@@ -1,0 +1,1056 @@
+{
+  "reviewer": "independent-pedagogical-source-review-agent",
+  "checked_at_utc": "2026-10-23T00:25:11.889312+00:00",
+  "verdict": "pass",
+  "findings": [
+    {
+      "id": "isolated-model-boundary",
+      "status": "observed-preserved",
+      "finding": "The 110/240 isolated DC maxima and complex dry gains are authored ideal binary64 calculations. Source uses Rust f32 and has downstream reverb/nonlinear output. Neither a full-bank/global measured peak nor physical bridge calibration, retuning or realism improvement follows."
+    },
+    {
+      "id": "excitation-and-record-boundaries",
+      "status": "observed-preserved",
+      "finding": "Analytically empty bins retain an undefined transfer ratio despite floating residues. Weak excitation and cropped finite convolution invalidate naive identification under the displayed conditions; no universal cutoff or arbitrary transient-STFT ratio is established."
+    },
+    {
+      "id": "limited-phase-counterexample",
+      "status": "observed-preserved",
+      "finding": "Unequal reversed two taps share all-frequency magnitudes and fail all eight integer circular-shift comparisons. This is not a universal phase-retrieval impossibility theorem. Centroid difference supplies no pure-delay, group-delay, audibility or preference result."
+    },
+    {
+      "id": "input-domain-boundary",
+      "status": "observed-preserved",
+      "finding": "SetClass transforms a canonical spectral prime-form vector; keeping its phase cannot restore removed original transposition. The separate actual-chroma alignment path and audio time-domain transforms have distinct inputs and invariances."
+    },
+    {
+      "id": "planning-chronology",
+      "status": "observed-preserved",
+      "finding": "Production plan explicitly records that it followed initial source reading, calculations and English drafting. It is not an advance preregistration."
+    }
+  ],
+  "fix_requests": [],
+  "fix_history": [
+    {
+      "id": "prior_staging_path_report",
+      "origin": "code/streeling/evidence/filter-phase-2026-10-22/data-audit.json",
+      "status": "resolved",
+      "prior_audit_status": "invalidated",
+      "resolution": "seven declared temporary source files were directly read and SHA256-verified"
+    },
+    {
+      "id": "ambiguous_true_gain_ratio",
+      "origin": "code/streeling/evidence/filter-phase-2026-10-22/data-audit.json",
+      "status": "resolved",
+      "prior_audit_status": "resolved",
+      "resolution": "bound to between_trial_complex_transfer_ratio, independently verified as 1+0i"
+    },
+    {
+      "id": "spanish-addition-signs",
+      "origin": "independent locale semantic review",
+      "status": "resolved",
+      "finding": "GAS007 Spanish could describe denominator coefficient values as all positive. Translator changed signos positivos to signos de suma, preserving algebraic plus signs without restricting coefficient values. Final source directly rechecked."
+    },
+    {
+      "id": "task-numeric-elicitation",
+      "origin": "independent task/rubric alignment review",
+      "status": "resolved",
+      "finding": "Standalone GAS007 items2/3 and AUD008 item3 previously described the topic without explicitly requesting rubric numerical subresults. Root added the 110/240 endpoint and first-section gains, complex dry versus magnitude-sum comparison, and weak-excitation complex calculation. GAS007 embedded task and both translations now mirror the expanded elicitation; directly rechecked."
+    }
+  ],
+  "coverage": {
+    "exercise_answer_pairs": 45,
+    "learner_criteria": 15
+  },
+  "scope": {
+    "reviewed": "All nine EN/FR/ES course bodies and45localized exercise-answer pairs; prepared15-criterion rubric and final answer-free task; body/paired/phase/source fixed records; seven actual immutable source/test copies; five primary document bodies.",
+    "method": "Direct independent agent semantic and source review, mathematical derivation checks and comparison with independent28/28data audit. Final input SHA values verified. No content reviewer numerical/audio/runtime experiment, source correction, build, dependency or paid call.",
+    "prerequisite_progression": "Six existing English prerequisite courses directly read. New material adds two-pole peak and complex-bank analysis beyond partial/period/excitation/attack clocks, paired transfer boundaries beyond amplitude/axis calibration, and phase nonuniqueness plus input canonicalization beyond quantization.",
+    "localization": "Full locale bodies and each answer directly reviewed; URL order, mathematics/code and UTF8LF verified. These are agent checks, not human fluent-language, musician or learner approval.",
+    "publication": "Only canonical source/evidence bytes reviewed. Root source-sync/build/rendered-link/idempotence/publication gates remain separate and are excluded as circular supporting inputs."
+  },
+  "exercise_answer_checks": [
+    {
+      "id": "GAS007-en-exercise-1",
+      "module": "GAS007",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-acoustics/en/gas-007-distinguish-body-poles-from-string-partials.md",
+      "heading_line": 45,
+      "exercise_answer_sha256": "bcb61b1973a43748f14c0595d71f1e1a1b5a55eb5a1088d6a87377318f80c712",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Additive feedback gives recurrence a2=-0.9025 but denominator coefficient +0.9025 for the 110 Hz section. Numerator g=0.08 is not a frequency-independent gain; the five listed radii below one establish only ideal isolated linear stability."
+    },
+    {
+      "id": "GAS007-en-exercise-2",
+      "module": "GAS007",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-acoustics/en/gas-007-distinguish-body-poles-from-string-partials.md",
+      "heading_line": 73,
+      "exercise_answer_sha256": "529932a0bcfb55f598d6840ecf3d1b71f5b38f6ab8152a61923b2f716e9dbd5f",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The peak cosine cos(omega0)*(1+r^2)/(2*r) exceeds one for the 110 and 240 Hz parameters at Fs44100, so the constrained isolated maximum is DC. For 110, gains are about29.268259 at DC and27.306424 at110. Pole angle, isolated maximum, bank response and full nonlinear engine are distinct; binary64 arithmetic does not reproduce Rust f32."
+    },
+    {
+      "id": "GAS007-en-exercise-3",
+      "module": "GAS007",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-acoustics/en/gas-007-distinguish-body-poles-from-string-partials.md",
+      "heading_line": 90,
+      "exercise_answer_sha256": "ade01e555209d3e9948df9d8972f587b34ecd460d29904d10b158c511b3aa283",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Take the magnitude of0.55+0.45*sum(Hi), retaining complex responses. At110Hz the result34.953699 is below the magnitude-only upper bound35.364828. Triangle equality requires aligned contributing phases, including the positive direct path."
+    },
+    {
+      "id": "GAS007-en-exercise-4",
+      "module": "GAS007",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-acoustics/en/gas-007-distinguish-body-poles-from-string-partials.md",
+      "heading_line": 100,
+      "exercise_answer_sha256": "323e96f202243fbee3a0ec2083ed4c989573c02f5030486b7f97f4810093e5cf",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "An ideal steady LTI input containing only82.4069 and164.8138Hz retains those frequencies with complex gains. A110Hz pole parameter supplies no additional sustained input-driven line; a decaying startup natural response and downstream nonlinear behavior are separate questions."
+    },
+    {
+      "id": "GAS007-en-exercise-5",
+      "module": "GAS007",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-acoustics/en/gas-007-distinguish-body-poles-from-string-partials.md",
+      "heading_line": 110,
+      "exercise_answer_sha256": "b92935b056ef60f36db968277f18ad68cbdf743dd8f8511950a589cc90a86d2e",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Current evidence is pinned postfilter source and authored calculations, not measured bridge coupling, radiation or physical accuracy. A proposed comparison needs defined instrument/path, excitation and observation, calibrated response, fit and held-out controls; pair normalized string-sum input with pre-reverb dry output using matched clocks/scales and assess preference separately."
+    },
+    {
+      "id": "GAS007-fr-exercise-1",
+      "module": "GAS007",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-acoustics/fr/gas-007-distinguish-body-poles-from-string-partials.fr.md",
+      "heading_line": 45,
+      "exercise_answer_sha256": "407b4ace0bbe285a0bc9798b8929558769acdd72eae353e2f456e40388596ff4",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Additive feedback gives recurrence a2=-0.9025 but denominator coefficient +0.9025 for the 110 Hz section. Numerator g=0.08 is not a frequency-independent gain; the five listed radii below one establish only ideal isolated linear stability."
+    },
+    {
+      "id": "GAS007-fr-exercise-2",
+      "module": "GAS007",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-acoustics/fr/gas-007-distinguish-body-poles-from-string-partials.fr.md",
+      "heading_line": 73,
+      "exercise_answer_sha256": "538c9149e07402b7073a010481c45bdc2475950ac69bab0c03eb9ddf11a74de4",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The peak cosine cos(omega0)*(1+r^2)/(2*r) exceeds one for the 110 and 240 Hz parameters at Fs44100, so the constrained isolated maximum is DC. For 110, gains are about29.268259 at DC and27.306424 at110. Pole angle, isolated maximum, bank response and full nonlinear engine are distinct; binary64 arithmetic does not reproduce Rust f32."
+    },
+    {
+      "id": "GAS007-fr-exercise-3",
+      "module": "GAS007",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-acoustics/fr/gas-007-distinguish-body-poles-from-string-partials.fr.md",
+      "heading_line": 90,
+      "exercise_answer_sha256": "450733e53dca4abbe2357a7c8956633c0b335474ab1e55d10a372ba7e199dd94",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Take the magnitude of0.55+0.45*sum(Hi), retaining complex responses. At110Hz the result34.953699 is below the magnitude-only upper bound35.364828. Triangle equality requires aligned contributing phases, including the positive direct path."
+    },
+    {
+      "id": "GAS007-fr-exercise-4",
+      "module": "GAS007",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-acoustics/fr/gas-007-distinguish-body-poles-from-string-partials.fr.md",
+      "heading_line": 100,
+      "exercise_answer_sha256": "7993211895bcb508ccad947b005eca23659c53a24c4384568af5108307e18e05",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "An ideal steady LTI input containing only82.4069 and164.8138Hz retains those frequencies with complex gains. A110Hz pole parameter supplies no additional sustained input-driven line; a decaying startup natural response and downstream nonlinear behavior are separate questions."
+    },
+    {
+      "id": "GAS007-fr-exercise-5",
+      "module": "GAS007",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-acoustics/fr/gas-007-distinguish-body-poles-from-string-partials.fr.md",
+      "heading_line": 110,
+      "exercise_answer_sha256": "91cb1dbf09c75d5171b4966c635e1289bfa9147e1462449cd3a424a7e91a1705",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Current evidence is pinned postfilter source and authored calculations, not measured bridge coupling, radiation or physical accuracy. A proposed comparison needs defined instrument/path, excitation and observation, calibrated response, fit and held-out controls; pair normalized string-sum input with pre-reverb dry output using matched clocks/scales and assess preference separately."
+    },
+    {
+      "id": "GAS007-es-exercise-1",
+      "module": "GAS007",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-acoustics/es/gas-007-distinguish-body-poles-from-string-partials.es.md",
+      "heading_line": 45,
+      "exercise_answer_sha256": "d5c98fdb7ae8c5569be79ec3f867c1b9bf2acd68345df3b59d3c1d723d16aa41",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Additive feedback gives recurrence a2=-0.9025 but denominator coefficient +0.9025 for the 110 Hz section. Numerator g=0.08 is not a frequency-independent gain; the five listed radii below one establish only ideal isolated linear stability."
+    },
+    {
+      "id": "GAS007-es-exercise-2",
+      "module": "GAS007",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-acoustics/es/gas-007-distinguish-body-poles-from-string-partials.es.md",
+      "heading_line": 73,
+      "exercise_answer_sha256": "c5b881d940e0c5b45721bf1a395e632bdef0e5a8f09ad91b5a1bc9592c36fdda",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The peak cosine cos(omega0)*(1+r^2)/(2*r) exceeds one for the 110 and 240 Hz parameters at Fs44100, so the constrained isolated maximum is DC. For 110, gains are about29.268259 at DC and27.306424 at110. Pole angle, isolated maximum, bank response and full nonlinear engine are distinct; binary64 arithmetic does not reproduce Rust f32."
+    },
+    {
+      "id": "GAS007-es-exercise-3",
+      "module": "GAS007",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-acoustics/es/gas-007-distinguish-body-poles-from-string-partials.es.md",
+      "heading_line": 90,
+      "exercise_answer_sha256": "667c9aed578cf2f2264e89edc91c61e0c62671df96e84dc54738360b7969b026",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Take the magnitude of0.55+0.45*sum(Hi), retaining complex responses. At110Hz the result34.953699 is below the magnitude-only upper bound35.364828. Triangle equality requires aligned contributing phases, including the positive direct path."
+    },
+    {
+      "id": "GAS007-es-exercise-4",
+      "module": "GAS007",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-acoustics/es/gas-007-distinguish-body-poles-from-string-partials.es.md",
+      "heading_line": 100,
+      "exercise_answer_sha256": "2a1f784fbebb1d009c78a190618c33f9577f68b69c20a2cbc9ee50539c82cfa5",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "An ideal steady LTI input containing only82.4069 and164.8138Hz retains those frequencies with complex gains. A110Hz pole parameter supplies no additional sustained input-driven line; a decaying startup natural response and downstream nonlinear behavior are separate questions."
+    },
+    {
+      "id": "GAS007-es-exercise-5",
+      "module": "GAS007",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-acoustics/es/gas-007-distinguish-body-poles-from-string-partials.es.md",
+      "heading_line": 110,
+      "exercise_answer_sha256": "3e8731c3975e5cddff2ec3b1ba853f984369f647ba8ade7cee4f9a46d0e1b745",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Current evidence is pinned postfilter source and authored calculations, not measured bridge coupling, radiation or physical accuracy. A proposed comparison needs defined instrument/path, excitation and observation, calibrated response, fit and held-out controls; pair normalized string-sum input with pre-reverb dry output using matched clocks/scales and assess preference separately."
+    },
+    {
+      "id": "AUD008-en-exercise-1",
+      "module": "AUD008",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/audio-engineering/en/aud-008-measure-a-filter-with-paired-input-and-output.md",
+      "heading_line": 34,
+      "exercise_answer_sha256": "28f87f2a6dc1a42959a69c1adc77d078a1817854f34e786b0033b0de92ac6ec9",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The two-tap LTI example observes a complete periodic steady N8 input/output period, with x[-1]=x[7] and unscaled negative-exponential DFT. These boundary/convention assumptions support Y=HX; they do not describe a zero-start linear crop or arbitrary windowed frame."
+    },
+    {
+      "id": "AUD008-en-exercise-2",
+      "module": "AUD008",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/audio-engineering/en/aud-008-measure-a-filter-with-paired-input-and-output.md",
+      "heading_line": 51,
+      "exercise_answer_sha256": "9bb913c2648aa7f04789e0dc8cef4d90bd8dd86e27df819e63cfbfda657e4d9a",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Input amplitudes0.25/0.50 give X[2]=1/2 and Y[2]=0.75-0.25i/1.50-0.50i. Both paired ratios are0.75-0.25i with magnitude0.790569415. Output amplitude ratio2 reflects doubled excitation; the between-trial transfer ratio is1+0i."
+    },
+    {
+      "id": "AUD008-en-exercise-3",
+      "module": "AUD008",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/audio-engineering/en/aud-008-measure-a-filter-with-paired-input-and-output.md",
+      "heading_line": 63,
+      "exercise_answer_sha256": "3c678fb3a94cbf067cf09eac1f5eef6ec48a8c6652bd414f589d420262cc069f",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Analytically zero input/output at bin1 gives an undefined, unmeasured ratio rather than rejection gain0. Tiny floating residues do not identify it. Adding output coefficient0.01 to input1e-6 yields10000.75-0.25i; acquisition needs adequate excitation and a declared noise/conditioning policy, not a universal cutoff."
+    },
+    {
+      "id": "AUD008-en-exercise-4",
+      "module": "AUD008",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/audio-engineering/en/aud-008-measure-a-filter-with-paired-input-and-output.md",
+      "heading_line": 73,
+      "exercise_answer_sha256": "dfc05fbe58509df899b320523a20bf3e87f497dd2135007df382fc091592a604",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The separate phase-pi/4 zero-initial control discards the ninth finite-convolution sample, giving an eight-point ratio0.71875-0.21875i. This boundary mismatch is not a changed filter. Use periodic steady data or complete finite convolution with adequate common zero-padding/alignment; IIR settling and tail tolerance need separate specification."
+    },
+    {
+      "id": "AUD008-en-exercise-5",
+      "module": "AUD008",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/audio-engineering/en/aud-008-measure-a-filter-with-paired-input-and-output.md",
+      "heading_line": 85,
+      "exercise_answer_sha256": "e2fbd830151f68dcbd7c899cc1f4fbce54bf9357b161eeee6f99cc0b84a669a3",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Retain paired samples or matched complex transforms,Fs,alignment,record/transform lengths,window/scaling,excitation,parameters,revision and noise/settling decisions. Isolate normalized string-sum to pre-reverb dry. IX scalar spectrogram drops individual complex phases; arbitrary transient STFT ratios need their own assumptions. No capture, adapter or runtime result follows."
+    },
+    {
+      "id": "AUD008-fr-exercise-1",
+      "module": "AUD008",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/audio-engineering/fr/aud-008-measure-a-filter-with-paired-input-and-output.fr.md",
+      "heading_line": 34,
+      "exercise_answer_sha256": "f259fe6353435d948ff21b3c9d4aa5bfaea5326cc69e63f2c4aae0e75b745760",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The two-tap LTI example observes a complete periodic steady N8 input/output period, with x[-1]=x[7] and unscaled negative-exponential DFT. These boundary/convention assumptions support Y=HX; they do not describe a zero-start linear crop or arbitrary windowed frame."
+    },
+    {
+      "id": "AUD008-fr-exercise-2",
+      "module": "AUD008",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/audio-engineering/fr/aud-008-measure-a-filter-with-paired-input-and-output.fr.md",
+      "heading_line": 51,
+      "exercise_answer_sha256": "227bfff9d5e9eb0f9ccb3edbb8d6a8acf4869d275458af17273caddfaef5f26d",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Input amplitudes0.25/0.50 give X[2]=1/2 and Y[2]=0.75-0.25i/1.50-0.50i. Both paired ratios are0.75-0.25i with magnitude0.790569415. Output amplitude ratio2 reflects doubled excitation; the between-trial transfer ratio is1+0i."
+    },
+    {
+      "id": "AUD008-fr-exercise-3",
+      "module": "AUD008",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/audio-engineering/fr/aud-008-measure-a-filter-with-paired-input-and-output.fr.md",
+      "heading_line": 63,
+      "exercise_answer_sha256": "43ad2de136d201ae5d5ea9b3cf5d5523b928f4652d4fb44c4d4afff7250a536b",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Analytically zero input/output at bin1 gives an undefined, unmeasured ratio rather than rejection gain0. Tiny floating residues do not identify it. Adding output coefficient0.01 to input1e-6 yields10000.75-0.25i; acquisition needs adequate excitation and a declared noise/conditioning policy, not a universal cutoff."
+    },
+    {
+      "id": "AUD008-fr-exercise-4",
+      "module": "AUD008",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/audio-engineering/fr/aud-008-measure-a-filter-with-paired-input-and-output.fr.md",
+      "heading_line": 73,
+      "exercise_answer_sha256": "ab6f126a77911874458353ec17087bc1688f76644e23344e5ddc37fd9e7a9eec",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The separate phase-pi/4 zero-initial control discards the ninth finite-convolution sample, giving an eight-point ratio0.71875-0.21875i. This boundary mismatch is not a changed filter. Use periodic steady data or complete finite convolution with adequate common zero-padding/alignment; IIR settling and tail tolerance need separate specification."
+    },
+    {
+      "id": "AUD008-fr-exercise-5",
+      "module": "AUD008",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/audio-engineering/fr/aud-008-measure-a-filter-with-paired-input-and-output.fr.md",
+      "heading_line": 85,
+      "exercise_answer_sha256": "6d65dae6c25a51a93b2a1da6227fd4d3852404045022a87c1d8f6a7d668eb577",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Retain paired samples or matched complex transforms,Fs,alignment,record/transform lengths,window/scaling,excitation,parameters,revision and noise/settling decisions. Isolate normalized string-sum to pre-reverb dry. IX scalar spectrogram drops individual complex phases; arbitrary transient STFT ratios need their own assumptions. No capture, adapter or runtime result follows."
+    },
+    {
+      "id": "AUD008-es-exercise-1",
+      "module": "AUD008",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/audio-engineering/es/aud-008-measure-a-filter-with-paired-input-and-output.es.md",
+      "heading_line": 34,
+      "exercise_answer_sha256": "17b91270880dc8c89f5a2e3367aa7ceaf901cf4218d517aa9e07e03551a8e22a",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The two-tap LTI example observes a complete periodic steady N8 input/output period, with x[-1]=x[7] and unscaled negative-exponential DFT. These boundary/convention assumptions support Y=HX; they do not describe a zero-start linear crop or arbitrary windowed frame."
+    },
+    {
+      "id": "AUD008-es-exercise-2",
+      "module": "AUD008",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/audio-engineering/es/aud-008-measure-a-filter-with-paired-input-and-output.es.md",
+      "heading_line": 51,
+      "exercise_answer_sha256": "6bac43a80e39db03fbced99ee54f12f2bdccabaa067f1c14369dea8c0c3a113b",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Input amplitudes0.25/0.50 give X[2]=1/2 and Y[2]=0.75-0.25i/1.50-0.50i. Both paired ratios are0.75-0.25i with magnitude0.790569415. Output amplitude ratio2 reflects doubled excitation; the between-trial transfer ratio is1+0i."
+    },
+    {
+      "id": "AUD008-es-exercise-3",
+      "module": "AUD008",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/audio-engineering/es/aud-008-measure-a-filter-with-paired-input-and-output.es.md",
+      "heading_line": 63,
+      "exercise_answer_sha256": "78fffcd829d96a69e6ae6aeb7da271e8b06c6587b95002f804ad43c6416f43d8",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Analytically zero input/output at bin1 gives an undefined, unmeasured ratio rather than rejection gain0. Tiny floating residues do not identify it. Adding output coefficient0.01 to input1e-6 yields10000.75-0.25i; acquisition needs adequate excitation and a declared noise/conditioning policy, not a universal cutoff."
+    },
+    {
+      "id": "AUD008-es-exercise-4",
+      "module": "AUD008",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/audio-engineering/es/aud-008-measure-a-filter-with-paired-input-and-output.es.md",
+      "heading_line": 73,
+      "exercise_answer_sha256": "2988ed1cdc7eec3bd00140daa7bf6ee59cf8f7ce94f6ff25c207f89ecd0ef963",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The separate phase-pi/4 zero-initial control discards the ninth finite-convolution sample, giving an eight-point ratio0.71875-0.21875i. This boundary mismatch is not a changed filter. Use periodic steady data or complete finite convolution with adequate common zero-padding/alignment; IIR settling and tail tolerance need separate specification."
+    },
+    {
+      "id": "AUD008-es-exercise-5",
+      "module": "AUD008",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/audio-engineering/es/aud-008-measure-a-filter-with-paired-input-and-output.es.md",
+      "heading_line": 85,
+      "exercise_answer_sha256": "95fbcef67710dc79eec421991a608df44955ff6b6a3439d9f11a55de39126c00",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Retain paired samples or matched complex transforms,Fs,alignment,record/transform lengths,window/scaling,excitation,parameters,revision and noise/settling decisions. Isolate normalized string-sum to pre-reverb dry. IX scalar spectrogram drops individual complex phases; arbitrary transient STFT ratios need their own assumptions. No capture, adapter or runtime result follows."
+    },
+    {
+      "id": "INF008-en-exercise-1",
+      "module": "INF008",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/information-theory/en/inf-008-keep-phase-when-waveform-identity-matters.md",
+      "heading_line": 34,
+      "exercise_answer_sha256": "0b4d6f5563a71540d3d4ee3a531a62eaf119158936ef7aecf94705e6a0024559",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Reversed unequal taps A[0.75,0.25] and B[0.25,0.75], padded to8, share magnitude squared5/8+(3/8)cos(omega) at every real frequency. Their samples differ, and none of eight integer circular shifts matches them; the minimum maximum sample mismatch is0.25. Other invariances are not excluded."
+    },
+    {
+      "id": "INF008-en-exercise-2",
+      "module": "INF008",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/information-theory/en/inf-008-keep-phase-when-waveform-identity-matters.md",
+      "heading_line": 51,
+      "exercise_answer_sha256": "7e585dd5d542b420221b8414ffd0b5df51f0bc04d8943dc6321c08abc83fe64f",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "At k2 A=0.75-0.25i and B=0.25-0.75i have equal magnitude0.790569415 but phases about-0.321750554/-1.249045772. DC is+1 for both; Nyquist is+0.5/-0.5. Complex phase distinguishes this pair; decibels cannot restore it. Zero-magnitude phase needs a separate undefined policy."
+    },
+    {
+      "id": "INF008-en-exercise-3",
+      "module": "INF008",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/information-theory/en/inf-008-keep-phase-when-waveform-identity-matters.md",
+      "heading_line": 61,
+      "exercise_answer_sha256": "f0bb37f0e363c566efe0ed67b96337ff32345ba12765f359c05478983e5b719a",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The positive-exponential1/N inverse reconstructs each full complex spectrum within numerical tolerance. Setting phases to zero before inversion invents a third choice. This finite full-transform counterexample is not a universal impossibility claim about constrained overlapping magnitude-STFT retrieval."
+    },
+    {
+      "id": "INF008-en-exercise-4",
+      "module": "INF008",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/information-theory/en/inf-008-keep-phase-when-waveform-identity-matters.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "5c504b7408921109850c86c4d87fb628e24204241b295d5cbda0b5856098f1b7",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Both energies are5/8. Weighted squared-sample centroids are0.1 and0.9 sample, differing by0.8. This descriptor proves neither a pure delay/group-delay curve nor audibility, listener preference or guitar improvement."
+    },
+    {
+      "id": "INF008-en-exercise-5",
+      "module": "INF008",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/information-theory/en/inf-008-keep-phase-when-waveform-identity-matters.md",
+      "heading_line": 85,
+      "exercise_answer_sha256": "163d9321773d658f3783e74405cbdafd4c0ac4b2081940072ac205f4347fb575",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "IX complex STFT and scalar spectrogram differ. GA SetClass transforms GetSpectralPrimeForm().ToBinaryVector(); its phase cannot recover original transposition erased before transformation. SpectralPhaseAlignment instead transforms actual chroma and cross-products for rotations. Handoff must retain domain,normalization,identity,transform,axes,audioFs,alignment and suitable complex/original data; pitch-class rotation is not audio time delay."
+    },
+    {
+      "id": "INF008-fr-exercise-1",
+      "module": "INF008",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/information-theory/fr/inf-008-keep-phase-when-waveform-identity-matters.fr.md",
+      "heading_line": 34,
+      "exercise_answer_sha256": "558e6f93d7a9a4d77508c4768ab5d7f3cf01a32198ec0eeccf246ed2c5dd06af",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Reversed unequal taps A[0.75,0.25] and B[0.25,0.75], padded to8, share magnitude squared5/8+(3/8)cos(omega) at every real frequency. Their samples differ, and none of eight integer circular shifts matches them; the minimum maximum sample mismatch is0.25. Other invariances are not excluded."
+    },
+    {
+      "id": "INF008-fr-exercise-2",
+      "module": "INF008",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/information-theory/fr/inf-008-keep-phase-when-waveform-identity-matters.fr.md",
+      "heading_line": 51,
+      "exercise_answer_sha256": "257b199359923f9731b24a6b7c0fd6ab53e72d5b5c01cad4d713671bcf8e4dbf",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "At k2 A=0.75-0.25i and B=0.25-0.75i have equal magnitude0.790569415 but phases about-0.321750554/-1.249045772. DC is+1 for both; Nyquist is+0.5/-0.5. Complex phase distinguishes this pair; decibels cannot restore it. Zero-magnitude phase needs a separate undefined policy."
+    },
+    {
+      "id": "INF008-fr-exercise-3",
+      "module": "INF008",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/information-theory/fr/inf-008-keep-phase-when-waveform-identity-matters.fr.md",
+      "heading_line": 61,
+      "exercise_answer_sha256": "85b625ff1145e68b3068a7b9c7f4b8696f46dfaee3afbff9015c0958cd58452b",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The positive-exponential1/N inverse reconstructs each full complex spectrum within numerical tolerance. Setting phases to zero before inversion invents a third choice. This finite full-transform counterexample is not a universal impossibility claim about constrained overlapping magnitude-STFT retrieval."
+    },
+    {
+      "id": "INF008-fr-exercise-4",
+      "module": "INF008",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/information-theory/fr/inf-008-keep-phase-when-waveform-identity-matters.fr.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "062662581750c4bb86379258c61f56bed14c1781a69e7082689ae5560d533123",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Both energies are5/8. Weighted squared-sample centroids are0.1 and0.9 sample, differing by0.8. This descriptor proves neither a pure delay/group-delay curve nor audibility, listener preference or guitar improvement."
+    },
+    {
+      "id": "INF008-fr-exercise-5",
+      "module": "INF008",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/information-theory/fr/inf-008-keep-phase-when-waveform-identity-matters.fr.md",
+      "heading_line": 85,
+      "exercise_answer_sha256": "3c9c61465a9dacd288dec4c31aca222c1409511694520f3cac0a409d642b40fe",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "IX complex STFT and scalar spectrogram differ. GA SetClass transforms GetSpectralPrimeForm().ToBinaryVector(); its phase cannot recover original transposition erased before transformation. SpectralPhaseAlignment instead transforms actual chroma and cross-products for rotations. Handoff must retain domain,normalization,identity,transform,axes,audioFs,alignment and suitable complex/original data; pitch-class rotation is not audio time delay."
+    },
+    {
+      "id": "INF008-es-exercise-1",
+      "module": "INF008",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/information-theory/es/inf-008-keep-phase-when-waveform-identity-matters.es.md",
+      "heading_line": 34,
+      "exercise_answer_sha256": "3751c3bb09e7d803877e7ef3096bbd856bbe79ff4c76fda16e5697c3631eab39",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Reversed unequal taps A[0.75,0.25] and B[0.25,0.75], padded to8, share magnitude squared5/8+(3/8)cos(omega) at every real frequency. Their samples differ, and none of eight integer circular shifts matches them; the minimum maximum sample mismatch is0.25. Other invariances are not excluded."
+    },
+    {
+      "id": "INF008-es-exercise-2",
+      "module": "INF008",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/information-theory/es/inf-008-keep-phase-when-waveform-identity-matters.es.md",
+      "heading_line": 51,
+      "exercise_answer_sha256": "5bfb870c69e62c5066a643d7d07b57c9deed65b94c32989d710622f23acfce42",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "At k2 A=0.75-0.25i and B=0.25-0.75i have equal magnitude0.790569415 but phases about-0.321750554/-1.249045772. DC is+1 for both; Nyquist is+0.5/-0.5. Complex phase distinguishes this pair; decibels cannot restore it. Zero-magnitude phase needs a separate undefined policy."
+    },
+    {
+      "id": "INF008-es-exercise-3",
+      "module": "INF008",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/information-theory/es/inf-008-keep-phase-when-waveform-identity-matters.es.md",
+      "heading_line": 61,
+      "exercise_answer_sha256": "bf2ab9da367a64ac31d7bd14d085d48f7f8d5d755af19e71335dc9e2330a75d9",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The positive-exponential1/N inverse reconstructs each full complex spectrum within numerical tolerance. Setting phases to zero before inversion invents a third choice. This finite full-transform counterexample is not a universal impossibility claim about constrained overlapping magnitude-STFT retrieval."
+    },
+    {
+      "id": "INF008-es-exercise-4",
+      "module": "INF008",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/information-theory/es/inf-008-keep-phase-when-waveform-identity-matters.es.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "265de80c73e43f2a5dca458bd0edd9cb6d885518d0cb373dea31d2448c45b937",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Both energies are5/8. Weighted squared-sample centroids are0.1 and0.9 sample, differing by0.8. This descriptor proves neither a pure delay/group-delay curve nor audibility, listener preference or guitar improvement."
+    },
+    {
+      "id": "INF008-es-exercise-5",
+      "module": "INF008",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/information-theory/es/inf-008-keep-phase-when-waveform-identity-matters.es.md",
+      "heading_line": 85,
+      "exercise_answer_sha256": "154aa6b510dc9f31943763209102e54f95c546c90b03d229e8883a2c27af8dd8",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "IX complex STFT and scalar spectrogram differ. GA SetClass transforms GetSpectralPrimeForm().ToBinaryVector(); its phase cannot recover original transposition erased before transformation. SpectralPhaseAlignment instead transforms actual chroma and cross-products for rotations. Handoff must retain domain,normalization,identity,transform,axes,audioFs,alignment and suitable complex/original data; pitch-class rotation is not audio time delay."
+    }
+  ],
+  "learner_criterion_checks": [
+    {
+      "id": "GAS007-1",
+      "module": "GAS007",
+      "title": "sign-convention",
+      "acceptance_reviewed": "Derive H from additive recurrence; a2=-0.9025 vs denominator+0.9025; numerator gain is not constant response; pole radii below1 in isolated linear model.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Additive feedback gives recurrence a2=-0.9025 but denominator coefficient +0.9025 for the 110 Hz section. Numerator g=0.08 is not a frequency-independent gain; the five listed radii below one establish only ideal isolated linear stability.",
+      "task_alignment": "Final standalone task and course source-assisted tasks elicit the prepared criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "GAS007-2",
+      "module": "GAS007",
+      "title": "pole-versus-peak",
+      "acceptance_reviewed": "At44100Hz cos optimum for110/240 exceeds1; endpoint peaks0. For110 DCgain29.268259 versus27.306424 at110. Not fullbank/globalpeak, f32runtime or physicalmeasurement.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "The peak cosine cos(omega0)*(1+r^2)/(2*r) exceeds one for the 110 and 240 Hz parameters at Fs44100, so the constrained isolated maximum is DC. For 110, gains are about29.268259 at DC and27.306424 at110. Pole angle, isolated maximum, bank response and full nonlinear engine are distinct; binary64 arithmetic does not reproduce Rust f32.",
+      "task_alignment": "Final standalone task and course source-assisted tasks elicit the prepared criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "GAS007-3",
+      "module": "GAS007",
+      "title": "complex-mix",
+      "acceptance_reviewed": "Hdry=.55+.45sumHi thenmagnitude;110 gives34.953699 vs35.364828 magnitude-onlyupperbound;statephaserequirementequality.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Take the magnitude of0.55+0.45*sum(Hi), retaining complex responses. At110Hz the result34.953699 is below the magnitude-only upper bound35.364828. Triangle equality requires aligned contributing phases, including the positive direct path.",
+      "task_alignment": "Final standalone task and course source-assisted tasks elicit the prepared criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "GAS007-4",
+      "module": "GAS007",
+      "title": "steady-versus-natural",
+      "acceptance_reviewed": "82.4069/164.8138 steady LTIinput retainsfrequencies;110poleangle doesnotaddsteadyline. Startupnaturalresponse distinct;downstreamnonlinearity excluded.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "An ideal steady LTI input containing only82.4069 and164.8138Hz retains those frequencies with complex gains. A110Hz pole parameter supplies no additional sustained input-driven line; a decaying startup natural response and downstream nonlinear behavior are separate questions.",
+      "task_alignment": "Final standalone task and course source-assisted tasks elicit the prepared criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "GAS007-5",
+      "module": "GAS007",
+      "title": "physical-experiment",
+      "acceptance_reviewed": "Pinnedpostfilter isnotcalibratedcoupledbridge/radiation;requiredefinedinstrument,geometryorresponsemeasurement/path,excitation/observation,fit/holdout;pairednormalizedstringsum/pre-reverbdrywithclockscale andseparatelistenerassessment.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Current evidence is pinned postfilter source and authored calculations, not measured bridge coupling, radiation or physical accuracy. A proposed comparison needs defined instrument/path, excitation and observation, calibrated response, fit and held-out controls; pair normalized string-sum input with pre-reverb dry output using matched clocks/scales and assess preference separately.",
+      "task_alignment": "Final standalone task and course source-assisted tasks elicit the prepared criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "AUD008-1",
+      "module": "AUD008",
+      "title": "boundary",
+      "acceptance_reviewed": "PeriodicN8,negativeforwardunscaledDFT,k2,twotap. x[-1]=x7; LTI/steadyfullperiod enablesY=HX,notarbitrarywindowframecrop.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "The two-tap LTI example observes a complete periodic steady N8 input/output period, with x[-1]=x[7] and unscaled negative-exponential DFT. These boundary/convention assumptions support Y=HX; they do not describe a zero-start linear crop or arbitrary windowed frame.",
+      "task_alignment": "Final standalone task and course source-assisted tasks elicit the prepared criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "AUD008-2",
+      "module": "AUD008",
+      "title": "paired-gain",
+      "acceptance_reviewed": "Amplitudes.25/.5giveX1/2,Y.75-.25i/1.5-.5i,commonH.75-.25i,mag.790569415.Outputratio2notfiltergainchange.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Input amplitudes0.25/0.50 give X[2]=1/2 and Y[2]=0.75-0.25i/1.50-0.50i. Both paired ratios are0.75-0.25i with magnitude0.790569415. Output amplitude ratio2 reflects doubled excitation; the between-trial transfer ratio is1+0i.",
+      "task_alignment": "Final standalone task and course source-assisted tasks elicit the prepared criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "AUD008-3",
+      "module": "AUD008",
+      "title": "excitation-refusal",
+      "acceptance_reviewed": "AnalyticzeroX/Yatbin1→undefinednotgain0;floatingresiduesnotidentification. NearX1e-6 plusoutputnoise.01 yields10000.75-.25i,needactualnoiseconditioningnotuniversalcutoff.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Analytically zero input/output at bin1 gives an undefined, unmeasured ratio rather than rejection gain0. Tiny floating residues do not identify it. Adding output coefficient0.01 to input1e-6 yields10000.75-0.25i; acquisition needs adequate excitation and a declared noise/conditioning policy, not a universal cutoff.",
+      "task_alignment": "Final standalone task and course source-assisted tasks elicit the prepared criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "AUD008-4",
+      "module": "AUD008",
+      "title": "boundary-control",
+      "acceptance_reviewed": "Phasepi/4finite9samplelinearconvtruncated8 gives.71875-.21875i nottrueH. Useperiodicsteadyorcompletezero-paddedlinearcommonlength;IIRsettling/tailseparate.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "The separate phase-pi/4 zero-initial control discards the ninth finite-convolution sample, giving an eight-point ratio0.71875-0.21875i. This boundary mismatch is not a changed filter. Use periodic steady data or complete finite convolution with adequate common zero-padding/alignment; IIR settling and tail tolerance need separate specification.",
+      "task_alignment": "Final standalone task and course source-assisted tasks elicit the prepared criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "AUD008-5",
+      "module": "AUD008",
+      "title": "artifact",
+      "acceptance_reviewed": "Preservepairedsamples/complexdata,Fs,alignment,N,windowscaling,excitation,revision,parameters,noise/settling;isolatebodypre-reverb,scalarIXspectrogramdropsphase,arbitrarySTFTratiosnotguaranteed. Noactualcapture/adapter.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Retain paired samples or matched complex transforms,Fs,alignment,record/transform lengths,window/scaling,excitation,parameters,revision and noise/settling decisions. Isolate normalized string-sum to pre-reverb dry. IX scalar spectrogram drops individual complex phases; arbitrary transient STFT ratios need their own assumptions. No capture, adapter or runtime result follows.",
+      "task_alignment": "Final standalone task and course source-assisted tasks elicit the prepared criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "INF008-1",
+      "module": "INF008",
+      "title": "ambiguity",
+      "acceptance_reviewed": "Provebothmag2=5/8+3/8cosw forA.75/.25andB.25/.75zero-padded8. Allintegercircularshiftsfail;notmerelyshiftbutdoesnotruleoutotherinvariances.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Reversed unequal taps A[0.75,0.25] and B[0.25,0.75], padded to8, share magnitude squared5/8+(3/8)cos(omega) at every real frequency. Their samples differ, and none of eight integer circular shifts matches them; the minimum maximum sample mismatch is0.25. Other invariances are not excluded.",
+      "task_alignment": "Final standalone task and course source-assisted tasks elicit the prepared criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "INF008-2",
+      "module": "INF008",
+      "title": "phase",
+      "acceptance_reviewed": "Atpi/2same.790569415mags vs.75-.25i and.25-.75i phases-.321750554/-1.249045772;DC+1both/Nyq+.5vs-.5;decibelscannotrestorephase.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "At k2 A=0.75-0.25i and B=0.25-0.75i have equal magnitude0.790569415 but phases about-0.321750554/-1.249045772. DC is+1 for both; Nyquist is+0.5/-0.5. Complex phase distinguishes this pair; decibels cannot restore it. Zero-magnitude phase needs a separate undefined policy.",
+      "task_alignment": "Final standalone task and course source-assisted tasks elicit the prepared criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "INF008-3",
+      "module": "INF008",
+      "title": "inverse",
+      "acceptance_reviewed": "Fullcomplexinversepositiveexp1/Nreconstructseach;zero-phaseinverseinventsanewchoice. Do notclaimalloverlappingSTFTmagnituderetrievalimpossible.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "The positive-exponential1/N inverse reconstructs each full complex spectrum within numerical tolerance. Setting phases to zero before inversion invents a third choice. This finite full-transform counterexample is not a universal impossibility claim about constrained overlapping magnitude-STFT retrieval.",
+      "task_alignment": "Final standalone task and course source-assisted tasks elicit the prepared criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "INF008-4",
+      "module": "INF008",
+      "title": "time-descriptor",
+      "acceptance_reviewed": "Energy5/8both,centroids.1/.9difference.8sample;notpuredelay,groupdelaycurve,audibilityorpreference.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Both energies are5/8. Weighted squared-sample centroids are0.1 and0.9 sample, differing by0.8. This descriptor proves neither a pure delay/group-delay curve nor audibility, listener preference or guitar improvement.",
+      "task_alignment": "Final standalone task and course source-assisted tasks elicit the prepared criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "INF008-5",
+      "module": "INF008",
+      "title": "domain",
+      "acceptance_reviewed": "IXcomplexSTFTvsmagnitude;GASetClassprime-forminputvsactualchromaSpectralPhaseAlignment;phasecannotrestorepriorcanonicalizationloss. Handoffdomain/normalization/source/transform/axes/Fsaudio/alignment/complexdata/claiminvariance,notimplementedcontract.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "IX complex STFT and scalar spectrogram differ. GA SetClass transforms GetSpectralPrimeForm().ToBinaryVector(); its phase cannot recover original transposition erased before transformation. SpectralPhaseAlignment instead transforms actual chroma and cross-products for rotations. Handoff must retain domain,normalization,identity,transform,axes,audioFs,alignment and suitable complex/original data; pitch-class rotation is not audio time delay.",
+      "task_alignment": "Final standalone task and course source-assisted tasks elicit the prepared criterion. Actual answers and assistance are required before learner decisions."
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-007-distinguish-body-poles-from-string-partials.md",
+      "sha256": "20430f16f872fd3d84c1f7caf46aaddfdc3dd3179ca052b052e118b52de1adda"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-007-distinguish-body-poles-from-string-partials.fr.md",
+      "sha256": "16ade8286f14e772b98f6e72fbdcb38d01e9fb8b294a1ffe2f529dbf0319628b"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-007-distinguish-body-poles-from-string-partials.es.md",
+      "sha256": "6c13e4592921adae4baae34544ab65c235328c888afcaccb2a7c8ccd34e2ec2a"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-008-measure-a-filter-with-paired-input-and-output.md",
+      "sha256": "cca3fc13385470976e8dcc52f83f425d1569beee234780a3f1109b0720e9648f"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-008-measure-a-filter-with-paired-input-and-output.fr.md",
+      "sha256": "99c1557593ce75862125336d85ca99bb5f6bc0808a30162e09f3ef45ed3b75b1"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-008-measure-a-filter-with-paired-input-and-output.es.md",
+      "sha256": "080c5825952013f0bd6464b1bf87b549a25ab60f9aee114ec23ff9c0b531bb04"
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-008-keep-phase-when-waveform-identity-matters.md",
+      "sha256": "0d4732397b82d36e2a4fca253eef7865b317acaf6d5b319975711f4415dd9e9b"
+    },
+    {
+      "path": "streeling/courses/information-theory/fr/inf-008-keep-phase-when-waveform-identity-matters.fr.md",
+      "sha256": "d99267e2faa2f87c8cc5cfd22c9c83480fec472f9f1a7d3b9bb052c38efcc812"
+    },
+    {
+      "path": "streeling/courses/information-theory/es/inf-008-keep-phase-when-waveform-identity-matters.es.md",
+      "sha256": "702cf0c5f8707abce8b08c04cc250834f0ca5ed36ec3fd649fc4ac3c24153385"
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/filter-phase-2026-10-22/production-plan.md",
+      "sha256": "5e0d4279925c810a3efef760ffb4c1ec5b287dc9bdd83b3be403c6265a3fb709"
+    },
+    {
+      "path": "code/streeling/evidence/filter-phase-2026-10-22/README.md",
+      "sha256": "853704a82e7d5aa4d735c69bf3c01188e5c22704aba2b3199e770bd73688a4b2"
+    },
+    {
+      "path": "code/streeling/evidence/filter-phase-2026-10-22/primary-readback.json",
+      "sha256": "4228b30ff376c5895cbdaf5a9ff36ac9a43191d2bddf2d32f467a1a5a5421294"
+    },
+    {
+      "path": "code/streeling/evidence/filter-phase-2026-10-22/primary-reading.json",
+      "sha256": "10deda0ce8f67eff956379a0a471d94d9714f62fe9ef6fda14b0e641b569329d"
+    },
+    {
+      "path": "code/streeling/evidence/filter-phase-2026-10-22/body-response.json",
+      "sha256": "2a8aca8bc0124e3e5bc88285a338cf3bcb39b362038f117acec1490f3fc0b461"
+    },
+    {
+      "path": "code/streeling/evidence/filter-phase-2026-10-22/paired-transfer.json",
+      "sha256": "344088860435fc3dde0810036b0eac50433689a00e073c7361e5cefdd084bb63"
+    },
+    {
+      "path": "code/streeling/evidence/filter-phase-2026-10-22/phase-pair.json",
+      "sha256": "f2cea561fe137d403202618cad736c4f641c737ad87fad0cb306b9e9a0efbdc3"
+    },
+    {
+      "path": "code/streeling/evidence/filter-phase-2026-10-22/source-observations.json",
+      "sha256": "34e8f3a4c7ca3353bae454990693dc8df83ff5c6deba6b8eff15d2022baa0c1f"
+    },
+    {
+      "path": "code/streeling/evidence/filter-phase-2026-10-22/data-audit.json",
+      "sha256": "4d02c271d8d68effd55d852fabeb08da8892359f667ebb748729e1d2952977e2"
+    },
+    {
+      "path": "code/streeling/evidence/filter-phase-2026-10-22/learner-task.md",
+      "sha256": "39e61ef33b811d78ef8b7aab20da2c41f0896a5a32c596430137da2682a87404"
+    },
+    {
+      "path": "code/streeling/evidence/filter-phase-2026-10-22/reviewer-rubric.json",
+      "sha256": "cb23d8a12a6cb774baa2cbbfd912344a3994ee17ebf92540b40d1281cd06690f"
+    },
+    {
+      "path": "code/streeling/evidence/filter-phase-2026-10-22/official-links.json",
+      "sha256": "455554f6eeba6652c06773c7bd892d0d09f7413fd308987db2bfea58d58160f3"
+    }
+  ],
+  "prerequisite_bindings": [
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-005-separate-a-partial-peak-from-a-period.md",
+      "sha256": "074fcd679fe05c9ec0592b6d4d0589fb7edc7c21dd1769002609335f14c42e79"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-006-relate-pluck-position-to-string-modes.md",
+      "sha256": "0eb9f99878d0d2714a8e09b59b0a8b25e76d8f546d7d2bd5b0454743196c404f"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-007-translate-attack-coefficients-into-time.md",
+      "sha256": "05d20b64e402b7150293290cc13114d9e6e278315cb66779da4440709d8d2f23"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-006-calibrate-spectral-amplitudes.md",
+      "sha256": "b2fe07f89c5cf3c9f46cd1204a8a8ca1e22559338e57c033309fcd7996966d54"
+    },
+    {
+      "path": "streeling/courses/computer-science/en/cs-013-preserve-spectral-axes-and-units.md",
+      "sha256": "ad9ff783ab13e0cb3a3096d8a8906cdcc648ec91ecea8ee74531ae04b342a311"
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-005-quantization-and-indistinguishable-renders.md",
+      "sha256": "cf02f36e78f303a760e73ee87dc92fc37960fa616b432b235f961ab95ca3422c"
+    }
+  ],
+  "locale_url_and_format_checks": [
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-007-distinguish-body-poles-from-string-partials.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-007-distinguish-body-poles-from-string-partials.fr.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-007-distinguish-body-poles-from-string-partials.es.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-008-measure-a-filter-with-paired-input-and-output.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-008-measure-a-filter-with-paired-input-and-output.fr.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-008-measure-a-filter-with-paired-input-and-output.es.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-008-keep-phase-when-waveform-identity-matters.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/information-theory/fr/inf-008-keep-phase-when-waveform-identity-matters.fr.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/information-theory/es/inf-008-keep-phase-when-waveform-identity-matters.es.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    }
+  ],
+  "primary_source_review": [
+    {
+      "repo": "ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "sha256": "2d4155cbfe26c4074ea701d0abb7cfd727fa4648d4d5109347fa442656e1f943",
+      "review_scope": "Actual pinned source/test text directly read for the cited recurrence/constructor/mix/downstream boundaries, canonical versus actual-chroma Fourier inputs, test assertions, complex STFT and magnitude/window projections. No tests or engine executed."
+    },
+    {
+      "repo": "ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Common/GA.Domain.Core/Theory/Atonal/SetClass.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Domain.Core/Theory/Atonal/SetClass.cs",
+      "sha256": "edca24703a5b74385875274fd6e5f7f0a497e69e4970bfadfb48f221f8380375",
+      "review_scope": "Actual pinned source/test text directly read for the cited recurrence/constructor/mix/downstream boundaries, canonical versus actual-chroma Fourier inputs, test assertions, complex STFT and magnitude/window projections. No tests or engine executed."
+    },
+    {
+      "repo": "ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Common/GA.Domain.Core/Theory/Atonal/SpectralPhaseAlignment.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Domain.Core/Theory/Atonal/SpectralPhaseAlignment.cs",
+      "sha256": "6129bc25c5e4ece19c54a266910bd007e9e9edcab03e0f848a6cf7676d193a79",
+      "review_scope": "Actual pinned source/test text directly read for the cited recurrence/constructor/mix/downstream boundaries, canonical versus actual-chroma Fourier inputs, test assertions, complex STFT and magnitude/window projections. No tests or engine executed."
+    },
+    {
+      "repo": "ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Tests/Common/GA.Business.Core.Tests/Atonal/SetClassTests.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Tests/Common/GA.Business.Core.Tests/Atonal/SetClassTests.cs",
+      "sha256": "074d5ad8f23a0239f36ebd680efabff3980054cd48f0400898df5d008221db8e",
+      "review_scope": "Actual pinned source/test text directly read for the cited recurrence/constructor/mix/downstream boundaries, canonical versus actual-chroma Fourier inputs, test assertions, complex STFT and magnitude/window projections. No tests or engine executed."
+    },
+    {
+      "repo": "ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Tests/Common/GA.Business.Core.Tests/Atonal/SpectralPhaseAlignmentTests.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Tests/Common/GA.Business.Core.Tests/Atonal/SpectralPhaseAlignmentTests.cs",
+      "sha256": "449bc32c1f6e745af537f34d628227be5e4e3d635e0c5427473b204dd1ae627d",
+      "review_scope": "Actual pinned source/test text directly read for the cited recurrence/constructor/mix/downstream boundaries, canonical versus actual-chroma Fourier inputs, test assertions, complex STFT and magnitude/window projections. No tests or engine executed."
+    },
+    {
+      "repo": "ix",
+      "commit": "bd1336b7c4045e427dcdbe80b102790e45da5ce1",
+      "path": "crates/ix-signal/src/spectral.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/bd1336b7c4045e427dcdbe80b102790e45da5ce1/crates/ix-signal/src/spectral.rs",
+      "sha256": "32eb7cfb68af526e955fa7a517b47472579d77ecfee4ceba830ea31e49846141",
+      "review_scope": "Actual pinned source/test text directly read for the cited recurrence/constructor/mix/downstream boundaries, canonical versus actual-chroma Fourier inputs, test assertions, complex STFT and magnitude/window projections. No tests or engine executed."
+    },
+    {
+      "repo": "ix",
+      "commit": "bd1336b7c4045e427dcdbe80b102790e45da5ce1",
+      "path": "crates/ix-signal/src/window.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/bd1336b7c4045e427dcdbe80b102790e45da5ce1/crates/ix-signal/src/window.rs",
+      "sha256": "2e619dc55133c53a824c3196b2f3b6997cff4424eb19faa961d1edb3e78089fc",
+      "review_scope": "Actual pinned source/test text directly read for the cited recurrence/constructor/mix/downstream boundaries, canonical versus actual-chroma Fourier inputs, test assertions, complex STFT and magnitude/window projections. No tests or engine executed."
+    }
+  ],
+  "official_document_review": [
+    {
+      "url": "https://www.dsprelated.com/freebooks/filters/Two_Pole.html",
+      "actual_read": "Actual author body read: two-pole recurrence, factorization, stability and pole-frequency versus exact gain-maximum distinction. Arithmetic and controls in the course are authored."
+    },
+    {
+      "url": "https://dsprelated.com/freebooks/pasp/Building_Synthetic_Guitar_Bridge.html",
+      "actual_read": "Actual author body read: measured admittance, string coupling, radiation and passivity requirements. No instrument measurement imported or performed."
+    },
+    {
+      "url": "https://www.w3.org/TR/audio-eq-cookbook/",
+      "actual_read": "Actual W3C Working Group Note of8June2021, transfer-function and subtractive delayed-output recurrence read. It supplies a convention comparison, not an implemented cookbook filter or conformance claim."
+    },
+    {
+      "url": "https://www.dsprelated.com/freebooks/mdft/DFT_Definition.html",
+      "actual_read": "Actual author forward DFT definition read: unscaled negative exponential."
+    },
+    {
+      "url": "https://www.dsprelated.com/freebooks/mdft/Inverse_DFT.html",
+      "actual_read": "Actual author inverse DFT definition read: positive exponential and1/N."
+    }
+  ],
+  "pending": {
+    "human_technical_review": null,
+    "musician_review": null,
+    "fluent_language_review": null,
+    "learner_attempts": null,
+    "independent_learner_transfer": null,
+    "runtime_validation": null,
+    "Rust_test_run": null,
+    "CSharp_test_run": null,
+    "new_engine_run": null,
+    "new_audio_render": null,
+    "physical_body_measurement": null,
+    "bridge_calibration": null,
+    "paired_filter_capture": null,
+    "noise_floor_measurement": null,
+    "listening_trial": null,
+    "perceptual_improvement": null,
+    "adapter_implementation": null,
+    "production_contract": null,
+    "deployed_html": null
+  },
+  "human_technical_review": null,
+  "musician_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "independent_learner_transfer": null,
+  "runtime_validation": null,
+  "Rust_test_run": null,
+  "CSharp_test_run": null,
+  "new_engine_run": null,
+  "new_audio_render": null,
+  "physical_body_measurement": null,
+  "bridge_calibration": null,
+  "paired_filter_capture": null,
+  "noise_floor_measurement": null,
+  "listening_trial": null,
+  "perceptual_improvement": null,
+  "adapter_implementation": null,
+  "production_contract": null,
+  "deployed_html": null
+}

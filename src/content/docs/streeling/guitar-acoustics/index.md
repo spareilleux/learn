@@ -17,3 +17,4 @@ sidebar:
 - [GAS-004 · Run and Reject an Open-E Decay Candidate](gas-004-run-open-e-decay-candidate/)
 - [GAS-005 · Separate a Partial Peak from a Period](gas-005-separate-a-partial-peak-from-a-period/)
 - [GAS-006 · Relate Pluck Position to String Modes](gas-006-relate-pluck-position-to-string-modes/)
+- [GAS-007 · Distinguish Body Poles from String Partials](gas-007-distinguish-body-poles-from-string-partials/)

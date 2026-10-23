@@ -1,0 +1,33 @@
+{
+  "scope": "Primary mathematical definitions and body-model context actually read in web tool; examples and arithmetic are authored.",
+  "references": [
+    {
+      "url": "https://www.dsprelated.com/freebooks/filters/Two_Pole.html",
+      "read": "Two-pole recurrence, pole factorization and statement that pole frequency need not be exact peak; equations B.1-B.3",
+      "used_for": "Derive response and peak distinction with an explicit sign convention."
+    },
+    {
+      "url": "https://dsprelated.com/freebooks/pasp/Building_Synthetic_Guitar_Bridge.html",
+      "read": "Actual bridge-admittance, radiation, coupling and passivity body",
+      "used_for": "Explain why postfilter source is not a measured coupled bridge/air model; no measurement imported."
+    },
+    {
+      "url": "https://www.w3.org/TR/audio-eq-cookbook/",
+      "read": "Biquad transfer and direct-form recurrence, lines45-75",
+      "used_for": "Opposite denominator versus recurrence coefficient signs; not an implemented cookbook EQ."
+    },
+    {
+      "url": "https://www.dsprelated.com/freebooks/mdft/DFT_Definition.html",
+      "read": "Forward finite DFT definition",
+      "used_for": "Unscaled forward sign convention."
+    },
+    {
+      "url": "https://www.dsprelated.com/freebooks/mdft/Inverse_DFT.html",
+      "read": "Inverse definition with1/N scaling",
+      "used_for": "Complex reconstruction convention."
+    }
+  ],
+  "engine_run": null,
+  "bridge_calibration": null,
+  "listening_trial": null
+}

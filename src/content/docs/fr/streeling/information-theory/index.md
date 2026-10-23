@@ -18,3 +18,4 @@ sidebar:
 - [INF-005 · Quantification et rendus indiscernables](inf-005-quantization-and-indistinguishable-renders/)
 - [INF-006 · Comprendre ce que les bornes d'une scène oublient](inf-006-know-what-scene-bounds-forget/)
 - [INF-007 · Compter les affectations candidates des plis sans inventer de probabilités](inf-007-count-crease-candidates-without-inventing-probabilities/)
+- [INF-008 · Conserver la phase lorsque l'identité des formes d'onde compte](inf-008-keep-phase-when-waveform-identity-matters/)

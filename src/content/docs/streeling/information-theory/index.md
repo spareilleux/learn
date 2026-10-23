@@ -18,3 +18,4 @@ sidebar:
 - [INF-005 · Quantization and indistinguishable renders](inf-005-quantization-and-indistinguishable-renders/)
 - [INF-006 · Know What Scene Bounds Forget](inf-006-know-what-scene-bounds-forget/)
 - [INF-007 · Count Crease Candidates without Inventing Probabilities](inf-007-count-crease-candidates-without-inventing-probabilities/)
+- [INF-008 · Keep Phase When Waveform Identity Matters](inf-008-keep-phase-when-waveform-identity-matters/)

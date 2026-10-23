@@ -18,3 +18,4 @@ sidebar:
 - [INF-005 · Cuantización y renders indistinguibles](inf-005-quantization-and-indistinguishable-renders/)
 - [INF-006 · Comprender qué olvidan los límites de una escena](inf-006-know-what-scene-bounds-forget/)
 - [INF-007 · Contar candidatos de pliegues sin inventar probabilidades](inf-007-count-crease-candidates-without-inventing-probabilities/)
+- [INF-008 · Conservar la fase cuando importa la identidad de las formas de onda](inf-008-keep-phase-when-waveform-identity-matters/)

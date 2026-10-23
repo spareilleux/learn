@@ -18,3 +18,4 @@ sidebar:
 - [AUD-005 · Controles PCM y límites de formato en el laboratorio de guitarra](aud-005-pcm-guards-and-format-boundaries/)
 - [AUD-006 · Calibrar una amplitud espectral antes de comparar renderizados](aud-006-calibrate-spectral-amplitudes/)
 - [AUD-007 · Traducir los coeficientes de ataque a duraciones](aud-007-translate-attack-coefficients-into-time/)
+- [AUD-008 · Medir un filtro con entrada y salida emparejadas](aud-008-measure-a-filter-with-paired-input-and-output/)

@@ -17,3 +17,4 @@ sidebar:
 - [GAS-004 · Ejecutar y rechazar un ajuste de decaimiento del mi al aire](gas-004-run-open-e-decay-candidate/)
 - [GAS-005 · Distinguir el pico de un parcial de un período](gas-005-separate-a-partial-peak-from-a-period/)
 - [GAS-006 · Relacionar la posición de pulsación con los modos de la cuerda](gas-006-relate-pluck-position-to-string-modes/)
+- [GAS-007 · Distinguir los polos del cuerpo de los parciales de las cuerdas](gas-007-distinguish-body-poles-from-string-partials/)
