@@ -22,7 +22,7 @@ Vous calculerez un nombre de reproduction et son seuil, vous trouverez la taille
 
 ## 1. Le modèle, et ce que signifie ici « infecté »
 
-**Observé.** La [fiche du département](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/departments/psychohistory.department.json) mentionne, comme domaine de recherche 7 sur 10, « Belief state epidemiology — how beliefs spread across agents and repos » (comment les croyances se propagent entre agents et dépôts), et son principe clé parle de « 14 personas across 4 repos ». [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-015/extract.py) fige ce que le dépôt enregistre sur les croyances au commit `4b03838` dans [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-015/observed-input.json) : les 8 fichiers de croyances actuels de [`state/beliefs/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/beliefs) et 13 fichiers archivés. Aucune proposition n'apparaît chez deux porteurs (0 sur 21), mais ce décompte n'aurait pas pu montrer un partage : les 12 fichiers qui ont un contenu ont un seul évaluateur, le persona de gouvernance Demerzel, et les 9 autres sont des squelettes vides.
+**Observé.** La [fiche du département](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/departments/psychohistory.department.json) mentionne, comme domaine de recherche 7 sur 10, « Belief state epidemiology — how beliefs spread across agents and repos » (comment les croyances se propagent entre agents et dépôts), et son principe clé parle de « 14 personas across 4 repos ». [`extract.py`](../../../../code/streeling/psychohistory/psy-015/extract.py) fige ce que le dépôt enregistre sur les croyances au commit `4b03838` dans [`observed-input.json`](../../../../code/streeling/psychohistory/psy-015/observed-input.json) : les 8 fichiers de croyances actuels de [`state/beliefs/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/beliefs) et 13 fichiers archivés. Aucune proposition n'apparaît chez deux porteurs (0 sur 21), mais ce décompte n'aurait pas pu montrer un partage : les 12 fichiers qui ont un contenu ont un seul évaluateur, le persona de gouvernance Demerzel, et les 9 autres sont des squelettes vides.
 
 Deux fichiers actuels nomment une source extérieure à leur évaluateur : `confidence-calibration` et `remediation-effectiveness` reposent chacun sur un seul élément de preuve, un message `ml-feedback-recommendation` dont [le script qui l'applique](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/scripts/apply_ml_feedback.py) recopie la justification et le niveau de confiance dans la croyance de Demerzel. Le schéma de ce message dit « from an ix ML pipeline to Demerzel » (d'une chaîne de traitement ML d'ix vers Demerzel) ; les deux messages ne sont pas dans le dépôt, si bien que l'expéditeur n'est connu que par cette description et par la docstring du script. Chacun de ces deux cas ne compte qu'un maillon, d'un document vers un seul porteur.
 
@@ -37,9 +37,9 @@ R0 = beta/gamma
 P(l'événement suivant est une adoption) = R0*S / (R0*S + N)
 ```
 
-Le *nombre de reproduction de base* R0 est le nombre moyen d'agents qu'un porteur convertit dans une grande population où tous les autres sont susceptibles. La dernière ligne est la *chaîne des sauts* (*embedded jump chain*) : elle dit quel événement vient ensuite, sans dire quand. La *taille finale*, c'est-à-dire le nombre d'agents qui ont détenu la croyance à un moment ou à un autre, ne dépend que de cet ordre ; [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-015/analyze.py) ne tire donc aucun temps d'attente.
+Le *nombre de reproduction de base* R0 est le nombre moyen d'agents qu'un porteur convertit dans une grande population où tous les autres sont susceptibles. La dernière ligne est la *chaîne des sauts* (*embedded jump chain*) : elle dit quel événement vient ensuite, sans dire quand. La *taille finale*, c'est-à-dire le nombre d'agents qui ont détenu la croyance à un moment ou à un autre, ne dépend que de cet ordre ; [`analyze.py`](../../../../code/streeling/psychohistory/psy-015/analyze.py) ne tire donc aucun temps d'attente.
 
-Hypothèses, dans [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-015/scenarios.json) : N = 14 (le nombre du principe clé ; PSY-004 trouve 17 fichiers de personas au commit épinglé) et N = 1 400 ; un seul porteur initial ; R0 égal à 0,8, à 1,2 ou à 3.
+Hypothèses, dans [`scenarios.json`](../../../../code/streeling/psychohistory/psy-015/scenarios.json) : N = 14 (le nombre du principe clé ; PSY-004 trouve 17 fichiers de personas au commit épinglé) et N = 1 400 ; un seul porteur initial ; R0 égal à 0,8, à 1,2 ou à 3.
 
 ### Exercice pratique 1
 
@@ -69,7 +69,7 @@ Pour N = 14 et un seul porteur initial, calculez R0 × S/N au départ pour les t
 
 ## 3. Quatorze agents : la loi dont une simulation est tirée
 
-**Synthétique.** Nombre de simulations pour chaque taille finale, sur 10 000 simulations par valeur de R0 ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-015/results.json), section `cases`) :
+**Synthétique.** Nombre de simulations pour chaque taille finale, sur 10 000 simulations par valeur de R0 ([`results.json`](../../../../code/streeling/psychohistory/psy-015/results.json), section `cases`) :
 
 ```text
 taille finale  1     2    3    4    5    6    7    8    9   10   11   12    13    14
@@ -122,7 +122,7 @@ Classez chaque énoncé comme observé, synthétique, analogie ou non étayé, e
 
 ## Sources, limites et prochaine vérification
 
-**Observé, épinglé au commit `4b03838800dcd4894f1e026461979bff1d985ca8` de Demerzel :** `extract.py` refuse de s'exécuter si l'un de ses 32 fichiers, ou l'un des deux dossiers qu'il liste (722 fichiers JSON sous `state/`, 11 schémas de contrat), diffère de la version épinglée. `results.json` énumère les 42 autocontrôles ; le [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-015/README.md) donne les commandes et les témoins.
+**Observé, épinglé au commit `4b03838800dcd4894f1e026461979bff1d985ca8` de Demerzel :** `extract.py` refuse de s'exécuter si l'un de ses 32 fichiers, ou l'un des deux dossiers qu'il liste (722 fichiers JSON sous `state/`, 11 schémas de contrat), diffère de la version épinglée. `results.json` énumère les 42 autocontrôles ; le [README](../../../../code/streeling/psychohistory/psy-015/README.md) donne les commandes et les témoins.
 
 **Références de méthode.** Kermack, W. O., et McKendrick, A. G. (1927), « A Contribution to the Mathematical Theory of Epidemics », *Proceedings of the Royal Society of London, Series A* 115, 700–721 (modèle déterministe, seuil, taille finale). Bailey, N. T. J. (1975), *The Mathematical Theory of Infectious Diseases and its Applications*, 2e édition, Griffin. Whittle, P. (1955), « The Outcome of a Stochastic Epidemic: A Note on Bailey's Paper », *Biometrika* 42, 116–122 (épidémies mineures et 1/R0).
 

@@ -25,7 +25,7 @@ You will put an exact interval on a share observed among a few yes/no agents, sa
 
 ## 1. What the record states and what the repository holds
 
-**Observed.** The [department record](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/departments/psychohistory.department.json) ends its key principle with: "One agent's decision is unpredictable, but the aggregate behavior of 14 personas across 4 repos follows mathematical laws." [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-004/extract.py) snapshots that record, and the files the sentence could refer to, into [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-004/observed-input.json).
+**Observed.** The [department record](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/departments/psychohistory.department.json) ends its key principle with: "One agent's decision is unpredictable, but the aggregate behavior of 14 personas across 4 repos follows mathematical laws." [`extract.py`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-004/extract.py) snapshots that record, and the files the sentence could refer to, into [`observed-input.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-004/observed-input.json).
 
 - The record lists 4 consumer repos, as stated. [`personas/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/personas) holds **17** persona files, 3 more than stated; it held 14 at [commit `e9fe8b7`](https://github.com/GuitarAlchemist/Demerzel/tree/e9fe8b7d711ede390b602896e4a5c571d0ad1f67/personas), which added the record on 2026-03-21 (read with `git ls-tree`, outside the fixture).
 - A persona file describes a role and records no decision.
@@ -50,7 +50,7 @@ upper bound: the p for which  P(X <= k) = 0.025      X ~ Binomial(n, p)
 if all n say yes: lower bound = 0.025^(1/n), upper bound = 1
 ```
 
-[`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-004/analyze.py) sums the binomial terms and solves for p by bisection. **Computed from assumed inputs** (half of the agents say yes; three decimals):
+[`analyze.py`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-004/analyze.py) sums the binomial terms and solves for p by bisection. **Computed from assumed inputs** (half of the agents say yes; three decimals):
 
 | Agents | Exact 95% interval | Width | SD at p = 0.5 |
 |---|---|---|---|
@@ -60,7 +60,7 @@ if all n say yes: lower bound = 0.025^(1/n), upper bound = 1
 
 Fourteen agents split evenly are compatible with any p from 0.23 to 0.77, over half the scale. The width shrinks with the square root of the group: 100 agents give an interval 2.652 times narrower (`sqrt(100 / 14) = 2.673`). The normal approximation `n = z² p (1 - p) / h²`, with z = 1.959964 and p = 0.5, asks for 384.146, so 385 agents, for a half-width h of 5 points.
 
-For 14 agents this interval contains p at least 95.5% of the time at all 99 values of p from 0.01 to 0.99 ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-004/results.json)). A panel of 5 says less still: if all five say yes, the lower bound is `0.025^(1/5) = 0.478`.
+For 14 agents this interval contains p at least 95.5% of the time at all 99 values of p from 0.01 to 0.99 ([`results.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-004/results.json)). A panel of 5 says less still: if all five say yes, the lower bound is `0.025^(1/5) = 0.478`.
 
 ### Practice Exercise 2
 
@@ -123,7 +123,7 @@ A team wants the share of yes among its agents to fall within 5 points of the lo
 
 **Observed, pinned at Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** the files linked in section 1.
 
-**Fixture.** `python -I scripts/streeling_fixtures/psychohistory/psy-004/extract.py`, then `analyze.py` in the same folder. Assumptions and seeds: [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-004/scenarios.json). Self-checks and negative controls: [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-004/README.md).
+**Fixture.** `python -I code/streeling/psychohistory/psy-004/extract.py --repo-root <Demerzel clone>`, then `analyze.py` in the same folder. Assumptions and seeds: [`scenarios.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-004/scenarios.json). Self-checks and negative controls: [README](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-004/README.md).
 
 **Method references.** Clopper, C. J., and Pearson, E. S. (1934), "The Use of Confidence or Fiducial Limits Illustrated in the Case of the Binomial", *Biometrika* 26(4), 404–413. Kish, L. (1965), *Survey Sampling*, Wiley (the design effect).
 

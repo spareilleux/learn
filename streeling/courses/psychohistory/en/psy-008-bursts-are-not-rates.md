@@ -22,7 +22,7 @@ You will turn an event log into counts per calendar day, compare them with what 
 
 ## 1. Count per calendar day, empty days included
 
-**Observed.** Until it was retired on 2026-07-18, the workflow [`demerzel-driver-triggers.yml`](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/.github/workflows/demerzel-driver-triggers.yml) wrote one JSON file, a *trigger*, for each push to the main branch, issue opened or reopened, discussion created, or failed run of four other workflows. [`state/triggers/archived/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers/archived) holds 594 of them, stamped from 2026-03-20 to 2026-07-16, of three types only: 252 `discussion_created`, 207 `push` and 135 `issue_opened`. [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-008/extract.py) reads all 594 at commit `4b03838`, refuses a folder that differs from its pinned digest, and writes one row per event into [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-008/observed-input.json). The few trigger files [outside the archive](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers) are left out.
+**Observed.** Until it was retired on 2026-07-18, the workflow [`demerzel-driver-triggers.yml`](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/.github/workflows/demerzel-driver-triggers.yml) wrote one JSON file, a *trigger*, for each push to the main branch, issue opened or reopened, discussion created, or failed run of four other workflows. [`state/triggers/archived/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers/archived) holds 594 of them, stamped from 2026-03-20 to 2026-07-16, of three types only: 252 `discussion_created`, 207 `push` and 135 `issue_opened`. [`extract.py`](../../../../code/streeling/psychohistory/psy-008/extract.py) reads all 594 at commit `4b03838`, refuses a folder that differs from its pinned digest, and writes one row per event into [`observed-input.json`](../../../../code/streeling/psychohistory/psy-008/observed-input.json). The few trigger files [outside the archive](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers) are left out.
 
 A *day* is the UTC date of a trigger's timestamp. From the first day to the last there are **119** calendar days: **100** *active* days with at least one event and **19** empty ones. A rate counts events over elapsed time, so the empty days stay in the series.
 
@@ -31,7 +31,7 @@ mean per calendar day = 594 / 119 = 4.99
 mean per active day   = 594 / 100 = 5.94
 ```
 
-**Computed** by [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-008/analyze.py) into [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-008/results.json):
+**Computed** by [`analyze.py`](../../../../code/streeling/psychohistory/psy-008/analyze.py) into [`results.json`](../../../../code/streeling/psychohistory/psy-008/results.json):
 
 | Events in the day | Days | Events |
 |---|---|---|
@@ -138,7 +138,7 @@ A teammate proposes "about 35 events a week, give or take 20%". How many of the 
 
 **Observed, pinned at Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** the 594 archived trigger files (Git tree `2da37c16496d39c0c9137897c8be2b0c6d6b7978`; manifest digest in `observed-input.json`), the pattern record and the two workflow files linked above.
 
-**Fixture.** [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-008/scenarios.json) holds the analysis choices; the [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-008/README.md) gives the commands, the self-checks and the controls.
+**Fixture.** [`scenarios.json`](../../../../code/streeling/psychohistory/psy-008/scenarios.json) holds the analysis choices; the [README](../../../../code/streeling/psychohistory/psy-008/README.md) gives the commands, the self-checks and the controls.
 
 **Method references.** Cox, D. R., and Lewis, P. A. W. (1966), *The Statistical Analysis of Series of Events*, Methuen (the index of dispersion and its test). Barabási, A.-L. (2005), "The origin of bursts and heavy tails in human dynamics", *Nature* 435, 207–211 (times between events, not analysed here).
 

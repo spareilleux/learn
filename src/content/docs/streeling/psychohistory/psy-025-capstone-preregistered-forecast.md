@@ -27,7 +27,7 @@ This capstone uses [PSY-005](../../psychohistory/psy-005-persistence-baseline/) 
 
 *Preregistration*, for Nosek and colleagues (2018), is "committing to analytic steps without advance knowledge of the research outcomes", usually posted to an independent registry that "preserves the preregistration and makes it discoverable". It "does not favor prediction over postdiction; its purpose is to make clear which is which". A forecast record fixes, before the outcome, everything needed to score one forecast.
 
-[`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-025/scenarios.json) holds four records. [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-025/analyze.py) checks each against 22 field rules, listed with their failure messages in the fixture's [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-025/README.md). They answer a stranger's questions:
+[`scenarios.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-025/scenarios.json) holds four records. [`analyze.py`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-025/analyze.py) checks each against 22 field rules, listed with their failure messages in the fixture's [README](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-025/README.md). They answer a stranger's questions:
 
 | A stranger asks | Fields (rules) |
 |---|---|
@@ -40,7 +40,7 @@ This capstone uses [PSY-005](../../psychohistory/psy-005-persistence-baseline/) 
 
 **Synthetic.** The draft `library-growth-draft` reads "Streeling will keep growing fast next quarter", with source "the repo" and forecast "likely". **Computed:** the validator rejects it on 16 of the 22 rules (R02, R04–R07, R09–R16, R18, R20, R22) and cannot judge R08, R17 and R19, whose fields are unusable. One failure differs in kind: this batch adds to the library, so the draft's author could make it come true, and an outcome its author can steer is a plan to monitor, not a forecast to score. R20 judges only the record's author; the maintainers who would merge the records also merge every department's modules, which `author_influence_note` discloses. The repair, `library-growth-repaired`, asks about the library outside Psychohistory and passes, as do section 3's two worked records.
 
-The validator checks form and agreement between fields, not clarity. Six changed copies of worked records each fail exactly the broken rule; a seventh, whose forecast equals its reference, passes ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-025/results.json), `validation.controls`).
+The validator checks form and agreement between fields, not clarity. Six changed copies of worked records each fail exactly the broken rule; a seventh, whose forecast equals its reference, passes ([`results.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-025/results.json), `validation.controls`).
 
 ### Practice Exercise 1
 
@@ -50,7 +50,7 @@ Two readers turn the draft's "likely" into 0.6 and 0.8. Give each reading's Brie
 
 ## 2. A base rate from the pinned history
 
-**Observed.** [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-025/extract.py) reads the 73 commits that touched [`state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/courses) up to commit `4b03838`, and the folder's 255 files at that commit, each checked against its pinned blob ([`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-025/observed-input.json)). An English *module* is a file `<department>/en/<name>.md` other than a README: 68 at the pin, in 18 departments. Music holds 19, Psychohistory 2.
+**Observed.** [`extract.py`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-025/extract.py) reads the 73 commits that touched [`state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/courses) up to commit `4b03838`, and the folder's 255 files at that commit, each checked against its pinned blob ([`observed-input.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-025/observed-input.json)). An English *module* is a file `<department>/en/<name>.md` other than a README: 68 at the pin, in 18 departments. Music holds 19, Psychohistory 2.
 
 The worked forecasts are about Music, which this batch does not touch: one about Psychohistory would measure the batch's own plan.
 
@@ -140,7 +140,7 @@ Recompute the interval score of [19, 25] at α = 0.2, and persistence's, for the
 
 **Observed, pinned at Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** the commit history and the 255 files of the course library linked above.
 
-**Fixture.** `python -I -B scripts/streeling_fixtures/psychohistory/psy-025/extract.py`, then `analyze.py` and `analyze.py --check`. The README lists the rules, the 22 self-checks and the negative controls.
+**Fixture.** `python -I -B code/streeling/psychohistory/psy-025/extract.py --repo-root <Demerzel clone>`, then `analyze.py` and `analyze.py --check`. The README lists the rules, the 22 self-checks and the negative controls.
 
 **Method references.** Nosek, B. A., Ebersole, C. R., DeHaven, A. C., and Mellor, D. T. (2018), "The preregistration revolution", *PNAS* 115(11), 2600–2606, [doi:10.1073/pnas.1708274114](https://doi.org/10.1073/pnas.1708274114). Gneiting, T., and Raftery, A. E. (2007), "Strictly Proper Scoring Rules, Prediction, and Estimation", *Journal of the American Statistical Association* 102(477), 359–378, section 6.2. Winkler, R. L. (1972), "A Decision-Theoretic Approach to Interval Estimation", *Journal of the American Statistical Association* 67(337), 187–191. The exact intervals are Clopper and Pearson's (1934), as cited in PSY-017.
 

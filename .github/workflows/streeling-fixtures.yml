@@ -1,0 +1,45 @@
+# Streeling fixtures: every analyze.py reproduces its saved results.json on three OSes and three Python versions, and
+# every extract.py, run against GuitarAlchemist/Demerzel at its pinned commit, reproduces its observed-input.json.
+# Standard library only; nothing is installed.
+name: Streeling fixtures
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/streeling/**', '.github/workflows/streeling-fixtures.yml']
+  pull_request:
+    paths: ['code/streeling/**', '.github/workflows/streeling-fixtures.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  analyses:
+    name: analyses (${{ matrix.os }}, Python ${{ matrix.python }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ['3.9', '3.12', '3.14']
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python code/streeling/check.py
+
+  extracts:
+    name: extracts (ubuntu-latest, Python 3.14)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+      - name: Clone Demerzel with its full history
+        run: git clone -q --filter=blob:none --no-checkout https://github.com/GuitarAlchemist/Demerzel.git "$RUNNER_TEMP/demerzel"
+      - run: python code/streeling/check.py --demerzel "$RUNNER_TEMP/demerzel"

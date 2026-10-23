@@ -22,7 +22,7 @@ You will count the actors that a record names, measure how concentrated their ac
 
 ## 1. One sender, and what "sender" means
 
-**Observed.** [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-024/extract.py) reads the 594 files of [`state/triggers/archived/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers/archived) at commit `4b03838` and replaces every identity by a label before it writes [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-024/observed-input.json). All **594** archived events, from 2026-03-20 to 2026-07-16, carry the same `sender`, labelled *account A*, and the same `repo`. So do 8 later events left in the parent folder: 602 events with a readable sender, one account.
+**Observed.** [`extract.py`](../../../../code/streeling/psychohistory/psy-024/extract.py) reads the 594 files of [`state/triggers/archived/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers/archived) at commit `4b03838` and replaces every identity by a label before it writes [`observed-input.json`](../../../../code/streeling/psychohistory/psy-024/observed-input.json). All **594** archived events, from 2026-03-20 to 2026-07-16, carry the same `sender`, labelled *account A*, and the same `repo`. So do 8 later events left in the parent folder: 602 events with a readable sender, one account.
 
 The [workflow file at the pin](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/.github/workflows/demerzel-driver-triggers.yml#L75), a later version of the one that wrote these files (earlier versions were not read), sets `sender` to `github.actor`, which GitHub [defines](https://docs.github.com/en/actions/reference/workflows-and-actions/contexts) as "The username of the user that triggered the initial workflow run", and `repo` to the name of the repository it runs in. So:
 
@@ -51,7 +51,7 @@ Take the worst case for "one sender": each of the 12 deleted files came from a d
 
 ## 2. A scale for N
 
-**Synthetic.** [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-024/scenarios.json) defines imaginary ensembles of 14 actors, the head count in the department's key principle; [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-024/analyze.py) computes:
+**Synthetic.** [`scenarios.json`](../../../../code/streeling/psychohistory/psy-024/scenarios.json) defines imaginary ensembles of 14 actors, the head count in the department's key principle; [`analyze.py`](../../../../code/streeling/psychohistory/psy-024/analyze.py) computes:
 
 | Imaginary ensemble | H | N | Half-coverage count | Relative spread |
 |---|---|---|---|---|
@@ -127,7 +127,7 @@ A new log tags each event with a persona id: 1,400 events, one persona with 1,01
 
 **Observed, pinned at Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** the files linked or named above and the 1,599 commits that lead to the pin. `extract.py` stops if a pinned value differs.
 
-**Fixture.** `python -I -B scripts/streeling_fixtures/psychohistory/psy-024/extract.py`, then `analyze.py`; `--check` compares a fresh run with [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-024/results.json). The [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-024/README.md) gives the labelling rule, the git commands and the checks.
+**Fixture.** `python -I -B code/streeling/psychohistory/psy-024/extract.py --repo-root <Demerzel clone>`, then `analyze.py`; `--check` compares a fresh run with [`results.json`](../../../../code/streeling/psychohistory/psy-024/results.json). The [README](../../../../code/streeling/psychohistory/psy-024/README.md) gives the labelling rule, the git commands and the checks.
 
 **Method references.** Simpson, E. H. (1949), "Measurement of Diversity", *Nature* 163, 688 (the sum of squared shares). Laakso, M., and Taagepera, R. (1979), "'Effective' Number of Parties: A Measure with Application to West Europe", *Comparative Political Studies* 12(1), 3–27 (N = 1/H). Avelino, G., Passos, L., Hora, A., and Valente, M. T. (2016), "A Novel Approach for Estimating Truck Factors", *24th IEEE International Conference on Program Comprehension*, 1–10.
 
