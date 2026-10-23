@@ -31,11 +31,11 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Investigación sobre IX](ix-research/) | 1 | 1 | 1 |
 | [Matemáticas](mathematics/) | 25 | 25 | 25 |
 | [Música](music/) | 25 | 25 | 25 |
-| [Musicología](musicology/) | 6 | 6 | 6 |
-| [Ciencia de redes](network-science/) | 7 | 7 | 7 |
+| [Musicología](musicology/) | 7 | 7 | 7 |
+| [Ciencia de redes](network-science/) | 8 | 8 | 8 |
 | [Filosofía](philosophy/) | 7 | 7 | 7 |
 | [Física](physics/) | 11 | 11 | 11 |
-| [Gestión de productos y proyectos](product-management/) | 6 | 6 | 6 |
+| [Gestión de productos y proyectos](product-management/) | 7 | 7 | 7 |
 | [Psicohistoria](psychohistory/) | 25 | 25 | 25 |
 | [Semiótica](semiotics/) | 7 | 7 | 7 |
 | [Computación visual](visual-computing/) | 10 | 10 | 10 |

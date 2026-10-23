@@ -18,3 +18,4 @@ sidebar:
 - [NET-005 · Resultados de ramas paralelas y uniones de dependencias](net-005-fanout-results-and-dependency-joins/)
 - [NET-006 · Grafos de instancias y recursos](net-006-instance-and-resource-graphs/)
 - [NET-007 · Distinguir los nodos listos de un DAG de su admisión a los workers](net-007-separate-dag-readiness-from-admission/)
+- [NET-008 · Relacionar dominios de reloj antes de ordenar eventos](net-008-map-clock-domains-before-ordering-events/)

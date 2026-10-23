@@ -17,3 +17,4 @@ sidebar:
 - [PM-004 · Décider quand les extensions artisanales sont prêtes à être distribuées](pm-004-craft-extension-release-decision/)
 - [PM-005 · Interpréter les expériences de coexistence BRUTAL avant de choisir un réglage par défaut](pm-005-interpret-brutal-coexistence-experiments/)
 - [PM-006 · Évaluer un essai pilote selon son horizon de décision](pm-006-test-a-pilot-against-its-decision-horizon/)
+- [PM-007 · Mesurer la latence de lecture du point de vue de l'utilisateur](pm-007-measure-playback-latency-at-the-user-boundary/)

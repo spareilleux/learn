@@ -31,11 +31,11 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [IX Research](ix-research/) | 1 | 1 | 1 |
 | [Mathematics](mathematics/) | 25 | 25 | 25 |
 | [Music](music/) | 25 | 25 | 25 |
-| [Musicology](musicology/) | 6 | 6 | 6 |
-| [Network Science](network-science/) | 7 | 7 | 7 |
+| [Musicology](musicology/) | 7 | 7 | 7 |
+| [Network Science](network-science/) | 8 | 8 | 8 |
 | [Philosophy](philosophy/) | 7 | 7 | 7 |
 | [Physics](physics/) | 11 | 11 | 11 |
-| [Product and Project Management](product-management/) | 6 | 6 | 6 |
+| [Product and Project Management](product-management/) | 7 | 7 | 7 |
 | [Psychohistory](psychohistory/) | 25 | 25 | 25 |
 | [Semiotics](semiotics/) | 7 | 7 | 7 |
 | [Visual Computing](visual-computing/) | 10 | 10 | 10 |

@@ -66,7 +66,9 @@ An agent replaces the table with one 2:1 playback instruction and promises exact
 
 ## 4. Quantify a particular source representation loss
 
-At GA commit `dc2e74cbd992a298f67efb928b5b3754615e1924`, the inspected [MIDI parser](https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.DSL/Parsers/MidiParser.fs) converts microseconds per quarter into integer BPM with `60000000 / microsecondsPerQuarter`. For 520000 microseconds, integer division gives 115, whereas the reference rate is approximately 115.384615385.
+At GA commit `dc2e74cbd992a298f67efb928b5b3754615e1924`, the selected tempo-construction body in the [MIDI parser](https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.DSL/Parsers/MidiParser.fs) divides microseconds per quarter into integer BPM with `60000000 / microsecondsPerQuarter`. For 520000 microseconds, that expression gives 115, whereas the reference rate is approximately 115.384615385.
+
+**Reachability correction.** The shown event dispatcher first masks the status to its high nibble, then matches a full meta-event status. That meta-event arm cannot be reached through this match at this pin. The calculation here interprets its body conditionally; it does not predict successful tempo parsing through the entry path. [MCL-007](mcl-007-integrate-a-midi-tempo-map-before-scheduling.md) shows the byte-mask witness and the separate event-timing loss. No parser repair or fresh execution is claimed.
 
 If a hypothetical later consumer rebuilt four quarter beats from 115 BPM, it would obtain approximately 2.086956522 seconds instead of 2.08, a difference of approximately 6.956521739 ms. This is conditional source-assisted arithmetic. No parser, importer or playback path was run, and the calculation does not establish actual GA drift or a perceptible difference. The separate [MIDI types](https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.DSL/Types/MidiTypes.fs) also declare delta ticks and a time-division field; those declarations alone are not an accumulated performance timeline.
 
