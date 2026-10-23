@@ -25,6 +25,7 @@ sidebar:
 - [x] Lesson 17: a bounded Petri specification oracle translated into deterministic Channel, TPL Dataflow and Rx test design
 - [x] Appendix 1: five GA members optimised, proved on all 4096 pitch-class sets, then measured — with the benchmarks rewritten once they turned out to be measuring the JIT
 - [x] Appendix 2: GA's indexing pipeline profiled, three changes proved against GA's own output and measured, and sent upstream as pull requests
+- [x] Appendix 4: plugins without MEF — four modules, each in its own collectible context, one container, seven scenarios predicted then measured
 
 ## QA
 
@@ -53,7 +54,7 @@ This course profiles [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga)
 
 ## Experiments
 
-Performance work invites reading a prediction back out of its own result, so these rows keep the hypothesis as it was written and let it be wrong. Two of the six are refuted, and the appendix's method — comparing two builds of GA rather than two methods, and checking that every answer is byte-identical — is itself the third row.
+Performance work invites reading a prediction back out of its own result, so these rows keep the hypothesis as it was written and let it be wrong. Two of the first six are refuted, and appendix 2's method — comparing two builds of GA rather than two methods, and checking that every answer is byte-identical — is itself the third row. The five rows of appendix 4 all held, including the last one, written to test an explanation rather than a behaviour.
 
 | Question | Hypothesis | Result | Verdict | Where |
 |---|---|---|---|---|
@@ -63,6 +64,11 @@ Performance work invites reading a prediction back out of its own result, so the
 | Were the search's 38 MB per query caused by `Parallel.For`? | Written in advance: parallelism was the suspect | A sequential scan allocated the same 38 MB, which cleared `Parallel.For` and pointed at `GetVector` | Refuted | [2026-09-17](#2026-09-17--appendix-2-profiling-ga-with-pull-requests) |
 | Does range partitioning of the search survive the allocation fix? | Not written as a prediction: it measured 8% faster before the fix, so it looked worth keeping | 22% slower after it. Dropped | Refuted | [2026-09-17](#2026-09-17--appendix-2-profiling-ga-with-pull-requests) |
 | Does the whole OPTIC-K export get faster end to end, not just the benchmark? | Written in advance: the analysis is most of the export | Four runs alternating `main` and the changed build: 142.8 s against 62.9 s, then 95.0 s against 38.3 s. The same `main` binary took 142.8 s then 95.0 s, so the machine was not idle and the pairs, not the absolute times, are the result | Confirmed | [2026-09-17](#2026-09-17--appendix-2-profiling-ga-with-pull-requests) |
+| Can two modules run two versions of Newtonsoft.Json in one process? | Not written as a prediction: seen in a prototype first | 13.0.3 and 13.0.1 side by side, both with assembly version 13.0.0.0 | Confirmed | [2026-10-22](#2026-10-22--appendix-4-plugins-without-mef), [`Plugins/`](https://github.com/spareilleux/learn/tree/main/code/csharp-advanced/Plugins) |
+| Can module B use a service of module A without referencing A? | Written in advance: yes if the interface lives in the contracts; without A, `ValidateOnBuild` fails when the container is built | B reverses A's spelling; without A, "Unable to resolve service for type 'Contracts.IChordSpeller'" from `BuildServiceProvider` | Confirmed | [2026-10-22](#2026-10-22--appendix-4-plugins-without-mef) |
+| Does one assembly loaded in two contexts give one type? | Written in advance: no, two types with one name, and one shared `IModule` | Same name `True`, same type `False`; the `IModule` both implement is the host's | Confirmed | [2026-10-22](#2026-10-22--appendix-4-plugins-without-mef) |
+| Does a module whose tool runs a `Timer` still unload? | Written in advance: yes once the container is disposed, never when it is dropped | 1 of 1 disposed; 0 of 1 dropped, after 100 collections, in every run. The control without a timer: 2 of 2 dropped | Confirmed | [2026-10-22](#2026-10-22--appendix-4-plugins-without-mef) |
+| Is it what the timer's callback captures that holds module C? | Written after the previous row's result, before module D's code: a static callback lets the module unload, since an active `Timer` can be collected | Module D unloads, 1 of 1, but within ten back-to-back collections only 36 times in 40; with 10 ms between collections, three every time | Confirmed | [2026-10-22](#2026-10-22--appendix-4-plugins-without-mef) |
 
 ## 2026-09-14 — Setup and the GA pin
 
@@ -250,7 +256,17 @@ Appendix 1 chose what to optimise by reading GA. This time a profiler chose, on 
   - `VoicingGenerator`'s parallel path now emits its windows in fret order, so its stream is the sequential one. That order was the cause of the export difference: the export keeps the first of equally cheap voicings. Two guitar exports of GA's main hashed `776c849e…` and `d0a7d1d9…`; with the fix, `138603e8…` both times.
 - `EnsureValueInRange` was fixed inside [#598](https://github.com/GuitarAlchemist/ga/pull/598), a feature PR, with no test. [#731](https://github.com/GuitarAlchemist/ga/pull/731) adds one: 9 tests pass on main, and 5 of them fail with the file from `a826864`.
 
+## 2026-10-22 — Appendix 4: plugins without MEF
+
+- The author asked for a trial of MEF's successor with two modules, A and B, then for this appendix, verified here rather than handed back. A prototype outside the repository came first; the appendix adds modules C and D and runs under `check.sh`.
+- The hypotheses were written before the first run of the course version, and are in the Experiments table. The predictions about a shared service, type identity and the timer held on the first run, with the same output over 31 runs on Windows 11 and the .NET 10.0.113 SDK.
+- The control, modules A and B dropped without `Dispose`, was added after the timer's result: without it, "the container was not disposed" and "the timer is running" were one explanation.
+- Module D tests the explanation drawn from the `Timer` documentation, that an active timer can be collected: it differs from C only by a static callback. It unloaded, but over 40 runs of the first host, ten back-to-back collections, the unloadability article's loop, were not enough four times: three times the context was alive with its assembly already gone from `GetAssemblies`, once with `ModuleD` still listed. With 10 ms between collections, three every time over 40 runs. The host now waits for up to 100 collections, 10 ms apart, and prints the count on a `# ` line that `check.sh` shows without comparing it.
+- Module B was first given Newtonsoft.Json 12.0.3; NuGet's audit flagged it (NU1903, [GHSA-5crp-9r3c-p9vr](https://github.com/advisories/GHSA-5crp-9r3c-p9vr)), so B uses 13.0.1. Both 13.x packages carry the assembly version 13.0.0.0, which the output now prints.
+
 ## To verify
+
+- The reference chain that keeps module C loaded, dumped with `dotnet-dump`'s `gcroot`; appendix 4 reads it from two measurements (appendix 4).
 
 - Execute the lesson 17 runtime recipes against pinned Channel, Dataflow and Rx fixtures, including a two-item blocked-producer schedule; the current evidence is the Petri oracle only.
 - Why dynamic PGO didn't remove the boxed enumerators of the first mask version of `TryMatch` (appendix 2).
