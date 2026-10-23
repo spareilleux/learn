@@ -274,4 +274,4 @@ La dernière colonne a fait changer l'hôte. La boucle d'attente de l'article s'
 - Les dépendances natives, par `LoadUnmanagedDll` : non essayées.
 - Des parties MEF chargées dans des contextes déchargeables : non essayé.
 - La chaîne de références qui retient le module C n'a pas été vidée avec le `gcroot` de `dotnet-dump` : la page la déduit des scénarios 6 et 7. *À vérifier.*
-- Les comptes ont été mesurés sur la machine Windows de l'auteur ; la CI exécute la même comparaison sous Linux et macOS, et son journal affiche les comptes sans les comparer.
+- Les comptes ont été mesurés sur la machine Windows de l'auteur, puis retrouvés à l'identique lors de la première exécution de la CI sous Linux, macOS et Windows (2, 2, 2, 2, 3 et 100 collectes) : une exécution chacun, un exécuteur plus lent pourrait donc encore en demander davantage.

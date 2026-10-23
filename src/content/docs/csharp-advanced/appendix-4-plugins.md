@@ -274,4 +274,4 @@ The last column changed the host. The article's waiting loop stops after ten col
 - Native dependencies, through `LoadUnmanagedDll`: not tried.
 - MEF parts loaded into collectible contexts: not tried.
 - The reference chain that holds module C was not dumped with `dotnet-dump`'s `gcroot`: the page reads it from scenarios 6 and 7. *To verify.*
-- The counts were measured on the author's Windows machine; CI runs the same comparison on Linux and macOS, and its log shows the counts without comparing them.
+- The counts were measured on the author's Windows machine, then found identical in CI's first run on Linux, macOS and Windows (2, 2, 2, 2, 3 and 100 collections): one run each, so a slower runner could still need more.

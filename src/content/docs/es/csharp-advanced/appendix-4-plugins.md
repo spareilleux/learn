@@ -274,4 +274,4 @@ La última columna hizo cambiar el host. El bucle de espera del artículo se det
 - Las dependencias nativas, mediante `LoadUnmanagedDll`: no probadas.
 - Partes MEF cargadas en contextos descargables: no probado.
 - La cadena de referencias que retiene el módulo C no se volcó con el `gcroot` de `dotnet-dump`: la página la deduce de los escenarios 6 y 7. *Por verificar.*
-- Los recuentos se midieron en la máquina Windows del autor; la CI ejecuta la misma comparación en Linux y macOS, y su registro muestra los recuentos sin compararlos.
+- Los recuentos se midieron en la máquina Windows del autor y se encontraron idénticos en la primera ejecución de la CI en Linux, macOS y Windows (2, 2, 2, 2, 3 y 100 recolecciones): una ejecución en cada uno, así que un runner más lento aún podría necesitar más.
