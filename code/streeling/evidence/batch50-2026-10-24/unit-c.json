@@ -1,0 +1,2555 @@
+{
+  "schema": "streeling-course-author-unit/1",
+  "unit": "c",
+  "base_learn_commit": "b7a402c162c15e77fd76e6c57360994308e33279",
+  "plan_commit": "212ffe4351633588efbe46938cbceec80aded31e",
+  "scope": "Sixteen new craft-to-scene interpretation courses; authored mathematics and source inspection only. No physical craft, Godot/DLSS fork, Blender, ComfyUI, learner or production trial.",
+  "primary_references": [
+    {
+      "id": "transform",
+      "url": "https://docs.godotengine.org/en/4.5/tutorials/3d/using_transforms.html",
+      "version_and_reading_scope": "Godot4.5; local versus parent rotation, transform precision and ordered rotations; web.open actual rendered body",
+      "read_method": "web.open or web.find actual rendered text",
+      "sha256": null
+    },
+    {
+      "id": "camera",
+      "url": "https://docs.godotengine.org/en/4.5/classes/class_camera3d.html",
+      "version_and_reading_scope": "Godot4.5; ProjectionType, KeepAspect and fov property; web.open/find actual rendered body",
+      "read_method": "web.open or web.find actual rendered text",
+      "sha256": null
+    },
+    {
+      "id": "material",
+      "url": "https://docs.godotengine.org/en/4.5/tutorials/3d/standard_material_3d.html",
+      "version_and_reading_scope": "Godot4.5; introduction material precedence and overlay distinction; web.open actual rendered body",
+      "read_method": "web.open or web.find actual rendered text",
+      "sha256": null
+    },
+    {
+      "id": "image",
+      "url": "https://docs.godotengine.org/en/4.5/tutorials/assets_pipeline/importing_images.html",
+      "version_and_reading_scope": "Godot4.5; Mipmaps Generate/Limit and import options; web.open/find actual rendered body",
+      "read_method": "web.open or web.find actual rendered text",
+      "sha256": null
+    },
+    {
+      "id": "thermal",
+      "url": "https://openstax.org/books/university-physics-volume-2/pages/1-3-thermal-expansion",
+      "version_and_reading_scope": "University Physics Volume2 section1.3 equation1.2 and constant-alpha approximation; web.open/find actual rendered body",
+      "read_method": "web.open or web.find actual rendered text",
+      "sha256": null
+    },
+    {
+      "id": "mass",
+      "url": "https://openstax.org/books/university-physics-volume-1/pages/9-6-center-of-mass",
+      "version_and_reading_scope": "University Physics Volume1 section9.6, weighted coordinate definition and calculation procedure; web.open/find actual rendered body",
+      "read_method": "web.open or web.find actual rendered text",
+      "sha256": null
+    },
+    {
+      "id": "factorial",
+      "url": "https://www.itl.nist.gov/div898/handbook/pri/section3/pri3331.htm",
+      "version_and_reading_scope": "NIST e-Handbook section5.3.3.3.1 complete page: full-factorial matrix, standard order and interaction columns; web.open actual rendered body",
+      "read_method": "web.open or web.find actual rendered text",
+      "sha256": null
+    },
+    {
+      "id": "lod",
+      "url": "https://docs.godotengine.org/en/4.5/tutorials/3d/visibility_ranges.html",
+      "version_and_reading_scope": "Godot4.5; How it works, Setting up visibility range, properties and Disabled/Self/Dependencies fade modes; web.open actual rendered body",
+      "read_method": "web.open or web.find actual rendered text",
+      "sha256": null
+    },
+    {
+      "id": "blender_identity",
+      "url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+      "version_and_reading_scope": "blender/blender v4.5.0; Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred.",
+      "read_method": "Coordinator HTTP200 byte receipt plus full local retained-file read and independent SHA256 verification by this author",
+      "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06"
+    }
+  ],
+  "courses": [
+    {
+      "code": "PHY016",
+      "department": "physics",
+      "module_id": "phy-016-bound-a-fold-hinge-sweep",
+      "title": "Bound a Fold Hinge Sweep",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-016-bound-a-fold-hinge-sweep.md",
+        "fr": "streeling/courses/physics/fr/phy-016-bound-a-fold-hinge-sweep.fr.md",
+        "es": "streeling/courses/physics/es/phy-016-bound-a-fold-hinge-sweep.es.md"
+      },
+      "novelty_vs_prerequisites": "A folded panel can finish clear of a neighbour while passing through it. For a proposed origami sculpture in Godot, an endpoint picture therefore answers a narrower question than a motion path. This lesson follows one marked point around an ideal hinge and separates its distance from the hinge from the distance it travels away from its starting position. Neither quantity is a material strain.",
+      "prerequisites": [
+        "phy-013-check-torque-when-moving-a-scene-pivot"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/physics/en/phy-013-check-torque-when-moving-a-scene-pivot.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "d5f818dc617edd6fb4763ee8f1653bd22700ee8b88cb291dd764ec9cddca11d9",
+          "scope": "Actual English prerequisite project question, model/interpretation and first exercise passages read; catalogue title/frontmatter enumerated."
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc",
+          "scope": "Lines1-45: declared Blender5.2 frame, reset_scene, material creation and object parenting helpers. No export or scene execution."
+        },
+        {
+          "path_or_url": "https://docs.godotengine.org/en/4.5/tutorials/3d/using_transforms.html",
+          "pin": "Godot4.5",
+          "sha256": null,
+          "scope": "Godot4.5; local versus parent rotation, transform precision and ordered rotations; web.open actual rendered body"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+          "pin": "blender/blender v4.5.0",
+          "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06",
+          "scope": "Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "radius_mm": 100,
+          "angle_deg": 60,
+          "obstacle_radius_mm": 90
+        },
+        "formula": "x=r*cos(theta*pi/180); y=r*sin(theta*pi/180); swept_displacement=2*r*sin(abs(theta)*pi/360); radial_margin=r-obstacle_radius",
+        "expected": {
+          "endpoint_mm": [
+            50,
+            86.60254037844386
+          ],
+          "swept_displacement_mm": 100,
+          "radial_margin_mm": 10
+        },
+        "negative_control": {
+          "values": {
+            "radius_mm": 100,
+            "angle_deg": 0,
+            "obstacle_radius_mm": 90
+          },
+          "expected": {
+            "endpoint_mm": [
+              100,
+              0
+            ],
+            "swept_displacement_mm": 0,
+            "radial_margin_mm": 10
+          },
+          "why": "Zero angle removes motion but preserves radius: endpoint change cannot be inferred from panel length alone."
+        },
+        "assumptions": [
+          "Rigid planar point about a fixed hinge",
+          "Angles in degrees converted to radians",
+          "Obstacle radius is only a declared radial comparison"
+        ],
+        "limits": [
+          "No swept-volume collision certification",
+          "No crease stiffness or paper deformation"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the endpoint of the marked point. Which coordinate has remained fixed?",
+          "expected_answer": "The endpoint is `(50,86.60254037844386) mm`. Neither coordinate is fixed; the hinge and radius remain fixed. Rounding should be declared rather than changing the construction.",
+          "decision": null
+        },
+        "2": {
+          "question": "Calculate straight displacement from the starting point, and compare it with the radius.",
+          "expected_answer": "The chord displacement is `100 mm`, equal to this case’s radius. That equality depends on the chosen angle; it is not the definition of a rotation.",
+          "decision": null
+        },
+        "3": {
+          "question": "What does the radial margin establish about a nearby obstacle?",
+          "expected_answer": "It is `10 mm` under the radial comparison. Without an angular extent and occupied volume, this number cannot establish that the moving panel avoids the obstacle.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the zero-angle negative control. Does unchanged radius imply unchanged endpoint in every case?",
+          "expected_answer": "The control endpoint is `(100,0) mm` and displacement is `0 mm`. The main case already changes the endpoint despite preserving the same radius.",
+          "decision": null
+        },
+        "5": {
+          "question": "What additional information would a scene handoff require to test motion clearance?",
+          "expected_answer": "Give the hinge frame, occupied panel geometry, obstacle geometry, complete angle interval and contact convention. A single marked point and final capture are insufficient.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: The endpoint is `(50,86.60254037844386) mm`. Neither coordinate is fixed; the hinge and radius remain fixed. Rounding should be declared rather than changing the construction.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: The chord displacement is `100 mm`, equal to this case’s radius. That equality depends on the chosen angle; it is not the definition of a rotation.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: It is `10 mm` under the radial comparison. Without an angular extent and occupied volume, this number cannot establish that the moving panel avoids the obstacle.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: The control endpoint is `(100,0) mm` and displacement is `0 mm`. The main case already changes the endpoint despite preserving the same radius.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: Give the hinge frame, occupied panel geometry, obstacle geometry, complete angle interval and contact convention. A single marked point and final capture are insufficient.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the start, end and connecting arc before checking the answers. Annotate a proposed parent-child hinge in the Atlas helper without editing it. Your falsifier for endpoint-based clearance is an obstacle intersecting an intermediate panel position while both endpoints remain clear.",
+        "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
+        "falsifier": "Zero angle removes motion but preserves radius: endpoint change cannot be inferred from panel length alone. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PHY017",
+      "department": "physics",
+      "module_id": "phy-017-budget-thermal-growth-at-a-metal-joint",
+      "title": "Budget Thermal Growth at a Metal Joint",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-017-budget-thermal-growth-at-a-metal-joint.md",
+        "fr": "streeling/courses/physics/fr/phy-017-budget-thermal-growth-at-a-metal-joint.fr.md",
+        "es": "streeling/courses/physics/es/phy-017-budget-thermal-growth-at-a-metal-joint.es.md"
+      },
+      "novelty_vs_prerequisites": "A chased metal strip in a proposed sculpture has a visible gap beside a fixed stop. An agent might preserve that gap in a mesh while forgetting the temperature at which it was specified. This lesson adds a thermal reference to the static-clearance prerequisite. We calculate free expansion with an explicitly invented coefficient, then distinguish a negative predicted gap from a measured failure of a real joint.",
+      "prerequisites": [
+        "phy-015-bound-clearance-after-thickening-a-panel"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/physics/en/phy-015-bound-clearance-after-thickening-a-panel.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "3f35d3e121e5ed09811acdfaa83a0f2ca9b9be5820dbdc3c4746bf51f70bf004",
+          "scope": "Actual English prerequisite project question, model/interpretation and first exercise passages read; catalogue title/frontmatter enumerated."
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc",
+          "scope": "Lines1-45: declared Blender5.2 frame, reset_scene, material creation and object parenting helpers. No export or scene execution."
+        },
+        {
+          "path_or_url": "https://openstax.org/books/university-physics-volume-2/pages/1-3-thermal-expansion",
+          "pin": "University Physics Volume2 section1.3 equation1.2 and constant-alpha approximation",
+          "sha256": null,
+          "scope": "University Physics Volume2 section1.3 equation1.2 and constant-alpha approximation; web.open/find actual rendered body"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+          "pin": "blender/blender v4.5.0",
+          "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06",
+          "scope": "Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "length_mm": 200,
+          "alpha_per_K": 2e-05,
+          "delta_K": 50,
+          "gap_mm": 0.3
+        },
+        "formula": "growth_mm=alpha_per_K*length_mm*delta_K; remaining_gap_mm=gap_mm-growth_mm",
+        "expected": {
+          "growth_mm": 0.2,
+          "remaining_gap_mm": 0.1
+        },
+        "negative_control": {
+          "values": {
+            "length_mm": 200,
+            "alpha_per_K": 2e-05,
+            "delta_K": 100,
+            "gap_mm": 0.3
+          },
+          "expected": {
+            "growth_mm": 0.4,
+            "remaining_gap_mm": -0.1
+          },
+          "why": "Larger temperature rise reverses the clearance sign under the same linear approximation."
+        },
+        "assumptions": [
+          "Constant authored expansion coefficient",
+          "Uniform temperature and unconstrained growth toward one fixed stop",
+          "Gap belongs to the initial temperature"
+        ],
+        "limits": [
+          "No alloy identification",
+          "No stress, plasticity or heat-transfer prediction"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the free growth of the authored strip. Which units cancel?",
+          "expected_answer": "Growth is `0.2 mm`. Reciprocal kelvins cancel kelvins, leaving the length unit. The coefficient is an input, not an estimate obtained from the material’s appearance.",
+          "decision": null
+        },
+        "2": {
+          "question": "What gap remains, and what narrow conclusion follows?",
+          "expected_answer": "The remaining gap is `0.1 mm`. The linear free-growth model predicts separation for this input; no real strip or contact was observed.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the larger-temperature negative control. What does a negative gap mean here?",
+          "expected_answer": "Growth is `0.4 mm` and remaining gap is `-0.1 mm`. The free-growth geometry overlaps the stop; the model does not calculate the restrained stress.",
+          "decision": null
+        },
+        "4": {
+          "question": "Could a metallic shader parameter replace the expansion coefficient?",
+          "expected_answer": "No. Appearance parameters control a visual material. They do not identify alloy, temperature dependence, restraint or the physical coefficient required by this calculation.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would falsify transferring this constant-coefficient model to a particular craft piece?",
+          "expected_answer": "A relevant measured expansion outside the declared error allowance, a moving stop, strong thermal gradients or constrained growth would invalidate at least one premise. Retain the discrepancy rather than claiming certification.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: Growth is `0.2 mm`. Reciprocal kelvins cancel kelvins, leaving the length unit. The coefficient is an input, not an estimate obtained from the material’s appearance.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: The remaining gap is `0.1 mm`. The linear free-growth model predicts separation for this input; no real strip or contact was observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: Growth is `0.4 mm` and remaining gap is `-0.1 mm`. The free-growth geometry overlaps the stop; the model does not calculate the restrained stress.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: No. Appearance parameters control a visual material. They do not identify alloy, temperature dependence, restraint or the physical coefficient required by this calculation.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: A relevant measured expansion outside the declared error allowance, a moving stop, strong thermal gradients or constrained growth would invalidate at least one premise. Retain the discrepancy rather than claiming certification.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a joint card with reference temperature, length, gap, coefficient provenance and growth direction. Use a manual before-and-after sketch as baseline. Point to Atlas’s material parameters and explicitly mark the absent physical-property field; do not add one to the code.",
+        "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
+        "falsifier": "Larger temperature rise reverses the clearance sign under the same linear approximation. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PHY018",
+      "department": "physics",
+      "module_id": "phy-018-locate-a-sculpture-mass-projection",
+      "title": "Locate a Sculpture Mass Projection",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-018-locate-a-sculpture-mass-projection.md",
+        "fr": "streeling/courses/physics/fr/phy-018-locate-a-sculpture-mass-projection.fr.md",
+        "es": "streeling/courses/physics/es/phy-018-locate-a-sculpture-mass-projection.es.md"
+      },
+      "novelty_vs_prerequisites": "An asymmetrical metal sculpture can look balanced because its mesh origin is centered. That origin is a modeling choice. This lesson places the projection of a declared mass model relative to a support interval, so a future Godot annotation can distinguish visual centering from a static mechanical premise. It extends pivot reasoning by weighting component locations, rather than treating every component or vertex as equally massive.",
+      "prerequisites": [
+        "phy-013-check-torque-when-moving-a-scene-pivot"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/physics/en/phy-013-check-torque-when-moving-a-scene-pivot.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "d5f818dc617edd6fb4763ee8f1653bd22700ee8b88cb291dd764ec9cddca11d9",
+          "scope": "Actual English prerequisite project question, model/interpretation and first exercise passages read; catalogue title/frontmatter enumerated."
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc",
+          "scope": "Lines1-45: declared Blender5.2 frame, reset_scene, material creation and object parenting helpers. No export or scene execution."
+        },
+        {
+          "path_or_url": "https://openstax.org/books/university-physics-volume-1/pages/9-6-center-of-mass",
+          "pin": "University Physics Volume1 section9.6, weighted coordinate definition and calculation procedure",
+          "sha256": null,
+          "scope": "University Physics Volume1 section9.6, weighted coordinate definition and calculation procedure; web.open/find actual rendered body"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+          "pin": "blender/blender v4.5.0",
+          "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06",
+          "scope": "Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "masses_kg": [
+            2,
+            1
+          ],
+          "x_m": [
+            0,
+            0.3
+          ],
+          "support_m": [
+            -0.12,
+            0.12
+          ]
+        },
+        "formula": "x_cm=sum(m_i*x_i)/sum(m_i); margin=min(x_cm-support_min,support_max-x_cm)",
+        "expected": {
+          "x_cm_m": 0.1,
+          "margin_m": 0.02,
+          "inside_support": true
+        },
+        "negative_control": {
+          "values": {
+            "masses_kg": [
+              2,
+              1
+            ],
+            "x_m": [
+              0,
+              0.6
+            ],
+            "support_m": [
+              -0.12,
+              0.12
+            ]
+          },
+          "expected": {
+            "x_cm_m": 0.2,
+            "margin_m": -0.08,
+            "inside_support": false
+          },
+          "why": "Moving only the decorative mass changes the weighted projection despite retaining the same total mass."
+        },
+        "assumptions": [
+          "Positive lumped masses",
+          "Uniform vertical gravity and horizontal rigid support",
+          "One-dimensional support section with no adhesion or external stabilizing force"
+        ],
+        "limits": [
+          "No dynamic stability or strength claim",
+          "Mesh vertex average is not a mass model"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Find the total mass and projected center for the main case.",
+          "expected_answer": "The total mass is `3 kg`, and the projected center is `0.1 m`. The component at the origin contributes to the denominator even though its weighted position is zero.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the nearest support-edge margin. What does its sign encode?",
+          "expected_answer": "The nearest-edge margin is `0.02 m`. It is positive because the projection is strictly inside the declared interval; it is not a measured safety factor.",
+          "decision": null
+        },
+        "3": {
+          "question": "Move only the decorative component according to the control.",
+          "expected_answer": "The projection becomes `0.2 m`, with margin `-0.08 m`. It lies outside the support despite the unchanged total mass and unchanged support interval.",
+          "decision": null
+        },
+        "4": {
+          "question": "Would averaging all mesh vertices give the same justified quantity?",
+          "expected_answer": "No. Vertex density follows tessellation, not mass. A mass interpretation requires component masses or a density-and-volume model; the object origin supplies neither.",
+          "decision": null
+        },
+        "5": {
+          "question": "What claims remain unavailable even with a positive margin?",
+          "expected_answer": "Dynamic response, frictional sliding, joint strength, deformation and real manufacturing stability remain untested. The result addresses only the declared static support section.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: The total mass is `3 kg`, and the projected center is `0.1 m`. The component at the origin contributes to the denominator even though its weighted position is zero.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: The nearest-edge margin is `0.02 m`. It is positive because the projection is strictly inside the declared interval; it is not a measured safety factor.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: The projection becomes `0.2 m`, with margin `-0.08 m`. It lies outside the support despite the unchanged total mass and unchanged support interval.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: No. Vertex density follows tessellation, not mass. A mass interpretation requires component masses or a density-and-volume model; the object origin supplies neither.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: Dynamic response, frictional sliding, joint strength, deformation and real manufacturing stability remain untested. The result addresses only the declared static support section.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Make a component-and-support diagram and calculate its weighted projection manually. Identify where Atlas stores placement and where the required mass data is absent. A projection outside the support falsifies a claim of positive support margin for this model; it does not record a real sculpture falling.",
+        "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
+        "falsifier": "Moving only the decorative mass changes the weighted projection despite retaining the same total mass. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "VC014",
+      "department": "visual-computing",
+      "module_id": "vc-014-predict-an-embroidered-stitch-pixel-footprint",
+      "title": "Predict an Embroidered Stitch Pixel Footprint",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-014-predict-an-embroidered-stitch-pixel-footprint.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-014-predict-an-embroidered-stitch-pixel-footprint.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-014-predict-an-embroidered-stitch-pixel-footprint.es.md"
+      },
+      "novelty_vs_prerequisites": "A thread survives Blender cleanup but disappears in a proposed Godot overview. Geometric retention and screen visibility answer different questions. This lesson predicts the projected width of one embroidered stitch before selecting a geometry or texture representation. The calculation supplies a camera-dependent footprint, not a claim that a person can recognize the stitch, and not a benchmark for a renderer or an upscaler.",
+      "prerequisites": [
+        "vc-005-craft-details-through-blender-to-godot"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "5fbad318a7815657d4cc1be13c1d6a7c265a732e3121d901bd35c994c9227d8d",
+          "scope": "Actual English prerequisite project question, model/interpretation and first exercise passages read; catalogue title/frontmatter enumerated."
+        },
+        {
+          "path_or_url": "code/blender/scripts/glb_pipeline.py",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "40379515ecff8ecda28dc1933725242d8eb82807d2085d60fbc080b73316cfbe",
+          "scope": "Lines1-36: docstring, size/axis, merge-distance, min-part, voxel-remesh, frames and resolution parameters only. No script execution."
+        },
+        {
+          "path_or_url": "https://docs.godotengine.org/en/4.5/classes/class_camera3d.html",
+          "pin": "Godot4.5",
+          "sha256": null,
+          "scope": "Godot4.5; ProjectionType, KeepAspect and fov property; web.open/find actual rendered body"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+          "pin": "blender/blender v4.5.0",
+          "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06",
+          "scope": "Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "width_m": 0.002,
+          "distance_m": 1,
+          "viewport_height_px": 1000,
+          "vertical_fov_deg": 90,
+          "required_px": 2
+        },
+        "formula": "focal_px=viewport_height_px/(2*tan(vertical_fov_deg*pi/360)); width_px=focal_px*width_m/distance_m; meets_declared_threshold=width_px>=required_px",
+        "expected": {
+          "focal_px": 500,
+          "width_px": 1,
+          "meets_declared_threshold": false
+        },
+        "negative_control": {
+          "values": {
+            "width_m": 0.002,
+            "distance_m": 0.5,
+            "viewport_height_px": 1000,
+            "vertical_fov_deg": 90,
+            "required_px": 2
+          },
+          "expected": {
+            "focal_px": 500,
+            "width_px": 2,
+            "meets_declared_threshold": true
+          },
+          "why": "Changing camera distance alone changes the geometric footprint, despite identical stitch geometry."
+        },
+        "assumptions": [
+          "Pinhole perspective camera",
+          "Stitch width parallel to image plane at stated depth",
+          "Vertical field of view and viewport height paired"
+        ],
+        "limits": [
+          "Threshold is authored, not perceptual evidence",
+          "No rasterization, antialiasing or DLSS inference"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute focal length in pixel units for the main case.",
+          "expected_answer": "The focal length is `500 px`. Pairing vertical field of view with horizontal viewport size would answer a different and generally incorrect projection question.",
+          "decision": null
+        },
+        "2": {
+          "question": "Find projected stitch width and compare it with the declared threshold.",
+          "expected_answer": "Its width is `1 px`, below the `2 px` threshold. This rejects only the authored geometric requirement; it does not demonstrate actual invisibility.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the closer-camera control without changing the mesh.",
+          "expected_answer": "Projected width becomes `2 px` and meets the declared threshold. Identical geometry can support different screen footprints at different camera distances.",
+          "decision": null
+        },
+        "4": {
+          "question": "Would this formula transfer unchanged to an orthographic view?",
+          "expected_answer": "No. The pinhole distance division belongs to perspective. An orthographic model needs its view size and viewport mapping; distance alone does not supply this scaling.",
+          "decision": null
+        },
+        "5": {
+          "question": "Can meeting the threshold establish a DLSS or recognition result?",
+          "expected_answer": "No. Neither an upscaler nor a viewer was tested. Retain contrast, sampling, camera motion and recognition as separate questions for a future observation.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: The focal length is `500 px`. Pairing vertical field of view with horizontal viewport size would answer a different and generally incorrect projection question.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: Its width is `1 px`, below the `2 px` threshold. This rejects only the authored geometric requirement; it does not demonstrate actual invisibility.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: Projected width becomes `2 px` and meets the declared threshold. Identical geometry can support different screen footprints at different camera distances.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: No. The pinhole distance division belongs to perspective. An orthographic model needs its view size and viewport mapping; distance alone does not supply this scaling.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: No. Neither an upscaler nor a viewer was tested. Retain contrast, sampling, camera motion and recognition as separate questions for a future observation.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a stitch card with physical width, camera axis convention, distance, viewport and predicted width. Calculate by hand before consulting the packet. Falsify an unconditional visibility claim by changing only the view distance; propose a matched-camera capture as future evidence, not an executed trial.",
+        "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
+        "falsifier": "Changing camera distance alone changes the geometric footprint, despite identical stitch geometry. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "VC015",
+      "department": "visual-computing",
+      "module_id": "vc-015-budget-a-sculpture-profile-chord-error",
+      "title": "Budget a Sculpture Profile Chord Error",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-015-budget-a-sculpture-profile-chord-error.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-015-budget-a-sculpture-profile-chord-error.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-015-budget-a-sculpture-profile-chord-error.es.md"
+      },
+      "novelty_vs_prerequisites": "A low-poly sculpture can meet a triangle budget and still lose a curved rim that identifies the piece. This lesson puts an explicit geometric tolerance beside a simplification budget. We replace an ideal circular profile with an inscribed regular polygon and calculate the maximum radial gap along each chord. The model concerns a deliberately simple section, so its accuracy is inspectable without running Blender.",
+      "prerequisites": [
+        "vc-005-craft-details-through-blender-to-godot"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "5fbad318a7815657d4cc1be13c1d6a7c265a732e3121d901bd35c994c9227d8d",
+          "scope": "Actual English prerequisite project question, model/interpretation and first exercise passages read; catalogue title/frontmatter enumerated."
+        },
+        {
+          "path_or_url": "code/blender/scripts/glb_pipeline.py",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "40379515ecff8ecda28dc1933725242d8eb82807d2085d60fbc080b73316cfbe",
+          "scope": "Lines1-36: docstring, size/axis, merge-distance, min-part, voxel-remesh, frames and resolution parameters only. No script execution."
+        },
+        {
+          "path_or_url": "https://docs.godotengine.org/en/4.5/tutorials/3d/using_transforms.html",
+          "pin": "Godot4.5",
+          "sha256": null,
+          "scope": "Godot4.5; local versus parent rotation, transform precision and ordered rotations; web.open actual rendered body"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+          "pin": "blender/blender v4.5.0",
+          "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06",
+          "scope": "Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "radius_mm": 100,
+          "segments": 12,
+          "tolerance_mm": 1
+        },
+        "formula": "sagitta_mm=radius_mm*(1-cos(pi/segments)); perimeter_mm=2*segments*radius_mm*sin(pi/segments); acceptable=sagitta_mm<=tolerance_mm",
+        "expected": {
+          "sagitta_mm": 3.407417371093169,
+          "perimeter_mm": 621.1657082460498,
+          "acceptable": false
+        },
+        "negative_control": {
+          "values": {
+            "radius_mm": 100,
+            "segments": 24,
+            "tolerance_mm": 1
+          },
+          "expected": {
+            "sagitta_mm": 0.8555138626189618,
+            "perimeter_mm": 626.5257226562476,
+            "acceptable": true
+          },
+          "why": "A doubled segment count changes geometric approximation error; triangle-count reduction alone does not bound shape loss."
+        },
+        "assumptions": [
+          "Regular polygon inscribed in a circle",
+          "Equal straight segments and exact radius",
+          "Tolerance measured radially at chord midpoint"
+        ],
+        "limits": [
+          "Only a planar profile bound",
+          "No full mesh quality, normal or perceptual certification"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Find the radial chord error in the main case.",
+          "expected_answer": "The sagitta is approximately `3.407417371093169 mm`. It exceeds the declared `1 mm` tolerance, so the authored profile requirement fails.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the polygon perimeter. Does its closeness certify the local tolerance?",
+          "expected_answer": "The perimeter is approximately `621.1657082460498 mm`. A global length comparison cannot replace the specified maximum radial-error condition.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the higher-segment negative control.",
+          "expected_answer": "The sagitta becomes approximately `0.8555138626189618 mm`, meeting tolerance; perimeter becomes `626.5257226562476 mm`. The changed count improves this precise construction.",
+          "decision": null
+        },
+        "4": {
+          "question": "What would be wrong with calling the triangle target a silhouette tolerance?",
+          "expected_answer": "A triangle count constrains quantity, not where triangles lie or which profile they approximate. The retained script parameters do not assert this feature-specific sagitta bound.",
+          "decision": null
+        },
+        "5": {
+          "question": "What must accompany transfer to a noncircular sculpture rim?",
+          "expected_answer": "Retain the reference profile, units, sampling or analytic error definition, feature identity and allowed tolerance. The circular calculation is not a proof for arbitrary curvature.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: The sagitta is approximately `3.407417371093169 mm`. It exceeds the declared `1 mm` tolerance, so the authored profile requirement fails.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: The perimeter is approximately `621.1657082460498 mm`. A global length comparison cannot replace the specified maximum radial-error condition.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: The sagitta becomes approximately `0.8555138626189618 mm`, meeting tolerance; perimeter becomes `626.5257226562476 mm`. The changed count improves this precise construction.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: A triangle count constrains quantity, not where triangles lie or which profile they approximate. The retained script parameters do not assert this feature-specific sagitta bound.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: Retain the reference profile, units, sampling or analytic error definition, feature identity and allowed tolerance. The circular calculation is not a proof for arbitrary curvature.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the circle center, chord midpoint and radius, then calculate the gap manually. Draft a feature-review note beside the existing triangle parameter without changing the script. The falsifier is a retained profile deviation larger than the declared tolerance even when the triangle target is met.",
+        "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
+        "falsifier": "A doubled segment count changes geometric approximation error; triangle-count reduction alone does not bound shape loss. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "VC016",
+      "department": "visual-computing",
+      "module_id": "vc-016-track-uv-gutters-through-mip-levels",
+      "title": "Track UV Gutters through Mip Levels",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-016-track-uv-gutters-through-mip-levels.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-016-track-uv-gutters-through-mip-levels.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-016-track-uv-gutters-through-mip-levels.es.md"
+      },
+      "novelty_vs_prerequisites": "A woven or embroidered atlas can have correct channel meanings and still mix neighbouring patches at a distance. This lesson follows a declared gutter width as an ideal mip chain shrinks the texture. It adds spatial separation to the prerequisite’s channel contract. The result tells an author where a chosen margin stops holding; it does not predict every texture filter or prove that a rendered seam appears.",
+      "prerequisites": [
+        "vc-010-preserve-packed-texture-channel-contracts"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/visual-computing/en/vc-010-preserve-packed-texture-channel-contracts.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "dff68b04b2af3c395f35b754b2c65e77968c8d95afce4a56a80f120b7725bf43",
+          "scope": "Actual English prerequisite project question, model/interpretation and first exercise passages read; catalogue title/frontmatter enumerated."
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc",
+          "scope": "Lines1-45: declared Blender5.2 frame, reset_scene, material creation and object parenting helpers. No export or scene execution."
+        },
+        {
+          "path_or_url": "https://docs.godotengine.org/en/4.5/tutorials/assets_pipeline/importing_images.html",
+          "pin": "Godot4.5",
+          "sha256": null,
+          "scope": "Godot4.5; Mipmaps Generate/Limit and import options; web.open/find actual rendered body"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+          "pin": "blender/blender v4.5.0",
+          "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06",
+          "scope": "Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "gutter_px": 16,
+          "mip_level": 3,
+          "required_gutter_px": 2
+        },
+        "formula": "effective_gutter_px=gutter_px/(2**mip_level); meets_declared_margin=effective_gutter_px>=required_gutter_px",
+        "expected": {
+          "effective_gutter_px": 2,
+          "meets_declared_margin": true
+        },
+        "negative_control": {
+          "values": {
+            "gutter_px": 16,
+            "mip_level": 4,
+            "required_gutter_px": 2
+          },
+          "expected": {
+            "effective_gutter_px": 1,
+            "meets_declared_margin": false
+          },
+          "why": "A coarser level reduces a fixed base-image gutter; successful channel decoding does not guarantee this margin."
+        },
+        "assumptions": [
+          "Ideal halving of both image axes per level",
+          "Gutter measured in base-image texels",
+          "Margin is an authored geometric requirement"
+        ],
+        "limits": [
+          "No exact filter footprint or bleed prediction",
+          "No actual atlas bake or import"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the effective gutter in the main case.",
+          "expected_answer": "The effective gutter is `2 px`, exactly the declared `2 px` requirement. Equality passes this authored comparison but provides no extra reserve.",
+          "decision": null
+        },
+        "2": {
+          "question": "Apply the coarser-level negative control.",
+          "expected_answer": "The gutter becomes `1 px`, below the requirement. The same base atlas therefore passes one declared level and fails the next.",
+          "decision": null
+        },
+        "3": {
+          "question": "Does passing the margin prove the absence of visible texture bleeding?",
+          "expected_answer": "No. The model omits actual filters, compression, UV derivatives, wrap rules and content. It bounds a stated ideal gutter quantity rather than a complete sampling process.",
+          "decision": null
+        },
+        "4": {
+          "question": "Why must the handoff distinguish total gutter from padding per island?",
+          "expected_answer": "The two definitions allocate different separation between regions. A shared number without its spatial definition may halve or double the assumed protection.",
+          "decision": null
+        },
+        "5": {
+          "question": "Can a correctly decoded packed map rescue a failed spatial contract?",
+          "expected_answer": "No. Correct channel interpretation does not prevent sampling from a neighbouring island. Preserve both the channel roles and the atlas-space separation requirement.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: The effective gutter is `2 px`, exactly the declared `2 px` requirement. Equality passes this authored comparison but provides no extra reserve.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: The gutter becomes `1 px`, below the requirement. The same base atlas therefore passes one declared level and fails the next.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: No. The model omits actual filters, compression, UV derivatives, wrap rules and content. It bounds a stated ideal gutter quantity rather than a complete sampling process.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: The two definitions allocate different separation between regions. A shared number without its spatial definition may halve or double the assumed protection.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: No. Correct channel interpretation does not prevent sampling from a neighbouring island. Preserve both the channel roles and the atlas-space separation requirement.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw two atlas islands and label the total gutter at the base and changed levels. Calculate the ideal widths manually. Locate the material helper’s limited scope, then write the additional atlas evidence a future import would need. A coarser level violating the declared margin falsifies an all-level margin claim.",
+        "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
+        "falsifier": "A coarser level reduces a fixed base-image gutter; successful channel decoding does not guarantee this margin. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "DV014",
+      "department": "data-visualization",
+      "module_id": "dv-014-plot-signed-craft-clearance",
+      "title": "Plot Signed Craft Clearance",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-014-plot-signed-craft-clearance.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-014-plot-signed-craft-clearance.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-014-plot-signed-craft-clearance.es.md"
+      },
+      "novelty_vs_prerequisites": "A craft dashboard reports average clearance magnitude and makes an overlapping strand look as healthy as a separated one. The missing sign changes the scene decision. This lesson designs a diverging position view with a visible contact line, while preserving the underlying authored rows. It extends the shared-scale prerequisite by treating zero as a physical interpretation boundary rather than merely an axis origin.",
+      "prerequisites": [
+        "dv-006-position-length-area-comparisons"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/data-visualization/en/dv-006-position-length-area-comparisons.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "8b04fc5c3b037f53310594333684c36fa0bb1b9efb5592b45db5f0f55e4bae7d",
+          "scope": "Actual English prerequisite project question, model/interpretation and first exercise passages read; catalogue title/frontmatter enumerated."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/weave-scene-2026-10-22/crossings.json",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "05ff96258db853cfdf31bbe53f4589e0a4d088045449035036123a0577056ab1",
+          "scope": "Top-level kind/sample/spacing/diameter and first crossing rows, their grid coordinates, millimetre positions and warp_over values. Historical retained fixture, no replay."
+        },
+        {
+          "path_or_url": "https://docs.godotengine.org/en/4.5/tutorials/3d/using_transforms.html",
+          "pin": "Godot4.5",
+          "sha256": null,
+          "scope": "Godot4.5; local versus parent rotation, transform precision and ordered rotations; web.open actual rendered body"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+          "pin": "blender/blender v4.5.0",
+          "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06",
+          "scope": "Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "clearance_mm": [
+            -0.4,
+            0,
+            0.2,
+            0.8
+          ]
+        },
+        "formula": "minimum=min(clearance); overlap_count=count(c<0); contact_count=count(c==0); mean_absolute=sum(abs(c))/len(c)",
+        "expected": {
+          "minimum_mm": -0.4,
+          "overlap_count": 1,
+          "contact_count": 1,
+          "mean_absolute_mm": 0.35
+        },
+        "negative_control": {
+          "values": {
+            "clearance_mm": [
+              0.4,
+              0,
+              0.2,
+              0.8
+            ]
+          },
+          "expected": {
+            "minimum_mm": 0,
+            "overlap_count": 0,
+            "contact_count": 1,
+            "mean_absolute_mm": 0.35
+          },
+          "why": "Absolute magnitudes remain equal while an overlap disappears, exposing the lost sign."
+        },
+        "assumptions": [
+          "Positive means separated along one declared normal",
+          "Zero is ideal contact",
+          "All rows use one frame and millimetres"
+        ],
+        "limits": [
+          "No full-volume collision evidence",
+          "No probabilistic tolerance estimate"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Classify every main-case row relative to contact.",
+          "expected_answer": "There is `1` overlapping row, `1` contact row and `2` separated rows. These categories follow the declared sign convention, not a color preference.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the minimum and mean absolute clearance.",
+          "expected_answer": "The minimum is `-0.4 mm` and mean absolute clearance is `0.35 mm`. The second number alone cannot identify an overlap.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the sign-changed control. What statistic conceals the improvement?",
+          "expected_answer": "The minimum becomes `0 mm`, overlap count becomes `0`, and mean absolute clearance remains `0.35 mm`. Absolute aggregation conceals the change of side.",
+          "decision": null
+        },
+        "4": {
+          "question": "Specify a view that preserves the scene question without relying on color.",
+          "expected_answer": "Use identified rows at signed positions, a labelled contact line, exact values and text states. Color may reinforce categories but must not carry the only sign information.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does a nonnegative minimum prove a moving weave is collision free?",
+          "expected_answer": "No. The rows concern a fixed stipulated section. Full geometry, motion, tolerances and unobserved crossings require their own evidence.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: There is `1` overlapping row, `1` contact row and `2` separated rows. These categories follow the declared sign convention, not a color preference.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: The minimum is `-0.4 mm` and mean absolute clearance is `0.35 mm`. The second number alone cannot identify an overlap.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: The minimum becomes `0 mm`, overlap count becomes `0`, and mean absolute clearance remains `0.35 mm`. Absolute aggregation conceals the change of side.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: Use identified rows at signed positions, a labelled contact line, exact values and text states. Color may reinforce categories but must not carry the only sign information.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: No. The rows concern a fixed stipulated section. Full geometry, motion, tolerances and unobserved crossings require their own evidence.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Sketch the signed dot plot manually and annotate each row with its scene identity. Compare it with a magnitude-only summary and retain the control. An overlap that remains invisible in a supposedly clearance-safe display is the falsifier for that display’s claimed task support.",
+        "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
+        "falsifier": "Absolute magnitudes remain equal while an overlap disappears, exposing the lost sign. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "DV015",
+      "department": "data-visualization",
+      "module_id": "dv-015-map-missing-stitches-without-inventing-holes",
+      "title": "Map Missing Stitches without Inventing Holes",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-015-map-missing-stitches-without-inventing-holes.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-015-map-missing-stitches-without-inventing-holes.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-015-map-missing-stitches-without-inventing-holes.es.md"
+      },
+      "novelty_vs_prerequisites": "An embroidery inspection map leaves a blank cell where no observation exists. A scene author reads the blank as a hole and removes geometry. This lesson separates an observed absent stitch from an unobserved location, preserving spatial identity as well as the denominator. It transfers the prerequisite’s missing-value distinction from a time trace to a proposed craft surface without pretending that an image is a physical inspection.",
+      "prerequisites": [
+        "dv-010-show-pitch-errors-and-missing-estimates"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/data-visualization/en/dv-010-show-pitch-errors-and-missing-estimates.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "130010520b74d9cbdf789771f447cba07a9cf4d22f518f91ce56192011b6498e",
+          "scope": "Actual English prerequisite project question, model/interpretation and first exercise passages read; catalogue title/frontmatter enumerated."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/weave-scene-2026-10-22/crossings.json",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "05ff96258db853cfdf31bbe53f4589e0a4d088045449035036123a0577056ab1",
+          "scope": "Top-level kind/sample/spacing/diameter and first crossing rows, their grid coordinates, millimetre positions and warp_over values. Historical retained fixture, no replay."
+        },
+        {
+          "path_or_url": "https://docs.godotengine.org/en/4.5/classes/class_camera3d.html",
+          "pin": "Godot4.5",
+          "sha256": null,
+          "scope": "Godot4.5; ProjectionType, KeepAspect and fov property; web.open/find actual rendered body"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+          "pin": "blender/blender v4.5.0",
+          "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06",
+          "scope": "Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "grid_width": 3,
+          "grid_height": 2,
+          "observed_stitch": [
+            true,
+            false,
+            null,
+            true,
+            false,
+            true
+          ]
+        },
+        "formula": "observed=count(v is not null); present=count(v is true); absent=count(v is false); missing=total-observed; observed_absence_fraction=absent/observed",
+        "expected": {
+          "observed": 5,
+          "present": 3,
+          "absent": 2,
+          "missing": 1,
+          "observed_absence_fraction": 0.4
+        },
+        "negative_control": {
+          "values": {
+            "grid_width": 3,
+            "grid_height": 2,
+            "observed_stitch": [
+              true,
+              false,
+              false,
+              true,
+              false,
+              true
+            ]
+          },
+          "expected": {
+            "observed": 6,
+            "present": 3,
+            "absent": 3,
+            "missing": 0,
+            "observed_absence_fraction": 0.5
+          },
+          "why": "Replacing an unobserved location by absence changes both state and denominator, inventing a hole."
+        },
+        "assumptions": [
+          "Row-major spatial indexing",
+          "Boolean false is an observed absence",
+          "Null means unobserved, not transparent"
+        ],
+        "limits": [
+          "No physical embroidery scan",
+          "No interpolated topology"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Count present, absent and unobserved sites in the main case.",
+          "expected_answer": "There are `3` present, `2` observed absent and `1` missing sites. The observation count is `5`; the grid has `6` sites.",
+          "decision": null
+        },
+        "2": {
+          "question": "Calculate observed absence fraction. What population does it describe?",
+          "expected_answer": "The fraction is `0.4`, using only `5` observed sites. It describes this observed subset; it is not an estimate justified for every location on a real textile.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the control replacing the missing value with false.",
+          "expected_answer": "The observed count becomes `6`, absent count `3`, missing count `0` and observed absence fraction `0.5`. The replacement invents an observation.",
+          "decision": null
+        },
+        "4": {
+          "question": "How should a scene legend distinguish the two kinds of blank?",
+          "expected_answer": "Use separate text states and marks for observed absence and unobserved location. A transparent background alone cannot tell a missing measurement from an actual hole.",
+          "decision": null
+        },
+        "5": {
+          "question": "May this grid certify a connected physical tear?",
+          "expected_answer": "No. Sparse site states do not define the intervening material or its connectivity. Additional geometry or inspection is required before removing a continuous surface.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: There are `3` present, `2` observed absent and `1` missing sites. The observation count is `5`; the grid has `6` sites.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: The fraction is `0.4`, using only `5` observed sites. It describes this observed subset; it is not an estimate justified for every location on a real textile.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: The observed count becomes `6`, absent count `3`, missing count `0` and observed absence fraction `0.5`. The replacement invents an observation.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: Use separate text states and marks for observed absence and unobserved location. A transparent background alone cannot tell a missing measurement from an actual hole.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: No. Sparse site states do not define the intervening material or its connectivity. Additional geometry or inspection is required before removing a continuous surface.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the grid, label its observation mask and reproduce both denominators manually. Point to the fixture’s address fields and explain why its order boolean cannot be reused as presence. A display that turns the missing site into confirmed absence falsifies preservation of the observation boundary.",
+        "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
+        "falsifier": "Replacing an unobserved location by absence changes both state and denominator, inventing a hole. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "DV016",
+      "department": "data-visualization",
+      "module_id": "dv-016-compare-paired-silhouette-residuals",
+      "title": "Compare Paired Silhouette Residuals",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-016-compare-paired-silhouette-residuals.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-016-compare-paired-silhouette-residuals.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-016-compare-paired-silhouette-residuals.es.md"
+      },
+      "novelty_vs_prerequisites": "A sculpture cleanup reduces the worst silhouette residual while making other views worse. Reporting only the mean improvement hides the affected views; sorting both columns separately destroys their pairing. This lesson prepares a before-and-after display keyed by camera identity. It asks which views changed, not merely whether two collections of numbers have different averages.",
+      "prerequisites": [
+        "dv-006-position-length-area-comparisons"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/data-visualization/en/dv-006-position-length-area-comparisons.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "8b04fc5c3b037f53310594333684c36fa0bb1b9efb5592b45db5f0f55e4bae7d",
+          "scope": "Actual English prerequisite project question, model/interpretation and first exercise passages read; catalogue title/frontmatter enumerated."
+        },
+        {
+          "path_or_url": "code/blender/scripts/glb_pipeline.py",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "40379515ecff8ecda28dc1933725242d8eb82807d2085d60fbc080b73316cfbe",
+          "scope": "Lines1-36: docstring, size/axis, merge-distance, min-part, voxel-remesh, frames and resolution parameters only. No script execution."
+        },
+        {
+          "path_or_url": "https://docs.godotengine.org/en/4.5/classes/class_camera3d.html",
+          "pin": "Godot4.5",
+          "sha256": null,
+          "scope": "Godot4.5; ProjectionType, KeepAspect and fov property; web.open/find actual rendered body"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+          "pin": "blender/blender v4.5.0",
+          "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06",
+          "scope": "Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "view_ids": [
+            "front",
+            "side",
+            "back"
+          ],
+          "before_px": [
+            2,
+            8,
+            2
+          ],
+          "after_px": [
+            4,
+            3,
+            4
+          ]
+        },
+        "formula": "delta_i=after_i-before_i; mean_delta=sum(delta)/len(delta); worst_before=max(before); worst_after=max(after)",
+        "expected": {
+          "delta_px": [
+            2,
+            -5,
+            2
+          ],
+          "mean_delta_px": -0.3333333333333333,
+          "worst_before_px": 8,
+          "worst_after_px": 4,
+          "worsened_views": [
+            "front",
+            "back"
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "view_ids": [
+              "front",
+              "side",
+              "back"
+            ],
+            "before_px": [
+              2,
+              8,
+              2
+            ],
+            "after_px": [
+              3,
+              4,
+              4
+            ]
+          },
+          "expected": {
+            "delta_px": [
+              1,
+              -4,
+              2
+            ],
+            "mean_delta_px": -0.3333333333333333,
+            "worst_before_px": 8,
+            "worst_after_px": 4,
+            "worsened_views": [
+              "front",
+              "back"
+            ]
+          },
+          "why": "Reassigning after values to different camera IDs preserves aggregate summaries while altering individual paired comparisons."
+        },
+        "assumptions": [
+          "Same reference silhouette and residual definition",
+          "View IDs identify matched cameras",
+          "Lower residual is preferred for this declared geometric task"
+        ],
+        "limits": [
+          "Authored residuals, no image comparison executed",
+          "No overall artistic-fidelity verdict"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the paired changes in the given camera order.",
+          "expected_answer": "They are `[2,-5,2] px`. Front and back worsen, while side improves. Keep the camera order attached to the vector.",
+          "decision": null
+        },
+        "2": {
+          "question": "Find mean change and the two worst residuals.",
+          "expected_answer": "Mean change is `-1/3 px`; worst residual falls from `8 px` to `4 px`. These summaries coexist with worsening views.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the control with reassigned after values.",
+          "expected_answer": "The changes become `[1,-4,2] px`, while mean change remains `-1/3 px` and worst residuals remain `8 px` and `4 px`. Pairing changes without aggregate change.",
+          "decision": null
+        },
+        "4": {
+          "question": "Why is independently sorting the before and after lists misleading?",
+          "expected_answer": "It pairs order statistics instead of matched cameras. A segment could connect different viewpoints and would no longer describe that view’s cleanup effect.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does a smaller maximum residual prove the sculpture is artistically more faithful?",
+          "expected_answer": "No. The chosen residual measures one geometric task. Semantic features, materials, lighting and artistic judgment need additional criteria and actual observations.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: They are `[2,-5,2] px`. Front and back worsen, while side improves. Keep the camera order attached to the vector.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: Mean change is `-1/3 px`; worst residual falls from `8 px` to `4 px`. These summaries coexist with worsening views.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: The changes become `[1,-4,2] px`, while mean change remains `-1/3 px` and worst residuals remain `8 px` and `4 px`. Pairing changes without aggregate change.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: It pairs order statistics instead of matched cameras. A segment could connect different viewpoints and would no longer describe that view’s cleanup effect.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: No. The chosen residual measures one geometric task. Semantic features, materials, lighting and artistic judgment need additional criteria and actual observations.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw labelled paired segments and annotate every worsening view before opening answers. Locate the pipeline’s capture arguments and identify the missing reference-image contract. An apparent all-view improvement contradicted by a matched positive change falsifies that summary claim.",
+        "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
+        "falsifier": "Reassigning after values to different camera IDs preserves aggregate summaries while altering individual paired comparisons. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "SEM012",
+      "department": "semiotics",
+      "module_id": "sem-012-preserve-the-order-of-stitch-frame-actions",
+      "title": "Preserve the Order of Stitch Frame Actions",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-012-preserve-the-order-of-stitch-frame-actions.md",
+        "fr": "streeling/courses/semiotics/fr/sem-012-preserve-the-order-of-stitch-frame-actions.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-012-preserve-the-order-of-stitch-frame-actions.es.md"
+      },
+      "novelty_vs_prerequisites": "A craft instruction says to shift a stitch motif and rotate it. Another author reverses the verbs because both lists contain the same actions. The resulting anchor lands elsewhere. This lesson treats instruction order as meaning: two compositions can share ingredients and still produce different scene placements. It extends frame-orientation reasoning from naming a direction to interpreting an ordered sequence of actions.",
+      "prerequisites": [
+        "sem-006-preserve-orientation-across-scene-frames"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/semiotics/en/sem-006-preserve-orientation-across-scene-frames.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "498533e3d3e5c4e8f7b009b1d6a0aeedfe04ae37853069e9be613e0d68336d78",
+          "scope": "Actual English prerequisite project question, model/interpretation and first exercise passages read; catalogue title/frontmatter enumerated."
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc",
+          "scope": "Lines1-45: declared Blender5.2 frame, reset_scene, material creation and object parenting helpers. No export or scene execution."
+        },
+        {
+          "path_or_url": "https://docs.godotengine.org/en/4.5/tutorials/3d/using_transforms.html",
+          "pin": "Godot4.5",
+          "sha256": null,
+          "scope": "Godot4.5; local versus parent rotation, transform precision and ordered rotations; web.open actual rendered body"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+          "pin": "blender/blender v4.5.0",
+          "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06",
+          "scope": "Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "point_mm": [
+            1,
+            0
+          ],
+          "translation_mm": [
+            1,
+            0
+          ],
+          "rotation_deg": 90
+        },
+        "formula": "R(x,y)=(-y,x); T(p)=p+t; rotate_after_translate=R(T(p)); translate_after_rotate=T(R(p))",
+        "expected": {
+          "rotate_after_translate_mm": [
+            0,
+            2
+          ],
+          "translate_after_rotate_mm": [
+            1,
+            1
+          ],
+          "commute": false
+        },
+        "negative_control": {
+          "values": {
+            "point_mm": [
+              1,
+              0
+            ],
+            "translation_mm": [
+              0,
+              0
+            ],
+            "rotation_deg": 90
+          },
+          "expected": {
+            "rotate_after_translate_mm": [
+              0,
+              1
+            ],
+            "translate_after_rotate_mm": [
+              0,
+              1
+            ],
+            "commute": true
+          },
+          "why": "Zero translation makes the two authored orders agree without making all rotations and translations commute."
+        },
+        "assumptions": [
+          "Exact planar quarter turn about origin",
+          "Translation expressed in the same fixed frame",
+          "Action names denote functions applied right-to-left in written composition"
+        ],
+        "limits": [
+          "No Godot adapter implementation",
+          "No claim about arbitrary rotations commuting"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Translate first and then rotate the main point.",
+          "expected_answer": "The result is `(0,2) mm`. The translation is included in the vector rotated about the fixed origin.",
+          "decision": null
+        },
+        "2": {
+          "question": "Rotate first and then translate. Is the anchor unchanged?",
+          "expected_answer": "The result is `(1,1) mm`, different from the first order. The same action names therefore do not specify the same placement without order.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the zero-translation control to both compositions.",
+          "expected_answer": "Both produce `(0,1) mm`. Agreement in this special case does not justify commuting the nonzero translation in the main case.",
+          "decision": null
+        },
+        "4": {
+          "question": "What information must survive a translation into a scene description?",
+          "expected_answer": "Retain the action order, point and offset units, rotation origin, frame of the offset and composition convention. Verb names alone leave essential meaning unresolved.",
+          "decision": null
+        },
+        "5": {
+          "question": "Could a compiler safely reorder these actions because a preview once matched?",
+          "expected_answer": "Not under the stated main inputs. A valid optimization needs a condition proving equal interpreted results, not merely matching a special zero-offset preview.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: The result is `(0,2) mm`. The translation is included in the vector rotated about the fixed origin.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: The result is `(1,1) mm`, different from the first order. The same action names therefore do not specify the same placement without order.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: Both produce `(0,1) mm`. Agreement in this special case does not justify commuting the nonzero translation in the main case.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: Retain the action order, point and offset units, rotation origin, frame of the offset and composition convention. Verb names alone leave essential meaning unresolved.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: Not under the stated main inputs. A valid optimization needs a condition proving equal interpreted results, not merely matching a special zero-offset preview.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw both paths from the same starting point and write each intermediate coordinate manually. Trace Atlas’s placement boundary without editing it. The unequal final anchors falsify an unconditional action-reordering rule; propose a semantic equivalence test before any compiler implementation.",
+        "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
+        "falsifier": "Zero translation makes the two authored orders agree without making all rotations and translations commute. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "SEM013",
+      "department": "semiotics",
+      "module_id": "sem-013-align-two-motif-periods-at-a-textile-seam",
+      "title": "Align Two Motif Periods at a Textile Seam",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-013-align-two-motif-periods-at-a-textile-seam.md",
+        "fr": "streeling/courses/semiotics/fr/sem-013-align-two-motif-periods-at-a-textile-seam.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-013-align-two-motif-periods-at-a-textile-seam.es.md"
+      },
+      "novelty_vs_prerequisites": "A woven panel repeats its crossing order while an embroidered marker repeats on a different cycle. Joining panels at a boundary that matches only the marker can still break the weave. This lesson composes two periodic meaning contracts on one integer grid. It adds a multi-motif phase condition beyond interpreting which strand lies above another at a single crossing.",
+      "prerequisites": [
+        "sem-008-interpret-layer-order-relative-to-the-reference-normal"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/semiotics/en/sem-008-interpret-layer-order-relative-to-the-reference-normal.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "eadc362fc63586dea572dc12bcea5ce2e15eebdfecf21c65dc3b783396e28521",
+          "scope": "Actual English prerequisite project question, model/interpretation and first exercise passages read; catalogue title/frontmatter enumerated."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/weave-scene-2026-10-22/crossings.json",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "05ff96258db853cfdf31bbe53f4589e0a4d088045449035036123a0577056ab1",
+          "scope": "Top-level kind/sample/spacing/diameter and first crossing rows, their grid coordinates, millimetre positions and warp_over values. Historical retained fixture, no replay."
+        },
+        {
+          "path_or_url": "https://docs.godotengine.org/en/4.5/tutorials/3d/using_transforms.html",
+          "pin": "Godot4.5",
+          "sha256": null,
+          "scope": "Godot4.5; local versus parent rotation, transform precision and ordered rotations; web.open actual rendered body"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+          "pin": "blender/blender v4.5.0",
+          "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06",
+          "scope": "Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "periods_cells": [
+            2,
+            3
+          ],
+          "shift_cells": 6
+        },
+        "formula": "phase_remainders=[shift % p for p in periods]; compatible=all(remainder==0); joint_period=lcm(periods)",
+        "expected": {
+          "phase_remainders": [
+            0,
+            0
+          ],
+          "compatible": true,
+          "joint_period_cells": 6
+        },
+        "negative_control": {
+          "values": {
+            "periods_cells": [
+              2,
+              3
+            ],
+            "shift_cells": 3
+          },
+          "expected": {
+            "phase_remainders": [
+              1,
+              0
+            ],
+            "compatible": false,
+            "joint_period_cells": 6
+          },
+          "why": "A shift can align one repeating motif while misaligning another; a seam needs both phase contracts."
+        },
+        "assumptions": [
+          "Integer grid translations",
+          "Both motifs begin at declared zero phase",
+          "Matching means preserving motif phase, not only color resemblance"
+        ],
+        "limits": [
+          "No textile fabrication claim",
+          "No arbitrary continuous texture seam guarantee"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Check both motif remainders for the main shift.",
+          "expected_answer": "The phase remainders are `[0,0]`, so the shift preserves both declared phases. This is an address-level equality, not a visual inspection.",
+          "decision": null
+        },
+        "2": {
+          "question": "Find the smallest positive shift preserving both motifs.",
+          "expected_answer": "The joint period is `6` cells. A common multiple works; the least positive common multiple gives the first repeat under the zero-phase assumptions.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the shorter-shift negative control.",
+          "expected_answer": "The remainders become `[1,0]`: the marker cycle matches while the other cycle fails. Compatibility is therefore false despite one successful motif.",
+          "decision": null
+        },
+        "4": {
+          "question": "Would declaring only each period fully identify a seam?",
+          "expected_answer": "No. Origins or phase offsets, grid directions and the joining transformation are also needed. The current calculation assumes both initial phases are zero.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does the modular condition certify a real seamless fabric or texture?",
+          "expected_answer": "No. It checks declared discrete phases only. Geometry, thread thickness, sampling, material continuity and fabrication remain separate requirements.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: The phase remainders are `[0,0]`, so the shift preserves both declared phases. This is an address-level equality, not a visual inspection.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: The joint period is `6` cells. A common multiple works; the least positive common multiple gives the first repeat under the zero-phase assumptions.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: The remainders become `[1,0]`: the marker cycle matches while the other cycle fails. Compatibility is therefore false despite one successful motif.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: No. Origins or phase offsets, grid directions and the joining transformation are also needed. The current calculation assumes both initial phases are zero.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: No. It checks declared discrete phases only. Geometry, thread thickness, sampling, material continuity and fabrication remain separate requirements.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw both cycles on a numbered strip and test the two shifts by hand. Locate grid identity in the fixture and mark the added marker cycle as authored. A seam that matches one period but not the other falsifies an unconditional single-motif compatibility rule.",
+        "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
+        "falsifier": "A shift can align one repeating motif while misaligning another; a seam needs both phase contracts. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "SEM014",
+      "department": "semiotics",
+      "module_id": "sem-014-declare-material-patch-precedence",
+      "title": "Declare Material Patch Precedence",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-014-declare-material-patch-precedence.md",
+        "fr": "streeling/courses/semiotics/fr/sem-014-declare-material-patch-precedence.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-014-declare-material-patch-precedence.es.md"
+      },
+      "novelty_vs_prerequisites": "A metalwork scene combines a base finish, a craft annotation and a review highlight. If two descriptions set roughness, the composition needs a declared winner. This lesson defines a small field-patch algebra and proves where order matters. The definition is an advisory interpretation for a future description language; it must not be mistaken for an existing Godot resource-merging API.",
+      "prerequisites": [
+        "sem-011-version-a-dsl-meaning-before-renaming-its-syntax"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/semiotics/en/sem-011-version-a-dsl-meaning-before-renaming-its-syntax.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "c7851beb7719ad1c9ed907d8b5205c1e10b39b789292eb69062350348dbd28d0",
+          "scope": "Actual English prerequisite project question, model/interpretation and first exercise passages read; catalogue title/frontmatter enumerated."
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc",
+          "scope": "Lines1-45: declared Blender5.2 frame, reset_scene, material creation and object parenting helpers. No export or scene execution."
+        },
+        {
+          "path_or_url": "https://docs.godotengine.org/en/4.5/tutorials/3d/standard_material_3d.html",
+          "pin": "Godot4.5",
+          "sha256": null,
+          "scope": "Godot4.5; introduction material precedence and overlay distinction; web.open actual rendered body"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+          "pin": "blender/blender v4.5.0",
+          "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06",
+          "scope": "Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "base": {
+            "roughness": 0.8,
+            "metallic": 0
+          },
+          "patch_a": {
+            "roughness": 0.3
+          },
+          "patch_b": {
+            "roughness": 0.6,
+            "metallic": 1
+          }
+        },
+        "formula": "merge(x,y)=right-biased field union; AB=merge(merge(base,a),b); BA=merge(merge(base,b),a)",
+        "expected": {
+          "AB": {
+            "roughness": 0.6,
+            "metallic": 1
+          },
+          "BA": {
+            "roughness": 0.3,
+            "metallic": 1
+          },
+          "commute": false
+        },
+        "negative_control": {
+          "values": {
+            "base": {
+              "roughness": 0.8,
+              "metallic": 0
+            },
+            "patch_a": {
+              "roughness": 0.3
+            },
+            "patch_b": {
+              "metallic": 1
+            }
+          },
+          "expected": {
+            "AB": {
+              "roughness": 0.3,
+              "metallic": 1
+            },
+            "BA": {
+              "roughness": 0.3,
+              "metallic": 1
+            },
+            "commute": true
+          },
+          "why": "Disjoint fields commute under this patch definition; conflict is an input property, not an inevitable effect."
+        },
+        "assumptions": [
+          "Finite partial maps",
+          "Last specified field wins",
+          "Classroom patch algebra, not Godot resource merging"
+        ],
+        "limits": [
+          "No new material API",
+          "No rendered appearance or physical alloy conclusion"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Apply the craft patch and then the review patch.",
+          "expected_answer": "The final roughness is `0.6` and metallic is `1`. The later review roughness wins under the declared field rule.",
+          "decision": null
+        },
+        "2": {
+          "question": "Reverse the patch order. Which value changes?",
+          "expected_answer": "Roughness becomes `0.3`; metallic remains `1`. Both results are well-defined, but they represent different precedence decisions.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the disjoint-field control in both orders.",
+          "expected_answer": "Both give roughness `0.3` and metallic `1`. The absence of overlapping keys permits this swap under the stated algebra.",
+          "decision": null
+        },
+        "4": {
+          "question": "Does Godot’s material override documentation establish this field-merge behavior?",
+          "expected_answer": "No. The cited passage describes material-resource precedence and overlay. This lesson’s partial-map merge is an authored interpretation requiring its own adapter contract.",
+          "decision": null
+        },
+        "5": {
+          "question": "What should a composable description retain for review?",
+          "expected_answer": "Keep patch identity, affected fields, order, base resource identity and the host mapping. A final appearance alone cannot reconstruct which instruction won a conflict.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: The final roughness is `0.6` and metallic is `1`. The later review roughness wins under the declared field rule.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: Roughness becomes `0.3`; metallic remains `1`. Both results are well-defined, but they represent different precedence decisions.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: Both give roughness `0.3` and metallic `1`. The absence of overlapping keys permits this swap under the stated algebra.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: No. The cited passage describes material-resource precedence and overlay. This lesson’s partial-map merge is an authored interpretation requiring its own adapter contract.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: Keep patch identity, affected fields, order, base resource identity and the host mapping. A final appearance alone cannot reconstruct which instruction won a conflict.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Build the two merge tables manually, including unchanged fields. Trace Atlas’s assignments and Godot’s separate resource precedence. A conflicting field whose result changes after a supposedly harmless swap falsifies an unconditional reordering proposal. Do not implement the proposed algebra in this authoring unit.",
+        "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
+        "falsifier": "Disjoint fields commute under this patch definition; conflict is an input property, not an inevitable effect. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PHI010",
+      "department": "philosophy",
+      "module_id": "phi-010-state-what-a-craft-view-cannot-distinguish",
+      "title": "State What a Craft View Cannot Distinguish",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-010-state-what-a-craft-view-cannot-distinguish.md",
+        "fr": "streeling/courses/philosophy/fr/phi-010-state-what-a-craft-view-cannot-distinguish.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-010-state-what-a-craft-view-cannot-distinguish.es.md"
+      },
+      "novelty_vs_prerequisites": "An origami or relief sculpture matches a front-view reference, so an agent declares the entire object faithful. The observation may discard the feature the requirement concerns. This lesson constructs two candidates that produce the same simplified view but disagree on a depth requirement. It extends oracle-versus-specification reasoning by showing exactly which distinction the observation function cannot carry.",
+      "prerequisites": [
+        "phi-008-separate-a-test-oracle-from-a-specification"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/philosophy/en/phi-008-separate-a-test-oracle-from-a-specification.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "ab7be6ab58c9d4dbb3279e4b753badaa6971ea9da0d153ea581373d6e99f626a",
+          "scope": "Actual English prerequisite project question, model/interpretation and first exercise passages read; catalogue title/frontmatter enumerated."
+        },
+        {
+          "path_or_url": "code/blender/scripts/glb_pipeline.py",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "40379515ecff8ecda28dc1933725242d8eb82807d2085d60fbc080b73316cfbe",
+          "scope": "Lines1-36: docstring, size/axis, merge-distance, min-part, voxel-remesh, frames and resolution parameters only. No script execution."
+        },
+        {
+          "path_or_url": "https://docs.godotengine.org/en/4.5/classes/class_camera3d.html",
+          "pin": "Godot4.5",
+          "sha256": null,
+          "scope": "Godot4.5; ProjectionType, KeepAspect and fov property; web.open/find actual rendered body"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+          "pin": "blender/blender v4.5.0",
+          "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06",
+          "scope": "Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "candidate_a": [
+            0,
+            0,
+            0
+          ],
+          "candidate_b": [
+            0,
+            0,
+            1
+          ],
+          "projection_axes": [
+            0,
+            1
+          ],
+          "required_depth": 0
+        },
+        "formula": "observe(p)=[p[0],p[1]]; requirement(p)=(p[2]==required_depth); indistinguishable=(observe(a)==observe(b))",
+        "expected": {
+          "observation_a": [
+            0,
+            0
+          ],
+          "observation_b": [
+            0,
+            0
+          ],
+          "indistinguishable": true,
+          "requirement_a": true,
+          "requirement_b": false
+        },
+        "negative_control": {
+          "values": {
+            "candidate_a": [
+              0,
+              0,
+              0
+            ],
+            "candidate_b": [
+              1,
+              0,
+              1
+            ],
+            "projection_axes": [
+              0,
+              1
+            ],
+            "required_depth": 0
+          },
+          "expected": {
+            "observation_a": [
+              0,
+              0
+            ],
+            "observation_b": [
+              1,
+              0
+            ],
+            "indistinguishable": false,
+            "requirement_a": true,
+            "requirement_b": false
+          },
+          "why": "Changing an observed coordinate distinguishes the candidates without changing the failed depth requirement."
+        },
+        "assumptions": [
+          "Ideal orthographic observation discarding depth",
+          "Exact point comparison",
+          "Requirement deliberately concerns the discarded coordinate"
+        ],
+        "limits": [
+          "Logical witness only, no actual image or material inspection",
+          "No claim that additional views identify every feature"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the two main observations under the declared projection.",
+          "expected_answer": "Both are `[0,0]`. The candidates are indistinguishable to this exact observation despite their different depth coordinates.",
+          "decision": null
+        },
+        "2": {
+          "question": "Evaluate the depth requirement for both candidates.",
+          "expected_answer": "The requirement is true for candidate A and false for candidate B. Equal observations therefore do not imply equal satisfaction of this requirement.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the changed-position control. What distinction becomes observable?",
+          "expected_answer": "The observations become `[0,0]` and `[1,0]`. They are distinguishable, while candidate B still fails the same depth requirement.",
+          "decision": null
+        },
+        "4": {
+          "question": "Which additional ideal observation would distinguish the main candidates?",
+          "expected_answer": "An observation retaining the depth coordinate could distinguish them. That supplies a witness for this pair, not a universal proof that all sculpture properties become identifiable.",
+          "decision": null
+        },
+        "5": {
+          "question": "What is a justified fidelity statement from the original observation?",
+          "expected_answer": "State agreement only under the declared front observation and comparison convention. Keep depth, hidden surfaces, material and craft-process fidelity unresolved unless separately evidenced.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: Both are `[0,0]`. The candidates are indistinguishable to this exact observation despite their different depth coordinates.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: The requirement is true for candidate A and false for candidate B. Equal observations therefore do not imply equal satisfaction of this requirement.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: The observations become `[0,0]` and `[1,0]`. They are distinguishable, while candidate B still fails the same depth requirement.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: An observation retaining the depth coordinate could distinguish them. That supplies a witness for this pair, not a universal proof that all sculpture properties become identifiable.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: State agreement only under the declared front observation and comparison convention. Keep depth, hidden surfaces, material and craft-process fidelity unresolved unless separately evidenced.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Write an observation table before revealing answers, then identify a proposed relief feature a front view would omit. Trace the pipeline’s capture arguments without claiming a render. Your falsifier for a universal fidelity inference is a same-view candidate that violates the declared hidden-feature requirement.",
+        "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
+        "falsifier": "Changing an observed coordinate distinguishes the candidates without changing the failed depth requirement. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PHI011",
+      "department": "philosophy",
+      "module_id": "phi-011-cross-mesh-and-lighting-before-attributing-a-render-change",
+      "title": "Cross Mesh and Lighting before Attributing a Render Change",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-011-cross-mesh-and-lighting-before-attributing-a-render-change.md",
+        "fr": "streeling/courses/philosophy/fr/phi-011-cross-mesh-and-lighting-before-attributing-a-render-change.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-011-cross-mesh-and-lighting-before-attributing-a-render-change.es.md"
+      },
+      "novelty_vs_prerequisites": "A scene team replaces a sculpture mesh and changes its lighting in the same comparison. The new capture has a worse residual, and the mesh receives the blame. This lesson separates those changes with a complete authored table. It extends counterfactual reasoning into an explicit crossed-factor design, then uses an interaction control to show when a single mesh-effect statement breaks down.",
+      "prerequisites": [
+        "phi-007-test-a-learning-gain-against-counterfactuals"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "a8056e98feade4a0da8a72311335b3124f8b3414d9e7cef136d7665b395b7b94",
+          "scope": "Actual English prerequisite project question, model/interpretation and first exercise passages read; catalogue title/frontmatter enumerated."
+        },
+        {
+          "path_or_url": "code/blender/scripts/glb_pipeline.py",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "40379515ecff8ecda28dc1933725242d8eb82807d2085d60fbc080b73316cfbe",
+          "scope": "Lines1-36: docstring, size/axis, merge-distance, min-part, voxel-remesh, frames and resolution parameters only. No script execution."
+        },
+        {
+          "path_or_url": "https://www.itl.nist.gov/div898/handbook/pri/section3/pri3331.htm",
+          "pin": "NIST e-Handbook section5.3.3.3.1 complete page: full-factorial matrix, standard order and interaction columns",
+          "sha256": null,
+          "scope": "NIST e-Handbook section5.3.3.3.1 complete page: full-factorial matrix, standard order and interaction columns; web.open actual rendered body"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+          "pin": "blender/blender v4.5.0",
+          "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06",
+          "scope": "Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "old_flat": 6,
+          "old_lit": 10,
+          "new_flat": 4,
+          "new_lit": 8
+        },
+        "formula": "mesh_flat=new_flat-old_flat; mesh_lit=new_lit-old_lit; average_mesh=(mesh_flat+mesh_lit)/2; interaction=mesh_lit-mesh_flat; diagonal=new_lit-old_flat",
+        "expected": {
+          "mesh_flat": -2,
+          "mesh_lit": -2,
+          "average_mesh": -2,
+          "interaction": 0,
+          "diagonal": 2
+        },
+        "negative_control": {
+          "values": {
+            "old_flat": 6,
+            "old_lit": 10,
+            "new_flat": 4,
+            "new_lit": 12
+          },
+          "expected": {
+            "mesh_flat": -2,
+            "mesh_lit": 2,
+            "average_mesh": 0,
+            "interaction": 4,
+            "diagonal": 6
+          },
+          "why": "A mesh-by-lighting interaction defeats a single lighting-independent mesh-effect claim."
+        },
+        "assumptions": [
+          "Authored complete two-factor table",
+          "Lower residual preferred",
+          "Identical camera and residual definition across cells"
+        ],
+        "limits": [
+          "No actual randomized experiment or renderer run",
+          "No uncertainty estimate from unreplicated fictional values"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compare new and old mesh under each matched lighting condition.",
+          "expected_answer": "Both mesh differences are `-2` residual units. Under this authored table, the new mesh improves the declared metric at each lighting level.",
+          "decision": null
+        },
+        "2": {
+          "question": "What does the diagonal comparison report, and why is attribution wrong?",
+          "expected_answer": "The diagonal change is `2` units. It mixes a mesh change with a lighting change, so it cannot attribute that increase to the mesh alone.",
+          "decision": null
+        },
+        "3": {
+          "question": "Calculate the average mesh difference and interaction.",
+          "expected_answer": "The average mesh difference is `-2` units and interaction is `0`. Equality across these lighting levels is a property of the table, not a universal rendering law.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the interaction control. Which simple claim now fails?",
+          "expected_answer": "The mesh differences are `-2` and `2`, their average is `0`, interaction is `4` and diagonal change is `6`. A lighting-independent improvement claim fails.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does this table prove a real cleanup process caused a better render?",
+          "expected_answer": "No. The values are invented. It teaches which comparisons an actual design should retain; runtime observations and their controlled conditions remain absent.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: Both mesh differences are `-2` residual units. Under this authored table, the new mesh improves the declared metric at each lighting level.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: The diagonal change is `2` units. It mixes a mesh change with a lighting change, so it cannot attribute that increase to the mesh alone.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: The average mesh difference is `-2` units and interaction is `0`. Equality across these lighting levels is a property of the table, not a universal rendering law.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: The mesh differences are `-2` and `2`, their average is `0`, interaction is `4` and diagonal change is `6`. A lighting-independent improvement claim fails.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: No. The values are invented. It teaches which comparisons an actual design should retain; runtime observations and their controlled conditions remain absent.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the crossed table and compute every within-lighting contrast manually. Annotate which pipeline settings would need fixing in a future trial. The falsifier for an unconditional mesh benefit is a matched lighting condition where the new mesh has a worse residual, as in the control.",
+        "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
+        "falsifier": "A mesh-by-lighting interaction defeats a single lighting-independent mesh-effect claim. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "FUT010",
+      "department": "futurology",
+      "module_id": "fut-010-project-weave-density-before-a-scene-expansion",
+      "title": "Project Weave Density before a Scene Expansion",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-010-project-weave-density-before-a-scene-expansion.md",
+        "fr": "streeling/courses/futurology/fr/fut-010-project-weave-density-before-a-scene-expansion.fr.md",
+        "es": "streeling/courses/futurology/es/fut-010-project-weave-density-before-a-scene-expansion.es.md"
+      },
+      "novelty_vs_prerequisites": "A future craft scene doubles thread density and budgets only twice as many crossing annotations. That plan confuses a strand count with a pairwise count. This lesson derives workload scenarios from an explicit weave construction before discussing capacity. It extends preview-versus-target reasoning by showing which resource grows with both directional counts and which grows with their sum.",
+      "prerequisites": [
+        "fut-007-test-a-weave-generator-outside-its-preview"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/futurology/en/fut-007-test-a-weave-generator-outside-its-preview.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "58bd198bae59ac931d33b7999c0da9df09a8b4cf5d35a2e1a04bf630d9a3ffc3",
+          "scope": "Actual English prerequisite project question, model/interpretation and first exercise passages read; catalogue title/frontmatter enumerated."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/weave-scene-2026-10-22/crossings.json",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "05ff96258db853cfdf31bbe53f4589e0a4d088045449035036123a0577056ab1",
+          "scope": "Top-level kind/sample/spacing/diameter and first crossing rows, their grid coordinates, millimetre positions and warp_over values. Historical retained fixture, no replay."
+        },
+        {
+          "path_or_url": "https://docs.godotengine.org/en/4.5/tutorials/3d/using_transforms.html",
+          "pin": "Godot4.5",
+          "sha256": null,
+          "scope": "Godot4.5; local versus parent rotation, transform precision and ordered rotations; web.open actual rendered body"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+          "pin": "blender/blender v4.5.0",
+          "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06",
+          "scope": "Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "warp_count": 6,
+          "weft_count": 4,
+          "warp_multiplier": 2,
+          "weft_multiplier": 2
+        },
+        "formula": "base_crossings=warp_count*weft_count; future_crossings=(warp_count*warp_multiplier)*(weft_count*weft_multiplier); crossing_ratio=warp_multiplier*weft_multiplier; strand_ratio=(warp_count*warp_multiplier+weft_count*weft_multiplier)/(warp_count+weft_count)",
+        "expected": {
+          "base_crossings": 24,
+          "future_crossings": 96,
+          "crossing_ratio": 4,
+          "base_strands": 10,
+          "future_strands": 20,
+          "strand_ratio": 2
+        },
+        "negative_control": {
+          "values": {
+            "warp_count": 6,
+            "weft_count": 4,
+            "warp_multiplier": 2,
+            "weft_multiplier": 1
+          },
+          "expected": {
+            "base_crossings": 24,
+            "future_crossings": 48,
+            "crossing_ratio": 2,
+            "base_strands": 10,
+            "future_strands": 16,
+            "strand_ratio": 1.6
+          },
+          "why": "Changing only one direction gives linear crossing growth in that multiplier; the quadratic statement needs both directions."
+        },
+        "assumptions": [
+          "Every warp crosses every weft once",
+          "Positive integer multipliers",
+          "Fixed modeled patch, no shared or excluded crossings"
+        ],
+        "limits": [
+          "Counts are not frame-time predictions",
+          "No draw-call, memory or fabrication benchmark"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Count the original crossings and strands.",
+          "expected_answer": "There are `24` crossings and `10` strands. Each crossing is a pair of directional identities, not an extra physical strand.",
+          "decision": null
+        },
+        "2": {
+          "question": "Scale both directions as declared and calculate the ratios.",
+          "expected_answer": "There are `96` crossings and `20` strands. Crossing count grows by `4`, while strand count grows by `2`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the one-direction control.",
+          "expected_answer": "There are `48` crossings and `16` strands. The crossing ratio is `2` and strand ratio `1.6`, so the earlier two-direction scaling statement does not apply unchanged.",
+          "decision": null
+        },
+        "4": {
+          "question": "Can the crossing ratio be reported as the frame-time ratio?",
+          "expected_answer": "No. Counts do not specify batching, culling, geometry, materials, query work or host overhead. An actual cost model and observations are needed.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would falsify this complete-grid inventory model?",
+          "expected_answer": "A declared construction in which some warp-weft pairs never meet, meet repeatedly or are intentionally excluded would violate its counting assumptions. Revise the model before applying its budget.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: There are `24` crossings and `10` strands. Each crossing is a pair of directional identities, not an extra physical strand.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: There are `96` crossings and `20` strands. Crossing count grows by `4`, while strand count grows by `2`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: There are `48` crossings and `16` strands. The crossing ratio is `2` and strand ratio `1.6`, so the earlier two-direction scaling statement does not apply unchanged.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: No. Counts do not specify batching, culling, geometry, materials, query work or host overhead. An actual cost model and observations are needed.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: A declared construction in which some warp-weft pairs never meet, meet repeatedly or are intentionally excluded would violate its counting assumptions. Revise the model before applying its budget.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a manual inventory separating strands, crossings and proposed per-crossing annotations. Trace the fixture’s identity fields and label each scenario input as assumed. State an observation that would reject the complete-grid premise before recommending a larger scene or an automation budget.",
+        "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
+        "falsifier": "Changing only one direction gives linear crossing growth in that multiplier; the quadratic statement needs both directions. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "FUT011",
+      "department": "futurology",
+      "module_id": "fut-011-plan-an-embroidery-representation-switch-with-memory",
+      "title": "Plan an Embroidery Representation Switch with Memory",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-011-plan-an-embroidery-representation-switch-with-memory.md",
+        "fr": "streeling/courses/futurology/fr/fut-011-plan-an-embroidery-representation-switch-with-memory.fr.md",
+        "es": "streeling/courses/futurology/es/fut-011-plan-an-embroidery-representation-switch-with-memory.es.md"
+      },
+      "novelty_vs_prerequisites": "A future embroidery viewer switches between mesh stitches and a texture as the camera moves. A single threshold can repeatedly change representation near the boundary. This lesson plans a stateful switching rule on an invented width trace and states what evidence would still be needed before adoption. It adds temporal path dependence to earlier scenario and pilot reasoning, rather than treating every camera sample as an independent choice.",
+      "prerequisites": [
+        "fut-005-value-a-renderer-pilot-before-running-it"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/futurology/en/fut-005-value-a-renderer-pilot-before-running-it.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "c5067688d5d47b93ef11382d1ad6914a49fca9395c44a5671659b373535c3b16",
+          "scope": "Actual English prerequisite project question, model/interpretation and first exercise passages read; catalogue title/frontmatter enumerated."
+        },
+        {
+          "path_or_url": "code/blender/scripts/glb_pipeline.py",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "40379515ecff8ecda28dc1933725242d8eb82807d2085d60fbc080b73316cfbe",
+          "scope": "Lines1-36: docstring, size/axis, merge-distance, min-part, voxel-remesh, frames and resolution parameters only. No script execution."
+        },
+        {
+          "path_or_url": "https://docs.godotengine.org/en/4.5/tutorials/3d/visibility_ranges.html",
+          "pin": "Godot4.5",
+          "sha256": null,
+          "scope": "Godot4.5; How it works, Setting up visibility range, properties and Disabled/Self/Dependencies fade modes; web.open actual rendered body"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+          "pin": "blender/blender v4.5.0",
+          "sha256": "2c2d0bf49d847dfed85d7a5d419d25bd1b008e05ca6485f66aa4afae7ac75b06",
+          "scope": "Full 1233-byte official versioned README body actually read from coordinator-retained file. Used solely for Blender project/tool identity; no feature, physics, modifier, material, export or runtime claim inferred."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "widths_px": [
+            2.5,
+            1.9,
+            2.1,
+            1.8,
+            1.1,
+            1.4,
+            2.5
+          ],
+          "enter_mesh_px": 2.4,
+          "exit_mesh_px": 1.2,
+          "initial_mesh": false
+        },
+        "formula": "Start state=initial_mesh; if state is false and width>=enter_mesh set true; else if state is true and width<exit_mesh set false; emit state; count transitions including from initial state",
+        "expected": {
+          "mesh_states": [
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true
+          ],
+          "switches": 3
+        },
+        "negative_control": {
+          "values": {
+            "widths_px": [
+              2.5,
+              1.9,
+              2.1,
+              1.8,
+              1.1,
+              1.4,
+              2.5
+            ],
+            "enter_mesh_px": 2,
+            "exit_mesh_px": 2,
+            "initial_mesh": false
+          },
+          "expected": {
+            "mesh_states": [
+              true,
+              false,
+              true,
+              false,
+              false,
+              false,
+              true
+            ],
+            "switches": 5
+          },
+          "why": "Collapsing entry and exit thresholds removes the retained band and increases switches on this authored trace."
+        },
+        "assumptions": [
+          "Widths already supplied, not measured",
+          "Ordered samples and explicit initial state",
+          "True means mesh representation; false means texture"
+        ],
+        "limits": [
+          "No runtime HLOD policy implementation",
+          "No quality, frame-time or DLSS benefit established"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Replay the state sequence using the separate thresholds.",
+          "expected_answer": "The mesh-state sequence is `[true,true,true,true,false,false,true]`. Samples inside the band retain the previous representation instead of deciding from width alone.",
+          "decision": null
+        },
+        "2": {
+          "question": "Count switches, including the transition from the declared initial state.",
+          "expected_answer": "There are `3` switches. Omitting the initial transition would change the counting convention and make the comparison inconsistent.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the coincident-threshold control to the same trace.",
+          "expected_answer": "The sequence is `[true,false,true,false,false,false,true]`, with `5` switches. The trace is unchanged; only the policy thresholds differ.",
+          "decision": null
+        },
+        "4": {
+          "question": "Can the state inside the band be determined from its current width alone?",
+          "expected_answer": "No. It also requires previous state. A stateless description would omit information needed to replay this policy.",
+          "decision": null
+        },
+        "5": {
+          "question": "Do fewer switches justify production adoption?",
+          "expected_answer": "No. Measure task-relevant recognition, visible transitions, cost and the actual host mapping before adoption. The authored count does not establish quality or performance improvement.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: The mesh-state sequence is `[true,true,true,true,false,false,true]`. Samples inside the band retain the previous representation instead of deciding from width alone.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: There are `3` switches. Omitting the initial transition would change the counting convention and make the comparison inconsistent.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: The sequence is `[true,false,true,false,false,false,true]`, with `5` switches. The trace is unchanged; only the policy thresholds differ.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: No. It also requires previous state. A stateless description would omit information needed to replay this policy.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: No. Measure task-relevant recognition, visible transitions, cost and the actual host mapping before adoption. The authored count does not establish quality or performance improvement.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Replay both state tables manually with a column for previous state. Compare that baseline with the documented Godot distance-margin semantics without configuring the engine. A policy that fails the declared replay or harms the intended recognition task would falsify its proposed benefit; no such task trial is claimed here.",
+        "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
+        "falsifier": "Collapsing entry and exit thresholds removes the retained band and increases switches on this authored trace. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    }
+  ]
+}

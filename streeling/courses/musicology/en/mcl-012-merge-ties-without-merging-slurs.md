@@ -1,0 +1,96 @@
+---
+module_id: mcl-012-merge-ties-without-merging-slurs
+department: musicology
+course: "Merge Ties Without Merging Slurs"
+level: intermediate
+prerequisites: ["mcl-007-integrate-a-midi-tempo-map-before-scheduling"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Merge Ties Without Merging Slurs
+
+> Authored example and source reading. No new guitar performance, audio or parser execution, participant response or production adoption is claimed. Human technical, fluent-language and learner decisions remain pending.
+
+A score can display two noteheads for one sustained sound, or a curved line over several separate sounds. A GA import that treats every curve as a duration merge can preserve the printed pitches while changing the phrase. This lesson turns the distinction into a small event calculation. It extends timeline reconstruction with sounding-event identity, before choosing audio scheduling or a physical guitar technique. Our attack count means symbolic sound beginnings, not plectrum strokes.
+
+## Read the retained evidence
+
+Read the retained timed-events packet's stable event identities and its held-note snapshots. It already distinguishes a held event from retriggering every snapshot. MusicXML's tie element explicitly concerns sound, while its tied element concerns notation. The selected passage establishes that distinction; it does not validate an importer. We author a single-voice case below and make no claim that GA parsed or played it.
+
+[Prerequisite](../../musicology/en/mcl-007-integrate-a-midi-tempo-map-before-scheduling.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/music-phrase-2026-10-22/timed-events.json)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-24/unit-a.json)
+
+[Validation journal](../../../../code/streeling/evidence/batch50-2026-10-24/journal.md)
+
+[Primary reading](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tie/)
+
+### Exercise 1
+
+The written rows are pitch `60` at beat `0` for `1` beat, pitch `60` at beat `1` for `1` beat, and pitch `62` at beat `2` for `1` beat. The first pair is explicitly tied. Their intervals are contiguous and their pitches equal, so the authored sound rule merges that pair while retaining its original start.
+
+What sounding event replaces the first pair?
+
+<details><summary>Answer 1</summary>
+
+It is pitch `60`, onset `0`, duration `2` beats. The tied notehead is not a second symbolic attack under this declared rule.
+
+</details>
+
+### Exercise 2
+
+The final pitch changes to `62`, so it remains an event beginning at beat `2` and ending at beat `3`. The complete sound list now has `2` events across `3` beats. Merely summing durations would not reveal whether a repeated note was attacked or held, which is why the relation and event identities must survive projection.
+
+Give the sounding-event and span totals.
+
+<details><summary>Answer 2</summary>
+
+There are `2` sounding events, with durations `[2,1]` beats and total span `3` beats. The span alone does not determine the attack count.
+
+</details>
+
+### Exercise 3
+
+Merging requires more than an equal pitch label. A gap, a different voice or an absent tie relation would change the premise. Real score formats also need a policy for paired starts and stops, repeat passes and malformed notation. This lesson does not implement those cases. A review should identify its simple valid case instead of declaring general score conformance from it.
+
+May any adjacent equal pitches be merged automatically?
+
+<details><summary>Answer 3</summary>
+
+No. The tie relation and relevant identity/time conditions must be retained. Equal pitch alone does not establish a single sustained event, and this model covers only its declared contiguous single voice.
+
+</details>
+
+### Exercise 4
+
+For the negative control, replace the first-pair relation with `slur`, retaining every pitch and duration. No sounding-duration merge is authorized by our rule. There are now `3` symbolic events, though total span remains `3` beats. A slur can concern phrasing or articulation without changing those event boundaries into a tie.
+
+What changes in the control despite equal timing totals?
+
+<details><summary>Answer 4</summary>
+
+The event count rises to `3`; the original `[1,1,1]` beat durations remain. The unchanged `3`-beat span cannot certify preservation of sustain identity.
+
+</details>
+
+### Exercise 5
+
+A guitar rendering might realize separate legato notes without separate picks, while a tie normally requests continued sound. That physical distinction should not be inferred merely from our symbolic attack count. Keep notation relation, sounding-event identity and intended guitar action distinct, and require an actual renderer trace before saying the exported audio preserves any of them.
+
+What would falsify an import's claim to distinguish ties from slurs?
+
+<details><summary>Answer 5</summary>
+
+If the main and control inputs produce the same merged sound-event list, the required distinction was lost. A correct total duration does not repair the missing event boundary.
+
+</details>
+
+## Source-assisted learner task
+
+Draw the written rows and sounding intervals manually for both relations. Compare them with the retained held-event snapshots and MusicXML's sound/notation distinction. Propose a minimal review table containing relation, voice, pitch and endpoints. State an output witness that would reject a tie/slur merger, while keeping importer execution, audio realization and actual learner performance pending.
+
+First retain your answer before revealing the prepared corrections. Use the manual table or calculation as the baseline for any calculator, source lookup or agent assistance, and record that assistance. Keep the original response and the corrected response separately. Match each exercise to a prepared criterion in the fixed packet; those criteria have no learner decisions yet. Record an actual source passage and its revision, then distinguish what it establishes from your proposed next step. Report any missing input as unresolved. A mathematically correct answer supports the stated example; human review, runtime execution and learner acceptance require their own retained observations.
