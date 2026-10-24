@@ -20,3 +20,6 @@ sidebar:
 - [AUD-007 · Translate Attack Coefficients into Time](aud-007-translate-attack-coefficients-into-time/)
 - [AUD-008 · Measure a Filter with Paired Input and Output](aud-008-measure-a-filter-with-paired-input-and-output/)
 - [AUD-009 · Declare Alignment Before a Null Test](aud-009-declare-alignment-before-a-null-test/)
+- [AUD-010 · Preserve Channels Before Downmixing](aud-010-preserve-channels-before-downmixing/)
+- [AUD-011 · Count Valid Frames Separately from Block Padding](aud-011-count-valid-frames-separately-from-block-padding/)
+- [AUD-012 · Choose a Fade Without Hiding Its Energy Cost](aud-012-choose-a-fade-without-hiding-its-energy-cost/)

@@ -19,3 +19,6 @@ sidebar:
 - [COG-006 · Separar las pruebas de píxeles de los juicios de apariencia](cog-006-separate-pixel-tests-from-appearance-judgments/)
 - [COG-007 · Separar el recuerdo sin ayuda del éxito asistido](cog-007-separate-unaided-recall-from-assisted-success/)
 - [COG-008 · Elegir preguntas que distingan modelos de razonamiento](cog-008-choose-probes-that-distinguish-reasoning-models/)
+- [COG-009 · Contrabalancear el orden de práctica antes de comparar interfaces](cog-009-counterbalance-practice-order-before-comparing-interfaces/)
+- [COG-010 · Usar pruebas diferidas de transferencia más allá de los elementos repetidos](cog-010-use-delayed-transfer-probes-beyond-repeated-items/)
+- [COG-011 · Medir el desacuerdo de la rúbrica antes de adjudicar](cog-011-measure-rubric-disagreement-before-adjudication/)

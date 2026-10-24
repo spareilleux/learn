@@ -19,3 +19,6 @@ sidebar:
 - [GAS-006 · Relacionar la posición de pulsación con los modos de la cuerda](gas-006-relate-pluck-position-to-string-modes/)
 - [GAS-007 · Distinguir los polos del cuerpo de los parciales de las cuerdas](gas-007-distinguish-body-poles-from-string-partials/)
 - [GAS-008 · Distinguir los batimientos de un cambio de amortiguamiento](gas-008-separate-beating-from-a-change-in-damping/)
+- [GAS-009 · Estimar el error de afinación de una longitud de retardo entera](gas-009-estimate-tuning-error-from-integer-delay-length/)
+- [GAS-010 · Distinguir los parciales de una cuerda rígida de los armónicos](gas-010-distinguish-stiff-string-partials-from-harmonics/)
+- [GAS-011 · Seguir la polaridad de las reflexiones en los extremos de una cuerda](gas-011-track-reflection-polarity-at-string-boundaries/)

@@ -18,3 +18,5 @@ sidebar:
 - [PM-005 · Interpret BRUTAL Coexistence Experiments Before Choosing a Default](pm-005-interpret-brutal-coexistence-experiments/)
 - [PM-006 · Test a Pilot against Its Decision Horizon](pm-006-test-a-pilot-against-its-decision-horizon/)
 - [PM-007 · Measure Playback Latency at the User Boundary](pm-007-measure-playback-latency-at-the-user-boundary/)
+- [PM-008 · Size a Fifty Course Batch by Review Capacity](pm-008-size-a-fifty-course-batch-by-review-capacity/)
+- [PM-009 · Separate Release Adoption from Artifact Downloads](pm-009-separate-release-adoption-from-artifact-downloads/)

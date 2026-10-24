@@ -19,3 +19,6 @@ sidebar:
 - [COG-006 · Separate Pixel Tests from Appearance Judgments](cog-006-separate-pixel-tests-from-appearance-judgments/)
 - [COG-007 · Separate Unaided Recall From Assisted Success](cog-007-separate-unaided-recall-from-assisted-success/)
 - [COG-008 · Choose Probes That Distinguish Reasoning Models](cog-008-choose-probes-that-distinguish-reasoning-models/)
+- [COG-009 · Counterbalance Practice Order Before Comparing Interfaces](cog-009-counterbalance-practice-order-before-comparing-interfaces/)
+- [COG-010 · Use Delayed Transfer Probes Beyond Repeated Items](cog-010-use-delayed-transfer-probes-beyond-repeated-items/)
+- [COG-011 · Measure Rubric Disagreement Before Adjudication](cog-011-measure-rubric-disagreement-before-adjudication/)

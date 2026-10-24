@@ -1,0 +1,2608 @@
+{
+  "schema": "streeling.batch50.unit-a.v1",
+  "scope": "Authored knowledge-work models and actual source reading; prepared checks are not independent review or learner evidence",
+  "base_learn_commit": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+  "courses": [
+    {
+      "code": "AUD010",
+      "module_id": "aud-010-preserve-channels-before-downmixing",
+      "novelty_vs_prerequisites": "Channel-pair information loss and non-invertibility; prerequisites address format guards and temporal alignment.",
+      "prerequisites": [
+        "aud-005-pcm-guards-and-format-boundaries",
+        "aud-009-declare-alignment-before-a-null-test"
+      ],
+      "source_readings": [
+        {
+          "path": "code/streeling/guitar-runtime/run.mjs",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+          "scope": "lines1-55 including frame constants and partial-block minimum; PCM and measurement discussion in AUD005/AUD009 also read"
+        },
+        {
+          "path": "streeling/courses/audio-engineering/en/aud-005-pcm-guards-and-format-boundaries.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "1f15d25a97ddff5b2f2ca57e1af9ababcc2a6c4a4b368306eb8b775316f35341",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "path": "streeling/courses/audio-engineering/en/aud-009-declare-alignment-before-a-null-test.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "ca5b9928bc5376c52ad6b2eaa55574ed989e5f3772e17c294ef78c9d9731a1ea",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "url": "https://www.w3.org/TR/webaudio-1.0/#channel-up-mixing-and-down-mixing",
+          "pin": "W3C Web Audio Recommendation 2021, section4.5 stereo-to-mono speaker rule only",
+          "sha256": null,
+          "scope": "Actual page body browsed; no execution, audio or empirical study replication. Remote body hash not retained."
+        }
+      ],
+      "authored_model": {
+        "formula": "m[n]=(L[n]+R[n])/2; E(x)=sum(x[n]^2)",
+        "values": {
+          "L": [
+            1,
+            -1,
+            1,
+            -1
+          ],
+          "R": [
+            -1,
+            1,
+            -1,
+            1
+          ]
+        },
+        "expected": {
+          "E_L": 4,
+          "E_R": 4,
+          "mono": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "E_mono": 0
+        },
+        "negative_control": "L=R=[1,-1,1,-1] gives mono=L, E_mono=4",
+        "assumptions": "Four synchronous real samples per channel; equal arithmetic weights, no delay or gain fit. Energy is a sample-square sum, not joules.",
+        "limits": "No stereo decoder or browser executed; no perceptual or physical-energy verdict.",
+        "negative_control_case": {
+          "values": {
+            "L": [
+              1,
+              -1,
+              1,
+              -1
+            ],
+            "R": [
+              1,
+              -1,
+              1,
+              -1
+            ]
+          },
+          "expected": {
+            "mono": [
+              1,
+              -1,
+              1,
+              -1
+            ],
+            "E_mono": 4
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "How many frames and scalar samples are present, and what is each channel's energy?",
+          "expected_answer": "There are 4 frames and 8 scalar samples. Each channel's squared-sample sum is 4; this is not a calibrated energy in joules."
+        },
+        "2": {
+          "question": "Calculate the mono vector and explain why a silence label would be misleading.",
+          "expected_answer": "The mono vector is `[0,0,0,0]`, with sum of squares 0. Cancellation under the chosen matrix explains that result; the original channels remain nonzero."
+        },
+        "3": {
+          "question": "What does the identical-channel control produce, and what variable does it isolate?",
+          "expected_answer": "Mono is `[1,-1,1,-1]` with squared-sample sum 4. The control changes the relation between channels; it does not diagnose an actual recording setup."
+        },
+        "4": {
+          "question": "Can an inverse operation recover the two inputs uniquely from the zero mono result?",
+          "expected_answer": "No. Opposite channels and two zero channels share the same output. Retain both originals and the declared matrix; the reduced buffer alone is insufficient."
+        },
+        "5": {
+          "question": "What would falsify a report claiming that zero mono proves zero input?",
+          "expected_answer": "The authored opposite-channel case already falsifies it. The report must preserve per-channel values and acknowledge that the selected runner was read, not rerun or extended."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "There are 4 frames and 8 scalar samples. Each channel's squared-sample sum is 4; this is not a calibrated energy in joules.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "The mono vector is `[0,0,0,0]`, with sum of squares 0. Cancellation under the chosen matrix explains that result; the original channels remain nonzero.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "Mono is `[1,-1,1,-1]` with squared-sample sum 4. The control changes the relation between channels; it does not diagnose an actual recording setup.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "No. Opposite channels and two zero channels share the same output. Retain both originals and the declared matrix; the reduced buffer alone is insufficient.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "The authored opposite-channel case already falsifies it. The report must preserve per-channel values and acknowledge that the selected runner was read, not rerun or extended.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "AUD011",
+      "module_id": "aud-011-count-valid-frames-separately-from-block-padding",
+      "novelty_vs_prerequisites": "Valid support versus allocated block length; predecessor covers exact PCM byte counts, not partial-block denominators.",
+      "prerequisites": [
+        "aud-005-pcm-guards-and-format-boundaries"
+      ],
+      "source_readings": [
+        {
+          "path": "code/streeling/guitar-runtime/run.mjs",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+          "scope": "lines1-55 including frame constants and partial-block minimum; PCM and measurement discussion in AUD005/AUD009 also read"
+        },
+        {
+          "path": "streeling/courses/audio-engineering/en/aud-005-pcm-guards-and-format-boundaries.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "1f15d25a97ddff5b2f2ca57e1af9ababcc2a6c4a4b368306eb8b775316f35341",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        }
+      ],
+      "authored_model": {
+        "formula": "blocks=ceil(N/B); padding=blocks*B-N; rms=sqrt(sum(x^2)/valid_count)",
+        "values": {
+          "N": 10,
+          "B": 4,
+          "rate_Hz": 1000,
+          "valid_samples": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "expected": {
+          "block_valid_counts": [
+            4,
+            4,
+            2
+          ],
+          "padding": 2,
+          "duration_s": 0.01,
+          "rms_valid": 1,
+          "rms_padded": 0.9128709291752769,
+          "raw_valid_bytes": 40
+        },
+        "negative_control": "N=8,B=4 gives no padding and both RMS values1",
+        "assumptions": "Mono float32 samples; zero-filled unused capacity; sample-square RMS over specified support.",
+        "limits": "No new host, engine or timing measurement.",
+        "negative_control_case": {
+          "values": {
+            "N": 8,
+            "B": 4,
+            "samples": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "expected": {
+            "blocks": 2,
+            "padding": 0,
+            "rms_valid": 1,
+            "rms_capacity": 1
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Give the block counts, capacity and padding.",
+          "expected_answer": "There are 3 blocks with valid counts `[4,4,2]`, capacity 12 and padding 2. Valid support remains 10 frames."
+        },
+        "2": {
+          "question": "Calculate both durations and the spurious extension caused by exporting capacity.",
+          "expected_answer": "Valid duration is .01 seconds; capacity duration is .012 seconds. Exporting the padding adds .002 seconds to this authored excerpt."
+        },
+        "3": {
+          "question": "Calculate the two RMS values and diagnose the apparent reduction.",
+          "expected_answer": "Valid-support RMS is 1; padded-support RMS is approximately .912870929. The added zeros alter the denominator and support, not the original samples."
+        },
+        "4": {
+          "question": "Give the valid and capacity byte counts and the first question for a hash mismatch.",
+          "expected_answer": "They are 40 and 48 bytes. First compare valid-frame contracts and padding policy, before attributing the mismatch to an engine or runtime."
+        },
+        "5": {
+          "question": "Why is the full-block control insufficient alone, and what source detail matters?",
+          "expected_answer": "With 8 frames there is no padding, so the two methods agree. The partial case is essential; inspect the runner's minimum of block capacity and remaining frames."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "There are 3 blocks with valid counts `[4,4,2]`, capacity 12 and padding 2. Valid support remains 10 frames.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "Valid duration is .01 seconds; capacity duration is .012 seconds. Exporting the padding adds .002 seconds to this authored excerpt.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "Valid-support RMS is 1; padded-support RMS is approximately .912870929. The added zeros alter the denominator and support, not the original samples.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "They are 40 and 48 bytes. First compare valid-frame contracts and padding policy, before attributing the mismatch to an engine or runtime.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "With 8 frames there is no padding, so the two methods agree. The partial case is essential; inspect the runner's minimum of block capacity and remaining frames.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "AUD012",
+      "module_id": "aud-012-choose-a-fade-without-hiding-its-energy-cost",
+      "novelty_vs_prerequisites": "Energy of finite fades versus source identity, separate from spectral window calibration and null alignment.",
+      "prerequisites": [
+        "aud-006-calibrate-spectral-amplitudes",
+        "aud-009-declare-alignment-before-a-null-test"
+      ],
+      "source_readings": [
+        {
+          "path": "code/streeling/guitar-runtime/run.mjs",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+          "scope": "lines1-55 including frame constants and partial-block minimum; PCM and measurement discussion in AUD005/AUD009 also read"
+        },
+        {
+          "path": "streeling/courses/audio-engineering/en/aud-006-calibrate-spectral-amplitudes.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "b2fe07f89c5cf3c9f46cd1204a8a8ca1e22559338e57c033309fcd7996966d54",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "path": "streeling/courses/audio-engineering/en/aud-009-declare-alignment-before-a-null-test.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "ca5b9928bc5376c52ad6b2eaa55574ed989e5f3772e17c294ef78c9d9731a1ea",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        }
+      ],
+      "authored_model": {
+        "formula": "y[n]=w[n]*x[n]; E=sum(y[n]^2)",
+        "values": {
+          "x": [
+            1,
+            1,
+            1
+          ],
+          "linear": [
+            1,
+            0.5,
+            0
+          ],
+          "root": [
+            1,
+            0.7071067811865476,
+            0
+          ]
+        },
+        "expected": {
+          "E_original": 3,
+          "E_linear": 1.25,
+          "E_root": 1.5,
+          "linear_fraction": 0.4166666666666667,
+          "root_fraction": 0.5
+        },
+        "negative_control": "x=[0,0,1] gives zero energy after either fade; no universal retention factor",
+        "assumptions": "Three equally weighted samples, no rescaling, toy envelopes on identical support.",
+        "limits": "No listening, crossfade correlation or spectral-leakage claim.",
+        "negative_control_case": {
+          "values": {
+            "x": [
+              0,
+              0,
+              1
+            ]
+          },
+          "expected": {
+            "linear_output": [
+              0,
+              0,
+              0
+            ],
+            "root_output": [
+              0,
+              0,
+              0
+            ],
+            "both_energy": 0
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Apply the linear envelope and calculate its squared-sample sum.",
+          "expected_answer": "The result is `[1,.5,0]` and its sum of squares is 1.25. Both endpoints and the discrete middle gain are part of the authored definition."
+        },
+        "2": {
+          "question": "Calculate the second energy and compare it with the linear-envelope result.",
+          "expected_answer": "The second energy is 1.5 versus 1.25. Equal endpoints and duration do not imply equal energy under the declared sample-square measure."
+        },
+        "3": {
+          "question": "Give the two retained fractions and identify what later RMS normalization adds.",
+          "expected_answer": "They are `5/12` and `.5`. Normalization adds a separate gain operation; it does not make the initial envelope energy preserving."
+        },
+        "4": {
+          "question": "Does the constant-input result establish a universal retention percentage?",
+          "expected_answer": "No. The final-frame-only control yields `[0,0,0]` for both envelopes and zero retained energy. A retention fraction must identify its input and support."
+        },
+        "5": {
+          "question": "What must a review note preserve before comparing faded results?",
+          "expected_answer": "Preserve original samples, envelope, support, energy definition, any later gain and the decision criterion. No new render or listening preference was observed here."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "The result is `[1,.5,0]` and its sum of squares is 1.25. Both endpoints and the discrete middle gain are part of the authored definition.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "The second energy is 1.5 versus 1.25. Equal endpoints and duration do not imply equal energy under the declared sample-square measure.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "They are `5/12` and `.5`. Normalization adds a separate gain operation; it does not make the initial envelope energy preserving.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "No. The final-frame-only control yields `[0,0,0]` for both envelopes and zero retained energy. A retention fraction must identify its input and support.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "Preserve original samples, envelope, support, energy definition, any later gain and the decision criterion. No new render or listening preference was observed here.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "GAS009",
+      "module_id": "gas-009-estimate-tuning-error-from-integer-delay-length",
+      "novelty_vs_prerequisites": "Floor versus nearest integer delay, cents budget and local sensitivity beyond GAS005 introductory ratio.",
+      "prerequisites": [
+        "gas-005-separate-a-partial-peak-from-a-period"
+      ],
+      "source_readings": [
+        {
+          "path": "code/streeling/guitar-runtime/vendor/lib.rs",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "d693e1ea1a5ca42d080c5829336bcc8423396c104ebee64d2e76ccd9bb503562",
+          "scope": "excite body lines281-330, integer and fractional delay state; raw upstream engine body also browsed"
+        },
+        {
+          "path": "streeling/courses/guitar-acoustics/en/gas-005-separate-a-partial-peak-from-a-period.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "074fcd679fe05c9ec0592b6d4d0589fb7edc7c21dd1769002609335f14c42e79",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        }
+      ],
+      "authored_model": {
+        "formula": "f=Fs/N; cents=1200*log2(f/target)",
+        "values": {
+          "Fs_Hz": 44100,
+          "target_Hz": 1000,
+          "N_floor": 44,
+          "N_next": 45,
+          "tolerance_cents": 5
+        },
+        "expected": {
+          "ideal_delay": 44.1,
+          "floor_Hz": 1002.2727272727273,
+          "floor_cents": 3.93015843943305,
+          "next_Hz": 980,
+          "next_cents": -34.97561479141981,
+          "passes_floor": true,
+          "passes_next": false
+        },
+        "negative_control": "target1090Hz, Fs44100, nearest N40 gives1102.5Hz and about19.740624937 cents, exceeding5cents; target1100 is an ineffective control and retained as such.",
+        "assumptions": "Bare periodic integer delay, real arithmetic and no loop-filter phase.",
+        "limits": "No engine pitch or perceptual tolerance measured.",
+        "negative_control_case": {
+          "values": {
+            "target_Hz": 1090,
+            "Fs_Hz": 44100,
+            "nearest_N": 40
+          },
+          "expected": {
+            "frequency_Hz": 1102.5,
+            "cents": 19.740624936713232,
+            "passes_5_cents": false
+          },
+          "ineffective_control": {
+            "target_Hz": 1100,
+            "nearest_N": 40,
+            "frequency_Hz": 1102.5,
+            "cents": 3.93015843943305,
+            "passes_5_cents": true
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "What ratio does length 44 produce?",
+          "expected_answer": "`44100/44` gives approximately 1002.272727273 Hz, above the target."
+        },
+        "2": {
+          "question": "Which length passes the stipulated 5-cent tolerance?",
+          "expected_answer": "Length 44 passes; length 45 fails. This is an authored criterion, not a measured hearing threshold."
+        },
+        "3": {
+          "question": "Does a passing 1000 Hz case certify every target?",
+          "expected_answer": "No. The local spacing and location of each target inside the integer interval must be checked."
+        },
+        "4": {
+          "question": "What stronger counterexample should replace that ineffective control?",
+          "expected_answer": "Use target 1090 Hz: nearest length 40 gives 1102.5 Hz and exceeds 5 cents."
+        },
+        "5": {
+          "question": "What result may the reviewer claim?",
+          "expected_answer": "Only the integer model's calculated tolerance outcomes, with clock, target and policy. Actual engine tuning and musician judgment remain unobserved."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "`44100/44` gives approximately 1002.272727273 Hz, above the target.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "Length 44 passes; length 45 fails. This is an authored criterion, not a measured hearing threshold.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "No. The local spacing and location of each target inside the integer interval must be checked.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "Use target 1090 Hz: nearest length 40 gives 1102.5 Hz and exceeds 5 cents.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "Only the integer model's calculated tolerance outcomes, with clock, target and policy. Actual engine tuning and musician judgment remain unobserved.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "GAS010",
+      "module_id": "gas-010-distinguish-stiff-string-partials-from-harmonics",
+      "novelty_vs_prerequisites": "Normalized inharmonic-partial model and harmonic-ratio residual; predecessors address peak/period and pluck amplitude.",
+      "prerequisites": [
+        "gas-005-separate-a-partial-peak-from-a-period",
+        "gas-006-relate-pluck-position-to-string-modes"
+      ],
+      "source_readings": [
+        {
+          "path": "code/streeling/guitar-runtime/vendor/lib.rs",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "d693e1ea1a5ca42d080c5829336bcc8423396c104ebee64d2e76ccd9bb503562",
+          "scope": "excite body lines281-330, integer and fractional delay state; raw upstream engine body also browsed"
+        },
+        {
+          "path": "streeling/courses/guitar-acoustics/en/gas-005-separate-a-partial-peak-from-a-period.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "074fcd679fe05c9ec0592b6d4d0589fb7edc7c21dd1769002609335f14c42e79",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "path": "streeling/courses/guitar-acoustics/en/gas-006-relate-pluck-position-to-string-modes.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "0eb9f99878d0d2714a8e09b59b0a8b25e76d8f546d7d2bd5b0454743196c404f",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "url": "https://www.dsprelated.com/freebooks/pasp/Stiff_String.html",
+          "pin": "Julius O. Smith, Physical Audio Signal Processing; section body on stiffness and dispersion, not its cited listener study",
+          "sha256": null,
+          "scope": "Actual page body browsed; no execution, audio or empirical study replication. Remote body hash not retained."
+        }
+      ],
+      "authored_model": {
+        "formula": "f_n=n*100*sqrt((1+B*n*n)/(1+B)); residual=f_n/(n*f_1)-1",
+        "values": {
+          "f_1_Hz": 100,
+          "B": 0.01,
+          "n": [
+            1,
+            2,
+            3
+          ]
+        },
+        "expected": {
+          "partials_Hz": [
+            100.0,
+            202.94856198525082,
+            311.65479760672247
+          ],
+          "B_zero_Hz": [
+            100,
+            200,
+            300
+          ]
+        },
+        "negative_control": "B=0 recovers exact harmonic multiples.",
+        "assumptions": "Stipulated normalized partial model, positive frequencies, no amplitude, damping or measured string fit.",
+        "limits": "Model values are not fitted GA dispersion settings or recorded guitar results.",
+        "negative_control_case": {
+          "values": {
+            "B": 0,
+            "f_1_Hz": 100,
+            "n": [
+              1,
+              2,
+              3
+            ]
+          },
+          "expected": {
+            "partials_Hz": [
+              100,
+              200,
+              300
+            ]
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "What does the formula give for the first partial?",
+          "expected_answer": "At n=1 the square-root ratio is 1, so the result is 100 Hz."
+        },
+        "2": {
+          "question": "Give the harmonic reference and the direction of the residual.",
+          "expected_answer": "The reference is 200 Hz; the residual is positive because the modeled second partial lies above it."
+        },
+        "3": {
+          "question": "Can the frequency calculation prove audibility or preference?",
+          "expected_answer": "No. It calculates a model discrepancy only; perceptual reports require separate observations and a specified comparison."
+        },
+        "4": {
+          "question": "What should the zero-coefficient control return?",
+          "expected_answer": "It must return `[100,200,300]` Hz. A nonzero discrepancy there would falsify the stated formula implementation or reference convention."
+        },
+        "5": {
+          "question": "What evidence is missing before recommending a GA slider value?",
+          "expected_answer": "A pinned executed mapping from control to measured partial frequencies, calibrated peak estimates and a declared acceptance task are missing."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "At n=1 the square-root ratio is 1, so the result is 100 Hz.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "The reference is 200 Hz; the residual is positive because the modeled second partial lies above it.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "No. It calculates a model discrepancy only; perceptual reports require separate observations and a specified comparison.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "It must return `[100,200,300]` Hz. A nonzero discrepancy there would falsify the stated formula implementation or reference convention.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "A pinned executed mapping from control to measured partial frequencies, calibrated peak estimates and a declared acceptance task are missing.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "GAS011",
+      "module_id": "gas-011-track-reflection-polarity-at-string-boundaries",
+      "novelty_vs_prerequisites": "Signed traveling-wave boundary cancellation and two-boundary product, beyond initial pluck modal amplitudes.",
+      "prerequisites": [
+        "gas-006-relate-pluck-position-to-string-modes"
+      ],
+      "source_readings": [
+        {
+          "path": "code/streeling/guitar-runtime/vendor/lib.rs",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "d693e1ea1a5ca42d080c5829336bcc8423396c104ebee64d2e76ccd9bb503562",
+          "scope": "excite body lines281-330, integer and fractional delay state; raw upstream engine body also browsed"
+        },
+        {
+          "path": "streeling/courses/guitar-acoustics/en/gas-006-relate-pluck-position-to-string-modes.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "0eb9f99878d0d2714a8e09b59b0a8b25e76d8f546d7d2bd5b0454743196c404f",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "url": "https://www.dsprelated.com/freebooks/pasp/Rigid_Terminations.html",
+          "pin": "Julius O. Smith, body on rigid displacement and force-wave reflection signs",
+          "sha256": null,
+          "scope": "Actual page body browsed; no execution, audio or empirical study replication. Remote body hash not retained."
+        }
+      ],
+      "authored_model": {
+        "formula": "boundary_displacement=a+r*a; round_trip=r_left*r_right",
+        "values": {
+          "incident_mm": 0.2,
+          "fixed_reflection": -1,
+          "left": -1,
+          "right": -1
+        },
+        "expected": {
+          "reflected_mm": -0.2,
+          "boundary_mm": 0,
+          "round_trip": 1
+        },
+        "negative_control": "r=+1 yields boundary .4mm, violating the stipulated fixed displacement condition.",
+        "assumptions": "Linear ideal traveling displacement waves, same positive transverse axis; no loss or finite-compliance bridge.",
+        "limits": "Force-wave sign differs; no GA boundary calibration or bridge measurement.",
+        "negative_control_case": {
+          "values": {
+            "incident_mm": 0.2,
+            "reflection": 1
+          },
+          "expected": {
+            "reflected_mm": 0.2,
+            "boundary_mm": 0.4,
+            "fixed_boundary_satisfied": false
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "What reflection coefficient satisfies the declared boundary?",
+          "expected_answer": "The displacement coefficient is -1, producing -.2 mm and total displacement 0 mm."
+        },
+        "2": {
+          "question": "Why does the positive coefficient fail here?",
+          "expected_answer": "It gives .4 mm instead of the required 0 mm at the fixed boundary."
+        },
+        "3": {
+          "question": "Does a positive round-trip sign imply non-inverting endpoints?",
+          "expected_answer": "No. Two displacement inversions produce the positive product +1; keep the two local gains separately."
+        },
+        "4": {
+          "question": "What context prevents a misleading sign comparison?",
+          "expected_answer": "Name displacement versus force, common orientation, units and boundary condition before comparing gains."
+        },
+        "5": {
+          "question": "May this calculation validate a real bridge model or repair the decay result?",
+          "expected_answer": "No. It validates the stipulated algebra only; physical mapping and the historical decay gate remain separate."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "The displacement coefficient is -1, producing -.2 mm and total displacement 0 mm.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "It gives .4 mm instead of the required 0 mm at the fixed boundary.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "No. Two displacement inversions produce the positive product +1; keep the two local gains separately.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "Name displacement versus force, common orientation, units and boundary condition before comparing gains.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "No. It validates the stipulated algebra only; physical mapping and the historical decay gate remain separate.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "GTR009",
+      "module_id": "gtr-009-budget-time-for-a-position-shift",
+      "novelty_vs_prerequisites": "Time-budget feasibility under declared shift costs, beyond static reach and string occupancy.",
+      "prerequisites": [
+        "gtr-003-audit-voicing-playability",
+        "gtr-005-plan-which-string-keeps-ringing"
+      ],
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/phrase-performance-2026-10-22/string-occupancy.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "6356c1bbbe0151940c7df105d48e1cdb42a3ef1aec2d314dc6a5e205580eb1c3",
+          "scope": "scope, assumptions and base_events excerpt; retained outcomes are historical, not rerun"
+        },
+        {
+          "path": "streeling/courses/guitar-studies/en/gtr-003-audit-voicing-playability.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "b70485d9d047e2ef9151e6732762031fb56b442cadaf0129ea0bf4e24476276a",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "path": "streeling/courses/guitar-studies/en/gtr-005-plan-which-string-keeps-ringing.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "dfb660db8e69ca8286fdd6f6e0f642a949d838257e4f565debd632af1eddaf82",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        }
+      ],
+      "authored_model": {
+        "formula": "available_ms=gap_beats*60000/quarter_BPM; required_ms=release_ms+distance_frets*cost_ms_per_fret+prepare_ms",
+        "values": {
+          "gap_beats": 0.5,
+          "quarter_BPM": 120,
+          "distance_frets": 4,
+          "release_ms": 40,
+          "cost_ms_per_fret": 30,
+          "prepare_ms": 60
+        },
+        "expected": {
+          "available_ms": 250,
+          "required_ms": 220,
+          "slack_ms": 30,
+          "at_180_slack_ms": -53.33333333333334
+        },
+        "negative_control": "At180quarter-BPM, .5beat gives166.666667ms <220ms.",
+        "assumptions": "Sequential additive costs, fixed authored cost per fret, no overlap or human calibration.",
+        "limits": "Timing feasibility does not establish comfort or clean playing.",
+        "negative_control_case": {
+          "values": {
+            "quarter_BPM": 180,
+            "gap_beats": 0.5,
+            "required_ms": 220
+          },
+          "expected": {
+            "available_ms": 166.66666666666666,
+            "deficit_ms": 53.33333333333334,
+            "fits": false
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "What is the available time for a gap of .5 quarter beats?",
+          "expected_answer": "`0.5*60000/120` gives 250 ms."
+        },
+        "2": {
+          "question": "Calculate required time and slack.",
+          "expected_answer": "Required time is `40+4*30+60=220` ms; slack against 250 ms is 30 ms."
+        },
+        "3": {
+          "question": "What is the deficit at the faster tempo?",
+          "expected_answer": "Required minus available is approximately 53.333333 ms; the declared model cannot fit this transition."
+        },
+        "4": {
+          "question": "Is releasing the note earlier an unchanged realization?",
+          "expected_answer": "No. It changes the event offset; record that musical edit and obtain the intended performer decision."
+        },
+        "5": {
+          "question": "What conclusion is supported by positive slack?",
+          "expected_answer": "The authored sequential-cost model fits; clean performance, comfort and an actual learning benefit remain undecided."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "`0.5*60000/120` gives 250 ms.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "Required time is `40+4*30+60=220` ms; slack against 250 ms is 30 ms.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "Required minus available is approximately 53.333333 ms; the declared model cannot fit this transition.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "No. It changes the event offset; record that musical edit and obtain the intended performer decision.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "The authored sequential-cost model fits; clean performance, comfort and an actual learning benefit remain undecided.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "GTR010",
+      "module_id": "gtr-010-separate-muting-from-releasing-a-fretted-note",
+      "novelty_vs_prerequisites": "Explicit post-release open-string state and damping-event semantics, beyond sustained-event occupancy.",
+      "prerequisites": [
+        "gtr-005-plan-which-string-keeps-ringing"
+      ],
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/phrase-performance-2026-10-22/string-occupancy.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "6356c1bbbe0151940c7df105d48e1cdb42a3ef1aec2d314dc6a5e205580eb1c3",
+          "scope": "scope, assumptions and base_events excerpt; retained outcomes are historical, not rerun"
+        },
+        {
+          "path": "streeling/courses/guitar-studies/en/gtr-005-plan-which-string-keeps-ringing.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "dfb660db8e69ca8286fdd6f6e0f642a949d838257e4f565debd632af1eddaf82",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        }
+      ],
+      "authored_model": {
+        "formula": "state_after_release=unfretted_not_verified_silent; state_after_declared_damp=muted_in_model",
+        "values": {
+          "open_midi": 64,
+          "fret": 3,
+          "fretted_midi": 67,
+          "release_beat": 1,
+          "damp_beat": 1.25
+        },
+        "expected": {
+          "possible_open_midi": 64,
+          "unverified_interval_beats": 0.25,
+          "silent_measurement": null
+        },
+        "negative_control": "Deleting the damping event does not establish silence; release-only state remains unverified.",
+        "assumptions": "Qualitative authored state machine; no amplitude or automatic pull-off sound asserted.",
+        "limits": "Neither physical release nor a specific muting technique was tested.",
+        "negative_control_case": {
+          "values": {
+            "release_beat": 1,
+            "damp_beat": null
+          },
+          "expected": {
+            "state": "unfretted_not_verified_silent",
+            "silence_verified": false
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "What pitch would the open string have, and what remains unknown?",
+          "expected_answer": "Open pitch is 64; actual remaining amplitude and audible output are unknown."
+        },
+        "2": {
+          "question": "How long is the interval whose silence is unverified?",
+          "expected_answer": "`1.25-1=.25` beats; retain it as unverified rather than filling it with a presumed recording."
+        },
+        "3": {
+          "question": "Does a freed string prove an acoustically silent string?",
+          "expected_answer": "No. Resource availability follows the schedule; silence requires its own model or measured observation."
+        },
+        "4": {
+          "question": "What status should a release-only adapter report?",
+          "expected_answer": "It should preserve the unresolved acoustic state and the missing damping instruction, rather than label silence as verified."
+        },
+        "5": {
+          "question": "What evidence closes the acoustic question?",
+          "expected_answer": "A specified actual playing or audio observation under the intended task is needed; no such outcome is retained here."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "Open pitch is 64; actual remaining amplitude and audible output are unknown.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "`1.25-1=.25` beats; retain it as unverified rather than filling it with a presumed recording.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "No. Resource availability follows the schedule; silence requires its own model or measured observation.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "It should preserve the unresolved acoustic state and the missing damping instruction, rather than label silence as verified.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "A specified actual playing or audio observation under the intended task is needed; no such outcome is retained here.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "GTR011",
+      "module_id": "gtr-011-test-barre-coverage-before-calling-a-shape-playable",
+      "novelty_vs_prerequisites": "Interval coverage of an explicitly proposed barre, including an open-string conflict, beyond Boolean heuristics.",
+      "prerequisites": [
+        "gtr-003-audit-voicing-playability"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/guitar-studies/en/gtr-003-audit-voicing-playability.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "b70485d9d047e2ef9151e6732762031fb56b442cadaf0129ea0bf4e24476276a",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "path": "streeling/courses/guitar-studies/en/gtr-003-audit-voicing-playability.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "b70485d9d047e2ef9151e6732762031fb56b442cadaf0129ea0bf4e24476276a",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        }
+      ],
+      "authored_model": {
+        "formula": "covered(s)=lo<=s<=hi; conflict=covered(s) and requested_fret(s)<barre_fret",
+        "values": {
+          "string_convention": "1high to6low",
+          "barre_fret": 2,
+          "lo": 1,
+          "hi": 3,
+          "requested": {
+            "1": 2,
+            "2": 0,
+            "3": 2
+          }
+        },
+        "expected": {
+          "covered": [
+            1,
+            2,
+            3
+          ],
+          "conflicts": [
+            2
+          ]
+        },
+        "negative_control": "Request string2 fret3 instead of0; no lower-fret conflict under ideal override model.",
+        "assumptions": "Continuous full contact across declared strings; higher fret can override lower contact; no arched selective contact.",
+        "limits": "No actual fingering, pressure or playability measured.",
+        "negative_control_case": {
+          "values": {
+            "barre_fret": 2,
+            "lo": 1,
+            "hi": 3,
+            "requested": {
+              "1": 2,
+              "2": 3,
+              "3": 2
+            }
+          },
+          "expected": {
+            "conflicts": [],
+            "coverage_check_passes": true,
+            "playability": null
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Which strings does the proposed contact cover?",
+          "expected_answer": "It covers strings `[1,2,3]`, including the requested open middle string."
+        },
+        "2": {
+          "question": "Identify the conflict and its assumption.",
+          "expected_answer": "String 2 conflicts because `0<2`; the result assumes continuous contact, with no selectively arched finger."
+        },
+        "3": {
+          "question": "What changes for request `[2,3,2]`?",
+          "expected_answer": "No requested fret lies below the covered fret 2. The coverage check passes; actual finger allocation remains unresolved."
+        },
+        "4": {
+          "question": "Can a false barre heuristic guarantee no barre is needed?",
+          "expected_answer": "No. It only reports its predicate; the explicit fingering and musician evidence answer different questions."
+        },
+        "5": {
+          "question": "What remains pending after the coverage calculation?",
+          "expected_answer": "Actual contact, clean sound, transition success and musician acceptance remain pending; no player was tested."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "It covers strings `[1,2,3]`, including the requested open middle string.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "String 2 conflicts because `0<2`; the result assumes continuous contact, with no selectively arched finger.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "No requested fret lies below the covered fret 2. The coverage check passes; actual finger allocation remains unresolved.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "No. It only reports its predicate; the explicit fingering and musician evidence answer different questions.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "Actual contact, clean sound, transition success and musician acceptance remain pending; no player was tested.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "GAA008",
+      "module_id": "gaa-008-schedule-retrieval-with-an-explicit-due-rule",
+      "novelty_vs_prerequisites": "Deterministic due-date scheduling with missing outcomes; predecessor defines practice item and cue policy.",
+      "prerequisites": [
+        "gaa-007-turn-a-voicing-result-into-a-practice-item"
+      ],
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "8b62207df7d7fa84e97053ef4d7c6cea36b7eae73ce7a867d14cfdbfa49b9cc6",
+          "scope": "scope, tuning, candidate and cue-policy excerpts"
+        },
+        {
+          "path": "streeling/courses/guitar-alchemist-academy/en/gaa-007-turn-a-voicing-result-into-a-practice-item.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "5e8990aff651d79bc42e376adcb27b2ff6b0c130b8206b0dc344dedecca8b5d6",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        }
+      ],
+      "authored_model": {
+        "formula": "due=last_day+interval_days; success_next=min(2*interval_days,16); failure_next=1",
+        "values": {
+          "last_day": 10,
+          "interval_days": 4,
+          "now_day": 14,
+          "cap_days": 16
+        },
+        "expected": {
+          "due_day": 14,
+          "due_inclusive": true,
+          "success_interval": 8,
+          "success_due": 22,
+          "failure_due": 15,
+          "missing_outcome_next_due": null
+        },
+        "negative_control": "now_day13 is not due; missing attempt outcome must not be treated as success.",
+        "assumptions": "Integer elapsed-day coordinate, inclusive due boundary, explicit synthetic binary outcomes, no timezone or memory model.",
+        "limits": "No scheduler deployed or learner retention measured.",
+        "negative_control_case": {
+          "values": {
+            "now_day": 13,
+            "due_day": 14,
+            "outcome": null
+          },
+          "expected": {
+            "is_due": false,
+            "updated_due": null
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Is the item due on day 14, and on day 13?",
+          "expected_answer": "It is due on day 14 and not due on day 13 under the inclusive rule."
+        },
+        "2": {
+          "question": "Calculate the successful branch.",
+          "expected_answer": "The interval is 8 days and due day is 22. No retention probability follows from either number."
+        },
+        "3": {
+          "question": "Calculate the failure branch and state the needed attempt evidence.",
+          "expected_answer": "Due day is 15; retain the actual answer before reveal, assistance and scoring rule."
+        },
+        "4": {
+          "question": "What next due date follows from no recorded outcome?",
+          "expected_answer": "No updated due date is determined. Preserve the missing outcome; do not choose either branch."
+        },
+        "5": {
+          "question": "What can correct scheduling arithmetic establish?",
+          "expected_answer": "Policy conformance only. Learning benefit, optimal intervals and actual learner acceptance remain unobserved."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "It is due on day 14 and not due on day 13 under the inclusive rule.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "The interval is 8 days and due day is 22. No retention probability follows from either number.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "Due day is 15; retain the actual answer before reveal, assistance and scoring rule.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "No updated due date is determined. Preserve the missing outcome; do not choose either branch.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "Policy conformance only. Learning benefit, optimal intervals and actual learner acceptance remain unobserved.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "GAA009",
+      "module_id": "gaa-009-test-transposition-beyond-a-memorized-fret-pattern",
+      "novelty_vs_prerequisites": "Unseen absolute-note transposition probe with register and changed-shape negative control; predecessor defines capo and practice keys.",
+      "prerequisites": [
+        "gaa-006-separate-capo-shapes-from-sounding-pitches",
+        "gaa-007-turn-a-voicing-result-into-a-practice-item"
+      ],
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/capo-spelling-2026-10-22/degree-context.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "55215f759ee0060edd6e5771e0eef3b3b11e02458ef3027a6658451fbb6b911e",
+          "scope": "major/minor offset tables, absolute rows, invalid-domain and naive-index controls"
+        },
+        {
+          "path": "streeling/courses/guitar-alchemist-academy/en/gaa-006-separate-capo-shapes-from-sounding-pitches.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "e055691e582eedd19198e5138a0a7b761ab2ddcaf3698c92e6d7630375b0dba7",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "path": "streeling/courses/guitar-alchemist-academy/en/gaa-007-turn-a-voicing-result-into-a-practice-item.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "5e8990aff651d79bc42e376adcb27b2ff6b0c130b8206b0dc344dedecca8b5d6",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        }
+      ],
+      "authored_model": {
+        "formula": "target_i=source_i+offset; intervals_i=note_i-note_0",
+        "values": {
+          "source": [
+            60,
+            64,
+            67
+          ],
+          "offset": 2
+        },
+        "expected": {
+          "target": [
+            62,
+            66,
+            69
+          ],
+          "intervals": [
+            0,
+            4,
+            7
+          ],
+          "wrong": [
+            62,
+            65,
+            69
+          ],
+          "octave_control": [
+            74,
+            78,
+            81
+          ]
+        },
+        "negative_control": "[62,65,69] reaches tonic62 but changes third; octave-shifted list has correct classes but wrong requested register.",
+        "assumptions": "Absolute integer note numbers, equal-tempered semitones, no physical position selected.",
+        "limits": "No actual learner transfer, guitar trial or musical quality observed.",
+        "negative_control_case": {
+          "values": {
+            "candidate": [
+              62,
+              65,
+              69
+            ],
+            "octave_candidate": [
+              74,
+              78,
+              81
+            ]
+          },
+          "expected": {
+            "candidate_intervals": [
+              0,
+              3,
+              7
+            ],
+            "target_pass": false,
+            "octave_absolute_pass": false,
+            "octave_pitch_class_pass": true
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Give the target and its intervals from the first note.",
+          "expected_answer": "The target is `[62,66,69]`; intervals are `[0,4,7]`."
+        },
+        "2": {
+          "question": "Why does this candidate fail?",
+          "expected_answer": "Its intervals are `[0,3,7]`; the middle note should be 66 rather than 65."
+        },
+        "3": {
+          "question": "Is the octave-shifted control correct here?",
+          "expected_answer": "No. It adds 12 beyond the target, violating the declared absolute-register requirement."
+        },
+        "4": {
+          "question": "What must precede revealing the key?",
+          "expected_answer": "Retain the actual response, input item, source assistance and scoring rule before reveal."
+        },
+        "5": {
+          "question": "Can the correct note list prove a playable fingering or learned transfer?",
+          "expected_answer": "No. It proves the authored arithmetic key only; neither playing nor a learner attempt occurred."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "The target is `[62,66,69]`; intervals are `[0,4,7]`.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "Its intervals are `[0,3,7]`; the middle note should be 66 rather than 65.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "No. It adds 12 beyond the target, violating the declared absolute-register requirement.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "Retain the actual response, input item, source assistance and scoring rule before reveal.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "No. It proves the authored arithmetic key only; neither playing nor a learner attempt occurred.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "GAA010",
+      "module_id": "gaa-010-define-a-practice-pass-before-counting-success",
+      "novelty_vs_prerequisites": "Conjunctive practice-pass endpoint and denominator with assisted attempt; predecessor defines individual answer keys.",
+      "prerequisites": [
+        "gaa-007-turn-a-voicing-result-into-a-practice-item"
+      ],
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "8b62207df7d7fa84e97053ef4d7c6cea36b7eae73ce7a867d14cfdbfa49b9cc6",
+          "scope": "scope, tuning, candidate and cue-policy excerpts"
+        },
+        {
+          "path": "streeling/courses/guitar-alchemist-academy/en/gaa-007-turn-a-voicing-result-into-a-practice-item.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "5e8990aff651d79bc42e376adcb27b2ff6b0c130b8206b0dc344dedecca8b5d6",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        }
+      ],
+      "authored_model": {
+        "formula": "pass=notes_correct and abs(onset_error_ms)<=50 and not disallowed_assistance",
+        "values": {
+          "attempts": [
+            {
+              "id": "A",
+              "notes": true,
+              "error_ms": 20,
+              "assisted": false
+            },
+            {
+              "id": "B",
+              "notes": true,
+              "error_ms": 60,
+              "assisted": false
+            },
+            {
+              "id": "C",
+              "notes": false,
+              "error_ms": 10,
+              "assisted": false
+            },
+            {
+              "id": "D",
+              "notes": true,
+              "error_ms": 20,
+              "assisted": true
+            }
+          ]
+        },
+        "expected": {
+          "passes": [
+            "A"
+          ],
+          "pass_rate": 0.25,
+          "note_correct_rate": 0.75
+        },
+        "negative_control": "Notes-only scoring admits B and D incorrectly under the conjunctive endpoint.",
+        "assumptions": "Synthetic fixed ledger, tolerance50ms inclusive, all four attempts retained.",
+        "limits": "No audio scoring, human performance or learning observation.",
+        "negative_control_case": {
+          "values": {
+            "endpoint": "notes_only"
+          },
+          "expected": {
+            "accepted": [
+              "A",
+              "B",
+              "D"
+            ],
+            "count": 3,
+            "rate": 0.75,
+            "matches_declared_endpoint": false
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Does correct pitch alone satisfy the rule?",
+          "expected_answer": "No. Timing and assistance conditions must also hold."
+        },
+        "2": {
+          "question": "Which of A and B passes?",
+          "expected_answer": "A passes. B fails because 60 exceeds the declared 50 ms tolerance."
+        },
+        "3": {
+          "question": "Why do C and D fail?",
+          "expected_answer": "C fails notes; D fails the assistance condition. Their failure reasons remain separate."
+        },
+        "4": {
+          "question": "Which rate answers the stated pass question?",
+          "expected_answer": "`.25` does; `.75` describes note correctness alone and must keep that label."
+        },
+        "5": {
+          "question": "Can the authored pass count be described as observed practice improvement?",
+          "expected_answer": "No. There are no actual takes or learner observations here, and no before-and-after comparison."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "No. Timing and assistance conditions must also hold.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "A passes. B fails because 60 exceeds the declared 50 ms tolerance.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "C fails notes; D fails the assistance condition. Their failure reasons remain separate.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "`.25` does; `.75` describes note correctness alone and must keep that label.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "No. There are no actual takes or learner observations here, and no before-and-after comparison.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "MCL009",
+      "module_id": "mcl-009-preserve-pickup-offsets-in-bar-addresses",
+      "novelty_vs_prerequisites": "Pickup-length prefix sums and semantic measure labels, beyond complete-bar and tempo-map timing.",
+      "prerequisites": [
+        "mcl-006-preserve-meter-grouping-and-tempo-units",
+        "mcl-007-integrate-a-midi-tempo-map-before-scheduling"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "41fae9c94fe4e7472414d2f9bc340d1a032a1302058a1ccd4f135ffff1acc8c5",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "41fae9c94fe4e7472414d2f9bc340d1a032a1302058a1ccd4f135ffff1acc8c5",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "path": "streeling/courses/musicology/en/mcl-007-integrate-a-midi-tempo-map-before-scheduling.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "00fb1aab5455d884d2b31ad0f05dd9cbf5df4bb087a8042a4c6a5387cf64e2c1",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-partwise/",
+          "pin": "MusicXML4.0 measure attributes number and implicit",
+          "sha256": null,
+          "scope": "Actual page body browsed; no execution, audio or empirical study replication. Remote body hash not retained."
+        }
+      ],
+      "authored_model": {
+        "formula": "absolute_quarters=prefix_duration_before_measure+local_offset; seconds=quarters*60/120",
+        "values": {
+          "measure_labels": [
+            "0",
+            "1",
+            "2"
+          ],
+          "durations_quarters": [
+            1,
+            4,
+            4
+          ],
+          "quarter_BPM": 120,
+          "local_offset_measure2": 1
+        },
+        "expected": {
+          "starts_quarters": [
+            0,
+            1,
+            5
+          ],
+          "measure2_event_quarters": 6,
+          "measure2_event_seconds": 3,
+          "wrong_full_pickup_event_quarters": 9
+        },
+        "negative_control": "Replacing pickup duration1 by nominal4 shifts later positions by3quarters.",
+        "assumptions": "Single voice, sequential measures, constant quarter tempo; local offsets zero-based.",
+        "limits": "No multi-voice MusicXML timeline algorithm or performed timing.",
+        "negative_control_case": {
+          "values": {
+            "durations_quarters": [
+              4,
+              4,
+              4
+            ],
+            "local_offset_measure2": 1
+          },
+          "expected": {
+            "starts_quarters": [
+              0,
+              4,
+              8
+            ],
+            "event_quarters": 9,
+            "error_quarters": 3,
+            "error_seconds": 1.5
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "At which absolute quarter positions do the measures start?",
+          "expected_answer": "They start at `[0,1,5]`; the pickup contributes 1 quarter, not 4."
+        },
+        "2": {
+          "question": "Give the absolute event coordinate.",
+          "expected_answer": "It is 6 quarters from this excerpt origin; retain measure label 2 and local offset 1 as well."
+        },
+        "3": {
+          "question": "Convert this event to seconds under the stated rate.",
+          "expected_answer": "`6*60/120=3` seconds; no expressive onset or recorded latency was measured."
+        },
+        "4": {
+          "question": "What offset error does the full-pickup shortcut create?",
+          "expected_answer": "It adds 3 quarters, equal to 1.5 seconds at the declared tempo."
+        },
+        "5": {
+          "question": "Does a measure number alone determine elapsed time?",
+          "expected_answer": "No. Actual durations, local offset, origin and tempo context are required; numbering is insufficient."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "They start at `[0,1,5]`; the pickup contributes 1 quarter, not 4.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "It is 6 quarters from this excerpt origin; retain measure label 2 and local offset 1 as well.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "`6*60/120=3` seconds; no expressive onset or recorded latency was measured.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "It adds 3 quarters, equal to 1.5 seconds at the declared tempo.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "No. Actual durations, local offset, origin and tempo context are required; numbering is insufficient.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "MCL010",
+      "module_id": "mcl-010-separate-swing-ratio-from-tempo",
+      "novelty_vs_prerequisites": "Within-beat duration ratio versus overall beat rate, beyond meter grouping and unspecified style labels.",
+      "prerequisites": [
+        "mcl-004-model-timing-without-inventing-a-style",
+        "mcl-006-preserve-meter-grouping-and-tempo-units"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "41fae9c94fe4e7472414d2f9bc340d1a032a1302058a1ccd4f135ffff1acc8c5",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "7ace697db10e92593203a2ad956ba94816925f119d5f41934d15018d6374b2af",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "41fae9c94fe4e7472414d2f9bc340d1a032a1302058a1ccd4f135ffff1acc8c5",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/swing/",
+          "pin": "MusicXML4.0 swing body, nominal first/second ratio and exclusions",
+          "sha256": null,
+          "scope": "Actual page body browsed; no execution, audio or empirical study replication. Remote body hash not retained."
+        }
+      ],
+      "authored_model": {
+        "formula": "T=60/BPM; first=T*a/(a+b); second=T*b/(a+b)",
+        "values": {
+          "quarter_BPM": 120,
+          "ratio": [
+            2,
+            1
+          ]
+        },
+        "expected": {
+          "beat_seconds": 0.5,
+          "first_seconds": 0.3333333333333333,
+          "second_seconds": 0.16666666666666666,
+          "straight_seconds": [
+            0.25,
+            0.25
+          ],
+          "at_60_seconds": [
+            0.6666666666666666,
+            0.3333333333333333
+          ]
+        },
+        "negative_control": "At60BPM with ratio1:1, halves are.5,.5; slower straight timing does not reproduce120BPM2:1.",
+        "assumptions": "One quarter beat divided into two nominal events, positive integer ratio, no grace notes or local expressive timing.",
+        "limits": "No cultural attribution or listener/player timing measured.",
+        "negative_control_case": {
+          "values": {
+            "quarter_BPM": 60,
+            "ratio": [
+              1,
+              1
+            ]
+          },
+          "expected": {
+            "pair_seconds": [
+              0.5,
+              0.5
+            ],
+            "total_seconds": 1,
+            "matches_original": false
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "How long is the beat and how many ratio parts fill it?",
+          "expected_answer": "The beat lasts .5 seconds and contains 3 ratio parts."
+        },
+        "2": {
+          "question": "Calculate the event durations and their sum.",
+          "expected_answer": "They are `1/3` and `1/6` seconds, summing to `.5` seconds."
+        },
+        "3": {
+          "question": "Which quantity changes between the two ratios at the same tempo?",
+          "expected_answer": "The internal division changes; total beat duration remains .5 seconds."
+        },
+        "4": {
+          "question": "Does slower straight timing reproduce the original pair?",
+          "expected_answer": "No. `[.5,.5]` differs from `[1/3,1/6]` and changes the total from .5 to 1 second."
+        },
+        "5": {
+          "question": "What must accompany a ratio in a handoff?",
+          "expected_answer": "Named beat unit, tempo, eligible event type, ratio and unsupported cases; no performed style or cultural identity follows."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "The beat lasts .5 seconds and contains 3 ratio parts.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "They are `1/3` and `1/6` seconds, summing to `.5` seconds.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "The internal division changes; total beat duration remains .5 seconds.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "No. `[.5,.5]` differs from `[1/3,1/6]` and changes the total from .5 to 1 second.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "Named beat unit, tempo, eligible event type, ratio and unsupported cases; no performed style or cultural identity follows.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "MCL011",
+      "module_id": "mcl-011-keep-repeats-separate-from-written-bar-identity",
+      "novelty_vs_prerequisites": "Written-measure versus playback-visit identity through bounded repeat expansion.",
+      "prerequisites": [
+        "mcl-002-musical-form",
+        "mcl-007-integrate-a-midi-tempo-map-before-scheduling"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/musicology/en/mcl-007-integrate-a-midi-tempo-map-before-scheduling.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "00fb1aab5455d884d2b31ad0f05dd9cbf5df4bb087a8042a4c6a5387cf64e2c1",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "path": "streeling/courses/musicology/en/mcl-002-musical-form.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "c5b63c0d1de4bd43cc625df6abb7795de34ab8eaf40c9c3317e078fea3eb50b0",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "path": "streeling/courses/musicology/en/mcl-007-integrate-a-midi-tempo-map-before-scheduling.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "00fb1aab5455d884d2b31ad0f05dd9cbf5df4bb087a8042a4c6a5387cf64e2c1",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/repeat/",
+          "pin": "MusicXML4.0 repeat attributes direction,times,after-jump",
+          "sha256": null,
+          "scope": "Actual page body browsed; no execution, audio or empirical study replication. Remote body hash not retained."
+        }
+      ],
+      "authored_model": {
+        "formula": "visit_start_k=sum(duration_of_prior_visits)",
+        "values": {
+          "written": [
+            "A",
+            "B",
+            "C"
+          ],
+          "durations_quarters": {
+            "A": 4,
+            "B": 4,
+            "C": 4
+          },
+          "playback": [
+            "A",
+            "B",
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "expected": {
+          "visit_starts_quarters": [
+            0,
+            4,
+            8,
+            12,
+            16
+          ],
+          "total_quarters": 20,
+          "B_visits": 2,
+          "second_B_start": 12,
+          "wrong_deduplicated_total": 12
+        },
+        "negative_control": "Deduplicating by written identity collapses repeated visits and shortens total20to12quarters.",
+        "assumptions": "Explicit traversal given, no nested repeats, alternate endings or jumps inferred.",
+        "limits": "No parser, playback engine or complete repeat interpreter executed.",
+        "negative_control_case": {
+          "values": {
+            "deduplicated": [
+              "A",
+              "B",
+              "C"
+            ],
+            "duration_each_quarters": 4
+          },
+          "expected": {
+            "total_quarters": 12,
+            "lost_quarters": 8
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "How many written measures and playback visits exist?",
+          "expected_answer": "There are 3 written measures and 5 visits; B has 2 visits."
+        },
+        "2": {
+          "question": "Where does the second B begin?",
+          "expected_answer": "At quarter coordinate 12; preserve written identity B and its second occurrence separately."
+        },
+        "3": {
+          "question": "What duration error follows from deduplication?",
+          "expected_answer": "The total shrinks from 20 to 12 quarters, losing 8 quarters."
+        },
+        "4": {
+          "question": "Can the example certify all repeat interpretation?",
+          "expected_answer": "No. Only the supplied five-visit traversal is checked; broader notation needs additional rules and tests."
+        },
+        "5": {
+          "question": "What distinguishes a second-visit annotation from a written-bar annotation?",
+          "expected_answer": "A retained visit identity and traversal context; written B alone cannot identify the second occurrence."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "There are 3 written measures and 5 visits; B has 2 visits.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "At quarter coordinate 12; preserve written identity B and its second occurrence separately.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "The total shrinks from 20 to 12 quarters, losing 8 quarters.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "No. Only the supplied five-visit traversal is checked; broader notation needs additional rules and tests.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "A retained visit identity and traversal context; written B alone cannot identify the second occurrence.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "WML008",
+      "module_id": "wml-008-retain-register-in-drone-relative-intervals",
+      "novelty_vs_prerequisites": "Signed absolute interval versus modulo class relative to an authored drone, beyond within-octave degree lookup.",
+      "prerequisites": [
+        "wml-007-resolve-scale-degrees-against-tonic-and-mode"
+      ],
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/capo-spelling-2026-10-22/degree-context.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "55215f759ee0060edd6e5771e0eef3b3b11e02458ef3027a6658451fbb6b911e",
+          "scope": "major/minor offset tables, absolute rows, invalid-domain and naive-index controls"
+        },
+        {
+          "path": "streeling/courses/world-music-languages/en/wml-007-resolve-scale-degrees-against-tonic-and-mode.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "6cdc497892019ec4163395c53f884187545a23809bb5789a931f29a12595441c",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        }
+      ],
+      "authored_model": {
+        "formula": "delta=note-drone; class=((delta%12)+12)%12",
+        "values": {
+          "drone": 60,
+          "notes": [
+            55,
+            67,
+            79
+          ]
+        },
+        "expected": {
+          "signed_semitones": [
+            -5,
+            7,
+            19
+          ],
+          "classes": [
+            7,
+            7,
+            7
+          ],
+          "reconstructed": [
+            55,
+            67,
+            79
+          ]
+        },
+        "negative_control": "Class7 alone cannot distinguish55,67,79 around drone60.",
+        "assumptions": "Absolute integer equal-tempered note coordinates; fixed reference60; no frequency-ratio or tradition claim.",
+        "limits": "No actual drone recording, microtonal system or singer tested.",
+        "negative_control_case": {
+          "values": {
+            "drone": 60,
+            "classes": [
+              7,
+              7,
+              7
+            ]
+          },
+          "expected": {
+            "naive_reconstructed": [
+              67,
+              67,
+              67
+            ],
+            "matches_original": false
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Give all signed distances and identify the lower note.",
+          "expected_answer": "Distances are `[-5,7,19]`; note 55 lies below drone 60."
+        },
+        "2": {
+          "question": "What classes result, and what information disappears?",
+          "expected_answer": "The classes are `[7,7,7]`; direction and octave displacement are lost."
+        },
+        "3": {
+          "question": "Reconstruct the three notes from full distances.",
+          "expected_answer": "They are `[55,67,79]`; class-only reconstruction would incorrectly yield `[67,67,67]`."
+        },
+        "4": {
+          "question": "Does this model establish a universal drone-relative vocabulary?",
+          "expected_answer": "No. It establishes only signed and reduced coordinates for the declared equal-tempered example."
+        },
+        "5": {
+          "question": "What must remain in the handoff to preserve reversibility?",
+          "expected_answer": "Reference60, signed distances, coordinate convention and original labels; reduced class7 alone is insufficient."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "Distances are `[-5,7,19]`; note 55 lies below drone 60.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "The classes are `[7,7,7]`; direction and octave displacement are lost.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "They are `[55,67,79]`; class-only reconstruction would incorrectly yield `[67,67,67]`.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "No. It establishes only signed and reduced coordinates for the declared equal-tempered example.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "Reference60, signed distances, coordinate convention and original labels; reduced class7 alone is insufficient.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "WML009",
+      "module_id": "wml-009-translate-rhythmic-terms-without-changing-counted-units",
+      "novelty_vs_prerequisites": "Operational localization of counted-unit labels through dimensioned duration equality, beyond origin and meter totals.",
+      "prerequisites": [
+        "wml-006-preserve-the-origin-of-an-additive-cycle",
+        "mcl-006-preserve-meter-grouping-and-tempo-units"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "41fae9c94fe4e7472414d2f9bc340d1a032a1302058a1ccd4f135ffff1acc8c5",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "path": "streeling/courses/world-music-languages/en/wml-006-preserve-the-origin-of-an-additive-cycle.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "529c1f410f2906b8af71cb2dadd007c143e558f30d5a2001eb87f8745a30386d",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "41fae9c94fe4e7472414d2f9bc340d1a032a1302058a1ccd4f135ffff1acc8c5",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        }
+      ],
+      "authored_model": {
+        "formula": "quarter_duration=count*unit_quarters; seconds=quarter_duration*60/quarter_BPM",
+        "values": {
+          "count": 6,
+          "source_unit_quarters": 0.5,
+          "wrong_target_unit_quarters": 1,
+          "quarter_BPM": 120,
+          "group_lengths_eighths": [
+            3,
+            3
+          ]
+        },
+        "expected": {
+          "source_quarters": 3,
+          "source_seconds": 1.5,
+          "wrong_quarters": 6,
+          "wrong_seconds": 3,
+          "starts_eighths": [
+            0,
+            3
+          ]
+        },
+        "negative_control": "Six quarter units retain numeral6 but double duration relative to six eighth units.",
+        "assumptions": "Explicit invented count vocabulary, constant tempo, no performed accents inferred.",
+        "limits": "No translation panel, cultural review or performer tested.",
+        "negative_control_case": {
+          "values": {
+            "count": 6,
+            "unit_quarters": 1,
+            "quarter_BPM": 120
+          },
+          "expected": {
+            "quarters": 6,
+            "seconds": 3,
+            "matches_source": false
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate the source duration in quarters and seconds.",
+          "expected_answer": "It is 3 quarters, equal to 1.5 seconds under the named tempo unit."
+        },
+        "2": {
+          "question": "What duration does candidate B request?",
+          "expected_answer": "It requests 6 quarters, or 3 seconds, twice the original duration."
+        },
+        "3": {
+          "question": "Give the two start lists and identify what equal totals fail to prove.",
+          "expected_answer": "They are `[0,3]` and `[0,2,4]`; equal totals do not prove identical grouping."
+        },
+        "4": {
+          "question": "What should happen when the counted unit is unspecified?",
+          "expected_answer": "Preserve the original term and ask for its operational unit; do not select a plausible duration silently."
+        },
+        "5": {
+          "question": "What is the manual acceptance baseline?",
+          "expected_answer": "Match duration, counted units and ordered anchored groups; fluent-language and musician judgments remain separate pending observations."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "It is 3 quarters, equal to 1.5 seconds under the named tempo unit.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "It requests 6 quarters, or 3 seconds, twice the original duration.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "They are `[0,3]` and `[0,2,4]`; equal totals do not prove identical grouping.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "Preserve the original term and ask for its operational unit; do not select a plausible duration silently.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "Match duration, counted units and ordered anchored groups; fluent-language and musician judgments remain separate pending observations.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    },
+    {
+      "code": "WML010",
+      "module_id": "wml-010-keep-unicode-note-labels-reversible",
+      "novelty_vs_prerequisites": "Loss-aware ASCII display mapping with original Unicode token retention, beyond declared naming conventions.",
+      "prerequisites": [
+        "wml-005-declare-note-name-conventions",
+        "wml-007-resolve-scale-degrees-against-tonic-and-mode"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/world-music-languages/en/wml-005-declare-note-name-conventions.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "6f2b4dc89deddd995693c2be4dee7bf2bb130d3e1d04b3691a7922bfeb8abcbb",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "path": "streeling/courses/world-music-languages/en/wml-005-declare-note-name-conventions.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "6f2b4dc89deddd995693c2be4dee7bf2bb130d3e1d04b3691a7922bfeb8abcbb",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "path": "streeling/courses/world-music-languages/en/wml-007-resolve-scale-degrees-against-tonic-and-mode.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "6cdc497892019ec4163395c53f884187545a23809bb5789a931f29a12595441c",
+          "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+        },
+        {
+          "url": "https://www.unicode.org/reports/tr15/tr15-58.html",
+          "pin": "Unicode18.0 UAX15 revision58, introduction and canonical/compatibility distinction; initial live annex read resolved to this version",
+          "sha256": null,
+          "scope": "Actual page body browsed; no execution, audio or empirical study replication. Remote body hash not retained."
+        }
+      ],
+      "authored_model": {
+        "formula": "display_map={\"C♯4\":\"C#4\",\"C#4\":\"C#4\"}; receipt=(original,display)",
+        "values": {
+          "originals": [
+            "C♯4",
+            "C#4"
+          ],
+          "sharp_codepoint": "U+266F",
+          "ascii_codepoint": "U+0023"
+        },
+        "expected": {
+          "displays": [
+            "C#4",
+            "C#4"
+          ],
+          "distinct_originals": 2,
+          "distinct_displays": 1,
+          "roundtrip_originals": [
+            "C♯4",
+            "C#4"
+          ]
+        },
+        "negative_control": "Display-only reverse cannot choose which of two originals produced C#4.",
+        "assumptions": "Explicit two-token alias vocabulary; no universal accidental normalizer, only original-preserving receipt.",
+        "limits": "No new parser execution, glyph rendering or language panel.",
+        "negative_control_case": {
+          "values": {
+            "display_only": [
+              "C#4",
+              "C#4"
+            ],
+            "reverse_always_musical": [
+              "C♯4",
+              "C♯4"
+            ]
+          },
+          "expected": {
+            "distinct_displays": 1,
+            "reversible": false,
+            "exact_restored_rows": 1
+          }
+        }
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "How many distinct original tokens are present?",
+          "expected_answer": "There are 2 distinct originals, distinguished by their accidental characters."
+        },
+        "2": {
+          "question": "Is this display map uniquely invertible by itself?",
+          "expected_answer": "No. Its single display value cannot identify which original token was supplied."
+        },
+        "3": {
+          "question": "What minimal retained data makes these two rows reversible?",
+          "expected_answer": "Keep each original alongside its display; original recovery then returns `C♯4` and `C#4` respectively."
+        },
+        "4": {
+          "question": "What fails if reverse mapping always emits the musical sharp?",
+          "expected_answer": "The ASCII-original row fails exact restoration; display-only data cannot distinguish the two cases."
+        },
+        "5": {
+          "question": "What may this source-assisted exercise establish?",
+          "expected_answer": "Only the two-token receipt's arithmetic count and exact restoration; parser acceptance and fluent terminology review remain unobserved."
+        }
+      },
+      "learner_criteria": [
+        {
+          "exercise": 1,
+          "criterion": "There are 2 distinct originals, distinguished by their accidental characters.",
+          "decision": null
+        },
+        {
+          "exercise": 2,
+          "criterion": "No. Its single display value cannot identify which original token was supplied.",
+          "decision": null
+        },
+        {
+          "exercise": 3,
+          "criterion": "Keep each original alongside its display; original recovery then returns `C♯4` and `C#4` respectively.",
+          "decision": null
+        },
+        {
+          "exercise": 4,
+          "criterion": "The ASCII-original row fails exact restoration; display-only data cannot distinguish the two cases.",
+          "decision": null
+        },
+        {
+          "exercise": 5,
+          "criterion": "Only the two-token receipt's arithmetic count and exact restoration; parser acceptance and fluent terminology review remain unobserved.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Recompute fixed main case and negative control manually; inspect cited artifact and retain source location, actual answer before reveal, assistance, falsifier, corrections and review. Compare direct baseline before a new abstraction.",
+        "actual_answers": null,
+        "assistance_received": null,
+        "review_decision": null,
+        "manual_baseline_observed": null,
+        "falsifier_observed": null
+      },
+      "runtime_results": null,
+      "human_technical_review": null,
+      "musician_review": null,
+      "fluent_language_review": null,
+      "learner_decision": null
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "code/streeling/guitar-runtime/run.mjs",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+      "scope": "lines1-55 including frame constants and partial-block minimum; PCM and measurement discussion in AUD005/AUD009 also read"
+    },
+    {
+      "path": "code/streeling/guitar-runtime/vendor/lib.rs",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "d693e1ea1a5ca42d080c5829336bcc8423396c104ebee64d2e76ccd9bb503562",
+      "scope": "excite body lines281-330, integer and fractional delay state; raw upstream engine body also browsed"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/string-occupancy.json",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "6356c1bbbe0151940c7df105d48e1cdb42a3ef1aec2d314dc6a5e205580eb1c3",
+      "scope": "scope, assumptions and base_events excerpt; retained outcomes are historical, not rerun"
+    },
+    {
+      "path": "code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "8b62207df7d7fa84e97053ef4d7c6cea36b7eae73ce7a867d14cfdbfa49b9cc6",
+      "scope": "scope, tuning, candidate and cue-policy excerpts"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/degree-context.json",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "55215f759ee0060edd6e5771e0eef3b3b11e02458ef3027a6658451fbb6b911e",
+      "scope": "major/minor offset tables, absolute rows, invalid-domain and naive-index controls"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/source-observations.json",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "15e75eb6c8b4f606194e4ab24fda42bbd2133f8d49542871be776b3c923728f9",
+      "scope": "full retained summary, historical failed decline gate unchanged"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/source-observations.json",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "b81027935227d237e818e080d86136aea37bd89076b3ce480f2be701e68f67f9",
+      "scope": "full retained static-source scope"
+    },
+    {
+      "path": "code/streeling/evidence/meter-picking-2026-10-22/source-observations.json",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "aa0e535e8ebe504866d94b1780784f21298aeb6167d30ba2e0b8b741e884aa7c",
+      "scope": "full retained static predictions; MIDI reachability correction taken from MCL006/MCL007"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-005-pcm-guards-and-format-boundaries.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "1f15d25a97ddff5b2f2ca57e1af9ababcc2a6c4a4b368306eb8b775316f35341",
+      "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-009-declare-alignment-before-a-null-test.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "ca5b9928bc5376c52ad6b2eaa55574ed989e5f3772e17c294ef78c9d9731a1ea",
+      "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-006-calibrate-spectral-amplitudes.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "b2fe07f89c5cf3c9f46cd1204a8a8ca1e22559338e57c033309fcd7996966d54",
+      "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-005-separate-a-partial-peak-from-a-period.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "074fcd679fe05c9ec0592b6d4d0589fb7edc7c21dd1769002609335f14c42e79",
+      "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-006-relate-pluck-position-to-string-modes.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "0eb9f99878d0d2714a8e09b59b0a8b25e76d8f546d7d2bd5b0454743196c404f",
+      "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-003-audit-voicing-playability.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "b70485d9d047e2ef9151e6732762031fb56b442cadaf0129ea0bf4e24476276a",
+      "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-005-plan-which-string-keeps-ringing.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "dfb660db8e69ca8286fdd6f6e0f642a949d838257e4f565debd632af1eddaf82",
+      "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-007-turn-a-voicing-result-into-a-practice-item.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "5e8990aff651d79bc42e376adcb27b2ff6b0c130b8206b0dc344dedecca8b5d6",
+      "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-006-separate-capo-shapes-from-sounding-pitches.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "e055691e582eedd19198e5138a0a7b761ab2ddcaf3698c92e6d7630375b0dba7",
+      "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "41fae9c94fe4e7472414d2f9bc340d1a032a1302058a1ccd4f135ffff1acc8c5",
+      "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-007-integrate-a-midi-tempo-map-before-scheduling.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "00fb1aab5455d884d2b31ad0f05dd9cbf5df4bb087a8042a4c6a5387cf64e2c1",
+      "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "7ace697db10e92593203a2ad956ba94816925f119d5f41934d15018d6374b2af",
+      "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-002-musical-form.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "c5b63c0d1de4bd43cc625df6abb7795de34ab8eaf40c9c3317e078fea3eb50b0",
+      "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-007-resolve-scale-degrees-against-tonic-and-mode.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "6cdc497892019ec4163395c53f884187545a23809bb5789a931f29a12595441c",
+      "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-006-preserve-the-origin-of-an-additive-cycle.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "529c1f410f2906b8af71cb2dadd007c143e558f30d5a2001eb87f8745a30386d",
+      "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-005-declare-note-name-conventions.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "6f2b4dc89deddd995693c2be4dee7bf2bb130d3e1d04b3691a7922bfeb8abcbb",
+      "scope": "Selected introductory/model paragraphs actually read for novelty and prerequisite boundary; not a fresh execution or whole-course validation"
+    }
+  ],
+  "human_reviews": null,
+  "musician_reviews": null,
+  "fluent_language_reviews": null,
+  "learner_attempts": null,
+  "new_engine_execution": null,
+  "listening": null,
+  "deployed_html": null,
+  "author_calculation_checks": {
+    "scope": "Author formula recomputation, not independent review or project execution",
+    "all_main_and_negative_cases_checked": true,
+    "transcription_corrections": [
+      {
+        "code": "GAS009",
+        "field": "next-delay signed cents",
+        "before": -34.975614192,
+        "after": -34.975614791
+      },
+      {
+        "code": "GAS010",
+        "field": "third partial Hz",
+        "before": 311.654958311,
+        "after": 311.654797607
+      }
+    ],
+    "human_or_learner_outcomes": null
+  }
+}

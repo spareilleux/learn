@@ -1,0 +1,145 @@
+---
+module_id: "cyb-009-bound-admission-with-a-token-bucket"
+department: "cybernetics"
+course: "Bound Admission with a Token Bucket"
+title: "Bound Admission with a Token Bucket"
+level: "intermediate"
+prerequisites: ["cyb-006-bound-retry-feedback-and-workload"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Bound Admission with a Token Bucket
+
+> **Draft scope.** Source-assisted authored fixed models. Human technical, fluent-language and learner decisions remain pending. No live fleet, production controller, user telemetry or learning improvement is claimed. The validation journal distinguishes tests actually executed from source reading and planned checks.
+
+## Sources to inspect
+
+- [cyb-006-bound-retry-feedback-and-workload.md](../../cybernetics/en/cyb-006-bound-retry-feedback-and-workload.md)
+- [dag.rs](https://raw.githubusercontent.com/GuitarAlchemist/ix/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/dag.rs)
+- [rfc2697.html](https://www.rfc-editor.org/rfc/rfc2697.html)
+
+An IX coordinator can correctly identify ready work and still admit too much of it during a burst. The retry prerequisite counts extra offered work; it does not define a burst limiter. Here an authored token bucket gives a precise admission rule that can be calculated with a pencil. It controls admission events, while a separate worker-slot rule would control concurrent execution. Neither one replaces the other.
+
+The RFC describes token buckets for packet metering with capacities and a replenishment rate. We borrow that accounting idea, not its complete packet-coloring specification. Our tokens represent permission to admit a unit-cost teaching job. The IX DAG source supplies dependency structure; it does not establish that this bucket has been installed. A graph node may therefore be ready under its dependencies and denied by this independent model.
+
+Start full and process arrivals in the declared order, including arrivals at the same instant. Refill only by elapsed time since the previous arrival and cap the balance. An admitted job spends its cost; a denied job does not spend tokens or move into an imaginary completed state. A simultaneous burst cannot gain fresh credit merely because the reporter processes its entries sequentially. This is why clock meaning and event order must be explicit.
+
+The retained trace includes denied arrivals. Deleting them would hide offered demand and make the limiter appear more generous than it is. Our model defines no waiting queue: denied means denied for that arrival. An implementation that queues denied jobs needs queue ownership, expiry, retry and cancellation semantics. Changing the token capacity also changes burst permission even when the long-run refill rate stays constant.
+
+Use the negative control with replenishment disabled. It isolates the initial credit from later credit. For the source-assisted task, compare the RFC's capacity and rate units with this course's job units and mark the difference on a manual ledger. Then inspect the IX predecessor query to identify graph readiness separately. Reject an assistant's proposal if it treats tokens as measured worker slots, silently refills between simultaneous arrivals, or claims this authored trace describes a live fleet.
+
+## Fixed case and expected calculations
+
+```json
+{
+  "values": {
+    "capacity_tokens": 3,
+    "refill_tokens_per_second": 1,
+    "cost_per_job": 1,
+    "arrivals_seconds": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      2
+    ]
+  },
+  "formula": "available=min(capacity, previous_tokens+rate*elapsed); admit iff available>=cost; debit only on admission",
+  "expected": {
+    "admitted": [
+      true,
+      true,
+      true,
+      false,
+      true,
+      false,
+      true
+    ],
+    "remaining": [
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "admissions": 5,
+    "denials": 2
+  },
+  "negative_control": "With refill zero only the initial burst of three is admitted.",
+  "assumptions": [
+    "Chronological arrivals, initial bucket full, unit job cost, exact seconds, no refund."
+  ],
+  "limits": "Authored job-admission model; not RFC2697 packet coloring or production IX scheduling."
+}
+```
+
+## Retain a source-assisted learner attempt
+
+Work from the pinned inputs listed above. Before asking for assistance, write your own prediction for the fixed case and its negative control, including the unit of every quantity and the exact comparison boundary. A short paper table is the direct manual baseline. Keep intermediate values, especially any result that contradicts your first prediction. This is an explanation task using existing sources and fixed data; it does not require installing a package, calling a paid service or introducing a new program.
+
+Next use an assistant to locate the relevant source passage and critique your calculation. Retain the original prompt, the response, the source location it cited and the changes you accepted or rejected. A citation is useful only when its inspected content supports the specific claim. A declared stage, a data type and a prose comment supply different kinds of evidence from an executed outcome. Explain that boundary in the final answer rather than borrowing the authority of a successful-looking label.
+
+Submit the manual baseline, corrected result, control outcome, falsifier and assistance history together. The prepared learner criteria ask whether the scope was identified, the calculation was correct, the counterexample was retained, the source supported the explanation and the conclusion respected its limits. Their decisions remain undecided until an actual learner answer exists. Answer keys below are prepared corrections, not evidence that anyone learned the material. A reviewer should preserve a failed criterion and its reason before any refinement, then judge the revised attempt separately. Runtime evidence and publication evidence, if later collected, need their own revision-bound records.
+
+### Exercise 1
+
+Give the admission decisions.
+
+<details>
+<summary>Answer 1</summary>
+
+`[true,true,true,false,true,false,true]`; `5` admissions and `2` denials.
+
+</details>
+
+### Exercise 2
+
+Give the remaining balances.
+
+<details>
+<summary>Answer 2</summary>
+
+`[2,1,0,0,0,0,0]`; simultaneous arrivals add no elapsed time.
+
+</details>
+
+### Exercise 3
+
+Evaluate the zero-refill control.
+
+<details>
+<summary>Answer 3</summary>
+
+Only `3` admissions; later arrivals receive no replenishment.
+
+</details>
+
+### Exercise 4
+
+Does admission bound concurrent jobs?
+
+<details>
+<summary>Answer 4</summary>
+
+Not without durations and a worker-slot rule; tokens track admission credit.
+
+</details>
+
+### Exercise 5
+
+What must a queued variant add?
+
+<details>
+<summary>Answer 5</summary>
+
+Explicit waiting, ownership, expiry and retry semantics; no live capacity measurement is supplied.
+
+</details>
+
+[Fixed evidence packet](../../../../code/streeling/evidence/batch50-2026-10-23/unit-b.json) · [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-23/journal.md)

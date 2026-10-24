@@ -19,3 +19,6 @@ sidebar:
 - [MCL-006 · Préserver les groupements métriques et les unités de tempo](mcl-006-preserve-meter-grouping-and-tempo-units/)
 - [MCL-007 · Intégrer une carte de tempo MIDI avant de planifier la lecture](mcl-007-integrate-a-midi-tempo-map-before-scheduling/)
 - [MCL-008 · Distinguer transposition diatonique et transposition chromatique](mcl-008-keep-diatonic-and-chromatic-transposition-separate/)
+- [MCL-009 · Conserver le décalage de l’anacrouse dans les adresses de mesure](mcl-009-preserve-pickup-offsets-in-bar-addresses/)
+- [MCL-010 · Distinguer le rapport de swing du tempo](mcl-010-separate-swing-ratio-from-tempo/)
+- [MCL-011 · Distinguer les reprises de l’identité des mesures écrites](mcl-011-keep-repeats-separate-from-written-bar-identity/)

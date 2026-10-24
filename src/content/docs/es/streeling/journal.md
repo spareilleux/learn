@@ -10,6 +10,21 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 
 ## Progreso
 
+## QA
+
+| Expectativa | Defecto observado | Corrección y medición | Estado y pruebas |
+| --- | --- | --- | --- |
+| Las descripciones traducidas corresponden a sus títulos. | 32 valores de metadatos FR/ES seguían en inglés. | 118 aprobadas/32 fallidas antes; 150 aprobadas/0 fallidas tras corregir los 32 valores. | Corregido en este lote; [cambios exactos](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/root-metadata-fix.json), [fallos](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/metadata-before-fix.json), [repetición](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/metadata-after-guard.json). |
+| Las pruebas rechazan cobertura ausente y conservan los diagnósticos. | Falso éxito con un plan vacío; aserciones anteriores a las observaciones; demora y cobertura impresas sin aserción independiente. | Comprobación del número de cursos, observaciones reordenadas, aserciones de valores y longitudes. Repetición: 69 pruebas nuevas y seis anteriores aprobadas. | Corregido en las pruebas revisadas; [diagnóstico e intentos conservados](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md). Solo casos construidos; pendientes las pruebas reales del software, la escucha y los alumnos. |
+
+
+## Experimentos
+
+| Pregunta | Hipótesis/estado | Resultado observado | Veredicto y límites | Registro |
+| --- | --- | --- | --- | --- |
+| ¿Siguen pasando las pruebas de regresión existentes del generador Streeling? | Control de regresión; sin prerregistro científico. | 18 aprobadas, 0 fallidas; Node v24.12.0. | Aprobado para estas pruebas del generador; ninguna conclusión sobre el dominio o el aprendizaje. | [Ejecución conservada](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/generator-initial.json) |
+
+
 ### Ingeniería de audio
 
 - [ ] [AUD-001 · EQ y compresión](../audio-engineering/aud-001-eq-compression-order/) <!-- aud-001-eq-compression-order -->
@@ -298,3 +313,39 @@ Sincronizado desde Demerzel en [`0f7a5fd`](https://github.com/GuitarAlchemist/De
 Aquí no se ejecutó nada de él.
 
 - **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-10-23 — Lote de50: probar, registrar, refinar y repetir
+
+Esto es verificación de producción, no un intento de aprendizaje completado. El lote solicitado contiene50 cursos ingleses distintos, traducidos íntegramente al francés y al español. [El plan](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/batch-plan.json) fija las150 fuentes y la revisión inicial. La redacción y la lectura de fuentes avanzan en tres conjuntos de archivos separados. No se marca ninguna casilla de curso estudiado por ese trabajo.
+
+Comando ejecutado: `node --test scripts/tests/lazy-demo.test.mjs scripts/tests/streeling-copy-source.test.mjs scripts/tests/sync-streeling.test.mjs`; 18 aprobadas, 0 fallidas. Se conservan la [salida completa](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/generator-initial.log) y las [huellas de las entradas y el código de salida](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/generator-initial.json). Esto verifica el generador existente, no los cálculos de los nuevos cursos.
+
+La petición adicional exige un [ciclo de validación de afirmaciones](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal-validation-plan.md): derivar y ejecutar comprobaciones, conservar los fallos, corregir cursos y pruebas, repetir y registrar los límites. Las pruebas específicas de afirmaciones y la revisión independiente siguen pendientes en esta entrada. No se ha realizado ningún nuevo ensayo de audio, escenas, materiales, humanos o aprendizaje.
+
+## 2026-10-23 — Comprobación baseline-audio-01
+
+Ejecución de `baseline-audio-01` para3 cursos: código0, 6 pruebas, cobertura de casos/contraejemplos True. Veredicto: aprobado. El [registro](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/baseline-audio-01.json) conserva comando, huellas y valores calculados; la [salida completa](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/baseline-audio-01.log) conserva los fallos. El [diario de producción](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) conserva la expectativa previa, el diagnóstico, las correcciones y las repeticiones. El alcance son los casos construidos, no nuevos ensayos del software, de músicos o de aprendices.
+
+## 2026-10-23 — Comprobación claims-a-01
+
+Ejecución de `claims-a-01` para18 cursos: código0, 36 pruebas, cobertura de casos/contraejemplos True. Veredicto: aprobado. El [registro](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-a-01.json) conserva comando, huellas y valores calculados; la [salida completa](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-a-01.log) conserva los fallos. El [diario de producción](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) conserva la expectativa previa, el diagnóstico, las correcciones y las repeticiones. El alcance son los casos construidos, no nuevos ensayos del software, de músicos o de aprendices.
+
+## 2026-10-23 — Comprobación claims-c-01
+
+Ejecución de `claims-c-01` para16 cursos: código0, 16 pruebas, cobertura de casos/contraejemplos True. Veredicto: aprobado. El [registro](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-c-01.json) conserva comando, huellas y valores calculados; la [salida completa](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-c-01.log) conserva los fallos. El [diario de producción](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) conserva la expectativa previa, el diagnóstico, las correcciones y las repeticiones. El alcance son los casos construidos, no nuevos ensayos del software, de músicos o de aprendices.
+
+## 2026-10-23 — Comprobación claims-b-01
+
+Ejecución de `claims-b-01` para16 cursos: código0, 17 pruebas, cobertura de casos/contraejemplos True. Veredicto: aprobado. El [registro](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-b-01.json) conserva comando, huellas y valores calculados; la [salida completa](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-b-01.log) conserva los fallos. El [diario de producción](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) conserva la expectativa previa, el diagnóstico, las correcciones y las repeticiones. El alcance son los casos construidos, no nuevos ensayos del software, de músicos o de aprendices.
+
+## 2026-10-23 — Comprobación claims-all-01
+
+Ejecución de `claims-all-01` para50 cursos: código0, 69 pruebas, cobertura de casos/contraejemplos True. Veredicto: aprobado. El [registro](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-all-01.json) conserva comando, huellas y valores calculados; la [salida completa](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-all-01.log) conserva los fallos. El [diario de producción](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) conserva la expectativa previa, el diagnóstico, las correcciones y las repeticiones. El alcance son los casos construidos, no nuevos ensayos del software, de músicos o de aprendices.
+
+## 2026-10-23 — Comprobación claims-all-02
+
+Ejecución de `claims-all-02` para50 cursos: código0, 69 pruebas, cobertura de casos/contraejemplos True. Veredicto: aprobado. El [registro](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-all-02.json) conserva comando, huellas y valores calculados; la [salida completa](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-all-02.log) conserva los fallos. El [diario de producción](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) conserva la expectativa previa, el diagnóstico, las correcciones y las repeticiones. El alcance son los casos construidos, no nuevos ensayos del software, de músicos o de aprendices.
+
+## 2026-10-23 — Comprobación baseline-audio-02
+
+Ejecución de `baseline-audio-02` para3 cursos: código0, 6 pruebas, cobertura de casos/contraejemplos True. Veredicto: aprobado. El [registro](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/baseline-audio-02.json) conserva comando, huellas y valores calculados; la [salida completa](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/baseline-audio-02.log) conserva los fallos. El [diario de producción](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) conserva la expectativa previa, el diagnóstico, las correcciones y las repeticiones. El alcance son los casos construidos, no nuevos ensayos del software, de músicos o de aprendices.

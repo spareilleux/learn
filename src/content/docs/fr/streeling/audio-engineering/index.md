@@ -20,3 +20,6 @@ sidebar:
 - [AUD-007 · Traduire les coefficients d'attaque en durées](aud-007-translate-attack-coefficients-into-time/)
 - [AUD-008 · Mesurer un filtre avec une entrée et une sortie appariées](aud-008-measure-a-filter-with-paired-input-and-output/)
 - [AUD-009 · Déclarer l’alignement avant un test d’annulation](aud-009-declare-alignment-before-a-null-test/)
+- [AUD-010 · Préserver les canaux avant de réduire en mono](aud-010-preserve-channels-before-downmixing/)
+- [AUD-011 · Compter les trames valides séparément du remplissage des blocs](aud-011-count-valid-frames-separately-from-block-padding/)
+- [AUD-012 · Choisir un fondu en explicitant son coût énergétique](aud-012-choose-a-fade-without-hiding-its-energy-cost/)

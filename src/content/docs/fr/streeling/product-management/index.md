@@ -18,3 +18,5 @@ sidebar:
 - [PM-005 · Interpréter les expériences de coexistence BRUTAL avant de choisir un réglage par défaut](pm-005-interpret-brutal-coexistence-experiments/)
 - [PM-006 · Évaluer un essai pilote selon son horizon de décision](pm-006-test-a-pilot-against-its-decision-horizon/)
 - [PM-007 · Mesurer la latence de lecture du point de vue de l'utilisateur](pm-007-measure-playback-latency-at-the-user-boundary/)
+- [PM-008 · Dimensionner un lot de cinquante cours selon la capacité de revue](pm-008-size-a-fifty-course-batch-by-review-capacity/)
+- [PM-009 · Distinguer adoption d’une version et téléchargements](pm-009-separate-release-adoption-from-artifact-downloads/)

@@ -21,6 +21,9 @@ sidebar:
 - [VC-008 · Save and Query a Weave Scene](vc-008-save-and-query-a-weave-scene/)
 - [VC-009 · Budget BRUTAL Scene Expansion Before Rendering](vc-009-budget-brutal-scene-expansion/)
 - [VC-010 · Preserve Packed Texture Channel Contracts](vc-010-preserve-packed-texture-channel-contracts/)
+- [VC-011 · Preserve Tangent Handedness After a Mirror](vc-011-preserve-tangent-handedness-after-a-mirror/)
+- [VC-012 · Separate Mesh Instances from Draw Calls](vc-012-separate-mesh-instances-from-draw-calls/)
+- [VC-013 · Keep Triangle Winding Consistent with Transforms](vc-013-keep-triangle-winding-consistent-with-transforms/)
 
 ## Course catalog (planned)
 

@@ -18,3 +18,6 @@ sidebar:
 - [GAA-005 · Repair a Phrase Without Hiding the Change](gaa-005-repair-a-phrase-without-hiding-the-change/)
 - [GAA-006 · Separate Capo Shapes from Sounding Pitches](gaa-006-separate-capo-shapes-from-sounding-pitches/)
 - [GAA-007 · Turn a Voicing Result Into a Practice Item](gaa-007-turn-a-voicing-result-into-a-practice-item/)
+- [GAA-008 · Schedule Retrieval with an Explicit Due Rule](gaa-008-schedule-retrieval-with-an-explicit-due-rule/)
+- [GAA-009 · Test Transposition Beyond a Memorized Fret Pattern](gaa-009-test-transposition-beyond-a-memorized-fret-pattern/)
+- [GAA-010 · Define a Practice Pass Before Counting Success](gaa-010-define-a-practice-pass-before-counting-success/)

@@ -20,3 +20,6 @@ sidebar:
 - [INF-007 · Count Crease Candidates without Inventing Probabilities](inf-007-count-crease-candidates-without-inventing-probabilities/)
 - [INF-008 · Keep Phase When Waveform Identity Matters](inf-008-keep-phase-when-waveform-identity-matters/)
 - [INF-009 · Keep Level When Normalizing Waveform Shape](inf-009-keep-level-when-normalizing-waveform-shape/)
+- [INF-010 · Keep Joint Outcomes When Composing Verdicts](inf-010-keep-joint-outcomes-when-composing-verdicts/)
+- [INF-011 · Separate Compressed Size from Preserved Information](inf-011-separate-compressed-size-from-preserved-information/)
+- [INF-012 · Retain Event Order in a Handoff Summary](inf-012-retain-event-order-in-a-handoff-summary/)

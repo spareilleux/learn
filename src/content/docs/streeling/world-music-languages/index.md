@@ -18,3 +18,6 @@ sidebar:
 - [WML-005 · Declare the Note-Name Convention Before Interpreting B](wml-005-declare-note-name-conventions/)
 - [WML-006 · Preserve the Origin of an Additive Cycle](wml-006-preserve-the-origin-of-an-additive-cycle/)
 - [WML-007 · Resolve Scale Degrees Against Tonic and Mode](wml-007-resolve-scale-degrees-against-tonic-and-mode/)
+- [WML-008 · Retain Register in Drone Relative Intervals](wml-008-retain-register-in-drone-relative-intervals/)
+- [WML-009 · Translate Rhythmic Terms Without Changing Counted Units](wml-009-translate-rhythmic-terms-without-changing-counted-units/)
+- [WML-010 · Keep Unicode Note Labels Reversible](wml-010-keep-unicode-note-labels-reversible/)

@@ -19,3 +19,6 @@ sidebar:
 - [MCL-006 · Preserve Meter Grouping and Tempo Units](mcl-006-preserve-meter-grouping-and-tempo-units/)
 - [MCL-007 · Integrate a MIDI Tempo Map Before Scheduling](mcl-007-integrate-a-midi-tempo-map-before-scheduling/)
 - [MCL-008 · Keep Diatonic and Chromatic Transposition Separate](mcl-008-keep-diatonic-and-chromatic-transposition-separate/)
+- [MCL-009 · Preserve Pickup Offsets in Bar Addresses](mcl-009-preserve-pickup-offsets-in-bar-addresses/)
+- [MCL-010 · Separate Swing Ratio from Tempo](mcl-010-separate-swing-ratio-from-tempo/)
+- [MCL-011 · Keep Repeats Separate from Written Bar Identity](mcl-011-keep-repeats-separate-from-written-bar-identity/)

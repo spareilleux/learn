@@ -19,3 +19,6 @@ sidebar:
 - [GAS-006 · Relate Pluck Position to String Modes](gas-006-relate-pluck-position-to-string-modes/)
 - [GAS-007 · Distinguish Body Poles from String Partials](gas-007-distinguish-body-poles-from-string-partials/)
 - [GAS-008 · Separate Beating from a Change in Damping](gas-008-separate-beating-from-a-change-in-damping/)
+- [GAS-009 · Estimate Tuning Error from Integer Delay Length](gas-009-estimate-tuning-error-from-integer-delay-length/)
+- [GAS-010 · Distinguish Stiff String Partials from Harmonics](gas-010-distinguish-stiff-string-partials-from-harmonics/)
+- [GAS-011 · Track Reflection Polarity at String Boundaries](gas-011-track-reflection-polarity-at-string-boundaries/)

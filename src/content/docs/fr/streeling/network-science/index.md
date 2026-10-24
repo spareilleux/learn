@@ -20,3 +20,5 @@ sidebar:
 - [NET-007 · Distinguer la disponibilité des nœuds d'un DAG de leur admission à l'exécution](net-007-separate-dag-readiness-from-admission/)
 - [NET-008 · Mettre en correspondance les domaines d'horloge avant d'ordonner les événements](net-008-map-clock-domains-before-ordering-events/)
 - [NET-009 · Détecter les cycles globaux dans un empilement de panneaux](net-009-detect-global-cycles-in-a-panel-stack/)
+- [NET-010 · Calculer les chemins critiques en précisant les ressources](net-010-compute-critical-paths-with-resource-assumptions/)
+- [NET-011 · Distinguer accessibilité et compatibilité sémantique](net-011-separate-reachability-from-semantic-compatibility/)

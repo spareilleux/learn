@@ -21,3 +21,6 @@ sidebar:
 - [DV-008 · Visualiser les sources, la relecture et la vérification publique de Streeling](dv-008-streeling-evidence-stage-map/)
 - [DV-009 · Comparer des spectrogrammes sans masquer un changement de gain](dv-009-compare-spectrogram-color-scales/)
 - [DV-010 · Afficher les erreurs de hauteur et les estimations manquantes](dv-010-show-pitch-errors-and-missing-estimates/)
+- [DV-011 · Conserver les effectifs derrière une carte thermique normalisée](dv-011-retain-raw-counts-behind-normalized-heatmaps/)
+- [DV-012 · Calculer les quantiles avant de réunir des cohortes de latence](dv-012-compute-quantiles-before-combining-latency-cohorts/)
+- [DV-013 · Comparer les courbes d’apprentissage à budget d’évaluation égal](dv-013-compare-learning-curves-at-equal-evaluation-budgets/)

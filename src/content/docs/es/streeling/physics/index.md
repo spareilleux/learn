@@ -23,3 +23,6 @@ sidebar:
 - [PHY-010 · Comprobar los ángulos locales de un plegado plano](phy-010-check-local-flat-fold-angles/)
 - [PHY-011 · Calcular la longitud de doblado en una capa neutra declarada](phy-011-compute-bend-length-on-a-declared-neutral-layer/)
 - [PHY-012 · Rotar la rigidez direccional con el material](phy-012-rotate-directional-stiffness-with-the-material/)
+- [PHY-013 · Comprobar el par al desplazar un pivote de escena](phy-013-check-torque-when-moving-a-scene-pivot/)
+- [PHY-014 · Conservar los supuestos de masa al escalar una malla artesanal](phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh/)
+- [PHY-015 · Acotar la holgura al engrosar un panel](phy-015-bound-clearance-after-thickening-a-panel/)

@@ -18,3 +18,5 @@ sidebar:
 - [FUT-005 · Évaluer l'intérêt d'un essai pilote de moteur de rendu avant de le lancer](fut-005-value-a-renderer-pilot-before-running-it/)
 - [FUT-006 · Tester une promesse d'automatisation créative sans étirement](fut-006-test-a-no-stretch-craft-automation-claim/)
 - [FUT-007 · Tester un générateur de tissage au-delà de son aperçu](fut-007-test-a-weave-generator-outside-its-preview/)
+- [FUT-008 · Éprouver un plan de publication face à l’accumulation des relectures](fut-008-stress-test-a-release-plan-against-review-backlogs/)
+- [FUT-009 · Comparer adoption progressive et migration irréversible](fut-009-compare-staged-adoption-with-an-irreversible-migration/)

@@ -25,3 +25,6 @@ sidebar:
 - [CS-012 · Límites de la comparación entre renderizados nativos y WASM](cs-012-native-and-wasm-render-boundaries/)
 - [CS-013 · Preservar ejes y unidades al componer salidas espectrales](cs-013-preserve-spectral-axes-and-units/)
 - [CS-014 · Componer descripciones de escenas BRUTAL con bloques F# tipados](cs-014-compose-brutal-scene-descriptions/)
+- [CS-015 · Componer bloques solapados sin duplicar fotogramas](cs-015-compose-overlapping-chunks-without-duplicate-frames/)
+- [CS-016 · Convertir la cancelación en un resultado explícito del pipeline](cs-016-make-cancellation-an-explicit-pipeline-outcome/)
+- [CS-017 · Probar reescrituras de pipelines con contraejemplos](cs-017-test-pipeline-rewrites-with-counterexamples/)

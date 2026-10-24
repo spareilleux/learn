@@ -23,3 +23,6 @@ sidebar:
 - [PHY-010 · Vérifier les angles locaux d'un pliage à plat](phy-010-check-local-flat-fold-angles/)
 - [PHY-011 · Calculer la longueur de pliage sur une couche neutre déclarée](phy-011-compute-bend-length-on-a-declared-neutral-layer/)
 - [PHY-012 · Faire tourner la rigidité directionnelle avec le matériau](phy-012-rotate-directional-stiffness-with-the-material/)
+- [PHY-013 · Vérifier le couple lors du déplacement d’un pivot de scène](phy-013-check-torque-when-moving-a-scene-pivot/)
+- [PHY-014 · Préserver les hypothèses de masse lors du redimensionnement d’un maillage](phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh/)
+- [PHY-015 · Borner le jeu après épaississement d’un panneau](phy-015-bound-clearance-after-thickening-a-panel/)

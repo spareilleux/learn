@@ -23,3 +23,6 @@ sidebar:
 - [PHY-010 · Check Local Flat-Fold Angles](phy-010-check-local-flat-fold-angles/)
 - [PHY-011 · Compute Bend Length on a Declared Neutral Layer](phy-011-compute-bend-length-on-a-declared-neutral-layer/)
 - [PHY-012 · Rotate Directional Stiffness with the Material](phy-012-rotate-directional-stiffness-with-the-material/)
+- [PHY-013 · Check Torque When Moving a Scene Pivot](phy-013-check-torque-when-moving-a-scene-pivot/)
+- [PHY-014 · Preserve Mass Assumptions When Scaling a Craft Mesh](phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh/)
+- [PHY-015 · Bound Clearance After Thickening a Panel](phy-015-bound-clearance-after-thickening-a-panel/)

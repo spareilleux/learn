@@ -19,3 +19,6 @@ sidebar:
 - [GTR-006 · Referir la distancia de pulsación a los trastes](gtr-006-keep-picking-distance-relative-to-frets/)
 - [GTR-007 · Conservar la fase de púa alternada a través de las barras de compás](gtr-007-carry-picking-phase-across-bar-lines/)
 - [GTR-008 · Contar una sola vez el desplazamiento de la cejilla](gtr-008-count-a-capo-offset-once/)
+- [GTR-009 · Reservar tiempo para un cambio de posición](gtr-009-budget-time-for-a-position-shift/)
+- [GTR-010 · Distinguir apagar una cuerda de liberar una nota pisada](gtr-010-separate-muting-from-releasing-a-fretted-note/)
+- [GTR-011 · Comprobar la cobertura de una cejilla antes de declarar tocable una forma](gtr-011-test-barre-coverage-before-calling-a-shape-playable/)

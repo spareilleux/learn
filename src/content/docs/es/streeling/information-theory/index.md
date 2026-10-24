@@ -20,3 +20,6 @@ sidebar:
 - [INF-007 · Contar candidatos de pliegues sin inventar probabilidades](inf-007-count-crease-candidates-without-inventing-probabilities/)
 - [INF-008 · Conservar la fase cuando importa la identidad de las formas de onda](inf-008-keep-phase-when-waveform-identity-matters/)
 - [INF-009 · Conservar el nivel al normalizar la forma de onda](inf-009-keep-level-when-normalizing-waveform-shape/)
+- [INF-010 · Conservar resultados conjuntos al componer veredictos](inf-010-keep-joint-outcomes-when-composing-verdicts/)
+- [INF-011 · Separar el tamaño comprimido de la información conservada](inf-011-separate-compressed-size-from-preserved-information/)
+- [INF-012 · Conservar el orden de los eventos en un traspaso](inf-012-retain-event-order-in-a-handoff-summary/)

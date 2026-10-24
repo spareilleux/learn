@@ -19,3 +19,6 @@ sidebar:
 - [SEM-006 · Preserve Orientation Across Scene Frames](sem-006-preserve-orientation-across-scene-frames/)
 - [SEM-007 · Preserve the Meaning of a Bend Angle](sem-007-preserve-the-meaning-of-a-bend-angle/)
 - [SEM-008 · Interpret Layer Order Relative to the Reference Normal](sem-008-interpret-layer-order-relative-to-the-reference-normal/)
+- [SEM-009 · Keep Units in a Composed Craft Instruction](sem-009-keep-units-in-a-composed-craft-instruction/)
+- [SEM-010 · Distinguish Stable Course Identity from Display Names](sem-010-distinguish-stable-course-identity-from-display-names/)
+- [SEM-011 · Version a DSL Meaning Before Renaming Its Syntax](sem-011-version-a-dsl-meaning-before-renaming-its-syntax/)

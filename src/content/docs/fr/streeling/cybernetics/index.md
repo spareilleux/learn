@@ -19,3 +19,6 @@ sidebar:
 - [CYB-006 · Borner la rétroaction des nouvelles tentatives avant d'ajouter des workers](cyb-006-bound-retry-feedback-and-workload/)
 - [CYB-007 · Mettre à jour les croyances sans compter un essai deux fois](cyb-007-update-beliefs-without-counting-a-trial-twice/)
 - [CYB-008 · Vérifier la convergence avant de répéter une correction](cyb-008-check-convergence-before-repeating-a-correction/)
+- [CYB-009 · Limiter l’admission avec un seau à jetons](cyb-009-bound-admission-with-a-token-bucket/)
+- [CYB-010 · Distinguer le bruit de dérivation du mouvement du système](cyb-010-separate-derivative-noise-from-plant-motion/)
+- [CYB-011 · Éviter l’accumulation intégrale en saturation](cyb-011-prevent-integral-accumulation-under-saturation/)

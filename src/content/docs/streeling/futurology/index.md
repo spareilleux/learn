@@ -18,3 +18,5 @@ sidebar:
 - [FUT-005 · Value a Renderer Pilot before Running It](fut-005-value-a-renderer-pilot-before-running-it/)
 - [FUT-006 · Test a No-Stretch Craft Automation Claim](fut-006-test-a-no-stretch-craft-automation-claim/)
 - [FUT-007 · Test a Weave Generator Outside Its Preview](fut-007-test-a-weave-generator-outside-its-preview/)
+- [FUT-008 · Stress Test a Release Plan Against Review Backlogs](fut-008-stress-test-a-release-plan-against-review-backlogs/)
+- [FUT-009 · Compare Staged Adoption with an Irreversible Migration](fut-009-compare-staged-adoption-with-an-irreversible-migration/)

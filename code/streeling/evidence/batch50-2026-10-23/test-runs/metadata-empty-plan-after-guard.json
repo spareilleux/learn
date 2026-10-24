@@ -1,0 +1,19 @@
+{
+  "tag": "metadata-empty-plan-after-guard",
+  "recorded_at_utc": "2026-10-24T00:26:20.314039+00:00",
+  "args": [
+    "node",
+    "--test",
+    "C:\\tmp\\batch50-empty-plan-y8xh80dy\\tests\\test_course_metadata.mjs"
+  ],
+  "exit_code": 1,
+  "incorrect_empty_plan_rejected": true,
+  "canonical_test_sha256": "3e0b59bad7c04d955cc116002dd53eb558fe2d76c2334afec68a5ccde85dbc38",
+  "probe_test_sha256": "181e9f78963ce661099127193ce7adf7f7a5926145660e1da4fa77b39d34e41b",
+  "probe_input": {
+    "courses": []
+  },
+  "probe_scope": "Temporary copy; only dependency import rewritten to canonical helper URL. Empty plan is a separate incorrect input. No canonical data/test mutation by this probe.",
+  "log": "code/streeling/evidence/batch50-2026-10-23/test-runs/metadata-empty-plan-after-guard.log",
+  "log_sha256": "3b3b12deb57a7279e1c8a348462ea2c0179c037c6df621657893525eedf0635b"
+}

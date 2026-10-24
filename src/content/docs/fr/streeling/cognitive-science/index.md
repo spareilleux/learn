@@ -19,3 +19,6 @@ sidebar:
 - [COG-006 · Distinguer les tests de pixels des jugements d'apparence](cog-006-separate-pixel-tests-from-appearance-judgments/)
 - [COG-007 · Distinguer le rappel sans aide de la réussite assistée](cog-007-separate-unaided-recall-from-assisted-success/)
 - [COG-008 · Choisir des questions qui distinguent les modèles de raisonnement](cog-008-choose-probes-that-distinguish-reasoning-models/)
+- [COG-009 · Contrebalancer l’ordre de pratique avant de comparer des interfaces](cog-009-counterbalance-practice-order-before-comparing-interfaces/)
+- [COG-010 · Utiliser des épreuves différées de transfert au-delà des items répétés](cog-010-use-delayed-transfer-probes-beyond-repeated-items/)
+- [COG-011 · Mesurer le désaccord de notation avant arbitrage](cog-011-measure-rubric-disagreement-before-adjudication/)

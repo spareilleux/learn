@@ -21,6 +21,9 @@ sidebar:
 - [VC-008 · Guardar y consultar una escena de tejido](vc-008-save-and-query-a-weave-scene/)
 - [VC-009 · Presupuestar la expansión de escenas BRUTAL antes de renderizarlas](vc-009-budget-brutal-scene-expansion/)
 - [VC-010 · Conservar los contratos de canales de las texturas empaquetadas](vc-010-preserve-packed-texture-channel-contracts/)
+- [VC-011 · Conservar la orientación de la base tangente tras un reflejo](vc-011-preserve-tangent-handedness-after-a-mirror/)
+- [VC-012 · Distinguir instancias de malla y llamadas de dibujo](vc-012-separate-mesh-instances-from-draw-calls/)
+- [VC-013 · Mantener coherentes el orden de los triángulos y las transformaciones](vc-013-keep-triangle-winding-consistent-with-transforms/)
 
 ## Catálogo de cursos (previsto)
 

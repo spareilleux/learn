@@ -19,3 +19,6 @@ sidebar:
 - [CYB-006 · Bound Retry Feedback Before Adding Workers](cyb-006-bound-retry-feedback-and-workload/)
 - [CYB-007 · Update Beliefs without Counting a Trial Twice](cyb-007-update-beliefs-without-counting-a-trial-twice/)
 - [CYB-008 · Check Convergence Before Repeating a Correction](cyb-008-check-convergence-before-repeating-a-correction/)
+- [CYB-009 · Bound Admission with a Token Bucket](cyb-009-bound-admission-with-a-token-bucket/)
+- [CYB-010 · Separate Derivative Noise from Plant Motion](cyb-010-separate-derivative-noise-from-plant-motion/)
+- [CYB-011 · Prevent Integral Accumulation Under Saturation](cyb-011-prevent-integral-accumulation-under-saturation/)

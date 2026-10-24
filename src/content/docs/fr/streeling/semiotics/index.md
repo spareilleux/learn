@@ -19,3 +19,6 @@ sidebar:
 - [SEM-006 · Préserver l'orientation entre les repères d'une scène](sem-006-preserve-orientation-across-scene-frames/)
 - [SEM-007 · Préserver le sens d'un angle de pliage](sem-007-preserve-the-meaning-of-a-bend-angle/)
 - [SEM-008 · Interpréter l'ordre des couches par rapport à la normale de référence](sem-008-interpret-layer-order-relative-to-the-reference-normal/)
+- [SEM-009 · Conserver les unités dans une instruction artisanale composée](sem-009-keep-units-in-a-composed-craft-instruction/)
+- [SEM-010 · Distinguer identité stable d’un cours et titre affiché](sem-010-distinguish-stable-course-identity-from-display-names/)
+- [SEM-011 · Versionner le sens d’un DSL avant de renommer sa syntaxe](sem-011-version-a-dsl-meaning-before-renaming-its-syntax/)

@@ -20,3 +20,5 @@ sidebar:
 - [NET-007 · Separate DAG Readiness from Worker Admission](net-007-separate-dag-readiness-from-admission/)
 - [NET-008 · Map Clock Domains Before Ordering Events](net-008-map-clock-domains-before-ordering-events/)
 - [NET-009 · Detect Global Cycles in a Panel Stack](net-009-detect-global-cycles-in-a-panel-stack/)
+- [NET-010 · Compute Critical Paths with Resource Assumptions](net-010-compute-critical-paths-with-resource-assumptions/)
+- [NET-011 · Separate Reachability from Semantic Compatibility](net-011-separate-reachability-from-semantic-compatibility/)

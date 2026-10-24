@@ -18,3 +18,6 @@ sidebar:
 - [GAA-005 · Réparer une phrase sans dissimuler la modification](gaa-005-repair-a-phrase-without-hiding-the-change/)
 - [GAA-006 · Distinguer les formes d'accord avec capo des hauteurs réelles](gaa-006-separate-capo-shapes-from-sounding-pitches/)
 - [GAA-007 · Transformer un résultat de voicing en question d'entraînement](gaa-007-turn-a-voicing-result-into-a-practice-item/)
+- [GAA-008 · Programmer le rappel avec une règle d’échéance explicite](gaa-008-schedule-retrieval-with-an-explicit-due-rule/)
+- [GAA-009 · Tester la transposition au-delà d’un dessin de cases mémorisé](gaa-009-test-transposition-beyond-a-memorized-fret-pattern/)
+- [GAA-010 · Définir une réussite de pratique avant de compter les succès](gaa-010-define-a-practice-pass-before-counting-success/)

@@ -19,3 +19,6 @@ sidebar:
 - [GAS-006 · Relier la position de pincement aux modes de la corde](gas-006-relate-pluck-position-to-string-modes/)
 - [GAS-007 · Distinguer les pôles de caisse des partiels de corde](gas-007-distinguish-body-poles-from-string-partials/)
 - [GAS-008 · Distinguer les battements d’un changement d’amortissement](gas-008-separate-beating-from-a-change-in-damping/)
+- [GAS-009 · Estimer l’erreur d’accordage due à une longueur de retard entière](gas-009-estimate-tuning-error-from-integer-delay-length/)
+- [GAS-010 · Distinguer les partiels d’une corde raide des harmoniques](gas-010-distinguish-stiff-string-partials-from-harmonics/)
+- [GAS-011 · Suivre la polarité des réflexions aux extrémités d’une corde](gas-011-track-reflection-polarity-at-string-boundaries/)

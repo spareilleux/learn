@@ -1,0 +1,2090 @@
+{
+  "schema": "streeling-batch50-unit-evidence-v1",
+  "scope": "Unit B author fixed models and source-reading evidence; author self-check is not independent review. No human, fluent-language, learner or production-runtime acceptance.",
+  "base_learn_commit": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+  "unit": "b",
+  "courses": [
+    {
+      "code": "CS015",
+      "module_id": "cs-015-compose-overlapping-chunks-without-duplicate-frames",
+      "source_paths": {
+        "en": "streeling/courses/computer-science/en/cs-015-compose-overlapping-chunks-without-duplicate-frames.md",
+        "fr": "streeling/courses/computer-science/fr/cs-015-compose-overlapping-chunks-without-duplicate-frames.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-015-compose-overlapping-chunks-without-duplicate-frames.es.md"
+      },
+      "novelty_vs_prerequisites": "CS013 recovers spectral axes and complete-window support; this lesson assigns ownership of overlapping output indices and proves union coverage without duplicate emission.",
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/computer-science/en/cs-013-preserve-spectral-axes-and-units.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "ad9ff783ab13e0cb3a3096d8a8906cdcc648ec91ecea8ee74531ae04b342a311",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "chunks": [
+            [
+              0,
+              6
+            ],
+            [
+              4,
+              10
+            ],
+            [
+              8,
+              12
+            ]
+          ],
+          "target": [
+            0,
+            12
+          ]
+        },
+        "formula": "half-open intervals; first writer owns an index; retain sorted union",
+        "expected": {
+          "raw_frames": 16,
+          "distinct_frames": 12,
+          "duplicate_emissions": 4,
+          "owned": [
+            [
+              0,
+              6
+            ],
+            [
+              6,
+              10
+            ],
+            [
+              10,
+              12
+            ]
+          ],
+          "gap_control": [
+            [
+              0,
+              6
+            ],
+            [
+              7,
+              12
+            ]
+          ],
+          "missing_index": 6
+        },
+        "negative_control": "A gap at index6 cannot be repaired by dropping duplicates.",
+        "assumptions": [
+          "Integer frame indices, half-open intervals, identical values for repeated indices, one declared stream identity."
+        ],
+        "limits": "Coverage is not audio quality, overlap-add synthesis or observed streaming behavior."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Count raw and distinct frames.",
+          "expected_answer": "`6+6+4=16`; union length `12`; duplicate emissions `4`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Give the owned intervals.",
+          "expected_answer": "`[0,6), [6,10), [10,12)` under the first-writer rule.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the gap control.",
+          "expected_answer": "`[0,6), [7,12)` omits index `6`; deduplication cannot supply it.",
+          "decision": null
+        },
+        "4": {
+          "question": "May conflicting duplicates be silently discarded?",
+          "expected_answer": "No. Preserve both values and provenance; the identical-value assumption failed.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies a correct composer claim?",
+          "expected_answer": "A missing target index, repeated emission or hidden conflict; coverage alone proves no audio quality.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the exact source scope, revision and quantity units.",
+          "decision": null
+        },
+        {
+          "criterion": "Reproduce the fixed-case calculation with retained intermediate values.",
+          "decision": null
+        },
+        {
+          "criterion": "Evaluate the negative control and preserve a failed gate with its cause.",
+          "decision": null
+        },
+        {
+          "criterion": "Support the explanation with actual source locations and distinguish authored from observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain original answer, assistance and corrected answer; respect the falsifier and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Read the named prerequisite and primary/source passages, calculate the fixed case manually before assistance, retain the negative control, then critique an assistant explanation against the source and submit a bounded conclusion.",
+        "direct_manual_baseline": "Paper table of inputs, intermediate values, expected result, control and source locations.",
+        "falsifier": "A gap at index6 cannot be repaired by dropping duplicates.",
+        "actual_learner_answer": null,
+        "retained_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CS016",
+      "module_id": "cs-016-make-cancellation-an-explicit-pipeline-outcome",
+      "source_paths": {
+        "en": "streeling/courses/computer-science/en/cs-016-make-cancellation-an-explicit-pipeline-outcome.md",
+        "fr": "streeling/courses/computer-science/fr/cs-016-make-cancellation-an-explicit-pipeline-outcome.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-016-make-cancellation-an-explicit-pipeline-outcome.es.md"
+      },
+      "novelty_vs_prerequisites": "CS011 explicitly leaves cancellation untested. This course distinguishes request, acknowledgment and effect state with a finite terminal-state ledger.",
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/computer-science/en/cs-011-preserve-absence-and-failure-boundaries.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "a02f57de93af20c49c5d9778e1bfe40a76ac0b11207fd59044f3fbf4d8a124f9",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.DSL/Closures/GaAsync.fs",
+          "pin": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+          "sha256": "d07792410d218d660ae9875366ce6255a4eb5bd422ad85b9355b5deec505a641",
+          "scope": "Error union, bind/map, fanOutAll and fromAsync bodies; lines1-105.",
+          "transport": "Full bytes fetched for hash; relevant body sections read via browser."
+        },
+        {
+          "path_or_url": "https://learn.microsoft.com/dotnet/standard/threading/cancellation-in-managed-threads",
+          "pin": "accessed 2026-10-23; unversioned document body",
+          "sha256": "f3237899be2aa2f80a1fe26c7280a9f273bfa82790944a6e9e9702a1e5993614",
+          "scope": "Cooperative request/listener mechanism and cancellation types; introductory body.",
+          "transport": "Full bytes fetched for hash; relevant body sections read via browser."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "requested": [
+            "A",
+            "B",
+            "C"
+          ],
+          "acknowledged_cancelled": [
+            "A"
+          ],
+          "completed": [
+            "B"
+          ],
+          "unknown": [
+            "C"
+          ],
+          "B_effect": "written"
+        },
+        "formula": "requested set partitions by observed terminal evidence, not by request count",
+        "expected": {
+          "requests": 3,
+          "cancelled": 1,
+          "completed": 1,
+          "unknown": 1,
+          "safe_to_claim_all_cancelled": false
+        },
+        "negative_control": "A request-only record has no acknowledged cancellation.",
+        "assumptions": [
+          "A terminal acknowledgment refers to the same attempt identity; effects are independently recorded."
+        ],
+        "limits": "No GA cancellation delivery, rollback or distributed stop was executed."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Count the requests and terminal categories.",
+          "expected_answer": "`3` requests; `1` cancelled, `1` completed, `1` unknown.",
+          "decision": null
+        },
+        "2": {
+          "question": "May B be reported as rolled back?",
+          "expected_answer": "No. B has a recorded write and completion; no compensation receipt exists.",
+          "decision": null
+        },
+        "3": {
+          "question": "What does the request-only control establish?",
+          "expected_answer": "Only requests were sent; every terminal outcome remains unknown.",
+          "decision": null
+        },
+        "4": {
+          "question": "Why retain attempt identity?",
+          "expected_answer": "To prevent a late acknowledgment from being assigned to a replacement attempt.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does the error union prove cooperative delivery?",
+          "expected_answer": "No. A representable case is not an observed request, acknowledgment or rollback.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the exact source scope, revision and quantity units.",
+          "decision": null
+        },
+        {
+          "criterion": "Reproduce the fixed-case calculation with retained intermediate values.",
+          "decision": null
+        },
+        {
+          "criterion": "Evaluate the negative control and preserve a failed gate with its cause.",
+          "decision": null
+        },
+        {
+          "criterion": "Support the explanation with actual source locations and distinguish authored from observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain original answer, assistance and corrected answer; respect the falsifier and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Read the named prerequisite and primary/source passages, calculate the fixed case manually before assistance, retain the negative control, then critique an assistant explanation against the source and submit a bounded conclusion.",
+        "direct_manual_baseline": "Paper table of inputs, intermediate values, expected result, control and source locations.",
+        "falsifier": "A request-only record has no acknowledged cancellation.",
+        "actual_learner_answer": null,
+        "retained_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CS017",
+      "module_id": "cs-017-test-pipeline-rewrites-with-counterexamples",
+      "source_paths": {
+        "en": "streeling/courses/computer-science/en/cs-017-test-pipeline-rewrites-with-counterexamples.md",
+        "fr": "streeling/courses/computer-science/fr/cs-017-test-pipeline-rewrites-with-counterexamples.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-017-test-pipeline-rewrites-with-counterexamples.es.md"
+      },
+      "novelty_vs_prerequisites": "CS010 checks reassociation without changing order. This lesson distinguishes reassociation from a fusion rewrite across a nonlinear guard and preserves a falsifying witness.",
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/computer-science/en/cs-010-compose-fail-fast-ga-computations.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "5f739c45f20c66cdbf484880b46596deb97a39687a9de00baf469fe9d33f8fdf",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.DSL/Closures/GaAsync.fs",
+          "pin": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+          "sha256": "d07792410d218d660ae9875366ce6255a4eb5bd422ad85b9355b5deec505a641",
+          "scope": "Error union, bind/map, fanOutAll and fromAsync bodies; lines1-105.",
+          "transport": "Full bytes fetched for hash; relevant body sections read via browser."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "inputs": [
+            -2,
+            0,
+            2
+          ],
+          "f": "x+1",
+          "g": "2*x",
+          "guard": "x>0"
+        },
+        "formula": "original=g(f(x)); swapped=f(g(x)); validation-before versus validation-after",
+        "expected": {
+          "original": [
+            -2,
+            2,
+            6
+          ],
+          "swapped": [
+            -3,
+            1,
+            5
+          ],
+          "guard_witness": 0,
+          "before": "reject",
+          "after": "accept"
+        },
+        "negative_control": "Identity rewrite must agree for every supplied witness.",
+        "assumptions": [
+          "Exact integer arithmetic, no effects, guard evaluates its stated input."
+        ],
+        "limits": "A finite witness set can refute equality but agreement is not a universal proof."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate the original output vector.",
+          "expected_answer": "`[-2,2,6]` from `2*(x+1)`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Calculate the swapped vector.",
+          "expected_answer": "`[-3,1,5]` from `2*x+1`; the rewrite is refuted.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the guard to the boundary witness.",
+          "expected_answer": "At `x=0`, validation before increment rejects; after increment it accepts `1`.",
+          "decision": null
+        },
+        "4": {
+          "question": "What should the identity control report?",
+          "expected_answer": "Equal results for every supplied input; a mismatch invalidates the checker.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does agreement on these inputs prove a law?",
+          "expected_answer": "No. A counterexample refutes a universal claim; finite agreement alone does not prove it.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the exact source scope, revision and quantity units.",
+          "decision": null
+        },
+        {
+          "criterion": "Reproduce the fixed-case calculation with retained intermediate values.",
+          "decision": null
+        },
+        {
+          "criterion": "Evaluate the negative control and preserve a failed gate with its cause.",
+          "decision": null
+        },
+        {
+          "criterion": "Support the explanation with actual source locations and distinguish authored from observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain original answer, assistance and corrected answer; respect the falsifier and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Read the named prerequisite and primary/source passages, calculate the fixed case manually before assistance, retain the negative control, then critique an assistant explanation against the source and submit a bounded conclusion.",
+        "direct_manual_baseline": "Paper table of inputs, intermediate values, expected result, control and source locations.",
+        "falsifier": "Identity rewrite must agree for every supplied witness.",
+        "actual_learner_answer": null,
+        "retained_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CYB009",
+      "module_id": "cyb-009-bound-admission-with-a-token-bucket",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-009-bound-admission-with-a-token-bucket.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-009-bound-admission-with-a-token-bucket.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-009-bound-admission-with-a-token-bucket.es.md"
+      },
+      "novelty_vs_prerequisites": "CYB006 estimates retry amplification; this course gives a bounded burst admission recurrence, separately from worker concurrency.",
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-006-bound-retry-feedback-and-workload.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "0dcd107956a26ff56e0e9a24ac70418846da0946277c7c9de1e9dd4e80281c31",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/dag.rs",
+          "pin": "456df065ee837e33b5bbe22a4df0616a4fcb76e5",
+          "sha256": "b2bf8462f9a266bd32de0555b3c5dd7abea68cd704a5ad538e136fd53cd745e5",
+          "scope": "Graph representation, add_edge, has_path, predecessors, topological_sort and parallel_levels.",
+          "transport": "Full bytes fetched for hash; relevant body sections read via browser."
+        },
+        {
+          "path_or_url": "https://www.rfc-editor.org/rfc/rfc2697.html",
+          "pin": "accessed 2026-10-23; unversioned document body",
+          "sha256": "310c4aab5969b806756aa09534acdc176dcf177d5601925c18f8da7b80a75e22",
+          "scope": "Sections2-3 configuration and token metering; job model is separate.",
+          "transport": "Full bytes fetched for hash; relevant body sections read via browser."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "capacity_tokens": 3,
+          "refill_tokens_per_second": 1,
+          "cost_per_job": 1,
+          "arrivals_seconds": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            2
+          ]
+        },
+        "formula": "available=min(capacity, previous_tokens+rate*elapsed); admit iff available>=cost; debit only on admission",
+        "expected": {
+          "admitted": [
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            true
+          ],
+          "remaining": [
+            2,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "admissions": 5,
+          "denials": 2
+        },
+        "negative_control": "With refill zero only the initial burst of three is admitted.",
+        "assumptions": [
+          "Chronological arrivals, initial bucket full, unit job cost, exact seconds, no refund."
+        ],
+        "limits": "Authored job-admission model; not RFC2697 packet coloring or production IX scheduling."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Give the admission decisions.",
+          "expected_answer": "`[true,true,true,false,true,false,true]`; `5` admissions and `2` denials.",
+          "decision": null
+        },
+        "2": {
+          "question": "Give the remaining balances.",
+          "expected_answer": "`[2,1,0,0,0,0,0]`; simultaneous arrivals add no elapsed time.",
+          "decision": null
+        },
+        "3": {
+          "question": "Evaluate the zero-refill control.",
+          "expected_answer": "Only `3` admissions; later arrivals receive no replenishment.",
+          "decision": null
+        },
+        "4": {
+          "question": "Does admission bound concurrent jobs?",
+          "expected_answer": "Not without durations and a worker-slot rule; tokens track admission credit.",
+          "decision": null
+        },
+        "5": {
+          "question": "What must a queued variant add?",
+          "expected_answer": "Explicit waiting, ownership, expiry and retry semantics; no live capacity measurement is supplied.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the exact source scope, revision and quantity units.",
+          "decision": null
+        },
+        {
+          "criterion": "Reproduce the fixed-case calculation with retained intermediate values.",
+          "decision": null
+        },
+        {
+          "criterion": "Evaluate the negative control and preserve a failed gate with its cause.",
+          "decision": null
+        },
+        {
+          "criterion": "Support the explanation with actual source locations and distinguish authored from observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain original answer, assistance and corrected answer; respect the falsifier and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Read the named prerequisite and primary/source passages, calculate the fixed case manually before assistance, retain the negative control, then critique an assistant explanation against the source and submit a bounded conclusion.",
+        "direct_manual_baseline": "Paper table of inputs, intermediate values, expected result, control and source locations.",
+        "falsifier": "With refill zero only the initial burst of three is admitted.",
+        "actual_learner_answer": null,
+        "retained_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CYB010",
+      "module_id": "cyb-010-separate-derivative-noise-from-plant-motion",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-010-separate-derivative-noise-from-plant-motion.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-010-separate-derivative-noise-from-plant-motion.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-010-separate-derivative-noise-from-plant-motion.es.md"
+      },
+      "novelty_vs_prerequisites": "CYB008 analyzes noiseless iterative convergence; this lesson propagates a specified measurement perturbation through a finite difference and declared smoothing rule.",
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-008-check-convergence-before-repeating-a-correction.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "0a0cbc4fa4266b833ae8d5fa2bc7d9e97360df8712ff55471815ebc7c29e6702",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "https://www.mathworks.com/help/simulink/slref/discretepidcontroller.html",
+          "pin": "accessed 2026-10-23; unversioned document body",
+          "sha256": null,
+          "scope": "Description: derivative contribution and first-order filtering; authored recurrence is separate.",
+          "transport": "Browser body reading succeeded; direct hash fetch failed: HTTP Error 403: Forbidden"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "dt_seconds": 0.1,
+          "true_position": [
+            10,
+            10,
+            10
+          ],
+          "measurement": [
+            10,
+            10.2,
+            10
+          ],
+          "gain": 1,
+          "filter_alpha": 0.5,
+          "filter_initial": 0
+        },
+        "formula": "d[k]=(y[k]-y[k-1])/dt; z[k]=alpha*d[k]+(1-alpha)*z[k-1]",
+        "expected": {
+          "true_derivative": [
+            0,
+            0
+          ],
+          "raw_derivative": [
+            2,
+            -2
+          ],
+          "filtered_derivative": [
+            1,
+            -0.5
+          ],
+          "half_dt_raw": [
+            4,
+            -4
+          ]
+        },
+        "negative_control": "A constant measured sequence gives zero raw and filtered derivatives.",
+        "assumptions": [
+          "Uniform sample intervals, fixed position units, no plant motion, stipulated perturbation, no missing samples."
+        ],
+        "limits": "No physical sensor, GA controller or noise distribution was measured; smoothing does not establish closed-loop stability."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate the raw derivative.",
+          "expected_answer": "`[2,-2]` position units per second; true derivative is `[0,0]`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Calculate the filtered sequence.",
+          "expected_answer": "`[1,-0.5]` with the stated initial state and smoothing recurrence.",
+          "decision": null
+        },
+        "3": {
+          "question": "Halve the sampling interval.",
+          "expected_answer": "At `dt=0.05`, the same jumps give `[4,-4]`.",
+          "decision": null
+        },
+        "4": {
+          "question": "Evaluate the constant-input control.",
+          "expected_answer": "Both traces remain zero; nonzero output would contradict the declared recurrence or initialization.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does smoothing prove better control?",
+          "expected_answer": "No. Motion attribution, delay, actuator behavior and stability remain untested.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the exact source scope, revision and quantity units.",
+          "decision": null
+        },
+        {
+          "criterion": "Reproduce the fixed-case calculation with retained intermediate values.",
+          "decision": null
+        },
+        {
+          "criterion": "Evaluate the negative control and preserve a failed gate with its cause.",
+          "decision": null
+        },
+        {
+          "criterion": "Support the explanation with actual source locations and distinguish authored from observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain original answer, assistance and corrected answer; respect the falsifier and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Read the named prerequisite and primary/source passages, calculate the fixed case manually before assistance, retain the negative control, then critique an assistant explanation against the source and submit a bounded conclusion.",
+        "direct_manual_baseline": "Paper table of inputs, intermediate values, expected result, control and source locations.",
+        "falsifier": "A constant measured sequence gives zero raw and filtered derivatives.",
+        "actual_learner_answer": null,
+        "retained_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CYB011",
+      "module_id": "cyb-011-prevent-integral-accumulation-under-saturation",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-011-prevent-integral-accumulation-under-saturation.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-011-prevent-integral-accumulation-under-saturation.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-011-prevent-integral-accumulation-under-saturation.es.md"
+      },
+      "novelty_vs_prerequisites": "CYB008 has no actuator limit. This model compares an unbounded integral with a declared conditional-integration rule under fixed saturation.",
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-008-check-convergence-before-repeating-a-correction.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "0a0cbc4fa4266b833ae8d5fa2bc7d9e97360df8712ff55471815ebc7c29e6702",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "https://www.mathworks.com/help/simulink/slref/anti-windup-control-using-a-pid-controller.html",
+          "pin": "accessed 2026-10-23; unversioned document body",
+          "sha256": null,
+          "scope": "Output saturation and conditional-integration/clamping discussion; authored rule differs.",
+          "transport": "Browser body reading succeeded; direct hash fetch failed: HTTP Error 403: Forbidden"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "initial_integral": 0,
+          "errors": [
+            3,
+            3,
+            3,
+            -1
+          ],
+          "dt_seconds": 1,
+          "gain": 1,
+          "lower_limit": 0,
+          "upper_limit": 2
+        },
+        "formula": "candidate=I+gain*error*dt; naive stores candidate; conditional stores candidate unless beyond a limit and error drives farther outward; command=clip(I,lower,upper)",
+        "expected": {
+          "naive_integrals": [
+            3,
+            6,
+            9,
+            8
+          ],
+          "naive_commands": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "conditional_integrals": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "conditional_commands": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "negative_control": "With sufficiently wide limits both rules integrate the same error sequence.",
+        "assumptions": [
+          "Integral-only teaching controller, no proportional term or plant dynamics, update then output, outward-increment rejection."
+        ],
+        "limits": "The deliberately strict rule is not a tuned production anti-windup controller and may fail to use available actuator range."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the naive states and commands.",
+          "expected_answer": "States `[3,6,9,8]`; commands `[2,2,2,2]`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the conditional states.",
+          "expected_answer": "`[0,0,0,0]`; each proposed increment is rejected by the stated outward-limit rule.",
+          "decision": null
+        },
+        "3": {
+          "question": "Why does reversed error leave naive output capped?",
+          "expected_answer": "The stored integral falls from `9` to `8`, still above the upper limit `2`.",
+          "decision": null
+        },
+        "4": {
+          "question": "State the conditional rule’s retained weakness.",
+          "expected_answer": "Rejecting a whole overshooting increment leaves usable actuator range unused.",
+          "decision": null
+        },
+        "5": {
+          "question": "Evaluate the wide-limit control.",
+          "expected_answer": "With no candidate reaching a limit, both rules store the same integral sequence.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the exact source scope, revision and quantity units.",
+          "decision": null
+        },
+        {
+          "criterion": "Reproduce the fixed-case calculation with retained intermediate values.",
+          "decision": null
+        },
+        {
+          "criterion": "Evaluate the negative control and preserve a failed gate with its cause.",
+          "decision": null
+        },
+        {
+          "criterion": "Support the explanation with actual source locations and distinguish authored from observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain original answer, assistance and corrected answer; respect the falsifier and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Read the named prerequisite and primary/source passages, calculate the fixed case manually before assistance, retain the negative control, then critique an assistant explanation against the source and submit a bounded conclusion.",
+        "direct_manual_baseline": "Paper table of inputs, intermediate values, expected result, control and source locations.",
+        "falsifier": "With sufficiently wide limits both rules integrate the same error sequence.",
+        "actual_learner_answer": null,
+        "retained_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "COG009",
+      "module_id": "cog-009-counterbalance-practice-order-before-comparing-interfaces",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-009-counterbalance-practice-order-before-comparing-interfaces.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-009-counterbalance-practice-order-before-comparing-interfaces.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-009-counterbalance-practice-order-before-comparing-interfaces.es.md"
+      },
+      "novelty_vs_prerequisites": "COG007 separates unaided and assisted scores; this lesson separates interface contrasts from a stipulated additive period effect using opposite orders.",
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/cognitive-science/en/cog-007-separate-unaided-recall-from-assisted-success.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "cc28d8be51e0d2c7ab4ad9d8f2cd14da93b148a14904f12e742e6d9024810f54",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "https://www.itl.nist.gov/div898/handbook/pri/section3/pri332.htm",
+          "pin": "accessed 2026-10-23; unversioned document body",
+          "sha256": "7b12541ebf95f497081921508cbf23f180899d566542ef40e97034533aa54f90",
+          "scope": "Nuisance-factor and balanced blocking definitions; no study results imported.",
+          "transport": "Full bytes fetched for hash; relevant body sections read via browser."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "A_base_seconds": 60,
+          "B_base_seconds": 50,
+          "second_period_change_seconds": -10,
+          "AB": [
+            60,
+            40
+          ],
+          "BA": [
+            50,
+            50
+          ]
+        },
+        "formula": "contrast=B_time-A_time within each order; balanced contrast=mean(order contrasts)",
+        "expected": {
+          "AB_contrast_seconds": -20,
+          "BA_contrast_seconds": 0,
+          "balanced_contrast_seconds": -10,
+          "A_mean_seconds": 55,
+          "B_mean_seconds": 45,
+          "null_interface_balanced_contrast": 0
+        },
+        "negative_control": "Set both interface base times to60; order contrasts are -10 and+10 and average0.",
+        "assumptions": [
+          "Invented matched tasks, additive identical period benefit, no carryover, complete observations, equal order weights."
+        ],
+        "limits": "Not a user study, statistical significance estimate or general proof that counterbalancing removes carryover."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate the forward-order contrast.",
+          "expected_answer": "`40-60=-20` seconds, combining interface and period effects.",
+          "decision": null
+        },
+        "2": {
+          "question": "Calculate the reverse-order contrast.",
+          "expected_answer": "`50-50=0` seconds, preserving the same B-minus-A direction.",
+          "decision": null
+        },
+        "3": {
+          "question": "Calculate the balanced contrast.",
+          "expected_answer": "`(-20+0)/2=-10` seconds; means are A `55`, B `45`.",
+          "decision": null
+        },
+        "4": {
+          "question": "Evaluate equal-base interfaces.",
+          "expected_answer": "Order contrasts `-10` and `+10` average to `0`.",
+          "decision": null
+        },
+        "5": {
+          "question": "What assumption would carryover violate?",
+          "expected_answer": "The common additive period model with no interface-specific carryover; real learning remains unmeasured.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the exact source scope, revision and quantity units.",
+          "decision": null
+        },
+        {
+          "criterion": "Reproduce the fixed-case calculation with retained intermediate values.",
+          "decision": null
+        },
+        {
+          "criterion": "Evaluate the negative control and preserve a failed gate with its cause.",
+          "decision": null
+        },
+        {
+          "criterion": "Support the explanation with actual source locations and distinguish authored from observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain original answer, assistance and corrected answer; respect the falsifier and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Read the named prerequisite and primary/source passages, calculate the fixed case manually before assistance, retain the negative control, then critique an assistant explanation against the source and submit a bounded conclusion.",
+        "direct_manual_baseline": "Paper table of inputs, intermediate values, expected result, control and source locations.",
+        "falsifier": "Set both interface base times to60; order contrasts are -10 and+10 and average0.",
+        "actual_learner_answer": null,
+        "retained_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "COG010",
+      "module_id": "cog-010-use-delayed-transfer-probes-beyond-repeated-items",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-010-use-delayed-transfer-probes-beyond-repeated-items.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-010-use-delayed-transfer-probes-beyond-repeated-items.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-010-use-delayed-transfer-probes-beyond-repeated-items.es.md"
+      },
+      "novelty_vs_prerequisites": "COG007 separates assistance and COG008 separates candidate laws; this course crosses exposure category with assessment delay and retains denominator eligibility.",
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/cognitive-science/en/cog-007-separate-unaided-recall-from-assisted-success.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "cc28d8be51e0d2c7ab4ad9d8f2cd14da93b148a14904f12e742e6d9024810f54",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "streeling/courses/cognitive-science/en/cog-008-choose-probes-that-distinguish-reasoning-models.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "bbf93d2068d19a69c8326a30ce2772d56d8690efb1abb0ad48d0a85ad7a0444e",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "immediate_repeated": {
+            "correct": 8,
+            "observed": 10
+          },
+          "delayed_repeated": {
+            "correct": 6,
+            "observed": 10
+          },
+          "delayed_novel": {
+            "correct": 3,
+            "observed": 8
+          },
+          "novel_exposed_correct": 1
+        },
+        "formula": "rate=eligible correct/eligible observed; remove exposed item from both numerator and denominator",
+        "expected": {
+          "immediate_rate": 0.8,
+          "delayed_repeated_rate": 0.6,
+          "raw_novel_rate": 0.375,
+          "eligible_novel_correct": 2,
+          "eligible_novel_observed": 7,
+          "eligible_novel_rate_fraction": "2/7",
+          "repeated_rate_change": -0.2
+        },
+        "negative_control": "Repeating identical prompts cannot supply evidence of novel-item transfer.",
+        "assumptions": [
+          "Fictional counts, same rubric, declared delay, observed items only; exposed novel item is correct and ineligible."
+        ],
+        "limits": "No real learning, causal effect, optimal delay or psychometric validity is inferred."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate repeated-item rates.",
+          "expected_answer": "Immediate `8/10=0.8`; delayed `6/10=0.6`; change `-0.2`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Calculate raw novel-item performance.",
+          "expected_answer": "`3/8=0.375`, before excluding answer exposure.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the exposure exclusion.",
+          "expected_answer": "Eligible correct `2`, observed `7`, rate `2/7`; preserve the excluded correct record.",
+          "decision": null
+        },
+        "4": {
+          "question": "Can the repeated-only control demonstrate transfer?",
+          "expected_answer": "No. It contains no novel-item observation under the declared definition.",
+          "decision": null
+        },
+        "5": {
+          "question": "What must the actual learner record retain?",
+          "expected_answer": "Prompt identity, changed features, delay, response, assistance and eligibility; no causal learning result is supplied.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the exact source scope, revision and quantity units.",
+          "decision": null
+        },
+        {
+          "criterion": "Reproduce the fixed-case calculation with retained intermediate values.",
+          "decision": null
+        },
+        {
+          "criterion": "Evaluate the negative control and preserve a failed gate with its cause.",
+          "decision": null
+        },
+        {
+          "criterion": "Support the explanation with actual source locations and distinguish authored from observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain original answer, assistance and corrected answer; respect the falsifier and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Read the named prerequisite and primary/source passages, calculate the fixed case manually before assistance, retain the negative control, then critique an assistant explanation against the source and submit a bounded conclusion.",
+        "direct_manual_baseline": "Paper table of inputs, intermediate values, expected result, control and source locations.",
+        "falsifier": "Repeating identical prompts cannot supply evidence of novel-item transfer.",
+        "actual_learner_answer": null,
+        "retained_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "COG011",
+      "module_id": "cog-011-measure-rubric-disagreement-before-adjudication",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-011-measure-rubric-disagreement-before-adjudication.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-011-measure-rubric-disagreement-before-adjudication.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-011-measure-rubric-disagreement-before-adjudication.es.md"
+      },
+      "novelty_vs_prerequisites": "COG008 distinguishes response signatures; this lesson retains paired independent ratings and computes disagreement before any consensus overwrite.",
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/cognitive-science/en/cog-008-choose-probes-that-distinguish-reasoning-models.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "bbf93d2068d19a69c8326a30ce2772d56d8690efb1abb0ad48d0a85ad7a0444e",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "streeling/courses/computer-science/en/cs-008-compose-exact-source-review-verdicts.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "fe241266735f1864f854fa1b74e17d0c0208cb068d255dce51a1e2a8bd99c0c8",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "rater_A": [
+            1,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rater_B": [
+            1,
+            0,
+            0,
+            1,
+            1,
+            0
+          ]
+        },
+        "formula": "agreement=count(A_i=B_i)/paired_count; disagreement=1-agreement",
+        "expected": {
+          "both_pass": 2,
+          "A_only": 1,
+          "B_only": 1,
+          "both_fail": 2,
+          "paired": 6,
+          "agreement_fraction": "4/6",
+          "disagreement_fraction": "2/6",
+          "disputed_items": [
+            2,
+            4
+          ],
+          "unanimous_pass_fraction": "2/6"
+        },
+        "negative_control": "Replacing B with A creates perfect agreement but supplies no independent rating.",
+        "assumptions": [
+          "Binary fixed rubric, same six artifacts, independent fictional ratings, no missing ratings."
+        ],
+        "limits": "Raw agreement is neither validity nor chance-corrected reliability; no human raters were observed."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Fill the paired outcome counts.",
+          "expected_answer": "Both pass `2`, A only `1`, B only `1`, both fail `2`; total `6`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute agreement and disagreement.",
+          "expected_answer": "Agreement `4/6`; disagreement `2/6`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Identify the disputed items.",
+          "expected_answer": "Items `[2,4]`; unanimous passing fraction `2/6`.",
+          "decision": null
+        },
+        "4": {
+          "question": "Interpret the copied-vector control.",
+          "expected_answer": "Perfect numeric agreement, with no independent second rating.",
+          "decision": null
+        },
+        "5": {
+          "question": "What must adjudication retain?",
+          "expected_answer": "Original ratings, artifact and rubric revisions, disputed evidence, rationale and final decision.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the exact source scope, revision and quantity units.",
+          "decision": null
+        },
+        {
+          "criterion": "Reproduce the fixed-case calculation with retained intermediate values.",
+          "decision": null
+        },
+        {
+          "criterion": "Evaluate the negative control and preserve a failed gate with its cause.",
+          "decision": null
+        },
+        {
+          "criterion": "Support the explanation with actual source locations and distinguish authored from observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain original answer, assistance and corrected answer; respect the falsifier and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Read the named prerequisite and primary/source passages, calculate the fixed case manually before assistance, retain the negative control, then critique an assistant explanation against the source and submit a bounded conclusion.",
+        "direct_manual_baseline": "Paper table of inputs, intermediate values, expected result, control and source locations.",
+        "falsifier": "Replacing B with A creates perfect agreement but supplies no independent rating.",
+        "actual_learner_answer": null,
+        "retained_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "INF010",
+      "module_id": "inf-010-keep-joint-outcomes-when-composing-verdicts",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-010-keep-joint-outcomes-when-composing-verdicts.md",
+        "fr": "streeling/courses/information-theory/fr/inf-010-keep-joint-outcomes-when-composing-verdicts.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-010-keep-joint-outcomes-when-composing-verdicts.es.md"
+      },
+      "novelty_vs_prerequisites": "CS008 binds verdict kinds to source bytes and INF003 compares marginal distributions; this lesson shows that matching marginal pass rates do not determine joint eligibility.",
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/computer-science/en/cs-008-compose-exact-source-review-verdicts.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "fe241266735f1864f854fa1b74e17d0c0208cb068d255dce51a1e2a8bd99c0c8",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "streeling/courses/information-theory/en/inf-003-verdict-distribution-drift.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "66c84ee111e358835be410e04e44f61b653343d3efd2d9626fd5545ab69a8f27",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "total": 10,
+          "case_X": {
+            "both_pass": 6,
+            "A_only": 0,
+            "B_only": 0,
+            "both_fail": 4
+          },
+          "case_Y": {
+            "both_pass": 2,
+            "A_only": 4,
+            "B_only": 4,
+            "both_fail": 0
+          }
+        },
+        "formula": "all_required_pass=both_pass/total; marginal_A=(both_pass+A_only)/total",
+        "expected": {
+          "A_rate": 0.6,
+          "B_rate": 0.6,
+          "X_joint_rate": 0.6,
+          "Y_joint_rate": 0.2,
+          "independence_product": 0.36,
+          "X_product_error": -0.24,
+          "Y_product_error": 0.16
+        },
+        "negative_control": "An explicitly independent authored table with total25 and cells9,6,6,4 gives joint9/25 equal to(15/25)^2.",
+        "assumptions": [
+          "Same ten fictional artifacts per table; paired verdicts use identical scope; all-input policy requires both passes."
+        ],
+        "limits": "No actual approval prevalence or independence is measured; valid verdicts still require identity and authority checks."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate both marginal rates.",
+          "expected_answer": "In both cases A and B each pass `6/10=0.6`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Calculate the joint pass rates.",
+          "expected_answer": "X gives `6/10=0.6`; Y gives `2/10=0.2`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Compare the product estimate.",
+          "expected_answer": "`0.6*0.6=0.36`; estimate minus truth is X `-0.24`, Y `0.16`.",
+          "decision": null
+        },
+        "4": {
+          "question": "Verify the independent control.",
+          "expected_answer": "Cells `9,6,6,4` total `25`; `9/25=(15/25)^2=0.36`.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does joint pass authorize publication?",
+          "expected_answer": "No. Identity, review scope, other gates and effect authority remain distinct requirements.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the exact source scope, revision and quantity units.",
+          "decision": null
+        },
+        {
+          "criterion": "Reproduce the fixed-case calculation with retained intermediate values.",
+          "decision": null
+        },
+        {
+          "criterion": "Evaluate the negative control and preserve a failed gate with its cause.",
+          "decision": null
+        },
+        {
+          "criterion": "Support the explanation with actual source locations and distinguish authored from observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain original answer, assistance and corrected answer; respect the falsifier and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Read the named prerequisite and primary/source passages, calculate the fixed case manually before assistance, retain the negative control, then critique an assistant explanation against the source and submit a bounded conclusion.",
+        "direct_manual_baseline": "Paper table of inputs, intermediate values, expected result, control and source locations.",
+        "falsifier": "An explicitly independent authored table with total25 and cells9,6,6,4 gives joint9/25 equal to(15/25)^2.",
+        "actual_learner_answer": null,
+        "retained_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "INF011",
+      "module_id": "inf-011-separate-compressed-size-from-preserved-information",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-011-separate-compressed-size-from-preserved-information.md",
+        "fr": "streeling/courses/information-theory/fr/inf-011-separate-compressed-size-from-preserved-information.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-011-separate-compressed-size-from-preserved-information.es.md"
+      },
+      "novelty_vs_prerequisites": "INF004 demonstrates decision collisions in summaries; this lesson contrasts a reversible byte encoding with an irreversible projection, including format overhead and expansion.",
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/information-theory/en/inf-004-information-loss-in-agent-handoffs.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "d8e755eae6b24d26cdfbebeaa3a3b6e347f06fa2659f21cc200801ea2c5c3b44",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "https://www.rfc-editor.org/rfc/rfc1950.html",
+          "pin": "accessed 2026-10-23; unversioned document body",
+          "sha256": null,
+          "scope": "Lossless-format scope and data-format overhead; toy encoding is separate.",
+          "transport": "Browser body reading succeeded; direct hash fetch failed: <urlopen error _ssl.c:1063: The handshake operation timed out>"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "raw": "AAAAABBB",
+          "payload": "A5B3",
+          "header_bytes": 2,
+          "raw_bytes": 8,
+          "payload_bytes": 4,
+          "control_raw": "ABABABAB",
+          "control_payload": "A1B1A1B1A1B1A1B1"
+        },
+        "formula": "stored_bytes=header_bytes+payload_bytes; ratio=stored_bytes/raw_bytes; alphabet summary discards order and counts",
+        "expected": {
+          "stored_bytes": 6,
+          "ratio": 0.75,
+          "control_stored_bytes": 18,
+          "control_ratio": 2.25,
+          "decoded": "AAAAABBB",
+          "lossy_collision": [
+            "AAAAABBB",
+            "ABAAAABB"
+          ],
+          "alphabet_summary": "AB"
+        },
+        "negative_control": "Alternating input expands under the stipulated run-length format.",
+        "assumptions": [
+          "ASCII symbols A/B, runs of single-digit length, symbol then count, fixed two-byte header, exact decoder known."
+        ],
+        "limits": "Toy run-length accounting, not measured zlib output, entropy coding efficiency or semantic preservation for arbitrary consumers."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Decode the retained payload.",
+          "expected_answer": "`A5B3` decodes to `AAAAABBB`, matching the original.",
+          "decision": null
+        },
+        "2": {
+          "question": "Charge the complete stored representation.",
+          "expected_answer": "`2+4=6` bytes; ratio `6/8=0.75`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Calculate the alternating control.",
+          "expected_answer": "`2+16=18` bytes; ratio `18/8=2.25`, an expansion.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does alphabet-only projection lose?",
+          "expected_answer": "Order and counts; `AB` cannot identify the original sequence uniquely.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does lossless mean smaller?",
+          "expected_answer": "No. Reversibility and stored size are distinct claims; the control is reversible and larger.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the exact source scope, revision and quantity units.",
+          "decision": null
+        },
+        {
+          "criterion": "Reproduce the fixed-case calculation with retained intermediate values.",
+          "decision": null
+        },
+        {
+          "criterion": "Evaluate the negative control and preserve a failed gate with its cause.",
+          "decision": null
+        },
+        {
+          "criterion": "Support the explanation with actual source locations and distinguish authored from observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain original answer, assistance and corrected answer; respect the falsifier and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Read the named prerequisite and primary/source passages, calculate the fixed case manually before assistance, retain the negative control, then critique an assistant explanation against the source and submit a bounded conclusion.",
+        "direct_manual_baseline": "Paper table of inputs, intermediate values, expected result, control and source locations.",
+        "falsifier": "Alternating input expands under the stipulated run-length format.",
+        "actual_learner_answer": null,
+        "retained_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "INF012",
+      "module_id": "inf-012-retain-event-order-in-a-handoff-summary",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-012-retain-event-order-in-a-handoff-summary.md",
+        "fr": "streeling/courses/information-theory/fr/inf-012-retain-event-order-in-a-handoff-summary.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-012-retain-event-order-in-a-handoff-summary.es.md"
+      },
+      "novelty_vs_prerequisites": "INF004 compares state-summary collisions; this lesson constructs an order-sensitive event fold and shows equal event counts with opposite final states.",
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/information-theory/en/inf-004-information-loss-in-agent-handoffs.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "d8e755eae6b24d26cdfbebeaa3a3b6e347f06fa2659f21cc200801ea2c5c3b44",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/dc2e74cbd992a298f67efb928b5b3754615e1924/Scripts/antigravity-bridge.ps1",
+          "pin": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+          "sha256": null,
+          "scope": "Handoff-writing branch and captured context; source body.",
+          "transport": "Browser body reading succeeded; direct hash fetch failed: <urlopen error _ssl.c:1063: The handshake operation timed out>"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "history_A": [
+            "approve:r1",
+            "edit:r2"
+          ],
+          "history_B": [
+            "edit:r2",
+            "approve:r2"
+          ],
+          "initial": "unapproved"
+        },
+        "formula": "edit invalidates approval; approve:r marks only exact revision r; fold events in retained order",
+        "expected": {
+          "A_final_revision": "r2",
+          "A_approved": false,
+          "B_final_revision": "r2",
+          "B_approved": true,
+          "same_edit_count": 1,
+          "same_approval_count": 1,
+          "order_free_summary": "one edit; one approval"
+        },
+        "negative_control": "Permuting independent notes without a state-changing effect leaves the state unchanged.",
+        "assumptions": [
+          "Single fictional source stream, complete causal sequence, explicit revision in each event, editing invalidates prior approval."
+        ],
+        "limits": "No distributed-clock total order, authenticated approval or live bridge execution is established."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Fold history A.",
+          "expected_answer": "Final `r2`, unapproved: the edit invalidates the earlier `r1` approval.",
+          "decision": null
+        },
+        "2": {
+          "question": "Fold history B.",
+          "expected_answer": "Final `r2`, approved in the authored model by `approve:r2`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Compare unordered counts.",
+          "expected_answer": "Both have `1` edit and `1` approval; these counts cannot select the final approval state.",
+          "decision": null
+        },
+        "4": {
+          "question": "What should the independent-note control do?",
+          "expected_answer": "Leave the state unchanged when only non-state-changing notes are permuted.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does a handoff timestamp authenticate approval?",
+          "expected_answer": "No. Revision, causal context, evidence and authorized reviewer remain necessary.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the exact source scope, revision and quantity units.",
+          "decision": null
+        },
+        {
+          "criterion": "Reproduce the fixed-case calculation with retained intermediate values.",
+          "decision": null
+        },
+        {
+          "criterion": "Evaluate the negative control and preserve a failed gate with its cause.",
+          "decision": null
+        },
+        {
+          "criterion": "Support the explanation with actual source locations and distinguish authored from observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain original answer, assistance and corrected answer; respect the falsifier and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Read the named prerequisite and primary/source passages, calculate the fixed case manually before assistance, retain the negative control, then critique an assistant explanation against the source and submit a bounded conclusion.",
+        "direct_manual_baseline": "Paper table of inputs, intermediate values, expected result, control and source locations.",
+        "falsifier": "Permuting independent notes without a state-changing effect leaves the state unchanged.",
+        "actual_learner_answer": null,
+        "retained_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "NET010",
+      "module_id": "net-010-compute-critical-paths-with-resource-assumptions",
+      "source_paths": {
+        "en": "streeling/courses/network-science/en/net-010-compute-critical-paths-with-resource-assumptions.md",
+        "fr": "streeling/courses/network-science/fr/net-010-compute-critical-paths-with-resource-assumptions.fr.md",
+        "es": "streeling/courses/network-science/es/net-010-compute-critical-paths-with-resource-assumptions.es.md"
+      },
+      "novelty_vs_prerequisites": "NET007 contrasts readiness and admission on a weighted diamond. This lesson supplies a resource-conflicting DAG whose longest dependency path is strictly shorter than the feasible limited-resource schedule.",
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/network-science/en/net-007-separate-dag-readiness-from-admission.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "e4f771c655caf9b3b74d3e3586e2c140d82dba4a945df7174bf824e6b25763d7",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/dag.rs",
+          "pin": "456df065ee837e33b5bbe22a4df0616a4fcb76e5",
+          "sha256": "b2bf8462f9a266bd32de0555b3c5dd7abea68cd704a5ad538e136fd53cd745e5",
+          "scope": "Graph representation, add_edge, has_path, predecessors, topological_sort and parallel_levels.",
+          "transport": "Full bytes fetched for hash; relevant body sections read via browser."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "durations_ticks": {
+            "A": 2,
+            "B": 4,
+            "C": 3,
+            "D": 1
+          },
+          "edges": [
+            [
+              "A",
+              "B"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "B",
+              "D"
+            ],
+            [
+              "C",
+              "D"
+            ]
+          ],
+          "shared_resource_jobs": [
+            "B",
+            "C"
+          ],
+          "resource_capacity": 1
+        },
+        "formula": "earliest_finish(v)=duration(v)+max(earliest_finish(predecessors)); add explicit non-overlap for shared exclusive resource",
+        "expected": {
+          "unlimited_earliest_finish": {
+            "A": 2,
+            "B": 6,
+            "C": 5,
+            "D": 7
+          },
+          "dependency_lower_bound": 7,
+          "resource_schedule": {
+            "A": [
+              0,
+              2
+            ],
+            "B": [
+              2,
+              6
+            ],
+            "C": [
+              6,
+              9
+            ],
+            "D": [
+              9,
+              10
+            ]
+          },
+          "resource_makespan": 10,
+          "alternative_resource_order_makespan": 10
+        },
+        "negative_control": "Removing the resource conflict permits B and C to overlap and finish in7ticks.",
+        "assumptions": [
+          "Exact nonpreemptive durations, no overhead, both B and C require the same exclusive resource for their whole duration, others unconstrained."
+        ],
+        "limits": "No optimal scheduler implementation, real worker utilization or IX timing was measured."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute unlimited-resource finishes.",
+          "expected_answer": "A `2`, B `6`, C `5`, D `7`; longest dependency duration `7`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Give a feasible exclusive-resource schedule.",
+          "expected_answer": "A `[0,2)`, B `[2,6)`, C `[6,9)`, D `[9,10)`; finish `10`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Reverse the resource order.",
+          "expected_answer": "C `[2,5)`, B `[5,9)`, D `[9,10)` still finish at `10`.",
+          "decision": null
+        },
+        "4": {
+          "question": "Evaluate the no-conflict control.",
+          "expected_answer": "Overlap B and C after A; D finishes at `7`, attaining the dependency lower bound.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies a proposed schedule?",
+          "expected_answer": "An unmet predecessor or overlapping exclusive reservations; no runtime timing claim follows.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the exact source scope, revision and quantity units.",
+          "decision": null
+        },
+        {
+          "criterion": "Reproduce the fixed-case calculation with retained intermediate values.",
+          "decision": null
+        },
+        {
+          "criterion": "Evaluate the negative control and preserve a failed gate with its cause.",
+          "decision": null
+        },
+        {
+          "criterion": "Support the explanation with actual source locations and distinguish authored from observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain original answer, assistance and corrected answer; respect the falsifier and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Read the named prerequisite and primary/source passages, calculate the fixed case manually before assistance, retain the negative control, then critique an assistant explanation against the source and submit a bounded conclusion.",
+        "direct_manual_baseline": "Paper table of inputs, intermediate values, expected result, control and source locations.",
+        "falsifier": "Removing the resource conflict permits B and C to overlap and finish in7ticks.",
+        "actual_learner_answer": null,
+        "retained_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "NET011",
+      "module_id": "net-011-separate-reachability-from-semantic-compatibility",
+      "source_paths": {
+        "en": "streeling/courses/network-science/en/net-011-separate-reachability-from-semantic-compatibility.md",
+        "fr": "streeling/courses/network-science/fr/net-011-separate-reachability-from-semantic-compatibility.fr.md",
+        "es": "streeling/courses/network-science/es/net-011-separate-reachability-from-semantic-compatibility.es.md"
+      },
+      "novelty_vs_prerequisites": "NET002 defines catalog edges without contracts; CS013 names spectral axes. This course composes a reachable path only when each boundary matches an explicit unit/orientation contract.",
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/network-science/en/net-002-capability-graphs-and-projections.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "6ec80cf3c04019b47a219cc0ad077d0479159f70921be96a669db8d70c477141",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "streeling/courses/computer-science/en/cs-013-preserve-spectral-axes-and-units.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "ad9ff783ab13e0cb3a3096d8a8906cdcc648ec91ecea8ee74531ae04b342a311",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/dag.rs",
+          "pin": "456df065ee837e33b5bbe22a4df0616a4fcb76e5",
+          "sha256": "b2bf8462f9a266bd32de0555b3c5dd7abea68cd704a5ad538e136fd53cd745e5",
+          "scope": "Graph representation, add_edge, has_path, predecessors, topological_sort and parallel_levels.",
+          "transport": "Full bytes fetched for hash; relevant body sections read via browser."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "edges": [
+            [
+              "capture",
+              "spectrum"
+            ],
+            [
+              "spectrum",
+              "display"
+            ]
+          ],
+          "producer": {
+            "shape": [
+              2,
+              3
+            ],
+            "orientation": "frame-major",
+            "sample_rate_hz": 48000,
+            "scale": "linear"
+          },
+          "consumer": {
+            "shape": [
+              2,
+              3
+            ],
+            "orientation": "bin-major",
+            "sample_rate_hz": 48000,
+            "scale": "dB"
+          }
+        },
+        "formula": "compatible=shape_match AND orientation_match AND sample_rate_match AND scale_match",
+        "expected": {
+          "reachable": true,
+          "shape_match": true,
+          "orientation_match": false,
+          "sample_rate_match": true,
+          "scale_match": false,
+          "compatible": false,
+          "mismatches": 2
+        },
+        "negative_control": "An otherwise identical frame-major linear consumer matches all stated fields; reachability still does not prove a live call.",
+        "assumptions": [
+          "The listed fields are the full teaching contract; no implicit conversion or live credentials."
+        ],
+        "limits": "No full spectral API validation, real transport or production adapter is established."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Is the display structurally reachable?",
+          "expected_answer": "Yes, through `capture -> spectrum -> display`; this says nothing about an observed call.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compare shape and sample rate.",
+          "expected_answer": "Shape `[2,3]` and sample rate `48000` match.",
+          "decision": null
+        },
+        "3": {
+          "question": "Count semantic mismatches.",
+          "expected_answer": "`2`: orientation and scale; overall compatible is `false`.",
+          "decision": null
+        },
+        "4": {
+          "question": "Evaluate the matching-card control.",
+          "expected_answer": "All stated fields match, but a live successful call remains unobserved.",
+          "decision": null
+        },
+        "5": {
+          "question": "What must an adapter proposal specify?",
+          "expected_answer": "Input/output meaning, conversion rules, reference and edge cases, plus independent validation evidence.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the exact source scope, revision and quantity units.",
+          "decision": null
+        },
+        {
+          "criterion": "Reproduce the fixed-case calculation with retained intermediate values.",
+          "decision": null
+        },
+        {
+          "criterion": "Evaluate the negative control and preserve a failed gate with its cause.",
+          "decision": null
+        },
+        {
+          "criterion": "Support the explanation with actual source locations and distinguish authored from observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain original answer, assistance and corrected answer; respect the falsifier and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Read the named prerequisite and primary/source passages, calculate the fixed case manually before assistance, retain the negative control, then critique an assistant explanation against the source and submit a bounded conclusion.",
+        "direct_manual_baseline": "Paper table of inputs, intermediate values, expected result, control and source locations.",
+        "falsifier": "An otherwise identical frame-major linear consumer matches all stated fields; reachability still does not prove a live call.",
+        "actual_learner_answer": null,
+        "retained_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PM008",
+      "module_id": "pm-008-size-a-fifty-course-batch-by-review-capacity",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md",
+        "fr": "streeling/courses/product-management/fr/pm-008-size-a-fifty-course-batch-by-review-capacity.fr.md",
+        "es": "streeling/courses/product-management/es/pm-008-size-a-fifty-course-batch-by-review-capacity.es.md"
+      },
+      "novelty_vs_prerequisites": "PM003 counts review queue events; this course converts the actual requested batch size into a role-specific hypothetical review workload without claiming measured reviewer capacity.",
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/product-management/en/pm-003-review-queue-flow-metrics.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "737a59b015767ceb7a97efa0eb158881cf71014939d4038ef25014ab08f1c83a",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "streeling/courses/product-management/en/pm-002-release-evidence-gate.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "a9e01ebe356618e94bd21ff6ec0b86379b14f091c3cb1f6fde94d7f06ccd78ef",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/batch50-2026-10-23/production-plan.md",
+          "pin": "batch planning input read in this worktree on2026-10-23",
+          "sha256": "47cdd6920ecc0a5de51ee670c6950b85620c46c5072b151cb142563cdc26971c",
+          "scope": "Full batch scope and ownership/production instructions read; fifty-course request is actual, review rates authored."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/batch50-2026-10-23/batch-plan.json",
+          "pin": "batch planning input read in this worktree on2026-10-23",
+          "sha256": "4716f9bd94d03f35d80df4f7a6a005e52434f14f522d3a4a9a1536c22e59db49",
+          "scope": "Full batch scope and ownership/production instructions read; fifty-course request is actual, review rates authored."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "courses": 50,
+          "locales": 3,
+          "translated_sources": 100,
+          "exercises_per_course": 5,
+          "subject_minutes_per_course": 20,
+          "language_minutes_per_translation": 12,
+          "learner_minutes_per_course": 25,
+          "subject_minutes_per_day": 100,
+          "language_minutes_per_day": 200,
+          "learner_minutes_per_day": 125
+        },
+        "formula": "role_work=scope*minutes_per_item; role_days=role_work/role_capacity; optimistic_parallel_days=max(role_days)",
+        "expected": {
+          "sources": 150,
+          "localized_answer_pairs": 750,
+          "prepared_learner_criteria": 250,
+          "subject_minutes": 1000,
+          "language_minutes": 1200,
+          "learner_minutes": 1250,
+          "total_minutes": 3450,
+          "subject_days": 10,
+          "language_days": 6,
+          "learner_days": 10,
+          "optimistic_parallel_days": 10
+        },
+        "negative_control": "Zero capacity in any required role admits no finite completion estimate for its positive work.",
+        "assumptions": [
+          "Actual requested fifty-course scope; all durations/capacities fictional, dedicated roles, divisible work, parallel availability, no rework or waiting."
+        ],
+        "limits": "Capacity planning scenario, not a deadline, measured team rate, completed review or learner result."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Count sources, localized pairs and prepared criteria.",
+          "expected_answer": "`50*3=150` sources; `50*3*5=750` pairs; `50*5=250` criteria.",
+          "decision": null
+        },
+        "2": {
+          "question": "Calculate role workloads.",
+          "expected_answer": "Subject `50*20=1000`, language `100*12=1200`, learner `50*25=1250` minutes; total `3450`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Calculate role durations and parallel bound.",
+          "expected_answer": "Subject `10`, language `6`, learner `10` days; optimistic parallel bound `10` days.",
+          "decision": null
+        },
+        "4": {
+          "question": "Evaluate a required role with zero capacity.",
+          "expected_answer": "Positive required work has no finite finish estimate; do not divide by zero or call it complete.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which inputs are actual and which fictional?",
+          "expected_answer": "The requested batch scope is actual; review times, capacities and resulting calendar scenario are authored.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the exact source scope, revision and quantity units.",
+          "decision": null
+        },
+        {
+          "criterion": "Reproduce the fixed-case calculation with retained intermediate values.",
+          "decision": null
+        },
+        {
+          "criterion": "Evaluate the negative control and preserve a failed gate with its cause.",
+          "decision": null
+        },
+        {
+          "criterion": "Support the explanation with actual source locations and distinguish authored from observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain original answer, assistance and corrected answer; respect the falsifier and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Read the named prerequisite and primary/source passages, calculate the fixed case manually before assistance, retain the negative control, then critique an assistant explanation against the source and submit a bounded conclusion.",
+        "direct_manual_baseline": "Paper table of inputs, intermediate values, expected result, control and source locations.",
+        "falsifier": "Zero capacity in any required role admits no finite completion estimate for its positive work.",
+        "actual_learner_answer": null,
+        "retained_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PM009",
+      "module_id": "pm-009-separate-release-adoption-from-artifact-downloads",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-009-separate-release-adoption-from-artifact-downloads.md",
+        "fr": "streeling/courses/product-management/fr/pm-009-separate-release-adoption-from-artifact-downloads.fr.md",
+        "es": "streeling/courses/product-management/es/pm-009-separate-release-adoption-from-artifact-downloads.es.md"
+      },
+      "novelty_vs_prerequisites": "PM002 separates release gates and PM006 evaluates a pilot horizon; this lesson defines adoption on a fixed eligible cohort and separates event downloads, enabling, use and task success.",
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/product-management/en/pm-002-release-evidence-gate.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "a9e01ebe356618e94bd21ff6ec0b86379b14f091c3cb1f6fde94d7f06ccd78ef",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        },
+        {
+          "path_or_url": "streeling/courses/product-management/en/pm-006-test-a-pilot-against-its-decision-horizon.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "ed714eff740f12aee462f5cf156dc84d5989a033c444fd4740e53f2e542ef8b3",
+          "scope": "Frontmatter and project-question/initial model sections inspected for novelty and prerequisite boundary; no old runtime result imported as a new run."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "download_events": 120,
+          "distinct_downloaders": 70,
+          "eligible_active_cohort": 50,
+          "enabled_in_cohort": 30,
+          "task_attempted_in_enabled_cohort": 18,
+          "task_success_in_attempted": 12
+        },
+        "formula": "adoption=enabled_in_cohort/eligible_active_cohort; attempted_coverage=attempted/enabled; observed_task_success=success/attempted",
+        "expected": {
+          "adoption": 0.6,
+          "attempted_coverage": 0.6,
+          "task_success_fraction": "2/3",
+          "cohort_task_success_rate": 0.24,
+          "downloads_per_cohort_member": 2.4
+        },
+        "negative_control": "A mirrored artifact can have more download events without any change in the eligible cohort or enabled users.",
+        "assumptions": [
+          "Fictional counts in one fixed window, stable release and cohort identity, nested enabled/attempted/success sets, downloader set not identical to eligible cohort."
+        ],
+        "limits": "No real telemetry, causal benefit, retention, sustained adoption or user-learning improvement was measured."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate the defined adoption rate.",
+          "expected_answer": "`30/50=0.6` within the eligible active cohort.",
+          "decision": null
+        },
+        "2": {
+          "question": "Calculate attempted-task coverage.",
+          "expected_answer": "`18/30=0.6` among enabled cohort members.",
+          "decision": null
+        },
+        "3": {
+          "question": "Calculate task success with both denominators.",
+          "expected_answer": "Among attempts `12/18=2/3`; across the full cohort `12/50=0.24`.",
+          "decision": null
+        },
+        "4": {
+          "question": "Interpret downloads divided by cohort size.",
+          "expected_answer": "`120/50=2.4` events per cohort member; this is not a user-adoption fraction.",
+          "decision": null
+        },
+        "5": {
+          "question": "Evaluate the mirror-download control.",
+          "expected_answer": "Adoption and task ratios stay unchanged because every cohort numerator and denominator stays fixed.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the exact source scope, revision and quantity units.",
+          "decision": null
+        },
+        {
+          "criterion": "Reproduce the fixed-case calculation with retained intermediate values.",
+          "decision": null
+        },
+        {
+          "criterion": "Evaluate the negative control and preserve a failed gate with its cause.",
+          "decision": null
+        },
+        {
+          "criterion": "Support the explanation with actual source locations and distinguish authored from observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain original answer, assistance and corrected answer; respect the falsifier and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Read the named prerequisite and primary/source passages, calculate the fixed case manually before assistance, retain the negative control, then critique an assistant explanation against the source and submit a bounded conclusion.",
+        "direct_manual_baseline": "Paper table of inputs, intermediate values, expected result, control and source locations.",
+        "falsifier": "A mirrored artifact can have more download events without any change in the eligible cohort or enabled users.",
+        "actual_learner_answer": null,
+        "retained_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    }
+  ],
+  "human_review": null,
+  "fluent_language_review": null,
+  "learner_decision": null,
+  "runtime_decision": null,
+  "deployed_html": null
+}
