@@ -15,6 +15,7 @@
 - Diagrams are ```` ```mermaid ```` code blocks: `src/components/MarkdownContent.astro` replaces them with the rendered diagram in the browser (Mermaid from jsdelivr, pinned), and keeps the code block if a diagram doesn't parse. Their labels are prose: translate them in `fr/` and `es/`. Add one only where it explains more than the text around it.
 - In `.mdx` files, prose must not contain bare `{`, `}` or `<` (JSX); keep them inside code. A fenced block that itself contains ``` needs a four-backtick outer fence.
 - Claude artifacts (claude.ai/code/artifact/…) worth keeping are listed on `artifacts.md` (all locales) under the matching area, with their language, date and a short description, and linked from the courses they illustrate. Link only artifacts shared with anyone who has the link, and drop query strings such as `?via=…`.
+- Demos a reader can play or watch (a web build, or the video and captures of a native prototype) are listed on `demos.md` (all locales) and in the *Demos* section of the three home pages.
 - This repository is shared by several sessions: stage explicit paths only, right before committing (no `git mv` or `git add -A` ahead of time).
 
 ## Development
