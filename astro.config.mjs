@@ -33,6 +33,7 @@ export default defineConfig({
 			sidebar: [
 				{ label: 'Method', translations: { fr: 'Méthode', es: 'Método' }, slug: 'method' },
 				{ label: 'Artifacts', translations: { fr: 'Artefacts', es: 'Artefactos' }, slug: 'artifacts' },
+				{ label: 'Demos', translations: { fr: 'Démos', es: 'Demos' }, slug: 'demos' },
 				{
 					label: 'Software Engineering',
 					translations: { fr: 'Génie logiciel', es: 'Ingeniería de software' },
