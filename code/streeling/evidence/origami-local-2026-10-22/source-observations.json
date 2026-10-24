@@ -1,0 +1,23 @@
+{
+  "source_commit": "d7c22fdd6a62becb66b9d7246ea85850e7c55854",
+  "observations": [
+    {
+      "id": "two-filters-not-complete-assignment-test",
+      "status": "observed-preserved",
+      "finding": "local.rs implements alternating angles and M-minus-V but not the strict-smallest-angle assignment rule. Do not infer full analyse acceptance from local filters."
+    },
+    {
+      "id": "unknowns-reduce-local-coverage",
+      "status": "observed-preserved",
+      "finding": "A central U/F moves the modeled center out of applicability; empty failures and maximum0 can coexist with applicable0. Skipped counts must remain visible."
+    },
+    {
+      "id": "coefficient-tolerance-not-material-tolerance",
+      "status": "observed-preserved",
+      "finding": "The local helper takes absolute radian tolerance. Its computational1e-9 value in analyse is not a measured paper or workshop angular tolerance."
+    }
+  ],
+  "production_bug_reproduced": false,
+  "new_runtime_policy": null,
+  "human_review": null
+}

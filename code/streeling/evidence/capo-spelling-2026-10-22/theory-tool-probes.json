@@ -1,0 +1,51 @@
+{
+  "scope": "Three actual read-only GA chord-transposition tool responses. Service revision unknown; not CapoSkill execution, score import, capo/fret adapter, playing or learner evidence.",
+  "service_revision": null,
+  "probes": [
+    {
+      "tool": "ga_transpose_chord",
+      "args": {
+        "symbol": "C",
+        "semitones": 2
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "D"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "ga_transpose_chord",
+      "args": {
+        "symbol": "B",
+        "semitones": -4
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "G"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "ga_transpose_chord",
+      "args": {
+        "symbol": "Bb",
+        "semitones": 2
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "C"
+          }
+        ]
+      }
+    }
+  ]
+}

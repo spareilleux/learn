@@ -1,0 +1,84 @@
+---
+module_id: sem-005-bind-scene-hits-to-crossing-identity
+department: semiotics
+course: "Bind Scene Hits to Crossing Identity"
+level: intermediate
+prerequisites: [sem-004-face-identity-under-reindexing]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Bind Scene Hits to Crossing Identity
+
+> **AI source draft.** Human subject, fluent-language, and learner reviews remain pending. Public course HTML publication remains pending.
+
+[SEM-004](sem-004-face-identity-under-reindexing.md) separates a material reference from an array position. A [Godot](https://docs.godotengine.org/en/4.6/tutorials/editor/command_line_tutorial.html) physics hit must name its source crossing after serialization. Your deliverable is an identity audit. Read the [lab README](../../../../code/streeling/weave-godot/README.md), [evidence README](../../../../code/streeling/evidence/weave-scene-2026-10-22/README.md), and [learner task](../../../../code/streeling/evidence/weave-scene-2026-10-22/learner-task.md). The evidence README retains execution details and failures.
+
+Verified Windows result: save/load and 36 physics probes passed; scale, collider-binding, and restarted-parity controls failed at their named gates. Earlier launcher failures supply no scene proof.
+
+## 1. Name the intended object
+
+The immutable [evaluator](https://raw.githubusercontent.com/GuitarAlchemist/Demerzel/f23ccae6c049d9066a1be2221c68f3b0bcf48373/state/streeling/fixtures/visual-computing/vc-007/evaluate_weave.py) and [specification](https://raw.githubusercontent.com/GuitarAlchemist/Demerzel/f23ccae6c049d9066a1be2221c68f3b0bcf48373/state/streeling/fixtures/visual-computing/vc-007/weave-trial.json) define synthetic sample `odd-tile-seam-a`. Repeating a 3 × 3 tile 2 × 2 gives 36 crossings on a 6 × 6 grid. Global parity has 0 adjacency violations; restarted parity has 12 and is rejected before scene creation.
+
+`w3-f0` names grid crossing `(3,0)` within this source model and manifest revision. It is not a universal material identity across arbitrary edits. The adapter stores this sign in node names and metadata so a loaded collider can refer to the manifest. That correspondence establishes its meaning.
+
+### Exercise 1 — Complete a reference
+
+An agent reports “crossing 3 is wrong.” What should an inspectable report add?
+
+> **Answer:** Include sample, source/manifest digest, stable crossing ID such as `w3-f0`, expected property, and observed result. An integer alone could be an array slot, grid coordinate, or runtime identifier. State which interpretation is intended before alleging a defect.
+
+## 2. Distinguish three kinds of address
+
+A source ID identifies the intended crossing under the declared manifest. A node path locates a node in a particular scene hierarchy. A runtime instance ID identifies a currently instantiated engine object. Renaming or reparenting a node can alter its path without altering the intended crossing. Freeing and reloading a scene creates new runtime objects; their instance IDs should not be expected to preserve source identity.
+
+The trial uses [PackedScene](https://docs.godotengine.org/en/4.6/classes/class_packedscene.html) with explicit owners and metadata, saves, frees the original, and loads a new instance. It expects 36 crossing parents and 72 meshes, bodies, and collision shapes. Runtime resource IDs count two shared resources of each mesh, shape, and material kind; they are not crossing provenance labels. An array's enumeration order is another address, not an identity guarantee.
+
+### Exercise 2 — Follow the referent
+
+After reload, a body has a new runtime ID but metadata `crossing_id = w3-f0`. Is identity retention disproved?
+
+> **Answer:** No. Runtime replacement is expected. Check the loaded metadata against the correct source manifest and probe target. A matching string without that provenance and correspondence is insufficient, but equality of old and new runtime IDs is not required.
+
+## 3. Separate the predicates
+
+[PhysicsDirectSpaceState3D.intersect_ray](https://docs.godotengine.org/en/4.6/classes/class_physicsdirectspacestate3d.html) returns a hit object whose collider metadata carries `crossing_id` and `strand`. The trial casts 36 downward rays at expected centres. Three distinct predicates matter: the loaded root binds to the source-manifest digest; the hit names the target crossing; and its strand is the expected upper strand. Under phase zero, `w2-f0` expects warp and `w3-f0` expects weft.
+
+A digest binds exact bytes, not truth. Those bytes may encode a rejected pattern; semantic admission addresses that. Correct hit identity does not establish upper/lower correctness, and a correct strand label does not establish crossing identity. Separate predicates make failures informative.
+
+### Exercise 3 — Read mixed evidence
+
+At `w3-f0`, the hit says `crossing_id = w2-f0` and `strand = weft`; the root digest matches. Which predicates can still pass?
+
+> **Answer:** Manifest binding and upper-strand expectation can pass. `ray_crossing_identity` fails because the requested crossing is `w3-f0`. The two successful predicates cannot repair the false reference; retain all three observations.
+
+## 4. Break the binding deliberately
+
+In a scratch copy, change only the static body's `crossing_id` assignment to the wrong ID. Preserve geometry, manifest, and strand assignment. The named `ray_crossing_identity` check must fail even if position and dimension predicates pass. This control tests whether the checker notices a false referent rather than merely detecting a surface.
+
+With installed [Node.js](https://nodejs.org/en/learn/getting-started/introduction-to-nodejs), [Python](https://docs.python.org/3/using/cmdline.html), and Godot 4.6.1 on `PATH`, run with new output outside the checkout:
+
+```text
+node code/streeling/weave-godot/run.mjs NEW_OUTPUT_DIR EXTERNAL_EVALUATOR.py EXTERNAL_SPEC.json
+```
+
+The spelling is common across systems; Windows is exercised, Linux/WSL and macOS remain to verify. Keep hashes and failure logs. A startup timeout is an environment/runtime failure, not evidence that the identity predicate accepted or rejected the mutation. It gives no new scene proof.
+
+### Exercise 4 — Protect the control
+
+Would moving the collider while changing its ID isolate an identity-binding defect?
+
+> **Answer:** No. Two interventions could produce a missed ray or a wrong hit for different reasons. Change only the metadata assignment, rerun, and retain the named failure. If execution fails before querying, report the control as unassessed.
+
+## 5. Bound the communicative claim
+
+These isolated box proxies carry warp along Z and weft along X; they do not establish continuous yarn. Automated physics hits are not human clicks, successful highlights, or learner understanding. A scene can pass all 36 query checks while its visual explanation remains confusing.
+
+Treat composability as a hypothesis: observe, change one binding, rerun, preserve the counterexample, and state the tested boundary. A simple manifest and a labeled 2D grid are credible alternatives. This exercise gives no universal reason to adopt a DSL or expect progress to grow exponentially with tool count.
+
+### Exercise 5 — Design the next observation
+
+What would an actual learner trial need beyond a passing query report?
+
+> **Answer:** A fixed task identifying a named crossing and its upper strand, recorded unassisted answers, and a comparison with the labeled 2D baseline. Human interaction, subject review, fluent-language review, and publication remain separate pending work. A scripted hit proves only the specified source-to-collider correspondence for the tested bytes.

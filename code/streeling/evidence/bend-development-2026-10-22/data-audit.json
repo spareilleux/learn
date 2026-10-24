@@ -1,0 +1,5190 @@
+{
+  "schema": "streeling-independent-data-audit-v1",
+  "packet": "bend-development-2026-10-22",
+  "reviewed_at_utc": "2026-10-22T23:54:06.198126+00:00",
+  "reviewer_role": "Independent AI data/source audit; no human or learner approval",
+  "verdict": "pass",
+  "findings": [
+    {
+      "id": "conditional-model",
+      "status": "observed-preserved",
+      "finding": "All bend allowances and k bounds are conditional authored circular neutral-layer geometry. k interval is deterministic sensitivity, not vendor calibration, probability interval or outside-dimension bend compensation."
+    },
+    {
+      "id": "angle-and-selected-checker-scope",
+      "status": "observed-preserved",
+      "finding": "Signed FOLD degree deviation and the stipulated planar included-angle convention remain distinct. All 35 cases translate only inspected range/sign/zero predicates; no parser/checker execution or whole IX acceptance is claimed."
+    },
+    {
+      "id": "metadata-not-model",
+      "status": "observed-preserved",
+      "finding": "Selected records preserve arbitrary other metadata. That does not establish physical k/radius consumption. ADR explicitly excludes bend-radius refusals and folding motion; no repository-wide absence inference was used."
+    },
+    {
+      "id": "geometry-not-manufacture",
+      "status": "observed-preserved",
+      "finding": "Zero Gaussian curvature is local and does not supply a cut-free global one-to-one rectangular chart. The closed-cylinder seam and exact smooth regular no-stretch sphere obstruction are bounded ideal geometry, outside the pinned flat IX domain. Approximation, material deformation and manufacture are not ruled out by the sphere statement."
+    },
+    {
+      "id": "unread-and-unexecuted",
+      "status": "observed-preserved",
+      "finding": "The inaccessible Autodesk support article body/images remain unread. Source test assertions are text evidence, not fresh results. No CAD command, host, checker, physical bend or fabrication was executed."
+    },
+    {
+      "id": "full-circle-roundoff",
+      "status": "observed-preserved",
+      "finding": "Stored full-circle chord ~2.45e-15 mm is ordinary floating evaluation residue; exact endpoint separation is zero. It does not contradict the seam or create a physical gap."
+    }
+  ],
+  "fix_requests": [],
+  "check_count": 698,
+  "checks": [
+    {
+      "id": "bend.inner_radius_mm.rational",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "bend.inner_radius_mm.decimal",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "bend.thickness_mm.rational",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "bend.thickness_mm.decimal",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "bend.reference_k.rational",
+      "pass_": true,
+      "actual": "2/5",
+      "expected": "2/5"
+    },
+    {
+      "id": "bend.reference_k.decimal",
+      "pass_": true,
+      "actual": 0.4,
+      "expected": 0.4
+    },
+    {
+      "id": "bend.reference_neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "24/5",
+      "expected": "24/5"
+    },
+    {
+      "id": "bend.reference_neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 4.8,
+      "expected": 4.8
+    },
+    {
+      "id": "bend.tangent_lengths",
+      "pass_": true,
+      "actual": [
+        30,
+        20
+      ],
+      "expected": [
+        30,
+        20
+      ]
+    },
+    {
+      "id": "bend.row_count",
+      "pass_": true,
+      "actual": 18,
+      "expected": 18
+    },
+    {
+      "id": "bend.exact_coverage",
+      "pass_": true,
+      "actual": [
+        [
+          0,
+          "3/10"
+        ],
+        [
+          0,
+          "2/5"
+        ],
+        [
+          0,
+          "1/2"
+        ],
+        [
+          30,
+          "3/10"
+        ],
+        [
+          30,
+          "2/5"
+        ],
+        [
+          30,
+          "1/2"
+        ],
+        [
+          60,
+          "3/10"
+        ],
+        [
+          60,
+          "2/5"
+        ],
+        [
+          60,
+          "1/2"
+        ],
+        [
+          90,
+          "3/10"
+        ],
+        [
+          90,
+          "2/5"
+        ],
+        [
+          90,
+          "1/2"
+        ],
+        [
+          120,
+          "3/10"
+        ],
+        [
+          120,
+          "2/5"
+        ],
+        [
+          120,
+          "1/2"
+        ],
+        [
+          180,
+          "3/10"
+        ],
+        [
+          180,
+          "2/5"
+        ],
+        [
+          180,
+          "1/2"
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          "3/10"
+        ],
+        [
+          0,
+          "2/5"
+        ],
+        [
+          0,
+          "1/2"
+        ],
+        [
+          30,
+          "3/10"
+        ],
+        [
+          30,
+          "2/5"
+        ],
+        [
+          30,
+          "1/2"
+        ],
+        [
+          60,
+          "3/10"
+        ],
+        [
+          60,
+          "2/5"
+        ],
+        [
+          60,
+          "1/2"
+        ],
+        [
+          90,
+          "3/10"
+        ],
+        [
+          90,
+          "2/5"
+        ],
+        [
+          90,
+          "1/2"
+        ],
+        [
+          120,
+          "3/10"
+        ],
+        [
+          120,
+          "2/5"
+        ],
+        [
+          120,
+          "1/2"
+        ],
+        [
+          180,
+          "3/10"
+        ],
+        [
+          180,
+          "2/5"
+        ],
+        [
+          180,
+          "1/2"
+        ]
+      ]
+    },
+    {
+      "id": "bend.row[0].degrees",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "bend.row[0].k.rational",
+      "pass_": true,
+      "actual": "3/10",
+      "expected": "3/10"
+    },
+    {
+      "id": "bend.row[0].k.decimal",
+      "pass_": true,
+      "actual": 0.3,
+      "expected": 0.3
+    },
+    {
+      "id": "bend.row[0].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "23/5",
+      "expected": "23/5"
+    },
+    {
+      "id": "bend.row[0].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 4.6,
+      "expected": 4.6
+    },
+    {
+      "id": "bend.row[0].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "bend.row[0].bend_radians.decimal",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "bend.row[0].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "bend.row[0].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "bend.row[0].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "bend.row[0].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "bend.row[0].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "bend.row[0].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "bend.row[0].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "bend.row[0].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 50.0,
+      "expected": 50.0
+    },
+    {
+      "id": "bend.row[0].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[1].degrees",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "bend.row[1].k.rational",
+      "pass_": true,
+      "actual": "2/5",
+      "expected": "2/5"
+    },
+    {
+      "id": "bend.row[1].k.decimal",
+      "pass_": true,
+      "actual": 0.4,
+      "expected": 0.4
+    },
+    {
+      "id": "bend.row[1].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "24/5",
+      "expected": "24/5"
+    },
+    {
+      "id": "bend.row[1].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 4.8,
+      "expected": 4.8
+    },
+    {
+      "id": "bend.row[1].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "bend.row[1].bend_radians.decimal",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "bend.row[1].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "bend.row[1].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "bend.row[1].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "bend.row[1].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "bend.row[1].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "bend.row[1].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "bend.row[1].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "bend.row[1].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 50.0,
+      "expected": 50.0
+    },
+    {
+      "id": "bend.row[1].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[2].degrees",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "bend.row[2].k.rational",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "bend.row[2].k.decimal",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "bend.row[2].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "bend.row[2].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 5.0,
+      "expected": 5.0
+    },
+    {
+      "id": "bend.row[2].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "bend.row[2].bend_radians.decimal",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "bend.row[2].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "bend.row[2].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "bend.row[2].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "bend.row[2].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "bend.row[2].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "bend.row[2].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "bend.row[2].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "bend.row[2].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 50.0,
+      "expected": 50.0
+    },
+    {
+      "id": "bend.row[2].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[3].degrees",
+      "pass_": true,
+      "actual": 30,
+      "expected": 30
+    },
+    {
+      "id": "bend.row[3].k.rational",
+      "pass_": true,
+      "actual": "3/10",
+      "expected": "3/10"
+    },
+    {
+      "id": "bend.row[3].k.decimal",
+      "pass_": true,
+      "actual": 0.3,
+      "expected": 0.3
+    },
+    {
+      "id": "bend.row[3].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "23/5",
+      "expected": "23/5"
+    },
+    {
+      "id": "bend.row[3].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 4.6,
+      "expected": 4.6
+    },
+    {
+      "id": "bend.row[3].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1/6",
+      "expected": "1/6"
+    },
+    {
+      "id": "bend.row[3].bend_radians.decimal",
+      "pass_": true,
+      "actual": 0.5235987755982988,
+      "expected": 0.5235987755982988
+    },
+    {
+      "id": "bend.row[3].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "2/3",
+      "expected": "2/3"
+    },
+    {
+      "id": "bend.row[3].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 2.0943951023931953,
+      "expected": 2.0943951023931953
+    },
+    {
+      "id": "bend.row[3].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "23/30",
+      "expected": "23/30"
+    },
+    {
+      "id": "bend.row[3].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 2.408554367752175,
+      "expected": 2.408554367752175
+    },
+    {
+      "id": "bend.row[3].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "bend.row[3].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 3.141592653589793,
+      "expected": 3.141592653589793
+    },
+    {
+      "id": "bend.row[3].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "23/30",
+      "expected": "23/30"
+    },
+    {
+      "id": "bend.row[3].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 52.408554367752174,
+      "expected": 52.408554367752174
+    },
+    {
+      "id": "bend.row[3].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[4].degrees",
+      "pass_": true,
+      "actual": 30,
+      "expected": 30
+    },
+    {
+      "id": "bend.row[4].k.rational",
+      "pass_": true,
+      "actual": "2/5",
+      "expected": "2/5"
+    },
+    {
+      "id": "bend.row[4].k.decimal",
+      "pass_": true,
+      "actual": 0.4,
+      "expected": 0.4
+    },
+    {
+      "id": "bend.row[4].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "24/5",
+      "expected": "24/5"
+    },
+    {
+      "id": "bend.row[4].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 4.8,
+      "expected": 4.8
+    },
+    {
+      "id": "bend.row[4].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1/6",
+      "expected": "1/6"
+    },
+    {
+      "id": "bend.row[4].bend_radians.decimal",
+      "pass_": true,
+      "actual": 0.5235987755982988,
+      "expected": 0.5235987755982988
+    },
+    {
+      "id": "bend.row[4].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "2/3",
+      "expected": "2/3"
+    },
+    {
+      "id": "bend.row[4].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 2.0943951023931953,
+      "expected": 2.0943951023931953
+    },
+    {
+      "id": "bend.row[4].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "bend.row[4].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 2.5132741228718345,
+      "expected": 2.5132741228718345
+    },
+    {
+      "id": "bend.row[4].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "bend.row[4].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 3.141592653589793,
+      "expected": 3.141592653589793
+    },
+    {
+      "id": "bend.row[4].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "bend.row[4].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 52.513274122871834,
+      "expected": 52.513274122871834
+    },
+    {
+      "id": "bend.row[4].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[5].degrees",
+      "pass_": true,
+      "actual": 30,
+      "expected": 30
+    },
+    {
+      "id": "bend.row[5].k.rational",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "bend.row[5].k.decimal",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "bend.row[5].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "bend.row[5].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 5.0,
+      "expected": 5.0
+    },
+    {
+      "id": "bend.row[5].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1/6",
+      "expected": "1/6"
+    },
+    {
+      "id": "bend.row[5].bend_radians.decimal",
+      "pass_": true,
+      "actual": 0.5235987755982988,
+      "expected": 0.5235987755982988
+    },
+    {
+      "id": "bend.row[5].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "2/3",
+      "expected": "2/3"
+    },
+    {
+      "id": "bend.row[5].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 2.0943951023931953,
+      "expected": 2.0943951023931953
+    },
+    {
+      "id": "bend.row[5].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "5/6",
+      "expected": "5/6"
+    },
+    {
+      "id": "bend.row[5].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 2.6179938779914944,
+      "expected": 2.6179938779914944
+    },
+    {
+      "id": "bend.row[5].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "bend.row[5].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 3.141592653589793,
+      "expected": 3.141592653589793
+    },
+    {
+      "id": "bend.row[5].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "5/6",
+      "expected": "5/6"
+    },
+    {
+      "id": "bend.row[5].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 52.617993877991495,
+      "expected": 52.617993877991495
+    },
+    {
+      "id": "bend.row[5].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[6].degrees",
+      "pass_": true,
+      "actual": 60,
+      "expected": 60
+    },
+    {
+      "id": "bend.row[6].k.rational",
+      "pass_": true,
+      "actual": "3/10",
+      "expected": "3/10"
+    },
+    {
+      "id": "bend.row[6].k.decimal",
+      "pass_": true,
+      "actual": 0.3,
+      "expected": 0.3
+    },
+    {
+      "id": "bend.row[6].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "23/5",
+      "expected": "23/5"
+    },
+    {
+      "id": "bend.row[6].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 4.6,
+      "expected": 4.6
+    },
+    {
+      "id": "bend.row[6].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1/3",
+      "expected": "1/3"
+    },
+    {
+      "id": "bend.row[6].bend_radians.decimal",
+      "pass_": true,
+      "actual": 1.0471975511965976,
+      "expected": 1.0471975511965976
+    },
+    {
+      "id": "bend.row[6].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "4/3",
+      "expected": "4/3"
+    },
+    {
+      "id": "bend.row[6].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 4.1887902047863905,
+      "expected": 4.1887902047863905
+    },
+    {
+      "id": "bend.row[6].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "23/15",
+      "expected": "23/15"
+    },
+    {
+      "id": "bend.row[6].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 4.81710873550435,
+      "expected": 4.81710873550435
+    },
+    {
+      "id": "bend.row[6].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "bend.row[6].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 6.283185307179586,
+      "expected": 6.283185307179586
+    },
+    {
+      "id": "bend.row[6].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "23/15",
+      "expected": "23/15"
+    },
+    {
+      "id": "bend.row[6].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 54.81710873550435,
+      "expected": 54.81710873550435
+    },
+    {
+      "id": "bend.row[6].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[7].degrees",
+      "pass_": true,
+      "actual": 60,
+      "expected": 60
+    },
+    {
+      "id": "bend.row[7].k.rational",
+      "pass_": true,
+      "actual": "2/5",
+      "expected": "2/5"
+    },
+    {
+      "id": "bend.row[7].k.decimal",
+      "pass_": true,
+      "actual": 0.4,
+      "expected": 0.4
+    },
+    {
+      "id": "bend.row[7].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "24/5",
+      "expected": "24/5"
+    },
+    {
+      "id": "bend.row[7].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 4.8,
+      "expected": 4.8
+    },
+    {
+      "id": "bend.row[7].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1/3",
+      "expected": "1/3"
+    },
+    {
+      "id": "bend.row[7].bend_radians.decimal",
+      "pass_": true,
+      "actual": 1.0471975511965976,
+      "expected": 1.0471975511965976
+    },
+    {
+      "id": "bend.row[7].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "4/3",
+      "expected": "4/3"
+    },
+    {
+      "id": "bend.row[7].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 4.1887902047863905,
+      "expected": 4.1887902047863905
+    },
+    {
+      "id": "bend.row[7].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "8/5",
+      "expected": "8/5"
+    },
+    {
+      "id": "bend.row[7].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 5.026548245743669,
+      "expected": 5.026548245743669
+    },
+    {
+      "id": "bend.row[7].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "bend.row[7].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 6.283185307179586,
+      "expected": 6.283185307179586
+    },
+    {
+      "id": "bend.row[7].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "8/5",
+      "expected": "8/5"
+    },
+    {
+      "id": "bend.row[7].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 55.02654824574367,
+      "expected": 55.02654824574367
+    },
+    {
+      "id": "bend.row[7].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[8].degrees",
+      "pass_": true,
+      "actual": 60,
+      "expected": 60
+    },
+    {
+      "id": "bend.row[8].k.rational",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "bend.row[8].k.decimal",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "bend.row[8].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "bend.row[8].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 5.0,
+      "expected": 5.0
+    },
+    {
+      "id": "bend.row[8].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1/3",
+      "expected": "1/3"
+    },
+    {
+      "id": "bend.row[8].bend_radians.decimal",
+      "pass_": true,
+      "actual": 1.0471975511965976,
+      "expected": 1.0471975511965976
+    },
+    {
+      "id": "bend.row[8].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "4/3",
+      "expected": "4/3"
+    },
+    {
+      "id": "bend.row[8].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 4.1887902047863905,
+      "expected": 4.1887902047863905
+    },
+    {
+      "id": "bend.row[8].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "5/3",
+      "expected": "5/3"
+    },
+    {
+      "id": "bend.row[8].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 5.235987755982989,
+      "expected": 5.235987755982989
+    },
+    {
+      "id": "bend.row[8].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "bend.row[8].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 6.283185307179586,
+      "expected": 6.283185307179586
+    },
+    {
+      "id": "bend.row[8].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "5/3",
+      "expected": "5/3"
+    },
+    {
+      "id": "bend.row[8].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 55.23598775598299,
+      "expected": 55.23598775598299
+    },
+    {
+      "id": "bend.row[8].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[9].degrees",
+      "pass_": true,
+      "actual": 90,
+      "expected": 90
+    },
+    {
+      "id": "bend.row[9].k.rational",
+      "pass_": true,
+      "actual": "3/10",
+      "expected": "3/10"
+    },
+    {
+      "id": "bend.row[9].k.decimal",
+      "pass_": true,
+      "actual": 0.3,
+      "expected": 0.3
+    },
+    {
+      "id": "bend.row[9].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "23/5",
+      "expected": "23/5"
+    },
+    {
+      "id": "bend.row[9].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 4.6,
+      "expected": 4.6
+    },
+    {
+      "id": "bend.row[9].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "bend.row[9].bend_radians.decimal",
+      "pass_": true,
+      "actual": 1.5707963267948966,
+      "expected": 1.5707963267948966
+    },
+    {
+      "id": "bend.row[9].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "bend.row[9].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 6.283185307179586,
+      "expected": 6.283185307179586
+    },
+    {
+      "id": "bend.row[9].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "23/10",
+      "expected": "23/10"
+    },
+    {
+      "id": "bend.row[9].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 7.225663103256523,
+      "expected": 7.225663103256523
+    },
+    {
+      "id": "bend.row[9].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "3",
+      "expected": "3"
+    },
+    {
+      "id": "bend.row[9].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 9.42477796076938,
+      "expected": 9.42477796076938
+    },
+    {
+      "id": "bend.row[9].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "23/10",
+      "expected": "23/10"
+    },
+    {
+      "id": "bend.row[9].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 57.22566310325652,
+      "expected": 57.22566310325652
+    },
+    {
+      "id": "bend.row[9].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[10].degrees",
+      "pass_": true,
+      "actual": 90,
+      "expected": 90
+    },
+    {
+      "id": "bend.row[10].k.rational",
+      "pass_": true,
+      "actual": "2/5",
+      "expected": "2/5"
+    },
+    {
+      "id": "bend.row[10].k.decimal",
+      "pass_": true,
+      "actual": 0.4,
+      "expected": 0.4
+    },
+    {
+      "id": "bend.row[10].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "24/5",
+      "expected": "24/5"
+    },
+    {
+      "id": "bend.row[10].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 4.8,
+      "expected": 4.8
+    },
+    {
+      "id": "bend.row[10].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "bend.row[10].bend_radians.decimal",
+      "pass_": true,
+      "actual": 1.5707963267948966,
+      "expected": 1.5707963267948966
+    },
+    {
+      "id": "bend.row[10].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "bend.row[10].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 6.283185307179586,
+      "expected": 6.283185307179586
+    },
+    {
+      "id": "bend.row[10].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "12/5",
+      "expected": "12/5"
+    },
+    {
+      "id": "bend.row[10].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 7.5398223686155035,
+      "expected": 7.5398223686155035
+    },
+    {
+      "id": "bend.row[10].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "3",
+      "expected": "3"
+    },
+    {
+      "id": "bend.row[10].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 9.42477796076938,
+      "expected": 9.42477796076938
+    },
+    {
+      "id": "bend.row[10].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "12/5",
+      "expected": "12/5"
+    },
+    {
+      "id": "bend.row[10].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 57.5398223686155,
+      "expected": 57.5398223686155
+    },
+    {
+      "id": "bend.row[10].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[11].degrees",
+      "pass_": true,
+      "actual": 90,
+      "expected": 90
+    },
+    {
+      "id": "bend.row[11].k.rational",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "bend.row[11].k.decimal",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "bend.row[11].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "bend.row[11].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 5.0,
+      "expected": 5.0
+    },
+    {
+      "id": "bend.row[11].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "bend.row[11].bend_radians.decimal",
+      "pass_": true,
+      "actual": 1.5707963267948966,
+      "expected": 1.5707963267948966
+    },
+    {
+      "id": "bend.row[11].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "bend.row[11].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 6.283185307179586,
+      "expected": 6.283185307179586
+    },
+    {
+      "id": "bend.row[11].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "5/2",
+      "expected": "5/2"
+    },
+    {
+      "id": "bend.row[11].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 7.853981633974483,
+      "expected": 7.853981633974483
+    },
+    {
+      "id": "bend.row[11].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "3",
+      "expected": "3"
+    },
+    {
+      "id": "bend.row[11].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 9.42477796076938,
+      "expected": 9.42477796076938
+    },
+    {
+      "id": "bend.row[11].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "5/2",
+      "expected": "5/2"
+    },
+    {
+      "id": "bend.row[11].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 57.853981633974485,
+      "expected": 57.853981633974485
+    },
+    {
+      "id": "bend.row[11].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[12].degrees",
+      "pass_": true,
+      "actual": 120,
+      "expected": 120
+    },
+    {
+      "id": "bend.row[12].k.rational",
+      "pass_": true,
+      "actual": "3/10",
+      "expected": "3/10"
+    },
+    {
+      "id": "bend.row[12].k.decimal",
+      "pass_": true,
+      "actual": 0.3,
+      "expected": 0.3
+    },
+    {
+      "id": "bend.row[12].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "23/5",
+      "expected": "23/5"
+    },
+    {
+      "id": "bend.row[12].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 4.6,
+      "expected": 4.6
+    },
+    {
+      "id": "bend.row[12].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "2/3",
+      "expected": "2/3"
+    },
+    {
+      "id": "bend.row[12].bend_radians.decimal",
+      "pass_": true,
+      "actual": 2.0943951023931953,
+      "expected": 2.0943951023931953
+    },
+    {
+      "id": "bend.row[12].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "8/3",
+      "expected": "8/3"
+    },
+    {
+      "id": "bend.row[12].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 8.377580409572781,
+      "expected": 8.377580409572781
+    },
+    {
+      "id": "bend.row[12].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "46/15",
+      "expected": "46/15"
+    },
+    {
+      "id": "bend.row[12].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 9.6342174710087,
+      "expected": 9.6342174710087
+    },
+    {
+      "id": "bend.row[12].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "bend.row[12].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 12.566370614359172,
+      "expected": 12.566370614359172
+    },
+    {
+      "id": "bend.row[12].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "46/15",
+      "expected": "46/15"
+    },
+    {
+      "id": "bend.row[12].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 59.6342174710087,
+      "expected": 59.6342174710087
+    },
+    {
+      "id": "bend.row[12].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[13].degrees",
+      "pass_": true,
+      "actual": 120,
+      "expected": 120
+    },
+    {
+      "id": "bend.row[13].k.rational",
+      "pass_": true,
+      "actual": "2/5",
+      "expected": "2/5"
+    },
+    {
+      "id": "bend.row[13].k.decimal",
+      "pass_": true,
+      "actual": 0.4,
+      "expected": 0.4
+    },
+    {
+      "id": "bend.row[13].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "24/5",
+      "expected": "24/5"
+    },
+    {
+      "id": "bend.row[13].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 4.8,
+      "expected": 4.8
+    },
+    {
+      "id": "bend.row[13].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "2/3",
+      "expected": "2/3"
+    },
+    {
+      "id": "bend.row[13].bend_radians.decimal",
+      "pass_": true,
+      "actual": 2.0943951023931953,
+      "expected": 2.0943951023931953
+    },
+    {
+      "id": "bend.row[13].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "8/3",
+      "expected": "8/3"
+    },
+    {
+      "id": "bend.row[13].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 8.377580409572781,
+      "expected": 8.377580409572781
+    },
+    {
+      "id": "bend.row[13].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "16/5",
+      "expected": "16/5"
+    },
+    {
+      "id": "bend.row[13].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 10.053096491487338,
+      "expected": 10.053096491487338
+    },
+    {
+      "id": "bend.row[13].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "bend.row[13].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 12.566370614359172,
+      "expected": 12.566370614359172
+    },
+    {
+      "id": "bend.row[13].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "16/5",
+      "expected": "16/5"
+    },
+    {
+      "id": "bend.row[13].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 60.05309649148734,
+      "expected": 60.05309649148734
+    },
+    {
+      "id": "bend.row[13].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[14].degrees",
+      "pass_": true,
+      "actual": 120,
+      "expected": 120
+    },
+    {
+      "id": "bend.row[14].k.rational",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "bend.row[14].k.decimal",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "bend.row[14].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "bend.row[14].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 5.0,
+      "expected": 5.0
+    },
+    {
+      "id": "bend.row[14].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "2/3",
+      "expected": "2/3"
+    },
+    {
+      "id": "bend.row[14].bend_radians.decimal",
+      "pass_": true,
+      "actual": 2.0943951023931953,
+      "expected": 2.0943951023931953
+    },
+    {
+      "id": "bend.row[14].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "8/3",
+      "expected": "8/3"
+    },
+    {
+      "id": "bend.row[14].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 8.377580409572781,
+      "expected": 8.377580409572781
+    },
+    {
+      "id": "bend.row[14].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "10/3",
+      "expected": "10/3"
+    },
+    {
+      "id": "bend.row[14].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 10.471975511965978,
+      "expected": 10.471975511965978
+    },
+    {
+      "id": "bend.row[14].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "bend.row[14].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 12.566370614359172,
+      "expected": 12.566370614359172
+    },
+    {
+      "id": "bend.row[14].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "10/3",
+      "expected": "10/3"
+    },
+    {
+      "id": "bend.row[14].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 60.47197551196598,
+      "expected": 60.47197551196598
+    },
+    {
+      "id": "bend.row[14].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[15].degrees",
+      "pass_": true,
+      "actual": 180,
+      "expected": 180
+    },
+    {
+      "id": "bend.row[15].k.rational",
+      "pass_": true,
+      "actual": "3/10",
+      "expected": "3/10"
+    },
+    {
+      "id": "bend.row[15].k.decimal",
+      "pass_": true,
+      "actual": 0.3,
+      "expected": 0.3
+    },
+    {
+      "id": "bend.row[15].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "23/5",
+      "expected": "23/5"
+    },
+    {
+      "id": "bend.row[15].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 4.6,
+      "expected": 4.6
+    },
+    {
+      "id": "bend.row[15].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "bend.row[15].bend_radians.decimal",
+      "pass_": true,
+      "actual": 3.141592653589793,
+      "expected": 3.141592653589793
+    },
+    {
+      "id": "bend.row[15].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "bend.row[15].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 12.566370614359172,
+      "expected": 12.566370614359172
+    },
+    {
+      "id": "bend.row[15].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "23/5",
+      "expected": "23/5"
+    },
+    {
+      "id": "bend.row[15].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 14.451326206513047,
+      "expected": 14.451326206513047
+    },
+    {
+      "id": "bend.row[15].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "6",
+      "expected": "6"
+    },
+    {
+      "id": "bend.row[15].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 18.84955592153876,
+      "expected": 18.84955592153876
+    },
+    {
+      "id": "bend.row[15].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "23/5",
+      "expected": "23/5"
+    },
+    {
+      "id": "bend.row[15].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 64.45132620651304,
+      "expected": 64.45132620651304
+    },
+    {
+      "id": "bend.row[15].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[16].degrees",
+      "pass_": true,
+      "actual": 180,
+      "expected": 180
+    },
+    {
+      "id": "bend.row[16].k.rational",
+      "pass_": true,
+      "actual": "2/5",
+      "expected": "2/5"
+    },
+    {
+      "id": "bend.row[16].k.decimal",
+      "pass_": true,
+      "actual": 0.4,
+      "expected": 0.4
+    },
+    {
+      "id": "bend.row[16].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "24/5",
+      "expected": "24/5"
+    },
+    {
+      "id": "bend.row[16].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 4.8,
+      "expected": 4.8
+    },
+    {
+      "id": "bend.row[16].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "bend.row[16].bend_radians.decimal",
+      "pass_": true,
+      "actual": 3.141592653589793,
+      "expected": 3.141592653589793
+    },
+    {
+      "id": "bend.row[16].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "bend.row[16].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 12.566370614359172,
+      "expected": 12.566370614359172
+    },
+    {
+      "id": "bend.row[16].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "24/5",
+      "expected": "24/5"
+    },
+    {
+      "id": "bend.row[16].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 15.079644737231007,
+      "expected": 15.079644737231007
+    },
+    {
+      "id": "bend.row[16].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "6",
+      "expected": "6"
+    },
+    {
+      "id": "bend.row[16].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 18.84955592153876,
+      "expected": 18.84955592153876
+    },
+    {
+      "id": "bend.row[16].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "24/5",
+      "expected": "24/5"
+    },
+    {
+      "id": "bend.row[16].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 65.079644737231,
+      "expected": 65.079644737231
+    },
+    {
+      "id": "bend.row[16].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.row[17].degrees",
+      "pass_": true,
+      "actual": 180,
+      "expected": 180
+    },
+    {
+      "id": "bend.row[17].k.rational",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "bend.row[17].k.decimal",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "bend.row[17].neutral_radius_mm.rational",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "bend.row[17].neutral_radius_mm.decimal",
+      "pass_": true,
+      "actual": 5.0,
+      "expected": 5.0
+    },
+    {
+      "id": "bend.row[17].bend_radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "bend.row[17].bend_radians.decimal",
+      "pass_": true,
+      "actual": 3.141592653589793,
+      "expected": 3.141592653589793
+    },
+    {
+      "id": "bend.row[17].inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "bend.row[17].inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 12.566370614359172,
+      "expected": 12.566370614359172
+    },
+    {
+      "id": "bend.row[17].neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "bend.row[17].neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 15.707963267948966,
+      "expected": 15.707963267948966
+    },
+    {
+      "id": "bend.row[17].outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "6",
+      "expected": "6"
+    },
+    {
+      "id": "bend.row[17].outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 18.84955592153876,
+      "expected": 18.84955592153876
+    },
+    {
+      "id": "bend.row[17].tangent_flange_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "bend.row[17].tangent_flange_total_mm.decimal",
+      "pass_": true,
+      "actual": 65.70796326794897,
+      "expected": 65.70796326794897
+    },
+    {
+      "id": "bend.row[17].tangent_flange_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.reference_90.inner_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "bend.reference_90.inner_arc_mm.decimal",
+      "pass_": true,
+      "actual": 6.283185307179586,
+      "expected": 6.283185307179586
+    },
+    {
+      "id": "bend.reference_90.neutral_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "12/5",
+      "expected": "12/5"
+    },
+    {
+      "id": "bend.reference_90.neutral_arc_mm.decimal",
+      "pass_": true,
+      "actual": 7.5398223686155035,
+      "expected": 7.5398223686155035
+    },
+    {
+      "id": "bend.reference_90.outer_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "3",
+      "expected": "3"
+    },
+    {
+      "id": "bend.reference_90.outer_arc_mm.decimal",
+      "pass_": true,
+      "actual": 9.42477796076938,
+      "expected": 9.42477796076938
+    },
+    {
+      "id": "bend.reference_90.midplane_arc_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "5/2",
+      "expected": "5/2"
+    },
+    {
+      "id": "bend.reference_90.midplane_arc_mm.decimal",
+      "pass_": true,
+      "actual": 7.853981633974483,
+      "expected": 7.853981633974483
+    },
+    {
+      "id": "bend.reference_90.midplane_error_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "1/10",
+      "expected": "1/10"
+    },
+    {
+      "id": "bend.reference_90.midplane_error_mm.decimal",
+      "pass_": true,
+      "actual": 0.3141592653589793,
+      "expected": 0.3141592653589793
+    },
+    {
+      "id": "bend.reference_90.inner_error_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "-2/5",
+      "expected": "-2/5"
+    },
+    {
+      "id": "bend.reference_90.inner_error_mm.decimal",
+      "pass_": true,
+      "actual": -1.2566370614359172,
+      "expected": -1.2566370614359172
+    },
+    {
+      "id": "bend.reference_90.outer_error_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "3/5",
+      "expected": "3/5"
+    },
+    {
+      "id": "bend.reference_90.outer_error_mm.decimal",
+      "pass_": true,
+      "actual": 1.8849555921538759,
+      "expected": 1.8849555921538759
+    },
+    {
+      "id": "bend.reference_90.flat_total_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "12/5",
+      "expected": "12/5"
+    },
+    {
+      "id": "bend.reference_90.flat_total_mm.decimal",
+      "pass_": true,
+      "actual": 57.5398223686155,
+      "expected": 57.5398223686155
+    },
+    {
+      "id": "bend.reference_90.flat_total_mm.constant",
+      "pass_": true,
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "id": "bend.sensitivity.d_allowance_d_k_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "bend.sensitivity.d_allowance_d_k_mm.decimal",
+      "pass_": true,
+      "actual": 3.141592653589793,
+      "expected": 3.141592653589793
+    },
+    {
+      "id": "bend.sensitivity.allowance_lower_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "23/10",
+      "expected": "23/10"
+    },
+    {
+      "id": "bend.sensitivity.allowance_lower_mm.decimal",
+      "pass_": true,
+      "actual": 7.225663103256523,
+      "expected": 7.225663103256523
+    },
+    {
+      "id": "bend.sensitivity.allowance_upper_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "5/2",
+      "expected": "5/2"
+    },
+    {
+      "id": "bend.sensitivity.allowance_upper_mm.decimal",
+      "pass_": true,
+      "actual": 7.853981633974483,
+      "expected": 7.853981633974483
+    },
+    {
+      "id": "bend.sensitivity.interval_width_mm.pi_coefficient",
+      "pass_": true,
+      "actual": "1/5",
+      "expected": "1/5"
+    },
+    {
+      "id": "bend.sensitivity.interval_width_mm.decimal",
+      "pass_": true,
+      "actual": 0.6283185307179586,
+      "expected": 0.6283185307179586
+    },
+    {
+      "id": "bend.sensitivity.interval",
+      "pass_": true,
+      "actual": [
+        "3/10",
+        "1/2"
+      ],
+      "expected": [
+        "3/10",
+        "1/2"
+      ]
+    },
+    {
+      "id": "bend.sensitivity.not_probability",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "bend.no_calibration",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "angle.row_count",
+      "pass_": true,
+      "actual": 11,
+      "expected": 11
+    },
+    {
+      "id": "angle.coverage",
+      "pass_": true,
+      "actual": [
+        -180,
+        -120,
+        -90,
+        -60,
+        -30,
+        0,
+        30,
+        60,
+        90,
+        120,
+        180
+      ],
+      "expected": [
+        -180,
+        -120,
+        -90,
+        -60,
+        -30,
+        0,
+        30,
+        60,
+        90,
+        120,
+        180
+      ]
+    },
+    {
+      "id": "angle.row[0].magnitude",
+      "pass_": true,
+      "actual": 180,
+      "expected": 180
+    },
+    {
+      "id": "angle.row[0].included",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "angle.row[0].radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "angle.row[0].radians.decimal",
+      "pass_": true,
+      "actual": 3.141592653589793,
+      "expected": 3.141592653589793
+    },
+    {
+      "id": "angle.row[0].arc.pi_coefficient",
+      "pass_": true,
+      "actual": "24/5",
+      "expected": "24/5"
+    },
+    {
+      "id": "angle.row[0].arc.decimal",
+      "pass_": true,
+      "actual": 15.079644737231007,
+      "expected": 15.079644737231007
+    },
+    {
+      "id": "angle.row[0].signed_arc_counterexample",
+      "pass_": true,
+      "actual": "-24/5",
+      "expected": "-24/5"
+    },
+    {
+      "id": "angle.row[1].magnitude",
+      "pass_": true,
+      "actual": 120,
+      "expected": 120
+    },
+    {
+      "id": "angle.row[1].included",
+      "pass_": true,
+      "actual": 60,
+      "expected": 60
+    },
+    {
+      "id": "angle.row[1].radians.pi_coefficient",
+      "pass_": true,
+      "actual": "2/3",
+      "expected": "2/3"
+    },
+    {
+      "id": "angle.row[1].radians.decimal",
+      "pass_": true,
+      "actual": 2.0943951023931953,
+      "expected": 2.0943951023931953
+    },
+    {
+      "id": "angle.row[1].arc.pi_coefficient",
+      "pass_": true,
+      "actual": "16/5",
+      "expected": "16/5"
+    },
+    {
+      "id": "angle.row[1].arc.decimal",
+      "pass_": true,
+      "actual": 10.053096491487338,
+      "expected": 10.053096491487338
+    },
+    {
+      "id": "angle.row[1].signed_arc_counterexample",
+      "pass_": true,
+      "actual": "-16/5",
+      "expected": "-16/5"
+    },
+    {
+      "id": "angle.row[2].magnitude",
+      "pass_": true,
+      "actual": 90,
+      "expected": 90
+    },
+    {
+      "id": "angle.row[2].included",
+      "pass_": true,
+      "actual": 90,
+      "expected": 90
+    },
+    {
+      "id": "angle.row[2].radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "angle.row[2].radians.decimal",
+      "pass_": true,
+      "actual": 1.5707963267948966,
+      "expected": 1.5707963267948966
+    },
+    {
+      "id": "angle.row[2].arc.pi_coefficient",
+      "pass_": true,
+      "actual": "12/5",
+      "expected": "12/5"
+    },
+    {
+      "id": "angle.row[2].arc.decimal",
+      "pass_": true,
+      "actual": 7.5398223686155035,
+      "expected": 7.5398223686155035
+    },
+    {
+      "id": "angle.row[2].signed_arc_counterexample",
+      "pass_": true,
+      "actual": "-12/5",
+      "expected": "-12/5"
+    },
+    {
+      "id": "angle.row[3].magnitude",
+      "pass_": true,
+      "actual": 60,
+      "expected": 60
+    },
+    {
+      "id": "angle.row[3].included",
+      "pass_": true,
+      "actual": 120,
+      "expected": 120
+    },
+    {
+      "id": "angle.row[3].radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1/3",
+      "expected": "1/3"
+    },
+    {
+      "id": "angle.row[3].radians.decimal",
+      "pass_": true,
+      "actual": 1.0471975511965976,
+      "expected": 1.0471975511965976
+    },
+    {
+      "id": "angle.row[3].arc.pi_coefficient",
+      "pass_": true,
+      "actual": "8/5",
+      "expected": "8/5"
+    },
+    {
+      "id": "angle.row[3].arc.decimal",
+      "pass_": true,
+      "actual": 5.026548245743669,
+      "expected": 5.026548245743669
+    },
+    {
+      "id": "angle.row[3].signed_arc_counterexample",
+      "pass_": true,
+      "actual": "-8/5",
+      "expected": "-8/5"
+    },
+    {
+      "id": "angle.row[4].magnitude",
+      "pass_": true,
+      "actual": 30,
+      "expected": 30
+    },
+    {
+      "id": "angle.row[4].included",
+      "pass_": true,
+      "actual": 150,
+      "expected": 150
+    },
+    {
+      "id": "angle.row[4].radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1/6",
+      "expected": "1/6"
+    },
+    {
+      "id": "angle.row[4].radians.decimal",
+      "pass_": true,
+      "actual": 0.5235987755982988,
+      "expected": 0.5235987755982988
+    },
+    {
+      "id": "angle.row[4].arc.pi_coefficient",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "angle.row[4].arc.decimal",
+      "pass_": true,
+      "actual": 2.5132741228718345,
+      "expected": 2.5132741228718345
+    },
+    {
+      "id": "angle.row[4].signed_arc_counterexample",
+      "pass_": true,
+      "actual": "-4/5",
+      "expected": "-4/5"
+    },
+    {
+      "id": "angle.row[5].magnitude",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "angle.row[5].included",
+      "pass_": true,
+      "actual": 180,
+      "expected": 180
+    },
+    {
+      "id": "angle.row[5].radians.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "angle.row[5].radians.decimal",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "angle.row[5].arc.pi_coefficient",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "angle.row[5].arc.decimal",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "angle.row[5].signed_arc_counterexample",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "angle.row[6].magnitude",
+      "pass_": true,
+      "actual": 30,
+      "expected": 30
+    },
+    {
+      "id": "angle.row[6].included",
+      "pass_": true,
+      "actual": 150,
+      "expected": 150
+    },
+    {
+      "id": "angle.row[6].radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1/6",
+      "expected": "1/6"
+    },
+    {
+      "id": "angle.row[6].radians.decimal",
+      "pass_": true,
+      "actual": 0.5235987755982988,
+      "expected": 0.5235987755982988
+    },
+    {
+      "id": "angle.row[6].arc.pi_coefficient",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "angle.row[6].arc.decimal",
+      "pass_": true,
+      "actual": 2.5132741228718345,
+      "expected": 2.5132741228718345
+    },
+    {
+      "id": "angle.row[6].signed_arc_counterexample",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "angle.row[7].magnitude",
+      "pass_": true,
+      "actual": 60,
+      "expected": 60
+    },
+    {
+      "id": "angle.row[7].included",
+      "pass_": true,
+      "actual": 120,
+      "expected": 120
+    },
+    {
+      "id": "angle.row[7].radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1/3",
+      "expected": "1/3"
+    },
+    {
+      "id": "angle.row[7].radians.decimal",
+      "pass_": true,
+      "actual": 1.0471975511965976,
+      "expected": 1.0471975511965976
+    },
+    {
+      "id": "angle.row[7].arc.pi_coefficient",
+      "pass_": true,
+      "actual": "8/5",
+      "expected": "8/5"
+    },
+    {
+      "id": "angle.row[7].arc.decimal",
+      "pass_": true,
+      "actual": 5.026548245743669,
+      "expected": 5.026548245743669
+    },
+    {
+      "id": "angle.row[7].signed_arc_counterexample",
+      "pass_": true,
+      "actual": "8/5",
+      "expected": "8/5"
+    },
+    {
+      "id": "angle.row[8].magnitude",
+      "pass_": true,
+      "actual": 90,
+      "expected": 90
+    },
+    {
+      "id": "angle.row[8].included",
+      "pass_": true,
+      "actual": 90,
+      "expected": 90
+    },
+    {
+      "id": "angle.row[8].radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "angle.row[8].radians.decimal",
+      "pass_": true,
+      "actual": 1.5707963267948966,
+      "expected": 1.5707963267948966
+    },
+    {
+      "id": "angle.row[8].arc.pi_coefficient",
+      "pass_": true,
+      "actual": "12/5",
+      "expected": "12/5"
+    },
+    {
+      "id": "angle.row[8].arc.decimal",
+      "pass_": true,
+      "actual": 7.5398223686155035,
+      "expected": 7.5398223686155035
+    },
+    {
+      "id": "angle.row[8].signed_arc_counterexample",
+      "pass_": true,
+      "actual": "12/5",
+      "expected": "12/5"
+    },
+    {
+      "id": "angle.row[9].magnitude",
+      "pass_": true,
+      "actual": 120,
+      "expected": 120
+    },
+    {
+      "id": "angle.row[9].included",
+      "pass_": true,
+      "actual": 60,
+      "expected": 60
+    },
+    {
+      "id": "angle.row[9].radians.pi_coefficient",
+      "pass_": true,
+      "actual": "2/3",
+      "expected": "2/3"
+    },
+    {
+      "id": "angle.row[9].radians.decimal",
+      "pass_": true,
+      "actual": 2.0943951023931953,
+      "expected": 2.0943951023931953
+    },
+    {
+      "id": "angle.row[9].arc.pi_coefficient",
+      "pass_": true,
+      "actual": "16/5",
+      "expected": "16/5"
+    },
+    {
+      "id": "angle.row[9].arc.decimal",
+      "pass_": true,
+      "actual": 10.053096491487338,
+      "expected": 10.053096491487338
+    },
+    {
+      "id": "angle.row[9].signed_arc_counterexample",
+      "pass_": true,
+      "actual": "16/5",
+      "expected": "16/5"
+    },
+    {
+      "id": "angle.row[10].magnitude",
+      "pass_": true,
+      "actual": 180,
+      "expected": 180
+    },
+    {
+      "id": "angle.row[10].included",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "angle.row[10].radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "angle.row[10].radians.decimal",
+      "pass_": true,
+      "actual": 3.141592653589793,
+      "expected": 3.141592653589793
+    },
+    {
+      "id": "angle.row[10].arc.pi_coefficient",
+      "pass_": true,
+      "actual": "24/5",
+      "expected": "24/5"
+    },
+    {
+      "id": "angle.row[10].arc.decimal",
+      "pass_": true,
+      "actual": 15.079644737231007,
+      "expected": 15.079644737231007
+    },
+    {
+      "id": "angle.row[10].signed_arc_counterexample",
+      "pass_": true,
+      "actual": "24/5",
+      "expected": "24/5"
+    },
+    {
+      "id": "angle.included120.correct_deviation",
+      "pass_": true,
+      "actual": 60,
+      "expected": 60
+    },
+    {
+      "id": "angle.included120.wrong_deviation",
+      "pass_": true,
+      "actual": 120,
+      "expected": 120
+    },
+    {
+      "id": "angle.included120.correct.pi_coefficient",
+      "pass_": true,
+      "actual": "8/5",
+      "expected": "8/5"
+    },
+    {
+      "id": "angle.included120.correct.decimal",
+      "pass_": true,
+      "actual": 5.026548245743669,
+      "expected": 5.026548245743669
+    },
+    {
+      "id": "angle.included120.wrong.pi_coefficient",
+      "pass_": true,
+      "actual": "16/5",
+      "expected": "16/5"
+    },
+    {
+      "id": "angle.included120.wrong.decimal",
+      "pass_": true,
+      "actual": 10.053096491487338,
+      "expected": 10.053096491487338
+    },
+    {
+      "id": "angle.included120.factor.rational",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "angle.included120.factor.decimal",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "angle.degree_control.input",
+      "pass_": true,
+      "actual": 60,
+      "expected": 60
+    },
+    {
+      "id": "angle.degree_control.radians.pi_coefficient",
+      "pass_": true,
+      "actual": "1/3",
+      "expected": "1/3"
+    },
+    {
+      "id": "angle.degree_control.radians.decimal",
+      "pass_": true,
+      "actual": 1.0471975511965976,
+      "expected": 1.0471975511965976
+    },
+    {
+      "id": "angle.degree_control.correct_arc.pi_coefficient",
+      "pass_": true,
+      "actual": "8/5",
+      "expected": "8/5"
+    },
+    {
+      "id": "angle.degree_control.correct_arc.decimal",
+      "pass_": true,
+      "actual": 5.026548245743669,
+      "expected": 5.026548245743669
+    },
+    {
+      "id": "angle.degree_control.wrong_arc.rational",
+      "pass_": true,
+      "actual": "288",
+      "expected": "288"
+    },
+    {
+      "id": "angle.degree_control.wrong_arc.decimal",
+      "pass_": true,
+      "actual": 288.0,
+      "expected": 288.0
+    },
+    {
+      "id": "angle.degree_control.factor",
+      "pass_": true,
+      "actual": 57.29577951308232,
+      "expected": 57.29577951308232
+    },
+    {
+      "id": "angle.static_case_count",
+      "pass_": true,
+      "actual": 35,
+      "expected": 35
+    },
+    {
+      "id": "angle.static_coverage",
+      "pass_": true,
+      "actual": [
+        [
+          "V",
+          -181
+        ],
+        [
+          "V",
+          -180
+        ],
+        [
+          "V",
+          -60
+        ],
+        [
+          "V",
+          0
+        ],
+        [
+          "V",
+          60
+        ],
+        [
+          "V",
+          180
+        ],
+        [
+          "V",
+          181
+        ],
+        [
+          "M",
+          -181
+        ],
+        [
+          "M",
+          -180
+        ],
+        [
+          "M",
+          -60
+        ],
+        [
+          "M",
+          0
+        ],
+        [
+          "M",
+          60
+        ],
+        [
+          "M",
+          180
+        ],
+        [
+          "M",
+          181
+        ],
+        [
+          "F",
+          -181
+        ],
+        [
+          "F",
+          -180
+        ],
+        [
+          "F",
+          -60
+        ],
+        [
+          "F",
+          0
+        ],
+        [
+          "F",
+          60
+        ],
+        [
+          "F",
+          180
+        ],
+        [
+          "F",
+          181
+        ],
+        [
+          "U",
+          -181
+        ],
+        [
+          "U",
+          -180
+        ],
+        [
+          "U",
+          -60
+        ],
+        [
+          "U",
+          0
+        ],
+        [
+          "U",
+          60
+        ],
+        [
+          "U",
+          180
+        ],
+        [
+          "U",
+          181
+        ],
+        [
+          "B",
+          -181
+        ],
+        [
+          "B",
+          -180
+        ],
+        [
+          "B",
+          -60
+        ],
+        [
+          "B",
+          0
+        ],
+        [
+          "B",
+          60
+        ],
+        [
+          "B",
+          180
+        ],
+        [
+          "B",
+          181
+        ]
+      ],
+      "expected": [
+        [
+          "V",
+          -181
+        ],
+        [
+          "V",
+          -180
+        ],
+        [
+          "V",
+          -60
+        ],
+        [
+          "V",
+          0
+        ],
+        [
+          "V",
+          60
+        ],
+        [
+          "V",
+          180
+        ],
+        [
+          "V",
+          181
+        ],
+        [
+          "M",
+          -181
+        ],
+        [
+          "M",
+          -180
+        ],
+        [
+          "M",
+          -60
+        ],
+        [
+          "M",
+          0
+        ],
+        [
+          "M",
+          60
+        ],
+        [
+          "M",
+          180
+        ],
+        [
+          "M",
+          181
+        ],
+        [
+          "F",
+          -181
+        ],
+        [
+          "F",
+          -180
+        ],
+        [
+          "F",
+          -60
+        ],
+        [
+          "F",
+          0
+        ],
+        [
+          "F",
+          60
+        ],
+        [
+          "F",
+          180
+        ],
+        [
+          "F",
+          181
+        ],
+        [
+          "U",
+          -181
+        ],
+        [
+          "U",
+          -180
+        ],
+        [
+          "U",
+          -60
+        ],
+        [
+          "U",
+          0
+        ],
+        [
+          "U",
+          60
+        ],
+        [
+          "U",
+          180
+        ],
+        [
+          "U",
+          181
+        ],
+        [
+          "B",
+          -181
+        ],
+        [
+          "B",
+          -180
+        ],
+        [
+          "B",
+          -60
+        ],
+        [
+          "B",
+          0
+        ],
+        [
+          "B",
+          60
+        ],
+        [
+          "B",
+          180
+        ],
+        [
+          "B",
+          181
+        ]
+      ]
+    },
+    {
+      "id": "angle.static[0].reasons",
+      "pass_": true,
+      "actual": [
+        "out-of-range",
+        "assignment-sign"
+      ],
+      "expected": [
+        "out-of-range",
+        "assignment-sign"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[0].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[1].reasons",
+      "pass_": true,
+      "actual": [
+        "assignment-sign"
+      ],
+      "expected": [
+        "assignment-sign"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[1].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[2].reasons",
+      "pass_": true,
+      "actual": [
+        "assignment-sign"
+      ],
+      "expected": [
+        "assignment-sign"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[2].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[3].reasons",
+      "pass_": true,
+      "actual": [
+        "assignment-sign"
+      ],
+      "expected": [
+        "assignment-sign"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[3].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[4].reasons",
+      "pass_": true,
+      "actual": [],
+      "expected": [],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[4].passes",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "angle.static[5].reasons",
+      "pass_": true,
+      "actual": [],
+      "expected": [],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[5].passes",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "angle.static[6].reasons",
+      "pass_": true,
+      "actual": [
+        "out-of-range"
+      ],
+      "expected": [
+        "out-of-range"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[6].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[7].reasons",
+      "pass_": true,
+      "actual": [
+        "out-of-range"
+      ],
+      "expected": [
+        "out-of-range"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[7].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[8].reasons",
+      "pass_": true,
+      "actual": [],
+      "expected": [],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[8].passes",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "angle.static[9].reasons",
+      "pass_": true,
+      "actual": [],
+      "expected": [],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[9].passes",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "angle.static[10].reasons",
+      "pass_": true,
+      "actual": [
+        "assignment-sign"
+      ],
+      "expected": [
+        "assignment-sign"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[10].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[11].reasons",
+      "pass_": true,
+      "actual": [
+        "assignment-sign"
+      ],
+      "expected": [
+        "assignment-sign"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[11].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[12].reasons",
+      "pass_": true,
+      "actual": [
+        "assignment-sign"
+      ],
+      "expected": [
+        "assignment-sign"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[12].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[13].reasons",
+      "pass_": true,
+      "actual": [
+        "out-of-range",
+        "assignment-sign"
+      ],
+      "expected": [
+        "out-of-range",
+        "assignment-sign"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[13].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[14].reasons",
+      "pass_": true,
+      "actual": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "expected": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[14].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[15].reasons",
+      "pass_": true,
+      "actual": [
+        "requires-zero"
+      ],
+      "expected": [
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[15].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[16].reasons",
+      "pass_": true,
+      "actual": [
+        "requires-zero"
+      ],
+      "expected": [
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[16].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[17].reasons",
+      "pass_": true,
+      "actual": [],
+      "expected": [],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[17].passes",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "angle.static[18].reasons",
+      "pass_": true,
+      "actual": [
+        "requires-zero"
+      ],
+      "expected": [
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[18].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[19].reasons",
+      "pass_": true,
+      "actual": [
+        "requires-zero"
+      ],
+      "expected": [
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[19].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[20].reasons",
+      "pass_": true,
+      "actual": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "expected": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[20].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[21].reasons",
+      "pass_": true,
+      "actual": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "expected": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[21].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[22].reasons",
+      "pass_": true,
+      "actual": [
+        "requires-zero"
+      ],
+      "expected": [
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[22].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[23].reasons",
+      "pass_": true,
+      "actual": [
+        "requires-zero"
+      ],
+      "expected": [
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[23].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[24].reasons",
+      "pass_": true,
+      "actual": [],
+      "expected": [],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[24].passes",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "angle.static[25].reasons",
+      "pass_": true,
+      "actual": [
+        "requires-zero"
+      ],
+      "expected": [
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[25].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[26].reasons",
+      "pass_": true,
+      "actual": [
+        "requires-zero"
+      ],
+      "expected": [
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[26].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[27].reasons",
+      "pass_": true,
+      "actual": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "expected": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[27].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[28].reasons",
+      "pass_": true,
+      "actual": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "expected": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[28].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[29].reasons",
+      "pass_": true,
+      "actual": [
+        "requires-zero"
+      ],
+      "expected": [
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[29].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[30].reasons",
+      "pass_": true,
+      "actual": [
+        "requires-zero"
+      ],
+      "expected": [
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[30].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[31].reasons",
+      "pass_": true,
+      "actual": [],
+      "expected": [],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[31].passes",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "angle.static[32].reasons",
+      "pass_": true,
+      "actual": [
+        "requires-zero"
+      ],
+      "expected": [
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[32].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[33].reasons",
+      "pass_": true,
+      "actual": [
+        "requires-zero"
+      ],
+      "expected": [
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[33].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.static[34].reasons",
+      "pass_": true,
+      "actual": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "expected": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "basis": "Independent translation of fold.rs 244,247,254; no Rust/checker execution"
+    },
+    {
+      "id": "angle.static[34].passes",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "angle.sign_retained",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "angle.length_magnitude",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "angle.no_adapter",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "angle.quantity[0].symbol",
+      "pass_": true,
+      "actual": "k",
+      "expected": "k"
+    },
+    {
+      "id": "angle.quantity[0].unit",
+      "pass_": true,
+      "actual": "dimensionless",
+      "expected": "dimensionless"
+    },
+    {
+      "id": "angle.quantity[0].value",
+      "pass_": true,
+      "actual": "2/5",
+      "expected": "2/5"
+    },
+    {
+      "id": "angle.quantity[1].symbol",
+      "pass_": true,
+      "actual": "K_G",
+      "expected": "K_G"
+    },
+    {
+      "id": "angle.quantity[1].unit",
+      "pass_": true,
+      "actual": "mm^-2",
+      "expected": "mm^-2"
+    },
+    {
+      "id": "angle.quantity[1].value",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "development.curvature_count",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "id": "development.curvature[0].surface",
+      "pass_": true,
+      "actual": "plane",
+      "expected": "plane"
+    },
+    {
+      "id": "development.curvature[0].principal",
+      "pass_": true,
+      "actual": [
+        "0",
+        "0"
+      ],
+      "expected": [
+        "0",
+        "0"
+      ]
+    },
+    {
+      "id": "development.curvature[0].gaussian.rational",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "development.curvature[0].gaussian.decimal",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "development.curvature[0].obstruction",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "development.curvature[1].surface",
+      "pass_": true,
+      "actual": "cylinder",
+      "expected": "cylinder"
+    },
+    {
+      "id": "development.curvature[1].principal",
+      "pass_": true,
+      "actual": [
+        "0",
+        "1/10"
+      ],
+      "expected": [
+        "0",
+        "1/10"
+      ]
+    },
+    {
+      "id": "development.curvature[1].gaussian.rational",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "development.curvature[1].gaussian.decimal",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "development.curvature[1].obstruction",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "development.curvature[2].surface",
+      "pass_": true,
+      "actual": "sphere",
+      "expected": "sphere"
+    },
+    {
+      "id": "development.curvature[2].principal",
+      "pass_": true,
+      "actual": [
+        "1/10",
+        "1/10"
+      ],
+      "expected": [
+        "1/10",
+        "1/10"
+      ]
+    },
+    {
+      "id": "development.curvature[2].gaussian.rational",
+      "pass_": true,
+      "actual": "1/100",
+      "expected": "1/100"
+    },
+    {
+      "id": "development.curvature[2].gaussian.decimal",
+      "pass_": true,
+      "actual": 0.01,
+      "expected": 0.01
+    },
+    {
+      "id": "development.curvature[2].obstruction",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "development.curvature[3].surface",
+      "pass_": true,
+      "actual": "saddle-point",
+      "expected": "saddle-point"
+    },
+    {
+      "id": "development.curvature[3].principal",
+      "pass_": true,
+      "actual": [
+        "1/10",
+        "-1/10"
+      ],
+      "expected": [
+        "1/10",
+        "-1/10"
+      ]
+    },
+    {
+      "id": "development.curvature[3].gaussian.rational",
+      "pass_": true,
+      "actual": "-1/100",
+      "expected": "-1/100"
+    },
+    {
+      "id": "development.curvature[3].gaussian.decimal",
+      "pass_": true,
+      "actual": -0.01,
+      "expected": -0.01
+    },
+    {
+      "id": "development.curvature[3].obstruction",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "development.patch_count",
+      "pass_": true,
+      "actual": 5,
+      "expected": 5
+    },
+    {
+      "id": "development.patch[0].angle_coefficient",
+      "pass_": true,
+      "actual": "1/6",
+      "expected": "1/6"
+    },
+    {
+      "id": "development.patch[0].angle",
+      "pass_": true,
+      "actual": 0.5235987755982988,
+      "expected": 0.5235987755982988
+    },
+    {
+      "id": "development.patch[0].radius",
+      "pass_": true,
+      "actual": 10,
+      "expected": 10
+    },
+    {
+      "id": "development.patch[0].height",
+      "pass_": true,
+      "actual": 30,
+      "expected": 30
+    },
+    {
+      "id": "development.patch[0].width.pi_coefficient",
+      "pass_": true,
+      "actual": "5/3",
+      "expected": "5/3"
+    },
+    {
+      "id": "development.patch[0].width.decimal",
+      "pass_": true,
+      "actual": 5.235987755982989,
+      "expected": 5.235987755982989
+    },
+    {
+      "id": "development.patch[0].area.pi_coefficient",
+      "pass_": true,
+      "actual": "50",
+      "expected": "50"
+    },
+    {
+      "id": "development.patch[0].area.decimal",
+      "pass_": true,
+      "actual": 157.07963267948966,
+      "expected": 157.07963267948966
+    },
+    {
+      "id": "development.patch[0].surface_arc",
+      "pass_": true,
+      "actual": 5.235987755982988,
+      "expected": 5.235987755982988
+    },
+    {
+      "id": "development.patch[0].chord",
+      "pass_": true,
+      "actual": 5.176380902050415,
+      "expected": 5.176380902050415
+    },
+    {
+      "id": "development.patch[0].arc_minus_chord",
+      "pass_": true,
+      "actual": 0.059606853932573145,
+      "expected": 0.059606853932573145
+    },
+    {
+      "id": "development.patch[0].closed",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "development.patch[0].needs_seam",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "development.patch[1].angle_coefficient",
+      "pass_": true,
+      "actual": "1/3",
+      "expected": "1/3"
+    },
+    {
+      "id": "development.patch[1].angle",
+      "pass_": true,
+      "actual": 1.0471975511965976,
+      "expected": 1.0471975511965976
+    },
+    {
+      "id": "development.patch[1].radius",
+      "pass_": true,
+      "actual": 10,
+      "expected": 10
+    },
+    {
+      "id": "development.patch[1].height",
+      "pass_": true,
+      "actual": 30,
+      "expected": 30
+    },
+    {
+      "id": "development.patch[1].width.pi_coefficient",
+      "pass_": true,
+      "actual": "10/3",
+      "expected": "10/3"
+    },
+    {
+      "id": "development.patch[1].width.decimal",
+      "pass_": true,
+      "actual": 10.471975511965978,
+      "expected": 10.471975511965978
+    },
+    {
+      "id": "development.patch[1].area.pi_coefficient",
+      "pass_": true,
+      "actual": "100",
+      "expected": "100"
+    },
+    {
+      "id": "development.patch[1].area.decimal",
+      "pass_": true,
+      "actual": 314.1592653589793,
+      "expected": 314.1592653589793
+    },
+    {
+      "id": "development.patch[1].surface_arc",
+      "pass_": true,
+      "actual": 10.471975511965976,
+      "expected": 10.471975511965976
+    },
+    {
+      "id": "development.patch[1].chord",
+      "pass_": true,
+      "actual": 9.999999999999998,
+      "expected": 9.999999999999998
+    },
+    {
+      "id": "development.patch[1].arc_minus_chord",
+      "pass_": true,
+      "actual": 0.47197551196597765,
+      "expected": 0.47197551196597765
+    },
+    {
+      "id": "development.patch[1].closed",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "development.patch[1].needs_seam",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "development.patch[2].angle_coefficient",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "development.patch[2].angle",
+      "pass_": true,
+      "actual": 1.5707963267948966,
+      "expected": 1.5707963267948966
+    },
+    {
+      "id": "development.patch[2].radius",
+      "pass_": true,
+      "actual": 10,
+      "expected": 10
+    },
+    {
+      "id": "development.patch[2].height",
+      "pass_": true,
+      "actual": 30,
+      "expected": 30
+    },
+    {
+      "id": "development.patch[2].width.pi_coefficient",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "development.patch[2].width.decimal",
+      "pass_": true,
+      "actual": 15.707963267948966,
+      "expected": 15.707963267948966
+    },
+    {
+      "id": "development.patch[2].area.pi_coefficient",
+      "pass_": true,
+      "actual": "150",
+      "expected": "150"
+    },
+    {
+      "id": "development.patch[2].area.decimal",
+      "pass_": true,
+      "actual": 471.23889803846896,
+      "expected": 471.23889803846896
+    },
+    {
+      "id": "development.patch[2].surface_arc",
+      "pass_": true,
+      "actual": 15.707963267948966,
+      "expected": 15.707963267948966
+    },
+    {
+      "id": "development.patch[2].chord",
+      "pass_": true,
+      "actual": 14.142135623730951,
+      "expected": 14.142135623730951
+    },
+    {
+      "id": "development.patch[2].arc_minus_chord",
+      "pass_": true,
+      "actual": 1.5658276442180146,
+      "expected": 1.5658276442180146
+    },
+    {
+      "id": "development.patch[2].closed",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "development.patch[2].needs_seam",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "development.patch[3].angle_coefficient",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "development.patch[3].angle",
+      "pass_": true,
+      "actual": 3.141592653589793,
+      "expected": 3.141592653589793
+    },
+    {
+      "id": "development.patch[3].radius",
+      "pass_": true,
+      "actual": 10,
+      "expected": 10
+    },
+    {
+      "id": "development.patch[3].height",
+      "pass_": true,
+      "actual": 30,
+      "expected": 30
+    },
+    {
+      "id": "development.patch[3].width.pi_coefficient",
+      "pass_": true,
+      "actual": "10",
+      "expected": "10"
+    },
+    {
+      "id": "development.patch[3].width.decimal",
+      "pass_": true,
+      "actual": 31.41592653589793,
+      "expected": 31.41592653589793
+    },
+    {
+      "id": "development.patch[3].area.pi_coefficient",
+      "pass_": true,
+      "actual": "300",
+      "expected": "300"
+    },
+    {
+      "id": "development.patch[3].area.decimal",
+      "pass_": true,
+      "actual": 942.4777960769379,
+      "expected": 942.4777960769379
+    },
+    {
+      "id": "development.patch[3].surface_arc",
+      "pass_": true,
+      "actual": 31.41592653589793,
+      "expected": 31.41592653589793
+    },
+    {
+      "id": "development.patch[3].chord",
+      "pass_": true,
+      "actual": 20.0,
+      "expected": 20.0
+    },
+    {
+      "id": "development.patch[3].arc_minus_chord",
+      "pass_": true,
+      "actual": 11.415926535897931,
+      "expected": 11.415926535897931
+    },
+    {
+      "id": "development.patch[3].closed",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "development.patch[3].needs_seam",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "development.patch[4].angle_coefficient",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "development.patch[4].angle",
+      "pass_": true,
+      "actual": 6.283185307179586,
+      "expected": 6.283185307179586
+    },
+    {
+      "id": "development.patch[4].radius",
+      "pass_": true,
+      "actual": 10,
+      "expected": 10
+    },
+    {
+      "id": "development.patch[4].height",
+      "pass_": true,
+      "actual": 30,
+      "expected": 30
+    },
+    {
+      "id": "development.patch[4].width.pi_coefficient",
+      "pass_": true,
+      "actual": "20",
+      "expected": "20"
+    },
+    {
+      "id": "development.patch[4].width.decimal",
+      "pass_": true,
+      "actual": 62.83185307179586,
+      "expected": 62.83185307179586
+    },
+    {
+      "id": "development.patch[4].area.pi_coefficient",
+      "pass_": true,
+      "actual": "600",
+      "expected": "600"
+    },
+    {
+      "id": "development.patch[4].area.decimal",
+      "pass_": true,
+      "actual": 1884.9555921538758,
+      "expected": 1884.9555921538758
+    },
+    {
+      "id": "development.patch[4].surface_arc",
+      "pass_": true,
+      "actual": 62.83185307179586,
+      "expected": 62.83185307179586
+    },
+    {
+      "id": "development.patch[4].chord",
+      "pass_": true,
+      "actual": 2.4492935982947065e-15,
+      "expected": 2.4492935982947065e-15
+    },
+    {
+      "id": "development.patch[4].arc_minus_chord",
+      "pass_": true,
+      "actual": 62.83185307179586,
+      "expected": 62.83185307179586
+    },
+    {
+      "id": "development.patch[4].closed",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "development.patch[4].needs_seam",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "development.quarter_patch.width.pi_coefficient",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "development.quarter_patch.width.decimal",
+      "pass_": true,
+      "actual": 15.707963267948966,
+      "expected": 15.707963267948966
+    },
+    {
+      "id": "development.quarter_patch.area.pi_coefficient",
+      "pass_": true,
+      "actual": "150",
+      "expected": "150"
+    },
+    {
+      "id": "development.quarter_patch.area.decimal",
+      "pass_": true,
+      "actual": 471.23889803846896,
+      "expected": 471.23889803846896
+    },
+    {
+      "id": "development.quarter_patch.height",
+      "pass_": true,
+      "actual": 30,
+      "expected": 30
+    },
+    {
+      "id": "development.full_lateral_surface.width.pi_coefficient",
+      "pass_": true,
+      "actual": "20",
+      "expected": "20"
+    },
+    {
+      "id": "development.full_lateral_surface.width.decimal",
+      "pass_": true,
+      "actual": 62.83185307179586,
+      "expected": 62.83185307179586
+    },
+    {
+      "id": "development.full_lateral_surface.area.pi_coefficient",
+      "pass_": true,
+      "actual": "600",
+      "expected": "600"
+    },
+    {
+      "id": "development.full_lateral_surface.area.decimal",
+      "pass_": true,
+      "actual": 1884.9555921538758,
+      "expected": 1884.9555921538758
+    },
+    {
+      "id": "development.full_lateral_surface.height",
+      "pass_": true,
+      "actual": 30,
+      "expected": 30
+    },
+    {
+      "id": "development.full.same_point",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "development.full.distinct_flat_sides",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "development.card_count",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "id": "development.card[0].status",
+      "pass_": true,
+      "actual": "refuted-in-authored-model",
+      "expected": "refuted-in-authored-model"
+    },
+    {
+      "id": "development.card[1].status",
+      "pass_": true,
+      "actual": "refuted-in-authored-model",
+      "expected": "refuted-in-authored-model"
+    },
+    {
+      "id": "development.card[2].status",
+      "pass_": true,
+      "actual": "supported-by-authored-geometry",
+      "expected": "supported-by-authored-geometry"
+    },
+    {
+      "id": "development.card[3].status",
+      "pass_": true,
+      "actual": "not-established",
+      "expected": "not-established"
+    },
+    {
+      "id": "development.metric[0].curved_E",
+      "pass_": true,
+      "actual": 100.0,
+      "expected": 100.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[0].curved_F",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[0].curved_G",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[0].flat_E",
+      "pass_": true,
+      "actual": 100,
+      "expected": 100.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[0].flat_F",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[0].flat_G",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[1].curved_E",
+      "pass_": true,
+      "actual": 100.00000000000001,
+      "expected": 100.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[1].curved_F",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[1].curved_G",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[1].flat_E",
+      "pass_": true,
+      "actual": 100,
+      "expected": 100.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[1].flat_F",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[1].flat_G",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[2].curved_E",
+      "pass_": true,
+      "actual": 100.0,
+      "expected": 100.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[2].curved_F",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[2].curved_G",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[2].flat_E",
+      "pass_": true,
+      "actual": 100,
+      "expected": 100.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[2].flat_F",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.metric[2].flat_G",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1.0,
+      "basis": "Independent derivative Gram products for cylinder and development x=R theta,z; chart global injectivity still needs seam/domain."
+    },
+    {
+      "id": "development.full_exact_chord",
+      "pass_": true,
+      "actual": true,
+      "expected": true,
+      "basis": "The exact full-circle chord is zero; the stored ~2.45e-15 is floating sine residue."
+    },
+    {
+      "id": "development.actual_unroll",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "development.physical_manufacture",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "source[0].fresh_hash",
+      "pass_": true,
+      "actual": "558ab071a94f2687d848391408a11d8004b55afdda86dd28a0dd4396b5059115",
+      "expected": "558ab071a94f2687d848391408a11d8004b55afdda86dd28a0dd4396b5059115"
+    },
+    {
+      "id": "source[0].fresh_length",
+      "pass_": true,
+      "actual": 19670,
+      "expected": 19670
+    },
+    {
+      "id": "source[0].root_download_equal",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source[0].immutable_git_equal",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source[1].fresh_hash",
+      "pass_": true,
+      "actual": "abae7d9b41cbf5a825b4dbe6f58b6579687c79027f1ae151b24e1b67eee30b8d",
+      "expected": "abae7d9b41cbf5a825b4dbe6f58b6579687c79027f1ae151b24e1b67eee30b8d"
+    },
+    {
+      "id": "source[1].fresh_length",
+      "pass_": true,
+      "actual": 8553,
+      "expected": 8553
+    },
+    {
+      "id": "source[1].root_download_equal",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source[1].immutable_git_equal",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source[2].fresh_hash",
+      "pass_": true,
+      "actual": "d77c513129a2647259c6ad432962a5c36d689696afbc4e12ba8d2b425137ca8b",
+      "expected": "d77c513129a2647259c6ad432962a5c36d689696afbc4e12ba8d2b425137ca8b"
+    },
+    {
+      "id": "source[2].fresh_length",
+      "pass_": true,
+      "actual": 4090,
+      "expected": 4090
+    },
+    {
+      "id": "source[2].root_download_equal",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source[2].immutable_git_equal",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source[3].fresh_hash",
+      "pass_": true,
+      "actual": "22797167a43bfa2301310d60f921f53f798bfed571b070b2baf42b7f3f7ca48d",
+      "expected": "22797167a43bfa2301310d60f921f53f798bfed571b070b2baf42b7f3f7ca48d"
+    },
+    {
+      "id": "source[3].fresh_length",
+      "pass_": true,
+      "actual": 11034,
+      "expected": 11034
+    },
+    {
+      "id": "source[3].root_download_equal",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source[3].immutable_git_equal",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source[4].fresh_hash",
+      "pass_": true,
+      "actual": "8f480b304eb08aecd5d08f36bbb4a4162039a38ec29a425c0c5e405a3e980e90",
+      "expected": "8f480b304eb08aecd5d08f36bbb4a4162039a38ec29a425c0c5e405a3e980e90"
+    },
+    {
+      "id": "source[4].fresh_length",
+      "pass_": true,
+      "actual": 11678,
+      "expected": 11678
+    },
+    {
+      "id": "source[4].root_download_equal",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source[4].immutable_git_equal",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source[5].fresh_hash",
+      "pass_": true,
+      "actual": "bc44c07effa10ec9572d059aec416d343dd269a0e99049cf719f265b1b48a346",
+      "expected": "bc44c07effa10ec9572d059aec416d343dd269a0e99049cf719f265b1b48a346"
+    },
+    {
+      "id": "source[5].fresh_length",
+      "pass_": true,
+      "actual": 5530,
+      "expected": 5530
+    },
+    {
+      "id": "source[5].root_download_equal",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source[5].immutable_git_equal",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source[6].fresh_hash",
+      "pass_": true,
+      "actual": "492a23850990412d0bd607a0835d139e87fad7665aa9ea7fcaf95917c232666b",
+      "expected": "492a23850990412d0bd607a0835d139e87fad7665aa9ea7fcaf95917c232666b"
+    },
+    {
+      "id": "source[6].fresh_length",
+      "pass_": true,
+      "actual": 23936,
+      "expected": 23936
+    },
+    {
+      "id": "source[6].root_download_equal",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "observations.fold_angle_semantics.degrees",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "observations.fold_angle_semantics.deviation_from_flat",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "observations.fold_angle_semantics.range",
+      "pass_": true,
+      "actual": [
+        -180,
+        180
+      ],
+      "expected": [
+        -180,
+        180
+      ]
+    },
+    {
+      "id": "observations.fold_angle_semantics.positive",
+      "pass_": true,
+      "actual": "valley",
+      "expected": "valley"
+    },
+    {
+      "id": "observations.fold_angle_semantics.negative",
+      "pass_": true,
+      "actual": "mountain",
+      "expected": "mountain"
+    },
+    {
+      "id": "observations.fold_angle_semantics.zero_assignments",
+      "pass_": true,
+      "actual": [
+        "F",
+        "U",
+        "B"
+      ],
+      "expected": [
+        "F",
+        "U",
+        "B"
+      ]
+    },
+    {
+      "id": "observations.ix_fold.angle_array_optional",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "observations.ix_fold.arbitrary_other_keys_preserved",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "observations.ix_fold.typed_bend_radius_or_k_fields_in_selected_types",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "observations.ix_fold.physical_k_model_consumed_by_selected_numeric_validator",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "observations.ix_thickness.full_t_in_crease_pattern_units",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "observations.ix_thickness.parallel_rigid_panel_reading",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "observations.ix_thickness.top_level_verdict_changed",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "observations.ix_thickness.explicit_out_of_scope",
+      "pass_": true,
+      "actual": [
+        "bend-radius refusals",
+        "folding motion",
+        "tilted panels"
+      ],
+      "expected": [
+        "bend-radius refusals",
+        "folding motion",
+        "tilted panels"
+      ]
+    },
+    {
+      "id": "observations.ix_thickness.makeable_certificate",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "observations.source_test.flat_edge_nonzero_angle",
+      "pass_": true,
+      "actual": 10,
+      "expected": 10
+    },
+    {
+      "id": "observations.source_test.asserted_refusal",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "observations.source_test.zero_angle_fixture_asserted_ok",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "observations.source_test.fresh_test_run",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "observations.hypothetical_metadata.k",
+      "pass_": true,
+      "actual": 0.4,
+      "expected": 0.4
+    },
+    {
+      "id": "observations.hypothetical_metadata.unit",
+      "pass_": true,
+      "actual": "mm",
+      "expected": "mm"
+    },
+    {
+      "id": "observations.hypothetical_metadata.retained_as_other_does_not_establish_consumption",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "observations.hypothetical_metadata.ratified_contract",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "observations.no_repositorywide_absence",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "observations.no_new_dsl",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "primary.ix_pin",
+      "pass_": true,
+      "actual": "d7c22fdd6a62becb66b9d7246ea85850e7c55854",
+      "expected": "d7c22fdd6a62becb66b9d7246ea85850e7c55854"
+    },
+    {
+      "id": "primary.fold_pin",
+      "pass_": true,
+      "actual": "824f9fa6f944248787b0b2077ef622761489201e",
+      "expected": "824f9fa6f944248787b0b2077ef622761489201e"
+    },
+    {
+      "id": "primary.unread_autodesk_preserved",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "primary.no_calibration",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "input.production-plan.md.utf8_no_bom",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "input.production-plan.md.LF",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "input.bend-lengths.json.utf8_no_bom",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "input.bend-lengths.json.LF",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "input.angle-meanings.json.utf8_no_bom",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "input.angle-meanings.json.LF",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "input.development-scope.json.utf8_no_bom",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "input.development-scope.json.LF",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "input.source-observations.json.utf8_no_bom",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "input.source-observations.json.LF",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "input.primary-reading.json.utf8_no_bom",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "input.primary-reading.json.LF",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "input.primary-readback.json.utf8_no_bom",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "input.primary-readback.json.LF",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    }
+  ],
+  "input_bindings": [
+    {
+      "path": "code/streeling/evidence/bend-development-2026-10-22/production-plan.md",
+      "sha256": "444cd96f0d806bbe55aaf2feb02d73a37e67e976dd6bf81c55790000a862968e"
+    },
+    {
+      "path": "code/streeling/evidence/bend-development-2026-10-22/bend-lengths.json",
+      "sha256": "518926056643a9a4bc50e18750d836bd6611934cd2f796fda6b60bf472c070ad"
+    },
+    {
+      "path": "code/streeling/evidence/bend-development-2026-10-22/angle-meanings.json",
+      "sha256": "70ca29faecb5674af6b4547e59bd6f7447cd13755dac2fa92aaf159c3f89c513"
+    },
+    {
+      "path": "code/streeling/evidence/bend-development-2026-10-22/development-scope.json",
+      "sha256": "625860e1b5acbdbdd329f4755a93e426cfd4fcfbd6459d6e7a1cd5c2825531b0"
+    },
+    {
+      "path": "code/streeling/evidence/bend-development-2026-10-22/source-observations.json",
+      "sha256": "22523833b4418d6ea430337891263c60c690e38ba2c779b8c86622b835fe4698"
+    },
+    {
+      "path": "code/streeling/evidence/bend-development-2026-10-22/primary-reading.json",
+      "sha256": "5ec61c855fa5b11fedd20d7b9c6309838773b0980aefab6dfb9528eccb077dfd"
+    },
+    {
+      "path": "code/streeling/evidence/bend-development-2026-10-22/primary-readback.json",
+      "sha256": "8d95bf91438d6a5b07c32d72162d6631d809f01c3309451a2e0c810d62d7bb85"
+    }
+  ],
+  "immutable_source_provenance": [
+    {
+      "repository": "GuitarAlchemist/ix",
+      "commit": "d7c22fdd6a62becb66b9d7246ea85850e7c55854",
+      "path": "crates/ix-origami/src/fold.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/fold.rs",
+      "sha256": "558ab071a94f2687d848391408a11d8004b55afdda86dd28a0dd4396b5059115",
+      "bytes": 19670,
+      "independent_fresh_anonymous_copy": "C:/tmp/bend-development-independent-audit-20261022/fold.rs",
+      "immutable_local_git_bytes_equal": true
+    },
+    {
+      "repository": "GuitarAlchemist/ix",
+      "commit": "d7c22fdd6a62becb66b9d7246ea85850e7c55854",
+      "path": "crates/ix-origami/src/thickness.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/thickness.rs",
+      "sha256": "abae7d9b41cbf5a825b4dbe6f58b6579687c79027f1ae151b24e1b67eee30b8d",
+      "bytes": 8553,
+      "independent_fresh_anonymous_copy": "C:/tmp/bend-development-independent-audit-20261022/thickness.rs",
+      "immutable_local_git_bytes_equal": true
+    },
+    {
+      "repository": "GuitarAlchemist/ix",
+      "commit": "d7c22fdd6a62becb66b9d7246ea85850e7c55854",
+      "path": "crates/ix-origami/src/lib.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/lib.rs",
+      "sha256": "d77c513129a2647259c6ad432962a5c36d689696afbc4e12ba8d2b425137ca8b",
+      "bytes": 4090,
+      "independent_fresh_anonymous_copy": "C:/tmp/bend-development-independent-audit-20261022/lib.rs",
+      "immutable_local_git_bytes_equal": true
+    },
+    {
+      "repository": "GuitarAlchemist/ix",
+      "commit": "d7c22fdd6a62becb66b9d7246ea85850e7c55854",
+      "path": "crates/ix-origami/tests/small_folds.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/tests/small_folds.rs",
+      "sha256": "22797167a43bfa2301310d60f921f53f798bfed571b070b2baf42b7f3f7ca48d",
+      "bytes": 11034,
+      "independent_fresh_anonymous_copy": "C:/tmp/bend-development-independent-audit-20261022/test-small_folds.rs",
+      "immutable_local_git_bytes_equal": true
+    },
+    {
+      "repository": "GuitarAlchemist/ix",
+      "commit": "d7c22fdd6a62becb66b9d7246ea85850e7c55854",
+      "path": "crates/ix-origami/tests/thickness.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/tests/thickness.rs",
+      "sha256": "8f480b304eb08aecd5d08f36bbb4a4162039a38ec29a425c0c5e405a3e980e90",
+      "bytes": 11678,
+      "independent_fresh_anonymous_copy": "C:/tmp/bend-development-independent-audit-20261022/test-thickness.rs",
+      "immutable_local_git_bytes_equal": true
+    },
+    {
+      "repository": "GuitarAlchemist/ix",
+      "commit": "d7c22fdd6a62becb66b9d7246ea85850e7c55854",
+      "path": "docs/adr/0007-origami-thickness-as-parallel-rigid-panels.md",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/docs/adr/0007-origami-thickness-as-parallel-rigid-panels.md",
+      "sha256": "bc44c07effa10ec9572d059aec416d343dd269a0e99049cf719f265b1b48a346",
+      "bytes": 5530,
+      "independent_fresh_anonymous_copy": "C:/tmp/bend-development-independent-audit-20261022/0007-origami-thickness-as-parallel-rigid-panels.md",
+      "immutable_local_git_bytes_equal": true
+    },
+    {
+      "repository": "edemaine/fold",
+      "commit": "824f9fa6f944248787b0b2077ef622761489201e",
+      "path": "doc/spec.md",
+      "url": "https://raw.githubusercontent.com/edemaine/fold/824f9fa6f944248787b0b2077ef622761489201e/doc/spec.md",
+      "sha256": "492a23850990412d0bd607a0835d139e87fad7665aa9ea7fcaf95917c232666b",
+      "bytes": 23936,
+      "independent_fresh_anonymous_copy": "C:/tmp/bend-development-independent-audit-20261022/fold-spec.md",
+      "immutable_local_git_bytes_equal": null
+    }
+  ],
+  "source_line_evidence": [
+    {
+      "id": "fold-optional-and-other",
+      "path": "crates/ix-origami/src/fold.rs",
+      "line": 84,
+      "end_line": 107,
+      "claim": "Selected typed records contain optional fold angles and arbitrary other maps; no typed bend radius/k field in these records.",
+      "excerpt": "pub struct FoldedFrame {\n    pub frame_classes: Vec<String>,\n    pub frame_parent: Option<i64>,\n    pub frame_inherit: Option<bool>,\n    pub vertices_coords: Vec<Point>,\n    pub edges_fold_angle: Option<Vec<f64>>,\n    /// `[f, g, s]` triples as written; [`Fold::structure`] checks their range.\n    pub face_orders: Vec<[i64; 3]>,\n    /// Every other key of the frame, as read.\n    pub other: Map<String, Value>,\n}\n\n/// A crease pattern (the top-level frame) and its folded frames, in the FOLD 1.2 layout.\n#[derive(Debug, Clone, PartialEq)]\npub struct Fold {\n    pub file_spec: Option<f64>,\n    pub frame_classes: Vec<String>,\n    pub vertices_coords: Vec<Point>,\n    pub edges_vertices: Vec<[usize; 2]>,\n    pub edges_assignment: Vec<Assignment>,\n    pub faces_vertices: Vec<Vec<usize>>,\n    pub frames: Vec<FoldedFrame>,\n    /// Every other top-level key (`file_title`, `file_author`, ...), as read.\n    pub other: Map<String, Value>,"
+    },
+    {
+      "id": "fold-other-load-write",
+      "path": "crates/ix-origami/src/fold.rs",
+      "line": 148,
+      "end_line": 162,
+      "claim": "Remaining top-level data is retained then cloned on serialization; retention alone is not physical consumption.",
+      "excerpt": "        Ok(Self {\n            file_spec: top.remove(\"file_spec\").and_then(|x| x.as_f64()),\n            frame_classes: take_strings(&mut top, \"frame_classes\", \"\")?,\n            vertices_coords: take_points(&mut top, \"vertices_coords\", \"\")?,\n            edges_vertices: take_pairs(&mut top, \"edges_vertices\")?,\n            edges_assignment: take_assignments(&mut top)?,\n            faces_vertices: take_lists(&mut top, \"faces_vertices\")?,\n            frames,\n            other: top,\n        })\n    }\n\n    /// The FOLD 1.2 object: everything read, with the crease pattern at the top level.\n    pub fn to_value(&self) -> Value {\n        let mut top = self.other.clone();"
+    },
+    {
+      "id": "fold-angle-selected-predicates",
+      "path": "crates/ix-origami/src/fold.rs",
+      "line": 239,
+      "end_line": 261,
+      "claim": "Optional branch checks array length, closed degree range, V/M sign and F/U/B zero. These are selected numeric branches, not all checker conditions.",
+      "excerpt": "            if let Some(fa) = &fr.edges_fold_angle {\n                if fa.len() != self.edges_vertices.len() {\n                    problems.push(\"edges_foldAngle length differs from edges\".to_string());\n                }\n                for (k, (&a, &s)) in fa.iter().zip(&self.edges_assignment).enumerate() {\n                    if !(-180.0..=180.0).contains(&a) {\n                        problems.push(format!(\"edge {k} fold angle out of range\"));\n                    }\n                    if (s == Assignment::V && a <= 0.0) || (s == Assignment::M && a >= 0.0) {\n                        problems.push(format!(\n                            \"edge {k}: fold angle sign {a:+.3} disagrees with {}\",\n                            s.letter()\n                        ));\n                    }\n                    // The spec: \"zero for flat, unassigned, and border folds\".\n                    if matches!(s, Assignment::F | Assignment::U | Assignment::B) && a != 0.0 {\n                        problems.push(format!(\n                            \"edge {k} ({}): fold angle {a:+.3}, where the spec sets 0 on flat, \\\n                             unassigned and border edges\",\n                            s.letter()\n                        ));\n                    }\n                }"
+    },
+    {
+      "id": "frame-angle-and-other",
+      "path": "crates/ix-origami/src/fold.rs",
+      "line": 391,
+      "end_line": 416,
+      "claim": "Frame data retains other map and optional angle; no physical bend adapter is supplied by this map handling.",
+      "excerpt": "        Ok(Self {\n            frame_classes: take_strings(&mut m, \"frame_classes\", at)?,\n            frame_parent: m.remove(\"frame_parent\").and_then(|x| x.as_i64()),\n            frame_inherit: m.remove(\"frame_inherit\").and_then(|x| x.as_bool()),\n            vertices_coords: take_points(&mut m, \"vertices_coords\", at)?,\n            edges_fold_angle,\n            face_orders,\n            other: m,\n        })\n    }\n\n    fn to_value(&self) -> Value {\n        let mut m = self.other.clone();\n        m.insert(\"frame_classes\".into(), self.frame_classes.clone().into());\n        if let Some(p) = self.frame_parent {\n            m.insert(\"frame_parent\".into(), p.into());\n        }\n        if let Some(i) = self.frame_inherit {\n            m.insert(\"frame_inherit\".into(), i.into());\n        }\n        m.insert(\n            \"vertices_coords\".into(),\n            points_value(&self.vertices_coords),\n        );\n        if let Some(fa) = &self.edges_fold_angle {\n            m.insert(\"edges_foldAngle\".into(), fa.clone().into());"
+    },
+    {
+      "id": "source-flat-angle-test",
+      "path": "crates/ix-origami/tests/small_folds.rs",
+      "line": 229,
+      "end_line": 241,
+      "claim": "Source test asserts F angle10 refusal then angle0 fixture ok; not executed in this audit.",
+      "excerpt": "fn a_fold_angle_on_a_flat_edge_is_refused() {\n    let mut v = two_sheets(&[[0, 2, 1], [1, 3, 1]]);\n    let mut angles = vec![0.0; 14];\n    angles[6] = 10.0;\n    v[\"file_frames\"][0][\"edges_foldAngle\"] = json!(angles);\n    let p = refused(&v);\n    assert_eq!(\n        p,\n        [\"edge 6 (F): fold angle +10.000, where the spec sets 0 on flat, unassigned and border edges\"]\n    );\n    angles[6] = 0.0;\n    v[\"file_frames\"][0][\"edges_foldAngle\"] = json!(angles);\n    assert!(analysed(&v).ok);"
+    },
+    {
+      "id": "thickness-scope",
+      "path": "crates/ix-origami/src/thickness.rs",
+      "line": 3,
+      "end_line": 20,
+      "claim": "Full thickness in crease-pattern units; parallel panel reading and refusal/makeability limits.",
+      "excerpt": "//! The other checks treat the sheet as having no thickness. Given a thickness `t` (the full\n//! thickness, in crease-pattern units), this module reports two readings of the stated layer\n//! order:\n//!\n//! - **ply**: the most faces stacked at one point. Any stack that keeps the stated positions is\n//!   at least `ply · t` thick, and a sheet whose faces may sit at a different height in each\n//!   overlay cell (paper that drapes) reaches it. That reading refuses nothing the layer rules\n//!   do not already refuse.\n//! - **parallel rigid panels**: each panel (faces joined by flat joints) keeps one height and\n//!   stays parallel to the sheet. Such a stack exists if and only if the stated \"above\" over\n//!   overlapping panels has no cycle. When every overlapping pair is stated, its least height is\n//!   the longest chain of panels, times `t`.\n//!\n//! A cycle is refused only for `t > 0`: at zero thickness every face lies in one plane, and the\n//! FOLD spec allows a stated order with cycles. So at `t = 0` nothing here refuses anything, and\n//! every height is 0. A refusal means \"no stack of parallel panels\", not \"cannot be made\": boards\n//! tilted by about `t` can escape it. Nothing here can say that a state can be made either: the\n//! two faces of a folded crease touch along it, which no exact thick state allows."
+    },
+    {
+      "id": "flat-domain-and-separate-output",
+      "path": "crates/ix-origami/src/lib.rs",
+      "line": 1,
+      "end_line": 24,
+      "claim": "Flat stated-state domain; thickness is beside and never changes checks verdict.",
+      "excerpt": "//! Checks of a flat folded state, read from a FOLD file.\n//!\n//! A [`Fold`] holds a crease pattern and one folded frame that inherits from it, with the\n//! frame's stated layer order (`faceOrders`). [`analyse`] runs every check on it:\n//!\n//! - **structure**: indices in range, fold angles that agree with the assignment (0 on flat,\n//!   unassigned and border edges), one folded frame that overrides none of the crease pattern's\n//!   edges or faces, faces counterclockwise, convex and of non-zero area, every face side an\n//!   edge;\n//! - **face isometry**: each face keeps its shape in the folded frame, up to one global scale;\n//! - **crease orientation**: a mountain or valley turns one face over relative to the other;\n//! - **Kawasaki and Maekawa** at interior vertices whose creases are all mountains or valleys\n//!   (vertices on no edge are skipped and counted);\n//! - **the layer order**: the adjacency rule across every mountain and valley, no cycle in any\n//!   overlay cell, taco-tortilla, taco-taco and tortilla-tortilla. An unassigned edge whose\n//!   faces are turned over relative to each other is a crease in these rules; a flat, join or\n//!   unassigned edge whose faces are not is a flat joint, whose sheet runs on across its line.\n//!\n//! [`swap_census`] flips each stated pair alone and records which rules reject it: a check\n//! that cannot fail proves nothing.\n//!\n//! [`thickness::stack`] reads the stated order at a material thickness `t`: the most faces\n//! stacked at one point, and whether parallel rigid panels, one height each, can realise the\n//! order. It is reported beside the checks above and never changes their verdict."
+    },
+    {
+      "id": "no-global-fold-proof",
+      "path": "crates/ix-origami/src/lib.rs",
+      "line": 38,
+      "end_line": 40,
+      "claim": "Checks do not establish global flat-foldability or compute a layer order.",
+      "excerpt": "//! These are local checks of one stated folded state. They do not prove that the sheet folds\n//! flat: testing global flat-foldability is NP-complete (Bern and Hayes 1996). Nothing here\n//! computes a layer order; the checks only test the one the file states."
+    },
+    {
+      "id": "thickness-zero-source-test",
+      "path": "crates/ix-origami/tests/thickness.rs",
+      "line": 159,
+      "end_line": 169,
+      "claim": "Source test documents zero-thickness behavior and independent base checks; not executed.",
+      "excerpt": "fn at_zero_thickness_nothing_changes() {\n    let fold = crane();\n    let s = stacked(&fold, 0.0);\n    assert_eq!((s.ply, s.ply_height), (28, 0.0));\n    assert_eq!((s.rigid.levels, s.rigid.height), (Some(36), Some(0.0)));\n    assert!(!s.rigid.refused);\n    // A cycle is reported but not refused: at zero thickness the faces share one plane.\n    let w = stacked(&weave(), 0.0);\n    assert!(!w.rigid.acyclic && !w.rigid.refused);\n    // The checks themselves do not depend on a thickness.\n    assert!(analyse(&weave()).unwrap().ok);"
+    },
+    {
+      "id": "adr-units",
+      "path": "docs/adr/0007-origami-thickness-as-parallel-rigid-panels.md",
+      "line": 7,
+      "end_line": 15,
+      "claim": "Opt-in separate reading, full thickness and caller coordinate-unit conversion.",
+      "excerpt": "`ix-origami` checks one stated flat folded state, and its checks treat the sheet as having no\nthickness. A material thickness is an **opt-in reading reported beside those checks**\n(`ix_origami::thickness::stack`, and `thickness: {t}` on the `ix_origami_check` MCP tool). It\nnever changes the top-level verdict.\n\n1. **`t` is the full thickness, in the crease pattern's units**, the units of `vertices_coords`.\n   It is not the half-thickness, and it is not in millimetres. The caller converts, for\n   example `t = 0.4 / 150` for 0.4 mm board on a 150 mm sheet whose crease pattern is the unit\n   square."
+    },
+    {
+      "id": "adr-process-exclusions",
+      "path": "docs/adr/0007-origami-thickness-as-parallel-rigid-panels.md",
+      "line": 24,
+      "end_line": 34,
+      "claim": "No thickness-wide ok; bend-radius refusals, motion and tilted models explicitly excluded.",
+      "excerpt": "3. **A cycle is refused only for `t > 0`.** The refusal stays out of the top-level `ok`, out of\n   `rejected_by` and out of `Rule`, so the census tallies do not change. `rigid.ok` is the\n   top-level `ok` **and** no refusal, so a state the checks reject is never reported as\n   stackable. There is no thickness-wide `ok`.\n4. **The rigid reading is always reported**, for paper too. It is information, and the caller\n   decides what it means for their material.\n5. **Out of scope:**\n   - computing or optimising a layering (LP-optimal levels, crease widths);\n   - refusals based on bend radius or creasing grooves;\n   - folding motion;\n   - tilted-panel models."
+    },
+    {
+      "id": "adr-output-separate",
+      "path": "docs/adr/0007-origami-thickness-as-parallel-rigid-panels.md",
+      "line": 80,
+      "end_line": 82,
+      "claim": "Existing analyse/Report/Rule/census unchanged.",
+      "excerpt": "- `analyse`, `Report`, `Rule` and the census are unchanged. The thickness output is a new key,\n  present only when `thickness` is passed. No tool is added, so the registry snapshot and the\n  parity count do not move."
+    },
+    {
+      "id": "fold-spec-angle",
+      "path": "doc/spec.md",
+      "line": 308,
+      "end_line": 314,
+      "claim": "Pinned FOLD deviation from flatness, signed degrees, range and assignment relation.",
+      "excerpt": "* `edges_foldAngle`: For each edge, the fold angle (deviation from flatness)\n  along each edge of the pattern.  The fold angle is a number in degrees\n  lying in the range [&minus;180, 180].  The fold angle is positive for\n  valley folds, negative for mountain folds, and zero for flat, unassigned,\n  and border folds.  Accordingly, the sign of `edge_foldAngle` should match\n  `edges_assignment` if both are specified.\n  *Renamed from `edges_foldAngles` in version 1.1.*"
+    }
+  ],
+  "primary_body_read_scope": [
+    {
+      "url": "https://help.autodesk.com/cloudhelp/ENU/Fusion-Sheet-Metal/files/SM-RULES-REF.htm",
+      "actual_read": "Fusion Sheet Metal Rules reference body: units, thickness, inside radius and neutral offset ratio; no calibrated numeric k or CAD execution."
+    },
+    {
+      "url": "https://developer.rhino3d.com/en/guides/general/essential-mathematics/parametric-curves-surfaces/",
+      "actual_read": "Rhino mathematics circle parameterization and principal/Gaussian curvature sections; circle x=Rcos(theta),y=Rsin(theta), cylindrical curvatures and product."
+    },
+    {
+      "url": "https://docs.mcneel.com/rhino/8/help/en-us/commands/unrollsrf.htm",
+      "actual_read": "Rhino 8 UnrollSrf body including seam splitting, relative tolerance, area warnings, developability and pitfalls. Approximate/toleranced outputs and material-dependent alternatives are not exact smooth isometry certificates; documentation explicitly excludes sheet-metal-purpose modeling."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/edemaine/fold/824f9fa6f944248787b0b2077ef622761489201e/doc/spec.md",
+      "actual_read": "Pinned specification lines308-314 directly read from independent fresh copy."
+    }
+  ],
+  "unread_primary_attempt": {
+    "url": "https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/How-to-calculate-K-Factor-for-Inventor-Sheet-Metal.html",
+    "web_result": "Open returned zero body lines",
+    "body_or_images_read": false
+  },
+  "method": {
+    "independent_script": "C:/tmp/bend-development-independent-audit-20261022/audit.py",
+    "root_analysis_helper_used": false,
+    "arithmetic": "Independent Fraction coefficients, closed-form circular arc/chord and principal-curvature products; floating leaves tolerance rel2e-14 abs2e-12. Source branch translation only.",
+    "coverage": {
+      "bend_rows": 18,
+      "angle_rows": 11,
+      "selected_numeric_cases": 35,
+      "curvature_rows": 4,
+      "cylinder_patches": 5,
+      "scope_cards": 4
+    },
+    "independent_source_git_comparison": "Six fresh anonymous IX copies compared with git show of immutable commit; separate FOLD spec fresh download SHA pin, no local FOLD Git comparison claimed."
+  },
+  "actual_scope": "Seven fixed packet files, six selected immutable IX source/test/ADR texts and separately pinned FOLD spec, plus named official web bodies. No course/translation review, repository-wide capability survey, runtime validation or engineering calibration.",
+  "unexecuted": [
+    "Rust/native or full FOLD checker",
+    "source tests",
+    "host/browser/audio/renderer/lab",
+    "Fusion/Rhino/CAD commands",
+    "physical bend or manufacture",
+    "paid calls",
+    "calibration or material measurements"
+  ],
+  "pending": {
+    "human_review": null,
+    "artisan_review": null,
+    "fluent_language_review": null,
+    "learner_validation": null,
+    "checker_runtime": null,
+    "host_runtime": null,
+    "CAD_runtime": null,
+    "physical_bend": null,
+    "manufacture": null,
+    "calibrated_k": null
+  }
+}

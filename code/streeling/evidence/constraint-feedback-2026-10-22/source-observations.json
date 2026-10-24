@@ -1,0 +1,79 @@
+{
+  "scope": "Pinned source interpretation, not execution.",
+  "ix_pin": "d7c22fdd6a62becb66b9d7246ea85850e7c55854",
+  "thickness": {
+    "panel_union_lines": [
+      71,
+      86
+    ],
+    "edge_construction_lines": [
+      142,
+      160
+    ],
+    "dag_level_lines": [
+      162,
+      169
+    ],
+    "cycle_lines": [
+      171,
+      188
+    ],
+    "acyclic_report_lines": [
+      190,
+      204
+    ],
+    "edge_direction": "lower-to-upper",
+    "edge_weight": 1,
+    "weight_is_not_force_or_physical_height": true,
+    "known_pair_exactness_requires_no_undetermined_cross_panel_overlaps": true,
+    "levels_times_full_thickness": true,
+    "face_levels_only_when_exact": true,
+    "cycle_refused_only_for_positive_t": true
+  },
+  "layers": {
+    "relation_lines": [
+      92,
+      118
+    ],
+    "uses_second_face_orientation": true,
+    "unknown_zero_skipped": true
+  },
+  "test": {
+    "lines": [
+      281,
+      305
+    ],
+    "weave_layer_analysis_ok": true,
+    "expected_cycle": [
+      [
+        0,
+        3
+      ],
+      [
+        3,
+        2
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "thickness_cases": [
+      0,
+      1e-300,
+      0.5
+    ],
+    "test_source_read_not_run": true
+  },
+  "learn": {
+    "pin": "d488be4c2fda37afa06a4f87e322b73f21e46313",
+    "teaching_scene_uses_static_bodies": true,
+    "teaching_scene_has_no_stiffness_iteration": true,
+    "previous_spring_record_is_authored_not_calibrated": true
+  },
+  "new_native_run": null
+}

@@ -1,0 +1,974 @@
+{
+  "audit": "Independent AI course/content review",
+  "checked_at_utc": "2026-10-22T19:52:01.694951+00:00",
+  "verdict": "pass_with_declared_evidence_limits",
+  "coverage": {
+    "modules": 3,
+    "locales": [
+      "en",
+      "fr",
+      "es"
+    ],
+    "course_sources": 9,
+    "exercise_answer_pairs": 45,
+    "learner_criteria": 15
+  },
+  "method": [
+    "Substantively read all nine localized pages and all45exercise-answer pairs; checked French/Spanish meaning against the English source, beyond mechanical parity.",
+    "Read all15prepared learner criteria, learner tasks, plan, README, native logs/temporary wrapper, source/probe/execution records and fixed numerical evidence.",
+    "Read four immutable GA source files and verified their bytes/hashes against the primary-readback record; source inspection is not C#mapper or MIDIparser execution.",
+    "Independently recomputed exact timing offsets/fractions/all-eight-onset residuals/integer-BPM consequence and exhaustively enumerated initial/base/early/repair assignments using a separate inline calculation.",
+    "Independently opened W3C swing, publisher abstract and KTH author page. FSI web.open failed in this reviewer transport; inspected the separately captured official Microsoft HTML body and direct200 receipt instead.",
+    "Checked existing prerequisite openings, metadata, encoding, ordered links, inline code and numeric-token parity. No actual learner, musician or audio trial was performed."
+  ],
+  "findings": [],
+  "source_bindings": [
+    {
+      "path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+      "bytes": 8686,
+      "sha256": "5a0c3a6c1d2539820d4b3ce8adee3d4cb7626b312491b70d323c747a1d5391b0"
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-004-model-timing-without-inventing-a-style.fr.md",
+      "bytes": 10315,
+      "sha256": "efff52dcb69e322365ee1dd0845f0b8cecbc48b2d9466d8697b40d36f6d9bf09"
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-004-model-timing-without-inventing-a-style.es.md",
+      "bytes": 10013,
+      "sha256": "8b46f88bc1b776956b50a4c7775777db98253c846119d440dd2e20d6bbfeb131"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-005-plan-which-string-keeps-ringing.md",
+      "bytes": 7953,
+      "sha256": "dfb660db8e69ca8286fdd6f6e0f642a949d838257e4f565debd632af1eddaf82"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/fr/gtr-005-plan-which-string-keeps-ringing.fr.md",
+      "bytes": 9585,
+      "sha256": "0aef6085c5e4ee6072650fdcb10ed23925958035b8674c406a0df1e455b872d8"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/es/gtr-005-plan-which-string-keeps-ringing.es.md",
+      "bytes": 9334,
+      "sha256": "f3afb12ac5d4e01e2333b3454d3f19684bf23ae4b9d0ef93c1ed5a5830e77745"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-005-repair-a-phrase-without-hiding-the-change.md",
+      "bytes": 7974,
+      "sha256": "c811f2c5b90bbab99420e307f6cf2a65a4069d55a8abe57f6a42da115fce2c11"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-005-repair-a-phrase-without-hiding-the-change.fr.md",
+      "bytes": 9571,
+      "sha256": "d2c787e2f481647110af855cedf02cfa17faede27d6ebc937419b3d1fc7283b6"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-005-repair-a-phrase-without-hiding-the-change.es.md",
+      "bytes": 9118,
+      "sha256": "f678ff20f7d8f434ff442fb5c69557a6eef86b174d1e77c28c00e47875f0b5ba"
+    }
+  ],
+  "prerequisite_bindings": [
+    {
+      "path": "streeling/courses/musicology/en/mcl-003-style-labels-as-evidence.md",
+      "bytes": 13367,
+      "sha256": "2d909db9f674ffd2dfb1d44322d0ee38d603efb2d1f3e9cf980869b4be7b3134"
+    },
+    {
+      "path": "streeling/courses/music/en/mus-004-rhythm-and-groove.md",
+      "bytes": 29941,
+      "sha256": "af2c21252b3f037e19a498b6cedcef926550711e0bbe3687bc7ffac7c20465ea"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-003-audit-voicing-playability.md",
+      "bytes": 7870,
+      "sha256": "b70485d9d047e2ef9151e6732762031fb56b442cadaf0129ea0bf4e24476276a"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-004-choose-a-useful-voicing.md",
+      "bytes": 7351,
+      "sha256": "d9a937a6af8e4f2ea684cf1735c584bea6aca49a62bbef5cd4b866522fa94d14"
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/README.md",
+      "bytes": 4230,
+      "sha256": "3be97517400cce6a656900bae83f928e12f64f391033c7b75db56f65b7bb8dbf"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/experiment-plan.md",
+      "bytes": 7134,
+      "sha256": "0d6bfd5ac8b66ddd828b7379b612a11e621db37f0a5f2136eaa08f1079a8726d"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/learner-task.md",
+      "bytes": 2807,
+      "sha256": "9d0525a35fed023f5425b1a8ac5d871948e62e2b0e42b77ae49f1bffa08f3492"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/reviewer-rubric.json",
+      "bytes": 4032,
+      "sha256": "9c743ca22ff7c782e0a27914b421de7430610c2c4ef286d3360fbf0ec3945fa9"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/data-audit.json",
+      "bytes": 35179,
+      "sha256": "1068b142dd3495101e5b82d4a73143b16c938932cf4ca1cb002129c26e0fd714"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/execution.json",
+      "bytes": 802,
+      "sha256": "97ba77a3a741ff6a745b1d2d722fec57106914a1c0cdf366194ec8c18455aa53"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/ga-tuning-probes.json",
+      "bytes": 991,
+      "sha256": "61a61695002da4b3c819aa32a923130d4dfee77419bc5935164ef46b08c3dfa4"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/native-execution.json",
+      "bytes": 1285,
+      "sha256": "10c10c8ffb379b79ace1feec5bdf3a6b12d2444bdb7ec16cfcff5a8ea7ed5e6e"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/native-positions.json",
+      "bytes": 10539,
+      "sha256": "3176bba742d9d2ebc141116fc26121d9e85d18c7663f9170edf03beb833a335d"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/primary-readback.json",
+      "bytes": 2809,
+      "sha256": "ab825fc89a191d5a597b329bfa2aed0d5b3ff5c606fe068d06dd8014a7a163e3"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/string-occupancy.json",
+      "bytes": 5314,
+      "sha256": "6356c1bbbe0151940c7df105d48e1cdb42a3ef1aec2d314dc6a5e205580eb1c3"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/repair-options.json",
+      "bytes": 8539,
+      "sha256": "8ff9449ba8a93b9ae2e4a3e95a58473f21f943e2293b7520ef43ed9683c652c1"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/timing-models.json",
+      "bytes": 5203,
+      "sha256": "605d1e22aaf21df7b1c228a0d3f6187f467a74e397d30b9cf09255bfdc71bb1f"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/official-links.json",
+      "bytes": 3729,
+      "sha256": "e4853710967c362bd7a4d575cbd56c1c6c2a6d86864b3ecc538d6742a6754e2f"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/locale-checks.json",
+      "bytes": 2927,
+      "sha256": "c9f32c9ed5d34e1672bdfd8658cb1b3fe8b962de2206c7545c38dab669d69a55"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/bindings.json",
+      "bytes": 4197,
+      "sha256": "000295b0446cd8d4bc93e05de8a448e23ebf5d56e74014dde80664b589e48b6a"
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/source-inventory.json",
+      "bytes": 1176,
+      "sha256": "ce0213bbbd2f14544b4d60faf571edf97171ee61797b95deac5921f5b4988bc5"
+    }
+  ],
+  "pinned_primary_source_bindings": [
+    {
+      "path": "Common/GA.Business.DSL/Types/MidiTypes.fs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "bytes": 9522,
+      "sha256": "8614a2a5d466b5bb792c50017ae7a6e09592b158f1362ac6bf8768683c428b36"
+    },
+    {
+      "path": "Common/GA.Business.DSL/Parsers/MidiParser.fs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "bytes": 13721,
+      "sha256": "00f812620749834af64988b07cde408fb50936d750623b246dc3e64b1ee0d402"
+    },
+    {
+      "path": "Common/GA.Domain.Services/Fretboard/Analysis/FretboardPositionMapper.cs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "bytes": 3142,
+      "sha256": "818a2ca2e243bcc4e922ac1a3840d6dba0ee1e85aa41172506e10a8aef0d062b"
+    },
+    {
+      "path": "Common/GA.Domain.Core/Instruments/Tuning.cs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "bytes": 3329,
+      "sha256": "037c5b48514528d65f59a263136d4fa4d66e5b1ceae7f14453c1868978378b8a"
+    }
+  ],
+  "exercise_answer_checks": [
+    {
+      "module": "MCL004",
+      "locale": "en",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+      "exercise_answer_block_sha256": "7e9b16f76d3dabc3afca3801fe5f538cc5dd158b7c85eeb52394ea1a406f9562",
+      "review": "Reconstructs the equal-subdivision onset .26seconds and +80ms authored residual; refuses an observed mistake, genre or corrective-performance claim."
+    },
+    {
+      "module": "MCL004",
+      "locale": "en",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+      "exercise_answer_block_sha256": "09cb22faf9e5c0c53338ab69412d8926e941bbf50c71faf8c401acec100a4531",
+      "review": "Derives the least-squares common offset .3275seconds and fraction131/208; reports3.75ms MAE across all eight onsets without claiming unique MAE optimization, independent validation, groove, skill or listener benefit."
+    },
+    {
+      "module": "MCL004",
+      "locale": "en",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+      "exercise_answer_block_sha256": "1c465b192d5b0db058157c4698638bf0ea462da82fe63610111bf0b1c11cfd60",
+      "review": "Distinguishes a common2:1 playback instruction from four distinct annotations and requires retained details, tested conversion and observed applicable output before exact recreation."
+    },
+    {
+      "module": "MCL004",
+      "locale": "en",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+      "exercise_answer_block_sha256": "759ebd5593d4427211fbcc4ef5862a71472c019362831a0361a698224070614a",
+      "review": "Applies integer division to115 and conditional240/115seconds, difference160/23ms; expressly refuses an observed parser or playback failure."
+    },
+    {
+      "module": "MCL004",
+      "locale": "en",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+      "exercise_answer_block_sha256": "79d46cd8fcc9129429692c9c4b23a7c7210144d0c6bd5b640ce9ab5a2785af31",
+      "review": "Explains why a common strictly increasing map preserves overlap and feasibility, whereas moving one onset can change overlap/articulation/duration; keeps200ms authored map separate from250ms constant-reference edit."
+    },
+    {
+      "module": "MCL004",
+      "locale": "fr",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/musicology/fr/mcl-004-model-timing-without-inventing-a-style.fr.md",
+      "exercise_answer_block_sha256": "376f348fe15c33b0980ff9afd5c52c5098033fa1838acc4ae0095fe1caff5632",
+      "review": "Reconstructs the equal-subdivision onset .26seconds and +80ms authored residual; refuses an observed mistake, genre or corrective-performance claim."
+    },
+    {
+      "module": "MCL004",
+      "locale": "fr",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/musicology/fr/mcl-004-model-timing-without-inventing-a-style.fr.md",
+      "exercise_answer_block_sha256": "b4c722ba18723a0a39c2e637144cf475185fd9a33a59a08d315471c2ed4a148f",
+      "review": "Derives the least-squares common offset .3275seconds and fraction131/208; reports3.75ms MAE across all eight onsets without claiming unique MAE optimization, independent validation, groove, skill or listener benefit."
+    },
+    {
+      "module": "MCL004",
+      "locale": "fr",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/musicology/fr/mcl-004-model-timing-without-inventing-a-style.fr.md",
+      "exercise_answer_block_sha256": "448fe0c98731d6c04799acd571a4c278ecfaf7a609cdddb2f78eaba0b524d458",
+      "review": "Distinguishes a common2:1 playback instruction from four distinct annotations and requires retained details, tested conversion and observed applicable output before exact recreation."
+    },
+    {
+      "module": "MCL004",
+      "locale": "fr",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/musicology/fr/mcl-004-model-timing-without-inventing-a-style.fr.md",
+      "exercise_answer_block_sha256": "cdb8824d4d71c7b21a41be74ddc4ba7dd82f61dc297caa860a79694847a498cc",
+      "review": "Applies integer division to115 and conditional240/115seconds, difference160/23ms; expressly refuses an observed parser or playback failure."
+    },
+    {
+      "module": "MCL004",
+      "locale": "fr",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/musicology/fr/mcl-004-model-timing-without-inventing-a-style.fr.md",
+      "exercise_answer_block_sha256": "873dba75f5f286b18cc0516675425a25e91ba4113bc69e39c131df9c87ce6760",
+      "review": "Explains why a common strictly increasing map preserves overlap and feasibility, whereas moving one onset can change overlap/articulation/duration; keeps200ms authored map separate from250ms constant-reference edit."
+    },
+    {
+      "module": "MCL004",
+      "locale": "es",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/musicology/es/mcl-004-model-timing-without-inventing-a-style.es.md",
+      "exercise_answer_block_sha256": "21697e438d63bb15ca333bbce9822aba633d2d62262043c68fe84c633666a6eb",
+      "review": "Reconstructs the equal-subdivision onset .26seconds and +80ms authored residual; refuses an observed mistake, genre or corrective-performance claim."
+    },
+    {
+      "module": "MCL004",
+      "locale": "es",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/musicology/es/mcl-004-model-timing-without-inventing-a-style.es.md",
+      "exercise_answer_block_sha256": "c5bc2928dfaaebb588412abcc33f1b307533d6789883fa2405190f1432b67d3d",
+      "review": "Derives the least-squares common offset .3275seconds and fraction131/208; reports3.75ms MAE across all eight onsets without claiming unique MAE optimization, independent validation, groove, skill or listener benefit."
+    },
+    {
+      "module": "MCL004",
+      "locale": "es",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/musicology/es/mcl-004-model-timing-without-inventing-a-style.es.md",
+      "exercise_answer_block_sha256": "0f25e442a826a204a79e762bc0481a2f274fc13eb9455dd17e140e42c0443ab2",
+      "review": "Distinguishes a common2:1 playback instruction from four distinct annotations and requires retained details, tested conversion and observed applicable output before exact recreation."
+    },
+    {
+      "module": "MCL004",
+      "locale": "es",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/musicology/es/mcl-004-model-timing-without-inventing-a-style.es.md",
+      "exercise_answer_block_sha256": "a664e97c51002b5c25a87a53711a5941b6ffb176ae403c371768e2d70240e4a5",
+      "review": "Applies integer division to115 and conditional240/115seconds, difference160/23ms; expressly refuses an observed parser or playback failure."
+    },
+    {
+      "module": "MCL004",
+      "locale": "es",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/musicology/es/mcl-004-model-timing-without-inventing-a-style.es.md",
+      "exercise_answer_block_sha256": "ce58a000f1b1cce69e2b1ceb5326afb1cf765a815140a934ae42856437162166",
+      "review": "Explains why a common strictly increasing map preserves overlap and feasibility, whereas moving one onset can change overlap/articulation/duration; keeps200ms authored map separate from250ms constant-reference edit."
+    },
+    {
+      "module": "GTR005",
+      "locale": "en",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-studies/en/gtr-005-plan-which-string-keeps-ringing.md",
+      "exercise_answer_block_sha256": "ddc1c51942ddd0c1c29c98d7d4298cfb55eb985a70713e2747f0a71bbf38d67f",
+      "review": "Correctly translates native string4fret5 into conventional string3 via7-4=3 and verifies55+5=60; limits the authored adapter to the stated six-string convention."
+    },
+    {
+      "module": "GTR005",
+      "locale": "en",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-studies/en/gtr-005-plan-which-string-keeps-ringing.md",
+      "exercise_answer_block_sha256": "51514981dde980ecf7967a826cb45040864cb5de23870582880d23ea5b51b4b8",
+      "review": "Explains independent sustain conflict on one string during overlap and requires onset/offset/event identity beyond individually valid pitches; does not fault a static helper for lacking temporal planning."
+    },
+    {
+      "module": "GTR005",
+      "locale": "en",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-studies/en/gtr-005-plan-which-string-keeps-ringing.md",
+      "exercise_answer_block_sha256": "705496eaf40e937b7b211eca6bb4e79a3d45eaf96fdba6483430396f908f62c1",
+      "review": "Gives the unique base plan C3/5,E2/5,G1/3,D2/3 and explains why E occupying G sole eligible string blocks a locally valid initial choice; no silent held-event transfer is permitted."
+    },
+    {
+      "module": "GTR005",
+      "locale": "en",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-studies/en/gtr-005-plan-which-string-keeps-ringing.md",
+      "exercise_answer_block_sha256": "36a438f9f1fd9e809753e30153f6bea129e9deb30f413f15f9ce1cedbd556899",
+      "review": "Uses half-open[1.5,2) four-active/three-eligible-string witness under Standard cap5 and independent-sustain assumptions; makes no universal physical impossibility or system-wide defect claim."
+    },
+    {
+      "module": "GTR005",
+      "locale": "en",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-studies/en/gtr-005-plan-which-string-keeps-ringing.md",
+      "exercise_answer_block_sha256": "c4ad95caf9705a73cf6802faebf864c06d629f1616e6e1b228dffaef47a852c5",
+      "review": "Limits cap10 candidate claims to pitch/time/occupancy/range satisfaction and identifies unobserved fingering, sustain, muting, transitions and sound checks; no player success invented."
+    },
+    {
+      "module": "GTR005",
+      "locale": "fr",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-studies/fr/gtr-005-plan-which-string-keeps-ringing.fr.md",
+      "exercise_answer_block_sha256": "3bf1937cbd3f47901848c64a298cc63b62966112f3a4f10a43393187667e90e3",
+      "review": "Correctly translates native string4fret5 into conventional string3 via7-4=3 and verifies55+5=60; limits the authored adapter to the stated six-string convention."
+    },
+    {
+      "module": "GTR005",
+      "locale": "fr",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-studies/fr/gtr-005-plan-which-string-keeps-ringing.fr.md",
+      "exercise_answer_block_sha256": "5d525f8ea3eebc64d6ac83edb49cc25f38a64a534e7de4cf75858fdab215ae66",
+      "review": "Explains independent sustain conflict on one string during overlap and requires onset/offset/event identity beyond individually valid pitches; does not fault a static helper for lacking temporal planning."
+    },
+    {
+      "module": "GTR005",
+      "locale": "fr",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-studies/fr/gtr-005-plan-which-string-keeps-ringing.fr.md",
+      "exercise_answer_block_sha256": "b3f533e1f4b98501cb5438413e657a75c2dbcef3374b643abb9db753d117917f",
+      "review": "Gives the unique base plan C3/5,E2/5,G1/3,D2/3 and explains why E occupying G sole eligible string blocks a locally valid initial choice; no silent held-event transfer is permitted."
+    },
+    {
+      "module": "GTR005",
+      "locale": "fr",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-studies/fr/gtr-005-plan-which-string-keeps-ringing.fr.md",
+      "exercise_answer_block_sha256": "29d07bc895709f58ce7cf92fca290659c3adfce227aabef40b9ba0a948893e7e",
+      "review": "Uses half-open[1.5,2) four-active/three-eligible-string witness under Standard cap5 and independent-sustain assumptions; makes no universal physical impossibility or system-wide defect claim."
+    },
+    {
+      "module": "GTR005",
+      "locale": "fr",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-studies/fr/gtr-005-plan-which-string-keeps-ringing.fr.md",
+      "exercise_answer_block_sha256": "de0685a051ddbc7a7e52c73a7ceb5c816dafdd8be3413e7ad5aa9c5739b181a9",
+      "review": "Limits cap10 candidate claims to pitch/time/occupancy/range satisfaction and identifies unobserved fingering, sustain, muting, transitions and sound checks; no player success invented."
+    },
+    {
+      "module": "GTR005",
+      "locale": "es",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-studies/es/gtr-005-plan-which-string-keeps-ringing.es.md",
+      "exercise_answer_block_sha256": "f4b30b871b6bc61189476865f379e9a87cbb69428025eb9aadebd0898641b224",
+      "review": "Correctly translates native string4fret5 into conventional string3 via7-4=3 and verifies55+5=60; limits the authored adapter to the stated six-string convention."
+    },
+    {
+      "module": "GTR005",
+      "locale": "es",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-studies/es/gtr-005-plan-which-string-keeps-ringing.es.md",
+      "exercise_answer_block_sha256": "fa672252c20ac1a075946cf95ae140785c1a28cd5d81f12983dbc8ea396fb683",
+      "review": "Explains independent sustain conflict on one string during overlap and requires onset/offset/event identity beyond individually valid pitches; does not fault a static helper for lacking temporal planning."
+    },
+    {
+      "module": "GTR005",
+      "locale": "es",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-studies/es/gtr-005-plan-which-string-keeps-ringing.es.md",
+      "exercise_answer_block_sha256": "f9bbfcf8d8163937bbd121c04262f3920e88f22fe29f2140dc9afa65f4ed5b30",
+      "review": "Gives the unique base plan C3/5,E2/5,G1/3,D2/3 and explains why E occupying G sole eligible string blocks a locally valid initial choice; no silent held-event transfer is permitted."
+    },
+    {
+      "module": "GTR005",
+      "locale": "es",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-studies/es/gtr-005-plan-which-string-keeps-ringing.es.md",
+      "exercise_answer_block_sha256": "ab733cd61eda44387d06e8d8eb8f3727f72088fa2efa94fd0e1603189251da7e",
+      "review": "Uses half-open[1.5,2) four-active/three-eligible-string witness under Standard cap5 and independent-sustain assumptions; makes no universal physical impossibility or system-wide defect claim."
+    },
+    {
+      "module": "GTR005",
+      "locale": "es",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-studies/es/gtr-005-plan-which-string-keeps-ringing.es.md",
+      "exercise_answer_block_sha256": "cba046e048de0b2ece34aadd77358320e8aceb2dd8e78d4857b7f0f3714987a4",
+      "review": "Limits cap10 candidate claims to pitch/time/occupancy/range satisfaction and identifies unobserved fingering, sustain, muting, transitions and sound checks; no player success invented."
+    },
+    {
+      "module": "GAA005",
+      "locale": "en",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-alchemist-academy/en/gaa-005-repair-a-phrase-without-hiding-the-change.md",
+      "exercise_answer_block_sha256": "67f5336712615fdddf27c7c17731a7bb1715d96f05fc97696e3d56603f632333",
+      "review": "Retains original D[1.5,3), cap5 and conflict[1.5,2), so proposed alternatives cannot conceal a relaxed requirement."
+    },
+    {
+      "module": "GAA005",
+      "locale": "en",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-alchemist-academy/en/gaa-005-repair-a-phrase-without-hiding-the-change.md",
+      "exercise_answer_block_sha256": "7285961f9ebcba0b8247d1265a4b6e24a3673f976b8df0ae4c760446aad6dd77",
+      "review": "Computes half a beat as250ms at120quarter/min and explains delayed-onset/fixed-offset D shortening and earlier-release E shortening as different musical edits."
+    },
+    {
+      "module": "GAA005",
+      "locale": "en",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-alchemist-academy/en/gaa-005-repair-a-phrase-without-hiding-the-change.md",
+      "exercise_answer_block_sha256": "274280b801e29e9193aec53a9decef72bfc9c5421fa6c2e5a5369d2a71e6b2ed",
+      "review": "Retains four pitches and every onset/offset while relaxing cap5to10; distinguishes lowest positive-fret span among three plans from player comfort, technique, sound or preference."
+    },
+    {
+      "module": "GAA005",
+      "locale": "en",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-alchemist-academy/en/gaa-005-repair-a-phrase-without-hiding-the-change.md",
+      "exercise_answer_block_sha256": "1e9073f3186e1c325ebab6a3dad46e75a2a37db002d5b6f46b0331b13435addf",
+      "review": "Rejects DropD as a solution to the unchanged upper-note candidates at cap5 and identifies deletion of D as a changed requested event set, despite one remaining plan."
+    },
+    {
+      "module": "GAA005",
+      "locale": "en",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-alchemist-academy/en/gaa-005-repair-a-phrase-without-hiding-the-change.md",
+      "exercise_answer_block_sha256": "416293f03596a1c4e4c9061c91b8849fad9026d8a9531ef6519d4f001a6c5b2f",
+      "review": "Offers expanded range plus a separately disclosed timing proposal without applying either silently; preserves permission boundaries and absent musician choice/trial rather than claiming played success."
+    },
+    {
+      "module": "GAA005",
+      "locale": "fr",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-alchemist-academy/fr/gaa-005-repair-a-phrase-without-hiding-the-change.fr.md",
+      "exercise_answer_block_sha256": "97b47bd65cc6702bfe7148be3d09ef59e895a85ca54170c102ff97435e712d7d",
+      "review": "Retains original D[1.5,3), cap5 and conflict[1.5,2), so proposed alternatives cannot conceal a relaxed requirement."
+    },
+    {
+      "module": "GAA005",
+      "locale": "fr",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-alchemist-academy/fr/gaa-005-repair-a-phrase-without-hiding-the-change.fr.md",
+      "exercise_answer_block_sha256": "07c21c7beddff913857e51cc7a15c2ec8eb0c1181600ead81fea7c6d6610ef64",
+      "review": "Computes half a beat as250ms at120quarter/min and explains delayed-onset/fixed-offset D shortening and earlier-release E shortening as different musical edits."
+    },
+    {
+      "module": "GAA005",
+      "locale": "fr",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-alchemist-academy/fr/gaa-005-repair-a-phrase-without-hiding-the-change.fr.md",
+      "exercise_answer_block_sha256": "6d33b70e482a9cf396949b9ea914c05264d9a2f64cffa733d4cc5fb9cbc61cee",
+      "review": "Retains four pitches and every onset/offset while relaxing cap5to10; distinguishes lowest positive-fret span among three plans from player comfort, technique, sound or preference."
+    },
+    {
+      "module": "GAA005",
+      "locale": "fr",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-alchemist-academy/fr/gaa-005-repair-a-phrase-without-hiding-the-change.fr.md",
+      "exercise_answer_block_sha256": "64b8c93ca2e75c02a1ac19a6585a26592a9661fffd088d5b16a6fc4ee9cc459e",
+      "review": "Rejects DropD as a solution to the unchanged upper-note candidates at cap5 and identifies deletion of D as a changed requested event set, despite one remaining plan."
+    },
+    {
+      "module": "GAA005",
+      "locale": "fr",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-alchemist-academy/fr/gaa-005-repair-a-phrase-without-hiding-the-change.fr.md",
+      "exercise_answer_block_sha256": "e459b15f5d70e92c62abc36735a0ff6360a6d1b7924202f907dabb0d262ca6b3",
+      "review": "Offers expanded range plus a separately disclosed timing proposal without applying either silently; preserves permission boundaries and absent musician choice/trial rather than claiming played success."
+    },
+    {
+      "module": "GAA005",
+      "locale": "es",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-alchemist-academy/es/gaa-005-repair-a-phrase-without-hiding-the-change.es.md",
+      "exercise_answer_block_sha256": "1b457ec6c542fab99c89d1426b2b6a3f507c69d22900b9ef4e26925e18527892",
+      "review": "Retains original D[1.5,3), cap5 and conflict[1.5,2), so proposed alternatives cannot conceal a relaxed requirement."
+    },
+    {
+      "module": "GAA005",
+      "locale": "es",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-alchemist-academy/es/gaa-005-repair-a-phrase-without-hiding-the-change.es.md",
+      "exercise_answer_block_sha256": "9f3ea04055bb7150dec2afc716f3f2745694a3f17a78652f276be9425bf64abe",
+      "review": "Computes half a beat as250ms at120quarter/min and explains delayed-onset/fixed-offset D shortening and earlier-release E shortening as different musical edits."
+    },
+    {
+      "module": "GAA005",
+      "locale": "es",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-alchemist-academy/es/gaa-005-repair-a-phrase-without-hiding-the-change.es.md",
+      "exercise_answer_block_sha256": "c5faa8400a372c405971e09f11e25108df7a105a77cf0a3825187f1a468971d2",
+      "review": "Retains four pitches and every onset/offset while relaxing cap5to10; distinguishes lowest positive-fret span among three plans from player comfort, technique, sound or preference."
+    },
+    {
+      "module": "GAA005",
+      "locale": "es",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-alchemist-academy/es/gaa-005-repair-a-phrase-without-hiding-the-change.es.md",
+      "exercise_answer_block_sha256": "632a59c098b3b92b432020fd76302729ea2f4fa91fe54d86190903eeaae272bf",
+      "review": "Rejects DropD as a solution to the unchanged upper-note candidates at cap5 and identifies deletion of D as a changed requested event set, despite one remaining plan."
+    },
+    {
+      "module": "GAA005",
+      "locale": "es",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-alchemist-academy/es/gaa-005-repair-a-phrase-without-hiding-the-change.es.md",
+      "exercise_answer_block_sha256": "c5d42e23b915ce38e4f85c4b1ffbf1ab78d7b45e509de990f3e333abfb5b6756",
+      "review": "Offers expanded range plus a separately disclosed timing proposal without applying either silently; preserves permission boundaries and absent musician choice/trial rather than claiming played success."
+    }
+  ],
+  "learner_criterion_checks": [
+    {
+      "module": "MCL004",
+      "criterion": 1,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Identifies invented quarter-note beat/second annotations, phrase end4/2.08 and reference60/.52=115.384615385quarter-notes/min without recording, genre or performance attribution.",
+      "review": "The prepared learner task, corresponding instruction and worked exercise align in all three locales. Reconstructs the equal-subdivision onset .26seconds and +80ms authored residual; refuses an observed mistake, genre or corrective-performance claim.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "MCL004",
+      "criterion": 2,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Derives offbeat offsets.34,.32,.33,.32, least-squares common.3275 and fraction131/208; recomputes all-eight-onset MAEs33.75ms,115/12ms,3.75ms and distinguishes in-sample fit from independent validation, groove, skill or preference.",
+      "review": "The prepared learner task, corresponding instruction and worked exercise align in all three locales. Derives the least-squares common offset .3275seconds and fraction131/208; reports3.75ms MAE across all eight onsets without claiming unique MAE optimization, independent validation, groove, skill or listener benefit.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "MCL004",
+      "criterion": 3,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Distinguishes MusicXML positive-integer playback ratio2:1 from distinct retained annotations and tested export/output; limits timing-research support to publisher abstract and author page, not full-paper/audio replication.",
+      "review": "The prepared learner task, corresponding instruction and worked exercise align in all three locales. Distinguishes a common2:1 playback instruction from four distinct annotations and requires retained details, tested conversion and observed applicable output before exact recreation.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "MCL004",
+      "criterion": 4,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Applies inspected integer division60000000/520000=115 and hypothetical240/115second reconstruction, difference160/23ms; makes no claim of actual parser, importer or playback execution or audible drift.",
+      "review": "The prepared learner task, corresponding instruction and worked exercise align in all three locales. Applies integer division to115 and conditional240/115seconds, difference160/23ms; expressly refuses an observed parser or playback failure.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "MCL004",
+      "criterion": 5,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Explains overlap preservation under one strictly increasing map of every boundary versus an onset-only edit that can change overlap and shorten duration; separates authored200ms from constant120quarter/min250ms.",
+      "review": "The prepared learner task, corresponding instruction and worked exercise align in all three locales. Explains why a common strictly increasing map preserves overlap and feasibility, whereas moving one onset can change overlap/articulation/duration; keeps200ms authored map separate from250ms constant-reference edit.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "GTR005",
+      "criterion": 1,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Distinguishes native low-first F# from inspected high-first C# default and authored six-string7-s adapter; verifies F#string4fret5 becomes conventionalstring3fret5,55+5=60 without claiming an implemented bridge.",
+      "review": "The prepared learner task, corresponding instruction and worked exercise align in all three locales. Correctly translates native string4fret5 into conventional string3 via7-4=3 and verifies55+5=60; limits the authored adapter to the stated six-string convention.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "GTR005",
+      "criterion": 2,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Reconstructs cap5 candidates C[(3,5),(2,1)],E[(2,5),(1,0)],G[(1,3)],D[(2,3)] and independent best strings2,1,1,2; identifies onset/offset/event identity as missing from independent static selection.",
+      "review": "The prepared learner task, corresponding instruction and worked exercise align in all three locales. Explains independent sustain conflict on one string during overlap and requires onset/offset/event identity beyond individually valid pitches; does not fault a static helper for lacking temporal planning.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "GTR005",
+      "criterion": 3,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Counts three initial C/E unique-string assignments and one complete base plan C3/5,E2/5,G1/3,D2/3; preserves each held event's string and half-open release/reuse at beat2.",
+      "review": "The prepared learner task, corresponding instruction and worked exercise align in all three locales. Gives the unique base plan C3/5,E2/5,G1/3,D2/3 and explains why E occupying G sole eligible string blocks a locally valid initial choice; no silent held-event transfer is permitted.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "GTR005",
+      "criterion": 4,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Gives early-D overlap[1.5,2) with four active events and eligible union{1,2,3}, zero cap5 plans, under fixed-string independent-sustain assumptions; distinguishes one-shape C# uniqueness from a timed phrase planner and avoids universal physical/system failure claims.",
+      "review": "The prepared learner task, corresponding instruction and worked exercise align in all three locales. Uses half-open[1.5,2) four-active/three-eligible-string witness under Standard cap5 and independent-sustain assumptions; makes no universal physical impossibility or system-wide defect claim.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "GTR005",
+      "criterion": 5,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Verifies cap9zero/cap10three and candidate C4/10,E1/0,G2/8,D3/7 with positive-fret span3; requires actual fingering, sustain, muting, transitions and sound observations before playability claims.",
+      "review": "The prepared learner task, corresponding instruction and worked exercise align in all three locales. Limits cap10 candidate claims to pitch/time/occupancy/range satisfaction and identifies unobserved fingering, sustain, muting, transitions and sound checks; no player success invented.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "GAA005",
+      "criterion": 1,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Retains original C60[0,4),E64[0,2),G67[1,2),D62[1.5,3), Standard cap5 and conflict[1.5,2); keeps original constraints visible and separates actual tuning replies from revision-attested temporal execution.",
+      "review": "The prepared learner task, corresponding instruction and worked exercise align in all three locales. Retains original D[1.5,3), cap5 and conflict[1.5,2), so proposed alternatives cannot conceal a relaxed requirement.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "GAA005",
+      "criterion": 2,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Calculates half-beat250ms at constant120quarter-notes/min; delayed D onset2 with fixed offset3 shortens1.5to1beat and earlier E offset1.5 shortens2to1.5beats, each yielding one model-valid plan.",
+      "review": "The prepared learner task, corresponding instruction and worked exercise align in all three locales. Computes half a beat as250ms at120quarter/min and explains delayed-onset/fixed-offset D shortening and earlier-release E shortening as different musical edits.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "GAA005",
+      "criterion": 3,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Counts three cap10 alternatives preserving requested pitches/onsets/offsets with spans3,7,7; identifies relaxed range and changed string realization, and avoids equating span proxy with millimeters, comfort, timbre or a universal best choice.",
+      "review": "The prepared learner task, corresponding instruction and worked exercise align in all three locales. Retains four pitches and every onset/offset while relaxing cap5to10; distinguishes lowest positive-fret span among three plans from player comfort, technique, sound or preference.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "GAA005",
+      "criterion": 4,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Explains DropDcap5zero because relevant candidates do not change; omission of D yields one plan for a changed event set and does not preserve the full requested pitch/time set.",
+      "review": "The prepared learner task, corresponding instruction and worked exercise align in all three locales. Rejects DropD as a solution to the unchanged upper-note candidates at cap5 and identifies deletion of D as a changed requested event set, despite one remaining plan.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "GAA005",
+      "criterion": 5,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Offers expanded range and a separately disclosed proposed timing edit without silently applying either; states preserved/changed fields and absent permission, musician trial, clean playing and preference outcomes.",
+      "review": "The prepared learner task, corresponding instruction and worked exercise align in all three locales. Offers expanded range plus a separately disclosed timing proposal without applying either silently; preserves permission boundaries and absent musician choice/trial rather than claiming played success.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    }
+  ],
+  "mechanical_parity_checks": [
+    {
+      "module": "MCL004",
+      "locale": "en",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "metadata_except_localized_title_equal_to_EN",
+        "link_URL_order_equal_to_EN",
+        "inline_code_equal_to_EN",
+        "numeric_token_multiset_equal_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    },
+    {
+      "module": "MCL004",
+      "locale": "fr",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "metadata_except_localized_title_equal_to_EN",
+        "link_URL_order_equal_to_EN",
+        "inline_code_equal_to_EN",
+        "numeric_token_multiset_equal_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    },
+    {
+      "module": "MCL004",
+      "locale": "es",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "metadata_except_localized_title_equal_to_EN",
+        "link_URL_order_equal_to_EN",
+        "inline_code_equal_to_EN",
+        "numeric_token_multiset_equal_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    },
+    {
+      "module": "GTR005",
+      "locale": "en",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "metadata_except_localized_title_equal_to_EN",
+        "link_URL_order_equal_to_EN",
+        "inline_code_equal_to_EN",
+        "numeric_token_multiset_equal_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    },
+    {
+      "module": "GTR005",
+      "locale": "fr",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "metadata_except_localized_title_equal_to_EN",
+        "link_URL_order_equal_to_EN",
+        "inline_code_equal_to_EN",
+        "numeric_token_multiset_equal_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    },
+    {
+      "module": "GTR005",
+      "locale": "es",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "metadata_except_localized_title_equal_to_EN",
+        "link_URL_order_equal_to_EN",
+        "inline_code_equal_to_EN",
+        "numeric_token_multiset_equal_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    },
+    {
+      "module": "GAA005",
+      "locale": "en",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "metadata_except_localized_title_equal_to_EN",
+        "link_URL_order_equal_to_EN",
+        "inline_code_equal_to_EN",
+        "numeric_token_multiset_equal_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    },
+    {
+      "module": "GAA005",
+      "locale": "fr",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "metadata_except_localized_title_equal_to_EN",
+        "link_URL_order_equal_to_EN",
+        "inline_code_equal_to_EN",
+        "numeric_token_multiset_equal_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    },
+    {
+      "module": "GAA005",
+      "locale": "es",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "metadata_except_localized_title_equal_to_EN",
+        "link_URL_order_equal_to_EN",
+        "inline_code_equal_to_EN",
+        "numeric_token_multiset_equal_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    }
+  ],
+  "independent_calculation_checks": [
+    {
+      "check": "least_squares_offset_and_fraction",
+      "offset_seconds_exact": "131/400",
+      "fraction_exact": "131/208",
+      "status": "pass"
+    },
+    {
+      "check": "mean_absolute_residual_ms_across_all8onsets",
+      "straight": "135/4",
+      "fixed2to1": "115/12",
+      "fitted": "15/4",
+      "status": "pass"
+    },
+    {
+      "check": "conditional_integer_BPM_consequence",
+      "integer_bpm": 115,
+      "difference_ms_exact": "160/23",
+      "parser_executed": false,
+      "status": "pass"
+    },
+    {
+      "check": "assignment_counts",
+      "initial_C_E": 3,
+      "base_cap5": 1,
+      "early_cap5": 0,
+      "early_cap9": 0,
+      "early_cap10": 3,
+      "shorten_E": 1,
+      "omit_D": 1,
+      "status": "pass"
+    },
+    {
+      "check": "expanded_candidate_spans",
+      "sorted_positive_fret_spans": [
+        3,
+        7,
+        7
+      ],
+      "status": "pass"
+    },
+    {
+      "check": "time_edit_reference_and_duration",
+      "authored_onset_shift_ms": 200,
+      "constant120quarter_per_minute_shift_ms": 250,
+      "fixed_offset_onset_edit_shortens_note": true,
+      "status": "pass"
+    }
+  ],
+  "course_separation": [
+    {
+      "module": "MCL004",
+      "decision": "Which timing-model fit and style interpretation claims follow from authored annotations.",
+      "instruction": "Separates score/annotation/model/playback instruction; derives fitted residuals and source-assisted integer-BPM consequence, then preserves overlap under a common map."
+    },
+    {
+      "module": "GTR005",
+      "decision": "Whether individually valid positions compose into a fixed-string sustained phrase.",
+      "instruction": "Reconciles actual native and inspected coordinate conventions, enumerates temporal assignments and gives a narrow overlap witness with a wider-range alternative."
+    },
+    {
+      "module": "GAA005",
+      "decision": "Which proposed musical or range changes the musician is being asked to accept.",
+      "instruction": "Retains the request, discloses altered boundaries/durations/range/event set and separates model validity from permission and playing outcomes."
+    }
+  ],
+  "primary_page_checks": [
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/swing/",
+      "review": "Positive-integer first/second ratio concerns applicable swing playback; grace/type/duration and attack/release conditions bound an actual conversion. No import/export executed."
+    },
+    {
+      "url": "https://online.ucpress.edu/mp/article-abstract/19/3/333/61900/Swing-Ratios-and-Ensemble-Timing-in-Jazz?redirectedFrom=fulltext",
+      "review": "Read publisher abstract only: selected-recording ratios depend on tempo and ensemble role. Full article is access restricted; no recording played or copied."
+    },
+    {
+      "url": "https://www.speech.kth.se/music/performance/Texts/ensemble_swing.htm",
+      "review": "Read author-maintained timing/ensemble-role summary; no linked image or synthesized audio copied or played."
+    },
+    {
+      "url": "https://learn.microsoft.com/dotnet/fsharp/tools/fsharp-interactive/",
+      "review": "Reviewer web.open inaccessible; separately saved officialHTML body describes dotnet fsi interactive and script execution, consistent with direct200 official-link receipt. Native run is separately bound."
+    }
+  ],
+  "limits": [
+    "Independent AI static/numerical/language review is not human technical, fluent-language, musician, participant or transfer validation.",
+    "Native helper execution is standalone unchanged F# source plus a temporary wrapper; coordinate adapter and temporal enumeration are authored calculations, not an implemented GA integration.",
+    "Static pitch/chord helpers are not failed temporal planners; current model proves only declared fixed-string independent-sustain feasibility and does not certify physical playability or sound.",
+    "Timing annotations are invented; least-squares fitting is in-sample and does not establish groove, genre, preference, player skill, actual integer-BPM playback drift or learning.",
+    "Tuning MCP responses do not attest deployed runtime revision or temporal behavior. Proposed repairs do not imply musician permission or a playing trial.",
+    "Rendered/deployed HTML and publication bytes were not inspected by this reviewer; integration and anonymous publication checks are separate."
+  ],
+  "human_technical_review": null,
+  "fluent_language_review": {
+    "en": null,
+    "fr": null,
+    "es": null
+  },
+  "musician_review": null,
+  "human_subject_review": null,
+  "learner_attempts": null,
+  "learner_transfer": null,
+  "listening_outcome": null,
+  "causal_learning_benefit": null
+}

@@ -1,0 +1,311 @@
+{
+  "inputs": [
+    {
+      "label": "B",
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/baseline.wav",
+      "sha256": "a78a70243a81aa79d806d9ef3db7baa1385c479505f7d5e97b8bf0c7866c3f98",
+      "bytes": 352844,
+      "channels": 1,
+      "bits": 16,
+      "sample_rate_hz": 44100,
+      "samples": 176400,
+      "decode_denominator": 32768,
+      "decoded_peak_abs": 0.46014404296875
+    },
+    {
+      "label": "C",
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/candidate.wav",
+      "sha256": "055e03fb6064f62601b1bbc07942d3e2223da6d2fc614c6f63fa9ec8d964be73",
+      "bytes": 352844,
+      "channels": 1,
+      "bits": 16,
+      "sample_rate_hz": 44100,
+      "samples": 176400,
+      "decode_denominator": 32768,
+      "decoded_peak_abs": 0.460052490234375
+    }
+  ],
+  "scope": "Numerical reproduction of declared framing on decoded WAV samples; not an IX binary invocation.",
+  "window_size": 2048,
+  "hop_size": 512,
+  "fft_length": 2048,
+  "n_frames": 341,
+  "n_bins": 1025,
+  "total_cells": 349525,
+  "axis_order": [
+    "frame",
+    "bin"
+  ],
+  "flatten_order": "row-major",
+  "frame_time_reference": "start",
+  "frame_start_seconds_formula": "j*512/44100",
+  "frequency_hz_formula": "k*44100/2048",
+  "frame_duration_seconds": 0.046439909297052155,
+  "hop_seconds": 0.011609977324263039,
+  "last_frame_start_sample": 174080,
+  "last_frame_end_exclusive": 176128,
+  "unframed_tail_samples": 272,
+  "last_frame_start_seconds": 3.947392290249433,
+  "last_frame_support_end_seconds": 3.9938321995464854,
+  "display_hop_cell_end_seconds": 3.959002267573696,
+  "sentinel": {
+    "matrix": [
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        100,
+        101,
+        102,
+        103,
+        104
+      ],
+      [
+        200,
+        201,
+        202,
+        203,
+        204
+      ]
+    ],
+    "shape": [
+      3,
+      5
+    ],
+    "requested_cell": [
+      2,
+      4
+    ],
+    "correct_offset": 14,
+    "correct_value": 204,
+    "wrong_stride": 3,
+    "wrong_offset": 10,
+    "wrong_value": 200
+  },
+  "selected_baseline_cells": [
+    {
+      "frame": 0,
+      "bin": 0,
+      "time_start_seconds": 0.0,
+      "frequency_hz": 0.0,
+      "amplitude": 0.11575026542447671
+    },
+    {
+      "frame": 0,
+      "bin": 1,
+      "time_start_seconds": 0.0,
+      "frequency_hz": 21.533203125,
+      "amplitude": 0.11383340549478874
+    },
+    {
+      "frame": 0,
+      "bin": 4,
+      "time_start_seconds": 0.0,
+      "frequency_hz": 86.1328125,
+      "amplitude": 0.1396993289223481
+    },
+    {
+      "frame": 0,
+      "bin": 32,
+      "time_start_seconds": 0.0,
+      "frequency_hz": 689.0625,
+      "amplitude": 0.0032367225924124685
+    },
+    {
+      "frame": 0,
+      "bin": 1024,
+      "time_start_seconds": 0.0,
+      "frequency_hz": 22050.0,
+      "amplitude": 0.0001519262764181568
+    },
+    {
+      "frame": 50,
+      "bin": 0,
+      "time_start_seconds": 0.5804988662131519,
+      "frequency_hz": 0.0,
+      "amplitude": 0.11545596023215739
+    },
+    {
+      "frame": 50,
+      "bin": 1,
+      "time_start_seconds": 0.5804988662131519,
+      "frequency_hz": 21.533203125,
+      "amplitude": 0.11681336328038872
+    },
+    {
+      "frame": 50,
+      "bin": 4,
+      "time_start_seconds": 0.5804988662131519,
+      "frequency_hz": 86.1328125,
+      "amplitude": 0.10322235619840708
+    },
+    {
+      "frame": 50,
+      "bin": 32,
+      "time_start_seconds": 0.5804988662131519,
+      "frequency_hz": 689.0625,
+      "amplitude": 1.6542401501657827e-05
+    },
+    {
+      "frame": 50,
+      "bin": 1024,
+      "time_start_seconds": 0.5804988662131519,
+      "frequency_hz": 22050.0,
+      "amplitude": 6.755247967852501e-07
+    },
+    {
+      "frame": 340,
+      "bin": 0,
+      "time_start_seconds": 3.947392290249433,
+      "frequency_hz": 0.0,
+      "amplitude": 0.11885053228668939
+    },
+    {
+      "frame": 340,
+      "bin": 1,
+      "time_start_seconds": 3.947392290249433,
+      "frequency_hz": 21.533203125,
+      "amplitude": 0.11897530858555562
+    },
+    {
+      "frame": 340,
+      "bin": 4,
+      "time_start_seconds": 3.947392290249433,
+      "frequency_hz": 86.1328125,
+      "amplitude": 0.01787584639452566
+    },
+    {
+      "frame": 340,
+      "bin": 32,
+      "time_start_seconds": 3.947392290249433,
+      "frequency_hz": 689.0625,
+      "amplitude": 3.455771368887054e-07
+    },
+    {
+      "frame": 340,
+      "bin": 1024,
+      "time_start_seconds": 3.947392290249433,
+      "frequency_hz": 22050.0,
+      "amplitude": 1.8046980770715603e-07
+    }
+  ],
+  "direct_dft_checks": [
+    {
+      "label": "B",
+      "frame": 0,
+      "bin": 0,
+      "complex_abs_error": 0.0
+    },
+    {
+      "label": "B",
+      "frame": 0,
+      "bin": 1,
+      "complex_abs_error": 8.931992632569433e-15
+    },
+    {
+      "label": "B",
+      "frame": 0,
+      "bin": 4,
+      "complex_abs_error": 3.499017183300205e-14
+    },
+    {
+      "label": "B",
+      "frame": 0,
+      "bin": 32,
+      "complex_abs_error": 1.3833864489500786e-14
+    },
+    {
+      "label": "B",
+      "frame": 0,
+      "bin": 1024,
+      "complex_abs_error": 4.23803198622687e-14
+    },
+    {
+      "label": "B",
+      "frame": 50,
+      "bin": 0,
+      "complex_abs_error": 0.0
+    },
+    {
+      "label": "B",
+      "frame": 50,
+      "bin": 1,
+      "complex_abs_error": 1.6250646570963807e-14
+    },
+    {
+      "label": "B",
+      "frame": 50,
+      "bin": 4,
+      "complex_abs_error": 2.5864145986817697e-14
+    },
+    {
+      "label": "B",
+      "frame": 50,
+      "bin": 32,
+      "complex_abs_error": 6.304297893581757e-15
+    },
+    {
+      "label": "B",
+      "frame": 50,
+      "bin": 1024,
+      "complex_abs_error": 1.5060406419148286e-13
+    },
+    {
+      "label": "B",
+      "frame": 340,
+      "bin": 0,
+      "complex_abs_error": 1.4210854715202004e-14
+    },
+    {
+      "label": "B",
+      "frame": 340,
+      "bin": 1,
+      "complex_abs_error": 6.6405214660392176e-15
+    },
+    {
+      "label": "B",
+      "frame": 340,
+      "bin": 4,
+      "complex_abs_error": 3.552713678800501e-15
+    },
+    {
+      "label": "B",
+      "frame": 340,
+      "bin": 32,
+      "complex_abs_error": 7.136840439401098e-15
+    },
+    {
+      "label": "B",
+      "frame": 340,
+      "bin": 1024,
+      "complex_abs_error": 1.064198484269857e-13
+    }
+  ],
+  "direct_dft_abs_tolerance": 1e-10,
+  "advisory_handoff": {
+    "status": "Teaching metadata, not an implemented schema or adapter.",
+    "sample_rate_hz": 44100,
+    "source_wav_sha256": "a78a70243a81aa79d806d9ef3db7baa1385c479505f7d5e97b8bf0c7866c3f98",
+    "shape": [
+      341,
+      1025
+    ],
+    "axes": [
+      "frame",
+      "bin"
+    ],
+    "frame_time_reference": "start",
+    "window_size": 2048,
+    "hop_size": 512,
+    "window_formula": "0.5 - 0.5*cos(2*pi*n/(N-1))",
+    "value_kind": "one-sided peak-amplitude estimator",
+    "interior_scale": "2/sum(window)",
+    "endpoint_scale": "1/sum(window)",
+    "db_reference_peak_amplitude": 1,
+    "display_floor_db": -80
+  }
+}

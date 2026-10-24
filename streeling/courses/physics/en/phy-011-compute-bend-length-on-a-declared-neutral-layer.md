@@ -1,0 +1,80 @@
+---
+module_id: phy-011-compute-bend-length-on-a-declared-neutral-layer
+department: physics
+course: "Compute Bend Length on a Declared Neutral Layer"
+level: intermediate
+prerequisites: ["phy-005-sheet-thickness-and-scene-units"]
+estimated_duration: "40 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Compute Bend Length on a Declared Neutral Layer
+
+> **Draft scope.** Authored circular-bend geometry, exact calculations and pinned source/primary-document reading. Human technical, artisan, fluent-language and learner reviews and deployed course HTML verification remain pending. No material coupon, bending machine, CAD command, IX checker or scene was run. The neutral-layer factor is stipulated, not calibrated.
+
+## The project question
+
+Can a future craft adapter infer a metal blank's developed length from an origami thickness report? The pinned [IX thickness ADR](https://github.com/GuitarAlchemist/ix/blob/d7c22fdd6a62becb66b9d7246ea85850e7c55854/docs/adr/0007-origami-thickness-as-parallel-rigid-panels.md#L7-L34) describes zero-thickness checks with an optional parallel-panel reading. It explicitly excludes bend-radius refusals and folding motion. [PHY-005](phy-005-sheet-thickness-and-scene-units.md) converts that reading's units; this lesson adds a separate authored bend model without claiming IX implements it.
+
+The [Fusion sheet-metal rule reference](https://help.autodesk.com/cloudhelp/ENU/Fusion-Sheet-Metal/files/SM-RULES-REF.htm) distinguishes thickness, inner bend radius and the neutral-axis offset ratio. Its actual text was read. Those definitions motivate the quantities below, but supply no measured factor for our material or machine.
+
+## 1. Declare the reference layer
+
+Use an authored inner radius 4 mm, full thickness 2 mm and dimensionless neutral offset factor `k=0.4`. Define the neutral radius by `R_n=R_i+k*t`, giving 4.8 mm. The outer radius is 6 mm. Assume circular concentric layers and treat the neutral arc as the developed bend length; this is a simplified geometry rule, not a prediction of strain, springback or tooling behavior.
+
+For bend magnitude 90 degrees, or `pi/2` radians, arc length is radius times angular magnitude. The inner, neutral and outer arcs are respectively `2*pi`, `2.4*pi` and `3*pi` mm. The neutral arc is approximately 7.539822369 mm. Different reference layers give different lengths even when a scene depicts the same bent region.
+
+### Practice exercise 1: identify the developed arc
+
+Calculate neutral radius and all three arc lengths for the declared bend. Which one is used by this model, and does the chosen factor describe a measured physical specimen?
+
+> **Answer:** The neutral radius is `4+0.4*2=4.8` mm. Inner, neutral and outer arcs are `2*pi`, `2.4*pi` and `3*pi` mm. The model uses the neutral arc `2.4*pi`, approximately 7.539822369 mm. The factor 0.4 is an authored assumption, not a measured material rule.
+
+## 2. Do not replace a declared layer by the middle
+
+Choosing the mid-thickness radius would give 5 mm and allowance `2.5*pi` mm. That exceeds the reference allowance by `0.1*pi`, approximately 0.314159265 mm. Using the inner or outer arc instead changes it by `-0.4*pi` or `0.6*pi` mm.
+
+Neither a rendered centreline nor the word “thickness” chooses the neutral layer automatically. A geometric midpoint and a calibrated neutral offset are different quantities. An application can display a midpoint for convenience while retaining a separate bend rule; this lesson observes no such implementation.
+
+### Practice exercise 2: quantify a convenient substitution
+
+An agent silently replaces the stipulated factor by 0.5. What radius, allowance and error result? Is a smaller display error or a visually plausible bend a material calibration?
+
+> **Answer:** It uses radius 5 mm and allowance `2.5*pi` mm, exceeding the stipulated `2.4*pi` by `0.1*pi`, approximately 0.314159265 mm. A visual result does not calibrate the neutral offset or show that the substituted model describes a real process.
+
+## 3. State where straight lengths end
+
+Add two authored straight lengths of 30 and 20 mm, each measured to the tangent where the circular bend begins. The model's flat total is therefore `30+20+2.4*pi`, approximately 57.539822369 mm. The tangent convention makes these straight regions disjoint from the bend arc.
+
+Outside flange dimensions measured to a virtual sharp corner are another convention. Adding those numbers to the full arc without the appropriate setbacks or deductions can count material twice. We derive no outside-dimension formula here. A handoff must retain the measurement endpoints rather than label every length “flange length.”
+
+### Practice exercise 3: audit the dimension convention
+
+Compute the total for the tangent-measured lengths. Can the same expression be used unchanged if 30 and 20 instead denote unspecified outside dimensions to a virtual corner?
+
+> **Answer:** The tangent-measured total is `50+2.4*pi`, approximately 57.539822369 mm. Unspecified outside dimensions do not justify that sum: their overlap/setback convention must be resolved first. Relabelling their numbers as tangent lengths would change the problem.
+
+## 4. Carry uncertainty as a conditional range
+
+Stipulate, separately, that `k` could lie from 0.3 to 0.5 while radius, thickness and angle remain fixed. The neutral radii then range from 4.6 to 5 mm, and the 90-degree allowances from `2.3*pi` to `2.5*pi` mm. Their width is `0.2*pi`, approximately 0.628318531 mm. The corresponding total is 50 mm plus that allowance interval.
+
+The allowance changes by `pi` mm for a unit change in `k` under these fixed premises. This is model sensitivity, not a probability distribution or a confidence interval. The selected range is a teaching assumption, not a recommended range for arbitrary metals, tools or forming processes.
+
+### Practice exercise 4: propagate the stipulated factor range
+
+Derive the allowance interval, its width and the total-length interval. What would justify treating it as a real process range instead of an authored sensitivity example?
+
+> **Answer:** Allowance lies from `2.3*pi` to `2.5*pi` mm, width `0.2*pi`; total length lies from `50+2.3*pi` to `50+2.5*pi` mm. Relevant measured material/process behavior and a justified model would be needed. The arithmetic alone supplies no calibration, probability or production tolerance.
+
+## 5. Keep the IX reading at its actual scope
+
+The pinned [thickness module](https://github.com/GuitarAlchemist/ix/blob/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/thickness.rs#L1-L22) accepts full thickness in crease-pattern units and reports stack readings. Its text explicitly distinguishes parallel-panel refusal from a claim that something can be made. The [existing thickness tests](https://github.com/GuitarAlchemist/ix/blob/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/tests/thickness.rs) are source assertions about that model; no fresh test was run in this packet.
+
+### Practice exercise 5: repair the fabrication claim
+
+An agent calls an IX thickness report a certified developed metal blank. Which additional quantities and observations are missing from that conclusion?
+
+> **Answer:** The selected report does not supply the circular bend model's physical units, inner radius, neutral offset rule, bend-angle convention or tangent-dimension endpoints. A real process also needs relevant calibration and checks of springback, relief, tooling and motion/clearance. The authored arc calculation and a stack reading certify neither a physical blank nor manufacture. No such trial occurred here.
+
+The [fixed bend record](../../../../code/streeling/evidence/bend-development-2026-10-22/bend-lengths.json) retains exact multiples of pi alongside displayed decimals. [SEM-007](../../semiotics/en/sem-007-preserve-the-meaning-of-a-bend-angle.md) follows the same calculation across different angle meanings.

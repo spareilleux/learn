@@ -1,0 +1,107 @@
+{
+  "checked_at_utc": "2026-10-22T16:09:58.082958+00:00",
+  "base_learn_commit": "a236fe21f79709328354fd4b3d69b30de55990f0",
+  "latest_main_checked": "05aa47b12b97e626405e961016d5035f7ecf74be",
+  "scope": "Three new trilingual music course drafts and standalone pinned-source voice-leading characterization; no GA production patch.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "native_characterization": {
+    "command": [
+      "node",
+      "code/streeling/voice-leading/run.mjs",
+      "../streeling-voiceleading-final-run"
+    ],
+    "exit_code": 0,
+    "checks_passed": 40,
+    "sdk": "10.0.113",
+    "assessed_platform": "Windows",
+    "build_warnings": 0,
+    "build_errors": 0,
+    "source_pin": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+    "original_expected_equivalence_satisfied": false,
+    "negative_controls": "Scratch oracle substitution rejected expected0actual4; output reuse rejected.",
+    "input_hashes": 13
+  },
+  "script_tests": {
+    "files": [
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "passed": 18,
+    "failed": 0,
+    "exit_code": 0,
+    "log": "C:\\tmp\\streeling-voiceleading-final-tests-20261022.log",
+    "log_sha256": "893320a5601acfb2334a408f9bb572f426674dec7e739cf74a8f5d06931c5b2d"
+  },
+  "sync": {
+    "idempotent_checked_generated_files": 74,
+    "journals_preserved": true,
+    "source_copy_provenance_preserved": true,
+    "log": "C:/tmp/streeling-voiceleading-final-sync-20261022.log"
+  },
+  "static_build": {
+    "exit_code": 0,
+    "elapsed_seconds": 81.72320199999376,
+    "log": "C:\\tmp\\streeling-voiceleading-final-build-20261022.log",
+    "pages": 1759,
+    "log_sha256": "5d86538c71834cd3f17917484fef0f8473e329f24569003a6c757c111adbeb52",
+    "dependency_install": "Existing node_modules junction; no fresh npm ci.",
+    "warnings": "Existing unsupported-language highlighting fallbacks and i18n/404 warnings; complete log retained."
+  },
+  "rendered_articles": {
+    "pages": 30,
+    "links": 1356,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML; browser and deployed HTML not assessed."
+  },
+  "review": {
+    "data_final_refresh_checks": 91,
+    "data_findings": [],
+    "data_receipt_sha256": "2f052a81fcb8259a932d2e0432f17d4bcb9a6e546bdb1ad9aed892a029ff1aef",
+    "content_verdict": "Pass for scoped factual and prepared-task AI audit; no participant or human approval implied.",
+    "content_findings": [],
+    "content_resolved_finding_groups": 4,
+    "content_receipt_sha256": "5daabc083aefa3b62375f5b43a23439fdbfdd0f979e66f8c9291d2cf43c54b4c",
+    "scope": "AI source-assisted factual/content review; no human, participant or formal CE approval.",
+    "human_subject": null,
+    "fluent_language": null,
+    "learner": null,
+    "playing_trial": null
+  },
+  "code_review": "Code review: skipped (ce-code-review unavailable)",
+  "code_review_reason": "Earlier top-level portable review terminated without usable receipt; unavailable transport and rejected cleanup not retried.",
+  "manual_host_scan": "Inspected lab source/controller and current results, independent arithmetic/control receipts, corrected task/rubric alignment, all final bindings and generated indexes; 15 old course-page changes are generated sidebar order only. No blocking issue remains for this draft PR lot.",
+  "source_inventory": {
+    "core_english_modules": 162,
+    "original_departments": 21,
+    "target": 525,
+    "remaining_core_source_gaps": 363,
+    "music_modules": 22,
+    "locale_counts": {
+      "en": 163,
+      "fr": 163,
+      "es": 163
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint or typecheck scripts configured; unchanged generator tests, native compilation and Astro build used.",
+  "considered_not_built": [
+    "GA production fix or universal normalization policy",
+    "General assignment optimizer or new DSL",
+    "Full GA build/upstream NUnit suite",
+    "Upstream KNN or UI execution",
+    "Unmeasured performance or learning claims"
+  ],
+  "manifest_format_normalization": "Owned source.json CRLF-to-LF only, semantically identical; vendor bytes untouched. Final native and independent review receipts rebound before staging."
+}

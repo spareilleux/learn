@@ -1,0 +1,102 @@
+{
+  "scope": "Authored serial mathematical state transitions and ideal atomic deduplication. No durable service, concurrent token store, crash window or real external effect tested.",
+  "state_cases": [
+    {
+      "initial": -2,
+      "set7_once": 7,
+      "set7_twice": 7,
+      "increment_once": -1,
+      "increment_twice": 0,
+      "responses_set": [
+        "ok",
+        "ok"
+      ],
+      "responses_increment": [
+        "ok",
+        "ok"
+      ]
+    },
+    {
+      "initial": 0,
+      "set7_once": 7,
+      "set7_twice": 7,
+      "increment_once": 1,
+      "increment_twice": 2,
+      "responses_set": [
+        "ok",
+        "ok"
+      ],
+      "responses_increment": [
+        "ok",
+        "ok"
+      ]
+    },
+    {
+      "initial": 5,
+      "set7_once": 7,
+      "set7_twice": 7,
+      "increment_once": 6,
+      "increment_twice": 7,
+      "responses_set": [
+        "ok",
+        "ok"
+      ],
+      "responses_increment": [
+        "ok",
+        "ok"
+      ]
+    }
+  ],
+  "same_logical_key": {
+    "initial": 0,
+    "keys": [
+      "job-A",
+      "job-A"
+    ],
+    "applied_effects": 1,
+    "final_state": 1,
+    "responses": [
+      "ok",
+      "ok"
+    ]
+  },
+  "new_key_per_attempt": {
+    "initial": 0,
+    "keys": [
+      "job-A-attempt-1",
+      "job-A-attempt-2"
+    ],
+    "applied_effects": 2,
+    "final_state": 2,
+    "responses": [
+      "ok",
+      "ok"
+    ]
+  },
+  "same_arguments_distinct_intents": {
+    "initial": 0,
+    "keys": [
+      "job-A",
+      "job-B"
+    ],
+    "applied_effects": 2,
+    "final_state": 2
+  },
+  "same_key_changed_arguments": {
+    "key": "job-A",
+    "first_amount": 1,
+    "second_amount": 2,
+    "decision": "conflicting intent requires explicit contract; do not silently return previous result"
+  },
+  "cache_boundaries": {
+    "source_key_inputs": [
+      "asset_name",
+      "tool",
+      "resolved_arguments"
+    ],
+    "step_id_in_key": false,
+    "tool_implementation_revision_in_key": false,
+    "external_state_revision_in_key": false,
+    "live_cache_hit_experiment": false
+  }
+}

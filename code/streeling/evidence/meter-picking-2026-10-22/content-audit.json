@@ -1,0 +1,1084 @@
+{
+  "reviewer": "independent-pedagogical-source-review-agent",
+  "checked_at_utc": "2026-10-22T23:18:01.166697+00:00",
+  "verdict": "pass",
+  "findings": [
+    {
+      "origin": "code/streeling/evidence/meter-picking-2026-10-22/data-audit.json",
+      "id": "integer-beats-and-first-pair-loss",
+      "status": "observed-preserved",
+      "finding": "Static pinned XML parser uses Int32 and first Element children; additive text is predictedNone and composite pairs lose the second pair. No fresh parser output asserted."
+    },
+    {
+      "origin": "code/streeling/evidence/meter-picking-2026-10-22/data-audit.json",
+      "id": "technical-and-tie-loss",
+      "status": "observed-preserved",
+      "finding": "Unsupported up/down technical children fall through the inspected mapping; parseNote assigns Articulations[] and TieNone. No import/export/playback reproduction asserted."
+    },
+    {
+      "origin": "code/streeling/evidence/meter-picking-2026-10-22/data-audit.json",
+      "id": "limited-GP-direction-branch",
+      "status": "observed-preserved",
+      "finding": "GP type has direction string; inspected effect case7 emits down and does not compute cross-bar phase. No binary-format conformance/system-wide absence claim."
+    },
+    {
+      "origin": "code/streeling/evidence/meter-picking-2026-10-22/data-audit.json",
+      "id": "MIDI-grouping-boundary",
+      "status": "observed-preserved",
+      "finding": "Inspected MIDI0x58 branch keeps numerator and denominator and skips two trailing bytes; additive order is not reconstructed by that event representation."
+    }
+  ],
+  "fix_history": [
+    {
+      "id": "mcl006-task-midi-resolution",
+      "status": "resolved",
+      "finding": "Initial MCL006 task did not explicitly elicit the MIDI tick-resolution distinction in criterion3.",
+      "resolution": "Author added MIDI tick resolution to the divisions-comparison prompt; final task directly reviewed against rubric.",
+      "source_changes_by_reviewer": false
+    },
+    {
+      "id": "wml006-task-second-origin",
+      "status": "resolved",
+      "finding": "Initial WML006 task explicitly derived old pulse4→B but criterion2 also asked old pulse2→C.",
+      "resolution": "Author added the old-pulse2 rebase toC; final task now explicitly elicits both transforms.",
+      "source_changes_by_reviewer": false
+    },
+    {
+      "id": "mcl006-french-composite-term",
+      "status": "resolved",
+      "finding": "French section2 called mixed-denominator2/4+3/8 a mesure composée, risking confusion with compound-meter classification.",
+      "resolution": "Translator replaced it with indication composite to preserve the intended mixed-denominator representation without asserting a compound beat structure. Final bytes directly checked.",
+      "source_changes_by_reviewer": false
+    }
+  ],
+  "coverage": {
+    "exercise_answer_pairs": 45,
+    "learner_criteria": 15
+  },
+  "scope": {
+    "reviewed": "All nine EN/FR/ES sources and45localized exercise-answer pairs, prepared learner task and15criteria, complete authored meter/cycle/picking records, eight actual primary MusicXML4 bodies and selected branches of all six pinned GA files.",
+    "data_audit": "Independent1426/1426 numerical/source checks read; current input hashes verified. No new parser, enumerator runtime experiment, playback or musician trial by content reviewer.",
+    "localization": "Agent semantic review plus ordered URL parity; no fluent human, cultural or learner approval inferred.",
+    "prerequisites": "Four existing English prerequisites read for continuity; meter/grouping/origin and pick-state exercises add distinct work. Their broader historical execution/publication claims were not newly approved; old MUS004 genre universals were not imported.",
+    "publication": "Source review only. Root sync/build/rendered-link/idempotence/publication receipts are separate gates excluded as circular supporting inputs."
+  },
+  "exercise_answer_checks": [
+    {
+      "id": "MCL006-en-exercise-1",
+      "module": "MCL006",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "00effb039212bf39ca2a64457006b7e32c5f920d43bf6b52e44a9ce218bd78d3",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Complete7/8bar at quarter120 lasts1.75seconds versus3.5seconds at eighth120. A bare120BPM lacks the named metronome note unit; signature denominator does not determine it. Constant numeric rate/no pickup/tempo change are stipulated."
+    },
+    {
+      "id": "MCL006-en-exercise-2",
+      "module": "MCL006",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "93d844759b9a2d5ea0a6282f04cb7a9e96698292d1038ee71fb4dc73d321c0eb",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Additive2+2+3eighth groups have starts0,2,4; composite2/4+3/8 means lengths4,3eighths and starts0,4. Equal total7eighths preserves neither grouping nor performed accents."
+    },
+    {
+      "id": "MCL006-en-exercise-3",
+      "module": "MCL006",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "ad92a6fe9cbba5842c58a2b726d3d6938fc7bfd7b639165b62b73e75fd20ed69",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "At24divisions per quarter an eighth occupies12,7/8occupies84,6/8and3/4each72. Equal totals do not fix grouping, metronome unit or musical interpretation. Score divisions are not automatically MIDI tick resolution; chord/voice position rules matter."
+    },
+    {
+      "id": "MCL006-en-exercise-4",
+      "module": "MCL006",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "a7e1483a80921eabf2a0d1faad9a94e09439b885f2cbf0b69394ffcf324bf9da",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Pinned first-child integer XML parser predicts7/8 for plain input, no time for2+2+3numerator text, and only first2/4pair from2/4+3/8. It does not sum/faithfully normalize the composites; these are static predictions, not executed importer results."
+    },
+    {
+      "id": "MCL006-en-exercise-5",
+      "module": "MCL006",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "2e7a6fff273fef17ebeb95548d2e272242954164bae1d57b4ac28f0cc779f02c",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Selected MIDI0x58 branch retains7/8from7,3,24,8 and skips24,8; two-integer event carries no ordered group sequence. Future executed path must compare original/recovered time text, group boundaries, duration and named metronome units; score/playback are separate observations."
+    },
+    {
+      "id": "MCL006-fr-exercise-1",
+      "module": "MCL006",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/fr/mcl-006-preserve-meter-grouping-and-tempo-units.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "5544bb703efef2bb1cb1dd37f00ca2691eb7f41d32b655f932c2f69fb913b351",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Complete7/8bar at quarter120 lasts1.75seconds versus3.5seconds at eighth120. A bare120BPM lacks the named metronome note unit; signature denominator does not determine it. Constant numeric rate/no pickup/tempo change are stipulated."
+    },
+    {
+      "id": "MCL006-fr-exercise-2",
+      "module": "MCL006",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/fr/mcl-006-preserve-meter-grouping-and-tempo-units.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "7faa33f09b525c2577720f76bad5e1918f1dac9e78f4b5e60c4fc6bfd832a9b5",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Additive2+2+3eighth groups have starts0,2,4; composite2/4+3/8 means lengths4,3eighths and starts0,4. Equal total7eighths preserves neither grouping nor performed accents."
+    },
+    {
+      "id": "MCL006-fr-exercise-3",
+      "module": "MCL006",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/fr/mcl-006-preserve-meter-grouping-and-tempo-units.fr.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "63c5b09ed302fd9342f9929c9f376419a15905a20e8e6dbafa8937ef464f57bc",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "At24divisions per quarter an eighth occupies12,7/8occupies84,6/8and3/4each72. Equal totals do not fix grouping, metronome unit or musical interpretation. Score divisions are not automatically MIDI tick resolution; chord/voice position rules matter."
+    },
+    {
+      "id": "MCL006-fr-exercise-4",
+      "module": "MCL006",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/fr/mcl-006-preserve-meter-grouping-and-tempo-units.fr.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "fc1b2250fcac379b22d4aa47a7b0e1c42e2adb45113797e424170eca043b5e5b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Pinned first-child integer XML parser predicts7/8 for plain input, no time for2+2+3numerator text, and only first2/4pair from2/4+3/8. It does not sum/faithfully normalize the composites; these are static predictions, not executed importer results."
+    },
+    {
+      "id": "MCL006-fr-exercise-5",
+      "module": "MCL006",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/fr/mcl-006-preserve-meter-grouping-and-tempo-units.fr.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "511bd64ed96c9a8870dfc958841126aafe4376968b0c9b479016b488f5a9329b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Selected MIDI0x58 branch retains7/8from7,3,24,8 and skips24,8; two-integer event carries no ordered group sequence. Future executed path must compare original/recovered time text, group boundaries, duration and named metronome units; score/playback are separate observations."
+    },
+    {
+      "id": "MCL006-es-exercise-1",
+      "module": "MCL006",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/es/mcl-006-preserve-meter-grouping-and-tempo-units.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "b0832c4b02792acaee30bfd9c66996049a4f493701dca14b529a8c489cec83f6",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Complete7/8bar at quarter120 lasts1.75seconds versus3.5seconds at eighth120. A bare120BPM lacks the named metronome note unit; signature denominator does not determine it. Constant numeric rate/no pickup/tempo change are stipulated."
+    },
+    {
+      "id": "MCL006-es-exercise-2",
+      "module": "MCL006",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/es/mcl-006-preserve-meter-grouping-and-tempo-units.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "5d0ed84cf087832e20d8b508fbc7c0a1057fe2a8d418b19a1e79a8ad48ae80d4",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Additive2+2+3eighth groups have starts0,2,4; composite2/4+3/8 means lengths4,3eighths and starts0,4. Equal total7eighths preserves neither grouping nor performed accents."
+    },
+    {
+      "id": "MCL006-es-exercise-3",
+      "module": "MCL006",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/es/mcl-006-preserve-meter-grouping-and-tempo-units.es.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "6cc0c9fcbea95bf88bebae037da7ff62b19a93d38bb9fe75c5830e52cf5bf621",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "At24divisions per quarter an eighth occupies12,7/8occupies84,6/8and3/4each72. Equal totals do not fix grouping, metronome unit or musical interpretation. Score divisions are not automatically MIDI tick resolution; chord/voice position rules matter."
+    },
+    {
+      "id": "MCL006-es-exercise-4",
+      "module": "MCL006",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/es/mcl-006-preserve-meter-grouping-and-tempo-units.es.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "9a4fcc55a5deaef4ef56dc36414907735ab0b138693dc01d0694596caab2e3b0",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Pinned first-child integer XML parser predicts7/8 for plain input, no time for2+2+3numerator text, and only first2/4pair from2/4+3/8. It does not sum/faithfully normalize the composites; these are static predictions, not executed importer results."
+    },
+    {
+      "id": "MCL006-es-exercise-5",
+      "module": "MCL006",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/es/mcl-006-preserve-meter-grouping-and-tempo-units.es.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "877b88d3354e77860e93be0ade8ef956d7c791558a10cd2c23705fd4609cbc32",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Selected MIDI0x58 branch retains7/8from7,3,24,8 and skips24,8; two-integer event carries no ordered group sequence. Future executed path must compare original/recovered time text, group boundaries, duration and named metronome units; score/playback are separate observations."
+    },
+    {
+      "id": "WML006-en-exercise-1",
+      "module": "WML006",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/world-music-languages/en/wml-006-preserve-the-origin-of-an-additive-cycle.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "9e4e9528b7ef732d5006207bcdd03cd9826d45989ee7a492b5895bcd4e5e937e",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "A2,2,3starts0,2,4 whileB3,2,2starts0,3,5 andC2,3,2starts0,2,5. Total7is unchanged but ordered groups and fixed-origin alignment differ. Starts are authored grouping markers, not observed accents or cultural identity."
+    },
+    {
+      "id": "WML006-en-exercise-2",
+      "module": "WML006",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/world-music-languages/en/wml-006-preserve-the-origin-of-an-additive-cycle.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "35a48e5c733ff0b2c46d2d88be9da6b7c9b620c7d98838d31bd2db9208d8ef48",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "RebasingAatoldpulse4 subtracts4mod7 and yields sorted0,3,5=B; oldpulse2 gives sorted0,2,5=C. Circular equivalence retains an explicit origin transform; silently rebasing one track changes relative alignment to unchanged bar/accompaniment/other tracks."
+    },
+    {
+      "id": "WML006-en-exercise-3",
+      "module": "WML006",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/world-music-languages/en/wml-006-preserve-the-origin-of-an-additive-cycle.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "6339c28ca157b9666743484f101b72658d47996a1101888dcf41ee5e3f1c4420",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Seven integer shifts produce seven distinct onset sets; three include0as a group start. Forward+1gives1,3,5, distinguishing arbitrary pulse phase from three possible original group-boundary rebases."
+    },
+    {
+      "id": "WML006-en-exercise-4",
+      "module": "WML006",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/world-music-languages/en/wml-006-preserve-the-origin-of-an-additive-cycle.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "a5c5bac9885f54b26fe2abb2361d2c89b45bf629855aa8e49f50b5cbfe340f3a",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Thirty-five anchored3-onset subsets of7positions partition into five7-member rotation classes. Empty/full controls have only1rotation, bounding the seven-phase claim to the authored population. Classes establish no repertoire, performer or cultural taxonomy."
+    },
+    {
+      "id": "WML006-en-exercise-5",
+      "module": "WML006",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/world-music-languages/en/wml-006-preserve-the-origin-of-an-additive-cycle.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "a60bf91078599099f5c6ebe54bb4f925fc8d245e84be22fc843c1fe0efb790ed",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Localization record should retain original/translated ordered groups, pulse unit, bar reference, old-to-new origin transform, affected tracks, reason and review. AtoBrebasesatold4. Circular equality does not license cultural/perceptual/arrangement equivalence; relevant human/repertoire evidence remains absent."
+    },
+    {
+      "id": "WML006-fr-exercise-1",
+      "module": "WML006",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/world-music-languages/fr/wml-006-preserve-the-origin-of-an-additive-cycle.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "ebdcb308cdd797c5c4c01f5373533c2febfbaf6925e8c40d989927e4fb5ebeef",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "A2,2,3starts0,2,4 whileB3,2,2starts0,3,5 andC2,3,2starts0,2,5. Total7is unchanged but ordered groups and fixed-origin alignment differ. Starts are authored grouping markers, not observed accents or cultural identity."
+    },
+    {
+      "id": "WML006-fr-exercise-2",
+      "module": "WML006",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/world-music-languages/fr/wml-006-preserve-the-origin-of-an-additive-cycle.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "d4543aa63007776d77778a9c8893a9bfc3c2817ef24cca89f7632c5d54a7b605",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "RebasingAatoldpulse4 subtracts4mod7 and yields sorted0,3,5=B; oldpulse2 gives sorted0,2,5=C. Circular equivalence retains an explicit origin transform; silently rebasing one track changes relative alignment to unchanged bar/accompaniment/other tracks."
+    },
+    {
+      "id": "WML006-fr-exercise-3",
+      "module": "WML006",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/world-music-languages/fr/wml-006-preserve-the-origin-of-an-additive-cycle.fr.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "4725dc3e32c265ed0f14b8018b0687a64cab9066cec3e40702c814d8ed4f1e85",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Seven integer shifts produce seven distinct onset sets; three include0as a group start. Forward+1gives1,3,5, distinguishing arbitrary pulse phase from three possible original group-boundary rebases."
+    },
+    {
+      "id": "WML006-fr-exercise-4",
+      "module": "WML006",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/world-music-languages/fr/wml-006-preserve-the-origin-of-an-additive-cycle.fr.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "55d9e1588d41e5ae8fc87ccbe03a67a6d2bfa5d46ccbead486b11b74db9199d0",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Thirty-five anchored3-onset subsets of7positions partition into five7-member rotation classes. Empty/full controls have only1rotation, bounding the seven-phase claim to the authored population. Classes establish no repertoire, performer or cultural taxonomy."
+    },
+    {
+      "id": "WML006-fr-exercise-5",
+      "module": "WML006",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/world-music-languages/fr/wml-006-preserve-the-origin-of-an-additive-cycle.fr.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "0fe56316a7a9027bd85c26416c28cb8115347c796a3fc6a63ce7af05e7ef9287",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Localization record should retain original/translated ordered groups, pulse unit, bar reference, old-to-new origin transform, affected tracks, reason and review. AtoBrebasesatold4. Circular equality does not license cultural/perceptual/arrangement equivalence; relevant human/repertoire evidence remains absent."
+    },
+    {
+      "id": "WML006-es-exercise-1",
+      "module": "WML006",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/world-music-languages/es/wml-006-preserve-the-origin-of-an-additive-cycle.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "ccad88fb21a344f07496a4b916ed308d83b9ca8c2cd5804aa40d1fe29f6b63e7",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "A2,2,3starts0,2,4 whileB3,2,2starts0,3,5 andC2,3,2starts0,2,5. Total7is unchanged but ordered groups and fixed-origin alignment differ. Starts are authored grouping markers, not observed accents or cultural identity."
+    },
+    {
+      "id": "WML006-es-exercise-2",
+      "module": "WML006",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/world-music-languages/es/wml-006-preserve-the-origin-of-an-additive-cycle.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "9b2ffc1c9167f298137e1ad0761c32a86631b3a2d3a44dedcb3071e95eb4a5a6",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "RebasingAatoldpulse4 subtracts4mod7 and yields sorted0,3,5=B; oldpulse2 gives sorted0,2,5=C. Circular equivalence retains an explicit origin transform; silently rebasing one track changes relative alignment to unchanged bar/accompaniment/other tracks."
+    },
+    {
+      "id": "WML006-es-exercise-3",
+      "module": "WML006",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/world-music-languages/es/wml-006-preserve-the-origin-of-an-additive-cycle.es.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "244340a0bb8030cbc25e36787fcbb875e1707cc99ba774b97aea19b108a70e29",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Seven integer shifts produce seven distinct onset sets; three include0as a group start. Forward+1gives1,3,5, distinguishing arbitrary pulse phase from three possible original group-boundary rebases."
+    },
+    {
+      "id": "WML006-es-exercise-4",
+      "module": "WML006",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/world-music-languages/es/wml-006-preserve-the-origin-of-an-additive-cycle.es.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "2a67a93c809f2f62cce5b67238f06c62823c3906a2ff281c95d043663f4c3e7a",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Thirty-five anchored3-onset subsets of7positions partition into five7-member rotation classes. Empty/full controls have only1rotation, bounding the seven-phase claim to the authored population. Classes establish no repertoire, performer or cultural taxonomy."
+    },
+    {
+      "id": "WML006-es-exercise-5",
+      "module": "WML006",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/world-music-languages/es/wml-006-preserve-the-origin-of-an-additive-cycle.es.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "5e5653f5c55237e1bf3336e29d4365bc43ccce8bd8a16d5109e09674a11b16ae",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Localization record should retain original/translated ordered groups, pulse unit, bar reference, old-to-new origin transform, affected tracks, reason and review. AtoBrebasesatold4. Circular equality does not license cultural/perceptual/arrangement equivalence; relevant human/repertoire evidence remains absent."
+    },
+    {
+      "id": "GTR007-en-exercise-1",
+      "module": "GTR007",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-studies/en/gtr-007-carry-picking-phase-across-bar-lines.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "8cb4c6f969cea0982c1b2ceacfc2334569d9b06d3f322d772022746162c5ceec",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "All-attack7pulse bar continuously alternatesD/U, so pulse7isU; bar resetmakesD, producing6D→7D. Bar and picking state first return together at14pulses/twobars. No preference or physical-technique judgment follows."
+    },
+    {
+      "id": "GTR007-en-exercise-2",
+      "module": "GTR007",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-studies/en/gtr-007-carry-picking-phase-across-bar-lines.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "878ffcec6f7e5f31f3565b22bf17d3e8857f25c7bcc3a84428ad6ac6d65aef9b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "State includes bar mod7, independent marker mod4 and pick mod2. At14markerphase2has not returned; first all-component return28occurs at7seconds under explicitly quarter120and eighth0.25s. This is authored timing, not observed playback."
+    },
+    {
+      "id": "GTR007-en-exercise-3",
+      "module": "GTR007",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-studies/en/gtr-007-carry-picking-phase-across-bar-lines.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "95520eb437d1729c843646519be73784e3e5f9f012d8758784fb42a2c0f1b14b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "With within-bar3rest, attack-driven policy does not advance at silence: pulse4U,pulse7D. Continuous pulse-clock policy advances through silence: pulse4D,pulse7U. Counter policy, initial phase and intentional resets must be explicit; neither policy is universal technique."
+    },
+    {
+      "id": "GTR007-en-exercise-4",
+      "module": "GTR007",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-studies/en/gtr-007-carry-picking-phase-across-bar-lines.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "a357b5b02dacc0dee000757bef23494168c357da862545288eb019bb27c62a66",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Absolute7tied continuation creates no new attack; after6D next real8attackisU. False reattack at7consumesUandmakes8D. Pinned parseNote Tie=None cannot certify continuation preservation; no importer/playback path executed."
+    },
+    {
+      "id": "GTR007-en-exercise-5",
+      "module": "GTR007",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-studies/en/gtr-007-carry-picking-phase-across-bar-lines.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "3b570772b160e957aeb5c27b0f8ed652ac7e175fc8c277d7ffd062ea2c9927a7",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Direction-string GP type and inspected down-only case7 prove neither both directions read nor phase continuation/roundtrip. Selected technical parser filters unsupported up/down tags. Future pinned probe needs explicit signs, odd bar, declared rest counter, tie, event identities/directions/reset comparisons, and separate score/player observation."
+    },
+    {
+      "id": "GTR007-fr-exercise-1",
+      "module": "GTR007",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-studies/fr/gtr-007-carry-picking-phase-across-bar-lines.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "356e44c09d59b68ddd243301af5a45527e150e1b595a85c46ed706832cee9b3d",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "All-attack7pulse bar continuously alternatesD/U, so pulse7isU; bar resetmakesD, producing6D→7D. Bar and picking state first return together at14pulses/twobars. No preference or physical-technique judgment follows."
+    },
+    {
+      "id": "GTR007-fr-exercise-2",
+      "module": "GTR007",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-studies/fr/gtr-007-carry-picking-phase-across-bar-lines.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "e707737391470f0828c2dbec1bd3e6639b5e03b47e1d422f7f03d95918d2e709",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "State includes bar mod7, independent marker mod4 and pick mod2. At14markerphase2has not returned; first all-component return28occurs at7seconds under explicitly quarter120and eighth0.25s. This is authored timing, not observed playback."
+    },
+    {
+      "id": "GTR007-fr-exercise-3",
+      "module": "GTR007",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-studies/fr/gtr-007-carry-picking-phase-across-bar-lines.fr.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "b152bc50fb32384a7b0941ce01b723b7b09701fefcda398ee230aae567545e4b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "With within-bar3rest, attack-driven policy does not advance at silence: pulse4U,pulse7D. Continuous pulse-clock policy advances through silence: pulse4D,pulse7U. Counter policy, initial phase and intentional resets must be explicit; neither policy is universal technique."
+    },
+    {
+      "id": "GTR007-fr-exercise-4",
+      "module": "GTR007",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-studies/fr/gtr-007-carry-picking-phase-across-bar-lines.fr.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "5481e157bd159d9ddfcd0ea77a70cd33c3578e7ad8ada8f1349d10218a6ba351",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Absolute7tied continuation creates no new attack; after6D next real8attackisU. False reattack at7consumesUandmakes8D. Pinned parseNote Tie=None cannot certify continuation preservation; no importer/playback path executed."
+    },
+    {
+      "id": "GTR007-fr-exercise-5",
+      "module": "GTR007",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-studies/fr/gtr-007-carry-picking-phase-across-bar-lines.fr.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "60204661cc9b0b068ba6986bbd84f936ff249b67ba267665816a7f0b8c3759bc",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Direction-string GP type and inspected down-only case7 prove neither both directions read nor phase continuation/roundtrip. Selected technical parser filters unsupported up/down tags. Future pinned probe needs explicit signs, odd bar, declared rest counter, tie, event identities/directions/reset comparisons, and separate score/player observation."
+    },
+    {
+      "id": "GTR007-es-exercise-1",
+      "module": "GTR007",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-studies/es/gtr-007-carry-picking-phase-across-bar-lines.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "e557d25128a6d558464176f5c9c3b527020c2412b2f3ab89220e36bf4c6c17f6",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "All-attack7pulse bar continuously alternatesD/U, so pulse7isU; bar resetmakesD, producing6D→7D. Bar and picking state first return together at14pulses/twobars. No preference or physical-technique judgment follows."
+    },
+    {
+      "id": "GTR007-es-exercise-2",
+      "module": "GTR007",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-studies/es/gtr-007-carry-picking-phase-across-bar-lines.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "7e83b9cc4f00ca9a1b3f8b1edcbdadffa528c102f077138f101132e26474a64a",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "State includes bar mod7, independent marker mod4 and pick mod2. At14markerphase2has not returned; first all-component return28occurs at7seconds under explicitly quarter120and eighth0.25s. This is authored timing, not observed playback."
+    },
+    {
+      "id": "GTR007-es-exercise-3",
+      "module": "GTR007",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-studies/es/gtr-007-carry-picking-phase-across-bar-lines.es.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "76113e3cefb26d64bdc31e5b8d835f29472255cbe00b562366a9a701003cbd07",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "With within-bar3rest, attack-driven policy does not advance at silence: pulse4U,pulse7D. Continuous pulse-clock policy advances through silence: pulse4D,pulse7U. Counter policy, initial phase and intentional resets must be explicit; neither policy is universal technique."
+    },
+    {
+      "id": "GTR007-es-exercise-4",
+      "module": "GTR007",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-studies/es/gtr-007-carry-picking-phase-across-bar-lines.es.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "b4c42ded4971b6021ced6fe31832b1a31ac9977f878754ab7da4b432f8e07006",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Absolute7tied continuation creates no new attack; after6D next real8attackisU. False reattack at7consumesUandmakes8D. Pinned parseNote Tie=None cannot certify continuation preservation; no importer/playback path executed."
+    },
+    {
+      "id": "GTR007-es-exercise-5",
+      "module": "GTR007",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-studies/es/gtr-007-carry-picking-phase-across-bar-lines.es.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "8c208be3a06943b2599a29fd5c9df1f5b14723f879c00e8dd66a6dc48d455fdf",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, actual primary specification bodies, pinned source branches and independently audited authored records. No human fluency, musician, cultural, learner or runtime outcome.",
+      "checked_conclusion": "Direction-string GP type and inspected down-only case7 prove neither both directions read nor phase continuation/roundtrip. Selected technical parser filters unsupported up/down tags. Future pinned probe needs explicit signs, odd bar, declared rest counter, tie, event identities/directions/reset comparisons, and separate score/player observation."
+    }
+  ],
+  "learner_criterion_checks": [
+    {
+      "id": "MCL006-1",
+      "module": "MCL006",
+      "title": "tempo-unit",
+      "acceptance_reviewed": "Derive7/8 durations1.75s at quarter120 and3.5s at eighth120; identify unspecified tempo note unit.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Complete7/8bar at quarter120 lasts1.75seconds versus3.5seconds at eighth120. A bare120BPM lacks the named metronome note unit; signature denominator does not determine it. Constant numeric rate/no pickup/tempo change are stipulated.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "MCL006-2",
+      "module": "MCL006",
+      "title": "group-sum",
+      "acceptance_reviewed": "Give2,2,3starts0,2,4 versus4,3starts0,4. Equal seven-eighth duration does not establish grouping or played accents.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Additive2+2+3eighth groups have starts0,2,4; composite2/4+3/8 means lengths4,3eighths and starts0,4. Equal total7eighths preserves neither grouping nor performed accents.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "MCL006-3",
+      "module": "MCL006",
+      "title": "score-units",
+      "acceptance_reviewed": "At24divisions/quarter derive eighth12,7/8bar84,6/8and3/4totals72. Distinguish divisions, MIDI resolution, grouping and metronome unit.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "At24divisions per quarter an eighth occupies12,7/8occupies84,6/8and3/4each72. Equal totals do not fix grouping, metronome unit or musical interpretation. Score divisions are not automatically MIDI tick resolution; chord/voice position rules matter.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "MCL006-4",
+      "module": "MCL006",
+      "title": "source-boundary",
+      "acceptance_reviewed": "State source-predicted plain7/8 values7,8; additive2+2+3 givesNone; two pairs2/4+3/8 retain only2,4. No executed parser or summed normalization claim.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Pinned first-child integer XML parser predicts7/8 for plain input, no time for2+2+3numerator text, and only first2/4pair from2/4+3/8. It does not sum/faithfully normalize the composites; these are static predictions, not executed importer results.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "MCL006-5",
+      "module": "MCL006",
+      "title": "transfer-check",
+      "acceptance_reviewed": "Authored MIDIbytes7,3,24,8 predict7/8 and skip24,8 in selected branch; ordered groups not retained by that event. Require actual pinned entered/recovered time/group/unit and score/playback checks without global claims.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Selected MIDI0x58 branch retains7/8from7,3,24,8 and skips24,8; two-integer event carries no ordered group sequence. Future executed path must compare original/recovered time text, group boundaries, duration and named metronome units; score/playback are separate observations.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "WML006-1",
+      "module": "WML006",
+      "title": "anchoring",
+      "acceptance_reviewed": "Derive Astarts0,2,4 and Bstarts0,3,5; total preserved but fixed-origin group alignment changes. Keep Cstarts0,2,5 distinct.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "A2,2,3starts0,2,4 whileB3,2,2starts0,3,5 andC2,3,2starts0,2,5. Total7is unchanged but ordered groups and fixed-origin alignment differ. Starts are authored grouping markers, not observed accents or cultural identity.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "WML006-2",
+      "module": "WML006",
+      "title": "rebase",
+      "acceptance_reviewed": "Old Aorigin4 gives B by subtracting4mod7; old2 gives C. One-track rebase changes relative alignment to unchanged tracks.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "RebasingAatoldpulse4 subtracts4mod7 and yields sorted0,3,5=B; oldpulse2 gives sorted0,2,5=C. Circular equivalence retains an explicit origin transform; silently rebasing one track changes relative alignment to unchanged bar/accompaniment/other tracks.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "WML006-3",
+      "module": "WML006",
+      "title": "transformation-set",
+      "acceptance_reviewed": "Seven distinct pulse shifts differ from three group-start choices. Forward shift1 gives1,3,5 with zero not a group start.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Seven integer shifts produce seven distinct onset sets; three include0as a group start. Forward+1gives1,3,5, distinguishing arbitrary pulse phase from three possible original group-boundary rebases.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "WML006-4",
+      "module": "WML006",
+      "title": "classification-scope",
+      "acceptance_reviewed": "35anchored three-onset sets form5rotation classes of7. Empty/full controls each have1rotation; no universal7phase rule or cultural taxonomy.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Thirty-five anchored3-onset subsets of7positions partition into five7-member rotation classes. Empty/full controls have only1rotation, bounding the seven-phase claim to the authored population. Classes establish no repertoire, performer or cultural taxonomy.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "WML006-5",
+      "module": "WML006",
+      "title": "localization-record",
+      "acceptance_reviewed": "Retain source/translated orderedgroups,pulseunit,barreference,origintransform,affectedtracks,reason,reviewdecision; cultural/perceptual/arrangement equivalence needs appropriate separate evidence.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Localization record should retain original/translated ordered groups, pulse unit, bar reference, old-to-new origin transform, affected tracks, reason and review. AtoBrebasesatold4. Circular equality does not license cultural/perceptual/arrangement equivalence; relevant human/repertoire evidence remains absent.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "GTR007-1",
+      "module": "GTR007",
+      "title": "odd-bar",
+      "acceptance_reviewed": "Strict alternate attacks start D,U,D,U across bars; resetD gives first D/D at6to7; first bar/pick return14. No universal preferred technique.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "All-attack7pulse bar continuously alternatesD/U, so pulse7isU; bar resetmakesD, producing6D→7D. Bar and picking state first return together at14pulses/twobars. No preference or physical-technique judgment follows.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "GTR007-2",
+      "module": "GTR007",
+      "title": "full-phase",
+      "acceptance_reviewed": "At14 markerphase2; first full7/4/2return28pulses or7seconds at quarter120. State what components repeat.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "State includes bar mod7, independent marker mod4 and pick mod2. At14markerphase2has not returned; first all-component return28occurs at7seconds under explicitly quarter120and eighth0.25s. This is authored timing, not observed playback.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "GTR007-3",
+      "module": "GTR007",
+      "title": "rest-policy",
+      "acceptance_reviewed": "Restlocal3: attack-driven directions4U,7D versus pulse-clock4D,7U. Explicit advancing event,initialphase and resets required.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "With within-bar3rest, attack-driven policy does not advance at silence: pulse4U,pulse7D. Continuous pulse-clock policy advances through silence: pulse4D,pulse7U. Counter policy, initial phase and intentional resets must be explicit; neither policy is universal technique.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "GTR007-4",
+      "module": "GTR007",
+      "title": "continuation",
+      "acceptance_reviewed": "Tieatabsolute7 makes no newattack; pulse8U versus false-reattack8D. SourceTieNone does not certify continuation roundtrip.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Absolute7tied continuation creates no new attack; after6D next real8attackisU. False reattack at7consumesUandmakes8D. Pinned parseNote Tie=None cannot certify continuation preservation; no importer/playback path executed.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "GTR007-5",
+      "module": "GTR007",
+      "title": "notation-check",
+      "acceptance_reviewed": "Typecapacity and GPcase7down do not prove bothdirections,phasecontinuity,binaryconformance or roundtrip. Require pinned explicitD/U,oddbar,restpolicy,tie,eventidentity/resetcomparison; notation,playback,player outcomes separate.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Direction-string GP type and inspected down-only case7 prove neither both directions read nor phase continuation/roundtrip. Selected technical parser filters unsupported up/down tags. Future pinned probe needs explicit signs, odd bar, declared rest counter, tie, event identities/directions/reset comparisons, and separate score/player observation.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no participant assessed."
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+      "sha256": "efe885fa7e6105fe720fb75ce794036ff592aa3d66f1f1be5a64f6bc14d7d91a"
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-006-preserve-meter-grouping-and-tempo-units.fr.md",
+      "sha256": "4eb5eb51645f6ac50fb903b9febd442e8ce608f695a621c8b58507d7fa3ab5ca"
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-006-preserve-meter-grouping-and-tempo-units.es.md",
+      "sha256": "43eb8015d20bce210d93a3d704ff4995a24be9126b4b260354b8e52982f7b103"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-006-preserve-the-origin-of-an-additive-cycle.md",
+      "sha256": "529c1f410f2906b8af71cb2dadd007c143e558f30d5a2001eb87f8745a30386d"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/fr/wml-006-preserve-the-origin-of-an-additive-cycle.fr.md",
+      "sha256": "cb066cf23081a724e81cc1f0277c786fcc0d679cae63446377f88227c499070f"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/es/wml-006-preserve-the-origin-of-an-additive-cycle.es.md",
+      "sha256": "973ed6873eedfa824f9b42ed69cdb19341a0b06af8940d668727577795e94a6a"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-007-carry-picking-phase-across-bar-lines.md",
+      "sha256": "c21c74be0099fdff53d741d69220aa50bde3d476fbff69f130cc00eada773c96"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/fr/gtr-007-carry-picking-phase-across-bar-lines.fr.md",
+      "sha256": "425f2bd13f9994f1e04d55114a347b95e72fc548cf4b87bac4a259e625a2e7ed"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/es/gtr-007-carry-picking-phase-across-bar-lines.es.md",
+      "sha256": "8b6556d5b157169b7eec2aae52d8f741411fc37513de2eafa96fd2edc7ae684c"
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/meter-picking-2026-10-22/production-plan.md",
+      "sha256": "0c210da07ee9815b6fee751f78f28c373efffeebd09a1b383de525eb183b2550"
+    },
+    {
+      "path": "code/streeling/evidence/meter-picking-2026-10-22/README.md",
+      "sha256": "e93c6d30efcfc08b38510ec7c696206a8131e5732cc077bebe6b47d5ec1b8590"
+    },
+    {
+      "path": "code/streeling/evidence/meter-picking-2026-10-22/primary-readback.json",
+      "sha256": "9938db465961ae5b2835539519aab07e302fdd1c4f64c70ff093cf6c5a961bb2"
+    },
+    {
+      "path": "code/streeling/evidence/meter-picking-2026-10-22/primary-reading.json",
+      "sha256": "fc2ad193fbe608cada6828c63e1ee0f5e1ef293172199f9f0c9fe6989b67deee"
+    },
+    {
+      "path": "code/streeling/evidence/meter-picking-2026-10-22/meter-units.json",
+      "sha256": "d9874b14bea0d4e8b22e22c0ba76d71493fcf15e973cfd1032eaff0123889bec"
+    },
+    {
+      "path": "code/streeling/evidence/meter-picking-2026-10-22/anchored-cycles.json",
+      "sha256": "1c8547eb72de8946c4cc136602ddf0576624e730d4cab5ebf0a4a0c9bb2cee3c"
+    },
+    {
+      "path": "code/streeling/evidence/meter-picking-2026-10-22/picking-phase.json",
+      "sha256": "3764a986354e6cbe6c8a074cc070b7e6e79109d8662631dd70fc60b42b7c6c7d"
+    },
+    {
+      "path": "code/streeling/evidence/meter-picking-2026-10-22/source-observations.json",
+      "sha256": "aa0e535e8ebe504866d94b1780784f21298aeb6167d30ba2e0b8b741e884aa7c"
+    },
+    {
+      "path": "code/streeling/evidence/meter-picking-2026-10-22/data-audit.json",
+      "sha256": "083059e9b1114bd551eba150b1a30ca7eb5d06ea252ab57e456894983c79956c"
+    },
+    {
+      "path": "code/streeling/evidence/meter-picking-2026-10-22/learner-task.md",
+      "sha256": "b9dcfb09eee183990e193d1ef170240aac5364447091f6ec5cef0ebf925d8234"
+    },
+    {
+      "path": "code/streeling/evidence/meter-picking-2026-10-22/reviewer-rubric.json",
+      "sha256": "c878b884cc51ccf5dc7103be488ce75b6c8466e61aac7a02c886d99500b52102"
+    },
+    {
+      "path": "code/streeling/evidence/meter-picking-2026-10-22/official-links.json",
+      "sha256": "531336aa213663a997ac91cbfcc17b2eaf2f24326c7723c0e6b3147f729d21f9"
+    }
+  ],
+  "prerequisite_bindings": [
+    {
+      "path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+      "sha256": "5a0c3a6c1d2539820d4b3ce8adee3d4cb7626b312491b70d323c747a1d5391b0"
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-005-preserve-written-and-sounding-pitch.md",
+      "sha256": "b4bcf44717f388103507ea2679cbe143bc01251cbd1079a1e6a5c8e89c5fd5dd"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-003-term-preservation-and-cultural-review.md",
+      "sha256": "e7d5b48dcccb9937971eaabd2e0b9fc9aa6ef6555b0fe24d0532f69303af5279"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-005-plan-which-string-keeps-ringing.md",
+      "sha256": "dfb660db8e69ca8286fdd6f6e0f642a949d838257e4f565debd632af1eddaf82"
+    }
+  ],
+  "locale_url_and_format_checks": [
+    {
+      "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-006-preserve-meter-grouping-and-tempo-units.fr.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-006-preserve-meter-grouping-and-tempo-units.es.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-006-preserve-the-origin-of-an-additive-cycle.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/world-music-languages/fr/wml-006-preserve-the-origin-of-an-additive-cycle.fr.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/world-music-languages/es/wml-006-preserve-the-origin-of-an-additive-cycle.es.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-007-carry-picking-phase-across-bar-lines.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/guitar-studies/fr/gtr-007-carry-picking-phase-across-bar-lines.fr.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/guitar-studies/es/gtr-007-carry-picking-phase-across-bar-lines.es.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    }
+  ],
+  "primary_source_review": [
+    {
+      "path": "Common/GA.Business.DSL/Types/MidiTypes.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Types/MidiTypes.fs",
+      "sha256": "8614a2a5d466b5bb792c50017ae7a6e09592b158f1362ac6bf8768683c428b36",
+      "review_scope": "Relevant MIDI event/0x58 types and parser; MusicXML time, note/tie, technical types and parser; GP direction type/effect case7 directly read. Static inspection only, no compiled parser or binary conformance."
+    },
+    {
+      "path": "Common/GA.Business.DSL/Parsers/MidiParser.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Parsers/MidiParser.fs",
+      "sha256": "00f812620749834af64988b07cde408fb50936d750623b246dc3e64b1ee0d402",
+      "review_scope": "Relevant MIDI event/0x58 types and parser; MusicXML time, note/tie, technical types and parser; GP direction type/effect case7 directly read. Static inspection only, no compiled parser or binary conformance."
+    },
+    {
+      "path": "Common/GA.Business.DSL/Types/MusicXmlTypes.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Types/MusicXmlTypes.fs",
+      "sha256": "e894f70561db1f4d1bdd378e8ccc0646250793896144f0a7f39a66b18d40cd1a",
+      "review_scope": "Relevant MIDI event/0x58 types and parser; MusicXML time, note/tie, technical types and parser; GP direction type/effect case7 directly read. Static inspection only, no compiled parser or binary conformance."
+    },
+    {
+      "path": "Common/GA.Business.DSL/Parsers/MusicXmlParser.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Parsers/MusicXmlParser.fs",
+      "sha256": "73ab96a59b50831b9930cbb8d37368febd6fc8d124d57ca70a3ff4c289940fee",
+      "review_scope": "Relevant MIDI event/0x58 types and parser; MusicXML time, note/tie, technical types and parser; GP direction type/effect case7 directly read. Static inspection only, no compiled parser or binary conformance."
+    },
+    {
+      "path": "Common/GA.Business.DSL/Types/GuitarProTypes.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Types/GuitarProTypes.fs",
+      "sha256": "51332d38d41a74cdaaa0f7170d2efd1ceba16109042222aef0dfe6f24134b7b9",
+      "review_scope": "Relevant MIDI event/0x58 types and parser; MusicXML time, note/tie, technical types and parser; GP direction type/effect case7 directly read. Static inspection only, no compiled parser or binary conformance."
+    },
+    {
+      "path": "Common/GA.Business.DSL/Parsers/GuitarProParser.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Parsers/GuitarProParser.fs",
+      "sha256": "6940c31e11e167b598270adb5ce945604529576a4470d92fc9ee3d82c4965cd1",
+      "review_scope": "Relevant MIDI event/0x58 types and parser; MusicXML time, note/tie, technical types and parser; GP direction type/effect case7 directly read. Static inspection only, no compiled parser or binary conformance."
+    }
+  ],
+  "official_document_review": [
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/time/",
+      "actual_read": true,
+      "review_scope": "One numerator/denominator pair can contain additive beats; mixed denominators use multiple pairs. Direct primary body independently opened/read; specification meaning does not establish project conformance."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beat-unit/",
+      "actual_read": true,
+      "review_scope": "Metronome graphical note unit. Direct primary body independently opened/read; specification meaning does not establish project conformance."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome/",
+      "actual_read": true,
+      "review_scope": "Regular marks combine beat unit and per-minute; other relations distinct. Direct primary body independently opened/read; specification meaning does not establish project conformance."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/per-minute/",
+      "actual_read": true,
+      "review_scope": "Content can be numeric or text, so these lessons stipulate numeric120. Direct primary body independently opened/read; specification meaning does not establish project conformance."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/divisions/",
+      "actual_read": true,
+      "review_scope": "Score duration units per quarter; do not confuse denominator or MIDI resolution. Direct primary body independently opened/read; specification meaning does not establish project conformance."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/duration/",
+      "actual_read": true,
+      "review_scope": "Positive division duration and score-position rules, not a universal note-count counter. Direct primary body independently opened/read; specification meaning does not establish project conformance."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/down-bow/",
+      "actual_read": true,
+      "review_scope": "Symbol includes down-stroke on plucked instruments. Direct primary body independently opened/read; specification meaning does not establish project conformance."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/up-bow/",
+      "actual_read": true,
+      "review_scope": "Symbol includes up-stroke on plucked instruments. Direct primary body independently opened/read; specification meaning does not establish project conformance."
+    }
+  ],
+  "pending": {
+    "human_technical_review": null,
+    "musician_review": null,
+    "cultural_review": null,
+    "fluent_language_review": null,
+    "learner_attempts": null,
+    "independent_learner_transfer": null,
+    "runtime_validation": null,
+    "parser_execution": null,
+    "import_export_roundtrip": null,
+    "binary_conformance": null,
+    "playback": null,
+    "audio_render": null,
+    "player_trial": null,
+    "technique_preference": null,
+    "physical_playability": null,
+    "calibration": null,
+    "production_fix": null,
+    "deployed_html": null
+  },
+  "human_technical_review": null,
+  "musician_review": null,
+  "cultural_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "independent_learner_transfer": null,
+  "runtime_validation": null,
+  "parser_execution": null,
+  "import_export_roundtrip": null,
+  "binary_conformance": null,
+  "playback": null,
+  "audio_render": null,
+  "player_trial": null,
+  "technique_preference": null,
+  "physical_playability": null,
+  "calibration": null,
+  "production_fix": null,
+  "deployed_html": null,
+  "boundaries": [
+    "Complete-bar duration arithmetic requires declared metronome note unit/rate, quarter-based divisions and fixed timing assumptions. Equal duration is not equal grouping, accent or performance interpretation.",
+    "XML additive rejection and first-pair retention, MIDI discarded fields, GP down-only case and unpopulated tie/technical metadata are selected static source predictions, not executed outputs or repository-wide absence.",
+    "Anchored onset sets preserve a bar reference; circular equivalence requires an explicit origin transform. Seven phase choices and three group-start rebases are distinct comparisons.",
+    "Thirty-five three-onset sets/five rotation classes are finite authored combinatorics, not cultural taxonomy or a probability model of repertoire. Empty/full controls bound universal orbit claims.",
+    "D/U directions are symbolic attack or motion-clock policies, not accent, difficulty, physical motion observation or preferred technique. Rest and tie-continuation advancement must be explicitly declared.",
+    "A repeat claim includes every selected state component; bar/pick return14does not restore marker mod4until28. Calculated7seconds is not actual playback timing.",
+    "No new native build/parser/import/export/playback/audio/host/player/cultural/paid experiment or production correction performed by this reviewer."
+  ]
+}

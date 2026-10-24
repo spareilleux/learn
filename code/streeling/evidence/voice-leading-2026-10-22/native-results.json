@@ -1,0 +1,806 @@
+{
+  "probe_completed": true,
+  "characterization_pass": true,
+  "original_expected_equivalence_satisfied": false,
+  "scope": "Unchanged pinned GA class compiled in standalone .NET 10 assembly with compile-only PublicAPI metadata stand-in; finite integer equal-cardinality cases <=7 voices. Not GA full assembly/full suite, a production fix, physical voice continuity, upstream KNN, or UI execution.",
+  "sourcePin": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+  "cases": [
+    {
+      "id": "ordered_absolute",
+      "a": [
+        60,
+        64,
+        67
+      ],
+      "b": [
+        67,
+        64,
+        60
+      ],
+      "o": false,
+      "p": false,
+      "t": false,
+      "i": false,
+      "nativeCost": 14,
+      "oracleCost": 14,
+      "permutationsEvaluated": 1,
+      "minimumAssignmentCount": 1,
+      "witnesses": []
+    },
+    {
+      "id": "ordered_octave",
+      "a": [
+        60,
+        64,
+        67
+      ],
+      "b": [
+        67,
+        64,
+        60
+      ],
+      "o": true,
+      "p": false,
+      "t": false,
+      "i": false,
+      "nativeCost": 10,
+      "oracleCost": 10,
+      "permutationsEvaluated": 1,
+      "minimumAssignmentCount": 1,
+      "witnesses": []
+    },
+    {
+      "id": "permuted_absolute",
+      "a": [
+        60,
+        64,
+        67
+      ],
+      "b": [
+        67,
+        64,
+        60
+      ],
+      "o": false,
+      "p": true,
+      "t": false,
+      "i": false,
+      "nativeCost": 0,
+      "oracleCost": 0,
+      "permutationsEvaluated": 6,
+      "minimumAssignmentCount": 1,
+      "witnesses": []
+    },
+    {
+      "id": "permuted_octave",
+      "a": [
+        60,
+        64,
+        67
+      ],
+      "b": [
+        67,
+        64,
+        60
+      ],
+      "o": true,
+      "p": true,
+      "t": false,
+      "i": false,
+      "nativeCost": 0,
+      "oracleCost": 0,
+      "permutationsEvaluated": 6,
+      "minimumAssignmentCount": 1,
+      "witnesses": []
+    },
+    {
+      "id": "register_absolute",
+      "a": [
+        60,
+        64,
+        67
+      ],
+      "b": [
+        72,
+        76,
+        79
+      ],
+      "o": false,
+      "p": false,
+      "t": false,
+      "i": false,
+      "nativeCost": 36,
+      "oracleCost": 36,
+      "permutationsEvaluated": 1,
+      "minimumAssignmentCount": 1,
+      "witnesses": []
+    },
+    {
+      "id": "register_octave",
+      "a": [
+        60,
+        64,
+        67
+      ],
+      "b": [
+        72,
+        76,
+        79
+      ],
+      "o": true,
+      "p": false,
+      "t": false,
+      "i": false,
+      "nativeCost": 0,
+      "oracleCost": 0,
+      "permutationsEvaluated": 1,
+      "minimumAssignmentCount": 1,
+      "witnesses": []
+    },
+    {
+      "id": "upstream_seven",
+      "a": [
+        3,
+        11,
+        5,
+        11,
+        1,
+        3,
+        9
+      ],
+      "b": [
+        3,
+        3,
+        2,
+        8,
+        7,
+        1,
+        1
+      ],
+      "o": true,
+      "p": true,
+      "t": false,
+      "i": false,
+      "nativeCost": 8,
+      "oracleCost": 8,
+      "permutationsEvaluated": 5040,
+      "minimumAssignmentCount": 12,
+      "witnesses": []
+    },
+    {
+      "id": "registered_counterexample",
+      "a": [
+        60,
+        63,
+        65
+      ],
+      "b": [
+        60,
+        65,
+        75
+      ],
+      "o": true,
+      "p": true,
+      "t": false,
+      "i": false,
+      "nativeCost": 4,
+      "oracleCost": 0,
+      "permutationsEvaluated": 6,
+      "minimumAssignmentCount": 1,
+      "witnesses": [
+        {
+          "assignment": [
+            60,
+            75,
+            65
+          ],
+          "motions": [
+            0,
+            12,
+            0
+          ],
+          "voiceCosts": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "normalized_counterexample_only",
+      "a": [
+        0,
+        3,
+        5
+      ],
+      "b": [
+        0,
+        5,
+        3
+      ],
+      "o": true,
+      "p": true,
+      "t": false,
+      "i": false,
+      "nativeCost": 0,
+      "oracleCost": 0,
+      "permutationsEvaluated": 6,
+      "minimumAssignmentCount": 1,
+      "witnesses": []
+    },
+    {
+      "id": "ambiguous_plan",
+      "a": [
+        60,
+        62
+      ],
+      "b": [
+        64,
+        65
+      ],
+      "o": true,
+      "p": true,
+      "t": false,
+      "i": false,
+      "nativeCost": 7,
+      "oracleCost": 7,
+      "permutationsEvaluated": 2,
+      "minimumAssignmentCount": 2,
+      "witnesses": [
+        {
+          "assignment": [
+            64,
+            65
+          ],
+          "motions": [
+            4,
+            3
+          ],
+          "voiceCosts": [
+            4,
+            3
+          ]
+        },
+        {
+          "assignment": [
+            65,
+            64
+          ],
+          "motions": [
+            5,
+            2
+          ],
+          "voiceCosts": [
+            5,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ranking_near",
+      "a": [
+        60,
+        63,
+        65
+      ],
+      "b": [
+        60,
+        63,
+        66
+      ],
+      "o": true,
+      "p": true,
+      "t": false,
+      "i": false,
+      "nativeCost": 1,
+      "oracleCost": 1,
+      "permutationsEvaluated": 6,
+      "minimumAssignmentCount": 1,
+      "witnesses": []
+    },
+    {
+      "id": "upstream_transposition",
+      "a": [
+        0,
+        4,
+        7
+      ],
+      "b": [
+        11,
+        3,
+        6
+      ],
+      "o": true,
+      "p": true,
+      "t": true,
+      "i": false,
+      "nativeCost": 0,
+      "oracleCost": 0,
+      "permutationsEvaluated": 72,
+      "minimumAssignmentCount": 1,
+      "witnesses": []
+    },
+    {
+      "id": "empty",
+      "a": [],
+      "b": [],
+      "o": true,
+      "p": true,
+      "t": false,
+      "i": false,
+      "nativeCost": 0,
+      "oracleCost": 0,
+      "permutationsEvaluated": 1,
+      "minimumAssignmentCount": 1,
+      "witnesses": []
+    }
+  ],
+  "counterexampleCyclicAssignments": [
+    [
+      60,
+      65,
+      75
+    ],
+    [
+      65,
+      75,
+      60
+    ],
+    [
+      75,
+      60,
+      65
+    ]
+  ],
+  "counterexampleCyclicCosts": [
+    4,
+    10,
+    6
+  ],
+  "commonNoteTeachingCounts": {
+    "absoluteCommonNotes": 0,
+    "commonPitchClasses": 3,
+    "isGaCommonTonesOutput": false
+  },
+  "constructedRanking": {
+    "nativeRanking": [
+      "targetNear",
+      "targetSame"
+    ],
+    "oracleRanking": [
+      "targetSame",
+      "targetNear"
+    ],
+    "isUpstreamKnnOrUiRun": false
+  },
+  "normalizedCounterexample": {
+    "scope": "Workaround for this example only; no general fix or physical voice continuity claim",
+    "nativeCost": 0
+  },
+  "checks": [
+    {
+      "id": "fixed_case_inventory",
+      "pass": true,
+      "expected": [
+        "ordered_absolute",
+        "ordered_octave",
+        "permuted_absolute",
+        "permuted_octave",
+        "register_absolute",
+        "register_octave",
+        "upstream_seven",
+        "registered_counterexample",
+        "normalized_counterexample_only",
+        "ambiguous_plan",
+        "ranking_near",
+        "upstream_transposition",
+        "empty"
+      ],
+      "actual": [
+        "ordered_absolute",
+        "ordered_octave",
+        "permuted_absolute",
+        "permuted_octave",
+        "register_absolute",
+        "register_octave",
+        "upstream_seven",
+        "registered_counterexample",
+        "normalized_counterexample_only",
+        "ambiguous_plan",
+        "ranking_near",
+        "upstream_transposition",
+        "empty"
+      ]
+    },
+    {
+      "id": "ordered_absolute_native",
+      "pass": true,
+      "expected": 14,
+      "actual": 14
+    },
+    {
+      "id": "ordered_absolute_oracle",
+      "pass": true,
+      "expected": 14,
+      "actual": 14
+    },
+    {
+      "id": "ordered_octave_native",
+      "pass": true,
+      "expected": 10,
+      "actual": 10
+    },
+    {
+      "id": "ordered_octave_oracle",
+      "pass": true,
+      "expected": 10,
+      "actual": 10
+    },
+    {
+      "id": "permuted_absolute_native",
+      "pass": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "permuted_absolute_oracle",
+      "pass": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "permuted_octave_native",
+      "pass": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "permuted_octave_oracle",
+      "pass": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "register_absolute_native",
+      "pass": true,
+      "expected": 36,
+      "actual": 36
+    },
+    {
+      "id": "register_absolute_oracle",
+      "pass": true,
+      "expected": 36,
+      "actual": 36
+    },
+    {
+      "id": "register_octave_native",
+      "pass": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "register_octave_oracle",
+      "pass": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "upstream_seven_native",
+      "pass": true,
+      "expected": 8,
+      "actual": 8
+    },
+    {
+      "id": "upstream_seven_oracle",
+      "pass": true,
+      "expected": 8,
+      "actual": 8
+    },
+    {
+      "id": "upstream_seven_permutation_count",
+      "pass": true,
+      "expected": 5040,
+      "actual": 5040
+    },
+    {
+      "id": "registered_counterexample_native",
+      "pass": true,
+      "expected": 4,
+      "actual": 4
+    },
+    {
+      "id": "registered_counterexample_oracle",
+      "pass": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "normalized_counterexample_only_native",
+      "pass": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "normalized_counterexample_only_oracle",
+      "pass": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "ambiguous_plan_native",
+      "pass": true,
+      "expected": 7,
+      "actual": 7
+    },
+    {
+      "id": "ambiguous_plan_oracle",
+      "pass": true,
+      "expected": 7,
+      "actual": 7
+    },
+    {
+      "id": "ranking_near_native",
+      "pass": true,
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "id": "ranking_near_oracle",
+      "pass": true,
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "id": "upstream_transposition_native",
+      "pass": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "upstream_transposition_oracle",
+      "pass": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "empty_native",
+      "pass": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "empty_oracle",
+      "pass": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "oracle_zero_known_case",
+      "pass": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "counterexample_oracle_witness",
+      "pass": true,
+      "expected": [
+        60,
+        75,
+        65
+      ],
+      "actual": [
+        {
+          "assignment": [
+            60,
+            75,
+            65
+          ],
+          "motions": [
+            0,
+            12,
+            0
+          ],
+          "voiceCosts": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "counterexample_cyclic_costs",
+      "pass": true,
+      "expected": [
+        4,
+        10,
+        6
+      ],
+      "actual": [
+        4,
+        10,
+        6
+      ]
+    },
+    {
+      "id": "counterexample_source_matches_cyclic_minimum",
+      "pass": true,
+      "expected": 4,
+      "actual": 4
+    },
+    {
+      "id": "original_equivalence_failure_reproduced",
+      "pass": true,
+      "expected": false,
+      "actual": false
+    },
+    {
+      "id": "normalization_is_exactly_this_example",
+      "pass": true,
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "ambiguous_two_minimum_assignments",
+      "pass": true,
+      "expected": [
+        {
+          "assignment": [
+            64,
+            65
+          ],
+          "motions": [
+            4,
+            3
+          ],
+          "voiceCosts": null
+        },
+        {
+          "assignment": [
+            65,
+            64
+          ],
+          "motions": [
+            5,
+            2
+          ],
+          "voiceCosts": null
+        }
+      ],
+      "actual": [
+        {
+          "assignment": [
+            64,
+            65
+          ],
+          "motions": [
+            4,
+            3
+          ],
+          "voiceCosts": [
+            4,
+            3
+          ]
+        },
+        {
+          "assignment": [
+            65,
+            64
+          ],
+          "motions": [
+            5,
+            2
+          ],
+          "voiceCosts": [
+            5,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "teaching_absolute_common_notes",
+      "pass": true,
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "id": "teaching_common_pitch_classes",
+      "pass": true,
+      "expected": 3,
+      "actual": 3
+    },
+    {
+      "id": "constructed_native_ranking",
+      "pass": true,
+      "expected": [
+        "targetNear",
+        "targetSame"
+      ],
+      "actual": [
+        "targetNear",
+        "targetSame"
+      ]
+    },
+    {
+      "id": "constructed_oracle_ranking",
+      "pass": true,
+      "expected": [
+        "targetSame",
+        "targetNear"
+      ],
+      "actual": [
+        "targetSame",
+        "targetNear"
+      ]
+    },
+    {
+      "id": "mismatched_cardinality_exception",
+      "pass": true,
+      "expected": "ArgumentException",
+      "actual": "ArgumentException"
+    }
+  ],
+  "ORIGINAL_EXPECTED_EQUIVALENCE_SATISFIED": false,
+  "provenance": {
+    "source": {
+      "repository": "https://github.com/GuitarAlchemist/ga",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "files": [
+        {
+          "upstreamPath": "Common/GA.Domain.Services/Atonal/VoiceLeadingSpace.cs",
+          "localPath": "vendor/Common/GA.Domain.Services/Atonal/VoiceLeadingSpace.cs",
+          "sha256": "2f3bd2240cd08305dace51f62069e60e6336d1b5088ce24eed2eabddf6c830ac",
+          "bytes": 3809,
+          "immutableUrl": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Domain.Services/Atonal/VoiceLeadingSpace.cs"
+        },
+        {
+          "upstreamPath": "Common/GA.Domain.Core/Theory/Atonal/VoiceLeadingOptions.cs",
+          "localPath": "vendor/Common/GA.Domain.Core/Theory/Atonal/VoiceLeadingOptions.cs",
+          "sha256": "4d9068fe2231fd6e8c4f3d7f2ddb2b93ae68b699fe65654104bf5d606bf89891",
+          "bytes": 699,
+          "immutableUrl": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Domain.Core/Theory/Atonal/VoiceLeadingOptions.cs"
+        },
+        {
+          "upstreamPath": "LICENSE",
+          "localPath": "vendor/LICENSE",
+          "sha256": "b0592d8995a0b7963cd8226d5a1e70f75c055810fc68ce3b0e5e6e3fa646c3c0",
+          "bytes": 1072,
+          "immutableUrl": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/LICENSE"
+        }
+      ],
+      "upstreamTestInspected": {
+        "path": "Tests/Common/GA.Business.Core.Tests/Atonal/Geometry/VoiceLeadingSpaceOpticTests.cs",
+        "sha256": "3032247fedddb05a1ecaef40959c19a2bba00b20b9fa2624a4651410abd57ac7",
+        "immutableUrl": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Tests/Common/GA.Business.Core.Tests/Atonal/Geometry/VoiceLeadingSpaceOpticTests.cs",
+        "compiled": false
+      },
+      "license": "MIT; copyright 2021 GuitarAlchemist",
+      "scope": "Unchanged pinned source in standalone .NET 10 assembly; compile-only metadata adapter; not original GA assembly, GA full build, or full suite."
+    },
+    "inputSha256": {
+      "run.mjs": "2ce00cfd60a7dba40c0398f8c5e2ad239a039770ce2c58fda28c718a0e801811",
+      "Probe.cs": "63b20d1d7e41272f1835930379263d237cef4fb2ef35c65fe486035f2fbb7a01",
+      "MetadataAdapter.cs": "4efdf03568bad3957590ed8af9ece3381334722bfdbc62bd791ce03839b59392",
+      "VoiceLeadingProbe.csproj": "d4973831025b0d276473f53639fd44632399a89cf5e1a7fb8d2066b2ae60a487",
+      "global.json": "b9cbf70f1a0418dd0d9b86d7bac0616700b85c8425a1314a64cb4b755a92dbdb",
+      "NuGet.Config": "964302159308872b9729e1828a1ba897f30634f7bd751cde11ea8e6fed8cfb97",
+      "expected-cases.json": "01b9d0d943232e3f6562341b840563c02b83a7a13206e23867611bcac91cfd3b",
+      "source.json": "fc78242b009707b8e2672d1fc274fc75e815e370478c6662b844f398bb9d9edb",
+      "README.md": "d944828b38e02adc4869d152cfdffba76b52ad17b4fc207b9cbbed2035f966c7",
+      ".gitattributes": "72d5da6a350b43d984ad0569f59ba5f39aa3ff3d390d45a817d931fa2b38396c",
+      "vendor/Common/GA.Domain.Services/Atonal/VoiceLeadingSpace.cs": "2f3bd2240cd08305dace51f62069e60e6336d1b5088ce24eed2eabddf6c830ac",
+      "vendor/Common/GA.Domain.Core/Theory/Atonal/VoiceLeadingOptions.cs": "4d9068fe2231fd6e8c4f3d7f2ddb2b93ae68b699fe65654104bf5d606bf89891",
+      "vendor/LICENSE": "b0592d8995a0b7963cd8226d5a1e70f75c055810fc68ce3b0e5e6e3fa646c3c0"
+    },
+    "sdkVersion": "10.0.113",
+    "nodeVersion": "v24.12.0",
+    "platform": "win32",
+    "architecture": "x64",
+    "assessedOsScope": "Windows only",
+    "commandRecords": "commands.json",
+    "outputDirectory": "C:\\tmp\\streeling-voiceleading-final-run"
+  }
+}

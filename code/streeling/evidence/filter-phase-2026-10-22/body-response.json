@@ -1,0 +1,1028 @@
+{
+  "scope": "Authored binary64 mathematical evaluation of pinned decimal parameters at44100Hz, not a Rust f32 execution, physical calibration, complete engine response or recording.",
+  "sample_rate_hz": 44100,
+  "model": "y[n]=g*x[n]+2*r*cos(omega0)*y[n-1]-r^2*y[n-2]; zero initial state",
+  "modes": [
+    {
+      "pole_frequency_hz": 110,
+      "pole_radius": 0.95,
+      "numerator_gain": 0.08,
+      "omega0_rad_per_sample": 0.015672344303622552,
+      "recurrence_a1": 1.899766663518941,
+      "recurrence_a2": -0.9025,
+      "denominator_a1": -1.899766663518941,
+      "denominator_a2": 0.9025,
+      "unclipped_peak_cosine": 1.0011928192090818,
+      "isolated_peak_frequency_hz": 0.0,
+      "gain_at_pole_frequency": 27.306423790757737,
+      "gain_at_dc": 29.26825897739633,
+      "gain_at_isolated_peak": 29.26825897739633,
+      "impulse_first_6": [
+        0.08,
+        0.1519813330815153,
+        0.21652907006543115,
+        0.2741915558869956,
+        0.3254824915584533,
+        0.37088290783382116
+      ],
+      "probes": [
+        {
+          "frequency_hz": 0,
+          "response": {
+            "real": 29.26825897739633,
+            "imag": -0.0,
+            "magnitude": 29.26825897739633,
+            "phase_rad": -0.0
+          },
+          "finite_impulse_sum": {
+            "real": 29.268258977396236,
+            "imag": 0.0,
+            "magnitude": 29.268258977396236,
+            "phase_rad": 0.0
+          },
+          "absolute_complex_difference": 9.237055564881302e-14
+        },
+        {
+          "frequency_hz": 110,
+          "response": {
+            "real": 23.518742522949967,
+            "imag": -13.87478037230302,
+            "magnitude": 27.306423790757737,
+            "phase_rad": -0.5329938098538746
+          },
+          "finite_impulse_sum": {
+            "real": 23.518742522949136,
+            "imag": -13.874780372301469,
+            "magnitude": 27.306423790756234,
+            "phase_rad": -0.5329938098538411
+          },
+          "absolute_complex_difference": 1.7595377162656235e-12
+        },
+        {
+          "frequency_hz": 0.0,
+          "response": {
+            "real": 29.26825897739633,
+            "imag": -0.0,
+            "magnitude": 29.26825897739633,
+            "phase_rad": -0.0
+          },
+          "finite_impulse_sum": {
+            "real": 29.268258977396236,
+            "imag": 0.0,
+            "magnitude": 29.268258977396236,
+            "phase_rad": 0.0
+          },
+          "absolute_complex_difference": 9.237055564881302e-14
+        },
+        {
+          "frequency_hz": 5000,
+          "response": {
+            "real": -0.11370055642798804,
+            "imag": -0.1294457179070989,
+            "magnitude": 0.17229048266378014,
+            "phase_rad": -2.2915288541993157
+          },
+          "finite_impulse_sum": {
+            "real": -0.11370055642798649,
+            "imag": -0.1294457179070992,
+            "magnitude": 0.1722904826637793,
+            "phase_rad": -2.291528854199308
+          },
+          "absolute_complex_difference": 1.5788995281571396e-15
+        },
+        {
+          "frequency_hz": 22050.0,
+          "response": {
+            "real": 0.02104008137239938,
+            "imag": -2.510594395911131e-18,
+            "magnitude": 0.02104008137239938,
+            "phase_rad": -1.1932436721487955e-16
+          },
+          "finite_impulse_sum": {
+            "real": 0.021040081372399308,
+            "imag": 3.6619576125351004e-15,
+            "magnitude": 0.021040081372399308,
+            "phase_rad": 1.7404674191702086e-13
+          },
+          "absolute_complex_difference": 3.665192434786665e-15
+        }
+      ]
+    },
+    {
+      "pole_frequency_hz": 240,
+      "pole_radius": 0.96,
+      "numerator_gain": 0.1,
+      "omega0_rad_per_sample": 0.03419420575335829,
+      "recurrence_a1": 1.9188776354073862,
+      "recurrence_a2": -0.9216,
+      "denominator_a1": -1.9188776354073862,
+      "denominator_a2": 0.9216,
+      "unclipped_peak_cosine": 1.000248281303937,
+      "isolated_peak_frequency_hz": 0.0,
+      "gain_at_pole_frequency": 32.040366328133956,
+      "gain_at_dc": 36.73277277823726,
+      "gain_at_isolated_peak": 36.73277277823726,
+      "impulse_first_6": [
+        0.1,
+        0.19188776354073864,
+        0.2760491379666642,
+        0.3528607542385752,
+        0.42268972417130635,
+        0.4858933873225657
+      ],
+      "probes": [
+        {
+          "frequency_hz": 0,
+          "response": {
+            "real": 36.73277277823726,
+            "imag": -0.0,
+            "magnitude": 36.73277277823726,
+            "phase_rad": -0.0
+          },
+          "finite_impulse_sum": {
+            "real": 36.73277277823723,
+            "imag": 0.0,
+            "magnitude": 36.73277277823723,
+            "phase_rad": 0.0
+          },
+          "absolute_complex_difference": 2.842170943040401e-14
+        },
+        {
+          "frequency_hz": 240,
+          "response": {
+            "real": 17.34685396723563,
+            "imag": -26.938294895564972,
+            "magnitude": 32.040366328133956,
+            "phase_rad": -0.9986875476222503
+          },
+          "finite_impulse_sum": {
+            "real": 17.346853967235475,
+            "imag": -26.938294895565218,
+            "magnitude": 32.04036632813408,
+            "phase_rad": -0.9986875476222585
+          },
+          "absolute_complex_difference": 2.9073703533647355e-13
+        },
+        {
+          "frequency_hz": 0.0,
+          "response": {
+            "real": 36.73277277823726,
+            "imag": -0.0,
+            "magnitude": 36.73277277823726,
+            "phase_rad": -0.0
+          },
+          "finite_impulse_sum": {
+            "real": 36.73277277823723,
+            "imag": 0.0,
+            "magnitude": 36.73277277823723,
+            "phase_rad": 0.0
+          },
+          "absolute_complex_difference": 2.842170943040401e-14
+        },
+        {
+          "frequency_hz": 5000,
+          "response": {
+            "real": -0.14560718574279874,
+            "imag": -0.15675044184822212,
+            "magnitude": 0.2139442767627841,
+            "phase_rad": -2.319356606651156
+          },
+          "finite_impulse_sum": {
+            "real": -0.1456071857427966,
+            "imag": -0.156750441848224,
+            "magnitude": 0.21394427676278402,
+            "phase_rad": -2.3193566066511426
+          },
+          "absolute_complex_difference": 2.8512691001109312e-15
+        },
+        {
+          "frequency_hz": 22050.0,
+          "response": {
+            "real": 0.026038427897105126,
+            "imag": -3.1236914185413486e-18,
+            "magnitude": 0.026038427897105126,
+            "phase_rad": -1.199646703282202e-16
+          },
+          "finite_impulse_sum": {
+            "real": 0.026038427897105185,
+            "imag": 1.654414013817403e-15,
+            "magnitude": 0.026038427897105185,
+            "phase_rad": 6.353740019770287e-14
+          },
+          "absolute_complex_difference": 1.658586734313551e-15
+        }
+      ]
+    },
+    {
+      "pole_frequency_hz": 530,
+      "pole_radius": 0.97,
+      "numerator_gain": 0.08,
+      "omega0_rad_per_sample": 0.07551220437199957,
+      "recurrence_a1": 1.9344715974857256,
+      "recurrence_a2": -0.9409,
+      "denominator_a1": -1.9344715974857256,
+      "denominator_a2": 0.9409,
+      "unclipped_peak_cosine": 0.997612903486036,
+      "isolated_peak_frequency_hz": 485.0596375940993,
+      "gain_at_pole_frequency": 17.59032495379589,
+      "gain_at_dc": 12.444771437749743,
+      "gain_at_isolated_peak": 17.943128500036458,
+      "impulse_first_6": [
+        0.08,
+        0.15475772779885805,
+        0.224102428918318,
+        0.28790823758410433,
+        0.34609233291937674,
+        0.39861292739722454
+      ],
+      "probes": [
+        {
+          "frequency_hz": 0,
+          "response": {
+            "real": 12.444771437749743,
+            "imag": -0.0,
+            "magnitude": 12.444771437749743,
+            "phase_rad": -0.0
+          },
+          "finite_impulse_sum": {
+            "real": 12.444771437749703,
+            "imag": 0.0,
+            "magnitude": 12.444771437749703,
+            "phase_rad": 0.0
+          },
+          "absolute_complex_difference": 4.085620730620576e-14
+        },
+        {
+          "frequency_hz": 530,
+          "response": {
+            "real": 4.76208852208821,
+            "imag": -16.933459330211594,
+            "magnitude": 17.59032495379589,
+            "phase_rad": -1.2966533335915813
+          },
+          "finite_impulse_sum": {
+            "real": 4.762088522088252,
+            "imag": -16.933459330211566,
+            "magnitude": 17.590324953795875,
+            "phase_rad": -1.2966533335915786
+          },
+          "absolute_complex_difference": 5.050135945278633e-14
+        },
+        {
+          "frequency_hz": 485.0596375940993,
+          "response": {
+            "real": 8.341954455954772,
+            "imag": -15.886083728332697,
+            "magnitude": 17.943128500036458,
+            "phase_rad": -1.0872624539915734
+          },
+          "finite_impulse_sum": {
+            "real": 8.341954455954596,
+            "imag": -15.8860837283329,
+            "magnitude": 17.943128500036558,
+            "phase_rad": -1.0872624539915874
+          },
+          "absolute_complex_difference": 2.695500784909477e-13
+        },
+        {
+          "frequency_hz": 5000,
+          "response": {
+            "real": -0.11989692381461242,
+            "imag": -0.12226114974194215,
+            "magnitude": 0.17123977656032074,
+            "phase_rad": -2.346431649010736
+          },
+          "finite_impulse_sum": {
+            "real": -0.1198969238146119,
+            "imag": -0.12226114974194427,
+            "magnitude": 0.17123977656032188,
+            "phase_rad": -2.3464316490107255
+          },
+          "absolute_complex_difference": 2.1878102501783827e-15
+        },
+        {
+          "frequency_hz": 22050.0,
+          "response": {
+            "real": 0.02064318168918372,
+            "imag": -2.489507332853722e-18,
+            "magnitude": 0.02064318168918372,
+            "phase_rad": -1.2059707511842196e-16
+          },
+          "finite_impulse_sum": {
+            "real": 0.020643181689183727,
+            "imag": 7.17856871281283e-16,
+            "magnitude": 0.020643181689183727,
+            "phase_rad": 3.4774526625293126e-14
+          },
+          "absolute_complex_difference": 7.2037979804483065e-16
+        }
+      ]
+    },
+    {
+      "pole_frequency_hz": 1200,
+      "pole_radius": 0.98,
+      "numerator_gain": 0.03,
+      "omega0_rad_per_sample": 0.17097102876679146,
+      "recurrence_a1": 1.9314232418562753,
+      "recurrence_a2": -0.9603999999999999,
+      "denominator_a1": -1.9314232418562753,
+      "denominator_a2": 0.9603999999999999,
+      "unclipped_peak_cosine": 0.9856211274820497,
+      "isolated_peak_frequency_hz": 1191.6752008147962,
+      "gain_at_pole_frequency": 4.445078912304918,
+      "gain_at_dc": 1.035312502910096,
+      "gain_at_isolated_peak": 4.4526793995619665,
+      "impulse_first_6": [
+        0.03,
+        0.05794269725568826,
+        0.08309987217547812,
+        0.10485285807064107,
+        0.12270612981536431,
+        0.13629678615258425
+      ],
+      "probes": [
+        {
+          "frequency_hz": 0,
+          "response": {
+            "real": 1.035312502910096,
+            "imag": -0.0,
+            "magnitude": 1.035312502910096,
+            "phase_rad": -0.0
+          },
+          "finite_impulse_sum": {
+            "real": 1.0353125029101016,
+            "imag": 0.0,
+            "magnitude": 1.0353125029101016,
+            "phase_rad": 0.0
+          },
+          "absolute_complex_difference": 5.551115123125783e-15
+        },
+        {
+          "frequency_hz": 1200,
+          "response": {
+            "real": 1.0108151902832774,
+            "imag": -4.328623243909137,
+            "magnitude": 4.445078912304918,
+            "phase_rad": -1.3413884479538671
+          },
+          "finite_impulse_sum": {
+            "real": 1.0108151902833362,
+            "imag": -4.328623243909122,
+            "magnitude": 4.4450789123049175,
+            "phase_rad": -1.3413884479538534
+          },
+          "absolute_complex_difference": 6.074817378679353e-14
+        },
+        {
+          "frequency_hz": 1191.6752008147962,
+          "response": {
+            "real": 1.2607573414146664,
+            "imag": -4.270461890867607,
+            "magnitude": 4.4526793995619665,
+            "phase_rad": -1.283723799547745
+          },
+          "finite_impulse_sum": {
+            "real": 1.2607573414146074,
+            "imag": -4.2704618908676295,
+            "magnitude": 4.452679399561971,
+            "phase_rad": -1.2837237995477593
+          },
+          "absolute_complex_difference": 6.309974804923354e-14
+        },
+        {
+          "frequency_hz": 5000,
+          "response": {
+            "real": -0.04801272386004326,
+            "imag": -0.0465676735519498,
+            "magnitude": 0.06688624576474399,
+            "phase_rad": -2.371471840702618
+          },
+          "finite_impulse_sum": {
+            "real": -0.04801272386004303,
+            "imag": -0.04656767355195019,
+            "magnitude": 0.06688624576474408,
+            "phase_rad": -2.371471840702611
+          },
+          "absolute_complex_difference": 4.510281037539698e-16
+        },
+        {
+          "frequency_hz": 22050.0,
+          "response": {
+            "real": 0.007708469304914002,
+            "imag": -9.344097016995067e-19,
+            "magnitude": 0.007708469304914002,
+            "phase_rad": -1.2121857981633764e-16
+          },
+          "finite_impulse_sum": {
+            "real": 0.007708469304914003,
+            "imag": 2.2401222140612616e-15,
+            "magnitude": 0.007708469304914003,
+            "phase_rad": 2.9060532324273853e-13
+          },
+          "absolute_complex_difference": 2.2410567916115438e-15
+        }
+      ]
+    },
+    {
+      "pole_frequency_hz": 2400,
+      "pole_radius": 0.92,
+      "numerator_gain": 0.02,
+      "omega0_rad_per_sample": 0.3419420575335829,
+      "recurrence_a1": 1.7334736360349816,
+      "recurrence_a2": -0.8464,
+      "denominator_a1": -1.7334736360349816,
+      "denominator_a2": 0.8464,
+      "unclipped_peak_cosine": 0.9453821247563179,
+      "isolated_peak_frequency_hz": 2330.439875698328,
+      "gain_at_pole_frequency": 0.38567995271799654,
+      "gain_at_dc": 0.17710656128267324,
+      "gain_at_isolated_peak": 0.38831374196517526,
+      "impulse_first_6": [
+        0.02,
+        0.03466947272069963,
+        0.04317061693656679,
+        0.04549088460010362,
+        0.04231763895907924,
+        0.03485302674928297
+      ],
+      "probes": [
+        {
+          "frequency_hz": 0,
+          "response": {
+            "real": 0.17710656128267324,
+            "imag": -0.0,
+            "magnitude": 0.17710656128267324,
+            "phase_rad": -0.0
+          },
+          "finite_impulse_sum": {
+            "real": 0.1771065612826731,
+            "imag": 0.0,
+            "magnitude": 0.1771065612826731,
+            "phase_rad": 0.0
+          },
+          "absolute_complex_difference": 1.3877787807814457e-16
+        },
+        {
+          "frequency_hz": 2400,
+          "response": {
+            "real": 0.17069570076525103,
+            "imag": -0.3458496836326671,
+            "magnitude": 0.38567995271799654,
+            "phase_rad": -1.1123183234096194
+          },
+          "finite_impulse_sum": {
+            "real": 0.1706957007652518,
+            "imag": -0.34584968363266616,
+            "magnitude": 0.38567995271799604,
+            "phase_rad": -1.1123183234096166
+          },
+          "absolute_complex_difference": 1.2225062931717345e-15
+        },
+        {
+          "frequency_hz": 2330.439875698328,
+          "response": {
+            "real": 0.20914645641979385,
+            "imag": -0.3271778139881126,
+            "magnitude": 0.38831374196517526,
+            "phase_rad": -1.0020196380463207
+          },
+          "finite_impulse_sum": {
+            "real": 0.2091464564197941,
+            "imag": -0.32717781398811224,
+            "magnitude": 0.38831374196517515,
+            "phase_rad": -1.0020196380463198
+          },
+          "absolute_complex_difference": 4.163336342344337e-16
+        },
+        {
+          "frequency_hz": 5000,
+          "response": {
+            "real": -0.03067849644849014,
+            "imag": -0.04805925254471301,
+            "magnitude": 0.057016330112490805,
+            "phase_rad": -2.138936212406943
+          },
+          "finite_impulse_sum": {
+            "real": -0.030678496448490127,
+            "imag": -0.04805925254471302,
+            "magnitude": 0.05701633011249081,
+            "phase_rad": -2.1389362124069424
+          },
+          "absolute_complex_difference": 1.962615573354719e-17
+        },
+        {
+          "frequency_hz": 22050.0,
+          "response": {
+            "real": 0.005586789376775802,
+            "imag": -6.548283869685492e-19,
+            "magnitude": 0.005586789376775802,
+            "phase_rad": -1.1721014393180112e-16
+          },
+          "finite_impulse_sum": {
+            "real": 0.0055867893767758,
+            "imag": 6.89661423844343e-17,
+            "magnitude": 0.0055867893767758,
+            "phase_rad": 1.2344503745053559e-14
+          },
+          "absolute_complex_difference": 6.9669580295946e-17
+        }
+      ]
+    }
+  ],
+  "frequency_rows": [
+    {
+      "frequency_hz": 0,
+      "mode_responses": [
+        {
+          "real": 29.26825897739633,
+          "imag": -0.0,
+          "magnitude": 29.26825897739633,
+          "phase_rad": -0.0
+        },
+        {
+          "real": 36.73277277823726,
+          "imag": -0.0,
+          "magnitude": 36.73277277823726,
+          "phase_rad": -0.0
+        },
+        {
+          "real": 12.444771437749743,
+          "imag": -0.0,
+          "magnitude": 12.444771437749743,
+          "phase_rad": -0.0
+        },
+        {
+          "real": 1.035312502910096,
+          "imag": -0.0,
+          "magnitude": 1.035312502910096,
+          "phase_rad": -0.0
+        },
+        {
+          "real": 0.17710656128267324,
+          "imag": -0.0,
+          "magnitude": 0.17710656128267324,
+          "phase_rad": -0.0
+        }
+      ],
+      "body": {
+        "real": 79.6582222575761,
+        "imag": -0.0,
+        "magnitude": 79.6582222575761,
+        "phase_rad": -0.0
+      },
+      "pre_reverb_dry": {
+        "real": 36.396200015909244,
+        "imag": -0.0,
+        "magnitude": 36.396200015909244,
+        "phase_rad": -0.0
+      },
+      "wrong_sum_of_mode_magnitudes": 79.6582222575761,
+      "wrong_dry_magnitude_sum": 36.396200015909244
+    },
+    {
+      "frequency_hz": 82.4069,
+      "mode_responses": [
+        {
+          "real": 25.889735225337233,
+          "imag": -11.028043441983646,
+          "magnitude": 28.14064910758716,
+          "phase_rad": -0.4026851893442606
+        },
+        {
+          "real": 34.421768176358405,
+          "imag": -11.780379344681966,
+          "magnitude": 36.38180124583677,
+          "phase_rad": -0.3297417302206144
+        },
+        {
+          "real": 12.572057655659403,
+          "imag": -1.2366422240862833,
+          "magnitude": 12.632731996192165,
+          "phase_rad": -0.09804893179356279
+        },
+        {
+          "real": 1.0400177407961761,
+          "imag": -0.004553018253153802,
+          "magnitude": 1.0400277069126551,
+          "phase_rad": -0.0043777995202635995
+        },
+        {
+          "real": 0.17728212409925262,
+          "imag": -0.0007525920497435595,
+          "magnitude": 0.1772837215311551,
+          "phase_rad": -0.004245140522129814
+        }
+      ],
+      "body": {
+        "real": 74.10086092225048,
+        "imag": -24.050370621054793,
+        "magnitude": 77.90608395002795,
+        "phase_rad": -0.31383626587698965
+      },
+      "pre_reverb_dry": {
+        "real": 33.89538741501271,
+        "imag": -10.822666779474657,
+        "magnitude": 35.58127884482718,
+        "phase_rad": -0.3090643455574447
+      },
+      "wrong_sum_of_mode_magnitudes": 78.3724937780599,
+      "wrong_dry_magnitude_sum": 35.817622200126955
+    },
+    {
+      "frequency_hz": 110,
+      "mode_responses": [
+        {
+          "real": 23.518742522949967,
+          "imag": -13.87478037230302,
+          "magnitude": 27.306423790757737,
+          "phase_rad": -0.5329938098538746
+        },
+        {
+          "real": 32.571921170527574,
+          "imag": -15.465361496403196,
+          "magnitude": 36.05700285594315,
+          "phase_rad": -0.44329048621143596
+        },
+        {
+          "real": 12.66906136545642,
+          "imag": -1.6930929466161961,
+          "magnitude": 12.781693143225665,
+          "phase_rad": -0.13285279810159797
+        },
+        {
+          "real": 1.0437248169325992,
+          "imag": -0.006179841236611736,
+          "magnitude": 1.0437431120341334,
+          "phase_rad": -0.0059208796427965395
+        },
+        {
+          "real": 0.17741957085182378,
+          "imag": -0.0010083942765823995,
+          "magnitude": 0.1774224365187852,
+          "phase_rad": -0.005683608710848581
+        }
+      ],
+      "body": {
+        "real": 69.98086944671839,
+        "imag": -31.040423050835606,
+        "magnitude": 76.55605757674235,
+        "phase_rad": -0.41748205105442254
+      },
+      "pre_reverb_dry": {
+        "real": 32.04139125102327,
+        "imag": -13.968190372876023,
+        "magnitude": 34.95369931200497,
+        "phase_rad": -0.4111020527821169
+      },
+      "wrong_sum_of_mode_magnitudes": 77.36628533847947,
+      "wrong_dry_magnitude_sum": 35.36482840231576
+    },
+    {
+      "frequency_hz": 164.8138,
+      "mode_responses": [
+        {
+          "real": 17.881655163627943,
+          "imag": -17.682507018325527,
+          "magnitude": 25.148054514097772,
+          "phase_rad": -0.7797985358062198
+        },
+        {
+          "real": 27.27169513901262,
+          "imag": -21.825347367727176,
+          "magnitude": 34.92980308385949,
+          "phase_rad": -0.674919589752159
+        },
+        {
+          "real": 12.929174835198328,
+          "imag": -2.725610143816687,
+          "magnitude": 13.213346002250987,
+          "phase_rad": -0.20776865499771185
+        },
+        {
+          "real": 1.0543815072159566,
+          "imag": -0.009704862631414596,
+          "magnitude": 1.0544261695906862,
+          "phase_rad": -0.00920405803338371
+        },
+        {
+          "real": 0.17781047035036107,
+          "imag": -0.001527141688880615,
+          "magnitude": 0.17781702822832957,
+          "phase_rad": -0.008588381427780036
+        }
+      ],
+      "body": {
+        "real": 59.31471711540521,
+        "imag": -42.244696534189686,
+        "magnitude": 72.82067049778051,
+        "phase_rad": -0.6188754871295555
+      },
+      "pre_reverb_dry": {
+        "real": 27.241622701932346,
+        "imag": -19.01011344038536,
+        "magnitude": 33.21882629550231,
+        "phase_rad": -0.6092703713316987
+      },
+      "wrong_sum_of_mode_magnitudes": 74.52344679802727,
+      "wrong_dry_magnitude_sum": 34.08555105911227
+    },
+    {
+      "frequency_hz": 240,
+      "mode_responses": [
+        {
+          "real": 10.097969060309335,
+          "imag": -19.074991123981295,
+          "magnitude": 21.58296238987896,
+          "phase_rad": -1.0839198480634031
+        },
+        {
+          "real": 17.34685396723563,
+          "imag": -26.938294895564972,
+          "magnitude": 32.040366328133956,
+          "phase_rad": -0.9986875476222503
+        },
+        {
+          "real": 13.354893627885266,
+          "imag": -4.5804995283159,
+          "magnitude": 14.118574989744278,
+          "phase_rad": -0.33040983834371124
+        },
+        {
+          "real": 1.0765583631148565,
+          "imag": -0.015516892030366703,
+          "magnitude": 1.0766701830787464,
+          "phase_rad": -0.014412425900655404
+        },
+        {
+          "real": 0.17860445766348498,
+          "imag": -0.0022721931887012743,
+          "magnitude": 0.17861891041867425,
+          "phase_rad": -0.012721242500996516
+        }
+      ],
+      "body": {
+        "real": 42.054879476208576,
+        "imag": -50.61157463308123,
+        "magnitude": 65.80383252211365,
+        "phase_rad": -0.8774757070734867
+      },
+      "pre_reverb_dry": {
+        "real": 19.47469576429386,
+        "imag": -22.775208584886556,
+        "magnitude": 29.966212660209422,
+        "phase_rad": -0.863358658192119
+      },
+      "wrong_sum_of_mode_magnitudes": 68.99719280125461,
+      "wrong_dry_magnitude_sum": 31.598736760564577
+    },
+    {
+      "frequency_hz": 530,
+      "mode_responses": [
+        {
+          "real": -2.772774637130167,
+          "imag": -9.831933262726396,
+          "magnitude": 10.215438848674982,
+          "phase_rad": -1.845674630238029
+        },
+        {
+          "real": -5.402594509294429,
+          "imag": -14.344063760645927,
+          "magnitude": 15.327758890370571,
+          "phase_rad": -1.9310068583921691
+        },
+        {
+          "real": 4.76208852208821,
+          "imag": -16.933459330211594,
+          "magnitude": 17.59032495379589,
+          "phase_rad": -1.2966533335915813
+        },
+        {
+          "real": 1.2705639449103892,
+          "imag": -0.06551979760471398,
+          "magnitude": 1.2722521691804707,
+          "phase_rad": -0.05152185646927702
+        },
+        {
+          "real": 0.18460247422860981,
+          "imag": -0.005854291880345651,
+          "magnitude": 0.1846952793786155,
+          "phase_rad": -0.031702340451734236
+        }
+      ],
+      "body": {
+        "real": -1.958114205197387,
+        "imag": -41.18083044306898,
+        "magnitude": 41.22735750956387,
+        "phase_rad": -1.6183097078375301
+      },
+      "pre_reverb_dry": {
+        "real": -0.33115139233882407,
+        "imag": -18.53137369938104,
+        "magnitude": 18.53433226287797,
+        "phase_rad": -1.5886641954024026
+      },
+      "wrong_sum_of_mode_magnitudes": 44.59047014140053,
+      "wrong_dry_magnitude_sum": 20.61571156363024
+    },
+    {
+      "frequency_hz": 1200,
+      "mode_responses": [
+        {
+          "real": -1.9384530056347051,
+          "imag": -1.8303218086158033,
+          "magnitude": 2.6660228765239147,
+          "phase_rad": -2.3848779605631556
+        },
+        {
+          "real": -2.770594926272006,
+          "imag": -2.133690309922905,
+          "magnitude": 3.4969744900618145,
+          "phase_rad": -2.48533866337725
+        },
+        {
+          "real": -2.7394201542407313,
+          "imag": -1.881887540869372,
+          "magnitude": 3.323540807322769,
+          "phase_rad": -2.5396682472129677
+        },
+        {
+          "real": 1.0108151902832774,
+          "imag": -4.328623243909137,
+          "magnitude": 4.445078912304918,
+          "phase_rad": -1.3413884479538671
+        },
+        {
+          "real": 0.22078861621169715,
+          "imag": -0.027523352316123986,
+          "magnitude": 0.2224975235174396,
+          "phase_rad": -0.12401951298242364
+        }
+      ],
+      "body": {
+        "real": -6.2168642796524685,
+        "imag": -10.202046255633341,
+        "magnitude": 11.947014240960002,
+        "phase_rad": -2.1180801604536033
+      },
+      "pre_reverb_dry": {
+        "real": -2.247588925843611,
+        "imag": -4.590920815035004,
+        "magnitude": 5.111576069031595,
+        "phase_rad": -2.026067252156181
+      },
+      "wrong_sum_of_mode_magnitudes": 14.154114609730856,
+      "wrong_dry_magnitude_sum": 6.919351574378885
+    },
+    {
+      "frequency_hz": 2400,
+      "mode_responses": [
+        {
+          "real": -0.5726138915331446,
+          "imag": -0.4240339945752791,
+          "magnitude": 0.712524734540633,
+          "phase_rad": -2.50418419801516
+        },
+        {
+          "real": -0.7492685689399493,
+          "imag": -0.4904638621410934,
+          "magnitude": 0.895521182590159,
+          "phase_rad": -2.5619973442522213
+        },
+        {
+          "real": -0.6416105210748306,
+          "imag": -0.37323501627530403,
+          "magnitude": 0.742272482399787,
+          "phase_rad": -2.614725873971158
+        },
+        {
+          "real": -0.30809262013843025,
+          "imag": -0.16742222188636308,
+          "magnitude": 0.35064406877220905,
+          "phase_rad": -2.643818981264614
+        },
+        {
+          "real": 0.17069570076525103,
+          "imag": -0.3458496836326671,
+          "magnitude": 0.38567995271799654,
+          "phase_rad": -1.1123183234096194
+        }
+      ],
+      "body": {
+        "real": -2.1008899009211035,
+        "imag": -1.8010047785107068,
+        "magnitude": 2.767192907625105,
+        "phase_rad": -2.4328999802816655
+      },
+      "pre_reverb_dry": {
+        "real": -0.39540045541449653,
+        "imag": -0.8104521503298181,
+        "magnitude": 0.9017617246901852,
+        "phase_rad": -2.0246980790405904
+      },
+      "wrong_sum_of_mode_magnitudes": 3.086642421020785,
+      "wrong_dry_magnitude_sum": 1.9389890894593533
+    },
+    {
+      "frequency_hz": 5000,
+      "mode_responses": [
+        {
+          "real": -0.11370055642798804,
+          "imag": -0.1294457179070989,
+          "magnitude": 0.17229048266378014,
+          "phase_rad": -2.2915288541993157
+        },
+        {
+          "real": -0.14560718574279874,
+          "imag": -0.15675044184822212,
+          "magnitude": 0.2139442767627841,
+          "phase_rad": -2.319356606651156
+        },
+        {
+          "real": -0.11989692381461242,
+          "imag": -0.12226114974194215,
+          "magnitude": 0.17123977656032074,
+          "phase_rad": -2.346431649010736
+        },
+        {
+          "real": -0.04801272386004326,
+          "imag": -0.0465676735519498,
+          "magnitude": 0.06688624576474399,
+          "phase_rad": -2.371471840702618
+        },
+        {
+          "real": -0.03067849644849014,
+          "imag": -0.04805925254471301,
+          "magnitude": 0.057016330112490805,
+          "phase_rad": -2.138936212406943
+        }
+      ],
+      "body": {
+        "real": -0.45789588629393263,
+        "imag": -0.503084235593926,
+        "magnitude": 0.6802664116271147,
+        "phase_rad": -2.3092059148186665
+      },
+      "pre_reverb_dry": {
+        "real": 0.3439468511677304,
+        "imag": -0.22638790601726672,
+        "magnitude": 0.4117656134490587,
+        "phase_rad": -0.5821223749127987
+      },
+      "wrong_sum_of_mode_magnitudes": 0.6813771118641198,
+      "wrong_dry_magnitude_sum": 0.8566197003388539
+    },
+    {
+      "frequency_hz": 22050.0,
+      "mode_responses": [
+        {
+          "real": 0.02104008137239938,
+          "imag": -2.510594395911131e-18,
+          "magnitude": 0.02104008137239938,
+          "phase_rad": -1.1932436721487955e-16
+        },
+        {
+          "real": 0.026038427897105126,
+          "imag": -3.1236914185413486e-18,
+          "magnitude": 0.026038427897105126,
+          "phase_rad": -1.199646703282202e-16
+        },
+        {
+          "real": 0.02064318168918372,
+          "imag": -2.489507332853722e-18,
+          "magnitude": 0.02064318168918372,
+          "phase_rad": -1.2059707511842196e-16
+        },
+        {
+          "real": 0.007708469304914002,
+          "imag": -9.344097016995067e-19,
+          "magnitude": 0.007708469304914002,
+          "phase_rad": -1.2121857981633764e-16
+        },
+        {
+          "real": 0.005586789376775802,
+          "imag": -6.548283869685492e-19,
+          "magnitude": 0.005586789376775802,
+          "phase_rad": -1.1721014393180112e-16
+        }
+      ],
+      "body": {
+        "real": 0.08101694964037803,
+        "imag": -9.713031235974258e-18,
+        "magnitude": 0.08101694964037803,
+        "phase_rad": -1.198888785505864e-16
+      },
+      "pre_reverb_dry": {
+        "real": 0.5864576273381702,
+        "imag": -4.370864056188416e-18,
+        "magnitude": 0.5864576273381702,
+        "phase_rad": -7.452992087471029e-18
+      },
+      "wrong_sum_of_mode_magnitudes": 0.08101694964037803,
+      "wrong_dry_magnitude_sum": 0.5864576273381702
+    }
+  ],
+  "derived_isolated_peak_cosine": "cos(omega0)*(1+r^2)/(2*r), clipped to[-1,1] on0..Nyquist",
+  "mix": "0.55+0.45*sum(H_i), before reverb and output nonlinearity",
+  "new_render": null,
+  "physical_body_measurement": null
+}

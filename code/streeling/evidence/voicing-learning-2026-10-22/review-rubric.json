@@ -1,0 +1,84 @@
+{
+  "status": "Draft scoring guide; unexecuted. Withhold from the learner until responses are collected.",
+  "score_each_criterion": "0: absent or incorrect;1: correct with required scope distinctions. Three criteria per task. Preserve actual responses and reasons.",
+  "approval_policy": "No automatic course approval. Source calculations and hypothetical tasks cannot substitute for musician, subject, fluent-language or learner evidence.",
+  "tasks": [
+    {
+      "module_code": "gaa-004",
+      "english_source": "streeling/courses/guitar-alchemist-academy/en/gaa-004-choose-a-useful-voicing.md",
+      "english_source_sha256_before_chronology_note": "5712d965d4b20a6699eb004cb105c4cc85ee008546995f2f64c86ce3cbd62699",
+      "criteria": [
+        "Open C mutes string 6; strings 3 and 1 are open; sounding notes C, E, G, C, E. Preserve low-to-high fixture order and check service-array order separately.",
+        "Ascending DifficultyScore ranks returned candidates only. Hypothetical scores are not fixture or captured query results.",
+        "Choosing a voicing still needs clean intended notes, an actual fingering, comfort and musical context; no playing outcome has been observed."
+      ],
+      "english_source_sha256": "d9a937a6af8e4f2ea684cf1735c584bea6aca49a62bbef5cd4b866522fa94d14"
+    },
+    {
+      "module_code": "gtr-003",
+      "english_source": "streeling/courses/guitar-studies/en/gtr-003-audit-voicing-playability.md",
+      "english_source_sha256_before_chronology_note": "f78e39c9233bc0791f95b315ac525f9ee1bba504202c6786ed7158f707e2d919",
+      "criteria": [
+        "A-form span 5 - 3 = 2 and E-form span 10 - 8 = 2; equal fret counts do not prove equal millimeters or effort.",
+        "For the exact teaching arrays: A-form BarreRequired=true, E-form=false; IsFullBarre=false for both. These predicates answer different questions.",
+        "The claim is conditional on the generator returning that array. Real fingering, hand comfort, fresh service output and musician review remain separate."
+      ],
+      "english_source_sha256": "b70485d9d047e2ef9151e6732762031fb56b442cadaf0129ea0bf4e24476276a"
+    },
+    {
+      "module_code": "gtr-004",
+      "english_source": "streeling/courses/guitar-studies/en/gtr-004-hear-and-audit-parallel-motion.md",
+      "english_source_sha256_before_chronology_note": "4776738ba9766354f49ffcc588d721053e20488ea49b61db5d13f2bbf979ec18",
+      "criteria": [
+        "A MIDI 52/59 and B 54/61 give interval classes 7/7; both notes move +2, so one source-predicted Fifths issue and IsClean=false.",
+        "A-to-C has opposite directions and final interval 3; clean report does not make C an interchangeable harmony or better music.",
+        "A-to-D shares only string 4 and yields no checked pair. The code misses cross-string voice continuity; ten-attempt playing target remains proposed."
+      ],
+      "english_source_sha256": "316bd71e22c162ada94a241fc671d43489d377d3fc538789570e574a92b680b2"
+    },
+    {
+      "module_code": "cog-002",
+      "english_source": "streeling/courses/cognitive-science/en/cog-002-feedback-integrity-fretboard-recall.md",
+      "english_source_sha256_before_chronology_note": "2a724aebc0e260ef4f9f5308bbaa65e5301d635853616ebd86450c8e1e2bafeb",
+      "criteria": [
+        "Default high-to-low indexing gives E, C, G, E, C, G. Five labels match; string 5 fret 3 is G, not the source marker C. This is a historical source finding.",
+        "showStringLabels hides tuning labels, not populated marker labels. A note-reveal task is not an existing tested feature.",
+        "Coordinate-only callback lacks pre-feedback note prediction, verified key and cue/feedback timing. A synthetic corrected answer is not observed learning."
+      ],
+      "english_source_sha256": "77c313631f27943312d9320a8888e26a5f8a5ce9ec267d415ff33320fbb5b5e4"
+    },
+    {
+      "module_code": "cog-003",
+      "english_source": "streeling/courses/cognitive-science/en/cog-003-calibrating-fretboard-confidence.md",
+      "english_source_sha256_before_chronology_note": "c3093167426837f4a62c46a334944290099d409017b115d81bc4bd1c406955ab",
+      "criteria": [
+        "Four correct out of 6; losses total 1.52 and mean 0.2533 rounded. The sixth wrong answer contributes 0.81. All rows are synthetic.",
+        "Wrong sixth key changes loss to 0.01 and mean to 0.12 without any new learner response. Expected loss at q=0.7 is 0.21 for p = 0.7 versus 0.25 for p = 0.9.",
+        "A real next-day held-out comparison must lower Brier without reducing accuracy under the guardrail. No real intervention or learner measurement exists."
+      ],
+      "english_source_sha256": "9610552ea1f8bf2727e820232fa1ad17f9914feb229b4f275173d5b861561e16"
+    },
+    {
+      "module_code": "wml-002",
+      "english_source": "streeling/courses/world-music-languages/en/wml-002-dadgad-layout-and-cultural-claims.md",
+      "english_source_sha256_before_chronology_note": "c98fc13fd18b62c1a1e4c94b66c12ff3a6ff5f7c6018872978020e9cc6c95537",
+      "criteria": [
+        "Low-to-high strings 6 to 1 are D, A, D, G, A, D; strings 6, 2, 1 drop 2 semitones from standard tuning.",
+        "Open collections are D, G, A versus D, F#, A for Open D; string 3 drops 1 semitone. These are tuning/harmonic statements, not cultural authenticity.",
+        "Lookup confidence 1.0 is assigned by source formatting. It does not validate uncited cultural prose or prove live chatbot routing."
+      ],
+      "english_source_sha256": "dc1fcb416e66e68d3aceeecf741d3849a3fffd92b5188cc622e9853357bc174d"
+    },
+    {
+      "module_code": "wml-003",
+      "english_source": "streeling/courses/world-music-languages/en/wml-003-term-preservation-and-cultural-review.md",
+      "english_source_sha256_before_chronology_note": "43d806420b46f065372826ddcf20d86834f9a81a24491e6db51bee4e34948d3e",
+      "criteria": [
+        "Seven terms times 6 historical source files = 42 pairs; 40 literal hits; missing fr:alzap\u00faa and fr:comp\u00e1s, with unaccented Alzapua and Compas in French.",
+        "Normal checker returns a record with exit 0; --require-exact returns exit 1. Accent folding would be a separate column, not a semantic approval.",
+        "Receipt is bound to historical Demerzel blobs; current Learn authoring is EN/FR/ES. Human meaning/cultural verdicts and deployed public readback require separate exact-source evidence."
+      ],
+      "english_source_sha256": "e7d5b48dcccb9937971eaabd2e0b9fc9aa6ef6555b0fe24d0532f69303af5279"
+    }
+  ]
+}

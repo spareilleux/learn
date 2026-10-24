@@ -3,7 +3,7 @@ title: Transposición, capotraste y equivalencia entre instrumentos — Tres cla
 description: Transposición, capotraste y equivalencia entre instrumentos — Música
 sidebar:
   label: MUS-019 · Transposición, capotraste y equivalencia entre instrumentos
-  order: 16
+  order: 19
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/es/mus-019-transposition-capo-cross-instrument.es.md
 ---
 

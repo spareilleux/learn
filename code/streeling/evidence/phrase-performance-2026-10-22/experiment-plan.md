@@ -1,0 +1,35 @@
+---
+execution: knowledge-work
+---
+
+# Phrase timing and guitar string occupancy
+
+## Deliverables and project decisions
+
+Write MCL004 on timing models without genre inference, GTR005 on sustaining notes on particular strings, and GAA005 on comparing explicit musical/technical repairs. Keep the full target525reviewed courses in the original21departments. Each new course has EN/FR/ES sources, five corrected exercises, a prepared source-assisted learner task and five criteria. Human, musician, fluent-language, learner, live audio and deployed-HTML outcomes stay separate and unperformed outcomes null.
+
+The project questions are whether a timing pattern establishes a style, whether individual pitch positions compose into a sustained phrase, and which proposed repair changes the requested music. Existing MUS024 already teaches attack/held-note identities and unit conversion; the new courses must teach different decisions rather than repeat that material.
+
+## Primary evidence and execution boundary
+
+Inspect anonymously byte-matched GA source at dc2e74cbd992a298f67efb928b5b3754615e1924: Common/GA.Business.DSL/Types/MidiTypes.fs, Common/GA.Business.DSL/Parsers/MidiParser.fs, Common/GA.Domain.Services/Fretboard/Analysis/FretboardPositionMapper.cs and Common/GA.Domain.Core/Instruments/Tuning.cs. Confirm the F#low-to-high string numbering versus the C#high-to-low convention. MapChord's unique-string check applies to one simultaneous shape, not a timed continuous phrase. Do not claim every GA path loses timing.
+
+Run only the unchanged public MidiTypes.fs helpers under an explicitly selected installed.NET10.0.113 F#Interactive SDK in a temporary standalone folder. Temporary verification code stays outside the deliverable. No full GA build, dependency install, source modification, GPU, audio playback or primary-repo execution. Capture exact source hash, command/environment/result hashes and actual native results; a failed attempt remains a failed attempt. Do not claim native C#mapper, MIDI parser, renderer or temporal-planner execution.
+
+Record the actual GA available-tunings and Standard-tuning MCP responses separately. Their returned values do not attest a deployed source revision, coordinate adapter or temporal solver.
+
+Read W3C MusicXML's swing element, the publisher's Friberg/Sundstrom2002 abstract and its author-hosted KTH ensemble-swing page. Use only the limited primary observation that timing ratios can depend on tempo and ensemble role. Copy no recording, diagram or prose, and claim no new performed style or listener finding. The MIDI Association landing page alone is not evidence that a full MIDI specification was read.
+
+## Before-analysis constructions and predictions
+
+1. Native calls: for Standard and DropD tunings, pitches60,64,67,62, maximum frets5and10, run findPositions, findBestPosition with default options except the stated cap, and positionToMidiNote round trips. Standard at cap5 should return F#positions C4[(4,5),(5,1)], E4[(5,5),(6,0)], G4[(6,3)], D4[(5,3)], with independently selected best strings5,6,6,5. F#string1is lowE; convert six-string indices to the conventional high-first labels with7-s. This explicitly authored adapter is not an implemented bridge. DropD should not change these upper-note candidates at those caps.
+2. Use conventional strings1..6(high to low). Four authored note events in absolute quarter-note beats: C=(60,0,4), E=(64,0,2), G=(67,1,2), D=(62,2,3), with half-open active intervals. At fretcap5, exhaustive assignment should give one globally valid plan: C string3fret5, E string2fret5, G string1fret3, D string2fret3. The initial C/E snapshot has three unique-string assignments but only one extends through G without moving a held event. Independently selected per-note best positions conflict; that observation is not execution of a GA temporal planner.
+3. Move D's onset to1.5 and keep all other values: over[1.5,2), four notes have only three eligible strings at cap5, so no valid assignment should exist in this model. This is an injective-occupancy constraint under an explicitly monophonic-per-string assumption, not a universal physical impossibility for guitars or a measure of hand comfort. With cap10, predict three valid complete assignments; cap9should remain infeasible. No note can silently change its string during a held event without a declared rearticulation/transfer model.
+4. Compare repairs of that early-D request: delay D to2(at120quarter-notes/min a250ms onset change), shorten E to1.5(a250ms earlier release), expand allowed range to10, or omit D. Predict valid-plan counts1,1,3,1respectively, but each preserves different requirements. DropD with cap5should remain infeasible. Rank expanded-range candidates only by declared positive-fret span; predict one span3and two span7. No proxy certifies technique, timbre, clean playing or user permission to change the phrase.
+5. Author eight score onsets[0,.5,1,1.5,2,2.5,3,3.5] and a phrase end4quarter-note beats, with corresponding performance-like seconds[0,.34,.52,.84,1.04,1.37,1.56,1.88] and end2.08. They are invented annotations, not extracted audio. Onbeat spacing.52seconds implies60000000/520000=115.384615...quarter-notes/min under the stated reference. A straight subdivision has offbeats at.26seconds within each pair; fixed2:1places them at.346666...; a fitted common fraction should be131/208, predicting.3275seconds within each pair. Predict mean absolute onset residuals33.75ms,9.583333...ms and3.75ms across all eight onsets. This is in-sample descriptive fitting, not a groove/genre/preference test.
+6. Characterize the inspected parser's integer-BPM expression for a520000microseconds/quarter value: integer division gives115. If a later hypothetical consumer reconstructed four quarter beats from that rounded BPM, duration would be240/115seconds rather than2.08, about6.956522ms longer. This is source-assisted arithmetic, not an observed parser/import/playback drift.
+7. Apply one strictly increasing piecewise-linear score-to-seconds map to every event boundary, using the authored onset/end anchors. It should preserve interval-overlap and assignment feasibility. Moving or quantizing only D's onset can change overlap and musical intent; it is not merely changing time units. No MIDI pairing, import/export or notation/render round trip is claimed.
+
+## Verification and publication
+
+Independently audit native/source bindings, exact note candidates, conventions, exhaustive assignments/overlap witnesses, repair differences and timing arithmetic. Review all9pages/45corrected exercise pairs and15criteria, including final translations. Normalize owned text to UTF8noBOM/LF before binding. Synchronize Learn, run its18existing generator tests, build, check changed articles and source references, verify generation idempotence, preserve source metadata and journals, stage explicit owned paths, publish to existing DraftPR201 without rewriting its title/body, and anonymously read back exact immutable bytes. Any new runnable teaching program would require its own normal code workflow; this deliverable is course text and fixed evidence only.

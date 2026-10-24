@@ -1,0 +1,84 @@
+---
+module_id: net-007-separate-dag-readiness-from-admission
+department: network-science
+course: "Separate DAG Readiness from Worker Admission"
+level: intermediate
+prerequisites: ["net-005-fanout-results-and-dependency-joins"]
+estimated_duration: "35 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Separate DAG Readiness from Worker Admission
+
+> **Draft scope.** Five pinned public IX files, three actual topology-tool responses, three bounded execution-tool responses and authored schedules. Human technical review, fluent-language review, learner attempts and deployed course HTML verification remain pending. No production scheduler, worker limit, retry mechanism or editor change was implemented; actual worker concurrency was not measured.
+
+## The project question
+
+An IX pipeline editor shows eight independent nodes. May an agent launch eight workers because all nodes are ready? A dependency graph answers which inputs precede a computation. Runtime admission additionally needs capacity and applicable policy. [NET-005](net-005-fanout-results-and-dependency-joins.md) examined joins and retained branch results; here we examine the gap between graph structure and execution resources.
+
+The public [IX DAG implementation](https://github.com/GuitarAlchemist/ix/blob/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/dag.rs) rejects cycles and computes topological orders and levels. All source observations in this lesson use commit `456df065ee837e33b5bbe22a4df0616a4fcb76e5`. Actual tool responses have an unknown service revision and remain separate evidence.
+
+## 1. A level describes dependency readiness
+
+The [actual topology probes](../../../../code/streeling/evidence/retry-admission-2026-10-22/topology-tool-probes.json) include a diamond with edges a to b, a to c, b to d and c to d. Its level sets are a, then b and c, then d. The tool reports four nodes, four edges and maximum parallelism 2. Here that field describes the largest returned level, not a measurement of running workers.
+
+A second input has eight nodes and no edges. It reports one level containing all eight and maximum parallelism 8. A cyclic two-node input returns an error. Cycle rejection protects the graph's acyclic structure; it does not choose how many ready nodes should execute simultaneously.
+
+### Practice exercise 1: interpret the reported width
+
+Give the diamond's level sets and reported width. If the machine has only one available worker slot, do the dependencies become cyclic or invalid?
+
+> **Answer:** The levels are a, then b and c, then d; the reported width is 2. One worker slot does not make the graph cyclic. It changes the possible execution schedule: b and c can run sequentially while preserving every dependency.
+
+## 2. Add a resource constraint explicitly
+
+The [authored scheduling model](../../../../code/streeling/evidence/retry-admission-2026-10-22/admission-model.json) assumes eight independent jobs, each lasting one tick, two workers, no overhead and no preemption. Four waves of two jobs finish in 4 ticks, with at most 2 active jobs. Readiness remains 8 initially even though only 2 can be admitted.
+
+For the diamond, assume durations a=1, b=4, c=2 and d=1 ticks. Two workers can run a from 0 to 1, b from 1 to 5, c from 1 to 3 and d from 5 to 6. The a-b-d path takes 6 ticks; one worker requires 8 ticks for all four jobs. These are constructed schedules under declared costs, not measured IX timings. Topology alone did not supply those costs.
+
+### Practice exercise 2: calculate a capacity-aware schedule
+
+How many waves do the eight unit jobs need with two slots? For the weighted diamond, give the two-worker completion time and the one-worker total. Does a topology width of 2 imply a speedup of 2?
+
+> **Answer:** The eight jobs need four waves and 4 ticks. The diamond finishes in 6 ticks with the given two-worker schedule, versus 8 with one worker. The speedup is `8/6`, not 2: the dependency path and unequal durations constrain the gain.
+
+## 3. Read control flow rather than trusting a parallelism label
+
+The pinned [ix-agent runner](https://github.com/GuitarAlchemist/ix/blob/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-agent/src/tools.rs#L408-L450) loops through topological order and calls one tool per iteration. A different [ix-pipeline executor](https://github.com/GuitarAlchemist/ix/blob/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/executor.rs#L115-L243) advertises parallel threads in comments, but its inspected multi-node branch directly calls compute inside an iterator map followed by collection. It does not spawn threads there. The [Rust iterator reference](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.map) describes map as an iterator transformation; this synchronous map-and-collect expression does not itself provide parallel scheduling.
+
+The initial source-mapping description followed the comments too readily. The [production record](../../../../code/streeling/evidence/retry-admission-2026-10-22/production-plan.md) retains that correction. Neither path's source description proves measured concurrency in the deployed service. Equally, a missing worker-limit field does not prove that this code launches unbounded threads.
+
+### Practice exercise 3: challenge the inference
+
+A dashboard says “parallel level” and a source comment says “std threads.” A reviewer concludes that eight threads were launched. What additional source observation contradicts that inference, and what runtime evidence would settle actual concurrency?
+
+> **Answer:** The inspected branch calls compute synchronously in map-and-collect and contains no thread spawn there. The labels do not prove eight running threads. An instrumented run with attempt start/end observations and execution-context identities could measure overlap; no such concurrency measurement was performed for this lesson.
+
+## 4. Keep partial orders distinct from a chosen total order
+
+The [actual execution probes](../../../../code/streeling/evidence/retry-admission-2026-10-22/execution-tool-probes.json) submit the same small three-step statistics pipeline twice. Both preserve first before second and third. The first reports first, second, third; the repeat reports first, third, second. Numeric results are equal. Both orders satisfy the declared dependencies.
+
+The pinned DAG source explicitly stabilizes its order by insertion position. The different actual sibling orders therefore cannot be used as an execution attestation of that exact source. Retain both observations and the unknown service revision. Do not silently sort the raw receipts or describe this pair as proof of deterministic ordering.
+
+### Practice exercise 4: identify the preserved invariant
+
+The two observed orders differ only in second and third. Which dependency invariant survives? Can either the equal numeric results or the two orders prove that the server runs the pinned deterministic-order revision?
+
+> **Answer:** First precedes both dependent steps in each order. Equal numeric results do not establish implementation identity, and the changed order does not attest the pinned deterministic-order source. The actual server revision remains unknown.
+
+## 5. Give an editor states it can justify
+
+A proposed editor vocabulary distinguishes dependency-ready, admitted, running and completed. These are task-specific design candidates, not installed IX states. A ready node awaits a capacity decision; an admitted node has a slot; running needs an observed attempt start; completion needs a terminal observation. Failure, blocked dependencies and missing observations need their own meanings rather than being displayed as one generic idle state.
+
+In the deliberate failing probe, a missing tool produces an error without a final per-step aggregate. The response does not enumerate which upstream work ran or give downstream skip states. Preserve that limitation rather than manufacturing a complete editor timeline. [CYB-006](../../cybernetics/en/cyb-006-bound-retry-feedback-and-workload.md) examines the extra load created when missing observations trigger retries.
+
+### Practice exercise 5: scope a proposed admission check
+
+Eight nodes have satisfied dependencies, but only two slots are available. Under the proposed vocabulary, may all eight be marked running? Name the observations needed to mark a particular node running and completed.
+
+> **Answer:** No. At most two are admitted under the stated capacity constraint, and admission still does not prove a start. Running requires an observed attempt start; completed requires its terminal result. The remaining ready nodes retain their dependency status while waiting for capacity. This is a proposed contract, not a report of installed editor behavior.
+
+## Source-assisted learner task
+
+Complete the [prepared task](../../../../code/streeling/evidence/retry-admission-2026-10-22/learner-task.md) before reading its rubric. Reconstruct levels, schedules and evidence boundaries, then propose the smallest useful admission display. Independent learner and human-review outcomes remain unrecorded.

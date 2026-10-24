@@ -1,0 +1,81 @@
+{
+  "scope": "Authored independent identical per-attempt failure model; eight presampled equally likely strings, later unused outcomes are only a counting device. At most three attempts. No measured queue, actual retry controller or latency benchmark.",
+  "failure_probability": "1/2",
+  "max_attempts": 3,
+  "outcomes": [
+    {
+      "pre_sampled": "SSS",
+      "probability": "1/8",
+      "attempts": 1,
+      "success": true,
+      "executed_prefix": "S"
+    },
+    {
+      "pre_sampled": "SSF",
+      "probability": "1/8",
+      "attempts": 1,
+      "success": true,
+      "executed_prefix": "S"
+    },
+    {
+      "pre_sampled": "SFS",
+      "probability": "1/8",
+      "attempts": 1,
+      "success": true,
+      "executed_prefix": "S"
+    },
+    {
+      "pre_sampled": "SFF",
+      "probability": "1/8",
+      "attempts": 1,
+      "success": true,
+      "executed_prefix": "S"
+    },
+    {
+      "pre_sampled": "FSS",
+      "probability": "1/8",
+      "attempts": 2,
+      "success": true,
+      "executed_prefix": "FS"
+    },
+    {
+      "pre_sampled": "FSF",
+      "probability": "1/8",
+      "attempts": 2,
+      "success": true,
+      "executed_prefix": "FS"
+    },
+    {
+      "pre_sampled": "FFS",
+      "probability": "1/8",
+      "attempts": 3,
+      "success": true,
+      "executed_prefix": "FFS"
+    },
+    {
+      "pre_sampled": "FFF",
+      "probability": "1/8",
+      "attempts": 3,
+      "success": false,
+      "executed_prefix": "FFF"
+    }
+  ],
+  "expected_attempts": "7/4",
+  "success_probability": "7/8",
+  "terminal_failure_probability": "1/8",
+  "fluid_example": {
+    "logical_arrivals_per_second": 6,
+    "capacity_attempts_per_second": 10,
+    "required_attempt_rate": "21/2",
+    "excess_attempt_rate": "1/2",
+    "logical_stability_boundary": "40/7",
+    "strict_below_boundary_required_for_spare_capacity": true,
+    "thirty_second_mean_demand_excess": "15",
+    "scope": "Mean-rate fluid workload demand under fixed assumptions; not a discrete stochastic queue sample or a claim of exactly15 queued jobs."
+  },
+  "persistent_failure_control": {
+    "failure_probability": 1,
+    "attempts_per_request": 3,
+    "success_probability": 0
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "scope": "Constructed Cmaj7 placements under explicit highest-registered-pitch melody contract; not returned GA voicings, GA DifficultyScore, solver output or a playing trial.",
+  "provenance": {
+    "analysis_kind": "Temporary Python standard-library calculation on explicitly constructed fixtures; not GA algorithm execution.",
+    "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "win32",
+    "plan_sha256": "60d1dbdb304e6b76f8d51b56389cb378aa5fd3f65182f975b1801a6e50573db5",
+    "checked_at_utc": "2026-10-22T16:23:57.880592+00:00"
+  },
+  "note_convention": "C4=60",
+  "string_order": [
+    "low-E",
+    "A",
+    "D",
+    "G",
+    "B",
+    "high-e"
+  ],
+  "open_string_pitches": [
+    40,
+    45,
+    50,
+    55,
+    59,
+    64
+  ],
+  "muted_fret": -1,
+  "open_fret": 0,
+  "melody_target": 64,
+  "changed_melody_target": 76,
+  "predecessor_position": 3,
+  "constructed_position_penalty": "absolute difference from predecessor position to minimum positive fret",
+  "candidates": [
+    {
+      "candidate": "A",
+      "frets": [
+        -1,
+        3,
+        2,
+        0,
+        0,
+        0
+      ],
+      "sounding": [
+        {
+          "string": "A",
+          "fret": 3,
+          "pitch": 48
+        },
+        {
+          "string": "D",
+          "fret": 2,
+          "pitch": 52
+        },
+        {
+          "string": "G",
+          "fret": 0,
+          "pitch": 55
+        },
+        {
+          "string": "B",
+          "fret": 0,
+          "pitch": 59
+        },
+        {
+          "string": "high-e",
+          "fret": 0,
+          "pitch": 64
+        }
+      ],
+      "pitches_low_to_high_string": [
+        48,
+        52,
+        55,
+        59,
+        64
+      ],
+      "highest_pitch": 64,
+      "last_sounding_string_pitch": 64,
+      "minimum_positive_fret": 2,
+      "constructed_position_penalty": 1,
+      "contains_pitch_class4": true,
+      "contains_registered64": true,
+      "highest_equals64": true,
+      "highest_pitch_class_equals4": true,
+      "highest_equals76": false
+    },
+    {
+      "candidate": "B",
+      "frets": [
+        -1,
+        3,
+        5,
+        4,
+        5,
+        3
+      ],
+      "sounding": [
+        {
+          "string": "A",
+          "fret": 3,
+          "pitch": 48
+        },
+        {
+          "string": "D",
+          "fret": 5,
+          "pitch": 55
+        },
+        {
+          "string": "G",
+          "fret": 4,
+          "pitch": 59
+        },
+        {
+          "string": "B",
+          "fret": 5,
+          "pitch": 64
+        },
+        {
+          "string": "high-e",
+          "fret": 3,
+          "pitch": 67
+        }
+      ],
+      "pitches_low_to_high_string": [
+        48,
+        55,
+        59,
+        64,
+        67
+      ],
+      "highest_pitch": 67,
+      "last_sounding_string_pitch": 67,
+      "minimum_positive_fret": 3,
+      "constructed_position_penalty": 0,
+      "contains_pitch_class4": true,
+      "contains_registered64": true,
+      "highest_equals64": false,
+      "highest_pitch_class_equals4": false,
+      "highest_equals76": false
+    },
+    {
+      "candidate": "C",
+      "frets": [
+        -1,
+        3,
+        2,
+        0,
+        0,
+        -1
+      ],
+      "sounding": [
+        {
+          "string": "A",
+          "fret": 3,
+          "pitch": 48
+        },
+        {
+          "string": "D",
+          "fret": 2,
+          "pitch": 52
+        },
+        {
+          "string": "G",
+          "fret": 0,
+          "pitch": 55
+        },
+        {
+          "string": "B",
+          "fret": 0,
+          "pitch": 59
+        }
+      ],
+      "pitches_low_to_high_string": [
+        48,
+        52,
+        55,
+        59
+      ],
+      "highest_pitch": 59,
+      "last_sounding_string_pitch": 59,
+      "minimum_positive_fret": 2,
+      "constructed_position_penalty": 1,
+      "contains_pitch_class4": true,
+      "contains_registered64": false,
+      "highest_equals64": false,
+      "highest_pitch_class_equals4": false,
+      "highest_equals76": false
+    },
+    {
+      "candidate": "D",
+      "frets": [
+        -1,
+        3,
+        5,
+        4,
+        8,
+        0
+      ],
+      "sounding": [
+        {
+          "string": "A",
+          "fret": 3,
+          "pitch": 48
+        },
+        {
+          "string": "D",
+          "fret": 5,
+          "pitch": 55
+        },
+        {
+          "string": "G",
+          "fret": 4,
+          "pitch": 59
+        },
+        {
+          "string": "B",
+          "fret": 8,
+          "pitch": 67
+        },
+        {
+          "string": "high-e",
+          "fret": 0,
+          "pitch": 64
+        }
+      ],
+      "pitches_low_to_high_string": [
+        48,
+        55,
+        59,
+        67,
+        64
+      ],
+      "highest_pitch": 67,
+      "last_sounding_string_pitch": 64,
+      "minimum_positive_fret": 3,
+      "constructed_position_penalty": 0,
+      "contains_pitch_class4": true,
+      "contains_registered64": true,
+      "highest_equals64": false,
+      "highest_pitch_class_equals4": false,
+      "highest_equals76": false
+    }
+  ],
+  "feasible_for64": [
+    "A"
+  ],
+  "feasible_for76": [],
+  "unconstrained_minimum_penalty_candidates": [
+    "B",
+    "D"
+  ]
+}

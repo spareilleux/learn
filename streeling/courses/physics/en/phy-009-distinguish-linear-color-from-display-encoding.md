@@ -1,0 +1,88 @@
+---
+module_id: phy-009-distinguish-linear-color-from-display-encoding
+department: physics
+course: "Distinguish Linear Color from Display Encoding"
+level: intermediate
+prerequisites: ["vc-005-craft-details-through-blender-to-godot"]
+estimated_duration: "35 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Distinguish Linear Color from Display Encoding
+
+> **Draft scope.** Pinned public GA rendering source, reference transfer-function calculations and an original digital control image. Human technical review, fluent-language review, learner attempts and deployed course HTML verification remain pending. No shader, [Blender](https://docs.blender.org/manual/en/4.5/render/color_management.html)/[Godot](https://docs.godotengine.org/en/4.6/tutorials/shaders/shader_reference/shading_language.html#using-source-color) import, GPU frame, calibrated display or human appearance trial was executed.
+
+## The project question
+
+A woven surface or sculpted wall changes appearance when an asset moves between hosts. Before changing its geometry or texture generator, determine which values represent encoded color, linear-light coordinates and data. The public [BRUTAL texture bake](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/textures/bake_blender.py) declares sRGB albedo separately from non-color packed maps. Its [Lego model](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Model.fs#L87-L94) declares box colors as linear RGB. These are different input contracts at public GA commit `76efbffd5af82b46c3146957a6bd4504008eeb89`.
+
+The [dated W3C Color 4 draft](https://www.w3.org/TR/2026/CRD-css-color-4-20261020/#color-conversion-code) supplies the piecewise sRGB reference used below. This work-in-progress document is a reference for our calculations, not certification of the project's rendering pipeline. The examples stay within nonnegative coordinates from 0 to 1.
+
+## 1. Declare the coordinate before interpreting its value
+
+For an encoded channel C, the reference gives `L=C/12.92` when `C<=0.04045`; otherwise `L=((C+0.055)/1.055)^2.4`. Thus encoded 0.5 corresponds to linear 0.21404114048223255. A linear value of 0.5 encodes to 0.7353569830524495. The number 0.5 alone cannot identify which of those values was intended.
+
+Linear-light RGB coordinates support the chosen color model's light-addition arithmetic. They are not measured luminance in cd/m², a material's physical reflectance spectrum or a participant's brightness judgment. A real photometric claim needs the relevant display or scene measurement.
+
+### Practice exercise 1: interpret the same number twice
+
+Compare encoded 0.5 with linear 0.5. Give the former's reference linear coordinate and the latter's encoded coordinate. Can either number alone establish a measured screen luminance?
+
+> **Answer:** Encoded 0.5 decodes to approximately 0.21404114048223255; linear 0.5 encodes to approximately 0.7353569830524495. Neither alone establishes measured screen luminance. The coordinate system and an actual physical measurement would be needed.
+
+## 2. Choose the domain in which to combine light
+
+The [fixed calculations](../../../../code/streeling/evidence/color-contract-2026-10-22/transfer-calculations.json) average black and white in two domains. Averaging their encoded endpoints gives encoded 0.5. Averaging the corresponding linear endpoints gives linear 0.5, which encodes to approximately 0.7353569830524495. With the declared round-to-nearest 8-bit quantization, these become bytes 128 and 188.
+
+Quantization matters: byte 128 decodes to approximately 0.21586050011389926, while byte 188 decodes to approximately 0.5028864580325687. They do not equal the unquantized reference values exactly. The image's upper panel illustrates these authored numeric choices; it is not a calibrated luminance comparison.
+
+![Authored midpoint swatches and identical-target context control](https://raw.githubusercontent.com/spareilleux/learn/50a9e9d5604dfe60c37f4a52d6bfa5e2ca376e63/code/streeling/evidence/color-contract-2026-10-22/color-context-controls.png)
+
+The shared figure uses English labels; the upper panel contrasts the two calculation domains, while the lower panel supports a separate contextual task.
+
+### Practice exercise 2: audit a midpoint
+
+A worker averages black and white directly in encoded coordinates and reports byte 128. Another combines them in linear coordinates and re-encodes, reporting 188. Which follows the declared linear-light mixture? Why should its decoded quantized result not be asserted to equal exactly 0.5?
+
+> **Answer:** Byte 188 follows the declared linear-light mixture. It comes from encoding linear 0.5 and rounding. Decoding the quantized byte gives approximately 0.5028864580325687 rather than exactly 0.5; finite quantization changes the represented value.
+
+## 3. Inspect the project's actual approximation
+
+The pinned [material shader](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs#L587-L655) applies a power of 2.2 to sampled albedo on concrete, facade and machine paths. For encoded 0.5, that power gives 0.217637640824031, differing from the reference by approximately 0.003596500341798453. It is an approximation, not the exact piecewise function.
+
+The inspected cladding path instead uses sampled RGB in a weighted tone expression without that same power expression. Do not generalize one conversion policy to every material. These are source observations; no new rendered comparison establishes the perceptual consequence or a preferred artistic result.
+
+### Practice exercise 3: bound a source claim
+
+Calculate 0.5 raised to the power 2.2 and compare it with the reference. Can a reviewer conclude that every BRUTAL material uses the same conversion or that the numerical difference is visibly objectionable?
+
+> **Answer:** The power gives approximately 0.217637640824031, about 0.003596500341798453 above the reference. The cladding expression differs, so a uniform-policy claim is unsupported. The numeric difference alone establishes no observer judgment of visibility or quality.
+
+## 4. Do not move exposure across a nonlinear curve
+
+The [composite shader](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs#L1186-L1228) names its clamped rational curve aces. The teaching calculation evaluates that isolated scalar curve, without claiming a complete ACES color-management transform. For input 0.25 and exposure 2, exposing before the curve gives approximately 0.6163069544364508. Doubling the already curved 0.25 value gives approximately 0.7482219061166429 instead.
+
+The real source also combines bloom, RGB grading, a vignette, output power 1/2.2 and grain. The isolated curve does not predict a complete captured pixel. Keep those omitted stages visible when comparing a simplified calculation with an application result.
+
+### Practice exercise 4: preserve operation order
+
+For the authored 0.25 input and exposure 2, compare exposure-before-curve with curve-before-doubling. Are they interchangeable? Does either scalar result reproduce the whole composite shader?
+
+> **Answer:** The results are approximately 0.6163069544364508 and 0.7482219061166429, so the operations are not interchangeable. Neither reproduces the whole composite: bloom, RGB grading, vignette, output encoding and grain are omitted from this scalar control.
+
+## 5. Verify conversions without inventing an import result
+
+The evidence checks all 256 byte values through decode, encode and the declared quantization; each returns its original byte. That finite round trip verifies those calculations, not a renderer's fidelity or a user's preference. An importer trial still needs a declared source space, data/color channel roles, conversion policy, output/view transform and observed target-host result.
+
+[VC-010](../../visual-computing/en/vc-010-preserve-packed-texture-channel-contracts.md) follows the packed map, where applying a color decode changes values that are supposed to be data. [COG-006](../../cognitive-science/en/cog-006-separate-pixel-tests-from-appearance-judgments.md) separates pixel checks from appearance questions.
+
+### Practice exercise 5: reject an overbroad verification claim
+
+All 256 reference round trips pass. A worker declares the Blender-to-Godot material transfer visually validated. What has actually passed, and which next evidence is missing?
+
+> **Answer:** The finite reference decode/encode/quantization check has passed. No Blender-to-Godot import, target rendering, calibrated display comparison or observer judgment was performed. A declared host configuration and an observed transfer result are still needed for that broader claim.
+
+## Source-assisted learner task
+
+Complete the [prepared task](../../../../code/streeling/evidence/color-contract-2026-10-22/learner-task.md) using the fixed reference and source. Keep mathematical conversion, shader inspection, actual host output and human review distinct.

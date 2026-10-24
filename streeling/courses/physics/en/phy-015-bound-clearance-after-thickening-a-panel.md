@@ -1,0 +1,81 @@
+---
+module_id: phy-015-bound-clearance-after-thickening-a-panel
+department: physics
+course: "Bound Clearance After Thickening a Panel"
+level: intermediate
+prerequisites: ["phy-005-sheet-thickness-and-scene-units", "phy-011-compute-bend-length-on-a-declared-neutral-layer"]
+estimated_duration: "40 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Bound Clearance After Thickening a Panel
+
+> Draft for human review. The fixed cases below are authored mathematics supported by source inspection. They are not new project measurements. Human technical, artisan, fluent-language and learner judgments remain pending. No scene host, physical sample, GPU, policy executor or learner session was run for this lesson.
+
+## Project question
+
+An IX panel is shown by a reference surface, then given finite thickness in a proposed scene. Does the old gap still clear the neighboring panel? A centre surface, an inner face and an outer face produce different occupied intervals. The task is to calculate an interval bound before asking a scene adapter to display clearance. It does not certify collision-free motion or manufacturability.
+
+[Prerequisite: phy-005-sheet-thickness-and-scene-units](../../physics/en/phy-005-sheet-thickness-and-scene-units.md); [Prerequisite: phy-011-compute-bend-length-on-a-declared-neutral-layer](../../physics/en/phy-011-compute-bend-length-on-a-declared-neutral-layer.md)
+
+## Read the boundary before calculating
+
+Read the linked prerequisite and project record before doing the arithmetic. Identify which statement comes from inspected source, which is an older recorded result, and which follows only from the premises below. A source comment, a prepared answer and an executed observation have different evidential roles. Preserve the original date and any failed or inconclusive gate when summarizing an older artifact. The direct baseline is a small handwritten calculation and a source-location table; an agent may help locate a definition, but its summary must be checked against that definition. Do not introduce a new language or automation merely to perform this finite comparison.
+
+Use two infinite parallel panel cross-sections measured along a common normal. Their reference surfaces are fixed; offsets expand occupied intervals without rotating them. Subtract the upper extent of the lower panel from the lower extent of the upper one. Positive clearance means separated intervals in this one-dimensional model. Negative clearance means overlap, and zero is contact under the ideal closed-interval convention. For bounded independent errors, subtract the worst inward movement from nominal clearance. This bound is deterministic; it is not a probability of contact and does not require independent random errors. Reference-layer choice is the new operation beyond converting thickness units.
+
+## Fixed case and assumptions
+
+```text
+zA=0 mm; zB=3 mm; tA=2 mm; tB=2 mm
+A=[-1,1] mm; B=[2,4] mm; c=2-1=1 mm
+eA=0.3 mm; eB=0.4 mm; c_min=1-0.3-0.4=0.3 mm
+tA2=3 mm; tB2=3 mm; c2=3-1.5-1.5=0 mm
+A_one_side=[0,2] mm; B_one_side=[3,5] mm; c_one_side=1 mm
+```
+
+## Corrected exercises
+
+### Exercise 1
+
+Find nominal clearance for centred thickness.
+
+> **Answer:** The intervals are `[-1,1] mm` and `[2,4] mm`, giving `1 mm` clearance. Surface separation alone overstates the remaining gap.
+
+### Exercise 2
+
+Apply the two inward error bounds.
+
+> **Answer:** Worst clearance is `0.3 mm`. The sum of worst movements is subtracted; no distribution or contact probability is inferred.
+
+### Exercise 3
+
+Thicken both centred panels to the second thickness.
+
+> **Answer:** Nominal clearance is `0 mm`. Applying the same errors permits `-0.7 mm`, so a positive robust-clearance claim fails.
+
+### Exercise 4
+
+Use the stated one-sided intervals. Must every offset convention change this equal-thickness gap?
+
+> **Answer:** No: the common one-sided shift still gives `1 mm`. This control prevents claiming that a reference change always changes clearance. Unequal offsets can change it.
+
+### Exercise 5
+
+Does the bound prove a fold path is clear?
+
+> **Answer:** No. It describes fixed parallel intervals. Finite edges, changing angles, tolerances outside the bounds and motion require separate geometry and observations.
+
+## Source-assisted learner task
+
+Trace the reference surfaces and scene units in the prerequisite and pinned frame. Supply the occupied intervals and worst-case gap in a proposed IX handoff. Keep a direct sketch as baseline. The falsifier is an allowed inward displacement that makes the promised positive clearance nonpositive.
+
+Complete the task with the answer sections hidden. Retain your original answers, intermediate quantities, source locations, uncertainty and every form of assistance, including a hint, a translated term or an agent suggestion. Then compare with the prepared answers and record corrections without replacing the original attempt. Produce a short decision note containing the claim, its assumptions, the calculation, the negative control and the next observation that could falsify it. A correct result with missing units or source identity is incomplete evidence for transfer. The evidence packet contains five prepared learner criteria; their decisions stay null until a real attempt and an authorized review exist. Passing these arithmetic checks would establish only competence on this declared case. It would not establish an implemented adapter, a successful material process, a faster renderer or improved learning in the project. Compare your source-assisted note with the direct manual baseline: if assistance obscures an assumption or removes a refusal, revise the note before proposing any workflow change.
+
+## Sources and validation journal
+
+- [Project record](../../../../code/streeling/evidence/scene-frames-2026-10-22/orientation-controls.json)
+- [Primary source](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Space.fs)
+- [Fixed evidence packet](../../../../code/streeling/evidence/batch50-2026-10-23/unit-c.json)
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-23/journal.md)

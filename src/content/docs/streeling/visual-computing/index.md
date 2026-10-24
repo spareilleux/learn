@@ -11,7 +11,19 @@ sidebar:
 
 ## Modules
 
-No modules produced yet.
+- [VC-001 · One Fretboard, Three Access Paths](vc-001-accessible-fretboard-paths/)
+- [VC-002 · Evidence for a Godot and React Observatory Bridge](vc-002-godot-react-bridge-evidence/)
+- [VC-003 · When Does Jitter Help a Voicing Cloud?](vc-003-jitter-and-voicing-cloud-distance/)
+- [VC-004 · A Capture Gate for the Godot Observatory](vc-004-godot-observatory-capture-gate/)
+- [VC-005 · Keep Craft Details through a Blender-to-Godot Asset Trial](vc-005-craft-details-through-blender-to-godot/)
+- [VC-006 · Test Fold-State Meaning in a Blender-to-Godot Scene](vc-006-origami-fold-state-scene-trial/)
+- [VC-007 · Keep Weave Crossings Correct across a Godot Scene Boundary](vc-007-weave-seams-as-scene-contracts/)
+- [VC-008 · Save and Query a Weave Scene](vc-008-save-and-query-a-weave-scene/)
+- [VC-009 · Budget BRUTAL Scene Expansion Before Rendering](vc-009-budget-brutal-scene-expansion/)
+- [VC-010 · Preserve Packed Texture Channel Contracts](vc-010-preserve-packed-texture-channel-contracts/)
+- [VC-011 · Preserve Tangent Handedness After a Mirror](vc-011-preserve-tangent-handedness-after-a-mirror/)
+- [VC-012 · Separate Mesh Instances from Draw Calls](vc-012-separate-mesh-instances-from-draw-calls/)
+- [VC-013 · Keep Triangle Winding Consistent with Transforms](vc-013-keep-triangle-winding-consistent-with-transforms/)
 
 ## Course catalog (planned)
 

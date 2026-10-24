@@ -1,0 +1,49 @@
+[
+  {
+    "id": "TC-01",
+    "severity": "P2",
+    "title": "Empty or partial metadata manifest can pass with omitted cases",
+    "status": "resolved",
+    "reviewers": [
+      "correctness"
+    ],
+    "file": "code/streeling/evidence/batch50-2026-10-23/tests/test_course_metadata.mjs",
+    "line": 12,
+    "first_evidence": "for (const course of plan.courses) {",
+    "consequence": "Original metadata suite permits an empty courses array, registers no localized checks and exits0; a private scratch reproduction confirmed this. Parent independently reproduced and added50unique courses/moduleids, exact3locales and150unique paths.",
+    "resolution_verified_at_utc": "2026-10-24T00:33:57.931702+00:00",
+    "validation": "Reviewed final delta and exact working/index SHA256 bindings; authoritative full replays passed; private mutation controls rejected the previously accepted wrong inputs and retained observations."
+  },
+  {
+    "id": "TC-02",
+    "severity": "P2",
+    "title": "Failed preliminary assertions omit mandatory observation records",
+    "status": "resolved",
+    "reviewers": [
+      "correctness",
+      "adversarial"
+    ],
+    "files": [
+      "code/streeling/evidence/batch50-2026-10-23/tests/test_unit_b.py",
+      "code/streeling/evidence/batch50-2026-10-23/tests/test_baseline_audio.py"
+    ],
+    "consequence": "INF010 total and baseline INF009 mean/sigma/reconstruction assertions precede the case OBSERVATION. A wrong mean can fail without any observation record. Move checks after emitted computed observations, preserving failure evidence.",
+    "resolution_verified_at_utc": "2026-10-24T00:33:57.931714+00:00",
+    "validation": "Reviewed final delta and exact working/index SHA256 bindings; authoritative full replays passed; private mutation controls rejected the previously accepted wrong inputs and retained observations."
+  },
+  {
+    "id": "TC-03",
+    "severity": "P2",
+    "title": "Baseline delay witness is printed without assertion",
+    "status": "resolved",
+    "reviewers": [
+      "adversarial"
+    ],
+    "file": "code/streeling/evidence/batch50-2026-10-23/tests/test_baseline_audio.py",
+    "line": 88,
+    "first_evidence": "self.assertEqual(1000 * lag / data[\"sample_rate_Hz\"], data[\"declared_delay_ms\"])",
+    "consequence": "In-memory rate4000Hz plus declared.5ms passes while output independently expects.25ms. Assert the fixed witness as well as consistency with declared delay; same class of missing explicit witness checks is being reviewed for negative coverage. Same root cause also affected printed .75 prefix coverage; independently reproduced with seven-frame prefix, observed .875, original test green.",
+    "resolution_verified_at_utc": "2026-10-24T00:33:57.931716+00:00",
+    "validation": "Reviewed final delta and exact working/index SHA256 bindings; authoritative full replays passed; private mutation controls rejected the previously accepted wrong inputs and retained observations."
+  }
+]

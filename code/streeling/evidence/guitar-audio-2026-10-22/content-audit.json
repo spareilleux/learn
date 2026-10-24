@@ -1,0 +1,323 @@
+{
+  "audit_kind": "bounded independent AI static content and provenance review",
+  "status": "no_outstanding_findings_in_reviewed_static_scope",
+  "human_approval": false,
+  "subject_approval": false,
+  "fluent_language_approval": false,
+  "learner_approval": false,
+  "publication_approval": false,
+  "canonical_checkout": "C:/tmp/learn-streeling-craft-transfer-20261022",
+  "archive_commit": "17f82a4b4b913d7c64942a3d3ff670abf4e6f85c",
+  "scope": {
+    "english_modules": [
+      "AUD002",
+      "AUD003",
+      "AUD004",
+      "GAS001",
+      "GAS002",
+      "GAS003",
+      "PHY002"
+    ],
+    "archived_localizations": [
+      "AUD003-FR",
+      "AUD003-ES",
+      "GAS001-FR",
+      "GAS001-ES",
+      "GAS003-FR",
+      "GAS003-ES"
+    ],
+    "source_file_count": 21,
+    "new_localizations": "AUD002-FR, AUD002-ES, AUD004-FR, AUD004-ES, GAS002-FR, GAS002-ES, PHY002-FR, PHY002-ES; independently read and reviewed for technical fidelity, not human fluent-language approval",
+    "reviewed": [
+      "scientific claims and exercise arithmetic",
+      "static FR/ES preservation of numeric values, negations and evidence limits",
+      "archive-to-Learn text identity after declared link rewrites",
+      "import manifest SHA-256 agreement for all 13 reviewed source files",
+      "saved reproduction JSON objects and their equality to archived objects",
+      "reproduction and public exercise-input receipt boundaries",
+      "pinned GA Rust formulas, setters, profile defaults and reset order",
+      "pinned IX FFT, STFT, Hann window, Haar transform and handler guards",
+      "final chronology-note insertions and declared JSTOR URL replacement",
+      "all eight new FR/ES translations read for semantic and scientific fidelity",
+      "new translation metadata, ordered external URLs and inline code equality",
+      "five exercises and five answers in every new translation",
+      "relative-link existence in all eight new translations",
+      "answer-free learner task protocol and seven-task factual rubric",
+      "seven final English rubric SHA-256 bindings"
+    ]
+  },
+  "findings": [],
+  "verified_checks": [
+    {
+      "check": "All 13 archived original files equal archived text after the link rewrites and chronology-note insertions declared in final import.json, after normalizing line endings for text comparison.",
+      "result": "pass",
+      "receipt": "code/streeling/evidence/guitar-audio-2026-10-22/import.json"
+    },
+    {
+      "check": "All 13 archived originals and all eight new translations match their final learn_sha256 fields in import.json.",
+      "result": "pass"
+    },
+    {
+      "check": "measurements-rerun.json and synthetic-rerun.json equal their archived JSON objects, including complete synthetic trial data, not just summaries.",
+      "result": "pass",
+      "method": "Independently parsed and serialized both archived and saved objects at depth 100; no measurement or benchmark source was executed by this reviewer."
+    },
+    {
+      "check": "AUD002 gain and envelope arithmetic",
+      "result": "pass",
+      "details": "-18.0 dB gain, approximately 0.126 amplitude multiplier, predicted later RMS -35.7 dBFS and 2.8 dB residual follow from rounded saved values. These remain predictions, not gained-WAV or listening measurements."
+    },
+    {
+      "check": "GAS002 brightness formulas and GAS003 decay formulas match pinned GA source",
+      "result": "pass",
+      "source": "GA dc2e74cbd992a298f67efb928b5b3754615e1924:Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "source_lines": [
+        "183-210",
+        "243-244",
+        "326-348",
+        "391-443",
+        "526-541"
+      ],
+      "independent_arithmetic": {
+        "f_norm_e2": 0.0016407258064515854,
+        "pluck_mix_velocity_0p1": 0.185,
+        "effective_brightness_base_0p80": 0.8562383266129032,
+        "effective_brightness_base_0p90": 0.9562383266129032,
+        "sustain_after_cap": 0.9998,
+        "feedback_base_decay_0p9978": 1.0000958390058468,
+        "feedback_base_decay_0p9976": 0.9998958790058469
+      },
+      "limit": "Approximate real-valued formula arithmetic, not an executed Rust f32 coefficient trace or an audio result."
+    },
+    {
+      "check": "GAS002 browser initialization and setter-order description agrees with pinned bridge and worklet source",
+      "result": "pass",
+      "source": "GA dc2e74cbd992a298f67efb928b5b3754615e1924:Rust/guitar-web-wasm-demo/src/audio/{audioEngine.js,guitar-worklet.js}",
+      "limit": "Static source inspection only; no browser execution or audio capture."
+    },
+    {
+      "check": "AUD003 and AUD004 descriptions of IX transforms and handler guards match locally available pinned source",
+      "result": "pass",
+      "source_commit": "bd1336b7c4045e427dcdbe80b102790e45da5ce1",
+      "source_files": [
+        "crates/ix-signal/src/fft.rs",
+        "crates/ix-signal/src/spectral.rs",
+        "crates/ix-signal/src/window.rs",
+        "crates/ix-signal/src/wavelet.rs",
+        "crates/ix-agent/src/handlers.rs"
+      ],
+      "details": "Full padded rfft output and normalized FFT frequency bins; complete STFT frames; Hann taper; power-of-two spectrogram guard; zero-hop coercion; one-sided bins; uncalibrated magnitude dB; Haar divisibility and finite nonnegative threshold guards agree with lessons. Hann offset-8 weight for length 16 is approximately 0.9890738. The one-level threshold-one impulse reconstructs the first pair as [0.5, 0.5].",
+      "limit": "No IX binary was run or attested."
+    },
+    {
+      "check": "AUD004 correctly rejects its declared synthetic advantage claim",
+      "result": "pass",
+      "details": "2.313 - 0.034 = 2.279 ms, below the 5 ms timing threshold despite 51.021 dB separation exceeding 6 dB; all four fourth-partial bursts were detected. This remains a Python synthetic comparison, not guitar, IX binary, listening or WASM evidence."
+    },
+    {
+      "check": "GAS003 proposed gate arithmetic",
+      "result": "pass",
+      "details": "2.8 - 1.0 = 1.8 dB; an error at most 1.8 dB around -3.9 dB gives decline interval [-5.7, -2.1] dB. Peak 0.98 fails the separate peak <0.95 guard. AUD002 deliberately states a distinct strict <1.8 dB illustrative gate; the two proposals are not a shared product standard."
+    },
+    {
+      "check": "Final delta reconstruction for all thirteen archived originals",
+      "result": "pass",
+      "details": "Reconstructed archive text using the exact declared link rewrites and insertion_after_h1 notes. Every normalized final source equals the reconstruction. Final SHA-256 values match import.json. JSTOR replacements in GAS001 EN/FR/ES are declared; scientific prose remains preserved."
+    },
+    {
+      "check": "Eight new translation source bindings and structural fidelity",
+      "result": "pass",
+      "details": "Final translation SHA-256 and bound final English SHA-256 all match. Technical metadata (excluding localized course title), ordered external URLs and inline code match English exactly. Each new file has five exercise headings and five answer blocks. Every relative link resolves locally. Localized chronology note occurs exactly as declared."
+    },
+    {
+      "check": "Eight new translation scientific fidelity",
+      "result": "pass",
+      "details": "Independently read all eight files. AUD002 preserves onset windows, -18.0 dB gain, predicted rather than measured gains and peaks, 2.8 dB residual, strict <1.8 dB illustrative gate and absent listening results. GAS002 preserves profile/setter order, readiness condition, coefficient arithmetic, 20.9 dB proposed ratio-error ceiling and separate guards, without inventing candidate results. AUD004 preserves calculated Morlet spans, distinct transforms, different denominators, 2.279 ms improvement failing 5 ms, passed 6 dB separation and synthetic Python rather than executable/guitar evidence. PHY002 preserves finite-DFT validity, 2205 samples/20 Hz, bin spacing versus resolving power, and approximate onset/pitch limits. No human approval was inferred."
+    },
+    {
+      "check": "Learner protocol and rubric",
+      "result": "pass_after_protocol_correction",
+      "details": "The initially observed answer-key leakage was reported to root and fixed: prepare lesson copies with every inline answer block hidden/removed; withhold original answered lessons and rubric until response collection; use assisted-recall labeling if hiding is not guaranteed. Seven task/rubric pairs remain unexecuted and numerically accurate. Each rubric task has three criteria; all seven final English source hashes match current files. No learner pass or automatic course approval exists."
+    },
+    {
+      "check": "Final README verification section agrees with validation.json and rendered-links.json",
+      "result": "pass",
+      "details": "Documentation-only review: 21 sources/105 answered exercises; explicit targeted test run 18 passed/0 failed; reported Astro build 1621 pages; 33 rendered pages with 780 checked article links/0 errors and both missing-page/anchor controls detected. Generated catalog 117 EN/111 FR/111 ES across 22 departments. Original 21-department inventory sums to 116 core codes against 525 target, leaving 409 source gaps; no reviewed/published completion credit. Initial broad discovery is accurately disclosed as 86 passed/1 unrelated direct-Node Tauri ERR_MODULE_NOT_FOUND, and no full-suite pass is claimed.",
+      "limit": "Reviewed supplied verification receipts only. No build, test execution, network request, interactive browser assessment or deployed course readback was performed by this reviewer in this delta."
+    }
+  ],
+  "tracked_integration_followups": [],
+  "evidence_boundaries": {
+    "offline_reproduction": "The saved rerun receipts and outputs support reproduction of archived measurements and synthetic calculations only.",
+    "public_assets": "public-exercise-inputs.json records anonymous immutable input downloads; it is not deployed Learn course readback. Reviewer inspected the receipt and did not repeat network requests.",
+    "comfyui": "GAS001 EN/FR/ES use immutable ComfyUI revision 46aad33e4d4c0696582611bf450dd93742fa9090. Reviewer checked the rewrite and source-link receipt; no independent network verification or ComfyUI run was performed.",
+    "ix_probe": "Historical AUD003 receipt describes a provisional short-excerpt MCP probe, all three candidates failing the illustrative 3 dB noise target. It does not attest the endpoint binary revision, full-file processing, perceptual equivalence or GA realism.",
+    "candidates": "Brightness 0.90 and decay 0.9976 remain unrun proposals within these reviewed lessons.",
+    "unassessed": [
+      "human subject review",
+      "fluent-language certification",
+      "learner performance",
+      "candidate rendering",
+      "browser and AudioWorklet behavior",
+      "WASM latency",
+      "listening preference",
+      "site build",
+      "deployment",
+      "anonymous course-page readback"
+    ]
+  },
+  "mutations": "Only this audit JSON was written; no repository file was edited or staged.",
+  "final_source_bindings": [
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-002-level-matched-guitar-comparison.md",
+      "sha256": "cb50f4e2c5d08e9a3780a1e76281d7810ef92fd4c574c8c61964a7a09d0d4153",
+      "kind": "archived source with declared delta"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-003-transient-preservation-gate.md",
+      "sha256": "0e67df4177d47bb313014168bf292d89405462cb3539ee2ee43e0dcb5c7ea131",
+      "kind": "archived source with declared delta"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-003-transient-preservation-gate.fr.md",
+      "sha256": "5aedbbac56fbd605c7b1f2abc8770b600c0b486544b69090debbbdd35a451dac",
+      "kind": "archived source with declared delta"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-003-transient-preservation-gate.es.md",
+      "sha256": "b17308b578a330e05c7a32be7b74faae129d2a2e139f67c004d70004b546f655",
+      "kind": "archived source with declared delta"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-004-wavelet-guitar-attack-evidence.md",
+      "sha256": "5e4ce335e577ffbf8e2894b385b30801d1679e543b62805d5fad115e617b79a7",
+      "kind": "archived source with declared delta"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-001-open-string-audio-evidence.md",
+      "sha256": "d5c0adb7e789d9599b46fc51e3c5df45afa352a82027482fd70c2cabaaf10b42",
+      "kind": "archived source with declared delta"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-001-open-string-audio-evidence.fr.md",
+      "sha256": "f08d03d9924e3ac03604f4b5dcd0f8e3d7c3e292e6d134487ae76481f58c1ba0",
+      "kind": "archived source with declared delta"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-001-open-string-audio-evidence.es.md",
+      "sha256": "ba5ca3e7410c56bb32a99e438594b7e9df17aa763217bf7254200344ddadf040",
+      "kind": "archived source with declared delta"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-002-brightness-control-and-evaluation-gate.md",
+      "sha256": "37fa3982cc852b84dc801b43933e300a281ca3b2bc410444e24248038350cc20",
+      "kind": "archived source with declared delta"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-003-decay-calibration-open-e.md",
+      "sha256": "1496944af65adcd681a9029c74360b3330d34edcaa041de71f815febf8a529f7",
+      "kind": "archived source with declared delta"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-003-decay-calibration-open-e.fr.md",
+      "sha256": "237ed267da092371ad7997cb17e85fc8966ff7d385a4e314bca5c9ecb0a3948a",
+      "kind": "archived source with declared delta"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-003-decay-calibration-open-e.es.md",
+      "sha256": "b7a4809aa5af884bc972f06927488e13368a87c0ef256c7924d8c44cd83eeb63",
+      "kind": "archived source with declared delta"
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-002-time-frequency-guitar-transients.md",
+      "sha256": "e224637f8ae217074e3df5cd32576793562c10846ddc970f96117868464607c4",
+      "kind": "archived source with declared delta"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-002-level-matched-guitar-comparison.fr.md",
+      "sha256": "92daf02fc5237beeba00f2cd8d86890f1085edcca76960d3117aac8a85078ad1",
+      "english_source": "streeling/courses/audio-engineering/en/aud-002-level-matched-guitar-comparison.md",
+      "english_sha256": "cb50f4e2c5d08e9a3780a1e76281d7810ef92fd4c574c8c61964a7a09d0d4153",
+      "kind": "new AI translation; technical static review"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-002-level-matched-guitar-comparison.es.md",
+      "sha256": "29150c3cdbe6910af848a96caa8c54ebd309c123e9e53b6c5e00d23e7886d3ef",
+      "english_source": "streeling/courses/audio-engineering/en/aud-002-level-matched-guitar-comparison.md",
+      "english_sha256": "cb50f4e2c5d08e9a3780a1e76281d7810ef92fd4c574c8c61964a7a09d0d4153",
+      "kind": "new AI translation; technical static review"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-004-wavelet-guitar-attack-evidence.fr.md",
+      "sha256": "df5c70616ff5e3e60fbf294af3ca3390eeb28f3d275e01cdc4151153cd97a1e4",
+      "english_source": "streeling/courses/audio-engineering/en/aud-004-wavelet-guitar-attack-evidence.md",
+      "english_sha256": "5e4ce335e577ffbf8e2894b385b30801d1679e543b62805d5fad115e617b79a7",
+      "kind": "new AI translation; technical static review"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-004-wavelet-guitar-attack-evidence.es.md",
+      "sha256": "e1e890703b5ccac45541a1e2e1dcdfd840f3fb66f6aa412cc024a68f6e6a7131",
+      "english_source": "streeling/courses/audio-engineering/en/aud-004-wavelet-guitar-attack-evidence.md",
+      "english_sha256": "5e4ce335e577ffbf8e2894b385b30801d1679e543b62805d5fad115e617b79a7",
+      "kind": "new AI translation; technical static review"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-002-brightness-control-and-evaluation-gate.fr.md",
+      "sha256": "46fe41748a0e4ecb12e8fbb40b5870ebf3a79d44b22ad36328fcf9ce7eb0ccbd",
+      "english_source": "streeling/courses/guitar-acoustics/en/gas-002-brightness-control-and-evaluation-gate.md",
+      "english_sha256": "37fa3982cc852b84dc801b43933e300a281ca3b2bc410444e24248038350cc20",
+      "kind": "new AI translation; technical static review"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-002-brightness-control-and-evaluation-gate.es.md",
+      "sha256": "25688eb7088ad4c4e2901b524d61c132e10582ea367786608400864631e22359",
+      "english_source": "streeling/courses/guitar-acoustics/en/gas-002-brightness-control-and-evaluation-gate.md",
+      "english_sha256": "37fa3982cc852b84dc801b43933e300a281ca3b2bc410444e24248038350cc20",
+      "kind": "new AI translation; technical static review"
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-002-time-frequency-guitar-transients.fr.md",
+      "sha256": "e1842c91d7540247adf649ef2c6d013e96880f406f1a1a2704efe9d8dc09dc5f",
+      "english_source": "streeling/courses/physics/en/phy-002-time-frequency-guitar-transients.md",
+      "english_sha256": "e224637f8ae217074e3df5cd32576793562c10846ddc970f96117868464607c4",
+      "kind": "new AI translation; technical static review"
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-002-time-frequency-guitar-transients.es.md",
+      "sha256": "d1938d0bf3dace46754552b77cdbf7ae19808ff1367e328de1e64b845bde5e43",
+      "english_source": "streeling/courses/physics/en/phy-002-time-frequency-guitar-transients.md",
+      "english_sha256": "e224637f8ae217074e3df5cd32576793562c10846ddc970f96117868464607c4",
+      "kind": "new AI translation; technical static review"
+    }
+  ],
+  "final_packet_bindings": [
+    {
+      "path": "code/streeling/evidence/guitar-audio-2026-10-22/README.md",
+      "sha256": "135ccfa5382de5c5cdf876ddfff458b92102354fdde3e4b7368a3d88ed89d15a"
+    },
+    {
+      "path": "code/streeling/evidence/guitar-audio-2026-10-22/import.json",
+      "sha256": "24c4e080df35173ade505304e90db19b4413bf2aab495d39676f9baa248e9e10"
+    },
+    {
+      "path": "code/streeling/evidence/guitar-audio-2026-10-22/learner-tasks.md",
+      "sha256": "b3e0eff55ac658d09659257fe9b3748ad4837e5ae39337d5b61f4e8c0382cc3e"
+    },
+    {
+      "path": "code/streeling/evidence/guitar-audio-2026-10-22/review-rubric.json",
+      "sha256": "1325e4e157538ce0370eb53177c84584ed4a09d2e022303b48b9a42fc8f4b406"
+    }
+  ],
+  "final_delta_reviewed_at_utc": "2026-10-22T02:28:26.4011745Z",
+  "resolved_findings": [
+    {
+      "id": "learner-answer-key-leakage",
+      "file": "code/streeling/evidence/guitar-audio-2026-10-22/learner-tasks.md",
+      "line": 3,
+      "original_problem": "Initial protocol withheld only review-rubric.json while supplying frozen lessons containing inline answer blocks.",
+      "resolution": "Root revised the protocol to hide all inline answers and withhold answered originals and rubric; if answer hiding cannot be guaranteed, classify the result as open-book assisted recall rather than independent transfer.",
+      "status": "resolved_and_rechecked"
+    }
+  ],
+  "final_readme_delta_reviewed_at_utc": "2026-10-22T02:31:46.5303125Z"
+}

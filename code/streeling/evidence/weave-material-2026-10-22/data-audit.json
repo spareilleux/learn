@@ -1,0 +1,6990 @@
+{
+  "schema": "streeling.weave-material.data-audit.v1",
+  "audited_at_utc": "2026-10-23T01:08:04.621Z",
+  "verdict": "pass",
+  "check_count": 18,
+  "checks": [
+    {
+      "id": "all_copied_sources_match_readback",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "path": "C:/tmp/streeling-weave-material-inputs-20261022/ix-thickness.rs",
+          "sha256": "abae7d9b41cbf5a825b4dbe6f58b6579687c79027f1ae151b24e1b67eee30b8d",
+          "expected_sha256": "abae7d9b41cbf5a825b4dbe6f58b6579687c79027f1ae151b24e1b67eee30b8d",
+          "bytes": 8553,
+          "expected_bytes": 8553
+        },
+        {
+          "path": "C:/tmp/streeling-weave-material-inputs-20261022/ix-layers.rs",
+          "sha256": "959afa31a4a00b85ee73e37444ea25c358dbcd551996be91e3127dc8f0b17f41",
+          "expected_sha256": "959afa31a4a00b85ee73e37444ea25c358dbcd551996be91e3127dc8f0b17f41",
+          "bytes": 35145,
+          "expected_bytes": 35145
+        },
+        {
+          "path": "C:/tmp/streeling-weave-material-inputs-20261022/ix-controls.rs",
+          "sha256": "0cc562a2756c7ba92e1f8a5208ec5d50b381bded2dbff4d43f3e486efc114c55",
+          "expected_sha256": "0cc562a2756c7ba92e1f8a5208ec5d50b381bded2dbff4d43f3e486efc114c55",
+          "bytes": 3451,
+          "expected_bytes": 3451
+        },
+        {
+          "path": "C:/tmp/streeling-weave-material-inputs-20261022/ix-test-thickness.rs",
+          "sha256": "8f480b304eb08aecd5d08f36bbb4a4162039a38ec29a425c0c5e405a3e980e90",
+          "expected_sha256": "8f480b304eb08aecd5d08f36bbb4a4162039a38ec29a425c0c5e405a3e980e90",
+          "bytes": 11678,
+          "expected_bytes": 11678
+        },
+        {
+          "path": "C:/tmp/streeling-weave-material-inputs-20261022/ix-0007-origami-thickness-as-parallel-rigid-panels.md",
+          "sha256": "bc44c07effa10ec9572d059aec416d343dd269a0e99049cf719f265b1b48a346",
+          "expected_sha256": "bc44c07effa10ec9572d059aec416d343dd269a0e99049cf719f265b1b48a346",
+          "bytes": 5530,
+          "expected_bytes": 5530
+        },
+        {
+          "path": "C:/tmp/streeling-weave-material-inputs-20261022/Demerzel-evaluate_weave.py",
+          "sha256": "43ba4e1a245ebc8c9d2ab34a9219419ad136ef73d021c1073e1f123e69479d9f",
+          "expected_sha256": "43ba4e1a245ebc8c9d2ab34a9219419ad136ef73d021c1073e1f123e69479d9f",
+          "bytes": 2213,
+          "expected_bytes": 2213
+        },
+        {
+          "path": "C:/tmp/streeling-weave-material-inputs-20261022/Demerzel-weave-trial.json",
+          "sha256": "da33830148b1ee98a1c004e0b89a86770f438da369e059cbdad06803da3a1955",
+          "expected_sha256": "da33830148b1ee98a1c004e0b89a86770f438da369e059cbdad06803da3a1955",
+          "bytes": 263,
+          "expected_bytes": 263
+        },
+        {
+          "path": "C:/tmp/streeling-weave-material-inputs-20261022/learn-trial.gd",
+          "sha256": "9e59b247bacff045398bfc9f00917fc3f0734b4d1e88424801f3f85c78fb8f99",
+          "expected_sha256": "9e59b247bacff045398bfc9f00917fc3f0734b4d1e88424801f3f85c78fb8f99",
+          "bytes": 9770,
+          "expected_bytes": 9770
+        },
+        {
+          "path": "C:/tmp/streeling-weave-material-inputs-20261022/learn-README.md",
+          "sha256": "8aa42aaac1e23d103fdc81d531264ac697d03e03ba7647bbc03cd852e5608b06",
+          "expected_sha256": "8aa42aaac1e23d103fdc81d531264ac697d03e03ba7647bbc03cd852e5608b06",
+          "bytes": 5684,
+          "expected_bytes": 5684
+        },
+        {
+          "path": "C:/tmp/streeling-weave-material-inputs-20261022/fold-spec.md",
+          "sha256": "492a23850990412d0bd607a0835d139e87fad7665aa9ea7fcaf95917c232666b",
+          "expected_sha256": "492a23850990412d0bd607a0835d139e87fad7665aa9ea7fcaf95917c232666b",
+          "bytes": 23936,
+          "expected_bytes": 23936
+        }
+      ],
+      "expected": "all nine copied project files and FOLD specification match declared bytes and SHA256"
+    },
+    {
+      "id": "source_observations_match_actual_bytes",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "scope": "Bounded immutable source/test/ADR interpretation, not full current ecosystem capability or fresh runtime evidence.",
+        "IX": {
+          "commit": "d7c22fdd6a62becb66b9d7246ea85850e7c55854",
+          "thickness": "Parallel rigid-panel stack reading and ply, not material response",
+          "layer_engine": "Checks supplied faceOrders; does not compute an order",
+          "turn_over": "Folded y reflected; raw faceOrders retained because orientations and up both flip",
+          "move_folded": "Rigid in-plane rotation then shift; does not define a stiffness tensor",
+          "test_weave": "Four-strip cycle passes supplied layer rules; positive-thickness parallel rigid stack refused in source tests",
+          "new_tests_run": false,
+          "calibrated_material_response_in_selected_model": false
+        },
+        "Demerzel": {
+          "commit": "f23ccae6c049d9066a1be2221c68f3b0bcf48373",
+          "supported_variants": [
+            "global-parity",
+            "restarted-tile-parity"
+          ],
+          "spec_preview": [
+            6,
+            6
+          ],
+          "evaluator_guards": [
+            "minimum grid size",
+            "diameter below spacing",
+            "supported variant name"
+          ],
+          "evaluator_reports": [
+            "crossing count",
+            "unique ID count",
+            "adjacent alternation violations"
+          ],
+          "nonzero_violations_raise_in_evaluator": false,
+          "authored_memorizer_is_supported_variant": false,
+          "learned_model": false
+        },
+        "Learn": {
+          "commit": "eebf49cb0b69a314bd13015340335a983aa64bfe",
+          "scene": "Isolated box meshes and static bodies, not connected yarn or constitutive simulation",
+          "warps_axis": "world Z",
+          "wefts_axis": "world X",
+          "up_axis": "world Y",
+          "material_source": "StandardMaterial3D albedo colours",
+          "hardcoded_crossing_count": 36,
+          "new_Godot_run": false
+        },
+        "FOLD": {
+          "commit": "824f9fa6f944248787b0b2077ef622761489201e",
+          "version": "1.2 rough draft",
+          "reference_normal": "second face g",
+          "swap_sign": "negative s for same normals; same s for opposite normals",
+          "zero": "unknown"
+        },
+        "new_DSL_or_mechanics_adapter": null
+      },
+      "expected": "observations are supported by actual copied source/spec bytes"
+    },
+    {
+      "id": "six_angles_six_displacements_covariance",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "angles": [
+          0,
+          30,
+          45,
+          60,
+          90,
+          180
+        ],
+        "cases": 36,
+        "max_force_error": 0,
+        "max_energy_error": 0
+      },
+      "expected": "all 36 cases satisfy F_world=R K R^T u_world and energy covariance"
+    },
+    {
+      "id": "rotated_stiffness_matches_RKRt",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "angle": 0,
+          "K": [
+            [
+              4,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "angle": 30,
+          "K": [
+            [
+              3.2500000000000004,
+              1.299038105676658
+            ],
+            [
+              1.299038105676658,
+              1.75
+            ]
+          ]
+        },
+        {
+          "angle": 45,
+          "K": [
+            [
+              2.5000000000000004,
+              1.5000000000000004
+            ],
+            [
+              1.5000000000000004,
+              2.5000000000000004
+            ]
+          ]
+        },
+        {
+          "angle": 60,
+          "K": [
+            [
+              1.7500000000000004,
+              1.2990381056766582
+            ],
+            [
+              1.2990381056766582,
+              3.2499999999999996
+            ]
+          ]
+        },
+        {
+          "angle": 90,
+          "K": [
+            [
+              1,
+              1.8369701987210297e-16
+            ],
+            [
+              1.8369701987210297e-16,
+              4
+            ]
+          ]
+        },
+        {
+          "angle": 180,
+          "K": [
+            [
+              4,
+              -3.6739403974420594e-16
+            ],
+            [
+              -3.6739403974420594e-16,
+              1
+            ]
+          ]
+        }
+      ],
+      "expected": "K_world=R K_local R^T"
+    },
+    {
+      "id": "force_energy_units_and_eigenvalues",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "force": "f=K*u",
+        "energy": "E=0.5*u^T*K*u in N*mm",
+        "eigenvalues": [
+          1,
+          4
+        ]
+      },
+      "expected": "force in N, displacement in mm, energy in N*mm, eigenvalues 1 and 4 N/mm"
+    },
+    {
+      "id": "exact_45_degree_matrix_and_x_probe",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "K": [
+          [
+            2.5,
+            1.5
+          ],
+          [
+            1.5,
+            2.5
+          ]
+        ],
+        "probe": {
+          "displacement_mm": [
+            1,
+            0
+          ],
+          "force_N": [
+            2.5,
+            1.5
+          ],
+          "energy_N_mm": 1.25
+        }
+      },
+      "expected": "45-degree K=[[2.5,1.5],[1.5,2.5]], u=(1,0) gives F=(2.5,1.5), E=1.25"
+    },
+    {
+      "id": "diagonal_probe_retains_off_diagonal_energy",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "displacement_mm": [
+          1,
+          -1
+        ],
+        "force_N": [
+          1,
+          -1
+        ],
+        "energy_N_mm": 1,
+        "wrong_off_diagonal_dropped_energy_N_mm": 2.5
+      },
+      "expected": "u=(1,-1) gives F=(1,-1), E=1; dropping off-diagonal terms would give 2.5"
+    },
+    {
+      "id": "same_geometry_different_response_row",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "force_N": [
+            1,
+            0
+          ],
+          "unrotated_displacement_mm": [
+            0.25,
+            0
+          ],
+          "quarter_turned_material_displacement_mm": [
+            1,
+            0
+          ],
+          "geometry_or_colour_does_not_identify_K": true
+        },
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            4
+          ]
+        ]
+      ],
+      "expected": "same displayed geometry can yield F=(1,0) from K=diag(4,1), u=(.25,0), or K=diag(1,4), u=(1,0) after material-axis rotation"
+    },
+    {
+      "id": "layer_relation_second_normal_and_swap",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "normal_f_global_sign": -1,
+          "normal_g_global_sign": -1,
+          "global_f_above_g_sign": -1,
+          "fold_s": 1,
+          "swapped_t": -1,
+          "swap_formula_t": -1,
+          "swap_twice_s": 1,
+          "turned_normal_f": 1,
+          "turned_normal_g": 1,
+          "turned_global_order": 1,
+          "turned_fold_s": 1,
+          "wrong_negated_s_implied_global_order": -1
+        },
+        {
+          "normal_f_global_sign": -1,
+          "normal_g_global_sign": -1,
+          "global_f_above_g_sign": 1,
+          "fold_s": -1,
+          "swapped_t": 1,
+          "swap_formula_t": 1,
+          "swap_twice_s": -1,
+          "turned_normal_f": 1,
+          "turned_normal_g": 1,
+          "turned_global_order": -1,
+          "turned_fold_s": -1,
+          "wrong_negated_s_implied_global_order": 1
+        },
+        {
+          "normal_f_global_sign": -1,
+          "normal_g_global_sign": 1,
+          "global_f_above_g_sign": -1,
+          "fold_s": -1,
+          "swapped_t": -1,
+          "swap_formula_t": -1,
+          "swap_twice_s": -1,
+          "turned_normal_f": 1,
+          "turned_normal_g": -1,
+          "turned_global_order": 1,
+          "turned_fold_s": -1,
+          "wrong_negated_s_implied_global_order": -1
+        },
+        {
+          "normal_f_global_sign": -1,
+          "normal_g_global_sign": 1,
+          "global_f_above_g_sign": 1,
+          "fold_s": 1,
+          "swapped_t": 1,
+          "swap_formula_t": 1,
+          "swap_twice_s": 1,
+          "turned_normal_f": 1,
+          "turned_normal_g": -1,
+          "turned_global_order": -1,
+          "turned_fold_s": 1,
+          "wrong_negated_s_implied_global_order": 1
+        },
+        {
+          "normal_f_global_sign": 1,
+          "normal_g_global_sign": -1,
+          "global_f_above_g_sign": -1,
+          "fold_s": 1,
+          "swapped_t": 1,
+          "swap_formula_t": 1,
+          "swap_twice_s": 1,
+          "turned_normal_f": -1,
+          "turned_normal_g": 1,
+          "turned_global_order": 1,
+          "turned_fold_s": 1,
+          "wrong_negated_s_implied_global_order": -1
+        },
+        {
+          "normal_f_global_sign": 1,
+          "normal_g_global_sign": -1,
+          "global_f_above_g_sign": 1,
+          "fold_s": -1,
+          "swapped_t": -1,
+          "swap_formula_t": -1,
+          "swap_twice_s": -1,
+          "turned_normal_f": -1,
+          "turned_normal_g": 1,
+          "turned_global_order": -1,
+          "turned_fold_s": -1,
+          "wrong_negated_s_implied_global_order": 1
+        },
+        {
+          "normal_f_global_sign": 1,
+          "normal_g_global_sign": 1,
+          "global_f_above_g_sign": -1,
+          "fold_s": -1,
+          "swapped_t": 1,
+          "swap_formula_t": 1,
+          "swap_twice_s": -1,
+          "turned_normal_f": -1,
+          "turned_normal_g": -1,
+          "turned_global_order": 1,
+          "turned_fold_s": -1,
+          "wrong_negated_s_implied_global_order": -1
+        },
+        {
+          "normal_f_global_sign": 1,
+          "normal_g_global_sign": 1,
+          "global_f_above_g_sign": 1,
+          "fold_s": 1,
+          "swapped_t": -1,
+          "swap_formula_t": -1,
+          "swap_twice_s": 1,
+          "turned_normal_f": -1,
+          "turned_normal_g": -1,
+          "turned_global_order": -1,
+          "turned_fold_s": 1,
+          "wrong_negated_s_implied_global_order": 1
+        }
+      ],
+      "expected": "FOLD [f,g,s] uses g normal; swap is t=-s*sigma_f*sigma_g and swapping twice restores s"
+    },
+    {
+      "id": "whole_turn_preserves_fold_sign",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "normal_f_global_sign": -1,
+          "normal_g_global_sign": -1,
+          "global_f_above_g_sign": -1,
+          "fold_s": 1,
+          "swapped_t": -1,
+          "swap_formula_t": -1,
+          "swap_twice_s": 1,
+          "turned_normal_f": 1,
+          "turned_normal_g": 1,
+          "turned_global_order": 1,
+          "turned_fold_s": 1,
+          "wrong_negated_s_implied_global_order": -1
+        },
+        {
+          "normal_f_global_sign": -1,
+          "normal_g_global_sign": -1,
+          "global_f_above_g_sign": 1,
+          "fold_s": -1,
+          "swapped_t": 1,
+          "swap_formula_t": 1,
+          "swap_twice_s": -1,
+          "turned_normal_f": 1,
+          "turned_normal_g": 1,
+          "turned_global_order": -1,
+          "turned_fold_s": -1,
+          "wrong_negated_s_implied_global_order": 1
+        },
+        {
+          "normal_f_global_sign": -1,
+          "normal_g_global_sign": 1,
+          "global_f_above_g_sign": -1,
+          "fold_s": -1,
+          "swapped_t": -1,
+          "swap_formula_t": -1,
+          "swap_twice_s": -1,
+          "turned_normal_f": 1,
+          "turned_normal_g": -1,
+          "turned_global_order": 1,
+          "turned_fold_s": -1,
+          "wrong_negated_s_implied_global_order": -1
+        },
+        {
+          "normal_f_global_sign": -1,
+          "normal_g_global_sign": 1,
+          "global_f_above_g_sign": 1,
+          "fold_s": 1,
+          "swapped_t": 1,
+          "swap_formula_t": 1,
+          "swap_twice_s": 1,
+          "turned_normal_f": 1,
+          "turned_normal_g": -1,
+          "turned_global_order": -1,
+          "turned_fold_s": 1,
+          "wrong_negated_s_implied_global_order": 1
+        },
+        {
+          "normal_f_global_sign": 1,
+          "normal_g_global_sign": -1,
+          "global_f_above_g_sign": -1,
+          "fold_s": 1,
+          "swapped_t": 1,
+          "swap_formula_t": 1,
+          "swap_twice_s": 1,
+          "turned_normal_f": -1,
+          "turned_normal_g": 1,
+          "turned_global_order": 1,
+          "turned_fold_s": 1,
+          "wrong_negated_s_implied_global_order": -1
+        },
+        {
+          "normal_f_global_sign": 1,
+          "normal_g_global_sign": -1,
+          "global_f_above_g_sign": 1,
+          "fold_s": -1,
+          "swapped_t": -1,
+          "swap_formula_t": -1,
+          "swap_twice_s": -1,
+          "turned_normal_f": -1,
+          "turned_normal_g": 1,
+          "turned_global_order": -1,
+          "turned_fold_s": -1,
+          "wrong_negated_s_implied_global_order": 1
+        },
+        {
+          "normal_f_global_sign": 1,
+          "normal_g_global_sign": 1,
+          "global_f_above_g_sign": -1,
+          "fold_s": -1,
+          "swapped_t": 1,
+          "swap_formula_t": 1,
+          "swap_twice_s": -1,
+          "turned_normal_f": -1,
+          "turned_normal_g": -1,
+          "turned_global_order": 1,
+          "turned_fold_s": -1,
+          "wrong_negated_s_implied_global_order": -1
+        },
+        {
+          "normal_f_global_sign": 1,
+          "normal_g_global_sign": 1,
+          "global_f_above_g_sign": 1,
+          "fold_s": 1,
+          "swapped_t": -1,
+          "swap_formula_t": -1,
+          "swap_twice_s": 1,
+          "turned_normal_f": -1,
+          "turned_normal_g": -1,
+          "turned_global_order": -1,
+          "turned_fold_s": 1,
+          "wrong_negated_s_implied_global_order": 1
+        }
+      ],
+      "expected": "whole turn reverses d and both normals so s is unchanged"
+    },
+    {
+      "id": "unknown_relation_is_not_equal_height",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "s": 0,
+        "meaning": "Unknown order, including omitted pair",
+        "does_not_mean_equal_height": true,
+        "unknown_remains_unknown_under_swap_or_turn": true
+      },
+      "expected": "s=0 is unknown, not zero height"
+    },
+    {
+      "id": "crossing_semantics_distinguish_recolour_rename_turn",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "crossing_id": "w2-f0",
+          "original": {
+            "warp_over": true,
+            "physical_old_warp_global_height_sign": 1
+          },
+          "recolour_only": {
+            "warp_over": true,
+            "physical_old_warp_global_height_sign": 1,
+            "role_names_unchanged": true
+          },
+          "rename_warp_weft_roles_only": {
+            "new_warp_over": false,
+            "physical_old_warp_global_height_sign": 1,
+            "old_warp_now_called": "weft"
+          },
+          "turn_entire_object_over": {
+            "warp_over": false,
+            "physical_old_warp_global_height_sign": -1,
+            "role_names_unchanged": true
+          }
+        },
+        {
+          "crossing_id": "w3-f0",
+          "original": {
+            "warp_over": false,
+            "physical_old_warp_global_height_sign": -1
+          },
+          "recolour_only": {
+            "warp_over": false,
+            "physical_old_warp_global_height_sign": -1,
+            "role_names_unchanged": true
+          },
+          "rename_warp_weft_roles_only": {
+            "new_warp_over": true,
+            "physical_old_warp_global_height_sign": -1,
+            "old_warp_now_called": "weft"
+          },
+          "turn_entire_object_over": {
+            "warp_over": true,
+            "physical_old_warp_global_height_sign": 1,
+            "role_names_unchanged": true
+          }
+        }
+      ],
+      "expected": "recolour preserves role/height, role rename changes names, whole turn flips physical height sign"
+    },
+    {
+      "id": "generator_preview_and_unseen_counts",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "scope": "Authored finite Boolean rule counterexample and graph propagation, not a trained model, observed agent generalization, actual evaluator custom variant or new Godot input.",
+        "preview_dimensions": [
+          6,
+          6
+        ],
+        "finite_target_dimensions": [
+          8,
+          8
+        ],
+        "cells": [
+          {
+            "x": 0,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 0,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 7,
+            "y": 0,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 1,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 7,
+            "y": 1,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 2,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 7,
+            "y": 2,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 3,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 7,
+            "y": 3,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 4,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 7,
+            "y": 4,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 5,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 7,
+            "y": 5,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 0,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 2,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 4,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 6,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 7,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 0,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 1,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 3,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 5,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 7,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          }
+        ],
+        "adjacency_edges": [
+          {
+            "start": [
+              0,
+              0
+            ],
+            "end": [
+              1,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              0
+            ],
+            "end": [
+              0,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              0
+            ],
+            "end": [
+              2,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              0
+            ],
+            "end": [
+              1,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              0
+            ],
+            "end": [
+              3,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              0
+            ],
+            "end": [
+              2,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              0
+            ],
+            "end": [
+              4,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              0
+            ],
+            "end": [
+              3,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              0
+            ],
+            "end": [
+              5,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              0
+            ],
+            "end": [
+              4,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              0
+            ],
+            "end": [
+              6,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              0
+            ],
+            "end": [
+              5,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              6,
+              0
+            ],
+            "end": [
+              7,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              0
+            ],
+            "end": [
+              6,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              0
+            ],
+            "end": [
+              7,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              1
+            ],
+            "end": [
+              1,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              1
+            ],
+            "end": [
+              0,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              1
+            ],
+            "end": [
+              2,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              1
+            ],
+            "end": [
+              1,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              1
+            ],
+            "end": [
+              3,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              1
+            ],
+            "end": [
+              2,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              1
+            ],
+            "end": [
+              4,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              1
+            ],
+            "end": [
+              3,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              1
+            ],
+            "end": [
+              5,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              1
+            ],
+            "end": [
+              4,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              1
+            ],
+            "end": [
+              6,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              1
+            ],
+            "end": [
+              5,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              6,
+              1
+            ],
+            "end": [
+              7,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              1
+            ],
+            "end": [
+              6,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              1
+            ],
+            "end": [
+              7,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              2
+            ],
+            "end": [
+              1,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              2
+            ],
+            "end": [
+              0,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              2
+            ],
+            "end": [
+              2,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              2
+            ],
+            "end": [
+              1,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              2
+            ],
+            "end": [
+              3,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              2
+            ],
+            "end": [
+              2,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              2
+            ],
+            "end": [
+              4,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              2
+            ],
+            "end": [
+              3,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              2
+            ],
+            "end": [
+              5,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              2
+            ],
+            "end": [
+              4,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              2
+            ],
+            "end": [
+              6,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              2
+            ],
+            "end": [
+              5,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              6,
+              2
+            ],
+            "end": [
+              7,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              2
+            ],
+            "end": [
+              6,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              2
+            ],
+            "end": [
+              7,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              3
+            ],
+            "end": [
+              1,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              3
+            ],
+            "end": [
+              0,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              3
+            ],
+            "end": [
+              2,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              3
+            ],
+            "end": [
+              1,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              3
+            ],
+            "end": [
+              3,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              3
+            ],
+            "end": [
+              2,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              3
+            ],
+            "end": [
+              4,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              3
+            ],
+            "end": [
+              3,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              3
+            ],
+            "end": [
+              5,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              3
+            ],
+            "end": [
+              4,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              3
+            ],
+            "end": [
+              6,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              3
+            ],
+            "end": [
+              5,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              6,
+              3
+            ],
+            "end": [
+              7,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              3
+            ],
+            "end": [
+              6,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              3
+            ],
+            "end": [
+              7,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              4
+            ],
+            "end": [
+              1,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              4
+            ],
+            "end": [
+              0,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              4
+            ],
+            "end": [
+              2,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              4
+            ],
+            "end": [
+              1,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              4
+            ],
+            "end": [
+              3,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              4
+            ],
+            "end": [
+              2,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              4
+            ],
+            "end": [
+              4,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              4
+            ],
+            "end": [
+              3,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              4
+            ],
+            "end": [
+              5,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              4
+            ],
+            "end": [
+              4,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              4
+            ],
+            "end": [
+              6,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              4
+            ],
+            "end": [
+              5,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              6,
+              4
+            ],
+            "end": [
+              7,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              4
+            ],
+            "end": [
+              6,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              4
+            ],
+            "end": [
+              7,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              5
+            ],
+            "end": [
+              1,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              5
+            ],
+            "end": [
+              0,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              5
+            ],
+            "end": [
+              2,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              5
+            ],
+            "end": [
+              1,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              2,
+              5
+            ],
+            "end": [
+              3,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              5
+            ],
+            "end": [
+              2,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              5
+            ],
+            "end": [
+              4,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              5
+            ],
+            "end": [
+              3,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              4,
+              5
+            ],
+            "end": [
+              5,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              5
+            ],
+            "end": [
+              4,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              5
+            ],
+            "end": [
+              6,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              5
+            ],
+            "end": [
+              5,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              5
+            ],
+            "end": [
+              7,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              5
+            ],
+            "end": [
+              6,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              5
+            ],
+            "end": [
+              7,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              6
+            ],
+            "end": [
+              1,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              6
+            ],
+            "end": [
+              0,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              1,
+              6
+            ],
+            "end": [
+              2,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              1,
+              6
+            ],
+            "end": [
+              1,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              2,
+              6
+            ],
+            "end": [
+              3,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              2,
+              6
+            ],
+            "end": [
+              2,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              3,
+              6
+            ],
+            "end": [
+              4,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              3,
+              6
+            ],
+            "end": [
+              3,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              4,
+              6
+            ],
+            "end": [
+              5,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              4,
+              6
+            ],
+            "end": [
+              4,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              6
+            ],
+            "end": [
+              6,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              6
+            ],
+            "end": [
+              5,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              6
+            ],
+            "end": [
+              7,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              6
+            ],
+            "end": [
+              6,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              6
+            ],
+            "end": [
+              7,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              7
+            ],
+            "end": [
+              1,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              1,
+              7
+            ],
+            "end": [
+              2,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              2,
+              7
+            ],
+            "end": [
+              3,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              3,
+              7
+            ],
+            "end": [
+              4,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              4,
+              7
+            ],
+            "end": [
+              5,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              7
+            ],
+            "end": [
+              6,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              7
+            ],
+            "end": [
+              7,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          }
+        ],
+        "observed_cells": 36,
+        "unobserved_cells": 28,
+        "unconstrained_extension_count_decimal": "268435456",
+        "all_domain_labeling_count_decimal": "18446744073709551616",
+        "constraints_are_not_a_probability_model": true,
+        "preview_disagreements": 0,
+        "outside_preview_disagreements": 14,
+        "total_disagreements": 14,
+        "global_adjacency_violations": 0,
+        "memorizer_adjacency_violations": 46,
+        "heldout_witness": {
+          "x": 6,
+          "y": 1,
+          "expected_global": false,
+          "memorizer": true
+        },
+        "constraint_propagation": [
+          {
+            "origin_value": false,
+            "assigned_nodes": 64,
+            "contradictions": [],
+            "values": [
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false
+            ],
+            "agrees_with_observed_preview": false
+          },
+          {
+            "origin_value": true,
+            "assigned_nodes": 64,
+            "contradictions": [],
+            "values": [
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true
+            ],
+            "agrees_with_observed_preview": true
+          }
+        ],
+        "unanchored_complete_alternation_solutions": 2,
+        "solutions_after_observed_origin": 1,
+        "uniqueness_argument": "Connected graph plus every-neighbour flip fixes all nodes from the origin; the grid is bipartite so the propagated assignments are consistent. This is not enumeration of2^64 assignments.",
+        "learned_generator": null,
+        "physical_fabrication": null
+      },
+      "expected": "8x8 authored checker agrees on 6x6 preview, differs in 14 unseen cells, memorizer has 46 adjacency violations"
+    },
+    {
+      "id": "generator_witness_and_extension_bound",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "scope": "Authored finite Boolean rule counterexample and graph propagation, not a trained model, observed agent generalization, actual evaluator custom variant or new Godot input.",
+        "preview_dimensions": [
+          6,
+          6
+        ],
+        "finite_target_dimensions": [
+          8,
+          8
+        ],
+        "cells": [
+          {
+            "x": 0,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 0,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 7,
+            "y": 0,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 1,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 7,
+            "y": 1,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 2,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 7,
+            "y": 2,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 3,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 7,
+            "y": 3,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 4,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 7,
+            "y": 4,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 5,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 7,
+            "y": 5,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 0,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 2,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 4,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 6,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 7,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 0,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 1,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 3,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 5,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 7,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          }
+        ],
+        "adjacency_edges": [
+          {
+            "start": [
+              0,
+              0
+            ],
+            "end": [
+              1,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              0
+            ],
+            "end": [
+              0,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              0
+            ],
+            "end": [
+              2,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              0
+            ],
+            "end": [
+              1,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              0
+            ],
+            "end": [
+              3,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              0
+            ],
+            "end": [
+              2,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              0
+            ],
+            "end": [
+              4,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              0
+            ],
+            "end": [
+              3,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              0
+            ],
+            "end": [
+              5,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              0
+            ],
+            "end": [
+              4,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              0
+            ],
+            "end": [
+              6,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              0
+            ],
+            "end": [
+              5,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              6,
+              0
+            ],
+            "end": [
+              7,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              0
+            ],
+            "end": [
+              6,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              0
+            ],
+            "end": [
+              7,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              1
+            ],
+            "end": [
+              1,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              1
+            ],
+            "end": [
+              0,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              1
+            ],
+            "end": [
+              2,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              1
+            ],
+            "end": [
+              1,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              1
+            ],
+            "end": [
+              3,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              1
+            ],
+            "end": [
+              2,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              1
+            ],
+            "end": [
+              4,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              1
+            ],
+            "end": [
+              3,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              1
+            ],
+            "end": [
+              5,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              1
+            ],
+            "end": [
+              4,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              1
+            ],
+            "end": [
+              6,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              1
+            ],
+            "end": [
+              5,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              6,
+              1
+            ],
+            "end": [
+              7,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              1
+            ],
+            "end": [
+              6,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              1
+            ],
+            "end": [
+              7,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              2
+            ],
+            "end": [
+              1,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              2
+            ],
+            "end": [
+              0,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              2
+            ],
+            "end": [
+              2,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              2
+            ],
+            "end": [
+              1,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              2
+            ],
+            "end": [
+              3,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              2
+            ],
+            "end": [
+              2,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              2
+            ],
+            "end": [
+              4,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              2
+            ],
+            "end": [
+              3,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              2
+            ],
+            "end": [
+              5,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              2
+            ],
+            "end": [
+              4,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              2
+            ],
+            "end": [
+              6,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              2
+            ],
+            "end": [
+              5,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              6,
+              2
+            ],
+            "end": [
+              7,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              2
+            ],
+            "end": [
+              6,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              2
+            ],
+            "end": [
+              7,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              3
+            ],
+            "end": [
+              1,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              3
+            ],
+            "end": [
+              0,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              3
+            ],
+            "end": [
+              2,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              3
+            ],
+            "end": [
+              1,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              3
+            ],
+            "end": [
+              3,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              3
+            ],
+            "end": [
+              2,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              3
+            ],
+            "end": [
+              4,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              3
+            ],
+            "end": [
+              3,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              3
+            ],
+            "end": [
+              5,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              3
+            ],
+            "end": [
+              4,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              3
+            ],
+            "end": [
+              6,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              3
+            ],
+            "end": [
+              5,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              6,
+              3
+            ],
+            "end": [
+              7,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              3
+            ],
+            "end": [
+              6,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              3
+            ],
+            "end": [
+              7,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              4
+            ],
+            "end": [
+              1,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              4
+            ],
+            "end": [
+              0,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              4
+            ],
+            "end": [
+              2,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              4
+            ],
+            "end": [
+              1,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              4
+            ],
+            "end": [
+              3,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              4
+            ],
+            "end": [
+              2,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              4
+            ],
+            "end": [
+              4,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              4
+            ],
+            "end": [
+              3,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              4
+            ],
+            "end": [
+              5,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              4
+            ],
+            "end": [
+              4,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              4
+            ],
+            "end": [
+              6,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              4
+            ],
+            "end": [
+              5,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              6,
+              4
+            ],
+            "end": [
+              7,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              4
+            ],
+            "end": [
+              6,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              4
+            ],
+            "end": [
+              7,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              5
+            ],
+            "end": [
+              1,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              5
+            ],
+            "end": [
+              0,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              5
+            ],
+            "end": [
+              2,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              5
+            ],
+            "end": [
+              1,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              2,
+              5
+            ],
+            "end": [
+              3,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              5
+            ],
+            "end": [
+              2,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              5
+            ],
+            "end": [
+              4,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              5
+            ],
+            "end": [
+              3,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              4,
+              5
+            ],
+            "end": [
+              5,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              5
+            ],
+            "end": [
+              4,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              5
+            ],
+            "end": [
+              6,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              5
+            ],
+            "end": [
+              5,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              5
+            ],
+            "end": [
+              7,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              5
+            ],
+            "end": [
+              6,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              5
+            ],
+            "end": [
+              7,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              6
+            ],
+            "end": [
+              1,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              6
+            ],
+            "end": [
+              0,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              1,
+              6
+            ],
+            "end": [
+              2,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              1,
+              6
+            ],
+            "end": [
+              1,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              2,
+              6
+            ],
+            "end": [
+              3,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              2,
+              6
+            ],
+            "end": [
+              2,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              3,
+              6
+            ],
+            "end": [
+              4,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              3,
+              6
+            ],
+            "end": [
+              3,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              4,
+              6
+            ],
+            "end": [
+              5,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              4,
+              6
+            ],
+            "end": [
+              4,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              6
+            ],
+            "end": [
+              6,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              6
+            ],
+            "end": [
+              5,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              6
+            ],
+            "end": [
+              7,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              6
+            ],
+            "end": [
+              6,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              6
+            ],
+            "end": [
+              7,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              7
+            ],
+            "end": [
+              1,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              1,
+              7
+            ],
+            "end": [
+              2,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              2,
+              7
+            ],
+            "end": [
+              3,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              3,
+              7
+            ],
+            "end": [
+              4,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              4,
+              7
+            ],
+            "end": [
+              5,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              7
+            ],
+            "end": [
+              6,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              7
+            ],
+            "end": [
+              7,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          }
+        ],
+        "observed_cells": 36,
+        "unobserved_cells": 28,
+        "unconstrained_extension_count_decimal": "268435456",
+        "all_domain_labeling_count_decimal": "18446744073709551616",
+        "constraints_are_not_a_probability_model": true,
+        "preview_disagreements": 0,
+        "outside_preview_disagreements": 14,
+        "total_disagreements": 14,
+        "global_adjacency_violations": 0,
+        "memorizer_adjacency_violations": 46,
+        "heldout_witness": {
+          "x": 6,
+          "y": 1,
+          "expected_global": false,
+          "memorizer": true
+        },
+        "constraint_propagation": [
+          {
+            "origin_value": false,
+            "assigned_nodes": 64,
+            "contradictions": [],
+            "values": [
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false
+            ],
+            "agrees_with_observed_preview": false
+          },
+          {
+            "origin_value": true,
+            "assigned_nodes": 64,
+            "contradictions": [],
+            "values": [
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true
+            ],
+            "agrees_with_observed_preview": true
+          }
+        ],
+        "unanchored_complete_alternation_solutions": 2,
+        "solutions_after_observed_origin": 1,
+        "uniqueness_argument": "Connected graph plus every-neighbour flip fixes all nodes from the origin; the grid is bipartite so the propagated assignments are consistent. This is not enumeration of2^64 assignments.",
+        "learned_generator": null,
+        "physical_fabrication": null
+      },
+      "expected": "witness (6,1) differs; 28 unconstrained cells imply 2^28 extensions, not a probability"
+    },
+    {
+      "id": "bfs_alternation_solution_count",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "scope": "Authored finite Boolean rule counterexample and graph propagation, not a trained model, observed agent generalization, actual evaluator custom variant or new Godot input.",
+        "preview_dimensions": [
+          6,
+          6
+        ],
+        "finite_target_dimensions": [
+          8,
+          8
+        ],
+        "cells": [
+          {
+            "x": 0,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 0,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 7,
+            "y": 0,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 1,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 7,
+            "y": 1,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 2,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 7,
+            "y": 2,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 3,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 3,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 7,
+            "y": 3,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 4,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 4,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 7,
+            "y": 4,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": false,
+            "authored_memorizer": false,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "observed_preview": true,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 5,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 7,
+            "y": 5,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 0,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 1,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 2,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 3,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 4,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 5,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 6,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 7,
+            "y": 6,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 0,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 1,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 2,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 3,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 4,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 5,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          },
+          {
+            "x": 6,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": false,
+            "authored_memorizer": true,
+            "equal": false
+          },
+          {
+            "x": 7,
+            "y": 7,
+            "observed_preview": false,
+            "global_rule": true,
+            "authored_memorizer": true,
+            "equal": true
+          }
+        ],
+        "adjacency_edges": [
+          {
+            "start": [
+              0,
+              0
+            ],
+            "end": [
+              1,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              0
+            ],
+            "end": [
+              0,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              0
+            ],
+            "end": [
+              2,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              0
+            ],
+            "end": [
+              1,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              0
+            ],
+            "end": [
+              3,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              0
+            ],
+            "end": [
+              2,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              0
+            ],
+            "end": [
+              4,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              0
+            ],
+            "end": [
+              3,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              0
+            ],
+            "end": [
+              5,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              0
+            ],
+            "end": [
+              4,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              0
+            ],
+            "end": [
+              6,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              0
+            ],
+            "end": [
+              5,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              6,
+              0
+            ],
+            "end": [
+              7,
+              0
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              0
+            ],
+            "end": [
+              6,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              0
+            ],
+            "end": [
+              7,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              1
+            ],
+            "end": [
+              1,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              1
+            ],
+            "end": [
+              0,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              1
+            ],
+            "end": [
+              2,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              1
+            ],
+            "end": [
+              1,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              1
+            ],
+            "end": [
+              3,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              1
+            ],
+            "end": [
+              2,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              1
+            ],
+            "end": [
+              4,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              1
+            ],
+            "end": [
+              3,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              1
+            ],
+            "end": [
+              5,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              1
+            ],
+            "end": [
+              4,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              1
+            ],
+            "end": [
+              6,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              1
+            ],
+            "end": [
+              5,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              6,
+              1
+            ],
+            "end": [
+              7,
+              1
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              1
+            ],
+            "end": [
+              6,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              1
+            ],
+            "end": [
+              7,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              2
+            ],
+            "end": [
+              1,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              2
+            ],
+            "end": [
+              0,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              2
+            ],
+            "end": [
+              2,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              2
+            ],
+            "end": [
+              1,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              2
+            ],
+            "end": [
+              3,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              2
+            ],
+            "end": [
+              2,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              2
+            ],
+            "end": [
+              4,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              2
+            ],
+            "end": [
+              3,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              2
+            ],
+            "end": [
+              5,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              2
+            ],
+            "end": [
+              4,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              2
+            ],
+            "end": [
+              6,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              2
+            ],
+            "end": [
+              5,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              6,
+              2
+            ],
+            "end": [
+              7,
+              2
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              2
+            ],
+            "end": [
+              6,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              2
+            ],
+            "end": [
+              7,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              3
+            ],
+            "end": [
+              1,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              3
+            ],
+            "end": [
+              0,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              3
+            ],
+            "end": [
+              2,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              3
+            ],
+            "end": [
+              1,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              3
+            ],
+            "end": [
+              3,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              3
+            ],
+            "end": [
+              2,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              3
+            ],
+            "end": [
+              4,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              3
+            ],
+            "end": [
+              3,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              3
+            ],
+            "end": [
+              5,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              3
+            ],
+            "end": [
+              4,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              3
+            ],
+            "end": [
+              6,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              3
+            ],
+            "end": [
+              5,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              6,
+              3
+            ],
+            "end": [
+              7,
+              3
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              3
+            ],
+            "end": [
+              6,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              3
+            ],
+            "end": [
+              7,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              4
+            ],
+            "end": [
+              1,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              4
+            ],
+            "end": [
+              0,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              4
+            ],
+            "end": [
+              2,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              4
+            ],
+            "end": [
+              1,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              4
+            ],
+            "end": [
+              3,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              4
+            ],
+            "end": [
+              2,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              4
+            ],
+            "end": [
+              4,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              4
+            ],
+            "end": [
+              3,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              4
+            ],
+            "end": [
+              5,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              4
+            ],
+            "end": [
+              4,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              4
+            ],
+            "end": [
+              6,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              4
+            ],
+            "end": [
+              5,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              6,
+              4
+            ],
+            "end": [
+              7,
+              4
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              4
+            ],
+            "end": [
+              6,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              4
+            ],
+            "end": [
+              7,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              5
+            ],
+            "end": [
+              1,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              0,
+              5
+            ],
+            "end": [
+              0,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              5
+            ],
+            "end": [
+              2,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              1,
+              5
+            ],
+            "end": [
+              1,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              2,
+              5
+            ],
+            "end": [
+              3,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              2,
+              5
+            ],
+            "end": [
+              2,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              5
+            ],
+            "end": [
+              4,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              3,
+              5
+            ],
+            "end": [
+              3,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              4,
+              5
+            ],
+            "end": [
+              5,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              4,
+              5
+            ],
+            "end": [
+              4,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": true
+          },
+          {
+            "start": [
+              5,
+              5
+            ],
+            "end": [
+              6,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              5
+            ],
+            "end": [
+              5,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              5
+            ],
+            "end": [
+              7,
+              5
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              5
+            ],
+            "end": [
+              6,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              5
+            ],
+            "end": [
+              7,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              6
+            ],
+            "end": [
+              1,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              6
+            ],
+            "end": [
+              0,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              1,
+              6
+            ],
+            "end": [
+              2,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              1,
+              6
+            ],
+            "end": [
+              1,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              2,
+              6
+            ],
+            "end": [
+              3,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              2,
+              6
+            ],
+            "end": [
+              2,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              3,
+              6
+            ],
+            "end": [
+              4,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              3,
+              6
+            ],
+            "end": [
+              3,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              4,
+              6
+            ],
+            "end": [
+              5,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              4,
+              6
+            ],
+            "end": [
+              4,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              6
+            ],
+            "end": [
+              6,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              6
+            ],
+            "end": [
+              5,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              6
+            ],
+            "end": [
+              7,
+              6
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              6
+            ],
+            "end": [
+              6,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              7,
+              6
+            ],
+            "end": [
+              7,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              0,
+              7
+            ],
+            "end": [
+              1,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              1,
+              7
+            ],
+            "end": [
+              2,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              2,
+              7
+            ],
+            "end": [
+              3,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              3,
+              7
+            ],
+            "end": [
+              4,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              4,
+              7
+            ],
+            "end": [
+              5,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              5,
+              7
+            ],
+            "end": [
+              6,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          },
+          {
+            "start": [
+              6,
+              7
+            ],
+            "end": [
+              7,
+              7
+            ],
+            "global_alternates": true,
+            "memorizer_alternates": false
+          }
+        ],
+        "observed_cells": 36,
+        "unobserved_cells": 28,
+        "unconstrained_extension_count_decimal": "268435456",
+        "all_domain_labeling_count_decimal": "18446744073709551616",
+        "constraints_are_not_a_probability_model": true,
+        "preview_disagreements": 0,
+        "outside_preview_disagreements": 14,
+        "total_disagreements": 14,
+        "global_adjacency_violations": 0,
+        "memorizer_adjacency_violations": 46,
+        "heldout_witness": {
+          "x": 6,
+          "y": 1,
+          "expected_global": false,
+          "memorizer": true
+        },
+        "constraint_propagation": [
+          {
+            "origin_value": false,
+            "assigned_nodes": 64,
+            "contradictions": [],
+            "values": [
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false
+            ],
+            "agrees_with_observed_preview": false
+          },
+          {
+            "origin_value": true,
+            "assigned_nodes": 64,
+            "contradictions": [],
+            "values": [
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true
+            ],
+            "agrees_with_observed_preview": true
+          }
+        ],
+        "unanchored_complete_alternation_solutions": 2,
+        "solutions_after_observed_origin": 1,
+        "uniqueness_argument": "Connected graph plus every-neighbour flip fixes all nodes from the origin; the grid is bipartite so the propagated assignments are consistent. This is not enumeration of2^64 assignments.",
+        "learned_generator": null,
+        "physical_fabrication": null
+      },
+      "expected": "connected bipartite propagation has two unanchored assignments and one after origin fixation"
+    },
+    {
+      "id": "evaluator_guard_and_reporting_boundary",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "commit": "f23ccae6c049d9066a1be2221c68f3b0bcf48373",
+        "supported_variants": [
+          "global-parity",
+          "restarted-tile-parity"
+        ],
+        "spec_preview": [
+          6,
+          6
+        ],
+        "evaluator_guards": [
+          "minimum grid size",
+          "diameter below spacing",
+          "supported variant name"
+        ],
+        "evaluator_reports": [
+          "crossing count",
+          "unique ID count",
+          "adjacent alternation violations"
+        ],
+        "nonzero_violations_raise_in_evaluator": false,
+        "authored_memorizer_is_supported_variant": false,
+        "learned_model": false
+      },
+      "expected": "evaluator guards dimensions/clearance/names and reports violations without raising on nonzero violations"
+    },
+    {
+      "id": "toy_and_godot_material_limits",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "directional_physical_calibration": null,
+        "observations": {
+          "scope": "Bounded immutable source/test/ADR interpretation, not full current ecosystem capability or fresh runtime evidence.",
+          "IX": {
+            "commit": "d7c22fdd6a62becb66b9d7246ea85850e7c55854",
+            "thickness": "Parallel rigid-panel stack reading and ply, not material response",
+            "layer_engine": "Checks supplied faceOrders; does not compute an order",
+            "turn_over": "Folded y reflected; raw faceOrders retained because orientations and up both flip",
+            "move_folded": "Rigid in-plane rotation then shift; does not define a stiffness tensor",
+            "test_weave": "Four-strip cycle passes supplied layer rules; positive-thickness parallel rigid stack refused in source tests",
+            "new_tests_run": false,
+            "calibrated_material_response_in_selected_model": false
+          },
+          "Demerzel": {
+            "commit": "f23ccae6c049d9066a1be2221c68f3b0bcf48373",
+            "supported_variants": [
+              "global-parity",
+              "restarted-tile-parity"
+            ],
+            "spec_preview": [
+              6,
+              6
+            ],
+            "evaluator_guards": [
+              "minimum grid size",
+              "diameter below spacing",
+              "supported variant name"
+            ],
+            "evaluator_reports": [
+              "crossing count",
+              "unique ID count",
+              "adjacent alternation violations"
+            ],
+            "nonzero_violations_raise_in_evaluator": false,
+            "authored_memorizer_is_supported_variant": false,
+            "learned_model": false
+          },
+          "Learn": {
+            "commit": "eebf49cb0b69a314bd13015340335a983aa64bfe",
+            "scene": "Isolated box meshes and static bodies, not connected yarn or constitutive simulation",
+            "warps_axis": "world Z",
+            "wefts_axis": "world X",
+            "up_axis": "world Y",
+            "material_source": "StandardMaterial3D albedo colours",
+            "hardcoded_crossing_count": 36,
+            "new_Godot_run": false
+          },
+          "FOLD": {
+            "commit": "824f9fa6f944248787b0b2077ef622761489201e",
+            "version": "1.2 rough draft",
+            "reference_normal": "second face g",
+            "swap_sign": "negative s for same normals; same s for opposite normals",
+            "zero": "unknown"
+          },
+          "new_DSL_or_mechanics_adapter": null
+        },
+        "learn_source_has_proxy_limit": true
+      },
+      "expected": "2DOF springs and Godot box/StandardMaterial proxies are not cloth continuum or calibrated mechanics"
+    },
+    {
+      "id": "fold_reference_normal_matches_spec",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "convention": {
+          "d": "sign of f minus g in one stipulated global up order; nonzero witnesses only",
+          "normal_f": "sigma_f in {-1,+1}",
+          "normal_g": "sigma_g in {-1,+1}",
+          "fold_relation": "s=d*sigma_g: the SECOND face normal is the reference",
+          "swap": "t=-s*sigma_f*sigma_g",
+          "whole_turn": "d and both normal signs reverse, so s is unchanged"
+        },
+        "fold_reference": {
+          "commit": "824f9fa6f944248787b0b2077ef622761489201e",
+          "version": "1.2 rough draft",
+          "reference_normal": "second face g",
+          "swap_sign": "negative s for same normals; same s for opposite normals",
+          "zero": "unknown"
+        }
+      },
+      "expected": "FOLD specification and authored semantic model agree on g as reference normal"
+    }
+  ],
+  "findings": [],
+  "fix_requests": [],
+  "input_bindings": [
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/weave-material-2026-10-22/primary-readback.json",
+      "sha256": "762ae1e4296fa2c9450e54be57dbf9d2674a467e13cdacfd4041e640e49f7bd4"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/weave-material-2026-10-22/directional-response.json",
+      "sha256": "13d0dc5cdf0e9d9c55a09c281220d80ad504c4f96e5e2ad6268a08d25d39c849"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/weave-material-2026-10-22/layer-relations.json",
+      "sha256": "1cf60a9544633a404dc34eab27614fb0426b36ec9c6341e4828e49bc0289195b"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/weave-material-2026-10-22/generator-scope.json",
+      "sha256": "627562748c7d6dbb4599853a020d984874c1fc273c916387f967cf9cabbed275"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/weave-material-2026-10-22/source-observations.json",
+      "sha256": "4737b408a1fd642d2b3b93343ae8c053a591f51037e74dc6dd32559f32536ac7"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/weave-material-2026-10-22/primary-reading.json",
+      "sha256": "118b678aec25047b37e6a3ba46589badfb8738959fe74e3f4b4f67813140cbcf"
+    },
+    {
+      "path": "C:/tmp/streeling-weave-material-inputs-20261022/ix-thickness.rs",
+      "sha256": "abae7d9b41cbf5a825b4dbe6f58b6579687c79027f1ae151b24e1b67eee30b8d"
+    },
+    {
+      "path": "C:/tmp/streeling-weave-material-inputs-20261022/ix-layers.rs",
+      "sha256": "959afa31a4a00b85ee73e37444ea25c358dbcd551996be91e3127dc8f0b17f41"
+    },
+    {
+      "path": "C:/tmp/streeling-weave-material-inputs-20261022/ix-controls.rs",
+      "sha256": "0cc562a2756c7ba92e1f8a5208ec5d50b381bded2dbff4d43f3e486efc114c55"
+    },
+    {
+      "path": "C:/tmp/streeling-weave-material-inputs-20261022/ix-test-thickness.rs",
+      "sha256": "8f480b304eb08aecd5d08f36bbb4a4162039a38ec29a425c0c5e405a3e980e90"
+    },
+    {
+      "path": "C:/tmp/streeling-weave-material-inputs-20261022/ix-0007-origami-thickness-as-parallel-rigid-panels.md",
+      "sha256": "bc44c07effa10ec9572d059aec416d343dd269a0e99049cf719f265b1b48a346"
+    },
+    {
+      "path": "C:/tmp/streeling-weave-material-inputs-20261022/Demerzel-evaluate_weave.py",
+      "sha256": "43ba4e1a245ebc8c9d2ab34a9219419ad136ef73d021c1073e1f123e69479d9f"
+    },
+    {
+      "path": "C:/tmp/streeling-weave-material-inputs-20261022/Demerzel-weave-trial.json",
+      "sha256": "da33830148b1ee98a1c004e0b89a86770f438da369e059cbdad06803da3a1955"
+    },
+    {
+      "path": "C:/tmp/streeling-weave-material-inputs-20261022/learn-trial.gd",
+      "sha256": "9e59b247bacff045398bfc9f00917fc3f0734b4d1e88424801f3f85c78fb8f99"
+    },
+    {
+      "path": "C:/tmp/streeling-weave-material-inputs-20261022/learn-README.md",
+      "sha256": "8aa42aaac1e23d103fdc81d531264ac697d03e03ba7647bbc03cd852e5608b06"
+    },
+    {
+      "path": "C:/tmp/streeling-weave-material-inputs-20261022/fold-spec.md",
+      "sha256": "492a23850990412d0bd607a0835d139e87fad7665aa9ea7fcaf95917c232666b"
+    }
+  ],
+  "audit_history": [
+    {
+      "event": "source_scope",
+      "status": "resolved",
+      "resolution": "all nine copied source files plus FOLD specification were read and hash-bound; no IX/Godot execution"
+    },
+    {
+      "event": "material_claim_boundary",
+      "status": "preserved",
+      "resolution": "directional response is an authored 2DOF linear-spring model and Godot uses box proxies/StandardMaterial3D; neither is cloth mechanics or physical calibration"
+    }
+  ],
+  "scope": {
+    "runtime": "no IX, Godot, material, GPU, build or test execution",
+    "source_pins": [
+      "d7c22fdd6a62becb66b9d7246ea85850e7c55854",
+      "f23ccae6c049d9066a1be2221c68f3b0bcf48373",
+      "eebf49cb0b69a314bd13015340335a983aa64bfe",
+      "824f9fa6f944248787b0b2077ef622761489201e"
+    ],
+    "model_boundary": "geometric layer/thickness and toy directional response evidence only"
+  }
+}

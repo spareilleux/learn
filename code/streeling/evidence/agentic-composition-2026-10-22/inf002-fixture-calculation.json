@@ -1,0 +1,112 @@
+{
+  "scope": "Independent Python arithmetic from pinned schema registry; not C# execution, index serialization or production retrieval.",
+  "ga_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+  "source_sha256": "77ecc162949d6c52b1dd880dd3e238d887ff9b90545723896ec6728d1ee14526",
+  "partitions": [
+    {
+      "name": "IDENTITY",
+      "start": 0,
+      "end": 5,
+      "weight": 0.0,
+      "role": "Identity"
+    },
+    {
+      "name": "STRUCTURE",
+      "start": 6,
+      "end": 29,
+      "weight": 0.45,
+      "role": "Similarity"
+    },
+    {
+      "name": "MORPHOLOGY",
+      "start": 30,
+      "end": 53,
+      "weight": 0.25,
+      "role": "Similarity"
+    },
+    {
+      "name": "CONTEXT",
+      "start": 54,
+      "end": 65,
+      "weight": 0.2,
+      "role": "Similarity"
+    },
+    {
+      "name": "SYMBOLIC",
+      "start": 66,
+      "end": 77,
+      "weight": 0.1,
+      "role": "Similarity"
+    },
+    {
+      "name": "EXTENSIONS",
+      "start": 78,
+      "end": 95,
+      "weight": 0.0,
+      "role": "Info"
+    },
+    {
+      "name": "SPECTRAL",
+      "start": 96,
+      "end": 108,
+      "weight": 0.0,
+      "role": "Info"
+    },
+    {
+      "name": "MODAL",
+      "start": 109,
+      "end": 148,
+      "weight": 0.1,
+      "role": "Similarity"
+    },
+    {
+      "name": "HIERARCHY",
+      "start": 149,
+      "end": 163,
+      "weight": 0.0,
+      "role": "Info"
+    },
+    {
+      "name": "ATONAL_MODAL",
+      "start": 164,
+      "end": 227,
+      "weight": 0.0,
+      "role": "Info"
+    },
+    {
+      "name": "ROOT",
+      "start": 228,
+      "end": 239,
+      "weight": 0.05,
+      "role": "Similarity"
+    }
+  ],
+  "raw_dimension": 240,
+  "compact_dimension": 124,
+  "pairs": [
+    {
+      "pair": "A/A",
+      "compact_equal": true,
+      "weighted_score": 1.15,
+      "compact_dot": 1.15
+    },
+    {
+      "pair": "A/B",
+      "compact_equal": true,
+      "weighted_score": 1.15,
+      "compact_dot": 1.15
+    },
+    {
+      "pair": "A/C",
+      "compact_equal": false,
+      "weighted_score": 1.0999999999999999,
+      "compact_dot": 1.1
+    },
+    {
+      "pair": "A/D",
+      "compact_equal": true,
+      "weighted_score": 1.15,
+      "compact_dot": 1.15
+    }
+  ]
+}

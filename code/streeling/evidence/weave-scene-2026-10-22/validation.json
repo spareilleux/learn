@@ -1,0 +1,69 @@
+{
+  "checked_at_utc": "2026-10-22T14:34:40.521595+00:00",
+  "scope": "Three new trilingual course drafts and one native saved/reloaded Godot weave experiment; not reviewed/published completion.",
+  "base_learn_commit": "5d260c6768ba8cb58b2a289ccef23e1981291da6",
+  "latest_main_checked": "05aa47b12b97e626405e961016d5035f7ecf74be",
+  "latest_main_delta": "Unrelated BRUTAL observatory changes, unchanged since prior tranche; not merged here.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "source_files": 9,
+  "new_localized_exercise_answer_pairs": 45,
+  "script_tests": {
+    "command": "node --test scripts/tests/lazy-demo.test.mjs scripts/tests/streeling-copy-source.test.mjs scripts/tests/sync-streeling.test.mjs",
+    "passed": 18,
+    "failed": 0,
+    "exit_code": 0,
+    "scope": "Explicit generator/copy/lazy-demo files only; no full GA/IX suite."
+  },
+  "static_build": {
+    "exit_code": 0,
+    "elapsed_seconds": 95.16528469999321,
+    "log": "C:\\tmp\\streeling-weave-build-20261022.log",
+    "pages": 1741,
+    "dependency_install": "Existing node_modules junction; no fresh npm ci.",
+    "warnings": "Existing highlighting fallback, i18n/404 and preserved-journal warnings; full build log retained."
+  },
+  "rendered_links": {
+    "pages": 21,
+    "article_links": 423,
+    "unresolved_internal_links": [],
+    "source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML articles, not browser or public deployment."
+  },
+  "runtime": {
+    "baseline_exit": 0,
+    "native_checks": 190,
+    "matching_rays": 36,
+    "negative_controls": 3,
+    "independent_native_execution_passed": true,
+    "scope": "Windows Godot4.6.1 GDScript only; no rendering/export/C# assembly or product integration result."
+  },
+  "review": {
+    "content_and_native_AI_receipts": "content-audit.json and lab-execution-review.json",
+    "formal": "Code review: skipped (ce-code-review unavailable)",
+    "formal_reason": "Earlier top-level CE review terminated without usable receipt; rejected transport/cleanup operations not retried.",
+    "manual_host_scan": "Inspected owned lab, source/evidence claims and generated delta; no blocking issue found.",
+    "human_subject": null,
+    "fluent_language": null,
+    "learner": null
+  },
+  "source_inventory": {
+    "core_english_modules": 156,
+    "target": 525,
+    "remaining_core_source_gaps": 369,
+    "locale_counts": {
+      "en": 157,
+      "fr": 157,
+      "es": 157
+    }
+  },
+  "public_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "configured_lint_typecheck": "No package.json lint or typecheck scripts configured; targeted tests, Node syntax check and Astro build used."
+}

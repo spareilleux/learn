@@ -1,0 +1,275 @@
+{
+  "scope": "Authored affine clock model and deterministic error bounds, not API samples or observed oscillator drift; context coordinates exact by premise.",
+  "anchors": [
+    {
+      "context_seconds": 0,
+      "performance_ms": 10000
+    },
+    {
+      "context_seconds": 60,
+      "performance_ms": 70006
+    }
+  ],
+  "intercept_ms": {
+    "rational": "10000",
+    "decimal": 10000.0
+  },
+  "slope_ms_per_context_second": {
+    "rational": "10001/10",
+    "decimal": 1000.1
+  },
+  "relative_rate_difference_ppm": {
+    "rational": "100",
+    "decimal": 100.0
+  },
+  "anchor_performance_error_bound_ms": {
+    "rational": "1/2",
+    "decimal": 0.5
+  },
+  "rows": [
+    {
+      "context_seconds": 0,
+      "affine_performance_ms": {
+        "rational": "10000",
+        "decimal": 10000.0
+      },
+      "nominal_1000_ms_rate_prediction": {
+        "rational": "10000",
+        "decimal": 10000.0
+      },
+      "nominal_rate_error_ms": {
+        "rational": "0",
+        "decimal": 0.0
+      },
+      "anchor_weights": [
+        {
+          "rational": "1",
+          "decimal": 1.0
+        },
+        {
+          "rational": "0",
+          "decimal": 0.0
+        }
+      ],
+      "assumed_anchor_error_bound_ms": {
+        "rational": "1/2",
+        "decimal": 0.5
+      },
+      "model_inside_anchor_interval": true
+    },
+    {
+      "context_seconds": 10,
+      "affine_performance_ms": {
+        "rational": "20001",
+        "decimal": 20001.0
+      },
+      "nominal_1000_ms_rate_prediction": {
+        "rational": "20000",
+        "decimal": 20000.0
+      },
+      "nominal_rate_error_ms": {
+        "rational": "1",
+        "decimal": 1.0
+      },
+      "anchor_weights": [
+        {
+          "rational": "5/6",
+          "decimal": 0.8333333333333334
+        },
+        {
+          "rational": "1/6",
+          "decimal": 0.16666666666666666
+        }
+      ],
+      "assumed_anchor_error_bound_ms": {
+        "rational": "1/2",
+        "decimal": 0.5
+      },
+      "model_inside_anchor_interval": true
+    },
+    {
+      "context_seconds": 30,
+      "affine_performance_ms": {
+        "rational": "40003",
+        "decimal": 40003.0
+      },
+      "nominal_1000_ms_rate_prediction": {
+        "rational": "40000",
+        "decimal": 40000.0
+      },
+      "nominal_rate_error_ms": {
+        "rational": "3",
+        "decimal": 3.0
+      },
+      "anchor_weights": [
+        {
+          "rational": "1/2",
+          "decimal": 0.5
+        },
+        {
+          "rational": "1/2",
+          "decimal": 0.5
+        }
+      ],
+      "assumed_anchor_error_bound_ms": {
+        "rational": "1/2",
+        "decimal": 0.5
+      },
+      "model_inside_anchor_interval": true
+    },
+    {
+      "context_seconds": 60,
+      "affine_performance_ms": {
+        "rational": "70006",
+        "decimal": 70006.0
+      },
+      "nominal_1000_ms_rate_prediction": {
+        "rational": "70000",
+        "decimal": 70000.0
+      },
+      "nominal_rate_error_ms": {
+        "rational": "6",
+        "decimal": 6.0
+      },
+      "anchor_weights": [
+        {
+          "rational": "0",
+          "decimal": 0.0
+        },
+        {
+          "rational": "1",
+          "decimal": 1.0
+        }
+      ],
+      "assumed_anchor_error_bound_ms": {
+        "rational": "1/2",
+        "decimal": 0.5
+      },
+      "model_inside_anchor_interval": true
+    },
+    {
+      "context_seconds": 90,
+      "affine_performance_ms": {
+        "rational": "100009",
+        "decimal": 100009.0
+      },
+      "nominal_1000_ms_rate_prediction": {
+        "rational": "100000",
+        "decimal": 100000.0
+      },
+      "nominal_rate_error_ms": {
+        "rational": "9",
+        "decimal": 9.0
+      },
+      "anchor_weights": [
+        {
+          "rational": "-1/2",
+          "decimal": -0.5
+        },
+        {
+          "rational": "3/2",
+          "decimal": 1.5
+        }
+      ],
+      "assumed_anchor_error_bound_ms": {
+        "rational": "1",
+        "decimal": 1.0
+      },
+      "model_inside_anchor_interval": false
+    },
+    {
+      "context_seconds": 120,
+      "affine_performance_ms": {
+        "rational": "130012",
+        "decimal": 130012.0
+      },
+      "nominal_1000_ms_rate_prediction": {
+        "rational": "130000",
+        "decimal": 130000.0
+      },
+      "nominal_rate_error_ms": {
+        "rational": "12",
+        "decimal": 12.0
+      },
+      "anchor_weights": [
+        {
+          "rational": "-1",
+          "decimal": -1.0
+        },
+        {
+          "rational": "2",
+          "decimal": 2.0
+        }
+      ],
+      "assumed_anchor_error_bound_ms": {
+        "rational": "3/2",
+        "decimal": 1.5
+      },
+      "model_inside_anchor_interval": false
+    }
+  ],
+  "scheduled_lead": {
+    "context_target_seconds": 10,
+    "mapped_target_performance_ms": {
+      "rational": "20001",
+      "decimal": 20001.0
+    },
+    "call_performance_ms": 19980,
+    "lead_ms": {
+      "rational": "21",
+      "decimal": 21.0
+    },
+    "raw_context_seconds_minus_performance_ms_is_meaningless": true
+  },
+  "held_out": {
+    "context_seconds": 90,
+    "authored_observed_performance_ms": {
+      "rational": "100011",
+      "decimal": 100011.0
+    },
+    "predicted_center_ms": {
+      "rational": "100009",
+      "decimal": 100009.0
+    },
+    "residual_ms": {
+      "rational": "2",
+      "decimal": 2.0
+    },
+    "prediction_error_bound_ms": {
+      "rational": "1",
+      "decimal": 1.0
+    },
+    "heldout_error_bound_ms": {
+      "rational": "1/2",
+      "decimal": 0.5
+    },
+    "max_allowed_absolute_residual_under_combined_assumptions_ms": {
+      "rational": "3/2",
+      "decimal": 1.5
+    },
+    "prediction_interval_ms": [
+      {
+        "rational": "100008",
+        "decimal": 100008.0
+      },
+      {
+        "rational": "100010",
+        "decimal": 100010.0
+      }
+    ],
+    "heldout_interval_ms": [
+      {
+        "rational": "200021/2",
+        "decimal": 100010.5
+      },
+      {
+        "rational": "200023/2",
+        "decimal": 100011.5
+      }
+    ],
+    "combined_assumptions_refuted": true,
+    "cause_identified": false
+  },
+  "one_anchor_cannot_identify_rate": true,
+  "new_clock_adapter": null
+}

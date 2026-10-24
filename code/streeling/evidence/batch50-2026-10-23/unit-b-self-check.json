@@ -1,0 +1,518 @@
+{
+  "schema": "streeling-batch50-unit-author-self-check-v1",
+  "scope": "Author self-check of exact authored bytes and fixed-model arithmetic; not independent review, human review, learner validation or GA/IX runtime execution.",
+  "base_learn_commit": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+  "unit": "b",
+  "source_files": 48,
+  "localized_exercise_answer_pairs": 240,
+  "prepared_learner_criteria": 80,
+  "checks": {
+    "metadata_except_title": true,
+    "ordered_hrefs": true,
+    "inline_and_fenced_code": true,
+    "numeric_multiset_including_signed_and_leading_dot": true,
+    "UTF8_LF_no_BOM": true,
+    "base_existing_prerequisites": true,
+    "EN_prose_word_range": [
+      650,
+      1000
+    ],
+    "self_read_all_translations_and_math": true
+  },
+  "arithmetic_checks": {
+    "CS015": "interval union and missing-index control",
+    "CS016": "terminal partition and request-only control",
+    "CS017": "order and validation witnesses; identity control",
+    "CYB009": "refill trace and zero-refill control",
+    "CYB010": "exact decimal derivatives, filter and constant control",
+    "CYB011": "stored/applied traces, unused-range limitation and wide-limit control",
+    "COG009": "opposite-order contrasts and equal-base control",
+    "COG010": "delay/category denominators and exposure exclusion; repeated-only lacks novel observations",
+    "COG011": "paired ratings and copied-vector limitation",
+    "INF010": "distinct joint rates and independent-table control",
+    "INF011": "round trip, header charge and expanding control",
+    "INF012": "order-sensitive revision fold; non-state notes leave state unchanged",
+    "NET010": "dependency bound, resource serialization and no-conflict control",
+    "NET011": "contract field mismatches and matching-card control",
+    "PM008": "scope/workload/role durations; zero required capacity has no finite estimate",
+    "PM009": "cohort denominator ratios; mirror event changes leave cohort ratios fixed"
+  },
+  "source_reading_hash_limits": [
+    {
+      "path_or_url": "https://www.mathworks.com/help/simulink/slref/discretepidcontroller.html",
+      "pin": "accessed 2026-10-23; unversioned document body",
+      "sha256": null,
+      "scope": "Description: derivative contribution and first-order filtering; authored recurrence is separate.",
+      "transport": "Browser body reading succeeded; direct hash fetch failed: HTTP Error 403: Forbidden"
+    },
+    {
+      "path_or_url": "https://www.mathworks.com/help/simulink/slref/anti-windup-control-using-a-pid-controller.html",
+      "pin": "accessed 2026-10-23; unversioned document body",
+      "sha256": null,
+      "scope": "Output saturation and conditional-integration/clamping discussion; authored rule differs.",
+      "transport": "Browser body reading succeeded; direct hash fetch failed: HTTP Error 403: Forbidden"
+    },
+    {
+      "path_or_url": "https://www.rfc-editor.org/rfc/rfc1950.html",
+      "pin": "accessed 2026-10-23; unversioned document body",
+      "sha256": null,
+      "scope": "Lossless-format scope and data-format overhead; toy encoding is separate.",
+      "transport": "Browser body reading succeeded; direct hash fetch failed: <urlopen error _ssl.c:1063: The handshake operation timed out>"
+    },
+    {
+      "path_or_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/dc2e74cbd992a298f67efb928b5b3754615e1924/Scripts/antigravity-bridge.ps1",
+      "pin": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": null,
+      "scope": "Handoff-writing branch and captured context; source body.",
+      "transport": "Browser body reading succeeded; direct hash fetch failed: <urlopen error _ssl.c:1063: The handshake operation timed out>"
+    }
+  ],
+  "retained_authoring_failures": [
+    {
+      "action": "Direct source-body byte fetch during initial author script",
+      "result": "HTTP403 caused initial run to stop; no lesson claim depended on a fabricated hash.",
+      "refinement": "Record successful browser body reading and null SHA256 where direct transport fails; replay authoring before freeze."
+    }
+  ],
+  "evidence_sha256": "26835a1ea650a76c9a255b8b2f3e3027c054d96361faca6d829d37b0f3dea414",
+  "files": [
+    {
+      "path": "streeling/courses/computer-science/en/cs-015-compose-overlapping-chunks-without-duplicate-frames.md",
+      "sha256": "1de5f2ee3ced1be75e4eeb75991bc5f8e6dd5ee41e4d5eab3d832fff2af602a0",
+      "bytes": 7158,
+      "prose_words": 826,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/computer-science/fr/cs-015-compose-overlapping-chunks-without-duplicate-frames.fr.md",
+      "sha256": "26911ed70e2bbaba268352767a0ef26dc6861985e37ab5d17cd26fa8be84fc09",
+      "bytes": 7733,
+      "prose_words": 867,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/computer-science/es/cs-015-compose-overlapping-chunks-without-duplicate-frames.es.md",
+      "sha256": "e70691cbb93303929d99beb867eb50317b9c3af21cb11ac7a5f4a9cf5d262b0f",
+      "bytes": 7541,
+      "prose_words": 866,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/computer-science/en/cs-016-make-cancellation-an-explicit-pipeline-outcome.md",
+      "sha256": "efd466a072190c86c6d40fb1f8f8c81f6e9b6130ac16d1800335d2722d937a03",
+      "bytes": 7339,
+      "prose_words": 876,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/computer-science/fr/cs-016-make-cancellation-an-explicit-pipeline-outcome.fr.md",
+      "sha256": "ec9589ee3564c276f81e3b3e0a71a735de57a58a2a2e7cc77564b1d0b5ccb80e",
+      "bytes": 7877,
+      "prose_words": 897,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/computer-science/es/cs-016-make-cancellation-an-explicit-pipeline-outcome.es.md",
+      "sha256": "36883851cfaad0193d910e39c954f9e87c42163f7dd9d33c771f0e565b3f4fa2",
+      "bytes": 7683,
+      "prose_words": 893,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/computer-science/en/cs-017-test-pipeline-rewrites-with-counterexamples.md",
+      "sha256": "9c28b373054530234ce99a61848b87243c8acb65c250282a03ce7fdd95c46c68",
+      "bytes": 6952,
+      "prose_words": 826,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/computer-science/fr/cs-017-test-pipeline-rewrites-with-counterexamples.fr.md",
+      "sha256": "70c22ed20441647ecd129ac669a517399374cfc7c1e4a9c09c37683cd51e8bac",
+      "bytes": 7427,
+      "prose_words": 840,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/computer-science/es/cs-017-test-pipeline-rewrites-with-counterexamples.es.md",
+      "sha256": "4639ac3be07d5f76b2fb3d9ed3dd2eebf1cc0e6df1618a29a22f627258a18af1",
+      "bytes": 7168,
+      "prose_words": 830,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-009-bound-admission-with-a-token-bucket.md",
+      "sha256": "4242599c427c1d2bb9fa90fe156cc9bda499f982eb888866c73fc0b4a9192c55",
+      "bytes": 7081,
+      "prose_words": 833,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cybernetics/fr/cyb-009-bound-admission-with-a-token-bucket.fr.md",
+      "sha256": "4397614ab819c8f5d96427d558fe91a0d687bd6989406aca16d0270c39ac8bf7",
+      "bytes": 7618,
+      "prose_words": 855,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cybernetics/es/cyb-009-bound-admission-with-a-token-bucket.es.md",
+      "sha256": "a796856bc326c6a395a2cf45472dd2b5934a381a2414115e3ffb04844adc7741",
+      "bytes": 7403,
+      "prose_words": 854,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-010-separate-derivative-noise-from-plant-motion.md",
+      "sha256": "2a75f3e964759a7335eeb94c46e8ca743f1789421a9b07724386439bb9b07247",
+      "bytes": 7031,
+      "prose_words": 795,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cybernetics/fr/cyb-010-separate-derivative-noise-from-plant-motion.fr.md",
+      "sha256": "dc74190e43129b4e8b023dff92ee11b518b436e28858ca05f4e0a56a3f6ba562",
+      "bytes": 7453,
+      "prose_words": 818,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cybernetics/es/cyb-010-separate-derivative-noise-from-plant-motion.es.md",
+      "sha256": "2bfd2b0caf7624503441abcbcda35770c73361778135abb75ed6c9e3a6b9eba9",
+      "bytes": 7220,
+      "prose_words": 817,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-011-prevent-integral-accumulation-under-saturation.md",
+      "sha256": "a73711166ecc017b610e2a8c51853bb951d9257ad5829d9432ecf5bb718114cf",
+      "bytes": 7345,
+      "prose_words": 816,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cybernetics/fr/cyb-011-prevent-integral-accumulation-under-saturation.fr.md",
+      "sha256": "4e050174fa3cec076491506a47890a2cc22c0a91a8df84c5a37edb93537e8ead",
+      "bytes": 7778,
+      "prose_words": 837,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cybernetics/es/cyb-011-prevent-integral-accumulation-under-saturation.es.md",
+      "sha256": "455f19af5c636f4355d4ddac56f8ac9af5c67c8a4eb99a6af2acdb8cda673ca3",
+      "bytes": 7537,
+      "prose_words": 830,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-009-counterbalance-practice-order-before-comparing-interfaces.md",
+      "sha256": "6156f1beacc64b6863a18c3b07834869920390db8e55850c346475ff1d5fb4a0",
+      "bytes": 7217,
+      "prose_words": 809,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cognitive-science/fr/cog-009-counterbalance-practice-order-before-comparing-interfaces.fr.md",
+      "sha256": "971c56b96a2c443bb53b68eb0a4aa9d924ad91d68ba87d31eeaf90b937042aa7",
+      "bytes": 7612,
+      "prose_words": 850,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cognitive-science/es/cog-009-counterbalance-practice-order-before-comparing-interfaces.es.md",
+      "sha256": "f21b05f90baf183b31f969db6c57581262bac482b79047bc4cd67f04697b2e54",
+      "bytes": 7357,
+      "prose_words": 834,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-010-use-delayed-transfer-probes-beyond-repeated-items.md",
+      "sha256": "eb951097d8f27ab98f5b91ced256503b51e9397293d48a3c84187be0e89c3d3e",
+      "bytes": 7463,
+      "prose_words": 822,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cognitive-science/fr/cog-010-use-delayed-transfer-probes-beyond-repeated-items.fr.md",
+      "sha256": "e0e55206dafa3472402757b30d8c38191c6357f4bd8490abbcc0e447c4e14a11",
+      "bytes": 7996,
+      "prose_words": 862,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cognitive-science/es/cog-010-use-delayed-transfer-probes-beyond-repeated-items.es.md",
+      "sha256": "e0dd55e01d51b99f925a43dffecdf2059c511b1e59981dba04d70b0bc3ca1867",
+      "bytes": 7735,
+      "prose_words": 837,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-011-measure-rubric-disagreement-before-adjudication.md",
+      "sha256": "4a5c0fec641fa1c12758f2dcdac7eaab996bbbbc3feb716f7c130030e6761786",
+      "bytes": 7105,
+      "prose_words": 792,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cognitive-science/fr/cog-011-measure-rubric-disagreement-before-adjudication.fr.md",
+      "sha256": "5daf167a37df95d258e158470f4c6b9ff59582093a82c765eb933d10449664c8",
+      "bytes": 7358,
+      "prose_words": 797,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/cognitive-science/es/cog-011-measure-rubric-disagreement-before-adjudication.es.md",
+      "sha256": "5c8e95670ad22da83db6c452597d39e65aa40f0e29d86923ecad6669115c6022",
+      "bytes": 7191,
+      "prose_words": 790,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-010-keep-joint-outcomes-when-composing-verdicts.md",
+      "sha256": "4dcdc388dca745b3563e5e8c639862d20b065bbd23355f0e84895f13c59e72e2",
+      "bytes": 7012,
+      "prose_words": 805,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/information-theory/fr/inf-010-keep-joint-outcomes-when-composing-verdicts.fr.md",
+      "sha256": "7a2a4cb746ffdead15e5ba1d6706b9a6851e3fd60569dfa866ad48757f1c1971",
+      "bytes": 7431,
+      "prose_words": 815,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/information-theory/es/inf-010-keep-joint-outcomes-when-composing-verdicts.es.md",
+      "sha256": "f40eb6737ab9f78af981d6cdcaa45dda50172e2112ed589f5c6cc73c6d4181ae",
+      "bytes": 7187,
+      "prose_words": 800,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-011-separate-compressed-size-from-preserved-information.md",
+      "sha256": "0806cd078a98d41564a9d4064c5e8b765554ace81823f43e64c4e67099b3c4dc",
+      "bytes": 7026,
+      "prose_words": 794,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/information-theory/fr/inf-011-separate-compressed-size-from-preserved-information.fr.md",
+      "sha256": "4fbf17daf56dbf21b593cdc945dfba6c14390a0a6a4a21ea095f5e9ded7de086",
+      "bytes": 7387,
+      "prose_words": 814,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/information-theory/es/inf-011-separate-compressed-size-from-preserved-information.es.md",
+      "sha256": "713c028540d02b5dca27478f70801eb04b7cd6431cf7e88d5e0cfa35dfc3278c",
+      "bytes": 7150,
+      "prose_words": 806,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-012-retain-event-order-in-a-handoff-summary.md",
+      "sha256": "671231919c1aa58da71ceee664d343ef181267d94d0c7b495eefd5e70ea60981",
+      "bytes": 7039,
+      "prose_words": 803,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/information-theory/fr/inf-012-retain-event-order-in-a-handoff-summary.fr.md",
+      "sha256": "c7a08ba977f1000a95e11a4517c0a88c932731570e1eaab9bc2f98ad34c2050d",
+      "bytes": 7475,
+      "prose_words": 812,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/information-theory/es/inf-012-retain-event-order-in-a-handoff-summary.es.md",
+      "sha256": "f8c0df82d1df70d6dbe64cdb2e47fcff3fb8c417ec7cd35deda4bc32e1a5b21c",
+      "bytes": 7200,
+      "prose_words": 822,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/network-science/en/net-010-compute-critical-paths-with-resource-assumptions.md",
+      "sha256": "61b217eef1cf38c0d21ec94cea890f4733515db27080b9f40405b42a230ee699",
+      "bytes": 7503,
+      "prose_words": 811,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/network-science/fr/net-010-compute-critical-paths-with-resource-assumptions.fr.md",
+      "sha256": "b4c7a4a484b3a6d7a7fb4c03e893b4d8f59847fda8411ee24b6ef9e0e2fdc1e6",
+      "bytes": 7800,
+      "prose_words": 821,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/network-science/es/net-010-compute-critical-paths-with-resource-assumptions.es.md",
+      "sha256": "0bfe177162f1ff12a872cb1d609db0f4a93400e78901a3722ed21024f4e77e7a",
+      "bytes": 7572,
+      "prose_words": 815,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/network-science/en/net-011-separate-reachability-from-semantic-compatibility.md",
+      "sha256": "dc875e8eb8be14d04908e45ea1a4a5829c815f139751061397f71589243d143b",
+      "bytes": 7470,
+      "prose_words": 809,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/network-science/fr/net-011-separate-reachability-from-semantic-compatibility.fr.md",
+      "sha256": "89a26b125304931ba501f3b6def00edf7c54f3d8be2c324a38fb58b5adbd4b80",
+      "bytes": 7767,
+      "prose_words": 802,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/network-science/es/net-011-separate-reachability-from-semantic-compatibility.es.md",
+      "sha256": "3d925f8d3f31259ada73ceebe77f2f1e569fc1369975bad86fc64310566fe02f",
+      "bytes": 7580,
+      "prose_words": 800,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md",
+      "sha256": "38f9f6bf4bcc8480d6c6a87729b2021fde7ca04e91cf7fbf1d5595b81db2544d",
+      "bytes": 7778,
+      "prose_words": 847,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/product-management/fr/pm-008-size-a-fifty-course-batch-by-review-capacity.fr.md",
+      "sha256": "67f59df163aa56ff1e45236869ad0e4486f58533eccb3287d0653d122ac05eda",
+      "bytes": 8172,
+      "prose_words": 874,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/product-management/es/pm-008-size-a-fifty-course-batch-by-review-capacity.es.md",
+      "sha256": "ae317629274a372cd47cc62da122fb1ea60323b5622ea58b0de7a05181f40d0c",
+      "bytes": 8032,
+      "prose_words": 865,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-009-separate-release-adoption-from-artifact-downloads.md",
+      "sha256": "d022e540be651daa1a413f0110333b6cfbf56e53033cfa26d29119d366963d7e",
+      "bytes": 7252,
+      "prose_words": 808,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/product-management/fr/pm-009-separate-release-adoption-from-artifact-downloads.fr.md",
+      "sha256": "9434225c272a8d8a186644d094e9ce142787a0553d36c23f4c71f95b61fd318c",
+      "bytes": 7666,
+      "prose_words": 821,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    },
+    {
+      "path": "streeling/courses/product-management/es/pm-009-separate-release-adoption-from-artifact-downloads.es.md",
+      "sha256": "315df3ff12997a87ab51fd37b0a14c9d1d9350a3bfd0b1957b7fdccaf167da74",
+      "bytes": 7363,
+      "prose_words": 830,
+      "exercise_answer_pairs": 5,
+      "checks_passed": true,
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "passed": true,
+  "human_review": null,
+  "fluent_language_review": null,
+  "learner_decision": null,
+  "runtime_decision": null
+}

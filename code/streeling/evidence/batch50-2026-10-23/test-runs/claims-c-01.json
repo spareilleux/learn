@@ -1,0 +1,1008 @@
+{
+  "tag": "claims-c-01",
+  "unit": "c",
+  "started_at_utc": "2026-10-24T00:09:17.430065+00:00",
+  "ended_at_utc": "2026-10-24T00:09:17.665834+00:00",
+  "base_learn_commit": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+  "args": [
+    "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "code/streeling/evidence/batch50-2026-10-23/tests",
+    "-p",
+    "test_unit_c.py",
+    "-v"
+  ],
+  "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+  "elapsed_seconds": 0.23553840001113713,
+  "exit_code": 0,
+  "tests_run": 16,
+  "selected_courses": 16,
+  "observation_count": 32,
+  "observations": [
+    {
+      "case": "model",
+      "code": "DV011",
+      "expected": {
+        "column_totals": [
+          21,
+          21
+        ],
+        "normalized_rows": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ],
+          null
+        ],
+        "overall_total": 42,
+        "totals": [
+          2,
+          40,
+          0
+        ]
+      },
+      "observed": {
+        "column_totals": [
+          21,
+          21
+        ],
+        "normalized_rows": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ],
+          null
+        ],
+        "overall_total": 42,
+        "totals": [
+          2,
+          40,
+          0
+        ]
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "negative",
+      "code": "DV011",
+      "expected": [
+        0.2,
+        0.8
+      ],
+      "observed": [
+        0.2,
+        0.8
+      ],
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "model",
+      "code": "DV012",
+      "expected": {
+        "A_quantiles_ms": [
+          2,
+          100
+        ],
+        "B_quantiles_ms": [
+          5,
+          7
+        ],
+        "average_medians_ms": 3.5,
+        "average_upper_quantiles_ms": 53.5,
+        "pooled_quantiles_ms": [
+          4,
+          100
+        ]
+      },
+      "observed": {
+        "A_quantiles_ms": [
+          2,
+          100
+        ],
+        "B_quantiles_ms": [
+          5,
+          7
+        ],
+        "average_medians_ms": 3.5,
+        "average_upper_quantiles_ms": 53.5,
+        "pooled_quantiles_ms": [
+          4,
+          100
+        ]
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "negative",
+      "code": "DV012",
+      "expected": 2,
+      "observed": 2,
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "model",
+      "code": "DV013",
+      "expected": {
+        "last_A": 0.75,
+        "last_B": 0.72,
+        "shared_differences_B_minus_A": [
+          0.05,
+          0.02
+        ],
+        "shared_mean_A": 0.65,
+        "shared_mean_B": 0.685,
+        "shared_mean_difference": 0.035
+      },
+      "observed": {
+        "last_A": 0.75,
+        "last_B": 0.72,
+        "shared_differences_B_minus_A": [
+          0.050000000000000044,
+          0.020000000000000018
+        ],
+        "shared_mean_A": 0.6499999999999999,
+        "shared_mean_B": 0.685,
+        "shared_mean_difference": 0.03500000000000014
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "negative",
+      "code": "DV013",
+      "expected": [
+        0,
+        0
+      ],
+      "observed": [
+        0.0,
+        0.0
+      ],
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "model",
+      "code": "FUT008",
+      "expected": {
+        "departures_trace": [
+          6,
+          6,
+          6
+        ],
+        "queue_trace": [
+          12,
+          14,
+          16,
+          18
+        ],
+        "total_departures": 18,
+        "zero_arrival_drain_weeks": 2
+      },
+      "observed": {
+        "departures_trace": [
+          6,
+          6,
+          6
+        ],
+        "queue_trace": [
+          12,
+          14,
+          16,
+          18
+        ],
+        "total_departures": 18,
+        "zero_arrival_drain_weeks": 2
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "negative",
+      "code": "FUT008",
+      "expected": [
+        12,
+        9,
+        6,
+        3,
+        0
+      ],
+      "observed": [
+        12,
+        9,
+        6,
+        3,
+        0
+      ],
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "model",
+      "code": "FUT009",
+      "expected": {
+        "direct_max_regret": 18,
+        "direct_regret": [
+          0,
+          18
+        ],
+        "direct_worst": 26,
+        "staged_max_regret": 4,
+        "staged_regret": [
+          4,
+          0
+        ],
+        "staged_worst": 10,
+        "state_best": [
+          6,
+          8
+        ]
+      },
+      "observed": {
+        "direct_max_regret": 18,
+        "direct_regret": [
+          0,
+          18
+        ],
+        "direct_worst": 26,
+        "staged_max_regret": 4,
+        "staged_regret": [
+          4,
+          0
+        ],
+        "staged_worst": 10,
+        "state_best": [
+          6,
+          8
+        ]
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "negative",
+      "code": "FUT009",
+      "expected": 30,
+      "observed": 30,
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "model",
+      "code": "PHI008",
+      "expected": {
+        "false_negative": 0,
+        "false_positive": 1,
+        "spec": [
+          true,
+          false,
+          false,
+          false
+        ],
+        "true_negative": 2,
+        "true_positive": 1,
+        "weak_oracle": [
+          true,
+          true,
+          false,
+          false
+        ]
+      },
+      "observed": {
+        "false_negative": 0,
+        "false_positive": 1,
+        "spec": [
+          true,
+          false,
+          false,
+          false
+        ],
+        "true_negative": 2,
+        "true_positive": 1,
+        "weak_oracle": [
+          true,
+          true,
+          false,
+          false
+        ]
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "negative",
+      "code": "PHI008",
+      "expected": {
+        "missing": [
+          "confidence"
+        ],
+        "well_formed_required_keys": false
+      },
+      "observed": {
+        "missing": [
+          "confidence"
+        ],
+        "well_formed_required_keys": false
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "model",
+      "code": "PHI009",
+      "expected": {
+        "may_execute": [
+          false,
+          false,
+          false,
+          true
+        ],
+        "permit": [
+          false,
+          false,
+          false,
+          true
+        ]
+      },
+      "observed": {
+        "may_execute": [
+          false,
+          false,
+          false,
+          true
+        ],
+        "permit": [
+          false,
+          false,
+          false,
+          true
+        ]
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "negative",
+      "code": "PHI009",
+      "expected": {
+        "may_execute": false,
+        "permit": true
+      },
+      "observed": {
+        "may_execute": false,
+        "permit": true
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "model",
+      "code": "PHY013",
+      "expected": {
+        "second_torque_Nm": [
+          0,
+          0,
+          -4
+        ],
+        "torque_Nm": [
+          0,
+          0,
+          -6
+        ]
+      },
+      "observed": {
+        "second_torque_Nm": [
+          0,
+          0.0,
+          -3.9999999999999996
+        ],
+        "torque_Nm": [
+          0,
+          0.0,
+          -6.0
+        ]
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "negative",
+      "code": "PHY013",
+      "expected": [
+        0,
+        0,
+        -6
+      ],
+      "observed": [
+        0,
+        0.0,
+        -6.000000000000001
+      ],
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "model",
+      "code": "PHY014",
+      "expected": {
+        "fixed_mass_density_kg_m3": 100,
+        "fully_scaled_mass_kg": 0.128,
+        "fully_scaled_volume_m3": 0.00016,
+        "mass_kg": 0.016,
+        "planar_scaled_mass_kg": 0.064,
+        "volume_m3": 2e-05
+      },
+      "observed": {
+        "fixed_mass_density_kg_m3": 100.0,
+        "fully_scaled_mass_kg": 0.12800000000000003,
+        "fully_scaled_volume_m3": 0.00016000000000000004,
+        "mass_kg": 0.016000000000000004,
+        "planar_scaled_mass_kg": 0.06400000000000002,
+        "volume_m3": 2.0000000000000005e-05
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "negative",
+      "code": "PHY014",
+      "expected": 4,
+      "observed": 4.0,
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "model",
+      "code": "PHY015",
+      "expected": {
+        "intervals_mm": [
+          [
+            -1,
+            1
+          ],
+          [
+            2,
+            4
+          ]
+        ],
+        "nominal_clearance_mm": 1,
+        "thickened_nominal_mm": 0,
+        "thickened_worst_mm": -0.7,
+        "worst_clearance_mm": 0.3
+      },
+      "observed": {
+        "intervals_mm": [
+          [
+            -1.0,
+            1.0
+          ],
+          [
+            2.0,
+            4.0
+          ]
+        ],
+        "nominal_clearance_mm": 1.0,
+        "thickened_nominal_mm": 0.0,
+        "thickened_worst_mm": -0.7,
+        "worst_clearance_mm": 0.30000000000000004
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "negative",
+      "code": "PHY015",
+      "expected": 1,
+      "observed": 1,
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "model",
+      "code": "SEM009",
+      "expected": {
+        "composed_m": 0.23,
+        "composed_mm": 230,
+        "offset_m": 0.03,
+        "scaled_offset_m": 0.06,
+        "wrong_raw_sum": 30.2
+      },
+      "observed": {
+        "composed_m": 0.23,
+        "composed_mm": 230.0,
+        "offset_m": 0.03,
+        "scaled_offset_m": 0.06,
+        "wrong_raw_sum": 30.2
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "negative",
+      "code": "SEM009",
+      "expected": {
+        "correct": 0.2,
+        "discriminates": false,
+        "wrong": 0.2
+      },
+      "observed": {
+        "correct": 0.2,
+        "discriminates": false,
+        "wrong": 0.2
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "model",
+      "code": "SEM010",
+      "expected": {
+        "after_title_rename_distinct_ids": 2,
+        "distinct_ids": 2,
+        "distinct_pairs": 4,
+        "rows": 4
+      },
+      "observed": {
+        "after_title_rename_distinct_ids": 2,
+        "distinct_ids": 2,
+        "distinct_pairs": 4,
+        "rows": 4
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "negative",
+      "code": "SEM010",
+      "expected": {
+        "conflict": true,
+        "distinct_pairs": 4,
+        "rows": 5
+      },
+      "observed": {
+        "conflict": true,
+        "distinct_pairs": 4,
+        "rows": 5
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "model",
+      "code": "SEM011",
+      "expected": {
+        "alias_result": 11,
+        "difference": 8,
+        "v1": 11,
+        "v2": 19
+      },
+      "observed": {
+        "alias_result": 11,
+        "difference": 8,
+        "v1": 11,
+        "v2": 19
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "negative",
+      "code": "SEM011",
+      "expected": {
+        "discriminates": false,
+        "v1": 3,
+        "v2": 3
+      },
+      "observed": {
+        "discriminates": false,
+        "v1": 3,
+        "v2": 3
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "model",
+      "code": "VC011",
+      "expected": {
+        "bitangent": [
+          0,
+          1,
+          0
+        ],
+        "correct_world_sample": [
+          0,
+          0.6,
+          0.8
+        ],
+        "corrected_bitangent": [
+          0,
+          1,
+          0
+        ],
+        "corrected_w": -1,
+        "old_w_bitangent": [
+          0,
+          -1,
+          0
+        ],
+        "reflected_normal": [
+          0,
+          0,
+          1
+        ],
+        "reflected_tangent": [
+          -1,
+          0,
+          0
+        ],
+        "sample_dot": 0.28,
+        "wrong_world_sample": [
+          0,
+          -0.6,
+          0.8
+        ]
+      },
+      "observed": {
+        "bitangent": [
+          0,
+          1,
+          0
+        ],
+        "correct_world_sample": [
+          0.0,
+          0.6,
+          0.8
+        ],
+        "corrected_bitangent": [
+          -0.0,
+          1.0,
+          -0.0
+        ],
+        "corrected_w": -1,
+        "old_w_bitangent": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "reflected_normal": [
+          -0.0,
+          0.0,
+          1.0
+        ],
+        "reflected_tangent": [
+          -1,
+          0,
+          0
+        ],
+        "sample_dot": 0.28000000000000014,
+        "wrong_world_sample": [
+          0.0,
+          -0.6,
+          0.8
+        ]
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "negative",
+      "code": "VC011",
+      "expected": {
+        "correct_world": [
+          0,
+          0,
+          1
+        ],
+        "discriminates": false,
+        "wrong_world": [
+          0,
+          0,
+          1
+        ]
+      },
+      "observed": {
+        "correct_world": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "discriminates": false,
+        "wrong_world": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "model",
+      "code": "VC012",
+      "expected": {
+        "grouped_submissions": 6,
+        "reduction": 114,
+        "separate_submissions": 120
+      },
+      "observed": {
+        "grouped_submissions": 6,
+        "reduction": 114,
+        "separate_submissions": 120
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "negative",
+      "code": "VC012",
+      "expected": 120,
+      "observed": 120,
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "model",
+      "code": "VC013",
+      "expected": {
+        "baked_cross": [
+          0,
+          0,
+          -12
+        ],
+        "composed_determinant": 2,
+        "mirror_determinant": -2,
+        "original_area": 3,
+        "original_cross": [
+          0,
+          0,
+          6
+        ],
+        "swapped_cross": [
+          0,
+          0,
+          12
+        ]
+      },
+      "observed": {
+        "baked_cross": [
+          0,
+          0,
+          -12
+        ],
+        "composed_determinant": 2,
+        "mirror_determinant": -2,
+        "original_area": 3.0,
+        "original_cross": [
+          0,
+          0,
+          6
+        ],
+        "swapped_cross": [
+          0,
+          0,
+          12
+        ]
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    },
+    {
+      "case": "negative",
+      "code": "VC013",
+      "expected": {
+        "area": 0,
+        "cross": [
+          0,
+          0,
+          0
+        ]
+      },
+      "observed": {
+        "area": 0.0,
+        "cross": [
+          0,
+          0,
+          0
+        ]
+      },
+      "scope": "Authored finite mathematics/logical witnesses only; no renderer, material, policy executor or learner validation."
+    }
+  ],
+  "complete_model_negative_coverage": true,
+  "missing_observations": [],
+  "unexpected_observations": [],
+  "passed": true,
+  "input_bindings": [
+    {
+      "path": "streeling/courses/physics/en/phy-013-check-torque-when-moving-a-scene-pivot.md",
+      "sha256": "d5f818dc617edd6fb4763ee8f1653bd22700ee8b88cb291dd764ec9cddca11d9"
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-013-check-torque-when-moving-a-scene-pivot.fr.md",
+      "sha256": "5a589332e67818eed4c1049d20e82a114207f15c9881e8784e7653dae4f79afe"
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-013-check-torque-when-moving-a-scene-pivot.es.md",
+      "sha256": "b0042ef428587331830eff26c61a68ee017acee0c50b1fe4db7ecbc4105aeccf"
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh.md",
+      "sha256": "c3b034bc3edf2d107f90d335636ab2262d2726dcbed91995c63c3382302db495"
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh.fr.md",
+      "sha256": "382386864b50f457ccbfbd32389a0ce1207a3c5ecab1a34bf95b228cb3b9342c"
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh.es.md",
+      "sha256": "b4fb8c51f7c68b13f0dce4d5b6dd9eb212622f0990b8e19fd76477fc0243c68f"
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-015-bound-clearance-after-thickening-a-panel.md",
+      "sha256": "3f35d3e121e5ed09811acdfaa83a0f2ca9b9be5820dbdc3c4746bf51f70bf004"
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-015-bound-clearance-after-thickening-a-panel.fr.md",
+      "sha256": "877f914c799ce7fac85da1e9751f78004a0e652f91f6321ab052e4b891e12a03"
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-015-bound-clearance-after-thickening-a-panel.es.md",
+      "sha256": "b15a6b83fc4bc6cb044b94d1eb58ead6b4200a3bb0efd09708a7997180fec5c8"
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-011-preserve-tangent-handedness-after-a-mirror.md",
+      "sha256": "1a327300cca20427804378b1fbe40751860ecef10b964240e879bd8a89a2709b"
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-011-preserve-tangent-handedness-after-a-mirror.fr.md",
+      "sha256": "15160dd969ba0724419ab79978de3a6795b794d7a9286a6c702e258a05e4e1b1"
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-011-preserve-tangent-handedness-after-a-mirror.es.md",
+      "sha256": "7c4b8ff1764e8f190ab0574865e995baf58e8b20bc5650df2052b29d9a5f76a5"
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-012-separate-mesh-instances-from-draw-calls.md",
+      "sha256": "29278359e2f387dc9b3a83f8c3994112b22736e8ee42b276f83f167daed763fc"
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-012-separate-mesh-instances-from-draw-calls.fr.md",
+      "sha256": "4f5495fccab03f53acc93d0d47a1d5dd562d4c220c13d562558a4914ee6cce63"
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-012-separate-mesh-instances-from-draw-calls.es.md",
+      "sha256": "823f07f03ed951ab4fd3319212f8c07d6d9eb6b63acb1ae5199421b6ad354c47"
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-013-keep-triangle-winding-consistent-with-transforms.md",
+      "sha256": "372e324e76bb6c0cf46ee43daaf5bd48e67d26fcaab253951256c5ff78e61f31"
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-013-keep-triangle-winding-consistent-with-transforms.fr.md",
+      "sha256": "9b43cba1acfec02536f634c57ea23de95da3626fea01b15328c7fc6f91e951e5"
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-013-keep-triangle-winding-consistent-with-transforms.es.md",
+      "sha256": "a62160a14ef1f3302dbe1417e185920892a86f03f7ba0fce9029e4bc89487e95"
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-011-retain-raw-counts-behind-normalized-heatmaps.md",
+      "sha256": "043f0f48fd49f09803b440cef630553e579c31d2716872e29443c40deea05e73"
+    },
+    {
+      "path": "streeling/courses/data-visualization/fr/dv-011-retain-raw-counts-behind-normalized-heatmaps.fr.md",
+      "sha256": "e0c1cd57fec96d84659743f3fe32f3a201fc7f35e6c8ecb84187b50a4278c38f"
+    },
+    {
+      "path": "streeling/courses/data-visualization/es/dv-011-retain-raw-counts-behind-normalized-heatmaps.es.md",
+      "sha256": "43614d6d52a8e92dc23a7cb513590069ffb3482dfd083b0d2e8d5292c66f4b7f"
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-012-compute-quantiles-before-combining-latency-cohorts.md",
+      "sha256": "8ce1f338e19aaf97ccd76185a3539f65d78bb8fa07c5fcdc621dd6c419617f28"
+    },
+    {
+      "path": "streeling/courses/data-visualization/fr/dv-012-compute-quantiles-before-combining-latency-cohorts.fr.md",
+      "sha256": "81eba39c1f8fc58349df43c35933118fb3db19cc6ecb403216afd597e307985b"
+    },
+    {
+      "path": "streeling/courses/data-visualization/es/dv-012-compute-quantiles-before-combining-latency-cohorts.es.md",
+      "sha256": "8c09eb1488225052c9379313ab10b8bdbf0459a1a2cc72b7f550c7234ab5f606"
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-013-compare-learning-curves-at-equal-evaluation-budgets.md",
+      "sha256": "adc4146f7aea64976c7bcc3462678bc3813aa0aaac843c17e32301ac4bb219c1"
+    },
+    {
+      "path": "streeling/courses/data-visualization/fr/dv-013-compare-learning-curves-at-equal-evaluation-budgets.fr.md",
+      "sha256": "0edeaee1fa3eaa6bfe95cbb9c353c1957a8df8a18a3cc4cd316f46d11ca2fd53"
+    },
+    {
+      "path": "streeling/courses/data-visualization/es/dv-013-compare-learning-curves-at-equal-evaluation-budgets.es.md",
+      "sha256": "04cf618d9442390fa13e06870cf32e244a55e59b04494cca67c34b3de4af90e5"
+    },
+    {
+      "path": "streeling/courses/semiotics/en/sem-009-keep-units-in-a-composed-craft-instruction.md",
+      "sha256": "f57e3b42ea9c51b419233b011236a821abae04760b1b57e64273935c75ae960e"
+    },
+    {
+      "path": "streeling/courses/semiotics/fr/sem-009-keep-units-in-a-composed-craft-instruction.fr.md",
+      "sha256": "cc3b051c460cb6e1df41b965348d0b67c5566d193950d5593e4026ce9e5c6caf"
+    },
+    {
+      "path": "streeling/courses/semiotics/es/sem-009-keep-units-in-a-composed-craft-instruction.es.md",
+      "sha256": "d43248c6bc5a93494f07b60c79bae160ce22fcadfba1d97a0bcee07c81c1d1e7"
+    },
+    {
+      "path": "streeling/courses/semiotics/en/sem-010-distinguish-stable-course-identity-from-display-names.md",
+      "sha256": "7ed2a6542e999d05dd5ac44b7c655651f54a1c416ce4f1da62da66069efa0a4a"
+    },
+    {
+      "path": "streeling/courses/semiotics/fr/sem-010-distinguish-stable-course-identity-from-display-names.fr.md",
+      "sha256": "1872d7ae51856dc068344df395eb5ef0f3eaf37ff2aa66a6dc47c1fc1c1dc124"
+    },
+    {
+      "path": "streeling/courses/semiotics/es/sem-010-distinguish-stable-course-identity-from-display-names.es.md",
+      "sha256": "3f170d367e2bd146401131ae810eba3e571d1bbcfed86e374612e7112c7c0981"
+    },
+    {
+      "path": "streeling/courses/semiotics/en/sem-011-version-a-dsl-meaning-before-renaming-its-syntax.md",
+      "sha256": "c7851beb7719ad1c9ed907d8b5205c1e10b39b789292eb69062350348dbd28d0"
+    },
+    {
+      "path": "streeling/courses/semiotics/fr/sem-011-version-a-dsl-meaning-before-renaming-its-syntax.fr.md",
+      "sha256": "a56353dbfa0a463f9f9a33746037933d72c0e4ea1b9676dc6944dec421e55bdb"
+    },
+    {
+      "path": "streeling/courses/semiotics/es/sem-011-version-a-dsl-meaning-before-renaming-its-syntax.es.md",
+      "sha256": "1d08d41a5c5cfc044c396f9a050309904534e42e988f68207c4658cf7224b95e"
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-008-separate-a-test-oracle-from-a-specification.md",
+      "sha256": "ab7be6ab58c9d4dbb3279e4b753badaa6971ea9da0d153ea581373d6e99f626a"
+    },
+    {
+      "path": "streeling/courses/philosophy/fr/phi-008-separate-a-test-oracle-from-a-specification.fr.md",
+      "sha256": "3ad781ece95d86774fb3070251381eaf16a1943663f93d220fddc91deed61f9b"
+    },
+    {
+      "path": "streeling/courses/philosophy/es/phi-008-separate-a-test-oracle-from-a-specification.es.md",
+      "sha256": "9035f0f563ea634290fff0222c8eab831769bddc972cfb40bcf79e599b3edac7"
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-009-state-who-may-authorize-an-agent-effect.md",
+      "sha256": "52510a0ae9b58c13a180c42ba1bd5c411c59854c01b7aae3a437bcc5d4aa9598"
+    },
+    {
+      "path": "streeling/courses/philosophy/fr/phi-009-state-who-may-authorize-an-agent-effect.fr.md",
+      "sha256": "bcc4e8fda4272976b3da42a80bf491cdeefd837a36571781ab5fd1d513ea703a"
+    },
+    {
+      "path": "streeling/courses/philosophy/es/phi-009-state-who-may-authorize-an-agent-effect.es.md",
+      "sha256": "02884b7c2710be4c9c55120cd4262637437430c00529543a55fcf01c59e0ed60"
+    },
+    {
+      "path": "streeling/courses/futurology/en/fut-008-stress-test-a-release-plan-against-review-backlogs.md",
+      "sha256": "cd4c36223781dbfc4f79a7764566cebe8512df5ae8075a868569c6a5bb0b8c6b"
+    },
+    {
+      "path": "streeling/courses/futurology/fr/fut-008-stress-test-a-release-plan-against-review-backlogs.fr.md",
+      "sha256": "3fc366580f53af85f95e2de938abc29b9a0a4f161d726407a6b79ba07aea673a"
+    },
+    {
+      "path": "streeling/courses/futurology/es/fut-008-stress-test-a-release-plan-against-review-backlogs.es.md",
+      "sha256": "e637dc5325bd10548bb6779b3065effb0487f729fbbcc148c27f77b4e8c50e82"
+    },
+    {
+      "path": "streeling/courses/futurology/en/fut-009-compare-staged-adoption-with-an-irreversible-migration.md",
+      "sha256": "fb5f18b9fae5fc7f12e0eb009482955534fa0e13d3d58228ee6663891f972b36"
+    },
+    {
+      "path": "streeling/courses/futurology/fr/fut-009-compare-staged-adoption-with-an-irreversible-migration.fr.md",
+      "sha256": "ecb4c7660c35a90597c5395ce03811a44d27821bff821b5b473f79c68feb4a96"
+    },
+    {
+      "path": "streeling/courses/futurology/es/fut-009-compare-staged-adoption-with-an-irreversible-migration.es.md",
+      "sha256": "4a0de397d8d1b316d4303a458195053b6da08be18041fc834a67e4a16de6d098"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/unit-c.json",
+      "sha256": "f73fbf9a7f53f6803c8f97d38e6e78b1b144534a445e5d6e956ea0691ed86313"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_unit_c.py",
+      "sha256": "c7a2084293e52ad30da598555033137ff019412ffd2c560f6071071e7d894437"
+    }
+  ],
+  "log": "code/streeling/evidence/batch50-2026-10-23/test-runs/claims-c-01.log",
+  "log_sha256": "857b9e446aa292725b9019cd2775fad4f9eac4355c0a1b2d444b72a5a68759a5",
+  "scope": "Executed checks of authored fixed cases and counterexamples. Not engine, scene, physical, listening, human or learner validation."
+}

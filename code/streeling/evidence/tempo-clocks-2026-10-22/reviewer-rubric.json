@@ -1,0 +1,123 @@
+{
+  "status": "prepared-not-performed",
+  "scope": "Fifteen prepared criteria for three new modules. MCL004/006 source-scope amendments are separately content-reviewed; no actual learner or playback evidence.",
+  "criteria": [
+    {
+      "id": "MCL007-1",
+      "module": "MCL007",
+      "title": "tempo-locations",
+      "acceptance": "At Q=480, map ticks0,240,480,720,960,1200 to seconds0,0.25,0.5,1,1.5,1.625. Applying the final tempo globally gives0.625 seconds at1200 and is invalid.",
+      "decision": null
+    },
+    {
+      "id": "MCL007-2",
+      "module": "MCL007",
+      "title": "spanning-note",
+      "acceptance": "Integrate tick240 to1200 in pieces240/480/240 with durations0.25/1/0.125 seconds: total1.375. Applying the onset tempo globally gives1 second.",
+      "decision": null
+    },
+    {
+      "id": "MCL007-3",
+      "module": "MCL007",
+      "title": "division-mode",
+      "acceptance": "For25 non-drop frames/s and40 ticks/frame,750 ticks give0.75 seconds independent of tempo. E728 high byte231 sign-decodes to-25, format25; the selected source expression instead predicts-231. Do not claim a fresh parser run or general drop-frame support.",
+      "decision": null
+    },
+    {
+      "id": "MCL007-4",
+      "module": "MCL007",
+      "title": "event-projection",
+      "acceptance": "Streams A and B place the tempo change at480 and240; note-offs at960/720 occur at1.5/1.25 seconds. Their hypothetical construction-body projections coincide, so erased tempo deltas cannot be recovered. The arrays are not actual parser output.",
+      "decision": null
+    },
+    {
+      "id": "MCL007-5",
+      "module": "MCL007",
+      "title": "dispatch-and-validation",
+      "acceptance": "Show FF&F0=F0 cannot match FF, at both identical parser pins. Distinguish unreachable dispatch from the separate representation loss. Propose retained time/raw units/division/order/source fields and a falsifying actual fixture check before claiming a working import; no implemented contract.",
+      "decision": null
+    },
+    {
+      "id": "NET008-1",
+      "module": "NET008",
+      "title": "coordinates",
+      "acceptance": "Map context10 seconds to performance20001 ms and compare call19980 ms: lead21 ms. Raw subtraction or unit conversion alone omits origin/rate assumptions.",
+      "decision": null
+    },
+    {
+      "id": "NET008-2",
+      "module": "NET008",
+      "title": "anchor-fit",
+      "acceptance": "Derive slope1000.1 ms/context-second, intercept10000 ms and apparent100 ppm from authored anchors0/10000 and60/70006. One anchor cannot identify rate; no observed hardware drift.",
+      "decision": null
+    },
+    {
+      "id": "NET008-3",
+      "module": "NET008",
+      "title": "prediction",
+      "acceptance": "At context30 and120 predict40003/130012 ms; nominal1000 slope gives130000 at120, discrepancy12 ms. Interpolation versus extrapolation and predictions versus observations remain distinct.",
+      "decision": null
+    },
+    {
+      "id": "NET008-4",
+      "module": "NET008",
+      "title": "bounded-falsifier",
+      "acceptance": "At90 weights-0.5/1.5 and assumed anchor bounds0.5 ms give prediction100009\u00b11 ms. Held-out100011\u00b10.5 has residual2 exceeding combined1.5; intervals disjoint. Reject the combined affine/coordinate/error assumptions without diagnosing the cause; bounds are not probabilities.",
+      "decision": null
+    },
+    {
+      "id": "NET008-5",
+      "module": "NET008",
+      "title": "handoff",
+      "acceptance": "Retain clock IDs, units, origins, anchors, assumptions, validity and lifecycle identities plus comparison endpoints. Common monotonic acquisition may be simpler than a DSL. Reject stale/failed mapping and require independent physical-output observation for acoustic latency. No implemented sync service or schema.",
+      "decision": null
+    },
+    {
+      "id": "PM007-1",
+      "module": "PM007",
+      "title": "callbacks",
+      "acceptance": "For requested0/1000/2000 and authored12/1080/2015 ms, lateness12/80/15 and executed intervals1068/935. Requests are not callbacks or acoustic events.",
+      "decision": null
+    },
+    {
+      "id": "PM007-2",
+      "module": "PM007",
+      "title": "string-index",
+      "acceptance": "Sounding physical indices1/3/4 request offsets0.03/0.09/0.12 seconds and gaps0.06/0.03. Compact ranks would request0/0.03/0.06. These are source-assisted requests, not measured onsets or a real guitar.",
+      "decision": null
+    },
+    {
+      "id": "PM007-3",
+      "module": "PM007",
+      "title": "metric-boundary",
+      "acceptance": "Compute median computationA4/B6 ms versus action-to-output97.5/67.5 ms; four paired differences30 ms. Distinguish sequential declared stages and invented records from actual causal GA improvement.",
+      "decision": null
+    },
+    {
+      "id": "PM007-4",
+      "module": "PM007",
+      "title": "latency-rule",
+      "acceptance": "Under authored all-trial<=80 ms gate, A passes0/4 and B4/4; both ranges15 ms. This does not establish production tails, musical fidelity, user preference or a real release approval.",
+      "decision": null
+    },
+    {
+      "id": "PM007-5",
+      "module": "PM007",
+      "title": "acquisition",
+      "acceptance": "Define input action/output onset, calibrated clocks, raw evidence and detection uncertainty, missing-output records, effective source/browser/device/context, matched order-balanced workloads and prior latency/quality guards. A simpler common-clock loopback may suffice; reject failed guards or invalid evidence. No actual instrument or telemetry DSL.",
+      "decision": null
+    }
+  ],
+  "pass_policy": "All five criteria per new module require actual learner answers and assistance records before a learner decision.",
+  "human_technical_review": null,
+  "musician_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "parser_run": null,
+  "browser_run": null,
+  "clock_calibration": null,
+  "physical_output": null,
+  "user_latency": null,
+  "listener_trial": null,
+  "deployed_html": null
+}

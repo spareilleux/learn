@@ -1,0 +1,46 @@
+{
+  "observed_at_utc": "2026-10-22T02:16:20.811481+00:00",
+  "repo": "Comfy-Org/ComfyUI",
+  "commit": "46aad33e4d4c0696582611bf450dd93742fa9090",
+  "files": [
+    {
+      "path": "comfy_extras/nodes_audio.py",
+      "url": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI/46aad33e4d4c0696582611bf450dd93742fa9090/comfy_extras/nodes_audio.py",
+      "status": 200,
+      "sha256": "483466af050a43bf96f9fcdfa56ab2759dbf8611dd6a14a9543f6d136ecbdf43",
+      "bytes": 35175
+    },
+    {
+      "path": "blueprints/Audio Generation (Stable Audio 3 Medium Base).json",
+      "url": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI/46aad33e4d4c0696582611bf450dd93742fa9090/blueprints/Audio%20Generation%20%28Stable%20Audio%203%20Medium%20Base%29.json",
+      "status": 200,
+      "sha256": "61400207a7c952a0e26e4584d5c4d1df628733eba3440bbebd3904124b9a77d9",
+      "bytes": 82233
+    }
+  ],
+  "execution_claim": false,
+  "audio_classes": [
+    "EmptyLatentAudio",
+    "ConditioningStableAudio",
+    "VAEEncodeAudio",
+    "VAEDecodeAudio",
+    "GetAudioLatentSize",
+    "VAEDecodeAudioTiled",
+    "SaveAudio",
+    "SaveAudioMP3",
+    "SaveAudioOpus",
+    "SaveAudioAdvanced",
+    "PreviewAudio",
+    "LoadAudio",
+    "RecordAudio",
+    "TrimAudioDuration",
+    "SplitAudioChannels",
+    "JoinAudioChannels",
+    "AudioConcat",
+    "AudioMerge",
+    "AudioAdjustVolume",
+    "EmptyAudio",
+    "AudioEqualizer3Band",
+    "AudioExtension"
+  ]
+}

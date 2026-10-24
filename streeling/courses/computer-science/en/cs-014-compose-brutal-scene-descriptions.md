@@ -1,0 +1,86 @@
+---
+module_id: cs-014-compose-brutal-scene-descriptions
+department: computer-science
+course: "Compose BRUTAL Scene Descriptions with Typed F# Blocks"
+level: intermediate
+prerequisites: ["cs-010-compose-fail-fast-ga-computations"]
+estimated_duration: "35 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Compose BRUTAL Scene Descriptions with Typed F# Blocks
+
+> **Draft scope.** Fresh CPU compilation and execution of public scene-description code, plus source-assisted calculations. Human technical review, fluent-language review, learner attempts and public course HTML verification remain pending. No graphics window, renderer, GPU, audio or stream was started.
+
+## The project question
+
+An Observatory agent should be able to ask for a colonnade, inspect its structure, change a block version and receive a precise refusal before drawing anything. The [BRUTAL evaluation](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/README.md) contains an F# Lego library that separates descriptions from their rendering host. Its public source, pinned to GA commit `76efbffd5af82b46c3146957a6bd4504008eeb89`, supplies this lesson's implementation case.
+
+The [typed model](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Model.fs#L87-L122) represents alternatives with [F# discriminated unions](https://learn.microsoft.com/dotnet/fsharp/language-reference/discriminated-unions): `Box`, `Use`, `Attach`, `Move`, `Group` and surface decoration. A block's `Build` receives arguments and a context, then describes parts and anchors. A renderer can consume the resulting scene separately.
+
+This boundary helps composition and inspection. It does not guarantee that every possible block function is mathematically pure or total: the context supplies a seeded random generator, and the generation code catches block failures. The measured determinism below concerns fresh complete generation calls with fixed inputs, not arbitrary reuse of mutable random context or parallel execution.
+
+## 1. Inspect structure before materialization
+
+The [CPU execution receipt](../../../../code/streeling/evidence/brutal-composition-2026-10-22/cpu-execution.json) records a fresh Release build with SDK 10.0.113, zero warnings, zero errors and 20 passing existing tests. Two unchanged public F# projects were compiled in a temporary standalone environment with inherited GA build properties and targets disabled. Source and lock-file hashes remained unchanged. That scope differs from executing a complete graphics application.
+
+The [captured description selections](../../../../code/streeling/evidence/brutal-composition-2026-10-22/cpu-descriptions.json) include a colonnade with count 4, spacing 3 and seed 7. It has five block instances: the root and four named columns. Their origins are `(0,0,0)`, `(3,0,0)`, `(6,0,0)` and `(9,0,0)` metres. Its 53 boxes include geometry inside those instances and the root's entablature. A block instance is not the same unit as a box.
+
+### Practice exercise 1: read the composition tree
+
+For count 4 and spacing 3, give the column origins and the number of block instances including the root. Why would interpreting five instances as five boxes be wrong?
+
+> **Answer:** Origins are `(0,0,0)`, `(3,0,0)`, `(6,0,0)` and `(9,0,0)` metres. Four columns plus the root give five instances. Each column expands into several boxes, and the root adds entablature geometry, giving 53 boxes in the captured version. The two counts describe different levels of the representation.
+
+## 2. Pin the nested version, not only the root name
+
+The [block definitions](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Blocks.fs#L36-L119) contain `column@1` and `column@2`. With four drums, they produce 11 and 19 boxes respectively. Resolving the unversioned name `column` selects the highest installed version, but the colonnade's `column` parameter defaults explicitly to 1. An unversioned outer request therefore does not automatically upgrade every nested block.
+
+The four-column colonnade contributes nine entablature boxes: two horizontal members and seven triglyphs. Thus version 1 gives `4*11+9 = 53`; selecting nested column version 2 gives `4*19+9 = 85`. Pin the library, version choices, arguments and seed when preserving a result. Otherwise the same friendly name can hide a changed description.
+
+### Practice exercise 2: resolve the intended version
+
+If `column` resolves to version 2, must a default colonnade use that version? Calculate the box totals when its nested column parameter is 1 and 2, and their difference.
+
+> **Answer:** No. The colonnade explicitly defaults its nested column parameter to 1. Version 1 gives `4*11+9 = 53`; version 2 gives `4*19+9 = 85`, an increase of 32 boxes. Record the nested parameter rather than inferring it from unversioned name resolution elsewhere.
+
+## 3. Attach to an anchor instead of repeating its height
+
+The colonnade attaches its entablature to the named first column's `top` anchor. The column computes that anchor from its height. In the captured case with height 9, count 3 and spacing 2, the first entablature box is translated to `(2,9,0)`. Its horizontal center follows the row's extent; its vertical position follows the anchor.
+
+This is a useful compositional seam: the parent asks for an attachment point rather than copying the child's construction details. A missing instance or missing anchor remains a meaningful failure. Silently substituting the origin would create a plausible but incorrect scene and erase the missing requirement from the agent's result.
+
+### Practice exercise 3: propagate a changed dimension
+
+For count 3, spacing 2 and height 9, derive the row's horizontal midpoint and the first entablature box translation. What information should remain visible if the required anchor is absent?
+
+> **Answer:** The row extends from X 0 to X 4, so its midpoint is X 2. The top anchor supplies Y 9; the captured box translation is `(2,9,0)`. Preserve a refusal naming the missing instance or anchor. A default placement at the origin would conceal the failed composition.
+
+## 4. Keep transform order explicit
+
+The [space convention](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Space.fs) uses metres, positive Y upward and positive yaw turning positive X toward negative Z. Its [System.Numerics matrices](https://learn.microsoft.com/dotnet/api/system.numerics.matrix4x4) multiply row vectors: a child's world matrix is its local matrix times its parent's. A transform scales, turns, then translates.
+
+For unit X, scale 2 gives `(2,0,0)`; yaw 90 degrees gives `(0,0,-2)`; translation `(1,2,3)` gives `(1,2,1)`. Translating first, then scaling and turning, would instead give `(6,4,-4)`. The existing transform tests passed with their declared tolerance `1e-3`; the [arithmetic record](../../../../code/streeling/evidence/brutal-composition-2026-10-22/composition-calculations.json) keeps the right-angle calculation and wrong-order control separate.
+
+### Practice exercise 4: catch a reordered composition
+
+Transform unit X by scale 2, yaw 90 degrees and translation `(1,2,3)` in the declared order. Compare with translating first. Can a scene consumer change matrix convention without converting the data?
+
+> **Answer:** The declared order gives `(1,2,1)`; translating first, then scaling and turning gives `(6,4,-4)`. The operations do not commute. A consumer using another matrix convention must perform an explicit conversion and verify a known point; copying values under a different interpretation is insufficient.
+
+## 5. Preserve refusal and determinism as different properties
+
+Repeating the fixed colonnade request produced identical output bytes and scene hash. Changing a temple's seed from 7 to 8 kept 405 boxes and the same instance count while changing its hash. Equal counts therefore do not prove equal scene content. The hash describes the serialized scene tree; it is not a rendered-image hash or a performance result.
+
+The [CLI](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego.Cli/Program.fs) emits `lego-scene/1` and exit 0 for an accepted scene. A request with `count=2.5` emits `lego-errors/1` and exit 2 because count must be whole. Receiving JSON is not enough to declare success. [VC-009](../../visual-computing/en/vc-009-budget-brutal-scene-expansion.md) extends this boundary to growth limits.
+
+### Practice exercise 5: interpret the agent result
+
+An agent receives JSON and exit 2 after requesting `count=2.5`; it rounds the count silently and reports a deterministic valid scene. Which result was actually observed, and what should a corrected request preserve?
+
+> **Answer:** The observed result was a refused request with `lego-errors/1`, not an accepted scene. Preserve its exit code and reason. A corrected request must explicitly choose a whole count and retain source/library identity, versions, arguments, seed and limits. Repetition can test determinism for that new request; it cannot retroactively turn the refusal into success or establish rendering performance.
+
+## Evidence boundary
+
+Only [anonymously verified public source](../../../../code/streeling/evidence/brutal-composition-2026-10-22/primary-readback.json) enters this teaching packet. The CPU checks exercise generation, validation and description. They do not establish a live IX adapter, a rendered Observatory scene, GPU disposal, DLSS behavior, human learning or deployed publication.

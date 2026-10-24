@@ -1,0 +1,184 @@
+{
+  "checked_at_utc": "2026-10-22T22:19:37.745780+00:00",
+  "base_learn_commit": "c9b075001d9b120d68a16affb9498ab1979f926e",
+  "source_ga_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "scope": "Three ideal-pluck/fret-geometry/attack-clock courses, fixed calculations and pinned public source. No new production patch, runnable lab, synthesis, browser or player trial.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "calculation_checks": {
+    "independent_checks": 399,
+    "passed": 399,
+    "failed": 0,
+    "findings": [
+      {
+        "id": "profile0-overwrites-default",
+        "status": "observed-preserved",
+        "finding": "Constructor0.988 is overwritten by set_guitar_profile(0) to0.986; original prediction is refuted and fixed calculations use correct profile value."
+      },
+      {
+        "id": "retained-positive-attack-state",
+        "status": "observed-preserved",
+        "finding": "All six positive cases stop above5e-5 after threshold1e-3; the deactivation attack conjunct cannot become true through this envelope branch alone.",
+        "runtime_reproduced": false,
+        "production_fix": null
+      },
+      {
+        "id": "recursive-noise-filter-wording",
+        "status": "resolved",
+        "finding": "The recurrence feeds back the previous filtered output; two-tap FIR wording was inaccurate.",
+        "resolution": "Requested first-order recursive smoother wording; exact final packet bytes bound below."
+      }
+    ],
+    "public_source_files": 3,
+    "ideal_modal_rows": 80,
+    "authored_fret_geometry_rows": 4,
+    "isolated_attack_cases": 6,
+    "source_noise_filter": "Recursive first-order smoother; strict anti-alias bandlimit not established.",
+    "new_native_run": false,
+    "new_wasm_run": false,
+    "new_browser_capture": false,
+    "new_guitar_recording": false,
+    "new_comfyui_run": false,
+    "new_dependency_install": false,
+    "retained_attack_runtime_reproduction": null,
+    "production_fix": null
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.0092033999972045,
+    "log": "C:\\tmp\\streeling-pluck-coordinates-tests-20261022.log",
+    "log_sha256": "5d9258587140549f536062b758c60840b0ddd858be6c5383d06fe7317d6a4336",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.217221500002779,
+    "log": "C:\\tmp\\streeling-pluck-coordinates-sync-20261022.log",
+    "log_sha256": "641e6e2f7d4804aeed8685c573ca42aa234d9a8eb0aa0abe7f66d2bb9de1fea0",
+    "idempotent_checked_files": 671
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 89.579754699982,
+    "log": "C:\\tmp\\streeling-pluck-coordinates-build-20261022.log",
+    "log_sha256": "400da6f947351db5feb934b925497f09f8c6078bb29673ae1d975378abea3df0",
+    "pages": 1867,
+    "dependency_install": "Existing node_modules junction; no install.",
+    "warnings": "Existing highlighting fallback and empty i18n/404 warnings retained in complete log."
+  },
+  "rendered_articles": {
+    "pages": 21,
+    "links": 369,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "data_verdict": "pass",
+    "data_receipt_sha256": "cc882e3500975d42ee23c4311880b1ec4d2ecbc9848178f653a8b3f2d8a27e01",
+    "content_verdict": "pass",
+    "content_receipt_sha256": "58f7327cdc701b44aee373355247e9a1cc359741fa7d7e1ac22b3d546448b3b0",
+    "exercise_pairs_checked": 45,
+    "learner_criteria_checked": 15,
+    "open_course_findings": [],
+    "content_observations": [
+      {
+        "origin": "code/streeling/evidence/pluck-coordinates-2026-10-22/data-audit.json",
+        "id": "profile0-overwrites-default",
+        "status": "observed-preserved",
+        "finding": "Constructor0.988 is overwritten by set_guitar_profile(0) to0.986; original prediction is refuted and fixed calculations use correct profile value."
+      },
+      {
+        "origin": "code/streeling/evidence/pluck-coordinates-2026-10-22/data-audit.json",
+        "id": "retained-positive-attack-state",
+        "status": "observed-preserved",
+        "finding": "All six positive cases stop above5e-5 after threshold1e-3; the deactivation attack conjunct cannot become true through this envelope branch alone.",
+        "runtime_reproduced": false,
+        "production_fix": null
+      }
+    ],
+    "content_fix_history": [
+      {
+        "origin": "code/streeling/evidence/pluck-coordinates-2026-10-22/data-audit.json",
+        "id": "recursive-noise-filter-wording",
+        "status": "resolved",
+        "finding": "The recurrence feeds back the previous filtered output; two-tap FIR wording was inaccurate.",
+        "resolution": "Requested first-order recursive smoother wording; exact final packet bytes bound below."
+      },
+      {
+        "id": "excitation-feedback-citation",
+        "status": "resolved",
+        "finding": "Initial data-audit source-recursive-feedback line159 identified the constructor reverb loop rather than the excitation recurrence paired with line369.",
+        "resolution": "Data owner corrected anchor to370. Verified actual pinned line370 is prev=filtered in excitation, and all399checks remain pass.",
+        "source_changes_by_reviewer": false
+      },
+      {
+        "id": "learner-task-explicit-elicitation",
+        "status": "resolved",
+        "finding": "Initial task did not explicitly ask all rubric requirements: GAS initial state/formula/two positions/midpoint, GTR fret24fixed fraction, and AUD330Hz/exact-E2 distinction.",
+        "resolution": "Author expanded all three answer-free task paragraphs. Independently reviewed final task against every criterion; no unasked rubric demands remain in the reviewed scope.",
+        "source_changes_by_reviewer": false
+      },
+      {
+        "id": "explicit-prerequisite-progression",
+        "status": "resolved",
+        "finding": "Existing PHY004 already introduces proportional ideal coefficients/nulls, velocity coupling and source-window/noise limits. GAS006 progression needed an explicit dependency rather than implying first discovery.",
+        "resolution": "Author added PHY004 prerequisite and a linked progression sentence across all three GAS006 locales, identifying normalized coefficients/signed ratios/fixedh and independently checked modes as the added scope. Existing PHY004 source directly read for this decision.",
+        "source_changes_by_reviewer": false
+      }
+    ],
+    "scope": "Independent AI source/model/content checks; not human approval.",
+    "human_technical": null,
+    "fluent_language": null,
+    "musician": null,
+    "learner": null,
+    "audio_render": null,
+    "browser_capture": null,
+    "perceptual_preference": null
+  },
+  "code_review_pipeline": "Documentation/fixed-data-only deliverable with temporary verification wrappers; no new production/lab program emitted and no code-shipping review invoked.",
+  "manual_host_scan": "Read pinned profile overwrite and per-sample branch, frame/unit/physical-coordinate distinctions, ideal displacement versus tent-times-recursive-noise, fixed h versus energy, rational modal nulls versus observation transfer, source-only lifecycle concern and threshold sample indices, effective coefficient translation versus setter/whole-engine compensation. Read scanned Princeton equation page visually. Independent reviewer corrected exact feedback line and hidden task/rubric demands; final hashes bind revised task.",
+  "source_inventory": {
+    "core_english_modules": 198,
+    "target": 525,
+    "original_departments": 21,
+    "remaining_core_source_gaps": 327,
+    "locale_counts": {
+      "en": 199,
+      "fr": 199,
+      "es": 199
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint/typecheck scripts configured; existing generator tests and Astro build used."
+}

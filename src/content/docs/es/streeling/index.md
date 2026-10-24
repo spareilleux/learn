@@ -18,30 +18,32 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 
 | Departamento | Módulos | En francés | En español |
 |---|---|---|---|
-| [Ingeniería de audio](audio-engineering/) | 1 | 1 | 1 |
-| [Ciencia cognitiva](cognitive-science/) | 1 | 1 | 1 |
-| [Ciencias de la computación](computer-science/) | 2 | 2 | 2 |
-| [Cibernética](cybernetics/) | 3 | 3 | 3 |
-| [Visualización de datos](data-visualization/) | 0 | 0 | 0 |
-| [Futurología](futurology/) | 1 | 1 | 1 |
-| [Acústica de la guitarra y síntesis sonora](guitar-acoustics/) | 0 | 0 | 0 |
-| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 3 | 3 |
-| [Estudios de guitarra](guitar-studies/) | 2 | 2 | 2 |
-| [Teoría de la información](information-theory/) | 1 | 1 | 1 |
+| [Ingeniería de audio](audio-engineering/) | 12 | 12 | 12 |
+| [Ciencia cognitiva](cognitive-science/) | 11 | 11 | 11 |
+| [Ciencias de la computación](computer-science/) | 17 | 17 | 17 |
+| [Cibernética](cybernetics/) | 11 | 11 | 11 |
+| [Visualización de datos](data-visualization/) | 13 | 13 | 13 |
+| [Futurología](futurology/) | 9 | 9 | 9 |
+| [Acústica de la guitarra y síntesis sonora](guitar-acoustics/) | 11 | 11 | 11 |
+| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 10 | 10 | 10 |
+| [Estudios de guitarra](guitar-studies/) | 11 | 11 | 11 |
+| [Teoría de la información](information-theory/) | 12 | 12 | 12 |
 | [Investigación sobre IX](ix-research/) | 1 | 1 | 1 |
 | [Matemáticas](mathematics/) | 25 | 25 | 25 |
-| [Música](music/) | 19 | 19 | 19 |
-| [Musicología](musicology/) | 2 | 2 | 2 |
-| [Ciencia de redes](network-science/) | 1 | 1 | 1 |
-| [Filosofía](philosophy/) | 1 | 1 | 1 |
-| [Física](physics/) | 1 | 1 | 1 |
-| [Gestión de productos y proyectos](product-management/) | 1 | 1 | 1 |
+| [Música](music/) | 25 | 25 | 25 |
+| [Musicología](musicology/) | 11 | 11 | 11 |
+| [Ciencia de redes](network-science/) | 11 | 11 | 11 |
+| [Filosofía](philosophy/) | 9 | 9 | 9 |
+| [Física](physics/) | 15 | 15 | 15 |
+| [Gestión de productos y proyectos](product-management/) | 9 | 9 | 9 |
 | [Psicohistoria](psychohistory/) | 25 | 25 | 25 |
-| [Semiótica](semiotics/) | 1 | 1 | 1 |
-| [Computación visual](visual-computing/) | 0 | 0 | 0 |
-| [Músicas y lenguas del mundo](world-music-languages/) | 1 | 1 | 1 |
+| [Semiótica](semiotics/) | 11 | 11 | 11 |
+| [Computación visual](visual-computing/) | 13 | 13 | 13 |
+| [Músicas y lenguas del mundo](world-music-languages/) | 10 | 10 | 10 |
 
 ## Procedencia
 
-- Fuente: [`spareilleux/learn` → `streeling/courses`](https://github.com/spareilleux/learn/tree/main/streeling/courses), copiada de [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses) en el commit `1beb089` (2026-10-21), licencia MIT.
+- Copia inicial de las fuentes: [`spareilleux/learn` → `streeling/courses`](https://github.com/spareilleux/learn/tree/main/streeling/courses), copiada de [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses) en el commit `1beb089` (2026-10-21), licencia MIT.
+- [Procedencia de las fuentes adicionales](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/craft-2026-10-22/import.json)
+- [Procedencia de las fuentes adicionales](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/data-visualization-2026-10-22/import.json)
 - Generado con `npm run sync:streeling` desde `streeling/`: se modifica un módulo allí, no en estas páginas — solo `journal.md` se conserva entre sincronizaciones.

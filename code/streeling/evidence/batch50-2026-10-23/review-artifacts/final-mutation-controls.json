@@ -1,0 +1,216 @@
+{
+  "command": [
+    "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+    "-B",
+    "C:\\tmp\\compound-engineering-spare\\ce-code-review\\20261023-batch50-test-code\\verify-final-in-memory.py"
+  ],
+  "python": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+  "scope": "Reviewer executes final real test bodies with isolated in-memory load/namespace substitutions only; canonical data/files unchanged. Expected rejection is a successful mutation control, not a canonical test failure.",
+  "mutations": [
+    {
+      "name": "wrong fixed delay rejected",
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "observations": [
+        {
+          "code": "AUD009",
+          "case": "model",
+          "observed": {
+            "gain": 0.5,
+            "raw_rms": 0.27599252707274524,
+            "unity_rms": 0.15309310892394862,
+            "fitted_rms": 0.0,
+            "delay_ms": 0.5
+          },
+          "expected": {
+            "gain": 0.5,
+            "raw_rms": 0.27599252707274524,
+            "unity_rms": 0.15309310892394862,
+            "fitted_rms": 0,
+            "delay_ms": 0.25
+          },
+          "scope": "Previous tranche's authored mathematical case; no engine/listener trial."
+        }
+      ],
+      "stdout": "OBSERVATION {\"code\": \"AUD009\", \"case\": \"model\", \"observed\": {\"gain\": 0.5, \"raw_rms\": 0.27599252707274524, \"unity_rms\": 0.15309310892394862, \"fitted_rms\": 0.0, \"delay_ms\": 0.5}, \"expected\": {\"gain\": 0.5, \"raw_rms\": 0.27599252707274524, \"unity_rms\": 0.15309310892394862, \"fitted_rms\": 0, \"delay_ms\": 0.25}, \"scope\": \"Previous tranche's authored mathematical case; no engine/listener trial.\"}\n",
+      "failure_detail": [
+        "Traceback (most recent call last):\n  File \"C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-23\\tests\\test_baseline_audio.py\", line 89, in test_AUD009_model\n    self.assertEqual(1000 * lag / data[\"sample_rate_Hz\"], .25)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0.5 != 0.25\n"
+      ],
+      "error_detail": []
+    },
+    {
+      "name": "wrong fixed prefix coverage rejected",
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "observations": [
+        {
+          "code": "AUD009",
+          "case": "negative",
+          "observed": {
+            "prefix_rms": 0.0,
+            "full_rms": 0.04419417382415922,
+            "coverage": 0.875,
+            "silence_energy": 0
+          },
+          "expected": {
+            "prefix_rms": 0,
+            "full_rms": 0.04419417382415922,
+            "coverage": 0.75,
+            "silence_energy": 0
+          },
+          "scope": "Previous tranche's authored mathematical case; no engine/listener trial."
+        }
+      ],
+      "stdout": "OBSERVATION {\"code\": \"AUD009\", \"case\": \"negative\", \"observed\": {\"prefix_rms\": 0.0, \"full_rms\": 0.04419417382415922, \"coverage\": 0.875, \"silence_energy\": 0}, \"expected\": {\"prefix_rms\": 0, \"full_rms\": 0.04419417382415922, \"coverage\": 0.75, \"silence_energy\": 0}, \"scope\": \"Previous tranche's authored mathematical case; no engine/listener trial.\"}\n",
+      "failure_detail": [
+        "Traceback (most recent call last):\n  File \"C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-23\\tests\\test_baseline_audio.py\", line 107, in test_AUD009_negative\n    self.assertEqual(tail[\"checked_prefix_frames\"] / tail[\"target_frames\"], .75)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0.875 != 0.75\n"
+      ],
+      "error_detail": []
+    },
+    {
+      "name": "wrong declared mean rejected after observation",
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "observations": [
+        {
+          "code": "INF009",
+          "case": "model",
+          "observed": {
+            "z_x": [
+              -1.3416407864998738,
+              -0.4472135954999579,
+              0.4472135954999579,
+              1.3416407864998738
+            ],
+            "z_y": [
+              -1.3416407864998738,
+              -0.4472135954999579,
+              0.4472135954999579,
+              1.3416407864998738
+            ],
+            "difference_rms": 0.23385358667337133,
+            "statistics": [
+              {
+                "key": "x",
+                "mean": 0.125,
+                "population_sigma": 0.2795084971874737
+              },
+              {
+                "key": "y",
+                "mean": 0.3125,
+                "population_sigma": 0.13975424859373686
+              }
+            ]
+          },
+          "expected": {
+            "z_equal": true,
+            "difference_rms": 0.23385358667337133,
+            "statistics": [
+              {
+                "key": "x",
+                "mean": 123,
+                "population_sigma": 0.2795084971874737
+              },
+              {
+                "key": "y",
+                "mean": 0.3125,
+                "population_sigma": 0.13975424859373686
+              }
+            ]
+          },
+          "scope": "Previous tranche's authored mathematical case; no engine/listener trial."
+        }
+      ],
+      "stdout": "OBSERVATION {\"code\": \"INF009\", \"case\": \"model\", \"observed\": {\"z_x\": [-1.3416407864998738, -0.4472135954999579, 0.4472135954999579, 1.3416407864998738], \"z_y\": [-1.3416407864998738, -0.4472135954999579, 0.4472135954999579, 1.3416407864998738], \"difference_rms\": 0.23385358667337133, \"statistics\": [{\"key\": \"x\", \"mean\": 0.125, \"population_sigma\": 0.2795084971874737}, {\"key\": \"y\", \"mean\": 0.3125, \"population_sigma\": 0.13975424859373686}]}, \"expected\": {\"z_equal\": true, \"difference_rms\": 0.23385358667337133, \"statistics\": [{\"key\": \"x\", \"mean\": 123, \"population_sigma\": 0.2795084971874737}, {\"key\": \"y\", \"mean\": 0.3125, \"population_sigma\": 0.13975424859373686}]}, \"scope\": \"Previous tranche's authored mathematical case; no engine/listener trial.\"}\n",
+      "failure_detail": [
+        "Traceback (most recent call last):\n  File \"C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-23\\tests\\test_baseline_audio.py\", line 130, in test_INF009_model\n    self.assertEqual(result[\"mean\"], row[\"mean\"])\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0.125 != 123\n"
+      ],
+      "error_detail": []
+    },
+    {
+      "name": "wrong table total rejected after observation",
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "observations": [
+        {
+          "case": "model",
+          "code": "INF010",
+          "expected": {
+            "A_rate": "3/5",
+            "B_rate": "3/5",
+            "X_joint_rate": "3/5",
+            "X_product_error": "-6/25",
+            "Y_joint_rate": "1/5",
+            "Y_product_error": "4/25",
+            "independence_product": "9/25"
+          },
+          "observed": {
+            "A_rate": "3/5",
+            "B_rate": "3/5",
+            "X_joint_rate": "3/5",
+            "X_product_error": "-6/25",
+            "Y_joint_rate": "1/5",
+            "Y_product_error": "4/25",
+            "independence_product": "9/25"
+          },
+          "scope": "Authored fixed-data calculation or logical witness only; no human, learner or production-runtime acceptance."
+        }
+      ],
+      "stdout": "OBSERVATION {\"case\": \"model\", \"code\": \"INF010\", \"expected\": {\"A_rate\": \"3/5\", \"B_rate\": \"3/5\", \"X_joint_rate\": \"3/5\", \"X_product_error\": \"-6/25\", \"Y_joint_rate\": \"1/5\", \"Y_product_error\": \"4/25\", \"independence_product\": \"9/25\"}, \"observed\": {\"A_rate\": \"3/5\", \"B_rate\": \"3/5\", \"X_joint_rate\": \"3/5\", \"X_product_error\": \"-6/25\", \"Y_joint_rate\": \"1/5\", \"Y_product_error\": \"4/25\", \"independence_product\": \"9/25\"}, \"scope\": \"Authored fixed-data calculation or logical witness only; no human, learner or production-runtime acceptance.\"}\n",
+      "failure_detail": [
+        "Traceback (most recent call last):\n  File \"C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-23\\tests\\test_unit_b.py\", line 343, in test_INF010_joint_tables_refute_marginal_product\n    self.assertEqual(total, data[\"total\"])\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 11 != 10\n"
+      ],
+      "error_detail": []
+    }
+  ],
+  "before_bindings": [
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_baseline_audio.py",
+      "sha256": "e6e444db27f732e4b8663df09f3f40e5f8e90e734c275b9eb231a2ee13641383"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_unit_a.py",
+      "sha256": "99e9ada7601e1de00e0a1aef4643f02a73a748f74d977ee6b5d9459ecc35d477"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_unit_b.py",
+      "sha256": "3f0f51cbbd83cc927cf797d2f7bbfcfe14ad0d10c945635e8fda8a4b307e89ac"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_unit_c.py",
+      "sha256": "c7a2084293e52ad30da598555033137ff019412ffd2c560f6071071e7d894437"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_course_metadata.mjs",
+      "sha256": "3e0b59bad7c04d955cc116002dd53eb558fe2d76c2334afec68a5ccde85dbc38"
+    }
+  ],
+  "after_bindings": [
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_baseline_audio.py",
+      "sha256": "e6e444db27f732e4b8663df09f3f40e5f8e90e734c275b9eb231a2ee13641383"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_unit_a.py",
+      "sha256": "99e9ada7601e1de00e0a1aef4643f02a73a748f74d977ee6b5d9459ecc35d477"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_unit_b.py",
+      "sha256": "3f0f51cbbd83cc927cf797d2f7bbfcfe14ad0d10c945635e8fda8a4b307e89ac"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_unit_c.py",
+      "sha256": "c7a2084293e52ad30da598555033137ff019412ffd2c560f6071071e7d894437"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_course_metadata.mjs",
+      "sha256": "3e0b59bad7c04d955cc116002dd53eb558fe2d76c2334afec68a5ccde85dbc38"
+    }
+  ],
+  "canonical_tests_unchanged": true,
+  "all_expected_rejections_with_observations": true
+}

@@ -1,0 +1,84 @@
+---
+module_id: dv-013-compare-learning-curves-at-equal-evaluation-budgets
+department: data-visualization
+course: "Compare Learning Curves at Equal Evaluation Budgets"
+level: intermediate
+prerequisites: ["dv-002-denominators-and-test-populations", "phi-007-test-a-learning-gain-against-counterfactuals"]
+estimated_duration: "40 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Compare Learning Curves at Equal Evaluation Budgets
+
+> Draft for human review. The fixed cases below are authored mathematics supported by source inspection. They are not new project measurements. Human technical, artisan, fluent-language and learner judgments remain pending. No scene host, physical sample, GPU, policy executor or learner session was run for this lesson.
+
+## Project question
+
+An IX-assisted GA evaluation chart compares the last point of each learning curve. One candidate was evaluated longer. Does its higher final score establish a better method? The earlier counterfactual lesson separated improvement from causal benefit. Here the narrower charting problem is unequal evaluation budget and selective stopping. All curves below are authored score lists, not learner observations or model-training runs.
+
+[Prerequisite: dv-002-denominators-and-test-populations](../../data-visualization/en/dv-002-denominators-and-test-populations.md); [Prerequisite: phi-007-test-a-learning-gain-against-counterfactuals](../../philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md)
+
+## Read the boundary before calculating
+
+Read the linked prerequisite and project record before doing the arithmetic. Identify which statement comes from inspected source, which is an older recorded result, and which follows only from the premises below. A source comment, a prepared answer and an executed observation have different evidential roles. Preserve the original date and any failed or inconclusive gate when summarizing an older artifact. The direct baseline is a small handwritten calculation and a source-location table; an agent may help locate a definition, but its summary must be checked against that definition. Do not introduce a new language or automation merely to perform this finite comparison.
+
+Declare the horizontal axis as cumulative evaluated items under one fixed evaluator and item policy. Compare observed points at matched budgets; do not invent a missing endpoint or interpolate silently. A score can improve with budget while another method dominates at every shared budget. This is a descriptive comparison, and evaluator cost or training cost can still differ. Preserve attempted evaluations and missing values, because deleting failed attempts can change both the budget and apparent learning. The existing GA evaluation record motivates retaining named evaluation results, but supplies none of this hypothetical trajectory or its causal explanation.
+
+## Fixed case and assumptions
+
+```text
+budget_items=[10,20,30]
+A_score=[0.60,0.70,0.75]
+B_score=[0.65,0.72,null]
+shared_budget_differences_B_minus_A=[0.05,0.02]
+last_observed_A=0.75; last_observed_B=0.72
+shared_mean_A=(0.60+0.70)/2=0.65
+shared_mean_B=(0.65+0.72)/2=0.685
+control_B_score=[0.60,0.70,null]; control_shared_differences=[0,0]
+```
+
+## Corrected exercises
+
+### Exercise 1
+
+Compare the last observed scores. What confound is visible?
+
+> **Answer:** A ends at `0.75` and B at `0.72`, but their budgets are `30` and `20` items. The endpoints do not compare equal work.
+
+### Exercise 2
+
+Compare only the common budgets.
+
+> **Answer:** B exceeds A by `0.05` and `0.02`. This descriptive result reverses the last-point impression without supplying a causal claim.
+
+### Exercise 3
+
+Calculate the shared-grid means. Are they areas under continuous curves?
+
+> **Answer:** The means are `0.65` and `0.685`, a difference of `0.035`. These are equally weighted point means, not continuous integrals or population estimates.
+
+### Exercise 4
+
+May the missing B endpoint be drawn as zero?
+
+> **Answer:** No: it is `null`. The equal-score control gives differences `[0,0]` at shared budgets, showing that missingness alone does not imply inferiority.
+
+### Exercise 5
+
+Can this chart prove that an agent teaches better?
+
+> **Answer:** No. It describes authored evaluation points. Real benefit requires actual outcomes, assistance records, a justified comparison and a fixed evaluator; none was observed here.
+
+## Source-assisted learner task
+
+Read the old counterfactual packet and locate the GA evaluation type through its pinned source. Prepare a manual equal-budget chart caption and retain omitted endpoints. Ask an assistant to compare terminal scores, then correct its conclusion with the shared-budget differences. An invented endpoint or unmatched-budget superiority claim falsifies the caption.
+
+Complete the task with the answer sections hidden. Retain your original answers, intermediate quantities, source locations, uncertainty and every form of assistance, including a hint, a translated term or an agent suggestion. Then compare with the prepared answers and record corrections without replacing the original attempt. Produce a short decision note containing the claim, its assumptions, the calculation, the negative control and the next observation that could falsify it. A correct result with missing units or source identity is incomplete evidence for transfer. The evidence packet contains five prepared learner criteria; their decisions stay null until a real attempt and an authorized review exist. Passing these arithmetic checks would establish only competence on this declared case. It would not establish an implemented adapter, a successful material process, a faster renderer or improved learning in the project. Compare your source-assisted note with the direct manual baseline: if assistance obscures an assumption or removes a refusal, revise the note before proposing any workflow change.
+
+## Sources and validation journal
+
+- [Project record](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/counterfactual-gains.json)
+- [Primary source](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.ML/Rag/RagEvaluationModels.cs)
+- [Fixed evidence packet](../../../../code/streeling/evidence/batch50-2026-10-23/unit-c.json)
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-23/journal.md)

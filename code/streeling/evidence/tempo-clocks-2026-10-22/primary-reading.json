@@ -1,0 +1,38 @@
+{
+  "scope": "Actual primary HTML bodies read. Complete MIDI specification PDF and browser implementation behavior are not claimed verified.",
+  "references": [
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/multimedia/timing-information",
+      "read": "Actual timing body, PPQN/tempo and signed SMPTE format fields",
+      "used_for": "Quarter-unit and25-fps non-drop distinction, not a full conformance certificate."
+    },
+    {
+      "url": "https://mido.readthedocs.io/en/stable/files/midi.html",
+      "read": "Track delta ticks, merged iteration units and tempo/time resolution sections",
+      "used_for": "Separate per-track delta ticks from other library coordinate conventions; no Mido execution."
+    },
+    {
+      "url": "https://midi.org/standard-midi-files",
+      "read": "Public introduction and specification listing",
+      "used_for": "Purpose and event timing scope only; linked specification PDF not read."
+    },
+    {
+      "url": "https://www.w3.org/TR/2026/WD-webaudio-1.1-20260922/",
+      "read": "Working Draft status plus baseLatency, outputLatency and getOutputTimestamp definitions/example/accuracy warning",
+      "used_for": "Clock mapping versus observed output and advisory latency estimates; no browser support claim."
+    },
+    {
+      "url": "https://www.w3.org/TR/2026/WD-hr-time-3-20260901/",
+      "read": "Working Draft status and high-resolution timestamps/time origin",
+      "used_for": "Milliseconds and time-origin distinctions; no observed clock calibration."
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers",
+      "read": "Actual timers section including no exact-schedule guarantee",
+      "used_for": "Requested timer delay is not observed callback time."
+    }
+  ],
+  "SMF_specification_PDF_read": false,
+  "new_browser_run": null,
+  "hardware_probe": null
+}

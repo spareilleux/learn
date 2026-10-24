@@ -12,3 +12,11 @@ sidebar:
 ## Modules
 
 - [PM-001 · Livrer vs parler — Comment savoir si vous construisez vraiment quelque chose](pm-001-shipping-vs-talking/)
+- [PM-002 · Une condition de publication fondée sur les preuves pour les cours Streeling](pm-002-release-evidence-gate/)
+- [PM-003 · Mesurer la file de révision Streeling sans compter les brouillons comme du débit](pm-003-review-queue-flow-metrics/)
+- [PM-004 · Décider quand les extensions artisanales sont prêtes à être distribuées](pm-004-craft-extension-release-decision/)
+- [PM-005 · Interpréter les expériences de coexistence BRUTAL avant de choisir un réglage par défaut](pm-005-interpret-brutal-coexistence-experiments/)
+- [PM-006 · Évaluer un essai pilote selon son horizon de décision](pm-006-test-a-pilot-against-its-decision-horizon/)
+- [PM-007 · Mesurer la latence de lecture du point de vue de l'utilisateur](pm-007-measure-playback-latency-at-the-user-boundary/)
+- [PM-008 · Dimensionner un lot de cinquante cours selon la capacité de revue](pm-008-size-a-fifty-course-batch-by-review-capacity/)
+- [PM-009 · Distinguer adoption d’une version et téléchargements](pm-009-separate-release-adoption-from-artifact-downloads/)

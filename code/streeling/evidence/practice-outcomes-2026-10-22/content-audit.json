@@ -1,0 +1,1043 @@
+{
+  "reviewer": "independent-pedagogical-source-review-agent",
+  "checked_at_utc": "2026-10-22T23:36:59.849659+00:00",
+  "verdict": "pass",
+  "findings": [
+    {
+      "origin": "code/streeling/evidence/practice-outcomes-2026-10-22/data-audit.json",
+      "id": "raw-display-and-learner-target",
+      "status": "observed-preserved",
+      "finding": "Pinned raw diagram and formatted chart order differ. Retrieval score/confidence clamp, practice goal/tracking labels and RAG metrics do not supply actual unaided learner responses."
+    },
+    {
+      "origin": "code/streeling/evidence/practice-outcomes-2026-10-22/data-audit.json",
+      "id": "denominator-and-assistance",
+      "status": "observed-preserved",
+      "finding": "Authored first unaided eligible endpoint2/6 differs from raw first3/7, repeated-row6/11, final6/7 and hinted retry3/3; missing outcomes remain unknown with explicit full-offer bounds."
+    },
+    {
+      "origin": "code/streeling/evidence/practice-outcomes-2026-10-22/data-audit.json",
+      "id": "before-after-not-counterfactual",
+      "status": "observed-preserved",
+      "finding": "Same pretest and observed treated posttest fit positive, zero or negative finite-population effects.256binary no-treatment vectors bound effects without assigning probabilities."
+    },
+    {
+      "origin": "code/streeling/evidence/practice-outcomes-2026-10-22/data-audit.json",
+      "id": "hypothetical-design-not-observed-study",
+      "status": "observed-preserved",
+      "finding": "Mean contrast across70uniform allocations equals each fixed-worldATE, but a single contrast can have opposite sign. No actual randomization, empirical treatment benefit or p-value observed."
+    }
+  ],
+  "fix_history": [
+    {
+      "id": "gaa007-task-calibration-elicitation",
+      "status": "resolved",
+      "finding": "Initial GAA007 task asked rejection of the recall-probability inference but did not expressly request the delayed-response calibration evidence in criterion4.",
+      "resolution": "Author added actual defined delayed responses and calibration evidence linking predictions to that event. Final task explicitly elicits all15criteria; no course exercise change was needed.",
+      "source_changes_by_reviewer": false
+    }
+  ],
+  "coverage": {
+    "exercise_answer_pairs": 45,
+    "learner_criteria": 15
+  },
+  "scope": {
+    "reviewed": "All nine EN/FR/ES sources and45localized exercise-answer pairs, final prepared learner task and15criteria, all fixed item/attempt/missingness/countermodel/allocation records, actual selected six-source/test text and limited primary readings.",
+    "data_audit": "Independent2393/2393 note/denominator/source/counterfactual/allocation checks read; current input hashes verified. Content review inspected all256vector/effect rows and210allocation mean/contrast rows as compact projections, not a new numerical experiment.",
+    "localization": "Agent semantic review plus ordered URL parity; human fluent-language/musician/learner outcomes remain absent.",
+    "prerequisites": "Four existing English prerequisites read for progression. Target-specific acceptance, denominator/missingness and counterfactual witnesses add distinct work beyond voicing preference/key integrity/Brier/argument basics. Wider historical claims not newly approved.",
+    "publication": "Course source review only. Root sync/build/rendered-link/idempotence/publication receipts are independent gates excluded as circular supporting inputs."
+  },
+  "exercise_answer_checks": [
+    {
+      "id": "GAA007-en-exercise-1",
+      "module": "GAA007",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-007-turn-a-voicing-result-into-a-practice-item.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "82c3e8bbaeaa0eef0204c8f8e92694abba449adcfb45aab5fc0ab0a2ce38e3d6",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Chord name is an answer leak for naming the shown diagram but an intended cue for generating a restricted C-major-triad shape. Exact learned shape must be explicitly identified with string-order convention. Target-specific masking is a proposed item policy, not an implemented API."
+    },
+    {
+      "id": "GAA007-en-exercise-2",
+      "module": "GAA007",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-007-turn-a-voicing-result-into-a-practice-item.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "bf8bf32df06902e48707f5ee048a7838206a2a2f1f13cb239250a81fd4aa649c",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Raw high-to-low0-1-0-2-3-x reverses to low-to-highx-3-2-0-1-0. Tuning40,45,50,55,59,64 with no capo gives sounding48,52,55,60,64. Structured raw versus displayed chart must retain order/source/tuning identity. Source and test assertions were read, not executed."
+    },
+    {
+      "id": "GAA007-en-exercise-3",
+      "module": "GAA007",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-007-turn-a-voicing-result-into-a-practice-item.md",
+      "heading_line": 59,
+      "exercise_answer_sha256": "a49490bd0abba89fecf19a14a64802aa5d630b577505f92d16afe02cdfb501fc",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Exact-A accepts onlyA. Restricted all-and-only pitch classes0,4,7 each present acceptsA/B/D, rejectsCwith extra11/B. This symbolic criterion neither proves physical playability nor covers every musically useful C-labelled brief."
+    },
+    {
+      "id": "GAA007-en-exercise-4",
+      "module": "GAA007",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-007-turn-a-voicing-result-into-a-practice-item.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "e94203f1512dbda77709d209e34784cf4e3e25547695d625d969fe5ae1dc7965",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Finite retrieval scores-0.2,0.8,1.2 clamp to0,0.8,1. A bounded retrieval/response score is not a learner-event probability. A defined delayed unassisted response and evidence calibrating predictions against that event are missing."
+    },
+    {
+      "id": "GAA007-en-exercise-5",
+      "module": "GAA007",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-007-turn-a-voicing-result-into-a-practice-item.md",
+      "heading_line": 81,
+      "exercise_answer_sha256": "2a0a71b210a0ce45de43994db2284758b14f4be435fd9bd1bb2f361982b2527b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Future item retains source/query/raw/display/instrument/tuning/capo,target,cues,key,acceptance rule, actual answer before reveal, assistance, attempt identity and timing. Actual delayed assessment plus justified comparison is needed before retention/benefit claims; plan/click/RAGscore is not that evidence."
+    },
+    {
+      "id": "GAA007-fr-exercise-1",
+      "module": "GAA007",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-007-turn-a-voicing-result-into-a-practice-item.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "f97c6bc509f6ac350cae1c3746732997d2a8ee1a9b5f4aff445745ca32f0e8a8",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Chord name is an answer leak for naming the shown diagram but an intended cue for generating a restricted C-major-triad shape. Exact learned shape must be explicitly identified with string-order convention. Target-specific masking is a proposed item policy, not an implemented API."
+    },
+    {
+      "id": "GAA007-fr-exercise-2",
+      "module": "GAA007",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-007-turn-a-voicing-result-into-a-practice-item.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "83a38dc48d4b54405b9de9756cc166ee673b046ae1b450cde5fddfb1ad58055e",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Raw high-to-low0-1-0-2-3-x reverses to low-to-highx-3-2-0-1-0. Tuning40,45,50,55,59,64 with no capo gives sounding48,52,55,60,64. Structured raw versus displayed chart must retain order/source/tuning identity. Source and test assertions were read, not executed."
+    },
+    {
+      "id": "GAA007-fr-exercise-3",
+      "module": "GAA007",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-007-turn-a-voicing-result-into-a-practice-item.fr.md",
+      "heading_line": 59,
+      "exercise_answer_sha256": "65da4813685f8a5369c8e48153b1025d8794b0ebad96ba1bb8bb350b3b0bb10b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Exact-A accepts onlyA. Restricted all-and-only pitch classes0,4,7 each present acceptsA/B/D, rejectsCwith extra11/B. This symbolic criterion neither proves physical playability nor covers every musically useful C-labelled brief."
+    },
+    {
+      "id": "GAA007-fr-exercise-4",
+      "module": "GAA007",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-007-turn-a-voicing-result-into-a-practice-item.fr.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "a53776ee287573c579897ac7fa8742d752fca2b73537531299dcb0ebeec7308f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Finite retrieval scores-0.2,0.8,1.2 clamp to0,0.8,1. A bounded retrieval/response score is not a learner-event probability. A defined delayed unassisted response and evidence calibrating predictions against that event are missing."
+    },
+    {
+      "id": "GAA007-fr-exercise-5",
+      "module": "GAA007",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-007-turn-a-voicing-result-into-a-practice-item.fr.md",
+      "heading_line": 81,
+      "exercise_answer_sha256": "ea6282b7e3783097796abd1ba337cfcd76a221bd5af3fbc40cf770254c386f24",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Future item retains source/query/raw/display/instrument/tuning/capo,target,cues,key,acceptance rule, actual answer before reveal, assistance, attempt identity and timing. Actual delayed assessment plus justified comparison is needed before retention/benefit claims; plan/click/RAGscore is not that evidence."
+    },
+    {
+      "id": "GAA007-es-exercise-1",
+      "module": "GAA007",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-007-turn-a-voicing-result-into-a-practice-item.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "b59efff944b75b49bdc4ed36f396cf1a850c389eb324425e8ac61e34f3a4c5a8",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Chord name is an answer leak for naming the shown diagram but an intended cue for generating a restricted C-major-triad shape. Exact learned shape must be explicitly identified with string-order convention. Target-specific masking is a proposed item policy, not an implemented API."
+    },
+    {
+      "id": "GAA007-es-exercise-2",
+      "module": "GAA007",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-007-turn-a-voicing-result-into-a-practice-item.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "d3caf94a7a1b4011e97b56dbf90f42eae2e405b6636d91ee6c94d45e0887dda4",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Raw high-to-low0-1-0-2-3-x reverses to low-to-highx-3-2-0-1-0. Tuning40,45,50,55,59,64 with no capo gives sounding48,52,55,60,64. Structured raw versus displayed chart must retain order/source/tuning identity. Source and test assertions were read, not executed."
+    },
+    {
+      "id": "GAA007-es-exercise-3",
+      "module": "GAA007",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-007-turn-a-voicing-result-into-a-practice-item.es.md",
+      "heading_line": 59,
+      "exercise_answer_sha256": "6d4785f6e4a3c0ccb23006256a96faa41f9daa44d80bb12f5de04d84b32ca7b8",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Exact-A accepts onlyA. Restricted all-and-only pitch classes0,4,7 each present acceptsA/B/D, rejectsCwith extra11/B. This symbolic criterion neither proves physical playability nor covers every musically useful C-labelled brief."
+    },
+    {
+      "id": "GAA007-es-exercise-4",
+      "module": "GAA007",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-007-turn-a-voicing-result-into-a-practice-item.es.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "1c4bccd801f83de963927268b7627324b054b54eac587ff915c4e5a82cacb1ff",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Finite retrieval scores-0.2,0.8,1.2 clamp to0,0.8,1. A bounded retrieval/response score is not a learner-event probability. A defined delayed unassisted response and evidence calibrating predictions against that event are missing."
+    },
+    {
+      "id": "GAA007-es-exercise-5",
+      "module": "GAA007",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-007-turn-a-voicing-result-into-a-practice-item.es.md",
+      "heading_line": 81,
+      "exercise_answer_sha256": "b3fd30aff3e0b289cae98076f6d4e12f4917076477cc744efc0e4db41fde570c",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Future item retains source/query/raw/display/instrument/tuning/capo,target,cues,key,acceptance rule, actual answer before reveal, assistance, attempt identity and timing. Actual delayed assessment plus justified comparison is needed before retention/benefit claims; plan/click/RAGscore is not that evidence."
+    },
+    {
+      "id": "COG007-en-exercise-1",
+      "module": "COG007",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/cognitive-science/en/cog-007-separate-unaided-recall-from-assisted-success.md",
+      "heading_line": 39,
+      "exercise_answer_sha256": "213ffdd8483222940d036f61d2a076fa5dc6d1efa65bdb9742eff11051dba93a",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Seven observed first responses yield3/7raw; correct but answer-exposedP03 is ineligible for unaided endpoint. Remaining six observed eligible responses yield2/6=1/3. MissingP08 is unobserved, not wrong; retain statuses/reasons."
+    },
+    {
+      "id": "COG007-en-exercise-2",
+      "module": "COG007",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/cognitive-science/en/cog-007-separate-unaided-recall-from-assisted-success.md",
+      "heading_line": 51,
+      "exercise_answer_sha256": "71a021dba81ad9fdc4125bb542034e8fbd9628534d00157dcedca01c50f7abb5",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Eleven completed response rows yield6/11; final observed answers per item yield6/7. These differ from first-unaided2/6 because retries/feedback/exposure alter the endpoint. Related rows are not independent new learners or first trials."
+    },
+    {
+      "id": "COG007-en-exercise-3",
+      "module": "COG007",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/cognitive-science/en/cog-007-separate-unaided-recall-from-assisted-success.md",
+      "heading_line": 63,
+      "exercise_answer_sha256": "73acd88ee85951893a46ba4c7de7e0a72cbfc0a1c956bc8c5c37c1abf39de6ef",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Selected hinted retries yield3/3. Seven eligible practice offers with six observed responses give deterministic full-offer bounds2/7to3/7. Missing-as-failure can define a separate declared policy, not an observed answer; assisted success proves no causal or delayed benefit."
+    },
+    {
+      "id": "COG007-en-exercise-4",
+      "module": "COG007",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/cognitive-science/en/cog-007-separate-unaided-recall-from-assisted-success.md",
+      "heading_line": 75,
+      "exercise_answer_sha256": "24d7c9f6af29c9994ee1884d0a977ab89baed9845a6d6895f3efdf8714e5da44",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "At stipulated24hours, eight authored held-out offers have six responses/fivecorrect: observed5/6, full-offer bounds5/8to7/8. Four missing binary completions give5/8,3/4,3/4,7/8. Bounds are deterministic, notCI, evidence of missing outcomes or item comparability."
+    },
+    {
+      "id": "COG007-en-exercise-5",
+      "module": "COG007",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/cognitive-science/en/cog-007-separate-unaided-recall-from-assisted-success.md",
+      "heading_line": 85,
+      "exercise_answer_sha256": "84de194b354e3a5a7c0b9b3b9d7430e940ecb79fdfd761a1f874c91ad14c05ce",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Report final6/7, eligiblefirst2/6, selectedhint3/3 and delayed5/6with5/8to7/8bounds separately. APS abstract concerns prose recall under studied delays, not guitar effect or schedule. Real timed/cued/assistance/missingness and comparable delayed endpoint/comparison are absent; selected tracking labels are not retention."
+    },
+    {
+      "id": "COG007-fr-exercise-1",
+      "module": "COG007",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/cognitive-science/fr/cog-007-separate-unaided-recall-from-assisted-success.fr.md",
+      "heading_line": 39,
+      "exercise_answer_sha256": "15298e7368ecf11a20f021d9e02fe15b2e6a2ef286f833374a8d459e0913ccbc",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Seven observed first responses yield3/7raw; correct but answer-exposedP03 is ineligible for unaided endpoint. Remaining six observed eligible responses yield2/6=1/3. MissingP08 is unobserved, not wrong; retain statuses/reasons."
+    },
+    {
+      "id": "COG007-fr-exercise-2",
+      "module": "COG007",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/cognitive-science/fr/cog-007-separate-unaided-recall-from-assisted-success.fr.md",
+      "heading_line": 51,
+      "exercise_answer_sha256": "008c74950ac4303c15e171192ea8063578c27df4b910a910d1974e9c424e4018",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Eleven completed response rows yield6/11; final observed answers per item yield6/7. These differ from first-unaided2/6 because retries/feedback/exposure alter the endpoint. Related rows are not independent new learners or first trials."
+    },
+    {
+      "id": "COG007-fr-exercise-3",
+      "module": "COG007",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/cognitive-science/fr/cog-007-separate-unaided-recall-from-assisted-success.fr.md",
+      "heading_line": 63,
+      "exercise_answer_sha256": "504023fd64641ff38bb1d6c3e9a4520ddb991826e2cbeca7c1916ca7aaf42ca3",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Selected hinted retries yield3/3. Seven eligible practice offers with six observed responses give deterministic full-offer bounds2/7to3/7. Missing-as-failure can define a separate declared policy, not an observed answer; assisted success proves no causal or delayed benefit."
+    },
+    {
+      "id": "COG007-fr-exercise-4",
+      "module": "COG007",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/cognitive-science/fr/cog-007-separate-unaided-recall-from-assisted-success.fr.md",
+      "heading_line": 75,
+      "exercise_answer_sha256": "bd0751b23c6014a13e6e35c72e87f7a7aa139be472580a8f9069364202835c20",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "At stipulated24hours, eight authored held-out offers have six responses/fivecorrect: observed5/6, full-offer bounds5/8to7/8. Four missing binary completions give5/8,3/4,3/4,7/8. Bounds are deterministic, notCI, evidence of missing outcomes or item comparability."
+    },
+    {
+      "id": "COG007-fr-exercise-5",
+      "module": "COG007",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/cognitive-science/fr/cog-007-separate-unaided-recall-from-assisted-success.fr.md",
+      "heading_line": 85,
+      "exercise_answer_sha256": "150389d2f853d8e3092f90c0ffef0b7b680dfa7eb02d34242ab1b515e5ac76a7",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Report final6/7, eligiblefirst2/6, selectedhint3/3 and delayed5/6with5/8to7/8bounds separately. APS abstract concerns prose recall under studied delays, not guitar effect or schedule. Real timed/cued/assistance/missingness and comparable delayed endpoint/comparison are absent; selected tracking labels are not retention."
+    },
+    {
+      "id": "COG007-es-exercise-1",
+      "module": "COG007",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/cognitive-science/es/cog-007-separate-unaided-recall-from-assisted-success.es.md",
+      "heading_line": 39,
+      "exercise_answer_sha256": "4b7ddbe8b4de11b2c3eee6d2541f3aab9330360f82f63233915d1f67eb01f7fe",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Seven observed first responses yield3/7raw; correct but answer-exposedP03 is ineligible for unaided endpoint. Remaining six observed eligible responses yield2/6=1/3. MissingP08 is unobserved, not wrong; retain statuses/reasons."
+    },
+    {
+      "id": "COG007-es-exercise-2",
+      "module": "COG007",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/cognitive-science/es/cog-007-separate-unaided-recall-from-assisted-success.es.md",
+      "heading_line": 51,
+      "exercise_answer_sha256": "066cea8876485cefdee2bcdb303ebb67a775c871d91febb30e3b5d0a2a77b62a",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Eleven completed response rows yield6/11; final observed answers per item yield6/7. These differ from first-unaided2/6 because retries/feedback/exposure alter the endpoint. Related rows are not independent new learners or first trials."
+    },
+    {
+      "id": "COG007-es-exercise-3",
+      "module": "COG007",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/cognitive-science/es/cog-007-separate-unaided-recall-from-assisted-success.es.md",
+      "heading_line": 63,
+      "exercise_answer_sha256": "82eced09186f84dda0c8367f6f926934db67dc8139597fb546ff0102dcb76661",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Selected hinted retries yield3/3. Seven eligible practice offers with six observed responses give deterministic full-offer bounds2/7to3/7. Missing-as-failure can define a separate declared policy, not an observed answer; assisted success proves no causal or delayed benefit."
+    },
+    {
+      "id": "COG007-es-exercise-4",
+      "module": "COG007",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/cognitive-science/es/cog-007-separate-unaided-recall-from-assisted-success.es.md",
+      "heading_line": 75,
+      "exercise_answer_sha256": "abc608f6076513e0a16d822c580ada6dce259cbda49f9dd25d86e600ad304d56",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "At stipulated24hours, eight authored held-out offers have six responses/fivecorrect: observed5/6, full-offer bounds5/8to7/8. Four missing binary completions give5/8,3/4,3/4,7/8. Bounds are deterministic, notCI, evidence of missing outcomes or item comparability."
+    },
+    {
+      "id": "COG007-es-exercise-5",
+      "module": "COG007",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/cognitive-science/es/cog-007-separate-unaided-recall-from-assisted-success.es.md",
+      "heading_line": 85,
+      "exercise_answer_sha256": "eeba054bdc042b08806b0f1912bc5c101bd3615187be7d2c1d9b42e77d6629ac",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Report final6/7, eligiblefirst2/6, selectedhint3/3 and delayed5/6with5/8to7/8bounds separately. APS abstract concerns prose recall under studied delays, not guitar effect or schedule. Real timed/cued/assistance/missingness and comparable delayed endpoint/comparison are absent; selected tracking labels are not retention."
+    },
+    {
+      "id": "PHI007-en-exercise-1",
+      "module": "PHI007",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "27c9faaf102abac133fcd085fff54e67461b8d0deae8ba60fc1028a379f30053",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Separate eight-unit pretest4/8 and treated later6/8 give change1/4. Y1/Y0 refer to the same later endpoint under different interventions. Setting missing laterY0equal earlier pretest requires a substantive no-change assumption."
+    },
+    {
+      "id": "PHI007-en-exercise-2",
+      "module": "PHI007",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "0cee468df997af0592f631db471a830ddd4215203b478f9527f9e996f5ea1535",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Benefit/no-effect/harm worlds share pretest and observedY1 but have average effects1/4,0,-1/4. Missing later no-treatment vectors differ; observed before/after improvement alone does not distinguish them or assign plausibility."
+    },
+    {
+      "id": "PHI007-en-exercise-3",
+      "module": "PHI007",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "10c7dc6b4308119d722ee1d5bc11fc0ca78752d1db023b7fb7feadd7193ce714",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "All256binaryY0vectors give nine attainable effect levels with tight bounds-1/4to3/4. Allones attains lower and allzeros upper. Enumeration gives no prior and interval is notCI. Pretests may inform a justified design/model without constraining unrestricted laterY0by themselves."
+    },
+    {
+      "id": "PHI007-en-exercise-4",
+      "module": "PHI007",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "beb740c56c2acd217c69aa92fecd9e956f4dce1dfb94bbaafd9bde6a47657a24",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Uniform balanced four-of-eight hypothetical assignments number70; mean contrast equals fixed-worldATE1/4,0,-1/4 under well-defined treatment, consistency, fixed outcomes and no interference. Benefit-worldtreated1,2,4,6mean1/2minuscontrolmean1gives-1/2. Assignment unbiasedness does not guarantee one-result sign/precision or an actual study."
+    },
+    {
+      "id": "PHI007-en-exercise-5",
+      "module": "PHI007",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "5fd6e1f934e16adfcf170a0198d3c6230803c7a4dd207bbccb32f9022b86cbe5",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Eleven attempts from one learner are not eleven independently assigned participants. Need real versioned intervention/comparison, learner-level units/procedure, timed comparable outcomes, assistance/missingness and assumption checks. Source labels, planned study and before/after difference do not establish causal learning gain."
+    },
+    {
+      "id": "PHI007-fr-exercise-1",
+      "module": "PHI007",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/philosophy/fr/phi-007-test-a-learning-gain-against-counterfactuals.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "e282c8ed6e0152d51ccbc7e2d5a3fc9ede9212ee61f8c6859b6e9d9685937d46",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Separate eight-unit pretest4/8 and treated later6/8 give change1/4. Y1/Y0 refer to the same later endpoint under different interventions. Setting missing laterY0equal earlier pretest requires a substantive no-change assumption."
+    },
+    {
+      "id": "PHI007-fr-exercise-2",
+      "module": "PHI007",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/philosophy/fr/phi-007-test-a-learning-gain-against-counterfactuals.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "43e07ddd8a8a660924195ebcc6eb45448e421bba2550ac53e12a7a03a57962a4",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Benefit/no-effect/harm worlds share pretest and observedY1 but have average effects1/4,0,-1/4. Missing later no-treatment vectors differ; observed before/after improvement alone does not distinguish them or assign plausibility."
+    },
+    {
+      "id": "PHI007-fr-exercise-3",
+      "module": "PHI007",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/philosophy/fr/phi-007-test-a-learning-gain-against-counterfactuals.fr.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "893d316746291bfea6edeb53a40c86941b1ece71007b529d25bc118ce056e5c5",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "All256binaryY0vectors give nine attainable effect levels with tight bounds-1/4to3/4. Allones attains lower and allzeros upper. Enumeration gives no prior and interval is notCI. Pretests may inform a justified design/model without constraining unrestricted laterY0by themselves."
+    },
+    {
+      "id": "PHI007-fr-exercise-4",
+      "module": "PHI007",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/philosophy/fr/phi-007-test-a-learning-gain-against-counterfactuals.fr.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "ccd5fa87a556269bebe34aa994ef51d00dc9726557b9db19a6df77b9de16c12b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Uniform balanced four-of-eight hypothetical assignments number70; mean contrast equals fixed-worldATE1/4,0,-1/4 under well-defined treatment, consistency, fixed outcomes and no interference. Benefit-worldtreated1,2,4,6mean1/2minuscontrolmean1gives-1/2. Assignment unbiasedness does not guarantee one-result sign/precision or an actual study."
+    },
+    {
+      "id": "PHI007-fr-exercise-5",
+      "module": "PHI007",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/philosophy/fr/phi-007-test-a-learning-gain-against-counterfactuals.fr.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "886c66eb4f56c5a82481ddbcb272526992df7f55e2fc6e9c0397af78da6f577e",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Eleven attempts from one learner are not eleven independently assigned participants. Need real versioned intervention/comparison, learner-level units/procedure, timed comparable outcomes, assistance/missingness and assumption checks. Source labels, planned study and before/after difference do not establish causal learning gain."
+    },
+    {
+      "id": "PHI007-es-exercise-1",
+      "module": "PHI007",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/philosophy/es/phi-007-test-a-learning-gain-against-counterfactuals.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "2c932e85baa9d2299f95ca768dc5e0416de61c2a2c7fdb60900ca52dffd97dab",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Separate eight-unit pretest4/8 and treated later6/8 give change1/4. Y1/Y0 refer to the same later endpoint under different interventions. Setting missing laterY0equal earlier pretest requires a substantive no-change assumption."
+    },
+    {
+      "id": "PHI007-es-exercise-2",
+      "module": "PHI007",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/philosophy/es/phi-007-test-a-learning-gain-against-counterfactuals.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "5a3b024a5cb56fd0be6685c67167f54c45786426e55d9dd977045dd0dc18995c",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Benefit/no-effect/harm worlds share pretest and observedY1 but have average effects1/4,0,-1/4. Missing later no-treatment vectors differ; observed before/after improvement alone does not distinguish them or assign plausibility."
+    },
+    {
+      "id": "PHI007-es-exercise-3",
+      "module": "PHI007",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/philosophy/es/phi-007-test-a-learning-gain-against-counterfactuals.es.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "9c9706a963cc2609bc727397870d72546d289b815c363387b7e297648d7965f4",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "All256binaryY0vectors give nine attainable effect levels with tight bounds-1/4to3/4. Allones attains lower and allzeros upper. Enumeration gives no prior and interval is notCI. Pretests may inform a justified design/model without constraining unrestricted laterY0by themselves."
+    },
+    {
+      "id": "PHI007-es-exercise-4",
+      "module": "PHI007",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/philosophy/es/phi-007-test-a-learning-gain-against-counterfactuals.es.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "b20c558a07a6dc759a3e8d6ab616ea63a4487417bc5ab03567c25e8d12cd8e26",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Uniform balanced four-of-eight hypothetical assignments number70; mean contrast equals fixed-worldATE1/4,0,-1/4 under well-defined treatment, consistency, fixed outcomes and no interference. Benefit-worldtreated1,2,4,6mean1/2minuscontrolmean1gives-1/2. Assignment unbiasedness does not guarantee one-result sign/precision or an actual study."
+    },
+    {
+      "id": "PHI007-es-exercise-5",
+      "module": "PHI007",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/philosophy/es/phi-007-test-a-learning-gain-against-counterfactuals.es.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "98c7b8ce8c99d9f51e3ad91f3dc2307e4b66cea5b0b4b716c9e8a9fa7f98fbd9",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, pinned source/test text, actual limited primary readings and independently audited authored item/trace/countermodel records. No human fluency, musician, learner or causal outcome.",
+      "checked_conclusion": "Eleven attempts from one learner are not eleven independently assigned participants. Need real versioned intervention/comparison, learner-level units/procedure, timed comparable outcomes, assistance/missingness and assumption checks. Source labels, planned study and before/after difference do not establish causal learning gain."
+    }
+  ],
+  "learner_criterion_checks": [
+    {
+      "id": "GAA007-1",
+      "module": "GAA007",
+      "title": "target-cue",
+      "acceptance_reviewed": "Distinguish naming target with chord label hidden versus any-triad/exact-learned-shape tasks with target chord label visible; exact target and order explicit.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Chord name is an answer leak for naming the shown diagram but an intended cue for generating a restricted C-major-triad shape. Exact learned shape must be explicitly identified with string-order convention. Target-specific masking is a proposed item policy, not an implemented API.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no actual participant assessed."
+    },
+    {
+      "id": "GAA007-2",
+      "module": "GAA007",
+      "title": "key-order",
+      "acceptance_reviewed": "Raw0-1-0-2-3-x reverses to chartx-3-2-0-1-0; tuning40,45,50,55,59,64 gives48,52,55,60,64 with no capo. Preserve raw/display distinction/source identity.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Raw high-to-low0-1-0-2-3-x reverses to low-to-highx-3-2-0-1-0. Tuning40,45,50,55,59,64 with no capo gives sounding48,52,55,60,64. Structured raw versus displayed chart must retain order/source/tuning identity. Source and test assertions were read, not executed.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no actual participant assessed."
+    },
+    {
+      "id": "GAA007-3",
+      "module": "GAA007",
+      "title": "acceptance",
+      "acceptance_reviewed": "Exact-A acceptsAonly; restricted all-and-onlyCEG acceptsA/B/D notC(extra11/B). Symbolic criterion is not physical playability or every musical brief.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Exact-A accepts onlyA. Restricted all-and-only pitch classes0,4,7 each present acceptsA/B/D, rejectsCwith extra11/B. This symbolic criterion neither proves physical playability nor covers every musically useful C-labelled brief.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no actual participant assessed."
+    },
+    {
+      "id": "GAA007-4",
+      "module": "GAA007",
+      "title": "score",
+      "acceptance_reviewed": "Scores-0.2/0.8/1.2 clamp0/0.8/1 but are not learner recall probabilities. Require actual defined delayed response and calibration evidence.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Finite retrieval scores-0.2,0.8,1.2 clamp to0,0.8,1. A bounded retrieval/response score is not a learner-event probability. A defined delayed unassisted response and evidence calibrating predictions against that event are missing.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no actual participant assessed."
+    },
+    {
+      "id": "GAA007-5",
+      "module": "GAA007",
+      "title": "attempt-record",
+      "acceptance_reviewed": "Retain target/cues/key/rule/source/tuning/order/query, actual answer before reveal, assistance/attempt/timing and delayed/comparison evidence. Plan/tracking/RAG score is not an attempt or causal benefit.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Future item retains source/query/raw/display/instrument/tuning/capo,target,cues,key,acceptance rule, actual answer before reveal, assistance, attempt identity and timing. Actual delayed assessment plus justified comparison is needed before retention/benefit claims; plan/click/RAGscore is not that evidence.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no actual participant assessed."
+    },
+    {
+      "id": "COG007-1",
+      "module": "COG007",
+      "title": "first-endpoint",
+      "acceptance_reviewed": "Raw3/7; observed eligible first2/6=1/3 after exposedP03 excluded. MissingP08 is not wrong and exposedcorrect is not unaided.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Seven observed first responses yield3/7raw; correct but answer-exposedP03 is ineligible for unaided endpoint. Remaining six observed eligible responses yield2/6=1/3. MissingP08 is unobserved, not wrong; retain statuses/reasons.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no actual participant assessed."
+    },
+    {
+      "id": "COG007-2",
+      "module": "COG007",
+      "title": "aggregation",
+      "acceptance_reviewed": "Allresponses6/11 and finalitems6/7 have different endpoints; repeated rows not independent new learners or unaided trials.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Eleven completed response rows yield6/11; final observed answers per item yield6/7. These differ from first-unaided2/6 because retries/feedback/exposure alter the endpoint. Related rows are not independent new learners or first trials.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no actual participant assessed."
+    },
+    {
+      "id": "COG007-3",
+      "module": "COG007",
+      "title": "assistance",
+      "acceptance_reviewed": "Hintretry3/3selected; eligibleoffers7with6responses give bounds2/7to3/7. No causal/delayed effect or hidden missing-as-failure inference.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Selected hinted retries yield3/3. Seven eligible practice offers with six observed responses give deterministic full-offer bounds2/7to3/7. Missing-as-failure can define a separate declared policy, not an observed answer; assisted success proves no causal or delayed benefit.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no actual participant assessed."
+    },
+    {
+      "id": "COG007-4",
+      "module": "COG007",
+      "title": "delayed",
+      "acceptance_reviewed": "At24hours8heldoutoffers,6responses5correct give5/6observed, bounds5/8to7/8 with4binarymissing completions. Deterministic bounds notCI or observed missing outcomes.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "At stipulated24hours, eight authored held-out offers have six responses/fivecorrect: observed5/6, full-offer bounds5/8to7/8. Four missing binary completions give5/8,3/4,3/4,7/8. Bounds are deterministic, notCI, evidence of missing outcomes or item comparability.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no actual participant assessed."
+    },
+    {
+      "id": "COG007-5",
+      "module": "COG007",
+      "title": "bounded-report",
+      "acceptance_reviewed": "Keep all endpoints separate in authoredtrace, APSabstract scope, actual timed/cued/assistance/missingness records and comparable delayed endpoint plus justified comparison needed; source labels/retrieval not retention.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Report final6/7, eligiblefirst2/6, selectedhint3/3 and delayed5/6with5/8to7/8bounds separately. APS abstract concerns prose recall under studied delays, not guitar effect or schedule. Real timed/cued/assistance/missingness and comparable delayed endpoint/comparison are absent; selected tracking labels are not retention.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no actual participant assessed."
+    },
+    {
+      "id": "PHI007-1",
+      "module": "PHI007",
+      "title": "counterfactual-time",
+      "acceptance_reviewed": "Before4/8after6/8change1/4; defineY1/Y0at same later time, pretest-as-Y0 adds assumption.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Separate eight-unit pretest4/8 and treated later6/8 give change1/4. Y1/Y0 refer to the same later endpoint under different interventions. Setting missing laterY0equal earlier pretest requires a substantive no-change assumption.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no actual participant assessed."
+    },
+    {
+      "id": "PHI007-2",
+      "module": "PHI007",
+      "title": "countermodels",
+      "acceptance_reviewed": "Benefit/noeffect/harm worlds share all supplied observations with effects1/4,0,-1/4. Need justified premise or comparison to distinguish.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Benefit/no-effect/harm worlds share pretest and observedY1 but have average effects1/4,0,-1/4. Missing later no-treatment vectors differ; observed before/after improvement alone does not distinguish them or assign plausibility.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no actual participant assessed."
+    },
+    {
+      "id": "PHI007-3",
+      "module": "PHI007",
+      "title": "bounds",
+      "acceptance_reviewed": "256binaryY0vectors yield tight-1/4to3/4 bounds witnessedallones/allzeros; no assignedprior/CI. Pretest may inform justified design but not unrestricted laterY0.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "All256binaryY0vectors give nine attainable effect levels with tight bounds-1/4to3/4. Allones attains lower and allzeros upper. Enumeration gives no prior and interval is notCI. Pretests may inform a justified design/model without constraining unrestricted laterY0by themselves.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no actual participant assessed."
+    },
+    {
+      "id": "PHI007-4",
+      "module": "PHI007",
+      "title": "randomization",
+      "acceptance_reviewed": "70balancedallocations meanbenefitcontrast1/4 under fixedpotentialoutcomes/consistentwell-definedtreatment/nointerference/uniformassignment; units1,2,4,6 yield1/2minus1=-1/2. No singleassignment sign/precision guarantee or actual run.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Uniform balanced four-of-eight hypothetical assignments number70; mean contrast equals fixed-worldATE1/4,0,-1/4 under well-defined treatment, consistency, fixed outcomes and no interference. Benefit-worldtreated1,2,4,6mean1/2minuscontrolmean1gives-1/2. Assignment unbiasedness does not guarantee one-result sign/precision or an actual study.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no actual participant assessed."
+    },
+    {
+      "id": "PHI007-5",
+      "module": "PHI007",
+      "title": "unit-evidence",
+      "acceptance_reviewed": "Elevenresponse rows fromonelearner are not11randomizedparticipants. Requireversionedcomparison,units/assignmentprocedure,realcomparabletimedoutcomes,assistance/missingness and assumptionchecks beforebenefit.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Eleven attempts from one learner are not eleven independently assigned participants. Need real versioned intervention/comparison, learner-level units/procedure, timed comparable outcomes, assistance/missingness and assumption checks. Source labels, planned study and before/after difference do not establish causal learning gain.",
+      "task_alignment": "Final answer-free task explicitly elicits this criterion; no actual participant assessed."
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-007-turn-a-voicing-result-into-a-practice-item.md",
+      "sha256": "5e8990aff651d79bc42e376adcb27b2ff6b0c130b8206b0dc344dedecca8b5d6"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-007-turn-a-voicing-result-into-a-practice-item.fr.md",
+      "sha256": "94ef5a2931dfa2fb15dd8855379390f8e92d64a7ca8485ce7d7f07a3bb7c94fc"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-007-turn-a-voicing-result-into-a-practice-item.es.md",
+      "sha256": "b077a38e3859f9b350c7a0d0fb9e3d141df631bdff515e4accfbe60b8021cc0e"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-007-separate-unaided-recall-from-assisted-success.md",
+      "sha256": "cc28d8be51e0d2c7ab4ad9d8f2cd14da93b148a14904f12e742e6d9024810f54"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/fr/cog-007-separate-unaided-recall-from-assisted-success.fr.md",
+      "sha256": "11824ee1996c78592381efe269d1eac54e421c61227432792831284882d81cca"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/es/cog-007-separate-unaided-recall-from-assisted-success.es.md",
+      "sha256": "539a71621a1c7170b41edc857c60e99305fdd59766763273cbf351a051635cf7"
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md",
+      "sha256": "a8056e98feade4a0da8a72311335b3124f8b3414d9e7cef136d7665b395b7b94"
+    },
+    {
+      "path": "streeling/courses/philosophy/fr/phi-007-test-a-learning-gain-against-counterfactuals.fr.md",
+      "sha256": "b62094a039f7b00ceadcf98981826d7e1a46708d43adece3ffefd45dec3d9a8e"
+    },
+    {
+      "path": "streeling/courses/philosophy/es/phi-007-test-a-learning-gain-against-counterfactuals.es.md",
+      "sha256": "01216657775d8c6ed16d25e6143c58dda4795c7badae4a20809c2b0f0f5dfe1d"
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/practice-outcomes-2026-10-22/production-plan.md",
+      "sha256": "5a4943830690bbdd5c96d93fa4dc9468ef5b61cbe143f2f8036bf5c1c5203a85"
+    },
+    {
+      "path": "code/streeling/evidence/practice-outcomes-2026-10-22/README.md",
+      "sha256": "ee9146d1b4c5f6cc81f441daacabf3444b4ada221460fa3f98e88fc6144a2e2b"
+    },
+    {
+      "path": "code/streeling/evidence/practice-outcomes-2026-10-22/primary-readback.json",
+      "sha256": "cdb1b4502d4eea2339e96637a0e1c711df1eab62510990e0f22ff3e40f1240a8"
+    },
+    {
+      "path": "code/streeling/evidence/practice-outcomes-2026-10-22/primary-reading.json",
+      "sha256": "02a823b74ec052b1c78f50983aeff8bc7c61906611788b97299355c8b67b68ab"
+    },
+    {
+      "path": "code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json",
+      "sha256": "8b62207df7d7fa84e97053ef4d7c6cea36b7eae73ce7a867d14cfdbfa49b9cc6"
+    },
+    {
+      "path": "code/streeling/evidence/practice-outcomes-2026-10-22/recall-trace.json",
+      "sha256": "fd8af864a3081bc673df661f008e90f2e892249be78d10fa7b977ad27d3885b4"
+    },
+    {
+      "path": "code/streeling/evidence/practice-outcomes-2026-10-22/counterfactual-gains.json",
+      "sha256": "b287aa1db4306eed64e00dfbb182722869fa0cfabbf7316ab2aba01346b0c713"
+    },
+    {
+      "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+      "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1"
+    },
+    {
+      "path": "code/streeling/evidence/practice-outcomes-2026-10-22/data-audit.json",
+      "sha256": "3a096cc1ee49255a5afa40253859f9ee5b23b99a43792ad983e8bb469c3e704c"
+    },
+    {
+      "path": "code/streeling/evidence/practice-outcomes-2026-10-22/learner-task.md",
+      "sha256": "f4197761044a49ea4041aaf53b06689f27e1d6d121a9d80c489af9e7bca7c189"
+    },
+    {
+      "path": "code/streeling/evidence/practice-outcomes-2026-10-22/reviewer-rubric.json",
+      "sha256": "94f0cd38de5bac314f88dc3ebb578175096dda4f007a9f95220cea0a8f1dc833"
+    },
+    {
+      "path": "code/streeling/evidence/practice-outcomes-2026-10-22/official-links.json",
+      "sha256": "59a2146cf1f0ce454bedb91d4d563a82fc4814dacd1c84ec3f5b90914a69dc6f"
+    }
+  ],
+  "prerequisite_bindings": [
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-004-choose-a-useful-voicing.md",
+      "sha256": "d9a937a6af8e4f2ea684cf1735c584bea6aca49a62bbef5cd4b866522fa94d14"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-002-feedback-integrity-fretboard-recall.md",
+      "sha256": "77c313631f27943312d9320a8888e26a5f8a5ce9ec267d415ff33320fbb5b5e4"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-003-calibrating-fretboard-confidence.md",
+      "sha256": "9610552ea1f8bf2727e820232fa1ad17f9914feb229b4f275173d5b861561e16"
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-001-how-to-argue-well.md",
+      "sha256": "e8b280a404edebcdf12b3e98d465e6e60d9d21cf5e84bba5a6d88296a5d6e0f4"
+    }
+  ],
+  "locale_url_and_format_checks": [
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-007-turn-a-voicing-result-into-a-practice-item.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-007-turn-a-voicing-result-into-a-practice-item.fr.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-007-turn-a-voicing-result-into-a-practice-item.es.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-007-separate-unaided-recall-from-assisted-success.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/cognitive-science/fr/cog-007-separate-unaided-recall-from-assisted-success.fr.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/cognitive-science/es/cog-007-separate-unaided-recall-from-assisted-success.es.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/philosophy/fr/phi-007-test-a-learning-gain-against-counterfactuals.fr.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/philosophy/es/phi-007-test-a-learning-gain-against-counterfactuals.es.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    }
+  ],
+  "primary_source_review": [
+    {
+      "path": "Common/GA.Business.ML/Agents/Skills/ChordVoicingsSkill.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.ML/Agents/Skills/ChordVoicingsSkill.cs",
+      "sha256": "1c234fdcced29e9ebdabe49ec85d1060bb89ec5c0fb5faefb4ad4b79bb33f63f",
+      "review_scope": "Actual immutable copies read for voicing display/raw data/confidence, formatter order and reversal test assertions, practice goals/tracking/catalog plan, RAG metrics. Live GA worktree not used as pinned source; no query/formatter/test execution."
+    },
+    {
+      "path": "Common/GA.Business.DSL/Types/PracticeRoutineTypes.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Types/PracticeRoutineTypes.fs",
+      "sha256": "a8417bfbe5588889d6bfd99b13fd07b80feec453175e107a05e59e5de6c028f0",
+      "review_scope": "Actual immutable copies read for voicing display/raw data/confidence, formatter order and reversal test assertions, practice goals/tracking/catalog plan, RAG metrics. Live GA worktree not used as pinned source; no query/formatter/test execution."
+    },
+    {
+      "path": "Common/GA.Business.ML/Agents/Skills/PracticeRoutineSkill.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.ML/Agents/Skills/PracticeRoutineSkill.cs",
+      "sha256": "6636adf36bda56f42a18bf2883575e30b702b7a6ee036f9c4b9d7efc46194ebd",
+      "review_scope": "Actual immutable copies read for voicing display/raw data/confidence, formatter order and reversal test assertions, practice goals/tracking/catalog plan, RAG metrics. Live GA worktree not used as pinned source; no query/formatter/test execution."
+    },
+    {
+      "path": "Common/GA.Business.ML/Rag/RagEvaluationModels.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.ML/Rag/RagEvaluationModels.cs",
+      "sha256": "411d3ec370ede3328ba5c9bad9babfe73ee69c1a08bcd99fda177baf439f2380",
+      "review_scope": "Actual immutable copies read for voicing display/raw data/confidence, formatter order and reversal test assertions, practice goals/tracking/catalog plan, RAG metrics. Live GA worktree not used as pinned source; no query/formatter/test execution."
+    },
+    {
+      "path": "Common/GA.Business.ML/Notation/PlayableNotationFormatter.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.ML/Notation/PlayableNotationFormatter.cs",
+      "sha256": "34f2ce63b67a87ce0225af361a121cdb6437f4a5995a253aa0c06f0fe36c4d72",
+      "review_scope": "Actual immutable copies read for voicing display/raw data/confidence, formatter order and reversal test assertions, practice goals/tracking/catalog plan, RAG metrics. Live GA worktree not used as pinned source; no query/formatter/test execution."
+    },
+    {
+      "path": "Tests/Common/GA.Business.ML.Tests/Notation/PlayableNotationFormatterTests.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Tests/Common/GA.Business.ML.Tests/Notation/PlayableNotationFormatterTests.cs",
+      "sha256": "6bfd0baae249d7c0df562afc55ba76aaeb14efd6d6683d7899b3d8da0e8c33f7",
+      "review_scope": "Actual immutable copies read for voicing display/raw data/confidence, formatter order and reversal test assertions, practice goals/tracking/catalog plan, RAG metrics. Live GA worktree not used as pinned source; no query/formatter/test execution."
+    }
+  ],
+  "official_document_review": [
+    {
+      "url": "https://www.psychologicalscience.org/journals/psychological-science/j.1467-9280.2006.01693.x/",
+      "actual_read": "Publisher abstract only, directly opened/read. Prose free recall had distinct immediate/delayed results under studied conditions. No full article/PDF, guitar effect, effect-size or universal schedule claim."
+    },
+    {
+      "url": "https://www.itl.nist.gov/div898/handbook/pri/section3/pri331.htm",
+      "actual_read": "Actual complete primary web body read: random assignment of factor levels to experimental units and design planning. Authored potential outcomes/allocation enumeration are separate; no ANOVA or sample-size adequacy claim."
+    }
+  ],
+  "unread_reference": {
+    "url": "https://psychnet.wustl.edu/memory/wp-content/uploads/2018/04/Roediger-Karpicke-2006_PsychSci.pdf",
+    "read": false,
+    "scope": "Earlier timed-out full-PDF attempt recorded by author; not retried or claimed read by reviewer."
+  },
+  "pending": {
+    "human_technical_review": null,
+    "musician_review": null,
+    "fluent_language_review": null,
+    "learner_attempts": null,
+    "independent_learner_transfer": null,
+    "runtime_validation": null,
+    "search_query": null,
+    "formatter_execution": null,
+    "notation_test_run": null,
+    "quiz_implementation": null,
+    "actual_recall": null,
+    "retention": null,
+    "learner_calibration": null,
+    "randomization": null,
+    "causal_effect": null,
+    "physical_playability": null,
+    "production_fix": null,
+    "deployed_html": null
+  },
+  "human_technical_review": null,
+  "musician_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "independent_learner_transfer": null,
+  "runtime_validation": null,
+  "search_query": null,
+  "formatter_execution": null,
+  "notation_test_run": null,
+  "quiz_implementation": null,
+  "actual_recall": null,
+  "retention": null,
+  "learner_calibration": null,
+  "randomization": null,
+  "causal_effect": null,
+  "physical_playability": null,
+  "production_fix": null,
+  "deployed_html": null,
+  "boundaries": [
+    "Target-specific answer cues and exact versus restricted-triad acceptance are authored item rules, not a new API, full harmonic taxonomy or physical performance proof.",
+    "Retrieval confidence clamp, RAG metrics, practice tracking names and read test assertions are not actual learner answers, retention probabilities, runtime tests or repository-wide absence evidence.",
+    "One fictional learner trace distinguishes offers, observed first responses, eligibility, retries, final answers and assisted successes. Missingness is not silently wrong; deterministic completion bounds are not confidence intervals.",
+    "Counterfactual illustration uses a separate eight-unit population. Later no-treatment outcomes differ from earlier pretests unless an assumption equates them; identical observations fit benefit/no-effect/harm.",
+    "All256Y0vectors are possible worlds without assigned probabilities; tight bounds-1/4to3/4 are finite identification limits, not population estimates orCI.",
+    "Seventy hypothetical uniform balanced allocations per fixed world yield an unbiased assignment average under stated assumptions, not a guaranteed one-assignment sign, actual randomization, p-value or observed effect.",
+    "Repeated item rows from one learner are not independent randomized participants. No query, formatter/test/quiz run, recruitment, memory write, causal experiment, paid call, host/player or production correction performed by reviewer."
+  ]
+}

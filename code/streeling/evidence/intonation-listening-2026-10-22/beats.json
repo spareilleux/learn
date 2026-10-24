@@ -1,0 +1,56 @@
+{
+  "scope": "Constructed constant-amplitude oscillators; no new GA render or physical-guitar diagnosis.",
+  "sample_rate_hz": 44100,
+  "component_peak_amplitude": 0.125,
+  "frequency_a_hz": 327.0319566257483,
+  "frequency_b_hz": 329.6275569128699,
+  "frequency_difference_hz": 2.595600287121613,
+  "carrier_frequency_hz": 328.32975676930914,
+  "unsigned_envelope_period_seconds": 0.3852673329409085,
+  "first_unsigned_envelope_zero_seconds": 0.19263366647045424,
+  "signed_modulator_frequency_hz": 1.2978001435608064,
+  "identity_max_abs_error": 5.682876044743601e-13,
+  "identity_tolerance": 1e-10,
+  "untapered_model": true,
+  "windows": [
+    {
+      "label": "constructive1",
+      "center_seconds": 0.3852673329409085,
+      "nominal_width_seconds": 0.02,
+      "start_sample": 16550,
+      "end_sample_exclusive": 17432,
+      "samples": 882,
+      "mix_rms": 0.17571441158396006,
+      "equal_frequency_control_rms": 0.17623301527266266
+    },
+    {
+      "label": "destructive",
+      "center_seconds": 0.5779009994113627,
+      "nominal_width_seconds": 0.02,
+      "start_sample": 25045,
+      "end_sample_exclusive": 25927,
+      "samples": 882,
+      "mix_rms": 0.00845124662257925,
+      "equal_frequency_control_rms": 0.17623478918411653
+    },
+    {
+      "label": "constructive2",
+      "center_seconds": 0.770534665881817,
+      "nominal_width_seconds": 0.02,
+      "start_sample": 33540,
+      "end_sample_exclusive": 34422,
+      "samples": 882,
+      "mix_rms": 0.17572195893116951,
+      "equal_frequency_control_rms": 0.17623774132406336
+    }
+  ],
+  "dip_relative_db": -26.357732142785096,
+  "recovery_relative_db": 0.0003730713746869126,
+  "equal_frequency_control_dip_relative_db": 8.742925692068016e-05,
+  "limits": [
+    "Unsigned-envelope recurrence differs from the signed modulator frequency.",
+    "RMS windows are sampled half-open intervals with declared ceil rounding.",
+    "Boundary-faded exported illustration is a separate quantized asset; these model windows lie outside its fades.",
+    "The old physical-engine decay gate is not reversed by this constructed counterexample."
+  ]
+}

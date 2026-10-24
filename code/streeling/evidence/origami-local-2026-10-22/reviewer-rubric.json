@@ -1,0 +1,119 @@
+{
+  "status": "prepared-not-performed",
+  "scope": "Source-assisted task criterion review is not learner performance.",
+  "criteria": [
+    {
+      "id": "PHY010-1",
+      "module": "PHY010",
+      "title": "cyclic-geometry",
+      "acceptance": "Recover sectors 60,90,120,90 from rays 0,60,150,270 including wraparound to360; explain geometric order versus input order.",
+      "decision": null
+    },
+    {
+      "id": "PHY010-2",
+      "module": "PHY010",
+      "title": "angular-existence",
+      "acceptance": "Compute alternating totals180/180 and residual0; preserve even degree and the ideal unassigned single-interior-vertex, zero-thickness, all-used-crease hypotheses and existential conclusion.",
+      "decision": null
+    },
+    {
+      "id": "PHY010-3",
+      "module": "PHY010",
+      "title": "radian-tolerance",
+      "acceptance": "Moving e1 changes adjacent sectors with opposite signs: residual magnitude2abs(delta). Classify 1e-10 and1e-8 at tolerance1e-9rad; no degrees or material allowance inferred.",
+      "decision": null
+    },
+    {
+      "id": "PHY010-4",
+      "module": "PHY010",
+      "title": "assignment-counterexample",
+      "acceptance": "MMMV gives M-V=2 and angular pass but violates opposite labels at the strict60degree minimum with90degree neighbors. No whole IX acceptance follows.",
+      "decision": null
+    },
+    {
+      "id": "PHY010-5",
+      "module": "PHY010",
+      "title": "coverage",
+      "acceptance": "State assigned-card counts1applicable,4border,1isolated and one-U counts0applicable,1other; empty failures/max0 describe no positive coverage. Keep the incidence-model boundary.",
+      "decision": null
+    },
+    {
+      "id": "INF007-1",
+      "module": "INF007",
+      "title": "prior",
+      "acceptance": "Count16labeled strings with authored fair1/16 prior and entropy4bits; do not infer an actual agent sampling distribution.",
+      "decision": null
+    },
+    {
+      "id": "INF007-2",
+      "module": "INF007",
+      "title": "filters",
+      "acceptance": "Count8 Maekawa survivors/H3 and4 both-filter survivors/H2 under conditional uniform distributions. Preserve identities and MMMV counterexample; no full-solver or physical certificate.",
+      "decision": null
+    },
+    {
+      "id": "INF007-3",
+      "module": "INF007",
+      "title": "skew",
+      "acceptance": "Compute entropy1.75 for probabilities1/2,1/4,1/8,1/8 against maximum2bits over the same4states; distinguish concentration from correctness.",
+      "decision": null
+    },
+    {
+      "id": "INF007-4",
+      "module": "INF007",
+      "title": "average",
+      "acceptance": "For bucket sizes8/4/4 derive probabilities1/2,1/4,1/4, expected remainder2.5 and label information1.5, distinct from accepted-branch remainder2.",
+      "decision": null
+    },
+    {
+      "id": "INF007-5",
+      "module": "INF007",
+      "title": "handoff",
+      "acceptance": "Preserve assignment identities, crease IDs, predicates and probability assumptions. A pass label cannot reconstruct identity, and U is not a fair binary prior.",
+      "decision": null
+    },
+    {
+      "id": "PHI006-1",
+      "module": "PHI006",
+      "title": "existential",
+      "acceptance": "Replace a universal assignment claim with existence under the ideal unassigned single-vertex hypotheses; no global, thick-object or manufacturing claim follows.",
+      "decision": null
+    },
+    {
+      "id": "PHI006-2",
+      "module": "PHI006",
+      "title": "necessity",
+      "acceptance": "Use MMMV as a necessary-filter counterexample without refuting the unassigned theorem or assuming complete IX acceptance.",
+      "decision": null
+    },
+    {
+      "id": "PHI006-3",
+      "module": "PHI006",
+      "title": "empty-domain",
+      "acceptance": "Explain applicable0, empty failures and maximum0 with the unknown-crease skip reason; do not infer a checked vertex or completed assignment.",
+      "decision": null
+    },
+    {
+      "id": "PHI006-4",
+      "module": "PHI006",
+      "title": "aggregate",
+      "acceptance": "Locate the other conjuncts of the IX aggregate predicate; distinguish missing full input/frame/order/runtime verdict and local versus whole fold, stack or motion.",
+      "decision": null
+    },
+    {
+      "id": "PHI006-5",
+      "module": "PHI006",
+      "title": "semantic-message",
+      "acceptance": "Write a handoff preserving subject, identity, predicate, domain, assumptions and witness; retain MMMV extra-rule failure and missing outcomes. The DSL is proposed, with a typed report as simpler alternative.",
+      "decision": null
+    }
+  ],
+  "pass_policy": "All five criteria per module. Record actual answers and assistance; preserve failures.",
+  "human_technical_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "full_ix_analysis": null,
+  "physical_fold": null,
+  "scene_trial": null,
+  "deployed_html": null
+}

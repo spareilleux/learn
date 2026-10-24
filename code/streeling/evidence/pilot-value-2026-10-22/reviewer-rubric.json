@@ -1,0 +1,119 @@
+{
+  "status": "prepared-not-performed",
+  "scope": "Criterion review is not an actual learner or pilot outcome.",
+  "criteria": [
+    {
+      "id": "FUT005-1",
+      "module": "FUT005",
+      "title": "prior-action",
+      "acceptance": "State authored prior/loss units and admissible actions. Derive K4 versus S5, boundary p>3/5 and tie-K without treating the boundary as a frequency estimate.",
+      "decision": null
+    },
+    {
+      "id": "FUT005-2",
+      "module": "FUT005",
+      "title": "posterior",
+      "acceptance": "Derive outcome probability1/2 and posteriors4/5 and1/5 from the stipulated channel; distinguish reversed conditionals and choose S/K.",
+      "decision": null
+    },
+    {
+      "id": "FUT005-3",
+      "module": "FUT005",
+      "title": "information-values",
+      "acceptance": "Compute optimized loss3 with noisy signal and2 with perfect state information, gross values1/2; preserve the same action/loss/timing model.",
+      "decision": null
+    },
+    {
+      "id": "FUT005-4",
+      "module": "FUT005",
+      "title": "acquisition-cost",
+      "acceptance": "Calculate noisy net0.4 at cost0.6 and perfect-test net-1 at cost3; do not add minutes to points without conversion.",
+      "decision": null
+    },
+    {
+      "id": "FUT005-5",
+      "module": "FUT005",
+      "title": "actionability",
+      "acceptance": "Explain locked-K gross value0 and information-ignoring option. Specify calibration, units, timing, allowed actions and quality guards needed before a live trial decision.",
+      "decision": null
+    },
+    {
+      "id": "CYB007-1",
+      "module": "CYB007",
+      "title": "fresh-updates",
+      "acceptance": "Use positive/negative likelihood ratios4 and1/4 with prior odds1; fresh plus then minus gives posteriors4/5 then1/2, actions S/K under the stated conditional-independence model.",
+      "decision": null
+    },
+    {
+      "id": "CYB007-2",
+      "module": "CYB007",
+      "title": "copy",
+      "acceptance": "A copy of trial-A adds conditional factor1, leaving4/5; a fresh independent plus yields16/17. Wrapper identity alone does not establish freshness/independence.",
+      "decision": null
+    },
+    {
+      "id": "CYB007-3",
+      "module": "CYB007",
+      "title": "ledger",
+      "acceptance": "Identify the spurious duplicate update and final deduplicated1/2 K versus naive4/5 S after independent trial-B minus; preserve authored trace versus production behavior.",
+      "decision": null
+    },
+    {
+      "id": "CYB007-4",
+      "module": "CYB007",
+      "title": "identity",
+      "acceptance": "Different hashes may describe one trial and equal summaries may arise from distinct trials. Preserve lineage, conditional dependence, comparability and state stability; no calibrated model inferred.",
+      "decision": null
+    },
+    {
+      "id": "CYB007-5",
+      "module": "CYB007",
+      "title": "optional-stop",
+      "acceptance": "Compute second-trial gross0.32 after plus and0 after minus; net-0.28/-0.6 at cost0.6. Keep optional information decisions separate from mandatory validation.",
+      "decision": null
+    },
+    {
+      "id": "PM006-1",
+      "module": "PM006",
+      "title": "one-time-cost",
+      "acceptance": "Declare horizon reuse assumptions and same loss scale. At N2 derive prior totals K8 and S12; migration2 is charged once only if S selected.",
+      "decision": null
+    },
+    {
+      "id": "PM006-2",
+      "module": "PM006",
+      "title": "reoptimization",
+      "acceptance": "After plus, N1 ties at4 and keeps K with zero migration; N2 chooses S6 over K8 and pays2. Do not carry the no-migration policy forward blindly.",
+      "decision": null
+    },
+    {
+      "id": "PM006-3",
+      "module": "PM006",
+      "title": "break-even",
+      "acceptance": "Derive total3N+1.6, netN-1.6, N1gain-0.6/N2gain0.4 and first positive integer2; N5total16.6 under stable reuse premises.",
+      "decision": null
+    },
+    {
+      "id": "PM006-4",
+      "module": "PM006",
+      "title": "ceiling",
+      "acceptance": "At N2 perfect-information loss5 and ceiling3 against baseline8, with the same migration charge. Imperfect gross value1 does not attain that ceiling.",
+      "decision": null
+    },
+    {
+      "id": "PM006-5",
+      "module": "PM006",
+      "title": "reuse",
+      "acceptance": "Reject automatic N10 reuse across unrelated scenes/hosts. State an expiry/reassessment trigger, comparable outcomes and real cost/quality evidence; no observed saving or implemented DSL inferred.",
+      "decision": null
+    }
+  ],
+  "pass_policy": "All five criteria per module. Record actual answers, assistance and individual decisions; preserve unresolved findings.",
+  "human_technical_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "live_pilot": null,
+  "empirical_calibration": null,
+  "production_quality": null,
+  "deployed_html": null
+}

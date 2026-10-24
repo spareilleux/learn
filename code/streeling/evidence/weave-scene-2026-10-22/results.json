@@ -1,0 +1,222 @@
+{
+  "scope": "Observed native save/load and scripted physics checks for one fixed synthetic weave fixture.",
+  "status": "passed",
+  "source_manifest_sha256": "05ff96258db853cfdf31bbe53f4589e0a4d088045449035036123a0577056ab1",
+  "counts": {
+    "collision_shapes": 72,
+    "crossings": 36,
+    "meshes": 72,
+    "static_bodies": 72
+  },
+  "shared_resources": {
+    "materials": 2,
+    "meshes": 2,
+    "shapes": 2
+  },
+  "matching_ray_identities": 36,
+  "godot_version": {
+    "build": "official",
+    "hash": "14d19694e0c88a3f9e82d899a0400f27a24c176e",
+    "hex": 263681,
+    "major": 4,
+    "minor": 6,
+    "patch": 1,
+    "status": "stable",
+    "string": "4.6.1-stable (official)",
+    "timestamp": 0
+  },
+  "selected_crossings": [
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w2-f0",
+      "lower_aabb_metres": {
+        "position": [
+          0.00800000037997961,
+          -0.00249999994412065,
+          -0.00100000004749745
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.0020000000949949
+        ]
+      },
+      "ray": {
+        "crossing_id": "w2-f0",
+        "position_metres": [
+          0.00999999977648258,
+          0.00250000017695129,
+          0.0
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.00900000054389238,
+          0.000499999965541065,
+          -0.0020000000949949
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000018998981
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.0100000007078052,
+        0.00150000001303852,
+        0.0
+      ],
+      "weft_position_metres": [
+        0.0100000007078052,
+        -0.00150000001303852,
+        0.0
+      ],
+      "world_position_metres": [
+        0.0100000007078052,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w3-f0",
+      "lower_aabb_metres": {
+        "position": [
+          0.0140000004321337,
+          -0.00249999994412065,
+          -0.0020000000949949
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000018998981
+        ]
+      },
+      "ray": {
+        "crossing_id": "w3-f0",
+        "position_metres": [
+          0.0149999996647239,
+          0.00250000017695129,
+          0.0
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0130000002682209,
+          0.000499999965541065,
+          -0.00100000004749745
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.0020000000949949
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.0150000005960464,
+        -0.00150000001303852,
+        0.0
+      ],
+      "weft_position_metres": [
+        0.0150000005960464,
+        0.00150000001303852,
+        0.0
+      ],
+      "world_position_metres": [
+        0.0150000005960464,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w5-f5",
+      "lower_aabb_metres": {
+        "position": [
+          0.0230000000447035,
+          -0.00249999994412065,
+          0.0240000002086163
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "ray": {
+        "crossing_id": "w5-f5",
+        "position_metres": [
+          0.025000000372529,
+          0.00250000017695129,
+          0.025000000372529
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0240000002086163,
+          0.000499999965541065,
+          0.0230000000447035
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.025000000372529,
+        0.00150000001303852,
+        0.025000000372529
+      ],
+      "weft_position_metres": [
+        0.025000000372529,
+        -0.00150000001303852,
+        0.025000000372529
+      ],
+      "world_position_metres": [
+        0.025000000372529,
+        0.0,
+        0.025000000372529
+      ]
+    }
+  ],
+  "native_check_count": 190,
+  "all_native_checks_passed": true,
+  "negative_controls": [
+    {
+      "name": "scale",
+      "expected_failed_gate": "independent_world_metres",
+      "failed_native_gates": [
+        "aabb_clearance",
+        "all_ray_identities",
+        "independent_world_metres",
+        "ray_crossing_identity",
+        "ray_upper_strand"
+      ]
+    },
+    {
+      "name": "binding",
+      "expected_failed_gate": "ray_crossing_identity",
+      "failed_native_gates": [
+        "all_ray_identities",
+        "ray_crossing_identity"
+      ]
+    },
+    {
+      "name": "semantic",
+      "expected_failed_gate": "semantic_admission",
+      "failed_native_gates": []
+    }
+  ],
+  "binding_control_geometry_and_upper_strand_checks_pass": true,
+  "learner_trial": null,
+  "subject_review": null,
+  "fluent_language_review": null,
+  "public_course_html_readback": null
+}

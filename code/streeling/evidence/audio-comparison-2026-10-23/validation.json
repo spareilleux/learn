@@ -1,0 +1,179 @@
+{
+  "checked_at_utc": "2026-10-23T19:01:14.600985+00:00",
+  "base_learn_commit": "49ad4cf7db680f031b3a3fb5b6ee118464ad099f",
+  "source_ga_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "scope": "Three authored courses on beating versus damping, declared delay/gain null comparisons and normalization information loss. Fixed calculations and pinned source/retained-result reading; no new render, browser capture, listening trial, production comparison pipeline or DSL.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "calculation_checks": {
+    "independent_grouped_checks": 22,
+    "passed": 22,
+    "failed": 0,
+    "immutable_public_project_files": 6,
+    "source_reading_is_not_execution": true,
+    "two_tone_grid_points": 1001,
+    "selected_envelope_times": 10,
+    "reference_frames": 8,
+    "delayed_frames": 10,
+    "delay_frames": 2,
+    "teaching_sample_rate_Hz": 8000,
+    "gain_fit": 0.5,
+    "tail_coverage": 0.75,
+    "shape_frames": 4,
+    "zero_log_undefined": true,
+    "silent_gain_undefined": true,
+    "constant_correlation_undefined": true,
+    "historical_decay_gate_still_failed": true,
+    "new_native_run": null,
+    "new_browser_capture": null,
+    "listening_trial": null
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 20.885725000000093,
+    "log": "C:\\tmp\\streeling-audio-comparison-tests-20261023.log",
+    "log_sha256": "c92e7b9a5450d9bbfbc1bf025de27196aaf1c2de99a5d7bd42655c5ce964e186",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.9649774999707006,
+    "log": "C:\\tmp\\streeling-audio-comparison-sync-20261023.log",
+    "log_sha256": "d417b433f618b85c367ff8f6346779a6faf87380df64b36fd979461951e3e8b5",
+    "idempotent_checked_files": 770
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 131.13778999994975,
+    "log": "C:\\tmp\\streeling-audio-comparison-build-20261023.log",
+    "log_sha256": "35aed88e3231344e2eb098695c697e53dc9e1732034efe978221eb767de6a0d8",
+    "pages": 1966,
+    "dependency_install": "None. Existing dependency tree with matching package lock; checkout junction recovery recorded in dependency-recovery.json.",
+    "warnings": "Existing highlighting fallback and empty i18n/404 warnings retained in complete log."
+  },
+  "rendered_articles": {
+    "pages": 21,
+    "links": 402,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "data_verdict": "pass",
+    "data_receipt_sha256": "db1f8916a72bf6ad2a6bce2fff0c17621e76dcafcece194ff09368e56730ce4a",
+    "content_verdict": "pass",
+    "content_receipt_sha256": "e858441dbd7a72e5ebf59d47155e26cb26e2d652629b3bf8f30a357108c5dabb",
+    "exercise_pairs_checked": 45,
+    "learner_criteria_checked": 15,
+    "open_course_findings": [],
+    "content_observations": [
+      {
+        "id": "algebraic-envelope-boundary",
+        "status": "observed-preserved",
+        "finding": "The authored exponential/two-tone envelope is algebraically defined, not measured or Hilbert-extracted. Only its undamped modulation factor repeats; phase-matched samples are not automatically maxima, and a squared envelope has no automatic physical-energy interpretation."
+      },
+      {
+        "id": "comparison-target-and-transform",
+        "status": "observed-preserved",
+        "finding": "Original-origin cropping, full target alignment and fitted gain are separate questions. The full8-frame reference target is retained; a6-frame zero prefix cannot hide the changed tail. Silent raw equality and undefined gain coexist."
+      },
+      {
+        "id": "normalization-and-polarity",
+        "status": "observed-preserved",
+        "finding": "Population normalization loses positive affine level/offset information; absolute correlation also loses polarity. Constant correlation is undefined. Real-arithmetic inverse metadata does not promise original float-byte reconstruction."
+      },
+      {
+        "id": "revision-and-historical-result",
+        "status": "observed-preserved",
+        "finding": "Actual six source/provenance/historical-result copies distinguish current76ef engine reading from the runner's olderdc2e engine. The retained0.11416614959438576dB improvement fails its1dB gate; toy calculations neither reverse that failure nor diagnose its cause."
+      },
+      {
+        "id": "primary-and-execution-scope",
+        "status": "observed-preserved",
+        "finding": "Actual OpenStax mathematical beat text and NIST centered/sign correlation definition were read. Lesson vectors/examples are authored; no textbook images, stimuli or exercises are reproduced and no listening/statistical inference is imported. No new render,worklet/browser or learner trial occurred."
+      },
+      {
+        "id": "chronology-and-simple-baseline",
+        "status": "observed-preserved",
+        "finding": "The plan follows initial reading/hand-worked examples rather than preregistering a physical experiment. Direct calculations and explicit comparison records remain simpler baselines before any unimplemented agentic/audio DSL."
+      },
+      {
+        "id": "modulation-factor-periodicity",
+        "status": "resolved",
+        "finding": "GAS008 answer1 initially described repeating envelope shape ambiguously. Root now specifies that the undamped absolute modulation factor repeats twice per second, while E includes a decreasing exponential and is not periodic. Final English and locale answers were directly rechecked."
+      },
+      {
+        "id": "aud009-prefix-wording",
+        "status": "resolved",
+        "finding": "AUD009 exercise4 replaced hyphenated first-6-frame wording with an explicit first6frames phrase to avoid a false negative-number token in mechanical checks. Meaning and numbers are unchanged; final wording in all locales was directly reviewed."
+      }
+    ],
+    "content_fix_history": [
+      {
+        "id": "modulation-factor-periodicity",
+        "origin": "independent English content review",
+        "status": "resolved",
+        "finding": "GAS008 answer1 initially described repeating envelope shape ambiguously. Root now specifies that the undamped absolute modulation factor repeats twice per second, while E includes a decreasing exponential and is not periodic. Final English and locale answers were directly rechecked."
+      },
+      {
+        "id": "aud009-prefix-wording",
+        "origin": "root/translation mechanical review",
+        "status": "resolved",
+        "finding": "AUD009 exercise4 replaced hyphenated first-6-frame wording with an explicit first6frames phrase to avoid a false negative-number token in mechanical checks. Meaning and numbers are unchanged; final wording in all locales was directly reviewed."
+      }
+    ],
+    "scope": "Independent AI source/model/math/content checks; not human approval.",
+    "human_technical": null,
+    "musician": null,
+    "fluent_language": null,
+    "learner": null,
+    "new_engine_run": null,
+    "new_browser_capture": null,
+    "listening_trial": null
+  },
+  "code_review_pipeline": "Documentation/fixed-data-only deliverable with temporary verification wrappers; no new production/lab program emitted and no code-shipping review invoked.",
+  "manual_host_scan": "Algebraic modulation envelope is not a measured/Hilbert envelope. Only its undamped modulation factor is periodic; equal-phase times are not asserted local maxima. Interference can produce a negative endpoint rate despite positive component damping; squared-envelope decay is not automatically physical energy. Declared lag and fitted gain change the comparison question; transformed zero is not original identity or latency/listening evidence. Undefined silent gain coexists with raw equality; a zero partial residual does not cover a declared full target. Positive affine normalization loses scale and offset; inverse metadata reconstructs authored real vectors, not guaranteed float bytes. Absolute correlation erases polarity; constants require undefined status. No probability or perceptual inference follows. Fresh source76ef is separate from runner49ad and retained labdc2e; the old failed gate remains failed. Existing runner does not implement new fitting/Pearson procedures. Explicit records/direct arithmetic precede DSL proposals. Actual human and learner decisions remain pending.",
+  "source_inventory": {
+    "core_english_modules": 231,
+    "target": 525,
+    "original_departments": 21,
+    "remaining_core_source_gaps": 294,
+    "locale_counts": {
+      "en": 232,
+      "fr": 232,
+      "es": 232
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint/typecheck scripts configured; existing generator tests and Astro build used."
+}

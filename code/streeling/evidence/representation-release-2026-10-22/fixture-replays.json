@@ -1,0 +1,459 @@
+{
+  "scope": "Four unchanged publicly downloaded teaching evaluators. No alternate agent, GA audio render, ComfyUI/Blender/Godot process, authentic human verdict or release performed.",
+  "runs": [
+    {
+      "fixture": "state/streeling/fixtures/futurology/fut-003",
+      "source_commit": "789239053dfeca9f044d2f893a3f277cb4ed9d8d",
+      "script": "evaluate_drill.py",
+      "script_sha256": "6c1b47bf951291c3e7ec5b151a0b2fb788cf86a6201439b59f04ece4fe25c095",
+      "command": [
+        "python",
+        "-B",
+        "-X",
+        "utf8",
+        "evaluate_drill.py"
+      ],
+      "exit_code": 0,
+      "result": {
+        "fixture_status": "synthetic teaching fixture; no live agents, costs, or human verdicts measured",
+        "expected_cases": [
+          "A",
+          "B",
+          "C"
+        ],
+        "adapters": {
+          "current": {
+            "comparable_cases": true,
+            "all_admissible": true,
+            "admissible_count": 3,
+            "run_count": 3,
+            "median_minutes_if_admitted": 40,
+            "corrections_if_admitted": 2,
+            "runs": [
+              {
+                "case": "A",
+                "admissible": true,
+                "reasons": [],
+                "minutes": 40,
+                "corrections": 1
+              },
+              {
+                "case": "B",
+                "admissible": true,
+                "reasons": [],
+                "minutes": 44,
+                "corrections": 0
+              },
+              {
+                "case": "C",
+                "admissible": true,
+                "reasons": [],
+                "minutes": 39,
+                "corrections": 1
+              }
+            ]
+          },
+          "fast": {
+            "comparable_cases": true,
+            "all_admissible": false,
+            "admissible_count": 1,
+            "run_count": 3,
+            "median_minutes_if_admitted": null,
+            "corrections_if_admitted": null,
+            "runs": [
+              {
+                "case": "A",
+                "admissible": false,
+                "reasons": [
+                  "source_identity_mismatch"
+                ],
+                "minutes": 15,
+                "corrections": 2
+              },
+              {
+                "case": "B",
+                "admissible": false,
+                "reasons": [
+                  "missing_checks:public_readback"
+                ],
+                "minutes": 16,
+                "corrections": 1
+              },
+              {
+                "case": "C",
+                "admissible": true,
+                "reasons": [],
+                "minutes": 14,
+                "corrections": 2
+              }
+            ]
+          },
+          "portable": {
+            "comparable_cases": true,
+            "all_admissible": true,
+            "admissible_count": 3,
+            "run_count": 3,
+            "median_minutes_if_admitted": 32,
+            "corrections_if_admitted": 2,
+            "runs": [
+              {
+                "case": "A",
+                "admissible": true,
+                "reasons": [],
+                "minutes": 31,
+                "corrections": 1
+              },
+              {
+                "case": "B",
+                "admissible": true,
+                "reasons": [],
+                "minutes": 32,
+                "corrections": 0
+              },
+              {
+                "case": "C",
+                "admissible": true,
+                "reasons": [],
+                "minutes": 34,
+                "corrections": 1
+              }
+            ]
+          },
+          "shortcut": {
+            "comparable_cases": true,
+            "all_admissible": false,
+            "admissible_count": 0,
+            "run_count": 3,
+            "median_minutes_if_admitted": null,
+            "corrections_if_admitted": null,
+            "runs": [
+              {
+                "case": "A",
+                "admissible": false,
+                "reasons": [
+                  "review_not_approved"
+                ],
+                "minutes": 20,
+                "corrections": 0
+              },
+              {
+                "case": "B",
+                "admissible": false,
+                "reasons": [
+                  "review_not_approved"
+                ],
+                "minutes": 19,
+                "corrections": 0
+              },
+              {
+                "case": "C",
+                "admissible": false,
+                "reasons": [
+                  "review_not_approved"
+                ],
+                "minutes": 21,
+                "corrections": 0
+              }
+            ]
+          }
+        }
+      },
+      "complete_archived_result_match": true,
+      "expected_result_file": "adapter-results.json"
+    },
+    {
+      "fixture": "state/streeling/fixtures/philosophy/phi-003",
+      "source_commit": "50c0d2f5eb6684499c3bcf95d77f0481af2cc136",
+      "script": "compare_voicings.py",
+      "script_sha256": "2baab0972a1f889a9b510c17fac603ed9f6a24ae95d8e89e4199c067a707daf5",
+      "command": [
+        "python",
+        "-B",
+        "-X",
+        "utf8",
+        "compare_voicings.py"
+      ],
+      "exit_code": 0,
+      "result": {
+        "scope": "Teaching examples from explicitly supplied MIDI notes and declared roots; not GA OPTIC-K vectors or search results",
+        "comparisons": [
+          {
+            "pair": [
+              "c_major_low",
+              "c_major_high"
+            ],
+            "same_midi_note_multiset": false,
+            "left_pitch_classes": [
+              0,
+              4,
+              7
+            ],
+            "right_pitch_classes": [
+              0,
+              4,
+              7
+            ],
+            "same_pitch_class_set": true,
+            "same_declared_root_pc": true,
+            "left_icv": [
+              0,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            "right_icv": [
+              0,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            "same_icv": true,
+            "related_by_transposition": true,
+            "related_by_transposition_or_inversion": true,
+            "toy_binary_chroma_cosine": 1.0
+          },
+          {
+            "pair": [
+              "c_major_low",
+              "d_major"
+            ],
+            "same_midi_note_multiset": false,
+            "left_pitch_classes": [
+              0,
+              4,
+              7
+            ],
+            "right_pitch_classes": [
+              2,
+              6,
+              9
+            ],
+            "same_pitch_class_set": false,
+            "same_declared_root_pc": false,
+            "left_icv": [
+              0,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            "right_icv": [
+              0,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            "same_icv": true,
+            "related_by_transposition": true,
+            "related_by_transposition_or_inversion": true,
+            "toy_binary_chroma_cosine": 0.0
+          },
+          {
+            "pair": [
+              "c_major_low",
+              "c_minor"
+            ],
+            "same_midi_note_multiset": false,
+            "left_pitch_classes": [
+              0,
+              4,
+              7
+            ],
+            "right_pitch_classes": [
+              0,
+              3,
+              7
+            ],
+            "same_pitch_class_set": false,
+            "same_declared_root_pc": true,
+            "left_icv": [
+              0,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            "right_icv": [
+              0,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            "same_icv": true,
+            "related_by_transposition": false,
+            "related_by_transposition_or_inversion": true,
+            "toy_binary_chroma_cosine": 0.666667
+          },
+          {
+            "pair": [
+              "c_major_low",
+              "c_diminished"
+            ],
+            "same_midi_note_multiset": false,
+            "left_pitch_classes": [
+              0,
+              4,
+              7
+            ],
+            "right_pitch_classes": [
+              0,
+              3,
+              6
+            ],
+            "same_pitch_class_set": false,
+            "same_declared_root_pc": true,
+            "left_icv": [
+              0,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            "right_icv": [
+              0,
+              0,
+              2,
+              0,
+              0,
+              1
+            ],
+            "same_icv": false,
+            "related_by_transposition": false,
+            "related_by_transposition_or_inversion": false,
+            "toy_binary_chroma_cosine": 0.333333
+          }
+        ]
+      },
+      "complete_archived_result_match": true,
+      "expected_result_file": "comparison-results.json"
+    },
+    {
+      "fixture": "state/streeling/fixtures/product-management/pm-004",
+      "source_commit": "17f82a4b4b913d7c64942a3d3ff670abf4e6f85c",
+      "script": "evaluate_release.py",
+      "script_sha256": "8f0ad9af5508d18897795237219c8bc854c6ad09c693eb7e27c0937940b3b276",
+      "command": [
+        "python",
+        "-B",
+        "-X",
+        "utf8",
+        "evaluate_release.py"
+      ],
+      "exit_code": 0,
+      "result": [
+        {
+          "id": "source-snapshot",
+          "kind": "project-source-boundary",
+          "decision": "hold_for_evidence",
+          "missing": [
+            "comfyui.implementation",
+            "comfyui.runtime",
+            "comfyui.meaning",
+            "comfyui.human_review",
+            "blender.implementation",
+            "blender.runtime",
+            "blender.meaning",
+            "blender.human_review",
+            "godot.implementation",
+            "godot.runtime",
+            "godot.meaning",
+            "godot.human_review",
+            "contract_replay",
+            "artifact_hashes"
+          ],
+          "published": false
+        },
+        {
+          "id": "pretty-but-wrong",
+          "kind": "synthetic",
+          "decision": "reject_candidate",
+          "missing": [
+            "godot.meaning"
+          ],
+          "published": false
+        },
+        {
+          "id": "technical-only",
+          "kind": "synthetic",
+          "decision": "hold_for_evidence",
+          "missing": [
+            "comfyui.human_review",
+            "blender.human_review",
+            "godot.human_review"
+          ],
+          "published": false
+        },
+        {
+          "id": "candidate-after-reviews",
+          "kind": "synthetic",
+          "decision": "release_candidate",
+          "missing": [],
+          "published": false
+        }
+      ]
+    },
+    {
+      "fixture": "state/streeling/fixtures/physics/phy-004",
+      "source_commit": "17f82a4b4b913d7c64942a3d3ff670abf4e6f85c",
+      "script": "evaluate_pick.py",
+      "script_sha256": "7c9260dbebcc3052613a774b455d9fb4032a8941e9f3487b3e2b78ffeceb1e7e",
+      "command": [
+        "python",
+        "-B",
+        "-X",
+        "utf8",
+        "evaluate_pick.py"
+      ],
+      "exit_code": 0,
+      "result": {
+        "scope": "selected source-formula simulation; no WAV or listening evidence",
+        "cases": [
+          {
+            "velocity": 0.25,
+            "buffer_len": 535,
+            "fractional_delay": 0.14936249270397184,
+            "pick_ratio": 0.6299999999999999,
+            "pick_offset": 337,
+            "pick_position": 0.6299065420560748,
+            "pluck_mix": 0.2375
+          },
+          {
+            "velocity": 0.5,
+            "buffer_len": 535,
+            "fractional_delay": 0.14936249270397184,
+            "pick_ratio": 0.48,
+            "pick_offset": 257,
+            "pick_position": 0.4803738317757009,
+            "pluck_mix": 0.32499999999999996
+          },
+          {
+            "velocity": 0.75,
+            "buffer_len": 535,
+            "fractional_delay": 0.14936249270397184,
+            "pick_ratio": 0.32999999999999996,
+            "pick_offset": 177,
+            "pick_position": 0.33084112149532713,
+            "pluck_mix": 0.4125
+          }
+        ]
+      },
+      "negative_control": {
+        "mutation": "First expected pick offset increased by one in a separate input copy.",
+        "exit_code": 1,
+        "assertion_detected": true,
+        "scope": "Sensitivity of teaching assertion only, not Rust/audio validation."
+      }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "scope": "Pinned source/provenance and retained historical-result reading, not new execution.",
+  "ga_pin": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "ga_engine": {
+    "voices_sum_before_shared_body": true,
+    "body_and_reverb_after_string_sum": true,
+    "soft_knee_then_hard_clamp": true,
+    "not_a_calibrated_two_tone_beating_model": true
+  },
+  "host": {
+    "context_sample_rate_forwarded": true,
+    "source_reading_not_live_context_rate": true
+  },
+  "learn_pin": "49ad4cf7db680f031b3a3fb5b6ee118464ad099f",
+  "teaching_lab_engine_pin": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+  "runner": {
+    "raw_f32_hashes_and_differences_separate_from_PCM16": true,
+    "block_partition_checks_within_runtime": true,
+    "rms_window_definition": "half-open rounded frame boundaries, sum squares,20log10(rms+1e-12)",
+    "reference_onset_s": 1.1,
+    "generated_onset_s": 0,
+    "decline_windows_relative_s": [
+      [
+        0.2,
+        0.4
+      ],
+      [
+        1,
+        1.2
+      ]
+    ],
+    "no_new_delay_gain_fit_or_Pearson_pipeline": true
+  },
+  "historical_gate": {
+    "required_improvement_dB": 1,
+    "actual_improvement_approx_dB": 0.11416614959438576,
+    "passed": false,
+    "not_reversed_by_authored_examples": true
+  },
+  "new_render": null,
+  "new_browser_capture": null
+}

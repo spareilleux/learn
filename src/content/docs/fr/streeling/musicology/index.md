@@ -13,3 +13,12 @@ sidebar:
 
 - [MCL-001 · Comment la musique évolue — Brève histoire de la musique occidentale](mcl-001-how-music-evolves/)
 - [MCL-002 · Forme et structure musicales — Comment la musique est construite](mcl-002-musical-form/)
+- [MCL-003 · Quand une étiquette de style constitue-t-elle une preuve ?](mcl-003-style-labels-as-evidence/)
+- [MCL-004 · Modéliser le placement temporel sans inventer un style](mcl-004-model-timing-without-inventing-a-style/)
+- [MCL-005 · Préserver la hauteur écrite et la hauteur réelle lors de l'importation d'une partition](mcl-005-preserve-written-and-sounding-pitch/)
+- [MCL-006 · Préserver les groupements métriques et les unités de tempo](mcl-006-preserve-meter-grouping-and-tempo-units/)
+- [MCL-007 · Intégrer une carte de tempo MIDI avant de planifier la lecture](mcl-007-integrate-a-midi-tempo-map-before-scheduling/)
+- [MCL-008 · Distinguer transposition diatonique et transposition chromatique](mcl-008-keep-diatonic-and-chromatic-transposition-separate/)
+- [MCL-009 · Conserver le décalage de l’anacrouse dans les adresses de mesure](mcl-009-preserve-pickup-offsets-in-bar-addresses/)
+- [MCL-010 · Distinguer le rapport de swing du tempo](mcl-010-separate-swing-ratio-from-tempo/)
+- [MCL-011 · Distinguer les reprises de l’identité des mesures écrites](mcl-011-keep-repeats-separate-from-written-bar-identity/)

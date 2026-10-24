@@ -1,0 +1,190 @@
+{
+  "checked_at_utc": "2026-10-22T23:02:36.713854+00:00",
+  "base_learn_commit": "69500bc5d5d4ef46119b82a4f4b02ac9672f70bd",
+  "source_ga_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "scope": "Three pilot-value, trial-identity and decision-horizon courses with fixed authored calculations and historical source interpretation. No new live pilot, controller, renderer, runnable lab or production policy.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "calculation_checks": {
+    "independent_checks": 675,
+    "passed": 675,
+    "failed": 0,
+    "findings": [
+      {
+        "id": "historical-not-calibrated",
+        "status": "observed-preserved",
+        "finding": "M2/M3 historical reports record dirty revisions, differing timing/control and binary conditions; current pinned documentation is not an exact executable reproduction or calibration of authored F/U likelihoods."
+      },
+      {
+        "id": "trial-identity-and-independence",
+        "status": "observed-preserved",
+        "finding": "The trial-A reread is one event; new wrapper identity or equal/different summary hashes alone establishes neither fresh conditional independence nor duplicate trial identity. Different genuine trials may share summary bytes."
+      },
+      {
+        "id": "cardinal-scale-and-horizon",
+        "status": "observed-preserved",
+        "finding": "Losses, pilot and migration costs are invented comparable teaching points. Horizon reuse assumes stable latent state, losses, likelihoods and controls; no host/agent calibration or engineering-time conversion inferred."
+      },
+      {
+        "id": "methodology-not-current-measurement",
+        "status": "observed-preserved",
+        "finding": "Pinned agentic guide recommendations and historical model claims are opinions/project methodology, not current reliability measurements."
+      }
+    ],
+    "public_ga_source_documents": 4,
+    "fresh_observation_sequences": 15,
+    "message_ledger_rows": 3,
+    "decision_horizons": 5,
+    "one_shot_sample_gross_value": 1,
+    "one_shot_perfect_gross_value": 2,
+    "one_shot_sample_net_value": 0.4,
+    "conditional_second_trial_gross_after_positive": 0.32,
+    "conditional_second_trial_gross_after_negative": 0,
+    "first_integer_positive_horizon": 2,
+    "horizon_one_tie_keeps_K": true,
+    "horizon_one_migration_paid": 0,
+    "new_live_trial": false,
+    "new_controller": false,
+    "new_renderer": false,
+    "new_dependency_install": false,
+    "real_likelihoods": null,
+    "real_prior": null,
+    "measured_savings": null
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 4.037953999999445,
+    "log": "C:\\tmp\\streeling-pilot-value-tests-20261022.log",
+    "log_sha256": "45a70ca3cecf0b1f022c2e1f4079232b424658773851542b8d811bcf482b1005",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.356121399992844,
+    "log": "C:\\tmp\\streeling-pilot-value-sync-20261022.log",
+    "log_sha256": "4f78ad984a9f44f7e706dc1b86b00544b97568469c89977ba4011479e79a09de",
+    "idempotent_checked_files": 689
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 100.46555449999869,
+    "log": "C:\\tmp\\streeling-pilot-value-build-20261022.log",
+    "log_sha256": "59841821ad1d6e1e3956b328af2b96aa523fa13069b106c595c28a88de35ca0c",
+    "pages": 1885,
+    "dependency_install": "Existing node_modules junction; no install.",
+    "warnings": "Existing highlighting fallback and empty i18n/404 warnings retained in complete log."
+  },
+  "rendered_articles": {
+    "pages": 21,
+    "links": 354,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "data_verdict": "pass",
+    "data_receipt_sha256": "7e97f33e8fe934f2f8881fe07d508ad8003bcbb2145c23e32bf3d80f207dd5e8",
+    "content_verdict": "pass",
+    "content_receipt_sha256": "16679eadf14df6183c794d6214ea2db2ad30c91a32737b0c01787d7b38cb8e63",
+    "exercise_pairs_checked": 45,
+    "learner_criteria_checked": 15,
+    "open_course_findings": [],
+    "content_observations": [
+      {
+        "origin": "code/streeling/evidence/pilot-value-2026-10-22/data-audit.json",
+        "id": "historical-not-calibrated",
+        "status": "observed-preserved",
+        "finding": "M2/M3 historical reports record dirty revisions, differing timing/control and binary conditions; current pinned documentation is not an exact executable reproduction or calibration of authored F/U likelihoods."
+      },
+      {
+        "origin": "code/streeling/evidence/pilot-value-2026-10-22/data-audit.json",
+        "id": "trial-identity-and-independence",
+        "status": "observed-preserved",
+        "finding": "The trial-A reread is one event; new wrapper identity or equal/different summary hashes alone establishes neither fresh conditional independence nor duplicate trial identity. Different genuine trials may share summary bytes."
+      },
+      {
+        "origin": "code/streeling/evidence/pilot-value-2026-10-22/data-audit.json",
+        "id": "cardinal-scale-and-horizon",
+        "status": "observed-preserved",
+        "finding": "Losses, pilot and migration costs are invented comparable teaching points. Horizon reuse assumes stable latent state, losses, likelihoods and controls; no host/agent calibration or engineering-time conversion inferred."
+      },
+      {
+        "origin": "code/streeling/evidence/pilot-value-2026-10-22/data-audit.json",
+        "id": "methodology-not-current-measurement",
+        "status": "observed-preserved",
+        "finding": "Pinned agentic guide recommendations and historical model claims are opinions/project methodology, not current reliability measurements."
+      }
+    ],
+    "content_fix_history": [
+      {
+        "id": "information-ignoring-task-elicitation",
+        "status": "resolved",
+        "finding": "Initial FUT005 task elicited locked-K zero value but did not expressly request the information-ignoring option included in criterion5.",
+        "resolution": "Author added an explicit gross-versus-net prompt. Final task and criterion reviewed together; no unasked acceptance demand remains.",
+        "source_changes_by_reviewer": false
+      },
+      {
+        "id": "gross-information-nonnegative-wording",
+        "status": "resolved",
+        "finding": "Initial FUT005 section5 said ignorable information need not have negative gross value, a weaker phrasing than the fixed-model nonnegativity guarantee.",
+        "resolution": "Author made optimized gross nonnegativity explicit, preserving possible zero gross and negative net after acquisition cost. Final EN/FR/ES semantics checked.",
+        "source_changes_by_reviewer": false
+      }
+    ],
+    "scope": "Independent AI source/theory/model/content checks; not human approval.",
+    "human_technical": null,
+    "fluent_language": null,
+    "learner": null,
+    "live_pilot": null,
+    "renderer_trial": null,
+    "host_calibration": null,
+    "measured_likelihoods": null,
+    "production_quality": null,
+    "production_switch": null
+  },
+  "code_review_pipeline": "Documentation/fixed-data-only deliverable with temporary verification wrappers; no new production/lab program emitted and no code-shipping review invoked.",
+  "manual_host_scan": "Preserved historical dirty revisions and inconclusive coexistence outcome; primary MIT pages7-10 including page10 visual and NIST Bayes read. Checked comparable cardinal loss premise, passive signal, admissible actions, freely ignorable information nonnegative gross value, conditional independence versus trial identity, optional information versus mandatory validation, one-time migration only on selected switch, horizon-one tie and reusable stable-state assumptions.",
+  "source_inventory": {
+    "core_english_modules": 204,
+    "target": 525,
+    "original_departments": 21,
+    "remaining_core_source_gaps": 321,
+    "locale_counts": {
+      "en": 205,
+      "fr": 205,
+      "es": 205
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint/typecheck scripts configured; existing generator tests and Astro build used."
+}

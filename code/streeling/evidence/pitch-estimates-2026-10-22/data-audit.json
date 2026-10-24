@@ -1,0 +1,614 @@
+{
+  "checked_at_utc": "2026-10-22T20:31:36.493355+00:00",
+  "reviewer": "Independent source data and plot auditor",
+  "verdict": "pass",
+  "scope": "Independent immutable-source and retained-byte verification; freshly recomputed synthetic controls, full retained-window FFT/lag arrays and all disclosed summaries. PNG inspected visually and through decoded pixels. No parent analysis rerun, engine build, detector service, playback, render, dependency install, GPU or human/learner review.",
+  "input_bindings": [
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/experiment-plan.md",
+      "sha256": "18a5f47d468e8975a30c5e9cb1bc6c081f1b27144bd1d92e1f4fdf0b07e9d0cd"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/primary-readback.json",
+      "sha256": "0c2cecdf648f6a691d41f1d3d76cde4ff32ed77a8118bbd0f8b0772bba097c0c"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/input-bindings.json",
+      "sha256": "e60a7ecc0ee36c5d44535b42cbf52c0838b9a665eba106ff934c1e1ebe06002e"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/synthetic-periods.json",
+      "sha256": "ac43642dfc5705c786e62d81f66fc832f31143a596e5dfd58dc5c80c7c55263f"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/native-pitch-windows.json",
+      "sha256": "0b68813b5d7293a098e41955692fe3cc90013708380bd9545c645652a144892d"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/pitch-trace.json",
+      "sha256": "52cbcf7fd045ba36b154981843697c587a7df62c7b00c6b127548a880bf0107b"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/plot-points.json",
+      "sha256": "f9a6942a6c24c8a9421be856216b1b8d867a717c0686a2f2cc37137a8a6a68f1"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/execution.json",
+      "sha256": "63447673b42d269eb95f7b24a9aed02871a2f87020781c306675b1c1dacdd75f"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/baseline-native.f32le",
+      "sha256": "e924c20a4305783870ae6a373b46844c5431a25bad7ec80d76fc1569cdee8363"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/pitch-errors-and-availability.png",
+      "sha256": "c553be8580299dec3e7d74e80cee1750edaa42f76dfaa20233a04eb198279d0f"
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/results.json",
+      "sha256": "d564b476e0fccaff1a435548b5ae795807337622fdff69fb19ce0ace0d320506"
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/execution.json",
+      "sha256": "1d64a71891cc91743cc872d964907ae2d1e9cb906275167dcf38ce382eaf39d4"
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/bindings.json",
+      "sha256": "c18a917f4d72a3a6ae89752efe9577b1efffd0c327ac3d1c7ca2e3246bf31a43"
+    },
+    {
+      "path": "code/streeling/guitar-runtime/vendor/lib.rs",
+      "sha256": "d693e1ea1a5ca42d080c5829336bcc8423396c104ebee64d2e76ccd9bb503562"
+    },
+    {
+      "path": "code/streeling/guitar-runtime/source.json",
+      "sha256": "0b710e34f14dfec45726ae4f811a27a5c732dad70276890add5211d72ea7f338"
+    },
+    {
+      "path": "code/streeling/guitar-runtime/native.rs",
+      "sha256": "8a6d911fb7d9333ed7b19222198bb383d7156ac7169e0b239409a156cc7b7c1d"
+    },
+    {
+      "path": "code/streeling/guitar-runtime/run.mjs",
+      "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848"
+    }
+  ],
+  "external_bindings": [
+    {
+      "path": "C:\\tmp\\streeling-pitch-estimates-analysis-20261022.py",
+      "sha256": "4c3ca8940d99da7ba0c4b0ba4bf97cde2ada18db2eb6491d6b7ae1345067855d"
+    },
+    {
+      "path": "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native-baseline.f32le",
+      "sha256": "e924c20a4305783870ae6a373b46844c5431a25bad7ec80d76fc1569cdee8363"
+    },
+    {
+      "path": "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\results.json",
+      "sha256": "d564b476e0fccaff1a435548b5ae795807337622fdff69fb19ce0ace0d320506"
+    }
+  ],
+  "independent_array_hashes": {
+    "A_lag_scores_sha256": "c8a0d25d9a76b2b40e7da40e942c5e4c5b21108b66a4df309795de2542ca86bc",
+    "B_lag_scores_sha256": "1bb8b4582bf169b4920d29c64ccd618aacd857c882acaafd36b2fb10e0f24336",
+    "native1_complex_fft_sha256": "a10b5cb7852fd1a83247b9ed06e0811f0294fe33ceed9b7d1c9c08bb8f96dba1",
+    "native1_lag_scores_sha256": "ad35eadb4078d795ff28871fe2ad2d4564f71dd8196e80151c773d4ff77932dd",
+    "native2_complex_fft_sha256": "63f5e79c0f1a67905c17dd3602e84cf9ad0bfba0ec7defd658ecb70e33137f92",
+    "native2_lag_scores_sha256": "ed50ee36fcc5e84b9ed61220609e91f9625362f5cc6ddb442bc94087e4538aaf",
+    "native3_complex_fft_sha256": "17370ff0eb3b7b06f5d50939d37811d559da8d80bd23884c041b88eb0b3b0371",
+    "native3_lag_scores_sha256": "c9960379f2b18851ad571662c87a2a3e9d82444deeed608652716e78421d9da5",
+    "native4_complex_fft_sha256": "9513407bc5f13ab12859eb0749bc6b3a1f183bd926de73e6798092ff9cd1a226",
+    "native4_lag_scores_sha256": "93c4e14f6618125a9ccb4cab6e73e810c9b43117df35f0373246bc3d06499a2e"
+  },
+  "checks": [
+    {
+      "name": "anonymous immutable source matches Git",
+      "pass_": true
+    },
+    {
+      "name": "primary source receipt binds exact byte count and hash",
+      "pass_": true
+    },
+    {
+      "name": "source pin agrees across new receipts and historical run",
+      "pass_": true
+    },
+    {
+      "name": "vendored source remains identical",
+      "pass_": true
+    },
+    {
+      "name": "inspected frequency input clamp",
+      "pass_": true
+    },
+    {
+      "name": "inspected integer delay floor",
+      "pass_": true
+    },
+    {
+      "name": "inspected fractional remainder",
+      "pass_": true
+    },
+    {
+      "name": "inspected stored requested frequency",
+      "pass_": true
+    },
+    {
+      "name": "inspected voice loop filtering",
+      "pass_": true
+    },
+    {
+      "name": "inspected body coloration",
+      "pass_": true
+    },
+    {
+      "name": "inspected API dispatch to excite",
+      "pass_": true
+    },
+    {
+      "name": "temporary analysis syntax parses",
+      "pass_": true
+    },
+    {
+      "name": "execution binds exact temporary analysis bytes",
+      "pass_": true
+    },
+    {
+      "name": "historical results hash matches input binding",
+      "pass_": true
+    },
+    {
+      "name": "retained native byte-identical to packet copy",
+      "pass_": true
+    },
+    {
+      "name": "all raw hash declarations agree",
+      "pass_": true
+    },
+    {
+      "name": "raw size and float frame count",
+      "pass_": true
+    },
+    {
+      "name": "decoded little endian float32 input finite",
+      "pass_": true
+    },
+    {
+      "name": "sample rate nominal request and native peak match retained run",
+      "pass_": true
+    },
+    {
+      "name": "retained raw intentionally differs from WASM",
+      "pass_": true
+    },
+    {
+      "name": "external historical output log equals committed results",
+      "pass_": true
+    },
+    {
+      "name": "historical improvement gate still failed",
+      "pass_": true
+    },
+    {
+      "name": "old execution source and wrapper hashes still match files",
+      "pass_": true
+    },
+    {
+      "name": "old native run command names the retained raw output",
+      "pass_": true
+    },
+    {
+      "name": "A authored frequencies amplitudes and phases",
+      "pass_": true
+    },
+    {
+      "name": "A coherent DFT component amplitudes",
+      "pass_": true
+    },
+    {
+      "name": "A absent fundamental and no unintended nonzero bins",
+      "pass_": true
+    },
+    {
+      "name": "A period is exact frequency GCD",
+      "pass_": true
+    },
+    {
+      "name": "A strongest spectral bin",
+      "pass_": true
+    },
+    {
+      "name": "A RMS and peak",
+      "pass_": true
+    },
+    {
+      "name": "A independent nonFFT complex projection agrees",
+      "pass_": true
+    },
+    {
+      "name": "A every one of433 lag scores agrees",
+      "pass_": true
+    },
+    {
+      "name": "A Cauchy Schwarz score range",
+      "pass_": true
+    },
+    {
+      "name": "A complete tied recurrence set retained",
+      "pass_": true
+    },
+    {
+      "name": "B authored frequencies amplitudes and phases",
+      "pass_": true
+    },
+    {
+      "name": "B coherent DFT component amplitudes",
+      "pass_": true
+    },
+    {
+      "name": "B absent fundamental and no unintended nonzero bins",
+      "pass_": true
+    },
+    {
+      "name": "B period is exact frequency GCD",
+      "pass_": true
+    },
+    {
+      "name": "B strongest spectral bin",
+      "pass_": true
+    },
+    {
+      "name": "B RMS and peak",
+      "pass_": true
+    },
+    {
+      "name": "B independent nonFFT complex projection agrees",
+      "pass_": true
+    },
+    {
+      "name": "B every one of433 lag scores agrees",
+      "pass_": true
+    },
+    {
+      "name": "B Cauchy Schwarz score range",
+      "pass_": true
+    },
+    {
+      "name": "B complete tied recurrence set retained",
+      "pass_": true
+    },
+    {
+      "name": "opposite numerical direction contrasts",
+      "pass_": true
+    },
+    {
+      "name": "native window1 half open selected frame indices",
+      "pass_": true
+    },
+    {
+      "name": "native window1 complete FFT strongest eligible bin and spacing",
+      "pass_": true
+    },
+    {
+      "name": "native window1 direct DFT peak projection matches FFT",
+      "pass_": true
+    },
+    {
+      "name": "native window1 every one of794 lag scores agrees",
+      "pass_": true
+    },
+    {
+      "name": "native window1 all overlap normalized scores bounded",
+      "pass_": true
+    },
+    {
+      "name": "native window1 all interior local maxima and ranking retained",
+      "pass_": true
+    },
+    {
+      "name": "native window1 declared shortest near tie winner",
+      "pass_": true
+    },
+    {
+      "name": "native window1 passes reporting threshold",
+      "pass_": true
+    },
+    {
+      "name": "native window1 teaching proximity fails and remains failure",
+      "pass_": true
+    },
+    {
+      "name": "native window2 half open selected frame indices",
+      "pass_": true
+    },
+    {
+      "name": "native window2 complete FFT strongest eligible bin and spacing",
+      "pass_": true
+    },
+    {
+      "name": "native window2 direct DFT peak projection matches FFT",
+      "pass_": true
+    },
+    {
+      "name": "native window2 every one of794 lag scores agrees",
+      "pass_": true
+    },
+    {
+      "name": "native window2 all overlap normalized scores bounded",
+      "pass_": true
+    },
+    {
+      "name": "native window2 all interior local maxima and ranking retained",
+      "pass_": true
+    },
+    {
+      "name": "native window2 declared shortest near tie winner",
+      "pass_": true
+    },
+    {
+      "name": "native window2 passes reporting threshold",
+      "pass_": true
+    },
+    {
+      "name": "native window2 teaching proximity fails and remains failure",
+      "pass_": true
+    },
+    {
+      "name": "native window3 half open selected frame indices",
+      "pass_": true
+    },
+    {
+      "name": "native window3 complete FFT strongest eligible bin and spacing",
+      "pass_": true
+    },
+    {
+      "name": "native window3 direct DFT peak projection matches FFT",
+      "pass_": true
+    },
+    {
+      "name": "native window3 every one of794 lag scores agrees",
+      "pass_": true
+    },
+    {
+      "name": "native window3 all overlap normalized scores bounded",
+      "pass_": true
+    },
+    {
+      "name": "native window3 all interior local maxima and ranking retained",
+      "pass_": true
+    },
+    {
+      "name": "native window3 declared shortest near tie winner",
+      "pass_": true
+    },
+    {
+      "name": "native window3 passes reporting threshold",
+      "pass_": true
+    },
+    {
+      "name": "native window3 teaching proximity fails and remains failure",
+      "pass_": true
+    },
+    {
+      "name": "native window4 half open selected frame indices",
+      "pass_": true
+    },
+    {
+      "name": "native window4 complete FFT strongest eligible bin and spacing",
+      "pass_": true
+    },
+    {
+      "name": "native window4 direct DFT peak projection matches FFT",
+      "pass_": true
+    },
+    {
+      "name": "native window4 every one of794 lag scores agrees",
+      "pass_": true
+    },
+    {
+      "name": "native window4 all overlap normalized scores bounded",
+      "pass_": true
+    },
+    {
+      "name": "native window4 all interior local maxima and ranking retained",
+      "pass_": true
+    },
+    {
+      "name": "native window4 declared shortest near tie winner",
+      "pass_": true
+    },
+    {
+      "name": "native window4 passes reporting threshold",
+      "pass_": true
+    },
+    {
+      "name": "native window4 teaching proximity fails and remains failure",
+      "pass_": true
+    },
+    {
+      "name": "summary retains4 reports and0 proximity passes",
+      "pass_": true
+    },
+    {
+      "name": "thresholds disclosed as authored not probability or standard",
+      "pass_": true
+    },
+    {
+      "name": "real arithmetic delay calculation with535 floor",
+      "pass_": true
+    },
+    {
+      "name": "trace row1 value status cent validity",
+      "pass_": true
+    },
+    {
+      "name": "trace row2 value status cent validity",
+      "pass_": true
+    },
+    {
+      "name": "trace row3 value status cent validity",
+      "pass_": true
+    },
+    {
+      "name": "trace row4 value status cent validity",
+      "pass_": true
+    },
+    {
+      "name": "trace row5 value status cent validity",
+      "pass_": true
+    },
+    {
+      "name": "trace row6 value status cent validity",
+      "pass_": true
+    },
+    {
+      "name": "trace statistic total_rows",
+      "pass_": true
+    },
+    {
+      "name": "trace statistic valid_reports",
+      "pass_": true
+    },
+    {
+      "name": "trace statistic missing_rows",
+      "pass_": true
+    },
+    {
+      "name": "trace statistic invalid_rows",
+      "pass_": true
+    },
+    {
+      "name": "trace statistic coverage",
+      "pass_": true
+    },
+    {
+      "name": "trace statistic within_10_cents",
+      "pass_": true
+    },
+    {
+      "name": "trace statistic conditional_within_10_fraction",
+      "pass_": true
+    },
+    {
+      "name": "trace statistic joint_within_10_fraction",
+      "pass_": true
+    },
+    {
+      "name": "trace statistic arithmetic_mean_frequency_hz",
+      "pass_": true
+    },
+    {
+      "name": "trace statistic cents_of_arithmetic_mean",
+      "pass_": true
+    },
+    {
+      "name": "trace statistic mean_signed_cents",
+      "pass_": true
+    },
+    {
+      "name": "trace statistic geometric_mean_frequency_hz",
+      "pass_": true
+    },
+    {
+      "name": "trace statistic median_signed_cents",
+      "pass_": true
+    },
+    {
+      "name": "trace statistic maximum_absolute_cents",
+      "pass_": true
+    },
+    {
+      "name": "missing invalid not interpolated or silently octave repaired",
+      "pass_": true
+    },
+    {
+      "name": "plot binds input trace and exact PNG hash",
+      "pass_": true
+    },
+    {
+      "name": "upper plot points include all four valid estimates",
+      "pass_": true
+    },
+    {
+      "name": "lower plot points preserve six distinct statuses",
+      "pass_": true
+    },
+    {
+      "name": "plot declares full outlier no connecting line no errorbars",
+      "pass_": true
+    },
+    {
+      "name": "actual PNG decodes to1600x960",
+      "pass_": true
+    },
+    {
+      "name": "actual image pixel region upper0",
+      "pass_": true
+    },
+    {
+      "name": "actual image pixel region upper octave",
+      "pass_": true
+    },
+    {
+      "name": "actual image pixel region upper positive",
+      "pass_": true
+    },
+    {
+      "name": "actual image pixel region upper negative",
+      "pass_": true
+    },
+    {
+      "name": "actual image pixel region lower reported0",
+      "pass_": true
+    },
+    {
+      "name": "actual image pixel region lower reported1",
+      "pass_": true
+    },
+    {
+      "name": "actual image pixel region lower reported3",
+      "pass_": true
+    },
+    {
+      "name": "actual image pixel region lower reported5",
+      "pass_": true
+    },
+    {
+      "name": "actual image pixel region lower missing",
+      "pass_": true
+    },
+    {
+      "name": "actual image pixel region lower invalid",
+      "pass_": true
+    },
+    {
+      "name": "visual figure audit agrees with data and generation code",
+      "pass_": true,
+      "detail": "Viewed actual PNG: four correctly labelled errors including+1200; categorical rows preserve missing/invalid; no connecting trace, clipping of outlier, or confidence intervals. Only a horizontal zero reference line appears."
+    },
+    {
+      "name": "execution declares no fresh engine detector playback install or GPU",
+      "pass_": true
+    },
+    {
+      "name": "human listener learner deployed outcomes pending",
+      "pass_": true
+    }
+  ],
+  "check_count": 123,
+  "findings": [],
+  "fix_requests": [],
+  "experimental_failures_retained": {
+    "native_pitch_proximity_passes": 0,
+    "native_pitch_windows": 4,
+    "historical_decay_improvement_db": 0.11416614959438576,
+    "historical_decay_required_db": 1,
+    "historical_decay_pass": false
+  },
+  "limitations": [
+    "A source/rule calculation is not evidence of perceived pitch.",
+    "Nominal82.4069Hz is a requested reference, not physical ground truth.",
+    "Reporting score.9 and proximity5cents are authored thresholds, not validated probabilities or product criteria.",
+    "Historical engine execution is bound by retained receipts/bytes, not rerun in this audit.",
+    "Visual/pixel checks inspect this exact PNG, not a deployed course or browser screenshot."
+  ]
+}

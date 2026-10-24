@@ -1,0 +1,1386 @@
+{
+  "checked_at_utc": "2026-10-22T04:25:44.185436+00:00",
+  "scope": "Source-file locale existence and module-code inventory only; not fluent, subject, learner or published completion.",
+  "generated_catalog": {
+    "departments": 22,
+    "en": 148,
+    "fr": 148,
+    "es": 148
+  },
+  "original_goal_source_inventory": {
+    "scope": "English module-code source inventory, not reviewed/published completion. Filename module pattern excludes README stubs; optional CYB026 not imported.",
+    "departments": 21,
+    "target_per_department": 25,
+    "target_total": 525,
+    "core_codes_in_candidate": 147,
+    "remaining_core_source_gaps": 378,
+    "per_department": {
+      "audio-engineering": 4,
+      "cognitive-science": 3,
+      "computer-science": 9,
+      "cybernetics": 3,
+      "data-visualization": 8,
+      "futurology": 3,
+      "guitar-acoustics": 3,
+      "guitar-alchemist-academy": 4,
+      "guitar-studies": 4,
+      "information-theory": 4,
+      "mathematics": 25,
+      "music": 19,
+      "musicology": 3,
+      "network-science": 4,
+      "philosophy": 3,
+      "physics": 5,
+      "product-management": 4,
+      "psychohistory": 25,
+      "semiotics": 4,
+      "visual-computing": 7,
+      "world-music-languages": 3
+    },
+    "duplicate_codes": {},
+    "extra_generated_department": "IX Research has1additional module and is excluded from the original21-department denominator."
+  },
+  "english_modules_with_both_locale_source_files": 148,
+  "missing_locale_source_paths": [],
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "latest_main_checked": "05aa47b12b97e626405e961016d5035f7ecf74be",
+  "module_locale_paths": [
+    {
+      "module": "aud-001-eq-compression-order",
+      "department": "audio-engineering",
+      "english_path": "streeling/courses/audio-engineering/en/aud-001-eq-compression-order.md",
+      "locale_paths": {
+        "fr": "streeling/courses/audio-engineering/fr/aud-001-eq-compression-order.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-001-eq-compression-order.es.md"
+      }
+    },
+    {
+      "module": "aud-002-level-matched-guitar-comparison",
+      "department": "audio-engineering",
+      "english_path": "streeling/courses/audio-engineering/en/aud-002-level-matched-guitar-comparison.md",
+      "locale_paths": {
+        "fr": "streeling/courses/audio-engineering/fr/aud-002-level-matched-guitar-comparison.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-002-level-matched-guitar-comparison.es.md"
+      }
+    },
+    {
+      "module": "aud-003-transient-preservation-gate",
+      "department": "audio-engineering",
+      "english_path": "streeling/courses/audio-engineering/en/aud-003-transient-preservation-gate.md",
+      "locale_paths": {
+        "fr": "streeling/courses/audio-engineering/fr/aud-003-transient-preservation-gate.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-003-transient-preservation-gate.es.md"
+      }
+    },
+    {
+      "module": "aud-004-wavelet-guitar-attack-evidence",
+      "department": "audio-engineering",
+      "english_path": "streeling/courses/audio-engineering/en/aud-004-wavelet-guitar-attack-evidence.md",
+      "locale_paths": {
+        "fr": "streeling/courses/audio-engineering/fr/aud-004-wavelet-guitar-attack-evidence.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-004-wavelet-guitar-attack-evidence.es.md"
+      }
+    },
+    {
+      "module": "cog-001-your-brain-lies-to-you",
+      "department": "cognitive-science",
+      "english_path": "streeling/courses/cognitive-science/en/cog-001-your-brain-lies-to-you.md",
+      "locale_paths": {
+        "fr": "streeling/courses/cognitive-science/fr/cog-001-your-brain-lies-to-you.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-001-your-brain-lies-to-you.es.md"
+      }
+    },
+    {
+      "module": "cog-002-feedback-integrity-fretboard-recall",
+      "department": "cognitive-science",
+      "english_path": "streeling/courses/cognitive-science/en/cog-002-feedback-integrity-fretboard-recall.md",
+      "locale_paths": {
+        "fr": "streeling/courses/cognitive-science/fr/cog-002-feedback-integrity-fretboard-recall.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-002-feedback-integrity-fretboard-recall.es.md"
+      }
+    },
+    {
+      "module": "cog-003-calibrating-fretboard-confidence",
+      "department": "cognitive-science",
+      "english_path": "streeling/courses/cognitive-science/en/cog-003-calibrating-fretboard-confidence.md",
+      "locale_paths": {
+        "fr": "streeling/courses/cognitive-science/fr/cog-003-calibrating-fretboard-confidence.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-003-calibrating-fretboard-confidence.es.md"
+      }
+    },
+    {
+      "module": "cs-001-thinking-algorithmically",
+      "department": "computer-science",
+      "english_path": "streeling/courses/computer-science/en/cs-001-thinking-algorithmically.md",
+      "locale_paths": {
+        "fr": "streeling/courses/computer-science/fr/cs-001-thinking-algorithmically.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-001-thinking-algorithmically.es.md"
+      }
+    },
+    {
+      "module": "cs-002-governing-agentic-loops",
+      "department": "computer-science",
+      "english_path": "streeling/courses/computer-science/en/cs-002-governing-agentic-loops.md",
+      "locale_paths": {
+        "fr": "streeling/courses/computer-science/fr/cs-002-governing-agentic-loops.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-002-governing-agentic-loops.es.md"
+      }
+    },
+    {
+      "module": "cs-003-chord-parser-uncertainty",
+      "department": "computer-science",
+      "english_path": "streeling/courses/computer-science/en/cs-003-chord-parser-uncertainty.md",
+      "locale_paths": {
+        "fr": "streeling/courses/computer-science/fr/cs-003-chord-parser-uncertainty.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-003-chord-parser-uncertainty.es.md"
+      }
+    },
+    {
+      "module": "cs-004-composable-agentic-audio-loop",
+      "department": "computer-science",
+      "english_path": "streeling/courses/computer-science/en/cs-004-composable-agentic-audio-loop.md",
+      "locale_paths": {
+        "fr": "streeling/courses/computer-science/fr/cs-004-composable-agentic-audio-loop.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-004-composable-agentic-audio-loop.es.md"
+      }
+    },
+    {
+      "module": "cs-005-agent-handoff-evidence-contract",
+      "department": "computer-science",
+      "english_path": "streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md",
+      "locale_paths": {
+        "fr": "streeling/courses/computer-science/fr/cs-005-agent-handoff-evidence-contract.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-005-agent-handoff-evidence-contract.es.md"
+      }
+    },
+    {
+      "module": "cs-006-ixql-pipeline-composition",
+      "department": "computer-science",
+      "english_path": "streeling/courses/computer-science/en/cs-006-ixql-pipeline-composition.md",
+      "locale_paths": {
+        "fr": "streeling/courses/computer-science/fr/cs-006-ixql-pipeline-composition.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-006-ixql-pipeline-composition.es.md"
+      }
+    },
+    {
+      "module": "cs-007-typed-agent-evidence-and-backpressure",
+      "department": "computer-science",
+      "english_path": "streeling/courses/computer-science/en/cs-007-typed-agent-evidence-and-backpressure.md",
+      "locale_paths": {
+        "fr": "streeling/courses/computer-science/fr/cs-007-typed-agent-evidence-and-backpressure.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-007-typed-agent-evidence-and-backpressure.es.md"
+      }
+    },
+    {
+      "module": "cs-008-compose-exact-source-review-verdicts",
+      "department": "computer-science",
+      "english_path": "streeling/courses/computer-science/en/cs-008-compose-exact-source-review-verdicts.md",
+      "locale_paths": {
+        "fr": "streeling/courses/computer-science/fr/cs-008-compose-exact-source-review-verdicts.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-008-compose-exact-source-review-verdicts.es.md"
+      }
+    },
+    {
+      "module": "cs-009-composing-origami-panel-constraints",
+      "department": "computer-science",
+      "english_path": "streeling/courses/computer-science/en/cs-009-composing-origami-panel-constraints.md",
+      "locale_paths": {
+        "fr": "streeling/courses/computer-science/fr/cs-009-composing-origami-panel-constraints.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-009-composing-origami-panel-constraints.es.md"
+      }
+    },
+    {
+      "module": "cyb-001-vsm-ai-governance-mapping",
+      "department": "cybernetics",
+      "english_path": "streeling/courses/cybernetics/en/cyb-001-vsm-ai-governance-mapping.md",
+      "locale_paths": {
+        "fr": "streeling/courses/cybernetics/fr/cyb-001-vsm-ai-governance-mapping.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-001-vsm-ai-governance-mapping.es.md"
+      }
+    },
+    {
+      "module": "cyb-002-active-dampening-cross-repo-oscillation",
+      "department": "cybernetics",
+      "english_path": "streeling/courses/cybernetics/en/cyb-002-active-dampening-cross-repo-oscillation.md",
+      "locale_paths": {
+        "fr": "streeling/courses/cybernetics/fr/cyb-002-active-dampening-cross-repo-oscillation.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-002-active-dampening-cross-repo-oscillation.es.md"
+      }
+    },
+    {
+      "module": "cyb-003-measuring-variety-ratio-quantitatively",
+      "department": "cybernetics",
+      "english_path": "streeling/courses/cybernetics/en/cyb-003-measuring-variety-ratio-quantitatively.md",
+      "locale_paths": {
+        "fr": "streeling/courses/cybernetics/fr/cyb-003-measuring-variety-ratio-quantitatively.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-003-measuring-variety-ratio-quantitatively.es.md"
+      }
+    },
+    {
+      "module": "dv-001-observed-degraded-stale-quality",
+      "department": "data-visualization",
+      "english_path": "streeling/courses/data-visualization/en/dv-001-observed-degraded-stale-quality.md",
+      "locale_paths": {
+        "fr": "streeling/courses/data-visualization/fr/dv-001-observed-degraded-stale-quality.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-001-observed-degraded-stale-quality.es.md"
+      }
+    },
+    {
+      "module": "dv-002-denominators-and-test-populations",
+      "department": "data-visualization",
+      "english_path": "streeling/courses/data-visualization/en/dv-002-denominators-and-test-populations.md",
+      "locale_paths": {
+        "fr": "streeling/courses/data-visualization/fr/dv-002-denominators-and-test-populations.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-002-denominators-and-test-populations.es.md"
+      }
+    },
+    {
+      "module": "dv-003-instrument-cohorts-and-units",
+      "department": "data-visualization",
+      "english_path": "streeling/courses/data-visualization/en/dv-003-instrument-cohorts-and-units.md",
+      "locale_paths": {
+        "fr": "streeling/courses/data-visualization/fr/dv-003-instrument-cohorts-and-units.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-003-instrument-cohorts-and-units.es.md"
+      }
+    },
+    {
+      "module": "dv-004-uncertainty-in-small-qa-suites",
+      "department": "data-visualization",
+      "english_path": "streeling/courses/data-visualization/en/dv-004-uncertainty-in-small-qa-suites.md",
+      "locale_paths": {
+        "fr": "streeling/courses/data-visualization/fr/dv-004-uncertainty-in-small-qa-suites.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-004-uncertainty-in-small-qa-suites.es.md"
+      }
+    },
+    {
+      "module": "dv-005-baselines-alerts-and-targets",
+      "department": "data-visualization",
+      "english_path": "streeling/courses/data-visualization/en/dv-005-baselines-alerts-and-targets.md",
+      "locale_paths": {
+        "fr": "streeling/courses/data-visualization/fr/dv-005-baselines-alerts-and-targets.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-005-baselines-alerts-and-targets.es.md"
+      }
+    },
+    {
+      "module": "dv-006-position-length-area-comparisons",
+      "department": "data-visualization",
+      "english_path": "streeling/courses/data-visualization/en/dv-006-position-length-area-comparisons.md",
+      "locale_paths": {
+        "fr": "streeling/courses/data-visualization/fr/dv-006-position-length-area-comparisons.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-006-position-length-area-comparisons.es.md"
+      }
+    },
+    {
+      "module": "dv-007-optick-partition-small-multiples",
+      "department": "data-visualization",
+      "english_path": "streeling/courses/data-visualization/en/dv-007-optick-partition-small-multiples.md",
+      "locale_paths": {
+        "fr": "streeling/courses/data-visualization/fr/dv-007-optick-partition-small-multiples.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-007-optick-partition-small-multiples.es.md"
+      }
+    },
+    {
+      "module": "dv-008-streeling-evidence-stage-map",
+      "department": "data-visualization",
+      "english_path": "streeling/courses/data-visualization/en/dv-008-streeling-evidence-stage-map.md",
+      "locale_paths": {
+        "fr": "streeling/courses/data-visualization/fr/dv-008-streeling-evidence-stage-map.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-008-streeling-evidence-stage-map.es.md"
+      }
+    },
+    {
+      "module": "fut-001-thinking-about-tomorrow",
+      "department": "futurology",
+      "english_path": "streeling/courses/futurology/en/fut-001-thinking-about-tomorrow.md",
+      "locale_paths": {
+        "fr": "streeling/courses/futurology/fr/fut-001-thinking-about-tomorrow.fr.md",
+        "es": "streeling/courses/futurology/es/fut-001-thinking-about-tomorrow.es.md"
+      }
+    },
+    {
+      "module": "fut-002-routing-embedder-revisit-triggers",
+      "department": "futurology",
+      "english_path": "streeling/courses/futurology/en/fut-002-routing-embedder-revisit-triggers.md",
+      "locale_paths": {
+        "fr": "streeling/courses/futurology/fr/fut-002-routing-embedder-revisit-triggers.fr.md",
+        "es": "streeling/courses/futurology/es/fut-002-routing-embedder-revisit-triggers.es.md"
+      }
+    },
+    {
+      "module": "fut-003-agent-substitution-readiness-drill",
+      "department": "futurology",
+      "english_path": "streeling/courses/futurology/en/fut-003-agent-substitution-readiness-drill.md",
+      "locale_paths": {
+        "fr": "streeling/courses/futurology/fr/fut-003-agent-substitution-readiness-drill.fr.md",
+        "es": "streeling/courses/futurology/es/fut-003-agent-substitution-readiness-drill.es.md"
+      }
+    },
+    {
+      "module": "gas-001-open-string-audio-evidence",
+      "department": "guitar-acoustics",
+      "english_path": "streeling/courses/guitar-acoustics/en/gas-001-open-string-audio-evidence.md",
+      "locale_paths": {
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-001-open-string-audio-evidence.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-001-open-string-audio-evidence.es.md"
+      }
+    },
+    {
+      "module": "gas-002-brightness-control-and-evaluation-gate",
+      "department": "guitar-acoustics",
+      "english_path": "streeling/courses/guitar-acoustics/en/gas-002-brightness-control-and-evaluation-gate.md",
+      "locale_paths": {
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-002-brightness-control-and-evaluation-gate.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-002-brightness-control-and-evaluation-gate.es.md"
+      }
+    },
+    {
+      "module": "gas-003-decay-calibration-open-e",
+      "department": "guitar-acoustics",
+      "english_path": "streeling/courses/guitar-acoustics/en/gas-003-decay-calibration-open-e.md",
+      "locale_paths": {
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-003-decay-calibration-open-e.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-003-decay-calibration-open-e.es.md"
+      }
+    },
+    {
+      "module": "gaa-001-your-first-chord",
+      "department": "guitar-alchemist-academy",
+      "english_path": "streeling/courses/guitar-alchemist-academy/en/gaa-001-your-first-chord.md",
+      "locale_paths": {
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-001-your-first-chord.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-001-your-first-chord.es.md"
+      }
+    },
+    {
+      "module": "gaa-002-training-your-ear",
+      "department": "guitar-alchemist-academy",
+      "english_path": "streeling/courses/guitar-alchemist-academy/en/gaa-002-training-your-ear.md",
+      "locale_paths": {
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-002-training-your-ear.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-002-training-your-ear.es.md"
+      }
+    },
+    {
+      "module": "gaa-003-improvisation-foundations",
+      "department": "guitar-alchemist-academy",
+      "english_path": "streeling/courses/guitar-alchemist-academy/en/gaa-003-improvisation-foundations.md",
+      "locale_paths": {
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-003-improvisation-foundations.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-003-improvisation-foundations.es.md"
+      }
+    },
+    {
+      "module": "gaa-004-choose-a-useful-voicing",
+      "department": "guitar-alchemist-academy",
+      "english_path": "streeling/courses/guitar-alchemist-academy/en/gaa-004-choose-a-useful-voicing.md",
+      "locale_paths": {
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-004-choose-a-useful-voicing.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-004-choose-a-useful-voicing.es.md"
+      }
+    },
+    {
+      "module": "gtr-001-the-fretboard-map",
+      "department": "guitar-studies",
+      "english_path": "streeling/courses/guitar-studies/en/gtr-001-the-fretboard-map.md",
+      "locale_paths": {
+        "fr": "streeling/courses/guitar-studies/fr/gtr-001-the-fretboard-map.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-001-the-fretboard-map.es.md"
+      }
+    },
+    {
+      "module": "gtr-002-caged-geometry",
+      "department": "guitar-studies",
+      "english_path": "streeling/courses/guitar-studies/en/gtr-002-caged-geometry.md",
+      "locale_paths": {
+        "fr": "streeling/courses/guitar-studies/fr/gtr-002-caged-geometry.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-002-caged-geometry.es.md"
+      }
+    },
+    {
+      "module": "gtr-003-audit-voicing-playability",
+      "department": "guitar-studies",
+      "english_path": "streeling/courses/guitar-studies/en/gtr-003-audit-voicing-playability.md",
+      "locale_paths": {
+        "fr": "streeling/courses/guitar-studies/fr/gtr-003-audit-voicing-playability.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-003-audit-voicing-playability.es.md"
+      }
+    },
+    {
+      "module": "gtr-004-hear-and-audit-parallel-motion",
+      "department": "guitar-studies",
+      "english_path": "streeling/courses/guitar-studies/en/gtr-004-hear-and-audit-parallel-motion.md",
+      "locale_paths": {
+        "fr": "streeling/courses/guitar-studies/fr/gtr-004-hear-and-audit-parallel-motion.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-004-hear-and-audit-parallel-motion.es.md"
+      }
+    },
+    {
+      "module": "inf-001-entropy-of-governance",
+      "department": "information-theory",
+      "english_path": "streeling/courses/information-theory/en/inf-001-entropy-of-governance.md",
+      "locale_paths": {
+        "fr": "streeling/courses/information-theory/fr/inf-001-entropy-of-governance.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-001-entropy-of-governance.es.md"
+      }
+    },
+    {
+      "module": "inf-002-optick-compact-vector-information-loss",
+      "department": "information-theory",
+      "english_path": "streeling/courses/information-theory/en/inf-002-optick-compact-vector-information-loss.md",
+      "locale_paths": {
+        "fr": "streeling/courses/information-theory/fr/inf-002-optick-compact-vector-information-loss.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-002-optick-compact-vector-information-loss.es.md"
+      }
+    },
+    {
+      "module": "inf-003-verdict-distribution-drift",
+      "department": "information-theory",
+      "english_path": "streeling/courses/information-theory/en/inf-003-verdict-distribution-drift.md",
+      "locale_paths": {
+        "fr": "streeling/courses/information-theory/fr/inf-003-verdict-distribution-drift.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-003-verdict-distribution-drift.es.md"
+      }
+    },
+    {
+      "module": "inf-004-information-loss-in-agent-handoffs",
+      "department": "information-theory",
+      "english_path": "streeling/courses/information-theory/en/inf-004-information-loss-in-agent-handoffs.md",
+      "locale_paths": {
+        "fr": "streeling/courses/information-theory/fr/inf-004-information-loss-in-agent-handoffs.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-004-information-loss-in-agent-handoffs.es.md"
+      }
+    },
+    {
+      "module": "ixr-001-streams-under-budgets",
+      "department": "ix-research",
+      "english_path": "streeling/courses/ix-research/en/ixr-001-streams-under-budgets.md",
+      "locale_paths": {
+        "fr": "streeling/courses/ix-research/fr/ixr-001-streams-under-budgets.fr.md",
+        "es": "streeling/courses/ix-research/es/ixr-001-streams-under-budgets.es.md"
+      }
+    },
+    {
+      "module": "mat-001-proof-strategies",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-001-proof-strategies.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-001-proof-strategies.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-001-proof-strategies.es.md"
+      }
+    },
+    {
+      "module": "mat-002-counterexamples-and-exhaustive-checks",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-002-counterexamples-and-exhaustive-checks.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-002-counterexamples-and-exhaustive-checks.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-002-counterexamples-and-exhaustive-checks.es.md"
+      }
+    },
+    {
+      "module": "mat-003-floating-point-conditioning",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-003-floating-point-conditioning.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-003-floating-point-conditioning.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-003-floating-point-conditioning.es.md"
+      }
+    },
+    {
+      "module": "mat-004-vectors-matrices-norms",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-004-vectors-matrices-norms.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-004-vectors-matrices-norms.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-004-vectors-matrices-norms.es.md"
+      }
+    },
+    {
+      "module": "mat-005-symmetric-eigenproblems",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-005-symmetric-eigenproblems.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-005-symmetric-eigenproblems.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-005-symmetric-eigenproblems.es.md"
+      }
+    },
+    {
+      "module": "mat-006-svd-low-rank-approximation",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-006-svd-low-rank-approximation.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-006-svd-low-rank-approximation.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-006-svd-low-rank-approximation.es.md"
+      }
+    },
+    {
+      "module": "mat-007-least-squares-regularisation",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-007-least-squares-regularisation.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-007-least-squares-regularisation.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-007-least-squares-regularisation.es.md"
+      }
+    },
+    {
+      "module": "mat-008-probability-conditional-reasoning",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-008-probability-conditional-reasoning.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-008-probability-conditional-reasoning.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-008-probability-conditional-reasoning.es.md"
+      }
+    },
+    {
+      "module": "mat-009-estimation-uncertainty-sampling",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-009-estimation-uncertainty-sampling.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-009-estimation-uncertainty-sampling.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-009-estimation-uncertainty-sampling.es.md"
+      }
+    },
+    {
+      "module": "mat-010-information-entropy-divergences",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-010-information-entropy-divergences.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-010-information-entropy-divergences.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-010-information-entropy-divergences.es.md"
+      }
+    },
+    {
+      "module": "mat-011-gradients-reverse-mode-autodiff",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-011-gradients-reverse-mode-autodiff.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-011-gradients-reverse-mode-autodiff.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-011-gradients-reverse-mode-autodiff.es.md"
+      }
+    },
+    {
+      "module": "mat-012-iterative-optimisation",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-012-iterative-optimisation.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-012-iterative-optimisation.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-012-iterative-optimisation.es.md"
+      }
+    },
+    {
+      "module": "mat-013-distances-kernels-psd",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-013-distances-kernels-psd.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-013-distances-kernels-psd.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-013-distances-kernels-psd.es.md"
+      }
+    },
+    {
+      "module": "mat-014-pca-variance-preservation",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-014-pca-variance-preservation.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-014-pca-variance-preservation.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-014-pca-variance-preservation.es.md"
+      }
+    },
+    {
+      "module": "mat-015-classical-mds-distance-preservation",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-015-classical-mds-distance-preservation.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-015-classical-mds-distance-preservation.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-015-classical-mds-distance-preservation.es.md"
+      }
+    },
+    {
+      "module": "mat-016-kernel-pca-misleading-projections",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-016-kernel-pca-misleading-projections.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-016-kernel-pca-misleading-projections.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-016-kernel-pca-misleading-projections.es.md"
+      }
+    },
+    {
+      "module": "mat-017-nonnegative-matrix-factorisation",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-017-nonnegative-matrix-factorisation.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-017-nonnegative-matrix-factorisation.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-017-nonnegative-matrix-factorisation.es.md"
+      }
+    },
+    {
+      "module": "mat-018-clustering-density-validity",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-018-clustering-density-validity.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-018-clustering-density-validity.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-018-clustering-density-validity.es.md"
+      }
+    },
+    {
+      "module": "mat-019-graphs-centrality-spectral",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-019-graphs-centrality-spectral.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-019-graphs-centrality-spectral.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-019-graphs-centrality-spectral.es.md"
+      }
+    },
+    {
+      "module": "mat-020-markov-chains-hmm",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-020-markov-chains-hmm.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-020-markov-chains-hmm.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-020-markov-chains-hmm.es.md"
+      }
+    },
+    {
+      "module": "mat-021-fourier-analysis-signals",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-021-fourier-analysis-signals.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-021-fourier-analysis-signals.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-021-fourier-analysis-signals.es.md"
+      }
+    },
+    {
+      "module": "mat-022-symmetry-groups-invariants",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-022-symmetry-groups-invariants.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-022-symmetry-groups-invariants.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-022-symmetry-groups-invariants.es.md"
+      }
+    },
+    {
+      "module": "mat-023-petri-nets-reachability",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-023-petri-nets-reachability.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-023-petri-nets-reachability.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-023-petri-nets-reachability.es.md"
+      }
+    },
+    {
+      "module": "mat-024-dynamical-systems-stability-feedback",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-024-dynamical-systems-stability-feedback.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-024-dynamical-systems-stability-feedback.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-024-dynamical-systems-stability-feedback.es.md"
+      }
+    },
+    {
+      "module": "mat-025-allocation-games-bandits-penalties",
+      "department": "mathematics",
+      "english_path": "streeling/courses/mathematics/en/mat-025-allocation-games-bandits-penalties.md",
+      "locale_paths": {
+        "fr": "streeling/courses/mathematics/fr/mat-025-allocation-games-bandits-penalties.fr.md",
+        "es": "streeling/courses/mathematics/es/mat-025-allocation-games-bandits-penalties.es.md"
+      }
+    },
+    {
+      "module": "mus-001-what-is-a-chord",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-001-what-is-a-chord.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-001-what-is-a-chord.fr.md",
+        "es": "streeling/courses/music/es/mus-001-what-is-a-chord.es.md"
+      }
+    },
+    {
+      "module": "mus-002-beyond-tonality",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-002-beyond-tonality.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-002-beyond-tonality.fr.md",
+        "es": "streeling/courses/music/es/mus-002-beyond-tonality.es.md"
+      }
+    },
+    {
+      "module": "mus-003-functional-harmony",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-003-functional-harmony.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-003-functional-harmony.fr.md",
+        "es": "streeling/courses/music/es/mus-003-functional-harmony.es.md"
+      }
+    },
+    {
+      "module": "mus-004-rhythm-and-groove",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-004-rhythm-and-groove.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-004-rhythm-and-groove.fr.md",
+        "es": "streeling/courses/music/es/mus-004-rhythm-and-groove.es.md"
+      }
+    },
+    {
+      "module": "mus-005-jazz-harmony",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-005-jazz-harmony.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-005-jazz-harmony.fr.md",
+        "es": "streeling/courses/music/es/mus-005-jazz-harmony.es.md"
+      }
+    },
+    {
+      "module": "mus-006-the-scale-universe",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-006-the-scale-universe.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-006-the-scale-universe.fr.md",
+        "es": "streeling/courses/music/es/mus-006-the-scale-universe.es.md"
+      }
+    },
+    {
+      "module": "mus-007-pitch-spelling-enharmonic-identity",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-007-pitch-spelling-enharmonic-identity.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-007-pitch-spelling-enharmonic-identity.fr.md",
+        "es": "streeling/courses/music/es/mus-007-pitch-spelling-enharmonic-identity.es.md"
+      }
+    },
+    {
+      "module": "mus-008-intervals-inversion-compound",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-008-intervals-inversion-compound.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-008-intervals-inversion-compound.fr.md",
+        "es": "streeling/courses/music/es/mus-008-intervals-inversion-compound.es.md"
+      }
+    },
+    {
+      "module": "mus-009-tuning-fretboard-geometry",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-009-tuning-fretboard-geometry.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-009-tuning-fretboard-geometry.fr.md",
+        "es": "streeling/courses/music/es/mus-009-tuning-fretboard-geometry.es.md"
+      }
+    },
+    {
+      "module": "mus-010-scales-pattern-set-interval-vector",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-010-scales-pattern-set-interval-vector.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-010-scales-pattern-set-interval-vector.fr.md",
+        "es": "streeling/courses/music/es/mus-010-scales-pattern-set-interval-vector.es.md"
+      }
+    },
+    {
+      "module": "mus-011-modes-modal-families",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-011-modes-modal-families.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-011-modes-modal-families.fr.md",
+        "es": "streeling/courses/music/es/mus-011-modes-modal-families.es.md"
+      }
+    },
+    {
+      "module": "mus-012-chord-formulas-essential-tones-doubling",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-012-chord-formulas-essential-tones-doubling.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-012-chord-formulas-essential-tones-doubling.fr.md",
+        "es": "streeling/courses/music/es/mus-012-chord-formulas-essential-tones-doubling.es.md"
+      }
+    },
+    {
+      "module": "mus-013-root-bass-pitch-class-set",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-013-root-bass-pitch-class-set.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-013-root-bass-pitch-class-set.fr.md",
+        "es": "streeling/courses/music/es/mus-013-root-bass-pitch-class-set.es.md"
+      }
+    },
+    {
+      "module": "mus-014-inversions-bass-line",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-014-inversions-bass-line.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-014-inversions-bass-line.fr.md",
+        "es": "streeling/courses/music/es/mus-014-inversions-bass-line.es.md"
+      }
+    },
+    {
+      "module": "mus-018-key-finding-roman-numerals-cadences",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-018-key-finding-roman-numerals-cadences.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-018-key-finding-roman-numerals-cadences.fr.md",
+        "es": "streeling/courses/music/es/mus-018-key-finding-roman-numerals-cadences.es.md"
+      }
+    },
+    {
+      "module": "mus-019-transposition-capo-cross-instrument",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-019-transposition-capo-cross-instrument.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-019-transposition-capo-cross-instrument.fr.md",
+        "es": "streeling/courses/music/es/mus-019-transposition-capo-cross-instrument.es.md"
+      }
+    },
+    {
+      "module": "mus-020-set-classes-interval-vectors-prime-forms",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-020-set-classes-interval-vectors-prime-forms.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-020-set-classes-interval-vectors-prime-forms.fr.md",
+        "es": "streeling/courses/music/es/mus-020-set-classes-interval-vectors-prime-forms.es.md"
+      }
+    },
+    {
+      "module": "mus-021-pitch-class-dft-magnitudes-phases-homometry",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-021-pitch-class-dft-magnitudes-phases-homometry.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-021-pitch-class-dft-magnitudes-phases-homometry.fr.md",
+        "es": "streeling/courses/music/es/mus-021-pitch-class-dft-magnitudes-phases-homometry.es.md"
+      }
+    },
+    {
+      "module": "mus-022-grothendieck-deltas-icv-distance",
+      "department": "music",
+      "english_path": "streeling/courses/music/en/mus-022-grothendieck-deltas-icv-distance.md",
+      "locale_paths": {
+        "fr": "streeling/courses/music/fr/mus-022-grothendieck-deltas-icv-distance.fr.md",
+        "es": "streeling/courses/music/es/mus-022-grothendieck-deltas-icv-distance.es.md"
+      }
+    },
+    {
+      "module": "mcl-001-how-music-evolves",
+      "department": "musicology",
+      "english_path": "streeling/courses/musicology/en/mcl-001-how-music-evolves.md",
+      "locale_paths": {
+        "fr": "streeling/courses/musicology/fr/mcl-001-how-music-evolves.fr.md",
+        "es": "streeling/courses/musicology/es/mcl-001-how-music-evolves.es.md"
+      }
+    },
+    {
+      "module": "mcl-002-musical-form",
+      "department": "musicology",
+      "english_path": "streeling/courses/musicology/en/mcl-002-musical-form.md",
+      "locale_paths": {
+        "fr": "streeling/courses/musicology/fr/mcl-002-musical-form.fr.md",
+        "es": "streeling/courses/musicology/es/mcl-002-musical-form.es.md"
+      }
+    },
+    {
+      "module": "mcl-003-style-labels-as-evidence",
+      "department": "musicology",
+      "english_path": "streeling/courses/musicology/en/mcl-003-style-labels-as-evidence.md",
+      "locale_paths": {
+        "fr": "streeling/courses/musicology/fr/mcl-003-style-labels-as-evidence.fr.md",
+        "es": "streeling/courses/musicology/es/mcl-003-style-labels-as-evidence.es.md"
+      }
+    },
+    {
+      "module": "net-001-scale-free-tool-networks",
+      "department": "network-science",
+      "english_path": "streeling/courses/network-science/en/net-001-scale-free-tool-networks.md",
+      "locale_paths": {
+        "fr": "streeling/courses/network-science/fr/net-001-scale-free-tool-networks.fr.md",
+        "es": "streeling/courses/network-science/es/net-001-scale-free-tool-networks.es.md"
+      }
+    },
+    {
+      "module": "net-002-capability-graphs-and-projections",
+      "department": "network-science",
+      "english_path": "streeling/courses/network-science/en/net-002-capability-graphs-and-projections.md",
+      "locale_paths": {
+        "fr": "streeling/courses/network-science/fr/net-002-capability-graphs-and-projections.fr.md",
+        "es": "streeling/courses/network-science/es/net-002-capability-graphs-and-projections.es.md"
+      }
+    },
+    {
+      "module": "net-003-worker-lane-coverage-and-fragility",
+      "department": "network-science",
+      "english_path": "streeling/courses/network-science/en/net-003-worker-lane-coverage-and-fragility.md",
+      "locale_paths": {
+        "fr": "streeling/courses/network-science/fr/net-003-worker-lane-coverage-and-fragility.fr.md",
+        "es": "streeling/courses/network-science/es/net-003-worker-lane-coverage-and-fragility.es.md"
+      }
+    },
+    {
+      "module": "net-004-semantic-backpressure-and-evidence-dependencies",
+      "department": "network-science",
+      "english_path": "streeling/courses/network-science/en/net-004-semantic-backpressure-and-evidence-dependencies.md",
+      "locale_paths": {
+        "fr": "streeling/courses/network-science/fr/net-004-semantic-backpressure-and-evidence-dependencies.fr.md",
+        "es": "streeling/courses/network-science/es/net-004-semantic-backpressure-and-evidence-dependencies.es.md"
+      }
+    },
+    {
+      "module": "phi-001-how-to-argue-well",
+      "department": "philosophy",
+      "english_path": "streeling/courses/philosophy/en/phi-001-how-to-argue-well.md",
+      "locale_paths": {
+        "fr": "streeling/courses/philosophy/fr/phi-001-how-to-argue-well.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-001-how-to-argue-well.es.md"
+      }
+    },
+    {
+      "module": "phi-002-when-is-an-advisory-decision-justified",
+      "department": "philosophy",
+      "english_path": "streeling/courses/philosophy/en/phi-002-when-is-an-advisory-decision-justified.md",
+      "locale_paths": {
+        "fr": "streeling/courses/philosophy/fr/phi-002-when-is-an-advisory-decision-justified.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-002-when-is-an-advisory-decision-justified.es.md"
+      }
+    },
+    {
+      "module": "phi-003-what-does-the-same-chord-mean",
+      "department": "philosophy",
+      "english_path": "streeling/courses/philosophy/en/phi-003-what-does-the-same-chord-mean.md",
+      "locale_paths": {
+        "fr": "streeling/courses/philosophy/fr/phi-003-what-does-the-same-chord-mean.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-003-what-does-the-same-chord-mean.es.md"
+      }
+    },
+    {
+      "module": "phy-001-science-of-guitar-sound",
+      "department": "physics",
+      "english_path": "streeling/courses/physics/en/phy-001-science-of-guitar-sound.md",
+      "locale_paths": {
+        "fr": "streeling/courses/physics/fr/phy-001-science-of-guitar-sound.fr.md",
+        "es": "streeling/courses/physics/es/phy-001-science-of-guitar-sound.es.md"
+      }
+    },
+    {
+      "module": "phy-002-time-frequency-guitar-transients",
+      "department": "physics",
+      "english_path": "streeling/courses/physics/en/phy-002-time-frequency-guitar-transients.md",
+      "locale_paths": {
+        "fr": "streeling/courses/physics/fr/phy-002-time-frequency-guitar-transients.fr.md",
+        "es": "streeling/courses/physics/es/phy-002-time-frequency-guitar-transients.es.md"
+      }
+    },
+    {
+      "module": "phy-003-sampling-aliasing-guitar-engine",
+      "department": "physics",
+      "english_path": "streeling/courses/physics/en/phy-003-sampling-aliasing-guitar-engine.md",
+      "locale_paths": {
+        "fr": "streeling/courses/physics/fr/phy-003-sampling-aliasing-guitar-engine.fr.md",
+        "es": "streeling/courses/physics/es/phy-003-sampling-aliasing-guitar-engine.es.md"
+      }
+    },
+    {
+      "module": "phy-004-velocity-pick-position-guitar-engine",
+      "department": "physics",
+      "english_path": "streeling/courses/physics/en/phy-004-velocity-pick-position-guitar-engine.md",
+      "locale_paths": {
+        "fr": "streeling/courses/physics/fr/phy-004-velocity-pick-position-guitar-engine.fr.md",
+        "es": "streeling/courses/physics/es/phy-004-velocity-pick-position-guitar-engine.es.md"
+      }
+    },
+    {
+      "module": "phy-005-sheet-thickness-and-scene-units",
+      "department": "physics",
+      "english_path": "streeling/courses/physics/en/phy-005-sheet-thickness-and-scene-units.md",
+      "locale_paths": {
+        "fr": "streeling/courses/physics/fr/phy-005-sheet-thickness-and-scene-units.fr.md",
+        "es": "streeling/courses/physics/es/phy-005-sheet-thickness-and-scene-units.es.md"
+      }
+    },
+    {
+      "module": "pm-001-shipping-vs-talking",
+      "department": "product-management",
+      "english_path": "streeling/courses/product-management/en/pm-001-shipping-vs-talking.md",
+      "locale_paths": {
+        "fr": "streeling/courses/product-management/fr/pm-001-shipping-vs-talking.fr.md",
+        "es": "streeling/courses/product-management/es/pm-001-shipping-vs-talking.es.md"
+      }
+    },
+    {
+      "module": "pm-002-release-evidence-gate",
+      "department": "product-management",
+      "english_path": "streeling/courses/product-management/en/pm-002-release-evidence-gate.md",
+      "locale_paths": {
+        "fr": "streeling/courses/product-management/fr/pm-002-release-evidence-gate.fr.md",
+        "es": "streeling/courses/product-management/es/pm-002-release-evidence-gate.es.md"
+      }
+    },
+    {
+      "module": "pm-003-review-queue-flow-metrics",
+      "department": "product-management",
+      "english_path": "streeling/courses/product-management/en/pm-003-review-queue-flow-metrics.md",
+      "locale_paths": {
+        "fr": "streeling/courses/product-management/fr/pm-003-review-queue-flow-metrics.fr.md",
+        "es": "streeling/courses/product-management/es/pm-003-review-queue-flow-metrics.es.md"
+      }
+    },
+    {
+      "module": "pm-004-craft-extension-release-decision",
+      "department": "product-management",
+      "english_path": "streeling/courses/product-management/en/pm-004-craft-extension-release-decision.md",
+      "locale_paths": {
+        "fr": "streeling/courses/product-management/fr/pm-004-craft-extension-release-decision.fr.md",
+        "es": "streeling/courses/product-management/es/pm-004-craft-extension-release-decision.es.md"
+      }
+    },
+    {
+      "module": "psy-001-intro-fractal-compounding",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-001-intro-fractal-compounding.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-001-intro-fractal-compounding.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-001-intro-fractal-compounding.es.md"
+      }
+    },
+    {
+      "module": "psy-002-governance-phase-transitions",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-002-governance-phase-transitions.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-002-governance-phase-transitions.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-002-governance-phase-transitions.es.md"
+      }
+    },
+    {
+      "module": "psy-003-review-throughput-and-compounding",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-003-review-throughput-and-compounding.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-003-review-throughput-and-compounding.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-003-review-throughput-and-compounding.es.md"
+      }
+    },
+    {
+      "module": "psy-004-how-large-is-large",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-004-how-large-is-large.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-004-how-large-is-large.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-004-how-large-is-large.es.md"
+      }
+    },
+    {
+      "module": "psy-005-persistence-baseline",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-005-persistence-baseline.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-005-persistence-baseline.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-005-persistence-baseline.es.md"
+      }
+    },
+    {
+      "module": "psy-006-transition-matrix-from-counts",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-006-transition-matrix-from-counts.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-006-transition-matrix-from-counts.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-006-transition-matrix-from-counts.es.md"
+      }
+    },
+    {
+      "module": "psy-007-power-law-or-not",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-007-power-law-or-not.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-007-power-law-or-not.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-007-power-law-or-not.es.md"
+      }
+    },
+    {
+      "module": "psy-008-bursts-are-not-rates",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-008-bursts-are-not-rates.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-008-bursts-are-not-rates.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-008-bursts-are-not-rates.es.md"
+      }
+    },
+    {
+      "module": "psy-009-concentration-and-heavy-tails",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-009-concentration-and-heavy-tails.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-009-concentration-and-heavy-tails.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-009-concentration-and-heavy-tails.es.md"
+      }
+    },
+    {
+      "module": "psy-010-growth-curves-short-series",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-010-growth-curves-short-series.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-010-growth-curves-short-series.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-010-growth-curves-short-series.es.md"
+      }
+    },
+    {
+      "module": "psy-011-measurement-change-or-system-change",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-011-measurement-change-or-system-change.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-011-measurement-change-or-system-change.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-011-measurement-change-or-system-change.es.md"
+      }
+    },
+    {
+      "module": "psy-012-early-warning-false-alarms",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-012-early-warning-false-alarms.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-012-early-warning-false-alarms.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-012-early-warning-false-alarms.es.md"
+      }
+    },
+    {
+      "module": "psy-013-four-scores-and-a-trend",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-013-four-scores-and-a-trend.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-013-four-scores-and-a-trend.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-013-four-scores-and-a-trend.es.md"
+      }
+    },
+    {
+      "module": "psy-014-prediction-horizons",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-014-prediction-horizons.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-014-prediction-horizons.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-014-prediction-horizons.es.md"
+      }
+    },
+    {
+      "module": "psy-015-belief-contagion-small-population",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-015-belief-contagion-small-population.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-015-belief-contagion-small-population.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-015-belief-contagion-small-population.es.md"
+      }
+    },
+    {
+      "module": "psy-016-brier-score",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-016-brier-score.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-016-brier-score.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-016-brier-score.es.md"
+      }
+    },
+    {
+      "module": "psy-017-calibration-with-six-observations",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-017-calibration-with-six-observations.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-017-calibration-with-six-observations.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-017-calibration-with-six-observations.es.md"
+      }
+    },
+    {
+      "module": "psy-018-backtesting-without-leakage",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-018-backtesting-without-leakage.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-018-backtesting-without-leakage.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-018-backtesting-without-leakage.es.md"
+      }
+    },
+    {
+      "module": "psy-019-combining-correlated-forecasters",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-019-combining-correlated-forecasters.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-019-combining-correlated-forecasters.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-019-combining-correlated-forecasters.es.md"
+      }
+    },
+    {
+      "module": "psy-020-goodhart-and-reflexivity",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-020-goodhart-and-reflexivity.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-020-goodhart-and-reflexivity.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-020-goodhart-and-reflexivity.es.md"
+      }
+    },
+    {
+      "module": "psy-021-conservation-claims",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-021-conservation-claims.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-021-conservation-claims.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-021-conservation-claims.es.md"
+      }
+    },
+    {
+      "module": "psy-022-competing-explanations",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-022-competing-explanations.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-022-competing-explanations.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-022-competing-explanations.es.md"
+      }
+    },
+    {
+      "module": "psy-023-monitoring-a-plan",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-023-monitoring-a-plan.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-023-monitoring-a-plan.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-023-monitoring-a-plan.es.md"
+      }
+    },
+    {
+      "module": "psy-024-the-single-actor",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-024-the-single-actor.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-024-the-single-actor.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-024-the-single-actor.es.md"
+      }
+    },
+    {
+      "module": "psy-025-capstone-preregistered-forecast",
+      "department": "psychohistory",
+      "english_path": "streeling/courses/psychohistory/en/psy-025-capstone-preregistered-forecast.md",
+      "locale_paths": {
+        "fr": "streeling/courses/psychohistory/fr/psy-025-capstone-preregistered-forecast.fr.md",
+        "es": "streeling/courses/psychohistory/es/psy-025-capstone-preregistered-forecast.es.md"
+      }
+    },
+    {
+      "module": "sem-001-signs-in-governance",
+      "department": "semiotics",
+      "english_path": "streeling/courses/semiotics/en/sem-001-signs-in-governance.md",
+      "locale_paths": {
+        "fr": "streeling/courses/semiotics/fr/sem-001-signs-in-governance.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-001-signs-in-governance.es.md"
+      }
+    },
+    {
+      "module": "sem-002-chord-symbols-and-canonicalization",
+      "department": "semiotics",
+      "english_path": "streeling/courses/semiotics/en/sem-002-chord-symbols-and-canonicalization.md",
+      "locale_paths": {
+        "fr": "streeling/courses/semiotics/fr/sem-002-chord-symbols-and-canonicalization.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-002-chord-symbols-and-canonicalization.es.md"
+      }
+    },
+    {
+      "module": "sem-003-status-signs-and-evidence",
+      "department": "semiotics",
+      "english_path": "streeling/courses/semiotics/en/sem-003-status-signs-and-evidence.md",
+      "locale_paths": {
+        "fr": "streeling/courses/semiotics/fr/sem-003-status-signs-and-evidence.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-003-status-signs-and-evidence.es.md"
+      }
+    },
+    {
+      "module": "sem-004-face-identity-under-reindexing",
+      "department": "semiotics",
+      "english_path": "streeling/courses/semiotics/en/sem-004-face-identity-under-reindexing.md",
+      "locale_paths": {
+        "fr": "streeling/courses/semiotics/fr/sem-004-face-identity-under-reindexing.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-004-face-identity-under-reindexing.es.md"
+      }
+    },
+    {
+      "module": "vc-001-accessible-fretboard-paths",
+      "department": "visual-computing",
+      "english_path": "streeling/courses/visual-computing/en/vc-001-accessible-fretboard-paths.md",
+      "locale_paths": {
+        "fr": "streeling/courses/visual-computing/fr/vc-001-accessible-fretboard-paths.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-001-accessible-fretboard-paths.es.md"
+      }
+    },
+    {
+      "module": "vc-002-godot-react-bridge-evidence",
+      "department": "visual-computing",
+      "english_path": "streeling/courses/visual-computing/en/vc-002-godot-react-bridge-evidence.md",
+      "locale_paths": {
+        "fr": "streeling/courses/visual-computing/fr/vc-002-godot-react-bridge-evidence.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-002-godot-react-bridge-evidence.es.md"
+      }
+    },
+    {
+      "module": "vc-003-jitter-and-voicing-cloud-distance",
+      "department": "visual-computing",
+      "english_path": "streeling/courses/visual-computing/en/vc-003-jitter-and-voicing-cloud-distance.md",
+      "locale_paths": {
+        "fr": "streeling/courses/visual-computing/fr/vc-003-jitter-and-voicing-cloud-distance.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-003-jitter-and-voicing-cloud-distance.es.md"
+      }
+    },
+    {
+      "module": "vc-004-godot-observatory-capture-gate",
+      "department": "visual-computing",
+      "english_path": "streeling/courses/visual-computing/en/vc-004-godot-observatory-capture-gate.md",
+      "locale_paths": {
+        "fr": "streeling/courses/visual-computing/fr/vc-004-godot-observatory-capture-gate.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-004-godot-observatory-capture-gate.es.md"
+      }
+    },
+    {
+      "module": "vc-005-craft-details-through-blender-to-godot",
+      "department": "visual-computing",
+      "english_path": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md",
+      "locale_paths": {
+        "fr": "streeling/courses/visual-computing/fr/vc-005-craft-details-through-blender-to-godot.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-005-craft-details-through-blender-to-godot.es.md"
+      }
+    },
+    {
+      "module": "vc-006-origami-fold-state-scene-trial",
+      "department": "visual-computing",
+      "english_path": "streeling/courses/visual-computing/en/vc-006-origami-fold-state-scene-trial.md",
+      "locale_paths": {
+        "fr": "streeling/courses/visual-computing/fr/vc-006-origami-fold-state-scene-trial.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-006-origami-fold-state-scene-trial.es.md"
+      }
+    },
+    {
+      "module": "vc-007-weave-seams-as-scene-contracts",
+      "department": "visual-computing",
+      "english_path": "streeling/courses/visual-computing/en/vc-007-weave-seams-as-scene-contracts.md",
+      "locale_paths": {
+        "fr": "streeling/courses/visual-computing/fr/vc-007-weave-seams-as-scene-contracts.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-007-weave-seams-as-scene-contracts.es.md"
+      }
+    },
+    {
+      "module": "wml-001-guitar-around-the-world",
+      "department": "world-music-languages",
+      "english_path": "streeling/courses/world-music-languages/en/wml-001-guitar-around-the-world.md",
+      "locale_paths": {
+        "fr": "streeling/courses/world-music-languages/fr/wml-001-guitar-around-the-world.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-001-guitar-around-the-world.es.md"
+      }
+    },
+    {
+      "module": "wml-002-dadgad-layout-and-cultural-claims",
+      "department": "world-music-languages",
+      "english_path": "streeling/courses/world-music-languages/en/wml-002-dadgad-layout-and-cultural-claims.md",
+      "locale_paths": {
+        "fr": "streeling/courses/world-music-languages/fr/wml-002-dadgad-layout-and-cultural-claims.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-002-dadgad-layout-and-cultural-claims.es.md"
+      }
+    },
+    {
+      "module": "wml-003-term-preservation-and-cultural-review",
+      "department": "world-music-languages",
+      "english_path": "streeling/courses/world-music-languages/en/wml-003-term-preservation-and-cultural-review.md",
+      "locale_paths": {
+        "fr": "streeling/courses/world-music-languages/fr/wml-003-term-preservation-and-cultural-review.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-003-term-preservation-and-cultural-review.es.md"
+      }
+    }
+  ]
+}

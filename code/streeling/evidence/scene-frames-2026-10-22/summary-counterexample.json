@@ -1,0 +1,106 @@
+{
+  "scope": "Authored two-scene geometry, native accepted Draft bounds, and exact ideal-decimal volume/membership calculations. Native Size decimals are float32 and not claimed to equal rational volume exactly.",
+  "scene_a": {
+    "boxes": [
+      {
+        "size": [
+          1,
+          2,
+          2
+        ],
+        "move": [
+          -0.5,
+          0,
+          0
+        ]
+      },
+      {
+        "size": [
+          1,
+          2,
+          2
+        ],
+        "move": [
+          0.5,
+          0,
+          0
+        ]
+      }
+    ],
+    "ideal_union_volume": 8
+  },
+  "scene_b": {
+    "boxes": [
+      {
+        "size": [
+          0.2,
+          2,
+          2
+        ],
+        "move": [
+          -0.9,
+          0,
+          0
+        ]
+      },
+      {
+        "size": [
+          0.2,
+          2,
+          2
+        ],
+        "move": [
+          0.9,
+          0,
+          0
+        ]
+      }
+    ],
+    "ideal_union_volume": 1.6,
+    "ideal_volume_fraction": "8/5"
+  },
+  "shared_summary": {
+    "box_count": 2,
+    "min": [
+      -1,
+      0,
+      -1
+    ],
+    "max": [
+      1,
+      2,
+      1
+    ],
+    "aabb_volume": 8
+  },
+  "centre_probe": {
+    "point": [
+      0,
+      1,
+      0
+    ],
+    "in_a": true,
+    "in_b": false,
+    "in_both_aggregate_bounds": true
+  },
+  "outside_control": {
+    "point": [
+      1.2,
+      1,
+      0
+    ],
+    "in_a": false,
+    "in_b": false,
+    "in_both_aggregate_bounds": false
+  },
+  "authored_prior": {
+    "probability_a": 0.5,
+    "probability_b": 0.5,
+    "scene_entropy_bits": 1,
+    "summary_conditional_entropy_bits": 1,
+    "summary_mutual_information_bits": 0,
+    "with_centre_probe_conditional_entropy_bits": 0,
+    "with_centre_probe_mutual_information_bits": 1
+  },
+  "limits": "No full-scene hash collision, visible-image equality, general scene entropy, physical collision or production summary adapter claim."
+}

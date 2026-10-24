@@ -3,7 +3,7 @@ title: Transposition, the Capo and Cross-Instrument Equivalence — Three Kinds 
 description: Transposition, the Capo and Cross-Instrument Equivalence — Music
 sidebar:
   label: MUS-019 · Transposition, the Capo and Cross-Instrument Equivalence
-  order: 16
+  order: 19
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/en/mus-019-transposition-capo-cross-instrument.md
 ---
 

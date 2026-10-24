@@ -173,6 +173,29 @@ test('the overview and the lock name the Demerzel commit the source was copied f
 	for (const lang of LANGS) assert.ok(page('fresh', lang, 'index.md').includes('`fffffff` (2026-01-01)'), `${lang} overview`);
 });
 
+test('overviews distinguish the initial source copy from supplemental source provenance', () => {
+	const manifest = 'code/streeling/evidence/craft-2026-10-22/import.json';
+	const origin = { ...JSON.parse(FIXTURE['streeling/source.json']), supplements: [manifest] };
+	const src = makeSource(path.join(tmp, 'supplemental-source'), { 'streeling/source.json': JSON.stringify(origin) });
+	const dest = path.join(tmp, 'supplemental-site');
+	sync(src, dest);
+	const wording = {
+		en: ['Initial source copy:', 'Additional source provenance'],
+		fr: ['Copie initiale des sources :', 'Provenance des sources supplémentaires'],
+		es: ['Copia inicial de las fuentes:', 'Procedencia de las fuentes adicionales'],
+	};
+	for (const lang of LANGS) {
+		const text = fs.readFileSync(path.join(dest, DOCS[lang], 'index.md'), 'utf8');
+		assert.ok(text.includes(wording[lang][0]), `${lang} must identify the initial copy`);
+		assert.ok(text.includes(`[${wording[lang][1]}](${SITE_REPO}/blob/main/${manifest})`), `${lang} must link the supplemental provenance`);
+		assert.ok(text.includes('`fffffff` (2026-01-01)'), `${lang} must preserve the initial commit`);
+		assert.ok(page('fresh', lang, 'index.md').includes(wording[lang][0]), `${lang} must identify the initial copy without supplements`);
+		assert.ok(!page('fresh', lang, 'index.md').includes(wording[lang][1]), `${lang} must omit absent supplements`);
+	}
+	const lock = JSON.parse(fs.readFileSync(path.join(dest, 'streeling.lock.json'), 'utf8'));
+	assert.deepEqual(lock.copied_from, origin);
+});
+
 test('the same source gives the same files', () => {
 	const files = (root) => fs.readdirSync(root, { recursive: true }).filter((f) => fs.statSync(path.join(root, f)).isFile()).sort();
 	assert.deepEqual(files(out.again), files(out.fresh));

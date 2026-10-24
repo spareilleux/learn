@@ -1,0 +1,133 @@
+{
+  "scope": "Authored two-attribute arithmetic, not actual image-quality/latency observations, elicited preferences or an ethical mandate.",
+  "attributes": {
+    "L": {
+      "detail_points": 70,
+      "adjacent_task_overhead_ms": 2
+    },
+    "B": {
+      "detail_points": 85,
+      "adjacent_task_overhead_ms": 5
+    },
+    "H": {
+      "detail_points": 95,
+      "adjacent_task_overhead_ms": 12
+    },
+    "W": {
+      "detail_points": 70,
+      "adjacent_task_overhead_ms": 8
+    }
+  },
+  "directions": {
+    "detail_points": "higher preferred",
+    "adjacent_task_overhead_ms": "lower preferred"
+  },
+  "dominators": {
+    "L": [],
+    "B": [],
+    "H": [],
+    "W": [
+      "L",
+      "B"
+    ]
+  },
+  "nondominated": [
+    "L",
+    "B",
+    "H"
+  ],
+  "score_rule": "U=D-lambda*O; lambda has units detail points per millisecond; linear commensurability is assumed.",
+  "weight_examples": [
+    {
+      "weight_points_per_ms": 0.5,
+      "scores": {
+        "L": 69.0,
+        "B": 82.5,
+        "H": 89.0,
+        "W": 66.0
+      },
+      "choice": "H",
+      "hard_limit_overhead_ms": 6,
+      "feasible_choices": [
+        "L",
+        "B"
+      ],
+      "constrained_choice": "B"
+    },
+    {
+      "weight_points_per_ms": 2.0,
+      "scores": {
+        "L": 66.0,
+        "B": 75.0,
+        "H": 71.0,
+        "W": 54.0
+      },
+      "choice": "B",
+      "hard_limit_overhead_ms": 6,
+      "feasible_choices": [
+        "L",
+        "B"
+      ],
+      "constrained_choice": "B"
+    },
+    {
+      "weight_points_per_ms": 6.0,
+      "scores": {
+        "L": 58.0,
+        "B": 55.0,
+        "H": 23.0,
+        "W": 22.0
+      },
+      "choice": "L",
+      "hard_limit_overhead_ms": 6,
+      "feasible_choices": [
+        "L",
+        "B"
+      ],
+      "constrained_choice": "L"
+    }
+  ],
+  "tie_weights": [
+    {
+      "weight_exact": "10/7",
+      "weight": 1.4285714285714286,
+      "choices": [
+        "B",
+        "H"
+      ]
+    },
+    {
+      "weight_exact": "5",
+      "weight": 5.0,
+      "choices": [
+        "L",
+        "B"
+      ]
+    }
+  ],
+  "unit_control": {
+    "original_weight_points_per_ms": 2,
+    "equivalent_weight_points_per_second": 2000,
+    "correct_seconds_scores": {
+      "L": 66.0,
+      "B": 75.0,
+      "H": 71.0,
+      "W": 54.0
+    },
+    "wrong_unscaled_weight_points_per_second": 2,
+    "wrong_seconds_scores": {
+      "L": 69.996,
+      "B": 84.99,
+      "H": 94.976,
+      "W": 69.984
+    },
+    "correct_choice": "B",
+    "wrong_choice": "H"
+  },
+  "limits": [
+    "Pareto dominance considers only these two declared attributes.",
+    "A hard6ms constraint is authored; it is not a source budget or a measured obligation.",
+    "Utility weights and hard constraints are value premises; measured facts alone do not select them.",
+    "Actor preferences, consent, accessibility and omitted attributes require separate consideration before real action."
+  ]
+}

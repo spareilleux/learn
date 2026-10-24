@@ -1,0 +1,122 @@
+{
+  "status": "prepared-not-performed",
+  "scope": "Criterion review is not actual learner, checker/CAD or fabrication evidence.",
+  "criteria": [
+    {
+      "id": "PHY011-1",
+      "module": "PHY011",
+      "title": "reference-layer",
+      "acceptance": "AtRi4,t2,k0.4 deriveRn4.8;90deg arcsinner2pi/neutral2.4pi/outer3pi. Neutralarc7.539822369mm is assumed model, notcalibratedmaterial.",
+      "decision": null
+    },
+    {
+      "id": "PHY011-2",
+      "module": "PHY011",
+      "title": "midpoint",
+      "acceptance": "k0.5 givesradius5/arc2.5pi/excess0.1pi=0.314159265mm; visual plausibility is not calibration.",
+      "decision": null
+    },
+    {
+      "id": "PHY011-3",
+      "module": "PHY011",
+      "title": "dimension-endpoints",
+      "acceptance": "Straight30+20totangencies gives50+2.4pi. Rejectunchangedsumforunspecifiedoutsidevirtualcornerdimensions; stateendpoints.",
+      "decision": null
+    },
+    {
+      "id": "PHY011-4",
+      "module": "PHY011",
+      "title": "sensitivity",
+      "acceptance": "Assumedk0.3..0.5 givesradius4.6..5,allowance2.3pi..2.5pi,width0.2pi,total50plusinterval. ConditionalmodelboundsnotCI/probability/recommendedrule;requirecalibrationevidence.",
+      "decision": null
+    },
+    {
+      "id": "PHY011-5",
+      "module": "PHY011",
+      "title": "IX-scope",
+      "acceptance": "Parallelstackreadingdoesnotsupplydevelopedblank/radius/neutralrule/angleordimensionconvention. Needphysicalunits/calibration/processrelief/tooling/springback/motionclearance;nofreshtrial.",
+      "decision": null
+    },
+    {
+      "id": "SEM007-1",
+      "module": "SEM007",
+      "title": "angle-object",
+      "acceptance": "Declaredalpha180-absdelta:included120\u2192deviation60\u2192pi/3\u2192arc1.6pi. Misreading120asdeviationgives3.2pi/factor2;notuniversalCADmapping.",
+      "decision": null
+    },
+    {
+      "id": "SEM007-2",
+      "module": "SEM007",
+      "title": "sign",
+      "acceptance": "SelectedsignconditionpassesV+60/M-60,rejectsM+60;equalpositivearcdoesnotretainmountain/valley. Onebranchpassisnotfullchecker/manufacture.",
+      "decision": null
+    },
+    {
+      "id": "SEM007-3",
+      "module": "SEM007",
+      "title": "angular-units",
+      "acceptance": "Degree60asradian60gives288mmvs1.6pi\u22485.026548246mm;factor180/pi\u224857.295779513,labelsnotconversion.",
+      "decision": null
+    },
+    {
+      "id": "SEM007-4",
+      "module": "SEM007",
+      "title": "quantity-units",
+      "acceptance": "Dimensionlessk0.4isneutraloffsetratio,GaussianK_G0hasmm^-2;zero curvature doesnotrelocateneutrallayer.",
+      "decision": null
+    },
+    {
+      "id": "SEM007-5",
+      "module": "SEM007",
+      "title": "consumption",
+      "acceptance": "Arbitrarymetadataretentiondoesnotprovephysicalmodelconsumption. Retainsource/edgeidentityandmapfields/units/conventions;testasymmetricangles/signs/calibration;advisoryrecordnotratifiedschema/DSL.",
+      "decision": null
+    },
+    {
+      "id": "FUT006-1",
+      "module": "FUT006",
+      "title": "falsifier",
+      "acceptance": "Principalproductsplane0/cylinder0/sphere1/100mm^-2;nonzeroobstructsregularsmoothexactintrinsicno-stretch,notallmakingorstrained/facetedtargets.",
+      "decision": null
+    },
+    {
+      "id": "FUT006-2",
+      "module": "FUT006",
+      "title": "positive-domain",
+      "acceptance": "IdealzerothicknessR10,H30,quarterpi/2\u2192width5pi,area150pi;retainreference/units/domain,notIXparsedinput/calibratedbend/hostexport.",
+      "decision": null
+    },
+    {
+      "id": "FUT006-3",
+      "module": "FUT006",
+      "title": "metric",
+      "acceptance": "Surfacepath5pi\u224815.707963268differschord10sqrt2\u224814.142135624;intrinsicdevelopmentpreservespathmetric,not3DEuclideanallchords.",
+      "decision": null
+    },
+    {
+      "id": "FUT006-4",
+      "module": "FUT006",
+      "title": "seam",
+      "acceptance": "Fullskinopens20pi\u00d730,area600pi;0/2piparameterscoincidentinputbutdistinctseamsides. LocalzeroKnotglobalcutfreeone-to-onerectangleorphysicalcertificate.",
+      "decision": null
+    },
+    {
+      "id": "FUT006-5",
+      "module": "FUT006",
+      "title": "bounded-milestone",
+      "acceptance": "Replaceall-surfacesmanufacturingpromisewithdeclaredreferencepatch/domain/units/seams/lengthareatolerances;stateassumptions,simpleranalyticalternativeandmaintenancecostobjection,falsifier,andphysicalcalibration/processobligations. NoimplementednewDSLorobservedoutcomes.",
+      "decision": null
+    }
+  ],
+  "pass_policy": "All five criteria per module; actual answers/assistance required before learner decisions.",
+  "human_technical_review": null,
+  "artisan_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "checker_run": null,
+  "CAD_run": null,
+  "material_calibration": null,
+  "physical_bend": null,
+  "manufacture": null,
+  "deployed_html": null
+}

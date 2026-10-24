@@ -1,0 +1,4354 @@
+{
+  "reviewer": "independent-data-source-decision-auditor",
+  "checked_at_utc": "2026-10-22T22:53:36.325668+00:00",
+  "verdict": "pass",
+  "findings": [
+    {
+      "id": "historical-not-calibrated",
+      "status": "observed-preserved",
+      "finding": "M2/M3 historical reports record dirty revisions, differing timing/control and binary conditions; current pinned documentation is not an exact executable reproduction or calibration of authored F/U likelihoods."
+    },
+    {
+      "id": "trial-identity-and-independence",
+      "status": "observed-preserved",
+      "finding": "The trial-A reread is one event; new wrapper identity or equal/different summary hashes alone establishes neither fresh conditional independence nor duplicate trial identity. Different genuine trials may share summary bytes."
+    },
+    {
+      "id": "cardinal-scale-and-horizon",
+      "status": "observed-preserved",
+      "finding": "Losses, pilot and migration costs are invented comparable teaching points. Horizon reuse assumes stable latent state, losses, likelihoods and controls; no host/agent calibration or engineering-time conversion inferred."
+    },
+    {
+      "id": "methodology-not-current-measurement",
+      "status": "observed-preserved",
+      "finding": "Pinned agentic guide recommendations and historical model claims are opinions/project methodology, not current reliability measurements."
+    }
+  ],
+  "fix_requests": [],
+  "check_count": 675,
+  "passed_check_count": 675,
+  "checks": [
+    {
+      "id": "states",
+      "pass_": true,
+      "actual": [
+        "F",
+        "U"
+      ],
+      "expected": [
+        "F",
+        "U"
+      ]
+    },
+    {
+      "id": "prior-F-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "prior-F-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "loss-K-F",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "id": "loss-K-U",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "id": "loss-S-F",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "loss-S-U",
+      "pass_": true,
+      "actual": 10,
+      "expected": 10
+    },
+    {
+      "id": "likelihood-F-+-exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "likelihood-F-+-float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "likelihood-F---exact",
+      "pass_": true,
+      "actual": "1/5",
+      "expected": "1/5"
+    },
+    {
+      "id": "likelihood-F---float",
+      "pass_": true,
+      "actual": 0.2,
+      "expected": 0.2
+    },
+    {
+      "id": "likelihood-U-+-exact",
+      "pass_": true,
+      "actual": "1/5",
+      "expected": "1/5"
+    },
+    {
+      "id": "likelihood-U-+-float",
+      "pass_": true,
+      "actual": 0.2,
+      "expected": 0.2
+    },
+    {
+      "id": "likelihood-U---exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "likelihood-U---float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "prior-decision-K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "prior-decision-K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "prior-decision-S-exact",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "prior-decision-S-float",
+      "pass_": true,
+      "actual": 5.0,
+      "expected": 5.0
+    },
+    {
+      "id": "prior-decision-minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "prior-decision-minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "prior-decision-action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "signal-+-probability-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "signal-+-probability-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "signal-+-posterior-exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "signal-+-posterior-float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "signal-+-K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "signal-+-K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "signal-+-S-exact",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "signal-+-S-float",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "signal-+-minimum-exact",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "signal-+-minimum-float",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "signal-+-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "signal---probability-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "signal---probability-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "signal---posterior-exact",
+      "pass_": true,
+      "actual": "1/5",
+      "expected": "1/5"
+    },
+    {
+      "id": "signal---posterior-float",
+      "pass_": true,
+      "actual": 0.2,
+      "expected": 0.2
+    },
+    {
+      "id": "signal---K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "signal---K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "signal---S-exact",
+      "pass_": true,
+      "actual": "8",
+      "expected": "8"
+    },
+    {
+      "id": "signal---S-float",
+      "pass_": true,
+      "actual": 8.0,
+      "expected": 8.0
+    },
+    {
+      "id": "signal---minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "signal---minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "signal---action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "pilot-expected_loss_with_noisy_signal-exact",
+      "pass_": true,
+      "actual": "3",
+      "expected": "3"
+    },
+    {
+      "id": "pilot-expected_loss_with_noisy_signal-float",
+      "pass_": true,
+      "actual": 3.0,
+      "expected": 3.0
+    },
+    {
+      "id": "pilot-expected_loss_with_perfect_signal-exact",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "pilot-expected_loss_with_perfect_signal-float",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "pilot-gross_sample_information_value-exact",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "pilot-gross_sample_information_value-float",
+      "pass_": true,
+      "actual": 1.0,
+      "expected": 1.0
+    },
+    {
+      "id": "pilot-gross_perfect_information_value-exact",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "pilot-gross_perfect_information_value-float",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "pilot-pilot_cost-exact",
+      "pass_": true,
+      "actual": "3/5",
+      "expected": "3/5"
+    },
+    {
+      "id": "pilot-pilot_cost-float",
+      "pass_": true,
+      "actual": 0.6,
+      "expected": 0.6
+    },
+    {
+      "id": "pilot-net_information_value-exact",
+      "pass_": true,
+      "actual": "2/5",
+      "expected": "2/5"
+    },
+    {
+      "id": "pilot-net_information_value-float",
+      "pass_": true,
+      "actual": 0.4,
+      "expected": 0.4
+    },
+    {
+      "id": "pilot-action_boundary_F-exact",
+      "pass_": true,
+      "actual": "3/5",
+      "expected": "3/5"
+    },
+    {
+      "id": "pilot-action_boundary_F-float",
+      "pass_": true,
+      "actual": 0.6,
+      "expected": 0.6
+    },
+    {
+      "id": "pilot-perfect_test_net_value-exact",
+      "pass_": true,
+      "actual": "-1",
+      "expected": "-1"
+    },
+    {
+      "id": "pilot-perfect_test_net_value-float",
+      "pass_": true,
+      "actual": -1.0,
+      "expected": -1.0
+    },
+    {
+      "id": "tie-policy",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "information-ignore-option",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "forced-K-zero-value",
+      "pass_": true,
+      "actual": 0,
+      "expected": "0"
+    },
+    {
+      "id": "perfect-test-cost-control",
+      "pass_": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "id": "prior-odds",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "id": "positive-LR",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "id": "negative-LR-exact",
+      "pass_": true,
+      "actual": "1/4",
+      "expected": "1/4"
+    },
+    {
+      "id": "negative-LR-float",
+      "pass_": true,
+      "actual": 0.25,
+      "expected": 0.25
+    },
+    {
+      "id": "fifteen-complete-sequences",
+      "pass_": true,
+      "actual": [
+        "",
+        "+",
+        "-",
+        "++",
+        "+-",
+        "-+",
+        "--",
+        "+++",
+        "++-",
+        "+-+",
+        "+--",
+        "-++",
+        "-+-",
+        "--+",
+        "---"
+      ],
+      "expected": [
+        "",
+        "+",
+        "-",
+        "++",
+        "+-",
+        "-+",
+        "--",
+        "+++",
+        "++-",
+        "+-+",
+        "+--",
+        "-++",
+        "-+-",
+        "--+",
+        "---"
+      ]
+    },
+    {
+      "id": "sequence-empty-probability-exact",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "sequence-empty-probability-float",
+      "pass_": true,
+      "actual": 1.0,
+      "expected": 1.0
+    },
+    {
+      "id": "sequence-empty-posterior-F-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "sequence-empty-posterior-F-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "sequence-empty-posterior-odds-exact",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "sequence-empty-posterior-odds-float",
+      "pass_": true,
+      "actual": 1.0,
+      "expected": 1.0
+    },
+    {
+      "id": "sequence-empty-K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence-empty-K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence-empty-S-exact",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "sequence-empty-S-float",
+      "pass_": true,
+      "actual": 5.0,
+      "expected": 5.0
+    },
+    {
+      "id": "sequence-empty-minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence-empty-minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence-empty-action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "sequence-+-probability-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "sequence-+-probability-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "sequence-+-posterior-F-exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "sequence-+-posterior-F-float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "sequence-+-posterior-odds-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence-+-posterior-odds-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence-+-K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence-+-K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence-+-S-exact",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "sequence-+-S-float",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "sequence-+-minimum-exact",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "sequence-+-minimum-float",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "sequence-+-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "sequence---probability-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "sequence---probability-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "sequence---posterior-F-exact",
+      "pass_": true,
+      "actual": "1/5",
+      "expected": "1/5"
+    },
+    {
+      "id": "sequence---posterior-F-float",
+      "pass_": true,
+      "actual": 0.2,
+      "expected": 0.2
+    },
+    {
+      "id": "sequence---posterior-odds-exact",
+      "pass_": true,
+      "actual": "1/4",
+      "expected": "1/4"
+    },
+    {
+      "id": "sequence---posterior-odds-float",
+      "pass_": true,
+      "actual": 0.25,
+      "expected": 0.25
+    },
+    {
+      "id": "sequence---K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence---K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence---S-exact",
+      "pass_": true,
+      "actual": "8",
+      "expected": "8"
+    },
+    {
+      "id": "sequence---S-float",
+      "pass_": true,
+      "actual": 8.0,
+      "expected": 8.0
+    },
+    {
+      "id": "sequence---minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence---minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence---action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "sequence-++-probability-exact",
+      "pass_": true,
+      "actual": "17/50",
+      "expected": "17/50"
+    },
+    {
+      "id": "sequence-++-probability-float",
+      "pass_": true,
+      "actual": 0.34,
+      "expected": 0.34
+    },
+    {
+      "id": "sequence-++-posterior-F-exact",
+      "pass_": true,
+      "actual": "16/17",
+      "expected": "16/17"
+    },
+    {
+      "id": "sequence-++-posterior-F-float",
+      "pass_": true,
+      "actual": 0.9411764705882353,
+      "expected": 0.9411764705882353
+    },
+    {
+      "id": "sequence-++-posterior-odds-exact",
+      "pass_": true,
+      "actual": "16",
+      "expected": "16"
+    },
+    {
+      "id": "sequence-++-posterior-odds-float",
+      "pass_": true,
+      "actual": 16.0,
+      "expected": 16.0
+    },
+    {
+      "id": "sequence-++-K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence-++-K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence-++-S-exact",
+      "pass_": true,
+      "actual": "10/17",
+      "expected": "10/17"
+    },
+    {
+      "id": "sequence-++-S-float",
+      "pass_": true,
+      "actual": 0.5882352941176471,
+      "expected": 0.5882352941176471
+    },
+    {
+      "id": "sequence-++-minimum-exact",
+      "pass_": true,
+      "actual": "10/17",
+      "expected": "10/17"
+    },
+    {
+      "id": "sequence-++-minimum-float",
+      "pass_": true,
+      "actual": 0.5882352941176471,
+      "expected": 0.5882352941176471
+    },
+    {
+      "id": "sequence-++-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "sequence-+--probability-exact",
+      "pass_": true,
+      "actual": "4/25",
+      "expected": "4/25"
+    },
+    {
+      "id": "sequence-+--probability-float",
+      "pass_": true,
+      "actual": 0.16,
+      "expected": 0.16
+    },
+    {
+      "id": "sequence-+--posterior-F-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "sequence-+--posterior-F-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "sequence-+--posterior-odds-exact",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "sequence-+--posterior-odds-float",
+      "pass_": true,
+      "actual": 1.0,
+      "expected": 1.0
+    },
+    {
+      "id": "sequence-+--K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence-+--K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence-+--S-exact",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "sequence-+--S-float",
+      "pass_": true,
+      "actual": 5.0,
+      "expected": 5.0
+    },
+    {
+      "id": "sequence-+--minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence-+--minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence-+--action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "sequence--+-probability-exact",
+      "pass_": true,
+      "actual": "4/25",
+      "expected": "4/25"
+    },
+    {
+      "id": "sequence--+-probability-float",
+      "pass_": true,
+      "actual": 0.16,
+      "expected": 0.16
+    },
+    {
+      "id": "sequence--+-posterior-F-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "sequence--+-posterior-F-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "sequence--+-posterior-odds-exact",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "sequence--+-posterior-odds-float",
+      "pass_": true,
+      "actual": 1.0,
+      "expected": 1.0
+    },
+    {
+      "id": "sequence--+-K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence--+-K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence--+-S-exact",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "sequence--+-S-float",
+      "pass_": true,
+      "actual": 5.0,
+      "expected": 5.0
+    },
+    {
+      "id": "sequence--+-minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence--+-minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence--+-action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "sequence----probability-exact",
+      "pass_": true,
+      "actual": "17/50",
+      "expected": "17/50"
+    },
+    {
+      "id": "sequence----probability-float",
+      "pass_": true,
+      "actual": 0.34,
+      "expected": 0.34
+    },
+    {
+      "id": "sequence----posterior-F-exact",
+      "pass_": true,
+      "actual": "1/17",
+      "expected": "1/17"
+    },
+    {
+      "id": "sequence----posterior-F-float",
+      "pass_": true,
+      "actual": 0.058823529411764705,
+      "expected": 0.058823529411764705
+    },
+    {
+      "id": "sequence----posterior-odds-exact",
+      "pass_": true,
+      "actual": "1/16",
+      "expected": "1/16"
+    },
+    {
+      "id": "sequence----posterior-odds-float",
+      "pass_": true,
+      "actual": 0.0625,
+      "expected": 0.0625
+    },
+    {
+      "id": "sequence----K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence----K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence----S-exact",
+      "pass_": true,
+      "actual": "160/17",
+      "expected": "160/17"
+    },
+    {
+      "id": "sequence----S-float",
+      "pass_": true,
+      "actual": 9.411764705882353,
+      "expected": 9.411764705882353
+    },
+    {
+      "id": "sequence----minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence----minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence----action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "sequence-+++-probability-exact",
+      "pass_": true,
+      "actual": "13/50",
+      "expected": "13/50"
+    },
+    {
+      "id": "sequence-+++-probability-float",
+      "pass_": true,
+      "actual": 0.26,
+      "expected": 0.26
+    },
+    {
+      "id": "sequence-+++-posterior-F-exact",
+      "pass_": true,
+      "actual": "64/65",
+      "expected": "64/65"
+    },
+    {
+      "id": "sequence-+++-posterior-F-float",
+      "pass_": true,
+      "actual": 0.9846153846153847,
+      "expected": 0.9846153846153847
+    },
+    {
+      "id": "sequence-+++-posterior-odds-exact",
+      "pass_": true,
+      "actual": "64",
+      "expected": "64"
+    },
+    {
+      "id": "sequence-+++-posterior-odds-float",
+      "pass_": true,
+      "actual": 64.0,
+      "expected": 64.0
+    },
+    {
+      "id": "sequence-+++-K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence-+++-K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence-+++-S-exact",
+      "pass_": true,
+      "actual": "2/13",
+      "expected": "2/13"
+    },
+    {
+      "id": "sequence-+++-S-float",
+      "pass_": true,
+      "actual": 0.15384615384615385,
+      "expected": 0.15384615384615385
+    },
+    {
+      "id": "sequence-+++-minimum-exact",
+      "pass_": true,
+      "actual": "2/13",
+      "expected": "2/13"
+    },
+    {
+      "id": "sequence-+++-minimum-float",
+      "pass_": true,
+      "actual": 0.15384615384615385,
+      "expected": 0.15384615384615385
+    },
+    {
+      "id": "sequence-+++-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "sequence-++--probability-exact",
+      "pass_": true,
+      "actual": "2/25",
+      "expected": "2/25"
+    },
+    {
+      "id": "sequence-++--probability-float",
+      "pass_": true,
+      "actual": 0.08,
+      "expected": 0.08
+    },
+    {
+      "id": "sequence-++--posterior-F-exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "sequence-++--posterior-F-float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "sequence-++--posterior-odds-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence-++--posterior-odds-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence-++--K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence-++--K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence-++--S-exact",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "sequence-++--S-float",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "sequence-++--minimum-exact",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "sequence-++--minimum-float",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "sequence-++--action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "sequence-+-+-probability-exact",
+      "pass_": true,
+      "actual": "2/25",
+      "expected": "2/25"
+    },
+    {
+      "id": "sequence-+-+-probability-float",
+      "pass_": true,
+      "actual": 0.08,
+      "expected": 0.08
+    },
+    {
+      "id": "sequence-+-+-posterior-F-exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "sequence-+-+-posterior-F-float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "sequence-+-+-posterior-odds-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence-+-+-posterior-odds-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence-+-+-K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence-+-+-K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence-+-+-S-exact",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "sequence-+-+-S-float",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "sequence-+-+-minimum-exact",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "sequence-+-+-minimum-float",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "sequence-+-+-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "sequence-+---probability-exact",
+      "pass_": true,
+      "actual": "2/25",
+      "expected": "2/25"
+    },
+    {
+      "id": "sequence-+---probability-float",
+      "pass_": true,
+      "actual": 0.08,
+      "expected": 0.08
+    },
+    {
+      "id": "sequence-+---posterior-F-exact",
+      "pass_": true,
+      "actual": "1/5",
+      "expected": "1/5"
+    },
+    {
+      "id": "sequence-+---posterior-F-float",
+      "pass_": true,
+      "actual": 0.2,
+      "expected": 0.2
+    },
+    {
+      "id": "sequence-+---posterior-odds-exact",
+      "pass_": true,
+      "actual": "1/4",
+      "expected": "1/4"
+    },
+    {
+      "id": "sequence-+---posterior-odds-float",
+      "pass_": true,
+      "actual": 0.25,
+      "expected": 0.25
+    },
+    {
+      "id": "sequence-+---K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence-+---K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence-+---S-exact",
+      "pass_": true,
+      "actual": "8",
+      "expected": "8"
+    },
+    {
+      "id": "sequence-+---S-float",
+      "pass_": true,
+      "actual": 8.0,
+      "expected": 8.0
+    },
+    {
+      "id": "sequence-+---minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence-+---minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence-+---action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "sequence--++-probability-exact",
+      "pass_": true,
+      "actual": "2/25",
+      "expected": "2/25"
+    },
+    {
+      "id": "sequence--++-probability-float",
+      "pass_": true,
+      "actual": 0.08,
+      "expected": 0.08
+    },
+    {
+      "id": "sequence--++-posterior-F-exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "sequence--++-posterior-F-float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "sequence--++-posterior-odds-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence--++-posterior-odds-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence--++-K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence--++-K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence--++-S-exact",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "sequence--++-S-float",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "sequence--++-minimum-exact",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "sequence--++-minimum-float",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "sequence--++-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "sequence--+--probability-exact",
+      "pass_": true,
+      "actual": "2/25",
+      "expected": "2/25"
+    },
+    {
+      "id": "sequence--+--probability-float",
+      "pass_": true,
+      "actual": 0.08,
+      "expected": 0.08
+    },
+    {
+      "id": "sequence--+--posterior-F-exact",
+      "pass_": true,
+      "actual": "1/5",
+      "expected": "1/5"
+    },
+    {
+      "id": "sequence--+--posterior-F-float",
+      "pass_": true,
+      "actual": 0.2,
+      "expected": 0.2
+    },
+    {
+      "id": "sequence--+--posterior-odds-exact",
+      "pass_": true,
+      "actual": "1/4",
+      "expected": "1/4"
+    },
+    {
+      "id": "sequence--+--posterior-odds-float",
+      "pass_": true,
+      "actual": 0.25,
+      "expected": 0.25
+    },
+    {
+      "id": "sequence--+--K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence--+--K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence--+--S-exact",
+      "pass_": true,
+      "actual": "8",
+      "expected": "8"
+    },
+    {
+      "id": "sequence--+--S-float",
+      "pass_": true,
+      "actual": 8.0,
+      "expected": 8.0
+    },
+    {
+      "id": "sequence--+--minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence--+--minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence--+--action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "sequence---+-probability-exact",
+      "pass_": true,
+      "actual": "2/25",
+      "expected": "2/25"
+    },
+    {
+      "id": "sequence---+-probability-float",
+      "pass_": true,
+      "actual": 0.08,
+      "expected": 0.08
+    },
+    {
+      "id": "sequence---+-posterior-F-exact",
+      "pass_": true,
+      "actual": "1/5",
+      "expected": "1/5"
+    },
+    {
+      "id": "sequence---+-posterior-F-float",
+      "pass_": true,
+      "actual": 0.2,
+      "expected": 0.2
+    },
+    {
+      "id": "sequence---+-posterior-odds-exact",
+      "pass_": true,
+      "actual": "1/4",
+      "expected": "1/4"
+    },
+    {
+      "id": "sequence---+-posterior-odds-float",
+      "pass_": true,
+      "actual": 0.25,
+      "expected": 0.25
+    },
+    {
+      "id": "sequence---+-K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence---+-K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence---+-S-exact",
+      "pass_": true,
+      "actual": "8",
+      "expected": "8"
+    },
+    {
+      "id": "sequence---+-S-float",
+      "pass_": true,
+      "actual": 8.0,
+      "expected": 8.0
+    },
+    {
+      "id": "sequence---+-minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence---+-minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence---+-action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "sequence-----probability-exact",
+      "pass_": true,
+      "actual": "13/50",
+      "expected": "13/50"
+    },
+    {
+      "id": "sequence-----probability-float",
+      "pass_": true,
+      "actual": 0.26,
+      "expected": 0.26
+    },
+    {
+      "id": "sequence-----posterior-F-exact",
+      "pass_": true,
+      "actual": "1/65",
+      "expected": "1/65"
+    },
+    {
+      "id": "sequence-----posterior-F-float",
+      "pass_": true,
+      "actual": 0.015384615384615385,
+      "expected": 0.015384615384615385
+    },
+    {
+      "id": "sequence-----posterior-odds-exact",
+      "pass_": true,
+      "actual": "1/64",
+      "expected": "1/64"
+    },
+    {
+      "id": "sequence-----posterior-odds-float",
+      "pass_": true,
+      "actual": 0.015625,
+      "expected": 0.015625
+    },
+    {
+      "id": "sequence-----K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence-----K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence-----S-exact",
+      "pass_": true,
+      "actual": "128/13",
+      "expected": "128/13"
+    },
+    {
+      "id": "sequence-----S-float",
+      "pass_": true,
+      "actual": 9.846153846153847,
+      "expected": 9.846153846153847
+    },
+    {
+      "id": "sequence-----minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "sequence-----minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "sequence-----action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "length0-probability-sum",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "length1-probability-sum",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "length2-probability-sum",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "length3-probability-sum",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "ledger1-fresh-stipulation",
+      "pass_": true,
+      "actual": true,
+      "expected": true,
+      "detail": "Trial independence is explicitly authored; new wrapper/trial label alone is not evidence that real trials are conditionally independent."
+    },
+    {
+      "id": "ledger1-unique-count",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "id": "ledger1-accepted-prefix",
+      "pass_": true,
+      "actual": "+",
+      "expected": "+"
+    },
+    {
+      "id": "ledger1-naive-prefix",
+      "pass_": true,
+      "actual": "+",
+      "expected": "+"
+    },
+    {
+      "id": "ledger1-identity-posterior-exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "ledger1-identity-posterior-float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "ledger1-naive-posterior-exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "ledger1-naive-posterior-float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "ledger1-identity-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "ledger1-naive-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "ledger2-fresh-stipulation",
+      "pass_": true,
+      "actual": false,
+      "expected": false,
+      "detail": "Trial independence is explicitly authored; new wrapper/trial label alone is not evidence that real trials are conditionally independent."
+    },
+    {
+      "id": "ledger2-unique-count",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "id": "ledger2-accepted-prefix",
+      "pass_": true,
+      "actual": "+",
+      "expected": "+"
+    },
+    {
+      "id": "ledger2-naive-prefix",
+      "pass_": true,
+      "actual": "++",
+      "expected": "++"
+    },
+    {
+      "id": "ledger2-identity-posterior-exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "ledger2-identity-posterior-float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "ledger2-naive-posterior-exact",
+      "pass_": true,
+      "actual": "16/17",
+      "expected": "16/17"
+    },
+    {
+      "id": "ledger2-naive-posterior-float",
+      "pass_": true,
+      "actual": 0.9411764705882353,
+      "expected": 0.9411764705882353
+    },
+    {
+      "id": "ledger2-identity-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "ledger2-naive-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "ledger3-fresh-stipulation",
+      "pass_": true,
+      "actual": true,
+      "expected": true,
+      "detail": "Trial independence is explicitly authored; new wrapper/trial label alone is not evidence that real trials are conditionally independent."
+    },
+    {
+      "id": "ledger3-unique-count",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "ledger3-accepted-prefix",
+      "pass_": true,
+      "actual": "+-",
+      "expected": "+-"
+    },
+    {
+      "id": "ledger3-naive-prefix",
+      "pass_": true,
+      "actual": "++-",
+      "expected": "++-"
+    },
+    {
+      "id": "ledger3-identity-posterior-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "ledger3-identity-posterior-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "ledger3-naive-posterior-exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "ledger3-naive-posterior-float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "ledger3-identity-action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "ledger3-naive-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "copy-likelihood-ratio",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "id": "wrapper-not-independence",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "matching-bytes-not-duplicate-proof",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "two-signal-loss-exact",
+      "pass_": true,
+      "actual": "71/25",
+      "expected": "71/25"
+    },
+    {
+      "id": "two-signal-loss-float",
+      "pass_": true,
+      "actual": 2.84,
+      "expected": 2.84
+    },
+    {
+      "id": "two-signal-gross-exact",
+      "pass_": true,
+      "actual": "29/25",
+      "expected": "29/25"
+    },
+    {
+      "id": "two-signal-gross-float",
+      "pass_": true,
+      "actual": 1.16,
+      "expected": 1.16
+    },
+    {
+      "id": "second-marginal-exact",
+      "pass_": true,
+      "actual": "4/25",
+      "expected": "4/25"
+    },
+    {
+      "id": "second-marginal-float",
+      "pass_": true,
+      "actual": 0.16,
+      "expected": 0.16
+    },
+    {
+      "id": "two-signal-exact-result",
+      "pass_": true,
+      "actual": "71/25",
+      "expected": "71/25"
+    },
+    {
+      "id": "conditional-second-two-branches",
+      "pass_": true,
+      "actual": [
+        "+",
+        "-"
+      ],
+      "expected": [
+        "+",
+        "-"
+      ]
+    },
+    {
+      "id": "second-after-+-current-K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "second-after-+-current-K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "second-after-+-current-S-exact",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "second-after-+-current-S-float",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "second-after-+-current-minimum-exact",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "second-after-+-current-minimum-float",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "second-after-+-current-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "second-after-+-+-probability-exact",
+      "pass_": true,
+      "actual": "17/25",
+      "expected": "17/25"
+    },
+    {
+      "id": "second-after-+-+-probability-float",
+      "pass_": true,
+      "actual": 0.68,
+      "expected": 0.68
+    },
+    {
+      "id": "second-after-+-+-posterior-exact",
+      "pass_": true,
+      "actual": "16/17",
+      "expected": "16/17"
+    },
+    {
+      "id": "second-after-+-+-posterior-float",
+      "pass_": true,
+      "actual": 0.9411764705882353,
+      "expected": 0.9411764705882353
+    },
+    {
+      "id": "second-after-+-+-K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "second-after-+-+-K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "second-after-+-+-S-exact",
+      "pass_": true,
+      "actual": "10/17",
+      "expected": "10/17"
+    },
+    {
+      "id": "second-after-+-+-S-float",
+      "pass_": true,
+      "actual": 0.5882352941176471,
+      "expected": 0.5882352941176471
+    },
+    {
+      "id": "second-after-+-+-minimum-exact",
+      "pass_": true,
+      "actual": "10/17",
+      "expected": "10/17"
+    },
+    {
+      "id": "second-after-+-+-minimum-float",
+      "pass_": true,
+      "actual": 0.5882352941176471,
+      "expected": 0.5882352941176471
+    },
+    {
+      "id": "second-after-+-+-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "second-after-+---probability-exact",
+      "pass_": true,
+      "actual": "8/25",
+      "expected": "8/25"
+    },
+    {
+      "id": "second-after-+---probability-float",
+      "pass_": true,
+      "actual": 0.32,
+      "expected": 0.32
+    },
+    {
+      "id": "second-after-+---posterior-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "second-after-+---posterior-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "second-after-+---K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "second-after-+---K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "second-after-+---S-exact",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "second-after-+---S-float",
+      "pass_": true,
+      "actual": 5.0,
+      "expected": 5.0
+    },
+    {
+      "id": "second-after-+---minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "second-after-+---minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "second-after-+---action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "second-after-+-expected-loss-exact",
+      "pass_": true,
+      "actual": "42/25",
+      "expected": "42/25"
+    },
+    {
+      "id": "second-after-+-expected-loss-float",
+      "pass_": true,
+      "actual": 1.68,
+      "expected": 1.68
+    },
+    {
+      "id": "second-after-+-gross-exact",
+      "pass_": true,
+      "actual": "8/25",
+      "expected": "8/25"
+    },
+    {
+      "id": "second-after-+-gross-float",
+      "pass_": true,
+      "actual": 0.32,
+      "expected": 0.32
+    },
+    {
+      "id": "second-after-+-cost-exact",
+      "pass_": true,
+      "actual": "3/5",
+      "expected": "3/5"
+    },
+    {
+      "id": "second-after-+-cost-float",
+      "pass_": true,
+      "actual": 0.6,
+      "expected": 0.6
+    },
+    {
+      "id": "second-after-+-net-exact",
+      "pass_": true,
+      "actual": "-7/25",
+      "expected": "-7/25"
+    },
+    {
+      "id": "second-after-+-net-float",
+      "pass_": true,
+      "actual": -0.28,
+      "expected": -0.28
+    },
+    {
+      "id": "second-after-+-one-more-test-is-unprofitable",
+      "pass_": true,
+      "actual": true,
+      "expected": true,
+      "detail": "This evaluates the stated one-fresh-test alternative; not a general optimal-stopping theorem or deployed controller."
+    },
+    {
+      "id": "second-after---current-K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "second-after---current-K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "second-after---current-S-exact",
+      "pass_": true,
+      "actual": "8",
+      "expected": "8"
+    },
+    {
+      "id": "second-after---current-S-float",
+      "pass_": true,
+      "actual": 8.0,
+      "expected": 8.0
+    },
+    {
+      "id": "second-after---current-minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "second-after---current-minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "second-after---current-action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "second-after---+-probability-exact",
+      "pass_": true,
+      "actual": "8/25",
+      "expected": "8/25"
+    },
+    {
+      "id": "second-after---+-probability-float",
+      "pass_": true,
+      "actual": 0.32,
+      "expected": 0.32
+    },
+    {
+      "id": "second-after---+-posterior-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "second-after---+-posterior-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "second-after---+-K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "second-after---+-K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "second-after---+-S-exact",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "second-after---+-S-float",
+      "pass_": true,
+      "actual": 5.0,
+      "expected": 5.0
+    },
+    {
+      "id": "second-after---+-minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "second-after---+-minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "second-after---+-action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "second-after-----probability-exact",
+      "pass_": true,
+      "actual": "17/25",
+      "expected": "17/25"
+    },
+    {
+      "id": "second-after-----probability-float",
+      "pass_": true,
+      "actual": 0.68,
+      "expected": 0.68
+    },
+    {
+      "id": "second-after-----posterior-exact",
+      "pass_": true,
+      "actual": "1/17",
+      "expected": "1/17"
+    },
+    {
+      "id": "second-after-----posterior-float",
+      "pass_": true,
+      "actual": 0.058823529411764705,
+      "expected": 0.058823529411764705
+    },
+    {
+      "id": "second-after-----K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "second-after-----K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "second-after-----S-exact",
+      "pass_": true,
+      "actual": "160/17",
+      "expected": "160/17"
+    },
+    {
+      "id": "second-after-----S-float",
+      "pass_": true,
+      "actual": 9.411764705882353,
+      "expected": 9.411764705882353
+    },
+    {
+      "id": "second-after-----minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "second-after-----minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "second-after-----action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "second-after---expected-loss-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "second-after---expected-loss-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "second-after---gross-exact",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "second-after---gross-float",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "second-after---cost-exact",
+      "pass_": true,
+      "actual": "3/5",
+      "expected": "3/5"
+    },
+    {
+      "id": "second-after---cost-float",
+      "pass_": true,
+      "actual": 0.6,
+      "expected": 0.6
+    },
+    {
+      "id": "second-after---net-exact",
+      "pass_": true,
+      "actual": "-3/5",
+      "expected": "-3/5"
+    },
+    {
+      "id": "second-after---net-float",
+      "pass_": true,
+      "actual": -0.6,
+      "expected": -0.6
+    },
+    {
+      "id": "second-after---one-more-test-is-unprofitable",
+      "pass_": true,
+      "actual": true,
+      "expected": true,
+      "detail": "This evaluates the stated one-fresh-test alternative; not a general optimal-stopping theorem or deployed controller."
+    },
+    {
+      "id": "migration-one-time-charge",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "horizon-pilot-cost-exact",
+      "pass_": true,
+      "actual": "3/5",
+      "expected": "3/5"
+    },
+    {
+      "id": "horizon-pilot-cost-float",
+      "pass_": true,
+      "actual": 0.6,
+      "expected": 0.6
+    },
+    {
+      "id": "horizon-coverage",
+      "pass_": true,
+      "actual": [
+        1,
+        2,
+        3,
+        5,
+        10
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        5,
+        10
+      ]
+    },
+    {
+      "id": "horizon1-baseline-K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "horizon1-baseline-K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "horizon1-baseline-S-exact",
+      "pass_": true,
+      "actual": "7",
+      "expected": "7"
+    },
+    {
+      "id": "horizon1-baseline-S-float",
+      "pass_": true,
+      "actual": 7.0,
+      "expected": 7.0
+    },
+    {
+      "id": "horizon1-baseline-minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "horizon1-baseline-minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "horizon1-baseline-action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "horizon1-+-probability-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "horizon1-+-probability-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "horizon1-+-posterior-exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "horizon1-+-posterior-float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "horizon1-+-K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "horizon1-+-K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "horizon1-+-S-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "horizon1-+-S-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "horizon1-+-minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "horizon1-+-minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "horizon1-+-action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "horizon1---probability-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "horizon1---probability-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "horizon1---posterior-exact",
+      "pass_": true,
+      "actual": "1/5",
+      "expected": "1/5"
+    },
+    {
+      "id": "horizon1---posterior-float",
+      "pass_": true,
+      "actual": 0.2,
+      "expected": 0.2
+    },
+    {
+      "id": "horizon1---K-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "horizon1---K-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "horizon1---S-exact",
+      "pass_": true,
+      "actual": "10",
+      "expected": "10"
+    },
+    {
+      "id": "horizon1---S-float",
+      "pass_": true,
+      "actual": 10.0,
+      "expected": 10.0
+    },
+    {
+      "id": "horizon1---minimum-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "horizon1---minimum-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "horizon1---action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "horizon1-expected_loss_before_pilot_cost-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "horizon1-expected_loss_before_pilot_cost-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "horizon1-pilot_cost-exact",
+      "pass_": true,
+      "actual": "3/5",
+      "expected": "3/5"
+    },
+    {
+      "id": "horizon1-pilot_cost-float",
+      "pass_": true,
+      "actual": 0.6,
+      "expected": 0.6
+    },
+    {
+      "id": "horizon1-expected_loss_including_pilot-exact",
+      "pass_": true,
+      "actual": "23/5",
+      "expected": "23/5"
+    },
+    {
+      "id": "horizon1-expected_loss_including_pilot-float",
+      "pass_": true,
+      "actual": 4.6,
+      "expected": 4.6
+    },
+    {
+      "id": "horizon1-gross_signal_value-exact",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "horizon1-gross_signal_value-float",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "horizon1-net_gain-exact",
+      "pass_": true,
+      "actual": "-3/5",
+      "expected": "-3/5"
+    },
+    {
+      "id": "horizon1-net_gain-float",
+      "pass_": true,
+      "actual": -0.6,
+      "expected": -0.6
+    },
+    {
+      "id": "horizon1-expected_migration_charge-exact",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "horizon1-expected_migration_charge-float",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "horizon1-switch_threshold_F-exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "horizon1-switch_threshold_F-float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "horizon1-expected_perfect_information_loss-exact",
+      "pass_": true,
+      "actual": "3",
+      "expected": "3"
+    },
+    {
+      "id": "horizon1-expected_perfect_information_loss-float",
+      "pass_": true,
+      "actual": 3.0,
+      "expected": 3.0
+    },
+    {
+      "id": "horizon1-perfect_information_ceiling-exact",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "horizon1-perfect_information_ceiling-float",
+      "pass_": true,
+      "actual": 1.0,
+      "expected": 1.0
+    },
+    {
+      "id": "horizon1-total-formula",
+      "pass_": true,
+      "actual": "23/5",
+      "expected": "23/5"
+    },
+    {
+      "id": "horizon1-gain-formula",
+      "pass_": true,
+      "actual": "-3/5",
+      "expected": "-3/5"
+    },
+    {
+      "id": "horizon1-perfect-ceiling-formula",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "horizon2-baseline-K-exact",
+      "pass_": true,
+      "actual": "8",
+      "expected": "8"
+    },
+    {
+      "id": "horizon2-baseline-K-float",
+      "pass_": true,
+      "actual": 8.0,
+      "expected": 8.0
+    },
+    {
+      "id": "horizon2-baseline-S-exact",
+      "pass_": true,
+      "actual": "12",
+      "expected": "12"
+    },
+    {
+      "id": "horizon2-baseline-S-float",
+      "pass_": true,
+      "actual": 12.0,
+      "expected": 12.0
+    },
+    {
+      "id": "horizon2-baseline-minimum-exact",
+      "pass_": true,
+      "actual": "8",
+      "expected": "8"
+    },
+    {
+      "id": "horizon2-baseline-minimum-float",
+      "pass_": true,
+      "actual": 8.0,
+      "expected": 8.0
+    },
+    {
+      "id": "horizon2-baseline-action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "horizon2-+-probability-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "horizon2-+-probability-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "horizon2-+-posterior-exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "horizon2-+-posterior-float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "horizon2-+-K-exact",
+      "pass_": true,
+      "actual": "8",
+      "expected": "8"
+    },
+    {
+      "id": "horizon2-+-K-float",
+      "pass_": true,
+      "actual": 8.0,
+      "expected": 8.0
+    },
+    {
+      "id": "horizon2-+-S-exact",
+      "pass_": true,
+      "actual": "6",
+      "expected": "6"
+    },
+    {
+      "id": "horizon2-+-S-float",
+      "pass_": true,
+      "actual": 6.0,
+      "expected": 6.0
+    },
+    {
+      "id": "horizon2-+-minimum-exact",
+      "pass_": true,
+      "actual": "6",
+      "expected": "6"
+    },
+    {
+      "id": "horizon2-+-minimum-float",
+      "pass_": true,
+      "actual": 6.0,
+      "expected": 6.0
+    },
+    {
+      "id": "horizon2-+-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "horizon2---probability-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "horizon2---probability-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "horizon2---posterior-exact",
+      "pass_": true,
+      "actual": "1/5",
+      "expected": "1/5"
+    },
+    {
+      "id": "horizon2---posterior-float",
+      "pass_": true,
+      "actual": 0.2,
+      "expected": 0.2
+    },
+    {
+      "id": "horizon2---K-exact",
+      "pass_": true,
+      "actual": "8",
+      "expected": "8"
+    },
+    {
+      "id": "horizon2---K-float",
+      "pass_": true,
+      "actual": 8.0,
+      "expected": 8.0
+    },
+    {
+      "id": "horizon2---S-exact",
+      "pass_": true,
+      "actual": "18",
+      "expected": "18"
+    },
+    {
+      "id": "horizon2---S-float",
+      "pass_": true,
+      "actual": 18.0,
+      "expected": 18.0
+    },
+    {
+      "id": "horizon2---minimum-exact",
+      "pass_": true,
+      "actual": "8",
+      "expected": "8"
+    },
+    {
+      "id": "horizon2---minimum-float",
+      "pass_": true,
+      "actual": 8.0,
+      "expected": 8.0
+    },
+    {
+      "id": "horizon2---action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "horizon2-expected_loss_before_pilot_cost-exact",
+      "pass_": true,
+      "actual": "7",
+      "expected": "7"
+    },
+    {
+      "id": "horizon2-expected_loss_before_pilot_cost-float",
+      "pass_": true,
+      "actual": 7.0,
+      "expected": 7.0
+    },
+    {
+      "id": "horizon2-pilot_cost-exact",
+      "pass_": true,
+      "actual": "3/5",
+      "expected": "3/5"
+    },
+    {
+      "id": "horizon2-pilot_cost-float",
+      "pass_": true,
+      "actual": 0.6,
+      "expected": 0.6
+    },
+    {
+      "id": "horizon2-expected_loss_including_pilot-exact",
+      "pass_": true,
+      "actual": "38/5",
+      "expected": "38/5"
+    },
+    {
+      "id": "horizon2-expected_loss_including_pilot-float",
+      "pass_": true,
+      "actual": 7.6,
+      "expected": 7.6
+    },
+    {
+      "id": "horizon2-gross_signal_value-exact",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "horizon2-gross_signal_value-float",
+      "pass_": true,
+      "actual": 1.0,
+      "expected": 1.0
+    },
+    {
+      "id": "horizon2-net_gain-exact",
+      "pass_": true,
+      "actual": "2/5",
+      "expected": "2/5"
+    },
+    {
+      "id": "horizon2-net_gain-float",
+      "pass_": true,
+      "actual": 0.4,
+      "expected": 0.4
+    },
+    {
+      "id": "horizon2-expected_migration_charge-exact",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "horizon2-expected_migration_charge-float",
+      "pass_": true,
+      "actual": 1.0,
+      "expected": 1.0
+    },
+    {
+      "id": "horizon2-switch_threshold_F-exact",
+      "pass_": true,
+      "actual": "7/10",
+      "expected": "7/10"
+    },
+    {
+      "id": "horizon2-switch_threshold_F-float",
+      "pass_": true,
+      "actual": 0.7,
+      "expected": 0.7
+    },
+    {
+      "id": "horizon2-expected_perfect_information_loss-exact",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "horizon2-expected_perfect_information_loss-float",
+      "pass_": true,
+      "actual": 5.0,
+      "expected": 5.0
+    },
+    {
+      "id": "horizon2-perfect_information_ceiling-exact",
+      "pass_": true,
+      "actual": "3",
+      "expected": "3"
+    },
+    {
+      "id": "horizon2-perfect_information_ceiling-float",
+      "pass_": true,
+      "actual": 3.0,
+      "expected": 3.0
+    },
+    {
+      "id": "horizon2-total-formula",
+      "pass_": true,
+      "actual": "38/5",
+      "expected": "38/5"
+    },
+    {
+      "id": "horizon2-gain-formula",
+      "pass_": true,
+      "actual": "2/5",
+      "expected": "2/5"
+    },
+    {
+      "id": "horizon2-perfect-ceiling-formula",
+      "pass_": true,
+      "actual": "3",
+      "expected": "3"
+    },
+    {
+      "id": "horizon3-baseline-K-exact",
+      "pass_": true,
+      "actual": "12",
+      "expected": "12"
+    },
+    {
+      "id": "horizon3-baseline-K-float",
+      "pass_": true,
+      "actual": 12.0,
+      "expected": 12.0
+    },
+    {
+      "id": "horizon3-baseline-S-exact",
+      "pass_": true,
+      "actual": "17",
+      "expected": "17"
+    },
+    {
+      "id": "horizon3-baseline-S-float",
+      "pass_": true,
+      "actual": 17.0,
+      "expected": 17.0
+    },
+    {
+      "id": "horizon3-baseline-minimum-exact",
+      "pass_": true,
+      "actual": "12",
+      "expected": "12"
+    },
+    {
+      "id": "horizon3-baseline-minimum-float",
+      "pass_": true,
+      "actual": 12.0,
+      "expected": 12.0
+    },
+    {
+      "id": "horizon3-baseline-action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "horizon3-+-probability-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "horizon3-+-probability-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "horizon3-+-posterior-exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "horizon3-+-posterior-float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "horizon3-+-K-exact",
+      "pass_": true,
+      "actual": "12",
+      "expected": "12"
+    },
+    {
+      "id": "horizon3-+-K-float",
+      "pass_": true,
+      "actual": 12.0,
+      "expected": 12.0
+    },
+    {
+      "id": "horizon3-+-S-exact",
+      "pass_": true,
+      "actual": "8",
+      "expected": "8"
+    },
+    {
+      "id": "horizon3-+-S-float",
+      "pass_": true,
+      "actual": 8.0,
+      "expected": 8.0
+    },
+    {
+      "id": "horizon3-+-minimum-exact",
+      "pass_": true,
+      "actual": "8",
+      "expected": "8"
+    },
+    {
+      "id": "horizon3-+-minimum-float",
+      "pass_": true,
+      "actual": 8.0,
+      "expected": 8.0
+    },
+    {
+      "id": "horizon3-+-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "horizon3---probability-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "horizon3---probability-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "horizon3---posterior-exact",
+      "pass_": true,
+      "actual": "1/5",
+      "expected": "1/5"
+    },
+    {
+      "id": "horizon3---posterior-float",
+      "pass_": true,
+      "actual": 0.2,
+      "expected": 0.2
+    },
+    {
+      "id": "horizon3---K-exact",
+      "pass_": true,
+      "actual": "12",
+      "expected": "12"
+    },
+    {
+      "id": "horizon3---K-float",
+      "pass_": true,
+      "actual": 12.0,
+      "expected": 12.0
+    },
+    {
+      "id": "horizon3---S-exact",
+      "pass_": true,
+      "actual": "26",
+      "expected": "26"
+    },
+    {
+      "id": "horizon3---S-float",
+      "pass_": true,
+      "actual": 26.0,
+      "expected": 26.0
+    },
+    {
+      "id": "horizon3---minimum-exact",
+      "pass_": true,
+      "actual": "12",
+      "expected": "12"
+    },
+    {
+      "id": "horizon3---minimum-float",
+      "pass_": true,
+      "actual": 12.0,
+      "expected": 12.0
+    },
+    {
+      "id": "horizon3---action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "horizon3-expected_loss_before_pilot_cost-exact",
+      "pass_": true,
+      "actual": "10",
+      "expected": "10"
+    },
+    {
+      "id": "horizon3-expected_loss_before_pilot_cost-float",
+      "pass_": true,
+      "actual": 10.0,
+      "expected": 10.0
+    },
+    {
+      "id": "horizon3-pilot_cost-exact",
+      "pass_": true,
+      "actual": "3/5",
+      "expected": "3/5"
+    },
+    {
+      "id": "horizon3-pilot_cost-float",
+      "pass_": true,
+      "actual": 0.6,
+      "expected": 0.6
+    },
+    {
+      "id": "horizon3-expected_loss_including_pilot-exact",
+      "pass_": true,
+      "actual": "53/5",
+      "expected": "53/5"
+    },
+    {
+      "id": "horizon3-expected_loss_including_pilot-float",
+      "pass_": true,
+      "actual": 10.6,
+      "expected": 10.6
+    },
+    {
+      "id": "horizon3-gross_signal_value-exact",
+      "pass_": true,
+      "actual": "2",
+      "expected": "2"
+    },
+    {
+      "id": "horizon3-gross_signal_value-float",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "horizon3-net_gain-exact",
+      "pass_": true,
+      "actual": "7/5",
+      "expected": "7/5"
+    },
+    {
+      "id": "horizon3-net_gain-float",
+      "pass_": true,
+      "actual": 1.4,
+      "expected": 1.4
+    },
+    {
+      "id": "horizon3-expected_migration_charge-exact",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "horizon3-expected_migration_charge-float",
+      "pass_": true,
+      "actual": 1.0,
+      "expected": 1.0
+    },
+    {
+      "id": "horizon3-switch_threshold_F-exact",
+      "pass_": true,
+      "actual": "2/3",
+      "expected": "2/3"
+    },
+    {
+      "id": "horizon3-switch_threshold_F-float",
+      "pass_": true,
+      "actual": 0.6666666666666666,
+      "expected": 0.6666666666666666
+    },
+    {
+      "id": "horizon3-expected_perfect_information_loss-exact",
+      "pass_": true,
+      "actual": "7",
+      "expected": "7"
+    },
+    {
+      "id": "horizon3-expected_perfect_information_loss-float",
+      "pass_": true,
+      "actual": 7.0,
+      "expected": 7.0
+    },
+    {
+      "id": "horizon3-perfect_information_ceiling-exact",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "horizon3-perfect_information_ceiling-float",
+      "pass_": true,
+      "actual": 5.0,
+      "expected": 5.0
+    },
+    {
+      "id": "horizon3-total-formula",
+      "pass_": true,
+      "actual": "53/5",
+      "expected": "53/5"
+    },
+    {
+      "id": "horizon3-gain-formula",
+      "pass_": true,
+      "actual": "7/5",
+      "expected": "7/5"
+    },
+    {
+      "id": "horizon3-perfect-ceiling-formula",
+      "pass_": true,
+      "actual": "5",
+      "expected": "5"
+    },
+    {
+      "id": "horizon5-baseline-K-exact",
+      "pass_": true,
+      "actual": "20",
+      "expected": "20"
+    },
+    {
+      "id": "horizon5-baseline-K-float",
+      "pass_": true,
+      "actual": 20.0,
+      "expected": 20.0
+    },
+    {
+      "id": "horizon5-baseline-S-exact",
+      "pass_": true,
+      "actual": "27",
+      "expected": "27"
+    },
+    {
+      "id": "horizon5-baseline-S-float",
+      "pass_": true,
+      "actual": 27.0,
+      "expected": 27.0
+    },
+    {
+      "id": "horizon5-baseline-minimum-exact",
+      "pass_": true,
+      "actual": "20",
+      "expected": "20"
+    },
+    {
+      "id": "horizon5-baseline-minimum-float",
+      "pass_": true,
+      "actual": 20.0,
+      "expected": 20.0
+    },
+    {
+      "id": "horizon5-baseline-action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "horizon5-+-probability-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "horizon5-+-probability-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "horizon5-+-posterior-exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "horizon5-+-posterior-float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "horizon5-+-K-exact",
+      "pass_": true,
+      "actual": "20",
+      "expected": "20"
+    },
+    {
+      "id": "horizon5-+-K-float",
+      "pass_": true,
+      "actual": 20.0,
+      "expected": 20.0
+    },
+    {
+      "id": "horizon5-+-S-exact",
+      "pass_": true,
+      "actual": "12",
+      "expected": "12"
+    },
+    {
+      "id": "horizon5-+-S-float",
+      "pass_": true,
+      "actual": 12.0,
+      "expected": 12.0
+    },
+    {
+      "id": "horizon5-+-minimum-exact",
+      "pass_": true,
+      "actual": "12",
+      "expected": "12"
+    },
+    {
+      "id": "horizon5-+-minimum-float",
+      "pass_": true,
+      "actual": 12.0,
+      "expected": 12.0
+    },
+    {
+      "id": "horizon5-+-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "horizon5---probability-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "horizon5---probability-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "horizon5---posterior-exact",
+      "pass_": true,
+      "actual": "1/5",
+      "expected": "1/5"
+    },
+    {
+      "id": "horizon5---posterior-float",
+      "pass_": true,
+      "actual": 0.2,
+      "expected": 0.2
+    },
+    {
+      "id": "horizon5---K-exact",
+      "pass_": true,
+      "actual": "20",
+      "expected": "20"
+    },
+    {
+      "id": "horizon5---K-float",
+      "pass_": true,
+      "actual": 20.0,
+      "expected": 20.0
+    },
+    {
+      "id": "horizon5---S-exact",
+      "pass_": true,
+      "actual": "42",
+      "expected": "42"
+    },
+    {
+      "id": "horizon5---S-float",
+      "pass_": true,
+      "actual": 42.0,
+      "expected": 42.0
+    },
+    {
+      "id": "horizon5---minimum-exact",
+      "pass_": true,
+      "actual": "20",
+      "expected": "20"
+    },
+    {
+      "id": "horizon5---minimum-float",
+      "pass_": true,
+      "actual": 20.0,
+      "expected": 20.0
+    },
+    {
+      "id": "horizon5---action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "horizon5-expected_loss_before_pilot_cost-exact",
+      "pass_": true,
+      "actual": "16",
+      "expected": "16"
+    },
+    {
+      "id": "horizon5-expected_loss_before_pilot_cost-float",
+      "pass_": true,
+      "actual": 16.0,
+      "expected": 16.0
+    },
+    {
+      "id": "horizon5-pilot_cost-exact",
+      "pass_": true,
+      "actual": "3/5",
+      "expected": "3/5"
+    },
+    {
+      "id": "horizon5-pilot_cost-float",
+      "pass_": true,
+      "actual": 0.6,
+      "expected": 0.6
+    },
+    {
+      "id": "horizon5-expected_loss_including_pilot-exact",
+      "pass_": true,
+      "actual": "83/5",
+      "expected": "83/5"
+    },
+    {
+      "id": "horizon5-expected_loss_including_pilot-float",
+      "pass_": true,
+      "actual": 16.6,
+      "expected": 16.6
+    },
+    {
+      "id": "horizon5-gross_signal_value-exact",
+      "pass_": true,
+      "actual": "4",
+      "expected": "4"
+    },
+    {
+      "id": "horizon5-gross_signal_value-float",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "horizon5-net_gain-exact",
+      "pass_": true,
+      "actual": "17/5",
+      "expected": "17/5"
+    },
+    {
+      "id": "horizon5-net_gain-float",
+      "pass_": true,
+      "actual": 3.4,
+      "expected": 3.4
+    },
+    {
+      "id": "horizon5-expected_migration_charge-exact",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "horizon5-expected_migration_charge-float",
+      "pass_": true,
+      "actual": 1.0,
+      "expected": 1.0
+    },
+    {
+      "id": "horizon5-switch_threshold_F-exact",
+      "pass_": true,
+      "actual": "16/25",
+      "expected": "16/25"
+    },
+    {
+      "id": "horizon5-switch_threshold_F-float",
+      "pass_": true,
+      "actual": 0.64,
+      "expected": 0.64
+    },
+    {
+      "id": "horizon5-expected_perfect_information_loss-exact",
+      "pass_": true,
+      "actual": "11",
+      "expected": "11"
+    },
+    {
+      "id": "horizon5-expected_perfect_information_loss-float",
+      "pass_": true,
+      "actual": 11.0,
+      "expected": 11.0
+    },
+    {
+      "id": "horizon5-perfect_information_ceiling-exact",
+      "pass_": true,
+      "actual": "9",
+      "expected": "9"
+    },
+    {
+      "id": "horizon5-perfect_information_ceiling-float",
+      "pass_": true,
+      "actual": 9.0,
+      "expected": 9.0
+    },
+    {
+      "id": "horizon5-total-formula",
+      "pass_": true,
+      "actual": "83/5",
+      "expected": "83/5"
+    },
+    {
+      "id": "horizon5-gain-formula",
+      "pass_": true,
+      "actual": "17/5",
+      "expected": "17/5"
+    },
+    {
+      "id": "horizon5-perfect-ceiling-formula",
+      "pass_": true,
+      "actual": "9",
+      "expected": "9"
+    },
+    {
+      "id": "horizon10-baseline-K-exact",
+      "pass_": true,
+      "actual": "40",
+      "expected": "40"
+    },
+    {
+      "id": "horizon10-baseline-K-float",
+      "pass_": true,
+      "actual": 40.0,
+      "expected": 40.0
+    },
+    {
+      "id": "horizon10-baseline-S-exact",
+      "pass_": true,
+      "actual": "52",
+      "expected": "52"
+    },
+    {
+      "id": "horizon10-baseline-S-float",
+      "pass_": true,
+      "actual": 52.0,
+      "expected": 52.0
+    },
+    {
+      "id": "horizon10-baseline-minimum-exact",
+      "pass_": true,
+      "actual": "40",
+      "expected": "40"
+    },
+    {
+      "id": "horizon10-baseline-minimum-float",
+      "pass_": true,
+      "actual": 40.0,
+      "expected": 40.0
+    },
+    {
+      "id": "horizon10-baseline-action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "horizon10-+-probability-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "horizon10-+-probability-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "horizon10-+-posterior-exact",
+      "pass_": true,
+      "actual": "4/5",
+      "expected": "4/5"
+    },
+    {
+      "id": "horizon10-+-posterior-float",
+      "pass_": true,
+      "actual": 0.8,
+      "expected": 0.8
+    },
+    {
+      "id": "horizon10-+-K-exact",
+      "pass_": true,
+      "actual": "40",
+      "expected": "40"
+    },
+    {
+      "id": "horizon10-+-K-float",
+      "pass_": true,
+      "actual": 40.0,
+      "expected": 40.0
+    },
+    {
+      "id": "horizon10-+-S-exact",
+      "pass_": true,
+      "actual": "22",
+      "expected": "22"
+    },
+    {
+      "id": "horizon10-+-S-float",
+      "pass_": true,
+      "actual": 22.0,
+      "expected": 22.0
+    },
+    {
+      "id": "horizon10-+-minimum-exact",
+      "pass_": true,
+      "actual": "22",
+      "expected": "22"
+    },
+    {
+      "id": "horizon10-+-minimum-float",
+      "pass_": true,
+      "actual": 22.0,
+      "expected": 22.0
+    },
+    {
+      "id": "horizon10-+-action",
+      "pass_": true,
+      "actual": "S",
+      "expected": "S"
+    },
+    {
+      "id": "horizon10---probability-exact",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "horizon10---probability-float",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "horizon10---posterior-exact",
+      "pass_": true,
+      "actual": "1/5",
+      "expected": "1/5"
+    },
+    {
+      "id": "horizon10---posterior-float",
+      "pass_": true,
+      "actual": 0.2,
+      "expected": 0.2
+    },
+    {
+      "id": "horizon10---K-exact",
+      "pass_": true,
+      "actual": "40",
+      "expected": "40"
+    },
+    {
+      "id": "horizon10---K-float",
+      "pass_": true,
+      "actual": 40.0,
+      "expected": 40.0
+    },
+    {
+      "id": "horizon10---S-exact",
+      "pass_": true,
+      "actual": "82",
+      "expected": "82"
+    },
+    {
+      "id": "horizon10---S-float",
+      "pass_": true,
+      "actual": 82.0,
+      "expected": 82.0
+    },
+    {
+      "id": "horizon10---minimum-exact",
+      "pass_": true,
+      "actual": "40",
+      "expected": "40"
+    },
+    {
+      "id": "horizon10---minimum-float",
+      "pass_": true,
+      "actual": 40.0,
+      "expected": 40.0
+    },
+    {
+      "id": "horizon10---action",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "horizon10-expected_loss_before_pilot_cost-exact",
+      "pass_": true,
+      "actual": "31",
+      "expected": "31"
+    },
+    {
+      "id": "horizon10-expected_loss_before_pilot_cost-float",
+      "pass_": true,
+      "actual": 31.0,
+      "expected": 31.0
+    },
+    {
+      "id": "horizon10-pilot_cost-exact",
+      "pass_": true,
+      "actual": "3/5",
+      "expected": "3/5"
+    },
+    {
+      "id": "horizon10-pilot_cost-float",
+      "pass_": true,
+      "actual": 0.6,
+      "expected": 0.6
+    },
+    {
+      "id": "horizon10-expected_loss_including_pilot-exact",
+      "pass_": true,
+      "actual": "158/5",
+      "expected": "158/5"
+    },
+    {
+      "id": "horizon10-expected_loss_including_pilot-float",
+      "pass_": true,
+      "actual": 31.6,
+      "expected": 31.6
+    },
+    {
+      "id": "horizon10-gross_signal_value-exact",
+      "pass_": true,
+      "actual": "9",
+      "expected": "9"
+    },
+    {
+      "id": "horizon10-gross_signal_value-float",
+      "pass_": true,
+      "actual": 9.0,
+      "expected": 9.0
+    },
+    {
+      "id": "horizon10-net_gain-exact",
+      "pass_": true,
+      "actual": "42/5",
+      "expected": "42/5"
+    },
+    {
+      "id": "horizon10-net_gain-float",
+      "pass_": true,
+      "actual": 8.4,
+      "expected": 8.4
+    },
+    {
+      "id": "horizon10-expected_migration_charge-exact",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "horizon10-expected_migration_charge-float",
+      "pass_": true,
+      "actual": 1.0,
+      "expected": 1.0
+    },
+    {
+      "id": "horizon10-switch_threshold_F-exact",
+      "pass_": true,
+      "actual": "31/50",
+      "expected": "31/50"
+    },
+    {
+      "id": "horizon10-switch_threshold_F-float",
+      "pass_": true,
+      "actual": 0.62,
+      "expected": 0.62
+    },
+    {
+      "id": "horizon10-expected_perfect_information_loss-exact",
+      "pass_": true,
+      "actual": "21",
+      "expected": "21"
+    },
+    {
+      "id": "horizon10-expected_perfect_information_loss-float",
+      "pass_": true,
+      "actual": 21.0,
+      "expected": 21.0
+    },
+    {
+      "id": "horizon10-perfect_information_ceiling-exact",
+      "pass_": true,
+      "actual": "19",
+      "expected": "19"
+    },
+    {
+      "id": "horizon10-perfect_information_ceiling-float",
+      "pass_": true,
+      "actual": 19.0,
+      "expected": 19.0
+    },
+    {
+      "id": "horizon10-total-formula",
+      "pass_": true,
+      "actual": "158/5",
+      "expected": "158/5"
+    },
+    {
+      "id": "horizon10-gain-formula",
+      "pass_": true,
+      "actual": "42/5",
+      "expected": "42/5"
+    },
+    {
+      "id": "horizon10-perfect-ceiling-formula",
+      "pass_": true,
+      "actual": "19",
+      "expected": "19"
+    },
+    {
+      "id": "N1-positive-tie-keeps-K",
+      "pass_": true,
+      "actual": "K",
+      "expected": "K"
+    },
+    {
+      "id": "N1-no-migration-paid-exact",
+      "pass_": true,
+      "actual": "0",
+      "expected": "0"
+    },
+    {
+      "id": "N1-no-migration-paid-float",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "id": "first-positive-integer",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "real-horizon-pending",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "source-anonymous-hash-Experiments/Brutal/README.md",
+      "pass_": true,
+      "actual": "4cb7e4e068eb000e97b5cd4bb323fbfd8a929749ad14ec3b96127f2d303d3fe7",
+      "expected": "4cb7e4e068eb000e97b5cd4bb323fbfd8a929749ad14ec3b96127f2d303d3fe7"
+    },
+    {
+      "id": "source-local-Git-hash-Experiments/Brutal/README.md",
+      "pass_": true,
+      "actual": "4cb7e4e068eb000e97b5cd4bb323fbfd8a929749ad14ec3b96127f2d303d3fe7",
+      "expected": "4cb7e4e068eb000e97b5cd4bb323fbfd8a929749ad14ec3b96127f2d303d3fe7"
+    },
+    {
+      "id": "source-anonymous-hash-Experiments/Brutal/evidence/m2-20261019-235218.md",
+      "pass_": true,
+      "actual": "e830a6b0bfaf06e6b5b0af4a0ff9f668109e5006bc42b5db9614c065ce91db56",
+      "expected": "e830a6b0bfaf06e6b5b0af4a0ff9f668109e5006bc42b5db9614c065ce91db56"
+    },
+    {
+      "id": "source-local-Git-hash-Experiments/Brutal/evidence/m2-20261019-235218.md",
+      "pass_": true,
+      "actual": "e830a6b0bfaf06e6b5b0af4a0ff9f668109e5006bc42b5db9614c065ce91db56",
+      "expected": "e830a6b0bfaf06e6b5b0af4a0ff9f668109e5006bc42b5db9614c065ce91db56"
+    },
+    {
+      "id": "source-anonymous-hash-Experiments/Brutal/evidence/m3-20261020-000727.md",
+      "pass_": true,
+      "actual": "7da3fd920f42caeba1cbb83a18980cd37670b4a20787253a16803814c7a1b7d6",
+      "expected": "7da3fd920f42caeba1cbb83a18980cd37670b4a20787253a16803814c7a1b7d6"
+    },
+    {
+      "id": "source-local-Git-hash-Experiments/Brutal/evidence/m3-20261020-000727.md",
+      "pass_": true,
+      "actual": "7da3fd920f42caeba1cbb83a18980cd37670b4a20787253a16803814c7a1b7d6",
+      "expected": "7da3fd920f42caeba1cbb83a18980cd37670b4a20787253a16803814c7a1b7d6"
+    },
+    {
+      "id": "source-anonymous-hash-docs/methodology/agentic-engineering.md",
+      "pass_": true,
+      "actual": "ba208bb384dd9f9030d7ca3dbace649c15466efa9de5723287cb1befb62a8a60",
+      "expected": "ba208bb384dd9f9030d7ca3dbace649c15466efa9de5723287cb1befb62a8a60"
+    },
+    {
+      "id": "source-local-Git-hash-docs/methodology/agentic-engineering.md",
+      "pass_": true,
+      "actual": "ba208bb384dd9f9030d7ca3dbace649c15466efa9de5723287cb1befb62a8a60",
+      "expected": "ba208bb384dd9f9030d7ca3dbace649c15466efa9de5723287cb1befb62a8a60"
+    },
+    {
+      "id": "M2-dirty-revision",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "M3-dirty-revision",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "M3-controls-protocol",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "M3-card-wide-measurement",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "README-inconclusive",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "README-binary-boundary",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "README-timing-change",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "README-controls-noisy",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "guide-scoped-work",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "guide-reliability-opinion",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "observation-historical-not-calibrated",
+      "pass_": true,
+      "actual": "observed-preserved",
+      "expected": "observed-preserved"
+    },
+    {
+      "id": "observation-trial-not-summary",
+      "pass_": true,
+      "actual": "observed-preserved",
+      "expected": "observed-preserved"
+    },
+    {
+      "id": "observation-loss-points-not-host-units",
+      "pass_": true,
+      "actual": "observed-preserved",
+      "expected": "observed-preserved"
+    },
+    {
+      "id": "observation-guide-is-methodology",
+      "pass_": true,
+      "actual": "observed-preserved",
+      "expected": "observed-preserved"
+    },
+    {
+      "id": "new_probe",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "new_renderer",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "new_belief_controller",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "production_switch",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "human_review",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "MIT-PDF-sha256",
+      "pass_": true,
+      "actual": "36766d722d4a8681b54ccd5daa65b242a4c8e44349920d02fada927e8694c505",
+      "expected": "36766d722d4a8681b54ccd5daa65b242a4c8e44349920d02fada927e8694c505"
+    },
+    {
+      "id": "MIT-PDF-bytes",
+      "pass_": true,
+      "actual": 409580,
+      "expected": 409580
+    },
+    {
+      "id": "no-calibrated-likelihoods",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "no-host-native-run",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    }
+  ],
+  "input_bindings": [
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/production-plan.md",
+      "sha256": "0189989869f21b694512c954b55c953ac20e66118130ef180f6ede16a9f96643"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/primary-readback.json",
+      "sha256": "8080e4abfd9a35319511c08cc82feaf0bce9f68c8eec01feb515fc37faa101cc"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/primary-reading.json",
+      "sha256": "a886dce2538b1840cbd8072c0ec70ef3f58f02e1f95c0c1397f1cc0af8725ab9"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/pilot-decision.json",
+      "sha256": "1daf2c0eaefebe981871d8f30bd96e6f9db4dc7ae8233cd856e440aaca73b636"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/belief-updates.json",
+      "sha256": "09d1a4f29b26e879a71fcdb2872ed72d689dc5375915ee28852d2914c8aac016"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/decision-horizons.json",
+      "sha256": "0bbdc7990bedd742e47fc156308de83a273957b3d986cd7453342a05b4c7fb61"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/source-observations.json",
+      "sha256": "1059ca60f45178942a810a54500202331c8200d7246a0e5be06b9b506124cbae"
+    }
+  ],
+  "immutable_source_provenance": {
+    "repository": "GuitarAlchemist/ga",
+    "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+    "anonymous_fresh_retrieval": true,
+    "files": [
+      {
+        "path": "Experiments/Brutal/README.md",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/README.md",
+        "sha256": "4cb7e4e068eb000e97b5cd4bb323fbfd8a929749ad14ec3b96127f2d303d3fe7",
+        "expected_sha256": "4cb7e4e068eb000e97b5cd4bb323fbfd8a929749ad14ec3b96127f2d303d3fe7",
+        "temporary_path": "C:\\tmp\\pilot-value-independent-audit-20261022\\brutal-readme.md"
+      },
+      {
+        "path": "Experiments/Brutal/evidence/m2-20261019-235218.md",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/evidence/m2-20261019-235218.md",
+        "sha256": "e830a6b0bfaf06e6b5b0af4a0ff9f668109e5006bc42b5db9614c065ce91db56",
+        "expected_sha256": "e830a6b0bfaf06e6b5b0af4a0ff9f668109e5006bc42b5db9614c065ce91db56",
+        "temporary_path": "C:\\tmp\\pilot-value-independent-audit-20261022\\m2-20261019-235218.md"
+      },
+      {
+        "path": "Experiments/Brutal/evidence/m3-20261020-000727.md",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/evidence/m3-20261020-000727.md",
+        "sha256": "7da3fd920f42caeba1cbb83a18980cd37670b4a20787253a16803814c7a1b7d6",
+        "expected_sha256": "7da3fd920f42caeba1cbb83a18980cd37670b4a20787253a16803814c7a1b7d6",
+        "temporary_path": "C:\\tmp\\pilot-value-independent-audit-20261022\\m3-20261020-000727.md"
+      },
+      {
+        "path": "docs/methodology/agentic-engineering.md",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/docs/methodology/agentic-engineering.md",
+        "sha256": "ba208bb384dd9f9030d7ca3dbace649c15466efa9de5723287cb1befb62a8a60",
+        "expected_sha256": "ba208bb384dd9f9030d7ca3dbace649c15466efa9de5723287cb1befb62a8a60",
+        "temporary_path": "C:\\tmp\\pilot-value-independent-audit-20261022\\agentic-engineering.md"
+      }
+    ],
+    "immutable_local_Git_comparisons": [
+      {
+        "path": "Experiments/Brutal/README.md",
+        "immutable_git_sha256": "4cb7e4e068eb000e97b5cd4bb323fbfd8a929749ad14ec3b96127f2d303d3fe7",
+        "anonymous_bytes_equal": true
+      },
+      {
+        "path": "Experiments/Brutal/evidence/m2-20261019-235218.md",
+        "immutable_git_sha256": "e830a6b0bfaf06e6b5b0af4a0ff9f668109e5006bc42b5db9614c065ce91db56",
+        "anonymous_bytes_equal": true
+      },
+      {
+        "path": "Experiments/Brutal/evidence/m3-20261020-000727.md",
+        "immutable_git_sha256": "7da3fd920f42caeba1cbb83a18980cd37670b4a20787253a16803814c7a1b7d6",
+        "anonymous_bytes_equal": true
+      },
+      {
+        "path": "docs/methodology/agentic-engineering.md",
+        "immutable_git_sha256": "ba208bb384dd9f9030d7ca3dbace649c15466efa9de5723287cb1befb62a8a60",
+        "anonymous_bytes_equal": true
+      }
+    ],
+    "read_scope": "Entire original M2 and follow-up M3 reports; bounded README milestones/M2/M3 conclusions and protocol/binary limits; entire agentic-engineering guide. No benchmark rerun."
+  },
+  "source_line_evidence": [
+    {
+      "id": "M2-dirty-revision",
+      "path": "Experiments/Brutal/evidence/m2-20261019-235218.md",
+      "line": 3,
+      "snippet": "- Revision: 29dd107c on claude/brutal-257 (uncommitted changes: True)",
+      "meaning": "Historical run declared dirty checkout; pinned current docs are not an exact historical executable attestation."
+    },
+    {
+      "id": "M3-dirty-revision",
+      "path": "Experiments/Brutal/evidence/m3-20261020-000727.md",
+      "line": 3,
+      "snippet": "- Revision: 96816dd7 on claude/brutal-257 (uncommitted changes: True)",
+      "meaning": "Follow-up report has its own dirty revision and controls."
+    },
+    {
+      "id": "M3-controls-protocol",
+      "path": "Experiments/Brutal/evidence/m3-20261020-000727.md",
+      "line": 8,
+      "snippet": "- Plan: vsync for 0 s (0 = skipped), then control, uncapped, control, uncapped, control, uncapped for 15 s each, 6 s apart; the view holds when its minimum is >= 58 fps",
+      "meaning": "Alternated historical controls differ from the original M2 observation."
+    },
+    {
+      "id": "M3-card-wide-measurement",
+      "path": "Experiments/Brutal/evidence/m3-20261020-000727.md",
+      "line": 16,
+      "snippet": "Frame times are present to present. GPU columns are the whole card, the view included. \"View before\" is its median over the pause before the run.",
+      "meaning": "GPU columns include the existing view and are not isolated renderer measurements."
+    },
+    {
+      "id": "README-inconclusive",
+      "path": "Experiments/Brutal/README.md",
+      "line": 158,
+      "snippet": "### M3 result (2026-10-20): inconclusive",
+      "meaning": "README retains inconclusive interpretation, not a calibrated latent likelihood."
+    },
+    {
+      "id": "README-binary-boundary",
+      "path": "Experiments/Brutal/README.md",
+      "line": 142,
+      "snippet": "  uncapped run also predates that logging, so its binary differs from the committed one by those lines.",
+      "meaning": "Original uncapped binary differs in logging; no exact historical-binary reconstruction claimed."
+    },
+    {
+      "id": "README-timing-change",
+      "path": "Experiments/Brutal/README.md",
+      "line": 149,
+      "snippet": "times from one present to the next; M2 measured from the start of a frame's work to its present. `run-m3.ps1` gates on",
+      "meaning": "Metric definitions changed between M2 and M3."
+    },
+    {
+      "id": "README-controls-noisy",
+      "path": "Experiments/Brutal/README.md",
+      "line": 197,
+      "snippet": "  - The collapse is neither confirmed nor ruled out. M2's single observation stands, and the controls are too noisy to",
+      "meaning": "Historical controls do not identify this invented F/U model."
+    },
+    {
+      "id": "guide-scoped-work",
+      "path": "docs/methodology/agentic-engineering.md",
+      "line": 26,
+      "snippet": "- **Scope tasks tightly.** A well-scoped task is one an AFK agent can finish with no further context.",
+      "meaning": "Methodology recommendation read as a project choice, not model performance calibration."
+    },
+    {
+      "id": "guide-reliability-opinion",
+      "path": "docs/methodology/agentic-engineering.md",
+      "line": 84,
+      "snippet": "The corollary of \"optimise the harness, not the model\": **reliability comes from the harness, not the",
+      "meaning": "Historical/opinion methodology wording does not establish current exchangeability or likelihoods."
+    }
+  ],
+  "independent_math": {
+    "arithmetic": "fractions.Fraction; every exact rational string and corresponding finite float checked separately",
+    "sequence_rows": 15,
+    "sequences": "All length0..3 strings over+/-; joint probability derived as prior-weighted products conditioned on F/U, then normalized. Fresh trials are conditionally, not unconditionally, independent.",
+    "ledger": "Underlying trial IDs and stipulated fresh condition govern authored acceptance; naive wrapper counting is a counterexample.",
+    "horizons": [
+      1,
+      2,
+      3,
+      5,
+      10
+    ],
+    "tie_policy": "K on exact equality; N1 post-plus tie incurs no migration charge.",
+    "two_signal_expected_loss": "71/25",
+    "marginal_second_value": "4/25",
+    "post_plus_second_gross": "8/25",
+    "post_minus_second_gross": "0"
+  },
+  "primary_reference_readback": [
+    {
+      "url": "https://ocw.mit.edu/courses/15-053-optimization-methods-in-management-science-spring-2013/b68f3b255275ffa42099958e373248b1_MIT15_053S13_lec19.pdf",
+      "sha256": "36766d722d4a8681b54ccd5daa65b242a4c8e44349920d02fada927e8694c505",
+      "actual_read": "MIT15.053lecture19 actual primary PDF body pages7–10 read using web; supplied local page10 rendered image independently viewed. Gross information may be zero and imperfect value is bounded by perfect value. Loss-minimization sign convention applied independently; unrelated gambling/medical examples not adopted.",
+      "local_image": "C:/tmp/streeling-pilot-value-mit-page10-20261022.png"
+    },
+    {
+      "url": "https://www.itl.nist.gov/div898/handbook/apr/section2/apr1a.htm",
+      "actual_read": "NIST handbook actual primary body read: prior plus likelihood normalized by total probability yields posterior; no MTBF/reliability population model imported."
+    }
+  ],
+  "checked_boundaries": [
+    "Prior K4 versus S5; passive signal posteriors4/5 and1/5 yield terminal expected loss3, grossEVSI1 andEVPI2; cost3/5 gives net2/5. ForcedK action set has gross0.",
+    "Each new test costs3/5. Two fresh signals produce71/25 terminal loss; marginal second gross4/25. Given first+/- the stated one-new-test alternatives have gross8/25 or0 and negative net after new cost. This is not an unrestricted optimal-stopping theorem.",
+    "Duplicate observation likelihood ratio is1 given the original observation; stable-state conditional-independent fresh trials allow multiplication by4 or1/4. New wrapper/timestamp/hash does not itself justify independence.",
+    "With horizon migration2 paid only on chosenS and cost3/5, every branch is reoptimized. Post-plus min(4N,2N+2), post-minus min(4N,8N+2); expected total3N+8/5, baseline4N, first positive integer gainN2.",
+    "AtN1 positive branch ties and keepsK with expected migration charge0. Strict switch boundary is p>3/5+1/(5N); same-cost perfect-information ceiling2N-1 differs from no-migration one-shotEVPI2.",
+    "All cardinal values are authored teaching points, not milliseconds, dollars, measured pilot accuracy, agent quality, financial advice or an adopted production policy.",
+    "Reusing one pilot requires a stable latent condition and relevant matching decisions; changed scene/workload/host/driver/protocol can invalidate reuse."
+  ],
+  "unexecuted": [
+    "GPU, renderer, host, browser or new probe",
+    "paid API calls or native execution",
+    "fresh benchmark, exact historical-binary reproduction or likelihood/prior calibration",
+    "production switch, belief controller or runtime policy delivery",
+    "human review or learner trial"
+  ],
+  "human_review": null,
+  "runtime_validation": null,
+  "host_calibration": null,
+  "measured_likelihoods": null,
+  "temporary_calculation_script_sha256": "9f891ba01c13fa8d9ab48dd45e2b719f1c66fb17bf26b4c6f95d7288d72f1f2f"
+}

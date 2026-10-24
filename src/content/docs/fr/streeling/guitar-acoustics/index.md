@@ -11,4 +11,14 @@ sidebar:
 
 ## Modules
 
-Aucun module produit pour l'instant.
+- [GAS-001 · Ce qu'une corde à vide peut apprendre au moteur guitare WASM](gas-001-open-string-audio-evidence/)
+- [GAS-002 · Tester un réglage de brillance dans le moteur de guitare GA](gas-002-brightness-control-and-evaluation-gate/)
+- [GAS-003 · Calibrer un test de décroissance du mi à vide pour le moteur de guitare GA](gas-003-decay-calibration-open-e/)
+- [GAS-004 · Exécuter et rejeter un réglage de décroissance du mi à vide](gas-004-run-open-e-decay-candidate/)
+- [GAS-005 · Distinguer le pic d’un partiel d’une période](gas-005-separate-a-partial-peak-from-a-period/)
+- [GAS-006 · Relier la position de pincement aux modes de la corde](gas-006-relate-pluck-position-to-string-modes/)
+- [GAS-007 · Distinguer les pôles de caisse des partiels de corde](gas-007-distinguish-body-poles-from-string-partials/)
+- [GAS-008 · Distinguer les battements d’un changement d’amortissement](gas-008-separate-beating-from-a-change-in-damping/)
+- [GAS-009 · Estimer l’erreur d’accordage due à une longueur de retard entière](gas-009-estimate-tuning-error-from-integer-delay-length/)
+- [GAS-010 · Distinguer les partiels d’une corde raide des harmoniques](gas-010-distinguish-stiff-string-partials-from-harmonics/)
+- [GAS-011 · Suivre la polarité des réflexions aux extrémités d’une corde](gas-011-track-reflection-polarity-at-string-boundaries/)

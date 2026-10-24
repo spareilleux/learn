@@ -1,0 +1,380 @@
+{
+  "scope": "Authored alternatives to the early-D request, not an agent-authorized change, native solver output or demonstrated player improvement.",
+  "reference_early_request": [
+    {
+      "id": "C",
+      "pitch": 60,
+      "time_unit": "beats",
+      "onset_beats": 0.0,
+      "offset_beats": 4.0,
+      "onset_exact": "0",
+      "offset_exact": "4"
+    },
+    {
+      "id": "E",
+      "pitch": 64,
+      "time_unit": "beats",
+      "onset_beats": 0.0,
+      "offset_beats": 2.0,
+      "onset_exact": "0",
+      "offset_exact": "2"
+    },
+    {
+      "id": "G",
+      "pitch": 67,
+      "time_unit": "beats",
+      "onset_beats": 1.0,
+      "offset_beats": 2.0,
+      "onset_exact": "1",
+      "offset_exact": "2"
+    },
+    {
+      "id": "D",
+      "pitch": 62,
+      "time_unit": "beats",
+      "onset_beats": 1.5,
+      "offset_beats": 3.0,
+      "onset_exact": "3/2",
+      "offset_exact": "3"
+    }
+  ],
+  "reference_max_fret": 5,
+  "reference_valid_plans": 0,
+  "options": [
+    {
+      "id": "late-attack",
+      "cap": 5,
+      "preserves_pitches": true,
+      "preserves_onsets": false,
+      "preserves_offsets": true,
+      "change": "D onset1.5->2, +0.5beat/+250ms at120quarter/min",
+      "events": [
+        {
+          "id": "C",
+          "pitch": 60,
+          "time_unit": "beats",
+          "onset_beats": 0.0,
+          "offset_beats": 4.0,
+          "onset_exact": "0",
+          "offset_exact": "4"
+        },
+        {
+          "id": "E",
+          "pitch": 64,
+          "time_unit": "beats",
+          "onset_beats": 0.0,
+          "offset_beats": 2.0,
+          "onset_exact": "0",
+          "offset_exact": "2"
+        },
+        {
+          "id": "G",
+          "pitch": 67,
+          "time_unit": "beats",
+          "onset_beats": 1.0,
+          "offset_beats": 2.0,
+          "onset_exact": "1",
+          "offset_exact": "2"
+        },
+        {
+          "id": "D",
+          "pitch": 62,
+          "time_unit": "beats",
+          "onset_beats": 2.0,
+          "offset_beats": 3.0,
+          "onset_exact": "2",
+          "offset_exact": "3"
+        }
+      ],
+      "valid_plan_count": 1,
+      "plans": [
+        {
+          "positions": {
+            "C": {
+              "string": 3,
+              "fret": 5
+            },
+            "E": {
+              "string": 2,
+              "fret": 5
+            },
+            "G": {
+              "string": 1,
+              "fret": 3
+            },
+            "D": {
+              "string": 2,
+              "fret": 3
+            }
+          },
+          "positive_fret_span": 2
+        }
+      ]
+    },
+    {
+      "id": "shorten-E",
+      "cap": 5,
+      "preserves_pitches": true,
+      "preserves_onsets": true,
+      "preserves_offsets": false,
+      "change": "E offset2->1.5, -0.5beat/-250ms at120quarter/min",
+      "events": [
+        {
+          "id": "C",
+          "pitch": 60,
+          "time_unit": "beats",
+          "onset_beats": 0.0,
+          "offset_beats": 4.0,
+          "onset_exact": "0",
+          "offset_exact": "4"
+        },
+        {
+          "id": "E",
+          "pitch": 64,
+          "time_unit": "beats",
+          "onset_beats": 0.0,
+          "offset_beats": 1.5,
+          "onset_exact": "0",
+          "offset_exact": "3/2"
+        },
+        {
+          "id": "G",
+          "pitch": 67,
+          "time_unit": "beats",
+          "onset_beats": 1.0,
+          "offset_beats": 2.0,
+          "onset_exact": "1",
+          "offset_exact": "2"
+        },
+        {
+          "id": "D",
+          "pitch": 62,
+          "time_unit": "beats",
+          "onset_beats": 1.5,
+          "offset_beats": 3.0,
+          "onset_exact": "3/2",
+          "offset_exact": "3"
+        }
+      ],
+      "valid_plan_count": 1,
+      "plans": [
+        {
+          "positions": {
+            "C": {
+              "string": 3,
+              "fret": 5
+            },
+            "E": {
+              "string": 2,
+              "fret": 5
+            },
+            "G": {
+              "string": 1,
+              "fret": 3
+            },
+            "D": {
+              "string": 2,
+              "fret": 3
+            }
+          },
+          "positive_fret_span": 2
+        }
+      ]
+    },
+    {
+      "id": "extend-range",
+      "cap": 10,
+      "preserves_pitches": true,
+      "preserves_onsets": true,
+      "preserves_offsets": true,
+      "change": "Maximum allowed fret5->10; hand/timbre not evaluated",
+      "events": [
+        {
+          "id": "C",
+          "pitch": 60,
+          "time_unit": "beats",
+          "onset_beats": 0.0,
+          "offset_beats": 4.0,
+          "onset_exact": "0",
+          "offset_exact": "4"
+        },
+        {
+          "id": "E",
+          "pitch": 64,
+          "time_unit": "beats",
+          "onset_beats": 0.0,
+          "offset_beats": 2.0,
+          "onset_exact": "0",
+          "offset_exact": "2"
+        },
+        {
+          "id": "G",
+          "pitch": 67,
+          "time_unit": "beats",
+          "onset_beats": 1.0,
+          "offset_beats": 2.0,
+          "onset_exact": "1",
+          "offset_exact": "2"
+        },
+        {
+          "id": "D",
+          "pitch": 62,
+          "time_unit": "beats",
+          "onset_beats": 1.5,
+          "offset_beats": 3.0,
+          "onset_exact": "3/2",
+          "offset_exact": "3"
+        }
+      ],
+      "valid_plan_count": 3,
+      "plans": [
+        {
+          "positions": {
+            "C": {
+              "string": 4,
+              "fret": 10
+            },
+            "E": {
+              "string": 3,
+              "fret": 9
+            },
+            "G": {
+              "string": 1,
+              "fret": 3
+            },
+            "D": {
+              "string": 2,
+              "fret": 3
+            }
+          },
+          "positive_fret_span": 7
+        },
+        {
+          "positions": {
+            "C": {
+              "string": 4,
+              "fret": 10
+            },
+            "E": {
+              "string": 2,
+              "fret": 5
+            },
+            "G": {
+              "string": 1,
+              "fret": 3
+            },
+            "D": {
+              "string": 3,
+              "fret": 7
+            }
+          },
+          "positive_fret_span": 7
+        },
+        {
+          "positions": {
+            "C": {
+              "string": 4,
+              "fret": 10
+            },
+            "E": {
+              "string": 1,
+              "fret": 0
+            },
+            "G": {
+              "string": 2,
+              "fret": 8
+            },
+            "D": {
+              "string": 3,
+              "fret": 7
+            }
+          },
+          "positive_fret_span": 3
+        }
+      ]
+    },
+    {
+      "id": "omit-D",
+      "cap": 5,
+      "preserves_pitches": false,
+      "preserves_onsets": false,
+      "preserves_offsets": false,
+      "change": "Remove a requested event, not a repair preserving the request",
+      "events": [
+        {
+          "id": "C",
+          "pitch": 60,
+          "time_unit": "beats",
+          "onset_beats": 0.0,
+          "offset_beats": 4.0,
+          "onset_exact": "0",
+          "offset_exact": "4"
+        },
+        {
+          "id": "E",
+          "pitch": 64,
+          "time_unit": "beats",
+          "onset_beats": 0.0,
+          "offset_beats": 2.0,
+          "onset_exact": "0",
+          "offset_exact": "2"
+        },
+        {
+          "id": "G",
+          "pitch": 67,
+          "time_unit": "beats",
+          "onset_beats": 1.0,
+          "offset_beats": 2.0,
+          "onset_exact": "1",
+          "offset_exact": "2"
+        }
+      ],
+      "valid_plan_count": 1,
+      "plans": [
+        {
+          "positions": {
+            "C": {
+              "string": 3,
+              "fret": 5
+            },
+            "E": {
+              "string": 2,
+              "fret": 5
+            },
+            "G": {
+              "string": 1,
+              "fret": 3
+            }
+          },
+          "positive_fret_span": 2
+        }
+      ]
+    }
+  ],
+  "dropD_control": {
+    "valid_plan_count": 0,
+    "reason": "Upper-note candidates unchanged at cap5; retuning the low string adds no needed eligible string."
+  },
+  "proxy_best_expanded_plan": {
+    "positions": {
+      "C": {
+        "string": 4,
+        "fret": 10
+      },
+      "E": {
+        "string": 1,
+        "fret": 0
+      },
+      "G": {
+        "string": 2,
+        "fret": 8
+      },
+      "D": {
+        "string": 3,
+        "fret": 7
+      }
+    },
+    "positive_fret_span": 3
+  },
+  "permission_and_human_result": null
+}

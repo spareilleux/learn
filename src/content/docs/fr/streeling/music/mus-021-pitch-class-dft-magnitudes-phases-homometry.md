@@ -3,7 +3,7 @@ title: La TFD des classes de hauteurs — Ce que gardent les modules, ce qu'ajou
 description: La TFD des classes de hauteurs — modules, phases et homométrie — Musique
 sidebar:
   label: MUS-021 · La TFD des classes de hauteurs
-  order: 18
+  order: 21
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/fr/mus-021-pitch-class-dft-magnitudes-phases-homometry.fr.md
 ---
 

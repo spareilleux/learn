@@ -3,7 +3,7 @@ title: Key Finding, Roman Numerals and Cadences — What a Count of Chords Can a
 description: Key Finding, Roman Numerals and Cadences — Music
 sidebar:
   label: MUS-018 · Key Finding, Roman Numerals and Cadences
-  order: 15
+  order: 18
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/en/mus-018-key-finding-roman-numerals-cadences.md
 ---
 

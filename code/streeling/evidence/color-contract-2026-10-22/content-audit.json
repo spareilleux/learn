@@ -1,0 +1,1045 @@
+{
+  "reviewer": "independent-pedagogical-source-review-agent",
+  "checked_at_utc": "2026-10-22T21:56:13.885555+00:00",
+  "verdict": "pass",
+  "findings": [
+    {
+      "origin": "code/streeling/evidence/color-contract-2026-10-22/data-audit.json",
+      "id": "nrh-metadata-contract-disagreement",
+      "status": "observed-preserved",
+      "finding": "Existing pinned concrete_nrh.png carries sRGB, gAMA and cHRM chunks although the inspected bake script declares Non-Color output.",
+      "boundary": "This is already explicitly preserved by the packet; no fresh bake, runtime import behavior or artifact generation history is established. No packet fix requested.",
+      "requires_source_correction": false
+    }
+  ],
+  "fix_history": [
+    {
+      "id": "first-tool-mention-official-links",
+      "status": "resolved",
+      "finding": "Initial PHY009 scope first mentioned Blender/Godot without official links; initial VC010 scope first mentioned ComfyUI before its later official link.",
+      "resolution": "Author linked first scope mentions to the existing official versioned Blender/Godot and ComfyUI documentation; translators mirrored links. Independently checked all nine ordered URL lists and first scope mentions.",
+      "source_changes_by_reviewer": false
+    },
+    {
+      "id": "capture-writer-citation-location",
+      "status": "resolved",
+      "finding": "Initial COG006 capture-writer permalink#L4233-L4308 mostly covered LoadPng and only reached the SavePng signature.",
+      "resolution": "Author and translators changed all three COG006 sources to#L4308-L4337, containing BGRA-to-RGB conversion and IHDR/IDAT/IEND writes; official-links refreshed. Verified against actual pinned Program.cs.",
+      "source_changes_by_reviewer": false
+    },
+    {
+      "id": "positive-power-notation-parity",
+      "status": "resolved",
+      "finding": "Initial English power-2.2 compound wording could be parsed by numeric parity checks as a signed negative value.",
+      "resolution": "Author rewrote the exercise as0.5 raised to the power2.2, preserving mathematical meaning and positive exponent; translations retain that meaning.",
+      "source_changes_by_reviewer": false
+    }
+  ],
+  "coverage": {
+    "exercise_answer_pairs": 45,
+    "learner_criteria": 15
+  },
+  "scope": {
+    "reviewed": "Direct semantic reading of nine EN/FR/ES source lessons, all45 localized exercise-answer pairs, learner task, all15 rubric acceptance criteria, complete fixed packet, four pinned public GA text files/relevant Program.cs paths, two existing source PNG inspections and original figure.",
+    "data_audit": "Independent source/data/PNG audit345/345 checks passes and current packet input hashes match. NRH metadata disagreement remains observed-preserved. Content reviewer did not rerun calculation/render/host experiments.",
+    "source_read_scope": "All bake_blender.py/generate_comfyui.py/Model.fs; bounded Program.cs material paths, texture storage, composite, PNG loader and capture writer. Both existing public PNGs and original figure visually viewed.",
+    "figure": "Original1600x1080 tagged-sRGB control directly viewed; matching crop hashes and publication/MIME/pixel-byte receipt reviewed. Visual inspection supplies no calibrated display or human observer outcome.",
+    "localization": "Agent semantic preservation review plus ordered href parity; human fluent-language approval remains absent.",
+    "prerequisite": "Existing English VC005 read for continuity only; its wider historical experiments/source claims are not reapproved.",
+    "publication": "Immutable figure asset published at the recorded asset commit; source review does not certify deployed course HTML or host rendering."
+  },
+  "exercise_answer_checks": [
+    {
+      "id": "PHY009-en-exercise-1",
+      "module": "PHY009",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/physics/en/phy-009-distinguish-linear-color-from-display-encoding.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "619220ff41cc01e29539b2725004c56f14dd5ee588728656902216132edfab35",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Encoded0.5 decodes to linear0.21404114048223255; linear0.5 encodes to0.7353569830524495 within the declared nonnegative0..1 reference domain. Neither coordinate supplies measured screen luminance."
+    },
+    {
+      "id": "PHY009-en-exercise-2",
+      "module": "PHY009",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/physics/en/phy-009-distinguish-linear-color-from-display-encoding.md",
+      "heading_line": 44,
+      "exercise_answer_sha256": "915fbe0ac886b4254027ff9d9f2f86ecba1394ce9c88f58650b2e82b50b4c8e9",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Linear-light mixture re-encodes/rounds to188. Quantized188 decodes to0.5028864580325687, not exact0.5; encoded-average128 decodes to0.21586050011389926. Quantized/unquantized distinctions are retained."
+    },
+    {
+      "id": "PHY009-en-exercise-3",
+      "module": "PHY009",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/physics/en/phy-009-distinguish-linear-color-from-display-encoding.md",
+      "heading_line": 56,
+      "exercise_answer_sha256": "fb50f1aa46d111a50ba3e88d6ed7a253db92fa3b98eb3e915a5d604fd9b829e1",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "0.5 raised to2.2 gives0.217637640824031,0.003596500341798453 above reference. Selected concrete/facade/machine paths use that power; cladding differs. No uniform policy or observer visibility/quality claim follows."
+    },
+    {
+      "id": "PHY009-en-exercise-4",
+      "module": "PHY009",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/physics/en/phy-009-distinguish-linear-color-from-display-encoding.md",
+      "heading_line": 68,
+      "exercise_answer_sha256": "81fc03287f006ea00750d79cd6e17613dc2a82ec90619350a95699137c295e52",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Exposing0.25 by2 before the isolated source curve gives0.6163069544364508; curve then double gives0.7482219061166429. Nonlinearity prevents interchange; omitted bloom/grading/vignette/output encoding/grain and no full ACES/frame claim remain explicit."
+    },
+    {
+      "id": "PHY009-en-exercise-5",
+      "module": "PHY009",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/physics/en/phy-009-distinguish-linear-color-from-display-encoding.md",
+      "heading_line": 80,
+      "exercise_answer_sha256": "e6412e278bbf30aa27ba53089079f4ae226185bddae4df47bda9b4953d4e7316",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "All256 finite reference round trips support only decode/encode/quantization arithmetic. No host import, target render, calibrated display or observer outcome is supplied; host interpretation/configuration and observed transfer remain needed."
+    },
+    {
+      "id": "PHY009-fr-exercise-1",
+      "module": "PHY009",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/physics/fr/phy-009-distinguish-linear-color-from-display-encoding.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "1598c2f729e05ea19e0190c8d2dea606f58a47cdf33afda2d70d8da6cf9437a3",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Encoded0.5 decodes to linear0.21404114048223255; linear0.5 encodes to0.7353569830524495 within the declared nonnegative0..1 reference domain. Neither coordinate supplies measured screen luminance."
+    },
+    {
+      "id": "PHY009-fr-exercise-2",
+      "module": "PHY009",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/physics/fr/phy-009-distinguish-linear-color-from-display-encoding.fr.md",
+      "heading_line": 44,
+      "exercise_answer_sha256": "32662455e154384f38794219a5bdc93134b2e58da5226cf41e5e2d6f7fa35e95",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Linear-light mixture re-encodes/rounds to188. Quantized188 decodes to0.5028864580325687, not exact0.5; encoded-average128 decodes to0.21586050011389926. Quantized/unquantized distinctions are retained."
+    },
+    {
+      "id": "PHY009-fr-exercise-3",
+      "module": "PHY009",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/physics/fr/phy-009-distinguish-linear-color-from-display-encoding.fr.md",
+      "heading_line": 56,
+      "exercise_answer_sha256": "c65c17115216dc8fa1868c86633ac8dfba8ebae63861c93fdc9f617375184c54",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "0.5 raised to2.2 gives0.217637640824031,0.003596500341798453 above reference. Selected concrete/facade/machine paths use that power; cladding differs. No uniform policy or observer visibility/quality claim follows."
+    },
+    {
+      "id": "PHY009-fr-exercise-4",
+      "module": "PHY009",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/physics/fr/phy-009-distinguish-linear-color-from-display-encoding.fr.md",
+      "heading_line": 68,
+      "exercise_answer_sha256": "68397bf36dbcdcd30eff27ed493b9c87e3555829dc013ebd93252838116418c0",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Exposing0.25 by2 before the isolated source curve gives0.6163069544364508; curve then double gives0.7482219061166429. Nonlinearity prevents interchange; omitted bloom/grading/vignette/output encoding/grain and no full ACES/frame claim remain explicit."
+    },
+    {
+      "id": "PHY009-fr-exercise-5",
+      "module": "PHY009",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/physics/fr/phy-009-distinguish-linear-color-from-display-encoding.fr.md",
+      "heading_line": 80,
+      "exercise_answer_sha256": "471e4602af8c6b39cf89b8dc543ce453d890e604084ea64228e919b87147cd5f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "All256 finite reference round trips support only decode/encode/quantization arithmetic. No host import, target render, calibrated display or observer outcome is supplied; host interpretation/configuration and observed transfer remain needed."
+    },
+    {
+      "id": "PHY009-es-exercise-1",
+      "module": "PHY009",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/physics/es/phy-009-distinguish-linear-color-from-display-encoding.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "57d3a50641f9010b94c454834eecfd60cdc5c47cc3b8ddd22c53495468ba5d6f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Encoded0.5 decodes to linear0.21404114048223255; linear0.5 encodes to0.7353569830524495 within the declared nonnegative0..1 reference domain. Neither coordinate supplies measured screen luminance."
+    },
+    {
+      "id": "PHY009-es-exercise-2",
+      "module": "PHY009",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/physics/es/phy-009-distinguish-linear-color-from-display-encoding.es.md",
+      "heading_line": 44,
+      "exercise_answer_sha256": "3ce5c53334d888d3086c1f26d3961dcdba651b9a709cd4f913a2f9a00a082536",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Linear-light mixture re-encodes/rounds to188. Quantized188 decodes to0.5028864580325687, not exact0.5; encoded-average128 decodes to0.21586050011389926. Quantized/unquantized distinctions are retained."
+    },
+    {
+      "id": "PHY009-es-exercise-3",
+      "module": "PHY009",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/physics/es/phy-009-distinguish-linear-color-from-display-encoding.es.md",
+      "heading_line": 56,
+      "exercise_answer_sha256": "c83480120badf14a628fba739b490ae4e82710c88d89abf5b706812c033e7d32",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "0.5 raised to2.2 gives0.217637640824031,0.003596500341798453 above reference. Selected concrete/facade/machine paths use that power; cladding differs. No uniform policy or observer visibility/quality claim follows."
+    },
+    {
+      "id": "PHY009-es-exercise-4",
+      "module": "PHY009",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/physics/es/phy-009-distinguish-linear-color-from-display-encoding.es.md",
+      "heading_line": 68,
+      "exercise_answer_sha256": "865afc79df924daf8e49ae5f2f5e3085bc3aead99035f90318cc9461fe943a92",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Exposing0.25 by2 before the isolated source curve gives0.6163069544364508; curve then double gives0.7482219061166429. Nonlinearity prevents interchange; omitted bloom/grading/vignette/output encoding/grain and no full ACES/frame claim remain explicit."
+    },
+    {
+      "id": "PHY009-es-exercise-5",
+      "module": "PHY009",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/physics/es/phy-009-distinguish-linear-color-from-display-encoding.es.md",
+      "heading_line": 80,
+      "exercise_answer_sha256": "5852e92947c2031659a1e1ba49d6766a951566b9ab245fa37ad165a4d457ee8f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "All256 finite reference round trips support only decode/encode/quantization arithmetic. No host import, target render, calibrated display or observer outcome is supplied; host interpretation/configuration and observed transfer remain needed."
+    },
+    {
+      "id": "VC010-en-exercise-1",
+      "module": "VC010",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/visual-computing/en/vc-010-preserve-packed-texture-channel-contracts.md",
+      "heading_line": 35,
+      "exercise_answer_sha256": "5f1700df43ee78226835a25a3f11087a6500f9db9a8cb09831bda7407207ae47",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Producer packs baked normalX/Y in R/G, roughness in B and weighted-albedo-derived height proxy in A. B is not baked normalZ, A is not opacity, and image-derived height does not establish physical thickness."
+    },
+    {
+      "id": "VC010-en-exercise-2",
+      "module": "VC010",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/visual-computing/en/vc-010-preserve-packed-texture-channel-contracts.md",
+      "heading_line": 47,
+      "exercise_answer_sha256": "2f6eaf921277523e43e701b05107bce73e75990c8123d81372b775f054c2059b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Direct normalized signed byte128 gives0.0039215686274509665; sRGB-first signed decoding gives-0.5682789997722015. Alpha64 normalizes to0.25098039215686274 without declaring transparency under this data contract."
+    },
+    {
+      "id": "VC010-en-exercise-3",
+      "module": "VC010",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/visual-computing/en/vc-010-preserve-packed-texture-channel-contracts.md",
+      "heading_line": 59,
+      "exercise_answer_sha256": "bd7dec0ab24e611a59817639bad25d59c1d84cfd6e8b9d1a5c77c6a5c1fcf95e",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Stored alpha does not establish use: named shader paths read signedRG/B and do not read packed alpha for displacement or reconstruct normalZ there. Concrete no-rain roughness is0.850392156862745; incorrect color-first value0.7931721000227798 is retained, without rendered-output claim."
+    },
+    {
+      "id": "VC010-en-exercise-4",
+      "module": "VC010",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/visual-computing/en/vc-010-preserve-packed-texture-channel-contracts.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "5442d7d453b6f63fe127d2388a915e52ce507e4020595c27847f35c9fdc6b4fc",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Both inspected512x512RGBA8 PNGs carry sRGB/gAMA/cHRM; packed NRH metadata disagrees with declared Non-Color output. No fresh bake, exact producer/environment history, global defect or actual destination interpretation is invented."
+    },
+    {
+      "id": "VC010-en-exercise-5",
+      "module": "VC010",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/visual-computing/en/vc-010-preserve-packed-texture-channel-contracts.md",
+      "heading_line": 83,
+      "exercise_answer_sha256": "d55fe18ec910a90e167a7ecefa90a1e0dd6382dd701a05f449a7cba6fb2313e6",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Known-texel target-host check must preserve data values and RG/B/A roles through explicit import/sampling/remapping policy. Whole-map color decode/full-normal hint conflicts with this packed contract; Godot guidance is renderer-qualified and no host trial occurred."
+    },
+    {
+      "id": "VC010-fr-exercise-1",
+      "module": "VC010",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/visual-computing/fr/vc-010-preserve-packed-texture-channel-contracts.fr.md",
+      "heading_line": 35,
+      "exercise_answer_sha256": "ede1cae132eac437d163db54f3e811d519a8b51585cff52c7bd2f624ac5d765a",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Producer packs baked normalX/Y in R/G, roughness in B and weighted-albedo-derived height proxy in A. B is not baked normalZ, A is not opacity, and image-derived height does not establish physical thickness."
+    },
+    {
+      "id": "VC010-fr-exercise-2",
+      "module": "VC010",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/visual-computing/fr/vc-010-preserve-packed-texture-channel-contracts.fr.md",
+      "heading_line": 47,
+      "exercise_answer_sha256": "10fc6a9b375717b126869d0308af2d5aaab01d53337c82cb97005e991970dcdb",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Direct normalized signed byte128 gives0.0039215686274509665; sRGB-first signed decoding gives-0.5682789997722015. Alpha64 normalizes to0.25098039215686274 without declaring transparency under this data contract."
+    },
+    {
+      "id": "VC010-fr-exercise-3",
+      "module": "VC010",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/visual-computing/fr/vc-010-preserve-packed-texture-channel-contracts.fr.md",
+      "heading_line": 59,
+      "exercise_answer_sha256": "74ab930dee781042c0ce385e9f6072323c10181a942846168acb1c84283ae581",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Stored alpha does not establish use: named shader paths read signedRG/B and do not read packed alpha for displacement or reconstruct normalZ there. Concrete no-rain roughness is0.850392156862745; incorrect color-first value0.7931721000227798 is retained, without rendered-output claim."
+    },
+    {
+      "id": "VC010-fr-exercise-4",
+      "module": "VC010",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/visual-computing/fr/vc-010-preserve-packed-texture-channel-contracts.fr.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "f0400b2fd352575a6c806e21e97346e8e010c8451337e95066d86ad5c368b2bc",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Both inspected512x512RGBA8 PNGs carry sRGB/gAMA/cHRM; packed NRH metadata disagrees with declared Non-Color output. No fresh bake, exact producer/environment history, global defect or actual destination interpretation is invented."
+    },
+    {
+      "id": "VC010-fr-exercise-5",
+      "module": "VC010",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/visual-computing/fr/vc-010-preserve-packed-texture-channel-contracts.fr.md",
+      "heading_line": 83,
+      "exercise_answer_sha256": "8013056e24939fc7ad863081669208f3a603fa1288f2d5fafc75d3459d73b3dd",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Known-texel target-host check must preserve data values and RG/B/A roles through explicit import/sampling/remapping policy. Whole-map color decode/full-normal hint conflicts with this packed contract; Godot guidance is renderer-qualified and no host trial occurred."
+    },
+    {
+      "id": "VC010-es-exercise-1",
+      "module": "VC010",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/visual-computing/es/vc-010-preserve-packed-texture-channel-contracts.es.md",
+      "heading_line": 35,
+      "exercise_answer_sha256": "f666dd0a4c3138fcbe06e962513ce5ddf89d4602bf9590a054b0ff268064f6b9",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Producer packs baked normalX/Y in R/G, roughness in B and weighted-albedo-derived height proxy in A. B is not baked normalZ, A is not opacity, and image-derived height does not establish physical thickness."
+    },
+    {
+      "id": "VC010-es-exercise-2",
+      "module": "VC010",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/visual-computing/es/vc-010-preserve-packed-texture-channel-contracts.es.md",
+      "heading_line": 47,
+      "exercise_answer_sha256": "75849bf04079a9a937be88498fe8b2957b35f06d96b2711a6fbd832296094900",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Direct normalized signed byte128 gives0.0039215686274509665; sRGB-first signed decoding gives-0.5682789997722015. Alpha64 normalizes to0.25098039215686274 without declaring transparency under this data contract."
+    },
+    {
+      "id": "VC010-es-exercise-3",
+      "module": "VC010",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/visual-computing/es/vc-010-preserve-packed-texture-channel-contracts.es.md",
+      "heading_line": 59,
+      "exercise_answer_sha256": "8bd937bb7a461f3fa178b8354ebe4190a0fef430bcda39a85f3e5e43d8d3238b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Stored alpha does not establish use: named shader paths read signedRG/B and do not read packed alpha for displacement or reconstruct normalZ there. Concrete no-rain roughness is0.850392156862745; incorrect color-first value0.7931721000227798 is retained, without rendered-output claim."
+    },
+    {
+      "id": "VC010-es-exercise-4",
+      "module": "VC010",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/visual-computing/es/vc-010-preserve-packed-texture-channel-contracts.es.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "67d7834665809973a3aff0b80bedff85494ceee76e5831e2d84c38dea97a0681",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Both inspected512x512RGBA8 PNGs carry sRGB/gAMA/cHRM; packed NRH metadata disagrees with declared Non-Color output. No fresh bake, exact producer/environment history, global defect or actual destination interpretation is invented."
+    },
+    {
+      "id": "VC010-es-exercise-5",
+      "module": "VC010",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/visual-computing/es/vc-010-preserve-packed-texture-channel-contracts.es.md",
+      "heading_line": 83,
+      "exercise_answer_sha256": "be91e8b855344e58e76457a6df2cf4a5a7df45fc6d0e98e89ca58dc7a7fd097f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Known-texel target-host check must preserve data values and RG/B/A roles through explicit import/sampling/remapping policy. Whole-map color decode/full-normal hint conflicts with this packed contract; Godot guidance is renderer-qualified and no host trial occurred."
+    },
+    {
+      "id": "COG006-en-exercise-1",
+      "module": "COG006",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/cognitive-science/en/cog-006-separate-pixel-tests-from-appearance-judgments.md",
+      "heading_line": 30,
+      "exercise_answer_sha256": "957e0b4b25c1191e46b88a3ec6a41ace3594a58f9ae8691382bf9c905e0a395a",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Each half-open160x160 target has25600RGB128pixels; crop hashes and bytes match while surrounds32/224 differ. Digital equality establishes neither participant judgment nor measured display luminance."
+    },
+    {
+      "id": "COG006-en-exercise-2",
+      "module": "COG006",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/cognitive-science/en/cog-006-separate-pixel-tests-from-appearance-judgments.md",
+      "heading_line": 42,
+      "exercise_answer_sha256": "c7f9d180ea0a3259e1bcd4af63d430eedc88eae89c0af383c405a4defb219f10",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Pixel equality forces no appearance answer. Perceived brightness/light intensity and lightness/surface reflectance are distinct operational questions. Lovell abstract/intro supports that distinction; original two-surround control is not the study stimulus or replication."
+    },
+    {
+      "id": "COG006-en-exercise-3",
+      "module": "COG006",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/cognitive-science/en/cog-006-separate-pixel-tests-from-appearance-judgments.md",
+      "heading_line": 54,
+      "exercise_answer_sha256": "145c2e455037a793e1545c93bbd363fa5fd14a586796cef494da3ae57578eb2e",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Authored PNG carries sRGB intent0; inspected capture writer emits IHDR/IDAT/IEND without a color-space chunk. Tags/source omission alone provide no calibrated match, actual capture comparison, browser behavior or observer result."
+    },
+    {
+      "id": "COG006-en-exercise-4",
+      "module": "COG006",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/cognitive-science/en/cog-006-separate-pixel-tests-from-appearance-judgments.md",
+      "heading_line": 66,
+      "exercise_answer_sha256": "c6c48d93369b4361cc43c363072d047d3ff07cf16474685f8e2b052fe708b21d",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Counterbalance surround side and use neutral wording with equal/unsure options. Only first layout/pixel checks exist; swapped layout, participants, responses and population effect/magnitude are unperformed."
+    },
+    {
+      "id": "COG006-en-exercise-5",
+      "module": "COG006",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/cognitive-science/en/cog-006-separate-pixel-tests-from-appearance-judgments.md",
+      "heading_line": 78,
+      "exercise_answer_sha256": "724dbcc9e35a12d0ebb67536d502055425c595794e08642f1a2ed17cbb1d817e",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Supported conclusion is exact target-crop byte equality with recorded coordinates/hash/encoding. No observer outcome or craft-material-quality equivalence follows; collect a controlled target-host/viewing observation for a declared appearance question."
+    },
+    {
+      "id": "COG006-fr-exercise-1",
+      "module": "COG006",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/cognitive-science/fr/cog-006-separate-pixel-tests-from-appearance-judgments.fr.md",
+      "heading_line": 30,
+      "exercise_answer_sha256": "dc7cf4b3345e279f541eb174c5902c67fad4db27afac3d901ae5cfe40d8bb249",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Each half-open160x160 target has25600RGB128pixels; crop hashes and bytes match while surrounds32/224 differ. Digital equality establishes neither participant judgment nor measured display luminance."
+    },
+    {
+      "id": "COG006-fr-exercise-2",
+      "module": "COG006",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/cognitive-science/fr/cog-006-separate-pixel-tests-from-appearance-judgments.fr.md",
+      "heading_line": 42,
+      "exercise_answer_sha256": "e47c05a4135d597207654d9fad0c9c90cfe84ccc10465bd27fc296a020bd17d4",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Pixel equality forces no appearance answer. Perceived brightness/light intensity and lightness/surface reflectance are distinct operational questions. Lovell abstract/intro supports that distinction; original two-surround control is not the study stimulus or replication."
+    },
+    {
+      "id": "COG006-fr-exercise-3",
+      "module": "COG006",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/cognitive-science/fr/cog-006-separate-pixel-tests-from-appearance-judgments.fr.md",
+      "heading_line": 54,
+      "exercise_answer_sha256": "2555b630dae9a3f422c98249ba23f736ac8c3a8cd4ba553473848b28ae67e412",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Authored PNG carries sRGB intent0; inspected capture writer emits IHDR/IDAT/IEND without a color-space chunk. Tags/source omission alone provide no calibrated match, actual capture comparison, browser behavior or observer result."
+    },
+    {
+      "id": "COG006-fr-exercise-4",
+      "module": "COG006",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/cognitive-science/fr/cog-006-separate-pixel-tests-from-appearance-judgments.fr.md",
+      "heading_line": 66,
+      "exercise_answer_sha256": "27a641bb4287dd2987048e6910397a099cbddac8164492cc23e41e0d1b48a401",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Counterbalance surround side and use neutral wording with equal/unsure options. Only first layout/pixel checks exist; swapped layout, participants, responses and population effect/magnitude are unperformed."
+    },
+    {
+      "id": "COG006-fr-exercise-5",
+      "module": "COG006",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/cognitive-science/fr/cog-006-separate-pixel-tests-from-appearance-judgments.fr.md",
+      "heading_line": 78,
+      "exercise_answer_sha256": "76b05a0c4ffacb04ab0ddfcbfe38416eaf69d32d9f425fafd307f97929f81d4a",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Supported conclusion is exact target-crop byte equality with recorded coordinates/hash/encoding. No observer outcome or craft-material-quality equivalence follows; collect a controlled target-host/viewing observation for a declared appearance question."
+    },
+    {
+      "id": "COG006-es-exercise-1",
+      "module": "COG006",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/cognitive-science/es/cog-006-separate-pixel-tests-from-appearance-judgments.es.md",
+      "heading_line": 30,
+      "exercise_answer_sha256": "3db52de97ffc75cc32b4ebd425e1d1af37677b966f83eef7fdc644f7574aee6b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Each half-open160x160 target has25600RGB128pixels; crop hashes and bytes match while surrounds32/224 differ. Digital equality establishes neither participant judgment nor measured display luminance."
+    },
+    {
+      "id": "COG006-es-exercise-2",
+      "module": "COG006",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/cognitive-science/es/cog-006-separate-pixel-tests-from-appearance-judgments.es.md",
+      "heading_line": 42,
+      "exercise_answer_sha256": "0ec0d124e2f47a36470382fc31f0f95007c9609360a7d72f79286d23bbe6672a",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Pixel equality forces no appearance answer. Perceived brightness/light intensity and lightness/surface reflectance are distinct operational questions. Lovell abstract/intro supports that distinction; original two-surround control is not the study stimulus or replication."
+    },
+    {
+      "id": "COG006-es-exercise-3",
+      "module": "COG006",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/cognitive-science/es/cog-006-separate-pixel-tests-from-appearance-judgments.es.md",
+      "heading_line": 54,
+      "exercise_answer_sha256": "e3e21e6b20854220b1eb2c27af89e781957973a77e6ae1f3005887d027292f12",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Authored PNG carries sRGB intent0; inspected capture writer emits IHDR/IDAT/IEND without a color-space chunk. Tags/source omission alone provide no calibrated match, actual capture comparison, browser behavior or observer result."
+    },
+    {
+      "id": "COG006-es-exercise-4",
+      "module": "COG006",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/cognitive-science/es/cog-006-separate-pixel-tests-from-appearance-judgments.es.md",
+      "heading_line": 66,
+      "exercise_answer_sha256": "1a82ff82d6e850057d2c154cd5801f6df6bbf254b87062dc0e69eeba0899e378",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Counterbalance surround side and use neutral wording with equal/unsure options. Only first layout/pixel checks exist; swapped layout, participants, responses and population effect/magnitude are unperformed."
+    },
+    {
+      "id": "COG006-es-exercise-5",
+      "module": "COG006",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/cognitive-science/es/cog-006-separate-pixel-tests-from-appearance-judgments.es.md",
+      "heading_line": 78,
+      "exercise_answer_sha256": "ba0283a59e4b772e2874fb8c7f1312185b0fd372988eafa4eabfa939dbe1c80b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading of localized prompt/answer against English, fixed evidence, actual pinned source and primary references; not a human fluent-language or learner outcome.",
+      "checked_conclusion": "Supported conclusion is exact target-crop byte equality with recorded coordinates/hash/encoding. No observer outcome or craft-material-quality equivalence follows; collect a controlled target-host/viewing observation for a declared appearance question."
+    }
+  ],
+  "learner_criterion_checks": [
+    {
+      "id": "PHY009-1",
+      "module": "PHY009",
+      "title": "coordinate",
+      "acceptance_reviewed": "Distinguish encoded 0.5 → linear 0.21404114048223255 from linear 0.5 → encoded 0.7353569830524495; state the nonnegative reference domain and absence of measured physical luminance.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Encoded0.5 decodes to linear0.21404114048223255; linear0.5 encodes to0.7353569830524495 within the declared nonnegative0..1 reference domain. Neither coordinate supplies measured screen luminance.",
+      "meaning": "Prepared learner task and criterion correctness reviewed; no participant has been assessed."
+    },
+    {
+      "id": "PHY009-2",
+      "module": "PHY009",
+      "title": "mixture-and-quantization",
+      "acceptance_reviewed": "Derive black/white encoded versus linear averages, rounded bytes 128/188 and decoded quantized values 0.21586050011389926/0.5028864580325687. Do not equate finite quantization with the unquantized 0.5.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Linear-light mixture re-encodes/rounds to188. Quantized188 decodes to0.5028864580325687, not exact0.5; encoded-average128 decodes to0.21586050011389926. Quantized/unquantized distinctions are retained.",
+      "meaning": "Prepared learner task and criterion correctness reviewed; no participant has been assessed."
+    },
+    {
+      "id": "PHY009-3",
+      "module": "PHY009",
+      "title": "source-approximation",
+      "acceptance_reviewed": "Compare power 2.2 at 0.5 with the piecewise reference and difference 0.003596500341798453; identify selected material paths and cladding exception, without inferring visual objection or uniform policy.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "0.5 raised to2.2 gives0.217637640824031,0.003596500341798453 above reference. Selected concrete/facade/machine paths use that power; cladding differs. No uniform policy or observer visibility/quality claim follows.",
+      "meaning": "Prepared learner task and criterion correctness reviewed; no participant has been assessed."
+    },
+    {
+      "id": "PHY009-4",
+      "module": "PHY009",
+      "title": "nonlinear-order",
+      "acceptance_reviewed": "Derive isolated exposure-before-curve 0.6163069544364508 versus curve-then-double 0.7482219061166429 for input 0.25/exposure 2. Preserve omitted composite stages and no full ACES-conformance claim.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Exposing0.25 by2 before the isolated source curve gives0.6163069544364508; curve then double gives0.7482219061166429. Nonlinearity prevents interchange; omitted bloom/grading/vignette/output encoding/grain and no full ACES/frame claim remain explicit.",
+      "meaning": "Prepared learner task and criterion correctness reviewed; no participant has been assessed."
+    },
+    {
+      "id": "PHY009-5",
+      "module": "PHY009",
+      "title": "verification-scope",
+      "acceptance_reviewed": "All 256 byte round trips support the stated finite calculations, not host-transfer fidelity. Specify source/data/view interpretation and actual import/render/display evidence still needed.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "All256 finite reference round trips support only decode/encode/quantization arithmetic. No host import, target render, calibrated display or observer outcome is supplied; host interpretation/configuration and observed transfer remain needed.",
+      "meaning": "Prepared learner task and criterion correctness reviewed; no participant has been assessed."
+    },
+    {
+      "id": "VC010-1",
+      "module": "VC010",
+      "title": "channel-roles",
+      "acceptance_reviewed": "Identify R/G baked normal X/Y, B roughness, A image-derived height proxy, omitted baked Z; neither alpha opacity nor blue normal Z nor physical thickness follows.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Producer packs baked normalX/Y in R/G, roughness in B and weighted-albedo-derived height proxy in A. B is not baked normalZ, A is not opacity, and image-derived height does not establish physical thickness.",
+      "meaning": "Prepared learner task and criterion correctness reviewed; no participant has been assessed."
+    },
+    {
+      "id": "VC010-2",
+      "module": "VC010",
+      "title": "data-decoding",
+      "acceptance_reviewed": "Decode authored 128,128,128,64 as normalized data and signed RG 0.0039215686274509665, compare wrong sRGB-first RG-0.5682789997722015; alpha 0.25098039215686274 is not transparency under this contract.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Direct normalized signed byte128 gives0.0039215686274509665; sRGB-first signed decoding gives-0.5682789997722015. Alpha64 normalizes to0.25098039215686274 without declaring transparency under this data contract.",
+      "meaning": "Prepared learner task and criterion correctness reviewed; no participant has been assessed."
+    },
+    {
+      "id": "VC010-3",
+      "module": "VC010",
+      "title": "consumer-use",
+      "acceptance_reviewed": "Locate named shader RG/B reads and absence of alpha displacement/Z reconstruction there. Derive concrete no-rain roughness 0.850392156862745 versus incorrect 0.7931721000227798; no complete rendered-output claim.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Stored alpha does not establish use: named shader paths read signedRG/B and do not read packed alpha for displacement or reconstruct normalZ there. Concrete no-rain roughness is0.850392156862745; incorrect color-first value0.7931721000227798 is retained, without rendered-output claim.",
+      "meaning": "Prepared learner task and criterion correctness reviewed; no participant has been assessed."
+    },
+    {
+      "id": "VC010-4",
+      "module": "VC010",
+      "title": "metadata-disagreement",
+      "acceptance_reviewed": "Both existing 512 x 512 RGBA 8 PNGs contain color chunks; preserve packed NRH sRGB/gAMA/cHRM versus declared Non-Color. Do not invent fresh bake or exact generation history, whole-repo defect or actual importer interpretation.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Both inspected512x512RGBA8 PNGs carry sRGB/gAMA/cHRM; packed NRH metadata disagrees with declared Non-Color output. No fresh bake, exact producer/environment history, global defect or actual destination interpretation is invented.",
+      "meaning": "Prepared learner task and criterion correctness reviewed; no participant has been assessed."
+    },
+    {
+      "id": "VC010-5",
+      "module": "VC010",
+      "title": "target-check",
+      "acceptance_reviewed": "Propose known-texel destination checks under explicit color/data/channel/remapping policy; Godot 4.6 source_color guidance is renderer-specific, and a standard full normal contract does not match packed blue roughness. No actual host import delivered.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Known-texel target-host check must preserve data values and RG/B/A roles through explicit import/sampling/remapping policy. Whole-map color decode/full-normal hint conflicts with this packed contract; Godot guidance is renderer-qualified and no host trial occurred.",
+      "meaning": "Prepared learner task and criterion correctness reviewed; no participant has been assessed."
+    },
+    {
+      "id": "COG006-1",
+      "module": "COG006",
+      "title": "digital-region",
+      "acceptance_reviewed": "Verify each 160 x 160 target has 25600 RGB 128 pixels under recorded half-open bounds and matching crop hashes; unequal surrounds remain distinct, no display-luminance or observer result inferred.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Each half-open160x160 target has25600RGB128pixels; crop hashes and bytes match while surrounds32/224 differ. Digital equality establishes neither participant judgment nor measured display luminance.",
+      "meaning": "Prepared learner task and criterion correctness reviewed; no participant has been assessed."
+    },
+    {
+      "id": "COG006-2",
+      "module": "COG006",
+      "title": "task-and-appearance",
+      "acceptance_reviewed": "Separate byte equality, perceived light intensity/brightness and perceived reflectance/lightness. Cite primary study at its actual scope; original two-surround control is not a replication and has no prescribed observer answer.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Pixel equality forces no appearance answer. Perceived brightness/light intensity and lightness/surface reflectance are distinct operational questions. Lovell abstract/intro supports that distinction; original two-surround control is not the study stimulus or replication.",
+      "meaning": "Prepared learner task and criterion correctness reviewed; no participant has been assessed."
+    },
+    {
+      "id": "COG006-3",
+      "module": "COG006",
+      "title": "display-boundary",
+      "acceptance_reviewed": "Our PNG carries sRGB intent 0 while inspected capture writer emits no color-space chunk; neither alone calibrates a display or proves a visual match/browser behavior.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Authored PNG carries sRGB intent0; inspected capture writer emits IHDR/IDAT/IEND without a color-space chunk. Tags/source omission alone provide no calibrated match, actual capture comparison, browser behavior or observer result.",
+      "meaning": "Prepared learner task and criterion correctness reviewed; no participant has been assessed."
+    },
+    {
+      "id": "COG006-4",
+      "module": "COG006",
+      "title": "procedure",
+      "acceptance_reviewed": "Use neutral wording, counterbalance surround side and allow equal/unsure; only first layout rendered, no swapped layout/participants/responses. No population effect or magnitude invented.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Counterbalance surround side and use neutral wording with equal/unsure options. Only first layout/pixel checks exist; swapped layout, participants, responses and population effect/magnitude are unperformed.",
+      "meaning": "Prepared learner task and criterion correctness reviewed; no participant has been assessed."
+    },
+    {
+      "id": "COG006-5",
+      "module": "COG006",
+      "title": "handoff",
+      "acceptance_reviewed": "Report digital hash/crop equality, declared encoding, observed display settings and actual observer result separately. Missing outcomes remain missing; no normative schema or craft-quality equivalence is established.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Supported conclusion is exact target-crop byte equality with recorded coordinates/hash/encoding. No observer outcome or craft-material-quality equivalence follows; collect a controlled target-host/viewing observation for a declared appearance question.",
+      "meaning": "Prepared learner task and criterion correctness reviewed; no participant has been assessed."
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "streeling/courses/physics/en/phy-009-distinguish-linear-color-from-display-encoding.md",
+      "sha256": "f4927064362cec0d66f7723c394febbec95effcf3fae46652c07c979b16ec8ca"
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-009-distinguish-linear-color-from-display-encoding.fr.md",
+      "sha256": "3d3d15a66a1b29a72a3164edafd867f5ca79cccce1016e758c64b0c7b165da53"
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-009-distinguish-linear-color-from-display-encoding.es.md",
+      "sha256": "bd41e03bdaf354b77d676b4a22691b154e18fc3b251effc8f9dfc2c356424fcb"
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-010-preserve-packed-texture-channel-contracts.md",
+      "sha256": "dff68b04b2af3c395f35b754b2c65e77968c8d95afce4a56a80f120b7725bf43"
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-010-preserve-packed-texture-channel-contracts.fr.md",
+      "sha256": "60baf93ad9ae830d168d7adda23bd4c33973938376e06228dfb7c731ed49df2a"
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-010-preserve-packed-texture-channel-contracts.es.md",
+      "sha256": "dfa445a8708a1a4de0254bd8b0f46aec4e22e59dec0b135f50ed3d1a5248f196"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-006-separate-pixel-tests-from-appearance-judgments.md",
+      "sha256": "a27de4e4cf6742b1e127e7b903aa31ed9d7625f39a3ba0d2f786c88a534dcbfd"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/fr/cog-006-separate-pixel-tests-from-appearance-judgments.fr.md",
+      "sha256": "9cad0dc846d76116fcfd1be46a0d787f9f4023660f04bc58ad176ad9ae65703a"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/es/cog-006-separate-pixel-tests-from-appearance-judgments.es.md",
+      "sha256": "4c6a64378f4f7c15cc28f4be6990439ea909926874ae6f85bcc46813fc6822a7"
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/color-contract-2026-10-22/production-plan.md",
+      "sha256": "300f71b7746bdf0da6cb4deded44f760ca7fcc1cbd19a7fc56a2a68d39518793"
+    },
+    {
+      "path": "code/streeling/evidence/color-contract-2026-10-22/README.md",
+      "sha256": "2806cfebc71c13e961ff9b3053794a8bb3db752b9ef74a5933c31972ac00fd69"
+    },
+    {
+      "path": "code/streeling/evidence/color-contract-2026-10-22/primary-readback.json",
+      "sha256": "4a01238248f57f15e98f949792b2aea624eed70cafe4c4fee2592cdbbda075b0"
+    },
+    {
+      "path": "code/streeling/evidence/color-contract-2026-10-22/source-observations.json",
+      "sha256": "3c7ca94b7ead4e1290e556c1c43d93074351f6fb5083337d4b802298fd48b0da"
+    },
+    {
+      "path": "code/streeling/evidence/color-contract-2026-10-22/transfer-calculations.json",
+      "sha256": "a135280b799a4f26131e6ae1aa4e40ea566482d3f8afdc66655b907892ac22f6"
+    },
+    {
+      "path": "code/streeling/evidence/color-contract-2026-10-22/packed-texel-calculations.json",
+      "sha256": "346f63e682c2741fa5b7be683067a4106345ad0e86a89e2efca85885ef85e5aa"
+    },
+    {
+      "path": "code/streeling/evidence/color-contract-2026-10-22/public-texture-inspection.json",
+      "sha256": "b54cc8ba25b900facf147e2c10c25923c4e1581efce79c9d929370dee7717d74"
+    },
+    {
+      "path": "code/streeling/evidence/color-contract-2026-10-22/figure-pixel-audit.json",
+      "sha256": "49c2ccd6ec80d72bbefeddadc72ac4946b6757143bceba3a8a71e7da3e8da85b"
+    },
+    {
+      "path": "code/streeling/evidence/color-contract-2026-10-22/appearance-task-design.json",
+      "sha256": "ae71df2633a047f4d96aca108c61a963de3e29b8d7a9126768c7ad0bd4ebe4a4"
+    },
+    {
+      "path": "code/streeling/evidence/color-contract-2026-10-22/data-audit.json",
+      "sha256": "11da28829c7bc6b73d435fc1f1cd43b4750dba8b39e7bbdc69254d6d0ba40f64"
+    },
+    {
+      "path": "code/streeling/evidence/color-contract-2026-10-22/asset-public-readback.json",
+      "sha256": "edb92f145e2b994d4df7b60d97489b6c3f6d9e6f1017358742190995862aaaa5"
+    },
+    {
+      "path": "code/streeling/evidence/color-contract-2026-10-22/learner-task.md",
+      "sha256": "b031453554cb70fe027f036e622eb4399dbf6042d59eaa304bebca60115ecfed"
+    },
+    {
+      "path": "code/streeling/evidence/color-contract-2026-10-22/reviewer-rubric.json",
+      "sha256": "26aa2a91418fe460ac6deac82e6a74159c98dcae9004518c28208f9be9e85643"
+    },
+    {
+      "path": "code/streeling/evidence/color-contract-2026-10-22/official-links.json",
+      "sha256": "ca31ee06058239953e082fb2a83c31edaea8d0050d8b3db602d8daf8c7b43e30"
+    },
+    {
+      "path": "code/streeling/evidence/color-contract-2026-10-22/color-context-controls.png",
+      "sha256": "8e18cb3952eae0798c7cb79b8421ee1d4c521e232e04faf20ed6ac7e086e5af1"
+    }
+  ],
+  "prerequisite_bindings": [
+    {
+      "path": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md",
+      "sha256": "5fbad318a7815657d4cc1be13c1d6a7c265a732e3121d901bd35c994c9227d8d"
+    }
+  ],
+  "locale_url_and_format_checks": [
+    {
+      "path": "streeling/courses/physics/en/phy-009-distinguish-linear-color-from-display-encoding.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true,
+      "immutable_image_url_correct": true
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-009-distinguish-linear-color-from-display-encoding.fr.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true,
+      "immutable_image_url_correct": true
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-009-distinguish-linear-color-from-display-encoding.es.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true,
+      "immutable_image_url_correct": true
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-010-preserve-packed-texture-channel-contracts.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true,
+      "immutable_image_url_correct": null
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-010-preserve-packed-texture-channel-contracts.fr.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true,
+      "immutable_image_url_correct": null
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-010-preserve-packed-texture-channel-contracts.es.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true,
+      "immutable_image_url_correct": null
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-006-separate-pixel-tests-from-appearance-judgments.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true,
+      "immutable_image_url_correct": true
+    },
+    {
+      "path": "streeling/courses/cognitive-science/fr/cog-006-separate-pixel-tests-from-appearance-judgments.fr.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true,
+      "immutable_image_url_correct": true
+    },
+    {
+      "path": "streeling/courses/cognitive-science/es/cog-006-separate-pixel-tests-from-appearance-judgments.es.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true,
+      "immutable_image_url_correct": true
+    }
+  ],
+  "primary_source_review": [
+    {
+      "path": "Experiments/Brutal/Colossus/Program.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs",
+      "sha256": "2ae759eace2d9037f2771bc82b5f901c02bf4ec2751ff4e510f4e1aa4ab60c15",
+      "review_scope": "Actual pinned text directly read in relevant scope, or existing PNG visually viewed and inspection receipt read; immutable bytes hash verified. No host execution or generation-history claim."
+    },
+    {
+      "path": "Experiments/Brutal/Colossus/textures/bake_blender.py",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/textures/bake_blender.py",
+      "sha256": "261cd72a0110ea4623948af3ddab7d6ba6ea77affaf34e5506647cd759217870",
+      "review_scope": "Actual pinned text directly read in relevant scope, or existing PNG visually viewed and inspection receipt read; immutable bytes hash verified. No host execution or generation-history claim."
+    },
+    {
+      "path": "Experiments/Brutal/Colossus/textures/generate_comfyui.py",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/textures/generate_comfyui.py",
+      "sha256": "49205e0df909592bea82e733595b44b77b6ffb8330d92a585ba2f961483972f4",
+      "review_scope": "Actual pinned text directly read in relevant scope, or existing PNG visually viewed and inspection receipt read; immutable bytes hash verified. No host execution or generation-history claim."
+    },
+    {
+      "path": "Experiments/Brutal/Lego/Model.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Model.fs",
+      "sha256": "ac44e7067730897d4fca91617ff68af67e7a1529b56c367d49add89ab6af5228",
+      "review_scope": "Actual pinned text directly read in relevant scope, or existing PNG visually viewed and inspection receipt read; immutable bytes hash verified. No host execution or generation-history claim."
+    },
+    {
+      "path": "Experiments/Brutal/Colossus/textures/concrete_albedo.png",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/textures/concrete_albedo.png",
+      "sha256": "00022a202474dd51fdf12282755ca377f961ea92b45b5417f85a77380c9ec02c",
+      "review_scope": "Actual pinned text directly read in relevant scope, or existing PNG visually viewed and inspection receipt read; immutable bytes hash verified. No host execution or generation-history claim."
+    },
+    {
+      "path": "Experiments/Brutal/Colossus/textures/concrete_nrh.png",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/textures/concrete_nrh.png",
+      "sha256": "d21fa32eec26fc459bad8219bcd2382b36dc9d29a715c89e66450f11d4853b0c",
+      "review_scope": "Actual pinned text directly read in relevant scope, or existing PNG visually viewed and inspection receipt read; immutable bytes hash verified. No host execution or generation-history claim."
+    }
+  ],
+  "official_document_review": [
+    {
+      "url": "https://www.w3.org/TR/2026/CRD-css-color-4-20261020/#color-conversion-code",
+      "actual_read": "Directly opened dated Candidate Recommendation Draft sample code; piecewise sRGB thresholds and transforms read. Restricted nonnegative reference domain; no pipeline certification."
+    },
+    {
+      "url": "https://docs.godotengine.org/en/4.6/tutorials/shaders/shader_reference/shading_language.html#using-source-color",
+      "actual_read": "Direct web.open/find read source_color and renderer qualifications. Separate direct transport403 in official-links retained; no host import inferred."
+    },
+    {
+      "url": "https://docs.blender.org/manual/en/4.5/render/color_management.html",
+      "direct_web_open": "402 Payment Required",
+      "actual_read": "Official versioned full page body supplied through web search and read, including Non-Color data guidance. No claim about default Filmic/AgX state. Transport403 in official-links is not counted as a successful direct read."
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12876641/",
+      "actual_read": "Directly read Lovell etal2026 abstract/introduction: perceived intensity/brightness versus perceived reflectance/lightness. No study stimulus copied, replication or participant result imported."
+    },
+    {
+      "url": "https://docs.comfy.org/",
+      "actual_read": "Directly read official documentation landing page/workflow description; no ComfyUI generation performed."
+    }
+  ],
+  "pending": {
+    "human_technical_review": null,
+    "fluent_language_review": null,
+    "learner_attempts": null,
+    "independent_learner_transfer": null,
+    "host_import": null,
+    "shader_execution": null,
+    "target_render": null,
+    "display_calibration": null,
+    "display_luminance": null,
+    "observer_responses": null,
+    "craft_material_quality": null,
+    "deployed_html": null
+  },
+  "human_technical_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "host_import": null,
+  "render_outcome": null,
+  "display_measurement": null,
+  "observer_responses": null,
+  "deployed_html": null,
+  "boundaries": [
+    "Linear-light RGB is a declared coordinate model, not measured cd/m2 luminance or surface reflectance.",
+    "Rounded bytes128/188 and their decoded values remain distinct from the exact unquantized0.5 examples.",
+    "Selected pow2.2 conversions include a cladding exception. Isolated scalar aces calculation is neither full ACES conformance nor a complete frame.",
+    "Packed RG/B/A roles are normalX/Y, roughness and image-derived height proxy; no normalZ, opacity, measured physical height or alpha displacement follows.",
+    "Observed NRH sRGB/gAMA/cHRM metadata versus declared Non-Color remains visible; generation history and host interpretation are unknown.",
+    "Equal target-crop bytes do not force equal brightness/lightness judgments. Brightness and perceived reflectance are separate tasks; no observer was tested.",
+    "Counterbalanced swap is planned, not rendered. Original two-surround control is not the cited checker-block stimulus or replication.",
+    "No host/GPU/paid calls, additional experiments, full builds or production source edits performed by this reviewer."
+  ]
+}

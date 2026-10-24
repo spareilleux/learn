@@ -11,7 +11,19 @@ sidebar:
 
 ## Modules
 
-Aucun module produit pour l'instant.
+- [VC-001 · Un manche, trois modes d'accès](vc-001-accessible-fretboard-paths/)
+- [VC-002 · Preuves pour un pont d’observatoire entre Godot et React](vc-002-godot-react-bridge-evidence/)
+- [VC-003 · Quand le jitter aide-t-il un nuage de voicings ?](vc-003-jitter-and-voicing-cloud-distance/)
+- [VC-004 · Une condition de capture pour l'observatoire Godot](vc-004-godot-observatory-capture-gate/)
+- [VC-005 · Préserver les détails artisanaux lors d'un essai d'asset Blender-vers-Godot](vc-005-craft-details-through-blender-to-godot/)
+- [VC-006 · Tester le sens des états de pli dans une scène Blender-vers-Godot](vc-006-origami-fold-state-scene-trial/)
+- [VC-007 · Préserver les croisements du tissage à travers une frontière de scène Godot](vc-007-weave-seams-as-scene-contracts/)
+- [VC-008 · Enregistrer une scène de tissage et l’interroger](vc-008-save-and-query-a-weave-scene/)
+- [VC-009 · Budgéter l'expansion des scènes BRUTAL avant le rendu](vc-009-budget-brutal-scene-expansion/)
+- [VC-010 · Préserver les contrats de canaux des textures regroupées](vc-010-preserve-packed-texture-channel-contracts/)
+- [VC-011 · Préserver l’orientation du repère tangent après une symétrie](vc-011-preserve-tangent-handedness-after-a-mirror/)
+- [VC-012 · Distinguer instances de maillage et appels de dessin](vc-012-separate-mesh-instances-from-draw-calls/)
+- [VC-013 · Maintenir la cohérence entre orientation des triangles et transformations](vc-013-keep-triangle-winding-consistent-with-transforms/)
 
 ## Catalogue de cours (prévu)
 

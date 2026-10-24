@@ -1,0 +1,72 @@
+{
+  "scope": "Original constructed oscillator media, not GA engine output, musician recordings or an administered listening test.",
+  "assets": [
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/tone-a.wav",
+      "sha256": "c75f061087aa80e51a767ca1fbe8297eb6b5020bdc04d2cbbf73aecf1f911153",
+      "bytes": 88244,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "bits": 16,
+      "samples": 44100,
+      "fade_samples": 441,
+      "fade_policy": "np.linspace endpoints included, first/last441 samples",
+      "pre_quantization_gain": 0.5694994093296575,
+      "target_float_rms": 0.05,
+      "float_rms": 0.05,
+      "decoded_rms": 0.05000004323784614,
+      "decoded_peak_abs": 0.071197509765625,
+      "max_abs_quantization_error": 1.5258202622617234e-05,
+      "encoder": "nearest-even round(sample*32768)",
+      "decoder": "signed PCM16 /32768"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/tone-b.wav",
+      "sha256": "fd1d82859b50a6771d56b96176507cd7641039cd35bad70d5b8e0c0722f1a63f",
+      "bytes": 88244,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "bits": 16,
+      "samples": 44100,
+      "fade_samples": 441,
+      "fade_policy": "np.linspace endpoints included, first/last441 samples",
+      "pre_quantization_gain": 0.5694974666513828,
+      "target_float_rms": 0.05,
+      "float_rms": 0.05,
+      "decoded_rms": 0.05000003760387708,
+      "decoded_peak_abs": 0.071197509765625,
+      "max_abs_quantization_error": 1.5258372559862066e-05,
+      "encoder": "nearest-even round(sample*32768)",
+      "decoder": "signed PCM16 /32768"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/two-tone-illustration.wav",
+      "sha256": "ab931fd23b805edec2a493de17001923762a2583f80fb386f3cf944685a2dd5d",
+      "bytes": 352844,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "bits": 16,
+      "samples": 176400,
+      "fade_samples": 441,
+      "fade_policy": "np.linspace endpoints included, first/last441 samples",
+      "pre_quantization_gain": 1.0,
+      "target_float_rms": null,
+      "float_rms": 0.12540502824762553,
+      "decoded_rms": 0.12540499226376442,
+      "decoded_peak_abs": 0.25,
+      "max_abs_quantization_error": 1.5258783825189415e-05,
+      "encoder": "nearest-even round(sample*32768)",
+      "decoder": "signed PCM16 /32768"
+    }
+  ],
+  "task_assets": [
+    "tone-a.wav",
+    "tone-b.wav"
+  ],
+  "task_frequency_a_hz": 327.0319566257483,
+  "task_frequency_b_hz": 329.6275569128699,
+  "decoded_task_b_minus_a_rms_db": -9.78719878658059e-07,
+  "perceptual_loudness_equality_measured": false,
+  "played_or_listened_here": false,
+  "mixture_scope": "Four-second faded illustration; different from the sequential single-tone task assets."
+}

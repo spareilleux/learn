@@ -1,0 +1,84 @@
+---
+module_id: cs-013-preserve-spectral-axes-and-units
+department: computer-science
+course: "Preserve Axes and Units When Composing Spectral Outputs"
+level: intermediate
+prerequisites: ["cs-012-native-and-wasm-render-boundaries", "aud-006-calibrate-spectral-amplitudes"]
+estimated_duration: "35 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Preserve Axes and Units When Composing Spectral Outputs
+
+> **Draft scope.** Source-assisted interface analysis and measured numerical fixtures. Human technical review, fluent-language review, learner attempts and public course HTML verification remain pending. No IX binary, new ComfyUI node or production handoff schema was executed or introduced.
+
+## The project question
+
+An agent passes an IX spectral matrix to a graph node or display. The receiver checks the total number of values, draws a plausible image and reports success. What information could still be wrong? Composition needs the coordinates and meaning of values, as well as their storage size. This lesson examines that interface; [CS-012](cs-012-native-and-wasm-render-boundaries.md) covers native and WASM render boundaries.
+
+The pinned [IX spectrogram handler](https://github.com/GuitarAlchemist/ix/blob/bd1336b7c4045e427dcdbe80b102790e45da5ce1/crates/ix-agent/src/handlers.rs#L1143-L1189) returns `spectrogram`, `n_frames`, `n_bins`, `window_size`, `hop_size` and `db`. Its payload does not supply a sample rate or time/frequency axis arrays. The [core frame loop](https://github.com/GuitarAlchemist/ix/blob/bd1336b7c4045e427dcdbe80b102790e45da5ce1/crates/ix-signal/src/spectral.rs#L6-L54) uses time frames as rows, bins as columns and complete windows only. Source text is the evidence for those statements, not a live service response.
+
+The [coordinate fixture](../../../../code/streeling/evidence/spectral-views-2026-10-22/coordinates.json) reproduces that framing on two retained WAVs with temporary [NumPy analysis](https://numpy.org/doc/stable/reference/generated/numpy.fft.rfft.html). Its `advisory_handoff` object is a teaching example to critique, not a new ecosystem contract. You will recover coordinates, expose a stride mistake and identify the context the receiver must obtain from a trusted caller.
+
+## 1. Derive the shape from the framing rule
+
+For signal length 176400, window 2048 and hop 512, complete-frame count is `1 + floor((176400-2048)/512) = 341`. A real one-sided transform has `2048/2 + 1 = 1025` bins. The frame-major matrix therefore contains 349525 values. The last frame starts at sample 174080 and ends at exclusive sample 176128, leaving 272 samples outside the complete frames.
+
+This tail is a consequence of the stated rule. It is neither evidence of a decoder losing samples nor permission to claim that the display analyzes every sample of the original file. Padding and partial-window processing are possible policies, but adopting either would change this experiment.
+
+### Practice exercise 1: recover the shape and tail
+
+Calculate the matrix shape, total cells, last frame boundaries and unframed tail from the stated input. Would padding the last frame leave the same analysis policy?
+
+> **Answer:** The shape is 341 by 1025, with `341*1025 = 349525` values. Last start is `340*512 = 174080`; exclusive end is `174080+2048 = 176128`. The tail is `176400-176128 = 272` samples. Padding would introduce another declared policy, so its outputs must not be presented as this complete-frame result.
+
+## 2. Attach time to a stated point of the window
+
+This fixture labels frame start as `t[j] = j*512/44100` seconds and bin frequency as `f[k] = k*44100/2048` hertz. A window spans approximately 0.046440 seconds; the hop is approximately 0.011610 seconds. Frame-start labels and window-center labels are both possible conventions, but silently switching between them shifts a displayed event.
+
+The accompanying plot draws each column over a hop-sized display cell. That cell does not describe the full sample support of the transform: a frame uses 2048 samples even though columns advance by 512 samples. The final display cell ends near 3.959002 seconds; the final frame's sample support ends near 3.993832 seconds. Keep these extents distinct when comparing an attack marker with the image.
+
+### Practice exercise 2: decode a cell
+
+For frame 50 and bin 32, give the frame-start time and frequency, using the declared formulas. Does the hop-sized column mean only 512 samples contributed? What context is missing if the receiver has the matrix and window/hop values but no sample rate?
+
+> **Answer:** Start time is `50*512/44100`, approximately 0.580499 seconds; frequency is `32*44100/2048 = 689.0625` Hz. Each complete transform still uses 2048 samples. Without the sample rate the receiver can retain sample-index and bin-index coordinates, but cannot assign these absolute seconds and hertz values.
+
+## 3. Test orientation with a non-symmetric sentinel
+
+The tiny fixture defines three frame rows and five bin columns, with `value = 100*frame + bin`. It is deliberately non-square so that a transposed shape is visibly different. In a flat row-major buffer, the element at frame 2, bin 4 has offset `2*5+4 = 14` and value 204. Accidentally using stride 3 reads offset 10 and value 200 instead. Both buffers can still contain the same total number of values.
+
+Plotting libraries commonly expect a frequency-by-time image. In that case transpose the frame-by-bin matrix for the display and bind its axes accordingly. Do not change the source record's axis order just to match a plotting call. A shape check, a cell check and a coordinate check target different failure modes.
+
+### Practice exercise 3: reject a passing size check
+
+A receiver has 15 values and reads frame 2, bin 4 with stride 3. Its author says the cell-count check proves correctness. Calculate the correct and wrong offsets and values, then propose a stronger check.
+
+> **Answer:** Correct offset is `2*5+4 = 14`, value 204. The wrong offset is `2*3+4 = 10`, value 200. Total count 15 cannot distinguish the layouts. Require shape 3 by 5, axis order frame then bin, the declared row-major convention and the sentinel cell result, followed by a real coordinate check.
+
+## 4. Preserve the meaning of the values
+
+The IX `db` flag distinguishes raw magnitudes from their logarithmic conversion; it does not turn them into a calibrated physical unit. [AUD-006](../../audio-engineering/en/aud-006-calibrate-spectral-amplitudes.md) applies an explicit coherent-window amplitude estimator instead. A display receiving that derived matrix must be told which quantity it received, which window was used, how endpoints were scaled, the dB reference if any, and any display floor.
+
+The advisory handoff binds a source WAV hash, sample rate, shape, ordered axes, frame-time reference, window/hop, window formula, amplitude estimator and display reference. These fields express information this example needs. They have not been ratified as a schema or implemented in an IX/ComfyUI bridge. A real integration would need validation and failure behavior at its own boundary; do not infer that a proposed record already provides them.
+
+### Practice exercise 4: repair an incomplete handoff
+
+An agent sends a logarithmic matrix and writes only “349525 cells; dB; successful.” Name the missing information needed to reproduce this lesson's coordinates and value interpretation. Can it call the matrix an observed IX response?
+
+> **Answer:** Require source identity and decoding convention, shape 341 by 1025, frame/bin axis order and storage convention, sample rate 44100 Hz, window 2048, hop 512, frame-start timing, the window formula, value estimator, endpoint treatment, dB reference and floor. The retained data were computed by temporary numerical analysis following pinned source equations, so they must not be relabeled as a response from an executed IX binary.
+
+## 5. Let a composition boundary reject ambiguity
+
+In an agent workflow, a plausible picture is weak evidence for a correct handoff. Before comparing candidates, validate the coordinates and quantity assumptions. When a required sample rate or value reference is unavailable, return the missing requirement to the producer or retain index-only data explicitly. A guessed unit propagates silently into every downstream judgment.
+
+### Practice exercise 5: choose the next action
+
+A downstream agent wants to rank guitar candidates by a displayed spectral feature, but the payload has no sample rate and no calibration reference. What can it safely preserve, what must it request, and which claim must wait?
+
+> **Answer:** Preserve the original values, source identity, existing shape and any known index coordinates. Request the trusted sample rate and the value/window/reference contract; validate them before assigning hertz, seconds or calibrated dB. The feature ranking and its musical interpretation must wait for those requirements. Recording missing context is a useful boundary result, not a measured comparison or an implemented semantic-backpressure protocol.
+
+## Evidence boundary
+
+Read the [analysis receipt](../../../../code/streeling/evidence/spectral-views-2026-10-22/execution.json) and [source readback](../../../../code/streeling/evidence/spectral-views-2026-10-22/primary-readback.json) for versions and input hashes. The fixture tests arithmetic, orientation and interpretation under declared inputs. It establishes neither a general schema's adequacy nor an executed IX editor pipeline, production adapter or learner outcome.

@@ -10,6 +10,21 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 
 ## Progress
 
+## QA
+
+| Expected | Observed defect | Correction and measurement | Status and evidence |
+| --- | --- | --- | --- |
+| Localized course descriptions match their titles. | 32 FR/ES metadata values remained English. | 118 passes/32 failures before; 150 passes/0 failures after 32 scalar corrections. | Fixed in this batch; [exact source changes](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/root-metadata-fix.json), [failed run](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/metadata-before-fix.json), [replay](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/metadata-after-guard.json). |
+| Tests reject missing coverage and record enough diagnostics. | Empty-plan false green; assertions before observations; printed delay/coverage expectations not independently asserted. | Cardinality guard, reordered observation paths, independent values/support checks. Replays: 69 new-course tests and six baseline tests pass. | Fixed in the reviewed test harness; [diagnosis and retained attempts](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md). Fixed-model evidence; real software, listening and learner trials remain pending. |
+
+
+## Experiments
+
+| Question | Hypothesis/status | Observed result | Verdict and limits | Record |
+| --- | --- | --- | --- | --- |
+| Does the existing Streeling generator regression suite still pass? | Regression check; not a scientific preregistration. | 18 passed, 0 failed; Node v24.12.0. | Pass for these generator checks; no domain or learner claim. | [Retained run](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/generator-initial.json) |
+
+
 ### Audio Engineering
 
 - [ ] [AUD-001 · EQ and Compression Order](../audio-engineering/aud-001-eq-compression-order/) <!-- aud-001-eq-compression-order -->
@@ -298,3 +313,39 @@ Synced from Demerzel at [`0f7a5fd`](https://github.com/GuitarAlchemist/Demerzel/
 Nothing in it was run here.
 
 - **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-10-23 — Batch of50: test, record, refine and replay
+
+This is production verification, not a completed learner attempt. The requested batch is50 distinct English courses with full French/Spanish translations. [The plan](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/batch-plan.json) records the exact150 source paths and baseline. Authoring/source reading is in progress in three disjoint units. No course checkbox is ticked from that work.
+
+Executed `node --test scripts/tests/lazy-demo.test.mjs scripts/tests/streeling-copy-source.test.mjs scripts/tests/sync-streeling.test.mjs`: 18 passed, 0 failed. The [full output](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/generator-initial.log) and [input hashes/exit status](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/generator-initial.json) are retained. This checks the existing generator, not the correctness of the new lesson calculations.
+
+The user's additional requirement is an iterative [claim-validation loop](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal-validation-plan.md): derive and execute checks, preserve failures, correct courses/tests, replay and record limitations. Dedicated claim tests and independent review remain pending at this entry. No new audio, scene, material, human or learner trial has been performed.
+
+## 2026-10-23 — Claim check baseline-audio-01
+
+Executed `baseline-audio-01` for3 courses: exit0, 6 tests, model/negative coverage True. Verdict: pass. The [run](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/baseline-audio-01.json) retains actual command, input/test hashes and computed observations; the [full output](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/baseline-audio-01.log) preserves failures. See the [production journal](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) for the expectation recorded before execution, diagnosis, corrections and replay. Scope: authored cases only, not new runtime, musician or learner evidence.
+
+## 2026-10-23 — Claim check claims-a-01
+
+Executed `claims-a-01` for18 courses: exit0, 36 tests, model/negative coverage True. Verdict: pass. The [run](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-a-01.json) retains actual command, input/test hashes and computed observations; the [full output](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-a-01.log) preserves failures. See the [production journal](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) for the expectation recorded before execution, diagnosis, corrections and replay. Scope: authored cases only, not new runtime, musician or learner evidence.
+
+## 2026-10-23 — Claim check claims-c-01
+
+Executed `claims-c-01` for16 courses: exit0, 16 tests, model/negative coverage True. Verdict: pass. The [run](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-c-01.json) retains actual command, input/test hashes and computed observations; the [full output](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-c-01.log) preserves failures. See the [production journal](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) for the expectation recorded before execution, diagnosis, corrections and replay. Scope: authored cases only, not new runtime, musician or learner evidence.
+
+## 2026-10-23 — Claim check claims-b-01
+
+Executed `claims-b-01` for16 courses: exit0, 17 tests, model/negative coverage True. Verdict: pass. The [run](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-b-01.json) retains actual command, input/test hashes and computed observations; the [full output](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-b-01.log) preserves failures. See the [production journal](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) for the expectation recorded before execution, diagnosis, corrections and replay. Scope: authored cases only, not new runtime, musician or learner evidence.
+
+## 2026-10-23 — Claim check claims-all-01
+
+Executed `claims-all-01` for50 courses: exit0, 69 tests, model/negative coverage True. Verdict: pass. The [run](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-all-01.json) retains actual command, input/test hashes and computed observations; the [full output](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-all-01.log) preserves failures. See the [production journal](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) for the expectation recorded before execution, diagnosis, corrections and replay. Scope: authored cases only, not new runtime, musician or learner evidence.
+
+## 2026-10-23 — Claim check claims-all-02
+
+Executed `claims-all-02` for50 courses: exit0, 69 tests, model/negative coverage True. Verdict: pass. The [run](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-all-02.json) retains actual command, input/test hashes and computed observations; the [full output](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-all-02.log) preserves failures. See the [production journal](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) for the expectation recorded before execution, diagnosis, corrections and replay. Scope: authored cases only, not new runtime, musician or learner evidence.
+
+## 2026-10-23 — Claim check baseline-audio-02
+
+Executed `baseline-audio-02` for3 courses: exit0, 6 tests, model/negative coverage True. Verdict: pass. The [run](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/baseline-audio-02.json) retains actual command, input/test hashes and computed observations; the [full output](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/baseline-audio-02.log) preserves failures. See the [production journal](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) for the expectation recorded before execution, diagnosis, corrections and replay. Scope: authored cases only, not new runtime, musician or learner evidence.

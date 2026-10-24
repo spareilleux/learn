@@ -1,0 +1,122 @@
+{
+  "checked_at_utc": "2026-10-22T19:19:13.654208+00:00",
+  "base_learn_commit": "218a2bffc18fe2251956197e882cb6c7ea5d7962",
+  "source_ga_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "scope": "Three courses on stateful control, scenario decisions and value trade-offs; fixed authored observations/losses/attributes, pinned public source and two original figures. No new production/lab program.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "amended_prior_locale_sources": 3,
+  "localized_new_exercise_answer_pairs": 45,
+  "reviewed_exercise_answer_pairs": 60,
+  "calculation_checks": {
+    "independent_checks": 62,
+    "passed": 62,
+    "failed": 0,
+    "original_figures": 2,
+    "public_ga_source_files": 3,
+    "new_source_controller_run": false,
+    "new_gpu_run": false,
+    "new_dependency_install": false
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.8315571999992244,
+    "log": "C:\\tmp\\streeling-observatory-tests-20261022.log",
+    "log_sha256": "05a90ce8ecf2fa85059c926b86882b1de4af010f597ee41f5adb327096e972f9",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.4479163000069093,
+    "log": "C:\\tmp\\streeling-observatory-sync-20261022.log",
+    "log_sha256": "22aa9c140f52c1c894cf3ebda0c355c6dc4954cf1e24211ddf233c5b3876394e",
+    "idempotent_checked_files": 608,
+    "warnings": "Journals report modules without actual study entries; protected journal bytes retained rather than manufacturing results."
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 84.36736800000654,
+    "log": "C:\\tmp\\streeling-observatory-build-20261022.log",
+    "log_sha256": "2fa81c68fddd34eeb996e90f91c380f8b2501495b0b15e3750270cf3a4c1870c",
+    "pages": 1804,
+    "dependency_install": "Existing node_modules junction; no install.",
+    "warnings": "Highlighting fallback and empty i18n/404 warnings retained in complete log."
+  },
+  "rendered_articles": {
+    "pages": 24,
+    "links": 387,
+    "unresolved_internal_links": [],
+    "correct_new_and_amended_source_banners": 12,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "data_verdict": "pass_with_declared_evidence_limits",
+    "data_receipt_sha256": "27cd71c27efb5f8539da81bde65a72b6cfe29eebd81fce5f216ab0a3e1dc2aac",
+    "content_verdict": "pass_with_declared_evidence_limits",
+    "content_receipt_sha256": "19f9989e48a990868b5dda39c6e988079e3918e7b5bcac23c0bbeb3bb63c7870",
+    "exercise_pairs_checked": 60,
+    "learner_criteria_checked": 15,
+    "findings": [],
+    "scope": "Independent AI source/arithmetic/figure/course checks; not human approval.",
+    "human_subject": null,
+    "fluent_language": null,
+    "learner": null,
+    "live_control": null,
+    "rendered_quality": null,
+    "stakeholder_preferences": null
+  },
+  "code_review_pipeline": "Documentation/data/figure-only deliverable with temporary numerical analysis; no new production/lab program emitted and no code-shipping review invoked.",
+  "manual_host_scan": "Checked configured-variant versus runtime-toggle distinction, source/availability/numeric/time boundaries, synthetic open-loop state traces, EMA and strict controls, scenario regret/expected assumptions/crossover/omission, dominance/weights/units/feasibility/authority, task/rubric/translation coverage, original figures and exact reviewer hashes. Historical inconclusive coexistence status retained.",
+  "source_inventory": {
+    "core_english_modules": 177,
+    "target": 525,
+    "original_departments": 21,
+    "remaining_core_source_gaps": 348,
+    "locale_counts": {
+      "en": 178,
+      "fr": 178,
+      "es": 178
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint/typecheck scripts configured; existing generator tests and Astro build used.",
+  "initial_course_baseline": "0e1080569fb174d7867eebc9248f4fc9193aa5a8",
+  "rendered_images": {
+    "image_occurrences": 9,
+    "unique_images": 3,
+    "decoded_public_pngs": true,
+    "negative_html_file_page_rejected": true,
+    "source_receipt_sha256": "1a26f400d030090edfc7218b2e64ae1ad029c0e965228f8c79809ec6ebc81a11",
+    "built_reference_receipt_sha256": "d8ad9112580b5b0588731aba8f14d5eb12f7b9c6c5dd0d26d89146c9842cd1ce",
+    "scope": "Built HTML references and anonymous decoded immutable PNG bytes, not browser or deployed course HTML."
+  }
+}

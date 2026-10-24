@@ -1,0 +1,111 @@
+{
+  "utc": "2026-10-22T01:08:56.199764+00:00",
+  "learn_base": "09b13e7f9eddc2b4ddbd87356001c1da2eec6b58",
+  "source_commit": "17f82a4b4b913d7c64942a3d3ff670abf4e6f85c",
+  "generator_tests": {
+    "passed": 17,
+    "failed": 0,
+    "regression_red": "New CLI provenance test failed before implementation: en must identify the initial copy."
+  },
+  "generated_catalog": {
+    "departments": 22,
+    "en": 102,
+    "fr": 96,
+    "es": 96
+  },
+  "source_courses": {
+    "files": 18,
+    "root_modules": 3,
+    "support_modules": 7,
+    "root_locales": [
+      "en",
+      "fr",
+      "es"
+    ],
+    "archive_only_files": 12,
+    "archive_root_locales": [
+      "pt",
+      "it",
+      "de"
+    ]
+  },
+  "static_build": {
+    "exit_code": 0,
+    "pages": 1576,
+    "node": "24.12.0",
+    "astro": "7.3.2",
+    "starlight": "0.42.0",
+    "dependency_install": "Existing Learn node_modules junction; no fresh npm ci proof.",
+    "log": "C:/tmp/streeling-craft-main-build-20261022.log"
+  },
+  "rendered_article_link_check": {
+    "pages": 21,
+    "course_pages": 18,
+    "overview_pages": 3,
+    "article_links_checked": 486,
+    "unresolved_internal_links": 0,
+    "errors": [],
+    "self_test": "Missing-page and missing-anchor controls detected."
+  },
+  "source_integrity": {
+    "original_source_files": 46,
+    "byte_identical": 33,
+    "markdown_link_only_changes": 10,
+    "locale_status_corrections": 3,
+    "mapped_relative_links": 37,
+    "actual_changed_destinations": 24,
+    "raw_response_hashes_matched": 3
+  },
+  "anonymous_source_readback": {
+    "fallback_files": 3,
+    "git_blob_matches": 3
+  },
+  "limits": [
+    "Human subject, fluent-language and learner approvals pending.",
+    "No final-base browser interaction or mobile visual QA.",
+    "No deployment or public Learn course readback.",
+    "Dependencies reused through existing node_modules junction; no fresh npm ci.",
+    "Personal journals lack these candidate entries; no study history fabricated.",
+    "Formal review degraded; final delta audit separately recorded."
+  ],
+  "initial_source_commit": "1beb0890faec827e1a9e5532abfdc97908de441d",
+  "other_tests": {
+    "lazy_demo": {
+      "passed": 1,
+      "failed": 0
+    }
+  },
+  "review": {
+    "formal_status": "degraded",
+    "formal_scope": "Prototype-based 99-file snapshot; two local reviewers found no retained defects. Cross-model transport failed before egress; required terminal-job cleanup rejected by automatic command policy. No retry.",
+    "formal_run": "20261021-205500-current3311",
+    "final_delta_audit": {
+      "status": "complete",
+      "kind": "native static audit; not a completed formal CE receipt",
+      "base": "09b13e7f9eddc2b4ddbd87356001c1da2eec6b58",
+      "files": 87,
+      "retained_findings": 0,
+      "resolved_findings": [
+        "Removed stale top-level link counters58/42; current counters37/24 remain in integrity.",
+        "Corrected Spanish adjustment manifest encoding; exact declared prose changes replay."
+      ],
+      "artifact": "C:/Users/spare/AppData/Local/Temp/compound-engineering-spare/ce-code-review/20261021-205500-current3311/final-delta-audit.json"
+    },
+    "shipping_status": "Code review: skipped (ce-code-review unavailable)",
+    "manual_diff_scan": "Completed against merged main; generator/test/provenance, generated catalog, source/evidence boundary checked; no blocking findings retained."
+  },
+  "visual_check": {
+    "scope": "CS-009 French desktop header/banner/outline inspected before main adaptation; screenshot retained outside repository.",
+    "mobile": "Not assessed."
+  },
+  "whitespace": {
+    "other_changed_files": "git diff --check passes with captured raw responses excluded.",
+    "preserved_raw_response_warnings": [
+      "cs-009-response.md:108 CRLF/trailing whitespace",
+      "phy-005-response.md:208 blank line at EOF"
+    ],
+    "reason": "Captured source bytes and three SHA-256 values preserved."
+  },
+  "verified_head": "cf51371edc20692b9b103df29db39cdb960653a5",
+  "scope_note": "Historical verification of the craft tranche at verified_head; this is not the cumulative catalog after later data-visualization imports."
+}
