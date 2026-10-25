@@ -1,0 +1,1440 @@
+{
+  "schema": "streeling-course-author-self-check/1",
+  "unit": "c",
+  "base_learn_commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+  "plan_commit": "f93c0356d23c3700ad1ead501eef46802dca2a31",
+  "scope": "Author format, parity, local-source binding and bounded arithmetic self-check only; no independent proof tests or learner decisions.",
+  "packet_path": "code/streeling/evidence/batch50-2026-10-25/unit-c.json",
+  "packet_sha256": "43f7e610a772c0d4863eb158d3ecf947b8117a75b3dfaa8e38a999d494bb0ef8",
+  "source_count": 48,
+  "course_count": 16,
+  "localized_exercise_answer_pairs": 240,
+  "prepared_learner_criteria": 80,
+  "sources": [
+    {
+      "path": "streeling/courses/physics/en/phy-019-test-sliding-before-calling-a-sculpture-stable.md",
+      "sha256": "c03fe02de52f3f1039fb22c3cb7cb27f04b7e94910164d360347cc8378b8d3f2",
+      "bytes": 6621,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 759,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true,
+      "english_prose_word_count_excluding_metadata_fences_and_urls": 715
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-019-test-sliding-before-calling-a-sculpture-stable.fr.md",
+      "sha256": "0cdd6565e81ea276e2739ead297ff6efb2c65c5513f8147b21f48f8c09e8a9a1",
+      "bytes": 7266,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 828,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-019-test-sliding-before-calling-a-sculpture-stable.es.md",
+      "sha256": "6c3ab5abf8fa4500bba16ea4ec2a5db33c8382789936fcd9bf0271fd80276fcf",
+      "bytes": 6943,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 799,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-020-separate-section-geometry-from-material-stiffness.md",
+      "sha256": "58a5e73d3c1481e7126418485de7adbed03e644b1a675a2ce409aaf96e351094",
+      "bytes": 6819,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 750,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true,
+      "english_prose_word_count_excluding_metadata_fences_and_urls": 705
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-020-separate-section-geometry-from-material-stiffness.fr.md",
+      "sha256": "ece8ffb45253adacea10cabe810b3d96167c4ce0daa76cd8676a748161424b3b",
+      "bytes": 7419,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 838,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-020-separate-section-geometry-from-material-stiffness.es.md",
+      "sha256": "b3991f03a29d771c7b234e3b7e0aa7cb58e9d6470feb41bdd6d33a73dc651d0a",
+      "bytes": 7049,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 796,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-021-separate-rebound-speed-from-retained-energy.md",
+      "sha256": "207f9b30476392844f26a04926038a044f39810d15e7232a19762fb8285574ca",
+      "bytes": 6448,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 724,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true,
+      "english_prose_word_count_excluding_metadata_fences_and_urls": 681
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-021-separate-rebound-speed-from-retained-energy.fr.md",
+      "sha256": "f8bd4181de91397dc4bda2695b18d767ee882cacdb1df42a9dd1a52ea2f9e91a",
+      "bytes": 7088,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 782,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-021-separate-rebound-speed-from-retained-energy.es.md",
+      "sha256": "a308dfdc97485401bbc7ee0171cbe1ae05c28624d711387c3b1060202622ff49",
+      "bytes": 6743,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 767,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-017-bound-relief-depth-separation-under-a-declared-quantizer.md",
+      "sha256": "c39c8dab61324a3f318aceb2ae8fab70eaccdca80d87af060f58b28d8b7b3eae",
+      "bytes": 6920,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 742,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true,
+      "english_prose_word_count_excluding_metadata_fences_and_urls": 701
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-017-bound-relief-depth-separation-under-a-declared-quantizer.fr.md",
+      "sha256": "c3087b752774698cbb3187ac4ef418d4ffc784729463c251b3137319ad4aa742",
+      "bytes": 7481,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 819,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-017-bound-relief-depth-separation-under-a-declared-quantizer.es.md",
+      "sha256": "d6aa10d57882c6273a1ea59eb3c8a3688f437f05dba650ed7e1c1538a5c17440",
+      "bytes": 7194,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 771,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-018-carry-alpha-association-through-a-textile-edge.md",
+      "sha256": "7c748e265227bd2a38096350f1e2574e8434d1d9167ca84b003d1bd7771d2051",
+      "bytes": 7166,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 712,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true,
+      "english_prose_word_count_excluding_metadata_fences_and_urls": 667
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-018-carry-alpha-association-through-a-textile-edge.fr.md",
+      "sha256": "62f59df265b2fce7e3c30c8c0415f4b6b06f8206502cdef4b7a4e8168532574b",
+      "bytes": 7746,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 770,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-018-carry-alpha-association-through-a-textile-edge.es.md",
+      "sha256": "bfd34f610d9261a6ebf2bbdccaae53423058494172846fa763644e7b93fc4428",
+      "bytes": 7364,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 749,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-019-measure-directional-uv-stretch-before-reusing-a-motif.md",
+      "sha256": "f8283047642a76bc012d9f9464f81d87ad10d380502a538487fc34e261ae16ba",
+      "bytes": 6538,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 734,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true,
+      "english_prose_word_count_excluding_metadata_fences_and_urls": 688
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-019-measure-directional-uv-stretch-before-reusing-a-motif.fr.md",
+      "sha256": "5d27d857d99cf4ad90770afe7103d280e7e7f41d3b4cf33bf9aa206017480199",
+      "bytes": 7077,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 780,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-019-measure-directional-uv-stretch-before-reusing-a-motif.es.md",
+      "sha256": "f51518b465d84a851e15e4b0231b8a93b7414c69c99ee9de3d662a22e8869f41",
+      "bytes": 6716,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 760,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-017-summarize-fibre-axes-without-inventing-a-direction.md",
+      "sha256": "c254c4c9bf38933ebd9d08e4c729b71e50a340b4238c26faddd4037ea3422baf",
+      "bytes": 6623,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 736,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true,
+      "english_prose_word_count_excluding_metadata_fences_and_urls": 694
+    },
+    {
+      "path": "streeling/courses/data-visualization/fr/dv-017-summarize-fibre-axes-without-inventing-a-direction.fr.md",
+      "sha256": "dbab1f1d6ae0a10783b9ce610f5f9974ba69e70e6e9bf976ec447c74386abf18",
+      "bytes": 7117,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 774,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/data-visualization/es/dv-017-summarize-fibre-axes-without-inventing-a-direction.es.md",
+      "sha256": "dcddc751946872ab58c4c90e2451adce8fdb61b2e1569431a8da44d3b9bbc5e4",
+      "bytes": 6828,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 753,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-018-show-overlapping-craft-defects-as-a-union.md",
+      "sha256": "d6369c8833bd1946e8b5b89b838ff2b5b0eaf0926efe0908fcbdddc9e1fda0fe",
+      "bytes": 6377,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 720,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true,
+      "english_prose_word_count_excluding_metadata_fences_and_urls": 671
+    },
+    {
+      "path": "streeling/courses/data-visualization/fr/dv-018-show-overlapping-craft-defects-as-a-union.fr.md",
+      "sha256": "80893ca435692cbd5f8b918179f786f54dade10b3b2655ed37a19b5f80b9e444",
+      "bytes": 6831,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 751,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/data-visualization/es/dv-018-show-overlapping-craft-defects-as-a-union.es.md",
+      "sha256": "c067e157b054438ead23834d5e3e27dac3cf50a050062b59573d9ba40eb3c300",
+      "bytes": 6550,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 735,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-019-choose-a-minimal-view-set-for-declared-features.md",
+      "sha256": "3d02fbc6685e874d25e32703f79534bafa6d037599696122b363809c7e0f67d4",
+      "bytes": 7347,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 745,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true,
+      "english_prose_word_count_excluding_metadata_fences_and_urls": 706
+    },
+    {
+      "path": "streeling/courses/data-visualization/fr/dv-019-choose-a-minimal-view-set-for-declared-features.fr.md",
+      "sha256": "00dc2955755ae63547a8f7c528d55de81fc039c78cc427193946b3c3796b444c",
+      "bytes": 7806,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 794,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/data-visualization/es/dv-019-choose-a-minimal-view-set-for-declared-features.es.md",
+      "sha256": "3d84e1a1b0aac2a79f8f8eb26ec8c1203e1cff1f010a633b63f718b7f3811fa3",
+      "bytes": 7492,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 756,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/semiotics/en/sem-015-bind-a-surface-marker-to-barycentric-vertex-identity.md",
+      "sha256": "3c69b0cf4cc8624872ee1e2491874dd5405ffe2ddd48426b0d0f27e77d4bb24c",
+      "bytes": 7114,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 723,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true,
+      "english_prose_word_count_excluding_metadata_fences_and_urls": 682
+    },
+    {
+      "path": "streeling/courses/semiotics/fr/sem-015-bind-a-surface-marker-to-barycentric-vertex-identity.fr.md",
+      "sha256": "fe42cc04077170f1bdcaf47295acdeb435ce38b9cd836a396f25a551e45d9693",
+      "bytes": 7573,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 773,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/semiotics/es/sem-015-bind-a-surface-marker-to-barycentric-vertex-identity.es.md",
+      "sha256": "decc0765706edd05d78b05c5f1a314b3594117df9c4b9f9301ff8e8f068966fa",
+      "bytes": 7331,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 745,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/semiotics/en/sem-016-check-sign-consistency-around-a-craft-seam-cycle.md",
+      "sha256": "22c49fa699ec9509081a806102c73a533770f5c4697ba566fab51d0b313f36f1",
+      "bytes": 7179,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 758,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true,
+      "english_prose_word_count_excluding_metadata_fences_and_urls": 715
+    },
+    {
+      "path": "streeling/courses/semiotics/fr/sem-016-check-sign-consistency-around-a-craft-seam-cycle.fr.md",
+      "sha256": "eea060fa5539bf8badba09fc015062fa528b10e4052378f250b1ce9ba649ed69",
+      "bytes": 7624,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 794,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/semiotics/es/sem-016-check-sign-consistency-around-a-craft-seam-cycle.es.md",
+      "sha256": "1b53510734a3a2a1a1cab90e7f25a26ef7438308d5328c9f55519bee5275196c",
+      "bytes": 7347,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 765,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/semiotics/en/sem-017-declare-boundary-ownership-for-negative-tile-coordinates.md",
+      "sha256": "c15841f405934cfef35c4f1338f51532345bab9026d1237a901c5f24b9157c42",
+      "bytes": 7177,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 749,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true,
+      "english_prose_word_count_excluding_metadata_fences_and_urls": 705
+    },
+    {
+      "path": "streeling/courses/semiotics/fr/sem-017-declare-boundary-ownership-for-negative-tile-coordinates.fr.md",
+      "sha256": "ab5162a28574d40bf2202f792e84612274db2210e56a69d3598caca9f3983162",
+      "bytes": 7783,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 818,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/semiotics/es/sem-017-declare-boundary-ownership-for-negative-tile-coordinates.es.md",
+      "sha256": "a50ab6c80a42967e6b38db70746d52ac956178938b2f30f5d857ceba1bef0e11",
+      "bytes": 7389,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 774,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-012-distinguish-equivalence-from-an-interval-containing-zero.md",
+      "sha256": "9a39f6f6757be1c3e4b84c6be991e5cd2ed53ffb1354e6fb461f44254c6d8a8e",
+      "bytes": 6931,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 735,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true,
+      "english_prose_word_count_excluding_metadata_fences_and_urls": 697
+    },
+    {
+      "path": "streeling/courses/philosophy/fr/phi-012-distinguish-equivalence-from-an-interval-containing-zero.fr.md",
+      "sha256": "954aa1d57fe9912dd010a613954b75931f5c9631d6a4c111dfa5efd1373403dc",
+      "bytes": 7402,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 760,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/philosophy/es/phi-012-distinguish-equivalence-from-an-interval-containing-zero.es.md",
+      "sha256": "1e3f2ab14e895c611f4f954b69c9c778513609c4b96df7791fe97f7bd8d1ec73",
+      "bytes": 7052,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 740,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core.md",
+      "sha256": "13f8488c338e67cc9628e2bae2ae35d166f0d0cb815fb7e3c3b9bb4c07210d1f",
+      "bytes": 7207,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 764,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true,
+      "english_prose_word_count_excluding_metadata_fences_and_urls": 716
+    },
+    {
+      "path": "streeling/courses/philosophy/fr/phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core.fr.md",
+      "sha256": "9314132dbe35d707424ee772a2d54e132c140f671eb5a8a8024f1cc3e135fb5e",
+      "bytes": 7695,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 794,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/philosophy/es/phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core.es.md",
+      "sha256": "8f4f2488c9305340771323f03078ad0e5e6bf689aa14d4e306eaa52e69ba6340",
+      "bytes": 7418,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 760,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/futurology/en/fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario.md",
+      "sha256": "00562dd42c9d7afa4359a3e6e2622d322f93b345eb9531c7cff4e3c7a942869e",
+      "bytes": 7266,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 762,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true,
+      "english_prose_word_count_excluding_metadata_fences_and_urls": 709
+    },
+    {
+      "path": "streeling/courses/futurology/fr/fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario.fr.md",
+      "sha256": "ea9141a7a222c15467dfc3d579eac0f338bf75ffbf952b329f28485750d2b86f",
+      "bytes": 7789,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 821,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/futurology/es/fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario.es.md",
+      "sha256": "752c18c846da79278b9d29d6c1898ad5e1cc9e5690019cdca99f700764ec2962",
+      "bytes": 7430,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 777,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/futurology/en/fut-013-bound-a-future-craft-workflow-by-its-serial-fraction.md",
+      "sha256": "31fb73dcefcae165f8bf262627863e02cfcd737276d7a8dc22e23b1808eb9397",
+      "bytes": 7191,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 761,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true,
+      "english_prose_word_count_excluding_metadata_fences_and_urls": 711
+    },
+    {
+      "path": "streeling/courses/futurology/fr/fut-013-bound-a-future-craft-workflow-by-its-serial-fraction.fr.md",
+      "sha256": "7eb9b462419a17e4ab935a128b2bbd6087910311ba403b70a659dbb3c3a6eb5f",
+      "bytes": 7722,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 807,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    },
+    {
+      "path": "streeling/courses/futurology/es/fut-013-bound-a-future-craft-workflow-by-its-serial-fraction.es.md",
+      "sha256": "ed1990691ba182b39fc561663d6daaa516b31907a08e05d869ea56381ba36888",
+      "bytes": 7285,
+      "utf8_no_bom": true,
+      "lf_only": true,
+      "exercise_count": 5,
+      "answer_count": 5,
+      "metadata_title_matches_h1": true,
+      "meaningful_word_count": 765,
+      "inline_code_parity": true,
+      "fenced_code_parity": true,
+      "ordered_url_parity": true,
+      "numeric_token_parity": true,
+      "canonical_filename": true,
+      "packet_hash_binding": true
+    }
+  ],
+  "metadata_checks": [
+    {
+      "code": "PHY019",
+      "nonlocalized_metadata_parity": true,
+      "prerequisites_are_baseline": true,
+      "five_criteria_undecided": true,
+      "all_acceptance_fields_null": true
+    },
+    {
+      "code": "PHY020",
+      "nonlocalized_metadata_parity": true,
+      "prerequisites_are_baseline": true,
+      "five_criteria_undecided": true,
+      "all_acceptance_fields_null": true
+    },
+    {
+      "code": "PHY021",
+      "nonlocalized_metadata_parity": true,
+      "prerequisites_are_baseline": true,
+      "five_criteria_undecided": true,
+      "all_acceptance_fields_null": true
+    },
+    {
+      "code": "VC017",
+      "nonlocalized_metadata_parity": true,
+      "prerequisites_are_baseline": true,
+      "five_criteria_undecided": true,
+      "all_acceptance_fields_null": true
+    },
+    {
+      "code": "VC018",
+      "nonlocalized_metadata_parity": true,
+      "prerequisites_are_baseline": true,
+      "five_criteria_undecided": true,
+      "all_acceptance_fields_null": true
+    },
+    {
+      "code": "VC019",
+      "nonlocalized_metadata_parity": true,
+      "prerequisites_are_baseline": true,
+      "five_criteria_undecided": true,
+      "all_acceptance_fields_null": true
+    },
+    {
+      "code": "DV017",
+      "nonlocalized_metadata_parity": true,
+      "prerequisites_are_baseline": true,
+      "five_criteria_undecided": true,
+      "all_acceptance_fields_null": true
+    },
+    {
+      "code": "DV018",
+      "nonlocalized_metadata_parity": true,
+      "prerequisites_are_baseline": true,
+      "five_criteria_undecided": true,
+      "all_acceptance_fields_null": true
+    },
+    {
+      "code": "DV019",
+      "nonlocalized_metadata_parity": true,
+      "prerequisites_are_baseline": true,
+      "five_criteria_undecided": true,
+      "all_acceptance_fields_null": true
+    },
+    {
+      "code": "SEM015",
+      "nonlocalized_metadata_parity": true,
+      "prerequisites_are_baseline": true,
+      "five_criteria_undecided": true,
+      "all_acceptance_fields_null": true
+    },
+    {
+      "code": "SEM016",
+      "nonlocalized_metadata_parity": true,
+      "prerequisites_are_baseline": true,
+      "five_criteria_undecided": true,
+      "all_acceptance_fields_null": true
+    },
+    {
+      "code": "SEM017",
+      "nonlocalized_metadata_parity": true,
+      "prerequisites_are_baseline": true,
+      "five_criteria_undecided": true,
+      "all_acceptance_fields_null": true
+    },
+    {
+      "code": "PHI012",
+      "nonlocalized_metadata_parity": true,
+      "prerequisites_are_baseline": true,
+      "five_criteria_undecided": true,
+      "all_acceptance_fields_null": true
+    },
+    {
+      "code": "PHI013",
+      "nonlocalized_metadata_parity": true,
+      "prerequisites_are_baseline": true,
+      "five_criteria_undecided": true,
+      "all_acceptance_fields_null": true
+    },
+    {
+      "code": "FUT012",
+      "nonlocalized_metadata_parity": true,
+      "prerequisites_are_baseline": true,
+      "five_criteria_undecided": true,
+      "all_acceptance_fields_null": true
+    },
+    {
+      "code": "FUT013",
+      "nonlocalized_metadata_parity": true,
+      "prerequisites_are_baseline": true,
+      "five_criteria_undecided": true,
+      "all_acceptance_fields_null": true
+    }
+  ],
+  "internal_links": {
+    "checked": 219,
+    "missing_nonjournal": [],
+    "pending_root_journal": 0
+  },
+  "actually_inspected_local_readings": [
+    {
+      "path": "streeling/courses/physics/en/phy-018-locate-a-sculpture-mass-projection.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "ccc408c1296529dc2c871ca11ae0f797d058f2d04983d98111c8395bc818a22c",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "code/blender/scripts/atlas/kit.py",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc",
+      "scope": "Actual full helper source read: declared frame, new_object/material helpers, primitives, sweep_tube and export declarations. No Blender execution.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-012-rotate-directional-stiffness-with-the-material.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "a4f9c3aca91da96752f79599c518e2cf50b650acd6444ebb4a9a9dd394e0ab3a",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "c3b034bc3edf2d107f90d335636ab2262d2726dcbed91995c63c3382302db495",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-014-predict-an-embroidered-stitch-pixel-footprint.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "cc2381c2dbb044a1b42dffa164aa03a1b9216b4e186d866230fec2c8f66a3921",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-005-quantization-and-indistinguishable-renders.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "cf02f36e78f303a760e73ee87dc92fc37960fa616b432b235f961ab95ca3422c",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "code/blender/scripts/glb_pipeline.py",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "40379515ecff8ecda28dc1933725242d8eb82807d2085d60fbc080b73316cfbe",
+      "scope": "Actual lines 1-65 read: docstring, argument defaults, ordered import setup and mesh joining. No cleanup, capture or export execution.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-009-distinguish-linear-color-from-display-encoding.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "f4927064362cec0d66f7723c394febbec95effcf3fae46652c07c979b16ec8ca",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-010-preserve-packed-texture-channel-contracts.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "dff68b04b2af3c395f35b754b2c65e77968c8d95afce4a56a80f120b7725bf43",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "code/comfyui/ga-lab/runner/comfy.py",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "d1d742a5c0352a031246ec43b8f7d486a7e6f3f488ef2423b60125a8b4369bed",
+      "scope": "Actual lines 1-100 read: HTTP wrapper, structured errors, submit/history/view and image-upload boundary. No ComfyUI call.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-016-track-uv-gutters-through-mip-levels.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "89f79259c6e1d1dcd92deee482ecf41f5f6829f5f3df49bb3bdeda9d51589403",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-006-position-length-area-comparisons.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "8b04fc5c3b037f53310594333684c36fa0bb1b9efb5592b45db5f0f55e4bae7d",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-015-map-missing-stitches-without-inventing-holes.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "b73683f82be6f620edb0b08680eb97abbc8bade39c9d9d4d3f7940021daf40cf",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-010-state-what-a-craft-view-cannot-distinguish.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "55d0c5a5c7ff2a200f66543a2fc0fd30af252db774cbef244fbf5dfbd0d24331",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-016-compare-paired-silhouette-residuals.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "03b11a94f3cc40a75e56a36d73d80b531b355f298063456fd35f44b6b26e9777",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/semiotics/en/sem-004-face-identity-under-reindexing.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "307ebe6590dd8210cd40ff0c4d0a1a079083cb99f9f2965d4c87c3a3ae53edea",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/semiotics/en/sem-013-align-two-motif-periods-at-a-textile-seam.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "2ad8fcc953fde8b7cb8b88a343473d907736ecd03b83038a02570e9bd6267d15",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/network-science/en/net-009-detect-global-cycles-in-a-panel-stack.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "ea8645490b3eab50a4b7d7c5e9539d1da9d08bd8f48600af9606630712861641",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/computer-science/en/cs-015-compose-overlapping-chunks-without-duplicate-frames.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "1de5f2ee3ced1be75e4eeb75991bc5f8e6dd5ee41e4d5eab3d832fff2af602a0",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-006-preserve-the-quantifier-in-a-fold-verdict.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "30d094117d25fcd4fc99f8602a77e520671b86d5d20b4d999ca0dbaf0c2fbbf2",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-011-cross-mesh-and-lighting-before-attributing-a-render-change.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "0efa53b8143de554946ff6fa60e226f0faa2c9b57aaee779dab72decbe77e2d8",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/computer-science/en/cs-009-composing-origami-panel-constraints.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "603098c720ce8a9dd5c142f282278ce39e418d7f66bd14a42dd9e0df12c2dba9",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-008-separate-a-test-oracle-from-a-specification.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "ab7be6ab58c9d4dbb3279e4b753badaa6971ea9da0d153ea581373d6e99f626a",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/futurology/en/fut-004-scenario-test-an-observatory-renderer.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "232bea032ecec5d8aba1ce2d2e5e0aa0919d24150fec634d7f1b17c6a5790328",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-012-compute-quantiles-before-combining-latency-cohorts.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "8ce1f338e19aaf97ccd76185a3539f65d78bb8fa07c5fcdc621dd6c419617f28",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/futurology/en/fut-008-stress-test-a-release-plan-against-review-backlogs.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "cd4c36223781dbfc4f79a7764566cebe8512df5ae8075a868569c6a5bb0b8c6b",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-011-include-review-and-correction-in-automation-break-even.md",
+      "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "sha256": "7ffeeafcc5a7be1f70494e65cd1d6d2577a61015dd77a4b56a5d9fa9999b5601",
+      "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite.",
+      "matches_base_bytes": true
+    }
+  ],
+  "primary_reference_readings": [
+    {
+      "id": "friction",
+      "url": "https://openstax.org/books/university-physics-volume-1/pages/6-2-friction",
+      "version_and_reading_scope": "OpenStax University Physics Volume 1, section 6.2; actual rendered lines 31-75, static bound versus kinetic equality; no material coefficient table reused.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "elastic",
+      "url": "https://openstax.org/books/university-physics-volume-1/pages/12-3-stress-strain-and-elastic-modulus",
+      "version_and_reading_scope": "OpenStax University Physics Volume 1, section 12.3; actual rendered lines 29-48, rigidity idealization and low-stress elastic modulus. Section integral and fixed-moment curvature relation are explicitly authored model premises, not a quoted experiment.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "collision",
+      "url": "https://openstax.org/books/university-physics-volume-1/pages/9-4-types-of-collisions",
+      "version_and_reading_scope": "OpenStax University Physics Volume 1, section 9.4; actual rendered lines 25-62, closed-system momentum and kinetic-energy distinction. Fixed-wall restitution case is authored.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "depth",
+      "url": "https://docs.godotengine.org/en/4.5/tutorials/shaders/advanced_postprocessing.html",
+      "version_and_reading_scope": "Godot 4.5 documentation, Depth texture, actual rendered lines 39-88; nonlinear reversed depth, renderer-dependent NDC and inverse-projection reconstruction. Authored finite uniform quantizer is not a claim about a GPU format.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "alpha",
+      "url": "https://www.w3.org/TR/2024/CRD-compositing-1-20240321/",
+      "version_and_reading_scope": "W3C Candidate Recommendation Draft, 2024-03-21, section 5.1, actual rendered lines 451-496; straight and premultiplied source-over formulas. No CSS or Godot runtime inferred.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "triangle",
+      "url": "https://pbr-book.org/4ed/Shapes/Triangle_Meshes",
+      "version_and_reading_scope": "PBRT fourth edition, section 6.5; actual rendered lines 554-568 and 603-629 for UV affine derivatives; lines 790-798 for barycentric interpolation. No renderer execution or copying of its implementation.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "circular",
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.circmean.html",
+      "version_and_reading_scope": "SciPy 1.18.0 documentation as served, actual rendered lines 30-38 and 74-82; mean resultant and zero-resultant warning. Axial doubling is explicitly derived in the lesson; SciPy not installed or run.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "logic",
+      "url": "https://microsoft.github.io/z3guide/docs/logic/propositional-logic/",
+      "version_and_reading_scope": "Microsoft Z3 Guide, read 2026-10-25, actual rendered lines 22-26 and 57-59: xor, satisfiability, named unsatisfiable cores. A core is not promised minimal; the finite lesson checks deletion witnesses by hand. No Z3 execution.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "floor",
+      "url": "https://docs.python.org/3/library/math.html",
+      "version_and_reading_scope": "Python documentation as served (3.15.1 banner), actual rendered lines 79-94; floor is greatest integer no greater than the input. This is a definition reference only; author host is a separate Python version.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "tail",
+      "url": "https://sites.math.washington.edu/~rtr/papers/rtr179-CVaR1.pdf",
+      "version_and_reading_scope": "Rockafellar and Uryasev, 1999-09-05 preprint, pages 5-6 (PDF indices 4-5), equations 4-9 and piecewise-linear finite approximation; actually read rendered lines 122-179. Lesson defines a weighted finite tail operation and splits cutoff mass explicitly, without claiming a conditional mean over all atoms at the cutoff.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "amdahl",
+      "url": "https://hpc.llnl.gov/documentation/tutorials/introduction-parallel-computing-tutorial",
+      "version_and_reading_scope": "LLNL Introduction to Parallel Computing tutorial, Amdahl law and Scalability sections, read actual served body 2026-10-25; finite-worker serial/parallel denominator, fixed problem size, overhead limitations. Initial guessed shorter URL failed and is retained as unread.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "blender_identity",
+      "url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+      "version_and_reading_scope": "Blender v4.5.0 README, actual full rendered lines 0-35; tool identity only, not a feature or material claim.",
+      "read_method": "web.open actual rendered body",
+      "sha256": null
+    },
+    {
+      "id": "comfyui_identity",
+      "url": "https://github.com/Comfy-Org/ComfyUI",
+      "version_and_reading_scope": "Official Comfy-Org repository page, read 2026-10-25; actual repository identity and About lines 115-148 only. No runtime or feature-performance claim adopted.",
+      "read_method": "web.open actual rendered body",
+      "sha256": null
+    }
+  ],
+  "failures_and_corrections": [
+    {
+      "kind": "prior_packet_lookup",
+      "status": "failed lookup retained; corrected",
+      "diagnostic": "Guessed batch49-2026-10-24/unit-c.json and self-check paths did not exist; exact rg file inventory located batch50-2026-10-24. No source inferred from absent paths."
+    },
+    {
+      "kind": "author_catalogue_stdout",
+      "status": "failed then corrected",
+      "diagnostic": "Initial Python default cp1252 stdout could not encode U+2192 while printing baseline passages. Replayed with python -X utf8; no source corruption."
+    },
+    {
+      "kind": "primary_lookup",
+      "status": "failed; unused",
+      "url": "https://www.itl.nist.gov/div898/handbook/apr/section1/apr productlimit.htm",
+      "diagnostic": "Malformed guessed page returned inaccessible URL. Correct Kaplan-Meier page was later read but survival candidate dropped to avoid duplication with Unit B PM013; no survival course authored."
+    },
+    {
+      "kind": "primary_lookup",
+      "status": "failed then corrected",
+      "url": "https://hpc.llnl.gov/documentation/tutorials/introduction-parallel-computing",
+      "diagnostic": "Short guessed LLNL URL inaccessible. Official search found introduction-parallel-computing-tutorial; actual Amdahl and scalability passages read."
+    },
+    {
+      "kind": "authored_numeric_value",
+      "status": "failed transcription found and corrected before source write",
+      "diagnostic": "VC017 control encoded second depth had been transcribed as 0.46847212089630014. Actual scratch reciprocal calculation gave 0.4684731631057843; corrected model in all locales and packet. Codes remain [121,119]. Main encoded values aligned to actual floating evaluation.",
+      "command": "python -X utf8 -B -c reciprocal-depth scratch calculation; retained output in author turn",
+      "before": 0.46847212089630014,
+      "observed": 0.4684731631057843
+    },
+    {
+      "kind": "rejected_subject_candidate",
+      "status": "prior-art duplicate avoided",
+      "diagnostic": "NET012 already teaches conditionally independent branches with a shared prerequisite; dropped correlated-failure candidate. FUT012 instead integrates weighted worst tail mass."
+    },
+    {
+      "kind": "rejected_subject_candidate",
+      "status": "inter-unit duplicate avoided",
+      "diagnostic": "Coordinator reported Unit B PM013 teaches Kaplan-Meier right-censoring. Dropped FUT013 survival candidate; authored fixed-work Amdahl decomposition instead."
+    },
+    {
+      "kind": "cross_department_prior_art",
+      "status": "scope sharpened",
+      "diagnostic": "Exact-topic scan found CS015 already teaches half-open chunk union and first-writer ownership. Read actual full source, added committed prerequisite to SEM017 and explicitly limited novelty to negative-coordinate lattice indexing versus truncation."
+    }
+  ],
+  "failed_author_helper_or_model_checks": [],
+  "replay_helpers": [
+    {
+      "path": "C:/tmp/batch25-c-author/author.py",
+      "role": "Bounded author dataset/writer. Refuses existing source paths; do not rerun with --write on frozen sources."
+    },
+    {
+      "path": "C:/tmp/batch25-c-author/check.py",
+      "role": "Author read-only source and packet self-check; writes only this allocated self-check packet."
+    },
+    {
+      "path": "C:/tmp/batch25-c-author/finalize.py",
+      "role": "Adds already-observed scratch arithmetic and stricter English prose counts; does not alter sources or unit packet."
+    }
+  ],
+  "checked_not_executed": {
+    "godot_runtime": null,
+    "blender_runtime": null,
+    "comfyui_runtime": null,
+    "physical_craft_trial": null,
+    "actual_learner_attempt": null,
+    "independent_review": null,
+    "build_and_generator_tests": "Root-owned; not run by Unit C",
+    "publication": "Root-owned; not assessed by Unit C"
+  },
+  "open_limits": [
+    "Translations are full author drafts pending independent fluent-language review.",
+    "Mathematical models are invented; no production or physical evidence is inferred from arithmetic.",
+    "Primary web bytes were read through rendered text; remote-source hashes are null, with exact local artifact hashes retained.",
+    "An English prose word count excludes fenced JSON but includes metadata and link labels; no word count is a quality verdict."
+  ],
+  "canonical_source_layout": {
+    "en": ".md",
+    "fr": ".fr.md",
+    "es": ".es.md",
+    "checked_sources": 48,
+    "all_passed": true
+  },
+  "formula_recomputations": [
+    {
+      "code": "VC017",
+      "case": "main",
+      "scope": "Actual scratch reciprocal-depth calculation, not independent proof test",
+      "observed": {
+        "encoded": [
+          0.09090909090909093,
+          0.08990899089908992
+        ]
+      },
+      "expected": {
+        "encoded": [
+          0.09090909090909093,
+          0.08990899089908992
+        ]
+      },
+      "passed": true
+    },
+    {
+      "code": "VC017",
+      "case": "negative_control",
+      "scope": "Actual scratch reciprocal-depth calculation; corrected transcription before source freeze",
+      "observed": {
+        "encoded": [
+          0.4736842105263158,
+          0.4684731631057843
+        ]
+      },
+      "expected": {
+        "encoded": [
+          0.4736842105263158,
+          0.4684731631057843
+        ]
+      },
+      "passed": true
+    },
+    {
+      "code": "PHY020",
+      "case": "main_partial",
+      "scope": "Actual scratch section-moment calculation only; no curvature implementation test",
+      "observed": {
+        "I_x_mm4": 27.0,
+        "I_y_mm4": 432.0
+      },
+      "expected": {
+        "I_x_mm4": 27,
+        "I_y_mm4": 432
+      },
+      "passed": true
+    },
+    {
+      "code": "DV017",
+      "case": "main_partial",
+      "scope": "Actual scratch cosine resultant component only; no full statistics implementation",
+      "observed": {
+        "cos_20_deg": 0.9396926207859084
+      },
+      "expected": {
+        "cos_20_deg": 0.9396926207859084
+      },
+      "passed": true
+    },
+    {
+      "code": "PHY021",
+      "case": "main_partial",
+      "scope": "Actual scratch impulse calculation only",
+      "observed": {
+        "impulse_Ns": 3.0
+      },
+      "expected": {
+        "impulse_Ns": 3
+      },
+      "passed": true
+    },
+    {
+      "code": "FUT012",
+      "case": "main_partial",
+      "scope": "Actual scratch weighted tail arithmetic only",
+      "observed": {
+        "tail_mean": 11.499999999999998
+      },
+      "expected": {
+        "tail_mean": 11.5
+      },
+      "absolute_tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "code": "FUT013",
+      "case": "negative_control_partial",
+      "scope": "Actual scratch serial/parallel component calculation only",
+      "observed": {
+        "serial_minutes": 16.8,
+        "parallel_minutes": 2.8000000000000003
+      },
+      "expected": {
+        "serial_minutes": 16.8,
+        "parallel_minutes": 2.8
+      },
+      "absolute_tolerance": 1e-12,
+      "passed": true
+    }
+  ],
+  "arithmetic_scope": "The retained scratch observations above are partial author arithmetic, not complete model/control coverage. Independent reviewer owns complete narrow claim implementations for all16models and controls."
+}
