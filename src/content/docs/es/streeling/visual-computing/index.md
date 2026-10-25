@@ -30,6 +30,9 @@ sidebar:
 - [VC-017 · Evaluar la separación del relieve con un cuantizador declarado](vc-017-bound-relief-depth-separation-under-a-declared-quantizer/)
 - [VC-018 · Conservar la asociación alfa en el borde de un textil](vc-018-carry-alpha-association-through-a-textile-edge/)
 - [VC-019 · Medir el estiramiento UV direccional antes de reutilizar un motivo](vc-019-measure-directional-uv-stretch-before-reusing-a-motif/)
+- [VC-020 · Intersectar un rayo de selección con las franjas de una caja](vc-020-intersect-a-scene-picking-ray-with-box-slabs/)
+- [VC-021 · Plegar el hemisferio inferior al codificar normales](vc-021-fold-the-lower-hemisphere-in-a-normal-encoding/)
+- [VC-022 · Proyectar una sombra artesanal sobre un plano declarado](vc-022-project-a-craft-shadow-onto-a-declared-plane/)
 
 ## Catálogo de cursos (previsto)
 

@@ -1,0 +1,100 @@
+[
+  {
+    "path": "streeling/courses/semiotics/en/sem-020-locate-a-motif-cell-in-positive-run-lengths.md",
+    "before_sha256": "32822a1b176f20834c5f449d4544323bed18e01584b554c0f5b74d48dd099ec7",
+    "after_sha256": "c35b5498593ecfb0ec8c415b9a1b2e89cd78f00590c4552c6a89799bff53cf48",
+    "replacements": [
+      {
+        "before": "Removing the invalid run silently would change period and later addresses and erase the source’s mistake.",
+        "after": "Changing the valid main run length from one to zero would reduce its length sum from `6` to `5` if accepted. Deleting that zero-length record does not further change the sum or expanded symbols; it erases the malformed instruction and its provenance. The declared positive-length contract therefore rejects the input before assigning it a period."
+      },
+      {
+        "before": "Return `invalid_run`, with period and samples `null`. Continuing after silent deletion would change the meaning of later indices.",
+        "after": "Return `invalid_run`, with period and samples `null`. Removing a zero-length record does not change its arithmetic contribution, but silently accepting the remainder would conceal the violated positive-length contract."
+      },
+      {
+        "before": "An interpreter that admits the zero-run input as the same motif is refuted by the lost period and address contract.",
+        "after": "An interpreter that reports `valid` for the zero-run input violates the declared positive-length contract. Deletion cannot repair the missing provenance or establish the intended motif."
+      }
+    ]
+  },
+  {
+    "path": "streeling/courses/semiotics/fr/sem-020-locate-a-motif-cell-in-positive-run-lengths.fr.md",
+    "before_sha256": "c66ecc2940ddf1b9d2ac0e121e4cc83a22754d27547f7497da5e5d33ff5e8218",
+    "after_sha256": "b5716db09776bf009555ab16901b4df1289cfdcbe698ff6587aebf7e4007e1bf",
+    "replacements": [
+      {
+        "before": "Supprimer silencieusement la séquence changerait période et adresses suivantes tout en effaçant l’erreur.",
+        "after": "Remplacer la longueur un du cas principal par zéro réduirait sa somme de `6` à `5` si cette entrée était admise. Supprimer ensuite l’enregistrement de longueur nulle ne change ni cette somme ni les symboles développés ; cela efface l’instruction mal formée et sa provenance. Le contrat de longueurs strictement positives refuse donc l’entrée avant de lui attribuer une période."
+      },
+      {
+        "before": "Renvoyez `invalid_run`, avec période et échantillons `null`. Supprimer silencieusement la séquence changerait le sens des indices suivants.",
+        "after": "Renvoyez `invalid_run`, avec période et échantillons `null`. Supprimer une séquence de longueur nulle ne change pas sa contribution arithmétique, mais accepter silencieusement le reste masquerait la violation du contrat de longueurs strictement positives."
+      },
+      {
+        "before": "Un interpréteur admettant l’entrée à longueur nulle comme le même motif est réfuté par la perte du contrat de période et d’adresse.",
+        "after": "Un interpréteur annonçant `valid` pour l’entrée à longueur nulle viole le contrat de longueurs strictement positives. La suppression ne rétablit ni la provenance manquante ni le motif voulu."
+      }
+    ]
+  },
+  {
+    "path": "streeling/courses/semiotics/es/sem-020-locate-a-motif-cell-in-positive-run-lengths.es.md",
+    "before_sha256": "377e38a01aa14d7d39ec0b18c4c0978aa51af8438a268174cd091f30f98ff247",
+    "after_sha256": "632c5192f9320dbad49573239c9702b41e5d54ae28b8a8ae396578988c9f2937",
+    "replacements": [
+      {
+        "before": "Eliminar el tramo silenciosamente cambiaría período y direcciones posteriores y borraría el error.",
+        "after": "Cambiar la longitud uno del caso principal a cero reduciría su suma de `6` a `5` si se aceptase la entrada. Eliminar después el registro de longitud nula no cambia esa suma ni los símbolos expandidos; borra la instrucción malformada y su procedencia. El contrato de longitudes positivas rechaza la entrada antes de asignarle un período."
+      },
+      {
+        "before": "Devuelva `invalid_run`, con período y muestras `null`. Eliminarlo silenciosamente cambiaría el significado de índices posteriores.",
+        "after": "Devuelva `invalid_run`, con período y muestras `null`. Eliminar un registro de longitud nula no cambia su contribución aritmética, pero aceptar silenciosamente el resto ocultaría la infracción del contrato de longitudes positivas."
+      },
+      {
+        "before": "La pérdida del contrato de período y dirección refuta admitir la entrada de tramo nulo como el mismo motivo.",
+        "after": "Un intérprete que anuncie `valid` para la entrada de tramo nulo incumple el contrato de longitudes positivas. Eliminar el registro no restablece la procedencia ausente ni demuestra el motivo previsto."
+      }
+    ]
+  },
+  {
+    "path": "streeling/courses/data-visualization/fr/dv-021-transform-interval-endpoints-before-drawing-error-bars.fr.md",
+    "before_sha256": "60a0c09f6d5571ab5534987b0afa684d056874ac2662b3474d51e6ec8e252d93",
+    "after_sha256": "41fb98cf0aeea3ff0ed1b4649a3c76209b319b6ed080cff5be269552a51daeb5",
+    "replacements": [
+      {
+        "before": "son axe de résidus positifs par une racine carrée",
+        "after": "son axe de résidus positifs ou nuls par une racine carrée"
+      }
+    ]
+  },
+  {
+    "path": "streeling/courses/data-visualization/es/dv-022-declare-diagonal-connectivity-in-a-relief-contour.es.md",
+    "before_sha256": "d3597d95fea38012b08d8e5793554744b8c370932b478cbde126e090b31cf803",
+    "after_sha256": "fae401b6e1d520dbdc681a42ba0b85a12abf21783491de9387ae854cac554f0a",
+    "replacements": [
+      {
+        "before": "reconstruir físicamente una silla.",
+        "after": "reconstruir físicamente una superficie en forma de silla de montar."
+      }
+    ]
+  },
+  {
+    "path": "code/streeling/evidence/batch50-2026-10-25-b/unit-c.json",
+    "before_sha256": "e3156cd85b13d150971974285d4b0e64aca00d279e50a253411d101db71915b1",
+    "after_sha256": "5c65a1e421eef843d1cf76698e177e4b899bff8194c1d959ecfa97d83dfd834e",
+    "replacements": [
+      {
+        "before": "Silently discarding a zero run changes the motif’s period and phase addresses instead of rejecting the malformed authored instruction.",
+        "after": "Changing the main run length from one to zero changes the arithmetic sum from 6 to 5 if accepted. Deleting the zero-length record does not further change that sum or expansion; it conceals a violation of the declared positive-length and provenance contract, so the authored control is rejected."
+      },
+      {
+        "before": "Return `invalid_run`, with period and samples `null`. Continuing after silent deletion would change the meaning of later indices.",
+        "after": "Return `invalid_run`, with period and samples `null`. Removing a zero-length record does not change its arithmetic contribution, but silently accepting the remainder would conceal the violated positive-length contract."
+      },
+      {
+        "before": "An interpreter that admits the zero-run input as the same motif is refuted by the lost period and address contract.",
+        "after": "An interpreter that reports `valid` for the zero-run input violates the declared positive-length contract. Deletion cannot repair the missing provenance or establish the intended motif."
+      }
+    ]
+  }
+]

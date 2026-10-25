@@ -115,7 +115,7 @@ Calcule ambos órdenes para la mayor muestra positiva.
 
 <details><summary>Respuesta 1</summary>
 
-Las salidas difieren: atenuar antes del recorte conserva un valor que el otro orden ya ha eliminado.
+Para `x=2`, `A=clip(0.5*2)=1`, `B=0.5*clip(2)=0.5` y `A-B=0.5`. Las salidas difieren: atenuar antes del recorte conserva un valor que el otro orden ya ha eliminado.
 
 </details>
 

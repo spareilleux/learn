@@ -18,28 +18,28 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 
 | Department | Modules | French | Spanish |
 |---|---|---|---|
-| [Audio Engineering](audio-engineering/) | 18 | 18 | 18 |
-| [Cognitive Science](cognitive-science/) | 17 | 17 | 17 |
-| [Computer Science](computer-science/) | 23 | 23 | 23 |
-| [Cybernetics](cybernetics/) | 17 | 17 | 17 |
-| [Data Visualization](data-visualization/) | 19 | 19 | 19 |
-| [Futurology](futurology/) | 13 | 13 | 13 |
-| [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 17 | 17 | 17 |
-| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 16 | 16 | 16 |
-| [Guitar Studies](guitar-studies/) | 17 | 17 | 17 |
-| [Information Theory](information-theory/) | 18 | 18 | 18 |
+| [Audio Engineering](audio-engineering/) | 21 | 21 | 21 |
+| [Cognitive Science](cognitive-science/) | 20 | 20 | 20 |
+| [Computer Science](computer-science/) | 25 | 25 | 25 |
+| [Cybernetics](cybernetics/) | 20 | 20 | 20 |
+| [Data Visualization](data-visualization/) | 22 | 22 | 22 |
+| [Futurology](futurology/) | 15 | 15 | 15 |
+| [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 20 | 20 | 20 |
+| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 19 | 19 | 19 |
+| [Guitar Studies](guitar-studies/) | 20 | 20 | 20 |
+| [Information Theory](information-theory/) | 21 | 21 | 21 |
 | [IX Research](ix-research/) | 1 | 1 | 1 |
 | [Mathematics](mathematics/) | 25 | 25 | 25 |
 | [Music](music/) | 25 | 25 | 25 |
-| [Musicology](musicology/) | 17 | 17 | 17 |
-| [Network Science](network-science/) | 15 | 15 | 15 |
-| [Philosophy](philosophy/) | 13 | 13 | 13 |
-| [Physics](physics/) | 21 | 21 | 21 |
-| [Product and Project Management](product-management/) | 13 | 13 | 13 |
+| [Musicology](musicology/) | 20 | 20 | 20 |
+| [Network Science](network-science/) | 18 | 18 | 18 |
+| [Philosophy](philosophy/) | 15 | 15 | 15 |
+| [Physics](physics/) | 24 | 24 | 24 |
+| [Product and Project Management](product-management/) | 15 | 15 | 15 |
 | [Psychohistory](psychohistory/) | 25 | 25 | 25 |
-| [Semiotics](semiotics/) | 17 | 17 | 17 |
-| [Visual Computing](visual-computing/) | 19 | 19 | 19 |
-| [World Music & Languages](world-music-languages/) | 16 | 16 | 16 |
+| [Semiotics](semiotics/) | 20 | 20 | 20 |
+| [Visual Computing](visual-computing/) | 22 | 22 | 22 |
+| [World Music & Languages](world-music-languages/) | 19 | 19 | 19 |
 
 ## Provenance
 

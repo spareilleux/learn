@@ -28,3 +28,6 @@ sidebar:
 - [MCL-015 · Separate Key Release from Pedal Release](mcl-015-separate-key-release-from-pedal-release/)
 - [MCL-016 · Reconstruct Polyphonic Score Cursors](mcl-016-reconstruct-polyphonic-score-cursors/)
 - [MCL-017 · Integrate a Tempo Ramp in Beat Coordinates](mcl-017-integrate-a-tempo-ramp-in-beat-coordinates/)
+- [MCL-018 · Convert Tempo through a Metric-Modulation Pivot](mcl-018-convert-tempo-through-a-metric-modulation-pivot/)
+- [MCL-019 · Expand a Trill with an Explicit Terminal Note](mcl-019-expand-a-trill-with-an-explicit-terminal-note/)
+- [MCL-020 · Reset an Accidental State at the Bar Boundary](mcl-020-reset-an-accidental-state-at-the-bar-boundary/)

@@ -1,0 +1,101 @@
+---
+module_id: phi-011-cross-mesh-and-lighting-before-attributing-a-render-change
+department: philosophy
+course: "Cross Mesh and Lighting before Attributing a Render Change"
+level: intermediate
+prerequisites: ["phi-007-test-a-learning-gain-against-counterfactuals"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Cross Mesh and Lighting before Attributing a Render Change
+
+> Draft for technical and language review. Every scene, count, temperature, timing and outcome introduced below is an authored example. Source inspection and arithmetic do not constitute a physical craft trial, a [Godot](https://docs.godotengine.org/en/4.5/) import, a [Blender](https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md) render, a [ComfyUI](https://docs.comfy.org/) run or a learner observation. Human and runtime decisions remain undecided.
+
+## Project question
+
+A scene team replaces a sculpture mesh and changes its lighting in the same comparison. The new capture has a worse residual, and the mesh receives the blame. This lesson separates those changes with a complete authored table. It extends counterfactual reasoning into an explicit crossed-factor design, then uses an interaction control to show when a single mesh-effect statement breaks down.
+
+## Read the retained boundary
+
+The cleanup pipeline exposes capture settings alongside geometry settings. The inspected arguments supply no controlled causal comparison. NIST’s full-factorial guide explains crossing factor levels and representing interactions; the residual table here is our own invented construction, not an experiment from that source.
+
+Read the prerequisite and the retained project artifact before interpreting the model. The source has its own revision and purpose; it supplies the boundary described here, not the new classroom inputs. Keep a small evidence table separating an inspected field, an assumption, a derived quantity and a proposed scene effect. An agent summary must point back to the field it interprets. A source filename alone cannot establish an earlier result.
+
+## Interpret the model
+
+Compare old and new meshes under the same lighting before averaging anything. Then compare the mesh differences across lighting conditions. If these differences disagree, the effect depends on lighting under the authored table. A diagonal comparison changes both factors and cannot isolate either one. Complete crossing makes the missing comparisons explicit but does not automatically establish causation in a real workflow. A future trial still needs controlled cameras, settings, inputs and execution order, with replication or another justified uncertainty method where relevant. The current arithmetic is deterministic and contains no sampled render noise.
+
+The direct baseline is a labelled sketch and a hand calculation with the answer panels closed. Preserve intermediate values and units, then apply the changed input in the negative control. A disagreement is useful evidence: locate whether it comes from the definition, arithmetic, representation or intended task before changing the model. Agreement on the main case alone does not establish a universal rule. These finite examples deliberately expose an assumption that a smooth preview could conceal.
+
+```text
+{"old_flat":6,"old_lit":10,"new_flat":4,"new_lit":8}
+mesh_flat=new_flat-old_flat; mesh_lit=new_lit-old_lit; average_mesh=(mesh_flat+mesh_lit)/2; interaction=mesh_lit-mesh_flat; diagonal=new_lit-old_flat
+```
+
+## Corrected exercises
+
+### Exercise 1
+
+Compare new and old mesh under each matched lighting condition.
+
+<details><summary>Answer 1</summary>
+
+Both mesh differences are `-2` residual units. Under this authored table, the new mesh improves the declared metric at each lighting level.
+
+</details>
+
+### Exercise 2
+
+What does the diagonal comparison report, and why is attribution wrong?
+
+<details><summary>Answer 2</summary>
+
+The diagonal change is `2` units. It mixes a mesh change with a lighting change, so it cannot attribute that increase to the mesh alone.
+
+</details>
+
+### Exercise 3
+
+Calculate the average mesh difference and interaction.
+
+<details><summary>Answer 3</summary>
+
+The average mesh difference is `-2` units and interaction is `0`. Equality across these lighting levels is a property of the table, not a universal rendering law.
+
+</details>
+
+### Exercise 4
+
+Apply the interaction control. Which simple claim now fails?
+
+<details><summary>Answer 4</summary>
+
+The mesh differences are `-2` and `2`, their average is `0`, interaction is `4` and diagonal change is `6`. A lighting-independent improvement claim fails.
+
+</details>
+
+### Exercise 5
+
+Does this table prove a real cleanup process caused a better render?
+
+<details><summary>Answer 5</summary>
+
+No. The values are invented. It teaches which comparisons an actual design should retain; runtime observations and their controlled conditions remain absent.
+
+</details>
+
+## Source-assisted learner task
+
+Draw the crossed table and compute every within-lighting contrast manually. Annotate which pipeline settings would need fixing in a future trial. The falsifier for an unconditional mesh benefit is a matched lighting condition where the new mesh has a worse residual, as in the control.
+
+Retain your original answer, source locations, assistance history and any later correction as separate records. State the observable result that would falsify your recommendation before proposing automation. Compare the source-assisted result with your direct manual baseline, including any extra uncertainty it introduces. The fixed packet contains five prepared criteria; each decision stays null until an actual learner attempt and review exist. Prepared answers are checks, not evidence that a learner performed the task.
+
+## Sources and validation journal
+
+- [Prerequisite: phi-007-test-a-learning-gain-against-counterfactuals](../../philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md)
+- [Retained project artifact](../../../../code/blender/scripts/glb_pipeline.py)
+- [Primary reading](https://www.itl.nist.gov/div898/handbook/pri/section3/pri3331.htm)
+- [Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-24/unit-c.json)
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-24/journal.md)

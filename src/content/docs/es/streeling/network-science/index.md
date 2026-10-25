@@ -26,3 +26,6 @@ sidebar:
 - [NET-013 · Trazar concurrencia causal con relojes vectoriales](net-013-trace-causal-concurrency-with-vector-clocks/)
 - [NET-014 · Acotar el caudal mediante un corte de capacidad](net-014-bound-throughput-with-a-capacity-cut/)
 - [NET-015 · Condensar dependencias mutuas antes de ordenar el trabajo](net-015-condense-mutual-dependencies-before-ordering-work/)
+- [NET-016 · Encontrar pasos obligatorios mediante dominadores](net-016-find-mandatory-gates-with-dominators/)
+- [NET-017 · Asignar roles simultáneos sin doble reserva](net-017-match-simultaneous-roles-without-double-booking/)
+- [NET-018 · Reducir aristas de precedencia sin borrar evidencias](net-018-reduce-precedence-edges-without-erasing-evidence/)

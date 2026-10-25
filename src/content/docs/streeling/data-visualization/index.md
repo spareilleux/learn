@@ -30,3 +30,6 @@ sidebar:
 - [DV-017 · Summarize Fibre Axes without Inventing a Direction](dv-017-summarize-fibre-axes-without-inventing-a-direction/)
 - [DV-018 · Show Overlapping Craft Defects as a Union](dv-018-show-overlapping-craft-defects-as-a-union/)
 - [DV-019 · Choose a Minimal View Set for Declared Features](dv-019-choose-a-minimal-view-set-for-declared-features/)
+- [DV-020 · Make Unequal Stitch Bins Preserve Frequency Area](dv-020-make-unequal-stitch-bins-preserve-frequency-area/)
+- [DV-021 · Transform Interval Endpoints before Drawing Error Bars](dv-021-transform-interval-endpoints-before-drawing-error-bars/)
+- [DV-022 · Declare Diagonal Connectivity in a Relief Contour](dv-022-declare-diagonal-connectivity-in-a-relief-contour/)

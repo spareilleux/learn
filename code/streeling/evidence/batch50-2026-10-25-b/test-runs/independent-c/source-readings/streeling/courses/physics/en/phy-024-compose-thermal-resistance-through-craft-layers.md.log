@@ -1,0 +1,162 @@
+---
+module_id: "phy-024-compose-thermal-resistance-through-craft-layers"
+department: "physics"
+course: "Compose Thermal Resistance through Craft Layers"
+level: "advanced"
+prerequisites: ["phy-017-budget-thermal-growth-at-a-metal-joint"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Compose Thermal Resistance through Craft Layers
+
+> Draft for technical and fluent-language review. The numerical inputs, labels and expected results are authored teaching cases. They are not new physical material tests, native scene runs, learner observations or production outcomes. Human and learner decisions remain undecided.
+
+## Project operation and interpretation
+
+A textile-backed metal relief is proposed as an interactive scene object. The material names suggest a temperature story, but a surface shader cannot determine heat flow through the assembly. This lesson composes a planar stack of invented layers and calculates the common steady heat-transfer power. It extends the thermal-growth prerequisite by determining where a specified total temperature difference falls, rather than prescribing that difference uniformly to every piece.
+
+At steady state without an internal source, each layer transmits the same power. A layer’s temperature drop is therefore that common power multiplied by its thermal resistance. Add the resistances before dividing the total temperature difference; averaging the conductivities would conceal the thicknesses and can give a different answer. The larger share of the total resistance receives the larger share of the temperature drop. Equal-area geometry is essential to the particular formula given here.
+
+The changed-thickness control gives equal resistances even though the conductivities differ. It tests whether a source-assisted explanation tracks geometry and units instead of treating an attractive material label as the answer. An eventual craft annotation should keep input conductivity provenance, contact construction and boundary temperatures beside the mesh dimensions. Atlas material parameters describe visual appearance, not measured thermal conductivity. An embossed pattern, adhesive gap or porous weave may break the simple slab model and require a different experiment.
+
+Read the committed prerequisite and the scoped primary passage before calculating. Make a small ledger with separate columns for source definition, authored premise, derived result and future observation. A documentation page supports only the claim within its inspected scope. A source parameter, mathematical answer and runtime observation have different evidential roles; an assistant’s confident summary cannot exchange those roles. The evidence packet retains the source revision and the reading boundary so another reviewer can challenge a precise statement.
+
+Work first with the answer panels closed. Draw the table or diagram required by this operation and retain the intermediate quantities, including units or identity conventions. That handwritten derivation is the direct manual baseline. Only then consult an assistant or translation aid. Keep the question, the source location cited, the suggestion received and the change accepted or rejected. Compare the assisted result with the retained first attempt on identical inputs. A shorter answer is not an improvement when it omits a precondition or invents a completed project trial.
+
+## Fixed model and changed-input control
+
+```json
+{
+  "values": {
+    "thickness_m": [
+      0.02,
+      0.01
+    ],
+    "conductivity_W_mK": [
+      0.2,
+      0.5
+    ],
+    "area_m2": 0.5,
+    "delta_K": 30
+  },
+  "formula": "R_i=d_i/(k_i*A); R_total=sum(R_i); power=delta/R_total; drop_i=power*R_i",
+  "expected": {
+    "resistances_K_W": [
+      0.2,
+      0.04
+    ],
+    "total_K_W": 0.24,
+    "power_W": 125,
+    "drops_K": [
+      25,
+      5
+    ]
+  },
+  "negative_control": {
+    "values": {
+      "thickness_m": [
+        0.02,
+        0.05
+      ],
+      "conductivity_W_mK": [
+        0.2,
+        0.5
+      ],
+      "area_m2": 0.5,
+      "delta_K": 30
+    },
+    "expected": {
+      "resistances_K_W": [
+        0.2,
+        0.2
+      ],
+      "total_K_W": 0.4,
+      "power_W": 75,
+      "drops_K": [
+        15,
+        15
+      ]
+    }
+  }
+}
+```
+
+### Exercise 1
+
+Calculate both resistances.
+
+<details><summary>Answer 1</summary>
+
+They are `[0.2,0.04] K/W`. Divide thickness by conductivity and common area; thickness alone is not resistance.
+
+</details>
+
+### Exercise 2
+
+Find total resistance and common power.
+
+<details><summary>Answer 2</summary>
+
+They are `0.24 K/W` and `125 W`. The same steady power passes through each layer.
+
+</details>
+
+### Exercise 3
+
+Allocate the temperature drops.
+
+<details><summary>Answer 3</summary>
+
+The drops are `[25,5] K`; they sum to the imposed difference. Applying the entire difference to both layers would violate the series model.
+
+</details>
+
+### Exercise 4
+
+Apply the thicker-layer control.
+
+<details><summary>Answer 4</summary>
+
+The resistances become `[0.2,0.2] K/W`, the power `75 W` and the drops `[15,15] K`. Conductivities alone do not explain the split.
+
+</details>
+
+### Exercise 5
+
+Can a metallic shader establish conductivity?
+
+<details><summary>Answer 5</summary>
+
+No. An appearance parameter has no supplied calibration to this transport coefficient. Keep material measurement and visual representation as separate evidence.
+
+</details>
+
+## Source-assisted task and direct baseline
+
+Draw a cross-section of a proposed textile-backed relief and manually allocate the temperature drops. Inspect the Atlas appearance fields, then write the separate material-data request that a physical calculation would need.
+
+Treat the control as a separate input record. Preserve the main case, write a prediction for the changed input and explain which premise changes. When a result disagrees with your first answer, distinguish arithmetic error, interpretation error and a model limitation. Keep a failed attempt beside its correction rather than replacing it. The task asks for a reviewable evidence note before proposing a DSL node or agent workflow; a manual table may already meet the project need.
+
+Submit the baseline, source locations, corrected explanation, control outcome and prospective falsifier together. The prepared criteria below are questions for a future reviewer, not accepted learner results. Actual learner answer, assistance history, corrected answer and learner decision remain empty until a real attempt is retained. Technical review, fluent-language review, runtime execution, production adoption and publication each require their own applicable evidence. A passing finite calculation would establish only the stated operation under its premises.
+
+## Prospective falsifier
+
+A claim that the higher-conductivity layer must always have the smaller drop is refuted by the equal-resistance control.
+
+## Prepared learner criteria
+
+- For exercise 1: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+- For exercise 2: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+- For exercise 3: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+- For exercise 4: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+- For exercise 5: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+
+## Sources and claim boundary
+
+- [Committed prerequisite: phy-017-budget-thermal-growth-at-a-metal-joint](../../physics/en/phy-017-budget-thermal-growth-at-a-metal-joint.md)
+- [Retained project source](../../../../code/blender/scripts/atlas/kit.py)
+- [Primary reading](https://openstax.org/books/university-physics-volume-2/pages/1-6-mechanisms-of-heat-transfer)
+- [Authored evidence packet](../../../../code/streeling/evidence/batch50-2026-10-25-b/unit-c.json)
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25-b/journal.md)

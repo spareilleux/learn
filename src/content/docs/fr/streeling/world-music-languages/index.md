@@ -27,3 +27,6 @@ sidebar:
 - [WML-014 · Quantifier un rapport sur une division déclarée de l’octave](wml-014-quantize-a-ratio-on-a-declared-octave-division/)
 - [WML-015 · Conserver le diapason de référence lors d’un transfert de fréquences](wml-015-carry-the-concert-reference-through-a-frequency-handoff/)
 - [WML-016 · Distinguer les opérations sur les degrés d’un accord](wml-016-keep-chord-degree-operations-distinct/)
+- [WML-017 · Déclarer l’équivalence selon une période autre que l’octave](wml-017-declare-equivalence-under-a-non-octave-period/)
+- [WML-018 · Détecter les conflits d’accordage à l’échelle du canal](wml-018-detect-channel-scoped-tuning-conflicts/)
+- [WML-019 · Répartir les attaques avec une grille de parties entières](wml-019-distribute-onsets-with-a-floor-lattice/)

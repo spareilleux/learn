@@ -19,7 +19,7 @@ Un borde bordado repite un motivo guardado por tramos, no por símbolos de cada 
 
 Valide longitudes antes de calcular el período. Deben ser enteros positivos para que los finales acumulados crezcan estrictamente. La celda pertenece al primer final estrictamente mayor que el desplazamiento reducido; la igualdad pertenece al tramo siguiente. Así se conserva pertenencia semiabierta en fronteras internas sin confundirla con índices de teselas negativas. El módulo resuelve la repetición; la búsqueda resuelve regiones internas desiguales.
 
-El control con longitud nula requiere rechazo, no reparación supuesta. Eliminar el tramo silenciosamente cambiaría período y direcciones posteriores y borraría el error. Un traspaso IX futuro puede conservar tramos adyacentes del mismo símbolo con procedencias distintas; fusionarlos debe ser una reescritura explícita con correspondencia. El asistente puede explicarla o proponerla, pero no admitir la entrada malformada porque la vista previa siga mostrando franjas.
+El control con longitud nula requiere rechazo, no reparación supuesta. Cambiar la longitud uno del caso principal a cero reduciría su suma de `6` a `5` si se aceptase la entrada. Eliminar después el registro de longitud nula no cambia esa suma ni los símbolos expandidos; borra la instrucción malformada y su procedencia. El contrato de longitudes positivas rechaza la entrada antes de asignarle un período. Un traspaso IX futuro puede conservar tramos adyacentes del mismo símbolo con procedencias distintas; fusionarlos debe ser una reescritura explícita con correspondencia. El asistente puede explicarla o proponerla, pero no admitir la entrada malformada porque la vista previa siga mostrando franjas.
 
 El prerrequisito confirmado de compresión ya enseña expansión de tramos y contabilidad de tamaño. La operación nueva es consulta de celdas indexadas con fase y pertenencia de fronteras internas; no se reivindica nueva codificación ni ida y vuelta.
 
@@ -137,7 +137,7 @@ Aplique el control de tramo nulo.
 
 <details><summary>Respuesta 4</summary>
 
-Devuelva `invalid_run`, con período y muestras `null`. Eliminarlo silenciosamente cambiaría el significado de índices posteriores.
+Devuelva `invalid_run`, con período y muestras `null`. Eliminar un registro de longitud nula no cambia su contribución aritmética, pero aceptar silenciosamente el resto ocultaría la infracción del contrato de longitudes positivas.
 
 </details>
 
@@ -161,7 +161,7 @@ Entregue juntos referencia inicial, ubicaciones de fuentes, explicación corregi
 
 ## Criterio de refutación previo
 
-La pérdida del contrato de período y dirección refuta admitir la entrada de tramo nulo como el mismo motivo.
+Un intérprete que anuncie `valid` para la entrada de tramo nulo incumple el contrato de longitudes positivas. Eliminar el registro no restablece la procedencia ausente ni demuestra el motivo previsto.
 
 ## Criterios de aprendizaje preparados
 

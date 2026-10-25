@@ -15,7 +15,7 @@ version: "0.1.0"
 
 ## Opération du projet et interprétation
 
-Un panneau de comparaison de sculptures comprime son axe de résidus positifs par une racine carrée. Un assistant transforme la valeur centrale, puis reporte l’ancienne longueur d’erreur symétrique de chaque côté. Cette opération peut placer les bornes à des valeurs absentes des données construites. Il s’agit de préserver un intervalle admissible lors du changement de coordonnées, sans présenter cette plage mathématique comme un intervalle de confiance étalonné.
+Un panneau de comparaison de sculptures comprime son axe de résidus positifs ou nuls par une racine carrée. Un assistant transforme la valeur centrale, puis reporte l’ancienne longueur d’erreur symétrique de chaque côté. Cette opération peut placer les bornes à des valeurs absentes des données construites. Il s’agit de préserver un intervalle admissible lors du changement de coordonnées, sans présenter cette plage mathématique comme un intervalle de confiance étalonné.
 
 Transformez centre et bornes par la même application croissante. Soustrayez seulement ensuite le centre affiché pour obtenir les étendues basse et haute. Une estimation centrale fournie n’est pas nécessairement le milieu de l’intervalle dans l’un ou l’autre repère. Le cas principal a des distances brutes inégales mais des distances affichées égales ; le témoin inverse cette relation. Ces motifs opposés empêchent de remplacer le calcul par une règle de symétrie visuelle.
 

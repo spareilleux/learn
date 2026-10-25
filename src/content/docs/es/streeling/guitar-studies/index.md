@@ -28,3 +28,6 @@ sidebar:
 - [GTR-015 · Muestrear un vibrato sin borrar su movimiento](gtr-015-sample-a-vibrato-without-erasing-its-motion/)
 - [GTR-016 · Desplazar el límite para un armónico artificial](gtr-016-move-the-boundary-for-an-artificial-harmonic/)
 - [GTR-017 · Comprobar la continuidad del contacto al sustituir un dedo](gtr-017-check-contact-continuity-during-finger-substitution/)
+- [GTR-018 · Comprobar restricciones de dirección al cambiar de cuerda](gtr-018-check-direction-constraints-at-string-crossings/)
+- [GTR-019 · Declarar la coordenada de un deslizamiento continuo](gtr-019-declare-the-coordinate-of-a-continuous-slide/)
+- [GTR-020 · Deducir los ataques de un acorde a partir de un barrido](gtr-020-derive-strum-onsets-from-a-sweep/)

@@ -29,3 +29,6 @@ sidebar:
 - [INF-016 · Vincular un delta a su estado de referencia](inf-016-bind-a-delta-to-its-reference-state/)
 - [INF-017 · Fusionar sumas y recuentos antes de calcular medias](inf-017-merge-sum-count-summaries-before-taking-means/)
 - [INF-018 · Delimitar textos mediante su longitud en bytes UTF-8](inf-018-frame-text-by-utf8-byte-length/)
+- [INF-019 · Comprobar la ambigüedad de palabras de código concatenadas](inf-019-check-concatenated-codeword-ambiguity/)
+- [INF-020 · Separar detección por paridad y corrección](inf-020-separate-parity-detection-from-correction/)
+- [INF-021 · Distinguir la tasa de entropía de un flujo de la entropía de etiquetas](inf-021-distinguish-stream-entropy-rate-from-label-entropy/)

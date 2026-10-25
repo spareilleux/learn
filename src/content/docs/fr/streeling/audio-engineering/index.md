@@ -29,3 +29,6 @@ sidebar:
 - [AUD-016 · Distinguer le décalage continu de l’énergie alternative](aud-016-separate-dc-offset-from-ac-energy/)
 - [AUD-017 · Signaler les retards de corrélation ambigus](aud-017-report-ambiguous-correlation-lags/)
 - [AUD-018 · Reconstruire la stéréo à partir des composantes centrale et latérale](aud-018-recover-stereo-from-mid-and-side/)
+- [AUD-019 · Vérifier si l’écrêtage commute avec le gain](aud-019-test-whether-clipping-commutes-with-gain/)
+- [AUD-020 · Reconstruire un signal avec les poids de recouvrement-addition](aud-020-reconstruct-a-signal-with-overlap-add-weights/)
+- [AUD-021 · Borner les répétitions d’un retard avec rétroaction](aud-021-bound-feedback-delay-repeats/)

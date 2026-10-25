@@ -24,3 +24,5 @@ sidebar:
 - [FUT-011 · Préparer un changement de représentation de broderie avec mémoire](fut-011-plan-an-embroidery-representation-switch-with-memory/)
 - [FUT-012 · Budgéter la masse de queue défavorable d’un scénario de rendu](fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario/)
 - [FUT-013 · Borner un futur flux artisanal par sa fraction séquentielle](fut-013-bound-a-future-craft-workflow-by-its-serial-fraction/)
+- [FUT-014 · Projeter les premiers retraits par cohortes d’assets artisanaux](fut-014-project-first-retirements-from-craft-asset-cohorts/)
+- [FUT-015 · Énumérer des futurs artisanaux compatibles](fut-015-enumerate-compatible-craft-workflow-futures/)

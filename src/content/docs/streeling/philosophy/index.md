@@ -24,3 +24,5 @@ sidebar:
 - [PHI-011 · Cross Mesh and Lighting before Attributing a Render Change](phi-011-cross-mesh-and-lighting-before-attributing-a-render-change/)
 - [PHI-012 · Distinguish Equivalence from an Interval Containing Zero](phi-012-distinguish-equivalence-from-an-interval-containing-zero/)
 - [PHI-013 · Explain an Infeasible Craft Plan with a Minimal Core](phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core/)
+- [PHI-014 · Test Selection on a Shared Scene Outcome](phi-014-test-selection-on-a-shared-scene-outcome/)
+- [PHI-015 · Diagnose a Failed Prediction with an Auxiliary Premise](phi-015-diagnose-a-failed-prediction-with-an-auxiliary-premise/)

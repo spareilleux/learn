@@ -28,3 +28,6 @@ sidebar:
 - [MCL-015 · Separar la liberación de la tecla de la del pedal](mcl-015-separate-key-release-from-pedal-release/)
 - [MCL-016 · Reconstruir cursores de una partitura polifónica](mcl-016-reconstruct-polyphonic-score-cursors/)
 - [MCL-017 · Integrar una rampa de tempo en coordenadas de pulsos](mcl-017-integrate-a-tempo-ramp-in-beat-coordinates/)
+- [MCL-018 · Convertir el tempo mediante un pivote de modulación métrica](mcl-018-convert-tempo-through-a-metric-modulation-pivot/)
+- [MCL-019 · Desarrollar un trino con una nota final explícita](mcl-019-expand-a-trill-with-an-explicit-terminal-note/)
+- [MCL-020 · Reiniciar el estado de alteraciones en la barra de compás](mcl-020-reset-an-accidental-state-at-the-bar-boundary/)

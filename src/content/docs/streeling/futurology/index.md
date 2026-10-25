@@ -24,3 +24,5 @@ sidebar:
 - [FUT-011 · Plan an Embroidery Representation Switch with Memory](fut-011-plan-an-embroidery-representation-switch-with-memory/)
 - [FUT-012 · Budget the Worst Tail Mass of a Renderer Scenario](fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario/)
 - [FUT-013 · Bound a Future Craft Workflow by Its Serial Fraction](fut-013-bound-a-future-craft-workflow-by-its-serial-fraction/)
+- [FUT-014 · Project First Retirements from Craft Asset Cohorts](fut-014-project-first-retirements-from-craft-asset-cohorts/)
+- [FUT-015 · Enumerate Compatible Craft Workflow Futures](fut-015-enumerate-compatible-craft-workflow-futures/)

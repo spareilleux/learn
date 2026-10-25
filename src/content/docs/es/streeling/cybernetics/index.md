@@ -28,3 +28,6 @@ sidebar:
 - [CYB-015 · Propagar la covarianza en la telemetría suavizada](cyb-015-carry-covariance-through-smoothed-telemetry/)
 - [CYB-016 · Probar la compensación anticipada con una perturbación mal estimada](cyb-016-test-feedforward-against-disturbance-mismatch/)
 - [CYB-017 · Limitar el cambio de mando por separado de su amplitud](cyb-017-limit-command-change-separately-from-amplitude/)
+- [CYB-018 · Reconstruir un estado oculto mediante dinámicas distintas](cyb-018-reconstruct-hidden-state-from-distinct-dynamics/)
+- [CYB-019 · Comprobar los modos propios de bucles acoplados](cyb-019-test-coupled-feedback-eigenmodes/)
+- [CYB-020 · Comprobar el cierre de un conjunto ante perturbaciones](cyb-020-check-disturbance-robust-set-closure/)

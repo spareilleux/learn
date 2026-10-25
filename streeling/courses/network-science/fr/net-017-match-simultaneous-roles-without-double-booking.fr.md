@@ -16,7 +16,7 @@ version: "0.1.0"
 
 Une table Demerzel donne au moins un candidat à chaque rôle demandé. Un coordinateur suppose alors que les rôles peuvent être remplis ensemble. Il réserve deux fois un worker lorsque plusieurs rôles n’ont que ce candidat. Le cours de couverture compte les routes par classe ; ici, on demande si des workers distincts peuvent occuper tous les rôles simultanés.
 
-Dessinez un graphe biparti, avec rôles d’un côté et workers de l’autre. Une arête déclare qu’un worker peut remplir un rôle. Un couplage ne réutilise aucun sommet. Pour prouver la faisabilité, donnez le couplage complet. Pour montrer l’impossibilité, trouvez un sous-ensemble de rôles dont l’ensemble commun des candidats est plus petit. Ces rôles ne peuvent recevoir des workers distincts, même si d’autres rôles sont flexibles.
+Dessinez un graphe biparti, avec rôles d’un côté et workers de l’autre. Une arête déclare qu’un worker peut remplir un rôle. Un couplage ne réutilise aucun sommet. Pour prouver la faisabilité, donnez le couplage complet. Pour montrer l’impossibilité, trouvez un sous-ensemble de rôles dont la réunion des ensembles de candidats compte moins de workers que ce sous-ensemble ne compte de rôles. Ces rôles ne peuvent recevoir des workers distincts, même si d’autres rôles sont flexibles.
 
 Dans le cas fixé, rédaction et revue ont chacune un candidat, mais le même candidat unique. Les alternatives de traduction ne lèvent pas l’obstacle. Le contrôle ajoute une arête de revue et permet une affectation complète. Gardez le témoin d’affectation et le sous-ensemble déficient : compter les rôles couverts masque la raison de l’échec initial.
 

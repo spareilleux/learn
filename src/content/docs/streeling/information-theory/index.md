@@ -29,3 +29,6 @@ sidebar:
 - [INF-016 · Bind a Delta to Its Reference State](inf-016-bind-a-delta-to-its-reference-state/)
 - [INF-017 · Merge Sum and Count Summaries Before Taking Means](inf-017-merge-sum-count-summaries-before-taking-means/)
 - [INF-018 · Frame Text by Its UTF-8 Byte Length](inf-018-frame-text-by-utf8-byte-length/)
+- [INF-019 · Check Concatenated Codeword Ambiguity](inf-019-check-concatenated-codeword-ambiguity/)
+- [INF-020 · Separate Parity Detection from Correction](inf-020-separate-parity-detection-from-correction/)
+- [INF-021 · Distinguish Stream Entropy Rate from Label Entropy](inf-021-distinguish-stream-entropy-rate-from-label-entropy/)

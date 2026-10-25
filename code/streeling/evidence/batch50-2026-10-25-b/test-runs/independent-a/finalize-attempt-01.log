@@ -1,0 +1,10 @@
+COMMAND python -X utf8 -B C:/tmp/batch25b-a-review/finalize.py
+PYTHON 3.14.2 (tags/v3.14.2:df79316, Dec 5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]
+Original complete console traceback transcribed from the actual tool result:
+Traceback (most recent call last):
+  File "C:\tmp\batch25b-a-review\finalize.py", line 10, in <module>
+    assert len(headings)==6,(c['code'],locale)
+           ^^^^^^^^^^^^^^^^
+AssertionError: ('AUD019', 'en')
+EXIT 1
+Diagnosis: final-inspection helper expected six level-two headings; the lessons have five. Source content and all36 mathematical observations were unaffected. Original helper preserved in finalize-attempt-01.py before correction/replay.

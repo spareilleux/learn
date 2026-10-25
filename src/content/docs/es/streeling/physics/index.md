@@ -32,3 +32,6 @@ sidebar:
 - [PHY-019 · Comprobar el deslizamiento antes de declarar estable una escultura](phy-019-test-sliding-before-calling-a-sculpture-stable/)
 - [PHY-020 · Separar la geometría de la sección de la rigidez del material](phy-020-separate-section-geometry-from-material-stiffness/)
 - [PHY-021 · Distinguir la velocidad de rebote de la energía conservada](phy-021-separate-rebound-speed-from-retained-energy/)
+- [PHY-022 · Calcular el desplazamiento de una escultura flotante](phy-022-budget-displacement-for-a-floating-sculpture/)
+- [PHY-023 · Acotar la amplificación de tensión alrededor de un poste artesanal](phy-023-bound-tension-amplification-around-a-craft-peg/)
+- [PHY-024 · Componer la resistencia térmica de capas artesanales](phy-024-compose-thermal-resistance-through-craft-layers/)

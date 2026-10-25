@@ -24,3 +24,5 @@ sidebar:
 - [PM-011 · Include Review and Correction in Automation Break Even](pm-011-include-review-and-correction-in-automation-break-even/)
 - [PM-012 · Order Review Work by Weighted Completion Cost](pm-012-order-review-work-by-weighted-completion-cost/)
 - [PM-013 · Retain Censoring in Time to First Task Use](pm-013-retain-censoring-in-time-to-first-task-use/)
+- [PM-014 · Select a Budgeted Portfolio with Prerequisite Closure](pm-014-select-a-budgeted-portfolio-with-prerequisite-closure/)
+- [PM-015 · Balance Verification Setup and Waiting Costs](pm-015-balance-verification-setup-and-waiting-costs/)

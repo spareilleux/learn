@@ -19,7 +19,7 @@ Une bordure brodée répète un motif stocké par séquences de longueur donnée
 
 Validez les longueurs avant de calculer la période. Elles doivent être des entiers strictement positifs, afin que les fins cumulées croissent strictement. La cellule appartient à la première fin strictement supérieure au décalage réduit ; l’égalité avec une fin appartient à la séquence suivante. Cela préserve les frontières internes semi-ouvertes sans confondre cette opération avec l’indexation de tuiles négatives. Le modulo traite la répétition ; la recherche traite les régions internes inégales.
 
-Le témoin à longueur nulle demande un refus, pas une réparation devinée. Supprimer silencieusement la séquence changerait période et adresses suivantes tout en effaçant l’erreur. Un transfert IX futur peut conserver deux séquences de symbole identique pour des provenances différentes ; leur fusion doit être une réécriture explicite avec correspondance. L’assistant peut la proposer, sans déclarer l’entrée mal formée admise parce que l’aperçu reste rayé.
+Le témoin à longueur nulle demande un refus, pas une réparation devinée. Remplacer la longueur un du cas principal par zéro réduirait sa somme de `6` à `5` si cette entrée était admise. Supprimer ensuite l’enregistrement de longueur nulle ne change ni cette somme ni les symboles développés ; cela efface l’instruction mal formée et sa provenance. Le contrat de longueurs strictement positives refuse donc l’entrée avant de lui attribuer une période. Un transfert IX futur peut conserver deux séquences de symbole identique pour des provenances différentes ; leur fusion doit être une réécriture explicite avec correspondance. L’assistant peut la proposer, sans déclarer l’entrée mal formée admise parce que l’aperçu reste rayé.
 
 Le prérequis commité sur la compression enseigne déjà le développement des séquences et le compte de taille stockée. L’opération nouvelle est la recherche de cellule indexée avec phase et appartenance aux frontières internes ; elle ne revendique aucun nouvel encodage ni aller-retour.
 
@@ -137,7 +137,7 @@ Appliquez le témoin à longueur nulle.
 
 <details><summary>Réponse 4</summary>
 
-Renvoyez `invalid_run`, avec période et échantillons `null`. Supprimer silencieusement la séquence changerait le sens des indices suivants.
+Renvoyez `invalid_run`, avec période et échantillons `null`. Supprimer une séquence de longueur nulle ne change pas sa contribution arithmétique, mais accepter silencieusement le reste masquerait la violation du contrat de longueurs strictement positives.
 
 </details>
 
@@ -161,7 +161,7 @@ Soumettez ensemble référence initiale, emplacements de sources, explication co
 
 ## Critère de réfutation annoncé
 
-Un interpréteur admettant l’entrée à longueur nulle comme le même motif est réfuté par la perte du contrat de période et d’adresse.
+Un interpréteur annonçant `valid` pour l’entrée à longueur nulle viole le contrat de longueurs strictement positives. La suppression ne rétablit ni la provenance manquante ni le motif voulu.
 
 ## Critères d’apprentissage préparés
 

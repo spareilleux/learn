@@ -30,6 +30,9 @@ sidebar:
 - [VC-017 · Bound Relief Depth Separation under a Declared Quantizer](vc-017-bound-relief-depth-separation-under-a-declared-quantizer/)
 - [VC-018 · Carry Alpha Association through a Textile Edge](vc-018-carry-alpha-association-through-a-textile-edge/)
 - [VC-019 · Measure Directional UV Stretch before Reusing a Motif](vc-019-measure-directional-uv-stretch-before-reusing-a-motif/)
+- [VC-020 · Intersect a Scene Picking Ray with Box Slabs](vc-020-intersect-a-scene-picking-ray-with-box-slabs/)
+- [VC-021 · Fold the Lower Hemisphere in a Normal Encoding](vc-021-fold-the-lower-hemisphere-in-a-normal-encoding/)
+- [VC-022 · Project a Craft Shadow onto a Declared Plane](vc-022-project-a-craft-shadow-onto-a-declared-plane/)
 
 ## Course catalog (planned)
 

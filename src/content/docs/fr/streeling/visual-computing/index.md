@@ -30,6 +30,9 @@ sidebar:
 - [VC-017 · Évaluer la séparation d’un relief avec un quantificateur déclaré](vc-017-bound-relief-depth-separation-under-a-declared-quantizer/)
 - [VC-018 · Conserver la convention d’alpha au bord d’un textile](vc-018-carry-alpha-association-through-a-textile-edge/)
 - [VC-019 · Mesurer l’étirement UV directionnel avant de réutiliser un motif](vc-019-measure-directional-uv-stretch-before-reusing-a-motif/)
+- [VC-020 · Intersecter un rayon de sélection avec les tranches d’une boîte](vc-020-intersect-a-scene-picking-ray-with-box-slabs/)
+- [VC-021 · Replier l’hémisphère inférieur dans un encodage de normales](vc-021-fold-the-lower-hemisphere-in-a-normal-encoding/)
+- [VC-022 · Projeter une ombre artisanale sur un plan déclaré](vc-022-project-a-craft-shadow-onto-a-declared-plane/)
 
 ## Catalogue de cours (prévu)
 

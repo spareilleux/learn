@@ -29,3 +29,6 @@ sidebar:
 - [AUD-016 · Separate DC Offset from AC Energy](aud-016-separate-dc-offset-from-ac-energy/)
 - [AUD-017 · Report Ambiguous Correlation Lags](aud-017-report-ambiguous-correlation-lags/)
 - [AUD-018 · Recover Stereo from Mid and Side](aud-018-recover-stereo-from-mid-and-side/)
+- [AUD-019 · Test Whether Clipping Commutes with Gain](aud-019-test-whether-clipping-commutes-with-gain/)
+- [AUD-020 · Reconstruct a Signal with Overlap-Add Weights](aud-020-reconstruct-a-signal-with-overlap-add-weights/)
+- [AUD-021 · Bound Feedback-Delay Repeats](aud-021-bound-feedback-delay-repeats/)

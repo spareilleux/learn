@@ -1,0 +1,35 @@
+COMMAND C:\Users\spare\AppData\Local\Programs\Python\Python314\python.exe -X utf8 -B C:\tmp\batch25b-a-review\mutation.py
+PYTHON 3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]
+CWD C:\tmp\learn-streeling-craft-transfer-20261022
+DELIBERATE MUTANT: gain changed from 0.5 to 0.25 in memory; packet.expected co-mutated to its newly computed result. Fixed reviewer oracle unchanged.
+test_AUD019 (proof_a.UnitA.test_AUD019) ... 
+OBSERVATION {"code": "AUD019", "case": "model", "observed": {"A": [-0.5, -0.125, 0.125, 0.5], "B": [-0.25, -0.125, 0.125, 0.25], "residual": [-0.25, 0.0, 0.0, 0.25], "commutes": false}, "expected": {"A": [-1, -0.25, 0.25, 1], "B": [-0.5, -0.25, 0.25, 0.5], "residual": [-0.5, 0, 0, 0.5], "commutes": false}, "scope": "Memoryless symmetric clip; exact finite real sample orders, no reconstruction or listening."}
+FAIL
+
+======================================================================
+FAIL: test_AUD019 (proof_a.UnitA.test_AUD019)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-25-b\tests\test_unit_a.py", line 240, in test
+    def test(self): self.check_course(code)
+                    ~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-25-b\tests\test_unit_a.py", line 235, in check_course
+    self.same(result,FIXED[code][index])
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-25-b\tests\test_unit_a.py", line 219, in same
+    for key,value in expected.items(): self.same(actual[key],value,path+'.'+key)
+                                       ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-25-b\tests\test_unit_a.py", line 222, in same
+    for i,value in enumerate(expected): self.same(actual[i],value,f'{path}[{i}]')
+                                        ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-25-b\tests\test_unit_a.py", line 226, in same
+    self.assertTrue(math.isfinite(actual) and math.isclose(actual,expected,rel_tol=1e-11,abs_tol=1e-11),f'{path}: {actual!r} != {expected!r}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : result.A[0]: -0.5 != -1
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)
+
+EXIT 1

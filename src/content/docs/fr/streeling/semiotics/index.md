@@ -28,3 +28,6 @@ sidebar:
 - [SEM-015 · Lier un repère de surface à l’identité des sommets barycentriques](sem-015-bind-a-surface-marker-to-barycentric-vertex-identity/)
 - [SEM-016 · Vérifier la cohérence des signes autour d’un cycle de coutures](sem-016-check-sign-consistency-around-a-craft-seam-cycle/)
 - [SEM-017 · Déclarer la propriété des frontières pour les coordonnées de tuiles négatives](sem-017-declare-boundary-ownership-for-negative-tile-coordinates/)
+- [SEM-018 · Interpréter un bref de tissage à plusieurs cadres](sem-018-interpret-a-multi-shaft-weaving-draft/)
+- [SEM-019 · Distinguer inversion du parcours et miroir d’un diagramme de nœud](sem-019-distinguish-knot-diagram-reversal-from-mirroring/)
+- [SEM-020 · Localiser une cellule de motif dans des longueurs de séquence positives](sem-020-locate-a-motif-cell-in-positive-run-lengths/)

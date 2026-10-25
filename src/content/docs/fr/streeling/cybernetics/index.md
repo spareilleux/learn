@@ -28,3 +28,6 @@ sidebar:
 - [CYB-015 · Propager la covariance dans une télémétrie lissée](cyb-015-carry-covariance-through-smoothed-telemetry/)
 - [CYB-016 · Éprouver l’anticipation face à une perturbation mal estimée](cyb-016-test-feedforward-against-disturbance-mismatch/)
 - [CYB-017 · Limiter la variation de commande séparément de son amplitude](cyb-017-limit-command-change-separately-from-amplitude/)
+- [CYB-018 · Reconstruire un état caché grâce à des dynamiques distinctes](cyb-018-reconstruct-hidden-state-from-distinct-dynamics/)
+- [CYB-019 · Tester les modes propres de boucles couplées](cyb-019-test-coupled-feedback-eigenmodes/)
+- [CYB-020 · Vérifier la fermeture d’un ensemble face aux perturbations](cyb-020-check-disturbance-robust-set-closure/)

@@ -27,3 +27,6 @@ sidebar:
 - [GAA-014 · Réserver des familles entières de transpositions pour l’évaluation](gaa-014-hold-out-whole-transposition-families/)
 - [GAA-015 · Conserver l’incertitude avec un taux de réussite](gaa-015-keep-uncertainty-with-a-practice-pass-rate/)
 - [GAA-016 · Distinguer la dérive temporelle de l’effet d’une condition de pratique](gaa-016-separate-order-drift-from-a-practice-condition/)
+- [GAA-017 · Auditer la règle d’arrêt d’un escalier de pratique](gaa-017-audit-a-practice-staircase-stopping-rule/)
+- [GAA-018 · Rattacher un retour différé à sa tentative d’origine](gaa-018-bind-delayed-feedback-to-the-original-attempt/)
+- [GAA-019 · Retrouver les motifs d’intervalles qui se chevauchent](gaa-019-retrieve-overlapping-interval-motifs/)

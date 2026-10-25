@@ -2025,7 +2025,7 @@
             "period": null,
             "samples": null
           },
-          "why": "Silently discarding a zero run changes the motif’s period and phase addresses instead of rejecting the malformed authored instruction."
+          "why": "Changing the main run length from one to zero changes the arithmetic sum from 6 to 5 if accepted. Deleting the zero-length record does not further change that sum or expansion; it conceals a violation of the declared positive-length and provenance contract, so the authored control is rejected."
         },
         "assumptions": [
           "Positive integer run lengths; integer global indices and phase",
@@ -2054,7 +2054,7 @@
         },
         "4": {
           "question": "Apply the zero-run control.",
-          "expected_answer": "Return `invalid_run`, with period and samples `null`. Continuing after silent deletion would change the meaning of later indices.",
+          "expected_answer": "Return `invalid_run`, with period and samples `null`. Removing a zero-length record does not change its arithmetic contribution, but silently accepting the remainder would conceal the violated positive-length contract.",
           "decision": null
         },
         "5": {
@@ -2088,7 +2088,7 @@
       "actual_task": {
         "description": "Expand the border by hand and label both cell addresses and run identities. Compare lookup before and after the malformed control, retaining the refusal rather than repairing it. Propose the smallest evidence note for an IX motif handoff.",
         "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
-        "falsifier": "An interpreter that admits the zero-run input as the same motif is refuted by the lost period and address contract.",
+        "falsifier": "An interpreter that reports `valid` for the zero-run input violates the declared positive-length contract. Deletion cannot repair the missing provenance or establish the intended motif.",
         "actual_learner_answer": null,
         "assistance_history": null,
         "corrected_answer": null,

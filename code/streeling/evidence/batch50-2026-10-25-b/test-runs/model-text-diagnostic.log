@@ -1,0 +1,1049 @@
+AUD019
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Memoryless symmetric hard clipping with positive threshold; real exact samples; no oversampling or reconstruction."
++  ],
+   "expected": {
+     "A": [
+       -1,
+@@ -21,6 +24,7 @@
+     ]
+   },
+   "formula": "clip(x)=max(-T,min(T,x)); A=clip(g*x); B=g*clip(x); residual=A-B",
++  "limits": "A witness for this operator does not describe the engine output nonlinearity, intersample peaks, harmonics or audible distortion.",
+   "negative_control": {
+     "expected": {
+       "A": [
+@@ -52,7 +56,8 @@
+         0.5
+       ],
+       "threshold": 1
+-    }
++    },
++    "why": "The control keeps every sample inside the linear region in both orders."
+   },
+   "values": {
+     "gain": 0.5,
+AUD020
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Circular record; window applied once; perfect unmodified frame reconstruction; no synthesis window."
++  ],
+   "expected": {
+     "output": [
+       2,
+@@ -15,6 +18,7 @@
+     ]
+   },
+   "formula": "weight[n]=sum_m window[(n-start[m])%N]; output[n]=samples[n]*weight[n]; perfect=all(weight[n]==1)",
++  "limits": "No FFT, IX resynthesis, spectral modification, streaming boundary policy or finite-edge extension was executed.",
+   "negative_control": {
+     "expected": {
+       "output": [
+@@ -47,7 +51,8 @@
+         0.5,
+         0.5
+       ]
+-    }
++    },
++    "why": "Removing a frame changes every overlap weight while retaining the input."
+   },
+   "values": {
+     "circular_starts": [
+AUD021
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Positive integer delay; zero initial state; real constant gain; isolated linear recurrence without limiter."
++  ],
+   "expected": {
+     "absolute_sum_infinite": 2,
+     "output": [
+@@ -13,6 +16,7 @@
+     "stable": true
+   },
+   "formula": "y[n]=x[n]+g*y[n-M]; y[n<0]=0; stable=abs(g)<1; absolute_sum_infinite=1/(1-abs(g)) if stable else null",
++  "limits": "A finite quiet prefix alone cannot prove stability; no full reverb, guitar engine or floating-point robustness result is supplied.",
+   "negative_control": {
+     "expected": {
+       "absolute_sum_infinite": null,
+@@ -40,7 +44,8 @@
+         0,
+         0
+       ]
+-    }
++    },
++    "why": "The control keeps the delay and input but makes successive repeats grow."
+   },
+   "values": {
+     "count": 7,
+GAS018
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Normally incident plane pressure waves; real positive impedances; lossless memoryless junction; no incoming right wave."
++  ],
+   "expected": {
+     "pressure_reflection": 0.5,
+     "pressure_transmission": 1.5,
+@@ -7,6 +10,7 @@
+     "transmitted_fraction": 0.75
+   },
+   "formula": "r=(Z2-Z1)/(Z1+Z2); t=1+r; reflected_fraction=r^2; transmitted_fraction=(Z1/Z2)*t^2; total=reflected_fraction+transmitted_fraction",
++  "limits": "The pressure convention differs from string displacement. No frequency-dependent guitar bridge impedance, radiation or measured energy transfer is inferred.",
+   "negative_control": {
+     "expected": {
+       "pressure_reflection": 0,
+@@ -19,7 +23,8 @@
+       "impedance_left": 1,
+       "impedance_right": 1,
+       "incident_pressure": 1
+-    }
++    },
++    "why": "Matched impedances remove the reflected pressure wave without removing transmitted power."
+   },
+   "values": {
+     "impedance_left": 1,
+GAS019
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Authored normalized Lorentzian power curve; positive halfwidth; isolated peak; exact continuous crossings."
++  ],
+   "expected": {
+     "Q": 10,
+     "bandwidth_hz": 10,
+@@ -15,6 +18,7 @@
+     ]
+   },
+   "formula": "P(f)=1/(1+((f-f0)/b)^2); half_power_edges=[f0-b,f0+b]; bandwidth=2*b; Q=f0/bandwidth",
++  "limits": "This defines a teaching bandwidth Q, not a fitted GA pole radius, a measured guitar mode or a universal decay conversion.",
+   "negative_control": {
+     "expected": {
+       "Q": 5,
+@@ -41,7 +45,8 @@
+         120
+       ],
+       "halfwidth_hz": 10
+-    }
++    },
++    "why": "The center and peak remain fixed while the width doubles, separating sharpness from resonance location."
+   },
+   "values": {
+     "center_hz": 100,
+GAS020
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Ideal sine displacement modes; uniform normalized spatial average; aperture stays inside the vibrating string; signed modal amplitude."
++  ],
+   "expected": {
+     "aperture": [
+       0.9003163161571061,
+@@ -14,6 +17,7 @@
+     ]
+   },
+   "formula": "point_n=sin(n*pi*c); aperture_n=point_n*sin(n*pi*w/2)/(n*pi*w/2); aperture_n=point_n when w=0",
++  "limits": "This is not an electromagnetic pickup law, a coil measurement, velocity sensing or a calibrated model of the GA output.",
+   "negative_control": {
+     "expected": {
+       "aperture": [
+@@ -38,7 +42,8 @@
+         4
+       ],
+       "width_fraction": 0
+-    }
++    },
++    "why": "The zero-width limit removes spatial averaging while retaining the observation center and mode identities."
+   },
+   "values": {
+     "center_fraction": 0.5,
+GTR018
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Conventional string numbers with highest string numbered one; D travels toward smaller numbers; equal adjacent strokes use one continuous sweep; no air reset."
++  ],
+   "expected": {
+     "plan_legal": false,
+     "transition_legal": [
+@@ -7,6 +10,7 @@
+     ]
+   },
+   "formula": "for equal consecutive strokes on different strings: legal iff (D and next_string<previous_string) or (U and next_string>previous_string); otherwise legal; plan_legal=all(transition_legal)",
++  "limits": "This is a declared sweep-only feasibility check, not a universal picking law, speed estimate or musician comfort result.",
+   "negative_control": {
+     "expected": {
+       "plan_legal": true,
+@@ -26,7 +30,8 @@
+         "D",
+         "D"
+       ]
+-    }
++    },
++    "why": "A monotone crossing removes the reversal conflict under the same constrained sweep policy."
+   },
+   "values": {
+     "strings": [
+GTR019
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Ideal flexible string at constant wave speed; continuous effective speaking length; no fret interruptions; authored interpolation paths."
++  ],
+   "expected": {
+     "frequency_hz": [
+       100,
+@@ -12,6 +15,7 @@
+     ]
+   },
+   "formula": "u=t/duration; linear_length: L=(1-u)*L0+u*L1; f=f0*L0/L; linear_log_frequency: f=f0*(L0/L1)^u; L=f0*L0/f",
++  "limits": "This is an ideal path comparison, not a normal fretted-slide acoustic prediction, MusicXML playback implementation or measured finger trajectory.",
+   "negative_control": {
+     "expected": {
+       "frequency_hz": [
+@@ -36,7 +40,8 @@
+         0.5,
+         1
+       ]
+-    }
++    },
++    "why": "Both routes share endpoints and duration but differ between them."
+   },
+   "values": {
+     "duration_s": 1,
+GTR020
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Parallel equally positioned authored string crossings; constant positive sweep speed; origin at the extreme string; instantaneous excitation at crossing; muted strings produce no pitched event."
++  ],
+   "expected": {
+     "events_time_s_and_index": [
+       [
+@@ -17,6 +20,7 @@
+     "spread_s": 0.05
+   },
+   "formula": "origin=min(positions) if direction=1 else max(positions); t[i]=abs(position[i]-origin)/speed; events=sort((t[i],i) for sounding i); spread=max(t)-min(t)",
++  "limits": "No physical pick compliance, acoustic onset latency, velocity dynamics, real spacing or performed strum is measured.",
+   "negative_control": {
+     "expected": {
+       "events_time_s_and_index": [
+@@ -51,7 +55,8 @@
+         5
+       ],
+       "speed_mm_s": 1000
+-    }
++    },
++    "why": "Reversing the same sweep preserves its full span but changes event order and the interior onset."
+   },
+   "values": {
+     "direction": 1,
+GAA017
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Authored complete Boolean outcomes; fixed step; no bounds reached; first step has no prior direction; zero-based trial indices."
++  ],
+   "expected": {
+     "estimate_tempo": 65,
+     "post_update_tempo": [
+@@ -25,6 +28,7 @@
+     "stop_index": 5
+   },
+   "formula": "direction=1 if pass else -1; next_tempo=current_tempo+step*direction; reversal occurs when direction differs from previous direction; stop at required_reversals; estimate=mean(pre_update_tempo at reversals) only after stop",
++  "limits": "The computed level summary is not a measured learner threshold, optimal practice tempo or evidence of improved performance.",
+   "negative_control": {
+     "expected": {
+       "estimate_tempo": null,
+@@ -59,7 +63,8 @@
+       ],
+       "required_reversals": 3,
+       "step": 5
+-    }
++    },
++    "why": "An all-success trace has many trials but no reversals and cannot satisfy the stated stopping rule."
+   },
+   "values": {
+     "initial_tempo": 60,
+GAA018
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Unique immutable attempt ids; at most one feedback per id in these fixtures; complete Boolean feedback; no duplicate conflict resolution."
++  ],
+   "expected": {
+     "ledger": [
+       {
+@@ -14,6 +17,7 @@
+     "unresolved_ids": []
+   },
+   "formula": "initialize every attempt to null; process feedback in arrival order; update only matching attempt_id; unknown ids are rejected; output ledger in original attempt order",
++  "limits": "No network race, tutor runtime or actual attempt was observed. A production duplicate/conflicting-feedback policy remains unspecified.",
+   "negative_control": {
+     "expected": {
+       "ledger": [
+@@ -48,7 +52,8 @@
+           "pass": true
+         }
+       ]
+-    }
++    },
++    "why": "An unknown feedback identity must not overwrite the current item or fill the unresolved original attempt."
+   },
+   "values": {
+     "attempt_ids": [
+GAA019
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Integer directed semitone intervals; zero-based starts; exact contiguous equality; all overlaps retained; no rhythmic or pitch-register matching."
++  ],
+   "expected": {
+     "count": 2,
+     "match_starts": [
+@@ -11,6 +14,7 @@
+     }
+   },
+   "formula": "matches=[i for i in range(len(stream)-len(motif)+1) if stream[i:i+len(motif)]==motif]; count=len(matches); overlap is permitted",
++  "limits": "No GA retrieval result, melody-recognition accuracy, musical theme identity or learned representation is established.",
+   "negative_control": {
+     "expected": {
+       "count": 0,
+@@ -33,7 +37,8 @@
+         -1,
+         2
+       ]
+-    }
++    },
++    "why": "The control preserves every interval count but changes order so that the contiguous motif disappears."
+   },
+   "values": {
+     "interval_stream": [
+MCL018
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Exact duration equality at an instantaneous modulation; old and new unit lengths are measured in their own quarter-note coordinates; no gradual ramp."
++  ],
+   "expected": {
+     "new_quarter_bpm": 80,
+     "new_quarter_s": 0.75,
+@@ -6,6 +9,7 @@
+     "pivot_s": 0.75
+   },
+   "formula": "old_quarter_s=60/old_bpm; pivot_s=old_pivot*old_quarter_s; new_quarter_s=pivot_s/new_pivot; new_bpm=old_bpm*new_pivot/old_pivot",
++  "limits": "No score importer, conductor interpretation, performed tempo transition or MusicXML relationship playback was executed.",
+   "negative_control": {
+     "expected": {
+       "new_quarter_bpm": 120,
+@@ -17,7 +21,8 @@
+       "new_pivot_quarters": 1.5,
+       "old_pivot_quarters": 1.5,
+       "old_quarter_bpm": 120
+-    }
++    },
++    "why": "An identical old/new pivot unit leaves the quarter-note rate unchanged."
+   },
+   "values": {
+     "new_pivot_quarters": 1,
+MCL019
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Positive integer note count; starts on main note; equal durations; no terminal turn; fixed authored pitches and total support."
++  ],
+   "expected": {
+     "duration_each_s": 0.2,
+     "onsets_s": [
+@@ -20,6 +23,7 @@
+     "terminal_pitch": 62
+   },
+   "formula": "pitch[i]=main if i%2==0 else alternate; onset[i]=i*duration/count for i=0..count-1; duration_each=duration/count; terminal=pitch[count-1]",
++  "limits": "No historically preferred trill realization, MusicXML importer, guitar articulation engine or performed ornament is asserted.",
+   "negative_control": {
+     "expected": {
+       "duration_each_s": 0.24,
+@@ -44,7 +48,8 @@
+       "duration_s": 1.2,
+       "main_pitch": 60,
+       "note_count": 5
+-    }
++    },
++    "why": "Changing count parity changes the terminal pitch even when the same pitches and overall duration are retained."
+   },
+   "values": {
+     "alternate_pitch": 62,
+MCL020
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Authored conventional exercise policy for F only; no ties across bars; overrides keyed by exact octave; explicit event fields are teaching instructions, not raw MusicXML."
++  ],
+   "expected": {
+     "effective_alters": [
+       0,
+@@ -14,6 +17,7 @@
+     ]
+   },
+   "formula": "state keyed by letter and octave; clear overrides at each new measure iff reset_at_bar; explicit_alter updates state; missing alter uses override else key; F4_base=65; F5_base=77; pitch=base+effective_alter",
++  "limits": "Real notation conventions may differ. MusicXML explicit pitch alteration is not to be inferred from display accidentals or this shorthand state machine.",
+   "negative_control": {
+     "expected": {
+       "effective_alters": [
+@@ -54,7 +58,8 @@
+       ],
+       "key_F_alter": 1,
+       "reset_at_bar": false
+-    }
++    },
++    "why": "Disabling the reset leaks the prior measure override into a new measure."
+   },
+   "values": {
+     "events": [
+WML017
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Positive rational frequency ratios; rational repeat period strictly above unity; canonical interval includes its lower boundary and excludes its upper boundary."
++  ],
+   "expected": {
+     "canonical_ratios": [
+       "1",
+@@ -24,6 +27,7 @@
+     ]
+   },
+   "formula": "choose integer k with 1<=r/P^k<P; canonical=r/P^k; equivalence groups share exact canonical ratio; retain k separately",
++  "limits": "No musical tradition, tuning preference, octave perception, equal division or GA renderer support is inferred from this equivalence convention.",
+   "negative_control": {
+     "expected": {
+       "canonical_ratios": [
+@@ -59,7 +63,8 @@
+         "9",
+         "2"
+       ]
+-    }
++    },
++    "why": "Changing the repeat period changes which exact ratios are equivalent, rather than merely renaming step integers."
+   },
+   "values": {
+     "period_ratio": "3",
+WML018
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Declared symmetric cent mapping and nearest rounding; encoded bends inside valid unsigned range; conventional channel-scoped bend; equal receiver sensitivity assumed; no sustaining tails."
++  ],
+   "expected": {
+     "bend_values": [
+       8192,
+@@ -22,6 +25,7 @@
+     ]
+   },
+   "formula": "bend=8192+floor(8192*cents/sensitivity+0.5); LSB=bend%128; MSB=bend//128; conflict iff same channel and max(starts)<min(ends) and unequal bend; note support is half-open",
++  "limits": "No MIDI device, MPE implementation, channel allocator, actual tuning accuracy or live GA playback was tested. Receiver capability remains a separate gate.",
+   "negative_control": {
+     "expected": {
+       "bend_values": [
+@@ -58,7 +62,8 @@
+         }
+       ],
+       "sensitivity_cents": 200
+-    }
++    },
++    "why": "Distinct channels remove the stipulated shared-bend conflict while keeping both requested tuning offsets unchanged."
+   },
+   "values": {
+     "notes": [
+WML019
+--- displayed
++++ packet
+@@ -1,4 +1,7 @@
+ {
++  "assumptions": [
++    "Positive integer counts with onset count no greater than pulse count; distinct integer onsets; uniform pulse grid; rotation declared separately."
++  ],
+   "expected": {
+     "balanced": true,
+     "base_onsets": [
+@@ -18,6 +21,7 @@
+     ]
+   },
+   "formula": "base[i]=floor(i*N/K) for i=0..K-1 in floor_lattice, else supplied_onsets; rotated=sorted((base+rotation)%N); gaps=cyclic differences including wrap; balanced=max(gaps)-min(gaps)<=1",
++  "limits": "Gap balance is the stated local criterion, not a cultural identity, full musical evenness theorem, accent pattern or performed timing result.",
+   "negative_control": {
+     "expected": {
+       "balanced": false,
+@@ -47,7 +51,8 @@
+         1,
+         2
+       ]
+-    }
++    },
++    "why": "The same pulse and onset counts can cluster events; cardinality alone does not imply balanced gaps."
+   },
+   "values": {
+     "onset_count": 3,
+PHY022
+--- displayed
++++ packet
+@@ -1,4 +1,8 @@
+ {
++  "assumptions": [
++    "Rigid sealed envelope; uniform resting fluid; positive supplied density and volume",
++    "Ignore surface tension, waves, leakage and stability; inputs are invented"
++  ],
+   "expected": {
+     "feasible": true,
+     "full_submersion_net_N": 4,
+@@ -8,6 +12,10 @@
+     "weight_N": 6
+   },
+   "formula": "weight=m*g; maximum_buoyancy=rho*g*V; required_displacement=m/rho; required_fraction=required_displacement/V; feasible=required_fraction<=1; full_submersion_net=maximum_buoyancy-weight",
++  "limits": [
++    "Feasible displacement does not prove stable orientation or watertight fabrication",
++    "No physical sculpture or fluid scene has been tested"
++  ],
+   "negative_control": {
+     "expected": {
+       "feasible": false,
+@@ -22,7 +30,8 @@
+       "g_m_s2": 10,
+       "mass_kg": 1.2,
+       "sealed_volume_m3": 0.001
+-    }
++    },
++    "why": "A visually identical envelope cannot supply arbitrarily large displaced-fluid weight."
+   },
+   "values": {
+     "fluid_density_kg_m3": 1000,
+PHY023
+--- displayed
++++ packet
+@@ -1,4 +1,8 @@
+ {
++  "assumptions": [
++    "Flexible massless rope on a fixed circular peg; uniform invented friction coefficient",
++    "Static limiting-slip capacity; positive endpoint tension and angle in radians"
++  ],
+   "expected": {
+     "capacity_N": 5.43656365691809,
+     "feasible": true,
+@@ -6,6 +10,10 @@
+     "reserve_N": 1.43656365691809
+   },
+   "formula": "ratio=exp(mu*wrap); capacity=hold*ratio; reserve=capacity-load; feasible=reserve>=0",
++  "limits": [
++    "Not a knot strength, rope safety or fabrication recommendation",
++    "Bending stiffness, local contact loss and deformation are outside the model"
++  ],
+   "negative_control": {
+     "expected": {
+       "capacity_N": 2,
+@@ -18,7 +26,8 @@
+       "load_N": 4,
+       "mu": 0.5,
+       "wrap_rad": 0
+-    }
++    },
++    "why": "Removing contact angle removes the amplification while retaining the same endpoint load and holding force."
+   },
+   "values": {
+     "hold_N": 2,
+PHY024
+--- displayed
++++ packet
+@@ -1,4 +1,8 @@
+ {
++  "assumptions": [
++    "Steady one-dimensional conduction through equal-area planar layers",
++    "Perfect contacts; positive invented conductivities; no internal heat generation"
++  ],
+   "expected": {
+     "drops_K": [
+       25,
+@@ -12,6 +16,10 @@
+     "total_K_W": 0.24
+   },
+   "formula": "R_i=d_i/(k_i*A); R_total=sum(R_i); power=delta/R_total; drop_i=power*R_i",
++  "limits": [
++    "No convection, radiation, moisture or contact resistance",
++    "No thermal comfort, fire resistance or material-performance certification"
++  ],
+   "negative_control": {
+     "expected": {
+       "drops_K": [
+@@ -36,7 +44,8 @@
+         0.02,
+         0.05
+       ]
+-    }
++    },
++    "why": "Making the better conductor thicker can make its resistance equal to the other layer; a material label alone does not determine the drop."
+   },
+   "values": {
+     "area_m2": 0.5,
+VC020
+--- displayed
++++ packet
+@@ -1,10 +1,18 @@
+ {
++  "assumptions": [
++    "Closed axis-aligned box and forward ray parameter interval; coordinates share one frame",
++    "Zero direction components handled without division; no floating-point robustness claim"
++  ],
+   "expected": {
+     "hit": true,
+     "t_enter": 2,
+     "t_exit": 4
+   },
+   "formula": "start=[0,t_max]; for each nonzero direction intersect with sorted((minimum-origin)/direction,(maximum-origin)/direction); zero direction outside slab rejects; hit iff resulting interval nonempty",
++  "limits": [
++    "A box hit does not establish triangle, strand identity or upper-strand correctness",
++    "No engine ray query has been executed"
++  ],
+   "negative_control": {
+     "expected": {
+       "hit": false,
+@@ -33,7 +41,8 @@
+         1
+       ],
+       "t_max": 10
+-    }
++    },
++    "why": "A parallel ray outside one slab must miss despite intersecting the other projected ranges."
+   },
+   "values": {
+     "direction": [
+VC021
+--- displayed
++++ packet
+@@ -1,4 +1,8 @@
+ {
++  "assumptions": [
++    "Nonzero vector; sign of zero defined positive; exact real arithmetic model before quantization",
++    "Both fold coordinates use the old pair simultaneously"
++  ],
+   "expected": {
+     "agreement": 1,
+     "decoded_normal": [
+@@ -12,6 +16,10 @@
+     ]
+   },
+   "formula": "p=v/(abs(x)+abs(y)+abs(z)); uv=(p.x,p.y); if p.z<0 and fold_lower: uv=((1-abs(p.y))*sign(p.x),(1-abs(p.x))*sign(p.y)); q=(u,v,1-abs(u)-abs(v)); if q.z<0 unfold xy using old coordinates; decoded=q/length(q); agreement=dot(decoded,original/length(original))",
++  "limits": [
++    "No integer packing, GPU precision or storage benchmark",
++    "A reconstructed normal does not establish material appearance"
++  ],
+   "negative_control": {
+     "expected": {
+       "agreement": 0.6666666666666666,
+@@ -32,7 +40,8 @@
+         2,
+         -1
+       ]
+-    }
++    },
++    "why": "Omitting the fold reconstructs the upper hemisphere and reverses the normal\u2019s depth component."
+   },
+   "values": {
+     "fold_lower": true,
+VC022
+--- displayed
++++ packet
+@@ -1,4 +1,8 @@
+ {
++  "assumptions": [
++    "One point, one infinite receiving plane and a constant light-travel direction",
++    "Shared scene frame; ray travels forward; parallel off-plane case explicitly rejected"
++  ],
+   "expected": {
+     "intersection": [
+       4,
+@@ -9,6 +13,10 @@
+     "t": 2
+   },
+   "formula": "if d.z==0 return parallel; t=(plane_z-point.z)/d.z; if t<0 return behind; otherwise intersection=point+t*d",
++  "limits": [
++    "No occlusion, penumbra, visibility or renderer result",
++    "A mathematical intersection is only a candidate shadow point"
++  ],
+   "negative_control": {
+     "expected": {
+       "intersection": null,
+@@ -27,7 +35,8 @@
+         3,
+         4
+       ]
+-    }
++    },
++    "why": "A light-travel direction parallel to the receiver cannot create a finite projection from this off-plane point."
+   },
+   "values": {
+     "light_travel": [
+DV020
+--- displayed
++++ packet
+@@ -1,4 +1,8 @@
+ {
++  "assumptions": [
++    "Strictly increasing finite edges; nonnegative counts with positive total",
++    "Counts are invented; left-closed bins with final right edge included"
++  ],
+   "expected": {
+     "areas": [
+       0.5,
+@@ -15,6 +19,10 @@
+     ]
+   },
+   "formula": "width_i=edge[i+1]-edge[i]; N=sum(counts); density_i=count_i/(N*width_i); area_i=density_i*width_i",
++  "limits": [
++    "Histogram density is not a failure probability at an exact stitch length",
++    "No continuous distribution, population inference or measured embroidery lengths"
++  ],
+   "negative_control": {
+     "expected": {
+       "areas": [
+@@ -41,7 +49,8 @@
+         1,
+         3
+       ]
+-    }
++    },
++    "why": "Equal density heights can represent unequal counts when widths differ."
+   },
+   "values": {
+     "counts": [
+DV021
+--- displayed
++++ packet
+@@ -1,4 +1,8 @@
+ {
++  "assumptions": [
++    "Ordered nonnegative authored feasible endpoints; square-root display map is increasing",
++    "Centre is the supplied reference value, not a recomputed midpoint or estimator"
++  ],
+   "expected": {
+     "display_centre": 2,
+     "display_lower": 1,
+@@ -7,6 +11,10 @@
+     "upper_extent": 1
+   },
+   "formula": "display_centre=sqrt(centre); display_lower=sqrt(lower); display_upper=sqrt(upper); lower_extent=display_centre-display_lower; upper_extent=display_upper-display_centre",
++  "limits": [
++    "Intervals are not calibrated confidence intervals or measured uncertainty",
++    "No claim about perceptual benefit of the display transform"
++  ],
+   "negative_control": {
+     "expected": {
+       "display_centre": 2,
+@@ -20,7 +28,8 @@
+       "lower": 0,
+       "transform": "sqrt",
+       "upper": 8
+-    }
++    },
++    "why": "A raw symmetric interval generally becomes asymmetric after a nonlinear coordinate transform."
+   },
+   "values": {
+     "centre": 4,
+DV022
+--- displayed
++++ packet
+@@ -1,4 +1,8 @@
+ {
++  "assumptions": [
++    "One square cell with alternating corner classes; no corner equal to threshold",
++    "Authored connectivity convention; component counts are local high/low regions inside this cell"
++  ],
+   "expected": {
+     "ambiguous": true,
+     "edge_fractions": [
+@@ -21,6 +25,10 @@
+     ]
+   },
+   "formula": "classify corners strictly above threshold; alternating high/low is ambiguous; interpolate each crossing at (threshold-a)/(b-a); connect_high false pairs top-left and right-bottom; connect_high true pairs top-right and bottom-left",
++  "limits": [
++    "No inference about an actual continuous relief between samples",
++    "No library or engine execution; this is not an asymptotic-decider implementation"
++  ],
+   "negative_control": {
+     "expected": {
+       "ambiguous": true,
+@@ -52,7 +60,8 @@
+         0
+       ],
+       "threshold": 0.5
+-    }
++    },
++    "why": "Identical samples and edge intersections permit different diagonal topology under a different declared connectivity policy."
+   },
+   "values": {
+     "connect_high": false,
+SEM018
+--- displayed
++++ packet
+@@ -1,4 +1,8 @@
+ {
++  "assumptions": [
++    "Authored rising-shed convention: true means warp above weft",
++    "Zero-based shaft labels; each warp assigned one shaft; lift sets refer to declared shafts"
++  ],
+   "expected": {
+     "drawdown": [
+       [
+@@ -23,6 +27,10 @@
+     "status": "complete"
+   },
+   "formula": "drawdown[pick][warp]=threading[warp] in lift_plan[pick]; a missing lift-plan row yields null and status incomplete rather than false cells",
++  "limits": [
++    "No loom execution, yarn deformation or physical weave feasibility",
++    "The convention is declared for the example and is not asserted universal across weaving notations"
++  ],
+   "negative_control": {
+     "expected": {
+       "drawdown": [
+@@ -59,7 +67,8 @@
+         2,
+         0
+       ]
+-    }
++    },
++    "why": "An unrecorded lift-plan row is not equivalent to a recorded empty lift set."
+   },
+   "values": {
+     "lift_plan": [
+SEM019
+--- displayed
++++ packet
+@@ -1,4 +1,8 @@
+ {
++  "assumptions": [
++    "Fixed over/under identities and oriented screen convention; all crossing determinants nonzero",
++    "The sign convention is explicitly defined here; reverse means reverse the entire single component"
++  ],
+   "expected": {
+     "original_signs": [
+       1,
+@@ -14,6 +18,10 @@
+     "transformed_writhe": 1
+   },
+   "formula": "crossing_sign=sign(det(over,under)) in a declared oriented screen frame; writhe=sum(signs); reverse negates both tangents at every crossing; mirror negates x components; recompute signs and writhe",
++  "limits": [
++    "Diagram writhe is not an ambient knot invariant: a Reidemeister-I curl changes it",
++    "No knot classification, crossing geometry validation or native scene execution"
++  ],
+   "negative_control": {
+     "expected": {
+       "original_signs": [
+@@ -59,7 +67,8 @@
+           1
+         ]
+       ]
+-    }
++    },
++    "why": "Traversal reversal negates both crossing tangents; an orientation-reversing planar mirror negates each determinant instead."
+   },
+   "values": {
+     "operation": "reverse",
+SEM020
+--- displayed
++++ packet
+@@ -1,4 +1,8 @@
+ {
++  "assumptions": [
++    "Positive integer run lengths; integer global indices and phase",
++    "Symbol equality is literal; adjacent equal-symbol runs may remain distinct provenance records"
++  ],
+   "expected": {
+     "period": 6,
+     "samples": [
+@@ -11,6 +15,10 @@
+     "status": "valid"
+   },
+   "formula": "reject any run length <=0 or non-integer; period=sum(lengths); offset=(index+phase)%period; choose first cumulative end strictly greater than offset",
++  "limits": [
++    "No compression benchmark or implemented parser/DSL",
++    "Symbols designate an authored motif, not physical yarn contact or automatic alternating parity"
++  ],
+   "negative_control": {
+     "expected": {
+       "period": null,
+@@ -40,7 +48,8 @@
+           3
+         ]
+       ]
+-    }
++    },
++    "why": "Changing the main run length from one to zero changes the arithmetic sum from 6 to 5 if accepted. Deleting the zero-length record does not further change that sum or expansion; it conceals a violation of the declared positive-length and provenance contract, so the authored control is rejected."
+   },
+   "values": {
+     "indices": [
+PHI014
+--- displayed
++++ packet
+@@ -1,4 +1,8 @@
+ {
++  "assumptions": [
++    "Invented equally weighted binary scene factors; selection is their logical disjunction",
++    "No unmodeled factor and no observational estimate of a causal effect"
++  ],
+   "expected": {
+     "B_given_A0": 1,
+     "B_given_A1": 0.5,
+@@ -7,6 +11,10 @@
+     "unselected_difference": 0
+   },
+   "formula": "retain rows satisfying selection; conditional_B_given_A=a weighted B count / retained mass for that A; difference=P(B|A=1,selected)-P(B|A=0,selected)",
++  "limits": [
++    "Finite selection demonstration, not diagnosis of a real project dataset",
++    "A conditional association alone does not identify a causal graph"
++  ],
+   "negative_control": {
+     "expected": {
+       "B_given_A0": 0.5,
+@@ -39,7 +47,8 @@
+         ]
+       ],
+       "selection": "all"
+-    }
++    },
++    "why": "Removing selection restores the original independence; the apparent negative association was created by retaining a shared outcome."
+   },
+   "values": {
+     "rows_A_B_mass": [
+PHI015
+--- displayed
++++ packet
+@@ -1,4 +1,8 @@
+ {
++  "assumptions": [
++    "Authored exhaustive Boolean model; prediction defined as conjunction, not merely one-way implication",
++    "The control stipulates a genuinely independent auxiliary verification"
++  ],
+   "expected": {
+     "H_false_entailed": false,
+     "count": 3,
+@@ -18,6 +22,10 @@
+     ]
+   },
+   "formula": "enumerate Boolean worlds [H,A] lexicographically; retain worlds with (H and A)==observed_prediction and, when auxiliary_verified is not null, A==auxiliary_verified; H_false_entailed=all(not H for retained worlds) with nonempty retained set",
++  "limits": [
++    "Logical entailment within this finite model does not rank real explanations",
++    "No actual failed capture, calibrated instrument or independent auxiliary observation is reported"
++  ],
+   "negative_control": {
+     "expected": {
+       "H_false_entailed": true,
+@@ -32,7 +40,8 @@
+     "values": {
+       "auxiliary_verified": true,
+       "observed_prediction": false
+-    }
++    },
++    "why": "An independently established auxiliary removes the surviving world where the main hypothesis is true but the auxiliary is false."
+   },
+   "values": {
+     "auxiliary_verified": null,
+FUT014
+--- displayed
++++ packet
+@@ -1,4 +1,8 @@
+ {
++  "assumptions": [
++    "Invented divisible cohort mass and normalized nonnegative age allocation; discrete periods",
++    "First retirements of original cohorts only; no replacement purchases re-enter the model"
++  ],
+   "expected": {
+     "first_retirements": [
+       0,
+@@ -14,6 +18,10 @@
+     "total": 6
+   },
+   "formula": "first_retirements[t]=sum(introduced[c]*age_mass[t-c] for c in cohort periods, absent ages contribute zero); total=sum(first_retirements)",
++  "limits": [
++    "No fitted survival curve, actual asset wear or future probability forecast",
++    "First-retirement workload is not total replacement cost or a stock balance"
++  ],
+   "negative_control": {
+     "expected": {
+       "first_retirements": [
+@@ -40,7 +48,8 @@
+       "retirement_age_mass": {
+         "1": 1
+       }
+-    }
++    },
++    "why": "The same introduced total can have a different retirement peak and date under a different lifespan allocation."
+   },
+   "values": {
+     "introduced_by_period": [
+FUT015
+--- displayed
++++ packet
+@@ -1,4 +1,8 @@
+ {
++  "assumptions": [
++    "Authored Boolean capability assumptions, not product facts",
++    "Implications encode necessary conditions only; feature order is fixed; every configuration explicitly enumerated"
++  ],
+   "expected": {
+     "compatible": [
+       "000",
+@@ -15,6 +19,10 @@
+     ]
+   },
+   "formula": "enumerate binary configurations in feature order; retain a configuration iff every implication premise=>consequence holds and no forbidden pair is jointly true; return ordered bitstrings and count",
++  "limits": [
++    "Logical compatibility is not implementation feasibility or future likelihood",
++    "No minimax regret, probability forecast or technology adoption authorization"
++  ],
+   "negative_control": {
+     "expected": {
+       "compatible": [
+@@ -53,7 +61,8 @@
+           "local"
+         ]
+       ]
+-    }
++    },
++    "why": "An added compatibility restriction removes a bundle that previously appeared in the scenario set without assigning a probability to any remaining bundle."
+   },
+   "values": {
+     "features": [

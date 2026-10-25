@@ -28,3 +28,6 @@ sidebar:
 - [CYB-015 · Carry Covariance Through Smoothed Telemetry](cyb-015-carry-covariance-through-smoothed-telemetry/)
 - [CYB-016 · Test Feedforward Against Disturbance Mismatch](cyb-016-test-feedforward-against-disturbance-mismatch/)
 - [CYB-017 · Limit Command Change Separately from Amplitude](cyb-017-limit-command-change-separately-from-amplitude/)
+- [CYB-018 · Reconstruct Hidden State from Distinct Dynamics](cyb-018-reconstruct-hidden-state-from-distinct-dynamics/)
+- [CYB-019 · Test Coupled Feedback Eigenmodes](cyb-019-test-coupled-feedback-eigenmodes/)
+- [CYB-020 · Check Disturbance-Robust Set Closure](cyb-020-check-disturbance-robust-set-closure/)

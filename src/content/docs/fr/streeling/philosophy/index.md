@@ -24,3 +24,5 @@ sidebar:
 - [PHI-011 · Croiser maillage et éclairage avant d’attribuer un changement de rendu](phi-011-cross-mesh-and-lighting-before-attributing-a-render-change/)
 - [PHI-012 · Distinguer l’équivalence d’un intervalle contenant zéro](phi-012-distinguish-equivalence-from-an-interval-containing-zero/)
 - [PHI-013 · Expliquer un projet artisanal impossible par un noyau minimal](phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core/)
+- [PHI-014 · Tester la sélection sur un résultat de scène commun](phi-014-test-selection-on-a-shared-scene-outcome/)
+- [PHI-015 · Diagnostiquer une prédiction échouée avec une prémisse auxiliaire](phi-015-diagnose-a-failed-prediction-with-an-auxiliary-premise/)

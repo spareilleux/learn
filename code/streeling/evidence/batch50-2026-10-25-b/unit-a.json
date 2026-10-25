@@ -175,7 +175,7 @@
       "exercise_checks": {
         "1": {
           "question": "Calculate both orders for the largest positive sample.",
-          "expected_answer": "The two outputs differ because attenuation before clipping retains a value that clipping before attenuation has already removed.",
+          "expected_answer": "For `x=2`, `A=clip(0.5*2)=1`, `B=0.5*clip(2)=0.5` and `A-B=0.5`. The two outputs differ because attenuation before clipping retains a value that clipping before attenuation has already removed.",
           "decision": null
         },
         "2": {

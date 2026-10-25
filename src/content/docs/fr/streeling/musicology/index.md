@@ -28,3 +28,6 @@ sidebar:
 - [MCL-015 · Distinguer le relâchement de la touche de celui de la pédale](mcl-015-separate-key-release-from-pedal-release/)
 - [MCL-016 · Reconstruire les curseurs d’une partition polyphonique](mcl-016-reconstruct-polyphonic-score-cursors/)
 - [MCL-017 · Intégrer une rampe de tempo dans le repère des temps musicaux](mcl-017-integrate-a-tempo-ramp-in-beat-coordinates/)
+- [MCL-018 · Convertir le tempo par un pivot de modulation métrique](mcl-018-convert-tempo-through-a-metric-modulation-pivot/)
+- [MCL-019 · Développer un trille avec une note finale explicite](mcl-019-expand-a-trill-with-an-explicit-terminal-note/)
+- [MCL-020 · Réinitialiser l’état des altérations à la barre de mesure](mcl-020-reset-an-accidental-state-at-the-bar-boundary/)

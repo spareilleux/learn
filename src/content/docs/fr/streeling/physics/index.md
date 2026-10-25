@@ -32,3 +32,6 @@ sidebar:
 - [PHY-019 · Vérifier le glissement avant de déclarer une sculpture stable](phy-019-test-sliding-before-calling-a-sculpture-stable/)
 - [PHY-020 · Distinguer la géométrie de section de la rigidité du matériau](phy-020-separate-section-geometry-from-material-stiffness/)
 - [PHY-021 · Distinguer vitesse de rebond et énergie conservée](phy-021-separate-rebound-speed-from-retained-energy/)
+- [PHY-022 · Dimensionner le volume déplacé par une sculpture flottante](phy-022-budget-displacement-for-a-floating-sculpture/)
+- [PHY-023 · Borner l’amplification de tension autour d’un plot artisanal](phy-023-bound-tension-amplification-around-a-craft-peg/)
+- [PHY-024 · Composer la résistance thermique de couches artisanales](phy-024-compose-thermal-resistance-through-craft-layers/)

@@ -26,3 +26,6 @@ sidebar:
 - [NET-013 · Tracer la concurrence causale avec des horloges vectorielles](net-013-trace-causal-concurrency-with-vector-clocks/)
 - [NET-014 · Borner le débit par une coupe de capacité](net-014-bound-throughput-with-a-capacity-cut/)
 - [NET-015 · Condenser les dépendances mutuelles avant d’ordonner le travail](net-015-condense-mutual-dependencies-before-ordering-work/)
+- [NET-016 · Repérer les passages obligés avec les dominateurs](net-016-find-mandatory-gates-with-dominators/)
+- [NET-017 · Affecter des rôles simultanés sans double réservation](net-017-match-simultaneous-roles-without-double-booking/)
+- [NET-018 · Réduire les arêtes de précédence sans effacer les preuves](net-018-reduce-precedence-edges-without-erasing-evidence/)

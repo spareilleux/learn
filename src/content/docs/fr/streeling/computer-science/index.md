@@ -34,3 +34,5 @@ sidebar:
 - [CS-021 · Accumuler les erreurs de validation indépendantes](cs-021-accumulate-independent-validation-errors/)
 - [CS-022 · Examiner les lectures et écritures avant de réordonner](cs-022-check-read-write-footprints-before-reordering/)
 - [CS-023 · Libérer uniquement les ressources acquises](cs-023-unwind-only-acquired-resources/)
+- [CS-024 · Vérifier le sens après un aller-retour entre analyseur et imprimeur](cs-024-check-semantic-parser-printer-round-trips/)
+- [CS-025 · Vérifier si une clé de cache préserve les résultats](cs-025-test-whether-a-cache-key-preserves-results/)

@@ -28,3 +28,6 @@ sidebar:
 - [GTR-015 · Sample a Vibrato Without Erasing Its Motion](gtr-015-sample-a-vibrato-without-erasing-its-motion/)
 - [GTR-016 · Move the Boundary for an Artificial Harmonic](gtr-016-move-the-boundary-for-an-artificial-harmonic/)
 - [GTR-017 · Check Contact Continuity During Finger Substitution](gtr-017-check-contact-continuity-during-finger-substitution/)
+- [GTR-018 · Check Direction Constraints at String Crossings](gtr-018-check-direction-constraints-at-string-crossings/)
+- [GTR-019 · Declare the Coordinate of a Continuous Slide](gtr-019-declare-the-coordinate-of-a-continuous-slide/)
+- [GTR-020 · Derive Strum Onsets from a Sweep](gtr-020-derive-strum-onsets-from-a-sweep/)

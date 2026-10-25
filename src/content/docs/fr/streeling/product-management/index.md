@@ -24,3 +24,5 @@ sidebar:
 - [PM-011 · Inclure revue et correction dans le seuil de rentabilité de l’automatisation](pm-011-include-review-and-correction-in-automation-break-even/)
 - [PM-012 · Ordonner les revues selon le coût pondéré d’achèvement](pm-012-order-review-work-by-weighted-completion-cost/)
 - [PM-013 · Conserver la censure du délai avant la première utilisation](pm-013-retain-censoring-in-time-to-first-task-use/)
+- [PM-014 · Choisir un portefeuille sous budget en fermant les prérequis](pm-014-select-a-budgeted-portfolio-with-prerequisite-closure/)
+- [PM-015 · Équilibrer les coûts de préparation et d’attente de la vérification](pm-015-balance-verification-setup-and-waiting-costs/)

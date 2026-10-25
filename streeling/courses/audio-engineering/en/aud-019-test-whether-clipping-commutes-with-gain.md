@@ -115,7 +115,7 @@ Calculate both orders for the largest positive sample.
 
 <details><summary>Answer 1</summary>
 
-The two outputs differ because attenuation before clipping retains a value that clipping before attenuation has already removed.
+For `x=2`, `A=clip(0.5*2)=1`, `B=0.5*clip(2)=0.5` and `A-B=0.5`. The two outputs differ because attenuation before clipping retains a value that clipping before attenuation has already removed.
 
 </details>
 

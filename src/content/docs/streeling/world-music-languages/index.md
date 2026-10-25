@@ -27,3 +27,6 @@ sidebar:
 - [WML-014 · Quantize a Ratio on a Declared Octave Division](wml-014-quantize-a-ratio-on-a-declared-octave-division/)
 - [WML-015 · Carry the Concert Reference Through a Frequency Handoff](wml-015-carry-the-concert-reference-through-a-frequency-handoff/)
 - [WML-016 · Keep Chord Degree Operations Distinct](wml-016-keep-chord-degree-operations-distinct/)
+- [WML-017 · Declare Equivalence under a Non-Octave Period](wml-017-declare-equivalence-under-a-non-octave-period/)
+- [WML-018 · Detect Channel-Scoped Tuning Conflicts](wml-018-detect-channel-scoped-tuning-conflicts/)
+- [WML-019 · Distribute Onsets with a Floor Lattice](wml-019-distribute-onsets-with-a-floor-lattice/)

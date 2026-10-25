@@ -28,3 +28,6 @@ sidebar:
 - [COG-015 · Transferir la precisión de alertas solo junto con la prevalencia](cog-015-transport-alert-precision-only-with-prevalence/)
 - [COG-016 · Hallar cuántas respuestas faltantes invierten la clasificación](cog-016-find-the-missing-answer-tipping-count/)
 - [COG-017 · Restar la tendencia de comparación antes de atribuir mejoras a la asistencia](cog-017-subtract-a-comparison-trend-before-crediting-assistance/)
+- [COG-018 · Contrastar cambios emparejados con resultados discordantes](cog-018-test-paired-changes-with-discordant-outcomes/)
+- [COG-019 · Corregir el acuerdo de revisión por los marginales de etiquetas](cog-019-correct-review-agreement-for-label-marginals/)
+- [COG-020 · Examinar un ítem mediante la puntuación de los demás ítems](cog-020-screen-an-item-using-the-rest-score/)

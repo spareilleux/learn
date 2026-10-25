@@ -1,0 +1,85 @@
+test_cog018 (__main__.UnitB.test_cog018) ... 
+OBSERVATION {"case": "model", "code": "COG018", "expected": {"accuracy_difference": 0.5, "discordant": 8, "new_correct": 9, "old_correct": 3, "p_value": 0.0703125, "paired": 12}, "observed": {"accuracy_difference": 0.5, "discordant": 8, "new_correct": 9, "old_correct": 3, "p_value": 0.0703125, "paired": 12}, "scope": "Independent discordant paired Bernoulli directions under p=1/2; authored counts, no causal learner result."}
+
+OBSERVATION {"case": "negative", "code": "COG018", "expected": {"accuracy_difference": 0, "discordant": 8, "new_correct": 6, "old_correct": 6, "p_value": 1, "paired": 12}, "observed": {"accuracy_difference": 0, "discordant": 8, "new_correct": 6, "old_correct": 6, "p_value": 1, "paired": 12}, "scope": "Independent discordant paired Bernoulli directions under p=1/2; authored counts, no causal learner result."}
+ok
+test_cog019 (__main__.UnitB.test_cog019) ... 
+OBSERVATION {"case": "model", "code": "COG019", "expected": {"N": 10, "expected_agreement": 0.56, "kappa_fraction": "6/11", "observed_agreement": 0.8}, "observed": {"N": 10, "expected_agreement": 0.56, "kappa_fraction": "6/11", "observed_agreement": 0.8}, "scope": "Fictional paired binary ratings with separate empirical marginals; undefined correction retained."}
+
+OBSERVATION {"case": "negative", "code": "COG019", "expected": {"N": 10, "expected_agreement": 1, "kappa_fraction": null, "observed_agreement": 1}, "observed": {"N": 10, "expected_agreement": 1, "kappa_fraction": null, "observed_agreement": 1}, "scope": "Fictional paired binary ratings with separate empirical marginals; undefined correction retained."}
+ok
+test_cog020 (__main__.UnitB.test_cog020) ... 
+OBSERVATION {"case": "model", "code": "COG020", "expected": {"discrimination": -0.5, "group_size": 4, "lower_correct": 3, "overall_fraction": 0.5, "upper_correct": 1}, "observed": {"discrimination": -0.5, "group_size": 4, "lower_correct": 3, "overall_fraction": 0.5, "upper_correct": 1}, "scope": "Eight complete fictional responses, distinct rest scores excluding the item and declared equal halves."}
+
+OBSERVATION {"case": "negative", "code": "COG020", "expected": {"discrimination": 0.5, "group_size": 4, "lower_correct": 1, "overall_fraction": 0.5, "upper_correct": 3}, "observed": {"discrimination": 0.5, "group_size": 4, "lower_correct": 1, "overall_fraction": 0.5, "upper_correct": 3}, "scope": "Eight complete fictional responses, distinct rest scores excluding the item and declared equal halves."}
+ok
+test_cs024 (__main__.UnitB.test_cs024) ... 
+OBSERVATION {"case": "model", "code": "CS024", "expected": {"printed_ast": ["add", ["lit", 1], ["mul", ["lit", 2], ["lit", 3]]], "same_ast": true, "same_text": false, "source_ast": ["add", ["lit", 1], ["mul", ["lit", 2], ["lit", 3]]], "values": [7, 7]}, "observed": {"printed_ast": ["add", ["lit", 1], ["mul", ["lit", 2], ["lit", 3]]], "same_ast": true, "same_text": false, "source_ast": ["add", ["lit", 1], ["mul", ["lit", 2], ["lit", 3]]], "values": [7, 7]}, "scope": "Two expressions in the integer/add/multiply grammar; structural equality, not a production parser."}
+
+OBSERVATION {"case": "negative", "code": "CS024", "expected": {"printed_ast": ["mul", ["add", ["lit", 1], ["lit", 2]], ["lit", 3]], "same_ast": false, "same_text": false, "source_ast": ["add", ["lit", 1], ["mul", ["lit", 2], ["lit", 3]]], "values": [7, 9]}, "observed": {"printed_ast": ["mul", ["add", ["lit", 1], ["lit", 2]], ["lit", 3]], "same_ast": false, "same_text": false, "source_ast": ["add", ["lit", 1], ["mul", ["lit", 2], ["lit", 3]]], "values": [7, 9]}, "scope": "Two expressions in the integer/add/multiply grammar; structural equality, not a production parser."}
+ok
+test_cs025 (__main__.UnitB.test_cs025) ... 
+OBSERVATION {"case": "model", "code": "CS025", "expected": {"sufficient": false, "witness_pairs": [[0, 1]]}, "observed": {"sufficient": false, "witness_pairs": [[0, 1]]}, "scope": "Three stipulated pure result rows; finite-catalogue key sufficiency only."}
+
+OBSERVATION {"case": "negative", "code": "CS025", "expected": {"sufficient": true, "witness_pairs": []}, "observed": {"sufficient": true, "witness_pairs": []}, "scope": "Three stipulated pure result rows; finite-catalogue key sufficiency only."}
+ok
+test_cyb018 (__main__.UnitB.test_cyb018) ... 
+OBSERVATION {"case": "model", "code": "CYB018", "expected": {"O": [[1, 1], [1, 2]], "determinant": 1, "outputs": [7, 11], "rank": 2, "reconstructed": [3, 4]}, "observed": {"O": [[1, 1], [1, 2]], "determinant": 1, "outputs": [7, 11], "rank": 2, "reconstructed": [3, 4]}, "scope": "Exact known autonomous 2x2 dynamics, noiseless synchronized outputs and no unknown inputs."}
+
+OBSERVATION {"case": "negative", "code": "CYB018", "expected": {"O": [[1, 1], [1, 1]], "determinant": 0, "outputs": [7, 7], "rank": 1, "reconstructed": null}, "observed": {"O": [[1, 1], [1, 1]], "determinant": 0, "outputs": [7, 7], "rank": 1, "reconstructed": null}, "scope": "Exact known autonomous 2x2 dynamics, noiseless synchronized outputs and no unknown inputs."}
+ok
+test_cyb019 (__main__.UnitB.test_cyb019) ... 
+OBSERVATION {"case": "model", "code": "CYB019", "expected": {"eigenvalues": [1.25, -0.25], "spectral_radius": 1.25, "stable": false, "trajectory": [[1, 1], [1.25, 1.25], [1.5625, 1.5625], [1.953125, 1.953125]]}, "observed": {"eigenvalues": [1.25, -0.25], "spectral_radius": 1.25, "stable": false, "trajectory": [[1, 1], [1.25, 1.25], [1.5625, 1.5625], [1.953125, 1.953125]]}, "scope": "Symmetric fixed 2x2 autonomous linear dynamics; stability means asymptotic decay of every mode."}
+
+OBSERVATION {"case": "negative", "code": "CYB019", "expected": {"eigenvalues": [0.75, 0.25], "spectral_radius": 0.75, "stable": true, "trajectory": [[1, 1], [0.75, 0.75], [0.5625, 0.5625], [0.421875, 0.421875]]}, "observed": {"eigenvalues": [0.75, 0.25], "spectral_radius": 0.75, "stable": true, "trajectory": [[1, 1], [0.75, 0.75], [0.5625, 0.5625], [0.421875, 0.421875]]}, "scope": "Symmetric fixed 2x2 autonomous linear dynamics; stability means asymptotic decay of every mode."}
+ok
+test_cyb020 (__main__.UnitB.test_cyb020) ... 
+OBSERVATION {"case": "model", "code": "CYB020", "expected": {"closed": true, "escaping": [], "successor_set": [0, 1, 2]}, "observed": {"closed": true, "escaping": [], "successor_set": [0, 1, 2]}, "scope": "All stated finite states/disturbances, service before arrivals; no arrival probabilities or real queue."}
+
+OBSERVATION {"case": "negative", "code": "CYB020", "expected": {"closed": false, "escaping": [[2, 2, 3]], "successor_set": [0, 1, 2, 3]}, "observed": {"closed": false, "escaping": [[2, 2, 3]], "successor_set": [0, 1, 2, 3]}, "scope": "All stated finite states/disturbances, service before arrivals; no arrival probabilities or real queue."}
+ok
+test_inf019 (__main__.UnitB.test_inf019) ... 
+OBSERVATION {"case": "model", "code": "INF019", "expected": {"decoding_count": 1, "decodings": [["A", "B", "C"]], "prefix_free": true, "prefix_violations": []}, "observed": {"decoding_count": 1, "decodings": [["A", "B", "C"]], "prefix_free": true, "prefix_violations": []}, "scope": "Finite distinct nonempty binary codewords; enumerate complete parses, no HPACK implementation."}
+
+OBSERVATION {"case": "negative", "code": "INF019", "expected": {"decoding_count": 2, "decodings": [["A", "C"], ["B"]], "prefix_free": false, "prefix_violations": [["A", "B"]]}, "observed": {"decoding_count": 2, "decodings": [["A", "C"], ["B"]], "prefix_free": false, "prefix_violations": [["A", "B"]]}, "scope": "Finite distinct nonempty binary codewords; enumerate complete parses, no HPACK implementation."}
+ok
+test_inf020 (__main__.UnitB.test_inf020) ... 
+OBSERVATION {"case": "model", "code": "INF020", "expected": {"codeword": [1, 0, 1, 1, 1], "detected": true, "hamming_distance": 1, "parity_bit": 1, "received": [1, 1, 1, 1, 1], "syndrome": 1}, "observed": {"codeword": [1, 0, 1, 1, 1], "detected": true, "hamming_distance": 1, "parity_bit": 1, "received": [1, 1, 1, 1, 1], "syndrome": 1}, "scope": "Known word boundaries, distinct bit substitutions and one even parity bit; no correction or authentication."}
+
+OBSERVATION {"case": "negative", "code": "INF020", "expected": {"codeword": [1, 0, 1, 1, 1], "detected": false, "hamming_distance": 2, "parity_bit": 1, "received": [1, 1, 0, 1, 1], "syndrome": 0}, "observed": {"codeword": [1, 0, 1, 1, 1], "detected": false, "hamming_distance": 2, "parity_bit": 1, "received": [1, 1, 0, 1, 1], "syndrome": 0}, "scope": "Known word boundaries, distinct bit substitutions and one even parity bit; no correction or authentication."}
+ok
+test_inf021 (__main__.UnitB.test_inf021) ... 
+OBSERVATION {"case": "model", "code": "INF021", "expected": {"block_entropy_bits": 3.4338343733773984, "entropy_rate_bits_per_symbol": 0.8112781244591328, "marginal_entropy_bits": 1}, "observed": {"block_entropy_bits": 3.433834373377399, "entropy_rate_bits_per_symbol": 0.8112781244591328, "marginal_entropy_bits": 1.0}, "scope": "Known stationary balanced symmetric first-order binary Markov source; base-2 random-symbol entropy."}
+
+OBSERVATION {"case": "negative", "code": "INF021", "expected": {"block_entropy_bits": 4, "entropy_rate_bits_per_symbol": 1, "marginal_entropy_bits": 1}, "observed": {"block_entropy_bits": 4.0, "entropy_rate_bits_per_symbol": 1.0, "marginal_entropy_bits": 1.0}, "scope": "Known stationary balanced symmetric first-order binary Markov source; base-2 random-symbol entropy."}
+ok
+test_net016 (__main__.UnitB.test_net016) ... 
+OBSERVATION {"case": "model", "code": "NET016", "expected": {"bypass": null, "candidate_mandatory": true, "dominators": ["S", "R", "P"]}, "observed": {"bypass": null, "candidate_mandatory": true, "dominators": ["S", "R", "P"]}, "scope": "Complete allowed-route graph, fixed entry and reachable target; no conjunctive join or authorization."}
+
+OBSERVATION {"case": "negative", "code": "NET016", "expected": {"bypass": ["S", "B", "P"], "candidate_mandatory": false, "dominators": ["S", "P"]}, "observed": {"bypass": ["S", "B", "P"], "candidate_mandatory": false, "dominators": ["S", "P"]}, "scope": "Complete allowed-route graph, fixed entry and reachable target; no conjunctive join or authorization."}
+ok
+test_net017 (__main__.UnitB.test_net017) ... 
+OBSERVATION {"case": "model", "code": "NET017", "expected": {"all_roles_covered": true, "matching": [["draft", "w1"], ["translate", "w2"]], "maximum_count": 2, "obstruction": {"deficiency": 1, "roles": ["draft", "review"], "workers": ["w1"]}}, "observed": {"all_roles_covered": true, "matching": [["draft", "w1"], ["translate", "w2"]], "maximum_count": 2, "obstruction": {"deficiency": 1, "roles": ["draft", "review"], "workers": ["w1"]}}, "scope": "Simultaneous single-worker roles and worker exclusivity; candidate coverage differs from full matching."}
+
+OBSERVATION {"case": "negative", "code": "NET017", "expected": {"all_roles_covered": true, "matching": [["draft", "w1"], ["review", "w2"], ["translate", "w3"]], "maximum_count": 3, "obstruction": null}, "observed": {"all_roles_covered": true, "matching": [["draft", "w1"], ["review", "w2"], ["translate", "w3"]], "maximum_count": 3, "obstruction": null}, "scope": "Simultaneous single-worker roles and worker exclusivity; candidate coverage differs from full matching."}
+ok
+test_net018 (__main__.UnitB.test_net018) ... 
+OBSERVATION {"case": "model", "code": "NET018", "expected": {"reachable_pairs_after": 6, "reachable_pairs_before": 6, "removed_edges": [["A", "C"], ["A", "D"], ["B", "D"]], "retained_edges": [["A", "B"], ["B", "C"], ["C", "D"]]}, "observed": {"reachable_pairs_after": 6, "reachable_pairs_before": 6, "removed_edges": [["A", "C"], ["A", "D"], ["B", "D"]], "retained_edges": [["A", "B"], ["B", "C"], ["C", "D"]]}, "scope": "Finite precedence-only DAG; actual reachable pair sets preserved, no payload or receipt deletion."}
+
+OBSERVATION {"case": "negative", "code": "NET018", "expected": {"reachable_pairs_after": 5, "reachable_pairs_before": 5, "removed_edges": [["A", "D"]], "retained_edges": [["A", "B"], ["A", "C"], ["B", "D"], ["C", "D"]]}, "observed": {"reachable_pairs_after": 5, "reachable_pairs_before": 5, "removed_edges": [["A", "D"]], "retained_edges": [["A", "B"], ["A", "C"], ["B", "D"], ["C", "D"]]}, "scope": "Finite precedence-only DAG; actual reachable pair sets preserved, no payload or receipt deletion."}
+ok
+test_pm014 (__main__.UnitB.test_pm014) ... 
+OBSERVATION {"case": "model", "code": "PM014", "expected": {"feasible_count": 7, "optimal_costs": [6], "optimal_sets": [["C", "D"]], "optimal_value": 10}, "observed": {"feasible_count": 7, "optimal_costs": [6], "optimal_sets": [["C", "D"]], "optimal_value": 10}, "scope": "Finite additive fictional costs/values, all required items selected once and acyclic prerequisites."}
+
+OBSERVATION {"case": "negative", "code": "PM014", "expected": {"feasible_count": 9, "optimal_costs": [5], "optimal_sets": [["B", "D"]], "optimal_value": 11}, "observed": {"feasible_count": 9, "optimal_costs": [5], "optimal_sets": [["B", "D"]], "optimal_value": 11}, "scope": "Finite additive fictional costs/values, all required items selected once and acyclic prerequisites."}
+ok
+test_pm015 (__main__.UnitB.test_pm015) ... 
+OBSERVATION {"case": "model", "code": "PM015", "expected": {"minimum_cost": 45, "optimal_sizes": [4], "total_costs": [108, 60, 48, 45, 48, 75], "waiting_item_ticks": [0, 6, 12, 18, 30, 66]}, "observed": {"minimum_cost": 45, "optimal_sizes": [4], "total_costs": [108, 60, 48, 45, 48, 75], "waiting_item_ticks": [0, 6, 12, 18, 30, 66]}, "scope": "Twelve deterministic one-per-tick arrivals, instant verification and stipulated common cost points; all ties retained."}
+
+OBSERVATION {"case": "negative", "code": "PM015", "expected": {"minimum_cost": 12, "optimal_sizes": [1, 2], "total_costs": [12, 12, 16, 21, 32, 67], "waiting_item_ticks": [0, 6, 12, 18, 30, 66]}, "observed": {"minimum_cost": 12, "optimal_sizes": [1, 2], "total_costs": [12, 12, 16, 21, 32, 67], "waiting_item_ticks": [0, 6, 12, 18, 30, 66]}, "scope": "Twelve deterministic one-per-tick arrivals, instant verification and stipulated common cost points; all ties retained."}
+ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.004s
+
+OK

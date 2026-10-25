@@ -19,7 +19,7 @@ An embroidered border repeats a motif stored as runs rather than one symbol per 
 
 Validate lengths before computing the period. Each length must be a positive integer, so the cumulative ends strictly increase. A cell belongs to the first end strictly greater than its reduced offset; equality with an end belongs to the next run. This preserves half-open ownership at internal boundaries without confusing it with negative-tile floor indexing. Modulo handles repetition after the period, while the run search handles the unequal internal regions.
 
-The zero-run control asks for refusal, not a guessed motif repair. Removing the invalid run silently would change period and later addresses and erase the source’s mistake. A future IX craft-to-scene handoff may keep two adjacent identical-symbol runs if they have different provenance; merging them should be an explicit rewrite with an appropriate correspondence. An assistant can explain or propose that rewrite, but cannot declare the malformed input accepted merely because a preview still looks striped.
+The zero-run control asks for refusal, not a guessed motif repair. Changing the valid main run length from one to zero would reduce its length sum from `6` to `5` if accepted. Deleting that zero-length record does not further change the sum or expanded symbols; it erases the malformed instruction and its provenance. The declared positive-length contract therefore rejects the input before assigning it a period. A future IX craft-to-scene handoff may keep two adjacent identical-symbol runs if they have different provenance; merging them should be an explicit rewrite with an appropriate correspondence. An assistant can explain or propose that rewrite, but cannot declare the malformed input accepted merely because a preview still looks striped.
 
 The committed compression prerequisite already teaches run expansion and stored-size accounting. Our new operation is indexed cell lookup with phase and internal-boundary ownership; it makes no new compression or round-trip claim.
 
@@ -137,7 +137,7 @@ Apply the zero-run control.
 
 <details><summary>Answer 4</summary>
 
-Return `invalid_run`, with period and samples `null`. Continuing after silent deletion would change the meaning of later indices.
+Return `invalid_run`, with period and samples `null`. Removing a zero-length record does not change its arithmetic contribution, but silently accepting the remainder would conceal the violated positive-length contract.
 
 </details>
 
@@ -161,7 +161,7 @@ Submit the baseline, source locations, corrected explanation, control outcome an
 
 ## Prospective falsifier
 
-An interpreter that admits the zero-run input as the same motif is refuted by the lost period and address contract.
+An interpreter that reports `valid` for the zero-run input violates the declared positive-length contract. Deletion cannot repair the missing provenance or establish the intended motif.
 
 ## Prepared learner criteria
 

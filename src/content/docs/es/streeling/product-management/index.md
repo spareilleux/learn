@@ -24,3 +24,5 @@ sidebar:
 - [PM-011 · Incluir revisión y corrección en el equilibrio de automatización](pm-011-include-review-and-correction-in-automation-break-even/)
 - [PM-012 · Ordenar revisiones por su coste ponderado de finalización](pm-012-order-review-work-by-weighted-completion-cost/)
 - [PM-013 · Conservar la censura del tiempo hasta el primer uso de la tarea](pm-013-retain-censoring-in-time-to-first-task-use/)
+- [PM-014 · Elegir una cartera con presupuesto y cierre de requisitos](pm-014-select-a-budgeted-portfolio-with-prerequisite-closure/)
+- [PM-015 · Equilibrar costes de preparación y espera de verificación](pm-015-balance-verification-setup-and-waiting-costs/)

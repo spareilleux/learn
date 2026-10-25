@@ -28,3 +28,6 @@ sidebar:
 - [SEM-015 · Bind a Surface Marker to Barycentric Vertex Identity](sem-015-bind-a-surface-marker-to-barycentric-vertex-identity/)
 - [SEM-016 · Check Sign Consistency around a Craft Seam Cycle](sem-016-check-sign-consistency-around-a-craft-seam-cycle/)
 - [SEM-017 · Declare Boundary Ownership for Negative Tile Coordinates](sem-017-declare-boundary-ownership-for-negative-tile-coordinates/)
+- [SEM-018 · Interpret a Multi-Shaft Weaving Draft](sem-018-interpret-a-multi-shaft-weaving-draft/)
+- [SEM-019 · Distinguish Knot Diagram Reversal from Mirroring](sem-019-distinguish-knot-diagram-reversal-from-mirroring/)
+- [SEM-020 · Locate a Motif Cell in Positive Run Lengths](sem-020-locate-a-motif-cell-in-positive-run-lengths/)

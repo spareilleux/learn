@@ -28,3 +28,6 @@ sidebar:
 - [GAS-015 · Separate Mode Excitation from Observation](gas-015-separate-mode-excitation-from-observation/)
 - [GAS-016 · Couple Fretting Geometry to Elastic Tension](gas-016-couple-fretting-geometry-to-elastic-tension/)
 - [GAS-017 · Recover a Stiffness Coefficient from Partial Ratios](gas-017-recover-a-stiffness-coefficient-from-partial-ratios/)
+- [GAS-018 · Account for Energy at an Impedance Junction](gas-018-account-for-energy-at-an-impedance-junction/)
+- [GAS-019 · Measure Half-Power Bandwidth before Reporting Q](gas-019-measure-half-power-bandwidth-before-reporting-q/)
+- [GAS-020 · Average a Mode over a Pickup Aperture](gas-020-average-a-mode-over-a-pickup-aperture/)

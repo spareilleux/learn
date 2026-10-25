@@ -27,3 +27,6 @@ sidebar:
 - [GAA-014 · Hold Out Whole Transposition Families](gaa-014-hold-out-whole-transposition-families/)
 - [GAA-015 · Keep Uncertainty with a Practice Pass Rate](gaa-015-keep-uncertainty-with-a-practice-pass-rate/)
 - [GAA-016 · Separate Order Drift from a Practice Condition](gaa-016-separate-order-drift-from-a-practice-condition/)
+- [GAA-017 · Audit a Practice Staircase Stopping Rule](gaa-017-audit-a-practice-staircase-stopping-rule/)
+- [GAA-018 · Bind Delayed Feedback to the Original Attempt](gaa-018-bind-delayed-feedback-to-the-original-attempt/)
+- [GAA-019 · Retrieve Overlapping Interval Motifs](gaa-019-retrieve-overlapping-interval-motifs/)

@@ -27,3 +27,6 @@ sidebar:
 - [WML-014 · Cuantizar una razón sobre una división declarada de la octava](wml-014-quantize-a-ratio-on-a-declared-octave-division/)
 - [WML-015 · Conservar el diapasón de referencia al transferir frecuencias](wml-015-carry-the-concert-reference-through-a-frequency-handoff/)
 - [WML-016 · Distinguir las operaciones sobre grados de un acorde](wml-016-keep-chord-degree-operations-distinct/)
+- [WML-017 · Declarar equivalencia bajo un período distinto de la octava](wml-017-declare-equivalence-under-a-non-octave-period/)
+- [WML-018 · Detectar conflictos de afinación por canal](wml-018-detect-channel-scoped-tuning-conflicts/)
+- [WML-019 · Distribuir ataques mediante una retícula de partes enteras](wml-019-distribute-onsets-with-a-floor-lattice/)

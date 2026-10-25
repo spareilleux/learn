@@ -30,3 +30,6 @@ sidebar:
 - [DV-017 · Resumir los ejes de fibras sin inventar una dirección](dv-017-summarize-fibre-axes-without-inventing-a-direction/)
 - [DV-018 · Mostrar los defectos artesanales superpuestos mediante su unión](dv-018-show-overlapping-craft-defects-as-a-union/)
 - [DV-019 · Elegir un conjunto mínimo de vistas para rasgos declarados](dv-019-choose-a-minimal-view-set-for-declared-features/)
+- [DV-020 · Conservar las frecuencias por área con intervalos desiguales de puntadas](dv-020-make-unequal-stitch-bins-preserve-frequency-area/)
+- [DV-021 · Transformar los extremos antes de dibujar barras de intervalo](dv-021-transform-interval-endpoints-before-drawing-error-bars/)
+- [DV-022 · Declarar la conectividad diagonal de un contorno de relieve](dv-022-declare-diagonal-connectivity-in-a-relief-contour/)

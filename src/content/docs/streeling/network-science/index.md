@@ -26,3 +26,6 @@ sidebar:
 - [NET-013 · Trace Causal Concurrency with Vector Clocks](net-013-trace-causal-concurrency-with-vector-clocks/)
 - [NET-014 · Bound Throughput with a Capacity Cut](net-014-bound-throughput-with-a-capacity-cut/)
 - [NET-015 · Condense Mutual Dependencies Before Ordering Work](net-015-condense-mutual-dependencies-before-ordering-work/)
+- [NET-016 · Find Mandatory Gates with Dominators](net-016-find-mandatory-gates-with-dominators/)
+- [NET-017 · Match Simultaneous Roles without Double Booking](net-017-match-simultaneous-roles-without-double-booking/)
+- [NET-018 · Reduce Precedence Edges without Erasing Evidence](net-018-reduce-precedence-edges-without-erasing-evidence/)

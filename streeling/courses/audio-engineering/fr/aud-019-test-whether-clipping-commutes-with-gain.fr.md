@@ -115,7 +115,7 @@ Calculez les deux ordres pour la plus grande valeur positive.
 
 <details><summary>Réponse 1</summary>
 
-Les sorties diffèrent : atténuer avant l’écrêtage conserve une valeur que l’autre ordre a déjà supprimée.
+Pour `x=2`, `A=clip(0.5*2)=1`, `B=0.5*clip(2)=0.5` et `A-B=0.5`. Les sorties diffèrent : atténuer avant l’écrêtage conserve une valeur que l’autre ordre a déjà supprimée.
 
 </details>
 

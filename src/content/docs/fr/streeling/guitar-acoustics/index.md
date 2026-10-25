@@ -28,3 +28,6 @@ sidebar:
 - [GAS-015 · Distinguer l’excitation d’un mode de son observation](gas-015-separate-mode-excitation-from-observation/)
 - [GAS-016 · Relier la géométrie du frettage à la tension élastique](gas-016-couple-fretting-geometry-to-elastic-tension/)
 - [GAS-017 · Retrouver un coefficient de raideur à partir des rapports de partiels](gas-017-recover-a-stiffness-coefficient-from-partial-ratios/)
+- [GAS-018 · Faire le bilan d’énergie à une jonction d’impédances](gas-018-account-for-energy-at-an-impedance-junction/)
+- [GAS-019 · Mesurer la largeur à mi-puissance avant d’annoncer Q](gas-019-measure-half-power-bandwidth-before-reporting-q/)
+- [GAS-020 · Moyenner un mode sur l’ouverture d’un capteur](gas-020-average-a-mode-over-a-pickup-aperture/)

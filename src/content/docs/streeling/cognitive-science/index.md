@@ -28,3 +28,6 @@ sidebar:
 - [COG-015 · Transport Alert Precision Only with Prevalence](cog-015-transport-alert-precision-only-with-prevalence/)
 - [COG-016 · Find the Missing-Answer Tipping Count](cog-016-find-the-missing-answer-tipping-count/)
 - [COG-017 · Subtract a Comparison Trend Before Crediting Assistance](cog-017-subtract-a-comparison-trend-before-crediting-assistance/)
+- [COG-018 · Test Paired Changes with Discordant Outcomes](cog-018-test-paired-changes-with-discordant-outcomes/)
+- [COG-019 · Correct Review Agreement for Label Marginals](cog-019-correct-review-agreement-for-label-marginals/)
+- [COG-020 · Screen an Item Using the Rest Score](cog-020-screen-an-item-using-the-rest-score/)

@@ -1,0 +1,26 @@
+{
+  "code": "AUD019",
+  "exercise": 1,
+  "before": "The two outputs differ because attenuation before clipping retains a value that clipping before attenuation has already removed.",
+  "after": "For `x=2`, `A=clip(0.5*2)=1`, `B=0.5*clip(2)=0.5` and `A-B=0.5`. The two outputs differ because attenuation before clipping retains a value that clipping before attenuation has already removed.",
+  "criterion_changed": false,
+  "reason": "Existing criterion remains compatible; only answer lacked requested explicit numerical calculation.",
+  "original_bindings": [
+    {
+      "path": "C:\\tmp\\batch25b-a-review\\correctness-originals\\code\\streeling\\evidence\\batch50-2026-10-25-b\\unit-a.json",
+      "sha256": "b3f7194f5bdb6aa87f56b761c919ac6d07a4e640551e67071a3729904c48630b"
+    },
+    {
+      "path": "C:\\tmp\\batch25b-a-review\\correctness-originals\\streeling\\courses\\audio-engineering\\en\\aud-019-test-whether-clipping-commutes-with-gain.md",
+      "sha256": "48eff07d0512192ee8dd8d0a876a0d0731f94c183b11d4ecc801c23cd19a12f3"
+    },
+    {
+      "path": "C:\\tmp\\batch25b-a-review\\correctness-originals\\streeling\\courses\\audio-engineering\\fr\\aud-019-test-whether-clipping-commutes-with-gain.fr.md",
+      "sha256": "7a43595fc8037bbddba031f710d870fcb93d3f71034cf23a402ad9a82d16dc44"
+    },
+    {
+      "path": "C:\\tmp\\batch25b-a-review\\correctness-originals\\streeling\\courses\\audio-engineering\\es\\aud-019-test-whether-clipping-commutes-with-gain.es.md",
+      "sha256": "96c01a6b5c2d59a9c2b0dd36d685db07d2569c7c59b7ac4a3c10b8b91109d07e"
+    }
+  ]
+}
