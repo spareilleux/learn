@@ -2389,9 +2389,10 @@
         "fr": "streeling/courses/futurology/fr/fut-011-plan-an-embroidery-representation-switch-with-memory.fr.md",
         "es": "streeling/courses/futurology/es/fut-011-plan-an-embroidery-representation-switch-with-memory.es.md"
       },
-      "novelty_vs_prerequisites": "A future embroidery viewer switches between mesh stitches and a texture as the camera moves. A single threshold can repeatedly change representation near the boundary. This lesson plans a stateful switching rule on an invented width trace and states what evidence would still be needed before adoption. It adds temporal path dependence to earlier scenario and pilot reasoning, rather than treating every camera sample as an independent choice.",
+      "novelty_vs_prerequisites": "CYB005 already teaches hysteresis, persistence, dwell and memoryless switch-count comparisons. VC014 predicts a point footprint under a declared camera. This course adds interval-valued footprint evidence: conservatively transition only when the entire interval crosses a threshold, and separately propagate every state consistent with the threshold rule and intervals. A straddling observation can leave multiple reachable states that persist through later in-band intervals. Single-point replay can conceal this ambiguity; the lesson does not establish that the conservative policy is beneficial.",
       "prerequisites": [
-        "fut-005-value-a-renderer-pilot-before-running-it"
+        "fut-005-value-a-renderer-pilot-before-running-it",
+        "cyb-005-stop-render-policy-flapping"
       ],
       "source_readings": [
         {
@@ -2432,9 +2433,39 @@
           ],
           "enter_mesh_px": 2.4,
           "exit_mesh_px": 1.2,
-          "initial_mesh": false
+          "initial_mesh": false,
+          "width_intervals_px": [
+            [
+              2.3,
+              2.5
+            ],
+            [
+              1.8,
+              2
+            ],
+            [
+              2,
+              2.2
+            ],
+            [
+              1.7,
+              1.9
+            ],
+            [
+              1.1,
+              1.3
+            ],
+            [
+              1.3,
+              1.5
+            ],
+            [
+              2.4,
+              2.6
+            ]
+          ]
         },
-        "formula": "Start state=initial_mesh; if state is false and width>=enter_mesh set true; else if state is true and width<exit_mesh set false; emit state; count transitions including from initial state",
+        "formula": "Start state=initial_mesh; if state is false and width>=enter_mesh set true; else if state is true and width<exit_mesh set false; emit state; count transitions including from initial state; for closed interval[lo,hi], robust false->true only if lo>=enter, true->false only if hi<exit, otherwise retain; separately propagate reachable states from initial state: from false include true if hi>=enter and false if lo<enter; from true include false if lo<exit and true if hi>=exit; union across preceding reachable states; sort false before true; ambiguous sample numbers are1-based",
         "expected": {
           "mesh_states": [
             true,
@@ -2445,7 +2476,54 @@
             false,
             true
           ],
-          "switches": 3
+          "switches": 3,
+          "robust_mesh_states": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true
+          ],
+          "robust_switches": 1,
+          "possible_mesh_states": [
+            [
+              false,
+              true
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              true
+            ]
+          ],
+          "ambiguous_samples": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
         },
         "negative_control": {
           "values": {
@@ -2460,7 +2538,37 @@
             ],
             "enter_mesh_px": 2,
             "exit_mesh_px": 2,
-            "initial_mesh": false
+            "initial_mesh": false,
+            "width_intervals_px": [
+              [
+                2.3,
+                2.5
+              ],
+              [
+                1.8,
+                2
+              ],
+              [
+                2,
+                2.2
+              ],
+              [
+                1.7,
+                1.9
+              ],
+              [
+                1.1,
+                1.3
+              ],
+              [
+                1.3,
+                1.5
+              ],
+              [
+                2.4,
+                2.6
+              ]
+            ]
           },
           "expected": {
             "mesh_states": [
@@ -2472,14 +2580,53 @@
               false,
               true
             ],
-            "switches": 5
+            "switches": 5,
+            "robust_mesh_states": [
+              true,
+              true,
+              true,
+              false,
+              false,
+              false,
+              true
+            ],
+            "robust_switches": 3,
+            "possible_mesh_states": [
+              [
+                true
+              ],
+              [
+                false,
+                true
+              ],
+              [
+                true
+              ],
+              [
+                false
+              ],
+              [
+                false
+              ],
+              [
+                false
+              ],
+              [
+                true
+              ]
+            ],
+            "ambiguous_samples": [
+              2
+            ]
           },
-          "why": "Collapsing entry and exit thresholds removes the retained band and increases switches on this authored trace."
+          "why": "Coincident thresholds change point switches from3to5, robust interval-policy switches from1to3, and reachable ambiguity from samples1-6to sample2. Neither switch count nor ambiguity count establishes quality. At control sample2, upper endpoint2equals exit2, so true remains reachable; a strict below-exit test matters."
         },
         "assumptions": [
           "Widths already supplied, not measured",
           "Ordered samples and explicit initial state",
-          "True means mesh representation; false means texture"
+          "True means mesh representation; false means texture",
+          "Closed independent per-sample intervals are authored feasible footprint sets, not calibrated confidence intervals; supplied point widths lie within their respective intervals but are not necessarily midpoints",
+          "Reachable-state sets propagate all admissible previous states; robust replay is a separate conservative policy, not a claim of equality with the unknown exact-width policy"
         ],
         "limits": [
           "No runtime HLOD policy implementation",
@@ -2488,57 +2635,57 @@
       },
       "exercise_checks": {
         "1": {
-          "question": "Replay the state sequence using the separate thresholds.",
-          "expected_answer": "The mesh-state sequence is `[true,true,true,true,false,false,true]`. Samples inside the band retain the previous representation instead of deciding from width alone.",
+          "question": "Replay the supplied point widths with separate and coincident thresholds. Which part is already taught by CYB005?",
+          "expected_answer": "The supplied-point sequences are `[true,true,true,true,false,false,true]` with `3` switches and `[true,false,true,false,false,false,true]` with `5` switches. Hysteresis, retained state and the memoryless comparison are prior art from CYB005; this replay is a baseline, not the new result.",
           "decision": null
         },
         "2": {
-          "question": "Count switches, including the transition from the declared initial state.",
-          "expected_answer": "There are `3` switches. Omitting the initial transition would change the counting convention and make the comparison inconsistent.",
+          "question": "Apply the whole-interval conservative rule with the separate thresholds. Count its switches from the declared initial state.",
+          "expected_answer": "The conservative sequence is `[false,false,false,false,false,false,true]`, with `1` switch. The first interval straddles entry, so it does not force entry; sample7 has lower endpoint at the entry threshold and does force it. The upper endpoint must be strictly below exit to force departure.",
           "decision": null
         },
         "3": {
-          "question": "Apply the coincident-threshold control to the same trace.",
-          "expected_answer": "The sequence is `[true,false,true,false,false,false,true]`, with `5` switches. The trace is unchanged; only the policy thresholds differ.",
+          "question": "Propagate all states consistent with the separate thresholds and footprint intervals. Does an in-band observation remove earlier ambiguity?",
+          "expected_answer": "Possible states are `[false,true]` at samples `1,2,3,4,5,6`, then `[true]` at sample7. Ambiguity from the first straddling interval survives later in-band observations. This propagates both prior states rather than deciding from a single chosen point or from only the conservative state.",
           "decision": null
         },
         "4": {
-          "question": "Can the state inside the band be determined from its current width alone?",
-          "expected_answer": "No. It also requires previous state. A stateless description would omit information needed to replay this policy.",
+          "question": "Apply the coincident-threshold control to both interval interpretations. Explain the equality case at sample2.",
+          "expected_answer": "The conservative control sequence is `[true,true,true,false,false,false,true]`, with `3` switches. Its reachable sets are `[[true],[false,true],[true],[false],[false],[false],[true]]`, so only sample2 is ambiguous. That interval reaches `2 px`, equal to exit: departure needs a value strictly below exit, while equality retains mesh.",
           "decision": null
         },
         "5": {
-          "question": "Do fewer switches justify production adoption?",
-          "expected_answer": "No. Measure task-relevant recognition, visible transitions, cost and the actual host mapping before adoption. The authored count does not establish quality or performance improvement.",
+          "question": "May point-trace agreement, fewer conservative switches or a narrower reachable set authorize the proposed representation policy?",
+          "expected_answer": "No. These intervals are authored feasible sets, not measured uncertainty or calibrated confidence. The conservative rule is a different policy, not the known state of the exact-width rule. Recognition, visible transitions, cost, interval validity and a host mapping remain untested. Godot4.5documents distance margins; our pixel intervals do not configure them.",
           "decision": null
         }
       },
       "learner_criteria": [
         {
-          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: The mesh-state sequence is `[true,true,true,true,false,false,true]`. Samples inside the band retain the previous representation instead of deciding from width alone.",
+          "criterion": "Exercise 1: demonstrate the following prepared result with the stated units and boundary: The supplied-point sequences are `[true,true,true,true,false,false,true]` with `3` switches and `[true,false,true,false,false,false,true]` with `5` switches. Hysteresis, retained state and the memoryless comparison are prior art from CYB005; this replay is a baseline, not the new result.",
           "decision": null
         },
         {
-          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: There are `3` switches. Omitting the initial transition would change the counting convention and make the comparison inconsistent.",
+          "criterion": "Exercise 2: demonstrate the following prepared result with the stated units and boundary: The conservative sequence is `[false,false,false,false,false,false,true]`, with `1` switch. The first interval straddles entry, so it does not force entry; sample7 has lower endpoint at the entry threshold and does force it. The upper endpoint must be strictly below exit to force departure.",
           "decision": null
         },
         {
-          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: The sequence is `[true,false,true,false,false,false,true]`, with `5` switches. The trace is unchanged; only the policy thresholds differ.",
+          "criterion": "Exercise 3: demonstrate the following prepared result with the stated units and boundary: Possible states are `[false,true]` at samples `1,2,3,4,5,6`, then `[true]` at sample7. Ambiguity from the first straddling interval survives later in-band observations. This propagates both prior states rather than deciding from a single chosen point or from only the conservative state.",
           "decision": null
         },
         {
-          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: No. It also requires previous state. A stateless description would omit information needed to replay this policy.",
+          "criterion": "Exercise 4: demonstrate the following prepared result with the stated units and boundary: The conservative control sequence is `[true,true,true,false,false,false,true]`, with `3` switches. Its reachable sets are `[[true],[false,true],[true],[false],[false],[false],[true]]`, so only sample2 is ambiguous. That interval reaches `2 px`, equal to exit: departure needs a value strictly below exit, while equality retains mesh.",
           "decision": null
         },
         {
-          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: No. Measure task-relevant recognition, visible transitions, cost and the actual host mapping before adoption. The authored count does not establish quality or performance improvement.",
+          "criterion": "Exercise 5: demonstrate the following prepared result with the stated units and boundary: No. These intervals are authored feasible sets, not measured uncertainty or calibrated confidence. The conservative rule is a different policy, not the known state of the exact-width rule. Recognition, visible transitions, cost, interval validity and a host mapping remain untested. Godot4.5documents distance margins; our pixel intervals do not configure them.",
           "decision": null
         }
       ],
       "actual_task": {
-        "description": "Replay both state tables manually with a column for previous state. Compare that baseline with the documented Godot distance-margin semantics without configuring the engine. A policy that fails the declared replay or harms the intended recognition task would falsify its proposed benefit; no such task trial is claimed here.",
+        "description": "Before opening answers, draw the seven closed footprint intervals and two distinct tables: a conservative single-state policy and all states reachable under the exact-width hysteresis rule. Preserve both branches through in-band observations, compare the coincident control, and name a future measurement that could falsify the assumed interval coverage. Credit CYB005 and VC014; no engine configuration or recognition trial is claimed.",
         "direct_manual_baseline": "A labelled sketch/table and handwritten calculation, with answers closed; preserve intermediate values and all assistance.",
-        "falsifier": "Collapsing entry and exit thresholds removes the retained band and increases switches on this authored trace. The exact changed-input result must be retained; the course task states the project claim it can refute.",
+        "falsifier": "A claimed unique exact-width state at a sample with two reachable states is refuted by two admissible width histories ending in different modes. An observed footprint outside its declared interval rejects that coverage premise. No such measurement was made.",
         "actual_learner_answer": null,
         "assistance_history": null,
         "corrected_answer": null,

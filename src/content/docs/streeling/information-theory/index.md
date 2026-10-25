@@ -23,3 +23,6 @@ sidebar:
 - [INF-010 · Keep Joint Outcomes When Composing Verdicts](inf-010-keep-joint-outcomes-when-composing-verdicts/)
 - [INF-011 · Separate Compressed Size from Preserved Information](inf-011-separate-compressed-size-from-preserved-information/)
 - [INF-012 · Retain Event Order in a Handoff Summary](inf-012-retain-event-order-in-a-handoff-summary/)
+- [INF-013 · Value an Evidence Probe by Expected Information](inf-013-value-an-evidence-probe-by-expected-information/)
+- [INF-014 · Retain Message Codebook Versions](inf-014-retain-message-codebook-versions/)
+- [INF-015 · Weight Sampled Telemetry Before Summarizing Failures](inf-015-weight-sampled-telemetry-before-summarizing-failures/)

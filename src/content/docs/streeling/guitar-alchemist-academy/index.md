@@ -21,3 +21,6 @@ sidebar:
 - [GAA-008 · Schedule Retrieval with an Explicit Due Rule](gaa-008-schedule-retrieval-with-an-explicit-due-rule/)
 - [GAA-009 · Test Transposition Beyond a Memorized Fret Pattern](gaa-009-test-transposition-beyond-a-memorized-fret-pattern/)
 - [GAA-010 · Define a Practice Pass Before Counting Success](gaa-010-define-a-practice-pass-before-counting-success/)
+- [GAA-011 · Diagnose Interval Errors with a Confusion Table](gaa-011-diagnose-interval-errors-with-a-confusion-table/)
+- [GAA-012 · Cross Timbre with Interval in an Ear Trial](gaa-012-cross-timbre-with-interval-in-an-ear-trial/)
+- [GAA-013 · Choose a Voicing Diversity Key for the Task](gaa-013-choose-a-voicing-diversity-key-for-the-task/)

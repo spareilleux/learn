@@ -22,3 +22,6 @@ sidebar:
 - [COG-009 · Contrabalancear el orden de práctica antes de comparar interfaces](cog-009-counterbalance-practice-order-before-comparing-interfaces/)
 - [COG-010 · Usar pruebas diferidas de transferencia más allá de los elementos repetidos](cog-010-use-delayed-transfer-probes-beyond-repeated-items/)
 - [COG-011 · Medir el desacuerdo de la rúbrica antes de adjudicar](cog-011-measure-rubric-disagreement-before-adjudication/)
+- [COG-012 · Separar la tasa de aciertos de las alertas y la tendencia de respuesta](cog-012-separate-review-alert-hit-rate-from-response-bias/)
+- [COG-013 · Conservar los fallos omitidos en ensayos trampa de revisión asistida](cog-013-retain-catch-trial-misses-in-assisted-review/)
+- [COG-014 · Informar del riesgo y la cobertura cuando un agente se abstiene](cog-014-report-risk-and-coverage-when-an-agent-abstains/)

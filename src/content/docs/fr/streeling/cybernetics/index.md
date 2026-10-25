@@ -22,3 +22,6 @@ sidebar:
 - [CYB-009 · Limiter l’admission avec un seau à jetons](cyb-009-bound-admission-with-a-token-bucket/)
 - [CYB-010 · Distinguer le bruit de dérivation du mouvement du système](cyb-010-separate-derivative-noise-from-plant-motion/)
 - [CYB-011 · Éviter l’accumulation intégrale en saturation](cyb-011-prevent-integral-accumulation-under-saturation/)
+- [CYB-012 · Tester le retard de retour avant de réutiliser un gain](cyb-012-test-feedback-delay-before-reusing-a-gain/)
+- [CYB-013 · Borner l’ancienneté d’une observation avant une décision de contrôle](cyb-013-bound-observation-age-before-a-control-decision/)
+- [CYB-014 · Tester les bandes mortes avec des actions quantifiées](cyb-014-test-deadbands-with-quantized-actions/)

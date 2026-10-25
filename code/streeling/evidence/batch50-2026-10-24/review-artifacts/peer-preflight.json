@@ -1,0 +1,20 @@
+{
+  "host_harness": "codex",
+  "host_family": "codex",
+  "config_local_exists": false,
+  "config_exists": false,
+  "selected_candidate_target": "claude",
+  "installed_route": "C:/Users/spare/.local/bin/claude.exe",
+  "outcome": "not-run",
+  "reason": "Exact four-file scope cannot be conveyed by bundled base-only worker: real git diff excludes all three untracked Python files and includes unrelated 47064 changed lines. No index writes or scope broadening authorized; local independent adversarial fallback required.",
+  "preflight": {
+    "tracked_scope": [
+      "test_course_metadata.mjs"
+    ],
+    "explicit_untracked": [
+      "test_unit_a.py",
+      "test_unit_b.py",
+      "test_unit_c.py"
+    ]
+  }
+}

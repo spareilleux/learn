@@ -22,3 +22,6 @@ sidebar:
 - [GTR-009 · Reservar tiempo para un cambio de posición](gtr-009-budget-time-for-a-position-shift/)
 - [GTR-010 · Distinguir apagar una cuerda de liberar una nota pisada](gtr-010-separate-muting-from-releasing-a-fretted-note/)
 - [GTR-011 · Comprobar la cobertura de una cejilla antes de declarar tocable una forma](gtr-011-test-barre-coverage-before-calling-a-shape-playable/)
+- [GTR-012 · Seleccionar armónicos naturales con un punto de contacto](gtr-012-select-natural-harmonics-with-a-touch-node/)
+- [GTR-013 · Evaluar un bend con un presupuesto de incertidumbre](gtr-013-judge-a-bend-with-an-uncertainty-budget/)
+- [GTR-014 · Contar notas legato por separado de los ataques de púa](gtr-014-count-legato-notes-separately-from-pick-attacks/)

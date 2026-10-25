@@ -23,3 +23,6 @@ sidebar:
 - [INF-010 · Conserver les résultats conjoints en composant des verdicts](inf-010-keep-joint-outcomes-when-composing-verdicts/)
 - [INF-011 · Distinguer taille comprimée et information préservée](inf-011-separate-compressed-size-from-preserved-information/)
 - [INF-012 · Conserver l’ordre des événements dans une passation](inf-012-retain-event-order-in-a-handoff-summary/)
+- [INF-013 · Évaluer une sonde de preuve par son information attendue](inf-013-value-an-evidence-probe-by-expected-information/)
+- [INF-014 · Conserver les versions des dictionnaires de messages](inf-014-retain-message-codebook-versions/)
+- [INF-015 · Pondérer la télémétrie échantillonnée avant de résumer les échecs](inf-015-weight-sampled-telemetry-before-summarizing-failures/)

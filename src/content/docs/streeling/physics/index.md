@@ -26,3 +26,6 @@ sidebar:
 - [PHY-013 · Check Torque When Moving a Scene Pivot](phy-013-check-torque-when-moving-a-scene-pivot/)
 - [PHY-014 · Preserve Mass Assumptions When Scaling a Craft Mesh](phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh/)
 - [PHY-015 · Bound Clearance After Thickening a Panel](phy-015-bound-clearance-after-thickening-a-panel/)
+- [PHY-016 · Bound a Fold Hinge Sweep](phy-016-bound-a-fold-hinge-sweep/)
+- [PHY-017 · Budget Thermal Growth at a Metal Joint](phy-017-budget-thermal-growth-at-a-metal-joint/)
+- [PHY-018 · Locate a Sculpture Mass Projection](phy-018-locate-a-sculpture-mass-projection/)

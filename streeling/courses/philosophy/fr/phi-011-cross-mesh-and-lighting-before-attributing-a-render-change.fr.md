@@ -62,7 +62,7 @@ Calculez l’écart moyen de maillage et l’interaction.
 
 <details><summary>Réponse 3</summary>
 
-L’écart moyen vaut `-2` unités et l’interaction `0`. Leur égalité entre ces éclairages appartient à la table, pas à une loi universelle du rendu.
+L’écart moyen vaut `-2` unités et l’interaction `0`. L’égalité des écarts de maillage entre ces éclairages appartient à cette table, pas à une loi universelle du rendu.
 
 </details>
 

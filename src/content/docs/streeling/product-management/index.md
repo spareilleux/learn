@@ -20,3 +20,5 @@ sidebar:
 - [PM-007 · Measure Playback Latency at the User Boundary](pm-007-measure-playback-latency-at-the-user-boundary/)
 - [PM-008 · Size a Fifty Course Batch by Review Capacity](pm-008-size-a-fifty-course-batch-by-review-capacity/)
 - [PM-009 · Separate Release Adoption from Artifact Downloads](pm-009-separate-release-adoption-from-artifact-downloads/)
+- [PM-010 · Standardize Dogfood Failures to a Declared Task Mix](pm-010-standardize-dogfood-failures-to-a-declared-task-mix/)
+- [PM-011 · Include Review and Correction in Automation Break Even](pm-011-include-review-and-correction-in-automation-break-even/)

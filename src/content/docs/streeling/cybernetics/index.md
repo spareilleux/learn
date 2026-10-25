@@ -22,3 +22,6 @@ sidebar:
 - [CYB-009 · Bound Admission with a Token Bucket](cyb-009-bound-admission-with-a-token-bucket/)
 - [CYB-010 · Separate Derivative Noise from Plant Motion](cyb-010-separate-derivative-noise-from-plant-motion/)
 - [CYB-011 · Prevent Integral Accumulation Under Saturation](cyb-011-prevent-integral-accumulation-under-saturation/)
+- [CYB-012 · Test Feedback Delay Before Reusing a Gain](cyb-012-test-feedback-delay-before-reusing-a-gain/)
+- [CYB-013 · Bound Observation Age Before a Control Decision](cyb-013-bound-observation-age-before-a-control-decision/)
+- [CYB-014 · Test Deadbands with Quantized Actions](cyb-014-test-deadbands-with-quantized-actions/)

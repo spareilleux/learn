@@ -22,3 +22,6 @@ sidebar:
 - [CYB-009 · Limitar la admisión con un depósito de tokens](cyb-009-bound-admission-with-a-token-bucket/)
 - [CYB-010 · Separar el ruido de derivación del movimiento del sistema](cyb-010-separate-derivative-noise-from-plant-motion/)
 - [CYB-011 · Evitar la acumulación integral durante la saturación](cyb-011-prevent-integral-accumulation-under-saturation/)
+- [CYB-012 · Probar el retardo de realimentación antes de reutilizar una ganancia](cyb-012-test-feedback-delay-before-reusing-a-gain/)
+- [CYB-013 · Acotar la antigüedad de una observación antes de decidir el control](cyb-013-bound-observation-age-before-a-control-decision/)
+- [CYB-014 · Probar bandas muertas con acciones cuantizadas](cyb-014-test-deadbands-with-quantized-actions/)

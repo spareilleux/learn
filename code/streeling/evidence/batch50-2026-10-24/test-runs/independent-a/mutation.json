@@ -1,0 +1,52 @@
+{
+  "in_memory_input_mutation": {
+    "code": "GAS012",
+    "field": "coupling_stiffness_n_per_m",
+    "before": 150,
+    "after": 0
+  },
+  "rejected": true,
+  "tests": 1,
+  "failures": 1,
+  "errors": 0,
+  "observations": [
+    {
+      "code": "GAS012",
+      "case": "model",
+      "observed": {
+        "omega_rad_per_s": [
+          10.0,
+          10.0
+        ],
+        "frequencies_hz": [
+          1.5915494309189535,
+          1.5915494309189535
+        ]
+      },
+      "expected": {
+        "omega_rad_per_s": [
+          10,
+          20
+        ],
+        "frequencies_hz": [
+          1.5915494309189535,
+          3.183098861837907
+        ]
+      },
+      "scope": "Two identical masses and symmetric linear undamped springs; derived eigenvalues in rad/s and Hz, no guitar coupling probe."
+    }
+  ],
+  "log": {
+    "path": "C:\\tmp\\batch50-review-a-20261024-1792858509586\\mutation.log",
+    "sha256": "acc3a94675c8bde4930ce4719562ae44e02fef7e1fee7adce6e5c139da07ae44"
+  },
+  "test_binding": {
+    "path": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\tests\\test_unit_a.py",
+    "sha256": "bdadbba27518e74e465c3421666cac55b6ac8cbcd50836c7dcdca2c69aa7c267"
+  },
+  "input_binding": {
+    "path": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\unit-a.json",
+    "sha256": "d02838183a7161a34cb9ebd4a0c0a70f4fb572c20d03ea033b19ffe06a6e7987"
+  },
+  "scope": "Mutated deep copy only. Canonical packet unchanged. Deliberate rejection is not a failing course."
+}

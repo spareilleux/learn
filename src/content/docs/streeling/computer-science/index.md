@@ -28,3 +28,6 @@ sidebar:
 - [CS-015 · Compose Overlapping Chunks Without Duplicate Frames](cs-015-compose-overlapping-chunks-without-duplicate-frames/)
 - [CS-016 · Make Cancellation an Explicit Pipeline Outcome](cs-016-make-cancellation-an-explicit-pipeline-outcome/)
 - [CS-017 · Test Pipeline Rewrites with Counterexamples](cs-017-test-pipeline-rewrites-with-counterexamples/)
+- [CS-018 · Merge Replayed Agent Messages by Identity](cs-018-merge-replayed-agent-messages-by-identity/)
+- [CS-019 · Preserve Lexical Bindings When Composing Fragments](cs-019-preserve-lexical-bindings-when-composing-fragments/)
+- [CS-020 · Audit Evidence Join Multiplicity](cs-020-audit-evidence-join-multiplicity/)

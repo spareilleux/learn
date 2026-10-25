@@ -22,3 +22,6 @@ sidebar:
 - [SEM-009 · Conserver les unités dans une instruction artisanale composée](sem-009-keep-units-in-a-composed-craft-instruction/)
 - [SEM-010 · Distinguer identité stable d’un cours et titre affiché](sem-010-distinguish-stable-course-identity-from-display-names/)
 - [SEM-011 · Versionner le sens d’un DSL avant de renommer sa syntaxe](sem-011-version-a-dsl-meaning-before-renaming-its-syntax/)
+- [SEM-012 · Conserver l’ordre des actions d’un repère de broderie](sem-012-preserve-the-order-of-stitch-frame-actions/)
+- [SEM-013 · Aligner deux périodes de motifs à une couture textile](sem-013-align-two-motif-periods-at-a-textile-seam/)
+- [SEM-014 · Déclarer la priorité des modifications de matériau](sem-014-declare-material-patch-precedence/)

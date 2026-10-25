@@ -20,3 +20,5 @@ sidebar:
 - [PHI-007 · Contrastar una ganancia de aprendizaje con contrafactuales](phi-007-test-a-learning-gain-against-counterfactuals/)
 - [PHI-008 · Distinguir un oráculo de prueba de una especificación](phi-008-separate-a-test-oracle-from-a-specification/)
 - [PHI-009 · Precisar quién puede autorizar un efecto de agente](phi-009-state-who-may-authorize-an-agent-effect/)
+- [PHI-010 · Declarar qué no distingue una vista artesanal](phi-010-state-what-a-craft-view-cannot-distinguish/)
+- [PHI-011 · Cruzar malla e iluminación antes de atribuir un cambio de renderizado](phi-011-cross-mesh-and-lighting-before-attributing-a-render-change/)

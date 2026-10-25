@@ -20,3 +20,5 @@ sidebar:
 - [FUT-007 · Test a Weave Generator Outside Its Preview](fut-007-test-a-weave-generator-outside-its-preview/)
 - [FUT-008 · Stress Test a Release Plan Against Review Backlogs](fut-008-stress-test-a-release-plan-against-review-backlogs/)
 - [FUT-009 · Compare Staged Adoption with an Irreversible Migration](fut-009-compare-staged-adoption-with-an-irreversible-migration/)
+- [FUT-010 · Project Weave Density before a Scene Expansion](fut-010-project-weave-density-before-a-scene-expansion/)
+- [FUT-011 · Plan an Embroidery Representation Switch with Memory](fut-011-plan-an-embroidery-representation-switch-with-memory/)

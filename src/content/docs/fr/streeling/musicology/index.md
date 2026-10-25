@@ -22,3 +22,6 @@ sidebar:
 - [MCL-009 · Conserver le décalage de l’anacrouse dans les adresses de mesure](mcl-009-preserve-pickup-offsets-in-bar-addresses/)
 - [MCL-010 · Distinguer le rapport de swing du tempo](mcl-010-separate-swing-ratio-from-tempo/)
 - [MCL-011 · Distinguer les reprises de l’identité des mesures écrites](mcl-011-keep-repeats-separate-from-written-bar-identity/)
+- [MCL-012 · Fusionner les tenues sans fusionner les liaisons de phrasé](mcl-012-merge-ties-without-merging-slurs/)
+- [MCL-013 · Conserver la durée du tuplet sous forme rationnelle](mcl-013-keep-tuplet-duration-as-a-rational/)
+- [MCL-014 · Déclarer où les petites notes prennent leur temps](mcl-014-declare-where-grace-notes-take-their-time/)

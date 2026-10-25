@@ -3,7 +3,7 @@ module_id: fut-011-plan-an-embroidery-representation-switch-with-memory
 department: futurology
 course: "Plan an Embroidery Representation Switch with Memory"
 level: intermediate
-prerequisites: ["fut-005-value-a-renderer-pilot-before-running-it"]
+prerequisites: ["fut-005-value-a-renderer-pilot-before-running-it","cyb-005-stop-render-policy-flapping"]
 estimated_duration: "45 minutes"
 produced_by: codex-project-pilot
 version: "0.1.0"
@@ -15,86 +15,92 @@ version: "0.1.0"
 
 ## Project question
 
-A future embroidery viewer switches between mesh stitches and a texture as the camera moves. A single threshold can repeatedly change representation near the boundary. This lesson plans a stateful switching rule on an invented width trace and states what evidence would still be needed before adoption. It adds temporal path dependence to earlier scenario and pilot reasoning, rather than treating every camera sample as an independent choice.
+The earlier CYB005 course already teaches hysteresis, persistence, dwell time and a memoryless switch-count comparison. Replaying that idea on an embroidery viewer is only a baseline. This lesson adds a different question: if the projected stitch footprint is supplied as an interval, which transitions are forced and which exact-width states remain possible? The new operation propagates sets of admissible states instead of hiding uncertainty in a midpoint.
 
 ## Read the retained boundary
 
-The cleanup pipeline’s resolution argument does not implement representation switching. Godot’s visibility-range guide describes hysteresis margins and distinguishes instant switching from alpha fading. Our rule uses projected pixels instead of its documented distance properties; it is a separate authored policy, not a claim about the user’s Godot fork.
+The cleanup pipeline’s resolution argument supplies neither these footprint intervals nor representation switching. Godot4.5 documents hysteresis using distance margins. Our intervals are authored feasible pixel sets for a proposed embroidery view; they are not measured bounds, probability distributions or calibrated confidence intervals. Companion VC014 derives a point footprint under a declared camera and is optional reading, not an earlier baseline.
 
 Read the prerequisite and the retained project artifact before interpreting the model. The source has its own revision and purpose; it supplies the boundary described here, not the new classroom inputs. Keep a small evidence table separating an inspected field, an assumption, a derived quantity and a proposed scene effect. An agent summary must point back to the field it interprets. A source filename alone cannot establish an earlier result.
 
 ## Interpret the model
 
-Keep the current representation while width remains between separate entry and exit thresholds. Enter mesh at or above the upper threshold; leave it only below the lower threshold. The previous state therefore matters inside the band. This is not an error deadband that ignores a small control residual: it is a representation policy with two transition conditions. The transition count includes the initial change from texture. Fewer transitions on one invented trace do not establish better recognition, less popping or faster rendering. Retain the possibility that keeping mesh longer costs more or that switching later hides a meaningful craft detail.
+Keep three interpretations separate. First, replay the supplied point widths, which lie inside the intervals but are not necessarily their midpoints under the earlier exact-width hysteresis rule. Second, define a conservative policy: when in texture, enter mesh only if the whole closed interval is at or above entry; when in mesh, leave only if its upper endpoint is strictly below exit; otherwise retain state. This is a new policy choice, not knowledge of the unknown exact-width rule’s actual state.
+
+Third, start from the declared initial state and propagate every reachable state. From texture, mesh is possible when the upper endpoint reaches entry, and texture remains possible when the lower endpoint is below entry. From mesh, texture is possible when the lower endpoint is below exit, and mesh remains possible when the upper endpoint reaches exit. Take the union over every preceding reachable state. A straddling observation can create two possibilities; later in-band intervals can preserve both. Do not propagate only the conservative policy’s state or silently replace an interval with its midpoint. Closed endpoints and the strict exit comparison determine equality cases. The intervals are independent per-sample feasible sets, with no hidden rate-of-change constraint.
 
 The direct baseline is a labelled sketch and a hand calculation with the answer panels closed. Preserve intermediate values and units, then apply the changed input in the negative control. A disagreement is useful evidence: locate whether it comes from the definition, arithmetic, representation or intended task before changing the model. Agreement on the main case alone does not establish a universal rule. These finite examples deliberately expose an assumption that a smooth preview could conceal.
 
 ```text
-{"widths_px":[2.5,1.9,2.1,1.8,1.1,1.4,2.5],"enter_mesh_px":2.4,"exit_mesh_px":1.2,"initial_mesh":false}
-Start state=initial_mesh; if state is false and width>=enter_mesh set true; else if state is true and width<exit_mesh set false; emit state; count transitions including from initial state
+{"widths_px":[2.5,1.9,2.1,1.8,1.1,1.4,2.5],"enter_mesh_px":2.4,"exit_mesh_px":1.2,"initial_mesh":false,"width_intervals_px":[[2.3,2.5],[1.8,2],[2,2.2],[1.7,1.9],[1.1,1.3],[1.3,1.5],[2.4,2.6]]}
+Start state=initial_mesh; if state is false and width>=enter_mesh set true; else if state is true and width<exit_mesh set false; emit state; count transitions including from initial state; for closed interval[lo,hi], robust false->true only if lo>=enter, true->false only if hi<exit, otherwise retain; separately propagate reachable states from initial state: from false include true if hi>=enter and false if lo<enter; from true include false if lo<exit and true if hi>=exit; union across preceding reachable states; sort false before true; ambiguous sample numbers are1-based
 ```
+
+The control keeps the same intervals and supplied point widths, setting both thresholds to `2 px`.
 
 ## Corrected exercises
 
 ### Exercise 1
 
-Replay the state sequence using the separate thresholds.
+Replay the supplied point widths with separate and coincident thresholds. Which part is already taught by CYB005?
 
 <details><summary>Answer 1</summary>
 
-The mesh-state sequence is `[true,true,true,true,false,false,true]`. Samples inside the band retain the previous representation instead of deciding from width alone.
+The supplied-point sequences are `[true,true,true,true,false,false,true]` with `3` switches and `[true,false,true,false,false,false,true]` with `5` switches. Hysteresis, retained state and the memoryless comparison are prior art from CYB005; this replay is a baseline, not the new result.
 
 </details>
 
 ### Exercise 2
 
-Count switches, including the transition from the declared initial state.
+Apply the whole-interval conservative rule with the separate thresholds. Count its switches from the declared initial state.
 
 <details><summary>Answer 2</summary>
 
-There are `3` switches. Omitting the initial transition would change the counting convention and make the comparison inconsistent.
+The conservative sequence is `[false,false,false,false,false,false,true]`, with `1` switch. The first interval straddles entry, so it does not force entry; sample7 has lower endpoint at the entry threshold and does force it. The upper endpoint must be strictly below exit to force departure.
 
 </details>
 
 ### Exercise 3
 
-Apply the coincident-threshold control to the same trace.
+Propagate all states consistent with the separate thresholds and footprint intervals. Does an in-band observation remove earlier ambiguity?
 
 <details><summary>Answer 3</summary>
 
-The sequence is `[true,false,true,false,false,false,true]`, with `5` switches. The trace is unchanged; only the policy thresholds differ.
+Possible states are `[false,true]` at samples `1,2,3,4,5,6`, then `[true]` at sample7. Ambiguity from the first straddling interval survives later in-band observations. This propagates both prior states rather than deciding from a midpoint or from only the conservative state.
 
 </details>
 
 ### Exercise 4
 
-Can the state inside the band be determined from its current width alone?
+Apply the coincident-threshold control to both interval interpretations. Explain the equality case at sample2.
 
 <details><summary>Answer 4</summary>
 
-No. It also requires previous state. A stateless description would omit information needed to replay this policy.
+The conservative control sequence is `[true,true,true,false,false,false,true]`, with `3` switches. Its reachable sets are `[[true],[false,true],[true],[false],[false],[false],[true]]`, so only sample2 is ambiguous. That interval reaches `2 px`, equal to exit: departure needs a value strictly below exit, while equality retains mesh.
 
 </details>
 
 ### Exercise 5
 
-Do fewer switches justify production adoption?
+May point-trace agreement, fewer conservative switches or a narrower reachable set authorize the proposed representation policy?
 
 <details><summary>Answer 5</summary>
 
-No. Measure task-relevant recognition, visible transitions, cost and the actual host mapping before adoption. The authored count does not establish quality or performance improvement.
+No. These intervals are authored feasible sets, not measured uncertainty or calibrated confidence. The conservative rule is a different policy, not the known state of the exact-width rule. Recognition, visible transitions, cost, interval validity and a host mapping remain untested. Godot4.5documents distance margins; our pixel intervals do not configure them.
 
 </details>
 
 ## Source-assisted learner task
 
-Replay both state tables manually with a column for previous state. Compare that baseline with the documented Godot distance-margin semantics without configuring the engine. A policy that fails the declared replay or harms the intended recognition task would falsify its proposed benefit; no such task trial is claimed here.
+Before opening answers, draw the seven closed footprint intervals and two distinct tables: a conservative single-state policy and all states reachable under the exact-width hysteresis rule. Preserve both branches through in-band observations, compare the coincident control, and name a future measurement that could falsify the assumed interval coverage. Credit CYB005 and VC014; no engine configuration or recognition trial is claimed.
 
 Retain your original answer, source locations, assistance history and any later correction as separate records. State the observable result that would falsify your recommendation before proposing automation. Compare the source-assisted result with your direct manual baseline, including any extra uncertainty it introduces. The fixed packet contains five prepared criteria; each decision stays null until an actual learner attempt and review exist. Prepared answers are checks, not evidence that a learner performed the task.
 
 ## Sources and validation journal
 
 - [Prerequisite: fut-005-value-a-renderer-pilot-before-running-it](../../futurology/en/fut-005-value-a-renderer-pilot-before-running-it.md)
+- [Prerequisite: cyb-005-stop-render-policy-flapping](../../cybernetics/en/cyb-005-stop-render-policy-flapping.md)
+- [Optional companion: vc-014-predict-an-embroidered-stitch-pixel-footprint](../../visual-computing/en/vc-014-predict-an-embroidered-stitch-pixel-footprint.md)
 - [Retained project artifact](../../../../code/blender/scripts/glb_pipeline.py)
 - [Primary reading](https://docs.godotengine.org/en/4.5/tutorials/3d/visibility_ranges.html)
 - [Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-24/unit-c.json)

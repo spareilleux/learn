@@ -1,0 +1,19 @@
+--- reviewed/test_unit_a.py
++++ resolved/test_unit_a.py
+@@ -128,11 +128,15 @@
+             self.assertTrue(math.isfinite(observed) and math.isclose(observed,expected,rel_tol=1e-11,abs_tol=1e-12),f'{path}: {observed!r} != {expected!r}')
+         else: self.assertEqual(observed,expected,path)
+     def check_course(self, code):
+         model=COURSES[code]['authored_model']
+         for index,case in enumerate(('model','negative')):
+-            entry=model if case=='model' else model['negative_control']; observed=observe(code,entry['values']); fixed=FIXED[code][index]
++            entry=model if case=='model' else model['negative_control']; values=entry['values']
++            if code=='AUD014' and len(values['a'])!=len(values['b']):
++                print('OBSERVATION '+json.dumps(dict(code=code,case=case,observed=dict(aligned_sample_counts=False,a_length=len(values['a']),b_length=len(values['b'])),expected=dict(aligned_sample_counts=True),scope=SCOPE[code]),allow_nan=False),flush=True)
++                self.assertEqual(len(values['a']),len(values['b']),'AUD014 requires aligned sample arrays of equal length')
++            observed=observe(code,values); fixed=FIXED[code][index]
+             print('OBSERVATION '+json.dumps(dict(code=code,case=case,observed=observed,expected=fixed,scope=SCOPE[code]),ensure_ascii=False,allow_nan=False),flush=True)
+             self.same(observed,fixed)
+             self.same(observed,entry['expected'])
+             if code=='AUD015' and case=='model': self.assertLessEqual(max(map(abs,observed['errors'])),1/65534+1e-16)
+             if code=='GAS012':

@@ -26,3 +26,6 @@ sidebar:
 - [PHY-013 · Comprobar el par al desplazar un pivote de escena](phy-013-check-torque-when-moving-a-scene-pivot/)
 - [PHY-014 · Conservar los supuestos de masa al escalar una malla artesanal](phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh/)
 - [PHY-015 · Acotar la holgura al engrosar un panel](phy-015-bound-clearance-after-thickening-a-panel/)
+- [PHY-016 · Acotar el barrido de una bisagra de pliegue](phy-016-bound-a-fold-hinge-sweep/)
+- [PHY-017 · Prever la dilatación térmica en una junta metálica](phy-017-budget-thermal-growth-at-a-metal-joint/)
+- [PHY-018 · Situar la proyección de masas de una escultura](phy-018-locate-a-sculpture-mass-projection/)

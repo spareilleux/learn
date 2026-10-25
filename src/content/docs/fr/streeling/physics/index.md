@@ -26,3 +26,6 @@ sidebar:
 - [PHY-013 · Vérifier le couple lors du déplacement d’un pivot de scène](phy-013-check-torque-when-moving-a-scene-pivot/)
 - [PHY-014 · Préserver les hypothèses de masse lors du redimensionnement d’un maillage](phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh/)
 - [PHY-015 · Borner le jeu après épaississement d’un panneau](phy-015-bound-clearance-after-thickening-a-panel/)
+- [PHY-016 · Borner le balayage d’une charnière de pli](phy-016-bound-a-fold-hinge-sweep/)
+- [PHY-017 · Prévoir la dilatation thermique à un joint métallique](phy-017-budget-thermal-growth-at-a-metal-joint/)
+- [PHY-018 · Situer la projection des masses d’une sculpture](phy-018-locate-a-sculpture-mass-projection/)

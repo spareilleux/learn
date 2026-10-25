@@ -22,3 +22,6 @@ sidebar:
 - [GTR-009 · Budget Time for a Position Shift](gtr-009-budget-time-for-a-position-shift/)
 - [GTR-010 · Separate Muting from Releasing a Fretted Note](gtr-010-separate-muting-from-releasing-a-fretted-note/)
 - [GTR-011 · Test Barre Coverage Before Calling a Shape Playable](gtr-011-test-barre-coverage-before-calling-a-shape-playable/)
+- [GTR-012 · Select Natural Harmonics with a Touch Node](gtr-012-select-natural-harmonics-with-a-touch-node/)
+- [GTR-013 · Judge a Bend with an Uncertainty Budget](gtr-013-judge-a-bend-with-an-uncertainty-budget/)
+- [GTR-014 · Count Legato Notes Separately from Pick Attacks](gtr-014-count-legato-notes-separately-from-pick-attacks/)

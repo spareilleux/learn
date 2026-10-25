@@ -22,3 +22,6 @@ sidebar:
 - [COG-009 · Contrebalancer l’ordre de pratique avant de comparer des interfaces](cog-009-counterbalance-practice-order-before-comparing-interfaces/)
 - [COG-010 · Utiliser des épreuves différées de transfert au-delà des items répétés](cog-010-use-delayed-transfer-probes-beyond-repeated-items/)
 - [COG-011 · Mesurer le désaccord de notation avant arbitrage](cog-011-measure-rubric-disagreement-before-adjudication/)
+- [COG-012 · Distinguer le taux de détection des alertes et la tendance à répondre](cog-012-separate-review-alert-hit-rate-from-response-bias/)
+- [COG-013 · Conserver les erreurs manquées dans les essais pièges de revue assistée](cog-013-retain-catch-trial-misses-in-assisted-review/)
+- [COG-014 · Présenter le risque et la couverture lorsqu’un agent s’abstient](cog-014-report-risk-and-coverage-when-an-agent-abstains/)

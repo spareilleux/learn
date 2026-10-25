@@ -24,6 +24,9 @@ sidebar:
 - [VC-011 · Préserver l’orientation du repère tangent après une symétrie](vc-011-preserve-tangent-handedness-after-a-mirror/)
 - [VC-012 · Distinguer instances de maillage et appels de dessin](vc-012-separate-mesh-instances-from-draw-calls/)
 - [VC-013 · Maintenir la cohérence entre orientation des triangles et transformations](vc-013-keep-triangle-winding-consistent-with-transforms/)
+- [VC-014 · Prévoir la largeur en pixels d’un point de broderie](vc-014-predict-an-embroidered-stitch-pixel-footprint/)
+- [VC-015 · Fixer une erreur de corde pour un profil sculpté](vc-015-budget-a-sculpture-profile-chord-error/)
+- [VC-016 · Suivre les espaces UV dans les niveaux de mipmap](vc-016-track-uv-gutters-through-mip-levels/)
 
 ## Catalogue de cours (prévu)
 

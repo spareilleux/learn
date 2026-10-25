@@ -22,3 +22,6 @@ sidebar:
 - [GAS-009 · Estimate Tuning Error from Integer Delay Length](gas-009-estimate-tuning-error-from-integer-delay-length/)
 - [GAS-010 · Distinguish Stiff String Partials from Harmonics](gas-010-distinguish-stiff-string-partials-from-harmonics/)
 - [GAS-011 · Track Reflection Polarity at String Boundaries](gas-011-track-reflection-polarity-at-string-boundaries/)
+- [GAS-012 · Distinguish Coupling from Parallel Resonance](gas-012-distinguish-coupling-from-parallel-resonance/)
+- [GAS-013 · Retune with an Explicit Tension Assumption](gas-013-retune-with-an-explicit-tension-assumption/)
+- [GAS-014 · Predict a Two-Path Comb from Distance](gas-014-predict-a-two-path-comb-with-distance/)

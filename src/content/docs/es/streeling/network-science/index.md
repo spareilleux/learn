@@ -22,3 +22,5 @@ sidebar:
 - [NET-009 · Detectar ciclos globales en una pila de paneles](net-009-detect-global-cycles-in-a-panel-stack/)
 - [NET-010 · Calcular rutas críticas con supuestos de recursos](net-010-compute-critical-paths-with-resource-assumptions/)
 - [NET-011 · Separar alcanzabilidad y compatibilidad semántica](net-011-separate-reachability-from-semantic-compatibility/)
+- [NET-012 · Contabilizar dependencias compartidas en rutas redundantes](net-012-account-for-shared-dependencies-in-redundant-paths/)
+- [NET-013 · Trazar concurrencia causal con relojes vectoriales](net-013-trace-causal-concurrency-with-vector-clocks/)

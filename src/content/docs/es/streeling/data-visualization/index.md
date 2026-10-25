@@ -24,3 +24,6 @@ sidebar:
 - [DV-011 · Conservar los recuentos de un mapa de calor normalizado](dv-011-retain-raw-counts-behind-normalized-heatmaps/)
 - [DV-012 · Calcular los cuantiles antes de combinar cohortes de latencia](dv-012-compute-quantiles-before-combining-latency-cohorts/)
 - [DV-013 · Comparar curvas de aprendizaje con presupuestos de evaluación iguales](dv-013-compare-learning-curves-at-equal-evaluation-budgets/)
+- [DV-014 · Representar la separación con signo de una pieza artesanal](dv-014-plot-signed-craft-clearance/)
+- [DV-015 · Mapear puntadas sin observar sin inventar agujeros](dv-015-map-missing-stitches-without-inventing-holes/)
+- [DV-016 · Comparar residuos de silueta emparejados](dv-016-compare-paired-silhouette-residuals/)

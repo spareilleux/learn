@@ -21,3 +21,6 @@ sidebar:
 - [WML-008 · Retain Register in Drone Relative Intervals](wml-008-retain-register-in-drone-relative-intervals/)
 - [WML-009 · Translate Rhythmic Terms Without Changing Counted Units](wml-009-translate-rhythmic-terms-without-changing-counted-units/)
 - [WML-010 · Keep Unicode Note Labels Reversible](wml-010-keep-unicode-note-labels-reversible/)
+- [WML-011 · Preserve the Kind of a Seventh Chord](wml-011-preserve-the-kind-of-a-seventh-chord/)
+- [WML-012 · Preserve Direction in a Melodic Inventory](wml-012-preserve-direction-in-a-melodic-inventory/)
+- [WML-013 · Check Whether a Fifth Cycle Closes](wml-013-check-whether-a-fifth-cycle-closes/)

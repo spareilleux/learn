@@ -22,3 +22,6 @@ sidebar:
 - [GAS-009 · Estimer l’erreur d’accordage due à une longueur de retard entière](gas-009-estimate-tuning-error-from-integer-delay-length/)
 - [GAS-010 · Distinguer les partiels d’une corde raide des harmoniques](gas-010-distinguish-stiff-string-partials-from-harmonics/)
 - [GAS-011 · Suivre la polarité des réflexions aux extrémités d’une corde](gas-011-track-reflection-polarity-at-string-boundaries/)
+- [GAS-012 · Distinguer le couplage de résonances en parallèle](gas-012-distinguish-coupling-from-parallel-resonance/)
+- [GAS-013 · Réaccorder avec une hypothèse de tension explicite](gas-013-retune-with-an-explicit-tension-assumption/)
+- [GAS-014 · Prévoir un peigne à deux trajets à partir des distances](gas-014-predict-a-two-path-comb-with-distance/)

@@ -22,3 +22,6 @@ sidebar:
 - [COG-009 · Counterbalance Practice Order Before Comparing Interfaces](cog-009-counterbalance-practice-order-before-comparing-interfaces/)
 - [COG-010 · Use Delayed Transfer Probes Beyond Repeated Items](cog-010-use-delayed-transfer-probes-beyond-repeated-items/)
 - [COG-011 · Measure Rubric Disagreement Before Adjudication](cog-011-measure-rubric-disagreement-before-adjudication/)
+- [COG-012 · Separate Review Alert Hit Rate from Response Bias](cog-012-separate-review-alert-hit-rate-from-response-bias/)
+- [COG-013 · Retain Catch Trial Misses in Assisted Review](cog-013-retain-catch-trial-misses-in-assisted-review/)
+- [COG-014 · Report Risk and Coverage When an Agent Abstains](cog-014-report-risk-and-coverage-when-an-agent-abstains/)

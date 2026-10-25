@@ -22,3 +22,6 @@ sidebar:
 - [GAS-009 · Estimar el error de afinación de una longitud de retardo entera](gas-009-estimate-tuning-error-from-integer-delay-length/)
 - [GAS-010 · Distinguir los parciales de una cuerda rígida de los armónicos](gas-010-distinguish-stiff-string-partials-from-harmonics/)
 - [GAS-011 · Seguir la polaridad de las reflexiones en los extremos de una cuerda](gas-011-track-reflection-polarity-at-string-boundaries/)
+- [GAS-012 · Distinguir acoplamiento y resonancias en paralelo](gas-012-distinguish-coupling-from-parallel-resonance/)
+- [GAS-013 · Reafinar con una hipótesis de tensión explícita](gas-013-retune-with-an-explicit-tension-assumption/)
+- [GAS-014 · Predecir un peine de dos trayectos mediante distancias](gas-014-predict-a-two-path-comb-with-distance/)

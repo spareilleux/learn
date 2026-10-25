@@ -1,0 +1,45 @@
+{
+  "timestamp_utc": "2026-10-24T16:16:57.018367+00:00",
+  "runs": [
+    {
+      "label": "focused",
+      "command": [
+        "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\tests\\test_unit_b.py"
+      ],
+      "cwd": "C:\\tmp\\learn-streeling-craft-transfer-20261022",
+      "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+      "exit_code": 0,
+      "log_path": "C:\\tmp\\batch50-20261024-review-b-run-161656249733\\focused.log",
+      "log_sha256": "cca751e864afd109765f91097adee290e2921f8437f950dff6d21dca7d1083dc",
+      "observation_count": 32,
+      "input_sha256": "3e25c7fe2cbe25b6e0be8dee147a6199369716f62bc595eb411607a22aa4b72d",
+      "test_sha256": "d60f2b0ce28cb1ab08ce59b3151434a24dd82e2a1616803b2d2654b9f1c8af8f"
+    },
+    {
+      "label": "mutation",
+      "command": [
+        "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\tests\\test_unit_b.py",
+        "--mutation-probe"
+      ],
+      "cwd": "C:\\tmp\\learn-streeling-craft-transfer-20261022",
+      "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+      "exit_code": 0,
+      "log_path": "C:\\tmp\\batch50-20261024-review-b-run-161656249733\\mutation.log",
+      "log_sha256": "cfbe49654874f08ad4f81819c7e9c08abfc8dc32e82edd2eef98ac4208d20f66",
+      "observation_count": 1,
+      "input_sha256": "3e25c7fe2cbe25b6e0be8dee147a6199369716f62bc595eb411607a22aa4b72d",
+      "test_sha256": "d60f2b0ce28cb1ab08ce59b3151434a24dd82e2a1616803b2d2654b9f1c8af8f"
+    }
+  ],
+  "canonical_packet_sha256_before": "3e25c7fe2cbe25b6e0be8dee147a6199369716f62bc595eb411607a22aa4b72d",
+  "canonical_packet_sha256_after": "3e25c7fe2cbe25b6e0be8dee147a6199369716f62bc595eb411607a22aa4b72d",
+  "canonical_packet_unchanged": true
+}

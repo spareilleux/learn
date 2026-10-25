@@ -28,3 +28,6 @@ sidebar:
 - [CS-015 · Componer bloques solapados sin duplicar fotogramas](cs-015-compose-overlapping-chunks-without-duplicate-frames/)
 - [CS-016 · Convertir la cancelación en un resultado explícito del pipeline](cs-016-make-cancellation-an-explicit-pipeline-outcome/)
 - [CS-017 · Probar reescrituras de pipelines con contraejemplos](cs-017-test-pipeline-rewrites-with-counterexamples/)
+- [CS-018 · Fusionar mensajes de agente repetidos según su identidad](cs-018-merge-replayed-agent-messages-by-identity/)
+- [CS-019 · Preservar los enlaces léxicos al componer fragmentos](cs-019-preserve-lexical-bindings-when-composing-fragments/)
+- [CS-020 · Auditar la multiplicidad de una unión de evidencias](cs-020-audit-evidence-join-multiplicity/)

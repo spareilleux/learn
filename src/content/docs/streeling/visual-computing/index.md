@@ -24,6 +24,9 @@ sidebar:
 - [VC-011 · Preserve Tangent Handedness After a Mirror](vc-011-preserve-tangent-handedness-after-a-mirror/)
 - [VC-012 · Separate Mesh Instances from Draw Calls](vc-012-separate-mesh-instances-from-draw-calls/)
 - [VC-013 · Keep Triangle Winding Consistent with Transforms](vc-013-keep-triangle-winding-consistent-with-transforms/)
+- [VC-014 · Predict an Embroidered Stitch Pixel Footprint](vc-014-predict-an-embroidered-stitch-pixel-footprint/)
+- [VC-015 · Budget a Sculpture Profile Chord Error](vc-015-budget-a-sculpture-profile-chord-error/)
+- [VC-016 · Track UV Gutters through Mip Levels](vc-016-track-uv-gutters-through-mip-levels/)
 
 ## Course catalog (planned)
 

@@ -20,3 +20,5 @@ sidebar:
 - [FUT-007 · Tester un générateur de tissage au-delà de son aperçu](fut-007-test-a-weave-generator-outside-its-preview/)
 - [FUT-008 · Éprouver un plan de publication face à l’accumulation des relectures](fut-008-stress-test-a-release-plan-against-review-backlogs/)
 - [FUT-009 · Comparer adoption progressive et migration irréversible](fut-009-compare-staged-adoption-with-an-irreversible-migration/)
+- [FUT-010 · Projeter la densité du tissage avant d’agrandir une scène](fut-010-project-weave-density-before-a-scene-expansion/)
+- [FUT-011 · Préparer un changement de représentation de broderie avec mémoire](fut-011-plan-an-embroidery-representation-switch-with-memory/)

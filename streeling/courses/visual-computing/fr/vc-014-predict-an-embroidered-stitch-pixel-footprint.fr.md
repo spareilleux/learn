@@ -15,7 +15,7 @@ version: "0.1.0"
 
 ## Question du projet
 
-Un fil survit au nettoyage Blender mais disparaît dans une vue générale Godot envisagée. La conservation géométrique et la visibilité à l’écran répondent à des questions différentes. Nous prévoyons la largeur projetée d’un point avant de choisir entre géométrie et texture. Le calcul donne une empreinte dépendant de la caméra, sans affirmer qu’une personne reconnaît le point, ni mesurer un moteur de rendu ou un suréchantillonneur.
+Un fil survit au nettoyage Blender mais disparaît dans une vue générale Godot envisagée. La conservation géométrique et la visibilité à l’écran répondent à des questions différentes. Nous prévoyons la largeur projetée d’un point avant de choisir entre géométrie et texture. Le calcul donne une empreinte dépendant de la caméra, sans affirmer qu’une personne reconnaît le point, ni mesurer un moteur de rendu ou un système de mise à l’échelle.
 
 ## Lire la limite conservée
 
@@ -82,7 +82,7 @@ Atteindre le seuil établit-il un résultat DLSS ou de reconnaissance ?
 
 <details><summary>Réponse 5</summary>
 
-Non. Aucun suréchantillonneur ni observateur n’a été testé. Contraste, échantillonnage, mouvement et reconnaissance restent des questions distinctes à observer.
+Non. Aucun système de mise à l’échelle ni observateur n’a été testé. Contraste, échantillonnage, mouvement et reconnaissance restent des questions distinctes à observer.
 
 </details>
 

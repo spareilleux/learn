@@ -24,3 +24,6 @@ sidebar:
 - [DV-011 · Conserver les effectifs derrière une carte thermique normalisée](dv-011-retain-raw-counts-behind-normalized-heatmaps/)
 - [DV-012 · Calculer les quantiles avant de réunir des cohortes de latence](dv-012-compute-quantiles-before-combining-latency-cohorts/)
 - [DV-013 · Comparer les courbes d’apprentissage à budget d’évaluation égal](dv-013-compare-learning-curves-at-equal-evaluation-budgets/)
+- [DV-014 · Tracer le dégagement signé d’un assemblage artisanal](dv-014-plot-signed-craft-clearance/)
+- [DV-015 · Cartographier les points manquants sans inventer de trous](dv-015-map-missing-stitches-without-inventing-holes/)
+- [DV-016 · Comparer des résidus de silhouette appariés](dv-016-compare-paired-silhouette-residuals/)

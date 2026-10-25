@@ -1,0 +1,23 @@
+{
+  "checked_at_utc": "2026-10-24T16:14:49.719981+00:00",
+  "unit": "b",
+  "packet_path": "code/streeling/evidence/batch50-2026-10-24/unit-b.json",
+  "packet_before_sha256": "f9f98ce1cad11e662d35e82391b195aaff1de67900bc1bd915c25ae06cd3807d",
+  "packet_after_sha256": "3e25c7fe2cbe25b6e0be8dee147a6199369716f62bc595eb411607a22aa4b72d",
+  "old_novelty": {
+    "CS018": "CS005 defines a handoff envelope; CYB006 bounds retry workload and CS015 allocates frame ownership. This course instead defines identity-scoped replay semantics, distinguishing equal replay from conflicting payload under the same identity.",
+    "CYB012": "CYB008 derives contraction with the current residual. This course introduces a one-update observation delay and compares characteristic roots and exact traces; repeated observations do not imply fresh feedback."
+  },
+  "new_novelty": {
+    "CS018": "CS005 defines a handoff envelope; CS015 already assigns overlapping frame ownership, assumes equal duplicate payloads and retains conflicts. This course adds an order-independent identity-to-payload-set merge: pointwise union is associative, commutative and idempotent, and a conflict persists under further merge; accepted totals are derived only after validation.",
+    "CYB012": "CYB008 section 4 already introduces a one-update residual delay and derives an unstable root counterexample. This course adds the complete scalar delayed-gain stability interval 0 < gain < 1, proves real, repeated and complex root cases and excluded boundaries, then compares stable and nondecaying exact traces. Finite traces illustrate the proof; they do not prove general stability."
+  },
+  "source_correction_receipt": "code/streeling/evidence/batch50-2026-10-24/review-b-source-amendments.json",
+  "source_correction_sha256": "36b1c19e6bdc01b0023075d868a0bed9805895790b8b5fb8f2caf5f37baecb21",
+  "author_selfcheck": {
+    "path": "code/streeling/evidence/batch50-2026-10-24/unit-b-self-check.json",
+    "sha256": "17384b750d32868f14cd1034eb428ffc1c998b7cbaccfce8d2a1b41e81bc782d",
+    "status": "Preserved historical author snapshot. Its source/packet hashes are superseded by the independent corrections and final review; no new author re-review is claimed."
+  },
+  "scope": "Only novelty prose changes in the packet; all model inputs, exercises, learner criteria and pending human decisions remain byte-equivalent after JSON parsing. Final independent review binds corrected source and packet bytes."
+}

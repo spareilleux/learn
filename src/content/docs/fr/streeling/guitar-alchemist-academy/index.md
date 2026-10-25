@@ -21,3 +21,6 @@ sidebar:
 - [GAA-008 · Programmer le rappel avec une règle d’échéance explicite](gaa-008-schedule-retrieval-with-an-explicit-due-rule/)
 - [GAA-009 · Tester la transposition au-delà d’un dessin de cases mémorisé](gaa-009-test-transposition-beyond-a-memorized-fret-pattern/)
 - [GAA-010 · Définir une réussite de pratique avant de compter les succès](gaa-010-define-a-practice-pass-before-counting-success/)
+- [GAA-011 · Diagnostiquer les erreurs d’intervalle avec une table de confusion](gaa-011-diagnose-interval-errors-with-a-confusion-table/)
+- [GAA-012 · Croiser timbre et intervalle dans une épreuve d’oreille](gaa-012-cross-timbre-with-interval-in-an-ear-trial/)
+- [GAA-013 · Choisir une clé de diversité des voicings selon la tâche](gaa-013-choose-a-voicing-diversity-key-for-the-task/)

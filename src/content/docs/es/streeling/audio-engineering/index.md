@@ -23,3 +23,6 @@ sidebar:
 - [AUD-010 · Conservar los canales antes de reducir a mono](aud-010-preserve-channels-before-downmixing/)
 - [AUD-011 · Contar las tramas válidas por separado del relleno de bloques](aud-011-count-valid-frames-separately-from-block-padding/)
 - [AUD-012 · Elegir un fundido explicitando su coste energético](aud-012-choose-a-fade-without-hiding-its-energy-cost/)
+- [AUD-013 · Remuestrear sin cambiar solamente la etiqueta del reloj](aud-013-resample-without-relabeling-the-clock/)
+- [AUD-014 · Prever margen para ataques correlacionados](aud-014-budget-headroom-for-correlated-plucks/)
+- [AUD-015 · Acotar el error de cuantización antes de comparar WAV](aud-015-bound-quantization-error-before-comparing-wavs/)

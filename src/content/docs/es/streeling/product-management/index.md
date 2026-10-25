@@ -20,3 +20,5 @@ sidebar:
 - [PM-007 · Medir la latencia de reproducción desde el punto de vista del usuario](pm-007-measure-playback-latency-at-the-user-boundary/)
 - [PM-008 · Dimensionar un lote de cincuenta cursos según la capacidad de revisión](pm-008-size-a-fifty-course-batch-by-review-capacity/)
 - [PM-009 · Separar la adopción de una versión de las descargas](pm-009-separate-release-adoption-from-artifact-downloads/)
+- [PM-010 · Estandarizar fallos de dogfooding con una mezcla declarada de tareas](pm-010-standardize-dogfood-failures-to-a-declared-task-mix/)
+- [PM-011 · Incluir revisión y corrección en el equilibrio de automatización](pm-011-include-review-and-correction-in-automation-break-even/)

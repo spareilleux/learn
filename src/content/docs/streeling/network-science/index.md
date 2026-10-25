@@ -22,3 +22,5 @@ sidebar:
 - [NET-009 · Detect Global Cycles in a Panel Stack](net-009-detect-global-cycles-in-a-panel-stack/)
 - [NET-010 · Compute Critical Paths with Resource Assumptions](net-010-compute-critical-paths-with-resource-assumptions/)
 - [NET-011 · Separate Reachability from Semantic Compatibility](net-011-separate-reachability-from-semantic-compatibility/)
+- [NET-012 · Account for Shared Dependencies in Redundant Paths](net-012-account-for-shared-dependencies-in-redundant-paths/)
+- [NET-013 · Trace Causal Concurrency with Vector Clocks](net-013-trace-causal-concurrency-with-vector-clocks/)

@@ -21,3 +21,6 @@ sidebar:
 - [GAA-008 · Programar el recuerdo con una regla explícita de vencimiento](gaa-008-schedule-retrieval-with-an-explicit-due-rule/)
 - [GAA-009 · Evaluar la transposición más allá de un patrón de trastes memorizado](gaa-009-test-transposition-beyond-a-memorized-fret-pattern/)
 - [GAA-010 · Definir una ejecución aprobada antes de contar éxitos](gaa-010-define-a-practice-pass-before-counting-success/)
+- [GAA-011 · Diagnosticar errores de intervalo con una tabla de confusión](gaa-011-diagnose-interval-errors-with-a-confusion-table/)
+- [GAA-012 · Cruzar timbre e intervalo en una prueba de oído](gaa-012-cross-timbre-with-interval-in-an-ear-trial/)
+- [GAA-013 · Elegir una clave de diversidad de voicings según la tarea](gaa-013-choose-a-voicing-diversity-key-for-the-task/)

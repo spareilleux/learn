@@ -1,0 +1,19 @@
+{
+  "checked_at_utc": "2026-10-25T14:56:28.971666+00:00",
+  "original_sha256": "94bc3a8f32acff12ffb6b91790fbcdcdb5c3d5e336fd22a3cb4ba4f524c8c6d3",
+  "renewed_sha256": "caeb9c3ee84581ecbcbd9b83c2a03d447e0d390f29919bbd6520ee7fea548efc",
+  "original_review_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-a/review-a-original.json",
+  "primary_readings_preserved_without_invented_hashes": 11,
+  "test_binding_changes": [
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-24/tests/test_unit_a.py",
+      "before_sha256": "bdadbba27518e74e465c3421666cac55b6ac8cbcd50836c7dcdca2c69aa7c267",
+      "after_sha256": "c2eb73be2f024bab8ec53e958e0c6e18d3b00f9c78d895379bacb2e70f1a9082"
+    }
+  ],
+  "course_source_checks_unchanged": true,
+  "calculation_observations_identical": true,
+  "authoritative_run": "test-runs/claims-after-review-fix-20261025.json",
+  "actual_normalization_failure": "KeyError: path in root local-binding iteration; eleven actual rendered primary readings had path_or_url and null sha256, not file path/hash.",
+  "scope": "Root receipt normalization and final binding renewal; not a new all-course content review or a rewrite of the original reviewer outcome."
+}

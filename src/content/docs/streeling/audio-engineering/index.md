@@ -23,3 +23,6 @@ sidebar:
 - [AUD-010 · Preserve Channels Before Downmixing](aud-010-preserve-channels-before-downmixing/)
 - [AUD-011 · Count Valid Frames Separately from Block Padding](aud-011-count-valid-frames-separately-from-block-padding/)
 - [AUD-012 · Choose a Fade Without Hiding Its Energy Cost](aud-012-choose-a-fade-without-hiding-its-energy-cost/)
+- [AUD-013 · Resample Without Relabeling the Clock](aud-013-resample-without-relabeling-the-clock/)
+- [AUD-014 · Budget Headroom for Correlated Plucks](aud-014-budget-headroom-for-correlated-plucks/)
+- [AUD-015 · Bound Quantization Error Before Comparing WAVs](aud-015-bound-quantization-error-before-comparing-wavs/)

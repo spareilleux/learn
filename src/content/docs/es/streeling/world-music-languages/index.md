@@ -21,3 +21,6 @@ sidebar:
 - [WML-008 · Conservar el registro en intervalos relativos a un bordón](wml-008-retain-register-in-drone-relative-intervals/)
 - [WML-009 · Traducir términos rítmicos sin cambiar las unidades contadas](wml-009-translate-rhythmic-terms-without-changing-counted-units/)
 - [WML-010 · Mantener reversibles las etiquetas de notas Unicode](wml-010-keep-unicode-note-labels-reversible/)
+- [WML-011 · Conservar el tipo de un acorde de séptima](wml-011-preserve-the-kind-of-a-seventh-chord/)
+- [WML-012 · Conservar la dirección en un inventario melódico](wml-012-preserve-direction-in-a-melodic-inventory/)
+- [WML-013 · Comprobar si cierra un ciclo de quintas](wml-013-check-whether-a-fifth-cycle-closes/)

@@ -22,3 +22,6 @@ sidebar:
 - [MCL-009 · Preserve Pickup Offsets in Bar Addresses](mcl-009-preserve-pickup-offsets-in-bar-addresses/)
 - [MCL-010 · Separate Swing Ratio from Tempo](mcl-010-separate-swing-ratio-from-tempo/)
 - [MCL-011 · Keep Repeats Separate from Written Bar Identity](mcl-011-keep-repeats-separate-from-written-bar-identity/)
+- [MCL-012 · Merge Ties Without Merging Slurs](mcl-012-merge-ties-without-merging-slurs/)
+- [MCL-013 · Keep Tuplet Duration as a Rational](mcl-013-keep-tuplet-duration-as-a-rational/)
+- [MCL-014 · Declare Where Grace Notes Take Their Time](mcl-014-declare-where-grace-notes-take-their-time/)

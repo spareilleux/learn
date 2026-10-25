@@ -20,3 +20,5 @@ sidebar:
 - [PHI-007 · Test a Learning Gain Against Counterfactuals](phi-007-test-a-learning-gain-against-counterfactuals/)
 - [PHI-008 · Separate a Test Oracle from a Specification](phi-008-separate-a-test-oracle-from-a-specification/)
 - [PHI-009 · State Who May Authorize an Agent Effect](phi-009-state-who-may-authorize-an-agent-effect/)
+- [PHI-010 · State What a Craft View Cannot Distinguish](phi-010-state-what-a-craft-view-cannot-distinguish/)
+- [PHI-011 · Cross Mesh and Lighting before Attributing a Render Change](phi-011-cross-mesh-and-lighting-before-attributing-a-render-change/)

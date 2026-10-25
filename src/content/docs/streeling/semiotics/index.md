@@ -22,3 +22,6 @@ sidebar:
 - [SEM-009 · Keep Units in a Composed Craft Instruction](sem-009-keep-units-in-a-composed-craft-instruction/)
 - [SEM-010 · Distinguish Stable Course Identity from Display Names](sem-010-distinguish-stable-course-identity-from-display-names/)
 - [SEM-011 · Version a DSL Meaning Before Renaming Its Syntax](sem-011-version-a-dsl-meaning-before-renaming-its-syntax/)
+- [SEM-012 · Preserve the Order of Stitch Frame Actions](sem-012-preserve-the-order-of-stitch-frame-actions/)
+- [SEM-013 · Align Two Motif Periods at a Textile Seam](sem-013-align-two-motif-periods-at-a-textile-seam/)
+- [SEM-014 · Declare Material Patch Precedence](sem-014-declare-material-patch-precedence/)

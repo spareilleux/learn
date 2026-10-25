@@ -24,3 +24,6 @@ sidebar:
 - [DV-011 · Retain Raw Counts Behind Normalized Heatmaps](dv-011-retain-raw-counts-behind-normalized-heatmaps/)
 - [DV-012 · Compute Quantiles Before Combining Latency Cohorts](dv-012-compute-quantiles-before-combining-latency-cohorts/)
 - [DV-013 · Compare Learning Curves at Equal Evaluation Budgets](dv-013-compare-learning-curves-at-equal-evaluation-budgets/)
+- [DV-014 · Plot Signed Craft Clearance](dv-014-plot-signed-craft-clearance/)
+- [DV-015 · Map Missing Stitches without Inventing Holes](dv-015-map-missing-stitches-without-inventing-holes/)
+- [DV-016 · Compare Paired Silhouette Residuals](dv-016-compare-paired-silhouette-residuals/)
