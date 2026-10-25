@@ -1,0 +1,180 @@
+---
+module_id: "cyb-020-check-disturbance-robust-set-closure"
+department: "cybernetics"
+course: "Check Disturbance-Robust Set Closure"
+title: "Check Disturbance-Robust Set Closure"
+level: "intermediate"
+prerequisites: ["cyb-013-bound-observation-age-before-a-control-decision"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Check Disturbance-Robust Set Closure
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A Demerzel coordinator proposes keeping pending work within a small set of admissible states. One quiet trace does not show that the policy survives every allowed arrival. The useful question is whether each safe state maps back into the safe set for every disturbance the model permits. This changes a reassuring example into a quantified safety argument.
+
+Declare the step order first. Our controller serves existing work, clips the remaining queue at zero, and then admits the arriving work. Reversing those operations changes the boundary calculation. List the successors for every state and disturbance pair. If none escapes, the set is closed under the specified transition. Starting inside that set, repeated application stays inside by induction.
+
+The fixed disturbance set permits at most the service quantity on each step. The control enlarges the disturbance set while preserving the controller and proposed safe states. A boundary state then has an escaping successor. Keep that exact pair as a witness rather than averaging it away with more favourable arrivals. The model requires every permitted case, so a rare but allowed witness is decisive.
+
+The source notes distinguish worst-case set assumptions from probability-based constraints. Our finite enumeration has no arrival distribution and therefore cannot report a failure probability. The stale-observation prerequisite asks where a current value could lie; this lesson asks whether a whole set remains safe indefinitely under a known transition. Neither supplies real queue service guarantees. Before proposing a DSL guard, check the manual successor table and identify what actual observations would justify the disturbance and service bounds.
+
+## Sources and project boundary
+
+The retained Learn helper separates metadata, title and body, and indexes English module identities. Inspect that representation when naming the artifact and its revision. It does not implement this lesson’s model or supply its invented inputs.
+
+[Prerequisite: cyb-013-bound-observation-age-before-a-control-decision](../../cybernetics/en/cyb-013-bound-observation-age-before-a-control-decision.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading](https://underactuated.mit.edu/robust.html)
+
+## Fixed model and negative control
+
+```json
+{
+  "values": {
+    "safe_states": [
+      0,
+      1,
+      2
+    ],
+    "disturbances": [
+      0,
+      1
+    ],
+    "service": 1
+  },
+  "formula": "For every safe integer state q and disturbance d compute q_next=max(0,q-service)+d. Closed iff every successor belongs to safe_states. Sort escaping [q,d,q_next] triples lexicographically.",
+  "expected": {
+    "successor_set": [
+      0,
+      1,
+      2
+    ],
+    "escaping": [],
+    "closed": true
+  },
+  "negative_control": {
+    "values": {
+      "safe_states": [
+        0,
+        1,
+        2
+      ],
+      "disturbances": [
+        0,
+        1,
+        2
+      ],
+      "service": 1
+    },
+    "expected": {
+      "successor_set": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "escaping": [
+        [
+          2,
+          2,
+          3
+        ]
+      ],
+      "closed": false
+    },
+    "why": "A larger allowed arrival breaks closure at the upper state."
+  },
+  "input_types": {
+    "safe_states": "finite set of nonnegative integers",
+    "disturbances": "finite set of nonnegative integers",
+    "service": "nonnegative integer"
+  },
+  "assumptions": [
+    "Service precedes arrivals on every step.",
+    "Initial state is safe; disturbance always lies in the declared set; no hidden transition exists."
+  ],
+  "limits": "A conditional finite invariant is not a verified production queue bound or a stochastic tail guarantee."
+}
+```
+
+### Exercise 1
+
+List the fixed successor set.
+
+<details><summary>Answer 1</summary>
+
+It is `[0,1,2]`, entirely inside the safe set. The escaping list is `[]`; closure is `true` under the stipulated step order.
+
+</details>
+
+### Exercise 2
+
+Find the control’s escaping transition.
+
+<details><summary>Answer 2</summary>
+
+The triple `[2,2,3]` starts at the upper safe state and ends outside. The successor set is `[0,1,2,3]`, so closure is `false`.
+
+</details>
+
+### Exercise 3
+
+Why does closure extend to every finite horizon?
+
+<details><summary>Answer 3</summary>
+
+The initial state is inside and each allowed step preserves membership. Induction therefore preserves membership after every finite number of steps, conditional on unchanged assumptions.
+
+</details>
+
+### Exercise 4
+
+Can the table estimate outage probability?
+
+<details><summary>Answer 4</summary>
+
+No. Disturbances are a set of possibilities without probabilities. Closure or an escaping witness addresses worst-case membership, not how frequently an event occurs.
+
+</details>
+
+### Exercise 5
+
+What must precede operational adoption?
+
+<details><summary>Answer 5</summary>
+
+Evidence for step order, service bound, disturbance set and initial membership, plus direct checks of omitted transitions. An agent assertion cannot supply those missing premises.
+
+</details>
+
+## Source-assisted learner task
+
+Assess a finite pending-work safety sketch before proposing an agent admission guard.
+
+**Direct manual baseline:** Enumerate every state/disturbance successor and mark set membership by hand.
+
+**Falsifier:** An allowed state/disturbance pair leaves the claimed invariant set.
+
+Save a first answer before opening the solutions. Identify the input types, the comparison boundary and the quantity that the task asks you to preserve. Draw the smallest table or diagram that permits every intermediate result to be checked. Keep an unexpected result; editing the premises until a preferred conclusion appears would destroy the counterexample.
+
+Read the linked prerequisite and the bounded primary passage. Record the source revision, the definition actually used and the assumptions you imported. The project artifact supplies a real representation to inspect, while the fixed model supplies invented inputs. Neither a document name nor an accessible URL establishes a production result. Explain what would need to be observed before using the calculation in an operational decision.
+
+State the direct manual baseline and its falsifier before proposing a composable DSL or an agent abstraction. Ask an assistant to challenge your manual answer only after saving it. Retain the prompt, the reply, the source passage it cites and the correction you accept or reject. A shorter expression is useful only if it preserves the operation, the control and the refusal boundary. Compare it with a plain table first.
+
+Submit the original answer, intermediate quantities, corrected answer and control together. Label source consultation and calculator use as assistance. A future dogfood comparison should use the same task version and retain failures as well as successes; otherwise changing the question can masquerade as improvement. The prepared criteria below remain undecided until a learner actually attempts the task. An answer key and an author check establish neither learning nor adoption.
+
+## Prepared learner criteria
+
+- Exercise 1: List the fixed successor set. — Decision undecided.
+- Exercise 2: Find the control’s escaping transition. — Decision undecided.
+- Exercise 3: Why does closure extend to every finite horizon? — Decision undecided.
+- Exercise 4: Can the table estimate outage probability? — Decision undecided.
+- Exercise 5: What must precede operational adoption? — Decision undecided.
+
+[Fixed unit packet](../../../../code/streeling/evidence/batch50-2026-10-25-b/unit-b.json) · [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25-b/journal.md)
