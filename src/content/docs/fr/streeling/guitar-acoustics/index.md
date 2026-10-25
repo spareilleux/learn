@@ -25,3 +25,6 @@ sidebar:
 - [GAS-012 · Distinguer le couplage de résonances en parallèle](gas-012-distinguish-coupling-from-parallel-resonance/)
 - [GAS-013 · Réaccorder avec une hypothèse de tension explicite](gas-013-retune-with-an-explicit-tension-assumption/)
 - [GAS-014 · Prévoir un peigne à deux trajets à partir des distances](gas-014-predict-a-two-path-comb-with-distance/)
+- [GAS-015 · Distinguer l’excitation d’un mode de son observation](gas-015-separate-mode-excitation-from-observation/)
+- [GAS-016 · Relier la géométrie du frettage à la tension élastique](gas-016-couple-fretting-geometry-to-elastic-tension/)
+- [GAS-017 · Retrouver un coefficient de raideur à partir des rapports de partiels](gas-017-recover-a-stiffness-coefficient-from-partial-ratios/)

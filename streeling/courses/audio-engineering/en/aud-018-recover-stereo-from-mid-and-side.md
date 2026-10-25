@@ -111,7 +111,7 @@ Form the mid and side arrays. Why specify the normalization?
 
 <details><summary>Answer 1</summary>
 
-Both arrays are listed below. The square-root normalization makes this particular matrix orthonormal; another common convention would need different inverse and energy formulas.
+Both arrays are listed above. The square-root normalization makes this particular matrix orthonormal; another common convention would need different inverse and energy formulas.
 
 </details>
 

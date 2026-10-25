@@ -22,3 +22,5 @@ sidebar:
 - [PHI-009 · State Who May Authorize an Agent Effect](phi-009-state-who-may-authorize-an-agent-effect/)
 - [PHI-010 · State What a Craft View Cannot Distinguish](phi-010-state-what-a-craft-view-cannot-distinguish/)
 - [PHI-011 · Cross Mesh and Lighting before Attributing a Render Change](phi-011-cross-mesh-and-lighting-before-attributing-a-render-change/)
+- [PHI-012 · Distinguish Equivalence from an Interval Containing Zero](phi-012-distinguish-equivalence-from-an-interval-containing-zero/)
+- [PHI-013 · Explain an Infeasible Craft Plan with a Minimal Core](phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core/)

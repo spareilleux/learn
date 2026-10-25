@@ -29,3 +29,6 @@ sidebar:
 - [PHY-016 · Bound a Fold Hinge Sweep](phy-016-bound-a-fold-hinge-sweep/)
 - [PHY-017 · Budget Thermal Growth at a Metal Joint](phy-017-budget-thermal-growth-at-a-metal-joint/)
 - [PHY-018 · Locate a Sculpture Mass Projection](phy-018-locate-a-sculpture-mass-projection/)
+- [PHY-019 · Test Sliding before Calling a Sculpture Stable](phy-019-test-sliding-before-calling-a-sculpture-stable/)
+- [PHY-020 · Separate Section Geometry from Material Stiffness](phy-020-separate-section-geometry-from-material-stiffness/)
+- [PHY-021 · Separate Rebound Speed from Retained Energy](phy-021-separate-rebound-speed-from-retained-energy/)

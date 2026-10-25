@@ -79,7 +79,7 @@ Calculez la fraction vibrante après frettage. Quelle extrémité reste fixe dan
 
 <details><summary>Réponse 1</summary>
 
-La fraction figure ci-dessous et le chevalet reste l’origine. L’extrémité frettée se déplace ; une fraction de la corde initiale n’est pas automatiquement une fraction du segment restant.
+La fraction figure ci-dessus et le chevalet reste l’origine. L’extrémité frettée se déplace ; une fraction de la corde initiale n’est pas automatiquement une fraction du segment restant.
 
 </details>
 

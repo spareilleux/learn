@@ -25,3 +25,6 @@ sidebar:
 - [GTR-012 · Select Natural Harmonics with a Touch Node](gtr-012-select-natural-harmonics-with-a-touch-node/)
 - [GTR-013 · Judge a Bend with an Uncertainty Budget](gtr-013-judge-a-bend-with-an-uncertainty-budget/)
 - [GTR-014 · Count Legato Notes Separately from Pick Attacks](gtr-014-count-legato-notes-separately-from-pick-attacks/)
+- [GTR-015 · Sample a Vibrato Without Erasing Its Motion](gtr-015-sample-a-vibrato-without-erasing-its-motion/)
+- [GTR-016 · Move the Boundary for an Artificial Harmonic](gtr-016-move-the-boundary-for-an-artificial-harmonic/)
+- [GTR-017 · Check Contact Continuity During Finger Substitution](gtr-017-check-contact-continuity-during-finger-substitution/)

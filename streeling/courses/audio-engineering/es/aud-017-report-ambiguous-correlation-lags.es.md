@@ -120,7 +120,7 @@ Evalúe la suma circular para cada retardo declarado. ¿Por qué forma parte de 
 
 <details><summary>Respuesta 1</summary>
 
-El vector de correlación aparece abajo. Envolver los índices difiere de extender con ceros; invertir el signo del retardo también cambiaría su interpretación.
+El vector de correlación aparece arriba. Envolver los índices difiere de extender con ceros; invertir el signo del retardo también cambiaría su interpretación.
 
 </details>
 

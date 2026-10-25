@@ -25,3 +25,6 @@ sidebar:
 - [COG-012 · Distinguer le taux de détection des alertes et la tendance à répondre](cog-012-separate-review-alert-hit-rate-from-response-bias/)
 - [COG-013 · Conserver les erreurs manquées dans les essais pièges de revue assistée](cog-013-retain-catch-trial-misses-in-assisted-review/)
 - [COG-014 · Présenter le risque et la couverture lorsqu’un agent s’abstient](cog-014-report-risk-and-coverage-when-an-agent-abstains/)
+- [COG-015 · Ne transférer la précision des alertes qu’avec leur prévalence](cog-015-transport-alert-precision-only-with-prevalence/)
+- [COG-016 · Trouver le nombre de réponses manquantes qui inverse le classement](cog-016-find-the-missing-answer-tipping-count/)
+- [COG-017 · Soustraire la tendance de comparaison avant de créditer l’assistance](cog-017-subtract-a-comparison-trend-before-crediting-assistance/)

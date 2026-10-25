@@ -140,7 +140,7 @@ Appliquez la suppression, puis calculez l’ensemble des classes de hauteur.
 
 <details><summary>Réponse 3</summary>
 
-La table et l’ensemble finaux figurent ci-dessous. Le degré supprimé est absent ; l’union de toutes les hauteurs intermédiaires le conserverait à tort.
+La table et l’ensemble finaux figurent ci-dessus. Le degré supprimé est absent ; l’union de toutes les hauteurs intermédiaires le conserverait à tort.
 
 </details>
 

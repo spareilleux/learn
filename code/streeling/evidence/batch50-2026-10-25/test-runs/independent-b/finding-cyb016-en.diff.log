@@ -1,0 +1,20 @@
+--- streeling/courses/cybernetics/en/cyb-016-test-feedforward-against-disturbance-mismatch.md before
++++ streeling/courses/cybernetics/en/cyb-016-test-feedforward-against-disturbance-mismatch.md after
+@@ -15,7 +15,7 @@
+ 
+ An agent knows an incoming load is expected and proposes compensating before observing an output error. That is a different information path from residual feedback. The direct baseline ignores the disturbance estimate; the proposed command subtracts it before scaling by the assumed plant gain.
+ 
+-The inspected official Caltech extraction describes measured-disturbance feedforward and its dependence on plant knowledge. Only that extracted passage was available; full-text fetching failed. Our static scalar equation is an authored simplification, with no transfer functions or production tuning inferred from the reading. It makes measurement mismatch visible without hiding it in a controller trace.
++The inspected official Caltech extraction describes measured-disturbance feedforward and its dependence on plant knowledge. The inspected search extraction is from the 2009-02-22 text linked below; fetching the originally considered 2007 draft failed. Only the extracted passage was read, not the complete chapter. Our static scalar equation is an authored simplification, with no transfer functions or production tuning inferred from the reading. It makes measurement mismatch visible without hiding it in a controller trace.
+ 
+ Calculate actual output using actual disturbance, not the estimate used to choose the command. Otherwise the model would certify its own prediction. Compare absolute residuals with the direct baseline. The changed-input control deliberately supplies a bad estimate: a mechanism that helps one case can harm another. Any DSL shorthand must retain which quantities are assumed and which would need measurement.
+ 
+@@ -29,7 +29,7 @@
+ 
+ [Retained project artifact](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json)
+ 
+-[Primary reading](https://www.cds.caltech.edu/~murray/books/AM08/pdf/cds101-complete_20Sep07.pdf)
++[Primary reading](https://www.cds.caltech.edu/~murray/books/AM08/pdf/am08-complete_22Feb09.pdf)
+ 
+ ## Fixed model and control
+ 

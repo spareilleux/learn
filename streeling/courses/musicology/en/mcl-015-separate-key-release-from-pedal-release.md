@@ -113,7 +113,7 @@ Compute the main release times and scheduled hold durations.
 
 <details><summary>Answer 2</summary>
 
-The arrays appear below. Subtract each onset from its scheduled release; do not subtract the first onset from every note or replace note identity with pitch alone.
+The arrays appear above. Subtract each onset from its scheduled release; do not subtract the first onset from every note or replace note identity with pitch alone.
 
 </details>
 

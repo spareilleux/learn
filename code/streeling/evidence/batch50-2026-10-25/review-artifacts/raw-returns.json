@@ -1,0 +1,22 @@
+[
+  {
+    "reviewer": "adversarial",
+    "findings": [
+      {
+        "title": "Invalid operation tokens retain passing proof receipts",
+        "severity": "P2",
+        "file": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py",
+        "line": 160,
+        "confidence": 100,
+        "autofix_class": "manual",
+        "owner": "downstream-resolver",
+        "requires_verification": true,
+        "pre_existing": false,
+        "suggested_fix": "Before evaluating operations, require MCL016 op values to be exactly note, backup, or forward and WML016 op values to be exactly add, alter, or subtract. Replace the implicit WML016 else deletion with an explicit subtract branch and fail on any unknown token. Add targeted in-memory rejection probes for the existing forward/subtract steps with a misspelled operation.",
+        "first_evidence": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py:160 --             else: del degrees[key]"
+      }
+    ],
+    "residual_risks": [],
+    "testing_gaps": []
+  }
+]

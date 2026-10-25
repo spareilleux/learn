@@ -113,7 +113,7 @@ Calculez les instants de relâchement et les durées de tenue planifiée.
 
 <details><summary>Réponse 2</summary>
 
-Les tableaux figurent ci-dessous. Soustrayez chaque début de son relâchement ; ne prenez pas le premier début pour toutes les notes et ne remplacez pas leur identité par la hauteur.
+Les tableaux figurent ci-dessus. Soustrayez chaque début de son relâchement ; ne prenez pas le premier début pour toutes les notes et ne remplacez pas leur identité par la hauteur.
 
 </details>
 

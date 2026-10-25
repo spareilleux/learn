@@ -26,3 +26,6 @@ sidebar:
 - [INF-013 · Value an Evidence Probe by Expected Information](inf-013-value-an-evidence-probe-by-expected-information/)
 - [INF-014 · Retain Message Codebook Versions](inf-014-retain-message-codebook-versions/)
 - [INF-015 · Weight Sampled Telemetry Before Summarizing Failures](inf-015-weight-sampled-telemetry-before-summarizing-failures/)
+- [INF-016 · Bind a Delta to Its Reference State](inf-016-bind-a-delta-to-its-reference-state/)
+- [INF-017 · Merge Sum and Count Summaries Before Taking Means](inf-017-merge-sum-count-summaries-before-taking-means/)
+- [INF-018 · Frame Text by Its UTF-8 Byte Length](inf-018-frame-text-by-utf8-byte-length/)

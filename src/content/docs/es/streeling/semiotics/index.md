@@ -25,3 +25,6 @@ sidebar:
 - [SEM-012 · Conservar el orden de acciones de un marco de bordado](sem-012-preserve-the-order-of-stitch-frame-actions/)
 - [SEM-013 · Alinear dos periodos de motivos en una costura textil](sem-013-align-two-motif-periods-at-a-textile-seam/)
 - [SEM-014 · Declarar la prioridad de cambios de material](sem-014-declare-material-patch-precedence/)
+- [SEM-015 · Vincular un marcador de superficie a la identidad de sus vértices baricéntricos](sem-015-bind-a-surface-marker-to-barycentric-vertex-identity/)
+- [SEM-016 · Comprobar la coherencia de signos en un ciclo de costuras](sem-016-check-sign-consistency-around-a-craft-seam-cycle/)
+- [SEM-017 · Declarar la pertenencia de fronteras para coordenadas de teselas negativas](sem-017-declare-boundary-ownership-for-negative-tile-coordinates/)

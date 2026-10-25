@@ -85,7 +85,7 @@ Convert the main note list into frequencies under its declared reference.
 
 <details><summary>Answer 1</summary>
 
-The expected frequencies appear below. The note numbers alone do not determine them unless the receiving tool knows the reference used in the conversion.
+The expected frequencies appear above. The note numbers alone do not determine them unless the receiving tool knows the reference used in the conversion.
 
 </details>
 

@@ -31,3 +31,6 @@ sidebar:
 - [CS-018 · Fusionar mensajes de agente repetidos según su identidad](cs-018-merge-replayed-agent-messages-by-identity/)
 - [CS-019 · Preservar los enlaces léxicos al componer fragmentos](cs-019-preserve-lexical-bindings-when-composing-fragments/)
 - [CS-020 · Auditar la multiplicidad de una unión de evidencias](cs-020-audit-evidence-join-multiplicity/)
+- [CS-021 · Acumular errores de validación independientes](cs-021-accumulate-independent-validation-errors/)
+- [CS-022 · Examinar lecturas y escrituras antes de cambiar el orden](cs-022-check-read-write-footprints-before-reordering/)
+- [CS-023 · Liberar solo los recursos adquiridos](cs-023-unwind-only-acquired-resources/)

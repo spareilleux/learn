@@ -1,0 +1,58 @@
+{
+  "status": "complete",
+  "finding": 1,
+  "resolution": "resolved",
+  "open_findings": [],
+  "original_review_receipt": {
+    "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/review.json",
+    "sha256": "d975023e695e33fbd930891a8b3c3c8468264ce39aa258ab4eb3cb4ed94b9e00"
+  },
+  "final_test_bindings": [
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25/tests/test_course_metadata.mjs",
+      "sha256": "d647cc7c3b9c4dedc988d0de021401522620e6c564a1239f0666470a36a36535"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py",
+      "sha256": "28a5208287cc54c383be878e73593d965b1613463ad03590d50e3545cf8aa374"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_b.py",
+      "sha256": "77350c60d915ab48b6977b73ed098160baab073df8c0432f3ccff65829a387ef"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_c.py",
+      "sha256": "973b9e0f91887e5cfc20f96bc06c6280e077e3787160cad24bb9c25c9c342bc6"
+    }
+  ],
+  "verification": {
+    "status": "complete",
+    "verification_type": "Independent focused verification of finding 1 fix; not a fresh full review or CE run",
+    "original_artifacts_unchanged": true,
+    "canonical_unit_a_packet_unchanged": true,
+    "root_same_probe_hash": "631adb79f14302762586afe2fe266340764c2c6e90fbfb87598efafbb6eff4c0",
+    "before_probe": {
+      "exit_code": 1,
+      "failures": 2,
+      "reason": "Both expected unsupported-operation exceptions were absent"
+    },
+    "after_probe": {
+      "exit_code": 0,
+      "tests": 2,
+      "rejection_diagnostics_before_assertion": true
+    },
+    "normal_replay": {
+      "exit_code": 0,
+      "tests": 50,
+      "observations": 100,
+      "observations_identical_to_before": true,
+      "complete_model_negative_coverage": true
+    },
+    "delta": {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/finding-1-fix.diff",
+      "sha256": "3cb822badc35eb5c5c9e0ab47dafc22eb1866f94373ad63c0acca8f700245cc1"
+    },
+    "scope_limits": "Operation enum guards and explicit subtract dispatch only; authored fixed cases only. No production, human or learner validation. No new test execution was needed; retained same-helper red/green receipts were inspected and byte verified."
+  },
+  "completed_at_utc": "2026-10-25T16:59:36.474462+00:00"
+}

@@ -140,7 +140,7 @@ Apply subtraction and then derive the pitch-class set.
 
 <details><summary>Answer 3</summary>
 
-The final map and set appear below. The removed degree is absent; deriving a union of every intermediate pitch would incorrectly retain it.
+The final map and set appear above. The removed degree is absent; deriving a union of every intermediate pitch would incorrectly retain it.
 
 </details>
 

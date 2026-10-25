@@ -24,3 +24,6 @@ sidebar:
 - [WML-011 · Conservar el tipo de un acorde de séptima](wml-011-preserve-the-kind-of-a-seventh-chord/)
 - [WML-012 · Conservar la dirección en un inventario melódico](wml-012-preserve-direction-in-a-melodic-inventory/)
 - [WML-013 · Comprobar si cierra un ciclo de quintas](wml-013-check-whether-a-fifth-cycle-closes/)
+- [WML-014 · Cuantizar una razón sobre una división declarada de la octava](wml-014-quantize-a-ratio-on-a-declared-octave-division/)
+- [WML-015 · Conservar el diapasón de referencia al transferir frecuencias](wml-015-carry-the-concert-reference-through-a-frequency-handoff/)
+- [WML-016 · Distinguir las operaciones sobre grados de un acorde](wml-016-keep-chord-degree-operations-distinct/)

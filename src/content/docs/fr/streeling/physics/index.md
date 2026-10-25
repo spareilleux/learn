@@ -29,3 +29,6 @@ sidebar:
 - [PHY-016 · Borner le balayage d’une charnière de pli](phy-016-bound-a-fold-hinge-sweep/)
 - [PHY-017 · Prévoir la dilatation thermique à un joint métallique](phy-017-budget-thermal-growth-at-a-metal-joint/)
 - [PHY-018 · Situer la projection des masses d’une sculpture](phy-018-locate-a-sculpture-mass-projection/)
+- [PHY-019 · Vérifier le glissement avant de déclarer une sculpture stable](phy-019-test-sliding-before-calling-a-sculpture-stable/)
+- [PHY-020 · Distinguer la géométrie de section de la rigidité du matériau](phy-020-separate-section-geometry-from-material-stiffness/)
+- [PHY-021 · Distinguer vitesse de rebond et énergie conservée](phy-021-separate-rebound-speed-from-retained-energy/)

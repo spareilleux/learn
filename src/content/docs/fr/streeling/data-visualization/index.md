@@ -27,3 +27,6 @@ sidebar:
 - [DV-014 · Tracer le dégagement signé d’un assemblage artisanal](dv-014-plot-signed-craft-clearance/)
 - [DV-015 · Cartographier les points manquants sans inventer de trous](dv-015-map-missing-stitches-without-inventing-holes/)
 - [DV-016 · Comparer des résidus de silhouette appariés](dv-016-compare-paired-silhouette-residuals/)
+- [DV-017 · Résumer les axes des fibres sans inventer une direction](dv-017-summarize-fibre-axes-without-inventing-a-direction/)
+- [DV-018 · Afficher les défauts artisanaux superposés par leur union](dv-018-show-overlapping-craft-defects-as-a-union/)
+- [DV-019 · Choisir un ensemble minimal de vues pour des traits déclarés](dv-019-choose-a-minimal-view-set-for-declared-features/)

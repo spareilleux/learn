@@ -75,7 +75,7 @@ Compute the main point rate. Why is that insufficient for the declared decision?
 
 <details><summary>Answer 1</summary>
 
-The rate is shown below, but the rule compares the lower interval endpoint with the prospective threshold. A percentage alone does not contain that uncertainty information.
+The rate is shown above, but the rule compares the lower interval endpoint with the prospective threshold. A percentage alone does not contain that uncertainty information.
 
 </details>
 
@@ -95,7 +95,7 @@ Apply the lower-bound rule. What exactly has not been established?
 
 <details><summary>Answer 3</summary>
 
-The main lower bound misses the threshold. That is a decision under this interval rule, not proof that the underlying rate lies below the threshold.
+The main lower bound misses the threshold. That is a decision under this interval rule, not proof that the underlying rate lies above the threshold.
 
 </details>
 

@@ -111,7 +111,7 @@ Formez les tableaux central et latéral. Pourquoi préciser la normalisation ?
 
 <details><summary>Réponse 1</summary>
 
-Les tableaux figurent ci-dessous. La normalisation par la racine carrée rend cette matrice orthonormale ; une autre convention demanderait d’autres formules d’inversion et d’énergie.
+Les tableaux figurent ci-dessus. La normalisation par la racine carrée rend cette matrice orthonormale ; une autre convention demanderait d’autres formules d’inversion et d’énergie.
 
 </details>
 

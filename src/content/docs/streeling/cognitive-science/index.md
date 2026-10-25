@@ -25,3 +25,6 @@ sidebar:
 - [COG-012 · Separate Review Alert Hit Rate from Response Bias](cog-012-separate-review-alert-hit-rate-from-response-bias/)
 - [COG-013 · Retain Catch Trial Misses in Assisted Review](cog-013-retain-catch-trial-misses-in-assisted-review/)
 - [COG-014 · Report Risk and Coverage When an Agent Abstains](cog-014-report-risk-and-coverage-when-an-agent-abstains/)
+- [COG-015 · Transport Alert Precision Only with Prevalence](cog-015-transport-alert-precision-only-with-prevalence/)
+- [COG-016 · Find the Missing-Answer Tipping Count](cog-016-find-the-missing-answer-tipping-count/)
+- [COG-017 · Subtract a Comparison Trend Before Crediting Assistance](cog-017-subtract-a-comparison-trend-before-crediting-assistance/)

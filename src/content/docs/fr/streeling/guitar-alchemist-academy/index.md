@@ -24,3 +24,6 @@ sidebar:
 - [GAA-011 · Diagnostiquer les erreurs d’intervalle avec une table de confusion](gaa-011-diagnose-interval-errors-with-a-confusion-table/)
 - [GAA-012 · Croiser timbre et intervalle dans une épreuve d’oreille](gaa-012-cross-timbre-with-interval-in-an-ear-trial/)
 - [GAA-013 · Choisir une clé de diversité des voicings selon la tâche](gaa-013-choose-a-voicing-diversity-key-for-the-task/)
+- [GAA-014 · Réserver des familles entières de transpositions pour l’évaluation](gaa-014-hold-out-whole-transposition-families/)
+- [GAA-015 · Conserver l’incertitude avec un taux de réussite](gaa-015-keep-uncertainty-with-a-practice-pass-rate/)
+- [GAA-016 · Distinguer la dérive temporelle de l’effet d’une condition de pratique](gaa-016-separate-order-drift-from-a-practice-condition/)

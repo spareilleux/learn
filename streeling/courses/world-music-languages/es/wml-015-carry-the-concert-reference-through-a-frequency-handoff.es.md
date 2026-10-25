@@ -85,7 +85,7 @@ Convierta la lista principal a frecuencias con su referencia declarada.
 
 <details><summary>Respuesta 1</summary>
 
-Las frecuencias esperadas aparecen abajo. Los números de nota no las determinan por sí solos si el receptor desconoce la referencia de conversión.
+Las frecuencias esperadas aparecen arriba. Los números de nota no las determinan por sí solos si el receptor desconoce la referencia de conversión.
 
 </details>
 

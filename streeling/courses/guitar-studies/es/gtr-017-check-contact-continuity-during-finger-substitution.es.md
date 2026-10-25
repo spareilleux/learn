@@ -144,7 +144,7 @@ Calcule el solapamiento. ¿Garantiza un sonido limpio?
 
 <details><summary>Respuesta 3</summary>
 
-Su duración aparece abajo. Solo establece coexistencia programada de contactos; no se han indicado ni medido su presión o calidad.
+Su duración aparece arriba. Solo establece coexistencia programada de contactos; no se han indicado ni medido su presión o calidad.
 
 </details>
 

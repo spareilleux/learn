@@ -75,7 +75,7 @@ Calcule la tasa principal. ¿Por qué no basta para la decisión declarada?
 
 <details><summary>Respuesta 1</summary>
 
-La tasa aparece abajo, pero la regla compara el límite inferior con el umbral previsto. Un porcentaje solo no contiene esa información de incertidumbre.
+La tasa aparece arriba, pero la regla compara el límite inferior con el umbral previsto. Un porcentaje solo no contiene esa información de incertidumbre.
 
 </details>
 

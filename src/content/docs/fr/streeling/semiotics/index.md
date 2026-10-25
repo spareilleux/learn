@@ -25,3 +25,6 @@ sidebar:
 - [SEM-012 · Conserver l’ordre des actions d’un repère de broderie](sem-012-preserve-the-order-of-stitch-frame-actions/)
 - [SEM-013 · Aligner deux périodes de motifs à une couture textile](sem-013-align-two-motif-periods-at-a-textile-seam/)
 - [SEM-014 · Déclarer la priorité des modifications de matériau](sem-014-declare-material-patch-precedence/)
+- [SEM-015 · Lier un repère de surface à l’identité des sommets barycentriques](sem-015-bind-a-surface-marker-to-barycentric-vertex-identity/)
+- [SEM-016 · Vérifier la cohérence des signes autour d’un cycle de coutures](sem-016-check-sign-consistency-around-a-craft-seam-cycle/)
+- [SEM-017 · Déclarer la propriété des frontières pour les coordonnées de tuiles négatives](sem-017-declare-boundary-ownership-for-negative-tile-coordinates/)

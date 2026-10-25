@@ -79,7 +79,7 @@ Calculate the remaining vibrating fraction after fretting. Which endpoint is fix
 
 <details><summary>Answer 1</summary>
 
-The fraction is listed below and the bridge remains the origin. The fretted endpoint moves; a fraction of the original string is not automatically a fraction of the remaining string.
+The fraction is listed above and the bridge remains the origin. The fretted endpoint moves; a fraction of the original string is not automatically a fraction of the remaining string.
 
 </details>
 

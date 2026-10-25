@@ -140,7 +140,7 @@ Aplique la sustracción y derive el conjunto de clases de altura.
 
 <details><summary>Respuesta 3</summary>
 
-El mapa y el conjunto finales aparecen abajo. El grado eliminado está ausente; unir todas las alturas intermedias lo conservaría incorrectamente.
+El mapa y el conjunto finales aparecen arriba. El grado eliminado está ausente; unir todas las alturas intermedias lo conservaría incorrectamente.
 
 </details>
 

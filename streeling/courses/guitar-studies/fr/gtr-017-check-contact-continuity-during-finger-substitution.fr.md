@@ -144,7 +144,7 @@ Calculez le chevauchement. Garantit-il un son propre ?
 
 <details><summary>Réponse 3</summary>
 
-Sa durée figure ci-dessous. Elle établit seulement une coexistence planifiée des contacts ; ni leur pression ni leur qualité ne sont données ou mesurées.
+Sa durée figure ci-dessus. Elle établit seulement une coexistence planifiée des contacts ; ni leur pression ni leur qualité ne sont données ou mesurées.
 
 </details>
 

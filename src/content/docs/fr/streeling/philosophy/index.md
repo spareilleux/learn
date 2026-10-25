@@ -22,3 +22,5 @@ sidebar:
 - [PHI-009 · Préciser qui peut autoriser l’effet d’un agent](phi-009-state-who-may-authorize-an-agent-effect/)
 - [PHI-010 · Dire ce qu’une vue artisanale ne peut pas distinguer](phi-010-state-what-a-craft-view-cannot-distinguish/)
 - [PHI-011 · Croiser maillage et éclairage avant d’attribuer un changement de rendu](phi-011-cross-mesh-and-lighting-before-attributing-a-render-change/)
+- [PHI-012 · Distinguer l’équivalence d’un intervalle contenant zéro](phi-012-distinguish-equivalence-from-an-interval-containing-zero/)
+- [PHI-013 · Expliquer un projet artisanal impossible par un noyau minimal](phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core/)

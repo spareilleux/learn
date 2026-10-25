@@ -18,28 +18,28 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 
 | Departamento | Módulos | En francés | En español |
 |---|---|---|---|
-| [Ingeniería de audio](audio-engineering/) | 15 | 15 | 15 |
-| [Ciencia cognitiva](cognitive-science/) | 14 | 14 | 14 |
-| [Ciencias de la computación](computer-science/) | 20 | 20 | 20 |
-| [Cibernética](cybernetics/) | 14 | 14 | 14 |
-| [Visualización de datos](data-visualization/) | 16 | 16 | 16 |
-| [Futurología](futurology/) | 11 | 11 | 11 |
-| [Acústica de la guitarra y síntesis sonora](guitar-acoustics/) | 14 | 14 | 14 |
-| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 13 | 13 | 13 |
-| [Estudios de guitarra](guitar-studies/) | 14 | 14 | 14 |
-| [Teoría de la información](information-theory/) | 15 | 15 | 15 |
+| [Ingeniería de audio](audio-engineering/) | 18 | 18 | 18 |
+| [Ciencia cognitiva](cognitive-science/) | 17 | 17 | 17 |
+| [Ciencias de la computación](computer-science/) | 23 | 23 | 23 |
+| [Cibernética](cybernetics/) | 17 | 17 | 17 |
+| [Visualización de datos](data-visualization/) | 19 | 19 | 19 |
+| [Futurología](futurology/) | 13 | 13 | 13 |
+| [Acústica de la guitarra y síntesis sonora](guitar-acoustics/) | 17 | 17 | 17 |
+| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 16 | 16 | 16 |
+| [Estudios de guitarra](guitar-studies/) | 17 | 17 | 17 |
+| [Teoría de la información](information-theory/) | 18 | 18 | 18 |
 | [Investigación sobre IX](ix-research/) | 1 | 1 | 1 |
 | [Matemáticas](mathematics/) | 25 | 25 | 25 |
 | [Música](music/) | 25 | 25 | 25 |
-| [Musicología](musicology/) | 14 | 14 | 14 |
-| [Ciencia de redes](network-science/) | 13 | 13 | 13 |
-| [Filosofía](philosophy/) | 11 | 11 | 11 |
-| [Física](physics/) | 18 | 18 | 18 |
-| [Gestión de productos y proyectos](product-management/) | 11 | 11 | 11 |
+| [Musicología](musicology/) | 17 | 17 | 17 |
+| [Ciencia de redes](network-science/) | 15 | 15 | 15 |
+| [Filosofía](philosophy/) | 13 | 13 | 13 |
+| [Física](physics/) | 21 | 21 | 21 |
+| [Gestión de productos y proyectos](product-management/) | 13 | 13 | 13 |
 | [Psicohistoria](psychohistory/) | 25 | 25 | 25 |
-| [Semiótica](semiotics/) | 14 | 14 | 14 |
-| [Computación visual](visual-computing/) | 16 | 16 | 16 |
-| [Músicas y lenguas del mundo](world-music-languages/) | 13 | 13 | 13 |
+| [Semiótica](semiotics/) | 17 | 17 | 17 |
+| [Computación visual](visual-computing/) | 19 | 19 | 19 |
+| [Músicas y lenguas del mundo](world-music-languages/) | 16 | 16 | 16 |
 
 ## Procedencia
 

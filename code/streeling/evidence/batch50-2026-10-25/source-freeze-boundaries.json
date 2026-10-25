@@ -1,0 +1,10 @@
+{
+  "source_freeze_commit": "1807c1fa2858c3af98e296f1c24f3efb75a477a0",
+  "scope": "Author packets/self-checks describe author-stage content. Independent review corrections are subsequent evidence and do not relabel the author checks as final checks.",
+  "newline_reconstruction": {
+    "record": "unit-a-byte-normalization.json",
+    "applies_to": "The after_sha256 bytes in the named source-freeze commit, before independent editorial/content corrections.",
+    "method": "Read each source at the pinned source-freeze commit, verify its after_sha256, then replace LF with CRLF and verify before_sha256. Do not apply the reconstruction to a later edited working copy."
+  },
+  "final_binding_rule": "Final independent review, source bindings and authoritative test-run receipts identify the corrected publication bytes. Original failed attempts and superseded author evidence remain historical."
+}

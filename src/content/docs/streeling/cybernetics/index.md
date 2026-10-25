@@ -25,3 +25,6 @@ sidebar:
 - [CYB-012 · Test Feedback Delay Before Reusing a Gain](cyb-012-test-feedback-delay-before-reusing-a-gain/)
 - [CYB-013 · Bound Observation Age Before a Control Decision](cyb-013-bound-observation-age-before-a-control-decision/)
 - [CYB-014 · Test Deadbands with Quantized Actions](cyb-014-test-deadbands-with-quantized-actions/)
+- [CYB-015 · Carry Covariance Through Smoothed Telemetry](cyb-015-carry-covariance-through-smoothed-telemetry/)
+- [CYB-016 · Test Feedforward Against Disturbance Mismatch](cyb-016-test-feedforward-against-disturbance-mismatch/)
+- [CYB-017 · Limit Command Change Separately from Amplitude](cyb-017-limit-command-change-separately-from-amplitude/)

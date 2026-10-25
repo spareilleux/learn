@@ -26,3 +26,6 @@ sidebar:
 - [INF-013 · Évaluer une sonde de preuve par son information attendue](inf-013-value-an-evidence-probe-by-expected-information/)
 - [INF-014 · Conserver les versions des dictionnaires de messages](inf-014-retain-message-codebook-versions/)
 - [INF-015 · Pondérer la télémétrie échantillonnée avant de résumer les échecs](inf-015-weight-sampled-telemetry-before-summarizing-failures/)
+- [INF-016 · Lier un delta à son état de référence](inf-016-bind-a-delta-to-its-reference-state/)
+- [INF-017 · Fusionner sommes et effectifs avant de calculer les moyennes](inf-017-merge-sum-count-summaries-before-taking-means/)
+- [INF-018 · Délimiter les textes par leur longueur en octets UTF-8](inf-018-frame-text-by-utf8-byte-length/)

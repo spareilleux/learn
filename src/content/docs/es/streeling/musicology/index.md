@@ -25,3 +25,6 @@ sidebar:
 - [MCL-012 · Unir ligaduras de prolongación sin unir las de expresión](mcl-012-merge-ties-without-merging-slurs/)
 - [MCL-013 · Conservar la duración del grupo irregular como racional](mcl-013-keep-tuplet-duration-as-a-rational/)
 - [MCL-014 · Declarar de dónde toman tiempo las notas de adorno](mcl-014-declare-where-grace-notes-take-their-time/)
+- [MCL-015 · Separar la liberación de la tecla de la del pedal](mcl-015-separate-key-release-from-pedal-release/)
+- [MCL-016 · Reconstruir cursores de una partitura polifónica](mcl-016-reconstruct-polyphonic-score-cursors/)
+- [MCL-017 · Integrar una rampa de tempo en coordenadas de pulsos](mcl-017-integrate-a-tempo-ramp-in-beat-coordinates/)

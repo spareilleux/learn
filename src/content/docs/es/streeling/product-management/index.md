@@ -22,3 +22,5 @@ sidebar:
 - [PM-009 · Separar la adopción de una versión de las descargas](pm-009-separate-release-adoption-from-artifact-downloads/)
 - [PM-010 · Estandarizar fallos de dogfooding con una mezcla declarada de tareas](pm-010-standardize-dogfood-failures-to-a-declared-task-mix/)
 - [PM-011 · Incluir revisión y corrección en el equilibrio de automatización](pm-011-include-review-and-correction-in-automation-break-even/)
+- [PM-012 · Ordenar revisiones por su coste ponderado de finalización](pm-012-order-review-work-by-weighted-completion-cost/)
+- [PM-013 · Conservar la censura del tiempo hasta el primer uso de la tarea](pm-013-retain-censoring-in-time-to-first-task-use/)

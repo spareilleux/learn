@@ -29,3 +29,6 @@ sidebar:
 - [PHY-016 · Acotar el barrido de una bisagra de pliegue](phy-016-bound-a-fold-hinge-sweep/)
 - [PHY-017 · Prever la dilatación térmica en una junta metálica](phy-017-budget-thermal-growth-at-a-metal-joint/)
 - [PHY-018 · Situar la proyección de masas de una escultura](phy-018-locate-a-sculpture-mass-projection/)
+- [PHY-019 · Comprobar el deslizamiento antes de declarar estable una escultura](phy-019-test-sliding-before-calling-a-sculpture-stable/)
+- [PHY-020 · Separar la geometría de la sección de la rigidez del material](phy-020-separate-section-geometry-from-material-stiffness/)
+- [PHY-021 · Distinguir la velocidad de rebote de la energía conservada](phy-021-separate-rebound-speed-from-retained-energy/)

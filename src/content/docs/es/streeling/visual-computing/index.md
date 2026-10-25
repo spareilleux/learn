@@ -27,6 +27,9 @@ sidebar:
 - [VC-014 · Prever la anchura en píxeles de una puntada bordada](vc-014-predict-an-embroidered-stitch-pixel-footprint/)
 - [VC-015 · Fijar un error de cuerda para un perfil escultórico](vc-015-budget-a-sculpture-profile-chord-error/)
 - [VC-016 · Seguir los espacios UV entre niveles de mipmap](vc-016-track-uv-gutters-through-mip-levels/)
+- [VC-017 · Evaluar la separación del relieve con un cuantizador declarado](vc-017-bound-relief-depth-separation-under-a-declared-quantizer/)
+- [VC-018 · Conservar la asociación alfa en el borde de un textil](vc-018-carry-alpha-association-through-a-textile-edge/)
+- [VC-019 · Medir el estiramiento UV direccional antes de reutilizar un motivo](vc-019-measure-directional-uv-stretch-before-reusing-a-motif/)
 
 ## Catálogo de cursos (previsto)
 

@@ -25,3 +25,6 @@ sidebar:
 - [COG-012 · Separar la tasa de aciertos de las alertas y la tendencia de respuesta](cog-012-separate-review-alert-hit-rate-from-response-bias/)
 - [COG-013 · Conservar los fallos omitidos en ensayos trampa de revisión asistida](cog-013-retain-catch-trial-misses-in-assisted-review/)
 - [COG-014 · Informar del riesgo y la cobertura cuando un agente se abstiene](cog-014-report-risk-and-coverage-when-an-agent-abstains/)
+- [COG-015 · Transferir la precisión de alertas solo junto con la prevalencia](cog-015-transport-alert-precision-only-with-prevalence/)
+- [COG-016 · Hallar cuántas respuestas faltantes invierten la clasificación](cog-016-find-the-missing-answer-tipping-count/)
+- [COG-017 · Restar la tendencia de comparación antes de atribuir mejoras a la asistencia](cog-017-subtract-a-comparison-trend-before-crediting-assistance/)

@@ -26,3 +26,6 @@ sidebar:
 - [AUD-013 · Remuestrear sin cambiar solamente la etiqueta del reloj](aud-013-resample-without-relabeling-the-clock/)
 - [AUD-014 · Prever margen para ataques correlacionados](aud-014-budget-headroom-for-correlated-plucks/)
 - [AUD-015 · Acotar el error de cuantización antes de comparar WAV](aud-015-bound-quantization-error-before-comparing-wavs/)
+- [AUD-016 · Separar el desplazamiento continuo de la energía alterna](aud-016-separate-dc-offset-from-ac-energy/)
+- [AUD-017 · Informar de retardos de correlación ambiguos](aud-017-report-ambiguous-correlation-lags/)
+- [AUD-018 · Reconstruir el estéreo a partir de las componentes central y lateral](aud-018-recover-stereo-from-mid-and-side/)

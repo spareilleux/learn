@@ -24,3 +24,6 @@ sidebar:
 - [GAA-011 · Diagnose Interval Errors with a Confusion Table](gaa-011-diagnose-interval-errors-with-a-confusion-table/)
 - [GAA-012 · Cross Timbre with Interval in an Ear Trial](gaa-012-cross-timbre-with-interval-in-an-ear-trial/)
 - [GAA-013 · Choose a Voicing Diversity Key for the Task](gaa-013-choose-a-voicing-diversity-key-for-the-task/)
+- [GAA-014 · Hold Out Whole Transposition Families](gaa-014-hold-out-whole-transposition-families/)
+- [GAA-015 · Keep Uncertainty with a Practice Pass Rate](gaa-015-keep-uncertainty-with-a-practice-pass-rate/)
+- [GAA-016 · Separate Order Drift from a Practice Condition](gaa-016-separate-order-drift-from-a-practice-condition/)

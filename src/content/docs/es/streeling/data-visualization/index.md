@@ -27,3 +27,6 @@ sidebar:
 - [DV-014 · Representar la separación con signo de una pieza artesanal](dv-014-plot-signed-craft-clearance/)
 - [DV-015 · Mapear puntadas sin observar sin inventar agujeros](dv-015-map-missing-stitches-without-inventing-holes/)
 - [DV-016 · Comparar residuos de silueta emparejados](dv-016-compare-paired-silhouette-residuals/)
+- [DV-017 · Resumir los ejes de fibras sin inventar una dirección](dv-017-summarize-fibre-axes-without-inventing-a-direction/)
+- [DV-018 · Mostrar los defectos artesanales superpuestos mediante su unión](dv-018-show-overlapping-craft-defects-as-a-union/)
+- [DV-019 · Elegir un conjunto mínimo de vistas para rasgos declarados](dv-019-choose-a-minimal-view-set-for-declared-features/)

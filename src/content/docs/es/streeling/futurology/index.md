@@ -22,3 +22,5 @@ sidebar:
 - [FUT-009 · Comparar adopción por etapas y migración irreversible](fut-009-compare-staged-adoption-with-an-irreversible-migration/)
 - [FUT-010 · Proyectar la densidad del tejido antes de ampliar una escena](fut-010-project-weave-density-before-a-scene-expansion/)
 - [FUT-011 · Planear un cambio de representación de bordado con memoria](fut-011-plan-an-embroidery-representation-switch-with-memory/)
+- [FUT-012 · Presupuestar la peor masa de cola de un escenario de renderizado](fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario/)
+- [FUT-013 · Acotar un futuro flujo artesanal por su fracción secuencial](fut-013-bound-a-future-craft-workflow-by-its-serial-fraction/)

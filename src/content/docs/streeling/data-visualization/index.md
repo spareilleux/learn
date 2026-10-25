@@ -27,3 +27,6 @@ sidebar:
 - [DV-014 · Plot Signed Craft Clearance](dv-014-plot-signed-craft-clearance/)
 - [DV-015 · Map Missing Stitches without Inventing Holes](dv-015-map-missing-stitches-without-inventing-holes/)
 - [DV-016 · Compare Paired Silhouette Residuals](dv-016-compare-paired-silhouette-residuals/)
+- [DV-017 · Summarize Fibre Axes without Inventing a Direction](dv-017-summarize-fibre-axes-without-inventing-a-direction/)
+- [DV-018 · Show Overlapping Craft Defects as a Union](dv-018-show-overlapping-craft-defects-as-a-union/)
+- [DV-019 · Choose a Minimal View Set for Declared Features](dv-019-choose-a-minimal-view-set-for-declared-features/)

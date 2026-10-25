@@ -15,7 +15,7 @@ version: "0.1.0"
 
 Un agente prevé una carga entrante y propone compensarla antes de observar un error de salida. Esa vía de información difiere de la realimentación del residuo. La referencia directa ignora la estimación de perturbación; la propuesta la resta antes de dividir por la ganancia supuesta.
 
-El extracto oficial de Caltech consultado describe la compensación anticipada con una perturbación medida y su dependencia del modelo de planta. Solo estuvo disponible ese pasaje extraído; falló la descarga completa. Nuestra ecuación escalar estática es una simplificación construida, sin inferir ajustes de producción de la lectura. Permite ver el desajuste de estimación.
+El extracto oficial de Caltech consultado describe la compensación anticipada con una perturbación medida y su dependencia del modelo de planta. El extracto de búsqueda consultado procede del texto del 2009-02-22 enlazado abajo; falló la descarga del borrador de 2007 considerado inicialmente. Solo se leyó el pasaje extraído, no el capítulo completo. Nuestra ecuación escalar estática es una simplificación construida, sin inferir ajustes de producción de la lectura. Permite ver el desajuste de estimación.
 
 Calcule la salida con la perturbación real estipulada, no con la estimación usada para mandar. De lo contrario, el modelo confirmaría su propia predicción. Compare los residuos absolutos con la referencia directa. El control introduce una estimación errónea: ayudar en un caso no garantiza ayudar en otro. El DSL debe conservar el papel de cada cantidad.
 
@@ -29,7 +29,7 @@ El auxiliar de Learn separa metadatos, título y cuerpo en `parseModule` e index
 
 [Artefacto conservado del proyecto](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json)
 
-[Lectura primaria](https://www.cds.caltech.edu/~murray/books/AM08/pdf/cds101-complete_20Sep07.pdf)
+[Lectura primaria](https://www.cds.caltech.edu/~murray/books/AM08/pdf/am08-complete_22Feb09.pdf)
 
 ## Modelo fijo y control
 

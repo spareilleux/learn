@@ -25,3 +25,6 @@ sidebar:
 - [GTR-012 · Sélectionner les harmoniques naturelles par un point de contact](gtr-012-select-natural-harmonics-with-a-touch-node/)
 - [GTR-013 · Évaluer un bend avec un budget d’incertitude](gtr-013-judge-a-bend-with-an-uncertainty-budget/)
 - [GTR-014 · Compter les notes en legato séparément des coups de médiator](gtr-014-count-legato-notes-separately-from-pick-attacks/)
+- [GTR-015 · Échantillonner un vibrato sans effacer son mouvement](gtr-015-sample-a-vibrato-without-erasing-its-motion/)
+- [GTR-016 · Déplacer la limite pour une harmonique artificielle](gtr-016-move-the-boundary-for-an-artificial-harmonic/)
+- [GTR-017 · Vérifier la continuité du contact lors d’une substitution de doigt](gtr-017-check-contact-continuity-during-finger-substitution/)

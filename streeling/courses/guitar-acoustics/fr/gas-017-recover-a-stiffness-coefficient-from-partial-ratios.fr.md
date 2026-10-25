@@ -79,7 +79,7 @@ Utilisez le rapport principal et indiquez le coefficient retrouvé. Quelle relat
 
 <details><summary>Réponse 2</summary>
 
-Le coefficient attendu figure ci-dessous. Seule la relation normalisée du second partiel a servi à l’ajustement ; le premier partiel fixe toujours l’échelle fréquentielle.
+Le coefficient attendu figure ci-dessus. Seule la relation normalisée du second partiel a servi à l’ajustement ; le premier partiel fixe toujours l’échelle fréquentielle.
 
 </details>
 

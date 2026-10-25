@@ -25,3 +25,6 @@ sidebar:
 - [CYB-012 · Tester le retard de retour avant de réutiliser un gain](cyb-012-test-feedback-delay-before-reusing-a-gain/)
 - [CYB-013 · Borner l’ancienneté d’une observation avant une décision de contrôle](cyb-013-bound-observation-age-before-a-control-decision/)
 - [CYB-014 · Tester les bandes mortes avec des actions quantifiées](cyb-014-test-deadbands-with-quantized-actions/)
+- [CYB-015 · Propager la covariance dans une télémétrie lissée](cyb-015-carry-covariance-through-smoothed-telemetry/)
+- [CYB-016 · Éprouver l’anticipation face à une perturbation mal estimée](cyb-016-test-feedforward-against-disturbance-mismatch/)
+- [CYB-017 · Limiter la variation de commande séparément de son amplitude](cyb-017-limit-command-change-separately-from-amplitude/)

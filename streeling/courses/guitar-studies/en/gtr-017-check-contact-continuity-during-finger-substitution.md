@@ -144,7 +144,7 @@ Calculate overlap duration. Does overlap prove clean sound?
 
 <details><summary>Answer 3</summary>
 
-The duration is listed below. It establishes scheduled contact coexistence only; pressure and contact quality were not specified or measured.
+The duration is listed above. It establishes scheduled contact coexistence only; pressure and contact quality were not specified or measured.
 
 </details>
 

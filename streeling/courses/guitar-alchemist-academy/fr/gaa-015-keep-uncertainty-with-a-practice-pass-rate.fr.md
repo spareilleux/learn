@@ -75,7 +75,7 @@ Calculez le taux principal. Pourquoi ne suffit-il pas à la décision déclarée
 
 <details><summary>Réponse 1</summary>
 
-Le taux figure ci-dessous, mais la règle compare la borne inférieure au seuil prévu. Un pourcentage seul ne contient pas cette information d’incertitude.
+Le taux figure ci-dessus, mais la règle compare la borne inférieure au seuil prévu. Un pourcentage seul ne contient pas cette information d’incertitude.
 
 </details>
 

@@ -91,7 +91,7 @@ Calcule la media y la secuencia centrada. ¿Por qué conservar los límites del 
 
 <details><summary>Respuesta 1</summary>
 
-La media y la secuencia alterna del caso principal aparecen abajo. Cambiar los límites cambia la media; ni el nombre del archivo ni un control de picos aportan ese cálculo.
+La media y la secuencia alterna del caso principal aparecen arriba. Cambiar los límites cambia la media; ni el nombre del archivo ni un control de picos aportan ese cálculo.
 
 </details>
 

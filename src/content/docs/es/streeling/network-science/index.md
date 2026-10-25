@@ -24,3 +24,5 @@ sidebar:
 - [NET-011 · Separar alcanzabilidad y compatibilidad semántica](net-011-separate-reachability-from-semantic-compatibility/)
 - [NET-012 · Contabilizar dependencias compartidas en rutas redundantes](net-012-account-for-shared-dependencies-in-redundant-paths/)
 - [NET-013 · Trazar concurrencia causal con relojes vectoriales](net-013-trace-causal-concurrency-with-vector-clocks/)
+- [NET-014 · Acotar el caudal mediante un corte de capacidad](net-014-bound-throughput-with-a-capacity-cut/)
+- [NET-015 · Condensar dependencias mutuas antes de ordenar el trabajo](net-015-condense-mutual-dependencies-before-ordering-work/)

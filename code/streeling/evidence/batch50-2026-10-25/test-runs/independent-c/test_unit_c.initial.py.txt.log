@@ -1,0 +1,241 @@
+"""Characterize 16 authored finite cases; no scene, material or learner trial."""
+import itertools
+import json
+import math
+from fractions import Fraction
+from pathlib import Path
+import unittest
+
+PACKET_PATH = Path(__file__).resolve().parents[1] / 'unit-c.json'
+PACKET = json.loads(PACKET_PATH.read_text(encoding='utf-8'))
+COURSES = {c['code']: c for c in PACKET['courses']}
+SCOPE = 'Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance.'
+
+
+def q(value):
+    return Fraction(str(value))
+
+
+def require(condition, diagnostic):
+    if not condition:
+        raise ValueError(diagnostic)
+
+
+def calculate(code, v):
+    """Derive observations solely from actual authored input values."""
+    if code == 'PHY019':
+        m, g, s, c, mu = [q(v[k]) for k in ('mass_kg', 'g_m_s2', 'sin_theta', 'cos_theta', 'mu_static')]
+        require(m > 0 and g > 0 and c > 0 and mu >= 0 and s*s+c*c == 1, 'positive loads and normalized slope pair required')
+        normal, demand = m*g*c, m*g*s
+        capacity = mu*normal
+        return dict(normal_N=float(normal), demand_N=float(demand), capacity_N=float(capacity), reserve_N=float(capacity-demand), static_feasible=capacity >= demand)
+    if code == 'PHY020':
+        w, h, moment, young = [q(v[k]) for k in ('width_mm', 'height_mm', 'moment_Nmm', 'young_N_mm2')]
+        require(w > 0 and h > 0 and young > 0, 'positive section dimensions and modulus required')
+        ix, iy = w*h**3/12, h*w**3/12
+        return dict(I_x_mm4=float(ix), I_y_mm4=float(iy), curvature_x_per_mm=float(moment/(young*ix)), curvature_y_per_mm=float(moment/(young*iy)), ratio=float(iy/ix))
+    if code == 'PHY021':
+        m, incoming, e = [q(v[k]) for k in ('mass_kg', 'incoming_m_s', 'restitution')]
+        require(m > 0 and incoming < 0 and 0 <= e <= 1, 'fixed-wall approach and restitution domain required')
+        outgoing = -e*incoming
+        return dict(outgoing_m_s=float(outgoing), K_before_J=float(m*incoming**2/2), K_after_J=float(m*outgoing**2/2), retained_fraction=float(e**2), impulse_Ns=float(m*(outgoing-incoming)))
+    if code == 'VC017':
+        n, f, steps = q(v['near_m']), q(v['far_m']), v['quantizer_steps']
+        require(len(v['depths_m']) == 2 and 0 < n < f and type(steps) is int and steps > 0, 'two depths and a finite ordered camera interval required')
+        z = list(map(q, v['depths_m']))
+        require(all(n <= x <= f for x in z), 'depth must lie between clipping planes')
+        encoded = [(1/x-1/f)/(1/n-1/f) for x in z]
+        codes = [math.floor(steps*x+q('0.5')) for x in encoded]
+        return dict(encoded=list(map(float, encoded)), codes=codes, separated=codes[0] != codes[1])
+    if code == 'VC018':
+        source, back = v['source_straight'], v['backdrop_straight']
+        require(len(source) == len(back) == 3, 'RGB vectors must both have exactly three channels')
+        source, back = list(map(q, source)), list(map(q, back))
+        a, b = q(v['source_alpha']), q(v['backdrop_alpha'])
+        require(all(0 <= x <= 1 for x in source+back+[a,b]), 'linear channels and alphas lie in the closed unit interval')
+        premul = [a*x for x in source]
+        out = [premul[i]+(1-a)*b*back[i] for i in range(3)]
+        wrong = [a*premul[i]+(1-a)*b*back[i] for i in range(3)]
+        return dict(source_premultiplied=list(map(float,premul)), out_premultiplied=list(map(float,out)), out_alpha=float(a+(1-a)*b), double_multiplied=list(map(float,wrong)))
+    if code == 'VC019':
+        x, y, radius = [q(v[k]) for k in ('dx_du','dy_dv','uv_radius')]
+        require(x != 0 and y != 0 and radius > 0, 'nondegenerate diagonal patch and positive UV radius required')
+        stretches = [abs(x), abs(y)]
+        return dict(stretches=list(map(float,stretches)), area_scale=float(abs(x*y)), anisotropy=float(max(stretches)/min(stretches)), ellipse_axes=[float(radius*s) for s in stretches])
+    if code == 'DV017':
+        angles, tol = v['angles_deg'], v['zero_tolerance']
+        require(len(angles) == 2 and 0 < tol < 1, 'two equally weighted axes and a declared zero tolerance required')
+        doubled = [math.radians(2*x) for x in angles]
+        c, s = sum(map(math.cos,doubled))/len(angles), sum(map(math.sin,doubled))/len(angles)
+        r = math.hypot(c,s)
+        angle = None if r <= tol else math.degrees(math.atan2(s,c))/2 % 180
+        if angle is not None and (abs(angle-180) < tol or abs(angle) < tol):
+            angle = 0.0
+        return dict(C=c, S=s, R=r, axial_mean_deg=angle, arithmetic_mean_deg=sum(angles)/len(angles))
+    if code == 'DV018':
+        total, a, b, inter = [q(v[k]) for k in ('canvas_area','mask_a_area','mask_b_area','intersection_area')]
+        union = a+b-inter
+        require(0 <= inter <= min(a,b) and union <= total, 'intersection and canvas must admit an exclusive area partition')
+        return dict(a_only=float(a-inter), b_only=float(b-inter), both=float(inter), union=float(union), neither=float(total-union), naive_sum=float(a+b))
+    if code == 'DV019':
+        target, views = set(v['required']), v['views']
+        require(len(target) == len(v['required']) == 4 and len(views) == 4, 'four distinct required features and four named views required')
+        require(all(len(items) == len(set(items)) and set(items) <= target for items in views.values()), 'visibility rows must contain distinct declared feature identities')
+        names, covers = sorted(views), []
+        for count in range(len(names)+1):
+            for subset in itertools.combinations(names,count):
+                if set().union(*(set(views[n]) for n in subset)) >= target:
+                    covers.append(list(subset))
+            if covers:
+                break
+        available = set().union(*(set(items) for items in views.values()))
+        return dict(minimum_count=len(covers[0]) if covers else None, covers=covers, uncovered=sorted(target-available))
+    if code == 'SEM015':
+        vertices, weights, order = v['vertices'], list(map(q,v['weights'])), v['new_vertex_order']
+        require(len(vertices) == len(weights) == len(order) == 3 and all(len(p) == 2 for p in vertices), 'three planar vertices, weights and reorder slots required')
+        require(sorted(order) == [0,1,2] and all(type(i) is int for i in order), 'vertex order must be a complete permutation')
+        require(all(w >= 0 for w in weights) and sum(weights) == 1, 'nonnegative normalized barycentric weights required')
+        points = [list(map(q,p)) for p in vertices]
+        a,b,c = points
+        require((b[0]-a[0])*(c[1]-a[1]) != (b[1]-a[1])*(c[0]-a[0]), 'nondegenerate triangle required')
+        original = [sum(weights[i]*points[i][axis] for i in range(3)) for axis in range(2)]
+        new_weights = [weights[i] for i in order] if v['remap_weights'] else weights
+        new_points = [points[i] for i in order]
+        moved = [sum(new_weights[i]*new_points[i][axis] for i in range(3)) for axis in range(2)]
+        return dict(original=list(map(float,original)), remapped_weights=list(map(float,new_weights)), new_point=list(map(float,moved)), preserved=moved == original)
+    if code == 'SEM016':
+        nodes, edges = v['nodes'], v['edges']
+        require(len(nodes) == len(set(nodes)) == 3 and len(edges) == 3 and all(len(e) == 3 for e in edges), 'three distinct nodes and three parity edge triples required')
+        require(all(u in nodes and w in nodes and u != w and type(p) is int and p in (0,1) for u,w,p in edges), 'binary edges must name distinct triangle endpoints')
+        require(len({frozenset((u,w)) for u,w,p in edges}) == 3, 'parity aggregate applies to the complete declared triangle')
+        assignments=[]
+        for bits in itertools.product((0,1),repeat=3):
+            by_node=dict(zip(nodes,bits))  # Both arrays have length three above.
+            if all(by_node[u] ^ by_node[w] == p for u,w,p in edges):
+                assignments.append(list(bits))
+        parity=edges[0][2] ^ edges[1][2] ^ edges[2][2]
+        return dict(assignments=assignments, cycle_parity=parity, consistent=bool(assignments))
+    if code == 'SEM017':
+        origin, pitch = q(v['origin']), q(v['pitch'])
+        require(pitch > 0 and len(v['coordinates']) == 4 and v['index_rule'] in ('floor','trunc'), 'positive lattice pitch, four probes and a declared indexing rule required')
+        coords=list(map(q,v['coordinates']))
+        rule=math.floor if v['index_rule'] == 'floor' else math.trunc
+        indices=[rule((x-origin)/pitch) for x in coords]
+        owned=[origin+i*pitch <= coords[k] < origin+(i+1)*pitch for k,i in enumerate(indices)]
+        return dict(indices=indices, ownership=owned, violating_coordinates=[v['coordinates'][k] for k,ok in enumerate(owned) if not ok])
+    if code == 'PHI012':
+        require(len(v['difference_interval']) == 2, 'closed interval needs exactly two endpoints')
+        lo,hi=map(q,v['difference_interval']); margin=q(v['equivalence_margin'])
+        require(lo <= hi and margin > 0, 'ordered feasible interval and positive equivalence margin required')
+        return dict(contains_zero=lo <= 0 <= hi, equivalent=-margin <= lo and hi <= margin, compatible_with_equivalence=hi >= -margin and lo <= margin, width=float(hi-lo))
+    if code == 'PHI013':
+        require(len(v['domain']) == 2 and all(type(x) is int for x in v['domain']), 'two inclusive integer domain endpoints required')
+        lo,hi=v['domain']; require(lo <= hi, 'ordered finite integer domain required')
+        points=list(itertools.product(range(lo,hi+1),repeat=2))
+        def satisfies(point, subset):
+            x,y=point
+            predicates=dict(A=x >= v['lower_x'], B=x <= v['upper_x'], C=y >= v['lower_y'], D=x+y <= v['sum_limit'])
+            return all(predicates[k] for k in subset)
+        def solutions(subset):
+            return [p for p in points if satisfies(p,subset)]
+        cores=[]
+        for size in range(1,5):
+            for subset in itertools.combinations('ABCD',size):
+                if not solutions(subset) and all(solutions(tuple(k for k in subset if k != removed)) for removed in subset):
+                    cores.append(list(subset))
+        witnesses={}
+        if cores == [['A','B']]:
+            for removed in cores[0]:
+                witnesses['remove_'+removed]=list(solutions([k for k in cores[0] if k != removed])[0])
+        return dict(full_solution_count=len(solutions('ABCD')), minimal_cores=cores, core_deletion_witnesses=witnesses)
+    if code == 'FUT012':
+        a,b,p = [list(map(q,v[k])) for k in ('losses_a','losses_b','probabilities')]
+        require(len(a) == len(b) == len(p) == 4, 'four losses per strategy and four corresponding probability masses required')
+        alpha=q(v['alpha'])
+        require(all(x >= 0 for x in p) and sum(p) == 1 and 0 < alpha < 1, 'normalized nonnegative masses and nonempty interior tail required')
+        def summarize(losses):
+            pairs=sorted(zip(losses,p))  # Equal nonzero lengths established above.
+            mean=sum(loss*mass for loss,mass in pairs)
+            cumulative=Fraction(0); quantile=None
+            for loss,mass in pairs:
+                cumulative += mass
+                if cumulative >= alpha:
+                    quantile=loss; break
+            left=1-alpha; tail=Fraction(0)
+            for loss,mass in reversed(pairs):
+                take=min(left,mass); tail += take*loss; left -= take
+                if left == 0: break
+            require(left == 0, 'all requested tail mass must be filled')
+            return mean,quantile,tail/(1-alpha)
+        ma,va,ta=summarize(a); mb,vb,tb=summarize(b)
+        return dict(mean_a=float(ma), mean_b=float(mb), var_a=float(va), tail_a=float(ta), tail_b=float(tb), mean_choice='A' if ma < mb else ('B' if mb < ma else 'tie'), tail_choice='A' if ta < tb else ('B' if tb < ta else 'tie'))
+    if code == 'FUT013':
+        total,serial=q(v['baseline_minutes']),q(v['serial_fraction']); workers=v['workers']
+        require(total > 0 and 0 < serial <= 1 and type(workers) is int and workers > 0, 'fixed positive baseline, serial share and integer worker count required')
+        s,p=total*serial,total*(1-serial)/workers
+        return dict(serial_minutes=float(s), parallel_minutes=float(p), ideal_minutes=float(s+p), speedup=float(total/(s+p)), asymptotic_speedup=float(1/serial))
+    raise ValueError('unassigned course '+code)
+
+
+class UnitC(unittest.TestCase):
+    def equal_tree(self, observed, expected):
+        if isinstance(expected,dict):
+            self.assertIsInstance(observed,dict); self.assertEqual(set(observed),set(expected))
+            for key in expected: self.equal_tree(observed[key],expected[key])
+        elif isinstance(expected,list):
+            self.assertIsInstance(observed,list); self.assertEqual(len(observed),len(expected))
+            for i in range(len(expected)): self.equal_tree(observed[i],expected[i])
+        elif isinstance(expected,bool) or expected is None:
+            self.assertIs(observed,expected)
+        elif isinstance(expected,(int,float)):
+            self.assertNotIsInstance(observed,bool)
+            self.assertTrue(math.isclose(observed,expected,rel_tol=1e-11,abs_tol=1e-11),(observed,expected))
+        else: self.assertEqual(observed,expected)
+
+    def check_course(self, code, model, negative, course=None):
+        packet=(course if course is not None else COURSES[code])['authored_model']
+        for case,p,fixed in (('model',packet,model),('negative',packet['negative_control'],negative)):
+            try:
+                observed=calculate(code,p['values'])
+            except (ValueError,KeyError,TypeError,ZeroDivisionError) as error:
+                observed={'diagnostic':str(error)}
+            print('OBSERVATION '+json.dumps(dict(code=code,case=case,observed=observed,expected=fixed,scope=SCOPE),sort_keys=True),flush=True)
+            self.equal_tree(observed,fixed)
+            self.equal_tree(p['expected'],fixed)
+
+    def test_phy019(self):
+        self.check_course('PHY019',dict(normal_N=16,demand_N=12,capacity_N=12.8,reserve_N=.8,static_feasible=True),dict(normal_N=16,demand_N=12,capacity_N=8,reserve_N=-4,static_feasible=False))
+    def test_phy020(self):
+        self.check_course('PHY020',dict(I_x_mm4=27,I_y_mm4=432,curvature_x_per_mm=1/3000,curvature_y_per_mm=1/48000,ratio=16),dict(I_x_mm4=108,I_y_mm4=108,curvature_x_per_mm=1/12000,curvature_y_per_mm=1/12000,ratio=1))
+    def test_phy021(self):
+        self.check_course('PHY021',dict(outgoing_m_s=2,K_before_J=4,K_after_J=1,retained_fraction=.25,impulse_Ns=3),dict(outgoing_m_s=4,K_before_J=4,K_after_J=4,retained_fraction=1,impulse_Ns=4))
+    def test_vc017(self):
+        self.check_course('VC017',dict(encoded=[1/11,899/9999],codes=[23,23],separated=False),dict(encoded=[9/19,899/1919],codes=[121,119],separated=True))
+    def test_vc018(self):
+        self.check_course('VC018',dict(source_premultiplied=[.25,0,0],out_premultiplied=[.25,0,.75],out_alpha=1,double_multiplied=[.0625,0,.75]),dict(source_premultiplied=[1,0,0],out_premultiplied=[1,0,0],out_alpha=1,double_multiplied=[1,0,0]))
+    def test_vc019(self):
+        self.check_course('VC019',dict(stretches=[4,1],area_scale=4,anisotropy=4,ellipse_axes=[.4,.1]),dict(stretches=[2,2],area_scale=4,anisotropy=1,ellipse_axes=[.2,.2]))
+    def test_dv017(self):
+        self.check_course('DV017',dict(C=.9396926207859084,S=0,R=.9396926207859084,axial_mean_deg=0,arithmetic_mean_deg=90),dict(C=0,S=0,R=0,axial_mean_deg=None,arithmetic_mean_deg=45))
+    def test_dv018(self):
+        self.check_course('DV018',dict(a_only=20,b_only=15,both=10,union=45,neither=55,naive_sum=55),dict(a_only=30,b_only=25,both=0,union=55,neither=45,naive_sum=55))
+    def test_dv019(self):
+        self.check_course('DV019',dict(minimum_count=2,covers=[['back','side'],['front','top']],uncovered=[]),dict(minimum_count=None,covers=[],uncovered=['D']))
+    def test_sem015(self):
+        self.check_course('SEM015',dict(original=[2,.5],remapped_weights=[.25,.25,.5],new_point=[2,.5],preserved=True),dict(original=[2,.5],remapped_weights=[.25,.5,.25],new_point=[1,1],preserved=False))
+    def test_sem016(self):
+        self.check_course('SEM016',dict(assignments=[[0,1,0],[1,0,1]],cycle_parity=0,consistent=True),dict(assignments=[],cycle_parity=1,consistent=False))
+    def test_sem017(self):
+        self.check_course('SEM017',dict(indices=[-1,0,0,1],ownership=[True,True,True,True],violating_coordinates=[]),dict(indices=[0,0,0,1],ownership=[False,True,True,True],violating_coordinates=[-.1]))
+    def test_phi012(self):
+        self.check_course('PHI012',dict(contains_zero=True,equivalent=True,compatible_with_equivalence=True,width=.25),dict(contains_zero=True,equivalent=False,compatible_with_equivalence=True,width=1))
+    def test_phi013(self):
+        self.check_course('PHI013',dict(full_solution_count=0,minimal_cores=[['A','B']],core_deletion_witnesses=dict(remove_A=[0,0],remove_B=[8,0])),dict(full_solution_count=3,minimal_cores=[],core_deletion_witnesses={}))
+    def test_fut012(self):
+        self.check_course('FUT012',dict(mean_a=3.6,mean_b=4,var_a=3,tail_a=11.5,tail_b=4,mean_choice='A',tail_choice='B'),dict(mean_a=2,mean_b=4,var_a=3,tail_a=3.5,tail_b=4,mean_choice='A',tail_choice='A'))
+    def test_fut013(self):
+        self.check_course('FUT013',dict(serial_minutes=7,parallel_minutes=5.25,ideal_minutes=12.25,speedup=16/7,asymptotic_speedup=4),dict(serial_minutes=16.8,parallel_minutes=2.8,ideal_minutes=19.6,speedup=10/7,asymptotic_speedup=5/3))
+
+
+if __name__ == '__main__':
+    unittest.main()

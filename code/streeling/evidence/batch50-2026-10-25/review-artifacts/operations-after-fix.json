@@ -1,0 +1,22 @@
+{
+  "started_date": "2026-10-25",
+  "tag": "operations-after-fix",
+  "args": [
+    "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "C:\\tmp\\streeling-operation-probe-next.py",
+    "worker"
+  ],
+  "exit_code": 0,
+  "inputs": {
+    "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-25\\tests\\test_unit_a.py": "28a5208287cc54c383be878e73593d965b1613463ad03590d50e3545cf8aa374",
+    "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-25\\unit-a.json": "dd20b6310052520a2888d7f51535da54318fba1dfd9eb159815750f0df3c5b58"
+  },
+  "probe_sha256": "631adb79f14302762586afe2fe266340764c2c6e90fbfb87598efafbb6eff4c0",
+  "log": "code/streeling/evidence/batch50-2026-10-25/test-runs/operations-after-fix.log",
+  "log_sha256": "c07a779185835de426058f57278c7e1fc6f2249d1dc5c791571855d0f0a22b16",
+  "canonical_bytes_unchanged": true,
+  "scope": "Two actual invalid operation token probes: both must be rejected before fixed model/packet assertions can pass. This is test-detector correctness, not learner/runtime evidence."
+}

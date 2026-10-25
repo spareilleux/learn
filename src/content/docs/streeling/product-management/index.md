@@ -22,3 +22,5 @@ sidebar:
 - [PM-009 · Separate Release Adoption from Artifact Downloads](pm-009-separate-release-adoption-from-artifact-downloads/)
 - [PM-010 · Standardize Dogfood Failures to a Declared Task Mix](pm-010-standardize-dogfood-failures-to-a-declared-task-mix/)
 - [PM-011 · Include Review and Correction in Automation Break Even](pm-011-include-review-and-correction-in-automation-break-even/)
+- [PM-012 · Order Review Work by Weighted Completion Cost](pm-012-order-review-work-by-weighted-completion-cost/)
+- [PM-013 · Retain Censoring in Time to First Task Use](pm-013-retain-censoring-in-time-to-first-task-use/)

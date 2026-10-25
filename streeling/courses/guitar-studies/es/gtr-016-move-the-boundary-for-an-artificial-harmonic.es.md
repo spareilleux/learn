@@ -79,7 +79,7 @@ Calcule la fracción vibrante tras pisar la cuerda. ¿Qué extremo permanece fij
 
 <details><summary>Respuesta 1</summary>
 
-La fracción aparece abajo y el puente sigue siendo el origen. Se desplaza el extremo pisado; una fracción de la cuerda inicial no es necesariamente esa fracción del segmento restante.
+La fracción aparece arriba y el puente sigue siendo el origen. Se desplaza el extremo pisado; una fracción de la cuerda inicial no es necesariamente esa fracción del segmento restante.
 
 </details>
 

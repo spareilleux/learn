@@ -85,7 +85,7 @@ Convertissez la liste principale en fréquences avec sa référence déclarée.
 
 <details><summary>Réponse 1</summary>
 
-Les fréquences attendues figurent ci-dessous. Les numéros de notes ne les déterminent pas seuls si le récepteur ignore la référence de conversion.
+Les fréquences attendues figurent ci-dessus. Les numéros de notes ne les déterminent pas seuls si le récepteur ignore la référence de conversion.
 
 </details>
 

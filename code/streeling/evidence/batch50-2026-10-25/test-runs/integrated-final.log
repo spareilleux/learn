@@ -1,0 +1,255 @@
+test_AUD016 (test_unit_a.UnitA.test_AUD016) ... 
+OBSERVATION {"code": "AUD016", "case": "model", "observed": {"mean": 0.5, "ac_samples": [-0.5, 0.5, -0.5, 0.5], "total_ms": 0.5, "ac_ms": 0.25, "total_rms": 0.7071067811865476, "ac_rms": 0.5}, "expected": {"mean": 0.5, "ac_samples": [-0.5, 0.5, -0.5, 0.5], "total_ms": 0.5, "ac_ms": 0.25, "total_rms": 0.7071067811865476, "ac_rms": 0.5}, "scope": "Finite normalized real samples; record mean and squared amplitudes, not streaming filtering or joules."}
+
+OBSERVATION {"code": "AUD016", "case": "negative", "observed": {"mean": 0.0, "ac_samples": [-0.5, 0.5, -0.5, 0.5], "total_ms": 0.25, "ac_ms": 0.25, "total_rms": 0.5, "ac_rms": 0.5}, "expected": {"mean": 0, "ac_samples": [-0.5, 0.5, -0.5, 0.5], "total_ms": 0.25, "ac_ms": 0.25, "total_rms": 0.5, "ac_rms": 0.5}, "scope": "Finite normalized real samples; record mean and squared amplitudes, not streaming filtering or joules."}
+ok
+test_AUD017 (test_unit_a.UnitA.test_AUD017) ... 
+OBSERVATION {"code": "AUD017", "case": "model", "observed": {"correlation": [0, 2, 0, -2], "signed_argmax": [1], "absolute_argmax": [1, 3]}, "expected": {"correlation": [0, 2, 0, -2], "signed_argmax": [1], "absolute_argmax": [1, 3]}, "scope": "Equal-length circular real records and listed lag direction; no zero padding or latency measurement."}
+
+OBSERVATION {"code": "AUD017", "case": "negative", "observed": {"correlation": [0, 1, 0, 0], "signed_argmax": [1], "absolute_argmax": [1]}, "expected": {"correlation": [0, 1, 0, 0], "signed_argmax": [1], "absolute_argmax": [1]}, "scope": "Equal-length circular real records and listed lag direction; no zero padding or latency measurement."}
+ok
+test_AUD018 (test_unit_a.UnitA.test_AUD018) ... 
+OBSERVATION {"code": "AUD018", "case": "model", "observed": {"mid": [0.7071067811865475, 0.7071067811865475], "side": [0.7071067811865475, -0.7071067811865475], "left_out": [0.9999999999999999, 0.0], "right_out": [0.0, 0.9999999999999999], "input_energy": 2, "output_energy": 1.9999999999999996}, "expected": {"mid": [0.7071067811865476, 0.7071067811865476], "side": [0.7071067811865476, -0.7071067811865476], "left_out": [1, 0], "right_out": [0, 1], "input_energy": 2, "output_energy": 2}, "scope": "Synchronous aligned channel pairs, orthonormal mid/side matrix and declared side gain; no perception."}
+
+OBSERVATION {"code": "AUD018", "case": "negative", "observed": {"mid": [0.7071067811865475, 0.7071067811865475], "side": [0.7071067811865475, -0.7071067811865475], "left_out": [0.49999999999999994, 0.49999999999999994], "right_out": [0.49999999999999994, 0.49999999999999994], "input_energy": 2, "output_energy": 0.9999999999999998}, "expected": {"mid": [0.7071067811865476, 0.7071067811865476], "side": [0.7071067811865476, -0.7071067811865476], "left_out": [0.5, 0.5], "right_out": [0.5, 0.5], "input_energy": 2, "output_energy": 1}, "scope": "Synchronous aligned channel pairs, orthonormal mid/side matrix and declared side gain; no perception."}
+ok
+test_GAA014 (test_unit_a.UnitA.test_GAA014) ... 
+OBSERVATION {"code": "GAA014", "case": "model", "observed": {"overlap": [[0, 4, 7]], "family_disjoint": false, "distinct_item_ids": 4}, "expected": {"overlap": [[0, 4, 7]], "family_disjoint": false, "distinct_item_ids": 4}, "scope": "Ordered offset keys and cross-partition intersection only; no learner or statistical independence evidence."}
+
+OBSERVATION {"code": "GAA014", "case": "negative", "observed": {"overlap": [], "family_disjoint": true, "distinct_item_ids": 4}, "expected": {"overlap": [], "family_disjoint": true, "distinct_item_ids": 4}, "scope": "Ordered offset keys and cross-partition intersection only; no learner or statistical independence evidence."}
+ok
+test_GAA015 (test_unit_a.UnitA.test_GAA015) ... 
+OBSERVATION {"code": "GAA015", "case": "model", "observed": {"rate": 0.8, "lower": 0.49015684672072335, "upper": 0.9433190520193067, "established": false}, "expected": {"rate": 0.8, "lower": 0.49015684672072346, "upper": 0.9433190520193067, "established": false}, "scope": "Stipulated iid Bernoulli counts, Wilson z=1.96 and prospective lower endpoint rule; no real mastery claim."}
+
+OBSERVATION {"code": "GAA015", "case": "negative", "observed": {"rate": 0.8, "lower": 0.7111690380734976, "upper": 0.8666340774409012, "established": true}, "expected": {"rate": 0.8, "lower": 0.7111690380734976, "upper": 0.8666340774409013, "established": true}, "scope": "Stipulated iid Bernoulli counts, Wilson z=1.96 and prospective lower endpoint rule; no real mastery claim."}
+ok
+test_GAA016 (test_unit_a.UnitA.test_GAA016) ... 
+OBSERVATION {"code": "GAA016", "case": "model", "observed": {"scores": [4, 5, 6, 7], "mean_a": 5.5, "mean_b": 5.5, "contrast": 0.0}, "expected": {"scores": [4, 5, 6, 7], "mean_a": 5.5, "mean_b": 5.5, "contrast": 0}, "scope": "Four deterministic equal-spaced trials with linear drift and zero effects; no randomized trial."}
+
+OBSERVATION {"code": "GAA016", "case": "negative", "observed": {"scores": [4, 5, 6, 7], "mean_a": 5.0, "mean_b": 6.0, "contrast": 1.0}, "expected": {"scores": [4, 5, 6, 7], "mean_a": 5, "mean_b": 6, "contrast": 1}, "scope": "Four deterministic equal-spaced trials with linear drift and zero effects; no randomized trial."}
+ok
+test_GAS015 (test_unit_a.UnitA.test_GAS015) ... 
+OBSERVATION {"code": "GAS015", "case": "model", "observed": {"observed": [1.0, 6.123233995736766e-17, -0.25, -3.061616997868383e-17], "zero_modes": [2, 4]}, "expected": {"observed": [1, 0, -0.25, 0], "zero_modes": [2, 4]}, "scope": "Four fixed-end ideal sine modes and signed point displacement; no pickup voltage or spectrum measurement."}
+
+OBSERVATION {"code": "GAS015", "case": "negative", "observed": {"observed": [0.7071067811865476, 0.5, 0.1767766952966369, 1.5308084989341915e-17], "zero_modes": [4]}, "expected": {"observed": [0.7071067811865476, 0.5, 0.1767766952966369, 0], "zero_modes": [4]}, "scope": "Four fixed-end ideal sine modes and signed point displacement; no pickup voltage or spectrum measurement."}
+ok
+test_GAS016 (test_unit_a.UnitA.test_GAS016) ... 
+OBSERVATION {"code": "GAS016", "case": "model", "observed": {"extension_m": 0.0001999800039989008, "tension_n": 10.1999800039989, "ideal_f_hz": 100.0, "frequency_hz": 100.9747574562156, "error_cents": 16.79361678856818}, "expected": {"extension_m": 0.0001999800039989008, "tension_n": 10.1999800039989, "ideal_f_hz": 100, "frequency_hz": 100.9747574562156, "error_cents": 16.79361678856818}, "scope": "Symmetric SI geometry, linear axial spring, fixed density, one vibrating half; no setup calibration."}
+
+OBSERVATION {"code": "GAS016", "case": "negative", "observed": {"extension_m": 0.0, "tension_n": 10.0, "ideal_f_hz": 100.0, "frequency_hz": 100.0, "error_cents": 0.0}, "expected": {"extension_m": 0, "tension_n": 10, "ideal_f_hz": 100, "frequency_hz": 100, "error_cents": 0}, "scope": "Symmetric SI geometry, linear axial spring, fixed density, one vibrating half; no setup calibration."}
+ok
+test_GAS017 (test_unit_a.UnitA.test_GAS017) ... 
+OBSERVATION {"code": "GAS017", "case": "model", "observed": {"B": 0.010000000000000009, "predicted_third_squared_ratio": 1.0792079207920793, "held_out_residual": 0.0, "valid": true}, "expected": {"B": 0.01, "predicted_third_squared_ratio": 1.0792079207920793, "held_out_residual": 0, "valid": true}, "scope": "Exact normalized second/third partial ratios and nonnegative coefficient family; no engine mapping."}
+
+OBSERVATION {"code": "GAS017", "case": "negative", "observed": {"B": -0.0033222591362126277, "valid": false}, "expected": {"B": -0.0033222591362126247, "valid": false}, "scope": "Exact normalized second/third partial ratios and nonnegative coefficient family; no engine mapping."}
+ok
+test_GTR015 (test_unit_a.UnitA.test_GTR015) ... 
+OBSERVATION {"code": "GTR015", "case": "model", "observed": {"cents": [0.0, 25.0, 3.061616997868383e-15, -25.0, -6.123233995736766e-15], "period_s": 0.5, "peak_to_peak_cents": 50}, "expected": {"cents": [0, 25, 0, -25, 0], "period_s": 0.5, "peak_to_peak_cents": 50}, "scope": "Sinusoidal authored cents at exact time grid and zero phase; continuous extent distinct from samples."}
+
+OBSERVATION {"code": "GTR015", "case": "negative", "observed": {"cents": [0.0, 3.061616997868383e-15, -6.123233995736766e-15, 9.184850993605149e-15, -1.2246467991473532e-14], "period_s": 0.25, "peak_to_peak_cents": 50}, "expected": {"cents": [0, 0, 0, 0, 0], "period_s": 0.25, "peak_to_peak_cents": 50}, "scope": "Sinusoidal authored cents at exact time grid and zero phase; continuous extent distinct from samples."}
+ok
+test_GTR016 (test_unit_a.UnitA.test_GTR016) ... 
+OBSERVATION {"code": "GTR016", "case": "model", "observed": {"vibrating_fraction": 0.6674199270850172, "base_hz": 164.81377845643496, "touch_fraction_from_bridge": 0.3337099635425086, "sounding_hz": 329.6275569128699, "fixed_touch_local": 0.7491535384383408}, "expected": {"vibrating_fraction": 0.6674199270850172, "base_hz": 164.81377845643496, "touch_fraction_from_bridge": 0.3337099635425086, "sounding_hz": 329.6275569128699, "fixed_touch_local": 0.7491535384383408}, "scope": "Ideal equal-tempered lengths, bridge origin and midpoint mode; no performed harmonic or contact dynamics."}
+
+OBSERVATION {"code": "GTR016", "case": "negative", "observed": {"vibrating_fraction": 1.0, "base_hz": 110.0, "touch_fraction_from_bridge": 0.5, "sounding_hz": 220.0, "fixed_touch_local": 0.5}, "expected": {"vibrating_fraction": 1, "base_hz": 110, "touch_fraction_from_bridge": 0.5, "sounding_hz": 220, "fixed_touch_local": 0.5}, "scope": "Ideal equal-tempered lengths, bridge origin and midpoint mode; no performed harmonic or contact dynamics."}
+ok
+test_GTR017 (test_unit_a.UnitA.test_GTR017) ... 
+OBSERVATION {"code": "GTR017", "case": "model", "observed": {"union_s": [[0.0, 1.0]], "gaps_s": [], "overlap_s": 0.1, "continuous": true}, "expected": {"union_s": [[0, 1]], "gaps_s": [], "overlap_s": 0.1, "continuous": true}, "scope": "Two same-target half-open contact intervals; necessary schedule coverage only, no clean-sound proof."}
+
+OBSERVATION {"code": "GTR017", "case": "negative", "observed": {"union_s": [[0.0, 0.6], [0.7, 1.0]], "gaps_s": [[0.6, 0.7]], "overlap_s": 0.0, "continuous": false}, "expected": {"union_s": [[0, 0.6], [0.7, 1]], "gaps_s": [[0.6, 0.7]], "overlap_s": 0, "continuous": false}, "scope": "Two same-target half-open contact intervals; necessary schedule coverage only, no clean-sound proof."}
+ok
+test_MCL015 (test_unit_a.UnitA.test_MCL015) ... 
+OBSERVATION {"code": "MCL015", "case": "model", "observed": {"release_times": [2, 2], "scheduled_holds": [2, 1]}, "expected": {"release_times": [2, 2], "scheduled_holds": [2, 1]}, "scope": "One damper interval and distinct event times; scheduled release commands, not acoustic silence."}
+
+OBSERVATION {"code": "MCL015", "case": "negative", "observed": {"release_times": [0.75, 1.5], "scheduled_holds": [0.75, 0.5]}, "expected": {"release_times": [0.75, 1.5], "scheduled_holds": [0.75, 0.5]}, "scope": "One damper interval and distinct event times; scheduled release commands, not acoustic silence."}
+ok
+test_MCL016 (test_unit_a.UnitA.test_MCL016) ... 
+OBSERVATION {"code": "MCL016", "case": "model", "observed": {"note_intervals": {"a": [0, 4], "b": [0, 2]}, "cursor_states": [0, 4, 0, 2, 4], "final_cursor": 4, "valid": true}, "expected": {"note_intervals": {"a": [0, 4], "b": [0, 2]}, "cursor_states": [0, 4, 0, 2, 4], "final_cursor": 4, "valid": true}, "scope": "Positive fixed division durations, one measure, note/backup/forward only; no parser conformance."}
+
+OBSERVATION {"code": "MCL016", "case": "negative", "observed": {"note_intervals": {"a": [0, 4], "b": [2, 4]}, "cursor_states": [0, 4, 2, 4, 6], "final_cursor": 6, "valid": false}, "expected": {"note_intervals": {"a": [0, 4], "b": [2, 4]}, "cursor_states": [0, 4, 2, 4, 6], "final_cursor": 6, "valid": false}, "scope": "Positive fixed division durations, one measure, note/backup/forward only; no parser conformance."}
+ok
+test_MCL017 (test_unit_a.UnitA.test_MCL017) ... 
+OBSERVATION {"code": "MCL017", "case": "model", "observed": {"slope_bpm_per_quarter": 15.0, "duration_s": 2.772588722239781, "endpoint_average_duration_s": 2.6666666666666665}, "expected": {"slope_bpm_per_quarter": 15, "duration_s": 2.772588722239781, "endpoint_average_duration_s": 2.6666666666666665}, "scope": "Positive beat-linear BPM ramp, quarter-beat coordinate and constant limit; no scheduler observation."}
+
+OBSERVATION {"code": "MCL017", "case": "negative", "observed": {"slope_bpm_per_quarter": 0.0, "duration_s": 4.0, "endpoint_average_duration_s": 4.0}, "expected": {"slope_bpm_per_quarter": 0, "duration_s": 4, "endpoint_average_duration_s": 4}, "scope": "Positive beat-linear BPM ramp, quarter-beat coordinate and constant limit; no scheduler observation."}
+ok
+test_WML014 (test_unit_a.UnitA.test_WML014) ... 
+OBSERVATION {"code": "WML014", "case": "model", "observed": {"target_cents": 386.3137138648348, "step": 6, "represented_cents": 378.94736842105266, "error_cents": -7.366345443782166}, "expected": {"target_cents": 386.3137138648348, "step": 6, "represented_cents": 378.94736842105266, "error_cents": -7.366345443782166}, "scope": "One positive ratio, equal octave division and nearest ties upward; no cultural or tuning endorsement."}
+
+OBSERVATION {"code": "WML014", "case": "negative", "observed": {"target_cents": 386.3137138648348, "step": 4, "represented_cents": 400.0, "error_cents": 13.686286135165176}, "expected": {"target_cents": 386.3137138648348, "step": 4, "represented_cents": 400, "error_cents": 13.686286135165204}, "scope": "One positive ratio, equal octave division and nearest ties upward; no cultural or tuning endorsement."}
+ok
+test_WML015 (test_unit_a.UnitA.test_WML015) ... 
+OBSERVATION {"code": "WML015", "case": "model", "observed": {"frequencies_hz": [442.0, 884.0], "calibration_ratio": 1.0045454545454546, "calibration_cents": 7.851415040126504, "octave_ratio": 2.0}, "expected": {"frequencies_hz": [442, 884], "calibration_ratio": 1.0045454545454546, "calibration_cents": 7.851415040126504, "octave_ratio": 2}, "scope": "Two specified MIDI notes with reference-bearing equal-tempered frequency law; no renderer fidelity."}
+
+OBSERVATION {"code": "WML015", "case": "negative", "observed": {"frequencies_hz": [440.0, 880.0], "calibration_ratio": 1.0, "calibration_cents": 0.0, "octave_ratio": 2.0}, "expected": {"frequencies_hz": [440, 880], "calibration_ratio": 1, "calibration_cents": 0, "octave_ratio": 2}, "scope": "Two specified MIDI notes with reference-bearing equal-tempered frequency law; no renderer fidelity."}
+ok
+test_WML016 (test_unit_a.UnitA.test_WML016) ... 
+OBSERVATION {"code": "WML016", "case": "model", "observed": {"degrees": {"1": 0, "5": 6, "7": 10, "9": 14}, "pitch_classes": [0, 2, 6, 10], "valid": true}, "expected": {"degrees": {"1": 0, "5": 6, "7": 10, "9": 14}, "pitch_classes": [0, 2, 6, 10], "valid": true}, "scope": "Root zero, ordered strict add/alter/subtract edits; authored collision policy, not full MusicXML semantics."}
+
+OBSERVATION {"code": "WML016", "case": "negative", "observed": {"valid": false, "rejected_operation_index": 1, "reason": "duplicate_degree", "degree": 5}, "expected": {"valid": false, "rejected_operation_index": 1, "reason": "duplicate_degree", "degree": 5}, "scope": "Root zero, ordered strict add/alter/subtract edits; authored collision policy, not full MusicXML semantics."}
+ok
+test_cog015 (test_unit_b.UnitB.test_cog015) ... 
+OBSERVATION {"case": "model", "code": "COG015", "expected": {"alerts": 170, "false_positives": 90, "precision": 0.47058823529411764, "true_positives": 80}, "observed": {"alerts": 170, "false_positives": 90, "precision": 0.47058823529411764, "true_positives": 80}, "scope": "Expected class counts with fixed threshold and transported conditional rates; no observed reviewer."}
+
+OBSERVATION {"case": "negative", "code": "COG015", "expected": {"alerts": 450, "false_positives": 50, "precision": 0.8888888888888888, "true_positives": 400}, "observed": {"alerts": 450, "false_positives": 50, "precision": 0.8888888888888888, "true_positives": 400}, "scope": "Expected class counts with fixed threshold and transported conditional rates; no observed reviewer."}
+ok
+test_cog016 (test_unit_b.UnitB.test_cog016) ... 
+OBSERVATION {"case": "model", "code": "COG016", "expected": {"comparison_rate": 0.7, "identified_strict_superiority": false, "lower": 0.6, "minimum_missing_successes_for_strict_superiority": 2, "upper": 1}, "observed": {"comparison_rate": 0.7, "identified_strict_superiority": false, "lower": 0.6, "minimum_missing_successes_for_strict_superiority": 2, "upper": 1}, "scope": "Binary missing completions enumerated with strict crossing; descriptive sensitivity, no probability or causal effect."}
+
+OBSERVATION {"case": "negative", "code": "COG016", "expected": {"comparison_rate": 0.7, "identified_strict_superiority": false, "lower": 0.6, "minimum_missing_successes_for_strict_superiority": null, "upper": 0.6}, "observed": {"comparison_rate": 0.7, "identified_strict_superiority": false, "lower": 0.6, "minimum_missing_successes_for_strict_superiority": null, "upper": 0.6}, "scope": "Binary missing completions enumerated with strict crossing; descriptive sensitivity, no probability or causal effect."}
+ok
+test_cog017 (test_unit_b.UnitB.test_cog017) ... 
+OBSERVATION {"case": "model", "code": "COG017", "expected": {"assisted_change": 0.3, "comparison_change": 0.1, "contrast": 0.2}, "observed": {"assisted_change": 0.3, "comparison_change": 0.1, "contrast": 0.2}, "scope": "Two-group two-period arithmetic; untreated parallel trends and causal benefit unverified."}
+
+OBSERVATION {"case": "negative", "code": "COG017", "expected": {"assisted_change": 0.3, "comparison_change": 0.3, "contrast": 0}, "observed": {"assisted_change": 0.3, "comparison_change": 0.3, "contrast": 0}, "scope": "Two-group two-period arithmetic; untreated parallel trends and causal benefit unverified."}
+ok
+test_cs021 (test_unit_b.UnitB.test_cs021) ... 
+OBSERVATION {"case": "model", "code": "CS021", "expected": {"accepted": false, "error_count": 3, "errors": ["sample_rate_hz", "channels", "frames"]}, "observed": {"accepted": false, "error_count": 3, "errors": ["sample_rate_hz", "channels", "frames"]}, "scope": "Three pure independent integer field checks, ordered errors; no decoder effects."}
+
+OBSERVATION {"case": "negative", "code": "CS021", "expected": {"accepted": true, "error_count": 0, "errors": []}, "observed": {"accepted": true, "error_count": 0, "errors": []}, "scope": "Three pure independent integer field checks, ordered errors; no decoder effects."}
+ok
+test_cs022 (test_unit_b.UnitB.test_cs022) ... 
+OBSERVATION {"case": "model", "code": "CS022", "expected": {"conflicts": ["manifest"], "independent": false}, "observed": {"conflicts": ["manifest"], "independent": false}, "scope": "Complete symbolic resource footprints, deterministic stages and no hidden effects."}
+
+OBSERVATION {"case": "negative", "code": "CS022", "expected": {"conflicts": [], "independent": true}, "observed": {"conflicts": [], "independent": true}, "scope": "Complete symbolic resource footprints, deterministic stages and no hidden effects."}
+ok
+test_cs023 (test_unit_b.UnitB.test_cs023) ... 
+OBSERVATION {"case": "model", "code": "CS023", "expected": {"acquired": ["input", "output"], "outcome": "work_error", "released": ["output", "input"]}, "observed": {"acquired": ["input", "output"], "outcome": "work_error", "released": ["output", "input"]}, "scope": "Two nested symbolic acquisitions; successful cleanup, no rollback or crash recovery."}
+
+OBSERVATION {"case": "negative", "code": "CS023", "expected": {"acquired": ["input"], "outcome": "acquire_error", "released": ["input"]}, "observed": {"acquired": ["input"], "outcome": "acquire_error", "released": ["input"]}, "scope": "Two nested symbolic acquisitions; successful cleanup, no rollback or crash recovery."}
+ok
+test_cyb015 (test_unit_b.UnitB.test_cyb015) ... 
+OBSERVATION {"case": "model", "code": "CYB015", "expected": {"bias": -1, "expected_level": 3, "variance": 1.75, "weights": [0.25, 0.5]}, "observed": {"bias": -1, "expected_level": 3, "variance": 1.75, "weights": [0.25, 0.5]}, "scope": "Two initialized EWMA updates, zero-mean errors and stipulated symmetric PSD covariance; no feedback."}
+
+OBSERVATION {"case": "negative", "code": "CYB015", "expected": {"bias": -1, "expected_level": 3, "variance": 1.25, "weights": [0.25, 0.5]}, "observed": {"bias": -1, "expected_level": 3, "variance": 1.25, "weights": [0.25, 0.5]}, "scope": "Two initialized EWMA updates, zero-mean errors and stipulated symmetric PSD covariance; no feedback."}
+ok
+test_cyb016 (test_unit_b.UnitB.test_cyb016) ... 
+OBSERVATION {"case": "model", "code": "CYB016", "expected": {"baseline_command": 5, "baseline_error": 4, "baseline_output": 14, "command": 3.5, "error": 1, "output": 11}, "observed": {"baseline_command": 5, "baseline_error": 4, "baseline_output": 14, "command": 3.5, "error": 1, "output": 11}, "scope": "Static scalar additive plant, separate estimate and actual disturbance; no feedback or tuning guarantee."}
+
+OBSERVATION {"case": "negative", "code": "CYB016", "expected": {"baseline_command": 5, "baseline_error": 4, "baseline_output": 14, "command": 0, "error": -6, "output": 4}, "observed": {"baseline_command": 5, "baseline_error": 4, "baseline_output": 14, "command": 0, "error": -6, "output": 4}, "scope": "Static scalar additive plant, separate estimate and actual disturbance; no feedback or tuning guarantee."}
+ok
+test_cyb017 (test_unit_b.UnitB.test_cyb017) ... 
+OBSERVATION {"case": "model", "code": "CYB017", "expected": {"amplitude_only": [4, 4, 0], "commands": [1, 2, 1], "deltas": [1, 1, -1], "final": 1}, "observed": {"amplitude_only": [4, 4, 0], "commands": [1, 2, 1], "deltas": [1, 1, -1], "final": 1}, "scope": "Three commands, uniform time interval and independent amplitude/rate bounds; no actuator."}
+
+OBSERVATION {"case": "negative", "code": "CYB017", "expected": {"amplitude_only": [4, 4, 0], "commands": [4, 4, 0], "deltas": [4, 0, -4], "final": 0}, "observed": {"amplitude_only": [4, 4, 0], "commands": [4, 4, 0], "deltas": [4, 0, -4], "final": 0}, "scope": "Three commands, uniform time interval and independent amplitude/rate bounds; no actuator."}
+ok
+test_inf016 (test_unit_b.UnitB.test_inf016) ... 
+OBSERVATION {"case": "model", "code": "INF016", "expected": {"accepted": true, "delta": 3, "guarded_reconstruction": 13, "naive_reconstruction": 13}, "observed": {"accepted": true, "delta": 3, "guarded_reconstruction": 13, "naive_reconstruction": 13}, "scope": "Exact scalar delta with trusted immutable base identities; no authenticity or update authority."}
+
+OBSERVATION {"case": "negative", "code": "INF016", "expected": {"accepted": false, "delta": 3, "guarded_reconstruction": null, "naive_reconstruction": 23}, "observed": {"accepted": false, "delta": 3, "guarded_reconstruction": null, "naive_reconstruction": 23}, "scope": "Exact scalar delta with trusted immutable base identities; no authenticity or update authority."}
+ok
+test_inf017 (test_unit_b.UnitB.test_inf017) ... 
+OBSERVATION {"case": "model", "code": "INF017", "expected": {"mean": 5, "merged": [20, 4], "naive_mean": 4, "summaries": [[2, 1], [18, 3]]}, "observed": {"mean": 5, "merged": [20, 4], "naive_mean": 4, "summaries": [[2, 1], [18, 3]]}, "scope": "Disjoint authored partitions, exact sum/count arithmetic; no median or population estimate."}
+
+OBSERVATION {"case": "negative", "code": "INF017", "expected": {"mean": 5, "merged": [20, 4], "naive_mean": 5, "summaries": [[6, 2], [14, 2]]}, "observed": {"mean": 5, "merged": [20, 4], "naive_mean": 5, "summaries": [[6, 2], [14, 2]]}, "scope": "Disjoint authored partitions, exact sum/count arithmetic; no median or population estimate."}
+ok
+test_inf018 (test_unit_b.UnitB.test_inf018) ... 
+OBSERVATION {"case": "model", "code": "INF018", "expected": {"actual_lengths": [2, 3], "frame": "2:é3:A|B", "naive_delimited": "é|A|B", "valid": true}, "observed": {"actual_lengths": [2, 3], "frame": "2:é3:A|B", "naive_delimited": "é|A|B", "valid": true}, "scope": "Two valid Unicode payloads with declared UTF-8 byte lengths; no arbitrary-stream decoder."}
+
+OBSERVATION {"case": "negative", "code": "INF018", "expected": {"actual_lengths": [2, 3], "frame": null, "naive_delimited": "é|A|B", "valid": false}, "observed": {"actual_lengths": [2, 3], "frame": null, "naive_delimited": "é|A|B", "valid": false}, "scope": "Two valid Unicode payloads with declared UTF-8 byte lengths; no arbitrary-stream decoder."}
+ok
+test_net014 (test_unit_b.UnitB.test_net014) ... 
+OBSERVATION {"case": "model", "code": "NET014", "expected": {"maximum_flow": 4, "minimum_cut_capacity": 4, "simple_path_count": 3, "sink_cut_capacity": 4}, "observed": {"maximum_flow": 4, "minimum_cut_capacity": 4, "simple_path_count": 3, "sink_cut_capacity": 4}, "scope": "Four-node directed finite capacity graph; feasible flow and matching cut, no actual worker throughput."}
+
+OBSERVATION {"case": "negative", "code": "NET014", "expected": {"maximum_flow": 3, "minimum_cut_capacity": 3, "simple_path_count": 3, "sink_cut_capacity": 3}, "observed": {"maximum_flow": 3, "minimum_cut_capacity": 3, "simple_path_count": 3, "sink_cut_capacity": 3}, "scope": "Four-node directed finite capacity graph; feasible flow and matching cut, no actual worker throughput."}
+ok
+test_net015 (test_unit_b.UnitB.test_net015) ... 
+OBSERVATION {"case": "model", "code": "NET015", "expected": {"component_count": 3, "components": [["a", "b"], ["c", "d"], ["e"]], "condensed_edge_count": 2, "condensed_edges": [["ab", "cd"], ["cd", "e"]]}, "observed": {"component_count": 3, "components": [["a", "b"], ["c", "d"], ["e"]], "condensed_edge_count": 2, "condensed_edges": [["ab", "cd"], ["cd", "e"]]}, "scope": "Five-node mutual reachability and condensation view; no resolved internal execution schedule."}
+
+OBSERVATION {"case": "negative", "code": "NET015", "expected": {"component_count": 1, "components": [["a", "b", "c", "d", "e"]], "condensed_edge_count": 0, "condensed_edges": []}, "observed": {"component_count": 1, "components": [["a", "b", "c", "d", "e"]], "condensed_edge_count": 0, "condensed_edges": []}, "scope": "Five-node mutual reachability and condensation view; no resolved internal execution schedule."}
+ok
+test_pm012 (test_unit_b.UnitB.test_pm012) ... 
+OBSERVATION {"case": "model", "code": "PM012", "expected": {"baseline_cost": 38, "makespan": 7, "optimal_completion": {"A": 5, "B": 1, "C": 7}, "optimal_cost": 30, "optimal_order": ["B", "A", "C"]}, "observed": {"baseline_cost": 38, "makespan": 7, "optimal_completion": {"A": 5, "B": 1, "C": 7}, "optimal_cost": 30, "optimal_order": ["B", "A", "C"]}, "scope": "Three available nonpreemptive jobs, one reviewer, all six orders; fictional cardinal delay weights."}
+
+OBSERVATION {"case": "negative", "code": "PM012", "expected": {"baseline_cost": 44, "makespan": 7, "optimal_completion": {"A": 4, "B": 5, "C": 7}, "optimal_cost": 44, "optimal_order": ["A", "B", "C"]}, "observed": {"baseline_cost": 44, "makespan": 7, "optimal_completion": {"A": 4, "B": 5, "C": 7}, "optimal_cost": 44, "optimal_order": ["A", "B", "C"]}, "scope": "Three available nonpreemptive jobs, one reviewer, all six orders; fictional cardinal delay weights."}
+ok
+test_pm013 (test_unit_b.UnitB.test_pm013) ... 
+OBSERVATION {"case": "model", "code": "PM013", "expected": {"cumulative_first_use": 0.625, "event_times": [1, 3], "raw_event_fraction": 0.5, "risk_sets": [4, 2], "survival": [0.75, 0.375]}, "observed": {"cumulative_first_use": 0.625, "event_times": [1, 3], "raw_event_fraction": 0.5, "risk_sets": [4, 2], "survival": [0.75, 0.375]}, "scope": "Four exact first-use/censor histories and finite product limits; population censoring premise unverified."}
+
+OBSERVATION {"case": "negative", "code": "PM013", "expected": {"cumulative_first_use": 0.5, "event_times": [1, 3], "raw_event_fraction": 0.5, "risk_sets": [4, 3], "survival": [0.75, 0.5]}, "observed": {"cumulative_first_use": 0.5, "event_times": [1, 3], "raw_event_fraction": 0.5, "risk_sets": [4, 3], "survival": [0.75, 0.5]}, "scope": "Four exact first-use/censor histories and finite product limits; population censoring premise unverified."}
+ok
+test_dv017 (test_unit_c.UnitC.test_dv017) ... 
+OBSERVATION {"case": "model", "code": "DV017", "expected": {"C": 0.9396926207859084, "R": 0.9396926207859084, "S": 0, "arithmetic_mean_deg": 90, "axial_mean_deg": 0}, "observed": {"C": 0.9396926207859084, "R": 0.9396926207859084, "S": 5.551115123125783e-17, "arithmetic_mean_deg": 90.0, "axial_mean_deg": 0.0}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+
+OBSERVATION {"case": "negative", "code": "DV017", "expected": {"C": 0, "R": 0, "S": 0, "arithmetic_mean_deg": 45, "axial_mean_deg": null}, "observed": {"C": 0.0, "R": 6.123233995736766e-17, "S": 6.123233995736766e-17, "arithmetic_mean_deg": 45.0, "axial_mean_deg": null}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+ok
+test_dv018 (test_unit_c.UnitC.test_dv018) ... 
+OBSERVATION {"case": "model", "code": "DV018", "expected": {"a_only": 20, "b_only": 15, "both": 10, "naive_sum": 55, "neither": 55, "union": 45}, "observed": {"a_only": 20.0, "b_only": 15.0, "both": 10.0, "naive_sum": 55.0, "neither": 55.0, "union": 45.0}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+
+OBSERVATION {"case": "negative", "code": "DV018", "expected": {"a_only": 30, "b_only": 25, "both": 0, "naive_sum": 55, "neither": 45, "union": 55}, "observed": {"a_only": 30.0, "b_only": 25.0, "both": 0.0, "naive_sum": 55.0, "neither": 45.0, "union": 55.0}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+ok
+test_dv019 (test_unit_c.UnitC.test_dv019) ... 
+OBSERVATION {"case": "model", "code": "DV019", "expected": {"covers": [["back", "side"], ["front", "top"]], "minimum_count": 2, "uncovered": []}, "observed": {"covers": [["back", "side"], ["front", "top"]], "minimum_count": 2, "uncovered": []}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+
+OBSERVATION {"case": "negative", "code": "DV019", "expected": {"covers": [], "minimum_count": null, "uncovered": ["D"]}, "observed": {"covers": [], "minimum_count": null, "uncovered": ["D"]}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+ok
+test_fut012 (test_unit_c.UnitC.test_fut012) ... 
+OBSERVATION {"case": "model", "code": "FUT012", "expected": {"mean_a": 3.6, "mean_b": 4, "mean_choice": "A", "tail_a": 11.5, "tail_b": 4, "tail_choice": "B", "var_a": 3}, "observed": {"mean_a": 3.6, "mean_b": 4.0, "mean_choice": "A", "tail_a": 11.5, "tail_b": 4.0, "tail_choice": "B", "var_a": 3.0}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+
+OBSERVATION {"case": "negative", "code": "FUT012", "expected": {"mean_a": 2, "mean_b": 4, "mean_choice": "A", "tail_a": 3.5, "tail_b": 4, "tail_choice": "A", "var_a": 3}, "observed": {"mean_a": 2.0, "mean_b": 4.0, "mean_choice": "A", "tail_a": 3.5, "tail_b": 4.0, "tail_choice": "A", "var_a": 3.0}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+ok
+test_fut013 (test_unit_c.UnitC.test_fut013) ... 
+OBSERVATION {"case": "model", "code": "FUT013", "expected": {"asymptotic_speedup": 4, "ideal_minutes": 12.25, "parallel_minutes": 5.25, "serial_minutes": 7, "speedup": 2.2857142857142856}, "observed": {"asymptotic_speedup": 4.0, "ideal_minutes": 12.25, "parallel_minutes": 5.25, "serial_minutes": 7.0, "speedup": 2.2857142857142856}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+
+OBSERVATION {"case": "negative", "code": "FUT013", "expected": {"asymptotic_speedup": 1.6666666666666667, "ideal_minutes": 19.6, "parallel_minutes": 2.8, "serial_minutes": 16.8, "speedup": 1.4285714285714286}, "observed": {"asymptotic_speedup": 1.6666666666666667, "ideal_minutes": 19.6, "parallel_minutes": 2.8, "serial_minutes": 16.8, "speedup": 1.4285714285714286}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+ok
+test_phi012 (test_unit_c.UnitC.test_phi012) ... 
+OBSERVATION {"case": "model", "code": "PHI012", "expected": {"compatible_with_equivalence": true, "contains_zero": true, "equivalent": true, "width": 0.25}, "observed": {"compatible_with_equivalence": true, "contains_zero": true, "equivalent": true, "width": 0.25}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+
+OBSERVATION {"case": "negative", "code": "PHI012", "expected": {"compatible_with_equivalence": true, "contains_zero": true, "equivalent": false, "width": 1}, "observed": {"compatible_with_equivalence": true, "contains_zero": true, "equivalent": false, "width": 1.0}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+ok
+test_phi013 (test_unit_c.UnitC.test_phi013) ... 
+OBSERVATION {"case": "model", "code": "PHI013", "expected": {"core_deletion_witnesses": {"remove_A": [0, 0], "remove_B": [8, 0]}, "full_solution_count": 0, "minimal_cores": [["A", "B"]]}, "observed": {"core_deletion_witnesses": {"remove_A": [0, 0], "remove_B": [8, 0]}, "full_solution_count": 0, "minimal_cores": [["A", "B"]]}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+
+OBSERVATION {"case": "negative", "code": "PHI013", "expected": {"core_deletion_witnesses": {}, "full_solution_count": 3, "minimal_cores": []}, "observed": {"core_deletion_witnesses": {}, "full_solution_count": 3, "minimal_cores": []}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+ok
+test_phy019 (test_unit_c.UnitC.test_phy019) ... 
+OBSERVATION {"case": "model", "code": "PHY019", "expected": {"capacity_N": 12.8, "demand_N": 12, "normal_N": 16, "reserve_N": 0.8, "static_feasible": true}, "observed": {"capacity_N": 12.8, "demand_N": 12.0, "normal_N": 16.0, "reserve_N": 0.8, "static_feasible": true}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+
+OBSERVATION {"case": "negative", "code": "PHY019", "expected": {"capacity_N": 8, "demand_N": 12, "normal_N": 16, "reserve_N": -4, "static_feasible": false}, "observed": {"capacity_N": 8.0, "demand_N": 12.0, "normal_N": 16.0, "reserve_N": -4.0, "static_feasible": false}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+ok
+test_phy020 (test_unit_c.UnitC.test_phy020) ... 
+OBSERVATION {"case": "model", "code": "PHY020", "expected": {"I_x_mm4": 27, "I_y_mm4": 432, "curvature_x_per_mm": 0.0003333333333333333, "curvature_y_per_mm": 2.0833333333333333e-05, "ratio": 16}, "observed": {"I_x_mm4": 27.0, "I_y_mm4": 432.0, "curvature_x_per_mm": 0.0003333333333333333, "curvature_y_per_mm": 2.0833333333333333e-05, "ratio": 16.0}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+
+OBSERVATION {"case": "negative", "code": "PHY020", "expected": {"I_x_mm4": 108, "I_y_mm4": 108, "curvature_x_per_mm": 8.333333333333333e-05, "curvature_y_per_mm": 8.333333333333333e-05, "ratio": 1}, "observed": {"I_x_mm4": 108.0, "I_y_mm4": 108.0, "curvature_x_per_mm": 8.333333333333333e-05, "curvature_y_per_mm": 8.333333333333333e-05, "ratio": 1.0}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+ok
+test_phy021 (test_unit_c.UnitC.test_phy021) ... 
+OBSERVATION {"case": "model", "code": "PHY021", "expected": {"K_after_J": 1, "K_before_J": 4, "impulse_Ns": 3, "outgoing_m_s": 2, "retained_fraction": 0.25}, "observed": {"K_after_J": 1.0, "K_before_J": 4.0, "impulse_Ns": 3.0, "outgoing_m_s": 2.0, "retained_fraction": 0.25}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+
+OBSERVATION {"case": "negative", "code": "PHY021", "expected": {"K_after_J": 4, "K_before_J": 4, "impulse_Ns": 4, "outgoing_m_s": 4, "retained_fraction": 1}, "observed": {"K_after_J": 4.0, "K_before_J": 4.0, "impulse_Ns": 4.0, "outgoing_m_s": 4.0, "retained_fraction": 1.0}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+ok
+test_sem015 (test_unit_c.UnitC.test_sem015) ... 
+OBSERVATION {"case": "model", "code": "SEM015", "expected": {"new_point": [2, 0.5], "original": [2, 0.5], "preserved": true, "remapped_weights": [0.25, 0.25, 0.5]}, "observed": {"new_point": [2.0, 0.5], "original": [2.0, 0.5], "preserved": true, "remapped_weights": [0.25, 0.25, 0.5]}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+
+OBSERVATION {"case": "negative", "code": "SEM015", "expected": {"new_point": [1, 1], "original": [2, 0.5], "preserved": false, "remapped_weights": [0.25, 0.5, 0.25]}, "observed": {"new_point": [1.0, 1.0], "original": [2.0, 0.5], "preserved": false, "remapped_weights": [0.25, 0.5, 0.25]}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+ok
+test_sem016 (test_unit_c.UnitC.test_sem016) ... 
+OBSERVATION {"case": "model", "code": "SEM016", "expected": {"assignments": [[0, 1, 0], [1, 0, 1]], "consistent": true, "cycle_parity": 0}, "observed": {"assignments": [[0, 1, 0], [1, 0, 1]], "consistent": true, "cycle_parity": 0}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+
+OBSERVATION {"case": "negative", "code": "SEM016", "expected": {"assignments": [], "consistent": false, "cycle_parity": 1}, "observed": {"assignments": [], "consistent": false, "cycle_parity": 1}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+ok
+test_sem017 (test_unit_c.UnitC.test_sem017) ... 
+OBSERVATION {"case": "model", "code": "SEM017", "expected": {"indices": [-1, 0, 0, 1], "ownership": [true, true, true, true], "violating_coordinates": []}, "observed": {"indices": [-1, 0, 0, 1], "ownership": [true, true, true, true], "violating_coordinates": []}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+
+OBSERVATION {"case": "negative", "code": "SEM017", "expected": {"indices": [0, 0, 0, 1], "ownership": [false, true, true, true], "violating_coordinates": [-0.1]}, "observed": {"indices": [0, 0, 0, 1], "ownership": [false, true, true, true], "violating_coordinates": [-0.1]}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+ok
+test_vc017 (test_unit_c.UnitC.test_vc017) ... 
+OBSERVATION {"case": "model", "code": "VC017", "expected": {"codes": [23, 23], "encoded": [0.09090909090909091, 0.08990899089908991], "separated": false}, "observed": {"codes": [23, 23], "encoded": [0.09090909090909091, 0.08990899089908991], "separated": false}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+
+OBSERVATION {"case": "negative", "code": "VC017", "expected": {"codes": [121, 119], "encoded": [0.47368421052631576, 0.46847316310578424], "separated": true}, "observed": {"codes": [121, 119], "encoded": [0.47368421052631576, 0.46847316310578424], "separated": true}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+ok
+test_vc018 (test_unit_c.UnitC.test_vc018) ... 
+OBSERVATION {"case": "model", "code": "VC018", "expected": {"double_multiplied": [0.0625, 0, 0.75], "out_alpha": 1, "out_premultiplied": [0.25, 0, 0.75], "source_premultiplied": [0.25, 0, 0]}, "observed": {"double_multiplied": [0.0625, 0.0, 0.75], "out_alpha": 1.0, "out_premultiplied": [0.25, 0.0, 0.75], "source_premultiplied": [0.25, 0.0, 0.0]}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+
+OBSERVATION {"case": "negative", "code": "VC018", "expected": {"double_multiplied": [1, 0, 0], "out_alpha": 1, "out_premultiplied": [1, 0, 0], "source_premultiplied": [1, 0, 0]}, "observed": {"double_multiplied": [1.0, 0.0, 0.0], "out_alpha": 1.0, "out_premultiplied": [1.0, 0.0, 0.0], "source_premultiplied": [1.0, 0.0, 0.0]}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+ok
+test_vc019 (test_unit_c.UnitC.test_vc019) ... 
+OBSERVATION {"case": "model", "code": "VC019", "expected": {"anisotropy": 4, "area_scale": 4, "ellipse_axes": [0.4, 0.1], "stretches": [4, 1]}, "observed": {"anisotropy": 4.0, "area_scale": 4.0, "ellipse_axes": [0.4, 0.1], "stretches": [4.0, 1.0]}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+
+OBSERVATION {"case": "negative", "code": "VC019", "expected": {"anisotropy": 1, "area_scale": 4, "ellipse_axes": [0.2, 0.2], "stretches": [2, 2]}, "observed": {"anisotropy": 1.0, "area_scale": 4.0, "ellipse_axes": [0.2, 0.2], "stretches": [2.0, 2.0]}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+ok
+
+----------------------------------------------------------------------
+Ran 50 tests in 0.008s
+
+OK

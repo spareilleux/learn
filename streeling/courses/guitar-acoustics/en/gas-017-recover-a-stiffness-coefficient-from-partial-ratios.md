@@ -79,7 +79,7 @@ Use the main ratio and state the recovered coefficient. What was fitted?
 
 <details><summary>Answer 2</summary>
 
-The expected coefficient is listed below. Only the normalized second-partial relationship was fitted; the overall frequency scale remains anchored by the first partial.
+The expected coefficient is listed above. Only the normalized second-partial relationship was fitted; the overall frequency scale remains anchored by the first partial.
 
 </details>
 

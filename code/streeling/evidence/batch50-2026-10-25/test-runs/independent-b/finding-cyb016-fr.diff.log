@@ -1,0 +1,20 @@
+--- streeling/courses/cybernetics/fr/cyb-016-test-feedforward-against-disturbance-mismatch.fr.md before
++++ streeling/courses/cybernetics/fr/cyb-016-test-feedforward-against-disturbance-mismatch.fr.md after
+@@ -15,7 +15,7 @@
+ 
+ Un agent prévoit une charge entrante et propose de la compenser avant d’observer une erreur de sortie. Cette voie d’information diffère de la rétroaction sur le résidu. La référence directe ignore l’estimation de perturbation ; la commande proposée la soustrait avant de diviser par le gain supposé.
+ 
+-L’extrait officiel de Caltech consulté décrit une anticipation fondée sur une perturbation mesurée et dépendante du modèle du système. Seul ce passage extrait était disponible ; le téléchargement intégral a échoué. Notre équation scalaire statique est une simplification construite, sans réglage de production déduit de la lecture. Elle rend visible l’écart d’estimation.
++L’extrait officiel de Caltech consulté décrit une anticipation fondée sur une perturbation mesurée et dépendante du modèle du système. L’extrait de recherche consulté provient du texte du 2009-02-22 lié ci-dessous ; le téléchargement du brouillon de 2007 initialement envisagé a échoué. Seul le passage extrait a été lu, pas le chapitre complet. Notre équation scalaire statique est une simplification construite, sans réglage de production déduit de la lecture. Elle rend visible l’écart d’estimation.
+ 
+ Calculez la sortie avec la perturbation réelle stipulée, pas avec l’estimation utilisée pour commander. Sinon le modèle confirmerait sa propre prévision. Comparez les résidus absolus à la référence directe. Le contrôle fournit volontairement une mauvaise estimation : aider dans un cas ne garantit pas d’aider dans l’autre. Le DSL doit conserver le rôle de chaque quantité.
+ 
+@@ -29,7 +29,7 @@
+ 
+ [Artefact conservé du projet](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json)
+ 
+-[Lecture primaire](https://www.cds.caltech.edu/~murray/books/AM08/pdf/cds101-complete_20Sep07.pdf)
++[Lecture primaire](https://www.cds.caltech.edu/~murray/books/AM08/pdf/am08-complete_22Feb09.pdf)
+ 
+ ## Modèle fixé et contrôle
+ 

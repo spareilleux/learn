@@ -139,7 +139,7 @@ Walk the main stream and record every cursor state. Why is backup not negative-d
 
 <details><summary>Answer 1</summary>
 
-The cursor states are listed below. Backup repositions the serialization cursor; it does not create a note with negative sounding duration.
+The cursor states are listed above. Backup repositions the serialization cursor; it does not create a note with negative sounding duration.
 
 </details>
 

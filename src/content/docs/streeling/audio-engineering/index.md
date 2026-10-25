@@ -26,3 +26,6 @@ sidebar:
 - [AUD-013 · Resample Without Relabeling the Clock](aud-013-resample-without-relabeling-the-clock/)
 - [AUD-014 · Budget Headroom for Correlated Plucks](aud-014-budget-headroom-for-correlated-plucks/)
 - [AUD-015 · Bound Quantization Error Before Comparing WAVs](aud-015-bound-quantization-error-before-comparing-wavs/)
+- [AUD-016 · Separate DC Offset from AC Energy](aud-016-separate-dc-offset-from-ac-energy/)
+- [AUD-017 · Report Ambiguous Correlation Lags](aud-017-report-ambiguous-correlation-lags/)
+- [AUD-018 · Recover Stereo from Mid and Side](aud-018-recover-stereo-from-mid-and-side/)

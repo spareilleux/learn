@@ -24,3 +24,6 @@ sidebar:
 - [WML-011 · Preserve the Kind of a Seventh Chord](wml-011-preserve-the-kind-of-a-seventh-chord/)
 - [WML-012 · Preserve Direction in a Melodic Inventory](wml-012-preserve-direction-in-a-melodic-inventory/)
 - [WML-013 · Check Whether a Fifth Cycle Closes](wml-013-check-whether-a-fifth-cycle-closes/)
+- [WML-014 · Quantize a Ratio on a Declared Octave Division](wml-014-quantize-a-ratio-on-a-declared-octave-division/)
+- [WML-015 · Carry the Concert Reference Through a Frequency Handoff](wml-015-carry-the-concert-reference-through-a-frequency-handoff/)
+- [WML-016 · Keep Chord Degree Operations Distinct](wml-016-keep-chord-degree-operations-distinct/)

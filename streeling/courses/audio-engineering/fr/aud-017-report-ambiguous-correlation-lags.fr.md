@@ -120,7 +120,7 @@ Une règle de départage rend la sortie reproductible sans établir l’identifi
 
 <details><summary>Réponse 1</summary>
 
-Le vecteur de corrélation figure ci-dessous. Le bouclage des indices diffère du prolongement par zéro ; inverser le signe du retard en changerait aussi le sens.
+Le vecteur de corrélation figure ci-dessus. Le bouclage des indices diffère du prolongement par zéro ; inverser le signe du retard en changerait aussi le sens.
 
 </details>
 

@@ -24,3 +24,5 @@ sidebar:
 - [NET-011 · Separate Reachability from Semantic Compatibility](net-011-separate-reachability-from-semantic-compatibility/)
 - [NET-012 · Account for Shared Dependencies in Redundant Paths](net-012-account-for-shared-dependencies-in-redundant-paths/)
 - [NET-013 · Trace Causal Concurrency with Vector Clocks](net-013-trace-causal-concurrency-with-vector-clocks/)
+- [NET-014 · Bound Throughput with a Capacity Cut](net-014-bound-throughput-with-a-capacity-cut/)
+- [NET-015 · Condense Mutual Dependencies Before Ordering Work](net-015-condense-mutual-dependencies-before-ordering-work/)

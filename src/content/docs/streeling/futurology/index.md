@@ -22,3 +22,5 @@ sidebar:
 - [FUT-009 · Compare Staged Adoption with an Irreversible Migration](fut-009-compare-staged-adoption-with-an-irreversible-migration/)
 - [FUT-010 · Project Weave Density before a Scene Expansion](fut-010-project-weave-density-before-a-scene-expansion/)
 - [FUT-011 · Plan an Embroidery Representation Switch with Memory](fut-011-plan-an-embroidery-representation-switch-with-memory/)
+- [FUT-012 · Budget the Worst Tail Mass of a Renderer Scenario](fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario/)
+- [FUT-013 · Bound a Future Craft Workflow by Its Serial Fraction](fut-013-bound-a-future-craft-workflow-by-its-serial-fraction/)

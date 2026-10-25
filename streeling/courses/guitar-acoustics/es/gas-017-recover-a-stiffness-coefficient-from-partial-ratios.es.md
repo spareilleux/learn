@@ -79,7 +79,7 @@ Utilice la razón principal e indique el coeficiente recuperado. ¿Qué relació
 
 <details><summary>Respuesta 2</summary>
 
-El coeficiente esperado figura abajo. Solo se ajustó la relación normalizada del segundo parcial; el primero sigue fijando la escala de frecuencia.
+El coeficiente esperado figura arriba. Solo se ajustó la relación normalizada del segundo parcial; el primero sigue fijando la escala de frecuencia.
 
 </details>
 

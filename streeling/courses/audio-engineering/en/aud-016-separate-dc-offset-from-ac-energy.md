@@ -91,7 +91,7 @@ Calculate the mean and the centered sequence. Why must the record support be ret
 
 <details><summary>Answer 1</summary>
 
-The main mean and AC sequence are listed below. Changing the support changes the mean, so a filename or a peak guard cannot supply this calculation.
+The main mean and AC sequence are listed above. Changing the support changes the mean, so a filename or a peak guard cannot supply this calculation.
 
 </details>
 

@@ -91,7 +91,7 @@ Calculez la moyenne et la séquence centrée. Pourquoi conserver les bornes de l
 
 <details><summary>Réponse 1</summary>
 
-La moyenne et la séquence alternative du cas principal figurent ci-dessous. Modifier les bornes modifie la moyenne ; ni un nom de fichier ni un contrôle de crête ne remplacent ce calcul.
+La moyenne et la séquence alternative du cas principal figurent ci-dessus. Modifier les bornes modifie la moyenne ; ni un nom de fichier ni un contrôle de crête ne remplacent ce calcul.
 
 </details>
 

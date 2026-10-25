@@ -113,7 +113,7 @@ Calcule los tiempos de liberación y las duraciones de retención programada.
 
 <details><summary>Respuesta 2</summary>
 
-Las matrices figuran abajo. Reste a cada liberación su propio inicio; no use el primer inicio para todas las notas ni sustituya su identidad por la altura.
+Las matrices figuran arriba. Reste a cada liberación su propio inicio; no use el primer inicio para todas las notas ni sustituya su identidad por la altura.
 
 </details>
 

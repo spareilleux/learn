@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\tmp\batch25-a-review\run_checks.py", line 32, in <module>
+    assert result.returncode==0 and len(observations)==36 and receipt['test_count']==18
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+Actual focused child result was exit 0 and 18 tests passed. Merged unittest progress stderr joined each first stdout observation on one physical line, so the prefix-only receipt parser retained only 18 of 36 observations. The full original child output and original receipt are retained as focused-before-observation-line-fix.log and focused-before-observation-line-fix-receipt.json. Corrected test prints a newline before observation records; final replay retains 36 prefix lines.

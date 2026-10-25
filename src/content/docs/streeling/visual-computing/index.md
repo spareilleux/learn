@@ -27,6 +27,9 @@ sidebar:
 - [VC-014 · Predict an Embroidered Stitch Pixel Footprint](vc-014-predict-an-embroidered-stitch-pixel-footprint/)
 - [VC-015 · Budget a Sculpture Profile Chord Error](vc-015-budget-a-sculpture-profile-chord-error/)
 - [VC-016 · Track UV Gutters through Mip Levels](vc-016-track-uv-gutters-through-mip-levels/)
+- [VC-017 · Bound Relief Depth Separation under a Declared Quantizer](vc-017-bound-relief-depth-separation-under-a-declared-quantizer/)
+- [VC-018 · Carry Alpha Association through a Textile Edge](vc-018-carry-alpha-association-through-a-textile-edge/)
+- [VC-019 · Measure Directional UV Stretch before Reusing a Motif](vc-019-measure-directional-uv-stretch-before-reusing-a-motif/)
 
 ## Course catalog (planned)
 

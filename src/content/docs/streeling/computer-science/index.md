@@ -31,3 +31,6 @@ sidebar:
 - [CS-018 · Merge Replayed Agent Messages by Identity](cs-018-merge-replayed-agent-messages-by-identity/)
 - [CS-019 · Preserve Lexical Bindings When Composing Fragments](cs-019-preserve-lexical-bindings-when-composing-fragments/)
 - [CS-020 · Audit Evidence Join Multiplicity](cs-020-audit-evidence-join-multiplicity/)
+- [CS-021 · Accumulate Independent Validation Errors](cs-021-accumulate-independent-validation-errors/)
+- [CS-022 · Check Read and Write Footprints Before Reordering](cs-022-check-read-write-footprints-before-reordering/)
+- [CS-023 · Unwind Only the Resources Actually Acquired](cs-023-unwind-only-acquired-resources/)

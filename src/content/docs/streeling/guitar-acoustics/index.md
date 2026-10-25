@@ -25,3 +25,6 @@ sidebar:
 - [GAS-012 · Distinguish Coupling from Parallel Resonance](gas-012-distinguish-coupling-from-parallel-resonance/)
 - [GAS-013 · Retune with an Explicit Tension Assumption](gas-013-retune-with-an-explicit-tension-assumption/)
 - [GAS-014 · Predict a Two-Path Comb from Distance](gas-014-predict-a-two-path-comb-with-distance/)
+- [GAS-015 · Separate Mode Excitation from Observation](gas-015-separate-mode-excitation-from-observation/)
+- [GAS-016 · Couple Fretting Geometry to Elastic Tension](gas-016-couple-fretting-geometry-to-elastic-tension/)
+- [GAS-017 · Recover a Stiffness Coefficient from Partial Ratios](gas-017-recover-a-stiffness-coefficient-from-partial-ratios/)

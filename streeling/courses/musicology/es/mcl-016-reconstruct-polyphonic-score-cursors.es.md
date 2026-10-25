@@ -139,7 +139,7 @@ Recorra la secuencia principal y registre cada estado del cursor. ¿Es el retroc
 
 <details><summary>Respuesta 1</summary>
 
-Los estados aparecen abajo. El retroceso reposiciona el cursor de serialización; no crea una nota de duración sonora negativa.
+Los estados aparecen arriba. El retroceso reposiciona el cursor de serialización; no crea una nota de duración sonora negativa.
 
 </details>
 

@@ -1,0 +1,832 @@
+diff --git a/code/streeling/evidence/batch50-2026-10-25/tests/test_course_metadata.mjs b/code/streeling/evidence/batch50-2026-10-25/tests/test_course_metadata.mjs
+new file mode 100644
+index 00000000..fcd71fc8
+--- /dev/null
++++ b/code/streeling/evidence/batch50-2026-10-25/tests/test_course_metadata.mjs
+@@ -0,0 +1,36 @@
++import assert from 'node:assert/strict';
++import { readFileSync } from 'node:fs';
++import { fileURLToPath } from 'node:url';
++import { test } from 'node:test';
++import { parseModule } from '../../../../../scripts/streeling-lib.mjs';
++
++const root = new URL('../../../../../', import.meta.url);
++const plan = JSON.parse(readFileSync(new URL('../batch-plan.json', import.meta.url), 'utf8'));
++
++assert.equal(plan.courses.length, 50, 'This batch must contain 50 courses.');
++assert.equal(new Set(plan.courses.map(course => course.code)).size, 50);
++assert.equal(new Set(plan.courses.map(course => course.module_id)).size, 50);
++for (const course of plan.courses) {
++  assert.deepEqual(Object.keys(course.source_paths).sort(), ['en', 'es', 'fr']);
++}
++const paths = plan.courses.flatMap(course => Object.values(course.source_paths));
++assert.equal(new Set(paths).size, 150, 'Each locale needs a distinct source path.');
++
++// The generator uses meta.course in the description and the body H1 as the
++// page title. Both must describe the same localized course.
++const sharedMetadata = meta => Object.fromEntries(
++  Object.entries(meta).filter(([key]) => key !== 'course' && key !== 'title'),
++);
++
++for (const course of plan.courses) {
++  const english = parseModule(fileURLToPath(new URL(course.source_paths.en, root)));
++  for (const [locale, relative] of Object.entries(course.source_paths)) {
++    test(`${course.code} ${locale}: source follows the generator locale contract`, () => {
++      const suffix = locale === 'en' ? '.md' : `.${locale}.md`;
++      assert.equal(relative, `streeling/courses/${course.department}/${locale}/${course.module_id}${suffix}`);
++      const parsed = parseModule(fileURLToPath(new URL(relative, root)));
++      assert.equal(parsed.meta.course, parsed.title);
++      assert.deepEqual(sharedMetadata(parsed.meta), sharedMetadata(english.meta));
++    });
++  }
++}
+diff --git a/code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py b/code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py
+new file mode 100644
+index 00000000..d000c831
+--- /dev/null
++++ b/code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py
+@@ -0,0 +1,201 @@
++"""Independent authored finite cases; no production, audio or learner execution."""
++import json
++import math
++from fractions import Fraction
++from pathlib import Path
++import unittest
++
++EVIDENCE = Path(__file__).resolve().parents[1]
++PACKET = json.loads((EVIDENCE / 'unit-a.json').read_text(encoding='utf-8'))
++COURSES = {course['code']: course for course in PACKET['courses']}
++R = math.sqrt(0.5)
++# Reviewer fixed oracles: fractions, analytic constants and manually derived tables.
++# None of these values is loaded from a packet expected field.
++FIXED = {
++    'AUD016': ({'mean': .5, 'ac_samples': [-.5,.5,-.5,.5], 'total_ms': .5, 'ac_ms': .25, 'total_rms': R, 'ac_rms': .5}, {'mean': 0, 'ac_samples': [-.5,.5,-.5,.5], 'total_ms': .25, 'ac_ms': .25, 'total_rms': .5, 'ac_rms': .5}),
++    'AUD017': ({'correlation': [0,2,0,-2], 'signed_argmax': [1], 'absolute_argmax': [1,3]}, {'correlation': [0,1,0,0], 'signed_argmax': [1], 'absolute_argmax': [1]}),
++    'AUD018': ({'mid': [R,R], 'side': [R,-R], 'left_out': [1,0], 'right_out': [0,1], 'input_energy': 2, 'output_energy': 2}, {'mid': [R,R], 'side': [R,-R], 'left_out': [.5,.5], 'right_out': [.5,.5], 'input_energy': 2, 'output_energy': 1}),
++    'GAS015': ({'observed': [1,0,-.25,0], 'zero_modes': [2,4]}, {'observed': [R,.5,R/4,0], 'zero_modes': [4]}),
++    'GAS016': ({'extension_m': .0001999800039989008, 'tension_n': 10.1999800039989, 'ideal_f_hz': 100, 'frequency_hz': 100.9747574562156, 'error_cents': 16.79361678856818}, {'extension_m': 0, 'tension_n': 10, 'ideal_f_hz': 100, 'frequency_hz': 100, 'error_cents': 0}),
++    'GAS017': ({'B': .01, 'predicted_third_squared_ratio': 109/101, 'held_out_residual': 0, 'valid': True}, {'B': -1/301, 'valid': False}),
++    'GTR015': ({'cents': [0,25,0,-25,0], 'period_s': .5, 'peak_to_peak_cents': 50}, {'cents': [0,0,0,0,0], 'period_s': .25, 'peak_to_peak_cents': 50}),
++    'GTR016': ({'vibrating_fraction': 2**(-7/12), 'base_hz': 110*2**(7/12), 'touch_fraction_from_bridge': 2**(-7/12)/2, 'sounding_hz': 220*2**(7/12), 'fixed_touch_local': 2**(7/12)/2}, {'vibrating_fraction': 1, 'base_hz': 110, 'touch_fraction_from_bridge': .5, 'sounding_hz': 220, 'fixed_touch_local': .5}),
++    'GTR017': ({'union_s': [[0,1]], 'gaps_s': [], 'overlap_s': .1, 'continuous': True}, {'union_s': [[0,.6],[.7,1]], 'gaps_s': [[.6,.7]], 'overlap_s': 0, 'continuous': False}),
++    'GAA014': ({'overlap': [[0,4,7]], 'family_disjoint': False, 'distinct_item_ids': 4}, {'overlap': [], 'family_disjoint': True, 'distinct_item_ids': 4}),
++    'GAA015': ({'rate': .8, 'lower': .49015684672072346, 'upper': .9433190520193067, 'established': False}, {'rate': .8, 'lower': .7111690380734976, 'upper': .8666340774409013, 'established': True}),
++    'GAA016': ({'scores': [4,5,6,7], 'mean_a': 5.5, 'mean_b': 5.5, 'contrast': 0}, {'scores': [4,5,6,7], 'mean_a': 5, 'mean_b': 6, 'contrast': 1}),
++    'MCL015': ({'release_times': [2,2], 'scheduled_holds': [2,1]}, {'release_times': [.75,1.5], 'scheduled_holds': [.75,.5]}),
++    'MCL016': ({'note_intervals': {'a': [0,4], 'b': [0,2]}, 'cursor_states': [0,4,0,2,4], 'final_cursor': 4, 'valid': True}, {'note_intervals': {'a': [0,4], 'b': [2,4]}, 'cursor_states': [0,4,2,4,6], 'final_cursor': 6, 'valid': False}),
++    'MCL017': ({'slope_bpm_per_quarter': 15, 'duration_s': 4*math.log(2), 'endpoint_average_duration_s': 8/3}, {'slope_bpm_per_quarter': 0, 'duration_s': 4, 'endpoint_average_duration_s': 4}),
++    'WML014': ({'target_cents': 386.3137138648348, 'step': 6, 'represented_cents': 7200/19, 'error_cents': -7.366345443782166}, {'target_cents': 386.3137138648348, 'step': 4, 'represented_cents': 400, 'error_cents': 13.686286135165204}),
++    'WML015': ({'frequencies_hz': [442,884], 'calibration_ratio': 221/220, 'calibration_cents': 7.851415040126504, 'octave_ratio': 2}, {'frequencies_hz': [440,880], 'calibration_ratio': 1, 'calibration_cents': 0, 'octave_ratio': 2}),
++    'WML016': ({'degrees': {'1':0,'5':6,'7':10,'9':14}, 'pitch_classes': [0,2,6,10], 'valid': True}, {'valid': False, 'rejected_operation_index': 1, 'reason': 'duplicate_degree', 'degree': 5}),
++}
++SCOPE = {
++    'AUD016': 'Finite normalized real samples; record mean and squared amplitudes, not streaming filtering or joules.',
++    'AUD017': 'Equal-length circular real records and listed lag direction; no zero padding or latency measurement.',
++    'AUD018': 'Synchronous aligned channel pairs, orthonormal mid/side matrix and declared side gain; no perception.',
++    'GAS015': 'Four fixed-end ideal sine modes and signed point displacement; no pickup voltage or spectrum measurement.',
++    'GAS016': 'Symmetric SI geometry, linear axial spring, fixed density, one vibrating half; no setup calibration.',
++    'GAS017': 'Exact normalized second/third partial ratios and nonnegative coefficient family; no engine mapping.',
++    'GTR015': 'Sinusoidal authored cents at exact time grid and zero phase; continuous extent distinct from samples.',
++    'GTR016': 'Ideal equal-tempered lengths, bridge origin and midpoint mode; no performed harmonic or contact dynamics.',
++    'GTR017': 'Two same-target half-open contact intervals; necessary schedule coverage only, no clean-sound proof.',
++    'GAA014': 'Ordered offset keys and cross-partition intersection only; no learner or statistical independence evidence.',
++    'GAA015': 'Stipulated iid Bernoulli counts, Wilson z=1.96 and prospective lower endpoint rule; no real mastery claim.',
++    'GAA016': 'Four deterministic equal-spaced trials with linear drift and zero effects; no randomized trial.',
++    'MCL015': 'One damper interval and distinct event times; scheduled release commands, not acoustic silence.',
++    'MCL016': 'Positive fixed division durations, one measure, note/backup/forward only; no parser conformance.',
++    'MCL017': 'Positive beat-linear BPM ramp, quarter-beat coordinate and constant limit; no scheduler observation.',
++    'WML014': 'One positive ratio, equal octave division and nearest ties upward; no cultural or tuning endorsement.',
++    'WML015': 'Two specified MIDI notes with reference-bearing equal-tempered frequency law; no renderer fidelity.',
++    'WML016': 'Root zero, ordered strict add/alter/subtract edits; authored collision policy, not full MusicXML semantics.',
++}
++
++
++def aligned(code, case, **arrays):
++    lengths = {name: len(values) for name, values in arrays.items()}
++    if len(set(lengths.values())) != 1:
++        print('\nOBSERVATION '+json.dumps(dict(code=code, case=case, observed={'aligned_lengths': lengths}, expected={'equal_lengths': True}, scope=SCOPE[code])), flush=True)
++        raise AssertionError(f'{code}: unequal paired input lengths {lengths}')
++
++
++def observe(code, v, case='model'):
++    if code == 'AUD016':
++        x = [Fraction(str(a)) for a in v['samples']]
++        mean = sum(x)/len(x)
++        ac = [a-mean for a in x]
++        total = sum(a*a for a in x)/len(x)
++        centered = sum(a*a for a in ac)/len(ac)
++        return dict(mean=float(mean), ac_samples=list(map(float, ac)), total_ms=float(total), ac_ms=float(centered), total_rms=math.sqrt(total), ac_rms=math.sqrt(centered))
++    if code == 'AUD017':
++        x,y = v['x'],v['y']
++        aligned(code,case,x=x,y=y)
++        c = [sum(x[n]*y[(n+k)%len(x)] for n in range(len(x))) for k in v['lags']]
++        return dict(correlation=c, signed_argmax=[v['lags'][i] for i,a in enumerate(c) if a==max(c)], absolute_argmax=[v['lags'][i] for i,a in enumerate(c) if abs(a)==max(map(abs,c))])
++    if code == 'AUD018':
++        left,right = v['left'],v['right']
++        aligned(code,case,left=left,right=right)
++        mid=[(left[i]+right[i])/math.sqrt(2) for i in range(len(left))]
++        side=[(left[i]-right[i])/math.sqrt(2) for i in range(len(left))]
++        lo=[(mid[i]+v['side_gain']*side[i])/math.sqrt(2) for i in range(len(left))]
++        ro=[(mid[i]-v['side_gain']*side[i])/math.sqrt(2) for i in range(len(left))]
++        return dict(mid=mid,side=side,left_out=lo,right_out=ro,input_energy=sum(a*a for a in left+right),output_energy=sum(a*a for a in lo+ro))
++    if code == 'GAS015':
++        aligned(code,case,amplitudes=v['amplitudes'],modes=v['modes'])
++        y=[v['amplitudes'][i]*math.sin(n*math.pi*v['position_fraction']) for i,n in enumerate(v['modes'])]
++        return dict(observed=y,zero_modes=[n for i,n in enumerate(v['modes']) if abs(y[i])<1e-12])
++    if code == 'GAS016':
++        length=v['length_m']; h=v['midpoint_displacement_m']
++        path=math.hypot(length,2*h)
++        extension=path-length
++        tension=v['initial_tension_n']+v['axial_stiffness_n_per_m']*extension
++        f=math.sqrt(tension/v['linear_density_kg_per_m'])/path
++        ref=math.sqrt(v['initial_tension_n']/v['linear_density_kg_per_m'])/length
++        return dict(extension_m=extension,tension_n=tension,ideal_f_hz=ref,frequency_hz=f,error_cents=1200*math.log2(f/ref))
++    if code == 'GAS017':
++        ratio=v['squared_normalized_second_ratio']; b=(ratio-1)/(4-ratio)
++        valid=1<=ratio<4 and b>=0
++        if not valid: return dict(B=b,valid=False)
++        predicted=(1+9*b)/(1+b)
++        return dict(B=b,predicted_third_squared_ratio=predicted,held_out_residual=v['squared_normalized_third_ratio']-predicted,valid=True)
++    if code == 'GTR015':
++        return dict(cents=[v['extent_cents']*math.sin(math.tau*v['rate_hz']*t) for t in v['times_s']],period_s=1/v['rate_hz'],peak_to_peak_cents=2*v['extent_cents'])
++    if code == 'GTR016':
++        ratio=2**(v['fretted_semitones']/12); length=1/ratio; base=v['open_hz']*ratio
++        return dict(vibrating_fraction=length,base_hz=base,touch_fraction_from_bridge=length/v['touch_mode'],sounding_hz=base*v['touch_mode'],fixed_touch_local=v['fixed_absolute_touch_fraction']/length)
++    if code == 'GTR017':
++        intervals=sorted([list(map(lambda a: Fraction(str(a)),c['interval_s'])) for c in v['contacts']])
++        merged=[]
++        for start,end in intervals:
++            if merged and start<=merged[-1][1]: merged[-1][1]=max(merged[-1][1],end)
++            else: merged.append([start,end])
++        start,end=map(lambda a: Fraction(str(a)),v['required_interval_s']); cursor=start; gaps=[]
++        for lo,hi in merged:
++            if lo>cursor: gaps.append([cursor,min(lo,end)])
++            cursor=max(cursor,hi)
++        if cursor<end: gaps.append([cursor,end])
++        overlap=max(Fraction(0),min(i[1] for i in intervals)-max(i[0] for i in intervals))
++        return dict(union_s=[[float(a),float(b)] for a,b in merged],gaps_s=[[float(a),float(b)] for a,b in gaps],overlap_s=float(overlap),continuous=not gaps)
++    if code == 'GAA014':
++        def families(rows): return {tuple(n-r['notes'][0] for n in r['notes']) for r in rows}
++        overlap=sorted(families(v['train']) & families(v['test']))
++        return dict(overlap=[list(row) for row in overlap],family_disjoint=not overlap,distinct_item_ids=len({r['id'] for r in v['train']+v['test']}))
++    if code == 'GAA015':
++        n=v['attempts']; p=v['passes']/n; z=v['z']; denominator=n+z*z
++        center=(n*p+z*z/2)/denominator
++        half=z*math.sqrt(n*p*(1-p)+z*z/4)/denominator
++        return dict(rate=p,lower=center-half,upper=center+half,established=center-half>=v['required_lower_bound'])
++    if code == 'GAA016':
++        scores=[v['base']+v['drift_per_trial']*i+v['condition_effect'][a] for i,a in enumerate(v['order'])]
++        means={a:sum(scores[i] for i,b in enumerate(v['order']) if a==b)/v['order'].count(a) for a in ('A','B')}
++        return dict(scores=scores,mean_a=means['A'],mean_b=means['B'],contrast=means['B']-means['A'])
++    if code == 'MCL015':
++        releases=[v['pedal_up'] if v['pedal_down']<=n['key_off']<v['pedal_up'] else n['key_off'] for n in v['notes']]
++        return dict(release_times=releases,scheduled_holds=[release-v['notes'][i]['on'] for i,release in enumerate(releases)])
++    if code == 'MCL016':
++        cursor=0; states=[0]; notes={}
++        for op in v['operations']:
++            if op['op']=='note': notes[op['id']]=[cursor,cursor+op['duration']]
++            cursor+=(-1 if op['op']=='backup' else 1)*op['duration']; states.append(cursor)
++        return dict(note_intervals=notes,cursor_states=states,final_cursor=cursor,valid=all(0<=a<=v['measure_units'] for a in states))
++    if code == 'MCL017':
++        a,b,q=v['start_bpm'],v['end_bpm'],v['quarter_beats']; slope=(b-a)/q
++        duration=60*q/a if a==b else 60*q*math.log(b/a)/(b-a)
++        return dict(slope_bpm_per_quarter=slope,duration_s=duration,endpoint_average_duration_s=120*q/(a+b))
++    if code == 'WML014':
++        cents=1200*math.log2(v['target_ratio']); divisions=v['octave_divisions']; step=math.floor(cents*divisions/1200+.5); represented=1200*step/divisions
++        return dict(target_cents=cents,step=step,represented_cents=represented,error_cents=represented-cents)
++    if code == 'WML015':
++        f=[v['reference_a_hz']*2**((n-69)/12) for n in v['midi_notes']]; ratio=v['reference_a_hz']/v['comparison_a_hz']
++        return dict(frequencies_hz=f,calibration_ratio=ratio,calibration_cents=1200*math.log2(ratio),octave_ratio=f[1]/f[0])
++    if code == 'WML016':
++        degrees=dict(v['degrees'])
++        for i,op in enumerate(v['operations']):
++            key=str(op['degree'])
++            if op['op']=='add':
++                if key in degrees: return dict(valid=False,rejected_operation_index=i,reason='duplicate_degree',degree=op['degree'])
++                degrees[key]=op['semitones']
++            elif op['op']=='alter': degrees[key]+=op['delta']
++            else: del degrees[key]
++        return dict(degrees=degrees,pitch_classes=sorted({n%12 for n in degrees.values()}),valid=True)
++    raise AssertionError(code)
++
++
++class UnitA(unittest.TestCase):
++    def same(self, actual, expected, path='result'):
++        if isinstance(expected,dict):
++            self.assertEqual(set(actual),set(expected),path)
++            for key,value in expected.items(): self.same(actual[key],value,path+'.'+key)
++        elif isinstance(expected,list):
++            self.assertEqual(len(actual),len(expected),path)
++            for i,value in enumerate(expected): self.same(actual[i],value,f'{path}[{i}]')
++        elif isinstance(expected,bool): self.assertIs(actual,expected,path)
++        elif isinstance(expected,(float,int)):
++            self.assertNotIsInstance(actual,bool,path)
++            self.assertTrue(math.isfinite(actual) and math.isclose(actual,expected,rel_tol=1e-11,abs_tol=1e-11),f'{path}: {actual!r} != {expected!r}')
++        else: self.assertEqual(actual,expected,path)
++
++    def check_course(self, code):
++        model=COURSES[code]['authored_model']
++        for index,case in enumerate(('model','negative')):
++            entry=model if case=='model' else model['negative_control']
++            result=observe(code,entry['values'],case)
++            print('\nOBSERVATION '+json.dumps(dict(code=code,case=case,observed=result,expected=FIXED[code][index],scope=SCOPE[code]),ensure_ascii=False,allow_nan=False),flush=True)
++            self.same(result,FIXED[code][index])
++            self.same(result,entry['expected'])
++            if code=='AUD016': self.same(result['total_ms'],result['mean']**2+result['ac_ms'])
++            if code=='GTR015':
++                frequencies=[entry['values']['base_hz']*2**(c/1200) for c in result['cents']]
++                self.same(frequencies,[440,446.39994737251044,440,433.6918074016825,440] if case=='model' else [440]*5)
++
++
++def course_test(code):
++    def test(self): self.check_course(code)
++    return test
++
++
++for _code in FIXED:
++    setattr(UnitA,'test_'+_code,course_test(_code))
++
++if __name__=='__main__': unittest.main(verbosity=2)
+diff --git a/code/streeling/evidence/batch50-2026-10-25/tests/test_unit_b.py b/code/streeling/evidence/batch50-2026-10-25/tests/test_unit_b.py
+new file mode 100644
+index 00000000..34180b03
+--- /dev/null
++++ b/code/streeling/evidence/batch50-2026-10-25/tests/test_unit_b.py
+@@ -0,0 +1,330 @@
++"""Independent exact finite-case characterization; no application behavior changes.
++
++Evaluate packet values, compare to independently derived literals, then compare
++to the packet. These checks do not observe a production system or learner.
++"""
++import copy
++from fractions import Fraction as Q
++import itertools
++import json
++import math
++from pathlib import Path
++import sys
++import unittest
++
++PACKET = Path(__file__).resolve().parents[1] / "unit-b.json"
++
++
++def require(condition, diagnostic):
++    if not condition:
++        print("DIAGNOSTIC " + json.dumps(diagnostic, ensure_ascii=False), flush=True)
++        raise AssertionError(diagnostic)
++
++
++def q(value):
++    require(type(value) in (int, float) and math.isfinite(value), {"invalid_finite_number": value})
++    return Q(str(value))
++
++
++def serial(value):
++    if isinstance(value, Q):
++        return int(value) if value.denominator == 1 else float(value)
++    if isinstance(value, dict):
++        return {k: serial(v) for k, v in value.items()}
++    if isinstance(value, (tuple, list)):
++        return [serial(v) for v in value]
++    return value
++
++
++def graph(v, capacity=False):
++    nodes, edges = v["nodes"], v["edges"]
++    require(isinstance(nodes, list) and len(nodes) == len(set(nodes)), {"unique_nodes_required": nodes})
++    require(all(isinstance(n, str) for n in nodes), {"string_nodes_required": nodes})
++    size = 3 if capacity else 2
++    require(all(isinstance(e, list) and len(e) == size for e in edges), {"edge_width_required": size, "edges": edges})
++    require(all(e[0] in nodes and e[1] in nodes for e in edges), {"unknown_edge_endpoint": edges})
++    require(len({tuple(e[:2]) for e in edges}) == len(edges), {"unique_edges_required": edges})
++    return nodes, edges
++
++
++def compute(code, v):
++    if code == "CS021":
++        require(all(type(v[k]) is int for k in ("sample_rate_hz", "channels", "frames")), {"integer_fields_required": v})
++        errors = []
++        if v["sample_rate_hz"] <= 0:
++            errors.append("sample_rate_hz")
++        if v["channels"] not in (1, 2):
++            errors.append("channels")
++        if v["frames"] < 0:
++            errors.append("frames")
++        return dict(errors=errors, error_count=len(errors), accepted=not errors)
++    if code == "CS022":
++        a, b = v["a"], v["b"]
++        require(all(isinstance(stage[k], list) and all(isinstance(x, str) for x in stage[k]) for stage in (a, b) for k in ("reads", "writes")), {"resource_name_sets_required": v})
++        ra, wa, rb, wb = (set(stage[k]) for stage, k in ((a, "reads"), (a, "writes"), (b, "reads"), (b, "writes")))
++        conflicts = sorted((wa & (rb | wb)) | (wb & (ra | wa)))
++        return dict(conflicts=conflicts, independent=not conflicts)
++    if code == "CS023":
++        resources = v["resources"]
++        require(isinstance(resources, list) and len(set(resources)) == len(resources) and all(isinstance(x, str) for x in resources), {"unique_resource_list_required": resources})
++        require(v["fail_acquire"] is None or v["fail_acquire"] in resources, {"unknown_failed_acquisition": v["fail_acquire"]})
++        require(type(v["work_error"]) is bool, {"boolean_work_error_required": v})
++        acquired = []
++        for resource in resources:
++            if resource == v["fail_acquire"]:
++                outcome = "acquire_error"
++                break
++            acquired.append(resource)
++        else:
++            outcome = "work_error" if v["work_error"] else "ok"
++        return dict(acquired=acquired, released=acquired[::-1], outcome=outcome)
++    if code == "CYB015":
++        cov = v["error_covariance"]
++        require(isinstance(cov, list) and len(cov) == 2 and all(isinstance(row, list) and len(row) == 2 for row in cov), {"covariance_shape_required": "2x2", "observed": cov})
++        c = [[q(x) for x in row] for row in cov]
++        require(c[0][1] == c[1][0] and c[0][0] >= 0 and c[1][1] >= 0 and c[0][0]*c[1][1] >= c[0][1]**2, {"symmetric_psd_covariance_required": cov})
++        alpha = q(v["alpha"])
++        require(0 < alpha <= 1, {"alpha_out_of_range": v["alpha"]})
++        weights = [alpha*(1-alpha), alpha]
++        expected = sum(weights)*q(v["true_level"]) + (1-alpha)**2*q(v["initial"])
++        variance = sum(weights[i]*c[i][j]*weights[j] for i in range(2) for j in range(2))
++        return serial(dict(weights=weights, expected_level=expected, bias=expected-q(v["true_level"]), variance=variance))
++    if code == "CYB016":
++        target, gain, disturbance, measured, assumed = (q(v[k]) for k in ("target", "plant_gain", "disturbance", "measured_disturbance", "assumed_gain"))
++        require(gain > 0 and assumed > 0, {"positive_gains_required": v})
++        baseline, command = target/assumed, (target-measured)/assumed
++        baseline_output, output = gain*baseline+disturbance, gain*command+disturbance
++        return serial(dict(baseline_command=baseline, baseline_output=baseline_output, baseline_error=baseline_output-target, command=command, output=output, error=output-target))
++    if code == "CYB017":
++        lower, upper, prev, rate, dt = (q(v[k]) for k in ("lower", "upper", "initial_command", "rate_per_second", "dt_seconds"))
++        require(lower <= prev <= upper and rate >= 0 and dt > 0, {"invalid_command_bounds_or_time": v})
++        require(isinstance(v["requests"], list) and bool(v["requests"]), {"nonempty_request_list_required": v})
++        amplitudes, commands, deltas = [], [], []
++        for request in v["requests"]:
++            amplitude = min(upper, max(lower, q(request)))
++            command = min(prev+rate*dt, max(prev-rate*dt, amplitude))
++            amplitudes.append(amplitude)
++            commands.append(command)
++            deltas.append(command-prev)
++            prev = command
++        return serial(dict(amplitude_only=amplitudes, commands=commands, deltas=deltas, final=prev))
++    if code == "COG015":
++        n = v["items"]
++        prevalence, hit, false = (q(v[k]) for k in ("prevalence", "hit_rate", "false_alarm_rate"))
++        require(type(n) is int and n > 0 and all(0 <= x <= 1 for x in (prevalence, hit, false)), {"invalid_population_or_probability": v})
++        tp, fp = n*prevalence*hit, n*(1-prevalence)*false
++        require(tp+fp > 0, {"undefined_empty_alert_precision": v})
++        return serial(dict(true_positives=tp, false_positives=fp, alerts=tp+fp, precision=tp/(tp+fp)))
++    if code == "COG016":
++        n, successes, missing, cs, cn = (v[k] for k in ("offered", "observed_successes", "missing", "comparison_successes", "comparison_offered"))
++        require(all(type(x) is int for x in (n, successes, missing, cs, cn)) and n > 0 and cn > 0 and 0 <= missing <= n and 0 <= successes <= n-missing and 0 <= cs <= cn, {"invalid_offer_counts": v})
++        comparison = Q(cs, cn)
++        feasible = [k for k in range(missing+1) if Q(successes+k, n) > comparison]
++        return serial(dict(lower=Q(successes, n), upper=Q(successes+missing, n), comparison_rate=comparison, minimum_missing_successes_for_strict_superiority=min(feasible) if feasible else None, identified_strict_superiority=Q(successes, n) > comparison))
++    if code == "COG017":
++        ab, aa, cb, ca = (q(v[k]) for k in ("assisted_before", "assisted_after", "comparison_before", "comparison_after"))
++        require(all(0 <= x <= 1 for x in (ab, aa, cb, ca)), {"proportions_required": v})
++        return serial(dict(assisted_change=aa-ab, comparison_change=ca-cb, contrast=(aa-ab)-(ca-cb)))
++    if code == "INF016":
++        require(all(type(v[k]) is int for k in ("sender_base", "target", "receiver_base")), {"exact_integer_states_required": v})
++        require(all(isinstance(v[k], str) for k in ("sender_base_id", "receiver_base_id")), {"base_id_strings_required": v})
++        accepted = v["sender_base_id"] == v["receiver_base_id"]
++        require(not accepted or v["sender_base"] == v["receiver_base"], {"trusted_immutable_identity_premise_violated": v})
++        delta = v["target"]-v["sender_base"]
++        naive = v["receiver_base"]+delta
++        return dict(delta=delta, naive_reconstruction=naive, accepted=accepted, guarded_reconstruction=naive if accepted else None)
++    if code == "INF017":
++        partitions = v["partitions"]
++        require(isinstance(partitions, list) and all(isinstance(p, list) for p in partitions), {"nested_partitions_required": partitions})
++        summaries = [[sum((q(x) for x in p), Q(0)), len(p)] for p in partitions]
++        total, count = sum(p[0] for p in summaries), sum(p[1] for p in summaries)
++        means = [s/Q(n) for s, n in summaries if n]
++        return serial(dict(summaries=summaries, merged=[total, count], mean=total/count if count else None, naive_mean=sum(means)/len(means) if means else None))
++    if code == "INF018":
++        messages, lengths = v["messages"], v["declared_lengths"]
++        require(isinstance(messages, list) and isinstance(lengths, list) and len(messages) == len(lengths), {"paired_length_mismatch": [len(messages), len(lengths)]})
++        require(all(isinstance(s, str) for s in messages) and all(type(n) is int and n >= 0 for n in lengths), {"invalid_framing_types": v})
++        actual = [len(s.encode("utf-8")) for s in messages]
++        valid = lengths == actual
++        frame = "".join(str(lengths[i])+":"+messages[i] for i in range(len(messages))) if valid else None
++        return dict(actual_lengths=actual, valid=valid, frame=frame, naive_delimited="|".join(messages))
++    if code == "NET014":
++        nodes, edges = graph(v, capacity=True)
++        source, sink = v["source"], v["sink"]
++        require(source in nodes and sink in nodes and source != sink, {"invalid_terminals": v})
++        require(all(type(e[2]) is int and e[2] >= 0 for e in edges), {"finite_integer_capacity_case_required": edges})
++        require(not any(b == source or a == sink for a, b, _ in edges), {"finite_case_terminal_orientation": edges})
++        middle = [n for n in nodes if n not in (source, sink)]
++        feasible = []
++        for flow in itertools.product(*(range(e[2]+1) for e in edges)):
++            balances = {n: 0 for n in nodes}
++            for i, (a, b, _) in enumerate(edges):
++                balances[a] -= flow[i]
++                balances[b] += flow[i]
++            if all(balances[n] == 0 for n in middle):
++                feasible.append(-balances[source])
++        cuts = []
++        for bits in itertools.product((False, True), repeat=len(middle)):
++            left = {source} | {middle[i] for i in range(len(middle)) if bits[i]}
++            cuts.append(sum(cap for a, b, cap in edges if a in left and b not in left))
++        def routes(node, visited):
++            if node == sink:
++                return 1
++            return sum(routes(b, visited | {b}) for a, b, _ in edges if a == node and b not in visited)
++        # Feasible integer flow plus equal cut also proves this divisible-flow bound.
++        require(max(feasible) == min(cuts), {"flow_cut_disagreement": [max(feasible), min(cuts)]})
++        return dict(maximum_flow=max(feasible), minimum_cut_capacity=min(cuts), sink_cut_capacity=sum(cap for _, b, cap in edges if b == sink), simple_path_count=routes(source, {source}))
++    if code == "NET015":
++        nodes, edges = graph(v)
++        require(all(len(n) == 1 for n in nodes), {"single_letter_component_labels_required": nodes})
++        reach = {(a, b): a == b or [a, b] in edges for a in nodes for b in nodes}
++        for k in nodes:
++            for a in nodes:
++                for b in nodes:
++                    reach[a, b] = reach[a, b] or (reach[a, k] and reach[k, b])
++        components = sorted({tuple(sorted(b for b in nodes if reach[a, b] and reach[b, a])) for a in nodes})
++        label = {n: "".join(group) for group in components for n in group}
++        condensed = sorted({(label[a], label[b]) for a, b in edges if label[a] != label[b]})
++        return serial(dict(components=components, component_count=len(components), condensed_edges=condensed, condensed_edge_count=len(condensed)))
++    if code == "PM012":
++        jobs, durations, weights, baseline = (v[k] for k in ("jobs", "duration_ticks", "weight_per_tick", "baseline_order"))
++        require(isinstance(jobs, list) and bool(jobs) and len(set(jobs)) == len(jobs) and all(isinstance(j, str) for j in jobs), {"unique_jobs_required": jobs})
++        require(set(durations) == set(weights) == set(jobs) and len(baseline) == len(jobs) and set(baseline) == set(jobs), {"job_keys_or_permutation_mismatch": v})
++        require(all(type(durations[j]) is int and durations[j] > 0 and q(weights[j]) >= 0 for j in jobs), {"invalid_duration_or_weight": v})
++        def score(order):
++            elapsed, completion, cost = 0, {}, Q(0)
++            for job in order:
++                elapsed += durations[job]
++                completion[job] = elapsed
++                cost += q(weights[job])*elapsed
++            return cost, completion, elapsed
++        order = min(itertools.permutations(jobs), key=lambda o: (score(o)[0], o))
++        cost, completion, makespan = score(order)
++        return serial(dict(optimal_order=order, optimal_completion=completion, optimal_cost=cost, baseline_cost=score(baseline)[0], makespan=makespan))
++    if code == "PM013":
++        followup, flags, horizon = v["followup_days"], v["event"], q(v["horizon_days"])
++        require(isinstance(followup, list) and isinstance(flags, list) and len(followup) == len(flags) and bool(followup), {"followup_event_length_mismatch": [len(followup), len(flags)]})
++        times = [q(t) for t in followup]
++        require(horizon > 0 and all(t > 0 for t in times) and all(type(e) is int and e in (0, 1) for e in flags), {"invalid_followup_or_event": v})
++        events = [times[i] for i in range(len(times)) if flags[i]]
++        require(len(events) == len(set(events)), {"distinct_event_times_required": followup})
++        event_times = sorted(t for t in events if t <= horizon)
++        risks, survivals, survival = [], [], Q(1)
++        for t in event_times:
++            risk = sum(x >= t for x in times)
++            failures = sum(times[i] == t and flags[i] == 1 for i in range(len(times)))
++            survival *= Q(risk-failures, risk)
++            risks.append(risk)
++            survivals.append(survival)
++        return serial(dict(event_times=event_times, risk_sets=risks, survival=survivals, cumulative_first_use=1-survival, raw_event_fraction=Q(sum(flags), len(flags))))
++    raise ValueError(code)
++
++
++# Independent oracles: exact arithmetic by hand, exhaustive cuts/orders or
++# mutual-reachability classes. Packet fields are never used to produce these.
++FIXED = {
++    "CS021": [dict(errors=["sample_rate_hz", "channels", "frames"], error_count=3, accepted=False), dict(errors=[], error_count=0, accepted=True)],
++    "CS022": [dict(conflicts=["manifest"], independent=False), dict(conflicts=[], independent=True)],
++    "CS023": [dict(acquired=["input", "output"], released=["output", "input"], outcome="work_error"), dict(acquired=["input"], released=["input"], outcome="acquire_error")],
++    "CYB015": [dict(weights=[.25, .5], expected_level=3, bias=-1, variance=1.75), dict(weights=[.25, .5], expected_level=3, bias=-1, variance=1.25)],
++    "CYB016": [dict(baseline_command=5, baseline_output=14, baseline_error=4, command=3.5, output=11, error=1), dict(baseline_command=5, baseline_output=14, baseline_error=4, command=0, output=4, error=-6)],
++    "CYB017": [dict(amplitude_only=[4,4,0], commands=[1,2,1], deltas=[1,1,-1], final=1), dict(amplitude_only=[4,4,0], commands=[4,4,0], deltas=[4,0,-4], final=0)],
++    "COG015": [dict(true_positives=80, false_positives=90, alerts=170, precision=8/17), dict(true_positives=400, false_positives=50, alerts=450, precision=8/9)],
++    "COG016": [dict(lower=.6, upper=1, comparison_rate=.7, minimum_missing_successes_for_strict_superiority=2, identified_strict_superiority=False), dict(lower=.6, upper=.6, comparison_rate=.7, minimum_missing_successes_for_strict_superiority=None, identified_strict_superiority=False)],
++    "COG017": [dict(assisted_change=.3, comparison_change=.1, contrast=.2), dict(assisted_change=.3, comparison_change=.3, contrast=0)],
++    "INF016": [dict(delta=3, naive_reconstruction=13, accepted=True, guarded_reconstruction=13), dict(delta=3, naive_reconstruction=23, accepted=False, guarded_reconstruction=None)],
++    "INF017": [dict(summaries=[[2,1],[18,3]], merged=[20,4], mean=5, naive_mean=4), dict(summaries=[[6,2],[14,2]], merged=[20,4], mean=5, naive_mean=5)],
++    "INF018": [dict(actual_lengths=[2,3], valid=True, frame="2:é3:A|B", naive_delimited="é|A|B"), dict(actual_lengths=[2,3], valid=False, frame=None, naive_delimited="é|A|B")],
++    "NET014": [dict(maximum_flow=4, minimum_cut_capacity=4, sink_cut_capacity=4, simple_path_count=3), dict(maximum_flow=3, minimum_cut_capacity=3, sink_cut_capacity=3, simple_path_count=3)],
++    "NET015": [dict(components=[["a","b"],["c","d"],["e"]], component_count=3, condensed_edges=[["ab","cd"],["cd","e"]], condensed_edge_count=2), dict(components=[["a","b","c","d","e"]], component_count=1, condensed_edges=[], condensed_edge_count=0)],
++    "PM012": [dict(optimal_order=["B","A","C"], optimal_completion={"B":1,"A":5,"C":7}, optimal_cost=30, baseline_cost=38, makespan=7), dict(optimal_order=["A","B","C"], optimal_completion={"A":4,"B":5,"C":7}, optimal_cost=44, baseline_cost=44, makespan=7)],
++    "PM013": [dict(event_times=[1,3], risk_sets=[4,2], survival=[.75,.375], cumulative_first_use=.625, raw_event_fraction=.5), dict(event_times=[1,3], risk_sets=[4,3], survival=[.75,.5], cumulative_first_use=.5, raw_event_fraction=.5)],
++}
++
++SCOPES = {
++    "CS021": "Three pure independent integer field checks, ordered errors; no decoder effects.",
++    "CS022": "Complete symbolic resource footprints, deterministic stages and no hidden effects.",
++    "CS023": "Two nested symbolic acquisitions; successful cleanup, no rollback or crash recovery.",
++    "CYB015": "Two initialized EWMA updates, zero-mean errors and stipulated symmetric PSD covariance; no feedback.",
++    "CYB016": "Static scalar additive plant, separate estimate and actual disturbance; no feedback or tuning guarantee.",
++    "CYB017": "Three commands, uniform time interval and independent amplitude/rate bounds; no actuator.",
++    "COG015": "Expected class counts with fixed threshold and transported conditional rates; no observed reviewer.",
++    "COG016": "Binary missing completions enumerated with strict crossing; descriptive sensitivity, no probability or causal effect.",
++    "COG017": "Two-group two-period arithmetic; untreated parallel trends and causal benefit unverified.",
++    "INF016": "Exact scalar delta with trusted immutable base identities; no authenticity or update authority.",
++    "INF017": "Disjoint authored partitions, exact sum/count arithmetic; no median or population estimate.",
++    "INF018": "Two valid Unicode payloads with declared UTF-8 byte lengths; no arbitrary-stream decoder.",
++    "NET014": "Four-node directed finite capacity graph; feasible flow and matching cut, no actual worker throughput.",
++    "NET015": "Five-node mutual reachability and condensation view; no resolved internal execution schedule.",
++    "PM012": "Three available nonpreemptive jobs, one reviewer, all six orders; fictional cardinal delay weights.",
++    "PM013": "Four exact first-use/censor histories and finite product limits; population censoring premise unverified.",
++}
++
++
++def assert_matches(observed, expected, path="result"):
++    if isinstance(expected, dict):
++        assert isinstance(observed, dict) and observed.keys() == expected.keys(), (path, observed, expected)
++        for key in expected:
++            assert_matches(observed[key], expected[key], path+"."+key)
++    elif isinstance(expected, list):
++        assert isinstance(observed, list) and len(observed) == len(expected), (path, observed, expected)
++        for i in range(len(expected)):
++            assert_matches(observed[i], expected[i], f"{path}[{i}]")
++    elif isinstance(expected, bool) or expected is None:
++        assert observed is expected, (path, observed, expected)
++    elif isinstance(expected, (int, float)):
++        assert type(observed) in (int, float) and math.isclose(observed, expected, rel_tol=1e-12, abs_tol=1e-12), (path, observed, expected)
++    else:
++        assert observed == expected, (path, observed, expected)
++
++
++def check_course(code, course):
++    model = course["authored_model"]
++    for i, (case, data) in enumerate((("model", model), ("negative", model["negative_control"]))):
++        observed = compute(code, data["values"])
++        print("\nOBSERVATION " + json.dumps(dict(code=code, case=case, observed=observed, expected=FIXED[code][i], scope=SCOPES[code]), ensure_ascii=False, sort_keys=True), flush=True)
++        assert_matches(observed, FIXED[code][i])
++        assert_matches(observed, data["expected"])
++
++
++class UnitB(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        rows = json.loads(PACKET.read_text(encoding="utf-8"))["courses"]
++        require(len(rows) == len(FIXED) and len({c["code"] for c in rows}) == len(rows), {"assigned_course_count_or_identity_mismatch": len(rows)})
++        cls.courses = {c["code"]: c for c in rows}
++        require(set(cls.courses) == set(FIXED), {"assigned_course_codes_mismatch": sorted(cls.courses)})
++
++
++def make_test(code):
++    def test(self):
++        check_course(code, self.courses[code])
++    return test
++
++
++for course_code in FIXED:
++    setattr(UnitB, "test_"+course_code.lower(), make_test(course_code))
++
++
++def mutation_probe():
++    rows = json.loads(PACKET.read_text(encoding="utf-8"))["courses"]
++    course = copy.deepcopy(next(c for c in rows if c["code"] == "CYB015"))
++    before = copy.deepcopy(course["authored_model"])
++    # Remove a substantial covariance contribution and tamper with the packet
++    # expectation too. The independent 7/4 oracle must still reject it.
++    course["authored_model"]["values"]["error_covariance"] = [[4,0],[0,4]]
++    course["authored_model"]["expected"]["variance"] = 1.25
++    print("MUTATION_INPUT " + json.dumps(dict(code="CYB015", before=before, after=course["authored_model"], canonical_mutated=False), ensure_ascii=False), flush=True)
++    try:
++        check_course("CYB015", course)
++    except AssertionError as exc:
++        print("MUTATION_REJECTED " + json.dumps(dict(code="CYB015", reason=str(exc), expectation_also_mutated=True, canonical_mutated=False)), flush=True)
++        return
++    raise AssertionError("Wrong covariance input and altered packet expectation were accepted")
++
++
++if __name__ == "__main__":
++    if "--mutation-probe" in sys.argv:
++        mutation_probe()
++    else:
++        unittest.main(verbosity=2)
+diff --git a/code/streeling/evidence/batch50-2026-10-25/tests/test_unit_c.py b/code/streeling/evidence/batch50-2026-10-25/tests/test_unit_c.py
+new file mode 100644
+index 00000000..11efab26
+--- /dev/null
++++ b/code/streeling/evidence/batch50-2026-10-25/tests/test_unit_c.py
+@@ -0,0 +1,241 @@
++"""Characterize 16 authored finite cases; no scene, material or learner trial."""
++import itertools
++import json
++import math
++from fractions import Fraction
++from pathlib import Path
++import unittest
++
++PACKET_PATH = Path(__file__).resolve().parents[1] / 'unit-c.json'
++PACKET = json.loads(PACKET_PATH.read_text(encoding='utf-8'))
++COURSES = {c['code']: c for c in PACKET['courses']}
++SCOPE = 'Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance.'
++
++
++def q(value):
++    return Fraction(str(value))
++
++
++def require(condition, diagnostic):
++    if not condition:
++        raise ValueError(diagnostic)
++
++
++def calculate(code, v):
++    """Derive observations solely from actual authored input values."""
++    if code == 'PHY019':
++        m, g, s, c, mu = [q(v[k]) for k in ('mass_kg', 'g_m_s2', 'sin_theta', 'cos_theta', 'mu_static')]
++        require(m > 0 and g > 0 and c > 0 and mu >= 0 and s*s+c*c == 1, 'positive loads and normalized slope pair required')
++        normal, demand = m*g*c, m*g*s
++        capacity = mu*normal
++        return dict(normal_N=float(normal), demand_N=float(demand), capacity_N=float(capacity), reserve_N=float(capacity-demand), static_feasible=capacity >= demand)
++    if code == 'PHY020':
++        w, h, moment, young = [q(v[k]) for k in ('width_mm', 'height_mm', 'moment_Nmm', 'young_N_mm2')]
++        require(w > 0 and h > 0 and young > 0, 'positive section dimensions and modulus required')
++        ix, iy = w*h**3/12, h*w**3/12
++        return dict(I_x_mm4=float(ix), I_y_mm4=float(iy), curvature_x_per_mm=float(moment/(young*ix)), curvature_y_per_mm=float(moment/(young*iy)), ratio=float(iy/ix))
++    if code == 'PHY021':
++        m, incoming, e = [q(v[k]) for k in ('mass_kg', 'incoming_m_s', 'restitution')]
++        require(m > 0 and incoming < 0 and 0 <= e <= 1, 'fixed-wall approach and restitution domain required')
++        outgoing = -e*incoming
++        return dict(outgoing_m_s=float(outgoing), K_before_J=float(m*incoming**2/2), K_after_J=float(m*outgoing**2/2), retained_fraction=float(e**2), impulse_Ns=float(m*(outgoing-incoming)))
++    if code == 'VC017':
++        n, f, steps = q(v['near_m']), q(v['far_m']), v['quantizer_steps']
++        require(len(v['depths_m']) == 2 and 0 < n < f and type(steps) is int and steps > 0, 'two depths and a finite ordered camera interval required')
++        z = list(map(q, v['depths_m']))
++        require(all(n <= x <= f for x in z), 'depth must lie between clipping planes')
++        encoded = [(1/x-1/f)/(1/n-1/f) for x in z]
++        codes = [math.floor(steps*x+q('0.5')) for x in encoded]
++        return dict(encoded=list(map(float, encoded)), codes=codes, separated=codes[0] != codes[1])
++    if code == 'VC018':
++        source, back = v['source_straight'], v['backdrop_straight']
++        require(len(source) == len(back) == 3, 'RGB vectors must both have exactly three channels')
++        source, back = list(map(q, source)), list(map(q, back))
++        a, b = q(v['source_alpha']), q(v['backdrop_alpha'])
++        require(all(0 <= x <= 1 for x in source+back+[a,b]), 'linear channels and alphas lie in the closed unit interval')
++        premul = [a*x for x in source]
++        out = [premul[i]+(1-a)*b*back[i] for i in range(3)]
++        wrong = [a*premul[i]+(1-a)*b*back[i] for i in range(3)]
++        return dict(source_premultiplied=list(map(float,premul)), out_premultiplied=list(map(float,out)), out_alpha=float(a+(1-a)*b), double_multiplied=list(map(float,wrong)))
++    if code == 'VC019':
++        x, y, radius = [q(v[k]) for k in ('dx_du','dy_dv','uv_radius')]
++        require(x != 0 and y != 0 and radius > 0, 'nondegenerate diagonal patch and positive UV radius required')
++        stretches = [abs(x), abs(y)]
++        return dict(stretches=list(map(float,stretches)), area_scale=float(abs(x*y)), anisotropy=float(max(stretches)/min(stretches)), ellipse_axes=[float(radius*s) for s in stretches])
++    if code == 'DV017':
++        angles, tol = v['angles_deg'], v['zero_tolerance']
++        require(len(angles) == 2 and 0 < tol < 1, 'two equally weighted axes and a declared zero tolerance required')
++        doubled = [math.radians(2*x) for x in angles]
++        c, s = sum(map(math.cos,doubled))/len(angles), sum(map(math.sin,doubled))/len(angles)
++        r = math.hypot(c,s)
++        angle = None if r <= tol else math.degrees(math.atan2(s,c))/2 % 180
++        if angle is not None and (abs(angle-180) < tol or abs(angle) < tol):
++            angle = 0.0
++        return dict(C=c, S=s, R=r, axial_mean_deg=angle, arithmetic_mean_deg=sum(angles)/len(angles))
++    if code == 'DV018':
++        total, a, b, inter = [q(v[k]) for k in ('canvas_area','mask_a_area','mask_b_area','intersection_area')]
++        union = a+b-inter
++        require(0 <= inter <= min(a,b) and union <= total, 'intersection and canvas must admit an exclusive area partition')
++        return dict(a_only=float(a-inter), b_only=float(b-inter), both=float(inter), union=float(union), neither=float(total-union), naive_sum=float(a+b))
++    if code == 'DV019':
++        target, views = set(v['required']), v['views']
++        require(len(target) == len(v['required']) == 4 and len(views) == 4, 'four distinct required features and four named views required')
++        require(all(len(items) == len(set(items)) and set(items) <= target for items in views.values()), 'visibility rows must contain distinct declared feature identities')
++        names, covers = sorted(views), []
++        for count in range(len(names)+1):
++            for subset in itertools.combinations(names,count):
++                if set().union(*(set(views[n]) for n in subset)) >= target:
++                    covers.append(list(subset))
++            if covers:
++                break
++        available = set().union(*(set(items) for items in views.values()))
++        return dict(minimum_count=len(covers[0]) if covers else None, covers=covers, uncovered=sorted(target-available))
++    if code == 'SEM015':
++        vertices, weights, order = v['vertices'], list(map(q,v['weights'])), v['new_vertex_order']
++        require(len(vertices) == len(weights) == len(order) == 3 and all(len(p) == 2 for p in vertices), 'three planar vertices, weights and reorder slots required')
++        require(sorted(order) == [0,1,2] and all(type(i) is int for i in order), 'vertex order must be a complete permutation')
++        require(all(w >= 0 for w in weights) and sum(weights) == 1, 'nonnegative normalized barycentric weights required')
++        points = [list(map(q,p)) for p in vertices]
++        a,b,c = points
++        require((b[0]-a[0])*(c[1]-a[1]) != (b[1]-a[1])*(c[0]-a[0]), 'nondegenerate triangle required')
++        original = [sum(weights[i]*points[i][axis] for i in range(3)) for axis in range(2)]
++        new_weights = [weights[i] for i in order] if v['remap_weights'] else weights
++        new_points = [points[i] for i in order]
++        moved = [sum(new_weights[i]*new_points[i][axis] for i in range(3)) for axis in range(2)]
++        return dict(original=list(map(float,original)), remapped_weights=list(map(float,new_weights)), new_point=list(map(float,moved)), preserved=moved == original)
++    if code == 'SEM016':
++        nodes, edges = v['nodes'], v['edges']
++        require(len(nodes) == len(set(nodes)) == 3 and len(edges) == 3 and all(len(e) == 3 for e in edges), 'three distinct nodes and three parity edge triples required')
++        require(all(u in nodes and w in nodes and u != w and type(p) is int and p in (0,1) for u,w,p in edges), 'binary edges must name distinct triangle endpoints')
++        require(len({frozenset((u,w)) for u,w,p in edges}) == 3, 'parity aggregate applies to the complete declared triangle')
++        assignments=[]
++        for bits in itertools.product((0,1),repeat=3):
++            by_node=dict(zip(nodes,bits))  # Both arrays have length three above.
++            if all(by_node[u] ^ by_node[w] == p for u,w,p in edges):
++                assignments.append(list(bits))
++        parity=edges[0][2] ^ edges[1][2] ^ edges[2][2]
++        return dict(assignments=assignments, cycle_parity=parity, consistent=bool(assignments))
++    if code == 'SEM017':
++        origin, pitch = q(v['origin']), q(v['pitch'])
++        require(pitch > 0 and len(v['coordinates']) == 4 and v['index_rule'] in ('floor','trunc'), 'positive lattice pitch, four probes and a declared indexing rule required')
++        coords=list(map(q,v['coordinates']))
++        rule=math.floor if v['index_rule'] == 'floor' else math.trunc
++        indices=[rule((x-origin)/pitch) for x in coords]
++        owned=[origin+i*pitch <= coords[k] < origin+(i+1)*pitch for k,i in enumerate(indices)]
++        return dict(indices=indices, ownership=owned, violating_coordinates=[v['coordinates'][k] for k,ok in enumerate(owned) if not ok])
++    if code == 'PHI012':
++        require(len(v['difference_interval']) == 2, 'closed interval needs exactly two endpoints')
++        lo,hi=map(q,v['difference_interval']); margin=q(v['equivalence_margin'])
++        require(lo <= hi and margin > 0, 'ordered feasible interval and positive equivalence margin required')
++        return dict(contains_zero=lo <= 0 <= hi, equivalent=-margin <= lo and hi <= margin, compatible_with_equivalence=hi >= -margin and lo <= margin, width=float(hi-lo))
++    if code == 'PHI013':
++        require(len(v['domain']) == 2 and all(type(x) is int for x in v['domain']), 'two inclusive integer domain endpoints required')
++        lo,hi=v['domain']; require(lo <= hi, 'ordered finite integer domain required')
++        points=list(itertools.product(range(lo,hi+1),repeat=2))
++        def satisfies(point, subset):
++            x,y=point
++            predicates=dict(A=x >= v['lower_x'], B=x <= v['upper_x'], C=y >= v['lower_y'], D=x+y <= v['sum_limit'])
++            return all(predicates[k] for k in subset)
++        def solutions(subset):
++            return [p for p in points if satisfies(p,subset)]
++        cores=[]
++        for size in range(1,5):
++            for subset in itertools.combinations('ABCD',size):
++                if not solutions(subset) and all(solutions(tuple(k for k in subset if k != removed)) for removed in subset):
++                    cores.append(list(subset))
++        witnesses={}
++        if cores == [['A','B']]:
++            for removed in cores[0]:
++                witnesses['remove_'+removed]=list(solutions([k for k in cores[0] if k != removed])[0])
++        return dict(full_solution_count=len(solutions('ABCD')), minimal_cores=cores, core_deletion_witnesses=witnesses)
++    if code == 'FUT012':
++        a,b,p = [list(map(q,v[k])) for k in ('losses_a','losses_b','probabilities')]
++        require(len(a) == len(b) == len(p) == 4, 'four losses per strategy and four corresponding probability masses required')
++        alpha=q(v['alpha'])
++        require(all(x >= 0 for x in p) and sum(p) == 1 and 0 < alpha < 1, 'normalized nonnegative masses and nonempty interior tail required')
++        def summarize(losses):
++            pairs=sorted(zip(losses,p))  # Equal nonzero lengths established above.
++            mean=sum(loss*mass for loss,mass in pairs)
++            cumulative=Fraction(0); quantile=None
++            for loss,mass in pairs:
++                cumulative += mass
++                if cumulative >= alpha:
++                    quantile=loss; break
++            left=1-alpha; tail=Fraction(0)
++            for loss,mass in reversed(pairs):
++                take=min(left,mass); tail += take*loss; left -= take
++                if left == 0: break
++            require(left == 0, 'all requested tail mass must be filled')
++            return mean,quantile,tail/(1-alpha)
++        ma,va,ta=summarize(a); mb,vb,tb=summarize(b)
++        return dict(mean_a=float(ma), mean_b=float(mb), var_a=float(va), tail_a=float(ta), tail_b=float(tb), mean_choice='A' if ma < mb else ('B' if mb < ma else 'tie'), tail_choice='A' if ta < tb else ('B' if tb < ta else 'tie'))
++    if code == 'FUT013':
++        total,serial=q(v['baseline_minutes']),q(v['serial_fraction']); workers=v['workers']
++        require(total > 0 and 0 < serial <= 1 and type(workers) is int and workers > 0, 'fixed positive baseline, serial share and integer worker count required')
++        s,p=total*serial,total*(1-serial)/workers
++        return dict(serial_minutes=float(s), parallel_minutes=float(p), ideal_minutes=float(s+p), speedup=float(total/(s+p)), asymptotic_speedup=float(1/serial))
++    raise ValueError('unassigned course '+code)
++
++
++class UnitC(unittest.TestCase):
++    def equal_tree(self, observed, expected):
++        if isinstance(expected,dict):
++            self.assertIsInstance(observed,dict); self.assertEqual(set(observed),set(expected))
++            for key in expected: self.equal_tree(observed[key],expected[key])
++        elif isinstance(expected,list):
++            self.assertIsInstance(observed,list); self.assertEqual(len(observed),len(expected))
++            for i in range(len(expected)): self.equal_tree(observed[i],expected[i])
++        elif isinstance(expected,bool) or expected is None:
++            self.assertIs(observed,expected)
++        elif isinstance(expected,(int,float)):
++            self.assertNotIsInstance(observed,bool)
++            self.assertTrue(math.isclose(observed,expected,rel_tol=1e-11,abs_tol=1e-11),(observed,expected))
++        else: self.assertEqual(observed,expected)
++
++    def check_course(self, code, model, negative, course=None):
++        packet=(course if course is not None else COURSES[code])['authored_model']
++        for case,p,fixed in (('model',packet,model),('negative',packet['negative_control'],negative)):
++            try:
++                observed=calculate(code,p['values'])
++            except (ValueError,KeyError,TypeError,ZeroDivisionError) as error:
++                observed={'diagnostic':str(error)}
++            print('\nOBSERVATION '+json.dumps(dict(code=code,case=case,observed=observed,expected=fixed,scope=SCOPE),sort_keys=True),flush=True)
++            self.equal_tree(observed,fixed)
++            self.equal_tree(p['expected'],fixed)
++
++    def test_phy019(self):
++        self.check_course('PHY019',dict(normal_N=16,demand_N=12,capacity_N=12.8,reserve_N=.8,static_feasible=True),dict(normal_N=16,demand_N=12,capacity_N=8,reserve_N=-4,static_feasible=False))
++    def test_phy020(self):
++        self.check_course('PHY020',dict(I_x_mm4=27,I_y_mm4=432,curvature_x_per_mm=1/3000,curvature_y_per_mm=1/48000,ratio=16),dict(I_x_mm4=108,I_y_mm4=108,curvature_x_per_mm=1/12000,curvature_y_per_mm=1/12000,ratio=1))
++    def test_phy021(self):
++        self.check_course('PHY021',dict(outgoing_m_s=2,K_before_J=4,K_after_J=1,retained_fraction=.25,impulse_Ns=3),dict(outgoing_m_s=4,K_before_J=4,K_after_J=4,retained_fraction=1,impulse_Ns=4))
++    def test_vc017(self):
++        self.check_course('VC017',dict(encoded=[1/11,899/9999],codes=[23,23],separated=False),dict(encoded=[9/19,899/1919],codes=[121,119],separated=True))
++    def test_vc018(self):
++        self.check_course('VC018',dict(source_premultiplied=[.25,0,0],out_premultiplied=[.25,0,.75],out_alpha=1,double_multiplied=[.0625,0,.75]),dict(source_premultiplied=[1,0,0],out_premultiplied=[1,0,0],out_alpha=1,double_multiplied=[1,0,0]))
++    def test_vc019(self):
++        self.check_course('VC019',dict(stretches=[4,1],area_scale=4,anisotropy=4,ellipse_axes=[.4,.1]),dict(stretches=[2,2],area_scale=4,anisotropy=1,ellipse_axes=[.2,.2]))
++    def test_dv017(self):
++        self.check_course('DV017',dict(C=.9396926207859084,S=0,R=.9396926207859084,axial_mean_deg=0,arithmetic_mean_deg=90),dict(C=0,S=0,R=0,axial_mean_deg=None,arithmetic_mean_deg=45))
++    def test_dv018(self):
++        self.check_course('DV018',dict(a_only=20,b_only=15,both=10,union=45,neither=55,naive_sum=55),dict(a_only=30,b_only=25,both=0,union=55,neither=45,naive_sum=55))
++    def test_dv019(self):
++        self.check_course('DV019',dict(minimum_count=2,covers=[['back','side'],['front','top']],uncovered=[]),dict(minimum_count=None,covers=[],uncovered=['D']))
++    def test_sem015(self):
++        self.check_course('SEM015',dict(original=[2,.5],remapped_weights=[.25,.25,.5],new_point=[2,.5],preserved=True),dict(original=[2,.5],remapped_weights=[.25,.5,.25],new_point=[1,1],preserved=False))
++    def test_sem016(self):
++        self.check_course('SEM016',dict(assignments=[[0,1,0],[1,0,1]],cycle_parity=0,consistent=True),dict(assignments=[],cycle_parity=1,consistent=False))
++    def test_sem017(self):
++        self.check_course('SEM017',dict(indices=[-1,0,0,1],ownership=[True,True,True,True],violating_coordinates=[]),dict(indices=[0,0,0,1],ownership=[False,True,True,True],violating_coordinates=[-.1]))
++    def test_phi012(self):
++        self.check_course('PHI012',dict(contains_zero=True,equivalent=True,compatible_with_equivalence=True,width=.25),dict(contains_zero=True,equivalent=False,compatible_with_equivalence=True,width=1))
++    def test_phi013(self):
++        self.check_course('PHI013',dict(full_solution_count=0,minimal_cores=[['A','B']],core_deletion_witnesses=dict(remove_A=[0,0],remove_B=[8,0])),dict(full_solution_count=3,minimal_cores=[],core_deletion_witnesses={}))
++    def test_fut012(self):
++        self.check_course('FUT012',dict(mean_a=3.6,mean_b=4,var_a=3,tail_a=11.5,tail_b=4,mean_choice='A',tail_choice='B'),dict(mean_a=2,mean_b=4,var_a=3,tail_a=3.5,tail_b=4,mean_choice='A',tail_choice='A'))
++    def test_fut013(self):
++        self.check_course('FUT013',dict(serial_minutes=7,parallel_minutes=5.25,ideal_minutes=12.25,speedup=16/7,asymptotic_speedup=4),dict(serial_minutes=16.8,parallel_minutes=2.8,ideal_minutes=19.6,speedup=10/7,asymptotic_speedup=5/3))
++
++
++if __name__ == '__main__':
++    unittest.main()

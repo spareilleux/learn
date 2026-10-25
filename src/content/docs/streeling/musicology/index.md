@@ -25,3 +25,6 @@ sidebar:
 - [MCL-012 · Merge Ties Without Merging Slurs](mcl-012-merge-ties-without-merging-slurs/)
 - [MCL-013 · Keep Tuplet Duration as a Rational](mcl-013-keep-tuplet-duration-as-a-rational/)
 - [MCL-014 · Declare Where Grace Notes Take Their Time](mcl-014-declare-where-grace-notes-take-their-time/)
+- [MCL-015 · Separate Key Release from Pedal Release](mcl-015-separate-key-release-from-pedal-release/)
+- [MCL-016 · Reconstruct Polyphonic Score Cursors](mcl-016-reconstruct-polyphonic-score-cursors/)
+- [MCL-017 · Integrate a Tempo Ramp in Beat Coordinates](mcl-017-integrate-a-tempo-ramp-in-beat-coordinates/)

@@ -120,7 +120,7 @@ Evaluate the circular sum at every declared lag. Why is the convention part of t
 
 <details><summary>Answer 1</summary>
 
-The correlation vector appears below. Wrapping indices uses another support rule from zero padding, and reversing the lag sign would change its interpretation.
+The correlation vector appears above. Wrapping indices uses another support rule from zero padding, and reversing the lag sign would change its interpretation.
 
 </details>
 

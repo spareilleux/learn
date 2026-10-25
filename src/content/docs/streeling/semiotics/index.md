@@ -25,3 +25,6 @@ sidebar:
 - [SEM-012 · Preserve the Order of Stitch Frame Actions](sem-012-preserve-the-order-of-stitch-frame-actions/)
 - [SEM-013 · Align Two Motif Periods at a Textile Seam](sem-013-align-two-motif-periods-at-a-textile-seam/)
 - [SEM-014 · Declare Material Patch Precedence](sem-014-declare-material-patch-precedence/)
+- [SEM-015 · Bind a Surface Marker to Barycentric Vertex Identity](sem-015-bind-a-surface-marker-to-barycentric-vertex-identity/)
+- [SEM-016 · Check Sign Consistency around a Craft Seam Cycle](sem-016-check-sign-consistency-around-a-craft-seam-cycle/)
+- [SEM-017 · Declare Boundary Ownership for Negative Tile Coordinates](sem-017-declare-boundary-ownership-for-negative-tile-coordinates/)

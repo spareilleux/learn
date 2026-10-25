@@ -111,7 +111,7 @@ Forme las matrices central y lateral. ¿Por qué hay que indicar la normalizaci�
 
 <details><summary>Respuesta 1</summary>
 
-Ambas aparecen abajo. La normalización por la raíz cuadrada hace ortonormal esta matriz; otra convención necesitaría distintas fórmulas de inversión y energía.
+Ambas aparecen arriba. La normalización por la raíz cuadrada hace ortonormal esta matriz; otra convención necesitaría distintas fórmulas de inversión y energía.
 
 </details>
 

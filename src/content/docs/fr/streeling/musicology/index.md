@@ -25,3 +25,6 @@ sidebar:
 - [MCL-012 · Fusionner les tenues sans fusionner les liaisons de phrasé](mcl-012-merge-ties-without-merging-slurs/)
 - [MCL-013 · Conserver la durée du tuplet sous forme rationnelle](mcl-013-keep-tuplet-duration-as-a-rational/)
 - [MCL-014 · Déclarer où les petites notes prennent leur temps](mcl-014-declare-where-grace-notes-take-their-time/)
+- [MCL-015 · Distinguer le relâchement de la touche de celui de la pédale](mcl-015-separate-key-release-from-pedal-release/)
+- [MCL-016 · Reconstruire les curseurs d’une partition polyphonique](mcl-016-reconstruct-polyphonic-score-cursors/)
+- [MCL-017 · Intégrer une rampe de tempo dans le repère des temps musicaux](mcl-017-integrate-a-tempo-ramp-in-beat-coordinates/)

@@ -139,7 +139,7 @@ Parcourez la suite principale et relevez chaque état du curseur. Le retour est-
 
 <details><summary>Réponse 1</summary>
 
-Les états figurent ci-dessous. Le retour repositionne le curseur de sérialisation ; il ne crée pas une note de durée sonore négative.
+Les états figurent ci-dessus. Le retour repositionne le curseur de sérialisation ; il ne crée pas une note de durée sonore négative.
 
 </details>
 
