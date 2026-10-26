@@ -1,0 +1,25 @@
+# Next fifty project-useful Streeling courses
+
+Execution: knowledge-work, with a separately reviewed runnable claim-test substep required by the user's journal-driven verification instruction. Produce 50 distinct English courses and 100 full French/Spanish translations. `allocation.json` fixes all 50 identifiers and the publication baseline. The source count advances from 431 to 481 of 525 across the original 21 departments; 44 remain. Source existence, AI review, public source bytes, deployed HTML and human/learner acceptance are separate signals.
+
+## Production contract
+
+Use the established repository source format and generator. Each course adds a distinct project operation beyond its baseline prerequisites; inspect the actual catalogue before choosing topics. Connect it to an actual GA, IX, Demerzel, Learn or craft-to-Godot artifact/question. The emphasis is audio/guitar, composable DSLs and agentic evidence, and manual-craft models useful to 3D scenes. Avoid quota fillers and restatements of existing courses.
+
+Each new source has substantive English prose, five corrected exercises, a concrete source-assisted task and five prepared learner criteria with undecided learner acceptance. Translate the whole course into idiomatic French and Spanish, including course metadata/title; preserve exact code, formula literals, URLs and numeric tokens. Only already-committed baseline courses may be prerequisites. Cite actual primary references and record reading scope/versions; never infer reading from HTTP status.
+
+For each course retain a fixed authored model, typed inputs, assumptions, independently checkable expected quantities, a relevant structured negative-control input and expected result, claim limits and novelty explanation. The example is an authored mathematical/logical case; it is not a new production audio/scene/agent/material/learner observation. State the direct/manual baseline and a falsifier before proposing a DSL or agent abstraction. No production engine, API, DSL or full runnable lab is included.
+
+## Ownership and verification
+
+Unit A owns 18 audio/music courses, B owns 16 agentic/system courses, C owns 16 craft/scene/interpretation courses, with exact code/departments in the allocation. Each author owns only its new three-locale course prefixes and `unit-<unit>.json` / `unit-<unit>-self-check.json`. Root owns shared evidence, journals, manifests, generated pages, lockfile and publication. No worker writes another unit, old sources, manifests/configuration, generated output or Git index.
+
+The native implementation route is selected: both CE checkout config files were absent and no live external authoring assignment applies to this course batch. The Galactic status call returned Transport closed; the inbox returned no messages and no integrity errors. No remote session state is inferred. Native workers use disjoint shared-workspace scopes from this committed plan baseline. Root alone stages and commits. Do not install dependencies, start visible sessions, or run heavy services/builds in workers.
+
+After author freeze, independent reviewers inspect every localized exercise/answer, prepared criterion, novelty/prerequisite, source/claim boundary and final-byte binding. They independently implement narrow standard-library claim checks for each authored model and negative control, with observations before assertions and fixed expectations not copied from the calculation under test. Root executes actual checks, verifies incorrect in-memory inputs are rejected, retains all failed attempts, diagnoses and corrects the relevant course/test/helper, and replays. No learner decision becomes accepted without actual learner evidence.
+
+The explicit code substep returns to the normal CE code workflow. Inspect the previous batch's tests and generator tests first. New test behavior has independent code review before publication. Temporary orchestration remains outside the repo. Preserve exact raw output with the batch-local attributes; the final index/blob/public readback must match the recorded bytes.
+
+Root maintains the English production journal and additive EN/FR/ES global journal entries, preserving all historical checklist states and failures. Each meaningful entry records question, prospective hypothesis or retrospective status, command, environment/input/test revision, expected and observed values, verdict, correction/replay and remaining limits. Never rewrite an old failed attempt into a success.
+
+Final verification: exact 50-course/150-source inventory delta, 750 localized exercise/answer pairs, 250 undecided learner criteria, source/translation parity, fresh independent review bindings, nonempty complete model/control test coverage, existing generator regressions, full static build, changed-page/source-banner/internal-link inspection and repeat-sync byte equality. Root publishes only owned paths to existing Draft PR201, preserves its title/body, checks remote head before normal push and anonymously reads every changed file at the resulting immutable commit. Do not claim deployed HTML, human review or completion of the 525-course objective.
