@@ -97,4 +97,13 @@ RBF fourth axis separates rings: True
 NMF raw CI timings reconstructed: True
 LDA with OS labels has two axes: True
 t-SNE on 12 jobs is finite: True
+
+== lesson 10
+stationary distribution: [0.625, 0.3125, 0.0625]
+mean first passage to state 2: [31.4286, 28.5714, 16.0]
+casino: 259 loaded rolls in 23 runs; 239 sixes
+ln P(rolls): -1761.7121
+Viterbi: agreement with the true states 0.869; 6 loaded runs
+posterior decoding: agreement with the true states 0.876; 16 loaded runs
+trap: posterior argmax [0, 1], Viterbi [0, 2]
 exit 0

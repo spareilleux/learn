@@ -1,0 +1,56 @@
+== Markov chain: bull, bear, stagnant
+  exact stationary distribution: [0.6250, 0.3125, 0.0625]
+  IX power iteration:            [0.6250, 0.3125, 0.0625]
+  largest gap below 1e-12: true
+  is_ergodic(1): true
+
+== mean first passage to stagnant (state 2)
+  exact, from bull, bear, stagnant: [31.4286, 28.5714, 16.0000]
+  Kac: 1 / pi_2 = 16.0000
+  IX, 20000 walks, at most 1000 steps: from bull 31.650, return 16.194
+  IX, 20000 walks, at most   20 steps: from bull 9.836, return 3.763
+  IX, 20000 walks, at most    5 steps: from bull 3.030, return 1.276
+
+== a periodic chain [[0, 1], [1, 0]]
+  state_distribution from [1, 0], 1 to 4 steps: [0.0, 1.0] [1.0, 0.0] [0.0, 1.0] [1.0, 0.0]
+  stationary_distribution: [0.5000, 0.5000]
+  is_ergodic(100): false
+
+== the casino: 1000 rolls from the course's generator, seed 10
+  true path: 259 loaded rolls in 23 runs; 239 sixes
+  forward in probability space: T = 300 gives 8.832e-233, T = 1000 gives 0.000e0
+  ln P(rolls), hand log space: -1761.7121
+  ln P(rolls), IX forward:     -1761.7121
+  agree within 1e-9: true
+
+== decoding the 1000 rolls
+  Viterbi: hand path = IX path: true; log-probabilities agree within 1e-9: true
+  Viterbi: agreement with the true states 0.869; 6 loaded runs
+  posteriors: hand against IX forward_backward, largest gap below 1e-9: true
+  posterior decoding (map_estimate): agreement with the true states 0.876; 16 loaded runs; same as hand argmax: true
+
+== when the best states are not a path
+  map_estimate: [0, 1], probability of that path 0.0000
+  viterbi:      [0, 2], probability 0.4000
+
+== Baum-Welch from a wrong start, on the 1000 rolls
+   0 iterations: ln P = -1775.9589
+   1 iterations: ln P = -1767.1374
+   2 iterations: ln P = -1766.1895
+   3 iterations: ln P = -1765.0041
+   4 iterations: ln P = -1763.6514
+   5 iterations: ln P = -1762.2635
+   6 iterations: ln P = -1760.9917
+   7 iterations: ln P = -1759.9472
+   8 iterations: ln P = -1759.1683
+   9 iterations: ln P = -1758.6270
+  10 iterations: ln P = -1758.2618
+  never decreases: true
+  after 10: stay fair 0.8505, stay loaded 0.8271, P(six | loaded) 0.4060; truth 0.9500, 0.9000, 0.5000
+
+== edges
+  viterbi on an impossible symbol: path [0, 0, 0], log-probability -inf
+  forward on it: -inf
+  backward entries all positive: true (a log-probability is never positive)
+  a symbol outside the alphabet (6 on a die of 0 to 5): forward panics: true
+exit 0

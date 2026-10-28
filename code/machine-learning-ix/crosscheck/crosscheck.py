@@ -319,3 +319,97 @@ print(f"LDA with OS labels has two axes: {LinearDiscriminantAnalysis(n_component
 tsne9 = TSNE(n_components=2, perplexity=3, random_state=42, max_iter=300,
              learning_rate=200, method="exact").fit_transform(Z[:12])
 print(f"t-SNE on 12 jobs is finite: {bool(np.isfinite(tsne9).all())}")
+
+# Lesson 10: the chain's exact answers, then the casino replayed from the course's generator and decoded
+# with numpy in log space.
+print("\n== lesson 10")
+market = np.array([[.9, .075, .025], [.15, .8, .05], [.25, .25, .5]])
+system = market.T - np.eye(3)
+system[-1] = 1
+stationary = np.linalg.solve(system, np.array([0., 0., 1.]))
+print(f"stationary distribution: {np.round(stationary, 4).tolist()}")
+passage = np.linalg.solve(np.eye(2) - market[:2, :2], np.ones(2))
+print(f"mean first passage to state 2: {np.round([*passage, 1 + market[2, :2] @ passage], 4).tolist()}")
+
+
+def uniforms(seed):
+    for x in xorshift(seed):
+        yield (x >> 11) / 2 ** 53
+
+
+def pick(p, u):
+    total = 0.0
+    for i, pi in enumerate(p):
+        total += pi
+        if u < total:
+            return i
+    return len(p) - 1
+
+
+init10 = np.array([.5, .5])
+trans10 = np.array([[.95, .05], [.1, .9]])
+emit10 = np.array([[1 / 6] * 6, [.1] * 5 + [.5]])
+draw10 = uniforms(10)
+truth, rolls = [], []
+for t in range(1000):
+    state = pick(init10 if t == 0 else trans10[truth[-1]], next(draw10))
+    truth.append(state)
+    rolls.append(pick(emit10[state], next(draw10)))
+truth, rolls = np.array(truth), np.array(rolls)
+
+
+def runs(path, state=1):
+    return int(np.sum((path == state) & np.concatenate(([True], path[:-1] != state))))
+
+
+print(f"casino: {int(np.sum(truth == 1))} loaded rolls in {runs(truth)} runs; {int(np.sum(rolls == 5))} sixes")
+
+with np.errstate(divide="ignore"):
+    log_init, log_trans, log_emit = np.log(init10), np.log(trans10), np.log(emit10)
+
+
+def log_alpha(obs, li, lt, le):
+    la = np.empty((len(obs), len(li)))
+    la[0] = li + le[:, obs[0]]
+    for t in range(1, len(obs)):
+        la[t] = np.logaddexp.reduce(la[t - 1][:, None] + lt, axis=0) + le[:, obs[t]]
+    return la
+
+
+def log_beta(obs, lt, le):
+    lb = np.zeros((len(obs), lt.shape[0]))
+    for t in range(len(obs) - 2, -1, -1):
+        lb[t] = np.logaddexp.reduce(lt + le[:, obs[t + 1]] + lb[t + 1], axis=1)
+    return lb
+
+
+def viterbi(obs, li, lt, le):
+    delta = li + le[:, obs[0]]
+    back = []
+    for t in range(1, len(obs)):
+        scores = delta[:, None] + lt
+        back.append(np.argmax(scores, axis=0))
+        delta = scores.max(axis=0) + le[:, obs[t]]
+    path = [int(np.argmax(delta))]
+    for b in reversed(back):
+        path.append(int(b[path[-1]]))
+    return np.array(path[::-1])
+
+
+la10 = log_alpha(rolls, log_init, log_trans, log_emit)
+print(f"ln P(rolls): {np.logaddexp.reduce(la10[-1]):.4f}")
+best = viterbi(rolls, log_init, log_trans, log_emit)
+print(f"Viterbi: agreement with the true states {np.mean(best == truth):.3f}; {runs(best)} loaded runs")
+gamma10 = la10 + log_beta(rolls, log_trans, log_emit)
+posterior = np.argmax(gamma10, axis=1)
+print(f"posterior decoding: agreement with the true states {np.mean(posterior == truth):.3f}; "
+      f"{runs(posterior)} loaded runs")
+
+with np.errstate(divide="ignore"):
+    trap_i = np.log([.4, .3, .3])
+    trap_t = np.log([[0., 0., 1.], [0., 1., 0.], [0., 1., 0.]])
+    trap_e = np.zeros((3, 1))
+trap_obs = np.array([0, 0])
+trap_gamma = log_alpha(trap_obs, trap_i, trap_t, trap_e) + log_beta(trap_obs, trap_t, trap_e)
+print(f"trap: posterior argmax {np.argmax(trap_gamma, axis=1).tolist()}, "
+      f"Viterbi {viterbi(trap_obs, trap_i, trap_t, trap_e).tolist()}")
