@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- run.sh copies GA's two files next to this one: the locator the loader calls, and the loader -->
+    <Compile Include="ConfigFileLocator.fs" />
+    <Compile Include="NeoRiemannianConfig.fs" />
+    <Compile Include="Program.fs" />
+    <Content Include="NeoRiemannian.yaml" CopyToOutputDirectory="PreserveNewest" />
+    <!-- the version GA.Business.Config.fsproj references at a826864 -->
+    <PackageReference Include="YamlDotNet" Version="16.2.1" />
+  </ItemGroup>
+
+</Project>

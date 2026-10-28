@@ -1,0 +1,42 @@
+== private: 3 private records
+transforms 0, hexatonic cycles 0, octatonic cycles 0
+Apply "P" "C_maj" -> None
+Apply "P" "C#_maj" -> None
+Apply "L" "G#_maj" -> None
+Apply "S" "C_maj" -> None
+Apply "P" "Db_maj" -> None
+Apply "P" "Ab_maj" -> None
+Apply "P" "c_maj" -> None
+Apply "P" "C" -> None
+Apply "P" "C major" -> None
+Apply "p" "C_maj" -> None
+Apply "PL" "C_maj" -> None
+Apply "LPR" "C_maj" -> None
+TryGetTransform "H" -> None
+TryGetTransform "h" -> None
+TryGetTransform "Hexatonic pole" -> None
+TryGetTransform "PL" -> None
+== public: 0 private records
+transforms 6, hexatonic cycles 4, octatonic cycles 3
+P: 24 mappings, cost 1
+L: 24 mappings, cost 1
+R: 24 mappings, cost 2
+S: 24 mappings, cost 2
+N: 24 mappings, cost 2
+H: 24 mappings, cost 3
+Apply "P" "C_maj" -> Some "C_min"
+Apply "P" "C#_maj" -> Some "C#_min"
+Apply "L" "G#_maj" -> Some "C_min"
+Apply "S" "C_maj" -> Some "C#_min"
+Apply "P" "Db_maj" -> None
+Apply "P" "Ab_maj" -> None
+Apply "P" "c_maj" -> None
+Apply "P" "C" -> None
+Apply "P" "C major" -> None
+Apply "p" "C_maj" -> None
+Apply "PL" "C_maj" -> None
+Apply "LPR" "C_maj" -> None
+TryGetTransform "H" -> Some "H"
+TryGetTransform "h" -> None
+TryGetTransform "Hexatonic pole" -> None
+TryGetTransform "PL" -> None

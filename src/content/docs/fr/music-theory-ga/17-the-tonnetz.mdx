@@ -1,0 +1,489 @@
+---
+title: "Leçon 17 : le Tonnetz et les transformations néo-riemanniennes"
+description: P, L et R, les trois coups qui changent une triade majeure ou mineure en ses plus proches voisines, le Tonnetz qui en dresse la carte et les médiantes chromatiques, comparés avec le NeoRiemannian.yaml de Guitar Alchemist, le chargeur qui n'en renvoie rien, son SemanticAnalysisService et son composant TonnetzDiagram.
+sidebar:
+  label: 17. Le Tonnetz
+  order: 17
+---
+
+import Tonnetz from '../../../../assets/music-theory-ga/l17-tonnetz.svg';
+
+La leçon 9 a mesuré à quelle distance sont deux accords, en notes communes et en demi-tons de conduite des voix. La théorie néo-riemannienne en tire une carte. Elle a trois coups, P, L et R, dont chacun change une triade majeure ou mineure en une autre en gardant deux notes et en déplaçant la troisième, et un réseau de notes, le Tonnetz, sur lequel chaque coup retourne un triangle autour de l'une de ses arêtes. [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) a quatre pièces sur le sujet : un catalogue de six transformations et de sept cycles, `NeoRiemannian.yaml` ; le module F# qui le charge, `NeoRiemannianConfig` ; trois méthodes d'un service C#, `SemanticAnalysisService` ; et un composant React, `TonnetzDiagram`. Le programme du cours définit P, L et R d'après la définition publiée, construit le Tonnetz à partir des douze classes de hauteurs, et vérifie chaque pièce contre eux. Sa première exécution a trouvé une chose qu'aucune prédiction n'avait écrite : le chargeur renvoie un catalogue vide.
+
+Tous les liens vers GA pointent sur le commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Le programme appelle `NeoRiemannianConfig` par le projet F# de GA lui-même, compile `SemanticAnalysisService.cs` tel quel, et lit le composant comme du texte. À ce commit, aucun autre code de GA ne nomme le module ni le service : aucune application, aucun outil ni aucun test ne les appelle. Aucun outil MCP ni aucun chatbot n'a été appelé. Les sorties viennent de la commande ci-dessous ; le point d'entrée est `l19`.
+
+```bash
+dotnet run --project code/music-theory-ga/GaTheory -c Release -- l19
+```
+
+## P, L et R
+
+### L'idée
+
+Wikipédia : "The three transformations move one of the three notes of the triad to produce a different triad", et elles "are their own inverses (a second application undoes the first)" ([Neo-Riemannian theory](https://en.wikipedia.org/wiki/Neo-Riemannian_theory)). Chacune a un nom venu de l'harmonie plus ancienne :
+
+- "The P transformation exchanges a triad for its parallel: applied to a major triad, it lowers the third by a semitone (C major to C minor)" ;
+- "The R transformation exchanges a triad for its relative: applied to a major triad, it raises the fifth by a tone (C major to A minor)" ;
+- "The L transformation exchanges a triad for its mediant or submediant: applied to a major triad, it lowers the root by a semitone (C major to E minor)".
+
+La leçon 5 a rencontré les deux premières comme des relations entre tonalités : C majeur et C mineur sont des tonalités homonymes, C majeur et A mineur des tonalités relatives. L vient de *leading-tone exchange*, l'échange de sensible : dans C majeur, la fondamentale C passe à B, la sensible.
+
+Une phrase du même article ramène les trois à une seule règle : "P preserves the perfect fifth interval (so given say C and G there are only two candidates for the third note: E and E♭), R preserves the major third interval (given C and E our candidates are G and A), and L preserves the minor third interval (given E and G our candidates are C and B)". Une triade majeure ou mineure a une quinte, une tierce majeure et une tierce mineure. Garde les deux notes de l'une d'elles ; la troisième note a exactement un autre endroit où aller. Le cours écrit cette règle une seule fois ([`Lesson19.Flip`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L56-L65)) : si les notes gardées sont les classes de hauteurs *a* et *b*, la note *x* passe à *a* + *b* − *x*, son image en miroir par rapport à la paire. Pour P sur C majeur, C et G restent, 0 et 7, et E, 4, passe à 0 + 7 − 4 = 3, E♭.
+
+Le module Streeling [MAT-022 · Symétrie, groupes et invariants](../../streeling/mathematics/mat-022-symmetry-groups-invariants/) dit la même chose : "Each keeps two notes of the triad and reflects the third about them, so each is an inversion chosen by the triad itself, and each is an **involution**: applied twice, it returns the triad it started from" ([`mat-022-symmetry-groups-invariants.md#L96`](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/mathematics/en/mat-022-symmetry-groups-invariants.md#L96)).
+
+Le programme applique les trois à C majeur et à C mineur ([`Lesson19.cs#L235-L249`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L235-L249)) :
+
+```text
+== P, L and R keep two notes of a triad and move the third to its mirror image about them: the course's three, from C major and from C minor
+triad  op  keeps   moves         gives  notes
+C      P   C G     E to E♭ (-1)  Cm     C E♭ G
+C      L   E G     C to B (-1)   Em     E G B
+C      R   C E     G to A (+2)   Am     A C E
+Cm     P   C G     E♭ to E (+1)  C      C E G
+Cm     L   C E♭    G to A♭ (+1)  A♭     A♭ C E♭
+Cm     R   E♭ G    C to B♭ (-2)  E♭     E♭ G B♭
+```
+
+Sur une triade mineure, chaque lettre déplace sa note dans l'autre sens, et pour L et R c'est un autre membre de la triade qui bouge. L garde la tierce mineure dans les deux cas : E et G dans C majeur, C et E♭ dans C mineur.
+
+### Dans GA : trois méthodes d'un service
+
+`SemanticAnalysisService`, dans `GA.Business.AI`, a une méthode pour chacune : `ApplyParallel`, `ApplyLeadingtone` et `ApplyRelative` ([`SemanticAnalysisService.cs#L22-L125`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.AI/Interpretation/SemanticAnalysisService.cs#L22-L125)). Chacune prend un ensemble de classes de hauteurs et une fondamentale et renvoie un `NeoRiemannianResult`, un enregistrement avec le nom de l'opération, les noms des deux triades, un nombre de notes communes et une phrase ([`SemanticAnalysisModels.cs#L9-L14`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.AI/Interpretation/SemanticAnalysisModels.cs#L9-L14)). Les méthodes ne déplacent aucune note : elles calculent la fondamentale de la nouvelle triade, 4 ou 8 demi-tons plus haut pour L, 9 ou 3 pour R, et changent la qualité. Le programme passe les 24 triades par les trois du cours et par celles de GA ([`Lesson19.cs#L251-L260`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L251-L260)) :
+
+```text
+== The 24 triads through P, L and R: the course against NeoRiemannianConfig.Apply, against NeoRiemannian.yaml as the course reads it, and against SemanticAnalysisService (GA.Business.AI)
+op  = Apply   = file    = service  undone by itself  common tones  movement
+P   0 of 24   24 of 24  24 of 24   24 of 24          2             1
+L   0 of 24   24 of 24  24 of 24   24 of 24          2             1
+R   0 of 24   24 of 24  24 of 24   24 of 24          2             2
+```
+
+Le service est d'accord sur les 24 triades pour les trois lettres, et les correspondances de `NeoRiemannian.yaml` aussi quand le cours lit le fichier. Chaque lettre se défait elle-même et garde deux notes communes ; P et L déplacent une note d'un demi-ton, R d'un ton. La colonne `= Apply` affiche 0 sur 24 : c'est le chargeur de GA, le sujet de la section suivante.
+
+Pour C majeur, les trois enregistrements se lisent ainsi ([`Lesson19.cs#L262-L267`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L262-L267)) :
+
+```text
+== SemanticAnalysisService on C major: the record each of its three methods returns
+P (Parallel): C major -> C minor, CommonTones 2. The P operation transforms C major to its parallel C minor by moving the 3rd, keeping root and 5th.
+L (Leading-tone): C major -> E minor, CommonTones 2. The L operation transforms C major to E minor by moving one note by a semitone, keeping 2 common tones.
+R (Relative): C major -> A minor, CommonTones 2. The R operation transforms C major to its relative A minor. These share 2 common tones and are in the same key.
+```
+
+Les méthodes testent l'ensemble contre la fondamentale qu'on leur donne ([`#L272-L282`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.AI/Interpretation/SemanticAnalysisService.cs#L272-L282)), donc un appelant doit déjà connaître la fondamentale et savoir que l'ensemble est une triade majeure ou mineure ([`Lesson19.cs#L269-L278`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L269-L278)) :
+
+```text
+== SemanticAnalysisService on a root that is not the triad's, and on sets that are not major or minor triads
+C E G with the root C      P C minor, L E minor, R A minor
+C E G with the root E      P (null), L (null), R (null)
+C E G♯ with the root C     P (null), L (null), R (null)
+C E♭ G♭ with the root C    P (null), L (null), R (null)
+C E G B with the root C    P (null), L (null), R (null)
+C E with the root C        P (null), L (null), R (null)
+```
+
+C E G avec E pour fondamentale n'est pas une triade majeure pour le service, et ni une triade augmentée ni une triade diminuée n'ont de P, de L ou de R. Le fichier écrit aussi une directive `using` deux fois ([`#L5-L6`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.AI/Interpretation/SemanticAnalysisService.cs#L5-L6)), ce que le compilateur C# signale par l'avertissement CS0105.
+
+## Le catalogue de GA, et un chargeur qui ne renvoie rien
+
+`NeoRiemannian.yaml` se décrit comme "Generated programmatically from first principles" ([`NeoRiemannian.yaml#L1-L20`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/NeoRiemannian.yaml#L1-L20)). Il liste six transformations, P, L, R, S, N et H, chacune avec une description, un `VoiceLeadingCost` et 24 correspondances entre des noms comme `C_maj` et `G#_min`, puis quatre cycles hexatoniques et trois octatoniques. Le module F# `NeoRiemannianConfig` le charge et offre cinq fonctions : `GetAllTransforms`, `TryGetTransform`, `Apply`, `GetHexatonicCycles` et `GetOctatonicCycles` ([`NeoRiemannianConfig.fs#L130-L155`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/NeoRiemannianConfig.fs#L130-L155)). Le programme les appelle ([`Lesson19.cs#L282-L292`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L282-L292)) :
+
+```text
+== NeoRiemannianConfig (GA.Business.Config), which loads NeoRiemannian.yaml: GetAllTransforms returns 0 transforms, GetHexatonicCycles 0 cycles, GetOctatonicCycles 0
+Apply("P", "C_maj") -> (none)
+Apply("L", "G#_maj") -> (none)
+Apply("S", "C_maj") -> (none)
+Apply("P", "Db_maj") -> (none)
+Apply("p", "C_maj") -> (none)
+Apply("PL", "C_maj") -> (none)
+TryGetTransform("H") -> (none); TryGetTransform("h") -> (none); TryGetTransform("PL") -> (none)
+```
+
+Rien ne revient : aucune transformation, aucun cycle, et aucune réponse pour `C_maj`, un nom que le fichier écrit. Rien n'a échoué non plus : le programme est allé jusqu'au bout. La prédiction, écrite avant cette exécution, attendait six transformations.
+
+### Ajouté après la première exécution : ce que le chargeur attrape
+
+Le chargeur fait son travail à l'intérieur de `try … with _ -> [], [], []` ([`#L65-L124`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/NeoRiemannianConfig.fs#L65-L124)) : quelle que soit l'exception levée, il répond par trois listes vides. Il garde le résultat dans une valeur `lazy` ([`#L126`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/NeoRiemannianConfig.fs#L126)), donc le fichier est lu une fois par processus. Pour voir ce qui a été levé, le programme s'abonne à [`AppDomain.FirstChanceException`](https://learn.microsoft.com/dotnet/api/system.appdomain.firstchanceexception), un événement que .NET déclenche pour chaque exception avant qu'aucun `catch` ne s'exécute, autour de son premier appel au module ([`Lesson19.cs#L224-L231`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L224-L231), [`#L294-L301`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L294-L301)) :
+
+```text
+== Added after the first run: the exceptions thrown while NeoRiemannianConfig loaded its file, which its loader catches: 3
+System.MissingMethodException: No parameterless constructor defined for type 'GA.Business.Config.NeoRiemannianConfig+NeoRiemannianYaml'.
+System.InvalidOperationException: Failed to create an instance of type 'GA.Business.Config.NeoRiemannianConfig+NeoRiemannianYaml'.
+  inner: System.MissingMethodException: No parameterless constructor defined for type 'GA.Business.Config.NeoRiemannianConfig+NeoRiemannianYaml'.
+YamlDotNet.Core.YamlException: Exception during deserialization
+  inner: System.InvalidOperationException: Failed to create an instance of type 'GA.Business.Config.NeoRiemannianConfig+NeoRiemannianYaml'.
+  inner: System.MissingMethodException: No parameterless constructor defined for type 'GA.Business.Config.NeoRiemannianConfig+NeoRiemannianYaml'.
+```
+
+[YamlDotNet](https://github.com/aaubry/YamlDotNet), la bibliothèque qui lit le fichier, ne peut pas créer de `NeoRiemannianYaml`, l'enregistrement que le module déclare pour la forme du fichier. Le module déclare trois enregistrements de ce genre, chacun avec l'attribut [`CLIMutable`](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-climutableattribute.html), qui donne à un enregistrement F# un constructeur sans paramètre et des setters sur ses propriétés, pour qu'un sérialiseur puisse le remplir. Il déclare aussi chacun d'eux `private` ([`#L42-L57`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/NeoRiemannianConfig.fs#L42-L57)). Le programme demande à l'assembly compilé ce que cela a produit, par réflexion ([`Lesson19.cs#L303-L317`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L303-L317)) :
+
+```text
+== Added after the first run: the [<CLIMutable>] records of GA.Business.Config, by module: how the assembly exposes them, and how many have a public constructor without parameters
+module                       records  exposed as  public constructor
+AtonalModalFamiliesConfig    3        public      3 of 3
+ExtendedScalesConfig         1        public      1 of 1
+ModesConfig                  3        public      3 of 3
+NeoRiemannianConfig          3        internal    0 of 3
+ScalesConfig                 1        public      1 of 1
+SemanticConfig               3        public      3 of 3
+TabSourcesConfig             2        public      2 of 2
+CycleYaml: constructors internal with 0 parameters, internal with 2 parameters; setters Name internal, Triads internal
+NeoRiemannianYaml: constructors internal with 0 parameters, internal with 3 parameters; setters Transforms internal, HexatonicCycles internal, OctatonicCycles internal
+TransformYaml: constructors internal with 0 parameters, internal with 3 parameters; setters Description internal, VoiceLeadingCost internal, Mappings internal
+```
+
+Sept modules de `GA.Business.Config` déclarent de tels enregistrements. Six les exposent comme des types publics avec un constructeur public. Les trois de `NeoRiemannianConfig` sont internes, et leurs constructeurs et leurs setters aussi : le constructeur sans paramètre existe, et YamlDotNet ne peut pas s'en servir.
+
+**Si tu écris du C#**, la même paire de choix donne le même résultat : une classe imbriquée marquée `private` ou `internal` confiée à un sérialiseur qui veut un constructeur public, et un `catch` qui renvoie une valeur par défaut vide. Chacun est raisonnable seul. Ensemble, ils changent un échec en « rien trouvé », ce qui ressemble à une réponse.
+
+### Avec et sans `private`
+
+Un tableau de constructeurs est une raison, pas encore une preuve. Le cours compile le chargeur de GA deux fois depuis le clone épinglé, avec le localisateur de fichiers qu'il appelle et la version de YamlDotNet que GA référence, 16.2.1 ([`GA.Business.Config.fsproj#L37`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/GA.Business.Config.fsproj#L37)) : une fois tel quel, une fois avec le mot `private` retiré des trois enregistrements, et rien d'autre de changé ([`loader-ab/run.sh`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/loader-ab/run.sh), [`Program.fs`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/loader-ab/Program.fs)). `check.sh` l'exécute après les leçons, donc la CI l'exécute sous Linux, Windows et macOS :
+
+```text
+== private: 3 private records
+transforms 0, hexatonic cycles 0, octatonic cycles 0
+Apply "P" "C_maj" -> None
+Apply "P" "C#_maj" -> None
+Apply "L" "G#_maj" -> None
+Apply "S" "C_maj" -> None
+Apply "P" "Db_maj" -> None
+Apply "P" "Ab_maj" -> None
+Apply "P" "c_maj" -> None
+Apply "P" "C" -> None
+Apply "P" "C major" -> None
+Apply "p" "C_maj" -> None
+Apply "PL" "C_maj" -> None
+Apply "LPR" "C_maj" -> None
+TryGetTransform "H" -> None
+TryGetTransform "h" -> None
+TryGetTransform "Hexatonic pole" -> None
+TryGetTransform "PL" -> None
+== public: 0 private records
+transforms 6, hexatonic cycles 4, octatonic cycles 3
+P: 24 mappings, cost 1
+L: 24 mappings, cost 1
+R: 24 mappings, cost 2
+S: 24 mappings, cost 2
+N: 24 mappings, cost 2
+H: 24 mappings, cost 3
+Apply "P" "C_maj" -> Some "C_min"
+Apply "P" "C#_maj" -> Some "C#_min"
+Apply "L" "G#_maj" -> Some "C_min"
+Apply "S" "C_maj" -> Some "C#_min"
+Apply "P" "Db_maj" -> None
+Apply "P" "Ab_maj" -> None
+Apply "P" "c_maj" -> None
+Apply "P" "C" -> None
+Apply "P" "C major" -> None
+Apply "p" "C_maj" -> None
+Apply "PL" "C_maj" -> None
+Apply "LPR" "C_maj" -> None
+TryGetTransform "H" -> Some "H"
+TryGetTransform "h" -> None
+TryGetTransform "Hexatonic pole" -> None
+TryGetTransform "PL" -> None
+```
+
+Trois mots retirés, et le chargeur renvoie les six transformations, les quatre cycles hexatoniques et les trois octatoniques. `Apply` répond alors aux graphies du fichier, `C_min` pour L de `G#_maj`, et à rien d'autre : elle cherche les deux noms dans une table ([`#L142-L145`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/NeoRiemannianConfig.fs#L142-L145)), donc elle ne connaît aucun bémol (`Db_maj`), aucune minuscule (`c_maj`, `p`), aucun nom écrit en toutes lettres (`C major`) et aucun mot de plusieurs lettres (`PL`, `LPR`). `TryGetTransform` trouve `H` et pas `h`. La seconde moitié de la sortie est ce que la prédiction avait écrit pour le chargeur.
+
+Le constat est signalé dans [GA #830](https://github.com/GuitarAlchemist/ga/issues/830). Sur le `main` de GA à `7f6b186`, le 2026-10-11, le chargeur, le fichier YAML, le localisateur et le fichier de projet étaient identiques à ceux de `a826864`.
+
+## Ce que contient le fichier
+
+### Ajouté après la première exécution : le fichier à travers des types publics
+
+Pour vérifier quand même le contenu du catalogue, le programme lit lui-même `NeoRiemannian.yaml`, avec les options que GA donne à son désérialiseur, dans des classes publiques de la même forme ([`Lesson19.cs#L135-L161`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L135-L161)). Chaque tableau ci-dessous qui parle de « the file » utilise cette lecture ([`#L321-L341`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L321-L341)) :
+
+```text
+== Added after the first run: NeoRiemannian.yaml through the deserializer GA builds, into public types of the same shape: 6 transforms, 4 hexatonic cycles, 3 octatonic cycles
+name  mappings  cost  description
+P     24        1     Parallel — swaps major/minor of the same root; 3rd moves by 1 semitone
+L     24        1     Leading-tone — M(x) paired with m(x+4); root moves 1 semitone, becomes 5th of target
+R     24        2     Relative — M(x) paired with m(x+9); 5th moves 2 semitones, becomes root of target
+S     24        2     Slide — L o P o R; M(x) paired with m(x+1); shares the 3rd, 2 voices move
+N     24        2     Nebenverwandt — R o L o P; M(x) paired with m(x+5); shares the root, 2 voices move
+H     24        3     Hexatonic pole — L o P o L; M(x) paired with m(x+8); no common tones, 3 voices move
+```
+
+```text
+== Each transform of the file over the course's 24 triads: the triads it maps, its distinct images, whether it undoes itself and swaps major and minor, and the minor root above the major root
+name  maps  images  undone by itself  swaps  semitones
+P     24    24      24 of 24          24     0
+L     24    24      24 of 24          24     4
+R     24    24      24 of 24          24     9
+S     24    24      24 of 24          24     1
+N     24    24      24 of 24          24     5
+H     24    24      24 of 24          24     8
+names the file does not write: Db_maj absent, Ab_maj absent, c_maj absent, C absent; transforms: H found, h absent, PL absent, LPR absent
+```
+
+Chacune des six envoie les 24 triades sur 24 triades distinctes, se défait elle-même et échange majeur et mineur sur toutes. La dernière colonne est la distance qui monte de la fondamentale d'une triade majeure à celle de la triade mineure qui lui est associée : 0, 4, 9, 1, 5 et 8 demi-tons, comme le dit l'en-tête du fichier ([`#L11-L18`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/NeoRiemannian.yaml#L11-L18)). Le fichier écrit toutes les fondamentales avec des dièses, et ses six noms sont les seules clés de `Transforms`.
+
+### S, N et H
+
+Wikipédia construit trois autres relations à partir des trois premières : "The N (or Nebenverwandt) relation exchanges a major triad for its minor subdominant, and a minor triad for its major dominant (C major and F minor). The "N" transformation can be obtained by applying R, L, and P successively" ; "The S (or Slide) relation exchanges two triads that share a third (C major and C♯ minor); it can be obtained by applying L, P, and R successively in that order" ; "The H relation (LPL) exchanges a triad for its hexatonic pole (C major and A♭ minor)". L'en-tête du fichier les écrit `L o P o R`, `R o L o P` et `L o P o L`. Un mot comme « LPR » peut se lire depuis la gauche, L d'abord, ou depuis la droite, comme les mathématiciens lisent une composition. Le programme applique chaque mot dans les deux sens et compare avec les correspondances du fichier ([`Lesson19.cs#L343-L349`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L343-L349)) :
+
+```text
+== S, N and H as the file's header writes them, read from left to right and from right to left, against the file's own mappings
+name  header     left to right  right to left  order  from C
+S     L o P o R  24 of 24       24 of 24       2      C♯m
+N     R o L o P  24 of 24       24 of 24       2      Fm
+H     L o P o L  24 of 24       24 of 24       2      G♯m
+```
+
+Les deux lectures donnent les correspondances du fichier sur les 24 triades. MAT-022 en nomme la raison parmi ses pièges : "Left to right and right to left agree only when the product is an involution, as for S" ([`#L205`](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/mathematics/en/mat-022-symmetry-groups-invariants.md#L205)). Chacun des trois mots est d'ordre 2 : appliqué deux fois, il ramène chaque triade à elle-même. Le cours écrit G♯ mineur le A♭ mineur de Wikipédia.
+
+Le catalogue d'invariants de GA énonce l'invariant 15 ainsi : "PLR composites match: L∘P∘R = S, P∘L = N" ([`invariants-catalog.md#L40`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/docs/methodology/invariants-catalog.md#L40), et de nouveau à [`#L100`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/docs/methodology/invariants-catalog.md#L100)). Le programme teste la seconde moitié ([`Lesson19.cs#L351-L355`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L351-L355)) :
+
+```text
+== docs/methodology/invariants-catalog.md, invariant 15, "PLR composites match: L∘P∘R = S, P∘L = N": words of two and three letters against the file's N
+PL   equals N on  0 of 24 triads; order 3; from C: A♭
+LP   equals N on  0 of 24 triads; order 3; from C: E
+PLR  equals N on 24 of 24 triads; order 2; from C: Fm
+RLP  equals N on 24 of 24 triads; order 2; from C: Fm
+```
+
+P∘L n'égale N sur aucune triade, dans aucune des deux lectures. Chaque lettre échange majeur et mineur, donc un mot de deux lettres envoie une triade majeure sur une triade majeure, C majeur sur A♭ majeur ou sur E majeur, et N les échange. Les mots de trois lettres PLR et RLP égalent tous deux N sur les 24 triades. La ligne du catalogue juste au-dessus, l'invariant 14, dit que P, L et R sont des involutions et le marque vrai "by construction", avec `NeoRiemannianConfig.fs` pour artefact ([`#L39`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/docs/methodology/invariants-catalog.md#L39)) : les correspondances du fichier le satisfont bien, et le module n'en renvoie aucune.
+
+Alterner deux lettres depuis C majeur donne les trois cycles de la théorie ([`Lesson19.cs#L357-L362`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L357-L362)) :
+
+```text
+== The three pairs of letters: the order of the word, and the triads met from C major by alternating its two letters
+PL: order 3, 6 triads: C Cm A♭ G♯m E Em
+PR: order 4, 8 triads: C Cm E♭ E♭m F♯ F♯m A Am
+LR: order 12, 24 triads: C Em G Bm D F♯m A C♯m E G♯m B E♭m F♯ B♭m D♭ Fm A♭ Cm E♭ Gm B♭ Dm F Am
+```
+
+MAT-022 donne les trois mêmes : "Alternating P and L from C major visits six triads, C major, C minor, A♭ major, A♭ minor, E major and E minor, the hexatonic cycle", "Alternating P and R visits eight, the octatonic cycle through C, E♭, F♯ and A. Alternating R and L visits all 24" ([`#L98`](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/mathematics/en/mat-022-symmetry-groups-invariants.md#L98)).
+
+Enfin, les coûts. La leçon 9 a mesuré le plus petit mouvement total entre deux accords ; le programme le calcule pour chaque paire du fichier et le compare au `VoiceLeadingCost` du fichier ([`Lesson19.cs#L364-L373`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L364-L373)) :
+
+```text
+== VoiceLeadingCost in the file against the smallest total movement between the two triads, with the notes they share
+name  file  course  shared  the major triad's note = the minor triad's
+P     1     1       2       root = root, fifth = fifth
+L     1     1       2       third = root, fifth = third
+R     2     2       2       root = third, third = fifth
+S     2     2       1       third = third
+N     2     2       1       root = fifth
+H     3     3       0       none
+```
+
+Les six coûts sont justes. P, L et R gardent deux notes, S et N une, H aucune. La dernière colonne nomme les notes gardées. S garde la tierce des deux triades, comme le dit sa description. Pour N, la description dit "shares the root" ([`#L141`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/NeoRiemannian.yaml#L141)) : C majeur et F mineur partagent C, la fondamentale de la triade majeure et la quinte de la mineure.
+
+## Les cycles
+
+Le fichier a deux listes de cycles, chacune sous une remarque ([`Lesson19.cs#L377-L386`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L377-L386)) :
+
+```text
+== NeoRiemannian.yaml, read as text: its top-level keys, and its remarks above the two lists of cycles
+keys: Transforms, HexatonicCycles, OctatonicCycles
+198: # Hexatonic cycles: 4 disjoint cycles of 6 triads each, produced by alternating
+199: # P and L. Roots in each cycle form a hexatonic pitch-class set (union of two
+200: # augmented triads related by semitone). Names are derived from the three
+201: # major-triad roots present in each cycle.
+212: # Octatonic cycles: 3 disjoint cycles of 8 triads each, produced by alternating
+213: # P and R. Roots in each cycle form a diminished-7 pitch-class set {pc, pc+3,
+214: # pc+6, pc+9}. Names use OCT(i,j) notation, where {i,j} are the two smallest
+215: # interval classes of the underlying octatonic scale — a math-derivation label.
+```
+
+Il n'a pas de liste pour le cycle de 24 que font L et R. Le programme parcourt chaque cycle hexatonique ([`Lesson19.cs#L391-L402`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L391-L402)) :
+
+```text
+== The file's 4 hexatonic cycles: the step from each triad to the next and back to the first, the roots, and the notes of the six triads together
+name           steps   roots        notes                prime form of the notes
+Cycle_C_E_G♯   PLPLPL  C E G♯ (3)   C D♯ E G G♯ B (6)    0 1 4 5 8 9
+Cycle_C♯_F_A   PLPLPL  C♯ F A (3)   C C♯ E F G♯ A (6)    0 1 4 5 8 9
+Cycle_D_F♯_A♯  PLPLPL  D F♯ A♯ (3)  C♯ D F F♯ A A♯ (6)   0 1 4 5 8 9
+Cycle_D♯_G_B   PLPLPL  D♯ G B (3)   D D♯ F♯ G A♯ B (6)   0 1 4 5 8 9
+prime form of the roots: 0 4 8; triads in the 4 cycles: 24, distinct: 24; the same triads in the same order as the course's P and L from the first: 4 of 4
+```
+
+Les quatre cycles avancent par P, L, P, L, P, L et se referment ; ils contiennent les 24 triades une fois chacune, dans l'ordre de l'alternance du cours. La remarque dit que les "Roots in each cycle form a hexatonic pitch-class set". Les fondamentales d'un cycle sont trois notes, une triade augmentée, forme primaire 0 4 8. Les six notes de l'ensemble hexatonique, forme primaire 0 1 4 5 8 9, sont les notes des six triades réunies. La [leçon 12](../12-symmetry-and-limited-transposition/) a rencontré cet ensemble sous le nom de gamme augmentée, classe d'ensembles 6-20.
+
+Les cycles octatoniques ([`Lesson19.cs#L404-L417`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L404-L417)) :
+
+```text
+== The file's 3 octatonic cycles: the steps, the roots, the notes of the eight triads together, and the two numbers of each name
+name      steps     roots          notes                      holds both  two lowest  interval-class vector
+OCT(0,1)  PRPRPRPR  C D♯ F♯ A (4)  C C♯ D♯ E F♯ G A A♯ (8)    True        0 1         <4 4 8 4 4 4>
+OCT(1,2)  PRPRPRPR  C♯ E G A♯ (4)  C♯ D E F G G♯ A♯ B (8)     True        1 2         <4 4 8 4 4 4>
+OCT(2,3)  PRPRPRPR  D F G♯ B (4)   C D D♯ F F♯ G♯ A B (8)     True        0 2         <4 4 8 4 4 4>
+prime form of the roots: 0 3 6 9; prime form of the notes: 0 1 3 4 6 7 9 T; triads in the 3 cycles: 24, distinct: 24; the same triads in the same order as the course's P and R from the first: 3 of 3
+```
+
+Les trois cycles avancent par P et R quatre fois et se referment. Leurs fondamentales sont les quatre notes d'un accord de septième diminuée, comme le dit la remarque, et leurs huit notes forment la gamme octatonique de la leçon 12. La remarque sur les noms est fausse : elle appelle les deux nombres de `OCT(i,j)` "the two smallest interval classes of the underlying octatonic scale". Les trois collections ont un seul vecteur de classes d'intervalles, `<4 4 8 4 4 4>`, donc aucune classe d'intervalles ne peut les distinguer. Les nombres sont des classes de hauteurs. Open Music Theory : "the subscript numbers represent pitches that create a half step unique to that scale (C,C♯; C♯,D; and D,E♭, respectively)" ([Collections](https://viva.pressbooks.pub/openmusictheory/chapter/collections/)). Chaque collection contient les deux classes de hauteurs de son nom. Ce ne sont pas non plus ses deux plus basses : celles de `OCT(2,3)` sont 0 et 2.
+
+Les noms des triades passent le test que le catalogue de GA leur fixe, l'invariant 8, "Every `NeoRiemannian.yaml` triad name resolves to a valid `SetClass`" ([`invariants-catalog.md#L33`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/docs/methodology/invariants-catalog.md#L33), [`Lesson19.cs#L419-L426`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L419-L426)) :
+
+```text
+== invariants-catalog.md, invariant 8, "Every NeoRiemannian.yaml triad name resolves to a valid SetClass"
+distinct names in the file: 24; among the course's 24: 24; GA's set classes for them: 1, prime form 0 3 7; the course's prime form of C major: 0 3 7
+```
+
+L'énoncé de l'invariant 15 et les trois remarques du fichier sont signalés ensemble dans [GA #831](https://github.com/GuitarAlchemist/ga/issues/831).
+
+## Le Tonnetz
+
+### L'idée
+
+Wikipédia : "the Tonnetz (German for 'tone net') is a conceptual lattice diagram representing tonal space first described by Leonhard Euler in 1739" ([Tonnetz](https://en.wikipedia.org/wiki/Tonnetz)). Dans sa forme néo-riemannienne, il "is a planar array of pitches along three simplicial axes, corresponding to the three consonant intervals. Major and minor triads are represented by triangles which tile the plane of the Tonnetz. Edge-adjacent triads share two common pitches, and so the principal transformations are expressed as minimal motion of the Tonnetz" ([Neo-Riemannian theory](https://en.wikipedia.org/wiki/Neo-Riemannian_theory)).
+
+Le programme du cours en dessine une portion autour de C majeur ([`Diagrams.Tonnetz`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Diagrams.cs#L285-L330)) :
+
+<Tonnetz role="img" aria-label="Une portion du Tonnetz : quatre rangées de cinq notes. Chaque rangée est une ligne de quintes : B bémol, F, C, G, D dans la rangée de C. Depuis chaque note, la note en haut à droite est une tierce majeure plus haut et la note en bas à droite une tierce mineure plus haut. Le triangle C, E, G, C majeur, est rempli. Les trois triangles qui partagent une arête avec lui portent une lettre : P sur C, E bémol, G, en dessous ; L sur E, G, B, à sa droite ; R sur A, C, E, à sa gauche." />
+
+Les quintes vont vers la droite, les tierces majeures vers le haut et la droite, les tierces mineures vers le bas et la droite. Chaque triangle est une triade : ceux qui pointent vers le haut sont majeurs, ceux qui pointent vers le bas mineurs. C majeur est le triangle rempli. Retourne-le autour de son arête C–G, la quinte, et il tombe sur C E♭ G : c'est P. Autour de E–G, la tierce mineure, il tombe sur E G B : L. Autour de C–E, la tierce majeure, sur A C E : R.
+
+La portion répète déjà des notes : B♭ est dans la rangée de C et de nouveau dans la rangée du dessous, D dans la rangée de C et de nouveau dans la rangée du dessus. Sur une feuille sans fin, chaque note revient dans les deux directions. Wikipédia : "neo-Riemannian theory typically assumes enharmonic equivalence (G♯ = A♭), which wraps the planar graph into a torus".
+
+### En nombres
+
+Le programme construit le même objet sans dessin : douze classes de hauteurs, reliées quand elles sont distantes d'une tierce mineure, d'une tierce majeure ou d'une quinte ([`Lesson19.cs#L430-L457`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L430-L457)) :
+
+```text
+== The Tonnetz as a graph: the 12 pitch classes, joined when they lie a minor third, a major third or a fifth apart
+notes: 12; edges: 36, 12 of interval class 3, 12 of interval class 4, 12 of interval class 5
+triangles: 28; with one edge of each kind: 24, all of them among the 24 triads: True; the others: 4, with the edges 4 4 4: C E G♯, C♯ F A, D F♯ A♯, D♯ G B
+notes - edges + triads = 0
+triads on each note: 6; triads on each edge: 2
+the two triads on an edge of interval class 5 are each other's P: 12 of 12
+the two triads on an edge of interval class 3 are each other's L: 12 of 12
+the two triads on an edge of interval class 4 are each other's R: 12 of 12
+```
+
+Il y a 36 arêtes et 28 triangles. Les 24 triangles avec une arête de chaque sorte sont les 24 triades. Les quatre autres sont faits de trois tierces majeures : les triades augmentées, qui sur le dessin ne sont pas des triangles mais trois notes sur une même droite, comme C, E et G♯. Avec 12 notes, 36 arêtes et 24 triades, notes − arêtes + triades vaut 0, le nombre d'un tore : Wikipédia note que "the surfaces of toroidal polyhedra all have Euler characteristic 0, like the torus" ([Euler characteristic](https://en.wikipedia.org/wiki/Euler_characteristic)).
+
+Chaque note appartient à 6 triades et chaque arête à 2. Les deux triades d'une arête sont le P l'une de l'autre quand l'arête est une quinte, le L quand c'est une tierce mineure et le R quand c'est une tierce majeure, 12 fois sur 12 pour chaque sorte. C'est la règle de la première section lue sur la carte : l'arête est l'intervalle gardé.
+
+### Le graphe des 24 triades
+
+Retourne la carte comme un gant : que chaque triade soit un point, et relie deux triades quand un coup, P, L ou R, mène de l'une à l'autre. Le programme parcourt ce graphe en largeur depuis C majeur ([`Lesson19.Words`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L89-L103), [`#L459-L470`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L459-L470)) :
+
+```text
+== The graph of the 24 triads joined by P, L and R: from C major, the triads at each distance with a shortest word, their common tones with C major and the movement to them
+steps  triads  common  movement  triad and word
+0      1       3       0         C
+1      3       2       1 to 2    Cm P, Em L, Am R
+2      6       1       2 to 3    A♭ PL, E♭ PR, E LP, G LR, A RP, F RL
+3      8       0 to 1  2 to 5    G♯m PLP, Fm PLR, E♭m PRP, Gm PRL, C♯m LPR, Bm LRL, F♯m RPR, Dm RLR
+4      5       0       3 to 6    B PLPR, D♭ PLRL, F♯ PRPR, B♭ PRLR, D LRLR
+5      1       0       5         B♭m PLRLR
+edges: 36; triads at each distance, from each of the 24: 1 3 6 8 5 1; five steps from C: B♭m; from Cm: D
+```
+
+Trois triades sont à un pas, six à deux pas, et la plus éloignée, B♭ mineur, à cinq pas. Le compte 1, 3, 6, 8, 5, 1 est le même depuis chacune des 24 triades. Les notes communes diminuent quand les pas augmentent, mais le mouvement ne suit pas : la triade à cinq pas demande 5 demi-tons, alors que l'une de celles à quatre pas en demande 6.
+
+**Si tu écris du C#**, le parcours tient en quinze lignes. `Triad` est un `readonly record struct`, donc deux triades de même fondamentale et de même qualité sont égales et peuvent servir de clés à un dictionnaire. Une file contient les triades encore à visiter, et le dictionnaire garde le premier mot qui a atteint chaque triade, qui est l'un des plus courts.
+
+Wikipédia rapporte cette critique : "the C major triad is closer to F major than to F minor, since C major can be transformed into F major by R-then-L, while it takes three moves to get from C major to F minor (R-then-L-then-P). However, from a chromatic voice-leading perspective F minor is closer to C major than F major is", et "F minor and E♭ minor are both three steps from C major, even though F minor and C major have one common tone, while E♭ minor and C major have none" ([Neo-Riemannian theory](https://en.wikipedia.org/wiki/Neo-Riemannian_theory)). Le programme mesure les trois ([`Lesson19.cs#L472-L477`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L472-L477)) :
+
+```text
+== Wikipedia's three examples, from C major: steps on the graph against common tones and movement
+triad  steps  word  common  movement
+F      2      RL    1       3
+Fm     3      PLR   1       2
+E♭m    3      PRP   0       4
+```
+
+F majeur est à deux pas et coûte 3 demi-tons ; F mineur est à trois pas et en coûte 2. Les pas du graphe sont une mesure de distance, et le mouvement de la leçon 9 en est une autre.
+
+## Les médiantes chromatiques
+
+La médiante et la sus-dominante d'une tonalité sont les accords une tierce au-dessus et une tierce au-dessous de sa tonique : en C majeur, E mineur et A mineur. Wikipédia : "A chromatic mediant relationship defined conservatively is a relationship between two sections and/or chords whose roots are related by a major third or minor third, and contain one common tone (thereby sharing the same quality, i.e. major or minor)", si bien que "C major has four chromatic mediants: E major, A major, E♭ major, and A♭ major". L'article ajoute qu'Allen Forte "describes an even more distant "doubly-chromatic mediant" relationship shared by two chords of the opposite mode, with roots a third apart and no common tones; for example C major and E♭ or A♭ minor" ([Chromatic mediant](https://en.wikipedia.org/wiki/Chromatic_mediant)).
+
+Huit triades ont une fondamentale à une tierce de C. Le programme les trie par notes communes avec C majeur ([`Lesson19.cs#L481-L491`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L481-L491)) :
+
+```text
+== The eight triads whose root lies a third from C, from C major: common tones, a shortest word, the file's transform if it has one, and the name of the relation
+triad  root      common  word  file  relation
+Em     M3 above  2       L     L     diatonic
+Am     m3 below  2       R     R     diatonic
+E      M3 above  1       LP    -     chromatic mediant
+A      m3 below  1       RP    -     chromatic mediant
+E♭     m3 above  1       PR    -     chromatic mediant
+A♭     M3 below  1       PL    -     chromatic mediant
+E♭m    m3 above  0       PRP   -     doubly chromatic mediant
+G♯m    M3 below  0       PLP   H     doubly chromatic mediant
+GA's cadence "Chromatic Mediant (Metal)" of lesson 7, Em to Gm: common tones 1, word RP, movement 3
+```
+
+Pour ces huit, les notes communes et les lettres font trois en tout. Les deux médiantes diatoniques, E mineur et A mineur, partagent deux notes et sont à une lettre : ce sont L et R. Les quatre médiantes chromatiques partagent une note et sont à deux lettres : P et l'une des deux autres, dans un ordre ou dans l'autre. Les deux médiantes doublement chromatiques n'en partagent aucune et sont à trois lettres ; l'une d'elles, A♭ mineur, que le cours écrit G♯ mineur, est le H du fichier, le pôle hexatonique. Des huit, le fichier a une transformation pour trois, et aucune pour les quatre médiantes chromatiques : ce sont des mots de deux lettres, qu'`Apply` ne compose pas.
+
+La leçon 7 a rencontré une cadence que le `Cadences.yaml` de GA appelle "Chromatic Mediant (Metal)", E mineur vers G mineur ([`Cadences.yaml#L124-L129`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Cadences.yaml#L124-L129)). Ses deux triades sont mineures, leurs fondamentales à une tierce mineure l'une de l'autre, et elles partagent une note : elle répond à la définition de Wikipédia, et le mot qui les relie est R, puis P.
+
+## `ExplainTriadRelationship`
+
+Le service a une quatrième méthode sur le sujet. Elle prend deux triades et leurs fondamentales et renvoie une phrase ([`SemanticAnalysisService.cs#L130-L142`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.AI/Interpretation/SemanticAnalysisService.cs#L130-L142)). Elle appelle les trois opérations sur la première triade, affecte chaque résultat à `_`, et renvoie un texte qui ne dépend pas d'eux. Le programme l'interroge sur chaque paire ordonnée de triades ([`Lesson19.cs#L495-L503`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L495-L503)) :
+
+```text
+== SemanticAnalysisService.ExplainTriadRelationship on the 576 ordered pairs of triads, then on sets that are not triads
+distinct answers: 1
+"To move between triads, you can use L (Leading-tone), P (Parallel), or R (Relative) operations. Each operation keeps 2 common tones while moving only 1 note by 1-2 semitones."
+C D E to F G A: the same answer True
+C E G B to C E G: "Neo-Riemannian operations only apply to triads (3-note chords)."
+```
+
+Une seule réponse pour les 576 paires : la même pour C majeur et C mineur, à une lettre l'un de l'autre, que pour C majeur et B♭ mineur, à cinq lettres l'un de l'autre et sans note commune. Elle donne aussi cette réponse pour C D E et F G A, qui ne sont pas des triades, puisqu'elle ne fait que compter les notes. La phrase est vraie de P, L et R ; elle ne dit rien des deux triades qu'on lui a données.
+
+## Le composant `TonnetzDiagram` de GA
+
+Les expériences React de GA contiennent un composant nommé `TonnetzDiagram`. Il liste douze notes dans l'ordre des quintes et les dessine comme des hexagones, quatre par rangée, une rangée sur deux étant décalée d'une demi-cellule vers la droite ([`TonnetzDiagram.tsx#L9`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Experiments/React/reactapp1.client/src/TonnetzDiagram.tsx#L9), [`#L27-L30`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Experiments/React/reactapp1.client/src/TonnetzDiagram.tsx#L27-L30)). Le programme lit le fichier comme du texte, place les douze cellules comme le fait le code, et regarde chaque paire de cellules dont les centres sont distants d'une cellule, les plus proches voisines ([`Lesson19.Centre`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L201-L220), [`#L507-L521`](https://github.com/spareilleux/learn/blob/aab44fd/code/music-theory-ga/GaTheory/Lesson19.cs#L507-L521)) :
+
+```text
+== GA's TonnetzDiagram.tsx (Experiments/React, read as text): its 12 cells, four to a row, and the cells it fills for the scale 2741 of App.tsx
+row 0                          : C G D A
+row 1, half a cell to the right: E B F♯ C♯
+row 2                          : G♯ D♯ A♯ F
+as the component places them: 23 pairs of neighbours; interval class 5: 9, interval class 4: 8, interval class 3: 3, interval class 1: 3; outside the Tonnetz's three: E-D♯, B-A♯, F♯-F
+each row half a cell further: 23 pairs of neighbours; interval class 5: 9, interval class 4: 8, interval class 3: 6; outside the Tonnetz's three: none
+scale 2741 = 101010110101, bit n for pitch class n: C D E F G A B
+cells filled, by position in the list: C D E B C♯ D♯ F
+cells whose note is in the scale:     C G D A E B F
+```
+
+Dans un Tonnetz, chaque rangée est décalée de la même façon par rapport à celle du dessous, comme dans le dessin du cours plus haut. Le composant décale la rangée 1 vers la droite et ramène la rangée 2 sous la rangée 0. De ses 23 paires de voisines, 3 sont distantes d'un demi-ton, un intervalle que le Tonnetz ne relie pas. Avec chaque rangée décalée d'une demi-cellule de plus que celle du dessus, `row * 0.5` là où le code écrit `(row % 2) * 0.5`, les mêmes douze cellules ne donnent que des quintes, des tierces majeures et des tierces mineures.
+
+Le second constat porte sur les cellules remplies. Le composant reçoit une gamme sous la forme d'un nombre sur 12 bits, les identifiants de gamme de la leçon 2, où le bit *n* désigne la classe de hauteurs *n*. Il remplit une cellule quand le bit à la position de la cellule dans sa liste vaut 1 ([`#L10`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Experiments/React/reactapp1.client/src/TonnetzDiagram.tsx#L10), [`#L36`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Experiments/React/reactapp1.client/src/TonnetzDiagram.tsx#L36)), et la liste est dans l'ordre des quintes. Pour 2741, C majeur, le nombre que passe `App.tsx` ([`App.tsx#L72`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Experiments/React/reactapp1.client/src/App.tsx#L72)), il remplit C, D, E, B, C♯, D♯ et F.
+
+Le cours a transcrit l'arithmétique du composant et ne l'a pas rendu dans un navigateur : cela reste *à vérifier*.
+
+## Exercices
+
+1. Applique P, L et R à A mineur. Quelle note bouge à chaque fois, et de combien ?
+2. Une fois ses trois enregistrements publics, `Apply "P" "Db_maj"` ne renvoie toujours rien. Pourquoi, et sous quel nom le fichier contient-il cette triade ?
+3. L'invariant 15 dit que P∘L = N. Sans calculer une seule triade, pourquoi un mot de deux lettres ne peut-il jamais égaler N ?
+4. Quelle triade est la plus éloignée de C majeur sur le graphe de P, L et R, combien de notes partage-t-elle avec C majeur, et combien de demi-tons le plus petit mouvement demande-t-il ?
+5. La gamme 2741 a le bit 5 à 1. Quelle note ce bit désigne-t-il, et quelle cellule `TonnetzDiagram` remplit-il pour lui ?
+6. `NeoRiemannianConfig` renvoie un catalogue vide et aucune erreur. Quels sont les deux choix de son code qui, ensemble, produisent cela ?
+
+<details>
+<summary>Solutions</summary>
+
+1. A mineur est A C E. P garde la quinte A–E et monte C d'un demi-ton vers C♯ : A majeur. L garde la tierce mineure A–C et monte E d'un demi-ton vers F : F majeur. R garde la tierce majeure C–E et descend A d'un ton vers G : C majeur.
+2. `Apply` cherche le nom dans les correspondances du fichier, et le fichier écrit toutes les fondamentales avec des dièses : la triade y est sous le nom `C#_maj`.
+3. Chaque lettre échange majeur et mineur. Deux lettres échangent deux fois, donc une triade majeure revient majeure. N envoie une triade majeure sur une triade mineure.
+4. B♭ mineur, à cinq pas par le mot PLRLR. Elle ne partage aucune note avec C majeur, et le plus petit mouvement est de 5 demi-tons.
+5. Le bit 5 désigne la classe de hauteurs 5, F. Le composant regarde la position 5 de sa liste, C G D A E B, et remplit B.
+6. Les trois enregistrements que YamlDotNet doit créer sont `private`, donc il ne trouve aucun constructeur dont il puisse se servir et lève une exception ; et le chargeur attrape toutes les exceptions et renvoie trois listes vides. La valeur `lazy` garde ensuite ce résultat pour toute la vie du processus.
+
+</details>
+
+## À retenir
+
+- P, L et R gardent chacune un intervalle d'une triade, la quinte, la tierce mineure ou la tierce majeure, et déplacent la note restante vers son image en miroir. Chacune se défait elle-même et échange majeur et mineur. Le `SemanticAnalysisService` de GA calcule les trois correctement sur les 24 triades, pour un appelant qui connaît déjà la fondamentale.
+- À `a826864`, et sur `main` le 2026-10-11, `NeoRiemannianConfig` ne renvoie aucune transformation et aucun cycle : ses trois enregistrements sont `private`, YamlDotNet ne peut pas les créer, et le chargeur change l'exception en listes vides. Une fois les trois mots retirés, il renvoie tout ([GA #830](https://github.com/GuitarAlchemist/ga/issues/830)).
+- Le contenu de `NeoRiemannian.yaml` est juste : six involutions, leurs coûts, quatre cycles hexatoniques et trois octatoniques. Quatre phrases à son sujet ne le sont pas : P∘L = N dans le catalogue d'invariants, et dans le fichier "shares the root" pour N, les fondamentales qui formeraient un ensemble hexatonique, et les nombres de `OCT(i,j)` qui seraient des classes d'intervalles ([GA #831](https://github.com/GuitarAlchemist/ga/issues/831)).
+- Le Tonnetz a 12 notes, 36 arêtes et 24 triangles, et se referme en tore. Retourner un triangle autour d'une arête, c'est P, L ou R. Sur le graphe des 24 triades, aucune triade n'est à plus de cinq coups d'une autre, et le nombre de coups n'est pas la distance de conduite des voix : F mineur est à trois coups de C majeur et à 2 demi-tons.
+- Les médiantes chromatiques de C majeur sont les quatre triades majeures à deux lettres ; les médiantes diatoniques sont L et R, et le pôle hexatonique est l'une des deux médiantes doublement chromatiques.
+- `ExplainTriadRelationship` renvoie une seule phrase pour toutes les paires de triades. `TonnetzDiagram` place ses rangées de telle sorte que trois paires de voisines sont distantes d'un demi-ton, et remplit les cellules d'après leur position dans une liste de quintes, alors que les bits de la gamme désignent des classes de hauteurs.
+
+## Sources
+
+- Wikipédia : [Neo-Riemannian theory](https://en.wikipedia.org/wiki/Neo-Riemannian_theory) (P, L et R, les intervalles qu'elles gardent, N, S et H, le Tonnetz comme tore, la critique), [Tonnetz](https://en.wikipedia.org/wiki/Tonnetz), [Chromatic mediant](https://en.wikipedia.org/wiki/Chromatic_mediant), [Euler characteristic](https://en.wikipedia.org/wiki/Euler_characteristic).
+- Mark Gotham et al., *Open Music Theory* : [Collections](https://viva.pressbooks.pub/openmusictheory/chapter/collections/) (les noms des trois collections octatoniques).
+- Streeling : [MAT-022 · Symétrie, groupes et invariants](../../streeling/mathematics/mat-022-symmetry-groups-invariants/), section 5.
+- GuitarAlchemist/ga à [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6) : `Common/GA.Business.Config/NeoRiemannian.yaml`, `NeoRiemannianConfig.fs`, `ConfigFileLocator.fs`, `GA.Business.Config.fsproj`, `Cadences.yaml`, `Common/GA.Business.AI/Interpretation/SemanticAnalysisService.cs`, `SemanticAnalysisModels.cs`, `Experiments/React/reactapp1.client/src/TonnetzDiagram.tsx`, `App.tsx`, `docs/methodology/invariants-catalog.md` ; et les tickets [GA #830](https://github.com/GuitarAlchemist/ga/issues/830) et [GA #831](https://github.com/GuitarAlchemist/ga/issues/831).
+- Les prédictions écrites avant la première exécution, et ce que l'exécution en a fait, sont dans le [journal](../journal/#2026-10-11--leçon-17--résultats-face-aux-prédictions).

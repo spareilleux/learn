@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[Cómo se prueba este curso]
-Cada tabla de salida de las lecciones procede de [`code/music-theory-ga`](https://github.com/spareilleux/learn/tree/main/code/music-theory-ga), un programa .NET 10 que calcula cada concepto a partir de las definiciones de los libros de texto y le pide la misma respuesta a [Guitar Alchemist](https://github.com/GuitarAlchemist/ga). Se compila contra el proyecto `GA.Domain.Core` de GA, clonado en el commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Las lecciones 9 a 15 compilan además archivos de `GA.Domain.Services`, las lecciones 14 y 15 archivos de `GA.Business.Core`, y la lección 10 un servicio de la API web de GA, tal cual; la lección 15 lee como texto un archivo del servidor MCP de GA. [`.github/workflows/music-ga-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/music-ga-examples.yml) lo ejecuta en Linux, Windows y macOS y compara la salida, líneas `DIFF` incluidas, con los archivos esperados. El mismo programa dibuja las figuras, brazaletes, diagramas de acordes, mástiles y círculos de quintas, como archivos SVG, y la CI comprueba que las imágenes del repositorio están al día. Las salidas se capturaron en septiembre y octubre de 2026.
+Cada tabla de salida de las lecciones procede de [`code/music-theory-ga`](https://github.com/spareilleux/learn/tree/main/code/music-theory-ga), un programa .NET 10 que calcula cada concepto a partir de las definiciones de los libros de texto y le pide la misma respuesta a [Guitar Alchemist](https://github.com/GuitarAlchemist/ga). Se compila contra el proyecto `GA.Domain.Core` de GA, clonado en el commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Las lecciones 9 a 15 compilan además archivos de `GA.Domain.Services`, las lecciones 14 y 15 archivos de `GA.Business.Core`, la lección 10 un servicio de la API web de GA, la lección 16 archivos de `GA.Business.ML` y la lección 17 un servicio de `GA.Business.AI`, tal cual; la lección 15 lee como texto un archivo del servidor MCP de GA, y la lección 17 un componente React. [`.github/workflows/music-ga-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/music-ga-examples.yml) lo ejecuta en Linux, Windows y macOS y compara la salida, líneas `DIFF` incluidas, con los archivos esperados. El mismo programa dibuja las figuras, brazaletes, diagramas de acordes, mástiles, círculos de quintas y un Tonnetz, como archivos SVG, y la CI comprueba que las imágenes del repositorio están al día. Las salidas se capturaron en septiembre y octubre de 2026.
 :::
 
 :::tip[En 3D]
@@ -42,7 +42,7 @@ El lado de la programación te resultará familiar: value objects, records, camp
 
 ## Plan
 
-El curso sigue los conceptos que usan el código, los archivos de configuración y las herramientas MCP de GA, desde la nota aislada hasta las transformaciones neorriemannianas. Las lecciones 1 a 16 están escritas; las demás son el plan, y su columna «En GA» nombra los tipos, archivos y herramientas que leerá cada una.
+El curso sigue los conceptos que usan el código, los archivos de configuración y las herramientas MCP de GA, desde la nota aislada hasta las transformaciones neorriemannianas. Las diecisiete lecciones están escritas.
 
 | # | Lección | Teoría | En GA | Si escribes C# |
 |---|---|---|---|---|
@@ -62,7 +62,7 @@ El curso sigue los conceptos que usan el código, los archivos de configuración
 | 14 | [Voicings de guitarra: shells, drop 2 y drop 3](14-guitar-voicings/) | voicings shell, voicings cerrados y drop, notas guía | `VoicingGenerator`, `VoicingHarmonicAnalyzer`, `VoicingAnalyzer`, `VoicingFilters`, `ChordClassificationEngine`, `ChordProgressions.yaml` | generación combinatoria |
 | 15 | [El mástil: CAGED, digitación y tocabilidad](15-the-fretboard/) | formas CAGED, geometría del mástil, extensión y esfuerzo, afinaciones abiertas | `FretboardGeometry`, `PhysicalFretboardCalculator`, `PhysicalCostService`, `VoicingPhysicalAnalyzer`, `BiomechanicalAnalyzer`, `PlayerProfile`, `Tunings.toml`, `ga_easier_voicings` | funciones de coste |
 | 16 | [Arpegios, teoría acorde–escala e improvisación](16-arpeggios-and-improvisation/) | arpegios, pares acorde–escala, notas fuera de la escala | `ga_arpeggio_suggestions`, `ImprovisationSkill`, `OutsideNotesSkill`, `ImprovisationConcepts.yaml` | tablas de correspondencia |
-| 17 | El Tonnetz y las transformaciones neorriemannianas | P, L y R, el Tonnetz, mediantes cromáticas | `NeoRiemannian.yaml`, `NeoRiemannianConfig.fs` | grafos de transformaciones |
+| 17 | [El Tonnetz y las transformaciones neorriemannianas](17-the-tonnetz/) | P, L y R, el Tonnetz, mediantes cromáticas | `NeoRiemannian.yaml`, `NeoRiemannianConfig`, `SemanticAnalysisService`, `TonnetzDiagram` | grafos de transformaciones |
 | A | [Todos los instrumentos de Guitar Alchemist](appendix-instruments/) | afinaciones, órdenes, cuerdas reentrantes | `Instruments.yaml`, `InstrumentsConfig`, `Tuning` | configuración que nadie lee |
 | B | [La jerarquía OPTIC](appendix-optic/) | octava, permutación, transposición, inversión, cardinalidad | `PitchClassSet`, `TranspositionClass`, `SetClass`, el esquema OPTIC-K de GA | equivalencia, cociente tras cociente |
 | C | [Cada divergencia, y de quién es el error](appendix-ga-findings/) | las 40 líneas `DIFF` de las lecciones 1 a 7 | los 19 defectos de los que proceden | leer una comparación con honestidad |
@@ -71,7 +71,7 @@ El curso sigue los conceptos que usan el código, los archivos de configuración
 ## Requisitos previos
 
 - El [SDK de .NET 10](https://dotnet.microsoft.com/download/dotnet/10.0) y [Git](https://git-scm.com/downloads). En Windows, ejecuta los scripts del curso desde Git Bash.
-- Unos 35 MB de disco para el clon parcial de GA y la salida de compilación: el script descarga solo los archivos de los tres proyectos contra los que se compila el programa, y algunos archivos de otros cuatro.
+- Unos 45 MB de disco para el clon parcial de GA y la salida de compilación: el script descarga solo los archivos de los tres proyectos contra los que se compila el programa, y algunos archivos de otros ocho.
 - Una guitarra ayuda: todos los ejemplos se pueden tocar.
 
 ## Módulos relacionados en este sitio
@@ -83,7 +83,8 @@ Los módulos de [Streeling](../streeling/), generados a partir de [GuitarAlchemi
 - [MUS-003 · Cómo funciona la armonía](../streeling/music/mus-003-functional-harmony/) (lecciones 5, 6, 7 y 10) y [MUS-005 · Armonía de jazz para guitarra](../streeling/music/mus-005-jazz-harmony/) (lecciones 7, 9, 10, 11, 13 y 14);
 - [GTR-001 · El mapa del mástil](../streeling/guitar-studies/gtr-001-the-fretboard-map/) y [GAA-001 · Tu primer acorde](../streeling/guitar-alchemist-academy/gaa-001-your-first-chord/) (lecciones 1 y 3), y [GTR-002 · Geometría CAGED](../streeling/guitar-studies/gtr-002-caged-geometry/) (lecciones 1, 3 y 15);
 - [MUS-009 · Afinación y geometría del mástil](../streeling/music/mus-009-tuning-fretboard-geometry/) y [PHY-001 · La ciencia del sonido de la guitarra](../streeling/physics/phy-001-science-of-guitar-sound/) (lección 15);
-- [GAA-003 · Fundamentos de la improvisación](../streeling/guitar-alchemist-academy/gaa-003-improvisation-foundations/) (lección 16).
+- [GAA-003 · Fundamentos de la improvisación](../streeling/guitar-alchemist-academy/gaa-003-improvisation-foundations/) (lección 16);
+- [MAT-022 · Simetría, grupos e invariantes](../streeling/mathematics/mat-022-symmetry-groups-invariants/) (lección 17).
 
 ## Recursos
 
