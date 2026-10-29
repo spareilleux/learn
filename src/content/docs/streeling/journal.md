@@ -414,9 +414,16 @@ This batch adds 50 distinct English course sources and 100 full French/Spanish t
 
 The [production journal](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-c/journal.md) keeps rejected duplicate topics, actual author-check findings, independent review findings and replay. The [validation record](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-c/validation.json) will record final static integration; this entry does not anticipate its outcome. The tests check authored finite cases, not actual learner responses, listening, materials or native-engine scenes. Human/fluent-language and learner decisions remain null; the user will designate a reviewer. GitHub source publication and deployed HTML are separate gates.
 
+
+## 2026-10-29 — Public delivery and visible counts
+
+All 482 distinct course modules are publicly deployed in English, French and Spanish: 481 core modules plus optional IX Research, or 1,446 localized lesson pages. Anonymous full-article checks passed for all 1,518 public routes, with zero failures and complete index reachability. The overview lacked a visible grand total; the user also requested a slightly wider left nav and dynamic department counts calculated from actual course links. The follow-up tests, review and browser/deployment results remain separate from the already successful course delivery.
+
+[Public URL and body verification / Vérification publique / Verificación pública](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/publication-2026-10-29/public-counts.md).
+
 ## To verify
 
-Human/language and learner acceptance, task-specific runtime trials and deployed HTML remain pending.
+Human/language and learner acceptance and task-specific runtime trials remain pending. The course deployment and full public-article readback passed at d37df840; the visible-counter/navigation correction is verified separately.
 
 ## Open questions
 

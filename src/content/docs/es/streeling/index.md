@@ -6,6 +6,12 @@ sidebar:
   order: 0
 ---
 
+## Recuento de cursos publicados
+
+**481 / 525** módulos del programa. Módulos adicionales de IX Research: **1**.
+
+**482** cursos distintos: inglés **482**, francés **482**, español **482** — **1446** páginas de cursos en total. Las traducciones no son cursos adicionales.
+
 > Organize and advance knowledge across all domains relevant to the GuitarAlchemist ecosystem. Each department pursues research, teaches its discipline, and contributes findings to the governance knowledge base.
 
 Streeling University es la capa de conocimiento de [Demerzel](https://github.com/GuitarAlchemist/Demerzel), el marco de gobernanza del ecosistema GuitarAlchemist. Cada departamento es una persona de agente que investiga su disciplina y redacta módulos de curso.
@@ -40,6 +46,7 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Semiótica](semiotics/) | 23 | 23 | 23 |
 | [Computación visual](visual-computing/) | 22 | 22 | 22 |
 | [Músicas y lenguas del mundo](world-music-languages/) | 23 | 23 | 23 |
+| **Total** | **482** | **482** | **482** |
 
 ## Procedencia
 

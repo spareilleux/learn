@@ -140,6 +140,34 @@ test('translations are neither invented nor hidden', () => {
 	}
 });
 
+test('the public overview shows distinct modules and actual translation totals', () => {
+	const headings = { en: 'Published course count', fr: 'Nombre de cours publiés', es: 'Recuento de cursos publicados' };
+	for (const lang of LANGS) {
+		const overview = page('fresh', lang, 'index.md');
+		assert.ok(overview.includes(`## ${headings[lang]}`), `${lang} visible count heading`);
+		assert.ok(overview.includes('**3 / 50**'), `${lang} three core modules across two departments`);
+		assert.ok(overview.includes('**3**'), `${lang} distinct modules`);
+		assert.ok(overview.includes('| **Total** | **3** | **2** | **1** |'), `${lang} counts actual translations, not English fallbacks`);
+		assert.ok(overview.includes('**6**'), `${lang} six localized lesson pages, not six courses`);
+	}
+});
+
+test('IX Research is published but stays outside the departmental quota', () => {
+	const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'streeling-extra-'));
+	const source = makeSource(path.join(dir, 'source'), {
+		'streeling/departments/ix-research.department.json': JSON.stringify({ full_name: 'IX Research' }),
+		'streeling/courses/ix-research/en/ixr-001-extra.md': moduleFile('ixr-001', 'Extra research', [], 'An optional research module.'),
+	});
+	const destination = path.join(dir, 'site');
+	sync(source, destination);
+	for (const lang of LANGS) {
+		const overview = fs.readFileSync(path.join(destination, DOCS[lang], 'index.md'), 'utf8');
+		assert.ok(overview.includes('**3 / 50**'), `${lang} optional research does not enlarge the quota`);
+		assert.ok(overview.includes('| **Total** | **4** | **2** | **1** |'), `${lang} optional module is still included in published totals`);
+		assert.ok(overview.includes('**7**'), `${lang} seven actual localized pages`);
+	}
+});
+
 test('hand-written journals are left alone', () => {
 	for (const lang of LANGS) {
 		assert.equal(page('kept', lang, 'journal.md'), `hand-written ${lang} journal\n`);

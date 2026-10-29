@@ -414,9 +414,16 @@ Ce lot ajoute 50 sources de cours anglais distincts et 100 traductions complète
 
 Le [journal de production](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-c/journal.md) conserve les doublons écartés, les constats des vérifications de rédaction et de revue indépendante, ainsi que les rejeux. La [validation](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-c/validation.json) consignera l’intégration statique finale ; cette entrée n’en présume pas le résultat. Les tests portent sur des cas construits, pas sur des réponses réelles d’apprenants, des essais d’écoute, de matériaux ou de scènes dans le moteur. Les décisions humaines, linguistiques et d’acceptation par les apprenants restent nulles ; l’utilisateur désignera un relecteur. La publication des sources GitHub et le HTML déployé sont deux étapes distinctes.
 
+
+## 2026-10-29 — Publication publique et compteurs visibles
+
+Les 482 cours distincts sont déployés en anglais, en français et en espagnol : 481 modules du programme et un module IX Research hors quota, soit 1 446 pages de cours. La lecture anonyme des articles complets a réussi pour les 1 518 URL publiques, sans échec ; les index donnent accès à tous les cours. Le total général manquait sur la page d’accueil. L’utilisateur a aussi demandé une navigation de gauche légèrement plus large et des compteurs par département calculés au chargement depuis les liens de cours réels. Les tests, la revue, les vérifications dans le navigateur et le déploiement de cette correction restent distincts de la publication des cours déjà vérifiée.
+
+[Public URL and body verification / Vérification publique / Verificación pública](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/publication-2026-10-29/public-counts.md).
+
 ## À vérifier
 
-Les revues humaines et linguistiques, les essais apprenants et les essais logiciels ou physiques requis, ainsi que le HTML déployé, restent à vérifier.
+Les revues humaines et linguistiques, les essais apprenants et les essais logiciels ou physiques requis restent à vérifier. Le déploiement des cours et la lecture complète des articles publics ont réussi au commit d37df840 ; la correction du compteur visible et de la navigation est vérifiée séparément.
 
 ## Questions ouvertes
 

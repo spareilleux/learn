@@ -3,4 +3,9 @@ import Default from '@astrojs/starlight/components/Sidebar.astro';
 import GlobalLinks from './GlobalLinks.astro';
 ---
 <GlobalLinks />
-<Default><slot /></Default>
+<div data-streeling-nav data-streeling-base={import.meta.env.BASE_URL}>
+ <Default><slot /></Default>
+</div>
+<script>
+ import '../scripts/streeling-nav-counts.mjs';
+</script>

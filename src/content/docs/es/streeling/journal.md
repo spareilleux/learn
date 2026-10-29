@@ -414,9 +414,16 @@ Este lote añade 50 fuentes de cursos ingleses distintos y 100 traducciones comp
 
 El [diario de producción](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-c/journal.md) conserva los temas duplicados descartados, los hallazgos de las comprobaciones de redacción y revisión independiente y las repeticiones. La [validación](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-c/validation.json) registrará la integración estática final; esta entrada no anticipa su resultado. Las pruebas cubren casos construidos, no respuestas reales de alumnos ni ensayos de escucha, materiales o escenas en el motor. Las decisiones humanas, lingüísticas y de aceptación de alumnos siguen nulas; el usuario designará un revisor. La publicación de fuentes en GitHub y el HTML desplegado son etapas distintas.
 
+
+## 2026-10-29 — Publicación y recuentos visibles
+
+Los 482 cursos distintos están desplegados en inglés, francés y español: 481 módulos del programa y un módulo adicional de IX Research, o 1 446 páginas de cursos. La lectura anónima de artículos completos aprobó para las 1 518 URL públicas, sin fallos y con acceso a todos los cursos desde los índices. Faltaba un total general visible. El usuario también pidió una navegación izquierda algo más ancha y recuentos por departamento calculados al cargar desde los enlaces de cursos reales. Las pruebas, revisión y verificaciones del navegador y del despliegue de esta corrección siguen separadas de la publicación ya comprobada de los cursos.
+
+[Public URL and body verification / Vérification publique / Verificación pública](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/publication-2026-10-29/public-counts.md).
+
 ## Por verificar
 
-Quedan pendientes las revisiones humanas y lingüísticas, los ensayos de alumnos y del software o materiales requeridos, y el HTML desplegado.
+Quedan pendientes las revisiones humanas y lingüísticas y los ensayos de alumnos y del software o materiales requeridos. El despliegue de cursos y la lectura completa de artículos públicos aprobaron en d37df840; la corrección del contador visible y de la navegación se verifica por separado.
 
 ## Preguntas abiertas
 
