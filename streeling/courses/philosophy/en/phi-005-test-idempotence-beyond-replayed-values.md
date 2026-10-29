@@ -1,0 +1,84 @@
+---
+module_id: phi-005-test-idempotence-beyond-replayed-values
+department: philosophy
+course: "Test Idempotence Beyond Replayed Return Values"
+level: intermediate
+prerequisites: ["phi-002-when-is-an-advisory-decision-justified", "net-007-separate-dag-readiness-from-admission"]
+estimated_duration: "35 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Test Idempotence Beyond Replayed Return Values
+
+> **Draft scope.** Actual bounded IX tool responses, pinned public cache/runner source and authored state-transition counterexamples. Human technical review, fluent-language review, learner attempts and deployed course HTML verification remain pending. No durable deduplication store, crash recovery, concurrent effect executor or real external mutation was tested.
+
+## The project question
+
+An agent repeats a pipeline and sees the same result. What does that observation justify? [RFC 9110's idempotence definition](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2) concerns the intended effect of repeating a request, rather than requiring identical response bytes. Its HTTP method semantics do not automatically apply to arbitrary agent tools. We use that distinction to examine IX replay claims and small mathematical counterexamples.
+
+The public [IX runner](https://github.com/GuitarAlchemist/ix/blob/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-agent/src/tools.rs#L408-L450), pinned to `456df065ee837e33b5bbe22a4df0616a4fcb76e5`, can return cached values when an asset name is supplied. Caching a computation and deduplicating an intended external effect are different contracts. [PHI-002](phi-002-when-is-an-advisory-decision-justified.md) distinguished evidence and authority; this lesson tests a particular claim using counterexamples and observational limits.
+
+## 1. State the property being tested
+
+The [authored state model](../../../../code/streeling/evidence/retry-admission-2026-10-22/effect-identity-model.json) compares two operations on an integer state. Set7 replaces the state with 7; increment adds 1. For initial states -2, 0 and 5, applying Set7 twice gives the same final state as applying it once. Increment twice gives one more than increment once.
+
+Both operations can return the response label “ok” after every call. Equal response sequences therefore do not distinguish the idempotent intended state transition from the non-idempotent one. The invariant must name the state or effect being compared. Audit logs may still record each request without changing the intended operation's idempotence; do not silently broaden the property to every incidental effect.
+
+### Practice exercise 1: construct a counterexample
+
+Starting from 0, give the state after one and two Set7 calls, then after one and two increments. Both return “ok” each time. Does response equality establish the same intended effect?
+
+> **Answer:** Set7 gives 7 and 7; increment gives 1 and 2. Identical “ok” responses occur in both cases, so response equality alone does not establish idempotence of the intended state change.
+
+## 2. Read the actual replay evidence at its real scope
+
+Two [actual IX pipeline calls](../../../../code/streeling/evidence/retry-admission-2026-10-22/execution-tool-probes.json) run the same three small statistics steps. Their numeric result maps agree, with means 2, 5 and 15. Both report an empty cache-hit list and null cache keys. The exposed tool schema offered no asset-name field, so this exercise did not bypass it to request caching. Equal results here are not evidence of a cache hit.
+
+The reported sibling execution order changes between calls. Thus the complete response packets are not equal even though the numeric maps are. Reported durations are 0 ms; the inspected runner records elapsed milliseconds, so a zero field does not prove zero computational cost. The service revision is unknown, and neither call mutates an external business resource.
+
+### Practice exercise 2: bound the replay conclusion
+
+What do equal means 2, 5 and 15 establish for these inputs? May the reviewer claim a measured cache hit, identical complete packets, zero cost or deduplicated external effects?
+
+> **Answer:** The observed numeric outputs agree for these small repeated inputs. The empty hit lists and null keys provide no measured cache hit; differing execution order disproves identical complete packets. Zero reported milliseconds do not prove zero cost, and no external-effect deduplication was tested.
+
+## 3. Identify the logical request, not just its arguments
+
+The [AWS Builders' Library idempotent-API discussion](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/) explains why equal arguments may represent either a retry or a separate intended operation. The authored serial model makes that distinction explicit. Two increment requests with the same logical key job-A apply the intended increment once under an ideal atomic deduplication rule, giving final state 1. Assigning a fresh key to each attempt applies it twice, giving 2. Two genuinely distinct logical jobs can also intentionally give 2 with the same arguments.
+
+This mathematical rule assumes atomic recording and effect application. It does not implement them. Concurrent attempts, crashes between mutation and token recording, key retention and changed intent need a real contract and failure tests before a durable service claim is justified.
+
+### Practice exercise 3: distinguish retries from new work
+
+Starting at 0, compare keys job-A/job-A with job-A-attempt-1/job-A-attempt-2 under the ideal rule. Why should two distinct jobs with equal arguments not automatically be collapsed?
+
+> **Answer:** The repeated logical key applies one increment and ends at 1; fresh attempt keys apply two and end at 2. Two distinct logical jobs may intend two effects despite equal arguments. Argument equality alone does not identify the caller's logical intent.
+
+## 4. Inspect what the cache key actually binds
+
+In the pinned runner, the cache key is derived from asset name, tool name and serialized resolved arguments. The expression does not directly include the step ID, tool implementation revision or external-state revision. This is a bounded source observation, not a claim that every IX cache has the same policy or that all these fields are always required.
+
+For a pure computation with an adequate versioned input contract, value reuse may be appropriate. For an operation whose meaning depends on mutable external state or a changed implementation, those premises need additional scrutiny. A matching key proves neither that the key covers all semantic inputs nor that a previous external effect was durably committed once. No cache-hit execution or deliberate collision test was performed here.
+
+### Practice exercise 4: challenge an insufficient identity claim
+
+A tool implementation changes while asset name, tool name and resolved arguments stay the same. Does the inspected key expression directly bind the new implementation revision? Would a returned cached value alone establish correct external-effect deduplication?
+
+> **Answer:** No. That expression does not directly include implementation revision. A cached value alone also does not establish durable deduplication of an external effect. The reviewer needs a justified semantic input/version policy and evidence about the effect contract; this source inspection does not supply those tests.
+
+## 5. Preserve uncertainty after an error
+
+The deliberate missing-tool probe reports failure at step b without a final partial-results packet. In the pinned runner, a preceding step can be dispatched before a later error exits the loop. For the actual unknown-revision service, the returned error alone does not provide a full attempt trace. Absence of a returned aggregate must not be converted into proof that no earlier work occurred.
+
+To test a repeated-effect claim, predeclare the intended effect, logical identity, admissible retries and observable state. Compare single and repeated requests, including a lost-response case and recovery after an interrupted attempt. Reconcile the effect itself, not only success labels. These are proposed tests, not performed outcomes or an installed deduplication mechanism. [CYB-006](../../cybernetics/en/cyb-006-bound-retry-feedback-and-workload.md) shows why retrying an unknown outcome can also amplify active work.
+
+### Practice exercise 5: identify the missing witness
+
+A pipeline returns an error at b. A reviewer concludes that earlier step a made no effect and authorizes an unconditional whole-pipeline retry. What is unsupported? Give a more discriminating observation without inventing a successful recovery.
+
+> **Answer:** The error alone does not prove that a never ran or made no effect. Inspect attempt-level observations and reconcile the intended effect under the same logical request identity, or rely on a separately validated idempotence contract covering that effect. No successful recovery or safe unconditional retry was demonstrated by this probe.
+
+## Source-assisted learner task
+
+Complete the [prepared task](../../../../code/streeling/evidence/retry-admission-2026-10-22/learner-task.md) by separating return-value equality, effect equality, identity and missing observations. Use the fixed counterexamples to reject an overbroad replay claim. Human and learner decisions remain pending.

@@ -1,0 +1,544 @@
+{
+  "scope": "Authored identical-decision horizon with one stable latent condition, one reusable pilot and a one-time migration charge only when S chosen. No actual resource, migration or engineering time measured.",
+  "migration_charge": 2,
+  "pilot_cost": {
+    "exact": "3/5",
+    "value": 0.6
+  },
+  "rows": [
+    {
+      "N": 1,
+      "baseline": {
+        "K": {
+          "exact": "4",
+          "value": 4.0
+        },
+        "S": {
+          "exact": "7",
+          "value": 7.0
+        },
+        "chosen": "K",
+        "minimum": {
+          "exact": "4",
+          "value": 4.0
+        }
+      },
+      "signal_decisions": [
+        {
+          "signal": "+",
+          "probability": {
+            "exact": "1/2",
+            "value": 0.5
+          },
+          "posterior_F": {
+            "exact": "4/5",
+            "value": 0.8
+          },
+          "K": {
+            "exact": "4",
+            "value": 4.0
+          },
+          "S": {
+            "exact": "4",
+            "value": 4.0
+          },
+          "chosen": "K",
+          "minimum": {
+            "exact": "4",
+            "value": 4.0
+          }
+        },
+        {
+          "signal": "-",
+          "probability": {
+            "exact": "1/2",
+            "value": 0.5
+          },
+          "posterior_F": {
+            "exact": "1/5",
+            "value": 0.2
+          },
+          "K": {
+            "exact": "4",
+            "value": 4.0
+          },
+          "S": {
+            "exact": "10",
+            "value": 10.0
+          },
+          "chosen": "K",
+          "minimum": {
+            "exact": "4",
+            "value": 4.0
+          }
+        }
+      ],
+      "expected_loss_before_pilot_cost": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "pilot_cost": {
+        "exact": "3/5",
+        "value": 0.6
+      },
+      "expected_loss_including_pilot": {
+        "exact": "23/5",
+        "value": 4.6
+      },
+      "gross_signal_value": {
+        "exact": "0",
+        "value": 0.0
+      },
+      "net_gain": {
+        "exact": "-3/5",
+        "value": -0.6
+      },
+      "expected_migration_charge": {
+        "exact": "0",
+        "value": 0.0
+      },
+      "switch_threshold_F": {
+        "exact": "4/5",
+        "value": 0.8
+      },
+      "expected_perfect_information_loss": {
+        "exact": "3",
+        "value": 3.0
+      },
+      "perfect_information_ceiling": {
+        "exact": "1",
+        "value": 1.0
+      }
+    },
+    {
+      "N": 2,
+      "baseline": {
+        "K": {
+          "exact": "8",
+          "value": 8.0
+        },
+        "S": {
+          "exact": "12",
+          "value": 12.0
+        },
+        "chosen": "K",
+        "minimum": {
+          "exact": "8",
+          "value": 8.0
+        }
+      },
+      "signal_decisions": [
+        {
+          "signal": "+",
+          "probability": {
+            "exact": "1/2",
+            "value": 0.5
+          },
+          "posterior_F": {
+            "exact": "4/5",
+            "value": 0.8
+          },
+          "K": {
+            "exact": "8",
+            "value": 8.0
+          },
+          "S": {
+            "exact": "6",
+            "value": 6.0
+          },
+          "chosen": "S",
+          "minimum": {
+            "exact": "6",
+            "value": 6.0
+          }
+        },
+        {
+          "signal": "-",
+          "probability": {
+            "exact": "1/2",
+            "value": 0.5
+          },
+          "posterior_F": {
+            "exact": "1/5",
+            "value": 0.2
+          },
+          "K": {
+            "exact": "8",
+            "value": 8.0
+          },
+          "S": {
+            "exact": "18",
+            "value": 18.0
+          },
+          "chosen": "K",
+          "minimum": {
+            "exact": "8",
+            "value": 8.0
+          }
+        }
+      ],
+      "expected_loss_before_pilot_cost": {
+        "exact": "7",
+        "value": 7.0
+      },
+      "pilot_cost": {
+        "exact": "3/5",
+        "value": 0.6
+      },
+      "expected_loss_including_pilot": {
+        "exact": "38/5",
+        "value": 7.6
+      },
+      "gross_signal_value": {
+        "exact": "1",
+        "value": 1.0
+      },
+      "net_gain": {
+        "exact": "2/5",
+        "value": 0.4
+      },
+      "expected_migration_charge": {
+        "exact": "1",
+        "value": 1.0
+      },
+      "switch_threshold_F": {
+        "exact": "7/10",
+        "value": 0.7
+      },
+      "expected_perfect_information_loss": {
+        "exact": "5",
+        "value": 5.0
+      },
+      "perfect_information_ceiling": {
+        "exact": "3",
+        "value": 3.0
+      }
+    },
+    {
+      "N": 3,
+      "baseline": {
+        "K": {
+          "exact": "12",
+          "value": 12.0
+        },
+        "S": {
+          "exact": "17",
+          "value": 17.0
+        },
+        "chosen": "K",
+        "minimum": {
+          "exact": "12",
+          "value": 12.0
+        }
+      },
+      "signal_decisions": [
+        {
+          "signal": "+",
+          "probability": {
+            "exact": "1/2",
+            "value": 0.5
+          },
+          "posterior_F": {
+            "exact": "4/5",
+            "value": 0.8
+          },
+          "K": {
+            "exact": "12",
+            "value": 12.0
+          },
+          "S": {
+            "exact": "8",
+            "value": 8.0
+          },
+          "chosen": "S",
+          "minimum": {
+            "exact": "8",
+            "value": 8.0
+          }
+        },
+        {
+          "signal": "-",
+          "probability": {
+            "exact": "1/2",
+            "value": 0.5
+          },
+          "posterior_F": {
+            "exact": "1/5",
+            "value": 0.2
+          },
+          "K": {
+            "exact": "12",
+            "value": 12.0
+          },
+          "S": {
+            "exact": "26",
+            "value": 26.0
+          },
+          "chosen": "K",
+          "minimum": {
+            "exact": "12",
+            "value": 12.0
+          }
+        }
+      ],
+      "expected_loss_before_pilot_cost": {
+        "exact": "10",
+        "value": 10.0
+      },
+      "pilot_cost": {
+        "exact": "3/5",
+        "value": 0.6
+      },
+      "expected_loss_including_pilot": {
+        "exact": "53/5",
+        "value": 10.6
+      },
+      "gross_signal_value": {
+        "exact": "2",
+        "value": 2.0
+      },
+      "net_gain": {
+        "exact": "7/5",
+        "value": 1.4
+      },
+      "expected_migration_charge": {
+        "exact": "1",
+        "value": 1.0
+      },
+      "switch_threshold_F": {
+        "exact": "2/3",
+        "value": 0.6666666666666666
+      },
+      "expected_perfect_information_loss": {
+        "exact": "7",
+        "value": 7.0
+      },
+      "perfect_information_ceiling": {
+        "exact": "5",
+        "value": 5.0
+      }
+    },
+    {
+      "N": 5,
+      "baseline": {
+        "K": {
+          "exact": "20",
+          "value": 20.0
+        },
+        "S": {
+          "exact": "27",
+          "value": 27.0
+        },
+        "chosen": "K",
+        "minimum": {
+          "exact": "20",
+          "value": 20.0
+        }
+      },
+      "signal_decisions": [
+        {
+          "signal": "+",
+          "probability": {
+            "exact": "1/2",
+            "value": 0.5
+          },
+          "posterior_F": {
+            "exact": "4/5",
+            "value": 0.8
+          },
+          "K": {
+            "exact": "20",
+            "value": 20.0
+          },
+          "S": {
+            "exact": "12",
+            "value": 12.0
+          },
+          "chosen": "S",
+          "minimum": {
+            "exact": "12",
+            "value": 12.0
+          }
+        },
+        {
+          "signal": "-",
+          "probability": {
+            "exact": "1/2",
+            "value": 0.5
+          },
+          "posterior_F": {
+            "exact": "1/5",
+            "value": 0.2
+          },
+          "K": {
+            "exact": "20",
+            "value": 20.0
+          },
+          "S": {
+            "exact": "42",
+            "value": 42.0
+          },
+          "chosen": "K",
+          "minimum": {
+            "exact": "20",
+            "value": 20.0
+          }
+        }
+      ],
+      "expected_loss_before_pilot_cost": {
+        "exact": "16",
+        "value": 16.0
+      },
+      "pilot_cost": {
+        "exact": "3/5",
+        "value": 0.6
+      },
+      "expected_loss_including_pilot": {
+        "exact": "83/5",
+        "value": 16.6
+      },
+      "gross_signal_value": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "net_gain": {
+        "exact": "17/5",
+        "value": 3.4
+      },
+      "expected_migration_charge": {
+        "exact": "1",
+        "value": 1.0
+      },
+      "switch_threshold_F": {
+        "exact": "16/25",
+        "value": 0.64
+      },
+      "expected_perfect_information_loss": {
+        "exact": "11",
+        "value": 11.0
+      },
+      "perfect_information_ceiling": {
+        "exact": "9",
+        "value": 9.0
+      }
+    },
+    {
+      "N": 10,
+      "baseline": {
+        "K": {
+          "exact": "40",
+          "value": 40.0
+        },
+        "S": {
+          "exact": "52",
+          "value": 52.0
+        },
+        "chosen": "K",
+        "minimum": {
+          "exact": "40",
+          "value": 40.0
+        }
+      },
+      "signal_decisions": [
+        {
+          "signal": "+",
+          "probability": {
+            "exact": "1/2",
+            "value": 0.5
+          },
+          "posterior_F": {
+            "exact": "4/5",
+            "value": 0.8
+          },
+          "K": {
+            "exact": "40",
+            "value": 40.0
+          },
+          "S": {
+            "exact": "22",
+            "value": 22.0
+          },
+          "chosen": "S",
+          "minimum": {
+            "exact": "22",
+            "value": 22.0
+          }
+        },
+        {
+          "signal": "-",
+          "probability": {
+            "exact": "1/2",
+            "value": 0.5
+          },
+          "posterior_F": {
+            "exact": "1/5",
+            "value": 0.2
+          },
+          "K": {
+            "exact": "40",
+            "value": 40.0
+          },
+          "S": {
+            "exact": "82",
+            "value": 82.0
+          },
+          "chosen": "K",
+          "minimum": {
+            "exact": "40",
+            "value": 40.0
+          }
+        }
+      ],
+      "expected_loss_before_pilot_cost": {
+        "exact": "31",
+        "value": 31.0
+      },
+      "pilot_cost": {
+        "exact": "3/5",
+        "value": 0.6
+      },
+      "expected_loss_including_pilot": {
+        "exact": "158/5",
+        "value": 31.6
+      },
+      "gross_signal_value": {
+        "exact": "9",
+        "value": 9.0
+      },
+      "net_gain": {
+        "exact": "42/5",
+        "value": 8.4
+      },
+      "expected_migration_charge": {
+        "exact": "1",
+        "value": 1.0
+      },
+      "switch_threshold_F": {
+        "exact": "31/50",
+        "value": 0.62
+      },
+      "expected_perfect_information_loss": {
+        "exact": "21",
+        "value": 21.0
+      },
+      "perfect_information_ceiling": {
+        "exact": "19",
+        "value": 19.0
+      }
+    }
+  ],
+  "formula_for_integer_N_at_least_one": "expected loss with pilot=3N+1.6; baseline=4N; net gain=N-1.6",
+  "first_integer_positive_net_gain": 2,
+  "perfect_information_ceiling_formula": "2N-1 for the same migration model",
+  "reuse_assumptions": [
+    "Same latent state remains relevant across all N decisions.",
+    "Same action losses, likelihoods, allowed actions and quality guards.",
+    "Pilot does not change that state; no delay/drift beyond stated cost."
+  ],
+  "invalidating_examples": [
+    "Changed scene or workload.",
+    "Different host/driver/effective mode.",
+    "Changed measurement protocol or a stale condition."
+  ],
+  "real_horizon": null
+}

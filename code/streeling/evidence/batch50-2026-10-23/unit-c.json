@@ -1,0 +1,2934 @@
+{
+  "schema": "streeling.batch50.unit-evidence/1",
+  "schema_version": "1.0.0",
+  "unit": "c",
+  "execution": "knowledge-work",
+  "base_learn_commit": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+  "scope": "Sixteen authored fixed cases with source-assisted learner tasks; source inspection and author consistency checking only. Historical results retain their old scope. Independent executable claim validation and journal are owned by the root/reviewer and are not claimed here.",
+  "courses": [
+    {
+      "code": "PHY013",
+      "module_id": "phy-013-check-torque-when-moving-a-scene-pivot",
+      "department": "physics",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-013-check-torque-when-moving-a-scene-pivot.md",
+        "fr": "streeling/courses/physics/fr/phy-013-check-torque-when-moving-a-scene-pivot.fr.md",
+        "es": "streeling/courses/physics/es/phy-013-check-torque-when-moving-a-scene-pivot.es.md"
+      },
+      "novelty_vs_prerequisites": "Adds origin-dependent torque and a common-translation counterexample beyond geometric unit conversion.",
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/scene-frames-2026-10-22/orientation-controls.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "124627e2f5f46423766c024d0be5aebe956f22d2ade12ce0bc5a112f45750b2a",
+          "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/physics/en/phy-005-sheet-thickness-and-scene-units.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "d5c70c6a5cdc7d41e48e89087ced3d7b1bf4a095ec82e9966201c2ea7c7d798c",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "url": "https://openstax.org/books/university-physics-volume-1/pages/10-6-torque",
+          "pin": "actual body retrieved 2026-10-23; mutable page",
+          "sha256": "0b41ee8c5c654f60ab45ed7ea3f0364a705c0706e7a45eaf6a7c906d9f1d789f",
+          "scope": "OpenStax section 10.6 defining torque as r cross F; actual body read, no mechanical experiment.",
+          "bytes": 354199,
+          "transport_url": "https://openstax.org/books/university-physics-volume-1/pages/10-6-torque",
+          "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "point_m": [
+            0.3,
+            0,
+            0
+          ],
+          "origin_m": [
+            0,
+            0,
+            0
+          ],
+          "second_origin_m": [
+            0.1,
+            0,
+            0
+          ],
+          "force_N": [
+            0,
+            -20,
+            0
+          ]
+        },
+        "formula": "P=(0.30,0,0) m; O=(0,0,0) m; O2=(0.10,0,0) m\nF=(0,-20,0) N\nr=P-O; tau=r cross F\ntau_z=-6 N*m; tau2_z=-4 N*m\nP3=(0.40,0,0) m; O3=(0.10,0,0) m; tau3_z=-6 N*m",
+        "assumptions": [
+          "Fixed planar force; right-handed axes; reporting origin may change independently of geometry."
+        ],
+        "expected_calculations": {
+          "torque_Nm": [
+            0,
+            0,
+            -6
+          ],
+          "second_torque_Nm": [
+            0,
+            0,
+            -4
+          ]
+        },
+        "negative_control": {
+          "point_m": [
+            0.4,
+            0,
+            0
+          ],
+          "origin_m": [
+            0.1,
+            0,
+            0
+          ],
+          "expected_torque_Nm": [
+            0,
+            0,
+            -6
+          ]
+        },
+        "limits": [
+          "Not a support reaction, hinge strength or motion model."
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the original moment and its sign.",
+          "expected_answer": "The lever arm is `0.30 m`; the moment is `-6 N*m`. The sign follows the declared axes and cross-product order."
+        },
+        "2": {
+          "question": "Keep the panel fixed and use the second origin. What changes?",
+          "expected_answer": "The arm becomes `0.20 m` and the moment `-4 N*m`. The force is unchanged; its reporting point changed."
+        },
+        "3": {
+          "question": "Translate both points using the control. Does torque change?",
+          "expected_answer": "No: `0.40-0.10=0.30 m`, hence `-6 N*m`. A common translation preserves the relative arm."
+        },
+        "4": {
+          "question": "Move the reporting origin to the force application point. Is there no force?",
+          "expected_answer": "The arm and moment are `0`, but the applied force remains `20 N` downward. Zero moment about that point is not zero load."
+        },
+        "5": {
+          "question": "May this calculation certify a craft hinge?",
+          "expected_answer": "No. It gives a moment about declared points. Support reactions, material strength and motion are missing; no load capacity was measured."
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "1",
+          "check": "Compute the original moment and its sign.",
+          "expected": "The lever arm is `0.30 m`; the moment is `-6 N*m`. The sign follows the declared axes and cross-product order.",
+          "decision": null
+        },
+        {
+          "criterion": "2",
+          "check": "Keep the panel fixed and use the second origin. What changes?",
+          "expected": "The arm becomes `0.20 m` and the moment `-4 N*m`. The force is unchanged; its reporting point changed.",
+          "decision": null
+        },
+        {
+          "criterion": "3",
+          "check": "Translate both points using the control. Does torque change?",
+          "expected": "No: `0.40-0.10=0.30 m`, hence `-6 N*m`. A common translation preserves the relative arm.",
+          "decision": null
+        },
+        {
+          "criterion": "4",
+          "check": "Move the reporting origin to the force application point. Is there no force?",
+          "expected": "The arm and moment are `0`, but the applied force remains `20 N` downward. Zero moment about that point is not zero load.",
+          "decision": null
+        },
+        {
+          "criterion": "5",
+          "check": "May this calculation certify a craft hinge?",
+          "expected": "No. It gives a moment about declared points. Support reactions, material strength and motion are missing; no load capacity was measured.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Using the project record and the pinned BRUTAL frame definition, prepare a pivot handoff distinguishing a fixed panel from a translated assembly. Recompute the model with the reporting origin at the application point. A claim that every origin gives the same moment is falsified by the unequal moments above.",
+        "manual_baseline": "Handwritten calculations and exact source-location table before assistant comparison.",
+        "falsifier": "A claim that every origin gives the same moment is falsified by the unequal moments above.",
+        "retained_answers": null,
+        "assistance_record": null,
+        "reviewer_verdict": null,
+        "learner_attempt": null
+      },
+      "human_review": null,
+      "artisan_review": null,
+      "fluent_language_review": null,
+      "learner_result": null,
+      "runtime_result": null,
+      "source_sha256": {
+        "en": "d5f818dc617edd6fb4763ee8f1653bd22700ee8b88cb291dd764ec9cddca11d9",
+        "fr": "5a589332e67818eed4c1049d20e82a114207f15c9881e8784e7653dae4f79afe",
+        "es": "b0042ef428587331830eff26c61a68ee017acee0c50b1fe4db7ecbc4105aeccf"
+      }
+    },
+    {
+      "code": "PHY014",
+      "module_id": "phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh",
+      "department": "physics",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh.md",
+        "fr": "streeling/courses/physics/fr/phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh.fr.md",
+        "es": "streeling/courses/physics/es/phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh.es.md"
+      },
+      "novelty_vs_prerequisites": "Adds mutually exclusive density/mass/thickness policies and a cubic-versus-quadratic control beyond PHY005 unit rulers.",
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/brutal-composition-2026-10-22/composition-calculations.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "89ff2231c3b7d57d9c22b5926bb3a8364180904b34783c6c4960eb2a6d501b9f",
+          "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/physics/en/phy-005-sheet-thickness-and-scene-units.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "d5c70c6a5cdc7d41e48e89087ced3d7b1bf4a095ec82e9966201c2ea7c7d798c",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Model.fs",
+          "pin": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+          "sha256": "ac44e7067730897d4fca91617ff68af67e7a1529b56c367d49add89ab6af5228",
+          "scope": "Actual pinned source body read; inspect only the definitions cited in the prose, no program execution.",
+          "bytes": 9322,
+          "transport_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Model.fs",
+          "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "width_m": 0.2,
+          "height_m": 0.1,
+          "thickness_m": 0.001,
+          "density_kg_m3": 800,
+          "scale": 2
+        },
+        "formula": "w=0.20 m; h=0.10 m; t=0.001 m; rho=800 kg/m^3\nV=w*h*t=0.00002 m^3; m=rho*V=0.016 kg\ns=2\nV_all=s^3*V=0.00016 m^3; m_all=0.128 kg\nV_planar=s^2*V=0.00008 m^3; m_planar=0.064 kg\nrho_fixed_mass=0.016/0.00016=100 kg/m^3",
+        "assumptions": [
+          "Homogeneous rectangular sheet; no holes; density held fixed except explicit fixed-mass alternative."
+        ],
+        "expected_calculations": {
+          "volume_m3": 2e-05,
+          "mass_kg": 0.016,
+          "fully_scaled_volume_m3": 0.00016,
+          "fully_scaled_mass_kg": 0.128,
+          "planar_scaled_mass_kg": 0.064,
+          "fixed_mass_density_kg_m3": 100
+        },
+        "negative_control": {
+          "scale_thickness": false,
+          "expected_mass_ratio": 4
+        },
+        "limits": [
+          "No material measurement or physical simulation."
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the original mass.",
+          "expected_answer": "The volume is `0.00002 m^3`; multiplying by density gives `0.016 kg`, or `16 g`. These are stipulated material values."
+        },
+        "2": {
+          "question": "Scale every dimension. What is the mass ratio?",
+          "expected_answer": "The ratio is `8`; mass becomes `0.128 kg`. Thickness is part of this geometric enlargement."
+        },
+        "3": {
+          "question": "Keep stock thickness fixed while enlarging the plane.",
+          "expected_answer": "Mass increases by `4` to `0.064 kg`. This is the negative control against automatically using a cubic factor."
+        },
+        "4": {
+          "question": "Keep original mass after full enlargement. What density is implied?",
+          "expected_answer": "It implies `100 kg/m^3`, one eighth of the stipulated original density. Fixed density and fixed mass cannot both hold for this changed volume."
+        },
+        "5": {
+          "question": "Does a stone surface name justify the density?",
+          "expected_answer": "No. The source surface descriptor supplies a rendering category. The numeric density is an authored assumption requiring a separate material basis for a physical claim."
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "1",
+          "check": "Compute the original mass.",
+          "expected": "The volume is `0.00002 m^3`; multiplying by density gives `0.016 kg`, or `16 g`. These are stipulated material values.",
+          "decision": null
+        },
+        {
+          "criterion": "2",
+          "check": "Scale every dimension. What is the mass ratio?",
+          "expected": "The ratio is `8`; mass becomes `0.128 kg`. Thickness is part of this geometric enlargement.",
+          "decision": null
+        },
+        {
+          "criterion": "3",
+          "check": "Keep stock thickness fixed while enlarging the plane.",
+          "expected": "Mass increases by `4` to `0.064 kg`. This is the negative control against automatically using a cubic factor.",
+          "decision": null
+        },
+        {
+          "criterion": "4",
+          "check": "Keep original mass after full enlargement. What density is implied?",
+          "expected": "It implies `100 kg/m^3`, one eighth of the stipulated original density. Fixed density and fixed mass cannot both hold for this changed volume.",
+          "decision": null
+        },
+        {
+          "criterion": "5",
+          "check": "Does a stone surface name justify the density?",
+          "expected": "No. The source surface descriptor supplies a rendering category. The numeric density is an authored assumption requiring a separate material basis for a physical claim.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Inspect the pinned model’s size and surface definitions. Annotate a proposed doubled scene with a chosen thickness policy and a separate density assumption. Compare the manual volume ledger with an agent summary. Reject the summary if it preserves both density and total mass under the enlarged volume.",
+        "manual_baseline": "Handwritten calculations and exact source-location table before assistant comparison.",
+        "falsifier": "Reject the summary if it preserves both density and total mass under the enlarged volume.",
+        "retained_answers": null,
+        "assistance_record": null,
+        "reviewer_verdict": null,
+        "learner_attempt": null
+      },
+      "human_review": null,
+      "artisan_review": null,
+      "fluent_language_review": null,
+      "learner_result": null,
+      "runtime_result": null,
+      "source_sha256": {
+        "en": "c3b034bc3edf2d107f90d335636ab2262d2726dcbed91995c63c3382302db495",
+        "fr": "382386864b50f457ccbfbd32389a0ce1207a3c5ecab1a34bf95b228cb3b9342c",
+        "es": "b4fb8c51f7c68b13f0dce4d5b6dd9eb212622f0990b8e19fd76477fc0243c68f"
+      }
+    },
+    {
+      "code": "PHY015",
+      "module_id": "phy-015-bound-clearance-after-thickening-a-panel",
+      "department": "physics",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-015-bound-clearance-after-thickening-a-panel.md",
+        "fr": "streeling/courses/physics/fr/phy-015-bound-clearance-after-thickening-a-panel.fr.md",
+        "es": "streeling/courses/physics/es/phy-015-bound-clearance-after-thickening-a-panel.es.md"
+      },
+      "novelty_vs_prerequisites": "Adds occupied-interval clearance and worst-case error subtraction beyond thickness conversion and neutral-layer arc length.",
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/scene-frames-2026-10-22/orientation-controls.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "124627e2f5f46423766c024d0be5aebe956f22d2ade12ce0bc5a112f45750b2a",
+          "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/physics/en/phy-005-sheet-thickness-and-scene-units.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "d5c70c6a5cdc7d41e48e89087ced3d7b1bf4a095ec82e9966201c2ea7c7d798c",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/physics/en/phy-011-compute-bend-length-on-a-declared-neutral-layer.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "8b47efadd78a9ec2e6efb4165d19bde5c87a0186fb5c4d9164558f897baa1a80",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Space.fs",
+          "pin": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+          "sha256": "c1580d2297f1bfedfac4f8d1adb126d29a4cf4cc2e10857f04eb7d991b6c3acc",
+          "scope": "Actual pinned source body read; inspect only the definitions cited in the prose, no program execution.",
+          "bytes": 1809,
+          "transport_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Space.fs",
+          "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "reference_surfaces_mm": [
+            0,
+            3
+          ],
+          "thicknesses_mm": [
+            2,
+            2
+          ],
+          "inward_error_bounds_mm": [
+            0.3,
+            0.4
+          ],
+          "thickened_mm": [
+            3,
+            3
+          ]
+        },
+        "formula": "zA=0 mm; zB=3 mm; tA=2 mm; tB=2 mm\nA=[-1,1] mm; B=[2,4] mm; c=2-1=1 mm\neA=0.3 mm; eB=0.4 mm; c_min=1-0.3-0.4=0.3 mm\ntA2=3 mm; tB2=3 mm; c2=3-1.5-1.5=0 mm\nA_one_side=[0,2] mm; B_one_side=[3,5] mm; c_one_side=1 mm",
+        "assumptions": [
+          "Fixed infinite parallel sections; closed intervals; bounded errors may simultaneously attain worst inward values."
+        ],
+        "expected_calculations": {
+          "intervals_mm": [
+            [
+              -1,
+              1
+            ],
+            [
+              2,
+              4
+            ]
+          ],
+          "nominal_clearance_mm": 1,
+          "worst_clearance_mm": 0.3,
+          "thickened_nominal_mm": 0,
+          "thickened_worst_mm": -0.7
+        },
+        "negative_control": {
+          "one_sided_intervals_mm": [
+            [
+              0,
+              2
+            ],
+            [
+              3,
+              5
+            ]
+          ],
+          "expected_clearance_mm": 1
+        },
+        "limits": [
+          "No finite-edge, deformation or fold-path guarantee."
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Find nominal clearance for centred thickness.",
+          "expected_answer": "The intervals are `[-1,1] mm` and `[2,4] mm`, giving `1 mm` clearance. Surface separation alone overstates the remaining gap."
+        },
+        "2": {
+          "question": "Apply the two inward error bounds.",
+          "expected_answer": "Worst clearance is `0.3 mm`. The sum of worst movements is subtracted; no distribution or contact probability is inferred."
+        },
+        "3": {
+          "question": "Thicken both centred panels to the second thickness.",
+          "expected_answer": "Nominal clearance is `0 mm`. Applying the same errors permits `-0.7 mm`, so a positive robust-clearance claim fails."
+        },
+        "4": {
+          "question": "Use the stated one-sided intervals. Must every offset convention change this equal-thickness gap?",
+          "expected_answer": "No: the common one-sided shift still gives `1 mm`. This control prevents claiming that a reference change always changes clearance. Unequal offsets can change it."
+        },
+        "5": {
+          "question": "Does the bound prove a fold path is clear?",
+          "expected_answer": "No. It describes fixed parallel intervals. Finite edges, changing angles, tolerances outside the bounds and motion require separate geometry and observations."
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "1",
+          "check": "Find nominal clearance for centred thickness.",
+          "expected": "The intervals are `[-1,1] mm` and `[2,4] mm`, giving `1 mm` clearance. Surface separation alone overstates the remaining gap.",
+          "decision": null
+        },
+        {
+          "criterion": "2",
+          "check": "Apply the two inward error bounds.",
+          "expected": "Worst clearance is `0.3 mm`. The sum of worst movements is subtracted; no distribution or contact probability is inferred.",
+          "decision": null
+        },
+        {
+          "criterion": "3",
+          "check": "Thicken both centred panels to the second thickness.",
+          "expected": "Nominal clearance is `0 mm`. Applying the same errors permits `-0.7 mm`, so a positive robust-clearance claim fails.",
+          "decision": null
+        },
+        {
+          "criterion": "4",
+          "check": "Use the stated one-sided intervals. Must every offset convention change this equal-thickness gap?",
+          "expected": "No: the common one-sided shift still gives `1 mm`. This control prevents claiming that a reference change always changes clearance. Unequal offsets can change it.",
+          "decision": null
+        },
+        {
+          "criterion": "5",
+          "check": "Does the bound prove a fold path is clear?",
+          "expected": "No. It describes fixed parallel intervals. Finite edges, changing angles, tolerances outside the bounds and motion require separate geometry and observations.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Trace the reference surfaces and scene units in the prerequisite and pinned frame. Supply the occupied intervals and worst-case gap in a proposed IX handoff. Keep a direct sketch as baseline. The falsifier is an allowed inward displacement that makes the promised positive clearance nonpositive.",
+        "manual_baseline": "Handwritten calculations and exact source-location table before assistant comparison.",
+        "falsifier": "The falsifier is an allowed inward displacement that makes the promised positive clearance nonpositive.",
+        "retained_answers": null,
+        "assistance_record": null,
+        "reviewer_verdict": null,
+        "learner_attempt": null
+      },
+      "human_review": null,
+      "artisan_review": null,
+      "fluent_language_review": null,
+      "learner_result": null,
+      "runtime_result": null,
+      "source_sha256": {
+        "en": "3f35d3e121e5ed09811acdfaa83a0f2ca9b9be5820dbdc3c4746bf51f70bf004",
+        "fr": "877f914c799ce7fac85da1e9751f78004a0e652f91f6321ab052e4b891e12a03",
+        "es": "b15a6b83fc4bc6cb044b94d1eb58ead6b4200a3bb0efd09708a7997180fec5c8"
+      }
+    },
+    {
+      "code": "VC011",
+      "module_id": "vc-011-preserve-tangent-handedness-after-a-mirror",
+      "department": "visual-computing",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-011-preserve-tangent-handedness-after-a-mirror.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-011-preserve-tangent-handedness-after-a-mirror.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-011-preserve-tangent-handedness-after-a-mirror.es.md"
+      },
+      "novelty_vs_prerequisites": "Adds tangent-basis sign reconstruction and a nonzero-bitangent sample beyond normal perpendicularity and texture-channel roles.",
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/scene-frames-2026-10-22/normal-comparison.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "b0b59bbb6015731dc672faae3cd90deb143aae64d0f8424f0942ba966c785e29",
+          "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/physics/en/phy-008-keep-surface-normals-perpendicular.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "15ba8a405aeb778323581b59089ab92a4a284885d479b69369afd5f2db6ce734",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/visual-computing/en/vc-010-preserve-packed-texture-channel-contracts.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "dff68b04b2af3c395f35b754b2c65e77968c8d95afce4a56a80f120b7725bf43",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "url": "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#meshes",
+          "pin": "glTF-2.0.1 source commit 8e798b02d254cea97659a333cfcb20875b62bdd4",
+          "sha256": "f58480945fd686e491bfc6ee30973768ecafde0863456d5d0bac1057ea9b8e0d",
+          "scope": "glTF 2.0.1 Meshes attribute table and bitangent reconstruction, especially normal/tangent/w; actual body read.",
+          "bytes": 1549770,
+          "transport_url": "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html",
+          "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "tangent": [
+            1,
+            0,
+            0
+          ],
+          "tangent_w": 1,
+          "mirror_diagonal": [
+            -1,
+            1,
+            1
+          ],
+          "sample": [
+            0,
+            0.6,
+            0.8
+          ]
+        },
+        "formula": "N=(0,0,1); T=(1,0,0); w=+1\nB=w*(N cross T)=(0,1,0)\nM=diag(-1,1,1); det(M)=-1\nN2=(0,0,1); T2=(-1,0,0); desired_B2=(0,1,0)\nold_w_B2=(0,-1,0); corrected_w=-1\nsample=(0,0.6,0.8); desired_world=(0,0.6,0.8)\nwrong_world=(0,-0.6,0.8); dot=0.28",
+        "assumptions": [
+          "UVs remain attached to material points; orthonormal axis-aligned basis; glTF reconstruction rule."
+        ],
+        "expected_calculations": {
+          "bitangent": [
+            0,
+            1,
+            0
+          ],
+          "reflected_normal": [
+            0,
+            0,
+            1
+          ],
+          "reflected_tangent": [
+            -1,
+            0,
+            0
+          ],
+          "old_w_bitangent": [
+            0,
+            -1,
+            0
+          ],
+          "corrected_w": -1,
+          "corrected_bitangent": [
+            0,
+            1,
+            0
+          ],
+          "correct_world_sample": [
+            0,
+            0.6,
+            0.8
+          ],
+          "wrong_world_sample": [
+            0,
+            -0.6,
+            0.8
+          ],
+          "sample_dot": 0.28
+        },
+        "negative_control": {
+          "sample": [
+            0,
+            0,
+            1
+          ],
+          "correct_world": [
+            0,
+            0,
+            1
+          ],
+          "wrong_world": [
+            0,
+            0,
+            1
+          ],
+          "discriminates": false
+        },
+        "limits": [
+          "No host import, packed-channel unpacking or visible defect demonstrated."
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Reconstruct the original bitangent.",
+          "expected_answer": "The cross product gives `(0,1,0)` and multiplication by `+1` leaves it unchanged. The normal does not alone encode that sign."
+        },
+        "2": {
+          "question": "Retain the old sign after the mirror. What fails?",
+          "expected_answer": "The reconstructed bitangent is `(0,-1,0)`, opposite to the reflected material bitangent `(0,1,0)`. Perpendicular normals do not catch this failure."
+        },
+        "3": {
+          "question": "Which sign repairs this authored basis?",
+          "expected_answer": "Using `-1` reconstructs `(0,1,0)`. This assumes unchanged material UV correspondence and the stated transformed normal/tangent convention."
+        },
+        "4": {
+          "question": "Use the asymmetric sample. Is the wrong world direction equal?",
+          "expected_answer": "No. The Y component changes sign and the unit directions have dot product `0.28`. A sample `(0,0,1)` would hide the error and is a weak control."
+        },
+        "5": {
+          "question": "Does this establish a visible project material defect?",
+          "expected_answer": "No. It is a basis counterexample. Actual UV generation, channel unpacking, host convention and a controlled import observation remain untested."
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "1",
+          "check": "Reconstruct the original bitangent.",
+          "expected": "The cross product gives `(0,1,0)` and multiplication by `+1` leaves it unchanged. The normal does not alone encode that sign.",
+          "decision": null
+        },
+        {
+          "criterion": "2",
+          "check": "Retain the old sign after the mirror. What fails?",
+          "expected": "The reconstructed bitangent is `(0,-1,0)`, opposite to the reflected material bitangent `(0,1,0)`. Perpendicular normals do not catch this failure.",
+          "decision": null
+        },
+        {
+          "criterion": "3",
+          "check": "Which sign repairs this authored basis?",
+          "expected": "Using `-1` reconstructs `(0,1,0)`. This assumes unchanged material UV correspondence and the stated transformed normal/tangent convention.",
+          "decision": null
+        },
+        {
+          "criterion": "4",
+          "check": "Use the asymmetric sample. Is the wrong world direction equal?",
+          "expected": "No. The Y component changes sign and the unit directions have dot product `0.28`. A sample `(0,0,1)` would hide the error and is a weak control.",
+          "decision": null
+        },
+        {
+          "criterion": "5",
+          "check": "Does this establish a visible project material defect?",
+          "expected": "No. It is a basis counterexample. Actual UV generation, channel unpacking, host convention and a controlled import observation remain untested.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Read the normal comparison and glTF tangent definition, then annotate the mirrored basis in a proposed craft transfer. Keep the direct cross-product table as baseline. Retain UV assumptions. The falsifier is a reconstructed bitangent opposite to the desired reflected one despite a claimed preserved basis.",
+        "manual_baseline": "Handwritten calculations and exact source-location table before assistant comparison.",
+        "falsifier": "The falsifier is a reconstructed bitangent opposite to the desired reflected one despite a claimed preserved basis.",
+        "retained_answers": null,
+        "assistance_record": null,
+        "reviewer_verdict": null,
+        "learner_attempt": null
+      },
+      "human_review": null,
+      "artisan_review": null,
+      "fluent_language_review": null,
+      "learner_result": null,
+      "runtime_result": null,
+      "source_sha256": {
+        "en": "1a327300cca20427804378b1fbe40751860ecef10b964240e879bd8a89a2709b",
+        "fr": "15160dd969ba0724419ab79978de3a6795b794d7a9286a6c702e258a05e4e1b1",
+        "es": "7c4b8ff1764e8f190ab0574865e995baf58e8b20bc5650df2052b29d9a5f76a5"
+      }
+    },
+    {
+      "code": "VC012",
+      "module_id": "vc-012-separate-mesh-instances-from-draw-calls",
+      "department": "visual-computing",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-012-separate-mesh-instances-from-draw-calls.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-012-separate-mesh-instances-from-draw-calls.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-012-separate-mesh-instances-from-draw-calls.es.md"
+      },
+      "novelty_vs_prerequisites": "Adds a pass/material/visibility-conditioned submission model beyond VC009 geometry-expansion limits.",
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/brutal-composition-2026-10-22/composition-calculations.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "89ff2231c3b7d57d9c22b5926bb3a8364180904b34783c6c4960eb2a6d501b9f",
+          "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/visual-computing/en/vc-009-budget-brutal-scene-expansion.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "ac2bd248bbc87be880c4b737d3bc6d5b2fcaa54dd6f2c355736c9996a165b6fc",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "url": "https://docs.godotengine.org/en/4.6/classes/class_multimesh.html",
+          "pin": "versioned 4.6 documentation",
+          "sha256": "83f1a17edef5a9ffa539381dfb643b4f44df905eaf0029a6776e1df2af8e9ef8",
+          "scope": "Godot 4.6 MultiMesh description: GPU instancing and whole-group spatial indexing; actual body read.",
+          "bytes": 1293170,
+          "transport_url": "https://docs.godotengine.org/en/4.6/classes/class_multimesh.html",
+          "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "authored_mesh_instances": 60,
+          "compatible_groups": 3,
+          "passes": 2,
+          "historical_block_instances": [
+            5,
+            5
+          ],
+          "historical_boxes": [
+            53,
+            85
+          ]
+        },
+        "formula": "historical_v1: block_instances=5; boxes=53; triangles=636\nhistorical_v2: block_instances=5; boxes=85; triangles=1020\nauthored_instances=60; groups=3; passes=2\nseparate_submissions=60*2=120\ngrouped_submissions=3*2=6\nreduction=120-6=114\ncontrol_groups=60; control_submissions=60*2=120",
+        "assumptions": [
+          "One surface and material per group per pass; all visible; no shadow or extra passes."
+        ],
+        "expected_calculations": {
+          "separate_submissions": 120,
+          "grouped_submissions": 6,
+          "reduction": 114
+        },
+        "negative_control": {
+          "groups": 60,
+          "expected_submissions": 120
+        },
+        "limits": [
+          "Conditional submission arithmetic, not measured draw calls or frame time."
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Which old quantity changes between column versions?",
+          "expected_answer": "Boxes change from `53` to `85`; block instances remain `5`. Neither count states observed draw calls."
+        },
+        "2": {
+          "question": "Compute the separate-submission budget.",
+          "expected_answer": "It is `120` under the stipulated pass and visibility model. This is arithmetic rather than a GPU observation."
+        },
+        "3": {
+          "question": "Compute grouped submissions and the modeled reduction.",
+          "expected_answer": "There are `6` grouped submissions and `114` fewer than the separate case. This does not specify frame-time savings."
+        },
+        "4": {
+          "question": "Use one incompatible group per instance. What happens?",
+          "expected_answer": "The control returns `120` submissions, eliminating the modeled reduction. Mesh reuse alone does not guarantee grouping."
+        },
+        "5": {
+          "question": "May the handoff claim the grouped scene is faster?",
+          "expected_answer": "No. It can state the conditional model. A real path needs measured counters, workload and visibility behavior; coarse group culling can change work."
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "1",
+          "check": "Which old quantity changes between column versions?",
+          "expected": "Boxes change from `53` to `85`; block instances remain `5`. Neither count states observed draw calls.",
+          "decision": null
+        },
+        {
+          "criterion": "2",
+          "check": "Compute the separate-submission budget.",
+          "expected": "It is `120` under the stipulated pass and visibility model. This is arithmetic rather than a GPU observation.",
+          "decision": null
+        },
+        {
+          "criterion": "3",
+          "check": "Compute grouped submissions and the modeled reduction.",
+          "expected": "There are `6` grouped submissions and `114` fewer than the separate case. This does not specify frame-time savings.",
+          "decision": null
+        },
+        {
+          "criterion": "4",
+          "check": "Use one incompatible group per instance. What happens?",
+          "expected": "The control returns `120` submissions, eliminating the modeled reduction. Mesh reuse alone does not guarantee grouping.",
+          "decision": null
+        },
+        {
+          "criterion": "5",
+          "check": "May the handoff claim the grouped scene is faster?",
+          "expected": "No. It can state the conditional model. A real path needs measured counters, workload and visibility behavior; coarse group culling can change work.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Read the old description counts and MultiMesh documentation. Make a source-assisted table for block nodes, boxes, mesh instances and modeled submissions; leave measured draw calls unknown. Compare against a handwritten grouping table. A compatible real workload requiring different submissions would falsify this model’s applicability.",
+        "manual_baseline": "Handwritten calculations and exact source-location table before assistant comparison.",
+        "falsifier": "A compatible real workload requiring different submissions would falsify this model’s applicability.",
+        "retained_answers": null,
+        "assistance_record": null,
+        "reviewer_verdict": null,
+        "learner_attempt": null
+      },
+      "human_review": null,
+      "artisan_review": null,
+      "fluent_language_review": null,
+      "learner_result": null,
+      "runtime_result": null,
+      "source_sha256": {
+        "en": "29278359e2f387dc9b3a83f8c3994112b22736e8ee42b276f83f167daed763fc",
+        "fr": "4f5495fccab03f53acc93d0d47a1d5dd562d4c220c13d562558a4914ee6cce63",
+        "es": "823f07f03ed951ab4fd3319212f8c07d6d9eb6b63acb1ae5199421b6ad354c47"
+      }
+    },
+    {
+      "code": "VC013",
+      "module_id": "vc-013-keep-triangle-winding-consistent-with-transforms",
+      "department": "visual-computing",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-013-keep-triangle-winding-consistent-with-transforms.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-013-keep-triangle-winding-consistent-with-transforms.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-013-keep-triangle-winding-consistent-with-transforms.es.md"
+      },
+      "novelty_vs_prerequisites": "Extends SEM006 with composed determinant parity, one-owner correction for baked versus retained transforms, and an area-zero counterexample.",
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/scene-frames-2026-10-22/orientation-controls.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "124627e2f5f46423766c024d0be5aebe956f22d2ade12ce0bc5a112f45750b2a",
+          "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/semiotics/en/sem-006-preserve-orientation-across-scene-frames.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "498533e3d3e5c4e8f7b009b1d6a0aeedfe04ae37853069e9be613e0d68336d78",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/physics/en/phy-008-keep-surface-normals-perpendicular.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "15ba8a405aeb778323581b59089ab92a4a284885d479b69369afd5f2db6ce734",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "url": "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#instantiation",
+          "pin": "glTF-2.0.1 source commit 8e798b02d254cea97659a333cfcb20875b62bdd4",
+          "sha256": "f58480945fd686e491bfc6ee30973768ecafde0863456d5d0bac1057ea9b8e0d",
+          "scope": "glTF 2.0.1 Instantiation global determinant/winding rule; actual body read.",
+          "bytes": 1549770,
+          "transport_url": "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html",
+          "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "triangle": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          "mirror_diagonal": [
+            -2,
+            1,
+            1
+          ],
+          "second_diagonal": [
+            -1,
+            1,
+            1
+          ]
+        },
+        "formula": "A=(0,0,0); B=(2,0,0); C=(0,3,0)\n(B-A) cross (C-A)=(0,0,6)\nM=diag(-2,1,1); det(M)=-2\nbaked_cross=(0,0,-12); outward_reference=(0,0,1)\nafter_one_index_swap=(0,0,12)\nN=diag(-1,1,1); det(M*N)=+2\nZ=diag(0,1,1); triangle_cross_after_Z=(0,0,0)",
+        "assumptions": [
+          "Baked correction targets agreement with chosen outward reference; retained glTF node rule is separate."
+        ],
+        "expected_calculations": {
+          "original_cross": [
+            0,
+            0,
+            6
+          ],
+          "original_area": 3,
+          "mirror_determinant": -2,
+          "baked_cross": [
+            0,
+            0,
+            -12
+          ],
+          "swapped_cross": [
+            0,
+            0,
+            12
+          ],
+          "composed_determinant": 2
+        },
+        "negative_control": {
+          "zero_diagonal": [
+            0,
+            1,
+            1
+          ],
+          "expected_cross": [
+            0,
+            0,
+            0
+          ],
+          "expected_area": 0
+        },
+        "limits": [
+          "No actual export, camera, culling or adapter test."
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate original cross product and area.",
+          "expected_answer": "The cross is `(0,0,6)` and area `3` square coordinate units. Cross magnitude is twice triangle area."
+        },
+        "2": {
+          "question": "Bake the first transform. What operation matches the outward reference?",
+          "expected_answer": "The baked cross is `(0,0,-12)`. Swap a pair once to obtain `(0,0,12)`. This is the declared baked policy, not an instruction to duplicate a node-level correction."
+        },
+        "3": {
+          "question": "Compose both reflected scales. Does the chain reverse orientation?",
+          "expected_answer": "No: the product determinant is `+2`. Blind swaps without tracking the composed representation risk a redundant correction."
+        },
+        "4": {
+          "question": "Apply the zero-axis control. Can an index swap repair this triangle?",
+          "expected_answer": "Its cross becomes `(0,0,0)` and area `0`. Reordering cannot restore area. This conclusion is specific to this triangle."
+        },
+        "5": {
+          "question": "What must the adapter say beyond “mirrors handled”?",
+          "expected_answer": "Name retained node transforms, baked vertex transforms, index policy, outward convention and consumer rule. State which stage corrects orientation; host visibility remains unobserved."
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "1",
+          "check": "Calculate original cross product and area.",
+          "expected": "The cross is `(0,0,6)` and area `3` square coordinate units. Cross magnitude is twice triangle area.",
+          "decision": null
+        },
+        {
+          "criterion": "2",
+          "check": "Bake the first transform. What operation matches the outward reference?",
+          "expected": "The baked cross is `(0,0,-12)`. Swap a pair once to obtain `(0,0,12)`. This is the declared baked policy, not an instruction to duplicate a node-level correction.",
+          "decision": null
+        },
+        {
+          "criterion": "3",
+          "check": "Compose both reflected scales. Does the chain reverse orientation?",
+          "expected": "No: the product determinant is `+2`. Blind swaps without tracking the composed representation risk a redundant correction.",
+          "decision": null
+        },
+        {
+          "criterion": "4",
+          "check": "Apply the zero-axis control. Can an index swap repair this triangle?",
+          "expected": "Its cross becomes `(0,0,0)` and area `0`. Reordering cannot restore area. This conclusion is specific to this triangle.",
+          "decision": null
+        },
+        {
+          "criterion": "5",
+          "check": "What must the adapter say beyond “mirrors handled”?",
+          "expected": "Name retained node transforms, baked vertex transforms, index policy, outward convention and consumer rule. State which stage corrects orientation; host visibility remains unobserved.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Inspect the historical orientation control and glTF instantiation rule. Prepare two manual ledgers for the same craft: retained-node and baked geometry. Ask an assistant to explain the correction owner, then check it. A double correction or claimed repair of a collapsed triangle falsifies the handoff.",
+        "manual_baseline": "Handwritten calculations and exact source-location table before assistant comparison.",
+        "falsifier": "A double correction or claimed repair of a collapsed triangle falsifies the handoff.",
+        "retained_answers": null,
+        "assistance_record": null,
+        "reviewer_verdict": null,
+        "learner_attempt": null
+      },
+      "human_review": null,
+      "artisan_review": null,
+      "fluent_language_review": null,
+      "learner_result": null,
+      "runtime_result": null,
+      "source_sha256": {
+        "en": "372e324e76bb6c0cf46ee43daaf5bd48e67d26fcaab253951256c5ff78e61f31",
+        "fr": "9b43cba1acfec02536f634c57ea23de95da3626fea01b15328c7fc6f91e951e5",
+        "es": "a62160a14ef1f3302dbe1417e185920892a86f03f7ba0fce9029e4bc89487e95"
+      }
+    },
+    {
+      "code": "DV011",
+      "module_id": "dv-011-retain-raw-counts-behind-normalized-heatmaps",
+      "department": "data-visualization",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-011-retain-raw-counts-behind-normalized-heatmaps.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-011-retain-raw-counts-behind-normalized-heatmaps.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-011-retain-raw-counts-behind-normalized-heatmaps.es.md"
+      },
+      "novelty_vs_prerequisites": "Adds row-normalization noninvertibility, reconstruction requirements and empty-row semantics beyond aggregate weighted rates.",
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/representation-release-2026-10-22/phi002-schema-replay.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "04d4924afcbb84c3bf2e1be34bb6b6a5faf27b837a21a26b05617afbe064e2ef",
+          "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/data-visualization/en/dv-002-denominators-and-test-populations.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "286660c780466d2d323b5980fbd16e5e519293677265b93bf168c6c468fce672",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/data-visualization/en/dv-008-streeling-evidence-stage-map.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "27d88b39d3c3a67d3fc73bfcdd4e33cb5e48926f747d577c1af01d20a263a5d9",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "url": "https://github.com/spareilleux/learn/blob/8f13637ae4596b614c2ba493b596b6a08e1cf43a/scripts/streeling-lib.mjs",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "Actual pinned source body read; inspect only the definitions cited in the prose, no program execution.",
+          "digest_scope": "Exact local baseline source bytes, separately inspected in this checkout.",
+          "transport_url": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "raw_rows": [
+            [
+              1,
+              1
+            ],
+            [
+              20,
+              20
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "columns": [
+            "pass",
+            "fail"
+          ]
+        },
+        "formula": "columns=[\"pass\",\"fail\"]\nA=[1,1]; B=[20,20]; Empty=[0,0]\nrow_normalized_A=[0.5,0.5]; row_normalized_B=[0.5,0.5]\nraw_column_totals=[21,21]; raw_total=42\ncontrol_C=[2,8]; normalized_C=[0.2,0.8]\nEmpty_normalized=null",
+        "assumptions": [
+          "Nonnegative integer counts; row normalization only for positive row total; invented dashboard cells."
+        ],
+        "expected_calculations": {
+          "normalized_rows": [
+            [
+              0.5,
+              0.5
+            ],
+            [
+              0.5,
+              0.5
+            ],
+            null
+          ],
+          "totals": [
+            2,
+            40,
+            0
+          ],
+          "column_totals": [
+            21,
+            21
+          ],
+          "overall_total": 42
+        },
+        "negative_control": {
+          "raw_row": [
+            2,
+            8
+          ],
+          "expected_normalized": [
+            0.2,
+            0.8
+          ]
+        },
+        "limits": [
+          "Not measured review status or human approval."
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Normalize the two nonempty balanced rows.",
+          "expected_answer": "Both become `[0.5,0.5]`, although their totals are `2` and `40`. Matching colors do not establish matching evidence volume."
+        },
+        "2": {
+          "question": "Can the normalized rows alone recover the raw totals?",
+          "expected_answer": "No. `[1,1]` and `[20,20]` are distinct preimages. Retain the raw counts or exact totals with unrounded proportions."
+        },
+        "3": {
+          "question": "Aggregate the raw balanced rows.",
+          "expected_answer": "The column totals are `[21,21]` over `42` records. The overall pass proportion is `0.5`, with its denominator retained."
+        },
+        "4": {
+          "question": "Normalize the unbalanced control and the empty row.",
+          "expected_answer": "The control is `[0.2,0.8]`; the empty row is `null`. Filling it with `[0,0]` would disguise an undefined proportion as measured values."
+        },
+        "5": {
+          "question": "Does a normalized review-status cell establish an authorized review?",
+          "expected_answer": "No. Its count still needs the underlying record and exact-source join. Normalization changes presentation, not the authority or validity of a receipt."
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "1",
+          "check": "Normalize the two nonempty balanced rows.",
+          "expected": "Both become `[0.5,0.5]`, although their totals are `2` and `40`. Matching colors do not establish matching evidence volume.",
+          "decision": null
+        },
+        {
+          "criterion": "2",
+          "check": "Can the normalized rows alone recover the raw totals?",
+          "expected": "No. `[1,1]` and `[20,20]` are distinct preimages. Retain the raw counts or exact totals with unrounded proportions.",
+          "decision": null
+        },
+        {
+          "criterion": "3",
+          "check": "Aggregate the raw balanced rows.",
+          "expected": "The column totals are `[21,21]` over `42` records. The overall pass proportion is `0.5`, with its denominator retained.",
+          "decision": null
+        },
+        {
+          "criterion": "4",
+          "check": "Normalize the unbalanced control and the empty row.",
+          "expected": "The control is `[0.2,0.8]`; the empty row is `null`. Filling it with `[0,0]` would disguise an undefined proportion as measured values.",
+          "decision": null
+        },
+        {
+          "criterion": "5",
+          "check": "Does a normalized review-status cell establish an authorized review?",
+          "expected": "No. Its count still needs the underlying record and exact-source join. Normalization changes presentation, not the authority or validity of a receipt.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Read the stored schema replay and locate its accepted empty-evidence case. Design a manual raw-count table for a proposed Learn status heatmap; label the authored cells as hypothetical. Ask an assistant for a caption and reject it if it infers equal sample sizes or human approval from equal normalized colors.",
+        "manual_baseline": "Handwritten calculations and exact source-location table before assistant comparison.",
+        "falsifier": "Ask an assistant for a caption and reject it if it infers equal sample sizes or human approval from equal normalized colors.",
+        "retained_answers": null,
+        "assistance_record": null,
+        "reviewer_verdict": null,
+        "learner_attempt": null
+      },
+      "human_review": null,
+      "artisan_review": null,
+      "fluent_language_review": null,
+      "learner_result": null,
+      "runtime_result": null,
+      "source_sha256": {
+        "en": "043f0f48fd49f09803b440cef630553e579c31d2716872e29443c40deea05e73",
+        "fr": "e0c1cd57fec96d84659743f3fe32f3a201fc7f35e6c8ecb84187b50a4278c38f",
+        "es": "43614d6d52a8e92dc23a7cb513590069ffb3482dfd083b0d2e8d5292c66f4b7f"
+      }
+    },
+    {
+      "code": "DV012",
+      "module_id": "dv-012-compute-quantiles-before-combining-latency-cohorts",
+      "department": "data-visualization",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-012-compute-quantiles-before-combining-latency-cohorts.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-012-compute-quantiles-before-combining-latency-cohorts.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-012-compute-quantiles-before-combining-latency-cohorts.es.md"
+      },
+      "novelty_vs_prerequisites": "Adds order-statistic pooling and a quantile convention counterexample beyond cohort labels and baseline alert thresholds.",
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/brutal-composition-2026-10-22/historical-comparison.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "d35004017d62ec1936ebf482aa0fb53e8e4288aa0c4b395598b85b0cbfdeb1e0",
+          "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/data-visualization/en/dv-003-instrument-cohorts-and-units.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "21acb387bd26835e913da544f67a0930c24b25579c4adc724327457ccce30d15",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/data-visualization/en/dv-005-baselines-alerts-and-targets.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "1321df135bab0a0d7107b16175e769825800c3b39749b2bcec77496d21a28b63",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "url": "https://www.itl.nist.gov/div898/handbook/prc/section2/prc262.htm",
+          "pin": "actual body retrieved 2026-10-23; mutable page",
+          "sha256": "f2e7e56774de5969f88ea75393434fa0cce39418c7ba4ca5ff889f8738a65b81",
+          "scope": "NIST percentile page: order statistics, multiple interpolation conventions and lack of a universal method; actual body read. Nearest rank here is explicitly authored.",
+          "bytes": 12109,
+          "transport_url": "https://www.itl.nist.gov/div898/handbook/prc/section2/prc262.htm",
+          "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "A_ms": [
+            1,
+            2,
+            100
+          ],
+          "B_ms": [
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "probabilities": [
+            0.5,
+            0.9
+          ],
+          "quantile_rule": "nearest_rank_ceiling_one_based"
+        },
+        "formula": "A_ms=[1,2,100]; B_ms=[3,4,5,6,7]\nQ(p,x)=sorted(x)[ceil(p*len(x))-1]\nQ(0.5,A)=2; Q(0.5,B)=5; mean_medians=3.5\npooled_ms=[1,2,3,4,5,6,7,100]; Q(0.5,pooled)=4\nQ(0.9,A)=100; Q(0.9,B)=7; Q(0.9,pooled)=100\ncontrol_A_ms=[2,2]; control_B_ms=[2,2,2]; Q(0.5,control_pooled)=2",
+        "assumptions": [
+          "Authored compatible durations and endpoints; nearest-rank rather than interpolated percentile."
+        ],
+        "expected_calculations": {
+          "A_quantiles_ms": [
+            2,
+            100
+          ],
+          "B_quantiles_ms": [
+            5,
+            7
+          ],
+          "pooled_quantiles_ms": [
+            4,
+            100
+          ],
+          "average_medians_ms": 3.5,
+          "average_upper_quantiles_ms": 53.5
+        },
+        "negative_control": {
+          "A_ms": [
+            2,
+            2
+          ],
+          "B_ms": [
+            2,
+            2,
+            2
+          ],
+          "expected_pooled_median_ms": 2
+        },
+        "limits": [
+          "Old different-endpoint renderer reports cannot be pooled by this assumption."
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Find the two medians using the declared rule.",
+          "expected_answer": "They are `2 ms` and `5 ms`. Their simple mean is `3.5 ms`; that is a new summary, not a pooled median."
+        },
+        "2": {
+          "question": "Compute the pooled median.",
+          "expected_answer": "There are `8` sorted observations. Rank `4` gives `4 ms`. The declared rule matters for the even-sized sample."
+        },
+        "3": {
+          "question": "Find the pooled upper quantile in the model.",
+          "expected_answer": "At `0.9`, rank `8` gives `100 ms`. Averaging the subgroup values would give `53.5 ms`, which is not this pooled quantile."
+        },
+        "4": {
+          "question": "What does the constant-value control show?",
+          "expected_answer": "All medians equal `2 ms`. Agreement can occur, so the lesson rejects a general averaging rule rather than claiming averaging always disagrees."
+        },
+        "5": {
+          "question": "May old different-endpoint renderer timings be pooled after unit conversion?",
+          "expected_answer": "No. Units alone do not reconcile different measured intervals. Preserve the historical failed and inconclusive gates; request matched endpoints and raw samples before pooling."
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "1",
+          "check": "Find the two medians using the declared rule.",
+          "expected": "They are `2 ms` and `5 ms`. Their simple mean is `3.5 ms`; that is a new summary, not a pooled median.",
+          "decision": null
+        },
+        {
+          "criterion": "2",
+          "check": "Compute the pooled median.",
+          "expected": "There are `8` sorted observations. Rank `4` gives `4 ms`. The declared rule matters for the even-sized sample.",
+          "decision": null
+        },
+        {
+          "criterion": "3",
+          "check": "Find the pooled upper quantile in the model.",
+          "expected": "At `0.9`, rank `8` gives `100 ms`. Averaging the subgroup values would give `53.5 ms`, which is not this pooled quantile.",
+          "decision": null
+        },
+        {
+          "criterion": "4",
+          "check": "What does the constant-value control show?",
+          "expected": "All medians equal `2 ms`. Agreement can occur, so the lesson rejects a general averaging rule rather than claiming averaging always disagrees.",
+          "decision": null
+        },
+        {
+          "criterion": "5",
+          "check": "May old different-endpoint renderer timings be pooled after unit conversion?",
+          "expected": "No. Units alone do not reconcile different measured intervals. Preserve the historical failed and inconclusive gates; request matched endpoints and raw samples before pooling.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Read the historical comparison’s timing-endpoint fields. Write a manual table separating compatible authored samples from old incomparable measurements. Use an assistant to propose a pooled caption, then falsify it if it substitutes averaged medians or silently merges different timing endpoints.",
+        "manual_baseline": "Handwritten calculations and exact source-location table before assistant comparison.",
+        "falsifier": "Use an assistant to propose a pooled caption, then falsify it if it substitutes averaged medians or silently merges different timing endpoints.",
+        "retained_answers": null,
+        "assistance_record": null,
+        "reviewer_verdict": null,
+        "learner_attempt": null
+      },
+      "human_review": null,
+      "artisan_review": null,
+      "fluent_language_review": null,
+      "learner_result": null,
+      "runtime_result": null,
+      "source_sha256": {
+        "en": "8ce1f338e19aaf97ccd76185a3539f65d78bb8fa07c5fcdc621dd6c419617f28",
+        "fr": "81eba39c1f8fc58349df43c35933118fb3db19cc6ecb403216afd597e307985b",
+        "es": "8c09eb1488225052c9379313ab10b8bdbf0459a1a2cc72b7f550c7234ab5f606"
+      }
+    },
+    {
+      "code": "DV013",
+      "module_id": "dv-013-compare-learning-curves-at-equal-evaluation-budgets",
+      "department": "data-visualization",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-013-compare-learning-curves-at-equal-evaluation-budgets.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-013-compare-learning-curves-at-equal-evaluation-budgets.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-013-compare-learning-curves-at-equal-evaluation-budgets.es.md"
+      },
+      "novelty_vs_prerequisites": "Adds equal-budget curve alignment, missing endpoints and a shared-grid descriptive summary beyond counterfactual identification.",
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/counterfactual-gains.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "b287aa1db4306eed64e00dfbb182722869fa0cfabbf7316ab2aba01346b0c713",
+          "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/data-visualization/en/dv-002-denominators-and-test-populations.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "286660c780466d2d323b5980fbd16e5e519293677265b93bf168c6c468fce672",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "a8056e98feade4a0da8a72311335b3124f8b3414d9e7cef136d7665b395b7b94",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.ML/Rag/RagEvaluationModels.cs",
+          "pin": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+          "sha256": "411d3ec370ede3328ba5c9bad9babfe73ee69c1a08bcd99fda177baf439f2380",
+          "scope": "Actual pinned source body read; inspect only the definitions cited in the prose, no program execution.",
+          "bytes": 850,
+          "transport_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.ML/Rag/RagEvaluationModels.cs",
+          "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "budget_items": [
+            10,
+            20,
+            30
+          ],
+          "A_scores": [
+            0.6,
+            0.7,
+            0.75
+          ],
+          "B_scores": [
+            0.65,
+            0.72,
+            null
+          ]
+        },
+        "formula": "budget_items=[10,20,30]\nA_score=[0.60,0.70,0.75]\nB_score=[0.65,0.72,null]\nshared_budget_differences_B_minus_A=[0.05,0.02]\nlast_observed_A=0.75; last_observed_B=0.72\nshared_mean_A=(0.60+0.70)/2=0.65\nshared_mean_B=(0.65+0.72)/2=0.685\ncontrol_B_score=[0.60,0.70,null]; control_shared_differences=[0,0]",
+        "assumptions": [
+          "Fixed evaluator and item policy; same score meaning; no interpolation or invented endpoint."
+        ],
+        "expected_calculations": {
+          "shared_differences_B_minus_A": [
+            0.05,
+            0.02
+          ],
+          "shared_mean_A": 0.65,
+          "shared_mean_B": 0.685,
+          "shared_mean_difference": 0.035,
+          "last_A": 0.75,
+          "last_B": 0.72
+        },
+        "negative_control": {
+          "B_scores": [
+            0.6,
+            0.7,
+            null
+          ],
+          "expected_shared_differences": [
+            0,
+            0
+          ]
+        },
+        "limits": [
+          "Authored descriptive curves, not learning or causal benefit observations."
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compare the last observed scores. What confound is visible?",
+          "expected_answer": "A ends at `0.75` and B at `0.72`, but their budgets are `30` and `20` items. The endpoints do not compare equal work."
+        },
+        "2": {
+          "question": "Compare only the common budgets.",
+          "expected_answer": "B exceeds A by `0.05` and `0.02`. This descriptive result reverses the last-point impression without supplying a causal claim."
+        },
+        "3": {
+          "question": "Calculate the shared-grid means. Are they areas under continuous curves?",
+          "expected_answer": "The means are `0.65` and `0.685`, a difference of `0.035`. These are equally weighted point means, not continuous integrals or population estimates."
+        },
+        "4": {
+          "question": "May the missing B endpoint be drawn as zero?",
+          "expected_answer": "No: it is `null`. The equal-score control gives differences `[0,0]` at shared budgets, showing that missingness alone does not imply inferiority."
+        },
+        "5": {
+          "question": "Can this chart prove that an agent teaches better?",
+          "expected_answer": "No. It describes authored evaluation points. Real benefit requires actual outcomes, assistance records, a justified comparison and a fixed evaluator; none was observed here."
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "1",
+          "check": "Compare the last observed scores. What confound is visible?",
+          "expected": "A ends at `0.75` and B at `0.72`, but their budgets are `30` and `20` items. The endpoints do not compare equal work.",
+          "decision": null
+        },
+        {
+          "criterion": "2",
+          "check": "Compare only the common budgets.",
+          "expected": "B exceeds A by `0.05` and `0.02`. This descriptive result reverses the last-point impression without supplying a causal claim.",
+          "decision": null
+        },
+        {
+          "criterion": "3",
+          "check": "Calculate the shared-grid means. Are they areas under continuous curves?",
+          "expected": "The means are `0.65` and `0.685`, a difference of `0.035`. These are equally weighted point means, not continuous integrals or population estimates.",
+          "decision": null
+        },
+        {
+          "criterion": "4",
+          "check": "May the missing B endpoint be drawn as zero?",
+          "expected": "No: it is `null`. The equal-score control gives differences `[0,0]` at shared budgets, showing that missingness alone does not imply inferiority.",
+          "decision": null
+        },
+        {
+          "criterion": "5",
+          "check": "Can this chart prove that an agent teaches better?",
+          "expected": "No. It describes authored evaluation points. Real benefit requires actual outcomes, assistance records, a justified comparison and a fixed evaluator; none was observed here.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Read the old counterfactual packet and locate the GA evaluation type through its pinned source. Prepare a manual equal-budget chart caption and retain omitted endpoints. Ask an assistant to compare terminal scores, then correct its conclusion with the shared-budget differences. An invented endpoint or unmatched-budget superiority claim falsifies the caption.",
+        "manual_baseline": "Handwritten calculations and exact source-location table before assistant comparison.",
+        "falsifier": "An invented endpoint or unmatched-budget superiority claim falsifies the caption.",
+        "retained_answers": null,
+        "assistance_record": null,
+        "reviewer_verdict": null,
+        "learner_attempt": null
+      },
+      "human_review": null,
+      "artisan_review": null,
+      "fluent_language_review": null,
+      "learner_result": null,
+      "runtime_result": null,
+      "source_sha256": {
+        "en": "adc4146f7aea64976c7bcc3462678bc3813aa0aaac843c17e32301ac4bb219c1",
+        "fr": "0edeaee1fa3eaa6bfe95cbb9c353c1957a8df8a18a3cc4cd316f46d11ca2fd53",
+        "es": "04cf618d9442390fa13e06870cf32e244a55e59b04494cca67c34b3de4af90e5"
+      }
+    },
+    {
+      "code": "SEM009",
+      "module_id": "sem-009-keep-units-in-a-composed-craft-instruction",
+      "department": "semiotics",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-009-keep-units-in-a-composed-craft-instruction.md",
+        "fr": "streeling/courses/semiotics/fr/sem-009-keep-units-in-a-composed-craft-instruction.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-009-keep-units-in-a-composed-craft-instruction.es.md"
+      },
+      "novelty_vs_prerequisites": "Adds dimensional composition and a unit-sensitive nonzero control beyond angle-meaning disambiguation and stand-alone conversion.",
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/brutal-composition-2026-10-22/composition-calculations.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "89ff2231c3b7d57d9c22b5926bb3a8364180904b34783c6c4960eb2a6d501b9f",
+          "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/semiotics/en/sem-007-preserve-the-meaning-of-a-bend-angle.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "eab79121e253ab1f1b5e4da12db55de6a39e479b1de4b44a636c52cbfb82d1ce",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/physics/en/phy-005-sheet-thickness-and-scene-units.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "d5c70c6a5cdc7d41e48e89087ced3d7b1bf4a095ec82e9966201c2ea7c7d798c",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Space.fs",
+          "pin": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+          "sha256": "c1580d2297f1bfedfac4f8d1adb126d29a4cf4cc2e10857f04eb7d991b6c3acc",
+          "scope": "Actual pinned source body read; inspect only the definitions cited in the prose, no program execution.",
+          "bytes": 1809,
+          "transport_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Space.fs",
+          "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "base_m": 0.2,
+          "offset_mm": 30,
+          "m_per_mm": 0.001,
+          "scale": 2
+        },
+        "formula": "base=0.20 m; offset=30 mm; mm_to_m=0.001 m/mm\noffset_m=30*0.001=0.03 m\ncomposed=0.20+0.03=0.23 m\nwrong=0.20+30=30.20\nroundtrip=0.23*1000=230 mm\nscale=2; scaled_offset=2*0.03=0.06 m\ncontrol_offset=0 mm; control_composed=0.20 m",
+        "assumptions": [
+          "Lengths share a declared frame after explicit unit conversion."
+        ],
+        "expected_calculations": {
+          "offset_m": 0.03,
+          "composed_m": 0.23,
+          "composed_mm": 230,
+          "wrong_raw_sum": 30.2,
+          "scaled_offset_m": 0.06
+        },
+        "negative_control": {
+          "offset_mm": 0,
+          "expected_correct_numeric": 0.2,
+          "expected_wrong_numeric": 0.2,
+          "discriminates": false
+        },
+        "limits": [
+          "No new parser, actual adapter or automatic dimensional checking."
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compose the two lengths correctly.",
+          "expected_answer": "Convert `30 mm` to `0.03 m`, then add to obtain `0.23 m`. A bare numeric addition does not perform this conversion."
+        },
+        "2": {
+          "question": "Why does the raw addition fail as a physical instruction?",
+          "expected_answer": "The numeric result `30.20` mixes representations. Labeling it metres would imply an offset `1000` times too large; the label cannot repair the operation."
+        },
+        "3": {
+          "question": "Check the result through the millimetre path.",
+          "expected_answer": "The base is `200 mm`, hence `200+30=230 mm`, agreeing with `0.23 m`. The two routes share declared units and frame."
+        },
+        "4": {
+          "question": "Scale the offset and inspect the zero control.",
+          "expected_answer": "The scaled offset is `0.06 m`. With zero offset, both correct and mistaken additions can yield `0.20`, so that control alone would miss the unit error."
+        },
+        "5": {
+          "question": "Are matching unit labels sufficient across different frames?",
+          "expected_answer": "No. A displacement must also have a declared frame and direction. The source’s metre convention does not establish a sheet-to-scene mapping or executed adapter."
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "1",
+          "check": "Compose the two lengths correctly.",
+          "expected": "Convert `30 mm` to `0.03 m`, then add to obtain `0.23 m`. A bare numeric addition does not perform this conversion.",
+          "decision": null
+        },
+        {
+          "criterion": "2",
+          "check": "Why does the raw addition fail as a physical instruction?",
+          "expected": "The numeric result `30.20` mixes representations. Labeling it metres would imply an offset `1000` times too large; the label cannot repair the operation.",
+          "decision": null
+        },
+        {
+          "criterion": "3",
+          "check": "Check the result through the millimetre path.",
+          "expected": "The base is `200 mm`, hence `200+30=230 mm`, agreeing with `0.23 m`. The two routes share declared units and frame.",
+          "decision": null
+        },
+        {
+          "criterion": "4",
+          "check": "Scale the offset and inspect the zero control.",
+          "expected": "The scaled offset is `0.06 m`. With zero offset, both correct and mistaken additions can yield `0.20`, so that control alone would miss the unit error.",
+          "decision": null
+        },
+        {
+          "criterion": "5",
+          "check": "Are matching unit labels sufficient across different frames?",
+          "expected": "No. A displacement must also have a declared frame and direction. The source’s metre convention does not establish a sheet-to-scene mapping or executed adapter.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Read the pinned frame definition and the old composition record. Annotate a proposed craft instruction with quantity, unit and frame at every boundary. Compare an assistant’s composition to the manual millimetre round trip. An unequal nonzero round trip falsifies a claim that numeric syntax preserved the instruction’s meaning.",
+        "manual_baseline": "Handwritten calculations and exact source-location table before assistant comparison.",
+        "falsifier": "An unequal nonzero round trip falsifies a claim that numeric syntax preserved the instruction’s meaning.",
+        "retained_answers": null,
+        "assistance_record": null,
+        "reviewer_verdict": null,
+        "learner_attempt": null
+      },
+      "human_review": null,
+      "artisan_review": null,
+      "fluent_language_review": null,
+      "learner_result": null,
+      "runtime_result": null,
+      "source_sha256": {
+        "en": "f57e3b42ea9c51b419233b011236a821abae04760b1b57e64273935c75ae960e",
+        "fr": "cc3b051c460cb6e1df41b965348d0b67c5566d193950d5593e4026ce9e5c6caf",
+        "es": "d43248c6bc5a93494f07b60c79bae160ce22fcadfba1d97a0bcee07c81c1d1e7"
+      }
+    },
+    {
+      "code": "SEM010",
+      "module_id": "sem-010-distinguish-stable-course-identity-from-display-names",
+      "department": "semiotics",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-010-distinguish-stable-course-identity-from-display-names.md",
+        "fr": "streeling/courses/semiotics/fr/sem-010-distinguish-stable-course-identity-from-display-names.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-010-distinguish-stable-course-identity-from-display-names.es.md"
+      },
+      "novelty_vs_prerequisites": "Adds identity-locale/content-version joins and duplicate coverage controls beyond material-face permutations and evidence-stage counts.",
+      "source_readings": [
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/semiotics/en/sem-004-face-identity-under-reindexing.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "307ebe6590dd8210cd40ff0c4d0a1a079083cb99f9f2965d4c87c3a3ae53edea",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/data-visualization/en/dv-008-streeling-evidence-stage-map.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "27d88b39d3c3a67d3fc73bfcdd4e33cb5e48926f747d577c1af01d20a263a5d9",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "url": "https://github.com/spareilleux/learn/blob/8f13637ae4596b614c2ba493b596b6a08e1cf43a/scripts/streeling-lib.mjs",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "Actual pinned source body read; inspect only the definitions cited in the prose, no program execution.",
+          "digest_scope": "Exact local baseline source bytes, separately inspected in this checkout.",
+          "transport_url": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "rows": [
+            {
+              "id": "course-a",
+              "locale": "en",
+              "title": "Clearance",
+              "revision": "r1"
+            },
+            {
+              "id": "course-a",
+              "locale": "fr",
+              "title": "Jeu",
+              "revision": "r1"
+            },
+            {
+              "id": "course-a",
+              "locale": "es",
+              "title": "Holgura",
+              "revision": "r1"
+            },
+            {
+              "id": "course-b",
+              "locale": "en",
+              "title": "Clearance",
+              "revision": "r1"
+            }
+          ]
+        },
+        "formula": "rows=[\n {\"id\":\"course-a\",\"locale\":\"en\",\"title\":\"Clearance\",\"revision\":\"r1\"},\n {\"id\":\"course-a\",\"locale\":\"fr\",\"title\":\"Jeu\",\"revision\":\"r1\"},\n {\"id\":\"course-a\",\"locale\":\"es\",\"title\":\"Holgura\",\"revision\":\"r1\"},\n {\"id\":\"course-b\",\"locale\":\"en\",\"title\":\"Clearance\",\"revision\":\"r1\"}\n]\nrows_count=4; distinct_ids=2; distinct_id_locale_pairs=4\nrename_course_a_en_title=\"Panel Clearance\"\nrenamed_distinct_ids=2\ncontrol_duplicate={\"id\":\"course-a\",\"locale\":\"en\",\"revision\":\"r2\"}",
+        "assumptions": [
+          "Stable identity is an authored mapping; title is display; exact bytes/version remain separately relevant."
+        ],
+        "expected_calculations": {
+          "rows": 4,
+          "distinct_ids": 2,
+          "distinct_pairs": 4,
+          "after_title_rename_distinct_ids": 2
+        },
+        "negative_control": {
+          "duplicate": {
+            "id": "course-a",
+            "locale": "en",
+            "revision": "r2"
+          },
+          "expected_rows": 5,
+          "expected_distinct_pairs": 4
+        },
+        "limits": [
+          "No global ID uniqueness service or authenticated review."
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Count core identities and locale coverage rows.",
+          "expected_answer": "There are `2` identities and `4` identity-locale pairs. The row count is not the distinct-course count."
+        },
+        "2": {
+          "question": "Rename the first display title. What inventory count changes?",
+          "expected_answer": "Neither count changes: identities remain `2` and coverage pairs `4`. A title edit may still alter reviewed bytes and require a new content check."
+        },
+        "3": {
+          "question": "Can equal titles merge the two identities?",
+          "expected_answer": "No. The shared display word does not establish common course identity. Retain both keys and investigate accidental duplicates separately."
+        },
+        "4": {
+          "question": "Append the duplicate control. Does coverage increase?",
+          "expected_answer": "Rows become `5` but distinct pairs remain `4`. The repeated identity-locale has conflicting revisions and needs reconciliation, not credit as another translation."
+        },
+        "5": {
+          "question": "Does stable identity carry old review approval to changed bytes?",
+          "expected_answer": "No. Identity supports correspondence; review applies to its exact target content. Preserve content hashes and the applicable verdict separately from titles."
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "1",
+          "check": "Count core identities and locale coverage rows.",
+          "expected": "There are `2` identities and `4` identity-locale pairs. The row count is not the distinct-course count.",
+          "decision": null
+        },
+        {
+          "criterion": "2",
+          "check": "Rename the first display title. What inventory count changes?",
+          "expected": "Neither count changes: identities remain `2` and coverage pairs `4`. A title edit may still alter reviewed bytes and require a new content check.",
+          "decision": null
+        },
+        {
+          "criterion": "3",
+          "check": "Can equal titles merge the two identities?",
+          "expected": "No. The shared display word does not establish common course identity. Retain both keys and investigate accidental duplicates separately.",
+          "decision": null
+        },
+        {
+          "criterion": "4",
+          "check": "Append the duplicate control. Does coverage increase?",
+          "expected": "Rows become `5` but distinct pairs remain `4`. The repeated identity-locale has conflicting revisions and needs reconciliation, not credit as another translation.",
+          "decision": null
+        },
+        {
+          "criterion": "5",
+          "check": "Does stable identity carry old review approval to changed bytes?",
+          "expected": "No. Identity supports correspondence; review applies to its exact target content. Preserve content hashes and the applicable verdict separately from titles.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Inspect parseModule and moduleKey in the pinned Learn helper. Manually trace one existing course and its translations through filename, metadata and heading. Compare an assistant’s inventory count with the distinct-key table. Counting a renamed title or duplicate locale as a new course falsifies the proposed inventory rule.",
+        "manual_baseline": "Handwritten calculations and exact source-location table before assistant comparison.",
+        "falsifier": "Counting a renamed title or duplicate locale as a new course falsifies the proposed inventory rule.",
+        "retained_answers": null,
+        "assistance_record": null,
+        "reviewer_verdict": null,
+        "learner_attempt": null
+      },
+      "human_review": null,
+      "artisan_review": null,
+      "fluent_language_review": null,
+      "learner_result": null,
+      "runtime_result": null,
+      "source_sha256": {
+        "en": "7ed2a6542e999d05dd5ac44b7c655651f54a1c416ce4f1da62da66069efa0a4a",
+        "fr": "1872d7ae51856dc068344df395eb5ef0f3eaf37ff2aa66a6dc47c1fc1c1dc124",
+        "es": "3f170d367e2bd146401131ae810eba3e571d1bbcfed86e374612e7112c7c0981"
+      }
+    },
+    {
+      "code": "SEM011",
+      "module_id": "sem-011-version-a-dsl-meaning-before-renaming-its-syntax",
+      "department": "semiotics",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-011-version-a-dsl-meaning-before-renaming-its-syntax.md",
+        "fr": "streeling/courses/semiotics/fr/sem-011-version-a-dsl-meaning-before-renaming-its-syntax.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-011-version-a-dsl-meaning-before-renaming-its-syntax.es.md"
+      },
+      "novelty_vs_prerequisites": "Adds alias-versus-denotation compatibility with a distinguishing input and nondiscriminating control beyond symbol categories and scene composition.",
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/brutal-composition-2026-10-22/composition-calculations.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "89ff2231c3b7d57d9c22b5926bb3a8364180904b34783c6c4960eb2a6d501b9f",
+          "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/semiotics/en/sem-001-signs-in-governance.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "3f7f06c70490397c9bec4f65f9fbd1ce7a06c84fbf128b20ae73b04931e30c04",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/computer-science/en/cs-014-compose-brutal-scene-descriptions.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "a8f4d6ab154f7c6ecca912200bf85ca7a2a081d71ce7e12757265b7080192753",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Model.fs",
+          "pin": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+          "sha256": "ac44e7067730897d4fca91617ff68af67e7a1529b56c367d49add89ab6af5228",
+          "scope": "Actual pinned source body read; inspect only the definitions cited in the prose, no program execution.",
+          "bytes": 9322,
+          "transport_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Model.fs",
+          "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "n": 4,
+          "v1_constant": 3,
+          "v1_slope": 2,
+          "v2_constant": 3,
+          "v2_slope": 4,
+          "old_token": "column@1",
+          "alias": "pillar@1",
+          "alias_binding": "column@1"
+        },
+        "formula": "n=4\nmeaning_v1(n)=3+2*n; result_v1=11\nmeaning_v2(n)=3+4*n; result_v2=19\ndifference=19-11=8\nold_token=\"column@1\"; alias=\"pillar@1\"\nalias_binding=\"column@1\"; alias_result=11\ncontrol_n=0; control_v1=3; control_v2=3",
+        "assumptions": [
+          "Historical count formulas only; alias explicitly retains version binding; zero case is algebraic only, not asserted to be an admissible BRUTAL request."
+        ],
+        "expected_calculations": {
+          "v1": 11,
+          "v2": 19,
+          "difference": 8,
+          "alias_result": 11
+        },
+        "negative_control": {
+          "n": 0,
+          "v1": 3,
+          "v2": 3,
+          "discriminates": false
+        },
+        "limits": [
+          "Count inequality can reject equivalence; equality is not full scene equivalence."
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Evaluate both meanings at the declared input.",
+          "expected_answer": "The results are `11` and `19`, differing by `8` boxes. These counts come from the pinned old calculation, not a new host execution."
+        },
+        "2": {
+          "question": "Does the alias preserve this selected meaning?",
+          "expected_answer": "Yes, if it binds to `column@1`, it still gives `11`. A different display token can denote the same versioned operation."
+        },
+        "3": {
+          "question": "Silently bind the old token to the second meaning. Is syntax preservation sufficient?",
+          "expected_answer": "No. The same old token now gives `19` rather than `11`. Unchanged spelling cannot establish unchanged denotation."
+        },
+        "4": {
+          "question": "What does the zero-input control establish?",
+          "expected_answer": "Both formulas give `3`. Equality on that input would miss the change, so choose a distinguishing supported input before claiming equivalence."
+        },
+        "5": {
+          "question": "Does equal box count establish full scene equivalence?",
+          "expected_answer": "No. Positions, dimensions, materials, seed and semantic bindings may differ. Box count is a witness that can reject equivalence, not a complete scene identity."
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "1",
+          "check": "Evaluate both meanings at the declared input.",
+          "expected": "The results are `11` and `19`, differing by `8` boxes. These counts come from the pinned old calculation, not a new host execution.",
+          "decision": null
+        },
+        {
+          "criterion": "2",
+          "check": "Does the alias preserve this selected meaning?",
+          "expected": "Yes, if it binds to `column@1`, it still gives `11`. A different display token can denote the same versioned operation.",
+          "decision": null
+        },
+        {
+          "criterion": "3",
+          "check": "Silently bind the old token to the second meaning. Is syntax preservation sufficient?",
+          "expected": "No. The same old token now gives `19` rather than `11`. Unchanged spelling cannot establish unchanged denotation.",
+          "decision": null
+        },
+        {
+          "criterion": "4",
+          "check": "What does the zero-input control establish?",
+          "expected": "Both formulas give `3`. Equality on that input would miss the change, so choose a distinguishing supported input before claiming equivalence.",
+          "decision": null
+        },
+        {
+          "criterion": "5",
+          "check": "Does equal box count establish full scene equivalence?",
+          "expected": "No. Positions, dimensions, materials, seed and semantic bindings may differ. Box count is a witness that can reject equivalence, not a complete scene identity.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Read the pinned BlockId definition and old column counts. Prepare a manual token-to-version-to-result table for a proposed rename. Ask an assistant to suggest an alias, then verify the binding rather than its wording. A changed denotation for an old supported input falsifies the claim of a meaning-preserving rename.",
+        "manual_baseline": "Handwritten calculations and exact source-location table before assistant comparison.",
+        "falsifier": "A changed denotation for an old supported input falsifies the claim of a meaning-preserving rename.",
+        "retained_answers": null,
+        "assistance_record": null,
+        "reviewer_verdict": null,
+        "learner_attempt": null
+      },
+      "human_review": null,
+      "artisan_review": null,
+      "fluent_language_review": null,
+      "learner_result": null,
+      "runtime_result": null,
+      "source_sha256": {
+        "en": "c7851beb7719ad1c9ed907d8b5205c1e10b39b789292eb69062350348dbd28d0",
+        "fr": "a56353dbfa0a463f9f9a33746037933d72c0e4ea1b9676dc6944dec421e55bdb",
+        "es": "1d08d41a5c5cfc044c396f9a050309904534e42e988f68207c4658cf7224b95e"
+      }
+    },
+    {
+      "code": "PHI008",
+      "module_id": "phi-008-separate-a-test-oracle-from-a-specification",
+      "department": "philosophy",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-008-separate-a-test-oracle-from-a-specification.md",
+        "fr": "streeling/courses/philosophy/fr/phi-008-separate-a-test-oracle-from-a-specification.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-008-separate-a-test-oracle-from-a-specification.es.md"
+      },
+      "novelty_vs_prerequisites": "Adds predicate-level oracle/specification confusion matrix and independent counterexample design beyond repeated-effect observations.",
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/representation-release-2026-10-22/phi002-schema-replay.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "04d4924afcbb84c3bf2e1be34bb6b6a5faf27b837a21a26b05617afbe064e2ef",
+          "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/philosophy/en/phi-001-how-to-argue-well.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "e8b280a404edebcdf12b3e98d465e6e60d9d21cf5e84bba5a6d88296a5d6e0f4",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/philosophy/en/phi-005-test-idempotence-beyond-replayed-values.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "14845f3e2c2ba9c79dc29cb919d056d4e579fd580a4a38e9c036da1164b9612a",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "url": "https://github.com/GuitarAlchemist/Demerzel/blob/9ba9a29f6424ac8c1a6654c9b979b282a8cf216f/schemas/advisory-decision.schema.json",
+          "pin": "9ba9a29f6424ac8c1a6654c9b979b282a8cf216f",
+          "sha256": "c67d220cbcb1aaffbcfb00e10bfa65c08a32fbc9bd74053a8e2ef874fff44293",
+          "scope": "Actual pinned source body read; inspect only the definitions cited in the prose, no program execution.",
+          "bytes": 2276,
+          "transport_url": "https://raw.githubusercontent.com/GuitarAlchemist/Demerzel/9ba9a29f6424ac8c1a6654c9b979b282a8cf216f/schemas/advisory-decision.schema.json",
+          "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "well_formed": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "relevant_evidence": [
+            true,
+            false,
+            true,
+            false
+          ]
+        },
+        "formula": "cases=[\"A\",\"B\",\"C\",\"D\"]\nwell_formed=[true,true,false,false]\nrelevant_evidence=[true,false,true,false]\nspec=well_formed AND relevant_evidence\nspec_values=[true,false,false,false]\nweak_oracle=[true,true,false,false]\ntrue_positive=1; false_positive=1; true_negative=2; false_negative=0\ncontrol_missing_required_field: well_formed=false",
+        "assumptions": [
+          "Classroom specification requires form AND relevant evidence; not a ratified governance policy."
+        ],
+        "expected_calculations": {
+          "spec": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "weak_oracle": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "true_positive": 1,
+          "false_positive": 1,
+          "true_negative": 2,
+          "false_negative": 0
+        },
+        "negative_control": {
+          "missing_required_field": true,
+          "expected_well_formed": false
+        },
+        "limits": [
+          "Stored schema replay validates form only, no new policy executor."
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Evaluate the authored specification on every case.",
+          "expected_answer": "The result is `[true,false,false,false]`. Relevant evidence alone cannot repair malformed structure under this conjunction."
+        },
+        "2": {
+          "question": "Locate the weak oracle’s false positive.",
+          "expected_answer": "Case B passes form but lacks relevant evidence. It is the single false positive; the other cases give `1` true positive and `2` true negatives."
+        },
+        "3": {
+          "question": "Does the actual stored schema acceptance contradict its form-only contract?",
+          "expected_answer": "No. The schema permits the empty array. The error is treating form acceptance as sufficient evidence of a broader justified-advice property."
+        },
+        "4": {
+          "question": "What does removing a required field test?",
+          "expected_answer": "It supplies a form-negative control. Rejection is expected, but that success does not distinguish an empty-evidence record from a justified record."
+        },
+        "5": {
+          "question": "How can a passing test share the implementation’s mistake?",
+          "expected_answer": "If both use the same weakened predicate, agreement verifies their consistency rather than the intended requirement. Keep an independently derived counterexample and specification rationale."
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "1",
+          "check": "Evaluate the authored specification on every case.",
+          "expected": "The result is `[true,false,false,false]`. Relevant evidence alone cannot repair malformed structure under this conjunction.",
+          "decision": null
+        },
+        {
+          "criterion": "2",
+          "check": "Locate the weak oracle’s false positive.",
+          "expected": "Case B passes form but lacks relevant evidence. It is the single false positive; the other cases give `1` true positive and `2` true negatives.",
+          "decision": null
+        },
+        {
+          "criterion": "3",
+          "check": "Does the actual stored schema acceptance contradict its form-only contract?",
+          "expected": "No. The schema permits the empty array. The error is treating form acceptance as sufficient evidence of a broader justified-advice property.",
+          "decision": null
+        },
+        {
+          "criterion": "4",
+          "check": "What does removing a required field test?",
+          "expected": "It supplies a form-negative control. Rejection is expected, but that success does not distinguish an empty-evidence record from a justified record.",
+          "decision": null
+        },
+        {
+          "criterion": "5",
+          "check": "How can a passing test share the implementation’s mistake?",
+          "expected": "If both use the same weakened predicate, agreement verifies their consistency rather than the intended requirement. Keep an independently derived counterexample and specification rationale.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Read the stored schema replay and required-field definitions. Write a manual requirement-to-oracle table, keeping the invented relevance predicate distinct from actual schema checks. Ask an assistant to justify the green result, then falsify any broader claim with case B. Retain the narrower correct test result.",
+        "manual_baseline": "Handwritten calculations and exact source-location table before assistant comparison.",
+        "falsifier": "Retain the narrower correct test result.",
+        "retained_answers": null,
+        "assistance_record": null,
+        "reviewer_verdict": null,
+        "learner_attempt": null
+      },
+      "human_review": null,
+      "artisan_review": null,
+      "fluent_language_review": null,
+      "learner_result": null,
+      "runtime_result": null,
+      "source_sha256": {
+        "en": "ab7be6ab58c9d4dbb3279e4b753badaa6971ea9da0d153ea581373d6e99f626a",
+        "fr": "3ad781ece95d86774fb3070251381eaf16a1943663f93d220fddc91deed61f9b",
+        "es": "9035f0f563ea634290fff0222c8eab831769bddc972cfb40bcf79e599b3edac7"
+      }
+    },
+    {
+      "code": "PHI009",
+      "module_id": "phi-009-state-who-may-authorize-an-agent-effect",
+      "department": "philosophy",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-009-state-who-may-authorize-an-agent-effect.md",
+        "fr": "streeling/courses/philosophy/fr/phi-009-state-who-may-authorize-an-agent-effect.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-009-state-who-may-authorize-an-agent-effect.es.md"
+      },
+      "novelty_vs_prerequisites": "Adds principal/scope/validity/capability conjunction and revocation countermodels beyond schema-form and evidence sufficiency.",
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/representation-release-2026-10-22/phi002-schema-replay.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "04d4924afcbb84c3bf2e1be34bb6b6a5faf27b837a21a26b05617afbe064e2ef",
+          "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/philosophy/en/phi-002-when-is-an-advisory-decision-justified.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "99200375356de40b214a76b3273daf1a51fded6525611f1d7ff768c0589d1c38",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/philosophy/en/phi-005-test-idempotence-beyond-replayed-values.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "14845f3e2c2ba9c79dc29cb919d056d4e579fd580a4a38e9c036da1164b9612a",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "url": "https://github.com/GuitarAlchemist/Demerzel/blob/9ba9a29f6424ac8c1a6654c9b979b282a8cf216f/schemas/advisory-decision.schema.json",
+          "pin": "9ba9a29f6424ac8c1a6654c9b979b282a8cf216f",
+          "sha256": "c67d220cbcb1aaffbcfb00e10bfa65c08a32fbc9bd74053a8e2ef874fff44293",
+          "scope": "Actual pinned source body read; inspect only the definitions cited in the prose, no program execution.",
+          "bytes": 2276,
+          "transport_url": "https://raw.githubusercontent.com/GuitarAlchemist/Demerzel/9ba9a29f6424ac8c1a6654c9b979b282a8cf216f/schemas/advisory-decision.schema.json",
+          "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "principal_authorized": [
+            false,
+            true,
+            true,
+            true
+          ],
+          "scope_matches": [
+            true,
+            false,
+            true,
+            true
+          ],
+          "still_valid": [
+            true,
+            true,
+            false,
+            true
+          ],
+          "capability": [
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        "formula": "permit=principal_authorized AND scope_matches AND still_valid\nmay_execute=permit AND capability\ncases=[\n {\"name\":\"advice_only\",\"principal_authorized\":false,\"scope_matches\":true,\"still_valid\":true,\"capability\":true},\n {\"name\":\"wrong_scope\",\"principal_authorized\":true,\"scope_matches\":false,\"still_valid\":true,\"capability\":true},\n {\"name\":\"revoked\",\"principal_authorized\":true,\"scope_matches\":true,\"still_valid\":false,\"capability\":true},\n {\"name\":\"declared_permit\",\"principal_authorized\":true,\"scope_matches\":true,\"still_valid\":true,\"capability\":true}\n]\nmay_execute_values=[false,false,false,true]\ncontrol_no_capability: permit=true; may_execute=false",
+        "assumptions": [
+          "Fictional applicable instruction, matching scope and current validity; capability is separate."
+        ],
+        "expected_calculations": {
+          "permit": [
+            false,
+            false,
+            false,
+            true
+          ],
+          "may_execute": [
+            false,
+            false,
+            false,
+            true
+          ]
+        },
+        "negative_control": {
+          "permit": true,
+          "capability": false,
+          "may_execute": false
+        },
+        "limits": [
+          "No authentication, revocation-race handling, real authorization or effect execution."
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Evaluate the advice-only case.",
+          "expected_answer": "The result is `false`: capability and a favorable recommendation do not establish an authorized principal’s instruction."
+        },
+        "2": {
+          "question": "Evaluate the wrong-scope and revoked cases.",
+          "expected_answer": "Both are `false`. Matching identity without matching effect, or an instruction no longer valid, fails the declared gate."
+        },
+        "3": {
+          "question": "Which authored case permits execution in the model?",
+          "expected_answer": "Only the declared-permit case gives `true`. Its Boolean premises are fictional inputs, not evidence that a real person authorized a project mutation."
+        },
+        "4": {
+          "question": "Remove capability from an otherwise permitted case. What distinction remains?",
+          "expected_answer": "Permission remains `true`, while executable ability is `false`. The model distinguishes authority from practical ability in both directions."
+        },
+        "5": {
+          "question": "May the advisory allow string be copied into a mutation permission field?",
+          "expected_answer": "No. The pinned contract is advisory and mutation-prohibited. Any real effect requires its applicable authorization process and current evidence; this lesson executes no effect."
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "1",
+          "check": "Evaluate the advice-only case.",
+          "expected": "The result is `false`: capability and a favorable recommendation do not establish an authorized principal’s instruction.",
+          "decision": null
+        },
+        {
+          "criterion": "2",
+          "check": "Evaluate the wrong-scope and revoked cases.",
+          "expected": "Both are `false`. Matching identity without matching effect, or an instruction no longer valid, fails the declared gate.",
+          "decision": null
+        },
+        {
+          "criterion": "3",
+          "check": "Which authored case permits execution in the model?",
+          "expected": "Only the declared-permit case gives `true`. Its Boolean premises are fictional inputs, not evidence that a real person authorized a project mutation.",
+          "decision": null
+        },
+        {
+          "criterion": "4",
+          "check": "Remove capability from an otherwise permitted case. What distinction remains?",
+          "expected": "Permission remains `true`, while executable ability is `false`. The model distinguishes authority from practical ability in both directions.",
+          "decision": null
+        },
+        {
+          "criterion": "5",
+          "check": "May the advisory allow string be copied into a mutation permission field?",
+          "expected": "No. The pinned contract is advisory and mutation-prohibited. Any real effect requires its applicable authorization process and current evidence; this lesson executes no effect.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Read the advisory schema’s decision description. Prepare a manual actor-effect-authority table for a hypothetical Learn publication request, without performing it. Ask an assistant to classify the four cases and preserve its reasoning. A recommendation treated as the principal’s instruction falsifies the authority claim.",
+        "manual_baseline": "Handwritten calculations and exact source-location table before assistant comparison.",
+        "falsifier": "A recommendation treated as the principal’s instruction falsifies the authority claim.",
+        "retained_answers": null,
+        "assistance_record": null,
+        "reviewer_verdict": null,
+        "learner_attempt": null
+      },
+      "human_review": null,
+      "artisan_review": null,
+      "fluent_language_review": null,
+      "learner_result": null,
+      "runtime_result": null,
+      "source_sha256": {
+        "en": "52510a0ae9b58c13a180c42ba1bd5c411c59854c01b7aae3a437bcc5d4aa9598",
+        "fr": "bcc4e8fda4272976b3da42a80bf491cdeefd837a36571781ab5fd1d513ea703a",
+        "es": "02884b7c2710be4c9c55120cd4262637437430c00529543a55fcf01c59e0ed60"
+      }
+    },
+    {
+      "code": "FUT008",
+      "module_id": "fut-008-stress-test-a-release-plan-against-review-backlogs",
+      "department": "futurology",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-008-stress-test-a-release-plan-against-review-backlogs.md",
+        "fr": "streeling/courses/futurology/fr/fut-008-stress-test-a-release-plan-against-review-backlogs.fr.md",
+        "es": "streeling/courses/futurology/es/fut-008-stress-test-a-release-plan-against-review-backlogs.es.md"
+      },
+      "novelty_vs_prerequisites": "Adds finite backlog recurrence, arrival-before-service timing and drain-horizon stress tests beyond one-shot agent throughput comparisons.",
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/agentic-composition-2026-10-22/pm003-synthetic-ledger-calculation.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "c4c1ba2c369111676a6b7c0e7a8fd5512c1a40c0a0b129824daf1cd361e3124c",
+          "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/futurology/en/fut-003-agent-substitution-readiness-drill.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "3cdeafbc266a8f0ae39cf5f82a6bc7a22d83ffd58c3a4951a0f73bef8b276683",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/data-visualization/en/dv-008-streeling-evidence-stage-map.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "27d88b39d3c3a67d3fc73bfcdd4e33cb5e48926f747d577c1af01d20a263a5d9",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "url": "https://github.com/spareilleux/learn/blob/8f13637ae4596b614c2ba493b596b6a08e1cf43a/scripts/sync-streeling.mjs",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "ba2042f9f99a24e374509dbefa5ce8226225d50ed020fc7e7a1411827a595e89",
+          "scope": "Actual pinned source body read; inspect only the definitions cited in the prose, no program execution.",
+          "digest_scope": "Exact local baseline source bytes, separately inspected in this checkout.",
+          "transport_url": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "initial_items": 12,
+          "arrivals_items_per_week": 8,
+          "capacity_items_per_week": 6,
+          "weeks": 3,
+          "arrival_order": "before_service"
+        },
+        "formula": "B0=12 items; arrivals=8 items/week; capacity=6 items/week\nB_next=max(0,B+arrivals-capacity)\nB_weeks=[12,14,16,18]\ndepartures_per_week=[6,6,6]; total_departures=18\ncontrol_arrivals=3; control_B_weeks=[12,9,6,3,0]\nzero_arrival_capacity=6; zero_arrival_drain_weeks=2",
+        "assumptions": [
+          "Review departures leave this queue; constant capacity; no rework unless counted in arrivals; truncate zero."
+        ],
+        "expected_calculations": {
+          "queue_trace": [
+            12,
+            14,
+            16,
+            18
+          ],
+          "departures_trace": [
+            6,
+            6,
+            6
+          ],
+          "total_departures": 18,
+          "zero_arrival_drain_weeks": 2
+        },
+        "negative_control": {
+          "arrivals_items_per_week": 3,
+          "weeks": 4,
+          "expected_trace": [
+            12,
+            9,
+            6,
+            3,
+            0
+          ]
+        },
+        "limits": [
+          "No staffing forecast, approval count, deployed release or learning outcome."
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate the growth scenario’s weekly queue.",
+          "expected_answer": "Starting at `12`, the end-of-week values are `14`, `16`, `18`. The queue grows by `2` items per week."
+        },
+        "2": {
+          "question": "How much review work leaves in the modeled horizon?",
+          "expected_answer": "There are `18` departures over `3` weeks. A growing queue can coexist with real completed review work; departures are not automatically approvals."
+        },
+        "3": {
+          "question": "Compute the draining control.",
+          "expected_answer": "With `3` arrivals per week the queue is `[12,9,6,3,0]`. It reaches zero after `4` weeks under the stated arrival-before-service convention."
+        },
+        "4": {
+          "question": "Stop new arrivals entirely. What is the drain horizon?",
+          "expected_answer": "It is `2` weeks at capacity `6`. This conditional horizon assumes no corrections or unavailable reviewers, rather than promising a calendar date."
+        },
+        "5": {
+          "question": "Does faster drafting repair the growing queue?",
+          "expected_answer": "No, if it raises arrivals while capacity stays fixed. Review actual correction loops and service availability before changing the plan; preserve unknown human verdicts."
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "1",
+          "check": "Calculate the growth scenario’s weekly queue.",
+          "expected": "Starting at `12`, the end-of-week values are `14`, `16`, `18`. The queue grows by `2` items per week.",
+          "decision": null
+        },
+        {
+          "criterion": "2",
+          "check": "How much review work leaves in the modeled horizon?",
+          "expected": "There are `18` departures over `3` weeks. A growing queue can coexist with real completed review work; departures are not automatically approvals.",
+          "decision": null
+        },
+        {
+          "criterion": "3",
+          "check": "Compute the draining control.",
+          "expected": "With `3` arrivals per week the queue is `[12,9,6,3,0]`. It reaches zero after `4` weeks under the stated arrival-before-service convention.",
+          "decision": null
+        },
+        {
+          "criterion": "4",
+          "check": "Stop new arrivals entirely. What is the drain horizon?",
+          "expected": "It is `2` weeks at capacity `6`. This conditional horizon assumes no corrections or unavailable reviewers, rather than promising a calendar date.",
+          "decision": null
+        },
+        {
+          "criterion": "5",
+          "check": "Does faster drafting repair the growing queue?",
+          "expected": "No, if it raises arrivals while capacity stays fixed. Review actual correction loops and service availability before changing the plan; preserve unknown human verdicts.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Read the old synthetic ledger and the actual Learn generation boundary. Prepare a handwritten queue trace with a review-departure label distinct from publication. Let an assistant propose a release date, then challenge its assumptions. A rising trace under claimed stable capacity falsifies a promise that added drafting alone drains review.",
+        "manual_baseline": "Handwritten calculations and exact source-location table before assistant comparison.",
+        "falsifier": "A rising trace under claimed stable capacity falsifies a promise that added drafting alone drains review.",
+        "retained_answers": null,
+        "assistance_record": null,
+        "reviewer_verdict": null,
+        "learner_attempt": null
+      },
+      "human_review": null,
+      "artisan_review": null,
+      "fluent_language_review": null,
+      "learner_result": null,
+      "runtime_result": null,
+      "source_sha256": {
+        "en": "cd4c36223781dbfc4f79a7764566cebe8512df5ae8075a868569c6a5bb0b8c6b",
+        "fr": "3fc366580f53af85f95e2de938abc29b9a0a4f161d726407a6b79ba07aea673a",
+        "es": "e637dc5325bd10548bb6779b3065effb0487f729fbbcc148c27f77b4e8c50e82"
+      }
+    },
+    {
+      "code": "FUT009",
+      "module_id": "fut-009-compare-staged-adoption-with-an-irreversible-migration",
+      "department": "futurology",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-009-compare-staged-adoption-with-an-irreversible-migration.md",
+        "fr": "streeling/courses/futurology/fr/fut-009-compare-staged-adoption-with-an-irreversible-migration.fr.md",
+        "es": "streeling/courses/futurology/es/fut-009-compare-staged-adoption-with-an-irreversible-migration.es.md"
+      },
+      "novelty_vs_prerequisites": "Adds scenario regret and rollback/gate-failure controls beyond expected information value and renderer scenario ranking.",
+      "source_readings": [
+        {
+          "path": "code/streeling/evidence/brutal-composition-2026-10-22/historical-comparison.json",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "d35004017d62ec1936ebf482aa0fb53e8e4288aa0c4b395598b85b0cbfdeb1e0",
+          "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/futurology/en/fut-004-scenario-test-an-observatory-renderer.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "232bea032ecec5d8aba1ce2d2e5e0aa0919d24150fec634d7f1b17c6a5790328",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "path": "streeling/courses/futurology/en/fut-005-value-a-renderer-pilot-before-running-it.md",
+          "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+          "sha256": "c5067688d5d47b93ef11382d1ad6914a49fca9395c44a5671659b373535c3b16",
+          "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+          "reading_kind": "actual source inspection; no new runtime"
+        },
+        {
+          "url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/README.md",
+          "pin": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+          "sha256": "4cb7e4e068eb000e97b5cd4bb323fbfd8a929749ad14ec3b96127f2d303d3fe7",
+          "scope": "Actual pinned source body read; inspect only the definitions cited in the prose, no program execution.",
+          "bytes": 80539,
+          "transport_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/README.md",
+          "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "states": [
+            "suitable",
+            "unsuitable"
+          ],
+          "direct_loss": [
+            6,
+            26
+          ],
+          "staged_loss": [
+            10,
+            8
+          ],
+          "unit": "authored comparable loss points"
+        },
+        "formula": "states=[\"suitable\",\"unsuitable\"]; unit=\"authored loss points\"\ndirect=[6,26]; staged_with_correct_gate=[10,8]\nstate_best=[6,8]\ndirect_regret=[0,18]; staged_regret=[4,0]\ndirect_worst=26; staged_worst=10\ndirect_max_regret=18; staged_max_regret=4\ncontrol_staged_false_acceptance=[10,30]; control_worst=30",
+        "assumptions": [
+          "Correct gate assumed only in main staged case; rollback retained; no probabilities supplied."
+        ],
+        "expected_calculations": {
+          "state_best": [
+            6,
+            8
+          ],
+          "direct_regret": [
+            0,
+            18
+          ],
+          "staged_regret": [
+            4,
+            0
+          ],
+          "direct_worst": 26,
+          "staged_worst": 10,
+          "direct_max_regret": 18,
+          "staged_max_regret": 4
+        },
+        "negative_control": {
+          "faulty_gate_staged_loss": [
+            10,
+            30
+          ],
+          "expected_worst": 30
+        },
+        "limits": [
+          "No calibrated utility, real pilot, accepted migration or runtime observation."
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Which plan has the lower loss in each state?",
+          "expected_answer": "Direct wins when suitable with `6` versus `10`; staging wins when unsuitable with `8` versus `26`. Neither plan dominates both states."
+        },
+        "2": {
+          "question": "Compare worst-case losses.",
+          "expected_answer": "They are `26` for direct and `10` for staged. A worst-loss preference favors staged under this authored table, without establishing real probabilities."
+        },
+        "3": {
+          "question": "Derive both regret vectors.",
+          "expected_answer": "Subtract the best loss in each state: direct gives `[0,18]`, staged `[4,0]`. Their maximum regrets are `18` and `4`."
+        },
+        "4": {
+          "question": "Apply the faulty-gate control. Does staging remain automatically safer?",
+          "expected_answer": "No. Its worst loss becomes `30`, exceeding direct’s `26`. The correct-gate premise is material, not a guaranteed property of staging."
+        },
+        "5": {
+          "question": "May the old inconclusive renderer report authorize migration?",
+          "expected_answer": "No. It preserves unresolved coexistence evidence. A real plan needs source-bound acceptance, retained rollback artifacts and applicable authorization; this loss table supplies none of those observations."
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "1",
+          "check": "Which plan has the lower loss in each state?",
+          "expected": "Direct wins when suitable with `6` versus `10`; staging wins when unsuitable with `8` versus `26`. Neither plan dominates both states.",
+          "decision": null
+        },
+        {
+          "criterion": "2",
+          "check": "Compare worst-case losses.",
+          "expected": "They are `26` for direct and `10` for staged. A worst-loss preference favors staged under this authored table, without establishing real probabilities.",
+          "decision": null
+        },
+        {
+          "criterion": "3",
+          "check": "Derive both regret vectors.",
+          "expected": "Subtract the best loss in each state: direct gives `[0,18]`, staged `[4,0]`. Their maximum regrets are `18` and `4`.",
+          "decision": null
+        },
+        {
+          "criterion": "4",
+          "check": "Apply the faulty-gate control. Does staging remain automatically safer?",
+          "expected": "No. Its worst loss becomes `30`, exceeding direct’s `26`. The correct-gate premise is material, not a guaranteed property of staging.",
+          "decision": null
+        },
+        {
+          "criterion": "5",
+          "check": "May the old inconclusive renderer report authorize migration?",
+          "expected": "No. It preserves unresolved coexistence evidence. A real plan needs source-bound acceptance, retained rollback artifacts and applicable authorization; this loss table supplies none of those observations.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "instructions": "Read the old renderer failure and inconclusive follow-up. Prepare a manual staged-versus-direct loss table, with retained artifact and gate requirements clearly proposed. Ask an assistant to explain why staging wins, then test the false-acceptance control. A claim of unconditional safety is falsified by that control.",
+        "manual_baseline": "Handwritten calculations and exact source-location table before assistant comparison.",
+        "falsifier": "A claim of unconditional safety is falsified by that control.",
+        "retained_answers": null,
+        "assistance_record": null,
+        "reviewer_verdict": null,
+        "learner_attempt": null
+      },
+      "human_review": null,
+      "artisan_review": null,
+      "fluent_language_review": null,
+      "learner_result": null,
+      "runtime_result": null,
+      "source_sha256": {
+        "en": "fb5f18b9fae5fc7f12e0eb009482955534fa0e13d3d58228ee6663891f972b36",
+        "fr": "ecb4c7660c35a90597c5395ce03811a44d27821bff821b5b473f79c68feb4a96",
+        "es": "4a0de397d8d1b316d4303a458195053b6da08be18041fc834a67e4a16de6d098"
+      }
+    }
+  ],
+  "human_reviews": null,
+  "artisan_reviews": null,
+  "fluent_language_reviews": null,
+  "learner_attempts": null,
+  "runtime_results": null,
+  "deployed_html": null,
+  "source_bindings": {
+    "code/streeling/evidence/scene-frames-2026-10-22/orientation-controls.json": {
+      "path": "code/streeling/evidence/scene-frames-2026-10-22/orientation-controls.json",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "124627e2f5f46423766c024d0be5aebe956f22d2ade12ce0bc5a112f45750b2a",
+      "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/physics/en/phy-005-sheet-thickness-and-scene-units.md": {
+      "path": "streeling/courses/physics/en/phy-005-sheet-thickness-and-scene-units.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "d5c70c6a5cdc7d41e48e89087ced3d7b1bf4a095ec82e9966201c2ea7c7d798c",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "code/streeling/evidence/brutal-composition-2026-10-22/composition-calculations.json": {
+      "path": "code/streeling/evidence/brutal-composition-2026-10-22/composition-calculations.json",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "89ff2231c3b7d57d9c22b5926bb3a8364180904b34783c6c4960eb2a6d501b9f",
+      "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/physics/en/phy-011-compute-bend-length-on-a-declared-neutral-layer.md": {
+      "path": "streeling/courses/physics/en/phy-011-compute-bend-length-on-a-declared-neutral-layer.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "8b47efadd78a9ec2e6efb4165d19bde5c87a0186fb5c4d9164558f897baa1a80",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "code/streeling/evidence/scene-frames-2026-10-22/normal-comparison.json": {
+      "path": "code/streeling/evidence/scene-frames-2026-10-22/normal-comparison.json",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "b0b59bbb6015731dc672faae3cd90deb143aae64d0f8424f0942ba966c785e29",
+      "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/physics/en/phy-008-keep-surface-normals-perpendicular.md": {
+      "path": "streeling/courses/physics/en/phy-008-keep-surface-normals-perpendicular.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "15ba8a405aeb778323581b59089ab92a4a284885d479b69369afd5f2db6ce734",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/visual-computing/en/vc-010-preserve-packed-texture-channel-contracts.md": {
+      "path": "streeling/courses/visual-computing/en/vc-010-preserve-packed-texture-channel-contracts.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "dff68b04b2af3c395f35b754b2c65e77968c8d95afce4a56a80f120b7725bf43",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/visual-computing/en/vc-009-budget-brutal-scene-expansion.md": {
+      "path": "streeling/courses/visual-computing/en/vc-009-budget-brutal-scene-expansion.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "ac2bd248bbc87be880c4b737d3bc6d5b2fcaa54dd6f2c355736c9996a165b6fc",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/semiotics/en/sem-006-preserve-orientation-across-scene-frames.md": {
+      "path": "streeling/courses/semiotics/en/sem-006-preserve-orientation-across-scene-frames.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "498533e3d3e5c4e8f7b009b1d6a0aeedfe04ae37853069e9be613e0d68336d78",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "code/streeling/evidence/representation-release-2026-10-22/phi002-schema-replay.json": {
+      "path": "code/streeling/evidence/representation-release-2026-10-22/phi002-schema-replay.json",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "04d4924afcbb84c3bf2e1be34bb6b6a5faf27b837a21a26b05617afbe064e2ef",
+      "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/data-visualization/en/dv-002-denominators-and-test-populations.md": {
+      "path": "streeling/courses/data-visualization/en/dv-002-denominators-and-test-populations.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "286660c780466d2d323b5980fbd16e5e519293677265b93bf168c6c468fce672",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/data-visualization/en/dv-008-streeling-evidence-stage-map.md": {
+      "path": "streeling/courses/data-visualization/en/dv-008-streeling-evidence-stage-map.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "27d88b39d3c3a67d3fc73bfcdd4e33cb5e48926f747d577c1af01d20a263a5d9",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "code/streeling/evidence/brutal-composition-2026-10-22/historical-comparison.json": {
+      "path": "code/streeling/evidence/brutal-composition-2026-10-22/historical-comparison.json",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "d35004017d62ec1936ebf482aa0fb53e8e4288aa0c4b395598b85b0cbfdeb1e0",
+      "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/data-visualization/en/dv-003-instrument-cohorts-and-units.md": {
+      "path": "streeling/courses/data-visualization/en/dv-003-instrument-cohorts-and-units.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "21acb387bd26835e913da544f67a0930c24b25579c4adc724327457ccce30d15",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/data-visualization/en/dv-005-baselines-alerts-and-targets.md": {
+      "path": "streeling/courses/data-visualization/en/dv-005-baselines-alerts-and-targets.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "1321df135bab0a0d7107b16175e769825800c3b39749b2bcec77496d21a28b63",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "code/streeling/evidence/practice-outcomes-2026-10-22/counterfactual-gains.json": {
+      "path": "code/streeling/evidence/practice-outcomes-2026-10-22/counterfactual-gains.json",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "b287aa1db4306eed64e00dfbb182722869fa0cfabbf7316ab2aba01346b0c713",
+      "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md": {
+      "path": "streeling/courses/philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "a8056e98feade4a0da8a72311335b3124f8b3414d9e7cef136d7665b395b7b94",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/semiotics/en/sem-007-preserve-the-meaning-of-a-bend-angle.md": {
+      "path": "streeling/courses/semiotics/en/sem-007-preserve-the-meaning-of-a-bend-angle.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "eab79121e253ab1f1b5e4da12db55de6a39e479b1de4b44a636c52cbfb82d1ce",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "scripts/streeling-lib.mjs": {
+      "path": "scripts/streeling-lib.mjs",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/semiotics/en/sem-004-face-identity-under-reindexing.md": {
+      "path": "streeling/courses/semiotics/en/sem-004-face-identity-under-reindexing.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "307ebe6590dd8210cd40ff0c4d0a1a079083cb99f9f2965d4c87c3a3ae53edea",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/semiotics/en/sem-001-signs-in-governance.md": {
+      "path": "streeling/courses/semiotics/en/sem-001-signs-in-governance.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "3f7f06c70490397c9bec4f65f9fbd1ce7a06c84fbf128b20ae73b04931e30c04",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/computer-science/en/cs-014-compose-brutal-scene-descriptions.md": {
+      "path": "streeling/courses/computer-science/en/cs-014-compose-brutal-scene-descriptions.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "a8f4d6ab154f7c6ecca912200bf85ca7a2a081d71ce7e12757265b7080192753",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/philosophy/en/phi-001-how-to-argue-well.md": {
+      "path": "streeling/courses/philosophy/en/phi-001-how-to-argue-well.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "e8b280a404edebcdf12b3e98d465e6e60d9d21cf5e84bba5a6d88296a5d6e0f4",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/philosophy/en/phi-005-test-idempotence-beyond-replayed-values.md": {
+      "path": "streeling/courses/philosophy/en/phi-005-test-idempotence-beyond-replayed-values.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "14845f3e2c2ba9c79dc29cb919d056d4e579fd580a4a38e9c036da1164b9612a",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/philosophy/en/phi-002-when-is-an-advisory-decision-justified.md": {
+      "path": "streeling/courses/philosophy/en/phi-002-when-is-an-advisory-decision-justified.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "99200375356de40b214a76b3273daf1a51fded6525611f1d7ff768c0589d1c38",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "code/streeling/evidence/agentic-composition-2026-10-22/pm003-synthetic-ledger-calculation.json": {
+      "path": "code/streeling/evidence/agentic-composition-2026-10-22/pm003-synthetic-ledger-calculation.json",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "c4c1ba2c369111676a6b7c0e7a8fd5512c1a40c0a0b129824daf1cd361e3124c",
+      "scope": "Relevant actual record inspected; authored or historical status remains as labeled. For counterfactual-gains, scope is top-level potential-outcome vectors and summary fields, not all allocation entries.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/futurology/en/fut-003-agent-substitution-readiness-drill.md": {
+      "path": "streeling/courses/futurology/en/fut-003-agent-substitution-readiness-drill.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "3cdeafbc266a8f0ae39cf5f82a6bc7a22d83ffd58c3a4951a0f73bef8b276683",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/futurology/en/fut-004-scenario-test-an-observatory-renderer.md": {
+      "path": "streeling/courses/futurology/en/fut-004-scenario-test-an-observatory-renderer.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "232bea032ecec5d8aba1ce2d2e5e0aa0919d24150fec634d7f1b17c6a5790328",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    },
+    "streeling/courses/futurology/en/fut-005-value-a-renderer-pilot-before-running-it.md": {
+      "path": "streeling/courses/futurology/en/fut-005-value-a-renderer-pilot-before-running-it.md",
+      "pin": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+      "sha256": "c5067688d5d47b93ef11382d1ad6914a49fca9395c44a5671659b373535c3b16",
+      "scope": "Existing English prerequisite inspected for novelty and source boundary.",
+      "reading_kind": "actual source inspection; no new runtime"
+    }
+  },
+  "primary_digest_readback": {
+    "scope": "Read-only transport to bind the actual primary bodies already read by section; no execution of downloaded content.",
+    "retrieved_at_utc": "2026-10-23T23:49:07.315608+00:00",
+    "urls": {
+      "https://docs.godotengine.org/en/4.6/classes/class_multimesh.html": {
+        "sha256": "83f1a17edef5a9ffa539381dfb643b4f44df905eaf0029a6776e1df2af8e9ef8",
+        "bytes": 1293170,
+        "transport_url": "https://docs.godotengine.org/en/4.6/classes/class_multimesh.html",
+        "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+      },
+      "https://github.com/GuitarAlchemist/Demerzel/blob/9ba9a29f6424ac8c1a6654c9b979b282a8cf216f/schemas/advisory-decision.schema.json": {
+        "sha256": "c67d220cbcb1aaffbcfb00e10bfa65c08a32fbc9bd74053a8e2ef874fff44293",
+        "bytes": 2276,
+        "transport_url": "https://raw.githubusercontent.com/GuitarAlchemist/Demerzel/9ba9a29f6424ac8c1a6654c9b979b282a8cf216f/schemas/advisory-decision.schema.json",
+        "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+      },
+      "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.ML/Rag/RagEvaluationModels.cs": {
+        "sha256": "411d3ec370ede3328ba5c9bad9babfe73ee69c1a08bcd99fda177baf439f2380",
+        "bytes": 850,
+        "transport_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.ML/Rag/RagEvaluationModels.cs",
+        "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+      },
+      "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Model.fs": {
+        "sha256": "ac44e7067730897d4fca91617ff68af67e7a1529b56c367d49add89ab6af5228",
+        "bytes": 9322,
+        "transport_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Model.fs",
+        "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+      },
+      "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Space.fs": {
+        "sha256": "c1580d2297f1bfedfac4f8d1adb126d29a4cf4cc2e10857f04eb7d991b6c3acc",
+        "bytes": 1809,
+        "transport_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Space.fs",
+        "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+      },
+      "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/README.md": {
+        "sha256": "4cb7e4e068eb000e97b5cd4bb323fbfd8a929749ad14ec3b96127f2d303d3fe7",
+        "bytes": 80539,
+        "transport_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/README.md",
+        "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+      },
+      "https://github.com/spareilleux/learn/blob/8f13637ae4596b614c2ba493b596b6a08e1cf43a/scripts/streeling-lib.mjs": {
+        "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+        "digest_scope": "Exact local baseline source bytes, separately inspected in this checkout.",
+        "transport_url": null
+      },
+      "https://github.com/spareilleux/learn/blob/8f13637ae4596b614c2ba493b596b6a08e1cf43a/scripts/sync-streeling.mjs": {
+        "sha256": "ba2042f9f99a24e374509dbefa5ce8226225d50ed020fc7e7a1411827a595e89",
+        "digest_scope": "Exact local baseline source bytes, separately inspected in this checkout.",
+        "transport_url": null
+      },
+      "https://openstax.org/books/university-physics-volume-1/pages/10-6-torque": {
+        "sha256": "0b41ee8c5c654f60ab45ed7ea3f0364a705c0706e7a45eaf6a7c906d9f1d789f",
+        "bytes": 354199,
+        "transport_url": "https://openstax.org/books/university-physics-volume-1/pages/10-6-torque",
+        "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+      },
+      "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html": {
+        "sha256": "f58480945fd686e491bfc6ee30973768ecafde0863456d5d0bac1057ea9b8e0d",
+        "bytes": 1549770,
+        "transport_url": "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html",
+        "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+      },
+      "https://www.itl.nist.gov/div898/handbook/prc/section2/prc262.htm": {
+        "sha256": "f2e7e56774de5969f88ea75393434fa0cce39418c7ba4ca5ff889f8738a65b81",
+        "bytes": 12109,
+        "transport_url": "https://www.itl.nist.gov/div898/handbook/prc/section2/prc262.htm",
+        "digest_scope": "Full retrieved response bytes; reading scope remains the named sections, not every byte."
+      }
+    }
+  },
+  "author_refinements": [
+    {
+      "scope": "Author final self-reading, before stable handoff; not independent review.",
+      "course": "SEM011",
+      "finding": "The zero-input algebraic control could be mistaken for an admitted real BRUTAL request.",
+      "change": "Added explicit algebraic-only boundary in all locales and rebound source hashes.",
+      "project_runtime_result": null
+    }
+  ]
+}

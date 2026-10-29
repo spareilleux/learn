@@ -1,0 +1,73 @@
+{
+  "reviewer_scope": "Independent AI body reading of the following primary passages, plus elementary derivation of the authored finite models. No runtime, material, physical, language-human or learner acceptance.",
+  "readings": [
+    {
+      "url": "https://docs.godotengine.org/en/4.5/tutorials/3d/using_transforms.html",
+      "version": "Godot 4.5",
+      "method": "web.open and web.find actual rendered body",
+      "passages": "Axis order; Introducing transforms; rotations relative to parent versus object space",
+      "assessment": "Supports separating local and parent transforms and preserving operation order. It does not supply the classroom hinge, sagitta, modular seam or inventory inputs. Those are expressly authored mathematical constructions."
+    },
+    {
+      "url": "https://docs.godotengine.org/en/4.5/classes/class_camera3d.html",
+      "version": "Godot 4.5",
+      "method": "web.open and web.find actual rendered body",
+      "passages": "ProjectionType; KeepAspect; fov; projection; size",
+      "assessment": "Perspective scales apparent size with depth; orthographic size is distance independent. fov applies in perspective and the locked axis determines the interpreted axis. VC014 explicitly pairs vertical FOV and viewport height; no actual Camera3D was configured."
+    },
+    {
+      "url": "https://docs.godotengine.org/en/4.5/tutorials/3d/standard_material_3d.html",
+      "version": "Godot 4.5",
+      "method": "web.open actual rendered body",
+      "passages": "Introduction, resource placement/override/overlay",
+      "assessment": "Node material supersedes mesh material, material override supersedes both, and overlay is drawn over the current material. SEM014 correctly distinguishes this resource precedence from its own right-biased partial-map field algebra."
+    },
+    {
+      "url": "https://docs.godotengine.org/en/4.5/tutorials/assets_pipeline/importing_images.html",
+      "version": "Godot 4.5",
+      "method": "web.open and web.find actual rendered body",
+      "passages": "Mipmaps > Generate and Mipmaps > Limit",
+      "assessment": "The image-chain example halves both dimensions per level. The documented Limit warning says it is unimplemented in this version. VC016 correctly treats total gutter division as an ideal geometric condition, not a complete sampling or bleed guarantee or a report on a fork."
+    },
+    {
+      "url": "https://docs.godotengine.org/en/4.5/tutorials/3d/visibility_ranges.html",
+      "version": "Godot 4.5",
+      "method": "web.open and web.find actual rendered body",
+      "passages": "Setting up visibility range; properties; Fade mode",
+      "assessment": "Hysteresis margins and visibility ranges use 3D distance relative to AABB center. Disabled uses hysteresis; Self/Dependencies use alpha transitions. FUT011 correctly declines to equate these host settings with authored feasible pixel intervals."
+    },
+    {
+      "url": "https://openstax.org/books/university-physics-volume-2/pages/1-3-thermal-expansion",
+      "version": "University Physics Volume 2 section 1.3",
+      "method": "web.open and web.find actual rendered body with equations",
+      "passages": "Linear Thermal Expansion equations 1.1/1.2 and coefficient units/approximation",
+      "assessment": "Equation1.2 multiplies original length, coefficient and temperature difference. The coefficient is a material property with temperature dependence, so PHY017's constant invented coefficient and free-growth scope are necessary and explicit."
+    },
+    {
+      "url": "https://openstax.org/books/university-physics-volume-1/pages/9-6-center-of-mass",
+      "version": "University Physics Volume 1 section 9.6",
+      "method": "web.open and web.find actual rendered body with equations",
+      "passages": "Center of Mass equations9.29-9.32; calculation procedure",
+      "assessment": "Position is weighted by component mass divided by total mass; a mass at the origin must remain in the denominator. This supports PHY018's calculation but does not supply actual sculpture masses, strength or stability measurements.",
+      "lookup_limit": "Initial web.find for mass-weighted returned no match. Follow-up Center of Mass find returned the needed complete definition, coordinates and calculation procedure; no content inferred from the failed search."
+    },
+    {
+      "url": "https://www.itl.nist.gov/div898/handbook/pri/section3/pri3331.htm",
+      "version": "NIST e-Handbook 5.3.3.3.1",
+      "method": "web.open actual complete 48-line rendered body",
+      "passages": "Two-level full factorial designs, standard order and analysis matrix interaction columns",
+      "assessment": "Supports complete level crossing and explicit interactions. PHI011 defines interaction as its own difference of within-lighting mesh contrasts; it does not confuse that definition with a measured randomized experiment."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+      "version": "blender/blender v4.5.0",
+      "method": "Read complete coordinator-retained 1233-byte local official README at C:/tmp/streeling-batch50-blender-readme-20261024.md",
+      "assessment": "Supports Blender tool identity only. Author self-check preserves historical HTTP402 manual/homepage failures and a guessed-path404; these were not repeated here and are not evidence of reading those unavailable manuals."
+    }
+  ],
+  "limits": [
+    "No claim to read every linked tool homepage or every prerequisite's transitive references.",
+    "Primary pages were read for specific claims, not merely tested for HTTP success.",
+    "Version4.5 documentation does not validate a Godot/DLSS fork; retained Atlas helper declares Blender5.2 but no such runtime was executed."
+  ]
+}

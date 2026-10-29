@@ -1,0 +1,198 @@
+{
+  "checked_at_utc": "2026-10-22T23:20:13.123293+00:00",
+  "base_learn_commit": "a1c02b0caa244c11106337380656902026b7a431",
+  "source_ga_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "scope": "Three meter-grouping, anchored-cycle and picking-phase courses with authored fixed calculations and primary specification/source interpretation. No new parser execution, score roundtrip, playback, player trial, runnable lab or production change.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "calculation_checks": {
+    "independent_checks": 1426,
+    "passed": 1426,
+    "failed": 0,
+    "findings": [
+      {
+        "id": "integer-beats-and-first-pair-loss",
+        "status": "observed-preserved",
+        "finding": "Static pinned XML parser uses Int32 and first Element children; additive text is predictedNone and composite pairs lose the second pair. No fresh parser output asserted."
+      },
+      {
+        "id": "technical-and-tie-loss",
+        "status": "observed-preserved",
+        "finding": "Unsupported up/down technical children fall through the inspected mapping; parseNote assigns Articulations[] and TieNone. No import/export/playback reproduction asserted."
+      },
+      {
+        "id": "limited-GP-direction-branch",
+        "status": "observed-preserved",
+        "finding": "GP type has direction string; inspected effect case7 emits down and does not compute cross-bar phase. No binary-format conformance/system-wide absence claim."
+      },
+      {
+        "id": "MIDI-grouping-boundary",
+        "status": "observed-preserved",
+        "finding": "Inspected MIDI0x58 branch keeps numerator and denominator and skips two trailing bytes; additive order is not reconstructed by that event representation."
+      }
+    ],
+    "public_ga_source_files": 6,
+    "primary_reference_bodies": 8,
+    "meter_cases": 6,
+    "pulse_rotations": 7,
+    "group_start_rebases": 3,
+    "anchored_three_onset_sets": 35,
+    "rotation_classes": 5,
+    "picking_trace_rows": 140,
+    "complete_phase_states": 29,
+    "first_bar_pick_return": 14,
+    "first_full_state_return": 28,
+    "new_parser_run": false,
+    "new_score_roundtrip": false,
+    "new_audio": false,
+    "new_player": false,
+    "new_dependency_install": false,
+    "binary_format_conformance": null,
+    "performed_accents": null,
+    "cultural_identity": null
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 9.80367359999218,
+    "log": "C:\\tmp\\streeling-meter-picking-tests-20261022.log",
+    "log_sha256": "5fd547ce14b332fc6490b8e04e3097ebc446117315d70e60ad364d55b9c84cec",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.254723099991679,
+    "log": "C:\\tmp\\streeling-meter-picking-sync-20261022.log",
+    "log_sha256": "30e0ebaa0f36a7fe69e701cf1dca4b70427d7133f65dbf908fdc433a4b7057b1",
+    "idempotent_checked_files": 698
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 87.78972239998984,
+    "log": "C:\\tmp\\streeling-meter-picking-build-20261022.log",
+    "log_sha256": "82b87db711dd79abb13c957b16d51e3d5d92e67c0e1ec9b5414fa2742915c5e2",
+    "pages": 1894,
+    "dependency_install": "Existing node_modules junction; no install.",
+    "warnings": "Existing highlighting fallback and empty i18n/404 warnings retained in complete log."
+  },
+  "rendered_articles": {
+    "pages": 21,
+    "links": 372,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "data_verdict": "pass",
+    "data_receipt_sha256": "083059e9b1114bd551eba150b1a30ca7eb5d06ea252ab57e456894983c79956c",
+    "content_verdict": "pass",
+    "content_receipt_sha256": "b3553de17b6e1517c35cf082866a6d156717bf4575b93c7da0b1882fccb981d6",
+    "exercise_pairs_checked": 45,
+    "learner_criteria_checked": 15,
+    "open_course_findings": [],
+    "content_observations": [
+      {
+        "origin": "code/streeling/evidence/meter-picking-2026-10-22/data-audit.json",
+        "id": "integer-beats-and-first-pair-loss",
+        "status": "observed-preserved",
+        "finding": "Static pinned XML parser uses Int32 and first Element children; additive text is predictedNone and composite pairs lose the second pair. No fresh parser output asserted."
+      },
+      {
+        "origin": "code/streeling/evidence/meter-picking-2026-10-22/data-audit.json",
+        "id": "technical-and-tie-loss",
+        "status": "observed-preserved",
+        "finding": "Unsupported up/down technical children fall through the inspected mapping; parseNote assigns Articulations[] and TieNone. No import/export/playback reproduction asserted."
+      },
+      {
+        "origin": "code/streeling/evidence/meter-picking-2026-10-22/data-audit.json",
+        "id": "limited-GP-direction-branch",
+        "status": "observed-preserved",
+        "finding": "GP type has direction string; inspected effect case7 emits down and does not compute cross-bar phase. No binary-format conformance/system-wide absence claim."
+      },
+      {
+        "origin": "code/streeling/evidence/meter-picking-2026-10-22/data-audit.json",
+        "id": "MIDI-grouping-boundary",
+        "status": "observed-preserved",
+        "finding": "Inspected MIDI0x58 branch keeps numerator and denominator and skips two trailing bytes; additive order is not reconstructed by that event representation."
+      }
+    ],
+    "content_fix_history": [
+      {
+        "id": "mcl006-task-midi-resolution",
+        "status": "resolved",
+        "finding": "Initial MCL006 task did not explicitly elicit the MIDI tick-resolution distinction in criterion3.",
+        "resolution": "Author added MIDI tick resolution to the divisions-comparison prompt; final task directly reviewed against rubric.",
+        "source_changes_by_reviewer": false
+      },
+      {
+        "id": "wml006-task-second-origin",
+        "status": "resolved",
+        "finding": "Initial WML006 task explicitly derived old pulse4\u2192B but criterion2 also asked old pulse2\u2192C.",
+        "resolution": "Author added the old-pulse2 rebase toC; final task now explicitly elicits both transforms.",
+        "source_changes_by_reviewer": false
+      },
+      {
+        "id": "mcl006-french-composite-term",
+        "status": "resolved",
+        "finding": "French section2 called mixed-denominator2/4+3/8 a mesure compos\u00e9e, risking confusion with compound-meter classification.",
+        "resolution": "Translator replaced it with indication composite to preserve the intended mixed-denominator representation without asserting a compound beat structure. Final bytes directly checked.",
+        "source_changes_by_reviewer": false
+      }
+    ],
+    "scope": "Independent AI source/theory/model/content checks; not human approval.",
+    "human_technical": null,
+    "cultural": null,
+    "musician": null,
+    "fluent_language": null,
+    "learner": null,
+    "parser_execution": null,
+    "score_roundtrip": null,
+    "playback": null,
+    "player": null,
+    "binary_format_conformance": null
+  },
+  "code_review_pipeline": "Documentation/fixed-data-only deliverable with temporary verification wrappers; no new production/lab program emitted and no code-shipping review invoked.",
+  "manual_host_scan": "Read six immutable GA type/parser files and eight W3C MusicXML4 references. Preserve total duration versus grouping versus named metronome unit versus divisions/MIDI ticks; integer-beats/first-pair and unsupported-sign/tie source predictions versus execution. Preserve anchored origin versus circular equivalence and no cultural taxonomy; picking attack versus motion-clock counters, continuation identity, intentional reset negative control and all named phase components. Direction-capable type and selected down-stroke case do not establish both-direction roundtrip, binary conformance or a preferred/physically playable technique",
+  "source_inventory": {
+    "core_english_modules": 207,
+    "target": 525,
+    "original_departments": 21,
+    "remaining_core_source_gaps": 318,
+    "locale_counts": {
+      "en": 208,
+      "fr": 208,
+      "es": 208
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint/typecheck scripts configured; existing generator tests and Astro build used."
+}

@@ -1,0 +1,78 @@
+---
+module_id: cyb-004-observe-before-correcting-a-feedback-loop
+department: cybernetics
+course: "Observe Before Correcting a Feedback Loop"
+level: intermediate
+prerequisites: ["cyb-002-active-dampening-cross-repo-oscillation"]
+estimated_duration: "40 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Observe Before Correcting a Feedback Loop
+
+> **AI source draft.** Human subject, fluent-language, and learner reviews and public course HTML publication remain pending.
+
+## 1. Define what the loop controls
+
+A retry can produce another log without improving the system. Before automating correction, identify the process being controlled (the plant), the permitted intervention (the actuator), the observation (the sensor), and the rule that turns evidence into a decision. Repetition without observing the relevant state does not demonstrate closed-loop improvement.
+
+[CYB-002](../en/cyb-002-active-dampening-cross-repo-oscillation.md) introduces target state, measured state, and feedback. Here we test that vocabulary against retained project traces. Its illustrative governance fields are not newly adopted protocol requirements. A shrinking error at one point does not establish convergence or justify a universal correction policy.
+
+Use the [evidence guide](../../../../code/streeling/evidence/feedback-projections-2026-10-22/README.md) and [learner task](../../../../code/streeling/evidence/feedback-projections-2026-10-22/learner-task.md). Your deliverable is an evidence-based correction note. This lesson analyzes retained artifacts; it reports no new native execution or learner trial.
+
+### Exercise 1 — Name the loop
+
+Define plant, actuator, sensor, and decision for the [guitar experiment](../../guitar-acoustics/en/gas-004-run-open-e-decay-candidate.md).
+
+> **Answer:** The plant is the fixed guitar-engine experiment. The actuator is base decay, changed from **0.9978** to **0.9976**. The sensor measures onset-relative PCM16 level decline and absolute reference error. The decision compares improvement with the declared threshold. Process exit status observes execution, a different property.
+
+## 2. Separate successful execution from the objective
+
+The [pinned guitar results](https://github.com/spareilleux/learn/blob/7eaa68f8d4d32e8d1b495a93775d18135e709811/code/streeling/evidence/guitar-runtime-2026-10-22/results.json) come from engine source `dc2e74cbd992a298f67efb928b5b3754615e1924`. Both arms use the same quantizer and measurement procedure on their actual inputs. Their errors therefore support this arithmetic comparison; quantization does not invalidate every measured difference.
+
+The [decision analysis](../../../../code/streeling/evidence/feedback-projections-2026-10-22/feedback-decisions.json) records baseline error **2.837303388606845 dB**, candidate error **2.723137239012459 dB**, and improvement **0.11416614959438576 dB**. The declared requirement is at least **1 dB**. Experiment exit **0** and `candidate_passes_decline_gate` false can coexist: the experiment completed and the candidate failed its objective.
+
+### Exercise 2 — Calculate the admissible error
+
+What candidate error would satisfy the named criterion? Does the observed candidate qualify?
+
+> **Answer:** Subtract the required improvement from baseline error: the maximum candidate error is **1.8373033886068448 dB** using the stored arithmetic. The actual error exceeds that limit. Reject this candidate under this criterion. One intervention supplies no convergence rate, gradient, or assurance that another decay change will help.
+
+## 3. Classify the evidence before choosing a correction
+
+For the scene case, [Godot](https://docs.godotengine.org/en/4.6/classes/class_resource.html) must load the saved scene and produce named observations. The [failed launch report](../../../../code/streeling/evidence/weave-scene-2026-10-22/launcher-failed-run-report.json) records `godot_execution` with `spawnSync godot ETIMEDOUT`. The controller's **60-second** startup bound expired. Earlier semantic admission passed, but no native report establishes geometry or crossing identity.
+
+Distinguish three situations. **Absent observation:** the expected native report never arrives. **Malformed measurement:** a report arrives with unusable values, wrong provenance, or a mismatched sensor definition. **Objective failure:** a valid observation violates its named criterion. A timeout is not a measured geometric defect; a numeric-looking value with unknown units is not a trustworthy objective failure.
+
+The [final scene results](../../../../code/streeling/evidence/weave-scene-2026-10-22/results.json) include **190** passing native checks and **3** controlled defects. In the wrong-binding control, geometry and upper-strand checks pass while `ray_crossing_identity` fails. This is useful observation: correct geometry alone does not establish that a hit identifies the intended crossing.
+
+### Exercise 3 — Choose the failure class
+
+Classify the timeout and wrong-binding result. Where would a report with incompatible units belong?
+
+> **Answer:** The timeout leaves native observation absent. Wrong binding is an observed failure of the identity criterion, despite passing geometric checks. Incompatible units make the proposed measurement unusable until its interpretation is repaired. Diagnose the missing or defective sensor before changing geometry.
+
+## 4. Ask what the sensor can distinguish
+
+A sensor often projects a richer state into a smaller representation. The retained encoder uses [Math.round](https://tc39.es/ecma262/multipage/numbers-and-dates.html#sec-math.round): `Math.round(sample * 32767)`, stored as signed PCM16. Equal projected outputs cannot reveal every difference between their inputs.
+
+The [quantization readback](../../../../code/streeling/evidence/feedback-projections-2026-10-22/quantization.json) finds **2918** differing baseline float samples between native and [Wasm](https://nodejs.org/en/learn/getting-started/nodejs-with-webassembly), yet **0** differing PCM16 samples. At frame **646**, native **0.000552888261154294** and Wasm **0.0005528881447389722** both become **18**. This concrete counterexample limits what PCM equality observes; it is not a general theorem about hidden dynamics.
+
+### Exercise 4 — Pick a discriminating observation
+
+Which retained observation refutes raw equality: equal PCM16 payloads or the differing decoded float samples?
+
+> **Answer:** The differing float samples refute raw equality. PCM16 equality establishes equality at that projection only. Neither result establishes auditory equivalence. Choose a sensor with enough resolution for the question, and preserve the richer observation when available.
+
+## 5. Make one checked correction and stop
+
+The [direct-executable characterization](../../../../code/streeling/evidence/weave-scene-2026-10-22/direct-executable-characterization.json) ran the same installed executable against the same copied project and script, passing in **0.5707436999946367 seconds**. An earlier PATH-parent attempt still selected the link because the real executable had a different basename; it did not isolate a changed executable choice. The final controller resolves that link before launch.
+
+### Exercise 5 — Write a bounded correction note
+
+Propose one launch correction, its check, stop condition, falsifier, and cost limit.
+
+> **Answer:** Resolve the executable link and record the selected path while retaining the same copied inputs. Require a valid native report with the named checks. Stop after this bounded comparison; retain failure logs if startup times out or a check fails. A resolved direct launch that still lacks the report falsifies the claim that this correction suffices locally. Cap the attempt at the existing timeout and review before another intervention.
+
+This sequential local result supports that corrective hypothesis. It establishes no universal startup reliability, causal performance improvement, or C# assembly stability. Human acceptance remains `null`; source assistance is pending. Further work needs a new bounded question, not a promise of infinite improvement or exponential convergence.

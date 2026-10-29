@@ -1,0 +1,80 @@
+{
+  "scope": "Static source-derived predictions at GA76efbffd5af82b46c3146957a6bd4504008eeb89. No F# parser execution or import/export occurred.",
+  "musicxml_time_cases": [
+    {
+      "beats_texts": [
+        "7"
+      ],
+      "beat_type_texts": [
+        "8"
+      ],
+      "predicted_time": {
+        "Beats": 7,
+        "BeatType": 8
+      }
+    },
+    {
+      "beats_texts": [
+        "2+2+3"
+      ],
+      "beat_type_texts": [
+        "8"
+      ],
+      "predicted_time": null
+    },
+    {
+      "beats_texts": [
+        "2",
+        "3"
+      ],
+      "beat_type_texts": [
+        "4",
+        "8"
+      ],
+      "predicted_time": {
+        "Beats": 2,
+        "BeatType": 4
+      },
+      "lost_pair": [
+        3,
+        8
+      ]
+    }
+  ],
+  "musicxml_notes": {
+    "tie_assigned": null,
+    "articulations_assigned": [],
+    "down_up_technical_tags_not_listed": true,
+    "unknown_technical_tags_filtered": true
+  },
+  "midi_example": {
+    "authored_payload_bytes": [
+      7,
+      3,
+      24,
+      8
+    ],
+    "predicted_numerator": 7,
+    "predicted_denominator": 8,
+    "skipped_trailing_bytes": [
+      24,
+      8
+    ],
+    "group_order_retained": false
+  },
+  "guitar_pro": {
+    "pickstroke_type_has_direction_string": true,
+    "effect_case_seven_source_direction": "down",
+    "continuous_cross_bar_phase_not_computed_in_inspected_branch": true,
+    "binary_format_compliance": null
+  },
+  "proposed_boundary_checks": [
+    "plain7/8 versus additive2+2+3/8",
+    "two time pairs2/4+3/8",
+    "explicit up and down technical signs",
+    "tie continuation crossing bar",
+    "rests with explicit attack/pulse motion policy"
+  ],
+  "real_parser_outputs": null,
+  "real_player": null
+}

@@ -1,0 +1,842 @@
+[
+  {
+    "case": "model",
+    "code": "DV014",
+    "expected": {
+      "contact_count": 1,
+      "mean_absolute_mm": 0.35,
+      "minimum_mm": -0.4,
+      "overlap_count": 1
+    },
+    "observed": {
+      "contact_count": 1,
+      "mean_absolute_mm": 0.35000000000000003,
+      "minimum_mm": -0.4,
+      "overlap_count": 1
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "negative",
+    "code": "DV014",
+    "expected": {
+      "contact_count": 1,
+      "mean_absolute_mm": 0.35,
+      "minimum_mm": 0,
+      "overlap_count": 0
+    },
+    "observed": {
+      "contact_count": 1,
+      "mean_absolute_mm": 0.35000000000000003,
+      "minimum_mm": 0,
+      "overlap_count": 0
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "model",
+    "code": "DV015",
+    "expected": {
+      "absent": 2,
+      "missing": 1,
+      "observed": 5,
+      "observed_absence_fraction": 0.4,
+      "present": 3
+    },
+    "observed": {
+      "absent": 2,
+      "missing": 1,
+      "observed": 5,
+      "observed_absence_fraction": 0.4,
+      "present": 3
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "negative",
+    "code": "DV015",
+    "expected": {
+      "absent": 3,
+      "missing": 0,
+      "observed": 6,
+      "observed_absence_fraction": 0.5,
+      "present": 3
+    },
+    "observed": {
+      "absent": 3,
+      "missing": 0,
+      "observed": 6,
+      "observed_absence_fraction": 0.5,
+      "present": 3
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "model",
+    "code": "DV016",
+    "expected": {
+      "delta_px": [
+        2,
+        -5,
+        2
+      ],
+      "mean_delta_px": -0.3333333333333333,
+      "worsened_views": [
+        "front",
+        "back"
+      ],
+      "worst_after_px": 4,
+      "worst_before_px": 8
+    },
+    "observed": {
+      "delta_px": [
+        2,
+        -5,
+        2
+      ],
+      "mean_delta_px": -0.3333333333333333,
+      "worsened_views": [
+        "front",
+        "back"
+      ],
+      "worst_after_px": 4,
+      "worst_before_px": 8
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "negative",
+    "code": "DV016",
+    "expected": {
+      "delta_px": [
+        1,
+        -4,
+        2
+      ],
+      "mean_delta_px": -0.3333333333333333,
+      "worsened_views": [
+        "front",
+        "back"
+      ],
+      "worst_after_px": 4,
+      "worst_before_px": 8
+    },
+    "observed": {
+      "delta_px": [
+        1,
+        -4,
+        2
+      ],
+      "mean_delta_px": -0.3333333333333333,
+      "worsened_views": [
+        "front",
+        "back"
+      ],
+      "worst_after_px": 4,
+      "worst_before_px": 8
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "model",
+    "code": "FUT010",
+    "expected": {
+      "base_crossings": 24,
+      "base_strands": 10,
+      "crossing_ratio": 4,
+      "future_crossings": 96,
+      "future_strands": 20,
+      "strand_ratio": 2
+    },
+    "observed": {
+      "base_crossings": 24,
+      "base_strands": 10,
+      "crossing_ratio": 4,
+      "future_crossings": 96,
+      "future_strands": 20,
+      "strand_ratio": 2.0
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "negative",
+    "code": "FUT010",
+    "expected": {
+      "base_crossings": 24,
+      "base_strands": 10,
+      "crossing_ratio": 2,
+      "future_crossings": 48,
+      "future_strands": 16,
+      "strand_ratio": 1.6
+    },
+    "observed": {
+      "base_crossings": 24,
+      "base_strands": 10,
+      "crossing_ratio": 2,
+      "future_crossings": 48,
+      "future_strands": 16,
+      "strand_ratio": 1.6
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "model",
+    "code": "FUT011",
+    "expected": {
+      "ambiguous_samples": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "mesh_states": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true
+      ],
+      "possible_mesh_states": [
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ],
+        [
+          true
+        ]
+      ],
+      "robust_mesh_states": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "robust_switches": 1,
+      "switches": 3
+    },
+    "observed": {
+      "ambiguous_samples": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "mesh_states": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true
+      ],
+      "possible_mesh_states": [
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ],
+        [
+          true
+        ]
+      ],
+      "robust_mesh_states": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "robust_switches": 1,
+      "switches": 3
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "negative",
+    "code": "FUT011",
+    "expected": {
+      "ambiguous_samples": [
+        2
+      ],
+      "mesh_states": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true
+      ],
+      "possible_mesh_states": [
+        [
+          true
+        ],
+        [
+          false,
+          true
+        ],
+        [
+          true
+        ],
+        [
+          false
+        ],
+        [
+          false
+        ],
+        [
+          false
+        ],
+        [
+          true
+        ]
+      ],
+      "robust_mesh_states": [
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true
+      ],
+      "robust_switches": 3,
+      "switches": 5
+    },
+    "observed": {
+      "ambiguous_samples": [
+        2
+      ],
+      "mesh_states": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true
+      ],
+      "possible_mesh_states": [
+        [
+          true
+        ],
+        [
+          false,
+          true
+        ],
+        [
+          true
+        ],
+        [
+          false
+        ],
+        [
+          false
+        ],
+        [
+          false
+        ],
+        [
+          true
+        ]
+      ],
+      "robust_mesh_states": [
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true
+      ],
+      "robust_switches": 3,
+      "switches": 5
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "model",
+    "code": "PHI010",
+    "expected": {
+      "indistinguishable": true,
+      "observation_a": [
+        0,
+        0
+      ],
+      "observation_b": [
+        0,
+        0
+      ],
+      "requirement_a": true,
+      "requirement_b": false
+    },
+    "observed": {
+      "indistinguishable": true,
+      "observation_a": [
+        0,
+        0
+      ],
+      "observation_b": [
+        0,
+        0
+      ],
+      "requirement_a": true,
+      "requirement_b": false
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "negative",
+    "code": "PHI010",
+    "expected": {
+      "indistinguishable": false,
+      "observation_a": [
+        0,
+        0
+      ],
+      "observation_b": [
+        1,
+        0
+      ],
+      "requirement_a": true,
+      "requirement_b": false
+    },
+    "observed": {
+      "indistinguishable": false,
+      "observation_a": [
+        0,
+        0
+      ],
+      "observation_b": [
+        1,
+        0
+      ],
+      "requirement_a": true,
+      "requirement_b": false
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "model",
+    "code": "PHI011",
+    "expected": {
+      "average_mesh": -2,
+      "diagonal": 2,
+      "interaction": 0,
+      "mesh_flat": -2,
+      "mesh_lit": -2
+    },
+    "observed": {
+      "average_mesh": -2.0,
+      "diagonal": 2,
+      "interaction": 0,
+      "mesh_flat": -2,
+      "mesh_lit": -2
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "negative",
+    "code": "PHI011",
+    "expected": {
+      "average_mesh": 0,
+      "diagonal": 6,
+      "interaction": 4,
+      "mesh_flat": -2,
+      "mesh_lit": 2
+    },
+    "observed": {
+      "average_mesh": 0.0,
+      "diagonal": 6,
+      "interaction": 4,
+      "mesh_flat": -2,
+      "mesh_lit": 2
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "model",
+    "code": "PHY016",
+    "expected": {
+      "endpoint_mm": [
+        50,
+        86.60254037844386
+      ],
+      "radial_margin_mm": 10,
+      "swept_displacement_mm": 100
+    },
+    "observed": {
+      "endpoint_mm": [
+        50.000000000000014,
+        86.60254037844386
+      ],
+      "radial_margin_mm": 10,
+      "swept_displacement_mm": 99.99999999999999
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "negative",
+    "code": "PHY016",
+    "expected": {
+      "endpoint_mm": [
+        100,
+        0
+      ],
+      "radial_margin_mm": 10,
+      "swept_displacement_mm": 0
+    },
+    "observed": {
+      "endpoint_mm": [
+        100.0,
+        0.0
+      ],
+      "radial_margin_mm": 10,
+      "swept_displacement_mm": 0.0
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "model",
+    "code": "PHY017",
+    "expected": {
+      "growth_mm": 0.2,
+      "remaining_gap_mm": 0.1
+    },
+    "observed": {
+      "growth_mm": 0.2,
+      "remaining_gap_mm": 0.09999999999999998
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "negative",
+    "code": "PHY017",
+    "expected": {
+      "growth_mm": 0.4,
+      "remaining_gap_mm": -0.1
+    },
+    "observed": {
+      "growth_mm": 0.4,
+      "remaining_gap_mm": -0.10000000000000003
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "model",
+    "code": "PHY018",
+    "expected": {
+      "inside_support": true,
+      "margin_m": 0.02,
+      "x_cm_m": 0.1
+    },
+    "observed": {
+      "inside_support": true,
+      "margin_m": 0.020000000000000004,
+      "x_cm_m": 0.09999999999999999
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "negative",
+    "code": "PHY018",
+    "expected": {
+      "inside_support": false,
+      "margin_m": -0.08,
+      "x_cm_m": 0.2
+    },
+    "observed": {
+      "inside_support": false,
+      "margin_m": -0.07999999999999999,
+      "x_cm_m": 0.19999999999999998
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "model",
+    "code": "SEM012",
+    "expected": {
+      "commute": false,
+      "rotate_after_translate_mm": [
+        0,
+        2
+      ],
+      "translate_after_rotate_mm": [
+        1,
+        1
+      ]
+    },
+    "observed": {
+      "commute": false,
+      "rotate_after_translate_mm": [
+        0.0,
+        2.0
+      ],
+      "translate_after_rotate_mm": [
+        1.0,
+        1.0
+      ]
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "negative",
+    "code": "SEM012",
+    "expected": {
+      "commute": true,
+      "rotate_after_translate_mm": [
+        0,
+        1
+      ],
+      "translate_after_rotate_mm": [
+        0,
+        1
+      ]
+    },
+    "observed": {
+      "commute": true,
+      "rotate_after_translate_mm": [
+        0.0,
+        1.0
+      ],
+      "translate_after_rotate_mm": [
+        0.0,
+        1.0
+      ]
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "model",
+    "code": "SEM013",
+    "expected": {
+      "compatible": true,
+      "joint_period_cells": 6,
+      "phase_remainders": [
+        0,
+        0
+      ]
+    },
+    "observed": {
+      "compatible": true,
+      "joint_period_cells": 6,
+      "phase_remainders": [
+        0,
+        0
+      ]
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "negative",
+    "code": "SEM013",
+    "expected": {
+      "compatible": false,
+      "joint_period_cells": 6,
+      "phase_remainders": [
+        1,
+        0
+      ]
+    },
+    "observed": {
+      "compatible": false,
+      "joint_period_cells": 6,
+      "phase_remainders": [
+        1,
+        0
+      ]
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "model",
+    "code": "SEM014",
+    "expected": {
+      "AB": {
+        "metallic": 1,
+        "roughness": 0.6
+      },
+      "BA": {
+        "metallic": 1,
+        "roughness": 0.3
+      },
+      "commute": false
+    },
+    "observed": {
+      "AB": {
+        "metallic": 1,
+        "roughness": 0.6
+      },
+      "BA": {
+        "metallic": 1,
+        "roughness": 0.3
+      },
+      "commute": false
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "negative",
+    "code": "SEM014",
+    "expected": {
+      "AB": {
+        "metallic": 1,
+        "roughness": 0.3
+      },
+      "BA": {
+        "metallic": 1,
+        "roughness": 0.3
+      },
+      "commute": true
+    },
+    "observed": {
+      "AB": {
+        "metallic": 1,
+        "roughness": 0.3
+      },
+      "BA": {
+        "metallic": 1,
+        "roughness": 0.3
+      },
+      "commute": true
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "model",
+    "code": "VC014",
+    "expected": {
+      "focal_px": 500,
+      "meets_declared_threshold": false,
+      "width_px": 1
+    },
+    "observed": {
+      "focal_px": 500.00000000000006,
+      "meets_declared_threshold": false,
+      "width_px": 1.0000000000000002
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "negative",
+    "code": "VC014",
+    "expected": {
+      "focal_px": 500,
+      "meets_declared_threshold": true,
+      "width_px": 2
+    },
+    "observed": {
+      "focal_px": 500.00000000000006,
+      "meets_declared_threshold": true,
+      "width_px": 2.0000000000000004
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "model",
+    "code": "VC015",
+    "expected": {
+      "acceptable": false,
+      "perimeter_mm": 621.1657082460498,
+      "sagitta_mm": 3.407417371093169
+    },
+    "observed": {
+      "acceptable": false,
+      "perimeter_mm": 621.1657082460498,
+      "sagitta_mm": 3.407417371093169
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "negative",
+    "code": "VC015",
+    "expected": {
+      "acceptable": true,
+      "perimeter_mm": 626.5257226562476,
+      "sagitta_mm": 0.8555138626189618
+    },
+    "observed": {
+      "acceptable": true,
+      "perimeter_mm": 626.5257226562476,
+      "sagitta_mm": 0.8555138626189618
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "model",
+    "code": "VC016",
+    "expected": {
+      "effective_gutter_px": 2,
+      "meets_declared_margin": true
+    },
+    "observed": {
+      "effective_gutter_px": 2.0,
+      "meets_declared_margin": true
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  },
+  {
+    "case": "negative",
+    "code": "VC016",
+    "expected": {
+      "effective_gutter_px": 1,
+      "meets_declared_margin": false
+    },
+    "observed": {
+      "effective_gutter_px": 1.0,
+      "meets_declared_margin": false
+    },
+    "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+  }
+]

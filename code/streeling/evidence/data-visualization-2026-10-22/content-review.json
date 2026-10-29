@@ -1,0 +1,69 @@
+{
+  "audit": {
+    "audit_kind": "native source-content audit",
+    "source_commit": "17f82a4b4b913d7c64942a3d3ff670abf4e6f85c",
+    "ga_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+    "historical_inventory_commit": "8a37e1d9a728a15ed384cbb912e3c8c518083d12",
+    "scope": "DV001-DV008 English modules, referenced pinned GA objects, DV008 historical scripts and synthetic fixture; amended Learn DV008 boundary glance",
+    "result": "no blocking findings; one minor numeric precision inconsistency",
+    "findings": [
+      {
+        "claim": "A radius ratio of 38.22 gives area ratio about 1460.62",
+        "line": 64,
+        "severity": "P3",
+        "correction": "38.22 squared is 1460.7684, about 1460.77. The unrounded count ratio 38.21808851828095 squared is 1460.6222899911581, about 1460.62. Either use 1460.77 for the stated rounded radius or explicitly identify the unrounded count ratio.",
+        "file": "state/streeling/courses/data-visualization/en/dv-006-position-length-area-comparisons.md"
+      }
+    ],
+    "verified": {
+      "embedding": "six means/labels, sample12000=3x4000, five folds, baseline33.33%, raw240 and compact124 offsets match pinned diagnostic/schema",
+      "analyzer_integrity": "analyze.py, scenarios.json, results.json working blobs all matched source pin before running",
+      "relative_links": "all pinned local lesson links resolve",
+      "cohort_shares": "95.16%, 2.49%, 2.35%; total 313047",
+      "counterfactual": "37/45 = 82.22%",
+      "pinned_sources": "all referenced GA and Demerzel Git objects resolve locally",
+      "dv008_analyzer": "PASS DV-008 synthetic results match saved results",
+      "dv008_synthetic_counts": [
+        6,
+        2,
+        2,
+        1
+      ],
+      "dv008_inventory": {
+        "english_files": 121,
+        "optional": "CYB-026",
+        "approved_production_records": 0,
+        "course_departments": 21,
+        "core_codes": 120
+      },
+      "modules": 8,
+      "bar_lengths": "2.62 and 2.46 for guitar=100",
+      "learn_dv008": "migration boundary reviewed; historical/current source and readback limitations remain explicit",
+      "weighted_rate": "5/11 = 45.45%",
+      "prerequisites": "all resolve; acyclic dependencies on earlier modules",
+      "qa_counts": "39/52 and 51/52; category totals 52 and reconstructed June passes 39",
+      "steps": "100/52 = 1.92 pp; 100/7 = 14.29 pp"
+    },
+    "limitations": [
+      "No full builds or test suite run.",
+      "No current service or public Learn readback performed.",
+      "No human subject review, learner attempt, fluent-language review or independent-model approval claimed.",
+      "Source availability means local pinned Git object availability; external W3C URLs were not probed."
+    ],
+    "repository_writes": "none",
+    "checked_at_utc": "2026-10-22T01:20:38.0100719Z"
+  },
+  "coordinator_resolution": {
+    "file": "streeling/courses/data-visualization/en/dv-006-position-length-area-comparisons.md",
+    "change": "Use1460.77 with explicit38.22 squared1460.7684; keep1460.62 only for unrounded ratio.",
+    "source_adjustment_in_manifest": true,
+    "human_approval": false
+  },
+  "web_source_check": {
+    "urls": [
+      "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color",
+      "https://www.w3.org/WAI/WCAG22/Understanding/non-text-content"
+    ],
+    "result": "Both official W3C pages opened; course distinction between visible non-color cues and text alternatives is supported."
+  }
+}

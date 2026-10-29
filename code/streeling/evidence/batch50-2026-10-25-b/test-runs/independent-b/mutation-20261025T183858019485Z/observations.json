@@ -1,0 +1,52 @@
+[
+  {
+    "case": "model",
+    "code": "PM015",
+    "expected": {
+      "minimum_cost": 45,
+      "optimal_sizes": [
+        4
+      ],
+      "total_costs": [
+        108,
+        60,
+        48,
+        45,
+        48,
+        75
+      ],
+      "waiting_item_ticks": [
+        0,
+        6,
+        12,
+        18,
+        30,
+        66
+      ]
+    },
+    "observed": {
+      "minimum_cost": 12,
+      "optimal_sizes": [
+        1,
+        2
+      ],
+      "total_costs": [
+        12,
+        12,
+        16,
+        21,
+        32,
+        67
+      ],
+      "waiting_item_ticks": [
+        0,
+        6,
+        12,
+        18,
+        30,
+        66
+      ]
+    },
+    "scope": "Twelve deterministic one-per-tick arrivals, instant verification and stipulated common cost points; all ties retained."
+  }
+]

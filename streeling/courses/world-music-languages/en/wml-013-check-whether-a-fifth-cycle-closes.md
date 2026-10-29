@@ -1,0 +1,98 @@
+---
+module_id: wml-013-check-whether-a-fifth-cycle-closes
+department: world-music-languages
+course: "Check Whether a Fifth Cycle Closes"
+level: intermediate
+prerequisites: ["wml-004-preserve-intonation-beyond-pitch-classes"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Check Whether a Fifth Cycle Closes
+
+> Authored example and source reading. No new guitar performance, audio or parser execution, participant response or production adoption is claimed. Human technical, fluent-language and learner decisions remain pending.
+
+A circle of pitch-class names can return to its starting label while a sequence of frequency ratios misses the corresponding octave. A guitar or scale tool that retains only the label may hide that residual. This lesson composes a declared fifth repeatedly and checks closure against a declared octave count. It deepens the prerequisite's individual-cent comparison into a cycle calculation, without claiming that one temperament is culturally correct or musically preferable.
+
+## Read the retained evidence
+
+Read the retained intonation packet's ratio example and its warning about projecting to integer notes. NIST supplies the cent ratio, while UNSW distinguishes harmonic relationships from equal-tempered approximations. We derive the cycle arithmetic ourselves. The figures below are authored mathematical values, not a tuning session, a pitch detector output or evidence that a GA catalog or renderer realizes a particular tuning system.
+
+[Prerequisite](../../world-music-languages/en/wml-004-preserve-intonation-beyond-pitch-classes.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/intonation-listening-2026-10-22/intonation.json)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-24/unit-a.json)
+
+[Validation journal](../../../../code/streeling/evidence/batch50-2026-10-24/journal.md)
+
+[Primary reading](https://www.nist.gov/pml/time-and-frequency-division/popular-links/time-frequency-z)
+
+[Primary reading](https://www.phys.unsw.edu.au/jw/strings.html)
+
+### Exercise 1
+
+Let each fifth multiply frequency by `3/2`, and compose `12` fifths. Compare the result with `7` octaves, each multiplying by `2`. In pitch-class arithmetic a fifth advances `7` steps modulo `12`, so the label returns. That discrete closure does not prove equality of the frequency multipliers, because the representations retain different information.
+
+Does returning to the starting pitch-class label prove ratio closure?
+
+<details><summary>Answer 1</summary>
+
+No. The label calculation works modulo `12`, while the ratio calculation compares `(3/2)^12` with `2^7`. They require separate checks.
+
+</details>
+
+### Exercise 2
+
+Divide the fifth-chain multiplier by the octave multiplier. The residual is `(3/2)^12/2^7=531441/524288`, greater than `1`. Keep the exact fraction before rounding; printing both sides with too few decimal places can conceal the discrepancy. This fraction describes the declared pure-ratio construction, not every practical instrument's tuning.
+
+What exact residual ratio remains?
+
+<details><summary>Answer 2</summary>
+
+It is `531441/524288`, so the cycle does not close exactly. The fifth chain ends above the selected octave-equivalent reference.
+
+</details>
+
+### Exercise 3
+
+Convert the residual to cents with `1200*log2(531441/524288)`, approximately `23.460010384649` cents. The sign is positive because the numerator exceeds the denominator. This calculation says how far the constructed endpoints differ on a ratio scale; it does not establish how audible or desirable the difference is in a specific musical context.
+
+Give the residual in cents and explain its sign.
+
+<details><summary>Answer 3</summary>
+
+It is approximately `23.460010384649` cents, positive because the composed fifth endpoint is higher than the octave reference. No listener threshold was measured.
+
+</details>
+
+### Exercise 4
+
+The negative control changes the fifth ratio to `2^(7/12)`, preserving the same counts. Symbolically, raising that ratio to `12` gives `2^7`, so residual ratio is `1` and cents residual `0`. A floating-point calculator may leave a tiny numerical residue; distinguish that approximation from the exact symbolic statement rather than declaring a new tuning discrepancy.
+
+What closes in the control?
+
+<details><summary>Answer 4</summary>
+
+The frequency-ratio cycle closes exactly under the symbolic definition: ratio `1` and `0` cents. Its fifth is a different input from `3/2`, so this does not erase the main result.
+
+</details>
+
+### Exercise 5
+
+A handoff that needs tuning fidelity should keep the interval definition, reference, composition count and any approximation. A pitch-class mask can remain useful for search while being insufficient to reconstruct the ratio cycle. Before proposing another DSL or agent abstraction, show how it preserves the manual residual and how it distinguishes the equal-tempered control.
+
+What would falsify a claim that a pitch-class-only record preserves this tuning distinction?
+
+<details><summary>Answer 5</summary>
+
+If both constructions map to the same record with no retained ratio or cent information, the receiver cannot recover which residual was intended. The paired examples witness that information loss.
+
+</details>
+
+## Source-assisted learner task
+
+Compute the exact fraction and cent conversion manually, then repeat the symbolic equal-tempered control. Inspect the retained projection example and explain why note labels cannot recover the lost ratio. Draft an advisory tuning note with explicit reference and interval definition, plus a closure falsifier. Leave instrument realization, cultural interpretation, preference and actual learner performance to separate evidence.
+
+First retain your answer before revealing the prepared corrections. Use the manual table or calculation as the baseline for any calculator, source lookup or agent assistance, and record that assistance. Keep the original response and the corrected response separately. Match each exercise to a prepared criterion in the fixed packet; those criteria have no learner decisions yet. Record an actual source passage and its revision, then distinguish what it establishes from your proposed next step. Report any missing input as unresolved. A mathematically correct answer supports the stated example; human review, runtime execution and learner acceptance require their own retained observations.

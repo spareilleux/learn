@@ -1,0 +1,22 @@
+{
+  "status": "complete",
+  "results": [
+    {
+      "code": "MCL016",
+      "index": 3,
+      "original_op": "forward",
+      "mutated_op": "invalid_operation",
+      "incorrect_input_accepted": true,
+      "canonical_mutated": false
+    },
+    {
+      "code": "WML016",
+      "index": 2,
+      "original_op": "subtract",
+      "mutated_op": "invalid_operation",
+      "incorrect_input_accepted": true,
+      "canonical_mutated": false
+    }
+  ],
+  "scope": "In-memory authored fixture vocabulary mutation only. No canonical writes."
+}

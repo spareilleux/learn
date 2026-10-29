@@ -1,0 +1,85 @@
+test_dv020 (__main__.UnitC.test_dv020) ... 
+OBSERVATION {"case": "model", "code": "DV020", "expected": {"areas": [0.5, 0.5], "density_per_mm": [0.5, 0.25], "sample_count": 8, "widths_mm": [1, 2]}, "observed": {"areas": [0.5, 0.5], "density_per_mm": [0.5, 0.25], "sample_count": 8.0, "widths_mm": [1.0, 2.0]}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "DV020", "expected": {"areas": [0.3333333333333333, 0.6666666666666666], "density_per_mm": [0.3333333333333333, 0.3333333333333333], "sample_count": 12, "widths_mm": [1, 2]}, "observed": {"areas": [0.3333333333333333, 0.6666666666666666], "density_per_mm": [0.3333333333333333, 0.3333333333333333], "sample_count": 12.0, "widths_mm": [1.0, 2.0]}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+ok
+test_dv021 (__main__.UnitC.test_dv021) ... 
+OBSERVATION {"case": "model", "code": "DV021", "expected": {"display_centre": 2, "display_lower": 1, "display_upper": 3, "lower_extent": 1, "upper_extent": 1}, "observed": {"display_centre": 2.0, "display_lower": 1.0, "display_upper": 3.0, "lower_extent": 1.0, "upper_extent": 1.0}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "DV021", "expected": {"display_centre": 2, "display_lower": 0, "display_upper": 2.8284271247461903, "lower_extent": 2, "upper_extent": 0.8284271247461903}, "observed": {"display_centre": 2.0, "display_lower": 0.0, "display_upper": 2.8284271247461903, "lower_extent": 2.0, "upper_extent": 0.8284271247461903}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+ok
+test_dv022 (__main__.UnitC.test_dv022) ... 
+OBSERVATION {"case": "model", "code": "DV022", "expected": {"ambiguous": true, "edge_fractions": [0.5, 0.5, 0.5, 0.5], "high_components": 2, "low_components": 1, "pairs": [["top", "left"], ["right", "bottom"]]}, "observed": {"ambiguous": true, "edge_fractions": [0.5, 0.5, 0.5, 0.5], "high_components": 2, "low_components": 1, "pairs": [["top", "left"], ["right", "bottom"]]}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "DV022", "expected": {"ambiguous": true, "edge_fractions": [0.5, 0.5, 0.5, 0.5], "high_components": 1, "low_components": 2, "pairs": [["top", "right"], ["bottom", "left"]]}, "observed": {"ambiguous": true, "edge_fractions": [0.5, 0.5, 0.5, 0.5], "high_components": 1, "low_components": 2, "pairs": [["top", "right"], ["bottom", "left"]]}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+ok
+test_fut014 (__main__.UnitC.test_fut014) ... 
+OBSERVATION {"case": "model", "code": "FUT014", "expected": {"first_retirements": [0, 0, 1, 2.5, 2, 0.5, 0], "peak_mass": 2.5, "peak_period": 3, "total": 6}, "observed": {"first_retirements": [0.0, 0.0, 1.0, 2.5, 2.0, 0.5, 0.0], "peak_mass": 2.5, "peak_period": 3, "total": 6.0}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "FUT014", "expected": {"first_retirements": [0, 2, 3, 1, 0, 0, 0], "peak_mass": 3, "peak_period": 2, "total": 6}, "observed": {"first_retirements": [0.0, 2.0, 3.0, 1.0, 0.0, 0.0, 0.0], "peak_mass": 3.0, "peak_period": 2, "total": 6.0}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+ok
+test_fut015 (__main__.UnitC.test_fut015) ... 
+OBSERVATION {"case": "model", "code": "FUT015", "expected": {"compatible": ["000", "010", "011", "110", "111"], "count": 5, "incompatible": ["001", "100", "101"]}, "observed": {"compatible": ["000", "010", "011", "110", "111"], "count": 5, "incompatible": ["001", "100", "101"]}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "FUT015", "expected": {"compatible": ["000", "010", "011", "110"], "count": 4, "incompatible": ["001", "100", "101", "111"]}, "observed": {"compatible": ["000", "010", "011", "110"], "count": 4, "incompatible": ["001", "100", "101", "111"]}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+ok
+test_phi014 (__main__.UnitC.test_phi014) ... 
+OBSERVATION {"case": "model", "code": "PHI014", "expected": {"B_given_A0": 1, "B_given_A1": 0.5, "difference": -0.5, "retained_mass": 3, "unselected_difference": 0}, "observed": {"B_given_A0": 1.0, "B_given_A1": 0.5, "difference": -0.5, "retained_mass": 3.0, "unselected_difference": 0.0}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "PHI014", "expected": {"B_given_A0": 0.5, "B_given_A1": 0.5, "difference": 0, "retained_mass": 4, "unselected_difference": 0}, "observed": {"B_given_A0": 0.5, "B_given_A1": 0.5, "difference": 0.0, "retained_mass": 4.0, "unselected_difference": 0.0}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+ok
+test_phi015 (__main__.UnitC.test_phi015) ... 
+OBSERVATION {"case": "model", "code": "PHI015", "expected": {"H_false_entailed": false, "count": 3, "worlds": [[false, false], [false, true], [true, false]]}, "observed": {"H_false_entailed": false, "count": 3, "worlds": [[false, false], [false, true], [true, false]]}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "PHI015", "expected": {"H_false_entailed": true, "count": 1, "worlds": [[false, true]]}, "observed": {"H_false_entailed": true, "count": 1, "worlds": [[false, true]]}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+ok
+test_phy022 (__main__.UnitC.test_phy022) ... 
+OBSERVATION {"case": "model", "code": "PHY022", "expected": {"feasible": true, "full_submersion_net_N": 4, "maximum_buoyancy_N": 10, "required_displacement_m3": 0.0006, "required_fraction": 0.6, "weight_N": 6}, "observed": {"feasible": true, "full_submersion_net_N": 4.0, "maximum_buoyancy_N": 10.0, "required_displacement_m3": 0.0006, "required_fraction": 0.6, "weight_N": 6.0}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "PHY022", "expected": {"feasible": false, "full_submersion_net_N": -2, "maximum_buoyancy_N": 10, "required_displacement_m3": 0.0012, "required_fraction": 1.2, "weight_N": 12}, "observed": {"feasible": false, "full_submersion_net_N": -2.0, "maximum_buoyancy_N": 10.0, "required_displacement_m3": 0.0012, "required_fraction": 1.2, "weight_N": 12.0}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+ok
+test_phy023 (__main__.UnitC.test_phy023) ... 
+OBSERVATION {"case": "model", "code": "PHY023", "expected": {"capacity_N": 5.43656365691809, "feasible": true, "ratio": 2.718281828459045, "reserve_N": 1.43656365691809}, "observed": {"capacity_N": 5.43656365691809, "feasible": true, "ratio": 2.718281828459045, "reserve_N": 1.4365636569180902}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "PHY023", "expected": {"capacity_N": 2, "feasible": false, "ratio": 1, "reserve_N": -2}, "observed": {"capacity_N": 2.0, "feasible": false, "ratio": 1.0, "reserve_N": -2.0}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+ok
+test_phy024 (__main__.UnitC.test_phy024) ... 
+OBSERVATION {"case": "model", "code": "PHY024", "expected": {"drops_K": [25, 5], "power_W": 125, "resistances_K_W": [0.2, 0.04], "total_K_W": 0.24}, "observed": {"drops_K": [25.0, 5.0], "power_W": 125.0, "resistances_K_W": [0.2, 0.04], "total_K_W": 0.24}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "PHY024", "expected": {"drops_K": [15, 15], "power_W": 75, "resistances_K_W": [0.2, 0.2], "total_K_W": 0.4}, "observed": {"drops_K": [15.0, 15.0], "power_W": 75.0, "resistances_K_W": [0.2, 0.2], "total_K_W": 0.4}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+ok
+test_sem018 (__main__.UnitC.test_sem018) ... 
+OBSERVATION {"case": "model", "code": "SEM018", "expected": {"drawdown": [[true, false, true, true], [false, true, false, false], [true, true, false, true]], "status": "complete"}, "observed": {"drawdown": [[true, false, true, true], [false, true, false, false], [true, true, false, true]], "status": "complete"}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "SEM018", "expected": {"drawdown": [[true, false, true, true], [false, true, false, false], null], "status": "incomplete"}, "observed": {"drawdown": [[true, false, true, true], [false, true, false, false], null], "status": "incomplete"}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+ok
+test_sem019 (__main__.UnitC.test_sem019) ... 
+OBSERVATION {"case": "model", "code": "SEM019", "expected": {"original_signs": [1, -1, 1], "original_writhe": 1, "transformed_signs": [1, -1, 1], "transformed_writhe": 1}, "observed": {"original_signs": [1, -1, 1], "original_writhe": 1, "transformed_signs": [1, -1, 1], "transformed_writhe": 1}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "SEM019", "expected": {"original_signs": [1, -1, 1], "original_writhe": 1, "transformed_signs": [-1, 1, -1], "transformed_writhe": -1}, "observed": {"original_signs": [1, -1, 1], "original_writhe": 1, "transformed_signs": [-1, 1, -1], "transformed_writhe": -1}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+ok
+test_sem020 (__main__.UnitC.test_sem020) ... 
+OBSERVATION {"case": "model", "code": "SEM020", "expected": {"period": 6, "samples": ["warp", "weft", "warp", "warp", "weft"], "status": "valid"}, "observed": {"period": 6, "samples": ["warp", "weft", "warp", "warp", "weft"], "status": "valid"}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "SEM020", "expected": {"period": null, "samples": null, "status": "invalid_run"}, "observed": {"period": null, "samples": null, "status": "invalid_run"}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+ok
+test_vc020 (__main__.UnitC.test_vc020) ... 
+OBSERVATION {"case": "model", "code": "VC020", "expected": {"hit": true, "t_enter": 2, "t_exit": 4}, "observed": {"hit": true, "t_enter": 2.0, "t_exit": 4.0}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "VC020", "expected": {"hit": false, "t_enter": null, "t_exit": null}, "observed": {"hit": false, "t_enter": null, "t_exit": null}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+ok
+test_vc021 (__main__.UnitC.test_vc021) ... 
+OBSERVATION {"case": "model", "code": "VC021", "expected": {"agreement": 1, "decoded_normal": [0.4082482904638631, 0.8164965809277261, -0.4082482904638631], "encoded": [0.5, 0.75]}, "observed": {"agreement": 1.0000000000000002, "decoded_normal": [0.4082482904638631, 0.8164965809277261, -0.4082482904638631], "encoded": [0.5, 0.75]}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "VC021", "expected": {"agreement": 0.6666666666666666, "decoded_normal": [0.4082482904638631, 0.8164965809277261, 0.4082482904638631], "encoded": [0.25, 0.5]}, "observed": {"agreement": 0.6666666666666669, "decoded_normal": [0.4082482904638631, 0.8164965809277261, 0.4082482904638631], "encoded": [0.25, 0.5]}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+ok
+test_vc022 (__main__.UnitC.test_vc022) ... 
+OBSERVATION {"case": "model", "code": "VC022", "expected": {"intersection": [4, 3, 0], "status": "hit", "t": 2}, "observed": {"intersection": [4.0, 3.0, 0.0], "status": "hit", "t": 2.0}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "VC022", "expected": {"intersection": null, "status": "parallel", "t": null}, "observed": {"intersection": null, "status": "parallel", "t": null}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.003s
+
+OK

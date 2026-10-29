@@ -1,0 +1,156 @@
+{
+  "audited_at_utc": "2026-10-22T02:04:55.705995+00:00",
+  "verdict": "passed_with_limits",
+  "findings": [],
+  "auditor_scope": "Read-only local audit of the fetch method, immutable Git coverage, saved API metadata, terminal readback rows, final manifest provenance additions, and four local tar HTML samples. No network sweep or build/tests rerun. Only this audit file was written.",
+  "learn_commit": "09b13e7f9eddc2b4ddbd87356001c1da2eec6b58",
+  "deployment_run": 39702018408,
+  "artifact_id": 12392898635,
+  "saved_evidence_sha256": {
+    "C:\\tmp\\observe-streeling-deployment-20261022.py": "6a9949e4f4a3761b0ef5dced58477120e6ac4560eba89be80cebb1fecdebf999",
+    "C:\\tmp\\streeling-public-readback-input-20261022.json": "53b4521454a2486da47d03c6045d5918b0f4687cfb3eedba9688f1f4e779e6eb",
+    "C:\\tmp\\streeling-deployed-09b13e7f-20261022\\readback.json": "38370044965bea95e3506f4df1512090df69b0a4cae311c2d66b2db455dfbff7",
+    "C:\\tmp\\streeling-deployed-09b13e7f-20261022\\controls.json": "19632a6edb0d1a5fb32377441bd99d005484d9b5533fcf7d9147ab44b4ce6194",
+    "C:\\tmp\\streeling-deployed-09b13e7f-20261022\\artifact-api.json": "68051cf5ff4c1bc27fe4af8eafa257f1d36ccf558f551458d1330dac1435e22e",
+    "C:\\tmp\\streeling-deployed-09b13e7f-20261022\\deployment-api.json": "dd8f231f4a6bcf618ecb7119281b9f739530f3f8ba555d00fe391a6800a65c55",
+    "C:\\tmp\\streeling-deployed-09b13e7f-20261022\\latest-successful-deployments.json": "216e72547f4c2849bf007d5b86b5fc59cda4c7359f8012682985a249f789a67f"
+  },
+  "coverage": {
+    "total_pages": 348,
+    "per_locale": {
+      "en": 116,
+      "fr": 116,
+      "es": 116
+    },
+    "roles": {
+      "overview": 3,
+      "department": 66,
+      "course": 276,
+      "journal": 3
+    },
+    "original_21": {
+      "departments": [
+        "audio-engineering",
+        "cognitive-science",
+        "computer-science",
+        "cybernetics",
+        "data-visualization",
+        "futurology",
+        "guitar-acoustics",
+        "guitar-alchemist-academy",
+        "guitar-studies",
+        "information-theory",
+        "mathematics",
+        "music",
+        "musicology",
+        "network-science",
+        "philosophy",
+        "physics",
+        "product-management",
+        "psychohistory",
+        "semiotics",
+        "visual-computing",
+        "world-music-languages"
+      ],
+      "distinct_course_modules": 91,
+      "localized_course_pages": 273,
+      "localized_department_indexes": 63,
+      "subtotal": 336
+    },
+    "shared": {
+      "overviews": 3,
+      "journals": 3,
+      "subtotal": 6
+    },
+    "additional_ix_research": {
+      "distinct_course_modules": 1,
+      "localized_course_pages": 3,
+      "localized_department_indexes": 3,
+      "subtotal": 6
+    },
+    "original_cohort_including_shared": 342,
+    "all_distinct_course_modules": 92,
+    "missing_tracked_markdown_inputs": 0,
+    "extra_inputs": 0,
+    "duplicate_urls": 0,
+    "duplicate_artifact_paths": 0,
+    "wrong_generated_markdown_git_blobs": 0,
+    "authoring_source_course_rows_verified": 276
+  },
+  "method_checks": {
+    "anonymous_requests_no_auth_or_cookie_headers": true,
+    "max_concurrent_requests": 3,
+    "http_entity_body_sha256_and_bytes_against_uploaded_html": true,
+    "one_expected_h1_required_per_artifact_page": true,
+    "all_public_rows_http_200": true,
+    "all_final_urls_equal_requested": true,
+    "all_348_public_hash_byte_and_heading_results_match": true,
+    "all_summary_counts_recomputed": true,
+    "saved_api_artifact_run_main_head_link_verified": true,
+    "saved_latest_successful_deployment_list_agrees": true,
+    "artifact_zip_digest_independently_verified": false
+  },
+  "targeted_tar_html_samples": {
+    "es/streeling/ix-research/ixr-001-streams-under-budgets/index.html": {
+      "sha256": "1b2970795c1333f898825abca2e8825ebc85c3e79dc78d99fc75dd7ce3bbeab5",
+      "bytes": 417626
+    },
+    "fr/streeling/mathematics/mat-001-proof-strategies/index.html": {
+      "sha256": "e199b68d949adc42ab397ed1620fbd1d01ce67b487c7e05bfaed5278085c68a2",
+      "bytes": 360750
+    },
+    "streeling/journal/index.html": {
+      "sha256": "8a56a786f26ac4b824bfff1cb32fb70a7bc1f784cc2e46ffaefc883d218e4deb",
+      "bytes": 408084
+    },
+    "streeling/index.html": {
+      "sha256": "f26a8497c65097b285cd9fe46a224154e7804ac64784533ccd45eecce1136272",
+      "bytes": 324897
+    }
+  },
+  "manifest_amendment": {
+    "note": "Final manifest adds cohort on all 348 entries and authoring source path/blob on all 276 courses. Terminal readback rows retain original generated Markdown binding; source additions are verified by joining on the unchanged URL and six original manifest fields, not claimed as fields captured by the HTTP sweep.",
+    "cohort_counts": {
+      "original-21": 336,
+      "shared": 6,
+      "additional-ix-research": 6
+    }
+  },
+  "controls": {
+    "recorded_one_byte_mutation_detected": true,
+    "recorded_href_only_mutation_detected_with_same_heading": true,
+    "draft_probe_scope": "Only the named DV-008 public URL was observed as 404; no assertion about all unpublished candidates.",
+    "control_execution_note": "Saved control results inspected; controls not rerun by this auditor."
+  },
+  "limits": [
+    "Artifact API digest is server-reported for the downloadable archive; local artifact.tar was extracted by CLI, and the ZIP digest was not independently verified.",
+    "Saved API responses link the named artifact to the deployment run and Learn commit; this audit does not independently verify the CLI download/extraction transport chain.",
+    "Coverage is exactly the 348 tracked Streeling pages in EN/FR/ES at the pinned Learn commit, not every Learn site route, every language, all university metadata departments, or the full 525-course target.",
+    "University metadata declares 24 departments; metaqa and systems-engineering have no generated pages at this commit. The generated catalog has 22 departments including additional IX Research.",
+    "The six journals/overviews are Streeling routes; global Learn update journals are outside this sweep.",
+    "HTTP delivery and HTML equality do not establish content correctness, human/native-language review, browser interaction, exercise execution, or learner outcomes.",
+    "No reviewed/completed-learning status or all-525 completion is granted."
+  ],
+  "durable_copy_audit": {
+    "status": "passed",
+    "path": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\public-readback-2026-10-22",
+    "original_row_values_preserved_exactly": 348,
+    "source_manifest_equals_audited_final_input": true,
+    "source_and_cohort_fields_match_manifest_for_all_rows": true,
+    "original_summary_values_preserved": true,
+    "readme_wording": "Accurate coverage, arithmetic, extracted-tar/ZIP distinction, source/review boundaries and observational freshness scope.",
+    "resolved_findings": [
+      {
+        "title": "Preserve UTF-8 headings when enriching durable report",
+        "affected_rows_before_repair": 241,
+        "status": "resolved",
+        "verification": "After explicit UTF-8 regeneration, all existing key/value pairs exactly match the original terminal JSON for all 348 rows; only manifest provenance fields were added."
+      }
+    ],
+    "sha256": {
+      "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\public-readback-2026-10-22\\README.md": "880cca6498990ab50fe52c2c0405e85257acbf105c672f93cb44f10c82d5dc6e",
+      "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\public-readback-2026-10-22\\source-manifest.json": "53b4521454a2486da47d03c6045d5918b0f4687cfb3eedba9688f1f4e779e6eb",
+      "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\public-readback-2026-10-22\\readback.json": "049176e7f9898d20826cc38ec557318a37b2f76a0e6e83b6b3c13681004f2b0d"
+    }
+  }
+}

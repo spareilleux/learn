@@ -1,0 +1,465 @@
+{
+  "cases": [
+    {
+      "id": "identity",
+      "accepted": true,
+      "issues": [],
+      "determinant": 1,
+      "inverse_success": true,
+      "bounds": {
+        "min": [
+          -0.5,
+          0,
+          -0.5
+        ],
+        "max": [
+          0.5,
+          1,
+          0.5
+        ]
+      },
+      "normal_arithmetic": {
+        "axis_x": [
+          1,
+          0,
+          0
+        ],
+        "axis_y": [
+          0,
+          1,
+          0
+        ],
+        "axis_z": [
+          0,
+          0,
+          1
+        ],
+        "axis_dot_raw": 0,
+        "axis_dot_normalized": 0,
+        "normalized_axis_as_normal": [
+          1,
+          0,
+          0
+        ],
+        "inverse_transpose_normal": [
+          1,
+          0,
+          0
+        ],
+        "axis_normal_dot_tangent": 0,
+        "correct_normal_dot_tangent": 0,
+        "normal_angle_degrees": 0
+      }
+    },
+    {
+      "id": "scale_then_yaw",
+      "accepted": true,
+      "issues": [],
+      "determinant": 1.9999998807907104,
+      "inverse_success": true,
+      "bounds": {
+        "min": [
+          -1.0606601238250732,
+          0,
+          -1.0606601238250732
+        ],
+        "max": [
+          1.0606601238250732,
+          1,
+          1.0606601238250732
+        ]
+      },
+      "normal_arithmetic": {
+        "axis_x": [
+          1.4142135381698608,
+          0,
+          -1.4142135381698608
+        ],
+        "axis_y": [
+          0,
+          1,
+          0
+        ],
+        "axis_z": [
+          0.7071067690849304,
+          0,
+          0.7071067690849304
+        ],
+        "axis_dot_raw": 0,
+        "axis_dot_normalized": 0,
+        "normalized_axis_as_normal": [
+          0.7071068286895752,
+          0,
+          -0.7071068286895752
+        ],
+        "inverse_transpose_normal": [
+          0.7071068286895752,
+          0,
+          -0.7071068286895752
+        ],
+        "axis_normal_dot_tangent": 0,
+        "correct_normal_dot_tangent": 0,
+        "normal_angle_degrees": 0
+      }
+    },
+    {
+      "id": "nested_yaw_under_scale",
+      "accepted": true,
+      "issues": [],
+      "determinant": 1.9999998807907104,
+      "inverse_success": true,
+      "bounds": {
+        "min": [
+          -1.4142135381698608,
+          0,
+          -0.7071067690849304
+        ],
+        "max": [
+          1.4142135381698608,
+          1,
+          0.7071067690849304
+        ]
+      },
+      "normal_arithmetic": {
+        "axis_x": [
+          1.4142135381698608,
+          0,
+          -0.7071067690849304
+        ],
+        "axis_y": [
+          0,
+          1,
+          0
+        ],
+        "axis_z": [
+          1.4142135381698608,
+          0,
+          0.7071067690849304
+        ],
+        "axis_dot_raw": 1.4999998807907104,
+        "axis_dot_normalized": 0.6000000238418579,
+        "normalized_axis_as_normal": [
+          0.8944272398948669,
+          0,
+          -0.44721361994743347
+        ],
+        "inverse_transpose_normal": [
+          0.44721361994743347,
+          0,
+          -0.8944272398948669
+        ],
+        "axis_normal_dot_tangent": 0.6000000238418579,
+        "correct_normal_dot_tangent": 0,
+        "normal_angle_degrees": 36.86989081565431
+      }
+    },
+    {
+      "id": "reflect_x",
+      "accepted": true,
+      "issues": [],
+      "determinant": -1,
+      "inverse_success": true,
+      "bounds": {
+        "min": [
+          -0.5,
+          0,
+          -0.5
+        ],
+        "max": [
+          0.5,
+          1,
+          0.5
+        ]
+      },
+      "normal_arithmetic": {
+        "axis_x": [
+          -1,
+          0,
+          0
+        ],
+        "axis_y": [
+          0,
+          1,
+          0
+        ],
+        "axis_z": [
+          0,
+          0,
+          1
+        ],
+        "axis_dot_raw": 0,
+        "axis_dot_normalized": 0,
+        "normalized_axis_as_normal": [
+          -1,
+          0,
+          0
+        ],
+        "inverse_transpose_normal": [
+          -1,
+          0,
+          0
+        ],
+        "axis_normal_dot_tangent": 0,
+        "correct_normal_dot_tangent": 0,
+        "normal_angle_degrees": 0
+      }
+    },
+    {
+      "id": "reflect_xz",
+      "accepted": true,
+      "issues": [],
+      "determinant": 1,
+      "inverse_success": true,
+      "bounds": {
+        "min": [
+          -0.5,
+          0,
+          -0.5
+        ],
+        "max": [
+          0.5,
+          1,
+          0.5
+        ]
+      },
+      "normal_arithmetic": {
+        "axis_x": [
+          -1,
+          0,
+          0
+        ],
+        "axis_y": [
+          0,
+          1,
+          0
+        ],
+        "axis_z": [
+          0,
+          0,
+          -1
+        ],
+        "axis_dot_raw": 0,
+        "axis_dot_normalized": 0,
+        "normalized_axis_as_normal": [
+          -1,
+          0,
+          0
+        ],
+        "inverse_transpose_normal": [
+          -1,
+          0,
+          0
+        ],
+        "axis_normal_dot_tangent": 0,
+        "correct_normal_dot_tangent": 0,
+        "normal_angle_degrees": 0
+      }
+    },
+    {
+      "id": "yaw_180",
+      "accepted": true,
+      "issues": [],
+      "determinant": 1,
+      "inverse_success": true,
+      "bounds": {
+        "min": [
+          -0.5000000596046448,
+          0,
+          -0.5000000596046448
+        ],
+        "max": [
+          0.5000000596046448,
+          1,
+          0.5000000596046448
+        ]
+      },
+      "normal_arithmetic": {
+        "axis_x": [
+          -1,
+          0,
+          8.742277657347586e-08
+        ],
+        "axis_y": [
+          0,
+          1,
+          0
+        ],
+        "axis_z": [
+          -8.742277657347586e-08,
+          0,
+          -1
+        ],
+        "axis_dot_raw": 0,
+        "axis_dot_normalized": 0,
+        "normalized_axis_as_normal": [
+          -1,
+          0,
+          8.742277657347586e-08
+        ],
+        "inverse_transpose_normal": [
+          -1,
+          0,
+          8.742277657347586e-08
+        ],
+        "axis_normal_dot_tangent": 0,
+        "correct_normal_dot_tangent": 0,
+        "normal_angle_degrees": 0
+      }
+    },
+    {
+      "id": "zero_x",
+      "accepted": true,
+      "issues": [],
+      "determinant": 0,
+      "inverse_success": false,
+      "bounds": {
+        "min": [
+          0,
+          0,
+          -0.5
+        ],
+        "max": [
+          0,
+          1,
+          0.5
+        ]
+      },
+      "normal_arithmetic": null
+    },
+    {
+      "id": "negative_local_size",
+      "accepted": false,
+      "issues": [
+        "bad-shape"
+      ],
+      "determinant": 1,
+      "inverse_success": true,
+      "bounds": null,
+      "normal_arithmetic": {
+        "axis_x": [
+          1,
+          0,
+          0
+        ],
+        "axis_y": [
+          0,
+          1,
+          0
+        ],
+        "axis_z": [
+          0,
+          0,
+          1
+        ],
+        "axis_dot_raw": 0,
+        "axis_dot_normalized": 0,
+        "normalized_axis_as_normal": [
+          1,
+          0,
+          0
+        ],
+        "inverse_transpose_normal": [
+          1,
+          0,
+          0
+        ],
+        "axis_normal_dot_tangent": 0,
+        "correct_normal_dot_tangent": 0,
+        "normal_angle_degrees": 0
+      }
+    },
+    {
+      "id": "nan_placement",
+      "accepted": false,
+      "issues": [
+        "bad-shape"
+      ],
+      "determinant": null,
+      "inverse_success": true,
+      "bounds": null,
+      "normal_arithmetic": null
+    }
+  ],
+  "scenes": [
+    {
+      "id": "A",
+      "box_count": 2,
+      "min": [
+        -1,
+        0,
+        -1
+      ],
+      "max": [
+        1,
+        2,
+        1
+      ],
+      "boxes": [
+        {
+          "size": [
+            1,
+            2,
+            2
+          ],
+          "world_translation": [
+            -0.5,
+            0,
+            0
+          ]
+        },
+        {
+          "size": [
+            1,
+            2,
+            2
+          ],
+          "world_translation": [
+            0.5,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "box_count": 2,
+      "min": [
+        -1,
+        0,
+        -1
+      ],
+      "max": [
+        1,
+        2,
+        1
+      ],
+      "boxes": [
+        {
+          "size": [
+            0.20000000298023224,
+            2,
+            2
+          ],
+          "world_translation": [
+            -0.8999999761581421,
+            0,
+            0
+          ]
+        },
+        {
+          "size": [
+            0.20000000298023224,
+            2,
+            2
+          ],
+          "world_translation": [
+            0.8999999761581421,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

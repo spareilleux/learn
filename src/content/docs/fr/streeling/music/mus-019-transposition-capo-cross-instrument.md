@@ -3,7 +3,7 @@ title: Transposition, capodastre et équivalence entre instruments — Trois sor
 description: Transposition, capodastre et équivalence entre instruments — Musique
 sidebar:
   label: MUS-019 · Transposition, capodastre et équivalence entre instruments
-  order: 16
+  order: 19
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/fr/mus-019-transposition-capo-cross-instrument.fr.md
 ---
 

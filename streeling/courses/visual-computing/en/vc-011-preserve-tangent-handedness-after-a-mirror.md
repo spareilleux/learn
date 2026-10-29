@@ -1,0 +1,83 @@
+---
+module_id: vc-011-preserve-tangent-handedness-after-a-mirror
+department: visual-computing
+course: "Preserve Tangent Handedness After a Mirror"
+level: intermediate
+prerequisites: ["phy-008-keep-surface-normals-perpendicular", "vc-010-preserve-packed-texture-channel-contracts"]
+estimated_duration: "40 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Preserve Tangent Handedness After a Mirror
+
+> Draft for human review. The fixed cases below are authored mathematics supported by source inspection. They are not new project measurements. Human technical, artisan, fluent-language and learner judgments remain pending. No scene host, physical sample, GPU, policy executor or learner session was run for this lesson.
+
+## Project question
+
+An agent mirrors a craft panel and preserves its normal correctly. Is a tangent-space texture now guaranteed to describe the same detail? A normal alone does not determine which way the second tangent axis points. This matters for a future Blender-to-Godot transfer, but no transfer was executed. The packed-channel prerequisite establishes data interpretation; this lesson reconstructs the local basis that interprets those values.
+
+[Prerequisite: phy-008-keep-surface-normals-perpendicular](../../physics/en/phy-008-keep-surface-normals-perpendicular.md); [Prerequisite: vc-010-preserve-packed-texture-channel-contracts](../../visual-computing/en/vc-010-preserve-packed-texture-channel-contracts.md)
+
+## Read the boundary before calculating
+
+Read the linked prerequisite and project record before doing the arithmetic. Identify which statement comes from inspected source, which is an older recorded result, and which follows only from the premises below. A source comment, a prepared answer and an executed observation have different evidential roles. Preserve the original date and any failed or inconclusive gate when summarizing an older artifact. The direct baseline is a small handwritten calculation and a source-location table; an agent may help locate a definition, but its summary must be checked against that definition. Do not introduce a new language or automation merely to perform this finite comparison.
+
+The glTF specification reconstructs the bitangent from the normal, tangent and signed tangent component. Our authored mirror keeps texture coordinates attached to the same material points and reflects the physical basis. Compare the desired reflected bitangent with the one reconstructed while retaining the old sign. A mismatch is a basis error even if the normal remains perpendicular. The axis-aligned case isolates handedness; nonuniform scale and tangent orthogonalization need further work. Do not confuse the tangent sign with an instruction to invert an entire packed texture or change triangle indices. Those operations address different contracts.
+
+## Fixed case and assumptions
+
+```text
+N=(0,0,1); T=(1,0,0); w=+1
+B=w*(N cross T)=(0,1,0)
+M=diag(-1,1,1); det(M)=-1
+N2=(0,0,1); T2=(-1,0,0); desired_B2=(0,1,0)
+old_w_B2=(0,-1,0); corrected_w=-1
+sample=(0,0.6,0.8); desired_world=(0,0.6,0.8)
+wrong_world=(0,-0.6,0.8); dot=0.28
+```
+
+## Corrected exercises
+
+### Exercise 1
+
+Reconstruct the original bitangent.
+
+> **Answer:** The cross product gives `(0,1,0)` and multiplication by `+1` leaves it unchanged. The normal does not alone encode that sign.
+
+### Exercise 2
+
+Retain the old sign after the mirror. What fails?
+
+> **Answer:** The reconstructed bitangent is `(0,-1,0)`, opposite to the reflected material bitangent `(0,1,0)`. Perpendicular normals do not catch this failure.
+
+### Exercise 3
+
+Which sign repairs this authored basis?
+
+> **Answer:** Using `-1` reconstructs `(0,1,0)`. This assumes unchanged material UV correspondence and the stated transformed normal/tangent convention.
+
+### Exercise 4
+
+Use the asymmetric sample. Is the wrong world direction equal?
+
+> **Answer:** No. The Y component changes sign and the unit directions have dot product `0.28`. A sample `(0,0,1)` would hide the error and is a weak control.
+
+### Exercise 5
+
+Does this establish a visible project material defect?
+
+> **Answer:** No. It is a basis counterexample. Actual UV generation, channel unpacking, host convention and a controlled import observation remain untested.
+
+## Source-assisted learner task
+
+Read the normal comparison and glTF tangent definition, then annotate the mirrored basis in a proposed craft transfer. Keep the direct cross-product table as baseline. Retain UV assumptions. The falsifier is a reconstructed bitangent opposite to the desired reflected one despite a claimed preserved basis.
+
+Complete the task with the answer sections hidden. Retain your original answers, intermediate quantities, source locations, uncertainty and every form of assistance, including a hint, a translated term or an agent suggestion. Then compare with the prepared answers and record corrections without replacing the original attempt. Produce a short decision note containing the claim, its assumptions, the calculation, the negative control and the next observation that could falsify it. A correct result with missing units or source identity is incomplete evidence for transfer. The evidence packet contains five prepared learner criteria; their decisions stay null until a real attempt and an authorized review exist. Passing these arithmetic checks would establish only competence on this declared case. It would not establish an implemented adapter, a successful material process, a faster renderer or improved learning in the project. Compare your source-assisted note with the direct manual baseline: if assistance obscures an assumption or removes a refusal, revise the note before proposing any workflow change.
+
+## Sources and validation journal
+
+- [Project record](../../../../code/streeling/evidence/scene-frames-2026-10-22/normal-comparison.json)
+- [Primary source](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#meshes)
+- [Fixed evidence packet](../../../../code/streeling/evidence/batch50-2026-10-23/unit-c.json)
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-23/journal.md)

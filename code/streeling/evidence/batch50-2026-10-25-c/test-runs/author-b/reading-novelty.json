@@ -1,0 +1,506 @@
+{
+  "unit": "b",
+  "kind": "author-reading-and-novelty-record",
+  "observed_date": "2026-10-26",
+  "strategy": "The pre-existing strategy.json was actually read before canonical course writes. It declares content characterization, finite authored arithmetic and a separate later independent reviewer. This note is retrospective, not a fabricated preregistration.",
+  "primary_references": [
+    {
+      "id": "irt",
+      "url": "https://quantdev.ssri.psu.edu/sites/qdev/files/IRT_tutorial_FA17_2.html",
+      "pin": "Julie Wood, Logistic IRT Models, 2017-11-12; read 2026-10-26",
+      "actual_reading_scope": "Section 3 two-parameter logistic response function and meanings of discrimination and difficulty, actual browser text inspected; information derived separately."
+    },
+    {
+      "id": "pava",
+      "url": "https://docs.scipy.org/doc/scipy-1.14.0/reference/generated/scipy.optimize.isotonic_regression.html",
+      "pin": "SciPy 1.14.0 documentation; read 2026-10-26",
+      "actual_reading_scope": "PAVA, case weights, monotone weighted least-squares objective and equal-valued blocks, browser lines 28-69. No SciPy execution."
+    },
+    {
+      "id": "cue",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37730934/",
+      "pin": "Scheller and Nardini, 2024, DOI 10.3758/s13428-023-02227-w; read 2026-10-26",
+      "actual_reading_scope": "Abstract only: precision-gain comparator should be the best single cue for each observer; no full-text or correlated-weight equation reading claimed. Covariance formula derived in authored case."
+    },
+    {
+      "id": "linear",
+      "url": "https://hankyang.seas.harvard.edu/OptimalControlEstimation/app-lti-system-theory.html",
+      "pin": "Harvard Optimal Control and Estimation, Appendix C; read 2026-10-26",
+      "actual_reading_scope": "Controllability matrix and full-row-rank criterion inspected in returned primary text. Finite discrete two-step trajectory derived separately; no control package run."
+    },
+    {
+      "id": "sysid",
+      "url": "https://underactuated.csail.mit.edu/sysid.html",
+      "pin": "Russ Tedrake, Underactuated Robotics, System Identification chapter; read 2026-10-26",
+      "actual_reading_scope": "Parameter identifiability from null-space of a sufficiently rich data matrix, browser line 87; exact small regression authored separately."
+    },
+    {
+      "id": "interleave",
+      "url": "https://www.rfc-editor.org/rfc/rfc8088.html",
+      "pin": "RFC 8088, May 2017; read 2026-10-26",
+      "actual_reading_scope": "RFC 8088 section 5.1.3, actual browser lines 1769-1809: burst spreading, buffering delay and complexity; toy permutation and erasure counts are authored."
+    },
+    {
+      "id": "mst",
+      "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.tree.mst.minimum_spanning_tree.html",
+      "pin": "NetworkX 3.7 documentation; read 2026-10-26",
+      "actual_reading_scope": "Minimum spanning tree or forest, undirected graph and connected-versus-disconnected behavior, actual browser lines 93-106. Library not run."
+    },
+    {
+      "id": "color",
+      "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.coloring.greedy_color.html",
+      "pin": "NetworkX 3.7 documentation; read 2026-10-26",
+      "actual_reading_scope": "Adjacent vertices cannot share a color; strategy determines greedy order, actual browser lines 93-100. Our exhaustive optimum is not a greedy-color guarantee."
+    },
+    {
+      "id": "signed",
+      "url": "https://arxiv.org/abs/1701.07963",
+      "pin": "Zaslavsky, arXiv:1701.07963v2, 2018-01-15; read 2026-10-26",
+      "actual_reading_scope": "Author abstract actually inspected, browser lines 8-24: edge signs and cycle product definition; no full-paper theorem verification claimed."
+    },
+    {
+      "id": "hamilton",
+      "url": "https://www.census.gov/about/history/historical-censuses-and-surveys/census-programs-surveys/decennial-census/methods.html",
+      "pin": "US Census Bureau, Methods of Apportionment; read 2026-10-26",
+      "actual_reading_scope": "Hamilton/Vinton section: take whole quotas then assign surplus seats by descending remainders. Authored review allocation is an analogy, not congressional implementation."
+    },
+    {
+      "id": "sampling",
+      "url": "https://www.census.gov/library/working-papers/2014/adrm/rrs2014-07.html",
+      "pin": "Tommy Wright, US Census Bureau RRS2014-07, 2014; read 2026-10-26",
+      "actual_reading_scope": "Abstract lines 172-177: exact integer stratified allocation, fixed total and lower/upper bounds; rounded continuous Neyman allocation need not be optimal. No full algorithm or real survey run."
+    },
+    {
+      "id": "bayes",
+      "url": "https://www.cs.cornell.edu/courses/cs2800/2016fa/lectures/lec17-prob.html",
+      "pin": "Cornell CS2800, Fall 2016, lecture 17; read 2026-10-26",
+      "actual_reading_scope": "Complete short Bayes/total-probability derivation inspected, browser lines 9-22; finite total variation derived separately."
+    },
+    {
+      "id": "arithmetic",
+      "url": "https://www.ece.unb.ca/tervo/ece4253/arith.shtml",
+      "pin": "University of New Brunswick ECE4253, Arithmetic Coding; read 2026-10-26",
+      "actual_reading_scope": "Opening distinction between symbol codewords and whole-message arithmetic representation, plus interval construction below; actual primary page inspected. Toy rational coder is independently authored."
+    },
+    {
+      "id": "convex",
+      "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxslides.pdf",
+      "pin": "Boyd and Vandenberghe, Convex Optimization, revised slides 2023; read 2026-10-26",
+      "actual_reading_scope": "Optimization actions/objectives/constraints, PDF pages 3-4; Pareto optimality and scalarization passages inspected by actual browser find. Only those bounded passages claimed, no full-book reading."
+    },
+    {
+      "id": "irt_information",
+      "url": "https://www.publichealth.columbia.edu/research/population-health-methods/item-response-theory",
+      "pin": "Columbia University Mailman School of Public Health, Item Response Theory; read 2026-10-26",
+      "actual_reading_scope": "Two-parameter information formula and local independence/multidimensional limits, actual browser lines 80-98. No software run."
+    }
+  ],
+  "local_readings": [
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-020-screen-an-item-using-the-rest-score.md",
+      "path_or_url": "streeling/courses/cognitive-science/en/cog-020-screen-an-item-using-the-rest-score.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "6468b119afcdaec5145b431b4e2a9ea19003701e28309e7ebd6db9f6d1f19a47",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "path_or_url": "scripts/streeling-lib.mjs",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+      "read_method": "Actual local source bytes and parser/index passage inspected."
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-003-calibrating-fretboard-confidence.md",
+      "path_or_url": "streeling/courses/cognitive-science/en/cog-003-calibrating-fretboard-confidence.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "9610552ea1f8bf2727e820232fa1ad17f9914feb229b4f275173d5b861561e16",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "streeling/courses/psychohistory/en/psy-017-calibration-with-six-observations.md",
+      "path_or_url": "streeling/courses/psychohistory/en/psy-017-calibration-with-six-observations.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "a9def13deb3dc4f572c69bff1f965a394d035bc33d3c0aa837e2f4ffd8237071",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "path_or_url": "scripts/streeling-lib.mjs",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+      "read_method": "Actual local source bytes and parser/index passage inspected."
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-005-separate-pitch-estimates-from-listener-reports.md",
+      "path_or_url": "streeling/courses/cognitive-science/en/cog-005-separate-pitch-estimates-from-listener-reports.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "8e3d710484cd9d30a79681670a757eab63b7b39670a8d2145182aab2874ead32",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-015-carry-covariance-through-smoothed-telemetry.md",
+      "path_or_url": "streeling/courses/cybernetics/en/cyb-015-carry-covariance-through-smoothed-telemetry.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "5e25e02722276f8925750bc88faf9222200c7a91bbffe20051f8ef48686905c2",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "path_or_url": "scripts/streeling-lib.mjs",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+      "read_method": "Actual local source bytes and parser/index passage inspected."
+    },
+    {
+      "path": "streeling/courses/mathematics/en/mat-024-dynamical-systems-stability-feedback.md",
+      "path_or_url": "streeling/courses/mathematics/en/mat-024-dynamical-systems-stability-feedback.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "9640f76dbdee018136ff8fb3323b8d94ec4a648969eac6553cd9d3ecd728a976",
+      "scope": "Complete section 6 inspected after novelty search found existing controllability material, including the same double integrator. New course changed to bounded finite-alphabet horizon feasibility and energy optimization.",
+      "read_method": "Actual local source section read in tool output; no historical runtime rerun."
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-018-reconstruct-hidden-state-from-distinct-dynamics.md",
+      "path_or_url": "streeling/courses/cybernetics/en/cyb-018-reconstruct-hidden-state-from-distinct-dynamics.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "88dc9bde079f649c2f384d4590adef0111ac6409b3aa76a20baf3979ac4f78d2",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-019-test-coupled-feedback-eigenmodes.md",
+      "path_or_url": "streeling/courses/cybernetics/en/cyb-019-test-coupled-feedback-eigenmodes.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "8b42936500da3f7c3aaccb35e6142bcd2782c87c98ee133e0927e74967318806",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "path_or_url": "scripts/streeling-lib.mjs",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+      "read_method": "Actual local source bytes and parser/index passage inspected."
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-017-limit-command-change-separately-from-amplitude.md",
+      "path_or_url": "streeling/courses/cybernetics/en/cyb-017-limit-command-change-separately-from-amplitude.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "dec0ab5226f2853aec56fdbb4320f6d6aad574ab12629ae4a0b2420e7d5bcdc0",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-020-check-disturbance-robust-set-closure.md",
+      "path_or_url": "streeling/courses/cybernetics/en/cyb-020-check-disturbance-robust-set-closure.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "e0fc9f1aec0d70c7d84f2b8823320d77c413e6cfdf8301881f2e0878f3e3a619",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "path_or_url": "scripts/streeling-lib.mjs",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+      "read_method": "Actual local source bytes and parser/index passage inspected."
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-018-reconstruct-hidden-state-from-distinct-dynamics.md",
+      "path_or_url": "streeling/courses/cybernetics/en/cyb-018-reconstruct-hidden-state-from-distinct-dynamics.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "88dc9bde079f649c2f384d4590adef0111ac6409b3aa76a20baf3979ac4f78d2",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-016-test-feedforward-against-disturbance-mismatch.md",
+      "path_or_url": "streeling/courses/cybernetics/en/cyb-016-test-feedforward-against-disturbance-mismatch.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "a675f17efb2b67468a1cb3c2a9f81bc2e0bbaf5bb8b4adde1dae405d58a728f9",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "path_or_url": "scripts/streeling-lib.mjs",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+      "read_method": "Actual local source bytes and parser/index passage inspected."
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-013-value-an-evidence-probe-by-expected-information.md",
+      "path_or_url": "streeling/courses/information-theory/en/inf-013-value-an-evidence-probe-by-expected-information.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "8547e09ca39f13845c229c48b238d0782902fd43550ed9e4b1cf6946c35bea65",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-003-verdict-distribution-drift.md",
+      "path_or_url": "streeling/courses/information-theory/en/inf-003-verdict-distribution-drift.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "66c84ee111e358835be410e04e44f61b653343d3efd2d9626fd5545ab69a8f27",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "path_or_url": "scripts/streeling-lib.mjs",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+      "read_method": "Actual local source bytes and parser/index passage inspected."
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-020-separate-parity-detection-from-correction.md",
+      "path_or_url": "streeling/courses/information-theory/en/inf-020-separate-parity-detection-from-correction.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "0144107bb2f82042a0321f0551436620a316dede1dc0415ce03cda1589be6a9c",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-012-retain-event-order-in-a-handoff-summary.md",
+      "path_or_url": "streeling/courses/information-theory/en/inf-012-retain-event-order-in-a-handoff-summary.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "671231919c1aa58da71ceee664d343ef181267d94d0c7b495eefd5e70ea60981",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "path_or_url": "scripts/streeling-lib.mjs",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+      "read_method": "Actual local source bytes and parser/index passage inspected."
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-019-check-concatenated-codeword-ambiguity.md",
+      "path_or_url": "streeling/courses/information-theory/en/inf-019-check-concatenated-codeword-ambiguity.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "97ce0786f31d90403e76d3d98781a599e894d7a8f555960fd153f586367a9f04",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-014-retain-message-codebook-versions.md",
+      "path_or_url": "streeling/courses/information-theory/en/inf-014-retain-message-codebook-versions.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "3efe20a3ed8c9f4fdb35f63e7ce372d2b048f6e06cb3531ba2cfdc16891a910b",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "path_or_url": "scripts/streeling-lib.mjs",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+      "read_method": "Actual local source bytes and parser/index passage inspected."
+    },
+    {
+      "path": "streeling/courses/network-science/en/net-014-bound-throughput-with-a-capacity-cut.md",
+      "path_or_url": "streeling/courses/network-science/en/net-014-bound-throughput-with-a-capacity-cut.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "8b63756e6866e0573eedf7240d07ca947a4dc772cb74fc69f0c8f39829eb01ae",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "streeling/courses/mathematics/en/mat-019-graphs-centrality-spectral.md",
+      "path_or_url": "streeling/courses/mathematics/en/mat-019-graphs-centrality-spectral.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "3ca9c5d0fa686225a422eecb7ca5f2431d5494511e23a76b42f621989491e871",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "path_or_url": "scripts/streeling-lib.mjs",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+      "read_method": "Actual local source bytes and parser/index passage inspected."
+    },
+    {
+      "path": "streeling/courses/network-science/en/net-017-match-simultaneous-roles-without-double-booking.md",
+      "path_or_url": "streeling/courses/network-science/en/net-017-match-simultaneous-roles-without-double-booking.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "129c851de64c8de5f3b573264a2babd6291f64228bcc4fea240498a62fbbb5bb",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "streeling/courses/network-science/en/net-007-separate-dag-readiness-from-admission.md",
+      "path_or_url": "streeling/courses/network-science/en/net-007-separate-dag-readiness-from-admission.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "e4f771c655caf9b3b74d3e3586e2c140d82dba4a945df7174bf824e6b25763d7",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "path_or_url": "scripts/streeling-lib.mjs",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+      "read_method": "Actual local source bytes and parser/index passage inspected."
+    },
+    {
+      "path": "streeling/courses/network-science/en/net-009-detect-global-cycles-in-a-panel-stack.md",
+      "path_or_url": "streeling/courses/network-science/en/net-009-detect-global-cycles-in-a-panel-stack.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ea8645490b3eab50a4b7d7c5e9539d1da9d08bd8f48600af9606630712861641",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "streeling/courses/network-science/en/net-011-separate-reachability-from-semantic-compatibility.md",
+      "path_or_url": "streeling/courses/network-science/en/net-011-separate-reachability-from-semantic-compatibility.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "dc875e8eb8be14d04908e45ea1a4a5829c815f139751061397f71589243d143b",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "path_or_url": "scripts/streeling-lib.mjs",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+      "read_method": "Actual local source bytes and parser/index passage inspected."
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-014-select-a-budgeted-portfolio-with-prerequisite-closure.md",
+      "path_or_url": "streeling/courses/product-management/en/pm-014-select-a-budgeted-portfolio-with-prerequisite-closure.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "28fafe233eb50e0ad172f76f978194610d783b4a9e9907558f7f62e896e13f40",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-004-craft-extension-release-decision.md",
+      "path_or_url": "streeling/courses/product-management/en/pm-004-craft-extension-release-decision.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "31eff99588c7e7a35084aee798280862f745fff617547c66df337af67e92b855",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "path_or_url": "scripts/streeling-lib.mjs",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+      "read_method": "Actual local source bytes and parser/index passage inspected."
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md",
+      "path_or_url": "streeling/courses/product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "38f9f6bf4bcc8480d6c6a87729b2021fde7ca04e91cf7fbf1d5595b81db2544d",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.md",
+      "path_or_url": "streeling/courses/product-management/en/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "7d9fa6e8c0d0689e575d911a7760b7969110410759c30d08c9896bc9995b581c",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "path_or_url": "scripts/streeling-lib.mjs",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+      "read_method": "Actual local source bytes and parser/index passage inspected."
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-011-include-review-and-correction-in-automation-break-even.md",
+      "path_or_url": "streeling/courses/product-management/en/pm-011-include-review-and-correction-in-automation-break-even.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "7ffeeafcc5a7be1f70494e65cd1d6d2577a61015dd77a4b56a5d9fa9999b5601",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-004-craft-extension-release-decision.md",
+      "path_or_url": "streeling/courses/product-management/en/pm-004-craft-extension-release-decision.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "31eff99588c7e7a35084aee798280862f745fff617547c66df337af67e92b855",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "path_or_url": "scripts/streeling-lib.mjs",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+      "read_method": "Actual local source bytes and parser/index passage inspected."
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.md",
+      "path_or_url": "streeling/courses/product-management/en/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "7d9fa6e8c0d0689e575d911a7760b7969110410759c30d08c9896bc9995b581c",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md",
+      "path_or_url": "streeling/courses/product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "38f9f6bf4bcc8480d6c6a87729b2021fde7ca04e91cf7fbf1d5595b81db2544d",
+      "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+      "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "path_or_url": "scripts/streeling-lib.mjs",
+      "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+      "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+      "read_method": "Actual local source bytes and parser/index passage inspected."
+    }
+  ],
+  "bounded_reading_limits": [
+    "Only stated browser passages and listed local instructional sections were inspected. Accessibility, a search title or a downloaded file was not treated as full reading.",
+    "The initial baseline read output was truncated; later bounded actual source passages were inspected. No full-catalogue line-by-line reading is claimed.",
+    "PubMed 12972395 returned only a vulnerability-disclosure shell on open; that paper is not a used full reading. The actual Scheller/Nardini abstract is used only for careful comparator choice; covariance optimization is independently derived.",
+    "UNB arithmetic page illustrates interval refinement but contains numerical inconsistencies outside the example adopted here. Its quoted example numbers and integer coder are not reproduced; the authored rational interval case is calculated independently.",
+    "No full external copyrighted source bodies are retained in shipped author evidence."
+  ],
+  "novelty_rejection": {
+    "code": "CYB021",
+    "original": "Unrestricted controllability-rank example with the double integrator.",
+    "reason": "Actual MAT024 section 6 already teaches the same matrix and rank test. A new target pair alone would be a renamed fixture.",
+    "correction": "New operation enumerates a bounded finite command alphabet for a target/horizon and minimizes squared command energy. The control retains rank two but becomes infeasible at a shorter horizon.",
+    "retained_originals": "original-cyb021/",
+    "replay": "author-check-2.json",
+    "outcome": "Author structural/arithmetic checks pass after content correction; independent review remains pending."
+  },
+  "catalogue_search_limits": "concept-mentions.json is an exact text-mention audit, not a semantic completeness proof. Chromatic musical mentions are false positives for graph coloring; Pareto distributions are distinct from Pareto dominance. Actual MAT024 controllability passage was read after its relevant hit.",
+  "omissions": [
+    "No runnable production engine, API or DSL was added.",
+    "No human, fluent-language, learner, native runtime, physical material, production adoption or publication decision was accepted.",
+    "No new independent claim proof was authored by this author; author arithmetic is separately labelled."
+  ]
+}

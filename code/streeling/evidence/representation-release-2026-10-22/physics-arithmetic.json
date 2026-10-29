@@ -1,0 +1,44 @@
+{
+  "scope": "Ideal sampled-sine arithmetic and ideal displacement zeros only; no engine waveform, capture or listening claim.",
+  "nyquist_hz": {
+    "44100": 22050,
+    "48000": 24000
+  },
+  "four_second_sample_counts": {
+    "44100": 176400,
+    "48000": 192000
+  },
+  "E2_hz": 82.4069,
+  "highest_integer_harmonic_strictly_below_nyquist": {
+    "44100": 267,
+    "48000": 291
+  },
+  "sampled_sine_equivalence_controls": [
+    {
+      "sample_rate": 44100,
+      "continuous_tone_hz": 23000,
+      "alias_hz": 21100,
+      "phase_relation": "opposite sign sine samples",
+      "maximum_sample_error_over_1000_samples": 7.902012377769552e-13
+    },
+    {
+      "sample_rate": 44100,
+      "continuous_tone_hz": 30000,
+      "alias_hz": 14100,
+      "phase_relation": "opposite sign sine samples",
+      "maximum_sample_error_over_1000_samples": 6.227240945122503e-13
+    },
+    {
+      "sample_rate": 48000,
+      "continuous_tone_hz": 30000,
+      "alias_hz": 18000,
+      "phase_relation": "opposite sign sine samples",
+      "maximum_sample_error_over_1000_samples": 5.612177389480166e-13
+    }
+  ],
+  "ideal_quarter_string_zero_harmonics_checked": [
+    4,
+    8,
+    12
+  ]
+}

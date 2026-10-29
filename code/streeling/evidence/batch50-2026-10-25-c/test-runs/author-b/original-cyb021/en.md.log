@@ -1,0 +1,198 @@
+---
+module_id: "cyb-021-test-finite-horizon-control-reachability"
+department: "cybernetics"
+course: "Test Finite-Horizon Control Reachability"
+title: "Test Finite-Horizon Control Reachability"
+level: "intermediate"
+prerequisites: ["cyb-018-reconstruct-hidden-state-from-distinct-dynamics", "cyb-019-test-coupled-feedback-eigenmodes"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Test Finite-Horizon Control Reachability
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+An agent coordinator can observe a queue state without having actions that can move every component of that state. Adding more telemetry does not create missing actuators. Before proposing a feedback DSL, describe which state variables each allowed action can change. This lesson uses a stipulated linear recurrence to separate controllability from the observability studied earlier.
+
+Expand the recurrence over the declared horizon from the stated initial condition. Earlier inputs are multiplied by the dynamics before the final observation; later inputs have fewer transitions to traverse. Put those contributions into columns in input-time order. Their span determines the reachable final states when controls are unrestricted real values. Rank alone describes the dimension of that span, while solving the target equation checks the particular requested endpoint.
+
+The fixed actuator can influence both state coordinates over the horizon, although it directly touches only one coordinate. The control changes the actuator direction and leaves a coordinate unreachable. Repeated calls cannot manufacture the missing direction. This does not model saturation, queue discreteness, human authority or delay. A reachable algebraic target is therefore a narrow feasibility statement, not permission to execute actions or a demonstration of stable closed-loop operation.
+
+## Sources and project boundary
+
+[Prerequisite: cyb-018-reconstruct-hidden-state-from-distinct-dynamics](../../cybernetics/en/cyb-018-reconstruct-hidden-state-from-distinct-dynamics.md)
+
+[Prerequisite: cyb-019-test-coupled-feedback-eigenmodes](../../cybernetics/en/cyb-019-test-coupled-feedback-eigenmodes.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading](https://hankyang.seas.harvard.edu/OptimalControlEstimation/app-lti-system-theory.html)
+
+## Fixed model and negative control
+
+```json
+{
+  "values": {
+    "A": [
+      [
+        1,
+        1
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "B": [
+      0,
+      1
+    ],
+    "initial": [
+      0,
+      0
+    ],
+    "target": [
+      1,
+      1
+    ],
+    "horizon": 2
+  },
+  "formula": "For x_next=A*x+B*u, horizon=2 gives target-A*A*initial=[A*B,B]*[u0,u1]. Compute exact rank and solve; when unreachable controls and final_state are null.",
+  "expected": {
+    "reachability_matrix": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ]
+    ],
+    "rank": 2,
+    "reachable": true,
+    "controls": [
+      1,
+      0
+    ],
+    "final_state": [
+      1,
+      1
+    ]
+  },
+  "negative_control": {
+    "values": {
+      "A": [
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "B": [
+        1,
+        0
+      ],
+      "initial": [
+        0,
+        0
+      ],
+      "target": [
+        1,
+        1
+      ],
+      "horizon": 2
+    },
+    "expected": {
+      "reachability_matrix": [
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "rank": 1,
+      "reachable": false,
+      "controls": null,
+      "final_state": null
+    },
+    "why": "Changing the actuator removes the target direction even though the dynamics are unchanged."
+  },
+  "input_types": {
+    "A": "finite 2-by-2 rational matrix",
+    "B": "rational two-vector for scalar input",
+    "initial": "rational two-vector",
+    "target": "rational two-vector",
+    "horizon": "fixed integer two"
+  },
+  "assumptions": [
+    "All inputs are stipulated teaching values, not measured project events.",
+    "Only the declared finite objective and constraints are represented."
+  ],
+  "limits": "No actual queue controller, bounded-input reachability, scheduler permission or closed-loop stability is tested."
+}
+```
+
+## Source-assisted task and journal
+
+**Direct manual baseline:** Expand the state recurrence by hand and solve the final-state linear equations.
+
+**Falsifier:** A controller promises a target outside the span of the declared finite-horizon input contributions.
+
+Read the prerequisite and the retained project representation before treating this example as a proposed feature. The linked Learn source helper extracts metadata, title and body, then indexes English module identities. That is an actual representation boundary to inspect; it supplies neither the invented inputs nor an implementation of this mathematical operation. Keep the source revision attached to the reading note so that a later change cannot silently inherit this inspection.
+
+For the source-assisted task, reproduce the fixed case directly before asking an assistant to explain it. Use the input types and assumptions in the packet as part of the question, preserve intermediate quantities and compare the declared negative control. Ask the assistant to identify which premise makes the two results differ. A plausible explanation that never calculates the changed input has not demonstrated the operation.
+
+Record the exact question, supplied sources, answer, assistance history and any correction in the journal. The prepared corrected answers below are an answer key, not a learner attempt. An independent model check can establish the finite arithmetic while still missing a poor prompt or a misleading translation. Human technical review, fluent-language review, learner acceptance, native runtime behavior, production adoption and publication decisions therefore remain undecided. Retain a failed check and its diagnosis before recording a successful replay; do not replace an original failure with the corrected result.
+
+## Corrected exercises
+
+### Exercise 1
+
+Why is column order important?
+
+> **Answer:** The endpoint uses `[A*B,B]` for `[u0,u1]`; the first input is propagated once before the endpoint.
+
+### Exercise 2
+
+Solve the fixed target.
+
+> **Answer:** The matrix has rank `2`; controls `[1,0]` reach `[1,1]` from `[0,0]`.
+
+### Exercise 3
+
+Explain the actuator control.
+
+> **Answer:** With `B=[1,0]`, rank is `1` and the second coordinate stays `0`. Target `[1,1]` is unreachable, so no control sequence is reported.
+
+### Exercise 4
+
+What does the retained project helper actually establish?
+
+> **Answer:** It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.
+
+### Exercise 5
+
+Which acceptance decisions can the corrected answer key close?
+
+> **Answer:** None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.
+
+## Prepared learner criteria
+
+These criteria are prepared; every learner decision remains undecided.
+
+- Exercise 1: The endpoint uses `[A*B,B]` for `[u0,u1]`; the first input is propagated once before the endpoint.
+- Exercise 2: The matrix has rank `2`; controls `[1,0]` reach `[1,1]` from `[0,0]`.
+- Exercise 3: With `B=[1,0]`, rank is `1` and the second coordinate stays `0`. Target `[1,1]` is unreachable, so no control sequence is reported.
+- Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.
+- Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.
+
+[Fixed unit packet](../../../../code/streeling/evidence/batch50-2026-10-25-c/unit-b.json) · [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25-c/journal.md)

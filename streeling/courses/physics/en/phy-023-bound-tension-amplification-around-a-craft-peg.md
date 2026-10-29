@@ -1,0 +1,140 @@
+---
+module_id: "phy-023-bound-tension-amplification-around-a-craft-peg"
+department: "physics"
+course: "Bound Tension Amplification around a Craft Peg"
+level: "advanced"
+prerequisites: ["phy-019-test-sliding-before-calling-a-sculpture-stable"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Bound Tension Amplification around a Craft Peg
+
+> Draft for technical and fluent-language review. The numerical inputs, labels and expected results are authored teaching cases. They are not new physical material tests, native scene runs, learner observations or production outcomes. Human and learner decisions remain undecided.
+
+## Project operation and interpretation
+
+A knot display uses a strand wrapped around a peg before it reaches the highlighted crossing. An agent proposes that doubling the number of wraps merely doubles the supported endpoint tension. The operation here derives an exponential capacity from a declared contact angle. It applies to an ideal flexible rope on a rigid circular support at impending slip. The craft scene is a place to attach a proposed mechanical annotation, not evidence that its mesh implements friction.
+
+The source’s limiting relation must be read with its direction and boundary intact. Name the lower holding tension and the higher load tension before taking their ratio. Below the limiting value, friction need not equal its maximum at every point. Therefore compute a capacity and compare the demand against it; do not announce that every static rope automatically has the limiting endpoint ratio. The angle is the total contact angle, not the change in the visible endpoint direction after discarding complete turns.
+
+The zero-contact control keeps both endpoint forces and the coefficient. Its lost capacity isolates the geometric contribution instead of changing material and geometry together. For a future [Blender](https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md) or [Godot](https://docs.godotengine.org/en/4.5/) knot annotation, retain the actual contact path, excluded self-contact and direction of possible slip. A plausible winding image cannot supply a friction coefficient. Real fibres, a sharp embroidery eyelet and a deforming knot can violate the rigid-peg premises.
+
+The contact angle is measured in radians. A complete turn contributes its full contact angle; a visual endpoint direction alone cannot replace that total.
+
+Read the committed prerequisite and the scoped primary passage before calculating. Make a small ledger with separate columns for source definition, authored premise, derived result and future observation. A documentation page supports only the claim within its inspected scope. A source parameter, mathematical answer and runtime observation have different evidential roles; an assistant’s confident summary cannot exchange those roles. The evidence packet retains the source revision and the reading boundary so another reviewer can challenge a precise statement.
+
+Work first with the answer panels closed. Draw the table or diagram required by this operation and retain the intermediate quantities, including units or identity conventions. That handwritten derivation is the direct manual baseline. Only then consult an assistant or translation aid. Keep the question, the source location cited, the suggestion received and the change accepted or rejected. Compare the assisted result with the retained first attempt on identical inputs. A shorter answer is not an improvement when it omits a precondition or invents a completed project trial.
+
+## Fixed model and changed-input control
+
+```json
+{
+  "values": {
+    "hold_N": 2,
+    "mu": 0.5,
+    "wrap_rad": 2,
+    "load_N": 4
+  },
+  "formula": "ratio=exp(mu*wrap); capacity=hold*ratio; reserve=capacity-load; feasible=reserve>=0",
+  "expected": {
+    "ratio": 2.718281828459045,
+    "capacity_N": 5.43656365691809,
+    "reserve_N": 1.43656365691809,
+    "feasible": true
+  },
+  "negative_control": {
+    "values": {
+      "hold_N": 2,
+      "mu": 0.5,
+      "wrap_rad": 0,
+      "load_N": 4
+    },
+    "expected": {
+      "ratio": 1,
+      "capacity_N": 2,
+      "reserve_N": -2,
+      "feasible": false
+    }
+  }
+}
+```
+
+### Exercise 1
+
+Compute the limiting ratio.
+
+<details><summary>Answer 1</summary>
+
+It is `2.718281828459045`, obtained from the exponential of the coefficient times the contact angle. It is a dimensionless capacity ratio.
+
+</details>
+
+### Exercise 2
+
+Calculate endpoint capacity.
+
+<details><summary>Answer 2</summary>
+
+The capacity is `5.43656365691809 N`. This is the larger tension sustainable at the declared limiting condition, not an observed rope force.
+
+</details>
+
+### Exercise 3
+
+Compare capacity with demand.
+
+<details><summary>Answer 3</summary>
+
+The reserve is `1.43656365691809 N`, so the authored demand is feasible in this ideal static bound. This does not certify a knot.
+
+</details>
+
+### Exercise 4
+
+Apply the zero-contact control.
+
+<details><summary>Answer 4</summary>
+
+The capacity falls to `2 N`, the reserve to `-2 N`, and feasibility becomes false. The coefficient alone cannot create contact amplification.
+
+</details>
+
+### Exercise 5
+
+Does every static rope realize the limiting ratio?
+
+<details><summary>Answer 5</summary>
+
+No. The equality describes impending slip. Below that boundary the frictional response can be smaller; geometry and material premises still require inspection.
+
+</details>
+
+## Source-assisted task and direct baseline
+
+Annotate one proposed IX knot display with holding end, loaded end and contact arc. Derive the capacity manually, then inspect whether an Atlas curve could even identify that arc. Propose a future observation without filling its result.
+
+Treat the control as a separate input record. Preserve the main case, write a prediction for the changed input and explain which premise changes. When a result disagrees with your first answer, distinguish arithmetic error, interpretation error and a model limitation. Keep a failed attempt beside its correction rather than replacing it. The task asks for a reviewable evidence note before proposing a DSL node or agent workflow; a manual table may already meet the project need.
+
+Submit the baseline, source locations, corrected explanation, control outcome and prospective falsifier together. The prepared criteria below are questions for a future reviewer, not accepted learner results. Actual learner answer, assistance history, corrected answer and learner decision remain empty until a real attempt is retained. Technical review, fluent-language review, runtime execution, production adoption and publication each require their own applicable evidence. A passing finite calculation would establish only the stated operation under its premises.
+
+## Prospective falsifier
+
+An explanation preserving amplification after the control removes every contact angle is refuted by the control capacity.
+
+## Prepared learner criteria
+
+- For exercise 1: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+- For exercise 2: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+- For exercise 3: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+- For exercise 4: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+- For exercise 5: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+
+## Sources and claim boundary
+
+- [Committed prerequisite: phy-019-test-sliding-before-calling-a-sculpture-stable](../../physics/en/phy-019-test-sliding-before-calling-a-sculpture-stable.md)
+- [Retained project source](../../../../code/blender/scripts/atlas/kit.py)
+- [Primary reading](https://www.ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter8.pdf)
+- [Authored evidence packet](../../../../code/streeling/evidence/batch50-2026-10-25-b/unit-c.json)
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25-b/journal.md)

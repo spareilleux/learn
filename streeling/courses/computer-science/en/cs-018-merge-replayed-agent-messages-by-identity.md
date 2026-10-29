@@ -1,0 +1,156 @@
+---
+module_id: "cs-018-merge-replayed-agent-messages-by-identity"
+department: "computer-science"
+course: "Merge Replayed Agent Messages by Identity"
+level: "intermediate"
+prerequisites: ["cs-005-agent-handoff-evidence-contract"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Merge Replayed Agent Messages by Identity
+
+> This lesson uses an authored fixed case and inspected sources. Counts, times, labels and signals are invented teaching inputs. Human technical review, fluent-language review, actual learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A Learn author receives a completion message twice after a sender loses its acknowledgement. Counting deliveries makes the same work appear twice; deleting every repeated-looking payload can erase separate work. The useful question is which logical result each message names. The handoff prerequisite retains artifact identity, but does not define an algebra for replay. Here identity determines grouping, and content equality determines whether a group is consistent.
+
+The retained Learn helper inserts module identifiers and filename stems into a set. That source demonstrates a membership representation, not this message protocol. A set of identifiers alone cannot reveal that an identifier arrived with different content. Our model therefore validates each group before summing. Equal payloads under different identifiers remain separate results; equal identifiers with different payloads remain a conflict. This is a deliberate teaching contract, not a claim about the current agent transport.
+
+[RFC](https://www.rfc-editor.org/rfc/rfc9110.html#name-idempotent-methods) idempotency concerns the intended effect of repeating an identical request. It does not promise identical logging or guarantee that all operations are safe to retry. [W3C](https://www.w3.org/TR/2013/REC-prov-dm-20130430/) provenance also distinguishes an entity from an activity that uses it. Keep that distinction when an assistant proposes treating each delivery as a fresh experiment. A second notification supplies another delivery event, not another trial.
+
+CS015 already assigns overlapping frames to a first writer and rejects conflicting duplicates. The additional question here is whether independently accumulated message states can merge in any order without erasing a conflict. Represent each logical identity by the set of payloads observed for it. Merge states by set union at each identity; a missing identity contributes the empty set. Union is associative, commutative and idempotent, so grouping, arrival order and equal replay cannot change the final state. A singleton set is consistent; a set with more than one value is conflicting. Further union cannot remove a conflicting value. Sum singleton payloads only after every identity has passed that check. This algebra supplies a conflict-preserving state merge, beyond choosing ownership of a frame interval.
+
+A composable merge is useful only if its identity scope is shared by producer and consumer. A new revision can legitimately require a new identity. An arbitrary timestamp or wrapper name does not establish that relationship. First write the grouped table manually; then ask whether a proposed helper preserves that table, rejects conflicting groups, and retains the input messages for diagnosis.
+
+## Sources and project boundary
+
+Read the prerequisite before using the model. Inspect the linked retained project artifact at the revision recorded in the packet, and identify the field or branch that supports the stated source observation. The source gives a representation or declared behavior; it does not turn the invented case into an observed project result. The primary reading supplies the named concept within its stated scope.
+
+[Prerequisite: cs-005-agent-handoff-evidence-contract](../../computer-science/en/cs-005-agent-handoff-evidence-contract.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading: RFC 9110, June 2022, section 9.2.2](https://www.rfc-editor.org/rfc/rfc9110.html#name-idempotent-methods)
+
+[Primary reading: W3C Recommendation 2013-04-30](https://www.w3.org/TR/2013/REC-prov-dm-20130430/)
+
+## Fixed model and control
+
+```json
+{
+  "values": {
+    "messages": [
+      {
+        "id": "a",
+        "value": 3
+      },
+      {
+        "id": "b",
+        "value": 5
+      },
+      {
+        "id": "a",
+        "value": 3
+      }
+    ],
+    "initial": {}
+  },
+  "formula": "Group by id; equal repeated values collapse; any unequal values for one id produce conflict; sum unique values only when no conflict.",
+  "expected": {
+    "unique_count": 2,
+    "sum": 8,
+    "conflict": false
+  },
+  "negative_control": {
+    "values": {
+      "messages": [
+        {
+          "id": "a",
+          "value": 3
+        },
+        {
+          "id": "b",
+          "value": 5
+        },
+        {
+          "id": "a",
+          "value": 4
+        }
+      ],
+      "initial": {}
+    },
+    "expected": {
+      "unique_count": 2,
+      "sum": null,
+      "conflict": true
+    },
+    "why": "Same identity now names unequal content, so replay equivalence fails."
+  },
+  "assumptions": [
+    "Identity is stable for one logical result.",
+    "Payload equality is exact; no partial effects are applied before validation."
+  ],
+  "limits": "An authored merge rule, not an exactly-once transport, authorization or existing GA deduplication implementation."
+}
+```
+
+### Exercise 1
+
+Compute the ordinary delivery sum and the identity-based sum. Which quantity answers the logical-result question?
+
+<details><summary>Answer 1</summary>
+
+The delivery sum is `11`; the unique-result sum is `8` with `2` identities. The former counts notifications. Neither sum establishes independent experiments; the stated identity contract supplies only replay grouping.
+
+</details>
+
+### Exercise 2
+
+Replay the first message again without changing its content. What should the accepted sum do?
+
+<details><summary>Answer 2</summary>
+
+It remains `8`. Adding an equal member to an already consistent identity group changes delivery count but not the unique payload. This is the precise bounded idempotency claim being proposed.
+
+</details>
+
+### Exercise 3
+
+Apply the changed payload in the control. Can a first-writer choice silently produce a valid total?
+
+<details><summary>Answer 3</summary>
+
+No. Identity `a` names `3` and `4`, so `conflict=true` and `sum=null`. Choosing a winner would add a conflict-resolution rule that this model does not contain.
+
+</details>
+
+### Exercise 4
+
+Could two genuine trials both return the same payload and still count separately?
+
+<details><summary>Answer 4</summary>
+
+Yes, if their logical identities differ. Payload equality alone cannot establish duplicate work. The trial identity and source revision must be retained before interpreting a count as evidence.
+
+</details>
+
+### Exercise 5
+
+What source-assisted check could reject a proposed DSL merge?
+
+<details><summary>Answer 5</summary>
+
+Build the identity groups manually and compare both cases. A total for the conflicting case, or a changed total after an equal replay, refutes this contract. No installed transport or production effect was tested.
+
+</details>
+
+## Source-assisted learner task
+
+Start with a paper table before revealing the answers. Copy the inputs and their units, apply the declared operation, and retain intermediate results. This direct calculation is the manual baseline against which an assistant or a proposed composable notation must be compared. A shorter response has no demonstrated advantage if it loses an input identity, a failure category or the counterexample.
+
+Then inspect the precise source passage recorded in the packet. Quote only the small field or branch needed for your explanation and record its revision. Ask an assistant to challenge one assumption after you have saved your first answer. Retain the prompt, reply, accepted corrections and rejected suggestions. Source lookup and calculator use are allowed; record them as assistance so the result cannot be mistaken for unaided recall.
+
+Apply the changed input in the negative control and state an observable falsifier before making a recommendation. An unexpected control result requires checking the calculation and assumptions before changing a project workflow. Submit the original answer, corrected answer, assistance history and remaining uncertainty together. The packet prepares five learner criteria, one per exercise, with undecided decisions. Prepared solutions and author checks do not fill those decisions. A future dogfood comparison needs actual attempts on the same task and a retained manual baseline; no new agent mechanism or DSL implementation is required by this lesson.
+
+[Fixed unit packet](../../../../code/streeling/evidence/batch50-2026-10-24/unit-b.json) · [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-24/journal.md)

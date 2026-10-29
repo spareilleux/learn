@@ -1,0 +1,1038 @@
+{
+  "reviewer": "independent-pedagogical-source-review-agent",
+  "checked_at_utc": "2026-10-22T22:59:55.733189+00:00",
+  "verdict": "pass",
+  "findings": [
+    {
+      "origin": "code/streeling/evidence/pilot-value-2026-10-22/data-audit.json",
+      "id": "historical-not-calibrated",
+      "status": "observed-preserved",
+      "finding": "M2/M3 historical reports record dirty revisions, differing timing/control and binary conditions; current pinned documentation is not an exact executable reproduction or calibration of authored F/U likelihoods."
+    },
+    {
+      "origin": "code/streeling/evidence/pilot-value-2026-10-22/data-audit.json",
+      "id": "trial-identity-and-independence",
+      "status": "observed-preserved",
+      "finding": "The trial-A reread is one event; new wrapper identity or equal/different summary hashes alone establishes neither fresh conditional independence nor duplicate trial identity. Different genuine trials may share summary bytes."
+    },
+    {
+      "origin": "code/streeling/evidence/pilot-value-2026-10-22/data-audit.json",
+      "id": "cardinal-scale-and-horizon",
+      "status": "observed-preserved",
+      "finding": "Losses, pilot and migration costs are invented comparable teaching points. Horizon reuse assumes stable latent state, losses, likelihoods and controls; no host/agent calibration or engineering-time conversion inferred."
+    },
+    {
+      "origin": "code/streeling/evidence/pilot-value-2026-10-22/data-audit.json",
+      "id": "methodology-not-current-measurement",
+      "status": "observed-preserved",
+      "finding": "Pinned agentic guide recommendations and historical model claims are opinions/project methodology, not current reliability measurements."
+    }
+  ],
+  "fix_history": [
+    {
+      "id": "information-ignoring-task-elicitation",
+      "status": "resolved",
+      "finding": "Initial FUT005 task elicited locked-K zero value but did not expressly request the information-ignoring option included in criterion5.",
+      "resolution": "Author added an explicit gross-versus-net prompt. Final task and criterion reviewed together; no unasked acceptance demand remains.",
+      "source_changes_by_reviewer": false
+    },
+    {
+      "id": "gross-information-nonnegative-wording",
+      "status": "resolved",
+      "finding": "Initial FUT005 section5 said ignorable information need not have negative gross value, a weaker phrasing than the fixed-model nonnegativity guarantee.",
+      "resolution": "Author made optimized gross nonnegativity explicit, preserving possible zero gross and negative net after acquisition cost. Final EN/FR/ES semantics checked.",
+      "source_changes_by_reviewer": false
+    }
+  ],
+  "coverage": {
+    "exercise_answer_pairs": 45,
+    "learner_criteria": 15
+  },
+  "scope": {
+    "reviewed": "All nine EN/FR/ES sources and45localized exercise-answer pairs, prepared learner task and15criteria, complete fixed decision/trace/horizon records, primary MIT/NIST definitions and actual pinned historical source documents.",
+    "data_audit": "Independent675/675 exact rational/source/decision checks read and current input hashes verified. No benchmark or model runtime reproduction by content reviewer.",
+    "localization": "Agent semantic review plus ordered URL parity. Human fluent-language and learner outcomes remain absent.",
+    "prerequisites": "Existing English FUT004/PM005/CYB004 read for continuity: new information value, evidence dependence and horizon reoptimization add distinct transfer work. Wider historical claims are not reapproved.",
+    "publication": "Course source review only. Root sync/build/rendered-link/idempotence/publication receipts are independent gates excluded as circular review inputs."
+  },
+  "exercise_answer_checks": [
+    {
+      "id": "FUT005-en-exercise-1",
+      "module": "FUT005",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/futurology/en/fut-005-value-a-renderer-pilot-before-running-it.md",
+      "heading_line": 33,
+      "exercise_answer_sha256": "102882e34c082030daff4ce5ebb1c269a8ee181be91d26396465806d36415dda",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Authored prior1/2 and comparable cardinal losses give K4 versus S5; S is preferred only above P(F)3/5, tiesK. This action boundary is not an estimated host-state frequency."
+    },
+    {
+      "id": "FUT005-en-exercise-2",
+      "module": "FUT005",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/futurology/en/fut-005-value-a-renderer-pilot-before-running-it.md",
+      "heading_line": 45,
+      "exercise_answer_sha256": "24450762ddb20800adaaa0d8e475e83936ed3cb2a1c1448983e3797b5a9aefa2",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Total probability gives P(+)1/2; Bayes gives P(F|+)4/5, with Sloss2. Likelihood P(+|F) and posterior P(F|+) condition on different events; numerical equality is special to these premises."
+    },
+    {
+      "id": "FUT005-en-exercise-3",
+      "module": "FUT005",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/futurology/en/fut-005-value-a-renderer-pilot-before-running-it.md",
+      "heading_line": 57,
+      "exercise_answer_sha256": "6768674a8626dd9a272f363a68eca128be74651df5e865046de178ba53dcfe4a",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Result-dependent optimal loss3 gives grossEVSI1; perfect-state knowledge selectsS inF andK inU with loss2 andEVPI2. The noisy channel is not perfect; no observed performance probability follows."
+    },
+    {
+      "id": "FUT005-en-exercise-4",
+      "module": "FUT005",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/futurology/en/fut-005-value-a-renderer-pilot-before-running-it.md",
+      "heading_line": 69,
+      "exercise_answer_sha256": "b34e31c12fde71a1cbf8356b484f52f1d72d451f57efd4a7c33d89ea56139f8e",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Acquisition cost0.6 on the same point scale gives total3.6 and net0.4. Perfect information costing3 has net-1. Raw engineering minutes/money/frame times require a justified conversion, and fixed-model EVPI is not a ceiling across changed actions/timing."
+    },
+    {
+      "id": "FUT005-en-exercise-5",
+      "module": "FUT005",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/futurology/en/fut-005-value-a-renderer-pilot-before-running-it.md",
+      "heading_line": 81,
+      "exercise_answer_sha256": "1b74caa2e56dadd128faec1e15535f5e6d312c2249ca85c783d0fd21faf81659",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "K-only admissibility gives zero gross decision value although posterior changes. Ignorable information has nonnegative optimized gross value under fixed premises; acquisition cost can make net value negative. Defensible real pilot needs consequence scale, admissible alternatives, defended/calibrated priors and likelihoods, acquisition cost, timing and quality/coexistence guards. Conditional arithmetic gives no live authorization."
+    },
+    {
+      "id": "FUT005-fr-exercise-1",
+      "module": "FUT005",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/futurology/fr/fut-005-value-a-renderer-pilot-before-running-it.fr.md",
+      "heading_line": 33,
+      "exercise_answer_sha256": "1dbcb8d819312b45e308b91e5576be51e15c468aee5d90e6819d52f821cebfef",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Authored prior1/2 and comparable cardinal losses give K4 versus S5; S is preferred only above P(F)3/5, tiesK. This action boundary is not an estimated host-state frequency."
+    },
+    {
+      "id": "FUT005-fr-exercise-2",
+      "module": "FUT005",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/futurology/fr/fut-005-value-a-renderer-pilot-before-running-it.fr.md",
+      "heading_line": 45,
+      "exercise_answer_sha256": "cf834cc7c73087d6c4d8709783f374f218572e7d7aedbdcedef269ff43bebf9b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Total probability gives P(+)1/2; Bayes gives P(F|+)4/5, with Sloss2. Likelihood P(+|F) and posterior P(F|+) condition on different events; numerical equality is special to these premises."
+    },
+    {
+      "id": "FUT005-fr-exercise-3",
+      "module": "FUT005",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/futurology/fr/fut-005-value-a-renderer-pilot-before-running-it.fr.md",
+      "heading_line": 57,
+      "exercise_answer_sha256": "293c497d9ab6a12b16214a9814457bb12a25f04cae2b4fc8e3821d6a1b06ccf9",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Result-dependent optimal loss3 gives grossEVSI1; perfect-state knowledge selectsS inF andK inU with loss2 andEVPI2. The noisy channel is not perfect; no observed performance probability follows."
+    },
+    {
+      "id": "FUT005-fr-exercise-4",
+      "module": "FUT005",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/futurology/fr/fut-005-value-a-renderer-pilot-before-running-it.fr.md",
+      "heading_line": 69,
+      "exercise_answer_sha256": "29eed6012e63afaa764f53196c69cc29d85ad35639079f87fb672f3a2a847926",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Acquisition cost0.6 on the same point scale gives total3.6 and net0.4. Perfect information costing3 has net-1. Raw engineering minutes/money/frame times require a justified conversion, and fixed-model EVPI is not a ceiling across changed actions/timing."
+    },
+    {
+      "id": "FUT005-fr-exercise-5",
+      "module": "FUT005",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/futurology/fr/fut-005-value-a-renderer-pilot-before-running-it.fr.md",
+      "heading_line": 81,
+      "exercise_answer_sha256": "635f7a6e6011245e720b60e42413c3cecf9afc2fae8ab641d13f58306ca3ba63",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "K-only admissibility gives zero gross decision value although posterior changes. Ignorable information has nonnegative optimized gross value under fixed premises; acquisition cost can make net value negative. Defensible real pilot needs consequence scale, admissible alternatives, defended/calibrated priors and likelihoods, acquisition cost, timing and quality/coexistence guards. Conditional arithmetic gives no live authorization."
+    },
+    {
+      "id": "FUT005-es-exercise-1",
+      "module": "FUT005",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/futurology/es/fut-005-value-a-renderer-pilot-before-running-it.es.md",
+      "heading_line": 33,
+      "exercise_answer_sha256": "53a873a9e24d29cf49a0dbecada1925ccbf0bf7400fa997a3b08c9a9fb8c45cf",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Authored prior1/2 and comparable cardinal losses give K4 versus S5; S is preferred only above P(F)3/5, tiesK. This action boundary is not an estimated host-state frequency."
+    },
+    {
+      "id": "FUT005-es-exercise-2",
+      "module": "FUT005",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/futurology/es/fut-005-value-a-renderer-pilot-before-running-it.es.md",
+      "heading_line": 45,
+      "exercise_answer_sha256": "55d622981c1aaa3ac2d54d990e207e6ca34ce5431f8e6dae97baac8aa8841743",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Total probability gives P(+)1/2; Bayes gives P(F|+)4/5, with Sloss2. Likelihood P(+|F) and posterior P(F|+) condition on different events; numerical equality is special to these premises."
+    },
+    {
+      "id": "FUT005-es-exercise-3",
+      "module": "FUT005",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/futurology/es/fut-005-value-a-renderer-pilot-before-running-it.es.md",
+      "heading_line": 57,
+      "exercise_answer_sha256": "527b5dcd7b5bf5206a0a0929da1e44a1981f3e6e390b13d386ea3b2961ddc539",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Result-dependent optimal loss3 gives grossEVSI1; perfect-state knowledge selectsS inF andK inU with loss2 andEVPI2. The noisy channel is not perfect; no observed performance probability follows."
+    },
+    {
+      "id": "FUT005-es-exercise-4",
+      "module": "FUT005",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/futurology/es/fut-005-value-a-renderer-pilot-before-running-it.es.md",
+      "heading_line": 69,
+      "exercise_answer_sha256": "35c258a807e4012fe58064ccab74ec180977ac57c5bd7faec26410dff09deed7",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Acquisition cost0.6 on the same point scale gives total3.6 and net0.4. Perfect information costing3 has net-1. Raw engineering minutes/money/frame times require a justified conversion, and fixed-model EVPI is not a ceiling across changed actions/timing."
+    },
+    {
+      "id": "FUT005-es-exercise-5",
+      "module": "FUT005",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/futurology/es/fut-005-value-a-renderer-pilot-before-running-it.es.md",
+      "heading_line": 81,
+      "exercise_answer_sha256": "821a1a4dab86c8d626f6fcda366bb7379073994cd34010848046887da194f64a",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "K-only admissibility gives zero gross decision value although posterior changes. Ignorable information has nonnegative optimized gross value under fixed premises; acquisition cost can make net value negative. Defensible real pilot needs consequence scale, admissible alternatives, defended/calibrated priors and likelihoods, acquisition cost, timing and quality/coexistence guards. Conditional arithmetic gives no live authorization."
+    },
+    {
+      "id": "CYB007-en-exercise-1",
+      "module": "CYB007",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/cybernetics/en/cyb-007-update-beliefs-without-counting-a-trial-twice.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "ae13be3f40620d8b0846ef491de42b193bae093d8d61abb39fbb411c35d61d46",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Prior odds1 times positiveLR4 gives odds4/posterior4/5 andS; subsequent fresh negativeLR1/4 gives odds1/posterior1/2 andK. Products require conditional independence given the same stable latentF/U state, not unconditional independence."
+    },
+    {
+      "id": "CYB007-en-exercise-2",
+      "module": "CYB007",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/cybernetics/en/cyb-007-update-beliefs-without-counting-a-trial-twice.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "c346b1f19da18b5077aa5a988bd341043bbd6d0da097d4fd02171040db24f157",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Deterministic copy of the observed positive trial adds conditionalLR1, retaining4/5; a genuinely fresh conditionally independent positive gives16/17. Wrapper identity or timestamp does not establish a new independent trial."
+    },
+    {
+      "id": "CYB007-en-exercise-3",
+      "module": "CYB007",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/cybernetics/en/cyb-007-update-beliefs-without-counting-a-trial-twice.md",
+      "heading_line": 58,
+      "exercise_answer_sha256": "0e8062b15eec99ccf256c52af85a2e267307036859d435af307f42380171a5bc",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "wrap-A-again repeats trialA; after independent negative trialB correct posterior1/2selectsK versus naive4/5selectsS. This is an authored counterexample, not reproduced runtime controller behavior."
+    },
+    {
+      "id": "CYB007-en-exercise-4",
+      "module": "CYB007",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/cybernetics/en/cyb-007-update-beliefs-without-counting-a-trial-twice.md",
+      "heading_line": 70,
+      "exercise_answer_sha256": "56b4c7728e962b48697261a3efca4d5bf69396d274447da9a4bc91e1985cfa5d",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Different hashes can summarize one trial and equal summary bytes can arise from different fresh trials. Underlying trial provenance matters; distinct trial identity alone proves neither conditional independence, stable state nor comparability."
+    },
+    {
+      "id": "CYB007-en-exercise-5",
+      "module": "CYB007",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/cybernetics/en/cyb-007-update-beliefs-without-counting-a-trial-twice.md",
+      "heading_line": 82,
+      "exercise_answer_sha256": "21c0fe7be22f3dcb270b51fa4d0f5652d67a3efd43625ebad7e6e00f9d5cbfe4",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Given first+, second conditional outcomes17/25 and8/25 give loss42/25, gross8/25=0.32 and net-0.28 after0.6cost. Given first-, both actions stayK, gross0/net-0.6. Reject this optional next test under premises; mandatory validation and unrestricted stopping policies are separate."
+    },
+    {
+      "id": "CYB007-fr-exercise-1",
+      "module": "CYB007",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/cybernetics/fr/cyb-007-update-beliefs-without-counting-a-trial-twice.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "1b19d6460858ac826cb58eb268caa42e12f9cf08eff23179829667e790716348",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Prior odds1 times positiveLR4 gives odds4/posterior4/5 andS; subsequent fresh negativeLR1/4 gives odds1/posterior1/2 andK. Products require conditional independence given the same stable latentF/U state, not unconditional independence."
+    },
+    {
+      "id": "CYB007-fr-exercise-2",
+      "module": "CYB007",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/cybernetics/fr/cyb-007-update-beliefs-without-counting-a-trial-twice.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "a2f18ff855dc064a0c7a7de014bcadf9d3f823df8efd5714d6da516f6143287d",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Deterministic copy of the observed positive trial adds conditionalLR1, retaining4/5; a genuinely fresh conditionally independent positive gives16/17. Wrapper identity or timestamp does not establish a new independent trial."
+    },
+    {
+      "id": "CYB007-fr-exercise-3",
+      "module": "CYB007",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/cybernetics/fr/cyb-007-update-beliefs-without-counting-a-trial-twice.fr.md",
+      "heading_line": 58,
+      "exercise_answer_sha256": "fd9e5d26243e2544a5068efc1177807ea5027d44a6953034ae08992c9f4d9b6f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "wrap-A-again repeats trialA; after independent negative trialB correct posterior1/2selectsK versus naive4/5selectsS. This is an authored counterexample, not reproduced runtime controller behavior."
+    },
+    {
+      "id": "CYB007-fr-exercise-4",
+      "module": "CYB007",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/cybernetics/fr/cyb-007-update-beliefs-without-counting-a-trial-twice.fr.md",
+      "heading_line": 70,
+      "exercise_answer_sha256": "46d2398e485a12c95994ad3fbb6701da4af80faea096c11e1ddc317127b33623",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Different hashes can summarize one trial and equal summary bytes can arise from different fresh trials. Underlying trial provenance matters; distinct trial identity alone proves neither conditional independence, stable state nor comparability."
+    },
+    {
+      "id": "CYB007-fr-exercise-5",
+      "module": "CYB007",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/cybernetics/fr/cyb-007-update-beliefs-without-counting-a-trial-twice.fr.md",
+      "heading_line": 82,
+      "exercise_answer_sha256": "dc823538178d3b3aea0cd3c3619eaea2488ca3a2f63da43192d849dce99b5596",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Given first+, second conditional outcomes17/25 and8/25 give loss42/25, gross8/25=0.32 and net-0.28 after0.6cost. Given first-, both actions stayK, gross0/net-0.6. Reject this optional next test under premises; mandatory validation and unrestricted stopping policies are separate."
+    },
+    {
+      "id": "CYB007-es-exercise-1",
+      "module": "CYB007",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/cybernetics/es/cyb-007-update-beliefs-without-counting-a-trial-twice.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "44ff385b9562cc506378217287568c5f464ba891bacfd91e64c5e269b734b3a9",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Prior odds1 times positiveLR4 gives odds4/posterior4/5 andS; subsequent fresh negativeLR1/4 gives odds1/posterior1/2 andK. Products require conditional independence given the same stable latentF/U state, not unconditional independence."
+    },
+    {
+      "id": "CYB007-es-exercise-2",
+      "module": "CYB007",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/cybernetics/es/cyb-007-update-beliefs-without-counting-a-trial-twice.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "46ea666921878c46e1214ef5664cad56dc127c33f33ee7a0d81315738e36d2a8",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Deterministic copy of the observed positive trial adds conditionalLR1, retaining4/5; a genuinely fresh conditionally independent positive gives16/17. Wrapper identity or timestamp does not establish a new independent trial."
+    },
+    {
+      "id": "CYB007-es-exercise-3",
+      "module": "CYB007",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/cybernetics/es/cyb-007-update-beliefs-without-counting-a-trial-twice.es.md",
+      "heading_line": 58,
+      "exercise_answer_sha256": "6af519641133917a825fe8fd75b82fa8cb6350a1a6abe5c3b169ff35182106da",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "wrap-A-again repeats trialA; after independent negative trialB correct posterior1/2selectsK versus naive4/5selectsS. This is an authored counterexample, not reproduced runtime controller behavior."
+    },
+    {
+      "id": "CYB007-es-exercise-4",
+      "module": "CYB007",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/cybernetics/es/cyb-007-update-beliefs-without-counting-a-trial-twice.es.md",
+      "heading_line": 70,
+      "exercise_answer_sha256": "194b2a980a367d0edfae61cf0fa2015d818908f8a84e1ec333c317c0c46d0b7f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Different hashes can summarize one trial and equal summary bytes can arise from different fresh trials. Underlying trial provenance matters; distinct trial identity alone proves neither conditional independence, stable state nor comparability."
+    },
+    {
+      "id": "CYB007-es-exercise-5",
+      "module": "CYB007",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/cybernetics/es/cyb-007-update-beliefs-without-counting-a-trial-twice.es.md",
+      "heading_line": 82,
+      "exercise_answer_sha256": "c6df44f19551f8f4ed78337761317de2dd8acbdd97be539c1cad7f3c51e18814",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Given first+, second conditional outcomes17/25 and8/25 give loss42/25, gross8/25=0.32 and net-0.28 after0.6cost. Given first-, both actions stayK, gross0/net-0.6. Reject this optional next test under premises; mandatory validation and unrestricted stopping policies are separate."
+    },
+    {
+      "id": "PM006-en-exercise-1",
+      "module": "PM006",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/product-management/en/pm-006-test-a-pilot-against-its-decision-horizon.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "6c25216c3bd728d1d3dabc4aedfe344b4596388083470e11ec2272c3b3be6640",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "AtN2 prior totalsK8 andS12 include one-time migration2only ifS is selected. Charging2per-use changes the model. All losses/costs use authored cardinal points, not measured resources."
+    },
+    {
+      "id": "PM006-en-exercise-2",
+      "module": "PM006",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/product-management/en/pm-006-test-a-pilot-against-its-decision-horizon.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "ac1f6ca58549f8ee795f4bec5a5608af329f6d9c671a232aa552e63b5569cf58",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Post+ atN1 K4/S4tiesK with no paid migration; atN2 K8/S6selectsS paying2. The no-migration FUT005 decision must be reoptimized after adding cost."
+    },
+    {
+      "id": "PM006-en-exercise-3",
+      "module": "PM006",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/product-management/en/pm-006-test-a-pilot-against-its-decision-horizon.md",
+      "heading_line": 59,
+      "exercise_answer_sha256": "2745672f33eaf47407bac8c374755e405bd85695c6e65c2b3622aae6e00f9c4b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Stable reused pilot model gives total3N+1.6 and baseline4N, hence netN-1.6: N1net-0.6,N2net0.4, first positive integer2; N5total16.6. AtN1 equal optimal loss does not imply the unchosen switch migration was paid."
+    },
+    {
+      "id": "PM006-en-exercise-4",
+      "module": "PM006",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/product-management/en/pm-006-test-a-pilot-against-its-decision-horizon.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "9e4b8587f93327151ed01517164fb32f4ac0e7d7b577357c1245e8320df298b7",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "With identical migration costs, perfect-information loss2N+1 and gross ceiling2N-1 giveN2loss5/ceiling3 againstbaseline8. Available noisy pilot has gross1andnet0.4; a no-migration ceiling is a different decision problem."
+    },
+    {
+      "id": "PM006-en-exercise-5",
+      "module": "PM006",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/product-management/en/pm-006-test-a-pilot-against-its-decision-horizon.md",
+      "heading_line": 83,
+      "exercise_answer_sha256": "49a9e0ae22f503f448778d6038735a68fc847cf8de92afe66ea2fda07c379e92",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Ten unrelated scenes/hosts do not establish ten identical decisions under one stable condition. Scene/workload/host/driver/effective-mode/protocol changes trigger reuse reassessment; actual savings need comparable outcomes, defended scale, real costs and mandatory guards. Typed record/DSL remains proposed."
+    },
+    {
+      "id": "PM006-fr-exercise-1",
+      "module": "PM006",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/product-management/fr/pm-006-test-a-pilot-against-its-decision-horizon.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "c789b6618cb72079380acef835cda7738e95c44c9e3724e0042bd8dde036b5c3",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "AtN2 prior totalsK8 andS12 include one-time migration2only ifS is selected. Charging2per-use changes the model. All losses/costs use authored cardinal points, not measured resources."
+    },
+    {
+      "id": "PM006-fr-exercise-2",
+      "module": "PM006",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/product-management/fr/pm-006-test-a-pilot-against-its-decision-horizon.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "dc46277295a6301ac319f4d048b179733287f27f840887fcc55098fe85ad929e",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Post+ atN1 K4/S4tiesK with no paid migration; atN2 K8/S6selectsS paying2. The no-migration FUT005 decision must be reoptimized after adding cost."
+    },
+    {
+      "id": "PM006-fr-exercise-3",
+      "module": "PM006",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/product-management/fr/pm-006-test-a-pilot-against-its-decision-horizon.fr.md",
+      "heading_line": 59,
+      "exercise_answer_sha256": "e4334ba2a52618db733204ad875c819fcc5672c8ddd14c6aa1bd84015b2bd2c0",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Stable reused pilot model gives total3N+1.6 and baseline4N, hence netN-1.6: N1net-0.6,N2net0.4, first positive integer2; N5total16.6. AtN1 equal optimal loss does not imply the unchosen switch migration was paid."
+    },
+    {
+      "id": "PM006-fr-exercise-4",
+      "module": "PM006",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/product-management/fr/pm-006-test-a-pilot-against-its-decision-horizon.fr.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "a1bead5a60f6238edddfbd560d88b5c3875135a67ec8c3ec76aadf13648d27f4",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "With identical migration costs, perfect-information loss2N+1 and gross ceiling2N-1 giveN2loss5/ceiling3 againstbaseline8. Available noisy pilot has gross1andnet0.4; a no-migration ceiling is a different decision problem."
+    },
+    {
+      "id": "PM006-fr-exercise-5",
+      "module": "PM006",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/product-management/fr/pm-006-test-a-pilot-against-its-decision-horizon.fr.md",
+      "heading_line": 83,
+      "exercise_answer_sha256": "dbda468022b859aaa64200c4b98a29b7074dac3c7d5e18d95b31ab382c176d9f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Ten unrelated scenes/hosts do not establish ten identical decisions under one stable condition. Scene/workload/host/driver/effective-mode/protocol changes trigger reuse reassessment; actual savings need comparable outcomes, defended scale, real costs and mandatory guards. Typed record/DSL remains proposed."
+    },
+    {
+      "id": "PM006-es-exercise-1",
+      "module": "PM006",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/product-management/es/pm-006-test-a-pilot-against-its-decision-horizon.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "69716b974275fa0679e8dbb87d9adf2e81cda7f6e9d8b4d824283fe2eabbc5fa",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "AtN2 prior totalsK8 andS12 include one-time migration2only ifS is selected. Charging2per-use changes the model. All losses/costs use authored cardinal points, not measured resources."
+    },
+    {
+      "id": "PM006-es-exercise-2",
+      "module": "PM006",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/product-management/es/pm-006-test-a-pilot-against-its-decision-horizon.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "bb9af69c82a896646f11e29edb036c788ae184e7b77b427eada7434774954414",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Post+ atN1 K4/S4tiesK with no paid migration; atN2 K8/S6selectsS paying2. The no-migration FUT005 decision must be reoptimized after adding cost."
+    },
+    {
+      "id": "PM006-es-exercise-3",
+      "module": "PM006",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/product-management/es/pm-006-test-a-pilot-against-its-decision-horizon.es.md",
+      "heading_line": 59,
+      "exercise_answer_sha256": "d9d7309cef1b920e8528686577d95f879ae4ac838442b99c39f4c84ceb7f11c6",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Stable reused pilot model gives total3N+1.6 and baseline4N, hence netN-1.6: N1net-0.6,N2net0.4, first positive integer2; N5total16.6. AtN1 equal optimal loss does not imply the unchosen switch migration was paid."
+    },
+    {
+      "id": "PM006-es-exercise-4",
+      "module": "PM006",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/product-management/es/pm-006-test-a-pilot-against-its-decision-horizon.es.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "a4ebb2c7e836df488cf130e4ed123408d48ac6e8b2b56ef511afc46cca128787",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "With identical migration costs, perfect-information loss2N+1 and gross ceiling2N-1 giveN2loss5/ceiling3 againstbaseline8. Available noisy pilot has gross1andnet0.4; a no-migration ceiling is a different decision problem."
+    },
+    {
+      "id": "PM006-es-exercise-5",
+      "module": "PM006",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/product-management/es/pm-006-test-a-pilot-against-its-decision-horizon.es.md",
+      "heading_line": 83,
+      "exercise_answer_sha256": "7131f91512e0714ac5aaf6aaed2cf9a697d6f3c3c059224f73549e2806376e37",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary definitions, actual pinned historical documentation and independently audited fixed models. No human fluency, learner or runtime outcome.",
+      "checked_conclusion": "Ten unrelated scenes/hosts do not establish ten identical decisions under one stable condition. Scene/workload/host/driver/effective-mode/protocol changes trigger reuse reassessment; actual savings need comparable outcomes, defended scale, real costs and mandatory guards. Typed record/DSL remains proposed."
+    }
+  ],
+  "learner_criterion_checks": [
+    {
+      "id": "FUT005-1",
+      "module": "FUT005",
+      "title": "prior-action",
+      "acceptance_reviewed": "State authored prior/loss units and admissible actions. Derive K4 versus S5, boundary p>3/5 and tie-K without treating the boundary as a frequency estimate.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Authored prior1/2 and comparable cardinal losses give K4 versus S5; S is preferred only above P(F)3/5, tiesK. This action boundary is not an estimated host-state frequency.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no learner assessed."
+    },
+    {
+      "id": "FUT005-2",
+      "module": "FUT005",
+      "title": "posterior",
+      "acceptance_reviewed": "Derive outcome probability1/2 and posteriors4/5 and1/5 from the stipulated channel; distinguish reversed conditionals and choose S/K.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Total probability gives P(+)1/2; Bayes gives P(F|+)4/5, with Sloss2. Likelihood P(+|F) and posterior P(F|+) condition on different events; numerical equality is special to these premises.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no learner assessed."
+    },
+    {
+      "id": "FUT005-3",
+      "module": "FUT005",
+      "title": "information-values",
+      "acceptance_reviewed": "Compute optimized loss3 with noisy signal and2 with perfect state information, gross values1/2; preserve the same action/loss/timing model.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Result-dependent optimal loss3 gives grossEVSI1; perfect-state knowledge selectsS inF andK inU with loss2 andEVPI2. The noisy channel is not perfect; no observed performance probability follows.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no learner assessed."
+    },
+    {
+      "id": "FUT005-4",
+      "module": "FUT005",
+      "title": "acquisition-cost",
+      "acceptance_reviewed": "Calculate noisy net0.4 at cost0.6 and perfect-test net-1 at cost3; do not add minutes to points without conversion.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Acquisition cost0.6 on the same point scale gives total3.6 and net0.4. Perfect information costing3 has net-1. Raw engineering minutes/money/frame times require a justified conversion, and fixed-model EVPI is not a ceiling across changed actions/timing.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no learner assessed."
+    },
+    {
+      "id": "FUT005-5",
+      "module": "FUT005",
+      "title": "actionability",
+      "acceptance_reviewed": "Explain locked-K gross value0 and information-ignoring option. Specify calibration, units, timing, allowed actions and quality guards needed before a live trial decision.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "K-only admissibility gives zero gross decision value although posterior changes. Ignorable information has nonnegative optimized gross value under fixed premises; acquisition cost can make net value negative. Defensible real pilot needs consequence scale, admissible alternatives, defended/calibrated priors and likelihoods, acquisition cost, timing and quality/coexistence guards. Conditional arithmetic gives no live authorization.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no learner assessed."
+    },
+    {
+      "id": "CYB007-1",
+      "module": "CYB007",
+      "title": "fresh-updates",
+      "acceptance_reviewed": "Use positive/negative likelihood ratios4 and1/4 with prior odds1; fresh plus then minus gives posteriors4/5 then1/2, actions S/K under the stated conditional-independence model.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Prior odds1 times positiveLR4 gives odds4/posterior4/5 andS; subsequent fresh negativeLR1/4 gives odds1/posterior1/2 andK. Products require conditional independence given the same stable latentF/U state, not unconditional independence.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no learner assessed."
+    },
+    {
+      "id": "CYB007-2",
+      "module": "CYB007",
+      "title": "copy",
+      "acceptance_reviewed": "A copy of trial-A adds conditional factor1, leaving4/5; a fresh independent plus yields16/17. Wrapper identity alone does not establish freshness/independence.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Deterministic copy of the observed positive trial adds conditionalLR1, retaining4/5; a genuinely fresh conditionally independent positive gives16/17. Wrapper identity or timestamp does not establish a new independent trial.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no learner assessed."
+    },
+    {
+      "id": "CYB007-3",
+      "module": "CYB007",
+      "title": "ledger",
+      "acceptance_reviewed": "Identify the spurious duplicate update and final deduplicated1/2 K versus naive4/5 S after independent trial-B minus; preserve authored trace versus production behavior.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "wrap-A-again repeats trialA; after independent negative trialB correct posterior1/2selectsK versus naive4/5selectsS. This is an authored counterexample, not reproduced runtime controller behavior.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no learner assessed."
+    },
+    {
+      "id": "CYB007-4",
+      "module": "CYB007",
+      "title": "identity",
+      "acceptance_reviewed": "Different hashes may describe one trial and equal summaries may arise from distinct trials. Preserve lineage, conditional dependence, comparability and state stability; no calibrated model inferred.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Different hashes can summarize one trial and equal summary bytes can arise from different fresh trials. Underlying trial provenance matters; distinct trial identity alone proves neither conditional independence, stable state nor comparability.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no learner assessed."
+    },
+    {
+      "id": "CYB007-5",
+      "module": "CYB007",
+      "title": "optional-stop",
+      "acceptance_reviewed": "Compute second-trial gross0.32 after plus and0 after minus; net-0.28/-0.6 at cost0.6. Keep optional information decisions separate from mandatory validation.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Given first+, second conditional outcomes17/25 and8/25 give loss42/25, gross8/25=0.32 and net-0.28 after0.6cost. Given first-, both actions stayK, gross0/net-0.6. Reject this optional next test under premises; mandatory validation and unrestricted stopping policies are separate.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no learner assessed."
+    },
+    {
+      "id": "PM006-1",
+      "module": "PM006",
+      "title": "one-time-cost",
+      "acceptance_reviewed": "Declare horizon reuse assumptions and same loss scale. At N2 derive prior totals K8 and S12; migration2 is charged once only if S selected.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "AtN2 prior totalsK8 andS12 include one-time migration2only ifS is selected. Charging2per-use changes the model. All losses/costs use authored cardinal points, not measured resources.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no learner assessed."
+    },
+    {
+      "id": "PM006-2",
+      "module": "PM006",
+      "title": "reoptimization",
+      "acceptance_reviewed": "After plus, N1 ties at4 and keeps K with zero migration; N2 chooses S6 over K8 and pays2. Do not carry the no-migration policy forward blindly.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Post+ atN1 K4/S4tiesK with no paid migration; atN2 K8/S6selectsS paying2. The no-migration FUT005 decision must be reoptimized after adding cost.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no learner assessed."
+    },
+    {
+      "id": "PM006-3",
+      "module": "PM006",
+      "title": "break-even",
+      "acceptance_reviewed": "Derive total3N+1.6, netN-1.6, N1gain-0.6/N2gain0.4 and first positive integer2; N5total16.6 under stable reuse premises.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Stable reused pilot model gives total3N+1.6 and baseline4N, hence netN-1.6: N1net-0.6,N2net0.4, first positive integer2; N5total16.6. AtN1 equal optimal loss does not imply the unchosen switch migration was paid.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no learner assessed."
+    },
+    {
+      "id": "PM006-4",
+      "module": "PM006",
+      "title": "ceiling",
+      "acceptance_reviewed": "At N2 perfect-information loss5 and ceiling3 against baseline8, with the same migration charge. Imperfect gross value1 does not attain that ceiling.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "With identical migration costs, perfect-information loss2N+1 and gross ceiling2N-1 giveN2loss5/ceiling3 againstbaseline8. Available noisy pilot has gross1andnet0.4; a no-migration ceiling is a different decision problem.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no learner assessed."
+    },
+    {
+      "id": "PM006-5",
+      "module": "PM006",
+      "title": "reuse",
+      "acceptance_reviewed": "Reject automatic N10 reuse across unrelated scenes/hosts. State an expiry/reassessment trigger, comparable outcomes and real cost/quality evidence; no observed saving or implemented DSL inferred.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Ten unrelated scenes/hosts do not establish ten identical decisions under one stable condition. Scene/workload/host/driver/effective-mode/protocol changes trigger reuse reassessment; actual savings need comparable outcomes, defended scale, real costs and mandatory guards. Typed record/DSL remains proposed.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no learner assessed."
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "streeling/courses/futurology/en/fut-005-value-a-renderer-pilot-before-running-it.md",
+      "sha256": "c5067688d5d47b93ef11382d1ad6914a49fca9395c44a5671659b373535c3b16"
+    },
+    {
+      "path": "streeling/courses/futurology/fr/fut-005-value-a-renderer-pilot-before-running-it.fr.md",
+      "sha256": "a28def30632f701481fdfb0ebffa9047b4060e6448ec4b6a9414bf4d8f7ba6be"
+    },
+    {
+      "path": "streeling/courses/futurology/es/fut-005-value-a-renderer-pilot-before-running-it.es.md",
+      "sha256": "822a924e92d67699c0508bc62b8b5307938e893d2ff4790529c8ce3c2e79809a"
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-007-update-beliefs-without-counting-a-trial-twice.md",
+      "sha256": "15f91a283f426b6acfa4d8c0524c2b6b7d3797549b4575374bc3466c27d33797"
+    },
+    {
+      "path": "streeling/courses/cybernetics/fr/cyb-007-update-beliefs-without-counting-a-trial-twice.fr.md",
+      "sha256": "680f1fc8d73556f4895b8b1fb50e39e50dfce16f7af50e9d793beb1f21c67a87"
+    },
+    {
+      "path": "streeling/courses/cybernetics/es/cyb-007-update-beliefs-without-counting-a-trial-twice.es.md",
+      "sha256": "1343019ac727c599df64c254701f7253f64062455ab2f153d76edf93f11e1962"
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-006-test-a-pilot-against-its-decision-horizon.md",
+      "sha256": "ed714eff740f12aee462f5cf156dc84d5989a033c444fd4740e53f2e542ef8b3"
+    },
+    {
+      "path": "streeling/courses/product-management/fr/pm-006-test-a-pilot-against-its-decision-horizon.fr.md",
+      "sha256": "163bcc843bd4f1f39b99115e2ded4592fa4c1b6a6166529184e9578ad28c0208"
+    },
+    {
+      "path": "streeling/courses/product-management/es/pm-006-test-a-pilot-against-its-decision-horizon.es.md",
+      "sha256": "ae2a5ff0f4f8c6fac712580788c97903612286d6ca8008dd537eac4edd4b9710"
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/production-plan.md",
+      "sha256": "0189989869f21b694512c954b55c953ac20e66118130ef180f6ede16a9f96643"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/README.md",
+      "sha256": "292ec55c8a7ab3d11d10f2733aec8465a521286c58745b9497ffea92026b8c5f"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/primary-readback.json",
+      "sha256": "8080e4abfd9a35319511c08cc82feaf0bce9f68c8eec01feb515fc37faa101cc"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/primary-reading.json",
+      "sha256": "a886dce2538b1840cbd8072c0ec70ef3f58f02e1f95c0c1397f1cc0af8725ab9"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/pilot-decision.json",
+      "sha256": "1daf2c0eaefebe981871d8f30bd96e6f9db4dc7ae8233cd856e440aaca73b636"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/belief-updates.json",
+      "sha256": "09d1a4f29b26e879a71fcdb2872ed72d689dc5375915ee28852d2914c8aac016"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/decision-horizons.json",
+      "sha256": "0bbdc7990bedd742e47fc156308de83a273957b3d986cd7453342a05b4c7fb61"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/source-observations.json",
+      "sha256": "1059ca60f45178942a810a54500202331c8200d7246a0e5be06b9b506124cbae"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/data-audit.json",
+      "sha256": "7e97f33e8fe934f2f8881fe07d508ad8003bcbb2145c23e32bf3d80f207dd5e8"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/learner-task.md",
+      "sha256": "0988d34836a32fa6b0cd3881b3a9b8f08c5dd08b73ba8dc957b28999284bb153"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/reviewer-rubric.json",
+      "sha256": "74ef40a59abc38f2a6943faf6d954d0e51ad5e0e3403097408edecb35625f003"
+    },
+    {
+      "path": "code/streeling/evidence/pilot-value-2026-10-22/official-links.json",
+      "sha256": "41e042552e09294fecbeb587c73d82a85154b646c957821ab7c81d93b16f12a7"
+    }
+  ],
+  "prerequisite_bindings": [
+    {
+      "path": "streeling/courses/futurology/en/fut-004-scenario-test-an-observatory-renderer.md",
+      "sha256": "232bea032ecec5d8aba1ce2d2e5e0aa0919d24150fec634d7f1b17c6a5790328"
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-005-interpret-brutal-coexistence-experiments.md",
+      "sha256": "313dc1577766294680bc96db230645f4635af05d5b10354dd106b3d044a6d10f"
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-004-observe-before-correcting-a-feedback-loop.md",
+      "sha256": "6422d5e4ca7197fa0a7f9fb855d4f11f4fac337f4fb167e94289fed90bf4a27e"
+    }
+  ],
+  "locale_url_and_format_checks": [
+    {
+      "path": "streeling/courses/futurology/en/fut-005-value-a-renderer-pilot-before-running-it.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/futurology/fr/fut-005-value-a-renderer-pilot-before-running-it.fr.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/futurology/es/fut-005-value-a-renderer-pilot-before-running-it.es.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-007-update-beliefs-without-counting-a-trial-twice.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/cybernetics/fr/cyb-007-update-beliefs-without-counting-a-trial-twice.fr.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/cybernetics/es/cyb-007-update-beliefs-without-counting-a-trial-twice.es.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-006-test-a-pilot-against-its-decision-horizon.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/product-management/fr/pm-006-test-a-pilot-against-its-decision-horizon.fr.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/product-management/es/pm-006-test-a-pilot-against-its-decision-horizon.es.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    }
+  ],
+  "primary_source_review": [
+    {
+      "path": "Experiments/Brutal/README.md",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/README.md",
+      "sha256": "4cb7e4e068eb000e97b5cd4bb323fbfd8a929749ad14ec3b96127f2d303d3fe7",
+      "review_scope": "Directly read complete M2/M3 reports and methodology guide; bounded README M2/M3 milestones, metric/binary limits and conclusions. These historical/opinion documents do not calibrate the authored model."
+    },
+    {
+      "path": "Experiments/Brutal/evidence/m2-20261019-235218.md",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/evidence/m2-20261019-235218.md",
+      "sha256": "e830a6b0bfaf06e6b5b0af4a0ff9f668109e5006bc42b5db9614c065ce91db56",
+      "review_scope": "Directly read complete M2/M3 reports and methodology guide; bounded README M2/M3 milestones, metric/binary limits and conclusions. These historical/opinion documents do not calibrate the authored model."
+    },
+    {
+      "path": "Experiments/Brutal/evidence/m3-20261020-000727.md",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/evidence/m3-20261020-000727.md",
+      "sha256": "7da3fd920f42caeba1cbb83a18980cd37670b4a20787253a16803814c7a1b7d6",
+      "review_scope": "Directly read complete M2/M3 reports and methodology guide; bounded README M2/M3 milestones, metric/binary limits and conclusions. These historical/opinion documents do not calibrate the authored model."
+    },
+    {
+      "path": "docs/methodology/agentic-engineering.md",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/docs/methodology/agentic-engineering.md",
+      "sha256": "ba208bb384dd9f9030d7ca3dbace649c15466efa9de5723287cb1befb62a8a60",
+      "review_scope": "Directly read complete M2/M3 reports and methodology guide; bounded README M2/M3 milestones, metric/binary limits and conclusions. These historical/opinion documents do not calibrate the authored model."
+    }
+  ],
+  "official_document_review": [
+    {
+      "url": "https://ocw.mit.edu/courses/15-053-optimization-methods-in-management-science-spring-2013/b68f3b255275ffa42099958e373248b1_MIT15_053S13_lec19.pdf#page=7",
+      "actual_read": "Actual primary PDF pages7–10 body and supplied page10 image read. Original/perfect/imperfect information definitions converted from payoff increase to loss reduction. Gross information value can be zero and cannot exceed perfect information under fixed model; unrelated gambling/medical examples not imported."
+    },
+    {
+      "url": "https://www.itl.nist.gov/div898/handbook/apr/section2/apr1a.htm",
+      "actual_read": "Actual primary body read: prior and likelihood yield posterior with total-probability normalization and distinct conditioning events. Reliability/MTBF models not imported."
+    }
+  ],
+  "primary_visual_read": {
+    "path": "C:/tmp/streeling-pilot-value-mit-page10-20261022.png",
+    "sha256": "95a6dc81819e26229fba812336fb7ec414b3681270f89d221b6e26d2b7597947",
+    "pdf_path": "C:\\tmp\\streeling-pilot-value-inputs-20261022\\mit-voi.pdf",
+    "pdf_sha256": "36766d722d4a8681b54ccd5daa65b242a4c8e44349920d02fada927e8694c505",
+    "page": 10,
+    "actual_viewed": true,
+    "scope": "Provided rendering read, including nonnegative imperfect value and perfect-information bound; strict positivity is the false option. No new PDF render or experiment."
+  },
+  "pending": {
+    "human_technical_review": null,
+    "fluent_language_review": null,
+    "learner_attempts": null,
+    "independent_learner_transfer": null,
+    "runtime_validation": null,
+    "live_pilot": null,
+    "belief_controller": null,
+    "renderer_trial": null,
+    "host_calibration": null,
+    "empirical_calibration": null,
+    "measured_likelihoods": null,
+    "measured_prior": null,
+    "production_quality": null,
+    "production_switch": null,
+    "migration": null,
+    "engineering_time_saving": null,
+    "dsl_implementation": null,
+    "deployed_html": null
+  },
+  "human_technical_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "independent_learner_transfer": null,
+  "runtime_validation": null,
+  "live_pilot": null,
+  "belief_controller": null,
+  "renderer_trial": null,
+  "host_calibration": null,
+  "empirical_calibration": null,
+  "measured_likelihoods": null,
+  "measured_prior": null,
+  "production_quality": null,
+  "production_switch": null,
+  "migration": null,
+  "engineering_time_saving": null,
+  "dsl_implementation": null,
+  "deployed_html": null,
+  "boundaries": [
+    "Comparable cardinal teaching losses/costs are authored premises, not money, frame times, preferences, empirical probabilities or financial advice.",
+    "Passive pilot, stable latentF/U state, prior1/2 and likelihoods4/5versus1/5 are stipulated. Historical dirty/noisy M2/M3 reports and methodology opinions provide no calibration.",
+    "Fresh likelihood products require conditional independence given the same stable latent state. Different trialIDs, wrappers, timestamps or summary hashes alone do not prove independence; equal summary bytes can come from fresh trials.",
+    "Second-test values are conditional marginal values for the stated optional one-new-test alternatives. They do not prove an unrestricted stopping theorem or waive required technical validation.",
+    "HorizonN presumes reusable evidence across matching decisions; migration2 is one-time and paid only on chosenS. N1tieK pays0migration despite equal optimal-loss formula.",
+    "Perfect-information ceilings retain the same action set, costs and timing. Changed actions, state or costs define a different model; no promised experimental benefit follows.",
+    "No renderer/GPU/host/paid call, live controller, calibration, migration, production switch or additional experiment performed; proposed typed handoff/DSL is not delivered runtime behavior."
+  ]
+}

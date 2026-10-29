@@ -1,0 +1,21 @@
+{
+  "source_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "source_path": "Experiments/Brutal/Colossus/Program.cs",
+  "initial_bounces": 3,
+  "initial_gpu_smooth_ms": 0,
+  "smoothing_alpha": 0.05,
+  "default_budget_ms": 16,
+  "recovery_budget_ratio": 0.65,
+  "recovery_threshold_ms": 10.4,
+  "down_predicate": "gpuSmooth > gpuBudget and bounces >1",
+  "up_predicate": "gpuSmooth < gpuBudget*0.65 and bounces <3",
+  "actuation": "At most one bounce step per qualifying observation.",
+  "time_guard": "now-bounceChanged >1.0 (strict)",
+  "time_base": "recording:frame/60.0; otherwise clock.Elapsed.TotalSeconds",
+  "configured_variant_guard": "pt.Length >0; pt is configured from RTX capability and the --pt argument.",
+  "runtime_toggle_boundary": "rtxOn separately affects the parameter sent to rendering; it is not checked by the adaptive block. Configuration is not an attestation of active path tracing.",
+  "query_guard": "After frames-in-flight startup and GetQueryPoolResults status Success.",
+  "unavailable_query": "Inspected success block is skipped; gpuSmooth/bounces/bounceChanged remain unchanged there. Clock time still advances.",
+  "numeric_validation": "No explicit finite/nonnegative check for successfully returned elapsed GPU time in the inspected adaptive block. API success is not a general validity guarantee.",
+  "historical_scope": "README reports earlier adaptive timings; historical coexistence controls remain inconclusive. No new rendered, quality or coexistence run."
+}

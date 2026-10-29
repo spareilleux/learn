@@ -62,9 +62,11 @@ La gamme chromatique (les 12 notes) dans l'ordre :
 La → La#/Sib → Si → Do → Do#/Réb → Ré → Ré#/Mib → Mi → Fa → Fa#/Solb → Sol → Sol#/Lab → (retour à La)
 ```
 
-Deux exceptions importantes où il n'y a **pas de dièse/bémol entre les notes naturelles adjacentes** :
-- **Si à Do** — un demi-ton, pas de Si#
-- **Mi à Fa** — un demi-ton, pas de Mi#
+Deux paires de notes naturelles adjacentes sont **séparées d'un demi-ton, sans demi-ton supplémentaire entre elles** :
+- **Si à Do** — un demi-ton.
+- **Mi à Fa** — un demi-ton.
+
+Si# et Mi# sont des écritures valides ; dans ce modèle au tempérament égal à douze sons, elles correspondent respectivement à Do et Fa. La liste chromatique utilise Do et Fa par commodité. [MCL-008](../../musicology/en/mcl-008-keep-diatonic-and-chromatic-transposition-separate.md) explique pourquoi l'orthographe des notes peut compter.
 
 Toutes les autres notes naturelles ont un dièse/bémol entre elles (par ex., La à Si a La#/Sib entre les deux — soit deux demi-tons).
 

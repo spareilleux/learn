@@ -62,9 +62,11 @@ La escala cromática (las 12 notas) en orden:
 La → La#/Sib → Si → Do → Do#/Reb → Re → Re#/Mib → Mi → Fa → Fa#/Solb → Sol → Sol#/Lab → (vuelve a La)
 ```
 
-Dos excepciones importantes donde **no hay sostenido/bemol entre notas naturales adyacentes**:
-- **Si a Do** — un semitono, no hay Si#
-- **Mi a Fa** — un semitono, no hay Mi#
+Dos pares de notas naturales adyacentes están **separados por un semitono, sin otro semitono entre ellas**:
+- **Si a Do** — un semitono.
+- **Mi a Fa** — un semitono.
+
+Si# y Mi# son grafías válidas; en este modelo de temperamento igual de doce sonidos corresponden respectivamente a Do y Fa. La lista cromática usa Do y Fa por comodidad. [MCL-008](../../musicology/en/mcl-008-keep-diatonic-and-chromatic-transposition-separate.md) explica por qué puede importar la escritura de las notas.
 
 Todo lo demás tiene un sostenido/bemol entre las notas naturales (por ejemplo, La a Si tiene La#/Sib en medio — son dos semitonos).
 

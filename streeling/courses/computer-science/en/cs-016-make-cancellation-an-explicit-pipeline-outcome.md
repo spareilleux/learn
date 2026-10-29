@@ -1,0 +1,133 @@
+---
+module_id: "cs-016-make-cancellation-an-explicit-pipeline-outcome"
+department: "computer-science"
+course: "Make Cancellation an Explicit Pipeline Outcome"
+title: "Make Cancellation an Explicit Pipeline Outcome"
+level: "intermediate"
+prerequisites: ["cs-011-preserve-absence-and-failure-boundaries"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Make Cancellation an Explicit Pipeline Outcome
+
+> **Draft scope.** Source-assisted authored fixed models. Human technical, fluent-language and learner decisions remain pending. No live fleet, production controller, user telemetry or learning improvement is claimed. The validation journal distinguishes tests actually executed from source reading and planned checks.
+
+## Sources to inspect
+
+- [cs-011-preserve-absence-and-failure-boundaries.md](../../computer-science/en/cs-011-preserve-absence-and-failure-boundaries.md)
+- [GaAsync.fs](https://raw.githubusercontent.com/GuitarAlchemist/ga/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.DSL/Closures/GaAsync.fs)
+- [cancellation-in-managed-threads](https://learn.microsoft.com/dotnet/standard/threading/cancellation-in-managed-threads)
+
+A coordinator asks an audio-analysis pipeline to stop and receives a successful response from the cancellation request. Has every branch stopped, and can its output file be deleted? The answer requires branch observations. GA's pinned error union contains a cancellation case, but the existence of that case does not show where every operation observes a request. The prerequisite deliberately leaves cancellation safety open; this lesson supplies a small audit model rather than filling that gap with a claim.
+
+Microsoft's cancellation documentation describes a cooperative request and a listener that must respond. Read its introductory mechanism, then keep the request receipt separate from terminal evidence. In our authored ledger, all named attempts receive a request. One acknowledges cancellation before its effect, another completes and records a write, and the last has no terminal observation. The packet's counts are exact consequences of those stipulated records. They are not measurements of a GA service.
+
+An attempt identity matters because a late acknowledgment could otherwise be attached to a replacement attempt. A timestamp helps locate an event but does not replace that identity. Preserve the event that says an effect occurred even when a later request asks the worker to stop. Cancellation does not itself compensate a completed write. Any deletion or reversal needs its own authority, effect model and evidence. Do not use a desired final state as a substitute for an observed one.
+
+The negative control is a ledger containing requests and no acknowledgments. A reporter that labels that ledger cancelled is inferring the outcome from its own command. Our reporter must retain unknown. Unknown also differs from a failed attempt: it can mean a delayed response, missing receipt or lost observation. A retry may create another effect while the original is still active, so this lesson does not recommend retrying from that category alone.
+
+For the actual source-assisted task, read the error union, the asynchronous wrapper and the dependent bind in the pinned GA file. Mark which lines describe returned errors and which would be needed to establish a terminal cancellation contract. Use a hand-drawn event table as the baseline. Ask an assistant to classify the same ledger and cite its source scope. Reject its answer if a stop request becomes a rollback guarantee or if it claims a runtime cancellation test that this exercise never performed.
+
+## Fixed case and expected calculations
+
+```json
+{
+  "values": {
+    "requested": [
+      "A",
+      "B",
+      "C"
+    ],
+    "acknowledged_cancelled": [
+      "A"
+    ],
+    "completed": [
+      "B"
+    ],
+    "unknown": [
+      "C"
+    ],
+    "B_effect": "written"
+  },
+  "formula": "requested set partitions by observed terminal evidence, not by request count",
+  "expected": {
+    "requests": 3,
+    "cancelled": 1,
+    "completed": 1,
+    "unknown": 1,
+    "safe_to_claim_all_cancelled": false
+  },
+  "negative_control": "A request-only record has no acknowledged cancellation.",
+  "assumptions": [
+    "A terminal acknowledgment refers to the same attempt identity; effects are independently recorded."
+  ],
+  "limits": "No GA cancellation delivery, rollback or distributed stop was executed."
+}
+```
+
+## Retain a source-assisted learner attempt
+
+Work from the pinned inputs listed above. Before asking for assistance, write your own prediction for the fixed case and its negative control, including the unit of every quantity and the exact comparison boundary. A short paper table is the direct manual baseline. Keep intermediate values, especially any result that contradicts your first prediction. This is an explanation task using existing sources and fixed data; it does not require installing a package, calling a paid service or introducing a new program.
+
+Next use an assistant to locate the relevant source passage and critique your calculation. Retain the original prompt, the response, the source location it cited and the changes you accepted or rejected. A citation is useful only when its inspected content supports the specific claim. A declared stage, a data type and a prose comment supply different kinds of evidence from an executed outcome. Explain that boundary in the final answer rather than borrowing the authority of a successful-looking label.
+
+Submit the manual baseline, corrected result, control outcome, falsifier and assistance history together. The prepared learner criteria ask whether the scope was identified, the calculation was correct, the counterexample was retained, the source supported the explanation and the conclusion respected its limits. Their decisions remain undecided until an actual learner answer exists. Answer keys below are prepared corrections, not evidence that anyone learned the material. A reviewer should preserve a failed criterion and its reason before any refinement, then judge the revised attempt separately. Runtime evidence and publication evidence, if later collected, need their own revision-bound records.
+
+### Exercise 1
+
+Count the requests and terminal categories.
+
+<details>
+<summary>Answer 1</summary>
+
+`3` requests; `1` cancelled, `1` completed, `1` unknown.
+
+</details>
+
+### Exercise 2
+
+May B be reported as rolled back?
+
+<details>
+<summary>Answer 2</summary>
+
+No. B has a recorded write and completion; no compensation receipt exists.
+
+</details>
+
+### Exercise 3
+
+What does the request-only control establish?
+
+<details>
+<summary>Answer 3</summary>
+
+Only requests were sent; every terminal outcome remains unknown.
+
+</details>
+
+### Exercise 4
+
+Why retain attempt identity?
+
+<details>
+<summary>Answer 4</summary>
+
+To prevent a late acknowledgment from being assigned to a replacement attempt.
+
+</details>
+
+### Exercise 5
+
+Does the error union prove cooperative delivery?
+
+<details>
+<summary>Answer 5</summary>
+
+No. A representable case is not an observed request, acknowledgment or rollback.
+
+</details>
+
+[Fixed evidence packet](../../../../code/streeling/evidence/batch50-2026-10-23/unit-b.json) · [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-23/journal.md)

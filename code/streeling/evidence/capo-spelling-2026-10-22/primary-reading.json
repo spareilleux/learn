@@ -1,0 +1,53 @@
+{
+  "scope": "Actual primary documentation/author text read; source definitions motivate authored arithmetic, not observed instrument or application behavior.",
+  "references": [
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/capo/",
+      "read": "Capo changes staff-tuning open pitches by the specified half-steps; initial fetch failed, later actual body read."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fret/",
+      "read": "Open-string0 and first-fret1 definition; does not alone choose an application capo-coordinate convention."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/string/",
+      "read": "String1 denotes highest pitched full-length string."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/diatonic/",
+      "read": "Written-to-sounding letter-step transposition, separate from octave change, for enharmonic spelling."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/chromatic/",
+      "read": "Written-to-sounding semitones, excluding octave-change contribution."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/mode/",
+      "read": "Major/minor and other named modes; not only two possible contexts."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fifths/",
+      "read": "Traditional key-signature sharp/flat count, distinct from a tonic register."
+    },
+    {
+      "url": "https://openmusictheory.github.io/scales.html",
+      "read": "Actual legacy author-published major/minor step, tonic, scale-degree and movable-do text; images not claimed inspected.",
+      "used_for": "Declared scale-degree interpretation, not universal cultural classification or a learning effect."
+    }
+  ],
+  "failed_unused_attempts": [
+    {
+      "url": "https://viva.pressbooks.pub/openmusictheory/chapter/major-scales/",
+      "status": 403,
+      "body_read": false
+    },
+    {
+      "url": "https://lilypond.org/doc/v2.24/Documentation/learning/pitches.html",
+      "status": "web inaccessible",
+      "body_read": false
+    }
+  ],
+  "service_revision_for_theory_probes": null,
+  "new_native_run": null,
+  "actual_learner": null
+}

@@ -1,0 +1,954 @@
+{
+  "audit": "Independent AI course/content review",
+  "checked_at_utc": "2026-10-22T20:45:06.328100+00:00",
+  "verdict": "pass_with_declared_evidence_limits",
+  "coverage": {
+    "modules": 3,
+    "locales": [
+      "en",
+      "fr",
+      "es"
+    ],
+    "course_sources": 9,
+    "exercise_answer_pairs": 45,
+    "learner_criteria": 15
+  },
+  "method": [
+    "Substantively read all nine localized pages and all45exercise-answer pairs; compared French/Spanish meaning against English beyond mechanical parity.",
+    "Read experiment plan,README,prepared learner task,all15rubric criteria,fixed numerical method/summary fields,input/public-asset receipts,final support receipts and independent123check data audit.",
+    "Inspected pinned vendored engine excite source for requested/clamped frequency,integer delay,fractional remainder and stored frequency. Separated new numerical reanalysis from historical engine run and nominal input from measured physical pitch.",
+    "Independently recomputed floor/ratio,RMS,opposing A/B cent changes,lag538frequency/deviation,all display errors,arithmetic/log/geometric summaries and median. Independent data audit separately covers full spectral/lag-array reanalysis.",
+    "Viewed actual1600x960PNG: four valid errors including+1200cents and six distinct availability rows, with only a horizontal zero reference, no connected trace or confidence intervals.",
+    "Independently read actual PubMed indexed Oxenham2012abstract. Bounded paraphrase is supported; full paper,associated stimuli,playback and participant experiment were not reproduced.",
+    "Read prerequisite openings and final receipt scopes. Independently verified nine byte hashes,metadata except title,ordered hrefs,inline/fenced code,numeric multisets,UTF8/LF,five pairs per source,all data-audit input hashes and inventory counts excluding department README files."
+  ],
+  "findings": [],
+  "resolved_findings": [
+    {
+      "module": "COG005",
+      "locales": [
+        "fr",
+        "es"
+      ],
+      "issue": "Initial translations used moyenne quadratique / media cuadrática for mean-square.07, terms that can denote RMS and conflict with the stated RMS.264575131.",
+      "resolution": "French now uses moyenne des carrés in explanation,exercise prompt and answer. Spanish uses valor medio de los cuadrados / media de los cuadrados in the same three locations; RMS remains sqrt(.07)approximately.264575131.",
+      "verification": "Re-read all corrected lines; ambiguous terms absent and corrected mean-of-squares terms present in all three locations. Final source hashes bound below.",
+      "status": "resolved"
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-005-separate-a-partial-peak-from-a-period.md",
+      "bytes": 9567,
+      "sha256": "074fcd679fe05c9ec0592b6d4d0589fb7edc7c21dd1769002609335f14c42e79"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-005-separate-a-partial-peak-from-a-period.fr.md",
+      "bytes": 11532,
+      "sha256": "bc1509e855e745e02ff73e6d13beaaee7b53466ff6c0bc6d2971ad659a3facd4"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-005-separate-a-partial-peak-from-a-period.es.md",
+      "bytes": 11212,
+      "sha256": "8c7b965402099c3abd40a2cf4d39bc5e008aa160e9da986c73a46119cc4d6357"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-005-separate-pitch-estimates-from-listener-reports.md",
+      "bytes": 8736,
+      "sha256": "8e3d710484cd9d30a79681670a757eab63b7b39670a8d2145182aab2874ead32"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/fr/cog-005-separate-pitch-estimates-from-listener-reports.fr.md",
+      "bytes": 10643,
+      "sha256": "c79a84335748a64f448ea4ad42b1642c5112cd2d54c15756dc6db67356ee61a2"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/es/cog-005-separate-pitch-estimates-from-listener-reports.es.md",
+      "bytes": 10275,
+      "sha256": "0367804d6411355f67ed67b59b8170b5a926fe643c87353dee65efe122ef49d8"
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-010-show-pitch-errors-and-missing-estimates.md",
+      "bytes": 8771,
+      "sha256": "130010520b74d9cbdf789771f447cba07a9cf4d22f518f91ce56192011b6498e"
+    },
+    {
+      "path": "streeling/courses/data-visualization/fr/dv-010-show-pitch-errors-and-missing-estimates.fr.md",
+      "bytes": 10778,
+      "sha256": "36eeb59aa05ff67ffb3b4e1ea65310e98af2c02c855bda1dc5f1b39f777abfe3"
+    },
+    {
+      "path": "streeling/courses/data-visualization/es/dv-010-show-pitch-errors-and-missing-estimates.es.md",
+      "bytes": 10228,
+      "sha256": "9e05d007a28429279b6483d189095e2e721668ea1e152ae274bfc8b3ff2fb58b"
+    }
+  ],
+  "prerequisite_bindings": [
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-001-open-string-audio-evidence.md",
+      "bytes": 15820,
+      "sha256": "d5c0adb7e789d9599b46fc51e3c5df45afa352a82027482fd70c2cabaaf10b42"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-006-calibrate-spectral-amplitudes.md",
+      "bytes": 9459,
+      "sha256": "b2fe07f89c5cf3c9f46cd1204a8a8ca1e22559338e57c033309fcd7996966d54"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-004-score-a-pitch-discrimination-task.md",
+      "bytes": 9138,
+      "sha256": "8f4f31ab1dc08de69d571be9b513ad30002ccdecdbaf2675a2ca9c0f3744c69e"
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-003-instrument-cohorts-and-units.md",
+      "bytes": 9518,
+      "sha256": "21acb387bd26835e913da544f67a0930c24b25579c4adc724327457ccce30d15"
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-009-compare-spectrogram-color-scales.md",
+      "bytes": 9066,
+      "sha256": "819f2a5ca8e34b1b0f205773c3b570a71e033f9a6e298b384820bc0ce1d03135"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-004-run-open-e-decay-candidate.md",
+      "bytes": 9387,
+      "sha256": "9e8d8019c04871e849621638b58673c839d243fa30830087f4b24218804bb227"
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/asset-readback.json",
+      "bytes": 1979,
+      "sha256": "35e83ee8f7877ed65b9020800043989f41083a8d1fb480e683971c34c1336ca1"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/baseline-native.f32le",
+      "bytes": 705600,
+      "sha256": "e924c20a4305783870ae6a373b46844c5431a25bad7ec80d76fc1569cdee8363"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/bindings.json",
+      "bytes": 4281,
+      "sha256": "3e1dc4f96aea779c8b1c9fba79afd52b698d49ebd3e340c27e55fc81ba6cccd2"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/data-audit.json",
+      "bytes": 17742,
+      "sha256": "85167ebee2bee628fe7a78f28eb59c3d9e36c653c3062777232d211526c4273d"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/execution.json",
+      "bytes": 1176,
+      "sha256": "63447673b42d269eb95f7b24a9aed02871a2f87020781c306675b1c1dacdd75f"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/experiment-plan.md",
+      "bytes": 7617,
+      "sha256": "18a5f47d468e8975a30c5e9cb1bc6c081f1b27144bd1d92e1f4fdf0b07e9d0cd"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/input-bindings.json",
+      "bytes": 1159,
+      "sha256": "e60a7ecc0ee36c5d44535b42cbf52c0838b9a665eba106ff934c1e1ebe06002e"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/learner-task.md",
+      "bytes": 2951,
+      "sha256": "56e132cd7d9e63893b80910e6a115ce4d00d4379e116c8561f8433272966b657"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/locale-checks.json",
+      "bytes": 2972,
+      "sha256": "80acde39c1d38471b42e93ce19680a1d1d9e8377501e0dc2f1e89c1ce36cbe94"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/native-pitch-windows.json",
+      "bytes": 96135,
+      "sha256": "0b68813b5d7293a098e41955692fe3cc90013708380bd9545c645652a144892d"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/official-links.json",
+      "bytes": 3843,
+      "sha256": "57f3834bcdbaeae3415b41bc858a1bd5d3e03617d8839139b9e1971e6be5f9f4"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/pitch-errors-and-availability.png",
+      "bytes": 77816,
+      "sha256": "c553be8580299dec3e7d74e80cee1750edaa42f76dfaa20233a04eb198279d0f"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/pitch-trace.json",
+      "bytes": 1864,
+      "sha256": "52cbcf7fd045ba36b154981843697c587a7df62c7b00c6b127548a880bf0107b"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/plot-points.json",
+      "bytes": 1829,
+      "sha256": "f9a6942a6c24c8a9421be856216b1b8d867a717c0686a2f2cc37137a8a6a68f1"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/primary-readback.json",
+      "bytes": 653,
+      "sha256": "0c2cecdf648f6a691d41f1d3d76cde4ff32ed77a8118bbd0f8b0772bba097c0c"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/README.md",
+      "bytes": 5026,
+      "sha256": "9adb0f1180ba62cf93e00db0597f5eb635afb2d5cd060bc8aeb32811800e1613"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/reviewer-rubric.json",
+      "bytes": 4619,
+      "sha256": "9afabd291481f5a2bb2b499adb4561ac63c2065506f79731b33553958939a15b"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/source-inventory.json",
+      "bytes": 1177,
+      "sha256": "4d646263d78a5dbd1f245ffe87c09be070a0abe9ae1a78bed80f6781f5d74ab7"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-estimates-2026-10-22/synthetic-periods.json",
+      "bytes": 27520,
+      "sha256": "ac43642dfc5705c786e62d81f66fc832f31143a596e5dfd58dc5c80c7c55263f"
+    }
+  ],
+  "exercise_answer_checks": [
+    {
+      "module": "GAS005",
+      "locale": "en",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-acoustics/en/gas-005-separate-a-partial-peak-from-a-period.md",
+      "exercise_answer_block_sha256": "a120aeed25c5f2cf6562c3552464c8d13d7eaa6fbe094128b24584211edbd836",
+      "review": "Derives nominal real-arithmetic floor535 and integer-only ratio82.429906542Hz; distinguishes stored request, fractional delay/filter state and measured output."
+    },
+    {
+      "module": "GAS005",
+      "locale": "en",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-acoustics/en/gas-005-separate-a-partial-peak-from-a-period.md",
+      "exercise_answer_block_sha256": "1e5b04d42732a9bb53a08bbeadcd782604011a5ae37511a10a4b8f401f8a9907",
+      "review": "Identifies strongest1000Hz, absent200Hz component and period1/200second=240samples through5/6/7harmonic cycles; does not infer listener pitch."
+    },
+    {
+      "module": "GAS005",
+      "locale": "en",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-acoustics/en/gas-005-separate-a-partial-peak-from-a-period.md",
+      "exercise_answer_block_sha256": "770e4c5c91fcdb58c3a2007c64ae57f4fb8fbb1618ad748cefd730f8d7f36ec0",
+      "review": "Converts recurrences240/480 to200/100Hz and retains both with shortest-tie rule; a period multiple is neither a supplied component nor independent octave/perceptual confidence."
+    },
+    {
+      "module": "GAS005",
+      "locale": "en",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-acoustics/en/gas-005-separate-a-partial-peak-from-a-period.md",
+      "exercise_answer_block_sha256": "0f5779ef18a187331fa8e17ffd6cdebe4a9751c4bb56a77199205924b6f827fe",
+      "review": "Computes lag538frequency81.970260223Hz and deviation-9.197475196cents; retains failed5cent nominal-reference check despite score>.999, without physical calibration/new render claims."
+    },
+    {
+      "module": "GAS005",
+      "locale": "en",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-acoustics/en/gas-005-separate-a-partial-peak-from-a-period.md",
+      "exercise_answer_block_sha256": "ae9197cc4ced0a782027676d017db3fe25d37cd0df55ffc16c43c9881765a6f9",
+      "review": "Reports four retained estimates and zero proximity passes; proposes estimator calibration while preserving missing listening/render observations and historical decay failure."
+    },
+    {
+      "module": "GAS005",
+      "locale": "fr",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-acoustics/fr/gas-005-separate-a-partial-peak-from-a-period.fr.md",
+      "exercise_answer_block_sha256": "b2bbdd116bed79260eda98cb46af5c3461eb16e19b93950e456558fb280ff001",
+      "review": "Derives nominal real-arithmetic floor535 and integer-only ratio82.429906542Hz; distinguishes stored request, fractional delay/filter state and measured output."
+    },
+    {
+      "module": "GAS005",
+      "locale": "fr",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-acoustics/fr/gas-005-separate-a-partial-peak-from-a-period.fr.md",
+      "exercise_answer_block_sha256": "8a2ae42b2e4e6742d84e0db652b831c0af8860094f8e4169b572ca360b9fa8f8",
+      "review": "Identifies strongest1000Hz, absent200Hz component and period1/200second=240samples through5/6/7harmonic cycles; does not infer listener pitch."
+    },
+    {
+      "module": "GAS005",
+      "locale": "fr",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-acoustics/fr/gas-005-separate-a-partial-peak-from-a-period.fr.md",
+      "exercise_answer_block_sha256": "3eee425d521a96a437307eade2377c50d87c1a5e47f97b45633b854bed71456f",
+      "review": "Converts recurrences240/480 to200/100Hz and retains both with shortest-tie rule; a period multiple is neither a supplied component nor independent octave/perceptual confidence."
+    },
+    {
+      "module": "GAS005",
+      "locale": "fr",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-acoustics/fr/gas-005-separate-a-partial-peak-from-a-period.fr.md",
+      "exercise_answer_block_sha256": "3080983a30b372266b395db49defd4cadcbcca919e182f0c3e614f5e0f20c14f",
+      "review": "Computes lag538frequency81.970260223Hz and deviation-9.197475196cents; retains failed5cent nominal-reference check despite score>.999, without physical calibration/new render claims."
+    },
+    {
+      "module": "GAS005",
+      "locale": "fr",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-acoustics/fr/gas-005-separate-a-partial-peak-from-a-period.fr.md",
+      "exercise_answer_block_sha256": "1f82027773099989d5eb6064d7404a982818b1d3ae967b3b5f15fafe39f97ff5",
+      "review": "Reports four retained estimates and zero proximity passes; proposes estimator calibration while preserving missing listening/render observations and historical decay failure."
+    },
+    {
+      "module": "GAS005",
+      "locale": "es",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-acoustics/es/gas-005-separate-a-partial-peak-from-a-period.es.md",
+      "exercise_answer_block_sha256": "e7aa62c7e9604af6568027e2a24e88f006bcbd06426cbf3d3ad0b8407ebc61c5",
+      "review": "Derives nominal real-arithmetic floor535 and integer-only ratio82.429906542Hz; distinguishes stored request, fractional delay/filter state and measured output."
+    },
+    {
+      "module": "GAS005",
+      "locale": "es",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-acoustics/es/gas-005-separate-a-partial-peak-from-a-period.es.md",
+      "exercise_answer_block_sha256": "d7a7d7f9743ba8f0cd1ad8f1130bf20b80b80bdd552cc4b36522db4a31c4ee76",
+      "review": "Identifies strongest1000Hz, absent200Hz component and period1/200second=240samples through5/6/7harmonic cycles; does not infer listener pitch."
+    },
+    {
+      "module": "GAS005",
+      "locale": "es",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-acoustics/es/gas-005-separate-a-partial-peak-from-a-period.es.md",
+      "exercise_answer_block_sha256": "df2963ceee77ba5df5a0963e7f357ecbd512cf48af6f28b6ee4b4f5f44076836",
+      "review": "Converts recurrences240/480 to200/100Hz and retains both with shortest-tie rule; a period multiple is neither a supplied component nor independent octave/perceptual confidence."
+    },
+    {
+      "module": "GAS005",
+      "locale": "es",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-acoustics/es/gas-005-separate-a-partial-peak-from-a-period.es.md",
+      "exercise_answer_block_sha256": "634f89af1a9c1fdd594fca31a5f6f65a8645b4a953871d476a5dfb51ed3ef0ca",
+      "review": "Computes lag538frequency81.970260223Hz and deviation-9.197475196cents; retains failed5cent nominal-reference check despite score>.999, without physical calibration/new render claims."
+    },
+    {
+      "module": "GAS005",
+      "locale": "es",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/guitar-acoustics/es/gas-005-separate-a-partial-peak-from-a-period.es.md",
+      "exercise_answer_block_sha256": "6fb1fa78102ceac30aad7cfed9d114347115b3fd9905af1da9cd775a4079668d",
+      "review": "Reports four retained estimates and zero proximity passes; proposes estimator calibration while preserving missing listening/render observations and historical decay failure."
+    },
+    {
+      "module": "COG005",
+      "locale": "en",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/en/cog-005-separate-pitch-estimates-from-listener-reports.md",
+      "exercise_answer_block_sha256": "5ab0fcfd36d00f21c3cbedf1a8c2bd7eb04f5f0e5169998fbc43fb2d13c27ee8",
+      "review": "Distinguishes technical-reference agreement from perceived-height choice/match; preserves actual question, conditions, response and separate prediction without claiming realism or learning."
+    },
+    {
+      "module": "COG005",
+      "locale": "en",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/en/cog-005-separate-pitch-estimates-from-listener-reports.md",
+      "exercise_answer_block_sha256": "516daa6040364968f769e83747aa44a8d4c566cc5c003ce9fbe156d250c340d6",
+      "review": "Correctly ranks B higher by strongest1050vs1000Hz but A higher by repetition200vs150Hz; numerical opposition supplies no actual or universal listener response."
+    },
+    {
+      "module": "COG005",
+      "locale": "en",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/en/cog-005-separate-pitch-estimates-from-listener-reports.md",
+      "exercise_answer_block_sha256": "5302a9ec2a42f9d31566a5c3a9460ccce0b9b3b3170d6d1dd3b2c07adbccba79",
+      "review": "Derives mean of squares.07 and RMSsqrt(.07)=.264575131 for unfaded arrays; requires faded/encoded hashes, new measurements and presentation evidence instead of equal-loudness/playback claims."
+    },
+    {
+      "module": "COG005",
+      "locale": "en",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/en/cog-005-separate-pitch-estimates-from-listener-reports.md",
+      "exercise_answer_block_sha256": "c0298d8603fe84ac2e15d5260dafbdb7d8e9a0762c1541a16084902561b66537",
+      "review": "Removes model labels, declares counterbalanced order/question, retains responses and comprehension controls, and avoids diagnosing disagreement on ambiguous complexes."
+    },
+    {
+      "module": "COG005",
+      "locale": "en",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/en/cog-005-separate-pitch-estimates-from-listener-reports.md",
+      "exercise_answer_block_sha256": "e3b08ebcf02d591a254e682dea044a2876b58974153ad005098939da7d7abf4a",
+      "review": "Separates recurrence agreement, mathematical controls and retained failures from listener pitch, preference, correction or learning, each requiring its corresponding actual observations."
+    },
+    {
+      "module": "COG005",
+      "locale": "fr",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/fr/cog-005-separate-pitch-estimates-from-listener-reports.fr.md",
+      "exercise_answer_block_sha256": "5c0260fde4307b8e7a3a391e57ade4760a0ed59fda0905bc31118b5300c1803f",
+      "review": "Distinguishes technical-reference agreement from perceived-height choice/match; preserves actual question, conditions, response and separate prediction without claiming realism or learning."
+    },
+    {
+      "module": "COG005",
+      "locale": "fr",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/fr/cog-005-separate-pitch-estimates-from-listener-reports.fr.md",
+      "exercise_answer_block_sha256": "e8975b1dd6a516783aa3182038b27f6bf867559896816bfa409a8ec5b3a7b820",
+      "review": "Correctly ranks B higher by strongest1050vs1000Hz but A higher by repetition200vs150Hz; numerical opposition supplies no actual or universal listener response."
+    },
+    {
+      "module": "COG005",
+      "locale": "fr",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/fr/cog-005-separate-pitch-estimates-from-listener-reports.fr.md",
+      "exercise_answer_block_sha256": "82f068c4598566ebc08f898462428b2d91a729cb612859b3a4f128327d9d7fe2",
+      "review": "Derives mean of squares.07 and RMSsqrt(.07)=.264575131 for unfaded arrays; requires faded/encoded hashes, new measurements and presentation evidence instead of equal-loudness/playback claims."
+    },
+    {
+      "module": "COG005",
+      "locale": "fr",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/fr/cog-005-separate-pitch-estimates-from-listener-reports.fr.md",
+      "exercise_answer_block_sha256": "16b38b70bf39ed8878eb667c5ec4a983bbb3346838b4e380c2fe3ce601015ad3",
+      "review": "Removes model labels, declares counterbalanced order/question, retains responses and comprehension controls, and avoids diagnosing disagreement on ambiguous complexes."
+    },
+    {
+      "module": "COG005",
+      "locale": "fr",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/fr/cog-005-separate-pitch-estimates-from-listener-reports.fr.md",
+      "exercise_answer_block_sha256": "92ea585c59804ecf64c31bf81745f214a737525c41b204d23649c09f11983f53",
+      "review": "Separates recurrence agreement, mathematical controls and retained failures from listener pitch, preference, correction or learning, each requiring its corresponding actual observations."
+    },
+    {
+      "module": "COG005",
+      "locale": "es",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/es/cog-005-separate-pitch-estimates-from-listener-reports.es.md",
+      "exercise_answer_block_sha256": "0fe019151eaf84a83479cbbce761825133a0265128d2ec89b8e6ac58e35aadc0",
+      "review": "Distinguishes technical-reference agreement from perceived-height choice/match; preserves actual question, conditions, response and separate prediction without claiming realism or learning."
+    },
+    {
+      "module": "COG005",
+      "locale": "es",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/es/cog-005-separate-pitch-estimates-from-listener-reports.es.md",
+      "exercise_answer_block_sha256": "842365f4557294195094f1dd64ebb1b12a14b174d493969992630e4d164720cd",
+      "review": "Correctly ranks B higher by strongest1050vs1000Hz but A higher by repetition200vs150Hz; numerical opposition supplies no actual or universal listener response."
+    },
+    {
+      "module": "COG005",
+      "locale": "es",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/es/cog-005-separate-pitch-estimates-from-listener-reports.es.md",
+      "exercise_answer_block_sha256": "ac86011739eb111868833afb1c6eb59625d4965752c782a7f668fc45809cc831",
+      "review": "Derives mean of squares.07 and RMSsqrt(.07)=.264575131 for unfaded arrays; requires faded/encoded hashes, new measurements and presentation evidence instead of equal-loudness/playback claims."
+    },
+    {
+      "module": "COG005",
+      "locale": "es",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/es/cog-005-separate-pitch-estimates-from-listener-reports.es.md",
+      "exercise_answer_block_sha256": "eff209ddd9c349f15f28569755aea0c25a33b6bd21e62e0e1fc28864b7932f2d",
+      "review": "Removes model labels, declares counterbalanced order/question, retains responses and comprehension controls, and avoids diagnosing disagreement on ambiguous complexes."
+    },
+    {
+      "module": "COG005",
+      "locale": "es",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/es/cog-005-separate-pitch-estimates-from-listener-reports.es.md",
+      "exercise_answer_block_sha256": "85e50d446ce61653b7a9b6f1336a3ec0aebf22bd8f6752bd57dfcdd8b2723f06",
+      "review": "Separates recurrence agreement, mathematical controls and retained failures from listener pitch, preference, correction or learning, each requiring its corresponding actual observations."
+    },
+    {
+      "module": "DV010",
+      "locale": "en",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/data-visualization/en/dv-010-show-pitch-errors-and-missing-estimates.md",
+      "exercise_answer_block_sha256": "1d745acc109dade3db9984a4c747fab1885f52d4d7b560ebf10343f176c1004d",
+      "review": "Retains four positive finite rows, missing null and invalid zero as distinct states; unavailable states do not become zero cents or interpolated observations."
+    },
+    {
+      "module": "DV010",
+      "locale": "en",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/data-visualization/en/dv-010-show-pitch-errors-and-missing-estimates.md",
+      "exercise_answer_block_sha256": "8de3f7f28e24438ee23cc890aab2ec3b9ce8613b010c52cbfaca3d821b6e207a",
+      "review": "Computes200/100 as+1200cents and preserves the octave point; an optional declared octave-invariant metric cannot silently rewrite displayed/evaluated rows."
+    },
+    {
+      "module": "DV010",
+      "locale": "en",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/data-visualization/en/dv-010-show-pitch-errors-and-missing-estimates.md",
+      "exercise_answer_block_sha256": "a8b622e0d47dc37417d5550506d5986f0797afc1d29ef124f6706a3bee36049e",
+      "review": "Distinguishes nonlinear summaries386.313713865vs299.989179652cents and retains median4.317300843 with maximumabsolute1200, without invented uncertainty or general quality verdict."
+    },
+    {
+      "module": "DV010",
+      "locale": "en",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/data-visualization/en/dv-010-show-pitch-errors-and-missing-estimates.md",
+      "exercise_answer_block_sha256": "5416232b8351f4d65cb27115e351998820584fb33d1c1fb77aeab8166b96a1b3",
+      "review": "Reports coverage4/6, conditional3/4 and joint3/6 with full denominators and declared10cent rule, as authored-fixture results rather than deployment/listener performance."
+    },
+    {
+      "module": "DV010",
+      "locale": "en",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/data-visualization/en/dv-010-show-pitch-errors-and-missing-estimates.md",
+      "exercise_answer_block_sha256": "1cdfa7d21b84daf6b93a19313070743df903324d95bbe1ffed181464a780830f",
+      "review": "Relabels recurrence as signal agreement; retains native check failures, separates actual windows from authored rows, exposes unavailable states and rejects invented listener validation."
+    },
+    {
+      "module": "DV010",
+      "locale": "fr",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/data-visualization/fr/dv-010-show-pitch-errors-and-missing-estimates.fr.md",
+      "exercise_answer_block_sha256": "6894a51adadb0202099792923070b4125002c7e5bcd878d22707bb91e8f2ca61",
+      "review": "Retains four positive finite rows, missing null and invalid zero as distinct states; unavailable states do not become zero cents or interpolated observations."
+    },
+    {
+      "module": "DV010",
+      "locale": "fr",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/data-visualization/fr/dv-010-show-pitch-errors-and-missing-estimates.fr.md",
+      "exercise_answer_block_sha256": "05a56df518f6c08d978e27a116ede0080ff530f7bbf450473cd56e74c3f17760",
+      "review": "Computes200/100 as+1200cents and preserves the octave point; an optional declared octave-invariant metric cannot silently rewrite displayed/evaluated rows."
+    },
+    {
+      "module": "DV010",
+      "locale": "fr",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/data-visualization/fr/dv-010-show-pitch-errors-and-missing-estimates.fr.md",
+      "exercise_answer_block_sha256": "cdf5367a775a14786db266a06ba80f0a78f224cd3363682546a17ccfdc04dff0",
+      "review": "Distinguishes nonlinear summaries386.313713865vs299.989179652cents and retains median4.317300843 with maximumabsolute1200, without invented uncertainty or general quality verdict."
+    },
+    {
+      "module": "DV010",
+      "locale": "fr",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/data-visualization/fr/dv-010-show-pitch-errors-and-missing-estimates.fr.md",
+      "exercise_answer_block_sha256": "77c32bf8488e3a481afbd31e0e12586cdf3656e224adfac263c74d0efba686d1",
+      "review": "Reports coverage4/6, conditional3/4 and joint3/6 with full denominators and declared10cent rule, as authored-fixture results rather than deployment/listener performance."
+    },
+    {
+      "module": "DV010",
+      "locale": "fr",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/data-visualization/fr/dv-010-show-pitch-errors-and-missing-estimates.fr.md",
+      "exercise_answer_block_sha256": "d9337ae79d6dde97ec72cd1bd8ce61ca199cb4ce4e9d14c9f2fbb947b7abf0ee",
+      "review": "Relabels recurrence as signal agreement; retains native check failures, separates actual windows from authored rows, exposes unavailable states and rejects invented listener validation."
+    },
+    {
+      "module": "DV010",
+      "locale": "es",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/data-visualization/es/dv-010-show-pitch-errors-and-missing-estimates.es.md",
+      "exercise_answer_block_sha256": "038cac66b28c5436f578aa794bf3e4c61045931f543f5348ddc47e8810bd58fc",
+      "review": "Retains four positive finite rows, missing null and invalid zero as distinct states; unavailable states do not become zero cents or interpolated observations."
+    },
+    {
+      "module": "DV010",
+      "locale": "es",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/data-visualization/es/dv-010-show-pitch-errors-and-missing-estimates.es.md",
+      "exercise_answer_block_sha256": "5c864a0a74aaf0eca8678ea6de9ec812788b3c84dc46091c4f0720a0cae992f8",
+      "review": "Computes200/100 as+1200cents and preserves the octave point; an optional declared octave-invariant metric cannot silently rewrite displayed/evaluated rows."
+    },
+    {
+      "module": "DV010",
+      "locale": "es",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/data-visualization/es/dv-010-show-pitch-errors-and-missing-estimates.es.md",
+      "exercise_answer_block_sha256": "4554d9b711c23b0c73b22113f490b8655846c1936bc6d221e10784c0024e84d6",
+      "review": "Distinguishes nonlinear summaries386.313713865vs299.989179652cents and retains median4.317300843 with maximumabsolute1200, without invented uncertainty or general quality verdict."
+    },
+    {
+      "module": "DV010",
+      "locale": "es",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/data-visualization/es/dv-010-show-pitch-errors-and-missing-estimates.es.md",
+      "exercise_answer_block_sha256": "bf152c0c3c4d48f3efcf9728fe8cd95678d8caf4763e3d2834200329c36e5da5",
+      "review": "Reports coverage4/6, conditional3/4 and joint3/6 with full denominators and declared10cent rule, as authored-fixture results rather than deployment/listener performance."
+    },
+    {
+      "module": "DV010",
+      "locale": "es",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/data-visualization/es/dv-010-show-pitch-errors-and-missing-estimates.es.md",
+      "exercise_answer_block_sha256": "c3bd610b0676718f6c4a9eceb6db34bca42a90552d35841e32db0a91bf0e2bd7",
+      "review": "Relabels recurrence as signal agreement; retains native check failures, separates actual windows from authored rows, exposes unavailable states and rejects invented listener validation."
+    }
+  ],
+  "learner_criterion_checks": [
+    {
+      "module": "GAS005",
+      "criterion": 1,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Derives nominal real-arithmetic length535 and44100/535approximately82.429906542Hz; distinguishes requested/stored frequency and fractional/filter state from a measured output period or a new native Rust-f32 calculation.",
+      "review": "Prepared learner task and instruction align across all three locales. Derives nominal real-arithmetic floor535 and integer-only ratio82.429906542Hz; distinguishes stored request, fractional delay/filter state and measured output.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "GAS005",
+      "criterion": 2,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Reconstructs Acomponents1000/1200/1400Hz with amplitudes.3/.2/.1, strongest1000Hz, absent200Hz component and fundamental period1/200second=240samples at48000Hz; separates mathematical repetition from listener pitch.",
+      "review": "Prepared learner task and instruction align across all three locales. Identifies strongest1000Hz, absent200Hz component and period1/200second=240samples through5/6/7harmonic cycles; does not infer listener pitch.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "GAS005",
+      "criterion": 3,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Defines full-window mean removal and overlap-energy-normalized lag score, search144..576 and tolerance1e-12; preserves perfectA lags240/480, shortest-tie rule200Hz versus multiple100Hz and score-not-probability/octave-evidence distinction.",
+      "review": "Prepared learner task and instruction align across all three locales. Converts recurrences240/480 to200/100Hz and retains both with shortest-tie rule; a period multiple is neither a supplied component nor independent octave/perceptual confidence.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "GAS005",
+      "criterion": 4,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Binds actual retained native little-endian float32 buffer705600bytes/176400frames/44100Hz, four8820sample half-open windows, symmetric-Hann spectral50..500Hz/nointerpolation and unwindowed lags89..882; verifies538/539/539/539 and allfour reported but failed5cent nominal-reference checks, not physical truth or new engine output.",
+      "review": "Prepared learner task and instruction align across all three locales. Computes lag538frequency81.970260223Hz and deviation-9.197475196cents; retains failed5cent nominal-reference check despite score>.999, without physical calibration/new render claims.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "GAS005",
+      "criterion": 5,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Proposes independent estimator calibration across controlled frequencies/phase/filter/duration/octaves, retains source/method/resolution and absent listener/render outcomes, and preserves previous0.114166150dBvs1dB decay failure.",
+      "review": "Prepared learner task and instruction align across all three locales. Reports four retained estimates and zero proximity passes; proposes estimator calibration while preserving missing listening/render observations and historical decay failure.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "COG005",
+      "criterion": 1,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Separates known-period technical scoring, perceived-height choice, matched tone, preference and learning; retains actual question/conditions/response and algorithm prediction instead of defining perception by detector agreement.",
+      "review": "Prepared learner task and instruction align across all three locales. Distinguishes technical-reference agreement from perceived-height choice/match; preserves actual question, conditions, response and separate prediction without claiming realism or learning.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "COG005",
+      "criterion": 2,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Derives strongest-componentA1000toB1050Hz rising50Hz/+84.467193470cents versus repetitionA200toB150Hz falling50Hz/-498.044999135cents; treats them as opposing numerical models with no universal listener strategy or observed choice.",
+      "review": "Prepared learner task and instruction align across all three locales. Correctly ranks B higher by strongest1050vs1000Hz but A higher by repetition200vs150Hz; numerical opposition supplies no actual or universal listener response.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "COG005",
+      "criterion": 3,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Computes unfaded coherent mean-square.07,RMSsqrt.07approximately.264575131 and peak.6; requires actual faded/encoded hashes, remeasured levels/peaks and controlled playback before a listening trial or equal-loudness claim.",
+      "review": "Prepared learner task and instruction align across all three locales. Derives mean of squares.07 and RMSsqrt(.07)=.264575131 for unfaded arrays; requires faded/encoded hashes, new measurements and presentation evidence instead of equal-loudness/playback claims.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "COG005",
+      "criterion": 4,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Proposes label-masked counterbalanced A/Border, declared instructions/response/familiarization/exclusions and actual presentation records; uses pure-tone comprehension controls without treating complex disagreement as hearing error or diagnosis.",
+      "review": "Prepared learner task and instruction align across all three locales. Removes model labels, declares counterbalanced order/question, retains responses and comprehension controls, and avoids diagnosing disagreement on ambiguous complexes.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "COG005",
+      "criterion": 5,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Reports numerical controls/retained failures separately from listener pitch, realism/preference, correction or learning; limits research support to the indexed Oxenham abstract and requires corresponding actual observations for each future claim.",
+      "review": "Prepared learner task and instruction align across all three locales. Separates recurrence agreement, mathematical controls and retained failures from listener pitch, preference, correction or learning, each requiring its corresponding actual observations.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "DV010",
+      "criterion": 1,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Reconstructs authored100/200/null/100.5/0/99.5Hz table with reference100Hz, fourvalid/one missing/oneinvalid; applies logarithm only to positive finite reports and does not zero-fill or interpolate unavailable rows.",
+      "review": "Prepared learner task and instruction align across all three locales. Retains four positive finite rows, missing null and invalid zero as distinct states; unavailable states do not become zero cents or interpolated observations.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "DV010",
+      "criterion": 2,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Computes0,+1200,+8.634601685,-8.677883077cents, retains full octave point and distinguishes optional declared octave-invariant analysis from silent repair; interprets shared English figure and category coordinates without confusing them with measured errors.",
+      "review": "Prepared learner task and instruction align across all three locales. Computes200/100 as+1200cents and preserves the octave point; an optional declared octave-invariant metric cannot silently rewrite displayed/evaluated rows.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "DV010",
+      "criterion": 3,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Distinguishes meanfrequency125Hzâ†’386.313713865cents from mean299.989179652centsâ†’geometricmean118.919968239Hz, median4.317300843cents and maxabsolute1200; recognizes nonlinear aggregation and retained distribution/outliers without invented confidence intervals.",
+      "review": "Prepared learner task and instruction align across all three locales. Distinguishes nonlinear summaries386.313713865vs299.989179652cents and retains median4.317300843 with maximumabsolute1200, without invented uncertainty or general quality verdict.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "DV010",
+      "criterion": 4,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Computes coverage4/6approximately66.666666667percent, conditionalwithin10cent3/4=75percent and joint3/6=50percent under the predeclared availability-and-tolerance rule, retaining all denominators and unavailable states.",
+      "review": "Prepared learner task and instruction align across all three locales. Reports coverage4/6, conditional3/4 and joint3/6 with full denominators and declared10cent rule, as authored-fixture results rather than deployment/listener performance.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "DV010",
+      "criterion": 5,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Labels actual retained recurrence score as signal agreement rather than99.9percent correct-pitch probability, retains fourfailed5centchecks and no manufactured connecting observations/errorbars; keeps authoredplot/nativewindows/listener or deployment outcomes separate.",
+      "review": "Prepared learner task and instruction align across all three locales. Relabels recurrence as signal agreement; retains native check failures, separates actual windows from authored rows, exposes unavailable states and rejects invented listener validation.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    }
+  ],
+  "mechanical_parity_checks": [
+    {
+      "module": "GAS005",
+      "locale": "en",
+      "path": "streeling/courses/guitar-acoustics/en/gas-005-separate-a-partial-peak-from-a-period.md",
+      "metadata_except_title_identical": true,
+      "ordered_links_identical": true,
+      "inline_code_identical": true,
+      "fenced_code_identical": true,
+      "numeric_tokens_identical": true,
+      "utf8_no_bom_lf": true,
+      "exercise_answer_pairs": 5,
+      "semantic_review": "pass"
+    },
+    {
+      "module": "GAS005",
+      "locale": "fr",
+      "path": "streeling/courses/guitar-acoustics/fr/gas-005-separate-a-partial-peak-from-a-period.fr.md",
+      "metadata_except_title_identical": true,
+      "ordered_links_identical": true,
+      "inline_code_identical": true,
+      "fenced_code_identical": true,
+      "numeric_tokens_identical": true,
+      "utf8_no_bom_lf": true,
+      "exercise_answer_pairs": 5,
+      "semantic_review": "pass"
+    },
+    {
+      "module": "GAS005",
+      "locale": "es",
+      "path": "streeling/courses/guitar-acoustics/es/gas-005-separate-a-partial-peak-from-a-period.es.md",
+      "metadata_except_title_identical": true,
+      "ordered_links_identical": true,
+      "inline_code_identical": true,
+      "fenced_code_identical": true,
+      "numeric_tokens_identical": true,
+      "utf8_no_bom_lf": true,
+      "exercise_answer_pairs": 5,
+      "semantic_review": "pass"
+    },
+    {
+      "module": "COG005",
+      "locale": "en",
+      "path": "streeling/courses/cognitive-science/en/cog-005-separate-pitch-estimates-from-listener-reports.md",
+      "metadata_except_title_identical": true,
+      "ordered_links_identical": true,
+      "inline_code_identical": true,
+      "fenced_code_identical": true,
+      "numeric_tokens_identical": true,
+      "utf8_no_bom_lf": true,
+      "exercise_answer_pairs": 5,
+      "semantic_review": "pass"
+    },
+    {
+      "module": "COG005",
+      "locale": "fr",
+      "path": "streeling/courses/cognitive-science/fr/cog-005-separate-pitch-estimates-from-listener-reports.fr.md",
+      "metadata_except_title_identical": true,
+      "ordered_links_identical": true,
+      "inline_code_identical": true,
+      "fenced_code_identical": true,
+      "numeric_tokens_identical": true,
+      "utf8_no_bom_lf": true,
+      "exercise_answer_pairs": 5,
+      "semantic_review": "pass"
+    },
+    {
+      "module": "COG005",
+      "locale": "es",
+      "path": "streeling/courses/cognitive-science/es/cog-005-separate-pitch-estimates-from-listener-reports.es.md",
+      "metadata_except_title_identical": true,
+      "ordered_links_identical": true,
+      "inline_code_identical": true,
+      "fenced_code_identical": true,
+      "numeric_tokens_identical": true,
+      "utf8_no_bom_lf": true,
+      "exercise_answer_pairs": 5,
+      "semantic_review": "pass"
+    },
+    {
+      "module": "DV010",
+      "locale": "en",
+      "path": "streeling/courses/data-visualization/en/dv-010-show-pitch-errors-and-missing-estimates.md",
+      "metadata_except_title_identical": true,
+      "ordered_links_identical": true,
+      "inline_code_identical": true,
+      "fenced_code_identical": true,
+      "numeric_tokens_identical": true,
+      "utf8_no_bom_lf": true,
+      "exercise_answer_pairs": 5,
+      "semantic_review": "pass"
+    },
+    {
+      "module": "DV010",
+      "locale": "fr",
+      "path": "streeling/courses/data-visualization/fr/dv-010-show-pitch-errors-and-missing-estimates.fr.md",
+      "metadata_except_title_identical": true,
+      "ordered_links_identical": true,
+      "inline_code_identical": true,
+      "fenced_code_identical": true,
+      "numeric_tokens_identical": true,
+      "utf8_no_bom_lf": true,
+      "exercise_answer_pairs": 5,
+      "semantic_review": "pass"
+    },
+    {
+      "module": "DV010",
+      "locale": "es",
+      "path": "streeling/courses/data-visualization/es/dv-010-show-pitch-errors-and-missing-estimates.es.md",
+      "metadata_except_title_identical": true,
+      "ordered_links_identical": true,
+      "inline_code_identical": true,
+      "fenced_code_identical": true,
+      "numeric_tokens_identical": true,
+      "utf8_no_bom_lf": true,
+      "exercise_answer_pairs": 5,
+      "semantic_review": "pass"
+    }
+  ],
+  "independent_calculation_checks": [
+    {
+      "check": "requested delay and retained lag report",
+      "status": "pass",
+      "review": "floor44100/82.4069=535;44100/535=82.42990654205607Hz;44100/538=81.97026022304833Hz,-9.197475196375477cents against nominal input,exceeding5cents."
+    },
+    {
+      "check": "constructed signals and opposing comparisons",
+      "status": "pass",
+      "review": "Frequency GCDs200/150Hz give periods240/320samples; mean square.07,RMS.2645751311064591,peaks.6; component change+84.4671934696776cents versus repetition change-498.04499913461257cents."
+    },
+    {
+      "check": "display values and summaries",
+      "status": "pass",
+      "review": "Cents0,1200,8.634601685044519,-8.677883077291035; meanHz125 converts386.3137138648348cents,mean signed299.98917965193834,geometricHz118.91996823885712,median4.317300842522259,maxabsolute1200."
+    },
+    {
+      "check": "availability denominator",
+      "status": "pass",
+      "review": "Four positive finite reports of six rows; three within10cents. Coverage4/6,conditional3/4,joint3/6 preserve missing and invalid as distinct nonnumeric error states."
+    },
+    {
+      "check": "native and historical failures",
+      "status": "pass",
+      "review": "Independent dataaudit123verification checks pass while0/4native estimates pass nominal-reference proximity and historical decay improvement.11416614959438576dB<1dB remains failed."
+    },
+    {
+      "check": "actual figure",
+      "status": "pass",
+      "review": "Actual PNG agrees with all4valid errors and6availability states,including full1200cent outlier. Category positions are not pitch errors; no connecting trace or errorbars."
+    }
+  ],
+  "primary_page_checks": [
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23015422/",
+      "reviewer_read": "web.open actual indexed abstract,title,author,date and DOI",
+      "scope": "Abstract only: periodicity as principal physical correlate with interactions complicating pitch perception; no full-paper protocol,playback or participant observation."
+    }
+  ],
+  "course_separation": [
+    {
+      "module": "GAS005",
+      "decision": "Distinguishes partial frequency,constructed period,retained estimator report and requested input; calibrates before attributing discrepancy."
+    },
+    {
+      "module": "COG005",
+      "decision": "Preserves perceptual questions and actual response outcomes separately from model prediction,preference and learning."
+    },
+    {
+      "module": "DV010",
+      "decision": "Retains authored octave errors,unavailable states,nonlinear summaries and denominators while keeping actual native windows separate."
+    }
+  ],
+  "limits": [
+    "Independent AI review is not human technical,musician/listener,fluent-language or learner approval.",
+    "Unfaded mathematical arrays are not prepared played stimuli,participant responses,equal-loudness evidence or a replicated perceptual study.",
+    "Nominal82.4069Hz is a requested reference;5cents/.9are authored teaching/reporting choices,not physical ground truth,probabilities or a product standard.",
+    "Retained native samples were reanalysed without a new engine,WASM,browser,IX detector,GPU or playback run. Historical decay failure remains unchanged.",
+    "Original plot uses six authored100Hzreference rows,not a measured guitar trace,deployment sample or listener result. Shared English labels are explicitly explained in localized prose.",
+    "Official-link receipt distinguishes direct200raw/source bytes,PubMed203challenge body and NumPy403responses from separately retrieved actual primary content; no false successful direct request is claimed.",
+    "Local build/generation,immutable source/assets and source inventory186/525 do not establish deployed HTML or completion of the original reviewed/published goal."
+  ],
+  "human_technical_review": null,
+  "musician_listener_review": null,
+  "fluent_language_review": {
+    "en": null,
+    "fr": null,
+    "es": null
+  },
+  "learner_attempts": null,
+  "learner_transfer": null,
+  "playback_outcome": null,
+  "pitch_perception_outcome": null,
+  "preference_outcome": null,
+  "causal_learning_benefit": null,
+  "deployed_html_readback": null
+}

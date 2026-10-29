@@ -3,7 +3,7 @@ title: Set Classes, Interval Vectors, the Z-Relation and Prime Forms — Two Pac
 description: Set Classes, Interval Vectors, the Z-Relation and Prime Forms — Music
 sidebar:
   label: MUS-020 · Set Classes, Interval Vectors, the Z-Relation and Prime Forms
-  order: 17
+  order: 20
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/en/mus-020-set-classes-interval-vectors-prime-forms.md
 ---
 

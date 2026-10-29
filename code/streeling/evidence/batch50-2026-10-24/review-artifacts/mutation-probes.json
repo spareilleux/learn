@@ -1,0 +1,50 @@
+{
+  "command": "python -X utf8 -B review stdlib import probe",
+  "scope": "Three concrete substantive wrong model values, copied in memory; canonical packets and tests not written.",
+  "probes": [
+    {
+      "unit": "a",
+      "code": "AUD014",
+      "mutation": {
+        "gain": 0.25
+      },
+      "rejected": true,
+      "exception": "False is not true : result.mixed[0]: 0.4 != 0.8",
+      "stdout": "OBSERVATION {\"code\": \"AUD014\", \"case\": \"model\", \"observed\": {\"raw\": [1.6, -1.6, 0.8], \"mixed\": [0.4, -0.4, 0.2], \"peak\": 0.4, \"clipped_raw\": [1, -1, 0.8]}, \"expected\": {\"raw\": [1.6, -1.6, 0.8], \"mixed\": [0.8, -0.8, 0.4], \"peak\": 0.8, \"clipped_raw\": [1, -1, 0.8]}, \"scope\": \"Three aligned authored mono samples; linear summation and hard clipping only; no loudness.\"}\n",
+      "observations_before_rejection": 1
+    },
+    {
+      "unit": "b",
+      "code": "COG012",
+      "mutation": {
+        "false_positive": 0
+      },
+      "rejected": true,
+      "exception": "('result.false_alarm_rate', 0, 0.4)",
+      "stdout": "OBSERVATION {\"case\": \"model\", \"code\": \"COG012\", \"expected\": {\"accuracy\": 0.7, \"alert_rate\": 0.6, \"false_alarm_rate\": 0.4, \"hit_rate\": 0.8, \"separation\": 0.4}, \"observed\": {\"accuracy\": 0.875, \"alert_rate\": 0.5, \"false_alarm_rate\": 0, \"hit_rate\": 0.8, \"separation\": 0.8}, \"scope\": \"Authored external-key confusion counts; conditional rates are not psychological sensitivity.\"}\n",
+      "observations_before_rejection": 1
+    },
+    {
+      "unit": "c",
+      "code": "PHY017",
+      "mutation": {
+        "delta_K": 100
+      },
+      "rejected": true,
+      "exception": "False is not true : (0.4, 0.2)",
+      "stdout": "OBSERVATION {\"case\": \"model\", \"code\": \"PHY017\", \"expected\": {\"growth_mm\": 0.2, \"remaining_gap_mm\": 0.1}, \"observed\": {\"growth_mm\": 0.4, \"remaining_gap_mm\": -0.10000000000000003}, \"scope\": \"Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation.\"}\n",
+      "observations_before_rejection": 1
+    }
+  ],
+  "input_hashes_before": {
+    "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\unit-a.json": "d02838183a7161a34cb9ebd4a0c0a70f4fb572c20d03ea033b19ffe06a6e7987",
+    "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\unit-b.json": "3e25c7fe2cbe25b6e0be8dee147a6199369716f62bc595eb411607a22aa4b72d",
+    "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\unit-c.json": "3eada91eae5f5baef028d22e71296a99b3baea4280c2ed2de20dc8b25c502a41"
+  },
+  "input_hashes_after": {
+    "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\unit-a.json": "d02838183a7161a34cb9ebd4a0c0a70f4fb572c20d03ea033b19ffe06a6e7987",
+    "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\unit-b.json": "3e25c7fe2cbe25b6e0be8dee147a6199369716f62bc595eb411607a22aa4b72d",
+    "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\unit-c.json": "3eada91eae5f5baef028d22e71296a99b3baea4280c2ed2de20dc8b25c502a41"
+  },
+  "canonical_bytes_unchanged": true
+}

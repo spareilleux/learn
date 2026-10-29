@@ -1,0 +1,1501 @@
+{
+  "audit_kind": "native static content preflight",
+  "checked_at_utc": "2026-10-22T04:27:50.289722Z",
+  "status": "complete bounded static pass; no unresolved content/translation/packet finding",
+  "formal_review": false,
+  "human_approval": false,
+  "learn_checkout": "C:\\tmp\\learn-streeling-craft-transfer-20261022",
+  "base_learn_commit": "0eca002201ba273dfe7348c724bd57ddea9b0568",
+  "scope": [
+    "Final 18 source files: six existing English plus twelve French/Spanish drafts",
+    "Six exact base-blob reconstructions with declared VC005 replacements and chronology insertions",
+    "Eighteen destination SHA records; twelve final/pre-chronology English and translation bindings",
+    "Twelve locale metadata, href multiset, fenced/inline code and numeric multiset comparisons",
+    "Native static meaning review of translations, exercises and historical/runtime/human/cultural caveats",
+    "Six source-assisted learner stimuli/prompts and separate expected-answer rubric"
+  ],
+  "exclusions": [
+    "No network, app/session action, Blender/Godot/IXQL runtime, build or test execution",
+    "No repository source edits, staging, formal review, human approval or publication",
+    "Root-owned public input and extracted/unchanged teaching replay executions were not duplicated"
+  ],
+  "manifest": "code/streeling/evidence/locale-completion-2026-10-22/bindings.json",
+  "bindings": [
+    {
+      "path": "streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md",
+      "sha256": "34b464061549b75e54058e76896bbec739e197a1f8cf7e54b837a5698e01f531",
+      "hash_matches": true,
+      "base_hash_matches": true,
+      "base_blob_matches": true,
+      "exact_reconstruction": true,
+      "pre_note_sha256": "07b816b0fb6756c8552ceb24ef9d88d312e5425020c093247b9985b87c46d175"
+    },
+    {
+      "path": "streeling/courses/computer-science/en/cs-006-ixql-pipeline-composition.md",
+      "sha256": "7077ccb18a5e5ac03bc3d0e0eaa89dc12e4c64ec09abcd143967da515f484117",
+      "hash_matches": true,
+      "base_hash_matches": true,
+      "base_blob_matches": true,
+      "exact_reconstruction": true,
+      "pre_note_sha256": "49ba1f2da3a2f007d81d41c68309e660917f953dffa9d8856243b23714ad5728"
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-002-godot-react-bridge-evidence.md",
+      "sha256": "aa5e1f7baeea211521c44ac7ee406be35d810d9386484d2d99e774a88afd2e56",
+      "hash_matches": true,
+      "base_hash_matches": true,
+      "base_blob_matches": true,
+      "exact_reconstruction": true,
+      "pre_note_sha256": "a7367d45880c6731a19c598b4117a2047fe54b03bea169ff64559cf218b48a29"
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-004-godot-observatory-capture-gate.md",
+      "sha256": "670c1ad35ba5231fe812e3b4144934ae5bd56faad92b2177bd4bb73a87c0eaa7",
+      "hash_matches": true,
+      "base_hash_matches": true,
+      "base_blob_matches": true,
+      "exact_reconstruction": true,
+      "pre_note_sha256": "bec735bd24232900c16b0d68ded5b7adf7ce5bfedc03d7eae83fdd5e8fd832ad"
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md",
+      "sha256": "5fbad318a7815657d4cc1be13c1d6a7c265a732e3121d901bd35c994c9227d8d",
+      "hash_matches": true,
+      "base_hash_matches": true,
+      "base_blob_matches": true,
+      "exact_reconstruction": true,
+      "pre_note_sha256": "bde01b139bddc60468e3bcdf18ef8adae7d5863077b56b3f3257456a22c73351"
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-007-weave-seams-as-scene-contracts.md",
+      "sha256": "7fb0cf78216e9a35e4b27d84bb9327efe1f8aa42f3bb861d4e9bee8200e0c2a5",
+      "hash_matches": true,
+      "base_hash_matches": true,
+      "base_blob_matches": true,
+      "exact_reconstruction": true,
+      "pre_note_sha256": "4ddf40807c786699261f11f3e6e19eed19e33845ee6de5c3a6e6c613fe4d6275"
+    },
+    {
+      "path": "streeling/courses/computer-science/fr/cs-005-agent-handoff-evidence-contract.fr.md",
+      "locale": "fr",
+      "sha256": "9d04890ef24629c532bcd25ff9f8bac455cd6ea90063b1aca0b8ba7ff3d4903d",
+      "hash_matches": true,
+      "english_hash_matches": true,
+      "pre_note_hash_matches": true,
+      "english_pre_note_hash_matches": true,
+      "metadata_matches": true,
+      "href_matches": true,
+      "fence_matches": true,
+      "inline_code_matches": true,
+      "number_matches": true,
+      "note_occurrences": 1,
+      "relative_links": [
+        {
+          "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+          "exists": true,
+          "literal_file_exists": true
+        },
+        {
+          "href": "cs-002-governing-agentic-loops.md",
+          "exists": false,
+          "literal_file_exists": false,
+          "canonical_english_path": "streeling/courses/computer-science/en/cs-002-governing-agentic-loops.md",
+          "canonical_english_exists": true,
+          "localized_target_path": "streeling/courses/computer-science/fr/cs-002-governing-agentic-loops.fr.md",
+          "localized_target_exists": true,
+          "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+        }
+      ],
+      "exercises": 5,
+      "answers": 5
+    },
+    {
+      "path": "streeling/courses/computer-science/es/cs-005-agent-handoff-evidence-contract.es.md",
+      "locale": "es",
+      "sha256": "8c360796f4c33774a77502ee7ed135ef9e8616854572b98ad827c3dacec969ee",
+      "hash_matches": true,
+      "english_hash_matches": true,
+      "pre_note_hash_matches": true,
+      "english_pre_note_hash_matches": true,
+      "metadata_matches": true,
+      "href_matches": true,
+      "fence_matches": true,
+      "inline_code_matches": true,
+      "number_matches": true,
+      "note_occurrences": 1,
+      "relative_links": [
+        {
+          "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+          "exists": true,
+          "literal_file_exists": true
+        },
+        {
+          "href": "cs-002-governing-agentic-loops.md",
+          "exists": false,
+          "literal_file_exists": false,
+          "canonical_english_path": "streeling/courses/computer-science/en/cs-002-governing-agentic-loops.md",
+          "canonical_english_exists": true,
+          "localized_target_path": "streeling/courses/computer-science/es/cs-002-governing-agentic-loops.es.md",
+          "localized_target_exists": true,
+          "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+        }
+      ],
+      "exercises": 5,
+      "answers": 5
+    },
+    {
+      "path": "streeling/courses/computer-science/fr/cs-006-ixql-pipeline-composition.fr.md",
+      "locale": "fr",
+      "sha256": "0c61d00d9ebdd8bec5b3016295de2cbeb6c1a6788d295e4e29cfa4f61bac250c",
+      "hash_matches": true,
+      "english_hash_matches": true,
+      "pre_note_hash_matches": true,
+      "english_pre_note_hash_matches": true,
+      "metadata_matches": true,
+      "href_matches": true,
+      "fence_matches": true,
+      "inline_code_matches": true,
+      "number_matches": true,
+      "note_occurrences": 1,
+      "relative_links": [
+        {
+          "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+          "exists": true,
+          "literal_file_exists": true
+        },
+        {
+          "href": "cs-005-agent-handoff-evidence-contract.md",
+          "exists": false,
+          "literal_file_exists": false,
+          "canonical_english_path": "streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md",
+          "canonical_english_exists": true,
+          "localized_target_path": "streeling/courses/computer-science/fr/cs-005-agent-handoff-evidence-contract.fr.md",
+          "localized_target_exists": true,
+          "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+        }
+      ],
+      "exercises": 5,
+      "answers": 5
+    },
+    {
+      "path": "streeling/courses/computer-science/es/cs-006-ixql-pipeline-composition.es.md",
+      "locale": "es",
+      "sha256": "4d0aa67259fce61f255707ffe758df110fce766639b2bc79eaa33de838596180",
+      "hash_matches": true,
+      "english_hash_matches": true,
+      "pre_note_hash_matches": true,
+      "english_pre_note_hash_matches": true,
+      "metadata_matches": true,
+      "href_matches": true,
+      "fence_matches": true,
+      "inline_code_matches": true,
+      "number_matches": true,
+      "note_occurrences": 1,
+      "relative_links": [
+        {
+          "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+          "exists": true,
+          "literal_file_exists": true
+        },
+        {
+          "href": "cs-005-agent-handoff-evidence-contract.md",
+          "exists": false,
+          "literal_file_exists": false,
+          "canonical_english_path": "streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md",
+          "canonical_english_exists": true,
+          "localized_target_path": "streeling/courses/computer-science/es/cs-005-agent-handoff-evidence-contract.es.md",
+          "localized_target_exists": true,
+          "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+        }
+      ],
+      "exercises": 5,
+      "answers": 5
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-002-godot-react-bridge-evidence.fr.md",
+      "locale": "fr",
+      "sha256": "b2d4f109c5b19c1afb17a922e3c6888d89014136ab7f737637577747edd37f80",
+      "hash_matches": true,
+      "english_hash_matches": true,
+      "pre_note_hash_matches": true,
+      "english_pre_note_hash_matches": true,
+      "metadata_matches": true,
+      "href_matches": true,
+      "fence_matches": true,
+      "inline_code_matches": true,
+      "number_matches": true,
+      "note_occurrences": 1,
+      "relative_links": [
+        {
+          "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+          "exists": true,
+          "literal_file_exists": true
+        },
+        {
+          "href": "vc-001-accessible-fretboard-paths.md",
+          "exists": false,
+          "literal_file_exists": false,
+          "canonical_english_path": "streeling/courses/visual-computing/en/vc-001-accessible-fretboard-paths.md",
+          "canonical_english_exists": true,
+          "localized_target_path": "streeling/courses/visual-computing/fr/vc-001-accessible-fretboard-paths.fr.md",
+          "localized_target_exists": true,
+          "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+        }
+      ],
+      "exercises": 5,
+      "answers": 5
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-002-godot-react-bridge-evidence.es.md",
+      "locale": "es",
+      "sha256": "ed6d1e420afae5969dc41ad4a82d1f6799e48100c853cc8a34c441232a213573",
+      "hash_matches": true,
+      "english_hash_matches": true,
+      "pre_note_hash_matches": true,
+      "english_pre_note_hash_matches": true,
+      "metadata_matches": true,
+      "href_matches": true,
+      "fence_matches": true,
+      "inline_code_matches": true,
+      "number_matches": true,
+      "note_occurrences": 1,
+      "relative_links": [
+        {
+          "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+          "exists": true,
+          "literal_file_exists": true
+        },
+        {
+          "href": "vc-001-accessible-fretboard-paths.md",
+          "exists": false,
+          "literal_file_exists": false,
+          "canonical_english_path": "streeling/courses/visual-computing/en/vc-001-accessible-fretboard-paths.md",
+          "canonical_english_exists": true,
+          "localized_target_path": "streeling/courses/visual-computing/es/vc-001-accessible-fretboard-paths.es.md",
+          "localized_target_exists": true,
+          "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+        }
+      ],
+      "exercises": 5,
+      "answers": 5
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-004-godot-observatory-capture-gate.fr.md",
+      "locale": "fr",
+      "sha256": "23a82cc934e562923822bf8476a2944cdb4c4334fa0dc4daa2ee8fc9fd7a98ff",
+      "hash_matches": true,
+      "english_hash_matches": true,
+      "pre_note_hash_matches": true,
+      "english_pre_note_hash_matches": true,
+      "metadata_matches": true,
+      "href_matches": true,
+      "fence_matches": true,
+      "inline_code_matches": true,
+      "number_matches": true,
+      "note_occurrences": 1,
+      "relative_links": [
+        {
+          "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+          "exists": true,
+          "literal_file_exists": true
+        },
+        {
+          "href": "vc-002-godot-react-bridge-evidence.md",
+          "exists": false,
+          "literal_file_exists": false,
+          "canonical_english_path": "streeling/courses/visual-computing/en/vc-002-godot-react-bridge-evidence.md",
+          "canonical_english_exists": true,
+          "localized_target_path": "streeling/courses/visual-computing/fr/vc-002-godot-react-bridge-evidence.fr.md",
+          "localized_target_exists": true,
+          "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+        },
+        {
+          "href": "vc-001-accessible-fretboard-paths.md",
+          "exists": false,
+          "literal_file_exists": false,
+          "canonical_english_path": "streeling/courses/visual-computing/en/vc-001-accessible-fretboard-paths.md",
+          "canonical_english_exists": true,
+          "localized_target_path": "streeling/courses/visual-computing/fr/vc-001-accessible-fretboard-paths.fr.md",
+          "localized_target_exists": true,
+          "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+        }
+      ],
+      "exercises": 5,
+      "answers": 5
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-004-godot-observatory-capture-gate.es.md",
+      "locale": "es",
+      "sha256": "fc864ead1ec1c201a1a990166cdd1f8bfd2df632c1bf6990f5032e0598d06d8d",
+      "hash_matches": true,
+      "english_hash_matches": true,
+      "pre_note_hash_matches": true,
+      "english_pre_note_hash_matches": true,
+      "metadata_matches": true,
+      "href_matches": true,
+      "fence_matches": true,
+      "inline_code_matches": true,
+      "number_matches": true,
+      "note_occurrences": 1,
+      "relative_links": [
+        {
+          "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+          "exists": true,
+          "literal_file_exists": true
+        },
+        {
+          "href": "vc-002-godot-react-bridge-evidence.md",
+          "exists": false,
+          "literal_file_exists": false,
+          "canonical_english_path": "streeling/courses/visual-computing/en/vc-002-godot-react-bridge-evidence.md",
+          "canonical_english_exists": true,
+          "localized_target_path": "streeling/courses/visual-computing/es/vc-002-godot-react-bridge-evidence.es.md",
+          "localized_target_exists": true,
+          "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+        },
+        {
+          "href": "vc-001-accessible-fretboard-paths.md",
+          "exists": false,
+          "literal_file_exists": false,
+          "canonical_english_path": "streeling/courses/visual-computing/en/vc-001-accessible-fretboard-paths.md",
+          "canonical_english_exists": true,
+          "localized_target_path": "streeling/courses/visual-computing/es/vc-001-accessible-fretboard-paths.es.md",
+          "localized_target_exists": true,
+          "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+        }
+      ],
+      "exercises": 5,
+      "answers": 5
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-005-craft-details-through-blender-to-godot.fr.md",
+      "locale": "fr",
+      "sha256": "835b923c7db70d559564540f2a22ffd1692f6d1e45fe5c00d943ed741bad1ae5",
+      "hash_matches": true,
+      "english_hash_matches": true,
+      "pre_note_hash_matches": true,
+      "english_pre_note_hash_matches": true,
+      "metadata_matches": true,
+      "href_matches": true,
+      "fence_matches": true,
+      "inline_code_matches": true,
+      "number_matches": true,
+      "note_occurrences": 1,
+      "relative_links": [
+        {
+          "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+          "exists": true,
+          "literal_file_exists": true
+        },
+        {
+          "href": "vc-004-godot-observatory-capture-gate.md",
+          "exists": false,
+          "literal_file_exists": false,
+          "canonical_english_path": "streeling/courses/visual-computing/en/vc-004-godot-observatory-capture-gate.md",
+          "canonical_english_exists": true,
+          "localized_target_path": "streeling/courses/visual-computing/fr/vc-004-godot-observatory-capture-gate.fr.md",
+          "localized_target_exists": true,
+          "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+        }
+      ],
+      "exercises": 5,
+      "answers": 5
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-005-craft-details-through-blender-to-godot.es.md",
+      "locale": "es",
+      "sha256": "b1989d501b28fd34f2faf4ac1109d238e897d14482edde5a43d52aa2199bd98c",
+      "hash_matches": true,
+      "english_hash_matches": true,
+      "pre_note_hash_matches": true,
+      "english_pre_note_hash_matches": true,
+      "metadata_matches": true,
+      "href_matches": true,
+      "fence_matches": true,
+      "inline_code_matches": true,
+      "number_matches": true,
+      "note_occurrences": 1,
+      "relative_links": [
+        {
+          "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+          "exists": true,
+          "literal_file_exists": true
+        },
+        {
+          "href": "vc-004-godot-observatory-capture-gate.md",
+          "exists": false,
+          "literal_file_exists": false,
+          "canonical_english_path": "streeling/courses/visual-computing/en/vc-004-godot-observatory-capture-gate.md",
+          "canonical_english_exists": true,
+          "localized_target_path": "streeling/courses/visual-computing/es/vc-004-godot-observatory-capture-gate.es.md",
+          "localized_target_exists": true,
+          "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+        }
+      ],
+      "exercises": 5,
+      "answers": 5
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-007-weave-seams-as-scene-contracts.fr.md",
+      "locale": "fr",
+      "sha256": "66ed91138f9e8ba6bf5769cc72cd747c1f41df2a690b805ed3f53ba4418dbc87",
+      "hash_matches": true,
+      "english_hash_matches": true,
+      "pre_note_hash_matches": true,
+      "english_pre_note_hash_matches": true,
+      "metadata_matches": true,
+      "href_matches": true,
+      "fence_matches": true,
+      "inline_code_matches": true,
+      "number_matches": true,
+      "note_occurrences": 1,
+      "relative_links": [
+        {
+          "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+          "exists": true,
+          "literal_file_exists": true
+        },
+        {
+          "href": "vc-005-craft-details-through-blender-to-godot.md",
+          "exists": false,
+          "literal_file_exists": false,
+          "canonical_english_path": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md",
+          "canonical_english_exists": true,
+          "localized_target_path": "streeling/courses/visual-computing/fr/vc-005-craft-details-through-blender-to-godot.fr.md",
+          "localized_target_exists": true,
+          "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+        }
+      ],
+      "exercises": 5,
+      "answers": 5
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-007-weave-seams-as-scene-contracts.es.md",
+      "locale": "es",
+      "sha256": "66cddf78a85c2b8cede85f0f2d65a29b945d2b8f76cd2618c9b73f13b0c8bbde",
+      "hash_matches": true,
+      "english_hash_matches": true,
+      "pre_note_hash_matches": true,
+      "english_pre_note_hash_matches": true,
+      "metadata_matches": true,
+      "href_matches": true,
+      "fence_matches": true,
+      "inline_code_matches": true,
+      "number_matches": true,
+      "note_occurrences": 1,
+      "relative_links": [
+        {
+          "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+          "exists": true,
+          "literal_file_exists": true
+        },
+        {
+          "href": "vc-005-craft-details-through-blender-to-godot.md",
+          "exists": false,
+          "literal_file_exists": false,
+          "canonical_english_path": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md",
+          "canonical_english_exists": true,
+          "localized_target_path": "streeling/courses/visual-computing/es/vc-005-craft-details-through-blender-to-godot.es.md",
+          "localized_target_exists": true,
+          "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+        }
+      ],
+      "exercises": 5,
+      "answers": 5
+    }
+  ],
+  "prerequisite_closure": {
+    "all_relative_markdown_links_exist": true,
+    "relative_link_occurrences_checked": 7,
+    "visual_computing": [
+      "VC007 -> VC005 -> VC004 -> VC002 -> existing VC001",
+      "VC001 has no prerequisites"
+    ],
+    "computer_science": [
+      "CS006 -> CS005 -> existing CS002",
+      "CS002 has a conceptual prerequisite, Multi-agent orchestration patterns; this is not an unresolved module ID"
+    ]
+  },
+  "source_checks": [
+    {
+      "boundary": "Retry summary supports bounded historical advisory work; full local receipt unavailable in this archive. No live run, authority, publication or subject/learner review inferred.",
+      "result": "Generated branch, abbreviated head plus subject, short-status line count, timestamp/actor and free text match source. No tests, full revision, byte identity or permission verification is supplied by the bridge.",
+      "module": "CS005",
+      "lesson_reference": "streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md:21",
+      "synthetic_case": "a1b2c3d cannot prefix bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb; different revisions, ancestry and chronology unknown. Two dirty lines do not identify bytes; wrapper/process state is not artifact completion.",
+      "source": "GA dc2e74cbd992a298f67efb928b5b3754615e1924 Scripts/antigravity-bridge.ps1 Handoff branch",
+      "historical_pin_comparison": {
+        "commits": [
+          "6bc584d7ca1cd9eb1b1481e1100eeeb74e983863",
+          "17f82a4b4b913d7c64942a3d3ff670abf4e6f85c"
+        ],
+        "followup_blob_at_both": "f40a89c89c681d788cfe260455c50eee33f382de",
+        "observation_blob_at_both": "b55d80dbd02f7aa1d93fdf4598bd7ffd7a0fa1af",
+        "conclusion": "Different URL commits preserve identical linked evidence bytes."
+      }
+    },
+    {
+      "validator_scope": "Minimal tokenizer/structural analysis, not complete parsing or execution. Main scans only pipelines/*.ixql; example in examples/ixql is outside that scan. No standard validator success can prove this example, execution, translations or delivery.",
+      "boundary": "UI specification explicitly brainstormed/ready for implementation. Stage cards are advisory prose, not implemented IXQL types.",
+      "result": "Bindings, arrow composition, parallel tool grouping, when guard and I/O constructs match grammar; conditional course-write flow matches example. Ellipses are explicitly non-runnable teaching notation.",
+      "module": "CS006",
+      "lesson_reference": "streeling/courses/computer-science/en/cs-006-ixql-pipeline-composition.md:21",
+      "synthetic_case": "Refute with confidence 0.81 requires no course-path write in a proposed harness. Empty variable is insufficient evidence of absence of an earlier effect.",
+      "source": "Demerzel 0220ca84a25f59973bd6b9236cc00b7f68631a50 grammars/sci-ml-pipelines.ebnf; examples/ixql/research-to-course.ixql; scripts/ixql-validate.js; docs/ixql-ui-composition-spec.md"
+    },
+    {
+      "source": "GA dc2e74cbd992a298f67efb928b5b3754615e1924 GodotScene.tsx; ForceRadiant.tsx; parked Godot integration plan",
+      "availability": "Static tracked-tree scan at pin found no .gd, .tscn, .wasm, godot/index.html or DLSS matching paths; this bounded scan does not prove artifacts cannot exist elsewhere.",
+      "module": "VC002",
+      "host_assumption": "Panel begins Builder; iframe needs Viewer. Parent switches recognized panel click to detail and closes fullscreen after recognized click. Dedicated mounted-iframe test and product reopen/fresh-ready traces are correctly distinguished.",
+      "boundary": "Twenty clicks and stricter source/origin/readiness contract are proposed acceptance rules, not observed Godot results or current implementation.",
+      "lesson_reference": "streeling/courses/visual-computing/en/vc-002-godot-react-bridge-evidence.md:42",
+      "synthetic_case": "With iframe F mounted, callbacks installed and initial false ready, six events give click belief-7, ready, ready, click belief-8; foreign X and later timeout yield none. Two ready and two click callbacks.",
+      "result": "Source comparison is conditional on mounted iframe ref. Runtime validation checks type string, not origin or nodeId. Pre-ready clicks and duplicate ready callbacks are allowed; outgoing postMessage target is wildcard. Fifteen-second timeout hides loading without setting ready."
+    },
+    {
+      "boundary": "Five percent, two pixels and 20/20 are proposed thresholds, not accessibility standards, measured baselines, actual captures or device-performance claims.",
+      "arithmetic": [
+        "1280*0.05=64; 1280-64=1216",
+        "720*0.05=36; 720-36=684",
+        "A and C bounding boxes fit; B left 60 needs +4 pixels to reach 64",
+        "max(80,81,84)-min(80,81,84)=4, above proposed 2-pixel drift",
+        "X fails box/drift; Y fails 19/20 known-click result; Z passes listed synthetic columns only"
+      ],
+      "result": "Capture controls, entire-box comparison, repeat frames, identification vs baseline and interaction are separate conjunctive checks. Ready event alone is insufficient rendered-frame proof.",
+      "module": "VC004",
+      "lesson_reference": "streeling/courses/visual-computing/en/vc-004-godot-observatory-capture-gate.md:43",
+      "source": "Same GA pinned host and parked plan as VC002"
+    },
+    {
+      "source": "Learn 93d424f872a576ba8bbcd3dd44c9733292373654 glb_pipeline.py; pipeline_check.py; expected/pipeline_check.txt; base 0eca002201ba273dfe7348c724bd57ddea9b0568 and proposed patch deac6e12a64864703300e5645cd5a9d1d374e062",
+      "arithmetic": [
+        "5140*0.01=51.4 and 20<51.4: isolated 20-face component removed",
+        "5140*0.001=5.14 and 20>=5.14: same component retained by this rule",
+        "Reference report has 186 raw reimport boundary edges and zero after position merge; remesh path UV becomes none"
+      ],
+      "module": "VC005",
+      "provenance": "Root-supplied cleanup-source-provenance.json records source-only replay and observed open/draft/unmerged PR168 state; PR state was not independently queried in this no-network audit.",
+      "boundary": "three.js target does not establish Godot import. Feature manifest/craft DSL/DLSS and small viewer trials are proposed or synthetic. No cultural-authority claim or material/cloth simulation is inferred.",
+      "lesson_reference": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md:43",
+      "zero_path": "Base early return is [] and caller unpacks a pair. Proposed pinned patch returns [],0. Verified by static Git text, without executing function or Blender.",
+      "result": "Pipeline order and report values match pinned source/reference output. Threshold examines connected-component topology, not semantic importance. Touching a larger component changes applicability; decimation/shading remain separate risks."
+    },
+    {
+      "matching_blobs": {
+        "same_at_both_pins": true,
+        "input": "38a4166128607d770575bcd299a42987f39d9d34",
+        "evaluator": "537402e48a203533248f6df7b448effb8968e438"
+      },
+      "boundary": "Plain-weave abstraction is not textile history, physical clearance/collision proof or real cloth simulation. No Godot import, GPU capture, real learner or human review is supplied. Root owns executable fixture replay.",
+      "arithmetic": [
+        "3*2 by 3*2 gives 6*6=36 crossings",
+        "Global parity at (2,0) warp, (3,0) weft; local restart repeats warp at the seam",
+        "Six horizontal seam relations plus six vertical relations gives 12, not 12 unique crossing IDs",
+        "Spacing/diameter=5/2=2.5; diameter>=spacing rejected by checker"
+      ],
+      "result": "Static evaluator loops and ID construction agree with lesson. Semantic manifest, scene ID binding, geometry coordinates, perception and performance remain separate gates.",
+      "module": "VC007",
+      "lesson_reference": "streeling/courses/visual-computing/en/vc-007-weave-seams-as-scene-contracts.md:25",
+      "source": "Demerzel f23ccae6c049d9066a1be2221c68f3b0bcf48373 fixture/evaluator; 17f82a4b4b913d7c64942a3d3ff670abf4e6f85c input link"
+    }
+  ],
+  "resolved_findings": [
+    {
+      "status": "resolved in canonical English",
+      "resolution": "Two exact declared replacements bind base and proposed fix to immutable Learn commits and describe observed draft/unmerged snapshot, with no Blender-run inference.",
+      "id": "VC005-temporal-source-wording"
+    }
+  ],
+  "unresolved_findings": [],
+  "pending_final_delta": [],
+  "final_binding_checks": {
+    "english": [
+      {
+        "path": "streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md",
+        "sha256": "34b464061549b75e54058e76896bbec739e197a1f8cf7e54b837a5698e01f531",
+        "hash_matches": true,
+        "base_hash_matches": true,
+        "base_blob_matches": true,
+        "exact_reconstruction": true,
+        "pre_note_sha256": "07b816b0fb6756c8552ceb24ef9d88d312e5425020c093247b9985b87c46d175"
+      },
+      {
+        "path": "streeling/courses/computer-science/en/cs-006-ixql-pipeline-composition.md",
+        "sha256": "7077ccb18a5e5ac03bc3d0e0eaa89dc12e4c64ec09abcd143967da515f484117",
+        "hash_matches": true,
+        "base_hash_matches": true,
+        "base_blob_matches": true,
+        "exact_reconstruction": true,
+        "pre_note_sha256": "49ba1f2da3a2f007d81d41c68309e660917f953dffa9d8856243b23714ad5728"
+      },
+      {
+        "path": "streeling/courses/visual-computing/en/vc-002-godot-react-bridge-evidence.md",
+        "sha256": "aa5e1f7baeea211521c44ac7ee406be35d810d9386484d2d99e774a88afd2e56",
+        "hash_matches": true,
+        "base_hash_matches": true,
+        "base_blob_matches": true,
+        "exact_reconstruction": true,
+        "pre_note_sha256": "a7367d45880c6731a19c598b4117a2047fe54b03bea169ff64559cf218b48a29"
+      },
+      {
+        "path": "streeling/courses/visual-computing/en/vc-004-godot-observatory-capture-gate.md",
+        "sha256": "670c1ad35ba5231fe812e3b4144934ae5bd56faad92b2177bd4bb73a87c0eaa7",
+        "hash_matches": true,
+        "base_hash_matches": true,
+        "base_blob_matches": true,
+        "exact_reconstruction": true,
+        "pre_note_sha256": "bec735bd24232900c16b0d68ded5b7adf7ce5bfedc03d7eae83fdd5e8fd832ad"
+      },
+      {
+        "path": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md",
+        "sha256": "5fbad318a7815657d4cc1be13c1d6a7c265a732e3121d901bd35c994c9227d8d",
+        "hash_matches": true,
+        "base_hash_matches": true,
+        "base_blob_matches": true,
+        "exact_reconstruction": true,
+        "pre_note_sha256": "bde01b139bddc60468e3bcdf18ef8adae7d5863077b56b3f3257456a22c73351"
+      },
+      {
+        "path": "streeling/courses/visual-computing/en/vc-007-weave-seams-as-scene-contracts.md",
+        "sha256": "7fb0cf78216e9a35e4b27d84bb9327efe1f8aa42f3bb861d4e9bee8200e0c2a5",
+        "hash_matches": true,
+        "base_hash_matches": true,
+        "base_blob_matches": true,
+        "exact_reconstruction": true,
+        "pre_note_sha256": "4ddf40807c786699261f11f3e6e19eed19e33845ee6de5c3a6e6c613fe4d6275"
+      }
+    ],
+    "locales": [
+      {
+        "path": "streeling/courses/computer-science/fr/cs-005-agent-handoff-evidence-contract.fr.md",
+        "locale": "fr",
+        "sha256": "9d04890ef24629c532bcd25ff9f8bac455cd6ea90063b1aca0b8ba7ff3d4903d",
+        "hash_matches": true,
+        "english_hash_matches": true,
+        "pre_note_hash_matches": true,
+        "english_pre_note_hash_matches": true,
+        "metadata_matches": true,
+        "href_matches": true,
+        "fence_matches": true,
+        "inline_code_matches": true,
+        "number_matches": true,
+        "note_occurrences": 1,
+        "relative_links": [
+          {
+            "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+            "exists": true,
+            "literal_file_exists": true
+          },
+          {
+            "href": "cs-002-governing-agentic-loops.md",
+            "exists": false,
+            "literal_file_exists": false,
+            "canonical_english_path": "streeling/courses/computer-science/en/cs-002-governing-agentic-loops.md",
+            "canonical_english_exists": true,
+            "localized_target_path": "streeling/courses/computer-science/fr/cs-002-governing-agentic-loops.fr.md",
+            "localized_target_exists": true,
+            "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+          }
+        ],
+        "exercises": 5,
+        "answers": 5
+      },
+      {
+        "path": "streeling/courses/computer-science/es/cs-005-agent-handoff-evidence-contract.es.md",
+        "locale": "es",
+        "sha256": "8c360796f4c33774a77502ee7ed135ef9e8616854572b98ad827c3dacec969ee",
+        "hash_matches": true,
+        "english_hash_matches": true,
+        "pre_note_hash_matches": true,
+        "english_pre_note_hash_matches": true,
+        "metadata_matches": true,
+        "href_matches": true,
+        "fence_matches": true,
+        "inline_code_matches": true,
+        "number_matches": true,
+        "note_occurrences": 1,
+        "relative_links": [
+          {
+            "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+            "exists": true,
+            "literal_file_exists": true
+          },
+          {
+            "href": "cs-002-governing-agentic-loops.md",
+            "exists": false,
+            "literal_file_exists": false,
+            "canonical_english_path": "streeling/courses/computer-science/en/cs-002-governing-agentic-loops.md",
+            "canonical_english_exists": true,
+            "localized_target_path": "streeling/courses/computer-science/es/cs-002-governing-agentic-loops.es.md",
+            "localized_target_exists": true,
+            "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+          }
+        ],
+        "exercises": 5,
+        "answers": 5
+      },
+      {
+        "path": "streeling/courses/computer-science/fr/cs-006-ixql-pipeline-composition.fr.md",
+        "locale": "fr",
+        "sha256": "0c61d00d9ebdd8bec5b3016295de2cbeb6c1a6788d295e4e29cfa4f61bac250c",
+        "hash_matches": true,
+        "english_hash_matches": true,
+        "pre_note_hash_matches": true,
+        "english_pre_note_hash_matches": true,
+        "metadata_matches": true,
+        "href_matches": true,
+        "fence_matches": true,
+        "inline_code_matches": true,
+        "number_matches": true,
+        "note_occurrences": 1,
+        "relative_links": [
+          {
+            "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+            "exists": true,
+            "literal_file_exists": true
+          },
+          {
+            "href": "cs-005-agent-handoff-evidence-contract.md",
+            "exists": false,
+            "literal_file_exists": false,
+            "canonical_english_path": "streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md",
+            "canonical_english_exists": true,
+            "localized_target_path": "streeling/courses/computer-science/fr/cs-005-agent-handoff-evidence-contract.fr.md",
+            "localized_target_exists": true,
+            "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+          }
+        ],
+        "exercises": 5,
+        "answers": 5
+      },
+      {
+        "path": "streeling/courses/computer-science/es/cs-006-ixql-pipeline-composition.es.md",
+        "locale": "es",
+        "sha256": "4d0aa67259fce61f255707ffe758df110fce766639b2bc79eaa33de838596180",
+        "hash_matches": true,
+        "english_hash_matches": true,
+        "pre_note_hash_matches": true,
+        "english_pre_note_hash_matches": true,
+        "metadata_matches": true,
+        "href_matches": true,
+        "fence_matches": true,
+        "inline_code_matches": true,
+        "number_matches": true,
+        "note_occurrences": 1,
+        "relative_links": [
+          {
+            "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+            "exists": true,
+            "literal_file_exists": true
+          },
+          {
+            "href": "cs-005-agent-handoff-evidence-contract.md",
+            "exists": false,
+            "literal_file_exists": false,
+            "canonical_english_path": "streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md",
+            "canonical_english_exists": true,
+            "localized_target_path": "streeling/courses/computer-science/es/cs-005-agent-handoff-evidence-contract.es.md",
+            "localized_target_exists": true,
+            "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+          }
+        ],
+        "exercises": 5,
+        "answers": 5
+      },
+      {
+        "path": "streeling/courses/visual-computing/fr/vc-002-godot-react-bridge-evidence.fr.md",
+        "locale": "fr",
+        "sha256": "b2d4f109c5b19c1afb17a922e3c6888d89014136ab7f737637577747edd37f80",
+        "hash_matches": true,
+        "english_hash_matches": true,
+        "pre_note_hash_matches": true,
+        "english_pre_note_hash_matches": true,
+        "metadata_matches": true,
+        "href_matches": true,
+        "fence_matches": true,
+        "inline_code_matches": true,
+        "number_matches": true,
+        "note_occurrences": 1,
+        "relative_links": [
+          {
+            "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+            "exists": true,
+            "literal_file_exists": true
+          },
+          {
+            "href": "vc-001-accessible-fretboard-paths.md",
+            "exists": false,
+            "literal_file_exists": false,
+            "canonical_english_path": "streeling/courses/visual-computing/en/vc-001-accessible-fretboard-paths.md",
+            "canonical_english_exists": true,
+            "localized_target_path": "streeling/courses/visual-computing/fr/vc-001-accessible-fretboard-paths.fr.md",
+            "localized_target_exists": true,
+            "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+          }
+        ],
+        "exercises": 5,
+        "answers": 5
+      },
+      {
+        "path": "streeling/courses/visual-computing/es/vc-002-godot-react-bridge-evidence.es.md",
+        "locale": "es",
+        "sha256": "ed6d1e420afae5969dc41ad4a82d1f6799e48100c853cc8a34c441232a213573",
+        "hash_matches": true,
+        "english_hash_matches": true,
+        "pre_note_hash_matches": true,
+        "english_pre_note_hash_matches": true,
+        "metadata_matches": true,
+        "href_matches": true,
+        "fence_matches": true,
+        "inline_code_matches": true,
+        "number_matches": true,
+        "note_occurrences": 1,
+        "relative_links": [
+          {
+            "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+            "exists": true,
+            "literal_file_exists": true
+          },
+          {
+            "href": "vc-001-accessible-fretboard-paths.md",
+            "exists": false,
+            "literal_file_exists": false,
+            "canonical_english_path": "streeling/courses/visual-computing/en/vc-001-accessible-fretboard-paths.md",
+            "canonical_english_exists": true,
+            "localized_target_path": "streeling/courses/visual-computing/es/vc-001-accessible-fretboard-paths.es.md",
+            "localized_target_exists": true,
+            "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+          }
+        ],
+        "exercises": 5,
+        "answers": 5
+      },
+      {
+        "path": "streeling/courses/visual-computing/fr/vc-004-godot-observatory-capture-gate.fr.md",
+        "locale": "fr",
+        "sha256": "23a82cc934e562923822bf8476a2944cdb4c4334fa0dc4daa2ee8fc9fd7a98ff",
+        "hash_matches": true,
+        "english_hash_matches": true,
+        "pre_note_hash_matches": true,
+        "english_pre_note_hash_matches": true,
+        "metadata_matches": true,
+        "href_matches": true,
+        "fence_matches": true,
+        "inline_code_matches": true,
+        "number_matches": true,
+        "note_occurrences": 1,
+        "relative_links": [
+          {
+            "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+            "exists": true,
+            "literal_file_exists": true
+          },
+          {
+            "href": "vc-002-godot-react-bridge-evidence.md",
+            "exists": false,
+            "literal_file_exists": false,
+            "canonical_english_path": "streeling/courses/visual-computing/en/vc-002-godot-react-bridge-evidence.md",
+            "canonical_english_exists": true,
+            "localized_target_path": "streeling/courses/visual-computing/fr/vc-002-godot-react-bridge-evidence.fr.md",
+            "localized_target_exists": true,
+            "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+          },
+          {
+            "href": "vc-001-accessible-fretboard-paths.md",
+            "exists": false,
+            "literal_file_exists": false,
+            "canonical_english_path": "streeling/courses/visual-computing/en/vc-001-accessible-fretboard-paths.md",
+            "canonical_english_exists": true,
+            "localized_target_path": "streeling/courses/visual-computing/fr/vc-001-accessible-fretboard-paths.fr.md",
+            "localized_target_exists": true,
+            "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+          }
+        ],
+        "exercises": 5,
+        "answers": 5
+      },
+      {
+        "path": "streeling/courses/visual-computing/es/vc-004-godot-observatory-capture-gate.es.md",
+        "locale": "es",
+        "sha256": "fc864ead1ec1c201a1a990166cdd1f8bfd2df632c1bf6990f5032e0598d06d8d",
+        "hash_matches": true,
+        "english_hash_matches": true,
+        "pre_note_hash_matches": true,
+        "english_pre_note_hash_matches": true,
+        "metadata_matches": true,
+        "href_matches": true,
+        "fence_matches": true,
+        "inline_code_matches": true,
+        "number_matches": true,
+        "note_occurrences": 1,
+        "relative_links": [
+          {
+            "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+            "exists": true,
+            "literal_file_exists": true
+          },
+          {
+            "href": "vc-002-godot-react-bridge-evidence.md",
+            "exists": false,
+            "literal_file_exists": false,
+            "canonical_english_path": "streeling/courses/visual-computing/en/vc-002-godot-react-bridge-evidence.md",
+            "canonical_english_exists": true,
+            "localized_target_path": "streeling/courses/visual-computing/es/vc-002-godot-react-bridge-evidence.es.md",
+            "localized_target_exists": true,
+            "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+          },
+          {
+            "href": "vc-001-accessible-fretboard-paths.md",
+            "exists": false,
+            "literal_file_exists": false,
+            "canonical_english_path": "streeling/courses/visual-computing/en/vc-001-accessible-fretboard-paths.md",
+            "canonical_english_exists": true,
+            "localized_target_path": "streeling/courses/visual-computing/es/vc-001-accessible-fretboard-paths.es.md",
+            "localized_target_exists": true,
+            "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+          }
+        ],
+        "exercises": 5,
+        "answers": 5
+      },
+      {
+        "path": "streeling/courses/visual-computing/fr/vc-005-craft-details-through-blender-to-godot.fr.md",
+        "locale": "fr",
+        "sha256": "835b923c7db70d559564540f2a22ffd1692f6d1e45fe5c00d943ed741bad1ae5",
+        "hash_matches": true,
+        "english_hash_matches": true,
+        "pre_note_hash_matches": true,
+        "english_pre_note_hash_matches": true,
+        "metadata_matches": true,
+        "href_matches": true,
+        "fence_matches": true,
+        "inline_code_matches": true,
+        "number_matches": true,
+        "note_occurrences": 1,
+        "relative_links": [
+          {
+            "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+            "exists": true,
+            "literal_file_exists": true
+          },
+          {
+            "href": "vc-004-godot-observatory-capture-gate.md",
+            "exists": false,
+            "literal_file_exists": false,
+            "canonical_english_path": "streeling/courses/visual-computing/en/vc-004-godot-observatory-capture-gate.md",
+            "canonical_english_exists": true,
+            "localized_target_path": "streeling/courses/visual-computing/fr/vc-004-godot-observatory-capture-gate.fr.md",
+            "localized_target_exists": true,
+            "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+          }
+        ],
+        "exercises": 5,
+        "answers": 5
+      },
+      {
+        "path": "streeling/courses/visual-computing/es/vc-005-craft-details-through-blender-to-godot.es.md",
+        "locale": "es",
+        "sha256": "b1989d501b28fd34f2faf4ac1109d238e897d14482edde5a43d52aa2199bd98c",
+        "hash_matches": true,
+        "english_hash_matches": true,
+        "pre_note_hash_matches": true,
+        "english_pre_note_hash_matches": true,
+        "metadata_matches": true,
+        "href_matches": true,
+        "fence_matches": true,
+        "inline_code_matches": true,
+        "number_matches": true,
+        "note_occurrences": 1,
+        "relative_links": [
+          {
+            "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+            "exists": true,
+            "literal_file_exists": true
+          },
+          {
+            "href": "vc-004-godot-observatory-capture-gate.md",
+            "exists": false,
+            "literal_file_exists": false,
+            "canonical_english_path": "streeling/courses/visual-computing/en/vc-004-godot-observatory-capture-gate.md",
+            "canonical_english_exists": true,
+            "localized_target_path": "streeling/courses/visual-computing/es/vc-004-godot-observatory-capture-gate.es.md",
+            "localized_target_exists": true,
+            "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+          }
+        ],
+        "exercises": 5,
+        "answers": 5
+      },
+      {
+        "path": "streeling/courses/visual-computing/fr/vc-007-weave-seams-as-scene-contracts.fr.md",
+        "locale": "fr",
+        "sha256": "66ed91138f9e8ba6bf5769cc72cd747c1f41df2a690b805ed3f53ba4418dbc87",
+        "hash_matches": true,
+        "english_hash_matches": true,
+        "pre_note_hash_matches": true,
+        "english_pre_note_hash_matches": true,
+        "metadata_matches": true,
+        "href_matches": true,
+        "fence_matches": true,
+        "inline_code_matches": true,
+        "number_matches": true,
+        "note_occurrences": 1,
+        "relative_links": [
+          {
+            "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+            "exists": true,
+            "literal_file_exists": true
+          },
+          {
+            "href": "vc-005-craft-details-through-blender-to-godot.md",
+            "exists": false,
+            "literal_file_exists": false,
+            "canonical_english_path": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md",
+            "canonical_english_exists": true,
+            "localized_target_path": "streeling/courses/visual-computing/fr/vc-005-craft-details-through-blender-to-godot.fr.md",
+            "localized_target_exists": true,
+            "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+          }
+        ],
+        "exercises": 5,
+        "answers": 5
+      },
+      {
+        "path": "streeling/courses/visual-computing/es/vc-007-weave-seams-as-scene-contracts.es.md",
+        "locale": "es",
+        "sha256": "66cddf78a85c2b8cede85f0f2d65a29b945d2b8f76cd2618c9b73f13b0c8bbde",
+        "hash_matches": true,
+        "english_hash_matches": true,
+        "pre_note_hash_matches": true,
+        "english_pre_note_hash_matches": true,
+        "metadata_matches": true,
+        "href_matches": true,
+        "fence_matches": true,
+        "inline_code_matches": true,
+        "number_matches": true,
+        "note_occurrences": 1,
+        "relative_links": [
+          {
+            "href": "../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md",
+            "exists": true,
+            "literal_file_exists": true
+          },
+          {
+            "href": "vc-005-craft-details-through-blender-to-godot.md",
+            "exists": false,
+            "literal_file_exists": false,
+            "canonical_english_path": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md",
+            "canonical_english_exists": true,
+            "localized_target_path": "streeling/courses/visual-computing/es/vc-005-craft-details-through-blender-to-godot.es.md",
+            "localized_target_exists": true,
+            "resolution": "Canonical English href spelling is intentional: sync-streeling.mjs rewriteLinks resolves moduleKey(filename without optional locale suffix), then links to the page in the current locale. It does not require a literal unsuffixed .md file in fr/es."
+          }
+        ],
+        "exercises": 5,
+        "answers": 5
+      }
+    ]
+  },
+  "final_delta": {
+    "status": "complete bounded static pass; no unresolved content/translation/packet finding",
+    "checked_at_utc": "2026-10-22T04:27:50.289722Z",
+    "scope": [
+      "Final 18 source files: six existing English plus twelve French/Spanish drafts",
+      "Six exact base-blob reconstructions with declared VC005 replacements and chronology insertions",
+      "Eighteen destination SHA records; twelve final/pre-chronology English and translation bindings",
+      "Twelve locale metadata, href multiset, fenced/inline code and numeric multiset comparisons",
+      "Native static meaning review of translations, exercises and historical/runtime/human/cultural caveats",
+      "Six source-assisted learner stimuli/prompts and separate expected-answer rubric"
+    ],
+    "formal_review": false,
+    "human_approval": false,
+    "bindings_passed": 18,
+    "english_reconstructions_passed": 6,
+    "locale_fixed_content_comparisons_passed": 12,
+    "pre_note_translation_bindings_passed": 12,
+    "exercise_pairs": 90.0,
+    "answer_blocks": 90.0,
+    "chronology_note_meaning": "All three note versions explicitly make pending translations, Learn integration and publication statements historical. They affirm current draft records while retaining unperformed runtime experiments and pending human subject/fluent-language/learner review. Each locale contains exactly one declared note; stripping it reproduces each recorded pre-note hash.",
+    "translation_meaning_checks": [
+      {
+        "module": "CS005",
+        "result": "Preserves bridge-generated vs independently verified fields, actor/authority distinction, different revisions with unknown ancestry/chronology, dirty counts vs byte identity, failed first review and bounded historical retry summary. Synthetic H1/H2 and unavailable full local receipt remain explicit.",
+        "locales": [
+          "fr",
+          "es"
+        ]
+      },
+      {
+        "module": "CS006",
+        "result": "Preserves non-runnable ellipsis excerpt, stage annotation not IXQL types, required failed-grammar dependency, external effects vs pure transformation, refute/no-write falsifier, empty variable not absence-of-effect proof, pipelines-only structural validator and examples exclusion; no IXQL/UI/runtime/publication inference.",
+        "locales": [
+          "fr",
+          "es"
+        ]
+      },
+      {
+        "module": "VC002",
+        "result": "Preserves bounded tracked-tree scan, mounted-ref assumption, absent origin/nodeId runtime validation, pre-ready click and duplicate ready callbacks, timeout not readiness, Builder/Viewer condition, dedicated mounted-iframe vs product reentry traces and proposed stricter gate. Accessibility/live scene/DLSS/real learner evidence remain separate.",
+        "locales": [
+          "fr",
+          "es"
+        ]
+      },
+      {
+        "module": "VC004",
+        "result": "Preserves whole-box five-percent synthetic safe rectangle, four-pixel repair, four-pixel repeat drift, proposed two-pixel and 20/20 thresholds, no-worse-than-baseline identification, conjunctive X/Y/Z logic, source declaration vs actual render, device matrix/accessibility/runtime/human limits.",
+        "locales": [
+          "fr",
+          "es"
+        ]
+      },
+      {
+        "module": "VC005",
+        "result": "Preserves topology vs semantic feature, threshold comparison and conditional isolated-component assumption, zero-path defect and immutable proposed unmerged patch, source-only call not Blender/full pipeline, raw vs position-merged boundary counts, missing UV, multiple-variable confound, craft DSL vs cheaper manifest benchmark and small hypothetical trial limitation.",
+        "locales": [
+          "fr",
+          "es"
+        ]
+      },
+      {
+        "module": "VC007",
+        "result": "Preserves global vs restarted odd-tile parity, 36 IDs, 12 violated relations not unique crossings, 2.5 input check not physical clearance, distinct semantic/geometry/perception gates, wrong ID mapping and unassessed coordinates, proposed DSL falsifier, hypothetical viewer/click figures and no textile-history/simulation/runtime authority.",
+        "locales": [
+          "fr",
+          "es"
+        ]
+      }
+    ],
+    "relative_module_links": "All canonical English stems resolve to existing English modules and corresponding FR/ES source files through the inspected moduleKey/rewriteLinks mechanism; chronology README exists. Literal unsuffixed paths inside locale folders are not how generated course links resolve.",
+    "learner_packet": {
+      "tasks": [
+        {
+          "module": "CS-005",
+          "source_path": "streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md",
+          "source_sha256": "34b464061549b75e54058e76896bbec739e197a1f8cf7e54b837a5698e01f531",
+          "hash_matches": true,
+          "packet_source_present": true,
+          "packet_hash_present": true,
+          "packet_prompt_matches": true,
+          "packet_stimulus_matches": true,
+          "primary_sources": [
+            {
+              "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Scripts/antigravity-bridge.ps1",
+              "packet_present": true
+            },
+            {
+              "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/CLAUDE.md",
+              "packet_present": true
+            }
+          ],
+          "prompt_from_lesson": true,
+          "expected_answer_matches_lesson": true,
+          "expected_answer_absent_from_packet": true,
+          "learner_response_blank": true,
+          "reviewer_score_blank": true,
+          "reviewer_reasoning_blank": true
+        },
+        {
+          "module": "CS-006",
+          "source_path": "streeling/courses/computer-science/en/cs-006-ixql-pipeline-composition.md",
+          "source_sha256": "7077ccb18a5e5ac03bc3d0e0eaa89dc12e4c64ec09abcd143967da515f484117",
+          "hash_matches": true,
+          "packet_source_present": true,
+          "packet_hash_present": true,
+          "packet_prompt_matches": true,
+          "packet_stimulus_matches": true,
+          "primary_sources": [
+            {
+              "url": "https://github.com/GuitarAlchemist/Demerzel/blob/0220ca84a25f59973bd6b9236cc00b7f68631a50/examples/ixql/research-to-course.ixql",
+              "packet_present": true
+            },
+            {
+              "url": "https://github.com/GuitarAlchemist/Demerzel/blob/0220ca84a25f59973bd6b9236cc00b7f68631a50/grammars/sci-ml-pipelines.ebnf",
+              "packet_present": true
+            }
+          ],
+          "prompt_from_lesson": true,
+          "expected_answer_matches_lesson": true,
+          "expected_answer_absent_from_packet": true,
+          "learner_response_blank": true,
+          "reviewer_score_blank": true,
+          "reviewer_reasoning_blank": true
+        },
+        {
+          "module": "VC-002",
+          "source_path": "streeling/courses/visual-computing/en/vc-002-godot-react-bridge-evidence.md",
+          "source_sha256": "aa5e1f7baeea211521c44ac7ee406be35d810d9386484d2d99e774a88afd2e56",
+          "hash_matches": true,
+          "packet_source_present": true,
+          "packet_hash_present": true,
+          "packet_prompt_matches": true,
+          "packet_stimulus_matches": true,
+          "primary_sources": [
+            {
+              "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/ReactComponents/ga-react-components/src/components/PrimeRadiant/GodotScene.tsx",
+              "packet_present": true
+            },
+            {
+              "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/docs/plans/parked/2026-03-28-feat-godot-integration-plan.md",
+              "packet_present": true
+            }
+          ],
+          "prompt_from_lesson": true,
+          "expected_answer_matches_lesson": true,
+          "expected_answer_absent_from_packet": true,
+          "learner_response_blank": true,
+          "reviewer_score_blank": true,
+          "reviewer_reasoning_blank": true
+        },
+        {
+          "module": "VC-004",
+          "source_path": "streeling/courses/visual-computing/en/vc-004-godot-observatory-capture-gate.md",
+          "source_sha256": "670c1ad35ba5231fe812e3b4144934ae5bd56faad92b2177bd4bb73a87c0eaa7",
+          "hash_matches": true,
+          "packet_source_present": true,
+          "packet_hash_present": true,
+          "packet_prompt_matches": true,
+          "packet_stimulus_matches": true,
+          "primary_sources": [
+            {
+              "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/ReactComponents/ga-react-components/src/components/PrimeRadiant/GodotScene.tsx",
+              "packet_present": true
+            },
+            {
+              "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/docs/plans/parked/2026-03-28-feat-godot-integration-plan.md",
+              "packet_present": true
+            }
+          ],
+          "prompt_from_lesson": true,
+          "expected_answer_matches_lesson": true,
+          "expected_answer_absent_from_packet": true,
+          "learner_response_blank": true,
+          "reviewer_score_blank": true,
+          "reviewer_reasoning_blank": true
+        },
+        {
+          "module": "VC-005",
+          "source_path": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md",
+          "source_sha256": "5fbad318a7815657d4cc1be13c1d6a7c265a732e3121d901bd35c994c9227d8d",
+          "hash_matches": true,
+          "packet_source_present": true,
+          "packet_hash_present": true,
+          "packet_prompt_matches": true,
+          "packet_stimulus_matches": true,
+          "primary_sources": [
+            {
+              "url": "https://github.com/spareilleux/learn/blob/93d424f872a576ba8bbcd3dd44c9733292373654/code/blender/scripts/glb_pipeline.py",
+              "packet_present": true
+            },
+            {
+              "url": "https://github.com/spareilleux/learn/blob/93d424f872a576ba8bbcd3dd44c9733292373654/code/blender/scripts/pipeline_check.py",
+              "packet_present": true
+            },
+            {
+              "url": "https://github.com/spareilleux/learn/blob/93d424f872a576ba8bbcd3dd44c9733292373654/code/blender/expected/pipeline_check.txt",
+              "packet_present": true
+            }
+          ],
+          "prompt_from_lesson": true,
+          "expected_answer_matches_lesson": true,
+          "expected_answer_absent_from_packet": true,
+          "learner_response_blank": true,
+          "reviewer_score_blank": true,
+          "reviewer_reasoning_blank": true
+        },
+        {
+          "module": "VC-007",
+          "source_path": "streeling/courses/visual-computing/en/vc-007-weave-seams-as-scene-contracts.md",
+          "source_sha256": "7fb0cf78216e9a35e4b27d84bb9327efe1f8aa42f3bb861d4e9bee8200e0c2a5",
+          "hash_matches": true,
+          "packet_source_present": true,
+          "packet_hash_present": true,
+          "packet_prompt_matches": true,
+          "packet_stimulus_matches": true,
+          "primary_sources": [
+            {
+              "url": "https://github.com/GuitarAlchemist/Demerzel/blob/17f82a4b4b913d7c64942a3d3ff670abf4e6f85c/state/streeling/fixtures/visual-computing/vc-007/weave-trial.json",
+              "packet_present": true
+            }
+          ],
+          "prompt_from_lesson": true,
+          "expected_answer_matches_lesson": true,
+          "expected_answer_absent_from_packet": true,
+          "learner_response_blank": true,
+          "reviewer_score_blank": true,
+          "reviewer_reasoning_blank": true
+        }
+      ],
+      "task_count": 6,
+      "primary_source_occurrences": 12,
+      "answer_marker_count": 0,
+      "stimuli_sufficient": "All six tasks have their exact primary files or local rule/statement supplied. CS005 bridge/guidance, CS006 declaration/example/grammar, VC002/004 host/plan, VC005 pipeline/checker/reference report, VC007 global parity rule/ID convention and trial input cover requested reasoning. No hidden fixture values are needed.",
+      "answer_free": "No expected answer paragraph or lesson answer block is copied into the learner packet. Source assistance intentionally exposes primary-file contents and explicit missing-runtime inputs; this is overlapping reasoning practice, not unseen or causal transfer.",
+      "administration": "Lesson is closed, input blocks/primary files supplied and lesson answers/reviewer rubric withheld; responses, confidence, time, hints and lookups recorded. All attempt/score/reasoning fields remain null."
+    },
+    "artifact_hashes": [
+      {
+        "path": "code/streeling/evidence/locale-completion-2026-10-22/bindings.json",
+        "sha256": "d5afd17421690990f1ca93cc7ba9d0a246fcb21d1e4aefdb3d74943108e1ea4a"
+      },
+      {
+        "path": "code/streeling/evidence/locale-completion-2026-10-22/review-rubric.json",
+        "sha256": "a3be9c11cb78897e7ffae319667feb805070e5d8b0bccf72ff2ecb4f7dbb406a"
+      },
+      {
+        "path": "code/streeling/evidence/locale-completion-2026-10-22/learner-tasks.md",
+        "sha256": "30e70830e61cf94158879d53095118f6a39571bbae742cae38dd12c6b78ef878"
+      },
+      {
+        "path": "code/streeling/evidence/locale-completion-2026-10-22/README.md",
+        "sha256": "f824c2e71a64e61257b1587503e54ec3a9ea2d6599e5644b5610a7ba8d65334c"
+      },
+      {
+        "path": "code/streeling/evidence/locale-completion-2026-10-22/cleanup-source-provenance.json",
+        "sha256": "c51a468bd601d0d8bbeb234c0eecab44d2377564bc08c47bace4f62ca39c8c9e"
+      }
+    ],
+    "integration_boundary": "Integration is now reported as coordinator-owned results read from saved receipts: sync and 18 targeted tests passed, Astro built 1714 pages, 27 rendered pages/573 article links had zero unresolved internal targets with detected negative controls, and 12 locale source banners/notes passed. This auditor did not rerun commands or apps. Human subject/fluent-language/learner review, runtime experiments and candidate deployment/readback remain outside these receipts.",
+    "findings": []
+  },
+  "initial_preflight": {
+    "checked_at_utc": "2026-10-22T04:19:50.8441305Z",
+    "scope": [
+      "Six named existing canonical English source bodies and their pinned source claims",
+      "Static arithmetic and complete named prerequisite closure",
+      "Exact reconstruction from base Learn blobs plus bindings.json prose_changes",
+      "Historical, runtime, craft/cultural, and human-review boundaries"
+    ],
+    "exclusions": [
+      "Twelve in-progress FR/ES files; final locale audit awaits root request",
+      "No network, browser, Blender, Godot, IXQL, app, build or test execution",
+      "No course-script or extracted-handler replay; root owns those receipts",
+      "No repository edits, staging, or publication"
+    ],
+    "bindings": [
+      {
+        "base_git_blob": "dea984b98f18515ced457e4d114547471162141a",
+        "sha256": "07b816b0fb6756c8552ceb24ef9d88d312e5425020c093247b9985b87c46d175",
+        "exact_reconstruction": true,
+        "path": "streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md"
+      },
+      {
+        "base_git_blob": "2fe650c1e49b0c559b6d587abe8b4fddd8d93b7f",
+        "sha256": "49ba1f2da3a2f007d81d41c68309e660917f953dffa9d8856243b23714ad5728",
+        "exact_reconstruction": true,
+        "path": "streeling/courses/computer-science/en/cs-006-ixql-pipeline-composition.md"
+      },
+      {
+        "base_git_blob": "8424732f10d7be80cc288ee12a9d091e45fffe1f",
+        "sha256": "a7367d45880c6731a19c598b4117a2047fe54b03bea169ff64559cf218b48a29",
+        "exact_reconstruction": true,
+        "path": "streeling/courses/visual-computing/en/vc-002-godot-react-bridge-evidence.md"
+      },
+      {
+        "base_git_blob": "fb1d96c58df78e732c51a2b755805ca166bd4e89",
+        "sha256": "bec735bd24232900c16b0d68ded5b7adf7ce5bfedc03d7eae83fdd5e8fd832ad",
+        "exact_reconstruction": true,
+        "path": "streeling/courses/visual-computing/en/vc-004-godot-observatory-capture-gate.md"
+      },
+      {
+        "base_git_blob": "03607cf80476ded0ff5fd09d74cdb03ff6e2f813",
+        "declared_replacements": 2,
+        "sha256": "bde01b139bddc60468e3bcdf18ef8adae7d5863077b56b3f3257456a22c73351",
+        "exact_reconstruction": true,
+        "path": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md"
+      },
+      {
+        "base_git_blob": "91a7abad3a5c6f6ab3095096d920077560ad75c7",
+        "sha256": "4ddf40807c786699261f11f3e6e19eed19e33845ee6de5c3a6e6c613fe4d6275",
+        "exact_reconstruction": true,
+        "path": "streeling/courses/visual-computing/en/vc-007-weave-seams-as-scene-contracts.md"
+      }
+    ],
+    "status": "Completed six-English preflight, superseded only for final hashes/scope by final_delta; source-claim checks retained."
+  },
+  "readme_final_delta": {
+    "checked_at_utc": "2026-10-22T04:33:50.6941652Z",
+    "status": "README final integration claims agree with coordinator-owned saved receipts; no finding",
+    "scope": "README-only delta; final source bodies, translations and packet were not re-reviewed. Existing bindings and packet/rubric digest stability checked.",
+    "previous_readme_checkpoint_sha256": "13163cfc66070c24b70ff0b84ef93c4d247fcec5d0a107413231e440a7ebbb44",
+    "final_readme_sha256": "f824c2e71a64e61257b1587503e54ec3a9ea2d6599e5644b5610a7ba8d65334c",
+    "integration_evidence_ownership": "Coordinator-owned results read from saved JSON receipts and existing test/build log tails. This auditor did not rerun sync, tests, build, rendered checks, network or apps.",
+    "claims": [
+      {
+        "evidence": "command-results.json records all three exit codes 0; validation.json agrees; saved targeted-test log tail has 18 tests/pass and zero failed; saved build log tail has 1714 pages and Complete.",
+        "claim": "Sync, targeted tests and Astro build succeeded"
+      },
+      {
+        "evidence": "rendered-links.json has 27 check rows; summed links 573 and unresolved 0, matching summary/validation.",
+        "claim": "27 rendered pages, 573 article links, zero unresolved internal targets"
+      },
+      {
+        "evidence": "rendered-links.json has explicit missing page and missing anchor errors for the two injected controls; validation.json agrees.",
+        "claim": "Missing-page and missing-anchor negative controls detected"
+      },
+      {
+        "evidence": "rendered-locale-sources.json has 12 rows, every locale_source_url_found and localized_scope_note_found true, and all_new_locale_sources_used true. Replacement of existing fallback routes is explicit; unchanged total page count does not imply absent translations.",
+        "claim": "All 12 changed locale pages select new localized source and note"
+      },
+      {
+        "evidence": "source-inventory.json generated catalog is 148/148/148 with 148 module mapping rows, 148 modules with both locale files and no missing locale paths; validation.json agrees.",
+        "claim": "148 English/French/Spanish source files per language, no locale path gaps"
+      },
+      {
+        "evidence": "Per-department counts sum to 147; 21*25=525 and 525-147=378. One IX Research module is explicitly outside original denominator.",
+        "claim": "Original 21-department goal has 147 core codes and 378 source gaps"
+      },
+      {
+        "evidence": "source-inventory.json and validation.json both name streeling/source.json and three personal journal files as protected/unchanged.",
+        "claim": "Initial-copy provenance and journals preserved"
+      },
+      {
+        "evidence": "README retains pending subject/fluent-language/learner reviews, source-assisted packet limits, formal-review skipped status and publication/deployed anonymous HTML readback gates; validation.json retains matching false/no-result fields and runtime limits.",
+        "claim": "Draft coverage remains distinct from human-reviewed or published completion"
+      }
+    ],
+    "prior_content_bindings_unchanged": [
+      {
+        "path": "code/streeling/evidence/locale-completion-2026-10-22/bindings.json",
+        "sha256": "d5afd17421690990f1ca93cc7ba9d0a246fcb21d1e4aefdb3d74943108e1ea4a",
+        "unchanged": true
+      },
+      {
+        "path": "code/streeling/evidence/locale-completion-2026-10-22/learner-tasks.md",
+        "sha256": "30e70830e61cf94158879d53095118f6a39571bbae742cae38dd12c6b78ef878",
+        "unchanged": true
+      },
+      {
+        "path": "code/streeling/evidence/locale-completion-2026-10-22/review-rubric.json",
+        "sha256": "a3be9c11cb78897e7ffae319667feb805070e5d8b0bccf72ff2ecb4f7dbb406a",
+        "unchanged": true
+      }
+    ],
+    "receipt_hashes": [
+      {
+        "path": "code/streeling/evidence/locale-completion-2026-10-22/command-results.json",
+        "sha256": "18a8f09a8f3979b741000ea7d65a8eda16f1229b8752c0291b864e168d02f7a1"
+      },
+      {
+        "path": "code/streeling/evidence/locale-completion-2026-10-22/rendered-links.json",
+        "sha256": "a0fdf0d6f37986ccc8870fe51edcab389855185d0202c226a1178b75b583f39a"
+      },
+      {
+        "path": "code/streeling/evidence/locale-completion-2026-10-22/rendered-locale-sources.json",
+        "sha256": "9e23b5414d05105d4572b1cf8c320a72be488f6d0beee256d8c07668984e41e1"
+      },
+      {
+        "path": "code/streeling/evidence/locale-completion-2026-10-22/source-inventory.json",
+        "sha256": "532cdf8972a04a4a278465f9e2adc0d5d9d0ca9c37faca4f97400db5b9127b56"
+      },
+      {
+        "path": "code/streeling/evidence/locale-completion-2026-10-22/validation.json",
+        "sha256": "34fe11a5a6b503d90eadee69137a542e6362dab7a950da190d427c29801788e0"
+      }
+    ],
+    "formal_review": false,
+    "human_approval": false,
+    "findings": []
+  }
+}

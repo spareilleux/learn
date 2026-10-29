@@ -1,0 +1,57 @@
+{
+  "unit": "a",
+  "artifact_list_origin": "C:\\tmp\\batch50-review-a-20261024-1792858509586\\artifact-list.json",
+  "artifact_list_sha256": "03a179592632ef8c49ac881c0568de0328a84fb510ed3bd1176c1b83958f4c35",
+  "artifacts": [
+    {
+      "origin": "C:\\tmp\\batch50-review-a-20261024-1792858509586\\focused.log",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-a/focused.log",
+      "sha256": "7fcc90123ccf618993fbe0ed0791fe0967ad42293cae630e3079fc56fcdc9cb0",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-review-a-20261024-1792858509586\\receipt.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-a/receipt.json",
+      "sha256": "a51e63609fd4278b899b315f96eb5a7ab1de9f28e65d4f90372507dded852abe",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-review-a-20261024-1792858509586\\mutation.log",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-a/mutation.log",
+      "sha256": "acc3a94675c8bde4930ce4719562ae44e02fef7e1fee7adce6e5c139da07ae44",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-review-a-20261024-1792858509586\\mutation.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-a/mutation.json",
+      "sha256": "a78637c27826e9e89d465fa8d1cef51953a73e12b08c2234d7c7aca1bb318d0f",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-review-a-20261024-1792858509586\\baseline-readback.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-a/baseline-readback.json",
+      "sha256": "93c3384198126928082d25c45b3ea4811205b652645c426dfe28ccc9753504f3",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\review-a.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-a/review-a-original.json",
+      "sha256": "94bc3a8f32acff12ffb6b91790fbcdcdb5c3d5e336fd22a3cb4ba4f524c8c6d3",
+      "byte_identical": true,
+      "scope": "Original independent review before root schema normalization and tested narrow guard binding renewal."
+    }
+  ],
+  "unshipped_helpers": [
+    {
+      "path": "C:\\tmp\\batch50-review-a-20261024-1792858509586\\run-review-a.py",
+      "sha256": "e93fc7b419c33886c34168b0fabe864cafcda3d1c41394f93ea80881235506df",
+      "reason": "Temporary reviewer orchestration stays outside shipped proof-test scope. Exact executed outputs and receipts are retained."
+    },
+    {
+      "path": "C:\\tmp\\batch50-review-a-20261024-1792858509586\\verify-baseline.py",
+      "sha256": "3b29629876c8e86c4f4684f455fdc62564b19acdaf64ff3731bf46fc745b9dd4",
+      "reason": "Temporary reviewer orchestration stays outside shipped proof-test scope. Exact executed outputs and receipts are retained."
+    }
+  ],
+  "scope": "Byte-preserved independent focused/mutation/prerequisite evidence; deliberate mutant rejections are not failing canonical courses. Historical input hashes are not relabeled as final after corrections."
+}

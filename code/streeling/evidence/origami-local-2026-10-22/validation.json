@@ -1,0 +1,190 @@
+{
+  "checked_at_utc": "2026-10-22T22:39:51.950260+00:00",
+  "base_learn_commit": "5ba152bc013efe1ac1b5edbcf5cc4c06e1a594e0",
+  "source_ix_commit": "d7c22fdd6a62becb66b9d7246ea85850e7c55854",
+  "scope": "Three local-angle/candidate-information/quantifier courses with fixed data and primary-source interpretation. No new analyzer, runnable lab, full FOLD analysis, physical object, mesh export or scene.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "calculation_checks": {
+    "independent_checks": 459,
+    "passed": 459,
+    "failed": 0,
+    "findings": [
+      {
+        "id": "local-filter-insufficiency",
+        "status": "observed-preserved",
+        "finding": "MMMV satisfies the fixed angle residual and M-minus-V count but violates the strict smallest-angle assignment condition. local.rs implements the two numeric filters but not that extra rule.",
+        "boundary": "No complete IX analyse result, exported folded geometry, physical fold or new production defect reproduction asserted."
+      },
+      {
+        "id": "empty-applicable-domain",
+        "status": "observed-preserved",
+        "finding": "Hand U/F central cards leave applicable0, empty failures and initialized maximum0; counts expose the skipped domain."
+      },
+      {
+        "id": "radian-tolerance-scope",
+        "status": "observed-preserved",
+        "finding": "1e-9 is a computational absolute radian tolerance, not measured material/manufacturing allowance."
+      },
+      {
+        "id": "adjacent-sector-perturbation-wording",
+        "status": "resolved",
+        "finding": "A shifted ray changes adjacent sectors with opposite signs; geometrically opposite sectors with opposite-sign changes would cancel in degree4.",
+        "resolution": "Requested adjacent/opposite-sign wording in production plan; final plan bytes bound below."
+      }
+    ],
+    "public_ix_source_files": 6,
+    "pinned_fold_spec_files": 1,
+    "ray_permutations": 24,
+    "cyclic_starts": 4,
+    "perturbations": 4,
+    "odd_degree_controls": 1,
+    "binary_assignments": 16,
+    "count_survivors": 8,
+    "extra_rule_survivors": 4,
+    "applicability_cards": 4,
+    "new_rust_run": false,
+    "new_full_fold_file": false,
+    "new_physical_fold": false,
+    "new_scene": false,
+    "new_dependency_install": false,
+    "full_analyzer_acceptance": null,
+    "complete_folded_state": null
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 5.775200599979144,
+    "log": "C:\\tmp\\streeling-origami-local-tests-20261022.log",
+    "log_sha256": "90404362aa4f48296a8363485a7b28b3d2b5b378f140a4555c6caab53578484d",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.3483106000057887,
+    "log": "C:\\tmp\\streeling-origami-local-sync-20261022.log",
+    "log_sha256": "f51c10a6c8b53c5b725b56e604e825800ae543e2140fcfb478ff42aabe4de12b",
+    "idempotent_checked_files": 680
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 89.56600360001903,
+    "log": "C:\\tmp\\streeling-origami-local-build-20261022.log",
+    "log_sha256": "d783e840d43de8d49b09285913b3cc075a08495f3ce6484abdd86a59850d5df9",
+    "pages": 1876,
+    "dependency_install": "Existing node_modules junction; no install.",
+    "warnings": "Existing highlighting fallback and empty i18n/404 warnings retained in complete log."
+  },
+  "rendered_articles": {
+    "pages": 21,
+    "links": 390,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "data_verdict": "pass",
+    "data_receipt_sha256": "f3656c1c8b43743a98adc2c3e93f18dd1de20b15a5984bb6d04d4b33a79459b7",
+    "content_verdict": "pass",
+    "content_receipt_sha256": "bb48fec16efa32f5a3c1deb27d1384142762eeccf844b563cfd49acf4613c137",
+    "exercise_pairs_checked": 45,
+    "learner_criteria_checked": 15,
+    "open_course_findings": [],
+    "content_observations": [
+      {
+        "origin": "code/streeling/evidence/origami-local-2026-10-22/data-audit.json",
+        "id": "local-filter-insufficiency",
+        "status": "observed-preserved",
+        "finding": "MMMV satisfies the fixed angle residual and M-minus-V count but violates the strict smallest-angle assignment condition. local.rs implements the two numeric filters but not that extra rule.",
+        "boundary": "No complete IX analyse result, exported folded geometry, physical fold or new production defect reproduction asserted."
+      },
+      {
+        "origin": "code/streeling/evidence/origami-local-2026-10-22/data-audit.json",
+        "id": "empty-applicable-domain",
+        "status": "observed-preserved",
+        "finding": "Hand U/F central cards leave applicable0, empty failures and initialized maximum0; counts expose the skipped domain."
+      },
+      {
+        "origin": "code/streeling/evidence/origami-local-2026-10-22/data-audit.json",
+        "id": "radian-tolerance-scope",
+        "status": "observed-preserved",
+        "finding": "1e-9 is a computational absolute radian tolerance, not measured material/manufacturing allowance."
+      }
+    ],
+    "content_fix_history": [
+      {
+        "origin": "code/streeling/evidence/origami-local-2026-10-22/data-audit.json",
+        "id": "adjacent-sector-perturbation-wording",
+        "status": "resolved",
+        "finding": "A shifted ray changes adjacent sectors with opposite signs; geometrically opposite sectors with opposite-sign changes would cancel in degree4.",
+        "resolution": "Requested adjacent/opposite-sign wording in production plan; final plan bytes bound below."
+      },
+      {
+        "id": "phy010-fr-article-agreement",
+        "status": "resolved",
+        "finding": "French exercise2 used toutes les \u00e9tiquetages.",
+        "resolution": "Translator corrected to tous les \u00e9tiquetages; technical quantifier meaning and all five exercise answers unchanged. Final source bytes and URL parity reviewed.",
+        "source_changes_by_reviewer": false
+      },
+      {
+        "id": "inf007-es-subject-agreement",
+        "status": "resolved",
+        "finding": "Translator final pass identified singular describe after Tres bits in the final Spanish answer.",
+        "resolution": "Translator corrected to Tres bits describen; identity-loss and conditional-uniform interpretation unchanged. Final corrected answer directly read.",
+        "source_changes_by_reviewer": false
+      }
+    ],
+    "scope": "Independent AI source/theory/model/content checks; not human approval.",
+    "human_technical": null,
+    "fluent_language": null,
+    "learner": null,
+    "full_ix_analysis": null,
+    "physical_fold": null,
+    "scene_trial": null,
+    "agent_quality_probability": null
+  },
+  "code_review_pipeline": "Documentation/fixed-data-only deliverable with temporary verification wrappers; no new production/lab program emitted and no code-shipping review invoked.",
+  "manual_host_scan": "Read exact source sorting/remainder/tolerance and applicability branches plus aggregate conjuncts. Preserve strict neighbor-angle hypotheses, existential unassigned theorem versus prescribed assignment, source-filter versus full analysis, labels and no symmetry quotient, uniform conditional ensembles versus skew entropy and average rejected branches, unknowns versus probabilities, empty checked-domain semantics. Visually read Hull page8 and later Shannon page11 after successful documented-UA recheck, preserving initial failed transport.",
+  "source_inventory": {
+    "core_english_modules": 201,
+    "target": 525,
+    "original_departments": 21,
+    "remaining_core_source_gaps": 324,
+    "locale_counts": {
+      "en": 202,
+      "fr": 202,
+      "es": 202
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint/typecheck scripts configured; existing generator tests and Astro build used."
+}

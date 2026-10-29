@@ -1,0 +1,68 @@
+{
+  "scope": "Source-field observations and constructed frequency/projection arithmetic; no observed GA converter or tradition intonation claim.",
+  "reference_a4_hz": 440,
+  "reference_midi": 69,
+  "tonic_midi": 60,
+  "tonic_hz": 261.6255653005986,
+  "constructed": {
+    "ratio_a": 1.25,
+    "ratio_a_exact": "5/4",
+    "frequency_a_hz": 327.0319566257483,
+    "frequency_b_hz": 329.6275569128699,
+    "ratio_b": "2^(4/12)",
+    "cents_a_above_tonic": 386.3137138648348,
+    "cents_b_above_tonic": 400.00000000000006,
+    "a_relative_to_b_cents": -13.686286135165112,
+    "continuous_midi_a": 63.86313713864835,
+    "continuous_midi_b": 64.0,
+    "authored_nearest_step_a": 64,
+    "authored_nearest_step_b": 64,
+    "residual_a_cents": -13.686286135165204
+  },
+  "catalog_rast": {
+    "source_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+    "name": "Rast",
+    "tradition": "Arabic Maqam",
+    "intervals": [
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1
+    ],
+    "pitch_classes": [
+      0,
+      2,
+      4,
+      5,
+      7,
+      9,
+      11
+    ],
+    "binary_scale_id": 2741,
+    "tuning_annotation": "approx-12tet",
+    "scope": "Selected stored catalog fields, not a certified account of performance practice."
+  },
+  "source_boundaries": {
+    "tuning_annotation": "Plain string, not an enforced enum in the inspected model.",
+    "intervals": "Integer semitone list in the inspected contract.",
+    "pitch_classes": "String documented as twelve-step pitch-class values; no structured per-degree cents field is declared.",
+    "midi_note": "Integer0..127 and pitch class modulo12 at this value-object boundary.",
+    "fret_mapping": "Target MIDI minus open-string MIDI.",
+    "audio_entry": "engine_note_on takes freq:f32; signature alone does not attest exact realized pitch."
+  },
+  "advisory_retention_options": [
+    {
+      "frequency_hz": 327.0319566257483,
+      "reference_a4_hz": 440
+    },
+    {
+      "note_midi": 64,
+      "cents_offset": -13.686286135165112,
+      "reference_a4_hz": 440
+    }
+  ],
+  "advisory_status": "Teaching alternatives, not a schema, implementation or prescribed intonation for Rast."
+}

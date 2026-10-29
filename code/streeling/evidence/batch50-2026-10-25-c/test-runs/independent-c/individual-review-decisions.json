@@ -1,0 +1,354 @@
+{
+  "DV023": [
+    [
+      "Signed clearances with positive scale; ordered physical inputs retained.",
+      "A logarithm is applied to the dimensionless ratio abs(x)/scale; the output is display position, while signed physical clearances remain separately recoverable."
+    ],
+    [
+      "Inverse recovers [-3,-1,0,1,3] within 1e-11 tolerance.",
+      "Signs and zero survive; ln(4) and ln(2) invert to magnitudes 3 and 1 at scale 1."
+    ],
+    [
+      "Visual compression changes neither physical clearance nor equality of raw gaps.",
+      "Log increments depend on position, so equal screen steps cannot justify equal millimetre differences."
+    ],
+    [
+      "Scale 3 gives outer positions ±ln(2), with unchanged roundtrip.",
+      "Magnitude 3 divided by scale 3 gives ln(2); scale changes display spacing while the inverse multiplies by that scale."
+    ],
+    [
+      "No collision/perception evidence or project acceptance supplied.",
+      "The finite inverse establishes a relation only; an actual collision or perception trial requires geometry, unit and display policy evidence."
+    ]
+  ],
+  "DV024": [
+    [
+      "Rows are cumulative endpoints including zero baseline.",
+      "Adjacent cumulative endpoints must be subtracted; treating them as independent layer times changes the representation."
+    ],
+    [
+      "Layers [[2,6],[5,3]], equal total 8, unequal final layers 6 and 3.",
+      "2-0=2,8-2=6,5-0=5,8-5=3; total equality tests final endpoints, not final differences."
+    ],
+    [
+      "Upper endpoints compare totals, not correction effort.",
+      "Both main totals equal 8 despite the correction stage differing by 3 common units."
+    ],
+    [
+      "Control layers [[2,6],[5,6]], unequal totals 8 and 11, equal final layers 6.",
+      "Changing the second topline to 11 leaves its first layer 5 and raises correction from 3 to 6."
+    ],
+    [
+      "Stage identities, common units and real timing records needed.",
+      "The authored ledger is neither measured processing time nor evidence of workflow improvement."
+    ]
+  ],
+  "DV025": [
+    [
+      "Inputs are linear relative luminances and a declared threshold.",
+      "RGB byte values require conversion before this contrast formula; foreground naming does not determine the lighter numerator."
+    ],
+    [
+      "Ratio 21/5=4.2 fails threshold 4.5.",
+      "(1+0.05)/(0.2+0.05)=1.05/0.25; compare the unrounded ratio to the declared ordinary-text threshold."
+    ],
+    [
+      "Neither screenshot impression nor keyboard equivalence substitutes for contrast arithmetic.",
+      "Accessibility dimensions differ; an interaction test provides no numerical relative-luminance ratio."
+    ],
+    [
+      "Control ratio 7 passes the same 4.5 threshold.",
+      "1.05/(0.1+0.05)=7; this decision concerns the specified opaque pair only."
+    ],
+    [
+      "Compositing, variable backgrounds and other criteria remain unassessed.",
+      "A pairwise calculation cannot certify a native render or complete accessibility."
+    ]
+  ],
+  "FUT016": [
+    [
+      "Growth endpoint order [1.25,1.5]; integer horizon includes 0 through 4.",
+      "Initial inventory belongs at t=0; swapping endpoint identities or omitting period 0 would change the retained paths."
+    ],
+    [
+      "First crossings [4,2], hence bounded window [2,4].",
+      "Slow path first reaches 19.53125 at t=4; fast path equals capacity 18 at t=2, which counts under >=."
+    ],
+    [
+      "Growth factors are scenario premises, not confidence limits.",
+      "Monotonicity in the growth factor bounds conditional arithmetic; no sampled distribution or calibrated coverage is supplied."
+    ],
+    [
+      "Capacity50 gives [null,null] through t=4.",
+      "The largest retained value is 40.5, so neither path reaches 50; no beyond-horizon date is inferred."
+    ],
+    [
+      "Adoption needs measured load and calibrated growth; inventory differs from render time.",
+      "Counting crossings supplies no service-time observation, forecasting fit or throughput claim."
+    ]
+  ],
+  "FUT017": [
+    [
+      "The law is unit-index cost, not cumulative average cost.",
+      "Every requested n receives first_cost*n^b; total and average are derived only after summing those individual costs."
+    ],
+    [
+      "Exponent -1, costs [16,8,16/3,4].",
+      "2^b=1/2 fixes b=-1; evaluate 16/n at each of the four explicit unit indexes."
+    ],
+    [
+      "Total100/3 and average25/3; last-unit cost4 is different.",
+      "Summing 16+8+16/3+4 gives100/3, then divide by 4; treating 4 as average would undercount the batch."
+    ],
+    [
+      "Control exponent0, total64, average16.",
+      "A doubling factor 1 makes n^0=1 for every unit, removing the assumed cost decline."
+    ],
+    [
+      "Comparable observed unit costs and a revisitable fitted convention required.",
+      "A stipulated learning ratio supplies no empirical staffing, financial or learning forecast."
+    ]
+  ],
+  "FUT018": [
+    [
+      "Use normalized masses paired with demands and strict > capacity.",
+      "Equality is served; demand14 alone exceeds capacities10 and12, and no demand exceeds14."
+    ],
+    [
+      "Exceedance [1/5,1/5,0]; only reserve 4 passes limit1/10.",
+      "The demand14 mass is 1/5; reserves 0 and 2 retain it, while reserve 4 removes all strict exceedance."
+    ],
+    [
+      "Probability constraint gives no conditional overload-severity bound.",
+      "The same event mass could carry a much larger excess demand without changing this decision rule."
+    ],
+    [
+      "Limit1/5 admits [0,2,4]; minimum passing reserve0.",
+      "The <= test includes equality at 1/5, while demands and probabilities remain fixed."
+    ],
+    [
+      "Production decision needs calibrated masses and reserve costs.",
+      "The finite candidate constraint makes neither a calibrated reliability statement nor a cost optimum."
+    ]
+  ],
+  "FUT019": [
+    [
+      "Nonnegative increments add to baseline5.",
+      "The same baseline is counted once for each subset; no interaction or causal contribution is measured."
+    ],
+    [
+      "Only [A,B] minimal, load11 at capacity10.",
+      "Single loads 8,8,6 and AC/BC loads 9 do not exceed 10; AB gives 5+3+3=11."
+    ],
+    [
+      "[A,B,C] overloads at12 but is not minimal.",
+      "Its proper subset AB already overloads; inclusion-minimality differs from smallest probability or magnitude."
+    ],
+    [
+      "Capacity8 gives AB,AC,BC loads [11,9,9].",
+      "Singles A and B equal 8 and therefore do not overload under strict >; all three pairs exceed 8 and lose overload upon deletion."
+    ],
+    [
+      "No probability or actual causal attribution follows.",
+      "Subset arithmetic proposes future challenges; an incident diagnosis needs observed effects and a causal design."
+    ]
+  ],
+  "GAA020": [
+    [
+      "Candidates A0,B2,C5,D8; centres must be existing points.",
+      "The discrete k-centre problem uses authored scalar features and absolute distance, not continuous or learned centres."
+    ],
+    [
+      "Radius3 with AC,AD,BC,BD, retaining all four ties.",
+      "All six pair radii in AB,AC,AD,BC,BD,CD order are6,3,3,3,3,5; all minima must survive."
+    ],
+    [
+      "Diversity-key counts cannot establish worst-nearest distance coverage.",
+      "Distinct labels supply no metric guarantee; radius examines the farthest candidate from its nearest selected centre."
+    ],
+    [
+      "One centreC, radius5.",
+      "Single-centre radii A=8,B=6,C=5,D=8 make C the unique minimum."
+    ],
+    [
+      "Feature meaning and actual transfer need validation.",
+      "An exact optimum in an invented scalar metric is no personalized practice or musician outcome."
+    ]
+  ],
+  "GAA021": [
+    [
+      "Rows target prefixes, columns attempt prefixes; empty-prefix costs retained.",
+      "Boundary costs count insertion/deletion distance from empty sequences and determine the complete dynamic-programming recurrence."
+    ],
+    [
+      "Main distance1; deletion of61 witnesses it.",
+      "The sequences differ, giving lower bound 1; deleting the extra second note produces the target, giving upper bound 1. The entire prefix table also agrees."
+    ],
+    [
+      "Ordered note score differs from set or pitch-class membership.",
+      "Insertion position and symbol order contribute to edit cost; an unordered note collection cannot determine this recurrence."
+    ],
+    [
+      "Reversed control distance2.",
+      "Substituting endpoints transforms[64,62,60] to[60,62,64] in 2 operations; one unit edit cannot repair both distinct endpoints."
+    ],
+    [
+      "No motor/listening/attention diagnosis established.",
+      "The finite symbol table includes neither timing nor behavioral observations or unique alignments."
+    ]
+  ],
+  "GAA022": [
+    [
+      "Positive IOIs are intervals, normalized by each vector own sum.",
+      "They are neither absolute timestamps nor a beat-clock mapping; equal vector lengths retain corresponding interval identities."
+    ],
+    [
+      "Both main shapes [1/4,1/2,1/4]; L1=0.",
+      "Target sum 4 and attempt sum 8 give the same proportions, and each component difference is 0."
+    ],
+    [
+      "Duration ratio 2 must accompany shape 0.",
+      "Normalizing hides a global doubling of duration; a tempo decision requires the separate ratio and declared tolerance."
+    ],
+    [
+      "Control shape L1=1/4 with unchanged duration ratio2.",
+      "Control [2,3,3]/8=[1/4,3/8,3/8], giving component errors[0,1/8,1/8]."
+    ],
+    [
+      "Tempo tolerance and actual onsets required before learner scoring.",
+      "No onset detector, articulation assessment or learner pass rule is executed by the finite vectors."
+    ]
+  ],
+  "PHI016": [
+    [
+      "U is unresolved truth status, neither F nor a probability.",
+      "The declared F<U<T truth-functional semantics uses an epistemic gap interpretation; it does not claim contradictory evidence."
+    ],
+    [
+      "U AND F=F, U OR F=U, NOT U=U.",
+      "Strong Kleene conjunction takes the lower ordered value, disjunction the higher, and negation fixes the middle."
+    ],
+    [
+      "U OR NOT U=U under this interpretation.",
+      "Applying classical excluded middle asT would silently replace the supplied three-valued truth table."
+    ],
+    [
+      "U AND T=U, U OR T=T, NOT U=U.",
+      "A known true disjunct settles only the disjunction; it supplies no new evidence resolving p."
+    ],
+    [
+      "Table authorizes no real policy effect.",
+      "Action rules, principal authority and evidence bindings are separate from truth-functional evaluation."
+    ]
+  ],
+  "PHI017": [
+    [
+      "One default requires consistency of usable after strict closure.",
+      "Asset identification is its prerequisite; absence of not_usable supports only a provisional default, not observed usability."
+    ],
+    [
+      "[asset,usable], default_fired=true.",
+      "No fragile premise triggers the strict rule, so no not_usable literal blocks the sole normal default."
+    ],
+    [
+      "The default conclusion may retract when facts grow.",
+      "Monotonic strict entailment and a defeasible consistency condition differ; the lesson is restricted to its single consistent fragment."
+    ],
+    [
+      "[asset,fragile,not_usable], default_fired=false; usable absent.",
+      "Fragile entails not_usable before default evaluation, defeating the justification; recomputation removes the earlier provisional conclusion."
+    ],
+    [
+      "No material validation or publication authorization established.",
+      "Logical default application supplies neither empirical properties nor permission to act."
+    ]
+  ],
+  "PHI018": [
+    [
+      "Directed attacks; every attacker needs a counterattack from the defending set.",
+      "Unattacked arguments are vacuously defended, while defendingC against B requires an accepted argument attacking B."
+    ],
+    [
+      "Iterations [],[A],[A,C],[A,C]; grounded [A,C].",
+      "From empty only A is unattacked; A attacksB and thereby defends C; the next application is unchanged and is the least fixed point."
+    ],
+    [
+      "Out [B] means attacked by grounded arguments, not factually false.",
+      "Abstract graph acceptance omits statement content and source credibility; out is a graph-theoretic status only."
+    ],
+    [
+      "Cycle control grounded=[], out=[], undecided=[A,B,C].",
+      "Every argument has an attacker and the empty defending set attacks none, so the first iterate remains empty."
+    ],
+    [
+      "Actual content, attack completeness and authority remain separate.",
+      "Graph evaluation cannot discover omitted attacks, establish credibility or grant effect authorization."
+    ]
+  ],
+  "SEM021": [
+    [
+      "Source-occurrence tokens form products and sums in the declared algebra.",
+      "Tokens are symbolic provenance inputs, with natural-number valuation in this case; they are not calibrated trust probabilities."
+    ],
+    [
+      "Polynomial2*a*b+c, evaluated multiplicity2.",
+      "Two identical ab derivations contribute coefficient 2 and c contributes 1; evaluating a=b=1,c=0 gives 2*1*1+0."
+    ],
+    [
+      "Set[a,b,c] loses joint versus alternative use and multiplicity.",
+      "A simple source-name set collapses repeated products and cannot distinguish whether sources were used jointly."
+    ],
+    [
+      "Control a*b+c evaluates 1, with same source names.",
+      "Deleting one ab derivation changes its coefficient from 2 to 1 without changing token membership."
+    ],
+    [
+      "No independent corroboration or deployed lineage implementation.",
+      "Polynomial multiplicity counts derivation use, not independent witnesses; W3C PROV is background rather than this algebra definition."
+    ]
+  ],
+  "SEM022": [
+    [
+      "Outer-wrapper identity differs from child identity.",
+      "A shallow outer copy is a new list whose entries still reference existing children."
+    ],
+    [
+      "Shallow edit gives original and copy [[9,2],[3]].",
+      "The edit addresses row0,column0 of the shared first child; both wrappers therefore expose its new value 9."
+    ],
+    [
+      "same_outer=false; same_first_child=true.",
+      "A distinct wrapper cannot prove independent mutable state when its child reference aliases the original child."
+    ],
+    [
+      "Deep control original [[1,2],[3]], copy [[9,2],[3]].",
+      "Recursive copying isolates the child in this acyclic list graph, so only the copy changes; both identity tests are false."
+    ],
+    [
+      "Other object types and intended sharing need their own copy contract.",
+      "The list demonstration cannot establish Godot resource duplication, host hooks, cycles or concurrency isolation."
+    ]
+  ],
+  "SEM023": [
+    [
+      "Point and displacement may share length units but differ in affine role.",
+      "Only points receive translation by the origin; dimensional equality alone cannot detect applying an origin to a difference."
+    ],
+    [
+      "World points [11,0,5],[14,4,5]; displacement [3,4,0].",
+      "Componentwise addition of [10,-2,5] to each point gives those values; subtracting cancels the common translation."
+    ],
+    [
+      "Translating a displacement attaches an origin incorrectly.",
+      "A relative differenceq-p is origin-free; adding t to it would produce[13,2,5], not the actual point difference."
+    ],
+    [
+      "Control points [-4,10,1],[-1,14,1]; difference [3,4,0].",
+      "Both receive[-5,8,1], which changes coordinates while preserving their pairwise displacement."
+    ],
+    [
+      "Rotation, scale, normals and import need separate declared transformations and evidence.",
+      "Only identity-basis translation is assessed; no normal transform, scene adapter, actual import or physical measurement ran."
+    ]
+  ]
+}

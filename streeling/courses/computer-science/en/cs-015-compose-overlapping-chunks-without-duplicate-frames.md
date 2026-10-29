@@ -1,0 +1,157 @@
+---
+module_id: "cs-015-compose-overlapping-chunks-without-duplicate-frames"
+department: "computer-science"
+course: "Compose Overlapping Chunks Without Duplicate Frames"
+title: "Compose Overlapping Chunks Without Duplicate Frames"
+level: "intermediate"
+prerequisites: ["cs-013-preserve-spectral-axes-and-units"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Compose Overlapping Chunks Without Duplicate Frames
+
+> **Draft scope.** Source-assisted authored fixed models. Human technical, fluent-language and learner decisions remain pending. No live fleet, production controller, user telemetry or learning improvement is claimed. The validation journal distinguishes tests actually executed from source reading and planned checks.
+
+## Sources to inspect
+
+- [cs-013-preserve-spectral-axes-and-units.md](../../computer-science/en/cs-013-preserve-spectral-axes-and-units.md)
+
+A GA audio report can look plausible even when its chunk composer emits the same analysis frame twice. The earlier spectral lesson derives frame support and axis units from an IX handler. Here we assume those coordinates are already correct and ask which output owns each global frame. The input is an authored interval ledger, not a capture of a running audio service. Its indices label analysis frames; they are not sample amplitudes or elapsed seconds.
+
+Treat every interval as including its start and excluding its end. This convention lets adjacent intervals meet without sharing a boundary frame. Each chunk carries the same stream identity and a global offset. Concatenating local arrays while discarding those offsets loses the fact that neighboring arrays overlap. A length check then counts stored entries rather than distinct global observations. Retain the original ledger so an apparently successful export can still be audited.
+
+Use the declared first-writer rule only when repeated indices carry identical values and matching provenance. The first chunk owns its whole interval. Each later chunk emits only indices not already owned. A conflicting repeated value requires a separate conflict decision: silently choosing the first value would hide disagreement. This lesson supplies no crossfade, averaging rule or signal reconstruction method. Those operations have different physical meanings and need their own contracts.
+
+The expected ledger below gives both the raw count and the retained union. Calculate them independently before reading the answers. Duplicate removal is successful only if the union still equals the required target interval. A gap is a failure even if the final count happens to match another expected length. Conversely, complete coverage does not validate the audio, its frame rate, or its association with the right note. Identity and coverage are separate checks.
+
+For the source-assisted task, open the prerequisite's shape and tail sections and identify where complete-window support differs from displayed extent. Annotate a copy of this ledger by hand, then ask an assistant to explain the ownership rule using those source locations. The direct baseline is a sorted list of global indices. Reject the proposed abstraction if it cannot expose a missing index or if it drops a conflicting duplicate without retaining its cause.
+
+## Fixed case and expected calculations
+
+```json
+{
+  "values": {
+    "chunks": [
+      [
+        0,
+        6
+      ],
+      [
+        4,
+        10
+      ],
+      [
+        8,
+        12
+      ]
+    ],
+    "target": [
+      0,
+      12
+    ]
+  },
+  "formula": "half-open intervals; first writer owns an index; retain sorted union",
+  "expected": {
+    "raw_frames": 16,
+    "distinct_frames": 12,
+    "duplicate_emissions": 4,
+    "owned": [
+      [
+        0,
+        6
+      ],
+      [
+        6,
+        10
+      ],
+      [
+        10,
+        12
+      ]
+    ],
+    "gap_control": [
+      [
+        0,
+        6
+      ],
+      [
+        7,
+        12
+      ]
+    ],
+    "missing_index": 6
+  },
+  "negative_control": "A gap at index6 cannot be repaired by dropping duplicates.",
+  "assumptions": [
+    "Integer frame indices, half-open intervals, identical values for repeated indices, one declared stream identity."
+  ],
+  "limits": "Coverage is not audio quality, overlap-add synthesis or observed streaming behavior."
+}
+```
+
+## Retain a source-assisted learner attempt
+
+Work from the pinned inputs listed above. Before asking for assistance, write your own prediction for the fixed case and its negative control, including the unit of every quantity and the exact comparison boundary. A short paper table is the direct manual baseline. Keep intermediate values, especially any result that contradicts your first prediction. This is an explanation task using existing sources and fixed data; it does not require installing a package, calling a paid service or introducing a new program.
+
+Next use an assistant to locate the relevant source passage and critique your calculation. Retain the original prompt, the response, the source location it cited and the changes you accepted or rejected. A citation is useful only when its inspected content supports the specific claim. A declared stage, a data type and a prose comment supply different kinds of evidence from an executed outcome. Explain that boundary in the final answer rather than borrowing the authority of a successful-looking label.
+
+Submit the manual baseline, corrected result, control outcome, falsifier and assistance history together. The prepared learner criteria ask whether the scope was identified, the calculation was correct, the counterexample was retained, the source supported the explanation and the conclusion respected its limits. Their decisions remain undecided until an actual learner answer exists. Answer keys below are prepared corrections, not evidence that anyone learned the material. A reviewer should preserve a failed criterion and its reason before any refinement, then judge the revised attempt separately. Runtime evidence and publication evidence, if later collected, need their own revision-bound records.
+
+### Exercise 1
+
+Count raw and distinct frames.
+
+<details>
+<summary>Answer 1</summary>
+
+`6+6+4=16`; union length `12`; duplicate emissions `4`.
+
+</details>
+
+### Exercise 2
+
+Give the owned intervals.
+
+<details>
+<summary>Answer 2</summary>
+
+`[0,6), [6,10), [10,12)` under the first-writer rule.
+
+</details>
+
+### Exercise 3
+
+Explain the gap control.
+
+<details>
+<summary>Answer 3</summary>
+
+`[0,6), [7,12)` omits index `6`; deduplication cannot supply it.
+
+</details>
+
+### Exercise 4
+
+May conflicting duplicates be silently discarded?
+
+<details>
+<summary>Answer 4</summary>
+
+No. Preserve both values and provenance; the identical-value assumption failed.
+
+</details>
+
+### Exercise 5
+
+What falsifies a correct composer claim?
+
+<details>
+<summary>Answer 5</summary>
+
+A missing target index, repeated emission or hidden conflict; coverage alone proves no audio quality.
+
+</details>
+
+[Fixed evidence packet](../../../../code/streeling/evidence/batch50-2026-10-23/unit-b.json) · [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-23/journal.md)

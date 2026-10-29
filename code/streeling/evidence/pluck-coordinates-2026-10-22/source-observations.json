@@ -1,0 +1,26 @@
+{
+  "source_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "observations": [
+    {
+      "id": "profile-overwrites-constructor",
+      "status": "prediction-refuted",
+      "finding": "Production plan tentatively predicted near0.988 for profile0. Actual pinned constructor calls set_guitar_profile(0), which writes0.986; fixed calculations use0.986 and retain this correction."
+    },
+    {
+      "id": "comment-versus-expression",
+      "status": "observed-preserved",
+      "finding": "Pick heuristic comment mentions higher strings, but ratio expression uses velocity and no string/fret/bridge-distance input. Quantized offset also depends on delay length."
+    },
+    {
+      "id": "threshold-retains-state",
+      "status": "observed-preserved",
+      "finding": "Selected positive envelope examples stop multiplying at or below1e-3, above the5e-5 attack part of the voice deactivation condition. Source-derived concern, not a runtime reproduction or production fix."
+    },
+    {
+      "id": "noise-not-ideal-displacement",
+      "status": "observed-preserved",
+      "finding": "Source window multiplies smoothed pseudorandom noise; its compact tent is not the fixed-end triangular displacement used by the ideal mode formula. The recursive one-pole smoother is not a demonstrated strict bandlimit."
+    }
+  ],
+  "human_review": null
+}

@@ -11,7 +11,28 @@ sidebar:
 
 ## Módulos
 
-Todavía no se ha producido ningún módulo.
+- [VC-001 · Un diapasón, tres vías de acceso](vc-001-accessible-fretboard-paths/)
+- [VC-002 · Pruebas para un puente de observatorio entre Godot y React](vc-002-godot-react-bridge-evidence/)
+- [VC-003 · ¿Cuándo ayuda el jitter a una nube de voicings?](vc-003-jitter-and-voicing-cloud-distance/)
+- [VC-004 · Una condición de captura para el observatorio de Godot](vc-004-godot-observatory-capture-gate/)
+- [VC-005 · Conservar detalles artesanales en una prueba de recursos de Blender a Godot](vc-005-craft-details-through-blender-to-godot/)
+- [VC-006 · Probar el significado del estado de pliegue en una escena de Blender a Godot](vc-006-origami-fold-state-scene-trial/)
+- [VC-007 · Conservar los cruces del tejido al atravesar un límite de escena de Godot](vc-007-weave-seams-as-scene-contracts/)
+- [VC-008 · Guardar y consultar una escena de tejido](vc-008-save-and-query-a-weave-scene/)
+- [VC-009 · Presupuestar la expansión de escenas BRUTAL antes de renderizarlas](vc-009-budget-brutal-scene-expansion/)
+- [VC-010 · Conservar los contratos de canales de las texturas empaquetadas](vc-010-preserve-packed-texture-channel-contracts/)
+- [VC-011 · Conservar la orientación de la base tangente tras un reflejo](vc-011-preserve-tangent-handedness-after-a-mirror/)
+- [VC-012 · Distinguir instancias de malla y llamadas de dibujo](vc-012-separate-mesh-instances-from-draw-calls/)
+- [VC-013 · Mantener coherentes el orden de los triángulos y las transformaciones](vc-013-keep-triangle-winding-consistent-with-transforms/)
+- [VC-014 · Prever la anchura en píxeles de una puntada bordada](vc-014-predict-an-embroidered-stitch-pixel-footprint/)
+- [VC-015 · Fijar un error de cuerda para un perfil escultórico](vc-015-budget-a-sculpture-profile-chord-error/)
+- [VC-016 · Seguir los espacios UV entre niveles de mipmap](vc-016-track-uv-gutters-through-mip-levels/)
+- [VC-017 · Evaluar la separación del relieve con un cuantizador declarado](vc-017-bound-relief-depth-separation-under-a-declared-quantizer/)
+- [VC-018 · Conservar la asociación alfa en el borde de un textil](vc-018-carry-alpha-association-through-a-textile-edge/)
+- [VC-019 · Medir el estiramiento UV direccional antes de reutilizar un motivo](vc-019-measure-directional-uv-stretch-before-reusing-a-motif/)
+- [VC-020 · Intersectar un rayo de selección con las franjas de una caja](vc-020-intersect-a-scene-picking-ray-with-box-slabs/)
+- [VC-021 · Plegar el hemisferio inferior al codificar normales](vc-021-fold-the-lower-hemisphere-in-a-normal-encoding/)
+- [VC-022 · Proyectar una sombra artesanal sobre un plano declarado](vc-022-project-a-craft-shadow-onto-a-declared-plane/)
 
 ## Catálogo de cursos (previsto)
 

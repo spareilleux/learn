@@ -1,0 +1,180 @@
+{
+  "checked_at_utc": "2026-10-22T02:43:56.106613+00:00",
+  "scope": "Independent arithmetic and source-compatible Python heuristic reproduction, not GA executable, analyzer or service output; no browser, guitar playing or learner observation.",
+  "ga_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+  "source_bindings": [
+    {
+      "path": "ReactComponents/ga-react-components/src/pages/GuitarFretboardTest.tsx",
+      "sha256": "b7fb15b8d2fac94e6948b4f81f41adc5a539d7195b73ea8093b4a1d87182e5f1",
+      "git_blob": "8beb071d7d636b8e27142e239f421246de7f7200"
+    },
+    {
+      "path": "ReactComponents/ga-react-components/src/components/GuitarFretboard.tsx",
+      "sha256": "b53ab2f7a78850a6371e90eb3df4011577dbd5a3e1cae1ad026b2a6fcd3c259d",
+      "git_blob": "9461279d4c4f90d27ee66ff3e4521d53fac16cd4"
+    }
+  ],
+  "marker_labels": [
+    {
+      "string_index": 0,
+      "fret": 0,
+      "source_label": "E",
+      "calculated_note": "E",
+      "matches": true
+    },
+    {
+      "string_index": 1,
+      "fret": 1,
+      "source_label": "C",
+      "calculated_note": "C",
+      "matches": true
+    },
+    {
+      "string_index": 2,
+      "fret": 0,
+      "source_label": "G",
+      "calculated_note": "G",
+      "matches": true
+    },
+    {
+      "string_index": 3,
+      "fret": 2,
+      "source_label": "E",
+      "calculated_note": "E",
+      "matches": true
+    },
+    {
+      "string_index": 4,
+      "fret": 3,
+      "source_label": "C",
+      "calculated_note": "C",
+      "matches": true
+    },
+    {
+      "string_index": 5,
+      "fret": 3,
+      "source_label": "C",
+      "calculated_note": "G",
+      "matches": false
+    }
+  ],
+  "marker_label_matches": 5,
+  "marker_total": 6,
+  "teaching_voicings": [
+    {
+      "name": "open C",
+      "sounding_notes": [
+        "C",
+        "E",
+        "G",
+        "C",
+        "E"
+      ],
+      "positive_fret_span": 2,
+      "source_compatible_BarreRequired": false,
+      "source_compatible_IsFullBarre": false
+    },
+    {
+      "name": "A-form C",
+      "sounding_notes": [
+        "C",
+        "G",
+        "C",
+        "E",
+        "G"
+      ],
+      "positive_fret_span": 2,
+      "source_compatible_BarreRequired": true,
+      "source_compatible_IsFullBarre": false
+    },
+    {
+      "name": "E-form C",
+      "sounding_notes": [
+        "C",
+        "G",
+        "C",
+        "E",
+        "G",
+        "C"
+      ],
+      "positive_fret_span": 2,
+      "source_compatible_BarreRequired": false,
+      "source_compatible_IsFullBarre": false
+    }
+  ],
+  "synthetic_confidence_trials": [
+    {
+      "trial": 1,
+      "p": "0.9",
+      "y": 1,
+      "loss": "0.01"
+    },
+    {
+      "trial": 2,
+      "p": "0.8",
+      "y": 1,
+      "loss": "0.04"
+    },
+    {
+      "trial": 3,
+      "p": "0.7",
+      "y": 0,
+      "loss": "0.49"
+    },
+    {
+      "trial": 4,
+      "p": "0.6",
+      "y": 1,
+      "loss": "0.16"
+    },
+    {
+      "trial": 5,
+      "p": "0.9",
+      "y": 1,
+      "loss": "0.01"
+    },
+    {
+      "trial": 6,
+      "p": "0.9",
+      "y": 0,
+      "loss": "0.81"
+    }
+  ],
+  "synthetic_accuracy": "4/6",
+  "synthetic_loss_sum": "1.52",
+  "synthetic_brier": "0.2533333333333333333333333333",
+  "wrong_key_brier": "0.12",
+  "expected_loss_example": {
+    "q": "0.7",
+    "p_0p7": "0.210",
+    "p_0p9": "0.250"
+  },
+  "source_compatible_transition_predictions": {
+    "A_to_B": {
+      "shared_strings": [
+        3,
+        4
+      ],
+      "issues": [
+        "Fifths"
+      ],
+      "IsClean": false
+    },
+    "A_to_C": {
+      "shared_strings": [
+        3,
+        4
+      ],
+      "issues": [],
+      "IsClean": true
+    },
+    "A_to_D": {
+      "shared_strings": [
+        4
+      ],
+      "issues": [],
+      "IsClean": true
+    }
+  },
+  "human_approval": false
+}

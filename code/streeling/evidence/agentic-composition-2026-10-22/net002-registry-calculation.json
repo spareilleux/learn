@@ -1,0 +1,32 @@
+{
+  "scope": "Static registry family graph, not tool liveness or actual dependencies.",
+  "commit": "5c4967454ddc740ed937c87719ca4d71a3522e4b",
+  "version": "1.1.0",
+  "repo_family_degrees": {
+    "ix": 27,
+    "tars": 4,
+    "ga": 5
+  },
+  "unique_family_count": 35,
+  "bipartite_node_count": 38,
+  "bipartite_edge_count": 36,
+  "repo_projection_edges": [
+    {
+      "a": "ix",
+      "b": "tars",
+      "shared_families": [
+        "grammar"
+      ]
+    }
+  ],
+  "repo_projection_components": [
+    [
+      "ix",
+      "tars"
+    ],
+    [
+      "ga"
+    ]
+  ],
+  "after_grammar_removal_projection_edges": []
+}

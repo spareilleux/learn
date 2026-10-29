@@ -1,0 +1,98 @@
+{
+  "observed_date": "2026-10-26",
+  "primary_references": [
+    {
+      "id": "math",
+      "url": "https://docs.python.org/3/library/math.html",
+      "version_and_reading_scope": "Python 3.15.1 documentation banner, read 2026-10-26; Actual rendered lines 259-296 and 318-327: exponential, natural logarithm, log1p and finite Euclidean distance. The finite scenario/optimization/edit/ratio constructions are authored derivations, not documented production capabilities.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "stack",
+      "url": "https://d3js.org/d3-shape/stack",
+      "version_and_reading_scope": "D3 documentation 7.9.0 banner, read 2026-10-26; Actual rendered lines 245-248 and 308-334: stacking supplies lower/upper interval positions and their difference carries the layer value. No D3 installation or chart execution.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "wcag",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
+      "version_and_reading_scope": "WCAG 2.2 Understanding SC 1.4.3, read 2026-10-26; Actual rendered lines 32-39, 61-65 and 204-228: text threshold, unrounded comparison, lighter/darker relative-luminance ratio and specified background. No complete conformance assessment.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "combinations",
+      "url": "https://docs.python.org/3/library/itertools.html#itertools.combinations",
+      "version_and_reading_scope": "Python 3.15.1 documentation banner, read 2026-10-26; Actual rendered lines 142-150: finite combinations and lexicographic ordering relative to input order. Objective functions and craft/practice meanings are authored; no production solver run.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "kleene",
+      "url": "https://plato.stanford.edu/entries/logic-manyvalued/",
+      "version_and_reading_scope": "Stanford Encyclopedia of Philosophy, substantive revision 2026-09-29, read 2026-10-26; Actual rendered lines 123-155: strong Kleene minimum/maximum/negation tables and unknown interpretation. This is the entry authors own expository account, not an inspected original Kleene monograph.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "defaults",
+      "url": "https://plato.stanford.edu/entries/logic-nonmonotonic/",
+      "version_and_reading_scope": "Stanford Encyclopedia of Philosophy, substantive revision 2024-11-23, read 2026-10-26; Actual rendered lines 12-17, 38-40 and 208-228: defeasible retraction, default consistency and extension caveats. Lesson restricts itself to one consistent normal default; no general construction algorithm claimed.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "dung",
+      "url": "https://cse-robotics.engr.tamu.edu/dshell/cs631/papers/dung95acceptability.pdf",
+      "version_and_reading_scope": "Dung, Artificial Intelligence 77 (1995) 321-357, read 2026-10-26; Actual extracted PDF page 5 lines 207-224 and page 8 lines 293-316: acceptable means defended against every attack; characteristic operator and grounded least fixed point. Original paper hosted by a university; no claims from uninspected later proofs.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "provenance",
+      "url": "https://www.cs.ucdavis.edu/~green/papers/pods07.pdf",
+      "version_and_reading_scope": "Green, Karvounarakis and Tannen, PODS 2007, read 2026-10-26; Actual extracted PDF page 3 lines 350-405: how-provenance, natural-coefficient polynomials and valuation. W3C PROV abstract was separately read as background only; not the polynomial semantics.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "copy",
+      "url": "https://docs.python.org/3/library/copy.html",
+      "version_and_reading_scope": "Python 3.15.1 documentation banner, updated 2026-10-25, read 2026-10-26; Actual rendered lines 7 and 32-47: assignment versus copies, outer references, recursive copies, memo and limitations. New finite list graph is authored, not host-resource duplication.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "affine",
+      "url": "https://docs.godotengine.org/en/stable/classes/class_transform3d.html",
+      "version_and_reading_scope": "Godot stable Transform3D documentation, read 2026-10-26; Actual rendered lines 6-17 and 32-42: Basis and origin separate the linear part from translation. The page response did not expose an exact stable minor version; no such pin or Godot execution is claimed.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    }
+  ],
+  "additional_background": {
+    "url": "https://www.w3.org/TR/prov-dm/",
+    "pin": "W3C Recommendation 30 April 2013",
+    "scope": "Actually read rendered abstract lines 34-38; background only, not polynomial semantics"
+  },
+  "official_product_links": {
+    "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md": "Actual full 36-line plain-text official README read; product identity only, no installed version inferred",
+    "https://github.com/GuitarAlchemist/ga": "Actual repository identity/navigation read; no live source or default-branch state claim",
+    "https://github.com/GuitarAlchemist/Demerzel": "Actual repository identity/navigation read; no live source or governance execution claim"
+  },
+  "failures_and_limits": [
+    {
+      "url": "https://www.cs.ait.ac.th/~dung/SonDung1995.pdf",
+      "observed": "web tool inaccessible; original paper university-hosted PDF used instead",
+      "used_as_reading": false
+    },
+    {
+      "url": "https://docs.blender.org/manual/en/latest/",
+      "observed": "web tool returned (402) Payment Required; pinned official README read and linked instead",
+      "used_as_reading": false
+    }
+  ],
+  "copyright_boundary": "No downloaded copyrighted external full text is included in the artifact index. Bounded reading records are authored descriptions, not reproduction of the references."
+}

@@ -1,0 +1,194 @@
+{
+  "scope": "Authored public answer key and synthetic responses for arithmetic. No participant or randomized blinded session was observed.",
+  "task": "Which of two sequential single-tone intervals has the higher frequency?",
+  "trials": [
+    {
+      "trial": 1,
+      "higher_interval": 1,
+      "synthetic_response_interval": 1,
+      "correct": true,
+      "always_first_correct": true
+    },
+    {
+      "trial": 2,
+      "higher_interval": 2,
+      "synthetic_response_interval": 2,
+      "correct": true,
+      "always_first_correct": false
+    },
+    {
+      "trial": 3,
+      "higher_interval": 1,
+      "synthetic_response_interval": 2,
+      "correct": false,
+      "always_first_correct": true
+    },
+    {
+      "trial": 4,
+      "higher_interval": 2,
+      "synthetic_response_interval": 2,
+      "correct": true,
+      "always_first_correct": false
+    },
+    {
+      "trial": 5,
+      "higher_interval": 1,
+      "synthetic_response_interval": 1,
+      "correct": true,
+      "always_first_correct": true
+    },
+    {
+      "trial": 6,
+      "higher_interval": 2,
+      "synthetic_response_interval": 2,
+      "correct": true,
+      "always_first_correct": false
+    },
+    {
+      "trial": 7,
+      "higher_interval": 1,
+      "synthetic_response_interval": 2,
+      "correct": false,
+      "always_first_correct": true
+    },
+    {
+      "trial": 8,
+      "higher_interval": 2,
+      "synthetic_response_interval": 2,
+      "correct": true,
+      "always_first_correct": false
+    },
+    {
+      "trial": 9,
+      "higher_interval": 1,
+      "synthetic_response_interval": 1,
+      "correct": true,
+      "always_first_correct": true
+    },
+    {
+      "trial": 10,
+      "higher_interval": 2,
+      "synthetic_response_interval": 2,
+      "correct": true,
+      "always_first_correct": false
+    },
+    {
+      "trial": 11,
+      "higher_interval": 1,
+      "synthetic_response_interval": 1,
+      "correct": true,
+      "always_first_correct": true
+    },
+    {
+      "trial": 12,
+      "higher_interval": 2,
+      "synthetic_response_interval": 1,
+      "correct": false,
+      "always_first_correct": false
+    },
+    {
+      "trial": 13,
+      "higher_interval": 1,
+      "synthetic_response_interval": 1,
+      "correct": true,
+      "always_first_correct": true
+    },
+    {
+      "trial": 14,
+      "higher_interval": 2,
+      "synthetic_response_interval": 2,
+      "correct": true,
+      "always_first_correct": false
+    },
+    {
+      "trial": 15,
+      "higher_interval": 1,
+      "synthetic_response_interval": 1,
+      "correct": true,
+      "always_first_correct": true
+    },
+    {
+      "trial": 16,
+      "higher_interval": 2,
+      "synthetic_response_interval": 1,
+      "correct": false,
+      "always_first_correct": false
+    },
+    {
+      "trial": 17,
+      "higher_interval": 1,
+      "synthetic_response_interval": 1,
+      "correct": true,
+      "always_first_correct": true
+    },
+    {
+      "trial": 18,
+      "higher_interval": 2,
+      "synthetic_response_interval": 2,
+      "correct": true,
+      "always_first_correct": false
+    },
+    {
+      "trial": 19,
+      "higher_interval": 1,
+      "synthetic_response_interval": 1,
+      "correct": true,
+      "always_first_correct": true
+    },
+    {
+      "trial": 20,
+      "higher_interval": 2,
+      "synthetic_response_interval": 1,
+      "correct": false,
+      "always_first_correct": false
+    }
+  ],
+  "correct": 15,
+  "total": 20,
+  "accuracy": 0.75,
+  "always_first_correct": 10,
+  "always_first_accuracy": 0.5,
+  "correct_when_higher_first": 8,
+  "correct_when_higher_second": 7,
+  "first_response_count": 11,
+  "binomial_null": {
+    "independent_trials": true,
+    "fair_guess_success_probability": 0.5,
+    "one_sided": true,
+    "alpha": 0.05,
+    "scope": "Assumed model, not established by the synthetic trace."
+  },
+  "exact_tail_probabilities": [
+    {
+      "at_least": 12,
+      "probability": 0.2517223358154297,
+      "scipy_sf_argument": 11
+    },
+    {
+      "at_least": 14,
+      "probability": 0.057659149169921875,
+      "scipy_sf_argument": 13
+    },
+    {
+      "at_least": 15,
+      "probability": 0.020694732666015625,
+      "scipy_sf_argument": 14
+    },
+    {
+      "at_least": 16,
+      "probability": 0.005908966064453125,
+      "scipy_sf_argument": 15
+    }
+  ],
+  "minimum_successes_for_rule": 15,
+  "selected_best_of_eight": {
+    "independent_complete_tests": 8,
+    "single_test_threshold_false_positive_probability": 0.020694732666015625,
+    "at_least_one_threshold_crossing_probability": 0.1540499441685269,
+    "scope": "Independence assumption for this calculation; actual repeated blocks can be dependent."
+  },
+  "human_outcome": null,
+  "preference_outcome": null,
+  "learning_outcome": null,
+  "administered_protocol": null
+}

@@ -1,0 +1,26 @@
+{
+  "checked_at_utc": "2026-10-22T22:06:05.055841+00:00",
+  "readings": [
+    {
+      "url": "https://dsprelated.com/freebooks/pasp/Ideal_Plucked_String.html",
+      "actual_read": "Julius O. Smith, ideal initial displacement with zero initial velocity; sampled sharp corners require bandlimiting. Direct web open body read.",
+      "scope": "Ideal model assumptions, not GA implementation certification."
+    },
+    {
+      "url": "https://www.dsprelated.com/freebooks/filters/Time_Constant_One_Pole.html",
+      "actual_read": "Julius O. Smith, exact R=exp(-T/tau) and approximate time-constant derivation. Direct web open body read."
+    },
+    {
+      "url": "https://kirkmcd.princeton.edu/examples/Ph205/ph205l21.pdf#page=5",
+      "actual_read": "Kirk T. McDonald Ph205 lecture21, scanned PDF page5 (printed228) visually rendered and read at full size. Triangular displacement coefficient from Fourier integral and modal-node suppression.",
+      "download_status": 200,
+      "pdf_bytes": 748688,
+      "pdf_sha256": "3d3feddaaef8069f62a5dce360745880382fb8e770cfa1a0ff04a41733ce1d15",
+      "web_open_status": "502 on two attempts",
+      "text_extraction": "pypdf returned empty text on all11 scanned pages; not counted as a text read.",
+      "notation": "Lecture uses A_n for displacement coefficients and B_n for initial-velocity sine-time terms. Course explicitly names its own displacement coefficient B_n to avoid importing that distinction incorrectly."
+    }
+  ],
+  "new_audio_run": false,
+  "new_player_trial": false
+}

@@ -1,0 +1,782 @@
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	﻿2026-10-25T19:16:50.1488362Z Current runner version: '2.338.0'
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1508302Z ##[group]Runner Image Provisioner
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1508995Z Hosted Compute Agent
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1509463Z Version: 20261021.618
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1510075Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1510663Z Build Date: 2026-10-21T00:45:21Z
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1511242Z Worker ID: {99ef0b96-bd29-4049-8045-b7478fb53304}
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1511861Z Region: westus3
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1512297Z Cloud: Azure
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1512825Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1513884Z ##[group]Operating System
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1514423Z Ubuntu
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1515132Z 24.04.5
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1515695Z LTS
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1516247Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1516701Z ##[group]Runner Image
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1517169Z Image: ubuntu-24.04
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1517726Z Version: 20261012.334.1
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1518704Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1520013Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1520845Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1521792Z ##[group]GITHUB_TOKEN Permissions
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1523443Z Contents: read
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1523976Z Metadata: read
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1524433Z Packages: read
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1525113Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1526825Z Secret source: Actions
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1527697Z Cache mode: write
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1528241Z Prepare workflow directory
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1835536Z Prepare all required actions
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.1874207Z Getting action download info
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.4940622Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:50.5892050Z Download action repository 'actions/setup-dotnet@v6' (SHA:a98b56852c35b8e3190ac28c8c2271da59106c68)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.4894381Z Complete job name: rust-for-csharp-java (ubuntu-latest)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5595335Z ##[group]Run actions/checkout@v7
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5596087Z with:
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5596472Z   repository: spareilleux/learn
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5599657Z   token: ***
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5600032Z   ssh-strict: true
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5600409Z   ssh-user: git
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5600788Z   persist-credentials: true
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5601195Z   clean: true
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5601572Z   sparse-checkout-cone-mode: true
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5602020Z   fetch-depth: 1
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5602388Z   fetch-tags: false
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5602773Z   show-progress: true
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5603161Z   lfs: false
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5603528Z   submodules: false
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5603916Z   set-safe-directory: true
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5604347Z   allow-unsafe-pr-checkout: false
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.5605126Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6418580Z Syncing repository: spareilleux/learn
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6420131Z ##[group]Getting Git version info
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6420885Z Working directory is '/home/runner/work/learn/learn'
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6421703Z [command]/usr/bin/git version
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6472644Z git version 2.55.0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6488369Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6496756Z Temporarily overriding HOME='/home/runner/work/_temp/40ea461e-5316-48f6-b88b-1f40b30f14d5' before making global git config changes
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6498661Z Adding repository directory to the temporary git global config as a safe directory
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6502045Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/learn/learn
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6541705Z Deleting the contents of '/home/runner/work/learn/learn'
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6546085Z ##[group]Determining repository object format
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6547974Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6549430Z ##[group]Initializing the repository
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6567288Z [command]/usr/bin/git init /home/runner/work/learn/learn
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6637590Z hint: Using 'master' as the name for the initial branch. This default branch name
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6639233Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6640518Z hint: to use in all of your new repositories, which will suppress this warning,
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6641554Z hint: call:
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6642125Z hint:
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6642849Z hint: 	git config --global init.defaultBranch <name>
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6643706Z hint:
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6644498Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6645991Z hint: 'development'. The just-created branch can be renamed via this command:
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6647027Z hint:
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6647805Z hint: 	git branch -m <name>
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6648524Z hint:
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6649496Z hint: Disable this message with "git config set advice.defaultBranchName false"
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6650904Z Initialized empty Git repository in /home/runner/work/learn/learn/.git/
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6653047Z [command]/usr/bin/git remote add origin https://github.com/spareilleux/learn
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6687360Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6688466Z ##[group]Disabling automatic garbage collection
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6690068Z [command]/usr/bin/git config --local gc.auto 0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6716875Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6717956Z ##[group]Setting up auth
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6718764Z Removing SSH command configuration
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6721109Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.6753066Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.7042761Z Removing HTTP extra header
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.7047476Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.7078063Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.7261782Z Removing includeIf entries pointing to credentials config files
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.7266168Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.7294552Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.7481500Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-26995bc3-9436-456e-a089-2cb4da92ca46.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.7514108Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/learn/learn/.git.path /home/runner/work/_temp/git-credentials-26995bc3-9436-456e-a089-2cb4da92ca46.config
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.7542905Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/learn/learn/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-26995bc3-9436-456e-a089-2cb4da92ca46.config
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.7575726Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-26995bc3-9436-456e-a089-2cb4da92ca46.config
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.7605754Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-26995bc3-9436-456e-a089-2cb4da92ca46.config
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.7632737Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.7637675Z ##[group]Fetching the repository
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:51.7638831Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +74718c003727e816cf9afc90b5e8be58a1074bd4:refs/remotes/pull/201/merge
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:59.6466927Z From https://github.com/spareilleux/learn
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:59.6468439Z  * [new ref]         74718c003727e816cf9afc90b5e8be58a1074bd4 -> pull/201/merge
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:59.6471346Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:59.6472273Z ##[group]Determining the checkout info
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:59.6473386Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:59.6474686Z [command]/usr/bin/git sparse-checkout disable
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:59.6519661Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:59.6547828Z ##[group]Checking out the ref
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:16:59.6550928Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/201/merge
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.6725052Z Updating files:  77% (7930/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.6844677Z Updating files:  78% (8013/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.6946413Z Updating files:  79% (8116/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.7039948Z Updating files:  80% (8219/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.7104244Z Updating files:  81% (8322/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.7171743Z Updating files:  82% (8424/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.7266401Z Updating files:  83% (8527/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.7331957Z Updating files:  84% (8630/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.7413473Z Updating files:  85% (8733/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.7474175Z Updating files:  86% (8835/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.7542105Z Updating files:  87% (8938/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.7611757Z Updating files:  88% (9041/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.7673992Z Updating files:  89% (9143/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.7736564Z Updating files:  90% (9246/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.7804511Z Updating files:  91% (9349/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.7903838Z Updating files:  92% (9452/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8037102Z Updating files:  93% (9554/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8107792Z Updating files:  94% (9657/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8173252Z Updating files:  95% (9760/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8247089Z Updating files:  96% (9863/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8324224Z Updating files:  97% (9965/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8388940Z Updating files:  98% (10068/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8438675Z Updating files:  99% (10171/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8439029Z Updating files: 100% (10273/10273)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8439607Z Updating files: 100% (10273/10273), done.
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8525602Z Note: switching to 'refs/remotes/pull/201/merge'.
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8525925Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8526179Z You are in 'detached HEAD' state. You can look around, make experimental
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8526621Z changes and commit them, and you can discard any commits you make in this
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8527058Z state without impacting any branches by switching back to a branch.
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8527392Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8527618Z If you want to create a new branch to retain commits you create, you may
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8528165Z do so (now or later) by using -c with the switch command. Example:
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8528468Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8528612Z   git switch -c <new-branch-name>
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8528820Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8528951Z Or undo this operation with:
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8529147Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8529257Z   git switch -
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8529404Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8529651Z Turn off this advice by setting config variable advice.detachedHead to false
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8529899Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8530171Z HEAD is now at 74718c0 Merge b77f44f82e1ad4547e6efd3aa2e4448cce6b2809 into 8c57097d363e29c5fb11cba9eabd7d8a6813a7d6
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8567553Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8610604Z [command]/usr/bin/git log -1 --format=%H
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8635785Z 74718c003727e816cf9afc90b5e8be58a1074bd4
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8829301Z ##[group]Run rustup show active-toolchain && cargo --version
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.8829727Z [36;1mrustup show active-toolchain && cargo --version[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.9025246Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.9025563Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:00.9371607Z stable-x86_64-unknown-linux-gnu (default)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:01.6654606Z cargo 1.99.0 (5f94df478 2026-08-27)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:01.7544757Z ##[group]Run cargo new hello
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:01.7545226Z [36;1mcargo new hello[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:01.7545495Z [36;1mcd hello[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:01.7545828Z [36;1mcargo run[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:01.7546012Z [36;1mcargo build --release[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:01.7546218Z [36;1mls -l target/release[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:01.7601419Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:01.7601701Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:01.8745884Z     Creating binary (application) `hello` package
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:03.3312525Z note: see more `Cargo.toml` keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:04.0981246Z    Compiling hello v0.1.0 (/home/runner/work/_temp/hello)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.0014784Z     Finished `dev` profile [unoptimized + debuginfo] target(s) in 7.65s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.0054530Z      Running `target/debug/hello`
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.0069621Z Hello, world!
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.0237592Z    Compiling hello v0.1.0 (/home/runner/work/_temp/hello)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.4529004Z     Finished `release` profile [optimized] target(s) in 0.43s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.4835782Z total 456
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.4836149Z drwxr-xr-x 2 runner runner   4096 Oct 25 19:17 build
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.4836504Z drwxr-xr-x 2 runner runner   4096 Oct 25 19:17 deps
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.4836785Z drwxr-xr-x 2 runner runner   4096 Oct 25 19:17 examples
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.4837058Z -rwxr-xr-x 2 runner runner 444664 Oct 25 19:17 hello
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.4837351Z -rw-r--r-- 1 runner runner     94 Oct 25 19:17 hello.d
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.4837658Z drwxr-xr-x 2 runner runner   4096 Oct 25 19:17 incremental
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.4865859Z ##[group]Run for dir in . l10-workspace l14-testing l15-ffi; do
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.4866213Z [36;1mfor dir in . l10-workspace l14-testing l15-ffi; do[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.4866475Z [36;1m  (cd "$dir" && cargo fmt --check)[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.4866683Z [36;1mdone[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.4921003Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:11.4921269Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.2782359Z ##[group]Run cargo test --doc
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.2782604Z [36;1mcargo test --doc[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.2837311Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.2837583Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.3393344Z     Updating crates.io index
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.7587037Z  Downloading crates ...
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.8363581Z   Downloaded unicode-ident v1.0.24
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.8472930Z   Downloaded tokio-macros v2.7.2
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.8552073Z   Downloaded quote v1.0.47
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.8575143Z   Downloaded either v1.18.0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.8587827Z   Downloaded pin-project-lite v0.2.17
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.8637726Z   Downloaded crossbeam-utils v0.8.23
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.8661874Z   Downloaded crossbeam-deque v0.8.8
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.8673757Z   Downloaded crossbeam-epoch v0.9.21
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.8693625Z   Downloaded proc-macro2 v1.0.107
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.8722653Z   Downloaded rayon-core v1.13.0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.8757992Z   Downloaded rayon v1.12.0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.8847800Z   Downloaded syn v3.0.5
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.8950916Z   Downloaded tokio v1.53.1
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.9733324Z    Compiling crossbeam-utils v0.8.23
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.9739641Z    Compiling proc-macro2 v1.0.107
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.9740139Z    Compiling unicode-ident v1.0.24
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:12.9740576Z    Compiling quote v1.0.47
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:13.8767000Z    Compiling crossbeam-epoch v0.9.21
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:14.0979852Z    Compiling crossbeam-deque v0.8.8
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:14.2116031Z    Compiling rayon-core v1.13.0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:14.2145660Z    Compiling pin-project-lite v0.2.17
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:14.2725632Z    Compiling either v1.18.0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:14.2932444Z    Compiling rust-for-csharp-java v0.1.0 (/home/runner/work/learn/learn/code/rust-for-csharp-java)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:14.8938438Z    Compiling syn v3.0.5
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:15.1766341Z    Compiling rayon v1.12.0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:16.3968866Z    Compiling tokio-macros v2.7.2
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:16.7604787Z    Compiling tokio v1.53.1
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:18.2859598Z     Finished `test` profile [unoptimized + debuginfo] target(s) in 5.98s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:18.2912339Z    Doc-tests rust_for_csharp_java
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9186398Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9186867Z running 39 tests
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9212803Z test src/lib.rs - lesson02 (line 25) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9213813Z test src/lib.rs - lesson02 (line 51) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9214182Z test src/lib.rs - lesson03 (line 109) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9214557Z test src/lib.rs - lesson03 (line 80) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9215081Z test src/lib.rs - lesson04 (line 179) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9225182Z test src/lib.rs - lesson03 (line 98) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9225577Z test src/lib.rs - lesson04 (line 167) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9225986Z test src/lib.rs - lesson04 (line 188) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9248883Z test src/lib.rs - lesson06 (line 280) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9251047Z test src/lib.rs - lesson05 (line 248) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9251471Z test src/lib.rs - lesson06 (line 292) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9251850Z test src/lib.rs - lesson05 (line 222) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9252272Z test src/lib.rs - lesson06 (line 306) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9252630Z test src/lib.rs - lesson07 (line 345) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9252977Z test src/lib.rs - lesson07 (line 380) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9253316Z test src/lib.rs - lesson08 (line 418) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9253679Z test src/lib.rs - lesson08 (line 433) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9262669Z test src/lib.rs - lesson08 (line 442) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9263141Z test src/lib.rs - lesson08 (line 458) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9263434Z test src/lib.rs - lesson09 (line 547) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9276605Z test src/lib.rs - lesson09 (line 623) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9277134Z test src/lib.rs - lesson09 (line 561) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9277644Z test src/lib.rs - lesson10 (line 716) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9278534Z test src/lib.rs - lesson11 (line 759) - should panic ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9287127Z test src/lib.rs - lesson11 (line 769) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9289134Z test src/lib.rs - lesson11 (line 817) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9298848Z test src/lib.rs - lesson11 (line 786) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9299457Z test src/lib.rs - lesson11 (line 858) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9306183Z test src/lib.rs - lesson11 (line 847) - should panic ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9329082Z test src/lib.rs - lesson12 (line 951) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9351360Z test src/lib.rs - lesson12 (line 935) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9480580Z test src/lib.rs - lesson13 (line 1119) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9608024Z test src/lib.rs - lesson13 (line 1138) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9617436Z test src/lib.rs - lesson14 (line 1160) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9626927Z test src/lib.rs - lesson15 (line 1251) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:19.9636349Z test src/lib.rs - lesson15 (line 1265) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.0178192Z test src/lib.rs - lesson12 (line 985) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.0833970Z test src/lib.rs - lesson13 (line 1047) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.1497007Z test src/lib.rs - lesson13 (line 1074) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.1497239Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.1497445Z test result: ok. 39 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.23s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.1497720Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.1522178Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.1522329Z running 56 tests
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.2256684Z test src/lib.rs - lesson02 (line 9) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.2869693Z test src/lib.rs - lesson02 (line 43) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.3273259Z test src/lib.rs - lesson03 (line 90) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.3274187Z test src/lib.rs - lesson03 (line 68) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.3275202Z test src/lib.rs - lesson03 (line 60) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.3540073Z test src/lib.rs - lesson04 (line 142) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.3540565Z test src/lib.rs - lesson04 (line 133) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.3814096Z test src/lib.rs - lesson04 (line 160) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.3854125Z test src/lib.rs - lesson02 (line 17) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.3918884Z test src/lib.rs - lesson04 (line 151) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.4069070Z test src/lib.rs - lesson05 (line 203) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.4077175Z test src/lib.rs - lesson05 (line 210) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.4108064Z test src/lib.rs - lesson05 (line 235) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.4306261Z test src/lib.rs - lesson07 (line 317) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.4310479Z test src/lib.rs - lesson06 (line 272) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.4531389Z test src/lib.rs - lesson07 (line 334) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.4640771Z test src/lib.rs - lesson06 (line 265) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.4766262Z test src/lib.rs - lesson08 (line 401) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.4946810Z test src/lib.rs - lesson08 (line 395) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.4987472Z test src/lib.rs - lesson08 (line 411) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.5134021Z test src/lib.rs - lesson09 (line 484) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.5159840Z test src/lib.rs - lesson09 (line 473) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.5294785Z test src/lib.rs - lesson09 (line 507) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.5310543Z test src/lib.rs - lesson09 (line 492) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.5459345Z test src/lib.rs - lesson09 (line 529) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.5466460Z test src/lib.rs - lesson09 (line 515) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.5649255Z test src/lib.rs - lesson09 (line 538) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.5653153Z test src/lib.rs - lesson09 (line 582) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.5840813Z test src/lib.rs - lesson09 (line 602) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.6174506Z test src/lib.rs - lesson10 (line 646) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.6333251Z test src/lib.rs - lesson10 (line 660) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.6417238Z test src/lib.rs - lesson10 (line 678) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.6707289Z test src/lib.rs - lesson10 (line 706) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.6723093Z test src/lib.rs - lesson10 (line 695) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.6926637Z test src/lib.rs - lesson11 (line 750) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.7163477Z test src/lib.rs - lesson11 (line 878) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.7346184Z test src/lib.rs - lesson12 (line 889) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.7464093Z test src/lib.rs - lesson08 (line 426) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.7566393Z test src/lib.rs - lesson07 (line 325) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.7586827Z test src/lib.rs - lesson12 (line 899) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.7756345Z test src/lib.rs - lesson12 (line 910) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.7799410Z test src/lib.rs - lesson12 (line 920) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.7800278Z test src/lib.rs - lesson12 (line 927) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.7977849Z test src/lib.rs - lesson13 (line 1023) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.8155932Z test src/lib.rs - lesson13 (line 1000) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.8490028Z test src/lib.rs - lesson13 (line 1031) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.8490707Z test src/lib.rs - lesson13 (line 1100) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.8685636Z test src/lib.rs - lesson15 (line 1186) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.8688030Z test src/lib.rs - lesson11 (line 741) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.8720355Z test src/lib.rs - lesson15 (line 1194) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.8861611Z test src/lib.rs - lesson15 (line 1203) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.8977281Z test src/lib.rs - lesson13 (line 1011) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.9142555Z test src/lib.rs - lesson15 (line 1240) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.9155823Z test src/lib.rs - lesson15 (line 1222) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.9180738Z test src/lib.rs - lesson15 (line 1212) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.9279524Z test src/lib.rs - lesson15 (line 1229) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.9279763Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.9281238Z test result: ok. 56 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.78s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.9281529Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.9283455Z all doctests ran in 2.11s; merged doctests compilation took 1.09s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.9439671Z ##[group]Run rustup toolchain install nightly --profile minimal
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.9440046Z [36;1mrustup toolchain install nightly --profile minimal[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.9440318Z [36;1mcargo +nightly test --doc[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.9495663Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.9495941Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:20.9634280Z info: syncing channel updates for nightly-x86_64-unknown-linux-gnu
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:21.0600677Z info: latest update on 2026-10-25 for version 1.101.0-nightly (12433c307 2026-10-24)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:21.0601098Z info: downloading 3 components
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:27.7506703Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:27.7567098Z   nightly-x86_64-unknown-linux-gnu installed - rustc 1.101.0-nightly (12433c307 2026-10-24)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:27.7567585Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:27.7986997Z    Compiling crossbeam-utils v0.8.23
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:27.7987441Z    Compiling proc-macro2 v1.0.107
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:27.7987791Z    Compiling unicode-ident v1.0.24
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:27.7989464Z    Compiling quote v1.0.47
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:27.8390617Z    Compiling crossbeam-epoch v0.9.21
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:27.9153051Z    Compiling crossbeam-deque v0.8.8
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:27.9270654Z    Compiling rayon-core v1.13.0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:27.9969039Z    Compiling either v1.18.0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:28.0026783Z    Compiling pin-project-lite v0.2.17
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:28.0256193Z    Compiling rust-for-csharp-java v0.1.0 (/home/runner/work/learn/learn/code/rust-for-csharp-java)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:28.3058335Z    Compiling syn v3.0.5
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:28.5649117Z    Compiling rayon v1.12.0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:29.8139083Z    Compiling tokio-macros v2.7.2
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:30.0021365Z    Compiling tokio v1.53.1
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:31.3351533Z     Finished `test` profile [unoptimized + debuginfo] target(s) in 3.56s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:31.3365770Z    Doc-tests rust_for_csharp_java
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0245193Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0245665Z running 39 tests
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0278915Z test src/lib.rs - lesson02 (line 25) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0282246Z test src/lib.rs - lesson03 (line 109) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0282666Z test src/lib.rs - lesson02 (line 51) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0283040Z test src/lib.rs - lesson03 (line 80) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0283384Z test src/lib.rs - lesson03 (line 98) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0283738Z test src/lib.rs - lesson04 (line 179) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0284151Z test src/lib.rs - lesson04 (line 188) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0284507Z test src/lib.rs - lesson04 (line 167) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0303615Z test src/lib.rs - lesson05 (line 222) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0304039Z test src/lib.rs - lesson05 (line 248) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0304429Z test src/lib.rs - lesson06 (line 280) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0304771Z test src/lib.rs - lesson06 (line 292) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0308104Z test src/lib.rs - lesson07 (line 345) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0308607Z test src/lib.rs - lesson06 (line 306) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0309063Z test src/lib.rs - lesson07 (line 380) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0316219Z test src/lib.rs - lesson08 (line 418) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0326127Z test src/lib.rs - lesson08 (line 433) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0326537Z test src/lib.rs - lesson08 (line 458) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0327003Z test src/lib.rs - lesson08 (line 442) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0339907Z test src/lib.rs - lesson09 (line 547) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0343821Z test src/lib.rs - lesson09 (line 561) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0344725Z test src/lib.rs - lesson10 (line 716) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0345555Z test src/lib.rs - lesson11 (line 759) - should panic ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0346695Z test src/lib.rs - lesson09 (line 623) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0352808Z test src/lib.rs - lesson11 (line 769) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0366313Z test src/lib.rs - lesson11 (line 786) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0366783Z test src/lib.rs - lesson11 (line 817) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0367296Z test src/lib.rs - lesson11 (line 847) - should panic ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0380974Z test src/lib.rs - lesson11 (line 858) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0381394Z test src/lib.rs - lesson12 (line 951) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0416980Z test src/lib.rs - lesson12 (line 935) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0543976Z test src/lib.rs - lesson13 (line 1119) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0669395Z test src/lib.rs - lesson13 (line 1138) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0681120Z test src/lib.rs - lesson14 (line 1160) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0690619Z test src/lib.rs - lesson15 (line 1251) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.0699814Z test src/lib.rs - lesson15 (line 1265) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.1237746Z test src/lib.rs - lesson12 (line 985) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.1914391Z test src/lib.rs - lesson13 (line 1047) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.2546730Z test src/lib.rs - lesson13 (line 1074) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.2546956Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.2547167Z test result: ok. 39 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.23s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.2547430Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.2568912Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.2569012Z running 56 tests
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.2799609Z test src/lib.rs - lesson02 (line 43) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.2815543Z test src/lib.rs - lesson02 (line 9) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.2837300Z test src/lib.rs - lesson02 (line 17) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.2856534Z test src/lib.rs - lesson03 (line 60) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3016733Z test src/lib.rs - lesson04 (line 133) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3037312Z test src/lib.rs - lesson03 (line 90) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3069509Z test src/lib.rs - lesson03 (line 68) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3095417Z test src/lib.rs - lesson04 (line 142) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3196476Z test src/lib.rs - lesson04 (line 151) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3222384Z test src/lib.rs - lesson05 (line 203) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3235715Z test src/lib.rs - lesson05 (line 210) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3236311Z test src/lib.rs - lesson04 (line 160) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3393057Z test src/lib.rs - lesson07 (line 317) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3403237Z test src/lib.rs - lesson05 (line 235) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3452362Z test src/lib.rs - lesson06 (line 265) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3476627Z test src/lib.rs - lesson06 (line 272) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3666075Z test src/lib.rs - lesson07 (line 334) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3736203Z test src/lib.rs - lesson07 (line 325) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3736800Z test src/lib.rs - lesson08 (line 395) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3755869Z test src/lib.rs - lesson08 (line 401) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3892410Z test src/lib.rs - lesson08 (line 411) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3892820Z test src/lib.rs - lesson09 (line 484) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.3936866Z test src/lib.rs - lesson09 (line 473) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4039971Z test src/lib.rs - lesson08 (line 426) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4074495Z test src/lib.rs - lesson09 (line 507) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4089846Z test src/lib.rs - lesson09 (line 492) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4106029Z test src/lib.rs - lesson09 (line 515) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4245942Z test src/lib.rs - lesson09 (line 529) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4271107Z test src/lib.rs - lesson09 (line 538) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4272162Z test src/lib.rs - lesson09 (line 582) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4285549Z test src/lib.rs - lesson09 (line 602) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4491289Z test src/lib.rs - lesson10 (line 660) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4505253Z test src/lib.rs - lesson10 (line 646) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4519977Z test src/lib.rs - lesson10 (line 678) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4606233Z test src/lib.rs - lesson10 (line 695) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4707146Z test src/lib.rs - lesson11 (line 741) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4799532Z test src/lib.rs - lesson11 (line 750) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4836123Z test src/lib.rs - lesson10 (line 706) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4836732Z test src/lib.rs - lesson11 (line 878) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.4946248Z test src/lib.rs - lesson12 (line 889) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5045959Z test src/lib.rs - lesson12 (line 899) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5052501Z test src/lib.rs - lesson12 (line 920) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5071775Z test src/lib.rs - lesson12 (line 910) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5138434Z test src/lib.rs - lesson12 (line 927) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5211436Z test src/lib.rs - lesson13 (line 1023) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5228080Z test src/lib.rs - lesson13 (line 1000) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5386167Z test src/lib.rs - lesson13 (line 1011) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5410053Z test src/lib.rs - lesson15 (line 1186) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5505272Z test src/lib.rs - lesson13 (line 1031) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5543929Z test src/lib.rs - lesson13 (line 1100) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5566556Z test src/lib.rs - lesson15 (line 1203) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5605940Z test src/lib.rs - lesson15 (line 1194) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5678019Z test src/lib.rs - lesson15 (line 1212) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5697869Z test src/lib.rs - lesson15 (line 1229) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5707438Z test src/lib.rs - lesson15 (line 1222) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5736525Z test src/lib.rs - lesson15 (line 1240) - compile fail ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5736849Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5737194Z test result: ok. 56 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.32s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5737578Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5738389Z all doctests ran in 1.21s; merged doctests compilation took 0.66s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5793235Z ##[group]Run cargo clippy --examples -- -D warnings
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5793546Z [36;1mcargo clippy --examples -- -D warnings[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5848958Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.5849230Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.8628590Z     Checking crossbeam-utils v0.8.23
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.8629218Z     Checking either v1.18.0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.8633729Z     Checking pin-project-lite v0.2.17
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.8639979Z     Checking rust-for-csharp-java v0.1.0 (/home/runner/work/learn/learn/code/rust-for-csharp-java)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:32.8905414Z     Checking tokio v1.53.1
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:33.0390294Z     Checking crossbeam-epoch v0.9.21
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:33.1231356Z     Checking crossbeam-deque v0.8.8
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:33.1816626Z     Checking rayon-core v1.13.0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:33.3211665Z     Checking rayon v1.12.0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.5195453Z     Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.85s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.5270060Z ##[group]Run for ex in examples/*.rs; do cargo run --quiet --example "$(basename "$ex" .rs)"; done
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.5270654Z [36;1mfor ex in examples/*.rs; do cargo run --quiet --example "$(basename "$ex" .rs)"; done[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.5326320Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.5326593Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.6567785Z answer = 42, counter = 1
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.6568088Z input + 1 = 8
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.6568295Z total = 30
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.6568504Z checked: None, wrapping: 0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.6573561Z ♪ is 3 bytes in UTF-8, size_of::<char>() = 4
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.6573876Z x = 1.5, y = -2, first prime = 2, count = 5
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.6574121Z 42 is even
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.6574271Z area = 12
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.6574442Z first power of two over 100 = 128
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.6574647Z 0 1 2 | sum 1..=10 = 55
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.6574823Z square(9) = 81
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.7394993Z b = hello
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.7395375Z b = hello, c = hello
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.7395579Z x = 5, y = 5
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.7395744Z len = 5
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.7395896Z Hello, Ferris!
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.7396055Z leaving inner scope
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.7396231Z dropping inner.tmp
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.7396406Z end of main
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.7396590Z dropping second.tmp
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.7396769Z dropping first.tmp
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.8533301Z the rust programming language / the rust programming language / 4 words
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.8533752Z HELLO!
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.8533906Z 4
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.8534049Z first word: the
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.8534221Z top two: [90, 72]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.8534396Z 5 bytes, 4 chars, first 3 bytes: caf
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.8534641Z [1, 2, 3, 2, 4, 6]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.8534857Z 0:alpha 1:beta
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9888917Z Account { owner: "Ada", balance_cents: 1250 }
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9889305Z balance = 12.50, equal to copy: true
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9889610Z Grace has 1250 cents
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9889942Z closed with 1250 cents
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9890209Z Meters(3.5) < Meters(10.0): true
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9890501Z circle r=1: area 3.14
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9890795Z rectangle 3x4: area 12.00
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9891180Z triangle: area 6.00
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9891451Z horizontal move by 3
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9891650Z move by (1, -2)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9891820Z say "hi"
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9891966Z quit
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9892351Z -5°C is freezing
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9892539Z 10°C is cold
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9892702Z 22°C is mild
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9892963Z 35°C is hot
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9893132Z first shape is a circle of radius 1
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:34.9893351Z port 3000 / 8080
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.1296281Z manager of 2: Some("Grace")
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.1296537Z manager of 1: None
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.1296803Z manager of 9: None
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.1297018Z name length: 3
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.1297223Z no user 3
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.1297417Z Ok(6)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.1297707Z Err(ParseIntError { kind: InvalidDigit })
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.1298063Z error: invalid digit found in string
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.1298373Z Err("missing key `port`")
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.1298826Z Err("`port` is not a number: invalid digit found in string")
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.1299244Z Ok(3000)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.1299400Z listening on 3000
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.2345185Z total circle area = 15.71
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.2345539Z shape has area 9.00
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.2345837Z largest: circle r=1.5 (7.07)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.2346102Z 3 9 4 (max 9)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.2346327Z pear apple fig (max pear)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.2346886Z 37.0°C / 100.0°C / default 0.0°C
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.2347155Z HELLO!
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.4435443Z big orders: ["mouse", "monitor"]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.4436016Z revenue 562, any monitor true, all positive true, first mouse buyer Some("grace")
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.4436466Z spend per customer: {"ada": 487.0, "grace": 50.0, "linus": 25.0}
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.4436741Z 3 distinct products
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.4437202Z top 2 by value: ["monitor", "keyboard"]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.4437428Z 0: ada is 36
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.4437592Z 1: grace is 85
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.4437785Z initials ag, range 3..=9
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.4437999Z total with tax 72.00
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.4438217Z expensive orders: 2
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.4438404Z report #1
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.4438620Z fibonacci < 100: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.4439036Z rising steps 3, batch sums [8, 12, 9]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.5468831Z longest: Rust for C# developers
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.5469212Z first word: Rust
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.5469450Z prefix: Rust
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.5469666Z excerpt: "Call me Ishmael" (3 words)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.5469894Z tokens: ["let", "x", "=", "42"]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.5470088Z hello / RUST
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.6776802Z total: 172.50
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.6777030Z with 10% off: 155.25
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.6777218Z tax rate: 0.15
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.6777390Z clamped area: 0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.6777554Z unit square: 1
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.6777753Z 15
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.8230699Z Mul(Add(Num(2.0), Num(3.0)), Num(4.0)) = 20
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.8231122Z api and worker share env "prod", strong count = 3
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.8231369Z true
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.8231539Z after dropping api: strong count = 2
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.8231774Z shared account: Account { balance: 75 }
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.8231997Z try_borrow_mut while reading: refused
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.8232339Z try_borrow_mut after: allowed
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.8232584Z hits: 3
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.8232825Z leaf's parent: Some("root"), children of root: 1
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.8233152Z root strong = 1, weak = 1
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.8233408Z drop root
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.8233620Z drop leaf
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.8233836Z tree scope ended
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:35.8234261Z sum computed on another thread: 6, strong count back to 1
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:36.1578851Z total name length: 8
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:36.1579868Z chunk sums: [31375, 93875, 156375, 218875], total 500500
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:36.1581350Z squares: [(1, 1), (2, 4), (3, 9), (4, 16)]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:36.1584033Z hits: 8000
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:36.1585027Z ["worker 0 done", "worker 1 done", "worker 2 done"]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:36.1585513Z mode read twice: fast fast
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:36.1585879Z mode after write: safe
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:36.4280042Z primes below 200000: 17984 sequential, 17984 parallel
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:36.4280391Z ["apple", "fig", "kiwi", "pear"] [5, 3, 4, 4]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:36.8600412Z future created
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:36.8600717Z   future body runs
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.1638879Z awaited: 1
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.1639177Z sequential: 110 in ~300 ms
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.2651812Z join!:      110 in ~100 ms
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.3165615Z spawned task returned 80
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.3678483Z   finished fast: 40
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.4170600Z   finished medium: 60
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.4672612Z   finished slow: 40
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.5186091Z timed out after 50 ms
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.5397515Z hare won: 40
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.5713313Z ["worker 0", "worker 1", "worker 2"]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.6048644Z cached prices: [10, 20, 30]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.6800026Z primes below 100000: 9592
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.8085010Z square!(1 + 2) = 9
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.8085280Z ["Ada", "Grace"]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.8085482Z max_of!(3, 9, 4) = 9
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.8085670Z UserId(7) OrderId(7) true
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.8085858Z [11, 40, 60]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.8086026Z through a raw pointer: 42
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.8086274Z abs(-3) from C = 3
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.8114433Z ##[group]Run cargo test --workspace
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.8114705Z [36;1mcargo test --workspace[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.8115225Z [36;1mcargo clippy --workspace --all-targets -- -D warnings[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.8115623Z [36;1mcargo run --quiet -p app[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.8170564Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.8170847Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.8769728Z    Compiling geometry v0.1.0 (/home/runner/work/learn/learn/code/rust-for-csharp-java/l10-workspace/geometry)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9040820Z    Compiling app v0.1.0 (/home/runner/work/learn/learn/code/rust-for-csharp-java/l10-workspace/app)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9724503Z     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.14s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9773396Z      Running unittests src/main.rs (target/debug/deps/app-eecfc64afc4aabe3)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9782787Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9782915Z running 0 tests
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9783461Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9783824Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9784241Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9785599Z      Running unittests src/lib.rs (target/debug/deps/geometry-f363ac193c01563c)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9793147Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9793258Z running 2 tests
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9795288Z test tests::negative_sizes_are_clamped ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9795635Z test tests::rect_area ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9795868Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9796271Z test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9796674Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9796790Z    Doc-tests geometry
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9935448Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9935697Z running 0 tests
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9935896Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9936215Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:37.9936712Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.0488757Z     Checking geometry v0.1.0 (/home/runner/work/learn/learn/code/rust-for-csharp-java/l10-workspace/geometry)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.0718547Z     Checking app v0.1.0 (/home/runner/work/learn/learn/code/rust-for-csharp-java/l10-workspace/app)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.0961993Z     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.07s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.1953153Z total area: 9.14
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.1953418Z 4x2.5 rectangle
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.1953590Z 10 cm = 3.94 in
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.1989225Z ##[group]Run cargo clippy --all-targets -- -D warnings
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.1989553Z [36;1mcargo clippy --all-targets -- -D warnings[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.1989788Z [36;1mcargo test[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.1989972Z [36;1mcargo test -- --ignored[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.1990184Z [36;1mcargo doc --no-deps[0m
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.2045265Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.2045531Z env:
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.2045698Z   RUSTDOCFLAGS: -D warnings
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.2045891Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.2760989Z     Checking pricing v0.1.0 (/home/runner/work/learn/learn/code/rust-for-csharp-java/l14-testing)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.3433019Z     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.10s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.3807636Z    Compiling pricing v0.1.0 (/home/runner/work/learn/learn/code/rust-for-csharp-java/l14-testing)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5021010Z     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.14s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5025833Z      Running unittests src/lib.rs (target/debug/deps/pricing-bfa8815676c7ea4f)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5035640Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5035790Z running 7 tests
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5038142Z test tests::many_lines ... ignored, slow: run with cargo test -- --ignored
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5038660Z test tests::empty_cart_totals_zero ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5039055Z test tests::fixed_discount_never_goes_negative ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5039472Z test tests::free_item_error_message ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5039842Z test tests::zero_quantity_is_rejected ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5040236Z test tests::percent_above_100_panics - should panic ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5041145Z test tests::percent_discount_rounds_down ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5041676Z      Running tests/checkout.rs (target/debug/deps/checkout-1942c129a30a315b)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5042058Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5042314Z test result: ok. 6 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5042583Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5049655Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5049765Z running 1 test
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5051304Z test checkout_with_discount ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5051470Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5051664Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5051908Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.5052772Z    Doc-tests pricing
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.6329523Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.6329754Z running 2 tests
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.6341254Z test src/lib.rs - Cart::add (line 59) ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.6341767Z test src/lib.rs - Cart::total_with (line 90) - should panic ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.6342487Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.6342793Z test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.6343052Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.6352973Z all doctests ran in 0.12s; merged doctests compilation took 0.11s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.6521378Z     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.00s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.6522419Z      Running unittests src/lib.rs (target/debug/deps/pricing-bfa8815676c7ea4f)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.6530695Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.6530890Z running 1 test
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.7607371Z test tests::many_lines ... ok
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.7607558Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.7607778Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 6 filtered out; finished in 0.11s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.7608053Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.7632466Z      Running tests/checkout.rs (target/debug/deps/checkout-1942c129a30a315b)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.7645760Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.7645892Z running 0 tests
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.7646078Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.7646366Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.7647795Z    Doc-tests pricing
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.7647953Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.8949679Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.8949966Z running 0 tests
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.8950120Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.8950679Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.8951122Z 
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:38.8960770Z all doctests ran in 0.11s; merged doctests compilation took 0.11s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:39.2010394Z  Documenting pricing v0.1.0 (/home/runner/work/learn/learn/code/rust-for-csharp-java/l14-testing)
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:39.7457576Z     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.84s
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:39.7463200Z    Generated /home/runner/work/learn/learn/code/rust-for-csharp-java/l14-testing/target/doc/pricing/index.html
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:39.7567004Z ##[group]Run actions/setup-dotnet@v6
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:39.7567242Z with:
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:39.7567411Z   dotnet-version: 10.0.x
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:39.7567598Z   cache: false
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:39.7567760Z ##[endgroup]
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:39.8586690Z [command]/home/runner/work/_actions/actions/setup-dotnet/v6/externals/install-dotnet.sh --skip-non-versioned-files --runtime dotnet --channel LTS
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:40.4865445Z dotnet-install: Attempting to download using aka.ms link https://dotnetorigin.blob.core.windows.net/dotnet/Runtime/10.0.14/dotnet-runtime-10.0.14-linux-x64.tar.gz
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:40.8744356Z dotnet-install: Download attempt #1 has failed: 409 Unable to download https://dotnetorigin.blob.core.windows.net/dotnet/Runtime/10.0.14/dotnet-runtime-10.0.14-linux-x64.tar.gz. Returned HTTP status code: 409.
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:40.8745281Z dotnet-install: Attempt #2 will start in 10 seconds.
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:51.2204442Z dotnet-install: Download attempt #2 has failed: 409 Unable to download https://dotnetorigin.blob.core.windows.net/dotnet/Runtime/10.0.14/dotnet-runtime-10.0.14-linux-x64.tar.gz. Returned HTTP status code: 409.
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:17:51.2205569Z dotnet-install: Attempt #3 will start in 20 seconds.
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:11.5616740Z dotnet-install: Failed to download aka.ms link 'https://dotnetorigin.blob.core.windows.net/dotnet/Runtime/10.0.14/dotnet-runtime-10.0.14-linux-x64.tar.gz': 409 Unable to download https://dotnetorigin.blob.core.windows.net/dotnet/Runtime/10.0.14/dotnet-runtime-10.0.14-linux-x64.tar.gz. Returned HTTP status code: 409.
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:11.5625811Z dotnet_install: Error: Could not find `.NET Core Runtime` with version = 10.0.14
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:11.5626938Z dotnet_install: Error: Refer to: https://aka.ms/dotnet-os-lifecycle for information on .NET Core support
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:11.5661735Z ##[warning]Failed to install dotnet runtime + cli, exit code: 1. dotnet_install: Error: Could not find `.NET Core Runtime` with version = 10.0.14
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	dotnet_install: Error: Refer to: https://aka.ms/dotnet-os-lifecycle for information on .NET Core support
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:11.5669856Z [command]/home/runner/work/_actions/actions/setup-dotnet/v6/externals/install-dotnet.sh --skip-non-versioned-files --channel 10.0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:12.2276566Z dotnet-install: Attempting to download using aka.ms link https://dotnetorigin.blob.core.windows.net/dotnet/Sdk/10.0.403/dotnet-sdk-10.0.403-linux-x64.tar.gz
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:12.5772951Z dotnet-install: Download attempt #1 has failed: 409 Unable to download https://dotnetorigin.blob.core.windows.net/dotnet/Sdk/10.0.403/dotnet-sdk-10.0.403-linux-x64.tar.gz. Returned HTTP status code: 409.
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:12.5774323Z dotnet-install: Attempt #2 will start in 10 seconds.
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:22.9255137Z dotnet-install: Download attempt #2 has failed: 409 Unable to download https://dotnetorigin.blob.core.windows.net/dotnet/Sdk/10.0.403/dotnet-sdk-10.0.403-linux-x64.tar.gz. Returned HTTP status code: 409.
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:22.9256022Z dotnet-install: Attempt #3 will start in 20 seconds.
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.2754064Z dotnet-install: Failed to download aka.ms link 'https://dotnetorigin.blob.core.windows.net/dotnet/Sdk/10.0.403/dotnet-sdk-10.0.403-linux-x64.tar.gz': 409 Unable to download https://dotnetorigin.blob.core.windows.net/dotnet/Sdk/10.0.403/dotnet-sdk-10.0.403-linux-x64.tar.gz. Returned HTTP status code: 409.
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.2762681Z dotnet_install: Error: Could not find `.NET Core SDK` with version = 10.0.403
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.2763504Z dotnet_install: Error: Refer to: https://aka.ms/dotnet-os-lifecycle for information on .NET Core support
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.2774628Z ##[error]Failed to install dotnet, exit code: 1. dotnet_install: Error: Could not find `.NET Core SDK` with version = 10.0.403
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	dotnet_install: Error: Refer to: https://aka.ms/dotnet-os-lifecycle for information on .NET Core support
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.2951158Z Post job cleanup.
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.3650603Z [command]/usr/bin/git version
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.3686724Z git version 2.55.0
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.3716008Z Temporarily overriding HOME='/home/runner/work/_temp/d7553fb2-9c7c-46a2-a5cb-34e2e7186268' before making global git config changes
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.3717199Z Adding repository directory to the temporary git global config as a safe directory
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.3720565Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/learn/learn
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.3747441Z Removing SSH command configuration
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.3752636Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.3783111Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4000220Z Removing HTTP extra header
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4006199Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4038498Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4258773Z Removing includeIf entries pointing to credentials config files
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4264426Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4295260Z includeif.gitdir:/home/runner/work/learn/learn/.git.path
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4296047Z includeif.gitdir:/home/runner/work/learn/learn/.git/worktrees/*.path
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4296752Z includeif.gitdir:/github/workspace/.git.path
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4297343Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4303244Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/learn/learn/.git.path
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4326123Z /home/runner/work/_temp/git-credentials-26995bc3-9436-456e-a089-2cb4da92ca46.config
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4334446Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/learn/learn/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-26995bc3\-9436\-456e\-a089\-2cb4da92ca46\.config
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4368211Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/learn/learn/.git/worktrees/*.path
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4397478Z /home/runner/work/_temp/git-credentials-26995bc3-9436-456e-a089-2cb4da92ca46.config
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4404503Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/learn/learn/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-26995bc3\-9436\-456e\-a089\-2cb4da92ca46\.config
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4435337Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4457600Z /github/runner_temp/git-credentials-26995bc3-9436-456e-a089-2cb4da92ca46.config
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4464539Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-26995bc3\-9436\-456e\-a089\-2cb4da92ca46\.config
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4496724Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4519613Z /github/runner_temp/git-credentials-26995bc3-9436-456e-a089-2cb4da92ca46.config
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4524852Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-26995bc3\-9436\-456e\-a089\-2cb4da92ca46\.config
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4555698Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4752419Z Removing credentials config '/home/runner/work/_temp/git-credentials-26995bc3-9436-456e-a089-2cb4da92ca46.config'
+rust-for-csharp-java (ubuntu-latest)	UNKNOWN STEP	2026-10-25T19:18:43.4886522Z Cleaning up orphan processes

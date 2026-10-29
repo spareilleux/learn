@@ -1,0 +1,27 @@
+--- before/streeling/courses/guitar-alchemist-academy/en/gaa-020-cover-a-finite-practice-space-with-fixed-centres.md
++++ after/streeling/courses/guitar-alchemist-academy/en/gaa-020-cover-a-finite-practice-space-with-fixed-centres.md
+@@ -40,7 +40,15 @@
+     "optimal_centres": [
+       [
+         "A",
++        "C"
++      ],
++      [
++        "A",
+         "D"
++      ],
++      [
++        "B",
++        "C"
+       ],
+       [
+         "B",
+@@ -86,7 +94,7 @@
+ 
+ <details><summary>Answer 2</summary>
+ 
+-> **Answer:** The optimal radius is `3`, attained by `[[A,D],[B,D]]`; retain both ties.
++> **Answer:** The optimal radius is `3`, attained by `[[A,C],[A,D],[B,C],[B,D]]`; retain all tied optima.
+ 
+ </details>
+ 

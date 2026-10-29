@@ -1,0 +1,1097 @@
+{
+  "reviewer": "independent-pedagogical-source-review-agent",
+  "checked_at_utc": "2026-10-23T18:59:18.596484+00:00",
+  "verdict": "pass",
+  "coverage": {
+    "exercise_answer_pairs": 45,
+    "learner_criteria": 15
+  },
+  "findings": [
+    {
+      "id": "algebraic-envelope-boundary",
+      "status": "observed-preserved",
+      "finding": "The authored exponential/two-tone envelope is algebraically defined, not measured or Hilbert-extracted. Only its undamped modulation factor repeats; phase-matched samples are not automatically maxima, and a squared envelope has no automatic physical-energy interpretation."
+    },
+    {
+      "id": "comparison-target-and-transform",
+      "status": "observed-preserved",
+      "finding": "Original-origin cropping, full target alignment and fitted gain are separate questions. The full8-frame reference target is retained; a6-frame zero prefix cannot hide the changed tail. Silent raw equality and undefined gain coexist."
+    },
+    {
+      "id": "normalization-and-polarity",
+      "status": "observed-preserved",
+      "finding": "Population normalization loses positive affine level/offset information; absolute correlation also loses polarity. Constant correlation is undefined. Real-arithmetic inverse metadata does not promise original float-byte reconstruction."
+    },
+    {
+      "id": "revision-and-historical-result",
+      "status": "observed-preserved",
+      "finding": "Actual six source/provenance/historical-result copies distinguish current76ef engine reading from the runner's olderdc2e engine. The retained0.11416614959438576dB improvement fails its1dB gate; toy calculations neither reverse that failure nor diagnose its cause."
+    },
+    {
+      "id": "primary-and-execution-scope",
+      "status": "observed-preserved",
+      "finding": "Actual OpenStax mathematical beat text and NIST centered/sign correlation definition were read. Lesson vectors/examples are authored; no textbook images, stimuli or exercises are reproduced and no listening/statistical inference is imported. No new render,worklet/browser or learner trial occurred."
+    },
+    {
+      "id": "chronology-and-simple-baseline",
+      "status": "observed-preserved",
+      "finding": "The plan follows initial reading/hand-worked examples rather than preregistering a physical experiment. Direct calculations and explicit comparison records remain simpler baselines before any unimplemented agentic/audio DSL."
+    },
+    {
+      "id": "modulation-factor-periodicity",
+      "status": "resolved",
+      "finding": "GAS008 answer1 initially described repeating envelope shape ambiguously. Root now specifies that the undamped absolute modulation factor repeats twice per second, while E includes a decreasing exponential and is not periodic. Final English and locale answers were directly rechecked."
+    },
+    {
+      "id": "aud009-prefix-wording",
+      "status": "resolved",
+      "finding": "AUD009 exercise4 replaced hyphenated first-6-frame wording with an explicit first6frames phrase to avoid a false negative-number token in mechanical checks. Meaning and numbers are unchanged; final wording in all locales was directly reviewed."
+    }
+  ],
+  "fix_requests": [],
+  "fix_history": [
+    {
+      "id": "modulation-factor-periodicity",
+      "origin": "independent English content review",
+      "status": "resolved",
+      "finding": "GAS008 answer1 initially described repeating envelope shape ambiguously. Root now specifies that the undamped absolute modulation factor repeats twice per second, while E includes a decreasing exponential and is not periodic. Final English and locale answers were directly rechecked."
+    },
+    {
+      "id": "aud009-prefix-wording",
+      "origin": "root/translation mechanical review",
+      "status": "resolved",
+      "finding": "AUD009 exercise4 replaced hyphenated first-6-frame wording with an explicit first6frames phrase to avoid a false negative-number token in mechanical checks. Meaning and numbers are unchanged; final wording in all locales was directly reviewed."
+    }
+  ],
+  "scope": {
+    "reviewed": "All nine EN/FR/ES bodies and45localized exercise-answer pairs; prepared15criteria and standalone task; six fixed input JSONs,22-check data receipt and six immutable source/provenance/retained-result copies; actual OpenStax and NIST bodies.",
+    "method": "Independent direct agent semantic/source reading and algebraic reasoning, comparison with22-pass independent data audit, exact hashes and locale mechanical checks. No new numerical/audio/native/browser runtime experiment,build,dependency install or paid call.",
+    "prerequisite_progression": "Eight prior English courses directly read. GAS008 adds interference/damping slope and phase controls beyond partial-period/body-pole/attack-state distinctions. AUD009 adds complete-target lag/gain transformed nulls beyond format guards and paired transfer estimation. INF009 adds positive-affine and polarity normalization loss beyond quantization and spectral phase ambiguity.",
+    "localization": "All six full locale bodies and each answer directly reviewed, including final periodicity and prefix-wording fixes. AI checks are not human fluent-language,musician/listener or learner approval.",
+    "publication": "Only canonical sources/evidence reviewed. Root generator tests,sync,build,rendered-links,idempotence and public readback are separate gates excluded from supporting bindings to avoid circularity. The dependency-recovery receipt is read and bound as producer infrastructure history, not an independently executed content-review build."
+  },
+  "exercise_answer_checks": [
+    {
+      "id": "GAS008-en-exercise-1",
+      "module": "GAS008",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-acoustics/en/gas-008-separate-beating-from-a-change-in-damping.md",
+      "heading_line": 32,
+      "exercise_answer_sha256": "99cd1196e637eb93d1291df5754443ddb5bb41c73f784d38b78d6dc1f8200de7",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The cosine identity yields0.5exp(-t)cos(2pi101t)cos(2pi t). Carrier average101Hz and half-difference1Hz are distinct from the2Hz repetition of the undamped absolute modulation factor. E also decays and is not periodic; each component damping remains1/s. This is an algebraic envelope, not measured/Hilbert extraction."
+    },
+    {
+      "id": "GAS008-en-exercise-2",
+      "module": "GAS008",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-acoustics/en/gas-008-separate-beating-from-a-change-in-damping.md",
+      "heading_line": 49,
+      "exercise_answer_sha256": "1affe0b1dfe91864d680b79d7541a905da51b8787ce56ad1b4767a8c834449ca",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "E(0.4)/E(0.2)=2.143464939 gives apparent rate-3.812118251/s under the endpoint formula. Its changing modulation factor violates a single-exponential fit assumption; growing combined envelope does not establish negative component damping or an unstable observed resonator."
+    },
+    {
+      "id": "GAS008-en-exercise-3",
+      "module": "GAS008",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-acoustics/en/gas-008-separate-beating-from-a-change-in-damping.md",
+      "heading_line": 61,
+      "exercise_answer_sha256": "d00ad4fc611b94da1a4ef44659c6628e0b8dbea5eda902dce5438ab30ffde1d5",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Equal absolute modulation phase at0/0.5 yields amplitude ratio exp(-0.5), rate1/s, and squared ratio exp(-1). Applying the amplitude log formula to the squared ratio gives2/s. These times are not asserted local maxima; squared envelope is not physical energy without an appropriate model."
+    },
+    {
+      "id": "GAS008-en-exercise-4",
+      "module": "GAS008",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-acoustics/en/gas-008-separate-beating-from-a-change-in-damping.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "b0a511a40e4428ceb2526210a835b83277f73d2efb92a50f47c206b664f064f6",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Analytic envelope zeros at0.25/0.75 have undefined logarithms, despite floating cosine residues. A disclosed floor changes the analysis rule and does not measure infinite damping. Carrier zeros and modulation zeros are different statuses."
+    },
+    {
+      "id": "GAS008-en-exercise-5",
+      "module": "GAS008",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-acoustics/en/gas-008-separate-beating-from-a-change-in-damping.md",
+      "heading_line": 81,
+      "exercise_answer_sha256": "20178207e2fe0495e36c8eaa6d35723a7ead54bc82f8962910a63dd9312a5287",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual pinned engine sums/normalizes voices, then applies shared body/reverb and nonlinear limiting. The authored100/102Hz pair does not diagnose the retained older render. Future isolated/combined or validated-model comparison needs pins,rate,boundary,phase,windows,filters,clipping and uncertainty; no experiment or DSL was delivered, and the old failed gate remains failed."
+    },
+    {
+      "id": "GAS008-fr-exercise-1",
+      "module": "GAS008",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-acoustics/fr/gas-008-separate-beating-from-a-change-in-damping.fr.md",
+      "heading_line": 32,
+      "exercise_answer_sha256": "0eeb4d2e2de5d42b47cbfdf075c43d050ccf838192b9fbadb95691a28100bd08",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The cosine identity yields0.5exp(-t)cos(2pi101t)cos(2pi t). Carrier average101Hz and half-difference1Hz are distinct from the2Hz repetition of the undamped absolute modulation factor. E also decays and is not periodic; each component damping remains1/s. This is an algebraic envelope, not measured/Hilbert extraction."
+    },
+    {
+      "id": "GAS008-fr-exercise-2",
+      "module": "GAS008",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-acoustics/fr/gas-008-separate-beating-from-a-change-in-damping.fr.md",
+      "heading_line": 49,
+      "exercise_answer_sha256": "47fcb3205c2c9b21d1c57a3dc94294f2d3b3b5570f133589e88c936042ef0419",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "E(0.4)/E(0.2)=2.143464939 gives apparent rate-3.812118251/s under the endpoint formula. Its changing modulation factor violates a single-exponential fit assumption; growing combined envelope does not establish negative component damping or an unstable observed resonator."
+    },
+    {
+      "id": "GAS008-fr-exercise-3",
+      "module": "GAS008",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-acoustics/fr/gas-008-separate-beating-from-a-change-in-damping.fr.md",
+      "heading_line": 61,
+      "exercise_answer_sha256": "4b0e69d7a19d207cce6475f1d97f27ffd08065b19e66ae0dcb4ea0e48a1a411b",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Equal absolute modulation phase at0/0.5 yields amplitude ratio exp(-0.5), rate1/s, and squared ratio exp(-1). Applying the amplitude log formula to the squared ratio gives2/s. These times are not asserted local maxima; squared envelope is not physical energy without an appropriate model."
+    },
+    {
+      "id": "GAS008-fr-exercise-4",
+      "module": "GAS008",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-acoustics/fr/gas-008-separate-beating-from-a-change-in-damping.fr.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "bfa95b8d1d0d44f2ba20d567ed3e380748884551c339aad6fbc5a66fd809bcd5",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Analytic envelope zeros at0.25/0.75 have undefined logarithms, despite floating cosine residues. A disclosed floor changes the analysis rule and does not measure infinite damping. Carrier zeros and modulation zeros are different statuses."
+    },
+    {
+      "id": "GAS008-fr-exercise-5",
+      "module": "GAS008",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-acoustics/fr/gas-008-separate-beating-from-a-change-in-damping.fr.md",
+      "heading_line": 81,
+      "exercise_answer_sha256": "5269265c5b6d8aca7b536ceb600a7d7629a7cf7ed1613420a15566ceecf321a2",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual pinned engine sums/normalizes voices, then applies shared body/reverb and nonlinear limiting. The authored100/102Hz pair does not diagnose the retained older render. Future isolated/combined or validated-model comparison needs pins,rate,boundary,phase,windows,filters,clipping and uncertainty; no experiment or DSL was delivered, and the old failed gate remains failed."
+    },
+    {
+      "id": "GAS008-es-exercise-1",
+      "module": "GAS008",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-acoustics/es/gas-008-separate-beating-from-a-change-in-damping.es.md",
+      "heading_line": 32,
+      "exercise_answer_sha256": "6fa40a76087550994dd6a005ab6c98b15ab5fa09b0b092d135d2cb5e2e15b832",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The cosine identity yields0.5exp(-t)cos(2pi101t)cos(2pi t). Carrier average101Hz and half-difference1Hz are distinct from the2Hz repetition of the undamped absolute modulation factor. E also decays and is not periodic; each component damping remains1/s. This is an algebraic envelope, not measured/Hilbert extraction."
+    },
+    {
+      "id": "GAS008-es-exercise-2",
+      "module": "GAS008",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-acoustics/es/gas-008-separate-beating-from-a-change-in-damping.es.md",
+      "heading_line": 49,
+      "exercise_answer_sha256": "87048d4e0b855bd2d118231220b9248bb7551be6241f3a433cdd6a6eb5a24d73",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "E(0.4)/E(0.2)=2.143464939 gives apparent rate-3.812118251/s under the endpoint formula. Its changing modulation factor violates a single-exponential fit assumption; growing combined envelope does not establish negative component damping or an unstable observed resonator."
+    },
+    {
+      "id": "GAS008-es-exercise-3",
+      "module": "GAS008",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-acoustics/es/gas-008-separate-beating-from-a-change-in-damping.es.md",
+      "heading_line": 61,
+      "exercise_answer_sha256": "f94c91e2f4ec198ccc3f1903eea2e35c067f43e8297320c55813ab62da8fde7e",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Equal absolute modulation phase at0/0.5 yields amplitude ratio exp(-0.5), rate1/s, and squared ratio exp(-1). Applying the amplitude log formula to the squared ratio gives2/s. These times are not asserted local maxima; squared envelope is not physical energy without an appropriate model."
+    },
+    {
+      "id": "GAS008-es-exercise-4",
+      "module": "GAS008",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-acoustics/es/gas-008-separate-beating-from-a-change-in-damping.es.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "eecd3c4b87e745adb14d29ed7a06fae4f52a1a9c303b648c251c357669477efb",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Analytic envelope zeros at0.25/0.75 have undefined logarithms, despite floating cosine residues. A disclosed floor changes the analysis rule and does not measure infinite damping. Carrier zeros and modulation zeros are different statuses."
+    },
+    {
+      "id": "GAS008-es-exercise-5",
+      "module": "GAS008",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-acoustics/es/gas-008-separate-beating-from-a-change-in-damping.es.md",
+      "heading_line": 81,
+      "exercise_answer_sha256": "b25037a1c2a8980e176df5426f4c82423992aa6eea01e7b6f444998bb70c4e3f",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual pinned engine sums/normalizes voices, then applies shared body/reverb and nonlinear limiting. The authored100/102Hz pair does not diagnose the retained older render. Future isolated/combined or validated-model comparison needs pins,rate,boundary,phase,windows,filters,clipping and uncertainty; no experiment or DSL was delivered, and the old failed gate remains failed."
+    },
+    {
+      "id": "AUD009-en-exercise-1",
+      "module": "AUD009",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/audio-engineering/en/aud-009-declare-alignment-before-a-null-test.md",
+      "heading_line": 33,
+      "exercise_answer_sha256": "38a804f52035fe9cdf6a8c31f6008547615ba232ecdbb8ca0fbfc8228746ac18",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The8-frame reference pairs x[n] with y[n+2],n0..7,covering y2..9 of10frames and accounting for two leading frames separately. The stipulated8000Hz clock converts2frames to0.25ms; it is neither measured hardware/browser latency nor an improvement."
+    },
+    {
+      "id": "AUD009-en-exercise-2",
+      "module": "AUD009",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/audio-engineering/en/aud-009-declare-alignment-before-a-null-test.md",
+      "heading_line": 45,
+      "exercise_answer_sha256": "10c9daed37114f151bbaeea2f228cf70e382f1460cd6dc48e0eb855ce4631598",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Reference RMS0.306186218, original-origin first8 residual0.275992527 and delay-aligned unity residual0.153093109 answer different pairing/support questions. Alignment changes the comparison without changing original samples or erasing their timing history; unadjusted metrics remain."
+    },
+    {
+      "id": "AUD009-en-exercise-3",
+      "module": "AUD009",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/audio-engineering/en/aud-009-declare-alignment-before-a-null-test.md",
+      "heading_line": 63,
+      "exercise_answer_sha256": "0a5ed3392d72a9ff1debc29d1c732b722fcf55be31731708a9738f98fe3088db",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "On the full aligned target, predictor x gives fitted gain0.5 or-6.020599913dB and exact zero residual in real arithmetic. Original support,timing and level still differ. A transformed null establishes neither original/byte identity, listening equivalence nor measured latency improvement."
+    },
+    {
+      "id": "AUD009-en-exercise-4",
+      "module": "AUD009",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/audio-engineering/en/aud-009-declare-alignment-before-a-null-test.md",
+      "heading_line": 75,
+      "exercise_answer_sha256": "0ba69cc423c07811a95c64e3beb56ccecafdc743b76a66a2bf38260f58389034",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Silent raw vectors are equal but zero predictor energy makes fitted gain undefined. Changing the last aligned frame by0.125 leaves the first6residuals zero at prescribed gain0.5,coverage6/8=0.75,but full RMS0.044194174. No hidden refit or universal coverage threshold follows."
+    },
+    {
+      "id": "AUD009-en-exercise-5",
+      "module": "AUD009",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/audio-engineering/en/aud-009-declare-alignment-before-a-null-test.md",
+      "heading_line": 85,
+      "exercise_answer_sha256": "7c7fba55a85d34d149ccbf0c0078d498fb6015c84522dfe39569fee40e419b84",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual runner keeps raw floats/PCM16 separate, writes float32LE, applies Math.round*32767 and rounded half-open RMS windows with20log10(rms+1e-12). Its onset-based decay method and older engine provenance are not a new delay/gain pipeline. Proposed record retains pins,formats,channels,clocks,excitation,full support,lag,gain,raw/adjusted metrics,missingness and cost; direct subtraction is the baseline."
+    },
+    {
+      "id": "AUD009-fr-exercise-1",
+      "module": "AUD009",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/audio-engineering/fr/aud-009-declare-alignment-before-a-null-test.fr.md",
+      "heading_line": 33,
+      "exercise_answer_sha256": "f1982b6d3ec9baceccd5eb4d177c3c9fd5bd5872d30506d8b1aeed2720f13e9d",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The8-frame reference pairs x[n] with y[n+2],n0..7,covering y2..9 of10frames and accounting for two leading frames separately. The stipulated8000Hz clock converts2frames to0.25ms; it is neither measured hardware/browser latency nor an improvement."
+    },
+    {
+      "id": "AUD009-fr-exercise-2",
+      "module": "AUD009",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/audio-engineering/fr/aud-009-declare-alignment-before-a-null-test.fr.md",
+      "heading_line": 45,
+      "exercise_answer_sha256": "46c2e446ca6465f115b244704788df2b1e8f7531d78bba1e4ec14ebd2c91d9e4",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Reference RMS0.306186218, original-origin first8 residual0.275992527 and delay-aligned unity residual0.153093109 answer different pairing/support questions. Alignment changes the comparison without changing original samples or erasing their timing history; unadjusted metrics remain."
+    },
+    {
+      "id": "AUD009-fr-exercise-3",
+      "module": "AUD009",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/audio-engineering/fr/aud-009-declare-alignment-before-a-null-test.fr.md",
+      "heading_line": 63,
+      "exercise_answer_sha256": "30bc619efa83adf3077ab531ae8a14d1e09fa9f1cf6db9a233de2a4d25333a0b",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "On the full aligned target, predictor x gives fitted gain0.5 or-6.020599913dB and exact zero residual in real arithmetic. Original support,timing and level still differ. A transformed null establishes neither original/byte identity, listening equivalence nor measured latency improvement."
+    },
+    {
+      "id": "AUD009-fr-exercise-4",
+      "module": "AUD009",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/audio-engineering/fr/aud-009-declare-alignment-before-a-null-test.fr.md",
+      "heading_line": 75,
+      "exercise_answer_sha256": "be36eb041346d9c11ae9868d4edb33427616adbf5b7e453c0f27c3e2f1f8b213",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Silent raw vectors are equal but zero predictor energy makes fitted gain undefined. Changing the last aligned frame by0.125 leaves the first6residuals zero at prescribed gain0.5,coverage6/8=0.75,but full RMS0.044194174. No hidden refit or universal coverage threshold follows."
+    },
+    {
+      "id": "AUD009-fr-exercise-5",
+      "module": "AUD009",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/audio-engineering/fr/aud-009-declare-alignment-before-a-null-test.fr.md",
+      "heading_line": 85,
+      "exercise_answer_sha256": "27c0a5870dfb8c74e505c0169a56894745400d48f0eb615fcf5604699a2f57c7",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual runner keeps raw floats/PCM16 separate, writes float32LE, applies Math.round*32767 and rounded half-open RMS windows with20log10(rms+1e-12). Its onset-based decay method and older engine provenance are not a new delay/gain pipeline. Proposed record retains pins,formats,channels,clocks,excitation,full support,lag,gain,raw/adjusted metrics,missingness and cost; direct subtraction is the baseline."
+    },
+    {
+      "id": "AUD009-es-exercise-1",
+      "module": "AUD009",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/audio-engineering/es/aud-009-declare-alignment-before-a-null-test.es.md",
+      "heading_line": 33,
+      "exercise_answer_sha256": "94671fcfa5ec740d779b80b83d7c351e4476328ad6bb825ce3863d0ed4f322ed",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The8-frame reference pairs x[n] with y[n+2],n0..7,covering y2..9 of10frames and accounting for two leading frames separately. The stipulated8000Hz clock converts2frames to0.25ms; it is neither measured hardware/browser latency nor an improvement."
+    },
+    {
+      "id": "AUD009-es-exercise-2",
+      "module": "AUD009",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/audio-engineering/es/aud-009-declare-alignment-before-a-null-test.es.md",
+      "heading_line": 45,
+      "exercise_answer_sha256": "e3a2865eef15f7c9346ceb604f6b8a7bfd60b1e39411c39933669b7a23b1588d",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Reference RMS0.306186218, original-origin first8 residual0.275992527 and delay-aligned unity residual0.153093109 answer different pairing/support questions. Alignment changes the comparison without changing original samples or erasing their timing history; unadjusted metrics remain."
+    },
+    {
+      "id": "AUD009-es-exercise-3",
+      "module": "AUD009",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/audio-engineering/es/aud-009-declare-alignment-before-a-null-test.es.md",
+      "heading_line": 63,
+      "exercise_answer_sha256": "4254e6979895a1ffcbbfbd226b32050170527295a77b203ab289d0da4a60d605",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "On the full aligned target, predictor x gives fitted gain0.5 or-6.020599913dB and exact zero residual in real arithmetic. Original support,timing and level still differ. A transformed null establishes neither original/byte identity, listening equivalence nor measured latency improvement."
+    },
+    {
+      "id": "AUD009-es-exercise-4",
+      "module": "AUD009",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/audio-engineering/es/aud-009-declare-alignment-before-a-null-test.es.md",
+      "heading_line": 75,
+      "exercise_answer_sha256": "87dacf35e58bd6d8a7ce637db9d2c7159f051d346d9ab9f45c0d260968df593e",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Silent raw vectors are equal but zero predictor energy makes fitted gain undefined. Changing the last aligned frame by0.125 leaves the first6residuals zero at prescribed gain0.5,coverage6/8=0.75,but full RMS0.044194174. No hidden refit or universal coverage threshold follows."
+    },
+    {
+      "id": "AUD009-es-exercise-5",
+      "module": "AUD009",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/audio-engineering/es/aud-009-declare-alignment-before-a-null-test.es.md",
+      "heading_line": 85,
+      "exercise_answer_sha256": "e7e17bbfc7dc3f843e8baded0dde41dd96e151e290c4844465eaefd513e3d0ca",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual runner keeps raw floats/PCM16 separate, writes float32LE, applies Math.round*32767 and rounded half-open RMS windows with20log10(rms+1e-12). Its onset-based decay method and older engine provenance are not a new delay/gain pipeline. Proposed record retains pins,formats,channels,clocks,excitation,full support,lag,gain,raw/adjusted metrics,missingness and cost; direct subtraction is the baseline."
+    },
+    {
+      "id": "INF009-en-exercise-1",
+      "module": "INF009",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/information-theory/en/inf-009-keep-level-when-normalizing-waveform-shape.md",
+      "heading_line": 35,
+      "exercise_answer_sha256": "a3b6c8d423dea9bc3554d76f5b5487147c7e4be01a053b538034fdba4ff56e53",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "For N4,x mean1/8 and population sigma sqrt5/8; y mean5/16 and sigma sqrt5/16. Both z=[-3,-1,1,3]/sqrt5 and Pearson1, but y-x=[0.375,0.25,0.125,0] has RMS0.233853587. Correlation1 is not raw equality, unchanged level or a probability of equivalence."
+    },
+    {
+      "id": "INF009-en-exercise-2",
+      "module": "INF009",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/information-theory/en/inf-009-keep-level-when-normalizing-waveform-shape.md",
+      "heading_line": 51,
+      "exercise_answer_sha256": "1c736efce32253390cc2c6192c5db53ebed6bc82c186361e9a84c1f8eb87e223",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "For positive a,the family ax+b shares z. Retaining all ordered z,mean,population sigma and N permits x=mean+sigma*z in real arithmetic; z/N alone loses scale and offset. Rounded/reduced descriptors or float serialization need separate reconstruction-error/byte analysis."
+    },
+    {
+      "id": "INF009-en-exercise-3",
+      "module": "INF009",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/information-theory/en/inf-009-keep-level-when-normalizing-waveform-shape.md",
+      "heading_line": 61,
+      "exercise_answer_sha256": "b2f7f711e4b4959cf73b33c64af3d90d51f188bf7f36209311700d15171005b6",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Inversion -x gives -z,signed Pearson-1 and absolute Pearson1. Mathematical samplewise cancellation does not establish an actual routing,room or listening result. Signed/polarity policy and raw residual preserve distinctions discarded by absolute correlation."
+    },
+    {
+      "id": "INF009-en-exercise-4",
+      "module": "INF009",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/information-theory/en/inf-009-keep-level-when-normalizing-waveform-shape.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "f8e270eb363efa5479fa5f51f36eff5582faa2a0d46f4415bd2bbc7697f19610",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Constant0.25 has sigma0,undefined z/Pearson and valid raw RMS0.25. Raw copy equality can still hold. Constant status,mean and count can represent it without dividing by zero; an application-specific score1 must not be called the defined Pearson result."
+    },
+    {
+      "id": "INF009-en-exercise-5",
+      "module": "INF009",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/information-theory/en/inf-009-keep-level-when-normalizing-waveform-shape.md",
+      "heading_line": 81,
+      "exercise_answer_sha256": "81ec6bdb7b27703d8de9f9d2aa63825c95af5c2ca5023f84c08d4e4fc9311960",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual runner has separate float/PCM16 comparisons and adds1e-12 before logarithmic RMS conversion; it does not implement this normalized-shape descriptor. A proposed handoff retains pin,boundary,clock,channels,format,N,normalization,mean,sigma,status,sign policy and raw levels/residual. Toy vectors have no measured audio clock; explicit records and inversion/constant controls precede any DSL or empirical benefit claim."
+    },
+    {
+      "id": "INF009-fr-exercise-1",
+      "module": "INF009",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/information-theory/fr/inf-009-keep-level-when-normalizing-waveform-shape.fr.md",
+      "heading_line": 35,
+      "exercise_answer_sha256": "515708f822a4b0576184f58a9f61220950f1bafb2018fd0424602888f2639aa3",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "For N4,x mean1/8 and population sigma sqrt5/8; y mean5/16 and sigma sqrt5/16. Both z=[-3,-1,1,3]/sqrt5 and Pearson1, but y-x=[0.375,0.25,0.125,0] has RMS0.233853587. Correlation1 is not raw equality, unchanged level or a probability of equivalence."
+    },
+    {
+      "id": "INF009-fr-exercise-2",
+      "module": "INF009",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/information-theory/fr/inf-009-keep-level-when-normalizing-waveform-shape.fr.md",
+      "heading_line": 51,
+      "exercise_answer_sha256": "72be3c42b5523ca1c6f7d7ee6515b6c5f71570c31d03feddcc8ba06ef12c9151",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "For positive a,the family ax+b shares z. Retaining all ordered z,mean,population sigma and N permits x=mean+sigma*z in real arithmetic; z/N alone loses scale and offset. Rounded/reduced descriptors or float serialization need separate reconstruction-error/byte analysis."
+    },
+    {
+      "id": "INF009-fr-exercise-3",
+      "module": "INF009",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/information-theory/fr/inf-009-keep-level-when-normalizing-waveform-shape.fr.md",
+      "heading_line": 61,
+      "exercise_answer_sha256": "19f7b5eb57cea720fbc92748477064be5a078c573827dcf4f64ca5e1dd2b2839",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Inversion -x gives -z,signed Pearson-1 and absolute Pearson1. Mathematical samplewise cancellation does not establish an actual routing,room or listening result. Signed/polarity policy and raw residual preserve distinctions discarded by absolute correlation."
+    },
+    {
+      "id": "INF009-fr-exercise-4",
+      "module": "INF009",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/information-theory/fr/inf-009-keep-level-when-normalizing-waveform-shape.fr.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "e38f4c1e632d1dd4033cbab657dbe8ab01888fddffa41f8751f27e6e6fcb2770",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Constant0.25 has sigma0,undefined z/Pearson and valid raw RMS0.25. Raw copy equality can still hold. Constant status,mean and count can represent it without dividing by zero; an application-specific score1 must not be called the defined Pearson result."
+    },
+    {
+      "id": "INF009-fr-exercise-5",
+      "module": "INF009",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/information-theory/fr/inf-009-keep-level-when-normalizing-waveform-shape.fr.md",
+      "heading_line": 81,
+      "exercise_answer_sha256": "a518ef0b201c3434c7a27bc29aae6f2fd377bdb39d05915cf346361474a763d1",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual runner has separate float/PCM16 comparisons and adds1e-12 before logarithmic RMS conversion; it does not implement this normalized-shape descriptor. A proposed handoff retains pin,boundary,clock,channels,format,N,normalization,mean,sigma,status,sign policy and raw levels/residual. Toy vectors have no measured audio clock; explicit records and inversion/constant controls precede any DSL or empirical benefit claim."
+    },
+    {
+      "id": "INF009-es-exercise-1",
+      "module": "INF009",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/information-theory/es/inf-009-keep-level-when-normalizing-waveform-shape.es.md",
+      "heading_line": 35,
+      "exercise_answer_sha256": "f8311031b43cab2cf22adbab63873c300e4c571e7c07155f90966ba7aea71534",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "For N4,x mean1/8 and population sigma sqrt5/8; y mean5/16 and sigma sqrt5/16. Both z=[-3,-1,1,3]/sqrt5 and Pearson1, but y-x=[0.375,0.25,0.125,0] has RMS0.233853587. Correlation1 is not raw equality, unchanged level or a probability of equivalence."
+    },
+    {
+      "id": "INF009-es-exercise-2",
+      "module": "INF009",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/information-theory/es/inf-009-keep-level-when-normalizing-waveform-shape.es.md",
+      "heading_line": 51,
+      "exercise_answer_sha256": "6b68be2e20340cab3fe5687530eeff304f420ce43c876cef596959050b70d31e",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "For positive a,the family ax+b shares z. Retaining all ordered z,mean,population sigma and N permits x=mean+sigma*z in real arithmetic; z/N alone loses scale and offset. Rounded/reduced descriptors or float serialization need separate reconstruction-error/byte analysis."
+    },
+    {
+      "id": "INF009-es-exercise-3",
+      "module": "INF009",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/information-theory/es/inf-009-keep-level-when-normalizing-waveform-shape.es.md",
+      "heading_line": 61,
+      "exercise_answer_sha256": "3c5a52d87060179d46a0356438d4476d67bdacb7949759221b725cbbc89c519d",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Inversion -x gives -z,signed Pearson-1 and absolute Pearson1. Mathematical samplewise cancellation does not establish an actual routing,room or listening result. Signed/polarity policy and raw residual preserve distinctions discarded by absolute correlation."
+    },
+    {
+      "id": "INF009-es-exercise-4",
+      "module": "INF009",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/information-theory/es/inf-009-keep-level-when-normalizing-waveform-shape.es.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "5958524dbacb1b80b0e6abc15c1a85e404ddd3b8b6c0eab8e2408994c1775503",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Constant0.25 has sigma0,undefined z/Pearson and valid raw RMS0.25. Raw copy equality can still hold. Constant status,mean and count can represent it without dividing by zero; an application-specific score1 must not be called the defined Pearson result."
+    },
+    {
+      "id": "INF009-es-exercise-5",
+      "module": "INF009",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/information-theory/es/inf-009-keep-level-when-normalizing-waveform-shape.es.md",
+      "heading_line": 81,
+      "exercise_answer_sha256": "aa978af0e82dd67b8e52d49e3cea016000823a7fefbb97e2db80db053ecef321",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual runner has separate float/PCM16 comparisons and adds1e-12 before logarithmic RMS conversion; it does not implement this normalized-shape descriptor. A proposed handoff retains pin,boundary,clock,channels,format,N,normalization,mean,sigma,status,sign policy and raw levels/residual. Toy vectors have no measured audio clock; explicit records and inversion/constant controls precede any DSL or empirical benefit claim."
+    }
+  ],
+  "learner_criterion_checks": [
+    {
+      "id": "GAS008-1",
+      "module": "GAS008",
+      "title": "product-and-units",
+      "acceptance_reviewed": "Derive carrier101Hz, absolute-envelope beat2Hz and component damping1/s; algebraic modulation, not Hilbert or measured envelope.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "The cosine identity yields0.5exp(-t)cos(2pi101t)cos(2pi t). Carrier average101Hz and half-difference1Hz are distinct from the2Hz repetition of the undamped absolute modulation factor. E also decays and is not periodic; each component damping remains1/s. This is an algebraic envelope, not measured/Hilbert extraction.",
+      "task_alignment": "The final source-assisted task explicitly elicits this prepared criterion. Actual submitted answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "GAS008-2",
+      "module": "GAS008",
+      "title": "misleading-slope",
+      "acceptance_reviewed": "Ratio E.4/E.2=2.143464939; apparent rate-3.812118251/s reflects interference, not changed component damping.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "E(0.4)/E(0.2)=2.143464939 gives apparent rate-3.812118251/s under the endpoint formula. Its changing modulation factor violates a single-exponential fit assumption; growing combined envelope does not establish negative component damping or an unstable observed resonator.",
+      "task_alignment": "The final source-assisted task explicitly elicits this prepared criterion. Actual submitted answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "GAS008-3",
+      "module": "GAS008",
+      "title": "same-phase",
+      "acceptance_reviewed": "t0/.5 amplitude exp(-.5), squared exp(-1), amplitude rate1/s; same phase not asserted local maxima or physical energy.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Equal absolute modulation phase at0/0.5 yields amplitude ratio exp(-0.5), rate1/s, and squared ratio exp(-1). Applying the amplitude log formula to the squared ratio gives2/s. These times are not asserted local maxima; squared envelope is not physical energy without an appropriate model.",
+      "task_alignment": "The final source-assisted task explicitly elicits this prepared criterion. Actual submitted answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "GAS008-4",
+      "module": "GAS008",
+      "title": "zeros",
+      "acceptance_reviewed": "Exact modulation zeros.25/.75; log undefined; floating residue/floor and carrier zeros distinct.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Analytic envelope zeros at0.25/0.75 have undefined logarithms, despite floating cosine residues. A disclosed floor changes the analysis rule and does not measure infinite damping. Carrier zeros and modulation zeros are different statuses.",
+      "task_alignment": "The final source-assisted task explicitly elicits this prepared criterion. Actual submitted answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "GAS008-5",
+      "module": "GAS008",
+      "title": "actual-next-trial",
+      "acceptance_reviewed": "Locate summed voices/shared body/reverb/limiter; retain pins,rate,boundary,windows,phase,filter,clipping,uncertainty. Isolate or validate model before attribution; old failed gate unchanged; no actual trial/DSL.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Actual pinned engine sums/normalizes voices, then applies shared body/reverb and nonlinear limiting. The authored100/102Hz pair does not diagnose the retained older render. Future isolated/combined or validated-model comparison needs pins,rate,boundary,phase,windows,filters,clipping and uncertainty; no experiment or DSL was delivered, and the old failed gate remains failed.",
+      "task_alignment": "The final source-assisted task explicitly elicits this prepared criterion. Actual submitted answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "AUD009-1",
+      "module": "AUD009",
+      "title": "support-clock",
+      "acceptance_reviewed": "x8,y10,lag2 with y[n+2],complete x target8,y2..9; Fs8000 teachingclock gives.25ms not latencymeasurement.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "The8-frame reference pairs x[n] with y[n+2],n0..7,covering y2..9 of10frames and accounting for two leading frames separately. The stipulated8000Hz clock converts2frames to0.25ms; it is neither measured hardware/browser latency nor an improvement.",
+      "task_alignment": "The final source-assisted task explicitly elicits this prepared criterion. Actual submitted answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "AUD009-2",
+      "module": "AUD009",
+      "title": "residuals",
+      "acceptance_reviewed": "ReferenceRMS.306186218,original-origin first8 residual.275992527,delay-alignedunity.153093109; changed support/question and unadjusted result retained.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Reference RMS0.306186218, original-origin first8 residual0.275992527 and delay-aligned unity residual0.153093109 answer different pairing/support questions. Alignment changes the comparison without changing original samples or erasing their timing history; unadjusted metrics remain.",
+      "task_alignment": "The final source-assisted task explicitly elicits this prepared criterion. Actual submitted answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "AUD009-3",
+      "module": "AUD009",
+      "title": "fitted-null",
+      "acceptance_reviewed": "Gain.5=-6.020599913dB,fullalignedfittedresidual0; originaltiming/support/level different; no byte/listening identity.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "On the full aligned target, predictor x gives fitted gain0.5 or-6.020599913dB and exact zero residual in real arithmetic. Original support,timing and level still differ. A transformed null establishes neither original/byte identity, listening equivalence nor measured latency improvement.",
+      "task_alignment": "The final source-assisted task explicitly elicits this prepared criterion. Actual submitted answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "AUD009-4",
+      "module": "AUD009",
+      "title": "negative-controls",
+      "acceptance_reviewed": "Silence gainundefined but raw equalityvalid; modifiedtail+.125,first6zero coverage6/8=.75,fullprescribedgainRMS.044194174; no hiddenrefit/universalcoverage.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Silent raw vectors are equal but zero predictor energy makes fitted gain undefined. Changing the last aligned frame by0.125 leaves the first6residuals zero at prescribed gain0.5,coverage6/8=0.75,but full RMS0.044194174. No hidden refit or universal coverage threshold follows.",
+      "task_alignment": "The final source-assisted task explicitly elicits this prepared criterion. Actual submitted answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "AUD009-5",
+      "module": "AUD009",
+      "title": "actual-record",
+      "acceptance_reviewed": "Locate floatserialization/PCM16/RMSwindows,retain pins/format/channels/clocks/excitation/extents/target/lag/gain/raw+adjustedmetrics/missingness/cost. Existingrunner no newfit; oldgateunchanged; directrecordbaselinebeforeDSL,no run.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Actual runner keeps raw floats/PCM16 separate, writes float32LE, applies Math.round*32767 and rounded half-open RMS windows with20log10(rms+1e-12). Its onset-based decay method and older engine provenance are not a new delay/gain pipeline. Proposed record retains pins,formats,channels,clocks,excitation,full support,lag,gain,raw/adjusted metrics,missingness and cost; direct subtraction is the baseline.",
+      "task_alignment": "The final source-assisted task explicitly elicits this prepared criterion. Actual submitted answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "INF009-1",
+      "module": "INF009",
+      "title": "population-normalization",
+      "acceptance_reviewed": "N4,mu.125/.3125,sigma sqrt5/8 andsqrt5/16,sharedz[-3,-1,1,3]/sqrt5,Pearson1 butrawRMSdifference.233853587.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "For N4,x mean1/8 and population sigma sqrt5/8; y mean5/16 and sigma sqrt5/16. Both z=[-3,-1,1,3]/sqrt5 and Pearson1, but y-x=[0.375,0.25,0.125,0] has RMS0.233853587. Correlation1 is not raw equality, unchanged level or a probability of equivalence.",
+      "task_alignment": "The final source-assisted task explicitly elicits this prepared criterion. Actual submitted answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "INF009-2",
+      "module": "INF009",
+      "title": "inverse",
+      "acceptance_reviewed": "Positiveaffinefamilycollapses; retainallorderedz,mu,populationsigma,N; inverse realarithmeticnotrounded/byteidentity.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "For positive a,the family ax+b shares z. Retaining all ordered z,mean,population sigma and N permits x=mean+sigma*z in real arithmetic; z/N alone loses scale and offset. Rounded/reduced descriptors or float serialization need separate reconstruction-error/byte analysis.",
+      "task_alignment": "The final source-assisted task explicitly elicits this prepared criterion. Actual submitted answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "INF009-3",
+      "module": "INF009",
+      "title": "polarity",
+      "acceptance_reviewed": "-x normalizes-z,Pearson-1,abs1,mathematicalsumzero; retain signed/polarity/rawresidual; no playback/probability.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Inversion -x gives -z,signed Pearson-1 and absolute Pearson1. Mathematical samplewise cancellation does not establish an actual routing,room or listening result. Signed/polarity policy and raw residual preserve distinctions discarded by absolute correlation.",
+      "task_alignment": "The final source-assisted task explicitly elicits this prepared criterion. Actual submitted answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "INF009-4",
+      "module": "INF009",
+      "title": "constant",
+      "acceptance_reviewed": "Constant.25 sigma0,z/Pearsonundefined,rawRMS.25,rawcopyequalityvalid; separateconstantstatusmeanN,no fabricatedPearson1.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Constant0.25 has sigma0,undefined z/Pearson and valid raw RMS0.25. Raw copy equality can still hold. Constant status,mean and count can represent it without dividing by zero; an application-specific score1 must not be called the defined Pearson result.",
+      "task_alignment": "The final source-assisted task explicitly elicits this prepared criterion. Actual submitted answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "INF009-5",
+      "module": "INF009",
+      "title": "actual-handoff",
+      "acceptance_reviewed": "Existingrunner separatesfloat/PCM16 andflooredRMS,no newdescriptor. Retainpin,boundary,clock,channels,format,N,rule,mu,sigma,status,signpolicy,rawlevels/residual; toyhasnomeasuredclock. Directrecordbaseline/controls beforeDSL,actualcost/errorsneeded,noimplementation/userstudy.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Actual runner has separate float/PCM16 comparisons and adds1e-12 before logarithmic RMS conversion; it does not implement this normalized-shape descriptor. A proposed handoff retains pin,boundary,clock,channels,format,N,normalization,mean,sigma,status,sign policy and raw levels/residual. Toy vectors have no measured audio clock; explicit records and inversion/constant controls precede any DSL or empirical benefit claim.",
+      "task_alignment": "The final source-assisted task explicitly elicits this prepared criterion. Actual submitted answers and assistance are required before a learner decision."
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-008-separate-beating-from-a-change-in-damping.md",
+      "sha256": "62ecc729fa4092631a07b7f4bd9bbe727699c8e4a7a5d5136d0ba76d21703ab2"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-008-separate-beating-from-a-change-in-damping.fr.md",
+      "sha256": "bf1a462fcb7931b3a494de296adb7d16ae7458e30b5c090673c540a77c9a7879"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-008-separate-beating-from-a-change-in-damping.es.md",
+      "sha256": "ff466c426ef9e755d4f12f1b75351a5d0ba5024640eb8e8cb33638d11f5de7ad"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-009-declare-alignment-before-a-null-test.md",
+      "sha256": "ca5b9928bc5376c52ad6b2eaa55574ed989e5f3772e17c294ef78c9d9731a1ea"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-009-declare-alignment-before-a-null-test.fr.md",
+      "sha256": "ff1c60ffdebd22e6f9f343ad7c7821a07829e2d9dc212c2590623acc2bb92020"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-009-declare-alignment-before-a-null-test.es.md",
+      "sha256": "334395cfc21c44ea54bc50aecd88a3ecc110f4f3a298a12cf8fdf2caf7f1acbc"
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-009-keep-level-when-normalizing-waveform-shape.md",
+      "sha256": "982aa0488cd63e7c76df670dfc894aeef4efc93c57115a57507bf18c357fc009"
+    },
+    {
+      "path": "streeling/courses/information-theory/fr/inf-009-keep-level-when-normalizing-waveform-shape.fr.md",
+      "sha256": "9681d059007533c4b52a69373206740707fde322e8a03441105ef7bc20a70797"
+    },
+    {
+      "path": "streeling/courses/information-theory/es/inf-009-keep-level-when-normalizing-waveform-shape.es.md",
+      "sha256": "ac0cb66bd461a729f51d13eea8cdc2567e44bbfe23da3322b5b197aef58717db"
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/production-plan.md",
+      "sha256": "afd52fb2676762297ad2018a19a2689d3617bd35fd1f18551bdebce444411673"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/README.md",
+      "sha256": "815a53bce788cdbeac672d122bc3a4b68f735fe20e944baafc0b8d3b65e7de0b"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/learner-task.md",
+      "sha256": "3a9c6225a4c230e042f47abea9fdeb6227b60477a1d0fcdec05893529c8fdd9d"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/reviewer-rubric.json",
+      "sha256": "c4fb69d40ce059beabb23d272e8da591192fb80cff162679f0367555192e2076"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/primary-readback.json",
+      "sha256": "00eb4a9e95bd301cdcc5eaffde60f25d8fb6742171553c01b689201ab318e0ee"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/primary-reading.json",
+      "sha256": "5d9d3fc2c3556859dd216f97f7d8b6a81f2289f9972df47685ccb74fbbea1668"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/source-observations.json",
+      "sha256": "15e75eb6c8b4f606194e4ab24fda42bbd2133f8d49542871be776b3c923728f9"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/beating-envelope.json",
+      "sha256": "5d97749972b417df1011452dc88f6e0d1909401b3253718878e07775db4b81c1"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/null-comparison.json",
+      "sha256": "14101adbc0a9a3db2d0868e9f7cbde0bb3222111a2938b402188dd4c06d87acb"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/normalized-shape.json",
+      "sha256": "d065fa4c72d3cd2b3a500e9840f90eeb0afe09eeb3ee9d19f35bda0c05b742b5"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/data-audit.json",
+      "sha256": "db1f8916a72bf6ad2a6bce2fff0c17621e76dcafcece194ff09368e56730ce4a"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/official-links.json",
+      "sha256": "46f241acc05073929352ed80e29a46bb4da997000c95aa9a7dd75dc64534d61f"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/bindings.json",
+      "sha256": "73b5ec4a6a4008eb6d6705afa03080799c1c43e08c5f1080857fabe211255b54"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/locale-checks.json",
+      "sha256": "ed41bc577ba3237e121d6df4c83ee587e77b443fe052e684ea27b17828c8613b"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/source-inventory.json",
+      "sha256": "f4d594d3f260faae98eb61aaf130068d2d81e18c1922fa97e8ebaca4db3fa87f"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/dependency-recovery.json",
+      "sha256": "ed51ca3b52a039dd2682eeb5bdb4634633b0f450e2cac827a7e8856d770d9445"
+    },
+    {
+      "path": "C:/tmp/streeling-audio-comparison-inputs-20261023/ga-lib.rs",
+      "sha256": "2d4155cbfe26c4074ea701d0abb7cfd727fa4648d4d5109347fa442656e1f943"
+    },
+    {
+      "path": "C:/tmp/streeling-audio-comparison-inputs-20261023/ga-audioEngine.js",
+      "sha256": "d8b72ae1b4a1d347733f7788500b9d6117130aae256301b15099850fbbd98d7a"
+    },
+    {
+      "path": "C:/tmp/streeling-audio-comparison-inputs-20261023/ga-guitar-worklet.js",
+      "sha256": "f76c722f16991d17f4b6202a30707af943fdc6c218bb1c960c43c85598da37f0"
+    },
+    {
+      "path": "C:/tmp/streeling-audio-comparison-inputs-20261023/learn-run.mjs",
+      "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848"
+    },
+    {
+      "path": "C:/tmp/streeling-audio-comparison-inputs-20261023/learn-source.json",
+      "sha256": "0b710e34f14dfec45726ae4f811a27a5c732dad70276890add5211d72ea7f338"
+    },
+    {
+      "path": "C:/tmp/streeling-audio-comparison-inputs-20261023/learn-results.json",
+      "sha256": "d564b476e0fccaff1a435548b5ae795807337622fdff69fb19ce0ace0d320506"
+    }
+  ],
+  "prerequisite_bindings": [
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-004-run-open-e-decay-candidate.md",
+      "sha256": "9e8d8019c04871e849621638b58673c839d243fa30830087f4b24218804bb227"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-005-separate-a-partial-peak-from-a-period.md",
+      "sha256": "074fcd679fe05c9ec0592b6d4d0589fb7edc7c21dd1769002609335f14c42e79"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-007-distinguish-body-poles-from-string-partials.md",
+      "sha256": "20430f16f872fd3d84c1f7caf46aaddfdc3dd3179ca052b052e118b52de1adda"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-005-pcm-guards-and-format-boundaries.md",
+      "sha256": "1f15d25a97ddff5b2f2ca57e1af9ababcc2a6c4a4b368306eb8b775316f35341"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-007-translate-attack-coefficients-into-time.md",
+      "sha256": "05d20b64e402b7150293290cc13114d9e6e278315cb66779da4440709d8d2f23"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-008-measure-a-filter-with-paired-input-and-output.md",
+      "sha256": "cca3fc13385470976e8dcc52f83f425d1569beee234780a3f1109b0720e9648f"
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-005-quantization-and-indistinguishable-renders.md",
+      "sha256": "cf02f36e78f303a760e73ee87dc92fc37960fa616b432b235f961ab95ca3422c"
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-008-keep-phase-when-waveform-identity-matters.md",
+      "sha256": "0d4732397b82d36e2a4fca253eef7865b317acaf6d5b319975711f4415dd9e9b"
+    }
+  ],
+  "locale_url_and_format_checks": [
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-008-separate-beating-from-a-change-in-damping.md",
+      "ordered_urls_match_english": true,
+      "inline_code_fenced_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-008-separate-beating-from-a-change-in-damping.fr.md",
+      "ordered_urls_match_english": true,
+      "inline_code_fenced_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-008-separate-beating-from-a-change-in-damping.es.md",
+      "ordered_urls_match_english": true,
+      "inline_code_fenced_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-009-declare-alignment-before-a-null-test.md",
+      "ordered_urls_match_english": true,
+      "inline_code_fenced_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-009-declare-alignment-before-a-null-test.fr.md",
+      "ordered_urls_match_english": true,
+      "inline_code_fenced_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-009-declare-alignment-before-a-null-test.es.md",
+      "ordered_urls_match_english": true,
+      "inline_code_fenced_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-009-keep-level-when-normalizing-waveform-shape.md",
+      "ordered_urls_match_english": true,
+      "inline_code_fenced_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/information-theory/fr/inf-009-keep-level-when-normalizing-waveform-shape.fr.md",
+      "ordered_urls_match_english": true,
+      "inline_code_fenced_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/information-theory/es/inf-009-keep-level-when-normalizing-waveform-shape.es.md",
+      "ordered_urls_match_english": true,
+      "inline_code_fenced_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    }
+  ],
+  "primary_source_review": [
+    {
+      "repo": "GuitarAlchemist/ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "temporary_path": "C:/tmp/streeling-audio-comparison-inputs-20261023/ga-lib.rs",
+      "sha256": "2d4155cbfe26c4074ea701d0abb7cfd727fa4648d4d5109347fa442656e1f943",
+      "review_scope": "Actual source/provenance/result text read for selected voice/body/reverb/limiter,host rate,raw/PCM16/RMS and historical gate boundaries. No native/browser/audio execution."
+    },
+    {
+      "repo": "GuitarAlchemist/ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Rust/guitar-web-wasm-demo/src/audio/audioEngine.js",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/src/audio/audioEngine.js",
+      "temporary_path": "C:/tmp/streeling-audio-comparison-inputs-20261023/ga-audioEngine.js",
+      "sha256": "d8b72ae1b4a1d347733f7788500b9d6117130aae256301b15099850fbbd98d7a",
+      "review_scope": "Actual source/provenance/result text read for selected voice/body/reverb/limiter,host rate,raw/PCM16/RMS and historical gate boundaries. No native/browser/audio execution."
+    },
+    {
+      "repo": "GuitarAlchemist/ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Rust/guitar-web-wasm-demo/src/audio/guitar-worklet.js",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/src/audio/guitar-worklet.js",
+      "temporary_path": "C:/tmp/streeling-audio-comparison-inputs-20261023/ga-guitar-worklet.js",
+      "sha256": "f76c722f16991d17f4b6202a30707af943fdc6c218bb1c960c43c85598da37f0",
+      "review_scope": "Actual source/provenance/result text read for selected voice/body/reverb/limiter,host rate,raw/PCM16/RMS and historical gate boundaries. No native/browser/audio execution."
+    },
+    {
+      "repo": "spareilleux/learn",
+      "commit": "49ad4cf7db680f031b3a3fb5b6ee118464ad099f",
+      "path": "code/streeling/guitar-runtime/run.mjs",
+      "url": "https://raw.githubusercontent.com/spareilleux/learn/49ad4cf7db680f031b3a3fb5b6ee118464ad099f/code/streeling/guitar-runtime/run.mjs",
+      "temporary_path": "C:/tmp/streeling-audio-comparison-inputs-20261023/learn-run.mjs",
+      "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+      "review_scope": "Actual source/provenance/result text read for selected voice/body/reverb/limiter,host rate,raw/PCM16/RMS and historical gate boundaries. No native/browser/audio execution."
+    },
+    {
+      "repo": "spareilleux/learn",
+      "commit": "49ad4cf7db680f031b3a3fb5b6ee118464ad099f",
+      "path": "code/streeling/guitar-runtime/source.json",
+      "url": "https://raw.githubusercontent.com/spareilleux/learn/49ad4cf7db680f031b3a3fb5b6ee118464ad099f/code/streeling/guitar-runtime/source.json",
+      "temporary_path": "C:/tmp/streeling-audio-comparison-inputs-20261023/learn-source.json",
+      "sha256": "0b710e34f14dfec45726ae4f811a27a5c732dad70276890add5211d72ea7f338",
+      "review_scope": "Actual source/provenance/result text read for selected voice/body/reverb/limiter,host rate,raw/PCM16/RMS and historical gate boundaries. No native/browser/audio execution."
+    },
+    {
+      "repo": "spareilleux/learn",
+      "commit": "49ad4cf7db680f031b3a3fb5b6ee118464ad099f",
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/results.json",
+      "url": "https://raw.githubusercontent.com/spareilleux/learn/49ad4cf7db680f031b3a3fb5b6ee118464ad099f/code/streeling/evidence/guitar-runtime-2026-10-22/results.json",
+      "temporary_path": "C:/tmp/streeling-audio-comparison-inputs-20261023/learn-results.json",
+      "sha256": "d564b476e0fccaff1a435548b5ae795807337622fdff69fb19ce0ace0d320506",
+      "review_scope": "Actual source/provenance/result text read for selected voice/body/reverb/limiter,host rate,raw/PCM16/RMS and historical gate boundaries. No native/browser/audio execution."
+    }
+  ],
+  "official_document_review": [
+    {
+      "url": "https://openstax.org/books/university-physics-volume-1/pages/17-6-beats",
+      "actual_read": "Actual mathematical superposition identity and difference-frequency beat definition read; no images inspected/copied or textbook exercise/stimulus imported. Damped pair is authored."
+    },
+    {
+      "url": "https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/correlat.htm",
+      "actual_read": "Actual centered Pearson definition,sign and separate absolute-value syntax read; no significance/p-value,independence or audio-equivalence probability imported."
+    }
+  ],
+  "pending": {
+    "human_technical_review": null,
+    "musician_review": null,
+    "listener_review": null,
+    "fluent_language_review": null,
+    "learner_attempts": null,
+    "independent_learner_transfer": null,
+    "new_engine_run": null,
+    "new_native_run": null,
+    "new_Wasm_run": null,
+    "new_browser_capture": null,
+    "new_ComfyUI_workflow": null,
+    "new_audio_recording": null,
+    "new_render": null,
+    "listening_trial": null,
+    "perceptual_equivalence": null,
+    "physical_damping_measurement": null,
+    "measured_latency_improvement": null,
+    "new_null_pipeline": null,
+    "new_Pearson_pipeline": null,
+    "new_DSL": null,
+    "production_contract": null,
+    "deployed_html": null
+  },
+  "human_technical_review": null,
+  "musician_review": null,
+  "listener_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "independent_learner_transfer": null,
+  "new_engine_run": null,
+  "new_native_run": null,
+  "new_Wasm_run": null,
+  "new_browser_capture": null,
+  "new_ComfyUI_workflow": null,
+  "new_audio_recording": null,
+  "new_render": null,
+  "listening_trial": null,
+  "perceptual_equivalence": null,
+  "physical_damping_measurement": null,
+  "measured_latency_improvement": null,
+  "new_null_pipeline": null,
+  "new_Pearson_pipeline": null,
+  "new_DSL": null,
+  "production_contract": null,
+  "deployed_html": null
+}

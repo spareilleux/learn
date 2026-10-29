@@ -1,0 +1,62 @@
+{
+  "scope": "Derived checks of actual raw MCP observations; service revision unknown. No arbitrary sibling-order normalization of raw receipts.",
+  "topology_calls": 3,
+  "execution_calls": 3,
+  "diamond": {
+    "nodes": 4,
+    "edges": 4,
+    "level_sets": [
+      [
+        "a"
+      ],
+      [
+        "b",
+        "c"
+      ],
+      [
+        "d"
+      ]
+    ],
+    "reported_width": 2,
+    "raw_topological_order": [
+      "a",
+      "c",
+      "b",
+      "d"
+    ]
+  },
+  "wide": {
+    "nodes": 8,
+    "edges": 0,
+    "reported_width": 8
+  },
+  "cycle_error": "Error: execution failed: adding edge a \u2192 b would create a cycle",
+  "same_numeric_results": true,
+  "first_order": [
+    "first",
+    "second",
+    "third"
+  ],
+  "repeat_order": [
+    "first",
+    "third",
+    "second"
+  ],
+  "order_changed": true,
+  "means": {
+    "first": 2.0,
+    "second": 5.0,
+    "third": 15.0
+  },
+  "cache_hits_first": [],
+  "cache_hits_repeat": [],
+  "all_cache_keys_null": true,
+  "reported_durations_ms": {
+    "first": 0,
+    "second": 0,
+    "third": 0
+  },
+  "missing_tool_error": "Error: ix_pipeline_run: step 'b' (tool 'ix_streeling_deliberately_missing_tool') failed: Unknown tool: ix_streeling_deliberately_missing_tool",
+  "failure_partial_results_packet": false,
+  "earlier_step_execution_observed": null
+}

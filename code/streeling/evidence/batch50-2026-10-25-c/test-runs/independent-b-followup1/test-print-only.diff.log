@@ -1,0 +1,11 @@
+--- test-before.py
++++ test-after.py
+@@ -306,7 +306,7 @@
+     model = course['authored_model']
+     for i,(case,data) in enumerate((('model',model),('negative',model['negative_control']))):
+         observed = compute(code,data['values'])
+-        print('OBSERVATION '+json.dumps(dict(code=code,case=case,observed=observed,expected=FIXED[code][i],scope=SCOPES[code]),sort_keys=True),flush=True)
++        print('\nOBSERVATION '+json.dumps(dict(code=code,case=case,observed=observed,expected=FIXED[code][i],scope=SCOPES[code]),sort_keys=True),flush=True)
+         assert_matches(observed,FIXED[code][i])
+         assert_matches(observed,data['expected'])
+ 

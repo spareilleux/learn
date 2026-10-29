@@ -1,0 +1,6 @@
+{
+  "reviewer": "efficiency",
+  "mode": "pipeline",
+  "findings": [],
+  "summary": "No worthwhile efficiency findings in the eligible changes. Discovery keeps the existing shallow glob and deterministic ordering, adds one bounded standard-library name match per directory, and avoids executing evidence/vendor trees. The small discovery regressions exercise each existing OS/Python matrix combination. No new resource lifetime, unbounded allocation, polling, or concurrent mutation is introduced."
+}

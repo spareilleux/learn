@@ -3,7 +3,7 @@ title: La TDF de las clases de altura — Lo que conservan los módulos y lo que
 description: La TDF de las clases de altura — módulos, fases y homometría — Música
 sidebar:
   label: MUS-021 · La TDF de las clases de altura
-  order: 18
+  order: 21
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/es/mus-021-pitch-class-dft-magnitudes-phases-homometry.es.md
 ---
 

@@ -1,0 +1,13 @@
+Actual source-discovery failures copied verbatim from this author's tool results; this is retained diagnostic output, not a model-test receipt.
+
+Attempt: initial catalogue printer under Windows default Python stdout encoding.
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2192' in position 612: character maps to <undefined>
+Observed call stack ended in C:\Users\spare\AppData\Local\Programs\Python\Python314\Lib\encodings\cp1252.py, line 19.
+Correction: PYTHONIOENCODING=utf-8; subsequent bounded-source reads succeeded.
+
+Attempt: prior localized AUD018 direct path read without locale filename suffix.
+Get-Content: Cannot find path 'C:\tmp\learn-streeling-craft-transfer-20261022\streeling\courses\audio-engineering\fr\aud-018-recover-stereo-from-mid-and-side.md' because it does not exist.
+Get-Content: Cannot find path 'C:\tmp\learn-streeling-craft-transfer-20261022\streeling\courses\audio-engineering\es\aud-018-recover-stereo-from-mid-and-side.md' because it does not exist.
+Correction: actual packet source_paths identifies .fr.md and .es.md; those complete localized sources were then read successfully.
+
+Focused authored-source check attempt 01: 650 passed of 650, zero failed assertions. There is no failed model-proof attempt by this author because no model proof was run.

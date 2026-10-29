@@ -1,0 +1,2919 @@
+{
+  "schema": "streeling-course-author-unit/1",
+  "unit": "c",
+  "base_learn_commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+  "plan_commit": "f93c0356d23c3700ad1ead501eef46802dca2a31",
+  "scope": "Sixteen advanced craft-to-scene/interpretation courses. Authored finite models and actual scoped source inspection; no new engine, physical, learner or production observation.",
+  "primary_references": [
+    {
+      "id": "friction",
+      "url": "https://openstax.org/books/university-physics-volume-1/pages/6-2-friction",
+      "version_and_reading_scope": "OpenStax University Physics Volume 1, section 6.2; actual rendered lines 31-75, static bound versus kinetic equality; no material coefficient table reused.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "elastic",
+      "url": "https://openstax.org/books/university-physics-volume-1/pages/12-3-stress-strain-and-elastic-modulus",
+      "version_and_reading_scope": "OpenStax University Physics Volume 1, section 12.3; actual rendered lines 29-48, rigidity idealization and low-stress elastic modulus. Section integral and fixed-moment curvature relation are explicitly authored model premises, not a quoted experiment.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "collision",
+      "url": "https://openstax.org/books/university-physics-volume-1/pages/9-4-types-of-collisions",
+      "version_and_reading_scope": "OpenStax University Physics Volume 1, section 9.4; actual rendered lines 25-62, closed-system momentum and kinetic-energy distinction. Fixed-wall restitution case is authored.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "depth",
+      "url": "https://docs.godotengine.org/en/4.5/tutorials/shaders/advanced_postprocessing.html",
+      "version_and_reading_scope": "Godot 4.5 documentation, Depth texture, actual rendered lines 39-88; nonlinear reversed depth, renderer-dependent NDC and inverse-projection reconstruction. Authored finite uniform quantizer is not a claim about a GPU format.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "alpha",
+      "url": "https://www.w3.org/TR/2024/CRD-compositing-1-20240321/",
+      "version_and_reading_scope": "W3C Candidate Recommendation Draft, 2024-03-21, section 5.1, actual rendered lines 451-496; straight and premultiplied source-over formulas. No CSS or Godot runtime inferred.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "triangle",
+      "url": "https://pbr-book.org/4ed/Shapes/Triangle_Meshes",
+      "version_and_reading_scope": "PBRT fourth edition, section 6.5; actual rendered lines 554-568 and 603-629 for UV affine derivatives; lines 790-798 for barycentric interpolation. No renderer execution or copying of its implementation.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "circular",
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.circmean.html",
+      "version_and_reading_scope": "SciPy 1.18.0 documentation as served, actual rendered lines 30-38 and 74-82; mean resultant and zero-resultant warning. Axial doubling is explicitly derived in the lesson; SciPy not installed or run.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "logic",
+      "url": "https://microsoft.github.io/z3guide/docs/logic/propositional-logic/",
+      "version_and_reading_scope": "Microsoft Z3 Guide, read 2026-10-25, actual rendered lines 22-26 and 57-59: xor, satisfiability, named unsatisfiable cores. A core is not promised minimal; the finite lesson checks deletion witnesses by hand. No Z3 execution.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "floor",
+      "url": "https://docs.python.org/3/library/math.html",
+      "version_and_reading_scope": "Python documentation as served (3.15.1 banner), actual rendered lines 79-94; floor is greatest integer no greater than the input. This is a definition reference only; author host is a separate Python version.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "tail",
+      "url": "https://sites.math.washington.edu/~rtr/papers/rtr179-CVaR1.pdf",
+      "version_and_reading_scope": "Rockafellar and Uryasev, 1999-09-05 preprint, pages 5-6 (PDF indices 4-5), equations 4-9 and piecewise-linear finite approximation; actually read rendered lines 122-179. Lesson defines a weighted finite tail operation and splits cutoff mass explicitly, without claiming a conditional mean over all atoms at the cutoff.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "amdahl",
+      "url": "https://hpc.llnl.gov/documentation/tutorials/introduction-parallel-computing-tutorial",
+      "version_and_reading_scope": "LLNL Introduction to Parallel Computing tutorial, Amdahl law and Scalability sections, read actual served body 2026-10-25; finite-worker serial/parallel denominator, fixed problem size, overhead limitations. Initial guessed shorter URL failed and is retained as unread.",
+      "read_method": "Actual rendered web body scoped as described; no HTTP-status-only reading claim",
+      "sha256": null
+    },
+    {
+      "id": "blender_identity",
+      "url": "https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md",
+      "version_and_reading_scope": "Blender v4.5.0 README, actual full rendered lines 0-35; tool identity only, not a feature or material claim.",
+      "read_method": "web.open actual rendered body",
+      "sha256": null
+    },
+    {
+      "id": "comfyui_identity",
+      "url": "https://github.com/Comfy-Org/ComfyUI",
+      "version_and_reading_scope": "Official Comfy-Org repository page, read 2026-10-25; actual repository identity and About lines 115-148 only. No runtime or feature-performance claim adopted.",
+      "read_method": "web.open actual rendered body",
+      "sha256": null
+    }
+  ],
+  "courses": [
+    {
+      "code": "PHY019",
+      "department": "physics",
+      "module_id": "phy-019-test-sliding-before-calling-a-sculpture-stable",
+      "prerequisites": [
+        "phy-018-locate-a-sculpture-mass-projection"
+      ],
+      "authored_model": {
+        "values": {
+          "mass_kg": 2,
+          "g_m_s2": 10,
+          "sin_theta": 0.6,
+          "cos_theta": 0.8,
+          "mu_static": 0.8
+        },
+        "formula": "normal_N=m*g*cos_theta; demand_N=m*g*sin_theta; capacity_N=mu_static*normal_N; reserve_N=capacity_N-demand_N; static_feasible=reserve_N>=0",
+        "expected": {
+          "normal_N": 16,
+          "demand_N": 12,
+          "capacity_N": 12.8,
+          "reserve_N": 0.8,
+          "static_feasible": true
+        },
+        "negative_control": {
+          "values": {
+            "mass_kg": 2,
+            "g_m_s2": 10,
+            "sin_theta": 0.6,
+            "cos_theta": 0.8,
+            "mu_static": 0.5
+          },
+          "expected": {
+            "normal_N": 16,
+            "demand_N": 12,
+            "capacity_N": 8,
+            "reserve_N": -4,
+            "static_feasible": false
+          },
+          "why": "The same mass projection can remain inside a support while the friction bound fails."
+        },
+        "assumptions": [
+          "Positive mass; fixed planar slope; normalized supplied sine/cosine pair",
+          "No other loads; static Coulomb bound; no adhesion",
+          "Coefficients and gravity are invented teaching inputs"
+        ],
+        "limits": [
+          "No measured friction or safety approval",
+          "Sliding feasibility does not test tipping or dynamic motion"
+        ]
+      },
+      "novelty_vs_prerequisites": "PHY018 tests a geometric support margin; this adds independent tangential force feasibility with responsive static friction, not another mass projection.",
+      "title": "Test Sliding before Calling a Sculpture Stable",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-019-test-sliding-before-calling-a-sculpture-stable.md",
+        "fr": "streeling/courses/physics/fr/phy-019-test-sliding-before-calling-a-sculpture-stable.fr.md",
+        "es": "streeling/courses/physics/es/phy-019-test-sliding-before-calling-a-sculpture-stable.es.md"
+      },
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/physics/en/phy-018-locate-a-sculpture-mass-projection.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ccc408c1296529dc2c871ca11ae0f797d058f2d04983d98111c8395bc818a22c",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc",
+          "scope": "Actual full helper source read: declared frame, new_object/material helpers, primitives, sweep_tube and export declarations. No Blender execution."
+        },
+        {
+          "path_or_url": "https://openstax.org/books/university-physics-volume-1/pages/6-2-friction",
+          "pin": "OpenStax University Physics Volume 1, section 6.2",
+          "sha256": null,
+          "scope": "OpenStax University Physics Volume 1, section 6.2; actual rendered lines 31-75, static bound versus kinetic equality; no material coefficient table reused."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the normal and downhill forces.",
+          "expected_answer": "They are `16 N` and `12 N`. Both use the same declared gravity and mass; the direction of each component matters.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the bound and reserve.",
+          "expected_answer": "The bound is `12.8 N` and the reserve is `0.8 N`. The actual static friction needed is `12 N`, below the bound.",
+          "decision": null
+        },
+        "3": {
+          "question": "Would doubling mass rescue a failed inequality?",
+          "expected_answer": "No. Demand and capacity scale together, so the sign of the reserve cannot change for positive mass under these assumptions.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed coefficient.",
+          "expected_answer": "Capacity becomes `8 N`, reserve becomes `-4 N`, and `static_feasible=false`. The earlier tipping result cannot repair this failure.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would justify a contact claim in the scene?",
+          "expected_answer": "Record the slope frame, contact model, coefficient provenance and other loads. Test sliding separately from support projection and identify the engine version before comparing behavior.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: independently derive and justify this prepared result, preserving its units and claim boundary: They are `16 N` and `12 N`. Both use the same declared gravity and mass; the direction of each component matters.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: independently derive and justify this prepared result, preserving its units and claim boundary: The bound is `12.8 N` and the reserve is `0.8 N`. The actual static friction needed is `12 N`, below the bound.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: independently derive and justify this prepared result, preserving its units and claim boundary: No. Demand and capacity scale together, so the sign of the reserve cannot change for positive mass under these assumptions.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: independently derive and justify this prepared result, preserving its units and claim boundary: Capacity becomes `8 N`, reserve becomes `-4 N`, and `static_feasible=false`. The earlier tipping result cannot repair this failure.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: independently derive and justify this prepared result, preserving its units and claim boundary: Record the slope frame, contact model, coefficient provenance and other loads. Test sliding separately from support projection and identify the engine version before comparing behavior.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw a free-body diagram before opening the answers. Inspect Atlas object placement and mark where a future contact contract would be needed. Compare the original and changed coefficients by hand; retain the tipping question as a separate requirement.",
+        "direct_manual_baseline": "Draw the declared diagram or input/output table, calculate intermediate results by hand with the answer panels closed, and retain original work before assistance.",
+        "falsifier": "A claim that support projection alone proves static stability is refuted by the control: the support geometry is unchanged while the friction inequality fails.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null,
+      "source_bindings": {
+        "en": {
+          "sha256": "c03fe02de52f3f1039fb22c3cb7cb27f04b7e94910164d360347cc8378b8d3f2",
+          "bytes": 6621
+        },
+        "fr": {
+          "sha256": "0cdd6565e81ea276e2739ead297ff6efb2c65c5513f8147b21f48f8c09e8a9a1",
+          "bytes": 7266
+        },
+        "es": {
+          "sha256": "6c3ab5abf8fa4500bba16ea4ec2a5db33c8382789936fcd9bf0271fd80276fcf",
+          "bytes": 6943
+        }
+      }
+    },
+    {
+      "code": "PHY020",
+      "department": "physics",
+      "module_id": "phy-020-separate-section-geometry-from-material-stiffness",
+      "prerequisites": [
+        "phy-012-rotate-directional-stiffness-with-the-material"
+      ],
+      "authored_model": {
+        "values": {
+          "width_mm": 12,
+          "height_mm": 3,
+          "moment_Nmm": 9,
+          "young_N_mm2": 1000
+        },
+        "formula": "I_x=width*height**3/12; I_y=height*width**3/12; curvature_x=moment/(young*I_x); curvature_y=moment/(young*I_y); ratio=I_y/I_x",
+        "expected": {
+          "I_x_mm4": 27,
+          "I_y_mm4": 432,
+          "curvature_x_per_mm": 0.0003333333333333333,
+          "curvature_y_per_mm": 2.0833333333333333e-05,
+          "ratio": 16
+        },
+        "negative_control": {
+          "values": {
+            "width_mm": 6,
+            "height_mm": 6,
+            "moment_Nmm": 9,
+            "young_N_mm2": 1000
+          },
+          "expected": {
+            "I_x_mm4": 108,
+            "I_y_mm4": 108,
+            "curvature_x_per_mm": 8.333333333333333e-05,
+            "curvature_y_per_mm": 8.333333333333333e-05,
+            "ratio": 1
+          },
+          "why": "Equal area does not imply equal directional section moments; a square removes directional section asymmetry."
+        },
+        "assumptions": [
+          "Uniform centered rectangular section; millimetres and newtons",
+          "Authored linear small-curvature relation kappa=M/(E*I)",
+          "Same positive isotropic Young modulus and moment for both axes"
+        ],
+        "limits": [
+          "No beam deflection or buckling simulation",
+          "No calibrated metal or textile elasticity"
+        ]
+      },
+      "novelty_vs_prerequisites": "PHY012 rotates a material stiffness tensor. This instead integrates section geometry at fixed isotropic modulus and distinguishes area from second moment; no constitutive-rotation replay.",
+      "title": "Separate Section Geometry from Material Stiffness",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-020-separate-section-geometry-from-material-stiffness.md",
+        "fr": "streeling/courses/physics/fr/phy-020-separate-section-geometry-from-material-stiffness.fr.md",
+        "es": "streeling/courses/physics/es/phy-020-separate-section-geometry-from-material-stiffness.es.md"
+      },
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/physics/en/phy-012-rotate-directional-stiffness-with-the-material.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "a4f9c3aca91da96752f79599c518e2cf50b650acd6444ebb4a9a9dd394e0ab3a",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc",
+          "scope": "Actual full helper source read: declared frame, new_object/material helpers, primitives, sweep_tube and export declarations. No Blender execution."
+        },
+        {
+          "path_or_url": "https://openstax.org/books/university-physics-volume-1/pages/12-3-stress-strain-and-elastic-modulus",
+          "pin": "OpenStax University Physics Volume 1, section 12.3",
+          "sha256": null,
+          "scope": "OpenStax University Physics Volume 1, section 12.3; actual rendered lines 29-48, rigidity idealization and low-stress elastic modulus. Section integral and fixed-moment curvature relation are explicitly authored model premises, not a quoted experiment."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the section moments about both centroidal axes.",
+          "expected_answer": "They are `27 mm^4` and `432 mm^4`. The fourth-power unit follows from squared distance integrated over area.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compare the curvatures under the same moment.",
+          "expected_answer": "They are `0.0003333333333333333 mm^-1` and `0.000020833333333333333 mm^-1`. The first is `16` times the second.",
+          "decision": null
+        },
+        "3": {
+          "question": "What changes in the square control?",
+          "expected_answer": "Both section moments are `108 mm^4`; both curvatures are `0.00008333333333333333 mm^-1`, and the ratio is `1`.",
+          "decision": null
+        },
+        "4": {
+          "question": "Does equal area preserve bending response?",
+          "expected_answer": "No. Both sections have area `36 mm^2`, but their distributions about the axes differ. Area alone cannot reconstruct a section moment.",
+          "decision": null
+        },
+        "5": {
+          "question": "Could an agent call this a metalwork safety result?",
+          "expected_answer": "No. It would need validated material behavior, actual section measurements, boundary conditions and failure criteria. The authored linear curvature calculation supplies none of those observations.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: independently derive and justify this prepared result, preserving its units and claim boundary: They are `27 mm^4` and `432 mm^4`. The fourth-power unit follows from squared distance integrated over area.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: independently derive and justify this prepared result, preserving its units and claim boundary: They are `0.0003333333333333333 mm^-1` and `0.000020833333333333333 mm^-1`. The first is `16` times the second.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: independently derive and justify this prepared result, preserving its units and claim boundary: Both section moments are `108 mm^4`; both curvatures are `0.00008333333333333333 mm^-1`, and the ratio is `1`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: independently derive and justify this prepared result, preserving its units and claim boundary: No. Both sections have area `36 mm^2`, but their distributions about the axes differ. Area alone cannot reconstruct a section moment.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: independently derive and justify this prepared result, preserving its units and claim boundary: No. It would need validated material behavior, actual section measurements, boundary conditions and failure criteria. The authored linear curvature calculation supplies none of those observations.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Sketch both cross-sections and mark each centroidal axis. Locate Atlas prism dimensions, then prepare an advisory field list distinguishing geometry, material modulus and load. Compute the ratios manually before considering a reusable notation.",
+        "direct_manual_baseline": "Draw the declared diagram or input/output table, calculate intermediate results by hand with the answer panels closed, and retain original work before assistance.",
+        "falsifier": "The assertion that equal area and equal material imply equal directional bending curvature fails on the rectangular and square cases under the declared model.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null,
+      "source_bindings": {
+        "en": {
+          "sha256": "58a5e73d3c1481e7126418485de7adbed03e644b1a675a2ce409aaf96e351094",
+          "bytes": 6819
+        },
+        "fr": {
+          "sha256": "ece8ffb45253adacea10cabe810b3d96167c4ce0daa76cd8676a748161424b3b",
+          "bytes": 7419
+        },
+        "es": {
+          "sha256": "b3991f03a29d771c7b234e3b7e0aa7cb58e9d6470feb41bdd6d33a73dc651d0a",
+          "bytes": 7049
+        }
+      }
+    },
+    {
+      "code": "PHY021",
+      "department": "physics",
+      "module_id": "phy-021-separate-rebound-speed-from-retained-energy",
+      "prerequisites": [
+        "phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh"
+      ],
+      "authored_model": {
+        "values": {
+          "mass_kg": 0.5,
+          "incoming_m_s": -4,
+          "restitution": 0.5
+        },
+        "formula": "outgoing=-e*incoming; K_before=mass*incoming**2/2; K_after=mass*outgoing**2/2; retained_fraction=e**2; impulse=mass*(outgoing-incoming)",
+        "expected": {
+          "outgoing_m_s": 2,
+          "K_before_J": 4,
+          "K_after_J": 1,
+          "retained_fraction": 0.25,
+          "impulse_Ns": 3
+        },
+        "negative_control": {
+          "values": {
+            "mass_kg": 0.5,
+            "incoming_m_s": -4,
+            "restitution": 1
+          },
+          "expected": {
+            "outgoing_m_s": 4,
+            "K_before_J": 4,
+            "K_after_J": 4,
+            "retained_fraction": 1,
+            "impulse_Ns": 4
+          },
+          "why": "An elastic control retains energy while changing signed momentum; coefficient and energy fraction are different quantities."
+        },
+        "assumptions": [
+          "One-dimensional normal impact against an ideal fixed wall",
+          "Restitution in the closed unit interval; positive mass",
+          "Wall impulse external to the moving-piece subsystem"
+        ],
+        "limits": [
+          "No contact solver or measured bounce",
+          "No tangential friction or deformation model"
+        ]
+      },
+      "novelty_vs_prerequisites": "Mass scaling is baseline; a signed wall-impact rule now connects linear restitution, quadratic energy and external impulse, which no retained craft course calculates.",
+      "title": "Separate Rebound Speed from Retained Energy",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-021-separate-rebound-speed-from-retained-energy.md",
+        "fr": "streeling/courses/physics/fr/phy-021-separate-rebound-speed-from-retained-energy.fr.md",
+        "es": "streeling/courses/physics/es/phy-021-separate-rebound-speed-from-retained-energy.es.md"
+      },
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/physics/en/phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "c3b034bc3edf2d107f90d335636ab2262d2726dcbed91995c63c3382302db495",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc",
+          "scope": "Actual full helper source read: declared frame, new_object/material helpers, primitives, sweep_tube and export declarations. No Blender execution."
+        },
+        {
+          "path_or_url": "https://openstax.org/books/university-physics-volume-1/pages/9-4-types-of-collisions",
+          "pin": "OpenStax University Physics Volume 1, section 9.4",
+          "sha256": null,
+          "scope": "OpenStax University Physics Volume 1, section 9.4; actual rendered lines 25-62, closed-system momentum and kinetic-energy distinction. Fixed-wall restitution case is authored."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the outgoing velocity.",
+          "expected_answer": "It is `2 m/s`, away from the wall. The sign reversal is part of the declared impact rule.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute both kinetic energies.",
+          "expected_answer": "They are `4 J` before and `1 J` after. The retained fraction is `0.25`, not `0.5`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Calculate the impulse on the piece.",
+          "expected_answer": "It is `3 N*s`. Subtracting a negative incoming momentum increases the signed change.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the elastic control.",
+          "expected_answer": "Outgoing velocity is `4 m/s`, retained fraction is `1`, and impulse is `4 N*s`. Equal kinetic energy does not mean unchanged momentum.",
+          "decision": null
+        },
+        "5": {
+          "question": "What does the source fail to establish?",
+          "expected_answer": "The helper supplies neither restitution calibration nor contact behavior. A scene claim needs host settings and actual observations with the same subsystem boundary.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: independently derive and justify this prepared result, preserving its units and claim boundary: It is `2 m/s`, away from the wall. The sign reversal is part of the declared impact rule.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: independently derive and justify this prepared result, preserving its units and claim boundary: They are `4 J` before and `1 J` after. The retained fraction is `0.25`, not `0.5`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: independently derive and justify this prepared result, preserving its units and claim boundary: It is `3 N*s`. Subtracting a negative incoming momentum increases the signed change.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: independently derive and justify this prepared result, preserving its units and claim boundary: Outgoing velocity is `4 m/s`, retained fraction is `1`, and impulse is `4 N*s`. Equal kinetic energy does not mean unchanged momentum.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: independently derive and justify this prepared result, preserving its units and claim boundary: The helper supplies neither restitution calibration nor contact behavior. A scene claim needs host settings and actual observations with the same subsystem boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the wall and velocity arrows, compute the energies by hand, then inspect Atlas geometry. Write a proposed observation that could compare a bead trajectory with this ideal model; keep the measurement fields empty.",
+        "direct_manual_baseline": "Draw the declared diagram or input/output table, calculate intermediate results by hand with the answer panels closed, and retain original work before assistance.",
+        "falsifier": "A report equating restitution with retained kinetic-energy fraction is refuted when restitution is `0.5` and energy fraction is `0.25`.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null,
+      "source_bindings": {
+        "en": {
+          "sha256": "207f9b30476392844f26a04926038a044f39810d15e7232a19762fb8285574ca",
+          "bytes": 6448
+        },
+        "fr": {
+          "sha256": "f8bd4181de91397dc4bda2695b18d767ee882cacdb1df42a9dd1a52ea2f9e91a",
+          "bytes": 7088
+        },
+        "es": {
+          "sha256": "a308dfdc97485401bbc7ee0171cbe1ae05c28624d711387c3b1060202622ff49",
+          "bytes": 6743
+        }
+      }
+    },
+    {
+      "code": "VC017",
+      "department": "visual-computing",
+      "module_id": "vc-017-bound-relief-depth-separation-under-a-declared-quantizer",
+      "prerequisites": [
+        "vc-014-predict-an-embroidered-stitch-pixel-footprint",
+        "inf-005-quantization-and-indistinguishable-renders"
+      ],
+      "authored_model": {
+        "values": {
+          "near_m": 1,
+          "far_m": 100,
+          "depths_m": [
+            10,
+            10.1
+          ],
+          "quantizer_steps": 255
+        },
+        "formula": "d(z)=(1/z-1/far)/(1/near-1/far); q(z)=floor(steps*d(z)+0.5); separated=q(z1)!=q(z2)",
+        "expected": {
+          "encoded": [
+            0.09090909090909093,
+            0.08990899089908992
+          ],
+          "codes": [
+            23,
+            23
+          ],
+          "separated": false
+        },
+        "negative_control": {
+          "values": {
+            "near_m": 5,
+            "far_m": 100,
+            "depths_m": [
+              10,
+              10.1
+            ],
+            "quantizer_steps": 255
+          },
+          "expected": {
+            "encoded": [
+              0.4736842105263158,
+              0.4684731631057843
+            ],
+            "codes": [
+              121,
+              119
+            ],
+            "separated": true
+          },
+          "why": "Moving the near plane changes the model code gap while physical relief stays fixed."
+        },
+        "assumptions": [
+          "Positive camera-distance magnitudes with near<=z<=far",
+          "Authored reversed finite-perspective depth and uniform rounding quantizer",
+          "Half-up rounding of nonnegative codes; no floating GPU format premise"
+        ],
+        "limits": [
+          "No actual depth-buffer precision inferred",
+          "No shader, render or z-fighting observation"
+        ]
+      },
+      "novelty_vs_prerequisites": "INF005 teaches generic quantizer collision and VC014 image footprint. New operation composes nonlinear finite-perspective inverse depth with quantization and a near-plane sensitivity control; it makes no GPU precision claim.",
+      "title": "Bound Relief Depth Separation under a Declared Quantizer",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-017-bound-relief-depth-separation-under-a-declared-quantizer.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-017-bound-relief-depth-separation-under-a-declared-quantizer.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-017-bound-relief-depth-separation-under-a-declared-quantizer.es.md"
+      },
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/visual-computing/en/vc-014-predict-an-embroidered-stitch-pixel-footprint.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "cc2381c2dbb044a1b42dffa164aa03a1b9216b4e186d866230fec2c8f66a3921",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "streeling/courses/information-theory/en/inf-005-quantization-and-indistinguishable-renders.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "cf02f36e78f303a760e73ee87dc92fc37960fa616b432b235f961ab95ca3422c",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "code/blender/scripts/glb_pipeline.py",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "40379515ecff8ecda28dc1933725242d8eb82807d2085d60fbc080b73316cfbe",
+          "scope": "Actual lines 1-65 read: docstring, argument defaults, ordered import setup and mesh joining. No cleanup, capture or export execution."
+        },
+        {
+          "path_or_url": "https://docs.godotengine.org/en/4.5/tutorials/shaders/advanced_postprocessing.html",
+          "pin": "Godot 4.5 documentation, Depth texture, actual rendered lines 39-88",
+          "sha256": null,
+          "scope": "Godot 4.5 documentation, Depth texture, actual rendered lines 39-88; nonlinear reversed depth, renderer-dependent NDC and inverse-projection reconstruction. Authored finite uniform quantizer is not a claim about a GPU format."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the main stored codes.",
+          "expected_answer": "They are `[23,23]`; `separated=false`. Distinct physical depths have collided after the declared rounding.",
+          "decision": null
+        },
+        "2": {
+          "question": "Does visible stitch width prevent this collision?",
+          "expected_answer": "No. The footprint prerequisite concerns image-plane extent; this model concerns stored depth along the camera direction.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the changed near plane.",
+          "expected_answer": "The codes become `[121,119]` and `separated=true`. The relief depths themselves have not changed.",
+          "decision": null
+        },
+        "4": {
+          "question": "What tradeoff accompanies that change?",
+          "expected_answer": "The near boundary moves from `1 m` to `5 m`, so nearer content would be excluded. Code separation alone cannot select a camera.",
+          "decision": null
+        },
+        "5": {
+          "question": "May the example predict a Godot precision bug?",
+          "expected_answer": "No. Identify renderer, projection matrix and actual buffer format, then measure. Uniform finite rounding here is an authored assumption.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: independently derive and justify this prepared result, preserving its units and claim boundary: They are `[23,23]`; `separated=false`. Distinct physical depths have collided after the declared rounding.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: independently derive and justify this prepared result, preserving its units and claim boundary: No. The footprint prerequisite concerns image-plane extent; this model concerns stored depth along the camera direction.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: independently derive and justify this prepared result, preserving its units and claim boundary: The codes become `[121,119]` and `separated=true`. The relief depths themselves have not changed.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: independently derive and justify this prepared result, preserving its units and claim boundary: The near boundary moves from `1 m` to `5 m`, so nearer content would be excluded. Code separation alone cannot select a camera.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: independently derive and justify this prepared result, preserving its units and claim boundary: No. Identify renderer, projection matrix and actual buffer format, then measure. Uniform finite rounding here is an authored assumption.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Tabulate reciprocal depth, encoded depth and rounded code by hand. Inspect the pipeline capture arguments and the Godot depth passage. Write the missing camera and format fields for a future relief test.",
+        "direct_manual_baseline": "Draw the declared diagram or input/output table, calculate intermediate results by hand with the answer panels closed, and retain original work before assistance.",
+        "falsifier": "The claim that distinct depths always remain distinguishable after storage fails on the main equal-code pair; a runtime claim would additionally require a measured buffer match.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null,
+      "source_bindings": {
+        "en": {
+          "sha256": "c39c8dab61324a3f318aceb2ae8fab70eaccdca80d87af060f58b28d8b7b3eae",
+          "bytes": 6920
+        },
+        "fr": {
+          "sha256": "c3087b752774698cbb3187ac4ef418d4ffc784729463c251b3137319ad4aa742",
+          "bytes": 7481
+        },
+        "es": {
+          "sha256": "d6aa10d57882c6273a1ea59eb3c8a3688f437f05dba650ed7e1c1538a5c17440",
+          "bytes": 7194
+        }
+      }
+    },
+    {
+      "code": "VC018",
+      "department": "visual-computing",
+      "module_id": "vc-018-carry-alpha-association-through-a-textile-edge",
+      "prerequisites": [
+        "phy-009-distinguish-linear-color-from-display-encoding",
+        "vc-010-preserve-packed-texture-channel-contracts"
+      ],
+      "authored_model": {
+        "values": {
+          "source_straight": [
+            1,
+            0,
+            0
+          ],
+          "source_alpha": 0.25,
+          "backdrop_straight": [
+            0,
+            0,
+            1
+          ],
+          "backdrop_alpha": 1
+        },
+        "formula": "premul=source_alpha*source_straight; out=premul+(1-source_alpha)*backdrop_alpha*backdrop_straight; out_alpha=source_alpha+(1-source_alpha)*backdrop_alpha; double_multiplied=source_alpha*premul+(1-source_alpha)*backdrop_alpha*backdrop_straight",
+        "expected": {
+          "source_premultiplied": [
+            0.25,
+            0,
+            0
+          ],
+          "out_premultiplied": [
+            0.25,
+            0,
+            0.75
+          ],
+          "out_alpha": 1,
+          "double_multiplied": [
+            0.0625,
+            0,
+            0.75
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "source_straight": [
+              1,
+              0,
+              0
+            ],
+            "source_alpha": 1,
+            "backdrop_straight": [
+              0,
+              0,
+              1
+            ],
+            "backdrop_alpha": 1
+          },
+          "expected": {
+            "source_premultiplied": [
+              1,
+              0,
+              0
+            ],
+            "out_premultiplied": [
+              1,
+              0,
+              0
+            ],
+            "out_alpha": 1,
+            "double_multiplied": [
+              1,
+              0,
+              0
+            ]
+          },
+          "why": "An opaque control hides the double-multiplication error that the translucent edge exposes."
+        },
+        "assumptions": [
+          "Declared linear-light channels in the closed unit interval",
+          "Source-over with fixed source/backdrop order",
+          "Association convention carried separately from channel values"
+        ],
+        "limits": [
+          "No real texture or image evaluated",
+          "No ComfyUI export or Godot blend setting inferred"
+        ]
+      },
+      "novelty_vs_prerequisites": "PHY009 separates encoding from linear color and VC010 channel roles. This adds straight versus associated alpha and a false-reassurance opaque control, not another color transfer or packed-map exercise.",
+      "title": "Carry Alpha Association through a Textile Edge",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-018-carry-alpha-association-through-a-textile-edge.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-018-carry-alpha-association-through-a-textile-edge.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-018-carry-alpha-association-through-a-textile-edge.es.md"
+      },
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/physics/en/phy-009-distinguish-linear-color-from-display-encoding.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "f4927064362cec0d66f7723c394febbec95effcf3fae46652c07c979b16ec8ca",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "streeling/courses/visual-computing/en/vc-010-preserve-packed-texture-channel-contracts.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "dff68b04b2af3c395f35b754b2c65e77968c8d95afce4a56a80f120b7725bf43",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "code/comfyui/ga-lab/runner/comfy.py",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d1d742a5c0352a031246ec43b8f7d486a7e6f3f488ef2423b60125a8b4369bed",
+          "scope": "Actual lines 1-100 read: HTTP wrapper, structured errors, submit/history/view and image-upload boundary. No ComfyUI call."
+        },
+        {
+          "path_or_url": "https://www.w3.org/TR/2024/CRD-compositing-1-20240321/",
+          "pin": "W3C Candidate Recommendation Draft, 2024-03-21, section 5.1, actual rendered lines 451-496",
+          "sha256": null,
+          "scope": "W3C Candidate Recommendation Draft, 2024-03-21, section 5.1, actual rendered lines 451-496; straight and premultiplied source-over formulas. No CSS or Godot runtime inferred."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Associate the source color once.",
+          "expected_answer": "The contribution is `[0.25,0,0]`. Keep that representation label attached to the vector.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the source-over result.",
+          "expected_answer": "The result is `[0.25,0,0.75]` with alpha `1`. On this opaque backdrop the associated output also equals the straight output.",
+          "decision": null
+        },
+        "3": {
+          "question": "Compute the erroneous second multiplication.",
+          "expected_answer": "It gives `[0.0625,0,0.75]`, reducing the source contribution again. This is a representation error, not evidence of a bad dye or material.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the opaque control.",
+          "expected_answer": "Both paths give `[1,0,0]` with alpha `1`. Agreement in the control cannot validate translucent boundaries.",
+          "decision": null
+        },
+        "5": {
+          "question": "What must a texture handoff name?",
+          "expected_answer": "Declare color domain, channel roles, alpha association and compositing order. Retrieval success alone supplies none of those pixel semantics.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: independently derive and justify this prepared result, preserving its units and claim boundary: The contribution is `[0.25,0,0]`. Keep that representation label attached to the vector.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: independently derive and justify this prepared result, preserving its units and claim boundary: The result is `[0.25,0,0.75]` with alpha `1`. On this opaque backdrop the associated output also equals the straight output.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: independently derive and justify this prepared result, preserving its units and claim boundary: It gives `[0.0625,0,0.75]`, reducing the source contribution again. This is a representation error, not evidence of a bad dye or material.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: independently derive and justify this prepared result, preserving its units and claim boundary: Both paths give `[1,0,0]` with alpha `1`. Agreement in the control cannot validate translucent boundaries.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: independently derive and justify this prepared result, preserving its units and claim boundary: Declare color domain, channel roles, alpha association and compositing order. Retrieval success alone supplies none of those pixel semantics.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Make a manual contribution table before inspecting the byte-fetch helper. Propose an edge diagnostic with both translucent and opaque cases, then record the association metadata that a future importer would need.",
+        "direct_manual_baseline": "Draw the declared diagram or input/output table, calculate intermediate results by hand with the answer panels closed, and retain original work before assistance.",
+        "falsifier": "A claim that opaque agreement proves correct alpha handling is refuted by the unequal translucent results under the same arithmetic.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null,
+      "source_bindings": {
+        "en": {
+          "sha256": "7c748e265227bd2a38096350f1e2574e8434d1d9167ca84b003d1bd7771d2051",
+          "bytes": 7166
+        },
+        "fr": {
+          "sha256": "62f59df265b2fce7e3c30c8c0415f4b6b06f8206502cdef4b7a4e8168532574b",
+          "bytes": 7746
+        },
+        "es": {
+          "sha256": "bfd34f610d9261a6ebf2bbdccaae53423058494172846fa763644e7b93fc4428",
+          "bytes": 7364
+        }
+      }
+    },
+    {
+      "code": "VC019",
+      "department": "visual-computing",
+      "module_id": "vc-019-measure-directional-uv-stretch-before-reusing-a-motif",
+      "prerequisites": [
+        "vc-016-track-uv-gutters-through-mip-levels"
+      ],
+      "authored_model": {
+        "values": {
+          "dx_du": 4,
+          "dy_dv": 1,
+          "uv_radius": 0.1
+        },
+        "formula": "J=diag(dx_du,dy_dv); stretches=[abs(dx_du),abs(dy_dv)]; area_scale=abs(dx_du*dy_dv); anisotropy=max(stretches)/min(stretches); ellipse_axes=uv_radius*stretches",
+        "expected": {
+          "stretches": [
+            4,
+            1
+          ],
+          "area_scale": 4,
+          "anisotropy": 4,
+          "ellipse_axes": [
+            0.4,
+            0.1
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "dx_du": 2,
+            "dy_dv": 2,
+            "uv_radius": 0.1
+          },
+          "expected": {
+            "stretches": [
+              2,
+              2
+            ],
+            "area_scale": 4,
+            "anisotropy": 1,
+            "ellipse_axes": [
+              0.2,
+              0.2
+            ]
+          },
+          "why": "Equal determinant preserves area scale while the directional shape distortion changes."
+        },
+        "assumptions": [
+          "Nonzero diagonal planar UV-to-surface map; world lengths in declared scene units",
+          "Orthogonal derivatives; fixed UV-circle radius",
+          "No shear, perspective or nonlinear patch in this restricted case"
+        ],
+        "limits": [
+          "No exported UV inspection or visual trial",
+          "Area equality does not guarantee motif shape or texel quality"
+        ]
+      },
+      "novelty_vs_prerequisites": "VC016 shrinks gutters through mip levels. This adds local affine directional stretch and an equal-determinant counterexample; no gutter or tangent-handedness restatement.",
+      "title": "Measure Directional UV Stretch before Reusing a Motif",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-019-measure-directional-uv-stretch-before-reusing-a-motif.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-019-measure-directional-uv-stretch-before-reusing-a-motif.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-019-measure-directional-uv-stretch-before-reusing-a-motif.es.md"
+      },
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/visual-computing/en/vc-016-track-uv-gutters-through-mip-levels.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "89f79259c6e1d1dcd92deee482ecf41f5f6829f5f3df49bb3bdeda9d51589403",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc",
+          "scope": "Actual full helper source read: declared frame, new_object/material helpers, primitives, sweep_tube and export declarations. No Blender execution."
+        },
+        {
+          "path_or_url": "https://pbr-book.org/4ed/Shapes/Triangle_Meshes",
+          "pin": "PBRT fourth edition, section 6.5",
+          "sha256": null,
+          "scope": "PBRT fourth edition, section 6.5; actual rendered lines 554-568 and 603-629 for UV affine derivatives; lines 790-798 for barycentric interpolation. No renderer execution or copying of its implementation."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Find the main directional stretches and area scale.",
+          "expected_answer": "The stretches are `[4,1]` and area scale is `4`. Their product alone loses the difference between directions.",
+          "decision": null
+        },
+        "2": {
+          "question": "Map the UV circle.",
+          "expected_answer": "Its semiaxes become `[0.4,0.1]` scene units, with anisotropy `4`. These are radii, not full diameters.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the equal-area control.",
+          "expected_answer": "The stretches become `[2,2]`, area scale stays `4`, semiaxes are `[0.2,0.2]`, and anisotropy becomes `1`.",
+          "decision": null
+        },
+        "4": {
+          "question": "Would sufficient atlas gutter solve this distortion?",
+          "expected_answer": "No. Gutter prevents a different kind of cross-island contamination. It cannot change the affine derivative within the patch.",
+          "decision": null
+        },
+        "5": {
+          "question": "What breaks the diagonal shortcut?",
+          "expected_answer": "Shear or nonorthogonal derivatives require singular values of the full local map. Curved patches require position-dependent derivatives; this case does not assess them.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: independently derive and justify this prepared result, preserving its units and claim boundary: The stretches are `[4,1]` and area scale is `4`. Their product alone loses the difference between directions.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: independently derive and justify this prepared result, preserving its units and claim boundary: Its semiaxes become `[0.4,0.1]` scene units, with anisotropy `4`. These are radii, not full diameters.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: independently derive and justify this prepared result, preserving its units and claim boundary: The stretches become `[2,2]`, area scale stays `4`, semiaxes are `[0.2,0.2]`, and anisotropy becomes `1`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: independently derive and justify this prepared result, preserving its units and claim boundary: No. Gutter prevents a different kind of cross-island contamination. It cannot change the affine derivative within the patch.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: independently derive and justify this prepared result, preserving its units and claim boundary: Shear or nonorthogonal derivatives require singular values of the full local map. Curved patches require position-dependent derivatives; this case does not assess them.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the two transformed circles on a common ruler, inspect Atlas mesh creation, and identify the missing UV derivative evidence. Make the area-only recommendation first, then challenge it with the control before suggesting automation.",
+        "direct_manual_baseline": "Draw the declared diagram or input/output table, calculate intermediate results by hand with the answer panels closed, and retain original work before assistance.",
+        "falsifier": "Equal area scale as a guarantee of preserved motif shape is refuted by the two maps: the area products agree while anisotropy differs.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null,
+      "source_bindings": {
+        "en": {
+          "sha256": "f8283047642a76bc012d9f9464f81d87ad10d380502a538487fc34e261ae16ba",
+          "bytes": 6538
+        },
+        "fr": {
+          "sha256": "5d27d857d99cf4ad90770afe7103d280e7e7f41d3b4cf33bf9aa206017480199",
+          "bytes": 7077
+        },
+        "es": {
+          "sha256": "f51518b465d84a851e15e4b0231b8a93b7414c69c99ee9de3d662a22e8869f41",
+          "bytes": 6716
+        }
+      }
+    },
+    {
+      "code": "DV017",
+      "department": "data-visualization",
+      "module_id": "dv-017-summarize-fibre-axes-without-inventing-a-direction",
+      "prerequisites": [
+        "dv-006-position-length-area-comparisons"
+      ],
+      "authored_model": {
+        "values": {
+          "angles_deg": [
+            10,
+            170
+          ],
+          "zero_tolerance": 1e-12
+        },
+        "formula": "C=mean(cos(2*theta*pi/180)); S=mean(sin(2*theta*pi/180)); R=hypot(C,S); axial_mean_deg=(atan2(S,C)*90/pi)%180 if R>tolerance else null; arithmetic_mean=mean(theta); normalize near-180 roundoff to 0",
+        "expected": {
+          "C": 0.9396926207859084,
+          "S": 0,
+          "R": 0.9396926207859084,
+          "axial_mean_deg": 0,
+          "arithmetic_mean_deg": 90
+        },
+        "negative_control": {
+          "values": {
+            "angles_deg": [
+              0,
+              90
+            ],
+            "zero_tolerance": 1e-12
+          },
+          "expected": {
+            "C": 0,
+            "S": 0,
+            "R": 0,
+            "axial_mean_deg": null,
+            "arithmetic_mean_deg": 45
+          },
+          "why": "Orthogonal balanced axes cancel the doubled-angle resultant; a mean axis must remain undefined."
+        },
+        "assumptions": [
+          "Unoriented axes modulo 180 degrees, equal weights",
+          "Authored planar angles; tolerance only handles numerical zero",
+          "No physical measurements or fitted angular distribution"
+        ],
+        "limits": [
+          "No directed-flow inference",
+          "A resultant summary cannot reconstruct multimodality"
+        ]
+      },
+      "novelty_vs_prerequisites": "Existing DV lessons preserve counts, scales and missingness but do not define an axial statistic. New operation quotients by half-turn, averages doubled vectors and distinguishes cancellation from missing data.",
+      "title": "Summarize Fibre Axes without Inventing a Direction",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-017-summarize-fibre-axes-without-inventing-a-direction.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-017-summarize-fibre-axes-without-inventing-a-direction.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-017-summarize-fibre-axes-without-inventing-a-direction.es.md"
+      },
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/data-visualization/en/dv-006-position-length-area-comparisons.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "8b04fc5c3b037f53310594333684c36fa0bb1b9efb5592b45db5f0f55e4bae7d",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc",
+          "scope": "Actual full helper source read: declared frame, new_object/material helpers, primitives, sweep_tube and export declarations. No Blender execution."
+        },
+        {
+          "path_or_url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.circmean.html",
+          "pin": "SciPy 1.18.0 documentation as served, actual rendered lines 30-38 and 74-82",
+          "sha256": null,
+          "scope": "SciPy 1.18.0 documentation as served, actual rendered lines 30-38 and 74-82; mean resultant and zero-resultant warning. Axial doubling is explicitly derived in the lesson; SciPy not installed or run."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the ordinary angle average.",
+          "expected_answer": "It is `90` degrees, which points across the near-horizontal axes rather than along their shared orientation.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the doubled-angle summary.",
+          "expected_answer": "The resultant length is `0.9396926207859084` and the axial mean is `0` degrees. Boundary roundoff must not turn it into a different axis.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the orthogonal control.",
+          "expected_answer": "The resultant length is `0` within tolerance and the axial mean is `null`; the arithmetic mean is `45` degrees.",
+          "decision": null
+        },
+        "4": {
+          "question": "Does a missing mean imply missing observations?",
+          "expected_answer": "No. The observations exist; their balanced axial directions cancel. Encode undefined summary separately from absent source data.",
+          "decision": null
+        },
+        "5": {
+          "question": "What should the visualization retain?",
+          "expected_answer": "Show the raw axial marks or an orientation histogram beside the resultant length. Label the half-turn convention and avoid an arrow that implies directed flow.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: independently derive and justify this prepared result, preserving its units and claim boundary: It is `90` degrees, which points across the near-horizontal axes rather than along their shared orientation.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: independently derive and justify this prepared result, preserving its units and claim boundary: The resultant length is `0.9396926207859084` and the axial mean is `0` degrees. Boundary roundoff must not turn it into a different axis.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: independently derive and justify this prepared result, preserving its units and claim boundary: The resultant length is `0` within tolerance and the axial mean is `null`; the arithmetic mean is `45` degrees.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: independently derive and justify this prepared result, preserving its units and claim boundary: No. The observations exist; their balanced axial directions cancel. Encode undefined summary separately from absent source data.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: independently derive and justify this prepared result, preserving its units and claim boundary: Show the raw axial marks or an orientation histogram beside the resultant length. Label the half-turn convention and avoid an arrow that implies directed flow.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the axes by hand, then their doubled-angle vectors. Inspect the Atlas directional helper and explain why it contains no fibre observations. Propose distinct visual states for missing data and a cancelled summary.",
+        "direct_manual_baseline": "Draw the declared diagram or input/output table, calculate intermediate results by hand with the answer panels closed, and retain original work before assistance.",
+        "falsifier": "The claim that every nonempty orientation sample has a meaningful mean axis fails on the balanced orthogonal control.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null,
+      "source_bindings": {
+        "en": {
+          "sha256": "c254c4c9bf38933ebd9d08e4c729b71e50a340b4238c26faddd4037ea3422baf",
+          "bytes": 6623
+        },
+        "fr": {
+          "sha256": "dbab1f1d6ae0a10783b9ce610f5f9974ba69e70e6e9bf976ec447c74386abf18",
+          "bytes": 7117
+        },
+        "es": {
+          "sha256": "dcddc751946872ab58c4c90e2451adce8fdb61b2e1569431a8da44d3b9bbc5e4",
+          "bytes": 6828
+        }
+      }
+    },
+    {
+      "code": "DV018",
+      "department": "data-visualization",
+      "module_id": "dv-018-show-overlapping-craft-defects-as-a-union",
+      "prerequisites": [
+        "dv-015-map-missing-stitches-without-inventing-holes"
+      ],
+      "authored_model": {
+        "values": {
+          "canvas_area": 100,
+          "mask_a_area": 30,
+          "mask_b_area": 25,
+          "intersection_area": 10
+        },
+        "formula": "a_only=A-I; b_only=B-I; both=I; union=A+B-I; neither=canvas-union; naive_sum=A+B",
+        "expected": {
+          "a_only": 20,
+          "b_only": 15,
+          "both": 10,
+          "union": 45,
+          "neither": 55,
+          "naive_sum": 55
+        },
+        "negative_control": {
+          "values": {
+            "canvas_area": 100,
+            "mask_a_area": 30,
+            "mask_b_area": 25,
+            "intersection_area": 0
+          },
+          "expected": {
+            "a_only": 30,
+            "b_only": 25,
+            "both": 0,
+            "union": 55,
+            "neither": 45,
+            "naive_sum": 55
+          },
+          "why": "Disjoint masks make naive addition correct; an overlap case is needed to test unique affected area."
+        },
+        "assumptions": [
+          "Areas measured in one common authored planar domain",
+          "Valid intersection between zero and the smaller area; canvas covers union",
+          "Masks denote known defects, not missing observations"
+        ],
+        "limits": [
+          "No actual segmentation or image run",
+          "No physical damage or semantic defect validation"
+        ]
+      },
+      "novelty_vs_prerequisites": "DV015 is a missingness map over mutually exclusive booleans. New operation constructs an exclusive partition from overlapping known masks and exposes double counting; it is not another denominator calculation.",
+      "title": "Show Overlapping Craft Defects as a Union",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-018-show-overlapping-craft-defects-as-a-union.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-018-show-overlapping-craft-defects-as-a-union.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-018-show-overlapping-craft-defects-as-a-union.es.md"
+      },
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/data-visualization/en/dv-015-map-missing-stitches-without-inventing-holes.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "b73683f82be6f620edb0b08680eb97abbc8bade39c9d9d4d3f7940021daf40cf",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "code/comfyui/ga-lab/runner/comfy.py",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d1d742a5c0352a031246ec43b8f7d486a7e6f3f488ef2423b60125a8b4369bed",
+          "scope": "Actual lines 1-100 read: HTTP wrapper, structured errors, submit/history/view and image-upload boundary. No ComfyUI call."
+        },
+        {
+          "path_or_url": "https://www.w3.org/TR/2024/CRD-compositing-1-20240321/",
+          "pin": "W3C Candidate Recommendation Draft, 2024-03-21, section 5.1, actual rendered lines 451-496",
+          "sha256": null,
+          "scope": "W3C Candidate Recommendation Draft, 2024-03-21, section 5.1, actual rendered lines 451-496; straight and premultiplied source-over formulas. No CSS or Godot runtime inferred."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Find the exclusive affected areas.",
+          "expected_answer": "Only the first is `20`, only the second `15`, and both `10` area units. Keep category meaning separate from color choice.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute unique affected area and unaffected area.",
+          "expected_answer": "They are `45` and `55`. The exclusive partition sums to `100`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Quantify the naive sum error.",
+          "expected_answer": "The sum is `55`, overstating the union by `10`, exactly the intersection counted again.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the disjoint control.",
+          "expected_answer": "The union becomes `55` and neither becomes `45`. Naive addition now agrees because intersection is `0`.",
+          "decision": null
+        },
+        "5": {
+          "question": "Can two input areas alone determine the union?",
+          "expected_answer": "No. The intersection is additional information. Without it, report bounds rather than inventing a unique affected area.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: independently derive and justify this prepared result, preserving its units and claim boundary: Only the first is `20`, only the second `15`, and both `10` area units. Keep category meaning separate from color choice.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: independently derive and justify this prepared result, preserving its units and claim boundary: They are `45` and `55`. The exclusive partition sums to `100`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: independently derive and justify this prepared result, preserving its units and claim boundary: The sum is `55`, overstating the union by `10`, exactly the intersection counted again.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: independently derive and justify this prepared result, preserving its units and claim boundary: The union becomes `55` and neither becomes `45`. Naive addition now agrees because intersection is `0`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: independently derive and justify this prepared result, preserving its units and claim boundary: No. The intersection is additional information. Without it, report bounds rather than inventing a unique affected area.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw a labelled overlap diagram and its exclusive-area table manually. Inspect the image retrieval boundary, then draft a display with a separate shared category and a declared unknown-intersection state.",
+        "direct_manual_baseline": "Draw the declared diagram or input/output table, calculate intermediate results by hand with the answer panels closed, and retain original work before assistance.",
+        "falsifier": "The rule that defect-category areas can always be added is refuted by the overlap case, even though it succeeds for the disjoint control.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null,
+      "source_bindings": {
+        "en": {
+          "sha256": "d6369c8833bd1946e8b5b89b838ff2b5b0eaf0926efe0908fcbdddc9e1fda0fe",
+          "bytes": 6377
+        },
+        "fr": {
+          "sha256": "80893ca435692cbd5f8b918179f786f54dade10b3b2655ed37a19b5f80b9e444",
+          "bytes": 6831
+        },
+        "es": {
+          "sha256": "c067e157b054438ead23834d5e3e27dac3cf50a050062b59573d9ba40eb3c300",
+          "bytes": 6550
+        }
+      }
+    },
+    {
+      "code": "DV019",
+      "department": "data-visualization",
+      "module_id": "dv-019-choose-a-minimal-view-set-for-declared-features",
+      "prerequisites": [
+        "phi-010-state-what-a-craft-view-cannot-distinguish",
+        "dv-016-compare-paired-silhouette-residuals"
+      ],
+      "authored_model": {
+        "values": {
+          "required": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "views": {
+            "front": [
+              "A",
+              "B"
+            ],
+            "side": [
+              "B",
+              "C"
+            ],
+            "top": [
+              "C",
+              "D"
+            ],
+            "back": [
+              "A",
+              "D"
+            ]
+          }
+        },
+        "formula": "For each subset of sorted view names union feature sets; retain subsets covering required; minimize cardinality; return all tied minima in lexicographic order; if impossible return minimum_count=null and covers=[]; uncovered=required-union(all views)",
+        "expected": {
+          "minimum_count": 2,
+          "covers": [
+            [
+              "back",
+              "side"
+            ],
+            [
+              "front",
+              "top"
+            ]
+          ],
+          "uncovered": []
+        },
+        "negative_control": {
+          "values": {
+            "required": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "views": {
+              "front": [
+                "A",
+                "B"
+              ],
+              "side": [
+                "B",
+                "C"
+              ],
+              "top": [
+                "C"
+              ],
+              "back": [
+                "A"
+              ]
+            }
+          },
+          "expected": {
+            "minimum_count": null,
+            "covers": [],
+            "uncovered": [
+              "D"
+            ]
+          },
+          "why": "Removing every declared view of one feature makes full coverage impossible, regardless of camera count."
+        },
+        "assumptions": [
+          "Finite authored binary visibility matrix; equal view acquisition costs",
+          "Coverage means supplied feature visibility only, with no quality score",
+          "Feature identities stable across views"
+        ],
+        "limits": [
+          "No actual occlusion or recognition observations",
+          "Coverage does not imply depth reconstruction or artistic fidelity"
+        ]
+      },
+      "novelty_vs_prerequisites": "PHI010 gives a noninjective projection witness and DV016 paired residuals. This adds exact finite set-cover selection, all tied minima and explicit infeasibility; it does not repeat either observation example.",
+      "title": "Choose a Minimal View Set for Declared Features",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-019-choose-a-minimal-view-set-for-declared-features.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-019-choose-a-minimal-view-set-for-declared-features.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-019-choose-a-minimal-view-set-for-declared-features.es.md"
+      },
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/philosophy/en/phi-010-state-what-a-craft-view-cannot-distinguish.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "55d0c5a5c7ff2a200f66543a2fc0fd30af252db774cbef244fbf5dfbd0d24331",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "streeling/courses/data-visualization/en/dv-016-compare-paired-silhouette-residuals.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "03b11a94f3cc40a75e56a36d73d80b531b355f298063456fd35f44b6b26e9777",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "code/blender/scripts/glb_pipeline.py",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "40379515ecff8ecda28dc1933725242d8eb82807d2085d60fbc080b73316cfbe",
+          "scope": "Actual lines 1-65 read: docstring, argument defaults, ordered import setup and mesh joining. No cleanup, capture or export execution."
+        },
+        {
+          "path_or_url": "https://docs.godotengine.org/en/4.5/tutorials/shaders/advanced_postprocessing.html",
+          "pin": "Godot 4.5 documentation, Depth texture, actual rendered lines 39-88",
+          "sha256": null,
+          "scope": "Godot 4.5 documentation, Depth texture, actual rendered lines 39-88; nonlinear reversed depth, renderer-dependent NDC and inverse-projection reconstruction. Authored finite uniform quantizer is not a claim about a GPU format."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Can one view cover all required features?",
+          "expected_answer": "No. Each supplied view covers only a proper subset. Counting its marks does not add missing identities.",
+          "decision": null
+        },
+        "2": {
+          "question": "Find every minimum cover.",
+          "expected_answer": "The minimum is `2`: `[back,side]` and `[front,top]`. Both cover the complete required set.",
+          "decision": null
+        },
+        "3": {
+          "question": "Does choosing one tied pair establish unique optimality?",
+          "expected_answer": "No. Preserve both tied pairs under the equal-cost rule. A preference requires an additional declared criterion.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the missing-feature control.",
+          "expected_answer": "Feature `[D]` is uncovered; minimum count is `null` and covers are `[]`. Adding more of the listed views cannot reveal it.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would a physical or rendered trial add?",
+          "expected_answer": "Validate visibility for the specific geometry, camera and feature recognition task. A binary authored table does not prove that a learner recognizes the feature.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: independently derive and justify this prepared result, preserving its units and claim boundary: No. Each supplied view covers only a proper subset. Counting its marks does not add missing identities.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: independently derive and justify this prepared result, preserving its units and claim boundary: The minimum is `2`: `[back,side]` and `[front,top]`. Both cover the complete required set.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: independently derive and justify this prepared result, preserving its units and claim boundary: No. Preserve both tied pairs under the equal-cost rule. A preference requires an additional declared criterion.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: independently derive and justify this prepared result, preserving its units and claim boundary: Feature `[D]` is uncovered; minimum count is `null` and covers are `[]`. Adding more of the listed views cannot reveal it.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: independently derive and justify this prepared result, preserving its units and claim boundary: Validate visibility for the specific geometry, camera and feature recognition task. A binary authored table does not prove that a learner recognizes the feature.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the feature-by-view table, enumerate subsets manually and retain the tied solutions. Inspect the pipeline frame argument and identify the missing visibility measurements. State an unobservable-feature refusal before proposing automatic camera selection.",
+        "direct_manual_baseline": "Draw the declared diagram or input/output table, calculate intermediate results by hand with the answer panels closed, and retain original work before assistance.",
+        "falsifier": "A claim that increasing the count of listed captures guarantees feature coverage is refuted when the required feature is absent from every supplied view.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null,
+      "source_bindings": {
+        "en": {
+          "sha256": "3d02fbc6685e874d25e32703f79534bafa6d037599696122b363809c7e0f67d4",
+          "bytes": 7347
+        },
+        "fr": {
+          "sha256": "00dc2955755ae63547a8f7c528d55de81fc039c78cc427193946b3c3796b444c",
+          "bytes": 7806
+        },
+        "es": {
+          "sha256": "3d84e1a1b0aac2a79f8f8eb26ec8c1203e1cff1f010a633b63f718b7f3811fa3",
+          "bytes": 7492
+        }
+      }
+    },
+    {
+      "code": "SEM015",
+      "department": "semiotics",
+      "module_id": "sem-015-bind-a-surface-marker-to-barycentric-vertex-identity",
+      "prerequisites": [
+        "sem-004-face-identity-under-reindexing"
+      ],
+      "authored_model": {
+        "values": {
+          "vertices": [
+            [
+              0,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              0,
+              2
+            ]
+          ],
+          "weights": [
+            0.25,
+            0.5,
+            0.25
+          ],
+          "new_vertex_order": [
+            0,
+            2,
+            1
+          ],
+          "remap_weights": true
+        },
+        "formula": "p=sum(weights[i]*vertices[i]); vertices_new=vertices[order]; weights_new=weights[order] if remap else weights; p_new=sum(weights_new[i]*vertices_new[i]); preserved=(p_new==p)",
+        "expected": {
+          "original": [
+            2,
+            0.5
+          ],
+          "remapped_weights": [
+            0.25,
+            0.25,
+            0.5
+          ],
+          "new_point": [
+            2,
+            0.5
+          ],
+          "preserved": true
+        },
+        "negative_control": {
+          "values": {
+            "vertices": [
+              [
+                0,
+                0
+              ],
+              [
+                4,
+                0
+              ],
+              [
+                0,
+                2
+              ]
+            ],
+            "weights": [
+              0.25,
+              0.5,
+              0.25
+            ],
+            "new_vertex_order": [
+              0,
+              2,
+              1
+            ],
+            "remap_weights": false
+          },
+          "expected": {
+            "original": [
+              2,
+              0.5
+            ],
+            "remapped_weights": [
+              0.25,
+              0.5,
+              0.25
+            ],
+            "new_point": [
+              1,
+              1
+            ],
+            "preserved": false
+          },
+          "why": "A stable face label cannot rescue weights that remain bound to obsolete vertex slots."
+        },
+        "assumptions": [
+          "Nondegenerate planar triangle, stable vertex identities",
+          "Nonnegative barycentric weights summing to one",
+          "Only reordering occurs; no remesh or changed surface"
+        ],
+        "limits": [
+          "No guarantee across triangulation edits",
+          "No engine hit or material attachment observation"
+        ]
+      },
+      "novelty_vs_prerequisites": "SEM004 remaps face identity. This adds ordered barycentric vertex-weight binding for an interior point, with an unchanged-face counterexample; no claim of remesh persistence.",
+      "title": "Bind a Surface Marker to Barycentric Vertex Identity",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-015-bind-a-surface-marker-to-barycentric-vertex-identity.md",
+        "fr": "streeling/courses/semiotics/fr/sem-015-bind-a-surface-marker-to-barycentric-vertex-identity.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-015-bind-a-surface-marker-to-barycentric-vertex-identity.es.md"
+      },
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/semiotics/en/sem-004-face-identity-under-reindexing.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "307ebe6590dd8210cd40ff0c4d0a1a079083cb99f9f2965d4c87c3a3ae53edea",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc",
+          "scope": "Actual full helper source read: declared frame, new_object/material helpers, primitives, sweep_tube and export declarations. No Blender execution."
+        },
+        {
+          "path_or_url": "https://pbr-book.org/4ed/Shapes/Triangle_Meshes",
+          "pin": "PBRT fourth edition, section 6.5",
+          "sha256": null,
+          "scope": "PBRT fourth edition, section 6.5; actual rendered lines 554-568 and 603-629 for UV affine derivatives; lines 790-798 for barycentric interpolation. No renderer execution or copying of its implementation."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Locate the original marker.",
+          "expected_answer": "It is `[2,0.5]` in the declared planar units. The weights refer to the original vertex order.",
+          "decision": null
+        },
+        "2": {
+          "question": "Reorder vertices and weights together.",
+          "expected_answer": "The new weights are `[0.25,0.25,0.5]`, giving `[2,0.5]`; `preserved=true`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the stale-slot control.",
+          "expected_answer": "Unchanged weights `[0.25,0.5,0.25]` give `[1,1]`; `preserved=false`. The named face can remain identical.",
+          "decision": null
+        },
+        "4": {
+          "question": "Is a sum of weights equal to unity enough for an interior pin?",
+          "expected_answer": "No. Nonnegativity is also required for a point inside the triangle, and correspondence with the intended vertices must be retained.",
+          "decision": null
+        },
+        "5": {
+          "question": "What must an annotation handoff carry?",
+          "expected_answer": "Bind the surface revision, ordered vertex identities and weights. A new triangulation needs a justified transfer method rather than blind index reuse.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: independently derive and justify this prepared result, preserving its units and claim boundary: It is `[2,0.5]` in the declared planar units. The weights refer to the original vertex order.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: independently derive and justify this prepared result, preserving its units and claim boundary: The new weights are `[0.25,0.25,0.5]`, giving `[2,0.5]`; `preserved=true`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: independently derive and justify this prepared result, preserving its units and claim boundary: Unchanged weights `[0.25,0.5,0.25]` give `[1,1]`; `preserved=false`. The named face can remain identical.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: independently derive and justify this prepared result, preserving its units and claim boundary: No. Nonnegativity is also required for a point inside the triangle, and correspondence with the intended vertices must be retained.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: independently derive and justify this prepared result, preserving its units and claim boundary: Bind the surface revision, ordered vertex identities and weights. A new triangulation needs a justified transfer method rather than blind index reuse.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the triangle and both marker positions manually. Inspect Atlas mesh creation, then write a source-bound annotation proposal carrying vertex identities. Challenge face-ID-only preservation with the control.",
+        "direct_manual_baseline": "Draw the declared diagram or input/output table, calculate intermediate results by hand with the answer panels closed, and retain original work before assistance.",
+        "falsifier": "The claim that preserving face identity alone preserves an interior marker is refuted by unchanged face geometry and the stale-weight point.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null,
+      "source_bindings": {
+        "en": {
+          "sha256": "3c69b0cf4cc8624872ee1e2491874dd5405ffe2ddd48426b0d0f27e77d4bb24c",
+          "bytes": 7114
+        },
+        "fr": {
+          "sha256": "fe42cc04077170f1bdcaf47295acdeb435ce38b9cd836a396f25a551e45d9693",
+          "bytes": 7573
+        },
+        "es": {
+          "sha256": "decc0765706edd05d78b05c5f1a314b3594117df9c4b9f9301ff8e8f068966fa",
+          "bytes": 7331
+        }
+      }
+    },
+    {
+      "code": "SEM016",
+      "department": "semiotics",
+      "module_id": "sem-016-check-sign-consistency-around-a-craft-seam-cycle",
+      "prerequisites": [
+        "sem-013-align-two-motif-periods-at-a-textile-seam",
+        "net-009-detect-global-cycles-in-a-panel-stack"
+      ],
+      "authored_model": {
+        "values": {
+          "nodes": [
+            "A",
+            "B",
+            "C"
+          ],
+          "edges": [
+            [
+              "A",
+              "B",
+              1
+            ],
+            [
+              "B",
+              "C",
+              1
+            ],
+            [
+              "C",
+              "A",
+              0
+            ]
+          ]
+        },
+        "formula": "Enumerate bit assignments in node order, require bit[u] XOR bit[v] == edge parity for every edge; return assignments lexicographically; cycle_parity=XOR of the three supplied edge bits",
+        "expected": {
+          "assignments": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              1
+            ]
+          ],
+          "cycle_parity": 0,
+          "consistent": true
+        },
+        "negative_control": {
+          "values": {
+            "nodes": [
+              "A",
+              "B",
+              "C"
+            ],
+            "edges": [
+              [
+                "A",
+                "B",
+                1
+              ],
+              [
+                "B",
+                "C",
+                1
+              ],
+              [
+                "C",
+                "A",
+                1
+              ]
+            ]
+          },
+          "expected": {
+            "assignments": [],
+            "cycle_parity": 1,
+            "consistent": false
+          },
+          "why": "An odd parity product contradicts binary seam labels even though each local edge has solutions."
+        },
+        "assumptions": [
+          "Bits encode only the declared orientation class",
+          "Undirected equality/difference constraints on a finite triangle",
+          "No panel height or mechanical order relation"
+        ],
+        "limits": [
+          "No physical seam fabrication",
+          "A graph cycle alone is not a parity contradiction"
+        ]
+      },
+      "novelty_vs_prerequisites": "SEM013 aligns periodic seam phases and NET009 detects strict directed-order cycles. This adds binary signed-graph consistency where even-parity cycles are valid and odd parity fails; it explicitly separates prior graph semantics.",
+      "title": "Check Sign Consistency around a Craft Seam Cycle",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-016-check-sign-consistency-around-a-craft-seam-cycle.md",
+        "fr": "streeling/courses/semiotics/fr/sem-016-check-sign-consistency-around-a-craft-seam-cycle.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-016-check-sign-consistency-around-a-craft-seam-cycle.es.md"
+      },
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/semiotics/en/sem-013-align-two-motif-periods-at-a-textile-seam.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "2ad8fcc953fde8b7cb8b88a343473d907736ecd03b83038a02570e9bd6267d15",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "streeling/courses/network-science/en/net-009-detect-global-cycles-in-a-panel-stack.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ea8645490b3eab50a4b7d7c5e9539d1da9d08bd8f48600af9606630712861641",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc",
+          "scope": "Actual full helper source read: declared frame, new_object/material helpers, primitives, sweep_tube and export declarations. No Blender execution."
+        },
+        {
+          "path_or_url": "https://microsoft.github.io/z3guide/docs/logic/propositional-logic/",
+          "pin": "Microsoft Z3 Guide, read 2026-10-25, actual rendered lines 22-26 and 57-59: xor, satisfiability, named unsatisfiable cores. A core is not promised minimal",
+          "sha256": null,
+          "scope": "Microsoft Z3 Guide, read 2026-10-25, actual rendered lines 22-26 and 57-59: xor, satisfiability, named unsatisfiable cores. A core is not promised minimal; the finite lesson checks deletion witnesses by hand. No Z3 execution."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Solve the main constraints.",
+          "expected_answer": "The assignments are `[0,1,0]` and `[1,0,1]` in node order. Both satisfy every edge.",
+          "decision": null
+        },
+        "2": {
+          "question": "Why does the existing graph cycle not force refusal?",
+          "expected_answer": "Its cycle parity is `0`. The edges mean same or opposite, not strict above; the stack-order theorem concerns a different relation.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the changed closing edge.",
+          "expected_answer": "Cycle parity becomes `1`, assignments are `[]`, and `consistent=false`. Local edge satisfiability survives while global consistency fails.",
+          "decision": null
+        },
+        "4": {
+          "question": "Does a solution choose an absolute orientation?",
+          "expected_answer": "No. Complementing all bits gives another solution. An external reference patch would be needed to fix that freedom.",
+          "decision": null
+        },
+        "5": {
+          "question": "What should an agent preserve when composing seam descriptions?",
+          "expected_answer": "Keep node identities, relation type, parity convention and any anchor. Do not reinterpret a sign graph as a directed height graph.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: independently derive and justify this prepared result, preserving its units and claim boundary: The assignments are `[0,1,0]` and `[1,0,1]` in node order. Both satisfy every edge.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: independently derive and justify this prepared result, preserving its units and claim boundary: Its cycle parity is `0`. The edges mean same or opposite, not strict above; the stack-order theorem concerns a different relation.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: independently derive and justify this prepared result, preserving its units and claim boundary: Cycle parity becomes `1`, assignments are `[]`, and `consistent=false`. Local edge satisfiability survives while global consistency fails.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: independently derive and justify this prepared result, preserving its units and claim boundary: No. Complementing all bits gives another solution. An external reference patch would be needed to fix that freedom.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: independently derive and justify this prepared result, preserving its units and claim boundary: Keep node identities, relation type, parity convention and any anchor. Do not reinterpret a sign graph as a directed height graph.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Trace bit propagation around the seam triangle on paper, then inspect Atlas parent links and label why they are not parity edges. Retain a contradictory closed walk as the refusal witness.",
+        "direct_manual_baseline": "Draw the declared diagram or input/output table, calculate intermediate results by hand with the answer panels closed, and retain original work before assistance.",
+        "falsifier": "The rule that any graph cycle invalidates a craft composition fails on the consistent main parity cycle; the opposite rule that locally valid seams always compose fails on the control.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null,
+      "source_bindings": {
+        "en": {
+          "sha256": "22c49fa699ec9509081a806102c73a533770f5c4697ba566fab51d0b313f36f1",
+          "bytes": 7179
+        },
+        "fr": {
+          "sha256": "eea060fa5539bf8badba09fc015062fa528b10e4052378f250b1ce9ba649ed69",
+          "bytes": 7624
+        },
+        "es": {
+          "sha256": "1b53510734a3a2a1a1cab90e7f25a26ef7438308d5328c9f55519bee5275196c",
+          "bytes": 7347
+        }
+      }
+    },
+    {
+      "code": "SEM017",
+      "department": "semiotics",
+      "module_id": "sem-017-declare-boundary-ownership-for-negative-tile-coordinates",
+      "prerequisites": [
+        "sem-013-align-two-motif-periods-at-a-textile-seam",
+        "cs-015-compose-overlapping-chunks-without-duplicate-frames"
+      ],
+      "authored_model": {
+        "values": {
+          "coordinates": [
+            -0.1,
+            0,
+            0.999,
+            1
+          ],
+          "origin": 0,
+          "pitch": 1,
+          "index_rule": "floor"
+        },
+        "formula": "index=floor((x-origin)/pitch) for floor, otherwise trunc((x-origin)/pitch); lower=origin+index*pitch; owns=(lower<=x<lower+pitch); list failing coordinates",
+        "expected": {
+          "indices": [
+            -1,
+            0,
+            0,
+            1
+          ],
+          "ownership": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "violating_coordinates": []
+        },
+        "negative_control": {
+          "values": {
+            "coordinates": [
+              -0.1,
+              0,
+              0.999,
+              1
+            ],
+            "origin": 0,
+            "pitch": 1,
+            "index_rule": "trunc"
+          },
+          "expected": {
+            "indices": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "ownership": [
+              false,
+              true,
+              true,
+              true
+            ],
+            "violating_coordinates": [
+              -0.1
+            ]
+          },
+          "why": "Truncation toward zero preserves positive examples but assigns a negative point outside its declared half-open tile."
+        },
+        "assumptions": [
+          "Positive pitch, one-dimensional world coordinate and explicit origin",
+          "Each cell owns its lower boundary and excludes its upper boundary",
+          "Control changes the proposed indexing rule while keeping ownership semantics fixed"
+        ],
+        "limits": [
+          "No actual tile lookup executed in a scene",
+          "No tolerance or floating-point seam policy calibrated"
+        ]
+      },
+      "novelty_vs_prerequisites": "SEM013 solves period-phase alignment. This instead defines unique spatial ownership with half-open intervals and tests negative-coordinate floor versus truncation; phase divisibility cannot answer this question. CS015 already uses half-open frame union and first-writer ownership; the new result is the floor/truncation discrepancy for a real spatial coordinate on the negative side of a declared lattice origin.",
+      "title": "Declare Boundary Ownership for Negative Tile Coordinates",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-017-declare-boundary-ownership-for-negative-tile-coordinates.md",
+        "fr": "streeling/courses/semiotics/fr/sem-017-declare-boundary-ownership-for-negative-tile-coordinates.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-017-declare-boundary-ownership-for-negative-tile-coordinates.es.md"
+      },
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/semiotics/en/sem-013-align-two-motif-periods-at-a-textile-seam.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "2ad8fcc953fde8b7cb8b88a343473d907736ecd03b83038a02570e9bd6267d15",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "streeling/courses/computer-science/en/cs-015-compose-overlapping-chunks-without-duplicate-frames.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "1de5f2ee3ced1be75e4eeb75991bc5f8e6dd5ee41e4d5eab3d832fff2af602a0",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc",
+          "scope": "Actual full helper source read: declared frame, new_object/material helpers, primitives, sweep_tube and export declarations. No Blender execution."
+        },
+        {
+          "path_or_url": "https://docs.python.org/3/library/math.html",
+          "pin": "Python documentation as served (3.15.1 banner), actual rendered lines 79-94",
+          "sha256": null,
+          "scope": "Python documentation as served (3.15.1 banner), actual rendered lines 79-94; floor is greatest integer no greater than the input. This is a definition reference only; author host is a separate Python version."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Find the floor-based tile indices.",
+          "expected_answer": "They are `[-1,0,0,1]`. Every supplied point belongs to its declared half-open interval.",
+          "decision": null
+        },
+        "2": {
+          "question": "Who owns the point at the shared boundary?",
+          "expected_answer": "The point `1` belongs to tile `1`; tile `0` excludes that upper boundary. There is no double ownership.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the truncation control.",
+          "expected_answer": "It gives `[0,0,0,1]`. Coordinate `-0.1` violates the assigned tile interval, so its ownership check is `false`.",
+          "decision": null
+        },
+        "4": {
+          "question": "Can positive-only examples detect the error?",
+          "expected_answer": "No. The supplied nonnegative coordinates agree under both rules. A negative coordinate is a discriminating probe.",
+          "decision": null
+        },
+        "5": {
+          "question": "What must a composed placement carry?",
+          "expected_answer": "Preserve origin, pitch, coordinate frame, boundary convention and indexing rule. A repeating motif label alone cannot reconstruct them.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: independently derive and justify this prepared result, preserving its units and claim boundary: They are `[-1,0,0,1]`. Every supplied point belongs to its declared half-open interval.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: independently derive and justify this prepared result, preserving its units and claim boundary: The point `1` belongs to tile `1`; tile `0` excludes that upper boundary. There is no double ownership.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: independently derive and justify this prepared result, preserving its units and claim boundary: It gives `[0,0,0,1]`. Coordinate `-0.1` violates the assigned tile interval, so its ownership check is `false`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: independently derive and justify this prepared result, preserving its units and claim boundary: No. The supplied nonnegative coordinates agree under both rules. A negative coordinate is a discriminating probe.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: independently derive and justify this prepared result, preserving its units and claim boundary: Preserve origin, pitch, coordinate frame, boundary convention and indexing rule. A repeating motif label alone cannot reconstruct them.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw adjacent intervals across the origin, place each coordinate manually and compare indexing rules. Inspect Atlas local positions and identify the missing ownership convention before proposing a tile DSL.",
+        "direct_manual_baseline": "Draw the declared diagram or input/output table, calculate intermediate results by hand with the answer panels closed, and retain original work before assistance.",
+        "falsifier": "The assertion that truncation and floor are interchangeable for tile ownership is refuted by the negative-coordinate witness.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null,
+      "source_bindings": {
+        "en": {
+          "sha256": "c15841f405934cfef35c4f1338f51532345bab9026d1237a901c5f24b9157c42",
+          "bytes": 7177
+        },
+        "fr": {
+          "sha256": "ab5162a28574d40bf2202f792e84612274db2210e56a69d3598caca9f3983162",
+          "bytes": 7783
+        },
+        "es": {
+          "sha256": "a50ab6c80a42967e6b38db70746d52ac956178938b2f30f5d857ceba1bef0e11",
+          "bytes": 7389
+        }
+      }
+    },
+    {
+      "code": "PHI012",
+      "department": "philosophy",
+      "module_id": "phi-012-distinguish-equivalence-from-an-interval-containing-zero",
+      "prerequisites": [
+        "phi-006-preserve-the-quantifier-in-a-fold-verdict",
+        "phi-011-cross-mesh-and-lighting-before-attributing-a-render-change"
+      ],
+      "authored_model": {
+        "values": {
+          "difference_interval": [
+            -0.1,
+            0.15
+          ],
+          "equivalence_margin": 0.2
+        },
+        "formula": "contains_zero=(lo<=0<=hi); equivalent=(lo>=-margin and hi<=margin); compatible_with_equivalence=(hi>=-margin and lo<=margin); width=hi-lo",
+        "expected": {
+          "contains_zero": true,
+          "equivalent": true,
+          "compatible_with_equivalence": true,
+          "width": 0.25
+        },
+        "negative_control": {
+          "values": {
+            "difference_interval": [
+              -0.5,
+              0.5
+            ],
+            "equivalence_margin": 0.2
+          },
+          "expected": {
+            "contains_zero": true,
+            "equivalent": false,
+            "compatible_with_equivalence": true,
+            "width": 1
+          },
+          "why": "Both intervals include zero, but the wide one includes differences outside the declared practical margin."
+        },
+        "assumptions": [
+          "Closed authored feasible intervals, not confidence intervals",
+          "Positive symmetric equivalence margin chosen before comparison",
+          "Lower and upper endpoints exhaust the stated feasible difference set"
+        ],
+        "limits": [
+          "No hypothesis test or statistical significance claim",
+          "No artistic or perceptual equivalence measured"
+        ]
+      },
+      "novelty_vs_prerequisites": "PHI006 distinguishes existential fold claims; PHI011 crosses experimental factors. New operation tests closed feasible-set containment in a prospectively declared practical margin and separates compatibility from equivalence; no significance-test inference.",
+      "title": "Distinguish Equivalence from an Interval Containing Zero",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-012-distinguish-equivalence-from-an-interval-containing-zero.md",
+        "fr": "streeling/courses/philosophy/fr/phi-012-distinguish-equivalence-from-an-interval-containing-zero.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-012-distinguish-equivalence-from-an-interval-containing-zero.es.md"
+      },
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/philosophy/en/phi-006-preserve-the-quantifier-in-a-fold-verdict.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "30d094117d25fcd4fc99f8602a77e520671b86d5d20b4d999ca0dbaf0c2fbbf2",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "streeling/courses/philosophy/en/phi-011-cross-mesh-and-lighting-before-attributing-a-render-change.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "0efa53b8143de554946ff6fa60e226f0faa2c9b57aaee779dab72decbe77e2d8",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "code/blender/scripts/glb_pipeline.py",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "40379515ecff8ecda28dc1933725242d8eb82807d2085d60fbc080b73316cfbe",
+          "scope": "Actual lines 1-65 read: docstring, argument defaults, ordered import setup and mesh joining. No cleanup, capture or export execution."
+        },
+        {
+          "path_or_url": "https://microsoft.github.io/z3guide/docs/logic/propositional-logic/",
+          "pin": "Microsoft Z3 Guide, read 2026-10-25, actual rendered lines 22-26 and 57-59: xor, satisfiability, named unsatisfiable cores. A core is not promised minimal",
+          "sha256": null,
+          "scope": "Microsoft Z3 Guide, read 2026-10-25, actual rendered lines 22-26 and 57-59: xor, satisfiability, named unsatisfiable cores. A core is not promised minimal; the finite lesson checks deletion witnesses by hand. No Z3 execution."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Does the main interval contain zero?",
+          "expected_answer": "Yes: `contains_zero=true`. This establishes compatibility with equality, without proving exact equality.",
+          "decision": null
+        },
+        "2": {
+          "question": "Does it satisfy the declared equivalence bound?",
+          "expected_answer": "Yes: `equivalent=true`; its width is `0.25`. Both endpoints lie within the prescribed margin.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the wider control.",
+          "expected_answer": "It still has `contains_zero=true`, but `equivalent=false` and width `1`. Compatibility with equivalence remains `true`.",
+          "decision": null
+        },
+        "4": {
+          "question": "Is an inconclusive interval proof of a harmful difference?",
+          "expected_answer": "No. The wide set permits acceptable and unacceptable values. Retain that ambiguity rather than asserting either equivalence or harm.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would a real equivalence claim require?",
+          "expected_answer": "Define the task and margin prospectively, justify how the interval was obtained, and retain the relevant observations. These feasible-set calculations are not a statistical equivalence test.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: independently derive and justify this prepared result, preserving its units and claim boundary: Yes: `contains_zero=true`. This establishes compatibility with equality, without proving exact equality.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: independently derive and justify this prepared result, preserving its units and claim boundary: Yes: `equivalent=true`; its width is `0.25`. Both endpoints lie within the prescribed margin.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: independently derive and justify this prepared result, preserving its units and claim boundary: It still has `contains_zero=true`, but `equivalent=false` and width `1`. Compatibility with equivalence remains `true`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: independently derive and justify this prepared result, preserving its units and claim boundary: No. The wide set permits acceptable and unacceptable values. Retain that ambiguity rather than asserting either equivalence or harm.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: independently derive and justify this prepared result, preserving its units and claim boundary: Define the task and margin prospectively, justify how the interval was obtained, and retain the relevant observations. These feasible-set calculations are not a statistical equivalence test.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw both intervals on the same tolerance band by hand. Inspect the cleanup capture arguments and list the missing measurement contract. Rewrite an interval-containing-zero claim using the correct quantifier.",
+        "direct_manual_baseline": "Draw the declared diagram or input/output table, calculate intermediate results by hand with the answer panels closed, and retain original work before assistance.",
+        "falsifier": "The assertion that every interval containing zero proves practical equivalence is refuted by the wider control with out-of-margin possibilities.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null,
+      "source_bindings": {
+        "en": {
+          "sha256": "9a39f6f6757be1c3e4b84c6be991e5cd2ed53ffb1354e6fb461f44254c6d8a8e",
+          "bytes": 6931
+        },
+        "fr": {
+          "sha256": "954aa1d57fe9912dd010a613954b75931f5c9631d6a4c111dfa5efd1373403dc",
+          "bytes": 7402
+        },
+        "es": {
+          "sha256": "1e3f2ab14e895c611f4f954b69c9c778513609c4b96df7791fe97f7bd8d1ec73",
+          "bytes": 7052
+        }
+      }
+    },
+    {
+      "code": "PHI013",
+      "department": "philosophy",
+      "module_id": "phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core",
+      "prerequisites": [
+        "cs-009-composing-origami-panel-constraints",
+        "phi-008-separate-a-test-oracle-from-a-specification"
+      ],
+      "authored_model": {
+        "values": {
+          "domain": [
+            0,
+            10
+          ],
+          "lower_x": 8,
+          "upper_x": 6,
+          "lower_y": 1,
+          "sum_limit": 10
+        },
+        "formula": "Integer x,y in inclusive domain; A:x>=lower_x; B:x<=upper_x; C:y>=lower_y; D:x+y<=sum_limit; enumerate full solutions; enumerate nonempty constraint subsets; a minimal core has no solution and every proper subset has one",
+        "expected": {
+          "full_solution_count": 0,
+          "minimal_cores": [
+            [
+              "A",
+              "B"
+            ]
+          ],
+          "core_deletion_witnesses": {
+            "remove_A": [
+              0,
+              0
+            ],
+            "remove_B": [
+              8,
+              0
+            ]
+          }
+        },
+        "negative_control": {
+          "values": {
+            "domain": [
+              0,
+              10
+            ],
+            "lower_x": 8,
+            "upper_x": 9,
+            "lower_y": 1,
+            "sum_limit": 10
+          },
+          "expected": {
+            "full_solution_count": 3,
+            "minimal_cores": [],
+            "core_deletion_witnesses": {}
+          },
+          "why": "Relaxing the contradictory upper bound restores three feasible plans; removing unrelated constraints never repairs the original core."
+        },
+        "assumptions": [
+          "Finite integer domain is part of the specification",
+          "Deletion witnesses apply to the core subset only, not all remaining full-plan constraints",
+          "Minimal means inclusion-minimal, not globally cheapest repair"
+        ],
+        "limits": [
+          "No actual craft dimensions or safety optimization",
+          "Generic solver core is not automatically minimal"
+        ]
+      },
+      "novelty_vs_prerequisites": "CS009 detects contradictory composed panel orders and PHI008 checks oracle sufficiency. This adds inclusion-minimal conflict enumeration and deletion witnesses, explicitly separating explanation from authorized repair.",
+      "title": "Explain an Infeasible Craft Plan with a Minimal Core",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core.md",
+        "fr": "streeling/courses/philosophy/fr/phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core.es.md"
+      },
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/computer-science/en/cs-009-composing-origami-panel-constraints.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "603098c720ce8a9dd5c142f282278ce39e418d7f66bd14a42dd9e0df12c2dba9",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "streeling/courses/philosophy/en/phi-008-separate-a-test-oracle-from-a-specification.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ab7be6ab58c9d4dbb3279e4b753badaa6971ea9da0d153ea581373d6e99f626a",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc",
+          "scope": "Actual full helper source read: declared frame, new_object/material helpers, primitives, sweep_tube and export declarations. No Blender execution."
+        },
+        {
+          "path_or_url": "https://microsoft.github.io/z3guide/docs/logic/propositional-logic/",
+          "pin": "Microsoft Z3 Guide, read 2026-10-25, actual rendered lines 22-26 and 57-59: xor, satisfiability, named unsatisfiable cores. A core is not promised minimal",
+          "sha256": null,
+          "scope": "Microsoft Z3 Guide, read 2026-10-25, actual rendered lines 22-26 and 57-59: xor, satisfiability, named unsatisfiable cores. A core is not promised minimal; the finite lesson checks deletion witnesses by hand. No Z3 execution."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Find the contradiction in the main plan.",
+          "expected_answer": "Constraints `[A,B]` demand incompatible bounds on the same dimension, so the full solution count is `0`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Demonstrate minimality of that core.",
+          "expected_answer": "Removing A permits `[0,0]`; removing B permits `[8,0]`. These witnesses satisfy the remaining core member and the domain, not necessarily every other full-plan requirement.",
+          "decision": null
+        },
+        "3": {
+          "question": "Would deleting the sum constraint fix the original plan?",
+          "expected_answer": "No. The incompatible bounds remain. A repair must address at least one core member or change the declared domain semantics.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the relaxed upper-bound control.",
+          "expected_answer": "There are `3` full solutions and no minimal cores: `[]`. The feasible points are `[8,1]`, `[8,2]` and `[9,1]`.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does a minimal core authorize a design change?",
+          "expected_answer": "No. It explains infeasibility. Cost, safety, craft intent and authority determine admissible repairs; a smaller explanation is not a preferred relaxation.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: independently derive and justify this prepared result, preserving its units and claim boundary: Constraints `[A,B]` demand incompatible bounds on the same dimension, so the full solution count is `0`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: independently derive and justify this prepared result, preserving its units and claim boundary: Removing A permits `[0,0]`; removing B permits `[8,0]`. These witnesses satisfy the remaining core member and the domain, not necessarily every other full-plan requirement.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: independently derive and justify this prepared result, preserving its units and claim boundary: No. The incompatible bounds remain. A repair must address at least one core member or change the declared domain semantics.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: independently derive and justify this prepared result, preserving its units and claim boundary: There are `3` full solutions and no minimal cores: `[]`. The feasible points are `[8,1]`, `[8,2]` and `[9,1]`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: independently derive and justify this prepared result, preserving its units and claim boundary: No. It explains infeasibility. Cost, safety, craft intent and authority determine admissible repairs; a smaller explanation is not a preferred relaxation.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "List the integer candidates and strike out violations by hand. Find the core, save its deletion witnesses, and inspect the Atlas dimension boundary. Write an explanation that separates contradiction, minimality and repair authority.",
+        "direct_manual_baseline": "Draw the declared diagram or input/output table, calculate intermediate results by hand with the answer panels closed, and retain original work before assistance.",
+        "falsifier": "A claimed minimal core is refuted by a satisfiable assignment to it or by a proper subset that remains inconsistent; either witness must be retained.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null,
+      "source_bindings": {
+        "en": {
+          "sha256": "13f8488c338e67cc9628e2bae2ae35d166f0d0cb815fb7e3c3b9bb4c07210d1f",
+          "bytes": 7207
+        },
+        "fr": {
+          "sha256": "9314132dbe35d707424ee772a2d54e132c140f671eb5a8a8024f1cc3e135fb5e",
+          "bytes": 7695
+        },
+        "es": {
+          "sha256": "8f4f2488c9305340771323f03078ad0e5e6bf689aa14d4e306eaa52e69ba6340",
+          "bytes": 7418
+        }
+      }
+    },
+    {
+      "code": "FUT012",
+      "department": "futurology",
+      "module_id": "fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario",
+      "prerequisites": [
+        "fut-004-scenario-test-an-observatory-renderer",
+        "dv-012-compute-quantiles-before-combining-latency-cohorts"
+      ],
+      "authored_model": {
+        "values": {
+          "losses_a": [
+            1,
+            2,
+            3,
+            20
+          ],
+          "probabilities": [
+            0.4,
+            0.3,
+            0.2,
+            0.1
+          ],
+          "losses_b": [
+            4,
+            4,
+            4,
+            4
+          ],
+          "alpha": 0.8
+        },
+        "formula": "mean=sum(p_i*loss_i); VaR=smallest loss with cumulative probability>=alpha; tail_mean=min_t(t+sum(p_i*max(loss_i-t,0))/(1-alpha)); integrate exactly the worst 1-alpha probability mass, splitting a cutoff atom; compare lower means and tail means",
+        "expected": {
+          "mean_a": 3.6,
+          "mean_b": 4,
+          "var_a": 3,
+          "tail_a": 11.5,
+          "tail_b": 4,
+          "mean_choice": "A",
+          "tail_choice": "B"
+        },
+        "negative_control": {
+          "values": {
+            "losses_a": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "probabilities": [
+              0.4,
+              0.3,
+              0.2,
+              0.1
+            ],
+            "losses_b": [
+              4,
+              4,
+              4,
+              4
+            ],
+            "alpha": 0.8
+          },
+          "expected": {
+            "mean_a": 2,
+            "mean_b": 4,
+            "var_a": 3,
+            "tail_a": 3.5,
+            "tail_b": 4,
+            "mean_choice": "A",
+            "tail_choice": "A"
+          },
+          "why": "Reducing only the extreme loss changes tail preference while preserving the quantile; a percentile alone does not describe tail severity."
+        },
+        "assumptions": [
+          "Authored exhaustive scenario probabilities summing to one",
+          "Comparable cardinal loss points, lower preferred",
+          "Tail mass fixed prospectively; weighted atoms split at the cutoff"
+        ],
+        "limits": [
+          "No measured renderer latency or demand forecast",
+          "No financial advice or production risk calibration"
+        ]
+      },
+      "novelty_vs_prerequisites": "FUT004 minimizes worst regret without probabilities and DV012 pools empirical quantiles. This adds weighted worst-tail integration with fractional cutoff mass and a constant-quantile tail-severity control.",
+      "title": "Budget the Worst Tail Mass of a Renderer Scenario",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario.md",
+        "fr": "streeling/courses/futurology/fr/fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario.fr.md",
+        "es": "streeling/courses/futurology/es/fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario.es.md"
+      },
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/futurology/en/fut-004-scenario-test-an-observatory-renderer.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "232bea032ecec5d8aba1ce2d2e5e0aa0919d24150fec634d7f1b17c6a5790328",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "streeling/courses/data-visualization/en/dv-012-compute-quantiles-before-combining-latency-cohorts.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "8ce1f338e19aaf97ccd76185a3539f65d78bb8fa07c5fcdc621dd6c419617f28",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "code/blender/scripts/glb_pipeline.py",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "40379515ecff8ecda28dc1933725242d8eb82807d2085d60fbc080b73316cfbe",
+          "scope": "Actual lines 1-65 read: docstring, argument defaults, ordered import setup and mesh joining. No cleanup, capture or export execution."
+        },
+        {
+          "path_or_url": "https://sites.math.washington.edu/~rtr/papers/rtr179-CVaR1.pdf",
+          "pin": "Rockafellar and Uryasev, 1999-09-05 preprint, pages 5-6 (PDF indices 4-5), equations 4-9 and piecewise-linear finite approximation",
+          "sha256": null,
+          "scope": "Rockafellar and Uryasev, 1999-09-05 preprint, pages 5-6 (PDF indices 4-5), equations 4-9 and piecewise-linear finite approximation; actually read rendered lines 122-179. Lesson defines a weighted finite tail operation and splits cutoff mass explicitly, without claiming a conditional mean over all atoms at the cutoff."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Compare expected losses.",
+          "expected_answer": "The means are `3.6` for A and `4` for B, so the mean criterion selects `A`. These are authored loss points.",
+          "decision": null
+        },
+        "2": {
+          "question": "Locate the quantile and compute the tail.",
+          "expected_answer": "A has quantile `3`. Its worst probability mass `0.2` contains mass `0.1` at loss `20` and mass `0.1` at loss `3`, giving `11.5`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Compare the tail-based decision.",
+          "expected_answer": "B has tail mean `4`, so the tail criterion selects `B`. This disagreement reflects the declared criterion, not an arithmetic inconsistency.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the reduced-extreme-loss control.",
+          "expected_answer": "A has mean `2`, quantile `3` and tail mean `3.5`; both criteria now select `A`. The unchanged quantile misses the tail improvement.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does this justify a production recommendation?",
+          "expected_answer": "No. Probabilities, losses, horizon and admissible strategies need evidence. This finite sensitivity case supplies a planning question rather than a forecast.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: independently derive and justify this prepared result, preserving its units and claim boundary: The means are `3.6` for A and `4` for B, so the mean criterion selects `A`. These are authored loss points.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: independently derive and justify this prepared result, preserving its units and claim boundary: A has quantile `3`. Its worst probability mass `0.2` contains mass `0.1` at loss `20` and mass `0.1` at loss `3`, giving `11.5`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: independently derive and justify this prepared result, preserving its units and claim boundary: B has tail mean `4`, so the tail criterion selects `B`. This disagreement reflects the declared criterion, not an arithmetic inconsistency.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: independently derive and justify this prepared result, preserving its units and claim boundary: A has mean `2`, quantile `3` and tail mean `3.5`; both criteria now select `A`. The unchanged quantile misses the tail improvement.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: independently derive and justify this prepared result, preserving its units and claim boundary: No. Probabilities, losses, horizon and admissible strategies need evidence. This finite sensitivity case supplies a planning question rather than a forecast.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Fill the tail mass manually on a probability bar, preserving the split atom. Inspect the pipeline capture controls and name the missing scenario evidence. Compare mean, quantile and tail recommendation before proposing a planner.",
+        "direct_manual_baseline": "Draw the declared diagram or input/output table, calculate intermediate results by hand with the answer panels closed, and retain original work before assistance.",
+        "falsifier": "The claim that an unchanged percentile implies unchanged tail severity is refuted by the control, whose quantile stays fixed while its tail mean changes.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null,
+      "source_bindings": {
+        "en": {
+          "sha256": "00562dd42c9d7afa4359a3e6e2622d322f93b345eb9531c7cff4e3c7a942869e",
+          "bytes": 7266
+        },
+        "fr": {
+          "sha256": "ea9141a7a222c15467dfc3d579eac0f338bf75ffbf952b329f28485750d2b86f",
+          "bytes": 7789
+        },
+        "es": {
+          "sha256": "752c18c846da79278b9d29d6c1898ad5e1cc9e5690019cdca99f700764ec2962",
+          "bytes": 7430
+        }
+      }
+    },
+    {
+      "code": "FUT013",
+      "department": "futurology",
+      "module_id": "fut-013-bound-a-future-craft-workflow-by-its-serial-fraction",
+      "prerequisites": [
+        "fut-008-stress-test-a-release-plan-against-review-backlogs",
+        "pm-011-include-review-and-correction-in-automation-break-even"
+      ],
+      "authored_model": {
+        "values": {
+          "baseline_minutes": 28,
+          "serial_fraction": 0.25,
+          "workers": 4
+        },
+        "formula": "serial_minutes=T*s; parallel_minutes=T*(1-s)/workers; ideal_minutes=serial_minutes+parallel_minutes; speedup=T/ideal_minutes; asymptotic_speedup=1/s",
+        "expected": {
+          "serial_minutes": 7,
+          "parallel_minutes": 5.25,
+          "ideal_minutes": 12.25,
+          "speedup": 2.2857142857142856,
+          "asymptotic_speedup": 4
+        },
+        "negative_control": {
+          "values": {
+            "baseline_minutes": 28,
+            "serial_fraction": 0.6,
+            "workers": 4
+          },
+          "expected": {
+            "serial_minutes": 16.8,
+            "parallel_minutes": 2.8,
+            "ideal_minutes": 19.6,
+            "speedup": 1.4285714285714286,
+            "asymptotic_speedup": 1.6666666666666667
+          },
+          "why": "A larger nonparallelizable fraction lowers the ideal ceiling even with unchanged total baseline and worker count."
+        },
+        "assumptions": [
+          "Fixed completed workload and unchanged acceptance scope",
+          "Positive serial fraction; positive integer workers",
+          "Parallel remainder divides perfectly; zero extra coordination cost"
+        ],
+        "limits": [
+          "No measured timing or scaling prediction",
+          "Queue backlog and economic break-even remain different models"
+        ]
+      },
+      "novelty_vs_prerequisites": "FUT008 evolves a queue and PM011 computes per-item economic break-even. This adds fixed-work Amdahl decomposition over worker count and an asymptotic serial floor; no new queue or adoption mechanism.",
+      "title": "Bound a Future Craft Workflow by Its Serial Fraction",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-013-bound-a-future-craft-workflow-by-its-serial-fraction.md",
+        "fr": "streeling/courses/futurology/fr/fut-013-bound-a-future-craft-workflow-by-its-serial-fraction.fr.md",
+        "es": "streeling/courses/futurology/es/fut-013-bound-a-future-craft-workflow-by-its-serial-fraction.es.md"
+      },
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/futurology/en/fut-008-stress-test-a-release-plan-against-review-backlogs.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "cd4c36223781dbfc4f79a7764566cebe8512df5ae8075a868569c6a5bb0b8c6b",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "streeling/courses/product-management/en/pm-011-include-review-and-correction-in-automation-break-even.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "7ffeeafcc5a7be1f70494e65cd1d6d2577a61015dd77a4b56a5d9fa9999b5601",
+          "scope": "Actual catalogue title/frontmatter and introductory/model excerpts from the first three main sections inspected (220-700 characters per section in catalogue pass, with selected complete files read separately); not a claim to have read every line or executed the prerequisite."
+        },
+        {
+          "path_or_url": "code/blender/scripts/glb_pipeline.py",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "40379515ecff8ecda28dc1933725242d8eb82807d2085d60fbc080b73316cfbe",
+          "scope": "Actual lines 1-65 read: docstring, argument defaults, ordered import setup and mesh joining. No cleanup, capture or export execution."
+        },
+        {
+          "path_or_url": "https://hpc.llnl.gov/documentation/tutorials/introduction-parallel-computing-tutorial",
+          "pin": "LLNL Introduction to Parallel Computing tutorial, Amdahl law and Scalability sections, read actual served body 2026-10-25",
+          "sha256": null,
+          "scope": "LLNL Introduction to Parallel Computing tutorial, Amdahl law and Scalability sections, read actual served body 2026-10-25; finite-worker serial/parallel denominator, fixed problem size, overhead limitations. Initial guessed shorter URL failed and is retained as unread."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Decompose the main baseline.",
+          "expected_answer": "Serial work is `7` minutes and divided parallel work is `5.25` minutes. The ideal total is `12.25` minutes.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute finite-worker speedup.",
+          "expected_answer": "It is `2.2857142857142856`, not the worker count. Serial work remains on the completion path.",
+          "decision": null
+        },
+        "3": {
+          "question": "Find the limiting ceiling.",
+          "expected_answer": "The asymptotic speedup is `4`. This is an upper limit in the declared model, not a measured future capability.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the larger serial fraction.",
+          "expected_answer": "The components become `16.8` and `2.8` minutes, total `19.6`, speedup `1.4285714285714286`, and ceiling `1.6666666666666667`.",
+          "decision": null
+        },
+        "5": {
+          "question": "Could this replace the existing queue or cost models?",
+          "expected_answer": "No. Fixed-work elapsed speedup does not determine arrivals, review acceptance, setup cost or correction effort. A real comparison must preserve task scope and measure the relevant time components.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: independently derive and justify this prepared result, preserving its units and claim boundary: Serial work is `7` minutes and divided parallel work is `5.25` minutes. The ideal total is `12.25` minutes.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: independently derive and justify this prepared result, preserving its units and claim boundary: It is `2.2857142857142856`, not the worker count. Serial work remains on the completion path.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: independently derive and justify this prepared result, preserving its units and claim boundary: The asymptotic speedup is `4`. This is an upper limit in the declared model, not a measured future capability.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: independently derive and justify this prepared result, preserving its units and claim boundary: The components become `16.8` and `2.8` minutes, total `19.6`, speedup `1.4285714285714286`, and ceiling `1.6666666666666667`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: independently derive and justify this prepared result, preserving its units and claim boundary: No. Fixed-work elapsed speedup does not determine arrivals, review acceptance, setup cost or correction effort. A real comparison must preserve task scope and measure the relevant time components.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw a serial-plus-parallel time bar manually and compare the finite-worker result with its ceiling. Inspect pipeline stage order without treating it as a timing profile. State which measurement could reject the assumed serial fraction before requesting more capacity.",
+        "direct_manual_baseline": "Draw the declared diagram or input/output table, calculate intermediate results by hand with the answer panels closed, and retain original work before assistance.",
+        "falsifier": "A prediction of proportional speedup for a workload with the stipulated positive serial fraction is refuted by its finite-worker denominator; a measured changed workload would instead challenge the model premises.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null,
+      "source_bindings": {
+        "en": {
+          "sha256": "31fb73dcefcae165f8bf262627863e02cfcd737276d7a8dc22e23b1808eb9397",
+          "bytes": 7191
+        },
+        "fr": {
+          "sha256": "7eb9b462419a17e4ab935a128b2bbd6087910311ba403b70a659dbb3c3a6eb5f",
+          "bytes": 7722
+        },
+        "es": {
+          "sha256": "ed1990691ba182b39fc561663d6daaa516b31907a08e05d869ea56381ba36888",
+          "bytes": 7285
+        }
+      }
+    }
+  ]
+}

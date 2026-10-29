@@ -1,0 +1,2801 @@
+{
+  "schema": "streeling-course-author-unit/1",
+  "unit": "c",
+  "base_learn_commit": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+  "plan_commit": "894486c7e69af7a161d8f75d32a27f7972d1ebce",
+  "scope": "Sixteen new craft-to-scene/interpretation source courses with full French and Spanish prose. Fixed authored models only; content-only behavior_changed=false. No production engine, DSL, API or learner claim.",
+  "primary_references": [
+    {
+      "id": "buoyancy",
+      "url": "https://openstax.org/books/university-physics-volume-1/pages/14-4-archimedes-principle-and-buoyancy",
+      "version_and_reading_scope": "OpenStax University Physics volume 1, section 14.4, read 2026-10-25; Rendered body lines 30-72: displaced-fluid weight, density and floating fraction; no coefficient or material measurement.",
+      "read_method": "Actual rendered or extracted body scoped explicitly; HTTP status alone was not treated as reading",
+      "sha256": null
+    },
+    {
+      "id": "capstan",
+      "url": "https://www.ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter8.pdf",
+      "version_and_reading_scope": "MIT OCW 8.01SC chapter 8, Example 8.11; Actually read extracted PDF lines 2091-2176, PDF pages 46-48: just-slipping premise, force slice and exponential tension relation. Earlier guessed MIT page and LibreTexts URL were inaccessible and are not readings.",
+      "read_method": "Actual rendered or extracted body scoped explicitly; HTTP status alone was not treated as reading",
+      "sha256": null
+    },
+    {
+      "id": "heat",
+      "url": "https://openstax.org/books/university-physics-volume-2/pages/1-6-mechanisms-of-heat-transfer",
+      "version_and_reading_scope": "OpenStax University Physics volume 2, section 1.6, read 2026-10-25; Rendered lines 30-65: conduction versus convection/radiation and slab conduction equation. Series composition is derived in the lesson; no conductivity table reused.",
+      "read_method": "Actual rendered or extracted body scoped explicitly; HTTP status alone was not treated as reading",
+      "sha256": null
+    },
+    {
+      "id": "bounds",
+      "url": "https://pbr-book.org/4ed/Shapes/Basic_Shape_Interface",
+      "version_and_reading_scope": "PBRT fourth edition, section 6.1.1; Rendered lines 0-11: shape interface and bounding-volume rejection. Finite slab intersection below is an authored derivation, not a copied PBRT implementation.",
+      "read_method": "Actual rendered or extracted body scoped explicitly; HTTP status alone was not treated as reading",
+      "sha256": null
+    },
+    {
+      "id": "oct",
+      "url": "https://pbr-book.org/4ed/Geometry_and_Transformations/Spherical_Geometry",
+      "version_and_reading_scope": "PBRT fourth edition, section 3.8, Octahedral Encoding; Rendered lines 95-123: L1 division, lower-hemisphere fold, decode and Euclidean renormalization. Lesson omits the reference integer quantizer and its precision claims.",
+      "read_method": "Actual rendered or extracted body scoped explicitly; HTTP status alone was not treated as reading",
+      "sha256": null
+    },
+    {
+      "id": "math",
+      "url": "https://docs.python.org/3/library/math.html",
+      "version_and_reading_scope": "Python documentation served with 3.15.1 banner, read 2026-10-25; Actually read rendered lines 281-296 for logarithms and 314-317 for square-root definition. Reference defines operations only; no interpreter execution or version inferred.",
+      "read_method": "Actual rendered or extracted body scoped explicitly; HTTP status alone was not treated as reading",
+      "sha256": null
+    },
+    {
+      "id": "hist",
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/histogra.htm",
+      "version_and_reading_scope": "NIST/SEMATECH e-Handbook, section 1.3.3.14, read 2026-10-25; Actual full rendered lines 5-45, especially normalization by sample count and class width. Invented bins and counts are not NIST observations.",
+      "read_method": "Actual rendered or extracted body scoped explicitly; HTTP status alone was not treated as reading",
+      "sha256": null
+    },
+    {
+      "id": "contour",
+      "url": "https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.find_contours",
+      "version_and_reading_scope": "scikit-image documentation served as 0.26.0, read 2026-10-25; Rendered lines 378-385: diagonal ambiguous marching-squares case, fully_connected parameter and open boundaries. No library installed or executed.",
+      "read_method": "Actual rendered or extracted body scoped explicitly; HTTP status alone was not treated as reading",
+      "sha256": null
+    },
+    {
+      "id": "product",
+      "url": "https://docs.python.org/3/library/itertools.html#itertools.product",
+      "version_and_reading_scope": "Python documentation served with 3.15.1 banner, read 2026-10-25; Rendered lines 414-422: Cartesian-product enumeration and ordering. Domain rules and scenario meanings are authored, not a Python capability claim.",
+      "read_method": "Actual rendered or extracted body scoped explicitly; HTTP status alone was not treated as reading",
+      "sha256": null
+    },
+    {
+      "id": "knot",
+      "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+      "version_and_reading_scope": "Danny Calegari, Introduction to Knot Theory, downloaded 2026-10-25; SHA-bound PDF; Actual raw PDF downloaded, then pypdf text of printed pages 40-41 read: signed crossing sum, orientation reversal, Reidemeister-I limitation. Web parser rejected full PDF for size; download and extraction succeeded.",
+      "read_method": "Actual rendered or extracted body scoped explicitly; HTTP status alone was not treated as reading",
+      "sha256": "2b38476c9471585bf0c480d1266699c3446daf1eb2c3ca6191d68d4aed79838f"
+    },
+    {
+      "id": "collider",
+      "url": "https://arxiv.org/abs/1809.07111v4",
+      "version_and_reading_scope": "Luque-Fernandez et al., arXiv:1809.07111v4, 2019-11-10; Actual abstract body lines 8-18 read at the canonical unversioned page, whose displayed version is v4: conditioning on a common effect can create association. Full paper and its simulation were not read or run.",
+      "read_method": "Actual rendered or extracted body scoped explicitly; HTTP status alone was not treated as reading",
+      "sha256": null
+    },
+    {
+      "id": "method",
+      "url": "https://plato.stanford.edu/entries/scientific-method/",
+      "version_and_reading_scope": "Stanford Encyclopedia of Philosophy, substantive revision 2026-08-08; Rendered opening lines 12-17 read: observation, hypothesis and model testing as activities with varied methods. Failed-conjunction model is an explicit logical derivation, not a quotation of an uninspected section.",
+      "read_method": "Actual rendered or extracted body scoped explicitly; HTTP status alone was not treated as reading",
+      "sha256": null
+    }
+  ],
+  "courses": [
+    {
+      "code": "PHY022",
+      "department": "physics",
+      "module_id": "phy-022-budget-displacement-for-a-floating-sculpture",
+      "title": "Budget Displacement for a Floating Sculpture",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-022-budget-displacement-for-a-floating-sculpture.md",
+        "fr": "streeling/courses/physics/fr/phy-022-budget-displacement-for-a-floating-sculpture.fr.md",
+        "es": "streeling/courses/physics/es/phy-022-budget-displacement-for-a-floating-sculpture.es.md"
+      },
+      "novelty_vs_prerequisites": "Mass scaling gives object mass; this adds an external displaced-fluid capacity and explicitly rejects a required submerged fraction above unity.",
+      "prerequisites": [
+        "phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/physics/en/phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "c3b034bc3edf2d107f90d335636ab2262d2726dcbed91995c63c3382302db495"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual first 100 lines inspected for frame declaration, material appearance, objects and geometric primitives; no execution.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://openstax.org/books/university-physics-volume-1/pages/14-4-archimedes-principle-and-buoyancy",
+          "pin": "OpenStax University Physics volume 1, section 14.4, read 2026-10-25",
+          "scope": "Rendered body lines 30-72: displaced-fluid weight, density and floating fraction; no coefficient or material measurement.",
+          "read_method": "Actual rendered body or PDF extraction, bounded as described",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "mass_kg": 0.6,
+          "fluid_density_kg_m3": 1000,
+          "sealed_volume_m3": 0.001,
+          "g_m_s2": 10
+        },
+        "formula": "weight=m*g; maximum_buoyancy=rho*g*V; required_displacement=m/rho; required_fraction=required_displacement/V; feasible=required_fraction<=1; full_submersion_net=maximum_buoyancy-weight",
+        "expected": {
+          "weight_N": 6,
+          "maximum_buoyancy_N": 10,
+          "required_displacement_m3": 0.0006,
+          "required_fraction": 0.6,
+          "feasible": true,
+          "full_submersion_net_N": 4
+        },
+        "negative_control": {
+          "values": {
+            "mass_kg": 1.2,
+            "fluid_density_kg_m3": 1000,
+            "sealed_volume_m3": 0.001,
+            "g_m_s2": 10
+          },
+          "expected": {
+            "weight_N": 12,
+            "maximum_buoyancy_N": 10,
+            "required_displacement_m3": 0.0012,
+            "required_fraction": 1.2,
+            "feasible": false,
+            "full_submersion_net_N": -2
+          },
+          "why": "A visually identical envelope cannot supply arbitrarily large displaced-fluid weight."
+        },
+        "assumptions": [
+          "Rigid sealed envelope; uniform resting fluid; positive supplied density and volume",
+          "Ignore surface tension, waves, leakage and stability; inputs are invented"
+        ],
+        "limits": [
+          "Feasible displacement does not prove stable orientation or watertight fabrication",
+          "No physical sculpture or fluid scene has been tested"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate weight and the largest buoyant force.",
+          "expected_answer": "They are `6 N` and `10 N`. The latter uses the entire sealed envelope, not the volume occupied only by the metal.",
+          "decision": null
+        },
+        "2": {
+          "question": "Find the displacement and required fraction.",
+          "expected_answer": "They are `0.0006 m^3` and `0.6`. This is a candidate equilibrium displacement, not a measurement from a frame.",
+          "decision": null
+        },
+        "3": {
+          "question": "Interpret full-submersion net force.",
+          "expected_answer": "It is `4 N` upward. At the proposed floating equilibrium the resultant would instead vanish under the declared static premises.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the heavier control.",
+          "expected_answer": "The required fraction is `1.2` and the net force at full immersion is `-2 N`. Partial immersion cannot balance the stipulated weight.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does feasibility establish stable orientation?",
+          "expected_answer": "No. The calculation contains no restoring torque or water ingress model. Stability and sealing require separate evidence at the proposed use boundary.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Calculate weight and the largest buoyant force. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Find the displacement and required fraction. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Interpret full-submersion net force. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the heavier control. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: Does feasibility establish stable orientation? Preserves reasoning and stated claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare an envelope-versus-shell annotation for one proposed hollow Atlas sculpture. Use a handwritten force balance as the direct baseline; identify which volume a future mesh inspection would have to establish. Leave physical and scene measurements empty.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
+        "falsifier": "Any claim that the heavier control can float partially immersed with this unchanged sealed volume is refuted by its required fraction.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PHY023",
+      "department": "physics",
+      "module_id": "phy-023-bound-tension-amplification-around-a-craft-peg",
+      "title": "Bound Tension Amplification around a Craft Peg",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-023-bound-tension-amplification-around-a-craft-peg.md",
+        "fr": "streeling/courses/physics/fr/phy-023-bound-tension-amplification-around-a-craft-peg.fr.md",
+        "es": "streeling/courses/physics/es/phy-023-bound-tension-amplification-around-a-craft-peg.es.md"
+      },
+      "novelty_vs_prerequisites": "The planar sliding prerequisite has one normal load. This integrates distributed curvature contact into an exponential endpoint-tension bound.",
+      "prerequisites": [
+        "phy-019-test-sliding-before-calling-a-sculpture-stable"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/physics/en/phy-019-test-sliding-before-calling-a-sculpture-stable.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "c03fe02de52f3f1039fb22c3cb7cb27f04b7e94910164d360347cc8378b8d3f2"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual first 100 lines inspected for frame declaration, material appearance, objects and geometric primitives; no execution.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://www.ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter8.pdf",
+          "pin": "MIT OCW 8.01SC chapter 8, Example 8.11",
+          "scope": "Actually read extracted PDF lines 2091-2176, PDF pages 46-48: just-slipping premise, force slice and exponential tension relation. Earlier guessed MIT page and LibreTexts URL were inaccessible and are not readings.",
+          "read_method": "Actual rendered body or PDF extraction, bounded as described",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "hold_N": 2,
+          "mu": 0.5,
+          "wrap_rad": 2,
+          "load_N": 4
+        },
+        "formula": "ratio=exp(mu*wrap); capacity=hold*ratio; reserve=capacity-load; feasible=reserve>=0",
+        "expected": {
+          "ratio": 2.718281828459045,
+          "capacity_N": 5.43656365691809,
+          "reserve_N": 1.43656365691809,
+          "feasible": true
+        },
+        "negative_control": {
+          "values": {
+            "hold_N": 2,
+            "mu": 0.5,
+            "wrap_rad": 0,
+            "load_N": 4
+          },
+          "expected": {
+            "ratio": 1,
+            "capacity_N": 2,
+            "reserve_N": -2,
+            "feasible": false
+          },
+          "why": "Removing contact angle removes the amplification while retaining the same endpoint load and holding force."
+        },
+        "assumptions": [
+          "Flexible massless rope on a fixed circular peg; uniform invented friction coefficient",
+          "Static limiting-slip capacity; positive endpoint tension and angle in radians"
+        ],
+        "limits": [
+          "Not a knot strength, rope safety or fabrication recommendation",
+          "Bending stiffness, local contact loss and deformation are outside the model"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the limiting ratio.",
+          "expected_answer": "It is `2.718281828459045`, obtained from the exponential of the coefficient times the contact angle. It is a dimensionless capacity ratio.",
+          "decision": null
+        },
+        "2": {
+          "question": "Calculate endpoint capacity.",
+          "expected_answer": "The capacity is `5.43656365691809 N`. This is the larger tension sustainable at the declared limiting condition, not an observed rope force.",
+          "decision": null
+        },
+        "3": {
+          "question": "Compare capacity with demand.",
+          "expected_answer": "The reserve is `1.43656365691809 N`, so the authored demand is feasible in this ideal static bound. This does not certify a knot.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the zero-contact control.",
+          "expected_answer": "The capacity falls to `2 N`, the reserve to `-2 N`, and feasibility becomes false. The coefficient alone cannot create contact amplification.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does every static rope realize the limiting ratio?",
+          "expected_answer": "No. The equality describes impending slip. Below that boundary the frictional response can be smaller; geometry and material premises still require inspection.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Compute the limiting ratio. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Calculate endpoint capacity. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Compare capacity with demand. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the zero-contact control. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: Does every static rope realize the limiting ratio? Preserves reasoning and stated claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Annotate one proposed IX knot display with holding end, loaded end and contact arc. Derive the capacity manually, then inspect whether an Atlas curve could even identify that arc. Propose a future observation without filling its result.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
+        "falsifier": "An explanation preserving amplification after the control removes every contact angle is refuted by the control capacity.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PHY024",
+      "department": "physics",
+      "module_id": "phy-024-compose-thermal-resistance-through-craft-layers",
+      "title": "Compose Thermal Resistance through Craft Layers",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-024-compose-thermal-resistance-through-craft-layers.md",
+        "fr": "streeling/courses/physics/fr/phy-024-compose-thermal-resistance-through-craft-layers.fr.md",
+        "es": "streeling/courses/physics/es/phy-024-compose-thermal-resistance-through-craft-layers.es.md"
+      },
+      "novelty_vs_prerequisites": "Thermal expansion predicts geometry from a temperature change; this derives heat flow and internal temperature drops from serial transport resistance.",
+      "prerequisites": [
+        "phy-017-budget-thermal-growth-at-a-metal-joint"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/physics/en/phy-017-budget-thermal-growth-at-a-metal-joint.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "7669d0f3c92103f8655d304a9bea0a712f605f083b3d4c7cb533e657d87664db"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual first 100 lines inspected for frame declaration, material appearance, objects and geometric primitives; no execution.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://openstax.org/books/university-physics-volume-2/pages/1-6-mechanisms-of-heat-transfer",
+          "pin": "OpenStax University Physics volume 2, section 1.6, read 2026-10-25",
+          "scope": "Rendered lines 30-65: conduction versus convection/radiation and slab conduction equation. Series composition is derived in the lesson; no conductivity table reused.",
+          "read_method": "Actual rendered body or PDF extraction, bounded as described",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "thickness_m": [
+            0.02,
+            0.01
+          ],
+          "conductivity_W_mK": [
+            0.2,
+            0.5
+          ],
+          "area_m2": 0.5,
+          "delta_K": 30
+        },
+        "formula": "R_i=d_i/(k_i*A); R_total=sum(R_i); power=delta/R_total; drop_i=power*R_i",
+        "expected": {
+          "resistances_K_W": [
+            0.2,
+            0.04
+          ],
+          "total_K_W": 0.24,
+          "power_W": 125,
+          "drops_K": [
+            25,
+            5
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "thickness_m": [
+              0.02,
+              0.05
+            ],
+            "conductivity_W_mK": [
+              0.2,
+              0.5
+            ],
+            "area_m2": 0.5,
+            "delta_K": 30
+          },
+          "expected": {
+            "resistances_K_W": [
+              0.2,
+              0.2
+            ],
+            "total_K_W": 0.4,
+            "power_W": 75,
+            "drops_K": [
+              15,
+              15
+            ]
+          },
+          "why": "Making the better conductor thicker can make its resistance equal to the other layer; a material label alone does not determine the drop."
+        },
+        "assumptions": [
+          "Steady one-dimensional conduction through equal-area planar layers",
+          "Perfect contacts; positive invented conductivities; no internal heat generation"
+        ],
+        "limits": [
+          "No convection, radiation, moisture or contact resistance",
+          "No thermal comfort, fire resistance or material-performance certification"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate both resistances.",
+          "expected_answer": "They are `[0.2,0.04] K/W`. Divide thickness by conductivity and common area; thickness alone is not resistance.",
+          "decision": null
+        },
+        "2": {
+          "question": "Find total resistance and common power.",
+          "expected_answer": "They are `0.24 K/W` and `125 W`. The same steady power passes through each layer.",
+          "decision": null
+        },
+        "3": {
+          "question": "Allocate the temperature drops.",
+          "expected_answer": "The drops are `[25,5] K`; they sum to the imposed difference. Applying the entire difference to both layers would violate the series model.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the thicker-layer control.",
+          "expected_answer": "The resistances become `[0.2,0.2] K/W`, the power `75 W` and the drops `[15,15] K`. Conductivities alone do not explain the split.",
+          "decision": null
+        },
+        "5": {
+          "question": "Can a metallic shader establish conductivity?",
+          "expected_answer": "No. An appearance parameter has no supplied calibration to this transport coefficient. Keep material measurement and visual representation as separate evidence.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Calculate both resistances. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Find total resistance and common power. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Allocate the temperature drops. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the thicker-layer control. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: Can a metallic shader establish conductivity? Preserves reasoning and stated claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw a cross-section of a proposed textile-backed relief and manually allocate the temperature drops. Inspect the Atlas appearance fields, then write the separate material-data request that a physical calculation would need.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A claim that the higher-conductivity layer must always have the smaller drop is refuted by the equal-resistance control.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "VC020",
+      "department": "visual-computing",
+      "module_id": "vc-020-intersect-a-scene-picking-ray-with-box-slabs",
+      "title": "Intersect a Scene Picking Ray with Box Slabs",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-020-intersect-a-scene-picking-ray-with-box-slabs.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-020-intersect-a-scene-picking-ray-with-box-slabs.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-020-intersect-a-scene-picking-ray-with-box-slabs.es.md"
+      },
+      "novelty_vs_prerequisites": "The prerequisite runs scene identity queries; this derives a broad-phase geometric rejection and handles parallel axes explicitly.",
+      "prerequisites": [
+        "vc-008-save-and-query-a-weave-scene"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/visual-computing/en/vc-008-save-and-query-a-weave-scene.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "922d0dbd44235bc5ad7ea9f9aea706b4bc645592f22b4804ab37984e14bd385c"
+        },
+        {
+          "path_or_url": "code/streeling/weave-godot/trial.gd",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual first 90 lines inspected for weave scene identity and instance/material construction.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "9e59b247bacff045398bfc9f00917fc3f0734b4d1e88424801f3f85c78fb8f99"
+        },
+        {
+          "path_or_url": "https://pbr-book.org/4ed/Shapes/Basic_Shape_Interface",
+          "pin": "PBRT fourth edition, section 6.1.1",
+          "scope": "Rendered lines 0-11: shape interface and bounding-volume rejection. Finite slab intersection below is an authored derivation, not a copied PBRT implementation.",
+          "read_method": "Actual rendered body or PDF extraction, bounded as described",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "minimum": [
+            0,
+            0,
+            0
+          ],
+          "maximum": [
+            2,
+            2,
+            2
+          ],
+          "origin": [
+            -2,
+            1,
+            1
+          ],
+          "direction": [
+            1,
+            0,
+            0
+          ],
+          "t_max": 10
+        },
+        "formula": "start=[0,t_max]; for each nonzero direction intersect with sorted((minimum-origin)/direction,(maximum-origin)/direction); zero direction outside slab rejects; hit iff resulting interval nonempty",
+        "expected": {
+          "hit": true,
+          "t_enter": 2,
+          "t_exit": 4
+        },
+        "negative_control": {
+          "values": {
+            "minimum": [
+              0,
+              0,
+              0
+            ],
+            "maximum": [
+              2,
+              2,
+              2
+            ],
+            "origin": [
+              -2,
+              3,
+              1
+            ],
+            "direction": [
+              1,
+              0,
+              0
+            ],
+            "t_max": 10
+          },
+          "expected": {
+            "hit": false,
+            "t_enter": null,
+            "t_exit": null
+          },
+          "why": "A parallel ray outside one slab must miss despite intersecting the other projected ranges."
+        },
+        "assumptions": [
+          "Closed axis-aligned box and forward ray parameter interval; coordinates share one frame",
+          "Zero direction components handled without division; no floating-point robustness claim"
+        ],
+        "limits": [
+          "A box hit does not establish triangle, strand identity or upper-strand correctness",
+          "No engine ray query has been executed"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Find the travelling-axis interval.",
+          "expected_answer": "It is `[2,4]`. Sort the boundary parameters before intersecting so negative directions would also be handled.",
+          "decision": null
+        },
+        "2": {
+          "question": "Handle the parallel coordinates.",
+          "expected_answer": "Both origins lie inside their closed slabs, so they add no restriction. No division by a zero direction is needed.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the forward limit.",
+          "expected_answer": "The interval remains `[2,4]` inside `[0,10]`, so the model reports a box hit. The exit belongs to the closed box.",
+          "decision": null
+        },
+        "4": {
+          "question": "Evaluate the displaced-origin control.",
+          "expected_answer": "It misses because the parallel origin lies outside the slab. Entry and exit are `null`; the travelling-axis interval cannot rescue it.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does a box hit establish a crossing selection?",
+          "expected_answer": "No. A detailed surface query and source-bound identity correspondence remain separate predicates; the box contains empty space as well as geometry.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Find the travelling-axis interval. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Handle the parallel coordinates. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Apply the forward limit. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Evaluate the displaced-origin control. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: Does a box hit establish a crossing selection? Preserves reasoning and stated claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the ray and slabs for a proposed sculpture picker before asking an assistant to summarize the scene trial. Produce a manual interval table and specify the detailed identity query needed after acceptance.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
+        "falsifier": "Any picker explanation admitting the control merely because its travelling-axis interval overlaps is refuted by the parallel slab.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "VC021",
+      "department": "visual-computing",
+      "module_id": "vc-021-fold-the-lower-hemisphere-in-a-normal-encoding",
+      "title": "Fold the Lower Hemisphere in a Normal Encoding",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-021-fold-the-lower-hemisphere-in-a-normal-encoding.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-021-fold-the-lower-hemisphere-in-a-normal-encoding.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-021-fold-the-lower-hemisphere-in-a-normal-encoding.es.md"
+      },
+      "novelty_vs_prerequisites": "The prerequisite transforms normals geometrically. This adds a sphere-to-square storage map whose lower-hemisphere branch is necessary for reconstruction.",
+      "prerequisites": [
+        "phy-008-keep-surface-normals-perpendicular"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/physics/en/phy-008-keep-surface-normals-perpendicular.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "15ba8a405aeb778323581b59089ab92a4a284885d479b69369afd5f2db6ce734"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual first 100 lines inspected for frame declaration, material appearance, objects and geometric primitives; no execution.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://pbr-book.org/4ed/Geometry_and_Transformations/Spherical_Geometry",
+          "pin": "PBRT fourth edition, section 3.8, Octahedral Encoding",
+          "scope": "Rendered lines 95-123: L1 division, lower-hemisphere fold, decode and Euclidean renormalization. Lesson omits the reference integer quantizer and its precision claims.",
+          "read_method": "Actual rendered body or PDF extraction, bounded as described",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "vector": [
+            1,
+            2,
+            -1
+          ],
+          "fold_lower": true
+        },
+        "formula": "p=v/(abs(x)+abs(y)+abs(z)); uv=(p.x,p.y); if p.z<0 and fold_lower: uv=((1-abs(p.y))*sign(p.x),(1-abs(p.x))*sign(p.y)); q=(u,v,1-abs(u)-abs(v)); if q.z<0 unfold xy using old coordinates; decoded=q/length(q); agreement=dot(decoded,original/length(original))",
+        "expected": {
+          "encoded": [
+            0.5,
+            0.75
+          ],
+          "decoded_normal": [
+            0.4082482904638631,
+            0.8164965809277261,
+            -0.4082482904638631
+          ],
+          "agreement": 1
+        },
+        "negative_control": {
+          "values": {
+            "vector": [
+              1,
+              2,
+              -1
+            ],
+            "fold_lower": false
+          },
+          "expected": {
+            "encoded": [
+              0.25,
+              0.5
+            ],
+            "decoded_normal": [
+              0.4082482904638631,
+              0.8164965809277261,
+              0.4082482904638631
+            ],
+            "agreement": 0.6666666666666666
+          },
+          "why": "Omitting the fold reconstructs the upper hemisphere and reverses the normal’s depth component."
+        },
+        "assumptions": [
+          "Nonzero vector; sign of zero defined positive; exact real arithmetic model before quantization",
+          "Both fold coordinates use the old pair simultaneously"
+        ],
+        "limits": [
+          "No integer packing, GPU precision or storage benchmark",
+          "A reconstructed normal does not establish material appearance"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Find the octahedron coordinates.",
+          "expected_answer": "They are `[0.25,0.5,-0.25]`. The negative final component requires the lower-hemisphere branch before storage.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the stored pair.",
+          "expected_answer": "It is `[0.5,0.75]`. Both components must be computed from the original pair, rather than sequentially overwriting it.",
+          "decision": null
+        },
+        "3": {
+          "question": "Check the decoded direction.",
+          "expected_answer": "Its depth component remains negative and agreement is `1`. Renormalization changes magnitude while preserving the decoded direction.",
+          "decision": null
+        },
+        "4": {
+          "question": "Evaluate the omitted-fold control.",
+          "expected_answer": "The pair becomes `[0.25,0.5]`; decoded depth becomes positive and agreement falls to `0.6666666666666666`. Unit length alone still passes.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does this establish an engine texture format?",
+          "expected_answer": "No. The model has no integer quantizer, channel convention or shader execution. Bind those separately before claiming a correct asset import.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Find the octahedron coordinates. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Compute the stored pair. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Check the decoded direction. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Evaluate the omitted-fold control. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: Does this establish an engine texture format? Preserves reasoning and stated claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a paper encoding-and-decoding trace for one relief normal. Compare a unit-length-only check with the original-direction check, and propose the missing texture metadata for an asset handoff.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A claim that dropping the depth component preserves this direction is refuted by the control’s changed hemisphere and dot agreement.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "VC022",
+      "department": "visual-computing",
+      "module_id": "vc-022-project-a-craft-shadow-onto-a-declared-plane",
+      "title": "Project a Craft Shadow onto a Declared Plane",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-022-project-a-craft-shadow-onto-a-declared-plane.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-022-project-a-craft-shadow-onto-a-declared-plane.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-022-project-a-craft-shadow-onto-a-declared-plane.es.md"
+      },
+      "novelty_vs_prerequisites": "Frame preservation fixes coordinate meaning; this derives a directional projection and returns explicit parallel or behind outcomes.",
+      "prerequisites": [
+        "sem-006-preserve-orientation-across-scene-frames"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/semiotics/en/sem-006-preserve-orientation-across-scene-frames.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "498533e3d3e5c4e8f7b009b1d6a0aeedfe04ae37853069e9be613e0d68336d78"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual first 100 lines inspected for frame declaration, material appearance, objects and geometric primitives; no execution.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://pbr-book.org/4ed/Shapes/Basic_Shape_Interface",
+          "pin": "PBRT fourth edition, section 6.1.1",
+          "scope": "Rendered lines 0-11: shape interface and bounding-volume rejection. Finite slab intersection below is an authored derivation, not a copied PBRT implementation.",
+          "read_method": "Actual rendered body or PDF extraction, bounded as described",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "point": [
+            2,
+            3,
+            4
+          ],
+          "light_travel": [
+            1,
+            0,
+            -2
+          ],
+          "plane_z": 0
+        },
+        "formula": "if d.z==0 return parallel; t=(plane_z-point.z)/d.z; if t<0 return behind; otherwise intersection=point+t*d",
+        "expected": {
+          "status": "hit",
+          "t": 2,
+          "intersection": [
+            4,
+            3,
+            0
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "point": [
+              2,
+              3,
+              4
+            ],
+            "light_travel": [
+              1,
+              0,
+              0
+            ],
+            "plane_z": 0
+          },
+          "expected": {
+            "status": "parallel",
+            "t": null,
+            "intersection": null
+          },
+          "why": "A light-travel direction parallel to the receiver cannot create a finite projection from this off-plane point."
+        },
+        "assumptions": [
+          "One point, one infinite receiving plane and a constant light-travel direction",
+          "Shared scene frame; ray travels forward; parallel off-plane case explicitly rejected"
+        ],
+        "limits": [
+          "No occlusion, penumbra, visibility or renderer result",
+          "A mathematical intersection is only a candidate shadow point"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Derive the intersection parameter.",
+          "expected_answer": "It is `2`. Use the signed receiver offset divided by the signed depth component; the positive value permits forward travel.",
+          "decision": null
+        },
+        "2": {
+          "question": "Find the candidate shadow point.",
+          "expected_answer": "It is `[4,3,0]`. The horizontal displacement follows the supplied direction, while the unchanged middle coordinate is a consequence of its zero component.",
+          "decision": null
+        },
+        "3": {
+          "question": "Which direction convention must travel with the data?",
+          "expected_answer": "The vector describes light travel from the point toward the receiver. A vector toward the light has the opposite meaning and cannot be substituted silently.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the parallel control.",
+          "expected_answer": "The result is `parallel`, with parameter and intersection `null`. A finite hit must not be fabricated by substituting a large denominator.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does the candidate point prove a visible shadow?",
+          "expected_answer": "No. The receiving surface may be bounded or occluded, and light transport is absent. A fixed engine capture remains a separate proposed observation.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Derive the intersection parameter. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Find the candidate shadow point. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Which direction convention must travel with the data? Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the parallel control. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: Does the candidate point prove a visible shadow? Preserves reasoning and stated claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw a folded ridge, a plinth and the light-travel arrow in a common frame. Derive the candidate point manually, then write the bounded-surface and occlusion checks a future scene trial would require.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
+        "falsifier": "Any report of a finite shadow point for the parallel off-plane control contradicts the declared ray equation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "DV020",
+      "department": "data-visualization",
+      "module_id": "dv-020-make-unequal-stitch-bins-preserve-frequency-area",
+      "title": "Make Unequal Stitch Bins Preserve Frequency Area",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-020-make-unequal-stitch-bins-preserve-frequency-area.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-020-make-unequal-stitch-bins-preserve-frequency-area.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-020-make-unequal-stitch-bins-preserve-frequency-area.es.md"
+      },
+      "novelty_vs_prerequisites": "Heatmap row normalization preserves denominators; this adds bin-width normalization so rectangular area represents mass on a continuous length axis.",
+      "prerequisites": [
+        "dv-011-retain-raw-counts-behind-normalized-heatmaps"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/data-visualization/en/dv-011-retain-raw-counts-behind-normalized-heatmaps.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "043f0f48fd49f09803b440cef630553e579c31d2716872e29443c40deea05e73"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual first 100 lines inspected for frame declaration, material appearance, objects and geometric primitives; no execution.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://www.itl.nist.gov/div898/handbook/eda/section3/histogra.htm",
+          "pin": "NIST/SEMATECH e-Handbook, section 1.3.3.14, read 2026-10-25",
+          "scope": "Actual full rendered lines 5-45, especially normalization by sample count and class width. Invented bins and counts are not NIST observations.",
+          "read_method": "Actual rendered body or PDF extraction, bounded as described",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "edges_mm": [
+            0,
+            1,
+            3
+          ],
+          "counts": [
+            4,
+            4
+          ]
+        },
+        "formula": "width_i=edge[i+1]-edge[i]; N=sum(counts); density_i=count_i/(N*width_i); area_i=density_i*width_i",
+        "expected": {
+          "widths_mm": [
+            1,
+            2
+          ],
+          "sample_count": 8,
+          "density_per_mm": [
+            0.5,
+            0.25
+          ],
+          "areas": [
+            0.5,
+            0.5
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "edges_mm": [
+              0,
+              1,
+              3
+            ],
+            "counts": [
+              4,
+              8
+            ]
+          },
+          "expected": {
+            "widths_mm": [
+              1,
+              2
+            ],
+            "sample_count": 12,
+            "density_per_mm": [
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "areas": [
+              0.3333333333333333,
+              0.6666666666666666
+            ]
+          },
+          "why": "Equal density heights can represent unequal counts when widths differ."
+        },
+        "assumptions": [
+          "Strictly increasing finite edges; nonnegative counts with positive total",
+          "Counts are invented; left-closed bins with final right edge included"
+        ],
+        "limits": [
+          "Histogram density is not a failure probability at an exact stitch length",
+          "No continuous distribution, population inference or measured embroidery lengths"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Find bin widths and the denominator.",
+          "expected_answer": "Widths are `[1,2] mm` and the total is `8`. The second interval is wider even though its raw count matches.",
+          "decision": null
+        },
+        "2": {
+          "question": "Calculate density heights.",
+          "expected_answer": "They are `[0.5,0.25] per mm`. Each height divides relative frequency by the corresponding width, rather than merely dividing by the total.",
+          "decision": null
+        },
+        "3": {
+          "question": "Recover the encoded masses.",
+          "expected_answer": "The areas are `[0.5,0.5]`, summing to `1`. Equal frequency does not require equal density when widths differ.",
+          "decision": null
+        },
+        "4": {
+          "question": "Interpret the changed-count control.",
+          "expected_answer": "Both heights become `0.3333333333333333 per mm`, while masses are `[0.3333333333333333,0.6666666666666666]`. Equal height does not mean equal count.",
+          "decision": null
+        },
+        "5": {
+          "question": "May a density be read as exact-length failure probability?",
+          "expected_answer": "No. It is mass per unit length over an interval. Failure labels, a continuous model and population evidence are not present.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Find bin widths and the denominator. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Calculate density heights. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Recover the encoded masses. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Interpret the changed-count control. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: May a density be read as exact-length failure probability? Preserves reasoning and stated claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw two unequal rectangles by hand and label their raw count, width, height and area. Prepare an embroidery-dashboard caption and ask an assistant to challenge its use of the word frequency before adopting any chart DSL.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A caption equating the control’s equal bar heights with equal sample counts is refuted by its unequal masses.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "DV021",
+      "department": "data-visualization",
+      "module_id": "dv-021-transform-interval-endpoints-before-drawing-error-bars",
+      "title": "Transform Interval Endpoints before Drawing Error Bars",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-021-transform-interval-endpoints-before-drawing-error-bars.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-021-transform-interval-endpoints-before-drawing-error-bars.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-021-transform-interval-endpoints-before-drawing-error-bars.es.md"
+      },
+      "novelty_vs_prerequisites": "Paired residuals retain correspondences; this adds nonlinear endpoint transport and derives display extents without assuming symmetry.",
+      "prerequisites": [
+        "dv-016-compare-paired-silhouette-residuals"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/data-visualization/en/dv-016-compare-paired-silhouette-residuals.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "03b11a94f3cc40a75e56a36d73d80b531b355f298063456fd35f44b6b26e9777"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual first 100 lines inspected for frame declaration, material appearance, objects and geometric primitives; no execution.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://docs.python.org/3/library/math.html",
+          "pin": "Python documentation served with 3.15.1 banner, read 2026-10-25",
+          "scope": "Actually read rendered lines 281-296 for logarithms and 314-317 for square-root definition. Reference defines operations only; no interpreter execution or version inferred.",
+          "read_method": "Actual rendered body or PDF extraction, bounded as described",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "centre": 4,
+          "lower": 1,
+          "upper": 9,
+          "transform": "sqrt"
+        },
+        "formula": "display_centre=sqrt(centre); display_lower=sqrt(lower); display_upper=sqrt(upper); lower_extent=display_centre-display_lower; upper_extent=display_upper-display_centre",
+        "expected": {
+          "display_centre": 2,
+          "display_lower": 1,
+          "display_upper": 3,
+          "lower_extent": 1,
+          "upper_extent": 1
+        },
+        "negative_control": {
+          "values": {
+            "centre": 4,
+            "lower": 0,
+            "upper": 8,
+            "transform": "sqrt"
+          },
+          "expected": {
+            "display_centre": 2,
+            "display_lower": 0,
+            "display_upper": 2.8284271247461903,
+            "lower_extent": 2,
+            "upper_extent": 0.8284271247461903
+          },
+          "why": "A raw symmetric interval generally becomes asymmetric after a nonlinear coordinate transform."
+        },
+        "assumptions": [
+          "Ordered nonnegative authored feasible endpoints; square-root display map is increasing",
+          "Centre is the supplied reference value, not a recomputed midpoint or estimator"
+        ],
+        "limits": [
+          "Intervals are not calibrated confidence intervals or measured uncertainty",
+          "No claim about perceptual benefit of the display transform"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Transform the supplied centre.",
+          "expected_answer": "The display centre is `2`. This transforms the reference value only; it does not determine either interval endpoint.",
+          "decision": null
+        },
+        "2": {
+          "question": "Transform both main endpoints.",
+          "expected_answer": "They become `[1,3]`. Applying the map to the endpoints preserves their ordering because the declared map is increasing on this domain.",
+          "decision": null
+        },
+        "3": {
+          "question": "Derive the display extents.",
+          "expected_answer": "Both extents are `1`, despite unequal raw distances. Compute them by subtraction after transformation, not by transforming a raw error length.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the raw-symmetric control.",
+          "expected_answer": "The lower extent is `2` and upper extent `0.8284271247461903`. Raw symmetry does not survive this nonlinear map.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does the transformed interval establish statistical confidence?",
+          "expected_answer": "No. These are stipulated feasible bounds. A confidence interpretation would need a sampling procedure and its own justification, which the axis cannot supply.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Transform the supplied centre. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Transform both main endpoints. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Derive the display extents. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the raw-symmetric control. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: Does the transformed interval establish statistical confidence? Preserves reasoning and stated claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Sketch a residual comparison with a raw axis and a square-root axis. Mark the same endpoints on both by hand, then ask an assistant to explain every display extent without replacing the original interval.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A display rule that forces equal control extents is refuted by the independently transformed control endpoints.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "DV022",
+      "department": "data-visualization",
+      "module_id": "dv-022-declare-diagonal-connectivity-in-a-relief-contour",
+      "title": "Declare Diagonal Connectivity in a Relief Contour",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-022-declare-diagonal-connectivity-in-a-relief-contour.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-022-declare-diagonal-connectivity-in-a-relief-contour.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-022-declare-diagonal-connectivity-in-a-relief-contour.es.md"
+      },
+      "novelty_vs_prerequisites": "Missing-data maps avoid invented holes; this resolves an ambiguity even with all samples present by declaring which diagonal class connects.",
+      "prerequisites": [
+        "dv-015-map-missing-stitches-without-inventing-holes"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/data-visualization/en/dv-015-map-missing-stitches-without-inventing-holes.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "b73683f82be6f620edb0b08680eb97abbc8bade39c9d9d4d3f7940021daf40cf"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual first 100 lines inspected for frame declaration, material appearance, objects and geometric primitives; no execution.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.find_contours",
+          "pin": "scikit-image documentation served as 0.26.0, read 2026-10-25",
+          "scope": "Rendered lines 378-385: diagonal ambiguous marching-squares case, fully_connected parameter and open boundaries. No library installed or executed.",
+          "read_method": "Actual rendered body or PDF extraction, bounded as described",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "corners_TL_TR_BR_BL": [
+            1,
+            0,
+            1,
+            0
+          ],
+          "threshold": 0.5,
+          "connect_high": false
+        },
+        "formula": "classify corners strictly above threshold; alternating high/low is ambiguous; interpolate each crossing at (threshold-a)/(b-a); connect_high false pairs top-left and right-bottom; connect_high true pairs top-right and bottom-left",
+        "expected": {
+          "ambiguous": true,
+          "edge_fractions": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "pairs": [
+            [
+              "top",
+              "left"
+            ],
+            [
+              "right",
+              "bottom"
+            ]
+          ],
+          "high_components": 2,
+          "low_components": 1
+        },
+        "negative_control": {
+          "values": {
+            "corners_TL_TR_BR_BL": [
+              1,
+              0,
+              1,
+              0
+            ],
+            "threshold": 0.5,
+            "connect_high": true
+          },
+          "expected": {
+            "ambiguous": true,
+            "edge_fractions": [
+              0.5,
+              0.5,
+              0.5,
+              0.5
+            ],
+            "pairs": [
+              [
+                "top",
+                "right"
+              ],
+              [
+                "bottom",
+                "left"
+              ]
+            ],
+            "high_components": 1,
+            "low_components": 2
+          },
+          "why": "Identical samples and edge intersections permit different diagonal topology under a different declared connectivity policy."
+        },
+        "assumptions": [
+          "One square cell with alternating corner classes; no corner equal to threshold",
+          "Authored connectivity convention; component counts are local high/low regions inside this cell"
+        ],
+        "limits": [
+          "No inference about an actual continuous relief between samples",
+          "No library or engine execution; this is not an asymptotic-decider implementation"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Classify the corner pattern.",
+          "expected_answer": "It alternates high and low, so the local case is ambiguous. Complete corner data does not by itself select diagonal connectivity.",
+          "decision": null
+        },
+        "2": {
+          "question": "Locate the edge crossings.",
+          "expected_answer": "All fractions are `0.5`. The edge interpolation determines positions without determining how to pair them inside the cell.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the main connectivity policy.",
+          "expected_answer": "Pair top with left and right with bottom. The local high class has `2` components and the low class `1`.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-policy control.",
+          "expected_answer": "Pair top with right and bottom with left. High components become `1` and low components `2`, with unchanged edge positions.",
+          "decision": null
+        },
+        "5": {
+          "question": "Is either policy a measured surface interior?",
+          "expected_answer": "No. Extra samples or a justified interpolation model would be required. A declared convention is useful evidence of meaning, not a physical observation.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Classify the corner pattern. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Locate the edge crossings. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Apply the main connectivity policy. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-policy control. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: Is either policy a measured surface interior? Preserves reasoning and stated claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw both contour pairings for the same cell and label the resulting high regions. Prepare a relief-preview annotation retaining the chosen policy and the alternative, then ask an assistant which future sample would challenge that choice.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A report claiming unchanged component identity under the policy-only control is refuted by the changed local component counts.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "SEM018",
+      "department": "semiotics",
+      "module_id": "sem-018-interpret-a-multi-shaft-weaving-draft",
+      "title": "Interpret a Multi-Shaft Weaving Draft",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-018-interpret-a-multi-shaft-weaving-draft.md",
+        "fr": "streeling/courses/semiotics/fr/sem-018-interpret-a-multi-shaft-weaving-draft.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-018-interpret-a-multi-shaft-weaving-draft.es.md"
+      },
+      "novelty_vs_prerequisites": "The prerequisite checks an alternating weave seam. This composes arbitrary threading with an independent lift plan and distinguishes missing instruction from a deliberate all-down row.",
+      "prerequisites": [
+        "vc-007-weave-seams-as-scene-contracts"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/visual-computing/en/vc-007-weave-seams-as-scene-contracts.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "7fb0cf78216e9a35e4b27d84bb9327efe1f8aa42f3bb861d4e9bee8200e0c2a5"
+        },
+        {
+          "path_or_url": "code/streeling/weave-godot/trial.gd",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual first 90 lines inspected for weave scene identity and instance/material construction.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "9e59b247bacff045398bfc9f00917fc3f0734b4d1e88424801f3f85c78fb8f99"
+        },
+        {
+          "path_or_url": "https://docs.python.org/3/library/itertools.html#itertools.product",
+          "pin": "Python documentation served with 3.15.1 banner, read 2026-10-25",
+          "scope": "Rendered lines 414-422: Cartesian-product enumeration and ordering. Domain rules and scenario meanings are authored, not a Python capability claim.",
+          "read_method": "Actual rendered body or PDF extraction, bounded as described",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "threading": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "lift_plan": [
+            [
+              0,
+              2
+            ],
+            [
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ]
+        },
+        "formula": "drawdown[pick][warp]=threading[warp] in lift_plan[pick]; a missing lift-plan row yields null and status incomplete rather than false cells",
+        "expected": {
+          "status": "complete",
+          "drawdown": [
+            [
+              true,
+              false,
+              true,
+              true
+            ],
+            [
+              false,
+              true,
+              false,
+              false
+            ],
+            [
+              true,
+              true,
+              false,
+              true
+            ]
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "threading": [
+              0,
+              1,
+              2,
+              0
+            ],
+            "lift_plan": [
+              [
+                0,
+                2
+              ],
+              [
+                1
+              ],
+              null
+            ]
+          },
+          "expected": {
+            "status": "incomplete",
+            "drawdown": [
+              [
+                true,
+                false,
+                true,
+                true
+              ],
+              [
+                false,
+                true,
+                false,
+                false
+              ],
+              null
+            ]
+          },
+          "why": "An unrecorded lift-plan row is not equivalent to a recorded empty lift set."
+        },
+        "assumptions": [
+          "Authored rising-shed convention: true means warp above weft",
+          "Zero-based shaft labels; each warp assigned one shaft; lift sets refer to declared shafts"
+        ],
+        "limits": [
+          "No loom execution, yarn deformation or physical weave feasibility",
+          "The convention is declared for the example and is not asserted universal across weaving notations"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Interpret the first pick.",
+          "expected_answer": "The row is `[true,false,true,true]`: the repeated shaft assignment raises both of its warp ends. Spatial indices are not shaft labels.",
+          "decision": null
+        },
+        "2": {
+          "question": "Interpret the second pick.",
+          "expected_answer": "The row is `[false,true,false,false]`. A lifted shaft affects precisely the warp ends assigned to it, regardless of their array positions.",
+          "decision": null
+        },
+        "3": {
+          "question": "Interpret the final recorded pick.",
+          "expected_answer": "The row is `[true,true,false,true]`. The pattern cannot be recovered from a single alternating parity bit.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the missing-lift control.",
+          "expected_answer": "The final row becomes `null` and status `incomplete`. Earlier rows stay available; an absent instruction must not become an empty lift set.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does a complete drawdown prove a physical weave?",
+          "expected_answer": "No. It proves this finite interpretation under its declared rising-shed convention. Yarn mechanics, construction and human reading remain untested.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Interpret the first pick. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Interpret the second pick. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Interpret the final recorded pick. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the missing-lift control. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: Does a complete drawdown prove a physical weave? Preserves reasoning and stated claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw shaft columns and pick rows by hand, then derive the crossing table before showing it to an assistant. Compare the arbitrary lift plan with the committed alternating-weave scene and write the missing semantic boundary for a proposed extension.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
+        "falsifier": "Any interpreter producing a definite all-down final row for the missing-row control has fabricated an instruction.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "SEM019",
+      "department": "semiotics",
+      "module_id": "sem-019-distinguish-knot-diagram-reversal-from-mirroring",
+      "title": "Distinguish Knot Diagram Reversal from Mirroring",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-019-distinguish-knot-diagram-reversal-from-mirroring.md",
+        "fr": "streeling/courses/semiotics/fr/sem-019-distinguish-knot-diagram-reversal-from-mirroring.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-019-distinguish-knot-diagram-reversal-from-mirroring.es.md"
+      },
+      "novelty_vs_prerequisites": "Crossing metadata identifies a referent; this derives a signed diagram statistic and distinguishes two transformations that may preserve those same referents.",
+      "prerequisites": [
+        "sem-005-bind-scene-hits-to-crossing-identity"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/semiotics/en/sem-005-bind-scene-hits-to-crossing-identity.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "c8c8e704fa6ea4ed28918530cb8e9f97c10de6833acf2d02d567133be4950de1"
+        },
+        {
+          "path_or_url": "code/streeling/weave-godot/trial.gd",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual first 90 lines inspected for weave scene identity and instance/material construction.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "9e59b247bacff045398bfc9f00917fc3f0734b4d1e88424801f3f85c78fb8f99"
+        },
+        {
+          "path_or_url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+          "pin": "Danny Calegari, Introduction to Knot Theory, downloaded 2026-10-25; SHA-bound PDF",
+          "scope": "Actual raw PDF downloaded, then pypdf text of printed pages 40-41 read: signed crossing sum, orientation reversal, Reidemeister-I limitation. Web parser rejected full PDF for size; download and extraction succeeded.",
+          "read_method": "Actual rendered body or PDF extraction, bounded as described",
+          "sha256": "2b38476c9471585bf0c480d1266699c3446daf1eb2c3ca6191d68d4aed79838f"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "over_tangents": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "under_tangents": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              1
+            ]
+          ],
+          "operation": "reverse"
+        },
+        "formula": "crossing_sign=sign(det(over,under)) in a declared oriented screen frame; writhe=sum(signs); reverse negates both tangents at every crossing; mirror negates x components; recompute signs and writhe",
+        "expected": {
+          "original_signs": [
+            1,
+            -1,
+            1
+          ],
+          "original_writhe": 1,
+          "transformed_signs": [
+            1,
+            -1,
+            1
+          ],
+          "transformed_writhe": 1
+        },
+        "negative_control": {
+          "values": {
+            "over_tangents": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "under_tangents": [
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                -1,
+                1
+              ]
+            ],
+            "operation": "mirror"
+          },
+          "expected": {
+            "original_signs": [
+              1,
+              -1,
+              1
+            ],
+            "original_writhe": 1,
+            "transformed_signs": [
+              -1,
+              1,
+              -1
+            ],
+            "transformed_writhe": -1
+          },
+          "why": "Traversal reversal negates both crossing tangents; an orientation-reversing planar mirror negates each determinant instead."
+        },
+        "assumptions": [
+          "Fixed over/under identities and oriented screen convention; all crossing determinants nonzero",
+          "The sign convention is explicitly defined here; reverse means reverse the entire single component"
+        ],
+        "limits": [
+          "Diagram writhe is not an ambient knot invariant: a Reidemeister-I curl changes it",
+          "No knot classification, crossing geometry validation or native scene execution"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate the original determinants and signs.",
+          "expected_answer": "Determinants are `[1,-1,2]`, giving signs `[1,-1,1]`. Magnitude does not weight the signed crossing sum.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute diagram writhe.",
+          "expected_answer": "The result is `1`. Count each declared crossing once, rather than each traversal encounter with that crossing.",
+          "decision": null
+        },
+        "3": {
+          "question": "Reverse both tangents.",
+          "expected_answer": "Signs remain `[1,-1,1]` and writhe `1`. Bilinearity gives the same determinant when both arguments are negated.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the mirror control.",
+          "expected_answer": "Signs become `[-1,1,-1]` and writhe `-1`. This flips planar orientation without changing the declared over/under referents.",
+          "decision": null
+        },
+        "5": {
+          "question": "May writhe certify knot type?",
+          "expected_answer": "No. A Reidemeister-I curl changes diagram writhe while preserving ambient knot type. Equal sums also discard the crossing arrangement.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Calculate the original determinants and signs. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Compute diagram writhe. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Reverse both tangents. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the mirror control. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: May writhe certify knot type? Preserves reasoning and stated claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the oriented tangent pairs on paper and preserve the crossing labels during reversal and mirroring. Prepare a proposed knot-ornament caption that states exactly which diagram transformation the signed number tests.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
+        "falsifier": "An annotation claiming that traversal reversal flips all crossing signs is refuted by the unchanged determinant products.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "SEM020",
+      "department": "semiotics",
+      "module_id": "sem-020-locate-a-motif-cell-in-positive-run-lengths",
+      "title": "Locate a Motif Cell in Positive Run Lengths",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-020-locate-a-motif-cell-in-positive-run-lengths.md",
+        "fr": "streeling/courses/semiotics/fr/sem-020-locate-a-motif-cell-in-positive-run-lengths.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-020-locate-a-motif-cell-in-positive-run-lengths.es.md"
+      },
+      "novelty_vs_prerequisites": "INF011 already encodes/decodes toy runs and charges size; this does not claim a new encoding. SEM013 aligns periodic motifs. The new operation answers indexed cell queries in unequal runs, preserves phase and boundary ownership, and explicitly refuses zero-length instructions rather than silently repairing provenance.",
+      "prerequisites": [
+        "sem-013-align-two-motif-periods-at-a-textile-seam",
+        "inf-011-separate-compressed-size-from-preserved-information"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/semiotics/en/sem-013-align-two-motif-periods-at-a-textile-seam.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "2ad8fcc953fde8b7cb8b88a343473d907736ecd03b83038a02570e9bd6267d15"
+        },
+        {
+          "path_or_url": "streeling/courses/information-theory/en/inf-011-separate-compressed-size-from-preserved-information.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "0806cd078a98d41564a9d4064c5e8b765554ace81823f43e64c4e67099b3c4dc"
+        },
+        {
+          "path_or_url": "code/streeling/weave-godot/trial.gd",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual first 90 lines inspected for weave scene identity and instance/material construction.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "9e59b247bacff045398bfc9f00917fc3f0734b4d1e88424801f3f85c78fb8f99"
+        },
+        {
+          "path_or_url": "https://docs.python.org/3/library/itertools.html#itertools.product",
+          "pin": "Python documentation served with 3.15.1 banner, read 2026-10-25",
+          "scope": "Rendered lines 414-422: Cartesian-product enumeration and ordering. Domain rules and scenario meanings are authored, not a Python capability claim.",
+          "read_method": "Actual rendered body or PDF extraction, bounded as described",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "runs": [
+            [
+              "warp",
+              2
+            ],
+            [
+              "weft",
+              1
+            ],
+            [
+              "warp",
+              3
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            5,
+            6,
+            8
+          ],
+          "phase": 0
+        },
+        "formula": "reject any run length <=0 or non-integer; period=sum(lengths); offset=(index+phase)%period; choose first cumulative end strictly greater than offset",
+        "expected": {
+          "status": "valid",
+          "period": 6,
+          "samples": [
+            "warp",
+            "weft",
+            "warp",
+            "warp",
+            "weft"
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "runs": [
+              [
+                "warp",
+                2
+              ],
+              [
+                "weft",
+                0
+              ],
+              [
+                "warp",
+                3
+              ]
+            ],
+            "indices": [
+              0,
+              2,
+              5,
+              6,
+              8
+            ],
+            "phase": 0
+          },
+          "expected": {
+            "status": "invalid_run",
+            "period": null,
+            "samples": null
+          },
+          "why": "Changing the main run length from one to zero changes the arithmetic sum from 6 to 5 if accepted. Deleting the zero-length record does not further change that sum or expansion; it conceals a violation of the declared positive-length and provenance contract, so the authored control is rejected."
+        },
+        "assumptions": [
+          "Positive integer run lengths; integer global indices and phase",
+          "Symbol equality is literal; adjacent equal-symbol runs may remain distinct provenance records"
+        ],
+        "limits": [
+          "No compression benchmark or implemented parser/DSL",
+          "Symbols designate an authored motif, not physical yarn contact or automatic alternating parity"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the period.",
+          "expected_answer": "It is `6`. Sum cell lengths, not the number of run records; the latter counts a different object.",
+          "decision": null
+        },
+        "2": {
+          "question": "Resolve the internal boundary query.",
+          "expected_answer": "At index `2`, the symbol is `weft`. Equality with the earlier cumulative end transfers ownership to the next run.",
+          "decision": null
+        },
+        "3": {
+          "question": "Resolve all requested cells.",
+          "expected_answer": "The symbols are `[warp,weft,warp,warp,weft]`. Global repetition is reduced before searching the unequal runs.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the zero-run control.",
+          "expected_answer": "Return `invalid_run`, with period and samples `null`. Removing a zero-length record does not change its arithmetic contribution, but silently accepting the remainder would conceal the violated positive-length contract.",
+          "decision": null
+        },
+        "5": {
+          "question": "Should identical adjacent symbols always be merged?",
+          "expected_answer": "No. Cell values may survive merging while source provenance does not. State the permitted equivalence and retain a correspondence before proposing that rewrite.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Compute the period. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Resolve the internal boundary query. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Resolve all requested cells. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the zero-run control. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: Should identical adjacent symbols always be merged? Preserves reasoning and stated claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Expand the border by hand and label both cell addresses and run identities. Compare lookup before and after the malformed control, retaining the refusal rather than repairing it. Propose the smallest evidence note for an IX motif handoff.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
+        "falsifier": "An interpreter that reports `valid` for the zero-run input violates the declared positive-length contract. Deletion cannot repair the missing provenance or establish the intended motif.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PHI014",
+      "department": "philosophy",
+      "module_id": "phi-014-test-selection-on-a-shared-scene-outcome",
+      "title": "Test Selection on a Shared Scene Outcome",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-014-test-selection-on-a-shared-scene-outcome.md",
+        "fr": "streeling/courses/philosophy/fr/phi-014-test-selection-on-a-shared-scene-outcome.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-014-test-selection-on-a-shared-scene-outcome.es.md"
+      },
+      "novelty_vs_prerequisites": "Crossed-factor design isolates changes; this exposes bias introduced after collection by filtering on a common effect of both factors.",
+      "prerequisites": [
+        "phi-011-cross-mesh-and-lighting-before-attributing-a-render-change"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/philosophy/en/phi-011-cross-mesh-and-lighting-before-attributing-a-render-change.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "0efa53b8143de554946ff6fa60e226f0faa2c9b57aaee779dab72decbe77e2d8"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual first 100 lines inspected for frame declaration, material appearance, objects and geometric primitives; no execution.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://arxiv.org/abs/1809.07111v4",
+          "pin": "Luque-Fernandez et al., arXiv:1809.07111v4, 2019-11-10",
+          "scope": "Actual abstract body lines 8-18 read at the canonical unversioned page, whose displayed version is v4: conditioning on a common effect can create association. Full paper and its simulation were not read or run.",
+          "read_method": "Actual rendered body or PDF extraction, bounded as described",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "rows_A_B_mass": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "selection": "A_or_B"
+        },
+        "formula": "retain rows satisfying selection; conditional_B_given_A=a weighted B count / retained mass for that A; difference=P(B|A=1,selected)-P(B|A=0,selected)",
+        "expected": {
+          "retained_mass": 3,
+          "B_given_A0": 1,
+          "B_given_A1": 0.5,
+          "difference": -0.5,
+          "unselected_difference": 0
+        },
+        "negative_control": {
+          "values": {
+            "rows_A_B_mass": [
+              [
+                0,
+                0,
+                1
+              ],
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                1,
+                1
+              ]
+            ],
+            "selection": "all"
+          },
+          "expected": {
+            "retained_mass": 4,
+            "B_given_A0": 0.5,
+            "B_given_A1": 0.5,
+            "difference": 0,
+            "unselected_difference": 0
+          },
+          "why": "Removing selection restores the original independence; the apparent negative association was created by retaining a shared outcome."
+        },
+        "assumptions": [
+          "Invented equally weighted binary scene factors; selection is their logical disjunction",
+          "No unmodeled factor and no observational estimate of a causal effect"
+        ],
+        "limits": [
+          "Finite selection demonstration, not diagnosis of a real project dataset",
+          "A conditional association alone does not identify a causal graph"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the unselected conditional rates.",
+          "expected_answer": "Both are `0.5`, so the unselected difference is `0`. The authored table makes the factors independent before retention.",
+          "decision": null
+        },
+        "2": {
+          "question": "Apply the shared-outcome selection.",
+          "expected_answer": "Retained mass is `3`. Only the row where both factors are absent is removed; the original weights are otherwise preserved.",
+          "decision": null
+        },
+        "3": {
+          "question": "Derive the selected association.",
+          "expected_answer": "The rates are `1` without a mesh change and `0.5` with one, producing difference `-0.5`. This does not establish compensation.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the all-rows control.",
+          "expected_answer": "Retained mass becomes `4` and the difference returns to `0`. Neither the mesh values nor the lighting values were changed.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which evidence should a scene report retain?",
+          "expected_answer": "The inclusion rule and excluded cases, with factor labels and source-bound captures. A selected association alone cannot identify its causal explanation.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Compute the unselected conditional rates. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Apply the shared-outcome selection. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Derive the selected association. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the all-rows control. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: Which evidence should a scene report retain? Preserves reasoning and stated claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare the full capture table by hand, then filter it using the stated rule. Ask an assistant to explain the apparent relationship and require it to retain the all-rows control before proposing a scene-evidence filter.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A causal-compensation claim based only on the selected difference is undermined by the unchanged-factor all-rows control.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PHI015",
+      "department": "philosophy",
+      "module_id": "phi-015-diagnose-a-failed-prediction-with-an-auxiliary-premise",
+      "title": "Diagnose a Failed Prediction with an Auxiliary Premise",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-015-diagnose-a-failed-prediction-with-an-auxiliary-premise.md",
+        "fr": "streeling/courses/philosophy/fr/phi-015-diagnose-a-failed-prediction-with-an-auxiliary-premise.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-015-diagnose-a-failed-prediction-with-an-auxiliary-premise.es.md"
+      },
+      "novelty_vs_prerequisites": "Oracle-versus-specification asks what a test decides; this diagnoses which premises survive a failed prediction before attributing failure to the main hypothesis.",
+      "prerequisites": [
+        "phi-008-separate-a-test-oracle-from-a-specification"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/philosophy/en/phi-008-separate-a-test-oracle-from-a-specification.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "ab7be6ab58c9d4dbb3279e4b753badaa6971ea9da0d153ea581373d6e99f626a"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual first 100 lines inspected for frame declaration, material appearance, objects and geometric primitives; no execution.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://plato.stanford.edu/entries/scientific-method/",
+          "pin": "Stanford Encyclopedia of Philosophy, substantive revision 2026-08-08",
+          "scope": "Rendered opening lines 12-17 read: observation, hypothesis and model testing as activities with varied methods. Failed-conjunction model is an explicit logical derivation, not a quotation of an uninspected section.",
+          "read_method": "Actual rendered body or PDF extraction, bounded as described",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "observed_prediction": false,
+          "auxiliary_verified": null
+        },
+        "formula": "enumerate Boolean worlds [H,A] lexicographically; retain worlds with (H and A)==observed_prediction and, when auxiliary_verified is not null, A==auxiliary_verified; H_false_entailed=all(not H for retained worlds) with nonempty retained set",
+        "expected": {
+          "worlds": [
+            [
+              false,
+              false
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              true,
+              false
+            ]
+          ],
+          "count": 3,
+          "H_false_entailed": false
+        },
+        "negative_control": {
+          "values": {
+            "observed_prediction": false,
+            "auxiliary_verified": true
+          },
+          "expected": {
+            "worlds": [
+              [
+                false,
+                true
+              ]
+            ],
+            "count": 1,
+            "H_false_entailed": true
+          },
+          "why": "An independently established auxiliary removes the surviving world where the main hypothesis is true but the auxiliary is false."
+        },
+        "assumptions": [
+          "Authored exhaustive Boolean model; prediction defined as conjunction, not merely one-way implication",
+          "The control stipulates a genuinely independent auxiliary verification"
+        ],
+        "limits": [
+          "Logical entailment within this finite model does not rank real explanations",
+          "No actual failed capture, calibrated instrument or independent auxiliary observation is reported"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Which world does prediction failure remove?",
+          "expected_answer": "It removes `[true,true]`. Under the declared equivalence, that world would necessarily produce success.",
+          "decision": null
+        },
+        "2": {
+          "question": "List the remaining worlds.",
+          "expected_answer": "They are `[[false,false],[false,true],[true,false]]`, a total of `3`. Do not silently choose one without added evidence.",
+          "decision": null
+        },
+        "3": {
+          "question": "Is the main hypothesis already refuted within the model?",
+          "expected_answer": "No. The world `[true,false]` remains. The auxiliary could fail while the main hypothesis remains true.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply independent auxiliary verification.",
+          "expected_answer": "Only `[[false,true]]` remains, count `1`; the main hypothesis is false in every surviving world. Independence is stipulated, not observed here.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does compatibility rank explanations by probability?",
+          "expected_answer": "No. The model has no likelihoods or priors. Counting logical worlds is not evidence that their real counterparts are equally probable.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Which world does prediction failure remove? Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: List the remaining worlds. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Is the main hypothesis already refuted within the model? Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply independent auxiliary verification. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: Does compatibility rank explanations by probability? Preserves reasoning and stated claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Write a paper failure-diagnosis table for a proposed crease-visibility capture. Name a manual geometry check and an independent setup check, preserving their unperformed status. Ask an assistant which surviving explanation each check would exclude.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A diagnosis asserting a false main hypothesis from failure alone is refuted by the surviving true-hypothesis, false-auxiliary world.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "FUT014",
+      "department": "futurology",
+      "module_id": "fut-014-project-first-retirements-from-craft-asset-cohorts",
+      "title": "Project First Retirements from Craft Asset Cohorts",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-014-project-first-retirements-from-craft-asset-cohorts.md",
+        "fr": "streeling/courses/futurology/fr/fut-014-project-first-retirements-from-craft-asset-cohorts.fr.md",
+        "es": "streeling/courses/futurology/es/fut-014-project-first-retirements-from-craft-asset-cohorts.es.md"
+      },
+      "novelty_vs_prerequisites": "Weave density projects geometric counts and conservation audits totals. This schedules first-retirement mass by convolving introduction cohorts with an explicit lifespan allocation.",
+      "prerequisites": [
+        "fut-010-project-weave-density-before-a-scene-expansion",
+        "psy-021-conservation-claims"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/futurology/en/fut-010-project-weave-density-before-a-scene-expansion.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "f2798dbc094190d03fcb003da03fd1065b9039e143c40bc0ad3b948668e7fea9"
+        },
+        {
+          "path_or_url": "streeling/courses/psychohistory/en/psy-021-conservation-claims.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "ac35a795c36010d0344c3408fa57430cf98dd24419b3de511f27a51ac26a7683"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual first 100 lines inspected for frame declaration, material appearance, objects and geometric primitives; no execution.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://docs.python.org/3/library/itertools.html#itertools.product",
+          "pin": "Python documentation served with 3.15.1 banner, read 2026-10-25",
+          "scope": "Rendered lines 414-422: Cartesian-product enumeration and ordering. Domain rules and scenario meanings are authored, not a Python capability claim.",
+          "read_method": "Actual rendered body or PDF extraction, bounded as described",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "introduced_by_period": [
+            2,
+            3,
+            1,
+            0
+          ],
+          "retirement_age_mass": {
+            "2": 0.5,
+            "3": 0.5
+          },
+          "output_periods": 7
+        },
+        "formula": "first_retirements[t]=sum(introduced[c]*age_mass[t-c] for c in cohort periods, absent ages contribute zero); total=sum(first_retirements)",
+        "expected": {
+          "first_retirements": [
+            0,
+            0,
+            1,
+            2.5,
+            2,
+            0.5,
+            0
+          ],
+          "total": 6,
+          "peak_period": 3,
+          "peak_mass": 2.5
+        },
+        "negative_control": {
+          "values": {
+            "introduced_by_period": [
+              2,
+              3,
+              1,
+              0
+            ],
+            "retirement_age_mass": {
+              "1": 1
+            },
+            "output_periods": 7
+          },
+          "expected": {
+            "first_retirements": [
+              0,
+              2,
+              3,
+              1,
+              0,
+              0,
+              0
+            ],
+            "total": 6,
+            "peak_period": 2,
+            "peak_mass": 3
+          },
+          "why": "The same introduced total can have a different retirement peak and date under a different lifespan allocation."
+        },
+        "assumptions": [
+          "Invented divisible cohort mass and normalized nonnegative age allocation; discrete periods",
+          "First retirements of original cohorts only; no replacement purchases re-enter the model"
+        ],
+        "limits": [
+          "No fitted survival curve, actual asset wear or future probability forecast",
+          "First-retirement workload is not total replacement cost or a stock balance"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Find the first nonzero retirement period.",
+          "expected_answer": "It is period `2`, with mass `1`. Earlier periods contain no cohort old enough under the declared allocation.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the peak by cohort contributions.",
+          "expected_answer": "Period `3` combines mass `1` from the earliest cohort and `1.5` from the next, giving `2.5`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Write the complete first-retirement profile.",
+          "expected_answer": "It is `[0,0,1,2.5,2,0.5,0]`, totaling `6`. The horizon includes the final allocated retirement.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the shorter-life control.",
+          "expected_answer": "The profile becomes `[0,2,3,1,0,0,0]`, with peak `3` in period `2`. The same total does not imply the same capacity need.",
+          "decision": null
+        },
+        "5": {
+          "question": "Are repeated retirements of replacements included?",
+          "expected_answer": "No. This is first retirement of original cohorts only. A renewal calculation would need a rule for introduction and lifetime of each replacement.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Find the first nonzero retirement period. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the peak by cohort contributions. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Write the complete first-retirement profile. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the shorter-life control. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: Are repeated retirements of replacements included? Preserves reasoning and stated claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw a cohort-by-calendar table for a proposed embroidery asset library and manually sum its diagonals. Compare that direct schedule with an assistant’s total-count-only forecast, retaining both age rules as hypotheses.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A forecast claiming identical peak workload whenever introduced totals match is refuted by the lifespan-only control.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "FUT015",
+      "department": "futurology",
+      "module_id": "fut-015-enumerate-compatible-craft-workflow-futures",
+      "title": "Enumerate Compatible Craft Workflow Futures",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-015-enumerate-compatible-craft-workflow-futures.md",
+        "fr": "streeling/courses/futurology/fr/fut-015-enumerate-compatible-craft-workflow-futures.fr.md",
+        "es": "streeling/courses/futurology/es/fut-015-enumerate-compatible-craft-workflow-futures.es.md"
+      },
+      "novelty_vs_prerequisites": "The scenario prerequisite compares actions across already listed futures. This constructs a coherent finite future set from explicit cross-compatibility constraints before any loss table is considered.",
+      "prerequisites": [
+        "fut-004-scenario-test-an-observatory-renderer"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/futurology/en/fut-004-scenario-test-an-observatory-renderer.md",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual whole file raw bytes decoded and compared to baseline; title/frontmatter plus introductory and model/interpretation excerpts inspected. Selected full files were read separately, but this record does not claim every prerequisite line was reviewed. No prerequisite runtime replay.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "232bea032ecec5d8aba1ce2d2e5e0aa0919d24150fec634d7f1b17c6a5790328"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "scope": "Actual first 100 lines inspected for frame declaration, material appearance, objects and geometric primitives; no execution.",
+          "read_method": "Actual raw bytes read; UTF-8 text excerpt inspected; baseline git blob compared",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://docs.python.org/3/library/itertools.html#itertools.product",
+          "pin": "Python documentation served with 3.15.1 banner, read 2026-10-25",
+          "scope": "Rendered lines 414-422: Cartesian-product enumeration and ordering. Domain rules and scenario meanings are authored, not a Python capability claim.",
+          "read_method": "Actual rendered body or PDF extraction, bounded as described",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "features": [
+            "detail",
+            "local",
+            "offline"
+          ],
+          "requirements": [
+            [
+              "detail",
+              "local"
+            ],
+            [
+              "offline",
+              "local"
+            ]
+          ],
+          "forbidden_together": []
+        },
+        "formula": "enumerate binary configurations in feature order; retain a configuration iff every implication premise=>consequence holds and no forbidden pair is jointly true; return ordered bitstrings and count",
+        "expected": {
+          "compatible": [
+            "000",
+            "010",
+            "011",
+            "110",
+            "111"
+          ],
+          "count": 5,
+          "incompatible": [
+            "001",
+            "100",
+            "101"
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "features": [
+              "detail",
+              "local",
+              "offline"
+            ],
+            "requirements": [
+              [
+                "detail",
+                "local"
+              ],
+              [
+                "offline",
+                "local"
+              ]
+            ],
+            "forbidden_together": [
+              [
+                "detail",
+                "offline"
+              ]
+            ]
+          },
+          "expected": {
+            "compatible": [
+              "000",
+              "010",
+              "011",
+              "110"
+            ],
+            "count": 4,
+            "incompatible": [
+              "001",
+              "100",
+              "101",
+              "111"
+            ]
+          },
+          "why": "An added compatibility restriction removes a bundle that previously appeared in the scenario set without assigning a probability to any remaining bundle."
+        },
+        "assumptions": [
+          "Authored Boolean capability assumptions, not product facts",
+          "Implications encode necessary conditions only; feature order is fixed; every configuration explicitly enumerated"
+        ],
+        "limits": [
+          "Logical compatibility is not implementation feasibility or future likelihood",
+          "No minimax regret, probability forecast or technology adoption authorization"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Interpret the feature order.",
+          "expected_answer": "It is `[detail,local,offline]`. A bitstring must travel with that order; a reordered display cannot silently change its referent.",
+          "decision": null
+        },
+        "2": {
+          "question": "List the main compatible futures.",
+          "expected_answer": "They are `[000,010,011,110,111]`, count `5`. Necessary local generation does not force detail or offline operation.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain an excluded bundle.",
+          "expected_answer": "Bundle `100` requests detail without local generation and violates its implication. Exclusion records a premise, not an observed product failure.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the added-conflict control.",
+          "expected_answer": "Compatible futures become `[000,010,011,110]`, count `4`; `111` is removed. Individual possibility does not establish joint possibility.",
+          "decision": null
+        },
+        "5": {
+          "question": "May the retained bundles be assigned equal forecast probability?",
+          "expected_answer": "No. Enumeration supplies a logical set, not frequencies or justified beliefs. Any probability model needs additional assumptions and evidence.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Interpret the feature order. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: List the main compatible futures. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain an excluded bundle. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the added-conflict control. Preserves reasoning and stated claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: May the retained bundles be assigned equal forecast probability? Preserves reasoning and stated claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Enumerate the bundles on paper before asking an assistant to propose a future craft pipeline. Keep a reason for each rejection and identify which constraints are merely proposed requirements awaiting stakeholder or source confirmation.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculations, with answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A future brief accepting the all-enabled bundle under the added conflict is contradicted by its own joint-compatibility rule.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    }
+  ]
+}

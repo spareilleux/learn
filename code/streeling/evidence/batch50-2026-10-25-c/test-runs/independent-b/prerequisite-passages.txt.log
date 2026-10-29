@@ -1,0 +1,1518 @@
+
+PREREQUISITE streeling/courses/cognitive-science/en/cog-020-screen-an-item-using-the-rest-score.md
+
+
+# Screen an Item Using the Rest Score
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A Learn quiz item is answered correctly by about half of an authored group. That does not show it distinguishes the intended skill. A mislabeled key or ambiguous prompt could reward the lower-scoring group more often. Before reusing the item in an agent-assisted explanation task, compare its outcome with performance on the other items and inspect the actual prompt.
+
+Build the ranking from the rest score, excluding the target item. Including the item in its own ranking creates a part-whole association and can obscure the question being asked. Our deliberately small diagnostic splits the distinct rest scores into equal halves. It then subtracts the lower group’s success fraction from the upper group’s fraction. Overall ease is a separate summary of all responses.
+
+The fixed case yields a negative contrast despite middling overall ease. The control reverses the item outcomes and keeps the overall proportion unchanged. Its contrast changes sign. The pair therefore shows why total correct count cannot replace the rest-score association. Preserve each row so a reviewer can inspect whether the scoring key, content alignment or wording could explain the pattern.
+
+The primary teaching text discusses item-rest scoring, sample dependence and the dimensionality assumption behind traditional discrimination summaries. Our equal-half calculation is a declared finite diagnostic, not its full psychometric method. A low or negative result is a reason to investigate, not automatic permission to delete a conceptually necessary item. Real learners, appropriate consent, sufficiently representative responses and content review are still absent. A proposed adaptive DSL should preserve this uncertainty rather than turn the contrast into a universal item-quality label.
+
+## Sources and project boundary
+
+The retained Learn helper separates metadata, title and body, and indexes English module identities. Inspect that representation when naming the artifact and its revision. It does not implement this lesson’s model or supply its invented inputs.
+
+[Prerequisite: cog-008-choose-probes-that-distinguish-reasoning-models](../../cognitive-science/en/cog-008-choose-probes-that-distinguish-reasoning-models.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading](https://www.cs.cas.cz/comps/PsychometricsBook/chapters/chapter5/chap5_item_analysis.html)
+
+## Fixed model and negative control
+
+[fixed model block]
+
+### Exercise 1
+
+Compute overall ease.
+
+<details><summary>Answer 1</summary>
+
+There are `4` correct responses among `8`, so the fraction is `0.5`. This quantity ignores which rest-score group answered correctly.
+
+</details>
+
+### Exercise 2
+
+Compute the signed contrast.
+
+<details><summary>Answer 2</summary>
+
+The lower group has `3` correct and the upper group `1`, each among `4`. The contrast is `-0.5`, a flag for investigation under this declared diagnostic.
+
+</details>
+
+### Exercise 3
+
+Apply the response-reversal control.
+
+<details><summary>Answer 3</summary>
+
+Its overall fraction stays `0.5`, but the contrast becomes `0.5`. Equal totals therefore do not establish equal discrimination patterns.
+
+</details>
+
+### Exercise 4
+
+Why exclude the target from ranking?
+
+<details><summary>Answer 4</summary>
+
+It prevents the target outcome from helping define its own comparison groups. It does not establish that the remaining score measures one valid skill or removes all sampling uncertainty.
+
+</details>
+
+### Exercise 5
+
+Should an agent delete the item automatically?
+
+
+PREREQUISITE streeling/courses/cognitive-science/en/cog-003-calibrating-fretboard-confidence.md
+
+
+# Calibrating Confidence in Fretboard Note Identification
+
+> **Archive and transfer scope.** The technical text below comes from an archived draft. Historical statements about an absent Learn import or build refer to that earlier stage; this [transfer record](../../../../code/streeling/evidence/voicing-learning-2026-10-22/README.md) records the current import and checks. Other unexecuted-experiment boundaries remain in force. Human subject, fluent-language and learner reviews remain pending.
+
+> **Department of Cognitive Science** | Intermediate | 40 minutes | English draft; review and publication pending
+
+## Objectives
+
+You will turn a guitarist's “I am sure” into a probability recorded **before** feedback, calculate a binary Brier score against a verified GA fretboard answer key, distinguish a six-item illustration from a measured learner result, and design a test that could falsify a calibration hypothesis. [COG-002](cog-002-feedback-integrity-fretboard-recall.md) audits whether the displayed key itself is correct. This lesson assumes that audit and asks a different question: **Does a learner's stated confidence match how often their note answers are correct?**
+
+## The project decision
+
+Suppose GA offers a “name this note” exercise on its SVG fretboard. Two guitarists each answer four of six positions correctly. One gives low confidence to the two wrong answers; the other is certain about them. Raw accuracy treats the two equally, but the second learner may need a different prompt or feedback. Before choosing one, we need a score with an explicit event, a trustworthy key, and a test of whether the feedback helps actual learners.
+
+Use GA commit [`dc2e74cbd992a298f67efb928b5b3754615e1924`](https://github.com/GuitarAlchemist/ga/tree/dc2e74cbd992a298f67efb928b5b3754615e1924). The [demo page](https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/ReactComponents/ga-react-components/src/pages/GuitarFretboardTest.tsx#L5-L13) declares six position objects; the [SVG component](https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/ReactComponents/ga-react-components/src/components/GuitarFretboard.tsx#L4-L85) defines string index 0 as high E, fret 0 as open, and default tuning `E, B, G, D, A, E` from high to low. The page does not override that tuning. Its sixth object displays `C` at string 5 fret 3, although low E plus three semitones is **G**. That is a source-level mismatch, not a claim about any user's experience. The corrected note sequence, in demo-array order, is `E, C, G, E, C, G`.
+
+The pinned page calls itself an SVG legacy component test page. The component's [click handler](https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/ReactComponents/ga-react-components/src/components/GuitarFretboard.tsx#L154-L157) passes only a string/fret coordinate to its callback. These sources do **not** show a confidence input, scored learner session, calibration dashboard, or deployed course flow. Every learner response below is **synthetic teaching data**; no GA user made these predictions for this lesson.
+
+## 1. Define the prediction before giving the answer
+
+For each trial, ask the learner to select a note name `a_i` for a specified string/fret. Then ask for `p_i`, a number from 0 to 1 answering: “How likely is **my chosen note** to match the independently verified key?” This is a probability about correctness of the answer just chosen, not about the chance that the guitar produces sound or that the demo's marker label is trustworthy. Record `a_i` and `p_i` before revealing any note label. Afterward set `y_i=1` if `a_i` matches the verified key and `y_i=0` otherwise.
+
+To construct a usable key, retain string order, tuning, and fret with the source revis
+
+PREREQUISITE streeling/courses/psychohistory/en/psy-017-calibration-with-six-observations.md
+
+
+# Calibration with Six Observations
+
+> **Department of Psychohistory** | Intermediate | 45 minutes | English draft; human subject and learner review pending
+
+## Objectives and project question
+
+You will trace a calibration record to the files behind its counts, put an exact interval on a proportion of six, compute how often a calibrated forecaster shows the same count, find the sample size that separates two rates, and follow a correction rule fed six observations at a time. **Project question:** a belief file records that 2 of 6 high-confidence beliefs were later revised and nudges a threshold by −0.1. What can six observations say about calibration?
+
+[PSY-002](psy-002-governance-phase-transitions.md) lists belief skew among six signals of an approaching regime shift; this module asks how much one small count about beliefs can carry. [PSY-004](psy-004-how-large-is-large.md) builds the exact interval reused here, [PSY-016](psy-016-brier-score.md) scores probability forecasts with the Brier score, and [PSY-025](psy-025-capstone-preregistered-forecast.md) uses both.
+
+## 1. Read the record, then recount it
+
+**Observed.** A *belief file* in `state/beliefs/` holds a proposition, a truth value (T true, P probable, U unknown, D doubtful, F false, C contradictory) and a `confidence` between 0 and 1. At commit `4b03838` the folder holds eight `*.belief.json` files (plus a YAML list of 19 beliefs, 9 at 0.85 or more, that the producer's glob skips) and [`archived/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/beliefs/archived) thirteen more. This lesson rests on one, [`confidence-calibration.belief.json`](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/beliefs/confidence-calibration.belief.json). Its proposition says that the governance agent's "confidence-assignment threshold is calibrated against the observed overconfidence-then-revision rate in her belief states." Truth value P, confidence 0.92, one supporting item, none contradicting. That item's claim, in full:
+
+[fixed model block]
+
+A `calibration` block stores `threshold_nudge` −0.1, `applied_delta` 0.0, `prior_nudge` −0.1 and `cap` 0.1. The file does not say which six beliefs were counted, which threshold the nudge moves, or whether a revised belief was wrong.
+
+**Where the record comes from.** The governance agent did not compute these numbers: its *applying script*, [`scripts/apply_ml_feedback.py`, lines 130–154](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/scripts/apply_ml_feedback.py#L130-L154), writes the belief with a fixed proposition and a fixed label P (commented "Probable: evidence leans true, magnitude still small-N") and copies the confidence, the claim and the claim's reliability from a recommendation document, which a producer in another repository (`ix/scripts/confidence_calibrator.py`, named in the script's header) computes from these same belief files.
+
+Three pinned files state the rule. The [policy](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/policies/ml-governance-feedback-policy.yaml#L57) defines the rate as "Proportion of high-confidence beliefs that were later revised". The [pipeline specification](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/pipelines/ml-feedback-loop.ixql#L41) recommends a change when the rate exceeds 0.15, of size `max(-0.1, -1 * overconfidence_rate * 0.5)`. The applying script (line 128) adds that nudge to the stored total and clamps the total to ±0.10.
+
+**Computed.** That producer ([`confidence_calibrator.py`](https://github.com/GuitarAlchemist/ix/blob/6418fcc69012108af266544ec4cf5a931a8f78e8/scripts/confiden
+
+PREREQUISITE streeling/courses/cognitive-science/en/cog-005-separate-pitch-estimates-from-listener-reports.md
+
+
+# Separate Pitch Estimates from Listener Reports
+
+> **Draft scope.** Original mathematical signal contrasts and a prepared listening-task design. Human technical, musician/listener, fluent-language and learner reviews and deployed course HTML verification remain pending. No participant, played stimulus, perceptual response or learning outcome was observed.
+
+## The project question
+
+A guitar agent predicts a repetition frequency, then treats a listener who reports another pitch as mistaken. It has changed the question from “what did the person hear?” into “which answer matches my algorithm?” A useful dogfooding exercise keeps those two outcomes separate.
+
+The [indexed abstract of Oxenham's 2012 review](https://pubmed.ncbi.nlm.nih.gov/23015422/) describes repetition rate as a principal physical correlate of pitch while emphasizing interactions that complicate perception. Only that abstract was read for this lesson; no full-paper protocol or recording was replicated. The original examples below compare explicit numerical predictions. They establish no universal percept or individual listener classification.
+
+## 1. State the response before choosing its answer key
+
+A technical task can ask for a supplied signal's fundamental period. Its answer follows the declared mathematics. A perceptual task can ask which of two sounds seems higher to the participant, or ask them to match a reference tone. That outcome is a recorded response with its own units and procedure. It is not automatically the same variable as a spectral peak, recurrence lag, realism preference or learning score.
+
+If the goal is algorithmic accuracy against a known constructed frequency, declare that reference and scoring rule. If the goal is to investigate perception, preserve the participant's response before interpreting it. “Different from the detector” can be an observation; “wrong” requires a justified task-specific criterion.
+
+### Practice exercise 1: separate the outcomes
+
+An evaluator asks “Which sounds higher?” but scores only agreement with an autocorrelation result. What distinction has been lost, and what should be retained?
+
+> **Answer:** The evaluator has substituted a model-defined technical reference for a perceptual response. Retain the actual question, stimulus conditions, participant choice or match, and the separate algorithm prediction. Agreement may be analyzed under an explicit hypothesis, but it does not retroactively define what the participant heard or measure realism or learning.
+
+## 2. Construct opposing numerical predictions
+
+The [original controls](../../../../code/streeling/evidence/pitch-estimates-2026-10-22/synthetic-periods.json) use one-second, zero-phase cosine sums with amplitudes 0.3, 0.2 and 0.1 at sample rate 48000 Hz:
+
+| Complex | Supplied components, Hz | Strongest component, Hz | Fundamental repetition rate, Hz |
+| --- | --- | --- | --- |
+| A | 1000, 1200, 1400 | 1000 | 200 |
+| B | 1050, 1200, 1350 | 1050 | 150 |
+
+The strongest component rises by 50 Hz from A to B, while the repetition frequency falls by 50 Hz. Their cent changes are approximately +84.467193470 and -498.044999135, respectively. These are two opposing numerical comparisons, not a prediction that every listener must use either one or even experience one unambiguous pitch.
+
+### Practice exercise 2: preserve the conflict
+
+Which complex is higher under the strongest-component comparison, and which under the fundamental-repetition comparison? Can this table alone determine an actual participant's choice?
+
+> **Answer:** B is higher by the strongest-component comparison, 1050 versus 1000 Hz. A is higher by fundamental repetition, 200 versus 150 Hz. The mathematical conflict motivates a response task; it supplies no observed participant choice or proof that all percepti
+
+PREREQUISITE streeling/courses/cybernetics/en/cyb-015-carry-covariance-through-smoothed-telemetry.md
+
+
+# Carry Covariance Through Smoothed Telemetry
+
+> This lesson uses authored fixed inputs and inspected source passages. The numbers, histories and labels are teaching constructions. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A quiet agent dashboard is not necessarily a precise dashboard. Successive measurements can share an error source. Applying an independent-sample variance formula to correlated inputs can understate uncertainty even when the smoothing arithmetic is correct. The earlier derivative course already gives a recurrence; this lesson adds its finite uncertainty accounting.
+
+NIST states an EWMA variance approximation for a long-running sequence and names independence conditions. Here only a short initialized sequence exists. Expand the recurrence into weights first, then apply the full covariance matrix. The off-diagonal terms matter because the errors can move together. A deterministic initial value also retains weight and can cause bias before the weights approach their long-run limit.
+
+Use symbolic monitoring units throughout. Our expected level is a mathematical expectation under stipulated errors, not an observed average of project traces. Before proposing an agent smoothing default, retain initialization, covariance assumptions and the response delay that this constant-level model leaves out.
+
+## Sources and project boundary
+
+The retained Learn helper separates frontmatter, heading and body in `parseModule`, and indexes English module names in `englishModuleKeys`. Those inspected representations let a task name its source and metadata; they do not implement the authored operation. The retained practice record instead distinguishes retrieval metrics from learner evidence. Inspect the particular file linked below and retain only the observation it actually supports. No model input in this lesson was estimated from that file.
+
+[Prerequisite: cyb-010-separate-derivative-noise-from-plant-motion](../../cybernetics/en/cyb-010-separate-derivative-noise-from-plant-motion.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Retained project artifact](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json)
+
+[Primary reading](https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc324.htm)
+
+## Fixed model and control
+
+[fixed model block]
+
+### Exercise 1
+
+Expand the measurement weights.
+
+<details><summary>Answer 1</summary>
+
+The weights are `[0.25,0.5]`; the initial state retains weight `0.25`. The measurement weights sum to `0.75`, so initialization still matters.
+
+</details>
+
+### Exercise 2
+
+Compute the expectation and bias.
+
+<details><summary>Answer 2</summary>
+
+Expected level is `3`; bias relative to `4` is `-1`. Smoothing has not reached the stipulated true level after this finite history.
+
+</details>
+
+### Exercise 3
+
+Compute variance with covariance.
+
+<details><summary>Answer 3</summary>
+
+Diagonal terms contribute `1.25`; the cross terms contribute `0.5`, giving `1.75`. Dropping covariance changes the calculation.
+
+</details>
+
+### Exercise 4
+
+Apply the independent-error control.
+
+<details><summary>Answer 4</summary>
+
+Variance becomes `1.25`. Expected level remains `3` and bias `-1`; independence does not remove initialization bias.
+
+</details>
+
+### Exercise 5
+
+Can a quieter display establish stability?
+
+<details><summary>Answer 5</summary>
+
+No. This model contains no plant or feedback. A future comparison needs actual errors, timing and task costs before choosing a policy.
+
+</details>
+
+## Source-assisted learner task
+
+Prepare a two-update uncertainty note for fictional GA monitoring values.
+
+**Direct manual baseline:** Expand both updates on paper, keep init
+
+PREREQUISITE streeling/courses/mathematics/en/mat-024-dynamical-systems-stability-feedback.md
+
+
+# Dynamical Systems, Stability and Feedback — What a Derivative, an Exponent and a Rank Can Tell
+
+> **Department of Mathematics** | Stage: Albedo (Intermediate) | Estimated duration: 60 minutes
+
+## Objectives
+
+After this lesson, you will be able to:
+- Find the fixed points and cycles of a map, decide their stability from a multiplier, and say when linearisation decides nothing
+- Compute a Lyapunov exponent as the orbit average of log|f′|, and say what its sign does and does not tell about the attractor
+- Locate period-doubling bifurcations, estimate Feigenbaum's δ from them, and explain why a scan with a fixed tolerance misplaces them
+- Stabilise an unstable fixed point by OGY control, and say when the controller acts linearly, saturates, or is not needed at all
+- Derive the scalar Kalman filter and its steady state, and explain why the Joseph form keeps a covariance honest where the short form does not
+- Decide controllability and observability by the Kalman rank test, and read the margin and the tolerance on which a numerical rank depends
+- Trace what IX's `ix-chaos` and `ix-signal` crates compute, which of their outputs a test pins down, and what they leave out
+
+---
+
+## 1. Fixed Points and Linearisation
+
+A discrete dynamical system iterates a map: x_(k+1) = f(x_k). A **fixed point** x* satisfies f(x*) = x*. Write x_k = x* + e_k; a Taylor expansion gives e_(k+1) = f′(x*) e_k + O(e_k²), so near x* the error is multiplied at each step by the **multiplier** f′(x*). If |f′(x*)| < 1 the fixed point is asymptotically stable: small errors shrink by about that factor per step, and when the multiplier is negative they alternate in sign. If |f′(x*)| > 1 it is unstable. If |f′(x*)| = 1, linearisation decides nothing, and the higher-order terms settle the question. If f′(x*) = 0 the fixed point is **superstable**: the error is squared at each step.
+
+The **logistic map** f(x) = r x (1 − x), with 0 ≤ r ≤ 4, maps [0, 1] into itself. For r > 1 it has a fixed point x* = 1 − 1/r besides 0, and since f′(x) = r(1 − 2x), the multiplier there is f′(x*) = 2 − r. At r = 2.5, x* = 0.6 and the multiplier is −0.5: errors halve and alternate. At r = 2, x* = 1/2 is superstable. At r = 3.2 the multiplier is −1.2, and x* repels.
+
+A **cycle** of period p is a fixed point of the p-th iterate f^p, and by the chain rule its multiplier is the product of f′ along the cycle. For the logistic map the 2-cycle exists for r > 3, and its multiplier works out to 4 + 2r − r². It is stable while |4 + 2r − r²| < 1, that is, for 3 < r < 1 + √6 ≈ 3.449490. It is superstable at r = 1 + √5 ≈ 3.236068, where the cycle passes through x = 1/2. It is born at r = 3, where the fixed point's multiplier passes through −1, and it loses stability where its own multiplier reaches −1.
+
+In n dimensions, x_(k+1) = F(x_k) is linearised with the Jacobian J of F at the fixed point, and the fixed point is stable when every eigenvalue of J has modulus less than 1, that is, when the **spectral radius** ρ(J) is below 1 (MAT-005). For a linear system x_(k+1) = A x_k, ρ(A) < 1 is necessary and sufficient for x_k → 0 from every start. It does not prevent transient growth. A = [[0.5, 10], [0, 0.5]] has ρ(A) = 0.5, but from x_0 = (0, 1) the first component of x_k is 10k · 0.5^(k−1): 10 at the first and second steps, 7.5 at the third, and below 1 only from the eighth. The eigenvalues fix the long run; for a non-normal A the norm, here about 10.02, bounds the short run. CYB-002 describes the dampening of oscillations between repositories in words; the multiplier is its quantitative form.
+
+### Practice Exercise
+
+At which r does the logistic map's fixed point x* = 1 − 1/r lose stability?
+
+> *Solution:* The multiplier is f′(x*) = 2 − r, and |2 − r| < 1 holds for 1 < r < 3. At r = 3 the multiplier reaches −1
+
+PREREQUISITE streeling/courses/cybernetics/en/cyb-018-reconstruct-hidden-state-from-distinct-dynamics.md
+
+
+# Reconstruct Hidden State from Distinct Dynamics
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A Demerzel dashboard reports one combined amount of unresolved work. The same total could hide different proportions of drafting and review work, which would suggest different interventions. Repeating the same aggregate is not automatically a second independent view. Ask whether known state dynamics make the later observation distinguish the hidden components before designing an estimator or blaming a stalled agent.
+
+The earlier guitar lesson makes a mode invisible at one observer position. Here the new issue is temporal: a sensor sees a sum now and another sum after a known update. Write the current observation as the sensor row applied to the initial state. Substitute the transition into the later observation. Stacking those rows creates a small linear system whose determinant tells us whether this exact reconstruction is unique.
+
+In the fixed model the hidden components evolve at different rates. The later total therefore adds a genuinely different equation, and subtraction recovers the second component before the first. In the control both components evolve identically. Any initial pair with the same sum produces the same observed pair. More repeated identical totals cannot recover the missing distinction under that model.
+
+The Harvard notes define the observability matrix; our finite discrete equations show the calculation directly. The two hidden components are pedagogical state coordinates, not calibrated counts of real drafting and review queues. Actual queues have inputs, completions and noise. A future agentic application must identify those effects and test the assumed transition. An exact determinant in an invented case cannot establish live observability or justify acting on reconstructed values without receipts.
+
+## Sources and project boundary
+
+The retained Learn helper separates metadata, title and body, and indexes English module identities. Inspect that representation when naming the artifact and its revision. It does not implement this lesson’s model or supply its invented inputs.
+
+[Prerequisite: cyb-004-observe-before-correcting-a-feedback-loop](../../cybernetics/en/cyb-004-observe-before-correcting-a-feedback-loop.md)
+
+[Prerequisite: gas-015-separate-mode-excitation-from-observation](../../guitar-acoustics/en/gas-015-separate-mode-excitation-from-observation.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading](https://hankyang.seas.harvard.edu/OptimalControlEstimation/app-lti-system-theory.html)
+
+## Fixed model and negative control
+
+[fixed model block]
+
+### Exercise 1
+
+Form the stacked observation matrix.
+
+<details><summary>Answer 1</summary>
+
+The rows are `[1,1]` and `[1,2]`, giving determinant `1` and rank `2`. Two independent equations can identify both unknown coordinates under the stated assumptions.
+
+</details>
+
+### Exercise 2
+
+Reconstruct the state from the outputs.
+
+<details><summary>Answer 2</summary>
+
+The observations are `[7,11]`. Subtracting gives the second component `4`; the first is `3`. This is exact reconstruction in the model, not a measured queue estimate.
+
+</details>
+
+### Exercise 3
+
+Apply the equal-dynamics control.
+
+<details><summary>Answer 3</summary>
+
+Its determinant is `0`, rank is `1` and outputs are `[7,7]`. Reconstruction is `null` because a unique initial pair cannot be selected.
+
+</details>
+
+### Exercise 4
+
+Would an unknown arrival preserve this calculation?
+
+<details><summary>Answer 4</summary>
+
+No. It adds an unmodeled contribution to the later output. Rec
+
+PREREQUISITE streeling/courses/cybernetics/en/cyb-019-test-coupled-feedback-eigenmodes.md
+
+
+# Test Coupled Feedback Eigenmodes
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+GA and IX agents can each reduce their local deviation while triggering extra corrective work in the other repository. Reviewing each local multiplier in isolation can miss this interaction. The question is whether the joint update shrinks every mode, including a mode in which both deviations rise together. Define the coupling explicitly before applying a scalar convergence rule to a multi-agent workflow.
+
+Use a symmetric transition with identical diagonal terms and a cross term in each off-diagonal position. Adding the coordinate equations gives a common-mode multiplier; subtracting them gives an opposing-mode multiplier. These calculations expose the eigenvectors directly, so a general numerical eigensolver is unnecessary. A diagonal entry smaller than unity describes only the system with its neighbour held fixed.
+
+In the fixed case the common mode grows while the opposing mode shrinks and alternates. Starting with equal positive coordinates excites the growing mode, making a short exact trajectory a visible witness. The control reduces the cross term and shrinks both modes. Checking only the displayed starting trajectory would still be weaker than checking both multipliers, because another starting state could excite the other mode.
+
+The earlier convergence lesson supplies error dynamics for a diagonal material calculation. This lesson changes the dependency structure, rather than retuning that example. Harvard’s discrete-time criterion applies to the diagonalizable matrix here. Actual agent handoffs can be delayed, nonlinear and discontinuous; their observed local improvements do not identify these coefficients. A future dogfood study needs aligned revision-bound changes and a measured transition before this algebra could inform coordination.
+
+## Sources and project boundary
+
+The retained Learn helper separates metadata, title and body, and indexes English module identities. Inspect that representation when naming the artifact and its revision. It does not implement this lesson’s model or supply its invented inputs.
+
+[Prerequisite: cyb-008-check-convergence-before-repeating-a-correction](../../cybernetics/en/cyb-008-check-convergence-before-repeating-a-correction.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading](https://hankyang.seas.harvard.edu/OptimalControlEstimation/app-lti-system-theory.html)
+
+## Fixed model and negative control
+
+[fixed model block]
+
+### Exercise 1
+
+Find both mode multipliers.
+
+<details><summary>Answer 1</summary>
+
+They are `1.25` and `-0.25`; the spectral radius is `1.25`. The matrix is unstable despite diagonal entries `0.5`.
+
+</details>
+
+### Exercise 2
+
+Trace the common-mode witness.
+
+<details><summary>Answer 2</summary>
+
+Starting from `[1,1]`, the final vector after `3` steps is `[1.953125,1.953125]`. Each step amplifies the shared deviation.
+
+</details>
+
+### Exercise 3
+
+Apply the reduced-coupling control.
+
+<details><summary>Answer 3</summary>
+
+The eigenvalues become `[0.75,0.25]`, both strictly inside the unit circle. The final common-mode vector is `[0.421875,0.421875]`; stability is `true`.
+
+</details>
+
+### Exercise 4
+
+Can a shrinking opposing trajectory certify stability?
+
+<details><summary>Answer 4</summary>
+
+No. It excites only its own mode. The unexcited common mode can still grow; check every eigenmode under the declared linear model.
+
+</details>
+
+### Exercise 5
+
+What would reject the proposed real coordination rule?
+
+<details><summary>Answer 5</summary>
+
+A measured transition outsi
+
+PREREQUISITE streeling/courses/cybernetics/en/cyb-017-limit-command-change-separately-from-amplitude.md
+
+
+# Limit Command Change Separately from Amplitude
+
+> This lesson uses authored fixed inputs and inspected source passages. The numbers, histories and labels are teaching constructions. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A command can stay inside its allowed range and still jump too quickly. The saturation prerequisite caps magnitude and tracks an integrator. This lesson introduces no integrator: it limits the difference between successive applied commands. An agent must retain the previous applied value and sampling interval to calculate that constraint.
+
+The cited rate-constraint paper’s abstract distinguishes rate constraints as a modeling concern. Our two clipping steps are independently declared and are not that paper’s optimization method. First satisfy the amplitude interval, then the interval reachable from the previous command. Starting inside the amplitude bounds ensures these intervals overlap.
+
+The output need not equal the request at the end of a short sequence. That remaining discrepancy is an intended consequence of the constraint. Reporting only whether the amplitude stayed in range hides the new requirement. A proposed controller DSL should name both units and carry the applied state; substituting the last requested value would change the next feasible interval.
+
+## Sources and project boundary
+
+The retained Learn helper separates frontmatter, heading and body in `parseModule`, and indexes English module names in `englishModuleKeys`. Those inspected representations let a task name its source and metadata; they do not implement the authored operation. The retained practice record instead distinguishes retrieval metrics from learner evidence. Inspect the particular file linked below and retain only the observation it actually supports. No model input in this lesson was estimated from that file.
+
+[Prerequisite: cyb-011-prevent-integral-accumulation-under-saturation](../../cybernetics/en/cyb-011-prevent-integral-accumulation-under-saturation.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Retained project artifact](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json)
+
+[Primary reading](https://arxiv.org/abs/1903.05508)
+
+## Fixed model and control
+
+[fixed model block]
+
+### Exercise 1
+
+Compute the allowed change per update.
+
+<details><summary>Answer 1</summary>
+
+`2*0.5=1` command unit. A rate per second must be multiplied by the actual interval.
+
+</details>
+
+### Exercise 2
+
+Compute applied commands and differences.
+
+<details><summary>Answer 2</summary>
+
+Commands are `[1,2,1]` and differences `[1,1,-1]`. Every difference satisfies the declared bound.
+
+</details>
+
+### Exercise 3
+
+Why does the final request not produce zero output?
+
+<details><summary>Answer 3</summary>
+
+The previous command is `2`; only a change of magnitude `1` is permitted, so the next applied value is `1`.
+
+</details>
+
+### Exercise 4
+
+Apply the wide-rate control.
+
+<details><summary>Answer 4</summary>
+
+Commands are `[4,4,0]`, differences `[4,0,-4]` and final value `0`. Amplitude bounds are unchanged.
+
+</details>
+
+### Exercise 5
+
+Would halving dt preserve the allowed jump?
+
+<details><summary>Answer 5</summary>
+
+No. At the same rate the per-update allowance halves. This statement concerns the constraint, not a measured actuator response.
+
+</details>
+
+## Source-assisted learner task
+
+Annotate a fictional GA load-control trace with both amplitude and change limits.
+
+**Direct manual baseline:** Make request, amplitude-clipped value, previous applied value and feasible-interval columns.
+
+**Falsifier:** An applied jump exceeds rate times interval or the next interval uses the previous 
+
+PREREQUISITE streeling/courses/cybernetics/en/cyb-020-check-disturbance-robust-set-closure.md
+
+
+# Check Disturbance-Robust Set Closure
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A Demerzel coordinator proposes keeping pending work within a small set of admissible states. One quiet trace does not show that the policy survives every allowed arrival. The useful question is whether each safe state maps back into the safe set for every disturbance the model permits. This changes a reassuring example into a quantified safety argument.
+
+Declare the step order first. Our controller serves existing work, clips the remaining queue at zero, and then admits the arriving work. Reversing those operations changes the boundary calculation. List the successors for every state and disturbance pair. If none escapes, the set is closed under the specified transition. Starting inside that set, repeated application stays inside by induction.
+
+The fixed disturbance set permits at most the service quantity on each step. The control enlarges the disturbance set while preserving the controller and proposed safe states. A boundary state then has an escaping successor. Keep that exact pair as a witness rather than averaging it away with more favourable arrivals. The model requires every permitted case, so a rare but allowed witness is decisive.
+
+The source notes distinguish worst-case set assumptions from probability-based constraints. Our finite enumeration has no arrival distribution and therefore cannot report a failure probability. The stale-observation prerequisite asks where a current value could lie; this lesson asks whether a whole set remains safe indefinitely under a known transition. Neither supplies real queue service guarantees. Before proposing a DSL guard, check the manual successor table and identify what actual observations would justify the disturbance and service bounds.
+
+## Sources and project boundary
+
+The retained Learn helper separates metadata, title and body, and indexes English module identities. Inspect that representation when naming the artifact and its revision. It does not implement this lesson’s model or supply its invented inputs.
+
+[Prerequisite: cyb-013-bound-observation-age-before-a-control-decision](../../cybernetics/en/cyb-013-bound-observation-age-before-a-control-decision.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading](https://underactuated.mit.edu/robust.html)
+
+## Fixed model and negative control
+
+[fixed model block]
+
+### Exercise 1
+
+List the fixed successor set.
+
+<details><summary>Answer 1</summary>
+
+It is `[0,1,2]`, entirely inside the safe set. The escaping list is `[]`; closure is `true` under the stipulated step order.
+
+</details>
+
+### Exercise 2
+
+Find the control’s escaping transition.
+
+<details><summary>Answer 2</summary>
+
+The triple `[2,2,3]` starts at the upper safe state and ends outside. The successor set is `[0,1,2,3]`, so closure is `false`.
+
+</details>
+
+### Exercise 3
+
+Why does closure extend to every finite horizon?
+
+<details><summary>Answer 3</summary>
+
+The initial state is inside and each allowed step preserves membership. Induction therefore preserves membership after every finite number of steps, conditional on unchanged assumptions.
+
+</details>
+
+### Exercise 4
+
+Can the table estimate outage probability?
+
+<details><summary>Answer 4</summary>
+
+No. Disturbances are a set of possibilities without probabilities. Closure or an escaping witness addresses worst-case membership, not how frequently an event occurs.
+
+</details>
+
+### Exercise 5
+
+What must precede operational adoption?
+
+<details><summary>Answer 5</summary>
+
+Evidence for step order, service bound, disturb
+
+PREREQUISITE streeling/courses/cybernetics/en/cyb-016-test-feedforward-against-disturbance-mismatch.md
+
+
+# Test Feedforward Against Disturbance Mismatch
+
+> This lesson uses authored fixed inputs and inspected source passages. The numbers, histories and labels are teaching constructions. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+An agent knows an incoming load is expected and proposes compensating before observing an output error. That is a different information path from residual feedback. The direct baseline ignores the disturbance estimate; the proposed command subtracts it before scaling by the assumed plant gain.
+
+The inspected official Caltech extraction describes measured-disturbance feedforward and its dependence on plant knowledge. The inspected search extraction is from the 2009-02-22 text linked below; fetching the originally considered 2007 draft failed. Only the extracted passage was read, not the complete chapter. Our static scalar equation is an authored simplification, with no transfer functions or production tuning inferred from the reading. It makes measurement mismatch visible without hiding it in a controller trace.
+
+Calculate actual output using actual disturbance, not the estimate used to choose the command. Otherwise the model would certify its own prediction. Compare absolute residuals with the direct baseline. The changed-input control deliberately supplies a bad estimate: a mechanism that helps one case can harm another. Any DSL shorthand must retain which quantities are assumed and which would need measurement.
+
+## Sources and project boundary
+
+The retained Learn helper separates frontmatter, heading and body in `parseModule`, and indexes English module names in `englishModuleKeys`. Those inspected representations let a task name its source and metadata; they do not implement the authored operation. The retained practice record instead distinguishes retrieval metrics from learner evidence. Inspect the particular file linked below and retain only the observation it actually supports. No model input in this lesson was estimated from that file.
+
+[Prerequisite: cyb-010-separate-derivative-noise-from-plant-motion](../../cybernetics/en/cyb-010-separate-derivative-noise-from-plant-motion.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Retained project artifact](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json)
+
+[Primary reading](https://www.cds.caltech.edu/~murray/books/AM08/pdf/am08-complete_22Feb09.pdf)
+
+## Fixed model and control
+
+[fixed model block]
+
+### Exercise 1
+
+Compute the uncompensated baseline.
+
+<details><summary>Answer 1</summary>
+
+Command `5` gives output `14` and error `4`. The baseline uses the target and assumed gain, without disturbance subtraction.
+
+</details>
+
+### Exercise 2
+
+Compute the proposed command and output.
+
+<details><summary>Answer 2</summary>
+
+Command `3.5` gives output `11` and error `1`. The actual disturbance remains `4`, although its estimate is `3`.
+
+</details>
+
+### Exercise 3
+
+Why not use the measured disturbance for actual output?
+
+<details><summary>Answer 3</summary>
+
+It would replace the stipulated world with the controller’s estimate and conceal mismatch. Prediction and actual model input occupy different roles.
+
+</details>
+
+### Exercise 4
+
+Apply the overstated-disturbance control.
+
+<details><summary>Answer 4</summary>
+
+Command `0` gives output `4` and error `-6`. Its absolute error exceeds the baseline’s `4`; feedforward is worse here.
+
+</details>
+
+### Exercise 5
+
+What would a project recommendation still need?
+
+<details><summary>Answer 5</summary>
+
+A justified gain, timely disturbance measurement, command limits and actual task evidence. This fixed calculation does not supply those observations.
+
+</d
+
+PREREQUISITE streeling/courses/information-theory/en/inf-013-value-an-evidence-probe-by-expected-information.md
+
+
+# Value an Evidence Probe by Expected Information
+
+> This lesson uses an authored fixed case and inspected sources. Counts, times, labels and signals are invented teaching inputs. Human technical review, fluent-language review, actual learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+Several explanations fit a failed agent handoff. A teammate proposes another probe because it produces a detailed report. Detail is useful only if the outcome distinguishes the explanations that matter. The probe-design prerequisite looks for separating responses; this lesson calculates the expected uncertainty left by a declared partition of hypotheses. It keeps the probability model explicit instead of treating the longest report as the most informative one.
+
+The prior assigns equal probability to the authored alternatives. A deterministic probe groups hypotheses by the outcome they predict. Within each group, renormalize the original probabilities before calculating entropy. Average those posterior entropies using the probability of each outcome. This expectation is formed before seeing the probe result. It does not describe a measured report or justify changing the prior after an unrecorded conversation.
+
+[Shannon](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf)’s original entropy definition supplies the logarithmic uncertainty measure. Here base choice gives bits, and equally likely alternatives permit a direct counting check. The balanced partition leaves the same number of alternatives after either outcome. The constant-output control leaves all alternatives possible. That contrast explains why repeating a summary with no new distinguishing observation can add words without adding information under the model.
+
+The retained project record explicitly rejects treating a reread as another trial. It also warns that historical renderer results do not calibrate an authored prior. A composable probe stage could carry the hypothesis set, likelihood model and outcome identity; whether that makes review easier remains a dogfood hypothesis. The direct baseline is a handwritten partition and entropy table. Information gain alone cannot choose the best product action because probe cost and the consequences of remaining errors require another decision model.
+
+## Sources and project boundary
+
+Read the prerequisite before using the model. Inspect the linked retained project artifact at the revision recorded in the packet, and identify the field or branch that supports the stated source observation. The source gives a representation or declared behavior; it does not turn the invented case into an observed project result. The primary reading supplies the named concept within its stated scope.
+
+[Prerequisite: inf-001-entropy-of-governance](../../information-theory/en/inf-001-entropy-of-governance.md)
+
+[Prerequisite: cog-008-choose-probes-that-distinguish-reasoning-models](../../cognitive-science/en/cog-008-choose-probes-that-distinguish-reasoning-models.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/pilot-value-2026-10-22/source-observations.json)
+
+[Primary reading: Shannon 1948 corrected reprint, section 6](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf)
+
+## Fixed model and control
+
+[fixed model block]
+
+### Exercise 1
+
+Compute the prior entropy of the authored alternatives.
+
+<details><summary>Answer 1</summary>
+
+The prior entropy is `2` bits. Each alternative has probability `0.25`, and the entropy equals `log2(4)`. This is uncertainty inside the stipulated model, not uncertainty measured from actual agent failures.
+
+</details>
+
+### Exercise 2
+
+Calculate outcome probabilities and expected posterior entropy.
+
+<details><s
+
+PREREQUISITE streeling/courses/information-theory/en/inf-003-verdict-distribution-drift.md
+
+
+# Measuring Verdict Distribution Drift with Jensen-Shannon Divergence
+
+> **Archive and transfer scope.** The technical text below comes from an archived draft. Historical statements about pending draft translations or an absent Learn import or build refer to that earlier stage; this [transfer record](../../../../code/streeling/evidence/representation-release-2026-10-22/README.md) records the current translation drafts, import and checks. Other unexecuted-experiment boundaries remain in force. Human subject, fluent-language and learner reviews remain pending.
+
+> **Department of Information Theory** | Level: Intermediate | Estimated duration: 35 minutes | Status: English draft; subject, learner, localization, and publication review pending
+
+## Objectives
+
+After this lesson, you will be able to:
+
+- Turn comparable IX analyzer verdict counts into aligned probability vectors.
+- Calculate directional Kullback–Leibler (KL) divergence and symmetric Jensen–Shannon (JS) divergence in the units returned by IX.
+- Explain why a new category can make one KL direction error while JS remains finite.
+- Use a divergence value as a prompt to inspect per-net evidence, with explicit controls for analysis limits and batch composition.
+
+## The project question
+
+IX's [pinned Petri analyzer](https://github.com/GuitarAlchemist/ix/blob/bd1336b7c4045e427dcdbe80b102790e45da5ce1/crates/ix-petri/src/analysis.rs#L83-L105) serializes a property's result as `holds`, `fails`, or `unknown`. The distinction matters: a `fails` result can carry a counterexample, while `unknown` says the analyzer did not decide the property within its exploration limits. If an engineer compares two runs of a set of nets, a shift in the mix of those results might deserve attention. How can the engineer quantify the shift without mistaking a single number for a proof of regression?
+
+The falsifiable question is: **For one fixed property, fixed set of net identities, fixed analyzer revision, and fixed limits, how far did the category distribution move after the net definitions changed?** IX already supplies [KL and JS functions](https://github.com/GuitarAlchemist/ix/blob/bd1336b7c4045e427dcdbe80b102790e45da5ce1/crates/ix-math/src/inference.rs#L156-L222), also exposed as [DuckDB scalar functions](https://github.com/GuitarAlchemist/ix/blob/bd1336b7c4045e427dcdbe80b102790e45da5ce1/crates/ix-duck/src/inference.rs#L186-L210). We can compute a reproducible answer for a small **synthetic** count fixture. We have not measured any production IX batch or user-facing quality change.
+
+INF-001 used entropy to describe uncertainty within one policy-token distribution. INF-002 showed that GA's compact OPTIC-K mapping discards distinctions between individual vectors. Here the object is different: we compare **two distributions over the same named verdict categories**. A drift score says something about aggregate frequencies. It cannot recover which net changed, why it changed, or whether a changed result is good.
+
+## 1. Choose an observation with a stable meaning
+
+The pinned analyzer's [`Verdict<T>` enum](https://github.com/GuitarAlchemist/ix/blob/bd1336b7c4045e427dcdbe80b102790e45da5ce1/crates/ix-petri/src/analysis.rs#L83-L95) has three tags. Its `holds()` helper returns true only for `Holds`, so `Unknown` is not silently promoted to a pass. The `Analysis` report contains several **different properties**, including `deadlock_free`, `bounded`, `quasi_live`, `live`, and `reversible`. Pooling all properties into one count would mix questions with different proof conditions. For this lesson, choose only `deadlock_free`, one verdict per net, and preserve the fixed order `[holds, fails, unknown]`.
+
+The [deadlock-freedom branch](https://github.com/GuitarAlchemist/ix/blob/bd1336b7c4045e427dcdbe80b102790e45da5ce
+
+PREREQUISITE streeling/courses/information-theory/en/inf-020-separate-parity-detection-from-correction.md
+
+
+# Separate Parity Detection from Correction
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+An agent receives a compact evidence tag and observes that the record parses correctly. Parsing does not establish that the transmitted bits were preserved. The codebook lesson examines a different problem, where intact bits are interpreted under the wrong mapping. Here sender and receiver agree on meaning, and the channel changes selected bits before decoding.
+
+Append a bit chosen to make the total number of set bits even. On reception, compute the same parity condition. Flipping one bit changes the total parity, so the checker detects a violated condition. It does not reveal which position changed. Multiple candidate original messages can satisfy the condition, so choosing a repair without extra information would be guessing.
+
+The fixed input changes one data position. The control changes two positions and passes the parity check while carrying a different message. Keep both the syndrome and actual Hamming distance in the teaching record: the sender-side comparison knows which bits changed, whereas an ordinary receiver does not possess that reference. A zero syndrome means only that this check did not detect a violation.
+
+The University of New Brunswick course states the single-error detection and even-error limitation. Our short codeword makes both boundaries inspectable by hand. It supplies neither a cryptographic digest nor a transport recommendation for Demerzel evidence. A production receipt needs identity, authorization and semantic revision binding as separate questions. Before adding a composable check stage, name its failure model and ensure its output says detection status rather than claiming a correct, trusted or repaired message.
+
+## Sources and project boundary
+
+The retained Learn helper separates metadata, title and body, and indexes English module identities. Inspect that representation when naming the artifact and its revision. It does not implement this lesson’s model or supply its invented inputs.
+
+[Prerequisite: inf-014-retain-message-codebook-versions](../../information-theory/en/inf-014-retain-message-codebook-versions.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading](https://www.ece.unb.ca/tervo/ece4253/ecc.shtml)
+
+## Fixed model and negative control
+
+[fixed model block]
+
+### Exercise 1
+
+Encode the data with even parity.
+
+<details><summary>Answer 1</summary>
+
+The parity bit is `1`, and the complete codeword is `[1,0,1,1,1]`. Count the appended bit as part of the checked word, not as another data symbol.
+
+</details>
+
+### Exercise 2
+
+Check the single substitution.
+
+<details><summary>Answer 2</summary>
+
+The received word is `[1,1,1,1,1]`, syndrome `1`, and detection `true`. Its Hamming distance from the reference is `1`; the syndrome alone does not name the position.
+
+</details>
+
+### Exercise 3
+
+Apply the double-substitution control.
+
+<details><summary>Answer 3</summary>
+
+The received word is `[1,1,0,1,1]`, syndrome `0`, detection `false`, and Hamming distance `2`. A passing parity condition can accompany altered data.
+
+</details>
+
+### Exercise 4
+
+Can the receiver correct a detected error?
+
+<details><summary>Answer 4</summary>
+
+Not from this syndrome alone. It does not identify the changed bit. Retain the refusal to guess a correction and request the information required by the actual channel protocol.
+
+</details>
+
+### Exercise 5
+
+Does passing establish trusted evidence?
+
+<details><summary>Answer 5</summary>
+
+No. The check addresses a narrow corruption pattern. It establishes neither sende
+
+PREREQUISITE streeling/courses/information-theory/en/inf-012-retain-event-order-in-a-handoff-summary.md
+
+
+# Retain Event Order in a Handoff Summary
+
+> **Draft scope.** Source-assisted authored fixed models. Human technical, fluent-language and learner decisions remain pending. No live fleet, production controller, user telemetry or learning improvement is claimed. The validation journal distinguishes tests actually executed from source reading and planned checks.
+
+## Sources to inspect
+
+- [inf-004-information-loss-in-agent-handoffs.md](../../information-theory/en/inf-004-information-loss-in-agent-handoffs.md)
+- [antigravity-bridge.ps1](https://raw.githubusercontent.com/GuitarAlchemist/ga/dc2e74cbd992a298f67efb928b5b3754615e1924/Scripts/antigravity-bridge.ps1)
+
+A handoff says that a lesson was edited and approved. Which happened first, and which revision did the approval cover? The same event counts can support opposite integration decisions. The handoff prerequisite demonstrates a collision between different states. This course gives an order-sensitive event fold that makes the collision calculable rather than relying on the tone of a summary.
+
+The pinned GA bridge writes lightweight context and a caller-supplied note. Its timestamp locates that note; it does not reconstruct every earlier edit and approval. Read the handoff-writing branch before designing a richer summary. Our event histories are authored records for a single source stream. They do not assert that the bridge enforces an approval lifecycle or supplies a distributed event log.
+
+The state consists of the current revision and whether that exact revision has approval. An edit changes revision and invalidates the old approval. An approval names its target revision. Apply the fold in the supplied causal order and keep each intermediate state. In one history, approval precedes the later edit. In the other, the later revision is approved after the edit. Counting event types erases that distinction.
+
+Retaining a clock field alone is insufficient if events come from unsynchronized sources or if the observation is incomplete. This lesson assumes a complete causal sequence and therefore does not solve distributed ordering. In practice, an explicit parent revision or dependency can express necessary precedence without inventing an order between unrelated events. The negative control permutes notes that have no state-changing effect; the fold should ignore them under its stated policy.
+
+For the source-assisted task, read the bridge's captured fields and the prerequisite's integration-evidence discussion. Write each authored history as a manual state table, then produce the shortest summary that still supports its final decision. Ask an assistant to recover that decision using only your summary. Reject it if it merges the two histories, grants approval to a different revision, or invents successful tests from a timestamp. Keep the failed summary as a concrete counterexample.
+
+## Fixed case and expected calculations
+
+[fixed model block]
+
+## Retain a source-assisted learner attempt
+
+Work from the pinned inputs listed above. Before asking for assistance, write your own prediction for the fixed case and its negative control, including the unit of every quantity and the exact comparison boundary. A short paper table is the direct manual baseline. Keep intermediate values, especially any result that contradicts your first prediction. This is an explanation task using existing sources and fixed data; it does not require installing a package, calling a paid service or introducing a new program.
+
+Next use an assistant to locate the relevant source passage and critique your calculation. Retain the original prompt, the response, the source location it cited and the changes you accepted or rejected. A citation is useful only when its inspected content supports the specific claim. A declared st
+
+PREREQUISITE streeling/courses/information-theory/en/inf-019-check-concatenated-codeword-ambiguity.md
+
+
+# Check Concatenated Codeword Ambiguity
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+An agent handoff compresses status symbols into short bit strings. Both ends select the same codebook, and the transmitted bits arrive intact. The receiving agent can still be unable to tell where one symbol ends and the next begins. Agreement on meaning and integrity of bytes do not by themselves establish a uniquely decodable symbol sequence.
+
+Write the codeword beside every symbol before concatenating anything. A prefix-free codebook has no codeword that starts another complete codeword. A left-to-right decoder can therefore finish a symbol without waiting for an unseen separator. For the fixed codebook, trace the supplied bit stream and retain the boundary positions. This is an elementary argument about the declared finite mapping, not an implementation of an internet compression protocol.
+
+The control supplies an explicit ambiguous stream. It can name one symbol or a pair of symbols, both consuming all bits. Stopping at the first plausible parse would hide the ambiguity. Enumerate every complete parse before reporting a unique decoding. A prefix violation is a useful warning, but some non-prefix codes remain uniquely decodable; do not replace a sufficient condition with an unsupported equivalence.
+
+RFC HPACK describes concatenated Huffman codes with their own framing and padding requirements. Our toy mapping borrows the communication question, not its wire format or code table. The prior lessons retain codebook versions and byte lengths; this operation concerns boundaries inside a concatenated code stream. A future DSL shorthand must make separators, lengths or a decoding convention explicit. The direct manual baseline is small enough to examine every alternative without creating a transport service.
+
+## Sources and project boundary
+
+The retained Learn helper separates metadata, title and body, and indexes English module identities. Inspect that representation when naming the artifact and its revision. It does not implement this lesson’s model or supply its invented inputs.
+
+[Prerequisite: inf-014-retain-message-codebook-versions](../../information-theory/en/inf-014-retain-message-codebook-versions.md)
+
+[Prerequisite: inf-018-frame-text-by-utf8-byte-length](../../information-theory/en/inf-018-frame-text-by-utf8-byte-length.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading](https://www.rfc-editor.org/rfc/rfc7541.html)
+
+## Fixed model and negative control
+
+[fixed model block]
+
+### Exercise 1
+
+Decode the fixed stream completely.
+
+<details><summary>Answer 1</summary>
+
+The only complete sequence is `[A,B,C]`. Its boundaries follow the codewords `0`, `10`, `11`; no other symbol sequence consumes the stream.
+
+</details>
+
+### Exercise 2
+
+Identify the control’s prefix violation.
+
+<details><summary>Answer 2</summary>
+
+Symbol `A` is a proper prefix of `B`. The ordered violation list is `[[A,B]]`; the codebook is not prefix-free.
+
+</details>
+
+### Exercise 3
+
+Exhibit both complete control parses.
+
+<details><summary>Answer 3</summary>
+
+Stream `01` decodes as `[A,C]` or `[B]`, giving `2` complete parses. Both must remain visible; choosing the preferred verdict would invent information.
+
+</details>
+
+### Exercise 4
+
+Does every prefix violation prove ambiguous decoding?
+
+<details><summary>Answer 4</summary>
+
+No. Prefix-free is a sufficient immediate-decoding property. For this control, ambiguity is established by the actual colliding sequences, not by an overgeneralized converse.
+
+</details>
+
+### Exercise 5
+
+Would a byte checksu
+
+PREREQUISITE streeling/courses/information-theory/en/inf-014-retain-message-codebook-versions.md
+
+
+# Retain Message Codebook Versions
+
+> This lesson uses an authored fixed case and inspected sources. Counts, times, labels and signals are invented teaching inputs. Human technical review, fluent-language review, actual learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A compact handoff replaces verdict words with small tags. Every tag arrives intact, yet the receiving agent reports the opposite verdict. The information-loss prerequisite asks which fields disappear from a summary. This lesson isolates a different failure: the same symbols have different meanings under two perfectly invertible codebooks. Nothing in a successful byte transfer establishes that sender and receiver selected the same interpretation.
+
+The codebook version is part of the message context. Decode using the sender’s declared mapping to obtain the intended labels, then decode the unchanged tags using the receiver’s mapping. Count mismatches by position rather than comparing only totals. Reversing the mapping can preserve tag frequency and message length while changing every verdict. A checksum over tags would detect neither this stipulated disagreement nor a missing semantic version.
+
+[Shannon](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf)’s communication problem separates a selected message from its transmitted representation. Our case assumes an error-free channel and concentrates on the chosen mappings. [W3C](https://www.w3.org/TR/2013/REC-prov-dm-20130430/) provenance motivates retaining the identity of the entity that supplies a derivation rule. Neither reference defines a new GA message schema. The Learn parser’s separate metadata and body fields provide a concrete project representation to inspect, without claiming they implement these binary tags.
+
+The control changes the receiver’s codebook selection while preserving every tag. This makes the missing agreement explicit and gives a direct manual baseline. A proposed DSL may abbreviate the mapping, but it must keep codebook identity recoverable and leave an unknown version unresolved. Guessing from a plausible verdict reverses the evidential direction: the desired meaning should not select the decoder after seeing the answer. No version migration or production compatibility policy is implemented here.
+
+## Sources and project boundary
+
+Read the prerequisite before using the model. Inspect the linked retained project artifact at the revision recorded in the packet, and identify the field or branch that supports the stated source observation. The source gives a representation or declared behavior; it does not turn the invented case into an observed project result. The primary reading supplies the named concept within its stated scope.
+
+[Prerequisite: inf-004-information-loss-in-agent-handoffs](../../information-theory/en/inf-004-information-loss-in-agent-handoffs.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading: Shannon 1948 corrected reprint, section 6](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf)
+
+[Primary reading: W3C Recommendation 2013-04-30](https://www.w3.org/TR/2013/REC-prov-dm-20130430/)
+
+## Fixed model and control
+
+[fixed model block]
+
+### Exercise 1
+
+Decode the sent tags using the sender’s version.
+
+<details><summary>Answer 1</summary>
+
+The intended labels are `[fail,pass,pass]` under `v2`. The mapping, not the visual size of a tag, determines its meaning. Keep that version attached before comparing any verdict counts.
+
+</details>
+
+### Exercise 2
+
+Decode the same tags using the receiver’s version and count disagreements.
+
+<details><summary>Answer 2</summary>
+
+The receiver obtains `[pass,fail,fail]` under `v1`. There are `3` pos
+
+PREREQUISITE streeling/courses/network-science/en/net-014-bound-throughput-with-a-capacity-cut.md
+
+
+# Bound Throughput with a Capacity Cut
+
+> This lesson uses authored fixed inputs and inspected source passages. The numbers, histories and labels are teaching constructions. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A coordinator adds routes between fictional evidence stages and claims more throughput because more paths exist. Several paths can share their final link. Reachability and route count do not account for capacity conservation. The scheduling prerequisite measures a finite completion horizon; this model instead bounds an idealized steady rate.
+
+NetworkX’s official flow documentation defines capacities and returns a flow value. We use that concept without calling the package. Show a feasible flow and a cut of equal capacity: the former is a lower witness, the latter an upper bound. Their agreement certifies the optimum for this authored graph. Counting paths alone supplies neither witness.
+
+The sink cut is especially easy to inspect here. Every delivered unit must enter the sink on one of its incoming edges. The control reduces an incoming capacity while keeping every edge present, so all routes still exist but the rate bound drops. Translating this result into a real agent pipeline would require compatible units, actual capacities and workload assumptions; no such measurements are supplied.
+
+## Sources and project boundary
+
+The retained Learn helper separates frontmatter, heading and body in `parseModule`, and indexes English module names in `englishModuleKeys`. Those inspected representations let a task name its source and metadata; they do not implement the authored operation. The retained practice record instead distinguishes retrieval metrics from learner evidence. Inspect the particular file linked below and retain only the observation it actually supports. No model input in this lesson was estimated from that file.
+
+[Prerequisite: net-010-compute-critical-paths-with-resource-assumptions](../../network-science/en/net-010-compute-critical-paths-with-resource-assumptions.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Retained project artifact](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json)
+
+[Primary reading](https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.flow.maximum_flow.html)
+
+## Fixed model and control
+
+[fixed model block]
+
+### Exercise 1
+
+Give a feasible fixed-case flow.
+
+<details><summary>Answer 1</summary>
+
+Send `2` units through `s-a-t` and `2` through `s-b-t`, with `0` on `a-b`. Total flow is `4` and conservation holds.
+
+</details>
+
+### Exercise 2
+
+Give a matching upper bound.
+
+<details><summary>Answer 2</summary>
+
+The edges entering `t` have total capacity `4`. Every feasible delivered flow crosses that cut, so `4` is also an upper bound.
+
+</details>
+
+### Exercise 3
+
+Count simple routes.
+
+<details><summary>Answer 3</summary>
+
+There are `3`: `s-a-t`, `s-b-t` and `s-a-b-t`. Route count is not flow capacity.
+
+</details>
+
+### Exercise 4
+
+Apply the reduced-capacity control.
+
+<details><summary>Answer 4</summary>
+
+Maximum flow and sink-cut capacity become `3`; simple route count remains `3`. Removing capacity need not remove reachability.
+
+</details>
+
+### Exercise 5
+
+Does the optimum guarantee a project delivery rate?
+
+<details><summary>Answer 5</summary>
+
+No. Steady divisible flow omits task granularity, failures, timing and semantic compatibility. The numerical optimum is conditional on this model.
+
+</details>
+
+## Source-assisted learner task
+
+Prepare a capacity-cut note for an authored Learn evidence pipeline.
+
+**Direct manual baseline:** Draw conservation balances, exhibit a feasible flow 
+
+PREREQUISITE streeling/courses/mathematics/en/mat-019-graphs-centrality-spectral.md
+
+
+# Graphs, Centrality and Spectral Structure — Which Vertex Matters, and What the Laplacian Counts
+
+> **Department of Mathematics** | Stage: Albedo (Intermediate) | Estimated duration: 50 minutes
+
+## Objectives
+
+After this lesson, you will be able to:
+- Describe a graph by its adjacency, degree and Laplacian matrices, and read walks and components from them
+- Define PageRank as the stationary distribution of a random surfer, bound the error of its power iteration, and say what becomes of the rank of a vertex without out-links
+- Compute degree, closeness, betweenness and eigenvector centrality, and build a graph on which they disagree
+- Prove that the Laplacian is positive semidefinite and that the multiplicity of its eigenvalue 0 is the number of connected components
+- Split a graph with the Fiedler vector, and say when that vector is not determined
+- Trace what IX's `Graph`, its handlers and `compute_laplacian_spectrum` guarantee, and where their comments, catalogue and tests promise more than the code delivers
+
+---
+
+## 1. Graphs as Matrices
+
+A graph has n vertices, numbered 0 to n − 1, and a set of edges. In a directed graph an edge i → j has a direction; in an undirected graph an edge {i, j} is an unordered pair. The **adjacency matrix** A has A_ij = 1 when there is an edge from i to j and 0 otherwise, or a weight w_ij > 0 in a weighted graph; for an undirected graph A is symmetric. The **degree** of a vertex is d_i = Σ_j A_ij, and D = diag(d_1, …, d_n). In an unweighted graph, the entry (Aᵏ)_ij counts the walks of length k from i to j, since a walk i → l → j contributes A_il A_lj to (A²)_ij, and so on. Two vertices of an undirected graph lie in the same **connected component** when a walk joins them; a directed graph is weakly connected when its edges, with their direction ignored, connect it.
+
+For an undirected graph, A is symmetric, so the spectral theorem of MAT-005 gives real eigenvalues λ_1 ≥ … ≥ λ_n and an orthonormal basis of eigenvectors. Since A has nonnegative entries, the Perron–Frobenius theorem adds more (Horn and Johnson 2013, ch. 8): λ_1 ≥ |λ_i| for every i, and when the graph is connected, λ_1 is simple and has an eigenvector with positive entries, the **Perron vector**. The bound |λ_n| ≤ λ_1 can be an equality: a connected graph has λ_n = −λ_1 exactly when it is **bipartite**, when its vertices split into two sides with every edge between them (Brouwer and Haemers 2012). A star, a path and an even cycle are bipartite; a triangle is not. This matters for power iteration (§3), which needs one eigenvalue strictly larger in modulus than all the others.
+
+### Practice Exercise
+
+Show that the spectrum of a bipartite graph is symmetric about 0: if λ is an eigenvalue, so is −λ, with the same multiplicity.
+
+> *Solution:* Number the vertices of one side first, so that A = [[0, B], [Bᵀ, 0]]. If (u, v) is an eigenvector for λ, then B v = λ u and Bᵀ u = λ v. Then A (u, −v) = (−B v, Bᵀ u) = (−λ u, λ v) = −λ (u, −v), so −λ is an eigenvalue. The map (u, v) ↦ (u, −v) is invertible and sends the eigenspace of λ onto that of −λ, so the multiplicities are equal. For the star with centre 0 and leaves 1, 2 and 3, the eigenvalues are √3, 0, 0 and −√3.
+
+---
+
+## 2. PageRank
+
+PageRank (Brin and Page 1998; Page, Brin, Motwani and Winograd 1999) ranks the vertices of a directed graph by the long-run behaviour of a random surfer. From vertex i, with probability α, the **damping factor**, the surfer follows one of the out-links of i, each with probability 1/out(i); with probability 1 − α, the surfer jumps to a vertex drawn uniformly. A vertex without out-links, a **dangling node**, needs a rule of its own, and the usual one sends the surfer from it to a uniform vertex. Write P for the matrix of the out-links, with P_ij = 1/out(i) for an ed
+
+PREREQUISITE streeling/courses/network-science/en/net-017-match-simultaneous-roles-without-double-booking.md
+
+
+# Match Simultaneous Roles without Double Booking
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A Demerzel capability table gives every requested role at least one named candidate. A coordinator then assumes the roles can all run together. That inference double-books a worker when several roles have only the same candidate. The earlier coverage course counts available routes per class; this lesson asks whether distinct workers can occupy all simultaneous roles.
+
+Draw a bipartite graph with roles on one side and workers on the other. An edge means the declared worker may fill that role. A matching uses no vertex twice. To show feasibility, write the complete matching. To show infeasibility, find a subset of roles whose combined candidate set is smaller than the subset. Those roles cannot receive distinct workers, regardless of how flexible unrelated roles are.
+
+In the fixed case, drafting and review each have a candidate but share the same sole candidate. The translation role has alternatives, which do not repair that obstruction. The control adds a review edge and permits a full assignment. Retain both the assignment witness and the deficient subset; a headline count of covered roles loses the reason that the first case fails.
+
+NetworkX documents maximum-cardinality bipartite matching. Our tiny example is solved by inspection and explicit neighbour counting, without installing or executing the package. The throughput prerequisite concerns capacities across a network; here worker exclusivity and role identity are the central contract. Real human review may additionally require independence, expertise and consent. Candidate declarations do not establish any of those conditions. A future agent scheduler must preserve such constraints before treating this finite matching as permission to dispatch work.
+
+## Sources and project boundary
+
+The retained Learn helper separates metadata, title and body, and indexes English module identities. Inspect that representation when naming the artifact and its revision. It does not implement this lesson’s model or supply its invented inputs.
+
+[Prerequisite: net-003-worker-lane-coverage-and-fragility](../../network-science/en/net-003-worker-lane-coverage-and-fragility.md)
+
+[Prerequisite: net-014-bound-throughput-with-a-capacity-cut](../../network-science/en/net-014-bound-throughput-with-a-capacity-cut.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading](https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.bipartite.matching.maximum_matching.html)
+
+## Fixed model and negative control
+
+[fixed model block]
+
+### Exercise 1
+
+Does marginal coverage pass?
+
+<details><summary>Answer 1</summary>
+
+Yes: every role has at least one candidate, so coverage is `true`. This says nothing yet about distinct simultaneous assignments.
+
+</details>
+
+### Exercise 2
+
+Find the allocation obstruction.
+
+<details><summary>Answer 2</summary>
+
+Roles `[draft,review]` have neighbours `[w1]`, giving deficiency `1`. No injective assignment can fill both roles in the same window.
+
+</details>
+
+### Exercise 3
+
+Give a maximum fixed matching.
+
+<details><summary>Answer 3</summary>
+
+The declared tie rule selects `[[draft,w1],[translate,w2]]`, with size `2`. Leaving review unfilled is explicit; silently reusing the drafting worker would violate exclusivity.
+
+</details>
+
+### Exercise 4
+
+Apply the extra-edge control.
+
+<details><summary>Answer 4</summary>
+
+The full matching is `[[draft,w1],[review,w2],[translate,w3]]`, with size `3`; the deficient-subset field is `null`. All wor
+
+PREREQUISITE streeling/courses/network-science/en/net-007-separate-dag-readiness-from-admission.md
+
+
+# Separate DAG Readiness from Worker Admission
+
+> **Draft scope.** Five pinned public IX files, three actual topology-tool responses, three bounded execution-tool responses and authored schedules. Human technical review, fluent-language review, learner attempts and deployed course HTML verification remain pending. No production scheduler, worker limit, retry mechanism or editor change was implemented; actual worker concurrency was not measured.
+
+## The project question
+
+An IX pipeline editor shows eight independent nodes. May an agent launch eight workers because all nodes are ready? A dependency graph answers which inputs precede a computation. Runtime admission additionally needs capacity and applicable policy. [NET-005](net-005-fanout-results-and-dependency-joins.md) examined joins and retained branch results; here we examine the gap between graph structure and execution resources.
+
+The public [IX DAG implementation](https://github.com/GuitarAlchemist/ix/blob/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/dag.rs) rejects cycles and computes topological orders and levels. All source observations in this lesson use commit `456df065ee837e33b5bbe22a4df0616a4fcb76e5`. Actual tool responses have an unknown service revision and remain separate evidence.
+
+## 1. A level describes dependency readiness
+
+The [actual topology probes](../../../../code/streeling/evidence/retry-admission-2026-10-22/topology-tool-probes.json) include a diamond with edges a to b, a to c, b to d and c to d. Its level sets are a, then b and c, then d. The tool reports four nodes, four edges and maximum parallelism 2. Here that field describes the largest returned level, not a measurement of running workers.
+
+A second input has eight nodes and no edges. It reports one level containing all eight and maximum parallelism 8. A cyclic two-node input returns an error. Cycle rejection protects the graph's acyclic structure; it does not choose how many ready nodes should execute simultaneously.
+
+### Practice exercise 1: interpret the reported width
+
+Give the diamond's level sets and reported width. If the machine has only one available worker slot, do the dependencies become cyclic or invalid?
+
+> **Answer:** The levels are a, then b and c, then d; the reported width is 2. One worker slot does not make the graph cyclic. It changes the possible execution schedule: b and c can run sequentially while preserving every dependency.
+
+## 2. Add a resource constraint explicitly
+
+The [authored scheduling model](../../../../code/streeling/evidence/retry-admission-2026-10-22/admission-model.json) assumes eight independent jobs, each lasting one tick, two workers, no overhead and no preemption. Four waves of two jobs finish in 4 ticks, with at most 2 active jobs. Readiness remains 8 initially even though only 2 can be admitted.
+
+For the diamond, assume durations a=1, b=4, c=2 and d=1 ticks. Two workers can run a from 0 to 1, b from 1 to 5, c from 1 to 3 and d from 5 to 6. The a-b-d path takes 6 ticks; one worker requires 8 ticks for all four jobs. These are constructed schedules under declared costs, not measured IX timings. Topology alone did not supply those costs.
+
+### Practice exercise 2: calculate a capacity-aware schedule
+
+How many waves do the eight unit jobs need with two slots? For the weighted diamond, give the two-worker completion time and the one-worker total. Does a topology width of 2 imply a speedup of 2?
+
+> **Answer:** The eight jobs need four waves and 4 ticks. The diamond finishes in 6 ticks with the given two-worker schedule, versus 8 with one worker. The speedup is `8/6`, not 2: the dependency path and unequal durations constrain the gain.
+
+## 3. Read control flow rather than trusting a parallelism label
+
+The pinned [ix-agent runner](https://githu
+
+PREREQUISITE streeling/courses/network-science/en/net-009-detect-global-cycles-in-a-panel-stack.md
+
+
+# Detect Global Cycles in a Panel Stack
+
+> **Draft scope.** Authored abstract graphs and pinned source/test reading. No new FOLD geometry, native IX run, physical panel test or manufacturing trial was produced. Human technical, artisan, fluent-language and learner reviews remain pending; deployed course HTML is a separate check.
+
+## The project question
+
+Can the observatory accept every individual weave crossing and still fail to place rigid panels at globally consistent heights? The pinned [IX parallel-panel ADR](https://github.com/GuitarAlchemist/ix/blob/d7c22fdd6a62becb66b9d7246ea85850e7c55854/docs/adr/0007-origami-thickness-as-parallel-rigid-panels.md) distinguishes a local ply reading from one height per parallel rigid panel. Its thickness is full thickness in crease-pattern units, not automatically millimetres. [SEM-008](../../semiotics/en/sem-008-interpret-layer-order-relative-to-the-reference-normal.md) explains how a supplied layer relation becomes an interpreted above/below statement.
+
+Here a directed edge means lower panel to upper panel. The [thickness source](https://github.com/GuitarAlchemist/ix/blob/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/thickness.rs#L142-L204) uses that convention after merging faces connected by flat joints. Its unit graph edge is not a physical force or a measured height.
+
+## 1. Sum the global constraints
+
+Use four authored panels and edges `A->B`, `B->C`, `C->D`, `D->A`. For positive full thickness `t`, require `z_upper>=z_lower+t` for every edge. Summing cancels all four height variables and yields `0>=4*t`. Positive thickness makes that impossible in this parallel-panel model.
+
+Each crossing can still have a locally coherent lower/upper pair. The contradiction appears when those relations must share the same panel height across different crossings. These authored labels are not the face IDs of a newly executed IX fixture.
+
+### Practice exercise 1: exhibit the global contradiction
+
+Write the four separation inequalities and their sum for `t=0.5` crease-pattern units. Does failure of this global model mean that every individual crossing was locally contradictory?
+
+> **Answer:** The inequalities are `z_B>=z_A+t`, `z_C>=z_B+t`, `z_D>=z_C+t` and `z_A>=z_D+t`. Their sum gives `0>=4*t`, hence `0>=2`, which is false. The cycle couples different crossings through one height per panel; a single local crossing need not contain a contradiction.
+
+## 2. Preserve the zero-thickness boundary
+
+At `t=0`, the same inequalities allow all heights to coincide. The directed graph still has a cycle. The pinned [weave test](https://github.com/GuitarAlchemist/ix/blob/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/tests/thickness.rs#L281-L305) expects layer analysis to pass while the rigid reading reports a cycle. Refusal is conditional on positive thickness.
+
+For that cyclic source case, `rigid.levels` and `rigid.height` remain null even at zero thickness; the separate ply height is zero. Do not replace an absent rigid witness by an invented numeric witness. These are assertions read in test source, not fresh test results.
+
+### Practice exercise 2: separate graph state from refusal
+
+At zero thickness, may an adapter rewrite “not refused” as “acyclic”? What changes at positive thickness, and does either result certify manufacture?
+
+> **Answer:** No. The graph remains cyclic; zero thickness only disables this positive-thickness rigid-stack refusal. At positive thickness the same cycle refuses that model, with no rigid level or height witness. Neither an acceptance nor a refusal certifies whether a real woven, tilted or deforming object can be made.
+
+## 3. Remove an edge and compute levels
+
+Delete `D->A`. The remaining chain has levels `A=0`, `B=1`, `C=2`, `D=3`. The longest directed 
+
+PREREQUISITE streeling/courses/network-science/en/net-011-separate-reachability-from-semantic-compatibility.md
+
+
+# Separate Reachability from Semantic Compatibility
+
+> **Draft scope.** Source-assisted authored fixed models. Human technical, fluent-language and learner decisions remain pending. No live fleet, production controller, user telemetry or learning improvement is claimed. The validation journal distinguishes tests actually executed from source reading and planned checks.
+
+## Sources to inspect
+
+- [net-002-capability-graphs-and-projections.md](../../network-science/en/net-002-capability-graphs-and-projections.md)
+- [cs-013-preserve-spectral-axes-and-units.md](../../computer-science/en/cs-013-preserve-spectral-axes-and-units.md)
+- [dag.rs](https://raw.githubusercontent.com/GuitarAlchemist/ix/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/dag.rs)
+
+A tool catalog contains a path from capture through analysis to display. The receiving node accepts the array length and draws an image. Has the pipeline composed correctly? A reachable graph path says that edges exist under a chosen definition. It does not guarantee that the payload's coordinates and scale mean what the consumer expects. The prerequisites supply both the catalog boundary and the concrete spectral context.
+
+Read IX's path-search operation as a structural question. Then read the spectral lesson's frame-major discussion. Our fixed producer and consumer records have matching shapes and sample rates, yet disagree on orientation and scale. These records are authored contract cards rather than a new API schema. They are intentionally small enough that a learner can compare every field without running a service.
+
+Shape equality does not prove orientation equality. A consumer may interpret stored positions differently while reading the same number of cells. Similarly, linear and logarithmic values cannot be silently exchanged because both happen to be numeric. A real conversion would need its reference, handling of zero and precise semantics. This lesson does not supply that conversion or claim that renaming a field performs it.
+
+The compatibility rule is a conjunction over the declared teaching fields. Report each mismatch instead of collapsing everything into a transport failure. A disconnected path and an incompatible payload need different repairs. A matching contract still leaves runtime availability, authentication, actual implementation identity and result evidence open. Those concerns are not secretly represented by a green edge in this graph.
+
+For the source-assisted task, annotate the catalog prerequisite's definition of an edge and the spectral prerequisite's orientation sentinel. Draw the route manually and compare the contract cards field by field. Then ask an assistant to identify the minimal mismatch set and propose evidence for an adapter, without implementing one. The negative control changes the consumer to match the producer. Reject a composition claim if it uses path existence or total cell count as its only evidence of semantic compatibility.
+
+## Fixed case and expected calculations
+
+[fixed model block]
+
+## Retain a source-assisted learner attempt
+
+Work from the pinned inputs listed above. Before asking for assistance, write your own prediction for the fixed case and its negative control, including the unit of every quantity and the exact comparison boundary. A short paper table is the direct manual baseline. Keep intermediate values, especially any result that contradicts your first prediction. This is an explanation task using existing sources and fixed data; it does not require installing a package, calling a paid service or introducing a new program.
+
+Next use an assistant to locate the relevant source passage and critique your calculation. Retain the original prompt, the response, the source location it cited and the changes you accepted o
+
+PREREQUISITE streeling/courses/product-management/en/pm-014-select-a-budgeted-portfolio-with-prerequisite-closure.md
+
+
+# Select a Budgeted Portfolio with Prerequisite Closure
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A Learn coordinator must compare optional verification improvements for a future workflow. An attractive feature requires a shared foundation, but its headline estimate lists only the feature’s own cost. Choosing the best-looking value ratio can then produce a portfolio that fits the budget on paper while omitting its prerequisite. Count the whole selected dependency closure before comparing benefit.
+
+The authored catalogue contains a foundation with no independent value, an improvement that requires it, and independent alternatives. Each chosen item contributes its cost and value once. A subset is admissible only when its prerequisites are also selected and its total resource charge fits the budget. Enumerating the small catalogue makes every rejected proposal inspectable and retains ties instead of inventing a unique optimum.
+
+The fixed optimum chooses the independent alternatives. A tempting feature-plus-small-item proposal fails closure once its foundation is included. The control removes the prerequisite and changes the optimum. That altered premise is intentionally consequential: it cannot be justified by renaming the foundation an implementation detail or charging it to an unspecified future budget.
+
+Google’s knapsack guide defines the ordinary capacity-constrained value problem. Our extra closure rule is an explicitly authored extension, not a claim about that solver’s input schema. The capacity prerequisite evaluates a fixed production request; this lesson evaluates optional work under invented comparable points. It does not reduce the user-requested course scope or waive required review. A real portfolio decision would need defensible value scales, measured costs, dependency evidence and authority to choose among admissible alternatives. A direct subset table is the baseline before proposing any agent optimizer or planning DSL.
+
+## Sources and project boundary
+
+The retained Learn helper separates metadata, title and body, and indexes English module identities. Inspect that representation when naming the artifact and its revision. It does not implement this lesson’s model or supply its invented inputs.
+
+[Prerequisite: pm-008-size-a-fifty-course-batch-by-review-capacity](../../product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading](https://developers.google.com/optimization/pack/knapsack)
+
+## Fixed model and negative control
+
+[fixed model block]
+
+### Exercise 1
+
+Why is the tempting feature pair infeasible?
+
+<details><summary>Answer 1</summary>
+
+Subset `[B,D]` costs `5` directly but omits prerequisite `A`. Its closure `[A,B,D]` costs `8`, exceeding budget `6`. The apparent saving comes from a missing obligation.
+
+</details>
+
+### Exercise 2
+
+Find the fixed optimal portfolio.
+
+<details><summary>Answer 2</summary>
+
+There are `7` feasible subsets. The optimum is `[C,D]`, costing `6` with value `10`. Both prerequisites and budget are satisfied.
+
+</details>
+
+### Exercise 3
+
+Apply the prerequisite-free control.
+
+<details><summary>Answer 3</summary>
+
+There are `9` feasible subsets; `[B,D]` now costs `5` and has value `11`. This result requires the altered dependency premise, not a faster optimizer.
+
+</details>
+
+### Exercise 4
+
+May a shared foundation be charged repeatedly?
+
+<details><summary>Answer 4</summary>
+
+Not under the declared model: each selected item is charged once. Repeated charging would define another cost model and coul
+
+PREREQUISITE streeling/courses/product-management/en/pm-004-craft-extension-release-decision.md
+
+
+# Decide When Craft Extensions Are Ready for a Release
+
+> **Archive and transfer scope.** The technical text below comes from an archived draft. Historical statements about pending draft translations or an absent Learn import or build refer to that earlier stage; this [transfer record](../../../../code/streeling/evidence/representation-release-2026-10-22/README.md) records the current translation drafts, import and checks. Other unexecuted-experiment boundaries remain in force. Human subject, fluent-language and learner reviews remain pending.
+
+> **Department of Product and Project Management** | Intermediate | 35 minutes | English source draft; no extension release, human review, learner trial, or public course publication
+
+## Objectives and project question
+
+After this lesson, you can name the product task served by a craft extension, distinguish a useful source component from an installable extension, apply a non-compensating release gate across three targets, and write a release decision that a second person can reproduce. **Project question:** when can the team truthfully release ComfyUI, Blender, and Godot extensions arising from its guitar-audio and craft-to-scene experiments? For this project, a release claim requires a versioned, installable distribution with named artifacts and notes; a tag alone is insufficient. A roadmap, draft course, source script, local experiment, or passing classroom fixture is not one.
+
+[PM-002](pm-002-release-evidence-gate.md) separates a Streeling course's review, build, and public-readback gates. [PM-003](pm-003-review-queue-flow-metrics.md) measures movement through that course review queue. This lesson makes a different decision: whether a **software extension** can be offered to users. The course itself still has its own independent review and publication gates.
+
+## 1. Choose one user task per extension
+
+An extension proposal must name what a user can install and do. A possible **ComfyUI** target is an offline guitar-audio workflow that takes a baseline WAV and yields a candidate plus provenance. A possible **Blender** target is a craft-feature cleanup aid that carries a declared feature identity through mesh processing. A possible **Godot** target is a scene importer or inspector that preserves the identity and over/under meaning of a woven crossing. These are *candidate product tasks*, not claims that the three installable extensions exist.
+
+The project already has narrower evidence. The pinned [CS-004 audio-loop lesson](https://github.com/GuitarAlchemist/Demerzel/blob/861b6b1891ef7017c22269d5ec6be4c50953040c/state/streeling/courses/computer-science/en/cs-004-composable-agentic-audio-loop.md) describes a local, unmerged GA ComfyUI bridge at `6fac5735f7ffbb4116ebee05cfc9d7911bb12ce9`; its supplied workflow loads and saves audio but demonstrates no improvement. The pinned [VC-005 craft lesson](https://github.com/GuitarAlchemist/Demerzel/blob/861b6b1891ef7017c22269d5ec6be4c50953040c/state/streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md) cites Learn's Blender GLB cleanup script and checked-in sample report at `93d424f872a576ba8bbcd3dd44c9733292373654`, but reports no Godot import or craft-feature trial. The pinned [VC-007 weave lesson](https://github.com/GuitarAlchemist/Demerzel/blob/861b6b1891ef7017c22269d5ec6be4c50953040c/state/streeling/courses/visual-computing/en/vc-007-weave-seams-as-scene-contracts.md) has a synthetic Python evaluator: global parity yields zero adjacent-crossing violations and restarted local parity yields twelve. That is a semantic counterexample, not a Godot extension. GA's [parked Godot plan](https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/docs/plans/parked/2026-03-28-feat-godot-integration-
+
+PREREQUISITE streeling/courses/product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md
+
+
+# Size a Fifty Course Batch by Review Capacity
+
+> **Draft scope.** Source-assisted authored fixed models. Human technical, fluent-language and learner decisions remain pending. No live fleet, production controller, user telemetry or learning improvement is claimed. The validation journal distinguishes tests actually executed from source reading and planned checks.
+
+## Sources to inspect
+
+- [pm-003-review-queue-flow-metrics.md](../../product-management/en/pm-003-review-queue-flow-metrics.md)
+- [pm-002-release-evidence-gate.md](../../product-management/en/pm-002-release-evidence-gate.md)
+- [production-plan.md](../../../../code/streeling/evidence/batch50-2026-10-23/production-plan.md)
+- [batch-plan.json](../../../../code/streeling/evidence/batch50-2026-10-23/batch-plan.json)
+
+The current request specifies a batch of distinct courses, with translations as additional sources rather than additional courses. How much review would that scope require? The queue-flow prerequisite explains why an inventory is not throughput. This lesson uses the actual requested batch size and explicitly fictional review minutes to expose which role would limit a proposed schedule. No human availability is inferred from the number of agents drafting.
+
+Read the production plan and manifest as the scope authority. Count subject review per English course, fluent-language review per translated source, and learner work per course under this teaching scenario. The language workload excludes the source-language technical review already counted separately. These categories are a planning assumption, not a claim that every real course can be reviewed in the same time or that one learner attempt is sufficient for acceptance.
+
+Multiply scope by time per item before dividing by capacity. Keep minutes, sources, courses and days visible. Pooling all reviewer minutes hides specialized roles: spare language time cannot automatically perform the subject or learner work. The optimistic parallel finish is the largest role duration under simultaneous availability and divisible work. Dependencies, limited calendar overlap, failed reviews and repeated learner attempts can only require a more detailed scenario; they were not measured here.
+
+The packet also counts localized exercise-answer pairs and prepared learner criteria. Those are authoring and inspection obligations, not completed observations. A prepared criterion remains undecided until an actual response and assistance history exist. Faster source production therefore cannot authorize a reviewed-course claim. Retain findings and rework instead of erasing failed gates to make the planned throughput appear achieved.
+
+For the source-assisted task, reconcile the manifest's module and locale counts manually, then create a role workload table from the stipulated rates. Ask an assistant to identify the bottlenecks and missing measurements. The direct baseline is that table, without a scheduling DSL. The zero-capacity control must block a finite promise for the required role. Reject a delivery claim if it substitutes these fictional minutes for observed capacity or counts translations as distinct courses.
+
+## Fixed case and expected calculations
+
+[fixed model block]
+
+## Retain a source-assisted learner attempt
+
+Work from the pinned inputs listed above. Before asking for assistance, write your own prediction for the fixed case and its negative control, including the unit of every quantity and the exact comparison boundary. A short paper table is the direct manual baseline. Keep intermediate values, especially any result that contradicts your first prediction. This is an explanation task using existing sources and fixed data; it does not require installing a package, calling a paid service or introducing a new program.
+
+Next use a
+
+PREREQUISITE streeling/courses/product-management/en/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.md
+
+
+# Standardize Dogfood Failures to a Declared Task Mix
+
+> This lesson uses an authored fixed case and inspected sources. Counts, times, labels and signals are invented teaching inputs. Human technical review, fluent-language review, actual learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A team compares two dogfood reports and celebrates a lower pooled failure percentage. One report may simply contain more routine tasks and fewer difficult edge cases. The adoption prerequisite defines who and what belongs in a denominator; this lesson asks how the mixture of task classes changes the summary even when each class performs identically. A comparison needs a declared target mixture before the pooled headline is interpreted.
+
+Calculate failure rate within each task stratum first. Those rates preserve the different difficulty profiles represented by the authored data. The pooled rate weights strata by the actual attempt counts. The standardized rate instead weights them by the declared target mix. These are different questions: what happened in the sample, and what summary would these stratum rates imply under the target weights? Neither automatically estimates the distribution of future users.
+
+[NIST](https://www.itl.nist.gov/div898/handbook/pri/section3/pri332.htm)’s blocking discussion motivates retaining nuisance groups and comparing within them. Our fixed mixture arithmetic is not itself a randomized experiment or a causal adjustment for every confounder. A stratum may still contain varied tasks, assisted attempts or repeated learners. Keep those limitations explicit instead of treating standardization as proof that all comparisons are fair. The target mix is an authored choice requiring a project reason.
+
+The control changes sample counts while keeping both within-stratum rates equal. Its pooled percentage moves toward the standardized value without any improvement in either class. This is the falsifier for a naive improvement headline. The retained project source lists exercise fields but supplies no actual learner-answer events, so it cannot calibrate our counts. Before asking an agent to report a rollout, compute both summaries manually and keep task identity, source revision and assistance visible.
+
+## Sources and project boundary
+
+Read the prerequisite before using the model. Inspect the linked retained project artifact at the revision recorded in the packet, and identify the field or branch that supports the stated source observation. The source gives a representation or declared behavior; it does not turn the invented case into an observed project result. The primary reading supplies the named concept within its stated scope.
+
+[Prerequisite: pm-009-separate-release-adoption-from-artifact-downloads](../../product-management/en/pm-009-separate-release-adoption-from-artifact-downloads.md)
+
+[Prerequisite: cog-009-counterbalance-practice-order-before-comparing-interfaces](../../cognitive-science/en/cog-009-counterbalance-practice-order-before-comparing-interfaces.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json)
+
+[Primary reading: NIST/SEMATECH e-Handbook section 5.3.3.2, read 2026-10-24](https://www.itl.nist.gov/div898/handbook/pri/section3/pri332.htm)
+
+## Fixed model and control
+
+[fixed model block]
+
+### Exercise 1
+
+Calculate the two stratum failure rates.
+
+<details><summary>Answer 1</summary>
+
+Routine rate is `3/30=0.1`; edge rate is `4/10=0.4`. Preserve the task labels and denominators, because the pooled value alone hides the much higher edge-case failure rate.
+
+</details>
+
+### Exercise 2
+
+Compute the pooled rate in the main sample.
+
+<details><summary>Answer 2</summary>
+
+It is `7/40=0.175`. This des
+
+PREREQUISITE streeling/courses/product-management/en/pm-011-include-review-and-correction-in-automation-break-even.md
+
+
+# Include Review and Correction in Automation Break Even
+
+> This lesson uses an authored fixed case and inspected sources. Counts, times, labels and signals are invented teaching inputs. Human technical review, fluent-language review, actual learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A team sees fast generated drafts and proposes automating the next authoring tranche. Drafting speed alone omits setup, review and correction. The pilot-horizon prerequisite values information for later decisions; the capacity prerequisite keeps review from disappearing in a quota. This lesson calculates whether an authored operational cost model ever recovers setup while preserving the same completed task and mandatory review.
+
+Define the manual baseline as active work for an equivalent accepted item, not an unreviewed rough note. The automated path includes drafting and review on every item, plus a correction cost multiplied by its probability. The probability is invented and refers to items needing the declared correction, without claiming that corrections are independent or that every defect is found. A real comparison must measure the entire path and preserve quality failures.
+
+Subtract per-item automated cost from manual cost before calculating a break-even horizon. Only positive savings can repay a positive setup charge. Equality at the break-even item count gives no saving, so a strict-saving recommendation needs the next integer count. If per-item savings vanish, increasing the batch does not eventually make setup free. This boundary is easy to hide when a report quotes only draft latency.
+
+The retained project record explicitly separates authored loss points from measured engineering time and says methodology does not calibrate performance. Our example does use minutes, but they are still invented active-work inputs. [NIST](https://www.itl.nist.gov/div898/handbook/pri/section3/pri332.htm)’s nuisance-factor discussion motivates comparable operators and task conditions in a future measurement. A proposed authoring DSL or agent loop remains a candidate until a dogfood attempt preserves manual and assisted work logs, equivalent scope, correction history and actual accepted output.
+
+## Sources and project boundary
+
+Read the prerequisite before using the model. Inspect the linked retained project artifact at the revision recorded in the packet, and identify the field or branch that supports the stated source observation. The source gives a representation or declared behavior; it does not turn the invented case into an observed project result. The primary reading supplies the named concept within its stated scope.
+
+[Prerequisite: pm-006-test-a-pilot-against-its-decision-horizon](../../product-management/en/pm-006-test-a-pilot-against-its-decision-horizon.md)
+
+[Prerequisite: pm-008-size-a-fifty-course-batch-by-review-capacity](../../product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/pilot-value-2026-10-22/source-observations.json)
+
+[Primary reading: NIST/SEMATECH e-Handbook section 5.3.3.2, read 2026-10-24](https://www.itl.nist.gov/div898/handbook/pri/section3/pri332.htm)
+
+## Fixed model and control
+
+[fixed model block]
+
+### Exercise 1
+
+Compute automated expected active work per item.
+
+<details><summary>Answer 1</summary>
+
+It is `3+5+0.25*8=10` minutes. Review is charged on every item and correction only in its stipulated probability-weighted amount. This is an expectation, without an observed timing run.
+
+</details>
+
+### Exercise 2
+
+Compute totals and net saving for the declared batch.
+
+<details><summary>Answer 2</summary>
+
+Manual total is `480` minutes, automated total `460` minutes and net saving

@@ -1,0 +1,4134 @@
+{
+  "reviewer": "independent-data-source-theory-auditor",
+  "checked_at_utc": "2026-10-22T22:30:46.703446+00:00",
+  "verdict": "pass",
+  "findings": [
+    {
+      "id": "local-filter-insufficiency",
+      "status": "observed-preserved",
+      "finding": "MMMV satisfies the fixed angle residual and M-minus-V count but violates the strict smallest-angle assignment condition. local.rs implements the two numeric filters but not that extra rule.",
+      "boundary": "No complete IX analyse result, exported folded geometry, physical fold or new production defect reproduction asserted."
+    },
+    {
+      "id": "empty-applicable-domain",
+      "status": "observed-preserved",
+      "finding": "Hand U/F central cards leave applicable0, empty failures and initialized maximum0; counts expose the skipped domain."
+    },
+    {
+      "id": "radian-tolerance-scope",
+      "status": "observed-preserved",
+      "finding": "1e-9 is a computational absolute radian tolerance, not measured material/manufacturing allowance."
+    },
+    {
+      "id": "adjacent-sector-perturbation-wording",
+      "status": "resolved",
+      "finding": "A shifted ray changes adjacent sectors with opposite signs; geometrically opposite sectors with opposite-sign changes would cancel in degree4.",
+      "resolution": "Requested adjacent/opposite-sign wording in production plan; final plan bytes bound below."
+    }
+  ],
+  "fix_requests": [],
+  "check_count": 459,
+  "passed_check_count": 459,
+  "checks": [
+    {
+      "id": "ray-directions",
+      "pass_": true,
+      "actual": [
+        0,
+        60,
+        150,
+        270
+      ],
+      "expected": [
+        0,
+        60,
+        150,
+        270
+      ]
+    },
+    {
+      "id": "declared-sectors",
+      "pass_": true,
+      "actual": [
+        60,
+        90,
+        120,
+        90
+      ],
+      "expected": [
+        60,
+        90,
+        120,
+        90
+      ]
+    },
+    {
+      "id": "exact-alternating",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "exact-odd-sum",
+      "pass_": true,
+      "actual": 180,
+      "expected": 180
+    },
+    {
+      "id": "exact-even-sum",
+      "pass_": true,
+      "actual": 180,
+      "expected": 180
+    },
+    {
+      "id": "tolerance",
+      "pass_": true,
+      "actual": 1e-09,
+      "expected": 1e-09
+    },
+    {
+      "id": "all24permutations",
+      "pass_": true,
+      "actual": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          3,
+          2
+        ],
+        [
+          0,
+          2,
+          1,
+          3
+        ],
+        [
+          0,
+          2,
+          3,
+          1
+        ],
+        [
+          0,
+          3,
+          1,
+          2
+        ],
+        [
+          0,
+          3,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          2,
+          3
+        ],
+        [
+          1,
+          0,
+          3,
+          2
+        ],
+        [
+          1,
+          2,
+          0,
+          3
+        ],
+        [
+          1,
+          2,
+          3,
+          0
+        ],
+        [
+          1,
+          3,
+          0,
+          2
+        ],
+        [
+          1,
+          3,
+          2,
+          0
+        ],
+        [
+          2,
+          0,
+          1,
+          3
+        ],
+        [
+          2,
+          0,
+          3,
+          1
+        ],
+        [
+          2,
+          1,
+          0,
+          3
+        ],
+        [
+          2,
+          1,
+          3,
+          0
+        ],
+        [
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          2,
+          3,
+          1,
+          0
+        ],
+        [
+          3,
+          0,
+          1,
+          2
+        ],
+        [
+          3,
+          0,
+          2,
+          1
+        ],
+        [
+          3,
+          1,
+          0,
+          2
+        ],
+        [
+          3,
+          1,
+          2,
+          0
+        ],
+        [
+          3,
+          2,
+          0,
+          1
+        ],
+        [
+          3,
+          2,
+          1,
+          0
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          3,
+          2
+        ],
+        [
+          0,
+          2,
+          1,
+          3
+        ],
+        [
+          0,
+          2,
+          3,
+          1
+        ],
+        [
+          0,
+          3,
+          1,
+          2
+        ],
+        [
+          0,
+          3,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          2,
+          3
+        ],
+        [
+          1,
+          0,
+          3,
+          2
+        ],
+        [
+          1,
+          2,
+          0,
+          3
+        ],
+        [
+          1,
+          2,
+          3,
+          0
+        ],
+        [
+          1,
+          3,
+          0,
+          2
+        ],
+        [
+          1,
+          3,
+          2,
+          0
+        ],
+        [
+          2,
+          0,
+          1,
+          3
+        ],
+        [
+          2,
+          0,
+          3,
+          1
+        ],
+        [
+          2,
+          1,
+          0,
+          3
+        ],
+        [
+          2,
+          1,
+          3,
+          0
+        ],
+        [
+          2,
+          3,
+          0,
+          1
+        ],
+        [
+          2,
+          3,
+          1,
+          0
+        ],
+        [
+          3,
+          0,
+          1,
+          2
+        ],
+        [
+          3,
+          0,
+          2,
+          1
+        ],
+        [
+          3,
+          1,
+          0,
+          2
+        ],
+        [
+          3,
+          1,
+          2,
+          0
+        ],
+        [
+          3,
+          2,
+          0,
+          1
+        ],
+        [
+          3,
+          2,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "permutation1-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation1-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation1-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation1-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation1-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation2-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation2-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation2-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation2-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation2-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation3-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation3-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation3-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation3-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation3-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation4-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation4-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation4-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation4-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation4-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation5-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation5-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation5-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation5-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation5-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation6-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation6-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation6-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation6-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation6-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation7-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation7-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation7-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation7-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation7-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation8-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation8-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation8-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation8-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation8-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation9-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation9-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation9-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation9-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation9-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation10-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation10-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation10-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation10-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation10-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation11-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation11-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation11-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation11-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation11-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation12-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation12-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation12-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation12-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation12-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation13-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation13-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation13-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation13-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation13-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation14-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation14-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation14-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation14-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation14-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation15-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation15-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation15-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation15-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation15-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation16-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation16-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation16-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation16-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation16-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation17-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation17-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation17-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation17-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation17-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation18-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation18-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation18-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation18-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation18-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation19-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation19-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation19-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation19-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation19-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation20-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation20-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation20-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation20-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation20-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation21-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation21-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation21-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation21-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation21-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation22-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation22-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation22-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation22-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation22-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation23-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation23-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation23-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation23-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation23-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "permutation24-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "permutation24-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "permutation24-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation24-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "permutation24-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "four-cyclic-starts",
+      "pass_": true,
+      "actual": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "expected": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "cyclic0-sectors",
+      "pass_": true,
+      "actual": [
+        60,
+        90,
+        120,
+        90
+      ],
+      "expected": [
+        60,
+        90,
+        120,
+        90
+      ]
+    },
+    {
+      "id": "cyclic0-alternating",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "cyclic1-sectors",
+      "pass_": true,
+      "actual": [
+        90,
+        120,
+        90,
+        60
+      ],
+      "expected": [
+        90,
+        120,
+        90,
+        60
+      ]
+    },
+    {
+      "id": "cyclic1-alternating",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "cyclic2-sectors",
+      "pass_": true,
+      "actual": [
+        120,
+        90,
+        60,
+        90
+      ],
+      "expected": [
+        120,
+        90,
+        60,
+        90
+      ]
+    },
+    {
+      "id": "cyclic2-alternating",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "cyclic3-sectors",
+      "pass_": true,
+      "actual": [
+        90,
+        60,
+        90,
+        120
+      ],
+      "expected": [
+        90,
+        60,
+        90,
+        120
+      ]
+    },
+    {
+      "id": "cyclic3-alternating",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "four-perturbations",
+      "pass_": true,
+      "actual": [
+        0,
+        1e-10,
+        1e-08,
+        -1e-08
+      ],
+      "expected": [
+        0,
+        1e-10,
+        1e-08,
+        -1e-08
+      ]
+    },
+    {
+      "id": "perturb0-exact-residual",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "perturb0-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975511965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "perturb0-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975511965976,
+        1.5707963267948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "perturb0-alternating_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "perturb0-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.1102230246251565e-15,
+      "expected": 1.1102230246251565e-15
+    },
+    {
+      "id": "perturb0-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "perturb1-exact-residual",
+      "pass_": true,
+      "actual": 2e-10,
+      "expected": 2e-10
+    },
+    {
+      "id": "perturb1-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975512965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975512965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "perturb1-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975512965976,
+        1.5707963266948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975512965976,
+        1.5707963266948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "perturb1-alternating_rad",
+      "pass_": true,
+      "actual": -1.9999890632504957e-10,
+      "expected": -1.9999890632504957e-10
+    },
+    {
+      "id": "perturb1-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.9999890632504957e-10,
+      "expected": 1.9999890632504957e-10
+    },
+    {
+      "id": "perturb1-fails",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "perturb2-exact-residual",
+      "pass_": true,
+      "actual": 2e-08,
+      "expected": 2e-08
+    },
+    {
+      "id": "perturb2-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975611965976,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975611965976,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "perturb2-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975611965976,
+        1.5707963167948968,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975611965976,
+        1.5707963167948968,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "perturb2-alternating_rad",
+      "pass_": true,
+      "actual": -1.9999998768227556e-08,
+      "expected": -1.9999998768227556e-08
+    },
+    {
+      "id": "perturb2-absolute_residual_rad",
+      "pass_": true,
+      "actual": 1.9999998768227556e-08,
+      "expected": 1.9999998768227556e-08
+    },
+    {
+      "id": "perturb2-fails",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "perturb3-exact-residual",
+      "pass_": true,
+      "actual": 2e-08,
+      "expected": 2e-08
+    },
+    {
+      "id": "perturb3-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975411965977,
+        2.6179938779914944
+      ],
+      "expected": [
+        -1.5707963267948968,
+        0.0,
+        1.0471975411965977,
+        2.6179938779914944
+      ]
+    },
+    {
+      "id": "perturb3-sectors_rad",
+      "pass_": true,
+      "actual": [
+        1.5707963267948968,
+        1.0471975411965977,
+        1.5707963367948967,
+        2.094395102393195
+      ],
+      "expected": [
+        1.5707963267948968,
+        1.0471975411965977,
+        1.5707963367948967,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "perturb3-alternating_rad",
+      "pass_": true,
+      "actual": 2.0000000988673605e-08,
+      "expected": 2.0000000988673605e-08
+    },
+    {
+      "id": "perturb3-absolute_residual_rad",
+      "pass_": true,
+      "actual": 2.0000000988673605e-08,
+      "expected": 2.0000000988673605e-08
+    },
+    {
+      "id": "perturb3-fails",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "odd-degree-sorted_directions_rad",
+      "pass_": true,
+      "actual": [
+        -2.094395102393196,
+        0.0,
+        2.0943951023931953
+      ],
+      "expected": [
+        -2.094395102393196,
+        0.0,
+        2.0943951023931953
+      ]
+    },
+    {
+      "id": "odd-degree-sectors_rad",
+      "pass_": true,
+      "actual": [
+        2.094395102393196,
+        2.0943951023931953,
+        2.094395102393195
+      ],
+      "expected": [
+        2.094395102393196,
+        2.0943951023931953,
+        2.094395102393195
+      ]
+    },
+    {
+      "id": "odd-degree-alternating_rad",
+      "pass_": true,
+      "actual": 2.0943951023931957,
+      "expected": 2.0943951023931957
+    },
+    {
+      "id": "odd-degree-absolute_residual_rad",
+      "pass_": true,
+      "actual": 2.0943951023931957,
+      "expected": 2.0943951023931957
+    },
+    {
+      "id": "odd-degree-fails",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "smallest-index",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "smallest-angle_degrees",
+      "pass_": true,
+      "actual": 60,
+      "expected": 60
+    },
+    {
+      "id": "smallest-left_neighbor_degrees",
+      "pass_": true,
+      "actual": 90,
+      "expected": 90
+    },
+    {
+      "id": "smallest-right_neighbor_degrees",
+      "pass_": true,
+      "actual": 90,
+      "expected": 90
+    },
+    {
+      "id": "smallest-bounding_creases",
+      "pass_": true,
+      "actual": [
+        "e0",
+        "e1"
+      ],
+      "expected": [
+        "e0",
+        "e1"
+      ]
+    },
+    {
+      "id": "smallest-strictly_smallest",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "sixteen-labeled-assignments",
+      "pass_": true,
+      "actual": [
+        "MMMM",
+        "MMMV",
+        "MMVM",
+        "MMVV",
+        "MVMM",
+        "MVMV",
+        "MVVM",
+        "MVVV",
+        "VMMM",
+        "VMMV",
+        "VMVM",
+        "VMVV",
+        "VVMM",
+        "VVMV",
+        "VVVM",
+        "VVVV"
+      ],
+      "expected": [
+        "MMMM",
+        "MMMV",
+        "MMVM",
+        "MMVV",
+        "MVMM",
+        "MVMV",
+        "MVVM",
+        "MVVV",
+        "VMMM",
+        "VMMV",
+        "VMVM",
+        "VMVV",
+        "VVMM",
+        "VVMV",
+        "VVVM",
+        "VVVV"
+      ]
+    },
+    {
+      "id": "assignment-MMMM-M",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "id": "assignment-MMMM-V",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "assignment-MMMM-M_minus_V",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "id": "assignment-MMMM-kawasaki_numerical_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MMMM-maekawa_count_filter",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-MMMM-strict_smallest_angle_filter",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-MMMM-survives_both_assignment_filters",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-MMMM-classification",
+      "pass_": true,
+      "actual": "count-rejected",
+      "expected": "count-rejected"
+    },
+    {
+      "id": "assignment-MMMM-physical_fold_observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-MMMM-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-MMMV-M",
+      "pass_": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "id": "assignment-MMMV-V",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "id": "assignment-MMMV-M_minus_V",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "assignment-MMMV-kawasaki_numerical_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MMMV-maekawa_count_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MMMV-strict_smallest_angle_filter",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-MMMV-survives_both_assignment_filters",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-MMMV-classification",
+      "pass_": true,
+      "actual": "small-angle-rejected",
+      "expected": "small-angle-rejected"
+    },
+    {
+      "id": "assignment-MMMV-physical_fold_observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-MMMV-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-MMVM-M",
+      "pass_": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "id": "assignment-MMVM-V",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "id": "assignment-MMVM-M_minus_V",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "assignment-MMVM-kawasaki_numerical_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MMVM-maekawa_count_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MMVM-strict_smallest_angle_filter",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-MMVM-survives_both_assignment_filters",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-MMVM-classification",
+      "pass_": true,
+      "actual": "small-angle-rejected",
+      "expected": "small-angle-rejected"
+    },
+    {
+      "id": "assignment-MMVM-physical_fold_observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-MMVM-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-MMVV-M",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "assignment-MMVV-V",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "assignment-MMVV-M_minus_V",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "assignment-MMVV-kawasaki_numerical_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MMVV-maekawa_count_filter",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-MMVV-strict_smallest_angle_filter",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-MMVV-survives_both_assignment_filters",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-MMVV-classification",
+      "pass_": true,
+      "actual": "count-rejected",
+      "expected": "count-rejected"
+    },
+    {
+      "id": "assignment-MMVV-physical_fold_observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-MMVV-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-MVMM-M",
+      "pass_": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "id": "assignment-MVMM-V",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "id": "assignment-MVMM-M_minus_V",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "assignment-MVMM-kawasaki_numerical_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MVMM-maekawa_count_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MVMM-strict_smallest_angle_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MVMM-survives_both_assignment_filters",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MVMM-classification",
+      "pass_": true,
+      "actual": "both-filters-survivor",
+      "expected": "both-filters-survivor"
+    },
+    {
+      "id": "assignment-MVMM-physical_fold_observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-MVMM-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-MVMV-M",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "assignment-MVMV-V",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "assignment-MVMV-M_minus_V",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "assignment-MVMV-kawasaki_numerical_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MVMV-maekawa_count_filter",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-MVMV-strict_smallest_angle_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MVMV-survives_both_assignment_filters",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-MVMV-classification",
+      "pass_": true,
+      "actual": "count-rejected",
+      "expected": "count-rejected"
+    },
+    {
+      "id": "assignment-MVMV-physical_fold_observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-MVMV-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-MVVM-M",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "assignment-MVVM-V",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "assignment-MVVM-M_minus_V",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "assignment-MVVM-kawasaki_numerical_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MVVM-maekawa_count_filter",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-MVVM-strict_smallest_angle_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MVVM-survives_both_assignment_filters",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-MVVM-classification",
+      "pass_": true,
+      "actual": "count-rejected",
+      "expected": "count-rejected"
+    },
+    {
+      "id": "assignment-MVVM-physical_fold_observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-MVVM-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-MVVV-M",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "id": "assignment-MVVV-V",
+      "pass_": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "id": "assignment-MVVV-M_minus_V",
+      "pass_": true,
+      "actual": -2,
+      "expected": -2
+    },
+    {
+      "id": "assignment-MVVV-kawasaki_numerical_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MVVV-maekawa_count_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MVVV-strict_smallest_angle_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MVVV-survives_both_assignment_filters",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-MVVV-classification",
+      "pass_": true,
+      "actual": "both-filters-survivor",
+      "expected": "both-filters-survivor"
+    },
+    {
+      "id": "assignment-MVVV-physical_fold_observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-MVVV-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-VMMM-M",
+      "pass_": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "id": "assignment-VMMM-V",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "id": "assignment-VMMM-M_minus_V",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "assignment-VMMM-kawasaki_numerical_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VMMM-maekawa_count_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VMMM-strict_smallest_angle_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VMMM-survives_both_assignment_filters",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VMMM-classification",
+      "pass_": true,
+      "actual": "both-filters-survivor",
+      "expected": "both-filters-survivor"
+    },
+    {
+      "id": "assignment-VMMM-physical_fold_observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-VMMM-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-VMMV-M",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "assignment-VMMV-V",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "assignment-VMMV-M_minus_V",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "assignment-VMMV-kawasaki_numerical_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VMMV-maekawa_count_filter",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-VMMV-strict_smallest_angle_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VMMV-survives_both_assignment_filters",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-VMMV-classification",
+      "pass_": true,
+      "actual": "count-rejected",
+      "expected": "count-rejected"
+    },
+    {
+      "id": "assignment-VMMV-physical_fold_observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-VMMV-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-VMVM-M",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "assignment-VMVM-V",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "assignment-VMVM-M_minus_V",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "assignment-VMVM-kawasaki_numerical_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VMVM-maekawa_count_filter",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-VMVM-strict_smallest_angle_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VMVM-survives_both_assignment_filters",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-VMVM-classification",
+      "pass_": true,
+      "actual": "count-rejected",
+      "expected": "count-rejected"
+    },
+    {
+      "id": "assignment-VMVM-physical_fold_observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-VMVM-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-VMVV-M",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "id": "assignment-VMVV-V",
+      "pass_": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "id": "assignment-VMVV-M_minus_V",
+      "pass_": true,
+      "actual": -2,
+      "expected": -2
+    },
+    {
+      "id": "assignment-VMVV-kawasaki_numerical_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VMVV-maekawa_count_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VMVV-strict_smallest_angle_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VMVV-survives_both_assignment_filters",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VMVV-classification",
+      "pass_": true,
+      "actual": "both-filters-survivor",
+      "expected": "both-filters-survivor"
+    },
+    {
+      "id": "assignment-VMVV-physical_fold_observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-VMVV-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-VVMM-M",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "assignment-VVMM-V",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "assignment-VVMM-M_minus_V",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "assignment-VVMM-kawasaki_numerical_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VVMM-maekawa_count_filter",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-VVMM-strict_smallest_angle_filter",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-VVMM-survives_both_assignment_filters",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-VVMM-classification",
+      "pass_": true,
+      "actual": "count-rejected",
+      "expected": "count-rejected"
+    },
+    {
+      "id": "assignment-VVMM-physical_fold_observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-VVMM-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-VVMV-M",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "id": "assignment-VVMV-V",
+      "pass_": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "id": "assignment-VVMV-M_minus_V",
+      "pass_": true,
+      "actual": -2,
+      "expected": -2
+    },
+    {
+      "id": "assignment-VVMV-kawasaki_numerical_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VVMV-maekawa_count_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VVMV-strict_smallest_angle_filter",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-VVMV-survives_both_assignment_filters",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-VVMV-classification",
+      "pass_": true,
+      "actual": "small-angle-rejected",
+      "expected": "small-angle-rejected"
+    },
+    {
+      "id": "assignment-VVMV-physical_fold_observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-VVMV-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-VVVM-M",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "id": "assignment-VVVM-V",
+      "pass_": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "id": "assignment-VVVM-M_minus_V",
+      "pass_": true,
+      "actual": -2,
+      "expected": -2
+    },
+    {
+      "id": "assignment-VVVM-kawasaki_numerical_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VVVM-maekawa_count_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VVVM-strict_smallest_angle_filter",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-VVVM-survives_both_assignment_filters",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-VVVM-classification",
+      "pass_": true,
+      "actual": "small-angle-rejected",
+      "expected": "small-angle-rejected"
+    },
+    {
+      "id": "assignment-VVVM-physical_fold_observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-VVVM-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-VVVV-M",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "assignment-VVVV-V",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "id": "assignment-VVVV-M_minus_V",
+      "pass_": true,
+      "actual": -4,
+      "expected": -4
+    },
+    {
+      "id": "assignment-VVVV-kawasaki_numerical_filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "assignment-VVVV-maekawa_count_filter",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-VVVV-strict_smallest_angle_filter",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-VVVV-survives_both_assignment_filters",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "assignment-VVVV-classification",
+      "pass_": true,
+      "actual": "count-rejected",
+      "expected": "count-rejected"
+    },
+    {
+      "id": "assignment-VVVV-physical_fold_observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "assignment-VVVV-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "count-survivor-list",
+      "pass_": true,
+      "actual": [
+        "MMMV",
+        "MMVM",
+        "MVMM",
+        "MVVV",
+        "VMMM",
+        "VMVV",
+        "VVMV",
+        "VVVM"
+      ],
+      "expected": [
+        "MMMV",
+        "MMVM",
+        "MVMM",
+        "MVVV",
+        "VMMM",
+        "VMVV",
+        "VVMV",
+        "VVVM"
+      ]
+    },
+    {
+      "id": "both-survivor-list",
+      "pass_": true,
+      "actual": [
+        "MVMM",
+        "MVVV",
+        "VMMM",
+        "VMVV"
+      ],
+      "expected": [
+        "MVMM",
+        "MVVV",
+        "VMMM",
+        "VMVV"
+      ]
+    },
+    {
+      "id": "eight-count-survivors",
+      "pass_": true,
+      "actual": 8,
+      "expected": 8
+    },
+    {
+      "id": "four-both-survivors",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "id": "MMMV-counterexample",
+      "pass_": true,
+      "actual": "MMMV",
+      "expected": "MMMV"
+    },
+    {
+      "id": "MMMV-pass-K-M-but-fail-small-angle",
+      "pass_": true,
+      "actual": [
+        true,
+        true,
+        false
+      ],
+      "expected": [
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "id": "source_local_helper_implements_strict_smallest_angle_rule",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "new_rust_run",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "new_folded_state",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "uniform_prior-states",
+      "pass_": true,
+      "actual": 16,
+      "expected": 16
+    },
+    {
+      "id": "uniform_prior-uniform-probability",
+      "pass_": true,
+      "actual": 0.0625,
+      "expected": 0.0625
+    },
+    {
+      "id": "uniform_prior-entropy",
+      "pass_": true,
+      "actual": 4.0,
+      "expected": 4.0
+    },
+    {
+      "id": "condition_on_count_pass-states",
+      "pass_": true,
+      "actual": 8,
+      "expected": 8
+    },
+    {
+      "id": "condition_on_count_pass-uniform-probability",
+      "pass_": true,
+      "actual": 0.125,
+      "expected": 0.125
+    },
+    {
+      "id": "condition_on_count_pass-entropy",
+      "pass_": true,
+      "actual": 3.0,
+      "expected": 3.0
+    },
+    {
+      "id": "condition_on_count_pass-event-probability",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "condition_on_both_pass-states",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "id": "condition_on_both_pass-uniform-probability",
+      "pass_": true,
+      "actual": 0.25,
+      "expected": 0.25
+    },
+    {
+      "id": "condition_on_both_pass-entropy",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "condition_on_both_pass-event-probability",
+      "pass_": true,
+      "actual": 0.25,
+      "expected": 0.25
+    },
+    {
+      "id": "both-branch-reduction",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "skew-support",
+      "pass_": true,
+      "actual": [
+        "MVMM",
+        "MVVV",
+        "VMMM",
+        "VMVV"
+      ],
+      "expected": [
+        "MVMM",
+        "MVVV",
+        "VMMM",
+        "VMVV"
+      ]
+    },
+    {
+      "id": "skew-probabilities",
+      "pass_": true,
+      "actual": [
+        0.5,
+        0.25,
+        0.125,
+        0.125
+      ],
+      "expected": [
+        0.5,
+        0.25,
+        0.125,
+        0.125
+      ]
+    },
+    {
+      "id": "skew-probability-sum",
+      "pass_": true,
+      "actual": 1.0,
+      "expected": 1
+    },
+    {
+      "id": "skew-entropy",
+      "pass_": true,
+      "actual": 1.75,
+      "expected": 1.75
+    },
+    {
+      "id": "skew-upper-bound",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2.0
+    },
+    {
+      "id": "group-count-rejected-count",
+      "pass_": true,
+      "actual": 8,
+      "expected": 8
+    },
+    {
+      "id": "group-count-rejected-probability",
+      "pass_": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "id": "group-count-rejected-conditional_uniform_entropy_bits",
+      "pass_": true,
+      "actual": 3.0,
+      "expected": 3.0
+    },
+    {
+      "id": "group-small-angle-rejected-count",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "id": "group-small-angle-rejected-probability",
+      "pass_": true,
+      "actual": 0.25,
+      "expected": 0.25
+    },
+    {
+      "id": "group-small-angle-rejected-conditional_uniform_entropy_bits",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "group-both-filters-survivor-count",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "id": "group-both-filters-survivor-probability",
+      "pass_": true,
+      "actual": 0.25,
+      "expected": 0.25
+    },
+    {
+      "id": "group-both-filters-survivor-conditional_uniform_entropy_bits",
+      "pass_": true,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "id": "classification-entropy",
+      "pass_": true,
+      "actual": 1.5,
+      "expected": 1.5
+    },
+    {
+      "id": "expected-remaining",
+      "pass_": true,
+      "actual": 2.5,
+      "expected": 2.5
+    },
+    {
+      "id": "expected-information",
+      "pass_": true,
+      "actual": 1.5,
+      "expected": 1.5
+    },
+    {
+      "id": "branch-vs-average",
+      "pass_": true,
+      "actual": [
+        2.0,
+        2.5
+      ],
+      "expected": [
+        2,
+        2.5
+      ],
+      "detail": "Conditioning on the both-pass branch is distinct from averaging over all classification outcomes."
+    },
+    {
+      "id": "no-physical-solution-count",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "applicability-assigned-total_vertices",
+      "pass_": true,
+      "actual": 6,
+      "expected": 6,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-assigned-applicable",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-assigned-skipped_border",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-assigned-skipped_other_creases",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-assigned-skipped_isolated",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-assigned-kawasaki_failing",
+      "pass_": true,
+      "actual": [],
+      "expected": [],
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-assigned-maekawa_failing",
+      "pass_": true,
+      "actual": [],
+      "expected": [],
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-assigned-kawasaki_max_abs_alt_sum",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-assigned-partition",
+      "pass_": true,
+      "actual": 6,
+      "expected": 6
+    },
+    {
+      "id": "applicability-one-U-total_vertices",
+      "pass_": true,
+      "actual": 6,
+      "expected": 6,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-U-applicable",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-U-skipped_border",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-U-skipped_other_creases",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-U-skipped_isolated",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-U-kawasaki_failing",
+      "pass_": true,
+      "actual": [],
+      "expected": [],
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-U-maekawa_failing",
+      "pass_": true,
+      "actual": [],
+      "expected": [],
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-U-kawasaki_max_abs_alt_sum",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-U-partition",
+      "pass_": true,
+      "actual": 6,
+      "expected": 6
+    },
+    {
+      "id": "applicability-one-F-total_vertices",
+      "pass_": true,
+      "actual": 6,
+      "expected": 6,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-F-applicable",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-F-skipped_border",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-F-skipped_other_creases",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-F-skipped_isolated",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-F-kawasaki_failing",
+      "pass_": true,
+      "actual": [],
+      "expected": [],
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-F-maekawa_failing",
+      "pass_": true,
+      "actual": [],
+      "expected": [],
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-F-kawasaki_max_abs_alt_sum",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-F-partition",
+      "pass_": true,
+      "actual": 6,
+      "expected": 6
+    },
+    {
+      "id": "applicability-one-border-total_vertices",
+      "pass_": true,
+      "actual": 6,
+      "expected": 6,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-border-applicable",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-border-skipped_border",
+      "pass_": true,
+      "actual": 5,
+      "expected": 5,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-border-skipped_other_creases",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-border-skipped_isolated",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-border-kawasaki_failing",
+      "pass_": true,
+      "actual": [],
+      "expected": [],
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-border-maekawa_failing",
+      "pass_": true,
+      "actual": [],
+      "expected": [],
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-border-kawasaki_max_abs_alt_sum",
+      "pass_": true,
+      "actual": 0.0,
+      "expected": 0.0,
+      "detail": "Independent hand incidence/count model only. Maximum0 is algebraic/initialized value, not claimed Rust output or complete parsed FOLD analysis."
+    },
+    {
+      "id": "applicability-one-border-partition",
+      "pass_": true,
+      "actual": 6,
+      "expected": 6
+    },
+    {
+      "id": "no-physical-coverage",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "logical-counterexample-assignment",
+      "pass_": true,
+      "actual": "MMMV",
+      "expected": "MMMV"
+    },
+    {
+      "id": "logical-counterexample-kawasaki",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "logical-counterexample-maekawa",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "logical-counterexample-additional_necessary_rule",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "logical-counterexample-full_ix_analyse_verdict",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "logical-empty-applicable",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "logical-empty-failing_vertices",
+      "pass_": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "id": "logical-empty-max_abs_residual",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "logical-new-dsl",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "source-hash-crates/ix-origami/src/local.rs",
+      "pass_": true,
+      "actual": "f1a0dc3ca3b25b941a4d4971a14ceeee6cade205f830aef238ccfe87c3f83439",
+      "expected": "f1a0dc3ca3b25b941a4d4971a14ceeee6cade205f830aef238ccfe87c3f83439"
+    },
+    {
+      "id": "source-hash-crates/ix-origami/src/fold.rs",
+      "pass_": true,
+      "actual": "558ab071a94f2687d848391408a11d8004b55afdda86dd28a0dd4396b5059115",
+      "expected": "558ab071a94f2687d848391408a11d8004b55afdda86dd28a0dd4396b5059115"
+    },
+    {
+      "id": "source-hash-crates/ix-origami/src/lib.rs",
+      "pass_": true,
+      "actual": "d77c513129a2647259c6ad432962a5c36d689696afbc4e12ba8d2b425137ca8b",
+      "expected": "d77c513129a2647259c6ad432962a5c36d689696afbc4e12ba8d2b425137ca8b"
+    },
+    {
+      "id": "source-hash-crates/ix-origami/src/layers.rs",
+      "pass_": true,
+      "actual": "959afa31a4a00b85ee73e37444ea25c358dbcd551996be91e3127dc8f0b17f41",
+      "expected": "959afa31a4a00b85ee73e37444ea25c358dbcd551996be91e3127dc8f0b17f41"
+    },
+    {
+      "id": "source-hash-crates/ix-origami/tests/crane.rs",
+      "pass_": true,
+      "actual": "f7a46dd381f761ee9f47a94d674c6f96090a38576bc8c7c328f824ce4d4693b9",
+      "expected": "f7a46dd381f761ee9f47a94d674c6f96090a38576bc8c7c328f824ce4d4693b9"
+    },
+    {
+      "id": "source-hash-crates/ix-origami/src/thickness.rs",
+      "pass_": true,
+      "actual": "abae7d9b41cbf5a825b4dbe6f58b6579687c79027f1ae151b24e1b67eee30b8d",
+      "expected": "abae7d9b41cbf5a825b4dbe6f58b6579687c79027f1ae151b24e1b67eee30b8d"
+    },
+    {
+      "id": "source-hash-doc/spec.md",
+      "pass_": true,
+      "actual": "492a23850990412d0bd607a0835d139e87fad7665aa9ea7fcaf95917c232666b",
+      "expected": "492a23850990412d0bd607a0835d139e87fad7665aa9ea7fcaf95917c232666b"
+    },
+    {
+      "id": "source-geometric-atan2",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-direction-sort",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-cyclic-sector",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-odd-or-tolerance",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-maekawa",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-is-fold-MV",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-border",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-other",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-applicable",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-lower-kawasaki-before-filter",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-filter-failures",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-empty-max-zero",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-skipped-other-excludes-border",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-analyse-local-tolerance",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-analyse-other-conditions",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-test-skips-F",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-thickness-limit",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-FOLD-U",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "source-helper-no-small-angle-rule",
+      "pass_": true,
+      "actual": true,
+      "expected": true,
+      "detail": "Bounded static inspection of the entire local.rs helper; not a repository-wide absence or full-analyser acceptance claim."
+    },
+    {
+      "id": "applicability-before-global-is-not-enough",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "observation-status-two-filters-not-complete-assignment-test",
+      "pass_": true,
+      "actual": "observed-preserved",
+      "expected": "observed-preserved"
+    },
+    {
+      "id": "observation-status-unknowns-reduce-local-coverage",
+      "pass_": true,
+      "actual": "observed-preserved",
+      "expected": "observed-preserved"
+    },
+    {
+      "id": "observation-status-coefficient-tolerance-not-material-tolerance",
+      "pass_": true,
+      "actual": "observed-preserved",
+      "expected": "observed-preserved"
+    },
+    {
+      "id": "no-reproduced-production-bug",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "no-new-runtime-policy",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "human-pending",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "perturbation-wording-corrected",
+      "pass_": true,
+      "actual": true,
+      "expected": true,
+      "detail": "Changing one ray perturbs adjacent sectors with opposite signs. Opposite degree-four sectors have the same alternating parity."
+    },
+    {
+      "id": "paper-hash-hull-survey.pdf",
+      "pass_": true,
+      "actual": "ec47b24c36b1e1aff4193c7ae4beaa3a70f1fffeb90fb4ffc3507bc8075bd640",
+      "expected": "ec47b24c36b1e1aff4193c7ae4beaa3a70f1fffeb90fb4ffc3507bc8075bd640"
+    },
+    {
+      "id": "paper-bytes-hull-survey.pdf",
+      "pass_": true,
+      "actual": 145811,
+      "expected": 145811
+    },
+    {
+      "id": "paper-hash-demaine-survey.pdf",
+      "pass_": true,
+      "actual": "9073c73650a4221a2b730b7ddd5efed861d40ea9803706dc85674208c98cee32",
+      "expected": "9073c73650a4221a2b730b7ddd5efed861d40ea9803706dc85674208c98cee32"
+    },
+    {
+      "id": "paper-bytes-demaine-survey.pdf",
+      "pass_": true,
+      "actual": 183050,
+      "expected": 183050
+    },
+    {
+      "id": "Shannon-no-local-file",
+      "pass_": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "id": "Shannon-direct-failure",
+      "pass_": true,
+      "actual": 403,
+      "expected": 403
+    }
+  ],
+  "input_bindings": [
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/production-plan.md",
+      "sha256": "6f55111e8b7afa209553b84744a2f29a9f2c3693651b311a8492dc23f13a768e"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/primary-readback.json",
+      "sha256": "d672dd93d70618deb6ba01b6288238dad1f522b6813c777af07f7003aed14896"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/primary-reading.json",
+      "sha256": "91fdd3d5eb867b814f2bc658ad303e21c96d3ae70cfb0b64f120996863981b89"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/sector-calculations.json",
+      "sha256": "4fae22826a4ca15cd3547fc3ffcdd4b7af8d71974b88f8ed7d804e78f9f090d3"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/assignment-enumeration.json",
+      "sha256": "38e2ac6bbd6da76d4216f0d3bc27aa53609fa31d7ba27767250788e8fa0b85d0"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/candidate-information.json",
+      "sha256": "cecd60e0068cdc0445f7031917d1a6c199f4e21ab73a3854d710b3305d6e525b"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/applicability-cards.json",
+      "sha256": "3ceb9484eba44d52c29d0bf4c49a4ee46462d5491c4611ea56dc4d752a99a0da"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/logical-claims.json",
+      "sha256": "0a3e6c0e2d5f060e85498d715d5a6c2d83802e12b1b968afbc534d48f5605fa5"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/source-observations.json",
+      "sha256": "1590ce364f1528f3b5743ea29383ee989a8b43d7863a741db816468aa3ebe8d4"
+    }
+  ],
+  "immutable_source_provenance": {
+    "ix_commit": "d7c22fdd6a62becb66b9d7246ea85850e7c55854",
+    "fold_spec_commit": "824f9fa6f944248787b0b2077ef622761489201e",
+    "anonymous_fresh_retrieval": true,
+    "files": [
+      {
+        "path": "crates/ix-origami/src/local.rs",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/local.rs",
+        "sha256": "f1a0dc3ca3b25b941a4d4971a14ceeee6cade205f830aef238ccfe87c3f83439",
+        "expected_sha256": "f1a0dc3ca3b25b941a4d4971a14ceeee6cade205f830aef238ccfe87c3f83439",
+        "temporary_path": "C:\\tmp\\origami-local-independent-audit-20261022\\local.rs"
+      },
+      {
+        "path": "crates/ix-origami/src/fold.rs",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/fold.rs",
+        "sha256": "558ab071a94f2687d848391408a11d8004b55afdda86dd28a0dd4396b5059115",
+        "expected_sha256": "558ab071a94f2687d848391408a11d8004b55afdda86dd28a0dd4396b5059115",
+        "temporary_path": "C:\\tmp\\origami-local-independent-audit-20261022\\fold.rs"
+      },
+      {
+        "path": "crates/ix-origami/src/lib.rs",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/lib.rs",
+        "sha256": "d77c513129a2647259c6ad432962a5c36d689696afbc4e12ba8d2b425137ca8b",
+        "expected_sha256": "d77c513129a2647259c6ad432962a5c36d689696afbc4e12ba8d2b425137ca8b",
+        "temporary_path": "C:\\tmp\\origami-local-independent-audit-20261022\\lib.rs"
+      },
+      {
+        "path": "crates/ix-origami/src/layers.rs",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/layers.rs",
+        "sha256": "959afa31a4a00b85ee73e37444ea25c358dbcd551996be91e3127dc8f0b17f41",
+        "expected_sha256": "959afa31a4a00b85ee73e37444ea25c358dbcd551996be91e3127dc8f0b17f41",
+        "temporary_path": "C:\\tmp\\origami-local-independent-audit-20261022\\layers.rs"
+      },
+      {
+        "path": "crates/ix-origami/tests/crane.rs",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/tests/crane.rs",
+        "sha256": "f7a46dd381f761ee9f47a94d674c6f96090a38576bc8c7c328f824ce4d4693b9",
+        "expected_sha256": "f7a46dd381f761ee9f47a94d674c6f96090a38576bc8c7c328f824ce4d4693b9",
+        "temporary_path": "C:\\tmp\\origami-local-independent-audit-20261022\\crane.rs"
+      },
+      {
+        "path": "crates/ix-origami/src/thickness.rs",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/thickness.rs",
+        "sha256": "abae7d9b41cbf5a825b4dbe6f58b6579687c79027f1ae151b24e1b67eee30b8d",
+        "expected_sha256": "abae7d9b41cbf5a825b4dbe6f58b6579687c79027f1ae151b24e1b67eee30b8d",
+        "temporary_path": "C:\\tmp\\origami-local-independent-audit-20261022\\thickness.rs"
+      },
+      {
+        "path": "doc/spec.md",
+        "url": "https://raw.githubusercontent.com/edemaine/fold/824f9fa6f944248787b0b2077ef622761489201e/doc/spec.md",
+        "sha256": "492a23850990412d0bd607a0835d139e87fad7665aa9ea7fcaf95917c232666b",
+        "expected_sha256": "492a23850990412d0bd607a0835d139e87fad7665aa9ea7fcaf95917c232666b",
+        "temporary_path": "C:\\tmp\\origami-local-independent-audit-20261022\\spec.md"
+      }
+    ],
+    "read_scope": "Entire local.rs; fold.rs Assignment/is_fold; lib.rs documentation; layers.rs analyse aggregate; crane.rs local tests; thickness.rs model limits; FOLD spec assignment definitions. Unrelated analyser geometry internals not reviewed."
+  },
+  "source_line_evidence": [
+    {
+      "id": "source-geometric-atan2",
+      "path": "crates/ix-origami/src/local.rs",
+      "line": 52,
+      "snippet": "            .map(|&(_, w)| (xy[w][1] - xy[v][1]).atan2(xy[w][0] - xy[v][0]))",
+      "meaning": "Rays computed from coordinate differences, independent of arbitrary edge incidence order."
+    },
+    {
+      "id": "source-direction-sort",
+      "path": "crates/ix-origami/src/local.rs",
+      "line": 54,
+      "snippet": "        dirs.sort_by(f64::total_cmp);",
+      "meaning": "Geometric sorting precedes cyclic sectors."
+    },
+    {
+      "id": "source-cyclic-sector",
+      "path": "crates/ix-origami/src/local.rs",
+      "line": 58,
+      "snippet": "                let sector = (dirs[(i + 1) % n] - dirs[i]).rem_euclid(TAU);",
+      "meaning": "Consecutive sorted directions wrap around one full turn."
+    },
+    {
+      "id": "source-odd-or-tolerance",
+      "path": "crates/ix-origami/src/local.rs",
+      "line": 67,
+      "snippet": "        if n % 2 == 1 || alt.abs() > tol {",
+      "meaning": "Odd degree fails separately from the absolute radian threshold."
+    },
+    {
+      "id": "source-maekawa",
+      "path": "crates/ix-origami/src/local.rs",
+      "line": 82,
+      "snippet": "        let d = count(Assignment::M) - count(Assignment::V);",
+      "meaning": "Only M/V contribute to Maekawa difference."
+    },
+    {
+      "id": "source-is-fold-MV",
+      "path": "crates/ix-origami/src/fold.rs",
+      "line": 60,
+      "snippet": "        matches!(self, Self::M | Self::V)",
+      "meaning": "U/F/B/C/J are not mountain/valley folded assignments."
+    },
+    {
+      "id": "source-border",
+      "path": "crates/ix-origami/src/local.rs",
+      "line": 27,
+      "snippet": "        if *a == Assignment::B {",
+      "meaning": "Endpoints of border edges are excluded from interior domain."
+    },
+    {
+      "id": "source-other",
+      "path": "crates/ix-origami/src/local.rs",
+      "line": 113,
+      "snippet": "        if *a != Assignment::B && !a.is_fold() {",
+      "meaning": "Other-assignment endpoints are tracked separately."
+    },
+    {
+      "id": "source-applicable",
+      "path": "crates/ix-origami/src/local.rs",
+      "line": 118,
+      "snippet": "    let applicable: BTreeSet<usize> = interior.difference(&other).copied().collect();",
+      "meaning": "Applicable set is interior minus other-assignment endpoints."
+    },
+    {
+      "id": "source-lower-kawasaki-before-filter",
+      "path": "crates/ix-origami/src/local.rs",
+      "line": 120,
+      "snippet": "    let (sums, kfail) = kawasaki(fold, tol);",
+      "meaning": "Lower-level values computed, then failures/max filtered by applicable set."
+    },
+    {
+      "id": "source-filter-failures",
+      "path": "crates/ix-origami/src/local.rs",
+      "line": 133,
+      "snippet": "            .filter(|v| applicable.contains(v))",
+      "meaning": "Empty failures may be caused by empty checked domain."
+    },
+    {
+      "id": "source-empty-max-zero",
+      "path": "crates/ix-origami/src/local.rs",
+      "line": 135,
+      "snippet": "        kawasaki_max_abs_alt_sum: applicable.iter().map(|v| sums[v].abs()).fold(0.0, f64::max),",
+      "meaning": "Maximum initializes to0 even if applicable set is empty."
+    },
+    {
+      "id": "source-skipped-other-excludes-border",
+      "path": "crates/ix-origami/src/local.rs",
+      "line": 129,
+      "snippet": "        skipped_other_creases: other.difference(&border).count(),",
+      "meaning": "Border priority prevents double counting in applicability cards."
+    },
+    {
+      "id": "source-analyse-local-tolerance",
+      "path": "crates/ix-origami/src/layers.rs",
+      "line": 881,
+      "snippet": "    let local_theorems = local_theorems(fold, 1e-9);",
+      "meaning": "Fixed1e-9 is a computational tolerance; no physical manufacturing measurement."
+    },
+    {
+      "id": "source-analyse-other-conditions",
+      "path": "crates/ix-origami/src/layers.rs",
+      "line": 883,
+      "snippet": "    let ok = conflicts.is_empty()",
+      "meaning": "Overall report combines local filters with conflicts, isometry, crease orientation and layer rejection; no whole-analyser acceptance inferred."
+    },
+    {
+      "id": "source-test-skips-F",
+      "path": "crates/ix-origami/tests/crane.rs",
+      "line": 310,
+      "snippet": "fn local_skips_vertices_with_other_creases() {",
+      "meaning": "Source test explicitly covers F exclusion; test read only, not executed."
+    },
+    {
+      "id": "source-thickness-limit",
+      "path": "crates/ix-origami/src/thickness.rs",
+      "line": 18,
+      "snippet": "//! every height is 0. A refusal means \"no stack of parallel panels\", not \"cannot be made\": boards",
+      "meaning": "Thickness interpretation is model-specific and not a physical construction certificate."
+    },
+    {
+      "id": "source-FOLD-U",
+      "path": "doc/spec.md",
+      "line": 258,
+      "snippet": "  * `\"U\"`: unassigned/unknown crease",
+      "meaning": "U encodes an unknown label, not a probability or automatically completed M/V choice."
+    }
+  ],
+  "primary_theory_readback": [
+    {
+      "url": "https://arxiv.org/pdf/1307.1065v1",
+      "actual_read": "Primary sections2 and5 actual PDF text read via web; local page8 image independently viewed with view_image. Zero thickness/all-used crease assumptions, unassigned existence versus prescribed MV validity, strict neighboring-angle hypotheses and degree4 count discussion read.",
+      "local_image": "C:/tmp/streeling-origami-hull-page8-20261022.png"
+    },
+    {
+      "url": "https://erikdemaine.org/papers/OSME2001/paper.pdf",
+      "actual_read": "Primary section3.1 actual PDF text: without prescribed crease directions, alternate180degree condition gives single-vertex flat-foldability; assignment constraints and local/global distinction read."
+    },
+    {
+      "url": "https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf",
+      "actual_read": "Actual primary PDF body read via web, section6 entropy definition/properties and weighted decomposition; extraction drops some minus signs. Arithmetic independently uses nonnegative -sum(p log2 p).",
+      "direct_download_status_as_recorded": 403,
+      "local_pdf": null,
+      "local_visual_inspection": false
+    }
+  ],
+  "checked_boundaries": [
+    "All24 permutations geometrically sorted with atan2 and cyclic wrap; four cyclic starts, four ray perturbations and odd-degree control recomputed.",
+    "The strict60degree sector is between e0/e1 and below both adjacent90degree sectors; its bounding labels must be opposite under the ideal single-interior-vertex flat-fold assignment assumptions.",
+    "All16 labeled assignments enumerated; eight Maekawa survivors and four after the extra necessary rule. Surviving filters do not deliver a global sheet state, physical fold, thick-panel stack, folding path or exported scene certificate.",
+    "Kawasaki unassigned existence is not validity of every prescribed assignment. The helper filters its own numeric results by applicability; it is only part of the full analyser aggregate.",
+    "Hand applicability graph has six vertices: one center, four boundary vertices and an isolated vertex. U/F removes only the center from applicability after border priority; B puts center on border. No full FOLD frame was parsed/executed.",
+    "Uniform16→8→4 conditional ensembles give4→3→2bits; skew four-state probabilities give1.75bits; group8/4/4 weighted residual2.5bits and expected information1.5bits differ from the2bit both-pass branch.",
+    "All probabilities are authored distributions over candidates, not measured agent confidence, physical success or throughput. U is an unknown FOLD label, not a binary probability.",
+    "Historical survey statements are not promoted into current universal open-problem/complexity status."
+  ],
+  "unexecuted": [
+    "Rust/native execution, compilation, tests, runnable lab or host integration",
+    "complete IX analyse or thickness/folded-scene acceptance",
+    "new physical paper fold or human/learner/musician trial",
+    "Shannon direct-byte verification or local PDF/visual inspection",
+    "paid calls or production change"
+  ],
+  "human_review": null,
+  "runtime_reproduction": null,
+  "physical_fold_observed": null,
+  "scene_certificate": null,
+  "temporary_calculation_script_sha256": "2f7f111099058a9b387ed60f77f150da955bf624622e5835fea5728c24e67be1"
+}

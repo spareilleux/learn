@@ -1,0 +1,90 @@
+---
+module_id: aud-005-pcm-guards-and-format-boundaries
+department: audio-engineering
+course: "PCM guards and format boundaries in the guitar lab"
+level: intermediate
+prerequisites: ["aud-002-level-matched-guitar-comparison"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# PCM guards and format boundaries in the guitar lab
+
+An audio file that opens successfully can still hide a broken measurement pipeline. A conversion may erase small differences, an input decoder may assume the wrong encoding, and a successful process may report an unsuccessful candidate. This course uses the actual GA guitar experiment to turn those risks into inspectable checks before another decay setting enters a listening comparison.
+
+By the end, you can trace raw samples into a WAV, explain each guard, distinguish an input format failure from an engine defect, and write a bounded acceptance statement. The deliverable is a short review note citing the supplied evidence, with a decision for the candidate and a list of remaining gates.
+
+## Establish the experiment boundary
+
+The [lab README](../../../../code/streeling/guitar-runtime/README.md) describes the teaching build. [Rust](https://doc.rust-lang.org/rustc/command-line-arguments.html) compiles the unchanged pinned engine for native execution and for the [WebAssembly target](https://doc.rust-lang.org/rustc/platform-support/wasm32-unknown-unknown.html); [Node.js](https://nodejs.org/en/learn/getting-started/nodejs-with-webassembly) hosts the latter. Inspect the [source manifest](../../../../code/streeling/guitar-runtime/source.json) and [public input readback](../../../../code/streeling/evidence/guitar-runtime-2026-10-22/public-input-readback.json) before treating a filename as provenance. The engine source and license are pinned; the teaching compiler flags do not reproduce the upstream release profile.
+
+The experiment starts a fresh profile at E2, requested frequency 82.4069 Hz and velocity 0.1. The baseline decay is 0.9978; the candidate is 0.9976. Both render mono audio for 4 seconds at 44100 Hz. Those settings define this observation, rather than a promise for every note, velocity, profile, compiler or audio host. Windows x64 was exercised. Linux/WSL and macOS remain to verify.
+
+## Check the samples before reducing their precision
+
+Follow [the runner](../../../../code/streeling/guitar-runtime/run.mjs) from rendering through `pcmGuard` to `pcm16Wav`. Each main raw buffer must contain 176400 samples. A sample occupies 4 bytes in little-endian floating point, so the expected raw size is 705600 bytes. The guard first compares the exact byte count, then requires `Number.isFinite(sample)`, then checks `Math.abs(sample) <= 1`. This order gives a truncated buffer a structural failure before the sample loop and makes invalid numeric data visible before integer conversion.
+
+The encoder uses `Math.round(sample * 32767)`. Its mono integer payload occupies 352800 bytes, and its 44-byte header makes the generated WAV 352844 bytes. The decoder reads those integer samples with `payload.readInt16LE(i * 2) / 32767`. Record that convention: conversion and decoding are part of the measurement method, not transparent plumbing. Raw hashes and WAV hashes answer different questions.
+
+The source ends rendering with a hard clamp. That is useful source evidence, but the clamp alone does not establish finite output for arbitrary `NaN` inputs. The observation here comes from checking every sample produced by the specified experiment. Extending input coverage requires another explicit test, rather than extrapolating from a comment about normalized output.
+
+The [results](../../../../code/streeling/evidence/guitar-runtime-2026-10-22/results.json) report raw peak magnitudes of 0.4601604640483856 for baseline and 0.46006888151168823 for candidate in both runtimes. Both are below the proposed GAS-003 margin of 0.95. This supports a peak guard for this render; it does not show that the sound is realistic, pleasant, or free of every audible artifact.
+
+## Make the guard demonstrate rejection
+
+Passing ordinary buffers only shows the guard tolerates those buffers. The runner also supplies deliberately invalid inputs and uses assertions to require rejection. A `NaN` sample reaches the finite check. A sample of 1.01 reaches the normalized range check. A truncated buffer of 3 bytes fails the expected count. These negative controls make the intended failure path observable; they do not enumerate every possible corrupt buffer.
+
+Fresh silence probes contain 4096 samples and have peak 0 in native and WASM execution. This is evidence for those fresh instances without a note event. It does not certify a whole audio host, browser scheduling, memory lifetime, cancellation, or silence after arbitrary previous activity. Keep the probe's initial state in the review note.
+
+## Let the input teach the decoder
+
+The recorded reference uncovered a concrete preparation error: the initial decoder accepted only integer PCM16 WAV and rejected the supplied IEEE float32 WAV, whose format tag is 3. The fix added an explicit format branch while retaining channel, rate, chunk and finite-value checks. The engine source was unchanged. Calling this a synthesis failure would have sent the investigation to the wrong layer.
+
+The recording remains in an external cache, rather than being copied into the repository. Credit **collegefishiesd**, with the dataset revision and attribution in the manifest; its license is [CC BY-SA4.0](https://creativecommons.org/licenses/by-sa/4.0/). The [pinned attribution](https://github.com/GuitarAlchemist/Demerzel/blob/5c4967454ddc740ed937c87719ca4d71a3522e4b/state/streeling/fixtures/guitar-acoustics/gas-001/README.md) explains the fixture. Its SHA256 is `03a1965f275f0858be70476dab2bf55d2cbf2272ef7a50c61453d45e7f38b248`. Preserve that input identity when repairing a decoder; silently substituting another recording changes the experiment.
+
+## Separate a valid artifact from an accepted candidate
+
+Native and WASM raw samples differ, yet their PCM16 WAV bytes match within each arm. Quantization can map distinct floating values to the same integer. Matching WAV hashes therefore cannot prove original sample equality or perceptual equivalence. The generated baseline WAV also matches the old public fixture hash, which anchors this particular artifact's continuity.
+
+Read the [primary measurement replay](../../../../code/streeling/evidence/guitar-runtime-2026-10-22/primary-measurement-replay.json), [baseline measurements](../../../../code/streeling/evidence/guitar-runtime-2026-10-22/baseline-primary-measurements.json), and [candidate measurements](../../../../code/streeling/evidence/guitar-runtime-2026-10-22/candidate-primary-measurements.json). The unchanged primary method was replayed on the generated native WAVs. The candidate's decline-error improvement is 0.11416614959438576 dB against a required 1 dB, so `candidate_passes_decline_gate` is `false`. Exit 0 means execution and assertions completed; it does not mean product acceptance. Human review and publication remain pending, with no listening or browser capture claim.
+
+For a future reproduction with the documented tools already installed, run from the repository root:
+
+```text
+node code/streeling/guitar-runtime/run.mjs <new-output-directory> <recorded-wav-path>
+```
+
+Replace both placeholders. The command spelling is the same on supported systems, but only the recorded platform has been exercised. Read the evidence before deciding to rerun it.
+
+## Exercises
+
+### Exercise A — Audit the buffer contract
+
+Explain the raw and generated WAV sizes, and identify where a short buffer is rejected.
+
+> **Answer:** The render has 176400 samples, producing 705600 raw bytes. Integer conversion produces 352800 payload bytes; the 44-byte header gives 352844 WAV bytes. `pcmGuard` rejects an unexpected byte count before reading samples.
+
+### Exercise B — Explain a rejection
+
+Assign the `NaN`, 1.01 and 3-byte controls to their intended checks. Why keep all of them?
+
+> **Answer:** They exercise finite values, normalized range and exact count respectively. Each protects a different assumption before encoding; a successful range control alone would leave the other paths untested.
+
+### Exercise C — Write the format diagnosis
+
+The input fails the initial decoder. Describe the correction without claiming an engine repair.
+
+> **Answer:** The recorded input is IEEE float32 WAV with format tag 3. Add explicit decoding for the supplied format and preserve validation and the input hash. The generated output is integer PCM16; the two containers need different sample interpretation.
+
+### Exercise D — Interpret identical WAV bytes
+
+Can matching native/WASM WAV hashes close a report of differing raw samples?
+
+> **Answer:** They establish equality after this conversion. Quantization loses information, so the raw difference remains real. Neither byte equality nor the small raw difference supplies a listening verdict.
+
+### Exercise E — Write the decision
+
+Draft the candidate verdict using the process status, peak result and decline gate.
+
+> **Answer:** Execution completed and the tested sample guards passed, but the candidate failed its declared decline-improvement criterion. Keep the candidate unaccepted. Request the remaining human and perceptual reviews before publication; the silence probe does not certify an entire audio host.

@@ -1,0 +1,110 @@
+{
+  "checked_at_utc": "2026-10-22T14:24:07.737802+00:00",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "node": "v24.12.0",
+  "python": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+  "scope": "Final-source native GDScript teaching trial on Windows; no C# assembly, rendering, browser, IX export or learner trial.",
+  "lab_hashes": {
+    "code/streeling/weave-godot/expected-cases.json": "1ae7daf03475b6b689ddaad6ce5567320bf81fa8f8e4ffd0d20b54570944236f",
+    "code/streeling/weave-godot/project.godot": "0ba0ec9494527550d9b099e48c31d98157b15487c92f1e6332dd2e02bf56852d",
+    "code/streeling/weave-godot/README.md": "8aa42aaac1e23d103fdc81d531264ac697d03e03ba7647bbc03cd852e5608b06",
+    "code/streeling/weave-godot/run.mjs": "4a51d925831e24536894cfe5043fbc288dabbc274936c7c331f4922898f0de7a",
+    "code/streeling/weave-godot/trial.gd": "9e59b247bacff045398bfc9f00917fc3f0734b4d1e88424801f3f85c78fb8f99"
+  },
+  "runs": [
+    {
+      "name": "good",
+      "command": [
+        "node",
+        "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\weave-godot\\run.mjs",
+        "C:\\tmp\\streeling-weave-godot-final-good-20261022",
+        "C:/tmp/streeling-weave-scene-20261022/evaluate_weave.py",
+        "C:/tmp/streeling-weave-scene-20261022/weave-trial.json"
+      ],
+      "exit": 0,
+      "seconds": 0.568738600006327,
+      "stdout": "{\"status\":\"passed\",\"report\":\"C:\\\\tmp\\\\streeling-weave-godot-final-good-20261022\\\\run-report.json\"}\n",
+      "stderr": "",
+      "output_directory": "C:\\tmp\\streeling-weave-godot-final-good-20261022",
+      "expected_failed_gate": null,
+      "mutation": null,
+      "failed_native_gates": [],
+      "godot_stderr": ""
+    },
+    {
+      "name": "scale",
+      "command": [
+        "node",
+        "C:\\tmp\\streeling-weave-godot-final-scale-source-20261022\\run.mjs",
+        "C:\\tmp\\streeling-weave-godot-final-scale-20261022",
+        "C:/tmp/streeling-weave-scene-20261022/evaluate_weave.py",
+        "C:/tmp/streeling-weave-scene-20261022/weave-trial.json"
+      ],
+      "exit": 1,
+      "seconds": 0.4405704999808222,
+      "stdout": "{\"status\":\"failed\",\"report\":\"C:\\\\tmp\\\\streeling-weave-godot-final-scale-20261022\\\\run-report.json\",\"error\":\"godot_execution: exit 1; see Godot logs and report\"}\n",
+      "stderr": "",
+      "output_directory": "C:\\tmp\\streeling-weave-godot-final-scale-20261022",
+      "expected_failed_gate": "independent_world_metres",
+      "mutation": {
+        "before": "const MM_TO_M = 0.001",
+        "after": "const MM_TO_M = 1",
+        "mutated_trial_sha256": "2a3b3d99247f353e18753a20d0c730ee81dace000b90dff5cea074e9d43a8860"
+      },
+      "failed_native_gates": [
+        "aabb_clearance",
+        "all_ray_identities",
+        "independent_world_metres",
+        "ray_crossing_identity",
+        "ray_upper_strand"
+      ],
+      "godot_stderr": ""
+    },
+    {
+      "name": "binding",
+      "command": [
+        "node",
+        "C:\\tmp\\streeling-weave-godot-final-binding-source-20261022\\run.mjs",
+        "C:\\tmp\\streeling-weave-godot-final-binding-20261022",
+        "C:/tmp/streeling-weave-scene-20261022/evaluate_weave.py",
+        "C:/tmp/streeling-weave-scene-20261022/weave-trial.json"
+      ],
+      "exit": 1,
+      "seconds": 0.6135699000151362,
+      "stdout": "{\"status\":\"failed\",\"report\":\"C:\\\\tmp\\\\streeling-weave-godot-final-binding-20261022\\\\run-report.json\",\"error\":\"godot_execution: exit 1; see Godot logs and report\"}\n",
+      "stderr": "",
+      "output_directory": "C:\\tmp\\streeling-weave-godot-final-binding-20261022",
+      "expected_failed_gate": "ray_crossing_identity",
+      "mutation": {
+        "before": "body.set_meta(\"crossing_id\", crossing[\"id\"])",
+        "after": "body.set_meta(\"crossing_id\", \"wrong-crossing\")",
+        "mutated_trial_sha256": "a06322404d87659d0adb9ded29ee5b3377950fdf6a013623b84590463afa6452"
+      },
+      "failed_native_gates": [
+        "all_ray_identities",
+        "ray_crossing_identity"
+      ],
+      "godot_stderr": ""
+    },
+    {
+      "name": "semantic",
+      "command": [
+        "node",
+        "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\weave-godot\\run.mjs",
+        "C:\\tmp\\streeling-weave-godot-final-semantic-20261022",
+        "C:/tmp/streeling-weave-scene-20261022/evaluate_weave.py",
+        "C:/tmp/streeling-weave-scene-20261022/weave-trial.json",
+        "restarted-tile-parity"
+      ],
+      "exit": 1,
+      "seconds": 0.16509749999386258,
+      "stdout": "{\"status\":\"failed\",\"report\":\"C:\\\\tmp\\\\streeling-weave-godot-final-semantic-20261022\\\\run-report.json\",\"error\":\"semantic_admission: Selected restarted-tile-parity: 12 adjacency violations\"}\n",
+      "stderr": "",
+      "output_directory": "C:\\tmp\\streeling-weave-godot-final-semantic-20261022",
+      "expected_failed_gate": "semantic_admission",
+      "mutation": null,
+      "failed_native_gates": [],
+      "godot_stderr": null
+    }
+  ]
+}

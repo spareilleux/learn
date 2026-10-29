@@ -1,0 +1,69 @@
+{
+  "scope": "Constructed isolated tones and endpoint controls; no guitar-partial or PSD certification.",
+  "sample_rate_hz": 44100,
+  "constructed_peak_amplitude": 0.25,
+  "window": "0.5 - 0.5*cos(2*pi*n/(N-1))",
+  "forward_fft_normalization": "backward (unscaled forward)",
+  "interior_estimator": "2*abs(X[k])/sum(window)",
+  "endpoint_estimator": "abs(X[k])/sum(window)",
+  "tolerance_amplitude": 1e-06,
+  "direct_dft_abs_tolerance": 1e-10,
+  "runs": [
+    {
+      "window_size": 2048,
+      "bin": 32,
+      "frequency_hz": 689.0625,
+      "window_sum": 1023.5000000000001,
+      "raw_magnitude": 127.9375151793639,
+      "raw_magnitude_db": 42.13995823068381,
+      "peak_amplitude_estimate": 0.25000002966167834,
+      "amplitude_db_re_unit_peak": -12.041198796007052,
+      "fft_direct_complex_abs_error": 5.081872053457477e-13,
+      "endpoint_controls": [
+        {
+          "kind": "DC",
+          "bin": 0,
+          "raw_magnitude": 255.875,
+          "amplitude": 0.24999999999999997,
+          "incorrect_doubled_amplitude": 0.49999999999999994
+        },
+        {
+          "kind": "Nyquist",
+          "bin": 1024,
+          "raw_magnitude": 255.875,
+          "amplitude": 0.24999999999999997,
+          "incorrect_doubled_amplitude": 0.49999999999999994
+        }
+      ]
+    },
+    {
+      "window_size": 4096,
+      "bin": 64,
+      "frequency_hz": 689.0625,
+      "window_sum": 2047.5,
+      "raw_magnitude": 255.93750379229243,
+      "raw_magnitude_db": 48.16267859751133,
+      "peak_amplitude_estimate": 0.25000000370431497,
+      "amplitude_db_re_unit_peak": -12.041199697858165,
+      "fft_direct_complex_abs_error": 2.019804628166825e-12,
+      "endpoint_controls": [
+        {
+          "kind": "DC",
+          "bin": 0,
+          "raw_magnitude": 511.875,
+          "amplitude": 0.25,
+          "incorrect_doubled_amplitude": 0.5
+        },
+        {
+          "kind": "Nyquist",
+          "bin": 2048,
+          "raw_magnitude": 511.875,
+          "amplitude": 0.25,
+          "incorrect_doubled_amplitude": 0.5
+        }
+      ]
+    }
+  ],
+  "raw_db_change": 6.022720366827521,
+  "normalized_db_change": -9.018511128999762e-07
+}

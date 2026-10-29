@@ -1,0 +1,93 @@
+{
+  "scope": "Pinned source inspection, not execution or whole-repository absence claims.",
+  "ga_pin": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "musicxml": {
+    "pitch_type_lines": [
+      31,
+      35
+    ],
+    "technical_type_lines": [
+      55,
+      64
+    ],
+    "key_type_lines": [
+      116,
+      121
+    ],
+    "pitch_to_midi_lines": [
+      282,
+      295
+    ],
+    "parse_pitch_lines": [
+      37,
+      52
+    ],
+    "parse_technical_lines": [
+      59,
+      78
+    ],
+    "parse_key_lines": [
+      140,
+      153
+    ],
+    "attributes_lines": [
+      165,
+      180
+    ],
+    "stored_pitch_fields": [
+      "Step",
+      "Alter",
+      "Octave"
+    ],
+    "stored_key_fields": [
+      "Fifths",
+      "Mode"
+    ],
+    "mode_is_optional_string": true,
+    "technical_string_and_fret_are_independent_integers": true,
+    "selected_attributes_type_has_no_capo_or_transpose": true,
+    "integer_alter_parser": true,
+    "alter_comment_does_not_enforce_range": true
+  },
+  "capo": {
+    "CanHandle": false,
+    "route": "semantic-routing only",
+    "accepted_integer_capo_range": [
+      0,
+      12
+    ],
+    "shape_root": "((soundingPc-capo)%12+12)%12",
+    "sounding_root": "(shapePc+capo)%12",
+    "major_minor_quality_retained": true,
+    "per_string_fret_mapping_not_in_selected_skill": true,
+    "partial_capo_not_in_selected_skill": true,
+    "spelling_preference_is_not_diatonic_transposition": true
+  },
+  "pitch_parser": {
+    "anchored_at_this_pin": true,
+    "letters": "A..G",
+    "one_optional_sharp_or_flat": true,
+    "absolute_octave_required": true,
+    "no_degree_or_solfege_context_in_selected_file": true
+  },
+  "relative_fret": {
+    "declared_range": [
+      0,
+      36
+    ],
+    "generic_distance_not_capo_origin": true
+  },
+  "navigation": {
+    "string_range": [
+      1,
+      12
+    ],
+    "fret_range": [
+      0,
+      24
+    ],
+    "no_capo_offset_in_selected_parser": true
+  },
+  "earlier_WML005_uses_distinct_pin_and_is_not_reinterpreted": true,
+  "new_native_run": null
+}

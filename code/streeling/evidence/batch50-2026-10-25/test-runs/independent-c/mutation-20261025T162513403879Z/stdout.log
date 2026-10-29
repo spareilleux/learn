@@ -1,0 +1,28 @@
+MUTATION {"code": "FUT012", "changed_input": "model losses_a[3]:20 -> 4", "expected_also_mutated": true, "mutated_expected": {"mean_a": 2.0, "mean_b": 4.0, "var_a": 3.0, "tail_a": 3.5, "tail_b": 4.0, "mean_choice": "A", "tail_choice": "A"}, "canonical_input_sha256_before": "43f7e610a772c0d4863eb158d3ecf947b8117a75b3dfaa8e38a999d494bb0ef8"}
+test_fut012 (unit_c_proof.UnitC.test_fut012) ... 
+OBSERVATION {"case": "model", "code": "FUT012", "expected": {"mean_a": 3.6, "mean_b": 4, "mean_choice": "A", "tail_a": 11.5, "tail_b": 4, "tail_choice": "B", "var_a": 3}, "observed": {"mean_a": 2.0, "mean_b": 4.0, "mean_choice": "A", "tail_a": 3.5, "tail_b": 4.0, "tail_choice": "A", "var_a": 3.0}, "scope": "Declared finite authored model/control only; no physical, engine, image, timing or learner acceptance."}
+FAIL
+
+======================================================================
+FAIL: test_fut012 (unit_c_proof.UnitC.test_fut012)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-25\tests\test_unit_c.py", line 235, in test_fut012
+    self.check_course('FUT012',dict(mean_a=3.6,mean_b=4,var_a=3,tail_a=11.5,tail_b=4,mean_choice='A',tail_choice='B'),dict(mean_a=2,mean_b=4,var_a=3,tail_a=3.5,tail_b=4,mean_choice='A',tail_choice='A'))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-25\tests\test_unit_c.py", line 203, in check_course
+    self.equal_tree(observed,fixed)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-25\tests\test_unit_c.py", line 184, in equal_tree
+    for key in expected: self.equal_tree(observed[key],expected[key])
+                         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-25\tests\test_unit_c.py", line 192, in equal_tree
+    self.assertTrue(math.isclose(observed,expected,rel_tol=1e-11,abs_tol=1e-11),(observed,expected))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : (2.0, 3.6)
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)
+MUTATION_RESULT {"rejected": true, "tests": 1, "failures": 1, "errors": 0, "canonical_input_sha256_after": "43f7e610a772c0d4863eb158d3ecf947b8117a75b3dfaa8e38a999d494bb0ef8", "canonical_unchanged": true, "scope": "One substantive in-memory wrong input with matching mutated packet expectation; deliberate rejection is not a failing course."}

@@ -1,0 +1,161 @@
+---
+module_id: "gaa-020-cover-a-finite-practice-space-with-fixed-centres"
+department: "guitar-alchemist-academy"
+course: "Cover a Finite Practice Space with Fixed Centres"
+level: "advanced"
+prerequisites: ["gaa-013-choose-a-voicing-diversity-key-for-the-task"]
+estimated_duration: "50 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Cover a Finite Practice Space with Fixed Centres
+
+> Draft for technical and fluent-language review. All numerical inputs and expected outputs are authored cases. No new material trial, native scene run, learner observation or production outcome is supplied. Human and learner decisions remain undecided.
+
+## Project operation and interpretation
+
+A [GA](https://github.com/GuitarAlchemist/ga) practice set can contain distinct voicings yet leave one part of a declared feature space far from every selected item. Fix the candidate locations, distance rule and item budget, then minimize the largest distance from any candidate to its nearest selected centre. Exhaustive enumeration makes this small discrete k-centre case exact; it is not a greedy guarantee or a learned musical similarity. This differs from counting diversity keys: the new endpoint asks how poorly the worst-covered candidate is represented. A small radius does not prove transfer to a guitarist.
+
+Read the committed prerequisite and the bounded source passage before calculating. Identify the exact operation that the project needs, the meaning of its inputs and the claim that the result could support. The source record retains its revision and inspected scope. A documentation definition, an authored assumption and an observed outcome belong in separate columns. Do not let an assistant replace an absent observation with a plausible story about what the software probably does.
+
+Keep the representation explicit. The JSON below is a finite mathematical specification, not executable project syntax or a new engine feature. Its field names and fixed identity order form part of the teaching case. Read the formula together with the values; a correct-looking number obtained under another interpretation does not answer this task. Preserve intermediate quantities and the changed-input case so a reviewer can locate the first disagreement. The assumptions are deliberately narrow, and extending the domain requires a new justification rather than another confident caption.
+
+## Fixed model and changed-input control
+
+```json
+{
+  "values": {
+    "positions": {
+      "A": 0,
+      "B": 2,
+      "C": 5,
+      "D": 8
+    },
+    "centres_required": 2
+  },
+  "formula": "for each k-subset S of candidate IDs: radius(S)=max_x min_s abs(position[x]-position[s]); retain all minimum-radius subsets in lexicographic order",
+  "expected": {
+    "best_radius": 3,
+    "optimal_centres": [
+      [
+        "A",
+        "C"
+      ],
+      [
+        "A",
+        "D"
+      ],
+      [
+        "B",
+        "C"
+      ],
+      [
+        "B",
+        "D"
+      ]
+    ]
+  },
+  "negative_control": {
+    "values": {
+      "positions": {
+        "A": 0,
+        "B": 2,
+        "C": 5,
+        "D": 8
+      },
+      "centres_required": 1
+    },
+    "expected": {
+      "best_radius": 5,
+      "optimal_centres": [
+        [
+          "C"
+        ]
+      ]
+    }
+  }
+}
+```
+
+### Exercise 1
+
+Identify the inputs and the operation that must be preserved.
+
+<details><summary>Answer 1</summary>
+
+> **Answer:** Locations are authored scalar task features; centres must be existing candidates.
+
+</details>
+
+### Exercise 2
+
+Find the optimal radius and every tied centre subset.
+
+<details><summary>Answer 2</summary>
+
+> **Answer:** The optimal radius is `3`, attained by `[[A,C],[A,D],[B,C],[B,D]]`; retain all tied optima.
+
+</details>
+
+### Exercise 3
+
+Explain the interpretation trap that a summary could conceal.
+
+<details><summary>Answer 3</summary>
+
+> **Answer:** Different diversity keys alone cannot establish good distance coverage.
+
+</details>
+
+### Exercise 4
+
+Apply the changed-input control and compare the result.
+
+<details><summary>Answer 4</summary>
+
+> **Answer:** With a single centre, `[C]` is optimal and the radius is `5`.
+
+</details>
+
+### Exercise 5
+
+State the limit and the evidence needed before project adoption.
+
+<details><summary>Answer 5</summary>
+
+> **Answer:** Validate the feature meaning and actual transfer before claiming useful practice coverage.
+
+</details>
+
+## Source-assisted task and direct manual baseline
+
+Sketch candidate practice-feature locations beside the retained GA item identities, then enumerate every centre subset.
+
+With the answers hidden, draw an operation-specific table or diagram and calculate the main result by hand. This saved first attempt is the direct manual baseline. Include the inputs, the intermediate quantities, the rule used at each step and the reason for any refusal or unresolved value. State the prospective falsifier before asking an assistant to simplify the work. A plain table may already meet the project need; a composable DSL or an agent node needs evidence of an additional benefit.
+
+Then inspect the linked local artifact and primary passage. Record the source location, its revision, the definition actually used and the boundary it does not establish. Ask an assistant to challenge one assumption, retaining the prompt and response. Mark any calculator, translation aid or source lookup as assistance. Compare the assisted result with the original baseline on identical inputs. Reject a shorter explanation if it removes an input identity, a condition or the distinction between an invented example and a project observation.
+
+Treat the negative control as a separate record. Predict its result before opening its correction, then compare which fields changed and which remained invariant. If the answer disagrees, distinguish arithmetic error, semantic error and a limitation of the premises. Retain the failed attempt, diagnosis, correction and replay instead of overwriting the failure. Submit those records with the source-assisted explanation and the remaining uncertainty. This is the small improvement loop that can later support dogfooding; no improvement in a real learner or runtime has been measured here.
+
+The packet prepares a criterion for every exercise, with no learner decisions filled in. Actual learner answer, assistance history, corrected answer and learner decision remain empty until an attempt exists. Technical review, fluent-language review, engine execution, material validation, production adoption and publication have separate evidence requirements. A finite calculation can establish only its declared relation under the stated assumptions. Before using it in a scene or practice product, name the additional observation and its rejection threshold; do not convert a prepared answer key into acceptance.
+
+## Prospective falsifier
+
+A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.
+
+## Prepared learner criteria
+
+- Retain the correct answer and its intermediate reasoning for exercise 1; preserve the claim boundary. Learner decision remains undecided.
+- Retain the correct answer and its intermediate reasoning for exercise 2; preserve the claim boundary. Learner decision remains undecided.
+- Retain the correct answer and its intermediate reasoning for exercise 3; preserve the claim boundary. Learner decision remains undecided.
+- Retain the correct answer and its intermediate reasoning for exercise 4; preserve the claim boundary. Learner decision remains undecided.
+- Retain the correct answer and its intermediate reasoning for exercise 5; preserve the claim boundary. Learner decision remains undecided.
+
+## Sources and claim boundary
+
+- [Committed prerequisite: gaa-013-choose-a-voicing-diversity-key-for-the-task](../../guitar-alchemist-academy/en/gaa-013-choose-a-voicing-diversity-key-for-the-task.md)
+- [Retained project artifact](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json)
+- [Primary reading](https://docs.python.org/3/library/itertools.html#itertools.combinations)
+- [Authored evidence packet](../../../../code/streeling/evidence/batch50-2026-10-25-c/unit-c.json)
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25-c/journal.md)

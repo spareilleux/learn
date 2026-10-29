@@ -1,0 +1,79 @@
+{
+  "unit": "c",
+  "artifact_list_origin": "C:\\tmp\\batch50-finish-c-20261025\\review-summary.json",
+  "artifact_list_sha256": "22889a807916bced53beedfa52d59564867d67639897ee06e451db4709dcd935",
+  "artifacts": [
+    {
+      "origin": "C:\\tmp\\batch50-finish-c-20261025\\focused-final-receipt.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-c/focused-final-receipt.json",
+      "sha256": "1e9574cb9b8fdc7e4a0b66322547f7fc6c2f916dd56a67a36508eb35ac74292a",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-finish-c-20261025\\focused-final.log",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-c/focused-final.log",
+      "sha256": "fe3dd54c4a8d39dcc0404dacb027a10b311c683553b7237879e6023bbed1650f",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-finish-c-20261025\\mutation-final-receipt.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-c/mutation-final-receipt.json",
+      "sha256": "8a07d2e4b913cc494e9b7b40eff55fb3a0cf305a37a6b8800c2f572322f6d2e9",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-finish-c-20261025\\mutation-final.log",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-c/mutation-final.log",
+      "sha256": "2031a63d3affd99bc95ace4ef0c32ec4999e4234aacc7fcde8f90d5247fc84d4",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-finish-c-20261025\\observations-final.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-c/observations-final.json",
+      "sha256": "3d307a2c006458e2a861437993df2b8c53b06a15c18d9bc5821809137c9af02a",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-finish-c-20261025\\primary-readings.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-c/primary-readings.json",
+      "sha256": "652223117675e65950d9b20c99a88dd48528a519c24dbfe72374c653cc44714e",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-finish-c-20261025\\review-c.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-c/review-c.json",
+      "sha256": "2dd1ff157640e7c49f498228cb3d76d2cdd56fe47190ed18a0998bc94d46a88b",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-finish-c-20261025\\reviewer-judgments.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-c/reviewer-judgments.json",
+      "sha256": "ab2072ad4b55c4caae121fb6fd2d38ff970ce0f02eeca48eac9a2d3add09d640",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-finish-c-20261025\\source-parity-final.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-c/source-parity-final.json",
+      "sha256": "87dc355ad6588c32f85b7a185f78a167491e6965c32beefb81b8bd9da6e84499",
+      "byte_identical": true
+    }
+  ],
+  "unshipped_helpers": [
+    {
+      "path": "C:\\tmp\\batch50-finish-c-20261025\\assemble-review.py",
+      "sha256": "a7ab43a4a79cd038a22ff75d99a7251187d5f49f38763b02b21b198c7daa5189",
+      "reason": "Temporary reviewer orchestration stays outside shipped proof-test scope. Exact executed outputs and receipts are retained."
+    },
+    {
+      "path": "C:\\tmp\\batch50-finish-c-20261025\\mutation-probe.py",
+      "sha256": "e287dd7fa83f9cd88b6c6c558f44e37142a372265af3230f35377bb544598a67",
+      "reason": "Temporary reviewer orchestration stays outside shipped proof-test scope. Exact executed outputs and receipts are retained."
+    },
+    {
+      "path": "C:\\tmp\\batch50-finish-c-20261025\\run-focused.py",
+      "sha256": "9ceda5b75af72e8087d3e904bcad07fac80b82fdee9ac5144e9498fb23736ab9",
+      "reason": "Temporary reviewer orchestration stays outside shipped proof-test scope. Exact executed outputs and receipts are retained."
+    }
+  ],
+  "scope": "Byte-preserved independent focused/mutation/prerequisite evidence; deliberate mutant rejections are not failing canonical courses. Historical input hashes are not relabeled as final after corrections."
+}

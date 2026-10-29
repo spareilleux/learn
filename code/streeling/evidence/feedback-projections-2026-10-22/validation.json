@@ -1,0 +1,70 @@
+{
+  "checked_at_utc": "2026-10-22T15:05:50.698840+00:00",
+  "base_learn_commit": "7eaa68f8d4d32e8d1b495a93775d18135e709811",
+  "latest_main_checked": "05aa47b12b97e626405e961016d5035f7ecf74be",
+  "scope": "Three new trilingual course drafts and static/arithmetic derived evidence; no new synthesis/Godot execution or product code.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "script_tests": {
+    "files": [
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "passed": 18,
+    "failed": 0,
+    "exit_code": 0,
+    "log": "C:/tmp/streeling-feedback-final-tests-20261022.log"
+  },
+  "static_build": {
+    "exit_code": 0,
+    "elapsed_seconds": 79.48779579999973,
+    "log": "C:\\tmp\\streeling-feedback-build-20261022.log",
+    "final_test_exit": 0,
+    "test_log": "C:/tmp/streeling-feedback-final-tests-20261022.log",
+    "pages": 1750,
+    "dependency_install": "Existing node_modules junction; no fresh npm ci.",
+    "warnings": "Existing highlighting fallback and empty i18n/404 warnings; complete log retained."
+  },
+  "rendered_articles": {
+    "pages": 21,
+    "links": 387,
+    "unresolved_internal_links": [],
+    "correct_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "independent_factual_checks": 53,
+    "factual_findings": [],
+    "content_verdict": "PASS_WITH_REVIEW_LIMITS",
+    "content_findings": [],
+    "scope": "AI-only factual/content review, not human or formal CE approval.",
+    "human_subject": null,
+    "fluent_language": null,
+    "learner": null
+  },
+  "no_new_code_review_pipeline": "Documentation/data-only; no new production or lab code emitted, code-shipping review not invoked.",
+  "manual_host_scan": "Checked derivation inputs and outcomes, final source qualifications/API links, generated indexes and explicit scope.",
+  "source_inventory": {
+    "core_english_modules": 159,
+    "original_departments": 21,
+    "target": 525,
+    "remaining_core_source_gaps": 366,
+    "locale_counts": {
+      "en": 160,
+      "fr": 160,
+      "es": 160
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint or typecheck scripts configured; generator tests and Astro build used."
+}

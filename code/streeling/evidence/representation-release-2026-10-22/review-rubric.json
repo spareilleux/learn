@@ -1,0 +1,248 @@
+{
+  "status": "Prepared; no learner attempt or human review recorded.",
+  "scope": "One overlapping, source-assisted task per module; supplied stimuli/primary inputs are available during the attempt. Not full-course mastery or causal improvement.",
+  "scoring": {
+    "0": "Incorrect or unsupported conclusion.",
+    "1": "Core answer correct but omits a requested unit, evidence condition or limitation.",
+    "2": "Matches the expected core answer and requested limitations; record reviewer reasoning."
+  },
+  "tasks": [
+    {
+      "module": "FUT-002",
+      "source_path": "streeling/courses/futurology/en/fut-002-routing-embedder-revisit-triggers.md",
+      "source_sha256": "80d8dfa21108fc3ffae971243a53ebfcb5d6d30e8f5289b5c245f0961ccd6042",
+      "prompt": "Using the numeric Phase 0 artifact, subtract `bge-large`'s single-embed p95 from the report's 500 ms budget. How much slower was its measured single-embed p95 than nomic's? What claim is still unsupported?",
+      "expected_answer": "The arithmetic margin is `500 - 238.27479999454226 = 261.72520000545774 ms`, about **261.7 ms**. The difference from nomic is `238.27479999454226 - 101.44889999355655 = 136.8259000009857 ms`, about **136.8 ms**. Both are single-embed comparisons from that fixed run. They do not establish end-to-end chat p95, behavior under a different host or load, or a future latency guarantee.",
+      "reviewer_score": null,
+      "reviewer_reasoning": null,
+      "learner_attempt": null,
+      "stimulus_markdown": "Pinned Phase 0 numeric inputs: `bge-large` single-embed p95 = `238.27479999454226 ms`; `nomic-embed-text` single-embed p95 = `101.44889999355655 ms`. The report uses a `500 ms` budget. These measurements concern one embedding call, not a captured end-to-end chat request.",
+      "primary_sources": [
+        {
+          "label": "Numeric artifact",
+          "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/state/quality/embedder-bakeoff/bakeoff-latest.json"
+        }
+      ]
+    },
+    {
+      "module": "FUT-003",
+      "source_path": "streeling/courses/futurology/en/fut-003-agent-substitution-readiness-drill.md",
+      "source_sha256": "3cdeafbc266a8f0ae39cf5f82a6bc7a22d83ffd58c3a4951a0f73bef8b276683",
+      "prompt": "The output reports `fixture-A-v2`, while its input and synthetic review target say `fixture-A-v1`. The build passes. Can the old verdict authorize publication of that output? What must happen next?",
+      "expected_answer": "No. The reviewed and output source identities differ, so the old verdict does not cover the changed output. Inspect the change and obtain a verdict bound to the new exact source before publication. A passing build checks a different property.",
+      "reviewer_score": null,
+      "reviewer_reasoning": null,
+      "learner_attempt": null,
+      "stimulus_markdown": "",
+      "primary_sources": []
+    },
+    {
+      "module": "INF-003",
+      "source_path": "streeling/courses/information-theory/en/inf-003-verdict-distribution-drift.md",
+      "source_sha256": "66c84ee111e358835be410e04e44f61b653343d3efd2d9626fd5545ab69a8f27",
+      "prompt": "For the table above, write both normalized vectors in `[holds, fails, unknown]` order. What additional metadata must travel with a real comparison?",
+      "expected_answer": "`p=[8/10,0/10,2/10]=[0.8,0,0.2]`; `q=[6/10,2/10,2/10]=[0.6,0.2,0.2]`. Keep the property name, net identities, category order, analyzer commit, exploration limits, and each run's total. A divergence computation alone does not verify those conditions.",
+      "reviewer_score": null,
+      "reviewer_reasoning": null,
+      "learner_attempt": null,
+      "stimulus_markdown": "Synthetic teaching counts; compare one fixed property in `[holds, fails, unknown]` order.\n\n| Run | Holds | Fails | Unknown | Total |\n|---|---:|---:|---:|---:|\n| Baseline | 8 | 0 | 2 | 10 |\n| Candidate | 6 | 2 | 2 | 10 |",
+      "primary_sources": []
+    },
+    {
+      "module": "MCL-003",
+      "source_path": "streeling/courses/musicology/en/mcl-003-style-labels-as-evidence.md",
+      "source_sha256": "2d909db9f674ffd2dfb1d44322d0ee38d603efb2d1f3e9cf980869b4be7b3134",
+      "prompt": "From the pinned catalog, give the `ii-V-I` category, key, Roman numerals, and chord names. Then write one permitted caption and one unsupported caption for a recording you have not heard.",
+      "expected_answer": "Category `Jazz`; key `C Major`; Roman numerals `ii7, V7, I`; chords `Dm7, G7, Cmaj7`. Permitted: “GA catalog labels `ii-V-I` as Jazz and gives Dm7–G7–Cmaj7 in C major.” Unsupported: “This unheard recording is jazz because it contains Dm7–G7–Cmaj7.” The file supplies the first statement's fields; it supplies no observation of the recording.",
+      "reviewer_score": null,
+      "reviewer_reasoning": null,
+      "learner_attempt": null,
+      "stimulus_markdown": "Use the exact catalog entry as input; the catalog is available during the attempt. No recording is supplied for listening.",
+      "primary_sources": [
+        {
+          "label": "Pinned progression catalog",
+          "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.Config/ChordProgressions.yaml"
+        }
+      ]
+    },
+    {
+      "module": "PHI-002",
+      "source_path": "streeling/courses/philosophy/en/phi-002-when-is-an-advisory-decision-justified.md",
+      "source_sha256": "99200375356de40b214a76b3273daf1a51fded6525611f1d7ff768c0589d1c38",
+      "prompt": "Does the synthetic fixture (a) conform to the schema, (b) satisfy the advisory document's specific-evidence principle, and (c) authorize a GA merge? Cite the fields or sentences that decide each answer.",
+      "expected_answer": "(a) Yes. It has all required `rule_result` keys, with allowed `pull_request`, `recommend`, and `high` values; the schema permits empty arrays. (b) No. `evidence_refs: []` contains no specific Streeling event or Seldon fact ID. (c) No. The document reserves merging for human approval, and the rule-pack document calls this engine advisory and dry-run. A valid object is neither a supported readiness conclusion nor merge authority.",
+      "reviewer_score": null,
+      "reviewer_reasoning": null,
+      "learner_attempt": null,
+      "stimulus_markdown": "Synthetic input object (PR-EXAMPLE is invented):\n\n```json\n{\n  \"rule_result\": {\n    \"rule_id\": \"SYNTHETIC-PR-READINESS\",\n    \"subject\": \"pull_request\",\n    \"decision\": \"recommend\",\n    \"reason_codes\": [],\n    \"evidence_refs\": [],\n    \"next_actions\": [\"ask a human to inspect PR-EXAMPLE\"],\n    \"confidence\": \"high\"\n  }\n}\n```\n\nUse the following exact schema and advisory documents to judge the object; no actual CI or PR evidence is supplied.",
+      "primary_sources": [
+        {
+          "label": "Pinned schema",
+          "url": "https://github.com/GuitarAlchemist/Demerzel/blob/9ba9a29f6424ac8c1a6654c9b979b282a8cf216f/schemas/advisory-decision.schema.json"
+        },
+        {
+          "label": "Advisory document",
+          "url": "https://github.com/GuitarAlchemist/Demerzel/blob/9ba9a29f6424ac8c1a6654c9b979b282a8cf216f/docs/architecture/demerzel-advisory-decisions.md"
+        },
+        {
+          "label": "Rule-pack authority scope",
+          "url": "https://github.com/GuitarAlchemist/Demerzel/blob/9ba9a29f6424ac8c1a6654c9b979b282a8cf216f/docs/governance/aiw-rule-packs.md"
+        }
+      ]
+    },
+    {
+      "module": "PHI-003",
+      "source_path": "streeling/courses/philosophy/en/phi-003-what-does-the-same-chord-mean.md",
+      "source_sha256": "bc4e4b3148eb6e10f3809d9275a93f97eedff8aa1e52c9aebc438ce2281fc020",
+      "prompt": "The fixture compares `c_major_low = [48,52,55]` with `c_major_high = [60,64,67]`. Are the MIDI-note multisets equal? Are the pitch-class sets and ICVs equal? What remains unproven about two guitar fingerings?",
+      "expected_answer": "The MIDI-note multisets differ by an octave. Both map to pitch-class set `{0,4,7}` and therefore share the ICV `[0,0,1,1,1,0]`; their toy binary chroma cosine is `1`. The fixture says nothing about string choice, hand stretch, timbre, playability, or whether GA's *whole* 240-dimensional embeddings and rankings are equal.",
+      "reviewer_score": null,
+      "reviewer_reasoning": null,
+      "learner_attempt": null,
+      "stimulus_markdown": "Reference aid: pitch classes are MIDI numbers modulo 12. For the interval-class vector, count each unordered pair of distinct pitch classes in bins 1–6 using `min(d, 12-d)`, where `d` is the pair distance modulo 12. No guitar fingering, recording or listener result is supplied.",
+      "primary_sources": []
+    },
+    {
+      "module": "PHY-003",
+      "source_path": "streeling/courses/physics/en/phy-003-sampling-aliasing-guitar-engine.md",
+      "source_sha256": "67f4d2e28ec8cf0ef646eacb4c7629c9f591600202e002f6e29d3668ba04f0f1",
+      "prompt": "A reviewer sees the GAS-001 44.1 kHz render and writes, “GA's browser engine always runs at 44.1 kHz.” What can the sources actually support, and what should a browser test record?",
+      "expected_answer": "GAS-001 fixes **its native rendered WAV** at 44,100 Hz. The inspected browser bridge passes `audioContext.sampleRate` into the worklet and Rust engine; its actual value must be observed in that browser session. Record the context rate, output or recording rate and codec, engine revision, and capture path. A native WAV is not a browser capture.",
+      "reviewer_score": null,
+      "reviewer_reasoning": null,
+      "learner_attempt": null,
+      "stimulus_markdown": "Inspect the native WAV provenance and the browser initialization sources as separate inputs. No browser capture or context-rate observation is supplied.",
+      "primary_sources": [
+        {
+          "label": "Native fixture provenance",
+          "url": "https://github.com/GuitarAlchemist/Demerzel/blob/17f82a4b4b913d7c64942a3d3ff670abf4e6f85c/state/streeling/fixtures/guitar-acoustics/gas-001/README.md"
+        },
+        {
+          "label": "Browser audio bridge",
+          "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Rust/guitar-web-wasm-demo/src/audio/audioEngine.js"
+        },
+        {
+          "label": "AudioWorklet",
+          "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Rust/guitar-web-wasm-demo/src/audio/guitar-worklet.js"
+        }
+      ]
+    },
+    {
+      "module": "PHY-004",
+      "source_path": "streeling/courses/physics/en/phy-004-velocity-pick-position-guitar-engine.md",
+      "source_sha256": "30815d970eb5153a4e6d77e9b42a6336fdcfa007d7d2e5c350923c74fc2f8c6d",
+      "prompt": "For the ideal triangular-displacement model, which harmonic indices have a zero initial coefficient at `p = 1/4`? Would a missing fourth harmonic in a captured guitar note prove that the player plucked at one-quarter of the string?",
+      "expected_answer": "The sine factor is zero when `n` is a positive multiple of four: `n = 4, 8, 12, ...`. A missing or low fourth harmonic alone does not prove a quarter-string pluck. Pickup or microphone placement, excitation width, string and body response, processing, noise, and the selected analysis window are alternative explanations. The formula describes one ideal initial displacement under fixed assumptions.",
+      "reviewer_score": null,
+      "reviewer_reasoning": null,
+      "learner_attempt": null,
+      "stimulus_markdown": "Ideal-model reference: a flexible string fixed at both ends starts from a triangular displacement with fixed apex height at normalized position `p`, where `0 < p < 1`. The harmonic coefficient is proportional to `sin(nπp) / [n² p(1-p)]` for positive integer `n`. This is an ideal initial-displacement model; no recorded spectrum is supplied.",
+      "primary_sources": []
+    },
+    {
+      "module": "PM-004",
+      "source_path": "streeling/courses/product-management/en/pm-004-craft-extension-release-decision.md",
+      "source_sha256": "31eff99588c7e7a35084aee798280862f745fff617547c66df337af67e92b855",
+      "prompt": "A draft announcement says, “Our ComfyUI, Blender, and Godot craft suite is ready because the audio bridge, GLB script, and weave validator exist.” Repair the statement into one truthful present-tense sentence and one falsifiable proposed task.",
+      "expected_answer": "“The project has source-level audio, mesh-cleanup, and weave-validation experiments, with different provenance and no demonstrated three-target extension release.” A falsifiable proposed task is: “A user installs the versioned Godot add-on, imports the supplied woven sample, clicks `w3-f0`, and receives that crossing's declared over/under value in a saved trace.” The latter needs an installable add-on and runtime receipt before it can be stated as an achieved result.",
+      "reviewer_score": null,
+      "reviewer_reasoning": null,
+      "learner_attempt": null,
+      "stimulus_markdown": "Use these dated source-experiment records and unchecked integration plan as the available inventory. Each record has its own artifact and measurement scope; no installable package, release receipt or user-installation trace is supplied with this task.",
+      "primary_sources": [
+        {
+          "label": "Audio-loop experiment",
+          "url": "https://github.com/GuitarAlchemist/Demerzel/blob/861b6b1891ef7017c22269d5ec6be4c50953040c/state/streeling/courses/computer-science/en/cs-004-composable-agentic-audio-loop.md"
+        },
+        {
+          "label": "Mesh-cleanup experiment",
+          "url": "https://github.com/GuitarAlchemist/Demerzel/blob/861b6b1891ef7017c22269d5ec6be4c50953040c/state/streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md"
+        },
+        {
+          "label": "Weave fixture",
+          "url": "https://github.com/GuitarAlchemist/Demerzel/blob/861b6b1891ef7017c22269d5ec6be4c50953040c/state/streeling/courses/visual-computing/en/vc-007-weave-seams-as-scene-contracts.md"
+        },
+        {
+          "label": "Godot plan",
+          "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/docs/plans/parked/2026-03-28-feat-godot-integration-plan.md"
+        }
+      ]
+    },
+    {
+      "module": "SEM-002",
+      "source_path": "streeling/courses/semiotics/en/sem-002-chord-symbols-and-canonicalization.md",
+      "source_sha256": "40b9a12d2c7fc5c6a07c3b77240370e8f5916c34f3577a64cdb9acae817b5ea6",
+      "prompt": "What canonical strings do the pinned tests expect for `Cmi7` and `D-7`? Which part of each written sign changes, and what would be lost if GA stored only the canonical output?",
+      "expected_answer": "The expected outputs are `Cm7` and `Dm7`. The entered minor markers `mi` and `-` become `m`; the root letters and `7` remain. If only the output is stored, the original minor-marker spelling cannot be reconstructed.",
+      "reviewer_score": null,
+      "reviewer_reasoning": null,
+      "learner_attempt": null,
+      "stimulus_markdown": "Read the pinned tests and renderer as inputs. No fresh parser run or original user recording is supplied.",
+      "primary_sources": [
+        {
+          "label": "Pinned DSL tests",
+          "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Tests/Common/GA.Business.DSL.Tests/ChordDslTests.cs"
+        },
+        {
+          "label": "Pinned renderer",
+          "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.DSL/Generators/ChordRenderer.fs"
+        }
+      ]
+    },
+    {
+      "module": "SEM-003",
+      "source_path": "streeling/courses/semiotics/en/sem-003-status-signs-and-evidence.md",
+      "source_sha256": "3a6a31b47c60b7034cc967132d80c39b8fdaa13c3edec2787c385e3595ff08d8",
+      "prompt": "A handoff says only “SEM-002 is ready.” Identify two materially different objects that `ready` could represent, and rewrite the sentence so one of them can be checked. Do the pinned schema values include `ready`?",
+      "expected_answer": "It could mean ready for source review, or ready for deployment after all reviews. One checkable rewrite is “SEM-002 English source at commit `c453a91d1c4d913af72c28779eff826659c1d654` is ready **for a bounded source and answer-key review**; production review and publication are incomplete.” The schema has no `ready` enum value.",
+      "reviewer_score": null,
+      "reviewer_reasoning": null,
+      "learner_attempt": null,
+      "stimulus_markdown": "Use the schema, SEM-002 production record and AI subject-review scope below. These are historical source records, not a new human review or deployment observation.",
+      "primary_sources": [
+        {
+          "label": "Pinned production schema",
+          "url": "https://github.com/GuitarAlchemist/Demerzel/blob/c453a91d1c4d913af72c28779eff826659c1d654/schemas/course-production.schema.json"
+        },
+        {
+          "label": "SEM-002 production record",
+          "url": "https://github.com/GuitarAlchemist/Demerzel/blob/c453a91d1c4d913af72c28779eff826659c1d654/state/streeling/course-productions/cp-semiotics-2026-10-11-002.json"
+        },
+        {
+          "label": "Subject-review scope",
+          "url": "https://github.com/GuitarAlchemist/Demerzel/blob/c453a91d1c4d913af72c28779eff826659c1d654/state/streeling/reviews/sem-002-subject-review-2026-10-11.md"
+        }
+      ]
+    },
+    {
+      "module": "VC-003",
+      "source_path": "streeling/courses/visual-computing/en/vc-003-jitter-and-voicing-cloud-distance.md",
+      "source_sha256": "e66350592803bfe2efb65545e219301026a1e04b49208c0df573b138d4cdb032",
+      "prompt": "How many floats must the binary contain for this fixture? What does the pinned loader do if it contains only eight floats while `meta.total` remains three?",
+      "expected_answer": "It needs `3 * 3 = 9` floats. Eight fails `basePositions.length !== meta.total * 3`, so `createVoicingCloud` rejects with a size-mismatch error before constructing the point group. The check concerns the total number of floats, not the validity of each instrument block.",
+      "reviewer_score": null,
+      "reviewer_reasoning": null,
+      "learner_attempt": null,
+      "stimulus_markdown": "Synthetic input has three XYZ points: `(0,0,0)`, `(0.2,0,0)`, `(10,0,0)`; `meta.total = 3`. The pinned loader reads the binary as a `Float32Array` and uses this exact length check:\n\n```ts\n  if (basePositions.length !== meta.total * 3) {\n    throw new Error(\n      `voicing-positions size mismatch: bin has ${basePositions.length / 3} points, meta says ${meta.total}`,\n    );\n  }\n```",
+      "primary_sources": [
+        {
+          "label": "Pinned loader",
+          "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/ReactComponents/ga-react-components/src/components/PrimeRadiant/VoicingCloud.ts"
+        }
+      ]
+    },
+    {
+      "module": "VC-006",
+      "source_path": "streeling/courses/visual-computing/en/vc-006-origami-fold-state-scene-trial.md",
+      "source_sha256": "a54d470cccd50cd4b8c8ca97e89651bce5b99a12d9308e05bf3c8cad9a9a3f83",
+      "prompt": "A modeler hands over two screenshots labeled `open` and `closed`, plus a GLB. The GLB has a visible ridge, but no crease IDs or panel adjacency record. Can a reviewer verify that `e1` changed state and still represents the policy dependency?",
+      "expected_answer": "No. The images can support a visual difference, but they do not identify which edge is `e1`, which panels it joins, or which policy state that edge means. Add a versioned external manifest with panel and crease IDs, adjacency, signed-angle convention, state-to-meaning mapping, and the GLB and scene hashes. Then test the mapping after import with an intentional selection or state change. A ridge alone is not a semantic receipt.",
+      "reviewer_score": null,
+      "reviewer_reasoning": null,
+      "learner_attempt": null,
+      "stimulus_markdown": "Declared synthetic trial: panels A/B/C; crease `e1` joins A to B and `e2` joins B to C. The external trial contract must bind a crease ID to its incident panels, signed pose and policy-state meaning. No exported folded scene or interaction trace is supplied.",
+      "primary_sources": []
+    }
+  ],
+  "packet_correction": "Added missing task stimuli and exact primary lookups after native review; course sources and question/answer text unchanged."
+}

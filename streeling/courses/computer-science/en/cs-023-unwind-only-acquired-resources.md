@@ -1,0 +1,159 @@
+---
+module_id: "cs-023-unwind-only-acquired-resources"
+department: "computer-science"
+course: "Unwind Only the Resources Actually Acquired"
+level: "intermediate"
+prerequisites: ["cs-010-compose-fail-fast-ga-computations"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Unwind Only the Resources Actually Acquired
+
+> This lesson uses authored fixed inputs and inspected source passages. The numbers, histories and labels are teaching constructions. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A fictional GA export opens an input handle and then an output handle. The work fails. Retaining the error is necessary, but the handles still need a declared lifetime. Fail-fast composition alone does not say who owns cleanup. Write acquisition and release events separately from the work outcome.
+
+The F# resource-management reading describes scope-bound disposal and reverse order for nested `use` bindings. Our trace uses symbolic handles, with no file opened. Only a successful acquisition grants ownership. If the second acquisition fails, there is no second resource to release, and the work body never starts. The outer successful acquisition still has to unwind.
+
+Releasing a handle does not erase data already written, cancel a remote effect or restore an earlier business state. Those require other contracts. We also assume releases succeed: a real cleanup failure needs an explicit error policy rather than a claim that this small trace covers every exception. A DSL proposal should preserve both ownership and outcome; hiding them behind a successful-looking finalizer label would weaken the report.
+
+## Sources and project boundary
+
+The retained Learn helper separates frontmatter, heading and body in `parseModule`, and indexes English module names in `englishModuleKeys`. Those inspected representations let a task name its source and metadata; they do not implement the authored operation. The retained practice record instead distinguishes retrieval metrics from learner evidence. Inspect the particular file linked below and retain only the observation it actually supports. No model input in this lesson was estimated from that file.
+
+[Prerequisite: cs-010-compose-fail-fast-ga-computations](../../computer-science/en/cs-010-compose-fail-fast-ga-computations.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Retained project artifact](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json)
+
+[Primary reading](https://learn.microsoft.com/dotnet/fsharp/language-reference/resource-management-the-use-keyword)
+
+## Fixed model and control
+
+```json
+{
+  "values": {
+    "resources": [
+      "input",
+      "output"
+    ],
+    "fail_acquire": null,
+    "work_error": true
+  },
+  "formula": "Acquire in listed order until failure. If acquisition completes run work. Release every successfully acquired resource exactly once in reverse order. Release cannot fail in this model.",
+  "expected": {
+    "acquired": [
+      "input",
+      "output"
+    ],
+    "released": [
+      "output",
+      "input"
+    ],
+    "outcome": "work_error"
+  },
+  "negative_control": {
+    "values": {
+      "resources": [
+        "input",
+        "output"
+      ],
+      "fail_acquire": "output",
+      "work_error": true
+    },
+    "expected": {
+      "acquired": [
+        "input"
+      ],
+      "released": [
+        "input"
+      ],
+      "outcome": "acquire_error"
+    },
+    "why": "A failed acquisition does not create ownership; work is skipped and only input is released."
+  },
+  "assumptions": [
+    "Acquisition failure returns no resource; all releases succeed.",
+    "Nested scopes own their acquired resources; no process crash or escaping borrow."
+  ],
+  "limits": "No implementation, exception suppression policy, asynchronous disposal or crash recovery is provided.",
+  "input_types": {
+    "resources": "ordered list<unique string>",
+    "fail_acquire": "string|null",
+    "work_error": "boolean"
+  }
+}
+```
+
+### Exercise 1
+
+Trace cleanup after the work failure.
+
+<details><summary>Answer 1</summary>
+
+Acquired resources are `[input,output]`; release order is `[output,input]`. The outcome stays `work_error`; cleanup does not convert failed work into success.
+
+</details>
+
+### Exercise 2
+
+Why is reverse order useful here?
+
+<details><summary>Answer 2</summary>
+
+The inner scope may depend on the outer resource. Closing the inner resource first respects nested ownership. This explanation assumes the declared scope relation.
+
+</details>
+
+### Exercise 3
+
+Apply the failed-acquisition control.
+
+<details><summary>Answer 3</summary>
+
+Only `[input]` is acquired and released. The outcome is `acquire_error`; `output` was never owned, and the work body is skipped.
+
+</details>
+
+### Exercise 4
+
+Does release roll back an exported artifact?
+
+<details><summary>Answer 4</summary>
+
+No. Handle lifetime and business compensation are different operations. This trace says nothing about partial bytes, transactions or remote effects.
+
+</details>
+
+### Exercise 5
+
+Which assumption must change for a release failure?
+
+<details><summary>Answer 5</summary>
+
+The successful-release premise fails. A new policy must preserve both work and cleanup errors; no masking or suppression behavior has been defined here.
+
+</details>
+
+## Source-assisted learner task
+
+Write a resource-lifetime card for an authored GA export and compare an assistant’s trace with the nested scopes.
+
+**Direct manual baseline:** List successful acquisitions, then reverse that list for cleanup and retain the original failure.
+
+**Falsifier:** A never-acquired resource is released, an acquired one leaks, or cleanup turns work failure into success.
+
+Save a first answer before opening the corrected exercises. Copy the input identities and units, write the intermediate quantities, and distinguish the calculation from the interpretation. A correct number with the wrong denominator, state boundary or counting unit does not meet the task. Retain a surprising intermediate result rather than changing the input to make the final answer look plausible.
+
+Read the cited primary passage within the scope recorded in the packet. Compare its actual definition with the authored rule in the fixed model. The reference may motivate a concept without specifying our entire model. Record the version or date, the passage used and the exact assumption you imported. An accessible page or a successful file read is not evidence that a claim has been verified.
+
+Inspect the retained project artifact and one prerequisite. Separate what the file actually represents from what this new task hypothesizes. Preserve source revision and assistance history. Ask an assistant to challenge an assumption only after saving the manual baseline, then keep its prompt, reply, accepted correction and rejected suggestion. Source lookup and calculator use are permitted assistance, not unaided recall.
+
+Run the changed input through the same reasoning on paper. State the falsifier before proposing an agent abstraction or a composable DSL expression. If an abstraction drops the counterexample or changes the accepted endpoint, it fails this task even if its response is shorter. Compare a direct table or typed record first; no new language or production engine is required.
+
+Submit original and corrected answers together with the control result, source passage and remaining uncertainty. The packet prepares a separate criterion for each exercise, with every learner decision undecided. An answer key, a byte hash and an author self-check are different evidence from an actual learner attempt. A future dogfood comparison must retain actual attempts on the same versioned task and the direct baseline before claiming a useful change.
+
+[Fixed unit packet](../../../../code/streeling/evidence/batch50-2026-10-25/unit-b.json) · [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25/journal.md)

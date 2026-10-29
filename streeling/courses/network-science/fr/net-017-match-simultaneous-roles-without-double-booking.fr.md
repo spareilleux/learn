@@ -1,0 +1,202 @@
+---
+module_id: "net-017-match-simultaneous-roles-without-double-booking"
+department: "network-science"
+course: "Affecter des rôles simultanés sans double réservation"
+title: "Affecter des rôles simultanés sans double réservation"
+level: "intermediate"
+prerequisites: ["net-003-worker-lane-coverage-and-fragility", "net-014-bound-throughput-with-a-capacity-cut"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Affecter des rôles simultanés sans double réservation
+
+> Il s’agit d’un cas mathématique ou logique construit, appuyé par des passages de sources consultés. Revue technique humaine, relecture linguistique, tentatives apprenantes, exécution, adoption en production et publication restent indéterminées.
+
+Une table Demerzel donne au moins un candidat à chaque rôle demandé. Un coordinateur suppose alors que les rôles peuvent être remplis ensemble. Il réserve deux fois un worker lorsque plusieurs rôles n’ont que ce candidat. Le cours de couverture compte les routes par classe ; ici, on demande si des workers distincts peuvent occuper tous les rôles simultanés.
+
+Dessinez un graphe biparti, avec rôles d’un côté et workers de l’autre. Une arête déclare qu’un worker peut remplir un rôle. Un couplage ne réutilise aucun sommet. Pour prouver la faisabilité, donnez le couplage complet. Pour montrer l’impossibilité, trouvez un sous-ensemble de rôles dont la réunion des ensembles de candidats compte moins de workers que ce sous-ensemble ne compte de rôles. Ces rôles ne peuvent recevoir des workers distincts, même si d’autres rôles sont flexibles.
+
+Dans le cas fixé, rédaction et revue ont chacune un candidat, mais le même candidat unique. Les alternatives de traduction ne lèvent pas l’obstacle. Le contrôle ajoute une arête de revue et permet une affectation complète. Gardez le témoin d’affectation et le sous-ensemble déficient : compter les rôles couverts masque la raison de l’échec initial.
+
+NetworkX décrit le couplage biparti de cardinalité maximale. Notre petit exemple se résout à vue et par comptage des voisins, sans installer ni exécuter le paquet. Le prérequis de débit traite de capacités dans un réseau ; ici, l’exclusivité des workers et l’identité des rôles sont centrales. Une vraie revue humaine peut exiger indépendance, expertise et consentement. Les candidatures ne prouvent rien de cela. Un ordonnanceur d’agents devrait préserver ces contraintes avant toute utilisation de l’affectation comme autorisation de dispatch.
+
+## Sources et périmètre du projet
+
+L’utilitaire Learn sépare métadonnées, titre et corps, puis indexe les identités des modules anglais. Examinez cette représentation pour nommer l’artefact et sa révision. Elle n’implémente pas le modèle du cours et ne fournit aucune de ses entrées inventées.
+
+[Prérequis: net-003-worker-lane-coverage-and-fragility](../../network-science/en/net-003-worker-lane-coverage-and-fragility.md)
+
+[Prérequis: net-014-bound-throughput-with-a-capacity-cut](../../network-science/en/net-014-bound-throughput-with-a-capacity-cut.md)
+
+[Artefact conservé du projet](../../../../scripts/streeling-lib.mjs)
+
+[Lecture primaire](https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.bipartite.matching.maximum_matching.html)
+
+## Modèle fixé et contrôle négatif
+
+```json
+{
+  "values": {
+    "candidates": {
+      "draft": [
+        "w1"
+      ],
+      "review": [
+        "w1"
+      ],
+      "translate": [
+        "w2",
+        "w3"
+      ]
+    }
+  },
+  "formula": "Choose injective role-to-worker assignments over candidate edges, allowing unfilled roles. Maximize assigned count, then choose lexicographically smallest sorted [role,worker] list. For each role subset U compute neighbours N(U); deficient if len(N(U))<len(U). Choose obstruction by smallest subset size, then lexical role list.",
+  "expected": {
+    "all_roles_covered": true,
+    "maximum_count": 2,
+    "matching": [
+      [
+        "draft",
+        "w1"
+      ],
+      [
+        "translate",
+        "w2"
+      ]
+    ],
+    "obstruction": {
+      "roles": [
+        "draft",
+        "review"
+      ],
+      "workers": [
+        "w1"
+      ],
+      "deficiency": 1
+    }
+  },
+  "negative_control": {
+    "values": {
+      "candidates": {
+        "draft": [
+          "w1"
+        ],
+        "review": [
+          "w1",
+          "w2"
+        ],
+        "translate": [
+          "w2",
+          "w3"
+        ]
+      }
+    },
+    "expected": {
+      "all_roles_covered": true,
+      "maximum_count": 3,
+      "matching": [
+        [
+          "draft",
+          "w1"
+        ],
+        [
+          "review",
+          "w2"
+        ],
+        [
+          "translate",
+          "w3"
+        ]
+      ],
+      "obstruction": null
+    },
+    "why": "An extra review candidate removes the bottleneck and permits distinct workers for every role."
+  },
+  "input_types": {
+    "candidates": "mapping of role strings to unique worker-string lists"
+  },
+  "assumptions": [
+    "Each role requires one worker and each worker occupies at most one role in this simultaneous window.",
+    "Candidate edges are hypothetical admissibility declarations, not live staffing or trust evidence."
+  ],
+  "limits": "A matching is a finite allocation witness, not authority, competence validation, independent human review or an actual dispatched fleet."
+}
+```
+
+### Exercice 1
+
+La couverture marginale est-elle satisfaite ?
+
+<details><summary>Réponse 1</summary>
+
+Oui : chaque rôle a au moins un candidat, donc elle vaut `true`. Cela ne dit encore rien des affectations simultanées distinctes.
+
+</details>
+
+### Exercice 2
+
+Trouvez l’obstacle d’affectation.
+
+<details><summary>Réponse 2</summary>
+
+Les rôles `[draft,review]` ont pour voisins `[w1]`, d’où une déficience de `1`. Aucune affectation injective ne remplit les deux dans la même fenêtre.
+
+</details>
+
+### Exercice 3
+
+Donnez un couplage maximal du cas fixé.
+
+<details><summary>Réponse 3</summary>
+
+La règle d’égalité choisit `[[draft,w1],[translate,w2]]`, de taille `2`. La revue reste explicitement vide ; réutiliser le worker de rédaction violerait l’exclusivité.
+
+</details>
+
+### Exercice 4
+
+Appliquez le contrôle avec une arête ajoutée.
+
+<details><summary>Réponse 4</summary>
+
+Le couplage complet est `[[draft,w1],[review,w2],[translate,w3]]`, de taille `3` ; le champ déficient vaut `null`. Les workers restent distincts.
+
+</details>
+
+### Exercice 5
+
+Le couplage prouve-t-il une revue indépendante ?
+
+<details><summary>Réponse 5</summary>
+
+Non. Des identifiants différents ne prouvent ni humains distincts, ni sources indépendantes, ni expertise, ni autorisation. Ajoutez ces contraintes et leurs preuves avant le dispatch.
+
+</details>
+
+## Travail avec consultation des sources
+
+Examinez une proposition de rôles simultanés pour une fenêtre fictive de production Demerzel.
+
+**Référence manuelle directe:** Dessinez les candidatures, construisez une affectation injective ou comptez un sous-ensemble déficient.
+
+**Critère de réfutation:** La proposition remplit tous les rôles uniquement en affectant deux fois un worker dans la même fenêtre.
+
+Enregistrez une première réponse avant d’ouvrir les corrigés. Repérez les types des entrées, le périmètre de comparaison et la quantité à préserver. Dessinez le plus petit tableau ou schéma qui permette de vérifier chaque résultat intermédiaire. Gardez un résultat inattendu : modifier les prémisses pour obtenir la conclusion souhaitée ferait disparaître le contre-exemple.
+
+Lisez le prérequis et le passage primaire dans les limites indiquées. Notez la révision de la source, la définition réellement utilisée et les hypothèses reprises. L’artefact du projet fournit une représentation réelle à examiner ; le modèle fixé apporte des entrées inventées. Un nom de document ou une URL accessible n’établit pas un résultat de production. Précisez les observations nécessaires avant d’utiliser le calcul dans une décision opérationnelle.
+
+Énoncez la référence manuelle directe et son critère de réfutation avant de proposer un DSL composable ou une abstraction d’agent. Demandez à un assistant de contester votre réponse manuelle après l’avoir enregistrée. Conservez la consigne, la réponse, le passage cité et la correction retenue ou rejetée. Une expression plus courte n’est utile que si elle préserve l’opération, le contrôle et la limite de refus. Comparez-la d’abord à un simple tableau.
+
+Remettez ensemble réponse initiale, étapes intermédiaires, réponse corrigée et contrôle. Signalez la consultation des sources et l’usage d’une calculatrice comme des aides. Une future comparaison en dogfood doit porter sur la même version de la tâche et garder les échecs comme les réussites ; changer la question pourrait autrement passer pour un progrès. Les critères préparés ci-dessous restent indéterminés jusqu’à une tentative réelle. Un corrigé et une vérification d’auteur n’établissent ni apprentissage ni adoption.
+
+## Critères préparés pour l’apprenant
+
+- Exercice 1: La couverture marginale est-elle satisfaite ? — Décision indéterminée.
+- Exercice 2: Trouvez l’obstacle d’affectation. — Décision indéterminée.
+- Exercice 3: Donnez un couplage maximal du cas fixé. — Décision indéterminée.
+- Exercice 4: Appliquez le contrôle avec une arête ajoutée. — Décision indéterminée.
+- Exercice 5: Le couplage prouve-t-il une revue indépendante ? — Décision indéterminée.
+
+[Dossier fixé](../../../../code/streeling/evidence/batch50-2026-10-25-b/unit-b.json) · [Journal de validation](../../../../code/streeling/evidence/batch50-2026-10-25-b/journal.md)

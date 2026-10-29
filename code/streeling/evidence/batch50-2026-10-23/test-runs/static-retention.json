@@ -1,0 +1,75 @@
+{
+  "artifacts": [
+    {
+      "origin": "C:\\tmp\\streeling-batch50-build-20261023.log",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-23/test-runs/static-build.log",
+      "sha256": "6a2574c0d12dc53d2f15af6f1e6369eacdbb921ee8a8760e3728f8f9b85e417f",
+      "byte_identical": true,
+      "command_or_receipt": {
+        "action": "build",
+        "args": [
+          "npm.cmd",
+          "run",
+          "build"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 112.1766146000009,
+        "log": "C:\\tmp\\streeling-batch50-build-20261023.log",
+        "log_sha256": "6a2574c0d12dc53d2f15af6f1e6369eacdbb921ee8a8760e3728f8f9b85e417f"
+      }
+    },
+    {
+      "origin": "C:\\tmp\\streeling-batch50-sync-20261023.log",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-23/test-runs/source-sync.log",
+      "sha256": "4e0fc1f761b7c0c67f994c9ab3df8c32414eb786aa2eeec32759a800e3a84c21",
+      "byte_identical": true,
+      "command_or_receipt": {
+        "action": "sync",
+        "args": [
+          "npm.cmd",
+          "run",
+          "sync:streeling"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 2.2884024000377394,
+        "log": "C:\\tmp\\streeling-batch50-sync-20261023.log",
+        "log_sha256": "4e0fc1f761b7c0c67f994c9ab3df8c32414eb786aa2eeec32759a800e3a84c21"
+      }
+    },
+    {
+      "origin": "C:\\tmp\\streeling-batch50-idempotent-sync-20261023.log",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-23/test-runs/repeat-sync.log",
+      "sha256": "4e0fc1f761b7c0c67f994c9ab3df8c32414eb786aa2eeec32759a800e3a84c21",
+      "byte_identical": true,
+      "command_or_receipt": {
+        "checked_at_utc": "2026-10-24T00:38:05.160564+00:00",
+        "scope": "All generated Streeling locale Markdown, lock, sidebar and preserved journals have identical bytes after repeat sync.",
+        "checked_files": 920,
+        "before_after_equal": true,
+        "snapshot_sha256": "a954d1117bd7025e0e55a9f18b0c7e71e3a868e81f1c32f37c1426f4712b9d69",
+        "log": "C:\\tmp\\streeling-batch50-idempotent-sync-20261023.log",
+        "log_sha256": "4e0fc1f761b7c0c67f994c9ab3df8c32414eb786aa2eeec32759a800e3a84c21"
+      }
+    },
+    {
+      "origin": "C:\\tmp\\streeling-batch50-tests-20261023.log",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-23/test-runs/generator-regression.log",
+      "sha256": "83e83a3ada7ffff7066037afd3e880fe2068102758587cdc371d768828bc2a10",
+      "byte_identical": true,
+      "command_or_receipt": {
+        "action": "tests",
+        "args": [
+          "node",
+          "--test",
+          "scripts/tests/lazy-demo.test.mjs",
+          "scripts/tests/streeling-copy-source.test.mjs",
+          "scripts/tests/sync-streeling.test.mjs"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 3.665444699989166,
+        "log": "C:\\tmp\\streeling-batch50-tests-20261023.log",
+        "log_sha256": "83e83a3ada7ffff7066037afd3e880fe2068102758587cdc371d768828bc2a10"
+      }
+    }
+  ]
+}

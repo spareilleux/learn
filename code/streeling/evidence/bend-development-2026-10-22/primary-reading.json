@@ -1,0 +1,31 @@
+{
+  "scope": "Actual primary bodies read; geometric and neutral-layer examples are authored, not vendor-calibrated results.",
+  "references": [
+    {
+      "url": "https://help.autodesk.com/cloudhelp/ENU/Fusion-Sheet-Metal/files/SM-RULES-REF.htm",
+      "read": "Web body, rule dimensions and unfold method",
+      "used_for": "Inner radius, thickness, dimensionless neutral offset ratio and additional process-rule fields; no command executed."
+    },
+    {
+      "url": "https://developer.rhino3d.com/en/guides/general/essential-mathematics/parametric-curves-surfaces/",
+      "read": "Circle parameterization and surface curvature sections",
+      "used_for": "Arc parameterization, cylinder principal curvatures and Gaussian product; no unrelated examples imported."
+    },
+    {
+      "url": "https://docs.mcneel.com/rhino/8/help/en-us/commands/unrollsrf.htm",
+      "read": "Full web body including tolerances/pitfalls and finite-thickness/tool-purpose limitations",
+      "used_for": "Ideal developability, seams and distinction from approximate/material-dependent flattening; not observed command behavior."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/edemaine/fold/824f9fa6f944248787b0b2077ef622761489201e/doc/spec.md",
+      "read": "Actual pinned edges_foldAngle definition",
+      "used_for": "Signed degree deviation from flat and assignment signs."
+    }
+  ],
+  "unread_attempt": {
+    "url": "https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/How-to-calculate-K-Factor-for-Inventor-Sheet-Metal.html",
+    "web_result": "Open returned zero body lines",
+    "body_or_images_read": false
+  },
+  "calibrated_material_values": null
+}

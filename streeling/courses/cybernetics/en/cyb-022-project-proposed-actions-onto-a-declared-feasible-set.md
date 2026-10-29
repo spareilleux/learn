@@ -1,0 +1,144 @@
+---
+module_id: "cyb-022-project-proposed-actions-onto-a-declared-feasible-set"
+department: "cybernetics"
+course: "Project Proposed Actions onto a Declared Feasible Set"
+title: "Project Proposed Actions onto a Declared Feasible Set"
+level: "intermediate"
+prerequisites: ["cyb-017-limit-command-change-separately-from-amplitude", "cyb-020-check-disturbance-robust-set-closure"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Project Proposed Actions onto a Declared Feasible Set
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+An assistant may propose an action that exceeds the allowed next-state bound even when it respects an actuator limit. Clamping only the actuator misses that extra obligation. A feasibility filter first intersects all declared restrictions and then chooses the admissible action nearest the proposal. The restrictions must come from the actual operating contract before such a filter could be useful.
+
+Here the next state is the current scalar state plus the chosen action. Translate the next-state upper bound into an action upper bound, intersect it with the actuator interval, and minimize squared distance to the proposal. For a nonempty closed interval, the nearest point is the proposal if it lies inside and the closer endpoint otherwise. This is an explicit tiny optimization rather than a guarantee about a general safety-filter implementation.
+
+The control moves the required state bound beyond what the actuator can achieve. The feasible set is empty, so an implementation must return an infeasibility result instead of inventing a supposedly safe command. Nearest action does not mean safe in an unmodelled world: disturbances, delayed observations and model error remain absent. Preserve the proposed action, active restrictions and refusal reason in a future agent artifact; otherwise a clipped command may conceal an impossible request.
+
+## Sources and project boundary
+
+[Prerequisite: cyb-017-limit-command-change-separately-from-amplitude](../../cybernetics/en/cyb-017-limit-command-change-separately-from-amplitude.md)
+
+[Prerequisite: cyb-020-check-disturbance-robust-set-closure](../../cybernetics/en/cyb-020-check-disturbance-robust-set-closure.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading](https://web.stanford.edu/~boyd/cvxbook/bv_cvxslides.pdf)
+
+## Fixed model and negative control
+
+```json
+{
+  "values": {
+    "state": 0,
+    "desired_action": 3,
+    "action_interval": [
+      -2,
+      2
+    ],
+    "next_state_upper": 1
+  },
+  "formula": "next_state=state+u. Feasible interval=[action_interval[0], min(action_interval[1], next_state_upper-state)]. If lower>upper return infeasible; otherwise project desired_action onto interval and compute squared change.",
+  "expected": {
+    "feasible": true,
+    "feasible_interval": [
+      -2,
+      1
+    ],
+    "action": 1,
+    "next_state": 1,
+    "squared_change": 4
+  },
+  "negative_control": {
+    "values": {
+      "state": 0,
+      "desired_action": 3,
+      "action_interval": [
+        -2,
+        2
+      ],
+      "next_state_upper": -3
+    },
+    "expected": {
+      "feasible": false,
+      "feasible_interval": null,
+      "action": null,
+      "next_state": null,
+      "squared_change": null
+    },
+    "why": "The tightened next-state obligation and actuator interval have no common action."
+  },
+  "input_types": {
+    "state": "finite scalar",
+    "desired_action": "finite scalar",
+    "action_interval": "ordered closed real interval",
+    "next_state_upper": "finite scalar upper bound"
+  },
+  "assumptions": [
+    "All inputs are stipulated teaching values, not measured project events.",
+    "Only the declared finite objective and constraints are represented."
+  ],
+  "limits": "No disturbance robustness, physical safety, actual agent action or generic quadratic-program solver is established."
+}
+```
+
+## Source-assisted task and journal
+
+**Direct manual baseline:** Intersect the scalar constraints on paper and locate the nearest point, or prove the intersection empty.
+
+**Falsifier:** A filter emits an action when the declared feasible intersection is empty, or checks actuator bounds but ignores the next-state bound.
+
+Read the prerequisite and the retained project representation before treating this example as a proposed feature. The linked Learn source helper extracts metadata, title and body, then indexes English module identities. That is an actual representation boundary to inspect; it supplies neither the invented inputs nor an implementation of this mathematical operation. Keep the source revision attached to the reading note so that a later change cannot silently inherit this inspection.
+
+For the source-assisted task, reproduce the fixed case directly before asking an assistant to explain it. Use the input types and assumptions in the packet as part of the question, preserve intermediate quantities and compare the declared negative control. Ask the assistant to identify which premise makes the two results differ. A plausible explanation that never calculates the changed input has not demonstrated the operation.
+
+Record the exact question, supplied sources, answer, assistance history and any correction in the journal. The prepared corrected answers below are an answer key, not a learner attempt. An independent model check can establish the finite arithmetic while still missing a poor prompt or a misleading translation. Human technical review, fluent-language review, learner acceptance, native runtime behavior, production adoption and publication decisions therefore remain undecided. Retain a failed check and its diagnosis before recording a successful replay; do not replace an original failure with the corrected result.
+
+## Corrected exercises
+
+### Exercise 1
+
+Find the admissible interval.
+
+> **Answer:** Intersecting action limits and next-state bound gives `[-2,1]`, not merely `[-2,2]`.
+
+### Exercise 2
+
+Project the fixed proposal.
+
+> **Answer:** Proposal `3` projects to `1`; the next state is `1` and squared change is `4`.
+
+### Exercise 3
+
+Handle the impossible control.
+
+> **Answer:** The upper action bound becomes `-3`, below the lower bound `-2`. The intersection is empty; action and next-state fields remain `null`.
+
+### Exercise 4
+
+What does the retained project helper actually establish?
+
+> **Answer:** It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.
+
+### Exercise 5
+
+Which acceptance decisions can the corrected answer key close?
+
+> **Answer:** None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.
+
+## Prepared learner criteria
+
+These criteria are prepared; every learner decision remains undecided.
+
+- Exercise 1: Intersecting action limits and next-state bound gives `[-2,1]`, not merely `[-2,2]`.
+- Exercise 2: Proposal `3` projects to `1`; the next state is `1` and squared change is `4`.
+- Exercise 3: The upper action bound becomes `-3`, below the lower bound `-2`. The intersection is empty; action and next-state fields remain `null`.
+- Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.
+- Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.
+
+[Fixed unit packet](../../../../code/streeling/evidence/batch50-2026-10-25-c/unit-b.json) · [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25-c/journal.md)

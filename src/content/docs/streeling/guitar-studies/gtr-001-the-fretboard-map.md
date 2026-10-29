@@ -63,9 +63,11 @@ The chromatic scale (all 12 notes) in order:
 A → A#/Bb → B → C → C#/Db → D → D#/Eb → E → F → F#/Gb → G → G#/Ab → (back to A)
 ```
 
-Two important exceptions where there is **no sharp/flat between adjacent natural notes**:
-- **B to C** — one semitone, no B#
-- **E to F** — one semitone, no E#
+Two adjacent-natural-note pairs are **one semitone apart, with no additional semitone between them**:
+- **B to C** — one semitone.
+- **E to F** — one semitone.
+
+B# and E# are valid spellings; in this twelve-tone equal-tempered model they sound at C and F respectively. The chromatic list uses C and F for convenience. [MCL-008](../../musicology/mcl-008-keep-diatonic-and-chromatic-transposition-separate/) explains why the spelling can matter.
 
 Everything else has a sharp/flat between the natural notes (e.g., A to B has A#/Bb in between — that is two semitones).
 

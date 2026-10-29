@@ -1,0 +1,101 @@
+---
+module_id: sem-012-preserve-the-order-of-stitch-frame-actions
+department: semiotics
+course: "Preserve the Order of Stitch Frame Actions"
+level: intermediate
+prerequisites: ["sem-006-preserve-orientation-across-scene-frames"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Preserve the Order of Stitch Frame Actions
+
+> Draft for technical and language review. Every scene, count, temperature, timing and outcome introduced below is an authored example. Source inspection and arithmetic do not constitute a physical craft trial, a [Godot](https://docs.godotengine.org/en/4.5/) import, a [Blender](https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md) render, a [ComfyUI](https://docs.comfy.org/) run or a learner observation. Human and runtime decisions remain undecided.
+
+## Project question
+
+A craft instruction says to shift a stitch motif and rotate it. Another author reverses the verbs because both lists contain the same actions. The resulting anchor lands elsewhere. This lesson treats instruction order as meaning: two compositions can share ingredients and still produce different scene placements. It extends frame-orientation reasoning from naming a direction to interpreting an ordered sequence of actions.
+
+## Read the retained boundary
+
+Atlas’s object helper accepts parent and location arguments, so a motif may eventually be placed inside another frame. The inspected helper does not define our stitch instructions. Godot’s transform documentation motivates declaring local versus parent operations instead of assuming that action words determine the frame.
+
+Read the prerequisite and the retained project artifact before interpreting the model. The source has its own revision and purpose; it supplies the boundary described here, not the new classroom inputs. Keep a small evidence table separating an inspected field, an assumption, a derived quantity and a proposed scene effect. An agent summary must point back to the field it interprets. A source filename alone cannot establish an earlier result.
+
+## Interpret the model
+
+Use a fixed planar frame and an exact quarter turn. Function composition applies the rightmost action first in the formula below. Translating before rotation rotates the translated offset as well as the point. Rotating before translation adds an offset that stays aligned with the fixed frame. This is a semantic distinction, not a numerical precision problem. The zero-translation control shows why one agreeing example cannot prove order independence. A proposed DSL should preserve the function order and frame in its interpretation before a prettier syntax or optimizer is considered.
+
+The direct baseline is a labelled sketch and a hand calculation with the answer panels closed. Preserve intermediate values and units, then apply the changed input in the negative control. A disagreement is useful evidence: locate whether it comes from the definition, arithmetic, representation or intended task before changing the model. Agreement on the main case alone does not establish a universal rule. These finite examples deliberately expose an assumption that a smooth preview could conceal.
+
+```text
+{"point_mm":[1,0],"translation_mm":[1,0],"rotation_deg":90}
+R(x,y)=(-y,x); T(p)=p+t; rotate_after_translate=R(T(p)); translate_after_rotate=T(R(p))
+```
+
+## Corrected exercises
+
+### Exercise 1
+
+Translate first and then rotate the main point.
+
+<details><summary>Answer 1</summary>
+
+The result is `(0,2) mm`. The translation is included in the vector rotated about the fixed origin.
+
+</details>
+
+### Exercise 2
+
+Rotate first and then translate. Is the anchor unchanged?
+
+<details><summary>Answer 2</summary>
+
+The result is `(1,1) mm`, different from the first order. The same action names therefore do not specify the same placement without order.
+
+</details>
+
+### Exercise 3
+
+Apply the zero-translation control to both compositions.
+
+<details><summary>Answer 3</summary>
+
+Both produce `(0,1) mm`. Agreement in this special case does not justify commuting the nonzero translation in the main case.
+
+</details>
+
+### Exercise 4
+
+What information must survive a translation into a scene description?
+
+<details><summary>Answer 4</summary>
+
+Retain the action order, point and offset units, rotation origin, frame of the offset and composition convention. Verb names alone leave essential meaning unresolved.
+
+</details>
+
+### Exercise 5
+
+Could a compiler safely reorder these actions because a preview once matched?
+
+<details><summary>Answer 5</summary>
+
+Not under the stated main inputs. A valid optimization needs a condition proving equal interpreted results, not merely matching a special zero-offset preview.
+
+</details>
+
+## Source-assisted learner task
+
+Draw both paths from the same starting point and write each intermediate coordinate manually. Trace Atlas’s placement boundary without editing it. The unequal final anchors falsify an unconditional action-reordering rule; propose a semantic equivalence test before any compiler implementation.
+
+Retain your original answer, source locations, assistance history and any later correction as separate records. State the observable result that would falsify your recommendation before proposing automation. Compare the source-assisted result with your direct manual baseline, including any extra uncertainty it introduces. The fixed packet contains five prepared criteria; each decision stays null until an actual learner attempt and review exist. Prepared answers are checks, not evidence that a learner performed the task.
+
+## Sources and validation journal
+
+- [Prerequisite: sem-006-preserve-orientation-across-scene-frames](../../semiotics/en/sem-006-preserve-orientation-across-scene-frames.md)
+- [Retained project artifact](../../../../code/blender/scripts/atlas/kit.py)
+- [Primary reading](https://docs.godotengine.org/en/4.5/tutorials/3d/using_transforms.html)
+- [Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-24/unit-c.json)
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-24/journal.md)

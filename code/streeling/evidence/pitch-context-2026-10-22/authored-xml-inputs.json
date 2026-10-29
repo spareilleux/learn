@@ -1,0 +1,45 @@
+{
+  "scope": "Ten authored parser fixtures, not validated full application exports or copied musical works.",
+  "cases": [
+    {
+      "id": "written-e3",
+      "xml": "<score-partwise version=\"4.0\"><part-list><score-part id=\"P1\"><part-name>Authored fixture</part-name></score-part></part-list><part id=\"P1\"><measure number=\"1\"><attributes><divisions>1</divisions><clef><sign>G</sign><line>2</line></clef></attributes><note><pitch><step>E</step><octave>3</octave></pitch><duration>1</duration><type>quarter</type></note></measure></part></score-partwise>"
+    },
+    {
+      "id": "written-e3-transpose-down",
+      "xml": "<score-partwise version=\"4.0\"><part-list><score-part id=\"P1\"><part-name>Authored fixture</part-name></score-part></part-list><part id=\"P1\"><measure number=\"1\"><attributes><divisions>1</divisions><clef><sign>G</sign><line>2</line></clef><transpose><chromatic>0</chromatic><octave-change>-1</octave-change></transpose></attributes><note><pitch><step>E</step><octave>3</octave></pitch><duration>1</duration><type>quarter</type></note></measure></part></score-partwise>"
+    },
+    {
+      "id": "concert-e2",
+      "xml": "<score-partwise version=\"4.0\"><part-list><score-part id=\"P1\"><part-name>Authored fixture</part-name></score-part></part-list><part id=\"P1\"><measure number=\"1\"><attributes><divisions>1</divisions><clef><sign>G</sign><line>2</line></clef></attributes><note><pitch><step>E</step><octave>2</octave></pitch><duration>1</duration><type>quarter</type></note></measure></part></score-partwise>"
+    },
+    {
+      "id": "b-flat4",
+      "xml": "<score-partwise version=\"4.0\"><part-list><score-part id=\"P1\"><part-name>Authored fixture</part-name></score-part></part-list><part id=\"P1\"><measure number=\"1\"><attributes><divisions>1</divisions><clef><sign>G</sign><line>2</line></clef></attributes><note><pitch><step>B</step><alter>-1</alter><octave>4</octave></pitch><duration>1</duration><type>quarter</type></note></measure></part></score-partwise>"
+    },
+    {
+      "id": "b-natural4",
+      "xml": "<score-partwise version=\"4.0\"><part-list><score-part id=\"P1\"><part-name>Authored fixture</part-name></score-part></part-list><part id=\"P1\"><measure number=\"1\"><attributes><divisions>1</divisions><clef><sign>G</sign><line>2</line></clef></attributes><note><pitch><step>B</step><octave>4</octave></pitch><duration>1</duration><type>quarter</type></note></measure></part></score-partwise>"
+    },
+    {
+      "id": "h4-not-a-step",
+      "xml": "<score-partwise version=\"4.0\"><part-list><score-part id=\"P1\"><part-name>Authored fixture</part-name></score-part></part-list><part id=\"P1\"><measure number=\"1\"><attributes><divisions>1</divisions><clef><sign>G</sign><line>2</line></clef></attributes><note><pitch><step>H</step><octave>4</octave></pitch><duration>1</duration><type>quarter</type></note></measure></part></score-partwise>"
+    },
+    {
+      "id": "decimal-alter",
+      "xml": "<score-partwise version=\"4.0\"><part-list><score-part id=\"P1\"><part-name>Authored fixture</part-name></score-part></part-list><part id=\"P1\"><measure number=\"1\"><attributes><divisions>1</divisions><clef><sign>G</sign><line>2</line></clef></attributes><note><pitch><step>C</step><alter>0.5</alter><octave>4</octave></pitch><duration>1</duration><type>quarter</type></note></measure></part></score-partwise>"
+    },
+    {
+      "id": "integer-alter-zero",
+      "xml": "<score-partwise version=\"4.0\"><part-list><score-part id=\"P1\"><part-name>Authored fixture</part-name></score-part></part-list><part id=\"P1\"><measure number=\"1\"><attributes><divisions>1</divisions><clef><sign>G</sign><line>2</line></clef></attributes><note><pitch><step>C</step><alter>0</alter><octave>4</octave></pitch><duration>1</duration><type>quarter</type></note></measure></part></score-partwise>"
+    },
+    {
+      "id": "missing-octave",
+      "xml": "<score-partwise version=\"4.0\"><part-list><score-part id=\"P1\"><part-name>Authored fixture</part-name></score-part></part-list><part id=\"P1\"><measure number=\"1\"><attributes><divisions>1</divisions><clef><sign>G</sign><line>2</line></clef></attributes><note><pitch><step>E</step></pitch><duration>1</duration><type>quarter</type></note></measure></part></score-partwise>"
+    },
+    {
+      "id": "clef-down-octave",
+      "xml": "<score-partwise version=\"4.0\"><part-list><score-part id=\"P1\"><part-name>Authored fixture</part-name></score-part></part-list><part id=\"P1\"><measure number=\"1\"><attributes><divisions>1</divisions><clef><sign>G</sign><line>2</line><clef-octave-change>-1</clef-octave-change></clef></attributes><note><pitch><step>E</step><octave>3</octave></pitch><duration>1</duration><type>quarter</type></note></measure></part></score-partwise>"
+    }
+  ]
+}

@@ -1,0 +1,313 @@
+{
+  "verdict": "pass",
+  "completed_at_utc": "2026-10-24T00:36:13.462270+00:00",
+  "open_findings": [],
+  "scope": {
+    "checkout": "C:/tmp/learn-streeling-craft-transfer-20261022",
+    "base": "base:8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+    "head_sha": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+    "code_files": 5,
+    "new_courses": 50,
+    "previous_audio_courses": 3,
+    "depth": "focused",
+    "intent": "Add reproducible read-only authored-case claim tests for 50 new courses (18/16/16) and three previous audio cases, plus 150 localized metadata title checks. Calculations must use fixed inputs with independent expected witnesses, relevant negative controls, concrete observation records, and explicit finite-model boundaries. No production engine, physical material, listening, musician, human-language, learner or deployment acceptance is implied."
+  },
+  "test_bindings": [
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_baseline_audio.py",
+      "sha256": "e6e444db27f732e4b8663df09f3f40e5f8e90e734c275b9eb231a2ee13641383"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_unit_a.py",
+      "sha256": "99e9ada7601e1de00e0a1aef4643f02a73a748f74d977ee6b5d9459ecc35d477"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_unit_b.py",
+      "sha256": "3f0f51cbbd83cc927cf797d2f7bbfcfe14ad0d10c945635e8fda8a4b307e89ac"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_unit_c.py",
+      "sha256": "c7a2084293e52ad30da598555033137ff019412ffd2c560f6071071e7d894437"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_course_metadata.mjs",
+      "sha256": "3e0b59bad7c04d955cc116002dd53eb558fe2d76c2334afec68a5ccde85dbc38"
+    }
+  ],
+  "review_receipt": {
+    "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/review.json",
+    "sha256": "a74cbe9ea8d9336278d34c41e4de1007a2bf94adba75b66c996149a27be951d1"
+  },
+  "reviewers": [
+    "correctness",
+    "adversarial"
+  ],
+  "peer": {
+    "outcome": "in-process-fallback",
+    "coverage": "Cross-model pass: not run. Native Claude Max subscription verified without exposing secrets, but the sanctioned Bash worker runtime had no callable claude or node command; no peer job or external review started. One separately dispatched local adversarial context supplied the independent read; same serving family, no cross-model corroboration."
+  },
+  "resolved_findings": [
+    {
+      "id": "TC-01",
+      "severity": "P2",
+      "title": "Empty or partial metadata manifest can pass with omitted cases",
+      "status": "resolved",
+      "reviewers": [
+        "correctness"
+      ],
+      "file": "code/streeling/evidence/batch50-2026-10-23/tests/test_course_metadata.mjs",
+      "line": 12,
+      "first_evidence": "for (const course of plan.courses) {",
+      "consequence": "Original metadata suite permits an empty courses array, registers no localized checks and exits0; a private scratch reproduction confirmed this. Parent independently reproduced and added50unique courses/moduleids, exact3locales and150unique paths.",
+      "resolution_verified_at_utc": "2026-10-24T00:33:57.931702+00:00",
+      "validation": "Reviewed final delta and exact working/index SHA256 bindings; authoritative full replays passed; private mutation controls rejected the previously accepted wrong inputs and retained observations."
+    },
+    {
+      "id": "TC-02",
+      "severity": "P2",
+      "title": "Failed preliminary assertions omit mandatory observation records",
+      "status": "resolved",
+      "reviewers": [
+        "correctness",
+        "adversarial"
+      ],
+      "files": [
+        "code/streeling/evidence/batch50-2026-10-23/tests/test_unit_b.py",
+        "code/streeling/evidence/batch50-2026-10-23/tests/test_baseline_audio.py"
+      ],
+      "consequence": "INF010 total and baseline INF009 mean/sigma/reconstruction assertions precede the case OBSERVATION. A wrong mean can fail without any observation record. Move checks after emitted computed observations, preserving failure evidence.",
+      "resolution_verified_at_utc": "2026-10-24T00:33:57.931714+00:00",
+      "validation": "Reviewed final delta and exact working/index SHA256 bindings; authoritative full replays passed; private mutation controls rejected the previously accepted wrong inputs and retained observations."
+    },
+    {
+      "id": "TC-03",
+      "severity": "P2",
+      "title": "Baseline delay witness is printed without assertion",
+      "status": "resolved",
+      "reviewers": [
+        "adversarial"
+      ],
+      "file": "code/streeling/evidence/batch50-2026-10-23/tests/test_baseline_audio.py",
+      "line": 88,
+      "first_evidence": "self.assertEqual(1000 * lag / data[\"sample_rate_Hz\"], data[\"declared_delay_ms\"])",
+      "consequence": "In-memory rate4000Hz plus declared.5ms passes while output independently expects.25ms. Assert the fixed witness as well as consistency with declared delay; same class of missing explicit witness checks is being reviewed for negative coverage. Same root cause also affected printed .75 prefix coverage; independently reproduced with seven-frame prefix, observed .875, original test green.",
+      "resolution_verified_at_utc": "2026-10-24T00:33:57.931716+00:00",
+      "validation": "Reviewed final delta and exact working/index SHA256 bindings; authoritative full replays passed; private mutation controls rejected the previously accepted wrong inputs and retained observations."
+    }
+  ],
+  "verification": {
+    "authoritative_claim_tests": 69,
+    "authoritative_claim_observations": 100,
+    "authoritative_baseline_tests": 6,
+    "authoritative_baseline_observations": 6,
+    "authoritative_metadata_tests": 150,
+    "execution_receipt_bindings": [
+      {
+        "path": "code/streeling/evidence/batch50-2026-10-23/test-runs/claims-all-02.json",
+        "sha256": "e57269cc5659059ef8ef05b7fd0c50e833feafa2048608f66e85debdc830cd15",
+        "exit_code": 0,
+        "final_test_bindings_match": true
+      },
+      {
+        "path": "code/streeling/evidence/batch50-2026-10-23/test-runs/baseline-audio-02.json",
+        "sha256": "a1a92bd930997680a18ec7e77b43a40e25e07019dea366571a723e024f5d29d2",
+        "exit_code": 0,
+        "final_test_bindings_match": true
+      },
+      {
+        "path": "code/streeling/evidence/batch50-2026-10-23/test-runs/metadata-after-guard.json",
+        "sha256": "7d831fce479094192109dc03c6ea7b61c2cecc05d825fd5287000ebd513b05c9",
+        "exit_code": 0,
+        "final_test_bindings_match": true
+      }
+    ],
+    "final_mutation_controls": {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/final-mutation-controls.json",
+      "sha256": "db57503b925832f91564242fe38d2c6545a9dad6376efb2ccc0174449bd8b183",
+      "expected_rejections": 4,
+      "observation_records": 4,
+      "canonical_test_files_unchanged": true
+    },
+    "metadata_empty_manifest_control": "Original rejected=false/exit0; final rejected=true/exit1. Original32metadata failures and all repair/replay receipts retained."
+  },
+  "exclusions": [
+    "Parent-owned generated indexes, root journals and streeling.lock.json are tracked context excluded from this code review.",
+    "Untracked curriculum/data/evidence are excluded as changed code; fixed inputs were read as supporting context.",
+    "Production code, complete curriculum/content review, generation/build/link/deployment gates, and human/learner acceptance are outside this delegated code review."
+  ],
+  "residual_risks": [
+    "Finite authored examples do not establish general production algorithms, actual engine/renderer/material behavior, musician/listener/language/human/learner acceptance or deployed HTML.",
+    "Adversarial leaf reviewed the retained initial snapshot; this coordinator reviewed the final corrective delta and executed isolated in-memory rejection controls bound to final staged files."
+  ],
+  "testing_gaps": [],
+  "artifact_root": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code",
+  "retained_review_artifacts": [
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/review.json",
+      "sha256": "a74cbe9ea8d9336278d34c41e4de1007a2bf94adba75b66c996149a27be951d1"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/adversarial.json",
+      "sha256": "01418f9cf386a53c943a7b1defcb67300545e850838e6f38b6c21564f1851fdd"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/final-mutation-controls.json",
+      "sha256": "db57503b925832f91564242fe38d2c6545a9dad6376efb2ccc0174449bd8b183"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/finding-history.json",
+      "sha256": "2b256a0ee56b306c09209280ef22791a0d57744ab38a90b2ffa51082ccfa9bf5"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/final-bindings.json",
+      "sha256": "ae949837c77937fad6c17bc333ad33959e11ec84b772477764f0db605a19f4fb"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/initial-bindings.json",
+      "sha256": "4ec88fbd04fa3bf816524f6dfb9120242d30bba52a941e722b3e7e42f6cdb00e"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/supporting-bindings.json",
+      "sha256": "b3a12669b92eba317b0c5f6447e82c8f1d76a876fddcf20e7a5e2575466ac906"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/correctness-notes.json",
+      "sha256": "56e512131d965e03dd6a35d581ee6765ae3f035271b87e6250961aaefb5f3cd1"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/metadata.json",
+      "sha256": "cba34903668339a12f129aa9004970907fe9cf9680157e80b08896a0ee67f526"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/stages.jsonl",
+      "sha256": "e1527b64f735b92ee515a908069eafc12f10d1d350738adb48a58d5f5fcf1546"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/full.diff",
+      "sha256": "fc270c216f95186f1ef2ac3ece87e6aeaf49b0e986422c6bccf4eadcfeda0e19"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/final-delta.diff",
+      "sha256": "099bdb6b68acc8349943bc8be3f9ff1d3504ea4b32c42ee85ea48f77781ff316"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/scope-helper.json",
+      "sha256": "7e391947edb9549b0af8cca48e72957f5556db4aa61e8f8cbe49e665e9c5bc15"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/files.txt",
+      "sha256": "38b12bf3e91f8514d031dabcfb7712df33048772350e93cac21532bb55a8847f"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/tracked-context-excluded.txt",
+      "sha256": "b642a75d228e90de90aee881882e292b587c40c96a24879bd1f87466ec1eb2f5"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/untracked-excluded.txt",
+      "sha256": "2c0a446bfb4b1e986be1601bb58e0d350470b69d90a613042064a06bb111e90b"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/peer-route.json",
+      "sha256": "78ecf01fbcc80f87990ab09bc8119b97dbcc1f60a74e3c0c13bea2b4addabd5f"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/authoritative-receipts-read.json",
+      "sha256": "bf61f95d27dee650950e92d662efcae5e43f8458d87ea9156f1e3194ce8ecefc"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/metadata-empty-plan-before-guard.json",
+      "sha256": "93bd4d072974c3bf75d33ede20d42119b0c8dd412da390ccecf479fab5767952"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/metadata-empty-plan-after-guard.json",
+      "sha256": "76fcfb5c67dd459bbbb1b7947cc838368cd23aefb7f65ba6507ff1d27193caf2"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/metadata-empty-plan-before.json",
+      "sha256": "24b601e1d1f5618e26fd8a7d00fe9d1a0088a9560153a37b49b11748f0adb28f"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/metadata-empty-plan-before.stdout.txt",
+      "sha256": "71cb5afee26f80fb052bf9944037b056b9f1725b8b70d6372a703c7733fc6b16"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/metadata-empty-plan-before.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/receipt-write-failure.json",
+      "sha256": "c448252f1f75b3ad961d2f31af71dff654937ea8db7e04d3131ac9dc1317dd46"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/artifact-bindings.json",
+      "sha256": "f325f1da92dc554e4613a25e1097e19c9057259c9a9951a9dced78fde58ee893"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261023-batch50-test-code/intent.txt",
+      "sha256": "5cd965316bca06130efd3b265d66b23e7bacddd0c08be29d5fc3950a82b5c0b1"
+    }
+  ],
+  "receipt_schema": {
+    "contract": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-code-review/references/modes-and-output.md#json-output-format-modeagent-only",
+    "leaf_findings_schema": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-code-review/references/findings-schema.json"
+  },
+  "skill_bindings": [
+    {
+      "path": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-code-review/SKILL.md",
+      "sha256": "9e43f77ea5cb5e5b2933e63253fd2f4cdd789e85210e7e394684ad08a4579a0c"
+    },
+    {
+      "path": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-code-review/references/modes-and-output.md",
+      "sha256": "d15f80f321f09cc3b8d4ebfae44f44ce6aa1f607c67ff11baaf98fe779960e88"
+    },
+    {
+      "path": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-code-review/references/scope.md",
+      "sha256": "2542327eaa375653115aeefc660bd501f2e61753b9f1b558a7d587c9aca50486"
+    },
+    {
+      "path": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-code-review/references/depth-paths.md",
+      "sha256": "ed3bbe9dd64fc9f6bc152ffd9236e7c75f914fe17d31e419d8cfa97cfc410fec"
+    },
+    {
+      "path": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-code-review/references/cross-model-review.md",
+      "sha256": "f12fdbf1894a8f30cd68d1717838e57e6e69b94cdef92b8af74ef041f1105692"
+    },
+    {
+      "path": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-code-review/references/intent-and-plan.md",
+      "sha256": "f7471dfb9ed392e0a7970f4a27b77c81ff6d9cded96d8a4e30212dd2f5d7ecb1"
+    },
+    {
+      "path": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-code-review/references/dispatch-reviewers.md",
+      "sha256": "dd092f64619c0f329f067dad86ed494eb94bdc9e1467891a641a5bd1a01932c4"
+    },
+    {
+      "path": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-code-review/references/personas/adversarial-reviewer.md",
+      "sha256": "dad2a922e41205423eaab12cbfa05e0d4706bf27147b244f52b14edf430b629c"
+    },
+    {
+      "path": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-code-review/references/action-class-rubric.md",
+      "sha256": "2042a63936fbc788e18c93062136eec1698d05b113539e8a2c69fdd4de984b0a"
+    },
+    {
+      "path": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-code-review/references/subagent-template.md",
+      "sha256": "2f253fc16791f867c3505832ea8dd0b19c6ac2107f6af8772c2d6af0848ef3be"
+    },
+    {
+      "path": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-code-review/references/diff-scope.md",
+      "sha256": "a53684ea919adfeca7b0074010293f33959cd20ae44177681c16240ad249d793"
+    },
+    {
+      "path": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-code-review/references/findings-schema.json",
+      "sha256": "4c81998aec2c9d8107d77027bd4403d2120a5a83fc67123a31477fcf51819fef"
+    },
+    {
+      "path": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-code-review/scripts/review-scope.py",
+      "sha256": "a48ae4a6e79f8ef19419b529b9937273ae97602c371d0f9185e2b0c70014da70"
+    },
+    {
+      "path": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-code-review/scripts/run-log.py",
+      "sha256": "8bf03cb4e3d78848034c92f259533dd2af724ab5bbd31f688a259f1d0e6f8e92"
+    }
+  ],
+  "limitations": "Mathematical/logical authored-case checks and localizedtitle consistency only; no actualengine/renderer/material/listening/musician/fluent-language/human/learner/deployedHTML acceptance."
+}

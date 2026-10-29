@@ -1,0 +1,65 @@
+{
+  "reviewer": "correctness",
+  "findings": [
+    {
+      "title": "Unmatched audio sample silently disappears from proof",
+      "severity": "P2",
+      "file": "code/streeling/evidence/batch50-2026-10-24/tests/test_unit_a.py",
+      "line": 59,
+      "confidence": 100,
+      "autofix_class": "gated_auto",
+      "owner": "downstream-resolver",
+      "requires_verification": true,
+      "pre_existing": false,
+      "suggested_fix": "Check that AUD014 a and b have the same length before treating the calculation as a valid aligned-sample proof; retain an OBSERVATION diagnostic before the shape assertion so rejected inputs remain evidenced.",
+      "first_evidence": "code/streeling/evidence/batch50-2026-10-24/tests/test_unit_a.py:59 -- raw=[a+b for a,b in zip(v['a'],v['b'])]; mixed=[v['gain']*x for x in raw]; limit=v['peak_limit']",
+      "why_it_matters": "An unmatched authored audio sample is silently discarded, so this proof stays green on malformed input despite claiming to use three aligned sample arrays. Appending .8 to only model values.a leaves all fixed and packet expectations unchanged and UnitA.check_course passes both cases; an explicit alignment check makes the claimed input assumption enforceable.",
+      "evidence": [
+        "code/streeling/evidence/batch50-2026-10-24/tests/test_unit_a.py:59 -- raw=[a+b for a,b in zip(v['a'],v['b'])]; mixed=[v['gain']*x for x in raw]; limit=v['peak_limit']",
+        "code/streeling/evidence/batch50-2026-10-24/tests/test_unit_a.py:35 -- 'AUD014':'Three aligned authored mono samples; linear summation and hard clipping only; no loudness.',",
+        "aligned-input-probe.json: append unmatched .8 to AUD014 model a; check_course completes with accepted=true and unchanged 3-element raw/mixed outputs."
+      ]
+    }
+  ],
+  "residual_risks": [],
+  "testing_gaps": [],
+  "inspected_scope": [
+    "test_course_metadata.mjs",
+    "test_unit_a.py",
+    "test_unit_b.py",
+    "test_unit_c.py"
+  ],
+  "assessment": "All 50 authored finite models and relevant negative controls compute from actual packet values; each result is compared first to separate fixed reviewer expectations and then packet expected outputs. Fixed value/oracle probes reject consistent wrong input+packet-expectation mutations. No engine, NLP, physical, scene, learner or broad input-validator claim.",
+  "criteria_mapping": {
+    "AGENTS.md": [
+      {
+        "path": "code/streeling/evidence/batch50-2026-10-24/tests/test_course_metadata.mjs",
+        "sha256": "d647cc7c3b9c4dedc988d0de021401522620e6c564a1239f0666470a36a36535",
+        "bytes": 1859,
+        "snapshot": "C:\\tmp\\compound-engineering-spare\\ce-code-review\\20261025-103528-74e0378c\\snapshots\\test_course_metadata.mjs"
+      },
+      {
+        "path": "code/streeling/evidence/batch50-2026-10-24/tests/test_unit_a.py",
+        "sha256": "bdadbba27518e74e465c3421666cac55b6ac8cbcd50836c7dcdca2c69aa7c267",
+        "bytes": 13871,
+        "snapshot": "C:\\tmp\\compound-engineering-spare\\ce-code-review\\20261025-103528-74e0378c\\snapshots\\test_unit_a.py"
+      },
+      {
+        "path": "code/streeling/evidence/batch50-2026-10-24/tests/test_unit_b.py",
+        "sha256": "d60f2b0ce28cb1ab08ce59b3151434a24dd82e2a1616803b2d2654b9f1c8af8f",
+        "bytes": 16968,
+        "snapshot": "C:\\tmp\\compound-engineering-spare\\ce-code-review\\20261025-103528-74e0378c\\snapshots\\test_unit_b.py"
+      },
+      {
+        "path": "code/streeling/evidence/batch50-2026-10-24/tests/test_unit_c.py",
+        "sha256": "0f0abe05f476810ef8d9bd00314a62ce54731c97ae647892748a7ed952421804",
+        "bytes": 11584,
+        "snapshot": "C:\\tmp\\compound-engineering-spare\\ce-code-review\\20261025-103528-74e0378c\\snapshots\\test_unit_c.py"
+      }
+    ]
+  },
+  "validation_artifacts": [
+    "mutation-probes.json",
+    "fixed-oracle-probes.json"
+  ]
+}

@@ -3,7 +3,7 @@ title: Identification de la tonalité, chiffres romains et cadences — Ce qu'un
 description: Identification de la tonalité, chiffres romains et cadences — Musique
 sidebar:
   label: MUS-018 · Identification de la tonalité, chiffres romains et cadences
-  order: 15
+  order: 18
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/fr/mus-018-key-finding-roman-numerals-cadences.fr.md
 ---
 

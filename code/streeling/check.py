@@ -25,7 +25,7 @@ PIN = re.compile(r'^(?:PINNED|SOURCE)_COMMIT = "([0-9a-f]{40})"$', re.M)
 
 
 def modules() -> list[Path]:
-    return sorted(p for p in HERE.glob("*/*") if p.is_dir() and p.name != "__pycache__")
+    return sorted(p for p in HERE.glob("*/*") if p.is_dir() and re.fullmatch(r"[a-z]+-\d{3}", p.name))
 
 
 def same_text(a: Path, b: Path) -> bool:

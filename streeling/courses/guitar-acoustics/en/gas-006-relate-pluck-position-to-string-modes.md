@@ -1,0 +1,82 @@
+---
+module_id: gas-006-relate-pluck-position-to-string-modes
+department: guitar-acoustics
+course: "Relate Pluck Position to String Modes"
+level: intermediate
+prerequisites: ["gas-002-brightness-control-and-evaluation-gate", "gas-005-separate-a-partial-peak-from-a-period", "phy-004-velocity-pick-position-guitar-engine"]
+estimated_duration: "40 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Relate Pluck Position to String Modes
+
+> **Draft scope.** Pinned public source inspection and fixed ideal-string calculations. Human technical, fluent-language, musician and learner reviews and deployed course HTML verification remain pending. No guitar, native/WASM engine, browser or [ComfyUI](https://docs.comfy.org/) workflow was run for this lesson.
+
+## The project question
+
+Moving a pick can change a guitar's spectrum without changing its nominal pitch. Could a future GA control express that movement directly? First distinguish a physical initial condition from the engine's existing heuristic. The inspected [Rust excitation source](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs#L294-L396) is pinned to GA commit `76efbffd5af82b46c3146957a6bd4504008eeb89`. Its public bytes are bound in the [source receipt](../../../../code/streeling/evidence/pluck-coordinates-2026-10-22/primary-readback.json).
+
+[PHY-004](../../physics/en/phy-004-velocity-pick-position-guitar-engine.md) already establishes the coupled velocity control and proportional ideal mode formula. This lesson deepens that work with normalized coefficients and signed ratios at fixed peak h, independent checks of 80 coefficients, and a comparison with the current pinned source.
+
+## 1. Declare an ideal initial shape
+
+Use a flexible, uniform string with fixed ends, small linear transverse displacement and no damping or stiffness. Declare the bridge as coordinate origin, the vibrating length as L, and normalized position as `u=x/L`. A point pluck peaks at `p`, strictly between the endpoints, with fixed displacement h and zero initial velocity. The initial shape divided by h rises as `u/p` up to p, then falls as `(1-u)/(1-p)` to the other endpoint.
+
+These assumptions follow the [ideal plucked-string model](https://dsprelated.com/freebooks/pasp/Ideal_Plucked_String.html). They exclude a finite-width plectrum contact, ongoing forcing and an observed instrument's body response. A peak displacement is not a velocity command or an arbitrary noise buffer.
+
+### Practice exercise 1: identify the state
+
+At `p=1/5`, what is the normalized displacement at the bridge, the pluck point and the opposite endpoint? What initial velocity is assumed? Is the model fully specified by saying “bright attack”?
+
+> **Answer:** The displacements divided by h are 0, 1 and 0. Initial velocity is zero everywhere. “Bright attack” supplies neither that shape nor its coordinates and initial velocity, so it does not specify this initial condition.
+
+## 2. Project that shape onto modes
+
+Let B_n denote our displacement coefficient for mode n. The [Princeton lecture's derivation](https://kirkmcd.princeton.edu/examples/Ph205/ph205l21.pdf#page=5), on PDF page 5, gives the triangular displacement's sine-series coefficients; its notation calls them A_n. In our notation:
+
+`B_n/h = 2*sin(n*pi*p)/(pi^2*n^2*p*(1-p))`
+
+It comes from integrating twice the normalized shape against `sin(n*pi*u)` over the unit interval. A mode is absent from this ideal initial displacement when `n*p` is an integer. At midpoint `p=1/2`, all even modes vanish. The third coefficient divided by the first is `-1/9`; its magnitude is `1/9`. The sign represents the modal displacement phase at release, not a negative measured loudness.
+
+### Practice exercise 2: locate the nulls
+
+Which mode families vanish at `p=1/5` and `p=1/10`? At the midpoint, does removing even modes also remove the third mode?
+
+> **Answer:** Multiples of 5 vanish at `p=1/5`; multiples of 10 vanish at `p=1/10`. The midpoint removes even modes, while the third remains with signed ratio `-1/9` to the fundamental. These are ideal displacement coefficients, not measured microphone amplitudes.
+
+## 3. Compare a ratio without changing the model
+
+With the same peak h, the signed second-to-first coefficient ratio is `cos(pi*p)/2`. The [fixed modal table](../../../../code/streeling/evidence/pluck-coordinates-2026-10-22/ideal-pluck-modes.json) gives approximately 0.40450849718747367 at `p=1/5` and 0.4755282581475768 at `p=1/10`. Both are positive. This selected ratio increases toward the bridge in these two authored cases; it does not prove a universal ranking of perceived brightness.
+
+Holding displacement h does not hold plucking force or initial energy constant. Bridge-force radiation, pickup location, body transfer, damping and listening conditions would add other transformations. An exact null in this model is a prediction under its assumptions, not a promise of an inaudible harmonic on a recorded guitar.
+
+### Practice exercise 3: state the comparison
+
+Compare the two second-to-first ratios. Which location has the larger value under this calculation? May the result be called a measured preference, or a constant-energy comparison?
+
+> **Answer:** The ratio at `p=1/10` is approximately 0.4755282581475768, larger than approximately 0.40450849718747367 at `p=1/5`. It is an ideal modal-displacement calculation with fixed peak h. No listener preference, radiated spectrum or equal initial energy was measured or imposed.
+
+## 4. Read the engine's different excitation
+
+The [pick heuristic and window](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs#L354-L379) choose a velocity-dependent delay-buffer ratio, round it to an integer offset, and multiply recursively smoothed noise by a clipped tent window. The ratio expression is `0.18+0.60*(1-velocity)` before its clamps. The comment mentions higher strings, but the expression contains velocity, with no string identity or fret input. Buffer length also affects the quantized offset.
+
+For an authored buffer length 100 and velocity 0.5, the real-arithmetic transcription gives ratio 0.48, offset 48 and quantized position 0.48. At buffer index 88 the tent is zero, while the ideal fixed-end triangle with `p=0.48` has normalized displacement approximately 0.23076923076923075 there. More fundamentally, the engine multiplies its window by noise. Neither the window nor the resulting buffer is the physical triangular displacement above, and no bridge-relative orientation is documented by that ratio expression.
+
+### Practice exercise 4: reject a false substitution
+
+For that length 100 example, may an agent substitute the engine's tent window into the ideal-triangle coefficient formula and announce an exact fifth-mode null? Give the source/model differences that matter.
+
+> **Answer:** No. The source has a compact tent multiplying recursively smoothed noise, with a quantized delay-buffer coordinate. The ideal calculation requires its declared full-length triangular displacement, fixed ends and zero initial velocity. Those conditions and a physical bridge origin have not been established for that engine buffer.
+
+## 5. Design a control without claiming its result
+
+A proposed pluck-position experiment needs its own coordinate, units and endpoint policy, separate from velocity. Changing velocity to move the existing heuristic also changes excitation amplitude and attack level, so it is not an isolated location comparison. [GTR-006](../../guitar-studies/en/gtr-006-keep-picking-distance-relative-to-frets.md) derives how a bridge-relative distance changes meaning after fretting.
+
+The ideal triangle has a sharp corner and infinitely many modes. A finite sampled implementation needs a stated bandlimit; the cited ideal-string source explains that requirement. The source's recursive smoother does not establish a strict anti-alias cutoff. Any implementation would need its own finite excitation, tuning and spectrum tests, followed by level-controlled listening. This lesson supplies an analytical target and a counterexample to an incorrect source interpretation.
+
+### Practice exercise 5: propose the next experiment
+
+An agent changes only velocity and calls the result a clean test of physical pick position. Identify the confounds and write a better proposed comparison. Has that comparison run here?
+
+> **Answer:** Velocity changes amplitude, the heuristic buffer ratio and attack level together. Propose a separate, explicitly defined bridge-relative position control, hold velocity and other synthesis settings fixed, state bandlimiting, then render and compare the requested positions with tuning and level guards. That control and comparison remain unimplemented and unrun here; no sound-quality result follows from these calculations.

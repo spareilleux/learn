@@ -1,0 +1,27 @@
+{
+  "scope": "Direct anonymous byte probes returned403 for these two official pages. The web reading service returned actual page bodies at the same URLs. Raw byte hashes/status are unavailable for that separate extraction;403 is retained rather than relabeled200.",
+  "references": [
+    {
+      "url": "https://www.mathworks.com/help/simulink/slref/anti-windup-control-using-a-pid-controller.html",
+      "title": "Anti-Windup Control Using PID Controller Block",
+      "displayed_release": "R2026b",
+      "direct_http_status": 403,
+      "fallback_method": "Actual official page body read through web extraction",
+      "body_read": true,
+      "read_scope": "Anti-windup overview, distinction between back-calculation and conditional integration/clamping, and stated tracking-mode conditions. Images and simulation outputs were not reproduced or verified.",
+      "raw_bytes_sha256": null,
+      "new_model_execution": null
+    },
+    {
+      "url": "https://www.mathworks.com/help/simulink/slref/discretepidcontroller.html",
+      "title": "Discrete PID Controller",
+      "displayed_release": "R2026b",
+      "direct_http_status": 403,
+      "fallback_method": "Actual official page body sections read through web extraction",
+      "body_read": true,
+      "read_scope": "Description of weighted controller terms and derivative filtering; I*T_s input/sample-time ownership and saturation/anti-windup ports in the initial sections. Not the entire long parameter reference, model internals or images.",
+      "raw_bytes_sha256": null,
+      "new_model_execution": null
+    }
+  ]
+}

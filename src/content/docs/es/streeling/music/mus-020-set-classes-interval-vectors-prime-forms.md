@@ -3,7 +3,7 @@ title: Clases de conjuntos, vectores interválicos, relación Z y formas primas 
 description: Clases de conjuntos, vectores interválicos, relación Z y formas primas — Música
 sidebar:
   label: MUS-020 · Clases de conjuntos, vectores interválicos, relación Z y formas primas
-  order: 17
+  order: 20
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/es/mus-020-set-classes-interval-vectors-prime-forms.es.md
 ---
 

@@ -1,0 +1,170 @@
+{
+  "scope": "Authored absolute quarter-note beat events with half-open active intervals. G7/Cmaj7 labels and anticipation role are authored annotations, not inferred harmonies or a GA/MusicXML import/export run.",
+  "provenance": {
+    "analysis_kind": "Temporary Python standard-library calculation on explicitly constructed fixtures; not GA algorithm execution.",
+    "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "win32",
+    "plan_sha256": "60d1dbdb304e6b76f8d51b56389cb378aa5fd3f65182f975b1801a6e50573db5",
+    "checked_at_utc": "2026-10-22T16:23:57.880592+00:00"
+  },
+  "note_convention": "C4=60",
+  "tempo_quarter_bpm": 120,
+  "events": [
+    {
+      "id": "g_bass",
+      "pitch": 43,
+      "onset": 0,
+      "offset": 2
+    },
+    {
+      "id": "b_shared",
+      "pitch": 59,
+      "onset": 0,
+      "offset": 4
+    },
+    {
+      "id": "d_inner",
+      "pitch": 62,
+      "onset": 0,
+      "offset": 2
+    },
+    {
+      "id": "f_inner",
+      "pitch": 65,
+      "onset": 0,
+      "offset": 2
+    },
+    {
+      "id": "e_anticipation",
+      "pitch": 76,
+      "onset": 1.5,
+      "offset": 4
+    },
+    {
+      "id": "c_bass",
+      "pitch": 48,
+      "onset": 2,
+      "offset": 4
+    },
+    {
+      "id": "e_inner",
+      "pitch": 64,
+      "onset": 2,
+      "offset": 4
+    },
+    {
+      "id": "g_inner",
+      "pitch": 67,
+      "onset": 2,
+      "offset": 4
+    }
+  ],
+  "harmonic_steps": [
+    {
+      "onset": 0,
+      "offset": 2,
+      "label": "G7"
+    },
+    {
+      "onset": 2,
+      "offset": 4,
+      "label": "Cmaj7"
+    }
+  ],
+  "sounding_snapshots": [
+    {
+      "onset": 0,
+      "offset": 1.5,
+      "event_ids": [
+        "g_bass",
+        "b_shared",
+        "d_inner",
+        "f_inner"
+      ],
+      "pitches": [
+        43,
+        59,
+        62,
+        65
+      ],
+      "attacks": [
+        43,
+        59,
+        62,
+        65
+      ],
+      "held_ids": [],
+      "released": []
+    },
+    {
+      "onset": 1.5,
+      "offset": 2,
+      "event_ids": [
+        "g_bass",
+        "b_shared",
+        "d_inner",
+        "f_inner",
+        "e_anticipation"
+      ],
+      "pitches": [
+        43,
+        59,
+        62,
+        65,
+        76
+      ],
+      "attacks": [
+        76
+      ],
+      "held_ids": [
+        "g_bass",
+        "b_shared",
+        "d_inner",
+        "f_inner"
+      ],
+      "released": []
+    },
+    {
+      "onset": 2,
+      "offset": 4,
+      "event_ids": [
+        "b_shared",
+        "e_anticipation",
+        "c_bass",
+        "e_inner",
+        "g_inner"
+      ],
+      "pitches": [
+        48,
+        59,
+        64,
+        67,
+        76
+      ],
+      "attacks": [
+        48,
+        64,
+        67
+      ],
+      "held_ids": [
+        "b_shared",
+        "e_anticipation"
+      ],
+      "released": [
+        43,
+        62,
+        65
+      ]
+    }
+  ],
+  "actual_authored_attacks": 8,
+  "hypothetical_all_snapshots_retriggered_attacks": 14,
+  "b_shared_snapshot_occurrences": 3,
+  "b_shared_authored_attacks": 1,
+  "milliseconds": {
+    "one_and_half_beats": 750.0,
+    "two_beats": 1000.0,
+    "full_phrase": 2000.0
+  },
+  "active_at_four": []
+}

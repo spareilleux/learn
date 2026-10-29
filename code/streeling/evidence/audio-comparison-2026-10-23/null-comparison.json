@@ -1,0 +1,143 @@
+{
+  "scope": "Authored finite sample comparison, not new native/Wasm renders, a deployed null-test program, physical latency or audibility.",
+  "sample_rate_Hz": 8000,
+  "reference": [
+    0,
+    0.25,
+    -0.25,
+    0.5,
+    -0.5,
+    0.25,
+    0,
+    -0.25
+  ],
+  "candidate": [
+    0.0,
+    0.0,
+    0.0,
+    0.125,
+    -0.125,
+    0.25,
+    -0.25,
+    0.125,
+    0.0,
+    -0.125
+  ],
+  "reference_frames": 8,
+  "candidate_frames": 10,
+  "declared_delay_frames": 2,
+  "declared_delay_s": 0.00025,
+  "declared_delay_ms": 0.25,
+  "declared_gain": 0.5,
+  "delay_direction": "candidate is later: y[n+lag]=g*x[n] on the complete8-sample target",
+  "reference_rms": 0.30618621784789724,
+  "raw_first8": {
+    "candidate": [
+      0.0,
+      0.0,
+      0.0,
+      0.125,
+      -0.125,
+      0.25,
+      -0.25,
+      0.125
+    ],
+    "residual": [
+      0.0,
+      -0.25,
+      0.25,
+      -0.375,
+      0.375,
+      0.0,
+      -0.25,
+      0.375
+    ],
+    "residual_rms": 0.27599252707274524
+  },
+  "aligned_unity_gain": {
+    "candidate": [
+      0.0,
+      0.125,
+      -0.125,
+      0.25,
+      -0.25,
+      0.125,
+      0.0,
+      -0.125
+    ],
+    "residual": [
+      0.0,
+      -0.125,
+      0.125,
+      -0.25,
+      0.25,
+      -0.125,
+      0.0,
+      0.125
+    ],
+    "residual_rms": 0.15309310892394862
+  },
+  "gain_fit": {
+    "formula": "g_hat=dot(x,y_aligned)/dot(x,x)",
+    "gain": 0.5,
+    "gain_dB": -6.020599913279624,
+    "residual": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "residual_rms": 0.0
+  },
+  "silence_control": {
+    "reference": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "candidate": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "raw_residual_rms": 0,
+    "gain_fit": null,
+    "reason": "zero reference energy makes gain unidentified even when raw residual is zero"
+  },
+  "tail_control": {
+    "aligned_candidate": [
+      0.0,
+      0.125,
+      -0.125,
+      0.25,
+      -0.25,
+      0.125,
+      0.0,
+      0.0
+    ],
+    "changed_index": 7,
+    "delta": 0.125,
+    "checked_prefix_frames": 6,
+    "target_frames": 8,
+    "coverage_fraction": 0.75,
+    "prefix_prescribed_gain_residual_rms": 0.0,
+    "full_prescribed_gain_residual_rms": 0.04419417382415922,
+    "full_target_equal_after_prescribed_gain": false
+  },
+  "new_native_or_wasm_run": null,
+  "new_alignment_pipeline": null
+}

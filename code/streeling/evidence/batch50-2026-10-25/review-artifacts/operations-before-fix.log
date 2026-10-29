@@ -1,0 +1,43 @@
+test_degree_subtraction (__main__.UnsupportedOperations.test_degree_subtraction) ... 
+MUTATED_INPUT {"code": "WML016", "original_operation": "subtract", "mutated_operation": "invalid_operation", "values": {"degrees": {"1": 0, "3": 4, "5": 7, "7": 10}, "operations": [{"op": "add", "degree": 9, "semitones": 14}, {"op": "alter", "degree": 5, "delta": -1}, {"op": "invalid_operation", "degree": 3}]}, "expected_unchanged": true}
+
+OBSERVATION {"code": "WML016", "case": "model", "observed": {"degrees": {"1": 0, "5": 6, "7": 10, "9": 14}, "pitch_classes": [0, 2, 6, 10], "valid": true}, "expected": {"degrees": {"1": 0, "5": 6, "7": 10, "9": 14}, "pitch_classes": [0, 2, 6, 10], "valid": true}, "scope": "Root zero, ordered strict add/alter/subtract edits; authored collision policy, not full MusicXML semantics."}
+
+OBSERVATION {"code": "WML016", "case": "negative", "observed": {"valid": false, "rejected_operation_index": 1, "reason": "duplicate_degree", "degree": 5}, "expected": {"valid": false, "rejected_operation_index": 1, "reason": "duplicate_degree", "degree": 5}, "scope": "Root zero, ordered strict add/alter/subtract edits; authored collision policy, not full MusicXML semantics."}
+FAIL
+test_musicxml_forward (__main__.UnsupportedOperations.test_musicxml_forward) ... 
+MUTATED_INPUT {"code": "MCL016", "original_operation": "forward", "mutated_operation": "invalid_operation", "values": {"measure_units": 4, "operations": [{"op": "note", "id": "a", "duration": 4}, {"op": "backup", "duration": 4}, {"op": "note", "id": "b", "duration": 2}, {"op": "invalid_operation", "duration": 2}]}, "expected_unchanged": true}
+
+OBSERVATION {"code": "MCL016", "case": "model", "observed": {"note_intervals": {"a": [0, 4], "b": [0, 2]}, "cursor_states": [0, 4, 0, 2, 4], "final_cursor": 4, "valid": true}, "expected": {"note_intervals": {"a": [0, 4], "b": [0, 2]}, "cursor_states": [0, 4, 0, 2, 4], "final_cursor": 4, "valid": true}, "scope": "Positive fixed division durations, one measure, note/backup/forward only; no parser conformance."}
+
+OBSERVATION {"code": "MCL016", "case": "negative", "observed": {"note_intervals": {"a": [0, 4], "b": [2, 4]}, "cursor_states": [0, 4, 2, 4, 6], "final_cursor": 6, "valid": false}, "expected": {"note_intervals": {"a": [0, 4], "b": [2, 4]}, "cursor_states": [0, 4, 2, 4, 6], "final_cursor": 6, "valid": false}, "scope": "Positive fixed division durations, one measure, note/backup/forward only; no parser conformance."}
+FAIL
+
+======================================================================
+FAIL: test_degree_subtraction (__main__.UnsupportedOperations.test_degree_subtraction)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\tmp\streeling-operation-probe-next.py", line 16, in test_degree_subtraction
+    def test_degree_subtraction(self):self.reject('WML016','subtract')
+                                      ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\tmp\streeling-operation-probe-next.py", line 13, in reject
+    with self.assertRaisesRegex(AssertionError,'unsupported operation'):module.UnitA().check_course(code)
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: AssertionError not raised
+
+======================================================================
+FAIL: test_musicxml_forward (__main__.UnsupportedOperations.test_musicxml_forward)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\tmp\streeling-operation-probe-next.py", line 15, in test_musicxml_forward
+    def test_musicxml_forward(self):self.reject('MCL016','forward')
+                                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\tmp\streeling-operation-probe-next.py", line 13, in reject
+    with self.assertRaisesRegex(AssertionError,'unsupported operation'):module.UnitA().check_course(code)
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: AssertionError not raised
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.002s
+
+FAILED (failures=2)

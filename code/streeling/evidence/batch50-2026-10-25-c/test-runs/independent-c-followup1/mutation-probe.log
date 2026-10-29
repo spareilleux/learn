@@ -1,0 +1,11 @@
+COMMAND: ["C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe", "-X", "utf8", "-B", "C:\\tmp\\batch25c-c-review\\false-finding-followup-2026-10-29T12-19-23-801Z\\mutation-probe.py"]
+CWD: C:\tmp\learn-streeling-craft-transfer-20261022
+STDOUT:
+
+OBSERVATION {"case": "model", "code": "SEM023", "expected": {"displacement": [3, 4, 0], "p_world": [11, 0, 5], "q_world": [14, 4, 5], "translated_difference": [3, 4, 0]}, "observed": {"displacement": [2.0, 4.0, 0.0], "p_world": [12.0, 0.0, 5.0], "q_world": [14.0, 4.0, 5.0], "translated_difference": [2.0, 4.0, 0.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+DETECTOR_DIAGNOSTIC False is not true : (12.0, 11)
+PROBE {"canonical_packet_modified": false, "code": "SEM023", "independent_fixed_oracle_rejected": true, "kind": "deliberate detector probe; not course failure", "mutation": "main p[0]: 1 -> 2; packet expected co-mutated to evaluator result", "observed": {"displacement": [2.0, 4.0, 0.0], "p_world": [12.0, 0.0, 5.0], "q_world": [14.0, 4.0, 5.0], "translated_difference": [2.0, 4.0, 0.0]}, "packet_consistency_passes": true, "packet_expected": {"displacement": [2.0, 4.0, 0.0], "p_world": [12.0, 0.0, 5.0], "q_world": [14.0, 4.0, 5.0], "translated_difference": [2.0, 4.0, 0.0]}}
+
+STDERR:
+
+EXIT: 0

@@ -1,0 +1,3059 @@
+{
+  "scope": "Compact selections from actual public CPU-only CLI outputs; output SHA256 binds full raw JSON retained outside the repo. No full scene is silently reconstructed from the selections.",
+  "source_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "full_capture_external_path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\full-cpu-descriptions.json",
+  "full_capture_sha256": "41537a988af1c50eb920e45abe8d5ff780cb18cab9d5fdfea74615d2f8044e78",
+  "cases": [
+    {
+      "case": "column1",
+      "argv": [
+        "describe",
+        "column@1",
+        "--seed",
+        "7"
+      ],
+      "exit_code": 0,
+      "output_sha256": "f2bd3afd421c4799d4e0441dae2c019f07081afb57a26993ba429931d38ac0ea",
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\column1.log",
+      "description": {
+        "format": "lego-scene/1",
+        "root": "column@1",
+        "seed": 7,
+        "limits": {
+          "maxDepth": 8,
+          "maxInstances": 4096,
+          "maxBoxes": 20000
+        },
+        "instances": 1,
+        "boxes": 11,
+        "hash": "sha256:c152ab55bbc57c1ee323a54329b3097cf1afb0dfad3261d8f6c5ed703162046e",
+        "tree_aggregate": {
+          "nodes": 1,
+          "boxes": 11,
+          "max_depth": 0
+        },
+        "selected_nodes": [
+          {
+            "path": "column",
+            "block": "column@1",
+            "args": {
+              "height": 6,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 0,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                6,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 11,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.6564861,
+                0.6141321,
+                0.5506012
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "column2",
+      "argv": [
+        "describe",
+        "column@2",
+        "--seed",
+        "7"
+      ],
+      "exit_code": 0,
+      "output_sha256": "c2d74fc46b95a7f9d62373a899e0c5fc31611243c83102c4c30e117fa00fa4b7",
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\column2.log",
+      "description": {
+        "format": "lego-scene/1",
+        "root": "column@2",
+        "seed": 7,
+        "limits": {
+          "maxDepth": 8,
+          "maxInstances": 4096,
+          "maxBoxes": 20000
+        },
+        "instances": 1,
+        "boxes": 19,
+        "hash": "sha256:a410d928068b8b1325b913deb8539d43709da10304afb6f59eeaea9344d6be54",
+        "tree_aggregate": {
+          "nodes": 1,
+          "boxes": 19,
+          "max_depth": 0
+        },
+        "selected_nodes": [
+          {
+            "path": "column",
+            "block": "column@2",
+            "args": {
+              "height": 6,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 0,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                6,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 19,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.6348076,
+                0.5938523,
+                0.53241926
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "colonnade4-v1",
+      "argv": [
+        "describe",
+        "colonnade",
+        "--arg",
+        "count=4",
+        "--arg",
+        "spacing=3",
+        "--seed",
+        "7"
+      ],
+      "exit_code": 0,
+      "output_sha256": "caf272fef8c0e1edc87881caa0a7e61872a55e5c1b5b07e0c1ecc62c45c3156b",
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\colonnade4-v1.log",
+      "description": {
+        "format": "lego-scene/1",
+        "root": "colonnade@1",
+        "seed": 7,
+        "limits": {
+          "maxDepth": 8,
+          "maxInstances": 4096,
+          "maxBoxes": 20000
+        },
+        "instances": 5,
+        "boxes": 53,
+        "hash": "sha256:8217b7c2e128efb4d1b2b6d655be463fceedfa09575cdb409b4e16850d7b8945",
+        "tree_aggregate": {
+          "nodes": 5,
+          "boxes": 53,
+          "max_depth": 1
+        },
+        "selected_nodes": [
+          {
+            "path": "colonnade",
+            "block": "colonnade@1",
+            "args": {
+              "count": 4,
+              "spacing": 3,
+              "height": 6,
+              "radius": 0.45,
+              "reach": 0.6,
+              "column": 1
+            },
+            "depth": 0,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "start": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "end": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                9,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                4.5,
+                7.1,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 9,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                4.5,
+                6,
+                0,
+                1
+              ],
+              "size": [
+                10.2,
+                0.6,
+                1.17
+              ],
+              "color": [
+                0.6345774,
+                0.5936369,
+                0.53222615
+              ]
+            }
+          },
+          {
+            "path": "colonnade/c0",
+            "block": "column@1",
+            "args": {
+              "height": 6,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 1,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                6,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 11,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.5896273,
+                0.55158687,
+                0.49452615
+              ]
+            }
+          },
+          {
+            "path": "colonnade/c1",
+            "block": "column@1",
+            "args": {
+              "height": 6,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 1,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              3,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                3,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                3,
+                6,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 11,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                3,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.6058958,
+                0.5668058,
+                0.50817066
+              ]
+            }
+          },
+          {
+            "path": "colonnade/c2",
+            "block": "column@1",
+            "args": {
+              "height": 6,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 1,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              6,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                6,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                6,
+                6,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 11,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                6,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.60325456,
+                0.56433487,
+                0.5059554
+              ]
+            }
+          },
+          {
+            "path": "colonnade/c3",
+            "block": "column@1",
+            "args": {
+              "height": 6,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 1,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              9,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                9,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                9,
+                6,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 11,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                9,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.62120885,
+                0.58113086,
+                0.52101386
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "colonnade4-v2",
+      "argv": [
+        "describe",
+        "colonnade",
+        "--arg",
+        "count=4",
+        "--arg",
+        "spacing=3",
+        "--arg",
+        "column=2",
+        "--seed",
+        "7"
+      ],
+      "exit_code": 0,
+      "output_sha256": "a03f28dc077a496d46b2f46d047895c74ce93e795b2c06c2eda7ec63c9959b80",
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\colonnade4-v2.log",
+      "description": {
+        "format": "lego-scene/1",
+        "root": "colonnade@1",
+        "seed": 7,
+        "limits": {
+          "maxDepth": 8,
+          "maxInstances": 4096,
+          "maxBoxes": 20000
+        },
+        "instances": 5,
+        "boxes": 85,
+        "hash": "sha256:6f334f4803f502af41d71b47bf8359c37fcb0ee5fcd9c58cac9ba27c6391d1b3",
+        "tree_aggregate": {
+          "nodes": 5,
+          "boxes": 85,
+          "max_depth": 1
+        },
+        "selected_nodes": [
+          {
+            "path": "colonnade",
+            "block": "colonnade@1",
+            "args": {
+              "count": 4,
+              "spacing": 3,
+              "height": 6,
+              "radius": 0.45,
+              "reach": 0.6,
+              "column": 2
+            },
+            "depth": 0,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "start": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "end": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                9,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                4.5,
+                7.1,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 9,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                4.5,
+                6,
+                0,
+                1
+              ],
+              "size": [
+                10.2,
+                0.6,
+                1.17
+              ],
+              "color": [
+                0.6345774,
+                0.5936369,
+                0.53222615
+              ]
+            }
+          },
+          {
+            "path": "colonnade/c0",
+            "block": "column@2",
+            "args": {
+              "height": 6,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 1,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                6,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 19,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.5881875,
+                0.5502399,
+                0.49331853
+              ]
+            }
+          },
+          {
+            "path": "colonnade/c1",
+            "block": "column@2",
+            "args": {
+              "height": 6,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 1,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              3,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                3,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                3,
+                6,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 19,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                3,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.61412346,
+                0.5745025,
+                0.5150713
+              ]
+            }
+          },
+          {
+            "path": "colonnade/c2",
+            "block": "column@2",
+            "args": {
+              "height": 6,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 1,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              6,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                6,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                6,
+                6,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 19,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                6,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.6346592,
+                0.5937134,
+                0.5322948
+              ]
+            }
+          },
+          {
+            "path": "colonnade/c3",
+            "block": "column@2",
+            "args": {
+              "height": 6,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 1,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              9,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                9,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                9,
+                6,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 19,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                9,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.58326983,
+                0.5456395,
+                0.48919404
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "colonnade-attachment",
+      "argv": [
+        "describe",
+        "colonnade",
+        "--arg",
+        "height=9",
+        "--arg",
+        "count=3",
+        "--arg",
+        "spacing=2",
+        "--seed",
+        "7"
+      ],
+      "exit_code": 0,
+      "output_sha256": "40772b6e7928c5b5dfc91ece1393684479ed1a8c5ed97c188abe43b876748649",
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\colonnade-attachment.log",
+      "description": {
+        "format": "lego-scene/1",
+        "root": "colonnade@1",
+        "seed": 7,
+        "limits": {
+          "maxDepth": 8,
+          "maxInstances": 4096,
+          "maxBoxes": 20000
+        },
+        "instances": 4,
+        "boxes": 40,
+        "hash": "sha256:f363df3a43723dfc94d8961ce9042f805c634df2726aba898e5e1cfc04bbb5f6",
+        "tree_aggregate": {
+          "nodes": 4,
+          "boxes": 40,
+          "max_depth": 1
+        },
+        "selected_nodes": [
+          {
+            "path": "colonnade",
+            "block": "colonnade@1",
+            "args": {
+              "count": 3,
+              "spacing": 2,
+              "height": 9,
+              "radius": 0.45,
+              "reach": 0.6,
+              "column": 1
+            },
+            "depth": 0,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "start": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "end": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                4,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                2,
+                10.1,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 7,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                2,
+                9,
+                0,
+                1
+              ],
+              "size": [
+                5.2,
+                0.6,
+                1.17
+              ],
+              "color": [
+                0.6345774,
+                0.5936369,
+                0.53222615
+              ]
+            }
+          },
+          {
+            "path": "colonnade/c0",
+            "block": "column@1",
+            "args": {
+              "height": 9,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 1,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                9,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 11,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.5896273,
+                0.55158687,
+                0.49452615
+              ]
+            }
+          },
+          {
+            "path": "colonnade/c1",
+            "block": "column@1",
+            "args": {
+              "height": 9,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 1,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              2,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                2,
+                9,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 11,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.6058958,
+                0.5668058,
+                0.50817066
+              ]
+            }
+          },
+          {
+            "path": "colonnade/c2",
+            "block": "column@1",
+            "args": {
+              "height": 9,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 1,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              4,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                4,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                4,
+                9,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 11,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                4,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.60325456,
+                0.56433487,
+                0.5059554
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "sanctuary-level2",
+      "argv": [
+        "describe",
+        "sanctuary",
+        "--arg",
+        "level=2",
+        "--seed",
+        "7"
+      ],
+      "exit_code": 0,
+      "output_sha256": "a8a81339d3ff0936636b2546230338b6b408dbd8b04d5b76db5a22e3cf3f17b9",
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\sanctuary-level2.log",
+      "description": {
+        "format": "lego-scene/1",
+        "root": "sanctuary@1",
+        "seed": 7,
+        "limits": {
+          "maxDepth": 8,
+          "maxInstances": 4096,
+          "maxBoxes": 20000
+        },
+        "instances": 756,
+        "boxes": 8505,
+        "hash": "sha256:adc845f67f56965f97ed28c3f6eb3bdcca85e29d4fee6a13209a3d6e1eab7276",
+        "tree_aggregate": {
+          "nodes": 756,
+          "boxes": 8505,
+          "max_depth": 5
+        },
+        "selected_nodes": [
+          {
+            "path": "sanctuary",
+            "block": "sanctuary@1",
+            "args": {
+              "level": 2,
+              "scale": 0.38
+            },
+            "depth": 0,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "anchors": {},
+            "own_box_count": 0,
+            "first_box": null
+          }
+        ]
+      }
+    },
+    {
+      "case": "sanctuary-level3",
+      "argv": [
+        "describe",
+        "sanctuary",
+        "--arg",
+        "level=3",
+        "--seed",
+        "7"
+      ],
+      "exit_code": 2,
+      "output_sha256": "b2027f22f575ea4e16dbe44e68dda201baf5fd654e3bb8d627191a87e644137d",
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\sanctuary-level3.log",
+      "description": {
+        "format": "lego-errors/1",
+        "root": "sanctuary@1",
+        "seed": 7,
+        "errors": [
+          {
+            "path": "sanctuary/se/nw/temple/back",
+            "block": "colonnade@1",
+            "kind": "too-many-boxes",
+            "message": "sanctuary/se/nw/temple/back (colonnade@1): more than 20000 boxes (240000 triangles)"
+          }
+        ]
+      }
+    },
+    {
+      "case": "temple-instances10",
+      "argv": [
+        "describe",
+        "temple@1",
+        "--max-instances",
+        "10",
+        "--seed",
+        "7"
+      ],
+      "exit_code": 2,
+      "output_sha256": "30c44a677a7c245fa379f31df84638e50014b9ea130e4cadc45f093ee0fc54d7",
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\temple-instances10.log",
+      "description": {
+        "format": "lego-errors/1",
+        "root": "temple@1",
+        "seed": 7,
+        "errors": [
+          {
+            "path": "temple/back/c1",
+            "block": "column@1",
+            "kind": "too-many-instances",
+            "message": "temple/back/c1 (column@1): more than 10 block instances"
+          }
+        ]
+      }
+    },
+    {
+      "case": "temple-depth1",
+      "argv": [
+        "describe",
+        "temple@1",
+        "--max-depth",
+        "1",
+        "--seed",
+        "7"
+      ],
+      "exit_code": 2,
+      "output_sha256": "aed64907c11652470d39f8d1a0abaa7cdebbb87b9cad72ec0c53ff1d0c446524",
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\temple-depth1.log",
+      "description": {
+        "format": "lego-errors/1",
+        "root": "temple@1",
+        "seed": 7,
+        "errors": [
+          {
+            "path": "temple/front/c0",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/front/c0 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/front/c1",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/front/c1 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/front/c2",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/front/c2 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/front/c3",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/front/c3 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/front/c4",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/front/c4 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/front/c5",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/front/c5 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/back/c0",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/back/c0 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/back/c1",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/back/c1 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/back/c2",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/back/c2 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/back/c3",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/back/c3 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/back/c4",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/back/c4 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/back/c5",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/back/c5 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/left/c0",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/left/c0 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/left/c1",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/left/c1 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/left/c2",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/left/c2 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/left/c3",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/left/c3 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/left/c4",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/left/c4 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/left/c5",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/left/c5 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/left/c6",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/left/c6 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/left/c7",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/left/c7 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/left/c8",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/left/c8 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/right/c0",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/right/c0 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/right/c1",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/right/c1 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/right/c2",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/right/c2 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/right/c3",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/right/c3 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/right/c4",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/right/c4 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/right/c5",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/right/c5 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/right/c6",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/right/c6 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/right/c7",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/right/c7 (column@1): nested deeper than 1 levels"
+          },
+          {
+            "path": "temple/right/c8",
+            "block": "column@1",
+            "kind": "too-deep",
+            "message": "temple/right/c8 (column@1): nested deeper than 1 levels"
+          }
+        ]
+      }
+    },
+    {
+      "case": "colonnade-count-fraction",
+      "argv": [
+        "describe",
+        "colonnade",
+        "--arg",
+        "count=2.5",
+        "--seed",
+        "7"
+      ],
+      "exit_code": 2,
+      "output_sha256": "9d73fdeb21d5a61344a40945c88d38f2836f7104b26e719266fe1551306d7498",
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\colonnade-count-fraction.log",
+      "description": {
+        "format": "lego-errors/1",
+        "root": "colonnade@1",
+        "seed": 7,
+        "errors": [
+          {
+            "path": "colonnade",
+            "block": "colonnade@1",
+            "kind": "bad-argument",
+            "message": "colonnade (colonnade@1): argument 'count': 2.5 is not a whole number"
+          }
+        ]
+      }
+    },
+    {
+      "case": "temple-seed7",
+      "argv": [
+        "describe",
+        "temple@1",
+        "--seed",
+        "7"
+      ],
+      "exit_code": 0,
+      "output_sha256": "b45c9411ff801d7648bb2749b6d44592ebf6e784c16a809efabe21ff28674788",
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\temple-seed7.log",
+      "description": {
+        "format": "lego-scene/1",
+        "root": "temple@1",
+        "seed": 7,
+        "limits": {
+          "maxDepth": 8,
+          "maxInstances": 4096,
+          "maxBoxes": 20000
+        },
+        "instances": 35,
+        "boxes": 405,
+        "hash": "sha256:3c5eae9c24c9760097fdf693557332abbe6348b170902747cc3ed74d602e711b",
+        "tree_aggregate": {
+          "nodes": 35,
+          "boxes": 405,
+          "max_depth": 2
+        },
+        "selected_nodes": [
+          {
+            "path": "temple",
+            "block": "temple@1",
+            "args": {
+              "front": 6,
+              "side": 11,
+              "spacing": 2.6,
+              "height": 6,
+              "radius": 0.45,
+              "column": 1
+            },
+            "depth": 0,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "roof": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                10.2604,
+                0,
+                1
+              ],
+              "ne": [
+                -1,
+                0,
+                8.742278e-08,
+                0,
+                0,
+                1,
+                0,
+                0,
+                -8.742278e-08,
+                0,
+                -1,
+                0,
+                17.77,
+                0,
+                -30.77,
+                1
+              ],
+              "nw": [
+                -1,
+                0,
+                8.742278e-08,
+                0,
+                0,
+                1,
+                0,
+                0,
+                -8.742278e-08,
+                0,
+                -1,
+                0,
+                -17.77,
+                0,
+                -30.77,
+                1
+              ],
+              "se": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                17.77,
+                0,
+                30.77,
+                1
+              ],
+              "sw": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                -17.77,
+                0,
+                30.77,
+                1
+              ]
+            },
+            "own_box_count": 11,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                17.77,
+                0.35,
+                30.77
+              ],
+              "color": [
+                0.6275632,
+                0.58707523,
+                0.5263433
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "temple-seed8",
+      "argv": [
+        "describe",
+        "temple@1",
+        "--seed",
+        "8"
+      ],
+      "exit_code": 0,
+      "output_sha256": "cbd2d28ae489faee3d57fef0bef7b407a5dcd5bc002ca04f10ca96247a4ba66d",
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\temple-seed8.log",
+      "description": {
+        "format": "lego-scene/1",
+        "root": "temple@1",
+        "seed": 8,
+        "limits": {
+          "maxDepth": 8,
+          "maxInstances": 4096,
+          "maxBoxes": 20000
+        },
+        "instances": 35,
+        "boxes": 405,
+        "hash": "sha256:82088eee8921c61cb13bfa32663c3380e6841fffb9078899dd68c22096ccacf7",
+        "tree_aggregate": {
+          "nodes": 35,
+          "boxes": 405,
+          "max_depth": 2
+        },
+        "selected_nodes": [
+          {
+            "path": "temple",
+            "block": "temple@1",
+            "args": {
+              "front": 6,
+              "side": 11,
+              "spacing": 2.6,
+              "height": 6,
+              "radius": 0.45,
+              "column": 1
+            },
+            "depth": 0,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "roof": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                10.2604,
+                0,
+                1
+              ],
+              "ne": [
+                -1,
+                0,
+                8.742278e-08,
+                0,
+                0,
+                1,
+                0,
+                0,
+                -8.742278e-08,
+                0,
+                -1,
+                0,
+                17.77,
+                0,
+                -30.77,
+                1
+              ],
+              "nw": [
+                -1,
+                0,
+                8.742278e-08,
+                0,
+                0,
+                1,
+                0,
+                0,
+                -8.742278e-08,
+                0,
+                -1,
+                0,
+                -17.77,
+                0,
+                -30.77,
+                1
+              ],
+              "se": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                17.77,
+                0,
+                30.77,
+                1
+              ],
+              "sw": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                -17.77,
+                0,
+                30.77,
+                1
+              ]
+            },
+            "own_box_count": 11,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                17.77,
+                0.35,
+                30.77
+              ],
+              "color": [
+                0.6174126,
+                0.57757956,
+                0.51782995
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "colonnade4-repeat",
+      "argv": [
+        "describe",
+        "colonnade",
+        "--arg",
+        "count=4",
+        "--arg",
+        "spacing=3",
+        "--seed",
+        "7"
+      ],
+      "exit_code": 0,
+      "output_sha256": "caf272fef8c0e1edc87881caa0a7e61872a55e5c1b5b07e0c1ecc62c45c3156b",
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\colonnade4-repeat.log",
+      "description": {
+        "format": "lego-scene/1",
+        "root": "colonnade@1",
+        "seed": 7,
+        "limits": {
+          "maxDepth": 8,
+          "maxInstances": 4096,
+          "maxBoxes": 20000
+        },
+        "instances": 5,
+        "boxes": 53,
+        "hash": "sha256:8217b7c2e128efb4d1b2b6d655be463fceedfa09575cdb409b4e16850d7b8945",
+        "tree_aggregate": {
+          "nodes": 5,
+          "boxes": 53,
+          "max_depth": 1
+        },
+        "selected_nodes": [
+          {
+            "path": "colonnade",
+            "block": "colonnade@1",
+            "args": {
+              "count": 4,
+              "spacing": 3,
+              "height": 6,
+              "radius": 0.45,
+              "reach": 0.6,
+              "column": 1
+            },
+            "depth": 0,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "start": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "end": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                9,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                4.5,
+                7.1,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 9,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                4.5,
+                6,
+                0,
+                1
+              ],
+              "size": [
+                10.2,
+                0.6,
+                1.17
+              ],
+              "color": [
+                0.6345774,
+                0.5936369,
+                0.53222615
+              ]
+            }
+          },
+          {
+            "path": "colonnade/c0",
+            "block": "column@1",
+            "args": {
+              "height": 6,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 1,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                6,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 11,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.5896273,
+                0.55158687,
+                0.49452615
+              ]
+            }
+          },
+          {
+            "path": "colonnade/c1",
+            "block": "column@1",
+            "args": {
+              "height": 6,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 1,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              3,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                3,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                3,
+                6,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 11,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                3,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.6058958,
+                0.5668058,
+                0.50817066
+              ]
+            }
+          },
+          {
+            "path": "colonnade/c2",
+            "block": "column@1",
+            "args": {
+              "height": 6,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 1,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              6,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                6,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                6,
+                6,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 11,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                6,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.60325456,
+                0.56433487,
+                0.5059554
+              ]
+            }
+          },
+          {
+            "path": "colonnade/c3",
+            "block": "column@1",
+            "args": {
+              "height": 6,
+              "radius": 0.45,
+              "drums": 4
+            },
+            "depth": 1,
+            "world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              9,
+              0,
+              0,
+              1
+            ],
+            "anchors": {
+              "base": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                9,
+                0,
+                0,
+                1
+              ],
+              "top": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                9,
+                6,
+                0,
+                1
+              ]
+            },
+            "own_box_count": 11,
+            "first_box": {
+              "world": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                9,
+                0,
+                0,
+                1
+              ],
+              "size": [
+                1.26,
+                0.25,
+                1.26
+              ],
+              "color": [
+                0.62120885,
+                0.58113086,
+                0.52101386
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

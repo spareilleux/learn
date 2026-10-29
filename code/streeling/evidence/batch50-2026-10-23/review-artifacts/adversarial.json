@@ -1,0 +1,68 @@
+{
+  "reviewer": "adversarial",
+  "findings": [
+    {
+      "title": "Changed audio witnesses can pass despite unequal observations",
+      "severity": "P2",
+      "file": "code/streeling/evidence/batch50-2026-10-23/tests/test_baseline_audio.py",
+      "line": 88,
+      "why_it_matters": "The baseline can report an observation that disagrees with its independent expected witness and still pass. Changing the sample rate to 4000 and the packet delay declaration to .5 makes the model pass while logging observed delay .5 against expected .25; changing the checked prefix to seven frames likewise passes while logging coverage .875 against .75. Asserting both fixed witnesses prevents these silent passes without changing the finite authored model.",
+      "autofix_class": "manual",
+      "owner": "downstream-resolver",
+      "requires_verification": true,
+      "suggested_fix": "Compute delay_ms and coverage once, include those values in OBSERVATION, and assert delay_ms == .25 and coverage == .75 independently of the packet declarations; retain the existing declaration and RMS checks.",
+      "confidence": 100,
+      "evidence": [
+        "code/streeling/evidence/batch50-2026-10-23/tests/test_baseline_audio.py:88 --         self.assertEqual(1000 * lag / data[\"sample_rate_Hz\"], data[\"declared_delay_ms\"])",
+        "code/streeling/evidence/batch50-2026-10-23/tests/test_baseline_audio.py:81 --                 unity_rms=data[\"aligned_unity_gain\"][\"residual_rms\"], fitted_rms=0, delay_ms=.25))",
+        "code/streeling/evidence/batch50-2026-10-23/tests/test_baseline_audio.py:103 --         self.assertLess(tail[\"checked_prefix_frames\"], tail[\"target_frames\"])",
+        "Read-only characterization executed the exact initial test bodies reconstructed from full.diff. In-memory sample_rate_Hz=4000 and declared_delay_ms=.5: test_AUD009_model succeeds and emits delay_ms observed .5 / expected .25.",
+        "Separate in-memory checked_prefix_frames=7 mutation: test_AUD009_negative succeeds and emits coverage observed .875 / expected .75. Canonical data remained unchanged."
+      ],
+      "pre_existing": false
+    },
+    {
+      "title": "Failed calculations can omit their required observation records",
+      "severity": "P2",
+      "file": "code/streeling/evidence/batch50-2026-10-23/tests/test_baseline_audio.py",
+      "line": 116,
+      "why_it_matters": "A failing authored calculation can leave the retained run without its concrete OBSERVATION record, which is the evidence the journal workflow explicitly requires on failure. Setting the INF009 declared mean to 123 causes an assertion before any observation is printed. Unit B also asserts joint-table totals before recording INF010; collecting the results first and asserting after emission preserves the failure evidence.",
+      "autofix_class": "manual",
+      "owner": "downstream-resolver",
+      "requires_verification": true,
+      "suggested_fix": "Collect the INF009 per-row means, sigmas and reconstruction observations before assertions, emit the model OBSERVATION, then assert them. Apply the same ordering to Unit B's INF010 total checks so incorrect totals still produce a concrete record.",
+      "confidence": 100,
+      "evidence": [
+        "code/streeling/evidence/batch50-2026-10-23/tests/test_baseline_audio.py:116 --             self.assertEqual(mean, row[\"mean\"])",
+        "code/streeling/evidence/batch50-2026-10-23/tests/test_baseline_audio.py:121 --         observe(\"INF009\", \"model\", dict(z_x=normalized[0], z_y=normalized[1], difference_rms=difference),",
+        "code/streeling/evidence/batch50-2026-10-23/tests/test_unit_b.py:330 --             self.assertEqual(sum(cells.values()), data[\"total\"])",
+        "review-protocol.md requires one OBSERVATION JSON record per checked case before assertions, retaining concrete values on success and failure.",
+        "Read-only in-memory mutation of normalized-shape.json x.mean to 123, using the exact original test body: one assertion failure (0.125 != 123), zero OBSERVATION records."
+      ],
+      "pre_existing": false
+    },
+    {
+      "title": "Reduced metadata manifests silently remove required checks",
+      "severity": "P2",
+      "file": "code/streeling/evidence/batch50-2026-10-23/tests/test_course_metadata.mjs",
+      "line": 12,
+      "why_it_matters": "The metadata command succeeds even when its manifest supplies no courses, so a reduced manifest can silently remove some or all of the required 150 localized checks. The original module creates tests only from the plan and never asserts the promised fifty-course, three-locale scope. Fixed scope and uniqueness checks before registration make an incomplete manifest fail visibly.",
+      "autofix_class": "manual",
+      "owner": "downstream-resolver",
+      "requires_verification": true,
+      "suggested_fix": "Before registering tests, assert fifty courses with unique codes and module IDs, exactly en/fr/es source-path keys per course, and 150 distinct source paths.",
+      "confidence": 100,
+      "evidence": [
+        "code/streeling/evidence/batch50-2026-10-23/tests/test_course_metadata.mjs:12 -- for (const course of plan.courses) {",
+        "code/streeling/evidence/batch50-2026-10-23/tests/test_course_metadata.mjs:13 --   for (const [locale, relative] of Object.entries(course.source_paths)) {",
+        "The original nineteen-line module has no coverage or manifest uniqueness assertion. batch-plan.json fixes batch_new_english_modules=50 and batch_locale_sources=150.",
+        "Read-only Node characterization imported the exact original module through a data URL, rebinding its relative URLs to the real checkout and substituting only an in-memory plan with courses=[]. It exited zero with no registered tests and no source-file changes."
+      ],
+      "pre_existing": false
+    }
+  ],
+  "residual_risks": [
+    "This artifact reviews the immutable initial full.diff. Working files changed during review; the coordinator must verify and bind the final delta before treating initial findings as resolved."
+  ],
+  "testing_gaps": []
+}

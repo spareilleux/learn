@@ -1,0 +1,62 @@
+{
+  "scope": "Exact authored distribution over labeled strings, not observed agent probabilities, model quality, physical folding success or channel throughput.",
+  "entropy_formula": "H(X)=-sum(p_i*log2(p_i)); uniform N gives log2(N)",
+  "uniform_prior": {
+    "states": 16,
+    "each_probability": 0.0625,
+    "entropy_bits": 4.0
+  },
+  "condition_on_count_pass": {
+    "states": 8,
+    "event_probability": 0.5,
+    "each_conditional_probability": 0.125,
+    "entropy_bits": 3.0
+  },
+  "condition_on_both_pass": {
+    "states": 4,
+    "event_probability": 0.25,
+    "each_conditional_probability": 0.25,
+    "entropy_bits": 2.0,
+    "branch_entropy_reduction_bits": 2
+  },
+  "skew_four_state_distribution": {
+    "assignments": [
+      "MVMM",
+      "MVVV",
+      "VMMM",
+      "VMVV"
+    ],
+    "probabilities": [
+      0.5,
+      0.25,
+      0.125,
+      0.125
+    ],
+    "entropy_bits": 1.75,
+    "cardinality_upper_bound_bits": 2
+  },
+  "classification_groups": [
+    {
+      "label": "count-rejected",
+      "count": 8,
+      "probability": 0.5,
+      "conditional_uniform_entropy_bits": 3.0
+    },
+    {
+      "label": "small-angle-rejected",
+      "count": 4,
+      "probability": 0.25,
+      "conditional_uniform_entropy_bits": 2.0
+    },
+    {
+      "label": "both-filters-survivor",
+      "count": 4,
+      "probability": 0.25,
+      "conditional_uniform_entropy_bits": 2.0
+    }
+  ],
+  "classification_entropy_bits": 1.5,
+  "expected_remaining_entropy_bits": 2.5,
+  "expected_information_bits": 1.5,
+  "full_physical_solution_count": null
+}

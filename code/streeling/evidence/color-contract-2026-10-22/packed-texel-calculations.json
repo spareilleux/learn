@@ -1,0 +1,41 @@
+{
+  "scope": "Authored RGBA data texel, no material/renderer execution. Unsigned normalized channels, RG decode2v-1. The source uses signed bump amplitudes, not a reconstructed complete unit normal.",
+  "bytes": [
+    128,
+    128,
+    128,
+    64
+  ],
+  "normalized": [
+    0.5019607843137255,
+    0.5019607843137255,
+    0.5019607843137255,
+    0.25098039215686274
+  ],
+  "semantics": [
+    "normal_X_encoded",
+    "normal_Y_encoded",
+    "roughness",
+    "height_proxy"
+  ],
+  "signed_xy": [
+    0.0039215686274509665,
+    0.0039215686274509665
+  ],
+  "incorrect_srgb_decoded_rgb": [
+    0.21586050011389926,
+    0.21586050011389926,
+    0.21586050011389926
+  ],
+  "incorrect_signed_xy": [
+    -0.5682789997722015,
+    -0.5682789997722015
+  ],
+  "facade_roughness": 0.5019607843137255,
+  "incorrect_facade_roughness": 0.21586050011389926,
+  "concrete_roughness_no_rain": 0.850392156862745,
+  "incorrect_concrete_roughness_no_rain": 0.7931721000227798,
+  "alpha_is_opacity": false,
+  "blue_is_normal_z": false,
+  "height_used_in_examined_shader_paths": false
+}

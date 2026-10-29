@@ -1,0 +1,36 @@
+{
+  "command": [
+    "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "C:\\tmp\\compound-engineering-spare\\ce-code-review\\20261025-103528-74e0378c\\verify-resolution-20261025.py"
+  ],
+  "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+  "normal_course": "AUD014",
+  "normal_observations": 2,
+  "mutation": "Append .8 only to copied model values.a",
+  "rejected": true,
+  "observations_before_rejection": [
+    {
+      "code": "AUD014",
+      "case": "model",
+      "observed": {
+        "aligned_sample_counts": false,
+        "a_length": 4,
+        "b_length": 3
+      },
+      "expected": {
+        "aligned_sample_counts": true
+      },
+      "scope": "Three aligned authored mono samples; linear summation and hard clipping only; no loudness."
+    }
+  ],
+  "rejection": "4 != 3 : AUD014 requires aligned sample arrays of equal length",
+  "canonical_packet_sha256_before": "d02838183a7161a34cb9ebd4a0c0a70f4fb572c20d03ea033b19ffe06a6e7987",
+  "canonical_packet_sha256_after": "d02838183a7161a34cb9ebd4a0c0a70f4fb572c20d03ea033b19ffe06a6e7987",
+  "log": {
+    "path": "C:\\tmp\\compound-engineering-spare\\ce-code-review\\20261025-103528-74e0378c\\finding-1-independent-resolution-probe.log",
+    "sha256": "c9d485e4d3c97fad9c1b56cf3d950c8cf258bdce12f491d5a4372f2873c3dc56"
+  }
+}

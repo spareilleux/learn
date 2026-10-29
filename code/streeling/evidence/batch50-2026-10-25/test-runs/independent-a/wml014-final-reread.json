@@ -1,0 +1,29 @@
+{
+  "source_bindings": [
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-014-quantize-a-ratio-on-a-declared-octave-division.md",
+      "sha256": "7f1668b45a30d438b1764b4b9d505e10eeb9d94421499a1cc72a3982444cf1bb",
+      "matches_freeze": true
+    },
+    {
+      "path": "streeling/courses/world-music-languages/fr/wml-014-quantize-a-ratio-on-a-declared-octave-division.fr.md",
+      "sha256": "f2fce585e9b9ba5631ce710673ae8f9d86180406727bd9f2b86708eefc748530",
+      "matches_freeze": true
+    },
+    {
+      "path": "streeling/courses/world-music-languages/es/wml-014-quantize-a-ratio-on-a-declared-octave-division.es.md",
+      "sha256": "56fc748d5f2b96d34e5fb5d803d5c9e2d294cba53abd011003675927be080dd8",
+      "matches_freeze": true
+    }
+  ],
+  "answer_3": {
+    "question": "Compute the represented interval and signed error. What does a negative residual mean?",
+    "expected_answer": "The represented interval lies below the target. Its residual is an approximation error under this grid, not an observed guitarist playing flat.",
+    "decision": null
+  },
+  "criterion_3": {
+    "criterion": "Independently derive and explain the result and boundary: The represented interval lies below the target. Its residual is an approximation error under this grid, not an observed guitarist playing flat.",
+    "decision": null
+  },
+  "verdict": "all three locale answers retain below-target meaning; packet answer and undecided criterion match"
+}

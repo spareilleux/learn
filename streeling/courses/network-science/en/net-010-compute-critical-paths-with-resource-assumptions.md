@@ -1,0 +1,168 @@
+---
+module_id: "net-010-compute-critical-paths-with-resource-assumptions"
+department: "network-science"
+course: "Compute Critical Paths with Resource Assumptions"
+title: "Compute Critical Paths with Resource Assumptions"
+level: "intermediate"
+prerequisites: ["net-007-separate-dag-readiness-from-admission"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Compute Critical Paths with Resource Assumptions
+
+> **Draft scope.** Source-assisted authored fixed models. Human technical, fluent-language and learner decisions remain pending. No live fleet, production controller, user telemetry or learning improvement is claimed. The validation journal distinguishes tests actually executed from source reading and planned checks.
+
+## Sources to inspect
+
+- [net-007-separate-dag-readiness-from-admission.md](../../network-science/en/net-007-separate-dag-readiness-from-admission.md)
+- [dag.rs](https://raw.githubusercontent.com/GuitarAlchemist/ix/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/dag.rs)
+
+A coordinator draws a dependency graph for a course pipeline and announces its longest path as the promised completion time. That is only a dependency lower bound when tasks also compete for a resource. The readiness prerequisite introduces worker admission. This lesson keeps the graph fixed and adds an exclusive resource that makes the achievable finish later than the longest dependency path.
+
+The pinned IX DAG source supplies predecessor and topological-order operations. It does not attach our task durations or resource reservations. Those belong to this authored teaching case. Think of the conflicting tasks as separate activities that both require one reserved reviewer or device for their entire duration. That interpretation is illustrative; no actual review availability, service performance or human work rate was observed.
+
+First calculate earliest finishes assuming unlimited resources. A node starts only after all its predecessors finish. The longest incoming finish determines a join's earliest start. Keep the durations in ticks rather than converting them into days without evidence. This calculation is reproducible from the graph and costs, but it omits resource conflicts by construction.
+
+Next impose the exclusive-resource rule. The conflicting tasks must run in sequence even though the graph makes both ready after their common predecessor. Either order has the same total resource occupation in this small case. The final join waits for both. A valid schedule lists intervals so a reviewer can verify dependencies and absence of overlap directly. A topological order alone supplies neither start times nor proof of a feasible resource allocation.
+
+The negative control removes the resource conflict while preserving durations and edges. Parallel execution then reaches the dependency lower bound. For the source-assisted task, inspect IX's predecessor lookup and the prerequisite's distinction between graph width and running workers. Draw both schedules by hand before asking an assistant to optimize anything. Reject a promised finish if it overlaps exclusive reservations or treats an authored tick as a measured production duration. Retain the infeasible fast schedule as the counterexample.
+
+## Fixed case and expected calculations
+
+```json
+{
+  "values": {
+    "durations_ticks": {
+      "A": 2,
+      "B": 4,
+      "C": 3,
+      "D": 1
+    },
+    "edges": [
+      [
+        "A",
+        "B"
+      ],
+      [
+        "A",
+        "C"
+      ],
+      [
+        "B",
+        "D"
+      ],
+      [
+        "C",
+        "D"
+      ]
+    ],
+    "shared_resource_jobs": [
+      "B",
+      "C"
+    ],
+    "resource_capacity": 1
+  },
+  "formula": "earliest_finish(v)=duration(v)+max(earliest_finish(predecessors)); add explicit non-overlap for shared exclusive resource",
+  "expected": {
+    "unlimited_earliest_finish": {
+      "A": 2,
+      "B": 6,
+      "C": 5,
+      "D": 7
+    },
+    "dependency_lower_bound": 7,
+    "resource_schedule": {
+      "A": [
+        0,
+        2
+      ],
+      "B": [
+        2,
+        6
+      ],
+      "C": [
+        6,
+        9
+      ],
+      "D": [
+        9,
+        10
+      ]
+    },
+    "resource_makespan": 10,
+    "alternative_resource_order_makespan": 10
+  },
+  "negative_control": "Removing the resource conflict permits B and C to overlap and finish in7ticks.",
+  "assumptions": [
+    "Exact nonpreemptive durations, no overhead, both B and C require the same exclusive resource for their whole duration, others unconstrained."
+  ],
+  "limits": "No optimal scheduler implementation, real worker utilization or IX timing was measured."
+}
+```
+
+## Retain a source-assisted learner attempt
+
+Work from the pinned inputs listed above. Before asking for assistance, write your own prediction for the fixed case and its negative control, including the unit of every quantity and the exact comparison boundary. A short paper table is the direct manual baseline. Keep intermediate values, especially any result that contradicts your first prediction. This is an explanation task using existing sources and fixed data; it does not require installing a package, calling a paid service or introducing a new program.
+
+Next use an assistant to locate the relevant source passage and critique your calculation. Retain the original prompt, the response, the source location it cited and the changes you accepted or rejected. A citation is useful only when its inspected content supports the specific claim. A declared stage, a data type and a prose comment supply different kinds of evidence from an executed outcome. Explain that boundary in the final answer rather than borrowing the authority of a successful-looking label.
+
+Submit the manual baseline, corrected result, control outcome, falsifier and assistance history together. The prepared learner criteria ask whether the scope was identified, the calculation was correct, the counterexample was retained, the source supported the explanation and the conclusion respected its limits. Their decisions remain undecided until an actual learner answer exists. Answer keys below are prepared corrections, not evidence that anyone learned the material. A reviewer should preserve a failed criterion and its reason before any refinement, then judge the revised attempt separately. Runtime evidence and publication evidence, if later collected, need their own revision-bound records.
+
+### Exercise 1
+
+Compute unlimited-resource finishes.
+
+<details>
+<summary>Answer 1</summary>
+
+A `2`, B `6`, C `5`, D `7`; longest dependency duration `7`.
+
+</details>
+
+### Exercise 2
+
+Give a feasible exclusive-resource schedule.
+
+<details>
+<summary>Answer 2</summary>
+
+A `[0,2)`, B `[2,6)`, C `[6,9)`, D `[9,10)`; finish `10`.
+
+</details>
+
+### Exercise 3
+
+Reverse the resource order.
+
+<details>
+<summary>Answer 3</summary>
+
+C `[2,5)`, B `[5,9)`, D `[9,10)` still finish at `10`.
+
+</details>
+
+### Exercise 4
+
+Evaluate the no-conflict control.
+
+<details>
+<summary>Answer 4</summary>
+
+Overlap B and C after A; D finishes at `7`, attaining the dependency lower bound.
+
+</details>
+
+### Exercise 5
+
+What falsifies a proposed schedule?
+
+<details>
+<summary>Answer 5</summary>
+
+An unmet predecessor or overlapping exclusive reservations; no runtime timing claim follows.
+
+</details>
+
+[Fixed evidence packet](../../../../code/streeling/evidence/batch50-2026-10-23/unit-b.json) · [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-23/journal.md)
