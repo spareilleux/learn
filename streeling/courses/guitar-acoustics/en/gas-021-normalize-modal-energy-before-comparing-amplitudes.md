@@ -1,0 +1,114 @@
+---
+module_id: gas-021-normalize-modal-energy-before-comparing-amplitudes
+department: guitar-acoustics
+course: "Normalize Modal Energy Before Comparing Amplitudes"
+level: advanced
+prerequisites: ["gas-015-separate-mode-excitation-from-observation"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Normalize Modal Energy Before Comparing Amplitudes
+
+> Authored finite model and bounded source reading. Human technical, fluent-language, musician and learner decisions remain pending. No new engine render, listening, playing, parser execution or production adoption is claimed.
+
+A guitar mode coefficient depends on the chosen shape normalization. Comparing coefficients without the modal mass can reverse an energy ranking. Integrate the squared sine shape along an ideal uniform string, then retain both generalized displacement and mass-normalized displacement. The physical displacement must stay unchanged when the coordinate basis changes. A [GA](https://github.com/GuitarAlchemist/ga) parameter report should identify its normalization before suggesting that one mode received more energy. The calculation concerns mechanical energy in an ideal model, not a pickup amplitude or loudness judgment.
+
+## Specific assumptions and limits
+
+The string is uniform and uses peak-normalized integer sine modes in consistent mechanical units. At the turning point velocity vanishes. This is modal energy, without calibrated pickup gain, acoustic radiation or measured guitar damping.
+
+## Work from the direct representation
+
+Write the main input table before opening the prepared answers. Identify the coordinate system, physical or logical unit, support and ordering rule for every field. A number without its convention cannot safely cross into an audio graph, a scene or an agent message. Derive intermediate quantities as well as the final decision. The displayed packet deliberately keeps inputs and expected outputs separate so a second reader can recompute the result rather than merely recognize a familiar label.
+
+Repeat the operation with the negative control, keeping its changed inputs visible. Explain which invariant survives and which claim fails. A useful control targets the mechanism under discussion; a different example that only looks plausible may never exercise the risky boundary. Agreement in the main case alone cannot show that a proposed abstraction preserves the operation. Conversely, a rejected control is an expected outcome of the teaching model, not an observed defect in an existing product.
+
+Read the full prerequisite and the retained project artifact below. The prerequisite establishes an earlier operation with its own limits. The retained runner supplies an actual audio comparison workflow and separates raw samples, encoded output and acceptance claims. It does not implement this lesson’s new model. Local source hashes identify complete bytes at the pinned revision; they do not turn a source inspection into runtime execution. Where a primary reference is linked, use only the bounded definition recorded in the packet.
+
+## Prepare a source-assisted project handoff
+
+Create a short GA review note containing your manual calculation, the declared convention and the rejecting witness. Keep that direct result as the baseline before proposing a DSL node, agent instruction or scene control. Such a proposal must explain what information its input preserves and which observation would disprove its fidelity. If a required input is absent, leave the result unresolved instead of filling the gap with a convenient default.
+
+Retain your unaided response before revealing the corrections. Record any calculator, source lookup or agent assistance, then preserve the corrected response alongside the original and explain the change. The packet contains a prepared criterion for each exercise, with no accepted learner decisions. Matching an answer key does not establish independent recall or a successful learner trial. Record actual commands, inputs, outputs, failures and replays in the validation journal when the model is tested. Keep human technical review, fluent-language review, musician judgment, production runtime and publication as separately supported decisions.
+
+[Prerequisite](../../guitar-acoustics/en/gas-015-separate-mode-excitation-from-observation.md)
+
+[Retained project artifact](../../../../code/streeling/guitar-runtime/run.mjs)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-25-c/unit-a.json)
+
+[Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25-c/journal.md)
+
+[Primary reading](https://www.phys.unsw.edu.au/jw/strings.html)
+
+## Fixed case and prepared quantities
+
+```json
+{
+  "values": {
+    "linear_density": 2,
+    "length": 3,
+    "omega": 4,
+    "amplitude": 0.5,
+    "assumed_modal_mass": null
+  },
+  "formula": "m_eff=mu*L/2 for sine peak normalization; E=0.5*m_eff*omega^2*A^2; q=sqrt(m_eff)*A; reported_E=0.5*used_mass*omega^2*A^2",
+  "expected": {
+    "modal_mass": 3,
+    "mass_normalized_amplitude": 0.8660254037844386,
+    "energy": 6,
+    "reported_energy": 6
+  },
+  "negative_control": {
+    "values": {
+      "linear_density": 2,
+      "length": 3,
+      "omega": 4,
+      "amplitude": 0.5,
+      "assumed_modal_mass": 6
+    },
+    "expected": {
+      "modal_mass": 3,
+      "mass_normalized_amplitude": 0.8660254037844386,
+      "energy": 6,
+      "reported_energy": 12
+    }
+  }
+}
+```
+
+### Exercise 1
+
+Calculate the main result and name its convention.
+
+> **Answer:** The effective mass is 3 and turning-point energy is 6; peak normalization sets the sine antinode to unity.
+
+### Exercise 2
+
+Which quantity must remain separate?
+
+> **Answer:** Generalized amplitude is 0.5; mass-normalized amplitude is `sqrt(3)/2`. They are different coordinates of the same displacement.
+
+### Exercise 3
+
+What assumption prevents a stronger conclusion?
+
+> **Answer:** The sine shape and uniform density supply the modal-mass integral; arbitrary body modes need their own shape and mass matrix.
+
+### Exercise 4
+
+Explain the negative control.
+
+> **Answer:** The assumed mass 6 reports energy 12 although the correct mode still has energy 6.
+
+### Exercise 5
+
+What observation would reject the proposed claim?
+
+> **Answer:** A basis rescaling that changes reconstructed displacement or energy rejects a claimed normalization-preserving conversion.
+
+## Source-assisted learner task
+
+Apply the direct project handoff above to both fixed cases. Preserve the typed input table, every intermediate result, the negative-control explanation and the final rejecting witness. The prepared answers are checks, not observations of your work.

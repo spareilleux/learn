@@ -1,0 +1,198 @@
+---
+module_id: "cyb-021-test-finite-horizon-control-reachability"
+department: "cybernetics"
+course: "Comprobar la alcanzabilidad en un horizonte finito"
+title: "Comprobar la alcanzabilidad en un horizonte finito"
+level: "intermediate"
+prerequisites: ["cyb-018-reconstruct-hidden-state-from-distinct-dynamics", "cyb-019-test-coupled-feedback-eigenmodes"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Comprobar la alcanzabilidad en un horizonte finito
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Un coordinador agéntico puede observar una cola sin disponer de acciones que modifiquen todas sus componentes. Añadir telemetría no crea actuadores ausentes. Antes de proponer un DSL de control, indique qué variables puede cambiar cada acción. Una recurrencia lineal estipulada permite separar controlabilidad de observabilidad.
+
+Desarrolle la recurrencia durante el horizonte declarado desde el estado inicial. Las primeras entradas atraviesan más transiciones antes de la observación final. Coloque sus contribuciones en columnas siguiendo el orden temporal de las entradas. Su espacio generado determina los estados finales alcanzables cuando los controles son reales sin restricciones. El rango indica su dimensión; resolver la ecuación objetivo comprueba el punto final concreto.
+
+El actuador fijo influye en ambas coordenadas durante el horizonte aunque actúe directamente sobre una sola. El control cambia su dirección y deja una coordenada inaccesible. Repetir llamadas no crea la dirección que falta. No se representan saturación, colas discretas, autoridad humana ni retardos. Una meta alcanzable algebraicamente es una conclusión de viabilidad limitada, no permiso de ejecución ni evidencia de estabilidad en lazo cerrado.
+
+## Fuentes y alcance del proyecto
+
+[Prerrequisito: cyb-018-reconstruct-hidden-state-from-distinct-dynamics](../../cybernetics/en/cyb-018-reconstruct-hidden-state-from-distinct-dynamics.md)
+
+[Prerrequisito: cyb-019-test-coupled-feedback-eigenmodes](../../cybernetics/en/cyb-019-test-coupled-feedback-eigenmodes.md)
+
+[Artefacto conservado del proyecto](../../../../scripts/streeling-lib.mjs)
+
+[Lectura primaria](https://hankyang.seas.harvard.edu/OptimalControlEstimation/app-lti-system-theory.html)
+
+## Modelo fijo y control negativo
+
+```json
+{
+  "values": {
+    "A": [
+      [
+        1,
+        1
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "B": [
+      0,
+      1
+    ],
+    "initial": [
+      0,
+      0
+    ],
+    "target": [
+      1,
+      1
+    ],
+    "horizon": 2
+  },
+  "formula": "For x_next=A*x+B*u, horizon=2 gives target-A*A*initial=[A*B,B]*[u0,u1]. Compute exact rank and solve; when unreachable controls and final_state are null.",
+  "expected": {
+    "reachability_matrix": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ]
+    ],
+    "rank": 2,
+    "reachable": true,
+    "controls": [
+      1,
+      0
+    ],
+    "final_state": [
+      1,
+      1
+    ]
+  },
+  "negative_control": {
+    "values": {
+      "A": [
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "B": [
+        1,
+        0
+      ],
+      "initial": [
+        0,
+        0
+      ],
+      "target": [
+        1,
+        1
+      ],
+      "horizon": 2
+    },
+    "expected": {
+      "reachability_matrix": [
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "rank": 1,
+      "reachable": false,
+      "controls": null,
+      "final_state": null
+    },
+    "why": "Changing the actuator removes the target direction even though the dynamics are unchanged."
+  },
+  "input_types": {
+    "A": "finite 2-by-2 rational matrix",
+    "B": "rational two-vector for scalar input",
+    "initial": "rational two-vector",
+    "target": "rational two-vector",
+    "horizon": "fixed integer two"
+  },
+  "assumptions": [
+    "All inputs are stipulated teaching values, not measured project events.",
+    "Only the declared finite objective and constraints are represented."
+  ],
+  "limits": "No actual queue controller, bounded-input reachability, scheduler permission or closed-loop stability is tested."
+}
+```
+
+## Tarea con fuentes y diario
+
+**Referencia manual directa:** Desarrollar la recurrencia y resolver las ecuaciones del estado final.
+
+**Criterio de refutación:** La meta anunciada queda fuera del espacio generado por las entradas.
+
+Lea el prerrequisito y la representación conservada del proyecto antes de tratar este ejemplo como una función propuesta. El script enlazado de Learn extrae metadatos, título y cuerpo, y después indexa las identidades de módulos ingleses. Es una frontera observable de representación; no suministra las entradas inventadas ni implementa esta operación matemática. Adjunte la revisión a la nota de lectura para que un cambio posterior no herede silenciosamente esta inspección.
+
+Para la tarea con fuentes, reproduzca directamente el caso fijo antes de pedir una explicación a un asistente. Incluya los tipos y supuestos del expediente, conserve cantidades intermedias y compare el control negativo declarado. Pregunte qué premisa distingue ambos resultados. Una explicación plausible sin calcular la entrada modificada no demuestra la operación.
+
+Registre pregunta exacta, fuentes aportadas, respuesta, ayuda recibida y correcciones en el diario. Las respuestas corregidas son una clave, no un intento de aprendizaje. Una comprobación matemática independiente puede verificar el cálculo finito sin detectar una pregunta deficiente o una traducción engañosa. Revisión técnica humana, revisión lingüística, aceptación del aprendiz, comportamiento del motor nativo, adopción y publicación siguen sin decidirse. Conserve el fallo original y su diagnóstico antes de registrar una repetición correcta; no sustituya el fallo por el resultado corregido.
+
+## Ejercicios corregidos
+
+### Ejercicio 1
+
+¿Por qué importa el orden de las columnas?
+
+> **Respuesta:** El punto final usa `[A*B,B]` para `[u0,u1]`; la primera entrada se propaga una vez.
+
+### Ejercicio 2
+
+Resuelva la meta fija.
+
+> **Respuesta:** La matriz tiene rango `2`; los controles `[1,0]` alcanzan `[1,1]` desde `[0,0]`.
+
+### Ejercicio 3
+
+Explique el control del actuador.
+
+> **Respuesta:** Con `B=[1,0]`, el rango es `1` y la segunda coordenada sigue en `0`. La meta `[1,1]` es inaccesible; no se anuncia ninguna secuencia.
+
+### Ejercicio 4
+
+¿Qué demuestra realmente el script conservado del proyecto?
+
+> **Respuesta:** Extrae metadatos, título y cuerpo e indexa identidades de módulos ingleses. Leerlo respalda esa representación; no ejecuta el modelo ni valida una función real.
+
+### Ejercicio 5
+
+¿Qué decisiones de aceptación puede cerrar la clave corregida?
+
+> **Respuesta:** Ninguna aceptación humana o del aprendiz. Un intento real necesita su respuesta, historial de ayuda y corrección; el caso finito no demuestra comportamiento nativo, adopción ni aprobación de publicación.
+
+## Criterios de aprendizaje preparados
+
+Estos criterios están preparados; cada decisión del aprendiz sigue sin decidirse.
+
+- Ejercicio 1: El punto final usa `[A*B,B]` para `[u0,u1]`; la primera entrada se propaga una vez.
+- Ejercicio 2: La matriz tiene rango `2`; los controles `[1,0]` alcanzan `[1,1]` desde `[0,0]`.
+- Ejercicio 3: Con `B=[1,0]`, el rango es `1` y la segunda coordenada sigue en `0`. La meta `[1,1]` es inaccesible; no se anuncia ninguna secuencia.
+- Ejercicio 4: Extrae metadatos, título y cuerpo e indexa identidades de módulos ingleses. Leerlo respalda esa representación; no ejecuta el modelo ni valida una función real.
+- Ejercicio 5: Ninguna aceptación humana o del aprendiz. Un intento real necesita su respuesta, historial de ayuda y corrección; el caso finito no demuestra comportamiento nativo, adopción ni aprobación de publicación.
+
+[Expediente fijo de la unidad](../../../../code/streeling/evidence/batch50-2026-10-25-c/unit-b.json) · [Diario de validación](../../../../code/streeling/evidence/batch50-2026-10-25-c/journal.md)

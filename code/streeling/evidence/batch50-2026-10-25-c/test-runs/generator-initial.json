@@ -1,0 +1,61 @@
+{
+  "action": "tests",
+  "args": [
+    "node",
+    "--test",
+    "scripts/tests/lazy-demo.test.mjs",
+    "scripts/tests/streeling-copy-source.test.mjs",
+    "scripts/tests/sync-streeling.test.mjs"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 20.58192249998683,
+  "log": "C:\\tmp\\streeling-batch50-tests-20261025-c.log",
+  "log_sha256": "0b760946f1b54ae6efa8312f2aaf7b7341519779680c7271a60ee695aa6aecc2",
+  "retained_log": "code/streeling/evidence/batch50-2026-10-25-c/test-runs/generator-initial.log",
+  "node_version": "v24.12.0",
+  "input_bindings": [
+    {
+      "path": "package.json",
+      "sha256": "dcbe37d0e97e5ef1423faa7f3252e323cfc8525727953dae7f691e35958d8ff2"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "8e1f664511bfc2f44ad2051dd312b1547d60c4b282010298431a0c7f904b913e"
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9"
+    },
+    {
+      "path": "scripts/sync-streeling.mjs",
+      "sha256": "ba2042f9f99a24e374509dbefa5ce8226225d50ed020fc7e7a1411827a595e89"
+    },
+    {
+      "path": "scripts/tests/lazy-demo.test.mjs",
+      "sha256": "87195e8095006215883da6262f783cda6e50661e9afdacce8a5b0a4b0bd93f83"
+    },
+    {
+      "path": "scripts/tests/streeling-copy-source.test.mjs",
+      "sha256": "732766b7444e89cc55f0ef11e1902f44e43c6df3df678cff4dd2f7a25e878592"
+    },
+    {
+      "path": "scripts/tests/sync-streeling.test.mjs",
+      "sha256": "33f2538ccfe801665a28c87a3477cc7d6383bbe529b8c3196365207bfcb72721"
+    }
+  ],
+  "config_files": [
+    {
+      "path": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\.compound-engineering\\config.local.yaml",
+      "exists": false,
+      "text": null
+    },
+    {
+      "path": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\.compound-engineering\\config.yaml",
+      "exists": false,
+      "text": null
+    }
+  ],
+  "passed": 18,
+  "failed": 0,
+  "scope": "Fresh actual unchanged generator regression baseline; not authored-domain or learner validation."
+}
