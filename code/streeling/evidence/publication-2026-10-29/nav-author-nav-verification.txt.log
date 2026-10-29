@@ -1,0 +1,16 @@
+Nav count verification (2026-10-29)
+
+node --test scripts/tests/streeling-nav-counts.test.mjs
+RED: module missing before implementation; 0 passed, 1 failed (nav-tests-red.txt).
+GREEN: 4 passed, 0 failed (nav-tests-green.txt).
+
+Astro compiler check, using @astrojs/compiler-rs transform:
+Sidebar: 1 compiled script(s), 0 diagnostics
+GlobalMenu: 1 compiled script(s), 0 diagnostics
+
+git diff --check -- src/components/Sidebar.astro src/components/GlobalMenu.astro src/styles/custom.css
+Exit 0; no output.
+
+Scope: dependency-free URL identity and count tests, DOM updater fixture exercising two independent navigation trees and repeated initialization. Compiler parsing for both changed components. No live browser/layout verification or full site build performed in this subtask; root owns those checks.
+
+Installed Starlight 0.42.0 verified from node_modules/@astrojs/starlight/package.json. Read dist/components/Sidebar.astro, SidebarSublist.astro and dist/style/props.css. Existing sidebar width token is 18.75rem; override sets 22rem only at >=72rem.

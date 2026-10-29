@@ -365,7 +365,7 @@ function main() {
 	for (const lang of LANGS) cleanOutput(OUT[lang]);
 	for (const [file, content] of pending) write(file, content);
 
-	writeOverview(university, departments, origin);
+	writeOverview(university, departments, origin, totals);
 	writeJournals(departments);
 	writeSidebar(departments, outRoot);
 
@@ -383,7 +383,13 @@ function main() {
 	console.log(`  links: ${totals.internal} rewritten to site pages, ${totals.github} pointed at GitHub`);
 }
 
-function writeOverview(university, departments, origin) {
+function writeOverview(university, departments, origin, totals) {
+	const research = departments.find((department) => department.id === 'ix-research');
+	const extra = research?.modules.length ?? 0;
+	const core = totals.en - extra;
+	const target = (departments.length - Number(Boolean(research))) * 25;
+	const localizedPages = LANGS.reduce((sum, lang) => sum + totals[lang], 0);
+	const totalRow = `| **Total** | **${totals.en}** | **${totals.fr}** | **${totals.es}** |`;
 	const short = origin.commit.slice(0, 7);
 	const date = origin.commit_date.slice(0, 10);
 	const sourceLink = `[\`${SITE_REPO}\` → \`${COURSES}\`](https://github.com/${SITE_REPO}/tree/main/${COURSES})`;
@@ -404,10 +410,11 @@ function writeOverview(university, departments, origin) {
 			description: 'Modules produced by the Demerzel departments, imported to study them and keep a learning journal.',
 			sidebar: { label: 'Overview', order: 0 },
 		}) +
+			`## Published course count\n\n**${core} / ${target}** core curriculum modules. Additional IX Research modules: **${extra}**.\n\n**${totals.en}** distinct course modules: English **${totals.en}**, French **${totals.fr}**, Spanish **${totals.es}** — **${localizedPages}** localized lesson pages. Translations are not additional distinct courses.\n\n` +
 			`> ${university.mandate}\n\n` +
 			`Streeling University is the knowledge layer of [Demerzel](https://github.com/${DEMERZEL}), the governance framework of the GuitarAlchemist ecosystem. Each department is an agent persona that researches its discipline and writes course modules.\n\n` +
 			`:::caution[Generated content]\nThese modules were written by AI departments and have **not been reviewed**. Unlike the other courses on this site, nothing here has been tested on my machine yet — my [journal](journal/) tracks what I have actually studied and verified.\n:::\n\n` +
-			`## Departments\n\n| Department | Modules | French | Spanish |\n|---|---|---|---|\n${rows('en')}\n\n` +
+			`## Departments\n\n| Department | Modules | French | Spanish |\n|---|---|---|---|\n${rows('en')}\n${totalRow}\n\n` +
 			`## Provenance\n\n- Initial source copy: ${sourceLink}, copied from ${originLink} at commit \`${short}\` (${date}), MIT license.\n` +
 			supplementLinks('Additional source provenance') +
 			`- Generated with \`npm run sync:streeling\` from \`${STREELING}/\`: change a module there, not on these pages — only \`journal.md\` is kept between syncs.\n`,
@@ -420,10 +427,11 @@ function writeOverview(university, departments, origin) {
 			description: 'Modules produits par les départements de Demerzel, importés pour les étudier et tenir un journal.',
 			sidebar: { label: 'Présentation', order: 0 },
 		}) +
+			`## Nombre de cours publiés\n\n**${core} / ${target}** modules du programme. Modules IX Research hors quota : **${extra}**.\n\n**${totals.en}** cours distincts : anglais **${totals.en}**, français **${totals.fr}**, espagnol **${totals.es}** — **${localizedPages}** pages de cours au total. Les traductions ne sont pas des cours supplémentaires.\n\n` +
 			`> ${university.mandate}\n\n` +
 			`Streeling University est la couche de connaissances de [Demerzel](https://github.com/${DEMERZEL}), le cadre de gouvernance de l'écosystème GuitarAlchemist. Chaque département est une persona d'agent qui étudie sa discipline et rédige des modules de cours.\n\n` +
 			`:::caution[Contenu généré]\nCes modules ont été écrits par des départements IA et **n'ont pas été relus**. Contrairement aux autres cours du site, rien ici n'a encore été testé sur ma machine — mon [journal](journal/) suit ce que j'ai réellement étudié et vérifié.\n:::\n\n` +
-			`## Départements\n\n| Département | Modules | En français | En espagnol |\n|---|---|---|---|\n${rows('fr')}\n\n` +
+			`## Départements\n\n| Département | Modules | En français | En espagnol |\n|---|---|---|---|\n${rows('fr')}\n${totalRow}\n\n` +
 			`## Provenance\n\n- Copie initiale des sources : ${sourceLink}, copiée depuis ${originLink} au commit \`${short}\` (${date}), licence MIT.\n` +
 			supplementLinks('Provenance des sources supplémentaires') +
 			`- Généré avec \`npm run sync:streeling\` depuis \`${STREELING}/\` : on modifie un module là, pas sur ces pages — seul \`journal.md\` est conservé entre deux synchronisations.\n`,
@@ -436,10 +444,11 @@ function writeOverview(university, departments, origin) {
 			description: 'Módulos producidos por los departamentos de Demerzel, importados para estudiarlos y llevar un diario de aprendizaje.',
 			sidebar: { label: 'Presentación', order: 0 },
 		}) +
+			`## Recuento de cursos publicados\n\n**${core} / ${target}** módulos del programa. Módulos adicionales de IX Research: **${extra}**.\n\n**${totals.en}** cursos distintos: inglés **${totals.en}**, francés **${totals.fr}**, español **${totals.es}** — **${localizedPages}** páginas de cursos en total. Las traducciones no son cursos adicionales.\n\n` +
 			`> ${university.mandate}\n\n` +
 			`Streeling University es la capa de conocimiento de [Demerzel](https://github.com/${DEMERZEL}), el marco de gobernanza del ecosistema GuitarAlchemist. Cada departamento es una persona de agente que investiga su disciplina y redacta módulos de curso.\n\n` +
 			`:::caution[Contenido generado]\nEstos módulos fueron escritos por departamentos de IA y **no han sido revisados**. A diferencia de los demás cursos del sitio, nada de lo que hay aquí se ha probado todavía en mi máquina — mi [diario](journal/) registra lo que realmente he estudiado y verificado.\n:::\n\n` +
-			`## Departamentos\n\n| Departamento | Módulos | En francés | En español |\n|---|---|---|---|\n${rows('es')}\n\n` +
+			`## Departamentos\n\n| Departamento | Módulos | En francés | En español |\n|---|---|---|---|\n${rows('es')}\n${totalRow}\n\n` +
 			`## Procedencia\n\n- Copia inicial de las fuentes: ${sourceLink}, copiada de ${originLink} en el commit \`${short}\` (${date}), licencia MIT.\n` +
 			supplementLinks('Procedencia de las fuentes adicionales') +
 			`- Generado con \`npm run sync:streeling\` desde \`${STREELING}/\`: se modifica un módulo allí, no en estas páginas — solo \`journal.md\` se conserva entre sincronizaciones.\n`,

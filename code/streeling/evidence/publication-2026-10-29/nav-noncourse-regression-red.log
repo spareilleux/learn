@@ -1,0 +1,45 @@
+✔ published course identities handle base paths, locales, relative links and URL suffixes (0.79ms)
+✖ each department counts unique published course URLs and retains empty departments (1.2657ms)
+✔ initialization scopes counts to each nav tree, retains zero and reuses its badge (0.56ms)
+✔ badge descriptions follow the document language (0.2211ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 59.8329
+
+✖ failing tests:
+
+test at scripts\tests\streeling-nav-counts.test.mjs:14:1
+✖ each department counts unique published course URLs and retains empty departments (1.2657ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+      [
+        'music',
+  +     4
+  -     2
+      ],
+      [
+        'empty',
+        0
+      ]
+  
+      at TestContext.<anonymous> (file:///C:/tmp/learn-streeling-craft-transfer-20261022/scripts/tests/streeling-nav-counts.test.mjs:26:10)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ [ 'music', 4 ], [ 'empty', 0 ] ],
+    expected: [ [ 'music', 2 ], [ 'empty', 0 ] ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
