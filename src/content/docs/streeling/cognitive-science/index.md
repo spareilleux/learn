@@ -31,3 +31,6 @@ sidebar:
 - [COG-018 · Test Paired Changes with Discordant Outcomes](cog-018-test-paired-changes-with-discordant-outcomes/)
 - [COG-019 · Correct Review Agreement for Label Marginals](cog-019-correct-review-agreement-for-label-marginals/)
 - [COG-020 · Screen an Item Using the Rest Score](cog-020-screen-an-item-using-the-rest-score/)
+- [COG-021 · Compare Logistic Item Information at a Stated Ability](cog-021-compare-logistic-item-information-at-a-stated-ability/)
+- [COG-022 · Pool Adjacent Calibration Violations with Case Weights](cog-022-pool-adjacent-calibration-violations-with-case-weights/)
+- [COG-023 · Carry Cue Covariance into Linear Fusion](cog-023-carry-cue-covariance-into-linear-fusion/)

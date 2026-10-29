@@ -32,3 +32,7 @@ sidebar:
 - [AUD-019 · Test Whether Clipping Commutes with Gain](aud-019-test-whether-clipping-commutes-with-gain/)
 - [AUD-020 · Reconstruct a Signal with Overlap-Add Weights](aud-020-reconstruct-a-signal-with-overlap-add-weights/)
 - [AUD-021 · Bound Feedback-Delay Repeats](aud-021-bound-feedback-delay-repeats/)
+- [AUD-022 · Flush the Tail of a Finite Convolution](aud-022-flush-the-tail-of-a-finite-convolution/)
+- [AUD-023 · Distinguish Allpass Magnitude from Phase](aud-023-distinguish-allpass-magnitude-from-phase/)
+- [AUD-024 · Prewarp a Bilinear Filter Cutoff](aud-024-prewarp-a-bilinear-filter-cutoff/)
+- [AUD-025 · Separate Subtractive-Dither Error from Bias](aud-025-separate-subtractive-dither-error-from-bias/)

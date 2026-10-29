@@ -18,28 +18,28 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 
 | Department | Modules | French | Spanish |
 |---|---|---|---|
-| [Audio Engineering](audio-engineering/) | 21 | 21 | 21 |
-| [Cognitive Science](cognitive-science/) | 20 | 20 | 20 |
+| [Audio Engineering](audio-engineering/) | 25 | 25 | 25 |
+| [Cognitive Science](cognitive-science/) | 23 | 23 | 23 |
 | [Computer Science](computer-science/) | 25 | 25 | 25 |
-| [Cybernetics](cybernetics/) | 20 | 20 | 20 |
-| [Data Visualization](data-visualization/) | 22 | 22 | 22 |
-| [Futurology](futurology/) | 15 | 15 | 15 |
-| [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 20 | 20 | 20 |
-| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 19 | 19 | 19 |
-| [Guitar Studies](guitar-studies/) | 20 | 20 | 20 |
-| [Information Theory](information-theory/) | 21 | 21 | 21 |
+| [Cybernetics](cybernetics/) | 23 | 23 | 23 |
+| [Data Visualization](data-visualization/) | 25 | 25 | 25 |
+| [Futurology](futurology/) | 19 | 19 | 19 |
+| [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 25 | 25 | 25 |
+| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 22 | 22 | 22 |
+| [Guitar Studies](guitar-studies/) | 25 | 25 | 25 |
+| [Information Theory](information-theory/) | 24 | 24 | 24 |
 | [IX Research](ix-research/) | 1 | 1 | 1 |
 | [Mathematics](mathematics/) | 25 | 25 | 25 |
 | [Music](music/) | 25 | 25 | 25 |
 | [Musicology](musicology/) | 20 | 20 | 20 |
-| [Network Science](network-science/) | 18 | 18 | 18 |
-| [Philosophy](philosophy/) | 15 | 15 | 15 |
+| [Network Science](network-science/) | 21 | 21 | 21 |
+| [Philosophy](philosophy/) | 18 | 18 | 18 |
 | [Physics](physics/) | 24 | 24 | 24 |
-| [Product and Project Management](product-management/) | 15 | 15 | 15 |
+| [Product and Project Management](product-management/) | 19 | 19 | 19 |
 | [Psychohistory](psychohistory/) | 25 | 25 | 25 |
-| [Semiotics](semiotics/) | 20 | 20 | 20 |
+| [Semiotics](semiotics/) | 23 | 23 | 23 |
 | [Visual Computing](visual-computing/) | 22 | 22 | 22 |
-| [World Music & Languages](world-music-languages/) | 19 | 19 | 19 |
+| [World Music & Languages](world-music-languages/) | 23 | 23 | 23 |
 
 ## Provenance
 

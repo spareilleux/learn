@@ -33,3 +33,6 @@ sidebar:
 - [DV-020 · Make Unequal Stitch Bins Preserve Frequency Area](dv-020-make-unequal-stitch-bins-preserve-frequency-area/)
 - [DV-021 · Transform Interval Endpoints before Drawing Error Bars](dv-021-transform-interval-endpoints-before-drawing-error-bars/)
 - [DV-022 · Declare Diagonal Connectivity in a Relief Contour](dv-022-declare-diagonal-connectivity-in-a-relief-contour/)
+- [DV-023 · Compress Signed Clearance with an Invertible Log Scale](dv-023-compress-signed-clearance-with-an-invertible-log-scale/)
+- [DV-024 · Recover Layer Values from Stacked Endpoints](dv-024-recover-layer-values-from-stacked-endpoints/)
+- [DV-025 · Check Overlay Contrast from Linear Luminance](dv-025-check-overlay-contrast-from-linear-luminance/)

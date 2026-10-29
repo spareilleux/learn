@@ -15,7 +15,7 @@ version: "0.1.0"
 
 ## Operación del proyecto e interpretación
 
-Un traspaso artesanal propuesto considera provisionalmente utilizable un objeto identificado cuando no se conoce un hecho contrario. Es un defecto revisable, no una implicación estricta desde la categoría de objeto. Especifique el defecto normal y la regla estricta de frágil a no utilizable. Cierre primero los hechos estrictos y compruebe si el único defecto puede aplicarse sin contradicción. Información adicional puede retirar la conclusión provisional. Este fragmento trata un solo defecto con hechos consistentes; no proporciona validación material ni autorización de efectos.
+Un traspaso artesanal propuesto considera provisionalmente utilizable un objeto identificado cuando no se conoce un hecho contrario. Es una regla por defecto revisable, no una implicación estricta desde la categoría de objeto. Especifique la regla por defecto normal y la regla estricta de frágil a no utilizable. Cierre primero los hechos estrictos y compruebe si la única regla por defecto puede aplicarse sin contradicción. Información adicional puede retirar la conclusión provisional. Este fragmento trata una sola regla por defecto con hechos consistentes; no proporciona validación material ni autorización de efectos.
 
 Lea el requisito previo versionado y el pasaje delimitado de la fuente antes de calcular. Identifique la operación que necesita el proyecto, el significado de sus entradas y la afirmación que podría respaldar el resultado. El expediente conserva la revisión y el alcance realmente consultado. Separe en columnas distintas una definición documental, una premisa construida y un resultado observado. Un asistente no debe sustituir una observación ausente por una historia plausible sobre lo que probablemente hace el programa.
 
@@ -81,13 +81,13 @@ Identifique las entradas y la operación que debe conservarse.
 
 <details><summary>Respuesta 1</summary>
 
-> **Respuesta:** El defecto tiene una condición de consistencia; ausencia de evidencia contraria no es verdad observada.
+> **Respuesta:** La regla por defecto tiene una condición de consistencia; ausencia de evidencia contraria no es verdad observada.
 
 </details>
 
 ### Ejercicio 2
 
-Encuentre el conjunto principal de literales y determine si se aplica el defecto.
+Encuentre el conjunto principal de literales y determine si se aplica la regla por defecto.
 
 <details><summary>Respuesta 2</summary>
 
@@ -101,7 +101,7 @@ Explique la trampa de interpretación que podría ocultar un resumen.
 
 <details><summary>Respuesta 3</summary>
 
-> **Respuesta:** Una implicación estricta conserva su conclusión al añadir hechos; este defecto puede retirarla.
+> **Respuesta:** Una implicación estricta conserva su conclusión al añadir hechos; esta regla por defecto puede retirarla.
 
 </details>
 

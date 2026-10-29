@@ -30,3 +30,6 @@ sidebar:
 - [GAA-017 · Audit a Practice Staircase Stopping Rule](gaa-017-audit-a-practice-staircase-stopping-rule/)
 - [GAA-018 · Bind Delayed Feedback to the Original Attempt](gaa-018-bind-delayed-feedback-to-the-original-attempt/)
 - [GAA-019 · Retrieve Overlapping Interval Motifs](gaa-019-retrieve-overlapping-interval-motifs/)
+- [GAA-020 · Cover a Finite Practice Space with Fixed Centres](gaa-020-cover-a-finite-practice-space-with-fixed-centres/)
+- [GAA-021 · Align a Practice Attempt with Unit Edit Costs](gaa-021-align-a-practice-attempt-with-unit-edit-costs/)
+- [GAA-022 · Retain Tempo while Comparing Onset Ratios](gaa-022-retain-tempo-while-comparing-onset-ratios/)

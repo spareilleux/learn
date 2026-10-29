@@ -133,7 +133,7 @@ Explain the negative control.
 
 What observation would reject the proposed claim?
 
-> **Answer:** Any occupied slot with count other than unity rejects the strict exclusive-complete policy.
+> **Answer:** Any declared slot with count other than unity rejects the strict exclusive-complete policy.
 
 ## Source-assisted learner task
 

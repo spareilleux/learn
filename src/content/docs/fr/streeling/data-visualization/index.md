@@ -33,3 +33,6 @@ sidebar:
 - [DV-020 · Préserver les fréquences par l’aire de classes de points inégales](dv-020-make-unequal-stitch-bins-preserve-frequency-area/)
 - [DV-021 · Transformer les bornes avant de dessiner les barres d’intervalle](dv-021-transform-interval-endpoints-before-drawing-error-bars/)
 - [DV-022 · Déclarer la connexité diagonale d’un contour de relief](dv-022-declare-diagonal-connectivity-in-a-relief-contour/)
+- [DV-023 · Comprimer les jeux signés avec une échelle logarithmique inversible](dv-023-compress-signed-clearance-with-an-invertible-log-scale/)
+- [DV-024 · Retrouver les valeurs des couches à partir des extrémités empilées](dv-024-recover-layer-values-from-stacked-endpoints/)
+- [DV-025 · Vérifier le contraste d’une annotation avec la luminance linéaire](dv-025-check-overlay-contrast-from-linear-luminance/)

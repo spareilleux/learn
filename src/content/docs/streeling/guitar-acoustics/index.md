@@ -31,3 +31,8 @@ sidebar:
 - [GAS-018 · Account for Energy at an Impedance Junction](gas-018-account-for-energy-at-an-impedance-junction/)
 - [GAS-019 · Measure Half-Power Bandwidth before Reporting Q](gas-019-measure-half-power-bandwidth-before-reporting-q/)
 - [GAS-020 · Average a Mode over a Pickup Aperture](gas-020-average-a-mode-over-a-pickup-aperture/)
+- [GAS-021 · Normalize Modal Energy Before Comparing Amplitudes](gas-021-normalize-modal-energy-before-comparing-amplitudes/)
+- [GAS-022 · Scale a Helmholtz Cavity with Effective Neck Length](gas-022-scale-a-helmholtz-cavity-with-effective-neck-length/)
+- [GAS-023 · Separate Phase and Group Speed in Bending Waves](gas-023-separate-phase-and-group-speed-in-bending-waves/)
+- [GAS-024 · Track Avoided Crossings Through Detuning](gas-024-track-avoided-crossings-through-detuning/)
+- [GAS-025 · Separate Active and Reactive Acoustic Power](gas-025-separate-active-and-reactive-acoustic-power/)

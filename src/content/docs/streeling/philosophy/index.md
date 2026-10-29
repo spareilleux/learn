@@ -26,3 +26,6 @@ sidebar:
 - [PHI-013 · Explain an Infeasible Craft Plan with a Minimal Core](phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core/)
 - [PHI-014 · Test Selection on a Shared Scene Outcome](phi-014-test-selection-on-a-shared-scene-outcome/)
 - [PHI-015 · Diagnose a Failed Prediction with an Auxiliary Premise](phi-015-diagnose-a-failed-prediction-with-an-auxiliary-premise/)
+- [PHI-016 · Compose Unknown Evidence with Strong Kleene Rules](phi-016-compose-unknown-evidence-with-strong-kleene-rules/)
+- [PHI-017 · Retract a Craft Default when a Defeater Arrives](phi-017-retract-a-craft-default-when-a-defeater-arrives/)
+- [PHI-018 · Compute Grounded Acceptance before an Agent Summary](phi-018-compute-grounded-acceptance-before-an-agent-summary/)

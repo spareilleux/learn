@@ -31,3 +31,6 @@ sidebar:
 - [SEM-018 · Interpret a Multi-Shaft Weaving Draft](sem-018-interpret-a-multi-shaft-weaving-draft/)
 - [SEM-019 · Distinguish Knot Diagram Reversal from Mirroring](sem-019-distinguish-knot-diagram-reversal-from-mirroring/)
 - [SEM-020 · Locate a Motif Cell in Positive Run Lengths](sem-020-locate-a-motif-cell-in-positive-run-lengths/)
+- [SEM-021 · Retain Alternative Lineages and Their Multiplicity](sem-021-retain-alternative-lineages-and-their-multiplicity/)
+- [SEM-022 · Distinguish an Independent Wrapper from Independent State](sem-022-distinguish-an-independent-wrapper-from-independent-state/)
+- [SEM-023 · Keep Points and Displacements Distinct under Translation](sem-023-keep-points-and-displacements-distinct-under-translation/)

@@ -30,3 +30,7 @@ sidebar:
 - [WML-017 · Déclarer l’équivalence selon une période autre que l’octave](wml-017-declare-equivalence-under-a-non-octave-period/)
 - [WML-018 · Détecter les conflits d’accordage à l’échelle du canal](wml-018-detect-channel-scoped-tuning-conflicts/)
 - [WML-019 · Répartir les attaques avec une grille de parties entières](wml-019-distribute-onsets-with-a-floor-lattice/)
+- [WML-020 · Vérifier le hoquet par l’occupation exclusive des voix](wml-020-audit-hocket-as-exclusive-voice-occupancy/)
+- [WML-021 · Trouver les partiels communs sans égaliser les fondamentales](wml-021-find-common-partials-without-equating-fundamentals/)
+- [WML-022 · Conserver la correspondance circulaire entre étiquettes d’événements](wml-022-retain-circular-correspondence-between-event-labels/)
+- [WML-023 · Reconnaître des repères ordonnés malgré des événements intercalés](wml-023-accept-ordered-landmarks-with-intervening-events/)

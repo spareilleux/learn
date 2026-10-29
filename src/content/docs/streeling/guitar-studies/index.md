@@ -31,3 +31,8 @@ sidebar:
 - [GTR-018 · Check Direction Constraints at String Crossings](gtr-018-check-direction-constraints-at-string-crossings/)
 - [GTR-019 · Declare the Coordinate of a Continuous Slide](gtr-019-declare-the-coordinate-of-a-continuous-slide/)
 - [GTR-020 · Derive Strum Onsets from a Sweep](gtr-020-derive-strum-onsets-from-a-sweep/)
+- [GTR-021 · Check Lateral Clearance Between String Envelopes](gtr-021-check-lateral-clearance-between-string-envelopes/)
+- [GTR-022 · Place Multiscale Frets in Physical Coordinates](gtr-022-place-multiscale-frets-in-physical-coordinates/)
+- [GTR-023 · Fit a Straight Slide Bar to Contact Targets](gtr-023-fit-a-straight-slide-bar-to-contact-targets/)
+- [GTR-024 · Schedule Plucking Recovery Separately from Held Support](gtr-024-schedule-plucking-recovery-separately-from-held-support/)
+- [GTR-025 · Compose Selective Capos with a Componentwise Join](gtr-025-compose-selective-capos-with-a-componentwise-join/)

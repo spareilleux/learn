@@ -33,3 +33,6 @@ sidebar:
 - [DV-020 · Conservar las frecuencias por área con intervalos desiguales de puntadas](dv-020-make-unequal-stitch-bins-preserve-frequency-area/)
 - [DV-021 · Transformar los extremos antes de dibujar barras de intervalo](dv-021-transform-interval-endpoints-before-drawing-error-bars/)
 - [DV-022 · Declarar la conectividad diagonal de un contorno de relieve](dv-022-declare-diagonal-connectivity-in-a-relief-contour/)
+- [DV-023 · Comprimir las holguras con signo mediante una escala logarítmica invertible](dv-023-compress-signed-clearance-with-an-invertible-log-scale/)
+- [DV-024 · Recuperar los valores de las capas a partir de extremos apilados](dv-024-recover-layer-values-from-stacked-endpoints/)
+- [DV-025 · Comprobar el contraste de una anotación con luminancia lineal](dv-025-check-overlay-contrast-from-linear-luminance/)

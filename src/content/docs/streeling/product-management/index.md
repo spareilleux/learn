@@ -26,3 +26,7 @@ sidebar:
 - [PM-013 · Retain Censoring in Time to First Task Use](pm-013-retain-censoring-in-time-to-first-task-use/)
 - [PM-014 · Select a Budgeted Portfolio with Prerequisite Closure](pm-014-select-a-budgeted-portfolio-with-prerequisite-closure/)
 - [PM-015 · Balance Verification Setup and Waiting Costs](pm-015-balance-verification-setup-and-waiting-costs/)
+- [PM-016 · Retain Pareto-Incomparable Verification Options](pm-016-retain-pareto-incomparable-verification-options/)
+- [PM-017 · Allocate Whole Review Slots by Largest Remainders](pm-017-allocate-whole-review-slots-by-largest-remainders/)
+- [PM-018 · Find the Weight at Which a Workflow Ranking Flips](pm-018-find-the-weight-at-which-a-workflow-ranking-flips/)
+- [PM-019 · Minimize Stratified Review Variance over Integer Allocations](pm-019-minimize-stratified-review-variance-over-integer-allocations/)

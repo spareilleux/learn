@@ -26,3 +26,6 @@ sidebar:
 - [PHI-013 · Explicar un plan artesanal inviable mediante un núcleo mínimo](phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core/)
 - [PHI-014 · Examinar la selección por un resultado de escena compartido](phi-014-test-selection-on-a-shared-scene-outcome/)
 - [PHI-015 · Diagnosticar una predicción fallida con una premisa auxiliar](phi-015-diagnose-a-failed-prediction-with-an-auxiliary-premise/)
+- [PHI-016 · Componer evidencia desconocida con reglas fuertes de Kleene](phi-016-compose-unknown-evidence-with-strong-kleene-rules/)
+- [PHI-017 · Retirar una conclusión por defecto cuando llega un refutador](phi-017-retract-a-craft-default-when-a-defeater-arrives/)
+- [PHI-018 · Calcular la aceptación fundamentada antes de un resumen agéntico](phi-018-compute-grounded-acceptance-before-an-agent-summary/)

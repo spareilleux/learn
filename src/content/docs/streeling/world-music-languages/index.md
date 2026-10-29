@@ -30,3 +30,7 @@ sidebar:
 - [WML-017 · Declare Equivalence under a Non-Octave Period](wml-017-declare-equivalence-under-a-non-octave-period/)
 - [WML-018 · Detect Channel-Scoped Tuning Conflicts](wml-018-detect-channel-scoped-tuning-conflicts/)
 - [WML-019 · Distribute Onsets with a Floor Lattice](wml-019-distribute-onsets-with-a-floor-lattice/)
+- [WML-020 · Audit Hocket as Exclusive Voice Occupancy](wml-020-audit-hocket-as-exclusive-voice-occupancy/)
+- [WML-021 · Find Common Partials Without Equating Fundamentals](wml-021-find-common-partials-without-equating-fundamentals/)
+- [WML-022 · Retain Circular Correspondence Between Event Labels](wml-022-retain-circular-correspondence-between-event-labels/)
+- [WML-023 · Accept Ordered Landmarks with Intervening Events](wml-023-accept-ordered-landmarks-with-intervening-events/)

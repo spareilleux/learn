@@ -1,0 +1,162 @@
+---
+module_id: "cog-021-compare-logistic-item-information-at-a-stated-ability"
+department: "cognitive-science"
+course: "Compare Logistic Item Information at a Stated Ability"
+title: "Compare Logistic Item Information at a Stated Ability"
+level: "intermediate"
+prerequisites: ["cog-020-screen-an-item-using-the-rest-score"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Compare Logistic Item Information at a Stated Ability
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+A GA practice designer wants to choose between pitch questions before collecting answers. A raw success percentage does not show where an item distinguishes nearby levels of ability. The logistic response model makes that dependence explicit. Difficulty moves the response curve along the ability axis, while discrimination changes its slope. These parameters are assumptions here, not fitted properties of a real exercise.
+
+For a Bernoulli response, differentiate its log likelihood with respect to ability. Taking the expected squared derivative gives discrimination squared times success probability times failure probability. Information is local: it concerns small changes around the stated ability, under this particular response model. It is not the Shannon entropy of a message, an accuracy score or evidence that a learner mastered the concept.
+
+Calculate both candidates at each declared ability and retain the probabilities as well as information. The item with the larger discrimination is not uniformly best when its difficulty lies away from the learner. Moving the hypothetical ability changes the ranking in the control. This is a model comparison before adaptive selection, not an implemented adaptive tutor. Parameter uncertainty, multidimensional skill and guessing would require a different analysis.
+
+## Sources and project boundary
+
+[Prerequisite: cog-020-screen-an-item-using-the-rest-score](../../cognitive-science/en/cog-020-screen-an-item-using-the-rest-score.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading](https://quantdev.ssri.psu.edu/sites/qdev/files/IRT_tutorial_FA17_2.html)
+
+[Primary reading](https://www.publichealth.columbia.edu/research/population-health-methods/item-response-theory)
+
+## Fixed model and negative control
+
+```json
+{
+  "values": {
+    "theta": 0,
+    "items": [
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        1
+      ]
+    ],
+    "round_digits": 12
+  },
+  "formula": "For each [a,b], P=1/(1+exp(-a*(theta-b))); I=a*a*P*(1-P). Round only displayed probabilities/information to round_digits; choose largest unrounded I, retaining ties.",
+  "expected": {
+    "probabilities": [
+      0.5,
+      0.119202922022
+    ],
+    "information": [
+      0.25,
+      0.419974341614
+    ],
+    "best_indices": [
+      1
+    ]
+  },
+  "negative_control": {
+    "values": {
+      "theta": -1,
+      "items": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "round_digits": 12
+    },
+    "expected": {
+      "probabilities": [
+        0.26894142137,
+        0.017986209962
+      ],
+      "information": [
+        0.196611933241,
+        0.070650824853
+      ],
+      "best_indices": [
+        0
+      ]
+    },
+    "why": "Moving ability changes which item is locally informative."
+  },
+  "input_types": {
+    "theta": "finite real ability",
+    "items": "ordered [positive discrimination a, finite difficulty b] pairs",
+    "round_digits": "nonnegative integer"
+  },
+  "assumptions": [
+    "All inputs are stipulated teaching values, not measured project events.",
+    "Only the declared finite objective and constraints are represented."
+  ],
+  "limits": "No real learner ability, fitted item parameters, guessing model or adaptive tutoring result is observed."
+}
+```
+
+## Source-assisted task and journal
+
+**Direct manual baseline:** Calculate both response probabilities and information values by hand before comparing items.
+
+**Falsifier:** The proposed ranking fails if the stated ability is changed without recomputing the item information.
+
+Read the prerequisite and the retained project representation before treating this example as a proposed feature. The linked Learn source helper extracts metadata, title and body, then indexes English module identities. That is an actual representation boundary to inspect; it supplies neither the invented inputs nor an implementation of this mathematical operation. Keep the source revision attached to the reading note so that a later change cannot silently inherit this inspection.
+
+For the source-assisted task, reproduce the fixed case directly before asking an assistant to explain it. Use the input types and assumptions in the packet as part of the question, preserve intermediate quantities and compare the declared negative control. Ask the assistant to identify which premise makes the two results differ. A plausible explanation that never calculates the changed input has not demonstrated the operation.
+
+Record the exact question, supplied sources, answer, assistance history and any correction in the journal. The prepared corrected answers below are an answer key, not a learner attempt. An independent model check can establish the finite arithmetic while still missing a poor prompt or a misleading translation. Human technical review, fluent-language review, learner acceptance, native runtime behavior, production adoption and publication decisions therefore remain undecided. Retain a failed check and its diagnosis before recording a successful replay; do not replace an original failure with the corrected result.
+
+## Corrected exercises
+
+### Exercise 1
+
+Which item is more informative in the fixed case?
+
+> **Answer:** Index `1` wins: information is `0.419974341614` versus `0.25`. Its success probability is lower, so information and ease are different.
+
+### Exercise 2
+
+Apply the ability control.
+
+> **Answer:** At `theta=-1`, index `0` wins with `0.196611933241` versus `0.070650824853`. The ordering is conditional, not universal.
+
+### Exercise 3
+
+Does the calculation estimate ability?
+
+> **Answer:** No. Ability and item parameters are stipulated inputs. A real estimate requires responses and a justified measurement model.
+
+### Exercise 4
+
+What does the retained project helper actually establish?
+
+> **Answer:** It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.
+
+### Exercise 5
+
+Which acceptance decisions can the corrected answer key close?
+
+> **Answer:** None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.
+
+## Prepared learner criteria
+
+These criteria are prepared; every learner decision remains undecided.
+
+- Exercise 1: Index `1` wins: information is `0.419974341614` versus `0.25`. Its success probability is lower, so information and ease are different.
+- Exercise 2: At `theta=-1`, index `0` wins with `0.196611933241` versus `0.070650824853`. The ordering is conditional, not universal.
+- Exercise 3: No. Ability and item parameters are stipulated inputs. A real estimate requires responses and a justified measurement model.
+- Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.
+- Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.
+
+[Fixed unit packet](../../../../code/streeling/evidence/batch50-2026-10-25-c/unit-b.json) · [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25-c/journal.md)

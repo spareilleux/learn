@@ -1,0 +1,495 @@
+=== streeling/courses/guitar-studies/en/gtr-019-declare-the-coordinate-of-a-continuous-slide.md ===
+---
+module_id: gtr-019-declare-the-coordinate-of-a-continuous-slide
+department: guitar-studies
+course: "Declare the Coordinate of a Continuous Slide"
+level: advanced
+prerequisites: ["gtr-014-count-legato-notes-separately-from-pick-attacks"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Declare the Coordinate of a Continuous Slide
+
+> Authored model and bounded source reading. Human technical, fluent-language, musician and learner decisions remain pending. No new performance, listening result, engine render, parser execution or production adoption is claimed.
+
+A GA phrase handoff preserves the two endpoints of a slide and assumes that the path between them is determined. It is not: the interpolated coordinate matters. We compare uniform change of speaking length with uniform change of logarithmic frequency. The endpoints and duration agree while the intermediate pitch differs. The operation extends the prerequisite’s articulation ledger into a continuous trajectory, without adding a production slide engine.
+
+For a flexible ideal string with constant wave speed, frequency is inversely proportional to speaking length. A straight line in length therefore becomes a curved path in frequency. Uniform logarithmic pitch instead makes frequency a geometric interpolation. Neither route should be called the default behavior of every slide, and an ordinary fretted guitar can introduce contact transitions excluded by this continuous model.
+
+The primary notation source identifies a slide as continuous and includes playback discretization attributes. That does not select our physical coordinate or certify that a parser retains it. The interior sample is the useful witness: identical endpoints cannot distinguish the policies. An agent that stores only the endpoints would need an additional agreed path convention to recover the intended result. Keep units, coordinate and contact assumption in a proposed record. A direct table already tests whether a later abstraction preserves the path. Actual finger movement, fret contact, pitch tracking and musician judgment require separate observations; the ideal calculation supplies none of them.
+
+## Read the retained project evidence
+
+The prerequisite supplies the earlier operation and its evidence boundary. Inspect the linked project artifact before using the authored case to propose a change. Its existing observations keep their original scope: a retained source file or fixture does not establish current deployment. The fixed packet records exact inputs, prepared outputs and reading provenance. Local file hashes identify complete bytes; they do not enlarge the bounded passage actually read. A primary web page supports only the specific definition read, with no invented immutable revision or byte hash.
+
+[Prerequisite](../../guitar-studies/en/gtr-014-count-legato-notes-separately-from-pick-attacks.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/phrase-performance-2026-10-22/string-occupancy.json)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-25-b/unit-a.json)
+
+[Primary reading](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/slide/)
+
+## Fixed case and prepared quantities
+
+```json
+{
+  "values": {
+    "start_length": 1,
+    "end_length": 0.5,
+    "start_frequency_hz": 100,
+    "duration_s": 1,
+    "times_s": [
+      0,
+      0.5,
+      1
+    ],
+    "policy": "linear_length"
+  },
+  "formula": "u=t/duration; linear_length: L=(1-u)*L0+u*L1; f=f0*L0/L; linear_log_frequency: f=f0*(L0/L1)^u; L=f0*L0/f",
+  "expected": {
+    "length": [
+      1,
+      0.75,
+      0.5
+    ],
+    "frequency_hz": [
+      100,
+      133.33333333333334,
+      200
+    ]
+  },
+  "negative_control": {
+    "values": {
+      "start_length": 1,
+      "end_length": 0.5,
+      "start_frequency_hz": 100,
+      "duration_s": 1,
+      "times_s": [
+        0,
+        0.5,
+        1
+      ],
+      "policy": "linear_log_frequency"
+    },
+    "expected": {
+      "length": [
+        1,
+        0.7071067811865475,
+        0.5
+      ],
+      "frequency_hz": [
+        100,
+        141.4213562373095,
+        200
+      ]
+    }
+  }
+}
+```
+
+## Assumptions and evidence limits
+
+Assume constant wave speed and a continuously variable ideal speaking length. Fret interruptions are absent. Both policies are authored trajectories; neither constitutes a normal fretted-slide prediction or a measured motion.
+
+## Interpret the operation before choosing an abstraction
+
+Before revealing the answer key, write the input contract in your own words and derive the main result manually. Keep intermediate quantities or state transitions, rather than copying only a final number. Compare the negative control under the same rule and identify the input that changed. The model is a finite authored example. A matching calculation supports this example’s stated claim; it does not supply an observed user outcome or validate a production feature.
+
+### Exercise 1
+
+Derive the length at the interior time for linear length motion.
+
+<details><summary>Answer 1</summary>
+
+It is the arithmetic interpolation of the endpoint lengths, as listed in the fixed case.
+
+</details>
+
+### Exercise 2
+
+Convert that length to frequency under constant wave speed.
+
+<details><summary>Answer 2</summary>
+
+Use the inverse-length relation; an arithmetic midpoint in length is not an arithmetic midpoint in frequency.
+
+</details>
+
+### Exercise 3
+
+How does the control interpolate pitch?
+
+<details><summary>Answer 3</summary>
+
+It interpolates logarithmic frequency, giving a geometric frequency midpoint and a different speaking length.
+
+</details>
+
+### Exercise 4
+
+Can shared endpoints establish shared slide behavior?
+
+<details><summary>Answer 4</summary>
+
+No. The interior values differ under the two declared policies despite identical endpoints and duration.
+
+</details>
+
+### Exercise 5
+
+What falsifies an endpoint-only fidelity claim?
+
+<details><summary>Answer 5</summary>
+
+A receiver unable to distinguish these two interior trajectories cannot recover which authored slide path was requested.
+
+</details>
+
+## Source-assisted learner task
+
+Draw both paths before opening the answers. Draft a GA phrase note that names the interpolation coordinate and explicitly excludes normal fret-contact prediction.
+
+Retain your unaided answer before consulting a source or calculator. Then identify a precise source passage and revision, record every kind of assistance and keep the original answer alongside any correction. A proposed agent workflow or DSL must preserve the manual result and its countercase before its convenience can be assessed. If required inputs are absent, leave the decision unresolved rather than substituting a plausible value.
+
+Write a falsifier as an observable disagreement with the stated rule, then say what additional observation would be needed at the next boundary. Use the exercise answers as prepared checks, not as a record of your attempt. The fixed packet contains a separate prepared criterion for every exercise; all learner decisions remain undecided until an actual response and review are retained. Report assistance, corrections and remaining limits with the final note so that arithmetic correctness is not confused with independent recall, musician judgment or runtime acceptance.
+
+=== streeling/courses/guitar-studies/en/gtr-005-plan-which-string-keeps-ringing.md ===
+---
+module_id: gtr-005-plan-which-string-keeps-ringing
+department: guitar-studies
+course: "Plan Which String Keeps Ringing"
+level: intermediate
+prerequisites: ["gtr-003-audit-voicing-playability"]
+estimated_duration: "40 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Plan Which String Keeps Ringing
+
+> **Draft scope.** Fresh standalone execution of unchanged F# position helpers, pinned source inspection and authored sustained-event calculations. Musician, human technical, fluent-language and learner reviews and deployed course HTML verification remain pending. No guitar was played and no timed GA planner or audio engine was run.
+
+## The project question
+
+A note can be played at several places on a guitar. Does choosing a valid place independently for each note produce a phrase in which every requested note keeps ringing? We will keep four event identities and test a narrow model: one independently sustained note per string at a time, with no string change inside a held event. This excludes transfers, rearticulation and special techniques; it is not a universal account of physical guitar possibilities.
+
+## 1. Reconcile string labels before composing functions
+
+The pinned [GA MIDI helpers](https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.DSL/Types/MidiTypes.fs) use Standard tuning `[40,45,50,55,59,64]`, with string 1 at the lowest end. The inspected [C# tuning model](https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Domain.Core/Instruments/Tuning.cs) normalizes its default to the highest string first. Throughout this lesson, conventional guitar labels mean string 1 high E4 and string 6 low E2, with C4 = MIDI 60.
+
+For this six-string case, convert an F# index s into conventional index `7-s`. The [fresh execution receipt](../../../../code/streeling/evidence/phrase-performance-2026-10-22/native-execution.json) records unchanged source loaded through [F# Interactive](https://learn.microsoft.com/dotnet/fsharp/tools/fsharp-interactive/) with SDK 10.0.113. Sixteen input cases cover two tunings, two fret caps and four pitches. The coordinate adapter and temporal search are authored calculations, not an implemented bridge or C# execution.
+
+### Practice exercise 1: translate one returned position
+
+The F# helper returns string 4 fret 5 for MIDI 60. Which conventional string is that, and which open note verifies the pitch? Would keeping string number 4 unchanged preserve its meaning across these inspected conventions?
+
+> **Answer:** `7-4=3`, the conventional G3 string with open MIDI 55. Adding fret 5 gives 60. Keeping the number 4 unchanged would instead identify the conventional D3 string, so the coordinate meaning would change. The adapter is specific to the declared six-string order.
+
+## 2. Keep the valid pitch candidates
+
+With maximum fret 5, the actual helper outputs yield these conventional positions:
+
+| Pitch | Conventional string/fret candidates |
+| --- | --- |
+| C4, MIDI 60 | string 3 fret 5; string 2 fret 1 |
+| E4, MIDI 64 | string 2 fret 5; string 1 fret 0 |
+| G4, MIDI 67 | string 1 fret 3 |
+| D4, MIDI 62 | string 2 fret 3 |
+
+The source's independent best-position calls choose strings 2, 1, 1 and 2 respectively. Each position produces the requested pitch. The E and G choices use the same string, so their durations will decide whether they can coexist. The helper answers a static question; it is not a failed temporal solver.
+
+### Practice exercise 2: identify the missing constraint
+
+Why can independently selected E4 on string 1 fret 0 and G4 on string 1 fret 3 conflict even though both are valid positions? What observation is needed beyond the pitch list?
+
+> **Answer:** Under the declared model they cannot sustain independently on the same string during an overlap. Their onsets, offsets and event identities determine whether that overlap exists. A list of valid per-note positions alone cannot answer the timed question.
+
+## 3. Plan a held note before the later attack
+
+Use these authored events in absolute quarter-note beats. Each interval includes its onset and excludes its offset.
+
+| Event | MIDI pitch | Onset | Offset |
+| --- | --- | --- | --- |
+| C | 60 | 0 | 4 |
+| E | 64 | 0 | 2 |
+| G | 67 | 1 | 2 |
+| D | 62 | 2 | 3 |
+
+C and E initially have three unique-string assignments. Only C on string 3 fret 5 and E on string 2 fret 5 can extend through G's attack on string 1 fret 3 without moving a held event. At beat 2, E and G have ended; D can reuse string 2 at fret 3. Exhaustive assignment gives one complete plan under these candidates and assumptions.
+
+### Practice exercise 3: preserve the held events
+
+Give the full plan. Why can a locally valid initial choice of C on string 2 and E on string 1 fail when G arrives? Is silently moving either held note to another string the same event realization?
+
+> **Answer:** C uses string 3 fret 5; E string 2 fret 5; G string 1 fret 3; D string 2 fret 3. The alternative initial choice occupies G's only eligible string while E must continue. Moving a held note would require a separately declared transfer or rearticulation model; it is not permitted silently by this assignment problem.
+
+## 4. Exhibit the conflict instead of inventing a fingering
+
+Move D's onset to beat 1.5 and keep its offset at 3. Between beats 1.5 and 2, all four events are active. At fret cap 5 their eligible strings together are only 1, 2 and 3. Four simultaneous independent events cannot be injected into those three strings. No valid assignment exists in this model, despite every event having at least one pitch position.
+
+The pinned [C# position mapper](https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Domain.Services/Fretboard/Analysis/FretboardPositionMapper.cs) already filters duplicate strings within one simultaneous chord shape. It does not retain a held event's string across a timed phrase. These are related constraints at different scopes; this course does not execute or replace that mapper.
+
+### Practice exercise 4: state the narrow impossibility
+
+What is the early-D overlap witness? Does it prove that no guitarist can ever play those pitches, or that every GA path is broken?
+
+> **Answer:** Over the half-open interval from 1.5 to 2, four active events have only three eligible strings under the Standard tuning, fret cap and monophonic-per-string assumptions. That proves infeasibility for this declared assignment model. Different ranges, techniques or musical edits are separate possibilities; it establishes no universal physical impossibility or system-wide failure.
+
+## 5. Separate a model solution from a player result
+
+Keeping the early onset but expanding the allowed fret cap to 10 yields three complete assignments; cap 9 still yields none. One expanded plan uses C on string 4 fret 10, E on string 1 open, G on string 2 fret 8 and D on string 3 fret 7. Its positive-fret span is 3. This verifies pitch and occupancy under the model, not the player's reach, muting, timbre or clean execution.
+
+### Practice exercise 5: make the next check concrete
+
+An agent calls that expanded plan “proven playable.” Rewrite the claim and identify the next observations needed for a guitarist's decision.
+
+> **Answer:** The plan satisfies the declared pitch, timing, string-occupancy and expanded-range constraints. A guitarist still needs to check the actual fingering, independent sustain, muting, clean transitions and sound in context. No musician trial occurred here, so those outcomes remain unverified.
+
+The [fixed occupancy record](../../../../code/streeling/evidence/phrase-performance-2026-10-22/string-occupancy.json) retains candidates, plans and the overlap witness. [GAA-005](../../guitar-alchemist-academy/en/gaa-005-repair-a-phrase-without-hiding-the-change.md) compares possible changes to the request rather than hiding them inside a supposed solution.
+
+=== streeling/courses/guitar-studies/en/gtr-008-count-a-capo-offset-once.md ===
+---
+module_id: gtr-008-count-a-capo-offset-once
+department: guitar-studies
+course: "Count a Capo Offset Once"
+level: intermediate
+prerequisites: ["gtr-001-the-fretboard-map", "gtr-003-audit-voicing-playability", "wml-005-declare-note-name-conventions", "gaa-006-separate-capo-shapes-from-sounding-pitches"]
+estimated_duration: "40 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Count a Capo Offset Once
+
+> **Draft scope.** Authored equal-tempered fret/pitch arithmetic, pinned source reading and three actual chord-transposition tool responses. No new capo adapter, native skill execution, MusicXML import, instrument measurement or playing trial was performed. Human technical, musician, fluent-language and learner reviews and deployed course HTML verification remain pending.
+
+## The project question
+
+A player requests a C shape with capo 2. Does a displayed fret 3 mean the third physical fret from the nut or the third fret above the capo? [MusicXML's capo definition](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/capo/) describes a change to open tuning. Its [fret definition](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fret/) starts with zero for an open string; that statement alone does not choose a consumer's capo-coordinate policy.
+
+[GAA-006](../../guitar-alchemist-academy/en/gaa-006-separate-capo-shapes-from-sounding-pitches.md) already establishes shape-versus-sounding root direction and register. This lesson extends that distinction to per-string fret origins, invalid positions and partial coverage.
+
+Declare an ideal full capo, twelve-tone equal temperament and arrays ordered from low E to high E. Open note numbers are `[40,45,50,55,59,64]`, with C4 equal to 60. The authored C shape is `[-1,3,2,0,1,0]`: -1 marks a muted string and the other numbers are distances above the effective open end.
+
+## 1. Retain the fret origin
+
+For each sounding string, let nut-relative physical fret be `a`, capo fret be `c`, capo-relative fret be `r` and original open note number be `T`. Then `a=c+r` and the sounding number is `T+a=(T+c)+r`. Either expression is valid under the declared model.
+
+At capo 2, the physical C-shape array becomes `[-1,5,4,2,3,2]`. The resulting notes are `[null,50,54,57,62,66]`. Here null means a muted string has no sounding pitch in the teaching record; it is not a zero-frequency observation.
+
+### Practice exercise 1: map the complete shape
+
+Convert the capo-relative C shape to physical frets and sounding note numbers. Where is a relative open string located? What happens to the muted marker?
+
+> **Answer:** Physical frets are `[-1,5,4,2,3,2]`; sounding notes are `[null,50,54,57,62,66]`. Relative fret 0 is located at physical fret 2 under this full capo. The muted -1 remains a muted status; adding the capo to it would invent a sounding fret.
+
+## 2. Do not retune and shift the physical frets again
+
+Retuning the open array by the capo gives `[42,47,52,57,61,66]`. Adding the original relative frets produces the same correct notes. Adding the already-shifted physical array instead produces `[null,52,56,59,64,68]`: every sounding note is two semitones too high.
+
+### Practice exercise 2: find the double count
+
+Calculate both results for the fifth string, whose original open note is 45, relative fret is 3 and physical fret is 5. Which quantity has already absorbed the capo offset?
+
+> **Answer:** The correct result is `45+5=50` or `(45+2)+3=50`. The incorrect result is `(45+2)+5=52`. Both the retuned open note and the physical fret already include the offset, so combining them counts it twice.
+
+## 3. Preserve direction and absolute register
+
+The pinned [GA CapoSkill](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.ML/Agents/Skills/CapoSkill.cs) computes sounding root as shape root plus capo, and shape root as sounding root minus capo, modulo 12. It retains major/minor quality for its supported cases and accepts capo integers from 0 through 12. Its selected code contains no per-string fret array or physical placement calculation.
+
+Three [actual theory-tool probes](../../../../code/streeling/evidence/capo-spelling-2026-10-22/theory-tool-probes.json) returned C up 2 as D, B down 4 as G, and Bb up 2 as C. The service revision is unknown. They are not executions of the inspected skill or a capo-to-fret adapter. At capo 12, a shape's pitch classes repeat but its sounding notes rise one octave in our model.
+
+### Practice exercise 3: invert the musical request
+
+For sounding B major with capo 4, which root/quality should the shape have under the declared English naming convention? Would a modulo-only comparison detect a missing capo 12 octave?
+
+> **Answer:** The shape is G major because `11-4=7`. The observed B down 4 tool result agrees at the root level; the selected skill source handles the quality separately. A modulo-only comparison cannot detect the capo 12 register change: every sounding note rises 12 while retaining its pitch class.
+
+## 4. Keep invalid positions separate from mute status
+
+With capo 2, physical fret 5 corresponds to relative fret 3, and physical fret 2 to relative fret 0. Physical fret 1 would give a negative relative distance and is outside this full-capo model. Its arithmetic difference of -1 must not be reinterpreted as the existing muted marker.
+
+A separate authored partial-capo example shifts the strings by `[0,2,2,2,2,2]`. Apply relative E-shape frets `[0,2,2,1,0,0]`: sounding notes are `[40,49,54,58,61,66]`. A full capo 2 instead gives `[42,49,54,58,61,66]`. The lowest string disproves a uniform-transposition description of this partial example.
+
+### Practice exercise 4: retain two counterexamples
+
+Classify physical fret 1 under capo 2. Then compare the two E-shape sounding arrays and identify why whole-chord root transposition cannot describe the partial example completely.
+
+> **Answer:** Physical fret 1 is behind the declared full capo and is invalid here, not a muted string inferred from subtraction. The partial example leaves the lowest note at 40 while the full capo gives 42; the other notes agree. A uniform root shift does not retain this per-string distinction. Neither array proves intonation or physical playability.
+
+## 5. Read the destination contract
+
+The pinned [MusicXML parser](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Parsers/MusicXmlParser.fs#L59-L78) stores technical string and fret independently. Its selected attributes do not retain a capo. The [RelativeFret type](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Domain.Core/Instruments/Primitives/RelativeFret.cs#L9-L18) is a generic fret distance; its name does not establish a capo origin. The [navigation parser](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Parsers/FretboardNavigationParser.fs#L25-L41) parses explicit coordinates without applying a capo offset.
+
+### Practice exercise 5: prepare a source-assisted handoff
+
+Read those sources and the [MusicXML string definition](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/string/). Specify the minimum information needed to move the authored array into another tool without guessing its convention.
+
+> **Answer:** Retain tuning, string order/numbering, capo coverage and offsets, fret origin, muted/invalid statuses, intended absolute pitches and source revision. MusicXML string 1 is the highest pitched full-length string; our array runs in the opposite physical order. Convert that indexing explicitly. Compare a small typed record and checked arithmetic before proposing a DSL. Import, rendering, playback and a musician's playing review remain unperformed.
+
+The [fixed coordinate record](../../../../code/streeling/evidence/capo-spelling-2026-10-22/capo-coordinates.json) retains all eight full-capo cases and the separate partial control.
+
+=== streeling/courses/world-music-languages/en/wml-019-distribute-onsets-with-a-floor-lattice.md ===
+---
+module_id: wml-019-distribute-onsets-with-a-floor-lattice
+department: world-music-languages
+course: "Distribute Onsets with a Floor Lattice"
+level: advanced
+prerequisites: ["wml-006-preserve-the-origin-of-an-additive-cycle"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Distribute Onsets with a Floor Lattice
+
+> Authored model and bounded source reading. Human technical, fluent-language, musician and learner decisions remain pending. No new performance, listening result, engine render, parser execution or production adoption is claimed.
+
+A rhythm-practice proposal asks for a fixed number of attacks spread across a pulse cycle. Merely preserving the total event count does not specify their spacing. We construct a floor-lattice pattern, inspect all cyclic gaps including the wrap, and apply a declared rotation. The prerequisite already checks whether a supplied grouping’s origin survives translation; this lesson supplies a new construction operation before the origin check.
+
+Take each event index times the pulse count, divide by the event count and round downward. The resulting integer starts distribute the authored events on the grid. Then rotate every start by the same amount and reduce modulo the cycle. Sorting is appropriate for displaying the anchored cycle, while the original event identity would need separate retention if a performance task distinguished individual strokes.
+
+Our verification criterion is deliberately limited to the largest and smallest cyclic gaps differing by at most a single pulse. Do not inflate it into a complete definition of musical evenness or a claim about a named rhythm tradition. The clustered control keeps counts and rotation but fails that criterion. Omitting the wrap gap would hide its largest empty interval. A direct circle drawing therefore provides a useful baseline for any rhythm-generation DSL or agent suggestion. The retained additive-cycle course motivates preserving origin, group order and cultural boundaries. No recording, culturally validated pattern or actual GA rhythm output supplied these authored events.
+
+## Read the retained project evidence
+
+The prerequisite supplies the earlier operation and its evidence boundary. Inspect the linked project artifact before using the authored case to propose a change. Its existing observations keep their original scope: a retained source file or fixture does not establish current deployment. The fixed packet records exact inputs, prepared outputs and reading provenance. Local file hashes identify complete bytes; they do not enlarge the bounded passage actually read. A primary web page supports only the specific definition read, with no invented immutable revision or byte hash.
+
+[Prerequisite](../../world-music-languages/en/wml-006-preserve-the-origin-of-an-additive-cycle.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-25-b/unit-a.json)
+
+## Fixed case and prepared quantities
+
+```json
+{
+  "values": {
+    "pulse_count": 8,
+    "onset_count": 3,
+    "rotation": 1,
+    "policy": "floor_lattice",
+    "supplied_onsets": null
+  },
+  "formula": "base[i]=floor(i*N/K) for i=0..K-1 in floor_lattice, else supplied_onsets; rotated=sorted((base+rotation)%N); gaps=cyclic differences including wrap; balanced=max(gaps)-min(gaps)<=1",
+  "expected": {
+    "base_onsets": [
+      0,
+      2,
+      5
+    ],
+    "rotated_onsets": [
+      1,
+      3,
+      6
+    ],
+    "cyclic_gaps": [
+      2,
+      3,
+      3
+    ],
+    "balanced": true
+  },
+  "negative_control": {
+    "values": {
+      "pulse_count": 8,
+      "onset_count": 3,
+      "rotation": 1,
+      "policy": "supplied",
+      "supplied_onsets": [
+        0,
+        1,
+        2
+      ]
+    },
+    "expected": {
+      "base_onsets": [
+        0,
+        1,
+        2
+      ],
+      "rotated_onsets": [
+        1,
+        2,
+        3
+      ],
+      "cyclic_gaps": [
+        1,
+        1,
+        6
+      ],
+      "balanced": false
+    }
+  }
+}
+```
+
+## Assumptions and evidence limits
+
+Assume distinct integer onsets on a uniform cyclic grid and positive counts within capacity. The gap criterion includes wraparound. It is the declared local spacing test, not a complete musical-evenness theorem or a cultural attribution.
+
+## Interpret the operation before choosing an abstraction
+
+Before revealing the answer key, write the input contract in your own words and derive the main result manually. Keep intermediate quantities or state transitions, rather than copying only a final number. Compare the negative control under the same rule and identify the input that changed. The model is a finite authored example. A matching calculation supports this example’s stated claim; it does not supply an observed user outcome or validate a production feature.
+
+### Exercise 1
+
+Construct every unrotated onset using the floor rule.
+
+<details><summary>Answer 1</summary>
+
+Use each event index rather than repeatedly rounding a running sum; the fixed starts are listed above.
+
+</details>
+
+### Exercise 2
+
+Apply the declared rotation without changing event count.
+
+<details><summary>Answer 2</summary>
+
+Add the rotation modulo the cycle to every start and sort the resulting distinct anchored positions.
+
+</details>
+
+### Exercise 3
+
+Compute all cyclic gaps, including the final wrap.
+
+<details><summary>Answer 3</summary>
+
+The gaps sum to the pulse count and satisfy the displayed maximum-minus-minimum criterion in the main case.
+
+</details>
+
+### Exercise 4
+
+Why does the clustered control fail?
+
+<details><summary>Answer 4</summary>
+
+Its wrap gap is much larger than its adjacent gaps despite identical cycle and event counts.
+
+</details>
+
+### Exercise 5
+
+What falsifies a count-only rhythm-preservation claim?
+
+<details><summary>Answer 5</summary>
+
+Equal event counts with unequal cyclic gap patterns show that cardinality alone cannot reconstruct the spacing.
+
+</details>
+
+## Source-assisted learner task
+
+Draw both onset circles before assistance. Draft a GA practice instruction retaining generator rule, rotation and cyclic gaps without assigning a tradition.
+
+Retain your unaided answer before consulting a source or calculator. Then identify a precise source passage and revision, record every kind of assistance and keep the original answer alongside any correction. A proposed agent workflow or DSL must preserve the manual result and its countercase before its convenience can be assessed. If required inputs are absent, leave the decision unresolved rather than substituting a plausible value.
+
+Write a falsifier as an observable disagreement with the stated rule, then say what additional observation would be needed at the next boundary. Use the exercise answers as prepared checks, not as a record of your attempt. The fixed packet contains a separate prepared criterion for every exercise; all learner decisions remain undecided until an actual response and review are retained. Report assistance, corrections and remaining limits with the final note so that arithmetic correctness is not confused with independent recall, musician judgment or runtime acceptance.

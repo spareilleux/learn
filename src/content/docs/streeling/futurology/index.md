@@ -26,3 +26,7 @@ sidebar:
 - [FUT-013 · Bound a Future Craft Workflow by Its Serial Fraction](fut-013-bound-a-future-craft-workflow-by-its-serial-fraction/)
 - [FUT-014 · Project First Retirements from Craft Asset Cohorts](fut-014-project-first-retirements-from-craft-asset-cohorts/)
 - [FUT-015 · Enumerate Compatible Craft Workflow Futures](fut-015-enumerate-compatible-craft-workflow-futures/)
+- [FUT-016 · Bound the First Capacity Threshold Crossing](fut-016-bound-the-first-capacity-threshold-crossing/)
+- [FUT-017 · Separate Unit Learning Cost from Cumulative Average](fut-017-separate-unit-learning-cost-from-cumulative-average/)
+- [FUT-018 · Choose a Reserve under a Declared Chance Constraint](fut-018-choose-a-reserve-under-a-declared-chance-constraint/)
+- [FUT-019 · Find Minimal Combinations that Overload a Craft Plan](fut-019-find-minimal-combinations-that-overload-a-craft-plan/)

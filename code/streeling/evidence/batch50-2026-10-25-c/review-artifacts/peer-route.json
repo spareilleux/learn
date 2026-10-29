@@ -1,0 +1,13 @@
+{
+  "host_harness": "codex",
+  "host_family": "codex",
+  "host_evidence": "Current Codex runtime plus CODEX_CI/CODEX_THREAD_ID/CODEX_SESSION_ID markers",
+  "checkout_config_files": "Both absent",
+  "policy": "auto",
+  "installed_different_family_route": "claude",
+  "started": false,
+  "job_id": null,
+  "reason": "Scope incompatibility: sanctioned worker contract takes base-ref and runs unbounded git diff against the entire current tree. Explicit caller boundary is seven paths; documented helper output demonstrates changed paths beyond that boundary, and --paths was actually rejected. No bounded provider route was supported; local adversarial fallback selected.",
+  "egress": false,
+  "provider_auth_probed": false
+}

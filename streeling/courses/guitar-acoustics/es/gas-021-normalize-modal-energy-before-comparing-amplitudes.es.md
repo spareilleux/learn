@@ -17,7 +17,7 @@ El coeficiente de un modo de guitarra depende de la normalización de su forma. 
 
 ## Supuestos y límites específicos
 
-La cuerda es uniforme y usa modos seno enteros normalizados en pico con unidades mecánicas coherentes. En el extremo la velocidad se anula. Es energía modal, sin ganancia de pastilla calibrada, radiación acústica ni amortiguamiento medido.
+La cuerda es uniforme y usa modos seno enteros normalizados en pico con unidades mecánicas coherentes. En el punto de retorno de la oscilación, la velocidad se anula. Es energía modal, sin ganancia de pastilla calibrada, radiación acústica ni amortiguamiento medido.
 
 ## Partir de la representación directa
 
@@ -83,7 +83,7 @@ Conserve su respuesta sin ayuda antes de revelar las correcciones. Registre calc
 
 Calcule el resultado principal y nombre su convención.
 
-> **Respuesta:** La masa efectiva es 3 y la energía en el extremo es 6; el seno tiene antinodo unitario.
+> **Respuesta:** La masa efectiva es 3 y la energía en el punto de retorno de la oscilación es 6; el seno tiene antinodo unitario.
 
 ### Ejercicio 2
 

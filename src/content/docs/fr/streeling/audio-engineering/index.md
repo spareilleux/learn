@@ -32,3 +32,7 @@ sidebar:
 - [AUD-019 · Vérifier si l’écrêtage commute avec le gain](aud-019-test-whether-clipping-commutes-with-gain/)
 - [AUD-020 · Reconstruire un signal avec les poids de recouvrement-addition](aud-020-reconstruct-a-signal-with-overlap-add-weights/)
 - [AUD-021 · Borner les répétitions d’un retard avec rétroaction](aud-021-bound-feedback-delay-repeats/)
+- [AUD-022 · Conserver la queue d’une convolution finie](aud-022-flush-the-tail-of-a-finite-convolution/)
+- [AUD-023 · Distinguer amplitude et phase d’un filtre passe-tout](aud-023-distinguish-allpass-magnitude-from-phase/)
+- [AUD-024 · Précompenser la fréquence de coupure bilinéaire](aud-024-prewarp-a-bilinear-filter-cutoff/)
+- [AUD-025 · Séparer erreur et biais avec un dither soustractif](aud-025-separate-subtractive-dither-error-from-bias/)

@@ -29,3 +29,6 @@ sidebar:
 - [NET-016 · Encontrar pasos obligatorios mediante dominadores](net-016-find-mandatory-gates-with-dominators/)
 - [NET-017 · Asignar roles simultáneos sin doble reserva](net-017-match-simultaneous-roles-without-double-booking/)
 - [NET-018 · Reducir aristas de precedencia sin borrar evidencias](net-018-reduce-precedence-edges-without-erasing-evidence/)
+- [NET-019 · Conectar una red de diagnóstico con coste mínimo](net-019-connect-a-diagnostic-backbone-at-minimum-edge-cost/)
+- [NET-020 · Colorear tareas agénticas incompatibles con búsqueda exacta](net-020-color-conflicting-agent-tasks-with-an-exact-small-search/)
+- [NET-021 · Comprobar la coherencia de transformaciones con signo en un ciclo](net-021-check-signed-transform-consistency-around-a-cycle/)

@@ -407,6 +407,13 @@ This batch adds 50 distinct English course sources and 100 full French/Spanish t
 
 The [production journal](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/journal.md) keeps rejected duplicate topics, actual author-check findings, independent review findings and replay. The [validation record](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/validation.json) will record final static integration; this entry does not anticipate its outcome. The tests check authored finite cases, not actual learner responses, listening, materials or native-engine scenes. Human/fluent-language and learner decisions remain null; the user will designate a reviewer. GitHub source publication and deployed HTML are separate gates.
 
+
+## 2026-10-29 — Fifty-course independent content and model checks
+
+This batch adds 50 distinct English course sources and 100 full French/Spanish translations. The inventory is now 481/525 core sources, with 44 source gaps; the extra IX Research module gives 482 per locale. Independent AI reviewers inspected 750 localized answers and 250 prepared criteria. Actual integrated checks executed 50 tests with 100 model/control observations and 150 metadata passes. The [selected runs](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-c/final-claim-runs.json), their full logs and final byte bindings preserve what was actually executed.
+
+The [production journal](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-c/journal.md) keeps rejected duplicate topics, actual author-check findings, independent review findings and replay. The [validation record](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-c/validation.json) will record final static integration; this entry does not anticipate its outcome. The tests check authored finite cases, not actual learner responses, listening, materials or native-engine scenes. Human/fluent-language and learner decisions remain null; the user will designate a reviewer. GitHub source publication and deployed HTML are separate gates.
+
 ## To verify
 
 Human/language and learner acceptance, task-specific runtime trials and deployed HTML remain pending.

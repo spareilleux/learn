@@ -31,3 +31,8 @@ sidebar:
 - [GAS-018 · Hacer el balance de energía en una unión de impedancias](gas-018-account-for-energy-at-an-impedance-junction/)
 - [GAS-019 · Medir el ancho de media potencia antes de informar Q](gas-019-measure-half-power-bandwidth-before-reporting-q/)
 - [GAS-020 · Promediar un modo sobre la apertura de un captador](gas-020-average-a-mode-over-a-pickup-aperture/)
+- [GAS-021 · Normalizar la energía modal antes de comparar amplitudes](gas-021-normalize-modal-energy-before-comparing-amplitudes/)
+- [GAS-022 · Redimensionar una cavidad de Helmholtz con longitud efectiva](gas-022-scale-a-helmholtz-cavity-with-effective-neck-length/)
+- [GAS-023 · Distinguir velocidades de fase y grupo en ondas de flexión](gas-023-separate-phase-and-group-speed-in-bending-waves/)
+- [GAS-024 · Seguir un cruce evitado al variar la desintonización](gas-024-track-avoided-crossings-through-detuning/)
+- [GAS-025 · Distinguir potencia acústica activa y reactiva](gas-025-separate-active-and-reactive-acoustic-power/)

@@ -31,3 +31,6 @@ sidebar:
 - [SEM-018 · Interpretar un proyecto de tejido con varios lizos](sem-018-interpret-a-multi-shaft-weaving-draft/)
 - [SEM-019 · Distinguir recorrido inverso y reflejo de un diagrama de nudo](sem-019-distinguish-knot-diagram-reversal-from-mirroring/)
 - [SEM-020 · Localizar una celda de motivo mediante longitudes de tramo positivas](sem-020-locate-a-motif-cell-in-positive-run-lengths/)
+- [SEM-021 · Conservar linajes alternativos y su multiplicidad](sem-021-retain-alternative-lineages-and-their-multiplicity/)
+- [SEM-022 · Distinguir una envoltura independiente de un estado independiente](sem-022-distinguish-an-independent-wrapper-from-independent-state/)
+- [SEM-023 · Distinguir puntos y desplazamientos bajo traslación](sem-023-keep-points-and-displacements-distinct-under-translation/)

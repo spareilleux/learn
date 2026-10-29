@@ -30,3 +30,6 @@ sidebar:
 - [GAA-017 · Auditar la regla de parada de una escalera de práctica](gaa-017-audit-a-practice-staircase-stopping-rule/)
 - [GAA-018 · Vincular la retroalimentación tardía al intento original](gaa-018-bind-delayed-feedback-to-the-original-attempt/)
 - [GAA-019 · Recuperar motivos de intervalos superpuestos](gaa-019-retrieve-overlapping-interval-motifs/)
+- [GAA-020 · Cubrir un espacio finito de práctica con centros fijados](gaa-020-cover-a-finite-practice-space-with-fixed-centres/)
+- [GAA-021 · Alinear un intento musical con costes unitarios de edición](gaa-021-align-a-practice-attempt-with-unit-edit-costs/)
+- [GAA-022 · Conservar el tempo al comparar proporciones entre ataques](gaa-022-retain-tempo-while-comparing-onset-ratios/)

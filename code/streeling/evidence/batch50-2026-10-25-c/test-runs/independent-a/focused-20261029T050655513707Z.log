@@ -1,0 +1,95 @@
+test_AUD022 (__main__.UnitA.test_AUD022) ... 
+OBSERVATION {"code": "AUD022", "case": "model", "observed": {"full": [1, 2.5, 1.25, 0.5], "emitted": [1, 2.5, 1.25, 0.5], "lost": [], "complete": true, "phases": ["input", "input", "flush", "flush"], "final_history": [0, 0], "pending_flush_frames": 0}, "expected": {"full": [1, 2.5, 1.25, 0.5], "emitted": [1, 2.5, 1.25, 0.5], "lost": [], "complete": true, "phases": ["input", "input", "flush", "flush"], "final_history": [0, 0], "pending_flush_frames": 0}, "scope": "Causal finite real convolution, zero history, bounded input/flush schedule; no streaming engine or export."}
+
+OBSERVATION {"code": "AUD022", "case": "negative", "observed": {"full": [1, 2.5, 1.25, 0.5], "emitted": [1, 2.5], "lost": [1.25, 0.5], "complete": false, "phases": ["input", "input"], "final_history": [2, 1], "pending_flush_frames": 2}, "expected": {"full": [1, 2.5, 1.25, 0.5], "emitted": [1, 2.5], "lost": [1.25, 0.5], "complete": false, "phases": ["input", "input"], "final_history": [2, 1], "pending_flush_frames": 2}, "scope": "Causal finite real convolution, zero history, bounded input/flush schedule; no streaming engine or export."}
+ok
+test_AUD023 (__main__.UnitA.test_AUD023) ... 
+OBSERVATION {"code": "AUD023", "case": "model", "observed": {"H_real": 0.8, "H_imag": -0.6, "magnitude": 1.0, "identity": false}, "expected": {"H_real": 0.8, "H_imag": -0.6, "magnitude": 1, "identity": false}, "scope": "Stable real first-order steady complex response at one frequency; no transient or audibility claim."}
+
+OBSERVATION {"code": "AUD023", "case": "negative", "observed": {"H_real": 1.6, "H_imag": -1.2, "magnitude": 2.0, "identity": false}, "expected": {"H_real": 1.6, "H_imag": -1.2, "magnitude": 2, "identity": false}, "scope": "Stable real first-order steady complex response at one frequency; no transient or audibility claim."}
+ok
+test_AUD024 (__main__.UnitA.test_AUD024) ... 
+OBSERVATION {"code": "AUD024", "case": "model", "observed": {"analog_rad_s": 15.999999999999998, "achieved_hz": 2.0, "error_hz": 0.0}, "expected": {"analog_rad_s": 16, "achieved_hz": 2, "error_hz": 0}, "scope": "Bilinear frequency map with factor 2*fs and principal atan; one target below Nyquist, no coefficients generated."}
+
+OBSERVATION {"code": "AUD024", "case": "negative", "observed": {"analog_rad_s": 12.566370614359172, "achieved_hz": 1.6953789327654465, "error_hz": -0.3046210672345535}, "expected": {"analog_rad_s": 12.566370614359172, "achieved_hz": 1.6953789327654465, "error_hz": -0.3046210672345535}, "scope": "Bilinear frequency map with factor 2*fs and principal atan; one target below Nyquist, no coefficients generated."}
+ok
+test_AUD025 (__main__.UnitA.test_AUD025) ... 
+OBSERVATION {"code": "AUD025", "case": "model", "observed": {"encoded": [0, 0, 0, 0], "decoded": [0.375, 0.125, -0.125, -0.375], "errors": [0.375, 0.125, -0.125, -0.375], "mean": 0.0, "mse": 0.078125}, "expected": {"encoded": [0, 0, 0, 0], "decoded": [0.375, 0.125, -0.125, -0.375], "errors": [0.375, 0.125, -0.125, -0.375], "mean": 0, "mse": 0.078125}, "scope": "Unbounded unit quantizer, floor(v+0.5), fixed deterministic ensemble; no stochastic independence or audio export."}
+
+OBSERVATION {"code": "AUD025", "case": "negative", "observed": {"encoded": [0, 0, 0, 1], "decoded": [0, 0, 0, 1], "errors": [-0.25, -0.25, -0.25, 0.75], "mean": 0.0, "mse": 0.1875}, "expected": {"encoded": [0, 0, 0, 1], "decoded": [0, 0, 0, 1], "errors": [-0.25, -0.25, -0.25, 0.75], "mean": 0, "mse": 0.1875}, "scope": "Unbounded unit quantizer, floor(v+0.5), fixed deterministic ensemble; no stochastic independence or audio export."}
+ok
+test_GAS021 (__main__.UnitA.test_GAS021) ... 
+OBSERVATION {"code": "GAS021", "case": "model", "observed": {"modal_mass": 3.0, "mass_normalized_amplitude": 0.8660254037844386, "energy": 5.999999999999999, "reported_energy": 6.0}, "expected": {"modal_mass": 3, "mass_normalized_amplitude": 0.8660254037844386, "energy": 6, "reported_energy": 6}, "scope": "Uniform ideal integer sine mode, peak normalization and turning-point mechanical energy in SI units."}
+
+OBSERVATION {"code": "GAS021", "case": "negative", "observed": {"modal_mass": 3.0, "mass_normalized_amplitude": 0.8660254037844386, "energy": 5.999999999999999, "reported_energy": 12.0}, "expected": {"modal_mass": 3, "mass_normalized_amplitude": 0.8660254037844386, "energy": 6, "reported_energy": 12}, "scope": "Uniform ideal integer sine mode, peak normalization and turning-point mechanical energy in SI units."}
+ok
+test_GAS022 (__main__.UnitA.test_GAS022) ... 
+OBSERVATION {"code": "GAS022", "case": "model", "observed": {"frequency_ratio": 0.49999999999999994}, "expected": {"frequency_ratio": 0.5}, "scope": "Same sound speed and compact small-motion Helmholtz cavity; positive dimensionless ratios and effective neck length."}
+
+OBSERVATION {"code": "GAS022", "case": "negative", "observed": {"frequency_ratio": 0.7071067811865475}, "expected": {"frequency_ratio": 0.7071067811865475}, "scope": "Same sound speed and compact small-motion Helmholtz cavity; positive dimensionless ratios and effective neck length."}
+ok
+test_GAS023 (__main__.UnitA.test_GAS023) ... 
+OBSERVATION {"code": "GAS023", "case": "model", "observed": {"omega": 18, "phase_speed": 6.0, "group_speed": 12.0}, "expected": {"omega": 18, "phase_speed": 6, "group_speed": 12}, "scope": "Positive-k ideal power-law dispersion; local narrow-band derivative, no material or broadband pulse model."}
+
+OBSERVATION {"code": "GAS023", "case": "negative", "observed": {"omega": 6, "phase_speed": 2.0, "group_speed": 2.0}, "expected": {"omega": 6, "phase_speed": 2, "group_speed": 2}, "scope": "Positive-k ideal power-law dispersion; local narrow-band derivative, no material or broadband pulse model."}
+ok
+test_GAS024 (__main__.UnitA.test_GAS024) ... 
+OBSERVATION {"code": "GAS024", "case": "model", "observed": {"lower": [6.39444872453601, 8.0, 6.39444872453601], "upper": [13.60555127546399, 12.0, 13.60555127546399], "gaps": [7.211102550927979, 4.0, 7.211102550927979], "minimum_gap": 4.0}, "expected": {"lower": [6.39444872453601, 8, 6.39444872453601], "upper": [13.60555127546399, 12, 13.60555127546399], "gaps": [7.211102550927978, 4, 7.211102550927978], "minimum_gap": 4}, "scope": "Positive real symmetric squared-frequency eigenvalues over supplied finite detunings, no damping or physical fit."}
+
+OBSERVATION {"code": "GAS024", "case": "negative", "observed": {"lower": [7.0, 10.0, 7.0], "upper": [13.0, 10.0, 13.0], "gaps": [6.0, 0.0, 6.0], "minimum_gap": 0.0}, "expected": {"lower": [7, 10, 7], "upper": [13, 10, 13], "gaps": [6, 0, 6], "minimum_gap": 0}, "scope": "Positive real symmetric squared-frequency eigenvalues over supplied finite detunings, no damping or physical fit."}
+ok
+test_GAS025 (__main__.UnitA.test_GAS025) ... 
+OBSERVATION {"code": "GAS025", "case": "model", "observed": {"complex_power": [0.0, -1.0], "active": 0.0, "reactive": -1.0}, "expected": {"complex_power": [0, -1], "active": 0, "reactive": -1}, "scope": "Same-port pressure and volume velocity, peak exp(j*omega*t) phasors, flow into port; no intensity field."}
+
+OBSERVATION {"code": "GAS025", "case": "negative", "observed": {"complex_power": [1.0, 0.0], "active": 1.0, "reactive": 0.0}, "expected": {"complex_power": [1, 0], "active": 1, "reactive": 0}, "scope": "Same-port pressure and volume velocity, peak exp(j*omega*t) phasors, flow into port; no intensity field."}
+ok
+test_GTR021 (__main__.UnitA.test_GTR021) ... 
+OBSERVATION {"code": "GTR021", "case": "model", "observed": {"intervals": [[-1, 7], [8, 11]], "gap": 1, "clear": true}, "expected": {"intervals": [[-1, 7], [8, 11]], "gap": 1, "clear": true}, "scope": "Two independent lateral swept intervals in one slice and common length units; touching is not clear."}
+
+OBSERVATION {"code": "GTR021", "case": "negative", "observed": {"intervals": [[-1, 9], [8, 11]], "gap": -1, "clear": false}, "expected": {"intervals": [[-1, 9], [8, 11]], "gap": -1, "clear": false}, "scope": "Two independent lateral swept intervals in one slice and common length units; touching is not clear."}
+ok
+test_GTR022 (__main__.UnitA.test_GTR022) ... 
+OBSERVATION {"code": "GTR022", "case": "model", "observed": {"positions": [300.0, 350.0], "slope": 5.0}, "expected": {"positions": [300, 350], "slope": 5}, "scope": "Two parallel ideal string axes, per-string nut/scale and equal temperament; no compensation or manufactured fret."}
+
+OBSERVATION {"code": "GTR022", "case": "negative", "observed": {"positions": [300.0, 320.0], "slope": 2.0}, "expected": {"positions": [300, 320], "slope": 2}, "scope": "Two parallel ideal string axes, per-string nut/scale and equal temperament; no compensation or manufactured fret."}
+ok
+test_GTR023 (__main__.UnitA.test_GTR023) ... 
+OBSERVATION {"code": "GTR023", "case": "model", "observed": {"intercept": 3.0, "slope": 1.0, "residuals": [0.0, 0.0, 0.0], "fits": true}, "expected": {"intercept": 3, "slope": 1, "residuals": [0, 0, 0], "fits": true}, "scope": "Unweighted physical-length least squares for a rigid affine bar; maximum residual policy, no pitch optimization."}
+
+OBSERVATION {"code": "GTR023", "case": "negative", "observed": {"intercept": 2.8333333333333335, "slope": 1.5, "residuals": [0.16666666666666666, -0.3333333333333333, 0.16666666666666666], "fits": false}, "expected": {"intercept": 2.8333333333333335, "slope": 1.5, "residuals": [0.16666666666666666, -0.3333333333333333, 0.16666666666666666], "fits": false}, "scope": "Unweighted physical-length least squares for a rigid affine bar; maximum residual policy, no pitch optimization."}
+ok
+test_GTR024 (__main__.UnitA.test_GTR024) ... 
+OBSERVATION {"code": "GTR024", "case": "model", "observed": {"ready": [true, true, true], "violations": []}, "expected": {"ready": [true, true, true], "violations": []}, "scope": "Sorted stipulated finger deadlines, equality allowed; held support validated separately and not a recovery resource."}
+
+OBSERVATION {"code": "GTR024", "case": "negative", "observed": {"ready": [true, true, false], "violations": [2]}, "expected": {"ready": [true, true, false], "violations": [2]}, "scope": "Sorted stipulated finger deadlines, equality allowed; held support validated separately and not a recovery resource."}
+ok
+test_GTR025 (__main__.UnitA.test_GTR025) ... 
+OBSERVATION {"code": "GTR025", "case": "model", "observed": {"join_ab": [2, 3, 4], "join_abc": [2, 3, 4], "commutative": true, "associative": true, "idempotent": true, "alternate_join": [2, 3, 2], "aggregate_distinguishes": true}, "expected": {"join_ab": [2, 3, 4], "join_abc": [2, 3, 4], "commutative": true, "associative": true, "idempotent": true, "alternate_join": [2, 3, 2], "aggregate_distinguishes": true}, "scope": "Equal nonnegative integer stop maps, component maximum and retained device distinction; no physical capo fit."}
+
+OBSERVATION {"code": "GTR025", "case": "negative", "observed": {"join_ab": [2, 3, 4], "join_abc": [2, 3, 4], "commutative": true, "associative": true, "idempotent": true, "alternate_join": [2, 3, 4], "aggregate_distinguishes": false}, "expected": {"join_ab": [2, 3, 4], "join_abc": [2, 3, 4], "commutative": true, "associative": true, "idempotent": true, "alternate_join": [2, 3, 4], "aggregate_distinguishes": false}, "scope": "Equal nonnegative integer stop maps, component maximum and retained device distinction; no physical capo fit."}
+ok
+test_WML020 (__main__.UnitA.test_WML020) ... 
+OBSERVATION {"code": "WML020", "case": "model", "observed": {"occupancy": [1, 1, 1, 1], "collisions": [], "gaps": [], "exclusive_complete": true}, "expected": {"occupancy": [1, 1, 1, 1], "collisions": [], "gaps": [], "exclusive_complete": true}, "scope": "Unique integer onsets per voice on a finite grid; exactly one voice at every declared slot, no duration/cultural claim."}
+
+OBSERVATION {"code": "WML020", "case": "negative", "observed": {"occupancy": [1, 0, 2, 1], "collisions": [2], "gaps": [1], "exclusive_complete": false}, "expected": {"occupancy": [1, 0, 2, 1], "collisions": [2], "gaps": [1], "exclusive_complete": false}, "scope": "Unique integer onsets per voice on a finite grid; exactly one voice at every declared slot, no duration/cultural claim."}
+ok
+test_WML021 (__main__.UnitA.test_WML021) ... 
+OBSERVATION {"code": "WML021", "case": "model", "observed": {"common": [[300, 3, 2]]}, "expected": {"common": [[300, 3, 2]]}, "scope": "Two positive integer fundamentals, exact harmonic inventory intersection at bounded indices, no near matches."}
+
+OBSERVATION {"code": "WML021", "case": "negative", "observed": {"common": []}, "expected": {"common": []}, "scope": "Two positive integer fundamentals, exact harmonic inventory intersection at bounded indices, no near matches."}
+ok
+test_WML022 (__main__.UnitA.test_WML022) ... 
+OBSERVATION {"code": "WML022", "case": "model", "observed": {"shifts": [2], "unique": true}, "expected": {"shifts": [2], "unique": true}, "scope": "Equal nonempty exact directed label cycles; all shifts target[i]=source[(i+s)%N], no accent/timing equivalence."}
+
+OBSERVATION {"code": "WML022", "case": "negative", "observed": {"shifts": [0, 2], "unique": false}, "expected": {"shifts": [0, 2], "unique": false}, "scope": "Equal nonempty exact directed label cycles; all shifts target[i]=source[(i+s)%N], no accent/timing equivalence."}
+ok
+test_WML023 (__main__.UnitA.test_WML023) ... 
+OBSERVATION {"code": "WML023", "case": "model", "observed": {"witness": [0, 2, 4], "consumed": 3, "accepted": true}, "expected": {"witness": [0, 2, 4], "consumed": 3, "accepted": true}, "scope": "Finite ordered-subsequence scan, extra events ignored and repeated landmarks consume distinct events; no style claim."}
+
+OBSERVATION {"code": "WML023", "case": "negative", "observed": {"witness": [4], "consumed": 1, "accepted": false}, "expected": {"witness": [4], "consumed": 1, "accepted": false}, "scope": "Finite ordered-subsequence scan, extra events ignored and repeated landmarks consume distinct events; no style claim."}
+ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.002s
+
+OK

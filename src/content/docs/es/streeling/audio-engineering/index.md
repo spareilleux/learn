@@ -32,3 +32,7 @@ sidebar:
 - [AUD-019 · Comprobar si el recorte conmuta con la ganancia](aud-019-test-whether-clipping-commutes-with-gain/)
 - [AUD-020 · Reconstruir una señal con pesos de solapamiento y suma](aud-020-reconstruct-a-signal-with-overlap-add-weights/)
 - [AUD-021 · Acotar las repeticiones de un retardo con realimentación](aud-021-bound-feedback-delay-repeats/)
+- [AUD-022 · Conservar la cola de una convolución finita](aud-022-flush-the-tail-of-a-finite-convolution/)
+- [AUD-023 · Distinguir magnitud y fase de un filtro pasa todo](aud-023-distinguish-allpass-magnitude-from-phase/)
+- [AUD-024 · Precompensar la frecuencia de corte bilineal](aud-024-prewarp-a-bilinear-filter-cutoff/)
+- [AUD-025 · Separar error y sesgo con dither sustractivo](aud-025-separate-subtractive-dither-error-from-bias/)

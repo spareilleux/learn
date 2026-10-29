@@ -658,7 +658,7 @@
           "decision": null
         },
         "5": {
-          "question": "What falsifies exact subtractive recovery?",
+          "question": "What falsifies the stipulated subtractive converter contract?",
           "expected_answer": "A decoder offset not matching the encoder offset rejects the stipulated converter contract.",
           "decision": null
         }
@@ -2374,7 +2374,7 @@
         },
         "5": {
           "question": "What observation would reject the proposed claim?",
-          "expected_answer": "Any occupied slot with count other than unity rejects the strict exclusive-complete policy.",
+          "expected_answer": "Any declared slot with count other than unity rejects the strict exclusive-complete policy.",
           "decision": null
         }
       },
@@ -2396,14 +2396,14 @@
           "decision": null
         },
         {
-          "criterion": "Independently derive the exercise result, preserve its input convention and explain the boundary: Any occupied slot with count other than unity rejects the strict exclusive-complete policy.",
+          "criterion": "Independently derive the exercise result, preserve its input convention and explain the boundary: Any declared slot with count other than unity rejects the strict exclusive-complete policy.",
           "decision": null
         }
       ],
       "actual_task": {
         "description": "Prepare a GA audio/music review note retaining the independently derived model and control, units and rejecting witness before proposing an agent or DSL abstraction.",
         "direct_manual_baseline": "Derive both fixed cases manually under: occupancy[t]=number of voices containing t; collisions=slots with count>1; gaps=slots with count==0; exclusive_complete=all(count==1)",
-        "falsifier": "Any occupied slot with count other than unity rejects the strict exclusive-complete policy.",
+        "falsifier": "Any declared slot with count other than unity rejects the strict exclusive-complete policy.",
         "actual_learner_answer": null,
         "assistance_history": null,
         "corrected_answer": null,

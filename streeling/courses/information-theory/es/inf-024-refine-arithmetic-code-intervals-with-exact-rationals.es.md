@@ -18,7 +18,7 @@ Un artefacto agéntico puede contener un flujo simbólico repetitivo cuyas frecu
 
 Divida el intervalo semiabierto actual según las frecuencias acumuladas ordenadas. Elija el subintervalo del símbolo siguiente y repita usando ambos extremos anteriores. La aritmética racional exacta evita que un redondeo de frontera admita silenciosamente otro símbolo. Se incluye el extremo izquierdo y se excluye el derecho; una etiqueta situada en una frontera tiene así un propietario declarado.
 
-La secuencia fija y su control comparten un prefijo y terminan en intervalos distintos sin solapamiento. Una etiqueta interior decodifica la secuencia correspondiente cuando se conoce su longitud. El coste de representación, la terminación, la renormalización y la precisión finita quedan fuera. La anchura no es un tamaño de archivo medido. Conserve orden alfabético, frecuencias y longitud: una etiqueta numérica sola no describe cómo decodificarla.
+La secuencia fija y su control comparten un prefijo y terminan en intervalos distintos sin solapamiento. Una etiqueta interior decodifica la secuencia correspondiente cuando se conoce su longitud. El coste de representación, la terminación, la renormalización y la precisión finita quedan fuera. La anchura no es un tamaño de archivo medido. Conserve el orden declarado del alfabeto, las frecuencias y la longitud: una etiqueta numérica sola no describe cómo decodificarla.
 
 ## Fuentes y alcance del proyecto
 

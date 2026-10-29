@@ -32,3 +32,6 @@ sidebar:
 - [INF-019 · Comprobar la ambigüedad de palabras de código concatenadas](inf-019-check-concatenated-codeword-ambiguity/)
 - [INF-020 · Separar detección por paridad y corrección](inf-020-separate-parity-detection-from-correction/)
 - [INF-021 · Distinguir la tasa de entropía de un flujo de la entropía de etiquetas](inf-021-distinguish-stream-entropy-rate-from-label-entropy/)
+- [INF-022 · Medir el cambio posterior con variación total](inf-022-measure-posterior-movement-with-total-variation/)
+- [INF-023 · Desentrelazar borrados en ráfaga sin inventar recuperación](inf-023-deinterleave-burst-erasures-without-inventing-recovery/)
+- [INF-024 · Refinar intervalos de codificación aritmética con racionales exactos](inf-024-refine-arithmetic-code-intervals-with-exact-rationals/)

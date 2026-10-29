@@ -26,3 +26,7 @@ sidebar:
 - [PM-013 · Conservar la censura del tiempo hasta el primer uso de la tarea](pm-013-retain-censoring-in-time-to-first-task-use/)
 - [PM-014 · Elegir una cartera con presupuesto y cierre de requisitos](pm-014-select-a-budgeted-portfolio-with-prerequisite-closure/)
 - [PM-015 · Equilibrar costes de preparación y espera de verificación](pm-015-balance-verification-setup-and-waiting-costs/)
+- [PM-016 · Conservar opciones de verificación incomparables según Pareto](pm-016-retain-pareto-incomparable-verification-options/)
+- [PM-017 · Asignar turnos enteros por mayores restos](pm-017-allocate-whole-review-slots-by-largest-remainders/)
+- [PM-018 · Hallar el peso que invierte el orden de procesos](pm-018-find-the-weight-at-which-a-workflow-ranking-flips/)
+- [PM-019 · Minimizar la varianza de revisión estratificada con asignaciones enteras](pm-019-minimize-stratified-review-variance-over-integer-allocations/)

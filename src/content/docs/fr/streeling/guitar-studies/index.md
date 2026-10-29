@@ -31,3 +31,8 @@ sidebar:
 - [GTR-018 · Vérifier les contraintes de direction aux changements de corde](gtr-018-check-direction-constraints-at-string-crossings/)
 - [GTR-019 · Déclarer la coordonnée d’un glissé continu](gtr-019-declare-the-coordinate-of-a-continuous-slide/)
 - [GTR-020 · Déduire les attaques d’un accord d’un balayage](gtr-020-derive-strum-onsets-from-a-sweep/)
+- [GTR-021 · Vérifier le dégagement latéral entre cordes](gtr-021-check-lateral-clearance-between-string-envelopes/)
+- [GTR-022 · Placer les frettes multidiapasons dans l’espace physique](gtr-022-place-multiscale-frets-in-physical-coordinates/)
+- [GTR-023 · Ajuster un bottleneck droit à des cibles de contact](gtr-023-fit-a-straight-slide-bar-to-contact-targets/)
+- [GTR-024 · Planifier la récupération du doigt qui pince séparément de l’appui tenu](gtr-024-schedule-plucking-recovery-separately-from-held-support/)
+- [GTR-025 · Composer des capodastres sélectifs par une borne supérieure composante par composante](gtr-025-compose-selective-capos-with-a-componentwise-join/)

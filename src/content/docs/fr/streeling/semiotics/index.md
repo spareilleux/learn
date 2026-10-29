@@ -31,3 +31,6 @@ sidebar:
 - [SEM-018 · Interpréter un bref de tissage à plusieurs cadres](sem-018-interpret-a-multi-shaft-weaving-draft/)
 - [SEM-019 · Distinguer inversion du parcours et miroir d’un diagramme de nœud](sem-019-distinguish-knot-diagram-reversal-from-mirroring/)
 - [SEM-020 · Localiser une cellule de motif dans des longueurs de séquence positives](sem-020-locate-a-motif-cell-in-positive-run-lengths/)
+- [SEM-021 · Conserver les lignées alternatives et leur multiplicité](sem-021-retain-alternative-lineages-and-their-multiplicity/)
+- [SEM-022 · Distinguer une enveloppe indépendante d’un état indépendant](sem-022-distinguish-an-independent-wrapper-from-independent-state/)
+- [SEM-023 · Distinguer points et déplacements lors d’une translation](sem-023-keep-points-and-displacements-distinct-under-translation/)

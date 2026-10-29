@@ -31,3 +31,6 @@ sidebar:
 - [COG-018 · Contrastar cambios emparejados con resultados discordantes](cog-018-test-paired-changes-with-discordant-outcomes/)
 - [COG-019 · Corregir el acuerdo de revisión por los marginales de etiquetas](cog-019-correct-review-agreement-for-label-marginals/)
 - [COG-020 · Examinar un ítem mediante la puntuación de los demás ítems](cog-020-screen-an-item-using-the-rest-score/)
+- [COG-021 · Comparar la información de ítems logísticos a una habilidad dada](cog-021-compare-logistic-item-information-at-a-stated-ability/)
+- [COG-022 · Agrupar violaciones adyacentes de calibración con pesos](cog-022-pool-adjacent-calibration-violations-with-case-weights/)
+- [COG-023 · Incorporar la covarianza de las señales a su fusión lineal](cog-023-carry-cue-covariance-into-linear-fusion/)

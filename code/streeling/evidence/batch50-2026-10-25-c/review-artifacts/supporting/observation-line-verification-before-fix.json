@@ -1,0 +1,49 @@
+[
+  {
+    "unit": "a",
+    "command": [
+      "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_a.py"
+    ],
+    "returncode": 0,
+    "prefixed_json_records": 36,
+    "observation_substrings": 36,
+    "log": "C:\\tmp\\batch25c-code-quality-20261029\\observation-lines-a.log",
+    "nonprefixed_examples": []
+  },
+  {
+    "unit": "b",
+    "command": [
+      "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_b.py"
+    ],
+    "returncode": 0,
+    "prefixed_json_records": 16,
+    "observation_substrings": 32,
+    "log": "C:\\tmp\\batch25c-code-quality-20261029\\observation-lines-b.log",
+    "nonprefixed_examples": [
+      "test_cog021 (__main__.UnitB.test_cog021) ... OBSERVATION {\"case\": \"model\", \"code\": \"COG021\", \"expected\": {\"best_indices\": [1], \"information\": [0.25, 0.419974341614], \"probabilities\": [0.5, 0.119202922022]}, \"observed\": {\"best_indices\": [1], \"information\": [0.25, 0.419974341614], \"probabilities\": [0.5, 0.119202922022]}, \"scope\": \"Stipulated one-dimensional Bernoulli logistic item curves, fixed ability and no guessing; no fitted learner result.\"}"
+    ]
+  },
+  {
+    "unit": "c",
+    "command": [
+      "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_c.py"
+    ],
+    "returncode": 0,
+    "prefixed_json_records": 32,
+    "observation_substrings": 32,
+    "log": "C:\\tmp\\batch25c-code-quality-20261029\\observation-lines-c.log",
+    "nonprefixed_examples": []
+  }
+]

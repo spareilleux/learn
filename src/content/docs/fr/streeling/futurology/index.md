@@ -26,3 +26,7 @@ sidebar:
 - [FUT-013 · Borner un futur flux artisanal par sa fraction séquentielle](fut-013-bound-a-future-craft-workflow-by-its-serial-fraction/)
 - [FUT-014 · Projeter les premiers retraits par cohortes d’assets artisanaux](fut-014-project-first-retirements-from-craft-asset-cohorts/)
 - [FUT-015 · Énumérer des futurs artisanaux compatibles](fut-015-enumerate-compatible-craft-workflow-futures/)
+- [FUT-016 · Encadrer le premier franchissement d’un seuil de capacité](fut-016-bound-the-first-capacity-threshold-crossing/)
+- [FUT-017 · Séparer le coût d’apprentissage unitaire du coût moyen cumulé](fut-017-separate-unit-learning-cost-from-cumulative-average/)
+- [FUT-018 · Choisir une réserve sous une contrainte probabiliste déclarée](fut-018-choose-a-reserve-under-a-declared-chance-constraint/)
+- [FUT-019 · Trouver les combinaisons minimales qui surchargent un plan artisanal](fut-019-find-minimal-combinations-that-overload-a-craft-plan/)

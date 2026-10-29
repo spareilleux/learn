@@ -32,3 +32,6 @@ sidebar:
 - [INF-019 · Check Concatenated Codeword Ambiguity](inf-019-check-concatenated-codeword-ambiguity/)
 - [INF-020 · Separate Parity Detection from Correction](inf-020-separate-parity-detection-from-correction/)
 - [INF-021 · Distinguish Stream Entropy Rate from Label Entropy](inf-021-distinguish-stream-entropy-rate-from-label-entropy/)
+- [INF-022 · Measure Posterior Movement with Total Variation](inf-022-measure-posterior-movement-with-total-variation/)
+- [INF-023 · Deinterleave Burst Erasures without Inventing Recovery](inf-023-deinterleave-burst-erasures-without-inventing-recovery/)
+- [INF-024 · Refine Arithmetic-Code Intervals with Exact Rationals](inf-024-refine-arithmetic-code-intervals-with-exact-rationals/)

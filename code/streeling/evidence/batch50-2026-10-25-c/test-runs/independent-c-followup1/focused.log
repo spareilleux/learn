@@ -1,0 +1,92 @@
+COMMAND: ["C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe", "-X", "utf8", "-B", "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-25-c\\tests\\test_unit_c.py", "-v"]
+CWD: C:\tmp\learn-streeling-craft-transfer-20261022
+STDOUT:
+
+OBSERVATION {"case": "model", "code": "DV023", "expected": {"positions": [-1.3862943611198906, -0.6931471805599453, 0, 0.6931471805599453, 1.3862943611198906], "roundtrip": [-3, -1, 0, 1, 3]}, "observed": {"positions": [-1.3862943611198906, -0.6931471805599453, 0.0, 0.6931471805599453, 1.3862943611198906], "roundtrip": [-3.0, -1.0, 0.0, 1.0, 3.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "DV023", "expected": {"positions": [-0.6931471805599453, -0.28768207245178085, 0, 0.28768207245178085, 0.6931471805599453], "roundtrip": [-3, -1, 0, 1, 3]}, "observed": {"positions": [-0.6931471805599453, -0.2876820724517809, 0.0, 0.2876820724517809, 0.6931471805599453], "roundtrip": [-3.0, -0.9999999999999998, 0.0, 0.9999999999999998, 3.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "model", "code": "DV024", "expected": {"equal_last_layers": false, "equal_totals": true, "layers": [[2, 6], [5, 3]]}, "observed": {"equal_last_layers": false, "equal_totals": true, "layers": [[2.0, 6.0], [5.0, 3.0]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "DV024", "expected": {"equal_last_layers": true, "equal_totals": false, "layers": [[2, 6], [5, 6]]}, "observed": {"equal_last_layers": true, "equal_totals": false, "layers": [[2.0, 6.0], [5.0, 6.0]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "model", "code": "DV025", "expected": {"passes": false, "ratio": 4.2}, "observed": {"passes": false, "ratio": 4.2}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "DV025", "expected": {"passes": true, "ratio": 7}, "observed": {"passes": true, "ratio": 7.0}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "model", "code": "FUT016", "expected": {"crossings": [4, 2], "earliest": 2, "latest": 4, "paths": [[8, 10, 12.5, 15.625, 19.53125], [8, 12, 18, 27, 40.5]]}, "observed": {"crossings": [4, 2], "earliest": 2, "latest": 4, "paths": [[8.0, 10.0, 12.5, 15.625, 19.53125], [8.0, 12.0, 18.0, 27.0, 40.5]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "FUT016", "expected": {"crossings": [null, null], "earliest": null, "latest": null, "paths": [[8, 10, 12.5, 15.625, 19.53125], [8, 12, 18, 27, 40.5]]}, "observed": {"crossings": [null, null], "earliest": null, "latest": null, "paths": [[8.0, 10.0, 12.5, 15.625, 19.53125], [8.0, 12.0, 18.0, 27.0, 40.5]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "model", "code": "FUT017", "expected": {"average": 8.333333333333334, "exponent": -1, "total": 33.333333333333336, "unit_costs": [16, 8, 5.333333333333333, 4]}, "observed": {"average": 8.333333333333334, "exponent": -1.0, "total": 33.333333333333336, "unit_costs": [16.0, 8.0, 5.333333333333333, 4.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "FUT017", "expected": {"average": 16, "exponent": 0, "total": 64, "unit_costs": [16, 16, 16, 16]}, "observed": {"average": 16.0, "exponent": 0.0, "total": 64.0, "unit_costs": [16.0, 16.0, 16.0, 16.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "model", "code": "FUT018", "expected": {"chosen_reserve": 4, "exceedance": [0.2, 0.2, 0], "passing_reserves": [4]}, "observed": {"chosen_reserve": 4.0, "exceedance": [0.2, 0.2, 0.0], "passing_reserves": [4.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "FUT018", "expected": {"chosen_reserve": 0, "exceedance": [0.2, 0.2, 0], "passing_reserves": [0, 2, 4]}, "observed": {"chosen_reserve": 0.0, "exceedance": [0.2, 0.2, 0.0], "passing_reserves": [0.0, 2.0, 4.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "model", "code": "FUT019", "expected": {"loads": [11], "minimal_overloads": [["A", "B"]]}, "observed": {"loads": [11.0], "minimal_overloads": [["A", "B"]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "FUT019", "expected": {"loads": [11, 9, 9], "minimal_overloads": [["A", "B"], ["A", "C"], ["B", "C"]]}, "observed": {"loads": [11.0, 9.0, 9.0], "minimal_overloads": [["A", "B"], ["A", "C"], ["B", "C"]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "model", "code": "GAA020", "expected": {"best_radius": 3, "optimal_centres": [["A", "C"], ["A", "D"], ["B", "C"], ["B", "D"]]}, "observed": {"best_radius": 3.0, "optimal_centres": [["A", "C"], ["A", "D"], ["B", "C"], ["B", "D"]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "GAA020", "expected": {"best_radius": 5, "optimal_centres": [["C"]]}, "observed": {"best_radius": 5.0, "optimal_centres": [["C"]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "model", "code": "GAA021", "expected": {"distance": 1, "table": [[0, 1, 2, 3, 4], [1, 0, 1, 2, 3], [2, 1, 1, 1, 2], [3, 2, 2, 2, 1]]}, "observed": {"distance": 1, "table": [[0, 1, 2, 3, 4], [1, 0, 1, 2, 3], [2, 1, 1, 1, 2], [3, 2, 2, 2, 1]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "GAA021", "expected": {"distance": 2, "table": [[0, 1, 2, 3], [1, 1, 2, 2], [2, 2, 1, 2], [3, 2, 2, 2]]}, "observed": {"distance": 2, "table": [[0, 1, 2, 3], [1, 1, 2, 2], [2, 2, 1, 2], [3, 2, 2, 2]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "model", "code": "GAA022", "expected": {"attempt_normalized": [0.25, 0.5, 0.25], "duration_ratio": 2, "errors": [0, 0, 0], "shape_L1": 0, "target_normalized": [0.25, 0.5, 0.25]}, "observed": {"attempt_normalized": [0.25, 0.5, 0.25], "duration_ratio": 2.0, "errors": [0.0, 0.0, 0.0], "shape_L1": 0.0, "target_normalized": [0.25, 0.5, 0.25]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "GAA022", "expected": {"attempt_normalized": [0.25, 0.375, 0.375], "duration_ratio": 2, "errors": [0, 0.125, 0.125], "shape_L1": 0.25, "target_normalized": [0.25, 0.5, 0.25]}, "observed": {"attempt_normalized": [0.25, 0.375, 0.375], "duration_ratio": 2.0, "errors": [0.0, 0.125, 0.125], "shape_L1": 0.25, "target_normalized": [0.25, 0.5, 0.25]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "model", "code": "PHI016", "expected": {"and": "F", "excluded_middle": "U", "not_p": "U", "or": "U"}, "observed": {"and": "F", "excluded_middle": "U", "not_p": "U", "or": "U"}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "PHI016", "expected": {"and": "U", "excluded_middle": "U", "not_p": "U", "or": "T"}, "observed": {"and": "U", "excluded_middle": "U", "not_p": "U", "or": "T"}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "model", "code": "PHI017", "expected": {"default_fired": true, "literals": ["asset", "usable"]}, "observed": {"default_fired": true, "literals": ["asset", "usable"]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "PHI017", "expected": {"default_fired": false, "literals": ["asset", "fragile", "not_usable"]}, "observed": {"default_fired": false, "literals": ["asset", "fragile", "not_usable"]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "model", "code": "PHI018", "expected": {"grounded": ["A", "C"], "iterations": [[], ["A"], ["A", "C"], ["A", "C"]], "out": ["B"], "undecided": []}, "observed": {"grounded": ["A", "C"], "iterations": [[], ["A"], ["A", "C"], ["A", "C"]], "out": ["B"], "undecided": []}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "PHI018", "expected": {"grounded": [], "iterations": [[], []], "out": [], "undecided": ["A", "B", "C"]}, "observed": {"grounded": [], "iterations": [[], []], "out": [], "undecided": ["A", "B", "C"]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "model", "code": "SEM021", "expected": {"coefficients": {"a*b": 2, "c": 1}, "evaluated_multiplicity": 2}, "observed": {"coefficients": {"a*b": 2, "c": 1}, "evaluated_multiplicity": 2}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "SEM021", "expected": {"coefficients": {"a*b": 1, "c": 1}, "evaluated_multiplicity": 1}, "observed": {"coefficients": {"a*b": 1, "c": 1}, "evaluated_multiplicity": 1}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "model", "code": "SEM022", "expected": {"copy_after": [[9, 2], [3]], "original_after": [[9, 2], [3]], "same_first_child": true, "same_outer": false}, "observed": {"copy_after": [[9, 2], [3]], "original_after": [[9, 2], [3]], "same_first_child": true, "same_outer": false}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "SEM022", "expected": {"copy_after": [[9, 2], [3]], "original_after": [[1, 2], [3]], "same_first_child": false, "same_outer": false}, "observed": {"copy_after": [[9, 2], [3]], "original_after": [[1, 2], [3]], "same_first_child": false, "same_outer": false}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "model", "code": "SEM023", "expected": {"displacement": [3, 4, 0], "p_world": [11, 0, 5], "q_world": [14, 4, 5], "translated_difference": [3, 4, 0]}, "observed": {"displacement": [3.0, 4.0, 0.0], "p_world": [11.0, 0.0, 5.0], "q_world": [14.0, 4.0, 5.0], "translated_difference": [3.0, 4.0, 0.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "SEM023", "expected": {"displacement": [3, 4, 0], "p_world": [-4, 10, 1], "q_world": [-1, 14, 1], "translated_difference": [3, 4, 0]}, "observed": {"displacement": [3.0, 4.0, 0.0], "p_world": [-4.0, 10.0, 1.0], "q_world": [-1.0, 14.0, 1.0], "translated_difference": [3.0, 4.0, 0.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+STDERR:
+test_dv023 (__main__.UnitC.test_dv023) ... ok
+test_dv024 (__main__.UnitC.test_dv024) ... ok
+test_dv025 (__main__.UnitC.test_dv025) ... ok
+test_fut016 (__main__.UnitC.test_fut016) ... ok
+test_fut017 (__main__.UnitC.test_fut017) ... ok
+test_fut018 (__main__.UnitC.test_fut018) ... ok
+test_fut019 (__main__.UnitC.test_fut019) ... ok
+test_gaa020 (__main__.UnitC.test_gaa020) ... ok
+test_gaa021 (__main__.UnitC.test_gaa021) ... ok
+test_gaa022 (__main__.UnitC.test_gaa022) ... ok
+test_phi016 (__main__.UnitC.test_phi016) ... ok
+test_phi017 (__main__.UnitC.test_phi017) ... ok
+test_phi018 (__main__.UnitC.test_phi018) ... ok
+test_sem021 (__main__.UnitC.test_sem021) ... ok
+test_sem022 (__main__.UnitC.test_sem022) ... ok
+test_sem023 (__main__.UnitC.test_sem023) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.002s
+
+OK
+
+EXIT: 0

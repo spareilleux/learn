@@ -31,3 +31,6 @@ sidebar:
 - [CYB-018 · Reconstruir un estado oculto mediante dinámicas distintas](cyb-018-reconstruct-hidden-state-from-distinct-dynamics/)
 - [CYB-019 · Comprobar los modos propios de bucles acoplados](cyb-019-test-coupled-feedback-eigenmodes/)
 - [CYB-020 · Comprobar el cierre de un conjunto ante perturbaciones](cyb-020-check-disturbance-robust-set-closure/)
+- [CYB-021 · Comprobar la alcanzabilidad en un horizonte finito](cyb-021-test-finite-horizon-control-reachability/)
+- [CYB-022 · Proyectar acciones propuestas sobre un conjunto factible](cyb-022-project-proposed-actions-onto-a-declared-feasible-set/)
+- [CYB-023 · Comprobar el rango de los regresores antes de identificar un controlador](cyb-023-check-regressor-rank-before-identifying-a-controller/)

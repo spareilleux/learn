@@ -31,3 +31,6 @@ sidebar:
 - [CYB-018 · Reconstruire un état caché grâce à des dynamiques distinctes](cyb-018-reconstruct-hidden-state-from-distinct-dynamics/)
 - [CYB-019 · Tester les modes propres de boucles couplées](cyb-019-test-coupled-feedback-eigenmodes/)
 - [CYB-020 · Vérifier la fermeture d’un ensemble face aux perturbations](cyb-020-check-disturbance-robust-set-closure/)
+- [CYB-021 · Tester l’atteignabilité sur un horizon fini](cyb-021-test-finite-horizon-control-reachability/)
+- [CYB-022 · Projeter une action proposée sur un ensemble admissible](cyb-022-project-proposed-actions-onto-a-declared-feasible-set/)
+- [CYB-023 · Vérifier le rang des régresseurs avant l’identification](cyb-023-check-regressor-rank-before-identifying-a-controller/)

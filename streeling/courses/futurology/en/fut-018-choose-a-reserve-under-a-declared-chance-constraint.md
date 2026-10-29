@@ -15,7 +15,7 @@ version: "0.1.0"
 
 ## Project operation and interpretation
 
-A proposed craft capture queue needs reserve capacity against uncertain demand. Instead of minimizing the mean or worst-tail loss, require that the probability of demand exceeding available capacity stay below a declared limit. Enumerate candidate reserves and sum the mass of strictly exceeding scenarios. Equality with capacity is served. The smallest passing reserve is conditional on the supplied distribution; its probabilities are teaching premises, not measured reliability of the queue or a promise that an overload cannot occur.
+A proposed craft capture queue needs reserve capacity against uncertain demand. Instead of minimizing the mean or worst-tail loss, require that the probability of demand exceeding available capacity stay at or below a declared limit. Enumerate candidate reserves and sum the mass of strictly exceeding scenarios. Equality with capacity is served. The smallest passing reserve is conditional on the supplied distribution; its probabilities are teaching premises, not measured reliability of the queue or a promise that an overload cannot occur.
 
 Read the committed prerequisite and the bounded source passage before calculating. Identify the exact operation that the project needs, the meaning of its inputs and the claim that the result could support. The source record retains its revision and inspected scope. A documentation definition, an authored assumption and an observed outcome belong in separate columns. Do not let an assistant replace an absent observation with a plausible story about what the software probably does.
 

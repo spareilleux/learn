@@ -14,7 +14,7 @@ version: "0.1.0"
 
 > Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
 
-Un informe de revisión agéntica ordena intervalos de confianza, pero sus frecuencias de éxito disminuyen entre grupos vecinos. Un ajuste monótono puede eliminar ese conflicto conservando el peso de cada grupo. No corrige el sesgo de muestreo ni demuestra que las previsiones sean fiables. Mantenga las frecuencias originales y sus pesos junto a la curva ajustada.
+Un informe de revisión agéntica ordena grupos según su puntuación de confianza, pero sus frecuencias de éxito disminuyen entre grupos vecinos. Un ajuste monótono puede eliminar ese conflicto conservando el peso de cada grupo. No corrige el sesgo de muestreo ni demuestra que las previsiones sean fiables. Mantenga las frecuencias originales y sus pesos junto a la curva ajustada.
 
 Empiece con un bloque por puntuación ordenada. Cuando la media de un bloque supera la siguiente, fusiónelos y calcule su media ponderada. Revise después la frontera anterior: una fusión puede descubrir otra violación. Los valores finales minimizan el error cuadrático ponderado sujeto a un orden no decreciente. Ordenar las respuestas separaría los resultados de sus grupos originales de confianza.
 

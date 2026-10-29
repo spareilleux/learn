@@ -29,3 +29,6 @@ sidebar:
 - [NET-016 · Find Mandatory Gates with Dominators](net-016-find-mandatory-gates-with-dominators/)
 - [NET-017 · Match Simultaneous Roles without Double Booking](net-017-match-simultaneous-roles-without-double-booking/)
 - [NET-018 · Reduce Precedence Edges without Erasing Evidence](net-018-reduce-precedence-edges-without-erasing-evidence/)
+- [NET-019 · Connect a Diagnostic Backbone at Minimum Edge Cost](net-019-connect-a-diagnostic-backbone-at-minimum-edge-cost/)
+- [NET-020 · Color Conflicting Agent Tasks with an Exact Small Search](net-020-color-conflicting-agent-tasks-with-an-exact-small-search/)
+- [NET-021 · Check Signed Transform Consistency around a Cycle](net-021-check-signed-transform-consistency-around-a-cycle/)

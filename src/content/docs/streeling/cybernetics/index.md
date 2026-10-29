@@ -31,3 +31,6 @@ sidebar:
 - [CYB-018 · Reconstruct Hidden State from Distinct Dynamics](cyb-018-reconstruct-hidden-state-from-distinct-dynamics/)
 - [CYB-019 · Test Coupled Feedback Eigenmodes](cyb-019-test-coupled-feedback-eigenmodes/)
 - [CYB-020 · Check Disturbance-Robust Set Closure](cyb-020-check-disturbance-robust-set-closure/)
+- [CYB-021 · Test Finite-Horizon Control Reachability](cyb-021-test-finite-horizon-control-reachability/)
+- [CYB-022 · Project Proposed Actions onto a Declared Feasible Set](cyb-022-project-proposed-actions-onto-a-declared-feasible-set/)
+- [CYB-023 · Check Regressor Rank before Identifying a Controller](cyb-023-check-regressor-rank-before-identifying-a-controller/)

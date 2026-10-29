@@ -141,7 +141,7 @@ Why is mean alone insufficient in the control?
 
 ### Exercise 5
 
-What falsifies exact subtractive recovery?
+What falsifies the stipulated subtractive converter contract?
 
 > **Answer:** A decoder offset not matching the encoder offset rejects the stipulated converter contract.
 

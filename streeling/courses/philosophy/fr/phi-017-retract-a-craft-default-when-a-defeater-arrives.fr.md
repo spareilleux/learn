@@ -15,7 +15,7 @@ version: "0.1.0"
 
 ## Opération du projet et interprétation
 
-Un transfert artisanal proposé considère provisoirement un objet identifié comme utilisable en l’absence de fait contraire connu. C’est un défaut révisable, pas une implication stricte à partir de la catégorie objet. Précisez le défaut normal et la règle stricte allant de fragile à non utilisable. Fermez d’abord les faits stricts, puis vérifiez si l’unique défaut peut s’appliquer sans contradiction. Une information supplémentaire peut retirer la conclusion provisoire. Ce fragment traite un seul défaut avec des faits cohérents ; il ne fournit ni validation matérielle ni autorisation d’effet.
+Un transfert artisanal proposé considère provisoirement un objet identifié comme utilisable en l’absence de fait contraire connu. C’est une règle par défaut révisable, pas une implication stricte à partir de la catégorie objet. Précisez la règle par défaut normale et la règle stricte allant de fragile à non utilisable. Fermez d’abord les faits stricts, puis vérifiez si l’unique règle par défaut peut s’appliquer sans contradiction. Une information supplémentaire peut retirer la conclusion provisoire. Ce fragment traite une seule règle par défaut avec des faits cohérents ; il ne fournit ni validation matérielle ni autorisation d’effet.
 
 Lisez le prérequis versionné et le passage précisément délimité de la source avant de calculer. Identifiez l’opération dont le projet a besoin, le sens de ses entrées et l’affirmation que le résultat pourrait étayer. Le dossier conserve la révision et le périmètre réellement consulté. Placez dans des colonnes distinctes une définition documentaire, une hypothèse construite et un résultat observé. Un assistant ne doit pas remplacer une observation absente par un récit plausible de ce que le logiciel ferait probablement.
 
@@ -81,13 +81,13 @@ Identifiez les entrées et l’opération à préserver.
 
 <details><summary>Réponse 1</summary>
 
-> **Réponse:** Le défaut possède une condition de cohérence ; l’absence de preuve contraire n’est pas une vérité observée.
+> **Réponse:** La règle par défaut possède une condition de cohérence ; l’absence de preuve contraire n’est pas une vérité observée.
 
 </details>
 
 ### Exercice 2
 
-Trouvez l’ensemble principal de littéraux et déterminez si le défaut s’applique.
+Trouvez l’ensemble principal de littéraux et déterminez si la règle par défaut s’applique.
 
 <details><summary>Réponse 2</summary>
 
@@ -101,7 +101,7 @@ Expliquez le piège d’interprétation qu’un résumé pourrait cacher.
 
 <details><summary>Réponse 3</summary>
 
-> **Réponse:** Une implication stricte conserve sa conclusion après ajout de faits ; ce défaut peut la retirer.
+> **Réponse:** Une implication stricte conserve sa conclusion après ajout de faits ; cette règle par défaut peut la retirer.
 
 </details>
 

@@ -1,0 +1,20 @@
+{
+  "status": "checked",
+  "criteria_sources": [
+    "AGENTS.md",
+    "CLAUDE.md"
+  ],
+  "fallback": "No CODING_STANDARDS.md found; root AGENTS.md governs all seven files, CLAUDE.md only references AGENTS.md",
+  "governed_paths": [
+    "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_a.py",
+    "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_b.py",
+    "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_c.py",
+    "code/streeling/evidence/batch50-2026-10-25-c/tests/test_course_metadata.mjs",
+    "code/streeling/check.py",
+    "code/streeling/test_check.py",
+    ".github/workflows/streeling-fixtures.yml"
+  ],
+  "violations": [],
+  "search": "rg --files --hidden -g AGENTS.md -g CLAUDE.md -g CODING_STANDARDS.md excluding node_modules/.git",
+  "result_file": "C:/tmp/batch25c-code-quality-20261029/criteria-candidates.txt"
+}
