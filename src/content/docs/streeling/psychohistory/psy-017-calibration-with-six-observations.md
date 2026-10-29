@@ -37,7 +37,7 @@ A `calibration` block stores `threshold_nudge` −0.1, `applied_delta` 0.0, `pri
 
 Three pinned files state the rule. The [policy](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/policies/ml-governance-feedback-policy.yaml#L57) defines the rate as "Proportion of high-confidence beliefs that were later revised". The [pipeline specification](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/pipelines/ml-feedback-loop.ixql#L41) recommends a change when the rate exceeds 0.15, of size `max(-0.1, -1 * overconfidence_rate * 0.5)`. The applying script (line 128) adds that nudge to the stored total and clamps the total to ±0.10.
 
-**Computed.** That producer ([`confidence_calibrator.py`](https://github.com/GuitarAlchemist/ix/blob/6418fcc69012108af266544ec4cf5a931a8f78e8/scripts/confidence_calibrator.py), read at ix commit `6418fcc`, outside the fixture) counts by this rule: every belief file, current or archived, with confidence at least 0.85 is "high-confidence", and the archived ones among them are "revised". [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-017/extract.py) snapshots the 21 pinned belief files into [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-017/observed-input.json), and [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-017/analyze.py) applies that rule to them:
+**Computed.** That producer ([`confidence_calibrator.py`](https://github.com/GuitarAlchemist/ix/blob/6418fcc69012108af266544ec4cf5a931a8f78e8/scripts/confidence_calibrator.py), read at ix commit `6418fcc`, outside the fixture) counts by this rule: every belief file, current or archived, with confidence at least 0.85 is "high-confidence", and the archived ones among them are "revised". [`extract.py`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-017/extract.py) snapshots the 21 pinned belief files into [`observed-input.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-017/observed-input.json), and [`analyze.py`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-017/analyze.py) applies that rule to them:
 
 | Belief file | Truth value | Confidence | Group |
 |---|---|---|---|
@@ -48,7 +48,7 @@ Three pinned files state the rule. The [policy](https://github.com/GuitarAlchemi
 | `2026-03-17-consumer-repo-integration-status` | F | 0.90 | archived: revised |
 | `2026-03-17-ga-governance-integration` | F | 0.85 | archived: revised |
 
-Four current files and two archived ones make six, the two archived ones are those the claim names, and the sentence rebuilt from the recount is identical to the recorded one ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-017/results.json), `recount`): one computation reproduced, not a second source. The four other current files hold 0.80 or 0.82, the eleven other archived files 0.5 or 0, and the YAML file's nine are never counted.
+Four current files and two archived ones make six, the two archived ones are those the claim names, and the sentence rebuilt from the recount is identical to the recorded one ([`results.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-017/results.json), `recount`): one computation reproduced, not a second source. The four other current files hold 0.80 or 0.82, the eleven other archived files 0.5 or 0, and the YAML file's nine are never counted.
 
 The record counts itself: its own 0.92 puts it among them. It and `remediation-effectiveness` are both written by the applying script, their confidences copied from recommendations; without those two the same rule gives 2 of 4. Nor were the six last updated at comparable times: the two archived ones 209.7 and 209.6 days before the record, the four current ones 31.5, 30.5, 0 and 0 days before it.
 
@@ -64,7 +64,7 @@ A forecaster is *calibrated* when, among statements made with confidence c, a sh
 
 Treat the six as independent trials with one unknown revision rate. The *exact 95% interval* (two-sided; Clopper and Pearson; PSY-004 shows the construction) keeps every rate under which the observed count falls in neither 2.5% tail. **Computed:** for 2 of 6 it runs from **0.0433 to 0.7772**, and it contains 15%, 10% and 5%.
 
-How often does a forecaster whose rate is known show two or more revisions among six? **Computed under assumed rates** ([`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-017/scenarios.json)), percentages rounded to two decimals:
+How often does a forecaster whose rate is known show two or more revisions among six? **Computed under assumed rates** ([`scenarios.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-017/scenarios.json)), percentages rounded to two decimals:
 
 | Assumed forecaster | True revision rate | P(2 or more of 6) |
 |---|---|---|
@@ -139,7 +139,7 @@ The policy schedules this calibration weekly, so 13 cycles are one quarter. By t
 
 **Observed, pinned at Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** the calibration belief, the twenty other belief files, the YAML belief list, the archive's `SUPERSEDED.md`, the policy, the pipeline specification and the applying script linked above.
 
-**Fixture.** The [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-017/README.md) gives the commands, the 32 self-checks and the negative controls.
+**Fixture.** The [README](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-017/README.md) gives the commands, the 32 self-checks and the negative controls.
 
 **Method references.** Clopper, C. J., and Pearson, E. S. (1934), "The Use of Confidence or Fiducial Limits Illustrated in the Case of the Binomial", *Biometrika* 26(4), 404–413, [doi:10.1093/biomet/26.4.404](https://doi.org/10.1093/biomet/26.4.404). Lichtenstein, S., Fischhoff, B., and Phillips, L. D. (1982), "Calibration of probabilities: The state of the art to 1980", in Kahneman, D., Slovic, P., and Tversky, A. (eds.), *Judgment under Uncertainty: Heuristics and Biases*, Cambridge University Press, 306–334.
 

@@ -25,7 +25,7 @@ You will compute a reproduction number and its threshold, find the final size th
 
 ## 1. The model, and what "infected" means here
 
-**Observed.** The [department record](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/departments/psychohistory.department.json) lists, as research area 7 of 10, "Belief state epidemiology — how beliefs spread across agents and repos", and its key principle speaks of "14 personas across 4 repos". [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-015/extract.py) snapshots what the repository records about beliefs at commit `4b03838` into [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-015/observed-input.json): the 8 current belief files of [`state/beliefs/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/beliefs) and 13 archived ones. No proposition appears under two holders (0 of 21), but this count could not have shown sharing: the 12 files with content have one evaluator, the governance persona Demerzel, and the other 9 are empty scaffolds.
+**Observed.** The [department record](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/departments/psychohistory.department.json) lists, as research area 7 of 10, "Belief state epidemiology — how beliefs spread across agents and repos", and its key principle speaks of "14 personas across 4 repos". [`extract.py`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-015/extract.py) snapshots what the repository records about beliefs at commit `4b03838` into [`observed-input.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-015/observed-input.json): the 8 current belief files of [`state/beliefs/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/beliefs) and 13 archived ones. No proposition appears under two holders (0 of 21), but this count could not have shown sharing: the 12 files with content have one evaluator, the governance persona Demerzel, and the other 9 are empty scaffolds.
 
 Two current files name a source outside their evaluator: `confidence-calibration` and `remediation-effectiveness` each rest on one evidence item, an `ml-feedback-recommendation` message whose rationale and confidence [the applying script](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/scripts/apply_ml_feedback.py) copies into Demerzel's belief. Its schema says "from an ix ML pipeline to Demerzel"; the two messages are not in the repository, so the sender is known from that description and the script's docstring only. Each is one hop, from a document to one holder.
 
@@ -40,9 +40,9 @@ R0 = beta/gamma
 P(next event is an adoption) = R0*S / (R0*S + N)
 ```
 
-The *basic reproduction number* R0 is the mean number of agents one holder converts in a large population when everybody else is susceptible. The last line is the *embedded jump chain*: it says which event comes next and ignores when. The *final size*, the number of agents that ever held the belief, depends only on that order, so [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-015/analyze.py) draws no waiting time.
+The *basic reproduction number* R0 is the mean number of agents one holder converts in a large population when everybody else is susceptible. The last line is the *embedded jump chain*: it says which event comes next and ignores when. The *final size*, the number of agents that ever held the belief, depends only on that order, so [`analyze.py`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-015/analyze.py) draws no waiting time.
 
-Assumptions, in [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-015/scenarios.json): N = 14 (the key principle's count; PSY-004 finds 17 persona files at the pin) and N = 1,400; one initial holder; R0 = 0.8, 1.2 and 3.
+Assumptions, in [`scenarios.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-015/scenarios.json): N = 14 (the key principle's count; PSY-004 finds 17 persona files at the pin) and N = 1,400; one initial holder; R0 = 0.8, 1.2 and 3.
 
 ### Practice Exercise 1
 
@@ -72,7 +72,7 @@ For N = 14 and one initial holder, compute R0 × S/N at the start for the three 
 
 ## 3. Fourteen agents: the distribution one run comes from
 
-**Synthetic.** Runs at each final size, over 10,000 runs for each R0 ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-015/results.json), section `cases`):
+**Synthetic.** Runs at each final size, over 10,000 runs for each R0 ([`results.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-015/results.json), section `cases`):
 
 ```text
 final size     1     2    3    4    5    6    7    8    9   10   11   12    13    14
@@ -125,7 +125,7 @@ Classify each statement as observed, synthetic, analogy or unsupported, with the
 
 ## Sources, limits, and next check
 
-**Observed, pinned at Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** `extract.py` refuses to run if one of its 32 files, or either folder it lists (722 JSON files under `state/`, 11 contract schemas), differs from the pin. `results.json` lists the 42 self-checks; the [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-015/README.md) gives the commands and the controls.
+**Observed, pinned at Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** `extract.py` refuses to run if one of its 32 files, or either folder it lists (722 JSON files under `state/`, 11 contract schemas), differs from the pin. `results.json` lists the 42 self-checks; the [README](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-015/README.md) gives the commands and the controls.
 
 **Method references.** Kermack, W. O., and McKendrick, A. G. (1927), "A Contribution to the Mathematical Theory of Epidemics", *Proceedings of the Royal Society of London, Series A* 115, 700–721 (deterministic model, threshold, final size). Bailey, N. T. J. (1975), *The Mathematical Theory of Infectious Diseases and its Applications*, 2nd edition, Griffin. Whittle, P. (1955), "The Outcome of a Stochastic Epidemic: A Note on Bailey's Paper", *Biometrika* 42, 116–122 (minor outbreaks and 1/R0).
 

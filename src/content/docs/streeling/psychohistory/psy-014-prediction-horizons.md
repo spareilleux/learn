@@ -31,9 +31,9 @@ A *deterministic* model contains no randomness: the same start always gives the 
 x_next = r * x * (1 - x)
 ```
 
-where r is a fixed setting. After a transient the state stays on an *attractor*: one fixed point at r = 2.9, a cycle of two points at r = 3.2, an irregular band at r = 3.7 and at r = 4. [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-014/analyze.py) draws 1,000 seeded starting points ([`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-014/scenarios.json)), lets each settle for 1,000 steps, then runs it twice: once as it is, once moved by an *initial error* of 1e-9. The *gap* is the absolute difference between the two runs at the same step.
+where r is a fixed setting. After a transient the state stays on an *attractor*: one fixed point at r = 2.9, a cycle of two points at r = 3.2, an irregular band at r = 3.7 and at r = 4. [`analyze.py`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-014/analyze.py) draws 1,000 seeded starting points ([`scenarios.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-014/scenarios.json)), lets each settle for 1,000 steps, then runs it twice: once as it is, once moved by an *initial error* of 1e-9. The *gap* is the absolute difference between the two runs at the same step.
 
-**Synthetic.** Median gap of the 1,000 pairs, from `gap_table` in [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-014/results.json):
+**Synthetic.** Median gap of the 1,000 pairs, from `gap_table` in [`results.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-014/results.json):
 
 | Step | r = 2.9 | r = 3.2 | r = 3.7 | r = 4 |
 |---|---|---|---|---|
@@ -135,7 +135,7 @@ A forecast at r = 4 must stay within 0.1 at each of 60 steps. Option A: measure 
 
 **Pinned at Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** PSY-001, PSY-002 and MAT-024. The fixture reproduces the four exponents that MAT-024 prints for these settings; the count of row pairs in section 4 is PSY-005's.
 
-**Fixture.** From the repository root, `python -I -B scripts/streeling_fixtures/psychohistory/psy-014/analyze.py`, then the same with `--check`. It reads only `scenarios.json` and runs 41 self-checks; its [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-014/README.md) explains why the output is byte-identical across platforms and lists the limits.
+**Fixture.** From the repository root, `python -I -B code/streeling/psychohistory/psy-014/analyze.py`, then the same with `--check`. It reads only `scenarios.json` and runs 41 self-checks; its [README](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-014/README.md) explains why the output is byte-identical across platforms and lists the limits.
 
 **Method references.** May, R. M. (1976), "Simple mathematical models with very complicated dynamics", *Nature* 261, 459–467. Lorenz, E. N. (1963), "Deterministic nonperiodic flow", *Journal of the Atmospheric Sciences* 20, 130–141 (sensitive dependence on initial conditions). Strogatz, S. H. (2015), *Nonlinear Dynamics and Chaos*, 2nd edition, Westview Press (Lyapunov exponents and the time horizon of a prediction).
 
