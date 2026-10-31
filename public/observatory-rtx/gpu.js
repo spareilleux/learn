@@ -8,13 +8,14 @@
 (function () {
   'use strict';
 
-  var VERSION = '0.2.5';  // the Windows program
-  var NATIVE = '0.2.1';   // the Linux and macOS packages: 0.2.2 changed only the Windows program's Streamline, 0.2.3 its glass, 0.2.4 its path-traced gardens, 0.2.5 its Capitole, scooter and toys
+  var VERSION = '0.2.6';  // the Windows program
+  var NATIVE = '0.2.1';   // the Linux and macOS packages: 0.2.2 changed only the Windows program's Streamline, 0.2.3 its glass, 0.2.4 its path-traced gardens, 0.2.5 its Capitole, scooter and toys, 0.2.6 its installer's link
   var LINKS = {
-    rtx: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.5/Observatory-RTX-0.2.5-win64.msi',
+    rtx: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.6/Observatory-RTX-0.2.6-win64.msi',
     linux: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-0.2.1-linux-x86_64.tar.gz',
     mac: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-0.2.1-macos.zip',
-    release: 'https://github.com/spareilleux/learn/releases/tag/observatory-rtx-0.2.5',
+    release: 'https://github.com/spareilleux/learn/releases/tag/observatory-rtx-0.2.6',
+    launch: 'observatory-rtx:',  // registered by the installer from 0.2.6 on: it starts the installed program
     nvidia: 'https://www.nvidia.com/en-us/geforce/technologies/dlss/',
     web: '../demos/observatory/'  // the page's own link replaces it (data-web)
   };
@@ -181,11 +182,14 @@
       installSub: 'Windows installer · 135 MB · version ' + VERSION,
       play: 'Play in the browser',
       playSub: 'WebGL 2 · about 55 MB, computer or phone',
+      launch: 'Play the RTX version',
+      launchSub: 'the installed program · 0.2.6 or later',
+      installed: 'Already installed, 0.2.6 or later? [[Play the RTX version|launch]]: your browser asks before it opens it.',
       after: 'Once it is downloaded:',
       started: 'The download has started. Once it is done:',
       steps: [
         'Open the file. It installs in a few seconds, for your Windows account only, without administrator rights. If Windows says it protected your PC (the installer is not signed): **More info**, then **Run anyway**.',
-        'Start **Observatory RTX** from the Start menu.',
+        'Start **Observatory RTX** from the Start menu, or come back here: [[Play the RTX version|launch]].',
         'The first time, press **Enter** to fetch NVIDIA\'s DLSS files (276 MB, once).'
       ],
       notes: '[[What is new in ' + VERSION + ', and the installer\'s SHA-256|release]]',
@@ -292,11 +296,14 @@
       installSub: 'installateur Windows · 135 Mo · version ' + VERSION,
       play: 'Jouer dans le navigateur',
       playSub: 'WebGL 2 · environ 55 Mo, ordinateur ou téléphone',
+      launch: 'Lancer la version RTX',
+      launchSub: 'le programme installé · 0.2.6 ou plus récente',
+      installed: 'Déjà installée, en 0.2.6 ou plus récente ? [[Lancer la version RTX|launch]] : votre navigateur demande avant de l\'ouvrir.',
       after: 'Une fois téléchargé :',
       started: 'Le téléchargement a commencé. Une fois terminé :',
       steps: [
         'Ouvrez le fichier. Il s\'installe en quelques secondes, pour votre compte Windows seulement, sans droits d\'administrateur. Si Windows dit avoir protégé votre PC (l\'installateur n\'est pas signé) : **Informations complémentaires**, puis **Exécuter quand même**.',
-        'Lancez **Observatory RTX** depuis le menu Démarrer.',
+        'Lancez **Observatory RTX** depuis le menu Démarrer, ou revenez ici : [[Lancer la version RTX|launch]].',
         'La première fois, appuyez sur **Entrée** pour récupérer les fichiers DLSS de NVIDIA (276 Mo, une fois).'
       ],
       notes: '[[Les nouveautés de la ' + VERSION + ', et le SHA-256 de l\'installateur|release]]',
@@ -403,11 +410,14 @@
       installSub: 'instalador de Windows · 135 MB · versión ' + VERSION,
       play: 'Jugar en el navegador',
       playSub: 'WebGL 2 · unos 55 MB, ordenador o teléfono',
+      launch: 'Iniciar la versión RTX',
+      launchSub: 'el programa instalado · 0.2.6 o posterior',
+      installed: '¿Ya instalada, en 0.2.6 o posterior? [[Iniciar la versión RTX|launch]]: su navegador pregunta antes de abrirla.',
       after: 'Una vez descargado:',
       started: 'La descarga ha comenzado. Una vez terminada:',
       steps: [
         'Abra el archivo. Se instala en unos segundos, solo para su cuenta de Windows, sin derechos de administrador. Si Windows dice que protegió su PC (el instalador no está firmado): **Más información**, y luego **Ejecutar de todas formas**.',
-        'Inicie **Observatory RTX** desde el menú Inicio.',
+        'Inicie **Observatory RTX** desde el menú Inicio, o vuelva aquí: [[Iniciar la versión RTX|launch]].',
         'La primera vez, pulse **Intro** para obtener los archivos DLSS de NVIDIA (276 MB, una sola vez).'
       ],
       notes: '[[Las novedades de la ' + VERSION + ', y el SHA-256 del instalador|release]]',
@@ -649,6 +659,25 @@
     box.appendChild(more);
   }
 
+  // A page cannot see an installed program. Once this browser has downloaded the installer, a mark kept on
+  // this device (never sent) makes "Play the RTX version" lead; before, a line under the buttons offers it.
+  // The author, 2026-10-20: « On devrait peut-être voir "Play the RTX version" quand installé ».
+  var MARK = 'observatory-rtx-installer';
+  function marked() {
+    try {
+      return !!window.localStorage.getItem(MARK);
+    } catch (e) {
+      return false;
+    }
+  }
+  function mark() {
+    try {
+      window.localStorage.setItem(MARK, VERSION);
+    } catch (e) {
+      // storage off: the line under the buttons still offers the link
+    }
+  }
+
   function button(href, label, sub, first) {
     var a = document.createElement('a');
     a.className = 'obs-btn' + (first ? ' first' : '');
@@ -667,7 +696,7 @@
     }
     var lang = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
     var t = TEXT[lang] || TEXT.en;
-    var links = { rtx: LINKS.rtx, linux: LINKS.linux, mac: LINKS.mac, release: LINKS.release, nvidia: LINKS.nvidia, web: box.getAttribute('data-web') || LINKS.web };
+    var links = { rtx: LINKS.rtx, linux: LINKS.linux, mac: LINKS.mac, release: LINKS.release, nvidia: LINKS.nvidia, launch: LINKS.launch, web: box.getAttribute('data-web') || LINKS.web };
     var found = classify(renderer(), navigator.userAgent, navigator.maxTouchPoints || 0);
     var k = t.kinds[found.kind];
     var o = offer(found);
@@ -697,10 +726,15 @@
     // not-content: Starlight's prose styles (link colour, underline, spacing) stay off the buttons.
     var actions = document.createElement('div');
     actions.className = 'obs-actions not-content';
+    // The installed RTX version, once this browser has downloaded its installer: it leads.
+    var launch = o.rtx && marked() ? button(links.launch, t.launch, t.launchSub, true) : null;
     // The download for this system (the RTX installer, or the Linux or macOS package), whose steps follow.
-    var main = o.rtx ? button(links.rtx, t.install, t.installSub, o.first === 'rtx')
+    var main = o.rtx ? button(links.rtx, t.install, t.installSub, o.first === 'rtx' && !launch)
       : native ? button(links[o.native], native.install, native.sub, o.first === o.native) : null;
-    var web = button(links.web, t.play, t.playSub, o.first === 'web');
+    var web = button(links.web, t.play, t.playSub, o.first === 'web' && !launch);
+    if (launch) {
+      actions.appendChild(launch);
+    }
     if (main && o.first !== 'web') {
       actions.appendChild(main);
       actions.appendChild(web);
@@ -711,6 +745,12 @@
       }
     }
     box.appendChild(actions);
+    if (o.rtx && !launch) {
+      var installed = document.createElement('p');
+      installed.className = 'obs-installed';
+      fill(installed, t.installed, links);
+      box.appendChild(installed);
+    }
     var rest = others(o).map(function (key) { return '[[' + t.platforms[key] + '|' + key + ']]'; });
     var other = document.createElement('p');
     other.className = 'obs-others';
@@ -744,6 +784,9 @@
       box.appendChild(steps);
       // The file downloads in place (GitHub serves it as an attachment): the page stays, and says what next.
       main.addEventListener('click', function () {
+        if (o.rtx) {
+          mark();
+        }
         steps.hidden = false;
         steps.className = 'obs-steps started';
         after.textContent = t.started;
