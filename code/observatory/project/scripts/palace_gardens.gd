@@ -36,6 +36,10 @@ const PALACE_Z := 430.0
 ## water mirrors its front elevation, rendered there too. Without the model, or with --palace=card
 ## (?palace=card), the card.
 const PALACE_GLB_PATH := "res://assets/palace/imperial_palace.glb"
+## Off the web, the clock in the palace's rose window (loaded, not preloaded: the web build leaves it out).
+const PALACE_CLOCK_SCRIPT_PATH := "res://scripts/palace_clock.gd"
+## The clipped hedges' outer leaves, in layers of real geometry over them, off the web (loaded, not preloaded).
+const HEDGE_SHELLS_PATH := "res://scripts/hedge_shells.gd"
 const PALACE_LIGHT_PATH := "res://assets/palace/palace_light.png"
 ## In the web build, the lightmap at half the size: 16 MB of video memory there rather than 64.
 const PALACE_LIGHT_WEB_PATH := "res://assets/palace/palace_light_web.png"
@@ -123,6 +127,14 @@ const VEG_KINDS := {
 const VEG_NEAR_R := [70.0, 70.0, 45.0, 0.0, 0.0, 0.0]
 const VEG_BAND := 8.0
 const VEG_CHUNK := 64.0
+## The sprays fringing the hedges and the yews: drawn out to FRINGE_R from the eye, in chunks FRINGE_CHUNK square.
+## Through the telescope or the monocle (view_fit.gd zoom), as far as the screen shows them as near, up to
+## FRINGE_ZOOM_MAX times: at power 100 from the terrace, 150 m off, none was drawn, and the hedges' edges were
+## a box's (the author, 2026-10-16: « Les haies ont l'air du papier peint »). The field narrows as the reach
+## grows, so that about as many are drawn.
+const FRINGE_R := 60.0
+const FRINGE_CHUNK := 32.0
+const FRINGE_ZOOM_MAX := 8.0
 const VEG_ZONE := 470.0
 ## The views' foot: this share of their frame up from its bottom (tree_kit.py).
 const VEG_FOOT_V := 0.0198
@@ -134,6 +146,10 @@ const VEG_FOOT_V := 0.0198
 ## (PARTERRE_AO_PATH). The places come from scripts/parterre_layout.gd. Without them, the shader's scrolls,
 ## the box edging and the yews as before.
 const PARTERRE_GLB_PATH := "res://assets/garden_parterre.glb"
+## Off the web, the same box from make_parterre.py --detail=rtx when it is there: a section every 12 cm, each plant
+## fuller or thinner than the next, the shears' unevenness at three scales (the author, 2026-10-16, from the
+## terrace: « la vue de loin est pas terrible »). The web keeps the lighter one.
+const PARTERRE_RTX_GLB_PATH := "res://assets/garden_parterre_rtx.glb"
 const PARTERRE_AO_PATH := "res://assets/garden_parterre_ao.png"
 const GROUND_TEX_PATH := "res://assets/garden_ground_%s.png"
 const PARTERRE_LAYOUT := preload("res://scripts/parterre_layout.gd")
@@ -146,6 +162,8 @@ const SHOW_SCRIPT_PATH := "res://scripts/fountain_show.gd"
 ## The terrace's stone in detail (assets/palace_garden.gdshader, stone_detail): generated photographs of
 ## travertine and of limestone paving, as detail maps. Without them, plain stone as before.
 const KIT_PATH := "res://assets/garden_%s.obj"
+## The finer baluster, off the web ("" and "_low"; artpass/gardens/blender/baluster_fine.py).
+const FINE_BALUSTER_PATH := "res://assets/garden_baluster_fine%s.obj"
 const STONE_TEX_PATH := "res://assets/garden_stone.png"
 const PAVING_TEX_PATH := "res://assets/garden_paving.png"
 const CITY_R := 1600.0
@@ -208,6 +226,18 @@ const RAMP_Z1 := TERRACE_R + 40.6
 const SOLID_CELL := 8.0
 const SEGWAY_SCRIPT_PATH := "res://scripts/segway.gd"
 const CROWD_SCRIPT_PATH := "res://scripts/garden_crowd.gd"
+const CAPITOLE_SCRIPT_PATH := "res://scripts/capitole_square.gd"
+const CAPITOLE_GLB_PATH := "res://assets/capitole/capitole.glb"
+const CAPITOLE_AT := 300.0   # metres from the basin along the avenue 60 degrees west to the square's street
+const GRAND_SCRIPT_PATH := "res://scripts/garden_grand.gd"
+## The lamps modelled (artpass/gardens/lamps/make_lamp.py; the author, 2026-10-15: « les lampadaires sont
+## pourris!! »): a fluted iron post under a six-sided lantern, in place of a box under a globe, off the web.
+## Its glass's middle stands LAMP_GLASS_Y over its foot; the glass's mesh is LAMP_GLASS_SCALE times its size,
+## so that an instance scaled by 1 / LAMP_GLASS_SCALE has the old globes' scale, which their glow's min_angle
+## and the path tracer's light read (set_rt_lit).
+const LAMP_KIT_PATH := "res://assets/garden_lamp.glb"
+const LAMP_GLASS_Y := 3.19
+const LAMP_GLASS_SCALE := 2.5
 ## How far from the hall's middle a rider goes: the maze, the orchard, the parterre to the canal's end
 ## and the first 300 m of the avenues, to the woods' edge. Further, the palace and the city, both
 ## painted cards, would show what they are.
@@ -234,11 +264,19 @@ var palace_model := true
 var parterre_kit := true
 ## The canal's fountain show (SHOW_SCRIPT_PATH); --show=off (?show=off) turns it off.
 var fountain_show := true
+## The Place du Capitole at the end of the avenue 60 degrees west (CAPITOLE_SCRIPT_PATH), off the web;
+## --capitole=off turns it off.
+var capitole := true
 var stats := {"bays": 0, "books_hidden": 0, "strips_hidden": 0, "crystals_hidden": 0, "wood_tris_cut": 0,
 	"lamps_turned": 0, "garden_meshes": 0, "garden_instances": 0, "shown_frames": 0, "hidden_frames": 0}
 var garden_visible := false
 ## Shows the garden whatever the camera sees, for views from above it (artpass/bays/baysprobe.gd).
 var show_always := false
+## Shows the garden until this tick (ms) whatever the camera sees: set by the path tracer's dress
+## (artpass/dlss/pt_scene.gd) as it starts, so that the fork builds the gardens' hit shaders during its first
+## half minute rather than when the visitor first walks out. Hidden until then, they were missing from the rays
+## for over 6 s after the eye reached the terrace (RTX 0.2.4's tree 12, artpass/publish/rtx/logs/views-b12).
+var rt_warm_until := 0
 
 var _obs: Node3D
 var _core := Vector3(-0.468, 0.867, -0.170)
@@ -253,22 +291,35 @@ var _thin: Array[MultiMeshInstance3D] = []  # thinned out from quality level 3, 
 var _far: Array[Node3D] = []                # gone from level 4
 var _lods: Array = []                       # [MultiMeshInstance3D, full mesh, light mesh from level 3]
 var _level := -1
+var _view_fit: Node         # view_fit.gd, for the screen's zoom (_zoom_fringe)
+var _fringe_zoom := 1.0
 var _compat := false
 ## The solids a rider meets, by cell (Vector2i): Vector4(x, z, half width, half depth) for a box,
 ## Vector4(x, z, radius, -1) for a round one.
 var _solids := {}
 ## What the terrace and the parterre share, drawn together by _build_fittings: boxes in stone or
 ## bronze (tinted), lamp globes, and round trees (tinted).
-var _fit := {"boxes": [], "box_tints": [], "lamps": [], "trees": [], "tree_tints": []}
+var _fit := {"boxes": [], "box_tints": [], "lamps": [], "trees": [], "tree_tints": [], "lamp_feet": [], "lamp_glass": []}
+var _lamp_kit := false                    # the modelled lamps (LAMP_KIT_PATH) stand for the posts and globes
 var _water_mat: ShaderMaterial  # mirrors the palace's card, once there is one
 ## The vegetation kit, once loaded: its meshes by path, its materials by name, and what the quality level
 ## changes: the near chunks, the near materials and the far views' materials that hand over to them.
-var _veg := {"ok": false, "meshes": {}, "mats": {}, "chunks": [], "fringe": [], "near_mats": [], "far_mats": [],
+var _veg := {"ok": false, "meshes": {}, "mats": {}, "chunks": [], "fringe": [], "fringe_mats": [], "near_mats": [], "far_mats": [],
 	"near_r": -1.0}
 var _crowd: Node3D                        # scripts/garden_crowd.gd, when its figures are there
+var _capitole: Node3D                     # scripts/capitole_square.gd, once built
+var _capitole_script: Script              # its script, while the square is to be built (its place, covers())
+var _capitole_xf := Transform3D()         # its place
 var _show: Node3D                         # scripts/fountain_show.gd, when the canal has its show
 var _maze_way := PackedVector2Array()     # from outside the maze's entrance to its clearing (_build_maze)
 var _maze_mid := Vector2.ZERO             # the temple's middle
+## Lit by the path tracer (set_rt_lit; the author, 2026-10-15: « On veut des arbres et jardins
+## photorealistes »): whether it is, and the lights that stand for the lamps then.
+var _rt_lit := false
+var _rt_lights: Node3D
+var _rt_sky: Node3D                         # the core and the sky's fill: outside _garden, so the hall never sees them come and go
+var _rt_lamps: Array[OmniLight3D] = []
+var _rt_culled_at := -1.0e9
 
 
 ## observatory: the hall, for its dimensions, materials and the nodes it built; core: the galactic
@@ -289,6 +340,7 @@ func _ready() -> void:
 	palace_model = palace_model and not args.has("--palace=card")
 	parterre_kit = parterre_kit and not args.has("--parterre=drawn")
 	fountain_show = fountain_show and not args.has("--show=off")
+	capitole = capitole and not args.has("--capitole=off")
 	if OS.has_feature("web"):
 		fountain_show = fountain_show and str(JavaScriptBridge.eval("new URLSearchParams(location.search).get('show') || ''", true)) != "off"
 		palace_model = palace_model and str(JavaScriptBridge.eval("new URLSearchParams(location.search).get('palace') || ''", true)) != "card"
@@ -308,6 +360,13 @@ func _ready() -> void:
 	_open_bays()
 	_veg.ok = _veg_ready()
 	stats.trees_kit = _veg.ok
+	_lamp_kit = not _compat and ResourceLoader.exists(LAMP_KIT_PATH)
+	stats.lamp_kit = _lamp_kit
+	# The Place du Capitole's place first: the avenues and the woods keep clear of it.
+	if capitole and not _compat and ResourceLoader.exists(CAPITOLE_SCRIPT_PATH) and ResourceLoader.exists(CAPITOLE_GLB_PATH):
+		_capitole_script = load(CAPITOLE_SCRIPT_PATH)
+		var a := deg_to_rad(-60.0)
+		_capitole_xf = _capitole_script.call("placement", AVENUE_FROM, Vector2(sin(a), cos(a)), CAPITOLE_AT, GROUND_Y)
 	_garden = Node3D.new()
 	_garden.name = "Garden"
 	add_child(_garden)
@@ -318,8 +377,17 @@ func _ready() -> void:
 	_build_fittings()
 	_build_water()
 	_build_palace()
+	_build_capitole()
 	_build_city(rng)
 	_build_crowd()
+	_build_grand()
+	# Off the web, the clipped hedges' outer leaves in layers over them (scripts/hedge_shells.gd).
+	if not _compat and _veg.ok and ResourceLoader.exists(HEDGE_SHELLS_PATH):
+		var shells: Node3D = load(HEDGE_SHELLS_PATH).new()
+		shells.name = "HedgeShells"
+		_garden.add_child(shells)
+		shells.call("build", _garden, _obs)
+		stats.hedge_shells = shells.get("stats")
 	# The ride in the gardens (scripts/segway.gd), beside the walking body and the other ways round.
 	if ResourceLoader.exists(SEGWAY_SCRIPT_PATH) and _obs.get_node_or_null("Segway") == null:
 		var seg: Node = load(SEGWAY_SCRIPT_PATH).new()
@@ -357,6 +425,10 @@ func _gmat(kind: int, albedo: Color, params := {}) -> ShaderMaterial:
 	m.set_shader_parameter("core_dir", _core)
 	m.set_shader_parameter("terrace_r", TERRACE_R - 0.3)
 	m.set_shader_parameter("terrace_y", 1.45)
+	if kind == 5:
+		# A lamp's light stands inside its globe in the path tracer (set_rt_lit): let it out (the fork's
+		# rt_no_shadow.py; only the shader's RT variant declares it).
+		m.set_shader_parameter("rt_no_shadow", true)
 	for k in params:
 		m.set_shader_parameter(k, params[k])
 	return m
@@ -430,6 +502,44 @@ static func _tinted(mesh: Mesh, col: Color) -> ArrayMesh:
 	return am
 
 
+static var _fine_balusters := {}
+
+
+## The finer baluster ("" or its light version "_low"; FINE_BALUSTER_PATH), its attributes uncompressed, with
+## the import's levels of detail and shadow mesh; the same mesh at each call, here and in the library's wings.
+## NVIDIA's fork merges a MultiMesh into one acceleration structure, with its instances' INSTANCE_CUSTOM, only
+## for a mesh whose attributes are not compressed (render_raytracing.cpp _build_merged_mm_blas), and the OBJ
+## importer compresses them: path traced, the balusters lost their custom data and the stone ringed them as it
+## does the walls (artpass/gardens/balusters/NOTES.md).
+static func fine_baluster(variant: String) -> Mesh:
+	if _fine_balusters.has(variant):
+		return _fine_balusters[variant]
+	var src: Mesh = load(FINE_BALUSTER_PATH % variant)
+	var out := ArrayMesh.new()
+	out.resource_name = (FINE_BALUSTER_PATH % variant).get_file().get_basename()
+	for s in src.get_surface_count():
+		var sd := RenderingServer.mesh_get_surface(src.get_rid(), s)
+		var main: PackedByteArray = sd.get("index_data", PackedByteArray())
+		var wide := main.size() >= int(sd.get("index_count", 0)) * 4  # 32-bit indices, else 16
+		var lods := {}
+		for lod: Dictionary in sd.get("lods", []):
+			var bytes: PackedByteArray = lod["index_data"]
+			var idx := PackedInt32Array()
+			if wide:
+				idx = bytes.to_int32_array()
+			else:
+				idx.resize(bytes.size() / 6 * 3)
+				for i in idx.size():
+					idx[i] = bytes.decode_u16(i * 2)
+			lods[float(lod["edge_length"])] = idx
+		out.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, src.surface_get_arrays(s), [], lods)
+		out.surface_set_material(s, src.surface_get_material(s))
+	if src is ArrayMesh:
+		out.shadow_mesh = (src as ArrayMesh).shadow_mesh
+	_fine_balusters[variant] = out
+	return out
+
+
 ## A flat convex face from its corners, fanned into triangles that face along n (Godot's front faces
 ## wind clockwise as seen from in front), UV the world's x and z.
 static func _face(st: SurfaceTool, pts: Array, n: Vector3) -> void:
@@ -467,12 +577,16 @@ func _solid(c: Vector2, half: Vector2) -> void:
 
 
 ## The ground's height for a rider at p (x, z): the terrace's paving (and the hall's floor), the ramp
-## down from it, the parterre.
+## down from it, the parterre; on the Place du Capitole's footprint, its paving, laid 3 cm over the gardens'
+## ground (capitole_square.gd placement): the scooter's wheels sank into it, and its headlamp's pool, 5 cm up,
+## went under it as the scooter leaned (2026-10-16, artpass/gardens/escooter).
 func ground_at(p: Vector2) -> float:
 	if absf(p.x) <= RAMP_HALF + 0.4 and p.y >= RAMP_Z0 - 0.6 and p.y <= RAMP_Z1:
 		return lerpf(0.0, GROUND_Y, clampf((p.y - RAMP_Z0) / (RAMP_Z1 - RAMP_Z0), 0.0, 1.0))
 	if p.length() < RAMP_Z0 and p.y > 0.0:
 		return 0.0
+	if _capitole != null and _capitole_covers(p, 0.0):
+		return _capitole_xf.origin.y
 	return GROUND_Y
 
 
@@ -533,7 +647,16 @@ func push_out(p: Vector2, r: float, y: float, doors := false) -> Vector2:
 	var wing := _wing()
 	if wing != null:
 		q = wing.call("push_out", q, r, y)
+	# On the Place du Capitole's ground, past the ride's edge, the square's own bounds hold the rider.
+	if _capitole != null and _capitole_covers(q, 0.0):
+		q = _capitole.call("push_in", q, r)
+		if q.length() <= RIDE_R or _capitole_covers(q, 0.0):
+			return q
 	if q.length() > RIDE_R:
+		# Off the square's footprint past the ride's edge, by its far streets: held on the footprint, its edge a
+		# wall there. Put back on the ride's edge, a walker landed in a building and was moved across the square.
+		if _capitole != null and _capitole_covers(q, 2.0):
+			return _capitole.call("hold_in", q, r)
 		q = q.normalized() * RIDE_R
 	return q
 
@@ -594,7 +717,13 @@ func _open_bays() -> void:
 		var row := _obs.get_node_or_null("Generated/CourseShelves/CourseRow_B%02d" % i) as Node3D
 		if row != null:
 			row.visible = false
-		stats.wing_bay = i
+		if not stats.has("wing_bay"):
+			stats.wing_bay = i
+		stats.wing_bays = stats.get("wing_bays", []) + [i]
+	# For the course shelves' later rebuilds (course_library.gd _build), which leave these bays empty.
+	var opened: Array = BAYS.duplicate()
+	opened.append_array(_wing_bays())
+	_obs.set_meta("open_bays", opened)
 	_bay_meshes(acc, m)
 	# The outer wall again, with the openings through it below the walkway.
 	var wall := _obs.get_node_or_null("Generated/Shelves/OuterWall") as MeshInstance3D
@@ -756,14 +885,14 @@ func _wing() -> Node3D:
 	return wing if wing != null and wing.has_method("walk") else null
 
 
-## The bay the library wing opens, when it is wanted (library_wing.gd wanted()).
+## The bays the library wings open, when they are wanted (library_wing.gd bays(): 10 and 13).
 func _wing_bays() -> Array[int]:
 	var out: Array[int] = []
 	if not ResourceLoader.exists(WING_SCRIPT_PATH):
 		return out
 	var script: GDScript = load(WING_SCRIPT_PATH)
-	if bool(script.call("wanted")):
-		out.append(int(script.get_script_constant_map().get("WING_BAY", -1)))
+	for i: int in script.call("bays"):
+		out.append(i)
 	return out
 
 
@@ -836,8 +965,13 @@ func _cut_shelves(shelves: Node, i: int, unit: Transform3D, width: float, top0: 
 	var inside := func(p: Vector3) -> bool:
 		var q := to_unit * p
 		return q.y < low and absf(q.x) < keep_x + 0.05 and absf(q.z) < 1.0
-	for spec: Array in [["Books_B%02d" % i, "books_hidden"], ["ShelfLightStrips", "strips_hidden"], ["CrystalArchives", "crystals_hidden"]]:
-		var mmi := shelves.get_node_or_null(str(spec[0])) as MultiMeshInstance3D
+	# The course row's crystals too (course_library.gd), which its row's hiding left standing in the air.
+	var course := _obs.get_node_or_null("Generated/CourseShelves")
+	for spec: Array in [[shelves, "Books_B%02d" % i, "books_hidden"], [shelves, "ShelfLightStrips", "strips_hidden"],
+			[shelves, "CrystalArchives", "crystals_hidden"], [course, "CourseRowCrystals", "crystals_hidden"]]:
+		var mmi: MultiMeshInstance3D = null
+		if spec[0] != null:
+			mmi = (spec[0] as Node).get_node_or_null(str(spec[1])) as MultiMeshInstance3D
 		if mmi == null or mmi.multimesh == null:
 			continue
 		var mm := mmi.multimesh
@@ -845,7 +979,7 @@ func _cut_shelves(shelves: Node, i: int, unit: Transform3D, width: float, top0: 
 			var xf := mm.get_instance_transform(j)
 			if inside.call(mmi.transform * xf.origin):
 				mm.set_instance_transform(j, Transform3D(Basis.from_scale(Vector3.ZERO), xf.origin))
-				stats[spec[1]] += 1
+				stats[spec[2]] += 1
 
 
 ## The mesh without its triangles whose centre, in the unit's frame, lies below `low` and within
@@ -1086,6 +1220,12 @@ func _pmat(kind: int, tex_path: String, params := {}) -> ShaderMaterial:
 	m.set_shader_parameter("terrace_r", TERRACE_R - 0.3)
 	m.set_shader_parameter("terrace_y", 1.45)
 	m.set_shader_parameter("foot_y", GROUND_Y)
+	if kind == 2 and not _compat:
+		# Off the web, the clipped growth in clumps and the wind in its leaves (assets/garden_plant.gdshader lumps,
+		# leaf_wind; the author at the telescope, 2026-10-16: « Les haies ont l'air du papier peint et devraient
+		# bouger un peu au vent »).
+		m.set_shader_parameter("lumps", 1.0)
+		m.set_shader_parameter("leaf_wind", 1.0)
 	for k in params:
 		m.set_shader_parameter(k, params[k])
 	return m
@@ -1121,7 +1261,10 @@ func _veg_hedge_mat(foot_h: float, tint: Vector3) -> ShaderMaterial:
 ## few pixels, they would only shimmer.
 func _veg_fringe_mat(atlas: String, tint: float, foot_h: float) -> ShaderMaterial:
 	var m := _pmat(1, VEG_LEAVES_PATH % atlas, {"tint": Vector3.ONE * tint, "foot_dark": 0.45, "foot_h": foot_h,
-		"near_r": 60.0, "band": 6.0, "flutter": 0.006, "wrap": 0.3})
+		"near_r": FRINGE_R, "band": 6.0, "flutter": 0.006, "wrap": 0.3})
+	if not _compat:
+		m.set_shader_parameter("gusty", 0.035)  # pushed 3.5 cm downwind in a gust, rasterized
+	(_veg.fringe_mats as Array).append(m)
 	return m
 
 
@@ -1168,7 +1311,7 @@ func _veg_chunks(parent: Node, node_name: String, mesh: Mesh, mat: Material, xfo
 ## Sprays along straight hedges: modules (hedge_kit.py's fringe_tall, 4 m, or fringe_low, 2 m) at the
 ## given places, in chunks shown near the eye only, gone from quality level 3.
 func _veg_fringe(parent: Node, node_name: String, part: String, mat: Material, xforms: Array) -> void:
-	var chunks := _veg_chunks(parent, node_name, _veg_mesh(VEG_KIT_PATH % part), mat, xforms, [], [], 32.0, 60.0)
+	var chunks := _veg_chunks(parent, node_name, _veg_mesh(VEG_KIT_PATH % part), mat, xforms, [], [], FRINGE_CHUNK, FRINGE_R)
 	(_veg.fringe as Array).append_array(chunks)
 	stats.veg_fringe_modules = int(stats.get("veg_fringe_modules", 0)) + xforms.size()
 
@@ -1345,6 +1488,16 @@ func _build_terrace() -> void:
 		and ResourceLoader.exists(KIT_PATH % "pedestal") and ResourceLoader.exists(KIT_PATH % "lantern_frame") \
 		and ResourceLoader.exists(KIT_PATH % "lantern_glass")
 	var baluster: Mesh = load(KIT_PATH % "baluster") if kit else _obs.call("low_poly", "baluster")
+	var light: Mesh = load(KIT_PATH % "baluster_low") if kit else null
+	# Off the web, the finer baluster (artpass/gardens/blender/baluster_fine.py, after the author's « je veux de
+	# bien plus belles balustres », 2026-10-16): a square die and abacus, eased, and between them a pear turned
+	# on 36 sides with its torus, astragal and ovolo; 6,608 triangles, 1,008 from quality level 3.
+	var fine := kit and not _compat and ResourceLoader.exists(FINE_BALUSTER_PATH % "") \
+		and ResourceLoader.exists(FINE_BALUSTER_PATH % "_low")
+	if fine:
+		baluster = fine_baluster("")
+		light = fine_baluster("_low")
+	stats.balusters = "fine" if fine else ("kit" if kit else "low_poly")
 	var xf: Array[Transform3D] = []
 	var step := deg_to_rad(7.5)
 	var n := int(PI * rail_r / 0.3)
@@ -1356,10 +1509,30 @@ func _build_terrace() -> void:
 			continue  # the ramp's head
 		var b := Basis(Vector3.UP, -a) if kit else Basis.from_scale(Vector3(1.6, 0.92, 1.6))
 		xf.append(Transform3D(b, Vector3(cos(a) * rail_r, 0.18, sin(a) * rail_r)))
-	if baluster != null:
+	if baluster != null and fine:
+		# Each instance's custom data 1, a turned piece: the stone's detail wrapped round it, its mouldings
+		# modelled by the light (assets/palace_garden.gdshader v_turned). Mapped as the walls are, they drew rings.
+		# In stretches of 15 degrees (about 6 m), each its own MultiMesh: Godot picks a mesh's level of detail
+		# by the MultiMesh's bounds, so the far stretches draw the import's lighter levels.
+		var parts := {}
+		for t in xf:
+			var k := int(floorf(atan2(t.origin.z, t.origin.x) / deg_to_rad(15.0)))
+			if not parts.has(k):
+				var stretch: Array[Transform3D] = []
+				parts[k] = stretch
+			(parts[k] as Array).append(t)
+		var keys := parts.keys()
+		keys.sort()
+		for k: int in keys:
+			var turned := []
+			turned.resize((parts[k] as Array).size())
+			turned.fill(Color(1.0, 0.0, 0.0, 0.0))
+			var bal := _multi_cc(g, "Balusters" if k == keys[0] else "Balusters%d" % k, baluster, stone, parts[k], [], turned)
+			_lods.append([bal, baluster, light])
+	elif baluster != null:
 		var bal := _multi(g, "Balusters", baluster, stone, xf)
 		if kit:
-			_lods.append([bal, baluster, load(KIT_PATH % "baluster_low")])
+			_lods.append([bal, baluster, light])
 	# Box colours are given as the albedos they replace, in sRGB; the shader takes them as linear.
 	var stone_tint := Color(0.58, 0.55, 0.5).srgb_to_linear()
 	var piers: Array[Transform3D] = []
@@ -1511,9 +1684,7 @@ func _build_parterre(rng: RandomNumberGenerator) -> void:
 	var lz := 36.0
 	while lz <= 176.0:
 		for side: float in [-1.0, 1.0]:
-			_fit.boxes.append(Transform3D(Basis.from_scale(Vector3(0.14, 3.0, 0.14)), Vector3(side * 7.0, GROUND_Y + 1.5, lz)))
-			_fit.box_tints.append(Color(0.2, 0.18, 0.15).srgb_to_linear())
-			_fit.lamps.append(Transform3D(Basis.from_scale(Vector3.ONE * 0.45), Vector3(side * 7.0, GROUND_Y + 3.2, lz)))
+			_lamp(Vector3(side * 7.0, GROUND_Y, lz), 3.2, 0.45, Vector3(0.14, 3.0, 0.14), Color(0.2, 0.18, 0.15).srgb_to_linear())
 			_solid(Vector2(side * 7.0, lz), Vector2(0.2, -1.0))
 		lz += 14.0
 	var foliage := _gmat(3, Color.WHITE)
@@ -1621,7 +1792,9 @@ func _build_parterre_kit(g: Node3D, ground: ShaderMaterial) -> bool:
 		if not ResourceLoader.exists(path):
 			return false
 	var meshes := {}
-	var root: Node = (load(PARTERRE_GLB_PATH) as PackedScene).instantiate()
+	var glb := PARTERRE_RTX_GLB_PATH if not _compat and ResourceLoader.exists(PARTERRE_RTX_GLB_PATH) else PARTERRE_GLB_PATH
+	stats.parterre_glb = glb.get_file()
+	var root: Node = (load(glb) as PackedScene).instantiate()
 	for mi: MeshInstance3D in root.find_children("*", "MeshInstance3D", true, false):
 		meshes[String(mi.name)] = mi.mesh
 	root.free()
@@ -1662,6 +1835,11 @@ func _build_parterre_kit(g: Node3D, ground: ShaderMaterial) -> bool:
 	ground.set_shader_parameter("parterre_ao", load(PARTERRE_AO_PATH))
 	for k: String in ["walk", "brick", "lawn"]:
 		ground.set_shader_parameter(k + "_tex", load(GROUND_TEX_PATH % k))
+	if not _compat:
+		# Off the web, the crushed brick as fine as it is laid, its pieces 2 cm at most rather than the 7 cm stones
+		# a 70 cm tile made of them (the author, 2026-10-16, from the terrace: « la vue de loin est pas terrible »).
+		ground.set_shader_parameter("tile_span", Vector3(1.6, 0.2, 2.4))
+		ground.set_shader_parameter("brick_macro", 0.3)
 	return true
 
 
@@ -1763,7 +1941,11 @@ func _build_grounds() -> void:
 	# garden's axis (RIDE_R): the rider meets a hedge there, not an unseen wall.
 	var forecourt := Rect2(-60.0, 398.0, 120.0, 1.4)
 	var hedge := [Transform3D(Basis.from_scale(Vector3(forecourt.size.x, 1.6, forecourt.size.y)), Vector3(0.0, GROUND_Y + 0.8, forecourt.get_center().y))]
-	if _veg.ok:
+	if not _compat:
+		# Off the web, a railing of forged iron there instead: from the garden, the hedge hid the palace's ground
+		# floor (the author at the telescope, 2026-10-16: « LE PALAIS est barre par une haie!!! »).
+		_build_forecourt_railing(g, forecourt)
+	elif _veg.ok:
 		_multi(g, "Forecourt", _box(Vector3.ONE), _veg_hedge_mat(1.6, Vector3(0.85, 0.95, 0.85)), hedge)
 		# The maze's 4 m modules of sprays, lowered and widened to this hedge.
 		var fringe: Array[Transform3D] = []
@@ -1780,6 +1962,46 @@ func _build_grounds() -> void:
 	_far.append(far)
 	_build_avenues(g, rng)
 	_build_woods(far, rng)
+
+
+## The forecourt's railing, off the web, where the ride ends: square bars 13 cm apart, 1.9 m high, with gilded
+## spear heads; a rail near the top and one near the foot; a post every 4 m with a gilded ball. The palace's
+## ground floor shows between the bars, as a royal court's through its gate.
+func _build_forecourt_railing(g: Node3D, r: Rect2) -> void:
+	const H := 1.9
+	const PER := 31               # bars from one post to the next: 13 cm apart
+	const POST := 4.0
+	var z := r.get_center().y
+	var iron := _gmat(0, Color(0.07, 0.07, 0.075), {"sheen": 0.3, "metal": 0.6})
+	var gilt := _gmat(0, Color(0.78, 0.6, 0.3), {"sheen": 0.8, "metal": 1.0})
+	var spear := CylinderMesh.new()
+	spear.top_radius = 0.0
+	spear.bottom_radius = 0.026
+	spear.height = 0.13
+	spear.radial_segments = 4
+	spear.rings = 1
+	var ball := SphereMesh.new()
+	ball.radius = 0.065
+	ball.height = 0.13
+	var bars: Array[Transform3D] = []
+	var tips: Array[Transform3D] = []
+	var balls: Array[Transform3D] = []
+	var n := int(round(r.size.x / POST)) * PER
+	for i in n + 1:
+		var x := r.position.x + r.size.x * i / n
+		var post := i % PER == 0
+		var w := 0.06 if post else 0.02
+		var top := H + (0.12 if post else 0.0)
+		bars.append(Transform3D(Basis.from_scale(Vector3(w, top, w)), Vector3(x, GROUND_Y + top * 0.5, z)))
+		if post:
+			balls.append(Transform3D(Basis(), Vector3(x, GROUND_Y + top + 0.06, z)))
+		else:
+			tips.append(Transform3D(Basis(Vector3.UP, PI * 0.25), Vector3(x, GROUND_Y + H + 0.06, z)))
+	for y: float in [0.16, H - 0.14]:
+		bars.append(Transform3D(Basis.from_scale(Vector3(r.size.x, 0.045, 0.03)), Vector3(r.get_center().x, GROUND_Y + y, z)))
+	_multi(g, "ForecourtRailing", _box(Vector3.ONE), iron, bars)
+	_multi(g, "ForecourtSpears", spear, gilt, tips)
+	_multi(g, "ForecourtBalls", ball, gilt, balls)
 
 
 ## The maze's lanterns' light on its hedges (assets/garden_plant.gdshader, lantern_map), every
@@ -2034,9 +2256,7 @@ func _build_maze(g: Node3D, rng: RandomNumberGenerator, pools: Array[Transform3D
 			pools.append(Transform3D(Basis.from_scale(Vector3(3.2, 1.0, 3.2)), Vector3(cx, GROUND_Y + 0.15, cz)))
 		if k % 2 == 0:
 			var post := Vector3(cx + 1.05, GROUND_Y, cz + 1.05)
-			_fit.boxes.append(Transform3D(Basis.from_scale(Vector3(0.12, 0.9, 0.12)), post + Vector3(0, 0.45, 0)))
-			_fit.box_tints.append(bronze)
-			_fit.lamps.append(Transform3D(Basis.from_scale(Vector3.ONE * 0.22), post + Vector3(0, 1.0, 0)))
+			_lamp(post, 1.0, 0.22, Vector3(0.12, 0.9, 0.12), bronze)
 			_solid(Vector2(post.x, post.z), Vector2(0.12, -1.0))
 	if light != null:
 		# The lanterns' light on the walk, from the same map: round about each post and stopped by the
@@ -2147,9 +2367,7 @@ func _build_orchard(g: Node3D, rng: RandomNumberGenerator, pools: Array[Transfor
 	while lz < ORCHARD_RECT.end.y:
 		for side: float in [-1.0, 1.0]:
 			var post := Vector3(walk + side * 1.8, GROUND_Y, lz)
-			_fit.boxes.append(Transform3D(Basis.from_scale(Vector3(0.14, 3.0, 0.14)), post + Vector3(0, 1.5, 0)))
-			_fit.box_tints.append(bronze)
-			_fit.lamps.append(Transform3D(Basis.from_scale(Vector3.ONE * 0.4), post + Vector3(0, 3.2, 0)))
+			_lamp(post, 3.2, 0.4, Vector3(0.14, 3.0, 0.14), bronze)
 			pools.append(Transform3D(Basis.from_scale(Vector3(5.0, 1.0, 5.0)), post + Vector3(0, 0.15, 0)))
 			_solid(Vector2(post.x, post.z), Vector2(0.2, -1.0))
 		lz += 12.0
@@ -2182,6 +2400,9 @@ func _build_avenues(g: Node3D, rng: RandomNumberGenerator) -> void:
 					var p := Vector2(at.x, at.z)
 					if absf(at.x) < 72.0 or PALACE_CLEAR.has_point(p) or MAZE_RECT.grow(3.0).has_point(p) or ORCHARD_RECT.grow(3.0).has_point(p):
 						continue
+					# The avenue 60 degrees west ends at the Place du Capitole's street.
+					if _capitole_script != null and ((deg == 60.0 and side < 0.0 and s > CAPITOLE_AT) or _capitole_covers(p, 4.0)):
+						continue
 					var height := rng.randf_range(10.0, 13.0)
 					var card_h := (3.0 + height) / 0.977
 					var xf := Transform3D(Basis.from_scale(Vector3(card_h, card_h, 1.0)), at)
@@ -2200,9 +2421,7 @@ func _build_avenues(g: Node3D, rng: RandomNumberGenerator) -> void:
 					# light (the lamps' min_angle, _build_fittings).
 					if int(s / 12.0) % 2 == 0:
 						var lamp := o + dir * s + across * (AVENUE_HALF - 4.5) * k
-						_fit.boxes.append(Transform3D(Basis.from_scale(Vector3(0.14, 3.0, 0.14)), lamp + Vector3(0, 1.5, 0)))
-						_fit.box_tints.append(bronze)
-						_fit.lamps.append(Transform3D(Basis.from_scale(Vector3.ONE * 0.4), lamp + Vector3(0, 3.2, 0)))
+						_lamp(lamp, 3.2, 0.4, Vector3(0.14, 3.0, 0.14), bronze)
 						_solid(Vector2(lamp.x, lamp.z), Vector2(0.2, -1.0))
 				s += 12.0
 	var avenues: MultiMeshInstance3D
@@ -2239,7 +2458,7 @@ func _build_woods(far: Node3D, rng: RandomNumberGenerator) -> void:
 			var p := Vector2(x + rng.randf_range(-6.0, 6.0), z + rng.randf_range(-6.0, 6.0))
 			var r := p.length()
 			if r > WOODS_R.x and r < WOODS_R.y and noise.get_noise_2d(p.x, p.y) > -0.05 and not PALACE_CLEAR.has_point(p) \
-					and _avenue_offset(p) > AVENUE_HALF + 6.0:
+					and _avenue_offset(p) > AVENUE_HALF + 6.0 and not _capitole_covers(p, 6.0):
 				var height := rng.randf_range(12.0, 20.0)
 				var card_h := (3.0 + height) / 0.977
 				var xf := Transform3D(Basis.from_scale(Vector3(card_h, card_h, 1.0)), Vector3(p.x, GROUND_Y, p.y))
@@ -2276,7 +2495,124 @@ func _build_fittings() -> void:
 	_garden.add_child(g)
 	_multi(g, "Boxes", _box(Vector3.ONE), _gmat(0, Color.WHITE, {"uplight": 0.35, "base_y": GROUND_Y, "sheen": 0.1}), _fit.boxes, _fit.box_tints)
 	_multi(g, "Lamps", _sphere(8, 4), _gmat(5, Color.WHITE, {"min_angle": 0.0025}), _fit.lamps)
+	if not (_fit.lamp_feet as Array).is_empty():
+		var kit := {}
+		var root: Node = (load(LAMP_KIT_PATH) as PackedScene).instantiate()
+		for mi: MeshInstance3D in root.find_children("*", "MeshInstance3D", true, false):
+			kit[String(mi.name)] = mi.mesh
+		root.free()
+		# Painted iron, its gilt as the basin's, its occlusion in the vertex colour (kind 0 multiplies by it); the
+		# glass glows as the globes did and stands for their light in the rays.
+		_multi(g, "LampIron", kit["iron"], _gmat(0, Color(0.035, 0.04, 0.035), {"sheen": 0.35}), _fit.lamp_feet)
+		_multi(g, "LampGilt", kit["gilt"], _gmat(0, Color(0.78, 0.6, 0.3), {"sheen": 0.8, "metal": 1.0}), _fit.lamp_feet)
+		_multi(g, "LampGlass", kit["glass"], _gmat(5, Color.WHITE, {"min_angle": 0.0025}), _fit.lamp_glass)
+		stats.lamps_modelled = (_fit.lamp_feet as Array).size()
 	_multi(g, "Trees", _sphere(8, 6), _gmat(3, Color.WHITE), _fit.trees, _fit.tree_tints)
+
+
+## A lamp on the ground at foot, its light globe_y over it: the modelled lamp (LAMP_KIT_PATH) scaled so that its
+## glass stands there, off the web; else a post (a box post_size big) and a globe globe metres across, as
+## before, both drawn by _build_fittings.
+func _lamp(foot: Vector3, globe_y: float, globe: float, post_size: Vector3, tint: Color) -> void:
+	if _lamp_kit:
+		var k := globe_y / LAMP_GLASS_Y
+		_fit.lamp_feet.append(Transform3D(Basis.from_scale(Vector3.ONE * k), foot))
+		_fit.lamp_glass.append(Transform3D(Basis.from_scale(Vector3.ONE * (k / LAMP_GLASS_SCALE)), foot + Vector3(0.0, globe_y, 0.0)))
+		return
+	_fit.boxes.append(Transform3D(Basis.from_scale(post_size), foot + Vector3(0.0, post_size.y * 0.5, 0.0)))
+	_fit.box_tints.append(tint)
+	_fit.lamps.append(Transform3D(Basis.from_scale(Vector3.ONE * globe), foot + Vector3(0.0, globe_y, 0.0)))
+
+
+## The lights that stand for the lamps while the path tracer lights the gardens (set_rt_lit): one in each
+## lamp's globe and each lantern's glass, inverse square; the galactic core's, and the sky's in a wide cone
+## from overhead, which the rays found too rarely in the sky's map for the shade to read as the painted
+## ambient did. The rasterizer never sees them; the gardens paint that light themselves there.
+const RT_LAMP_COLOUR := Color(1.0, 0.72, 0.42)  # palace_garden.gdshader's lamp_colour (sRGB)
+const RT_LAMP_ENERGY := 8.0      # a walk lamp's globe, 0.45 m across; smaller globes in proportion to their area
+const RT_LANTERN_ENERGY := 4.0   # a terrace lantern's glass
+const RT_LAMP_RANGE := 20.0
+const RT_CORE_ENERGY := 0.35    # the shaders' core_energy
+const RT_FILL_COLOUR := Color(0.64, 0.73, 1.0)  # the shaders' ambient (0.07, 0.08, 0.11), its hue, linear
+const RT_FILL_ENERGY := 0.07
+## The fork draws a light for each hit from 8 picked at random among all of them: of the 613 lamps, the
+## nearest this many to the camera are shown, a quarter of a second at a time.
+const RT_LAMPS_SHOWN := 48
+
+
+## Path traced (on), the gardens are lit by the rays from lights standing for their lamps and the galactic
+## core (their shaders' RT variants take no light of their own); off, they paint their light again. The
+## lights are made the first time. Returns how many there are.
+func set_rt_lit(on: bool) -> Dictionary:
+	_rt_lit = on
+	if on and _rt_lights == null and _garden != null:
+		_rt_lights = _build_rt_lights()
+	if _rt_lights != null:
+		_rt_lights.visible = on
+	if on and _rt_sky == null and _garden != null:
+		_rt_sky = _build_rt_sky()
+	if _rt_sky != null:
+		_rt_sky.visible = on
+	if _crowd != null:
+		_crowd.call("set_rays", on)   # the nearest people on bones, which the rays see walk
+	_rt_culled_at = -1.0e9
+	return {"on": on, "lights": _rt_lights.get_child_count() if _rt_lights != null else 0}
+
+
+func _build_rt_lights() -> Node3D:
+	var g := Node3D.new()
+	g.name = "RtLights"
+	_garden.add_child(g)
+	for n in _garden.find_children("*", "MultiMeshInstance3D", true, false):
+		var mmi := n as MultiMeshInstance3D
+		var m := mmi.material_override as ShaderMaterial
+		if m == null or mmi.multimesh == null or mmi.multimesh.mesh == null or m.shader == null \
+				or m.shader.resource_path != GARDEN_SHADER_PATH or int(m.get_shader_parameter("kind")) != 5:
+			continue
+		var box := mmi.multimesh.mesh.get_aabb()
+		var lantern := mmi.name == "LanternGlass"
+		for i in mmi.multimesh.instance_count:
+			var t: Transform3D = mmi.global_transform * mmi.multimesh.get_instance_transform(i)
+			var r := 0.5 * box.size.x * t.basis.get_scale().x
+			var l := OmniLight3D.new()
+			l.light_color = RT_LAMP_COLOUR
+			l.light_energy = RT_LANTERN_ENERGY if lantern else RT_LAMP_ENERGY * minf(1.0, pow(r / 0.225, 2.0))
+			l.light_size = r
+			l.omni_range = RT_LAMP_RANGE
+			l.omni_attenuation = 2.0
+			l.shadow_enabled = false  # the rays shadow every light; the rasterizer never draws these
+			g.add_child(l)
+			l.global_position = t * box.get_center()
+			_rt_lamps.append(l)
+	stats.rt_lights = g.get_child_count()
+	return g
+
+
+## Under the garden, so hidden with it: two directional lights reach every hit, the hall's too, where their
+## shadow rays cross the dome. With them always on, the hall took 17.4 ms of GPU at DLSS Quality against 15.7
+## for 0.2.3's scene on the same engine (RTX 0.2.4's tree 12, artpass/publish/rtx/logs/ab-engine024-*).
+func _build_rt_sky() -> Node3D:
+	var g := Node3D.new()
+	g.name = "RtSky"
+	_garden.add_child(g)
+	var core := DirectionalLight3D.new()
+	core.name = "Core"
+	core.light_color = Color(0.9, 0.8, 0.66).linear_to_srgb()  # the shaders' core_light, linear
+	core.light_energy = RT_CORE_ENERGY
+	core.light_angular_distance = 6.0
+	core.shadow_enabled = false
+	g.add_child(core)
+	var up := Vector3.UP if absf(_core.normalized().y) < 0.99 else Vector3.FORWARD
+	core.global_basis = Basis.looking_at(-_core.normalized(), up)
+	var fill := DirectionalLight3D.new()
+	fill.name = "SkyFill"
+	fill.light_color = RT_FILL_COLOUR.linear_to_srgb()
+	fill.light_energy = RT_FILL_ENERGY
+	fill.light_angular_distance = 90.0  # the widest Godot allows: a cone 45 degrees about the zenith
+	fill.shadow_enabled = false
+	g.add_child(fill)
+	fill.global_basis = Basis.looking_at(Vector3.DOWN, Vector3.FORWARD)
+	return g
 
 
 func _build_water() -> void:
@@ -2367,7 +2703,7 @@ func _build_basin_kit(g: Node3D, water: ShaderMaterial) -> bool:
 	var foot := GROUND_Y + 0.25
 	var stone := _gmat(0, Color(0.62, 0.59, 0.54), {"uplight": 0.3, "base_y": foot, "sheen": 0.08})
 	# At 0.86, 0.66, 0.3 and uplight 0.45 the rims read as orange plastic (shots/basin/live-basin-oblique2).
-	var gilt := _gmat(0, Color(0.78, 0.6, 0.3), {"uplight": 0.3, "base_y": foot, "sheen": 0.8})
+	var gilt := _gmat(0, Color(0.78, 0.6, 0.3), {"uplight": 0.3, "base_y": foot, "sheen": 0.8, "metal": 1.0})
 	_mesh(g, "BasinCoping", meshes["coping"], stone, at)
 	_mesh(g, "Fountain", meshes["fountain"], stone, at)
 	_mesh(g, "FountainGilt", meshes["gilt"], gilt, at)
@@ -2470,6 +2806,22 @@ func _build_crowd() -> void:
 	stats.crowd = (crowd.get("stats") as Dictionary).people
 
 
+## The gardens made grander (scripts/garden_grand.gd; the author, 2026-10-15: « Pour ressembler un petit peu plus
+## à Versailles ou quelque chose de plus grandiose »): statues and vases along the canal, gilded dolphins in the
+## basin. Off the web, and only when its script and every one of its files are there.
+func _build_grand() -> void:
+	stats.grand = 0
+	if _compat or not ResourceLoader.exists(GRAND_SCRIPT_PATH):
+		return
+	var grand: Node3D = load(GRAND_SCRIPT_PATH).new()
+	grand.name = "Grand"
+	if not bool(grand.call("setup", self, GROUND_Y)):
+		grand.free()
+		return
+	_garden.add_child(grand)
+	stats.grand = int((grand.get("stats") as Dictionary).pieces)
+
+
 # --- The palace, the city -----------------------------------------------------------------------
 
 func _build_palace() -> void:
@@ -2546,6 +2898,28 @@ func _build_palace() -> void:
 	_mesh(g, "Lantern", drum, _gmat(0, Color(0.8, 0.76, 0.68), {"windows": 1.0, "window_cell": Vector3(1.5, 3.0, 1.5), "window_energy": 2.4}), Transform3D(Basis(), Vector3(0, y0 + 33.5 + 15.0 + 2.5, 427)))
 
 
+## The Place du Capitole (scripts/capitole_square.gd) at _capitole_xf, the end of the avenue 60 degrees west.
+func _build_capitole() -> void:
+	if _capitole_script == null:
+		return
+	var sq := Node3D.new()
+	sq.set_script(_capitole_script)
+	sq.name = "Capitole"
+	sq.transform = _capitole_xf
+	_garden.add_child(sq)
+	if not bool(sq.call("build", 1.0 if _compat else 1.35)):
+		sq.queue_free()
+		_capitole_script = null
+		return
+	_capitole = sq
+	stats.capitole = sq.get("stats")
+
+
+## Whether p (x, z) is on the Place du Capitole's footprint, grown by margin.
+func _capitole_covers(p: Vector2, margin: float) -> bool:
+	return _capitole_script != null and bool(_capitole_script.call("covers", _capitole_xf, p, margin))
+
+
 ## The modelled palace (PALACE_GLB_PATH), each of its materials drawn by assets/palace_baked.gdshader with
 ## the baked light, the beam from its spire by assets/palace_beam.gdshader. false when it is not there.
 func _build_palace_model(g: Node3D) -> bool:
@@ -2580,6 +2954,13 @@ func _build_palace_model(g: Node3D) -> bool:
 				# The beam widens far off (palace_beam.gdshader): past its mesh's bounds.
 				mi.extra_cull_margin = 16.0
 	stats.palace_surfaces = names
+	# The author, 2026-10-16, at the telescope: « Je veux l'horloge de l'hotel de ville de retour vers le futur ».
+	if not _compat and ResourceLoader.exists(PALACE_CLOCK_SCRIPT_PATH):
+		var clock: Node3D = load(PALACE_CLOCK_SCRIPT_PATH).new()
+		clock.name = "Clock"
+		root.add_child(clock)
+		clock.call("build")
+		stats.palace_clock = clock.get("stats")
 	if _water_mat != null and ResourceLoader.exists(PALACE_MIRROR_PATH):
 		_water_mat.set_shader_parameter("palace_tex", load(PALACE_MIRROR_PATH))
 		_water_mat.set_shader_parameter("palace_rect", Vector4(-PALACE_MIRROR.x, PALACE_MIRROR.x, GROUND_Y + PALACE_MIRROR.y, GROUND_Y + PALACE_MIRROR.z))
@@ -2751,7 +3132,7 @@ func _web_state() -> void:
 
 func _process(delta: float) -> void:
 	_swing_doors(delta)
-	var show := show_always or _bay_in_view() or _wing_view()
+	var show := show_always or Time.get_ticks_msec() < rt_warm_until or _bay_in_view() or _wing_view()
 	if _garden.visible != show:
 		_garden.visible = show
 		garden_visible = show
@@ -2762,6 +3143,45 @@ func _process(delta: float) -> void:
 	var level := int(quality.get("level")) if quality != null else 0
 	if level != _level:
 		_apply_quality(level)
+	if _rt_lit and show and not _rt_lamps.is_empty():
+		_rt_cull()
+	if show:
+		_zoom_fringe()
+
+
+## The fringes' reach times the screen's zoom (FRINGE_ZOOM_MAX), in steps of a tenth.
+func _zoom_fringe() -> void:
+	var k := 1.0
+	var cam := get_viewport().get_camera_3d()
+	if cam != null:
+		if _view_fit == null or not is_instance_valid(_view_fit):
+			_view_fit = _obs.get_node_or_null("ViewFit") if _obs != null else null
+		if _view_fit != null:
+			k = clampf(1.0 / clampf(float(_view_fit.get("zoom")), 0.001, 1.0), 1.0, FRINGE_ZOOM_MAX)
+	if absf(k - _fringe_zoom) < 0.1 * _fringe_zoom and (k > 1.0 or _fringe_zoom == 1.0):
+		return
+	_fringe_zoom = k
+	stats.fringe_zoom = snappedf(k, 0.01)
+	for m: ShaderMaterial in _veg.fringe_mats:
+		m.set_shader_parameter("near_r", FRINGE_R * k)
+	for c: MultiMeshInstance3D in _veg.fringe:
+		c.visibility_range_end = FRINGE_R * k + FRINGE_CHUNK * 0.75
+
+
+## The lamps nearest the camera shown, the others hidden (RT_LAMPS_SHOWN), at most four times a second.
+func _rt_cull() -> void:
+	var now := Time.get_ticks_msec() / 1000.0
+	var cam := get_viewport().get_camera_3d()
+	if cam == null or now - _rt_culled_at < 0.25:
+		return
+	_rt_culled_at = now
+	var eye := cam.global_position
+	var near: Array = []
+	for l in _rt_lamps:
+		near.append([l.global_position.distance_squared_to(eye), l])
+	near.sort_custom(func(a: Array, b: Array) -> bool: return a[0] < b[0])
+	for i in near.size():
+		(near[i][1] as OmniLight3D).visible = i < RT_LAMPS_SHOWN
 
 
 ## Whether the camera sees out through one of the library wing's windows (library_wing.gd).

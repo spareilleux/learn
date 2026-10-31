@@ -1,5 +1,14 @@
 shader_type spatial;
+#if defined(RT)
+// NVIDIA's fork reads every shader a second time with RT defined, for its path tracer: there the gardens are
+// lit by its rays, the lamps standing as lights (scripts/palace_gardens.gd set_rt_lit; the author, 2026-10-15:
+// « On veut des arbres et jardins photorealistes »). Stock Godot and the web never define it.
+render_mode fog_disabled, cull_back;
+// A lamp's globe lets its light out: the fork's shadow rays pass through a material that sets it (rt_no_shadow.py).
+uniform bool rt_no_shadow = false;
+#else
 render_mode unshaded, fog_disabled, cull_back;
+#endif
 
 // The palace gardens of Trantor seen through the hall's two glazed bays (scripts/palace_gardens.gd):
 // the terrace outside, the parterre below it, the trees, the water, the palace and the domed city
@@ -18,6 +27,8 @@ render_mode unshaded, fog_disabled, cull_back;
 uniform int kind = 0;
 uniform vec3 albedo : source_color = vec3(0.6, 0.57, 0.52);
 uniform float sheen = 0.05;
+// For the path tracer only: gilt is metal (the rasterizer draws its sheen as a highlight instead).
+uniform float metal = 0.0;
 uniform float windows = 0.0;      // the share of lit windows
 uniform vec3 window_colour : source_color = vec3(1.0, 0.76, 0.46);
 uniform float window_energy = 1.4;
@@ -50,6 +61,10 @@ uniform float terrace_reach = 3.5;  // metres: a terrace lamp's pool
 // with no joints drawn.
 uniform sampler2D detail_tex : hint_default_white, filter_linear_mipmap_anisotropic, repeat_enable;
 uniform float stone_detail = 0.0;
+// A turned piece (its MultiMesh's INSTANCE_CUSTOM.r 1: the finer balusters, scripts/palace_gardens.gd
+// FINE_BALUSTER_PATH): the detail wrapped round its own axis and up it, each piece its own window. Told by the
+// instance and not by a material of its own: NVIDIA's fork drew a copy of the terrace's stone material, the same
+// in every uniform, browner than the stone itself under its path tracer (artpass/gardens/balusters).
 uniform vec2 ashlar = vec2(1.2, 0.5);   // the wall's blocks: length and course height, metres
 uniform float wall_top = -0.35;
 uniform vec3 haze = vec3(0.016, 0.02, 0.036);
@@ -79,6 +94,7 @@ uniform sampler2D parterre_ao : hint_default_white, filter_linear_mipmap, repeat
 uniform vec3 tile_span = vec3(1.6, 0.7, 2.4);       // metres a tile spans: walk, brick, lawn
 uniform vec3 walk_tint = vec3(0.62, 0.66, 0.72);    // linear, times the tile: the gravel's albedo
 uniform vec3 brick_tint = vec3(0.62);
+uniform float brick_macro = 0.0;     // the crushed brick raked and worn unevenly, in patches some 4 m across (0: even)
 uniform vec3 lawn_tint = vec3(0.8);
 uniform vec2 bed = vec2(0.2, 1.75);                 // the bed's lines of box, in from the compartment's edge
 // The basin's fountain lit from under the water (kind 4; make_basin.py): its middle at (x, z), six jets on a
@@ -106,6 +122,7 @@ varying vec3 v_origin;
 varying vec3 v_wnorm;
 varying vec3 v_local;
 varying vec4 v_tint;
+varying float v_turned;
 
 void vertex() {
 	if (min_angle > 0.0) {
@@ -119,6 +136,7 @@ void vertex() {
 	v_wnorm = normalize(MODEL_NORMAL_MATRIX * NORMAL);
 	v_local = VERTEX;
 	v_tint = COLOR;
+	v_turned = INSTANCE_CUSTOM.r;
 }
 
 float hash12(vec2 p) {
@@ -209,6 +227,9 @@ vec3 ground_tile(sampler2D t, vec2 p, float span) {
 vec3 parterre_ground(vec2 p, float m_px) {
 	vec3 walk = ground_tile(walk_tex, p, tile_span.x) * walk_tint;
 	vec3 brick = ground_tile(brick_tex, p, tile_span.y) * brick_tint;
+	// A finer tile (palace_gardens.gd off the web) brings its slow changes of brightness closer together: the
+	// bed's own, broader, so that it does not read as one flat red from the terrace.
+	brick *= 1.0 + brick_macro * (noise2(p * 0.23 + 3.3) * 0.7 + noise2(p * 0.61 - 1.9) * 0.3 - 0.5);
 	float ci = floor((p.y - 28.0) / 32.0);
 	vec2 q = vec2(abs(p.x) - 36.0, p.y - (44.0 + 32.0 * ci));
 	bool notched = ci == 1.0 || ci == 2.0;
@@ -263,7 +284,15 @@ void fragment() {
 		// Stone and bronze boxes of several colours share one MultiMesh, each tinted (linear, white
 		// without a colour).
 		a *= v_tint.rgb;
-		if (stone_detail > 0.0) {
+		if (stone_detail > 0.0 && v_turned > 0.5) {
+			// Mapped as the walls are, a baluster's mouldings crossed from the top faces' mapping to the sides'
+			// and back, and drew rings like a wood's grain (artpass/gardens/balusters). Round its axis instead,
+			// mirrored (no seam), 7 cm out, in metres; the image spans 2.4 m.
+			vec2 s = vec2(abs(atan(v_local.z, v_local.x)) * 0.07, v_local.y) / 2.4;
+			vec2 win = vec2(0.23, 0.36);
+			vec2 uv = s + vec2(hash12(v_origin.xz * 7.13 + 3.1), hash12(v_origin.xz * 7.13 + 7.7)) * (1.0 - win);
+			a *= mix(vec3(1.0), textureGrad(detail_tex, uv, dFdx(s), dFdy(s)).rgb * 2.0, stone_detail);
+		} else if (stone_detail > 0.0) {
 			// On top faces, blocks laid flat; on the others, round the hall (along the circle) and up.
 			vec3 an = abs(n);
 			bool top = an.y > 0.7;
@@ -364,6 +393,7 @@ void fragment() {
 			col = sky * fres * 2.0 + wc * band * 0.25 * fres * 4.0 + a * 0.15;
 		}
 		col += lc * lamps(v_wpos) * lamp_energy * 0.25;
+		vec3 pools = vec3(0.0);
 		if (jet_light.w > 0.0) {
 			// Pools of warm light round the fountain's foot and round each jet's, broken by the ripples.
 			vec2 d0 = v_wpos.xz - jet_light.xy;
@@ -371,7 +401,8 @@ void fragment() {
 			float aj = 1.0471976 * floor(atan(d0.y, d0.x) / 1.0471976 + 0.5);
 			vec2 dj = v_wpos.xz - (jet_light.xy + jet_light.z * vec2(cos(aj), sin(aj)));
 			float g = exp(-max(r - 3.2, 0.0) * max(r - 3.2, 0.0) / 6.0) * 0.8 + exp(-dot(dj, dj) / 1.5);
-			col += lc * jet_light.w * g * (0.7 + 0.6 * rip.x);
+			pools = lc * jet_light.w * g * (0.7 + 0.6 * rip.x);
+			col += pools;
 		}
 		if (show_mirror_k > 0.0) {
 			// The show's jets in the water, drawn out towards the eye by finer ripples than the palace's, which
@@ -385,9 +416,21 @@ void fragment() {
 			col += jets * show_mirror_k * (0.1 + 0.9 * fres);
 		}
 		float fade = exp(-dist / haze_distance);
+#if defined(RT)
+		{
+			// Dark, smooth water under its ripples: the rays mirror the palace, the lamps and the sky; the
+			// fountain's lights glow from under it.
+			ALBEDO = a * 0.15 * fade;
+			EMISSION = pools * fade + haze * (1.0 - fade);
+			NORMAL = normalize((VIEW_MATRIX * vec4(nn, 0.0)).xyz);
+			ROUGHNESS = 0.04;
+			SPECULAR = 0.35;
+		}
+#else
 		ALBEDO = mix(haze, col, fade);
 #if CURRENT_RENDERER == RENDERER_COMPATIBILITY
 		ALBEDO = pow(max(ALBEDO, vec3(0.0)), vec3(1.0 / 2.2));
+#endif
 #endif
 	} else if (kind == 5) {
 		float fl = 1.0;
@@ -395,19 +438,44 @@ void fragment() {
 			float ph = hash12(floor(v_origin.xz * 4.0)) * 40.0;
 			fl += flicker * (sin(TIME * 7.0 + ph) * 0.6 + sin(TIME * 17.0 + ph * 1.7) * 0.4);
 		}
+#if defined(RT)
+		ALBEDO = vec3(0.0);
+		EMISSION = lc * lamp_energy * 3.0 * fl;
+#else
 		ALBEDO = lc * lamp_energy * 3.0 * fl;
 #if CURRENT_RENDERER == RENDERER_COMPATIBILITY
 		ALBEDO = pow(max(ALBEDO, vec3(0.0)), vec3(1.0 / 2.2));
 #endif
+#endif
+	}
+	// A turned piece, modelled by its light: the floodlights from the parterre stronger on its outer side, the
+	// nearest terrace lantern's light turning round it, and (rasterized) darker at its foot, under the coping
+	// and in its narrow parts. Lit evenly all round, the balusters read as flat cut-outs; lit from one side
+	// alone, greyer than the coping beside them (artpass/gardens/balusters): about as much light on the whole.
+	float flood_k = 1.0;
+	float occ = 1.0;
+	if (kind == 0 && v_turned > 0.5) {
+#if !defined(RT)
+		// (Not for the path tracer: its rays model the piece themselves, and the floodlights' glow stays the
+		// walls'.)
+		flood_k = clamp(0.8 + 0.5 * dot(n, normalize(vec3(v_wpos.x, 0.0, v_wpos.z))), 0.3, 1.3);
+#endif
+		float al = lamp_arc * floor(atan(v_wpos.z, v_wpos.x) / lamp_arc + 0.5);
+		vec3 lamp_at = vec3(cos(al) * terrace_r, terrace_y, sin(al) * terrace_r);
+		lamp_k = clamp(0.75 + 0.55 * dot(n, normalize(lamp_at - v_wpos)), 0.2, 1.3);
+		occ = mix(0.55, 1.0, smoothstep(0.0, 0.1, v_local.y)) * mix(0.7, 1.0, smoothstep(0.82, 0.66, v_local.y))
+			* mix(0.75, 1.0, smoothstep(0.04, 0.085, length(v_local.xz)));
 	}
 	if (kind != 4 && kind != 5) {
-		vec3 col = a * (ambient + core_light * core_energy * max(dot(n, l), 0.0) + lc * lamps(v_wpos) * lamp_energy * lamp_k);
+		vec3 col = a * (ambient * occ + core_light * core_energy * max(dot(n, l), 0.0) + lc * lamps(v_wpos) * lamp_energy * lamp_k * occ);
 		vec3 h = normalize(l + v);
 		col += core_light * core_energy * sh * pow(max(dot(n, h), 0.0), 32.0);
+		vec3 flood = vec3(0.0);
 		if (uplight > 0.0) {
 			// Floodlit from its foot: warm, fading up the facade.
 			float up = exp(-max(v_wpos.y - base_y, 0.0) / 14.0);
-			col += a * lc * uplight * up * (1.0 - smoothstep(0.7, 0.95, abs(n.y)));
+			flood = a * lc * uplight * up * (1.0 - smoothstep(0.7, 0.95, abs(n.y))) * flood_k;
+			col += flood;
 		}
 		if (windows > 0.0) {
 			// Rows of windows on the facades, most of them lit; far off, their average glow.
@@ -435,9 +503,22 @@ void fragment() {
 			glow = wc * window_energy * side * mix(share * 0.2, lit * pane, near);
 		}
 		float fade = exp(-dist / haze_distance);
+#if defined(RT)
+		{
+			// What the surface is made of, for the path tracer to light: its colour, its normal (in view
+			// space, as the rasterizer's NORMAL), how rough; the windows and the floodlights glow.
+			ALBEDO = min(a, vec3(0.9)) * fade;
+			EMISSION = (flood + glow) * mix(0.3, 1.0, fade) + haze * (1.0 - fade);
+			NORMAL = normalize((VIEW_MATRIX * vec4(n, 0.0)).xyz);
+			ROUGHNESS = mix(kind == 3 ? 0.6 : (kind == 0 ? 0.7 : 0.85), 0.3, metal);
+			METALLIC = metal;
+			SPECULAR = 0.5;
+		}
+#else
 		ALBEDO = mix(haze, col, fade) + glow * mix(0.3, 1.0, fade);
 #if CURRENT_RENDERER == RENDERER_COMPATIBILITY
 		ALBEDO = pow(max(ALBEDO, vec3(0.0)), vec3(1.0 / 2.2));
+#endif
 #endif
 	}
 }

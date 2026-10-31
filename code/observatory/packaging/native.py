@@ -47,12 +47,12 @@ def sub_once(pattern, repl, text, what):
     return new
 
 
-def presets(exclude, version, templates):
+def presets(include, exclude, version, templates):
     def tpl(name):
         return os.path.join(templates, name).replace('\\', '/') if templates else ''
 
     common = ('runnable=false\nadvanced_options=false\ndedicated_server=false\ncustom_features=""\n'
-              'export_filter="all_resources"\ninclude_filter=""\n'
+              f'export_filter="all_resources"\ninclude_filter="{include}"\n'
               f'exclude_filter="{exclude}"\n'
               'encryption_include_filters=""\nencryption_exclude_filters=""\nencrypt_pck=false\n'
               'encrypt_directory=false\nscript_export_mode=2\n')
@@ -141,8 +141,11 @@ def prepare(project, tree, templates):
     text = sub_once(r'^\[rendering\]$', '[rendering]\n\ntextures/vram_compression/import_etc2_astc=true', text, 'rendering section')
     write(path, text)
     web = read(os.path.join(project, 'export_presets.cfg'))
+    # The web preset's filters: what it leaves out, and the files that are not resources but are read at run time
+    # (the courses' texts, scripts/holo_tree.gd).
+    include = re.search(r'^include_filter="([^"]*)"$', web, re.M).group(1)
     exclude = re.search(r'^exclude_filter="([^"]*)"$', web, re.M).group(1)
-    write(os.path.join(tree, 'export_presets.cfg'), presets(exclude, version, templates))
+    write(os.path.join(tree, 'export_presets.cfg'), presets(include, exclude, version, templates))
     print(f'prepared {tree}: scene version {version}, Forward+, presets Windows Desktop, Linux, macOS'
           + (f', templates from {templates}' if templates else ''))
 

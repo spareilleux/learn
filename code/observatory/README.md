@@ -4,7 +4,7 @@ The [Observatory](https://spareilleux.github.io/learn/observatory/) is a Godot 4
 
 | Path | What it is |
 |---|---|
-| `project/` | The Godot project of the published web build, version 43 of the scene: `project.godot`, `main.tscn`, `scripts/` and `assets/`. It holds what that build holds and nothing more: the web preset's `exclude_filter` (the Prime Radiant, the unused steel portal, the metal gilding's shader) applies to this copy too. |
+| `project/` | The Godot project of the published web build, version 50 of the scene: `project.godot`, `main.tscn`, `scripts/` and `assets/`. It holds what that build holds and nothing more: the web preset's `exclude_filter` (the Prime Radiant, the unused steel portal, the metal gilding's shader) applies to this copy too. |
 | `packaging/native.py` | Prepares a desktop build tree from `project/`: Forward+, the name "Observatory", export presets for Windows, Linux and macOS. It also writes the notices beside each export. |
 | `packaging/windows/` | The `.msi` (WiX Toolset 5.0.2, per user, no administrator rights), and its install, update and uninstall test. |
 | `packaging/linux/` | The `.deb` and the `.rpm`, their menu entry, and their install, run and remove test. |
@@ -30,7 +30,7 @@ cd ../build-tree
 godot --headless --import
 godot --headless --export-release "Linux" out/linux/observatory.x86_64
 python ../observatory/packaging/native.py stage out/linux
-bash ../observatory/packaging/linux/build-linux.sh out/linux 43.0.0 dist
+bash ../observatory/packaging/linux/build-linux.sh out/linux 50.0.0 dist
 ```
 
 ## Where the scene is edited
