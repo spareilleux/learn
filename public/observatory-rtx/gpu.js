@@ -8,13 +8,13 @@
 (function () {
   'use strict';
 
-  var VERSION = '0.3.0';  // the Windows program
-  var NATIVE = '0.2.1';   // the Linux and macOS packages: 0.2.2 changed only the Windows program's Streamline, 0.2.3 its glass, 0.2.4 its path-traced gardens, 0.2.5 its Capitole, scooter and toys, 0.3.0 its shelves and Streamline 2.14.16
+  var VERSION = '0.3.1';  // the Windows program
+  var NATIVE = '0.2.1';   // the Linux and macOS packages: 0.2.2 changed only the Windows program's Streamline, 0.2.3 its glass, 0.2.4 its path-traced gardens, 0.2.5 its Capitole, scooter and toys, 0.3.0 its shelves and Streamline 2.14.16, 0.3.1 its updater
   var LINKS = {
-    rtx: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.3.0/Observatory-RTX-0.3.0-win64.msi',
+    rtx: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.3.1/Observatory-RTX-0.3.1-win64.msi',
     linux: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-0.2.1-linux-x86_64.tar.gz',
     mac: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-0.2.1-macos.zip',
-    release: 'https://github.com/spareilleux/learn/releases/tag/observatory-rtx-0.3.0',
+    release: 'https://github.com/spareilleux/learn/releases/tag/observatory-rtx-0.3.1',
     nvidia: 'https://www.nvidia.com/en-us/geforce/technologies/dlss/',
     web: '../demos/observatory/'  // the page's own link replaces it (data-web)
   };
