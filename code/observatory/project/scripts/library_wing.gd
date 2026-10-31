@@ -11,8 +11,16 @@ extends Node3D
 ## push_out(). The wing's own lights reach only its own meshes (render layer 13), so the hall is lit as it
 ## was. Everything is built in the wing's frame: x across, y up, z out along the axis from the hall
 ## wall's inner face. --no-wing (?wing=0) leaves the hall as it was.
+## Two wings, =O= (the author, 2026-10-16: « j'ai commandé une aile symétrique "=O=" on a que "=O" comprends
+## tu? »): the node extra_views.gd makes builds bay 10's and, as its child Twin, the same wing off bay 13,
+## bay 10 mirrored on the gardens' axis (90 degrees, between the lift's bay and its neighbour, on which the
+## gardens' glazed bays 2 and 5 are mirrored too). The wing is symmetric about its own axis, so the twin is
+## its mirror image. The others ask the first node, which answers for both (contains, walk, fly, push_out,
+## window_in_view). The court and the park round them are the first's alone: they already ring the hall's
+## half behind it. --one-wing (?wing=1) builds bay 10's alone.
 
 const WING_BAY := 10
+const TWIN_BAY := 13       # (7 - WING_BAY) mod 16: bay b's middle at 90 - x degrees mirrors b's at 90 + x
 const STONE_SHADER_PATH := "res://assets/wing_stone.gdshader"
 const INTERIOR_SHADER_PATH := "res://assets/wing_interior.gdshader"
 const CARPET_SHADER_PATH := "res://assets/wing_carpet.gdshader"
@@ -90,6 +98,9 @@ var _hall_out := false      # under Compatibility, the hall's lights faded out (
 var _hall_faded := []       # [light, fade enabled, begin, length, cull mask] as they were
 var _book_full: Mesh
 var _book_low: Mesh
+var _bal_mmis: Array[MultiMeshInstance3D] = []  # off the web, the finer balusters, in stretches
+var _bal_full: Mesh
+var _bal_low: Mesh
 var _solids: Array[Rect2] = []   # what the walking body walks round, in the wing's (x, z)
 var _interior: Node3D
 var _exterior: Node3D
@@ -102,6 +113,11 @@ var _compat := false
 var _chandeliers: Array[OmniLight3D] = []
 var _portal: Array[Vector3] = []   # points round the portal, in the wing's frame
 var _time := 0.0
+## The bay this one stands off: WING_BAY, or TWIN_BAY for the twin, which the first sets before it is ready.
+var bay := WING_BAY
+## The mirrored wing, the first's child; null in the twin itself and with --one-wing.
+var twin: Node3D
+var _probes: Array[ReflectionProbe] = []
 
 
 ## Whether the wing is wanted: not with --no-wing (?wing=0), nor without the gardens, which open its bay.
@@ -116,6 +132,20 @@ static func wanted() -> bool:
 	return true
 
 
+## The bays the wings open: none when the wing is not wanted, bay 10's alone with --one-wing (?wing=1).
+static func bays() -> Array[int]:
+	var out: Array[int] = []
+	if not wanted():
+		return out
+	out.append(WING_BAY)
+	var one := OS.get_cmdline_user_args().has("--one-wing")
+	if OS.has_feature("web"):
+		one = one or str(JavaScriptBridge.eval("new URLSearchParams(location.search).get('wing') || ''", true)) == "1"
+	if not one:
+		out.append(TWIN_BAY)
+	return out
+
+
 ## observatory: the hall, for its dimensions and materials; core: the galactic core's direction.
 func configure(observatory: Node3D, core: Vector3) -> void:
 	_obs = observatory
@@ -127,7 +157,7 @@ func _ready() -> void:
 	var t0 := Time.get_ticks_usec()
 	_rng.seed = 7319
 	_outer = float(_obs.get("outer_radius"))
-	_angle = TAU * (WING_BAY + 0.5) / int(_obs.get("bay_count"))
+	_angle = TAU * (bay + 0.5) / int(_obs.get("bay_count"))
 	var u := Vector3(cos(_angle), 0.0, sin(_angle))
 	_frame = Transform3D(Basis(Vector3(u.z, 0.0, -u.x), Vector3.UP, u), u * _outer)
 	_inv = _frame.affine_inverse()
@@ -146,7 +176,8 @@ func _ready() -> void:
 	_build_end_walls()
 	_build_shell()
 	_build_terrace()
-	_build_grounds()
+	if bay == WING_BAY:
+		_build_grounds()
 	_build_busts()
 	_build_mirrors()
 	_build_chandeliers()
@@ -154,7 +185,17 @@ func _ready() -> void:
 	_build_probes()
 	_flush()
 	stats.solids = _solids.size()
+	stats.bay = bay
 	stats.build_ms = snappedf(float(Time.get_ticks_usec() - t0) / 1000.0, 0.1)
+	if bay == WING_BAY and bays().has(TWIN_BAY):
+		var t1 := Time.get_ticks_usec()
+		twin = (get_script() as GDScript).new()
+		twin.name = "Twin"
+		twin.set("bay", TWIN_BAY)
+		twin.call("configure", _obs, _core)
+		add_child(twin)
+		stats.twin = twin.get("stats")
+		stats.twin_build_ms = snappedf(float(Time.get_ticks_usec() - t1) / 1000.0, 0.1)
 
 
 func _group(node_name: String, xf: Transform3D) -> Node3D:
@@ -1077,6 +1118,22 @@ func _build_terrace() -> void:
 		outline.append(Vector2(x, sqrt(drum * drum - x * x) - _outer))
 	outline.append(Vector2(hw, end_t))
 	outline.append(Vector2(-hw, end_t))
+	# With the twin (=O=), the two terraces overlap by the hall, where their sides cross 24.7 m from its
+	# middle: each keeps its own side of the gardens' axis (_kept), and they make one terrace there, its
+	# inner balustrades meeting at a pedestal on the axis (bay 10's).
+	var keep := _side_kept()
+	if keep != 0.0:
+		var half := PackedVector2Array()
+		for c: Vector2 in [Vector2(0.0, -2000.0), Vector2(keep * 2000.0, -2000.0), Vector2(keep * 2000.0, 2000.0), Vector2(0.0, 2000.0)]:
+			var l := _inv * Vector3(c.x, 0.0, c.y)
+			half.append(Vector2(l.x, l.z))
+		var cut := Geometry2D.intersect_polygons(outline, half)
+		var area := 0.0
+		for poly: PackedVector2Array in cut:
+			var a := absf(_area(poly))
+			if a > area:
+				area = a
+				outline = poly
 	var tri := Geometry2D.triangulate_polygon(outline)
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -1089,21 +1146,30 @@ func _build_terrace() -> void:
 	_mesh_part(o, "paving", st.commit())
 	# The retaining wall, and a coping on it under the balustrade.
 	var wall_lo := near - 0.2
+	# The side towards the twin, whose walls start where the other terrace ends (0 without the twin).
+	var inner := 0.0
+	if keep != 0.0:
+		inner = -1.0 if not _kept(Vector3(-hw, 0.0, 0.0)) else 1.0
 	for s: float in [-1.0, 1.0]:
 		var sx := func(x0: float, x1: float) -> Vector2: return Vector2(minf(s * x0, s * x1), maxf(s * x0, s * x1))
+		var lo := wall_lo if s != inner else minf(_cut_z(s * (hw - 0.15)), _cut_z(s * (hw + 0.9)))
 		var wx: Vector2 = sx.call(hw, hw + 0.6)
-		_box("retaining", Vector3(wx.x, PODIUM_Y - 0.4, wall_lo), Vector3(wx.y, -0.02, end_t + 0.6), o)
+		_box("retaining", Vector3(wx.x, PODIUM_Y - 0.4, lo), Vector3(wx.y, -0.02, end_t + 0.6), o)
 		var cx: Vector2 = sx.call(hw - 0.15, hw + 0.7)
-		_box("retaining", Vector3(cx.x, -0.3, wall_lo), Vector3(cx.y, -0.02, end_t + 0.7), o)
+		_box("retaining", Vector3(cx.x, -0.3, lo), Vector3(cx.y, -0.02, end_t + 0.7), o)
 	_box("retaining", Vector3(-hw - 0.6, PODIUM_Y - 0.4, end_t), Vector3(hw + 0.6, -0.02, end_t + 0.6), o)
 	for s: float in [-1.0, 1.0]:
 		var sx := func(x0: float, x1: float) -> Vector2: return Vector2(minf(s * x0, s * x1), maxf(s * x0, s * x1))
+		var lo := wall_lo if s != inner else minf(_cut_z(s * (hw - 0.15)), _cut_z(s * (hw + 0.9)))
 		var pc: Vector2 = sx.call(hw + 0.6, hw + 0.85)
-		_box("retaining", Vector3(pc.x, PODIUM_Y - 0.4, wall_lo), Vector3(pc.y, PODIUM_Y + 0.9, end_t + 0.85), o)
+		_box("retaining", Vector3(pc.x, PODIUM_Y - 0.4, lo), Vector3(pc.y, PODIUM_Y + 0.9, end_t + 0.85), o)
 		var sc: Vector2 = sx.call(hw + 0.6, hw + 0.72)
-		_box("retaining", Vector3(sc.x, -0.62, wall_lo), Vector3(sc.y, -0.48, end_t + 0.72), o)
+		_box("retaining", Vector3(sc.x, -0.62, lo), Vector3(sc.y, -0.48, end_t + 0.72), o)
 		var zp := 2.0
 		while zp < end_t - 1.0:
+			if zp < lo + 0.6:
+				zp += 9.6
+				continue
 			var pl: Vector2 = sx.call(hw + 0.6, hw + 0.9)
 			_box("retaining", Vector3(pl.x, PODIUM_Y + 0.9, zp - 0.6), Vector3(pl.y, -0.62, zp + 0.6), o)
 			zp += 9.6
@@ -1129,6 +1195,24 @@ func _build_terrace() -> void:
 	posts.append(Vector3(rail, 0.0, end_t - 0.25))
 	for x: float in [-4.8, 4.8]:
 		posts.append(Vector3(x, 0.0, end_t - 0.25))
+	# With the twin: the inner run from where it leaves the other terrace, the posts on it past there, and
+	# where the two inner runs meet a pedestal of bay 10's, which the twin's balusters keep clear of too.
+	var shared: Array[Vector3] = []
+	if keep != 0.0:
+		var apex := Vector3(inner * rail, 0.0, _cut_z(inner * rail))
+		for run: Array in runs:
+			var a: Vector3 = run[0]
+			if absf(a.x - inner * rail) < 0.01 and a.z < apex.z:
+				run[0] = apex
+		var kept_posts: Array[Vector3] = []
+		for p in posts:
+			if absf(p.x - inner * rail) > 0.01 or p.z > apex.z + 0.6:
+				kept_posts.append(p)
+		posts = kept_posts
+		if bay == WING_BAY:
+			posts.append(apex)
+		else:
+			shared.append(apex)
 	var bal_xf: Array[Transform3D] = []
 	for run: Array in runs:
 		var a: Vector3 = run[0]
@@ -1147,7 +1231,7 @@ func _build_terrace() -> void:
 		for i in n:
 			var p := a.lerp(b, (i + 0.5) / n)
 			var clear := true
-			for q: Vector3 in posts:
+			for q: Vector3 in posts + shared:
 				if p.distance_to(q) < 0.42:
 					clear = false
 			if clear:
@@ -1160,7 +1244,21 @@ func _build_terrace() -> void:
 	var bal_mat: Material = _mat.retaining
 	if from != null and from.get_node_or_null("Balusters") != null:
 		bal_mat = (from.get_node("Balusters") as GeometryInstance3D).material_override
-	if ResourceLoader.exists(kit % "baluster"):
+	# Off the web, the gardens' finer baluster (palace_gardens.gd FINE_BALUSTER_PATH), in stretches of 20 (6 m)
+	# so that Godot draws the far ones at the import's lighter levels; its light version from quality level 3.
+	# Each a turned piece to the gardens' stone (custom data 1; assets/palace_garden.gdshader v_turned). The meshes
+	# the gardens use, uncompressed so that the fork's path tracer keeps the custom data (palace_gardens.gd
+	# fine_baluster).
+	var fine := "res://assets/garden_baluster_fine%s.obj"
+	if not _compat and ResourceLoader.exists(fine % "") and ResourceLoader.exists(fine % "_low"):
+		var gardens_gd: Script = load("res://scripts/palace_gardens.gd")
+		_bal_full = gardens_gd.call("fine_baluster", "")
+		_bal_low = gardens_gd.call("fine_baluster", "_low")
+		for i in range(0, bal_xf.size(), 20):
+			_bal_mmis.append(_kit_multi("Balusters" if i == 0 else "Balusters%d" % (i / 20), _bal_full, bal_mat,
+				bal_xf.slice(i, i + 20), Color(1.0, 0.0, 0.0, 0.0)))
+		stats.fine_balusters = true
+	elif ResourceLoader.exists(kit % "baluster"):
 		_kit_multi("Balusters", load(kit % "baluster") as Mesh, bal_mat, bal_xf)
 	var post_xf: Array[Transform3D] = []
 	var lamp_xf: Array[Transform3D] = []
@@ -1182,14 +1280,50 @@ func _build_terrace() -> void:
 	stats.balusters = bal_xf.size()
 
 
-## The gardens' kit, as a MultiMesh among the grounds (world transforms).
-func _kit_multi(node_name: String, mesh: Mesh, mat: Material, xforms: Array[Transform3D]) -> void:
+## Which side of the gardens' axis this wing's terrace keeps, with the twin: -1 (world x <= 0, bay 10's), 1
+## (the twin's); 0 without it, the whole terrace.
+func _side_kept() -> float:
+	if not bays().has(TWIN_BAY):
+		return 0.0
+	return -1.0 if bay == WING_BAY else 1.0
+
+
+## Whether p (the wing's frame) is on the side this terrace keeps.
+func _kept(p: Vector3) -> bool:
+	var keep := _side_kept()
+	return keep == 0.0 or (_frame * p).x * keep >= -0.001
+
+
+## Along the line x (the wing's frame), the z where it crosses the gardens' axis (world x = 0).
+func _cut_z(x: float) -> float:
+	var b := _frame.basis
+	if absf(b.z.x) < 1e-6:
+		return -INF
+	return -(b.x.x * x + _frame.origin.x) / b.z.x
+
+
+static func _area(poly: PackedVector2Array) -> float:
+	var a := 0.0
+	for i in poly.size():
+		var p := poly[i]
+		var q := poly[(i + 1) % poly.size()]
+		a += p.x * q.y - q.x * p.y
+	return a * 0.5
+
+
+## The gardens' kit, as a MultiMesh among the grounds (world transforms); custom, when not zero, every
+## instance's custom data.
+func _kit_multi(node_name: String, mesh: Mesh, mat: Material, xforms: Array[Transform3D],
+		custom := Color(0.0, 0.0, 0.0, 0.0)) -> MultiMeshInstance3D:
 	var mm := MultiMesh.new()
 	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_custom_data = custom != Color(0.0, 0.0, 0.0, 0.0)
 	mm.mesh = mesh
 	mm.instance_count = xforms.size()
 	for i in xforms.size():
 		mm.set_instance_transform(i, xforms[i])
+		if mm.use_custom_data:
+			mm.set_instance_custom_data(i, custom)
 	var mmi := MultiMeshInstance3D.new()
 	mmi.name = node_name
 	mmi.multimesh = mm
@@ -1197,6 +1331,7 @@ func _kit_multi(node_name: String, mesh: Mesh, mat: Material, xforms: Array[Tran
 	mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	mmi.gi_mode = GeometryInstance3D.GI_MODE_DISABLED
 	_grounds.add_child(mmi)
+	return mmi
 
 
 func _add(parent: Node3D, node_name: String, mesh: Mesh, mat: Material, xf: Transform3D) -> MeshInstance3D:
@@ -1467,7 +1602,16 @@ func _build_probes() -> void:
 			# vestibule beside it). The glasses are left out of the captures there: each shows the wall
 			# across, its lanterns and the nave.
 			probe.cull_mask = 0xFFFFF & ~MIRROR_LAYER
-		_interior.add_child(probe)
+		# The reflection atlas holds 4 probes (project.godot reflection_count), and with the hall's and the
+		# steel box's, two wings' 4 more crashed Forward+ ("Reflection probe atlas index invalid", then a null
+		# framebuffer, 2026-10-16). A hidden probe keeps its slot: it is given back only when the probe leaves
+		# the tree (renderer_scene_cull.cpp instance_set_scenario), and a full atlas takes none from another
+		# (light_storage.cpp's least-used search starts at 0 and finds nothing). So the first puts in the tree
+		# the probes of the wing nearer the camera alone (_process); the twin's wait out of it. A probe put back
+		# has no slot, takes a free one and is taken anew (reflection_probe_instance_needs_redraw).
+		if bay == WING_BAY:
+			_interior.add_child(probe)
+		_probes.append(probe)
 	stats.probes = 2
 
 
@@ -1522,6 +1666,12 @@ func local(p: Vector3) -> Vector3:
 ## Whether p (world) is inside the wing, past the hall's wall: extra_views.gd does not count it as
 ## outside, and the gardens show through its windows.
 func contains(p: Vector3) -> bool:
+	return (twin != null and bool(twin.call("contains", p))) or _inside(p)
+
+
+## Whether p (world) is inside this wing, not its twin: what this one's _process fades the hall's lights by,
+## so that the two never take the hall's lights' states one after the other.
+func _inside(p: Vector3) -> bool:
 	var q := _inv * p
 	return q.z > 0.05 and q.z < _line_z(BAYS) + 0.1 and absf(q.x) < WALL_IN + 0.1 and q.y > -1.0 and q.y < ENTABLATURE + VAULT_B + 0.5
 
@@ -1534,6 +1684,10 @@ func far_radius() -> float:
 ## For the hall's walking body (palace_gardens.gd bay_walk): where a body of radius r going to p (x,
 ## z) stays, in the portal, the vestibule or the nave; Vector2.INF when p is not the wing's.
 func walk(p: Vector2, r: float) -> Vector2:
+	if twin != null:
+		var at: Vector2 = twin.call("walk", p, r)
+		if at != Vector2.INF:
+			return at
 	var q3 := _inv * Vector3(p.x, 0.0, p.y)
 	var q := Vector2(q3.x, q3.z)
 	var hw := PORTAL_W * 0.5 - 0.1
@@ -1562,6 +1716,10 @@ func walk(p: Vector2, r: float) -> Vector2:
 ## head the wall stops it on the side it came from: in the hall the hall's own bound, in the nave the
 ## near end wall.
 func fly(p: Vector3, r: float) -> Vector3:
+	if twin != null:
+		var at: Vector3 = twin.call("fly", p, r)
+		if at != Vector3.INF:
+			return at
 	var q := _inv * p
 	var hw := PORTAL_W * 0.5 - 0.1
 	if q.z < -2.0 or q.z > _line_z(BAYS) + 2.0 or absf(q.x) > WALL_OUT + 2.0:
@@ -1671,6 +1829,8 @@ func _portal_seen(cam: Camera3D) -> bool:
 func push_out(p: Vector2, r: float, y: float) -> Vector2:
 	if y > PODIUM_Y + 1.0:
 		return p
+	if twin != null:
+		p = twin.call("push_out", p, r, y)
 	var q3 := _inv * Vector3(p.x, 0.0, p.y)
 	var end_t := _line_z(BAYS) + END_T + TERRACE_END
 	var b := Rect2(-TERRACE_HW - 0.7, -8.0, 2.0 * (TERRACE_HW + 0.7), end_t + 8.7)
@@ -1681,14 +1841,41 @@ func push_out(p: Vector2, r: float, y: float) -> Vector2:
 	return Vector2(w.x, w.z)
 
 
+## For the dice and dominoes (scripts/toy_physics.gd): this wing's solids and its twin's, as boxes, each
+## [world transform, size]: the floor from the portal to the end wall, the vestibule's sides and the top of
+## its vault, the nave's cases to the upper ones with the gallery's floor over the alcoves, the piers and the
+## busts (what the walking body walks round, _solids), the end wall, and a lid over the vault.
+func toy_boxes() -> Array:
+	var out := []
+	var end := _line_z(BAYS)
+	var add := func(lo: Vector3, hi: Vector3) -> void:
+		out.append([Transform3D(_frame.basis, _frame * ((lo + hi) * 0.5)), hi - lo])
+	add.call(Vector3(-WALL_OUT, -0.5, RECESS_Z), Vector3(WALL_OUT, 0.0, end + END_T))
+	for s: float in [-1.0, 1.0]:
+		add.call(Vector3(minf(s * VEST_HW, s * WALL_OUT), 0.0, VEST_Z0), Vector3(maxf(s * VEST_HW, s * WALL_OUT), ENTABLATURE, NAVE_Z0))
+		add.call(Vector3(minf(s * CASE_FRONT, s * WALL_OUT), 0.0, NAVE_Z0), Vector3(maxf(s * CASE_FRONT, s * WALL_OUT), UPPER_TOP, end))
+		add.call(Vector3(minf(s * GALLERY_X, s * CASE_FRONT), GALLERY_Y - 0.3, NAVE_Z0), Vector3(maxf(s * GALLERY_X, s * CASE_FRONT), GALLERY_Y, end))
+	add.call(Vector3(-VEST_HW, VEST_SPRING + VEST_HW, VEST_Z0), Vector3(VEST_HW, VEST_SPRING + VEST_HW + 0.5, NAVE_Z0))
+	add.call(Vector3(-WALL_OUT, 0.0, end), Vector3(WALL_OUT, ENTABLATURE + VAULT_B, end + END_T))
+	add.call(Vector3(-WALL_OUT, ENTABLATURE + VAULT_B, NAVE_Z0), Vector3(WALL_OUT, ENTABLATURE + VAULT_B + 0.5, end))
+	for r: Rect2 in _solids:
+		# A bust's plinth is half a metre square (_build_pier_line); the rest are piers, to the entablature.
+		add.call(Vector3(r.position.x, 0.0, r.position.y), Vector3(r.end.x, 2.4 if r.size.x < 0.6 else ENTABLATURE, r.end.y))
+	if twin != null:
+		out.append_array(twin.call("toy_boxes"))
+	return out
+
+
 ## Whether the camera sees out of a window of the wing: from inside it, always (its windows line both
 ## sides and its end); from the hall, when the end window shows through the portal.
 func window_in_view() -> bool:
+	if twin != null and bool(twin.call("window_in_view")):
+		return true
 	var cam := get_viewport().get_camera_3d()
 	if cam == null:
 		return false
 	var p := cam.global_position
-	if contains(p):
+	if _inside(p):
 		return true
 	var q := _inv * p
 	if q.z > 0.0 or q.y > WALKWAY:
@@ -1704,9 +1891,40 @@ func window_in_view() -> bool:
 	return false
 
 
+## This wing's reflection probes put in the tree or taken out of it (_build_probes: the atlas holds one
+## wing's at a time).
+func show_probes(on: bool) -> void:
+	for probe in _probes:
+		if (probe.get_parent() != null) == on:
+			continue
+		if on:
+			_interior.add_child(probe)
+			stats.probes_shown = int(stats.get("probes_shown", 0)) + 1
+		else:
+			_interior.remove_child(probe)
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		for probe in _probes:
+			if is_instance_valid(probe) and probe.get_parent() == null:
+				probe.free()
+
+
 func _process(delta: float) -> void:
 	_time += delta
 	var cam := get_viewport().get_camera_3d()
+	if cam != null and twin != null:
+		var at := cam.global_position
+		var mine := (_frame * Vector3(0.0, 1.7, NAVE_Z0)).distance_to(at)
+		var its := ((twin.get("_frame") as Transform3D) * Vector3(0.0, 1.7, NAVE_Z0)).distance_to(at)
+		# Taken out first, so that the atlas never has both wings' four.
+		if mine <= its:
+			twin.call("show_probes", false)
+			show_probes(true)
+		else:
+			show_probes(false)
+			twin.call("show_probes", true)
 	if cam != null:
 		# Inside the hall, the outside is behind its walls.
 		var p := cam.global_position
@@ -1718,7 +1936,7 @@ func _process(delta: float) -> void:
 		# open air to its light until the cascades were taken again.
 		if _compat:
 			_interior.visible = not in_hall or _portal_seen(cam)
-			_fade_hall(contains(p) and (_inv * p).z > NAVE_Z0 and not _portal_in_view(cam))
+			_fade_hall(_inside(p) and (_inv * p).z > NAVE_Z0 and not _portal_in_view(cam))
 	# The candles flicker, each chandelier at its own pace.
 	for i in _chandeliers.size():
 		var l := _chandeliers[i]
@@ -1731,6 +1949,8 @@ func _process(delta: float) -> void:
 		# From level 3, the books as boxes (observatory.gd low_poly), as the hall's.
 		for mmi in _book_mmis:
 			mmi.multimesh.mesh = _book_full if level < 3 else _book_low
+		for mmi in _bal_mmis:
+			mmi.multimesh.mesh = _bal_full if level < 3 else _bal_low
 		for l in _lights:
 			if l.name.begins_with("Alcove") and l.name.ends_with("R"):
 				l.visible = level < 4

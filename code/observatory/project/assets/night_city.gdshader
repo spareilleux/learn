@@ -63,6 +63,13 @@ uniform int facade_style = -1;               // -1: from the seed; 0 to 7, that 
 uniform float facade_tile = 42.0;            // m of wall a tile covers
 uniform bool round_mesh = false;
 uniform bool use_uv = false;                 // shape 0: the mesh's UV is its wall in metres (the landmarks)             // shapes 3: the mesh is the unit cylinder, not the cube
+// The city lives (the author, 2026-10-15: « La ville en fond d'écran est trop statique (mêmes fenêtres
+// toujours allumées, rayons dans le ciel semblent figés) »): each window, each block of a photographed
+// facade and each storey keeps its state for a while of its own and then draws again, a few screens
+// flicker, and the tallest towers carry red lights that blink on their corners. 0: as it was, fixed.
+uniform float life = 1.0;
+uniform float beacon_from = 260.0;           // m: towers at least this tall carry the red lights
+uniform float beacon_energy = 9.0;
 
 varying vec3 v_local;
 varying vec3 v_size;
@@ -112,13 +119,22 @@ vec3 windows(vec2 uv, float s, float share, float warm_share) {
 	vec2 g = uv / cell;
 	vec2 id = floor(g);
 	vec2 fw = fwidth(g);
-	float h = hash12(id + vec2(s * 97.0, s * 13.0));
-	// Whole storeys go dark together, as offices do at night.
-	float storey = hash12(vec2(id.y, s * 61.0));
+	// A window keeps its state 40 s to 6 min, then draws again: rooms left and come back to.
+	float per = mix(40.0, 360.0, hash12(id + vec2(s * 7.0, 31.0)));
+	float epoch = floor(TIME * life / per + hash12(id + vec2(3.0, s * 11.0)));
+	float h = hash12(id + vec2(s * 97.0, s * 13.0) + epoch * vec2(1.37, 0.71));
+	// Whole storeys go dark together, as offices do at night, and light up again, 3 to 12 minutes each.
+	float sper = mix(180.0, 720.0, hash12(vec2(id.y, s * 3.0)));
+	float sepoch = floor(TIME * life / sper + hash12(vec2(id.y, s * 17.0)));
+	float storey = hash12(vec2(id.y, s * 61.0) + vec2(sepoch * 0.913, sepoch * 0.37));
 	float on = step(h, share * (storey < 0.3 ? 0.12 : 1.35));
 	float mask = pulse(g.x, pane.x, fw.x) * pulse(g.y, pane.y, fw.y);
 	vec3 tint = mix(window_cool, window_warm, step(hash12(id.yx + vec2(s * 29.0, 4.0)), warm_share));
 	tint *= 0.5 + hash12(id + vec2(17.0, s * 5.0));
+	// One room in sixty lit by a screen: a cool light that flickers with what it shows.
+	float tv = step(0.984, hash12(id + vec2(s * 23.0, 41.0))) * step(0.01, life);
+	float fl = 0.55 + 0.45 * sin(TIME * 6.3 + id.x * 3.1) * sin(TIME * 2.2 + id.y * 1.7 + s * 9.0);
+	tint = mix(tint, vec3(0.42, 0.58, 1.0) * (0.4 + 0.9 * fl), tv);
 	float blur = smoothstep(0.45, 1.0, max(fw.x, fw.y));
 	vec3 avg = mix(window_cool, window_warm, warm_share) * share * pane.x * pane.y;
 	return mix(tint * on * mask, avg, blur);
@@ -141,6 +157,15 @@ vec3 facade(vec2 uv, float s, float share, float warm_share, float face) {
 #endif
 	float lvl = hash12(vec2(row * 3.1 + face, s * 7.0));
 	c *= share / 0.22 * (0.3 + 1.2 * lvl * lvl);
+	// Blocks of the tile, about two windows by a storey, go dark for a while and come back, each in its own
+	// time (1 to 7 minutes); a block under a pixel gives the average, so that a far tower keeps its light.
+	vec2 rq = t * vec2(8.0, 10.0);
+	vec2 rc = floor(rq);
+	float rper = mix(60.0, 420.0, hash12(rc + vec2(s * 19.0, face)));
+	float rep = floor(TIME * life / rper + hash12(rc.yx + vec2(face, s * 7.0)));
+	float dark = step(hash12(rc + vec2(s * 3.0 + rep * 1.7, face + rep * 0.37)), 0.22) * step(0.01, life);
+	float rblur = smoothstep(0.5, 1.0, max(length(dFdx(rq)), length(dFdy(rq))));
+	c *= mix(mix(1.0, 0.1, dark), 1.0 - 0.22 * 0.9 * step(0.01, life), rblur);
 	// Trantor's light is cool; a warm tower keeps its own.
 	bool warm_tower = hash12(vec2(s * 3.0, 9.0)) < warm_share * 2.0;
 	return warm_tower ? c * vec3(1.1, 0.95, 0.8) : c * vec3(0.7, 0.9, 1.25);
@@ -258,6 +283,14 @@ void fragment() {
 		}
 		// A cyan line under the roof, or round a ring's wall at its foot and top.
 		c += rim * edge_line(top - rim_width * 0.5, rim_width) * rim_energy * edge;
+		// The tallest towers' red lights, on their corners (four round a round one), just under the roof,
+		// blinking together, each tower in its own time. Never under a pixel: a far one stays a point.
+		if (life > 0.0 && ring_r.y <= 0.0 && !use_uv && v_size.y >= beacon_from) {
+			float half_w = shape == 0 ? (abs(n.x) > 0.5 ? v_size.z : v_size.x) * 0.5 : 0.0;
+			float dc = shape == 0 ? half_w - abs(uv.x) : abs(fract(atan(v_local.z, v_local.x) / 1.5708 + 0.5) - 0.5) * 1.5708 * r;
+			float blink = step(fract(TIME * 0.5 + hash12(vec2(s * 43.0, 1.0))), 0.3);
+			c += vec3(1.0, 0.06, 0.02) * edge_line(dc - 0.9, 1.8) * edge_line(top - 1.6, 2.0) * blink * beacon_energy;
+		}
 		if (traffic > 0.0 && ring_r.y > 0.0 && r > ring_r.y - 1.0) {
 			// Traffic round a raised ring, in two lanes, white one way and amber the other.
 			float lane = step(0.0, v_local.y);

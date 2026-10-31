@@ -8,13 +8,13 @@
 (function () {
   'use strict';
 
-  var VERSION = '0.2.5';  // the Windows program
-  var NATIVE = '0.2.1';   // the Linux and macOS packages: 0.2.2 changed only the Windows program's Streamline, 0.2.3 its glass, 0.2.4 its path-traced gardens, 0.2.5 its Capitole, scooter and toys
+  var VERSION = '0.3.0';  // the Windows program
+  var NATIVE = '0.2.1';   // the Linux and macOS packages: 0.2.2 changed only the Windows program's Streamline, 0.2.3 its glass, 0.2.4 its path-traced gardens, 0.2.5 its Capitole, scooter and toys, 0.3.0 its shelves and Streamline 2.14.16
   var LINKS = {
-    rtx: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.5/Observatory-RTX-0.2.5-win64.msi',
+    rtx: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.3.0/Observatory-RTX-0.3.0-win64.msi',
     linux: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-0.2.1-linux-x86_64.tar.gz',
     mac: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-0.2.1-macos.zip',
-    release: 'https://github.com/spareilleux/learn/releases/tag/observatory-rtx-0.2.5',
+    release: 'https://github.com/spareilleux/learn/releases/tag/observatory-rtx-0.3.0',
     nvidia: 'https://www.nvidia.com/en-us/geforce/technologies/dlss/',
     web: '../demos/observatory/'  // the page's own link replaces it (data-web)
   };
@@ -178,9 +178,9 @@
       windows: ', under Windows',
       local: ' (read in this page; nothing is sent).',
       install: 'Install the RTX version',
-      installSub: 'Windows installer · 135 MB · version ' + VERSION,
+      installSub: 'Windows installer · 156 MB · version ' + VERSION,
       play: 'Play in the browser',
-      playSub: 'WebGL 2 · about 55 MB, computer or phone',
+      playSub: 'WebGL 2 · about 71 MB, computer or phone',
       after: 'Once it is downloaded:',
       started: 'The download has started. Once it is done:',
       steps: [
@@ -242,7 +242,7 @@
           dlaa: ['DLAA (DLSS at the full resolution)', 'F7.'],
           fg: ['DLSS Frame Generation, 2x', 'F8, with NVIDIA Reflex, which NVIDIA requires with it.'],
           mfg: ['DLSS Multi Frame Generation, 3x to 6x', 'F8 picks 2x to 6x: as many frames as the screen\'s refresh rate takes over the rendered ones (4x at most before version 0.2.2).'],
-          dlss45: ['DLSS 4.5 and 5: Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'Not in this program. Dynamic Multi Frame Generation is in Streamline 2.14.1, which the program is built on since 0.2.2, but on Direct3D 12 only, and the fork\'s path tracer runs on Vulkan; Streamline (2.14.1) has no kit for 3D-Guided Neural Rendering.'],
+          dlss45: ['DLSS 4.5 and 5: Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'Not in this program. Dynamic Multi Frame Generation is in Streamline 2.14.1 and later, which the program is built on since 0.2.2 (2.14.16 since 0.3.0), but on Direct3D 12 only, and the fork\'s path tracer runs on Vulkan; Streamline (2.14.1) has no kit for 3D-Guided Neural Rendering.'],
           raster: ['Without NVIDIA\'s files: rasterized, MSAA 4x + TAA', 'The program starts so when NVIDIA\'s files are missing.'],
           webgl2: ['WebGL 2, in this browser', 'What the web version needs.'],
           webgpu: ['WebGPU, in this browser', 'Not used by the Observatory.']
@@ -289,9 +289,9 @@
       windows: ', sous Windows',
       local: ' (lu dans cette page ; rien n\'est envoyé).',
       install: 'Installer la version RTX',
-      installSub: 'installateur Windows · 135 Mo · version ' + VERSION,
+      installSub: 'installateur Windows · 156 Mo · version ' + VERSION,
       play: 'Jouer dans le navigateur',
-      playSub: 'WebGL 2 · environ 55 Mo, ordinateur ou téléphone',
+      playSub: 'WebGL 2 · environ 71 Mo, ordinateur ou téléphone',
       after: 'Une fois téléchargé :',
       started: 'Le téléchargement a commencé. Une fois terminé :',
       steps: [
@@ -353,7 +353,7 @@
           dlaa: ['DLAA (DLSS à la pleine résolution)', 'F7.'],
           fg: ['DLSS Frame Generation, 2x', 'F8, avec NVIDIA Reflex, que NVIDIA exige avec elle.'],
           mfg: ['DLSS Multi Frame Generation, de 3x à 6x', 'F8 choisit de 2x à 6x : autant d\'images que la fréquence de l\'écran en demande au-delà des images rendues (4x au plus avant la version 0.2.2).'],
-          dlss45: ['DLSS 4.5 et 5 : Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'Pas dans ce programme. Dynamic Multi Frame Generation est dans Streamline 2.14.1, sur lequel le programme repose depuis la 0.2.2, mais sous Direct3D 12 seulement, et le path tracer du fork tourne sous Vulkan ; Streamline (2.14.1) n\'a pas de kit pour 3D-Guided Neural Rendering.'],
+          dlss45: ['DLSS 4.5 et 5 : Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'Pas dans ce programme. Dynamic Multi Frame Generation est dans Streamline depuis la 2.14.1, sur lequel le programme repose depuis la 0.2.2 (2.14.16 depuis la 0.3.0), mais sous Direct3D 12 seulement, et le path tracer du fork tourne sous Vulkan ; Streamline (2.14.1) n\'a pas de kit pour 3D-Guided Neural Rendering.'],
           raster: ['Sans les fichiers de NVIDIA : rastérisation, MSAA 4x + TAA', 'Le programme démarre ainsi quand les fichiers de NVIDIA manquent.'],
           webgl2: ['WebGL 2, dans ce navigateur', 'Ce que demande la version web.'],
           webgpu: ['WebGPU, dans ce navigateur', 'Pas utilisé par l\'Observatoire.']
@@ -400,9 +400,9 @@
       windows: ', en Windows',
       local: ' (leído en esta página; no se envía nada).',
       install: 'Instalar la versión RTX',
-      installSub: 'instalador de Windows · 135 MB · versión ' + VERSION,
+      installSub: 'instalador de Windows · 156 MB · versión ' + VERSION,
       play: 'Jugar en el navegador',
-      playSub: 'WebGL 2 · unos 55 MB, ordenador o teléfono',
+      playSub: 'WebGL 2 · unos 71 MB, ordenador o teléfono',
       after: 'Una vez descargado:',
       started: 'La descarga ha comenzado. Una vez terminada:',
       steps: [
@@ -464,7 +464,7 @@
           dlaa: ['DLAA (DLSS a la resolución completa)', 'F7.'],
           fg: ['DLSS Frame Generation, 2x', 'F8, con NVIDIA Reflex, que NVIDIA exige con ella.'],
           mfg: ['DLSS Multi Frame Generation, de 3x a 6x', 'F8 elige de 2x a 6x: tantas imágenes como la frecuencia de la pantalla pide además de las renderizadas (4x como máximo antes de la versión 0.2.2).'],
-          dlss45: ['DLSS 4.5 y 5: Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'No en este programa. Dynamic Multi Frame Generation está en Streamline 2.14.1, sobre el que se basa el programa desde la 0.2.2, pero solo con Direct3D 12, y el path tracer del fork funciona con Vulkan; Streamline (2.14.1) no tiene kit para 3D-Guided Neural Rendering.'],
+          dlss45: ['DLSS 4.5 y 5: Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'No en este programa. Dynamic Multi Frame Generation está en Streamline desde la 2.14.1, sobre el que se basa el programa desde la 0.2.2 (2.14.16 desde la 0.3.0), pero solo con Direct3D 12, y el path tracer del fork funciona con Vulkan; Streamline (2.14.1) no tiene kit para 3D-Guided Neural Rendering.'],
           raster: ['Sin los archivos de NVIDIA: rasterizado, MSAA 4x + TAA', 'El programa se inicia así cuando faltan los archivos de NVIDIA.'],
           webgl2: ['WebGL 2, en este navegador', 'Lo que necesita la versión web.'],
           webgpu: ['WebGPU, en este navegador', 'El Observatorio no lo usa.']

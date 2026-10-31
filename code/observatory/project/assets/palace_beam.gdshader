@@ -16,6 +16,9 @@ uniform float fade_height = 520.0;            // fades out over this height abov
 uniform float min_angle = 0.0025;             // radians across, at least
 uniform vec3 haze = vec3(0.016, 0.02, 0.036);
 uniform float haze_distance = 900.0;
+// Pulses of light rising up the shaft, this share of fade_height a second (the author, 2026-10-15: « rayons
+// dans le ciel semblent figés »); 0: steady.
+uniform float pulse_speed = 0.08;
 
 varying float v_dim;
 varying float v_along;
@@ -42,6 +45,10 @@ void fragment() {
 	float edge = pow(clamp(abs(dot(normalize(v_wnorm), v)), 0.0, 1.0), 1.5);
 	float along = (1.0 - v_along) * (1.0 - v_along);
 	vec3 col = colour * energy * along * edge * v_dim * mix(0.5, 1.0, v_fade);
+	if (pulse_speed > 0.0) {
+		float rise = fract(v_along * 1.6 - TIME * pulse_speed);
+		col *= 0.75 + 0.75 * smoothstep(0.0, 0.05, rise) * (1.0 - smoothstep(0.07, 0.25, rise));
+	}
 #if CURRENT_RENDERER == RENDERER_COMPATIBILITY
 	col = pow(max(col, vec3(0.0)), vec3(1.0 / 2.2));
 #endif
