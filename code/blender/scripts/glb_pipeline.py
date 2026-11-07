@@ -140,7 +140,7 @@ def merge_by_distance(obj, distance):
 def remove_small_parts(obj, fraction):
     """Deletes connected parts that hold fewer than `fraction` of the faces: the floaters of generated meshes."""
     if fraction <= 0:
-        return []
+        return [], 0
     bm = bmesh.new()
     bm.from_mesh(obj.data)
     seen, parts = set(), []
