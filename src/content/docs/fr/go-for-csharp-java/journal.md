@@ -24,8 +24,8 @@ sidebar:
 - [x] Tests du module intégré, vet, formatage et quatorze sorties exactes.
 - [x] Correspondance des sources et extraits, liens des pages traduites construites.
 - [x] Fuzzing actif borné des cibles écrites.
-- [ ] CI hébergée Windows/Linux/macOS et détecteur de courses Linux.
-- [ ] Lecture anonyme des pages publiques après déploiement Pages.
+- [x] CI hébergée Windows/Linux/macOS et détecteur de data races Linux.
+- [x] Lecture anonyme des pages publiques après déploiement Pages.
 - [ ] Essai par des apprenants et révision linguistique indépendante.
 
 ## QA
@@ -63,7 +63,7 @@ Les deux modules ont été exécutés avec Go 1.27.1 sous Windows/amd64, CGO dé
 
 Les essais de fuzzing bornés utilisent `-fuzztime=5s -parallel=2` : `FuzzLoad` du module standard, puis `FuzzReverse` et `FuzzFrames` du module avancé ont réussi. Le lancement du benchmark avancé sur une seule itération a réussi ; il ne constitue pas une référence de performance représentative. Après simplification de l’exemple JSON avec `bytes.NewReader`, les tests du niveau standard, la sortie exacte de cet exemple et vet ont de nouveau réussi. Les extraits ont été synchronisés dans les trois langues.
 
-L’audit a révélé un vrai défaut du contrôleur : la détection insensible à la casse du marqueur `TODO` rejetait le mot espagnol courant « todo ». Un test de régression a d’abord échoué, puis réussi après correction de la casse ; les seize tests du contrôleur et les dix-neuf tests Node existants passent. Il s’agissait d’un défaut de validation des cours, pas de Go. Aucun essai par un apprenant, scan de vulnérabilités, profil CPU, trace ou rapport d’échappement n’est revendiqué. La CI hébergée, le détecteur de courses et la publication restent des validations distinctes.
+L’audit a révélé un vrai défaut du contrôleur : la détection insensible à la casse du marqueur `TODO` rejetait le mot espagnol courant « todo ». Un test de régression a d’abord échoué, puis réussi après correction de la casse ; les seize tests du contrôleur et les dix-neuf tests Node existants passent. Il s’agissait d’un défaut de validation des cours, pas de Go. Aucun essai par un apprenant, scan de vulnérabilités, profil CPU, trace ou rapport d’échappement n’est revendiqué. La CI hébergée, le détecteur de data races et la publication restent des validations distinctes.
 
 
 ## 2026-11-07 — Revue, contre-exemples et corrections
@@ -74,10 +74,12 @@ Un test coordonné par canaux annule maintenant Squares après son démarrage, a
 
 Le validateur permanent compare désormais les blocs de sortie de chaque traduction à examples.json. Une sortie espagnole volontairement inventée échappait d’abord au contrôle, faisant échouer une régression ; la correction la rejette et les dix-sept régressions passent. Un essai natif sous Windows a aussi montré que -run=^$ non protégé devient -run=$ dans le processus enfant. Les guillemets de -run="^$" préservent l’argument attendu ; les instructions de benchmark sont corrigées dans les trois langues. Le [relevé de vérification](https://github.com/spareilleux/learn/blob/main/docs/verification/2026-11-07-go-courses-local.json) conserve les contre-exemples, les résultats et les empreintes finales des sources. La CI hébergée et la lecture publique restent à effectuer à cette étape.
 
+## 2026-11-07 — Tests hébergés et publication publique
+
+Le [workflow Go](https://github.com/spareilleux/learn/actions/runs/42404338250) a passé ses neuf jobs : les deux modules sous Windows, Linux et macOS, deux jobs Linux avec le détecteur de data races et le validateur des cours. Le [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/42405574875) a publié la révision `cd8ca24400c1591d56dc0878ba52974fd6e54b4d`. Des requêtes HTTP anonymes ont ensuite vérifié les 99 adresses attendues : 96 documents de cours, dont six journaux, et trois pages d’accueil en EN/FR/ES. Les titres, la langue, les URL canoniques, les index de quatorze leçons, les exercices corrigés et les liens d’accueil correspondent aux attentes. Le [relevé public](https://github.com/spareilleux/learn/blob/main/docs/verification/2026-11-07-go-courses-public.json) conserve chaque URL, l’heure du contrôle et l’empreinte SHA-256 du HTML, avec les identités du déploiement et de la CI. Cela confirme la publication et les vérifications techniques exécutées ; l’essai apprenant, la revue linguistique indépendante et le profilage représentatif restent à faire.
+
 ## À vérifier
 
-- Consulter la CI hébergée Windows, Linux et macOS, dont le détecteur de courses Linux.
-- Relire sans authentification les pages EN/FR/ES déployées et consigner la révision publiée.
 - Mesurer une charge représentative avant de tirer des conclusions de performance, de profilage, de trace ou d’échappement.
 - Observer de vraies tentatives d’exercices et obtenir une révision linguistique indépendante ; ces observations restent à faire.
 
