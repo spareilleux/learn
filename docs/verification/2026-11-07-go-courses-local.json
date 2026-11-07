@@ -1,0 +1,661 @@
+{
+  "observed_at_utc": "2026-11-07T17:50:26.301575+00:00",
+  "environment": {
+    "go": "go1.27.1",
+    "os": "windows",
+    "arch": "amd64",
+    "CGO_ENABLED": "0"
+  },
+  "scope": {
+    "courses": [
+      "go-for-csharp-java",
+      "go-advanced"
+    ],
+    "lessons": 28,
+    "locales": [
+      "en",
+      "fr",
+      "es"
+    ],
+    "documents": 96,
+    "unique_exercises": 56,
+    "stdout_blocks": 84
+  },
+  "module_tests": [
+    {
+      "course": "go-for-csharp-java",
+      "command": "go test -count=1 -timeout=60s ./...",
+      "exit": 0,
+      "evidence": "Coordinator terminal execution; standard rerun after reader simplification"
+    },
+    {
+      "course": "go-advanced",
+      "command": "go test -count=1 -timeout=60s ./...",
+      "exit": 0,
+      "evidence": "Coordinator terminal execution; standard rerun after reader simplification"
+    }
+  ],
+  "checks": [
+    {
+      "course": "go-for-csharp-java",
+      "label": "vet",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "exit": 0,
+      "seconds": 4.403,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "course": "go-for-csharp-java",
+      "label": "gofmt",
+      "command": [
+        "gofmt",
+        "-l",
+        "cmd\\l01\\main.go",
+        "cmd\\l02\\main.go",
+        "cmd\\l03\\main.go",
+        "cmd\\l04\\main.go",
+        "cmd\\l05\\main.go",
+        "cmd\\l06\\main.go",
+        "cmd\\l07\\main.go",
+        "cmd\\l08\\main.go",
+        "cmd\\l09\\main.go",
+        "cmd\\l10\\main.go",
+        "cmd\\l11\\main.go",
+        "cmd\\l12\\main.go",
+        "cmd\\l13\\main.go",
+        "cmd\\l14\\main.go",
+        "internal\\cli\\cli.go",
+        "internal\\cli\\cli_test.go",
+        "internal\\study\\study.go",
+        "internal\\study\\study_test.go",
+        "internal\\webapi\\webapi.go",
+        "internal\\webapi\\webapi_test.go"
+      ],
+      "exit": 0,
+      "seconds": 0.148,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "course": "go-for-csharp-java",
+      "label": "./cmd/l01",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l01"
+      ],
+      "exit": 0,
+      "seconds": 4.555,
+      "stdout": "module=study-log records=2\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-for-csharp-java",
+      "label": "./cmd/l02",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l02"
+      ],
+      "exit": 0,
+      "seconds": 4.491,
+      "stdout": "bytes=5 runes=4 double=40\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-for-csharp-java",
+      "label": "./cmd/l03",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l03"
+      ],
+      "exit": 0,
+      "seconds": 5.252,
+      "stdout": "selected=1 total=25\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-for-csharp-java",
+      "label": "./cmd/l04",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l04"
+      ],
+      "exit": 0,
+      "seconds": 4.997,
+      "stdout": "original=30 clone=15\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-for-csharp-java",
+      "label": "./cmd/l05",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l05"
+      ],
+      "exit": 0,
+      "seconds": 10.871,
+      "stdout": "go=25 missing=0 present=false\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-for-csharp-java",
+      "label": "./cmd/l06",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l06"
+      ],
+      "exit": 0,
+      "seconds": 13.603,
+      "stdout": "record=25 copy=20\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-for-csharp-java",
+      "label": "./cmd/l07",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l07"
+      ],
+      "exit": 0,
+      "seconds": 8.245,
+      "stdout": "pointer-nil=true interface-nil=false label=types\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-for-csharp-java",
+      "label": "./cmd/l08",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l08"
+      ],
+      "exit": 0,
+      "seconds": 7.919,
+      "stdout": "total=40 invalid=true\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-for-csharp-java",
+      "label": "./cmd/l09",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l09"
+      ],
+      "exit": 0,
+      "seconds": 25.77,
+      "stdout": "records=2 bytes=5 runes=4\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-for-csharp-java",
+      "label": "./cmd/l10",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l10"
+      ],
+      "exit": 0,
+      "seconds": 13.418,
+      "stdout": "labels=[types go]\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-for-csharp-java",
+      "label": "./cmd/l11",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l11"
+      ],
+      "exit": 0,
+      "seconds": 12.051,
+      "stdout": "stream-total=40\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-for-csharp-java",
+      "label": "./cmd/l12",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l12"
+      ],
+      "exit": 0,
+      "seconds": 9.234,
+      "stdout": "status=200 records=2 cancelled=true\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-for-csharp-java",
+      "label": "./cmd/l13",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l13"
+      ],
+      "exit": 0,
+      "seconds": 5.097,
+      "stdout": "fixture-total=40 empty-total=0\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-for-csharp-java",
+      "label": "./cmd/l14",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l14"
+      ],
+      "exit": 0,
+      "seconds": 6.31,
+      "stdout": "types: 15 min\ngo: 25 min\ntotal: 40 min\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "vet",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "exit": 0,
+      "seconds": 16.354,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "gofmt",
+      "command": [
+        "gofmt",
+        "-l",
+        "cmd\\l01\\main.go",
+        "cmd\\l02\\main.go",
+        "cmd\\l03\\main.go",
+        "cmd\\l04\\main.go",
+        "cmd\\l05\\main.go",
+        "cmd\\l06\\main.go",
+        "cmd\\l07\\main.go",
+        "cmd\\l08\\main.go",
+        "cmd\\l09\\main.go",
+        "cmd\\l10\\main.go",
+        "cmd\\l11\\main.go",
+        "cmd\\l12\\main.go",
+        "cmd\\l13\\main.go",
+        "cmd\\l14\\main.go",
+        "collection\\sequence.go",
+        "collection\\sequence_test.go",
+        "domain\\job.go",
+        "domain\\job_test.go",
+        "encodingx\\record.go",
+        "encodingx\\record_test.go",
+        "framing\\frame.go",
+        "framing\\frame_test.go",
+        "httpapi\\api.go",
+        "httpapi\\api_test.go",
+        "jobs\\service.go",
+        "jobs\\service_test.go",
+        "metrics\\sum.go",
+        "metrics\\sum_test.go",
+        "pipeline\\pipeline.go",
+        "pipeline\\pipeline_test.go",
+        "provenance\\build.go"
+      ],
+      "exit": 0,
+      "seconds": 3.154,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "./cmd/l01",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l01"
+      ],
+      "exit": 0,
+      "seconds": 31.805,
+      "stdout": "sum 5\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "./cmd/l02",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l02"
+      ],
+      "exit": 0,
+      "seconds": 18.642,
+      "stdout": "[9 2] [1 2]\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "./cmd/l03",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l03"
+      ],
+      "exit": 0,
+      "seconds": 13.036,
+      "stdout": "[2 4 6]\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "./cmd/l04",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l04"
+      ],
+      "exit": 0,
+      "seconds": 20.546,
+      "stdout": "false true\ntrue name\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "./cmd/l05",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l05"
+      ],
+      "exit": 0,
+      "seconds": 8.315,
+      "stdout": "100\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "./cmd/l06",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l06"
+      ],
+      "exit": 0,
+      "seconds": 17.249,
+      "stdout": "[1 4 9]\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "./cmd/l07",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l07"
+      ],
+      "exit": 0,
+      "seconds": 19.015,
+      "stdout": "requested\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "./cmd/l08",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l08"
+      ],
+      "exit": 0,
+      "seconds": 16.718,
+      "stdout": "200\n{\"total\":5}\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "./cmd/l09",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l09"
+      ],
+      "exit": 0,
+      "seconds": 5.1,
+      "stdout": "Go\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "./cmd/l10",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l10"
+      ],
+      "exit": 0,
+      "seconds": 4.265,
+      "stdout": "oG été\ntrue\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "./cmd/l11",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l11"
+      ],
+      "exit": 0,
+      "seconds": 6.607,
+      "stdout": "6\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "./cmd/l12",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l12"
+      ],
+      "exit": 0,
+      "seconds": 3.529,
+      "stdout": "{\"name\":\"sum\",\"values\":[2,3]}\nsum 2\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "./cmd/l13",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l13"
+      ],
+      "exit": 0,
+      "seconds": 3.521,
+      "stdout": "example.com/learn/go-advanced\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "./cmd/l14",
+      "command": [
+        "go",
+        "run",
+        "./cmd/l14"
+      ],
+      "exit": 0,
+      "seconds": 4.872,
+      "stdout": "200\n{\"total\":9}\n503\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "fuzz-smoke",
+      "command": [
+        "go",
+        "test",
+        "./framing",
+        "-run=^$",
+        "-fuzz=^FuzzFrames$",
+        "-fuzztime=5s",
+        "-parallel=2"
+      ],
+      "exit": 0,
+      "seconds": 108.274,
+      "stdout": "fuzz: elapsed: 0s, gathering baseline coverage: 0/2 completed\nfuzz: elapsed: 1s, gathering baseline coverage: 2/2 completed, now fuzzing with 2 workers\nfuzz: elapsed: 3s, execs: 25785 (8594/sec), new interesting: 2 (total: 4)\nfuzz: elapsed: 6s, execs: 25785 (0/sec), new interesting: 2 (total: 4)\nfuzz: elapsed: 6s, execs: 25785 (0/sec), new interesting: 2 (total: 4)\nPASS\nok  \texample.com/learn/go-advanced/framing\t7.699s\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "label": "benchmark-smoke",
+      "command": [
+        "go",
+        "test",
+        "./...",
+        "-run=^$",
+        "-bench=.",
+        "-benchtime=1x"
+      ],
+      "exit": 0,
+      "seconds": 17.775,
+      "stdout": "?   \texample.com/learn/go-advanced/cmd/l01\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l02\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l03\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l04\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l05\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l06\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l07\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l08\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l09\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l10\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l11\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l12\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l13\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l14\t[no test files]\nPASS\nok  \texample.com/learn/go-advanced/collection\t0.809s\nPASS\nok  \texample.com/learn/go-advanced/domain\t1.341s\nPASS\nok  \texample.com/learn/go-advanced/encodingx\t1.433s\nPASS\nok  \texample.com/learn/go-advanced/framing\t1.536s\nPASS\nok  \texample.com/learn/go-advanced/httpapi\t1.147s\nPASS\nok  \texample.com/learn/go-advanced/jobs\t1.386s\ngoos: windows\ngoarch: amd64\npkg: example.com/learn/go-advanced/metrics\ncpu: Intel(R) Core(TM) Ultra 9 285K\nBenchmarkSum-24    \t       1\t       300.0 ns/op\t       0 B/op\t       0 allocs/op\nPASS\nok  \texample.com/learn/go-advanced/metrics\t2.996s\nPASS\nok  \texample.com/learn/go-advanced/pipeline\t2.355s\n?   \texample.com/learn/go-advanced/provenance\t[no test files]\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-for-csharp-java",
+      "command": [
+        "go",
+        "test",
+        "./internal/study",
+        "-run=^$",
+        "-fuzz=^FuzzLoad$",
+        "-fuzztime=5s",
+        "-parallel=2"
+      ],
+      "exit": 0,
+      "stdout": "fuzz: elapsed: 0s, gathering baseline coverage: 0/3 completed\nfuzz: elapsed: 1s, gathering baseline coverage: 3/3 completed, now fuzzing with 2 workers\nfuzz: elapsed: 3s, execs: 12457 (4151/sec), new interesting: 38 (total: 41)\nfuzz: elapsed: 6s, execs: 12457 (0/sec), new interesting: 38 (total: 41)\nfuzz: elapsed: 6s, execs: 12457 (0/sec), new interesting: 38 (total: 41)\nPASS\nok  \texample.com/learn/go-for-csharp-java/internal/study\t7.068s\n",
+      "stderr": ""
+    },
+    {
+      "course": "go-advanced",
+      "command": [
+        "go",
+        "test",
+        "./collection",
+        "-run=^$",
+        "-fuzz=^FuzzReverse$",
+        "-fuzztime=5s",
+        "-parallel=2"
+      ],
+      "exit": 0,
+      "stdout": "fuzz: elapsed: 0s, gathering baseline coverage: 0/4 completed\nfuzz: elapsed: 1s, gathering baseline coverage: 4/4 completed, now fuzzing with 2 workers\nfuzz: elapsed: 3s, execs: 49956 (16650/sec), new interesting: 19 (total: 23)\nfuzz: elapsed: 6s, execs: 353503 (101190/sec), new interesting: 23 (total: 27)\nfuzz: elapsed: 6s, execs: 353503 (0/sec), new interesting: 23 (total: 27)\nPASS\nok  \texample.com/learn/go-advanced/collection\t6.961s\n",
+      "stderr": ""
+    }
+  ],
+  "post_simplification": [
+    {
+      "command": [
+        "go",
+        "run",
+        "./cmd/l09"
+      ],
+      "exit": 0,
+      "stdout": "records=2 bytes=5 runes=4\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "go",
+        "vet",
+        "./cmd/l09"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "site_checks": {
+    "local_build_exit": 0,
+    "article_routes_checked": 99,
+    "unresolved_article_links": 0,
+    "node_tests_passed": 19,
+    "checker_tests_passed": 16,
+    "content_checker_errors": 0
+  },
+  "module_source_sha256": {
+    "code/go-for-csharp-java/cmd/l01/main.go": "9fbac13b774eacf1a7c8af376d28cae71ff3df8b926f34bb11aee1bfc31f6c58",
+    "code/go-for-csharp-java/cmd/l02/main.go": "d7bf3e183579d2861110cccb4b355f5f16a09b0ff6d9625b502e9790216eda9c",
+    "code/go-for-csharp-java/cmd/l03/main.go": "934620a282d3d914317c7981f492d3eb74123168aee98ec2be5ea828f0992a34",
+    "code/go-for-csharp-java/cmd/l04/main.go": "6f4bc4b36268e5314dfae74c1c8d2c305d5d957e1dec9b63582085f58cf45fde",
+    "code/go-for-csharp-java/cmd/l05/main.go": "07688a8b3d47c1323b92eafa55eb52bcd81ad573eb95faffe6df51fdc40917aa",
+    "code/go-for-csharp-java/cmd/l06/main.go": "a0795af4893191da34ef2ac96863d3fc8481203e27205cda5b1814e80b60b441",
+    "code/go-for-csharp-java/cmd/l07/main.go": "abc1a69670a1048b96ffcad72bb41b2b1b51923b5ac25caeb997693ceaf1ae92",
+    "code/go-for-csharp-java/cmd/l08/main.go": "2adfc1298662fb0dc22a347179b91568d63d98b3c700d38f89d0e71a2aa8979a",
+    "code/go-for-csharp-java/cmd/l09/main.go": "d6a92fb1954a4aa63e7d41dd7bf7875d779ff10e4fc41a18c2f79c92b1661962",
+    "code/go-for-csharp-java/cmd/l10/main.go": "d49c7585771cafad43901c442836e6ce844bf536200ed95547b846eabcef5b37",
+    "code/go-for-csharp-java/cmd/l11/main.go": "1312b87957ffb0b5524a299f06d9f82be71de4412c56f2c8762cb91e452bcfdf",
+    "code/go-for-csharp-java/cmd/l12/main.go": "bc7341372448bc703446197ce4876c997b36dfe4cbe8601c8ac75e954da0785a",
+    "code/go-for-csharp-java/cmd/l13/main.go": "d886542e4a73e932d3184c4b8ee41bf1d697e91ab567abea8c70396a20cec337",
+    "code/go-for-csharp-java/cmd/l14/main.go": "770083f8f2e4e4746b95388e5e442c324a8a6e4df7680e6bc38e6431c42a748b",
+    "code/go-for-csharp-java/examples.json": "2633324079e3e9266ff274828ffa35a93988331ebd8e75920d62adc9b94d1a3b",
+    "code/go-for-csharp-java/go.mod": "6ed79aade40d843c1eedaad1674c70051e2329e20d2bae359638f68cb46c70db",
+    "code/go-for-csharp-java/internal/cli/cli.go": "7556d1f2069ffc858b3f393db9be2ea335b107ca3eca229da4e05ee6fcd8ccf4",
+    "code/go-for-csharp-java/internal/cli/cli_test.go": "caad0f9a1c454004381291bd0a67f5d2292de2c7411d063b2fa97b7ae789a69f",
+    "code/go-for-csharp-java/internal/study/study.go": "d5a57928af5f483f48b90f23e3e749185ea4f8b8985bfa23958fd681f170e087",
+    "code/go-for-csharp-java/internal/study/study_test.go": "e3f318b323f44dbb7eb866afaef6d5239280b1f9803fc1523ccff5dc036b7ccb",
+    "code/go-for-csharp-java/internal/webapi/webapi.go": "885ab1286837150c0a3c910cf06cdf55fce701121c5d2dd115b5650eb93a1a16",
+    "code/go-for-csharp-java/internal/webapi/webapi_test.go": "f4cf35a2db4a669d5aa6bf56593a7b4d36ea5846c3dc44f5672d647781b550da",
+    "code/go-advanced/cmd/l01/main.go": "e8afa6409eeaabb0c0acdd71c288f12499e39236780c201ad0f819b7db5ddd61",
+    "code/go-advanced/cmd/l02/main.go": "4c65b0bec9d8a407e865d006725b80edb75a48c7b984c29d9bd1adefaa7c266c",
+    "code/go-advanced/cmd/l03/main.go": "836c341d193c7febfdd91aa2a014aa9d7b12c6c91ac5339402d55f980d8a654e",
+    "code/go-advanced/cmd/l04/main.go": "7f6cd6b2cc395fec276d8d64a7d60fa33d7df2080ad1df585ae54fd53f6497da",
+    "code/go-advanced/cmd/l05/main.go": "8f2f1dae68a36460bc1a824a65426d9432440b3c58388839fb145e0dfaf1869f",
+    "code/go-advanced/cmd/l06/main.go": "5d0c627a8921e040a27cbeb63207d668b7cd6ff71da669cb7987728081e7c150",
+    "code/go-advanced/cmd/l07/main.go": "9ab7ac0c97a873f5588c08d4a95e8fc7afcbfcea5864894c3f7a596aa5cf9427",
+    "code/go-advanced/cmd/l08/main.go": "5b5fc92f380d83ba41b58e7be1144d6c5b71199d4e33542e9b91e7669455e974",
+    "code/go-advanced/cmd/l09/main.go": "64a3616893ef25fc9cdd5d9365215215ff5decd0111e1afffb4d670aa128c863",
+    "code/go-advanced/cmd/l10/main.go": "5fc2d7371437278e087e8240471cb4e61f7550c5dd331a2fbbe9f3183fe452f1",
+    "code/go-advanced/cmd/l11/main.go": "d782719479560e865cb5dbe4fbf5fc7f0565b409cefdebaf4afe084e86af1f07",
+    "code/go-advanced/cmd/l12/main.go": "ea0e90c590df1e53cb3d33367db22e625771986e3a00655e64bdd63db9dcd514",
+    "code/go-advanced/cmd/l13/main.go": "9a4d47c04b6cc4d7ffa5bbe47a6357d79af13bcc97a62ad17ecba56961c0a7f3",
+    "code/go-advanced/cmd/l14/main.go": "fb1200af84bd2dba9f2838ed679281bdef2f83c5225204dfa2e0ce6d0539c670",
+    "code/go-advanced/collection/sequence.go": "99eb8ee59497d97b31142cd989cede9a2047232499c7cf6391f4dc92b09123ac",
+    "code/go-advanced/collection/sequence_test.go": "6ebf1871b02cca1d583df587da6bfe97c79792f4677772e2a38e9aef57d015cc",
+    "code/go-advanced/domain/job.go": "bf22b4672fb854958dd9d83871af2cbbfb7d3391b77cf19ee9bea3fd181bc3e2",
+    "code/go-advanced/domain/job_test.go": "2f9ab20e497e13f1f8d88d57d0f04c206d174e8fe221047645965729b6470f0d",
+    "code/go-advanced/encodingx/record.go": "d4e37822755ab540ee056345ad8e803a05f3e9ae6bee98426e837f671b18b6c3",
+    "code/go-advanced/encodingx/record_test.go": "6dd8011501e76c73719383a82edb2e4f0d8f298a156e7dd9fb6fd39d6cc66b91",
+    "code/go-advanced/examples.json": "424a86196ddc202ba15c545b05840ea81ab9f4b3897e906c688a091f14b8a0d0",
+    "code/go-advanced/framing/frame.go": "d79e317b667886a3298db2d0be762eb80e2a1199033b068d3f24ce535a9799b9",
+    "code/go-advanced/framing/frame_test.go": "9963fca335a517e2ca7283a1fb73cde051ead4c1e68e089a6a2bf3e4d45a933e",
+    "code/go-advanced/go.mod": "ddb258d29cfe5527c35989285007d6ddf3d9c17b27f01cc1d22f9053bced54cc",
+    "code/go-advanced/httpapi/api.go": "1ad18138d17c7b28af5bfd7cfb527ba865140a0410a4383f4303ef8d30957314",
+    "code/go-advanced/httpapi/api_test.go": "6bceaf454942863cb3af5f9d4c1479aadee0ecdce7cd5752edab12751c1387fd",
+    "code/go-advanced/jobs/service.go": "9b80b336c9fb57b65927678c2f26cc37d6d8a347da080dbd04200a31e369d6a2",
+    "code/go-advanced/jobs/service_test.go": "c96d8d59178384b13ed579821021632c8b2520e8bf750f8c61f8b6c5e71be771",
+    "code/go-advanced/metrics/sum.go": "1f8b4a8ebf66a562de0bda66e934a9affad3947de7ae914d9ffd9b83a54afdeb",
+    "code/go-advanced/metrics/sum_test.go": "c7cb4ba0c83761fd82726dc8b8a42a2dd2ac45ff8c5abc7de3242dff4e2ef009",
+    "code/go-advanced/pipeline/pipeline.go": "c54a56f1ba811ef11ab6ba3f1aa28d4fb4c42da8269199d9be089f62495d4e7c",
+    "code/go-advanced/pipeline/pipeline_test.go": "a88011c92bc2f1f3a77284d7944070e5a3b6d2873ec90f373f94943b22bf2505",
+    "code/go-advanced/provenance/build.go": "927a22bc9cc2d874e41959b290d36e2d1e72a40a9115ed1f98ed5b23bef053fe"
+  },
+  "limits": [
+    "Hosted CI and anonymous publication are recorded separately after deployment.",
+    "Local race instrumentation unavailable because CGO_ENABLED=0.",
+    "Five-second fuzz runs and one-iteration benchmark smoke are bounded checks, not exhaustive proof or a performance baseline.",
+    "No interactive browser layout inspection, human learner study, vulnerability scan, profile, trace or escape-analysis measurement was performed."
+  ]
+}
