@@ -73,6 +73,18 @@ export default defineConfig({
 									items: [{ autogenerate: { directory: 'java-for-csharp' } }],
 								},
 								{
+									label: 'Go for C#/Java developers',
+									translations: { fr: 'Go pour développeurs C#/Java', es: 'Go para desarrolladores C#/Java' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'go-for-csharp-java' } }],
+								},
+								{
+									label: 'Advanced Go',
+									translations: { fr: 'Go avancé', es: 'Go avanzado' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'go-advanced' } }],
+								},
+								{
 									label: 'Spring Boot, Spring Cloud and Reactor for C# developers',
 									translations: { fr: 'Spring Boot, Spring Cloud et Reactor pour développeurs C#', es: 'Spring Boot, Spring Cloud y Reactor para desarrolladores C#' },
 									collapsed: true,
