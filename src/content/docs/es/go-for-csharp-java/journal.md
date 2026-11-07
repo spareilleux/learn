@@ -24,8 +24,8 @@ sidebar:
 - [x] Pruebas del módulo integrado, vet, formato y catorce salidas exactas.
 - [x] Correspondencia entre fuentes y fragmentos, enlaces de artículos traducidos construidos.
 - [x] Fuzzing activo acotado de los objetivos escritos.
-- [ ] CI alojada Windows/Linux/macOS y detector de carreras Linux.
-- [ ] Lectura anónima de páginas públicas tras el despliegue Pages.
+- [x] CI alojada Windows/Linux/macOS y detector de carreras Linux.
+- [x] Lectura anónima de páginas públicas tras el despliegue Pages.
 - [ ] Estudio con alumnos y revisión lingüística independiente.
 
 ## QA
@@ -74,10 +74,12 @@ Una prueba coordinada mediante canales cancela ahora Squares después del inicio
 
 El validador permanente compara ahora los bloques de salida de cada traducción con examples.json. Una salida española inventada escapaba inicialmente al control y hacía fallar una regresión; la corrección la rechaza y pasan las diecisiete regresiones. Una prueba nativa de Windows mostró además que -run=^$ sin comillas llega al proceso hijo como -run=$. Las comillas de -run="^$" conservan el argumento previsto; se corrigieron las instrucciones de benchmark en los tres idiomas. El [registro de verificación](https://github.com/spareilleux/learn/blob/main/docs/verification/2026-11-07-go-courses-local.json) conserva los contraejemplos, los resultados y las huellas finales de las fuentes. La CI alojada y la lectura pública siguen pendientes en esta entrada.
 
+## 2026-11-07 — Pruebas alojadas y publicación pública
+
+El [workflow Go](https://github.com/spareilleux/learn/actions/runs/42404338250) superó sus nueve jobs: ambos módulos en Windows, Linux y macOS, dos jobs Linux de detección de carreras y el validador de cursos. El [despliegue Pages](https://github.com/spareilleux/learn/actions/runs/42405574875) publicó la revisión `cd8ca24400c1591d56dc0878ba52974fd6e54b4d`. Después, peticiones HTTP anónimas verificaron las 99 rutas previstas: 96 documentos de los cursos, incluidos seis diarios, y tres páginas de inicio en EN/FR/ES. Los títulos, el idioma, las URL canónicas, los índices de catorce lecciones, los ejercicios resueltos y los enlaces de inicio coincidieron con lo previsto. El [registro público](https://github.com/spareilleux/learn/blob/main/docs/verification/2026-11-07-go-courses-public.json) conserva cada URL, la hora de observación y el SHA-256 del HTML, junto con la identidad del despliegue y de la CI. Esto confirma la publicación y las comprobaciones técnicas ejecutadas; siguen pendientes la prueba con alumnos, la revisión lingüística independiente y el perfilado representativo.
+
 ## Por verificar
 
-- Consultar CI alojada en Windows, Linux y macOS, incluido el detector de carreras Linux.
-- Leer anónimamente las páginas EN/FR/ES desplegadas y registrar la revisión publicada.
 - Medir una carga representativa antes de extraer conclusiones de benchmarks, perfiles, trazas o escape.
 - Observar intentos reales de ejercicios y obtener revisión lingüística independiente; todavía no se han realizado.
 

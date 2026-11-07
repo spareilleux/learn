@@ -24,8 +24,8 @@ sidebar:
 - [x] Integrated module tests, vet, formatting and fourteen exact stdout examples.
 - [x] Source/snippet parity and localized built article links.
 - [x] Bounded active fuzzing of the authored targets.
-- [ ] Hosted Windows/Linux/macOS CI and Linux race detector.
-- [ ] Anonymous public-page readback after Pages deployment.
+- [x] Hosted Windows/Linux/macOS CI and Linux race detector.
+- [x] Anonymous public-page readback after Pages deployment.
 - [ ] Human learner study and independent language review.
 
 ## QA
@@ -74,10 +74,12 @@ A channel-gated test now cancels Squares after startup, beyond its initial Err c
 
 The permanent content checker now compares every localized text output block with examples.json. A deliberately invented Spanish output first escaped detection (one failing regression), then was rejected after the fix; all seventeen checker regressions pass. A native Windows command-line probe also showed that unquoted -run=^$ reaches a child as -run=$. Quoting -run="^$" preserves the intended argument; the benchmark instructions were corrected in EN/FR/ES. The [verification record](https://github.com/spareilleux/learn/blob/main/docs/verification/2026-11-07-go-courses-local.json) preserves the failing counterexamples, passing checks and final source digests. Hosted CI and anonymous public readback are still pending at this entry.
 
+## 2026-11-07 — Hosted tests and public delivery
+
+The [Go workflow](https://github.com/spareilleux/learn/actions/runs/42404338250) passed all nine jobs: both modules on Windows, Linux and macOS, two Linux race-detector jobs and the course checker. The [Pages deployment](https://github.com/spareilleux/learn/actions/runs/42405574875) successfully published revision `cd8ca24400c1591d56dc0878ba52974fd6e54b4d`. Anonymous HTTP requests then verified all 99 expected routes: 96 course documents, including six journals, and three homepages in EN/FR/ES. Titles, language, canonical URLs, fourteen-lesson indexes, corrected exercises and homepage course links matched expectations. The [public verification record](https://github.com/spareilleux/learn/blob/main/docs/verification/2026-11-07-go-courses-public.json) preserves every URL, observation time and HTML SHA-256, with the deployment and CI identities. This confirms publication and the exercised technical checks; learner acceptance, independent language review and representative profiling remain unmeasured.
+
 ## To verify
 
-- Consult the hosted CI for Windows, Linux and macOS, including the Linux race detector.
-- Read back the deployed EN/FR/ES pages anonymously and record the deployed revision.
 - Measure a representative workload before using benchmark, profile, trace or escape-analysis conclusions.
 - Observe real learner exercise attempts and obtain independent translation review; neither has happened yet.
 
