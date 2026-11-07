@@ -1,0 +1,72 @@
+[
+  {
+    "lesson": "01-toolchain-and-modules.md",
+    "command": "./cmd/l01",
+    "stdout": "module=study-log records=2\n"
+  },
+  {
+    "lesson": "02-values-types-and-strings.md",
+    "command": "./cmd/l02",
+    "stdout": "bytes=5 runes=4 double=40\n"
+  },
+  {
+    "lesson": "03-control-flow-and-functions.md",
+    "command": "./cmd/l03",
+    "stdout": "selected=1 total=25\n"
+  },
+  {
+    "lesson": "04-arrays-and-slices.md",
+    "command": "./cmd/l04",
+    "stdout": "original=30 clone=15\n"
+  },
+  {
+    "lesson": "05-maps-and-structs.md",
+    "command": "./cmd/l05",
+    "stdout": "go=25 missing=0 present=false\n"
+  },
+  {
+    "lesson": "06-pointers-and-methods.md",
+    "command": "./cmd/l06",
+    "stdout": "record=25 copy=20\n"
+  },
+  {
+    "lesson": "07-interfaces-and-composition.md",
+    "command": "./cmd/l07",
+    "stdout": "pointer-nil=true interface-nil=false label=types\n"
+  },
+  {
+    "lesson": "08-errors-defer-and-resources.md",
+    "command": "./cmd/l08",
+    "stdout": "total=40 invalid=true\n"
+  },
+  {
+    "lesson": "09-files-json-and-unicode.md",
+    "command": "./cmd/l09",
+    "stdout": "records=2 bytes=5 runes=4\n"
+  },
+  {
+    "lesson": "10-generics-and-collections.md",
+    "command": "./cmd/l10",
+    "stdout": "labels=[types go]\n"
+  },
+  {
+    "lesson": "11-goroutines-and-channels.md",
+    "command": "./cmd/l11",
+    "stdout": "stream-total=40\n"
+  },
+  {
+    "lesson": "12-http-and-context.md",
+    "command": "./cmd/l12",
+    "stdout": "status=200 records=2 cancelled=true\n"
+  },
+  {
+    "lesson": "13-testing.md",
+    "command": "./cmd/l13",
+    "stdout": "fixture-total=40 empty-total=0\n"
+  },
+  {
+    "lesson": "14-cli-capstone.md",
+    "command": "./cmd/l14",
+    "stdout": "types: 15 min\ngo: 25 min\ntotal: 40 min\n"
+  }
+]
