@@ -48,5 +48,8 @@ func Read(r io.Reader) ([]byte, error) {
 	}
 	data := make([]byte, int(size))
 	_, err := io.ReadFull(r, data)
+	if err == io.EOF {
+		err = io.ErrUnexpectedEOF
+	}
 	return data, err
 }

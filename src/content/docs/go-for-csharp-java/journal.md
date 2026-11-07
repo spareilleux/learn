@@ -28,6 +28,19 @@ sidebar:
 - [ ] Anonymous public-page readback after Pages deployment.
 - [ ] Human learner study and independent language review.
 
+## QA
+
+| Expected / observed | Location and measurement | Status |
+| --- | --- | --- |
+| Ordinary Spanish todo should be accepted as prose. | [scripts/tests/test_check_go_courses.py](https://github.com/spareilleux/learn/blob/7afa6d69bf354ead998b05303ac940075f7d548b/scripts/tests/test_check_go_courses.py#L164); Initially rejected; targeted regression failed, then all 16 original checker regressions passed after case-sensitive marker matching. Hypothesis refuted before correction. | Corrected before publication |
+
+## Experiments
+
+| Question / hypothesis before the check | Result / verdict |
+| --- | --- |
+| Ordinary Spanish todo should be accepted as prose. | Initially rejected; targeted regression failed, then all 16 original checker regressions passed after case-sensitive marker matching. Hypothesis refuted before correction. [Go](https://github.com/spareilleux/learn/tree/main/code/go-for-csharp-java) · [Dated entry](#2026-11-07--review-counterexamples-and-corrections) · [JSON](https://github.com/spareilleux/learn/blob/main/docs/verification/2026-11-07-go-courses-local.json) |
+
+
 ## 2026-11-07 — Complete course authoring and preliminary module verification
 
 The standard course was authored as a general Learn course, outside Streeling. Fourteen lessons now progress from modules and value semantics to a real study-log CLI. The English, French and Spanish versions contain full explanations and two corrected exercises per lesson. Their filenames, Go snippets, commands and expected output contracts match across locales.
@@ -52,6 +65,14 @@ The bounded fuzz runs used `-fuzztime=5s -parallel=2`: `FuzzLoad` in the standar
 
 The audit exposed a real checker defect: case-insensitive detection of the marker `TODO` rejected ordinary Spanish “todo”. A regression first failed, then passed after marker detection became case-sensitive; all sixteen checker regressions and nineteen existing Node tests pass. This was a course-validation defect, not a defect in Go. No human learner session, vulnerability scan, CPU profile, trace or escape report is claimed. Hosted CI, race instrumentation and publication remain separate evidence gates.
 
+
+## 2026-11-07 — Review, counterexamples and corrections
+
+The completed six-lens review retained three confirmed findings: payload EOF classification, missing cancellation-after-startup coverage and missing official iterator API links. All three were corrected. A complete nonzero frame header with no payload first failed the new regression (`EOF`, expected `unexpected EOF`); after normalization, the existing framing tests and the new regression pass. Clean stream EOF, empty frames, partial payloads and other reader errors keep their existing tests. The complete source listing was synchronized in all three translations.
+
+A channel-gated test now cancels Squares after startup, beyond its initial Err check; it requires context.Canceled and bounded completion. A second test concurrently releases sixteen Submit calls and two Drain calls, checks every accepted reply and leaves the first accepted reply unread until both drains finish. Both packages passed twenty consecutive runs. These checks exercise the stated lifetimes; they do not enumerate every scheduler interleaving or establish an observed production hang.
+
+The permanent content checker now compares every localized text output block with examples.json. A deliberately invented Spanish output first escaped detection (one failing regression), then was rejected after the fix; all seventeen checker regressions pass. A native Windows command-line probe also showed that unquoted -run=^$ reaches a child as -run=$. Quoting -run="^$" preserves the intended argument; the benchmark instructions were corrected in EN/FR/ES. The [verification record](https://github.com/spareilleux/learn/blob/main/docs/verification/2026-11-07-go-courses-local.json) preserves the failing counterexamples, passing checks and final source digests. Hosted CI and anonymous public readback are still pending at this entry.
 
 ## To verify
 

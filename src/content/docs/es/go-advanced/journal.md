@@ -28,6 +28,19 @@ sidebar:
 - [ ] Lectura anónima de páginas públicas tras el despliegue Pages.
 - [ ] Estudio con alumnos y revisión lingüística independiente.
 
+## QA
+
+| Esperado / observado | Ubicación y medida | Estado |
+| --- | --- | --- |
+| Una cabecera completa no nula sin cuerpo debería indicar una trama truncada. | [framing/frame.go:50](https://github.com/spareilleux/learn/blob/7afa6d69bf354ead998b05303ac940075f7d548b/code/go-advanced/framing/frame.go#L50); EOF inicial; regresión fallida. La normalización hace pasar las pruebas existentes y la nueva. Implementación inicial refutada. | Corregido antes de publicar |
+
+## Experimentos
+
+| Pregunta / hipótesis antes de probar | Resultado / veredicto |
+| --- | --- |
+| Una cabecera completa no nula sin cuerpo debería indicar una trama truncada. | EOF inicial; regresión fallida. La normalización hace pasar las pruebas existentes y la nueva. Implementación inicial refutada. [Go](https://github.com/spareilleux/learn/tree/main/code/go-advanced) · [Entrada fechada](#2026-11-07--revisión-contraejemplos-y-correcciones) · [JSON](https://github.com/spareilleux/learn/blob/main/docs/verification/2026-11-07-go-courses-local.json) |
+
+
 ## 2026-11-07 — Redacción y verificación preliminar del módulo
 
 Se escribieron las catorce lecciones, la misión y los ejercicios resueltos en inglés, francés y español. El código es un módulo independiente que solo usa la biblioteca estándar, con catorce órdenes y paquetes reutilizables de dominio, iteración, pipeline, tramas, codificación, procedencia, HTTP y servicio de trabajos. Los listados proceden de archivos Go versionados y formateados; no hay comentarios en lenguaje natural que requieran variantes entre traducciones.
@@ -46,6 +59,14 @@ Los ensayos acotados usan `-fuzztime=5s -parallel=2`: pasaron `FuzzLoad` del mó
 
 La auditoría descubrió un defecto real del verificador: detectar el marcador `TODO` sin distinguir mayúsculas rechazaba el término español corriente « todo ». Una regresión falló primero y pasó tras corregir esa distinción; pasan las dieciséis regresiones del verificador y las diecinueve pruebas Node existentes. Era un fallo de validación de cursos, no de Go. No se afirma haber realizado un estudio con alumnos, análisis de vulnerabilidades, perfil CPU, traza ni informe de escape. CI alojada, detector de carreras y publicación siguen siendo evidencias separadas.
 
+
+## 2026-11-07 — Revisión, contraejemplos y correcciones
+
+La revisión desde seis perspectivas confirmó tres puntos: clasificación de EOF en una trama, falta de una prueba de cancelación después del inicio y enlaces ausentes a las API oficiales de iteración. Los tres están corregidos. Una cabecera completa que anunciaba un cuerpo no vacío, seguida de cero bytes, hacía fallar la nueva regresión: EOF en vez de unexpected EOF. Tras normalizar ese error, pasan las pruebas existentes y la nueva regresión. Se conservan los casos de EOF antes de cabecera, trama vacía, cuerpo parcial y otros errores del lector. El código mostrado se sincronizó en los tres idiomas.
+
+Una prueba coordinada mediante canales cancela ahora Squares después del inicio, superada la comprobación inicial de Err; exige context.Canceled y terminación dentro del plazo de vigilancia. Otra prueba libera simultáneamente dieciséis llamadas Submit y dos llamadas Drain, comprueba todas las respuestas aceptadas y deja la primera sin leer hasta que ambos cierres terminen. Ambos paquetes superaron veinte ejecuciones consecutivas. Esto ejercita las duraciones declaradas sin explorar todos los órdenes posibles del planificador; no se observó ningún bloqueo en producción.
+
+El validador permanente compara ahora los bloques de salida de cada traducción con examples.json. Una salida española inventada escapaba inicialmente al control y hacía fallar una regresión; la corrección la rechaza y pasan las diecisiete regresiones. Una prueba nativa de Windows mostró además que -run=^$ sin comillas llega al proceso hijo como -run=$. Las comillas de -run="^$" conservan el argumento previsto; se corrigieron las instrucciones de benchmark en los tres idiomas. El [registro de verificación](https://github.com/spareilleux/learn/blob/main/docs/verification/2026-11-07-go-courses-local.json) conserva los contraejemplos, los resultados y las huellas finales de las fuentes. La CI alojada y la lectura pública siguen pendientes en esta entrada.
 
 ## Por verificar
 

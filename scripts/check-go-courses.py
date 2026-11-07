@@ -32,7 +32,7 @@ def normalize(text: str) -> str:
     return text.replace("\r\n", "\n").replace("\r", "\n").strip("\n")
 
 
-def markdown_parts(text: str) -> tuple[str, list[str], bool]:
+def markdown_parts(text: str, languages=("go", "golang")) -> tuple[str, list[str], bool]:
     prose, snippets, code = [], [], []
     fence, language = "", ""
     for line in text.splitlines(keepends=True):
@@ -45,7 +45,7 @@ def markdown_parts(text: str) -> tuple[str, list[str], bool]:
             else:
                 prose.append(line)
         elif re.fullmatch(r" {0,3}" + re.escape(fence[0]) + "{" + str(len(fence)) + r",}\s*", line):
-            if language in ("go", "golang"):
+            if language in languages:
                 snippets.append("".join(code))
             fence = ""
             prose.append("\n")
@@ -118,6 +118,7 @@ def check_course(root: Path, course: str, content_only: bool) -> list[str]:
     sources = ["\n" + normalize(p.read_text(encoding="utf-8")) + "\n"
                for p in module.rglob("*.go") if p.resolve().is_relative_to(module.resolve())]
     english_orders = {}
+    quoted_outputs = {}
     for locale, headings in JOURNAL_HEADINGS.items():
         folder = docs / (locale if locale != "en" else "") / course
         actual = {p.name for p in folder.glob("*.md")}
@@ -145,6 +146,7 @@ def check_course(root: Path, course: str, content_only: bool) -> list[str]:
             if name == "index.md" and order != "0":
                 errors.append(f"{label}: index sidebar order must be 0")
             prose, snippets, unclosed = markdown_parts(body)
+            quoted_outputs[locale, name] = markdown_parts(body, ("text",))[1]
             if unclosed:
                 errors.append(f"{label}: unclosed code fence")
             if (re.search(r"\b(?:TODO|TBD|FIXME)\b", prose)
@@ -223,6 +225,9 @@ def check_course(root: Path, course: str, content_only: bool) -> list[str]:
             errors.append(f"{course}: invalid lesson, command or newline in examples.json entry {item!r}")
             continue
         manifest_lessons.append(item["lesson"])
+        for locale in JOURNAL_HEADINGS:
+            if item["stdout"] not in quoted_outputs.get((locale, item["lesson"]), []):
+                errors.append(f"{locale}/{course}/{item['lesson']}: quoted stdout does not match examples.json")
         if not (module / item["command"]).is_dir():
             errors.append(f"{course}: example command directory missing: {item['command']}")
             continue

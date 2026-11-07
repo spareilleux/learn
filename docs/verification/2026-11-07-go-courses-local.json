@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-11-07T17:50:26.301575+00:00",
+  "observed_at_utc": "2026-11-07T18:58:44.821262+00:00",
   "environment": {
     "go": "go1.27.1",
     "os": "windows",
@@ -592,10 +592,18 @@
     "article_routes_checked": 99,
     "unresolved_article_links": 0,
     "node_tests_passed": 19,
-    "checker_tests_passed": 16,
+    "checker_tests_passed": 17,
     "content_checker_errors": 0
   },
   "module_source_sha256": {
+    "code/go-for-csharp-java/examples.json": "2633324079e3e9266ff274828ffa35a93988331ebd8e75920d62adc9b94d1a3b",
+    "code/go-for-csharp-java/go.mod": "6ed79aade40d843c1eedaad1674c70051e2329e20d2bae359638f68cb46c70db",
+    "code/go-for-csharp-java/internal/cli/cli.go": "7556d1f2069ffc858b3f393db9be2ea335b107ca3eca229da4e05ee6fcd8ccf4",
+    "code/go-for-csharp-java/internal/cli/cli_test.go": "caad0f9a1c454004381291bd0a67f5d2292de2c7411d063b2fa97b7ae789a69f",
+    "code/go-for-csharp-java/internal/study/study.go": "d5a57928af5f483f48b90f23e3e749185ea4f8b8985bfa23958fd681f170e087",
+    "code/go-for-csharp-java/internal/study/study_test.go": "e3f318b323f44dbb7eb866afaef6d5239280b1f9803fc1523ccff5dc036b7ccb",
+    "code/go-for-csharp-java/internal/webapi/webapi.go": "885ab1286837150c0a3c910cf06cdf55fce701121c5d2dd115b5650eb93a1a16",
+    "code/go-for-csharp-java/internal/webapi/webapi_test.go": "f4cf35a2db4a669d5aa6bf56593a7b4d36ea5846c3dc44f5672d647781b550da",
     "code/go-for-csharp-java/cmd/l01/main.go": "9fbac13b774eacf1a7c8af376d28cae71ff3df8b926f34bb11aee1bfc31f6c58",
     "code/go-for-csharp-java/cmd/l02/main.go": "d7bf3e183579d2861110cccb4b355f5f16a09b0ff6d9625b502e9790216eda9c",
     "code/go-for-csharp-java/cmd/l03/main.go": "934620a282d3d914317c7981f492d3eb74123168aee98ec2be5ea828f0992a34",
@@ -610,14 +618,28 @@
     "code/go-for-csharp-java/cmd/l12/main.go": "bc7341372448bc703446197ce4876c997b36dfe4cbe8601c8ac75e954da0785a",
     "code/go-for-csharp-java/cmd/l13/main.go": "d886542e4a73e932d3184c4b8ee41bf1d697e91ab567abea8c70396a20cec337",
     "code/go-for-csharp-java/cmd/l14/main.go": "770083f8f2e4e4746b95388e5e442c324a8a6e4df7680e6bc38e6431c42a748b",
-    "code/go-for-csharp-java/examples.json": "2633324079e3e9266ff274828ffa35a93988331ebd8e75920d62adc9b94d1a3b",
-    "code/go-for-csharp-java/go.mod": "6ed79aade40d843c1eedaad1674c70051e2329e20d2bae359638f68cb46c70db",
-    "code/go-for-csharp-java/internal/cli/cli.go": "7556d1f2069ffc858b3f393db9be2ea335b107ca3eca229da4e05ee6fcd8ccf4",
-    "code/go-for-csharp-java/internal/cli/cli_test.go": "caad0f9a1c454004381291bd0a67f5d2292de2c7411d063b2fa97b7ae789a69f",
-    "code/go-for-csharp-java/internal/study/study.go": "d5a57928af5f483f48b90f23e3e749185ea4f8b8985bfa23958fd681f170e087",
-    "code/go-for-csharp-java/internal/study/study_test.go": "e3f318b323f44dbb7eb866afaef6d5239280b1f9803fc1523ccff5dc036b7ccb",
-    "code/go-for-csharp-java/internal/webapi/webapi.go": "885ab1286837150c0a3c910cf06cdf55fce701121c5d2dd115b5650eb93a1a16",
-    "code/go-for-csharp-java/internal/webapi/webapi_test.go": "f4cf35a2db4a669d5aa6bf56593a7b4d36ea5846c3dc44f5672d647781b550da",
+    "code/go-advanced/examples.json": "424a86196ddc202ba15c545b05840ea81ab9f4b3897e906c688a091f14b8a0d0",
+    "code/go-advanced/go.mod": "ddb258d29cfe5527c35989285007d6ddf3d9c17b27f01cc1d22f9053bced54cc",
+    "code/go-advanced/collection/sequence.go": "99eb8ee59497d97b31142cd989cede9a2047232499c7cf6391f4dc92b09123ac",
+    "code/go-advanced/collection/sequence_test.go": "6ebf1871b02cca1d583df587da6bfe97c79792f4677772e2a38e9aef57d015cc",
+    "code/go-advanced/domain/job.go": "bf22b4672fb854958dd9d83871af2cbbfb7d3391b77cf19ee9bea3fd181bc3e2",
+    "code/go-advanced/domain/job_test.go": "2f9ab20e497e13f1f8d88d57d0f04c206d174e8fe221047645965729b6470f0d",
+    "code/go-advanced/encodingx/record.go": "d4e37822755ab540ee056345ad8e803a05f3e9ae6bee98426e837f671b18b6c3",
+    "code/go-advanced/encodingx/record_test.go": "6dd8011501e76c73719383a82edb2e4f0d8f298a156e7dd9fb6fd39d6cc66b91",
+    "code/go-advanced/framing/frame.go": "364c4432c5b21d1babd3a8258db7cdc52c4b23dadf88816b11d16f7f5d531736",
+    "code/go-advanced/framing/frame_test.go": "9963fca335a517e2ca7283a1fb73cde051ead4c1e68e089a6a2bf3e4d45a933e",
+    "code/go-advanced/framing/truncation_test.go": "0d8f0594c0bf0518653de5f570debb5562654db643238fc28a8eaddbe9912dfc",
+    "code/go-advanced/httpapi/api.go": "1ad18138d17c7b28af5bfd7cfb527ba865140a0410a4383f4303ef8d30957314",
+    "code/go-advanced/httpapi/api_test.go": "6bceaf454942863cb3af5f9d4c1479aadee0ecdce7cd5752edab12751c1387fd",
+    "code/go-advanced/jobs/concurrent_test.go": "a47993d04d5ff5405bbfbffd789b928bdc1b7f287742a28c5ea1b4dff91c2fe3",
+    "code/go-advanced/jobs/service.go": "9b80b336c9fb57b65927678c2f26cc37d6d8a347da080dbd04200a31e369d6a2",
+    "code/go-advanced/jobs/service_test.go": "c96d8d59178384b13ed579821021632c8b2520e8bf750f8c61f8b6c5e71be771",
+    "code/go-advanced/metrics/sum.go": "1f8b4a8ebf66a562de0bda66e934a9affad3947de7ae914d9ffd9b83a54afdeb",
+    "code/go-advanced/metrics/sum_test.go": "c7cb4ba0c83761fd82726dc8b8a42a2dd2ac45ff8c5abc7de3242dff4e2ef009",
+    "code/go-advanced/pipeline/cancellation_test.go": "cfbf1dc5ddcd79f78ff7695c627d123b4de98b7ec12911a0051d9f5f3f2e24a8",
+    "code/go-advanced/pipeline/pipeline.go": "c54a56f1ba811ef11ab6ba3f1aa28d4fb4c42da8269199d9be089f62495d4e7c",
+    "code/go-advanced/pipeline/pipeline_test.go": "a88011c92bc2f1f3a77284d7944070e5a3b6d2873ec90f373f94943b22bf2505",
+    "code/go-advanced/provenance/build.go": "927a22bc9cc2d874e41959b290d36e2d1e72a40a9115ed1f98ed5b23bef053fe",
     "code/go-advanced/cmd/l01/main.go": "e8afa6409eeaabb0c0acdd71c288f12499e39236780c201ad0f819b7db5ddd61",
     "code/go-advanced/cmd/l02/main.go": "4c65b0bec9d8a407e865d006725b80edb75a48c7b984c29d9bd1adefaa7c266c",
     "code/go-advanced/cmd/l03/main.go": "836c341d193c7febfdd91aa2a014aa9d7b12c6c91ac5339402d55f980d8a654e",
@@ -631,31 +653,507 @@
     "code/go-advanced/cmd/l11/main.go": "d782719479560e865cb5dbe4fbf5fc7f0565b409cefdebaf4afe084e86af1f07",
     "code/go-advanced/cmd/l12/main.go": "ea0e90c590df1e53cb3d33367db22e625771986e3a00655e64bdd63db9dcd514",
     "code/go-advanced/cmd/l13/main.go": "9a4d47c04b6cc4d7ffa5bbe47a6357d79af13bcc97a62ad17ecba56961c0a7f3",
-    "code/go-advanced/cmd/l14/main.go": "fb1200af84bd2dba9f2838ed679281bdef2f83c5225204dfa2e0ce6d0539c670",
-    "code/go-advanced/collection/sequence.go": "99eb8ee59497d97b31142cd989cede9a2047232499c7cf6391f4dc92b09123ac",
-    "code/go-advanced/collection/sequence_test.go": "6ebf1871b02cca1d583df587da6bfe97c79792f4677772e2a38e9aef57d015cc",
-    "code/go-advanced/domain/job.go": "bf22b4672fb854958dd9d83871af2cbbfb7d3391b77cf19ee9bea3fd181bc3e2",
-    "code/go-advanced/domain/job_test.go": "2f9ab20e497e13f1f8d88d57d0f04c206d174e8fe221047645965729b6470f0d",
-    "code/go-advanced/encodingx/record.go": "d4e37822755ab540ee056345ad8e803a05f3e9ae6bee98426e837f671b18b6c3",
-    "code/go-advanced/encodingx/record_test.go": "6dd8011501e76c73719383a82edb2e4f0d8f298a156e7dd9fb6fd39d6cc66b91",
-    "code/go-advanced/examples.json": "424a86196ddc202ba15c545b05840ea81ab9f4b3897e906c688a091f14b8a0d0",
-    "code/go-advanced/framing/frame.go": "d79e317b667886a3298db2d0be762eb80e2a1199033b068d3f24ce535a9799b9",
-    "code/go-advanced/framing/frame_test.go": "9963fca335a517e2ca7283a1fb73cde051ead4c1e68e089a6a2bf3e4d45a933e",
-    "code/go-advanced/go.mod": "ddb258d29cfe5527c35989285007d6ddf3d9c17b27f01cc1d22f9053bced54cc",
-    "code/go-advanced/httpapi/api.go": "1ad18138d17c7b28af5bfd7cfb527ba865140a0410a4383f4303ef8d30957314",
-    "code/go-advanced/httpapi/api_test.go": "6bceaf454942863cb3af5f9d4c1479aadee0ecdce7cd5752edab12751c1387fd",
-    "code/go-advanced/jobs/service.go": "9b80b336c9fb57b65927678c2f26cc37d6d8a347da080dbd04200a31e369d6a2",
-    "code/go-advanced/jobs/service_test.go": "c96d8d59178384b13ed579821021632c8b2520e8bf750f8c61f8b6c5e71be771",
-    "code/go-advanced/metrics/sum.go": "1f8b4a8ebf66a562de0bda66e934a9affad3947de7ae914d9ffd9b83a54afdeb",
-    "code/go-advanced/metrics/sum_test.go": "c7cb4ba0c83761fd82726dc8b8a42a2dd2ac45ff8c5abc7de3242dff4e2ef009",
-    "code/go-advanced/pipeline/pipeline.go": "c54a56f1ba811ef11ab6ba3f1aa28d4fb4c42da8269199d9be089f62495d4e7c",
-    "code/go-advanced/pipeline/pipeline_test.go": "a88011c92bc2f1f3a77284d7944070e5a3b6d2873ec90f373f94943b22bf2505",
-    "code/go-advanced/provenance/build.go": "927a22bc9cc2d874e41959b290d36e2d1e72a40a9115ed1f98ed5b23bef053fe"
+    "code/go-advanced/cmd/l14/main.go": "fb1200af84bd2dba9f2838ed679281bdef2f83c5225204dfa2e0ce6d0539c670"
   },
   "limits": [
     "Hosted CI and anonymous publication are recorded separately after deployment.",
     "Local race instrumentation unavailable because CGO_ENABLED=0.",
     "Five-second fuzz runs and one-iteration benchmark smoke are bounded checks, not exhaustive proof or a performance baseline.",
     "No interactive browser layout inspection, human learner study, vulnerability scan, profile, trace or escape-analysis measurement was performed."
-  ]
+  ],
+  "post_review": {
+    "review": {
+      "status": "complete",
+      "run_id": "20261107-130838-c72d7be3",
+      "reviewed_sha": "7afa6d69bf354ead998b05303ac940075f7d548b",
+      "findings_applied": [
+        1,
+        2,
+        3
+      ],
+      "unapplied_findings": []
+    },
+    "framing_red": {
+      "source": "code/go-advanced/framing/frame.go",
+      "source_sha256": "d79e317b667886a3298db2d0be762eb80e2a1199033b068d3f24ce535a9799b9",
+      "test": "package framing\n\nimport (\n    \"bytes\"\n    \"errors\"\n    \"io\"\n    \"testing\"\n)\n\nfunc TestMissingPayloadIsUnexpectedEOF(t *testing.T) {\n    _, err := Read(bytes.NewReader([]byte{0, 0, 0, 2}))\n    if !errors.Is(err, io.ErrUnexpectedEOF) {\n        t.Fatalf(\"got %v; want %v\", err, io.ErrUnexpectedEOF)\n    }\n}\n",
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-run=^TestMissingPayloadIsUnexpectedEOF$",
+        "-timeout=30s",
+        "."
+      ],
+      "exit": 1,
+      "stdout": "--- FAIL: TestMissingPayloadIsUnexpectedEOF (0.00s)\n    truncation_test.go:13: got EOF; want unexpected EOF\nFAIL\nFAIL\texample.com/learn/framing-repro\t1.225s\nFAIL\n",
+      "stderr": ""
+    },
+    "framing_green_isolated": {
+      "scope": "Proposed fix in isolated copy only; canonical checkout unchanged",
+      "source_sha256": "364c4432c5b21d1babd3a8258db7cdc52c4b23dadf88816b11d16f7f5d531736",
+      "new_test_sha256": "0d8f0594c0bf0518653de5f570debb5562654db643238fc28a8eaddbe9912dfc",
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-timeout=60s",
+        "."
+      ],
+      "exit": 0,
+      "stdout": "ok  \texample.com/learn/framing-repro\t1.202s\n",
+      "stderr": ""
+    },
+    "quoted_stdout_red": {
+      "command": [
+        "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/tests",
+        "-p",
+        "test_check_go_courses.py"
+      ],
+      "exit": 1,
+      "stdout": "",
+      "stderr": ".....F...........\r\n======================================================================\r\nFAIL: test_invented_localized_stdout_fails (test_check_go_courses.CourseCheckerTests.test_invented_localized_stdout_fails)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"C:\\tmp\\learn-streeling-craft-transfer-20261022\\scripts\\tests\\test_check_go_courses.py\", line 167, in test_invented_localized_stdout_fails\r\n    self.assertNotEqual(status, 0)\r\n    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\r\nAssertionError: 0 == 0\r\n\r\n----------------------------------------------------------------------\r\nRan 17 tests in 2.426s\r\n\r\nFAILED (failures=1)\r\n"
+    },
+    "checks": [
+      {
+        "command": [
+          "C:\\Users\\spare\\AppData\\Local\\Programs\\go\\bin\\gofmt.exe",
+          "-w",
+          "pipeline/cancellation_test.go",
+          "framing/truncation_test.go"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "C:\\Users\\spare\\AppData\\Local\\Programs\\go\\bin\\go.exe",
+          "test",
+          "-count=1",
+          "-timeout=60s",
+          "./..."
+        ],
+        "exit": 0,
+        "stdout": "?   \texample.com/learn/go-advanced/cmd/l01\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l02\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l03\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l04\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l05\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l06\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l07\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l08\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l09\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l10\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l11\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l12\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l13\t[no test files]\n?   \texample.com/learn/go-advanced/cmd/l14\t[no test files]\nok  \texample.com/learn/go-advanced/collection\t0.732s\nok  \texample.com/learn/go-advanced/domain\t0.492s\nok  \texample.com/learn/go-advanced/encodingx\t0.598s\nok  \texample.com/learn/go-advanced/framing\t0.754s\nok  \texample.com/learn/go-advanced/httpapi\t1.275s\nok  \texample.com/learn/go-advanced/jobs\t0.395s\nok  \texample.com/learn/go-advanced/metrics\t0.377s\nok  \texample.com/learn/go-advanced/pipeline\t0.395s\n?   \texample.com/learn/go-advanced/provenance\t[no test files]\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "C:\\Users\\spare\\AppData\\Local\\Programs\\go\\bin\\go.exe",
+          "vet",
+          "./..."
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "C:\\Users\\spare\\AppData\\Local\\Programs\\go\\bin\\go.exe",
+          "test",
+          "./framing",
+          "-run=^$",
+          "-fuzz=^FuzzFrames$",
+          "-fuzztime=5s",
+          "-parallel=2"
+        ],
+        "exit": 0,
+        "stdout": "fuzz: elapsed: 0s, gathering baseline coverage: 0/4 completed\nfuzz: elapsed: 0s, gathering baseline coverage: 4/4 completed, now fuzzing with 2 workers\nfuzz: elapsed: 3s, execs: 2375 (791/sec), new interesting: 0 (total: 4)\nfuzz: elapsed: 6s, execs: 1088876 (362267/sec), new interesting: 1 (total: 5)\nfuzz: elapsed: 6s, execs: 1088876 (0/sec), new interesting: 1 (total: 5)\nPASS\nok  \texample.com/learn/go-advanced/framing\t6.867s\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "scripts/tests",
+          "-p",
+          "test_check_go_courses.py"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": ".................\r\n----------------------------------------------------------------------\r\nRan 17 tests in 2.136s\r\n\r\nOK\r\n"
+      },
+      {
+        "command": [
+          "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "scripts/check-go-courses.py",
+          "--content-only"
+        ],
+        "exit": 0,
+        "stdout": "src/content/docs/go-for-csharp-java/01-toolchain-and-modules.md: 996 prose words\r\nsrc/content/docs/go-for-csharp-java/02-values-types-and-strings.md: 910 prose words\r\nsrc/content/docs/go-for-csharp-java/03-control-flow-and-functions.md: 942 prose words\r\nsrc/content/docs/go-for-csharp-java/04-arrays-and-slices.md: 889 prose words\r\nsrc/content/docs/go-for-csharp-java/05-maps-and-structs.md: 849 prose words\r\nsrc/content/docs/go-for-csharp-java/06-pointers-and-methods.md: 862 prose words\r\nsrc/content/docs/go-for-csharp-java/07-interfaces-and-composition.md: 861 prose words\r\nsrc/content/docs/go-for-csharp-java/08-errors-defer-and-resources.md: 875 prose words\r\nsrc/content/docs/go-for-csharp-java/09-files-json-and-unicode.md: 880 prose words\r\nsrc/content/docs/go-for-csharp-java/10-generics-and-collections.md: 888 prose words\r\nsrc/content/docs/go-for-csharp-java/11-goroutines-and-channels.md: 858 prose words\r\nsrc/content/docs/go-for-csharp-java/12-http-and-context.md: 903 prose words\r\nsrc/content/docs/go-for-csharp-java/13-testing.md: 931 prose words\r\nsrc/content/docs/go-for-csharp-java/14-cli-capstone.md: 930 prose words\r\nsrc/content/docs/fr/go-for-csharp-java/01-toolchain-and-modules.md: 1047 prose words\r\nsrc/content/docs/fr/go-for-csharp-java/02-values-types-and-strings.md: 950 prose words\r\nsrc/content/docs/fr/go-for-csharp-java/03-control-flow-and-functions.md: 959 prose words\r\nsrc/content/docs/fr/go-for-csharp-java/04-arrays-and-slices.md: 902 prose words\r\nsrc/content/docs/fr/go-for-csharp-java/05-maps-and-structs.md: 854 prose words\r\nsrc/content/docs/fr/go-for-csharp-java/06-pointers-and-methods.md: 869 prose words\r\nsrc/content/docs/fr/go-for-csharp-java/07-interfaces-and-composition.md: 881 prose words\r\nsrc/content/docs/fr/go-for-csharp-java/08-errors-defer-and-resources.md: 912 prose words\r\nsrc/content/docs/fr/go-for-csharp-java/09-files-json-and-unicode.md: 895 prose words\r\nsrc/content/docs/fr/go-for-csharp-java/10-generics-and-collections.md: 886 prose words\r\nsrc/content/docs/fr/go-for-csharp-java/11-goroutines-and-channels.md: 877 prose words\r\nsrc/content/docs/fr/go-for-csharp-java/12-http-and-context.md: 904 prose words\r\nsrc/content/docs/fr/go-for-csharp-java/13-testing.md: 913 prose words\r\nsrc/content/docs/fr/go-for-csharp-java/14-cli-capstone.md: 933 prose words\r\nsrc/content/docs/es/go-for-csharp-java/01-toolchain-and-modules.md: 1002 prose words\r\nsrc/content/docs/es/go-for-csharp-java/02-values-types-and-strings.md: 902 prose words\r\nsrc/content/docs/es/go-for-csharp-java/03-control-flow-and-functions.md: 900 prose words\r\nsrc/content/docs/es/go-for-csharp-java/04-arrays-and-slices.md: 854 prose words\r\nsrc/content/docs/es/go-for-csharp-java/05-maps-and-structs.md: 823 prose words\r\nsrc/content/docs/es/go-for-csharp-java/06-pointers-and-methods.md: 816 prose words\r\nsrc/content/docs/es/go-for-csharp-java/07-interfaces-and-composition.md: 815 prose words\r\nsrc/content/docs/es/go-for-csharp-java/08-errors-defer-and-resources.md: 863 prose words\r\nsrc/content/docs/es/go-for-csharp-java/09-files-json-and-unicode.md: 856 prose words\r\nsrc/content/docs/es/go-for-csharp-java/10-generics-and-collections.md: 826 prose words\r\nsrc/content/docs/es/go-for-csharp-java/11-goroutines-and-channels.md: 807 prose words\r\nsrc/content/docs/es/go-for-csharp-java/12-http-and-context.md: 845 prose words\r\nsrc/content/docs/es/go-for-csharp-java/13-testing.md: 852 prose words\r\nsrc/content/docs/es/go-for-csharp-java/14-cli-capstone.md: 872 prose words\r\nsrc/content/docs/go-advanced/01-package-and-module-boundaries.md: 834 prose words\r\nsrc/content/docs/go-advanced/02-memory-escape-and-gc.md: 854 prose words\r\nsrc/content/docs/go-advanced/03-generics-and-iterators.md: 846 prose words\r\nsrc/content/docs/go-advanced/04-error-contracts-and-typed-nil.md: 834 prose words\r\nsrc/content/docs/go-advanced/05-memory-model-sync-and-atomics.md: 842 prose words\r\nsrc/content/docs/go-advanced/06-bounded-pipelines.md: 831 prose words\r\nsrc/content/docs/go-advanced/07-cancellation-deadlines-and-shutdown.md: 855 prose words\r\nsrc/content/docs/go-advanced/08-production-http.md: 850 prose words\r\nsrc/content/docs/go-advanced/09-streaming-and-framing.md: 869 prose words\r\nsrc/content/docs/go-advanced/10-race-fuzz-and-property-tests.md: 870 prose words\r\nsrc/content/docs/go-advanced/11-benchmarks-pprof-and-trace.md: 851 prose words\r\nsrc/content/docs/go-advanced/12-reflection-and-encoding.md: 889 prose words\r\nsrc/content/docs/go-advanced/13-dependencies-builds-and-security.md: 889 prose words\r\nsrc/content/docs/go-advanced/14-service-capstone.md: 889 prose words\r\nsrc/content/docs/fr/go-advanced/01-package-and-module-boundaries.md: 875 prose words\r\nsrc/content/docs/fr/go-advanced/02-memory-escape-and-gc.md: 879 prose words\r\nsrc/content/docs/fr/go-advanced/03-generics-and-iterators.md: 872 prose words\r\nsrc/content/docs/fr/go-advanced/04-error-contracts-and-typed-nil.md: 865 prose words\r\nsrc/content/docs/fr/go-advanced/05-memory-model-sync-and-atomics.md: 868 prose words\r\nsrc/content/docs/fr/go-advanced/06-bounded-pipelines.md: 862 prose words\r\nsrc/content/docs/fr/go-advanced/07-cancellation-deadlines-and-shutdown.md: 871 prose words\r\nsrc/content/docs/fr/go-advanced/08-production-http.md: 877 prose words\r\nsrc/content/docs/fr/go-advanced/09-streaming-and-framing.md: 880 prose words\r\nsrc/content/docs/fr/go-advanced/10-race-fuzz-and-property-tests.md: 868 prose words\r\nsrc/content/docs/fr/go-advanced/11-benchmarks-pprof-and-trace.md: 872 prose words\r\nsrc/content/docs/fr/go-advanced/12-reflection-and-encoding.md: 906 prose words\r\nsrc/content/docs/fr/go-advanced/13-dependencies-builds-and-security.md: 901 prose words\r\nsrc/content/docs/fr/go-advanced/14-service-capstone.md: 902 prose words\r\nsrc/content/docs/es/go-advanced/01-package-and-module-boundaries.md: 835 prose words\r\nsrc/content/docs/es/go-advanced/02-memory-escape-and-gc.md: 830 prose words\r\nsrc/content/docs/es/go-advanced/03-generics-and-iterators.md: 839 prose words\r\nsrc/content/docs/es/go-advanced/04-error-contracts-and-typed-nil.md: 818 prose words\r\nsrc/content/docs/es/go-advanced/05-memory-model-sync-and-atomics.md: 827 prose words\r\nsrc/content/docs/es/go-advanced/06-bounded-pipelines.md: 805 prose words\r\nsrc/content/docs/es/go-advanced/07-cancellation-deadlines-and-shutdown.md: 828 prose words\r\nsrc/content/docs/es/go-advanced/08-production-http.md: 825 prose words\r\nsrc/content/docs/es/go-advanced/09-streaming-and-framing.md: 838 prose words\r\nsrc/content/docs/es/go-advanced/10-race-fuzz-and-property-tests.md: 824 prose words\r\nsrc/content/docs/es/go-advanced/11-benchmarks-pprof-and-trace.md: 834 prose words\r\nsrc/content/docs/es/go-advanced/12-reflection-and-encoding.md: 857 prose words\r\nsrc/content/docs/es/go-advanced/13-dependencies-builds-and-security.md: 848 prose words\r\nsrc/content/docs/es/go-advanced/14-service-capstone.md: 856 prose words\r\nGo courses: 0 errors; example execution skipped (content-only)\r\n",
+        "stderr": ""
+      }
+    ],
+    "windows_argument_probe": [
+      {
+        "shell": "cmd.exe",
+        "source_argument": "-run=^$",
+        "exit": 0,
+        "received_argv": [
+          "-run=$"
+        ],
+        "stderr": ""
+      },
+      {
+        "shell": "cmd.exe",
+        "source_argument": "-run=\"^$\"",
+        "exit": 0,
+        "received_argv": [
+          "-run=^$"
+        ],
+        "stderr": ""
+      }
+    ],
+    "concurrency_repeats": {
+      "command": "go test -count=20 -timeout=60s ./jobs ./pipeline",
+      "exit": 0,
+      "stdout": "ok  \texample.com/learn/go-advanced/jobs\t0.539s\nok  \texample.com/learn/go-advanced/pipeline\t0.491s\n"
+    },
+    "limits": [
+      "Channel synchronization determines test ordering; deadlines only bound failure.",
+      "Concurrent admission/drain test samples scheduler interleavings and does not prove all schedules."
+    ],
+    "site_build": {
+      "command": [
+        "C:/Program Files/nodejs/npm.cmd",
+        "run",
+        "build"
+      ],
+      "exit": 0,
+      "note": "Build exited 0; external Python helper subsequently failed to print a Unicode glyph to a cp1252 console. Build evidence JSON was saved before the reporting error."
+    },
+    "exact_examples": {
+      "command": [
+        "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "scripts/check-go-courses.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    "official_sources": [
+      {
+        "url": "https://docs.oracle.com/en/java/javase/25/core/virtual-threads.html",
+        "status": 200,
+        "resolved_url": "https://docs.oracle.com/en/java/javase/25/core/virtual-threads.html"
+      },
+      {
+        "url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html",
+        "status": 200,
+        "resolved_url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html"
+      },
+      {
+        "url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html",
+        "status": 200,
+        "resolved_url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html"
+      },
+      {
+        "url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/stream/Stream.html",
+        "status": 200,
+        "resolved_url": "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/stream/Stream.html"
+      },
+      {
+        "url": "https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html",
+        "status": 200,
+        "resolved_url": "https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html"
+      },
+      {
+        "url": "https://go.dev/blog/package-names",
+        "status": 200,
+        "resolved_url": "https://go.dev/blog/package-names"
+      },
+      {
+        "url": "https://go.dev/blog/pipelines",
+        "status": 200,
+        "resolved_url": "https://go.dev/blog/pipelines"
+      },
+      {
+        "url": "https://go.dev/doc/",
+        "status": 200,
+        "resolved_url": "https://go.dev/doc/"
+      },
+      {
+        "url": "https://go.dev/doc/articles/race_detector",
+        "status": 200,
+        "resolved_url": "https://go.dev/doc/articles/race_detector"
+      },
+      {
+        "url": "https://go.dev/doc/diagnostics",
+        "status": 200,
+        "resolved_url": "https://go.dev/doc/diagnostics"
+      },
+      {
+        "url": "https://go.dev/doc/faq",
+        "status": 200,
+        "resolved_url": "https://go.dev/doc/faq"
+      },
+      {
+        "url": "https://go.dev/doc/gc-guide",
+        "status": 200,
+        "resolved_url": "https://go.dev/doc/gc-guide"
+      },
+      {
+        "url": "https://go.dev/doc/go1.27",
+        "status": 200,
+        "resolved_url": "https://go.dev/doc/go1.27"
+      },
+      {
+        "url": "https://go.dev/doc/install",
+        "status": 200,
+        "resolved_url": "https://go.dev/doc/install"
+      },
+      {
+        "url": "https://go.dev/doc/security/fuzz/",
+        "status": 200,
+        "resolved_url": "https://go.dev/doc/security/fuzz/"
+      },
+      {
+        "url": "https://go.dev/doc/tutorial/create-module",
+        "status": 200,
+        "resolved_url": "https://go.dev/doc/tutorial/create-module"
+      },
+      {
+        "url": "https://go.dev/doc/tutorial/fuzz",
+        "status": 200,
+        "resolved_url": "https://go.dev/doc/tutorial/fuzz"
+      },
+      {
+        "url": "https://go.dev/ref/mem",
+        "status": 200,
+        "resolved_url": "https://go.dev/ref/mem"
+      },
+      {
+        "url": "https://go.dev/ref/mod",
+        "status": 200,
+        "resolved_url": "https://go.dev/ref/mod"
+      },
+      {
+        "url": "https://go.dev/ref/spec",
+        "status": 200,
+        "resolved_url": "https://go.dev/ref/spec"
+      },
+      {
+        "url": "https://go.dev/security/vuln",
+        "status": 200,
+        "resolved_url": "https://go.dev/doc/security/vuln/"
+      },
+      {
+        "url": "https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.trygetvalue",
+        "status": 200,
+        "resolved_url": "https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2.trygetvalue?view=net-10.0"
+      },
+      {
+        "url": "https://learn.microsoft.com/dotnet/api/system.collections.ienumerator",
+        "status": 200,
+        "resolved_url": "https://learn.microsoft.com/en-us/dotnet/api/system.collections.ienumerator?view=net-10.0"
+      },
+      {
+        "url": "https://learn.microsoft.com/dotnet/api/system.linq.enumerable.select",
+        "status": 200,
+        "resolved_url": "https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.select?view=net-10.0"
+      },
+      {
+        "url": "https://learn.microsoft.com/dotnet/api/system.linq.enumerable.where",
+        "status": 200,
+        "resolved_url": "https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.where?view=net-10.0"
+      },
+      {
+        "url": "https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken",
+        "status": 200,
+        "resolved_url": "https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken?view=net-10.0"
+      },
+      {
+        "url": "https://learn.microsoft.com/dotnet/api/system.threading.tasks.task",
+        "status": 200,
+        "resolved_url": "https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task?view=net-10.0"
+      },
+      {
+        "url": "https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/reference-types",
+        "status": 200,
+        "resolved_url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/reference-types"
+      },
+      {
+        "url": "https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/struct",
+        "status": 200,
+        "resolved_url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct"
+      },
+      {
+        "url": "https://learn.microsoft.com/dotnet/csharp/language-reference/statements/using",
+        "status": 200,
+        "resolved_url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/using"
+      },
+      {
+        "url": "https://learn.microsoft.com/dotnet/standard/serialization/system-text-json/overview",
+        "status": 200,
+        "resolved_url": "https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/overview"
+      },
+      {
+        "url": "https://pkg.go.dev/builtin",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/builtin"
+      },
+      {
+        "url": "https://pkg.go.dev/cmd/compile",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/cmd/compile"
+      },
+      {
+        "url": "https://pkg.go.dev/cmd/go",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/cmd/go"
+      },
+      {
+        "url": "https://pkg.go.dev/cmd/gofmt",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/cmd/gofmt"
+      },
+      {
+        "url": "https://pkg.go.dev/context",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/context"
+      },
+      {
+        "url": "https://pkg.go.dev/encoding/binary",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/encoding/binary"
+      },
+      {
+        "url": "https://pkg.go.dev/encoding/json",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/encoding/json"
+      },
+      {
+        "url": "https://pkg.go.dev/encoding/json/jsontext",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/encoding/json/jsontext"
+      },
+      {
+        "url": "https://pkg.go.dev/encoding/json/v2",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/encoding/json/v2"
+      },
+      {
+        "url": "https://pkg.go.dev/errors",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/errors"
+      },
+      {
+        "url": "https://pkg.go.dev/flag",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/flag"
+      },
+      {
+        "url": "https://pkg.go.dev/fmt",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/fmt"
+      },
+      {
+        "url": "https://pkg.go.dev/io",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/io"
+      },
+      {
+        "url": "https://pkg.go.dev/io/fs",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/io/fs"
+      },
+      {
+        "url": "https://pkg.go.dev/iter",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/iter"
+      },
+      {
+        "url": "https://pkg.go.dev/net",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/net"
+      },
+      {
+        "url": "https://pkg.go.dev/net/http",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/net/http"
+      },
+      {
+        "url": "https://pkg.go.dev/net/http/httptest",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/net/http/httptest"
+      },
+      {
+        "url": "https://pkg.go.dev/os",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/os"
+      },
+      {
+        "url": "https://pkg.go.dev/reflect",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/reflect"
+      },
+      {
+        "url": "https://pkg.go.dev/runtime/debug",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/runtime/debug"
+      },
+      {
+        "url": "https://pkg.go.dev/runtime/pprof",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/runtime/pprof"
+      },
+      {
+        "url": "https://pkg.go.dev/runtime/trace",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/runtime/trace"
+      },
+      {
+        "url": "https://pkg.go.dev/slices",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/slices"
+      },
+      {
+        "url": "https://pkg.go.dev/std",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/std"
+      },
+      {
+        "url": "https://pkg.go.dev/sync",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/sync"
+      },
+      {
+        "url": "https://pkg.go.dev/sync/atomic",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/sync/atomic"
+      },
+      {
+        "url": "https://pkg.go.dev/testing",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/testing"
+      },
+      {
+        "url": "https://pkg.go.dev/testing/fstest",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/testing/fstest"
+      },
+      {
+        "url": "https://pkg.go.dev/testing/quick",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/testing/quick"
+      },
+      {
+        "url": "https://pkg.go.dev/unicode/utf8",
+        "status": 200,
+        "resolved_url": "https://pkg.go.dev/unicode/utf8"
+      }
+    ]
+  }
 }

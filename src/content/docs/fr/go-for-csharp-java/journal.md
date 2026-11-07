@@ -28,6 +28,19 @@ sidebar:
 - [ ] Lecture anonyme des pages publiques après déploiement Pages.
 - [ ] Essai par des apprenants et révision linguistique indépendante.
 
+## QA
+
+| Attendu / observé | Lieu et mesure | État |
+| --- | --- | --- |
+| Le mot espagnol courant todo devrait être accepté dans le texte. | [scripts/tests/test_check_go_courses.py](https://github.com/spareilleux/learn/blob/7afa6d69bf354ead998b05303ac940075f7d548b/scripts/tests/test_check_go_courses.py#L164); Rejet initial ; la régression échouait, puis les 16 régressions initiales passaient après correction de la casse. Hypothèse réfutée avant correction. | Corrigé avant publication |
+
+## Expériences
+
+| Question / hypothèse avant le test | Résultat / verdict |
+| --- | --- |
+| Le mot espagnol courant todo devrait être accepté dans le texte. | Rejet initial ; la régression échouait, puis les 16 régressions initiales passaient après correction de la casse. Hypothèse réfutée avant correction. [Go](https://github.com/spareilleux/learn/tree/main/code/go-for-csharp-java) · [Entrée datée](#2026-11-07--revue-contre-exemples-et-corrections) · [JSON](https://github.com/spareilleux/learn/blob/main/docs/verification/2026-11-07-go-courses-local.json) |
+
+
 ## 2026-11-07 — Rédaction complète et vérification préliminaire du module
 
 Le cours standard a été rédigé comme cours général Learn, en dehors de Streeling. Quatorze leçons relient modules et sémantique des valeurs à un véritable CLI de journal d’étude. Les versions anglaise, française et espagnole contiennent des explications complètes et deux exercices corrigés par leçon. Noms de fichiers, extraits Go, commandes et sorties attendues correspondent entre langues.
@@ -52,6 +65,14 @@ Les essais de fuzzing bornés utilisent `-fuzztime=5s -parallel=2` : `FuzzLoad` 
 
 L’audit a révélé un vrai défaut du contrôleur : la détection insensible à la casse du marqueur `TODO` rejetait le mot espagnol courant « todo ». Un test de régression a d’abord échoué, puis réussi après correction de la casse ; les seize tests du contrôleur et les dix-neuf tests Node existants passent. Il s’agissait d’un défaut de validation des cours, pas de Go. Aucun essai par un apprenant, scan de vulnérabilités, profil CPU, trace ou rapport d’échappement n’est revendiqué. La CI hébergée, le détecteur de courses et la publication restent des validations distinctes.
 
+
+## 2026-11-07 — Revue, contre-exemples et corrections
+
+La revue selon six axes a confirmé trois points : la qualification d’EOF dans une trame, l’absence de test d’annulation après démarrage et des liens manquants vers les API d’itération officielles. Les trois sont corrigés. Un en-tête complet annonçant un corps non vide, suivi d’aucun octet, faisait d’abord échouer la nouvelle régression : EOF au lieu de unexpected EOF. Après normalisation, les tests existants et la nouvelle régression passent. Les tests d’EOF avant en-tête, de trame vide, de corps partiel et des autres erreurs du lecteur sont conservés. Le code reproduit dans les trois traductions a été synchronisé.
+
+Un test coordonné par canaux annule maintenant Squares après son démarrage, au-delà du contrôle initial d’Err ; il exige context.Canceled et une fin dans le délai de surveillance. Un second test libère simultanément seize appels Submit et deux appels Drain, contrôle toutes les réponses acceptées et ne lit la première réponse qu’après la fin des deux arrêts. Les deux paquets ont passé vingt exécutions consécutives. Cela exerce les durées de vie annoncées sans explorer tous les ordonnancements possibles ; aucun blocage en production n’a été observé.
+
+Le validateur permanent compare désormais les blocs de sortie de chaque traduction à examples.json. Une sortie espagnole volontairement inventée échappait d’abord au contrôle, faisant échouer une régression ; la correction la rejette et les dix-sept régressions passent. Un essai natif sous Windows a aussi montré que -run=^$ non protégé devient -run=$ dans le processus enfant. Les guillemets de -run="^$" préservent l’argument attendu ; les instructions de benchmark sont corrigées dans les trois langues. Le [relevé de vérification](https://github.com/spareilleux/learn/blob/main/docs/verification/2026-11-07-go-courses-local.json) conserve les contre-exemples, les résultats et les empreintes finales des sources. La CI hébergée et la lecture publique restent à effectuer à cette étape.
 
 ## À vérifier
 

@@ -62,7 +62,7 @@ class CourseCheckerTests(unittest.TestCase):
                 body = f"## Values\n\n{paragraphs}\n\n```go\n{SOURCE}```\n\n## {exercises}\n\n"
                 body += f"Change the output and explain the result.\n\n<details><summary>{solution} 1</summary>\n\nUse fmt.Println to print the new value and keep the newline.\n\n</details>\n\n"
                 body += f"Explain who owns the value.\n\n<details><summary>{solution} 2</summary>\n\nThe local variable belongs to this function and remains usable until its last reference.\n\n</details>\n\n"
-                body += "[Mission](../) [Official fragment](https://go.dev/ref/spec#Types)\n\n`[illustration](missing-inline/)`\n\n```text\n[illustration](missing-code/)\n```"
+                body += "```text\nhello\n```\n\n[Mission](../) [Official fragment](https://go.dev/ref/spec#Types)\n\n`[illustration](missing-inline/)`\n\n```text\n[illustration](missing-code/)\n```"
                 (folder / name).write_text(page("Values", i, body), encoding="utf-8")
 
     def folder(self, locale="en"):
@@ -160,6 +160,12 @@ class CourseCheckerTests(unittest.TestCase):
         self.assertNotEqual(status, 0)
         self.assertIn("placeholder", output)
         self.assertIn("explanatory paragraphs", output)
+
+    def test_invented_localized_stdout_fails(self):
+        self.replace(self.names[0], "```text\nhello\n```", "```text\ninvented\n```", "es")
+        status, output = self.check()
+        self.assertNotEqual(status, 0)
+        self.assertIn("quoted stdout does not match examples.json", output)
 
     def test_spanish_todo_is_normal_prose(self):
         self.replace(self.names[0], PARAGRAPHS["es"],
