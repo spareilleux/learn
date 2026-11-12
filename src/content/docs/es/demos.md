@@ -65,6 +65,16 @@ La biblioteca no dibuja nada. Genera una escena, luego la valida, y una escena r
 
 Capturas del 2026-10-21. Los bloques, las convenciones y las mediciones están en [las notas de la evaluación de BRUTAL](https://github.com/GuitarAlchemist/ga/blob/644e25db913a53f43b1464677fd130fe79c75090/Experiments/Brutal/README.md#lego-composable-scenes-2026-10-21) (pull request [#840](https://github.com/GuitarAlchemist/ga/pull/840) de Guitar Alchemist, en inglés). Como el Coloso, es un experimento local que no se distribuye; el motor es [BRUTAL](https://github.com/ahwootech/BRUTAL) de Ahwoo, bajo la BRUTAL License v1.0.
 
+### GeoTiles: un vuelo de dron sobre Ottawa
+
+<video controls playsinline preload="metadata" poster="../../demos/geotiles/ottawa-drone.jpg" width="1280" height="720" style="width: 100%; height: auto;"><source src="../../demos/geotiles/ottawa-drone.mp4" type="video/mp4"></video>
+
+*Un vuelo de dron alrededor de la Colina del Parlamento, en Ottawa: 57 s, 15 MB, sin sonido. Imágenes: Google Maps.*
+
+Un programa en C# y Vulkan, hecho con [BRUTAL](https://github.com/ahwootech/BRUTAL), lee las [teselas 3D fotorrealistas](https://developers.google.com/maps/documentation/tile/3d-tiles) de Google: abre una sesión, recorre los conjuntos de teselas anidados, decodifica las mallas Draco y sus texturas JPEG, y lleva cada tesela de las coordenadas centradas en la Tierra a un sistema local alrededor del lugar. La cámara sigue después un óvalo a 150 m del suelo, o el teclado y el ratón toman el mando. Con `--osm`, el mismo programa extruye en su lugar los edificios de OpenStreetMap, sin clave.
+
+Captura del 2026-11-11. Las teselas se eligen una sola vez, al empezar, así que las más lejanas quedan toscas. El código y sus mediciones están en la pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851) de Guitar Alchemist (en inglés). Es un experimento local que no se distribuye: las teselas se leen de Google en cada ejecución y no se guarda ninguna.
+
 ## Ver también
 
 La página [Artefactos](../artifacts/) recoge páginas interactivas alojadas en claude.ai, como el *Atlas des Douze* y un banco de colocación de micrófonos.
