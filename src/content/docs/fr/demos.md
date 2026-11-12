@@ -65,6 +65,16 @@ La bibliothèque ne dessine rien. Elle génère une scène, puis la valide, et u
 
 Captures du 2026-10-21. Les blocs, les conventions et les mesures sont dans [les notes de l'évaluation de BRUTAL](https://github.com/GuitarAlchemist/ga/blob/644e25db913a53f43b1464677fd130fe79c75090/Experiments/Brutal/README.md#lego-composable-scenes-2026-10-21) (pull request [#840](https://github.com/GuitarAlchemist/ga/pull/840) de Guitar Alchemist, en anglais). Comme le Colosse, c'est une expérience locale, qui n'est pas distribuée ; le moteur est [BRUTAL](https://github.com/ahwootech/BRUTAL) d'Ahwoo, sous la BRUTAL License v1.0.
 
+### GeoTiles : un vol de drone au-dessus d'Ottawa
+
+<video controls playsinline preload="metadata" poster="../../demos/geotiles/ottawa-drone.jpg" width="1280" height="720" style="width: 100%; height: auto;"><source src="../../demos/geotiles/ottawa-drone.mp4" type="video/mp4"></video>
+
+*Un vol de drone autour de la colline du Parlement, à Ottawa : 57 s, 15 Mo, sans son. Imagerie : Google Maps.*
+
+Un programme en C# et Vulkan, construit avec [BRUTAL](https://github.com/ahwootech/BRUTAL), lit les [tuiles 3D photoréalistes](https://developers.google.com/maps/documentation/tile/3d-tiles) de Google : il ouvre une session, parcourt les jeux de tuiles imbriqués, décode les maillages Draco et leurs textures JPEG, et ramène chaque tuile des coordonnées centrées sur la Terre à un repère local autour du lieu. La caméra suit ensuite un ovale à 150 m du sol, ou le clavier et la souris prennent les commandes. Avec `--osm`, le même programme extrude à la place les bâtiments d'OpenStreetMap, sans clef.
+
+Capture du 2026-11-11. Les tuiles sont choisies une seule fois, au départ : les plus lointaines restent donc grossières. Le code et ses mesures sont dans la pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851) de Guitar Alchemist (en anglais). C'est une expérience locale, qui n'est pas distribuée : les tuiles sont lues chez Google à chaque lancement et aucune n'est conservée.
+
 ## Voir aussi
 
 La page [Artefacts](../artifacts/) liste des pages interactives hébergées sur claude.ai, comme l'*Atlas des Douze* et un banc de placement de micros.

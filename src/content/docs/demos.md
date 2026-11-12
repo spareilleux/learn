@@ -65,6 +65,16 @@ The library draws nothing. It generates a scene, then validates it, and a refuse
 
 Captured on 2026-10-21. The blocks, conventions and measurements are in [the BRUTAL evaluation's notes](https://github.com/GuitarAlchemist/ga/blob/644e25db913a53f43b1464677fd130fe79c75090/Experiments/Brutal/README.md#lego-composable-scenes-2026-10-21) (Guitar Alchemist pull request [#840](https://github.com/GuitarAlchemist/ga/pull/840)). Like the Colossus, it is a local experiment and is not distributed; the engine is [BRUTAL](https://github.com/ahwootech/BRUTAL) by Ahwoo, under the BRUTAL License v1.0.
 
+### GeoTiles: a drone flight over Ottawa
+
+<video controls playsinline preload="metadata" poster="../demos/geotiles/ottawa-drone.jpg" width="1280" height="720" style="width: 100%; height: auto;"><source src="../demos/geotiles/ottawa-drone.mp4" type="video/mp4"></video>
+
+*A drone flight around Parliament Hill, Ottawa: 57 s, 15 MB, without sound. Imagery: Google Maps.*
+
+A C# and Vulkan program built with [BRUTAL](https://github.com/ahwootech/BRUTAL) reads Google's [Photorealistic 3D Tiles](https://developers.google.com/maps/documentation/tile/3d-tiles): it opens a session, walks the nested tilesets, decodes the Draco meshes and their JPEG textures, and moves each tile from Earth-centred coordinates to a local frame around the place. The camera then follows an oval 150 m above the ground, or the keyboard and mouse take over. With `--osm` the same program extrudes OpenStreetMap buildings instead, without a key.
+
+Captured on 2026-11-11. The tiles are chosen once, at the start, so the far ones stay coarse. The code and its measurements are in Guitar Alchemist pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851). It is a local experiment and is not distributed: the tiles are streamed from Google at each run and none is stored.
+
 ## Also
 
 The [Artifacts](../artifacts/) page lists interactive pages hosted on claude.ai, such as the *Atlas des Douze* and a microphone placement bench.
