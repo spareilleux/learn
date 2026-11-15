@@ -69,7 +69,7 @@ Chaque lien vers du code IX dans les leçons pointe vers ce commit, si bien que 
 
 ## Plan
 
-Les leçons 1 à 19 sont écrites. Le reste est le plan, une leçon par famille d'algorithmes qu'IX implémente, et chacune sera publiée avec son code et sa vérification croisée comme les autres.
+Les leçons 1 à 20 sont écrites. Le reste est le plan, une leçon par famille d'algorithmes qu'IX implémente, et chacune sera publiée avec son code et sa vérification croisée comme les autres.
 
 | # | Leçon | Crates IX | Si tu connais ML.NET |
 |---|---|---|---|
@@ -92,7 +92,7 @@ Les leçons 1 à 19 sont écrites. Le reste est le plan, une leçon par famille 
 | 17 | [Évolution : algorithmes génétiques, évolution différentielle, fronts de Pareto](17-evolution/) | `ix-evolution` | — |
 | 18 | [Exemples adverses, empoisonnement et les défenses](18-adversarial/) | `ix-adversarial` | — |
 | 19 | [La forme des données : homologie persistante](19-persistent-homology/) | `ix-topo`, `ix-manifold` | — |
-| 20 | Sur le GPU : produits matriciels, distances et k plus proches voisins en WGSL | `ix-gpu` | — |
+| 20 | [Sur le GPU : les shaders WGSL d'IX, leurs limites et leurs accélérations](20-gpu-wgsl/) | `ix-gpu` | — |
 | 21 | Pipelines de bout en bout, et les outils MCP qu'appelle un assistant | `ix-pipeline`, `ix-agent` | `MLContext` |
 | — | [Chaque crate et chaque fonction publique](api-map/) | les 80 qui ont une surface publique | — |
 | — | [Journal](journal/) | | |

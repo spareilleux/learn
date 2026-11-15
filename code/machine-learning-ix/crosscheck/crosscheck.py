@@ -1012,3 +1012,81 @@ for t19 in range(50):
     within19 += bottleneck19(h1a19, h1b19) <= 0.02 + 1e-12
     above19 += ix_bottleneck19(h1a19, h1b19) > 0.02
 print(f"stability, Python sets and scipy: exact bottleneck at most 0.02 in {within19} of 50, IX's above 0.02 in {above19}")
+
+print("\n== lesson 20")
+# The kNN shader's loop again, vectorised in float32: references Rng(20_200), queries Rng(20_201), 8 coordinates.
+# Distances add the squared differences one coordinate after the other, as the shader and batch_knn_cpu do.
+refs20 = rng13(20_200, 1000 * 8).astype(np.float32).reshape(1000, 8)
+queries20 = rng13(20_201, 1000 * 8).astype(np.float32).reshape(1000, 8)
+
+
+def distances20(q, r):
+    acc = np.zeros((len(q), len(r)), dtype=np.float32)
+    for d in range(q.shape[1]):
+        diff = q[:, None, d] - r[None, :, d]
+        acc = acc + diff * diff
+    return np.sqrt(acc)
+
+
+def port20(dist, k):
+    """Thread t keeps the first nearest of references t, t + 256, ...; the candidates are sorted, k kept"""
+    n_q, n = dist.shape
+    rows = -(-n // 256)
+    padded = np.full((n_q, rows * 256), np.inf, dtype=np.float32)
+    padded[:, :n] = dist
+    blocks = padded.reshape(n_q, rows, 256)
+    row = blocks.argmin(axis=1)
+    best = np.take_along_axis(blocks, row[:, None, :], axis=1)[:, 0, :]
+    index = row * 256 + np.arange(256)
+    order = np.argsort(best, axis=1, kind="stable")[:, :k]
+    return np.take_along_axis(index, order, axis=1)
+
+
+def exact20(dist, k):
+    return np.argsort(dist, axis=1, kind="stable")[:, :k]
+
+
+def differ20(a, b):
+    return sum(set(x) != set(y) for x, y in zip(a.tolist(), b.tolist()))
+
+
+def p_wrong20(n, k):
+    e = [1] + [0] * k
+    for t in range(256):
+        size = n // 256 + (t < n % 256)
+        for j in range(k, 0, -1):
+            e[j] += e[j - 1] * size
+    return 1 - e[k] / math.comb(n, k)
+
+
+d20 = distances20(queries20, refs20)
+d20_256 = distances20(queries20, refs20[:256])
+recovered20 = sum(len(set(x) & set(y)) for x, y in zip(exact20(d20, 10).tolist(), port20(d20, 10).tolist()))
+print(f"kNN shader loop, numpy float32: P(wrong) {p_wrong20(1000, 10):.4f}; queries that differ {differ20(port20(d20, 10), exact20(d20, 10))}, "
+      f"k = 1 {differ20(port20(d20, 1), exact20(d20, 1))}, first 256 references {differ20(port20(d20_256, 10), exact20(d20_256, 10))}; "
+      f"neighbours recovered {recovered20} of 10000")
+
+
+def cosine20(a, b):
+    """cosine_similarity_cpu in float32: sums one term after the other, zero below a norm of 1e-10"""
+    dot = na = nb = np.float32(0)
+    for x, y in zip(a, b):
+        dot, na, nb = dot + x * y, na + x * x, nb + y * y
+    na, nb = np.sqrt(na), np.sqrt(nb)
+    return np.float32(0) if na < np.float32(1e-10) or nb < np.float32(1e-10) else dot / (na * nb)
+
+
+def batch20(a, b):
+    """batch_top_k's normalisation in float32: zero unless the product of the norms is above 1e-10"""
+    dot = na = nb = np.float32(0)
+    for x, y in zip(a, b):
+        dot, na, nb = dot + x * y, na + x * x, nb + y * y
+    denom = np.sqrt(na) * np.sqrt(nb)
+    return dot / denom if denom > np.float32(1e-10) else np.float32(0)
+
+
+a20 = np.array([1e-6, 2e-6, 2e-6], dtype=np.float32)
+b20 = np.float32(2) * a20
+z20 = np.zeros(3, dtype=np.float32)
+print(f"thresholds, numpy float32: cosine {cosine20(a20, b20):.6f}, batch {batch20(a20, b20):.6f}, cosine of zero {cosine20(z20, z20):.6f}")
+print(f"limits: largest n with 4 n^2 <= 128 MiB {math.isqrt((128 << 20) // 4)}; 10000 x 10000 x 4 = {4 * 10000 ** 2} bytes")

@@ -27,6 +27,7 @@ pub mod data;
 pub mod ensemble;
 pub mod evaluation;
 pub mod evolution;
+pub mod gpu;
 pub mod linear;
 pub mod net;
 pub mod optimize;

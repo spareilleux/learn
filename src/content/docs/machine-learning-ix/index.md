@@ -69,7 +69,7 @@ Every link to IX code in the lessons points to that commit, so the line numbers 
 
 ## Outline
 
-Lessons 1 to 19 are written. The rest is the plan, one lesson per family of algorithms IX implements, and each will be published with its code and its cross-check like the others.
+Lessons 1 to 20 are written. The rest is the plan, one lesson per family of algorithms IX implements, and each will be published with its code and its cross-check like the others.
 
 | # | Lesson | IX crates | If you know ML.NET |
 |---|---|---|---|
@@ -92,7 +92,7 @@ Lessons 1 to 19 are written. The rest is the plan, one lesson per family of algo
 | 17 | [Evolution: genetic algorithms, differential evolution, Pareto fronts](17-evolution/) | `ix-evolution` | — |
 | 18 | [Adversarial examples, poisoning and the defences](18-adversarial/) | `ix-adversarial` | — |
 | 19 | [The shape of data: persistent homology](19-persistent-homology/) | `ix-topo`, `ix-manifold` | — |
-| 20 | On the GPU: matrix products, distances and k nearest neighbours in WGSL | `ix-gpu` | — |
+| 20 | [On the GPU: IX's WGSL shaders, their limits and their speed-ups](20-gpu-wgsl/) | `ix-gpu` | — |
 | 21 | Pipelines end to end, and the MCP tools an assistant calls | `ix-pipeline`, `ix-agent` | `MLContext` |
 | — | [Every crate and every public function](api-map/) | the 80 with a public surface | — |
 | — | [Journal](journal/) | | |
