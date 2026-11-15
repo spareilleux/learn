@@ -175,4 +175,12 @@ certified radius, sigma 1, p_A = 0.501 to 0.999: largest error against scipy 4.4
 logits (2, -1) clamped: IX's formula 6.3609, scipy 6.3613
 label flips, numpy's 5 nearest neighbours: 99 of 100 flipped labels found, 11 others
 spectral signatures with numpy's eigh: flagged per class [9, 9]; with the 5 shifted points [10, 9], shifted among them 5
+
+== lesson 19
+circle, Python sets: H0 23 finite pairs, 1 essential, deaths equal scipy's minimum spanning tree: True; H1 1 pairs, above persistence 0.5: born 0.3153, dies 1.7007
+top dimension, Python sets: built to edges, H1 253 pairs, 253 essential; to triangles, H2 1771 pairs, 1771 essential; to tetrahedra, H2 2 pairs, 0 essential
+unit square at 1.5, Python sets: built to edges [1, 3], to triangles [1, 0, 1], to tetrahedra [1, 0, 0]
+hand-made, scipy: bottleneck IX 10.0000, exact 1.0000; W1 IX 16.0000, exact 2.0000; W2 IX 11.3137, exact 1.4142; (0, inf) against nothing: IX 0.0000, exact inf
+random diagrams, scipy: bottleneck, IX at least exact 1000, above 999; W1, IX at least exact 1000, above 982
+stability, Python sets and scipy: exact bottleneck at most 0.02 in 50 of 50, IX's above 0.02 in 24
 exit 0

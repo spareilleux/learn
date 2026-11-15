@@ -1,0 +1,43 @@
+== the circle
+24 points at radii 1 +- 0.1; diameter 2.1592, so every simplex is present at 2.5
+
+== P1, compute_persistence(rips_complex(points, 2, 2.5)) against a reduction written here
+  H0: 23 finite pairs, 1 essential; equal to the reduction's: yes; deaths are Kruskal's tree, bit for bit: yes
+  H1 pairs: 1, equal to the reduction's: yes
+  persistence above 0.5: born 0.3153 (longest gap between neighbours 0.3153), dies 1.7007
+  no other H1 pair
+
+== P2, the top dimension without cofaces, the circle at max_radius 2.5
+  persistence_from_points(points, 1, ..): H1 253 pairs, 253 essential   (C(24, 2) - 24 + 1 = 253)
+  persistence_from_points(points, 2, ..): H1 right: yes, 0 essential; H2 1771 pairs, 1771 essential   (C(23, 3) = 1771)
+  H2 from the reduction written here, up to tetrahedra: 2 pairs, 0 essential
+  the unit square's corners at radius 1.5: betti_at_radius [1, 3] with max_dim 1, [1, 0, 1] with max_dim 2; up to tetrahedra [1, 0, 0]
+
+== P3, hand-made diagrams: IX, exact
+  bottleneck, {(0, 2), (10, 11)} and {(10, 12), (0, 1)}: 10.0000, 1.0000
+  W1, {(0, 10), (1, 2)} and {(1, 10), (0, 2)}: 16.0000, 2.0000; W2: 11.3137, 1.4142
+  {(0, inf)} and an empty diagram: IX's bottleneck 0.0000, IX's W2 0.0000; exact inf
+
+== P4, 1000 pairs of random 5-point diagrams
+  bottleneck: IX at least the exact distance in 1000, above it by more than 1e-9 in 999; median of IX / exact 2.29
+  W1: IX at least the exact distance in 1000, above it by more than 1e-9 in 982; median of IX / exact 1.64
+
+== P5, stability: 50 clouds of 24 points, each point moved by 0.01, H1 from persistence_from_points(.., 2, 1.5)
+  H1 pairs in a diagram: fewest 0, most 7
+  exact bottleneck at most 2 delta = 0.02: 50 of 50, largest 0.0195
+  IX's bottleneck above 0.02: 24 of 50, largest 0.2526
+
+== P6, seeds: 150 points in three clusters in 10 dimensions
+  BarnesHutTsne::with_seed(7) twice: largest coordinate difference above 1e-3: yes
+  both Barnes-Hut embeddings: 5-nearest-neighbour vote right for at least 95% of the points: no; below 60%, where a random embedding gives about 1/3: yes
+  Tsne::with_seed(7), 300 iterations, twice: the same embedding bit for bit: yes
+
+== P7, early exaggeration, the same points, seed 7, KL(P||Q) against P at perplexity 30
+  200 iterations, default: the same as with_early_exaggeration(12.0, 200), bit for bit: yes
+  KL after 200 iterations: default above exaggeration for the first 50: yes
+
+== exploratory
+  Barnes-Hut on the same points scaled by 0.3, twice: vote at least 95% in both runs: yes
+  the default 1000 iterations, exaggeration for the first 250: KL within 0.05 of 200 iterations with the first 50: yes
+  the circle at max_radius 1.0: essential H1 pairs 1; most_persistent_features ranks first a pair of dimension 0, persistence 0.3057
+exit 0

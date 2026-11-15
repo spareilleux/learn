@@ -833,3 +833,182 @@ def spectral18(n):
 clean18, poisoned18 = spectral18(200), spectral18(205)
 print(f"spectral signatures with numpy's eigh: flagged per class {[len(f) for f in clean18]}; with the 5 shifted "
       f"points {[len(f) for f in poisoned18]}, shifted among them {int(np.sum(poisoned18[0] >= 200))}")
+
+
+print("\n== lesson 19")
+from itertools import combinations  # noqa: E402
+
+from scipy.optimize import linear_sum_assignment  # noqa: E402
+from scipy.sparse import csr_matrix  # noqa: E402
+from scipy.sparse.csgraph import maximum_bipartite_matching, minimum_spanning_tree  # noqa: E402
+
+
+def rips19(points, build_dim, max_radius):
+    """Rips persistence over Z/2, written again with Python sets: simplices from itertools, faces by dictionary"""
+    n = len(points)
+    dist = np.sqrt(((points[:, None, :] - points[None, :, :]) ** 2).sum(axis=2))
+    simplices = []
+    for k in range(1, build_dim + 2):
+        for s in combinations(range(n), k):
+            value = max((dist[a, b] for a, b in combinations(s, 2)), default=0.0)
+            if value <= max_radius:
+                simplices.append((value, k, s))
+    simplices.sort()
+    index = {s: i for i, (_, _, s) in enumerate(simplices)}
+    columns, pivot = [], {}
+    for j, (_, k, s) in enumerate(simplices):
+        col = {index[f] for f in combinations(s, k - 1)} if k > 1 else set()
+        while col:
+            low = max(col)
+            if low not in pivot:
+                pivot[low] = j
+                break
+            col ^= columns[pivot[low]]
+        columns.append(col)
+    diagrams = [[] for _ in range(build_dim + 1)]
+    for j, col in enumerate(columns):
+        if col:
+            low = max(col)
+            birth, death = simplices[low][0], simplices[j][0]
+            if death - birth > 1e-15:
+                diagrams[simplices[low][1] - 1].append((birth, death))
+        elif j not in pivot:
+            diagrams[simplices[j][1] - 1].append((simplices[j][0], math.inf))
+    return diagrams
+
+
+def essential19(diagram):
+    return sum(1 for _, d in diagram if math.isinf(d))
+
+
+def betti19(diagrams, r):
+    return [sum(1 for b, d in dg if b <= r < d) for dg in diagrams]
+
+
+def split19(diagram):
+    return [p for p in diagram if math.isfinite(p[1])], sorted(p[0] for p in diagram if math.isinf(p[1]))
+
+
+def costs19(d1, d2):
+    """d1's points then a diagonal slot per point of d2, against d2's points then a slot per point of d1"""
+    n1, n2 = len(d1), len(d2)
+    c = np.full((n1 + n2, n1 + n2), np.inf)
+    for i, (b, d) in enumerate(d1):
+        for j, (b2, e2) in enumerate(d2):
+            c[i, j] = max(abs(b - b2), abs(d - e2))
+        c[i, n2 + i] = (d - b) / 2
+    for j, (b, d) in enumerate(d2):
+        c[n1 + j, j] = (d - b) / 2
+    c[n1:, n2:] = 0.0
+    return c
+
+
+def bottleneck19(d1, d2):
+    """The smallest cost at which scipy's maximum_bipartite_matching finds a perfect matching"""
+    (f1, e1), (f2, e2) = split19(d1), split19(d2)
+    if len(e1) != len(e2):
+        return math.inf
+    essential = max((abs(a - b) for a, b in zip(e1, e2)), default=0.0)
+    c = costs19(f1, f2)
+    candidates = np.unique(c[np.isfinite(c)])
+    if len(candidates) == 0:
+        return essential
+    lo, hi = 0, len(candidates) - 1
+    while lo < hi:
+        mid = (lo + hi) // 2
+        matching = maximum_bipartite_matching(csr_matrix((c <= candidates[mid]).astype(np.int8)), perm_type="column")
+        if (matching >= 0).all():
+            hi = mid
+        else:
+            lo = mid + 1
+    return max(essential, float(candidates[lo]))
+
+
+def wasserstein19(d1, d2, p):
+    """scipy's linear_sum_assignment on the same matching problem"""
+    (f1, e1), (f2, e2) = split19(d1), split19(d2)
+    if len(e1) != len(e2):
+        return math.inf
+    c = costs19(f1, f2) ** p
+    c[~np.isfinite(c)] = 1e9
+    rows, cols = linear_sum_assignment(c)
+    return (c[rows, cols].sum() + sum(abs(a - b) ** p for a, b in zip(e1, e2))) ** (1 / p)
+
+
+def ix_bottleneck19(d1, d2):
+    """IX's greedy: pad each list with the other's diagonal projections, sort both by persistence, pair by rank"""
+    p1, p2 = list(d1), list(d2)
+    p2 += [((b + d) / 2, (b + d) / 2) for b, d in d1 if math.isfinite(d)]
+    p1 += [((b + d) / 2, (b + d) / 2) for b, d in d2 if math.isfinite(d)]
+    p1.sort(key=lambda q: -abs(q[1] - q[0]))
+    p2.sort(key=lambda q: -abs(q[1] - q[0]))
+    return max((max(abs(a[0] - b[0]), abs(a[1] - b[1])) for a, b in zip(p1, p2)), default=0.0)
+
+
+def ix_wasserstein19(d1, d2, p):
+    """IX's matching: drop essential points, pad the shorter list, sort both by birth, pair by index"""
+    p1 = [q for q in d1 if math.isfinite(q[1])]
+    p2 = [q for q in d2 if math.isfinite(q[1])]
+    while len(p1) < len(p2):
+        b, d = p2[len(p1)]
+        p1.append(((b + d) / 2, (b + d) / 2))
+    while len(p2) < len(p1):
+        b, d = p1[len(p2)]
+        p2.append(((b + d) / 2, (b + d) / 2))
+    p1.sort(key=lambda q: q[0])
+    p2.sort(key=lambda q: q[0])
+    return sum(max(abs(a[0] - b[0]), abs(a[1] - b[1])) ** p for a, b in zip(p1, p2)) ** (1 / p)
+
+
+# The circle of Rng(19_100): 24 points at angles 2 pi i / 24 and radii 1 + 0.1 (2u - 1)
+u19 = rng13(19_100, 24)
+radius19 = 1 + 0.1 * (2 * u19 - 1)
+angle19 = 2 * np.pi * np.arange(24) / 24
+circle19 = np.stack([radius19 * np.cos(angle19), radius19 * np.sin(angle19)], axis=1)
+d19 = rips19(circle19, 2, 2.5)
+dist19 = np.sqrt(((circle19[:, None, :] - circle19[None, :, :]) ** 2).sum(axis=2))
+deaths19 = np.sort([d for _, d in d19[0] if math.isfinite(d)])
+loops19 = [(b, d) for b, d in d19[1] if d - b > 0.5]
+print(f"circle, Python sets: H0 {len(deaths19)} finite pairs, {essential19(d19[0])} essential, deaths equal scipy's "
+      f"minimum spanning tree: {np.array_equal(deaths19, np.sort(minimum_spanning_tree(dist19).data))}; "
+      f"H1 {len(d19[1])} pairs, above persistence 0.5: born {loops19[0][0]:.4f}, dies {loops19[0][1]:.4f}")
+top1_19, top3_19 = rips19(circle19, 1, 2.5)[1], rips19(circle19, 3, 2.5)[2]
+print(f"top dimension, Python sets: built to edges, H1 {len(top1_19)} pairs, {essential19(top1_19)} essential; "
+      f"to triangles, H2 {len(d19[2])} pairs, {essential19(d19[2])} essential; "
+      f"to tetrahedra, H2 {len(top3_19)} pairs, {essential19(top3_19)} essential")
+square19 = np.array([[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.0, 1.0]])
+print(f"unit square at 1.5, Python sets: built to edges {betti19(rips19(square19, 1, 1.5), 1.5)}, "
+      f"to triangles {betti19(rips19(square19, 2, 1.5), 1.5)}, to tetrahedra {betti19(rips19(square19, 3, 1.5)[:3], 1.5)}")
+
+a1_19, a2_19 = [(0.0, 2.0), (10.0, 11.0)], [(10.0, 12.0), (0.0, 1.0)]
+b1_19, b2_19 = [(0.0, 10.0), (1.0, 2.0)], [(1.0, 10.0), (0.0, 2.0)]
+print(f"hand-made, scipy: bottleneck IX {ix_bottleneck19(a1_19, a2_19):.4f}, exact {bottleneck19(a1_19, a2_19):.4f}; "
+      f"W1 IX {ix_wasserstein19(b1_19, b2_19, 1):.4f}, exact {wasserstein19(b1_19, b2_19, 1):.4f}; "
+      f"W2 IX {ix_wasserstein19(b1_19, b2_19, 2):.4f}, exact {wasserstein19(b1_19, b2_19, 2):.4f}; "
+      f"(0, inf) against nothing: IX {ix_bottleneck19([(0.0, math.inf)], []):.4f}, "
+      f"exact {bottleneck19([(0.0, math.inf)], [])}")
+
+# 1,000 pairs of 5-point diagrams from Rng(19_400): each point draws its birth, then its persistence
+r19 = rng13(19_400, 1000 * 2 * 5 * 2).reshape(1000, 2, 5, 2)
+counts19 = [0, 0, 0, 0]
+for pair19 in r19:
+    e1_19, e2_19 = ([(float(u[0]), float(u[0] + u[1])) for u in diagram] for diagram in pair19)
+    for k19, (ix19, exact19) in enumerate([(ix_bottleneck19(e1_19, e2_19), bottleneck19(e1_19, e2_19)),
+                                           (ix_wasserstein19(e1_19, e2_19, 1), wasserstein19(e1_19, e2_19, 1))]):
+        counts19[2 * k19] += ix19 >= exact19 - 1e-12
+        counts19[2 * k19 + 1] += ix19 > exact19 + 1e-9
+print(f"random diagrams, scipy: bottleneck, IX at least exact {counts19[0]}, above {counts19[1]}; "
+      f"W1, IX at least exact {counts19[2]}, above {counts19[3]}")
+
+# Stability: cloud t from Rng(19_500 + t), 24 points in the unit square, each moved by 0.01 along (u, v)/|(u, v)|
+within19 = above19 = 0
+for t19 in range(50):
+    r = rng13(19_500 + t19, 96)
+    points19 = r[:48].reshape(24, 2)
+    uv19 = 2 * r[48:].reshape(24, 2) - 1
+    norm19 = np.sqrt(uv19[:, 0] * uv19[:, 0] + uv19[:, 1] * uv19[:, 1])
+    moved19 = points19 + 0.01 * (uv19 / norm19[:, None])
+    h1a19, h1b19 = rips19(points19, 2, 1.5)[1], rips19(moved19, 2, 1.5)[1]
+    within19 += bottleneck19(h1a19, h1b19) <= 0.02 + 1e-12
+    above19 += ix_bottleneck19(h1a19, h1b19) > 0.02
+print(f"stability, Python sets and scipy: exact bottleneck at most 0.02 in {within19} of 50, IX's above 0.02 in {above19}")
