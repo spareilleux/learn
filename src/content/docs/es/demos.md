@@ -75,6 +75,16 @@ Un programa en C# y Vulkan, hecho con [BRUTAL](https://github.com/ahwootech/BRUT
 
 Captura del 2026-11-11. Las teselas se eligen una sola vez, al empezar, así que las más lejanas quedan toscas. El código y sus mediciones están en la pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851) de Guitar Alchemist (en inglés). Es un experimento local que no se distribuye: las teselas se leen de Google en cada ejecución y no se guarda ninguna.
 
+### GeoTiles: sobre el Château Frontenac, en Quebec
+
+<video controls playsinline preload="metadata" poster="../../demos/geotiles/quebec-drone.jpg" width="1280" height="720" style="width: 100%; height: auto;"><source src="../../demos/geotiles/quebec-drone.mp4" type="video/mp4"></video>
+
+*Un vuelo de dron sobre el Château Frontenac y el Viejo Quebec: 60 s, 15 MB, sin sonido. Imágenes: Google Maps.*
+
+El mismo programa y el mismo óvalo, centrados en el Château Frontenac: la terraza Dufferin, la Place d'Armes, la Ciudadela y el puerto viejo sobre el San Lorenzo pasan bajo la cámara. El programa recorrió 100 tilesets anidados para elegir 185 teselas, unos 700 000 triángulos, con 286 peticiones en una sola sesión de Google, dibujadas a 60 imágenes por segundo.
+
+Captura del 2026-11-14, con el código de la pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851). Como en Ottawa, las teselas llegan de Google en cada ejecución y no se guarda ninguna.
+
 ## Ver también
 
 La página [Artefactos](../artifacts/) recoge páginas interactivas alojadas en claude.ai, como el *Atlas des Douze* y un banco de colocación de micrófonos.
