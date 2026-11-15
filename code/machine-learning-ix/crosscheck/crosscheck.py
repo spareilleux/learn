@@ -526,3 +526,37 @@ def fft_loss12(s):
 fd12 = np.array([(fft_loss12(sig12 + 1e-5 * e) - fft_loss12(sig12 - 1e-5 * e)) / 2e-5 for e in np.eye(64)])
 print(f"FFT loss, numpy: dL/dx first four {np.array2string(grad12[:4], precision=6)}, "
       f"central differences within 1e-6: {np.max(np.abs(fd12 - grad12)) < 1e-6}")
+
+print("\n== lesson 13")
+
+
+def rng13(seed, n, start=0):
+    """Draws start to start + n of the course's Rng(seed): splitmix64 of seed + 1, seed + 2, ..., top 53 bits"""
+    counters = np.arange(seed + 1 + start, seed + 1 + start + n, dtype=U64)
+    return (splitmix64(counters) >> U64(11)).astype(np.float64) / 2.0 ** 53
+
+
+u13 = rng13(13, 84) * 2 - 1
+q13, k13, v13 = (u13[i * 24:(i + 1) * 24].reshape(2, 4, 3) for i in range(3))
+scores13 = q13 @ k13.transpose(0, 2, 1) / np.sqrt(3)
+w13 = np.exp(scores13 - scores13.max(axis=2, keepdims=True))
+w13 /= w13.sum(axis=2, keepdims=True)
+out13 = w13 @ v13
+print(f"attention, batch 0, query 0: weights {np.array2string(w13[0, 0], precision=6)}, "
+      f"output {np.array2string(out13[0, 0], precision=6)}")
+x13 = u13[72:84].reshape(2, 6) * 3 + 1
+ln13 = (x13 - x13.mean(axis=1, keepdims=True)) / np.sqrt(x13.var(axis=1, keepdims=True) + 1e-5)
+print(f"layer norm, token 0: {np.array2string(ln13[0], precision=6)}")
+for d13 in [4, 16, 64, 256]:
+    dots13, largest13 = [], np.zeros(2)
+    for chunk in range(8):
+        # 250 queries at a time: each draws q, then the 16 keys, d components each
+        block = ((rng13(7, 250 * 17 * d13, chunk * 250 * 17 * d13) * 2 - 1) * np.sqrt(3)).reshape(250, 17, d13)
+        dots = np.einsum("tkd,td->tk", block[:, 1:, :], block[:, 0, :])
+        dots13.append(dots)
+        for i, s in enumerate((1, 1 / np.sqrt(d13))):
+            largest13[i] += np.sum(1 / np.exp((dots - dots.max(axis=1, keepdims=True)) * s).sum(axis=1))
+    print(f"d {d13}: var(q.k) {np.concatenate(dots13).var():.1f}, largest of 16 weights unscaled "
+          f"{largest13[0] / 2000:.3f}, scaled {largest13[1] / 2000:.3f}")
+spread13 = np.random.default_rng(13).uniform(-1, 1, 1_000_000).std()
+print(f"numpy's own U(-1, 1), a million draws: std {spread13:.4f}, 1/sqrt(3) = {1 / np.sqrt(3):.4f}")

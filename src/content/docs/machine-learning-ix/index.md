@@ -85,7 +85,7 @@ Lessons 1 to 9 are written. The rest is the plan, one lesson per family of algor
 | 10 | [Sequences: Markov chains, hidden Markov models and Viterbi](10-sequences/) | `ix-graph` | — |
 | 11 | [Counting without counting: Bloom filters, HyperLogLog, count-min, cuckoo](11-probabilistic/) | `ix-probabilistic` | — |
 | 12 | [Automatic differentiation: the Wengert tape](12-autodiff/) | `ix-autograd` | — |
-| 13 | Attention, layer normalization and a transformer block | `ix-nn` | — |
+| 13 | [Attention, layer normalization and a transformer block](13-transformer/) | `ix-nn` | — |
 | 14 | Reinforcement learning: bandits and Q-learning | `ix-rl` | — |
 | 15 | Signals: the Fourier transform, wavelets, filters and Kalman | `ix-signal` | — |
 | 16 | Search: A\*, Monte-Carlo tree search, local search | `ix-search`, `ix-graph` | — |
