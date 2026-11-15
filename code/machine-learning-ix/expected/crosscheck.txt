@@ -141,4 +141,15 @@ value iteration, 5 x 5 GridWorld, gamma 0.99: V*(start) 2.527188
 testbed, 2000 tasks from the course's Rng: mean of the best arm's mean 1.538
 Auer et al. bound at T = 10000: 1106.5
 Auer et al. bound at T = 100000: 1382.8
+
+== lesson 15
+Welch, 63 segments: integral / variance, IX's convention 0.503, scipy.signal.welch 1.002
+scipy / IX's convention: bins 1 to 255 within 1e-9 of 2: True; bins 0 and 256: 1.000000, 1.000000
+IX's FFT recurrence in numpy against numpy.fft, N = 2^8: 1e-15 to 1e-14
+IX's FFT recurrence in numpy against numpy.fft, N = 2^16: 1e-13 to 1e-12
+scipy.signal.butter(2, 0.2): b [0.067455274, 0.134910548, 0.067455274], a [1.000000000, -1.142980503, 0.412801598]
+scipy.linalg.solve_discrete_are, q 0.01, r 1: prior variance 0.105124922, gain 0.095124922
+scipy.signal.firwin(65, 0.2, hamming, unscaled): centre tap 0.200000000, sum of the taps 1.000041082
+scipy.signal.firwin refuses a 32-tap high-pass: ValueError
+numpy windows of length 1 (hanning, hamming, blackman, bartlett, kaiser 5): [1.0, 1.0, 1.0, 1.0, 1.0]
 exit 0

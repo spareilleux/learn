@@ -579,3 +579,72 @@ print(f"testbed, 2000 tasks from the course's Rng: mean of the best arm's mean {
 for horizon14 in [10_000, 100_000]:
     bound14 = 8 * math.log(horizon14) * (1 / 0.1 + 1 / 0.2) + (1 + math.pi ** 2 / 3) * 0.3
     print(f"Auer et al. bound at T = {horizon14}: {bound14:.1f}")
+
+print("\n== lesson 15")
+# scipy is not pinned here: it comes with scikit-learn 1.8.0, and the lines below print nothing that differs
+# between its recent versions
+from scipy import linalg as spl, signal as sps  # noqa: E402
+
+
+def taps15(v):
+    return "[" + ", ".join(f"{x:.9f}" for x in v) + "]"
+
+
+def decade15(x):
+    e = math.floor(math.log10(x))
+    return f"1e{e} to 1e{e + 1}"
+
+
+x15 = rng13(15, 12 * 16384).reshape(16384, 12).sum(axis=1) - 6
+w15 = np.hanning(512)
+seg15 = np.lib.stride_tricks.sliding_window_view(x15, 512)[::256]
+ix15 = (np.abs(np.fft.rfft(seg15 * w15, axis=1)) ** 2 / (w15 ** 2).sum()).mean(axis=0) / 1000
+_, sp15 = sps.welch(x15, fs=1000, window=w15, nperseg=512, noverlap=256, detrend=False, scaling="density")
+print(f"Welch, {len(seg15)} segments: integral / variance, IX's convention {ix15.sum() * 1000 / 512 / x15.var():.3f}, "
+      f"scipy.signal.welch {sp15.sum() * 1000 / 512 / x15.var():.3f}")
+r15 = sp15 / ix15
+print(f"scipy / IX's convention: bins 1 to 255 within 1e-9 of 2: {bool(np.all(np.abs(r15[1:256] / 2 - 1) < 1e-9))}; "
+      f"bins 0 and 256: {r15[0]:.6f}, {r15[256]:.6f}")
+
+
+def ix_fft15(x):
+    """IX's fft_in_place: bit reversal, then one cos and one sin per stage and the twiddles by recurrence"""
+    n = len(x)
+    bits = n.bit_length() - 1
+    data = x[[int(format(i, f"0{bits}b")[::-1], 2) for i in range(n)]].astype(np.complex128)
+    length = 2
+    while length <= n:
+        half = length // 2
+        angle = -2.0 * math.pi / length
+        base = complex(math.cos(angle), math.sin(angle))
+        w = [1 + 0j]
+        for _ in range(half - 1):
+            w.append(w[-1] * base)
+        rows = data.reshape(-1, length)
+        even = rows[:, :half].copy()
+        odd = rows[:, half:] * np.array(w)
+        rows[:, :half] = even + odd
+        rows[:, half:] = even - odd
+        length *= 2
+    return data
+
+
+for log15 in [8, 16]:
+    u15 = rng13(15_200 + log15, 1 << log15) * 2 - 1
+    ref15 = np.fft.fft(u15)
+    err15 = np.linalg.norm(ix_fft15(u15) - ref15) / np.linalg.norm(ref15)
+    print(f"IX's FFT recurrence in numpy against numpy.fft, N = 2^{log15}: {decade15(err15)}")
+
+b15, a15 = sps.butter(2, 0.2)
+print(f"scipy.signal.butter(2, 0.2): b {taps15(b15)}, a {taps15(a15)}")
+p15 = spl.solve_discrete_are(np.array([[1.0]]), np.array([[1.0]]), np.array([[0.01]]), np.array([[1.0]]))[0, 0]
+print(f"scipy.linalg.solve_discrete_are, q 0.01, r 1: prior variance {p15:.9f}, gain {p15 / (p15 + 1):.9f}")
+h15 = sps.firwin(65, 0.2, window="hamming", scale=False)
+print(f"scipy.signal.firwin(65, 0.2, hamming, unscaled): centre tap {h15[32]:.9f}, sum of the taps {h15.sum():.9f}")
+try:
+    sps.firwin(32, 0.5, pass_zero=False)
+    print("scipy.signal.firwin designs a 32-tap high-pass")
+except ValueError:
+    print("scipy.signal.firwin refuses a 32-tap high-pass: ValueError")
+ones15 = [float(f(1)[0]) for f in (np.hanning, np.hamming, np.blackman, np.bartlett)] + [float(np.kaiser(1, 5)[0])]
+print(f"numpy windows of length 1 (hanning, hamming, blackman, bartlett, kaiser 5): {ones15}")
