@@ -1,6 +1,6 @@
 ---
 title: "Journal"
-description: "Dated progress notes — IX pinned at 490c395, CI data and course checks, nineteen earlier findings, then two from lesson 9 and three from lesson 10, what agreed, the generated API map, and items to verify."
+description: "Dated progress notes — IX pinned at 490c395, CI data and course checks, nineteen earlier findings, then two from lesson 9, three from lesson 10 and four from lesson 11, what agreed, the generated API map, and items to verify."
 sidebar:
   order: 99
 ---
@@ -20,13 +20,14 @@ sidebar:
 - [x] Lesson 8: optimization
 - [x] Lesson 9: five other reducers, with a hand MDS and independent cross-checks
 - [x] Lesson 10: Markov chains and hidden Markov models, by hand, with IX and with numpy
+- [x] Lesson 11: probabilistic structures, seven predictions written before the first run
 - [x] Appendix: the API map, generated from the pinned commit
-- [ ] Lessons 11 to 21
+- [ ] Lessons 12 to 21
 - [x] French and Spanish translations
 
 ## QA
 
-IX is somebody else's library, pinned at `490c395`. The earlier lessons recorded nineteen findings; lesson 9 adds two API or documentation findings, and lesson 10 three more. The first column says what a caller would expect. None is filed as an IX issue. Several are defensible choices rather than defects, and the middle column says which.
+IX is somebody else's library, pinned at `490c395`. The earlier lessons recorded nineteen findings; lesson 9 adds two API or documentation findings, lesson 10 three more, and lesson 11 four more. The first column says what a caller would expect. None is filed as an IX issue. Several are defensible choices rather than defects, and the middle column says which.
 
 | Expected | What happens | Where | Measure | Status |
 |---|---|---|---|---|
@@ -54,10 +55,14 @@ IX is somebody else's library, pinned at `490c395`. The earlier lessons recorded
 | A mean first-passage time is the mean over all the walks | `mean_first_passage` averages only the walks that reach the target within `max_steps`, and reports neither that any were dropped nor how many | [`markov.rs` 94-131](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-graph/src/markov.rs#L94-L131) | From bull to stagnant, exact 31.43: 31.650 at `max_steps = 1000`, 9.836 at 20, 3.030 at 5 | Reproduced, not filed [2026-09-29](#2026-09-29--markov-chains-and-a-dishonest-casino) |
 | `backward` returns log-probabilities, as its comment says | It returns β divided by the forward scale factors: positive numbers, not logarithms | [`hmm.rs` 196-197](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-graph/src/hmm.rs#L196-L197) | Every entry of `backward` on ten rolls is positive | Reproduced, not filed [2026-09-29](#2026-09-29--markov-chains-and-a-dishonest-casino) |
 | An observation outside the alphabet is an error | `new` validates the three tables but not the observations; `forward` indexes past the emission table | [`hmm.rs` 117, 133](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-graph/src/hmm.rs#L117-L133) | `forward(&[0, 6])` on a model with six symbols panics | Reproduced, not filed [2026-09-29](#2026-09-29--markov-chains-and-a-dishonest-casino) |
+| `CountMinSketch::new`'s doc comment gives the error bound: at most total_count / width with probability at least 1 − (1/e)^depth | That is the expected overcount of one row, exceeded about half the time. The bound of Cormode and Muthukrishnan is e · total_count / width, which `with_error` uses | [`count_min.rs` 22-23](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/src/count_min.rs#L22-L23) | `new(100, 3)`, 10,000 items × 10: 0.0992 of the items exceed 1,000, where 0.0498 is allowed; none exceed 2,718 | Reproduced, not filed [2026-09-29](#2026-09-29--lesson-11-measured) |
+| A failed `CuckooFilter::insert` leaves the filter as it was: "Returns false if the filter is full" | It keeps the new fingerprint and drops the one displaced by the last kick, as Algorithm 1 of Fan et al. does, so an item inserted earlier reads as absent. The authors' reference implementation keeps that fingerprint in a victim cache; neither the doc comment nor `CONTRACTS.md` mentions the loss | [`cuckoo.rs` 36, 54-75](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/src/cuckoo.rs#L36-L75) | `new(4096)`: inserting 3,730 fails at load 0.9106; afterwards 3,730 is found and 2,498 is not | Reproduced, not filed [2026-09-29](#2026-09-29--lesson-11-measured) |
+| `CONTRACTS.md` describes `CuckooFilter` | It says victims are picked with `rand::random()`, so runs are not deterministic, and names a `CuckooFilter::delete`. The code picks `fingerprint % len`, the crate has no `rand` dependency, and the method is `remove` | [`CONTRACTS.md` 17, 32](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/CONTRACTS.md?plain=1#L17-L32), [`cuckoo.rs` 60](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/src/cuckoo.rs#L60) | Two filters fed the same sequence fail at the same insert and disagree on 0 of 100,000 probes | Reproduced, not filed [2026-09-29](#2026-09-29--lesson-11-measured) |
+| The `hyperloglog` module header states its memory | "~1.6KB memory"; `standard()` (p = 14) takes 16,384 bytes, and no precision takes 1.6 KB | [`hyperloglog.rs` 1, 34-37](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/src/hyperloglog.rs#L1-L37) | `memory_bytes()` = 16384 | Reproduced, not filed [2026-09-29](#2026-09-29--lesson-11-measured) |
 
 ## Experiments
 
-A course that finds divergences must show what it checked and found right. The original six checks remain below; the fifth failed and produced findings 15 and 16. Lesson 9 adds two exploratory geometry checks, not preregistered experiments.
+A course that finds divergences must show what it checked and found right. The original six checks remain below; the fifth failed and produced findings 15 and 16. Lesson 9 adds two exploratory geometry checks, not preregistered experiments. Lesson 11 adds seven predictions written before its first run, all confirmed, and one exploratory check.
 
 | Question | Hypothesis | Result | Verdict | Where |
 |---|---|---|---|---|
@@ -69,6 +74,14 @@ A course that finds divergences must show what it checked and found right. The o
 | Does macOS-ARM float summation change any claim the lessons make? | Written in advance: only the sign of an already-zero value should differ | `-0.0000` against `0.0000` at two corners, every other value identical to four decimals (run 35039180659) | Confirmed | [2026-09-16](#2026-09-16--a-negative-zero-on-macos) |
 | Does hand-written classical MDS preserve the same square distances as IX? | Both should reproduce the six distances, irrespective of axis orientation | Both have maximum distance error below `1e-10`; numpy agrees | Confirmed, exploratory | [2026-09-24](#2026-09-24--five-reducers-three-inputs), [`l09_reducers.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/examples/l09_reducers.rs) |
 | Does the first RBF kernel-PCA axis separate concentric rings? | Nonlinear similarity should put the radial contrast first | Both IX and scikit-learn put it on axis 4; gap `0.5798` in IX, zero on axis 1 | Refuted, exploratory | [2026-09-24](#2026-09-24--five-reducers-three-inputs), [`l09_reducers.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/examples/l09_reducers.rs) |
+| Does IX's Bloom filter meet its false-positive rate at capacity? | Written in advance (P1): in [0.00909, 0.01098], around (1 − e^(−kn/m))^k = 0.01004 | 0.01041 over 100,000 integers never inserted; no false negatives | Confirmed | [prediction](#2026-09-29--lesson-11-predicted-before-measuring), [result](#2026-09-29--lesson-11-measured), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
+| And at twice its capacity? | Written in advance (P2): in [0.1540, 0.1609], around 0.15745 | 0.15616 | Confirmed | [prediction](#2026-09-29--lesson-11-predicted-before-measuring), [result](#2026-09-29--lesson-11-measured), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
+| Does HyperLogLog's error match 1.04/√m, in IX and by hand? | Written in advance (P3): with p = 10 and 100 sets of 100,000, RMS in [0.0256, 0.0394] and mean within ±0.00975 | IX 0.0354 and 0.0028; hand 0.0340 and 0.0076 | Confirmed | [prediction](#2026-09-29--lesson-11-predicted-before-measuring), [result](#2026-09-29--lesson-11-measured), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
+| Does count-min's documented bound hold? | Written in advance (P4): more than 0.0498 of the items above N/width, in [0.07, 0.20]; fewer than 0.0498 above e·N/width | 0.0992 and 0.0000 | Confirmed: the documented bound fails (finding 25) | [prediction](#2026-09-29--lesson-11-predicted-before-measuring), [result](#2026-09-29--lesson-11-measured), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
+| How full does a cuckoo filter get before an insert fails? | Written in advance (P5): at least 0.90 of the slots | 0.9106, below the 95% of Fan et al. | Confirmed | [prediction](#2026-09-29--lesson-11-predicted-before-measuring), [result](#2026-09-29--lesson-11-measured), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
+| Does a failed cuckoo insert lose an item inserted earlier? | Written in advance (P6), from reading `insert`: at least one | One, 2,498 (finding 26) | Confirmed | [prediction](#2026-09-29--lesson-11-predicted-before-measuring), [result](#2026-09-29--lesson-11-measured), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
+| Is the cuckoo filter deterministic, against `CONTRACTS.md`? | Written in advance (P7): the same failure and the same answers | Same failure; 0 of 100,000 answers differ (finding 27) | Confirmed | [prediction](#2026-09-29--lesson-11-predicted-before-measuring), [result](#2026-09-29--lesson-11-measured), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
+| Where is HyperLogLog least accurate? | Not written in advance | Mean error +0.0244 (IX) and +0.0234 (hand) at n = 2,560 = 2.5 m, about seven standard errors; within ±0.008 at the other cardinalities tested except n = 3,000 | Exploratory | [result](#2026-09-29--lesson-11-measured), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
 
 ## 2026-09-14 — IX, pinned
 
@@ -199,6 +212,37 @@ Worth recording next to the findings, because the lessons so far have mostly fou
 
   No hypothesis was written before this run: these are comparisons with hand implementations and with numpy, not preregistered experiments. CI run [36645993165](https://github.com/spareilleux/learn/actions/runs/36645993165) passed on Windows, Linux and macOS: every line of lesson 10, log-likelihoods included, matched `expected/` byte for byte, and the Linux cross-check matched `expected/crosscheck.txt`.
 
+## 2026-09-29 — Lesson 11, predicted before measuring
+
+Written before any lesson 11 code ran against IX's [`ix-probabilistic`](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic) at the pinned commit. The numbers below come from formulas and from reading the source, not from a run. Once the lesson is written, each prediction gets one test in `code/machine-learning-ix`. A prediction that fails stays in the Experiments table as refuted.
+
+- **P1, Bloom filter at capacity.** `BloomFilter::new(10_000, 0.01)` sizes itself to m = 95,851 bits and k = 7 hashes. Insert the integers 0 to 9,999, then query the 100,000 integers 10,000 to 109,999. The false-positive rate lies in [0.00909, 0.01098], three standard deviations around (1 − e^(−kn/m))^k = 0.01004.
+- **P2, Bloom filter at twice its capacity.** Insert 0 to 19,999 into the same kind of filter, then query 20,000 to 119,999. The rate lies in [0.1540, 0.1609], around 0.15745.
+- **P3, HyperLogLog.** Use p = 10 (1,024 registers) and 100 disjoint sets of 100,000 distinct items. The root-mean-square relative error of `count()` lies in [0.0256, 0.0394], around 1.04/√1024 = 0.0325. The mean relative error lies within ±0.00975 of zero. The same holds for a hand-written HyperLogLog that hashes with splitmix64 instead of `DefaultHasher`.
+- **P4, count-min sketch.** `CountMinSketch::new(100, 3)` receives 10,000 distinct items, 10 times each (N = 100,000). The doc comment of `new` promises an error of at most N/width = 1,000 with probability at least 1 − e^(−3) = 0.9502.
+  - **Prediction:** more than 0.0498 of the items have an overcount above 1,000. A binomial model of the bucket loads gives 0.106, and the fraction should lie in [0.07, 0.20].
+  - **Control:** fewer than 0.0498 have an overcount above e·N/width = 2,718, the bound of Cormode and Muthukrishnan.
+- **P5, cuckoo filter load.** `CuckooFilter::new(4096)` has 1,024 buckets of 4 slots. Insert the integers 0, 1, 2, … until the first `insert` returns false. The load factor at that point is at least 0.90; Fan et al. report about 95% for buckets of 4.
+- **P6, cuckoo filter after a failure.** When `insert` gives up after 500 kicks, it drops the fingerprint displaced by the last kick ([`cuckoo.rs` 54-75](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/src/cuckoo.rs#L54-L75)). Prediction: after the first failure, `contains` no longer finds at least one item whose `insert` returned true.
+- **P7, cuckoo determinism.** `CONTRACTS.md` says `insert` picks its victim with `rand::random()` and is not deterministic. The code picks `fingerprint % len`, and the crate has no `rand` dependency. Prediction: two filters fed the same sequence fail at the same insert and answer `contains` identically on 100,000 probes.
+
+Sources for the constants: [Bloom (1970)](https://doi.org/10.1145/362686.362692), [Flajolet et al. (2007)](https://dmtcs.episciences.org/3545), [Cormode and Muthukrishnan (2005)](https://doi.org/10.1016/j.jalgor.2003.12.001), [Fan et al. (2014)](https://doi.org/10.1145/2674005.2674994).
+
+## 2026-09-29 — Lesson 11, measured
+
+- **Order of events:** the predictions entry above was committed alone as `6b220c5` at 23:10 local time (UTC−4), before any lesson 11 code existed. [`l11_sketches.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/examples/l11_sketches.rs) first ran at 23:13 on Windows, with the pinned IX commit. [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) holds the experiments, and one test per prediction asserts the interval written in advance. All seven predictions held on that first run, and no interval was changed.
+- **Bloom:** 1,041 false positives in 100,000 at capacity (0.01041; theory 0.01004), and 15,616 at twice the capacity (0.15616; theory 0.15745). No false negatives. IX's `new(10_000, 0.01)` matches the hand sizing, m = 95,851 and k = 7.
+- **HyperLogLog, p = 10:** RMS relative errors 0.0354 (IX) and 0.0340 (hand, splitmix64), means 0.0028 and 0.0076, against 1.04/√1024 = 0.0325.
+- **Count-min, `new(100, 3)`:** 0.0992 of the items overshoot N/width = 1,000, the bound its doc comment gives with probability 0.9502. None overshoot e·N/width = 2,718 (finding 25).
+- **Cuckoo, `new(4096)`:** the first insert to fail is 3,730, at load 0.9106. After it, 2,498 is no longer found, while 3,730 is (finding 26). A second filter fed the same sequence fails at the same insert and agrees on 100,000 probes, against the `rand::random()` of `CONTRACTS.md` (finding 27).
+- **Not preregistered:** the cardinality table.
+  - The first run used 20 sets per point and already showed a bump at n = 2,560 (mean errors +0.0265 for IX, +0.0356 by hand).
+  - The lesson prints 100 sets per point. There the bump is +0.0244 and +0.0234, about seven standard errors, at the switch from linear counting.
+  - `HyperLogLog::standard()` reports 16,384 bytes against the module header's "~1.6KB" (finding 28).
+- **The numpy 2.4.2 cross-check** recomputes m, k, both theoretical rates and the binomial model (0.1058). It also replays the hand HyperLogLog and finds the same RMS, mean and worst errors, and the same means and RMS errors at every cardinality. It does not replay IX's `DefaultHasher`.
+
+  CI run [36665337751](https://github.com/spareilleux/learn/actions/runs/36665337751) passed on Windows, Linux and macOS: every count lesson 11 prints, IX's `DefaultHasher` ones included, matched `expected/` byte for byte, and the Linux cross-check matched `expected/crosscheck.txt`.
+
 ## To verify
 
 - The `ix_ml_pipeline` tool end to end: the scaling order of finding 1, the task inference of finding 2 on a CSV file, and the `All rows contain NaN values` error for a file with a text column. All three are read in the code, not run.
@@ -216,3 +260,5 @@ Worth recording next to the findings, because the lessons so far have mostly fou
 - The values printed by a direct `println!("{:.6}")` rather than through `fmt_vec` — lesson 8's `intercept -0.000000` is one — carry the same signed-zero hazard and are not normalized. That one agreed on the three systems in run 35039180659; the others have not been enumerated.
 - Repeat lesson 9's numeric snapshots on Linux and macOS CI; check whether IX's NMF MSE and the RBF fourth-axis gap round identically there. Benchmark t-SNE's scaling separately before assigning a runtime cost.
 - Whether IX's `baum_welch`, from several starts and on longer sequences, recovers the casino's parameters; lesson 10 ran one start on 1,000 rolls.
+- Whether the deterministic victim choice is why IX's cuckoo filter stops at 91% rather than the 95% of Fan et al.: lesson 11 measured one filter and one sequence. Compare with a random choice over several sequences.
+- Whether `ix-duck`'s `ix_cuckoo_*` SQL functions, which wrap the same `insert`, can surface finding 26.

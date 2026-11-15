@@ -106,4 +106,16 @@ ln P(rolls): -1761.7121
 Viterbi: agreement with the true states 0.869; 6 loaded runs
 posterior decoding: agreement with the true states 0.876; 16 loaded runs
 trap: posterior argmax [0, 1], Viterbi [0, 2]
+
+== lesson 11
+Bloom sizing: m = 95851, k = 7; theory at 1x and 2x capacity 0.01004, 0.15745
+count-min binomial model: 0.1058
+hand HyperLogLog, 100 sets of 100000: RMS 0.0340, mean 0.0076, worst 0.1016
+  n =    500: mean -0.0011, RMS 0.0235
+  n =   2000: mean  0.0034, RMS 0.0289
+  n =   2560: mean  0.0234, RMS 0.0421
+  n =   3000: mean  0.0148, RMS 0.0289
+  n =   4000: mean  0.0052, RMS 0.0334
+  n =   6000: mean  0.0010, RMS 0.0321
+  n =  10000: mean  0.0026, RMS 0.0341
 exit 0
