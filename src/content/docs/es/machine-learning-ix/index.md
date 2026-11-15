@@ -88,7 +88,7 @@ Las lecciones 1 a 9 están escritas. El resto es el plan, una lección por famil
 | 13 | [Atención, normalización de capa y un bloque transformer](13-transformer/) | `ix-nn` | — |
 | 14 | [Aprendizaje por refuerzo: bandidos y Q-learning](14-reinforcement-learning/) | `ix-rl` | — |
 | 15 | [Señales: la transformada de Fourier, ondículas, filtros y Kalman](15-signals/) | `ix-signal` | — |
-| 16 | Búsqueda: A\*, búsqueda en árbol de Monte-Carlo, búsqueda local | `ix-search`, `ix-graph` | — |
+| 16 | [Búsqueda: A\*, búsqueda en árbol de Monte-Carlo, búsqueda local](16-search/) | `ix-search`, `ix-graph` | — |
 | 17 | Evolución: algoritmos genéticos, evolución diferencial, frentes de Pareto | `ix-evolution` | — |
 | 18 | Ejemplos adversarios, envenenamiento y las defensas | `ix-adversarial` | — |
 | 19 | La forma de los datos: homología persistente | `ix-topo`, `ix-manifold` | — |

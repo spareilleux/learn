@@ -30,6 +30,7 @@ pub mod net;
 pub mod optimize;
 pub mod reduce;
 pub mod rl;
+pub mod search;
 pub mod sequence;
 pub mod signal;
 pub mod sketch;
