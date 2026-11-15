@@ -560,3 +560,22 @@ for d13 in [4, 16, 64, 256]:
           f"{largest13[0] / 2000:.3f}, scaled {largest13[1] / 2000:.3f}")
 spread13 = np.random.default_rng(13).uniform(-1, 1, 1_000_000).std()
 print(f"numpy's own U(-1, 1), a million draws: std {spread13:.4f}, 1/sqrt(3) = {1 / np.sqrt(3):.4f}")
+
+print("\n== lesson 14")
+q14 = np.zeros((25, 4))
+for _ in range(200):
+    v14 = q14.max(axis=1)
+    new14 = np.zeros((25, 4))
+    for r in range(5):
+        for c in range(5):
+            if (r, c) == (4, 4):
+                continue
+            for a, (nr, nc) in enumerate([(max(r - 1, 0), c), (r, min(c + 1, 4)), (min(r + 1, 4), c), (r, max(c - 1, 0))]):
+                new14[r * 5 + c, a] = 10.0 if (nr, nc) == (4, 4) else -1.0 + 0.99 * v14[nr * 5 + nc]
+    q14 = new14
+print(f"value iteration, 5 x 5 GridWorld, gamma 0.99: V*(start) {q14[0].max():.6f}")
+best14 = [(rng13(t * 1_000_000, 120).reshape(10, 12).sum(axis=1) - 6).max() for t in range(2000)]
+print(f"testbed, 2000 tasks from the course's Rng: mean of the best arm's mean {np.mean(best14):.3f}")
+for horizon14 in [10_000, 100_000]:
+    bound14 = 8 * math.log(horizon14) * (1 / 0.1 + 1 / 0.2) + (1 + math.pi ** 2 / 3) * 0.3
+    print(f"Auer et al. bound at T = {horizon14}: {bound14:.1f}")
