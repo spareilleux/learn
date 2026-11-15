@@ -69,7 +69,7 @@ Cada enlace a código de IX en las lecciones apunta a ese commit, así que los n
 
 ## Plan
 
-Las lecciones 1 a 20 están escritas. El resto es el plan, una lección por familia de algoritmos que IX implementa, y cada una se publicará con su código y su comprobación cruzada como las demás.
+Las 21 lecciones del plan están escritas, una por familia de algoritmos que IX implementa, cada una con su código y su comprobación cruzada.
 
 | # | Lección | Crates de IX | Si conoces ML.NET |
 |---|---|---|---|
@@ -93,7 +93,7 @@ Las lecciones 1 a 20 están escritas. El resto es el plan, una lección por fami
 | 18 | [Ejemplos adversarios, envenenamiento y las defensas](18-adversarial/) | `ix-adversarial` | — |
 | 19 | [La forma de los datos: homología persistente](19-persistent-homology/) | `ix-topo`, `ix-manifold` | — |
 | 20 | [En la GPU: los shaders WGSL de IX, sus límites y sus aceleraciones](20-gpu-wgsl/) | `ix-gpu` | — |
-| 21 | Pipelines de principio a fin, y las herramientas MCP que llama un asistente | `ix-pipeline`, `ix-agent` | `MLContext` |
+| 21 | [Pipelines de principio a fin, y las herramientas MCP que llama un asistente](21-pipelines-mcp/) | `ix-pipeline`, `ix-agent` | `MLContext` |
 | — | [Cada crate y cada función pública](api-map/) | los 80 con superficie pública | — |
 | — | [Diario](journal/) | | |
 

@@ -188,4 +188,11 @@ stability, Python sets and scipy: exact bottleneck at most 0.02 in 50 of 50, IX'
 kNN shader loop, numpy float32: P(wrong) 0.1253; queries that differ 135, k = 1 0, first 256 references 0; neighbours recovered 9855 of 10000
 thresholds, numpy float32: cosine 1.000000, batch 0.000000, cosine of zero 0.000000
 limits: largest n with 4 n^2 <= 128 MiB 5792; 10000 x 10000 x 4 = 400000000 bytes
+
+== lesson 21
+labels 1 and 2, all right: scikit-learn macro 1 1 1
+the same with labels=[0, 1, 2], as the tool counts them: 0.6666666666666666 0.6666666666666666 0.6666666666666666
+FNV-1a 64 of {"data":[1.0,2.0]}: fnv1a64:8091c3ce6ff9b24c
+build_seconds: 18 distinct whole values, largest 48: the tool counts 49 classes
+linear regression, chronological split: predictions after either scaler within 1e-9 of the raw feature's: yes
 exit 0
