@@ -118,4 +118,12 @@ hand HyperLogLog, 100 sets of 100000: RMS 0.0340, mean 0.0076, worst 0.1016
   n =   4000: mean  0.0052, RMS 0.0334
   n =   6000: mean  0.0010, RMS 0.0321
   n =  10000: mean  0.0026, RMS 0.0341
+
+== lesson 12
+x[i, 2] - x[i, 0]: min 0.055422, max 0.055483
+singular values of [x 1]: [4.557008e+00 3.947100e+00 1.871730e+00 8.891541e-05], condition number 51251
+least squares: w [ 0.499818 -0.3       0.800182], b 0.089990, w0 + w2 = 1.300000, mean squared error below 1e-12: True
+at w = 0, b = 0: loss 0.724417, dL/dw [-0.959694  0.656138 -0.96151 ], dL/db -0.032640
+Adam, 200 steps: w [ 0.64994  -0.300002  0.650065], b 0.098315, loss below 0.01 first at step 31
+FFT loss, numpy: dL/dx first four [-4.429396 -6.277916 -0.459292 -5.058516], central differences within 1e-6: True
 exit 0
