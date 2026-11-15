@@ -9,6 +9,7 @@ description = "Examples of the 'Machine learning, as applied in IX' course: each
 [dependencies]
 ix-autograd = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2", features = ["fft-autograd"] }
 ix-ensemble = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-evolution = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
 ix-graph = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
 ix-math = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
 ix-nn = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
@@ -23,3 +24,5 @@ ix-voicings = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c395336
 ndarray = "0.17"
 csv = "1.4"
 serde_json = "1"
+# The trait that IX's evolution operators take; 0.9.5 is already in the lock through IX
+rand = { version = "0.9", default-features = false }

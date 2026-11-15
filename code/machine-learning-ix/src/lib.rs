@@ -25,6 +25,7 @@ pub mod cluster;
 pub mod data;
 pub mod ensemble;
 pub mod evaluation;
+pub mod evolution;
 pub mod linear;
 pub mod net;
 pub mod optimize;
