@@ -75,6 +75,16 @@ A C# and Vulkan program built with [BRUTAL](https://github.com/ahwootech/BRUTAL)
 
 Captured on 2026-11-11. The tiles are chosen once, at the start, so the far ones stay coarse. The code and its measurements are in Guitar Alchemist pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851). It is a local experiment and is not distributed: the tiles are streamed from Google at each run and none is stored.
 
+### GeoTiles: above the Château Frontenac, Quebec City
+
+<video controls playsinline preload="metadata" poster="../demos/geotiles/quebec-drone.jpg" width="1280" height="720" style="width: 100%; height: auto;"><source src="../demos/geotiles/quebec-drone.mp4" type="video/mp4"></video>
+
+*A drone flight above the Château Frontenac and Old Quebec: 60 s, 15 MB, without sound. Imagery: Google Maps.*
+
+The same program and the same oval, centred on the Château Frontenac: the Dufferin Terrace, the Place d'Armes, the Citadelle and the old port on the St. Lawrence pass below the camera. The run walked 100 nested tilesets to pick 185 tiles, about 700,000 triangles, with 286 requests in one Google session, and drew them at 60 frames a second.
+
+Captured on 2026-11-14, with the code of pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851). As for Ottawa, the tiles are streamed from Google at each run and none is stored.
+
 ## Also
 
 The [Artifacts](../artifacts/) page lists interactive pages hosted on claude.ai, such as the *Atlas des Douze* and a microphone placement bench.

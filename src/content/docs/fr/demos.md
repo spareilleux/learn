@@ -75,6 +75,16 @@ Un programme en C# et Vulkan, construit avec [BRUTAL](https://github.com/ahwoote
 
 Capture du 2026-11-11. Les tuiles sont choisies une seule fois, au départ : les plus lointaines restent donc grossières. Le code et ses mesures sont dans la pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851) de Guitar Alchemist (en anglais). C'est une expérience locale, qui n'est pas distribuée : les tuiles sont lues chez Google à chaque lancement et aucune n'est conservée.
 
+### GeoTiles : au-dessus du Château Frontenac, à Québec
+
+<video controls playsinline preload="metadata" poster="../../demos/geotiles/quebec-drone.jpg" width="1280" height="720" style="width: 100%; height: auto;"><source src="../../demos/geotiles/quebec-drone.mp4" type="video/mp4"></video>
+
+*Un vol de drone au-dessus du Château Frontenac et du Vieux-Québec : 60 s, 15 Mo, sans son. Imagerie : Google Maps.*
+
+Le même programme et le même ovale, centrés sur le Château Frontenac : la terrasse Dufferin, la place d'Armes, la Citadelle et le Vieux-Port sur le Saint-Laurent passent sous la caméra. Le programme a parcouru 100 tilesets imbriqués pour choisir 185 tuiles, environ 700 000 triangles, en 286 requêtes et une seule session Google, affichés à 60 images par seconde.
+
+Capture du 2026-11-14, avec le code de la pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851). Comme pour Ottawa, les tuiles viennent de Google à chaque exécution et aucune n'est conservée.
+
 ## Voir aussi
 
 La page [Artefacts](../artifacts/) liste des pages interactives hébergées sur claude.ai, comme l'*Atlas des Douze* et un banc de placement de micros.
