@@ -19,6 +19,7 @@
 //! assert_eq!(labels[0], labels[1]);
 //! ```
 
+pub mod adversarial;
 pub mod autodiff;
 pub mod classify;
 pub mod cluster;

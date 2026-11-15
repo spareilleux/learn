@@ -163,4 +163,16 @@ numpy windows of length 1 (hanning, hamming, blackman, bartlett, kaiser 5): [1.0
 3 dimensions, 100 sets of 200 uniform points: mean size of front 0 17.810
 BLX-0.500, 10^6 children of N(0, 1) parents: variance 1.169, formula 1.167
 BLX-0.366, 10^6 children of N(0, 1) parents: variance 1.002, formula 1.000
+
+== lesson 18
+FGSM against w = mu, numpy: accuracy at eps 0, 0.1, 0.2, 0.3: 0.9780 0.8460 0.4780 0.1470
+Carlini-Wagner as a scalar recurrence, c = 0.25: 1956 points, 1956 unchanged, misclassified 0.0000
+Carlini-Wagner as a scalar recurrence, c = 1.0: 1956 points, 1 unchanged, misclassified 0.5072
+Carlini-Wagner as a scalar recurrence, c = 0.75: 1956 points, 1 unchanged, misclassified 0.3522
+squeezing to 3 bits, eps 0.05: changed 0.3510, mean |change| 0.05014, root mean square 0.08463
+squeezing to 5 bits, eps 0.01: changed 0.3094, mean |change| 0.00998, root mean square 0.01794
+certified radius, sigma 1, p_A = 0.501 to 0.999: largest error against scipy 4.44e-04 at p_A = 0.642
+logits (2, -1) clamped: IX's formula 6.3609, scipy 6.3613
+label flips, numpy's 5 nearest neighbours: 99 of 100 flipped labels found, 11 others
+spectral signatures with numpy's eigh: flagged per class [9, 9]; with the 5 shifted points [10, 9], shifted among them 5
 exit 0
