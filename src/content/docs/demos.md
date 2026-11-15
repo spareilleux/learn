@@ -75,6 +75,14 @@ A C# and Vulkan program built with [BRUTAL](https://github.com/ahwootech/BRUTAL)
 
 Captured on 2026-11-11. The tiles are chosen once, at the start, so the far ones stay coarse. The code and its measurements are in Guitar Alchemist pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851). It is a local experiment and is not distributed: the tiles are streamed from Google at each run and none is stored.
 
+<video controls playsinline preload="metadata" poster="../demos/geotiles/ottawa-lidar-drone.jpg" width="1280" height="720" style="width: 100%; height: auto;"><source src="../demos/geotiles/ottawa-lidar-drone.mp4" type="video/mp4"></video>
+
+*The same flight over the laser's measurements: 60 s, 14 MB, without sound. Contains information licensed under the Open Government Licence – Canada (Natural Resources Canada, HRDEM).*
+
+With `--lidar`, the program draws the place from free data instead: the elevation models that [Natural Resources Canada](https://natural-resources.canada.ca/science-data/science-research/geomatics/significant-increase-elevation-data-coverage) made from airborne LiDAR, at one metre (HRDEM), without a key. It asks NRCan's catalogue which file holds the place, reads only the dozen tiles it needs out of a 300 GB file through HTTP range requests, and turns the surface the laser measured into about a million triangles, drawn at 60 frames a second. There is no photograph: the colours (water, ground, trees, buildings) are guessed from the heights, walls are slopes from the roofs down to the street, and some trees on the escarpment come out the colour of stone. The highest point lands 2 m from where OpenStreetMap puts the Peace Tower. It covers only the parts of Canada that HRDEM covers, and these data may be stored and shared.
+
+Captured on 2026-11-14.
+
 ## Also
 
 The [Artifacts](../artifacts/) page lists interactive pages hosted on claude.ai, such as the *Atlas des Douze* and a microphone placement bench.

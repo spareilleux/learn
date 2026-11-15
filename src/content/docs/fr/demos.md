@@ -75,6 +75,14 @@ Un programme en C# et Vulkan, construit avec [BRUTAL](https://github.com/ahwoote
 
 Capture du 2026-11-11. Les tuiles sont choisies une seule fois, au départ : les plus lointaines restent donc grossières. Le code et ses mesures sont dans la pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851) de Guitar Alchemist (en anglais). C'est une expérience locale, qui n'est pas distribuée : les tuiles sont lues chez Google à chaque lancement et aucune n'est conservée.
 
+<video controls playsinline preload="metadata" poster="../../demos/geotiles/ottawa-lidar-drone.jpg" width="1280" height="720" style="width: 100%; height: auto;"><source src="../../demos/geotiles/ottawa-lidar-drone.mp4" type="video/mp4"></video>
+
+*Le même vol au-dessus des mesures du laser : 60 s, 14 Mo, sans son. Contient des informations visées par la Licence du gouvernement ouvert – Canada (Ressources naturelles Canada, MNEHR).*
+
+Avec `--lidar`, le programme dessine le lieu à partir de données gratuites : les modèles d'élévation que [Ressources naturelles Canada](https://natural-resources.canada.ca/science-data/science-research/geomatics/significant-increase-elevation-data-coverage) a tirés du LiDAR aéroporté, au mètre près (MNEHR), sans clef. Il demande au catalogue de RNCan quel fichier contient le lieu, ne lit que la douzaine de tuiles utiles d'un fichier de 300 Go par des requêtes HTTP de plages d'octets, et change la surface mesurée par le laser en un million de triangles environ, affichés à 60 images par seconde. Il n'y a pas de photographie : les couleurs (eau, sol, arbres, bâtiments) sont devinées d'après les hauteurs, les murs sont des pentes des toits jusqu'à la rue, et des arbres de l'escarpement sortent couleur pierre. Le point le plus haut tombe à 2 m de l'endroit où OpenStreetMap place la Tour de la Paix. Seules les régions du Canada couvertes par le MNEHR sont disponibles, et ces données peuvent être conservées et partagées.
+
+Capture du 2026-11-14.
+
 ## Voir aussi
 
 La page [Artefacts](../artifacts/) liste des pages interactives hébergées sur claude.ai, comme l'*Atlas des Douze* et un banc de placement de micros.

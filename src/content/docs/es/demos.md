@@ -75,6 +75,14 @@ Un programa en C# y Vulkan, hecho con [BRUTAL](https://github.com/ahwootech/BRUT
 
 Captura del 2026-11-11. Las teselas se eligen una sola vez, al empezar, así que las más lejanas quedan toscas. El código y sus mediciones están en la pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851) de Guitar Alchemist (en inglés). Es un experimento local que no se distribuye: las teselas se leen de Google en cada ejecución y no se guarda ninguna.
 
+<video controls playsinline preload="metadata" poster="../../demos/geotiles/ottawa-lidar-drone.jpg" width="1280" height="720" style="width: 100%; height: auto;"><source src="../../demos/geotiles/ottawa-lidar-drone.mp4" type="video/mp4"></video>
+
+*El mismo vuelo sobre las mediciones del láser: 60 s, 14 MB, sin sonido. Contiene información bajo la Licencia de Gobierno Abierto – Canadá (Recursos Naturales de Canadá, HRDEM).*
+
+Con `--lidar`, el programa dibuja el lugar a partir de datos gratuitos: los modelos de elevación que [Recursos Naturales de Canadá](https://natural-resources.canada.ca/science-data/science-research/geomatics/significant-increase-elevation-data-coverage) obtuvo del LiDAR aerotransportado, con un metro de resolución (HRDEM), sin clave. Pregunta al catálogo de NRCan qué archivo contiene el lugar, lee solo la docena de teselas que necesita de un archivo de 300 GB mediante peticiones HTTP de rangos de bytes, y convierte la superficie que midió el láser en cerca de un millón de triángulos, dibujados a 60 imágenes por segundo. No hay fotografía: los colores (agua, suelo, árboles, edificios) se deducen de las alturas, los muros son pendientes desde los tejados hasta la calle, y algunos árboles del escarpe salen del color de la piedra. El punto más alto cae a 2 m de donde OpenStreetMap sitúa la Torre de la Paz. Solo cubre las regiones de Canadá que cubre HRDEM, y estos datos se pueden guardar y compartir.
+
+Captura del 2026-11-14.
+
 ## Ver también
 
 La página [Artefactos](../artifacts/) recoge páginas interactivas alojadas en claude.ai, como el *Atlas des Douze* y un banco de colocación de micrófonos.
