@@ -1,0 +1,132 @@
+---
+module_id: gtr-023-fit-a-straight-slide-bar-to-contact-targets
+department: guitar-studies
+course: "Fit a Straight Slide Bar to Contact Targets"
+level: advanced
+prerequisites: ["gtr-019-declare-the-coordinate-of-a-continuous-slide"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Fit a Straight Slide Bar to Contact Targets
+
+> Authored finite model and bounded source reading. Human technical, fluent-language, musician and learner decisions remain pending. No new engine render, listening, playing, parser execution or production adoption is claimed.
+
+A diagram can show individually valid slide positions that one rigid straight bar cannot reach simultaneously. Fit the physical contact coordinate as an affine function of transverse string position. Least squares gives a transparent baseline, and the maximum absolute residual checks the declared geometric tolerance. Musical pitch closeness is a different objective and would require a different weighting. The authored fit constrains a future [GA](https://github.com/GuitarAlchemist/ga) slide suggestion or a teaching scene; it is not a hand or bottleneck contact simulation.
+
+## Specific assumptions and limits
+
+Transverse coordinates are distinct; least squares is unweighted and operates in physical length units. The rigid bar is straight. Signed residual means target minus fitted contact. No deflection, pitch optimization or playing trial is included.
+
+## Work from the direct representation
+
+Write the main input table before opening the prepared answers. Identify the coordinate system, physical or logical unit, support and ordering rule for every field. A number without its convention cannot safely cross into an audio graph, a scene or an agent message. Derive intermediate quantities as well as the final decision. The displayed packet deliberately keeps inputs and expected outputs separate so a second reader can recompute the result rather than merely recognize a familiar label.
+
+Repeat the operation with the negative control, keeping its changed inputs visible. Explain which invariant survives and which claim fails. A useful control targets the mechanism under discussion; a different example that only looks plausible may never exercise the risky boundary. Agreement in the main case alone cannot show that a proposed abstraction preserves the operation. Conversely, a rejected control is an expected outcome of the teaching model, not an observed defect in an existing product.
+
+Read the full prerequisite and the retained project artifact below. The prerequisite establishes an earlier operation with its own limits. The retained runner supplies an actual audio comparison workflow and separates raw samples, encoded output and acceptance claims. It does not implement this lesson’s new model. Local source hashes identify complete bytes at the pinned revision; they do not turn a source inspection into runtime execution. Where a primary reference is linked, use only the bounded definition recorded in the packet.
+
+## Prepare a source-assisted project handoff
+
+Create a short GA review note containing your manual calculation, the declared convention and the rejecting witness. Keep that direct result as the baseline before proposing a DSL node, agent instruction or scene control. Such a proposal must explain what information its input preserves and which observation would disprove its fidelity. If a required input is absent, leave the result unresolved instead of filling the gap with a convenient default.
+
+Retain your unaided response before revealing the corrections. Record any calculator, source lookup or agent assistance, then preserve the corrected response alongside the original and explain the change. The packet contains a prepared criterion for each exercise, with no accepted learner decisions. Matching an answer key does not establish independent recall or a successful learner trial. Record actual commands, inputs, outputs, failures and replays in the validation journal when the model is tested. Keep human technical review, fluent-language review, musician judgment, production runtime and publication as separately supported decisions.
+
+[Prerequisite](../../guitar-studies/en/gtr-019-declare-the-coordinate-of-a-continuous-slide.md)
+
+[Retained project artifact](../../../../code/streeling/guitar-runtime/run.mjs)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-25-c/unit-a.json)
+
+[Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25-c/journal.md)
+
+## Fixed case and prepared quantities
+
+```json
+{
+  "values": {
+    "transverse": [
+      0,
+      1,
+      2
+    ],
+    "targets": [
+      3,
+      4,
+      5
+    ],
+    "tolerance": 0.1
+  },
+  "formula": "b=sum((y-mean(y))*(x-mean(x)))/sum((y-mean(y))^2); a=mean(x)-b*mean(y); residual=target-(a+b*y); fits=max(abs(residual))<=tolerance",
+  "expected": {
+    "intercept": 3,
+    "slope": 1,
+    "residuals": [
+      0,
+      0,
+      0
+    ],
+    "fits": true
+  },
+  "negative_control": {
+    "values": {
+      "transverse": [
+        0,
+        1,
+        2
+      ],
+      "targets": [
+        3,
+        4,
+        6
+      ],
+      "tolerance": 0.1
+    },
+    "expected": {
+      "intercept": 2.8333333333333335,
+      "slope": 1.5,
+      "residuals": [
+        0.16666666666666666,
+        -0.3333333333333333,
+        0.16666666666666666
+      ],
+      "fits": false
+    }
+  }
+}
+```
+
+### Exercise 1
+
+Calculate the main result and name its convention.
+
+> **Answer:** The fitted intercept is 3 and slope is 1; every residual is 0.
+
+### Exercise 2
+
+Which quantity must remain separate?
+
+> **Answer:** Geometric length error and pitch error are different objectives; the fit does not minimize cents.
+
+### Exercise 3
+
+What assumption prevents a stronger conclusion?
+
+> **Answer:** A rigid straight bar imposes an affine contact line; curved or independently articulated contacts need another model.
+
+### Exercise 4
+
+Explain the negative control.
+
+> **Answer:** The control residuals are `[1/6,-1/3,1/6]`; their largest magnitude exceeds 0.1.
+
+### Exercise 5
+
+What observation would reject the proposed claim?
+
+> **Answer:** A retained maximum residual larger than tolerance rejects a simultaneous straight-bar fit under this policy.
+
+## Source-assisted learner task
+
+Apply the direct project handoff above to both fixed cases. Preserve the typed input table, every intermediate result, the negative-control explanation and the final rejecting witness. The prepared answers are checks, not observations of your work.

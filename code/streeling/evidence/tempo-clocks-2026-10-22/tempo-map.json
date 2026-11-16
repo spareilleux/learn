@@ -1,0 +1,271 @@
+{
+  "scope": "Authored event models and exact rational integration, not an emitted SMF, parsed GA output, device sequence or render.",
+  "ticks_per_quarter": 480,
+  "segments": [
+    {
+      "absolute_tick": 0,
+      "microseconds_per_quarter": 500000
+    },
+    {
+      "absolute_tick": 480,
+      "microseconds_per_quarter": 1000000
+    },
+    {
+      "absolute_tick": 960,
+      "microseconds_per_quarter": 250000
+    }
+  ],
+  "rows": [
+    {
+      "tick": 0,
+      "quarter_position": {
+        "rational": "0",
+        "decimal": 0.0
+      },
+      "seconds": {
+        "rational": "0",
+        "decimal": 0.0
+      }
+    },
+    {
+      "tick": 240,
+      "quarter_position": {
+        "rational": "1/2",
+        "decimal": 0.5
+      },
+      "seconds": {
+        "rational": "1/4",
+        "decimal": 0.25
+      }
+    },
+    {
+      "tick": 480,
+      "quarter_position": {
+        "rational": "1",
+        "decimal": 1.0
+      },
+      "seconds": {
+        "rational": "1/2",
+        "decimal": 0.5
+      }
+    },
+    {
+      "tick": 720,
+      "quarter_position": {
+        "rational": "3/2",
+        "decimal": 1.5
+      },
+      "seconds": {
+        "rational": "1",
+        "decimal": 1.0
+      }
+    },
+    {
+      "tick": 960,
+      "quarter_position": {
+        "rational": "2",
+        "decimal": 2.0
+      },
+      "seconds": {
+        "rational": "3/2",
+        "decimal": 1.5
+      }
+    },
+    {
+      "tick": 1200,
+      "quarter_position": {
+        "rational": "5/2",
+        "decimal": 2.5
+      },
+      "seconds": {
+        "rational": "13/8",
+        "decimal": 1.625
+      }
+    }
+  ],
+  "event_order_at_tempo_boundary": "Apply new tempo only to subsequent positive tick intervals; simultaneous events use the declared order.",
+  "spanning_note": {
+    "start_tick": 240,
+    "end_tick": 1200,
+    "start_seconds": {
+      "rational": "1/4",
+      "decimal": 0.25
+    },
+    "end_seconds": {
+      "rational": "13/8",
+      "decimal": 1.625
+    },
+    "duration_seconds": {
+      "rational": "11/8",
+      "decimal": 1.375
+    },
+    "interval_ticks": [
+      240,
+      480,
+      240
+    ],
+    "interval_seconds": [
+      {
+        "rational": "1/4",
+        "decimal": 0.25
+      },
+      {
+        "rational": "1",
+        "decimal": 1.0
+      },
+      {
+        "rational": "1/8",
+        "decimal": 0.125
+      }
+    ]
+  },
+  "wrong_global_last_tempo_at_tick1200_seconds": {
+    "rational": "5/8",
+    "decimal": 0.625
+  },
+  "streams": [
+    {
+      "id": "A",
+      "events": [
+        {
+          "kind": "tempo",
+          "delta": 0,
+          "microseconds_per_quarter": 500000,
+          "absolute_tick": 0
+        },
+        {
+          "kind": "note_on",
+          "delta": 0,
+          "note": 60,
+          "velocity": 64,
+          "channel": 0,
+          "absolute_tick": 0
+        },
+        {
+          "kind": "tempo",
+          "delta": 480,
+          "microseconds_per_quarter": 1000000,
+          "absolute_tick": 480
+        },
+        {
+          "kind": "note_off",
+          "delta": 480,
+          "note": 60,
+          "velocity": 0,
+          "channel": 0,
+          "absolute_tick": 960
+        },
+        {
+          "kind": "end",
+          "delta": 0,
+          "absolute_tick": 960
+        }
+      ],
+      "expected_note_off_tick": 960,
+      "expected_note_off_seconds": {
+        "rational": "3/2",
+        "decimal": 1.5
+      },
+      "hypothetical_selected_body_projection": [
+        {
+          "case": "Tempo",
+          "bpm": 120
+        },
+        {
+          "case": "note_on",
+          "delta": 0,
+          "note": 60,
+          "velocity": 64,
+          "channel": 0
+        },
+        {
+          "case": "Tempo",
+          "bpm": 60
+        },
+        {
+          "case": "note_off",
+          "delta": 480,
+          "note": 60,
+          "velocity": 0,
+          "channel": 0
+        },
+        {
+          "case": "EndOfTrack"
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "events": [
+        {
+          "kind": "tempo",
+          "delta": 0,
+          "microseconds_per_quarter": 500000,
+          "absolute_tick": 0
+        },
+        {
+          "kind": "note_on",
+          "delta": 0,
+          "note": 60,
+          "velocity": 64,
+          "channel": 0,
+          "absolute_tick": 0
+        },
+        {
+          "kind": "tempo",
+          "delta": 240,
+          "microseconds_per_quarter": 1000000,
+          "absolute_tick": 240
+        },
+        {
+          "kind": "note_off",
+          "delta": 480,
+          "note": 60,
+          "velocity": 0,
+          "channel": 0,
+          "absolute_tick": 720
+        },
+        {
+          "kind": "end",
+          "delta": 0,
+          "absolute_tick": 720
+        }
+      ],
+      "expected_note_off_tick": 720,
+      "expected_note_off_seconds": {
+        "rational": "5/4",
+        "decimal": 1.25
+      },
+      "hypothetical_selected_body_projection": [
+        {
+          "case": "Tempo",
+          "bpm": 120
+        },
+        {
+          "case": "note_on",
+          "delta": 0,
+          "note": 60,
+          "velocity": 64,
+          "channel": 0
+        },
+        {
+          "case": "Tempo",
+          "bpm": 60
+        },
+        {
+          "case": "note_off",
+          "delta": 480,
+          "note": 60,
+          "velocity": 0,
+          "channel": 0
+        },
+        {
+          "case": "EndOfTrack"
+        }
+      ]
+    }
+  ],
+  "hypothetical_projection_equal": true,
+  "projection_scope": "Imagined direct execution of selected event-construction bodies with correct dispatch. The inspected parser meta arm is unreachable after its mask; these arrays are NOT full-parser outputs.",
+  "actual_parser_run": null
+}

@@ -1,0 +1,36 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: This batch must contain 50 courses.
+
+0 !== 50
+
+    at file:///C:/tmp/batch50-empty-plan-y8xh80dy/tests/test_course_metadata.mjs:10:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 0,
+  expected: 50,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.12.0
+✖ C:\tmp\batch50-empty-plan-y8xh80dy\tests\test_course_metadata.mjs (89.9252ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 95.4354
+
+✖ failing tests:
+
+test at ..\batch50-empty-plan-y8xh80dy\tests\test_course_metadata.mjs:1:1
+✖ C:\tmp\batch50-empty-plan-y8xh80dy\tests\test_course_metadata.mjs (89.9252ms)
+  'test failed'

@@ -15,9 +15,10 @@ const close = lang.startsWith('fr') ? 'Fermer le menu' : lang.startsWith('es') ?
  <div class="global-menu-heading"><strong>{label}</strong><button type="button" class="global-menu-close" autofocus>{close}</button></div>
  <GlobalLinks />
  <div class="global-preferences"><ThemeSelect /><LanguageSelect /></div>
- <nav aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}><SidebarSublist sublist={sidebar} /></nav>
+ <nav aria-label={Astro.locals.t('sidebarNav.accessibleLabel')} data-streeling-nav data-streeling-base={import.meta.env.BASE_URL}><SidebarSublist sublist={sidebar} /></nav>
 </dialog>
 <script>
+ import '../scripts/streeling-nav-counts.mjs';
  const dialog = document.querySelector<HTMLDialogElement>('#learn-global-menu');
  const button = document.querySelector<HTMLButtonElement>('.global-menu-button');
  if (dialog && button) {

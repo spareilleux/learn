@@ -1,0 +1,266 @@
+{
+  "schema_version": "1.0",
+  "audit_type": "independent AI content and assessment audit",
+  "reviewer": "Codex feedback_course_content_audit subagent",
+  "reviewed_at_utc": "2026-10-22T15:03:44.3491714Z",
+  "repository_root": "C:/tmp/learn-streeling-craft-transfer-20261022",
+  "base_learn_commit": "7eaa68f8d4d32e8d1b495a93775d18135e709811",
+  "verdict": "PASS_WITH_REVIEW_LIMITS",
+  "summary": "No remaining actionable factual, qualification, assessment-alignment, or EN/FR/ES semantic-parity finding in the nine final source drafts. This is an AI review of source content, not human subject or fluent-language approval.",
+  "scope": {
+    "modules": [
+      "INF005",
+      "NET006",
+      "CYB004"
+    ],
+    "locales": [
+      "en",
+      "fr",
+      "es"
+    ],
+    "source_count": 9,
+    "exercise_answer_pairs_read": 45,
+    "rubric_criteria_read": 15,
+    "evidence_read_in_full": [
+      "README.md",
+      "bindings.json",
+      "learner-task.md",
+      "reviewer-rubric.json",
+      "quantization.json",
+      "resource-graphs.json",
+      "feedback-decisions.json",
+      "analysis-crosscheck.json",
+      "locale-checks.json",
+      "primary-input-readback.json",
+      "additional-doc-readback.json"
+    ],
+    "comparison_reads": "Introductions and section headings of INF004, AUD005, NET002, VC008, CYB002 and GAS004 were checked to assess the new objectives. These predecessor courses were not audited in full.",
+    "method": "Direct local source and evidence reads; semantic comparison across all locales and review of every exercise and answer. Complete resource-reference entries were read in compact form. Final NET006 triple, bindings and locale report were reread after root corrections."
+  },
+  "findings": [],
+  "resolved_during_review": [
+    {
+      "id": "NET006-first-api-links",
+      "owner": "root",
+      "references": [
+        "streeling/courses/network-science/en/net-006-instance-and-resource-graphs.md:22",
+        "streeling/courses/network-science/en/net-006-instance-and-resource-graphs.md:48",
+        "code/streeling/evidence/feedback-projections-2026-10-22/additional-doc-readback.json:1"
+      ],
+      "resolution": "Root added official Godot 4.6 links for the first Node3D, MeshInstance3D, StaticBody3D, CollisionShape3D and BoxMesh mentions in all three locales. Verified in final local sources; endpoint readback is supplied evidence."
+    },
+    {
+      "id": "NET006-declared-type-count-qualification",
+      "owner": "root",
+      "references": [
+        "streeling/courses/network-science/en/net-006-instance-and-resource-graphs.md:22"
+      ],
+      "resolution": "Root qualified the hierarchy inventory as counting declared types; French and Spanish preserve the qualification. This avoids reading the 37 Node3D declarations as a count including all subclasses."
+    }
+  ],
+  "content_checks": [
+    {
+      "module": "INF005",
+      "status": "pass",
+      "references": [
+        "streeling/courses/information-theory/en/inf-005-quantization-and-indistinguishable-renders.md:20",
+        "streeling/courses/information-theory/en/inf-005-quantization-and-indistinguishable-renders.md:38",
+        "streeling/courses/information-theory/en/inf-005-quantization-and-indistinguishable-renders.md:46",
+        "streeling/courses/information-theory/en/inf-005-quantization-and-indistinguishable-renders.md:58",
+        "streeling/courses/information-theory/en/inf-005-quantization-and-indistinguishable-renders.md:70",
+        "streeling/courses/information-theory/en/inf-005-quantization-and-indistinguishable-renders.md:84"
+      ],
+      "observations": [
+        "Finite decoded float32 input domain [-1,1] and exact Math.round(x*32767) encoder are stated.",
+        "Captured frame 646 and constructed 0.25 pair are distinguished. Equal serialized PCM16 codes are correctly treated as fibers, with no unique float32 inverse.",
+        "Image -32767..32767 has 65535 integer codes and is distinguished from all signed int16 storage codes.",
+        "Ideal-real half-open bins, JavaScript floating boundary caveat, ties toward positive infinity, and serialized signed-zero collapse are preserved.",
+        "Half-step individual reconstruction bound is separated from possible full-bin input-pair distance; equality is directly checked rather than inferred from a small distance.",
+        "Single-trace counts are not called entropy bits; no listening, auditory, noise, SNR, performance, browser or all-platform result is inferred."
+      ]
+    },
+    {
+      "module": "NET006",
+      "status": "pass",
+      "references": [
+        "streeling/courses/network-science/en/net-006-instance-and-resource-graphs.md:22",
+        "streeling/courses/network-science/en/net-006-instance-and-resource-graphs.md:36",
+        "streeling/courses/network-science/en/net-006-instance-and-resource-graphs.md:50",
+        "streeling/courses/network-science/en/net-006-instance-and-resource-graphs.md:60",
+        "streeling/courses/network-science/en/net-006-instance-and-resource-graphs.md:72"
+      ],
+      "observations": [
+        "253 declared hierarchy nodes are distinct from six resources, 144+6 reference-graph vertices, and 72 mesh-projection vertices.",
+        "216 selected directed property references and six indegrees of 36 are used consistently.",
+        "Declared same-mesh projection has two 36-node cliques, degree 35 and 1260 undirected edges.",
+        "Hypothetical removal of one resource eliminates 36 incident edges, leaving 180; it is not reported as an executed deletion or Godot failure.",
+        "Saved references do not imply draw calls, memory savings, runtime service/collaboration edges, mutation propagation, MultiMesh batching, general exporter capability or a node-UUID requirement."
+      ]
+    },
+    {
+      "module": "CYB004",
+      "status": "pass",
+      "references": [
+        "streeling/courses/cybernetics/en/cyb-004-observe-before-correcting-a-feedback-loop.md:34",
+        "streeling/courses/cybernetics/en/cyb-004-observe-before-correcting-a-feedback-loop.md:40",
+        "streeling/courses/cybernetics/en/cyb-004-observe-before-correcting-a-feedback-loop.md:46",
+        "streeling/courses/cybernetics/en/cyb-004-observe-before-correcting-a-feedback-loop.md:48",
+        "streeling/courses/cybernetics/en/cyb-004-observe-before-correcting-a-feedback-loop.md:60",
+        "streeling/courses/cybernetics/en/cyb-004-observe-before-correcting-a-feedback-loop.md:70",
+        "streeling/courses/cybernetics/en/cyb-004-observe-before-correcting-a-feedback-loop.md:78"
+      ],
+      "observations": [
+        "Exit 0 completion is distinguished from improvement 0.11416614959438576 dB failing the fixed 1 dB gate; maximum allowable candidate error is 1.8373033886068448 dB.",
+        "Absent native observation following startup timeout, malformed measurement, and valid named-criterion failure are separated.",
+        "Wrong-binding control is named as an identity failure despite passing geometry; timeout is not evidence of a geometry defect.",
+        "Projection counterexample limits the observed equality without claiming formal dynamical unobservability, stability or convergence.",
+        "PATH-parent attempt is explicitly inconclusive because it still selected the link; direct resolved launch supports a bounded sequential local correction only.",
+        "Bounded correction specifies selected-path record, unchanged copied inputs, named report checks, falsifier, stop and existing-timeout limit. No causal performance, all-platform startup, C# stability or convergence-rate guarantee is made."
+      ]
+    }
+  ],
+  "assessment": {
+    "status": "prepared source-assisted assessment only",
+    "references": [
+      "code/streeling/evidence/feedback-projections-2026-10-22/learner-task.md:3",
+      "code/streeling/evidence/feedback-projections-2026-10-22/learner-task.md:19",
+      "code/streeling/evidence/feedback-projections-2026-10-22/reviewer-rubric.json:1"
+    ],
+    "observations": [
+      "Every source has five exercises and five substantively appropriate answers; 45 pairs were read across nine sources.",
+      "Three source-assisted tasks each have five aligned reviewer criteria, totaling 15.",
+      "NET006 assessment changes the removed resource from lesson BoxMesh to BoxShape3D, requiring CollisionShape3D reference interpretation while retaining the 36/180 deduction.",
+      "Tasks require evidence, arithmetic and limits, rather than accepting process completion or a static graph as empirical success.",
+      "Participant answers, learner outcomes, reviewer decisions, human subject review, fluent-language review and causal learning benefit remain null or explicitly unperformed.",
+      "Assessment shares examples and solution structure with lessons; neither unaided transfer nor a causal teaching benefit is established."
+    ],
+    "human_subject_review": null,
+    "fluent_language_review": {
+      "en": null,
+      "fr": null,
+      "es": null
+    },
+    "learner_outcomes": null
+  },
+  "objective_distinctions": {
+    "INF005": "Adds an explicit deterministic-map/fiber, reachable-alphabet and error-bound argument beyond INF004 handoff collisions and AUD005 decoder/guard checks.",
+    "NET006": "Uses one retained scene to distinguish containment, property references and same-mesh projection, with exact affected-reference scope, beyond NET002 catalog modeling and VC008 persistence/query execution.",
+    "CYB004": "Teaches how observation validity and discriminating power select a bounded correction, beyond CYB002 illustrative dampening policies and GAS004 candidate acceptance arithmetic."
+  },
+  "locale_review": {
+    "type": "AI semantic parity review beyond the supplied mechanical report",
+    "status": "No substantive numerical or qualification mismatch found across EN/FR/ES.",
+    "observations": [
+      "All locales preserve captured-versus-constructed inputs, finite-domain/ideal-real qualifications, signed zero, alphabet versus capacity, and individual versus pairwise error.",
+      "All preserve declared hierarchy counts, selected relation rules, hypothetical deletion and missing renderer/edit measurements.",
+      "All preserve completion versus objective failure, absent/malformed/named-failure distinctions, PATH limitation, local-only correction and no convergence claim.",
+      "Code, numeric values and evidence links remain consistent in the read final sources. Human fluency/style approval remains pending."
+    ]
+  },
+  "evidence_limits": [
+    "New analysis is static/arithmetic on retained inputs. This reviewer did not run native audio, Wasm, Godot, a controller, a build, a browser, a lab process, or a learner trial.",
+    "Original full-buffer arithmetic and static extraction provenance are reviewed as supplied evidence; the separately assigned factual auditor owns independent recomputation checks. This receipt does not assert that those calculations were rerun by this reviewer.",
+    "primary-input-readback.json and additional-doc-readback.json supply prior anonymous-source and official-documentation readbacks; this reviewer did not independently repeat network requests.",
+    "README claims were reviewed, but its mutable bytes are deliberately omitted from receipt hashes. Future build/render/validation/AI-review files are not covered.",
+    "Draft/source existence, source counts and mechanical parity do not establish human review, learner benefit or public HTML publication.",
+    "Neither the supplied 159/525 source count nor these nine drafts establishes completion of the full 525-course reviewed/published objective."
+  ],
+  "source_hashes": [
+    {
+      "path": "streeling/courses/information-theory/en/inf-005-quantization-and-indistinguishable-renders.md",
+      "locale": "en",
+      "sha256": "cf02f36e78f303a760e73ee87dc92fc37960fa616b432b235f961ab95ca3422c",
+      "matches_binding": true
+    },
+    {
+      "path": "streeling/courses/information-theory/fr/inf-005-quantization-and-indistinguishable-renders.fr.md",
+      "locale": "fr",
+      "sha256": "1ce22849978ff0ad49b6ef6ed7d51d596c2b0d74edef2eee415f1af6ded9c2cc",
+      "matches_binding": true
+    },
+    {
+      "path": "streeling/courses/information-theory/es/inf-005-quantization-and-indistinguishable-renders.es.md",
+      "locale": "es",
+      "sha256": "2680075d5820cb55247535fd3d5cd4442720c08fb7bb1a346d0951267845f6fe",
+      "matches_binding": true
+    },
+    {
+      "path": "streeling/courses/network-science/en/net-006-instance-and-resource-graphs.md",
+      "locale": "en",
+      "sha256": "f808d57673cb05c9b1c9f611317f20b9efa1e65a4c93ec1626d76423b0d7acfa",
+      "matches_binding": true
+    },
+    {
+      "path": "streeling/courses/network-science/fr/net-006-instance-and-resource-graphs.fr.md",
+      "locale": "fr",
+      "sha256": "7727dd398f7342fbfc34917673682f04daf8b73f2038252c92bc27c30d9c7017",
+      "matches_binding": true
+    },
+    {
+      "path": "streeling/courses/network-science/es/net-006-instance-and-resource-graphs.es.md",
+      "locale": "es",
+      "sha256": "5aca2fd610d57983106e8aa4936f053cfc31df748960527a451ef2293be4aece",
+      "matches_binding": true
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-004-observe-before-correcting-a-feedback-loop.md",
+      "locale": "en",
+      "sha256": "6422d5e4ca7197fa0a7f9fb855d4f11f4fac337f4fb167e94289fed90bf4a27e",
+      "matches_binding": true
+    },
+    {
+      "path": "streeling/courses/cybernetics/fr/cyb-004-observe-before-correcting-a-feedback-loop.fr.md",
+      "locale": "fr",
+      "sha256": "2b28ad0f1da5d938b2f58411a277eefac46f00a19ced4793c8a3545976bd57ec",
+      "matches_binding": true
+    },
+    {
+      "path": "streeling/courses/cybernetics/es/cyb-004-observe-before-correcting-a-feedback-loop.es.md",
+      "locale": "es",
+      "sha256": "fd6b38938dffb388f4a6248fb1907f29aca550fa123b878109006b2912414030",
+      "matches_binding": true
+    }
+  ],
+  "artifact_hashes": [
+    {
+      "path": "code/streeling/evidence/feedback-projections-2026-10-22/bindings.json",
+      "sha256": "c488a7515d2ad54e807d829726db65de4eb1da4f89d7e27500384f1ce014c6a6"
+    },
+    {
+      "path": "code/streeling/evidence/feedback-projections-2026-10-22/locale-checks.json",
+      "sha256": "b0da593c2b67968733d01983d43368a0da56163d259bcb9180a66929a489a0fe"
+    },
+    {
+      "path": "code/streeling/evidence/feedback-projections-2026-10-22/quantization.json",
+      "sha256": "136c19df51d516f20c34049f7d1a278456aa46c372d6bdf2dbc41589e0374879"
+    },
+    {
+      "path": "code/streeling/evidence/feedback-projections-2026-10-22/resource-graphs.json",
+      "sha256": "cacaaf452b395687ef3d155791b56337ed3408d294e20819abf9094c43ecce56"
+    },
+    {
+      "path": "code/streeling/evidence/feedback-projections-2026-10-22/feedback-decisions.json",
+      "sha256": "fc73ca39a0f92190da1493c36bbf1d38cb451f0326d615e5ad572b2cf645a801"
+    },
+    {
+      "path": "code/streeling/evidence/feedback-projections-2026-10-22/analysis-crosscheck.json",
+      "sha256": "8761d2e63020c18096925aefd674d1bfea77fa63437e3f1579a229bc79cb5060"
+    },
+    {
+      "path": "code/streeling/evidence/feedback-projections-2026-10-22/primary-input-readback.json",
+      "sha256": "7725470f43f042095e83f9e8465bf3f13e744f85dda4637e4bacb7bde2312256"
+    },
+    {
+      "path": "code/streeling/evidence/feedback-projections-2026-10-22/additional-doc-readback.json",
+      "sha256": "3b82620f997667263f3244d00c565a094bcfdcb06666a0d78423fc087d9c77a0"
+    },
+    {
+      "path": "code/streeling/evidence/feedback-projections-2026-10-22/learner-task.md",
+      "sha256": "211159885a7767f97ed1eac4d53e5309005a2a0fbce84abbaeb36a59893bba0a"
+    },
+    {
+      "path": "code/streeling/evidence/feedback-projections-2026-10-22/reviewer-rubric.json",
+      "sha256": "87cfbd86f67719a7021c01d1db91264bca8d0a1ed1aec114221d3e177e107e17"
+    }
+  ]
+}

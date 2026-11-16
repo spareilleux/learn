@@ -1,0 +1,50 @@
+{
+  "action": "tests",
+  "args": [
+    "node",
+    "--test",
+    "scripts/tests/lazy-demo.test.mjs",
+    "scripts/tests/streeling-copy-source.test.mjs",
+    "scripts/tests/sync-streeling.test.mjs"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 13.359716399980243,
+  "log": "C:\\tmp\\streeling-batch50-tests-20261025-b.log",
+  "log_sha256": "96727f6f844b5925ca4bcc8aa5a65fc77359027e8684d80597ab3d7c52fca4f3",
+  "base_learn_commit": "894486c7e69af7a161d8f75d32a27f7972d1ebce",
+  "node_version_observed": "v24.12.0",
+  "passed": 18,
+  "failed": 0,
+  "scope": "Existing generator regressions, actual run. No inference of new domain or learner correctness.",
+  "retained_log": "code/streeling/evidence/batch50-2026-10-25-b/test-runs/generator-initial.log",
+  "tested_input_bindings": [
+    {
+      "path": "scripts/tests/lazy-demo.test.mjs",
+      "sha256": "87195e8095006215883da6262f783cda6e50661e9afdacce8a5b0a4b0bd93f83"
+    },
+    {
+      "path": "scripts/tests/streeling-copy-source.test.mjs",
+      "sha256": "732766b7444e89cc55f0ef11e1902f44e43c6df3df678cff4dd2f7a25e878592"
+    },
+    {
+      "path": "scripts/tests/sync-streeling.test.mjs",
+      "sha256": "33f2538ccfe801665a28c87a3477cc7d6383bbe529b8c3196365207bfcb72721"
+    },
+    {
+      "path": "scripts/sync-streeling.mjs",
+      "sha256": "ba2042f9f99a24e374509dbefa5ce8226225d50ed020fc7e7a1411827a595e89"
+    },
+    {
+      "path": "scripts/streeling-lib.mjs",
+      "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9"
+    },
+    {
+      "path": "scripts/streeling-copy-source.mjs",
+      "sha256": "abd1c3fecbae74e8cb3cbfa14466ea67d3484c5f1eb722f5649e1c862a954c62"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "8e1f664511bfc2f44ad2051dd312b1547d60c4b282010298431a0c7f904b913e"
+    }
+  ]
+}

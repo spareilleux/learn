@@ -25,6 +25,7 @@ sidebar:
 - [x] Lección 17: traducción de un oráculo de especificación Petri acotado en diseño de pruebas deterministas para Channel, TPL Dataflow y Rx
 - [x] Apéndice 1: cinco miembros de GA optimizados, demostrados sobre los 4096 conjuntos de clases de altura y luego medidos — con los benchmarks reescritos en cuanto se vio que medían el JIT
 - [x] Apéndice 2: el pipeline de indexación de GA perfilado, tres cambios demostrados contra la propia salida de GA y medidos, y enviados aguas arriba como pull requests
+- [x] Apéndice 4: plugins sin MEF — cuatro módulos, cada uno en su propio contexto descargable, un único contenedor, siete escenarios predichos y luego medidos
 
 ## QA
 
@@ -53,7 +54,7 @@ Este curso perfila [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga), 
 
 ## Experimentos
 
-El trabajo de rendimiento invita a leer una predicción dentro de su propio resultado, así que estas filas conservan la hipótesis tal como se escribió y la dejan equivocarse. Dos de las seis están refutadas, y el método del apéndice — comparar dos builds de GA en lugar de dos métodos, y comprobar que cada respuesta es idéntica byte a byte — es él mismo la tercera fila.
+El trabajo de rendimiento invita a leer una predicción dentro de su propio resultado, así que estas filas conservan la hipótesis tal como se escribió y la dejan equivocarse. Dos de las seis primeras están refutadas, y el método del apéndice 2 — comparar dos builds de GA en lugar de dos métodos, y comprobar que cada respuesta es idéntica byte a byte — es él mismo la tercera fila. Las cinco filas del apéndice 4 se cumplieron todas, incluida la última, escrita para poner a prueba una explicación y no un comportamiento.
 
 | Pregunta | Hipótesis | Resultado | Veredicto | Dónde |
 |---|---|---|---|---|
@@ -63,6 +64,11 @@ El trabajo de rendimiento invita a leer una predicción dentro de su propio resu
 | ¿Venían de `Parallel.For` los 38 MB por consulta de la búsqueda? | Escrita de antemano: el paralelismo era el sospechoso | Un barrido secuencial asignó los mismos 38 MB, lo que absolvió a `Parallel.For` y señaló a `GetVector` | Refutada | [2026-09-17](#2026-09-17--apéndice-2-perfilar-ga-con-pull-requests) |
 | ¿Sobrevive el particionado por rangos de la búsqueda al arreglo de asignaciones? | No escrita como predicción: medía un 8 % más rápido antes del arreglo, así que parecía digno de conservar | Un 22 % más lento después. Descartado | Refutada | [2026-09-17](#2026-09-17--apéndice-2-perfilar-ga-con-pull-requests) |
 | ¿Se acelera la exportación OPTIC-K entera de punta a punta, y no solo el benchmark? | Escrita de antemano: el análisis es la mayor parte de la exportación | Cuatro ejecuciones alternando `main` y el build modificado: 142,8 s frente a 62,9 s, luego 95,0 s frente a 38,3 s. El mismo binario de `main` tardó 142,8 s y luego 95,0 s: la máquina no estaba ociosa, y son los pares, no los tiempos absolutos, el resultado | Confirmada | [2026-09-17](#2026-09-17--apéndice-2-perfilar-ga-con-pull-requests) |
+| ¿Pueden dos módulos ejecutar dos versiones de Newtonsoft.Json en un mismo proceso? | No escrita como predicción: vista primero en un prototipo | 13.0.3 y 13.0.1 lado a lado, ambas con la versión de ensamblado 13.0.0.0 | Confirmada | [2026-10-22](#2026-10-22--apéndice-4-plugins-sin-mef), [`Plugins/`](https://github.com/spareilleux/learn/tree/main/code/csharp-advanced/Plugins) |
+| ¿Puede el módulo B usar un servicio del módulo A sin referenciar A? | Escrita de antemano: sí si la interfaz está en los contratos; sin A, `ValidateOnBuild` falla al construir el contenedor | B invierte el deletreo de A; sin A, «Unable to resolve service for type 'Contracts.IChordSpeller'» desde `BuildServiceProvider` | Confirmada | [2026-10-22](#2026-10-22--apéndice-4-plugins-sin-mef) |
+| ¿Un ensamblado cargado en dos contextos da un solo tipo? | Escrita de antemano: no, dos tipos con un mismo nombre, y un solo `IModule` compartido | Mismo nombre `True`, mismo tipo `False`; el `IModule` que implementan ambos es el del host | Confirmada | [2026-10-22](#2026-10-22--apéndice-4-plugins-sin-mef) |
+| ¿Se descarga todavía un módulo cuya herramienta hace correr un `Timer`? | Escrita de antemano: sí una vez liberado el contenedor, nunca cuando se abandona | 1 de 1 liberado; 0 de 1 abandonado, tras 100 recolecciones, en cada ejecución. El control sin temporizador: 2 de 2 abandonado | Confirmada | [2026-10-22](#2026-10-22--apéndice-4-plugins-sin-mef) |
+| ¿Es lo que captura el callback del temporizador lo que retiene el módulo C? | Escrita tras el resultado de la fila anterior, antes del código del módulo D: un callback estático deja descargarse al módulo, ya que un `Timer` activo puede recolectarse | El módulo D se descarga, 1 de 1, pero en diez recolecciones seguidas solo 36 veces de 40; con 10 ms entre recolecciones, tres cada vez | Confirmada | [2026-10-22](#2026-10-22--apéndice-4-plugins-sin-mef) |
 
 ## 2026-09-14 — Configuración y la versión fijada de GA
 
@@ -250,8 +256,17 @@ El apéndice 1 eligió qué optimizar leyendo GA. Esta vez eligió un perfilador
   - El camino paralelo de `VoicingGenerator` emite ahora sus ventanas en orden de trastes, así que su flujo es el secuencial. Ese orden era la causa de la diferencia entre exportaciones: la exportación conserva el primero de los voicings igual de baratos. Dos exportaciones de guitarra del main de GA tenían los hashes `776c849e…` y `d0a7d1d9…`; con la corrección, `138603e8…` las dos veces.
 - `EnsureValueInRange` se corrigió dentro de [#598](https://github.com/GuitarAlchemist/ga/pull/598), una PR de funcionalidades, sin prueba. [#731](https://github.com/GuitarAlchemist/ga/pull/731) añade una: 9 pruebas pasan en main, y 5 de ellas fallan con el archivo de `a826864`.
 
+## 2026-10-22 — Apéndice 4: plugins sin MEF
+
+- El autor pidió una prueba del sucesor de MEF con dos módulos, A y B, y después este apéndice, verificado aquí en lugar de devuelto. Primero hubo un prototipo fuera del repositorio; el apéndice añade los módulos C y D y se ejecuta con `check.sh`.
+- Las hipótesis se escribieron antes de la primera ejecución de la versión del curso, y están en la tabla de experimentos. Las predicciones sobre el servicio compartido, la identidad de los tipos y el temporizador se cumplieron en la primera ejecución, con la misma salida en 31 ejecuciones en Windows 11 y el SDK de .NET 10.0.113.
+- El control, los módulos A y B abandonados sin `Dispose`, se añadió tras el resultado del temporizador: sin él, «el contenedor no se liberó» y «el temporizador corre» eran una sola explicación.
+- El módulo D pone a prueba la explicación sacada de la documentación de `Timer`, según la cual un temporizador activo puede recolectarse: solo se distingue de C por un callback estático. Se descargó, pero en 40 ejecuciones del primer host, diez recolecciones seguidas, el bucle del artículo sobre la descarga, no bastaron cuatro veces: tres veces el contexto seguía vivo con su ensamblado ya fuera de `GetAssemblies`, una vez con `ModuleD` todavía en la lista. Con 10 ms entre recolecciones, tres cada vez en 40 ejecuciones. El host espera ahora hasta 100 recolecciones, con 10 ms de intervalo, e imprime el recuento en una línea `# ` que `check.sh` muestra sin compararla.
+- El módulo B recibió primero Newtonsoft.Json 12.0.3; la auditoría de NuGet lo señaló (NU1903, [GHSA-5crp-9r3c-p9vr](https://github.com/advisories/GHSA-5crp-9r3c-p9vr)), así que B usa 13.0.1. Los dos paquetes 13.x llevan la versión de ensamblado 13.0.0.0, que la salida imprime ahora.
+
 ## Por verificar
 
+- La cadena de referencias que mantiene cargado el módulo C, volcada con el `gcroot` de `dotnet-dump`; el apéndice 4 la deduce de dos medidas (apéndice 4).
 - Ejecutar las recetas de la lección 17 contra fixtures fijadas de Channel, Dataflow y Rx, incluido un ordenamiento de dos elementos con productor bloqueado; la evidencia actual es solo el oráculo Petri.
 - Por qué la PGO dinámica no eliminó los enumeradores encapsulados de la primera versión con máscaras de `TryMatch` (apéndice 2).
 - Por qué la exportación del índice OPTIC-K de GA difiere entre sesiones en 266 de las 313.047 entradas (apéndice 2).

@@ -1,0 +1,35 @@
+{
+  "docs_root": "docs",
+  "config_exists": false,
+  "files": [
+    "code/streeling/evidence/batch50-2026-10-25/tests/test_course_metadata.mjs",
+    "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py",
+    "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_b.py",
+    "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_c.py"
+  ],
+  "scope_diff": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/review.diff",
+  "helper_scope": "whole canonical checkout",
+  "criteria_kind": "instruction-file fallback",
+  "review_scope": "four files restricted by caller",
+  "criteria": [
+    {
+      "governs": [
+        "code/streeling/evidence/batch50-2026-10-25/tests/test_course_metadata.mjs",
+        "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py",
+        "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_b.py",
+        "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_c.py"
+      ],
+      "path": "AGENTS.md"
+    },
+    {
+      "governs": [
+        "code/streeling/evidence/batch50-2026-10-25/tests/test_course_metadata.mjs",
+        "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py",
+        "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_b.py",
+        "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_c.py"
+      ],
+      "path": "CLAUDE.md"
+    }
+  ],
+  "search_complete": true
+}

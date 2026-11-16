@@ -1,0 +1,662 @@
+{
+  "audit_kind": "Independent factual and derived-data read-only review; no formal CE or human approval",
+  "checked_at_utc": "2026-10-22T15:01:20.836409+00:00",
+  "repo": "C:\\tmp\\learn-streeling-craft-transfer-20261022",
+  "base_commit": "7eaa68f8d4d32e8d1b495a93775d18135e709811",
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+    "node": "v24.12.0",
+    "architecture": "AMD64"
+  },
+  "new_json_inputs": {
+    "quantization.json": {
+      "path": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\feedback-projections-2026-10-22\\quantization.json",
+      "sha256": "136c19df51d516f20c34049f7d1a278456aa46c372d6bdf2dbc41589e0374879"
+    },
+    "resource-graphs.json": {
+      "path": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\feedback-projections-2026-10-22\\resource-graphs.json",
+      "sha256": "cacaaf452b395687ef3d155791b56337ed3408d294e20819abf9094c43ecce56"
+    },
+    "feedback-decisions.json": {
+      "path": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\feedback-projections-2026-10-22\\feedback-decisions.json",
+      "sha256": "fc73ca39a0f92190da1493c36bbf1d38cb451f0326d615e5ad572b2cf645a801"
+    },
+    "analysis-crosscheck.json": {
+      "path": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\feedback-projections-2026-10-22\\analysis-crosscheck.json",
+      "sha256": "8761d2e63020c18096925aefd674d1bfea77fa63437e3f1579a229bc79cb5060"
+    },
+    "primary-input-readback.json": {
+      "path": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\feedback-projections-2026-10-22\\primary-input-readback.json",
+      "sha256": "7725470f43f042095e83f9e8465bf3f13e744f85dda4637e4bacb7bde2312256"
+    }
+  },
+  "pinned_primary_inputs": [
+    {
+      "path": "code/streeling/guitar-runtime/run.mjs",
+      "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+      "git_show_exit": 0,
+      "matches_pinned_bytes": true,
+      "matches_readback_receipt_hash": true,
+      "historical_http_status_recorded": 200,
+      "http_not_rerequested": true
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/results.json",
+      "sha256": "d564b476e0fccaff1a435548b5ae795807337622fdff69fb19ce0ace0d320506",
+      "git_show_exit": 0,
+      "matches_pinned_bytes": true,
+      "matches_readback_receipt_hash": true,
+      "historical_http_status_recorded": 200,
+      "http_not_rerequested": true
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/execution.json",
+      "sha256": "1d64a71891cc91743cc872d964907ae2d1e9cb906275167dcf38ce382eaf39d4",
+      "git_show_exit": 0,
+      "matches_pinned_bytes": true,
+      "matches_readback_receipt_hash": true,
+      "historical_http_status_recorded": 200,
+      "http_not_rerequested": true
+    },
+    {
+      "path": "code/streeling/evidence/weave-scene-2026-10-22/native-scene.tscn",
+      "sha256": "7c8003a9e7ea1433cd7e7e18ed83512ca2c436ea0af70bb7415e01e43c3bb4ca",
+      "git_show_exit": 0,
+      "matches_pinned_bytes": true,
+      "matches_readback_receipt_hash": true,
+      "historical_http_status_recorded": 200,
+      "http_not_rerequested": true
+    },
+    {
+      "path": "code/streeling/evidence/weave-scene-2026-10-22/results.json",
+      "sha256": "f7f5875aba2fffb7111aa8e63d8c69fa1f701fe1387252656b27b81c317bdde3",
+      "git_show_exit": 0,
+      "matches_pinned_bytes": true,
+      "matches_readback_receipt_hash": true,
+      "historical_http_status_recorded": 200,
+      "http_not_rerequested": true
+    },
+    {
+      "path": "code/streeling/evidence/weave-scene-2026-10-22/launcher-failed-run-report.json",
+      "sha256": "eeb2f1cc904433f1f3fe9c8c1c1a1ccfac1e63fa2e32d4b96c0c9dd0149e2920",
+      "git_show_exit": 0,
+      "matches_pinned_bytes": true,
+      "matches_readback_receipt_hash": true,
+      "historical_http_status_recorded": 200,
+      "http_not_rerequested": true
+    },
+    {
+      "path": "code/streeling/evidence/weave-scene-2026-10-22/direct-executable-characterization.json",
+      "sha256": "0a9af667db880ae4edfef9e7c01ab4bdf806817f93233c2cd4f4cb375f73114f",
+      "git_show_exit": 0,
+      "matches_pinned_bytes": true,
+      "matches_readback_receipt_hash": true,
+      "historical_http_status_recorded": 200,
+      "http_not_rerequested": true
+    },
+    {
+      "path": "code/streeling/evidence/weave-scene-2026-10-22/execution.json",
+      "sha256": "f27c61b029e65adefc67bf5f4117a384ffdd2e00c9ae6b2cd4febeb492ca4aeb",
+      "git_show_exit": 0,
+      "matches_pinned_bytes": true,
+      "matches_readback_receipt_hash": true,
+      "historical_http_status_recorded": 200,
+      "http_not_rerequested": true
+    }
+  ],
+  "other_pinned_inputs": [
+    {
+      "path": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\guitar-runtime-2026-10-22\\baseline.wav",
+      "sha256": "a78a70243a81aa79d806d9ef3db7baa1385c479505f7d5e97b8bf0c7866c3f98",
+      "matches_pinned_commit": true
+    },
+    {
+      "path": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\guitar-runtime-2026-10-22\\candidate.wav",
+      "sha256": "055e03fb6064f62601b1bbc07942d3e2223da6d2fc614c6f63fa9ec8d964be73",
+      "matches_pinned_commit": true
+    },
+    {
+      "path": "C:\\tmp\\streeling-weave-godot-root-realpath-20261022\\project\\trial.gd",
+      "sha256": "acb8f28ff5c9075c30d908b611c9599cd598571ffeaf961458e61de704bcf729",
+      "matches_failed_run_teaching_digest": true
+    }
+  ],
+  "commands": [
+    {
+      "command": "python - (inline stdlib script via PowerShell here-string)",
+      "exit_code": 0,
+      "methods": [
+        "struct.unpack little-endian float32, full 176400 sample pairs per mode",
+        "Compare four-byte words; encode signed integer floor(v*32767+.5); struct.pack int16le; compare all bytes to committed WAV[44:]",
+        "Compute max(abs(sample-code/32767)) and full raw pair distances separately",
+        "Check code(float32(k/32767))==k for every integer -32767 through 32767",
+        "Parse node, sub_resource declarations and three property references directly from native-scene.tscn; derive clique pairs n*(n-1)/2",
+        "Recompute abs(measured decline-reference decline), E0-E1 and E0-required",
+        "Hash input bytes with SHA256 and compare primary bytes to git show pinned commit:path; no Git mutation"
+      ]
+    },
+    {
+      "command": "node -e <embedded arithmetic-only script> C:/tmp/streeling-guitar-lab-output-20261022-v4",
+      "script": "const fs=require('fs');const path=require('path');const crypto=require('crypto');let rows=[];for(const mode of ['baseline','candidate']){const b={};const out={};for(const a of ['native','wasm']){b[a]=fs.readFileSync(path.join(process.argv[1],a+'-'+mode+'.f32le'));out[a]=Buffer.alloc(b[a].length/2);for(let i=0;i<b[a].length/4;i++)out[a].writeInt16LE(Math.round(b[a].readFloatLE(i*4)*32767),i*2);}rows.push({mode,payload_sha256:crypto.createHash('sha256').update(out.native).digest('hex'),pcm_equal:out.native.equals(out.wasm)});}console.log(JSON.stringify({node:process.version,platform:process.platform,arch:process.arch,rows,rounding:{positive_half:Math.round(.5),negative_half_is_negative_zero:Object.is(Math.round(-.5),-0),negative_one_and_half:Math.round(-1.5)}}));",
+      "exit_code": 0,
+      "result": {
+        "node": "v24.12.0",
+        "platform": "win32",
+        "arch": "x64",
+        "rows": [
+          {
+            "mode": "baseline",
+            "payload_sha256": "a24121da0bde439bb553f35712cd6880cc9e8d1adf978f838bfeb76412ff42f8",
+            "pcm_equal": true
+          },
+          {
+            "mode": "candidate",
+            "payload_sha256": "230a1d7956e9c8f81c5a0624ff8893477c90e61bb6cf806d466043c17003fb21",
+            "pcm_equal": true
+          }
+        ],
+        "rounding": {
+          "positive_half": 1,
+          "negative_half_is_negative_zero": true,
+          "negative_one_and_half": -1
+        }
+      }
+    },
+    {
+      "command": "git show 7eaa68f8d4d32e8d1b495a93775d18135e709811:<each primary input and WAV path>",
+      "exit_codes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "quantization": [
+    {
+      "mode": "baseline",
+      "samples_per_arm": {
+        "native": 176400,
+        "wasm": 176400
+      },
+      "raw_hashes": {
+        "native": "e924c20a4305783870ae6a373b46844c5431a25bad7ec80d76fc1569cdee8363",
+        "wasm": "f2a84abd90f7b812c045fc613694d749896f7b2eda5bd8ae73a167dc9ddc9491"
+      },
+      "raw_unequal_words": 2918,
+      "pcm16_unequal_samples": 0,
+      "max_raw_pair_distance": 2.9802322387695312e-08,
+      "max_reconstruction_error": {
+        "native": 1.5258982790783415e-05,
+        "wasm": 1.5258982790783415e-05
+      },
+      "wav_sha256": "a78a70243a81aa79d806d9ef3db7baa1385c479505f7d5e97b8bf0c7866c3f98",
+      "wav_matches_git_pinned_bytes": true,
+      "payload_sha256": "a24121da0bde439bb553f35712cd6880cc9e8d1adf978f838bfeb76412ff42f8",
+      "both_encoded_arms_equal_committed_payload": true,
+      "captured_examples": [
+        {
+          "zero_based_frame": 646,
+          "native": 0.000552888261154294,
+          "native_f32le_hex": "b4ef103a",
+          "native_pcm16": 18,
+          "wasm": 0.0005528881447389722,
+          "wasm_f32le_hex": "b2ef103a",
+          "wasm_pcm16": 18
+        },
+        {
+          "zero_based_frame": 689,
+          "native": 0.0016998229548335075,
+          "native_f32le_hex": "98ccde3a",
+          "native_pcm16": 56,
+          "wasm": 0.0016998227220028639,
+          "wasm_f32le_hex": "96ccde3a",
+          "wasm_pcm16": 56
+        },
+        {
+          "zero_based_frame": 786,
+          "native": -0.0010487496620044112,
+          "native_f32le_hex": "337689ba",
+          "native_pcm16": -34,
+          "wasm": -0.0010487495455890894,
+          "wasm_f32le_hex": "327689ba",
+          "wasm_pcm16": -34
+        }
+      ]
+    },
+    {
+      "mode": "candidate",
+      "samples_per_arm": {
+        "native": 176400,
+        "wasm": 176400
+      },
+      "raw_hashes": {
+        "native": "62861da6e0d81a8524624bb69ec57094438529a65494402083a720968741d365",
+        "wasm": "f63e100ba95f0f3e3954eb26325a975c142b1c443ac604a679e4812d17caa83b"
+      },
+      "raw_unequal_words": 2926,
+      "pcm16_unequal_samples": 0,
+      "max_raw_pair_distance": 2.9802322387695312e-08,
+      "max_reconstruction_error": {
+        "native": 1.525887933261083e-05,
+        "wasm": 1.525887933261083e-05
+      },
+      "wav_sha256": "055e03fb6064f62601b1bbc07942d3e2223da6d2fc614c6f63fa9ec8d964be73",
+      "wav_matches_git_pinned_bytes": true,
+      "payload_sha256": "230a1d7956e9c8f81c5a0624ff8893477c90e61bb6cf806d466043c17003fb21",
+      "both_encoded_arms_equal_committed_payload": true,
+      "captured_examples": [
+        {
+          "zero_based_frame": 690,
+          "native": 0.0016457438468933105,
+          "native_f32le_hex": "00b6d73a",
+          "native_pcm16": 54,
+          "wasm": 0.001645743614062667,
+          "wasm_f32le_hex": "feb5d73a",
+          "wasm_pcm16": 54
+        },
+        {
+          "zero_based_frame": 707,
+          "native": 0.0007097600027918816,
+          "native_f32le_hex": "300f3a3a",
+          "native_pcm16": 23,
+          "wasm": 0.0007097598863765597,
+          "wasm_f32le_hex": "2e0f3a3a",
+          "wasm_pcm16": 23
+        },
+        {
+          "zero_based_frame": 710,
+          "native": 0.0006366895395331085,
+          "native_f32le_hex": "83e7263a",
+          "native_pcm16": 21,
+          "wasm": 0.0006366894231177866,
+          "wasm_f32le_hex": "81e7263a",
+          "wasm_pcm16": 21
+        }
+      ]
+    }
+  ],
+  "quantization_edge_cases": {
+    "encoder_possible_codes": 65535,
+    "all_float32_constructed_codes_reachable": true,
+    "unreachable_codes": [],
+    "minus32768_outside_encoder_range": true,
+    "toy": {
+      "label": "Constructed float32 pair, not a captured guitar sample",
+      "x": 0.25,
+      "y": 0.2500000298023224,
+      "qx": 8192,
+      "qy": 8192
+    },
+    "ideal_real_half_step_bound": 1.5259254737998596e-05,
+    "ideal_real_full_bin_width": 3.051850947599719e-05,
+    "same_code_pair_exceeding_half_step": {
+      "samples": [
+        -1.4954069229133893e-05,
+        1.4954069229133893e-05
+      ],
+      "codes": [
+        0,
+        0
+      ],
+      "pair_distance": 2.9908138458267786e-05,
+      "individual_reconstruction_errors": [
+        1.4954069229133893e-05,
+        1.4954069229133893e-05
+      ]
+    },
+    "rounding_note": "Python built-in round is not used. floor(v*32767+.5) gives the stored integer for these finite caches; JavaScript negative-zero Number identity is lost in signed int16 storage. Node Math.round was also applied directly to every sample. Ideal real bin boundaries do not assert exact floating-point endpoint behavior."
+  },
+  "resource_graph": {
+    "scene_sha256": "7c8003a9e7ea1433cd7e7e18ed83512ca2c436ea0af70bb7415e01e43c3bb4ca",
+    "node_type_counts": {
+      "Node3D": 37,
+      "MeshInstance3D": 72,
+      "StaticBody3D": 72,
+      "CollisionShape3D": 72
+    },
+    "hierarchy_nodes": 253,
+    "resource_type_counts": {
+      "StandardMaterial3D": 2,
+      "BoxMesh": 2,
+      "BoxShape3D": 2
+    },
+    "resources": 6,
+    "selected_properties": [
+      "mesh",
+      "shape",
+      "material_override"
+    ],
+    "left_nodes": 144,
+    "reference_edges": 216,
+    "resource_indegrees": {
+      "StandardMaterial3D_waucl": 36,
+      "BoxMesh_jk82c": 36,
+      "BoxShape3D_ly8rt": 36,
+      "StandardMaterial3D_iksmk": 36,
+      "BoxMesh_douni": 36,
+      "BoxShape3D_os7eo": 36
+    },
+    "mesh_projection_component_sizes": [
+      36,
+      36
+    ],
+    "mesh_projection_nodes": 72,
+    "mesh_projection_edges": 1260,
+    "mesh_projection_degree_values": [
+      35
+    ],
+    "hypothetical_resource_removal": {
+      "removed_reference_edges": 36,
+      "remaining_edges": 180,
+      "actual_scene_modified": false
+    }
+  },
+  "feedback": {
+    "E0": 2.837303388606845,
+    "E1": 2.723137239012459,
+    "improvement": 0.11416614959438576,
+    "required": 1,
+    "maximum_candidate_error": 1.8373033886068448,
+    "candidate_gate_passed": false,
+    "execution_exit_recorded": 0,
+    "perceptual_product_acceptance": null,
+    "launcher_project_paths_equal": true,
+    "old_trial_sha256": "acb8f28ff5c9075c30d908b611c9599cd598571ffeaf961458e61de704bcf729",
+    "direct_success_is_retained_receipt_only": true
+  },
+  "checks": [
+    {
+      "name": "pinned_primary:code/streeling/guitar-runtime/run.mjs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "pinned_primary:code/streeling/evidence/guitar-runtime-2026-10-22/results.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "pinned_primary:code/streeling/evidence/guitar-runtime-2026-10-22/execution.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "pinned_primary:code/streeling/evidence/weave-scene-2026-10-22/native-scene.tscn",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "pinned_primary:code/streeling/evidence/weave-scene-2026-10-22/results.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "pinned_primary:code/streeling/evidence/weave-scene-2026-10-22/launcher-failed-run-report.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "pinned_primary:code/streeling/evidence/weave-scene-2026-10-22/direct-executable-characterization.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "pinned_primary:code/streeling/evidence/weave-scene-2026-10-22/execution.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:sample_counts",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:normalized_finite",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:raw_hashes_match_both_records",
+      "passed": true,
+      "detail": {
+        "native": "e924c20a4305783870ae6a373b46844c5431a25bad7ec80d76fc1569cdee8363",
+        "wasm": "f2a84abd90f7b812c045fc613694d749896f7b2eda5bd8ae73a167dc9ddc9491"
+      }
+    },
+    {
+      "name": "baseline:raw_difference_counts",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:pcm16_difference_count",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:maximum_raw_difference",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:maximum_reconstruction_error",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:pinned_wav",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:payload_byte44",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:captured_example:646",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:captured_example:689",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:captured_example:786",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:crosscheck_record",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "candidate:sample_counts",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "candidate:normalized_finite",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "candidate:raw_hashes_match_both_records",
+      "passed": true,
+      "detail": {
+        "native": "62861da6e0d81a8524624bb69ec57094438529a65494402083a720968741d365",
+        "wasm": "f63e100ba95f0f3e3954eb26325a975c142b1c443ac604a679e4812d17caa83b"
+      }
+    },
+    {
+      "name": "candidate:raw_difference_counts",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "candidate:pcm16_difference_count",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "candidate:maximum_raw_difference",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "candidate:maximum_reconstruction_error",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "candidate:pinned_wav",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "candidate:payload_byte44",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "candidate:captured_example:690",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "candidate:captured_example:707",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "candidate:captured_example:710",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "candidate:crosscheck_record",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "crosscheck_quantization_source_hash",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "all_65535_codes_reachable_from_float32_domain",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "half_step_bound_value",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "constructed_toy",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "same_bin_pair_can_exceed_half_step",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "scene_hash",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "scene_hierarchy",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "scene_declared_resources",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "scene_direct_extraction_matches_full_new_reference_list",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "scene_bipartite_totals",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "mesh_projection",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "hypothetical_removal_arithmetic",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "audio_decline_arithmetic",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "execution_success_is_not_treatment_acceptance",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "launcher_failed_observation",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "same_copied_project_and_retained_trial",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "direct_receipt_success_and_seconds",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "path_parent_attempt_qualification",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "direct_ecmascript_math_round_crosscheck",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "findings": [],
+  "scope_assessment": {
+    "narratives_distinguish_new_arithmetic_from_retained_runtime": true,
+    "no_entropy_or_auditory_equivalence_inferred": true,
+    "no_actual_scene_fault_or_draw_call_reduction_inferred": true,
+    "no_general_causal_performance_stability_or_convergence_claim_supported": true,
+    "human_or_learner_outcomes_assessed": "Only new README and requested JSON scope assessed; learner/reviewer artifacts are handled by separate content reviewer. Audio perceptual/product outcome remains null."
+  },
+  "not_rerun": [
+    "No native/WASM synthesis, Godot trial, full build, shared lab, network readback, randomized benchmark, listening test, learner task or human review",
+    "Historical HTTP status records were checked against pinned local bytes and their hashes; HTTP requests were not repeated",
+    "No new README, learner artifact or source-binding hashes captured; root may edit them"
+  ],
+  "verdict": "No derived-data findings"
+}

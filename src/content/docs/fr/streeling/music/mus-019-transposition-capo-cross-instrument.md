@@ -3,13 +3,14 @@ title: Transposition, capodastre et équivalence entre instruments — Trois sor
 description: Transposition, capodastre et équivalence entre instruments — Musique
 sidebar:
   label: MUS-019 · Transposition, capodastre et équivalence entre instruments
-  order: 16
+  order: 19
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/fr/mus-019-transposition-capo-cross-instrument.fr.md
 ---
 
 :::note[Streeling University]
 **MUS-019** · Transposition, capodastre et équivalence entre instruments · intermédiaire · 45 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/music/fr/mus-019-transposition-capo-cross-instrument.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-019-transposition-capo-cross-instrument.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-009](../../music/mus-009-tuning-fretboard-geometry/), [MUS-020](../../music/mus-020-set-classes-interval-vectors-prime-forms/)
 :::

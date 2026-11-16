@@ -4,12 +4,13 @@ description: Intervalos, inversión e intervalos compuestos — Música
 sidebar:
   label: MUS-008 · Intervalos, inversión e intervalos compuestos
   order: 8
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/es/mus-008-intervals-inversion-compound.es.md
 ---
 
 :::note[Streeling University]
-**MUS-008** · Intervalos, inversión e intervalos compuestos · principiante · 45 minutes
+**MUS-008** · Intervalos, inversión e intervalos compuestos · principiante · 45 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/music/es/mus-008-intervals-inversion-compound.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-008-intervals-inversion-compound.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-007](../../music/mus-007-pitch-spelling-enharmonic-identity/)
 :::

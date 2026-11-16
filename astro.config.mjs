@@ -33,6 +33,7 @@ export default defineConfig({
 			sidebar: [
 				{ label: 'Method', translations: { fr: 'Méthode', es: 'Método' }, slug: 'method' },
 				{ label: 'Artifacts', translations: { fr: 'Artefacts', es: 'Artefactos' }, slug: 'artifacts' },
+				{ label: 'Demos', translations: { fr: 'Démos', es: 'Demos' }, slug: 'demos' },
 				{ label: 'My bookmarks and notes', translations: { fr: 'Mes favoris et notes', es: 'Mis marcadores y notas' }, slug: 'my-notes' },
 				{
 					label: 'Software Engineering',
@@ -71,6 +72,18 @@ export default defineConfig({
 									translations: { fr: 'Java pour développeurs C#', es: 'Java para desarrolladores C#' },
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'java-for-csharp' } }],
+								},
+								{
+									label: 'Go for C#/Java developers',
+									translations: { fr: 'Go pour développeurs C#/Java', es: 'Go para desarrolladores C#/Java' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'go-for-csharp-java' } }],
+								},
+								{
+									label: 'Advanced Go',
+									translations: { fr: 'Go avancé', es: 'Go avanzado' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'go-advanced' } }],
 								},
 								{
 									label: 'Spring Boot, Spring Cloud and Reactor for C# developers',

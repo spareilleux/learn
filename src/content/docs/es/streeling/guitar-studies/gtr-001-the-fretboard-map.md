@@ -4,12 +4,13 @@ description: Fundamentos de guitarra — Estudios de guitarra
 sidebar:
   label: GTR-001 · El mapa del diapasón
   order: 1
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar-studies/es/gtr-001-the-fretboard-map.es.md
 ---
 
 :::note[Streeling University]
-**GTR-001** · Fundamentos de guitarra · principiante · 30 minutes
+**GTR-001** · Fundamentos de guitarra · principiante · 30 minutos
 
-Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/guitar-studies/es/gtr-001-the-fretboard-map.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-001-the-fretboard-map.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Estudios de Guitarra** | Etapa: Nigredo (Principiante) | Duración: 30 minutos
@@ -62,9 +63,11 @@ La escala cromática (las 12 notas) en orden:
 La → La#/Sib → Si → Do → Do#/Reb → Re → Re#/Mib → Mi → Fa → Fa#/Solb → Sol → Sol#/Lab → (vuelve a La)
 ```
 
-Dos excepciones importantes donde **no hay sostenido/bemol entre notas naturales adyacentes**:
-- **Si a Do** — un semitono, no hay Si#
-- **Mi a Fa** — un semitono, no hay Mi#
+Dos pares de notas naturales adyacentes están **separados por un semitono, sin otro semitono entre ellas**:
+- **Si a Do** — un semitono.
+- **Mi a Fa** — un semitono.
+
+Si# y Mi# son grafías válidas; en este modelo de temperamento igual de doce sonidos corresponden respectivamente a Do y Fa. La lista cromática usa Do y Fa por comodidad. [MCL-008](../../musicology/mcl-008-keep-diatonic-and-chromatic-transposition-separate/) explica por qué puede importar la escritura de las notas.
 
 Todo lo demás tiene un sostenido/bemol entre las notas naturales (por ejemplo, La a Si tiene La#/Sib en medio — son dos semitonos).
 

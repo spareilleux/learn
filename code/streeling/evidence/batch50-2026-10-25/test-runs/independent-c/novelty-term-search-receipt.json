@@ -1,0 +1,24 @@
+{
+  "command": [
+    "rg",
+    "-l",
+    "-i",
+    "Amdahl|barycentr|premultip|restitution|second moment of area|axial mean|set cover|inclusion.minimal|tail mean|tail mass|equivalence margin|static friction|UV stretch",
+    "C:\\tmp\\learn-streeling-craft-transfer-20261022\\streeling\\courses",
+    "-g",
+    "*.md",
+    "-g",
+    "!*.fr.md",
+    "-g",
+    "!*.es.md",
+    "-g",
+    "!*.de.md",
+    "-g",
+    "!*.it.md",
+    "-g",
+    "!*.pt.md"
+  ],
+  "exit_code": 0,
+  "stdout_sha256": "a94f48800713b986ac05e81521487375c9b5ff838fa23dc559a33369d26027a5",
+  "scope": "Term-based discovery only; actual prerequisite/MAT006/PM013 content reading provides novelty reasoning."
+}

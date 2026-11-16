@@ -1,0 +1,4 @@
+OBSERVATION {"case": "model", "code": "COG012", "expected": {"accuracy": 0.7, "alert_rate": 0.6, "false_alarm_rate": 0.4, "hit_rate": 0.8, "separation": 0.4}, "observed": {"accuracy": 0.875, "alert_rate": 0.5, "false_alarm_rate": 0, "hit_rate": 0.8, "separation": 0.8}, "scope": "Authored external-key confusion counts; conditional rates are not psychological sensitivity."}
+MUTATION_REJECTED {"code": "COG012", "mutation": "false_positive 4 -> 0 in a deep copy; fixed expected fields retained", "reason": "('result.false_alarm_rate', 0, 0.4)", "canonical_packet_unchanged": true}
+
+STDERR
