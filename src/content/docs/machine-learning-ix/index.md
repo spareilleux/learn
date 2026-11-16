@@ -69,7 +69,7 @@ Every link to IX code in the lessons points to that commit, so the line numbers 
 
 ## Outline
 
-Lessons 1 to 9 are written. The rest is the plan, one lesson per family of algorithms IX implements, and each will be published with its code and its cross-check like the others.
+The 21 lessons of the plan are written, one per family of algorithms IX implements, each with its code and its cross-check.
 
 | # | Lesson | IX crates | If you know ML.NET |
 |---|---|---|---|
@@ -84,16 +84,16 @@ Lessons 1 to 9 are written. The rest is the plan, one lesson per family of algor
 | 9 | [The other reducers: MDS, kernel PCA, NMF, LDA, t-SNE](09-other-reducers/) | `ix-unsupervised` | — |
 | 10 | [Sequences: Markov chains, hidden Markov models and Viterbi](10-sequences/) | `ix-graph` | — |
 | 11 | [Counting without counting: Bloom filters, HyperLogLog, count-min, cuckoo](11-probabilistic/) | `ix-probabilistic` | — |
-| 12 | Automatic differentiation: the Wengert tape | `ix-autograd` | — |
-| 13 | Attention, layer normalization and a transformer block | `ix-nn` | — |
-| 14 | Reinforcement learning: bandits and Q-learning | `ix-rl` | — |
-| 15 | Signals: the Fourier transform, wavelets, filters and Kalman | `ix-signal` | — |
-| 16 | Search: A\*, Monte-Carlo tree search, local search | `ix-search`, `ix-graph` | — |
-| 17 | Evolution: genetic algorithms, differential evolution, Pareto fronts | `ix-evolution` | — |
-| 18 | Adversarial examples, poisoning and the defences | `ix-adversarial` | — |
-| 19 | The shape of data: persistent homology | `ix-topo`, `ix-manifold` | — |
-| 20 | On the GPU: matrix products, distances and k nearest neighbours in WGSL | `ix-gpu` | — |
-| 21 | Pipelines end to end, and the MCP tools an assistant calls | `ix-pipeline`, `ix-agent` | `MLContext` |
+| 12 | [Automatic differentiation: the Wengert tape](12-autodiff/) | `ix-autograd` | — |
+| 13 | [Attention, layer normalization and a transformer block](13-transformer/) | `ix-nn` | — |
+| 14 | [Reinforcement learning: bandits and Q-learning](14-reinforcement-learning/) | `ix-rl` | — |
+| 15 | [Signals: the Fourier transform, wavelets, filters and Kalman](15-signals/) | `ix-signal` | — |
+| 16 | [Search: A\*, Monte-Carlo tree search, local search](16-search/) | `ix-search`, `ix-graph` | — |
+| 17 | [Evolution: genetic algorithms, differential evolution, Pareto fronts](17-evolution/) | `ix-evolution` | — |
+| 18 | [Adversarial examples, poisoning and the defences](18-adversarial/) | `ix-adversarial` | — |
+| 19 | [The shape of data: persistent homology](19-persistent-homology/) | `ix-topo`, `ix-manifold` | — |
+| 20 | [On the GPU: IX's WGSL shaders, their limits and their speed-ups](20-gpu-wgsl/) | `ix-gpu` | — |
+| 21 | [Pipelines end to end, and the MCP tools an assistant calls](21-pipelines-mcp/) | `ix-pipeline`, `ix-agent` | `MLContext` |
 | — | [Every crate and every public function](api-map/) | the 80 with a public surface | — |
 | — | [Journal](journal/) | | |
 

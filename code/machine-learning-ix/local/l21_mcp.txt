@@ -1,0 +1,47 @@
+== ix-mcp at the pinned commit: 97 tools listed
+
+== P5 through the tool: 20 inline rows, test ratio 0.3, task and model on auto
+  labels 1 and 2: ok; model knn, accuracy 1, classes among the test predictions 2
+    precision 0.6666666666666666, recall 0.6666666666666666, f1 0.6666666666666666; each equal to k/3 = 0.6666666666666666: yes
+  labels 0 and 1: ok; model knn, accuracy 1, classes among the test predictions 2
+    precision 1, recall 1, f1 1; each equal to k/2 = 1: yes
+
+== P6, lesson 1's three items to verify, through the tool
+  (a) builds.csv as it is: error: Error: execution failed: All rows contain NaN values
+  (b) pages and build_seconds, defaults: task "classify", model "knn", 52 training and 13 test rows
+      tool:   accuracy, precision, recall, f1 = [0.15384615384615385, 0.030612244897959183, 0.030612244897959183, 0.027210884353741496]
+      replay: accuracy, precision, recall, f1 = [0.15384615384615385, 0.030612244897959183, 0.030612244897959183, 0.027210884353741496]
+      same bits: 4 of 4
+  (c) task regress, normalize on: ok; model "linear_regression", 13 predictions returned
+      same bits as the replay that fits the scaler on all 65 rows: 16 of 16
+      same bits as the replay that splits first and fits it on the 52 training rows: 3 of 16
+      largest difference from the training-rows replay: 1.4210854715202004e-14
+      mse 63.847900084610906, rmse 7.990488100523704, r2 0.0427346420955248
+
+== P7, one server: a persisted knn, then a prediction that panics
+  (a) P5's rows persisted as l21-knn: ok, persisted true
+      ix_ml_predict on l21-knn: error: Error: execution failed: Prediction not supported for algorithm 'knn'
+  (b) 10 rows of 3 features, normalize, pca_components 1, persisted as l21-pca: ok, data_shape {"features":1,"rows":10}
+      ix_ml_predict on a row of 3 features: no response
+      stderr: ndarray: inputs 1 × 3 and 1 × 1 are not compatible for matrix multiplication
+  (c) tools/list afterwards: 97 tools
+      P5's valid ix_ml_pipeline call afterwards: no response
+      stderr: middleware chain mutex poisoned: PoisonError { .. }
+      panics on stderr: 2
+
+== P8, a fresh server: the loop detector, then the approval policy
+  ix_ml_pipeline, seed 1: ok
+  ix_ml_pipeline, seed 2: ok
+  ix_ml_pipeline, seed 3: ok
+  ix_ml_pipeline, seed 4: ok
+  ix_ml_pipeline, seed 5: ok
+  ix_ml_pipeline, seed 6: ok
+  ix_ml_pipeline, seed 7: ok
+  ix_ml_pipeline, seed 8: ok
+  ix_ml_pipeline, seed 9: ok
+  ix_ml_pipeline, seed 10: ok
+  ix_ml_pipeline, seed 11: error: Error: ix_loop_detect: circuit breaker tripped on tool 'ix_ml_pipeline' — circuit breaker tripped: 11 calls in the last 300s exceeds threshold 10. The agent should stop calling this tool and reconsider its approach. This is a governance-instrument safety check, not a transient error.
+  ix_ml_predict on an unknown key: error: Error: execution failed: No persisted model found for key 'l21-nothing-here'
+  tools/list: 97 tools; of the six in neither approval list, listed: 6
+  ix_petri_analyze: error: Error: ix_approval: action blocked (ApprovalRequired) — action requires explicit approval (tier: tier_three, rationale: 1 evidence item(s))
+exit 0

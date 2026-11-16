@@ -118,4 +118,81 @@ hand HyperLogLog, 100 sets of 100000: RMS 0.0340, mean 0.0076, worst 0.1016
   n =   4000: mean  0.0052, RMS 0.0334
   n =   6000: mean  0.0010, RMS 0.0321
   n =  10000: mean  0.0026, RMS 0.0341
+
+== lesson 12
+x[i, 2] - x[i, 0]: min 0.055422, max 0.055483
+singular values of [x 1]: [4.557008e+00 3.947100e+00 1.871730e+00 8.891541e-05], condition number 51251
+least squares: w [ 0.499818 -0.3       0.800182], b 0.089990, w0 + w2 = 1.300000, mean squared error below 1e-12: True
+at w = 0, b = 0: loss 0.724417, dL/dw [-0.959694  0.656138 -0.96151 ], dL/db -0.032640
+Adam, 200 steps: w [ 0.64994  -0.300002  0.650065], b 0.098315, loss below 0.01 first at step 31
+FFT loss, numpy: dL/dx first four [-4.429396 -6.277916 -0.459292 -5.058516], central differences within 1e-6: True
+
+== lesson 13
+attention, batch 0, query 0: weights [0.255277 0.255466 0.217414 0.271842], output [-0.338191 -0.187914  0.504304]
+layer norm, token 0: [ 0.136528  0.65296  -2.171448  0.100933  0.573105  0.707922]
+d 4: var(q.k) 4.0, largest of 16 weights unscaled 0.413, scaled 0.226
+d 16: var(q.k) 15.7, largest of 16 weights unscaled 0.679, scaled 0.238
+d 64: var(q.k) 63.8, largest of 16 weights unscaled 0.847, scaled 0.247
+d 256: var(q.k) 259.7, largest of 16 weights unscaled 0.925, scaled 0.247
+numpy's own U(-1, 1), a million draws: std 0.5776, 1/sqrt(3) = 0.5774
+
+== lesson 14
+value iteration, 5 x 5 GridWorld, gamma 0.99: V*(start) 2.527188
+testbed, 2000 tasks from the course's Rng: mean of the best arm's mean 1.538
+Auer et al. bound at T = 10000: 1106.5
+Auer et al. bound at T = 100000: 1382.8
+
+== lesson 15
+Welch, 63 segments: integral / variance, IX's convention 0.503, scipy.signal.welch 1.002
+scipy / IX's convention: bins 1 to 255 within 1e-9 of 2: True; bins 0 and 256: 1.000000, 1.000000
+IX's FFT recurrence in numpy against numpy.fft, N = 2^8: 1e-15 to 1e-14
+IX's FFT recurrence in numpy against numpy.fft, N = 2^16: 1e-13 to 1e-12
+scipy.signal.butter(2, 0.2): b [0.067455274, 0.134910548, 0.067455274], a [1.000000000, -1.142980503, 0.412801598]
+scipy.linalg.solve_discrete_are, q 0.01, r 1: prior variance 0.105124922, gain 0.095124922
+scipy.signal.firwin(65, 0.2, hamming, unscaled): centre tap 0.200000000, sum of the taps 1.000041082
+scipy.signal.firwin refuses a 32-tap high-pass: ValueError
+numpy windows of length 1 (hanning, hamming, blackman, bartlett, kaiser 5): [1.0, 1.0, 1.0, 1.0, 1.0]
+
+== lesson 16
+100 mazes of 30 x 30, walls 0.25: far corner reachable 84, total optimal cost 5046
+8 queens, 1000 boards, steepest ascent with the last best neighbour: solved 144, mean steps 4.08 when solved, 3.10 when stuck
+8 queens, 100 runs of 20 restarts: solved 94
+
+== lesson 17
+2 dimensions, 100 sets of 200 uniform points: mean size of front 0 6.220
+3 dimensions, 100 sets of 200 uniform points: mean size of front 0 17.810
+BLX-0.500, 10^6 children of N(0, 1) parents: variance 1.169, formula 1.167
+BLX-0.366, 10^6 children of N(0, 1) parents: variance 1.002, formula 1.000
+
+== lesson 18
+FGSM against w = mu, numpy: accuracy at eps 0, 0.1, 0.2, 0.3: 0.9780 0.8460 0.4780 0.1470
+Carlini-Wagner as a scalar recurrence, c = 0.25: 1956 points, 1956 unchanged, misclassified 0.0000
+Carlini-Wagner as a scalar recurrence, c = 1.0: 1956 points, 1 unchanged, misclassified 0.5072
+Carlini-Wagner as a scalar recurrence, c = 0.75: 1956 points, 1 unchanged, misclassified 0.3522
+squeezing to 3 bits, eps 0.05: changed 0.3510, mean |change| 0.05014, root mean square 0.08463
+squeezing to 5 bits, eps 0.01: changed 0.3094, mean |change| 0.00998, root mean square 0.01794
+certified radius, sigma 1, p_A = 0.501 to 0.999: largest error against scipy 4.44e-04 at p_A = 0.642
+logits (2, -1) clamped: IX's formula 6.3609, scipy 6.3613
+label flips, numpy's 5 nearest neighbours: 99 of 100 flipped labels found, 11 others
+spectral signatures with numpy's eigh: flagged per class [9, 9]; with the 5 shifted points [10, 9], shifted among them 5
+
+== lesson 19
+circle, Python sets: H0 23 finite pairs, 1 essential, deaths equal scipy's minimum spanning tree: True; H1 1 pairs, above persistence 0.5: born 0.3153, dies 1.7007
+top dimension, Python sets: built to edges, H1 253 pairs, 253 essential; to triangles, H2 1771 pairs, 1771 essential; to tetrahedra, H2 2 pairs, 0 essential
+unit square at 1.5, Python sets: built to edges [1, 3], to triangles [1, 0, 1], to tetrahedra [1, 0, 0]
+hand-made, scipy: bottleneck IX 10.0000, exact 1.0000; W1 IX 16.0000, exact 2.0000; W2 IX 11.3137, exact 1.4142; (0, inf) against nothing: IX 0.0000, exact inf
+random diagrams, scipy: bottleneck, IX at least exact 1000, above 999; W1, IX at least exact 1000, above 982
+stability, Python sets and scipy: exact bottleneck at most 0.02 in 50 of 50, IX's above 0.02 in 24
+
+== lesson 20
+kNN shader loop, numpy float32: P(wrong) 0.1253; queries that differ 135, k = 1 0, first 256 references 0; neighbours recovered 9855 of 10000
+thresholds, numpy float32: cosine 1.000000, batch 0.000000, cosine of zero 0.000000
+limits: largest n with 4 n^2 <= 128 MiB 5792; 10000 x 10000 x 4 = 400000000 bytes
+
+== lesson 21
+labels 1 and 2, all right: scikit-learn macro 1 1 1
+the same with labels=[0, 1, 2], as the tool counts them: 0.6666666666666666 0.6666666666666666 0.6666666666666666
+FNV-1a 64 of {"data":[1.0,2.0]}: fnv1a64:8091c3ce6ff9b24c
+build_seconds: 18 distinct whole values, largest 48: the tool counts 49 classes
+linear regression, chronological split: predictions after either scaler within 1e-9 of the raw feature's: yes
 exit 0

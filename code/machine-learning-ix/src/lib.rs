@@ -19,17 +19,28 @@
 //! assert_eq!(labels[0], labels[1]);
 //! ```
 
+pub mod adversarial;
+pub mod autodiff;
 pub mod classify;
 pub mod cluster;
 pub mod data;
 pub mod ensemble;
 pub mod evaluation;
+pub mod evolution;
+pub mod gpu;
 pub mod linear;
+pub mod mcp;
 pub mod net;
 pub mod optimize;
+pub mod pipeline;
 pub mod reduce;
+pub mod rl;
+pub mod search;
 pub mod sequence;
+pub mod signal;
 pub mod sketch;
+pub mod topology;
+pub mod transformer;
 
 use ndarray::{Array1, Array2};
 
