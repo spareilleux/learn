@@ -206,6 +206,48 @@ l07_missing_override.cs(9,14): error CS0534: 'Flute' does not implement inherite
 
 Les modèles d'accords de Guitar Alchemist suivent ce schéma, avec un record. Au commit `5c3a52a`, [`ChordTemplate`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Domain.Core/Theory/Harmony/ChordTemplate.cs#L15-L18) est un `public abstract record` doté d'un `abstract string Name`, et ses deux records dérivés, [`TonalModal`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Domain.Core/Theory/Harmony/ChordTemplate.cs#L44-L46) et [`Analytical`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Domain.Core/Theory/Harmony/ChordTemplate.cs#L66-L68), redéfinissent chacun `Name`.
 
+Son `ToString() => Name` cache un piège des records. Le compilateur écrit un `ToString` dans chaque record, records dérivés compris, et celui qu'il écrit dans un record dérivé remplace celui de la base. Seul un `ToString` `sealed` dans le record de base l'en empêche ([mise en forme intégrée pour l'affichage](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/record#built-in-formatting-for-display)). `examples/l07_record_tostring.cs` écrit le record de base des deux façons :
+
+```csharp
+// Un record dérivé écrit son propre ToString, sauf si son record de base scelle ToString
+ChordTemplate open = new Seventh("Major 7th");
+SealedTemplate kept = new SealedSeventh("Major 7th");
+
+Console.WriteLine(open);                    // le ToString propre à Seventh liste ses propriétés
+Console.WriteLine(kept);                    // le ToString scellé de la base affiche le nom
+
+abstract record ChordTemplate
+{
+    public abstract string Name { get; }
+
+    public override string ToString() => Name;
+}
+
+record Seventh(string Quality) : ChordTemplate
+{
+    public override string Name => Quality;
+}
+
+abstract record SealedTemplate
+{
+    public abstract string Name { get; }
+
+    public sealed override string ToString() => Name;
+}
+
+record SealedSeventh(string Quality) : SealedTemplate
+{
+    public override string Name => Quality;
+}
+```
+
+```text
+Seventh { Name = Major 7th, Quality = Major 7th }
+Major 7th
+```
+
+Au commit `5c3a52a`, le `ToString` de GA n'est pas `sealed` : afficher un `TonalModal` donne `TonalModal { Name = Major 7th, PitchClassSet = 0 4 7 E, … }`, pas son nom (le [tableau QA du journal](../journal/#qa)). La [PR GA n° 816](https://github.com/GuitarAlchemist/ga/pull/816) propose de le sceller.
+
 ## Les interfaces : un contrat que tout type peut signer
 
 Un instrument et un chanteur n'ont rien de commun en tant que classes, mais tous deux ont une tessiture, d'une note la plus grave à une note la plus aiguë. Une [**interface**](https://learn.microsoft.com/dotnet/csharp/fundamentals/types/interfaces) énonce un tel contrat, sans code, et n'importe quel type peut le signer :

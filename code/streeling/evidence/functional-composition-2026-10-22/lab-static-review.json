@@ -1,0 +1,99 @@
+{
+  "review_type": "native local static teaching-lab review",
+  "status": "reviewed-no-actionable-findings",
+  "scope": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\functional-composition",
+  "reviewed_files": [
+    {
+      "path": "exercise.fsx",
+      "sha256": "15e653f08aeb92ff3f1392e15e218b7926bd49bab90a61ee3d14b8acae932949"
+    },
+    {
+      "path": "README.md",
+      "sha256": "7c74b16bec8f3b5e16f31326ec4e032a2e7e888a21bc7217432e8838c8117cef"
+    },
+    {
+      "path": "source.json",
+      "sha256": "22a9e3ca44a149149ba1bf85a7968368920f02941cdaa2871610a0bbd1e1f795"
+    },
+    {
+      "path": "vendor/GaAsync.fs",
+      "sha256": "d07792410d218d660ae9875366ce6255a4eb5bd422ad85b9355b5deec505a641"
+    },
+    {
+      "path": "vendor/LICENSE",
+      "sha256": "b0592d8995a0b7963cd8226d5a1e70f75c055810fc68ce3b0e5e6e3fa646c3c0"
+    }
+  ],
+  "provenance": {
+    "declared_repo": "GuitarAlchemist/ga",
+    "declared_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+    "manifest_hash_checks": [
+      {
+        "path": "vendor/GaAsync.fs",
+        "declared_sha256": "d07792410d218d660ae9875366ce6255a4eb5bd422ad85b9355b5deec505a641",
+        "actual_sha256": "d07792410d218d660ae9875366ce6255a4eb5bd422ad85b9355b5deec505a641",
+        "matches": true
+      },
+      {
+        "path": "vendor/LICENSE",
+        "declared_sha256": "b0592d8995a0b7963cd8226d5a1e70f75c055810fc68ce3b0e5e6e3fa646c3c0",
+        "actual_sha256": "b0592d8995a0b7963cd8226d5a1e70f75c055810fc68ce3b0e5e6e3fa646c3c0",
+        "matches": true
+      }
+    ],
+    "upstream_identity_independently_verified": false,
+    "upstream_identity_limit": "No network or Git source-history inspection was authorized. The pinned commit, raw URLs, and unchanged-source claim were inspected as declarations; the two manifest hashes were independently checked against vendored bytes.",
+    "license": "Complete MIT permission notice, copyright notice, and warranty disclaimer retained in vendor/LICENSE."
+  },
+  "findings": [],
+  "coverage_observations": [
+    {
+      "severity": "informational",
+      "location": "exercise.fsx:65-68",
+      "observation": "zip assertions cover two successes, two domain failures with left-error precedence, and both branches starting. Neither one-sided domain failure is asserted. This is a small optional teaching extension for the right-error match arm, not a contradiction of the stated example scope or a demonstrated implementation defect."
+    }
+  ],
+  "correctness_checks": [
+    {
+      "area": "bind and map",
+      "result": "Success chain yields ready:11 and invokes double then increment; an initial DomainError bypasses both bind callbacks. Reassociation compares the same pure validate/format functions for a success and a failure; these are examples, not a general proof of monad laws."
+    },
+    {
+      "area": "mapError and option",
+      "result": "Error formatting matches GaError.ToString; successful mapError never invokes its callback. Some 0 is present and subsequently fails explicit positive-value validation. None becomes the supplied error. Result.toOption intentionally erases distinct errors."
+    },
+    {
+      "area": "fromAsync",
+      "result": "An IOException raised inside the supplied async workflow is caught and retained as IoError with its message and exception object. The assertions test that specific boundary."
+    },
+    {
+      "area": "fanOutAll",
+      "result": "All children are started before their handles are awaited. Successful values and returned errors are collected in input order. Empty and all-success lists yield Ok; mixed and all-error lists yield PartialFailure. The two integer unbox operations match the homogeneous input type and the source boxes successful values only in PartialFailure."
+    },
+    {
+      "area": "zip",
+      "result": "Async.Parallel evaluates both operands and retains array input order. Both Ok values are boxed internally then unboxed to their own generic types. Returned errors select the left error first, then the right error when only it fails."
+    },
+    {
+      "area": "exception escape",
+      "result": "fanOutAll has no exception-to-GaError catch. A raw child IOException escapes; wrapping the same kind of failure with fromAsync converts it into a collected IoError. The try/catch and wrapped assertions correctly distinguish those outcomes."
+    },
+    {
+      "area": "claims and execution limits",
+      "result": "README limits the lab to a pinned module, synthetic values, and pure reassociation examples, and explicitly excludes host integration, fleet scheduling, human review, and publication approval. The runner has no package references or explicit network calls. A 5000 ms timeout is applied to each top-level run invocation. Twenty-four record calls execute across the two-value loop."
+    }
+  ],
+  "execution_evidence": {
+    "source": "Supplied by parent task; not independently rerun in this review",
+    "sdk": "10.0.113",
+    "assertion_count": 24,
+    "outcome": "successful",
+    "stderr": "empty",
+    "build_or_runner_executed_by_reviewer": false
+  },
+  "review_limits": [
+    "Exactly the five named lab files were inspected. The learner packet referenced by README was outside the authorized inspection scope.",
+    "This receipt is a native static review, not formal ce-code-review or human review.",
+    "No repository files were changed; no builds, stage, commit, network, or session operations were performed."
+  ]
+}

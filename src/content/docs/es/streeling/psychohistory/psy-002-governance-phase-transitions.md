@@ -4,12 +4,13 @@ description: "Teoría de las transiciones de fase: cuándo los sistemas de gober
 sidebar:
   label: PSY-002 · Transiciones de fase de la gobernanza
   order: 2
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/es/psy-002-governance-phase-transitions.es.md
 ---
 
 :::note[Streeling University]
-**PSY-002** · Teoría de las transiciones de fase: cuándo los sistemas de gobernanza cambian de régimen · intermedio · 35 minutes
+**PSY-002** · Teoría de las transiciones de fase: cuándo los sistemas de gobernanza cambian de régimen · intermedio · 35 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/518158b0568981b4ebe290d69f197995bd41ded0/state/streeling/courses/psychohistory/es/psy-002-governance-phase-transitions.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-002-governance-phase-transitions.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-001](../../psychohistory/psy-001-intro-fractal-compounding/)
 :::
@@ -201,7 +202,7 @@ Usando el estado actual de la gobernanza de Demerzel:
 ## Lecturas adicionales
 
 - [PSY-001: Introducción a la capitalización fractal](../../psychohistory/psy-001-intro-fractal-compounding/): requisito previo sobre D_c y ERGOL/LOLLI
-- [CYB-003: Medir cuantitativamente el cociente de variedad](../../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) *(en inglés)* (en inglés): el parámetro de orden candidato
+- [CYB-003: Medir cuantitativamente el cociente de variedad](../../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) (en inglés): el parámetro de orden candidato
 - [CYB-001: Correspondencia entre el VSM y la gobernanza de la IA](../../cybernetics/cyb-001-vsm-ai-governance-mapping/): requisitos previos estructurales
 - Mecánica estadística de las transiciones de fase (teoría de Landau, parámetros de orden, exponentes críticos)
 - Fundación de Asimov: la psicohistoria predice tendencias agregadas, no sucesos individuales

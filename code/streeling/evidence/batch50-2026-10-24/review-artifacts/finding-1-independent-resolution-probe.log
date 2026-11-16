@@ -1,0 +1,19 @@
+NORMAL AUD014 MODEL/NEGATIVE
+OBSERVATION {"code": "AUD014", "case": "model", "observed": {"raw": [1.6, -1.6, 0.8], "mixed": [0.8, -0.8, 0.4], "peak": 0.8, "clipped_raw": [1, -1, 0.8]}, "expected": {"raw": [1.6, -1.6, 0.8], "mixed": [0.8, -0.8, 0.4], "peak": 0.8, "clipped_raw": [1, -1, 0.8]}, "scope": "Three aligned authored mono samples; linear summation and hard clipping only; no loudness."}
+OBSERVATION {"code": "AUD014", "case": "negative", "observed": {"raw": [0.0, 0.0, 0.0], "mixed": [0.0, 0.0, 0.0], "peak": 0.0, "clipped_raw": [0.0, 0.0, 0.0]}, "expected": {"raw": [0, 0, 0], "mixed": [0, 0, 0], "peak": 0, "clipped_raw": [0, 0, 0]}, "scope": "Three aligned authored mono samples; linear summation and hard clipping only; no loudness."}
+
+UNALIGNED INPUT REJECTION
+OBSERVATION {"code": "AUD014", "case": "model", "observed": {"aligned_sample_counts": false, "a_length": 4, "b_length": 3}, "expected": {"aligned_sample_counts": true}, "scope": "Three aligned authored mono samples; linear summation and hard clipping only; no loudness."}
+Traceback (most recent call last):
+  File "C:\tmp\compound-engineering-spare\ce-code-review\20261025-103528-74e0378c\verify-resolution-20261025.py", line 95, in <module>
+    module.UnitA().check_course('AUD014')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-24\tests\test_unit_a.py", line 136, in check_course
+    self.assertEqual(len(values['a']),len(values['b']),'AUD014 requires aligned sample arrays of equal length')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\spare\AppData\Local\Programs\Python\Python314\Lib\unittest\case.py", line 925, in assertEqual
+    assertion_func(first, second, msg=msg)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\spare\AppData\Local\Programs\Python\Python314\Lib\unittest\case.py", line 918, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 4 != 3 : AUD014 requires aligned sample arrays of equal length

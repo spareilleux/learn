@@ -1,0 +1,64 @@
+{
+  "scope": "Authored ideal equal-tempered length model, no physical measurement, string stiffness/compensation/action change or player observation.",
+  "open_scale_length_mm": 650,
+  "fixed_bridge_distance_mm": 65,
+  "formula": "L_k=L_0*2^(-k/12); p=d/L_k; d_for_fixed_p=p*L_k",
+  "rows": [
+    {
+      "fret": 0,
+      "vibrating_length_mm": 650.0,
+      "bridge_distance_mm": 65,
+      "p": 0.1,
+      "frequency_ratio": 1.0,
+      "distance_for_fixed_p_one_tenth_mm": 65.0
+    },
+    {
+      "fret": 7,
+      "vibrating_length_mm": 433.82295260526115,
+      "bridge_distance_mm": 65,
+      "p": 0.14983070768766815,
+      "frequency_ratio": 1.4983070768766815,
+      "distance_for_fixed_p_one_tenth_mm": 43.382295260526114
+    },
+    {
+      "fret": 12,
+      "vibrating_length_mm": 325.0,
+      "bridge_distance_mm": 65,
+      "p": 0.2,
+      "frequency_ratio": 2.0,
+      "distance_for_fixed_p_one_tenth_mm": 32.5
+    },
+    {
+      "fret": 24,
+      "vibrating_length_mm": 162.5,
+      "bridge_distance_mm": 65,
+      "p": 0.4,
+      "frequency_ratio": 4.0,
+      "distance_for_fixed_p_one_tenth_mm": 16.25
+    }
+  ],
+  "exact_rational_rows": [
+    {
+      "fret": 0,
+      "L_mm": "650",
+      "p": "1/10",
+      "null_multiples_of": 10,
+      "d_for_fixed_p_mm": "65"
+    },
+    {
+      "fret": 12,
+      "L_mm": "325",
+      "p": "1/5",
+      "null_multiples_of": 5,
+      "d_for_fixed_p_mm": "32.5"
+    },
+    {
+      "fret": 24,
+      "L_mm": "162.5",
+      "p": "2/5",
+      "null_multiples_of": 5,
+      "d_for_fixed_p_mm": "16.25"
+    }
+  ],
+  "physical_performance": null
+}

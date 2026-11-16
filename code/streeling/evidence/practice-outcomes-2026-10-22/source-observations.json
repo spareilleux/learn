@@ -1,0 +1,64 @@
+{
+  "scope": "Static pinned source/test inspection only.",
+  "voicing_response": {
+    "display_uses_chart_order": true,
+    "structured_diagram_raw": true,
+    "fields": [
+      "diagram",
+      "chordName",
+      "instrument",
+      "score"
+    ],
+    "confidence_is_clamped_top_retrieval_score": true,
+    "learner_answer_in_selected_data": false
+  },
+  "formatter": {
+    "raw_example": "0-1-0-2-3-x",
+    "chart_example": "x-3-2-0-1-0",
+    "known_test_reversal_cases": 4,
+    "fresh_formatter_run": false,
+    "fresh_test_run": false
+  },
+  "practice_routine": {
+    "goal_labels": [
+      "AccuracyGoal",
+      "TempoGoal",
+      "ConsistencyGoal",
+      "TechniqueGoal"
+    ],
+    "tracking_labels": [
+      "Accuracy",
+      "Tempo",
+      "Consistency",
+      "Mistakes",
+      "ImprovementRate",
+      "SessionCompletion"
+    ],
+    "selected_exercise_fields": [
+      "Type",
+      "Duration",
+      "Description",
+      "Timing",
+      "Difficulty",
+      "Goals",
+      "Content",
+      "ContentSource",
+      "PracticeOptions"
+    ],
+    "catalog_skill_source": true,
+    "learner_answer_events_shown": false
+  },
+  "rag": {
+    "query_fields": [
+      "Query",
+      "TargetPartitions",
+      "TotalResults",
+      "AverageScore",
+      "Latency",
+      "Results"
+    ],
+    "scores_are_learner_retention": false
+  },
+  "repository_wide_absence_claim": false,
+  "implemented_quiz_or_study": null
+}

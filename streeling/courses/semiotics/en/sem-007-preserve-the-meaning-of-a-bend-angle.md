@@ -1,0 +1,82 @@
+---
+module_id: sem-007-preserve-the-meaning-of-a-bend-angle
+department: semiotics
+course: "Preserve the Meaning of a Bend Angle"
+level: intermediate
+prerequisites: ["sem-006-preserve-orientation-across-scene-frames", "phy-011-compute-bend-length-on-a-declared-neutral-layer"]
+estimated_duration: "40 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Preserve the Meaning of a Bend Angle
+
+> **Draft scope.** Pinned FOLD/IX source reading and authored angle/reference-layer calculations. Human technical, artisan, fluent-language and learner reviews and deployed course HTML verification remain pending. No format adapter, full checker, CAD tool, scene or physical bend was executed.
+
+## The project question
+
+Two agents exchange a number called “bend angle.” One means signed deviation from flat; the other means an unsigned included angle between flanges. Equal numbers can therefore prescribe different geometry. A composable description needs the quantity's meaning before any arithmetic or field-name match.
+
+The [pinned FOLD specification](https://raw.githubusercontent.com/edemaine/fold/824f9fa6f944248787b0b2077ef622761489201e/doc/spec.md) defines `edges_foldAngle` as deviation from flat, in degrees from -180 to 180, positive for valley and negative for mountain folds. The [selected IX validation branch](https://github.com/GuitarAlchemist/ix/blob/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/fold.rs#L239-L261) checks angle range and assignment signs. These are source semantics, not a freshly executed conversion to metal-forming instructions.
+
+## 1. Translate the angle's object
+
+For an authored simple planar cross-section, define included angle by `alpha=180-abs(delta)`, where `delta` is signed deviation in degrees. This is our explicit convention for comparing the examples, not a universal mapping for every CAD field or assembly.
+
+An included angle of 120 degrees therefore corresponds to deviation magnitude 60 degrees. Under [PHY-011](../../physics/en/phy-011-compute-bend-length-on-a-declared-neutral-layer.md)'s neutral radius 4.8 mm, the correct arc is `4.8*pi/3=1.6*pi` mm. Interpreting 120 as deviation would instead give `3.2*pi` mm, twice as much. The symmetry of a 90-degree example can hide this error, so use an asymmetric control.
+
+### Practice exercise 1: reject a misleading equal number
+
+Convert included angle 120 into deviation magnitude under the declared convention. Calculate the correct neutral arc and the result of misreading 120 as the deviation.
+
+> **Answer:** Deviation magnitude is 60 degrees, or `pi/3` radians. The correct arc is `1.6*pi` mm; the misreading gives `3.2*pi` mm, a factor of 2. The conversion requires the stated angle convention rather than a shared field name.
+
+## 2. Preserve sign even when length uses magnitude
+
+Signed deviations +60 and -60 have the same magnitude and produce the same `1.6*pi` allowance in this model. They do not have the same FOLD assignment meaning. The selected source expects a positive value for V and a negative one for M. It also requires zero on F, U and B edges.
+
+Replacing every angle with its absolute value would preserve these two computed lengths while changing or invalidating the mountain example. Conversely, using a negative signed angle directly as a developed length would produce a negative length. Carry the signed state and derive the length from its magnitude as a separately named operation.
+
+### Practice exercise 2: separate state from a derived length
+
+Which of V with +60, M with -60 and M with +60 passes the inspected sign condition? What information is lost by keeping only the positive arc length?
+
+> **Answer:** V with +60 and M with -60 pass the selected sign condition; M with +60 fails it. The common positive length `1.6*pi` does not preserve whether the fold was valley or mountain. Passing one numeric branch is not full geometric acceptance or a manufacturing verdict.
+
+## 3. Convert units before multiplying
+
+Arc length requires the angular magnitude in radians. Sixty degrees becomes `pi/3`; multiplying 4.8 mm by that value gives `1.6*pi`, approximately 5.026548246 mm. Multiplying 4.8 by the bare degree count 60 instead gives 288 mm, a factor `180/pi`, approximately 57.295779513, too large.
+
+The type “number” alone cannot distinguish these representations. A value named angle needs its unit and convention at the boundary, and a displayed suffix does not itself convert it. This is a proposed handoff discipline, not an implemented adapter contract.
+
+### Practice exercise 3: diagnose a unit mistake
+
+An adapter uses the degree value 60 directly in a radians-based arc expression. Give the incorrect length, correct length and error factor. Would adding “degrees” beside the output repair the number?
+
+> **Answer:** The incorrect length is 288 mm; the correct length is `1.6*pi`, approximately 5.026548246 mm. The factor is `180/pi`, approximately 57.295779513. A label does not perform the required conversion or make the wrong length correct.
+
+## 4. Do not merge unrelated quantities sharing a symbol
+
+In the [Fusion sheet-metal rule reference](https://help.autodesk.com/cloudhelp/ENU/Fusion-Sheet-Metal/files/SM-RULES-REF.htm), the neutral offset ratio is dimensionless. We call it `k` and stipulate 0.4. Gaussian curvature, called `K_G` here, is instead the product of two principal curvatures and has inverse-length-squared units. A cylinder can have `K_G=0` while this authored finite-thickness bend uses `k=0.4`.
+
+These quantities also answer different questions. One locates a neutral reference layer in a chosen bend rule. The other describes local surface geometry. Neither can be copied into the other's field merely because a document calls both “K.”
+
+### Practice exercise 4: interpret the zero
+
+An agent sees zero Gaussian curvature on a cylinder and replaces the neutral offset factor 0.4 with zero. Why is that substitution invalid, and what units distinguish the two fields?
+
+> **Answer:** It substitutes a different physical/geometric quantity. The neutral offset factor is dimensionless; Gaussian curvature has units such as `mm^-2`. Zero curvature does not locate the neutral layer at the inner surface or invalidate the separately stipulated 0.4 factor.
+
+## 5. Separate preserved metadata from consumed meaning
+
+IX's pinned [frame/model types](https://github.com/GuitarAlchemist/ix/blob/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/fold.rs#L82-L108) retain optional angle arrays and arbitrary other fields. Preserving an extra physical-rule annotation as data does not demonstrate that the selected validator uses it to compute bend allowance. Its [thickness ADR](https://github.com/GuitarAlchemist/ix/blob/d7c22fdd6a62becb66b9d7246ea85850e7c55854/docs/adr/0007-origami-thickness-as-parallel-rigid-panels.md#L30-L34) explicitly scopes bend-radius refusals and motion out.
+
+A small advisory record could retain source revision, edge identity, signed degree deviation and assignment, included-angle convention, physical length unit, inner radius, thickness, neutral offset assumption and the derived radians/length. It is a teaching alternative to an ambiguous number, not a ratified schema or a new manufacturing DSL. Existing formats with documented fields may suffice; carrying more annotations also costs validation and migration work.
+
+### Practice exercise 5: bound a successful handoff
+
+An agent says “the field survived JSON, so the downstream bend model was verified.” Replace the claim and name the evidence needed to move beyond metadata preservation.
+
+> **Answer:** The field may have been preserved as data. To verify its meaning, identify the consuming implementation and its field/unit/convention mapping, test asymmetric angles and signs against known targets, and distinguish the model's assumptions from calibrated material behavior. Retain source and edge identity. Neither arbitrary-field storage nor this advisory example establishes an implemented physical adapter or manufacture.
+
+The [angle record](../../../../code/streeling/evidence/bend-development-2026-10-22/angle-meanings.json) separates source-predicted numeric checks from authored conversions. [FUT-006](../../futurology/en/fut-006-test-a-no-stretch-craft-automation-claim.md) uses that distinction when evaluating a future automation claim.

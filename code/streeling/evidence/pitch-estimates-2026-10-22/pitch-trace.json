@@ -1,0 +1,69 @@
+{
+  "scope": "Authored diagnostic rows, not an estimated guitar trace or participant results.",
+  "reference_hz": 100,
+  "cents_formula": "1200*log2(frequency/reference), only for positive finite reported frequency.",
+  "rows": [
+    {
+      "time_seconds": 0.0,
+      "frequency_hz": 100,
+      "status": "reported",
+      "signed_cents": 0.0,
+      "within_10_cents": true
+    },
+    {
+      "time_seconds": 0.1,
+      "frequency_hz": 200,
+      "status": "reported",
+      "signed_cents": 1200.0,
+      "within_10_cents": false
+    },
+    {
+      "time_seconds": 0.2,
+      "frequency_hz": null,
+      "status": "missing",
+      "signed_cents": null,
+      "within_10_cents": null
+    },
+    {
+      "time_seconds": 0.3,
+      "frequency_hz": 100.5,
+      "status": "reported",
+      "signed_cents": 8.634601685044519,
+      "within_10_cents": true
+    },
+    {
+      "time_seconds": 0.4,
+      "frequency_hz": 0,
+      "status": "invalid",
+      "signed_cents": null,
+      "within_10_cents": null
+    },
+    {
+      "time_seconds": 0.5,
+      "frequency_hz": 99.5,
+      "status": "reported",
+      "signed_cents": -8.677883077291035,
+      "within_10_cents": true
+    }
+  ],
+  "statistics": {
+    "total_rows": 6,
+    "valid_reports": 4,
+    "missing_rows": 1,
+    "invalid_rows": 1,
+    "coverage": 0.6666666666666666,
+    "within_10_cents": 3,
+    "conditional_within_10_fraction": 0.75,
+    "joint_within_10_fraction": 0.5,
+    "arithmetic_mean_frequency_hz": 125.0,
+    "cents_of_arithmetic_mean": 386.3137138648348,
+    "mean_signed_cents": 299.98917965193834,
+    "geometric_mean_frequency_hz": 118.91996823885712,
+    "median_signed_cents": 4.317300842522259,
+    "maximum_absolute_cents": 1200.0
+  },
+  "missing_and_invalid_are_distinct": true,
+  "interpolation_performed": false,
+  "octave_outlier_repaired": false,
+  "confidence_intervals": null
+}

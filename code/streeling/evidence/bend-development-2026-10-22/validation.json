@@ -1,0 +1,211 @@
+{
+  "checked_at_utc": "2026-10-23T00:01:17.263484+00:00",
+  "base_learn_commit": "2f4866b99c92c638dc914f3d3655830b21e6c8c2",
+  "source_ix_commit": "d7c22fdd6a62becb66b9d7246ea85850e7c55854",
+  "source_fold_spec_commit": "824f9fa6f944248787b0b2077ef622761489201e",
+  "scope": "Three neutral-bend-length, angle-meaning and no-stretch-development courses with authored ideal geometry and primary/source interpretation. No Rust/fullFOLD/CAD/host/scene, calibrated physical bend, manufacturing trial, runnable lab or production change.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "calculation_checks": {
+    "independent_checks": 698,
+    "passed": 698,
+    "failed": 0,
+    "findings": [
+      {
+        "id": "conditional-model",
+        "status": "observed-preserved",
+        "finding": "All bend allowances and k bounds are conditional authored circular neutral-layer geometry. k interval is deterministic sensitivity, not vendor calibration, probability interval or outside-dimension bend compensation."
+      },
+      {
+        "id": "angle-and-selected-checker-scope",
+        "status": "observed-preserved",
+        "finding": "Signed FOLD degree deviation and the stipulated planar included-angle convention remain distinct. All 35 cases translate only inspected range/sign/zero predicates; no parser/checker execution or whole IX acceptance is claimed."
+      },
+      {
+        "id": "metadata-not-model",
+        "status": "observed-preserved",
+        "finding": "Selected records preserve arbitrary other metadata. That does not establish physical k/radius consumption. ADR explicitly excludes bend-radius refusals and folding motion; no repository-wide absence inference was used."
+      },
+      {
+        "id": "geometry-not-manufacture",
+        "status": "observed-preserved",
+        "finding": "Zero Gaussian curvature is local and does not supply a cut-free global one-to-one rectangular chart. The closed-cylinder seam and exact smooth regular no-stretch sphere obstruction are bounded ideal geometry, outside the pinned flat IX domain. Approximation, material deformation and manufacture are not ruled out by the sphere statement."
+      },
+      {
+        "id": "unread-and-unexecuted",
+        "status": "observed-preserved",
+        "finding": "The inaccessible Autodesk support article body/images remain unread. Source test assertions are text evidence, not fresh results. No CAD command, host, checker, physical bend or fabrication was executed."
+      },
+      {
+        "id": "full-circle-roundoff",
+        "status": "observed-preserved",
+        "finding": "Stored full-circle chord ~2.45e-15 mm is ordinary floating evaluation residue; exact endpoint separation is zero. It does not contradict the seam or create a physical gap."
+      }
+    ],
+    "public_ix_source_test_ADR_files": 6,
+    "pinned_fold_spec_files": 1,
+    "primary_reference_bodies": 4,
+    "bodyless_support_article_read": false,
+    "bend_cases": 18,
+    "signed_angle_rows": 11,
+    "selected_static_numeric_cases": 35,
+    "curvature_cases": 4,
+    "cylinder_patches": 5,
+    "scope_cards": 4,
+    "reference_neutral_radius_mm": 4.8,
+    "reference_allowance_pi_coefficient": "12/5",
+    "reference_flat_total_constant_mm": 50,
+    "assumed_k_interval": [
+      "3/10",
+      "1/2"
+    ],
+    "zero_Gaussian_curvature_is_not_global_cut_free_certificate": true,
+    "new_checker_or_Rust_run": false,
+    "new_CAD_or_host": false,
+    "new_physical_bend": false,
+    "new_dependency_install": false,
+    "calibrated_k": null,
+    "physical_manufacture": null
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.752100399986375,
+    "log": "C:\\tmp\\streeling-bend-development-tests-20261022.log",
+    "log_sha256": "a8a96c26c566894fd25aa7b3960843e2a470b62ec003a67c7d68ec5adb15eb4e",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 3.4588097000087146,
+    "log": "C:\\tmp\\streeling-bend-development-sync-20261022.log",
+    "log_sha256": "cc5fe9793dbb27890bc40d1a85897d76bb6a8622ec830c7c70dd58e105ac4014",
+    "idempotent_checked_files": 716
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 127.17623799998546,
+    "log": "C:\\tmp\\streeling-bend-development-build-20261022.log",
+    "log_sha256": "98bec8920b625df4cb0609b1979b13c4cd713b89905cdbdedd69db2ba0f795f0",
+    "pages": 1912,
+    "dependency_install": "Existing node_modules junction; no install.",
+    "warnings": "Existing highlighting fallback and empty i18n/404 warnings retained in complete log."
+  },
+  "rendered_articles": {
+    "pages": 21,
+    "links": 366,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "data_verdict": "pass",
+    "data_receipt_sha256": "611055737b8d50b2d741c6cadd9e9d50d17baa0820f25d4b10fa29e103c0a28b",
+    "content_verdict": "pass",
+    "content_receipt_sha256": "32373450e68d4f6a3b510124bbc086ecead6863d8a86898f317d27bc8b3d2a8d",
+    "exercise_pairs_checked": 45,
+    "learner_criteria_checked": 15,
+    "open_course_findings": [],
+    "content_observations": [
+      {
+        "origin": "code/streeling/evidence/bend-development-2026-10-22/data-audit.json",
+        "id": "conditional-model",
+        "status": "observed-preserved",
+        "finding": "All bend allowances and k bounds are conditional authored circular neutral-layer geometry. k interval is deterministic sensitivity, not vendor calibration, probability interval or outside-dimension bend compensation."
+      },
+      {
+        "origin": "code/streeling/evidence/bend-development-2026-10-22/data-audit.json",
+        "id": "angle-and-selected-checker-scope",
+        "status": "observed-preserved",
+        "finding": "Signed FOLD degree deviation and the stipulated planar included-angle convention remain distinct. All 35 cases translate only inspected range/sign/zero predicates; no parser/checker execution or whole IX acceptance is claimed."
+      },
+      {
+        "origin": "code/streeling/evidence/bend-development-2026-10-22/data-audit.json",
+        "id": "metadata-not-model",
+        "status": "observed-preserved",
+        "finding": "Selected records preserve arbitrary other metadata. That does not establish physical k/radius consumption. ADR explicitly excludes bend-radius refusals and folding motion; no repository-wide absence inference was used."
+      },
+      {
+        "origin": "code/streeling/evidence/bend-development-2026-10-22/data-audit.json",
+        "id": "geometry-not-manufacture",
+        "status": "observed-preserved",
+        "finding": "Zero Gaussian curvature is local and does not supply a cut-free global one-to-one rectangular chart. The closed-cylinder seam and exact smooth regular no-stretch sphere obstruction are bounded ideal geometry, outside the pinned flat IX domain. Approximation, material deformation and manufacture are not ruled out by the sphere statement."
+      },
+      {
+        "origin": "code/streeling/evidence/bend-development-2026-10-22/data-audit.json",
+        "id": "unread-and-unexecuted",
+        "status": "observed-preserved",
+        "finding": "The inaccessible Autodesk support article body/images remain unread. Source test assertions are text evidence, not fresh results. No CAD command, host, checker, physical bend or fabrication was executed."
+      },
+      {
+        "origin": "code/streeling/evidence/bend-development-2026-10-22/data-audit.json",
+        "id": "full-circle-roundoff",
+        "status": "observed-preserved",
+        "finding": "Stored full-circle chord ~2.45e-15 mm is ordinary floating evaluation residue; exact endpoint separation is zero. It does not contradict the seam or create a physical gap."
+      }
+    ],
+    "content_fix_history": [
+      {
+        "origin": "root author and translation review",
+        "id": "positive-radius-wording",
+        "status": "resolved",
+        "finding": "English radius-10 compounds could be mechanically read as negative signed numbers. Root clarified cylinder of radius 10 and sphere of radius 10; French and Spanish retain positive radius 10. Quantities, equations and conclusions are unchanged; final nine sources were reviewed after this clarification."
+      }
+    ],
+    "scope": "Independent AI source/theory/model/content checks; not human approval.",
+    "human_technical": null,
+    "artisan": null,
+    "fluent_language": null,
+    "learner": null,
+    "checker": null,
+    "CAD": null,
+    "host": null,
+    "calibrated_k": null,
+    "physical_bend": null,
+    "manufacture": null
+  },
+  "code_review_pipeline": "Documentation/fixed-data-only deliverable with temporary verification wrappers; no new production/lab program emitted and no code-shipping review invoked.",
+  "manual_host_scan": "Read six immutable IX source/test/ADR files, pinned FOLD angle definition, Fusion rule body and Rhino mathematical/UnrollSrf text including pitfalls and tool-purpose limitations. Preserve neutral versus inner/mid/outer layers, tangent versus outside dimensions, conditional factor bounds versus calibration/probability, signed deviation versus included-angle convention and radians. Preserve arbitrary metadata storage versus model consumption, selected numeric checks versus full acceptance, dimensionless k versus Gaussian curvature units, intrinsic paths versus spatial chords, local obstruction versus global seams, and ideal zero-thickness geometric targets versus manufacturing. Inaccessible support article body/images remain unread; full-circle floating chord residue is not a physical gap",
+  "source_inventory": {
+    "core_english_modules": 213,
+    "target": 525,
+    "original_departments": 21,
+    "remaining_core_source_gaps": 312,
+    "locale_counts": {
+      "en": 214,
+      "fr": 214,
+      "es": 214
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint/typecheck scripts configured; existing generator tests and Astro build used."
+}

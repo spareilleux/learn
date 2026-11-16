@@ -1,0 +1,1508 @@
+{
+  "audit": "independent_source_assisted_music_phrase_course_content",
+  "checked_at_utc": "2026-10-22T16:42:15.040900+00:00",
+  "repository": "C:\\tmp\\learn-streeling-craft-transfer-20261022",
+  "result": "pass",
+  "actionable_findings": [],
+  "sources": [
+    {
+      "path": "streeling/courses/music/en/mus-023-plan-voice-leading-across-a-phrase.md",
+      "sha256": "cf93848a5b83f63193edc815d89ca228522afcecb213e7f23705f19d5a44e102",
+      "bytes": 7101,
+      "locale": "en",
+      "module": "mus-023-plan-voice-leading-across-a-phrase",
+      "binding_matches": true
+    },
+    {
+      "path": "streeling/courses/music/fr/mus-023-plan-voice-leading-across-a-phrase.fr.md",
+      "sha256": "0b27417a439cd5c4699ac1917ceafff8c78e475b30e6bf94e94069ed17aa2f99",
+      "bytes": 8743,
+      "locale": "fr",
+      "module": "mus-023-plan-voice-leading-across-a-phrase",
+      "binding_matches": true
+    },
+    {
+      "path": "streeling/courses/music/es/mus-023-plan-voice-leading-across-a-phrase.es.md",
+      "sha256": "2484bfaf8bc8a12db68a0013a9665e5c26cf63c611344b187035f5929bf75ba7",
+      "bytes": 8428,
+      "locale": "es",
+      "module": "mus-023-plan-voice-leading-across-a-phrase",
+      "binding_matches": true
+    },
+    {
+      "path": "streeling/courses/music/en/mus-024-preserve-attacks-and-harmonic-boundaries.md",
+      "sha256": "59fa133db3ee59af2c1e06b2c5a166fbf49fbd7fcfd0180693d72df856cf0b6a",
+      "bytes": 7893,
+      "locale": "en",
+      "module": "mus-024-preserve-attacks-and-harmonic-boundaries",
+      "binding_matches": true
+    },
+    {
+      "path": "streeling/courses/music/fr/mus-024-preserve-attacks-and-harmonic-boundaries.fr.md",
+      "sha256": "3d9292538ab7c600f3308743080a55033a3d2d0f3af9bee649e4b14ae0930eaf",
+      "bytes": 9776,
+      "locale": "fr",
+      "module": "mus-024-preserve-attacks-and-harmonic-boundaries",
+      "binding_matches": true
+    },
+    {
+      "path": "streeling/courses/music/es/mus-024-preserve-attacks-and-harmonic-boundaries.es.md",
+      "sha256": "271f884f12f6a35d110d0d187de3e8ccf3d1b4b508efc6f8f0cb387fc22617ef",
+      "bytes": 9257,
+      "locale": "es",
+      "module": "mus-024-preserve-attacks-and-harmonic-boundaries",
+      "binding_matches": true
+    },
+    {
+      "path": "streeling/courses/music/en/mus-025-keep-the-melody-in-a-voicing.md",
+      "sha256": "363951b2d15e924b833fdb90c22297cd527d80b90fcd1e43f5fa6f8706570035",
+      "bytes": 7670,
+      "locale": "en",
+      "module": "mus-025-keep-the-melody-in-a-voicing",
+      "binding_matches": true
+    },
+    {
+      "path": "streeling/courses/music/fr/mus-025-keep-the-melody-in-a-voicing.fr.md",
+      "sha256": "022a0f52a2e0cac78a803d3068ac987adf6cc78d4e39f8fb89e41e92cf5a9e92",
+      "bytes": 9149,
+      "locale": "fr",
+      "module": "mus-025-keep-the-melody-in-a-voicing",
+      "binding_matches": true
+    },
+    {
+      "path": "streeling/courses/music/es/mus-025-keep-the-melody-in-a-voicing.es.md",
+      "sha256": "98195c2548f98d8eb800589bbba06674d3716aca8920b87e902db79fbeaa1a5b",
+      "bytes": 8969,
+      "locale": "es",
+      "module": "mus-025-keep-the-melody-in-a-voicing",
+      "binding_matches": true
+    }
+  ],
+  "support_files": [
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/bindings.json",
+      "sha256": "b00164ce9af7b5d280dd657eae8705f1bb96464859e4607f9a1e47b68308a418",
+      "bytes": 3951
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/phrase-paths.json",
+      "sha256": "39bfa9703e564e752ef8a990d258cc25e88f7b63b5c904be177e06e966aac343",
+      "bytes": 3280
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/timed-events.json",
+      "sha256": "390485ec3d789336e26e8a727b98733ce12ab39f6b1d5eaf786cde3e6ef1ad10",
+      "bytes": 3204
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/melody-constraints.json",
+      "sha256": "33447cadc0d9e6f5cdca4939d3afb8c842edc46e428e55be64d65ecf2c15bbd2",
+      "bytes": 5237
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/data-audit.json",
+      "sha256": "388637cec39d4e140afb0aa70b918a2a9052508f78f340704b983c77d77eaf0e",
+      "bytes": 11755
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/primary-readback.json",
+      "sha256": "cb7dc22f967ddf0bdd730274175ddd395e678940566dfd90f4e1fec336628390",
+      "bytes": 2374
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/additional-doc-readback.json",
+      "sha256": "c5c2b947ae747e059c57de4d8030764a6d294245f960b8cdd822a5fc85ffacd0",
+      "bytes": 400
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/ga-voicings-probe.json",
+      "sha256": "dc44bf59b8c6edde19ddb103facd7730fc392fd004d37c153cfe5e3efe3bcf06",
+      "bytes": 456
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/learner-task.md",
+      "sha256": "c565059856e392834e8c5010d236edf7fe07518f5e6102a378231904997dc2a2",
+      "bytes": 3153
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/reviewer-rubric.json",
+      "sha256": "7855512947de80a486637b7b95e42fd068e3d14e0b0271c847e450eea412604f",
+      "bytes": 3007
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/README.md",
+      "sha256": "dd957f842fb8c4e66ef6be77b97b23fffde63dfc139a925289afd28315c93131",
+      "bytes": 3070
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/experiment-plan.md",
+      "sha256": "60d1dbdb304e6b76f8d51b56389cb378aa5fd3f65182f975b1801a6e50573db5",
+      "bytes": 4658
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "a9f9fa23747f397cbe7a791eb3a4ae5736ff9448da6e120bd44f2ae3524fd15d",
+      "bytes": 6866
+    }
+  ],
+  "pinned_sources": [
+    {
+      "path": "Common/GA.Business.ML/Tabs/AdvancedTabSolver.cs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "dbfec81179024374563e2f90af0895e7cf4f2be710688bb9d0823f857a130b71",
+      "bytes": 11169,
+      "verification": "read-only git show bytes match supplied anonymous readback"
+    },
+    {
+      "path": "Common/GA.Domain.Core/Theory/Harmony/Progressions/ProgressionStep.cs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "07fadf265bdfdfd77ceffe4f419fed1c577e1117c1fcdee30cd18805a4d945b6",
+      "bytes": 965,
+      "verification": "read-only git show bytes match supplied anonymous readback"
+    },
+    {
+      "path": "Common/GA.Business.DSL/Types/MusicXmlTypes.fs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "e894f70561db1f4d1bdd378e8ccc0646250793896144f0a7f39a66b18d40cd1a",
+      "bytes": 8252,
+      "verification": "read-only git show bytes match supplied anonymous readback"
+    },
+    {
+      "path": "Common/GA.Domain.Core/Instruments/Tuning.cs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "037c5b48514528d65f59a263136d4fa4d66e5b1ceae7f14453c1868978378b8a",
+      "bytes": 3329,
+      "verification": "read-only git show bytes match supplied anonymous readback"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "MUS023-en-E1",
+      "path": "streeling/courses/music/en/mus-023-plan-voice-leading-across-a-phrase.md",
+      "exercise_line": 35,
+      "prompt_lines": [
+        37,
+        37
+      ],
+      "answer_lines": [
+        39,
+        39
+      ],
+      "answer_sha256": "3dda237997ae5af813d0726a976b0f3e85b5d30eccd85c84e8d85e4b31b7b2e3",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS023 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS023-en-E2",
+      "path": "streeling/courses/music/en/mus-023-plan-voice-leading-across-a-phrase.md",
+      "exercise_line": 52,
+      "prompt_lines": [
+        54,
+        54
+      ],
+      "answer_lines": [
+        56,
+        56
+      ],
+      "answer_sha256": "b0fd374b8fc7f8bd90fb0ef41efe2121ccf7884ceba4369305a68b28c917d828",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS023 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS023-en-E3",
+      "path": "streeling/courses/music/en/mus-023-plan-voice-leading-across-a-phrase.md",
+      "exercise_line": 64,
+      "prompt_lines": [
+        66,
+        66
+      ],
+      "answer_lines": [
+        68,
+        68
+      ],
+      "answer_sha256": "f5a577c06c6936e250fbab6e9c95ec210e604281e5b6e84e60952eee70432e0a",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS023 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS023-en-E4",
+      "path": "streeling/courses/music/en/mus-023-plan-voice-leading-across-a-phrase.md",
+      "exercise_line": 76,
+      "prompt_lines": [
+        78,
+        78
+      ],
+      "answer_lines": [
+        80,
+        80
+      ],
+      "answer_sha256": "04167b109282d429e4fc095a240aa647cffb2205de44f5f32319c1222c896f6a",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS023 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS023-en-E5",
+      "path": "streeling/courses/music/en/mus-023-plan-voice-leading-across-a-phrase.md",
+      "exercise_line": 88,
+      "prompt_lines": [
+        90,
+        90
+      ],
+      "answer_lines": [
+        92,
+        92
+      ],
+      "answer_sha256": "ca3223df4d1d7aa69e08bbea945bce04702e14d87b76bf34b3b3ce08818d6c18",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS023 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS023-fr-E1",
+      "path": "streeling/courses/music/fr/mus-023-plan-voice-leading-across-a-phrase.fr.md",
+      "exercise_line": 35,
+      "prompt_lines": [
+        37,
+        37
+      ],
+      "answer_lines": [
+        39,
+        39
+      ],
+      "answer_sha256": "f7dadb45ed31bbece47f73b11b94aaad067c22deab4cdba2c700a8dafbebe60a",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS023 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS023-fr-E2",
+      "path": "streeling/courses/music/fr/mus-023-plan-voice-leading-across-a-phrase.fr.md",
+      "exercise_line": 52,
+      "prompt_lines": [
+        54,
+        54
+      ],
+      "answer_lines": [
+        56,
+        56
+      ],
+      "answer_sha256": "bf474e8809e5970d5afda960e7ac2c06bfe2588631d448eb08c17ed338ca7757",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS023 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS023-fr-E3",
+      "path": "streeling/courses/music/fr/mus-023-plan-voice-leading-across-a-phrase.fr.md",
+      "exercise_line": 64,
+      "prompt_lines": [
+        66,
+        66
+      ],
+      "answer_lines": [
+        68,
+        68
+      ],
+      "answer_sha256": "fddad3463b3d8350da790fa42b9d4e09ca4e769c7bc04b84a08f5dc791454ab2",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS023 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS023-fr-E4",
+      "path": "streeling/courses/music/fr/mus-023-plan-voice-leading-across-a-phrase.fr.md",
+      "exercise_line": 76,
+      "prompt_lines": [
+        78,
+        78
+      ],
+      "answer_lines": [
+        80,
+        80
+      ],
+      "answer_sha256": "871646a0e9e5769327c742b4c0687352269760782d5710c192a6fedebf2c2e75",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS023 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS023-fr-E5",
+      "path": "streeling/courses/music/fr/mus-023-plan-voice-leading-across-a-phrase.fr.md",
+      "exercise_line": 88,
+      "prompt_lines": [
+        90,
+        90
+      ],
+      "answer_lines": [
+        92,
+        92
+      ],
+      "answer_sha256": "bd9defadc8010b4ee594cf42225b13a3661d454c6f2a92fc13f1300a1aaf5dad",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS023 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS023-es-E1",
+      "path": "streeling/courses/music/es/mus-023-plan-voice-leading-across-a-phrase.es.md",
+      "exercise_line": 35,
+      "prompt_lines": [
+        37,
+        37
+      ],
+      "answer_lines": [
+        39,
+        39
+      ],
+      "answer_sha256": "d504652736b3ae8857161c4f579179197fa0cc6945c05d0c537131facf224fb5",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS023 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS023-es-E2",
+      "path": "streeling/courses/music/es/mus-023-plan-voice-leading-across-a-phrase.es.md",
+      "exercise_line": 52,
+      "prompt_lines": [
+        54,
+        54
+      ],
+      "answer_lines": [
+        56,
+        56
+      ],
+      "answer_sha256": "4f958a6db41fc05b1a54928eccbc0bc343133778c3e289425a60fe2efe686591",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS023 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS023-es-E3",
+      "path": "streeling/courses/music/es/mus-023-plan-voice-leading-across-a-phrase.es.md",
+      "exercise_line": 64,
+      "prompt_lines": [
+        66,
+        66
+      ],
+      "answer_lines": [
+        68,
+        68
+      ],
+      "answer_sha256": "6655b7f7f1a5c6c51ebf3b483de06ab8bf70bba3f5b61784f79425774f08e9f2",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS023 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS023-es-E4",
+      "path": "streeling/courses/music/es/mus-023-plan-voice-leading-across-a-phrase.es.md",
+      "exercise_line": 76,
+      "prompt_lines": [
+        78,
+        78
+      ],
+      "answer_lines": [
+        80,
+        80
+      ],
+      "answer_sha256": "0957603bb3ab37c0c820c2ebde6dfef6b61fdbe57083edcf4d17c69093a36b8e",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS023 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS023-es-E5",
+      "path": "streeling/courses/music/es/mus-023-plan-voice-leading-across-a-phrase.es.md",
+      "exercise_line": 88,
+      "prompt_lines": [
+        90,
+        90
+      ],
+      "answer_lines": [
+        92,
+        92
+      ],
+      "answer_sha256": "9a83f9a991078dab4c17b50c18d8d5a20915e85cf4af672f46690502b2e46d0b",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS023 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS024-en-E1",
+      "path": "streeling/courses/music/en/mus-024-preserve-attacks-and-harmonic-boundaries.md",
+      "exercise_line": 38,
+      "prompt_lines": [
+        40,
+        40
+      ],
+      "answer_lines": [
+        42,
+        42
+      ],
+      "answer_sha256": "9dca4b2a46161c5488f44b43218d8797787be5155f09a5a1f97514603ec79469",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS024 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS024-en-E2",
+      "path": "streeling/courses/music/en/mus-024-preserve-attacks-and-harmonic-boundaries.md",
+      "exercise_line": 50,
+      "prompt_lines": [
+        52,
+        52
+      ],
+      "answer_lines": [
+        54,
+        54
+      ],
+      "answer_sha256": "bd4bda6500d1fe5872b03c6be539c0a8de6fab30601adbf132fb48b9b13c9949",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS024 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS024-en-E3",
+      "path": "streeling/courses/music/en/mus-024-preserve-attacks-and-harmonic-boundaries.md",
+      "exercise_line": 62,
+      "prompt_lines": [
+        64,
+        64
+      ],
+      "answer_lines": [
+        66,
+        66
+      ],
+      "answer_sha256": "bd9b547b9b4e92ef62d05ccffa0192cf1e2a713a4f2b967b1066c435e982bd37",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS024 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS024-en-E4",
+      "path": "streeling/courses/music/en/mus-024-preserve-attacks-and-harmonic-boundaries.md",
+      "exercise_line": 74,
+      "prompt_lines": [
+        76,
+        76
+      ],
+      "answer_lines": [
+        78,
+        78
+      ],
+      "answer_sha256": "271e8adec48cbfd0dfd143d5792a097eabb404f3a7e7bd94cc3d0500ef55aaf3",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS024 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS024-en-E5",
+      "path": "streeling/courses/music/en/mus-024-preserve-attacks-and-harmonic-boundaries.md",
+      "exercise_line": 86,
+      "prompt_lines": [
+        88,
+        88
+      ],
+      "answer_lines": [
+        90,
+        90
+      ],
+      "answer_sha256": "c15d5b7db4acbbe9d161b6aa6480871630ed68433b248f07920736fec2d9a6f8",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS024 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS024-fr-E1",
+      "path": "streeling/courses/music/fr/mus-024-preserve-attacks-and-harmonic-boundaries.fr.md",
+      "exercise_line": 38,
+      "prompt_lines": [
+        40,
+        40
+      ],
+      "answer_lines": [
+        42,
+        42
+      ],
+      "answer_sha256": "401887c1281a3d707668176d732021806ca240c28f8cd003a72cc71d9b0f01de",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS024 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS024-fr-E2",
+      "path": "streeling/courses/music/fr/mus-024-preserve-attacks-and-harmonic-boundaries.fr.md",
+      "exercise_line": 50,
+      "prompt_lines": [
+        52,
+        52
+      ],
+      "answer_lines": [
+        54,
+        54
+      ],
+      "answer_sha256": "5be6cfc1bcdbc207e476ac37fc66764604e97c7eef951ae67f5751fc489bcd88",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS024 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS024-fr-E3",
+      "path": "streeling/courses/music/fr/mus-024-preserve-attacks-and-harmonic-boundaries.fr.md",
+      "exercise_line": 62,
+      "prompt_lines": [
+        64,
+        64
+      ],
+      "answer_lines": [
+        66,
+        66
+      ],
+      "answer_sha256": "210f69cfb7d631b571ef5e060c1b66eb2ce4d82b5bb399e76a5a1e15a8d72fdb",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS024 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS024-fr-E4",
+      "path": "streeling/courses/music/fr/mus-024-preserve-attacks-and-harmonic-boundaries.fr.md",
+      "exercise_line": 74,
+      "prompt_lines": [
+        76,
+        76
+      ],
+      "answer_lines": [
+        78,
+        78
+      ],
+      "answer_sha256": "fba7c9454db75b484b5af6084d3841e3cf770d5c691eba5c934acc31a422ffae",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS024 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS024-fr-E5",
+      "path": "streeling/courses/music/fr/mus-024-preserve-attacks-and-harmonic-boundaries.fr.md",
+      "exercise_line": 86,
+      "prompt_lines": [
+        88,
+        88
+      ],
+      "answer_lines": [
+        90,
+        90
+      ],
+      "answer_sha256": "ab0131cbb49bd186b47382dbd77622c551d218df9e4b1939e96169579fe4db8c",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS024 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS024-es-E1",
+      "path": "streeling/courses/music/es/mus-024-preserve-attacks-and-harmonic-boundaries.es.md",
+      "exercise_line": 38,
+      "prompt_lines": [
+        40,
+        40
+      ],
+      "answer_lines": [
+        42,
+        42
+      ],
+      "answer_sha256": "a683aa129899b8aad86e1515e07de5094edc0efe4a6ec5f4723bb76d2007e988",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS024 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS024-es-E2",
+      "path": "streeling/courses/music/es/mus-024-preserve-attacks-and-harmonic-boundaries.es.md",
+      "exercise_line": 50,
+      "prompt_lines": [
+        52,
+        52
+      ],
+      "answer_lines": [
+        54,
+        54
+      ],
+      "answer_sha256": "c09e2b4ba147aee194690b892eddacb39e5f8e127f756efbf9d70f4edd70cab8",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS024 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS024-es-E3",
+      "path": "streeling/courses/music/es/mus-024-preserve-attacks-and-harmonic-boundaries.es.md",
+      "exercise_line": 62,
+      "prompt_lines": [
+        64,
+        64
+      ],
+      "answer_lines": [
+        66,
+        66
+      ],
+      "answer_sha256": "1de9845d3607acff5b724b045cb1b7c12e4d9799dc9a1ec7ef4e89d3af834407",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS024 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS024-es-E4",
+      "path": "streeling/courses/music/es/mus-024-preserve-attacks-and-harmonic-boundaries.es.md",
+      "exercise_line": 74,
+      "prompt_lines": [
+        76,
+        76
+      ],
+      "answer_lines": [
+        78,
+        78
+      ],
+      "answer_sha256": "3885cdfa4ba4acb37029a57254fb6c420b03bd650566b653bd17ca88a7743814",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS024 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS024-es-E5",
+      "path": "streeling/courses/music/es/mus-024-preserve-attacks-and-harmonic-boundaries.es.md",
+      "exercise_line": 86,
+      "prompt_lines": [
+        88,
+        88
+      ],
+      "answer_lines": [
+        90,
+        90
+      ],
+      "answer_sha256": "28334e42c527b9a70edc5bac26f3e10161de6d5964ded34798e8b205b3a510c7",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS024 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS025-en-E1",
+      "path": "streeling/courses/music/en/mus-025-keep-the-melody-in-a-voicing.md",
+      "exercise_line": 34,
+      "prompt_lines": [
+        36,
+        36
+      ],
+      "answer_lines": [
+        38,
+        38
+      ],
+      "answer_sha256": "8f32522aec2a02e1fe20446a73ca33d5e16e270f5ed1889bb382874148c0ab0b",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS025 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS025-en-E2",
+      "path": "streeling/courses/music/en/mus-025-keep-the-melody-in-a-voicing.md",
+      "exercise_line": 46,
+      "prompt_lines": [
+        48,
+        48
+      ],
+      "answer_lines": [
+        50,
+        50
+      ],
+      "answer_sha256": "041ee97a0879f4181f615110f5ddd7721405b6ad69d64c011f9412b252a3db87",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS025 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS025-en-E3",
+      "path": "streeling/courses/music/en/mus-025-keep-the-melody-in-a-voicing.md",
+      "exercise_line": 58,
+      "prompt_lines": [
+        60,
+        60
+      ],
+      "answer_lines": [
+        62,
+        62
+      ],
+      "answer_sha256": "076185c2d4cb9f948eb929aff354c63a4dbe831e708cf9da09fddd2bdf2643c4",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS025 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS025-en-E4",
+      "path": "streeling/courses/music/en/mus-025-keep-the-melody-in-a-voicing.md",
+      "exercise_line": 70,
+      "prompt_lines": [
+        72,
+        72
+      ],
+      "answer_lines": [
+        74,
+        74
+      ],
+      "answer_sha256": "9932216757bcbff6274f9b7aad4893cbedd65f9b9d9c724d9c667179b8f6f494",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS025 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS025-en-E5",
+      "path": "streeling/courses/music/en/mus-025-keep-the-melody-in-a-voicing.md",
+      "exercise_line": 82,
+      "prompt_lines": [
+        84,
+        84
+      ],
+      "answer_lines": [
+        86,
+        86
+      ],
+      "answer_sha256": "1524b9b879b65d7158f130375483724918239c3e8f5dc119d8658f8cc9255fa7",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS025 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS025-fr-E1",
+      "path": "streeling/courses/music/fr/mus-025-keep-the-melody-in-a-voicing.fr.md",
+      "exercise_line": 34,
+      "prompt_lines": [
+        36,
+        36
+      ],
+      "answer_lines": [
+        38,
+        38
+      ],
+      "answer_sha256": "60d1e732ef49998ff6f5588c4f84d3f683f502cbe3391ada66e30575b8d3da35",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS025 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS025-fr-E2",
+      "path": "streeling/courses/music/fr/mus-025-keep-the-melody-in-a-voicing.fr.md",
+      "exercise_line": 46,
+      "prompt_lines": [
+        48,
+        48
+      ],
+      "answer_lines": [
+        50,
+        50
+      ],
+      "answer_sha256": "67ec77d22307f22e98a6df4cfe31a8d7844f995a42d54d49813661bdd8c42ff8",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS025 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS025-fr-E3",
+      "path": "streeling/courses/music/fr/mus-025-keep-the-melody-in-a-voicing.fr.md",
+      "exercise_line": 58,
+      "prompt_lines": [
+        60,
+        60
+      ],
+      "answer_lines": [
+        62,
+        62
+      ],
+      "answer_sha256": "57a6fecbedb409b99a13e8f8146b3b8f165f1230e8ff5206cf64f1b781906d66",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS025 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS025-fr-E4",
+      "path": "streeling/courses/music/fr/mus-025-keep-the-melody-in-a-voicing.fr.md",
+      "exercise_line": 70,
+      "prompt_lines": [
+        72,
+        72
+      ],
+      "answer_lines": [
+        74,
+        74
+      ],
+      "answer_sha256": "3f40c89b44e83febe8a08ef1461009aecd2d928fbfa4f0e3895d13e704ac9f23",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS025 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS025-fr-E5",
+      "path": "streeling/courses/music/fr/mus-025-keep-the-melody-in-a-voicing.fr.md",
+      "exercise_line": 82,
+      "prompt_lines": [
+        84,
+        84
+      ],
+      "answer_lines": [
+        86,
+        86
+      ],
+      "answer_sha256": "90edfcbf3d0090b182872968bac63bc0780e58ac4a6b575681a07b33c80f63d6",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS025 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS025-es-E1",
+      "path": "streeling/courses/music/es/mus-025-keep-the-melody-in-a-voicing.es.md",
+      "exercise_line": 34,
+      "prompt_lines": [
+        36,
+        36
+      ],
+      "answer_lines": [
+        38,
+        38
+      ],
+      "answer_sha256": "b5b1f14883aa1108a005148abdb85f30056a4ed626dffaac7a8827ddb1a9165a",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS025 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS025-es-E2",
+      "path": "streeling/courses/music/es/mus-025-keep-the-melody-in-a-voicing.es.md",
+      "exercise_line": 46,
+      "prompt_lines": [
+        48,
+        48
+      ],
+      "answer_lines": [
+        50,
+        50
+      ],
+      "answer_sha256": "c3ce43eeede1937bdab80203d656a25a803bdb898f10654b2a17b277751a0d58",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS025 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS025-es-E3",
+      "path": "streeling/courses/music/es/mus-025-keep-the-melody-in-a-voicing.es.md",
+      "exercise_line": 58,
+      "prompt_lines": [
+        60,
+        60
+      ],
+      "answer_lines": [
+        62,
+        62
+      ],
+      "answer_sha256": "1dffba1fcabb0899fd68508c09a3eda217c29db2052137da51cbbfe38ea223e1",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS025 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS025-es-E4",
+      "path": "streeling/courses/music/es/mus-025-keep-the-melody-in-a-voicing.es.md",
+      "exercise_line": 70,
+      "prompt_lines": [
+        72,
+        72
+      ],
+      "answer_lines": [
+        74,
+        74
+      ],
+      "answer_sha256": "b840c6ed7c9dcb574445061d7f64ed8db5a950a29edb96c039eb06aee77ef55e",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS025 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    },
+    {
+      "id": "MUS025-es-E5",
+      "path": "streeling/courses/music/es/mus-025-keep-the-melody-in-a-voicing.es.md",
+      "exercise_line": 82,
+      "prompt_lines": [
+        84,
+        84
+      ],
+      "answer_lines": [
+        86,
+        86
+      ],
+      "answer_sha256": "13d227abecc03b42373c15c79ea4ebf3cd9f517f278e61cad472a7c54e910ed6",
+      "answer_hash_encoding": "UTF-8 exact answer line without line terminator",
+      "result": "pass",
+      "basis": "MUS025 semantic/source and independently recomputed fixture checks; locale scope preserved"
+    }
+  ],
+  "exercise_summary": {
+    "checked": 45,
+    "passed": 45,
+    "failed": 0
+  },
+  "learner_criteria": [
+    {
+      "id": "MUS023-C1",
+      "criterion_sha256": "a471b9d8e6388c4e001b23ac4238cfc54127f516c88b328b42936e6dca3bbf17",
+      "adequacy": "adequate",
+      "task_path": "code/streeling/evidence/music-phrase-2026-10-22/learner-task.md",
+      "task_section": "MUS023",
+      "course_exercises": [
+        1,
+        2
+      ],
+      "english_answer_anchor_line": 39,
+      "locales_checked": [
+        "en",
+        "fr",
+        "es"
+      ],
+      "reason": "High endpoint comparison fully elicited and taught; independently recalculated.",
+      "learner_result": null,
+      "human_reviewer_result": null
+    },
+    {
+      "id": "MUS023-C2",
+      "criterion_sha256": "637ffdf9eb951a0d070109e6b24ece5b46c7d0eae239880a49bf46efd7a2852f",
+      "adequacy": "adequate",
+      "task_path": "code/streeling/evidence/music-phrase-2026-10-22/learner-task.md",
+      "task_section": "MUS023",
+      "course_exercises": [
+        3
+      ],
+      "english_answer_anchor_line": 68,
+      "locales_checked": [
+        "en",
+        "fr",
+        "es"
+      ],
+      "reason": "Per-state versus global one-state distinction explicitly elicited; source table confirms scope.",
+      "learner_result": null,
+      "human_reviewer_result": null
+    },
+    {
+      "id": "MUS023-C3",
+      "criterion_sha256": "1e3218dc7704d5dbde2764d8212da59f5021e2606734899211c5438f1b2a8fdf",
+      "adequacy": "adequate",
+      "task_path": "code/streeling/evidence/music-phrase-2026-10-22/learner-task.md",
+      "task_section": "MUS023",
+      "course_exercises": [
+        4
+      ],
+      "english_answer_anchor_line": 80,
+      "locales_checked": [
+        "en",
+        "fr",
+        "es"
+      ],
+      "reason": "Changed endpoint with unchanged labeled distance rule is explicitly elicited.",
+      "learner_result": null,
+      "human_reviewer_result": null
+    },
+    {
+      "id": "MUS023-C4",
+      "criterion_sha256": "ba29b3f4b5913ff67c5430ce4f6d40981762cb6050a7b8ca6ef7037b9dd6e0a6",
+      "adequacy": "adequate",
+      "task_path": "code/streeling/evidence/music-phrase-2026-10-22/learner-task.md",
+      "task_section": "MUS023",
+      "course_exercises": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "english_answer_anchor_line": 92,
+      "locales_checked": [
+        "en",
+        "fr",
+        "es"
+      ],
+      "reason": "Objective, register/identity and two-path bound are requested and taught; no runtime or comfort claim.",
+      "learner_result": null,
+      "human_reviewer_result": null
+    },
+    {
+      "id": "MUS023-C5",
+      "criterion_sha256": "71e0406db055243573cccca4300150fabacbac2e14a282f2562dbb3f8e062888",
+      "adequacy": "adequate",
+      "task_path": "code/streeling/evidence/music-phrase-2026-10-22/learner-task.md",
+      "task_section": "MUS023",
+      "course_exercises": [
+        5
+      ],
+      "english_answer_anchor_line": 92,
+      "locales_checked": [
+        "en",
+        "fr",
+        "es"
+      ],
+      "reason": "Handoff audit asks for internal terms versus separate formatted output; pinned source supports it.",
+      "learner_result": null,
+      "human_reviewer_result": null
+    },
+    {
+      "id": "MUS024-C1",
+      "criterion_sha256": "14f371fa5a04be81e7649733557467e1564920fe9c3e65da167f92b401c3779b",
+      "adequacy": "adequate",
+      "task_path": "code/streeling/evidence/music-phrase-2026-10-22/learner-task.md",
+      "task_section": "MUS024",
+      "course_exercises": [
+        1
+      ],
+      "english_answer_anchor_line": 42,
+      "locales_checked": [
+        "en",
+        "fr",
+        "es"
+      ],
+      "reason": "All intervals, half-open rule and authored annotation status are available and task-aligned.",
+      "learner_result": null,
+      "human_reviewer_result": null
+    },
+    {
+      "id": "MUS024-C2",
+      "criterion_sha256": "4db71ba379f95ea617386c7c8d966c828b831ada2dd6163b4edb0d0b93045e15",
+      "adequacy": "adequate",
+      "task_path": "code/streeling/evidence/music-phrase-2026-10-22/learner-task.md",
+      "task_section": "MUS024",
+      "course_exercises": [
+        2
+      ],
+      "english_answer_anchor_line": 54,
+      "locales_checked": [
+        "en",
+        "fr",
+        "es"
+      ],
+      "reason": "Boundary release/attack/hold split and missing seventh explanation explicitly elicited.",
+      "learner_result": null,
+      "human_reviewer_result": null
+    },
+    {
+      "id": "MUS024-C3",
+      "criterion_sha256": "025e0e27e7e90fb159e14846608f05884171e6ad36f8d8dcd2cb0b4a8c63f324",
+      "adequacy": "adequate",
+      "task_path": "code/streeling/evidence/music-phrase-2026-10-22/learner-task.md",
+      "task_section": "MUS024",
+      "course_exercises": [
+        3
+      ],
+      "english_answer_anchor_line": 66,
+      "locales_checked": [
+        "en",
+        "fr",
+        "es"
+      ],
+      "reason": "All event/snapshot/shared-B counts are elicited and independently recomputed.",
+      "learner_result": null,
+      "human_reviewer_result": null
+    },
+    {
+      "id": "MUS024-C4",
+      "criterion_sha256": "b19187b29bf5f7c6a6e7f5d1d0e254c416c1ccff4bbf8c681c915cfa8b3eef60",
+      "adequacy": "adequate",
+      "task_path": "code/streeling/evidence/music-phrase-2026-10-22/learner-task.md",
+      "task_section": "MUS024",
+      "course_exercises": [
+        4
+      ],
+      "english_answer_anchor_line": 78,
+      "locales_checked": [
+        "en",
+        "fr",
+        "es"
+      ],
+      "reason": "All beat conversions and scales are elicited; corrected numeric-copy qualification is taught in every locale.",
+      "learner_result": null,
+      "human_reviewer_result": null
+    },
+    {
+      "id": "MUS024-C5",
+      "criterion_sha256": "58d720b94c9e966fefde3661b56a8c8104234725a324d01b6d37c249b4c97d5b",
+      "adequacy": "adequate",
+      "task_path": "code/streeling/evidence/music-phrase-2026-10-22/learner-task.md",
+      "task_section": "MUS024",
+      "course_exercises": [
+        5
+      ],
+      "english_answer_anchor_line": 90,
+      "locales_checked": [
+        "en",
+        "fr",
+        "es"
+      ],
+      "reason": "Exact-export data and executed-evidence boundary explicitly elicited without asserting observed runtime failure.",
+      "learner_result": null,
+      "human_reviewer_result": null
+    },
+    {
+      "id": "MUS025-C1",
+      "criterion_sha256": "9f0152f6de84f618d5e7ab6f9240a3b6b4ed45310d7f1f8f2a03cfba6987f804",
+      "adequacy": "adequate",
+      "task_path": "code/streeling/evidence/music-phrase-2026-10-22/learner-task.md",
+      "task_section": "MUS025",
+      "course_exercises": [
+        1
+      ],
+      "english_answer_anchor_line": 38,
+      "locales_checked": [
+        "en",
+        "fr",
+        "es"
+      ],
+      "reason": "All placements and pitch-class content are elicited; fixture order differs explicitly from GA internal order.",
+      "learner_result": null,
+      "human_reviewer_result": null
+    },
+    {
+      "id": "MUS025-C2",
+      "criterion_sha256": "ecc226368d6cd80b83b88e23a0919eeea838723c001698d691a7022b0b6abe83",
+      "adequacy": "adequate",
+      "task_path": "code/streeling/evidence/music-phrase-2026-10-22/learner-task.md",
+      "task_section": "MUS025",
+      "course_exercises": [
+        2
+      ],
+      "english_answer_anchor_line": 50,
+      "locales_checked": [
+        "en",
+        "fr",
+        "es"
+      ],
+      "reason": "Three separate melody predicates explicitly elicited; each candidate membership recomputed.",
+      "learner_result": null,
+      "human_reviewer_result": null
+    },
+    {
+      "id": "MUS025-C3",
+      "criterion_sha256": "184b6dc6aaafe8b6161729e6628113fc2909b6461a3a84bfd8b0fa486bb8af61",
+      "adequacy": "adequate",
+      "task_path": "code/streeling/evidence/music-phrase-2026-10-22/learner-task.md",
+      "task_section": "MUS025",
+      "course_exercises": [
+        3
+      ],
+      "english_answer_anchor_line": 62,
+      "locales_checked": [
+        "en",
+        "fr",
+        "es"
+      ],
+      "reason": "D string-order counterexample is explicitly elicited and arithmetically correct.",
+      "learner_result": null,
+      "human_reviewer_result": null
+    },
+    {
+      "id": "MUS025-C4",
+      "criterion_sha256": "a49153b114fce8d0cc6bc4a55107630906f24ba46bff2eac2d7e1c8df8fdd4a8",
+      "adequacy": "adequate",
+      "task_path": "code/streeling/evidence/music-phrase-2026-10-22/learner-task.md",
+      "task_section": "MUS025",
+      "course_exercises": [
+        4
+      ],
+      "english_answer_anchor_line": 74,
+      "locales_checked": [
+        "en",
+        "fr",
+        "es"
+      ],
+      "reason": "Positions, penalties and hard-before-soft selection explicitly elicited; physical claims withheld.",
+      "learner_result": null,
+      "human_reviewer_result": null
+    },
+    {
+      "id": "MUS025-C5",
+      "criterion_sha256": "f8e5e732782fee22681f5f42ae97837da50b0ceb277d1e880ad541b0f2e0e255",
+      "adequacy": "adequate",
+      "task_path": "code/streeling/evidence/music-phrase-2026-10-22/learner-task.md",
+      "task_section": "MUS025",
+      "course_exercises": [
+        5
+      ],
+      "english_answer_anchor_line": 86,
+      "locales_checked": [
+        "en",
+        "fr",
+        "es"
+      ],
+      "reason": "Empty exact-register result, authored candidates, failed probe and unmeasured comfort explicitly elicited.",
+      "learner_result": null,
+      "human_reviewer_result": null
+    }
+  ],
+  "criterion_summary": {
+    "checked": 15,
+    "adequate": 15
+  },
+  "independent_arithmetic": [
+    {
+      "id": "required_high",
+      "totals": [
+        26,
+        24
+      ],
+      "minimum": 24
+    },
+    {
+      "id": "changed_low",
+      "totals": [
+        4,
+        26
+      ],
+      "minimum": 4
+    },
+    {
+      "id": "half_open_events",
+      "sounding_counts": [
+        4,
+        5,
+        5
+      ],
+      "authored_attacks": 8,
+      "hypothetical_attacks": 14,
+      "extra": 6,
+      "held_at_2": [
+        59,
+        76
+      ],
+      "milliseconds": [
+        750.0,
+        1000.0,
+        2000.0
+      ]
+    },
+    {
+      "id": "melody_candidates",
+      "highest": [
+        64,
+        67,
+        59,
+        67
+      ],
+      "positions": [
+        2,
+        3,
+        2,
+        3
+      ],
+      "penalties": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "feasible64": [
+        "A"
+      ],
+      "feasible76": [],
+      "D_highest": 67,
+      "D_last": 64
+    }
+  ],
+  "prerequisites": [
+    {
+      "course": "mus-023-plan-voice-leading-across-a-phrase",
+      "locale": "en",
+      "prerequisite": "mus-005-jazz-harmony",
+      "exists": true
+    },
+    {
+      "course": "mus-023-plan-voice-leading-across-a-phrase",
+      "locale": "en",
+      "prerequisite": "mus-016-recover-voice-correspondence",
+      "exists": true
+    },
+    {
+      "course": "mus-023-plan-voice-leading-across-a-phrase",
+      "locale": "fr",
+      "prerequisite": "mus-005-jazz-harmony",
+      "exists": true
+    },
+    {
+      "course": "mus-023-plan-voice-leading-across-a-phrase",
+      "locale": "fr",
+      "prerequisite": "mus-016-recover-voice-correspondence",
+      "exists": true
+    },
+    {
+      "course": "mus-023-plan-voice-leading-across-a-phrase",
+      "locale": "es",
+      "prerequisite": "mus-005-jazz-harmony",
+      "exists": true
+    },
+    {
+      "course": "mus-023-plan-voice-leading-across-a-phrase",
+      "locale": "es",
+      "prerequisite": "mus-016-recover-voice-correspondence",
+      "exists": true
+    },
+    {
+      "course": "mus-024-preserve-attacks-and-harmonic-boundaries",
+      "locale": "en",
+      "prerequisite": "mus-003-functional-harmony",
+      "exists": true
+    },
+    {
+      "course": "mus-024-preserve-attacks-and-harmonic-boundaries",
+      "locale": "en",
+      "prerequisite": "mus-004-rhythm-and-groove",
+      "exists": true
+    },
+    {
+      "course": "mus-024-preserve-attacks-and-harmonic-boundaries",
+      "locale": "fr",
+      "prerequisite": "mus-003-functional-harmony",
+      "exists": true
+    },
+    {
+      "course": "mus-024-preserve-attacks-and-harmonic-boundaries",
+      "locale": "fr",
+      "prerequisite": "mus-004-rhythm-and-groove",
+      "exists": true
+    },
+    {
+      "course": "mus-024-preserve-attacks-and-harmonic-boundaries",
+      "locale": "es",
+      "prerequisite": "mus-003-functional-harmony",
+      "exists": true
+    },
+    {
+      "course": "mus-024-preserve-attacks-and-harmonic-boundaries",
+      "locale": "es",
+      "prerequisite": "mus-004-rhythm-and-groove",
+      "exists": true
+    },
+    {
+      "course": "mus-025-keep-the-melody-in-a-voicing",
+      "locale": "en",
+      "prerequisite": "mus-012-chord-formulas-essential-tones-doubling",
+      "exists": true
+    },
+    {
+      "course": "mus-025-keep-the-melody-in-a-voicing",
+      "locale": "en",
+      "prerequisite": "mus-016-recover-voice-correspondence",
+      "exists": true
+    },
+    {
+      "course": "mus-025-keep-the-melody-in-a-voicing",
+      "locale": "en",
+      "prerequisite": "mus-024-preserve-attacks-and-harmonic-boundaries",
+      "exists": true
+    },
+    {
+      "course": "mus-025-keep-the-melody-in-a-voicing",
+      "locale": "fr",
+      "prerequisite": "mus-012-chord-formulas-essential-tones-doubling",
+      "exists": true
+    },
+    {
+      "course": "mus-025-keep-the-melody-in-a-voicing",
+      "locale": "fr",
+      "prerequisite": "mus-016-recover-voice-correspondence",
+      "exists": true
+    },
+    {
+      "course": "mus-025-keep-the-melody-in-a-voicing",
+      "locale": "fr",
+      "prerequisite": "mus-024-preserve-attacks-and-harmonic-boundaries",
+      "exists": true
+    },
+    {
+      "course": "mus-025-keep-the-melody-in-a-voicing",
+      "locale": "es",
+      "prerequisite": "mus-012-chord-formulas-essential-tones-doubling",
+      "exists": true
+    },
+    {
+      "course": "mus-025-keep-the-melody-in-a-voicing",
+      "locale": "es",
+      "prerequisite": "mus-016-recover-voice-correspondence",
+      "exists": true
+    },
+    {
+      "course": "mus-025-keep-the-melody-in-a-voicing",
+      "locale": "es",
+      "prerequisite": "mus-024-preserve-attacks-and-harmonic-boundaries",
+      "exists": true
+    }
+  ],
+  "first_api_official_links": {
+    "result": "pass",
+    "locales": [
+      "en",
+      "fr",
+      "es"
+    ],
+    "basis": "First tab-solver/type/tuning mentions link to the official pinned GA repository; first MusicXML mention links to W3C. Official URL HTTP statuses are supplied readback evidence, not new network observations."
+  },
+  "locale_scope": {
+    "result": "pass",
+    "review_kind": "AI semantic comparison; no fluent human approval",
+    "details": "All nine maintain constructed-fixture, exact-register, authored harmony, source-only and failed-live-probe boundaries; MusicXML divisions scale and numeric-copy correction appear in EN/FR/ES."
+  },
+  "distinctness": {
+    "comparators": [
+      {
+        "path": "streeling/courses/music/en/mus-005-jazz-harmony.md",
+        "sha256": "c603a5c697a5a5d194f0ef5ea9cf352b4360f0deb1112cc0309dde3d9e7c75b5",
+        "relevant_ranges": [
+          [
+            263,
+            309
+          ]
+        ]
+      },
+      {
+        "path": "streeling/courses/music/en/mus-004-rhythm-and-groove.md",
+        "sha256": "af2c21252b3f037e19a498b6cedcef926550711e0bbe3687bc7ffac7c20465ea",
+        "relevant_ranges": [
+          [
+            17,
+            63
+          ],
+          [
+            128,
+            156
+          ],
+          [
+            219,
+            243
+          ]
+        ]
+      }
+    ],
+    "MUS023": "Adds fixed registered two-voice endpoint, complete path totals, changed destination and per-state DP distinction to MUS005 guide-tone/nearest-note exercise.",
+    "MUS024": "Adds identified half-open events, attacks versus sounding snapshots, independent harmonic annotations and explicit representation/export unit boundary to MUS004 duration/tie/groove vocabulary.",
+    "MUS025": "Adds exact highest-registered-pitch predicate before a separately declared soft position penalty; string-order counterexample and empty feasible set."
+  },
+  "outcomes": {
+    "human_subject_review": null,
+    "fluent_language_review": {
+      "en": null,
+      "fr": null,
+      "es": null
+    },
+    "playing_trial": null,
+    "participant_outcome": null,
+    "causal_learning_benefit": null
+  },
+  "scope_limits": [
+    "AI factual/source-assisted audit only; not a formal CE shipping review or human approval.",
+    "No network, builds, installs, Git mutations or repository edits.",
+    "Only external receipt written; all course/support files read-only.",
+    "GA Git blobs inspected at exact pinned commit; official MusicXML page content not independently fetched or byte-validated in this audit; supplied HTTP readback receipts retained.",
+    "No GA solver/candidate execution, physical objective measurement, score conversion, audio, player trial or learner outcome.",
+    "Source and fixture audit does not validate rendered pages, deployment or the complete university goal.",
+    "Receipt binds only inspected sources and support; no not-ready validation/build files are bound."
+  ],
+  "ownership": "released_after_receipt_write"
+}

@@ -1,0 +1,34 @@
+{
+  "checked_at_utc": "2026-10-22T13:19:56.158084+00:00",
+  "scope": "Unchanged public GAS001 measurement script on new native WAVs and its existing RMS helper; not a new perceptual score.",
+  "script_sha256": "bf2da975a6090e92ce47bdc94b55bd470c77e0c5b90f4e2301500cd3d4f0b1ef",
+  "numpy": "2.4.2",
+  "reference_decline_db": -3.9221151304441193,
+  "arms": {
+    "baseline": {
+      "primary_unrounded_decline_db": -1.0848117418372638,
+      "node_unrounded_decline_db": -1.0848117418372532,
+      "absolute_difference_db": 1.0658141036401503e-14
+    },
+    "candidate": {
+      "primary_unrounded_decline_db": -1.1989778914316709,
+      "node_unrounded_decline_db": -1.198977891431639,
+      "absolute_difference_db": 3.197442310920451e-14
+    }
+  },
+  "baseline_complete_json_exact_archived_measurements": true,
+  "script_runs": {
+    "baseline_exit_code": 0,
+    "candidate_exit_code": 0
+  },
+  "preparation_findings": [
+    "Recorded reference uses IEEE float32 WAV, not PCM16. Initial narrow decoder rejected format3; lab now explicitly handles the two supplied formats, retaining rate/format guards.",
+    "Exploratory native/WASM outputs are not bit-identical. No posthoc floating-point tolerance is adopted as a release gate."
+  ],
+  "limits": [
+    "No listening result, other notes or browser capture.",
+    "Rounded partial summaries do not prove every spectral or attack property preserved."
+  ],
+  "scipy": "1.17.1",
+  "python": "3.14.2"
+}

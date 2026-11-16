@@ -4,12 +4,13 @@ description: Distances, noyaux et matrices semi-définies positives — Mathéma
 sidebar:
   label: MAT-013 · Distances, noyaux et matrices semi-définies positives
   order: 13
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/fr/mat-013-distances-kernels-psd.fr.md
 ---
 
 :::note[Streeling University]
 **MAT-013** · Distances, noyaux et matrices semi-définies positives · intermédiaire · 50 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/518158b0568981b4ebe290d69f197995bd41ded0/state/streeling/courses/mathematics/fr/mat-013-distances-kernels-psd.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/fr/mat-013-distances-kernels-psd.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-005](../../mathematics/mat-005-symmetric-eigenproblems/)
 :::

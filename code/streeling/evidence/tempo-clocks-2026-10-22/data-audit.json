@@ -1,0 +1,824 @@
+{
+  "schema": "streeling.tempo-clocks.data-audit.v1",
+  "audited_at_utc": "2026-10-23T00:39:44.066Z",
+  "verdict": "pass",
+  "check_count": 18,
+  "checks": [
+    {
+      "id": "pinned_source_bytes_match_readback",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "path": "C:/tmp/streeling-tempo-clocks-inputs-20261022/76efbff-MidiTypes.fs",
+          "sha256": "8614a2a5d466b5bb792c50017ae7a6e09592b158f1362ac6bf8768683c428b36",
+          "expected_sha256": "8614a2a5d466b5bb792c50017ae7a6e09592b158f1362ac6bf8768683c428b36",
+          "bytes": 9522,
+          "expected_bytes": 9522
+        },
+        {
+          "path": "C:/tmp/streeling-tempo-clocks-inputs-20261022/76efbff-MidiParser.fs",
+          "sha256": "00f812620749834af64988b07cde408fb50936d750623b246dc3e64b1ee0d402",
+          "expected_sha256": "00f812620749834af64988b07cde408fb50936d750623b246dc3e64b1ee0d402",
+          "bytes": 13721,
+          "expected_bytes": 13721
+        },
+        {
+          "path": "C:/tmp/streeling-tempo-clocks-inputs-20261022/76efbff-progression.component.ts",
+          "sha256": "545b627ea30997b669077e8310893121b5ee5ff18e73d3cb24efd08692e71934",
+          "expected_sha256": "545b627ea30997b669077e8310893121b5ee5ff18e73d3cb24efd08692e71934",
+          "bytes": 5538,
+          "expected_bytes": 5538
+        },
+        {
+          "path": "C:/tmp/streeling-tempo-clocks-inputs-20261022/dc2e74c-MidiParser.fs",
+          "sha256": "00f812620749834af64988b07cde408fb50936d750623b246dc3e64b1ee0d402",
+          "expected_sha256": "00f812620749834af64988b07cde408fb50936d750623b246dc3e64b1ee0d402",
+          "bytes": 13721,
+          "expected_bytes": 13721
+        }
+      ],
+      "expected": "all four copied source files match declared SHA256 and byte lengths"
+    },
+    {
+      "id": "parser_bytes_equal_across_pins",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "declared": true,
+        "byte_equal": true
+      },
+      "expected": "GA and dc2 parser copies are byte-identical"
+    },
+    {
+      "id": "source_observations_match_actual_bytes",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "scope": "Bounded reading of pinned files, not a current GA canonical-path census, source patch, browser experiment or F# test execution.",
+        "ga_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+        "earlier_parser_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+        "parser": {
+          "status_mask": "actualStatus &&&0xF0uy",
+          "meta_arm": "0xFFuy",
+          "meta_arm_reachable": false,
+          "selected_tempo_body_integer_BPM": true,
+          "selected_tempo_body_keeps_delta": false,
+          "note_record_keeps_delta": true,
+          "metric_tempo_map_emitted_by_selected_types": false,
+          "SMPTE_source_uses_unsigned_high_byte": true,
+          "actual_run": false
+        },
+        "dashboard": {
+          "path": "Apps/ga-dashboard/src/app/shared/progression.component.ts",
+          "duration_unit": "ms",
+          "callback": "setTimeout at accumulated duration",
+          "visual_and_audio_request_same_callback": true,
+          "audio_anchor": "AudioContext.currentTime when callback invokes playChordAudio",
+          "strum_offset": "physical stringIdx*0.03 seconds, muted indices skipped without compaction",
+          "oscillator": "triangle",
+          "getOutputTimestamp_used_in_selected_file": false,
+          "measured_latency_used_in_selected_file": false,
+          "canonical_main_UI_claim": false
+        },
+        "existing_course_corrections": [
+          "MCL004 integer-BPM example is conditional selected-body arithmetic; metadata arm is unreachable at its pin too.",
+          "MCL006 selected time-signature payload example is conditional body interpretation, not reachable parser output."
+        ],
+        "new_parser_or_scheduler": null
+      },
+      "expected": "observations are supported by copied source bytes"
+    },
+    {
+      "id": "all_256_status_masks_make_meta_arm_unreachable",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "count": 256,
+        "meta_status": 255,
+        "meta_masked": 240
+      },
+      "expected": "actualStatus &&& 0xF0uy cannot equal 0xFFuy for any byte"
+    },
+    {
+      "id": "smpte_signed_high_byte_boundary",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "encoded_signed_high_byte": -24,
+          "unsigned_high_byte": 232,
+          "ticks_per_frame": 40,
+          "division_word": 59432,
+          "division_hex": "E828",
+          "source_fps_expression": -232,
+          "signed_high_byte_after_explicit_decode": -24,
+          "positive_format_label_after_decode": 24,
+          "not_a_complete_drop_frame_converter": true
+        },
+        {
+          "encoded_signed_high_byte": -25,
+          "unsigned_high_byte": 231,
+          "ticks_per_frame": 40,
+          "division_word": 59176,
+          "division_hex": "E728",
+          "source_fps_expression": -231,
+          "signed_high_byte_after_explicit_decode": -25,
+          "positive_format_label_after_decode": 25,
+          "not_a_complete_drop_frame_converter": true
+        },
+        {
+          "encoded_signed_high_byte": -29,
+          "unsigned_high_byte": 227,
+          "ticks_per_frame": 40,
+          "division_word": 58152,
+          "division_hex": "E328",
+          "source_fps_expression": -227,
+          "signed_high_byte_after_explicit_decode": -29,
+          "positive_format_label_after_decode": 29,
+          "not_a_complete_drop_frame_converter": true
+        },
+        {
+          "encoded_signed_high_byte": -30,
+          "unsigned_high_byte": 226,
+          "ticks_per_frame": 40,
+          "division_word": 57896,
+          "division_hex": "E228",
+          "source_fps_expression": -226,
+          "signed_high_byte_after_explicit_decode": -30,
+          "positive_format_label_after_decode": 30,
+          "not_a_complete_drop_frame_converter": true
+        }
+      ],
+      "expected": "source uses unsigned high byte before signed interpretation; E728 yields source fps -231, explicit signed -25 is separate"
+    },
+    {
+      "id": "ppqn_tempo_map_piecewise_rows",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        0,
+        0.25,
+        0.5,
+        1,
+        1.5,
+        1.625
+      ],
+      "expected": [
+        0,
+        0.25,
+        0.5,
+        1,
+        1.5,
+        1.625
+      ]
+    },
+    {
+      "id": "spanning_note_integrates_each_tempo_segment",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "start_tick": 240,
+        "end_tick": 1200,
+        "start_seconds": {
+          "rational": "1/4",
+          "decimal": 0.25
+        },
+        "end_seconds": {
+          "rational": "13/8",
+          "decimal": 1.625
+        },
+        "duration_seconds": {
+          "rational": "11/8",
+          "decimal": 1.375
+        },
+        "interval_ticks": [
+          240,
+          480,
+          240
+        ],
+        "interval_seconds": [
+          {
+            "rational": "1/4",
+            "decimal": 0.25
+          },
+          {
+            "rational": "1",
+            "decimal": 1
+          },
+          {
+            "rational": "1/8",
+            "decimal": 0.125
+          }
+        ]
+      },
+      "expected": "tick 240 to 1200 duration is 1.375s under the three tempo segments"
+    },
+    {
+      "id": "hypothetical_delta_projection_A_B",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "id": "A",
+          "tick": 960,
+          "expectedTick": 960,
+          "sec": 1.5,
+          "delta": 480,
+          "projection": [
+            {
+              "case": "Tempo",
+              "bpm": 120
+            },
+            {
+              "case": "note_on",
+              "delta": 0,
+              "note": 60,
+              "velocity": 64,
+              "channel": 0
+            },
+            {
+              "case": "Tempo",
+              "bpm": 60
+            },
+            {
+              "case": "note_off",
+              "delta": 480,
+              "note": 60,
+              "velocity": 0,
+              "channel": 0
+            },
+            {
+              "case": "EndOfTrack"
+            }
+          ]
+        },
+        {
+          "id": "B",
+          "tick": 720,
+          "expectedTick": 720,
+          "sec": 1.25,
+          "delta": 240,
+          "projection": [
+            {
+              "case": "Tempo",
+              "bpm": 120
+            },
+            {
+              "case": "note_on",
+              "delta": 0,
+              "note": 60,
+              "velocity": 64,
+              "channel": 0
+            },
+            {
+              "case": "Tempo",
+              "bpm": 60
+            },
+            {
+              "case": "note_off",
+              "delta": 480,
+              "note": 60,
+              "velocity": 0,
+              "channel": 0
+            },
+            {
+              "case": "EndOfTrack"
+            }
+          ]
+        }
+      ],
+      "expected": "A delta 480 at tick 960 -> 1.5s; B delta 480 at tick 720 -> 1.25s; both hypothetical projections use 120 then 60 BPM"
+    },
+    {
+      "id": "clock_affine_anchors_and_rate",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "context_seconds": 0,
+          "performance_ms": 10000
+        },
+        {
+          "context_seconds": 60,
+          "performance_ms": 70006
+        }
+      ],
+      "expected": "affine map is performance_ms=10000+1000.1*context_seconds"
+    },
+    {
+      "id": "clock_nominal_rate_projection",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "context_seconds": 0,
+          "affine_performance_ms": {
+            "rational": "10000",
+            "decimal": 10000
+          },
+          "nominal_1000_ms_rate_prediction": {
+            "rational": "10000",
+            "decimal": 10000
+          },
+          "nominal_rate_error_ms": {
+            "rational": "0",
+            "decimal": 0
+          },
+          "anchor_weights": [
+            {
+              "rational": "1",
+              "decimal": 1
+            },
+            {
+              "rational": "0",
+              "decimal": 0
+            }
+          ],
+          "assumed_anchor_error_bound_ms": {
+            "rational": "1/2",
+            "decimal": 0.5
+          },
+          "model_inside_anchor_interval": true
+        },
+        {
+          "context_seconds": 10,
+          "affine_performance_ms": {
+            "rational": "20001",
+            "decimal": 20001
+          },
+          "nominal_1000_ms_rate_prediction": {
+            "rational": "20000",
+            "decimal": 20000
+          },
+          "nominal_rate_error_ms": {
+            "rational": "1",
+            "decimal": 1
+          },
+          "anchor_weights": [
+            {
+              "rational": "5/6",
+              "decimal": 0.8333333333333334
+            },
+            {
+              "rational": "1/6",
+              "decimal": 0.16666666666666666
+            }
+          ],
+          "assumed_anchor_error_bound_ms": {
+            "rational": "1/2",
+            "decimal": 0.5
+          },
+          "model_inside_anchor_interval": true
+        },
+        {
+          "context_seconds": 30,
+          "affine_performance_ms": {
+            "rational": "40003",
+            "decimal": 40003
+          },
+          "nominal_1000_ms_rate_prediction": {
+            "rational": "40000",
+            "decimal": 40000
+          },
+          "nominal_rate_error_ms": {
+            "rational": "3",
+            "decimal": 3
+          },
+          "anchor_weights": [
+            {
+              "rational": "1/2",
+              "decimal": 0.5
+            },
+            {
+              "rational": "1/2",
+              "decimal": 0.5
+            }
+          ],
+          "assumed_anchor_error_bound_ms": {
+            "rational": "1/2",
+            "decimal": 0.5
+          },
+          "model_inside_anchor_interval": true
+        },
+        {
+          "context_seconds": 60,
+          "affine_performance_ms": {
+            "rational": "70006",
+            "decimal": 70006
+          },
+          "nominal_1000_ms_rate_prediction": {
+            "rational": "70000",
+            "decimal": 70000
+          },
+          "nominal_rate_error_ms": {
+            "rational": "6",
+            "decimal": 6
+          },
+          "anchor_weights": [
+            {
+              "rational": "0",
+              "decimal": 0
+            },
+            {
+              "rational": "1",
+              "decimal": 1
+            }
+          ],
+          "assumed_anchor_error_bound_ms": {
+            "rational": "1/2",
+            "decimal": 0.5
+          },
+          "model_inside_anchor_interval": true
+        },
+        {
+          "context_seconds": 90,
+          "affine_performance_ms": {
+            "rational": "100009",
+            "decimal": 100009
+          },
+          "nominal_1000_ms_rate_prediction": {
+            "rational": "100000",
+            "decimal": 100000
+          },
+          "nominal_rate_error_ms": {
+            "rational": "9",
+            "decimal": 9
+          },
+          "anchor_weights": [
+            {
+              "rational": "-1/2",
+              "decimal": -0.5
+            },
+            {
+              "rational": "3/2",
+              "decimal": 1.5
+            }
+          ],
+          "assumed_anchor_error_bound_ms": {
+            "rational": "1",
+            "decimal": 1
+          },
+          "model_inside_anchor_interval": false
+        },
+        {
+          "context_seconds": 120,
+          "affine_performance_ms": {
+            "rational": "130012",
+            "decimal": 130012
+          },
+          "nominal_1000_ms_rate_prediction": {
+            "rational": "130000",
+            "decimal": 130000
+          },
+          "nominal_rate_error_ms": {
+            "rational": "12",
+            "decimal": 12
+          },
+          "anchor_weights": [
+            {
+              "rational": "-1",
+              "decimal": -1
+            },
+            {
+              "rational": "2",
+              "decimal": 2
+            }
+          ],
+          "assumed_anchor_error_bound_ms": {
+            "rational": "3/2",
+            "decimal": 1.5
+          },
+          "model_inside_anchor_interval": false
+        }
+      ],
+      "expected": "nominal 1000 ms/s clock accumulates 100 ppm error"
+    },
+    {
+      "id": "clock_anchor_error_bounds",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "context_seconds": 30,
+          "bound_ms": 0.5
+        },
+        {
+          "context_seconds": 90,
+          "bound_ms": 1
+        },
+        {
+          "context_seconds": 120,
+          "bound_ms": 1.5
+        }
+      ],
+      "expected": "deterministic ±0.5ms anchor bounds project to ±0.5, ±1, ±1.5ms"
+    },
+    {
+      "id": "heldout_refutes_combined_affine_assumptions",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "context_seconds": 90,
+        "authored_observed_performance_ms": {
+          "rational": "100011",
+          "decimal": 100011
+        },
+        "predicted_center_ms": {
+          "rational": "100009",
+          "decimal": 100009
+        },
+        "residual_ms": {
+          "rational": "2",
+          "decimal": 2
+        },
+        "prediction_error_bound_ms": {
+          "rational": "1",
+          "decimal": 1
+        },
+        "heldout_error_bound_ms": {
+          "rational": "1/2",
+          "decimal": 0.5
+        },
+        "max_allowed_absolute_residual_under_combined_assumptions_ms": {
+          "rational": "3/2",
+          "decimal": 1.5
+        },
+        "prediction_interval_ms": [
+          {
+            "rational": "100008",
+            "decimal": 100008
+          },
+          {
+            "rational": "100010",
+            "decimal": 100010
+          }
+        ],
+        "heldout_interval_ms": [
+          {
+            "rational": "200021/2",
+            "decimal": 100010.5
+          },
+          {
+            "rational": "200023/2",
+            "decimal": 100011.5
+          }
+        ],
+        "combined_assumptions_refuted": true,
+        "cause_identified": false
+      },
+      "expected": "held-out observation interval is disjoint from combined prediction interval; cause remains unknown"
+    },
+    {
+      "id": "lead_target_mapping",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "context_target_seconds": 10,
+        "mapped_target_performance_ms": {
+          "rational": "20001",
+          "decimal": 20001
+        },
+        "call_performance_ms": 19980,
+        "lead_ms": {
+          "rational": "21",
+          "decimal": 21
+        },
+        "raw_context_seconds_minus_performance_ms_is_meaningless": true
+      },
+      "expected": "context 10s maps to 20001ms; call at 19980ms gives 21ms lead"
+    },
+    {
+      "id": "playback_trial_medians_and_gate",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "configuration": "A",
+          "median_compute_ms": 4,
+          "median_end_to_end_ms": {
+            "rational": "195/2",
+            "decimal": 97.5
+          },
+          "range_end_to_end_ms": 15,
+          "passes": 0,
+          "trials": 4
+        },
+        {
+          "configuration": "B",
+          "median_compute_ms": 6,
+          "median_end_to_end_ms": {
+            "rational": "135/2",
+            "decimal": 67.5
+          },
+          "range_end_to_end_ms": 15,
+          "passes": 4,
+          "trials": 4
+        }
+      ],
+      "expected": "authored medians differ by 30ms; 80ms gate yields A=0 and B=4"
+    },
+    {
+      "id": "callback_lateness_and_intervals",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "callbacks": [
+          {
+            "requested_callback_relative_ms": 0,
+            "authored_callback_relative_ms": 12,
+            "lateness_ms": 12
+          },
+          {
+            "requested_callback_relative_ms": 1000,
+            "authored_callback_relative_ms": 1080,
+            "lateness_ms": 80
+          },
+          {
+            "requested_callback_relative_ms": 2000,
+            "authored_callback_relative_ms": 2015,
+            "lateness_ms": 15
+          }
+        ],
+        "intervals": [
+          1068,
+          935
+        ]
+      },
+      "expected": "requested callbacks 0/1000/2000 become 12/1080/2015; intervals 1068/935"
+    },
+    {
+      "id": "muted_frets_preserve_physical_string_indices",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "frets": [
+          -1,
+          0,
+          -1,
+          2,
+          3,
+          -1
+        ],
+        "index_base": 0,
+        "seconds_per_physical_string": {
+          "rational": "3/100",
+          "decimal": 0.03
+        },
+        "rows": [
+          {
+            "physical_string_index": 1,
+            "fret": 0,
+            "requested_audio_offset_seconds": {
+              "rational": "3/100",
+              "decimal": 0.03
+            },
+            "wrong_compacted_rank_offset_seconds": {
+              "rational": "0",
+              "decimal": 0
+            }
+          },
+          {
+            "physical_string_index": 3,
+            "fret": 2,
+            "requested_audio_offset_seconds": {
+              "rational": "9/100",
+              "decimal": 0.09
+            },
+            "wrong_compacted_rank_offset_seconds": {
+              "rational": "3/100",
+              "decimal": 0.03
+            }
+          },
+          {
+            "physical_string_index": 4,
+            "fret": 3,
+            "requested_audio_offset_seconds": {
+              "rational": "3/25",
+              "decimal": 0.12
+            },
+            "wrong_compacted_rank_offset_seconds": {
+              "rational": "3/50",
+              "decimal": 0.06
+            }
+          }
+        ],
+        "requested_gap_seconds": [
+          {
+            "rational": "3/50",
+            "decimal": 0.06
+          },
+          {
+            "rational": "3/100",
+            "decimal": 0.03
+          }
+        ],
+        "oscillator": "triangle",
+        "measured_onsets": null
+      },
+      "expected": "muted -1 frets are skipped without compacting physical string indices"
+    },
+    {
+      "id": "playback_has_no_measured_output_claim",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "dashboard": {
+          "path": "Apps/ga-dashboard/src/app/shared/progression.component.ts",
+          "duration_unit": "ms",
+          "callback": "setTimeout at accumulated duration",
+          "visual_and_audio_request_same_callback": true,
+          "audio_anchor": "AudioContext.currentTime when callback invokes playChordAudio",
+          "strum_offset": "physical stringIdx*0.03 seconds, muted indices skipped without compaction",
+          "oscillator": "triangle",
+          "getOutputTimestamp_used_in_selected_file": false,
+          "measured_latency_used_in_selected_file": false,
+          "canonical_main_UI_claim": false
+        },
+        "actual_user_latency": null,
+        "measured_onsets": null
+      },
+      "expected": "records are authored/scheduled endpoints, not measured browser or audio output"
+    },
+    {
+      "id": "source_has_scheduled_deadline_boundary",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "setTimeout": true,
+        "accumulated_duration": true,
+        "audio_context_anchor": true
+      },
+      "expected": "source schedules callback and AudioContext deadlines but does not measure callback/output realization"
+    }
+  ],
+  "findings": [],
+  "fix_requests": [],
+  "input_bindings": [
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/tempo-clocks-2026-10-22/primary-readback.json",
+      "sha256": "081f6f1c423c5144536a2f5fd35ed6f6502af5d1e38a83fcdcd8addbe4ed6075"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/tempo-clocks-2026-10-22/tempo-map.json",
+      "sha256": "a3a707315c496369b326c5a6561c1e346325135c5123d9f26297b1a3975a673f"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/tempo-clocks-2026-10-22/parser-boundaries.json",
+      "sha256": "b8d58152503a77fd971d9ffb306f601c2f6c14773dde973342807035f259087c"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/tempo-clocks-2026-10-22/clock-map.json",
+      "sha256": "eecbcac9db1f43da4c2fd35378aac7bde520af8a5f1f9d8b55e546a2893a0d16"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/tempo-clocks-2026-10-22/playback-endpoints.json",
+      "sha256": "a57287b184038c3ffacca21e91a506da9a9b16fafb7fc685fb187d04dd5ce963"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/tempo-clocks-2026-10-22/source-observations.json",
+      "sha256": "09908593d4222ed968db4224b4d0999be53961d6d897e670dfb8224c96e8633c"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/tempo-clocks-2026-10-22/primary-reading.json",
+      "sha256": "245fad5e5199d0901038a2cc201d6c2012177d6b28ff49be4e57dfdc87359f9c"
+    },
+    {
+      "path": "C:/tmp/streeling-tempo-clocks-inputs-20261022/76efbff-MidiTypes.fs",
+      "sha256": "8614a2a5d466b5bb792c50017ae7a6e09592b158f1362ac6bf8768683c428b36"
+    },
+    {
+      "path": "C:/tmp/streeling-tempo-clocks-inputs-20261022/76efbff-MidiParser.fs",
+      "sha256": "00f812620749834af64988b07cde408fb50936d750623b246dc3e64b1ee0d402"
+    },
+    {
+      "path": "C:/tmp/streeling-tempo-clocks-inputs-20261022/76efbff-progression.component.ts",
+      "sha256": "545b627ea30997b669077e8310893121b5ee5ff18e73d3cb24efd08692e71934"
+    },
+    {
+      "path": "C:/tmp/streeling-tempo-clocks-inputs-20261022/dc2e74c-MidiParser.fs",
+      "sha256": "00f812620749834af64988b07cde408fb50936d750623b246dc3e64b1ee0d402"
+    }
+  ],
+  "audit_history": [
+    {
+      "event": "source_dispatch_interpretation",
+      "status": "resolved",
+      "resolution": "actualStatus is masked with 0xF0 before the 0xFF meta arm; the meta arm is unreachable at both recorded parser pins"
+    },
+    {
+      "event": "scope_boundary",
+      "status": "preserved",
+      "resolution": "tempo-map, clock, playback and latency values are authored/static evidence; no parser execution, browser run, hardware or audio measurement"
+    }
+  ],
+  "scope": {
+    "arithmetic": "independent binary64/integer recomputation from evidence rows and actual copied source bytes",
+    "runtime": "no F# tests, builds, browser, MIDI hardware, audio, GPU, or service runs",
+    "source_pins": [
+      "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "dc2e74cbd992a298f67efb928b5b3754615e1924"
+    ],
+    "output_clock_boundary": "scheduled/requested endpoints are separated from actual callback/output timing"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "status": "resolved",
+  "problem": "External review helper used Windows default text newline when rebinding packet, producing an unnecessarily broad CRLF diff. Calculations remained green; this was a review-helper formatting error, not a course calculation failure.",
+  "before_sha256": "5b5b1ff1ce99e83fad3533e207ce955271e483ec4cac1376ca858d1fab357f33",
+  "snapshot": "C:\\tmp\\batch25b-b-review\\incorrect-crlf-write-unit-b.json",
+  "correction": "Normalize only CRLF to LF; preserve final semantic JSON and the one revised source binding.",
+  "after_sha256": "3c336f9a7898eb3c316c494abc42e74c780e026547c1eedb6700b627107634f0"
+}

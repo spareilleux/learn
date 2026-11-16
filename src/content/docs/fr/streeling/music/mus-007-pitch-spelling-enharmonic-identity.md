@@ -4,12 +4,13 @@ description: Hauteur, orthographe et identité enharmonique — Musique
 sidebar:
   label: MUS-007 · Hauteur, orthographe et identité enharmonique
   order: 7
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/fr/mus-007-pitch-spelling-enharmonic-identity.fr.md
 ---
 
 :::note[Streeling University]
 **MUS-007** · Hauteur, orthographe et identité enharmonique · débutant · 45 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/518158b0568981b4ebe290d69f197995bd41ded0/state/streeling/courses/music/fr/mus-007-pitch-spelling-enharmonic-identity.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-007-pitch-spelling-enharmonic-identity.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-001](../../music/mus-001-what-is-a-chord/)
 :::

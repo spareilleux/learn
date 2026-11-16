@@ -4,12 +4,13 @@ description: Disposition du manche et système CAGED — Études de guitare
 sidebar:
   label: GTR-002 · La géométrie du CAGED
   order: 2
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar-studies/fr/gtr-002-caged-geometry.fr.md
 ---
 
 :::note[Streeling University]
 **GTR-002** · Disposition du manche et système CAGED · intermédiaire · 45 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/518158b0568981b4ebe290d69f197995bd41ded0/state/streeling/courses/guitar-studies/fr/gtr-002-caged-geometry.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-002-caged-geometry.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GTR-001](../../guitar-studies/gtr-001-the-fretboard-map/)
 :::

@@ -1,0 +1,966 @@
+{
+  "reviewer": "independent-pedagogical-source-review-agent",
+  "checked_at_utc": "2026-10-22T21:34:30.336976+00:00",
+  "verdict": "pass",
+  "findings": [],
+  "fix_history": [
+    {
+      "origin": "code/streeling/evidence/retry-admission-2026-10-22/data-audit.json",
+      "id": "derived-cycle-error-encoding",
+      "status": "resolved",
+      "finding": "Initial observed-probe-summary cycle_error contained mojibake a â†’ b rather than the raw Unicode a → b.",
+      "resolution": "Author regenerated derived JSON using explicit UTF-8 reads. Exact final equality is checked against raw MCP text; no raw tool call was rerun.",
+      "content_review_action": "Verified the resolved correction remains explicit in the reviewed packet and lessons; no course source correction made by this reviewer."
+    },
+    {
+      "origin": "code/streeling/evidence/retry-admission-2026-10-22/data-audit.json",
+      "id": "executor-comment-control-flow",
+      "status": "resolved",
+      "finding": "Initial parallel std-thread executor interpretation trusted comments. The actual multi-node map/collect branch invokes node.compute synchronously without spawning.",
+      "resolution": "Production plan and admission model preserve the source inspection correction. Pinned implementation and unknown service runtime/order remain distinct.",
+      "content_review_action": "Verified the resolved correction remains explicit in the reviewed packet and lessons; no course source correction made by this reviewer."
+    }
+  ],
+  "coverage": {
+    "exercise_answer_pairs": 45,
+    "learner_criteria": 15
+  },
+  "scope": {
+    "reviewed": "All nine EN/FR/ES source lessons, all45 localized exercise-answer pairs, prepared learner task, all15 rubric criteria, fixed packet/raw responses/models, five pinned IX source files and four official primary references.",
+    "data_audit": "Independent data/source receipt128/128 passes; both resolved historical findings retained. Current input hashes verified. Content reviewer did not rerun tool calls or native source tests.",
+    "source_read_scope": "dag.rs production methods and tests; executor.rs; spec.rs; tools.rs bounded run_pipeline control flow/cache expression and exposed schema; dag-execution.md relevant architecture/executor and legacy-tool sections. Unrelated tools handlers not reviewed.",
+    "localization": "Agent semantic review, not human fluent-language approval.",
+    "prerequisites": "Existing English NET005/CYB004/PHI002 read for continuity only; their wider historical experimental claims are outside this review.",
+    "publication": "Source review only. Generator/build/local/public/deployed checks are separate receipts."
+  },
+  "exercise_answer_checks": [
+    {
+      "id": "NET007-en-exercise-1",
+      "module": "NET007",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/network-science/en/net-007-separate-dag-readiness-from-admission.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "676018d778f618e1c78fa2ebef258acd56b73bf3983b460693c8056f20b3e960",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Diamond level sets are a | b,c | d with reported width2; a single slot changes scheduling, not graph validity. Eight independent nodes have reported width8; this is not measured concurrency or a general antichain-width theorem."
+    },
+    {
+      "id": "NET007-en-exercise-2",
+      "module": "NET007",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/network-science/en/net-007-separate-dag-readiness-from-admission.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "f9fcbfc9596bcfa0a19a09d571ea98aeebcace7f74064565c6144f3e91ba2b0a",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Eight unit jobs/two slots need four waves and4ticks. Weighted diamond finishes in6ticks versus8serial, giving speedup8/6 rather than2. All durations and overlap are authored assumptions."
+    },
+    {
+      "id": "NET007-en-exercise-3",
+      "module": "NET007",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/network-science/en/net-007-separate-dag-readiness-from-admission.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "3e88007230cda416cd6d8bd819c20c4151633b01c744bdba7810cd584b2d7baa",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "The inspected multi-node branch directly computes synchronously inside Iterator map/collect, with no thread spawn there. Runtime attempt start/end and context observations would measure overlap; internal tool parallelism remains a separate question."
+    },
+    {
+      "id": "NET007-en-exercise-4",
+      "module": "NET007",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/network-science/en/net-007-separate-dag-readiness-from-admission.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "6807eb54225fd995e73ae31a299dff149ae4b138f750eedfa90af65446c2e5ab",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Both raw orders place first before second and third; siblings differ. Equal numeric maps do not attest an implementation, and differing order does not attest the pinned deterministic-order DAG. Service revision remains unknown."
+    },
+    {
+      "id": "NET007-en-exercise-5",
+      "module": "NET007",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/network-science/en/net-007-separate-dag-readiness-from-admission.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "a8b6192ae7da65388d8bd9131cdbf529f646b65107fc969fbb924df508db5fa4",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "At most two ready nodes are admitted under the proposed two-slot rule. Admission does not prove start; running requires an observed attempt start and completion a terminal observation. No installed editor behavior or full failure timeline is claimed."
+    },
+    {
+      "id": "NET007-fr-exercise-1",
+      "module": "NET007",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/network-science/fr/net-007-separate-dag-readiness-from-admission.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "7f762083123db1f1c8acb71bc0d586e1aa8a161c939d3d0b270416bf40710b7c",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Diamond level sets are a | b,c | d with reported width2; a single slot changes scheduling, not graph validity. Eight independent nodes have reported width8; this is not measured concurrency or a general antichain-width theorem."
+    },
+    {
+      "id": "NET007-fr-exercise-2",
+      "module": "NET007",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/network-science/fr/net-007-separate-dag-readiness-from-admission.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "99d1c5ad3936af1da7c0c3a48319fe0300c9beaa6448226840e2b3b421c7987b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Eight unit jobs/two slots need four waves and4ticks. Weighted diamond finishes in6ticks versus8serial, giving speedup8/6 rather than2. All durations and overlap are authored assumptions."
+    },
+    {
+      "id": "NET007-fr-exercise-3",
+      "module": "NET007",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/network-science/fr/net-007-separate-dag-readiness-from-admission.fr.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "5642221cef2074d9120a0bbf1fbcd6cc4ea610d3323e4363d1aad50619b78e1b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "The inspected multi-node branch directly computes synchronously inside Iterator map/collect, with no thread spawn there. Runtime attempt start/end and context observations would measure overlap; internal tool parallelism remains a separate question."
+    },
+    {
+      "id": "NET007-fr-exercise-4",
+      "module": "NET007",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/network-science/fr/net-007-separate-dag-readiness-from-admission.fr.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "2364ac54870cf15c6303464e765cf8d28bc9171f6f4cb47fe6e0dab29fb42946",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Both raw orders place first before second and third; siblings differ. Equal numeric maps do not attest an implementation, and differing order does not attest the pinned deterministic-order DAG. Service revision remains unknown."
+    },
+    {
+      "id": "NET007-fr-exercise-5",
+      "module": "NET007",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/network-science/fr/net-007-separate-dag-readiness-from-admission.fr.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "1a197bb4b3f265aa47a536f1be96209a67824cc466be550a56e58026368b644f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "At most two ready nodes are admitted under the proposed two-slot rule. Admission does not prove start; running requires an observed attempt start and completion a terminal observation. No installed editor behavior or full failure timeline is claimed."
+    },
+    {
+      "id": "NET007-es-exercise-1",
+      "module": "NET007",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/network-science/es/net-007-separate-dag-readiness-from-admission.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "bf465e3ae370e1557fe07d012f2ec58f03f1c359affbadacd686f1f94975cce7",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Diamond level sets are a | b,c | d with reported width2; a single slot changes scheduling, not graph validity. Eight independent nodes have reported width8; this is not measured concurrency or a general antichain-width theorem."
+    },
+    {
+      "id": "NET007-es-exercise-2",
+      "module": "NET007",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/network-science/es/net-007-separate-dag-readiness-from-admission.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "4ac1a5f1fcde7aae42e0961f4f1b7d1ac891ca384c3c3ea85bb4bf9063b78a4c",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Eight unit jobs/two slots need four waves and4ticks. Weighted diamond finishes in6ticks versus8serial, giving speedup8/6 rather than2. All durations and overlap are authored assumptions."
+    },
+    {
+      "id": "NET007-es-exercise-3",
+      "module": "NET007",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/network-science/es/net-007-separate-dag-readiness-from-admission.es.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "df26b75c545a90ae2386957446faeb0cd98ba33a940d79687525c32ff26e53da",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "The inspected multi-node branch directly computes synchronously inside Iterator map/collect, with no thread spawn there. Runtime attempt start/end and context observations would measure overlap; internal tool parallelism remains a separate question."
+    },
+    {
+      "id": "NET007-es-exercise-4",
+      "module": "NET007",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/network-science/es/net-007-separate-dag-readiness-from-admission.es.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "6c22e49e4df606b53fc73c859a781dfdc9740df016c1754aee825314471836b1",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Both raw orders place first before second and third; siblings differ. Equal numeric maps do not attest an implementation, and differing order does not attest the pinned deterministic-order DAG. Service revision remains unknown."
+    },
+    {
+      "id": "NET007-es-exercise-5",
+      "module": "NET007",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/network-science/es/net-007-separate-dag-readiness-from-admission.es.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "413ef50ca8af21f54d070875101d5d602e0c3b443dec70181b41a02279b33881",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "At most two ready nodes are admitted under the proposed two-slot rule. Admission does not prove start; running requires an observed attempt start and completion a terminal observation. No installed editor behavior or full failure timeline is claimed."
+    },
+    {
+      "id": "CYB006-en-exercise-1",
+      "module": "CYB006",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/cybernetics/en/cyb-006-bound-retry-feedback-and-workload.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "538e4602e587e01af1fef016c0c7da5caaa363092a2a38ded47aa45b6c07b6ab",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Independent failure1/2 with cap3 gives expected attempts7/4, success7/8 and failure1/8. SFF executes only its first successful attempt; later presampled outcomes are unused counting devices."
+    },
+    {
+      "id": "CYB006-en-exercise-2",
+      "module": "CYB006",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/cybernetics/en/cyb-006-bound-retry-feedback-and-workload.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "b3473be8ce6c5b19815e6506830ba215653a6ec0ad4524d95a8d61d8e2e61c4f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "6logical requests/s times7/4 gives10.5attempts/s against10capacity; boundary40/7logical requests/s. The30second excess15 is fluid mean attempt-work, not15observed queued jobs or a general stability proof."
+    },
+    {
+      "id": "CYB006-en-exercise-3",
+      "module": "CYB006",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/cybernetics/en/cyb-006-bound-retry-feedback-and-workload.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "92f84625843333a124d5c103900b120d8f39fcf848aa58df0f227f36468c531f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Timing-only backoff/jitter does not change fixed independent outcome probabilities or expected work7/4. Persistent failure consumes3attempts and success0. Changed failure behavior/policy needs new evidence."
+    },
+    {
+      "id": "CYB006-en-exercise-4",
+      "module": "CYB006",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/cybernetics/en/cyb-006-bound-retry-feedback-and-workload.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "46e1bf52a81e65ef462136d354e371f8a5bd681e83b4e2590caf098fa50e914b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Starts0,1,2 lasting3 complete3,4,5 with peak3. Two slots retain starts0,1, completions3,4 and peak2. Accepting at3 does not cancel the second active attempt; timeout alone is not stopped-work evidence."
+    },
+    {
+      "id": "CYB006-en-exercise-5",
+      "module": "CYB006",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/cybernetics/en/cyb-006-bound-retry-feedback-and-workload.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "c4983d94b2837e3fc93cabcfe49d7a0927031fb93f5275144c3c24a7506c32ee",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Launching3rather than1 does not establish improved accepted outcomes. Compare attempt starts/terminal or acknowledged cancellation, effect identity/reconciliation, total work and accepted results against a single-attempt baseline. Controller remains proposed."
+    },
+    {
+      "id": "CYB006-fr-exercise-1",
+      "module": "CYB006",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/cybernetics/fr/cyb-006-bound-retry-feedback-and-workload.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "a350acdfef1e23463630104b069532af9d7d36e97afccb38f25f71f6daed0886",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Independent failure1/2 with cap3 gives expected attempts7/4, success7/8 and failure1/8. SFF executes only its first successful attempt; later presampled outcomes are unused counting devices."
+    },
+    {
+      "id": "CYB006-fr-exercise-2",
+      "module": "CYB006",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/cybernetics/fr/cyb-006-bound-retry-feedback-and-workload.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "b425459e64cbf33c64d6742bd02afa6c2c0e6ada8a65fc95d66bb8b7d3b09433",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "6logical requests/s times7/4 gives10.5attempts/s against10capacity; boundary40/7logical requests/s. The30second excess15 is fluid mean attempt-work, not15observed queued jobs or a general stability proof."
+    },
+    {
+      "id": "CYB006-fr-exercise-3",
+      "module": "CYB006",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/cybernetics/fr/cyb-006-bound-retry-feedback-and-workload.fr.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "c9549dc1aa5468172e44adc8b1845db7925d90c3442b0fd6d050b66531c783e8",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Timing-only backoff/jitter does not change fixed independent outcome probabilities or expected work7/4. Persistent failure consumes3attempts and success0. Changed failure behavior/policy needs new evidence."
+    },
+    {
+      "id": "CYB006-fr-exercise-4",
+      "module": "CYB006",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/cybernetics/fr/cyb-006-bound-retry-feedback-and-workload.fr.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "ec5e9b0f13c46dd9531d9e1695814889ed929c0e4333fff7f697784598d3b97d",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Starts0,1,2 lasting3 complete3,4,5 with peak3. Two slots retain starts0,1, completions3,4 and peak2. Accepting at3 does not cancel the second active attempt; timeout alone is not stopped-work evidence."
+    },
+    {
+      "id": "CYB006-fr-exercise-5",
+      "module": "CYB006",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/cybernetics/fr/cyb-006-bound-retry-feedback-and-workload.fr.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "86d044dda6d3bb490656b1c9a12afe0df6219f487471e1216250fbcb9250b31f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Launching3rather than1 does not establish improved accepted outcomes. Compare attempt starts/terminal or acknowledged cancellation, effect identity/reconciliation, total work and accepted results against a single-attempt baseline. Controller remains proposed."
+    },
+    {
+      "id": "CYB006-es-exercise-1",
+      "module": "CYB006",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/cybernetics/es/cyb-006-bound-retry-feedback-and-workload.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "6953ae6337cd6611dc66261d975a51b6749552a7d4ad93e1f0697da734a97bdb",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Independent failure1/2 with cap3 gives expected attempts7/4, success7/8 and failure1/8. SFF executes only its first successful attempt; later presampled outcomes are unused counting devices."
+    },
+    {
+      "id": "CYB006-es-exercise-2",
+      "module": "CYB006",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/cybernetics/es/cyb-006-bound-retry-feedback-and-workload.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "e5d9445ba5a2a9e3081ffa106088ca646aed53b24859e7b61fa7b9877d57e525",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "6logical requests/s times7/4 gives10.5attempts/s against10capacity; boundary40/7logical requests/s. The30second excess15 is fluid mean attempt-work, not15observed queued jobs or a general stability proof."
+    },
+    {
+      "id": "CYB006-es-exercise-3",
+      "module": "CYB006",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/cybernetics/es/cyb-006-bound-retry-feedback-and-workload.es.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "deee54ed4956fee1b8938f0e7041eb6d7c06bdff5da1acc931674dfe0fced894",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Timing-only backoff/jitter does not change fixed independent outcome probabilities or expected work7/4. Persistent failure consumes3attempts and success0. Changed failure behavior/policy needs new evidence."
+    },
+    {
+      "id": "CYB006-es-exercise-4",
+      "module": "CYB006",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/cybernetics/es/cyb-006-bound-retry-feedback-and-workload.es.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "5176e5429b367988c8e4e35a478ad8711f89d421fca3f0d63eb64b15395f40e8",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Starts0,1,2 lasting3 complete3,4,5 with peak3. Two slots retain starts0,1, completions3,4 and peak2. Accepting at3 does not cancel the second active attempt; timeout alone is not stopped-work evidence."
+    },
+    {
+      "id": "CYB006-es-exercise-5",
+      "module": "CYB006",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/cybernetics/es/cyb-006-bound-retry-feedback-and-workload.es.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "8ef403fa4e6824e33da7876e0f805d7d0648e486e0c11e8b52c5df9ce51ae92b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Launching3rather than1 does not establish improved accepted outcomes. Compare attempt starts/terminal or acknowledged cancellation, effect identity/reconciliation, total work and accepted results against a single-attempt baseline. Controller remains proposed."
+    },
+    {
+      "id": "PHI005-en-exercise-1",
+      "module": "PHI005",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/philosophy/en/phi-005-test-idempotence-beyond-replayed-values.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "e49b8c04a5bcf40d23bcf9bb902ba6aceb4d8134f7e8aab0e82e8fc3e8e5c4ab",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "At initial0, Set7 once/twice yields7/7 while increment yields1/2, despite identical ok labels. All three supplied initial states support the same counterexample; intended effects are distinct from incidental logs."
+    },
+    {
+      "id": "PHI005-en-exercise-2",
+      "module": "PHI005",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/philosophy/en/phi-005-test-idempotence-beyond-replayed-values.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "15ba44c579b3e81dc40977385e88f23b6ac4212e299267f798827fc606ee044b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Observed means2,5,15 agree only for these inputs. Empty hit lists/null keys provide no cache-hit trial; sibling orders differ; reported0ms is not zero cost. No external business effect or runtime revision was attested."
+    },
+    {
+      "id": "PHI005-en-exercise-3",
+      "module": "PHI005",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/philosophy/en/phi-005-test-idempotence-beyond-replayed-values.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "a72f7b3c53e3c0e7b8dc4682320ad4810e42c7a78dd9757fc375791bd34dbda1",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Under ideal serial atomic dedup, repeated logical key job-A applies one increment and ends1; fresh attempt keys apply two and end2. Distinct equal-argument jobs may intend two effects. No durable/concurrent/crash-safe implementation is established."
+    },
+    {
+      "id": "PHI005-en-exercise-4",
+      "module": "PHI005",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/philosophy/en/phi-005-test-idempotence-beyond-replayed-values.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "ee07e286f9bd2986a6cb9e2e5d458cf664cd3aeebfe0321ed077a667840dceae",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Pinned legacy key directly binds asset name, tool name and serialized resolved arguments, without directly binding step ID, implementation revision or external-state revision. Adequacy is task-dependent; matching values do not prove durable effect deduplication."
+    },
+    {
+      "id": "PHI005-en-exercise-5",
+      "module": "PHI005",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/philosophy/en/phi-005-test-idempotence-beyond-replayed-values.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "f4cd5f1e3210df7c16b0357563b1d490ada35c12e8578dd7cab1abdd963d8ad4",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Failure at b without aggregate does not prove a never ran or had no effect. Attempt witnesses and intended-effect reconciliation or a separately validated idempotence contract are needed. Proposed lost-response/recovery tests are not successful recovery evidence."
+    },
+    {
+      "id": "PHI005-fr-exercise-1",
+      "module": "PHI005",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/philosophy/fr/phi-005-test-idempotence-beyond-replayed-values.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "a5e22f9de1339872992adb9858f50ec7c8e8e15e26cbe59b4965fceb1ecf5580",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "At initial0, Set7 once/twice yields7/7 while increment yields1/2, despite identical ok labels. All three supplied initial states support the same counterexample; intended effects are distinct from incidental logs."
+    },
+    {
+      "id": "PHI005-fr-exercise-2",
+      "module": "PHI005",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/philosophy/fr/phi-005-test-idempotence-beyond-replayed-values.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "537e3aacb273e45332bea8014c1d459db2c489bdc08a03899e2eb3a612f376f0",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Observed means2,5,15 agree only for these inputs. Empty hit lists/null keys provide no cache-hit trial; sibling orders differ; reported0ms is not zero cost. No external business effect or runtime revision was attested."
+    },
+    {
+      "id": "PHI005-fr-exercise-3",
+      "module": "PHI005",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/philosophy/fr/phi-005-test-idempotence-beyond-replayed-values.fr.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "b6385b18bc0250460666e3dd8a72af0b79e2f526d565465421830d9b70d5de24",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Under ideal serial atomic dedup, repeated logical key job-A applies one increment and ends1; fresh attempt keys apply two and end2. Distinct equal-argument jobs may intend two effects. No durable/concurrent/crash-safe implementation is established."
+    },
+    {
+      "id": "PHI005-fr-exercise-4",
+      "module": "PHI005",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/philosophy/fr/phi-005-test-idempotence-beyond-replayed-values.fr.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "39e5ed31b6355f3296b35fe5568c4fa3241bdeb3d80813740c52eeafbfb92f22",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Pinned legacy key directly binds asset name, tool name and serialized resolved arguments, without directly binding step ID, implementation revision or external-state revision. Adequacy is task-dependent; matching values do not prove durable effect deduplication."
+    },
+    {
+      "id": "PHI005-fr-exercise-5",
+      "module": "PHI005",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/philosophy/fr/phi-005-test-idempotence-beyond-replayed-values.fr.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "70f9119397805c780a8774e076244ee69096b846aacf53569034b867ece717b2",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Failure at b without aggregate does not prove a never ran or had no effect. Attempt witnesses and intended-effect reconciliation or a separately validated idempotence contract are needed. Proposed lost-response/recovery tests are not successful recovery evidence."
+    },
+    {
+      "id": "PHI005-es-exercise-1",
+      "module": "PHI005",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/philosophy/es/phi-005-test-idempotence-beyond-replayed-values.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "6251482f419ffcf91835022ff8753c0d6bab5301f522d5a841ed1c6abe215851",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "At initial0, Set7 once/twice yields7/7 while increment yields1/2, despite identical ok labels. All three supplied initial states support the same counterexample; intended effects are distinct from incidental logs."
+    },
+    {
+      "id": "PHI005-es-exercise-2",
+      "module": "PHI005",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/philosophy/es/phi-005-test-idempotence-beyond-replayed-values.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "4ed0d2eaed00b742787e4c6b72c7cef93fd07baa870a76603656edf5c3e3fb05",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Observed means2,5,15 agree only for these inputs. Empty hit lists/null keys provide no cache-hit trial; sibling orders differ; reported0ms is not zero cost. No external business effect or runtime revision was attested."
+    },
+    {
+      "id": "PHI005-es-exercise-3",
+      "module": "PHI005",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/philosophy/es/phi-005-test-idempotence-beyond-replayed-values.es.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "c8ea854c64c312c1cbd514aaa6d8128a7905fa72362153e1abac642a5964a927",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Under ideal serial atomic dedup, repeated logical key job-A applies one increment and ends1; fresh attempt keys apply two and end2. Distinct equal-argument jobs may intend two effects. No durable/concurrent/crash-safe implementation is established."
+    },
+    {
+      "id": "PHI005-es-exercise-4",
+      "module": "PHI005",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/philosophy/es/phi-005-test-idempotence-beyond-replayed-values.es.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "1acc87ff83a048ebe4187c5ab4cde8e753b73c7b6d03960f8b2d6fe25a5df890",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Pinned legacy key directly binds asset name, tool name and serialized resolved arguments, without directly binding step ID, implementation revision or external-state revision. Adequacy is task-dependent; matching values do not prove durable effect deduplication."
+    },
+    {
+      "id": "PHI005-es-exercise-5",
+      "module": "PHI005",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/philosophy/es/phi-005-test-idempotence-beyond-replayed-values.es.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "441ba10c3c94d5a62cf1cc133c8e7ee69963ba6de43304ea5146fdc6a27d112e",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic review of localized prompt/answer against English, fixed evidence and primary sources; no human fluency or learner outcome.",
+      "checked_conclusion": "Failure at b without aggregate does not prove a never ran or had no effect. Attempt witnesses and intended-effect reconciliation or a separately validated idempotence contract are needed. Proposed lost-response/recovery tests are not successful recovery evidence."
+    }
+  ],
+  "learner_criterion_checks": [
+    {
+      "id": "NET007-1",
+      "module": "NET007",
+      "title": "readiness",
+      "acceptance_reviewed": "Reconstruct the diamond with four edges and level sets a | b,c | d, reported width 2; the eight-node independent graph has reported width 8. The cycle returns an error. These are dependency properties, not observed workers or a general graph-width theorem.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Diamond level sets are a | b,c | d with reported width2; a single slot changes scheduling, not graph validity. Eight independent nodes have reported width8; this is not measured concurrency or a general antichain-width theorem.",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no participant has been assessed."
+    },
+    {
+      "id": "NET007-2",
+      "module": "NET007",
+      "title": "schedule",
+      "acceptance_reviewed": "Eight unit jobs with two slots need four waves and four ticks. The weighted diamond a=1,b=4,c=2,d=1 has critical path a-b-d of cost 6 with two workers, versus serial cost 8. Actual costs and overlap were not measured.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Eight unit jobs/two slots need four waves and4ticks. Weighted diamond finishes in6ticks versus8serial, giving speedup8/6 rather than2. All durations and overlap are authored assumptions.",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no participant has been assessed."
+    },
+    {
+      "id": "NET007-3",
+      "module": "NET007",
+      "title": "source-control-flow",
+      "acceptance_reviewed": "Identify the sequential legacy loop and direct synchronous compute in ix-pipeline map/collect despite comments. There is no thread spawn in that branch; internal tool parallelism is a separate question. Preserve the correction and absence of native Rust execution.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "The inspected multi-node branch directly computes synchronously inside Iterator map/collect, with no thread spawn there. Runtime attempt start/end and context observations would measure overlap; internal tool parallelism remains a separate question.",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no participant has been assessed."
+    },
+    {
+      "id": "NET007-4",
+      "module": "NET007",
+      "title": "partial-order",
+      "acceptance_reviewed": "Both actual orders preserve first before second and third, while raw sibling orders differ. Equal numeric maps do not attest the pinned deterministic-order revision. Keep the runtime revision unknown and the raw receipts unchanged.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Both raw orders place first before second and third; siblings differ. Equal numeric maps do not attest an implementation, and differing order does not attest the pinned deterministic-order DAG. Service revision remains unknown.",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no participant has been assessed."
+    },
+    {
+      "id": "NET007-5",
+      "module": "NET007",
+      "title": "admission-state",
+      "acceptance_reviewed": "Under the proposed two-slot rule, at most two of eight ready jobs are admitted. Distinguish admission from an observed running attempt and terminal completion. No installed editor states, full failure trace or capacity contract was delivered.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "At most two ready nodes are admitted under the proposed two-slot rule. Admission does not prove start; running requires an observed attempt start and completion a terminal observation. No installed editor behavior or full failure timeline is claimed.",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no participant has been assessed."
+    },
+    {
+      "id": "CYB006-1",
+      "module": "CYB006",
+      "title": "attempt-probability",
+      "acceptance_reviewed": "Under independent failure probability 1/2 and at most 3 attempts, the 8 equally likely pre-sampled strings stop at first success. Expected attempts are 7/4, success probability 7/8 and terminal failure probability 1/8. The unused suffix is not executed.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Independent failure1/2 with cap3 gives expected attempts7/4, success7/8 and failure1/8. SFF executes only its first successful attempt; later presampled outcomes are unused counting devices.",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no participant has been assessed."
+    },
+    {
+      "id": "CYB006-2",
+      "module": "CYB006",
+      "title": "workload-units",
+      "acceptance_reviewed": "6 logical requests/s times 7/4 yields 10.5 attempts/s against capacity 10 attempts/s; the boundary is 40/7 logical requests/s. A 30-second mean excess of 15 attempt-work units is neither 15 observed queued jobs nor a general stability proof.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "6logical requests/s times7/4 gives10.5attempts/s against10capacity; boundary40/7logical requests/s. The30second excess15 is fluid mean attempt-work, not15observed queued jobs or a general stability proof.",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no participant has been assessed."
+    },
+    {
+      "id": "CYB006-3",
+      "module": "CYB006",
+      "title": "timing-versus-work",
+      "acceptance_reviewed": "Backoff or jitter timing alone leaves fixed-model expected attempts at 7/4. A changed failure process needs new evidence. The persistent-failure control uses 3 attempts and succeeds with probability 0; no universal retry improvement is established.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Timing-only backoff/jitter does not change fixed independent outcome probabilities or expected work7/4. Persistent failure consumes3attempts and success0. Changed failure behavior/policy needs new evidence.",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no participant has been assessed."
+    },
+    {
+      "id": "CYB006-4",
+      "module": "CYB006",
+      "title": "delayed-outcome",
+      "acceptance_reviewed": "Starts at 0,1,2 with duration 3 complete at 3,4,5 and peak at 3 active attempts. Two-slot admission leaves starts 0,1, completions 3,4 and peak 2. Accepting a result at 3 does not cancel the active second attempt; timeout does not prove stopped work.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Starts0,1,2 lasting3 complete3,4,5 with peak3. Two slots retain starts0,1, completions3,4 and peak2. Accepting at3 does not cancel the second active attempt; timeout alone is not stopped-work evidence.",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no participant has been assessed."
+    },
+    {
+      "id": "CYB006-5",
+      "module": "CYB006",
+      "title": "falsifiable-controller",
+      "acceptance_reviewed": "Compare accepted logical results, total attempt work, active-attempt observations and effect reconciliation against a single-attempt baseline. No returned result packet is not proof of absent work. The controller policy remains proposed, not installed.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Launching3rather than1 does not establish improved accepted outcomes. Compare attempt starts/terminal or acknowledged cancellation, effect identity/reconciliation, total work and accepted results against a single-attempt baseline. Controller remains proposed.",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no participant has been assessed."
+    },
+    {
+      "id": "PHI005-1",
+      "module": "PHI005",
+      "title": "property-and-counterexample",
+      "acceptance_reviewed": "Set7 once or twice yields 7 for initial states -2,0,5; increment once and twice differ. Identical ok responses cannot prove intended-effect idempotence. Incidental logging is outside the declared intended-effect comparison.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "At initial0, Set7 once/twice yields7/7 while increment yields1/2, despite identical ok labels. All three supplied initial states support the same counterexample; intended effects are distinct from incidental logs.",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no participant has been assessed."
+    },
+    {
+      "id": "PHI005-2",
+      "module": "PHI005",
+      "title": "actual-replay-scope",
+      "acceptance_reviewed": "Observed numeric means 2,5,15 agree while sibling orders differ. Empty hit lists and null keys provide no cache-hit trial. Reported 0 ms is not zero cost. No external business resource was mutated and no runtime revision was attested.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Observed means2,5,15 agree only for these inputs. Empty hit lists/null keys provide no cache-hit trial; sibling orders differ; reported0ms is not zero cost. No external business effect or runtime revision was attested.",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no participant has been assessed."
+    },
+    {
+      "id": "PHI005-3",
+      "module": "PHI005",
+      "title": "logical-intent",
+      "acceptance_reviewed": "In the ideal serial atomic rule, job-A repeated increments once, ending at 1; fresh attempt keys increment twice, ending at 2. Distinct logical jobs may intend two effects with equal arguments. This model does not prove a durable store, crash safety or concurrent correctness.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Under ideal serial atomic dedup, repeated logical key job-A applies one increment and ends1; fresh attempt keys apply two and end2. Distinct equal-argument jobs may intend two effects. No durable/concurrent/crash-safe implementation is established.",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no participant has been assessed."
+    },
+    {
+      "id": "PHI005-4",
+      "module": "PHI005",
+      "title": "cache-identity",
+      "acceptance_reviewed": "The pinned legacy key directly binds asset name, tool name and serialized resolved arguments, not step ID, implementation revision or external-state revision. Adequacy depends on the task. A matching key does not prove durable external-effect deduplication.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Pinned legacy key directly binds asset name, tool name and serialized resolved arguments, without directly binding step ID, implementation revision or external-state revision. Adequacy is task-dependent; matching values do not prove durable effect deduplication.",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no participant has been assessed."
+    },
+    {
+      "id": "PHI005-5",
+      "module": "PHI005",
+      "title": "unknown-outcome",
+      "acceptance_reviewed": "An error at b without an aggregate cannot prove that a never ran or mutated state. Propose attempt/effect witnesses and single/repeated/lost-response/recovery tests, while retaining the absence of an actual recovery or safe unconditional-retry result.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Failure at b without aggregate does not prove a never ran or had no effect. Attempt witnesses and intended-effect reconciliation or a separately validated idempotence contract are needed. Proposed lost-response/recovery tests are not successful recovery evidence.",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no participant has been assessed."
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "streeling/courses/network-science/en/net-007-separate-dag-readiness-from-admission.md",
+      "sha256": "e4f771c655caf9b3b74d3e3586e2c140d82dba4a945df7174bf824e6b25763d7"
+    },
+    {
+      "path": "streeling/courses/network-science/fr/net-007-separate-dag-readiness-from-admission.fr.md",
+      "sha256": "05b4fb6586068f7f06bca3fc2c2bb531b32bcfee6caecec8f55dbed26b74c27c"
+    },
+    {
+      "path": "streeling/courses/network-science/es/net-007-separate-dag-readiness-from-admission.es.md",
+      "sha256": "bb7bda5c61e2e95b1d14afb74638838772e73dc50fddbca459b50b48d09a7712"
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-006-bound-retry-feedback-and-workload.md",
+      "sha256": "0dcd107956a26ff56e0e9a24ac70418846da0946277c7c9de1e9dd4e80281c31"
+    },
+    {
+      "path": "streeling/courses/cybernetics/fr/cyb-006-bound-retry-feedback-and-workload.fr.md",
+      "sha256": "09c5e3bbf0f5a861309c267beb2ad9a188512acdbcb565b1a598cfe60cf098ee"
+    },
+    {
+      "path": "streeling/courses/cybernetics/es/cyb-006-bound-retry-feedback-and-workload.es.md",
+      "sha256": "e2dd454912e046207eb6216f0b8b602e1355091e7bd6d24434315743ac4ce927"
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-005-test-idempotence-beyond-replayed-values.md",
+      "sha256": "14845f3e2c2ba9c79dc29cb919d056d4e579fd580a4a38e9c036da1164b9612a"
+    },
+    {
+      "path": "streeling/courses/philosophy/fr/phi-005-test-idempotence-beyond-replayed-values.fr.md",
+      "sha256": "044e9edfdd3aefee38059c9630466da9e4133a6b2b08dd65d99045a6dfa36e75"
+    },
+    {
+      "path": "streeling/courses/philosophy/es/phi-005-test-idempotence-beyond-replayed-values.es.md",
+      "sha256": "ebdbcf5c3c9985ffe1be35855c6fc24f78ca330a251daa918207478efdee87b2"
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/production-plan.md",
+      "sha256": "ffa2d12de16c366ac1e0834a0fbe76c21426f278090456acd3b88cf114231d96"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/README.md",
+      "sha256": "9cf309e5810cd60125809ec109681d24f5604338c7f5c202c866d49551c0e77d"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/primary-readback.json",
+      "sha256": "9daed5ca3852ca1a5d898481af0754ac1165b80c1050e348838f8ed01e4a0d13"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/topology-tool-probes.json",
+      "sha256": "0d163eb67073d9b731c5879fea51f7ad7d1b64ec7680fc8d6bd788e3f3d79703"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/execution-tool-probes.json",
+      "sha256": "527d4e6ecb8d8224d1fcec9e62963c32f34cf0b5cdce6d501b087937fa09778f"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/observed-probe-summary.json",
+      "sha256": "2b6417cb23ca707c66167a52094f8a64de0f73b0a97a925164477f8a244e7a34"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/admission-model.json",
+      "sha256": "cbdbc8283637fc277cceb4c8e527e6ddfa7f6e05ec582eb25082c7d5e55fed0c"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/retry-load-model.json",
+      "sha256": "60d807fa24399144c85efb4e2bf8b9ae30620cefe241c8bec9ed614e6edf34c6"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/delayed-completion-model.json",
+      "sha256": "844d89cc0680a58f5d3732fe8cd9cf849333315f6a023a40479cb187a37da770"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/effect-identity-model.json",
+      "sha256": "53706256ee2667d676e2452679acbd4e84f95a77e9bc34419606fa90be0aeb97"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/data-audit.json",
+      "sha256": "4d6cbf9769bcc1bb99c4a541bab67950460c7ad08a5afaa22d25151be53bd3ef"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/learner-task.md",
+      "sha256": "74656f630dbbf888635c77d3673b6ef0105c25897faa6e156917bd3b1a335a45"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/reviewer-rubric.json",
+      "sha256": "7f8d2f9d4ded3e48a9852d7d97ab09690ab06656d9c6c7cb315d344740e6a208"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/official-links.json",
+      "sha256": "8a5914fa41e0818a17492f648a6d920c841ba4841588b82d6788cbb788fd22ca"
+    }
+  ],
+  "prerequisite_bindings": [
+    {
+      "path": "streeling/courses/network-science/en/net-005-fanout-results-and-dependency-joins.md",
+      "sha256": "b6fc52457ff1dc1b4e0ddbbce80dae021dcbbdda905a642a00a7db531d057218"
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-004-observe-before-correcting-a-feedback-loop.md",
+      "sha256": "6422d5e4ca7197fa0a7f9fb855d4f11f4fac337f4fb167e94289fed90bf4a27e"
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-002-when-is-an-advisory-decision-justified.md",
+      "sha256": "99200375356de40b214a76b3273daf1a51fded6525611f1d7ff768c0589d1c38"
+    }
+  ],
+  "primary_source_review": [
+    {
+      "path": "crates/ix-pipeline/src/dag.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/dag.rs",
+      "sha256": "b2bf8462f9a266bd32de0555b3c5dd7abea68cd704a5ad538e136fd53cd745e5",
+      "review_scope": "Actual pinned public bytes directly read in the relevant DAG/executor/spec/runner/schema/architecture scope; no Rust execution or service revision attestation."
+    },
+    {
+      "path": "crates/ix-pipeline/src/executor.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/executor.rs",
+      "sha256": "8fe49c0e63822fba8a04ce06d7d4c4696784bebae81e42b273d2b8f6b1d24b35",
+      "review_scope": "Actual pinned public bytes directly read in the relevant DAG/executor/spec/runner/schema/architecture scope; no Rust execution or service revision attestation."
+    },
+    {
+      "path": "crates/ix-pipeline/src/spec.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/spec.rs",
+      "sha256": "48d191450480cf57129dd423572887600278d9d505e3ae0abef96c227c4d2e79",
+      "review_scope": "Actual pinned public bytes directly read in the relevant DAG/executor/spec/runner/schema/architecture scope; no Rust execution or service revision attestation."
+    },
+    {
+      "path": "crates/ix-agent/src/tools.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-agent/src/tools.rs",
+      "sha256": "5adb4b80bde1aefff760d604925e661074538201a52151ac76113800329dd767",
+      "review_scope": "Actual pinned public bytes directly read in the relevant DAG/executor/spec/runner/schema/architecture scope; no Rust execution or service revision attestation."
+    },
+    {
+      "path": "docs/pipelines/dag-execution.md",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/456df065ee837e33b5bbe22a4df0616a4fcb76e5/docs/pipelines/dag-execution.md",
+      "sha256": "05b1c20b8f95a3f6f9d369c7db43e0dcfad63f1339f1d4a920c16a9dba1b21dc",
+      "review_scope": "Actual pinned public bytes directly read in the relevant DAG/executor/spec/runner/schema/architecture scope; no Rust execution or service revision attestation."
+    }
+  ],
+  "official_document_review": [
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2",
+      "review_scope": "Directly read intended-effect idempotence, allowed incidental logging, differing responses and bounded retry semantics; arbitrary agent tools do not inherit HTTP semantics."
+    },
+    {
+      "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+      "review_scope": "Directly read the redirected official AWS article: retry load, backoff/jitter timing and timeout/side-effect uncertainty."
+    },
+    {
+      "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+      "review_scope": "Directly read caller-provided request identity, distinct intent despite equal arguments, atomic token/effect requirement and changed-parameter handling."
+    },
+    {
+      "url": "https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.map",
+      "review_scope": "Directly read official map closure and lazy iterator semantics; inspected concrete map/collect branch supplies synchronous-compute finding. No native execution."
+    }
+  ],
+  "pending": {
+    "human_technical_review": null,
+    "fluent_language_review": null,
+    "learner_attempts": null,
+    "independent_learner_transfer": null,
+    "runtime_revision": null,
+    "concurrency_measurement": null,
+    "runtime_retry_controller": null,
+    "runtime_cancellation": null,
+    "cache_hit_trial": null,
+    "durable_effect_store": null,
+    "crash_recovery": null,
+    "deployed_html": null
+  },
+  "human_technical_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "runtime_revision": null,
+  "deployed_html": null,
+  "boundaries": [
+    "Readiness level sizes are graph observations, not actual concurrency, admission permission or a general graph-width theorem.",
+    "No thread spawn in the inspected synchronous compute/map/collect branch is not a claim of absent internal tool parallelism.",
+    "Actual sibling orders differ despite deterministic pinned DAG source; raw receipts and unknown service revision are retained.",
+    "Reported0ms is not zero cost; empty cache hits/null keys do not supply a cache-hit experiment.",
+    "Expected7/4 attempts and7/8success are assumption-bound; fluid15attempt-work excess is not15observed queued jobs.",
+    "Authored delayed-completion traces do not execute retries/cancellation; refusing a new start does not stop an active attempt.",
+    "Intended state/effect idempotence is distinct from equal return values; ideal serial atomic dedup is not delivered durable/crash/concurrent correctness.",
+    "Legacy cache-key inputs are actual fields, not a blanket requirement to introduce a new schema.",
+    "Final error without aggregate does not establish absence of prior effects or authorize unconditional whole-pipeline retry.",
+    "No builds, additional MCP calls, Rust tests, GPU/audio, dependencies or paid calls performed by this reviewer."
+  ]
+}

@@ -1,0 +1,316 @@
+{
+  "execution": "knowledge-work with a separately reviewed runnable-claim-test substep",
+  "base_learn_commit": "b7a402c162c15e77fd76e6c57360994308e33279",
+  "baseline_core": 281,
+  "target": 525,
+  "expected_core_after": 331,
+  "expected_remaining": 194,
+  "original_departments": 21,
+  "units": {
+    "a": 18,
+    "b": 16,
+    "c": 16
+  },
+  "courses": [
+    {
+      "unit": "a",
+      "department": "audio-engineering",
+      "code": "AUD013",
+      "filename_prefix": "aud-013-"
+    },
+    {
+      "unit": "a",
+      "department": "audio-engineering",
+      "code": "AUD014",
+      "filename_prefix": "aud-014-"
+    },
+    {
+      "unit": "a",
+      "department": "audio-engineering",
+      "code": "AUD015",
+      "filename_prefix": "aud-015-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-acoustics",
+      "code": "GAS012",
+      "filename_prefix": "gas-012-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-acoustics",
+      "code": "GAS013",
+      "filename_prefix": "gas-013-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-acoustics",
+      "code": "GAS014",
+      "filename_prefix": "gas-014-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-studies",
+      "code": "GTR012",
+      "filename_prefix": "gtr-012-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-studies",
+      "code": "GTR013",
+      "filename_prefix": "gtr-013-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-studies",
+      "code": "GTR014",
+      "filename_prefix": "gtr-014-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-alchemist-academy",
+      "code": "GAA011",
+      "filename_prefix": "gaa-011-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-alchemist-academy",
+      "code": "GAA012",
+      "filename_prefix": "gaa-012-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-alchemist-academy",
+      "code": "GAA013",
+      "filename_prefix": "gaa-013-"
+    },
+    {
+      "unit": "a",
+      "department": "musicology",
+      "code": "MCL012",
+      "filename_prefix": "mcl-012-"
+    },
+    {
+      "unit": "a",
+      "department": "musicology",
+      "code": "MCL013",
+      "filename_prefix": "mcl-013-"
+    },
+    {
+      "unit": "a",
+      "department": "musicology",
+      "code": "MCL014",
+      "filename_prefix": "mcl-014-"
+    },
+    {
+      "unit": "a",
+      "department": "world-music-languages",
+      "code": "WML011",
+      "filename_prefix": "wml-011-"
+    },
+    {
+      "unit": "a",
+      "department": "world-music-languages",
+      "code": "WML012",
+      "filename_prefix": "wml-012-"
+    },
+    {
+      "unit": "a",
+      "department": "world-music-languages",
+      "code": "WML013",
+      "filename_prefix": "wml-013-"
+    },
+    {
+      "unit": "b",
+      "department": "computer-science",
+      "code": "CS018",
+      "filename_prefix": "cs-018-"
+    },
+    {
+      "unit": "b",
+      "department": "computer-science",
+      "code": "CS019",
+      "filename_prefix": "cs-019-"
+    },
+    {
+      "unit": "b",
+      "department": "computer-science",
+      "code": "CS020",
+      "filename_prefix": "cs-020-"
+    },
+    {
+      "unit": "b",
+      "department": "cybernetics",
+      "code": "CYB012",
+      "filename_prefix": "cyb-012-"
+    },
+    {
+      "unit": "b",
+      "department": "cybernetics",
+      "code": "CYB013",
+      "filename_prefix": "cyb-013-"
+    },
+    {
+      "unit": "b",
+      "department": "cybernetics",
+      "code": "CYB014",
+      "filename_prefix": "cyb-014-"
+    },
+    {
+      "unit": "b",
+      "department": "cognitive-science",
+      "code": "COG012",
+      "filename_prefix": "cog-012-"
+    },
+    {
+      "unit": "b",
+      "department": "cognitive-science",
+      "code": "COG013",
+      "filename_prefix": "cog-013-"
+    },
+    {
+      "unit": "b",
+      "department": "cognitive-science",
+      "code": "COG014",
+      "filename_prefix": "cog-014-"
+    },
+    {
+      "unit": "b",
+      "department": "information-theory",
+      "code": "INF013",
+      "filename_prefix": "inf-013-"
+    },
+    {
+      "unit": "b",
+      "department": "information-theory",
+      "code": "INF014",
+      "filename_prefix": "inf-014-"
+    },
+    {
+      "unit": "b",
+      "department": "information-theory",
+      "code": "INF015",
+      "filename_prefix": "inf-015-"
+    },
+    {
+      "unit": "b",
+      "department": "network-science",
+      "code": "NET012",
+      "filename_prefix": "net-012-"
+    },
+    {
+      "unit": "b",
+      "department": "network-science",
+      "code": "NET013",
+      "filename_prefix": "net-013-"
+    },
+    {
+      "unit": "b",
+      "department": "product-management",
+      "code": "PM010",
+      "filename_prefix": "pm-010-"
+    },
+    {
+      "unit": "b",
+      "department": "product-management",
+      "code": "PM011",
+      "filename_prefix": "pm-011-"
+    },
+    {
+      "unit": "c",
+      "department": "physics",
+      "code": "PHY016",
+      "filename_prefix": "phy-016-"
+    },
+    {
+      "unit": "c",
+      "department": "physics",
+      "code": "PHY017",
+      "filename_prefix": "phy-017-"
+    },
+    {
+      "unit": "c",
+      "department": "physics",
+      "code": "PHY018",
+      "filename_prefix": "phy-018-"
+    },
+    {
+      "unit": "c",
+      "department": "visual-computing",
+      "code": "VC014",
+      "filename_prefix": "vc-014-"
+    },
+    {
+      "unit": "c",
+      "department": "visual-computing",
+      "code": "VC015",
+      "filename_prefix": "vc-015-"
+    },
+    {
+      "unit": "c",
+      "department": "visual-computing",
+      "code": "VC016",
+      "filename_prefix": "vc-016-"
+    },
+    {
+      "unit": "c",
+      "department": "data-visualization",
+      "code": "DV014",
+      "filename_prefix": "dv-014-"
+    },
+    {
+      "unit": "c",
+      "department": "data-visualization",
+      "code": "DV015",
+      "filename_prefix": "dv-015-"
+    },
+    {
+      "unit": "c",
+      "department": "data-visualization",
+      "code": "DV016",
+      "filename_prefix": "dv-016-"
+    },
+    {
+      "unit": "c",
+      "department": "semiotics",
+      "code": "SEM012",
+      "filename_prefix": "sem-012-"
+    },
+    {
+      "unit": "c",
+      "department": "semiotics",
+      "code": "SEM013",
+      "filename_prefix": "sem-013-"
+    },
+    {
+      "unit": "c",
+      "department": "semiotics",
+      "code": "SEM014",
+      "filename_prefix": "sem-014-"
+    },
+    {
+      "unit": "c",
+      "department": "philosophy",
+      "code": "PHI010",
+      "filename_prefix": "phi-010-"
+    },
+    {
+      "unit": "c",
+      "department": "philosophy",
+      "code": "PHI011",
+      "filename_prefix": "phi-011-"
+    },
+    {
+      "unit": "c",
+      "department": "futurology",
+      "code": "FUT010",
+      "filename_prefix": "fut-010-"
+    },
+    {
+      "unit": "c",
+      "department": "futurology",
+      "code": "FUT011",
+      "filename_prefix": "fut-011-"
+    }
+  ]
+}

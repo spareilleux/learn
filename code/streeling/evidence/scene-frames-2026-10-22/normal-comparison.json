@@ -1,0 +1,50 @@
+{
+  "scope": "Exact authored affine-box calculation compared with actual float32 helper arithmetic; source-assisted Colossus expression comparison, no sampler/shader execution.",
+  "world_order": "childYaw45 * parentScale(2,1,1)",
+  "exact_expressions": {
+    "axis_x": "(sqrt2,0,-1/sqrt2)",
+    "axis_z": "(sqrt2,0,1/sqrt2)",
+    "normalized_axis": "(2/sqrt5,0,-1/sqrt5)",
+    "correct_normal": "(1/sqrt5,0,-2/sqrt5)"
+  },
+  "predicted_exact": {
+    "axis_x": [
+      1.4142135623730951,
+      0,
+      -0.7071067811865475
+    ],
+    "axis_y": [
+      0,
+      1,
+      0
+    ],
+    "axis_z": [
+      1.4142135623730951,
+      0,
+      0.7071067811865475
+    ],
+    "axis_dot_raw": 1.5,
+    "normalized_axis": [
+      0.8944271909999159,
+      0,
+      -0.4472135954999579
+    ],
+    "correct_normal": [
+      0.4472135954999579,
+      0,
+      -0.8944271909999159
+    ],
+    "normalized_axis_dot_tangent": 0.6,
+    "correct_normal_dot_tangent": 0,
+    "normal_cosine": 0.8,
+    "normal_angle_degrees": 36.86989764584401,
+    "determinant": 2
+  },
+  "native_case": "nested_yaw_under_scale",
+  "native_tolerance": 1e-05,
+  "native_comparison_pass": true,
+  "orthogonal_controls": [
+    "identity",
+    "scale_then_yaw"
+  ]
+}

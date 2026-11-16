@@ -1,0 +1,101 @@
+---
+module_id: sem-014-declare-material-patch-precedence
+department: semiotics
+course: "Declare Material Patch Precedence"
+level: intermediate
+prerequisites: ["sem-011-version-a-dsl-meaning-before-renaming-its-syntax"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Declare Material Patch Precedence
+
+> Draft for technical and language review. Every scene, count, temperature, timing and outcome introduced below is an authored example. Source inspection and arithmetic do not constitute a physical craft trial, a [Godot](https://docs.godotengine.org/en/4.5/) import, a [Blender](https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md) render, a [ComfyUI](https://docs.comfy.org/) run or a learner observation. Human and runtime decisions remain undecided.
+
+## Project question
+
+A metalwork scene combines a base finish, a craft annotation and a review highlight. If two descriptions set roughness, the composition needs a declared winner. This lesson defines a small field-patch algebra and proves where order matters. The definition is an advisory interpretation for a future description language; it must not be mistaken for an existing Godot resource-merging API.
+
+## Read the retained boundary
+
+Atlas’s material helper writes base color, metallic and roughness inputs. Godot’s material introduction separately documents precedence among mesh, node and override resources, with overlay having another role. Those source facts motivate explicit precedence; neither implements the field algebra invented here.
+
+Read the prerequisite and the retained project artifact before interpreting the model. The source has its own revision and purpose; it supplies the boundary described here, not the new classroom inputs. Keep a small evidence table separating an inspected field, an assumption, a derived quantity and a proposed scene effect. An agent summary must point back to the field it interprets. A source filename alone cannot establish an earlier result.
+
+## Interpret the model
+
+A patch is a partial map from field names to values. Applying a patch replaces only fields it specifies, leaving the others intact. A later conflicting field wins by definition. This operation is associative for these finite maps but is not generally commutative. The disjoint-field control explains a condition under which swapping does preserve the result. Resource override and field merge are different levels of interpretation: the documented host precedence can replace a whole material resource, while our classroom model merges declared fields. Preserve that difference before translating a craft instruction into a scene adapter.
+
+The direct baseline is a labelled sketch and a hand calculation with the answer panels closed. Preserve intermediate values and units, then apply the changed input in the negative control. A disagreement is useful evidence: locate whether it comes from the definition, arithmetic, representation or intended task before changing the model. Agreement on the main case alone does not establish a universal rule. These finite examples deliberately expose an assumption that a smooth preview could conceal.
+
+```text
+{"base":{"roughness":0.8,"metallic":0},"patch_a":{"roughness":0.3},"patch_b":{"roughness":0.6,"metallic":1}}
+merge(x,y)=right-biased field union; AB=merge(merge(base,a),b); BA=merge(merge(base,b),a)
+```
+
+## Corrected exercises
+
+### Exercise 1
+
+Apply the craft patch and then the review patch.
+
+<details><summary>Answer 1</summary>
+
+The final roughness is `0.6` and metallic is `1`. The later review roughness wins under the declared field rule.
+
+</details>
+
+### Exercise 2
+
+Reverse the patch order. Which value changes?
+
+<details><summary>Answer 2</summary>
+
+Roughness becomes `0.3`; metallic remains `1`. Both results are well-defined, but they represent different precedence decisions.
+
+</details>
+
+### Exercise 3
+
+Apply the disjoint-field control in both orders.
+
+<details><summary>Answer 3</summary>
+
+Both give roughness `0.3` and metallic `1`. The absence of overlapping keys permits this swap under the stated algebra.
+
+</details>
+
+### Exercise 4
+
+Does Godot’s material override documentation establish this field-merge behavior?
+
+<details><summary>Answer 4</summary>
+
+No. The cited passage describes material-resource precedence and overlay. This lesson’s partial-map merge is an authored interpretation requiring its own adapter contract.
+
+</details>
+
+### Exercise 5
+
+What should a composable description retain for review?
+
+<details><summary>Answer 5</summary>
+
+Keep patch identity, affected fields, order, base resource identity and the host mapping. A final appearance alone cannot reconstruct which instruction won a conflict.
+
+</details>
+
+## Source-assisted learner task
+
+Build the two merge tables manually, including unchanged fields. Trace Atlas’s assignments and Godot’s separate resource precedence. A conflicting field whose result changes after a supposedly harmless swap falsifies an unconditional reordering proposal. Do not implement the proposed algebra in this authoring unit.
+
+Retain your original answer, source locations, assistance history and any later correction as separate records. State the observable result that would falsify your recommendation before proposing automation. Compare the source-assisted result with your direct manual baseline, including any extra uncertainty it introduces. The fixed packet contains five prepared criteria; each decision stays null until an actual learner attempt and review exist. Prepared answers are checks, not evidence that a learner performed the task.
+
+## Sources and validation journal
+
+- [Prerequisite: sem-011-version-a-dsl-meaning-before-renaming-its-syntax](../../semiotics/en/sem-011-version-a-dsl-meaning-before-renaming-its-syntax.md)
+- [Retained project artifact](../../../../code/blender/scripts/atlas/kit.py)
+- [Primary reading](https://docs.godotengine.org/en/4.5/tutorials/3d/standard_material_3d.html)
+- [Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-24/unit-c.json)
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-24/journal.md)

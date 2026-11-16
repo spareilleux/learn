@@ -1,0 +1,29 @@
+{
+  "status": "complete",
+  "verification_type": "Independent focused verification of finding 1 fix; not a fresh full review or CE run",
+  "original_artifacts_unchanged": true,
+  "canonical_unit_a_packet_unchanged": true,
+  "root_same_probe_hash": "631adb79f14302762586afe2fe266340764c2c6e90fbfb87598efafbb6eff4c0",
+  "before_probe": {
+    "exit_code": 1,
+    "failures": 2,
+    "reason": "Both expected unsupported-operation exceptions were absent"
+  },
+  "after_probe": {
+    "exit_code": 0,
+    "tests": 2,
+    "rejection_diagnostics_before_assertion": true
+  },
+  "normal_replay": {
+    "exit_code": 0,
+    "tests": 50,
+    "observations": 100,
+    "observations_identical_to_before": true,
+    "complete_model_negative_coverage": true
+  },
+  "delta": {
+    "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/finding-1-fix.diff",
+    "sha256": "3cb822badc35eb5c5c9e0ab47dafc22eb1866f94373ad63c0acca8f700245cc1"
+  },
+  "scope_limits": "Operation enum guards and explicit subtract dispatch only; authored fixed cases only. No production, human or learner validation. No new test execution was needed; retained same-helper red/green receipts were inspected and byte verified."
+}

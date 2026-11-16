@@ -1,0 +1,29 @@
+--- reviewed-test_unit_a.py
++++ fixed-test_unit_a.py
+@@ -136,6 +136,9 @@
+     if code == 'MCL016':
+         cursor=0; states=[0]; notes={}
+         for op in v['operations']:
++            if op['op'] not in ('note','backup','forward'):
++                print('\nOBSERVATION '+json.dumps(dict(code=code,case='invalid-input',observed=op['op'],expected=['note','backup','forward'],scope=SCOPE[code]),allow_nan=False),flush=True)
++                raise AssertionError(f"{code}: unsupported operation {op['op']!r}")
+             if op['op']=='note': notes[op['id']]=[cursor,cursor+op['duration']]
+             cursor+=(-1 if op['op']=='backup' else 1)*op['duration']; states.append(cursor)
+         return dict(note_intervals=notes,cursor_states=states,final_cursor=cursor,valid=all(0<=a<=v['measure_units'] for a in states))
+@@ -152,12 +155,15 @@
+     if code == 'WML016':
+         degrees=dict(v['degrees'])
+         for i,op in enumerate(v['operations']):
++            if op['op'] not in ('add','alter','subtract'):
++                print('\nOBSERVATION '+json.dumps(dict(code=code,case='invalid-input',observed=op['op'],expected=['add','alter','subtract'],scope=SCOPE[code]),allow_nan=False),flush=True)
++                raise AssertionError(f"{code}: unsupported operation {op['op']!r}")
+             key=str(op['degree'])
+             if op['op']=='add':
+                 if key in degrees: return dict(valid=False,rejected_operation_index=i,reason='duplicate_degree',degree=op['degree'])
+                 degrees[key]=op['semitones']
+             elif op['op']=='alter': degrees[key]+=op['delta']
+-            else: del degrees[key]
++            elif op['op']=='subtract': del degrees[key]
+         return dict(degrees=degrees,pitch_classes=sorted({n%12 for n in degrees.values()}),valid=True)
+     raise AssertionError(code)
+ 

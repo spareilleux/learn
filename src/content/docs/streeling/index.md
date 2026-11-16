@@ -6,6 +6,12 @@ sidebar:
   order: 0
 ---
 
+## Published course count
+
+**481 / 525** core curriculum modules. Additional IX Research modules: **1**.
+
+**482** distinct course modules: English **482**, French **482**, Spanish **482** — **1446** localized lesson pages. Translations are not additional distinct courses.
+
 > Organize and advance knowledge across all domains relevant to the GuitarAlchemist ecosystem. Each department pursues research, teaches its discipline, and contributes findings to the governance knowledge base.
 
 Streeling University is the knowledge layer of [Demerzel](https://github.com/GuitarAlchemist/Demerzel), the governance framework of the GuitarAlchemist ecosystem. Each department is an agent persona that researches its discipline and writes course modules.
@@ -18,29 +24,33 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 
 | Department | Modules | French | Spanish |
 |---|---|---|---|
-| [Audio Engineering](audio-engineering/) | 1 | 1 | 1 |
-| [Cognitive Science](cognitive-science/) | 1 | 1 | 1 |
-| [Computer Science](computer-science/) | 2 | 2 | 2 |
-| [Cybernetics](cybernetics/) | 3 | 2 | 2 |
-| [Data Visualization](data-visualization/) | 0 | 0 | 0 |
-| [Futurology](futurology/) | 1 | 1 | 1 |
-| [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 0 | 0 | 0 |
-| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 3 | 3 |
-| [Guitar Studies](guitar-studies/) | 2 | 2 | 2 |
-| [Information Theory](information-theory/) | 1 | 1 | 1 |
+| [Audio Engineering](audio-engineering/) | 25 | 25 | 25 |
+| [Cognitive Science](cognitive-science/) | 23 | 23 | 23 |
+| [Computer Science](computer-science/) | 25 | 25 | 25 |
+| [Cybernetics](cybernetics/) | 23 | 23 | 23 |
+| [Data Visualization](data-visualization/) | 25 | 25 | 25 |
+| [Futurology](futurology/) | 19 | 19 | 19 |
+| [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 25 | 25 | 25 |
+| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 22 | 22 | 22 |
+| [Guitar Studies](guitar-studies/) | 25 | 25 | 25 |
+| [Information Theory](information-theory/) | 24 | 24 | 24 |
+| [IX Research](ix-research/) | 1 | 1 | 1 |
 | [Mathematics](mathematics/) | 25 | 25 | 25 |
-| [Music](music/) | 16 | 16 | 16 |
-| [Musicology](musicology/) | 2 | 2 | 2 |
-| [Network Science](network-science/) | 1 | 1 | 1 |
-| [Philosophy](philosophy/) | 1 | 1 | 1 |
-| [Physics](physics/) | 1 | 1 | 1 |
-| [Product and Project Management](product-management/) | 1 | 1 | 1 |
-| [Psychohistory](psychohistory/) | 2 | 2 | 2 |
-| [Semiotics](semiotics/) | 1 | 1 | 1 |
-| [Visual Computing](visual-computing/) | 0 | 0 | 0 |
-| [World Music & Languages](world-music-languages/) | 1 | 1 | 1 |
+| [Music](music/) | 25 | 25 | 25 |
+| [Musicology](musicology/) | 20 | 20 | 20 |
+| [Network Science](network-science/) | 21 | 21 | 21 |
+| [Philosophy](philosophy/) | 18 | 18 | 18 |
+| [Physics](physics/) | 24 | 24 | 24 |
+| [Product and Project Management](product-management/) | 19 | 19 | 19 |
+| [Psychohistory](psychohistory/) | 25 | 25 | 25 |
+| [Semiotics](semiotics/) | 23 | 23 | 23 |
+| [Visual Computing](visual-computing/) | 22 | 22 | 22 |
+| [World Music & Languages](world-music-languages/) | 23 | 23 | 23 |
+| **Total** | **482** | **482** | **482** |
 
 ## Provenance
 
-- Source: [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/518158b0568981b4ebe290d69f197995bd41ded0/state/streeling/courses) at commit `518158b` (2026-10-04), MIT license.
-- Imported with `npm run sync:streeling`; do not edit these pages by hand — only `journal.md` is kept between syncs.
+- Initial source copy: [`spareilleux/learn` → `streeling/courses`](https://github.com/spareilleux/learn/tree/main/streeling/courses), copied from [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses) at commit `1beb089` (2026-10-21), MIT license.
+- [Additional source provenance](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/craft-2026-10-22/import.json)
+- [Additional source provenance](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/data-visualization-2026-10-22/import.json)
+- Generated with `npm run sync:streeling` from `streeling/`: change a module there, not on these pages — only `journal.md` is kept between syncs.

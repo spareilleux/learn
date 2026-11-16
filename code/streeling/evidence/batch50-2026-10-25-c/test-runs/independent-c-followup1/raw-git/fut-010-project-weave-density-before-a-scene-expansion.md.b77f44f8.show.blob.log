@@ -1,0 +1,101 @@
+---
+module_id: fut-010-project-weave-density-before-a-scene-expansion
+department: futurology
+course: "Project Weave Density before a Scene Expansion"
+level: intermediate
+prerequisites: ["fut-007-test-a-weave-generator-outside-its-preview"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Project Weave Density before a Scene Expansion
+
+> Draft for technical and language review. Every scene, count, temperature, timing and outcome introduced below is an authored example. Source inspection and arithmetic do not constitute a physical craft trial, a [Godot](https://docs.godotengine.org/en/4.5/) import, a [Blender](https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md) render, a [ComfyUI](https://docs.comfy.org/) run or a learner observation. Human and runtime decisions remain undecided.
+
+## Project question
+
+A future craft scene doubles thread density and budgets only twice as many crossing annotations. That plan confuses a strand count with a pairwise count. This lesson derives workload scenarios from an explicit weave construction before discussing capacity. It extends preview-versus-target reasoning by showing which resource grows with both directional counts and which grows with their sum.
+
+## Read the retained boundary
+
+The retained crossing fixture contains grid coordinates and crossing IDs for a finite patch. Its historical rows are not performance samples. They motivate a pairwise crossing inventory; the density multipliers and future workload below are authored planning assumptions.
+
+Read the prerequisite and the retained project artifact before interpreting the model. The source has its own revision and purpose; it supplies the boundary described here, not the new classroom inputs. Keep a small evidence table separating an inspected field, an assumption, a derived quantity and a proposed scene effect. An agent summary must point back to the field it interprets. A source filename alone cannot establish an earlier result.
+
+## Interpret the model
+
+Under the complete rectangular weave assumption, each warp meets every weft. Crossing count is a product; strand count is a sum. Scaling both directions therefore changes them differently. The multiplication describes an inventory, not the cost of rendering or querying it. A host may batch representations, omit hidden crossings or attach different payloads, so a future capacity estimate must connect counts to an actual measured unit cost and its validity range. The control scales one direction only, preventing the phrase quadratic growth from escaping the assumptions that made it true. A scenario is conditional arithmetic rather than a forecast of user demand.
+
+The direct baseline is a labelled sketch and a hand calculation with the answer panels closed. Preserve intermediate values and units, then apply the changed input in the negative control. A disagreement is useful evidence: locate whether it comes from the definition, arithmetic, representation or intended task before changing the model. Agreement on the main case alone does not establish a universal rule. These finite examples deliberately expose an assumption that a smooth preview could conceal.
+
+```text
+{"warp_count":6,"weft_count":4,"warp_multiplier":2,"weft_multiplier":2}
+base_crossings=warp_count*weft_count; future_crossings=(warp_count*warp_multiplier)*(weft_count*weft_multiplier); crossing_ratio=warp_multiplier*weft_multiplier; strand_ratio=(warp_count*warp_multiplier+weft_count*weft_multiplier)/(warp_count+weft_count)
+```
+
+## Corrected exercises
+
+### Exercise 1
+
+Count the original crossings and strands.
+
+<details><summary>Answer 1</summary>
+
+There are `24` crossings and `10` strands. Each crossing is a pair of directional identities, not an extra physical strand.
+
+</details>
+
+### Exercise 2
+
+Scale both directions as declared and calculate the ratios.
+
+<details><summary>Answer 2</summary>
+
+There are `96` crossings and `20` strands. Crossing count grows by `4`, while strand count grows by `2`.
+
+</details>
+
+### Exercise 3
+
+Apply the one-direction control.
+
+<details><summary>Answer 3</summary>
+
+There are `48` crossings and `16` strands. The crossing ratio is `2` and strand ratio `1.6`, so the earlier two-direction scaling statement does not apply unchanged.
+
+</details>
+
+### Exercise 4
+
+Can the crossing ratio be reported as the frame-time ratio?
+
+<details><summary>Answer 4</summary>
+
+No. Counts do not specify batching, culling, geometry, materials, query work or host overhead. An actual cost model and observations are needed.
+
+</details>
+
+### Exercise 5
+
+What would falsify this complete-grid inventory model?
+
+<details><summary>Answer 5</summary>
+
+A declared construction in which some warp-weft pairs never meet, meet repeatedly or are intentionally excluded would violate its counting assumptions. Revise the model before applying its budget.
+
+</details>
+
+## Source-assisted learner task
+
+Prepare a manual inventory separating strands, crossings and proposed per-crossing annotations. Trace the fixture’s identity fields and label each scenario input as assumed. State an observation that would reject the complete-grid premise before recommending a larger scene or an automation budget.
+
+Retain your original answer, source locations, assistance history and any later correction as separate records. State the observable result that would falsify your recommendation before proposing automation. Compare the source-assisted result with your direct manual baseline, including any extra uncertainty it introduces. The fixed packet contains five prepared criteria; each decision stays null until an actual learner attempt and review exist. Prepared answers are checks, not evidence that a learner performed the task.
+
+## Sources and validation journal
+
+- [Prerequisite: fut-007-test-a-weave-generator-outside-its-preview](../../futurology/en/fut-007-test-a-weave-generator-outside-its-preview.md)
+- [Retained project artifact](../../../../code/streeling/evidence/weave-scene-2026-10-22/crossings.json)
+- [Primary reading](https://docs.godotengine.org/en/4.5/tutorials/3d/using_transforms.html)
+- [Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-24/unit-c.json)
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-24/journal.md)

@@ -1,0 +1,92 @@
+---
+module_id: mus-023-plan-voice-leading-across-a-phrase
+department: music
+course: Plan Voice Leading Across a Whole Phrase
+level: intermediate
+alchemical_stage: albedo
+prerequisites: [mus-005-jazz-harmony, mus-016-recover-voice-correspondence]
+estimated_duration: "60 minutes"
+produced_by: codex-project-analysis
+version: "1.0.0"
+---
+
+# Plan Voice Leading Across a Whole Phrase
+
+## Project question and deliverable
+
+A guitarist wants to arrive at a specified register at the end of a phrase. Choosing the nearest next voicing can postpone a large leap until the final chord. Produce a complete path comparison and explain when a locally more costly choice improves the whole phrase.
+
+GA's pinned [AdvancedTabSolver](https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.ML/Tabs/AdvancedTabSolver.cs#L52) builds candidate shapes for each step and uses a dynamic-programming table to retain paths. This lesson calculates a much smaller authored example. It does not execute that solver, reproduce its physical/style objective or claim that GA generated these candidates. The [retained fixture](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/music-phrase-2026-10-22/phrase-paths.json) exposes every input and result.
+
+## 1. Fix the musical task and the voice labels
+
+Use C4 = 60 and two labeled registered voices. Match entries by label and sum their absolute semitone motions. Do not reduce octaves or reassign voices. These are guide-tone shells, not complete chords or proposed fingerings:
+
+| Step | Chord context | Registered pitches | Note names |
+|---|---|---|---|
+| Start | Cmaj7 | 52, 59 | E3, B3 |
+| Next | Dm7 | 53, 60 | F3, C4 |
+| Choice low | G7 | 53, 59 | F3, B3 |
+| Choice high | G7 | 59, 65 | B3, F4 |
+| Required ending | Cmaj7 | 64, 71 | E4, B4 |
+
+The third and seventh identify each shell's role in the given chord context; the shell alone need not determine that chord name. MUS-005 teaches the guide tones. Here the added requirement is the ending register and the comparison of complete paths.
+
+### Practice exercise 1
+
+Calculate Start to Dm7, then Dm7 to each G7 choice. Keep the voice labels fixed.
+
+> **Answer:** Start to Dm7 costs 1 + 1 = 2. Dm7 to G7-low costs 0 + 1 = 1. Dm7 to G7-high costs 6 + 5 = 11. At this point the low choice has the cheaper prefix, 3 rather than 13.
+
+## 2. Include the required ending
+
+G7-low to the ending costs 11 + 12 = 23. G7-high to the same ending costs 5 + 6 = 11. There are only two permitted complete paths in this fixture:
+
+| G7 choice | Three edge costs | Whole-phrase cost |
+|---|---|---:|
+| Low | 2, 1, 23 | 26 |
+| High | 2, 11, 11 | 24 |
+
+The nearest-next-choice rule selects low, then pays the larger final leap. Full-path enumeration selects high at cost 24. This is optimal among these two authored paths under this declared objective. It is not a claim about all possible harmonizations, musical preference or playing comfort.
+
+### Practice exercise 2
+
+Write the two labeled lines along the cheaper whole phrase. Does the smaller total guarantee that every individual leap is smaller?
+
+> **Answer:** The lines are E3 → F3 → B3 → E4 and B3 → C4 → F4 → B4. Their absolute motion totals are 12 and 12, giving 24. No: the Dm7-to-G7 move is larger than in the low path. We optimized the sum over the phrase, not every individual edge.
+
+## 3. Keep a best prefix for each state
+
+For this finite additive example, future edge costs depend on the current state. Retain the cheapest known prefix ending at each state. The Dm7 prefix is 2; the G7-low and G7-high prefixes are 3 and 13. At the required ending, compare 3 + 23 with 13 + 11.
+
+Keeping one best prefix **per state** retains both G7 states. Keeping only the single cheapest state overall discards the high state and loses the better ending. The [pinned GA table](https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.ML/Tabs/AdvancedTabSolver.cs#L113) retains up to `k` paths for each current candidate before selecting final paths. Setting `k` to 1 is therefore not the same operation as keeping only one current candidate overall.
+
+### Practice exercise 3
+
+Which G7 prefixes survive a per-state limit of 1? What does a one-state overall limit lose in this fixture?
+
+> **Answer:** Both survive: low at 3 and high at 13, one prefix for each state. A one-state overall limit keeps low and produces 26 instead of the available 24. This example does not establish that any particular pruning policy fails in an executed GA run.
+
+## 4. Change the destination and recalculate
+
+If the ending is instead the low Cmaj7 shell `[52,59]`, the last edges are 1 from G7-low and 13 from G7-high. Complete totals become 4 and 26. The same candidates now favor the low path. A phrase planner needs the destination and allowed states before “best” has a definite meaning.
+
+The actual GA candidate-generation stage [retains at most 40 shapes per step after scoring](https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.ML/Tabs/AdvancedTabSolver.cs#L94). A path search over a retained pool does not establish a minimum over every possible fingering. Our two-path exhaustive calculation is similarly bounded by its declared candidate pool.
+
+### Practice exercise 4
+
+Calculate both totals for the changed low ending. Which assumption changed, and which cost rule stayed the same?
+
+> **Answer:** Low gives 2 + 1 + 1 = 4; high gives 2 + 11 + 13 = 26. The required destination changed. The labeled, registered absolute-motion rule stayed the same. The earlier high-path recommendation must not be reused without checking that new endpoint.
+
+## 5. Report the objective actually measured
+
+The pinned solver's internal sum includes transition, static physical, style, position-inertia and ML terms. Its separate [formatted-solution method](https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.ML/Tabs/AdvancedTabSolver.cs#L23) reports `TotalPhysicalCost` by summing transition-method outputs along the chosen path. That report is not a replay of every term in the internal search sum. This is source inspection, not an observed numerical solver run.
+
+Submit arrays, voice labels, ending, edge rule, both complete paths and the comparison scope. Use the [learner packet](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/music-phrase-2026-10-22/learner-task.md) to record an answer before opening its separate rubric. No participant or playing result is supplied by these calculations.
+
+### Practice exercise 5
+
+An agent calls 24 “GA's measured total physical cost.” Rewrite the claim so it matches the evidence.
+
+> **Answer:** “In the constructed two-path fixture, 24 is the minimum sum of absolute registered motion for the required high ending.” GA's solver and its formatted cost report were not executed here; no physical comfort or actual fingering cost was measured.

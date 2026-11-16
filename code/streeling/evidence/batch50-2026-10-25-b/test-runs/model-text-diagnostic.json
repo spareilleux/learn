@@ -1,0 +1,29 @@
+{
+  "checked_at_utc": "2026-10-25T18:50:44.747850+00:00",
+  "args": [
+    "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "C:\\tmp\\streeling-diagnose-model-text-20261025-b.py"
+  ],
+  "exit_code": 0,
+  "script_sha256": "01a0e98eef0544b504dec3d749705d3c66b90ab7aa212d22745e7f108b3651f6",
+  "log": "code/streeling/evidence/batch50-2026-10-25-b/test-runs/model-text-diagnostic.log",
+  "log_sha256": "8077a006591a3eaff60fd463edf820c22978efbb6c4a9567c3b235b3fb87d829",
+  "scope": "Actual full diagnostic replay after the original diagnostic tool output was truncated. The first failed equality gate is retained separately in model-text-final.log. Differences concern narrative fields intentionally outside certain displayed JSON fences; executable projections are checked next.",
+  "packet_bindings": [
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25-b/unit-a.json",
+      "sha256": "af503e8f56f4e808a630db649f08fe7591de22382726da2cfb9098e4567a602b"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25-b/unit-b.json",
+      "sha256": "870f170bc512ac5f1e3959849bd85f10981f05c926997c49ce99f729628a105b"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25-b/unit-c.json",
+      "sha256": "5c65a1e421eef843d1cf76698e177e4b899bff8194c1d959ecfa97d83dfd834e"
+    }
+  ]
+}

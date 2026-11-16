@@ -64,6 +64,14 @@
     <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Biomechanics/BiomechanicalAnalyzer.cs" Link="Ga/BiomechanicalAnalyzer.cs" />
     <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Biomechanics/BiomechanicalPlayabilityAnalysis.cs" Link="Ga/BiomechanicalPlayabilityAnalysis.cs" />
     <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Biomechanics/FingeringEfficiency.cs" Link="Ga/FingeringEfficiency.cs" />
+    <!-- Lesson 16 compiles two skills of GA's chatbot, as they are, with the chord vocabulary, the skill interface, the keyword
+         matcher and the registry attribute they use; StandIns.cs replaces the four types they take from code the course does not build -->
+    <Compile Include="$(GaRoot)Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs" Link="Ga/ImprovisationSkill.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Business.ML/Agents/Skills/OutsideNotesSkill.cs" Link="Ga/OutsideNotesSkill.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Business.ML/Agents/Skills/ChordIntentMatching.cs" Link="Ga/ChordIntentMatching.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Business.ML/Agents/ChordVocabulary.cs" Link="Ga/ChordVocabulary.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Business.ML/Agents/IOrchestratorSkill.cs" Link="Ga/IOrchestratorSkill.cs" />
+    <Compile Include="$(GaRoot)GuitarAlchemist.Registry/GaSkillAttribute.cs" Link="Ga/GaSkillAttribute.cs" />
   </ItemGroup>
 
   <ItemGroup>

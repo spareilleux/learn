@@ -247,6 +247,20 @@ La [PR Demerzel #1185](https://github.com/GuitarAlchemist/Demerzel/pull/1185) a 
 
 MUS-014 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
 
+## 2026-10-04 — Streeling MUS-014 publié
+
+La [PR Learn #143](https://github.com/spareilleux/learn/pull/143) a été fusionnée en `a0c78d9`, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37215263087) a réussi. Les pages ont ensuite été relues sans authentification dans les trois langues : douze pages, qui répondent toutes 200. Les pages du [module MUS-014](../streeling/music/mus-014-inversions-bass-line/) nomment MUS-014 et renvoient à leur source à `518158b` ; l'[index de la musique](../streeling/music/) le liste, et le [journal Streeling](../streeling/journal/) et ce journal portent leurs entrées du 2026-10-04.
+
+MUS-014 passe donc d'en attente de vérification à vérifié ; son entrée ci-dessus reste telle qu'écrite. Cette mise à jour réépingle ses liens source à `0f7a5fd`. Publié ne veut pas dire étudié : MUS-014 n'a été ni exécuté ni étudié ici, et son expérience reste proposée.
+
+## 2026-10-04 — Streeling MUS-019 synchronisé, en attente de vérification
+
+La [PR Demerzel #1186](https://github.com/GuitarAlchemist/Demerzel/pull/1186) a été fusionnée en `0f7a5fd`, après l'épingle de `518158b`. Cette mise à jour la synchronise dans Learn :
+- le nouveau [module MUS-019](../streeling/music/mus-019-transposition-capo-cross-instrument/), Transposition, capodastre et équivalence entre instruments, dans les trois langues ;
+- sa ligne dans l'[index de la musique](../streeling/music/) et dans le [journal Streeling](../streeling/journal/), avec une entrée datée dans ce dernier.
+
+MUS-019 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
 ## À vérifier
 
 - Contrôler les URL publiques de cette mise à jour et le catalogue après déploiement ; conserver le reçu de déploiement avec le compte rendu d'intégration.
