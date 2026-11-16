@@ -298,6 +298,12 @@ export default defineConfig({
 							collapsed: true,
 							items: [{ autogenerate: { directory: 'blender' } }],
 						},
+						{
+							label: 'Speaking in knots',
+							translations: { fr: 'Parler en nœuds', es: 'Hablar en nudos' },
+							collapsed: true,
+							items: [{ autogenerate: { directory: 'speaking-in-knots' } }],
+						},
 					],
 				},
 				{
