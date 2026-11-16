@@ -1,0 +1,83 @@
+---
+module_id: vc-012-separate-mesh-instances-from-draw-calls
+department: visual-computing
+course: "Separate Mesh Instances from Draw Calls"
+level: intermediate
+prerequisites: ["vc-009-budget-brutal-scene-expansion"]
+estimated_duration: "40 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Separate Mesh Instances from Draw Calls
+
+> Draft for human review. The fixed cases below are authored mathematics supported by source inspection. They are not new project measurements. Human technical, artisan, fluent-language and learner judgments remain pending. No scene host, physical sample, GPU, policy executor or learner session was run for this lesson.
+
+## Project question
+
+BRUTAL’s old CPU descriptions count expanded block instances and boxes. Can an agent turn either number directly into draw calls for a Godot craft preview? A block instance is a description node; a box is a primitive description; a draw submission belongs to a rendering path. The project needs a handoff that keeps those quantities distinct before using batching as a performance argument.
+
+[Prerequisite: vc-009-budget-brutal-scene-expansion](../../visual-computing/en/vc-009-budget-brutal-scene-expansion.md)
+
+## Read the boundary before calculating
+
+Read the linked prerequisite and project record before doing the arithmetic. Identify which statement comes from inspected source, which is an older recorded result, and which follows only from the premises below. A source comment, a prepared answer and an executed observation have different evidential roles. Preserve the original date and any failed or inconclusive gate when summarizing an older artifact. The direct baseline is a small handwritten calculation and a source-location table; an agent may help locate a definition, but its summary must be checked against that definition. Do not introduce a new language or automation merely to perform this finite comparison.
+
+Godot documents MultiMesh as an instancing mechanism and warns that spatial indexing treats the group as one object. We construct a restricted submission model: one mesh surface, one material per group, a declared number of passes, all instances visible, no shadows or extra work. The arithmetic compares separate and grouped submissions under those assumptions. It is not a prediction of an actual host counter. Changing material groups or pass count changes the model. The pinned accepted description and refused larger request remain CPU results; neither becomes a graphics benchmark because we derive a submission budget.
+
+## Fixed case and assumptions
+
+```text
+historical_v1: block_instances=5; boxes=53; triangles=636
+historical_v2: block_instances=5; boxes=85; triangles=1020
+authored_instances=60; groups=3; passes=2
+separate_submissions=60*2=120
+grouped_submissions=3*2=6
+reduction=120-6=114
+control_groups=60; control_submissions=60*2=120
+```
+
+## Corrected exercises
+
+### Exercise 1
+
+Which old quantity changes between column versions?
+
+> **Answer:** Boxes change from `53` to `85`; block instances remain `5`. Neither count states observed draw calls.
+
+### Exercise 2
+
+Compute the separate-submission budget.
+
+> **Answer:** It is `120` under the stipulated pass and visibility model. This is arithmetic rather than a GPU observation.
+
+### Exercise 3
+
+Compute grouped submissions and the modeled reduction.
+
+> **Answer:** There are `6` grouped submissions and `114` fewer than the separate case. This does not specify frame-time savings.
+
+### Exercise 4
+
+Use one incompatible group per instance. What happens?
+
+> **Answer:** The control returns `120` submissions, eliminating the modeled reduction. Mesh reuse alone does not guarantee grouping.
+
+### Exercise 5
+
+May the handoff claim the grouped scene is faster?
+
+> **Answer:** No. It can state the conditional model. A real path needs measured counters, workload and visibility behavior; coarse group culling can change work.
+
+## Source-assisted learner task
+
+Read the old description counts and MultiMesh documentation. Make a source-assisted table for block nodes, boxes, mesh instances and modeled submissions; leave measured draw calls unknown. Compare against a handwritten grouping table. A compatible real workload requiring different submissions would falsify this model’s applicability.
+
+Complete the task with the answer sections hidden. Retain your original answers, intermediate quantities, source locations, uncertainty and every form of assistance, including a hint, a translated term or an agent suggestion. Then compare with the prepared answers and record corrections without replacing the original attempt. Produce a short decision note containing the claim, its assumptions, the calculation, the negative control and the next observation that could falsify it. A correct result with missing units or source identity is incomplete evidence for transfer. The evidence packet contains five prepared learner criteria; their decisions stay null until a real attempt and an authorized review exist. Passing these arithmetic checks would establish only competence on this declared case. It would not establish an implemented adapter, a successful material process, a faster renderer or improved learning in the project. Compare your source-assisted note with the direct manual baseline: if assistance obscures an assumption or removes a refusal, revise the note before proposing any workflow change.
+
+## Sources and validation journal
+
+- [Project record](../../../../code/streeling/evidence/brutal-composition-2026-10-22/composition-calculations.json)
+- [Primary source](https://docs.godotengine.org/en/4.6/classes/class_multimesh.html)
+- [Fixed evidence packet](../../../../code/streeling/evidence/batch50-2026-10-23/unit-c.json)
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-23/journal.md)

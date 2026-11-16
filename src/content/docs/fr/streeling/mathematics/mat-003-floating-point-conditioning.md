@@ -4,12 +4,13 @@ description: Arithmétique flottante et conditionnement — Mathématiques
 sidebar:
   label: MAT-003 · Arithmétique flottante et conditionnement
   order: 3
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/fr/mat-003-floating-point-conditioning.fr.md
 ---
 
 :::note[Streeling University]
 **MAT-003** · Arithmétique flottante et conditionnement · intermédiaire · 45 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/mathematics/fr/mat-003-floating-point-conditioning.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/fr/mat-003-floating-point-conditioning.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-001](../../mathematics/mat-001-proof-strategies/)
 :::

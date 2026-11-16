@@ -1,0 +1,151 @@
+---
+module_id: "vc-017-bound-relief-depth-separation-under-a-declared-quantizer"
+department: "visual-computing"
+course: "Bound Relief Depth Separation under a Declared Quantizer"
+level: "advanced"
+prerequisites: ["vc-014-predict-an-embroidered-stitch-pixel-footprint", "inf-005-quantization-and-indistinguishable-renders"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+
+# Bound Relief Depth Separation under a Declared Quantizer
+
+> Draft for technical and language review. The case is authored, including its numeric inputs, labels and expected results. It is not a physical craft trial, a [Godot](https://docs.godotengine.org/en/4.5/tutorials/shaders/advanced_postprocessing.html) observation, a [Blender](https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md) render, a [ComfyUI](https://github.com/Comfy-Org/ComfyUI) run or a learner result. All human and learner decisions remain undecided.
+
+## Project question
+
+A relief ridge can occupy visible pixels yet share a stored depth code with the backing surface. Screen footprint and depth discrimination are separate questions. The information-loss prerequisite already shows quantizer collisions; this lesson composes inverse-distance projection with a finite quantizer to test how a camera clipping choice changes those collisions.
+
+Read the committed prerequisite and the retained source passage before calculating. Make an evidence table that separates a source definition, an authored premise, a derived result and a proposed future observation. The source revision and reading scope are recorded in the packet. An inspected parameter is evidence that a representation exposes that parameter; it cannot supply an unmeasured material coefficient, visibility judgement or processing time. Preserve that distinction when an assistant summarizes the source. The primary reference supports only the concept and passage named in the reading record.
+
+## Derive the operation before proposing automation
+
+Our depth coordinate puts the near plane at its upper endpoint and the far plane at its lower endpoint. Equal world-distance increments therefore produce unequal depth increments. The Godot documentation describes nonlinear reversed depth and renderer-specific reconstruction, but supplies no basis for identifying our classroom quantizer with a particular GPU format. The cleanup pipeline exposes capture parameters, without choosing this projection. Changing the near plane also clips more geometry; improving a code gap is not a free scene improvement.
+
+## Fixed authored model and changed-input control
+
+```json
+{
+  "values": {
+    "near_m": 1,
+    "far_m": 100,
+    "depths_m": [
+      10,
+      10.1
+    ],
+    "quantizer_steps": 255
+  },
+  "formula": "d(z)=(1/z-1/far)/(1/near-1/far); q(z)=floor(steps*d(z)+0.5); separated=q(z1)!=q(z2)",
+  "expected": {
+    "encoded": [
+      0.09090909090909093,
+      0.08990899089908992
+    ],
+    "codes": [
+      23,
+      23
+    ],
+    "separated": false
+  },
+  "negative_control": {
+    "values": {
+      "near_m": 5,
+      "far_m": 100,
+      "depths_m": [
+        10,
+        10.1
+      ],
+      "quantizer_steps": 255
+    },
+    "expected": {
+      "encoded": [
+        0.4736842105263158,
+        0.4684731631057843
+      ],
+      "codes": [
+        121,
+        119
+      ],
+      "separated": true
+    }
+  }
+}
+```
+
+### Exercise 1
+
+Compute the main stored codes.
+
+<details><summary>Answer 1</summary>
+
+They are `[23,23]`; `separated=false`. Distinct physical depths have collided after the declared rounding.
+
+</details>
+
+### Exercise 2
+
+Does visible stitch width prevent this collision?
+
+<details><summary>Answer 2</summary>
+
+No. The footprint prerequisite concerns image-plane extent; this model concerns stored depth along the camera direction.
+
+</details>
+
+### Exercise 3
+
+Apply the changed near plane.
+
+<details><summary>Answer 3</summary>
+
+The codes become `[121,119]` and `separated=true`. The relief depths themselves have not changed.
+
+</details>
+
+### Exercise 4
+
+What tradeoff accompanies that change?
+
+<details><summary>Answer 4</summary>
+
+The near boundary moves from `1 m` to `5 m`, so nearer content would be excluded. Code separation alone cannot select a camera.
+
+</details>
+
+### Exercise 5
+
+May the example predict a Godot precision bug?
+
+<details><summary>Answer 5</summary>
+
+No. Identify renderer, projection matrix and actual buffer format, then measure. Uniform finite rounding here is an authored assumption.
+
+</details>
+
+## Source-assisted learner task
+
+Tabulate reciprocal depth, encoded depth and rounded code by hand. Inspect the pipeline capture arguments and the Godot depth passage. Write the missing camera and format fields for a future relief test.
+
+Begin with a direct manual baseline: close the answer panels, draw the diagram or table required by the task, and derive intermediate quantities with their units. Retain that first answer before asking an assistant for help. Then use the linked source to challenge a specific assumption, retaining the question, the source location, the assistance received and any rejected suggestion. Compare the assisted answer with your original calculation on the same task and inputs. A shorter explanation is not a demonstrated improvement if it drops a boundary condition or invents an observation.
+
+Apply the structured control as a separate case, rather than editing the main inputs in place. Record what changes and what remains invariant, and state whether a discrepancy concerns arithmetic, an interpretation or the model premises. Preserve any failed attempt and its correction separately. The packet prepares a criterion for each corrected exercise; every learner decision remains null until an actual attempt is retained and reviewed. Source lookup and a prepared answer are not evidence that a learner performed the task. No new DSL, agent workflow, scene adapter or production integration is required to complete this paper exercise.
+
+## Prospective falsifier
+
+The claim that distinct depths always remain distinguishable after storage fails on the main equal-code pair; a runtime claim would additionally require a measured buffer match.
+
+## Sources and validation boundary
+
+- [Committed prerequisite: vc-014-predict-an-embroidered-stitch-pixel-footprint](../../visual-computing/en/vc-014-predict-an-embroidered-stitch-pixel-footprint.md)
+
+- [Committed prerequisite: inf-005-quantization-and-indistinguishable-renders](../../information-theory/en/inf-005-quantization-and-indistinguishable-renders.md)
+
+- [Retained project source](../../../../code/blender/scripts/glb_pipeline.py)
+
+- [Primary reading](https://docs.godotengine.org/en/4.5/tutorials/shaders/advanced_postprocessing.html)
+
+- [Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-25/unit-c.json)
+
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25/journal.md)

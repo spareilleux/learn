@@ -1,0 +1,83 @@
+---
+module_id: gas-010-distinguish-stiff-string-partials-from-harmonics
+department: guitar-acoustics
+course: "Distinguish Stiff String Partials from Harmonics"
+level: intermediate
+prerequisites: ["gas-005-separate-a-partial-peak-from-a-period", "gas-006-relate-pluck-position-to-string-modes"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+
+# Distinguish Stiff String Partials from Harmonics
+
+> **Draft and evidence boundary.** This lesson contains an authored model and source reading. Human technical, musician, fluent-language and learner decisions remain pending. No new engine render, parser run, playing, listening or learner observation is claimed. Historical failures keep their original status.
+
+## The project question
+
+A GA spectrum label may call every partial a harmonic. That is exact only when its frequency is an integer multiple of a reference fundamental. Here an explicitly stipulated stiffness-inspired model changes frequency ratios while leaving amplitude outside the question. We normalize to the first partial so the meaning of the reference remains visible.
+
+## Read the project evidence
+
+Read the linked prerequisite and retained project artifact before applying the model. Locate the particular representation, transformation or exclusion that matters to this question. The fixed packet records source identity, reading scope and authored values; a source location is evidence for its contents at that revision, not proof of current deployment. Keep a source-derived observation separate from an inferred proposal. Where a primary reference is linked, use its stated scope rather than extending it to unsupported cases.
+
+[Prerequisite: gas-005-separate-a-partial-peak-from-a-period](../../guitar-acoustics/en/gas-005-separate-a-partial-peak-from-a-period.md)
+
+[Prerequisite: gas-006-relate-pluck-position-to-string-modes](../../guitar-acoustics/en/gas-006-relate-pluck-position-to-string-modes.md)
+
+[Retained project artifact](../../../../code/streeling/guitar-runtime/vendor/lib.rs)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-23/unit-a.json)
+
+[Validation journal](../../../../code/streeling/evidence/batch50-2026-10-23/journal.md)
+
+[Primary reference](https://www.dsprelated.com/freebooks/pasp/Stiff_String.html)
+
+## 1. Exercise 1
+
+Define `f_n=n*100*sqrt((1+B*n*n)/(1+B))` with dimensionless `B=.01`. The denominator makes the first partial exactly 100 Hz. Omitting it would change the reference itself. The coefficient is authored and is not the GA engine's dispersion slider.
+
+What does the formula give for the first partial?
+
+> **Answer.** At n=1 the square-root ratio is 1, so the result is 100 Hz.
+
+## 2. Exercise 2
+
+The second partial is approximately 202.948561985 Hz, above the harmonic reference 200 Hz. Its ratio to twice the first partial exceeds unity. Calling it the second partial preserves its position in the model; calling it an exact second harmonic would discard the computed discrepancy.
+
+Give the harmonic reference and the direction of the residual.
+
+> **Answer.** The reference is 200 Hz; the residual is positive because the modeled second partial lies above it.
+
+## 3. Exercise 3
+
+For the third partial, the same formula gives approximately 311.654797607 Hz rather than 300 Hz. The discrepancy grows with partial index in this selected positive-coefficient model. This does not establish a universal audible effect; amplitude, bandwidth, duration and a listener task were never supplied.
+
+Can the frequency calculation prove audibility or preference?
+
+> **Answer.** No. It calculates a model discrepancy only; perceptual reports require separate observations and a specified comparison.
+
+## 4. Exercise 4
+
+Set B to 0 as a negative control. The formula returns `[100,200,300]`, restoring exact harmonic multiples. This checks the normalization and the direction of the proposed comparison. A reference generated with the wrong first-partial convention could otherwise manufacture an apparent residual even in the intended flexible-string control.
+
+What should the zero-coefficient control return?
+
+> **Answer.** It must return `[100,200,300]` Hz. A nonzero discrepancy there would falsify the stated formula implementation or reference convention.
+
+## 5. Exercise 5
+
+The source reading identifies dispersion state, while the primary acoustics text explains frequency-dependent propagation. Neither establishes a calibration between our coefficient and a GA control. Preserve the authored model separately from a future fitted spectrum, including partial identities and uncertain peaks. The prerequisite's tallest-peak warning still applies.
+
+What evidence is missing before recommending a GA slider value?
+
+> **Answer.** A pinned executed mapping from control to measured partial frequencies, calibrated peak estimates and a declared acceptance task are missing.
+
+## Source-assisted learner task
+
+Prepare a short review note from the fixed case before opening the prepared answers. First reproduce the calculation or table manually, keeping the stated units, support and assumptions. That direct result is the baseline for any source-assisted or agent-assisted answer. Then inspect the linked project artifact and identify one precise boundary relevant to the calculation. Record the actual source excerpt or field used, its revision, your proposed answer and every kind of assistance received. A calculator and source lookup are allowed; label them instead of presenting the result as unaided recall.
+
+Apply the negative control as well as the main case. Write the observable result that would falsify your conclusion, and state whether the control actually supplies it. If a model input is absent, retain an unresolved result rather than substituting a plausible value. Compare a proposed abstraction with the manual baseline before recommending a new agent workflow or DSL. The answer key is a prepared check, not a record of your attempt. Keep your original answer before reveal, any correction afterward and the reason for the correction.
+
+The packet contains five prepared learner criteria corresponding to the exercises. Their decisions remain null until actual answers, assistance and review are retained. Correct arithmetic supports only the declared model. A useful project decision still needs the relevant human judgment or runtime observation at its own boundary. Record actual checks, errors and refinements in the linked validation journal; the journal must distinguish executed tests from planned tests.

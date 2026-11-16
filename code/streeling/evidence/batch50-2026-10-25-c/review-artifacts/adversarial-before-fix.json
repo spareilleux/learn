@@ -1,0 +1,27 @@
+{
+  "reviewer": "adversarial",
+  "findings": [
+    {
+      "title": "Merged logs break Unit B observation line prefixes",
+      "severity": "P2",
+      "file": "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_b.py",
+      "line": 309,
+      "why_it_matters": "A full terminal log captured with stderr redirected into stdout loses the required line prefix on every Unit B model observation: unittest's verbose status text precedes the JSON on the same line. The normal script invocation then yields only 16 line-prefixed records from Unit B instead of 32, and the integrated suite yields 84 instead of the promised 100, although all tests pass. Starting each observation on a fresh line, as Units A and C already do, preserves the protocol's independently parseable evidence records in combined logs.",
+      "autofix_class": "advisory",
+      "owner": "human",
+      "requires_verification": true,
+      "suggested_fix": "In the protected proof test's observation print at line 309, prepend a newline before OBSERVATION, matching test_unit_a.py:73 and test_unit_c.py:185. Replay the ordinary verbose Unit B command with subprocess stderr=STDOUT and verify that all 32 JSON observation records begin their own lines; leave assertion semantics intact.",
+      "confidence": 100,
+      "evidence": [
+        "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_b.py:309 --         print('OBSERVATION '+json.dumps(dict(code=code,case=case,observed=observed,expected=FIXED[code][i],scope=SCOPES[code]),sort_keys=True),flush=True)",
+        "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_b.py:358 --     else: unittest.main(verbosity=2)",
+        "code/streeling/evidence/batch50-2026-10-25-c/review-protocol.md:7 requires every model and negative-control observation to be printed as one JSON line prefixed OBSERVATION before assertion.",
+        "Reproduced without filesystem output using subprocess.run([sys.executable, '-X', 'utf8', '-B', test_path], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding='utf-8'): Unit A exit 0 / 36 prefixed records / 36 observation substrings; Unit B exit 0 / 16 prefixed records / 32 substrings; Unit C exit 0 / 32 prefixed records / 32 substrings. Unit B's first line begins: test_cog021 (__main__.UnitB.test_cog021) ... OBSERVATION {\"case\": \"model\", \"code\": \"COG021\".",
+        "Separate stdout/stderr capture confirms the arithmetic tests themselves pass: 50 tests, zero failures/errors, 100 stdout observation records across 50 codes; metadata 150/150; discovery regression 2/2. Co-mutated input and expected fields for AUD023, COG023 and DV025 are each rejected by the independent fixed oracle."
+      ],
+      "pre_existing": false
+    }
+  ],
+  "residual_risks": [],
+  "testing_gaps": []
+}

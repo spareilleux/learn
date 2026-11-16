@@ -1,0 +1,15 @@
+test_degree_subtraction (__main__.UnsupportedOperations.test_degree_subtraction) ... 
+MUTATED_INPUT {"code": "WML016", "original_operation": "subtract", "mutated_operation": "invalid_operation", "values": {"degrees": {"1": 0, "3": 4, "5": 7, "7": 10}, "operations": [{"op": "add", "degree": 9, "semitones": 14}, {"op": "alter", "degree": 5, "delta": -1}, {"op": "invalid_operation", "degree": 3}]}, "expected_unchanged": true}
+
+OBSERVATION {"code": "WML016", "case": "invalid-input", "observed": "invalid_operation", "expected": ["add", "alter", "subtract"], "scope": "Root zero, ordered strict add/alter/subtract edits; authored collision policy, not full MusicXML semantics."}
+ok
+test_musicxml_forward (__main__.UnsupportedOperations.test_musicxml_forward) ... 
+MUTATED_INPUT {"code": "MCL016", "original_operation": "forward", "mutated_operation": "invalid_operation", "values": {"measure_units": 4, "operations": [{"op": "note", "id": "a", "duration": 4}, {"op": "backup", "duration": 4}, {"op": "note", "id": "b", "duration": 2}, {"op": "invalid_operation", "duration": 2}]}, "expected_unchanged": true}
+
+OBSERVATION {"code": "MCL016", "case": "invalid-input", "observed": "invalid_operation", "expected": ["note", "backup", "forward"], "scope": "Positive fixed division durations, one measure, note/backup/forward only; no parser conformance."}
+ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+OK

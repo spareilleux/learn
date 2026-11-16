@@ -1,0 +1,179 @@
+{
+  "scope": "Authored flat-layer sign models and semantic operation cards from a pinned draft specification, not executed IX transforms, measured 3D heights or a new adapter.",
+  "convention": {
+    "d": "sign of f minus g in one stipulated global up order; nonzero witnesses only",
+    "normal_f": "sigma_f in {-1,+1}",
+    "normal_g": "sigma_g in {-1,+1}",
+    "fold_relation": "s=d*sigma_g: the SECOND face normal is the reference",
+    "swap": "t=-s*sigma_f*sigma_g",
+    "whole_turn": "d and both normal signs reverse, so s is unchanged"
+  },
+  "truth_rows": [
+    {
+      "normal_f_global_sign": -1,
+      "normal_g_global_sign": -1,
+      "global_f_above_g_sign": -1,
+      "fold_s": 1,
+      "swapped_t": -1,
+      "swap_formula_t": -1,
+      "swap_twice_s": 1,
+      "turned_normal_f": 1,
+      "turned_normal_g": 1,
+      "turned_global_order": 1,
+      "turned_fold_s": 1,
+      "wrong_negated_s_implied_global_order": -1
+    },
+    {
+      "normal_f_global_sign": -1,
+      "normal_g_global_sign": -1,
+      "global_f_above_g_sign": 1,
+      "fold_s": -1,
+      "swapped_t": 1,
+      "swap_formula_t": 1,
+      "swap_twice_s": -1,
+      "turned_normal_f": 1,
+      "turned_normal_g": 1,
+      "turned_global_order": -1,
+      "turned_fold_s": -1,
+      "wrong_negated_s_implied_global_order": 1
+    },
+    {
+      "normal_f_global_sign": -1,
+      "normal_g_global_sign": 1,
+      "global_f_above_g_sign": -1,
+      "fold_s": -1,
+      "swapped_t": -1,
+      "swap_formula_t": -1,
+      "swap_twice_s": -1,
+      "turned_normal_f": 1,
+      "turned_normal_g": -1,
+      "turned_global_order": 1,
+      "turned_fold_s": -1,
+      "wrong_negated_s_implied_global_order": -1
+    },
+    {
+      "normal_f_global_sign": -1,
+      "normal_g_global_sign": 1,
+      "global_f_above_g_sign": 1,
+      "fold_s": 1,
+      "swapped_t": 1,
+      "swap_formula_t": 1,
+      "swap_twice_s": 1,
+      "turned_normal_f": 1,
+      "turned_normal_g": -1,
+      "turned_global_order": -1,
+      "turned_fold_s": 1,
+      "wrong_negated_s_implied_global_order": 1
+    },
+    {
+      "normal_f_global_sign": 1,
+      "normal_g_global_sign": -1,
+      "global_f_above_g_sign": -1,
+      "fold_s": 1,
+      "swapped_t": 1,
+      "swap_formula_t": 1,
+      "swap_twice_s": 1,
+      "turned_normal_f": -1,
+      "turned_normal_g": 1,
+      "turned_global_order": 1,
+      "turned_fold_s": 1,
+      "wrong_negated_s_implied_global_order": -1
+    },
+    {
+      "normal_f_global_sign": 1,
+      "normal_g_global_sign": -1,
+      "global_f_above_g_sign": 1,
+      "fold_s": -1,
+      "swapped_t": -1,
+      "swap_formula_t": -1,
+      "swap_twice_s": -1,
+      "turned_normal_f": -1,
+      "turned_normal_g": 1,
+      "turned_global_order": -1,
+      "turned_fold_s": -1,
+      "wrong_negated_s_implied_global_order": 1
+    },
+    {
+      "normal_f_global_sign": 1,
+      "normal_g_global_sign": 1,
+      "global_f_above_g_sign": -1,
+      "fold_s": -1,
+      "swapped_t": 1,
+      "swap_formula_t": 1,
+      "swap_twice_s": -1,
+      "turned_normal_f": -1,
+      "turned_normal_g": -1,
+      "turned_global_order": 1,
+      "turned_fold_s": -1,
+      "wrong_negated_s_implied_global_order": -1
+    },
+    {
+      "normal_f_global_sign": 1,
+      "normal_g_global_sign": 1,
+      "global_f_above_g_sign": 1,
+      "fold_s": 1,
+      "swapped_t": -1,
+      "swap_formula_t": -1,
+      "swap_twice_s": 1,
+      "turned_normal_f": -1,
+      "turned_normal_g": -1,
+      "turned_global_order": -1,
+      "turned_fold_s": 1,
+      "wrong_negated_s_implied_global_order": 1
+    }
+  ],
+  "unknown": {
+    "s": 0,
+    "meaning": "Unknown order, including omitted pair",
+    "does_not_mean_equal_height": true,
+    "unknown_remains_unknown_under_swap_or_turn": true
+  },
+  "crossing_operation_cards": [
+    {
+      "crossing_id": "w2-f0",
+      "original": {
+        "warp_over": true,
+        "physical_old_warp_global_height_sign": 1
+      },
+      "recolour_only": {
+        "warp_over": true,
+        "physical_old_warp_global_height_sign": 1,
+        "role_names_unchanged": true
+      },
+      "rename_warp_weft_roles_only": {
+        "new_warp_over": false,
+        "physical_old_warp_global_height_sign": 1,
+        "old_warp_now_called": "weft"
+      },
+      "turn_entire_object_over": {
+        "warp_over": false,
+        "physical_old_warp_global_height_sign": -1,
+        "role_names_unchanged": true
+      }
+    },
+    {
+      "crossing_id": "w3-f0",
+      "original": {
+        "warp_over": false,
+        "physical_old_warp_global_height_sign": -1
+      },
+      "recolour_only": {
+        "warp_over": false,
+        "physical_old_warp_global_height_sign": -1,
+        "role_names_unchanged": true
+      },
+      "rename_warp_weft_roles_only": {
+        "new_warp_over": true,
+        "physical_old_warp_global_height_sign": -1,
+        "old_warp_now_called": "weft"
+      },
+      "turn_entire_object_over": {
+        "warp_over": true,
+        "physical_old_warp_global_height_sign": 1,
+        "role_names_unchanged": true
+      }
+    }
+  ],
+  "actual_IX_run": null,
+  "actual_scene_change": null
+}

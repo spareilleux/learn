@@ -1,0 +1,219 @@
+{
+  "schema": "streeling.audio-comparison.data-audit.v1",
+  "verdict": "pass",
+  "check_count": 22,
+  "checks": [
+    {
+      "id": "source_hash_ga-lib.rs",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "2d4155cbfe26c4074ea701d0abb7cfd727fa4648d4d5109347fa442656e1f943",
+      "expected": "2d4155cbfe26c4074ea701d0abb7cfd727fa4648d4d5109347fa442656e1f943"
+    },
+    {
+      "id": "source_hash_ga-audioEngine.js",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "d8b72ae1b4a1d347733f7788500b9d6117130aae256301b15099850fbbd98d7a",
+      "expected": "d8b72ae1b4a1d347733f7788500b9d6117130aae256301b15099850fbbd98d7a"
+    },
+    {
+      "id": "source_hash_ga-guitar-worklet.js",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "f76c722f16991d17f4b6202a30707af943fdc6c218bb1c960c43c85598da37f0",
+      "expected": "f76c722f16991d17f4b6202a30707af943fdc6c218bb1c960c43c85598da37f0"
+    },
+    {
+      "id": "source_hash_learn-run.mjs",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+      "expected": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848"
+    },
+    {
+      "id": "source_hash_learn-source.json",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "0b710e34f14dfec45726ae4f811a27a5c732dad70276890add5211d72ea7f338",
+      "expected": "0b710e34f14dfec45726ae4f811a27a5c732dad70276890add5211d72ea7f338"
+    },
+    {
+      "id": "source_hash_learn-results.json",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "d564b476e0fccaff1a435548b5ae795807337622fdff69fb19ce0ace0d320506",
+      "expected": "d564b476e0fccaff1a435548b5ae795807337622fdff69fb19ce0ace0d320506"
+    },
+    {
+      "id": "beating_model_boundary",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "algebraic envelope only",
+      "expected": "no measured/Hilbert/engine claim"
+    },
+    {
+      "id": "beating_identity_grid",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "max identity errors 1.1379786002407855e-14/0",
+      "expected": "1001-point algebraic identity agrees"
+    },
+    {
+      "id": "beating_zero_and_phase",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "zeros, same-phase amplitude/energy ratios, no maxima assertion",
+      "expected": "phase samples are not local-max claims"
+    },
+    {
+      "id": "zero_log_undefined",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "log envelope null at t=.25",
+      "expected": "zero is undefined, not infinite damping"
+    },
+    {
+      "id": "null_raw_comparison",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "raw/aligned RMS independently recomputed",
+      "expected": "raw and delayed aligned values agree"
+    },
+    {
+      "id": "null_gain_fit",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "g_hat=0.5",
+      "expected": "unity-aligned target is exactly 0.5 gain"
+    },
+    {
+      "id": "null_delay_units",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "2 frames at 8 kHz = .25 ms",
+      "expected": "delay conversion agrees"
+    },
+    {
+      "id": "null_silence_undefined_gain",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "zero reference energy",
+      "expected": "gain undefined despite zero residual"
+    },
+    {
+      "id": "null_tail_crop_boundary",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "6/8 prefix covered; changed index 7",
+      "expected": "crop does not establish full-buffer equality"
+    },
+    {
+      "id": "population_z_pearson",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "population z and Pearson 1",
+      "expected": "positive affine shape correlation is 1"
+    },
+    {
+      "id": "positive_affine_levels",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "raw difference remains 0.23385358667337133",
+      "expected": "normalization removes positive scale/offset"
+    },
+    {
+      "id": "negative_polarity_boundary",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "Pearson -1, absolute Pearson 1",
+      "expected": "absolute correlation loses polarity"
+    },
+    {
+      "id": "constant_undefined",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "constant correlation null",
+      "expected": "zero variance correlation undefined"
+    },
+    {
+      "id": "source_revision_boundary",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "new GA source, historical Learn lab pin, no new render",
+      "expected": "versions are not conflated"
+    },
+    {
+      "id": "historical_gate_preserved",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "historical gate failed at 0.114166 dB vs 1 dB",
+      "expected": "authored examples do not reverse result"
+    },
+    {
+      "id": "runner_boundaries",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "raw/PCM16 distinct; block checks in runtime; no new delay/gain/Pearson",
+      "expected": "finite authored comparison only"
+    }
+  ],
+  "findings": [],
+  "fix_requests": [],
+  "input_bindings": [
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/audio-comparison-2026-10-23/primary-readback.json",
+      "sha256": "00eb4a9e95bd301cdcc5eaffde60f25d8fb6742171553c01b689201ab318e0ee"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/audio-comparison-2026-10-23/beating-envelope.json",
+      "sha256": "5d97749972b417df1011452dc88f6e0d1909401b3253718878e07775db4b81c1"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/audio-comparison-2026-10-23/null-comparison.json",
+      "sha256": "14101adbc0a9a3db2d0868e9f7cbde0bb3222111a2938b402188dd4c06d87acb"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/audio-comparison-2026-10-23/normalized-shape.json",
+      "sha256": "d065fa4c72d3cd2b3a500e9840f90eeb0afe09eeb3ee9d19f35bda0c05b742b5"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/audio-comparison-2026-10-23/source-observations.json",
+      "sha256": "15e75eb6c8b4f606194e4ab24fda42bbd2133f8d49542871be776b3c923728f9"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/audio-comparison-2026-10-23/primary-reading.json",
+      "sha256": "5d9d3fc2c3556859dd216f97f7d8b6a81f2289f9972df47685ccb74fbbea1668"
+    },
+    {
+      "path": "C:/tmp/streeling-audio-comparison-inputs-20261023/ga-lib.rs",
+      "sha256": "2d4155cbfe26c4074ea701d0abb7cfd727fa4648d4d5109347fa442656e1f943"
+    },
+    {
+      "path": "C:/tmp/streeling-audio-comparison-inputs-20261023/ga-audioEngine.js",
+      "sha256": "d8b72ae1b4a1d347733f7788500b9d6117130aae256301b15099850fbbd98d7a"
+    },
+    {
+      "path": "C:/tmp/streeling-audio-comparison-inputs-20261023/ga-guitar-worklet.js",
+      "sha256": "f76c722f16991d17f4b6202a30707af943fdc6c218bb1c960c43c85598da37f0"
+    },
+    {
+      "path": "C:/tmp/streeling-audio-comparison-inputs-20261023/learn-run.mjs",
+      "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848"
+    },
+    {
+      "path": "C:/tmp/streeling-audio-comparison-inputs-20261023/learn-source.json",
+      "sha256": "0b710e34f14dfec45726ae4f811a27a5c732dad70276890add5211d72ea7f338"
+    },
+    {
+      "path": "C:/tmp/streeling-audio-comparison-inputs-20261023/learn-results.json",
+      "sha256": "d564b476e0fccaff1a435548b5ae795807337622fdff69fb19ce0ace0d320506"
+    }
+  ],
+  "history": [
+    {
+      "status": "resolved",
+      "note": "Independent fixed-data arithmetic and source/version audit; no native render, playback, browser capture, or producer-script reuse."
+    }
+  ]
+}

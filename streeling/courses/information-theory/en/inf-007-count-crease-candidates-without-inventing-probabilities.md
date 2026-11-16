@@ -1,0 +1,80 @@
+---
+module_id: inf-007-count-crease-candidates-without-inventing-probabilities
+department: information-theory
+course: "Count Crease Candidates without Inventing Probabilities"
+level: intermediate
+prerequisites: ["inf-001-entropy-of-governance", "phy-010-check-local-flat-fold-angles"]
+estimated_duration: "40 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Count Crease Candidates without Inventing Probabilities
+
+> **Draft scope.** Authored exhaustive labeled assignments and explicit probability models, with pinned source inspection. Human technical, fluent-language and learner reviews and deployed course HTML verification remain pending. No agent success rate, complete origami solve, Rust run or scene export was measured.
+
+## The project question
+
+A craft-search agent reports that a constraint removed half its candidates. How much uncertainty did that remove, and what does a surviving candidate mean? Use the degree-four neighborhood from [PHY-010](../../physics/en/phy-010-check-local-flat-fold-angles.md): cyclic sectors 60, 90, 120 and 90 degrees, with crease labels e0 through e3. The geometric angular condition is fixed and satisfied; only the mountain/valley labels vary.
+
+The [pinned IX local helper](https://github.com/GuitarAlchemist/ix/blob/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/local.rs) implements angle and count filters, not the extra smallest-angle rule used in this teaching calculation. The [enumeration record](../../../../code/streeling/evidence/origami-local-2026-10-22/assignment-enumeration.json) lists all candidates and both predicates separately. It is not the output of a complete solver.
+
+## 1. Count labeled choices before filtering
+
+Each of four creases has two binary choices, giving `2^4=16` labeled strings. Keep crease identity: permuting labels can change whether they border the smallest angle. We do not quotient by symmetry or identify a string with its mountain/valley inversion.
+
+Now explicitly choose an authored uniform distribution over those strings. Each has probability `1/16`; Shannon entropy is 4 bits. The [primary entropy definition](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf#page=11) uses a negative probability-weighted logarithmic sum. With base 2, `H(X)=-sum(p_i*log2(p_i))`; a uniform set of N choices gives `log2(N)`. Counting possibilities alone does not establish the actual distribution of an agent or a physical process.
+
+### Practice exercise 1: declare the ensemble
+
+How many labeled assignments exist, and what entropy follows under the authored uniform prior? Would the same count alone prove that a real agent samples every string equally often?
+
+> **Answer:** There are 16 assignments, with probability `1/16` each and entropy 4 bits under the declared prior. The count does not establish a real sampling distribution; equal probabilities are an explicit classroom assumption.
+
+## 2. Condition on stated filters
+
+Maekawa's count condition keeps assignments with three mountains and one valley, or the inverse. There are `4+4=8`. Conditioning the uniform prior on this event gives probability `1/8` per surviving string and entropy 3 bits.
+
+The strict 60-degree minimum lies between e0 and e1. Applying the additional necessary opposite-label rule retains four count survivors: `MVMM`, `MVVV`, `VMMM` and `VMVV`. Conditional on both passes, each has probability `1/4` and the entropy is 2 bits. This is a reduction along the accepted branch. A survivor means it passed the named filters; it is not an exported folded state, a measured physical success, or proof of global feasibility.
+
+### Practice exercise 2: count the two reductions
+
+Give the count and conditional uniform entropy after the count filter and after both filters. Why would calling the first eight candidates “eight verified folds” be wrong?
+
+> **Answer:** The count filter leaves 8 candidates and 3 bits; both filters leave 4 and 2 bits. The first set includes assignments such as `MMMV` that violate the extra smallest-angle restriction. Neither filter stage supplies a full folded-state witness or physical observation, so eight count survivors are not eight verified folds.
+
+## 3. Keep cardinality separate from entropy
+
+For those same four final candidate identities, choose a different authored distribution: probabilities `1/2`, `1/4`, `1/8` and `1/8` in the listed order. Its entropy is 1.75 bits, while the uniform distribution over the same identities has 2 bits. The number of states has not changed.
+
+The [fixed information record](../../../../code/streeling/evidence/origami-local-2026-10-22/candidate-information.json) retains both distributions. Without probability evidence, `log2(N)` is the maximum entropy over N possibilities, not an observed entropy. Conversely, a low entropy does not certify that the likely candidate is correct or manufacturable.
+
+### Practice exercise 3: calculate a skew distribution
+
+Calculate entropy for probabilities `1/2`, `1/4`, `1/8` and `1/8`. What is the cardinality-based upper bound? Does the gap measure a folding-quality improvement?
+
+> **Answer:** The contributions are `0.5+0.5+0.375+0.375=1.75` bits. The upper bound for four states is 2 bits. The gap reflects this authored probability concentration, not better folding quality, observed agent calibration or a physical result.
+
+## 4. Separate a selected branch from the average
+
+The deterministic teaching classifier emits one of three labels. Eight strings fail the count rule; four pass the count but fail the smallest-angle rule; four survive both. Under the uniform prior these label probabilities are `1/2`, `1/4` and `1/4`.
+
+The average remaining assignment entropy after learning that coarse label is `0.5*3+0.25*2+0.25*2=2.5` bits. The label itself carries 1.5 bits, and `4=1.5+2.5`. Selecting only the accepted branch leaves 2 bits, but that branch is not the average over all inputs. Reporting a 2-bit average reduction by looking only at accepted inputs would change the conditioning silently.
+
+### Practice exercise 4: include rejected branches
+
+Compute the expected remaining entropy using the three bucket sizes and probabilities. What is the average information in the coarse label? Why is the accepted branch's 2-bit remainder a different statistic?
+
+> **Answer:** The expected remainder is 2.5 bits, so the label carries `4-2.5=1.5` bits on average. The accepted branch's 2-bit remainder is conditional on that particular event, whose prior probability is `1/4`; it is not the weighted average across the rejected and accepted branches.
+
+## 5. Preserve identities and predicate meaning in a handoff
+
+A coarse pass label cannot reconstruct which assignment passed. In the eight-member count-survivor set, a uniform conditional description still has 3 bits of assignment uncertainty. An agent that needs to place particular creases must retain the actual labeling and geometry, rather than receive only “local checks passed.” Unknown `U` in the [pinned FOLD specification](https://raw.githubusercontent.com/edemaine/fold/824f9fa6f944248787b0b2077ef622761489201e/doc/spec.md) is a different input category; it does not automatically mean a fair binary draw over M and V.
+
+A proposed high-level handoff can state the candidate identities, coordinate order, tested predicates, skipped domains and explicit probability model where one exists. This is an information-preservation task, not a requirement to build a new language. A plain typed report may suffice. Measure actual selection errors or search cost before claiming that a DSL or a smaller candidate set improved the agentic process.
+
+### Practice exercise 5: repair an information-poor summary
+
+An agent sends only “count passed; eight possibilities; 3 bits,” while the recipient needs to select a specific labeled crease pattern. What was lost, and which assumption gives the 3 bits? Can an unknown input label be treated as the same probability model automatically?
+
+> **Answer:** The particular assignment and its relation to the geometric crease IDs were lost. Three bits describes the conditional uniform ensemble over the eight count survivors, not an observed distribution. An unknown label supplies neither a probability prior nor a completed assignment. Send the identities and predicate scope, and state or leave unknown the probability model; full folding and scene outcomes remain unobserved.

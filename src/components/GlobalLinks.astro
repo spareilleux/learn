@@ -1,0 +1,23 @@
+---
+const { lang } = Astro.locals.starlightRoute;
+const locale = lang.startsWith('fr') ? 'fr' : lang.startsWith('es') ? 'es' : 'en';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+const home = base + (locale === 'en' ? '' : locale + '/');
+const labels = {
+ en: ['Global navigation', 'Home', 'All courses', 'Method', 'Artifacts', 'Streeling University', 'courses'],
+ fr: ['Navigation globale', 'Accueil', 'Tous les cours', 'Méthode', 'Artefacts', 'Université Streeling', 'cours'],
+ es: ['Navegación global', 'Inicio', 'Todos los cursos', 'Método', 'Artefactos', 'Universidad Streeling', 'cursos'],
+}[locale];
+const links = [[labels[1], home], [labels[2], home + '#' + labels[6]], [labels[3], home + 'method/'], [labels[4], home + 'artifacts/'], [labels[5], home + 'streeling/']];
+---
+<nav class="global-links" aria-label={labels[0]}>
+ <strong>{labels[0]}</strong>
+ <ul>{links.map(([label, href]) => <li><a href={href}>{label}</a></li>)}</ul>
+</nav>
+<style>
+ .global-links { padding-bottom: .75rem; border-bottom: 1px solid var(--sl-color-hairline); }
+ strong { color: var(--sl-color-white); }
+ ul { list-style: none; padding: 0; margin: .5rem 0 0; }
+ a { display: flex; align-items: center; min-height: 2.75rem; padding: .35rem .75rem; border-radius: .35rem; color: var(--sl-color-text); text-decoration: none; }
+ a:hover, a:focus-visible { background: var(--sl-color-gray-6); color: var(--sl-color-text-accent); }
+</style>

@@ -1,0 +1,126 @@
+{
+  "assertion_count": 24,
+  "assertions": [
+    {
+      "id": "bind-success",
+      "observed": "Ok \u0022ready:11\u0022",
+      "passed": true
+    },
+    {
+      "id": "bind-success-trace",
+      "observed": "[\u0022double\u0022; \u0022increment\u0022]",
+      "passed": true
+    },
+    {
+      "id": "bind-error",
+      "observed": "Error (DomainError \u0022invalid-pitch\u0022)",
+      "passed": true
+    },
+    {
+      "id": "bind-error-trace",
+      "observed": "[]",
+      "passed": true
+    },
+    {
+      "id": "bind-associativity-5",
+      "observed": "Ok \u0022note:5\u0022",
+      "passed": true
+    },
+    {
+      "id": "bind-associativity--1",
+      "observed": "Error (DomainError \u0022nonpositive-note\u0022)",
+      "passed": true
+    },
+    {
+      "id": "map-error",
+      "observed": "Error (DomainError \u0022wrapped: DomainError: invalid-pitch\u0022)",
+      "passed": true
+    },
+    {
+      "id": "map-error-success",
+      "observed": "Ok 42",
+      "passed": true
+    },
+    {
+      "id": "option-present-zero",
+      "observed": "Ok 0",
+      "passed": true
+    },
+    {
+      "id": "option-absent",
+      "observed": "Error (DomainError \u0022missing-note\u0022)",
+      "passed": true
+    },
+    {
+      "id": "option-present-invalid",
+      "observed": "Error (DomainError \u0022nonpositive-note\u0022)",
+      "passed": true
+    },
+    {
+      "id": "erased-errors",
+      "observed": "[None; None]",
+      "passed": true
+    },
+    {
+      "id": "captured-io",
+      "observed": "[\u0022fixture-io\u0022; \u0022System.IO.IOException\u0022]",
+      "passed": true
+    },
+    {
+      "id": "fanout-empty",
+      "observed": "Ok []",
+      "passed": true
+    },
+    {
+      "id": "fanout-all-success",
+      "observed": "Ok [100; 300]",
+      "passed": true
+    },
+    {
+      "id": "fanout-partial-successes",
+      "observed": "[100; 300]",
+      "passed": true
+    },
+    {
+      "id": "fanout-partial-errors",
+      "observed": "[DomainError \u0022missing-branch\u0022]",
+      "passed": true
+    },
+    {
+      "id": "fanout-all-failed-counts",
+      "observed": "[0; 2]",
+      "passed": true
+    },
+    {
+      "id": "fanout-all-failed-order",
+      "observed": "[DomainError \u0022left\u0022; DomainError \u0022right\u0022]",
+      "passed": true
+    },
+    {
+      "id": "zip-both-failed",
+      "observed": "Error (DomainError \u0022left\u0022)",
+      "passed": true
+    },
+    {
+      "id": "zip-started-branches",
+      "observed": "[\u0022left\u0022; \u0022right\u0022]",
+      "passed": true
+    },
+    {
+      "id": "zip-both-success",
+      "observed": "Ok (2, 3)",
+      "passed": true
+    },
+    {
+      "id": "fanout-wrapped-exception",
+      "observed": "([1], \u0022wrapped\u0022, \u0022System.IO.IOException\u0022)",
+      "passed": true
+    },
+    {
+      "id": "fanout-unwrapped-exception-escapes",
+      "observed": "true",
+      "passed": true
+    }
+  ],
+  "scope": "Pinned GaAsync source executed in F# Interactive; synthetic inputs, no GA host or agent fleet."
+}

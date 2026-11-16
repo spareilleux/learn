@@ -1,0 +1,287 @@
+{
+  "checked_at_utc": "2026-10-25T19:15:19.559906+00:00",
+  "source_catalog_base": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+  "plan_commit": "894486c7e69af7a161d8f75d32a27f7972d1ebce",
+  "source_freeze_commit": "82353eaaded070e1c36716301f87808b1003a7f4",
+  "scope": "Fifty distinct project-useful courses with full EN/FR/ES sources; fixed authored cases and independent AI review. No new production engine, scene, material, listening or learner acceptance.",
+  "new_english_modules": 50,
+  "new_translations": 100,
+  "canonical_sources": 150,
+  "localized_exercise_answer_pairs": 750,
+  "prepared_learner_criteria": 250,
+  "independent_review": {
+    "a": {
+      "courses": 18,
+      "localized_sources": 54,
+      "exercise_answer_pairs": 270,
+      "learner_criteria": 90,
+      "model_control_checks": 36,
+      "receipt": "review-a.json",
+      "receipt_sha256": "fd91998e81d7e896f29fe8992d62f9537771be1b346f264d7d9d98abf75378ac"
+    },
+    "b": {
+      "courses": 16,
+      "localized_sources": 48,
+      "exercise_answer_pairs": 240,
+      "learner_criteria": 80,
+      "model_control_checks": 32,
+      "receipt": "review-b.json",
+      "receipt_sha256": "0c120bc9711a32e9362249e47edbc2fe885fd4df3d7c52eda55bf1557c5d8628"
+    },
+    "c": {
+      "courses": 16,
+      "localized_sources": 48,
+      "exercise_answer_pairs": 240,
+      "learner_criteria": 80,
+      "model_control_checks": 32,
+      "receipt": "review-c.json",
+      "receipt_sha256": "27e38ad6fddc604ad727a55a59d3a582f8e8ef9fd3b6d43253282cd4c3a06322"
+    }
+  },
+  "independent_model_control_checks": 100,
+  "claim_tests": {
+    "receipt": "test-runs/integrated-final.json",
+    "receipt_sha256": "590d56c1f70e4720aee92c110333e28977b18c31bb329e1cbf123d97fb5b2142",
+    "tests": 50,
+    "observations": 100,
+    "complete_coverage": true
+  },
+  "metadata_tests": {
+    "receipt": "test-runs/metadata-final.json",
+    "receipt_sha256": "5bc8fa007fefc452d853c2451dd8abdfae2b463a34a4efa9cc808fa6386202e4",
+    "passed": 150,
+    "failed": 0
+  },
+  "test_code_review": {
+    "status": "complete",
+    "verdict": "pass",
+    "open_findings": [],
+    "review_receipt": {
+      "path": "C:/tmp/ce-batch50b-quality-20261025/ce-code-review/20261025-b-proof-tests/review.json",
+      "sha256": "7bfc1562414ec31cf6b26bea048b78315fea79e1f27dc1e19ac520cd937865d3"
+    },
+    "test_bindings": [
+      {
+        "path": "code/streeling/evidence/batch50-2026-10-25-b/tests/test_unit_a.py",
+        "sha256": "94f5044d78be4fde078e1762f0577efadf3590c1a4f3630b2aebc644868f4171"
+      },
+      {
+        "path": "code/streeling/evidence/batch50-2026-10-25-b/tests/test_unit_b.py",
+        "sha256": "9937e53d2ace35e5290c075fbb50e29e1bad4e21d025d9635e0b09f4820baa18"
+      },
+      {
+        "path": "code/streeling/evidence/batch50-2026-10-25-b/tests/test_unit_c.py",
+        "sha256": "69a59d7a79420b0ff34acc015f853a8ef6c9201bca497a1f437c4dbfecf932ab"
+      },
+      {
+        "path": "code/streeling/evidence/batch50-2026-10-25-b/tests/test_course_metadata.mjs",
+        "sha256": "d647cc7c3b9c4dedc988d0de021401522620e6c564a1239f0666470a36a36535"
+      }
+    ],
+    "retained_review_artifacts": [
+      {
+        "path": "C:/tmp/ce-batch50b-quality-20261025/ce-code-review/20261025-b-proof-tests/adversarial.json",
+        "sha256": "b6aa297f2b4a9cc57d4e5595a94882ea18715fe346ff40dc5e2a59d85789f23a"
+      },
+      {
+        "path": "C:/tmp/ce-batch50b-quality-20261025/ce-code-review/20261025-b-proof-tests/correctness-analysis.md",
+        "sha256": "c7bfb87c31cc7689825be3a862dbf739c5001a934bd88c721f7df2df518e8b86"
+      },
+      {
+        "path": "C:/tmp/ce-batch50b-quality-20261025/ce-code-review/20261025-b-proof-tests/correctness.json",
+        "sha256": "1156cadb603db67d9f0eeaa3e67139816aeacf17006bda58f9056475e1c71a9c"
+      },
+      {
+        "path": "C:/tmp/ce-batch50b-quality-20261025/ce-code-review/20261025-b-proof-tests/cross-model-capability-probe-raw.json",
+        "sha256": "64a6582a1e1ca36703202f4485a42dd22b73edfc60c93ed36cf616f19ffa6280"
+      },
+      {
+        "path": "C:/tmp/ce-batch50b-quality-20261025/ce-code-review/20261025-b-proof-tests/cross-model-route-receipt.json",
+        "sha256": "9132bf3656fb56710c1fdf3f35928381d7a6e679096539dc153f242066ecc9ec"
+      },
+      {
+        "path": "C:/tmp/ce-batch50b-quality-20261025/ce-code-review/20261025-b-proof-tests/intent.md",
+        "sha256": "8d1221cb6ed586a4a0bdeff6b926efa409bcebc413725cabff65a1c8ff7f37b3"
+      },
+      {
+        "path": "C:/tmp/ce-batch50b-quality-20261025/ce-code-review/20261025-b-proof-tests/metadata.json",
+        "sha256": "ec983ae247cc51be2eed3e23677a16bdba89f9902bd5728cf0aac26cd89be207"
+      },
+      {
+        "path": "C:/tmp/ce-batch50b-quality-20261025/ce-code-review/20261025-b-proof-tests/review.diff",
+        "sha256": "8f989ff240463f7b0f6b84ce2366b741f735efa08f852f1eafb188b8f305dcf1"
+      },
+      {
+        "path": "C:/tmp/ce-batch50b-quality-20261025/ce-code-review/20261025-b-proof-tests/review.json",
+        "sha256": "7bfc1562414ec31cf6b26bea048b78315fea79e1f27dc1e19ac520cd937865d3"
+      },
+      {
+        "path": "C:/tmp/ce-batch50b-quality-20261025/ce-code-review/20261025-b-proof-tests/scope-probe-failure.log",
+        "sha256": "4e92a94374a4e764d77467d3dc944d7e3da695671c66f6a7af31965ee7b1ed22"
+      },
+      {
+        "path": "C:/tmp/ce-batch50b-quality-20261025/ce-code-review/20261025-b-proof-tests/scope-resolution.md",
+        "sha256": "002f4d5850a55f8bb3daabd9fe3b76f1bc286a44b6a5c4103643d558542a6020"
+      },
+      {
+        "path": "C:/tmp/ce-batch50b-quality-20261025/ce-code-review/20261025-b-proof-tests/scope-signals.json",
+        "sha256": "e65234a114d5e717f9ab2856e58c7b74caea4ac22df7944917ff80e00ceb949b"
+      },
+      {
+        "path": "C:/tmp/ce-batch50b-quality-20261025/ce-code-review/20261025-b-proof-tests/stages.jsonl",
+        "sha256": "c86c2b251c38bdadfc6f5675d85386661bdc73a06521414425927061274eec5a"
+      },
+      {
+        "path": "C:/tmp/ce-batch50b-quality-20261025/verification.json",
+        "sha256": "7851defa8cd6e7c8d5b40f38ca93d23d70ea924cb3b55941af530fc2af92d39a"
+      }
+    ],
+    "artifact_list": {
+      "path": "C:/tmp/ce-batch50b-quality-20261025/code-review-artifact-list.json",
+      "sha256": "494684486a517cd24f5828fe8bdbde73639e78d4312645e404d5d6c1dd15a701"
+    },
+    "coverage": {
+      "depth": "focused",
+      "scope": "Exact three staged Python additions plus unchanged metadata checker supporting context. No whole-branch review.",
+      "criteria": [
+        "AGENTS.md",
+        "CLAUDE.md (@AGENTS.md)"
+      ],
+      "criteria_basis": "Instruction-file fallback; exact ancestors checked and no governing CODING_STANDARDS.md found.",
+      "compound_packs": "No declared packs; none applied.",
+      "not_assessed": [
+        "learnings",
+        "agent-native gaps",
+        "deployment notes",
+        "production engine behavior",
+        "learner/human/musician acceptance",
+        "language fluency",
+        "publication/spec refresh caller gates"
+      ],
+      "independent_read": "One separately dispatched native adversarial reviewer, same serving family; no cross-model corroboration claimed.",
+      "validator": "No validator or finish leaves run on the installed focused path.",
+      "verification": "Authoritative unchanged exact-hash receipts: integrated-final 50 tests/100 observations, metadata-final 150 passed, generator-initial 18 passed; all exit 0 and full-log hashes verified.",
+      "lint_typecheck": "No package lint or typecheck script configured.",
+      "scope_helper_adaptation": "Direct bundled --paths invocation failed. External scope-adapter.py executes actual bundled helper algorithm and appends only four exact pathspecs to its read-only git diff queries; not an unmodified bundled invocation. Source/hash, query list, failure log and raw output retained.",
+      "cross_model": "adversarial lens: in-process fallback (cross-model peer not run: current installed worker stages the whole-tree base diff and cannot honor the four-file egress boundary)",
+      "source_boundary": "Tests characterize actual fixed packet values; no claim that executing their local model constitutes production or learner validation.",
+      "observation_limits": "50 authored model cases and 50 authored controls; not a general validator or exhaustive engine test suite."
+    },
+    "peer": {
+      "outcome": "in-process-fallback",
+      "coverage": "adversarial lens: in-process fallback (cross-model peer not run: current installed worker stages the whole-tree base diff and cannot honor the four-file egress boundary)"
+    },
+    "terminal_outcomes": {
+      "simplify_reuse": "complete; 1 optional candidate skipped (protected/unchanged proof file)",
+      "simplify_quality": "complete; 1 optional candidate skipped (protected helper; alternate source supports probes)",
+      "simplify_efficiency": "complete; 1 optional candidate skipped (protected/unchanged proof file)",
+      "simplify_test_value": "complete; no findings",
+      "simplify_comments": "complete; 8 groups skipped (protected proof files)",
+      "scope_helper": "direct path-selector probe failed; actual algorithm completed through explicitly recorded bounded external adapter",
+      "cross_model": "not started; fresh installed capability inspection establishes scope failure before egress",
+      "correctness": "complete; no findings",
+      "native_adversarial": "complete; no findings",
+      "review": "complete; focused; no open findings"
+    },
+    "scope_adapter": {
+      "path": "C:/tmp/ce-batch50b-quality-20261025/scope-adapter.py",
+      "sha256": "745d0d12807c2a0f875edd99e9bd70ec9f9d15a184799386bff376b9d8a2e736"
+    },
+    "scope_adapter_queries": {
+      "path": "C:/tmp/ce-batch50b-quality-20261025/scope-git-queries.json",
+      "sha256": "fe9998eddf45ebfd440e894ee46776615b54d3f78355d2c1a21f7945e22004ae"
+    },
+    "simplification_summary_external_only": {
+      "path": "C:/tmp/ce-batch50b-quality-20261025/simplify-step5.md",
+      "sha256": "cbb9ce3e23bd6c0fdcd5e9bad3f07f2d7b55247b2db187214db68aafe0ea6749"
+    },
+    "mutations": "No canonical file/index/branch/commit changes by this review unit."
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 13.359716399980243,
+    "log": "C:\\tmp\\streeling-batch50-tests-20261025-b.log",
+    "log_sha256": "96727f6f844b5925ca4bcc8aa5a65fc77359027e8684d80597ab3d7c52fca4f3",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 6.6024246999877505,
+    "log": "C:\\tmp\\streeling-batch50-sync-20261025-b.log",
+    "log_sha256": "a8b7c2ad3dc1abe46660c24a1b41ac36a773a3c645f543143cfcf4809b18da0a",
+    "idempotent_checked_files": 1370
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 158.34154399996623,
+    "log": "C:\\tmp\\streeling-batch50-build-20261025-b.log",
+    "log_sha256": "14354bdb0414ace4ba224b6cb14ef096f30079382b71940654986a9244478d8e",
+    "pages": 2566,
+    "dependency_install": "None; existing complete matching-lock dependency tree."
+  },
+  "rendered_articles": {
+    "pages": 210,
+    "article_links": 4818,
+    "source_banners": 150,
+    "unresolved_internal_links": [],
+    "missing_controls_detected": true,
+    "scope": "Built static HTML, not interactive browser or public deployment."
+  },
+  "official_link_transport": {
+    "urls": 39,
+    "direct_failures_retained": 0,
+    "official_body_read_fallbacks": 0,
+    "actual_reading": "Per-unit author and independent-review records; not inferred from status200."
+  },
+  "source_inventory": {
+    "core_english_modules": 431,
+    "target": 525,
+    "remaining_core_source_gaps": 94,
+    "locale_counts": {
+      "en": 432,
+      "fr": 432,
+      "es": 432
+    }
+  },
+  "protected_files_unchanged": [
+    "streeling/source.json"
+  ],
+  "journal_history_preserved": true,
+  "human_technical": null,
+  "artisan_musician": null,
+  "fluent_language": null,
+  "learner_attempts": null,
+  "new_native_runtime": null,
+  "new_scene_runtime": null,
+  "physical_material_trial": null,
+  "listening_trial": null,
+  "new_DSL": null,
+  "public_course_html_readback": null,
+  "lint_typecheck": "No configured package lint/typecheck script; generator regressions and Astro build used.",
+  "displayed_executable_models_match_executed_packets": {
+    "sources": 150,
+    "receipt": "model-text-consistency.json",
+    "receipt_sha256": "d80a64ed74310c491981403b6fc3183a30f31ff72fce43022d8a6338ddd96cd9"
+  }
+}

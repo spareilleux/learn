@@ -1,0 +1,52 @@
+{
+  "code": "NET017",
+  "status": "resolved",
+  "before": "dont l’ensemble commun des candidats est plus petit",
+  "after": "dont la réunion des ensembles de candidats compte moins de workers que ce sous-ensemble ne compte de rôles",
+  "reason": "Hall obstruction counts the union of the candidate sets; French commun could be read as intersection. Candidate coverage remains true and maximum matching remains 2; no mathematical packet value changed.",
+  "snapshots": [
+    {
+      "original": {
+        "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/unit-b.json",
+        "sha256": "d8939ceb9fc9f0bb05fe387d4d542712098fcc563a4edd795844011a786f12a6"
+      },
+      "retained": {
+        "path": "C:/tmp/batch25b-b-review/originals/code/streeling/evidence/batch50-2026-10-25-b/unit-b.json",
+        "sha256": "d8939ceb9fc9f0bb05fe387d4d542712098fcc563a4edd795844011a786f12a6"
+      }
+    },
+    {
+      "original": {
+        "path": "C:/tmp/learn-streeling-craft-transfer-20261022/streeling/courses/network-science/fr/net-017-match-simultaneous-roles-without-double-booking.fr.md",
+        "sha256": "e6d0d0cfeebf9448faf94b1b090a665321350a67cb8060ae2b0ebe926fde8c7d"
+      },
+      "retained": {
+        "path": "C:/tmp/batch25b-b-review/originals/streeling/courses/network-science/fr/net-017-match-simultaneous-roles-without-double-booking.fr.md",
+        "sha256": "e6d0d0cfeebf9448faf94b1b090a665321350a67cb8060ae2b0ebe926fde8c7d"
+      }
+    },
+    {
+      "original": {
+        "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/tests/test_unit_b.py",
+        "sha256": "9937e53d2ace35e5290c075fbb50e29e1bad4e21d025d9635e0b09f4820baa18"
+      },
+      "retained": {
+        "path": "C:/tmp/batch25b-b-review/originals/code/streeling/evidence/batch50-2026-10-25-b/tests/test_unit_b.py",
+        "sha256": "9937e53d2ace35e5290c075fbb50e29e1bad4e21d025d9635e0b09f4820baa18"
+      }
+    }
+  ],
+  "final_source": {
+    "path": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\streeling\\courses\\network-science\\fr\\net-017-match-simultaneous-roles-without-double-booking.fr.md",
+    "sha256": "a6385879f2dd8d1eb116003f3891f5549272c46171658089d6aba072c019d40a"
+  },
+  "final_packet": {
+    "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/unit-b.json",
+    "sha256": "870f170bc512ac5f1e3959849bd85f10981f05c926997c49ce99f729628a105b"
+  },
+  "author_self_check_unchanged": true,
+  "intermediate_source": {
+    "path": "C:\\tmp\\batch25b-b-review\\intermediate-union-clarification.fr.md",
+    "sha256": "436b69397645a83d7fc10b5cac6ca625032f285634b26280a9019403df1ba2f9"
+  }
+}

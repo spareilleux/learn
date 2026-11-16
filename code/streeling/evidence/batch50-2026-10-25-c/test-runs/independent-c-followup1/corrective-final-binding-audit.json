@@ -1,0 +1,89 @@
+{
+  "observed_at": "2026-10-29",
+  "kind": "Corrective final-byte audit after invalidating C-PIN-01",
+  "counts": {
+    "courses": 16,
+    "sources": 48,
+    "answers": 240,
+    "criteria": 80,
+    "calculations": 32
+  },
+  "binding_mismatches": [],
+  "actual_nonempty_historical_paths": [
+    {
+      "path": "streeling/courses/data-visualization/en/dv-014-plot-signed-craft-clearance.md",
+      "bytes": 6074,
+      "sha256": "7ec3a671d90b07a3ee78f05c3f2463fb7842a0976a70069ff598c32674b63eb3",
+      "all_commands_exit_zero": true,
+      "size_show_catfile_agree": true
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-006-position-length-area-comparisons.md",
+      "bytes": 11033,
+      "sha256": "8b04fc5c3b037f53310594333684c36fa0bb1b9efb5592b45db5f0f55e4bae7d",
+      "all_commands_exit_zero": true,
+      "size_show_catfile_agree": true
+    },
+    {
+      "path": "streeling/courses/futurology/en/fut-010-project-weave-density-before-a-scene-expansion.md",
+      "bytes": 6324,
+      "sha256": "f2798dbc094190d03fcb003da03fd1065b9039e143c40bc0ad3b948668e7fea9",
+      "all_commands_exit_zero": true,
+      "size_show_catfile_agree": true
+    },
+    {
+      "path": "streeling/courses/futurology/en/fut-013-bound-a-future-craft-workflow-by-its-serial-fraction.md",
+      "bytes": 7191,
+      "sha256": "31fb73dcefcae165f8bf262627863e02cfcd737276d7a8dc22e23b1808eb9397",
+      "all_commands_exit_zero": true,
+      "size_show_catfile_agree": true
+    },
+    {
+      "path": "streeling/courses/futurology/en/fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario.md",
+      "bytes": 7266,
+      "sha256": "00562dd42c9d7afa4359a3e6e2622d322f93b345eb9531c7cff4e3c7a942869e",
+      "all_commands_exit_zero": true,
+      "size_show_catfile_agree": true
+    },
+    {
+      "path": "streeling/courses/futurology/en/fut-008-stress-test-a-release-plan-against-review-backlogs.md",
+      "bytes": 6231,
+      "sha256": "cd4c36223781dbfc4f79a7764566cebe8512df5ae8075a868569c6a5bb0b8c6b",
+      "all_commands_exit_zero": true,
+      "size_show_catfile_agree": true
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core.md",
+      "bytes": 7207,
+      "sha256": "13f8488c338e67cc9628e2bae2ae35d166f0d0cb815fb7e3c3b9bb4c07210d1f",
+      "all_commands_exit_zero": true,
+      "size_show_catfile_agree": true
+    }
+  ],
+  "packet_byte_identical_to_original_author": true,
+  "focused": {
+    "exit": 0,
+    "tests": 16,
+    "observations": 32
+  },
+  "mutation_probe": {
+    "exit": 0,
+    "rejected": true
+  },
+  "final_packet": {
+    "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-c/unit-c.json",
+    "sha256": "bca15c52393ab47680db75bb904f75ef7dbb5df006a9975b9fe63a4b176edad4"
+  },
+  "final_review": {
+    "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-c/review-c.json",
+    "sha256": "5ca0d3fd60332ff30cfe34d911c04de6e29888351a0e92fd3a0f459ae3e1cd3a"
+  },
+  "unchanged_test": {
+    "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_c.py",
+    "sha256": "481167b61423dd6cbbff69304ba6850c0b76cbe18e1c0aaf9103f8a264c1a4d1"
+  },
+  "original_artifact_list": {
+    "path": "C:/tmp/batch25c-c-review/artifact-list.json",
+    "sha256": "f76d0866e6ee7b31f7805be53e896ff546c3f5722684e649a28d9d629acc0e85"
+  }
+}

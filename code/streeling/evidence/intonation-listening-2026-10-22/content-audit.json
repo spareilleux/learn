@@ -1,0 +1,963 @@
+{
+  "audit": "Independent AI course/content review",
+  "checked_at_utc": "2026-10-22T18:37:52.869388+00:00",
+  "verdict": "pass_with_declared_evidence_limits",
+  "coverage": {
+    "modules": 3,
+    "locales": [
+      "en",
+      "fr",
+      "es"
+    ],
+    "course_sources": 9,
+    "exercise_answer_pairs": 45,
+    "learner_criteria": 15
+  },
+  "method": [
+    "Substantively read all nine source pages and all45exercise-answer pairs, not only mechanical parity.",
+    "Read all15prepared criteria and learner-task prompts; reviewed explanatory progression and distinct project decisions.",
+    "Independently opened the five cited primary pages, read relevant immutable GA definitions and verified eight pinned-source hashes.",
+    "Recomputed selected cent/projection/mask/period/binomial/selection values and checked PCM headers; reviewed figure visually without audio playback.",
+    "Checked prerequisites, first official-source links, numerical/code/link parity and source encoding."
+  ],
+  "findings": [],
+  "source_bindings": [
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-004-preserve-intonation-beyond-pitch-classes.md",
+      "bytes": 8908,
+      "sha256": "1f43c926a8c86cd07402c0436991f13356bbd57572909825b98f57f76d545468"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/fr/wml-004-preserve-intonation-beyond-pitch-classes.fr.md",
+      "bytes": 10872,
+      "sha256": "d632600ec1c1f43bf20215a27fd15114586e7240c719fb13f5359394cee5e176"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/es/wml-004-preserve-intonation-beyond-pitch-classes.es.md",
+      "bytes": 10391,
+      "sha256": "28035a2bf26a37efc2d68685a057da7b35c5d1dd00d18b3b2acb59ce926c1d3c"
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-007-separate-beating-from-decay.md",
+      "bytes": 8779,
+      "sha256": "6f445bf7b8476d7a9cc58a30474f2ba051b759e2f6489e8479e47907fe352bf2"
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-007-separate-beating-from-decay.fr.md",
+      "bytes": 10653,
+      "sha256": "c5f28c6c95f3ff68ad4daa38cc4f50fc0191cc34a18d431f56886faf6dac8df7"
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-007-separate-beating-from-decay.es.md",
+      "bytes": 10113,
+      "sha256": "8bd5a456c20bd430044b80446020b458e8f7f1875b8f7fee857c6105b0510357"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-004-score-a-pitch-discrimination-task.md",
+      "bytes": 9138,
+      "sha256": "8f4f31ab1dc08de69d571be9b513ad30002ccdecdbaf2675a2ca9c0f3744c69e"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/fr/cog-004-score-a-pitch-discrimination-task.fr.md",
+      "bytes": 11129,
+      "sha256": "8d7fc70f056d0305c92548911ef7f4a0da4e78d89aabf809e8d08dabd7b2184d"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/es/cog-004-score-a-pitch-discrimination-task.es.md",
+      "bytes": 10669,
+      "sha256": "c8c9db84550eba3abf1faafc6b6bbed73a855a94fe0c66eb026cb8f3eea13b74"
+    }
+  ],
+  "prerequisite_bindings": [
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-002-dadgad-layout-and-cultural-claims.md",
+      "bytes": 12943,
+      "sha256": "dc1fcb416e66e68d3aceeecf741d3849a3fffd92b5188cc622e9853357bc174d"
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-001-science-of-guitar-sound.md",
+      "bytes": 11196,
+      "sha256": "966ed4c80ef436bd8519cb4d0e3c97c0d737b5acd96d64b7da0b6d92f20be36e"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-003-calibrating-fretboard-confidence.md",
+      "bytes": 14052,
+      "sha256": "9610552ea1f8bf2727e820232fa1ad17f9914feb229b4f275173d5b861561e16"
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/audio-assets.json",
+      "bytes": 2802,
+      "sha256": "67b4be3cac59e638685c675f4a413d96bb98bda362f6ff1cc405dfa4b849c872"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/beats.json",
+      "bytes": 2122,
+      "sha256": "dac4a59588f901c7d5f68a1aa86dcb2a3e5b5603f82fd7a488aabc3356ad0fb9"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/data-audit.json",
+      "bytes": 21103,
+      "sha256": "b048f1f181dceba5bc0f38b75f32f7819436d65674d1629743cba918ec16d5b5"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/execution.json",
+      "bytes": 1106,
+      "sha256": "cbd72d32a5da16399bedeabd2b8a5e4e29a584123627fec3a6dfd88e7e6ba96d"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/experiment-plan.md",
+      "bytes": 5882,
+      "sha256": "d29645e3645a8fd554f9e386aae15306aee591d5d635cf608d94c472d7f97a36"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/ga-intervals-probe.json",
+      "bytes": 398,
+      "sha256": "3cabfa681ab289c28418b7dc7fd67ad3332ad59e690e65a9063e1ef81db2c584"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/intonation.json",
+      "bytes": 2163,
+      "sha256": "88e77c28a2b03d1fab494fa2572e4a7eb1ec8414b39a57254823fb33a35d1a16"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/learner-task.md",
+      "bytes": 3071,
+      "sha256": "5ad894411ec41ea54df39929b9dc56356802a5a1c69c6ddf46da3b25d8cde639"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/official-links.json",
+      "bytes": 5461,
+      "sha256": "d0697c69327d3ab0d731972dbdd72abcc060d0fb63b1b496214439f120a013d3"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/primary-readback.json",
+      "bytes": 4883,
+      "sha256": "0ec7106b7afac21612a936ab05368724076706f201e55952d872c0d5e0cea76f"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/README.md",
+      "bytes": 4344,
+      "sha256": "3d3e519a1477f3a3f7a34eea3f17907d51409aa7992a13bb34127ecfc2f66231"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/reviewer-rubric.json",
+      "bytes": 3859,
+      "sha256": "6792a21b1f2327daa42979d0a191ba082d2f00467e771e6a6e643904ab7f987d"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/synthetic-trials.json",
+      "bytes": 4779,
+      "sha256": "2170fa26d9cc78db4f62473c2de51ca0198efd2eaecb738259039857b2977b3a"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/tone-a.wav",
+      "bytes": 88244,
+      "sha256": "c75f061087aa80e51a767ca1fbe8297eb6b5020bdc04d2cbbf73aecf1f911153"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/tone-b.wav",
+      "bytes": 88244,
+      "sha256": "fd1d82859b50a6771d56b96176507cd7641039cd35bad70d5b8e0c0722f1a63f"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/two-tone-envelope.png",
+      "bytes": 183204,
+      "sha256": "1827aa7669136735e73c8d07054fb48527353c297e36a617fb7d1ccdeb25d021"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/two-tone-illustration.wav",
+      "bytes": 352844,
+      "sha256": "ab931fd23b805edec2a493de17001923762a2583f80fb386f3cf944685a2dd5d"
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/README.md",
+      "bytes": 4704,
+      "sha256": "98e269e0d4f6e99dfe73d20bb3c8bd0a998b2c9b23ea1113a65d8ec697b7bbba"
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/validation.json",
+      "bytes": 5999,
+      "sha256": "9f364117c89cec0cbce760a74a61f40dd758a8db0deba371364308519b028afb"
+    }
+  ],
+  "pinned_primary_source_bindings": [
+    {
+      "path": "Common/GA.Business.Config/WorldScalesConfig.fs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "3e0db7dec97a358785bbb14e57000c6fc4174074399f71c17ff737d39c1d3ecd",
+      "bytes": 8019
+    },
+    {
+      "path": "Common/GA.Business.Config/WorldScales/MaqamScales.yaml",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "a01f1d1413de1ee5b066b0efcd930d9f96a3a466167157ab7a76ec22d282948c",
+      "bytes": 11566
+    },
+    {
+      "path": "Common/GA.Domain.Core/Primitives/Notes/MidiNote.cs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "3448adf415b347509d75a006415733d65ddf69da4ede2832f6edb208efbf8691",
+      "bytes": 5443
+    },
+    {
+      "path": "Common/GA.Domain.Core/Primitives/Notes/Pitch.cs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "ec2315f5e24154fd6e79ab7f730490af316dd2fb244331d30930d9ffc95ab698",
+      "bytes": 17970
+    },
+    {
+      "path": "Common/GA.Domain.Core/Instruments/Tuning.cs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "037c5b48514528d65f59a263136d4fa4d66e5b1ceae7f14453c1868978378b8a",
+      "bytes": 3329
+    },
+    {
+      "path": "Common/GA.Domain.Services/Fretboard/Analysis/FretboardPositionMapper.cs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "818a2ca2e243bcc4e922ac1a3840d6dba0ee1e85aa41172506e10a8aef0d062b",
+      "bytes": 3142
+    },
+    {
+      "path": "Common/GA.Business.DSL/Types/MidiTypes.fs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "8614a2a5d466b5bb792c50017ae7a6e09592b158f1362ac6bf8768683c428b36",
+      "bytes": 9522
+    },
+    {
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "d693e1ea1a5ca42d080c5829336bcc8423396c104ebee64d2e76ccd9bb503562",
+      "bytes": 19221
+    }
+  ],
+  "exercise_answer_checks": [
+    {
+      "module": "WML004",
+      "locale": "en",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/world-music-languages/en/wml-004-preserve-intonation-beyond-pitch-classes.md",
+      "exercise_answer_block_sha256": "4517a4f887f3e5c0665fde067bddf97f7ad2a06144bb5cb29608eb6bc037cff1",
+      "review": "Matching mask2741 establishes the chosen twelve-step pitch-class set; answer retains approximation/tradition/provenance and rejects performed equivalence."
+    },
+    {
+      "module": "WML004",
+      "locale": "en",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/world-music-languages/en/wml-004-preserve-intonation-beyond-pitch-classes.md",
+      "exercise_answer_block_sha256": "ae17267abeddcea3e2902c192fad6fa19b3b3aea9afa7325d001f9a7669684e4",
+      "review": "The cent calculation yields386.313713865 and signed offset-13.686286135; answer correctly distinguishes a constructed5:4ratio from Rast practice."
+    },
+    {
+      "module": "WML004",
+      "locale": "en",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/world-music-languages/en/wml-004-preserve-intonation-beyond-pitch-classes.md",
+      "exercise_answer_block_sha256": "8d1640072fc95d321e376dbd24faa27647d12bb0f7618909fd004eff6c1dc7ef",
+      "review": "The integer64alone loses the residual; answer proposes frequency/reference or MIDI+cents/reference as advisory examples without declaring implementation."
+    },
+    {
+      "module": "WML004",
+      "locale": "en",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/world-music-languages/en/wml-004-preserve-intonation-beyond-pitch-classes.md",
+      "exercise_answer_block_sha256": "2def2959aa4f232efd6174249d82dc62b7063c1369747bc163de4853f8533c16",
+      "review": "A floating-frequency entry demonstrates one acceptance boundary; answer requires retained target/reference/units and measured rendered pitch across actual interfaces."
+    },
+    {
+      "module": "WML004",
+      "locale": "en",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/world-music-languages/en/wml-004-preserve-intonation-beyond-pitch-classes.md",
+      "exercise_answer_block_sha256": "4f99853a8f71d26046427550bae2740faf5629b28e699311b59e08dbb0ac6117",
+      "review": "C probe returns interval names only; answer separates pinned-source observations, authored projection, live fidelity, cultural validity and listeners."
+    },
+    {
+      "module": "WML004",
+      "locale": "fr",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/world-music-languages/fr/wml-004-preserve-intonation-beyond-pitch-classes.fr.md",
+      "exercise_answer_block_sha256": "517c78687a33198142bc1b70202a166a0eae9285cab8067050aa9ed4b7efac25",
+      "review": "Matching mask2741 establishes the chosen twelve-step pitch-class set; answer retains approximation/tradition/provenance and rejects performed equivalence."
+    },
+    {
+      "module": "WML004",
+      "locale": "fr",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/world-music-languages/fr/wml-004-preserve-intonation-beyond-pitch-classes.fr.md",
+      "exercise_answer_block_sha256": "49e6aea998139ac278d7afbc4e9409be4ebfc1813ab82e46b3345417b97acb40",
+      "review": "The cent calculation yields386.313713865 and signed offset-13.686286135; answer correctly distinguishes a constructed5:4ratio from Rast practice."
+    },
+    {
+      "module": "WML004",
+      "locale": "fr",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/world-music-languages/fr/wml-004-preserve-intonation-beyond-pitch-classes.fr.md",
+      "exercise_answer_block_sha256": "392459cb9f512e112c687efc035239ad9728045f1794eb68440c559abd58ed0f",
+      "review": "The integer64alone loses the residual; answer proposes frequency/reference or MIDI+cents/reference as advisory examples without declaring implementation."
+    },
+    {
+      "module": "WML004",
+      "locale": "fr",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/world-music-languages/fr/wml-004-preserve-intonation-beyond-pitch-classes.fr.md",
+      "exercise_answer_block_sha256": "2a41674f9579515b2ea49c2533bf2e84d1a32add694a626d40e1af027f0bee92",
+      "review": "A floating-frequency entry demonstrates one acceptance boundary; answer requires retained target/reference/units and measured rendered pitch across actual interfaces."
+    },
+    {
+      "module": "WML004",
+      "locale": "fr",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/world-music-languages/fr/wml-004-preserve-intonation-beyond-pitch-classes.fr.md",
+      "exercise_answer_block_sha256": "b2321ec3ea5616e104bd406e5cdf3e60f9de9f4b362561fbc664b47cb6cc7d15",
+      "review": "C probe returns interval names only; answer separates pinned-source observations, authored projection, live fidelity, cultural validity and listeners."
+    },
+    {
+      "module": "WML004",
+      "locale": "es",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/world-music-languages/es/wml-004-preserve-intonation-beyond-pitch-classes.es.md",
+      "exercise_answer_block_sha256": "47c4659a1cee61ba6d580ed9e60936a1a17406888b7f9aa19ac61264ad976a57",
+      "review": "Matching mask2741 establishes the chosen twelve-step pitch-class set; answer retains approximation/tradition/provenance and rejects performed equivalence."
+    },
+    {
+      "module": "WML004",
+      "locale": "es",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/world-music-languages/es/wml-004-preserve-intonation-beyond-pitch-classes.es.md",
+      "exercise_answer_block_sha256": "bdb36073774e98ef91345034daeaf814dc4130fafb86ad26ba1322e143263c72",
+      "review": "The cent calculation yields386.313713865 and signed offset-13.686286135; answer correctly distinguishes a constructed5:4ratio from Rast practice."
+    },
+    {
+      "module": "WML004",
+      "locale": "es",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/world-music-languages/es/wml-004-preserve-intonation-beyond-pitch-classes.es.md",
+      "exercise_answer_block_sha256": "68d8022619328172a0ba9ce86e117ffa58a476d4a107490c0c4c43205113ad6a",
+      "review": "The integer64alone loses the residual; answer proposes frequency/reference or MIDI+cents/reference as advisory examples without declaring implementation."
+    },
+    {
+      "module": "WML004",
+      "locale": "es",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/world-music-languages/es/wml-004-preserve-intonation-beyond-pitch-classes.es.md",
+      "exercise_answer_block_sha256": "828c2d07cb68a3028a2dfefc10213feab4f2f1f2838d7519d31dd5fc5e98cb22",
+      "review": "A floating-frequency entry demonstrates one acceptance boundary; answer requires retained target/reference/units and measured rendered pitch across actual interfaces."
+    },
+    {
+      "module": "WML004",
+      "locale": "es",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/world-music-languages/es/wml-004-preserve-intonation-beyond-pitch-classes.es.md",
+      "exercise_answer_block_sha256": "c09e5fd90e758e25b9465e5eb8cca843c8f2cdec1b0acb84055bf964cab20a71",
+      "review": "C probe returns interval names only; answer separates pinned-source observations, authored projection, live fidelity, cultural validity and listeners."
+    },
+    {
+      "module": "PHY007",
+      "locale": "en",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/physics/en/phy-007-separate-beating-from-decay.md",
+      "exercise_answer_block_sha256": "3388d57aff2cfa74719bbddc05cd22610c7ea5d06f7834ed794fd8c61f69cf89",
+      "review": "Answer distinguishes signed modulation at1.297800144Hz from unsigned peaks at2.595600287Hz and recurrence0.385267333seconds."
+    },
+    {
+      "module": "PHY007",
+      "locale": "en",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/physics/en/phy-007-separate-beating-from-decay.md",
+      "exercise_answer_block_sha256": "649a9c9fa30a941fa072d496df0ef24ebcf4048a27c84438f825497759125f37",
+      "review": "Fixed-amplitude components cancel then recover; answer invalidates universal damping inference while declining physical-recording diagnosis."
+    },
+    {
+      "module": "PHY007",
+      "locale": "en",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/physics/en/phy-007-separate-beating-from-decay.md",
+      "exercise_answer_block_sha256": "1b172507f929d3c987cdd35cb89c11c4d1d62b07e95b8a5dd085d8485b10f1d8",
+      "review": "Measured dip26.357732143dB and recovery+0.000373071dB satisfy declared10dB/1dB rules; equal-frequency control supports this constructed comparison."
+    },
+    {
+      "module": "PHY007",
+      "locale": "en",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/physics/en/phy-007-separate-beating-from-decay.md",
+      "exercise_answer_block_sha256": "2f24c893a741843d43a85df057c1bc40ef40028cfe2ac4b6af7e7de4d1e492a3",
+      "review": "Answer chooses the simultaneous4second mixture for beating and separate1second tones for sequential discrimination, without inferring equal perceived loudness."
+    },
+    {
+      "module": "PHY007",
+      "locale": "en",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/physics/en/phy-007-separate-beating-from-decay.md",
+      "exercise_answer_block_sha256": "74f937bbd81c343b2d7d32cf9af60da63c07aac6ea58a5495bcaef710d71f61a",
+      "review": "Answer preserves the prior0.114166150dB-versus1dB failure and treats interference as a follow-up possibility rather than a historical diagnosis or passed gate."
+    },
+    {
+      "module": "PHY007",
+      "locale": "fr",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/physics/fr/phy-007-separate-beating-from-decay.fr.md",
+      "exercise_answer_block_sha256": "1ddd6cdd25112b869fc08a031d858a9af839b07ff8165c2cbda1e8164f71a6c2",
+      "review": "Answer distinguishes signed modulation at1.297800144Hz from unsigned peaks at2.595600287Hz and recurrence0.385267333seconds."
+    },
+    {
+      "module": "PHY007",
+      "locale": "fr",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/physics/fr/phy-007-separate-beating-from-decay.fr.md",
+      "exercise_answer_block_sha256": "e0c40aed2bc70fe83ca236edb3a5d641baa7b98d9e48c59bdd13f703897f4c3d",
+      "review": "Fixed-amplitude components cancel then recover; answer invalidates universal damping inference while declining physical-recording diagnosis."
+    },
+    {
+      "module": "PHY007",
+      "locale": "fr",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/physics/fr/phy-007-separate-beating-from-decay.fr.md",
+      "exercise_answer_block_sha256": "0ca3ace482cf463bda35d4af427e4411dcc36114a4c8648f656d90fe81247923",
+      "review": "Measured dip26.357732143dB and recovery+0.000373071dB satisfy declared10dB/1dB rules; equal-frequency control supports this constructed comparison."
+    },
+    {
+      "module": "PHY007",
+      "locale": "fr",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/physics/fr/phy-007-separate-beating-from-decay.fr.md",
+      "exercise_answer_block_sha256": "dc98b67489299f8d21144c2591eaa798e61face611928b4ff9d012bd3f8ac03b",
+      "review": "Answer chooses the simultaneous4second mixture for beating and separate1second tones for sequential discrimination, without inferring equal perceived loudness."
+    },
+    {
+      "module": "PHY007",
+      "locale": "fr",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/physics/fr/phy-007-separate-beating-from-decay.fr.md",
+      "exercise_answer_block_sha256": "f20f431620e67aae3807d3ea2687f1ddd20f291476420df527d2a1c1b42cc924",
+      "review": "Answer preserves the prior0.114166150dB-versus1dB failure and treats interference as a follow-up possibility rather than a historical diagnosis or passed gate."
+    },
+    {
+      "module": "PHY007",
+      "locale": "es",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/physics/es/phy-007-separate-beating-from-decay.es.md",
+      "exercise_answer_block_sha256": "55c6d60592ec0e08a94275447761c67cf355fb293e058bfa2025fac95f43901f",
+      "review": "Answer distinguishes signed modulation at1.297800144Hz from unsigned peaks at2.595600287Hz and recurrence0.385267333seconds."
+    },
+    {
+      "module": "PHY007",
+      "locale": "es",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/physics/es/phy-007-separate-beating-from-decay.es.md",
+      "exercise_answer_block_sha256": "800c65b950da308eac3d7cf804480933002335f55b55fda538ad65cd98b26e80",
+      "review": "Fixed-amplitude components cancel then recover; answer invalidates universal damping inference while declining physical-recording diagnosis."
+    },
+    {
+      "module": "PHY007",
+      "locale": "es",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/physics/es/phy-007-separate-beating-from-decay.es.md",
+      "exercise_answer_block_sha256": "3d163603081ad55583a7804e1c56a5d222e03ee0e5f83e89a37b612d76eb3d2b",
+      "review": "Measured dip26.357732143dB and recovery+0.000373071dB satisfy declared10dB/1dB rules; equal-frequency control supports this constructed comparison."
+    },
+    {
+      "module": "PHY007",
+      "locale": "es",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/physics/es/phy-007-separate-beating-from-decay.es.md",
+      "exercise_answer_block_sha256": "d624c8a821645a825b9cda9ac71950206329dde078d6b6fdc93b82f2edaba042",
+      "review": "Answer chooses the simultaneous4second mixture for beating and separate1second tones for sequential discrimination, without inferring equal perceived loudness."
+    },
+    {
+      "module": "PHY007",
+      "locale": "es",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/physics/es/phy-007-separate-beating-from-decay.es.md",
+      "exercise_answer_block_sha256": "d80fe219ff969892172dc1dbf8f98f3c5886e6eea5b0ae61851bf23301fdc523",
+      "review": "Answer preserves the prior0.114166150dB-versus1dB failure and treats interference as a follow-up possibility rather than a historical diagnosis or passed gate."
+    },
+    {
+      "module": "COG004",
+      "locale": "en",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/en/cog-004-score-a-pitch-discrimination-task.md",
+      "exercise_answer_block_sha256": "ff163a5ed9e74678d7c4a22614d521a3bb0850aaaf1a65868ecb797c27a9ffd7",
+      "review": "Answer identifies a correct higher-frequency interval choice while refusing threshold/preference/learning/population conclusions from one response."
+    },
+    {
+      "module": "COG004",
+      "locale": "en",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/en/cog-004-score-a-pitch-discrimination-task.md",
+      "exercise_answer_block_sha256": "41b4072d71cca6afa25018ea323a43ae105d37ee4d7404a95ee4449a39687c63",
+      "review": "Answer reproduces15/20=.75,always-first10/20=.5 and conditional8/10,7/10; explicitly states no participant performed the synthetic predictable fixture."
+    },
+    {
+      "module": "COG004",
+      "locale": "en",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/en/cog-004-score-a-pitch-discrimination-task.md",
+      "exercise_answer_block_sha256": "636059ef479049bffb35fae642c601fc53d35fe767877e0c6d6fa245a3e69e82",
+      "review": "Answer correctly rejects14/20 atalpha.05, uses sfargument14foratleast15 and interprets the exact tail under the assumed independent guessing model."
+    },
+    {
+      "module": "COG004",
+      "locale": "en",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/en/cog-004-score-a-pitch-discrimination-task.md",
+      "exercise_answer_block_sha256": "da6e43fecf8da62fbaa1f8638dc90e53873b6fe4d1f67a09b7fabc331c28ebe7",
+      "review": "Answer computes1-(1-q)^8 approximately.154049944using actual discrete q and requires disclosure of eight tests, selection and independence."
+    },
+    {
+      "module": "COG004",
+      "locale": "en",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/en/cog-004-score-a-pitch-discrimination-task.md",
+      "exercise_answer_block_sha256": "28d3a825d88d2ff45b1f1f5397fcb162d6ec7f3d4bbac0f52a72153bfcb44c77",
+      "review": "Answer replaces unsupported listener/learning claims with prepared tones, synthetic scoring and a future controlled protocol; no observed outcome is invented."
+    },
+    {
+      "module": "COG004",
+      "locale": "fr",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/fr/cog-004-score-a-pitch-discrimination-task.fr.md",
+      "exercise_answer_block_sha256": "6c83a6bdac2cbbf0f78a698a519b542094d3a8a05fc20c958fee6128139b2d5d",
+      "review": "Answer identifies a correct higher-frequency interval choice while refusing threshold/preference/learning/population conclusions from one response."
+    },
+    {
+      "module": "COG004",
+      "locale": "fr",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/fr/cog-004-score-a-pitch-discrimination-task.fr.md",
+      "exercise_answer_block_sha256": "fdef5f3faa175c9069bd6835ae9e6b5c73d4b9c12061c50288db8807196ed4d0",
+      "review": "Answer reproduces15/20=.75,always-first10/20=.5 and conditional8/10,7/10; explicitly states no participant performed the synthetic predictable fixture."
+    },
+    {
+      "module": "COG004",
+      "locale": "fr",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/fr/cog-004-score-a-pitch-discrimination-task.fr.md",
+      "exercise_answer_block_sha256": "366c64c749515634b7211a88bde2e2724c78644e57dcdfced280b22e7b409e69",
+      "review": "Answer correctly rejects14/20 atalpha.05, uses sfargument14foratleast15 and interprets the exact tail under the assumed independent guessing model."
+    },
+    {
+      "module": "COG004",
+      "locale": "fr",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/fr/cog-004-score-a-pitch-discrimination-task.fr.md",
+      "exercise_answer_block_sha256": "061d1850216a0019443b2fcc88aa0bd6da5a479554a490a837d370ba7cf6ebe0",
+      "review": "Answer computes1-(1-q)^8 approximately.154049944using actual discrete q and requires disclosure of eight tests, selection and independence."
+    },
+    {
+      "module": "COG004",
+      "locale": "fr",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/fr/cog-004-score-a-pitch-discrimination-task.fr.md",
+      "exercise_answer_block_sha256": "c06b4234680ff58ded075da56139cd1d3a0052714e8a2abd0f979747b1407dbe",
+      "review": "Answer replaces unsupported listener/learning claims with prepared tones, synthetic scoring and a future controlled protocol; no observed outcome is invented."
+    },
+    {
+      "module": "COG004",
+      "locale": "es",
+      "exercise": 1,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/es/cog-004-score-a-pitch-discrimination-task.es.md",
+      "exercise_answer_block_sha256": "b3b766c3be841cb0ea5eca1c83d2cd40b46c3fadcdb67cd0dd30bc0d10a92ea7",
+      "review": "Answer identifies a correct higher-frequency interval choice while refusing threshold/preference/learning/population conclusions from one response."
+    },
+    {
+      "module": "COG004",
+      "locale": "es",
+      "exercise": 2,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/es/cog-004-score-a-pitch-discrimination-task.es.md",
+      "exercise_answer_block_sha256": "412c79c7514029de3f0c2f16252848b00e463850f98ee4ecd94f31aec234d5e3",
+      "review": "Answer reproduces15/20=.75,always-first10/20=.5 and conditional8/10,7/10; explicitly states no participant performed the synthetic predictable fixture."
+    },
+    {
+      "module": "COG004",
+      "locale": "es",
+      "exercise": 3,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/es/cog-004-score-a-pitch-discrimination-task.es.md",
+      "exercise_answer_block_sha256": "6a1b6a85192d9cf89d26e55921319ae1d1b16cbf8ace559ea14749cd9e29d0a1",
+      "review": "Answer correctly rejects14/20 atalpha.05, uses sfargument14foratleast15 and interprets the exact tail under the assumed independent guessing model."
+    },
+    {
+      "module": "COG004",
+      "locale": "es",
+      "exercise": 4,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/es/cog-004-score-a-pitch-discrimination-task.es.md",
+      "exercise_answer_block_sha256": "cc8ee9fe073a469cb6fce852a13fbd13622e2eecce35ebc744aa5a0f774e027a",
+      "review": "Answer computes1-(1-q)^8 approximately.154049944using actual discrete q and requires disclosure of eight tests, selection and independence."
+    },
+    {
+      "module": "COG004",
+      "locale": "es",
+      "exercise": 5,
+      "status": "pass",
+      "source_path": "streeling/courses/cognitive-science/es/cog-004-score-a-pitch-discrimination-task.es.md",
+      "exercise_answer_block_sha256": "be9ca30239f4358bea86b24852fa4fc588c6c3007b39119d018be383ac26f526",
+      "review": "Answer replaces unsupported listener/learning claims with prepared tones, synthetic scoring and a future controlled protocol; no observed outcome is invented."
+    }
+  ],
+  "learner_criterion_checks": [
+    {
+      "module": "WML004",
+      "criterion": 1,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Reconstructs mask2741 from[0,2,4,5,7,9,11], retains approx-12tet/provenance/tradition and refuses to infer performed equivalence or validated catalog-wide semantics.",
+      "review": "The prepared learner-task prompt and the corresponding source instruction/exercise cover this criterion in all three locales; no learner answer or human decision was collected.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "WML004",
+      "criterion": 2,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Derives C4=261.625565301Hz, fa=327.031956626Hz, fb=329.627556913Hz, 386.313713865/400cents and signed offset-13.686286135cents; makes no 5:4 prescription for Rast.",
+      "review": "The prepared learner-task prompt and the corresponding source instruction/exercise cover this criterion in all three locales; no learner answer or human decision was collected.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "WML004",
+      "criterion": 3,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Applies the authored nearest-step projection to64 for both targets, explains lost residual and proposes frequency/reference or MIDI+cents/reference as advisory alternatives, not an implemented GA converter/schema.",
+      "review": "The prepared learner-task prompt and the corresponding source instruction/exercise cover this criterion in all three locales; no learner answer or human decision was collected.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "WML004",
+      "criterion": 4,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Distinguishes integer MidiNote/fret arithmetic from freq:f32 entry; requires retained target/reference/units provenance and an actual measured render before a fidelity claim.",
+      "review": "The prepared learner-task prompt and the corresponding source instruction/exercise cover this criterion in all three locales; no learner answer or human decision was collected.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "WML004",
+      "criterion": 5,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Reports actual C probe P1,M3,P5 and absence of tuning/runtime revision/performance outcomes; keeps pinned source inspection, authored arithmetic, live pipeline and musician review separate.",
+      "review": "The prepared learner-task prompt and the corresponding source instruction/exercise cover this criterion in all three locales; no learner answer or human decision was collected.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "PHY007",
+      "criterion": 1,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Derives cosine identity, delta2.595600287Hz, signed modulator1.297800144Hz and unsigned recurrence T0.385267333seconds without factor-of-two confusion.",
+      "review": "The prepared learner-task prompt and the corresponding source instruction/exercise cover this criterion in all three locales; no learner answer or human decision was collected.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "PHY007",
+      "criterion": 2,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Locates first unsigned zero0.192633666seconds and recovery0.385267333seconds with components constant at0.125; identifies counterexample to damping inference without physical-guitar diagnosis.",
+      "review": "The prepared learner-task prompt and the corresponding source instruction/exercise cover this criterion in all three locales; no learner answer or human decision was collected.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "PHY007",
+      "criterion": 3,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "States ceil-derived half-open20ms windows centeredT,1.5T,2T; matches dip-26.357732143dB/recovery+0.000373071dB to predeclared10dB/1dB rules and interprets equal-frequency control+0.000087429dB.",
+      "review": "The prepared learner-task prompt and the corresponding source instruction/exercise cover this criterion in all three locales; no learner answer or human decision was collected.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "PHY007",
+      "criterion": 4,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Separates untapered float plot/model, faded4second PCM16 mixture and separate1second tones; states441sample fades,44100Hz,nearest-even/sample32768 rule,quantization bound0.5/32768 and no perceptual loudness/playback claim.",
+      "review": "The prepared learner-task prompt and the corresponding source instruction/exercise cover this criterion in all three locales; no learner answer or human decision was collected.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "PHY007",
+      "criterion": 5,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Preserves prior candidate0.114166150dB versus1dB failed gate and calls for declared component/band/window/interaction controls on actual recordings without claiming the cause or reversing history.",
+      "review": "The prepared learner-task prompt and the corresponding source instruction/exercise cover this criterion in all three locales; no learner answer or human decision was collected.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "COG004",
+      "criterion": 1,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Defines higher-frequency sequential interval response separately from preference, learning and threshold; identifies actual prepared assets and absent listener/presentation/loudness-calibration evidence.",
+      "review": "The prepared learner-task prompt and the corresponding source instruction/exercise cover this criterion in all three locales; no learner answer or human decision was collected.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "COG004",
+      "criterion": 2,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Recomputes15/20=.75,always-first10/20=.5,conditional8/10 and7/10,first responses11; recognizes public alternating authored key and synthetic responses as an arithmetic fixture.",
+      "review": "The prepared learner-task prompt and the corresponding source instruction/exercise cover this criterion in all three locales; no learner answer or human decision was collected.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "COG004",
+      "criterion": 3,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Derives exact tails>=14:.057659149169921875 and>=15:.020694732666015625, minimum passing15 for one-sidedalpha.05 and sf argument14; distinguishes tail probability from posterior null belief and failure from proof of inability.",
+      "review": "The prepared learner-task prompt and the corresponding source instruction/exercise cover this criterion in all three locales; no learner answer or human decision was collected.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "COG004",
+      "criterion": 4,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Uses actual discrete q=.020694732666015625 in1-(1-q)^8=.1540499441685269; discloses eight selected tests/independence assumption and notes dependence/optional stopping/analysis-selection limits.",
+      "review": "The prepared learner-task prompt and the corresponding source instruction/exercise cover this criterion in all three locales; no learner answer or human decision was collected.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    },
+    {
+      "module": "COG004",
+      "criterion": 5,
+      "status": "pass_prepared_alignment_only",
+      "expectation": "Specifies hidden balanced randomized assignment and nonrevealing interface, cue/level/playback controls, declared conditions/exclusions/analysis/privacy/consent, full attempts and uncertainty; rejects population/threshold/learning claims without the corresponding study.",
+      "review": "The prepared learner-task prompt and the corresponding source instruction/exercise cover this criterion in all three locales; no learner answer or human decision was collected.",
+      "learner_outcome": null,
+      "human_reviewer_decision": null
+    }
+  ],
+  "mechanical_parity_checks": [
+    {
+      "module": "WML004",
+      "locale": "en",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "module_and_existing_prerequisite",
+        "inline_code_identical_to_EN",
+        "link_URL_sequence_identical_to_EN",
+        "numeric_token_multiset_identical_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    },
+    {
+      "module": "WML004",
+      "locale": "fr",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "module_and_existing_prerequisite",
+        "inline_code_identical_to_EN",
+        "link_URL_sequence_identical_to_EN",
+        "numeric_token_multiset_identical_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    },
+    {
+      "module": "WML004",
+      "locale": "es",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "module_and_existing_prerequisite",
+        "inline_code_identical_to_EN",
+        "link_URL_sequence_identical_to_EN",
+        "numeric_token_multiset_identical_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    },
+    {
+      "module": "PHY007",
+      "locale": "en",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "module_and_existing_prerequisite",
+        "inline_code_identical_to_EN",
+        "link_URL_sequence_identical_to_EN",
+        "numeric_token_multiset_identical_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    },
+    {
+      "module": "PHY007",
+      "locale": "fr",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "module_and_existing_prerequisite",
+        "inline_code_identical_to_EN",
+        "link_URL_sequence_identical_to_EN",
+        "numeric_token_multiset_identical_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    },
+    {
+      "module": "PHY007",
+      "locale": "es",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "module_and_existing_prerequisite",
+        "inline_code_identical_to_EN",
+        "link_URL_sequence_identical_to_EN",
+        "numeric_token_multiset_identical_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    },
+    {
+      "module": "COG004",
+      "locale": "en",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "module_and_existing_prerequisite",
+        "inline_code_identical_to_EN",
+        "link_URL_sequence_identical_to_EN",
+        "numeric_token_multiset_identical_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    },
+    {
+      "module": "COG004",
+      "locale": "fr",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "module_and_existing_prerequisite",
+        "inline_code_identical_to_EN",
+        "link_URL_sequence_identical_to_EN",
+        "numeric_token_multiset_identical_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    },
+    {
+      "module": "COG004",
+      "locale": "es",
+      "status": "pass",
+      "checks": [
+        "UTF8withoutBOMandLF",
+        "module_and_existing_prerequisite",
+        "inline_code_identical_to_EN",
+        "link_URL_sequence_identical_to_EN",
+        "numeric_token_multiset_identical_to_EN",
+        "five_substantively_reviewed_exercise_answer_pairs"
+      ]
+    }
+  ],
+  "course_separation": [
+    {
+      "module": "WML004",
+      "decision": "Whether an intended pitch target survives a discrete handoff.",
+      "instruction": "Explains pitch-class information loss, exact ratio arithmetic, advisory retention choices and actual discrete/floating interface boundaries."
+    },
+    {
+      "module": "PHY007",
+      "decision": "Whether a falling short-window level establishes damping.",
+      "instruction": "Derives the cosine identity, separates signed modulation/unsigned recurrence, uses a recovery window and equal-frequency control, and distinguishes equations from exported WAVs."
+    },
+    {
+      "module": "COG004",
+      "decision": "What a declared sequential discrimination score and selected block could establish.",
+      "instruction": "Defines response events, audits synthetic position counts, derives exact tails and selection probability, and specifies the missing actual protocol."
+    }
+  ],
+  "primary_page_checks": [
+    {
+      "url": "https://www.nist.gov/pml/time-and-frequency-division/popular-links/time-frequency-z",
+      "review": "Landing page A440 passage states the1200th-root-of2 cent ratio; the course does not adopt its approximate just-noticeable-difference generalization."
+    },
+    {
+      "url": "https://openstax.org/books/university-physics-volume-1/pages/17-6-beats",
+      "review": "Cosine addition identity and absolute frequency-difference beat recurrence support the independently constructed equations; no borrowed prose/example/media is needed."
+    },
+    {
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html",
+      "review": "Official pmf and survival-function convention support the exact tail calculation; current1.18manual is not presented as installed1.17.1."
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/528924/",
+      "review": "Read indexed abstract: apparent auditory sensitivity varies across procedures; no full-paper access or relevance to these untested stimuli is overstated."
+    },
+    {
+      "url": "https://www.maqamworld.com/en/maqam/rast.php",
+      "review": "Reviewed musician-authored Rast page with jins relationships/repertoire examples; no recording was played and no numeric Rast intonation was inferred."
+    }
+  ],
+  "preserved_failed_gate": {
+    "improvement_db": 0.11416614959438576,
+    "required_improvement_db": 1,
+    "verdict": "failed",
+    "new_constructed_model_reverses_result": false
+  },
+  "limits": [
+    "AI static and numerical review is not human technical, fluent-language, musician, participant or transfer validation.",
+    "Public predictable synthetic responses do not establish a listener result or the assumptions of the binomial model.",
+    "Constructed5:4frequency is not a Rast prescription; source masks and API signatures do not establish actual performance or rendered fidelity.",
+    "Model interference is not a diagnosis of the older engine failure.",
+    "Rendered/deployed HTML and browser playback were not inspected by this reviewer; integration verification is separate."
+  ],
+  "human_technical_review": null,
+  "fluent_language_review": {
+    "en": null,
+    "fr": null,
+    "es": null
+  },
+  "musician_review": null,
+  "human_subject_review": null,
+  "learner_attempts": null,
+  "learner_transfer": null,
+  "listening_outcome": null,
+  "perceptual_threshold": null,
+  "causal_learning_benefit": null
+}

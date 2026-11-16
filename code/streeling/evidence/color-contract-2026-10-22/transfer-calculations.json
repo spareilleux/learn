@@ -1,0 +1,1856 @@
+{
+  "scope": "Authored scalar calculations for in-gamut nonnegative sRGB coordinates; not a physical luminance measurement or full shader/frame simulation.",
+  "reference": {
+    "source": "W3C CSS Color4 CRD2026-10-20, sRGB transfer reference",
+    "decode_threshold": 0.04045,
+    "linear_slope": 12.92,
+    "offset": 0.055,
+    "scale": 1.055,
+    "exponent": 2.4,
+    "encode_threshold": 0.0031308
+  },
+  "byte_table": [
+    {
+      "byte": 0,
+      "encoded": 0.0,
+      "linear_reference": 0.0,
+      "power22": 0.0,
+      "roundtrip_byte": 0
+    },
+    {
+      "byte": 1,
+      "encoded": 0.00392156862745098,
+      "linear_reference": 0.0003035269835488375,
+      "power22": 5.077051900661759e-06,
+      "roundtrip_byte": 1
+    },
+    {
+      "byte": 2,
+      "encoded": 0.00784313725490196,
+      "linear_reference": 0.000607053967097675,
+      "power22": 2.3328004666098932e-05,
+      "roundtrip_byte": 2
+    },
+    {
+      "byte": 3,
+      "encoded": 0.011764705882352941,
+      "linear_reference": 0.0009105809506465125,
+      "power22": 5.69217657121931e-05,
+      "roundtrip_byte": 3
+    },
+    {
+      "byte": 4,
+      "encoded": 0.01568627450980392,
+      "linear_reference": 0.00121410793419535,
+      "power22": 0.00010718736234124402,
+      "roundtrip_byte": 4
+    },
+    {
+      "byte": 5,
+      "encoded": 0.0196078431372549,
+      "linear_reference": 0.0015176349177441874,
+      "power22": 0.0001751239775030267,
+      "roundtrip_byte": 5
+    },
+    {
+      "byte": 6,
+      "encoded": 0.023529411764705882,
+      "linear_reference": 0.001821161901293025,
+      "power22": 0.00026154375454849144,
+      "roundtrip_byte": 6
+    },
+    {
+      "byte": 7,
+      "encoded": 0.027450980392156862,
+      "linear_reference": 0.0021246888848418626,
+      "power22": 0.0003671362698159426,
+      "roundtrip_byte": 7
+    },
+    {
+      "byte": 8,
+      "encoded": 0.03137254901960784,
+      "linear_reference": 0.0024282158683907,
+      "power22": 0.0004925037871914326,
+      "roundtrip_byte": 8
+    },
+    {
+      "byte": 9,
+      "encoded": 0.03529411764705882,
+      "linear_reference": 0.0027317428519395373,
+      "power22": 0.0006381828421670219,
+      "roundtrip_byte": 9
+    },
+    {
+      "byte": 10,
+      "encoded": 0.0392156862745098,
+      "linear_reference": 0.003035269835488375,
+      "power22": 0.0008046584995130583,
+      "roundtrip_byte": 10
+    },
+    {
+      "byte": 11,
+      "encoded": 0.043137254901960784,
+      "linear_reference": 0.003346535763899161,
+      "power22": 0.0009923743040743253,
+      "roundtrip_byte": 11
+    },
+    {
+      "byte": 12,
+      "encoded": 0.047058823529411764,
+      "linear_reference": 0.003676507324047436,
+      "power22": 0.0012017395224384016,
+      "roundtrip_byte": 12
+    },
+    {
+      "byte": 13,
+      "encoded": 0.050980392156862744,
+      "linear_reference": 0.004024717018496307,
+      "power22": 0.001433134589671864,
+      "roundtrip_byte": 13
+    },
+    {
+      "byte": 14,
+      "encoded": 0.054901960784313725,
+      "linear_reference": 0.004391442037410293,
+      "power22": 0.0016869153167892836,
+      "roundtrip_byte": 14
+    },
+    {
+      "byte": 15,
+      "encoded": 0.058823529411764705,
+      "linear_reference": 0.004776953480693729,
+      "power22": 0.0019634162133964697,
+      "roundtrip_byte": 15
+    },
+    {
+      "byte": 16,
+      "encoded": 0.06274509803921569,
+      "linear_reference": 0.005181516702338386,
+      "power22": 0.002262953160706434,
+      "roundtrip_byte": 16
+    },
+    {
+      "byte": 17,
+      "encoded": 0.06666666666666667,
+      "linear_reference": 0.005605391624202723,
+      "power22": 0.002585825596234168,
+      "roundtrip_byte": 17
+    },
+    {
+      "byte": 18,
+      "encoded": 0.07058823529411765,
+      "linear_reference": 0.006048833022857054,
+      "power22": 0.0029323183239383624,
+      "roundtrip_byte": 18
+    },
+    {
+      "byte": 19,
+      "encoded": 0.07450980392156863,
+      "linear_reference": 0.006512090792594475,
+      "power22": 0.003302703032003638,
+      "roundtrip_byte": 19
+    },
+    {
+      "byte": 20,
+      "encoded": 0.0784313725490196,
+      "linear_reference": 0.006995410187265387,
+      "power22": 0.0036972395789001307,
+      "roundtrip_byte": 20
+    },
+    {
+      "byte": 21,
+      "encoded": 0.08235294117647059,
+      "linear_reference": 0.007499032043226175,
+      "power22": 0.004116177093282753,
+      "roundtrip_byte": 21
+    },
+    {
+      "byte": 22,
+      "encoded": 0.08627450980392157,
+      "linear_reference": 0.008023192985384994,
+      "power22": 0.00455975492252602,
+      "roundtrip_byte": 22
+    },
+    {
+      "byte": 23,
+      "encoded": 0.09019607843137255,
+      "linear_reference": 0.008568125618069307,
+      "power22": 0.005028203456855535,
+      "roundtrip_byte": 23
+    },
+    {
+      "byte": 24,
+      "encoded": 0.09411764705882353,
+      "linear_reference": 0.009134058702220787,
+      "power22": 0.0055217448502396585,
+      "roundtrip_byte": 24
+    },
+    {
+      "byte": 25,
+      "encoded": 0.09803921568627451,
+      "linear_reference": 0.00972121732023785,
+      "power22": 0.006040593654849813,
+      "roundtrip_byte": 25
+    },
+    {
+      "byte": 26,
+      "encoded": 0.10196078431372549,
+      "linear_reference": 0.010329823029626936,
+      "power22": 0.006584957382581685,
+      "roundtrip_byte": 26
+    },
+    {
+      "byte": 27,
+      "encoded": 0.10588235294117647,
+      "linear_reference": 0.010960094006488246,
+      "power22": 0.007155037004573032,
+      "roundtrip_byte": 27
+    },
+    {
+      "byte": 28,
+      "encoded": 0.10980392156862745,
+      "linear_reference": 0.011612245179743885,
+      "power22": 0.00775102739766061,
+      "roundtrip_byte": 28
+    },
+    {
+      "byte": 29,
+      "encoded": 0.11372549019607843,
+      "linear_reference": 0.012286488356915872,
+      "power22": 0.008373117745148581,
+      "roundtrip_byte": 29
+    },
+    {
+      "byte": 30,
+      "encoded": 0.11764705882352941,
+      "linear_reference": 0.012983032342173012,
+      "power22": 0.009021491898012131,
+      "roundtrip_byte": 30
+    },
+    {
+      "byte": 31,
+      "encoded": 0.12156862745098039,
+      "linear_reference": 0.013702083047289686,
+      "power22": 0.009696328701658229,
+      "roundtrip_byte": 31
+    },
+    {
+      "byte": 32,
+      "encoded": 0.12549019607843137,
+      "linear_reference": 0.014443843596092545,
+      "power22": 0.010397802292555288,
+      "roundtrip_byte": 32
+    },
+    {
+      "byte": 33,
+      "encoded": 0.12941176470588237,
+      "linear_reference": 0.01520851442291271,
+      "power22": 0.011126082368383245,
+      "roundtrip_byte": 33
+    },
+    {
+      "byte": 34,
+      "encoded": 0.13333333333333333,
+      "linear_reference": 0.01599629336550963,
+      "power22": 0.011881334434813665,
+      "roundtrip_byte": 34
+    },
+    {
+      "byte": 35,
+      "encoded": 0.13725490196078433,
+      "linear_reference": 0.016807375752887384,
+      "power22": 0.012663720031582098,
+      "roundtrip_byte": 35
+    },
+    {
+      "byte": 36,
+      "encoded": 0.1411764705882353,
+      "linear_reference": 0.017641954488384078,
+      "power22": 0.013473396940142641,
+      "roundtrip_byte": 36
+    },
+    {
+      "byte": 37,
+      "encoded": 0.1450980392156863,
+      "linear_reference": 0.018500220128379697,
+      "power22": 0.014310519374884064,
+      "roundtrip_byte": 37
+    },
+    {
+      "byte": 38,
+      "encoded": 0.14901960784313725,
+      "linear_reference": 0.019382360956935723,
+      "power22": 0.015175238159625197,
+      "roundtrip_byte": 38
+    },
+    {
+      "byte": 39,
+      "encoded": 0.15294117647058825,
+      "linear_reference": 0.0202885630566524,
+      "power22": 0.016067700890886875,
+      "roundtrip_byte": 39
+    },
+    {
+      "byte": 40,
+      "encoded": 0.1568627450980392,
+      "linear_reference": 0.021219010376003555,
+      "power22": 0.016988052089250045,
+      "roundtrip_byte": 40
+    },
+    {
+      "byte": 41,
+      "encoded": 0.1607843137254902,
+      "linear_reference": 0.02217388479338738,
+      "power22": 0.017936433339950233,
+      "roundtrip_byte": 41
+    },
+    {
+      "byte": 42,
+      "encoded": 0.16470588235294117,
+      "linear_reference": 0.02315336617811041,
+      "power22": 0.018912983423721504,
+      "roundtrip_byte": 42
+    },
+    {
+      "byte": 43,
+      "encoded": 0.16862745098039217,
+      "linear_reference": 0.024157632448504756,
+      "power22": 0.01991783843878572,
+      "roundtrip_byte": 43
+    },
+    {
+      "byte": 44,
+      "encoded": 0.17254901960784313,
+      "linear_reference": 0.02518685962736163,
+      "power22": 0.020951131914781092,
+      "roundtrip_byte": 44
+    },
+    {
+      "byte": 45,
+      "encoded": 0.17647058823529413,
+      "linear_reference": 0.026241221894849898,
+      "power22": 0.02201299491933654,
+      "roundtrip_byte": 45
+    },
+    {
+      "byte": 46,
+      "encoded": 0.1803921568627451,
+      "linear_reference": 0.027320891639074894,
+      "power22": 0.023103556157921437,
+      "roundtrip_byte": 46
+    },
+    {
+      "byte": 47,
+      "encoded": 0.1843137254901961,
+      "linear_reference": 0.028426039504420793,
+      "power22": 0.02422294206753424,
+      "roundtrip_byte": 47
+    },
+    {
+      "byte": 48,
+      "encoded": 0.18823529411764706,
+      "linear_reference": 0.0295568344378088,
+      "power22": 0.025371276904734584,
+      "roundtrip_byte": 48
+    },
+    {
+      "byte": 49,
+      "encoded": 0.19215686274509805,
+      "linear_reference": 0.030713443732993635,
+      "power22": 0.026548682828472916,
+      "roundtrip_byte": 49
+    },
+    {
+      "byte": 50,
+      "encoded": 0.19607843137254902,
+      "linear_reference": 0.03189603307301153,
+      "power22": 0.027755279978126032,
+      "roundtrip_byte": 50
+    },
+    {
+      "byte": 51,
+      "encoded": 0.2,
+      "linear_reference": 0.033104766570885055,
+      "power22": 0.028991186547107816,
+      "roundtrip_byte": 51
+    },
+    {
+      "byte": 52,
+      "encoded": 0.20392156862745098,
+      "linear_reference": 0.03433980680868217,
+      "power22": 0.030256518852388652,
+      "roundtrip_byte": 52
+    },
+    {
+      "byte": 53,
+      "encoded": 0.20784313725490197,
+      "linear_reference": 0.03560131487502034,
+      "power22": 0.03155139140022645,
+      "roundtrip_byte": 53
+    },
+    {
+      "byte": 54,
+      "encoded": 0.21176470588235294,
+      "linear_reference": 0.03688945040110004,
+      "power22": 0.03287591694838383,
+      "roundtrip_byte": 54
+    },
+    {
+      "byte": 55,
+      "encoded": 0.21568627450980393,
+      "linear_reference": 0.0382043715953465,
+      "power22": 0.03423020656508195,
+      "roundtrip_byte": 55
+    },
+    {
+      "byte": 56,
+      "encoded": 0.2196078431372549,
+      "linear_reference": 0.03954623527673284,
+      "power22": 0.03561436968491877,
+      "roundtrip_byte": 56
+    },
+    {
+      "byte": 57,
+      "encoded": 0.2235294117647059,
+      "linear_reference": 0.04091519690685319,
+      "power22": 0.0370285141619602,
+      "roundtrip_byte": 57
+    },
+    {
+      "byte": 58,
+      "encoded": 0.22745098039215686,
+      "linear_reference": 0.042311410620809675,
+      "power22": 0.03847274632019464,
+      "roundtrip_byte": 58
+    },
+    {
+      "byte": 59,
+      "encoded": 0.23137254901960785,
+      "linear_reference": 0.043735029256973465,
+      "power22": 0.03994717100152558,
+      "roundtrip_byte": 59
+    },
+    {
+      "byte": 60,
+      "encoded": 0.23529411764705882,
+      "linear_reference": 0.04518620438567554,
+      "power22": 0.04145189161146246,
+      "roundtrip_byte": 60
+    },
+    {
+      "byte": 61,
+      "encoded": 0.23921568627450981,
+      "linear_reference": 0.046665086336880095,
+      "power22": 0.042987010162657116,
+      "roundtrip_byte": 61
+    },
+    {
+      "byte": 62,
+      "encoded": 0.24313725490196078,
+      "linear_reference": 0.04817182422688942,
+      "power22": 0.04455262731642138,
+      "roundtrip_byte": 62
+    },
+    {
+      "byte": 63,
+      "encoded": 0.24705882352941178,
+      "linear_reference": 0.04970656598412723,
+      "power22": 0.04614884242235095,
+      "roundtrip_byte": 63
+    },
+    {
+      "byte": 64,
+      "encoded": 0.25098039215686274,
+      "linear_reference": 0.05126945837404324,
+      "power22": 0.04777575355617064,
+      "roundtrip_byte": 64
+    },
+    {
+      "byte": 65,
+      "encoded": 0.2549019607843137,
+      "linear_reference": 0.052860647023180246,
+      "power22": 0.04943345755590796,
+      "roundtrip_byte": 65
+    },
+    {
+      "byte": 66,
+      "encoded": 0.25882352941176473,
+      "linear_reference": 0.05448027644244237,
+      "power22": 0.051122050056493396,
+      "roundtrip_byte": 66
+    },
+    {
+      "byte": 67,
+      "encoded": 0.2627450980392157,
+      "linear_reference": 0.05612849004960009,
+      "power22": 0.05284162552287903,
+      "roundtrip_byte": 67
+    },
+    {
+      "byte": 68,
+      "encoded": 0.26666666666666666,
+      "linear_reference": 0.05780543019106723,
+      "power22": 0.05459227728176034,
+      "roundtrip_byte": 68
+    },
+    {
+      "byte": 69,
+      "encoded": 0.27058823529411763,
+      "linear_reference": 0.0595112381629812,
+      "power22": 0.05637409755197975,
+      "roundtrip_byte": 69
+    },
+    {
+      "byte": 70,
+      "encoded": 0.27450980392156865,
+      "linear_reference": 0.06124605423161761,
+      "power22": 0.05818717747368544,
+      "roundtrip_byte": 70
+    },
+    {
+      "byte": 71,
+      "encoded": 0.2784313725490196,
+      "linear_reference": 0.06301001765316767,
+      "power22": 0.06003160713631323,
+      "roundtrip_byte": 71
+    },
+    {
+      "byte": 72,
+      "encoded": 0.2823529411764706,
+      "linear_reference": 0.06480326669290577,
+      "power22": 0.06190747560545576,
+      "roundtrip_byte": 72
+    },
+    {
+      "byte": 73,
+      "encoded": 0.28627450980392155,
+      "linear_reference": 0.06662593864377289,
+      "power22": 0.06381487094867724,
+      "roundtrip_byte": 73
+    },
+    {
+      "byte": 74,
+      "encoded": 0.2901960784313726,
+      "linear_reference": 0.06847816984440017,
+      "power22": 0.06575388026033009,
+      "roundtrip_byte": 74
+    },
+    {
+      "byte": 75,
+      "encoded": 0.29411764705882354,
+      "linear_reference": 0.07036009569659588,
+      "power22": 0.06772458968542432,
+      "roundtrip_byte": 75
+    },
+    {
+      "byte": 76,
+      "encoded": 0.2980392156862745,
+      "linear_reference": 0.07227185068231748,
+      "power22": 0.0697270844425988,
+      "roundtrip_byte": 76
+    },
+    {
+      "byte": 77,
+      "encoded": 0.30196078431372547,
+      "linear_reference": 0.07421356838014963,
+      "power22": 0.07176144884623908,
+      "roundtrip_byte": 77
+    },
+    {
+      "byte": 78,
+      "encoded": 0.3058823529411765,
+      "linear_reference": 0.07618538148130785,
+      "power22": 0.07382776632778461,
+      "roundtrip_byte": 78
+    },
+    {
+      "byte": 79,
+      "encoded": 0.30980392156862746,
+      "linear_reference": 0.07818742180518633,
+      "power22": 0.07592611945626479,
+      "roundtrip_byte": 79
+    },
+    {
+      "byte": 80,
+      "encoded": 0.3137254901960784,
+      "linear_reference": 0.08021982031446832,
+      "power22": 0.07805658995810189,
+      "roundtrip_byte": 80
+    },
+    {
+      "byte": 81,
+      "encoded": 0.3176470588235294,
+      "linear_reference": 0.0822827071298148,
+      "power22": 0.08021925873621505,
+      "roundtrip_byte": 81
+    },
+    {
+      "byte": 82,
+      "encoded": 0.3215686274509804,
+      "linear_reference": 0.08437621154414882,
+      "power22": 0.08241420588845923,
+      "roundtrip_byte": 82
+    },
+    {
+      "byte": 83,
+      "encoded": 0.3254901960784314,
+      "linear_reference": 0.08650046203654976,
+      "power22": 0.08464151072542946,
+      "roundtrip_byte": 83
+    },
+    {
+      "byte": 84,
+      "encoded": 0.32941176470588235,
+      "linear_reference": 0.08865558628577294,
+      "power22": 0.08690125178766034,
+      "roundtrip_byte": 84
+    },
+    {
+      "byte": 85,
+      "encoded": 0.3333333333333333,
+      "linear_reference": 0.09084171118340768,
+      "power22": 0.08919350686224782,
+      "roundtrip_byte": 85
+    },
+    {
+      "byte": 86,
+      "encoded": 0.33725490196078434,
+      "linear_reference": 0.09305896284668745,
+      "power22": 0.09151835299891949,
+      "roundtrip_byte": 86
+    },
+    {
+      "byte": 87,
+      "encoded": 0.3411764705882353,
+      "linear_reference": 0.0953074666309647,
+      "power22": 0.09387586652557776,
+      "roundtrip_byte": 87
+    },
+    {
+      "byte": 88,
+      "encoded": 0.34509803921568627,
+      "linear_reference": 0.09758734714186246,
+      "power22": 0.09626612306333969,
+      "roundtrip_byte": 88
+    },
+    {
+      "byte": 89,
+      "encoded": 0.34901960784313724,
+      "linear_reference": 0.09989872824711389,
+      "power22": 0.09868919754109445,
+      "roundtrip_byte": 89
+    },
+    {
+      "byte": 90,
+      "encoded": 0.35294117647058826,
+      "linear_reference": 0.10224173308810132,
+      "power22": 0.10114516420959989,
+      "roundtrip_byte": 90
+    },
+    {
+      "byte": 91,
+      "encoded": 0.3568627450980392,
+      "linear_reference": 0.10461648409110419,
+      "power22": 0.10363409665513738,
+      "roundtrip_byte": 91
+    },
+    {
+      "byte": 92,
+      "encoded": 0.3607843137254902,
+      "linear_reference": 0.10702310297826761,
+      "power22": 0.1061560678127439,
+      "roundtrip_byte": 92
+    },
+    {
+      "byte": 93,
+      "encoded": 0.36470588235294116,
+      "linear_reference": 0.10946171077829933,
+      "power22": 0.10871114997903854,
+      "roundtrip_byte": 93
+    },
+    {
+      "byte": 94,
+      "encoded": 0.3686274509803922,
+      "linear_reference": 0.1119324278369056,
+      "power22": 0.11129941482466024,
+      "roundtrip_byte": 94
+    },
+    {
+      "byte": 95,
+      "encoded": 0.37254901960784315,
+      "linear_reference": 0.11443537382697373,
+      "power22": 0.11392093340633272,
+      "roundtrip_byte": 95
+    },
+    {
+      "byte": 96,
+      "encoded": 0.3764705882352941,
+      "linear_reference": 0.11697066775851084,
+      "power22": 0.11657577617857154,
+      "roundtrip_byte": 96
+    },
+    {
+      "byte": 97,
+      "encoded": 0.3803921568627451,
+      "linear_reference": 0.11953842798834562,
+      "power22": 0.11926401300504741,
+      "roundtrip_byte": 97
+    },
+    {
+      "byte": 98,
+      "encoded": 0.3843137254901961,
+      "linear_reference": 0.12213877222960187,
+      "power22": 0.12198571316961948,
+      "roundtrip_byte": 98
+    },
+    {
+      "byte": 99,
+      "encoded": 0.38823529411764707,
+      "linear_reference": 0.12477181756095049,
+      "power22": 0.1247409453870513,
+      "roundtrip_byte": 99
+    },
+    {
+      "byte": 100,
+      "encoded": 0.39215686274509803,
+      "linear_reference": 0.12743768043564743,
+      "power22": 0.12752977781342206,
+      "roundtrip_byte": 100
+    },
+    {
+      "byte": 101,
+      "encoded": 0.396078431372549,
+      "linear_reference": 0.1301364766903643,
+      "power22": 0.13035227805624436,
+      "roundtrip_byte": 101
+    },
+    {
+      "byte": 102,
+      "encoded": 0.4,
+      "linear_reference": 0.13286832155381798,
+      "power22": 0.1332085131842997,
+      "roundtrip_byte": 102
+    },
+    {
+      "byte": 103,
+      "encoded": 0.403921568627451,
+      "linear_reference": 0.13563332965520566,
+      "power22": 0.13609854973720245,
+      "roundtrip_byte": 103
+    },
+    {
+      "byte": 104,
+      "encoded": 0.40784313725490196,
+      "linear_reference": 0.13843161503245183,
+      "power22": 0.1390224537347025,
+      "roundtrip_byte": 104
+    },
+    {
+      "byte": 105,
+      "encoded": 0.4117647058823529,
+      "linear_reference": 0.14126329114027164,
+      "power22": 0.14198029068573553,
+      "roundtrip_byte": 105
+    },
+    {
+      "byte": 106,
+      "encoded": 0.41568627450980394,
+      "linear_reference": 0.14412847085805777,
+      "power22": 0.14497212559723088,
+      "roundtrip_byte": 106
+    },
+    {
+      "byte": 107,
+      "encoded": 0.4196078431372549,
+      "linear_reference": 0.14702726649759498,
+      "power22": 0.14799802298268516,
+      "roundtrip_byte": 107
+    },
+    {
+      "byte": 108,
+      "encoded": 0.4235294117647059,
+      "linear_reference": 0.14995978981060856,
+      "power22": 0.15105804687051058,
+      "roundtrip_byte": 108
+    },
+    {
+      "byte": 109,
+      "encoded": 0.42745098039215684,
+      "linear_reference": 0.15292615199615017,
+      "power22": 0.15415226081216518,
+      "roundtrip_byte": 109
+    },
+    {
+      "byte": 110,
+      "encoded": 0.43137254901960786,
+      "linear_reference": 0.1559264637078274,
+      "power22": 0.1572807278900734,
+      "roundtrip_byte": 110
+    },
+    {
+      "byte": 111,
+      "encoded": 0.43529411764705883,
+      "linear_reference": 0.1589608350608804,
+      "power22": 0.16044351072534352,
+      "roundtrip_byte": 111
+    },
+    {
+      "byte": 112,
+      "encoded": 0.4392156862745098,
+      "linear_reference": 0.162029375639111,
+      "power22": 0.16364067148528988,
+      "roundtrip_byte": 112
+    },
+    {
+      "byte": 113,
+      "encoded": 0.44313725490196076,
+      "linear_reference": 0.1651321945016676,
+      "power22": 0.1668722718907655,
+      "roundtrip_byte": 113
+    },
+    {
+      "byte": 114,
+      "encoded": 0.4470588235294118,
+      "linear_reference": 0.16826940018969075,
+      "power22": 0.1701383732233124,
+      "roundtrip_byte": 114
+    },
+    {
+      "byte": 115,
+      "encoded": 0.45098039215686275,
+      "linear_reference": 0.1714411007328226,
+      "power22": 0.173439036332135,
+      "roundtrip_byte": 115
+    },
+    {
+      "byte": 116,
+      "encoded": 0.4549019607843137,
+      "linear_reference": 0.17464740365558504,
+      "power22": 0.17677432164090326,
+      "roundtrip_byte": 116
+    },
+    {
+      "byte": 117,
+      "encoded": 0.4588235294117647,
+      "linear_reference": 0.17788841598362912,
+      "power22": 0.18014428915439032,
+      "roundtrip_byte": 117
+    },
+    {
+      "byte": 118,
+      "encoded": 0.4627450980392157,
+      "linear_reference": 0.18116424424986022,
+      "power22": 0.18354899846495082,
+      "roundtrip_byte": 118
+    },
+    {
+      "byte": 119,
+      "encoded": 0.4666666666666667,
+      "linear_reference": 0.184474994500441,
+      "power22": 0.18698850875884424,
+      "roundtrip_byte": 119
+    },
+    {
+      "byte": 120,
+      "encoded": 0.47058823529411764,
+      "linear_reference": 0.18782077230067787,
+      "power22": 0.1904628788224093,
+      "roundtrip_byte": 120
+    },
+    {
+      "byte": 121,
+      "encoded": 0.4745098039215686,
+      "linear_reference": 0.19120168274079138,
+      "power22": 0.19397216704809314,
+      "roundtrip_byte": 121
+    },
+    {
+      "byte": 122,
+      "encoded": 0.47843137254901963,
+      "linear_reference": 0.1946178304415758,
+      "power22": 0.19751643144034023,
+      "roundtrip_byte": 122
+    },
+    {
+      "byte": 123,
+      "encoded": 0.4823529411764706,
+      "linear_reference": 0.19806931955994886,
+      "power22": 0.20109572962134564,
+      "roundtrip_byte": 123
+    },
+    {
+      "byte": 124,
+      "encoded": 0.48627450980392156,
+      "linear_reference": 0.20155625379439707,
+      "power22": 0.20471011883667684,
+      "roundtrip_byte": 124
+    },
+    {
+      "byte": 125,
+      "encoded": 0.49019607843137253,
+      "linear_reference": 0.20507873639031693,
+      "power22": 0.20835965596076741,
+      "roundtrip_byte": 125
+    },
+    {
+      "byte": 126,
+      "encoded": 0.49411764705882355,
+      "linear_reference": 0.20863687014525575,
+      "power22": 0.2120443975022877,
+      "roundtrip_byte": 126
+    },
+    {
+      "byte": 127,
+      "encoded": 0.4980392156862745,
+      "linear_reference": 0.21223075741405523,
+      "power22": 0.215764399609395,
+      "roundtrip_byte": 127
+    },
+    {
+      "byte": 128,
+      "encoded": 0.5019607843137255,
+      "linear_reference": 0.21586050011389926,
+      "power22": 0.2195197180748679,
+      "roundtrip_byte": 128
+    },
+    {
+      "byte": 129,
+      "encoded": 0.5058823529411764,
+      "linear_reference": 0.2195261997292692,
+      "power22": 0.22331040834112742,
+      "roundtrip_byte": 129
+    },
+    {
+      "byte": 130,
+      "encoded": 0.5098039215686274,
+      "linear_reference": 0.2232279573168085,
+      "power22": 0.2271365255051489,
+      "roundtrip_byte": 130
+    },
+    {
+      "byte": 131,
+      "encoded": 0.5137254901960784,
+      "linear_reference": 0.22696587351009836,
+      "power22": 0.23099812432326744,
+      "roundtrip_byte": 131
+    },
+    {
+      "byte": 132,
+      "encoded": 0.5176470588235295,
+      "linear_reference": 0.23074004852434915,
+      "power22": 0.23489525921588023,
+      "roundtrip_byte": 132
+    },
+    {
+      "byte": 133,
+      "encoded": 0.5215686274509804,
+      "linear_reference": 0.23455058216100522,
+      "power22": 0.2388279842720483,
+      "roundtrip_byte": 133
+    },
+    {
+      "byte": 134,
+      "encoded": 0.5254901960784314,
+      "linear_reference": 0.238397573812271,
+      "power22": 0.24279635325400195,
+      "roundtrip_byte": 134
+    },
+    {
+      "byte": 135,
+      "encoded": 0.5294117647058824,
+      "linear_reference": 0.24228112246555486,
+      "power22": 0.24680041960155044,
+      "roundtrip_byte": 135
+    },
+    {
+      "byte": 136,
+      "encoded": 0.5333333333333333,
+      "linear_reference": 0.24620132670783548,
+      "power22": 0.25084023643640047,
+      "roundtrip_byte": 136
+    },
+    {
+      "byte": 137,
+      "encoded": 0.5372549019607843,
+      "linear_reference": 0.25015828472995344,
+      "power22": 0.2549158565663851,
+      "roundtrip_byte": 137
+    },
+    {
+      "byte": 138,
+      "encoded": 0.5411764705882353,
+      "linear_reference": 0.25415209433082675,
+      "power22": 0.25902733248960613,
+      "roundtrip_byte": 138
+    },
+    {
+      "byte": 139,
+      "encoded": 0.5450980392156862,
+      "linear_reference": 0.2581828529215958,
+      "power22": 0.2631747163984916,
+      "roundtrip_byte": 139
+    },
+    {
+      "byte": 140,
+      "encoded": 0.5490196078431373,
+      "linear_reference": 0.26225065752969623,
+      "power22": 0.267358060183772,
+      "roundtrip_byte": 140
+    },
+    {
+      "byte": 141,
+      "encoded": 0.5529411764705883,
+      "linear_reference": 0.26635560480286247,
+      "power22": 0.2715774154383751,
+      "roundtrip_byte": 141
+    },
+    {
+      "byte": 142,
+      "encoded": 0.5568627450980392,
+      "linear_reference": 0.2704977910130658,
+      "power22": 0.27583283346124515,
+      "roundtrip_byte": 142
+    },
+    {
+      "byte": 143,
+      "encoded": 0.5607843137254902,
+      "linear_reference": 0.27467731206038465,
+      "power22": 0.2801243652610849,
+      "roundtrip_byte": 143
+    },
+    {
+      "byte": 144,
+      "encoded": 0.5647058823529412,
+      "linear_reference": 0.2788942634768104,
+      "power22": 0.28445206156002445,
+      "roundtrip_byte": 144
+    },
+    {
+      "byte": 145,
+      "encoded": 0.5686274509803921,
+      "linear_reference": 0.2831487404299921,
+      "power22": 0.2888159727972186,
+      "roundtrip_byte": 145
+    },
+    {
+      "byte": 146,
+      "encoded": 0.5725490196078431,
+      "linear_reference": 0.2874408377269175,
+      "power22": 0.29321614913237454,
+      "roundtrip_byte": 146
+    },
+    {
+      "byte": 147,
+      "encoded": 0.5764705882352941,
+      "linear_reference": 0.29177064981753587,
+      "power22": 0.2976526404492112,
+      "roundtrip_byte": 147
+    },
+    {
+      "byte": 148,
+      "encoded": 0.5803921568627451,
+      "linear_reference": 0.2961382707983211,
+      "power22": 0.30212549635885283,
+      "roundtrip_byte": 148
+    },
+    {
+      "byte": 149,
+      "encoded": 0.5843137254901961,
+      "linear_reference": 0.3005437944157765,
+      "power22": 0.3066347662031576,
+      "roundtrip_byte": 149
+    },
+    {
+      "byte": 150,
+      "encoded": 0.5882352941176471,
+      "linear_reference": 0.3049873140698863,
+      "power22": 0.31118049905798434,
+      "roundtrip_byte": 150
+    },
+    {
+      "byte": 151,
+      "encoded": 0.592156862745098,
+      "linear_reference": 0.30946892281750854,
+      "power22": 0.3157627437363971,
+      "roundtrip_byte": 151
+    },
+    {
+      "byte": 152,
+      "encoded": 0.596078431372549,
+      "linear_reference": 0.31398871337571754,
+      "power22": 0.3203815487918104,
+      "roundtrip_byte": 152
+    },
+    {
+      "byte": 153,
+      "encoded": 0.6,
+      "linear_reference": 0.31854677812509186,
+      "power22": 0.3250369625210763,
+      "roundtrip_byte": 153
+    },
+    {
+      "byte": 154,
+      "encoded": 0.6039215686274509,
+      "linear_reference": 0.32314320911295075,
+      "power22": 0.3297290329675149,
+      "roundtrip_byte": 154
+    },
+    {
+      "byte": 155,
+      "encoded": 0.6078431372549019,
+      "linear_reference": 0.3277780980565422,
+      "power22": 0.33445780792388924,
+      "roundtrip_byte": 155
+    },
+    {
+      "byte": 156,
+      "encoded": 0.611764705882353,
+      "linear_reference": 0.33245153634617935,
+      "power22": 0.3392233349353267,
+      "roundtrip_byte": 156
+    },
+    {
+      "byte": 157,
+      "encoded": 0.615686274509804,
+      "linear_reference": 0.33716361504833037,
+      "power22": 0.34402566130218676,
+      "roundtrip_byte": 157
+    },
+    {
+      "byte": 158,
+      "encoded": 0.6196078431372549,
+      "linear_reference": 0.3419144249086609,
+      "power22": 0.348864834082879,
+      "roundtrip_byte": 158
+    },
+    {
+      "byte": 159,
+      "encoded": 0.6235294117647059,
+      "linear_reference": 0.3467040563550296,
+      "power22": 0.35374090009662945,
+      "roundtrip_byte": 159
+    },
+    {
+      "byte": 160,
+      "encoded": 0.6274509803921569,
+      "linear_reference": 0.35153259950043936,
+      "power22": 0.3586539059261989,
+      "roundtrip_byte": 160
+    },
+    {
+      "byte": 161,
+      "encoded": 0.6313725490196078,
+      "linear_reference": 0.3564001441459435,
+      "power22": 0.36360389792055325,
+      "roundtrip_byte": 161
+    },
+    {
+      "byte": 162,
+      "encoded": 0.6352941176470588,
+      "linear_reference": 0.3613067797835095,
+      "power22": 0.36859092219748707,
+      "roundtrip_byte": 162
+    },
+    {
+      "byte": 163,
+      "encoded": 0.6392156862745098,
+      "linear_reference": 0.3662525955988395,
+      "power22": 0.37361502464620194,
+      "roundtrip_byte": 163
+    },
+    {
+      "byte": 164,
+      "encoded": 0.6431372549019608,
+      "linear_reference": 0.3712376804741491,
+      "power22": 0.37867625092984036,
+      "roundtrip_byte": 164
+    },
+    {
+      "byte": 165,
+      "encoded": 0.6470588235294118,
+      "linear_reference": 0.3762621229909065,
+      "power22": 0.3837746464879752,
+      "roundtrip_byte": 165
+    },
+    {
+      "byte": 166,
+      "encoded": 0.6509803921568628,
+      "linear_reference": 0.38132601143253014,
+      "power22": 0.38891025653905886,
+      "roundtrip_byte": 166
+    },
+    {
+      "byte": 167,
+      "encoded": 0.6549019607843137,
+      "linear_reference": 0.386429433787049,
+      "power22": 0.39408312608282897,
+      "roundtrip_byte": 167
+    },
+    {
+      "byte": 168,
+      "encoded": 0.6588235294117647,
+      "linear_reference": 0.39157247774972326,
+      "power22": 0.39929329990267437,
+      "roundtrip_byte": 168
+    },
+    {
+      "byte": 169,
+      "encoded": 0.6627450980392157,
+      "linear_reference": 0.39675523072562685,
+      "power22": 0.4045408225679618,
+      "roundtrip_byte": 169
+    },
+    {
+      "byte": 170,
+      "encoded": 0.6666666666666666,
+      "linear_reference": 0.4019777798321958,
+      "power22": 0.40982573843632336,
+      "roundtrip_byte": 170
+    },
+    {
+      "byte": 171,
+      "encoded": 0.6705882352941176,
+      "linear_reference": 0.4072402119017367,
+      "power22": 0.41514809165590655,
+      "roundtrip_byte": 171
+    },
+    {
+      "byte": 172,
+      "encoded": 0.6745098039215687,
+      "linear_reference": 0.41254261348390375,
+      "power22": 0.42050792616758714,
+      "roundtrip_byte": 172
+    },
+    {
+      "byte": 173,
+      "encoded": 0.6784313725490196,
+      "linear_reference": 0.4178850708481375,
+      "power22": 0.42590528570714575,
+      "roundtrip_byte": 173
+    },
+    {
+      "byte": 174,
+      "encoded": 0.6823529411764706,
+      "linear_reference": 0.4232676699860717,
+      "power22": 0.4313402138074096,
+      "roundtrip_byte": 174
+    },
+    {
+      "byte": 175,
+      "encoded": 0.6862745098039216,
+      "linear_reference": 0.4286904966139066,
+      "power22": 0.4368127538003594,
+      "roundtrip_byte": 175
+    },
+    {
+      "byte": 176,
+      "encoded": 0.6901960784313725,
+      "linear_reference": 0.43415363617474895,
+      "power22": 0.4423229488192018,
+      "roundtrip_byte": 176
+    },
+    {
+      "byte": 177,
+      "encoded": 0.6941176470588235,
+      "linear_reference": 0.4396571738409188,
+      "power22": 0.4478708418004099,
+      "roundtrip_byte": 177
+    },
+    {
+      "byte": 178,
+      "encoded": 0.6980392156862745,
+      "linear_reference": 0.44520119451622786,
+      "power22": 0.4534564754857306,
+      "roundtrip_byte": 178
+    },
+    {
+      "byte": 179,
+      "encoded": 0.7019607843137254,
+      "linear_reference": 0.45078578283822346,
+      "power22": 0.4590798924241601,
+      "roundtrip_byte": 179
+    },
+    {
+      "byte": 180,
+      "encoded": 0.7058823529411765,
+      "linear_reference": 0.45641102318040466,
+      "power22": 0.4647411349738896,
+      "roundtrip_byte": 180
+    },
+    {
+      "byte": 181,
+      "encoded": 0.7098039215686275,
+      "linear_reference": 0.4620769996544071,
+      "power22": 0.4704402453042184,
+      "roundtrip_byte": 181
+    },
+    {
+      "byte": 182,
+      "encoded": 0.7137254901960784,
+      "linear_reference": 0.467783796112159,
+      "power22": 0.4761772653974402,
+      "roundtrip_byte": 182
+    },
+    {
+      "byte": 183,
+      "encoded": 0.7176470588235294,
+      "linear_reference": 0.47353149614800955,
+      "power22": 0.4819522370506978,
+      "roundtrip_byte": 183
+    },
+    {
+      "byte": 184,
+      "encoded": 0.7215686274509804,
+      "linear_reference": 0.4793201831008268,
+      "power22": 0.48776520187781053,
+      "roundtrip_byte": 184
+    },
+    {
+      "byte": 185,
+      "encoded": 0.7254901960784313,
+      "linear_reference": 0.4851499400560704,
+      "power22": 0.49361620131107364,
+      "roundtrip_byte": 185
+    },
+    {
+      "byte": 186,
+      "encoded": 0.7294117647058823,
+      "linear_reference": 0.4910208498478356,
+      "power22": 0.4995052766030301,
+      "roundtrip_byte": 186
+    },
+    {
+      "byte": 187,
+      "encoded": 0.7333333333333333,
+      "linear_reference": 0.4969329950608704,
+      "power22": 0.505432468828216,
+      "roundtrip_byte": 187
+    },
+    {
+      "byte": 188,
+      "encoded": 0.7372549019607844,
+      "linear_reference": 0.5028864580325687,
+      "power22": 0.5113978188848795,
+      "roundtrip_byte": 188
+    },
+    {
+      "byte": 189,
+      "encoded": 0.7411764705882353,
+      "linear_reference": 0.5088813208549338,
+      "power22": 0.5174013674966733,
+      "roundtrip_byte": 189
+    },
+    {
+      "byte": 190,
+      "encoded": 0.7450980392156863,
+      "linear_reference": 0.5149176653765214,
+      "power22": 0.5234431552143247,
+      "roundtrip_byte": 190
+    },
+    {
+      "byte": 191,
+      "encoded": 0.7490196078431373,
+      "linear_reference": 0.5209955732043543,
+      "power22": 0.5295232224172772,
+      "roundtrip_byte": 191
+    },
+    {
+      "byte": 192,
+      "encoded": 0.7529411764705882,
+      "linear_reference": 0.5271151257058131,
+      "power22": 0.5356416093153108,
+      "roundtrip_byte": 192
+    },
+    {
+      "byte": 193,
+      "encoded": 0.7568627450980392,
+      "linear_reference": 0.5332764040105052,
+      "power22": 0.5417983559501369,
+      "roundtrip_byte": 193
+    },
+    {
+      "byte": 194,
+      "encoded": 0.7607843137254902,
+      "linear_reference": 0.5394794890121072,
+      "power22": 0.5479935021969718,
+      "roundtrip_byte": 194
+    },
+    {
+      "byte": 195,
+      "encoded": 0.7647058823529411,
+      "linear_reference": 0.5457244613701866,
+      "power22": 0.5542270877660852,
+      "roundtrip_byte": 195
+    },
+    {
+      "byte": 196,
+      "encoded": 0.7686274509803922,
+      "linear_reference": 0.5520114015120001,
+      "power22": 0.5604991522043282,
+      "roundtrip_byte": 196
+    },
+    {
+      "byte": 197,
+      "encoded": 0.7725490196078432,
+      "linear_reference": 0.5583403896342679,
+      "power22": 0.5668097348966382,
+      "roundtrip_byte": 197
+    },
+    {
+      "byte": 198,
+      "encoded": 0.7764705882352941,
+      "linear_reference": 0.5647115057049292,
+      "power22": 0.5731588750675233,
+      "roundtrip_byte": 198
+    },
+    {
+      "byte": 199,
+      "encoded": 0.7803921568627451,
+      "linear_reference": 0.5711248294648731,
+      "power22": 0.5795466117825252,
+      "roundtrip_byte": 199
+    },
+    {
+      "byte": 200,
+      "encoded": 0.7843137254901961,
+      "linear_reference": 0.5775804404296506,
+      "power22": 0.5859729839496614,
+      "roundtrip_byte": 200
+    },
+    {
+      "byte": 201,
+      "encoded": 0.788235294117647,
+      "linear_reference": 0.5840784178911641,
+      "power22": 0.5924380303208466,
+      "roundtrip_byte": 201
+    },
+    {
+      "byte": 202,
+      "encoded": 0.792156862745098,
+      "linear_reference": 0.5906188409193369,
+      "power22": 0.598941789493296,
+      "roundtrip_byte": 202
+    },
+    {
+      "byte": 203,
+      "encoded": 0.796078431372549,
+      "linear_reference": 0.5972017883637634,
+      "power22": 0.6054842999109072,
+      "roundtrip_byte": 203
+    },
+    {
+      "byte": 204,
+      "encoded": 0.8,
+      "linear_reference": 0.6038273388553378,
+      "power22": 0.6120655998656237,
+      "roundtrip_byte": 204
+    },
+    {
+      "byte": 205,
+      "encoded": 0.803921568627451,
+      "linear_reference": 0.6104955708078648,
+      "power22": 0.6186857274987796,
+      "roundtrip_byte": 205
+    },
+    {
+      "byte": 206,
+      "encoded": 0.807843137254902,
+      "linear_reference": 0.6172065624196511,
+      "power22": 0.6253447208024265,
+      "roundtrip_byte": 206
+    },
+    {
+      "byte": 207,
+      "encoded": 0.8117647058823529,
+      "linear_reference": 0.6239603916750761,
+      "power22": 0.6320426176206414,
+      "roundtrip_byte": 207
+    },
+    {
+      "byte": 208,
+      "encoded": 0.8156862745098039,
+      "linear_reference": 0.6307571363461468,
+      "power22": 0.6387794556508168,
+      "roundtrip_byte": 208
+    },
+    {
+      "byte": 209,
+      "encoded": 0.8196078431372549,
+      "linear_reference": 0.6375968739940326,
+      "power22": 0.6455552724449345,
+      "roundtrip_byte": 209
+    },
+    {
+      "byte": 210,
+      "encoded": 0.8235294117647058,
+      "linear_reference": 0.6444796819705821,
+      "power22": 0.6523701054108211,
+      "roundtrip_byte": 210
+    },
+    {
+      "byte": 211,
+      "encoded": 0.8274509803921568,
+      "linear_reference": 0.6514056374198242,
+      "power22": 0.6592239918133873,
+      "roundtrip_byte": 211
+    },
+    {
+      "byte": 212,
+      "encoded": 0.8313725490196079,
+      "linear_reference": 0.6583748172794485,
+      "power22": 0.6661169687758508,
+      "roundtrip_byte": 212
+    },
+    {
+      "byte": 213,
+      "encoded": 0.8352941176470589,
+      "linear_reference": 0.665387298282272,
+      "power22": 0.6730490732809419,
+      "roundtrip_byte": 213
+    },
+    {
+      "byte": 214,
+      "encoded": 0.8392156862745098,
+      "linear_reference": 0.6724431569576875,
+      "power22": 0.6800203421720954,
+      "roundtrip_byte": 214
+    },
+    {
+      "byte": 215,
+      "encoded": 0.8431372549019608,
+      "linear_reference": 0.6795424696330938,
+      "power22": 0.6870308121546249,
+      "roundtrip_byte": 215
+    },
+    {
+      "byte": 216,
+      "encoded": 0.8470588235294118,
+      "linear_reference": 0.6866853124353135,
+      "power22": 0.6940805197968822,
+      "roundtrip_byte": 216
+    },
+    {
+      "byte": 217,
+      "encoded": 0.8509803921568627,
+      "linear_reference": 0.6938717612919899,
+      "power22": 0.7011695015314021,
+      "roundtrip_byte": 217
+    },
+    {
+      "byte": 218,
+      "encoded": 0.8549019607843137,
+      "linear_reference": 0.7011018919329731,
+      "power22": 0.7082977936560323,
+      "roundtrip_byte": 218
+    },
+    {
+      "byte": 219,
+      "encoded": 0.8588235294117647,
+      "linear_reference": 0.7083757798916868,
+      "power22": 0.7154654323350483,
+      "roundtrip_byte": 219
+    },
+    {
+      "byte": 220,
+      "encoded": 0.8627450980392157,
+      "linear_reference": 0.7156935005064807,
+      "power22": 0.7226724536002546,
+      "roundtrip_byte": 220
+    },
+    {
+      "byte": 221,
+      "encoded": 0.8666666666666667,
+      "linear_reference": 0.7230551289219693,
+      "power22": 0.7299188933520705,
+      "roundtrip_byte": 221
+    },
+    {
+      "byte": 222,
+      "encoded": 0.8705882352941177,
+      "linear_reference": 0.7304607400903537,
+      "power22": 0.7372047873606051,
+      "roundtrip_byte": 222
+    },
+    {
+      "byte": 223,
+      "encoded": 0.8745098039215686,
+      "linear_reference": 0.7379104087727308,
+      "power22": 0.744530171266715,
+      "roundtrip_byte": 223
+    },
+    {
+      "byte": 224,
+      "encoded": 0.8784313725490196,
+      "linear_reference": 0.7454042095403874,
+      "power22": 0.7518950805830509,
+      "roundtrip_byte": 224
+    },
+    {
+      "byte": 225,
+      "encoded": 0.8823529411764706,
+      "linear_reference": 0.7529422167760779,
+      "power22": 0.7592995506950911,
+      "roundtrip_byte": 225
+    },
+    {
+      "byte": 226,
+      "encoded": 0.8862745098039215,
+      "linear_reference": 0.7605245046752924,
+      "power22": 0.7667436168621613,
+      "roundtrip_byte": 226
+    },
+    {
+      "byte": 227,
+      "encoded": 0.8901960784313725,
+      "linear_reference": 0.768151147247507,
+      "power22": 0.7742273142184416,
+      "roundtrip_byte": 227
+    },
+    {
+      "byte": 228,
+      "encoded": 0.8941176470588236,
+      "linear_reference": 0.7758222183174236,
+      "power22": 0.7817506777739623,
+      "roundtrip_byte": 228
+    },
+    {
+      "byte": 229,
+      "encoded": 0.8980392156862745,
+      "linear_reference": 0.7835377915261935,
+      "power22": 0.7893137424155858,
+      "roundtrip_byte": 229
+    },
+    {
+      "byte": 230,
+      "encoded": 0.9019607843137255,
+      "linear_reference": 0.7912979403326302,
+      "power22": 0.7969165429079781,
+      "roundtrip_byte": 230
+    },
+    {
+      "byte": 231,
+      "encoded": 0.9058823529411765,
+      "linear_reference": 0.799102738014409,
+      "power22": 0.8045591138945669,
+      "roundtrip_byte": 231
+    },
+    {
+      "byte": 232,
+      "encoded": 0.9098039215686274,
+      "linear_reference": 0.8069522576692516,
+      "power22": 0.8122414898984895,
+      "roundtrip_byte": 232
+    },
+    {
+      "byte": 233,
+      "encoded": 0.9137254901960784,
+      "linear_reference": 0.8148465722161012,
+      "power22": 0.8199637053235279,
+      "roundtrip_byte": 233
+    },
+    {
+      "byte": 234,
+      "encoded": 0.9176470588235294,
+      "linear_reference": 0.8227857543962835,
+      "power22": 0.8277257944550337,
+      "roundtrip_byte": 234
+    },
+    {
+      "byte": 235,
+      "encoded": 0.9215686274509803,
+      "linear_reference": 0.8307698767746546,
+      "power22": 0.8355277914608409,
+      "roundtrip_byte": 235
+    },
+    {
+      "byte": 236,
+      "encoded": 0.9254901960784314,
+      "linear_reference": 0.83879901174074,
+      "power22": 0.8433697303921693,
+      "roundtrip_byte": 236
+    },
+    {
+      "byte": 237,
+      "encoded": 0.9294117647058824,
+      "linear_reference": 0.846873231509858,
+      "power22": 0.8512516451845149,
+      "roundtrip_byte": 237
+    },
+    {
+      "byte": 238,
+      "encoded": 0.9333333333333333,
+      "linear_reference": 0.8549926081242338,
+      "power22": 0.8591735696585323,
+      "roundtrip_byte": 238
+    },
+    {
+      "byte": 239,
+      "encoded": 0.9372549019607843,
+      "linear_reference": 0.8631572134541023,
+      "power22": 0.8671355375209048,
+      "roundtrip_byte": 239
+    },
+    {
+      "byte": 240,
+      "encoded": 0.9411764705882353,
+      "linear_reference": 0.8713671191987972,
+      "power22": 0.8751375823652049,
+      "roundtrip_byte": 240
+    },
+    {
+      "byte": 241,
+      "encoded": 0.9450980392156862,
+      "linear_reference": 0.8796223968878317,
+      "power22": 0.8831797376727453,
+      "roundtrip_byte": 241
+    },
+    {
+      "byte": 242,
+      "encoded": 0.9490196078431372,
+      "linear_reference": 0.8879231178819663,
+      "power22": 0.8912620368134188,
+      "roundtrip_byte": 242
+    },
+    {
+      "byte": 243,
+      "encoded": 0.9529411764705882,
+      "linear_reference": 0.8962693533742664,
+      "power22": 0.8993845130465294,
+      "roundtrip_byte": 243
+    },
+    {
+      "byte": 244,
+      "encoded": 0.9568627450980393,
+      "linear_reference": 0.9046611743911496,
+      "power22": 0.907547199521614,
+      "roundtrip_byte": 244
+    },
+    {
+      "byte": 245,
+      "encoded": 0.9607843137254902,
+      "linear_reference": 0.9130986517934192,
+      "power22": 0.9157501292792527,
+      "roundtrip_byte": 245
+    },
+    {
+      "byte": 246,
+      "encoded": 0.9647058823529412,
+      "linear_reference": 0.9215818562772946,
+      "power22": 0.9239933352518732,
+      "roundtrip_byte": 246
+    },
+    {
+      "byte": 247,
+      "encoded": 0.9686274509803922,
+      "linear_reference": 0.9301108583754237,
+      "power22": 0.9322768502645428,
+      "roundtrip_byte": 247
+    },
+    {
+      "byte": 248,
+      "encoded": 0.9725490196078431,
+      "linear_reference": 0.938685728457888,
+      "power22": 0.940600707035753,
+      "roundtrip_byte": 248
+    },
+    {
+      "byte": 249,
+      "encoded": 0.9764705882352941,
+      "linear_reference": 0.9473065367331999,
+      "power22": 0.9489649381781952,
+      "roundtrip_byte": 249
+    },
+    {
+      "byte": 250,
+      "encoded": 0.9803921568627451,
+      "linear_reference": 0.9559733532492861,
+      "power22": 0.9573695761995268,
+      "roundtrip_byte": 250
+    },
+    {
+      "byte": 251,
+      "encoded": 0.984313725490196,
+      "linear_reference": 0.9646862478944651,
+      "power22": 0.9658146535031301,
+      "roundtrip_byte": 251
+    },
+    {
+      "byte": 252,
+      "encoded": 0.9882352941176471,
+      "linear_reference": 0.9734452903984125,
+      "power22": 0.9743002023888613,
+      "roundtrip_byte": 252
+    },
+    {
+      "byte": 253,
+      "encoded": 0.9921568627450981,
+      "linear_reference": 0.9822505503331171,
+      "power22": 0.9828262550537913,
+      "roundtrip_byte": 253
+    },
+    {
+      "byte": 254,
+      "encoded": 0.996078431372549,
+      "linear_reference": 0.9911020971138298,
+      "power22": 0.9913928435929399,
+      "roundtrip_byte": 254
+    },
+    {
+      "byte": 255,
+      "encoded": 1.0,
+      "linear_reference": 1.0,
+      "power22": 1.0,
+      "roundtrip_byte": 255
+    }
+  ],
+  "encoded_half": {
+    "encoded": 0.5,
+    "linear_reference": 0.21404114048223255,
+    "power22": 0.217637640824031,
+    "absolute_difference": 0.003596500341798453
+  },
+  "midpoint": {
+    "encoded_average": 0.5,
+    "encoded_average_byte": 128,
+    "decoded_encoded_average": 0.21404114048223255,
+    "linear_average": 0.5,
+    "encoded_linear_average": 0.7353569830524495,
+    "encoded_linear_average_byte": 188,
+    "decoded_byte128": 0.21586050011389926,
+    "decoded_byte188": 0.5028864580325687
+  },
+  "isolated_filmic_curve": [
+    {
+      "input": 0,
+      "curve": 0,
+      "power_output": 0.0
+    },
+    {
+      "input": 0.25,
+      "curve": 0.3741109530583214,
+      "power_output": 0.6396012198975219
+    },
+    {
+      "input": 0.5,
+      "curve": 0.6163069544364508,
+      "power_output": 0.8025151002184169
+    },
+    {
+      "input": 1,
+      "curve": 0.8037974683544302,
+      "power_output": 0.905492450252642
+    },
+    {
+      "input": 2,
+      "curve": 0.914855072463768,
+      "power_output": 0.9603573483587566
+    }
+  ],
+  "exposure_control": {
+    "input": 0.25,
+    "exposure": 2,
+    "expose_then_curve": 0.6163069544364508,
+    "curve_then_double": 0.7482219061166429,
+    "scope": "Isolated source scalar curve. Bloom, RGB grading, vignette and grain omitted; not a complete composite result."
+  }
+}

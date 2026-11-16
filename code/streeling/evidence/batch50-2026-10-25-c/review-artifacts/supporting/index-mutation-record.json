@@ -1,0 +1,15 @@
+{
+  "action": "git add -- four explicit untracked proof-test paths",
+  "before": "Index empty: git diff --cached --raw returned no lines before this mutation",
+  "after_raw": "index-after.txt",
+  "paths": [
+    "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_a.py",
+    "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_b.py",
+    "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_c.py",
+    "code/streeling/test_check.py"
+  ],
+  "other_index_mutations": 0,
+  "commits": 0,
+  "working_tree_mutations": 0,
+  "later_root_change": "B observation newline fix was applied by root after this staging; root owns final staging"
+}

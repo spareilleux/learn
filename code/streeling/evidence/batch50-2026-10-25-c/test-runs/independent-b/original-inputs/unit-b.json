@@ -1,0 +1,3546 @@
+{
+  "schema": "streeling-batch50-unit-evidence-v1",
+  "unit": "b",
+  "base_learn_commit": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+  "plan_commit": "d687c942ccb1be716375280d112744dcc89cf920",
+  "scope": "Sixteen distinct authored agentic/system operations, full EN/FR/ES source. Finite authored arithmetic is not actual learner, engine, material or production observation.",
+  "primary_references": [
+    {
+      "id": "irt",
+      "url": "https://quantdev.ssri.psu.edu/sites/qdev/files/IRT_tutorial_FA17_2.html",
+      "pin": "Julie Wood, Logistic IRT Models, 2017-11-12; read 2026-10-26",
+      "actual_reading_scope": "Section 3 two-parameter logistic response function and meanings of discrimination and difficulty, actual browser text inspected; information derived separately."
+    },
+    {
+      "id": "pava",
+      "url": "https://docs.scipy.org/doc/scipy-1.14.0/reference/generated/scipy.optimize.isotonic_regression.html",
+      "pin": "SciPy 1.14.0 documentation; read 2026-10-26",
+      "actual_reading_scope": "PAVA, case weights, monotone weighted least-squares objective and equal-valued blocks, browser lines 28-69. No SciPy execution."
+    },
+    {
+      "id": "cue",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37730934/",
+      "pin": "Scheller and Nardini, 2024, DOI 10.3758/s13428-023-02227-w; read 2026-10-26",
+      "actual_reading_scope": "Abstract only: precision-gain comparator should be the best single cue for each observer; no full-text or correlated-weight equation reading claimed. Covariance formula derived in authored case."
+    },
+    {
+      "id": "linear",
+      "url": "https://hankyang.seas.harvard.edu/OptimalControlEstimation/app-lti-system-theory.html",
+      "pin": "Harvard Optimal Control and Estimation, Appendix C; read 2026-10-26",
+      "actual_reading_scope": "Controllability matrix and full-row-rank criterion inspected in returned primary text. Finite discrete two-step trajectory derived separately; no control package run."
+    },
+    {
+      "id": "sysid",
+      "url": "https://underactuated.csail.mit.edu/sysid.html",
+      "pin": "Russ Tedrake, Underactuated Robotics, System Identification chapter; read 2026-10-26",
+      "actual_reading_scope": "Parameter identifiability from null-space of a sufficiently rich data matrix, browser line 87; exact small regression authored separately."
+    },
+    {
+      "id": "interleave",
+      "url": "https://www.rfc-editor.org/rfc/rfc8088.html",
+      "pin": "RFC 8088, May 2017; read 2026-10-26",
+      "actual_reading_scope": "RFC 8088 section 5.1.3, actual browser lines 1769-1809: burst spreading, buffering delay and complexity; toy permutation and erasure counts are authored."
+    },
+    {
+      "id": "mst",
+      "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.tree.mst.minimum_spanning_tree.html",
+      "pin": "NetworkX 3.7 documentation; read 2026-10-26",
+      "actual_reading_scope": "Minimum spanning tree or forest, undirected graph and connected-versus-disconnected behavior, actual browser lines 93-106. Library not run."
+    },
+    {
+      "id": "color",
+      "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.coloring.greedy_color.html",
+      "pin": "NetworkX 3.7 documentation; read 2026-10-26",
+      "actual_reading_scope": "Adjacent vertices cannot share a color; strategy determines greedy order, actual browser lines 93-100. Our exhaustive optimum is not a greedy-color guarantee."
+    },
+    {
+      "id": "signed",
+      "url": "https://arxiv.org/abs/1701.07963",
+      "pin": "Zaslavsky, arXiv:1701.07963v2, 2018-01-15; read 2026-10-26",
+      "actual_reading_scope": "Author abstract actually inspected, browser lines 8-24: edge signs and cycle product definition; no full-paper theorem verification claimed."
+    },
+    {
+      "id": "hamilton",
+      "url": "https://www.census.gov/about/history/historical-censuses-and-surveys/census-programs-surveys/decennial-census/methods.html",
+      "pin": "US Census Bureau, Methods of Apportionment; read 2026-10-26",
+      "actual_reading_scope": "Hamilton/Vinton section: take whole quotas then assign surplus seats by descending remainders. Authored review allocation is an analogy, not congressional implementation."
+    },
+    {
+      "id": "sampling",
+      "url": "https://www.census.gov/library/working-papers/2014/adrm/rrs2014-07.html",
+      "pin": "Tommy Wright, US Census Bureau RRS2014-07, 2014; read 2026-10-26",
+      "actual_reading_scope": "Abstract lines 172-177: exact integer stratified allocation, fixed total and lower/upper bounds; rounded continuous Neyman allocation need not be optimal. No full algorithm or real survey run."
+    },
+    {
+      "id": "bayes",
+      "url": "https://www.cs.cornell.edu/courses/cs2800/2016fa/lectures/lec17-prob.html",
+      "pin": "Cornell CS2800, Fall 2016, lecture 17; read 2026-10-26",
+      "actual_reading_scope": "Complete short Bayes/total-probability derivation inspected, browser lines 9-22; finite total variation derived separately."
+    },
+    {
+      "id": "arithmetic",
+      "url": "https://www.ece.unb.ca/tervo/ece4253/arith.shtml",
+      "pin": "University of New Brunswick ECE4253, Arithmetic Coding; read 2026-10-26",
+      "actual_reading_scope": "Opening distinction between symbol codewords and whole-message arithmetic representation, plus interval construction below; actual primary page inspected. Toy rational coder is independently authored."
+    },
+    {
+      "id": "convex",
+      "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxslides.pdf",
+      "pin": "Boyd and Vandenberghe, Convex Optimization, revised slides 2023; read 2026-10-26",
+      "actual_reading_scope": "Optimization actions/objectives/constraints, PDF pages 3-4; Pareto optimality and scalarization passages inspected by actual browser find. Only those bounded passages claimed, no full-book reading."
+    },
+    {
+      "id": "irt_information",
+      "url": "https://www.publichealth.columbia.edu/research/population-health-methods/item-response-theory",
+      "pin": "Columbia University Mailman School of Public Health, Item Response Theory; read 2026-10-26",
+      "actual_reading_scope": "Two-parameter information formula and local independence/multidimensional limits, actual browser lines 80-98. No software run."
+    }
+  ],
+  "courses": [
+    {
+      "code": "COG021",
+      "department": "cognitive-science",
+      "module_id": "cog-021-compare-logistic-item-information-at-a-stated-ability",
+      "title": "Compare Logistic Item Information at a Stated Ability",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-021-compare-logistic-item-information-at-a-stated-ability.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-021-compare-logistic-item-information-at-a-stated-ability.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-021-compare-logistic-item-information-at-a-stated-ability.es.md"
+      },
+      "novelty_vs_prerequisites": "COG020 screens a fixed item using an observed rest-score split. This computes conditional Fisher information from a stipulated logistic response curve and shows its ranking changes with ability; no item parameters are estimated.",
+      "prerequisites": [
+        "cog-020-screen-an-item-using-the-rest-score"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/cognitive-science/en/cog-020-screen-an-item-using-the-rest-score.md",
+          "path_or_url": "streeling/courses/cognitive-science/en/cog-020-screen-an-item-using-the-rest-score.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "6468b119afcdaec5145b431b4e2a9ea19003701e28309e7ebd6db9f6d1f19a47",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+          "read_method": "Actual local source bytes and parser/index passage inspected."
+        },
+        {
+          "path_or_url": "https://quantdev.ssri.psu.edu/sites/qdev/files/IRT_tutorial_FA17_2.html",
+          "pin": "Julie Wood, Logistic IRT Models, 2017-11-12; read 2026-10-26",
+          "scope": "Section 3 two-parameter logistic response function and meanings of discrimination and difficulty, actual browser text inspected; information derived separately.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        },
+        {
+          "path_or_url": "https://www.publichealth.columbia.edu/research/population-health-methods/item-response-theory",
+          "pin": "Columbia University Mailman School of Public Health, Item Response Theory; read 2026-10-26",
+          "scope": "Two-parameter information formula and local independence/multidimensional limits, actual browser lines 80-98. No software run.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        }
+      ],
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/cognitive-science/en/cog-021-compare-logistic-item-information-at-a-stated-ability.md",
+          "sha256": "149bcb84d813f167d77e9666ea1764af783a1d7948f0e7bba36a99ea12a54465"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/cognitive-science/fr/cog-021-compare-logistic-item-information-at-a-stated-ability.fr.md",
+          "sha256": "58d13bfdba403e9fc003955d20ec4761447b63e07d302dd380306ffd25411f65"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/cognitive-science/es/cog-021-compare-logistic-item-information-at-a-stated-ability.es.md",
+          "sha256": "c7fc81b3784a3e0d979f98e776249cbd264ffa7a9c6832f63482298d1526243b"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "theta": 0,
+          "items": [
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              1
+            ]
+          ],
+          "round_digits": 12
+        },
+        "formula": "For each [a,b], P=1/(1+exp(-a*(theta-b))); I=a*a*P*(1-P). Round only displayed probabilities/information to round_digits; choose largest unrounded I, retaining ties.",
+        "expected": {
+          "probabilities": [
+            0.5,
+            0.119202922022
+          ],
+          "information": [
+            0.25,
+            0.419974341614
+          ],
+          "best_indices": [
+            1
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "theta": -1,
+            "items": [
+              [
+                1,
+                0
+              ],
+              [
+                2,
+                1
+              ]
+            ],
+            "round_digits": 12
+          },
+          "expected": {
+            "probabilities": [
+              0.26894142137,
+              0.017986209962
+            ],
+            "information": [
+              0.196611933241,
+              0.070650824853
+            ],
+            "best_indices": [
+              0
+            ]
+          },
+          "why": "Moving ability changes which item is locally informative."
+        },
+        "input_types": {
+          "theta": "finite real ability",
+          "items": "ordered [positive discrimination a, finite difficulty b] pairs",
+          "round_digits": "nonnegative integer"
+        },
+        "assumptions": [
+          "All inputs are stipulated teaching values, not measured project events.",
+          "Only the declared finite objective and constraints are represented."
+        ],
+        "limits": "No real learner ability, fitted item parameters, guessing model or adaptive tutoring result is observed."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Which item is more informative in the fixed case?",
+          "expected_answer": "Index `1` wins: information is `0.419974341614` versus `0.25`. Its success probability is lower, so information and ease are different.",
+          "decision": null
+        },
+        "2": {
+          "question": "Apply the ability control.",
+          "expected_answer": "At `theta=-1`, index `0` wins with `0.196611933241` versus `0.070650824853`. The ordering is conditional, not universal.",
+          "decision": null
+        },
+        "3": {
+          "question": "Does the calculation estimate ability?",
+          "expected_answer": "No. Ability and item parameters are stipulated inputs. A real estimate requires responses and a justified measurement model.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the retained project helper actually establish?",
+          "expected_answer": "It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which acceptance decisions can the corrected answer key close?",
+          "expected_answer": "None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Index `1` wins: information is `0.419974341614` versus `0.25`. Its success probability is lower, so information and ease are different.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: At `theta=-1`, index `0` wins with `0.196611933241` versus `0.070650824853`. The ordering is conditional, not universal.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: No. Ability and item parameters are stipulated inputs. A real estimate requires responses and a justified measurement model.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reproduce and explain the fixed operation for Compare Logistic Item Information at a Stated Ability.",
+        "direct_manual_baseline": "Calculate both response probabilities and information values by hand before comparing items.",
+        "falsifier": "The proposed ranking fails if the stated ability is changed without recomputing the item information.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "COG022",
+      "department": "cognitive-science",
+      "module_id": "cog-022-pool-adjacent-calibration-violations-with-case-weights",
+      "title": "Pool Adjacent Calibration Violations with Case Weights",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-022-pool-adjacent-calibration-violations-with-case-weights.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-022-pool-adjacent-calibration-violations-with-case-weights.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-022-pool-adjacent-calibration-violations-with-case-weights.es.md"
+      },
+      "novelty_vs_prerequisites": "Prerequisites score confidence and inspect small calibration counts. This fits an order-constrained weighted least-squares sequence by pooling adjacent violating blocks; it is not another calibration score.",
+      "prerequisites": [
+        "cog-003-calibrating-fretboard-confidence",
+        "psy-017-calibration-with-six-observations"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/cognitive-science/en/cog-003-calibrating-fretboard-confidence.md",
+          "path_or_url": "streeling/courses/cognitive-science/en/cog-003-calibrating-fretboard-confidence.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "9610552ea1f8bf2727e820232fa1ad17f9914feb229b4f275173d5b861561e16",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "streeling/courses/psychohistory/en/psy-017-calibration-with-six-observations.md",
+          "path_or_url": "streeling/courses/psychohistory/en/psy-017-calibration-with-six-observations.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "a9def13deb3dc4f572c69bff1f965a394d035bc33d3c0aa837e2f4ffd8237071",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+          "read_method": "Actual local source bytes and parser/index passage inspected."
+        },
+        {
+          "path_or_url": "https://docs.scipy.org/doc/scipy-1.14.0/reference/generated/scipy.optimize.isotonic_regression.html",
+          "pin": "SciPy 1.14.0 documentation; read 2026-10-26",
+          "scope": "PAVA, case weights, monotone weighted least-squares objective and equal-valued blocks, browser lines 28-69. No SciPy execution.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        }
+      ],
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/cognitive-science/en/cog-022-pool-adjacent-calibration-violations-with-case-weights.md",
+          "sha256": "301bb309a04167879fbfd183901968487ff0512a265d48c8527c2a34dfa26727"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/cognitive-science/fr/cog-022-pool-adjacent-calibration-violations-with-case-weights.fr.md",
+          "sha256": "ad013fa61071a42a3202f17936955fe2240d2cb4f75a57927d9c3f9a3fad95d1"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/cognitive-science/es/cog-022-pool-adjacent-calibration-violations-with-case-weights.es.md",
+          "sha256": "3de149e76069d657d80811fc3f6c30eb76625274aaba73fe9c025cde5532a8b6"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "y": [
+            0.2,
+            0.8,
+            0.4,
+            0.9
+          ],
+          "weights": [
+            1,
+            1,
+            3,
+            1
+          ]
+        },
+        "formula": "Weighted nondecreasing least squares: minimize sum(weights[i]*(fit[i]-y[i])**2) subject to fit[i]<=fit[i+1]. PAVA merges adjacent decreasing block means using summed weights.",
+        "expected": {
+          "fit": [
+            0.2,
+            0.5,
+            0.5,
+            0.9
+          ],
+          "weighted_squared_error": 0.12
+        },
+        "negative_control": {
+          "values": {
+            "y": [
+              0.2,
+              0.8,
+              0.4,
+              0.9
+            ],
+            "weights": [
+              1,
+              3,
+              1,
+              1
+            ]
+          },
+          "expected": {
+            "fit": [
+              0.2,
+              0.7,
+              0.7,
+              0.9
+            ],
+            "weighted_squared_error": 0.12
+          },
+          "why": "Changing case weights changes the pooled mean; sorting responses is not weighted fitting."
+        },
+        "input_types": {
+          "y": "ordered finite observed frequencies",
+          "weights": "same-length strictly positive case weights"
+        },
+        "assumptions": [
+          "All inputs are stipulated teaching values, not measured project events.",
+          "Only the declared finite objective and constraints are represented."
+        ],
+        "limits": "No held-out calibration, actual learner counts or behavior of a deployed agent is established."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the pooled block.",
+          "expected_answer": "The violating values pool to `(1*0.8+3*0.4)/4=0.5`; the fit is `[0.2,0.5,0.5,0.9]`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Apply the swapped-weight control.",
+          "expected_answer": "The pooled value becomes `(3*0.8+1*0.4)/4=0.7`. Both weighted objectives are `0.12`, but the fitted sequences differ.",
+          "decision": null
+        },
+        "3": {
+          "question": "Why keep the original bin order?",
+          "expected_answer": "The ordering belongs to confidence scores. Sorting success frequencies would move outcomes to different scores and change the problem.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the retained project helper actually establish?",
+          "expected_answer": "It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which acceptance decisions can the corrected answer key close?",
+          "expected_answer": "None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: The violating values pool to `(1*0.8+3*0.4)/4=0.5`; the fit is `[0.2,0.5,0.5,0.9]`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: The pooled value becomes `(3*0.8+1*0.4)/4=0.7`. Both weighted objectives are `0.12`, but the fitted sequences differ.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: The ordering belongs to confidence scores. Sorting success frequencies would move outcomes to different scores and change the problem.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reproduce and explain the fixed operation for Pool Adjacent Calibration Violations with Case Weights.",
+        "direct_manual_baseline": "Write weighted block sums and merge every decreasing adjacent boundary on paper.",
+        "falsifier": "A reported monotone fit uses equal weights despite unequal declared case weights, or sorts outcomes away from their score identities.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "COG023",
+      "department": "cognitive-science",
+      "module_id": "cog-023-carry-cue-covariance-into-linear-fusion",
+      "title": "Carry Cue Covariance into Linear Fusion",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-023-carry-cue-covariance-into-linear-fusion.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-023-carry-cue-covariance-into-linear-fusion.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-023-carry-cue-covariance-into-linear-fusion.es.md"
+      },
+      "novelty_vs_prerequisites": "CYB015 propagates covariance through temporal smoothing. This optimizes unbiased simultaneous cue weights with cross-cue covariance, including a negative unconstrained weight; it is not another smoothing recurrence.",
+      "prerequisites": [
+        "cog-005-separate-pitch-estimates-from-listener-reports",
+        "cyb-015-carry-covariance-through-smoothed-telemetry"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/cognitive-science/en/cog-005-separate-pitch-estimates-from-listener-reports.md",
+          "path_or_url": "streeling/courses/cognitive-science/en/cog-005-separate-pitch-estimates-from-listener-reports.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "8e3d710484cd9d30a79681670a757eab63b7b39670a8d2145182aab2874ead32",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "streeling/courses/cybernetics/en/cyb-015-carry-covariance-through-smoothed-telemetry.md",
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-015-carry-covariance-through-smoothed-telemetry.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "5e25e02722276f8925750bc88faf9222200c7a91bbffe20051f8ef48686905c2",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+          "read_method": "Actual local source bytes and parser/index passage inspected."
+        },
+        {
+          "path_or_url": "https://pubmed.ncbi.nlm.nih.gov/37730934/",
+          "pin": "Scheller and Nardini, 2024, DOI 10.3758/s13428-023-02227-w; read 2026-10-26",
+          "scope": "Abstract only: precision-gain comparator should be the best single cue for each observer; no full-text or correlated-weight equation reading claimed. Covariance formula derived in authored case.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        }
+      ],
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/cognitive-science/en/cog-023-carry-cue-covariance-into-linear-fusion.md",
+          "sha256": "efccde8cd3f80d9d4460e951692ab618e0397661018af68051c6f893f536e053"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/cognitive-science/fr/cog-023-carry-cue-covariance-into-linear-fusion.fr.md",
+          "sha256": "121e31dfc8a84fd8e97dc7b412360cafdecf1e383e1ffaf0e08dfc547f628905"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/cognitive-science/es/cog-023-carry-cue-covariance-into-linear-fusion.es.md",
+          "sha256": "cb580952b2bebb5368773dd595d1df0a839d3c989b456e05d572ed2e704c3050"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "estimates": [
+            10,
+            14
+          ],
+          "variances": [
+            1,
+            4
+          ],
+          "covariance": 1.5
+        },
+        "formula": "For unbiased estimates, w1=(v2-c)/(v1+v2-2*c), w2=1-w1; fused=w1*x1+w2*x2; variance=w1*w1*v1+w2*w2*v2+2*w1*w2*c. Weights are unconstrained real numbers summing to one.",
+        "expected": {
+          "weights": [
+            1.25,
+            -0.25
+          ],
+          "fused": 9,
+          "variance": 0.875,
+          "independence_weight_variance": 1.28
+        },
+        "negative_control": {
+          "values": {
+            "estimates": [
+              10,
+              14
+            ],
+            "variances": [
+              1,
+              4
+            ],
+            "covariance": 0
+          },
+          "expected": {
+            "weights": [
+              0.8,
+              0.2
+            ],
+            "fused": 10.8,
+            "variance": 0.8,
+            "independence_weight_variance": 0.8
+          },
+          "why": "Covariance changes the optimum; inverse-variance weights assume independence."
+        },
+        "input_types": {
+          "estimates": "two finite unbiased scalar estimates",
+          "variances": "two positive marginal variances",
+          "covariance": "finite covariance giving a positive-definite covariance matrix"
+        },
+        "assumptions": [
+          "All inputs are stipulated teaching values, not measured project events.",
+          "Only the declared finite objective and constraints are represented."
+        ],
+        "limits": "No perceptual fusion, actual detector variance, unbiasedness test or deployed interface gain is measured."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Find the correlated-case weights.",
+          "expected_answer": "Weights `[1.25,-0.25]` sum to `1`; fused estimate is `9` and variance `0.875`. Negative weight is allowed by the stated unconstrained model.",
+          "decision": null
+        },
+        "2": {
+          "question": "Apply the independence control.",
+          "expected_answer": "With covariance `0`, weights are `[0.8,0.2]`, estimate `10.8`, variance `0.8`. Those weights yield variance `1.28` under the original covariance.",
+          "decision": null
+        },
+        "3": {
+          "question": "Does a negative weight prove the input is invalid?",
+          "expected_answer": "No. The covariance matrix is positive definite and weights are unconstrained. Requiring nonnegative weights would define a different optimization problem.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the retained project helper actually establish?",
+          "expected_answer": "It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which acceptance decisions can the corrected answer key close?",
+          "expected_answer": "None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Weights `[1.25,-0.25]` sum to `1`; fused estimate is `9` and variance `0.875`. Negative weight is allowed by the stated unconstrained model.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: With covariance `0`, weights are `[0.8,0.2]`, estimate `10.8`, variance `0.8`. Those weights yield variance `1.28` under the original covariance.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: No. The covariance matrix is positive definite and weights are unconstrained. Requiring nonnegative weights would define a different optimization problem.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reproduce and explain the fixed operation for Carry Cue Covariance into Linear Fusion.",
+        "direct_manual_baseline": "Expand the fused-error variance and differentiate the quadratic before selecting weights.",
+        "falsifier": "A precision claim evaluates correlated cues using a variance formula that drops the covariance term.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CYB021",
+      "department": "cybernetics",
+      "module_id": "cyb-021-test-finite-horizon-control-reachability",
+      "title": "Test Finite-Horizon Control Reachability",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-021-test-finite-horizon-control-reachability.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-021-test-finite-horizon-control-reachability.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-021-test-finite-horizon-control-reachability.es.md"
+      },
+      "novelty_vs_prerequisites": "MAT024 already teaches controllability rank and the same double integrator; that is explicitly baseline. The new operation enumerates bounded finite-alphabet input sequences for a target/horizon and minimizes command energy. Its shorter-horizon control has full rank but no admissible sequence, so unrestricted rank alone cannot supply the result.",
+      "prerequisites": [
+        "cyb-018-reconstruct-hidden-state-from-distinct-dynamics",
+        "cyb-019-test-coupled-feedback-eigenmodes",
+        "mat-024-dynamical-systems-stability-feedback"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/mathematics/en/mat-024-dynamical-systems-stability-feedback.md",
+          "path_or_url": "streeling/courses/mathematics/en/mat-024-dynamical-systems-stability-feedback.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "9640f76dbdee018136ff8fb3323b8d94ec4a648969eac6553cd9d3ecd728a976",
+          "scope": "Complete section 6 inspected after novelty search found existing controllability material, including the same double integrator. New course changed to bounded finite-alphabet horizon feasibility and energy optimization.",
+          "read_method": "Actual local source section read in tool output; no historical runtime rerun."
+        },
+        {
+          "path": "streeling/courses/cybernetics/en/cyb-018-reconstruct-hidden-state-from-distinct-dynamics.md",
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-018-reconstruct-hidden-state-from-distinct-dynamics.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "88dc9bde079f649c2f384d4590adef0111ac6409b3aa76a20baf3979ac4f78d2",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "streeling/courses/cybernetics/en/cyb-019-test-coupled-feedback-eigenmodes.md",
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-019-test-coupled-feedback-eigenmodes.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "8b42936500da3f7c3aaccb35e6142bcd2782c87c98ee133e0927e74967318806",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+          "read_method": "Actual local source bytes and parser/index passage inspected."
+        },
+        {
+          "path_or_url": "https://hankyang.seas.harvard.edu/OptimalControlEstimation/app-lti-system-theory.html",
+          "pin": "Harvard Optimal Control and Estimation, Appendix C; read 2026-10-26",
+          "scope": "Controllability matrix and full-row-rank criterion inspected in returned primary text. Finite discrete two-step trajectory derived separately; no control package run.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        }
+      ],
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/cybernetics/en/cyb-021-test-finite-horizon-control-reachability.md",
+          "sha256": "8b819071ed187ec1af068d59823b807275c70d35459c438c1e3c00d4f9d521c2"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/cybernetics/fr/cyb-021-test-finite-horizon-control-reachability.fr.md",
+          "sha256": "ffbe7eacbb56d9005d1e661df6ae6168b6b08cea20ef3495e331a723fa926550"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/cybernetics/es/cyb-021-test-finite-horizon-control-reachability.es.md",
+          "sha256": "6eb936317b1d937e18727494c52cb1f2e15936debb14b3f1a8d3f99f4df97727"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "A": [
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "B": [
+            0,
+            1
+          ],
+          "initial": [
+            0,
+            0
+          ],
+          "target": [
+            2,
+            1
+          ],
+          "horizon": 3,
+          "allowed_controls": [
+            -1,
+            0,
+            1
+          ]
+        },
+        "formula": "For x_next=A*x+B*u, enumerate every allowed_controls sequence of length horizon in lexicographic order. Propagate from initial; retain sequences whose final state equals target. Report reachability_matrix=[A^(horizon-1)*B,...,B] and its exact rank separately. Minimize sum(u*u) over feasible sequences, retaining all ties. Empty feasible set has null minimum_energy and null final_state.",
+        "expected": {
+          "reachability_matrix": [
+            [
+              2,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "rank": 2,
+          "feasible_sequences": [
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "minimum_energy": 1,
+          "optimal_controls": [
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "final_state": [
+            2,
+            1
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "A": [
+              [
+                1,
+                1
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "B": [
+              0,
+              1
+            ],
+            "initial": [
+              0,
+              0
+            ],
+            "target": [
+              2,
+              1
+            ],
+            "horizon": 2,
+            "allowed_controls": [
+              -1,
+              0,
+              1
+            ]
+          },
+          "expected": {
+            "reachability_matrix": [
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "rank": 2,
+            "feasible_sequences": [],
+            "minimum_energy": null,
+            "optimal_controls": [],
+            "final_state": null
+          },
+          "why": "The shorter horizon retains full linear controllability rank but cannot reach the target with the declared bounded discrete action alphabet."
+        },
+        "input_types": {
+          "A": "rational two-by-two transition matrix",
+          "B": "rational two-vector for scalar input",
+          "initial": "rational initial two-vector",
+          "target": "rational target two-vector",
+          "horizon": "positive integer",
+          "allowed_controls": "ordered distinct finite rational scalar actions"
+        },
+        "assumptions": [
+          "Every action sequence uses only the declared finite action alphabet.",
+          "Energy is the stipulated sum of squared commands, not measured electricity or human effort."
+        ],
+        "limits": "Finite exhaustive bounded-command feasibility and energy are new here; unrestricted linear rank is baseline knowledge. No actual queue, continuous-input optimum, physical controller or execution permission is established."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Why keep command-time order?",
+          "expected_answer": "The fixed matrix is `[A*A*B,A*B,B]` for `[u0,u1,u2]`. Earlier commands propagate longer, so equal command magnitudes can have different endpoint effects.",
+          "decision": null
+        },
+        "2": {
+          "question": "Find the bounded fixed optimum.",
+          "expected_answer": "The matrix `[[2,1,0],[1,1,1]]` has rank `2`. The sole feasible sequence `[1,0,0]` reaches `[2,1]` with squared-command energy `1`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Why does full rank not rescue the shorter-horizon control?",
+          "expected_answer": "At horizon `2`, the matrix still has rank `2`, but its unrestricted solution `[2,-1]` uses forbidden action `2`. The feasible sequence set is empty; minimum energy is `null`.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the retained project helper actually establish?",
+          "expected_answer": "It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which acceptance decisions can the corrected answer key close?",
+          "expected_answer": "None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: The fixed matrix is `[A*A*B,A*B,B]` for `[u0,u1,u2]`. Earlier commands propagate longer, so equal command magnitudes can have different endpoint effects.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: The matrix `[[2,1,0],[1,1,1]]` has rank `2`. The sole feasible sequence `[1,0,0]` reaches `[2,1]` with squared-command energy `1`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: At horizon `2`, the matrix still has rank `2`, but its unrestricted solution `[2,-1]` uses forbidden action `2`. The feasible sequence set is empty; minimum energy is `null`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reproduce and explain the fixed operation for Test Finite-Horizon Control Reachability.",
+        "direct_manual_baseline": "Enumerate allowed command sequences, propagate every state transition and compare squared-command energy for exact target matches.",
+        "falsifier": "A rank-based executable-target claim has no command sequence satisfying the declared horizon and finite action alphabet.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CYB022",
+      "department": "cybernetics",
+      "module_id": "cyb-022-project-proposed-actions-onto-a-declared-feasible-set",
+      "title": "Project Proposed Actions onto a Declared Feasible Set",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-022-project-proposed-actions-onto-a-declared-feasible-set.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-022-project-proposed-actions-onto-a-declared-feasible-set.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-022-project-proposed-actions-onto-a-declared-feasible-set.es.md"
+      },
+      "novelty_vs_prerequisites": "CYB017 bounds actuator changes and CYB020 checks invariant-set closure. This minimally changes a proposed scalar action subject to simultaneous action and next-state constraints, explicitly handling an empty intersection.",
+      "prerequisites": [
+        "cyb-017-limit-command-change-separately-from-amplitude",
+        "cyb-020-check-disturbance-robust-set-closure"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/cybernetics/en/cyb-017-limit-command-change-separately-from-amplitude.md",
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-017-limit-command-change-separately-from-amplitude.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "dec0ab5226f2853aec56fdbb4320f6d6aad574ab12629ae4a0b2420e7d5bcdc0",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "streeling/courses/cybernetics/en/cyb-020-check-disturbance-robust-set-closure.md",
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-020-check-disturbance-robust-set-closure.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "e0fc9f1aec0d70c7d84f2b8823320d77c413e6cfdf8301881f2e0878f3e3a619",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+          "read_method": "Actual local source bytes and parser/index passage inspected."
+        },
+        {
+          "path_or_url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxslides.pdf",
+          "pin": "Boyd and Vandenberghe, Convex Optimization, revised slides 2023; read 2026-10-26",
+          "scope": "Optimization actions/objectives/constraints, PDF pages 3-4; Pareto optimality and scalarization passages inspected by actual browser find. Only those bounded passages claimed, no full-book reading.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        }
+      ],
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/cybernetics/en/cyb-022-project-proposed-actions-onto-a-declared-feasible-set.md",
+          "sha256": "d50a85fef65392e0dbf41813425b67494fdd9f917c0bbc0f3d956adfa65edd36"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/cybernetics/fr/cyb-022-project-proposed-actions-onto-a-declared-feasible-set.fr.md",
+          "sha256": "c58b180c854ccb77929f1c4f624f64ef09c66ce21bbbe4f66bdcefe0bc201668"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/cybernetics/es/cyb-022-project-proposed-actions-onto-a-declared-feasible-set.es.md",
+          "sha256": "35f0c47425a217ba0f115f6f1853c2fc71a1ff2bcc29af03e15cf6793e4fe5f3"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "state": 0,
+          "desired_action": 3,
+          "action_interval": [
+            -2,
+            2
+          ],
+          "next_state_upper": 1
+        },
+        "formula": "next_state=state+u. Feasible interval=[action_interval[0], min(action_interval[1], next_state_upper-state)]. If lower>upper return infeasible; otherwise project desired_action onto interval and compute squared change.",
+        "expected": {
+          "feasible": true,
+          "feasible_interval": [
+            -2,
+            1
+          ],
+          "action": 1,
+          "next_state": 1,
+          "squared_change": 4
+        },
+        "negative_control": {
+          "values": {
+            "state": 0,
+            "desired_action": 3,
+            "action_interval": [
+              -2,
+              2
+            ],
+            "next_state_upper": -3
+          },
+          "expected": {
+            "feasible": false,
+            "feasible_interval": null,
+            "action": null,
+            "next_state": null,
+            "squared_change": null
+          },
+          "why": "The tightened next-state obligation and actuator interval have no common action."
+        },
+        "input_types": {
+          "state": "finite scalar",
+          "desired_action": "finite scalar",
+          "action_interval": "ordered closed real interval",
+          "next_state_upper": "finite scalar upper bound"
+        },
+        "assumptions": [
+          "All inputs are stipulated teaching values, not measured project events.",
+          "Only the declared finite objective and constraints are represented."
+        ],
+        "limits": "No disturbance robustness, physical safety, actual agent action or generic quadratic-program solver is established."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Find the admissible interval.",
+          "expected_answer": "Intersecting action limits and next-state bound gives `[-2,1]`, not merely `[-2,2]`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Project the fixed proposal.",
+          "expected_answer": "Proposal `3` projects to `1`; the next state is `1` and squared change is `4`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Handle the impossible control.",
+          "expected_answer": "The upper action bound becomes `-3`, below the lower bound `-2`. The intersection is empty; action and next-state fields remain `null`.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the retained project helper actually establish?",
+          "expected_answer": "It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which acceptance decisions can the corrected answer key close?",
+          "expected_answer": "None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Intersecting action limits and next-state bound gives `[-2,1]`, not merely `[-2,2]`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Proposal `3` projects to `1`; the next state is `1` and squared change is `4`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: The upper action bound becomes `-3`, below the lower bound `-2`. The intersection is empty; action and next-state fields remain `null`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reproduce and explain the fixed operation for Project Proposed Actions onto a Declared Feasible Set.",
+        "direct_manual_baseline": "Intersect the scalar constraints on paper and locate the nearest point, or prove the intersection empty.",
+        "falsifier": "A filter emits an action when the declared feasible intersection is empty, or checks actuator bounds but ignores the next-state bound.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CYB023",
+      "department": "cybernetics",
+      "module_id": "cyb-023-check-regressor-rank-before-identifying-a-controller",
+      "title": "Check Regressor Rank before Identifying a Controller",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-023-check-regressor-rank-before-identifying-a-controller.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-023-check-regressor-rank-before-identifying-a-controller.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-023-check-regressor-rank-before-identifying-a-controller.es.md"
+      },
+      "novelty_vs_prerequisites": "State observability reconstructs an evolving state under known parameters. This identifies fixed unknown response parameters from a finite regressor matrix and shows why repeated collinear trials do not separate them.",
+      "prerequisites": [
+        "cyb-018-reconstruct-hidden-state-from-distinct-dynamics",
+        "cyb-016-test-feedforward-against-disturbance-mismatch"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/cybernetics/en/cyb-018-reconstruct-hidden-state-from-distinct-dynamics.md",
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-018-reconstruct-hidden-state-from-distinct-dynamics.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "88dc9bde079f649c2f384d4590adef0111ac6409b3aa76a20baf3979ac4f78d2",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "streeling/courses/cybernetics/en/cyb-016-test-feedforward-against-disturbance-mismatch.md",
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-016-test-feedforward-against-disturbance-mismatch.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "a675f17efb2b67468a1cb3c2a9f81bc2e0bbaf5bb8b4adde1dae405d58a728f9",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+          "read_method": "Actual local source bytes and parser/index passage inspected."
+        },
+        {
+          "path_or_url": "https://underactuated.csail.mit.edu/sysid.html",
+          "pin": "Russ Tedrake, Underactuated Robotics, System Identification chapter; read 2026-10-26",
+          "scope": "Parameter identifiability from null-space of a sufficiently rich data matrix, browser line 87; exact small regression authored separately.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        }
+      ],
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/cybernetics/en/cyb-023-check-regressor-rank-before-identifying-a-controller.md",
+          "sha256": "76f96791c7e4a77be3f7c721e44da16b0a160983242e6424d63d9740c7835052"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/cybernetics/fr/cyb-023-check-regressor-rank-before-identifying-a-controller.fr.md",
+          "sha256": "d9f5655579e3d762f3a0d05c6d7c6c67e872e95852225b720d91290e4f779048"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/cybernetics/es/cyb-023-check-regressor-rank-before-identifying-a-controller.es.md",
+          "sha256": "e8f7284bf0431eefd3633d0581e6c959e49aa0b90a2e8791c67729da15231809"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "X": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "y": [
+            2,
+            3,
+            5
+          ]
+        },
+        "formula": "Compute Gram=X^T*X, rhs=X^T*y, exact rank and determinant. If full column rank solve Gram*theta=rhs; otherwise unique_parameters=null and report rank deficiency without pseudoinverse.",
+        "expected": {
+          "gram": [
+            [
+              2,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "rhs": [
+            7,
+            8
+          ],
+          "determinant": 3,
+          "rank": 2,
+          "unique_parameters": [
+            2,
+            3
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "X": [
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                2
+              ],
+              [
+                3,
+                3
+              ]
+            ],
+            "y": [
+              5,
+              10,
+              15
+            ]
+          },
+          "expected": {
+            "gram": [
+              [
+                14,
+                14
+              ],
+              [
+                14,
+                14
+              ]
+            ],
+            "rhs": [
+              70,
+              70
+            ],
+            "determinant": 0,
+            "rank": 1,
+            "unique_parameters": null
+          },
+          "why": "Repeated proportional regressors identify only a sum of parameters."
+        },
+        "input_types": {
+          "X": "nonempty rational matrix with two columns",
+          "y": "same-length rational response vector"
+        },
+        "assumptions": [
+          "All inputs are stipulated teaching values, not measured project events.",
+          "Only the declared finite objective and constraints are represented."
+        ],
+        "limits": "Finite rank is not a uniform infinite-horizon persistent-excitation guarantee, noise robustness or an identified production controller."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the fixed Gram matrix.",
+          "expected_answer": "The Gram matrix is `[[2,1],[1,2]]`, determinant `3`, rank `2`; the unique parameters are `[2,3]`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Diagnose the collinear control.",
+          "expected_answer": "The Gram matrix `[[14,14],[14,14]]` has determinant `0` and rank `1`. Parameter pairs `[2,3]` and `[1,4]` both fit.",
+          "decision": null
+        },
+        "3": {
+          "question": "Would duplicating the control rows identify both parameters?",
+          "expected_answer": "No. Duplicating proportional rows changes their weight but not the missing direction. A new independent regressor is needed.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the retained project helper actually establish?",
+          "expected_answer": "It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which acceptance decisions can the corrected answer key close?",
+          "expected_answer": "None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: The Gram matrix is `[[2,1],[1,2]]`, determinant `3`, rank `2`; the unique parameters are `[2,3]`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: The Gram matrix `[[14,14],[14,14]]` has determinant `0` and rank `1`. Parameter pairs `[2,3]` and `[1,4]` both fit.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: No. Duplicating proportional rows changes their weight but not the missing direction. A new independent regressor is needed.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reproduce and explain the fixed operation for Check Regressor Rank before Identifying a Controller.",
+        "direct_manual_baseline": "Form the design and Gram matrices by hand and exhibit a nonzero null direction when rank is deficient.",
+        "falsifier": "The report claims unique identification from a singular design, or treats a regularizer-selected vector as uniquely supported by the trials.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "INF022",
+      "department": "information-theory",
+      "module_id": "inf-022-measure-posterior-movement-with-total-variation",
+      "title": "Measure Posterior Movement with Total Variation",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-022-measure-posterior-movement-with-total-variation.md",
+        "fr": "streeling/courses/information-theory/fr/inf-022-measure-posterior-movement-with-total-variation.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-022-measure-posterior-movement-with-total-variation.es.md"
+      },
+      "novelty_vs_prerequisites": "INF013 computes expected entropy reduction before a probe. This conditions on one specified result using exact likelihood normalization and measures posterior displacement with total variation; it is neither another entropy score nor evidence of truth.",
+      "prerequisites": [
+        "inf-013-value-an-evidence-probe-by-expected-information",
+        "inf-003-verdict-distribution-drift"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/information-theory/en/inf-013-value-an-evidence-probe-by-expected-information.md",
+          "path_or_url": "streeling/courses/information-theory/en/inf-013-value-an-evidence-probe-by-expected-information.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "8547e09ca39f13845c229c48b238d0782902fd43550ed9e4b1cf6946c35bea65",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "streeling/courses/information-theory/en/inf-003-verdict-distribution-drift.md",
+          "path_or_url": "streeling/courses/information-theory/en/inf-003-verdict-distribution-drift.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "66c84ee111e358835be410e04e44f61b653343d3efd2d9626fd5545ab69a8f27",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+          "read_method": "Actual local source bytes and parser/index passage inspected."
+        },
+        {
+          "path_or_url": "https://www.cs.cornell.edu/courses/cs2800/2016fa/lectures/lec17-prob.html",
+          "pin": "Cornell CS2800, Fall 2016, lecture 17; read 2026-10-26",
+          "scope": "Complete short Bayes/total-probability derivation inspected, browser lines 9-22; finite total variation derived separately.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        }
+      ],
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/information-theory/en/inf-022-measure-posterior-movement-with-total-variation.md",
+          "sha256": "9a0c07a0e971671c501391c1e3e7099785bd565dae67e956bb5c5f05f70070fa"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/information-theory/fr/inf-022-measure-posterior-movement-with-total-variation.fr.md",
+          "sha256": "a785a06ec990eaa650a9e1f34705a2a777d9aa0ec3d9f467203b73a5439f6918"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/information-theory/es/inf-022-measure-posterior-movement-with-total-variation.es.md",
+          "sha256": "02587d27d42b2751a78d9e038dea75845d282ffb10fc168b11d6b5c51dba7d17"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "prior": [
+            "1/2",
+            "1/2"
+          ],
+          "likelihood": [
+            "4/5",
+            "1/5"
+          ]
+        },
+        "formula": "Products prior[i]*likelihood[i] give unnormalized mass; normalizer=sum(products)>0; posterior=products/normalizer; total_variation=sum(abs(posterior[i]-prior[i]))/2. All arithmetic is exact rational.",
+        "expected": {
+          "unnormalized": [
+            "2/5",
+            "1/10"
+          ],
+          "normalizer": "1/2",
+          "posterior": [
+            "4/5",
+            "1/5"
+          ],
+          "total_variation": "3/10"
+        },
+        "negative_control": {
+          "values": {
+            "prior": [
+              "1/2",
+              "1/2"
+            ],
+            "likelihood": [
+              "2/5",
+              "2/5"
+            ]
+          },
+          "expected": {
+            "unnormalized": [
+              "1/5",
+              "1/5"
+            ],
+            "normalizer": "2/5",
+            "posterior": [
+              "1/2",
+              "1/2"
+            ],
+            "total_variation": "0"
+          },
+          "why": "An equally predicted observation is not discriminating evidence."
+        },
+        "input_types": {
+          "prior": "nonnegative rational strings summing to one",
+          "likelihood": "same-length rational strings in closed unit interval with positive marginal"
+        },
+        "assumptions": [
+          "All inputs are stipulated teaching values, not measured project events.",
+          "Only the declared finite objective and constraints are represented."
+        ],
+        "limits": "No real likelihood calibration, causal claim, posterior truth guarantee or production belief update is observed."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Normalize the fixed products.",
+          "expected_answer": "Products are `[2/5,1/10]`, normalizer `1/2`, posterior `[4/5,1/5]`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute movement and the control.",
+          "expected_answer": "Fixed total variation is `3/10`. Equal likelihoods give posterior `[1/2,1/2]` and movement `0`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Should likelihoods be normalized across hypotheses first?",
+          "expected_answer": "No. They are probabilities of the same observation conditional on different hypotheses. Normalize the prior-weighted products, retaining the original likelihood model.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the retained project helper actually establish?",
+          "expected_answer": "It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which acceptance decisions can the corrected answer key close?",
+          "expected_answer": "None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Products are `[2/5,1/10]`, normalizer `1/2`, posterior `[4/5,1/5]`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Fixed total variation is `3/10`. Equal likelihoods give posterior `[1/2,1/2]` and movement `0`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: No. They are probabilities of the same observation conditional on different hypotheses. Normalize the prior-weighted products, retaining the original likelihood model.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reproduce and explain the fixed operation for Measure Posterior Movement with Total Variation.",
+        "direct_manual_baseline": "Write the likelihood-weighted probability table, normalization and absolute differences manually.",
+        "falsifier": "A claimed discriminating update changes equal prior masses under equal likelihoods without introducing any new model premise.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "INF023",
+      "department": "information-theory",
+      "module_id": "inf-023-deinterleave-burst-erasures-without-inventing-recovery",
+      "title": "Deinterleave Burst Erasures without Inventing Recovery",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-023-deinterleave-burst-erasures-without-inventing-recovery.md",
+        "fr": "streeling/courses/information-theory/fr/inf-023-deinterleave-burst-erasures-without-inventing-recovery.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-023-deinterleave-burst-erasures-without-inventing-recovery.es.md"
+      },
+      "novelty_vs_prerequisites": "INF020 checks what parity detects. This changes a transmission permutation, reconstructs original positions after a burst, and counts unrecovered erasures per block; no redundancy or correction is added.",
+      "prerequisites": [
+        "inf-020-separate-parity-detection-from-correction",
+        "inf-012-retain-event-order-in-a-handoff-summary"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/information-theory/en/inf-020-separate-parity-detection-from-correction.md",
+          "path_or_url": "streeling/courses/information-theory/en/inf-020-separate-parity-detection-from-correction.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "0144107bb2f82042a0321f0551436620a316dede1dc0415ce03cda1589be6a9c",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "streeling/courses/information-theory/en/inf-012-retain-event-order-in-a-handoff-summary.md",
+          "path_or_url": "streeling/courses/information-theory/en/inf-012-retain-event-order-in-a-handoff-summary.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "671231919c1aa58da71ceee664d343ef181267d94d0c7b495eefd5e70ea60981",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+          "read_method": "Actual local source bytes and parser/index passage inspected."
+        },
+        {
+          "path_or_url": "https://www.rfc-editor.org/rfc/rfc8088.html",
+          "pin": "RFC 8088, May 2017; read 2026-10-26",
+          "scope": "RFC 8088 section 5.1.3, actual browser lines 1769-1809: burst spreading, buffering delay and complexity; toy permutation and erasure counts are authored.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        }
+      ],
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/information-theory/en/inf-023-deinterleave-burst-erasures-without-inventing-recovery.md",
+          "sha256": "45477939767a02849763573a0eb048115d74dcdb3c562f3a6c30428aa8a21f6b"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/information-theory/fr/inf-023-deinterleave-burst-erasures-without-inventing-recovery.fr.md",
+          "sha256": "b3ddc8b2c19778218c3254b7d923113890252cf28662a85f7bd5762517533366"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/information-theory/es/inf-023-deinterleave-burst-erasures-without-inventing-recovery.es.md",
+          "sha256": "03848fe641093432ec2d7a6405aa6c4d59b9ea882823a6208d2805c741f1213d"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "blocks": [
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            [
+              "D",
+              "E",
+              "F"
+            ],
+            [
+              "G",
+              "H",
+              "I"
+            ]
+          ],
+          "order": "column-major",
+          "erased_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        "formula": "Serialize rectangular blocks in declared row-major or column-major position order. Replace erased zero-based wire indices by null, inverse-map positions, then count nulls per original block. Do not infer erased values.",
+        "expected": {
+          "wire": [
+            "A",
+            "D",
+            "G",
+            "B",
+            "E",
+            "H",
+            "C",
+            "F",
+            "I"
+          ],
+          "reconstructed": [
+            [
+              null,
+              "B",
+              "C"
+            ],
+            [
+              null,
+              "E",
+              "F"
+            ],
+            [
+              null,
+              "H",
+              "I"
+            ]
+          ],
+          "missing_per_block": [
+            1,
+            1,
+            1
+          ],
+          "missing_total": 3
+        },
+        "negative_control": {
+          "values": {
+            "blocks": [
+              [
+                "A",
+                "B",
+                "C"
+              ],
+              [
+                "D",
+                "E",
+                "F"
+              ],
+              [
+                "G",
+                "H",
+                "I"
+              ]
+            ],
+            "order": "row-major",
+            "erased_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "expected": {
+            "wire": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F",
+              "G",
+              "H",
+              "I"
+            ],
+            "reconstructed": [
+              [
+                null,
+                null,
+                null
+              ],
+              [
+                "D",
+                "E",
+                "F"
+              ],
+              [
+                "G",
+                "H",
+                "I"
+              ]
+            ],
+            "missing_per_block": [
+              3,
+              0,
+              0
+            ],
+            "missing_total": 3
+          },
+          "why": "The same burst has different block concentration, but no values are recovered."
+        },
+        "input_types": {
+          "blocks": "rectangular nonempty array of distinct symbol strings",
+          "order": "row-major or column-major",
+          "erased_indices": "distinct valid zero-based transmitted positions"
+        },
+        "assumptions": [
+          "All inputs are stipulated teaching values, not measured project events.",
+          "Only the declared finite objective and constraints are represented."
+        ],
+        "limits": "No redundancy, erasure correction, packet capture, perceptual benefit, latency measurement or implemented RTP payload is claimed."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Write the interleaved wire order.",
+          "expected_answer": "Column reading gives `[A,D,G,B,E,H,C,F,I]`; indices `[0,1,2]` erase the first symbol of each block.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compare the control loss counts.",
+          "expected_answer": "Interleaving gives `[1,1,1]` missing symbols per block; row order gives `[3,0,0]`. Both totals are `3`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Can inverse permutation fill the missing values?",
+          "expected_answer": "No. Missing positions stay `null`; the permutation changes location but adds no redundant information.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the retained project helper actually establish?",
+          "expected_answer": "It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which acceptance decisions can the corrected answer key close?",
+          "expected_answer": "None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Column reading gives `[A,D,G,B,E,H,C,F,I]`; indices `[0,1,2]` erase the first symbol of each block.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Interleaving gives `[1,1,1]` missing symbols per block; row order gives `[3,0,0]`. Both totals are `3`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: No. Missing positions stay `null`; the permutation changes location but adds no redundant information.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reproduce and explain the fixed operation for Deinterleave Burst Erasures without Inventing Recovery.",
+        "direct_manual_baseline": "Draw the position permutation and inverse map, mark erased wire indices, and count missing cells manually.",
+        "falsifier": "A deinterleaver reports original lost symbols without a separately specified source of redundancy or retransmission.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "INF024",
+      "department": "information-theory",
+      "module_id": "inf-024-refine-arithmetic-code-intervals-with-exact-rationals",
+      "title": "Refine Arithmetic-Code Intervals with Exact Rationals",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-024-refine-arithmetic-code-intervals-with-exact-rationals.md",
+        "fr": "streeling/courses/information-theory/fr/inf-024-refine-arithmetic-code-intervals-with-exact-rationals.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-024-refine-arithmetic-code-intervals-with-exact-rationals.es.md"
+      },
+      "novelty_vs_prerequisites": "INF019 concatenates individual prefix codewords. This maps the whole fixed-length sequence into nested rational intervals and decodes a tag using the same ordered frequency model; it is not another prefix-tree check.",
+      "prerequisites": [
+        "inf-019-check-concatenated-codeword-ambiguity",
+        "inf-014-retain-message-codebook-versions"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/information-theory/en/inf-019-check-concatenated-codeword-ambiguity.md",
+          "path_or_url": "streeling/courses/information-theory/en/inf-019-check-concatenated-codeword-ambiguity.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "97ce0786f31d90403e76d3d98781a599e894d7a8f555960fd153f586367a9f04",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "streeling/courses/information-theory/en/inf-014-retain-message-codebook-versions.md",
+          "path_or_url": "streeling/courses/information-theory/en/inf-014-retain-message-codebook-versions.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "3efe20a3ed8c9f4fdb35f63e7ce372d2b048f6e06cb3531ba2cfdc16891a910b",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+          "read_method": "Actual local source bytes and parser/index passage inspected."
+        },
+        {
+          "path_or_url": "https://www.ece.unb.ca/tervo/ece4253/arith.shtml",
+          "pin": "University of New Brunswick ECE4253, Arithmetic Coding; read 2026-10-26",
+          "scope": "Opening distinction between symbol codewords and whole-message arithmetic representation, plus interval construction below; actual primary page inspected. Toy rational coder is independently authored.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        }
+      ],
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/information-theory/en/inf-024-refine-arithmetic-code-intervals-with-exact-rationals.md",
+          "sha256": "f982e8d4f5488f1b2652926e1f2759b3c3097e020009b9c019f19126f595fedc"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/information-theory/fr/inf-024-refine-arithmetic-code-intervals-with-exact-rationals.fr.md",
+          "sha256": "1a26ef62844d3b6c7dffeaa9019214e321719bcf5d3bff07b835fc2795e6a218"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/information-theory/es/inf-024-refine-arithmetic-code-intervals-with-exact-rationals.es.md",
+          "sha256": "124fdb58b4785614a87dc56b61bdaba69f6684f98a46d6b02eb2df8fc864d8ee"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "alphabet": [
+            "A",
+            "B"
+          ],
+          "frequencies": [
+            1,
+            3
+          ],
+          "sequence": "ABA",
+          "tag": "3/32"
+        },
+        "formula": "Start [L,U)=[0,1). For each symbol with cumulative fraction c and probability p, replace by [L+(U-L)*c,L+(U-L)*(c+p)). Compute with exact rational strings. Decode tag for the declared sequence length using the same half-open partitions.",
+        "expected": {
+          "intervals": [
+            [
+              "0",
+              "1/4"
+            ],
+            [
+              "1/16",
+              "1/4"
+            ],
+            [
+              "1/16",
+              "7/64"
+            ]
+          ],
+          "width": "3/64",
+          "tag_inside": true,
+          "decoded": "ABA"
+        },
+        "negative_control": {
+          "values": {
+            "alphabet": [
+              "A",
+              "B"
+            ],
+            "frequencies": [
+              1,
+              3
+            ],
+            "sequence": "ABB",
+            "tag": "3/16"
+          },
+          "expected": {
+            "intervals": [
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "1/16",
+                "1/4"
+              ],
+              [
+                "7/64",
+                "1/4"
+              ]
+            ],
+            "width": "9/64",
+            "tag_inside": true,
+            "decoded": "ABB"
+          },
+          "why": "A changed suffix selects a different final half-open interval under the same frequency model."
+        },
+        "input_types": {
+          "alphabet": "ordered distinct symbol strings",
+          "frequencies": "same-length positive integers",
+          "sequence": "nonempty string over the single-character alphabet",
+          "tag": "exact rational string inside the unit interval"
+        },
+        "assumptions": [
+          "All inputs are stipulated teaching values, not measured project events.",
+          "Only the declared finite objective and constraints are represented."
+        ],
+        "limits": "No bitstream length, finite-precision coder, entropy guarantee, compressed artifact or production decoder is measured."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Find the fixed final interval.",
+          "expected_answer": "The final interval is `[1/16,7/64)` and its width is `3/64`. Tag `3/32` lies inside and decodes to `ABA`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Apply the changed-suffix control.",
+          "expected_answer": "Sequence `ABB` ends in `[7/64,1/4)`, width `9/64`; tag `3/16` decodes to `ABB`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Who owns the shared boundary?",
+          "expected_answer": "Boundary `7/64` is excluded from the `ABA` interval and included in the `ABB` interval. Half-open boundaries prevent ambiguity.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the retained project helper actually establish?",
+          "expected_answer": "It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which acceptance decisions can the corrected answer key close?",
+          "expected_answer": "None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: The final interval is `[1/16,7/64)` and its width is `3/64`. Tag `3/32` lies inside and decodes to `ABA`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Sequence `ABB` ends in `[7/64,1/4)`, width `9/64`; tag `3/16` decodes to `ABB`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Boundary `7/64` is excluded from the `ABA` interval and included in the `ABB` interval. Half-open boundaries prevent ambiguity.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reproduce and explain the fixed operation for Refine Arithmetic-Code Intervals with Exact Rationals.",
+        "direct_manual_baseline": "Refine exact rational interval endpoints on paper and decode an interior tag with the stated length.",
+        "falsifier": "Encoder and decoder use different alphabet orders, probability tables, lengths or boundary conventions.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "NET019",
+      "department": "network-science",
+      "module_id": "net-019-connect-a-diagnostic-backbone-at-minimum-edge-cost",
+      "title": "Connect a Diagnostic Backbone at Minimum Edge Cost",
+      "source_paths": {
+        "en": "streeling/courses/network-science/en/net-019-connect-a-diagnostic-backbone-at-minimum-edge-cost.md",
+        "fr": "streeling/courses/network-science/fr/net-019-connect-a-diagnostic-backbone-at-minimum-edge-cost.fr.md",
+        "es": "streeling/courses/network-science/es/net-019-connect-a-diagnostic-backbone-at-minimum-edge-cost.es.md"
+      },
+      "novelty_vs_prerequisites": "NET014 bounds flow by a cut and MAT019 studies centrality/spectra. This chooses a minimum-total-cost connected undirected backbone over all spanning trees; it does not optimize flow, redundancy or importance.",
+      "prerequisites": [
+        "net-014-bound-throughput-with-a-capacity-cut",
+        "mat-019-graphs-centrality-spectral"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/network-science/en/net-014-bound-throughput-with-a-capacity-cut.md",
+          "path_or_url": "streeling/courses/network-science/en/net-014-bound-throughput-with-a-capacity-cut.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "8b63756e6866e0573eedf7240d07ca947a4dc772cb74fc69f0c8f39829eb01ae",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "streeling/courses/mathematics/en/mat-019-graphs-centrality-spectral.md",
+          "path_or_url": "streeling/courses/mathematics/en/mat-019-graphs-centrality-spectral.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "3ca9c5d0fa686225a422eecb7ca5f2431d5494511e23a76b42f621989491e871",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+          "read_method": "Actual local source bytes and parser/index passage inspected."
+        },
+        {
+          "path_or_url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.tree.mst.minimum_spanning_tree.html",
+          "pin": "NetworkX 3.7 documentation; read 2026-10-26",
+          "scope": "Minimum spanning tree or forest, undirected graph and connected-versus-disconnected behavior, actual browser lines 93-106. Library not run.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        }
+      ],
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/network-science/en/net-019-connect-a-diagnostic-backbone-at-minimum-edge-cost.md",
+          "sha256": "8ebd5e932967178824a039f25cd3cef21308b77337411912db1308c27328120f"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/network-science/fr/net-019-connect-a-diagnostic-backbone-at-minimum-edge-cost.fr.md",
+          "sha256": "168fae610824dc8836c0a4a509512885090d4627eb127e7ff57a97bb70f42520"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/network-science/es/net-019-connect-a-diagnostic-backbone-at-minimum-edge-cost.es.md",
+          "sha256": "f817a738af3d800220968a890899981355fb77d185c25766432196171dea58d7"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "nodes": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "edges": [
+            [
+              "A",
+              "B",
+              1
+            ],
+            [
+              "A",
+              "C",
+              4
+            ],
+            [
+              "A",
+              "D",
+              6
+            ],
+            [
+              "B",
+              "C",
+              2
+            ],
+            [
+              "B",
+              "D",
+              5
+            ],
+            [
+              "C",
+              "D",
+              3
+            ]
+          ]
+        },
+        "formula": "Enumerate subsets of len(nodes)-1 undirected edges, retain connected subsets, sum weights and keep all minimum-cost trees. Sort each tree edge label and the list of optimal trees lexicographically.",
+        "expected": {
+          "minimum_cost": 6,
+          "optimal_trees": [
+            [
+              "AB",
+              "BC",
+              "CD"
+            ]
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "nodes": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "edges": [
+              [
+                "A",
+                "B",
+                1
+              ],
+              [
+                "A",
+                "C",
+                4
+              ],
+              [
+                "A",
+                "D",
+                6
+              ],
+              [
+                "B",
+                "C",
+                2
+              ],
+              [
+                "B",
+                "D",
+                5
+              ],
+              [
+                "C",
+                "D",
+                8
+              ]
+            ]
+          },
+          "expected": {
+            "minimum_cost": 8,
+            "optimal_trees": [
+              [
+                "AB",
+                "BC",
+                "BD"
+              ]
+            ]
+          },
+          "why": "The changed edge cost changes the minimum-cost connected subset."
+        },
+        "input_types": {
+          "nodes": "ordered distinct node strings",
+          "edges": "simple undirected [endpoint,endpoint,nonnegative cost] records on connected input"
+        },
+        "assumptions": [
+          "All inputs are stipulated teaching values, not measured project events.",
+          "Only the declared finite objective and constraints are represented."
+        ],
+        "limits": "No deployed topology, redundant connectivity, throughput optimum, failure probability or actual link cost is measured."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Find the fixed minimum backbone.",
+          "expected_answer": "Edges `[AB,BC,CD]` connect all nodes at cost `6`. Their subset is connected and has no cycle.",
+          "decision": null
+        },
+        "2": {
+          "question": "Apply the expensive-link control.",
+          "expected_answer": "The optimum becomes `[AB,BC,BD]`, cost `8`. Keeping the previous tree would cost `11`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Does minimum cost imply a failover route?",
+          "expected_answer": "No. Removing any tree edge disconnects it. Resilience needs an additional connectivity objective or constraint.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the retained project helper actually establish?",
+          "expected_answer": "It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which acceptance decisions can the corrected answer key close?",
+          "expected_answer": "None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Edges `[AB,BC,CD]` connect all nodes at cost `6`. Their subset is connected and has no cycle.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: The optimum becomes `[AB,BC,BD]`, cost `8`. Keeping the previous tree would cost `11`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: No. Removing any tree edge disconnects it. Resilience needs an additional connectivity objective or constraint.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reproduce and explain the fixed operation for Connect a Diagnostic Backbone at Minimum Edge Cost.",
+        "direct_manual_baseline": "Enumerate small connected edge subsets and compare total costs on paper.",
+        "falsifier": "A claimed spanning backbone is disconnected or a cheaper connected tree exists under the same edge costs.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "NET020",
+      "department": "network-science",
+      "module_id": "net-020-color-conflicting-agent-tasks-with-an-exact-small-search",
+      "title": "Color Conflicting Agent Tasks with an Exact Small Search",
+      "source_paths": {
+        "en": "streeling/courses/network-science/en/net-020-color-conflicting-agent-tasks-with-an-exact-small-search.md",
+        "fr": "streeling/courses/network-science/fr/net-020-color-conflicting-agent-tasks-with-an-exact-small-search.fr.md",
+        "es": "streeling/courses/network-science/es/net-020-color-conflicting-agent-tasks-with-an-exact-small-search.es.md"
+      },
+      "novelty_vs_prerequisites": "NET017 assigns distinct workers to roles by bipartite matching. This groups pairwise-conflicting tasks into distinct time slots using graph coloring, with a minimum-color proof for a finite graph.",
+      "prerequisites": [
+        "net-017-match-simultaneous-roles-without-double-booking",
+        "net-007-separate-dag-readiness-from-admission"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/network-science/en/net-017-match-simultaneous-roles-without-double-booking.md",
+          "path_or_url": "streeling/courses/network-science/en/net-017-match-simultaneous-roles-without-double-booking.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "129c851de64c8de5f3b573264a2babd6291f64228bcc4fea240498a62fbbb5bb",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "streeling/courses/network-science/en/net-007-separate-dag-readiness-from-admission.md",
+          "path_or_url": "streeling/courses/network-science/en/net-007-separate-dag-readiness-from-admission.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "e4f771c655caf9b3b74d3e3586e2c140d82dba4a945df7174bf824e6b25763d7",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+          "read_method": "Actual local source bytes and parser/index passage inspected."
+        },
+        {
+          "path_or_url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.coloring.greedy_color.html",
+          "pin": "NetworkX 3.7 documentation; read 2026-10-26",
+          "scope": "Adjacent vertices cannot share a color; strategy determines greedy order, actual browser lines 93-100. Our exhaustive optimum is not a greedy-color guarantee.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        }
+      ],
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/network-science/en/net-020-color-conflicting-agent-tasks-with-an-exact-small-search.md",
+          "sha256": "32062b1f02776faf9f151ba06c5a705389413ff3e5e698fe1ab9ff46fed18a21"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/network-science/fr/net-020-color-conflicting-agent-tasks-with-an-exact-small-search.fr.md",
+          "sha256": "775089f107852514b18cdda30438d7af344ebfd5813ee5901787017250ff52bb"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/network-science/es/net-020-color-conflicting-agent-tasks-with-an-exact-small-search.es.md",
+          "sha256": "2e89a84bfee4807382d26c8e5ffad0537957c682e35123cb55c243bc08de4ead"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "nodes": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "edges": [
+            [
+              "A",
+              "B"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "D",
+              "A"
+            ]
+          ]
+        },
+        "formula": "For k from 1 to len(nodes), enumerate color vectors in lexicographic order from range(k)^len(nodes); valid iff every undirected edge has different endpoint colors. Return first feasible k and first valid vector.",
+        "expected": {
+          "chromatic_number": 2,
+          "colors": [
+            0,
+            1,
+            0,
+            1
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "nodes": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "edges": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "B",
+                "C"
+              ],
+              [
+                "C",
+                "D"
+              ],
+              [
+                "D",
+                "A"
+              ],
+              [
+                "A",
+                "C"
+              ]
+            ]
+          },
+          "expected": {
+            "chromatic_number": 3,
+            "colors": [
+              0,
+              1,
+              2,
+              1
+            ]
+          },
+          "why": "A new conflict closes a triangle and raises the required slot count."
+        },
+        "input_types": {
+          "nodes": "ordered distinct node strings",
+          "edges": "simple undirected pairs; edge means simultaneous-slot incompatibility"
+        },
+        "assumptions": [
+          "All inputs are stipulated teaching values, not measured project events.",
+          "Only the declared finite objective and constraints are represented."
+        ],
+        "limits": "No actual schedule, capability assignment, equal-duration guarantee, worker availability or greedy-optimality theorem is claimed."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Color the fixed conflict cycle.",
+          "expected_answer": "The first minimum coloring is `[0,1,0,1]`, using `2` slots. Every edge has distinct endpoint colors.",
+          "decision": null
+        },
+        "2": {
+          "question": "Explain the diagonal control.",
+          "expected_answer": "Adding `[A,C]` creates a triangle. The minimum is `3`, with first coloring `[0,1,2,1]`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Can a greedy result certify the minimum here?",
+          "expected_answer": "Not by itself. The exact search and graph lower bounds justify the minimum; a greedy assignment only demonstrates feasibility.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the retained project helper actually establish?",
+          "expected_answer": "It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which acceptance decisions can the corrected answer key close?",
+          "expected_answer": "None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: The first minimum coloring is `[0,1,0,1]`, using `2` slots. Every edge has distinct endpoint colors.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Adding `[A,C]` creates a triangle. The minimum is `3`, with first coloring `[0,1,2,1]`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Not by itself. The exact search and graph lower bounds justify the minimum; a greedy assignment only demonstrates feasibility.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reproduce and explain the fixed operation for Color Conflicting Agent Tasks with an Exact Small Search.",
+        "direct_manual_baseline": "Draw the conflict graph and enumerate small slot assignments, checking every edge.",
+        "falsifier": "A proposed simultaneous slot contains the endpoints of a conflict edge, or a greedy result is labelled globally minimal without proof.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "NET021",
+      "department": "network-science",
+      "module_id": "net-021-check-signed-transform-consistency-around-a-cycle",
+      "title": "Check Signed Transform Consistency around a Cycle",
+      "source_paths": {
+        "en": "streeling/courses/network-science/en/net-021-check-signed-transform-consistency-around-a-cycle.md",
+        "fr": "streeling/courses/network-science/fr/net-021-check-signed-transform-consistency-around-a-cycle.fr.md",
+        "es": "streeling/courses/network-science/es/net-021-check-signed-transform-consistency-around-a-cycle.es.md"
+      },
+      "novelty_vs_prerequisites": "NET009 rejects cycles in a precedence graph. This permits an undirected cycle and checks whether pairwise same/opposite sign constraints admit consistent node labels; cycle existence alone is not an error.",
+      "prerequisites": [
+        "net-009-detect-global-cycles-in-a-panel-stack",
+        "net-011-separate-reachability-from-semantic-compatibility"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/network-science/en/net-009-detect-global-cycles-in-a-panel-stack.md",
+          "path_or_url": "streeling/courses/network-science/en/net-009-detect-global-cycles-in-a-panel-stack.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ea8645490b3eab50a4b7d7c5e9539d1da9d08bd8f48600af9606630712861641",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "streeling/courses/network-science/en/net-011-separate-reachability-from-semantic-compatibility.md",
+          "path_or_url": "streeling/courses/network-science/en/net-011-separate-reachability-from-semantic-compatibility.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "dc875e8eb8be14d04908e45ea1a4a5829c815f139751061397f71589243d143b",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+          "read_method": "Actual local source bytes and parser/index passage inspected."
+        },
+        {
+          "path_or_url": "https://arxiv.org/abs/1701.07963",
+          "pin": "Zaslavsky, arXiv:1701.07963v2, 2018-01-15; read 2026-10-26",
+          "scope": "Author abstract actually inspected, browser lines 8-24: edge signs and cycle product definition; no full-paper theorem verification claimed.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        }
+      ],
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/network-science/en/net-021-check-signed-transform-consistency-around-a-cycle.md",
+          "sha256": "66a2ab4365140417f6254e68a86747f1264b551c594315afb694caecfd315913"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/network-science/fr/net-021-check-signed-transform-consistency-around-a-cycle.fr.md",
+          "sha256": "c21a81505b2957cb7b0ee5b21a7adc7c94869012c76afac6f2bbc1f246f2ddaa"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/network-science/es/net-021-check-signed-transform-consistency-around-a-cycle.es.md",
+          "sha256": "04516131952e06fc13f388342d9e740b9bfc93050efbb219f6b884ed736b323d"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "nodes": [
+            "A",
+            "B",
+            "C"
+          ],
+          "edges": [
+            [
+              "A",
+              "B",
+              1
+            ],
+            [
+              "B",
+              "C",
+              -1
+            ],
+            [
+              "A",
+              "C",
+              -1
+            ]
+          ],
+          "root_sign": 1
+        },
+        "formula": "Require label[u]*label[v]=edge_sign with root label fixed. Enumerate remaining signs in order [1,-1]; report first satisfying assignment or null. For this triangle cycle_product is product of its three edge signs.",
+        "expected": {
+          "cycle_product": 1,
+          "consistent": true,
+          "labels": [
+            1,
+            1,
+            -1
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "nodes": [
+              "A",
+              "B",
+              "C"
+            ],
+            "edges": [
+              [
+                "A",
+                "B",
+                1
+              ],
+              [
+                "B",
+                "C",
+                -1
+              ],
+              [
+                "A",
+                "C",
+                1
+              ]
+            ],
+            "root_sign": 1
+          },
+          "expected": {
+            "cycle_product": -1,
+            "consistent": false,
+            "labels": null
+          },
+          "why": "One changed edge makes closed-loop sign transport contradictory."
+        },
+        "input_types": {
+          "nodes": "ordered three distinct node strings",
+          "edges": "triangle undirected pairs with sign integer +1 or -1",
+          "root_sign": "fixed first-node sign +1 or -1"
+        },
+        "assumptions": [
+          "All inputs are stipulated teaching values, not measured project events.",
+          "Only the declared finite objective and constraints are represented."
+        ],
+        "limits": "Only commuting scalar sign relations are modeled; no 3D transform, social trust, knot type or physical panel is validated."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Propagate the fixed signs.",
+          "expected_answer": "With root `A=1`, labels `[1,1,-1]` satisfy every edge and the cycle product is `1`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Why does the control fail?",
+          "expected_answer": "Its cycle product is `-1`. Multiplying all endpoint equations would require `1=-1`, so no labeling exists.",
+          "decision": null
+        },
+        "3": {
+          "question": "Would reversing every node label repair the control?",
+          "expected_answer": "No. Global reversal preserves endpoint products. The conflicting edge relation must be inspected, not hidden by changing the root convention.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the retained project helper actually establish?",
+          "expected_answer": "It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which acceptance decisions can the corrected answer key close?",
+          "expected_answer": "None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: With root `A=1`, labels `[1,1,-1]` satisfy every edge and the cycle product is `1`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Its cycle product is `-1`. Multiplying all endpoint equations would require `1=-1`, so no labeling exists.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: No. Global reversal preserves endpoint products. The conflicting edge relation must be inspected, not hidden by changing the root convention.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reproduce and explain the fixed operation for Check Signed Transform Consistency around a Cycle.",
+        "direct_manual_baseline": "Assign a root sign, propagate edge constraints and multiply the cycle signs by hand.",
+        "falsifier": "A sign-consistency report accepts a negative cycle product or treats every cycle as contradictory without composing its relations.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PM016",
+      "department": "product-management",
+      "module_id": "pm-016-retain-pareto-incomparable-verification-options",
+      "title": "Retain Pareto-Incomparable Verification Options",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-016-retain-pareto-incomparable-verification-options.md",
+        "fr": "streeling/courses/product-management/fr/pm-016-retain-pareto-incomparable-verification-options.fr.md",
+        "es": "streeling/courses/product-management/es/pm-016-retain-pareto-incomparable-verification-options.es.md"
+      },
+      "novelty_vs_prerequisites": "PM014 optimizes a scalar value under budget and dependency closure. This retains a multiobjective nondominated set without inventing exchange weights between cost and defects.",
+      "prerequisites": [
+        "pm-014-select-a-budgeted-portfolio-with-prerequisite-closure",
+        "pm-004-craft-extension-release-decision"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/product-management/en/pm-014-select-a-budgeted-portfolio-with-prerequisite-closure.md",
+          "path_or_url": "streeling/courses/product-management/en/pm-014-select-a-budgeted-portfolio-with-prerequisite-closure.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "28fafe233eb50e0ad172f76f978194610d783b4a9e9907558f7f62e896e13f40",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "streeling/courses/product-management/en/pm-004-craft-extension-release-decision.md",
+          "path_or_url": "streeling/courses/product-management/en/pm-004-craft-extension-release-decision.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "31eff99588c7e7a35084aee798280862f745fff617547c66df337af67e92b855",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+          "read_method": "Actual local source bytes and parser/index passage inspected."
+        },
+        {
+          "path_or_url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxslides.pdf",
+          "pin": "Boyd and Vandenberghe, Convex Optimization, revised slides 2023; read 2026-10-26",
+          "scope": "Optimization actions/objectives/constraints, PDF pages 3-4; Pareto optimality and scalarization passages inspected by actual browser find. Only those bounded passages claimed, no full-book reading.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        }
+      ],
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/product-management/en/pm-016-retain-pareto-incomparable-verification-options.md",
+          "sha256": "370a295501bcacf4e4ad92698af2b795fddf1d1bf25a44a9e992a94ae703d140"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/product-management/fr/pm-016-retain-pareto-incomparable-verification-options.fr.md",
+          "sha256": "420d09677531aab8ed4ee260e8b71638b884fad91dc3a25ab0bb4576ed1b4c9a"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/product-management/es/pm-016-retain-pareto-incomparable-verification-options.es.md",
+          "sha256": "23313fc3d438d1ecc984fa1eb99fa28b9b80b0e94ce3355632b17cda6fb5716d"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "names": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "objectives": [
+            [
+              2,
+              5
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        "formula": "Minimize every coordinate. i dominates j iff all objectives[i]<=objectives[j] coordinatewise and at least one strict inequality. Return nondominated names and all ordered [dominator,dominated] pairs in name order.",
+        "expected": {
+          "nondominated": [
+            "A",
+            "B",
+            "D"
+          ],
+          "dominance_pairs": [
+            [
+              "A",
+              "C"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "D",
+              "C"
+            ]
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "names": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "objectives": [
+              [
+                2,
+                5
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                4,
+                5
+              ]
+            ]
+          },
+          "expected": {
+            "nondominated": [
+              "A",
+              "B"
+            ],
+            "dominance_pairs": [
+              [
+                "A",
+                "C"
+              ],
+              [
+                "A",
+                "D"
+              ],
+              [
+                "B",
+                "C"
+              ],
+              [
+                "B",
+                "D"
+              ],
+              [
+                "D",
+                "C"
+              ]
+            ]
+          },
+          "why": "Worsening an option removes its distinct tradeoff without supplying a preference among survivors."
+        },
+        "input_types": {
+          "names": "ordered distinct option strings",
+          "objectives": "equal-length finite minimization vectors, one per option"
+        },
+        "assumptions": [
+          "All inputs are stipulated teaching values, not measured project events.",
+          "Only the declared finite objective and constraints are represented."
+        ],
+        "limits": "No observed defects, chosen product policy, approved release or subjective utility scale is supplied."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Find the fixed nondominated set.",
+          "expected_answer": "The survivors are `[A,B,D]`. Each dominates `C`, but none dominates another survivor.",
+          "decision": null
+        },
+        "2": {
+          "question": "Apply the worsened-option control.",
+          "expected_answer": "With `D=[4,5]`, both `A` and `B` dominate `D`. The nondominated set is `[A,B]`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Can the surviving set justify a unique choice?",
+          "expected_answer": "No. Pareto filtering retains tradeoffs. Choosing among them requires declared priorities and all mandatory constraints.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the retained project helper actually establish?",
+          "expected_answer": "It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which acceptance decisions can the corrected answer key close?",
+          "expected_answer": "None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: The survivors are `[A,B,D]`. Each dominates `C`, but none dominates another survivor.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: With `D=[4,5]`, both `A` and `B` dominate `D`. The nondominated set is `[A,B]`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: No. Pareto filtering retains tradeoffs. Choosing among them requires declared priorities and all mandatory constraints.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reproduce and explain the fixed operation for Retain Pareto-Incomparable Verification Options.",
+        "direct_manual_baseline": "Compare each option pair in a two-column objective table before constructing any weighted score.",
+        "falsifier": "A supposedly dominated option improves a represented objective, or the report invents a unique winner from incomparable survivors.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PM017",
+      "department": "product-management",
+      "module_id": "pm-017-allocate-whole-review-slots-by-largest-remainders",
+      "title": "Allocate Whole Review Slots by Largest Remainders",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-017-allocate-whole-review-slots-by-largest-remainders.md",
+        "fr": "streeling/courses/product-management/fr/pm-017-allocate-whole-review-slots-by-largest-remainders.fr.md",
+        "es": "streeling/courses/product-management/es/pm-017-allocate-whole-review-slots-by-largest-remainders.es.md"
+      },
+      "novelty_vs_prerequisites": "PM008 computes review workload and PM010 applies declared target proportions to rates. This turns proportional quotas into integer slot counts with a fixed total and an explicit remainder tie rule.",
+      "prerequisites": [
+        "pm-008-size-a-fifty-course-batch-by-review-capacity",
+        "pm-010-standardize-dogfood-failures-to-a-declared-task-mix"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md",
+          "path_or_url": "streeling/courses/product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "38f9f6bf4bcc8480d6c6a87729b2021fde7ca04e91cf7fbf1d5595b81db2544d",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "streeling/courses/product-management/en/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.md",
+          "path_or_url": "streeling/courses/product-management/en/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "7d9fa6e8c0d0689e575d911a7760b7969110410759c30d08c9896bc9995b581c",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+          "read_method": "Actual local source bytes and parser/index passage inspected."
+        },
+        {
+          "path_or_url": "https://www.census.gov/about/history/historical-censuses-and-surveys/census-programs-surveys/decennial-census/methods.html",
+          "pin": "US Census Bureau, Methods of Apportionment; read 2026-10-26",
+          "scope": "Hamilton/Vinton section: take whole quotas then assign surplus seats by descending remainders. Authored review allocation is an analogy, not congressional implementation.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        }
+      ],
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/product-management/en/pm-017-allocate-whole-review-slots-by-largest-remainders.md",
+          "sha256": "49f80dde2962808a22c242ae90a609bc39538dfb8540c0a1f7b59c517826cc9e"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/product-management/fr/pm-017-allocate-whole-review-slots-by-largest-remainders.fr.md",
+          "sha256": "459f0df3ce47eb397b2363fa2df1845eef5fdde4e4a4c542021537d651820364"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/product-management/es/pm-017-allocate-whole-review-slots-by-largest-remainders.es.md",
+          "sha256": "4d2d3fa6d8d20d4b41efbf970dc201cf4391aea2f785578df4d42fb7441f3977"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "total_slots": 7,
+          "weights": [
+            5,
+            3,
+            2
+          ]
+        },
+        "formula": "quota[i]=total_slots*weights[i]/sum(weights). Assign floor quotas; allocate remaining slots to descending fractional remainders, breaking exact ties by lower index. Use exact rational arithmetic.",
+        "expected": {
+          "quotas": [
+            "7/2",
+            "21/10",
+            "7/5"
+          ],
+          "floors": [
+            3,
+            2,
+            1
+          ],
+          "remainder_order": [
+            0,
+            2,
+            1
+          ],
+          "allocation": [
+            4,
+            2,
+            1
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "total_slots": 8,
+            "weights": [
+              5,
+              3,
+              2
+            ]
+          },
+          "expected": {
+            "quotas": [
+              "4",
+              "12/5",
+              "8/5"
+            ],
+            "floors": [
+              4,
+              2,
+              1
+            ],
+            "remainder_order": [
+              2,
+              1,
+              0
+            ],
+            "allocation": [
+              4,
+              2,
+              2
+            ]
+          },
+          "why": "Changing the total changes the remainder ordering and full allocation."
+        },
+        "input_types": {
+          "total_slots": "nonnegative integer",
+          "weights": "nonnegative integers with strictly positive sum"
+        },
+        "assumptions": [
+          "All inputs are stipulated teaching values, not measured project events.",
+          "Only the declared finite objective and constraints are represented."
+        ],
+        "limits": "No real reviewer capacity, universal fairness, population apportionment or variance-optimal sampling allocation is established."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Allocate the fixed total.",
+          "expected_answer": "Quotas `[7/2,21/10,7/5]` have floors `[3,2,1]`. The remaining slot goes to index `0`, giving `[4,2,1]`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Recompute the larger-total control.",
+          "expected_answer": "For `8` slots, quotas are `[4,12/5,8/5]`; index `2` gets the surplus and allocation is `[4,2,2]`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Why declare a tie rule?",
+          "expected_answer": "Equal remainders may compete for fewer remaining slots. A fixed rule makes the result reproducible without claiming that the rule is uniquely fair.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the retained project helper actually establish?",
+          "expected_answer": "It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which acceptance decisions can the corrected answer key close?",
+          "expected_answer": "None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Quotas `[7/2,21/10,7/5]` have floors `[3,2,1]`. The remaining slot goes to index `0`, giving `[4,2,1]`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: For `8` slots, quotas are `[4,12/5,8/5]`; index `2` gets the surplus and allocation is `[4,2,2]`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Equal remainders may compete for fewer remaining slots. A fixed rule makes the result reproducible without claiming that the rule is uniquely fair.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reproduce and explain the fixed operation for Allocate Whole Review Slots by Largest Remainders.",
+        "direct_manual_baseline": "Tabulate exact quotas, integer floors and ranked remainders, checking the final slot sum manually.",
+        "falsifier": "Independent rounding changes the required total, or a hidden tie decision changes which class receives a slot.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PM018",
+      "department": "product-management",
+      "module_id": "pm-018-find-the-weight-at-which-a-workflow-ranking-flips",
+      "title": "Find the Weight at Which a Workflow Ranking Flips",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-018-find-the-weight-at-which-a-workflow-ranking-flips.md",
+        "fr": "streeling/courses/product-management/fr/pm-018-find-the-weight-at-which-a-workflow-ranking-flips.fr.md",
+        "es": "streeling/courses/product-management/es/pm-018-find-the-weight-at-which-a-workflow-ranking-flips.es.md"
+      },
+      "novelty_vs_prerequisites": "PM011 finds break-even in completed-item count. This solves a preference-weight crossover between fixed two-objective alternatives and retains the exact tie; no workload or cost estimate is fitted.",
+      "prerequisites": [
+        "pm-011-include-review-and-correction-in-automation-break-even",
+        "pm-004-craft-extension-release-decision"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/product-management/en/pm-011-include-review-and-correction-in-automation-break-even.md",
+          "path_or_url": "streeling/courses/product-management/en/pm-011-include-review-and-correction-in-automation-break-even.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "7ffeeafcc5a7be1f70494e65cd1d6d2577a61015dd77a4b56a5d9fa9999b5601",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "streeling/courses/product-management/en/pm-004-craft-extension-release-decision.md",
+          "path_or_url": "streeling/courses/product-management/en/pm-004-craft-extension-release-decision.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "31eff99588c7e7a35084aee798280862f745fff617547c66df337af67e92b855",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+          "read_method": "Actual local source bytes and parser/index passage inspected."
+        },
+        {
+          "path_or_url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxslides.pdf",
+          "pin": "Boyd and Vandenberghe, Convex Optimization, revised slides 2023; read 2026-10-26",
+          "scope": "Optimization actions/objectives/constraints, PDF pages 3-4; Pareto optimality and scalarization passages inspected by actual browser find. Only those bounded passages claimed, no full-book reading.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        }
+      ],
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/product-management/en/pm-018-find-the-weight-at-which-a-workflow-ranking-flips.md",
+          "sha256": "83ca0060bfb9e6c536ed7dce8042fa0d4b1fa1652b6895b464c443cde481e2da"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/product-management/fr/pm-018-find-the-weight-at-which-a-workflow-ranking-flips.fr.md",
+          "sha256": "9e82f7312c50728c164d04661c891df5f752fc77408298bccd5a8f355c08f091"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/product-management/es/pm-018-find-the-weight-at-which-a-workflow-ranking-flips.es.md",
+          "sha256": "3b0b964c1a038d10bf187a005567d132967c9ac6fb199bdc5c70bd6e2151def7"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "names": [
+            "A",
+            "B"
+          ],
+          "latency": [
+            2,
+            6
+          ],
+          "rework": [
+            8,
+            2
+          ],
+          "latency_weight": "1/4"
+        },
+        "formula": "score[i]=w*latency[i]+(1-w)*rework[i], minimize. Solve equal affine scores for crossover w; report scores there and all tied winners. Exact rationals.",
+        "expected": {
+          "scores": [
+            "13/2",
+            "3"
+          ],
+          "winners": [
+            "B"
+          ],
+          "crossover_weight": "3/5",
+          "crossover_scores": [
+            "22/5",
+            "22/5"
+          ],
+          "crossover_winners": [
+            "A",
+            "B"
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "names": [
+              "A",
+              "B"
+            ],
+            "latency": [
+              2,
+              6
+            ],
+            "rework": [
+              8,
+              2
+            ],
+            "latency_weight": "3/4"
+          },
+          "expected": {
+            "scores": [
+              "7/2",
+              "5"
+            ],
+            "winners": [
+              "A"
+            ],
+            "crossover_weight": "3/5",
+            "crossover_scores": [
+              "22/5",
+              "22/5"
+            ],
+            "crossover_winners": [
+              "A",
+              "B"
+            ]
+          },
+          "why": "Different declared preferences reverse the winner without changing either workflow coordinate."
+        },
+        "input_types": {
+          "names": "two distinct option strings",
+          "latency": "two finite rational points on declared comparable scale",
+          "rework": "two finite rational points on declared comparable scale",
+          "latency_weight": "rational string in closed unit interval"
+        },
+        "assumptions": [
+          "All inputs are stipulated teaching values, not measured project events.",
+          "Only the declared finite objective and constraints are represented."
+        ],
+        "limits": "No measured workflow cost, accepted utility scale, stakeholder preference or production recommendation is established."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the fixed ranking.",
+          "expected_answer": "At weight `1/4`, scores are `[13/2,3]`; minimizing selects `B`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Find the crossover and control.",
+          "expected_answer": "The crossover is `3/5`, where both scores are `22/5`. At `3/4`, scores `[7/2,5]` select `A`.",
+          "decision": null
+        },
+        "3": {
+          "question": "What does the tie authorize?",
+          "expected_answer": "It authorizes reporting both minimizers under that objective. A unique recommendation needs an additional declared criterion, not an arbitrary hidden tie-break.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the retained project helper actually establish?",
+          "expected_answer": "It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which acceptance decisions can the corrected answer key close?",
+          "expected_answer": "None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: At weight `1/4`, scores are `[13/2,3]`; minimizing selects `B`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: The crossover is `3/5`, where both scores are `22/5`. At `3/4`, scores `[7/2,5]` select `A`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: It authorizes reporting both minimizers under that objective. A unique recommendation needs an additional declared criterion, not an arbitrary hidden tie-break.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reproduce and explain the fixed operation for Find the Weight at Which a Workflow Ranking Flips.",
+        "direct_manual_baseline": "Write both affine score lines, solve their intersection and check one preference on each side.",
+        "falsifier": "A recommendation claims weight independence although the allowed preference interval contains a ranking crossover.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PM019",
+      "department": "product-management",
+      "module_id": "pm-019-minimize-stratified-review-variance-over-integer-allocations",
+      "title": "Minimize Stratified Review Variance over Integer Allocations",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-019-minimize-stratified-review-variance-over-integer-allocations.md",
+        "fr": "streeling/courses/product-management/fr/pm-019-minimize-stratified-review-variance-over-integer-allocations.fr.md",
+        "es": "streeling/courses/product-management/es/pm-019-minimize-stratified-review-variance-over-integer-allocations.es.md"
+      },
+      "novelty_vs_prerequisites": "PM010 standardizes rates to a task mix and PM008 sizes workload. This chooses bounded positive integer sample counts minimizing a declared independent-stratum mean variance, not proportional rounding.",
+      "prerequisites": [
+        "pm-010-standardize-dogfood-failures-to-a-declared-task-mix",
+        "pm-008-size-a-fifty-course-batch-by-review-capacity"
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/product-management/en/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.md",
+          "path_or_url": "streeling/courses/product-management/en/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "7d9fa6e8c0d0689e575d911a7760b7969110410759c30d08c9896bc9995b581c",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "streeling/courses/product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md",
+          "path_or_url": "streeling/courses/product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "38f9f6bf4bcc8480d6c6a87729b2021fde7ca04e91cf7fbf1d5595b81db2544d",
+          "scope": "Opening project question and instructional paragraphs inspected for prerequisites and novelty; no historical test execution rerun.",
+          "read_method": "Actual local source bytes loaded and bounded instructional text inspected."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata/title/body split and englishModuleKeys identity indexing inspected. No authored operation is implemented there.",
+          "read_method": "Actual local source bytes and parser/index passage inspected."
+        },
+        {
+          "path_or_url": "https://www.census.gov/library/working-papers/2014/adrm/rrs2014-07.html",
+          "pin": "Tommy Wright, US Census Bureau RRS2014-07, 2014; read 2026-10-26",
+          "scope": "Abstract lines 172-177: exact integer stratified allocation, fixed total and lower/upper bounds; rounded continuous Neyman allocation need not be optimal. No full algorithm or real survey run.",
+          "read_method": "Actual bounded primary browser passage inspected; access alone was not counted as reading."
+        }
+      ],
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/product-management/en/pm-019-minimize-stratified-review-variance-over-integer-allocations.md",
+          "sha256": "4f1dfe8f15325adf8ed7982a54460369a1f185cf4876495a5a4cd1deb913311d"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/product-management/fr/pm-019-minimize-stratified-review-variance-over-integer-allocations.fr.md",
+          "sha256": "48f214171b7fa4bb787add9d0deb0c549bcf75efb067452ee0d2061144866cfc"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/product-management/es/pm-019-minimize-stratified-review-variance-over-integer-allocations.es.md",
+          "sha256": "a91036ad1794e921ff5681b997ea9d46fc88359f1421170340696e1a48fa2cd1"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "total_samples": 8,
+          "target_weights": [
+            "1/2",
+            "1/2"
+          ],
+          "stratum_variances": [
+            1,
+            9
+          ]
+        },
+        "formula": "Enumerate [n1,total_samples-n1] with 1<=n1<total_samples. Under independent with-replacement samples, variance=sum(target_weights[h]**2*stratum_variances[h]/n[h]); keep all exact-rational minima in n1 order.",
+        "expected": {
+          "candidate_variances": [
+            "4/7",
+            "1/2",
+            "8/15",
+            "5/8",
+            "4/5",
+            "7/6",
+            "16/7"
+          ],
+          "optimal_allocations": [
+            [
+              2,
+              6
+            ]
+          ],
+          "minimum_variance": "1/2"
+        },
+        "negative_control": {
+          "values": {
+            "total_samples": 8,
+            "target_weights": [
+              "1/2",
+              "1/2"
+            ],
+            "stratum_variances": [
+              9,
+              1
+            ]
+          },
+          "expected": {
+            "candidate_variances": [
+              "16/7",
+              "7/6",
+              "4/5",
+              "5/8",
+              "8/15",
+              "1/2",
+              "4/7"
+            ],
+            "optimal_allocations": [
+              [
+                6,
+                2
+              ]
+            ],
+            "minimum_variance": "1/2"
+          },
+          "why": "Swapping stratum variability reverses the exact optimal integer allocation."
+        },
+        "input_types": {
+          "total_samples": "integer at least two",
+          "target_weights": "two nonnegative rational strings summing to one",
+          "stratum_variances": "two strictly positive rational variances"
+        },
+        "assumptions": [
+          "All inputs are stipulated teaching values, not measured project events.",
+          "Only the declared finite objective and constraints are represented."
+        ],
+        "limits": "No actual review precision, independent learner sampling, measured stratum variance, finite-population correction or staffing decision is established."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Find the exact fixed optimum.",
+          "expected_answer": "Allocation `[2,6]` gives variance `1/2`, the minimum over all positive integer splits. Equal allocation gives `5/8`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Apply the variance-swapped control.",
+          "expected_answer": "The optimum becomes `[6,2]` with minimum `1/2`. The target weights and total sample count are unchanged.",
+          "decision": null
+        },
+        "3": {
+          "question": "Does proportional allocation solve this objective?",
+          "expected_answer": "Not generally. It uses target weights alone, while this variance objective also depends on within-stratum variability and integer feasibility.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the retained project helper actually establish?",
+          "expected_answer": "It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which acceptance decisions can the corrected answer key close?",
+          "expected_answer": "None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Allocation `[2,6]` gives variance `1/2`, the minimum over all positive integer splits. Equal allocation gives `5/8`.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: The optimum becomes `[6,2]` with minimum `1/2`. The target weights and total sample count are unchanged.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Not generally. It uses target weights alone, while this variance objective also depends on within-stratum variability and integer feasibility.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reproduce and explain the fixed operation for Minimize Stratified Review Variance over Integer Allocations.",
+        "direct_manual_baseline": "Enumerate each positive integer sample split and calculate its exact stratified-mean variance on paper.",
+        "falsifier": "A purported optimum ignores a feasible lower-variance split or silently substitutes actual dependent attempts for independent stratum samples.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    }
+  ]
+}

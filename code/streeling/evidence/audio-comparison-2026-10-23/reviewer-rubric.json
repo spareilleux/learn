@@ -1,0 +1,120 @@
+{
+  "status": "prepared-not-performed",
+  "scope": "AI checks are not human, musician, fluent-language or learner acceptance.",
+  "criteria": [
+    {
+      "id": "GAS008-1",
+      "module": "GAS008",
+      "title": "product-and-units",
+      "acceptance": "Derive carrier101Hz, absolute-envelope beat2Hz and component damping1/s; algebraic modulation, not Hilbert or measured envelope.",
+      "decision": null
+    },
+    {
+      "id": "GAS008-2",
+      "module": "GAS008",
+      "title": "misleading-slope",
+      "acceptance": "Ratio E.4/E.2=2.143464939; apparent rate-3.812118251/s reflects interference, not changed component damping.",
+      "decision": null
+    },
+    {
+      "id": "GAS008-3",
+      "module": "GAS008",
+      "title": "same-phase",
+      "acceptance": "t0/.5 amplitude exp(-.5), squared exp(-1), amplitude rate1/s; same phase not asserted local maxima or physical energy.",
+      "decision": null
+    },
+    {
+      "id": "GAS008-4",
+      "module": "GAS008",
+      "title": "zeros",
+      "acceptance": "Exact modulation zeros.25/.75; log undefined; floating residue/floor and carrier zeros distinct.",
+      "decision": null
+    },
+    {
+      "id": "GAS008-5",
+      "module": "GAS008",
+      "title": "actual-next-trial",
+      "acceptance": "Locate summed voices/shared body/reverb/limiter; retain pins,rate,boundary,windows,phase,filter,clipping,uncertainty. Isolate or validate model before attribution; old failed gate unchanged; no actual trial/DSL.",
+      "decision": null
+    },
+    {
+      "id": "AUD009-1",
+      "module": "AUD009",
+      "title": "support-clock",
+      "acceptance": "x8,y10,lag2 with y[n+2],complete x target8,y2..9; Fs8000 teachingclock gives.25ms not latencymeasurement.",
+      "decision": null
+    },
+    {
+      "id": "AUD009-2",
+      "module": "AUD009",
+      "title": "residuals",
+      "acceptance": "ReferenceRMS.306186218,original-origin first8 residual.275992527,delay-alignedunity.153093109; changed support/question and unadjusted result retained.",
+      "decision": null
+    },
+    {
+      "id": "AUD009-3",
+      "module": "AUD009",
+      "title": "fitted-null",
+      "acceptance": "Gain.5=-6.020599913dB,fullalignedfittedresidual0; originaltiming/support/level different; no byte/listening identity.",
+      "decision": null
+    },
+    {
+      "id": "AUD009-4",
+      "module": "AUD009",
+      "title": "negative-controls",
+      "acceptance": "Silence gainundefined but raw equalityvalid; modifiedtail+.125,first6zero coverage6/8=.75,fullprescribedgainRMS.044194174; no hiddenrefit/universalcoverage.",
+      "decision": null
+    },
+    {
+      "id": "AUD009-5",
+      "module": "AUD009",
+      "title": "actual-record",
+      "acceptance": "Locate floatserialization/PCM16/RMSwindows,retain pins/format/channels/clocks/excitation/extents/target/lag/gain/raw+adjustedmetrics/missingness/cost. Existingrunner no newfit; oldgateunchanged; directrecordbaselinebeforeDSL,no run.",
+      "decision": null
+    },
+    {
+      "id": "INF009-1",
+      "module": "INF009",
+      "title": "population-normalization",
+      "acceptance": "N4,mu.125/.3125,sigma sqrt5/8 andsqrt5/16,sharedz[-3,-1,1,3]/sqrt5,Pearson1 butrawRMSdifference.233853587.",
+      "decision": null
+    },
+    {
+      "id": "INF009-2",
+      "module": "INF009",
+      "title": "inverse",
+      "acceptance": "Positiveaffinefamilycollapses; retainallorderedz,mu,populationsigma,N; inverse realarithmeticnotrounded/byteidentity.",
+      "decision": null
+    },
+    {
+      "id": "INF009-3",
+      "module": "INF009",
+      "title": "polarity",
+      "acceptance": "-x normalizes-z,Pearson-1,abs1,mathematicalsumzero; retain signed/polarity/rawresidual; no playback/probability.",
+      "decision": null
+    },
+    {
+      "id": "INF009-4",
+      "module": "INF009",
+      "title": "constant",
+      "acceptance": "Constant.25 sigma0,z/Pearsonundefined,rawRMS.25,rawcopyequalityvalid; separateconstantstatusmeanN,no fabricatedPearson1.",
+      "decision": null
+    },
+    {
+      "id": "INF009-5",
+      "module": "INF009",
+      "title": "actual-handoff",
+      "acceptance": "Existingrunner separatesfloat/PCM16 andflooredRMS,no newdescriptor. Retainpin,boundary,clock,channels,format,N,rule,mu,sigma,status,signpolicy,rawlevels/residual; toyhasnomeasuredclock. Directrecordbaseline/controls beforeDSL,actualcost/errorsneeded,noimplementation/userstudy.",
+      "decision": null
+    }
+  ],
+  "pass_policy": "All five criteria per module; retain actual answers and assistance before learner decision.",
+  "human_technical_review": null,
+  "musician_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "new_engine_run": null,
+  "new_browser_capture": null,
+  "listening_trial": null,
+  "deployed_html": null
+}

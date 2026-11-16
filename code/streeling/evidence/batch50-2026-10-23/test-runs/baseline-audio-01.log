@@ -1,0 +1,17 @@
+test_AUD009_model (test_baseline_audio.BaselineAudio.test_AUD009_model) ... OBSERVATION {"code": "AUD009", "case": "model", "observed": {"gain": 0.5, "raw_rms": 0.27599252707274524, "unity_rms": 0.15309310892394862, "fitted_rms": 0.0, "delay_ms": 0.25}, "expected": {"gain": 0.5, "raw_rms": 0.27599252707274524, "unity_rms": 0.15309310892394862, "fitted_rms": 0, "delay_ms": 0.25}, "scope": "Previous tranche's authored mathematical case; no engine/listener trial."}
+ok
+test_AUD009_negative (test_baseline_audio.BaselineAudio.test_AUD009_negative) ... OBSERVATION {"code": "AUD009", "case": "negative", "observed": {"prefix_rms": 0.0, "full_rms": 0.04419417382415922, "coverage": 0.75, "silence_energy": 0}, "expected": {"prefix_rms": 0, "full_rms": 0.04419417382415922, "coverage": 0.75, "silence_energy": 0}, "scope": "Previous tranche's authored mathematical case; no engine/listener trial."}
+ok
+test_GAS008_model (test_baseline_audio.BaselineAudio.test_GAS008_model) ... OBSERVATION {"code": "GAS008", "case": "model", "observed": {"max_envelope_error": 6.25888230132432e-15, "carrier": 101.0, "beat": 2.0}, "expected": {"max_envelope_error_bound": 1e-12, "carrier": 101, "beat": 2}, "scope": "Previous tranche's authored mathematical case; no engine/listener trial."}
+ok
+test_GAS008_negative (test_baseline_audio.BaselineAudio.test_GAS008_negative) ... OBSERVATION {"code": "GAS008", "case": "negative", "observed": {"apparent_rate": -3.8121182505960336, "component_rate": 1.0, "zero_log": null}, "expected": {"apparent_rate": -3.8121182505960336, "component_rate_positive": true, "zero_log": null}, "scope": "Previous tranche's authored mathematical case; no engine/listener trial."}
+ok
+test_INF009_model (test_baseline_audio.BaselineAudio.test_INF009_model) ... OBSERVATION {"code": "INF009", "case": "model", "observed": {"z_x": [-1.3416407864998738, -0.4472135954999579, 0.4472135954999579, 1.3416407864998738], "z_y": [-1.3416407864998738, -0.4472135954999579, 0.4472135954999579, 1.3416407864998738], "difference_rms": 0.23385358667337133}, "expected": {"z_equal": true, "difference_rms": 0.23385358667337133}, "scope": "Previous tranche's authored mathematical case; no engine/listener trial."}
+ok
+test_INF009_negative (test_baseline_audio.BaselineAudio.test_INF009_negative) ... OBSERVATION {"code": "INF009", "case": "negative", "observed": {"signed": -1.0, "absolute": 1.0, "constant_sigma": 0.0}, "expected": {"signed": -1, "absolute": 1, "constant_sigma": 0}, "scope": "Previous tranche's authored mathematical case; no engine/listener trial."}
+ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.002s
+
+OK

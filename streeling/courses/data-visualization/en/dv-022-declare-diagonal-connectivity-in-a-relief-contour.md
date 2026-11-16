@@ -1,0 +1,176 @@
+---
+module_id: "dv-022-declare-diagonal-connectivity-in-a-relief-contour"
+department: "data-visualization"
+course: "Declare Diagonal Connectivity in a Relief Contour"
+level: "advanced"
+prerequisites: ["dv-015-map-missing-stitches-without-inventing-holes"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Declare Diagonal Connectivity in a Relief Contour
+
+> Draft for technical and fluent-language review. The numerical inputs, labels and expected results are authored teaching cases. They are not new physical material tests, native scene runs, learner observations or production outcomes. Human and learner decisions remain undecided.
+
+## Project operation and interpretation
+
+A relief-height preview has a square cell whose high corners lie diagonally opposite. Every corner is present, so missing-data handling does not decide how the contour should pass through the cell. Linear edge interpolation supplies crossing positions but leaves a connectivity choice. This lesson makes that choice visible before an embroidery mask or chased-metal region receives a connected-component label in a proposed scene.
+
+Name corners and edges in a fixed image orientation. The local pattern alternates high and low, giving a crossing on every edge. Connecting the high class through the cell separates the low corners; connecting the low class instead separates the high corners. Keep the edge coordinates and the pairing policy in different fields. The control changes only the policy, so identical crossing positions coexist with different local component counts. A screenshot that shows the same dots can conceal the topological change.
+
+The official contour documentation describes this ambiguous case and exposes a connectivity option; our finite paper construction does not run that implementation. It does not infer the unknown surface interior from corner values or claim a physically correct saddle reconstruction. A future asset handoff should state whether contour connectivity is an authored convention or supported by additional sampling. An assistant may propose either policy for a task, but must retain the rejected alternative and the region-identity consequence instead of calling one choice a measurement.
+
+Read the committed prerequisite and the scoped primary passage before calculating. Make a small ledger with separate columns for source definition, authored premise, derived result and future observation. A documentation page supports only the claim within its inspected scope. A source parameter, mathematical answer and runtime observation have different evidential roles; an assistant’s confident summary cannot exchange those roles. The evidence packet retains the source revision and the reading boundary so another reviewer can challenge a precise statement.
+
+Work first with the answer panels closed. Draw the table or diagram required by this operation and retain the intermediate quantities, including units or identity conventions. That handwritten derivation is the direct manual baseline. Only then consult an assistant or translation aid. Keep the question, the source location cited, the suggestion received and the change accepted or rejected. Compare the assisted result with the retained first attempt on identical inputs. A shorter answer is not an improvement when it omits a precondition or invents a completed project trial.
+
+## Fixed model and changed-input control
+
+```json
+{
+  "values": {
+    "corners_TL_TR_BR_BL": [
+      1,
+      0,
+      1,
+      0
+    ],
+    "threshold": 0.5,
+    "connect_high": false
+  },
+  "formula": "classify corners strictly above threshold; alternating high/low is ambiguous; interpolate each crossing at (threshold-a)/(b-a); connect_high false pairs top-left and right-bottom; connect_high true pairs top-right and bottom-left",
+  "expected": {
+    "ambiguous": true,
+    "edge_fractions": [
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "pairs": [
+      [
+        "top",
+        "left"
+      ],
+      [
+        "right",
+        "bottom"
+      ]
+    ],
+    "high_components": 2,
+    "low_components": 1
+  },
+  "negative_control": {
+    "values": {
+      "corners_TL_TR_BR_BL": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "threshold": 0.5,
+      "connect_high": true
+    },
+    "expected": {
+      "ambiguous": true,
+      "edge_fractions": [
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "pairs": [
+        [
+          "top",
+          "right"
+        ],
+        [
+          "bottom",
+          "left"
+        ]
+      ],
+      "high_components": 1,
+      "low_components": 2
+    }
+  }
+}
+```
+
+### Exercise 1
+
+Classify the corner pattern.
+
+<details><summary>Answer 1</summary>
+
+It alternates high and low, so the local case is ambiguous. Complete corner data does not by itself select diagonal connectivity.
+
+</details>
+
+### Exercise 2
+
+Locate the edge crossings.
+
+<details><summary>Answer 2</summary>
+
+All fractions are `0.5`. The edge interpolation determines positions without determining how to pair them inside the cell.
+
+</details>
+
+### Exercise 3
+
+Apply the main connectivity policy.
+
+<details><summary>Answer 3</summary>
+
+Pair top with left and right with bottom. The local high class has `2` components and the low class `1`.
+
+</details>
+
+### Exercise 4
+
+Apply the changed-policy control.
+
+<details><summary>Answer 4</summary>
+
+Pair top with right and bottom with left. High components become `1` and low components `2`, with unchanged edge positions.
+
+</details>
+
+### Exercise 5
+
+Is either policy a measured surface interior?
+
+<details><summary>Answer 5</summary>
+
+No. Extra samples or a justified interpolation model would be required. A declared convention is useful evidence of meaning, not a physical observation.
+
+</details>
+
+## Source-assisted task and direct baseline
+
+Draw both contour pairings for the same cell and label the resulting high regions. Prepare a relief-preview annotation retaining the chosen policy and the alternative, then ask an assistant which future sample would challenge that choice.
+
+Treat the control as a separate input record. Preserve the main case, write a prediction for the changed input and explain which premise changes. When a result disagrees with your first answer, distinguish arithmetic error, interpretation error and a model limitation. Keep a failed attempt beside its correction rather than replacing it. The task asks for a reviewable evidence note before proposing a DSL node or agent workflow; a manual table may already meet the project need.
+
+Submit the baseline, source locations, corrected explanation, control outcome and prospective falsifier together. The prepared criteria below are questions for a future reviewer, not accepted learner results. Actual learner answer, assistance history, corrected answer and learner decision remain empty until a real attempt is retained. Technical review, fluent-language review, runtime execution, production adoption and publication each require their own applicable evidence. A passing finite calculation would establish only the stated operation under its premises.
+
+## Prospective falsifier
+
+A report claiming unchanged component identity under the policy-only control is refuted by the changed local component counts.
+
+## Prepared learner criteria
+
+- For exercise 1: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+- For exercise 2: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+- For exercise 3: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+- For exercise 4: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+- For exercise 5: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+
+## Sources and claim boundary
+
+- [Committed prerequisite: dv-015-map-missing-stitches-without-inventing-holes](../../data-visualization/en/dv-015-map-missing-stitches-without-inventing-holes.md)
+- [Retained project source](../../../../code/blender/scripts/atlas/kit.py)
+- [Primary reading](https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.find_contours)
+- [Authored evidence packet](../../../../code/streeling/evidence/batch50-2026-10-25-b/unit-c.json)
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25-b/journal.md)

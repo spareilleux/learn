@@ -1,0 +1,40 @@
+{
+  "scope": "Prepared design for a possible trial, not an experiment that occurred. New two-surround control is not the cited checker-block study stimulus.",
+  "stimulus_file": "color-context-controls.png",
+  "byte_equality_question": "Are the two specified target crops byte-identical?",
+  "appearance_question": "Which target appears brighter under the recorded viewing condition, or do they appear equal?",
+  "material_question": "What surface reflectance is implied by the scene? This requires a separately designed contextual task, not an answer inferred from pixel equality.",
+  "allowed_responses": [
+    "left",
+    "right",
+    "equal",
+    "unsure"
+  ],
+  "counterbalance": [
+    {
+      "layout": "dark-left/light-right",
+      "target_bytes": [
+        128,
+        128
+      ]
+    },
+    {
+      "layout": "light-left/dark-right",
+      "target_bytes": [
+        128,
+        128
+      ]
+    }
+  ],
+  "second_layout_rendered": false,
+  "planned_controls": [
+    "Equal target size and bytes",
+    "Record image transform, browser zoom, display mode and ambient conditions",
+    "Counterbalance surround side without exposing expected answer",
+    "Allow equal and unsure; retain exclusions and actual responses"
+  ],
+  "participant_count": 0,
+  "responses": null,
+  "instrument_measured_luminance": null,
+  "transfer_to_craft_material_quality": null
+}

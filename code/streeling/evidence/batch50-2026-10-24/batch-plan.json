@@ -1,0 +1,625 @@
+{
+  "execution": "knowledge-work with independently reviewed claim-test substep",
+  "base_learn_commit": "212ffe4351633588efbe46938cbceec80aded31e",
+  "publication_base": "b7a402c162c15e77fd76e6c57360994308e33279",
+  "source_catalog_base": "b7a402c162c15e77fd76e6c57360994308e33279",
+  "baseline_core": 281,
+  "target": 525,
+  "original_departments": 21,
+  "batch_new_english_modules": 50,
+  "batch_locale_sources": 150,
+  "expected_core_after": 331,
+  "expected_remaining": 194,
+  "expected_locale_counts": {
+    "en": 332,
+    "fr": 332,
+    "es": 332
+  },
+  "units": {
+    "a": 18,
+    "b": 16,
+    "c": 16
+  },
+  "courses": [
+    {
+      "unit": "a",
+      "code": "AUD013",
+      "department": "audio-engineering",
+      "module_id": "aud-013-resample-without-relabeling-the-clock",
+      "title": "Resample Without Relabeling the Clock",
+      "source_paths": {
+        "en": "streeling/courses/audio-engineering/en/aud-013-resample-without-relabeling-the-clock.md",
+        "fr": "streeling/courses/audio-engineering/fr/aud-013-resample-without-relabeling-the-clock.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-013-resample-without-relabeling-the-clock.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "AUD014",
+      "department": "audio-engineering",
+      "module_id": "aud-014-budget-headroom-for-correlated-plucks",
+      "title": "Budget Headroom for Correlated Plucks",
+      "source_paths": {
+        "en": "streeling/courses/audio-engineering/en/aud-014-budget-headroom-for-correlated-plucks.md",
+        "fr": "streeling/courses/audio-engineering/fr/aud-014-budget-headroom-for-correlated-plucks.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-014-budget-headroom-for-correlated-plucks.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "AUD015",
+      "department": "audio-engineering",
+      "module_id": "aud-015-bound-quantization-error-before-comparing-wavs",
+      "title": "Bound Quantization Error Before Comparing WAVs",
+      "source_paths": {
+        "en": "streeling/courses/audio-engineering/en/aud-015-bound-quantization-error-before-comparing-wavs.md",
+        "fr": "streeling/courses/audio-engineering/fr/aud-015-bound-quantization-error-before-comparing-wavs.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-015-bound-quantization-error-before-comparing-wavs.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAS012",
+      "department": "guitar-acoustics",
+      "module_id": "gas-012-distinguish-coupling-from-parallel-resonance",
+      "title": "Distinguish Coupling from Parallel Resonance",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-012-distinguish-coupling-from-parallel-resonance.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-012-distinguish-coupling-from-parallel-resonance.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-012-distinguish-coupling-from-parallel-resonance.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAS013",
+      "department": "guitar-acoustics",
+      "module_id": "gas-013-retune-with-an-explicit-tension-assumption",
+      "title": "Retune with an Explicit Tension Assumption",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-013-retune-with-an-explicit-tension-assumption.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-013-retune-with-an-explicit-tension-assumption.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-013-retune-with-an-explicit-tension-assumption.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAS014",
+      "department": "guitar-acoustics",
+      "module_id": "gas-014-predict-a-two-path-comb-with-distance",
+      "title": "Predict a Two-Path Comb from Distance",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-014-predict-a-two-path-comb-with-distance.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-014-predict-a-two-path-comb-with-distance.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-014-predict-a-two-path-comb-with-distance.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GTR012",
+      "department": "guitar-studies",
+      "module_id": "gtr-012-select-natural-harmonics-with-a-touch-node",
+      "title": "Select Natural Harmonics with a Touch Node",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-012-select-natural-harmonics-with-a-touch-node.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-012-select-natural-harmonics-with-a-touch-node.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-012-select-natural-harmonics-with-a-touch-node.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GTR013",
+      "department": "guitar-studies",
+      "module_id": "gtr-013-judge-a-bend-with-an-uncertainty-budget",
+      "title": "Judge a Bend with an Uncertainty Budget",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-013-judge-a-bend-with-an-uncertainty-budget.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-013-judge-a-bend-with-an-uncertainty-budget.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-013-judge-a-bend-with-an-uncertainty-budget.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GTR014",
+      "department": "guitar-studies",
+      "module_id": "gtr-014-count-legato-notes-separately-from-pick-attacks",
+      "title": "Count Legato Notes Separately from Pick Attacks",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-014-count-legato-notes-separately-from-pick-attacks.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-014-count-legato-notes-separately-from-pick-attacks.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-014-count-legato-notes-separately-from-pick-attacks.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAA011",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-011-diagnose-interval-errors-with-a-confusion-table",
+      "title": "Diagnose Interval Errors with a Confusion Table",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-011-diagnose-interval-errors-with-a-confusion-table.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-011-diagnose-interval-errors-with-a-confusion-table.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-011-diagnose-interval-errors-with-a-confusion-table.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAA012",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-012-cross-timbre-with-interval-in-an-ear-trial",
+      "title": "Cross Timbre with Interval in an Ear Trial",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-012-cross-timbre-with-interval-in-an-ear-trial.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-012-cross-timbre-with-interval-in-an-ear-trial.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-012-cross-timbre-with-interval-in-an-ear-trial.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAA013",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-013-choose-a-voicing-diversity-key-for-the-task",
+      "title": "Choose a Voicing Diversity Key for the Task",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-013-choose-a-voicing-diversity-key-for-the-task.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-013-choose-a-voicing-diversity-key-for-the-task.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-013-choose-a-voicing-diversity-key-for-the-task.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "MCL012",
+      "department": "musicology",
+      "module_id": "mcl-012-merge-ties-without-merging-slurs",
+      "title": "Merge Ties Without Merging Slurs",
+      "source_paths": {
+        "en": "streeling/courses/musicology/en/mcl-012-merge-ties-without-merging-slurs.md",
+        "fr": "streeling/courses/musicology/fr/mcl-012-merge-ties-without-merging-slurs.fr.md",
+        "es": "streeling/courses/musicology/es/mcl-012-merge-ties-without-merging-slurs.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "MCL013",
+      "department": "musicology",
+      "module_id": "mcl-013-keep-tuplet-duration-as-a-rational",
+      "title": "Keep Tuplet Duration as a Rational",
+      "source_paths": {
+        "en": "streeling/courses/musicology/en/mcl-013-keep-tuplet-duration-as-a-rational.md",
+        "fr": "streeling/courses/musicology/fr/mcl-013-keep-tuplet-duration-as-a-rational.fr.md",
+        "es": "streeling/courses/musicology/es/mcl-013-keep-tuplet-duration-as-a-rational.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "MCL014",
+      "department": "musicology",
+      "module_id": "mcl-014-declare-where-grace-notes-take-their-time",
+      "title": "Declare Where Grace Notes Take Their Time",
+      "source_paths": {
+        "en": "streeling/courses/musicology/en/mcl-014-declare-where-grace-notes-take-their-time.md",
+        "fr": "streeling/courses/musicology/fr/mcl-014-declare-where-grace-notes-take-their-time.fr.md",
+        "es": "streeling/courses/musicology/es/mcl-014-declare-where-grace-notes-take-their-time.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "WML011",
+      "department": "world-music-languages",
+      "module_id": "wml-011-preserve-the-kind-of-a-seventh-chord",
+      "title": "Preserve the Kind of a Seventh Chord",
+      "source_paths": {
+        "en": "streeling/courses/world-music-languages/en/wml-011-preserve-the-kind-of-a-seventh-chord.md",
+        "fr": "streeling/courses/world-music-languages/fr/wml-011-preserve-the-kind-of-a-seventh-chord.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-011-preserve-the-kind-of-a-seventh-chord.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "WML012",
+      "department": "world-music-languages",
+      "module_id": "wml-012-preserve-direction-in-a-melodic-inventory",
+      "title": "Preserve Direction in a Melodic Inventory",
+      "source_paths": {
+        "en": "streeling/courses/world-music-languages/en/wml-012-preserve-direction-in-a-melodic-inventory.md",
+        "fr": "streeling/courses/world-music-languages/fr/wml-012-preserve-direction-in-a-melodic-inventory.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-012-preserve-direction-in-a-melodic-inventory.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "WML013",
+      "department": "world-music-languages",
+      "module_id": "wml-013-check-whether-a-fifth-cycle-closes",
+      "title": "Check Whether a Fifth Cycle Closes",
+      "source_paths": {
+        "en": "streeling/courses/world-music-languages/en/wml-013-check-whether-a-fifth-cycle-closes.md",
+        "fr": "streeling/courses/world-music-languages/fr/wml-013-check-whether-a-fifth-cycle-closes.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-013-check-whether-a-fifth-cycle-closes.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "CS018",
+      "department": "computer-science",
+      "module_id": "cs-018-merge-replayed-agent-messages-by-identity",
+      "title": "Merge Replayed Agent Messages by Identity",
+      "source_paths": {
+        "en": "streeling/courses/computer-science/en/cs-018-merge-replayed-agent-messages-by-identity.md",
+        "fr": "streeling/courses/computer-science/fr/cs-018-merge-replayed-agent-messages-by-identity.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-018-merge-replayed-agent-messages-by-identity.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "CS019",
+      "department": "computer-science",
+      "module_id": "cs-019-preserve-lexical-bindings-when-composing-fragments",
+      "title": "Preserve Lexical Bindings When Composing Fragments",
+      "source_paths": {
+        "en": "streeling/courses/computer-science/en/cs-019-preserve-lexical-bindings-when-composing-fragments.md",
+        "fr": "streeling/courses/computer-science/fr/cs-019-preserve-lexical-bindings-when-composing-fragments.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-019-preserve-lexical-bindings-when-composing-fragments.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "CS020",
+      "department": "computer-science",
+      "module_id": "cs-020-audit-evidence-join-multiplicity",
+      "title": "Audit Evidence Join Multiplicity",
+      "source_paths": {
+        "en": "streeling/courses/computer-science/en/cs-020-audit-evidence-join-multiplicity.md",
+        "fr": "streeling/courses/computer-science/fr/cs-020-audit-evidence-join-multiplicity.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-020-audit-evidence-join-multiplicity.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "CYB012",
+      "department": "cybernetics",
+      "module_id": "cyb-012-test-feedback-delay-before-reusing-a-gain",
+      "title": "Test Feedback Delay Before Reusing a Gain",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-012-test-feedback-delay-before-reusing-a-gain.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-012-test-feedback-delay-before-reusing-a-gain.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-012-test-feedback-delay-before-reusing-a-gain.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "CYB013",
+      "department": "cybernetics",
+      "module_id": "cyb-013-bound-observation-age-before-a-control-decision",
+      "title": "Bound Observation Age Before a Control Decision",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-013-bound-observation-age-before-a-control-decision.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-013-bound-observation-age-before-a-control-decision.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-013-bound-observation-age-before-a-control-decision.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "CYB014",
+      "department": "cybernetics",
+      "module_id": "cyb-014-test-deadbands-with-quantized-actions",
+      "title": "Test Deadbands with Quantized Actions",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-014-test-deadbands-with-quantized-actions.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-014-test-deadbands-with-quantized-actions.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-014-test-deadbands-with-quantized-actions.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "COG012",
+      "department": "cognitive-science",
+      "module_id": "cog-012-separate-review-alert-hit-rate-from-response-bias",
+      "title": "Separate Review Alert Hit Rate from Response Bias",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-012-separate-review-alert-hit-rate-from-response-bias.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-012-separate-review-alert-hit-rate-from-response-bias.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-012-separate-review-alert-hit-rate-from-response-bias.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "COG013",
+      "department": "cognitive-science",
+      "module_id": "cog-013-retain-catch-trial-misses-in-assisted-review",
+      "title": "Retain Catch Trial Misses in Assisted Review",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-013-retain-catch-trial-misses-in-assisted-review.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-013-retain-catch-trial-misses-in-assisted-review.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-013-retain-catch-trial-misses-in-assisted-review.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "COG014",
+      "department": "cognitive-science",
+      "module_id": "cog-014-report-risk-and-coverage-when-an-agent-abstains",
+      "title": "Report Risk and Coverage When an Agent Abstains",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-014-report-risk-and-coverage-when-an-agent-abstains.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-014-report-risk-and-coverage-when-an-agent-abstains.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-014-report-risk-and-coverage-when-an-agent-abstains.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "INF013",
+      "department": "information-theory",
+      "module_id": "inf-013-value-an-evidence-probe-by-expected-information",
+      "title": "Value an Evidence Probe by Expected Information",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-013-value-an-evidence-probe-by-expected-information.md",
+        "fr": "streeling/courses/information-theory/fr/inf-013-value-an-evidence-probe-by-expected-information.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-013-value-an-evidence-probe-by-expected-information.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "INF014",
+      "department": "information-theory",
+      "module_id": "inf-014-retain-message-codebook-versions",
+      "title": "Retain Message Codebook Versions",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-014-retain-message-codebook-versions.md",
+        "fr": "streeling/courses/information-theory/fr/inf-014-retain-message-codebook-versions.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-014-retain-message-codebook-versions.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "INF015",
+      "department": "information-theory",
+      "module_id": "inf-015-weight-sampled-telemetry-before-summarizing-failures",
+      "title": "Weight Sampled Telemetry Before Summarizing Failures",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-015-weight-sampled-telemetry-before-summarizing-failures.md",
+        "fr": "streeling/courses/information-theory/fr/inf-015-weight-sampled-telemetry-before-summarizing-failures.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-015-weight-sampled-telemetry-before-summarizing-failures.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "NET012",
+      "department": "network-science",
+      "module_id": "net-012-account-for-shared-dependencies-in-redundant-paths",
+      "title": "Account for Shared Dependencies in Redundant Paths",
+      "source_paths": {
+        "en": "streeling/courses/network-science/en/net-012-account-for-shared-dependencies-in-redundant-paths.md",
+        "fr": "streeling/courses/network-science/fr/net-012-account-for-shared-dependencies-in-redundant-paths.fr.md",
+        "es": "streeling/courses/network-science/es/net-012-account-for-shared-dependencies-in-redundant-paths.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "NET013",
+      "department": "network-science",
+      "module_id": "net-013-trace-causal-concurrency-with-vector-clocks",
+      "title": "Trace Causal Concurrency with Vector Clocks",
+      "source_paths": {
+        "en": "streeling/courses/network-science/en/net-013-trace-causal-concurrency-with-vector-clocks.md",
+        "fr": "streeling/courses/network-science/fr/net-013-trace-causal-concurrency-with-vector-clocks.fr.md",
+        "es": "streeling/courses/network-science/es/net-013-trace-causal-concurrency-with-vector-clocks.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "PM010",
+      "department": "product-management",
+      "module_id": "pm-010-standardize-dogfood-failures-to-a-declared-task-mix",
+      "title": "Standardize Dogfood Failures to a Declared Task Mix",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.md",
+        "fr": "streeling/courses/product-management/fr/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.fr.md",
+        "es": "streeling/courses/product-management/es/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "PM011",
+      "department": "product-management",
+      "module_id": "pm-011-include-review-and-correction-in-automation-break-even",
+      "title": "Include Review and Correction in Automation Break Even",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-011-include-review-and-correction-in-automation-break-even.md",
+        "fr": "streeling/courses/product-management/fr/pm-011-include-review-and-correction-in-automation-break-even.fr.md",
+        "es": "streeling/courses/product-management/es/pm-011-include-review-and-correction-in-automation-break-even.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "PHY016",
+      "department": "physics",
+      "module_id": "phy-016-bound-a-fold-hinge-sweep",
+      "title": "Bound a Fold Hinge Sweep",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-016-bound-a-fold-hinge-sweep.md",
+        "fr": "streeling/courses/physics/fr/phy-016-bound-a-fold-hinge-sweep.fr.md",
+        "es": "streeling/courses/physics/es/phy-016-bound-a-fold-hinge-sweep.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "PHY017",
+      "department": "physics",
+      "module_id": "phy-017-budget-thermal-growth-at-a-metal-joint",
+      "title": "Budget Thermal Growth at a Metal Joint",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-017-budget-thermal-growth-at-a-metal-joint.md",
+        "fr": "streeling/courses/physics/fr/phy-017-budget-thermal-growth-at-a-metal-joint.fr.md",
+        "es": "streeling/courses/physics/es/phy-017-budget-thermal-growth-at-a-metal-joint.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "PHY018",
+      "department": "physics",
+      "module_id": "phy-018-locate-a-sculpture-mass-projection",
+      "title": "Locate a Sculpture Mass Projection",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-018-locate-a-sculpture-mass-projection.md",
+        "fr": "streeling/courses/physics/fr/phy-018-locate-a-sculpture-mass-projection.fr.md",
+        "es": "streeling/courses/physics/es/phy-018-locate-a-sculpture-mass-projection.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "VC014",
+      "department": "visual-computing",
+      "module_id": "vc-014-predict-an-embroidered-stitch-pixel-footprint",
+      "title": "Predict an Embroidered Stitch Pixel Footprint",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-014-predict-an-embroidered-stitch-pixel-footprint.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-014-predict-an-embroidered-stitch-pixel-footprint.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-014-predict-an-embroidered-stitch-pixel-footprint.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "VC015",
+      "department": "visual-computing",
+      "module_id": "vc-015-budget-a-sculpture-profile-chord-error",
+      "title": "Budget a Sculpture Profile Chord Error",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-015-budget-a-sculpture-profile-chord-error.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-015-budget-a-sculpture-profile-chord-error.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-015-budget-a-sculpture-profile-chord-error.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "VC016",
+      "department": "visual-computing",
+      "module_id": "vc-016-track-uv-gutters-through-mip-levels",
+      "title": "Track UV Gutters through Mip Levels",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-016-track-uv-gutters-through-mip-levels.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-016-track-uv-gutters-through-mip-levels.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-016-track-uv-gutters-through-mip-levels.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "DV014",
+      "department": "data-visualization",
+      "module_id": "dv-014-plot-signed-craft-clearance",
+      "title": "Plot Signed Craft Clearance",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-014-plot-signed-craft-clearance.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-014-plot-signed-craft-clearance.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-014-plot-signed-craft-clearance.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "DV015",
+      "department": "data-visualization",
+      "module_id": "dv-015-map-missing-stitches-without-inventing-holes",
+      "title": "Map Missing Stitches without Inventing Holes",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-015-map-missing-stitches-without-inventing-holes.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-015-map-missing-stitches-without-inventing-holes.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-015-map-missing-stitches-without-inventing-holes.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "DV016",
+      "department": "data-visualization",
+      "module_id": "dv-016-compare-paired-silhouette-residuals",
+      "title": "Compare Paired Silhouette Residuals",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-016-compare-paired-silhouette-residuals.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-016-compare-paired-silhouette-residuals.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-016-compare-paired-silhouette-residuals.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "SEM012",
+      "department": "semiotics",
+      "module_id": "sem-012-preserve-the-order-of-stitch-frame-actions",
+      "title": "Preserve the Order of Stitch Frame Actions",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-012-preserve-the-order-of-stitch-frame-actions.md",
+        "fr": "streeling/courses/semiotics/fr/sem-012-preserve-the-order-of-stitch-frame-actions.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-012-preserve-the-order-of-stitch-frame-actions.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "SEM013",
+      "department": "semiotics",
+      "module_id": "sem-013-align-two-motif-periods-at-a-textile-seam",
+      "title": "Align Two Motif Periods at a Textile Seam",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-013-align-two-motif-periods-at-a-textile-seam.md",
+        "fr": "streeling/courses/semiotics/fr/sem-013-align-two-motif-periods-at-a-textile-seam.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-013-align-two-motif-periods-at-a-textile-seam.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "SEM014",
+      "department": "semiotics",
+      "module_id": "sem-014-declare-material-patch-precedence",
+      "title": "Declare Material Patch Precedence",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-014-declare-material-patch-precedence.md",
+        "fr": "streeling/courses/semiotics/fr/sem-014-declare-material-patch-precedence.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-014-declare-material-patch-precedence.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "PHI010",
+      "department": "philosophy",
+      "module_id": "phi-010-state-what-a-craft-view-cannot-distinguish",
+      "title": "State What a Craft View Cannot Distinguish",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-010-state-what-a-craft-view-cannot-distinguish.md",
+        "fr": "streeling/courses/philosophy/fr/phi-010-state-what-a-craft-view-cannot-distinguish.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-010-state-what-a-craft-view-cannot-distinguish.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "PHI011",
+      "department": "philosophy",
+      "module_id": "phi-011-cross-mesh-and-lighting-before-attributing-a-render-change",
+      "title": "Cross Mesh and Lighting before Attributing a Render Change",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-011-cross-mesh-and-lighting-before-attributing-a-render-change.md",
+        "fr": "streeling/courses/philosophy/fr/phi-011-cross-mesh-and-lighting-before-attributing-a-render-change.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-011-cross-mesh-and-lighting-before-attributing-a-render-change.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "FUT010",
+      "department": "futurology",
+      "module_id": "fut-010-project-weave-density-before-a-scene-expansion",
+      "title": "Project Weave Density before a Scene Expansion",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-010-project-weave-density-before-a-scene-expansion.md",
+        "fr": "streeling/courses/futurology/fr/fut-010-project-weave-density-before-a-scene-expansion.fr.md",
+        "es": "streeling/courses/futurology/es/fut-010-project-weave-density-before-a-scene-expansion.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "FUT011",
+      "department": "futurology",
+      "module_id": "fut-011-plan-an-embroidery-representation-switch-with-memory",
+      "title": "Plan an Embroidery Representation Switch with Memory",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-011-plan-an-embroidery-representation-switch-with-memory.md",
+        "fr": "streeling/courses/futurology/fr/fut-011-plan-an-embroidery-representation-switch-with-memory.fr.md",
+        "es": "streeling/courses/futurology/es/fut-011-plan-an-embroidery-representation-switch-with-memory.es.md"
+      }
+    }
+  ]
+}
