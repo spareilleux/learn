@@ -186,7 +186,7 @@ Both reach a loss near 10⁻¹¹. The example prints the final w next to the tru
 | P4 | `add`, `sub` and `mul` panic on [2, 3] and [3, 2] | All three panic | Confirmed |
 | P5 | Quadratic: error at most 10⁻¹² at ε = 0.1, at least 10⁻⁹ at ε = 10⁻¹⁰ | Below 10⁻¹²; 6 × 10⁻⁷ | Confirmed |
 | P6 | FFT loss: the best ε is in [10⁻⁶, 10⁻³], and ε = 10⁻¹ and 10⁻¹⁰ are each at least 100 times worse | 10⁻⁵; 10⁶ and 10⁵ times worse | Confirmed |
-| P7 | FFT backward within 10⁻⁶ of central differences at ε = 10⁻⁵, 20 signals | 8 × 10⁻⁹ | Confirmed |
+| P7 | FFT backward within 10⁻⁶ of central differences at ε = 10⁻⁵, 20 signals | 8 × 10⁻⁹ on Windows, 9 × 10⁻⁹ on Linux and macOS | Confirmed |
 | P8 | Least squares on the example's data: b in [0.0899, 0.0901], mean squared error below 10⁻¹¹ | 0.089990; below 10⁻¹² | Confirmed |
 
 All eight predictions held on the first run, and none was adjusted afterwards. P3, P4 and P8 were written to catch a gap between IX's documentation and its code, found by reading it first, and all three found one. The collinear features, the result that matters most here, were not predicted: P8 explained the intercept and missed the weights. The journal records them as exploratory.

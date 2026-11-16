@@ -186,7 +186,7 @@ Les deux atteignent une perte proche de 10⁻¹¹. L'exemple affiche le w final 
 | P4 | `add`, `sub` et `mul` paniquent sur [2, 3] et [3, 2] | Les trois paniquent | Confirmée |
 | P5 | Quadratique : erreur d'au plus 10⁻¹² pour ε = 0,1, d'au moins 10⁻⁹ pour ε = 10⁻¹⁰ | Moins de 10⁻¹² ; 6 × 10⁻⁷ | Confirmée |
 | P6 | Perte FFT : le meilleur ε est dans [10⁻⁶ ; 10⁻³], et ε = 10⁻¹ et 10⁻¹⁰ sont chacun au moins 100 fois pires | 10⁻⁵ ; 10⁶ et 10⁵ fois pires | Confirmée |
-| P7 | Backward de la FFT à 10⁻⁶ près des différences centrées à ε = 10⁻⁵, sur 20 signaux | 8 × 10⁻⁹ | Confirmée |
+| P7 | Backward de la FFT à 10⁻⁶ près des différences centrées à ε = 10⁻⁵, sur 20 signaux | 8 × 10⁻⁹ sous Windows, 9 × 10⁻⁹ sous Linux et macOS | Confirmée |
 | P8 | Moindres carrés sur les données de l'exemple : b dans [0,0899 ; 0,0901], erreur quadratique moyenne sous 10⁻¹¹ | 0,089990 ; sous 10⁻¹² | Confirmée |
 
 Les huit prédictions ont tenu dès la première exécution, et aucune n'a été ajustée ensuite. P3, P4 et P8 ont été écrites pour repérer un écart entre la documentation d'IX et son code, trouvé en le lisant d'abord, et toutes trois en ont trouvé un. Les variables colinéaires, le résultat qui compte le plus ici, n'étaient pas prédites : P8 expliquait l'ordonnée à l'origine et n'a pas vu les poids. Le journal les consigne comme exploratoires.
