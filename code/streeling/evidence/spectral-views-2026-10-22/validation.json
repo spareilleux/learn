@@ -1,0 +1,98 @@
+{
+  "checked_at_utc": "2026-10-22T17:26:51.394951+00:00",
+  "base_learn_commit": "aa1a71b30ea98b9adce4f70b53c59bbf691ba1cb",
+  "latest_main_checked": "05aa47b12b97e626405e961016d5035f7ecf74be",
+  "scope": "Three new trilingual documentation courses, numerical evidence and a scientific figure. No new production/lab program, IX binary execution or engine render.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 5.1722481999895535,
+    "log": "C:\\tmp\\streeling-spectral-tests-20261022.log",
+    "log_sha256": "d4a5c0c3510bc92076e89752b4784d150ac73320a426d54ea925489bcc71da59",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.212293899996439,
+    "log": "C:\\tmp\\streeling-spectral-sync-20261022.log",
+    "log_sha256": "b2f24d0ff4527d0c7c4375fce10f54913662dbdb5370c857b4e3708bac801ae7",
+    "idempotent_checked_files": 581
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 78.98954209999647,
+    "log": "C:\\tmp\\streeling-spectral-build-20261022.log",
+    "log_sha256": "8260664802b320ef5b05dab435491e930629ec7d2c26119bad18c1e6a5ff65e1",
+    "pages": 1777,
+    "dependency_install": "Existing node_modules junction; no fresh npm ci.",
+    "warnings": "Highlighting fallback and empty i18n/404 warnings retained in complete build log."
+  },
+  "rendered_articles": {
+    "pages": 21,
+    "links": 423,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "factual_checks": 42,
+    "factual_findings": [],
+    "data_receipt_sha256": "03563cd094fc6c4c8b872ae4b894560858b0da8da5e9a54b813076e0465e59d1",
+    "content_verdict": "PASS_WITH_LIMITS",
+    "content_findings": [],
+    "exercise_pairs_checked": 45,
+    "learner_criteria_checked": 15,
+    "content_receipt_sha256": "5e0585d305d0ca2e1f60ed08936e1494c8181c30fdbf9a937cb47759a571d812",
+    "scope": "Independent AI numerical/source-assisted course review; not formal CE or human approval.",
+    "human_subject": null,
+    "fluent_language": null,
+    "learner": null,
+    "listening_trial": null
+  },
+  "code_review_pipeline": "Documentation/data/figure-only: no new production or lab code emitted; code-shipping review not invoked.",
+  "manual_host_scan": "Inspected pinned equations, calibrated endpoints, frame/stride/time semantics, decoder boundary, fixed/relative references, actual figure, final course distinctions, task/rubric coverage and exact reviewer bindings. No blocking issue remains for this draft-source lot.",
+  "source_inventory": {
+    "core_english_modules": 168,
+    "original_departments": 21,
+    "target": 525,
+    "remaining_core_source_gaps": 357,
+    "locale_counts": {
+      "en": 169,
+      "fr": 169,
+      "es": 169
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint or typecheck scripts configured; existing generator tests and Astro build used."
+}

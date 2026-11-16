@@ -1,0 +1,9 @@
+{
+  "reviewer": "testing",
+  "findings": [],
+  "residual_risks": [],
+  "testing_gaps": [
+    "src/scripts/streeling-nav-counts.mjs:74-77: the Node proof tests import without a document and call updateStreelingNavCounts directly, so they do not exercise initial browser execution or the astro:page-load registration. The actual browser validation being performed by the root should explicitly dispatch astro:page-load after changing navigation links and confirm recomputation without duplicate badges; the recorded 19 passing Node tests alone do not establish that lifecycle contract.",
+    "scripts/tests/streeling-nav-counts.test.mjs:36-41: the DOM fixture contains only flat department groups and returns a group's own links for every querySelectorAll call. It does not exercise a nested parent details containing department details, where removing the production closest('details') ownership filter could attach a department badge to an ancestor. Confirm actual built navigation badges occur only on department summaries during the root browser check. Preserve the immutable proof tests."
+  ]
+}

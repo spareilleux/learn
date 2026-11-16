@@ -1,0 +1,158 @@
+{
+  "status": "complete",
+  "verdict": "Ready with fixes",
+  "scope": {
+    "base": "f93c0356d23c3700ad1ead501eef46802dca2a31",
+    "branch": "codex/streeling-craft-transfer-20261022",
+    "head_sha": "1807c1fa2858c3af98e296f1c24f3efb75a477a0",
+    "pr_url": null,
+    "files_changed": 4,
+    "mode": "local-aligned",
+    "paths": [
+      "code/streeling/evidence/batch50-2026-10-25/tests/test_course_metadata.mjs",
+      "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py",
+      "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_b.py",
+      "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_c.py"
+    ]
+  },
+  "intent": "Intent: Verify localized course metadata and fifty fixed authored model/control cases using observations derived from packet inputs, independent fixed expectations, and explicit fixture-model scope limits. Review the four new proof-test files only, with their imported batch/unit packets and existing parser as context; do not assess production runtime, course prose, publication, or learner acceptance.",
+  "intent_confidence": "explicit",
+  "reviewers": [
+    "correctness",
+    "adversarial"
+  ],
+  "findings": [
+    {
+      "title": "Invalid operation tokens retain passing proof receipts",
+      "severity": "P2",
+      "file": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py",
+      "line": 160,
+      "why_it_matters": "An invalid operation in an authored packet can still produce a passing model/control proof, so the receipt does not establish that the declared operation vocabulary was followed. WML016 silently treats every token other than add or alter as subtract; MCL016 likewise treats every token other than backup as a forward cursor movement. A nonmutating probe replacing the existing subtract and forward tokens with invalid_operation passed both independent fixed expectations and packet expectations. Explicit vocabulary checks preserve the finite-case scope while rejecting malformed fixture steps.",
+      "autofix_class": "manual",
+      "owner": "downstream-resolver",
+      "requires_verification": true,
+      "suggested_fix": "Before evaluating operations, require MCL016 op values to be exactly note, backup, or forward and WML016 op values to be exactly add, alter, or subtract. Replace the implicit WML016 else deletion with an explicit subtract branch and fail on any unknown token. Add targeted in-memory rejection probes for the existing forward/subtract steps with a misspelled operation.",
+      "confidence": 100,
+      "evidence": [
+        "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py:160 --             else: del degrees[key]",
+        "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py:140 --             cursor+=(-1 if op['op']=='backup' else 1)*op['duration']; states.append(cursor)",
+        "unit-a.json WML016 authored_model.formula declares add/alter/subtract; MCL016 authored_model.formula declares note/backup/forward. These are finite authored operations, not production parser behavior.",
+        "Nonmutating focused probe loaded test_unit_a.py with exec(compile(...)) and deep-copied COURSES. Setting WML016.authored_model.values.operations[2].op from subtract to invalid_operation left UnitA.check_course('WML016') passing, including both fixed and packet assertions and two observations.",
+        "The same focused probe set MCL016.authored_model.values.operations[3].op from forward to invalid_operation. UnitA.check_course('MCL016') also passed both fixed and packet assertions and two observations. Canonical files and the Git index were not changed."
+      ],
+      "pre_existing": false,
+      "#": 1,
+      "first_evidence": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py:160 --             else: del degrees[key]",
+      "reviewers": [
+        "adversarial"
+      ],
+      "independent_reviewers": [
+        "adversarial"
+      ],
+      "validation_status": "confirmed",
+      "validation_reason": "Orchestrator reproduced both cases in memory without canonical writes; see operation-enum-probe.json and .log."
+    }
+  ],
+  "actionable_findings": [
+    {
+      "title": "Invalid operation tokens retain passing proof receipts",
+      "severity": "P2",
+      "file": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py",
+      "line": 160,
+      "why_it_matters": "An invalid operation in an authored packet can still produce a passing model/control proof, so the receipt does not establish that the declared operation vocabulary was followed. WML016 silently treats every token other than add or alter as subtract; MCL016 likewise treats every token other than backup as a forward cursor movement. A nonmutating probe replacing the existing subtract and forward tokens with invalid_operation passed both independent fixed expectations and packet expectations. Explicit vocabulary checks preserve the finite-case scope while rejecting malformed fixture steps.",
+      "autofix_class": "manual",
+      "owner": "downstream-resolver",
+      "requires_verification": true,
+      "suggested_fix": "Before evaluating operations, require MCL016 op values to be exactly note, backup, or forward and WML016 op values to be exactly add, alter, or subtract. Replace the implicit WML016 else deletion with an explicit subtract branch and fail on any unknown token. Add targeted in-memory rejection probes for the existing forward/subtract steps with a misspelled operation.",
+      "confidence": 100,
+      "evidence": [
+        "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py:160 --             else: del degrees[key]",
+        "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py:140 --             cursor+=(-1 if op['op']=='backup' else 1)*op['duration']; states.append(cursor)",
+        "unit-a.json WML016 authored_model.formula declares add/alter/subtract; MCL016 authored_model.formula declares note/backup/forward. These are finite authored operations, not production parser behavior.",
+        "Nonmutating focused probe loaded test_unit_a.py with exec(compile(...)) and deep-copied COURSES. Setting WML016.authored_model.values.operations[2].op from subtract to invalid_operation left UnitA.check_course('WML016') passing, including both fixed and packet assertions and two observations.",
+        "The same focused probe set MCL016.authored_model.values.operations[3].op from forward to invalid_operation. UnitA.check_course('MCL016') also passed both fixed and packet assertions and two observations. Canonical files and the Git index were not changed."
+      ],
+      "pre_existing": false,
+      "#": 1,
+      "first_evidence": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py:160 --             else: del degrees[key]",
+      "reviewers": [
+        "adversarial"
+      ],
+      "independent_reviewers": [
+        "adversarial"
+      ],
+      "validation_status": "confirmed",
+      "validation_reason": "Orchestrator reproduced both cases in memory without canonical writes; see operation-enum-probe.json and .log."
+    }
+  ],
+  "triage_groups": [],
+  "pre_existing_findings": [],
+  "requirements_completeness": {
+    "plan_source": "explicit",
+    "plan_path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25/production-plan.md",
+    "format": "legacy prose contract with no formal R-IDs or implementation-unit section",
+    "scope": "Runnable claim-test substep only",
+    "checks": [
+      {
+        "requirement": "Independent fixed oracles derived separately from packet expected fields",
+        "status": "covered"
+      },
+      {
+        "requirement": "Model and structured negative-control observations before assertions",
+        "status": "covered",
+        "evidence": "50 tests, 100 observations, complete_model_negative_coverage true in retained authoritative receipt"
+      },
+      {
+        "requirement": "Metadata checks use existing generator parser contract",
+        "status": "covered",
+        "evidence": "150 pass and zero fail in retained metadata receipt"
+      },
+      {
+        "requirement": "Authored fixture scope and limits distinguish runtime and learner evidence",
+        "status": "covered"
+      },
+      {
+        "requirement": "Independent code review before publication",
+        "status": "completed with finding 1 outstanding"
+      }
+    ],
+    "missing_requirements": [],
+    "missing_units": [],
+    "unrequested_behavior_rules": [],
+    "coverage_limits": "Course prose, translations, publication and full batch requirements are owned by separate reviews; this receipt assesses four proof-test files and direct packet/parser context."
+  },
+  "learnings": [],
+  "agent_native_gaps": [],
+  "deployment_notes": [],
+  "residual_risks": [],
+  "testing_gaps": [],
+  "coverage": {
+    "depth": "focused",
+    "criteria_files": [
+      "AGENTS.md",
+      "CLAUDE.md"
+    ],
+    "criteria_kind": "instruction-file fallback; no CODING_STANDARDS.md governs the four paths",
+    "compound_packs": "not applied on focused path; no declared packs",
+    "independent_read": "Native adversarial leaf, terminal full artifact and compact return collected. Same serving family; no confidence promotion.",
+    "peer": "Cross-model pass not run: the documented worker cannot restrict its whole-tree diff collection to the caller-authorized four proof-test files. One separately dispatched native adversarial reviewer completed and was collected in this turn; no cross-model corroboration is claimed.",
+    "scope_signals": "Bundled helper ran on canonical base-vs-tree and reported 0 executable non-test lines, small band, no hard full floor; full helper facts retained. Review diff itself restricted to four files.",
+    "untracked": "All untracked paths excluded; exact inventory in excluded-untracked.txt. Three staged Python tests included.",
+    "not_assessed": [
+      "learnings",
+      "agent-native gaps",
+      "deployment notes",
+      "production runtimes",
+      "human/learner acceptance",
+      "course prose and generated publication output"
+    ],
+    "validators": "No validator batch or finish leaves run on focused path; one targeted in-memory reproduction retained.",
+    "validation": "Authoritative 50-test/100-observation and 150-metadata receipts and logs retained byte-for-byte; ten relevant input bindings plus raw log hashes verified against current reviewed files. No broad test rerun."
+  },
+  "peer": {
+    "outcome": "in-process-fallback",
+    "coverage": "Cross-model pass not run: the documented worker cannot restrict its whole-tree diff collection to the caller-authorized four proof-test files. One separately dispatched native adversarial reviewer completed and was collected in this turn; no cross-model corroboration is claimed."
+  },
+  "artifact_path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042",
+  "run_id": "20261025-proof-tests-aec2e042"
+}

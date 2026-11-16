@@ -1,0 +1,610 @@
+{
+  "audit": "Independent fixed-data/source/media audit",
+  "checked_at_utc": "2026-10-22T18:30:21.297780+00:00",
+  "verdict": "pass_with_declared_evidence_limits",
+  "input_bindings": [
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/experiment-plan.md",
+      "bytes": 5882,
+      "sha256": "d29645e3645a8fd554f9e386aae15306aee591d5d635cf608d94c472d7f97a36"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/ga-intervals-probe.json",
+      "bytes": 398,
+      "sha256": "3cabfa681ab289c28418b7dc7fd67ad3332ad59e690e65a9063e1ef81db2c584"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/primary-readback.json",
+      "bytes": 4883,
+      "sha256": "0ec7106b7afac21612a936ab05368724076706f201e55952d872c0d5e0cea76f"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/intonation.json",
+      "bytes": 2163,
+      "sha256": "88e77c28a2b03d1fab494fa2572e4a7eb1ec8414b39a57254823fb33a35d1a16"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/beats.json",
+      "bytes": 2122,
+      "sha256": "dac4a59588f901c7d5f68a1aa86dcb2a3e5b5603f82fd7a488aabc3356ad0fb9"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/audio-assets.json",
+      "bytes": 2802,
+      "sha256": "67b4be3cac59e638685c675f4a413d96bb98bda362f6ff1cc405dfa4b849c872"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/synthetic-trials.json",
+      "bytes": 4779,
+      "sha256": "2170fa26d9cc78db4f62473c2de51ca0198efd2eaecb738259039857b2977b3a"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/execution.json",
+      "bytes": 1106,
+      "sha256": "cbd72d32a5da16399bedeabd2b8a5e4e29a584123627fec3a6dfd88e7e6ba96d"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/tone-a.wav",
+      "bytes": 88244,
+      "sha256": "c75f061087aa80e51a767ca1fbe8297eb6b5020bdc04d2cbbf73aecf1f911153"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/tone-b.wav",
+      "bytes": 88244,
+      "sha256": "fd1d82859b50a6771d56b96176507cd7641039cd35bad70d5b8e0c0722f1a63f"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/two-tone-illustration.wav",
+      "bytes": 352844,
+      "sha256": "ab931fd23b805edec2a493de17001923762a2583f80fb386f3cf944685a2dd5d"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/two-tone-envelope.png",
+      "bytes": 183204,
+      "sha256": "1827aa7669136735e73c8d07054fb48527353c297e36a617fb7d1ccdeb25d021"
+    },
+    {
+      "path": "C:\\tmp\\streeling-intonation-analysis-20261022.py",
+      "bytes": 12585,
+      "sha256": "fb2070a0015e4fba23c37ac74ffdd1bc6d4ed5bca31bcee61256cca29336eb95"
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/validation.json",
+      "bytes": 5999,
+      "sha256": "9f364117c89cec0cbce760a74a61f40dd758a8db0deba371364308519b028afb"
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "Common/GA.Business.Config/WorldScalesConfig.fs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "3e0db7dec97a358785bbb14e57000c6fc4174074399f71c17ff737d39c1d3ecd",
+      "bytes": 8019
+    },
+    {
+      "path": "Common/GA.Business.Config/WorldScales/MaqamScales.yaml",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "a01f1d1413de1ee5b066b0efcd930d9f96a3a466167157ab7a76ec22d282948c",
+      "bytes": 11566
+    },
+    {
+      "path": "Common/GA.Domain.Core/Primitives/Notes/MidiNote.cs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "3448adf415b347509d75a006415733d65ddf69da4ede2832f6edb208efbf8691",
+      "bytes": 5443
+    },
+    {
+      "path": "Common/GA.Domain.Core/Primitives/Notes/Pitch.cs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "ec2315f5e24154fd6e79ab7f730490af316dd2fb244331d30930d9ffc95ab698",
+      "bytes": 17970
+    },
+    {
+      "path": "Common/GA.Domain.Core/Instruments/Tuning.cs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "037c5b48514528d65f59a263136d4fa4d66e5b1ceae7f14453c1868978378b8a",
+      "bytes": 3329
+    },
+    {
+      "path": "Common/GA.Domain.Services/Fretboard/Analysis/FretboardPositionMapper.cs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "818a2ca2e243bcc4e922ac1a3840d6dba0ee1e85aa41172506e10a8aef0d062b",
+      "bytes": 3142
+    },
+    {
+      "path": "Common/GA.Business.DSL/Types/MidiTypes.fs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "8614a2a5d466b5bb792c50017ae7a6e09592b158f1362ac6bf8768683c428b36",
+      "bytes": 9522
+    },
+    {
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "sha256": "d693e1ea1a5ca42d080c5829336bcc8423396c104ebee64d2e76ccd9bb503562",
+      "bytes": 19221
+    }
+  ],
+  "checks": [
+    {
+      "check": "plan_declares_counterexamples_and_limits",
+      "pass_": true,
+      "evidence": "Predictions and limits inspected; file chronology is not independently proven by a file hash."
+    },
+    {
+      "check": "utf8_lf_experiment-plan.md",
+      "pass_": true,
+      "evidence": "UTF-8 decoding succeeded; no BOM or CR bytes"
+    },
+    {
+      "check": "utf8_lf_ga-intervals-probe.json",
+      "pass_": true,
+      "evidence": "UTF-8 decoding succeeded; no BOM or CR bytes"
+    },
+    {
+      "check": "utf8_lf_primary-readback.json",
+      "pass_": true,
+      "evidence": "UTF-8 decoding succeeded; no BOM or CR bytes"
+    },
+    {
+      "check": "utf8_lf_intonation.json",
+      "pass_": true,
+      "evidence": "UTF-8 decoding succeeded; no BOM or CR bytes"
+    },
+    {
+      "check": "utf8_lf_beats.json",
+      "pass_": true,
+      "evidence": "UTF-8 decoding succeeded; no BOM or CR bytes"
+    },
+    {
+      "check": "utf8_lf_audio-assets.json",
+      "pass_": true,
+      "evidence": "UTF-8 decoding succeeded; no BOM or CR bytes"
+    },
+    {
+      "check": "utf8_lf_synthetic-trials.json",
+      "pass_": true,
+      "evidence": "UTF-8 decoding succeeded; no BOM or CR bytes"
+    },
+    {
+      "check": "utf8_lf_execution.json",
+      "pass_": true,
+      "evidence": "UTF-8 decoding succeeded; no BOM or CR bytes"
+    },
+    {
+      "check": "pinned_source_Common/GA.Business.Config/WorldScalesConfig.fs",
+      "pass_": true,
+      "evidence": {
+        "sha256": "3e0db7dec97a358785bbb14e57000c6fc4174074399f71c17ff737d39c1d3ecd",
+        "bytes": 8019,
+        "boundary": "Local immutable Git bytes compared to producer anonymous-readback receipt; auditor did not repeat HTTP request."
+      }
+    },
+    {
+      "check": "pinned_source_Common/GA.Business.Config/WorldScales/MaqamScales.yaml",
+      "pass_": true,
+      "evidence": {
+        "sha256": "a01f1d1413de1ee5b066b0efcd930d9f96a3a466167157ab7a76ec22d282948c",
+        "bytes": 11566,
+        "boundary": "Local immutable Git bytes compared to producer anonymous-readback receipt; auditor did not repeat HTTP request."
+      }
+    },
+    {
+      "check": "pinned_source_Common/GA.Domain.Core/Primitives/Notes/MidiNote.cs",
+      "pass_": true,
+      "evidence": {
+        "sha256": "3448adf415b347509d75a006415733d65ddf69da4ede2832f6edb208efbf8691",
+        "bytes": 5443,
+        "boundary": "Local immutable Git bytes compared to producer anonymous-readback receipt; auditor did not repeat HTTP request."
+      }
+    },
+    {
+      "check": "pinned_source_Common/GA.Domain.Core/Primitives/Notes/Pitch.cs",
+      "pass_": true,
+      "evidence": {
+        "sha256": "ec2315f5e24154fd6e79ab7f730490af316dd2fb244331d30930d9ffc95ab698",
+        "bytes": 17970,
+        "boundary": "Local immutable Git bytes compared to producer anonymous-readback receipt; auditor did not repeat HTTP request."
+      }
+    },
+    {
+      "check": "pinned_source_Common/GA.Domain.Core/Instruments/Tuning.cs",
+      "pass_": true,
+      "evidence": {
+        "sha256": "037c5b48514528d65f59a263136d4fa4d66e5b1ceae7f14453c1868978378b8a",
+        "bytes": 3329,
+        "boundary": "Local immutable Git bytes compared to producer anonymous-readback receipt; auditor did not repeat HTTP request."
+      }
+    },
+    {
+      "check": "pinned_source_Common/GA.Domain.Services/Fretboard/Analysis/FretboardPositionMapper.cs",
+      "pass_": true,
+      "evidence": {
+        "sha256": "818a2ca2e243bcc4e922ac1a3840d6dba0ee1e85aa41172506e10a8aef0d062b",
+        "bytes": 3142,
+        "boundary": "Local immutable Git bytes compared to producer anonymous-readback receipt; auditor did not repeat HTTP request."
+      }
+    },
+    {
+      "check": "pinned_source_Common/GA.Business.DSL/Types/MidiTypes.fs",
+      "pass_": true,
+      "evidence": {
+        "sha256": "8614a2a5d466b5bb792c50017ae7a6e09592b158f1362ac6bf8768683c428b36",
+        "bytes": 9522,
+        "boundary": "Local immutable Git bytes compared to producer anonymous-readback receipt; auditor did not repeat HTTP request."
+      }
+    },
+    {
+      "check": "pinned_source_Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "pass_": true,
+      "evidence": {
+        "sha256": "d693e1ea1a5ca42d080c5829336bcc8423396c104ebee64d2e76ccd9bb503562",
+        "bytes": 19221,
+        "boundary": "Local immutable Git bytes compared to producer anonymous-readback receipt; auditor did not repeat HTTP request."
+      }
+    },
+    {
+      "check": "catalog_model_fields",
+      "pass_": true,
+      "evidence": "Integer interval list and plain-string pitch-class/tuning fields inspected, including loader; no structured per-degree cents field declared."
+    },
+    {
+      "check": "rast_catalog_fields",
+      "pass_": true,
+      "evidence": "Only stored fields verified; no approval of cultural prose or performed intonation."
+    },
+    {
+      "check": "discrete_midi_value_object",
+      "pass_": true,
+      "evidence": "Specific integer note value object; this is not a statement about every GA surface."
+    },
+    {
+      "check": "pitch_tuning_mapper_boundary",
+      "pass_": true,
+      "evidence": "Pinned Pitch, Tuning, FretboardPositionMapper and MidiTypes sources inspected, not built or executed."
+    },
+    {
+      "check": "continuous_audio_entry",
+      "pass_": true,
+      "evidence": "Signature retains a float frequency argument; exact synthesized pitch is not established."
+    },
+    {
+      "check": "probe_claim_boundary",
+      "pass_": true,
+      "evidence": "Saved parent actual-call result inspected; no independent MCP call or invocation attestation by this auditor. The response has no cents/frequency field."
+    },
+    {
+      "check": "intonation_values",
+      "pass_": true,
+      "evidence": {
+        "frequency_a_hz": 327.0319566257483,
+        "frequency_b_hz": 329.6275569128699,
+        "cents_a_above_tonic": 386.3137138648348,
+        "cents_b_above_tonic": 400,
+        "a_relative_to_b_cents": -13.686286135165114,
+        "continuous_midi_a": 63.86313713864835,
+        "continuous_midi_b": 64,
+        "residual_a_cents": -13.686286135165204
+      }
+    },
+    {
+      "check": "authored_projection_loss",
+      "pass_": true,
+      "evidence": {
+        "authored_nearest_step": 64,
+        "lost_offset_cents": -13.686286135165114,
+        "ga_converter_executed": false
+      }
+    },
+    {
+      "check": "pitch_class_mask",
+      "pass_": true,
+      "evidence": {
+        "mask": 2741,
+        "approximation_retained": true
+      }
+    },
+    {
+      "check": "retention_arithmetic",
+      "pass_": true,
+      "evidence": "Both proposed records reconstruct the constructed frequency; neither is an implemented schema or Rast prescription."
+    },
+    {
+      "check": "sum_identity",
+      "pass_": true,
+      "evidence": {
+        "max_abs_error": 5.682876044743601e-13,
+        "tolerance": 1e-10
+      }
+    },
+    {
+      "check": "envelope_recurrence_and_signed_frequency",
+      "pass_": true,
+      "evidence": {
+        "unsigned_recurrence_seconds": 0.3852673329409085,
+        "signed_modulator_hz": 1.2978001435608064
+      }
+    },
+    {
+      "check": "rms_window_constructive1",
+      "pass_": true,
+      "evidence": {
+        "start": 16550,
+        "end_exclusive": 17432,
+        "samples": 882,
+        "mix_rms": 0.17571441158396006,
+        "equal_frequency_control_rms": 0.17623301527266266
+      }
+    },
+    {
+      "check": "rms_window_destructive",
+      "pass_": true,
+      "evidence": {
+        "start": 25045,
+        "end_exclusive": 25927,
+        "samples": 882,
+        "mix_rms": 0.00845124662257925,
+        "equal_frequency_control_rms": 0.17623478918411653
+      }
+    },
+    {
+      "check": "rms_window_constructive2",
+      "pass_": true,
+      "evidence": {
+        "start": 33540,
+        "end_exclusive": 34422,
+        "samples": 882,
+        "mix_rms": 0.17572195893116951,
+        "equal_frequency_control_rms": 0.17623774132406336
+      }
+    },
+    {
+      "check": "beat_predictions",
+      "pass_": true,
+      "evidence": {
+        "dip_db": -26.357732142785096,
+        "recovery_db": 0.0003730713746869126,
+        "control_db": 8.742925692068016e-05
+      }
+    },
+    {
+      "check": "wav_integrity_tone-a.wav",
+      "pass_": true,
+      "evidence": {
+        "params": [
+          1,
+          2,
+          44100,
+          44100,
+          "NONE"
+        ],
+        "sha256": "c75f061087aa80e51a767ca1fbe8297eb6b5020bdc04d2cbbf73aecf1f911153",
+        "bytes": 88244
+      }
+    },
+    {
+      "check": "wav_samples_tone-a.wav",
+      "pass_": true,
+      "evidence": {
+        "exact_reconstructed_pcm_samples_equal": true,
+        "boundary_samples": [
+          0,
+          0
+        ],
+        "max_quantization_error": 1.5258202622617234e-05,
+        "saturation": false
+      }
+    },
+    {
+      "check": "wav_rms_gain_tone-a.wav",
+      "pass_": true,
+      "evidence": {
+        "gain": 0.5694994093296575,
+        "float_rms": 0.049999999999999996,
+        "decoded_rms": 0.05000004323784614,
+        "peak": 0.071197509765625
+      }
+    },
+    {
+      "check": "wav_integrity_tone-b.wav",
+      "pass_": true,
+      "evidence": {
+        "params": [
+          1,
+          2,
+          44100,
+          44100,
+          "NONE"
+        ],
+        "sha256": "fd1d82859b50a6771d56b96176507cd7641039cd35bad70d5b8e0c0722f1a63f",
+        "bytes": 88244
+      }
+    },
+    {
+      "check": "wav_samples_tone-b.wav",
+      "pass_": true,
+      "evidence": {
+        "exact_reconstructed_pcm_samples_equal": true,
+        "boundary_samples": [
+          0,
+          0
+        ],
+        "max_quantization_error": 1.5258372559848188e-05,
+        "saturation": false
+      }
+    },
+    {
+      "check": "wav_rms_gain_tone-b.wav",
+      "pass_": true,
+      "evidence": {
+        "gain": 0.5694974666513829,
+        "float_rms": 0.05000000000000002,
+        "decoded_rms": 0.05000003760387708,
+        "peak": 0.071197509765625
+      }
+    },
+    {
+      "check": "wav_integrity_two-tone-illustration.wav",
+      "pass_": true,
+      "evidence": {
+        "params": [
+          1,
+          2,
+          44100,
+          176400,
+          "NONE"
+        ],
+        "sha256": "ab931fd23b805edec2a493de17001923762a2583f80fb386f3cf944685a2dd5d",
+        "bytes": 352844
+      }
+    },
+    {
+      "check": "wav_samples_two-tone-illustration.wav",
+      "pass_": true,
+      "evidence": {
+        "exact_reconstructed_pcm_samples_equal": true,
+        "boundary_samples": [
+          0,
+          0
+        ],
+        "max_quantization_error": 1.5258783825189415e-05,
+        "saturation": false
+      }
+    },
+    {
+      "check": "wav_rms_gain_two-tone-illustration.wav",
+      "pass_": true,
+      "evidence": {
+        "gain": 1.0,
+        "float_rms": 0.12540502824762553,
+        "decoded_rms": 0.12540499226376442,
+        "peak": 0.25
+      }
+    },
+    {
+      "check": "decoded_task_level",
+      "pass_": true,
+      "evidence": {
+        "b_minus_a_db": -9.78719878658059e-07,
+        "perceptual_loudness_established": false
+      }
+    },
+    {
+      "check": "asset_scope_flags",
+      "pass_": true,
+      "evidence": "Arithmetic and sample audit does not establish listening, perceptual loudness equality or engine execution."
+    },
+    {
+      "check": "synthetic_trace",
+      "pass_": true,
+      "evidence": {
+        "correct": 15,
+        "total": 20,
+        "accuracy": 0.75,
+        "always_first_correct": 10,
+        "always_first_accuracy": 0.5,
+        "correct_when_higher_first": 8,
+        "correct_when_higher_second": 7,
+        "first_response_count": 11
+      }
+    },
+    {
+      "check": "key_balance_and_public_order",
+      "pass_": true,
+      "evidence": "Alternating public arithmetic fixture: balanced positions, not a randomized or blinded participant protocol."
+    },
+    {
+      "check": "exact_tail_12",
+      "pass_": true,
+      "evidence": {
+        "exact_fraction": "131975/524288",
+        "probability": 0.2517223358154297,
+        "scipy_sf_argument": 11
+      }
+    },
+    {
+      "check": "exact_tail_14",
+      "pass_": true,
+      "evidence": {
+        "exact_fraction": "15115/262144",
+        "probability": 0.057659149169921875,
+        "scipy_sf_argument": 13
+      }
+    },
+    {
+      "check": "exact_tail_15",
+      "pass_": true,
+      "evidence": {
+        "exact_fraction": "5425/262144",
+        "probability": 0.020694732666015625,
+        "scipy_sf_argument": 14
+      }
+    },
+    {
+      "check": "exact_tail_16",
+      "pass_": true,
+      "evidence": {
+        "exact_fraction": "1549/262144",
+        "probability": 0.005908966064453125,
+        "scipy_sf_argument": 15
+      }
+    },
+    {
+      "check": "threshold_and_selection",
+      "pass_": true,
+      "evidence": {
+        "single_threshold": 15,
+        "single_tail": 0.020694732666015625,
+        "best_of_eight_probability": 0.1540499441685269,
+        "independence_is_assumption": true
+      }
+    },
+    {
+      "check": "unobserved_human_outcomes",
+      "pass_": true,
+      "evidence": "No human performance, preference, learning, threshold or randomized-session approval."
+    },
+    {
+      "check": "temporary_script_binding",
+      "pass_": true,
+      "evidence": "Inspected completed script uses stat().st_size; earlier failed attempt is not hidden as a successful run. Audit does not replay network or producer side effects."
+    },
+    {
+      "check": "figure_binding",
+      "pass_": true,
+      "evidence": "PNG decoder verification and visual inspection: two readable panels, original waveform overlay and unsigned envelope, declared untapered model; no copied third-party media observed."
+    },
+    {
+      "check": "figure_metadata_boundary",
+      "pass_": true,
+      "evidence": {
+        "size": [
+          1600,
+          960
+        ],
+        "title": "Constructed two-tone interference",
+        "description": "Untapered equal-amplitude model, not a physical guitar recording or exported faded WAV waveform."
+      }
+    },
+    {
+      "check": "old_failed_gate_preserved",
+      "pass_": true,
+      "evidence": "Existing guitar-runtime validation still retains measured 0.11416614959438576 dB improvement below required 1 dB and explicitly false decline/perceptual acceptance; this constructed signal cannot reverse the prior gate."
+    }
+  ],
+  "check_count": 56,
+  "findings": [],
+  "fix_requests": [],
+  "limitations": [
+    "Producer primary-page HTTP hashes are not content certifications. NIST 403 and MaqamWorld 465 are explicitly failures; PubMed 203 may be an intermediary response. This auditor did not independently review those web pages or reproduce historical HTTP bytes.",
+    "Pinned source bytes were independently checked through Git; anonymous HTTP success comes from the bound producer receipt. The actual MCP invocation comes from the parent record; this auditor checked the saved response and its limited fields, not a separately invoked MCP session.",
+    "This is constructed oscillator arithmetic and sample-level verification, not a new GA/IX engine run, a physical-guitar diagnosis, a cultural endorsement or proof of exact synthesized pitch.",
+    "Projection and cents/reference records are authored teaching alternatives. The 5:4 counterexample is not prescribed Rast intonation; a shared pitch-class mask is not equivalence of traditions.",
+    "Matched full-asset RMS is not measured perceptual loudness equality. No playback, listener, fluent reviewer or learner trial was performed by this audit.",
+    "Exact binomial/selection calculations assume independent fair guesses and independent complete tests respectively; the public alternating fixture establishes neither model in real listeners.",
+    "Scope covers fixed evidence, not eventual course translations, generated pages, browser links, publication, release or deployment."
+  ],
+  "human_review": null,
+  "fluent_language_review": null,
+  "learner_outcome": null,
+  "listening_outcome": null
+}

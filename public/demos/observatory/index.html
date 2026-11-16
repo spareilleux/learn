@@ -92,7 +92,145 @@ body {
 		</style>
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
-
+<script>
+/* Observatory: supersampling for the 3D view (artpass/aa/NOTES.md). Godot sizes its canvas by
+   window.devicePixelRatio; reporting a larger ratio makes it render finer than the screen, and
+   the browser filters the canvas down. 1.5 on computers, 1 on touch screens; ?ss=<factor>
+   overrides. If frames then come slower than about 45 per second, it falls back to 1.
+   observatory.gd reads window.__obsSS to keep the HUD's size. */
+(function () {
+  var q = new URLSearchParams(location.search);
+  var touch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+  var fixed = q.has('ss');
+  var ss = parseFloat(q.get('ss') || (touch ? '1' : '1.5'));
+  if (!(ss >= 1 && ss <= 3)) ss = 1;
+  window.__obsSS = ss;
+  var d = Object.getOwnPropertyDescriptor(window, 'devicePixelRatio') || Object.getOwnPropertyDescriptor(Window.prototype, 'devicePixelRatio');
+  var get = d && d.get;
+  Object.defineProperty(window, 'devicePixelRatio', { configurable: true, get: function () { return (get ? get.call(window) : 1) * window.__obsSS; } });
+  if (fixed || ss === 1) return;
+  // observatory.gd sets __obsRunning once the scene is built; skip 2 s of shader compiles, then
+  // take the median frame interval over 90 frames.
+  var times = [], last = 0, start = 0;
+  function tick(t) {
+    if (!window.__obsRunning) { requestAnimationFrame(tick); return; }
+    if (!start) start = t;
+    if (t - start > 2000) { if (last) times.push(t - last); last = t; }
+    if (times.length < 90) { requestAnimationFrame(tick); return; }
+    times.sort(function (a, b) { return a - b; });
+    window.__obsFrameMedian = times[45];
+    // Only ever down: scripts/quality.gd may have taken it under 1 already, on a slow GPU.
+    if (times[45] > 22 && window.__obsSS > 1) { window.__obsSS = 1; window.dispatchEvent(new Event('resize')); }
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+<script>
+/* Observatory: MSAA for the 3D view (artpass/motion/NOTES.md). Under Godot's Compatibility
+   renderer, the web export's, FXAA and SMAA change no pixel; MSAA is the only anti-aliasing there.
+   4x on touch screens, where it cut the visible shimmer by 30 to 43 % in emulation; none on
+   computers, where Chrome's ANGLE made it ten times slower and the 1.5x supersampling above does
+   the work. Its cost on a real phone is not measured yet: if frames come slower than about 45 a
+   second, it steps down to 2x, then off. ?msaa=0|2|4 fixes it.
+   observatory.gd applies window.__obsMSAA once a second. */
+(function () {
+  var q = new URLSearchParams(location.search);
+  var touch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+  var fixed = q.has('msaa');
+  var m = parseInt(q.get('msaa') || (touch ? '4' : '0'), 10);
+  if ([0, 2, 4].indexOf(m) < 0) m = 0;
+  window.__obsMSAA = m;
+  if (fixed || m === 0) return;
+  var times = [], last = 0, start = 0;
+  function tick(t) {
+    if (!window.__obsRunning || window.__obsMSAA === 0) { if (window.__obsMSAA !== 0) requestAnimationFrame(tick); return; }
+    if (!start) start = t;
+    // Skip 2 s (shader compiles, or the last change settling), then 90 frames.
+    if (t - start > 2000) { if (last) times.push(t - last); last = t; }
+    if (times.length < 90) { requestAnimationFrame(tick); return; }
+    times.sort(function (a, b) { return a - b; });
+    window.__obsMSAAMedian = times[45];
+    if (times[45] > 22) {
+      window.__obsMSAA = window.__obsMSAA === 4 ? 2 : 0;
+      times = []; last = 0; start = 0;
+      requestAnimationFrame(tick);
+    }
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0a1424">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Observatory">
+<script>
+/* Observatory: installable, and kept up to date (artpass/publish/pwa/NOTES.md). sw.js keeps a copy of
+   this build's files in the browser and serves them from then on. When a newer build is published the
+   browser finds a new sw.js, which fetches the new files, each one checked with the server so that a
+   stale copy in the browser's cache cannot be taken, replaces the old ones and tells this page. If the
+   scene has not started yet the page reloads at once; later it shows a line to tap, and the next visit
+   has the new build either way. ?sw=0 removes the worker and its copies. */
+(function () {
+  if (!('serviceWorker' in navigator)) return;
+  var q = new URLSearchParams(location.search);
+  if (q.get('sw') === '0') {
+    navigator.serviceWorker.getRegistrations().then(function (rs) { rs.forEach(function (r) { r.unregister(); }); });
+    if (window.caches) caches.keys().then(function (ks) { ks.forEach(function (k) { if (k.indexOf('observatory-') === 0) caches.delete(k); }); });
+    window.__obsSW = 'off';
+    return;
+  }
+  // Whether a worker served this page: if none did, the worker installed now holds the build this page
+  // already runs, and there is nothing to reload for.
+  var had = !!navigator.serviceWorker.controller;
+  var TEXT = {
+    en: 'Version {v} is ready. Tap here to reload.',
+    fr: 'La version {v} est prête. Touchez ici pour recharger.',
+    es: 'La versión {v} está lista. Toca aquí para recargar.'
+  };
+  function notice(version) {
+    if (document.getElementById('obs-update')) return;
+    var lang = (navigator.language || 'en').slice(0, 2);
+    var b = document.createElement('button');
+    b.id = 'obs-update';
+    b.textContent = (TEXT[lang] || TEXT.en).replace('{v}', version);
+    b.style.cssText = 'position:fixed;left:50%;top:max(12px,env(safe-area-inset-top));transform:translateX(-50%);z-index:10;' +
+      'font:600 15px/1.3 system-ui,sans-serif;color:#0a1424;background:#e9b46a;border:0;border-radius:999px;' +
+      'padding:10px 18px;box-shadow:0 2px 12px rgba(0,0,0,.5);cursor:pointer;max-width:90vw';
+    b.addEventListener('click', function () { location.reload(); });
+    document.body.appendChild(b);
+  }
+  navigator.serviceWorker.addEventListener('message', function (e) {
+    var d = e.data || {};
+    if (d.type === 'obs-build') { window.__obsSWBuild = d; return; }
+    if (d.type !== 'obs-updated') return;
+    window.__obsUpdate = d;
+    if (!had) return;
+    if (!window.__obsRunning) { location.reload(); return; }
+    notice(d.version);
+  });
+  function register() {
+    navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(function (reg) {
+      window.__obsSW = reg;
+      // Left to itself, Chrome looked for a newer worker only a minute after the page opened (62 s,
+      // pwa-test.mjs): ask at once.
+      if (had) reg.update().catch(function () {});
+      // An installed app that comes back from the background is not a new visit: ask again then.
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'visible') reg.update().catch(function () {});
+      });
+    }).catch(function (err) { window.__obsSW = 'failed: ' + err; });
+  }
+  if (had || q.get('sw') === '1') { register(); return; }
+  // A first visit: the copy is made once the scene runs and its first shaders are compiled, not while
+  // the page is still loading the same files.
+  var wait = setInterval(function () {
+    if (!window.__obsRunning) return;
+    clearInterval(wait);
+    setTimeout(register, 15000);
+  }, 1000);
+})();
+</script>
 	</head>
 	<body>
 		<canvas id="canvas">
@@ -111,7 +249,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":12630260,"index.wasm":37685705},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":72638428,"index.wasm":37685705},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
@@ -217,3 +355,4 @@ const engine = new Engine(GODOT_CONFIG);
 		</script>
 	</body>
 </html>
+

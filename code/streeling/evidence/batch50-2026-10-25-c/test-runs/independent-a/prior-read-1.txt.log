@@ -1,0 +1,459 @@
+=== streeling/courses/audio-engineering/en/aud-015-bound-quantization-error-before-comparing-wavs.md ===
+---
+module_id: aud-015-bound-quantization-error-before-comparing-wavs
+department: audio-engineering
+course: "Bound Quantization Error Before Comparing WAVs"
+level: intermediate
+prerequisites: ["aud-005-pcm-guards-and-format-boundaries"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Bound Quantization Error Before Comparing WAVs
+
+> Authored example and source reading. No new guitar performance, audio or parser execution, participant response or production adoption is claimed. Human technical, fluent-language and learner decisions remain pending.
+
+The retained guitar runner keeps raw floating samples and also writes an integer WAV. These are different representations of the same proposed render. A byte difference in the raw buffers can disappear after integer conversion; a small decoded difference can also arise from the conversion itself. Before an agent interprets two WAVs as equivalent engines, it must identify the quantizer, its rounding rule and the assumptions behind any error bound.
+
+## Read the retained evidence
+
+Read the actual `pcm16Wav` expression and its decoder in the retained project artifact. The encoder multiplies by `32767` and uses `Math.round`; the decoder divides the stored signed integer by the same scale. This is a source observation at the retained revision. The lesson studies that explicit convention, rather than substituting a familiar textbook scale or claiming support for every WAV format.
+
+[Prerequisite](../../audio-engineering/en/aud-005-pcm-guards-and-format-boundaries.md)
+
+[Retained project artifact](../../../../code/streeling/guitar-runtime/run.mjs)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-24/unit-a.json)
+
+[Validation journal](../../../../code/streeling/evidence/batch50-2026-10-24/journal.md)
+
+### Exercise 1
+
+Define `q=floor(scale*x+0.5)` with `scale=32767`, matching the selected rounding direction for these finite examples. Adjacent decoded levels differ by `1/32767`. Provided rounding stays within representable output and no clamp intervenes, the magnitude of conversion error is at most `1/65534`. This is an amplitude bound in normalized sample units, not a frequency or a duration.
+
+What are the quantization step and half-step bound?
+
+<details><summary>Answer 1</summary>
+
+They are `1/32767` and `1/65534`. The bound applies to the declared un-clipped nearest-level conversion, not to arbitrary invalid inputs.
+
+</details>
+
+### Exercise 2
+
+The authored samples are `[0,0.00001,0.5,-0.5]`. Their encoded integers are `[0,0,16384,-16383]`. The two half-amplitude values expose the tie rule: positive and negative midpoint cases do not produce symmetric integers. A reviewer who silently changes to ties-to-even would be checking another converter even if ordinary samples often agree.
+
+Encode the samples and explain the asymmetric midpoint results.
+
+<details><summary>Answer 2</summary>
+
+The integers are `[0,0,16384,-16383]`. Rounding ties toward positive infinity gives the shown midpoint pair; the selected rule must remain part of the source contract.
+
+</details>
+
+### Exercise 3
+
+Decode by dividing the integers by `32767`. The tiny positive sample becomes exactly `0`, so its signed error is `-0.00001`. The half-amplitude samples have errors `16384/32767-0.5` and `-16383/32767+0.5`. Both remain within the declared half-step magnitude. Vanishing after conversion means the integer representation cannot resolve that difference, not that the original floating samples were identical.
+
+What is lost when the tiny sample becomes zero?
+
+<details><summary>Answer 3</summary>
+
+Its nonzero floating amplitude is lost at this representation boundary. Error is `-0.00001`; integer equality afterward cannot establish raw floating equality beforehand.
+
+</details>
+
+### Exercise 4
+
+The negative control supplies `1.1`, outside the normalized input contract. The rounding expression yields integer `36044`, which a signed integer field of this width cannot represent. The retained guard rejects out-of-range samples before writing; the mathematical nearest-level bound must not be stretched into a promise about overflow or clipping behavior.
+
+Does the half-step bound certify this control's stored output?
+
+<details><summary>Answer 4</summary>
+
+No. Integer `36044` is outside the signed destination range. The input contract is violated, so rejection belongs before conversion; no valid stored sample is claimed.
+
+</details>
+
+### Exercise 5
+
+Dither would deliberately change the sample before quantization and would require its own distribution, level and measurement scope. This course neither adds it nor promises that the bounded errors are inaudible. For a native/Wasm comparison, retain raw samples and encoded bytes separately, and state whether the question concerns numerical equality, integer reproducibility or a listening decision.
+
+What evidence would falsify a claim of bit-exact raw equality inferred from equal WAVs?
+
+<details><summary>Answer 5</summary>
+
+Two retained raw samples that differ while encoding to the same integer are a counterexample. The tiny-sample case supplies that construction; an auditory conclusion still needs an actual listening task.
+
+</details>
+
+## Source-assisted learner task
+
+Write a conversion note for the existing runner. Compute the integer table and signed errors manually using its stated rule, then inspect the encoder and decoder expressions. Include the out-of-range control and explain why it is a rejected input rather than a measured engine defect. Recommend which artifacts to retain when raw equality and WAV equality disagree, without inventing a listening result.
+
+First retain your answer before revealing the prepared corrections. Use the manual table or calculation as the baseline for any calculator, source lookup or agent assistance, and record that assistance. Keep the original response and the corrected response separately. Match each exercise to a prepared criterion in the fixed packet; those criteria have no learner decisions yet. Record an actual source passage and its revision, then distinguish what it establishes from your proposed next step. Report any missing input as unresolved. A mathematically correct answer supports the stated example; human review, runtime execution and learner acceptance require their own retained observations.
+
+=== streeling/courses/guitar-acoustics/en/gas-015-separate-mode-excitation-from-observation.md ===
+---
+module_id: gas-015-separate-mode-excitation-from-observation
+department: guitar-acoustics
+course: "Separate Mode Excitation from Observation"
+level: advanced
+prerequisites: ["gas-006-relate-pluck-position-to-string-modes"]
+estimated_duration: "60 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Separate Mode Excitation from Observation
+
+> Authored model and source reading. Human technical, fluent-language, musician and learner decisions remain pending. No new performance, listening, parser execution, engine render or production adoption is claimed.
+
+A missing spectral component need not mean the string was never excited in that mode. A point observer placed at a node cannot see its displacement. [GA](https://github.com/GuitarAlchemist/ga) explanations should preserve the distinction between excitation, propagation and observation before diagnosing a guitar model. Here the modal amplitudes remain fixed while the observer moves.
+
+## Read the retained evidence
+
+The standing-wave source describes nodes and antinodes. Read the prerequisite’s amplitude derivation alongside the retained voice state. Neither provides a calibrated point-pickup measurement. We introduce the observation operator explicitly as an ideal teaching model.
+
+[Prerequisite](../../guitar-acoustics/en/gas-006-relate-pluck-position-to-string-modes.md)
+
+[Retained project artifact](../../../../code/streeling/guitar-runtime/vendor/lib.rs)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-25/unit-a.json)
+
+[Primary reading](https://www.phys.unsw.edu.au/jw/strings.html)
+
+## Fixed case and prepared quantities
+
+```json
+{
+  "values": {
+    "amplitudes": [
+      1,
+      0.5,
+      0.25,
+      0.125
+    ],
+    "modes": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "position_fraction": 0.5
+  },
+  "formula": "observed_n=A_n*sin(n*pi*u)",
+  "expected": {
+    "observed": [
+      1,
+      0,
+      -0.25,
+      0
+    ],
+    "zero_modes": [
+      2,
+      4
+    ]
+  },
+  "negative_control": {
+    "values": {
+      "amplitudes": [
+        1,
+        0.5,
+        0.25,
+        0.125
+      ],
+      "modes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "position_fraction": 0.25
+    },
+    "expected": {
+      "observed": [
+        0.7071067811865476,
+        0.5,
+        0.1767766952966369,
+        0
+      ],
+      "zero_modes": [
+        4
+      ]
+    }
+  }
+}
+```
+
+## Ask which stage can explain a missing component
+
+The excitation coefficient describes the prepared modal state, whereas the observation weight describes how one coordinate contributes to the output. Their product can vanish because either factor vanishes. Seeing only the product cannot identify which factor caused the zero. This simple factorization is useful when an agent is tempted to adjust a pluck parameter after finding a spectral dip in an observed signal.
+
+A point at an ideal node is especially informative because its zero does not depend on the mode’s amplitude. Increasing excitation cannot make displacement at that exact node reveal the mode. Moving the observer can help, provided its new position and the same excitation are retained. The control demonstrates that idea without claiming complete recovery: a mode that is invisible at both selected positions still needs another observation.
+
+Real guitar outputs usually apply additional transfer functions. A magnetic pickup may respond to motion in a way that requires velocity, field geometry and finite aperture, while a microphone observes radiated pressure after body and room effects. Our point-displacement observer deliberately supplies none of those mechanisms. A useful next experiment would characterize the observation path before attributing a missing peak to synthesis. The direct modal table is cheaper and more interpretable than adding a compensating agent rule whose cause has not been identified.
+
+### Exercise 1
+
+Apply the displayed operator at the main position. Which listed modes are invisible?
+
+<details><summary>Answer 1</summary>
+
+The zero-mode list gives the even modes in this finite example. Their authored excitation coefficients are nonzero, so observation alone cannot prove absence of excitation.
+
+</details>
+
+### Exercise 2
+
+Interpret the negative observed coefficient. Is it negative loudness?
+
+<details><summary>Answer 2</summary>
+
+It is a signed displacement coefficient relative to the declared modal phase. Loudness is not a signed displacement and was not measured.
+
+</details>
+
+### Exercise 3
+
+Can the main observation uniquely recover all the original amplitudes?
+
+<details><summary>Answer 3</summary>
+
+No. Multiplication by a zero observation weight erases that mode’s amplitude. Many excitation arrays give the same observation at those indices.
+
+</details>
+
+### Exercise 4
+
+Move to the control position. Which formerly invisible mode becomes available?
+
+<details><summary>Answer 4</summary>
+
+The second mode becomes nonzero while the fourth remains invisible. The excitation was unchanged; the changed observation explains the new coefficient.
+
+</details>
+
+### Exercise 5
+
+What rejects a claim that a missing observed mode proves zero excitation?
+
+<details><summary>Answer 5</summary>
+
+The main case itself supplies a nonzero excitation coefficient with zero observed displacement. A real diagnosis needs a known observation transfer and additional positions or measurements.
+
+</details>
+
+## Source-assisted learner task
+
+Draw the sine-mode nodes and reproduce both signed tables manually. Propose a second observation position for a future guitar experiment. State which remaining zero prevents full recovery, and keep the physical pickup transfer unresolved before suggesting an engine parameter change.
+
+First retain your unaided derivation before revealing the answers. Then inspect a specific source passage and its revision, record every kind of assistance, and keep the original and corrected responses separately. Use the direct manual result as the baseline for any calculator, DSL or agent proposal. Missing inputs stay unresolved. The fixed packet holds a prepared criterion for each exercise with no learner decision. A correct model answer supports only the declared case; acceptance needs an actual attempt and review. Record a falsifier before choosing an abstraction, then state the additional runtime or human evidence needed at the next boundary.
+
+=== streeling/courses/guitar-acoustics/en/gas-007-distinguish-body-poles-from-string-partials.md ===
+---
+module_id: gas-007-distinguish-body-poles-from-string-partials
+department: guitar-acoustics
+course: "Distinguish Body Poles from String Partials"
+level: intermediate
+prerequisites: ["gas-005-separate-a-partial-peak-from-a-period", "gas-006-relate-pluck-position-to-string-modes", "aud-007-translate-attack-coefficients-into-time"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Distinguish Body Poles from String Partials
+
+> **Draft scope.** Public source inspection and authored real-arithmetic filter calculations. Human technical, fluent-language, musician and learner reviews and deployed course HTML verification remain pending. No new guitar recording, native/WASM render or [ComfyUI](https://docs.comfy.org/) workflow was run.
+
+## The project question
+
+An agent sees a spectral peak and proposes changing a guitar's body frequency. Which model parameter would that change, and does that parameter equal the observed peak? [GAS-005](gas-005-separate-a-partial-peak-from-a-period.md) separates a partial from a period; [GAS-006](gas-006-relate-pluck-position-to-string-modes.md) models excitation. Here we inspect the subsequent body stage at public GA commit `76efbffd5af82b46c3146957a6bd4504008eeb89`.
+
+The [constructor](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs#L124-L135) installs five sections. These are source parameters, not measured body modes:
+
+| Pole-frequency parameter, Hz | Pole radius r | Numerator gain g |
+| --- | --- | --- |
+| 110 | 0.95 | 0.08 |
+| 240 | 0.96 | 0.10 |
+| 530 | 0.97 | 0.08 |
+| 1200 | 0.98 | 0.03 |
+| 2400 | 0.92 | 0.02 |
+
+## 1. Derive the section before interpreting its name
+
+The [recurrence](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs#L23-L44) has two delayed output states, initially zero. For a declared sample rate Fs and pole frequency f0:
+
+```text
+omega0 = 2*pi*f0/Fs
+a1 = 2*r*cos(omega0)
+a2 = -r^2
+y[n] = g*x[n] + a1*y[n-1] + a2*y[n-2]
+H(z) = g / (1 - a1*z^-1 - a2*z^-2)
+     = g / (1 - 2*r*cos(omega0)*z^-1 + r^2*z^-2)
+```
+
+The poles are at radius r and angles plus and minus omega0. All listed radii are below 1, so the ideal isolated linear sections are stable. The [W3C biquad convention](https://www.w3.org/TR/audio-eq-cookbook/) writes denominator coefficients with plus signs and subtracts their delayed outputs. Its denominator signs must not be copied directly into this source's additive recurrence.
+
+### Exercise 1 — Map the signs
+
+For the 110 Hz section, give the recurrence's a2 and the coefficient of z^-2 in the denominator. Does g = 0.08 mean an amplitude gain of 0.08 at every frequency?
+
+> **Answer.** a2 = -0.9025; the denominator coefficient is +0.9025. No: g is a numerator coefficient. The feedback denominator changes the frequency response.
+
+## 2. A pole angle is not necessarily a gain maximum
+
+[Julius O. Smith's two-pole derivation](https://www.dsprelated.com/freebooks/filters/Two_Pole.html) explicitly distinguishes pole frequency from exact peak gain. For this constant-numerator section, minimizing the squared denominator over frequencies from 0 to Nyquist gives:
+
+```text
+c = cos(omega0)*(1+r^2)/(2*r)
+omega_peak = acos(clamp(c, -1, 1))
+f_peak = Fs*omega_peak/(2*pi)
+```
+
+At Fs = 44100 Hz, the [authored response calculations](../../../../code/streeling/evidence/filter-phase-2026-10-22/body-response.json) give:
+
+| Pole-frequency parameter, Hz | Isolated maximum, Hz, approximately |
+| --- | --- |
+| 110 | 0 |
+| 240 | 0 |
+| 530 | 485.059638 |
+| 1200 | 1191.675201 |
+| 2400 | 2330.439876 |
+
+The first section has magnitude about 29.268259 at DC and 27.306424 at 110 Hz. A damped oscillatory impulse response can have its largest frequency-response magnitude at DC. This result describes the isolated mathematical section, not a new recording, the entire bank's peaks or the complete nonlinear engine.
+
+### Exercise 2 — Read the 110 Hz label
+
+At Fs = 44100 Hz, is “the 110 Hz section's maximum must be at 110 Hz” supported? Explain what the clipped cosine above means when c is greater than 1.
+
+> **Answer.** No. The minimum denominator occurs at the endpoint omega = 0 when the unconstrained optimal cosine exceeds 1. The parameter sets the pole angle; the resulting isolated gain maximum is at DC in this model. Clamping selects the frequency-domain endpoint, not a repaired physical calibration.
+
+## 3. Sum complex responses before taking magnitude
+
+The [mixing source](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs#L483-L496) sends the normalized string sum through every section, adds their outputs, then combines body and string signals:
+
+```text
+H_body(omega) = sum_i H_i(omega)
+H_dry(omega) = 0.55 + 0.45*H_body(omega)
+```
+
+At 110 Hz, the mathematical dry magnitude is about 34.953699. Adding mode magnitudes instead gives about 35.364828. Relative phases account for the difference. Neither number is a measured full-engine output gain: reverb and output nonlinearities follow this stage, and active-voice normalization can change upstream behavior.
+
+### Exercise 3 — Combine the bank
+
+Choose the correct expression: the magnitude of the complex dry response above, or 0.55 plus 0.45 times the sum of section magnitudes. Explain why the other expression is only an upper bound here.
+
+> **Answer.** Take the magnitude after the complex sum. The triangle inequality bounds it by 0.55 plus 0.45 times the sum of magnitudes, but equality requires aligned phases. The 110 Hz calculation shows that equality does not hold there.
+
+## 4. A linear body filter does not retune a steady sinusoid
+
+Consider an authored steady input containing only 82.4069 Hz and 164.8138 Hz. Under the isolated linear time-invariant body model, each sinusoid keeps its frequency and acquires a complex gain. A pole-frequency parameter of 110 Hz does not insert a new steady 110 Hz spectral line. Startup transients can ring; reverb, time variation and output clipping must be assessed separately.
+
+### Exercise 4 — Separate steady response from startup
+
+An agent says that the 110 Hz pole parameter makes every open-E input contain a new steady 110 Hz tone. Give a counterexample using the two-tone input above, and state why an initial ringing transient would not invalidate it.
+
+> **Answer.** The steady output of this LTI stage still contains only 82.4069 Hz and 164.8138 Hz, with modified amplitudes and phases. Its decaying natural response can occur during startup; that is different from an additional sustained input-driven spectral line. This argument does not cover nonlinear clipping in the complete engine.
+
+## 5. Keep a physical claim separate from a useful synthetic filter
+
+Smith's [bridge-model discussion](https://dsprelated.com/freebooks/pasp/Building_Synthetic_Guitar_Bridge.html) distinguishes bridge admittance, string coupling and radiation. The inspected engine stage is an output filter bank fed by the string sum. Names such as top plate in comments do not establish measured geometry, calibrated modal gains or a passive bridge model coupled back into each string.
+
+### Exercise 5 — Bound the next experiment
+
+Before calling a changed bank “a more accurate guitar body,” identify the current evidence and name missing measurements and comparison controls. Where should paired signals be retained for an isolated test?
+
+> **Answer.** Current evidence consists of pinned code and authored filter calculations. A physical accuracy claim needs a defined instrument and measurement path, calibrated response data, excitation and observation locations, fitting criteria and held-out comparisons. Preserve the normalized string-sum input and pre-reverb dry output with matching clocks and scales; keep downstream clipping and reverb separate. A listener preference requires its own controlled assessment. [AUD-008](../../audio-engineering/en/aud-008-measure-a-filter-with-paired-input-and-output.md) develops the paired measurement.
+
+## Source-assisted learner task
+
+Without copying the answers, prepare a short review of a proposed “110 Hz body peak” control. Include the recurrence signs, the endpoint peak calculations for the 110 Hz and 240 Hz sections at Fs = 44100 Hz, the first section's DC and 110 Hz gains, and the bank's dry magnitude at 110 Hz compared with the sum-of-magnitudes alternative. Add the steady two-tone counterexample and a bounded measurement plan. Record assistance and uncertainty. The [reviewer rubric](../../../../code/streeling/evidence/filter-phase-2026-10-22/reviewer-rubric.json) is prepared; no learner attempt is recorded.
+
+The [source receipt](../../../../code/streeling/evidence/filter-phase-2026-10-22/primary-readback.json) binds immutable public files. The calculations use higher-precision arithmetic on decimal source parameters, not a bit-exact Rust f32 reproduction. No source change, runtime repair or acoustical improvement follows from this lesson alone.
+
+=== streeling/courses/guitar-acoustics/en/gas-010-distinguish-stiff-string-partials-from-harmonics.md ===
+---
+module_id: gas-010-distinguish-stiff-string-partials-from-harmonics
+department: guitar-acoustics
+course: "Distinguish Stiff String Partials from Harmonics"
+level: intermediate
+prerequisites: ["gas-005-separate-a-partial-peak-from-a-period", "gas-006-relate-pluck-position-to-string-modes"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+
+# Distinguish Stiff String Partials from Harmonics
+
+> **Draft and evidence boundary.** This lesson contains an authored model and source reading. Human technical, musician, fluent-language and learner decisions remain pending. No new engine render, parser run, playing, listening or learner observation is claimed. Historical failures keep their original status.
+
+## The project question
+
+A GA spectrum label may call every partial a harmonic. That is exact only when its frequency is an integer multiple of a reference fundamental. Here an explicitly stipulated stiffness-inspired model changes frequency ratios while leaving amplitude outside the question. We normalize to the first partial so the meaning of the reference remains visible.
+
+## Read the project evidence
+
+Read the linked prerequisite and retained project artifact before applying the model. Locate the particular representation, transformation or exclusion that matters to this question. The fixed packet records source identity, reading scope and authored values; a source location is evidence for its contents at that revision, not proof of current deployment. Keep a source-derived observation separate from an inferred proposal. Where a primary reference is linked, use its stated scope rather than extending it to unsupported cases.
+
+[Prerequisite: gas-005-separate-a-partial-peak-from-a-period](../../guitar-acoustics/en/gas-005-separate-a-partial-peak-from-a-period.md)
+
+[Prerequisite: gas-006-relate-pluck-position-to-string-modes](../../guitar-acoustics/en/gas-006-relate-pluck-position-to-string-modes.md)
+
+[Retained project artifact](../../../../code/streeling/guitar-runtime/vendor/lib.rs)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-23/unit-a.json)
+
+[Validation journal](../../../../code/streeling/evidence/batch50-2026-10-23/journal.md)
+
+[Primary reference](https://www.dsprelated.com/freebooks/pasp/Stiff_String.html)
+
+## 1. Exercise 1
+
+Define `f_n=n*100*sqrt((1+B*n*n)/(1+B))` with dimensionless `B=.01`. The denominator makes the first partial exactly 100 Hz. Omitting it would change the reference itself. The coefficient is authored and is not the GA engine's dispersion slider.
+
+What does the formula give for the first partial?
+
+> **Answer.** At n=1 the square-root ratio is 1, so the result is 100 Hz.
+
+## 2. Exercise 2
+
+The second partial is approximately 202.948561985 Hz, above the harmonic reference 200 Hz. Its ratio to twice the first partial exceeds unity. Calling it the second partial preserves its position in the model; calling it an exact second harmonic would discard the computed discrepancy.
+
+Give the harmonic reference and the direction of the residual.
+
+> **Answer.** The reference is 200 Hz; the residual is positive because the modeled second partial lies above it.
+
+## 3. Exercise 3
+
+For the third partial, the same formula gives approximately 311.654797607 Hz rather than 300 Hz. The discrepancy grows with partial index in this selected positive-coefficient model. This does not establish a universal audible effect; amplitude, bandwidth, duration and a listener task were never supplied.
+
+Can the frequency calculation prove audibility or preference?
+
+> **Answer.** No. It calculates a model discrepancy only; perceptual reports require separate observations and a specified comparison.
+
+## 4. Exercise 4
+
+Set B to 0 as a negative control. The formula returns `[100,200,300]`, restoring exact harmonic multiples. This checks the normalization and the direction of the proposed comparison. A reference generated with the wrong first-partial convention could otherwise manufacture an apparent residual even in the intended flexible-string control.
+
+What should the zero-coefficient control return?
+
+> **Answer.** It must return `[100,200,300]` Hz. A nonzero discrepancy there would falsify the stated formula implementation or reference convention.
+
+## 5. Exercise 5
+
+The source reading identifies dispersion state, while the primary acoustics text explains frequency-dependent propagation. Neither establishes a calibration between our coefficient and a GA control. Preserve the authored model separately from a future fitted spectrum, including partial identities and uncertain peaks. The prerequisite's tallest-peak warning still applies.
+
+What evidence is missing before recommending a GA slider value?
+
+> **Answer.** A pinned executed mapping from control to measured partial frequencies, calibrated peak estimates and a declared acceptance task are missing.
+
+## Source-assisted learner task
+
+Prepare a short review note from the fixed case before opening the prepared answers. First reproduce the calculation or table manually, keeping the stated units, support and assumptions. That direct result is the baseline for any source-assisted or agent-assisted answer. Then inspect the linked project artifact and identify one precise boundary relevant to the calculation. Record the actual source excerpt or field used, its revision, your proposed answer and every kind of assistance received. A calculator and source lookup are allowed; label them instead of presenting the result as unaided recall.
+
+Apply the negative control as well as the main case. Write the observable result that would falsify your conclusion, and state whether the control actually supplies it. If a model input is absent, retain an unresolved result rather than substituting a plausible value. Compare a proposed abstraction with the manual baseline before recommending a new agent workflow or DSL. The answer key is a prepared check, not a record of your attempt. Keep your original answer before reveal, any correction afterward and the reason for the correction.
+
+The packet contains five prepared learner criteria corresponding to the exercises. Their decisions remain null until actual answers, assistance and review are retained. Correct arithmetic supports only the declared model. A useful project decision still needs the relevant human judgment or runtime observation at its own boundary. Record actual checks, errors and refinements in the linked validation journal; the journal must distinguish executed tests from planned tests.

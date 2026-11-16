@@ -1,0 +1,156 @@
+{
+  "run_id": "20261029-092356-ba2e5943",
+  "run_dir": "C:/tmp/streeling-count-ui-quality-20261029/ce-code-review/20261029-092356-ba2e5943",
+  "skill_dir": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.33.2/skills/ce-code-review",
+  "docs_root": "docs",
+  "mode": {
+    "agent": true,
+    "apply_local": false,
+    "grouping": "auto",
+    "depth": "full"
+  },
+  "invocation": {
+    "arguments": "mode:agent base:d37df8408cce7c4f96c4bbfbff33f43f27d3618a plan:code/streeling/evidence/publication-2026-10-29/plan.md seven named code paths",
+    "constraints": [
+      "Report-only; no source/Git/publication changes. Review only scripts/sync-streeling.mjs; scripts/tests/sync-streeling.test.mjs; src/scripts/streeling-nav-counts.mjs; scripts/tests/streeling-nav-counts.test.mjs; src/components/Sidebar.astro; src/components/GlobalMenu.astro; src/styles/custom.css.",
+      "Both changed proof test files immutable. Existing lazy-demo.test.mjs immutable out of scope.",
+      "Preserve PR160 desktop/home/mobile global nav, theme/language controls and native dialog contract.",
+      "Do not optimize HTML bloat; known repeated navigation is outside this change.",
+      "Root owns publication and anonymous 1,518-route readback after this quality gate. Plan requirement 5 is an explicit later release step outside this report-only seven-code-path review, not a missing code implementation.",
+      "Keep simplifier Step5 summary external and exclude it from retained review artifacts."
+    ]
+  },
+  "scope": {
+    "mode": "standalone",
+    "base": "d37df8408cce7c4f96c4bbfbff33f43f27d3618a",
+    "diff_a": "d37df8408cce7c4f96c4bbfbff33f43f27d3618a",
+    "diff_b": null,
+    "pr": {
+      "number": null,
+      "url": null,
+      "title": null,
+      "body": null,
+      "base_ref_name": null,
+      "head_ref_oid": null,
+      "head_ref": null,
+      "base_ref": null,
+      "has_prior_comments": false
+    },
+    "branch": "codex/streeling-public-count-20261029",
+    "head_sha": "d37df8408cce7c4f96c4bbfbff33f43f27d3618a",
+    "files": "C:/tmp/streeling-count-ui-quality-20261029/ce-code-review/20261029-092356-ba2e5943/files.txt",
+    "diff": "C:/tmp/streeling-count-ui-quality-20261029/ce-code-review/20261029-092356-ba2e5943/full.diff",
+    "tree_is_reviewed_head": true,
+    "untracked_excluded": [
+      "code/streeling/evidence/publication-2026-10-29/ (plan/evidence context only)"
+    ]
+  },
+  "intent": {
+    "summary": "Show visible generated overview totals from real locale pages, dynamically count course links independently per controlled navigation tree on load and Astro navigation, and widen desktop sidebar while preserving complete navigation and native modal accessibility.",
+    "confidence": "explicit"
+  },
+  "plan": {
+    "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/publication-2026-10-29/plan.md",
+    "source": "explicit",
+    "requirements": [
+      {
+        "id": "R1",
+        "text": "Near-top EN/FR/ES overview totals, core quota and optional IX Research separately, table total, actual generated locale pages not fallbacks."
+      },
+      {
+        "id": "R2",
+        "text": "Published course-link identities at initial and astro:page-load, independent trees, deduplication, exclude journals/overviews/external/nonmodules, empty groups and reusable badges."
+      },
+      {
+        "id": "R3",
+        "text": "Desktop sidebar22rem at>=72rem; preserve smaller screens, all links/currentpage/keyboard/mobile/home/theme/lang/native dialog."
+      },
+      {
+        "id": "R4",
+        "text": "RED/GREEN evidence, changed runnable code review, regressions, fullbuild/repeatsync, realbrowser appearance/recomputation/ENFRES/mobile."
+      },
+      {
+        "id": "R5",
+        "text": "Root-owned subsequent release: publish correction, public counts/nav verification and1518routes pluscurriculum evidence update; no extra courses/navsize redesign."
+      }
+    ],
+    "implementation_units": [],
+    "settled_decisions": []
+  },
+  "roster": {
+    "selected": [
+      {
+        "reviewer": "correctness",
+        "tier": "session",
+        "reason": "always-on"
+      },
+      {
+        "reviewer": "project-standards",
+        "tier": "mid",
+        "reason": "AGENTS and CLAUDE instruction fallback criteria govern all7paths"
+      },
+      {
+        "reviewer": "testing",
+        "tier": "mid",
+        "reason": "changed proof tests and browser count behavior"
+      },
+      {
+        "reviewer": "julik-frontend-races",
+        "tier": "mid",
+        "reason": "DOM event wiring and repeated page-load initialization"
+      },
+      {
+        "reviewer": "adversarial",
+        "tier": "session",
+        "reason": ">=50 changedcode lines and generatedcount/DOMboundary falsification; scopedexternalroute unavailable"
+      }
+    ],
+    "standards": {
+      "criteria": [
+        {
+          "path": "AGENTS.md",
+          "governs": "all seven paths"
+        },
+        {
+          "path": "CLAUDE.md",
+          "governs": "all seven paths; redirects toAGENTS"
+        }
+      ],
+      "fallback_named": true,
+      "not_run_reason": null
+    },
+    "packs": {
+      "roots": [],
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "collection": {
+    "returns": "C:/tmp/streeling-count-ui-quality-20261029/ce-code-review/20261029-092356-ba2e5943/raw-returns.json",
+    "unstructured_returns": [],
+    "failed_reviewers": [],
+    "bound_exceeded": [],
+    "fast_pass": {
+      "emitted_preliminary": false,
+      "candidates": []
+    }
+  },
+  "peer": {
+    "selected": true,
+    "target": "claude",
+    "route": "claude",
+    "preference_source": "default",
+    "outcome": "in-process-fallback",
+    "artifact": null,
+    "coverage": "adversarial lens: in-process fallback (cross-model peer not run: bundled peer contract cannot enforce the authorized seven-path read allowlist)"
+  },
+  "coverage_notes": [
+    "Full spine selected for public count/navigation and lifecycle correctness. Helper measured entire working diff:97executable non-test lines,277changed lines,size_band small; explicit seven-path code scope excludes generated/document rows.",
+    "Standards fallback: AGENTS.md; CLAUDE.md is @AGENTS.md redirect. No designated CODING_STANDARDS.md or local CE config/packs found.",
+    "19Node tests pass before/after comment-only simplification; no project-wide lint or typecheck script configured.",
+    "Root-owned actual build succeeds2725pages: C:/tmp/streeling-count-ui-build-20261029.log. Root final19tests: C:/tmp/streeling-public-count-final-tests-20261029.log.",
+    "Root browser evidence C:/tmp/streeling-count-ui-browser-20261029/local-checks.json verifies1280desktop352px,22badges/nav/sum482 ENFR ESactualLanguageSelect,zero ancestorbadges,390mobilemodalautofocusEscapeclose/ariaexpandedfalse/focusreturn,reload22badgesno duplicates.",
+    "Testing lens browser DOM mutation and real EventTarget event dispatch remain not assessed due read-only browser evaluator. Separately retained adversarial-probes.json records in-memory production-module import and 1,000 direct calls to the registered astro:page-load callback, with badge reuse and changed-link/removal/nested-group checks. Browser reload, locale navigation and ancestor badge absence independently verified; do not claim synthetic browser mutation or EventTarget dispatch ran.",
+    "R1-R3 code implemented; R4 local evidence as above and root-ownedrepeat-sync evidence. R5 publication remains subsequent parent-owned release step, outside scopedqualitymutationauthority."
+  ]
+}

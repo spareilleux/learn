@@ -1,0 +1,7 @@
+{
+  "reviewer": "code-reuse",
+  "mode": "pipeline",
+  "base": "2c0ccbabee05a8c71f49d2f8eee20cc86c99f758",
+  "findings": [],
+  "summary": "No worthwhile reuse findings in the eligible checker or workflow changes. The checker uses the standard-library re.fullmatch primitive directly; the existing record checker parses prefixed module filenames and is not behavior-equivalent to directory-name discovery. The workflow adds a focused regression invocation without duplicating an existing step. Protected proof tests were treated as context only."
+}

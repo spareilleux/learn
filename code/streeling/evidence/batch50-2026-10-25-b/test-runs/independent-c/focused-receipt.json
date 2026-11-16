@@ -1,0 +1,1136 @@
+{
+  "command": [
+    "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "code\\streeling\\evidence\\batch50-2026-10-25-b\\tests\\test_unit_c.py",
+    "-v"
+  ],
+  "python_version": "Python 3.14.2",
+  "cwd": "C:\\tmp\\learn-streeling-craft-transfer-20261022",
+  "exit_code": 0,
+  "test_count": 16,
+  "observation_count": 32,
+  "observations": [
+    {
+      "case": "model",
+      "code": "DV020",
+      "expected": {
+        "areas": [
+          0.5,
+          0.5
+        ],
+        "density_per_mm": [
+          0.5,
+          0.25
+        ],
+        "sample_count": 8,
+        "widths_mm": [
+          1,
+          2
+        ]
+      },
+      "observed": {
+        "areas": [
+          0.5,
+          0.5
+        ],
+        "density_per_mm": [
+          0.5,
+          0.25
+        ],
+        "sample_count": 8.0,
+        "widths_mm": [
+          1.0,
+          2.0
+        ]
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "negative",
+      "code": "DV020",
+      "expected": {
+        "areas": [
+          0.3333333333333333,
+          0.6666666666666666
+        ],
+        "density_per_mm": [
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "sample_count": 12,
+        "widths_mm": [
+          1,
+          2
+        ]
+      },
+      "observed": {
+        "areas": [
+          0.3333333333333333,
+          0.6666666666666666
+        ],
+        "density_per_mm": [
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "sample_count": 12.0,
+        "widths_mm": [
+          1.0,
+          2.0
+        ]
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "model",
+      "code": "DV021",
+      "expected": {
+        "display_centre": 2,
+        "display_lower": 1,
+        "display_upper": 3,
+        "lower_extent": 1,
+        "upper_extent": 1
+      },
+      "observed": {
+        "display_centre": 2.0,
+        "display_lower": 1.0,
+        "display_upper": 3.0,
+        "lower_extent": 1.0,
+        "upper_extent": 1.0
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "negative",
+      "code": "DV021",
+      "expected": {
+        "display_centre": 2,
+        "display_lower": 0,
+        "display_upper": 2.8284271247461903,
+        "lower_extent": 2,
+        "upper_extent": 0.8284271247461903
+      },
+      "observed": {
+        "display_centre": 2.0,
+        "display_lower": 0.0,
+        "display_upper": 2.8284271247461903,
+        "lower_extent": 2.0,
+        "upper_extent": 0.8284271247461903
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "model",
+      "code": "DV022",
+      "expected": {
+        "ambiguous": true,
+        "edge_fractions": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "high_components": 2,
+        "low_components": 1,
+        "pairs": [
+          [
+            "top",
+            "left"
+          ],
+          [
+            "right",
+            "bottom"
+          ]
+        ]
+      },
+      "observed": {
+        "ambiguous": true,
+        "edge_fractions": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "high_components": 2,
+        "low_components": 1,
+        "pairs": [
+          [
+            "top",
+            "left"
+          ],
+          [
+            "right",
+            "bottom"
+          ]
+        ]
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "negative",
+      "code": "DV022",
+      "expected": {
+        "ambiguous": true,
+        "edge_fractions": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "high_components": 1,
+        "low_components": 2,
+        "pairs": [
+          [
+            "top",
+            "right"
+          ],
+          [
+            "bottom",
+            "left"
+          ]
+        ]
+      },
+      "observed": {
+        "ambiguous": true,
+        "edge_fractions": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "high_components": 1,
+        "low_components": 2,
+        "pairs": [
+          [
+            "top",
+            "right"
+          ],
+          [
+            "bottom",
+            "left"
+          ]
+        ]
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "model",
+      "code": "FUT014",
+      "expected": {
+        "first_retirements": [
+          0,
+          0,
+          1,
+          2.5,
+          2,
+          0.5,
+          0
+        ],
+        "peak_mass": 2.5,
+        "peak_period": 3,
+        "total": 6
+      },
+      "observed": {
+        "first_retirements": [
+          0.0,
+          0.0,
+          1.0,
+          2.5,
+          2.0,
+          0.5,
+          0.0
+        ],
+        "peak_mass": 2.5,
+        "peak_period": 3,
+        "total": 6.0
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "negative",
+      "code": "FUT014",
+      "expected": {
+        "first_retirements": [
+          0,
+          2,
+          3,
+          1,
+          0,
+          0,
+          0
+        ],
+        "peak_mass": 3,
+        "peak_period": 2,
+        "total": 6
+      },
+      "observed": {
+        "first_retirements": [
+          0.0,
+          2.0,
+          3.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "peak_mass": 3.0,
+        "peak_period": 2,
+        "total": 6.0
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "model",
+      "code": "FUT015",
+      "expected": {
+        "compatible": [
+          "000",
+          "010",
+          "011",
+          "110",
+          "111"
+        ],
+        "count": 5,
+        "incompatible": [
+          "001",
+          "100",
+          "101"
+        ]
+      },
+      "observed": {
+        "compatible": [
+          "000",
+          "010",
+          "011",
+          "110",
+          "111"
+        ],
+        "count": 5,
+        "incompatible": [
+          "001",
+          "100",
+          "101"
+        ]
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "negative",
+      "code": "FUT015",
+      "expected": {
+        "compatible": [
+          "000",
+          "010",
+          "011",
+          "110"
+        ],
+        "count": 4,
+        "incompatible": [
+          "001",
+          "100",
+          "101",
+          "111"
+        ]
+      },
+      "observed": {
+        "compatible": [
+          "000",
+          "010",
+          "011",
+          "110"
+        ],
+        "count": 4,
+        "incompatible": [
+          "001",
+          "100",
+          "101",
+          "111"
+        ]
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "model",
+      "code": "PHI014",
+      "expected": {
+        "B_given_A0": 1,
+        "B_given_A1": 0.5,
+        "difference": -0.5,
+        "retained_mass": 3,
+        "unselected_difference": 0
+      },
+      "observed": {
+        "B_given_A0": 1.0,
+        "B_given_A1": 0.5,
+        "difference": -0.5,
+        "retained_mass": 3.0,
+        "unselected_difference": 0.0
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "negative",
+      "code": "PHI014",
+      "expected": {
+        "B_given_A0": 0.5,
+        "B_given_A1": 0.5,
+        "difference": 0,
+        "retained_mass": 4,
+        "unselected_difference": 0
+      },
+      "observed": {
+        "B_given_A0": 0.5,
+        "B_given_A1": 0.5,
+        "difference": 0.0,
+        "retained_mass": 4.0,
+        "unselected_difference": 0.0
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "model",
+      "code": "PHI015",
+      "expected": {
+        "H_false_entailed": false,
+        "count": 3,
+        "worlds": [
+          [
+            false,
+            false
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            true,
+            false
+          ]
+        ]
+      },
+      "observed": {
+        "H_false_entailed": false,
+        "count": 3,
+        "worlds": [
+          [
+            false,
+            false
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            true,
+            false
+          ]
+        ]
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "negative",
+      "code": "PHI015",
+      "expected": {
+        "H_false_entailed": true,
+        "count": 1,
+        "worlds": [
+          [
+            false,
+            true
+          ]
+        ]
+      },
+      "observed": {
+        "H_false_entailed": true,
+        "count": 1,
+        "worlds": [
+          [
+            false,
+            true
+          ]
+        ]
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "model",
+      "code": "PHY022",
+      "expected": {
+        "feasible": true,
+        "full_submersion_net_N": 4,
+        "maximum_buoyancy_N": 10,
+        "required_displacement_m3": 0.0006,
+        "required_fraction": 0.6,
+        "weight_N": 6
+      },
+      "observed": {
+        "feasible": true,
+        "full_submersion_net_N": 4.0,
+        "maximum_buoyancy_N": 10.0,
+        "required_displacement_m3": 0.0006,
+        "required_fraction": 0.6,
+        "weight_N": 6.0
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "negative",
+      "code": "PHY022",
+      "expected": {
+        "feasible": false,
+        "full_submersion_net_N": -2,
+        "maximum_buoyancy_N": 10,
+        "required_displacement_m3": 0.0012,
+        "required_fraction": 1.2,
+        "weight_N": 12
+      },
+      "observed": {
+        "feasible": false,
+        "full_submersion_net_N": -2.0,
+        "maximum_buoyancy_N": 10.0,
+        "required_displacement_m3": 0.0012,
+        "required_fraction": 1.2,
+        "weight_N": 12.0
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "model",
+      "code": "PHY023",
+      "expected": {
+        "capacity_N": 5.43656365691809,
+        "feasible": true,
+        "ratio": 2.718281828459045,
+        "reserve_N": 1.43656365691809
+      },
+      "observed": {
+        "capacity_N": 5.43656365691809,
+        "feasible": true,
+        "ratio": 2.718281828459045,
+        "reserve_N": 1.4365636569180902
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "negative",
+      "code": "PHY023",
+      "expected": {
+        "capacity_N": 2,
+        "feasible": false,
+        "ratio": 1,
+        "reserve_N": -2
+      },
+      "observed": {
+        "capacity_N": 2.0,
+        "feasible": false,
+        "ratio": 1.0,
+        "reserve_N": -2.0
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "model",
+      "code": "PHY024",
+      "expected": {
+        "drops_K": [
+          25,
+          5
+        ],
+        "power_W": 125,
+        "resistances_K_W": [
+          0.2,
+          0.04
+        ],
+        "total_K_W": 0.24
+      },
+      "observed": {
+        "drops_K": [
+          25.0,
+          5.0
+        ],
+        "power_W": 125.0,
+        "resistances_K_W": [
+          0.2,
+          0.04
+        ],
+        "total_K_W": 0.24
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "negative",
+      "code": "PHY024",
+      "expected": {
+        "drops_K": [
+          15,
+          15
+        ],
+        "power_W": 75,
+        "resistances_K_W": [
+          0.2,
+          0.2
+        ],
+        "total_K_W": 0.4
+      },
+      "observed": {
+        "drops_K": [
+          15.0,
+          15.0
+        ],
+        "power_W": 75.0,
+        "resistances_K_W": [
+          0.2,
+          0.2
+        ],
+        "total_K_W": 0.4
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "model",
+      "code": "SEM018",
+      "expected": {
+        "drawdown": [
+          [
+            true,
+            false,
+            true,
+            true
+          ],
+          [
+            false,
+            true,
+            false,
+            false
+          ],
+          [
+            true,
+            true,
+            false,
+            true
+          ]
+        ],
+        "status": "complete"
+      },
+      "observed": {
+        "drawdown": [
+          [
+            true,
+            false,
+            true,
+            true
+          ],
+          [
+            false,
+            true,
+            false,
+            false
+          ],
+          [
+            true,
+            true,
+            false,
+            true
+          ]
+        ],
+        "status": "complete"
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "negative",
+      "code": "SEM018",
+      "expected": {
+        "drawdown": [
+          [
+            true,
+            false,
+            true,
+            true
+          ],
+          [
+            false,
+            true,
+            false,
+            false
+          ],
+          null
+        ],
+        "status": "incomplete"
+      },
+      "observed": {
+        "drawdown": [
+          [
+            true,
+            false,
+            true,
+            true
+          ],
+          [
+            false,
+            true,
+            false,
+            false
+          ],
+          null
+        ],
+        "status": "incomplete"
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "model",
+      "code": "SEM019",
+      "expected": {
+        "original_signs": [
+          1,
+          -1,
+          1
+        ],
+        "original_writhe": 1,
+        "transformed_signs": [
+          1,
+          -1,
+          1
+        ],
+        "transformed_writhe": 1
+      },
+      "observed": {
+        "original_signs": [
+          1,
+          -1,
+          1
+        ],
+        "original_writhe": 1,
+        "transformed_signs": [
+          1,
+          -1,
+          1
+        ],
+        "transformed_writhe": 1
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "negative",
+      "code": "SEM019",
+      "expected": {
+        "original_signs": [
+          1,
+          -1,
+          1
+        ],
+        "original_writhe": 1,
+        "transformed_signs": [
+          -1,
+          1,
+          -1
+        ],
+        "transformed_writhe": -1
+      },
+      "observed": {
+        "original_signs": [
+          1,
+          -1,
+          1
+        ],
+        "original_writhe": 1,
+        "transformed_signs": [
+          -1,
+          1,
+          -1
+        ],
+        "transformed_writhe": -1
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "model",
+      "code": "SEM020",
+      "expected": {
+        "period": 6,
+        "samples": [
+          "warp",
+          "weft",
+          "warp",
+          "warp",
+          "weft"
+        ],
+        "status": "valid"
+      },
+      "observed": {
+        "period": 6,
+        "samples": [
+          "warp",
+          "weft",
+          "warp",
+          "warp",
+          "weft"
+        ],
+        "status": "valid"
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "negative",
+      "code": "SEM020",
+      "expected": {
+        "period": null,
+        "samples": null,
+        "status": "invalid_run"
+      },
+      "observed": {
+        "period": null,
+        "samples": null,
+        "status": "invalid_run"
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "model",
+      "code": "VC020",
+      "expected": {
+        "hit": true,
+        "t_enter": 2,
+        "t_exit": 4
+      },
+      "observed": {
+        "hit": true,
+        "t_enter": 2.0,
+        "t_exit": 4.0
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "negative",
+      "code": "VC020",
+      "expected": {
+        "hit": false,
+        "t_enter": null,
+        "t_exit": null
+      },
+      "observed": {
+        "hit": false,
+        "t_enter": null,
+        "t_exit": null
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "model",
+      "code": "VC021",
+      "expected": {
+        "agreement": 1,
+        "decoded_normal": [
+          0.4082482904638631,
+          0.8164965809277261,
+          -0.4082482904638631
+        ],
+        "encoded": [
+          0.5,
+          0.75
+        ]
+      },
+      "observed": {
+        "agreement": 1.0000000000000002,
+        "decoded_normal": [
+          0.4082482904638631,
+          0.8164965809277261,
+          -0.4082482904638631
+        ],
+        "encoded": [
+          0.5,
+          0.75
+        ]
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "negative",
+      "code": "VC021",
+      "expected": {
+        "agreement": 0.6666666666666666,
+        "decoded_normal": [
+          0.4082482904638631,
+          0.8164965809277261,
+          0.4082482904638631
+        ],
+        "encoded": [
+          0.25,
+          0.5
+        ]
+      },
+      "observed": {
+        "agreement": 0.6666666666666669,
+        "decoded_normal": [
+          0.4082482904638631,
+          0.8164965809277261,
+          0.4082482904638631
+        ],
+        "encoded": [
+          0.25,
+          0.5
+        ]
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "model",
+      "code": "VC022",
+      "expected": {
+        "intersection": [
+          4,
+          3,
+          0
+        ],
+        "status": "hit",
+        "t": 2
+      },
+      "observed": {
+        "intersection": [
+          4.0,
+          3.0,
+          0.0
+        ],
+        "status": "hit",
+        "t": 2.0
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    },
+    {
+      "case": "negative",
+      "code": "VC022",
+      "expected": {
+        "intersection": null,
+        "status": "parallel",
+        "t": null
+      },
+      "observed": {
+        "intersection": null,
+        "status": "parallel",
+        "t": null
+      },
+      "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."
+    }
+  ],
+  "input_bindings": [
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25-b/unit-c.json",
+      "sha256": "5c65a1e421eef843d1cf76698e177e4b899bff8194c1d959ecfa97d83dfd834e"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25-b/unit-c-self-check.json",
+      "sha256": "c79eda56239a0c3ee7e203eb4e9a29f267df8ca74e03ab084b477d69c8f16703"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25-b/review-protocol.md",
+      "sha256": "fc9fba08d7c46f8f110bacf3ec93a9ed1341530c95640e4d8f5953638e5015de"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25-b/tests/test_unit_c.py",
+      "sha256": "69a59d7a79420b0ff34acc015f853a8ef6c9201bca497a1f437c4dbfecf932ab"
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-022-budget-displacement-for-a-floating-sculpture.md",
+      "sha256": "2aec2e008ff5dd5fd223698056d8bff550a142117bac648f4571ab43fc598bc6"
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-022-budget-displacement-for-a-floating-sculpture.fr.md",
+      "sha256": "7c7ff1b58e5399ad571103f44d3bc884a11d439298e79fc3f016f56ba898ecb6"
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-022-budget-displacement-for-a-floating-sculpture.es.md",
+      "sha256": "b7c2a80a188bcce1d6ecbbdecda601c7f6d479fdbc281297816998913aecf2dd"
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-023-bound-tension-amplification-around-a-craft-peg.md",
+      "sha256": "1e1315b5552094489b56f42ae62efbd7b408631b76335c30ecffde443de49b7d"
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-023-bound-tension-amplification-around-a-craft-peg.fr.md",
+      "sha256": "4f773070b0f570791ace0054d31fea47249f5290be7f09476d780a7b0cb97d22"
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-023-bound-tension-amplification-around-a-craft-peg.es.md",
+      "sha256": "59d7bf5505cbafdf993ad6a14d33a5fc333cf15b48a0ae22d95138571e19c7e1"
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-024-compose-thermal-resistance-through-craft-layers.md",
+      "sha256": "70c01b478900df1f76f0ee32ece52f95f49e9a79fd864889b130f72d8a52d069"
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-024-compose-thermal-resistance-through-craft-layers.fr.md",
+      "sha256": "3d2774aa7c7508f2ede963777662a20f629678bad2da3c9423ff95d2a685c1eb"
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-024-compose-thermal-resistance-through-craft-layers.es.md",
+      "sha256": "872e5d19144a15f3b88ccf098e71a1f756dc853e8e49130e553c6f8fa2f2aa75"
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-020-intersect-a-scene-picking-ray-with-box-slabs.md",
+      "sha256": "4ff79c0c49104379cdc7c12e9c78098c307ac6ae4fa018636e0cf14f059e8668"
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-020-intersect-a-scene-picking-ray-with-box-slabs.fr.md",
+      "sha256": "b8204e3913373678f2222524f0aeec5751803b3c214f300265815ab6ef9f432a"
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-020-intersect-a-scene-picking-ray-with-box-slabs.es.md",
+      "sha256": "aaef1de84017b6cadf124f40066e7e5a3b09f8fa9c86f34d4ad6fa172abe744d"
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-021-fold-the-lower-hemisphere-in-a-normal-encoding.md",
+      "sha256": "aa4dab69e6947526ef992dbb03a59941d36310ea7844f3c06f1583e5b3a704f5"
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-021-fold-the-lower-hemisphere-in-a-normal-encoding.fr.md",
+      "sha256": "536259db21b9a2498b5814afb111fd32212443051f315798445b6fff640197c5"
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-021-fold-the-lower-hemisphere-in-a-normal-encoding.es.md",
+      "sha256": "0acddf9df05b98629c3d6238e218a4132cb4c63a465a17b3e03650d309fc4a39"
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-022-project-a-craft-shadow-onto-a-declared-plane.md",
+      "sha256": "3e7fc911ba66d50434e89bf2c21be786175f6c872072b395c88a53d07de82f9d"
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-022-project-a-craft-shadow-onto-a-declared-plane.fr.md",
+      "sha256": "8ca0dd0d731db9c34ef0a74d3da03b66befe424462417a094dfdb54bdc8790b2"
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-022-project-a-craft-shadow-onto-a-declared-plane.es.md",
+      "sha256": "ca416a58669c584db45951dd2827f9f80b8ca0391484d5392bb3f1b1c06625f8"
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-020-make-unequal-stitch-bins-preserve-frequency-area.md",
+      "sha256": "82d4209623b958fcb713df229d9ef2e6994b29c093ea6fa6f8924e1a17b124e0"
+    },
+    {
+      "path": "streeling/courses/data-visualization/fr/dv-020-make-unequal-stitch-bins-preserve-frequency-area.fr.md",
+      "sha256": "4c69f664f162af6cf50b0339d19c4fc5949ef00e18f6596d838ae42273ab3bc9"
+    },
+    {
+      "path": "streeling/courses/data-visualization/es/dv-020-make-unequal-stitch-bins-preserve-frequency-area.es.md",
+      "sha256": "d558819a658eb336bb185dd3c4c4743cad1242d3c7b1a5ade6711197240fceea"
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-021-transform-interval-endpoints-before-drawing-error-bars.md",
+      "sha256": "2ce5171148f617a79748c68995ccd9ab8a35f9e3774837c3eaa24d4701779fa2"
+    },
+    {
+      "path": "streeling/courses/data-visualization/fr/dv-021-transform-interval-endpoints-before-drawing-error-bars.fr.md",
+      "sha256": "41fb98cf0aeea3ff0ed1b4649a3c76209b319b6ed080cff5be269552a51daeb5"
+    },
+    {
+      "path": "streeling/courses/data-visualization/es/dv-021-transform-interval-endpoints-before-drawing-error-bars.es.md",
+      "sha256": "a3ddb5ee3dcb06ef070f73e5d9ed4dada008ecda5af28335404e62f5a138a2bb"
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-022-declare-diagonal-connectivity-in-a-relief-contour.md",
+      "sha256": "35092b37e65abb1674a7cdb80314e3854efe8b27bc26934abcf2a52aa866cf62"
+    },
+    {
+      "path": "streeling/courses/data-visualization/fr/dv-022-declare-diagonal-connectivity-in-a-relief-contour.fr.md",
+      "sha256": "5c8895fc698b2535fcfe39fe72a38acd614a3ef9d90b2b065d4b53990c223cd3"
+    },
+    {
+      "path": "streeling/courses/data-visualization/es/dv-022-declare-diagonal-connectivity-in-a-relief-contour.es.md",
+      "sha256": "fae401b6e1d520dbdc681a42ba0b85a12abf21783491de9387ae854cac554f0a"
+    },
+    {
+      "path": "streeling/courses/semiotics/en/sem-018-interpret-a-multi-shaft-weaving-draft.md",
+      "sha256": "0f56cec9ab1e49869cf34c286a2bdeec7084deb3aeefca112b45da1ae2b99d30"
+    },
+    {
+      "path": "streeling/courses/semiotics/fr/sem-018-interpret-a-multi-shaft-weaving-draft.fr.md",
+      "sha256": "90db01222bfe41cc5ed3be143df2dd5ff47a3a4c7c1d1aa32929e437ba39dc3f"
+    },
+    {
+      "path": "streeling/courses/semiotics/es/sem-018-interpret-a-multi-shaft-weaving-draft.es.md",
+      "sha256": "d4f3ce0f012fc61411b788e33c6f82992653a8890179cfb9a33382367fc3abae"
+    },
+    {
+      "path": "streeling/courses/semiotics/en/sem-019-distinguish-knot-diagram-reversal-from-mirroring.md",
+      "sha256": "795e7a251a22c7646891abe3138172ba13c3b854d501ad5d62692e53596d16b8"
+    },
+    {
+      "path": "streeling/courses/semiotics/fr/sem-019-distinguish-knot-diagram-reversal-from-mirroring.fr.md",
+      "sha256": "15adb1b1597d5d76ca4567d4c52e8b2c5a5a9a776526514db0cde6f9c16fa0d1"
+    },
+    {
+      "path": "streeling/courses/semiotics/es/sem-019-distinguish-knot-diagram-reversal-from-mirroring.es.md",
+      "sha256": "105518633c7a1b3201d1b538369597d51cb5ce4f89d3e59c686dc3dd434ac50a"
+    },
+    {
+      "path": "streeling/courses/semiotics/en/sem-020-locate-a-motif-cell-in-positive-run-lengths.md",
+      "sha256": "c35b5498593ecfb0ec8c415b9a1b2e89cd78f00590c4552c6a89799bff53cf48"
+    },
+    {
+      "path": "streeling/courses/semiotics/fr/sem-020-locate-a-motif-cell-in-positive-run-lengths.fr.md",
+      "sha256": "b5716db09776bf009555ab16901b4df1289cfdcbe698ff6587aebf7e4007e1bf"
+    },
+    {
+      "path": "streeling/courses/semiotics/es/sem-020-locate-a-motif-cell-in-positive-run-lengths.es.md",
+      "sha256": "632c5192f9320dbad49573239c9702b41e5d54ae28b8a8ae396578988c9f2937"
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-014-test-selection-on-a-shared-scene-outcome.md",
+      "sha256": "e0897de784b0978198b68ab868dc762af0c3d4960ea5cd1e1ddd236df81ff8cc"
+    },
+    {
+      "path": "streeling/courses/philosophy/fr/phi-014-test-selection-on-a-shared-scene-outcome.fr.md",
+      "sha256": "15a43f91335a8108acd7686eed4fc4dbc4770d654863fbdc1164c88a63f9e578"
+    },
+    {
+      "path": "streeling/courses/philosophy/es/phi-014-test-selection-on-a-shared-scene-outcome.es.md",
+      "sha256": "fa4031f44e4be70fc50dfe5eaaff1a09ab32131102bbbc5d923f4cdc116f92a2"
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-015-diagnose-a-failed-prediction-with-an-auxiliary-premise.md",
+      "sha256": "97bb20cc4b2f53837cd30490104ce28414dda5dd99f1911291e2a16bb1cc7206"
+    },
+    {
+      "path": "streeling/courses/philosophy/fr/phi-015-diagnose-a-failed-prediction-with-an-auxiliary-premise.fr.md",
+      "sha256": "bc315d26b65be0d87951e2fb22961e61d9c3a4410bef1105f23300a6c99fccfa"
+    },
+    {
+      "path": "streeling/courses/philosophy/es/phi-015-diagnose-a-failed-prediction-with-an-auxiliary-premise.es.md",
+      "sha256": "c676e4bfaecce5d8664afc561704f60d5a87a1d33385d49e79a1efa1c28aa3de"
+    },
+    {
+      "path": "streeling/courses/futurology/en/fut-014-project-first-retirements-from-craft-asset-cohorts.md",
+      "sha256": "5404b054c9d1f212fa0364b4bdfa4857432b349c10166d0fa9eebf03bac7e065"
+    },
+    {
+      "path": "streeling/courses/futurology/fr/fut-014-project-first-retirements-from-craft-asset-cohorts.fr.md",
+      "sha256": "6eadb3f538a687be89eba33de56ee1ea8ad8a86ea7bc8e8fffbe7921b042fc60"
+    },
+    {
+      "path": "streeling/courses/futurology/es/fut-014-project-first-retirements-from-craft-asset-cohorts.es.md",
+      "sha256": "32a853886e9f4ccd91b27e65b5667697e960bbd98792f2bdf9fa60e0140f841c"
+    },
+    {
+      "path": "streeling/courses/futurology/en/fut-015-enumerate-compatible-craft-workflow-futures.md",
+      "sha256": "8cc4691fdc6a891a309b6f23b63f5788cd9f4e20b26cc78551615de171db23aa"
+    },
+    {
+      "path": "streeling/courses/futurology/fr/fut-015-enumerate-compatible-craft-workflow-futures.fr.md",
+      "sha256": "cc7030554e086dae8484fc7bd18000e5296c37f4823b823b8ef77fca0620cdf6"
+    },
+    {
+      "path": "streeling/courses/futurology/es/fut-015-enumerate-compatible-craft-workflow-futures.es.md",
+      "sha256": "4262750b229a8413d9a284bbff02858fad9b29c72c5811b50eb28f4cac0723a2"
+    }
+  ],
+  "log": {
+    "path": "C:/tmp/batch25b-c-review/focused-run.log",
+    "sha256": "45a395b83e5228fd569ec86f7fd9b905040e6801097da67e86879beb63d3fb85"
+  },
+  "scope": "Finite authored model characterization; no production implementation or runtime scene trial.",
+  "expected_exit_code": 0,
+  "passed": true
+}

@@ -1,0 +1,193 @@
+---
+module_id: "sem-022-distinguish-an-independent-wrapper-from-independent-state"
+department: "semiotics"
+course: "Distinguir una envoltura independiente de un estado independiente"
+level: "advanced"
+prerequisites: ["sem-014-declare-material-patch-precedence", "cs-019-preserve-lexical-bindings-when-composing-fragments"]
+estimated_duration: "50 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Distinguir una envoltura independiente de un estado independiente
+
+> Borrador pendiente de revisión técnica y lingüística. Las entradas numéricas y los resultados previstos son casos construidos. No se aporta un nuevo ensayo de materiales, una ejecución del motor de escena, una observación del alumno ni un resultado de producción. Las decisiones humanas y del aprendizaje siguen abiertas.
+
+## Operación del proyecto e interpretación
+
+Un nodo propuesto de cambios de material copia un contenedor y supone ediciones aisladas. Una envoltura externa nueva puede referir al mismo estado mutable anidado. Dibuje el grafo antes de mutar, distinga identidad de envoltura e identidad de hijo y compare copia superficial con copia recursiva de esta estructura de listas. Esto trata alias en memoria, no captura léxica, precedencia de campos ni duplicación de recursos [Godot](https://docs.godotengine.org/en/stable/classes/class_transform3d.html). No se copió ningún objeto de escena. Compartición intencional, ciclos y mecanismos propios del motor requieren otros contratos.
+
+Lea el requisito previo versionado y el pasaje delimitado de la fuente antes de calcular. Identifique la operación que necesita el proyecto, el significado de sus entradas y la afirmación que podría respaldar el resultado. El expediente conserva la revisión y el alcance realmente consultado. Separe en columnas distintas una definición documental, una premisa construida y un resultado observado. Un asistente no debe sustituir una observación ausente por una historia plausible sobre lo que probablemente hace el programa.
+
+Explicite la representación. El JSON siguiente es una especificación matemática finita, no una sintaxis ejecutable del proyecto ni una nueva función del motor. Los nombres de campos y el orden de las identidades forman parte del caso didáctico. Lea la fórmula junto con los valores: un número aparentemente correcto obtenido bajo otra interpretación no responde a la tarea. Conserve los pasos intermedios y el control para que otra persona pueda localizar el primer desacuerdo. Las premisas son deliberadamente estrechas; ampliar el dominio exige otra justificación.
+
+## Modelo fijado y control con otra entrada
+
+```json
+{
+  "values": {
+    "original": [
+      [
+        1,
+        2
+      ],
+      [
+        3
+      ]
+    ],
+    "copy_mode": "shallow",
+    "mutation": {
+      "row": 0,
+      "column": 0,
+      "value": 9
+    }
+  },
+  "formula": "copy outer list; shallow retains child references, deep recursively copies list children; mutate copied child at supplied row/column; compare original and copy after mutation",
+  "expected": {
+    "original_after": [
+      [
+        9,
+        2
+      ],
+      [
+        3
+      ]
+    ],
+    "copy_after": [
+      [
+        9,
+        2
+      ],
+      [
+        3
+      ]
+    ],
+    "same_outer": false,
+    "same_first_child": true
+  },
+  "negative_control": {
+    "values": {
+      "original": [
+        [
+          1,
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "copy_mode": "deep",
+      "mutation": {
+        "row": 0,
+        "column": 0,
+        "value": 9
+      }
+    },
+    "expected": {
+      "original_after": [
+        [
+          1,
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "copy_after": [
+        [
+          9,
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "same_outer": false,
+      "same_first_child": false
+    }
+  }
+}
+```
+
+### Ejercicio 1
+
+Identifique las entradas y la operación que debe conservarse.
+
+<details><summary>Respuesta 1</summary>
+
+> **Respuesta:** La identidad de envoltura y la del hijo anidado son distintas.
+
+</details>
+
+### Ejercicio 2
+
+Determine los valores original y copiado después de editar la copia superficial.
+
+<details><summary>Respuesta 2</summary>
+
+> **Respuesta:** El caso superficial cambia ambos valores a `[[9,2],[3]]` porque comparten el primer hijo.
+
+</details>
+
+### Ejercicio 3
+
+Explique la trampa de interpretación que podría ocultar un resumen.
+
+<details><summary>Respuesta 3</summary>
+
+> **Respuesta:** `same_outer` es `false`, pero `same_first_child` es `true`; una envoltura nueva no prueba aislamiento.
+
+</details>
+
+### Ejercicio 4
+
+Aplique el control modificado y compare los resultados.
+
+<details><summary>Respuesta 4</summary>
+
+> **Respuesta:** El control profundo conserva el original `[[1,2],[3]]` y cambia solo la copia a `[[9,2],[3]]`.
+
+</details>
+
+### Ejercicio 5
+
+Indique el límite y las pruebas necesarias antes de adoptar el resultado.
+
+<details><summary>Respuesta 5</summary>
+
+> **Respuesta:** Otros tipos de objeto y compartición intencional necesitan un contrato de copia independiente.
+
+</details>
+
+## Tarea con fuentes y referencia manual directa
+
+Dibuje identidades de objetos de un cambio de material Atlas antes y después de modificar un hijo copiado.
+
+Con las respuestas ocultas, dibuje una tabla o un diagrama específico de la operación y calcule a mano el resultado principal. Este primer intento guardado constituye la referencia manual directa. Incluya las entradas, los valores intermedios, la regla de cada paso y el motivo de cualquier rechazo o valor sin resolver. Declare el criterio de refutación antes de pedir a un asistente que simplifique el trabajo. Una tabla corriente puede bastar; un DSL componible o un nodo agéntico necesita demostrar un beneficio adicional.
+
+Consulte después el artefacto local y el pasaje primario enlazados. Registre la ubicación, la revisión, la definición utilizada y lo que esta no establece. Pida al asistente que cuestione una premisa y guarde la pregunta y su respuesta. Declare como ayuda cualquier calculadora, traducción o consulta documental. Compare el resultado asistido con la referencia inicial usando las mismas entradas. Rechace una explicación más breve si elimina una identidad, una condición o la distinción entre ejemplo construido y observación del proyecto.
+
+Trate el control negativo como otro registro. Prediga su resultado antes de abrir la corrección y compare los campos modificados y los invariantes. Ante un desacuerdo, distinga error aritmético, error semántico y limitación de las premisas. Conserve el fallo, el diagnóstico, la corrección y la repetición en lugar de sobrescribir el primer intento. Entregue esas trazas con la explicación documentada y la incertidumbre restante. Este pequeño ciclo podrá apoyar el dogfooding; aquí no se ha medido una mejora real del aprendizaje o de la ejecución.
+
+El expediente prepara un criterio por ejercicio sin completar las decisiones del aprendizaje. La respuesta real, el historial de ayuda, la corrección personal y la decisión siguen vacíos hasta que exista un intento. Revisión técnica, revisión lingüística, ejecución del motor, validación material, adopción y publicación requieren pruebas distintas. El cálculo finito solo establece la relación declarada bajo sus premisas. Antes de usarla en una escena o una herramienta de práctica, nombre la observación adicional y su umbral de rechazo; una solución preparada no equivale a aceptación.
+
+## Criterio prospectivo de refutación
+
+Se rechaza una respuesta si aplicar la operación mostrada a alguna entrada conservada contradice el resultado previsto, o si su explicación presenta el caso construido como una observación ya realizada en el proyecto.
+
+## Criterios preparados para el alumno
+
+- Conservar la respuesta correcta y el razonamiento intermedio del ejercicio 1, junto con el alcance de la afirmación. La decisión del aprendizaje sigue abierta.
+- Conservar la respuesta correcta y el razonamiento intermedio del ejercicio 2, junto con el alcance de la afirmación. La decisión del aprendizaje sigue abierta.
+- Conservar la respuesta correcta y el razonamiento intermedio del ejercicio 3, junto con el alcance de la afirmación. La decisión del aprendizaje sigue abierta.
+- Conservar la respuesta correcta y el razonamiento intermedio del ejercicio 4, junto con el alcance de la afirmación. La decisión del aprendizaje sigue abierta.
+- Conservar la respuesta correcta y el razonamiento intermedio del ejercicio 5, junto con el alcance de la afirmación. La decisión del aprendizaje sigue abierta.
+
+## Fuentes y alcance de las afirmaciones
+
+- [Requisito previo versionado: sem-014-declare-material-patch-precedence](../../semiotics/en/sem-014-declare-material-patch-precedence.md)
+- [Requisito previo versionado: cs-019-preserve-lexical-bindings-when-composing-fragments](../../computer-science/en/cs-019-preserve-lexical-bindings-when-composing-fragments.md)
+- [Artefacto local conservado](../../../../code/blender/scripts/atlas/kit.py)
+- [Lectura primaria](https://docs.python.org/3/library/copy.html)
+- [Expediente del caso construido](../../../../code/streeling/evidence/batch50-2026-10-25-c/unit-c.json)
+- [Diario de validación](../../../../code/streeling/evidence/batch50-2026-10-25-c/journal.md)

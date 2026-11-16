@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- GA's DSL closures at 6baf32e, as they are on main: domain.analyzeProgression takes its key
+       from the key identification service (#625) and its numerals from the chord (6baf32e). The
+       file is compiled against the pinned GA.Business.DSL, whose chord parser main changed only
+       for symbols lesson 13 does not use, and against main's service in GaKeysMain. It is
+       fetched by ../fetch-ga.sh; lesson 13 reaches this assembly through the extern alias dslmain -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <GaRoot>$(MSBuildThisFileDirectory)../.ga/</GaRoot>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../.ga-dsl/DomainClosures.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(GaRoot)Common/GA.Business.DSL/GA.Business.DSL.fsproj" />
+    <ProjectReference Include="../GaKeysMain/GaKeysMain.csproj" />
+  </ItemGroup>
+
+</Project>

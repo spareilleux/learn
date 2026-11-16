@@ -1,0 +1,326 @@
+---
+title: "Lección 9: Conducción de voces y notas comunes"
+description: Las notas comunes, el tamaño de una conducción de voces, las quintas y octavas paralelas y las distancias entre tipos de acordes, comparadas con los cuatro lugares de Guitar Alchemist que miden cuánto dista un acorde del siguiente.
+sidebar:
+  label: 9. Conducción de voces y notas comunes
+  order: 9
+---
+
+import BraceletCF from '../../../../assets/music-theory-ga/l9-bracelet-c-f.svg';
+import GridsG7C from '../../../../assets/music-theory-ga/l9-g7-c.svg';
+
+La lección 7 llevó cada nota de G7 a la nota más cercana de C. Esta lección lo convierte en un método: qué notas comparten dos acordes, cómo medir el movimiento total de un acorde al siguiente, qué movimientos prohíben los manuales y a qué distancia están dos *tipos* de acordes. [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) mide la distancia entre acordes en cuatro lugares, una habilidad (*skill*) del chatbot, una herramienta MCP y dos clases de su biblioteca de dominio, y cada uno responde a una pregunta distinta. El programa del curso comprueba los cuatro.
+
+Todos los enlaces a GA apuntan al commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Las salidas proceden del comando de abajo; el punto de entrada es `l11` porque los dos apéndices ocuparon `l9` y `l10`.
+
+```bash
+dotnet run --project code/music-theory-ga/GaTheory -c Release -- l11
+```
+
+## Notas comunes
+
+### La idea
+
+Una **nota común** es una nota que comparten dos acordes. Open Music Theory la considera el movimiento más pequeño posible: "not moving at all, but instead remaining on a single tone that is common to both chords" ([Open Music Theory, "Jazz Voicings"](https://viva.pressbooks.pub/openmusictheory/chapter/jazz-voicings/)). La regla es antigua. Rameau enseñaba que una voz va a la nota más cercana, y en 1841 el organista Johann August Dürrnberger la llamó la «regla del camino más corto»: las notas que el acorde siguiente reutiliza se quedan en su parte, y las demás van a la nota más cercana del acorde siguiente ([Voice leading](https://en.wikipedia.org/wiki/Voice_leading), Wikipedia, "Chord connection").
+
+Entre las tríadas de una tonalidad, la distancia entre las fundamentales decide cuántas notas comparten dos acordes. Fundamentales a una tercera comparten dos notas, a una quinta una, a una segunda ninguna. Una nota compartida cambia de papel: C es la fundamental de C mayor y la tercera de A menor. El programa interseca las clases de altura de los acordes y nombra el intervalo de cada nota común en los dos acordes:
+
+```text
+== Common tones: C major and the other chords of its key (GA: Chord.FromSymbol, PitchClassSet.Intersect)
+chords         course       GA           check
+C Dm           (none)       (none)       ok
+C Em           4 7          4 7          ok
+  E: M3 in C, P1 in Em; G: P5 in C, m3 in Em
+C F            0            0            ok
+  C: P1 in C, P5 in F
+C G            7            7            ok
+  G: P5 in C, P1 in G
+C Am           0 4          0 4          ok
+  C: P1 in C, m3 in Am; E: M3 in C, P5 in Am
+C Bdim         (none)       (none)       ok
+```
+
+Los acordes de séptima comparten más. En el ii–V–I de la lección 7, la tercera de cada acorde se convierte en la séptima del siguiente: F, tercera de Dm7, es la séptima de G7, y B, tercera de G7, es la séptima de Cmaj7. Open Music Theory construye sus voicings de jazz a dos voces sobre ese intercambio, para "lead from the third of one chord to the seventh of the next" (mismo capítulo), y el módulo de Streeling [MUS-005 · Armonía de jazz para guitarra](../../streeling/music/mus-005-jazz-harmony/) llama a esas notas notas guía (sección "4. Guide Tones and Voice Leading").
+
+```text
+== Common tones of seventh chords and extensions
+chords         course       GA           check
+G7 Cmaj7       7 E          7 E          ok
+  G: P1 in G7, P5 in Cmaj7; B: M3 in G7, M7 in Cmaj7
+Dm7 G7         2 5          2 5          ok
+  D: P1 in Dm7, P5 in G7; F: m3 in Dm7, m7 in G7
+Bm7b5 G7       2 5 E        2 5 E        ok
+  D: m3 in Bm7b5, P5 in G7; F: d5 in Bm7b5, m7 in G7; B: P1 in Bm7b5, M3 in G7
+Cmaj9 Em7      2 4 7 E      2 4 7 E      ok
+  D: M9 in Cmaj9, m7 in Em7; E: M3 in Cmaj9, P1 in Em7; G: P5 in Cmaj9, m3 in Em7; B: M7 in Cmaj9, P5 in Em7
+Cdim7 F7       0 3 9        0 3 9        ok
+  C: P1 in Cdim7, P5 in F7; Eb: m3 in Cdim7, m7 in F7; Bbb/A: d7 in Cdim7, M3 in F7
+C6 Am7         0 4 7 9      0 4 7 9      ok
+  C: P1 in C6, m3 in Am7; E: M3 in C6, P5 in Am7; G: P5 in C6, m7 in Am7; A: M6 in C6, P1 in Am7
+C9 Gm7         2 7 T        2 7 T        ok
+  D: M9 in C9, P5 in Gm7; G: P5 in C9, P1 in Gm7; Bb: m7 in C9, m3 in Gm7
+```
+
+Bm7♭5 comparte tres de sus cuatro notas con G7: es G9 sin su fundamental. Cmaj9 contiene todo Em7, y C6 tiene las mismas cuatro notas que Am7. En Cdim7 la séptima es B𝄫, que suena igual que el A de F7: el curso escribe los dos nombres.
+
+### En GA
+
+La columna GA interseca los conjuntos de clases de altura de [`Chord.FromSymbol`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/Chord.cs), el núcleo de GA, como en la lección 7. Coincide en los trece pares.
+
+La herramienta MCP `ga_common_tones` de GA y la habilidad `CommonTones` del chatbot toman otro camino: una closure de F#, `domain.commonTones` ([`DomainClosures.fs#L488-L531`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L488-L531)), que también nombra los papeles. Construye cada acorde a partir de una tríada para la calidad más un intervalo por extensión, sacado de una tabla de seis entradas, e ignora las alteraciones ([`#L85-L98`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L85-L98), [`#L349-L355`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L349-L355)). El 2026-09-30, el servidor MCP que se ejecutaba en la máquina del autor (no indica su versión) respondió, cada respuesta en una línea:
+
+```text
+ga_common_tones G7 Cmaj7   Common tones (2): G (P1 in G7, P5 in Cmaj7), B (M3 in G7, M7 in Cmaj7)
+ga_common_tones Dm7 G7     Common tones (2): D (P1 in Dm7, P5 in G7), F (m3 in Dm7, m7 in G7)
+ga_common_tones Bm7b5 G7   Common tones (2): B (P1 in Bm7b5, M3 in G7), D (m3 in Bm7b5, P5 in G7)
+ga_common_tones Cmaj9 Em7  Common tones (3): E (M3 in Cmaj9, P1 in Em7), G (P5 in Cmaj9, m3 in Em7), D (M9 in Cmaj9, m7 in Em7)
+ga_common_tones Cdim7 F7   Common tones (2): C (P1 in Cdim7, P5 in F7), Eb (m3 in Cdim7, m7 in F7)
+ga_common_tones C6 Am7     Common tones (3): C (P1 in C6, m3 in Am7), E (M3 in C6, P5 in Am7), G (P5 in C6, m7 in Am7)
+ga_common_tones C9 Gm7     Common tones (2): G (P5 in C9, P1 in Gm7), D (M9 in C9, P5 in Gm7)
+```
+
+Las dos primeras son correctas. Cada una de las otras cinco pierde una nota: F, la ♭5 de Bm7♭5, una alteración; B, porque «maj9» solo añade la novena; A, porque el «7» de Cdim7 es una séptima menor y el acorde sale C E♭ G♭ B♭; A otra vez, porque «6» no está en la tabla; B♭, porque «9» no trae su séptima. El analizador de GA lee bien estos acordes: `ga_parse_chord("Bm7b5")` responde `"components":["ext:7","alt:b5"]`. Las notas se pierden después. La misma tabla dio a `ga_chord_to_set` sus grafías erróneas, un hallazgo de la [tabla QA del diario](../journal/#qa), y [GA #681](https://github.com/GuitarAlchemist/ga/pull/681), fusionada el 2026-09-23, sustituyó la tabla por una función que apila el acorde por terceras, sobrentiende la séptima bajo 9, 11 y 13 y aplica las alteraciones ([`chordTones`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L125-L185) en la rama `main` de GA, `5c3a52a`). `domain.commonTones` también toma sus notas y sus papeles de esa función ([`#L446-L450`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L446-L450), [`#L580-L620`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L580-L620)). Esto está leído en el código, no ejecutado: el servidor que respondió arriba era anterior a la corrección.
+
+## La conducción de voces más pequeña
+
+### La idea
+
+La **conducción de voces** es la manera en que se mueve cada voz cuando cambia la armonía (glosario de Open Music Theory, mismo capítulo). Esta "should generally be smooth—that is, voices should ideally move as little as possible when going to a new chord (except the bass, which often leaps)". Para comparar dos maneras de moverse, se cuentan semitonos: cada nota del primer acorde va a una nota del segundo, cada una por el camino más corto alrededor de la octava, seis semitonos como mucho, y se suman. Esa suma es el **tamaño** de la conducción de voces, y la más pequeña es la más fluida. La geometría de los acordes de Dmitri Tymoczko se basa en encontrar estas conducciones mínimas entre dos acordes cualesquiera ([Tymoczko 2006](https://doi.org/10.1126/science.1126287); en su libro de 2011, la música tonal pide acordes "connected by efficient voice leadings", citado en el artículo [Voice leading](https://en.wikipedia.org/wiki/Voice_leading) de Wikipedia).
+
+Cuando los acordes no tienen el mismo tamaño, una nota del más pequeño se duplica: una voz se divide en dos, o dos voces se juntan. El curso prueba todas las duplicaciones y todas las asignaciones de voces ([`Lesson11.Smallest`](https://github.com/spareilleux/learn/blob/50a94bb/code/music-theory-ga/GaTheory/Lesson11.cs#L127-L140)). Trabaja con clases de altura: adónde va una voz, no en qué octava.
+
+La figura pone C mayor y F mayor en un mismo brazalete. C es compartida y va rodeada con un círculo; E está junto a F, y G dos pasos por debajo de A: C se queda, E sube un semitono, G un tono, tres semitonos en total.
+
+<BraceletCF role="img" aria-label="Brazalete de nombres de notas con dos triángulos: C, E, G para C mayor y F, A, C para F mayor. C es compartida; E está junto a F y G a dos pasos de A." />
+
+```text
+== The smallest voice leading: the course tries every doubling, GA's VoiceLeadingSkill doubles the root
+chords         course GA     check
+C F            3      3      ok
+  course: C->C 0, E->F +1, G->A +2
+C Am           2      2      ok
+  course: C->C 0, E->E 0, G->A +2
+C G            3      3      ok
+  course: C->B -1, E->D -2, G->G 0
+C Dm           5      5      ok
+  course: C->D +2, E->F +1, G->A +2
+C F#           6      6      ok
+  course: C->A# -2, E->C# -3, G->F# -1
+Dm7 G7         3      3      ok
+  course: D->D 0, F->F 0, A->G -2, C->B -1
+G7 Cmaj7       3      3      ok
+  course: G->G 0, B->B 0, D->C -2, F->E -1
+G7 C           4      4      ok
+  course: G->G 0, B->C +1, D->C -2, F->E -1
+C G7           4      4      ok
+  course: C->B -1, E->F +1, G->G 0, C->D +2
+G Cmaj7        3      5      DIFF
+  course: G->G 0, B->C +1, D->E +2, B->B 0
+  GA:     G->E -3, B->B 0, D->C -2, G->G 0
+Fmaj7 Bm7b5    3      3      ok
+  course: F->F 0, A->A 0, C->B -1, E->D -2
+```
+
+De C a A menor, una voz se mueve un tono. C y D menor no comparten nada, así que todas las voces se mueven. De C a F♯, a un tritono, cuesta seis semitonos, y sin embargo ninguna voz se mueve más de tres. Cada cambio del ii–V–I mueve dos voces por grado conjunto y mantiene las otras dos; de las notas guía, la tercera se queda para ser la séptima siguiente, y la séptima baja un semitono hasta la tercera siguiente. G7 a C tiene cuatro voces para tres notas, así que dos de ellas se juntan en C: B sube, D baja.
+
+### En GA: la habilidad del chatbot
+
+El chatbot responde a «voice leading from C to F» con `VoiceLeadingSkill`, sin modelo de lenguaje: una tabla de tipos de acorde y luego todas las permutaciones de las voces ([`VoiceLeadingSkill.cs#L139-L161`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/VoiceLeadingSkill.cs#L139-L161)), cada voz por el camino más corto ([`#L179-L183`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/VoiceLeadingSkill.cs#L179-L183)). Cuando los acordes no tienen el mismo tamaño, repite siempre la fundamental del más pequeño: "a 'stays-on-root' doubling is harmless" ([`#L185-L194`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/VoiceLeadingSkill.cs#L185-L194)). El programa reescribe esa regla ([`Lesson11.SkillSmallest`](https://github.com/spareilleux/learn/blob/50a94bb/code/music-theory-ga/GaTheory/Lesson11.cs#L142-L166)). Duplicar no es inocuo de G a Cmaj7: con B duplicada, una B se queda y la otra sube a C, 3 semitonos; con G duplicada, una G tiene que bajar a E, 5. Aun así, la respuesta de la habilidad termina con la frase `This is the optimal pitch-class assignment — every other voicing of {aLabel} → {bLabel} requires more total semitone movement.` ([`#L131`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/VoiceLeadingSkill.cs#L131)).
+
+Después, el programa prueba cada tríada (mayor, menor, disminuida, aumentada, sobre las 12 fundamentales) contra cada acorde de séptima (séptima mayor, de dominante, menor, semidisminuida y disminuida):
+
+```text
+== Every triad to every seventh chord, and back: how often doubling the root misses the minimum
+direction          pairs    GA above the minimum, largest gap
+triad -> seventh   2880     1260 (43.8 %), 4 semitones, first Cdim -> Gmaj7
+seventh -> triad   2880     1260 (43.8 %), 4 semitones, first Cmaj7 -> Eaug
+```
+
+Duplicar la fundamental se aleja del mínimo en 1260 de los 2880 pares, hasta cuatro semitonos, e igual de a menudo en los dos sentidos: la tríada es el acorde más pequeño en ambos casos, y un movimiento cuesta lo mismo hacia atrás que hacia delante.
+
+La habilidad lee los dos acordes con una expresión regular ([`#L55-L57`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/VoiceLeadingSkill.cs#L55-L57)). El programa la copia y le pasa los diez ejemplos de consulta de la propia habilidad ([`#L35-L47`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/VoiceLeadingSkill.cs#L35-L47)):
+
+```text
+== GA's VoiceLeadingSkill: its own ten example prompts against its own chord pattern
+  voice leading from C to F                  C -> F
+  smooth voice leading C to Am               C -> Am
+  best voicing from G7 to Cmaj7              G7 -> Cmaj7
+  how do I voice lead Dm7 to G7              Dm7 -> G7
+  voice leading C major to G major           (no match: the skill answers "Ask about voice leading between two chords")
+  smoothest voicing from Em to A7            Em -> A7
+  voice leading Fmaj7 to Bm7b5               Fmaj7 -> Bm7b5
+  what's the smoothest voicing from D to A   D -> A
+  voice lead C7 to F                         C7 -> F
+  best way to move from G7 to C              G7 -> C
+```
+
+El patrón quiere un cifrado de acorde justo antes de «to», y «major» no lo es. El chatbot elige esta habilidad por el significado, nunca por el patrón ([`#L49`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/VoiceLeadingSkill.cs#L49): "semantic-routing only"), así que esta pregunta, uno de los propios ejemplos de la habilidad, le llega, y ella pide entonces una pregunta sobre "voice leading between two chords" ([`#L288-L294`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/VoiceLeadingSkill.cs#L288-L294)).
+
+### En GA: la herramienta MCP, sobre voicings de guitarra
+
+La herramienta MCP `ga_voice_leading_pair` trabaja con voicings reales: busca voicings de guitarra para los dos acordes y ordena los pares según una distancia sobre sus alturas MIDI ([`CompositionTools.cs#L312-L336`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/CompositionTools.cs#L312-L336)): ordena los dos voicings, los empareja desde abajo y cobra 3 semitonos por cada nota sobrante. Aquí las octavas cuentan, porque un voicing de guitarra tiene un registro. Cuando los dos voicings tienen las mismas notas en número, emparejarlos en orden es lo mejor que se puede hacer: en una recta, dos pares que se cruzan nunca son más cortos que los mismos pares sin cruzar. Cuando difieren, el comentario dice que el voicing más corto "pairs against its nearest neighbors", pero el código lo empareja con las notas más graves. El mismo comentario advierte que esto "is not a formal Hungarian-optimal assignment", solo una clasificación "good enough to surface smooth voice-leadings among candidates". El programa copia la función ([`Lesson11.PairDistance`](https://github.com/spareilleux/learn/blob/50a94bb/code/music-theory-ga/GaTheory/Lesson11.cs#L219-L236)) y la compara con todos los emparejamientos, con la misma tarifa de 3 semitonos por nota sobrante ([`Lesson11.VoicingDistance`](https://github.com/spareilleux/learn/blob/50a94bb/code/music-theory-ga/GaTheory/Lesson11.cs#L238-L249)):
+
+```text
+== Guitar voicings in pitch space: the course pairs the notes every way, GA's ga_voice_leading_pair pairs the lowest
+voicings             course GA     check
+C -> Am              5      5      ok
+  x32010 C3 E3 G3 C4 E4  ->  x02210 A2 E3 A3 C4 E4
+G -> C               10     28     DIFF
+  320003 G2 B2 D3 G3 B3 G4  ->  x32010 C3 E3 G3 C4 E4
+G7 -> C              8      28     DIFF
+  320001 G2 B2 D3 G3 B3 F4  ->  x32010 C3 E3 G3 C4 E4
+C (no bass) -> C     3      19     DIFF
+  xx2010 E3 G3 C4 E4  ->  x32010 C3 E3 G3 C4 E4
+G7/B -> C (MCP)      5      5      ok
+  x2xx63 B2 F4 G4  ->  8xx988 C3 E4 G4 C5
+```
+
+El C abierto no tiene nada por debajo de C3, así que GA empareja el G2 del G abierto con C3, B2 con E3, y así sucesivamente: cada voz sube un puesto, 28 semitonos. Dejar fuera G2 da 10. Añadir un bajo bajo el mismo acorde cuesta 19 en lugar de 3. El 2026-09-30, el mismo servidor respondió a `ga_voice_leading_pair("G7", "C", limit 3, guitar)` con 225 pares evaluados; sus diagramas empiezan por la cuerda 1, y la última fila de la tabla de arriba es su primer par:
+
+```text
+5  G7(shell)/B  3-6-x-x-2-x  [67, 65, 47]            ->  C  8-8-9-x-x-8  [72, 67, 64, 48]
+5  G7(shell)/B  3-6-x-5-2-x  [67, 65, 55, 47]        ->  C  8-8-9-5-x-8  [72, 67, 64, 55, 48]
+6  G7(shell)/B  3-0-0-3-2-x  [67, 59, 55, 53, 47]    ->  C  8-8-5-5-7-8  [72, 67, 60, 55, 52, 48]
+```
+
+En estos pares las notas de más están arriba, donde emparejar desde abajo es correcto. La clasificación falla cuando la nota de más es el bajo.
+
+## Quintas y octavas paralelas
+
+### La idea
+
+Dos voces se mueven en **paralelo** cuando van en la misma dirección por el mismo intervalo. El contrapunto de especies prohíbe dos consonancias perfectas del mismo tamaño seguidas: "P5–P5 or P8–P8. This includes both simple and compound intervals; for example, P5–P12 is considered the same as P5–P5." El motivo: "Parallel fifths and octaves promote tonal fusion at the expense of melodic independence" ([Open Music Theory, "First-Species Counterpoint"](https://viva.pressbooks.pub/openmusictheory/chapter/first-species-counterpoint/)). La armonía de la práctica común mantiene la regla entre dos voces cualesquiera.
+
+Una guitarra la rompe todo el tiempo. Mover un acorde con cejilla a lo largo del mástil mueve cada cuerda el mismo intervalo, así que cada quinta y cada octava de la forma se mueve en paralelo. Un power chord es una quinta, y un riff de power chords no es más que quintas paralelas; el artículo [Consecutive fifths](https://en.wikipedia.org/wiki/Consecutive_fifths) de Wikipedia señala que "the prohibition is not relevant since there is no intention to create independent voices". La regla pertenece a un estilo, no al instrumento.
+
+### En GA
+
+[`ProgressionVoiceLeadingAnalyzer`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ProgressionVoiceLeadingAnalyzer.cs#L33-L68) toma cada cuerda como una voz. Para cada par de cuerdas que suenan en los dos voicings, si las dos se mueven en la misma dirección y el intervalo, reducido a una octava, es una quinta antes y después, señala quintas paralelas; si vale 0 antes y después, octavas paralelas. El programa compila el archivo de GA tal cual y lo compara con su propia lectura de la regla ([`Lesson11.Parallels`](https://github.com/spareilleux/learn/blob/50a94bb/code/music-theory-ga/GaTheory/Lesson11.cs#L281-L299)). Las cuerdas se numeran de 1, la E aguda, a 6, la E grave; «6-5» es el par de las dos cuerdas más graves:
+
+```text
+== Parallel fifths and octaves, string by string (GA: ProgressionVoiceLeadingAnalyzer)
+voicings           course                         GA                             check
+F -> G barre       5ths 4-2 6-2 6-5; 8ves 4-1 5-2 6-1 6-4 5ths 4-2 6-2 6-5; 8ves 4-1 5-2 6-1 6-4 ok
+E5 -> G5           5ths 6-5; 8ves 6-4             5ths 6-5; 8ves 6-4             ok
+C -> G open        5ths -; 8ves 5-2               5ths -; 8ves 5-2               ok
+G7 -> C open       5ths -; 8ves 5-2               5ths -; 8ves 5-2               ok
+Am -> Dm open      5ths -; 8ves -                 5ths -; 8ves -                 ok
+```
+
+Coinciden en cada par. El acorde con cejilla contiene tres quintas y cuatro octavas, y las siete se mueven juntas. Dos de los tres cambios de acordes abiertos, C → G y G7 → C, esconden cada uno un par de octavas paralelas, en las cuerdas 5 y 2. En el G7 abierto de abajo, B2 y B3 son la misma nota, la sensible, duplicada: las dos suben a C, C3 y C4. Un manual de armonía no duplicaría la sensible por esa razón; la forma abierta lo hace.
+
+<GridsG7C role="img" aria-label="Dos diagramas de acorde. G7, 320001: G2 B2 D3 G3 B3 F4. C, x32010: C3 E3 G3 C4 E4." />
+
+```play
+G2 B2 D3 G3 B3 F4
+C3 E3 G3 C4 E4
+```
+
+El analizador hace exactamente lo que dice su nombre. No busca las quintas y octavas ocultas, "similar motion into a fifth or octave" (Open Music Theory, mismo capítulo), ni las quintas por movimiento contrario, que según Wikipedia también son "generally avoided". Como las voces son cuerdas, una melodía que pasa de la cuerda 2 a la cuerda 1 cambia de voz. En el commit `a826864`, nada en GA lo llama, salvo sus pruebas.
+
+## Distancias entre tipos de acordes
+
+### La idea
+
+El [apéndice B](../appendix-optic/) subió la escalera OPTIC: octava, permutación, transposición, inversión, cardinalidad. Clifton Callender, Ian Quinn y Dmitri Tymoczko midieron las conducciones de voces en cada peldaño ([Callender, Quinn y Tymoczko 2008](https://doi.org/10.1126/science.1153021)). Con O y P, la distancia es entre conjuntos de clases de altura, como arriba: de C mayor a F mayor, 3. Añade T, y pasa a ser una distancia entre *tipos* de acordes: de C mayor a F mayor, 0, dos tríadas mayores; de C mayor a C menor, 1, E a E♭; de una tríada mayor a una aumentada, 1. Añade I, y mayor y menor pasan a ser el mismo tipo. El programa calcula las tres distancias por fuerza bruta, todas las asignaciones de voces, todas las transposiciones, la inversión ([`Lesson11.Optic`](https://github.com/spareilleux/learn/blob/50a94bb/code/music-theory-ga/GaTheory/Lesson11.cs#L319-L351)), en la forma «OP OPT OPTI»:
+
+```text
+== Distance from C major under OP, OPT and OPTI (GA: VoiceLeadingSpace)
+chords         course       GA           check
+C F            3 0 0        3 0 0        ok
+C Eb           3 0 0        3 0 0        ok
+C Am           2 1 0        2 1 0        ok
+C Cm           1 1 0        1 1 0        ok
+C Caug         1 1 1        1 1 1        ok
+C Cdim         2 1 1        2 1 1        ok
+C F#           6 0 0        6 0 0        ok
+Cmaj7 C7       1 1 1        1 1 1        ok
+C7 Cdim7       3 1 1        3 1 1        ok
+```
+
+### En GA
+
+[`VoiceLeadingSpace`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Atonal/VoiceLeadingSpace.cs) toma los cuatro interruptores y calcula la misma distancia; el programa compila el archivo de GA tal cual, y la columna GA de arriba es su respuesta. Con equivalencia de octava y de permutación, no prueba todas las asignaciones de voces: ordena los dos acordes y solo prueba los desplazamientos cíclicos de uno contra el otro ([`#L63-L91`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Atonal/VoiceLeadingSpace.cs#L63-L91)). Ese atajo es correcto, en todos los pares de conjuntos de tres y de cuatro notas:
+
+```text
+== GA's shortcut (cyclic shifts of the sorted chords) against every assignment of voices
+sets           ordered pairs  GA differs from the course
+3 notes, OP    48400          0
+3 notes, OPT   48400          0
+4 notes, OP    245025         0
+4 notes, OPT   245025         0
+```
+
+Sin equivalencia de octava, es la transposición la que falla: prueba solo desplazamientos de 0 a 11 semitonos, hacia arriba ([`#L46-L61`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Atonal/VoiceLeadingSpace.cs#L46-L61)), de modo que el segundo acorde nunca puede bajar al encuentro del primero:
+
+```text
+== Without octave equivalence, with transposition: GA only shifts upward, by 0 to 11 semitones
+from -> to             course GA     check
+C4 major -> B3 major   0      0      ok
+B3 major -> C4 major   0      3      DIFF
+C4 major -> C5 major   0      36     DIFF
+C5 major -> C4 major   0      3      DIFF
+```
+
+Dos tríadas mayores son el mismo tipo bajo T, a distancia 0, pero la respuesta de GA depende de cuál va primero, y una distancia que cambia con el orden no es una distancia.
+
+La otra distancia OPTIC de GA es entre clases de conjuntos: [`SetClassOpticIndex.Distance`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Atonal/SetClassOpticIndex.cs#L53-L76). Para dos clases del mismo tamaño, su comentario sopesa "the nearest-neighbor sum approach (approximation)" frente a "strict best-permutation (expensive)" y se queda con la primera, "a reasonable Hausdorff-like distance": cada nota de la primera clase va a la nota más cercana de la segunda ([`#L167-L224`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Atonal/SetClassOpticIndex.cs#L167-L224)), de modo que varias voces pueden llegar a la misma nota. El programa compila también ese archivo y lo compara con la distancia uno a uno sobre las mismas formas primas:
+
+```text
+== Set classes of the same size: GA's SetClassOpticIndex sums each note's nearest neighbour
+set classes      course GA     check
+(012) -> (048)   6      2      DIFF
+(048) -> (012)   6      6      ok
+  12 trichord classes, 144 ordered pairs:
+  GA below the one-to-one minimum: 35
+  GA above it: 0
+  GA's answer changes when the two are swapped: 70
+```
+
+Las tres notas del cluster (012) se apiñan alrededor de una nota de la tríada aumentada, 2 semitonos en total; uno a uno, dos de ellas tienen que recorrer 3 semitonos cada una. El comentario de la clase cita además el artículo de Callender, Quinn y Tymoczko como publicado en *Music Theory Online* 14(3), con un enlace que acaba en la página de error de esa revista ([`#L15-L18`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Atonal/SetClassOpticIndex.cs#L15-L18)); el artículo apareció en *Science*.
+
+Ninguna de las dos clases decide nada en GA todavía. En el commit `a826864`, a `VoiceLeadingSpace` solo la llaman sus pruebas, y a `SetClassOpticIndex`, `ShapeGraphBuilder`, solo cuando `VoiceLeadingWeight` es mayor que cero ([`ShapeGraphBuilder.cs#L233-L260`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Shapes/ShapeGraphBuilder.cs#L233-L260)), y su valor por defecto es 0 ([`ShapeGraphBuildOptions.cs#L44`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Shapes/ShapeGraphBuildOptions.cs#L44)). GA tiene, pues, cuatro respuestas a «¿a qué distancia está G de C?»: 3 semitonos para el chatbot, que trabaja con clases de altura; 28 para la herramienta MCP con las formas abiertas; 0 para `VoiceLeadingSpace` bajo T, porque las dos son tríadas mayores; y 0 para `SetClassOpticIndex`, que compara sus clases de conjuntos. Cada una responde a una pregunta distinta. Solo las dos primeras llegan a un usuario, y las dos tienen los defectos mostrados arriba.
+
+## Ejercicios
+
+1. ¿Qué notas comparten F y Dm, y qué papel tiene cada una en los dos acordes?
+2. ¿Cuál es la conducción de voces más pequeña de Am a F?
+3. Sube el acorde de A con cejilla (`577655`) dos trastes, a B. ¿Qué pares de cuerdas se mueven en quintas paralelas, y cuáles en octavas paralelas?
+4. ¿A qué distancia está C mayor de E♭ mayor bajo OP, y bajo OPT?
+
+<details>
+<summary>Soluciones</summary>
+
+1. F y A. F es la fundamental de F y la tercera menor de Dm; A es la tercera mayor de F y la quinta de Dm. Las fundamentales están a una tercera, así que las tríadas comparten dos notas.
+2. Un semitono: A y C se quedan, E sube a F. A menor y F mayor están a una tercera, como C y A menor.
+3. Las mismas siete que en el acorde de F con cejilla: quintas en las cuerdas 6-5, 6-2 y 4-2, octavas en 6-4, 6-1, 4-1 y 5-2. Decide la forma, no el traste.
+4. 3 bajo OP: G se queda, E baja a E♭, C baja a B♭. 0 bajo OPT: las dos son tríadas mayores.
+
+```text
+== Exercise solutions
+question             course       GA           check
+1. F Dm              5 9          5 9          ok
+  F: P1 in F, m3 in Dm; A: M3 in F, P5 in Dm
+2. Am F              1            1            ok
+  A->A 0, C->C 0, E->F +1
+3. A -> B barre      5ths 4-2 6-2 6-5; 8ves 4-1 5-2 6-1 6-4 5ths 4-2 6-2 6-5; 8ves 4-1 5-2 6-1 6-4 ok
+4. C Eb, OP OPT      3 0          3 0          ok
+```
+
+</details>
+
+## Puntos clave
+
+- Una nota común es el movimiento más pequeño. Las tríadas cuyas fundamentales están a una tercera comparten dos notas, a una quinta una, a una segunda ninguna; en ii–V–I, la tercera de cada acorde se convierte en la séptima del siguiente.
+- El tamaño de una conducción de voces es la suma de los semitonos que recorre cada voz, por el camino más corto. Entre acordes de tamaños distintos, importa qué nota se duplica: duplicar siempre la fundamental se aleja del mínimo en el 43,8 % de los pares tríada–séptima.
+- Con voicings reales, las octavas cuentan. Emparejar las notas en orden es óptimo cuando los dos voicings tienen las mismas notas en número; la herramienta MCP de GA empareja desde abajo cuando no es así, y cobra demasiado por un bajo quitado o añadido.
+- El analizador de quintas paralelas de GA sigue la regla de los manuales, cuerda por cuerda. Las formas con cejilla y los power chords rompen la regla por construcción, y el rock no les pide que la sigan.
+- El atajo de `VoiceLeadingSpace` es correcto, pero sin equivalencia de octava su transposición solo desplaza hacia arriba, así que la distancia cambia con el orden; `SetClassOpticIndex` deja que varias voces compartan una nota, así que su distancia cambia con el orden. El núcleo de GA encuentra bien las notas comunes; la closure de F# detrás de `ga_common_tones` perdía notas en el commit `a826864`.
+
+## Fuentes
+
+- Mark Gotham et al., [*Open Music Theory*](https://viva.pressbooks.pub/openmusictheory/), versión 2, 2023, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/): capítulos [Jazz Voicings](https://viva.pressbooks.pub/openmusictheory/chapter/jazz-voicings/) y [First-Species Counterpoint](https://viva.pressbooks.pub/openmusictheory/chapter/first-species-counterpoint/).
+- Dmitri Tymoczko, "The Geometry of Musical Chords", *Science* 313, 2006, [doi:10.1126/science.1126287](https://doi.org/10.1126/science.1126287); *A Geometry of Music*, Oxford University Press, 2011.
+- Clifton Callender, Ian Quinn y Dmitri Tymoczko, "Generalized Voice-Leading Spaces", *Science* 320, 2008, [doi:10.1126/science.1153021](https://doi.org/10.1126/science.1153021).
+- Wikipedia: [Voice leading](https://en.wikipedia.org/wiki/Voice_leading), [Consecutive fifths](https://en.wikipedia.org/wiki/Consecutive_fifths).
+- GuitarAlchemist/ga en el commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6): `Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs`, `Common/GA.Business.ML/Agents/Skills/VoiceLeadingSkill.cs`, `GaMcpServer/Tools/CompositionTools.cs`, `Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ProgressionVoiceLeadingAnalyzer.cs`, `Common/GA.Domain.Services/Atonal/VoiceLeadingSpace.cs`, `Common/GA.Domain.Services/Atonal/SetClassOpticIndex.cs`.

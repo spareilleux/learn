@@ -1,0 +1,88 @@
+---
+module_id: cs-011-preserve-absence-and-failure-boundaries
+department: computer-science
+course: "Preserve Absence and Failure Boundaries"
+level: intermediate
+prerequisites: ["cs-010-compose-fail-fast-ga-computations"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Preserve Absence and Failure Boundaries
+
+> **Draft scope.** Project-source experiment with synthetic inputs. Human subject, fluent-language and learner review remain pending; no release or public course readback is claimed.
+
+## Objectives and project question
+
+Distinguish a missing value, a present invalid value and an infrastructure exception; choose a conversion that retains the information needed to repair a GA workflow. **Project question:** how should a pipeline report “no artifact supplied” without confusing it with “an artifact was supplied but failed validation” or “the storage operation threw”?
+
+Use GA's pinned [GaAsync module](https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.DSL/Closures/GaAsync.fs). It defines `GaError` cases including `DomainError`, `IoError`, `AgentError` and `PartialFailure`, and provides `ofOption` and `fromAsync`. Its values use the standard [F# option type](https://learn.microsoft.com/dotnet/fsharp/language-reference/options) and [F# result type](https://learn.microsoft.com/dotnet/fsharp/language-reference/results). This is not an execution of GA's separate C# `Option` or `Try` implementations.
+
+## 1. Presence is not validity
+
+An option reports whether a value is present: `Some value` or `None`. `Some 0` is present even if a later domain rule rejects zero. In this fixture, `ofOption (DomainError "missing-note") (Some 0)` produces `Ok 0`; passing it through a validation function requiring a positive integer produces `Error (DomainError "nonpositive-note")`. The error names different corrective actions: provide the missing input, or repair the supplied input.
+
+The numeric rule is a teaching choice, not a music-theory rule. Zero can be meaningful in a pitch-class representation. Before adopting a validator in GA, identify the actual domain representation and accepted range. This fixture intentionally uses integers so the conversion can be inspected independently of a music parser.
+
+### Practice exercise 1
+
+For the supplied fixture rule “integer must be positive,” classify `None`, `Some 0` and `Some 5` after optional promotion and validation. Why would classifying every zero as “missing” lose information?
+
+> **Answer:** `None` becomes `DomainError "missing-note"`; `Some 0` becomes `DomainError "nonpositive-note"` after validation; `Some 5` succeeds with 5. Calling zero missing conflates a supplied value with no supplied value and can send the operator to the wrong repair. It also imports the fixture's rule into representations where zero may be valid.
+
+## 2. State the error when promoting absence
+
+The pinned `ofOption` accepts an error argument and an option. It maps `Some x` to `Ok x` and uses the supplied error for `None`. The option itself did not contain a reason. The conversion therefore introduces context chosen by the caller; it cannot recover an original failure that was previously discarded.
+
+At a proposed artifact lookup boundary, an absent artifact might become `DomainError "missing-artifact"`. That is a teaching example, not evidence that this module reads a filesystem or an agent inbox. A lookup that can fail through access denial or transport loss needs a richer result before optional conversion, or it risks hiding the reason for failure.
+
+### Practice exercise 2
+
+Two lookups return `None`: one means no configured artifact and the other was produced by discarding a transport error. Can `ofOption` infer which occurred? What should the boundary retain?
+
+> **Answer:** No. It sees only `None` and the error supplied by its caller. Retain a result or another explicit status that distinguishes absence from transport failure before discarding that detail. Naming every `None` “missing” would conceal the transport problem.
+
+## 3. Measure a lossy projection
+
+The runner converts `Error "missing-note"` and `Error "invalid-pitch"` to standard F# options with `Result.toOption`. Its recorded observation is `[None; None]`. The two distinct causes now have the same representation. This is a concrete many-to-one mapping: a later consumer cannot reconstruct which message existed from `None` alone.
+
+Such a projection can be appropriate when the consumer truly needs only presence. It is unsuitable for a repair queue whose next action depends on the cause. Keeping every diagnostic indefinitely also has a cost; retain the information required by the consumer's contract rather than treating maximum logging as a universal rule.
+
+### Practice exercise 3
+
+A retry worker sees only the projected `None` from either error. Can it safely decide to retry network transport? Give a simpler correct interface for that decision.
+
+> **Answer:** It cannot infer a transport failure or retryability from that option. Keep the original error category and relevant evidence in a result, then let an explicit retry policy inspect it. A Boolean retry decision could also be supplied by an upstream policy, provided its scope and evidence remain available for audit.
+
+## 4. Convert an exception at a named boundary
+
+GA's `fromAsync` awaits an asynchronous computation in a `try` block and converts a caught exception into `GaError.IoError`, retaining its message and `Some ex`. The lab deliberately raises `System.IO.IOException` with message `"fixture-io"` inside that boundary. The observed error retains both the message and exception type. No disk failure is induced; this is an intentional exception fixture.
+
+The case name does not prove the cause was I/O. A different exception caught by this broad wrapper also receives the `IoError` case. The caller must choose the boundary honestly and inspect the retained cause. This experiment makes no cancellation-safety claim: cancellation delivery and exception handling require their own contract and tests.
+
+### Practice exercise 4
+
+If a programming exception from a calculation is wrapped by `fromAsync`, does the resulting `IoError` prove that storage is broken? Which part of the returned value could help distinguish the cause?
+
+> **Answer:** No. The wrapper assigns that case to caught exceptions regardless of the operation's real origin. The retained exception and message can help investigate the cause. Avoid claiming a storage diagnosis from the union-case name alone.
+
+### Practice exercise 5
+
+An agent proposes converting every failure to `None` before handing work to a repair agent, saying that a smaller message is always better. State a falsifier and a minimal comparison using this fixture.
+
+> **Answer:** Compare the repair decisions for `missing-note` and `invalid-pitch` while both causes are known, then repeat after projection to `[None; None]`. If the second interface cannot select the two required repairs without another lookup, the claim that it preserves enough information is falsified. Measure message size and extra lookups against a result carrying the needed category; smaller payload alone does not establish a better workflow.
+
+## Reproduce the project experiment
+
+Use the [shared teaching lab](../../../../code/streeling/functional-composition/README.md), which loads an unchanged copy of GA's pinned module and retains its MIT license. [F# Interactive](https://learn.microsoft.com/dotnet/fsharp/tools/fsharp-interactive/) executes the lab with no NuGet package references. From the Learn repository root, the same command spelling applies on Windows, Linux/WSL and macOS:
+
+```text
+dotnet fsi --exec code/streeling/functional-composition/exercise.fsx
+```
+
+The author observed SDK `10.0.113` on Windows, exit code 0, no compiler warnings, and 24 passing assertions. Other operating systems remain to verify. The [experiment record](../../../../code/streeling/evidence/functional-composition-2026-10-22/README.md) separates input provenance, execution and review. These are synthetic inputs executed by the actual pinned module, not captured GA application traffic. Read the learner packet before opening the runner, which contains the answers.
+
+## Evidence and next check
+
+The immutable GA module and its existing tests establish the source case study; the lab's captured observations establish only its executed inputs. Do not count an AI static review as human approval. A reviewer should check the claims against the pinned source, then a learner should attempt the separate source-assisted packet before consulting the answers. Integration, deployment and anonymous public readback remain separate steps.

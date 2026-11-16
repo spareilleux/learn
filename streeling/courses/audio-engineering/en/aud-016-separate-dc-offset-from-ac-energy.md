@@ -1,0 +1,142 @@
+---
+module_id: aud-016-separate-dc-offset-from-ac-energy
+department: audio-engineering
+course: "Separate DC Offset from AC Energy"
+level: advanced
+prerequisites: ["aud-005-pcm-guards-and-format-boundaries"]
+estimated_duration: "60 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Separate DC Offset from AC Energy
+
+> Authored model and source reading. Human technical, fluent-language, musician and learner decisions remain pending. No new performance, listening, parser execution, engine render or production adoption is claimed.
+
+A guitar buffer can pass every sample guard and still carry an offset. If a comparison matches total RMS, the offset can make identical alternating components appear to have different levels. This lesson decomposes a finite record before choosing a gain. The operation helps review the retained [GA](https://github.com/GuitarAlchemist/ga) runner, whose RMS function squares samples without first removing their mean.
+
+## Read the retained evidence
+
+Read the runner’s sample guard and RMS accumulation. They establish its arithmetic at the pinned revision. They do not say that every future buffer has zero mean. The following sequence is authored; it is not newly rendered audio.
+
+[Prerequisite](../../audio-engineering/en/aud-005-pcm-guards-and-format-boundaries.md)
+
+[Retained project artifact](../../../../code/streeling/guitar-runtime/run.mjs)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-25/unit-a.json)
+
+## Fixed case and prepared quantities
+
+```json
+{
+  "values": {
+    "samples": [
+      0,
+      1,
+      0,
+      1
+    ]
+  },
+  "formula": "mean=sum(x)/N; ac_i=x_i-mean; total_ms=sum(x_i^2)/N; ac_ms=sum(ac_i^2)/N; total_ms=mean^2+ac_ms",
+  "expected": {
+    "mean": 0.5,
+    "ac_samples": [
+      -0.5,
+      0.5,
+      -0.5,
+      0.5
+    ],
+    "total_ms": 0.5,
+    "ac_ms": 0.25,
+    "total_rms": 0.7071067811865476,
+    "ac_rms": 0.5
+  },
+  "negative_control": {
+    "values": {
+      "samples": [
+        -0.5,
+        0.5,
+        -0.5,
+        0.5
+      ]
+    },
+    "expected": {
+      "mean": 0,
+      "ac_samples": [
+        -0.5,
+        0.5,
+        -0.5,
+        0.5
+      ],
+      "total_ms": 0.25,
+      "ac_ms": 0.25,
+      "total_rms": 0.5,
+      "ac_rms": 0.5
+    }
+  }
+}
+```
+
+## Choose the quantity before changing the signal
+
+The mean is computed over the selected record, so even a genuinely alternating signal can have a nonzero finite-window mean when the window cuts its cycle unevenly. Calling that value a hardware defect would require additional evidence. In this lesson it is simply the constant coordinate of the retained samples. Centering answers a descriptive question about those samples and should be recorded as a transformation, with the untouched input kept alongside it.
+
+The decomposition follows directly by expanding each sample as its mean plus its centered remainder. The average of the remainder is zero, so the cross term disappears when averaged. This explains why the identity belongs to squared quantities. It also shows why a sample-by-sample subtraction can reduce measured energy even though the alternating waveform is unchanged. A gain chosen from the original total RMS would change that alternating waveform afterward.
+
+For a source review, use a table with the original sample, mean, centered value and squared contributions. That direct calculation is enough to challenge a misleading level report. A new analysis node or agent is useful only if it retains the support and transformation history at least as clearly. Before processing actual audio, decide whether the experiment asks about the original buffer, its centered component or a specified filter output; those are different retained artifacts.
+
+### Exercise 1
+
+Calculate the mean and the centered sequence. Why must the record support be retained?
+
+<details><summary>Answer 1</summary>
+
+The main mean and AC sequence are listed above. Changing the support changes the mean, so a filename or a peak guard cannot supply this calculation.
+
+</details>
+
+### Exercise 2
+
+Decompose mean square into constant and alternating contributions. Is this a subtraction of RMS amplitudes?
+
+<details><summary>Answer 2</summary>
+
+Use the displayed identity for mean squares. The cross term vanishes because the centered sequence sums to zero. Subtracting RMS amplitudes would give a different result.
+
+</details>
+
+### Exercise 3
+
+Compare total RMS and AC RMS in the main case. Which one measures the centered component?
+
+<details><summary>Answer 3</summary>
+
+AC RMS measures the centered component. Total RMS also includes the constant contribution; equal total RMS therefore need not mean equal alternating energy.
+
+</details>
+
+### Exercise 4
+
+Apply the control. Which component changed, and which comparison is preserved?
+
+<details><summary>Answer 4</summary>
+
+The mean becomes zero, while the centered samples and their RMS stay unchanged. A comparison that reports an AC difference for these exact sequences has mixed up its quantities.
+
+</details>
+
+### Exercise 5
+
+Can subtracting this mean certify the streaming chain or the listening result?
+
+<details><summary>Answer 5</summary>
+
+No. Record centering can change boundaries and does not establish a filter’s transient response. A listening judgment and a streaming implementation need their own observations.
+
+</details>
+
+## Source-assisted learner task
+
+Write a level-comparison note for the runner. Compute both decompositions by hand, then identify the accumulation expression. State whether a proposed gain targets total or AC RMS. Reject a report that changes its denominator or silently centers only one input.
+
+First retain your unaided derivation before revealing the answers. Then inspect a specific source passage and its revision, record every kind of assistance, and keep the original and corrected responses separately. Use the direct manual result as the baseline for any calculator, DSL or agent proposal. Missing inputs stay unresolved. The fixed packet holds a prepared criterion for each exercise with no learner decision. A correct model answer supports only the declared case; acceptance needs an actual attempt and review. Record a falsifier before choosing an abstraction, then state the additional runtime or human evidence needed at the next boundary.

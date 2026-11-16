@@ -1,0 +1,162 @@
+{
+  "PHY016": {
+    "novelty": "PHY013 computes torque about a reporting pivot; PHY016 instead follows a rigid planar point, separates endpoint chord from circular path, and refuses to infer swept-volume clearance from radial difference. The zero-angle control distinguishes retained radius from displacement.",
+    "ex": [
+      "r(cos60,sin60) gives (50,50sqrt3)mm; neither endpoint coordinate is retained, while the hinge and radius are fixed.",
+      "The Euclidean distance from (100,0) to the final point is100mm. Equality with the radius is specific to60degrees, not arc length or material strain.",
+      "100-90=10mm compares radii; obstacle angular extent and occupied volume remain absent, so positive margin proves no motion clearance.",
+      "At0degrees the endpoint is(100,0)mm and its chord displacement0; radius remains100mm in both cases.",
+      "A clearance test needs complete angle interval, panel/obstacle geometry and contact convention; a marked point and endpoints do not constitute a collision experiment."
+    ]
+  },
+  "PHY017": {
+    "novelty": "PHY015 bounds static occupied intervals and clearance. PHY017 introduces constant-coefficient free thermal expansion, reference temperature and growth toward a fixed stop, without assigning physical alloy properties from appearance.",
+    "ex": [
+      "200mm times2e-5/K times50K equals0.2mm. K cancels; the invented coefficient is not inferred from a shader.",
+      "0.3-0.2=0.1mm remains; this is a conditional separation in the linear free-growth model only.",
+      "100K gives0.4mm growth and-0.1mm gap; overlap in the unconstrained geometry does not calculate restrained stress.",
+      "Atlas metallic/roughness appearance inputs do not determine alloy, expansion coefficient, temperature law or restraint.",
+      "Measured disagreement outside a declared allowance or failure of fixed-stop/uniform-temperature/free-growth premises can reject transfer. No such trial or certification is asserted."
+    ]
+  },
+  "PHY018": {
+    "novelty": "PHY013 distinguishes moments about pivots. PHY018 adds mass-weighted spatial projection and a signed support-edge margin, separating component mass from object origin and mesh sampling.",
+    "ex": [
+      "Total mass is3kg and weighted coordinate(2*0+1*0.3)/3=0.1m; the mass at origin remains in the denominator.",
+      "min(0.1-(-0.12),0.12-0.1)=0.02m; strictly interior projection gives positive authored margin, not a safety factor.",
+      "Moving the1kg component to0.6m yields0.2m center and-0.08m nearest margin, with unchanged total mass/support.",
+      "Vertex-count weighting follows tessellation; masses or density-volume integration are needed for a mass interpretation.",
+      "Only the1D rigid static section is modeled. Dynamic response, sliding, joints, deformation and manufacturing remain untested."
+    ]
+  },
+  "VC014": {
+    "novelty": "VC005 proposes asset preservation/capture trials. VC014 adds a declared pinhole projection with matched vertical FOV and viewport height, giving a geometric pixel-width criterion rather than a recognition or upscaler result.",
+    "ex": [
+      "1000/(2tan45degrees)=500px; vertical FOV must use vertical viewport size.",
+      "500px*0.002m/1m=1px, below the authored2px requirement; failing that criterion is not measured invisibility.",
+      "Distance0.5m gives2px and meets the same criterion with unchanged geometry.",
+      "Orthographic projection uses view-size mapping, not the perspective inverse-depth factor. Godot4.5 documents the distinction.",
+      "Threshold satisfaction supplies no observer or DLSS test. Contrast, sampling, motion and recognition require actual separate observations."
+    ]
+  },
+  "VC015": {
+    "novelty": "VC005 describes triangle budgets and semantic detail loss. VC015 adds an analytic maximum radial chord-error criterion for a regular inscribed circular profile, separate from global triangle count.",
+    "ex": [
+      "100(1-cos(pi/12))=3.407417371093169mm exceeds1mm at chord midpoint.",
+      "2*12*100*sin(pi/12)=621.1657082460498mm; perimeter closeness does not bound the defined maximum radial gap.",
+      "24segments give0.8555138626189618mm sagitta and626.5257226562476mm perimeter; only this construction meets tolerance.",
+      "Triangle count alone does not constrain feature positions or local silhouette approximation.",
+      "A noncircular transfer must retain reference profile, units, feature identity, defined analytic/sampled error and tolerance; no arbitrary-curvature guarantee follows."
+    ]
+  },
+  "VC016": {
+    "novelty": "VC010 traces packed channel meanings. VC016 adds spatial atlas separation across ideal mip levels and explicitly distinguishes total gutter from per-island padding.",
+    "ex": [
+      "16/2^3=2px equals the2px threshold, passing the authored >= comparison with no reserve.",
+      "Level4 gives16/16=1px and fails; the unchanged base atlas has different level-specific margin results.",
+      "Filters, compression, derivatives, wrap and image content are omitted, so ideal distance does not certify absent bleeding.",
+      "Total inter-island gutter and padding for each island are different spatial definitions; a shared number needs its definition.",
+      "Correct channel decoding cannot prevent pulling values from the wrong island; channel and spatial contracts both matter."
+    ]
+  },
+  "DV014": {
+    "novelty": "DV006 teaches shared scales and encoding geometry. DV014 adds signed clearance with contact as an interpretive boundary and an equal-magnitude changed-sign witness that aggregation loses.",
+    "ex": [
+      "The four rows contain one negative, one zero and two positive values under the declared overlap/contact/separation convention.",
+      "Minimum-0.4mm exposes overlap while(0.4+0+0.2+0.8)/4=0.35mm absolute mean loses side.",
+      "Changing-0.4to+0.4 gives minimum0 and zero overlaps but the same0.35mm magnitude mean.",
+      "Identified signed positions, labeled zero/contact, exact values and text states carry meaning without relying solely on color.",
+      "A nonnegative minimum in four stipulated static rows does not address full geometry, motion, tolerances or unobserved crossings."
+    ]
+  },
+  "DV015": {
+    "novelty": "DV010 separates unavailable/invalid pitch rows and metric denominators. DV015 adds a spatial row-major observation mask and refuses to infer material connectivity or holes between sampled sites.",
+    "ex": [
+      "Identity-based booleans yield3present,2observed absent,1null;5observed of6grid sites.",
+      "2/5=0.4 describes observed sites only, not every site of a real textile.",
+      "Replacing null byfalse changes observed to6, absent to3, missing to0 and fraction to3/6=0.5; the added absence is invented.",
+      "Observed absence and unobserved location need separate marks/text; background transparency alone cannot encode both meanings.",
+      "Discrete site labels do not identify intervening material or continuous tear topology."
+    ]
+  },
+  "DV016": {
+    "novelty": "DV006 compares shared-scale quantities. DV016 adds identity-preserving paired changes and a reassignment control where aggregates remain equal but individual view changes differ.",
+    "ex": [
+      "After-before in front/side/back order is[2,-5,2]px; front/back worsen and side improves.",
+      "Sum changes=-1 gives-1/3px mean; maxima8px and4px coexist with worsening views.",
+      "Reassigned after[3,4,4] gives[1,-4,2]px while mean and maxima are retained; camera pairing is consequential data.",
+      "Separately sorting values connects order statistics rather than matched camera identities.",
+      "One geometric residual cannot establish overall artistic fidelity, material/lighting quality or semantic preservation."
+    ]
+  },
+  "SEM012": {
+    "novelty": "SEM006 distinguishes side identity, frame and orientation. SEM012 adds action-order semantics using explicit rotation/translation composition and an agreement control.",
+    "ex": [
+      "T(1,0)=(2,0) then exact quarter turn gives(0,2)mm.",
+      "R(1,0)=(0,1) then fixed-frame offset gives(1,1)mm; order changes denotation.",
+      "Zero translation yields(0,1)mm in both orders; the special agreement does not prove universal commutation.",
+      "Order, units, origin, offset frame and composition convention are needed to interpret action words.",
+      "The nonzero-offset witness rejects unconditional optimizer reordering. A special matched preview is not an equivalence proof."
+    ]
+  },
+  "SEM013": {
+    "novelty": "SEM008 interprets crossing order relative to normals and roles. SEM013 adds joint preservation of two discrete periodic phases under integer translation, rather than reusing one crossing-order predicate.",
+    "ex": [
+      "Shift6 has remainders[0,0] modulo[2,3], preserving both zero phases.",
+      "The least positive shared period is lcm(2,3)=6cells under the stated phases.",
+      "Shift3 has remainders[1,0], preserving only the marker cycle, so joint compatibility is false.",
+      "Periods omit origins/phase offsets, directions and joining transformation; zero phases and translation-only are explicit assumptions.",
+      "Discrete modular agreement certifies no physical seamless fabric, thickness, sampling or material continuity."
+    ]
+  },
+  "SEM014": {
+    "novelty": "SEM011 separates token spelling from versioned meaning. SEM014 defines a specific right-biased finite partial-map algebra, its noncommutation witness, and disjoint-key control, while distinguishing host resource override.",
+    "ex": [
+      "Applying A thenB retains metallic1 and final roughness0.6 because the later conflicting field wins.",
+      "Reversing changes roughness to0.3 while metallic stays1; both orders are defined but differ.",
+      "With B containing onlymetallic, both orders give roughness0.3/metallic1; disjoint key sets permit the swap.",
+      "Godot4.5 resource precedence/overlay does not implement an arbitrary per-field merge. The lesson labels its algebra authored.",
+      "Patch IDs, fields, order, base identity and host mapping preserve provenance that final appearance cannot reconstruct."
+    ]
+  },
+  "PHI010": {
+    "novelty": "PHI008 distinguishes oracle acceptance from specification satisfaction. PHI010 constructs a concrete noninjective observation witness: equal projected coordinates coexist with different depth-requirement outcomes.",
+    "ex": [
+      "Dropping depth gives[0,0] for both distinct main candidates.",
+      "Depth equals0 for A and not B; identical observations therefore do not identify this requirement.",
+      "Control B=(1,0,1) changes the observed coordinate to[1,0] while retaining depth failure.",
+      "Retaining depth distinguishes this pair, without proving all properties of arbitrary sculptures identifiable.",
+      "Agreement is bounded by the declared projection/comparison; hidden surfaces, material and craft process need independent evidence."
+    ]
+  },
+  "PHI011": {
+    "novelty": "PHI007 constructs causal countermodels and hypothetical allocation contrasts. PHI011 adds a complete mesh-by-lighting table with matched contrasts, explicit difference-of-differences and a control where improvement changes sign.",
+    "ex": [
+      "4-6=-2 and8-10=-2 residual units under matched lighting; lower is preferred in this invented table.",
+      "8-6=+2 diagonal changes both factors and cannot isolate mesh attribution.",
+      "The average matched difference is-2 and defined interaction(-2)-(-2)=0; equality refers to mesh contrasts across lighting, not average versus interaction.",
+      "Control new_lit12 gives matched differences-2,+2, average0, interaction4 and diagonal6; a universal lighting-independent benefit fails.",
+      "Invented deterministic cells are not measured renders or a causal cleanup trial. Real controls and observations remain absent."
+    ]
+  },
+  "FUT010": {
+    "novelty": "FUT007 probes generalization outside a finite weave preview. FUT010 instead derives conditional pairwise-versus-strand inventory scaling for a complete rectangular weave, separating capacity from counts.",
+    "ex": [
+      "6warp*4weft=24crossings;6+4=10strands. Pair identities are not additional strands.",
+      "Doubling both gives12*8=96crossings and20strands, ratios4 and2 respectively.",
+      "Doubling warp only gives12*4=48crossings and16strands, ratios2 and1.6; two-direction quadratic scaling does not transfer unchanged.",
+      "Inventory multiplication alone cannot predict frame time, batching, culling, material/query work or fixed overhead.",
+      "Missing/repeated/excluded pairs falsify the exactly-one-crossing-per-pair complete-grid assumption before capacity use."
+    ]
+  },
+  "FUT011": {
+    "novelty": "Actual CYB005 already teaches point hysteresis/persistence/dwell and memoryless switch-count comparisons; FUT005 values hypothetical information. Final FUT011 credits that baseline and adds genuinely distinct conservative whole-interval policy and propagation of every exact-width reachable state across independent closed feasible intervals. VC014 is an optional same-batch companion, not older prerequisite evidence. Final supplied point values are admissible and explicitly not necessarily interval centers.",
+    "ex": [
+      "Final exercise uses the supplied admissible points, not interval midpoints. Point states TTTTFFT/3switches and TFTFFFT/5switches reproduce the credited CYB005 baseline. Actual interval centers instead give7true/1switch under separate thresholds.",
+      "Conservative lower>=entry and upper<exit giveFFFFFFT/1switch, including initial false->true. Sample7 lower2.4 meets entry; first interval straddles it.",
+      "Full propagation unions outcomes over all prior states: both false/true survive samples1-6; onlytrue survives sample7. Independent feasible intervals permit the branches; a conservative state alone would lose them.",
+      "At coincident2px thresholds the conservative sequenceTTTFFFT has3switches; reachable sets areT,FT,T,F,F,F,T. Closed upper2 at sample2 preserves true because exit is strict.",
+      "Neither point agreement, fewer conservative switches nor fewer feasible states validates the policy. The intervals are authored sets, not calibrated confidence; runtime mapping, valid coverage, recognition and cost remain untested."
+    ]
+  }
+}

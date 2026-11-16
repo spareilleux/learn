@@ -1,0 +1,173 @@
+{
+  "scope": "Constructed guide-tone phrase with labeled registered voices and sum absolute semitone motion. No O/P/T/I reduction, physical cost, GA-generated candidates or GA Viterbi execution.",
+  "provenance": {
+    "analysis_kind": "Temporary Python standard-library calculation on explicitly constructed fixtures; not GA algorithm execution.",
+    "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "win32",
+    "plan_sha256": "60d1dbdb304e6b76f8d51b56389cb378aa5fd3f65182f975b1801a6e50573db5",
+    "checked_at_utc": "2026-10-22T16:23:57.880592+00:00"
+  },
+  "note_convention": "C4=60",
+  "states": {
+    "start_Cmaj7": [
+      52,
+      59
+    ],
+    "Dm7": [
+      53,
+      60
+    ],
+    "G7_low": [
+      53,
+      59
+    ],
+    "G7_high": [
+      59,
+      65
+    ]
+  },
+  "dp_prefix_costs": {
+    "start": 0,
+    "Dm7": 2,
+    "G7_low": 3,
+    "G7_high": 13
+  },
+  "cases": [
+    {
+      "endpoint_id": "required_high",
+      "endpoint": [
+        64,
+        71
+      ],
+      "paths": [
+        {
+          "g7": "low",
+          "states": [
+            [
+              52,
+              59
+            ],
+            [
+              53,
+              60
+            ],
+            [
+              53,
+              59
+            ],
+            [
+              64,
+              71
+            ]
+          ],
+          "edge_costs": [
+            2,
+            1,
+            23
+          ],
+          "total": 26
+        },
+        {
+          "g7": "high",
+          "states": [
+            [
+              52,
+              59
+            ],
+            [
+              53,
+              60
+            ],
+            [
+              59,
+              65
+            ],
+            [
+              64,
+              71
+            ]
+          ],
+          "edge_costs": [
+            2,
+            11,
+            11
+          ],
+          "total": 24
+        }
+      ],
+      "greedy_g7": "low",
+      "greedy_total": 26,
+      "minimum_g7": "high",
+      "minimum_total": 24
+    },
+    {
+      "endpoint_id": "changed_low",
+      "endpoint": [
+        52,
+        59
+      ],
+      "paths": [
+        {
+          "g7": "low",
+          "states": [
+            [
+              52,
+              59
+            ],
+            [
+              53,
+              60
+            ],
+            [
+              53,
+              59
+            ],
+            [
+              52,
+              59
+            ]
+          ],
+          "edge_costs": [
+            2,
+            1,
+            1
+          ],
+          "total": 4
+        },
+        {
+          "g7": "high",
+          "states": [
+            [
+              52,
+              59
+            ],
+            [
+              53,
+              60
+            ],
+            [
+              59,
+              65
+            ],
+            [
+              52,
+              59
+            ]
+          ],
+          "edge_costs": [
+            2,
+            11,
+            13
+          ],
+          "total": 26
+        }
+      ],
+      "greedy_g7": "low",
+      "greedy_total": 4,
+      "minimum_g7": "low",
+      "minimum_total": 4
+    }
+  ],
+  "per_state_k1_keeps_both_g7_states": true,
+  "keep_one_state_overall_high_endpoint_cost": 26
+}

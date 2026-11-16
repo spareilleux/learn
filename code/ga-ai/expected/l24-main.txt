@@ -1,0 +1,191 @@
+# l24, GA's main
+
+== SetTheoryEquivalenceSkill's and GrothendieckParseSkill's example prompts, on main
+prompt                                                                   skill  its answer         the other's    routing hints, +0.06 each
+Are pitch classes 0,1,4 and 0,1,6 equivalent under inversion             sets   no, TI             declined       none
+Are pitch class sets 0,1,3 and 0,2,3 equivalent under transposition      sets   yes, TI            declined       skill.transpose
+Are 0,1,4 and 0,3,4 the same set class                                   sets   yes, TI            declined       none
+Do 0146 and 0137 belong to the same set class                            sets   no, TI             declined       none
+Are pitch classes 0,2,4 and 1,3,5 transpositionally equivalent           sets   declined           declined       skill.transpose
+parse C ⊗ G                                                              parse  TensorProduct      declined       skill.grothendieckparse
+what does Transpose(C ⊗ G) mean                                          parse  can't parse        declined       skill.grothendieckparse, skill.transpose
+parse Transpose ∘ Invert                                                 parse  ComposeFunctors    declined       skill.grothendieckparse, skill.transpose
+parse pullback(Cmaj7, Transpose, Gmaj7)                                  parse  Pullback           declined       skill.grothendieckparse, skill.transpose
+parse Cmaj7 + Gmaj7 + Fmaj7                                              parse  declined           declined       none
+parse functor Transpose: Chords -> Chords                                parse  DefineFunctor      declined       skill.transpose
+what is Hom(Cmaj7, Gmaj7)                                                parse  declined           declined       skill.grothendieckparse
+explain power(Cmaj7)                                                     parse  declined           declined       none
+parse equalizer Transpose Invert                                         parse  can't parse        declined       skill.transpose
+parse Cmaj7 ⊕ Gmaj7                                                      parse  DirectSum          declined       skill.grothendieckparse
+parse Transpose(Cmaj7)                                                   parse  declined           declined       skill.transpose
+SetTheoryEquivalenceSkill: anchors 5, answered 4, hinted toward skill.settheoryequivalence 0; the other skill answers 0 of them; CanHandle accepts 4
+GrothendieckParseSkill: anchors 10, answered 5, hinted toward skill.grothendieckparse 6; the other skill answers 0 of them; CanHandle accepts 0
+
+== The relation SetTheoryEquivalenceSkill reads, on main
+a pair's cell: the verdict, the relation it applies (T, I or TI), and "wrong" when the verdict
+is wrong for the relation the question names
+question                                                       asks 0,1,3 | 0,2,3        0,1,4 | 1,2,5        0,1,4,6 | 0,1,3,7    0,1,4 | 0,1,6
+                                                                    inversion only       transposition        Z-related            different
+are pitch classes {a} and {b} equivalent under transposition   T    yes, TI, wrong       yes, TI              no, TI               no, TI
+are pitch classes {a} and {b} equivalent under inversion       I    yes, TI              yes, TI              no, TI               no, TI
+are pitch classes {a} and {b} equivalent                       TI   yes, TI              yes, TI              no, TI               no, TI
+are {a} and {b} equivalent under transposition or inversion    TI   yes, TI              yes, TI              no, TI               no, TI
+are {a} and {b} the same set class under transposition         T    no, T                yes, T               no, T                no, T
+are {a} and {b} the same set class under inversion             I    yes, I               yes, I               no, I                no, I
+are {a} and {b} the same set class                             TI   yes, TI              yes, TI              no, TI               no, TI
+are {a} and {b} related by inversion                           I    yes, TI              yes, TI              no, TI               no, TI
+are {a} and {b} transpositionally equivalent                   T    declined             declined             declined             declined
+is {a} a transposition of {b}                                  T    declined             declined             declined             declined
+
+== Every ordered pair of three-note and of four-note sets, asked of SetTheoryEquivalenceSkill, on main
+question                                                     size  pairs   right   wrong  what the wrong ones are
+are pitch classes {a} and {b} equivalent under transposition 3     48400   46384   2016   yes for an inversion only 2016
+are {a} and {b} the same set class under transposition       3     48400   48400   0      none
+are {a} and {b} the same set class under inversion           3     48400   48400   0      none
+  "via either operation": said for 2608 pairs, of which no inversion maps the first set onto the second for 2016
+are {a} and {b} the same set class                           3     48400   48400   0      none
+  Z-related pairs: the answer says so for 0, the vectors give 0
+are pitch classes {a} and {b} equivalent under transposition 4     245025  240993  4032   yes for an inversion only 4032
+are {a} and {b} the same set class under transposition       4     245025  245025  0      none
+are {a} and {b} the same set class under inversion           4     245025  245025  0      none
+  "via either operation": said for 5841 pairs, of which no inversion maps the first set onto the second for 4032
+are {a} and {b} the same set class                           4     245025  245025  0      none
+  Z-related pairs: the answer says so for 1152, the vectors give 1152
+
+== The sets SetTheoryEquivalenceSkill reads, on main
+written    TryParseSet        in a question          the answer's set A and its prime form
+0,1,4      {0,1,4}            answered               `0,1,4` {0,1,4}
+0, 1, 4    {0,1,4}            answered               `0, 1, 4` {0,1,4}
+0 1 4      {0,1,4}            answered               `0 1 4` {0,1,4}
+014        {0,1,4}            answered               `014` {0,1,4}
+[0,1,4]    {0,1,4}            answered               `0,1,4` {0,1,4}
+{0,1,4}    {0,1,4}            answered               `0,1,4` {0,1,4}
+(0,1,4)    {0,1,4}            declined
+<0,1,4>    {0,1,4}            declined
+0-1-4      {0,1,4}            answered               `4` {0}
+0,1,10     {0,1,10}           answered               `0,1,10` {0,1,3}
+0,10,11    {0,10,11}          answered               `0,10,11` {0,1,2}
+0,1,t      {0,1}              declined
+0,1,T      {0,1}              declined
+0,1,A      {0,1}              declined
+0te        {0}                declined
+01t        {0,1}              declined
+0,1,12     (none)             can't parse
+0,4,7,4    {0,4,7}            answered               `0,4,7,4` {0,3,7}
+3-3        {3}                answered               `3` {0}
+C,E,G      (none)             declined
+
+== The prime forms SetTheoryEquivalenceSkill prints, on main
+sets 4096, distinct prime forms 224, sets whose 24 transpositions and inversions all give the same prime form 4096
+Forte labels CanonicalForteCatalog resolves 224; whose stored set differs from its PrimeForm 0; prime forms no label gives 0
+interval-class vectors shared by two prime forms of the same size (Z pairs) 23
+
+== The expressions GrothendieckParseSkill reads, on main
+expression                                       the comment's case   the parser gives     "parse <expression>" gets
+C ⊗ G                                            TensorProduct        TensorProduct        TensorProduct
+C tensor G                                       TensorProduct        fails                declined
+tensor(C, G)                                     TensorProduct        TensorProduct        declined
+C ⊕ G                                            DirectSum            DirectSum            DirectSum
+C direct_sum G                                   DirectSum            fails                declined
+direct_sum(C, G)                                 DirectSum            DirectSum            declined
+C × G                                            Product              Product              Product
+C product G                                      Product              fails                declined
+product(C, G, F)                                 Product              Product              declined
+C + G                                            Coproduct            Coproduct            declined
+C coproduct G                                    Coproduct            fails                can't parse
+coproduct(C, G, F)                               Coproduct            Coproduct            Coproduct
+C ^ G                                            Exponential          Exponential          declined
+exp(C, G)                                        Exponential          Exponential          declined
+functor Transpose: Chords -> Chords              DefineFunctor        DefineFunctor        DefineFunctor
+define functor Transpose { a -> invert }         DefineFunctor        fails                can't parse
+Invert(C)                                        ApplyFunctor         ApplyFunctor         declined
+apply Invert to C                                ApplyFunctor         fails                declined
+Transpose ∘ Invert                               ComposeFunctors      ComposeFunctors      ComposeFunctors
+Transpose compose Invert                         ComposeFunctors      fails                declined
+compose(Transpose, Invert)                       ComposeFunctors      fails                declined
+natural transformation eta: Transpose => Invert  DefineNatTrans       fails                can't parse
+define nat_trans eta { C -> invert }             DefineNatTrans       fails                declined
+eta(C)                                           ApplyNatTrans        ApplyFunctor         declined
+limit of {C, G}                                  Limit                fails                declined
+lim {C, G}                                       Limit                fails                declined
+pullback(C, invert, G)                           Pullback             Pullback             Pullback
+pullback(C, transpose 7, G)                      Pullback             fails                can't parse
+C pullback invert                                Pullback             Pullback             Pullback
+equalizer(invert, reflect)                       Equalizer            fails                can't parse
+eq(invert, reflect)                              Equalizer            fails                declined
+colimit of {C, G}                                Colimit              fails                declined
+colim {C, G}                                     Colimit              fails                declined
+pushout(C, invert, G)                            Pushout              Pushout              Pushout
+C pushout invert                                 Pushout              Pushout              Pushout
+coequalizer(invert, reflect)                     Coequalizer          fails                can't parse
+coeq(invert, reflect)                            Coequalizer          fails                declined
+Ω                                                SubobjectClassifier  SubobjectClassifier  declined
+Ω(C)                                             SubobjectClassifier  ApplyFunctor         declined
+truth_value of C                                 SubobjectClassifier  fails                declined
+P(C)                                             PowerObject          ApplyFunctor         declined
+power(C)                                         PowerObject          ApplyFunctor         declined
+subobjects of C                                  PowerObject          fails                declined
+Hom(C, G)                                        InternalHom          InternalHom          InternalHom
+C => G                                           InternalHom          InternalHom          declined
+sheaf S on fretboard                             DefineSheaf          DefineSheaf          DefineSheaf
+define sheaf S { U -> C }                        DefineSheaf          fails                can't parse
+S | U                                            SheafRestriction     fails                declined
+restrict S to U                                  SheafRestriction     fails                declined
+glue { C, G }                                    SheafGluing          fails                declined
+the operation's cases 22; forms 50, parsed 25, of which as their comment says 21; "parse <expression>" answered for 12
+cases no form reaches through the parser: ApplyNatTrans, Coequalizer, Colimit, DefineNatTrans, Equalizer, Limit, PowerObject, SheafGluing, SheafRestriction
+cases no form reaches through the skill: ApplyFunctor, ApplyNatTrans, Coequalizer, Colimit, DefineNatTrans, Equalizer, Exponential, Limit, PowerObject, SheafGluing, SheafRestriction, SubobjectClassifier
+written without spaces: S|U SheafRestriction, eq(invert,reflect) Equalizer, equalizer((invert,reflect) Equalizer, coeq(invert,reflect) Coequalizer
+two operators in a row: C + G + F fails, C ⊗ G ⊗ F fails, Cmaj7 ⊕ Gmaj7 ⊕ Fmaj7 fails
+
+== The chords GA's Grothendieck parser reads, on main
+written      what "<written> ⊗ G" parses into, on the left of ⊗
+C            chord C Major
+Bb           chord Bb Major
+F#           chord F# Major
+Am           fails
+Cm           fails
+G7           fails
+C7           fails
+Dm7          fails
+Cmaj7        chord C Major7
+CM7          fails
+Cmin7        chord C Minor7
+Cdom7        chord C Dominant7
+Cmaj         chord C Major
+Cmin         chord C Minor
+Cdim         chord C Diminished
+Cdim7        chord C Diminished7
+C°           fails
+Caug         chord C Augmented
+C+           fails
+Csus4        chord C Sus4
+Cadd9        chord C Add9
+C6/9         chord C Custom "6/9"
+Cm7b5        fails
+Gmaj9        chord G Major9
+C major      scale C major
+PC{0,4,7}    set class [0,4,7]
+"parse C ⊗ G" and "parse F# ⊗ Bb" give the same answer apart from the expression they repeat: yes
+
+== The questions GrothendieckParseSkill reads, on main
+question                                 the skill says       the expression it parses
+parse C ⊗ G                              TensorProduct        C ⊗ G
+Parse: C ⊗ G                             can't parse          Parse: C ⊗ G
+please parse C ⊗ G                       can't parse          please parse C ⊗ G
+can you parse C ⊗ G                      can't parse          can you parse C ⊗ G
+parse C ⊗ G please                       can't parse          C ⊗ G please
+what does C ⊗ G mean?                    TensorProduct        C ⊗ G
+explain C ⊗ G                            TensorProduct        C ⊗ G
+interpret Cmaj7 ⊕ Gmaj7                  DirectSum            Cmaj7 ⊕ Gmaj7
+meaning of C ⊗ G                         TensorProduct        C ⊗ G
+parse Am ⊗ G7                            can't parse          Am ⊗ G7
+parse Dm7 ⊕ G7                           can't parse          Dm7 ⊕ G7
+parse C + G                              declined
+parse C × G                              Product              C × G
+parse C ^ G                              declined
+parse Ω                                  declined
+explain the tensor product               can't parse          the tensor product
+explain natural transformation           can't parse          natural transformation
+what is a pullback                       declined
+what is the tensor product of C and G    declined

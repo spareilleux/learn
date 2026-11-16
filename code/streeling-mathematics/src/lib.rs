@@ -100,7 +100,7 @@ pub fn norm_inf(a: &Array2<f64>) -> f64 {
     a.rows()
         .into_iter()
         .map(|r| r.iter().map(|x| x.abs()).sum::<f64>())
-        .fold(0.0, f64::max)
+        .fold(0.0, max_or_nan)
 }
 
 /// Plain triple loop, so the order of the sums is fixed and the checker does not depend on IX.

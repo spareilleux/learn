@@ -1,0 +1,675 @@
+{
+  "scope": "Authored exact Bayesian updates with a stable binary latent state and explicitly conditional-independent fresh trials. Repeated wrappers of trialA are the same event. Not a deployed agent/controller or calibrated evidence channel.",
+  "prior_odds": 1,
+  "positive_likelihood_ratio": 4,
+  "negative_likelihood_ratio": {
+    "exact": "1/4",
+    "value": 0.25
+  },
+  "independent_sequence_rows": [
+    {
+      "signals": "",
+      "probability": {
+        "exact": "1",
+        "value": 1.0
+      },
+      "posterior_F": {
+        "exact": "1/2",
+        "value": 0.5
+      },
+      "posterior_odds_F_to_U": {
+        "exact": "1",
+        "value": 1.0
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "5",
+        "value": 5.0
+      },
+      "chosen": "K",
+      "minimum": {
+        "exact": "4",
+        "value": 4.0
+      }
+    },
+    {
+      "signals": "+",
+      "probability": {
+        "exact": "1/2",
+        "value": 0.5
+      },
+      "posterior_F": {
+        "exact": "4/5",
+        "value": 0.8
+      },
+      "posterior_odds_F_to_U": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "2",
+        "value": 2.0
+      },
+      "chosen": "S",
+      "minimum": {
+        "exact": "2",
+        "value": 2.0
+      }
+    },
+    {
+      "signals": "-",
+      "probability": {
+        "exact": "1/2",
+        "value": 0.5
+      },
+      "posterior_F": {
+        "exact": "1/5",
+        "value": 0.2
+      },
+      "posterior_odds_F_to_U": {
+        "exact": "1/4",
+        "value": 0.25
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "8",
+        "value": 8.0
+      },
+      "chosen": "K",
+      "minimum": {
+        "exact": "4",
+        "value": 4.0
+      }
+    },
+    {
+      "signals": "++",
+      "probability": {
+        "exact": "17/50",
+        "value": 0.34
+      },
+      "posterior_F": {
+        "exact": "16/17",
+        "value": 0.9411764705882353
+      },
+      "posterior_odds_F_to_U": {
+        "exact": "16",
+        "value": 16.0
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "10/17",
+        "value": 0.5882352941176471
+      },
+      "chosen": "S",
+      "minimum": {
+        "exact": "10/17",
+        "value": 0.5882352941176471
+      }
+    },
+    {
+      "signals": "+-",
+      "probability": {
+        "exact": "4/25",
+        "value": 0.16
+      },
+      "posterior_F": {
+        "exact": "1/2",
+        "value": 0.5
+      },
+      "posterior_odds_F_to_U": {
+        "exact": "1",
+        "value": 1.0
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "5",
+        "value": 5.0
+      },
+      "chosen": "K",
+      "minimum": {
+        "exact": "4",
+        "value": 4.0
+      }
+    },
+    {
+      "signals": "-+",
+      "probability": {
+        "exact": "4/25",
+        "value": 0.16
+      },
+      "posterior_F": {
+        "exact": "1/2",
+        "value": 0.5
+      },
+      "posterior_odds_F_to_U": {
+        "exact": "1",
+        "value": 1.0
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "5",
+        "value": 5.0
+      },
+      "chosen": "K",
+      "minimum": {
+        "exact": "4",
+        "value": 4.0
+      }
+    },
+    {
+      "signals": "--",
+      "probability": {
+        "exact": "17/50",
+        "value": 0.34
+      },
+      "posterior_F": {
+        "exact": "1/17",
+        "value": 0.058823529411764705
+      },
+      "posterior_odds_F_to_U": {
+        "exact": "1/16",
+        "value": 0.0625
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "160/17",
+        "value": 9.411764705882353
+      },
+      "chosen": "K",
+      "minimum": {
+        "exact": "4",
+        "value": 4.0
+      }
+    },
+    {
+      "signals": "+++",
+      "probability": {
+        "exact": "13/50",
+        "value": 0.26
+      },
+      "posterior_F": {
+        "exact": "64/65",
+        "value": 0.9846153846153847
+      },
+      "posterior_odds_F_to_U": {
+        "exact": "64",
+        "value": 64.0
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "2/13",
+        "value": 0.15384615384615385
+      },
+      "chosen": "S",
+      "minimum": {
+        "exact": "2/13",
+        "value": 0.15384615384615385
+      }
+    },
+    {
+      "signals": "++-",
+      "probability": {
+        "exact": "2/25",
+        "value": 0.08
+      },
+      "posterior_F": {
+        "exact": "4/5",
+        "value": 0.8
+      },
+      "posterior_odds_F_to_U": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "2",
+        "value": 2.0
+      },
+      "chosen": "S",
+      "minimum": {
+        "exact": "2",
+        "value": 2.0
+      }
+    },
+    {
+      "signals": "+-+",
+      "probability": {
+        "exact": "2/25",
+        "value": 0.08
+      },
+      "posterior_F": {
+        "exact": "4/5",
+        "value": 0.8
+      },
+      "posterior_odds_F_to_U": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "2",
+        "value": 2.0
+      },
+      "chosen": "S",
+      "minimum": {
+        "exact": "2",
+        "value": 2.0
+      }
+    },
+    {
+      "signals": "+--",
+      "probability": {
+        "exact": "2/25",
+        "value": 0.08
+      },
+      "posterior_F": {
+        "exact": "1/5",
+        "value": 0.2
+      },
+      "posterior_odds_F_to_U": {
+        "exact": "1/4",
+        "value": 0.25
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "8",
+        "value": 8.0
+      },
+      "chosen": "K",
+      "minimum": {
+        "exact": "4",
+        "value": 4.0
+      }
+    },
+    {
+      "signals": "-++",
+      "probability": {
+        "exact": "2/25",
+        "value": 0.08
+      },
+      "posterior_F": {
+        "exact": "4/5",
+        "value": 0.8
+      },
+      "posterior_odds_F_to_U": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "2",
+        "value": 2.0
+      },
+      "chosen": "S",
+      "minimum": {
+        "exact": "2",
+        "value": 2.0
+      }
+    },
+    {
+      "signals": "-+-",
+      "probability": {
+        "exact": "2/25",
+        "value": 0.08
+      },
+      "posterior_F": {
+        "exact": "1/5",
+        "value": 0.2
+      },
+      "posterior_odds_F_to_U": {
+        "exact": "1/4",
+        "value": 0.25
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "8",
+        "value": 8.0
+      },
+      "chosen": "K",
+      "minimum": {
+        "exact": "4",
+        "value": 4.0
+      }
+    },
+    {
+      "signals": "--+",
+      "probability": {
+        "exact": "2/25",
+        "value": 0.08
+      },
+      "posterior_F": {
+        "exact": "1/5",
+        "value": 0.2
+      },
+      "posterior_odds_F_to_U": {
+        "exact": "1/4",
+        "value": 0.25
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "8",
+        "value": 8.0
+      },
+      "chosen": "K",
+      "minimum": {
+        "exact": "4",
+        "value": 4.0
+      }
+    },
+    {
+      "signals": "---",
+      "probability": {
+        "exact": "13/50",
+        "value": 0.26
+      },
+      "posterior_F": {
+        "exact": "1/65",
+        "value": 0.015384615384615385
+      },
+      "posterior_odds_F_to_U": {
+        "exact": "1/64",
+        "value": 0.015625
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "128/13",
+        "value": 9.846153846153847
+      },
+      "chosen": "K",
+      "minimum": {
+        "exact": "4",
+        "value": 4.0
+      }
+    }
+  ],
+  "ledger": [
+    {
+      "wrapper": "wrap-A",
+      "underlying_trial": "trial-A",
+      "signal": "+",
+      "fresh_conditional_independence_stipulated": true,
+      "unique_trial_count": 1,
+      "accepted_signals": "+",
+      "naive_signals": "+",
+      "identity_preserving_posterior_F": {
+        "exact": "4/5",
+        "value": 0.8
+      },
+      "naive_posterior_F": {
+        "exact": "4/5",
+        "value": 0.8
+      },
+      "identity_preserving_action": "S",
+      "naive_action": "S"
+    },
+    {
+      "wrapper": "wrap-A-again",
+      "underlying_trial": "trial-A",
+      "signal": "+",
+      "fresh_conditional_independence_stipulated": false,
+      "unique_trial_count": 1,
+      "accepted_signals": "+",
+      "naive_signals": "++",
+      "identity_preserving_posterior_F": {
+        "exact": "4/5",
+        "value": 0.8
+      },
+      "naive_posterior_F": {
+        "exact": "16/17",
+        "value": 0.9411764705882353
+      },
+      "identity_preserving_action": "S",
+      "naive_action": "S"
+    },
+    {
+      "wrapper": "wrap-B",
+      "underlying_trial": "trial-B",
+      "signal": "-",
+      "fresh_conditional_independence_stipulated": true,
+      "unique_trial_count": 2,
+      "accepted_signals": "+-",
+      "naive_signals": "++-",
+      "identity_preserving_posterior_F": {
+        "exact": "1/2",
+        "value": 0.5
+      },
+      "naive_posterior_F": {
+        "exact": "4/5",
+        "value": 0.8
+      },
+      "identity_preserving_action": "K",
+      "naive_action": "S"
+    }
+  ],
+  "same_trial_copy_conditional_likelihood_ratio": 1,
+  "two_fresh_signal_expected_loss": {
+    "exact": "71/25",
+    "value": 2.84
+  },
+  "two_fresh_signal_gross_value": {
+    "exact": "29/25",
+    "value": 1.16
+  },
+  "unconditional_marginal_second_value": {
+    "exact": "4/25",
+    "value": 0.16
+  },
+  "conditional_second_test": [
+    {
+      "first": "+",
+      "current": {
+        "K": {
+          "exact": "4",
+          "value": 4.0
+        },
+        "S": {
+          "exact": "2",
+          "value": 2.0
+        },
+        "chosen": "S",
+        "minimum": {
+          "exact": "2",
+          "value": 2.0
+        }
+      },
+      "second_outcomes": [
+        {
+          "second": "+",
+          "conditional_probability": {
+            "exact": "17/25",
+            "value": 0.68
+          },
+          "posterior_F": {
+            "exact": "16/17",
+            "value": 0.9411764705882353
+          },
+          "K": {
+            "exact": "4",
+            "value": 4.0
+          },
+          "S": {
+            "exact": "10/17",
+            "value": 0.5882352941176471
+          },
+          "chosen": "S",
+          "minimum": {
+            "exact": "10/17",
+            "value": 0.5882352941176471
+          }
+        },
+        {
+          "second": "-",
+          "conditional_probability": {
+            "exact": "8/25",
+            "value": 0.32
+          },
+          "posterior_F": {
+            "exact": "1/2",
+            "value": 0.5
+          },
+          "K": {
+            "exact": "4",
+            "value": 4.0
+          },
+          "S": {
+            "exact": "5",
+            "value": 5.0
+          },
+          "chosen": "K",
+          "minimum": {
+            "exact": "4",
+            "value": 4.0
+          }
+        }
+      ],
+      "expected_loss_after_second": {
+        "exact": "42/25",
+        "value": 1.68
+      },
+      "gross_second_value": {
+        "exact": "8/25",
+        "value": 0.32
+      },
+      "second_cost": {
+        "exact": "3/5",
+        "value": 0.6
+      },
+      "net_second_value": {
+        "exact": "-7/25",
+        "value": -0.28
+      }
+    },
+    {
+      "first": "-",
+      "current": {
+        "K": {
+          "exact": "4",
+          "value": 4.0
+        },
+        "S": {
+          "exact": "8",
+          "value": 8.0
+        },
+        "chosen": "K",
+        "minimum": {
+          "exact": "4",
+          "value": 4.0
+        }
+      },
+      "second_outcomes": [
+        {
+          "second": "+",
+          "conditional_probability": {
+            "exact": "8/25",
+            "value": 0.32
+          },
+          "posterior_F": {
+            "exact": "1/2",
+            "value": 0.5
+          },
+          "K": {
+            "exact": "4",
+            "value": 4.0
+          },
+          "S": {
+            "exact": "5",
+            "value": 5.0
+          },
+          "chosen": "K",
+          "minimum": {
+            "exact": "4",
+            "value": 4.0
+          }
+        },
+        {
+          "second": "-",
+          "conditional_probability": {
+            "exact": "17/25",
+            "value": 0.68
+          },
+          "posterior_F": {
+            "exact": "1/17",
+            "value": 0.058823529411764705
+          },
+          "K": {
+            "exact": "4",
+            "value": 4.0
+          },
+          "S": {
+            "exact": "160/17",
+            "value": 9.411764705882353
+          },
+          "chosen": "K",
+          "minimum": {
+            "exact": "4",
+            "value": 4.0
+          }
+        }
+      ],
+      "expected_loss_after_second": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "gross_second_value": {
+        "exact": "0",
+        "value": 0.0
+      },
+      "second_cost": {
+        "exact": "3/5",
+        "value": 0.6
+      },
+      "net_second_value": {
+        "exact": "-3/5",
+        "value": -0.6
+      }
+    }
+  ],
+  "new_wrapper_identity_proves_independence": false,
+  "matching_summary_bytes_prove_duplicate_trial": false
+}

@@ -1,0 +1,3115 @@
+{
+  "checks": [
+    {
+      "detail": "Actual manifest bytes must match the controller digest",
+      "name": "source_manifest_sha256",
+      "passed": true
+    },
+    {
+      "detail": "4.6.1-stable (official)",
+      "name": "godot_version",
+      "passed": true
+    },
+    {
+      "detail": "36 admitted crossings",
+      "name": "manifest_input",
+      "passed": true
+    },
+    {
+      "detail": 0,
+      "name": "scene_pack",
+      "passed": true
+    },
+    {
+      "detail": 0,
+      "name": "scene_save",
+      "passed": true
+    },
+    {
+      "detail": "Load the saved native scene",
+      "name": "scene_load",
+      "passed": true
+    },
+    {
+      "detail": "Root metadata survives serialization",
+      "name": "loaded_manifest_binding",
+      "passed": true
+    },
+    {
+      "detail": {
+        "collision_shapes": 72,
+        "crossings": 36,
+        "meshes": 72,
+        "static_bodies": 72
+      },
+      "name": "loaded_counts",
+      "passed": true
+    },
+    {
+      "detail": {
+        "materials": 2,
+        "meshes": 2,
+        "shapes": 2
+      },
+      "name": "shared_resources",
+      "passed": true
+    },
+    {
+      "detail": "w0-f0",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w0-f0"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w0-f0",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w0-f0"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w0-f0"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w1-f0",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w1-f0"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w1-f0",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w1-f0"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w1-f0"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w2-f0",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w2-f0"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w2-f0",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w2-f0"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w2-f0"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w3-f0",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w3-f0"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w3-f0",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w3-f0"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w3-f0"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w4-f0",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w4-f0"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w4-f0",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w4-f0"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w4-f0"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w5-f0",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w5-f0"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w5-f0",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w5-f0"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w5-f0"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w0-f1",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w0-f1"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w0-f1",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w0-f1"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w0-f1"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w1-f1",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w1-f1"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w1-f1",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w1-f1"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w1-f1"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w2-f1",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w2-f1"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w2-f1",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w2-f1"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w2-f1"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w3-f1",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w3-f1"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w3-f1",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w3-f1"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w3-f1"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w4-f1",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w4-f1"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w4-f1",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w4-f1"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w4-f1"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w5-f1",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w5-f1"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w5-f1",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w5-f1"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w5-f1"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w0-f2",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w0-f2"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w0-f2",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w0-f2"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w0-f2"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w1-f2",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w1-f2"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w1-f2",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w1-f2"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w1-f2"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w2-f2",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w2-f2"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w2-f2",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w2-f2"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w2-f2"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w3-f2",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w3-f2"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w3-f2",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w3-f2"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w3-f2"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w4-f2",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w4-f2"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w4-f2",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w4-f2"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w4-f2"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w5-f2",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w5-f2"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w5-f2",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w5-f2"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w5-f2"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w0-f3",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w0-f3"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w0-f3",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w0-f3"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w0-f3"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w1-f3",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w1-f3"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w1-f3",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w1-f3"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w1-f3"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w2-f3",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w2-f3"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w2-f3",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w2-f3"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w2-f3"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w3-f3",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w3-f3"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w3-f3",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w3-f3"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w3-f3"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w4-f3",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w4-f3"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w4-f3",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w4-f3"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w4-f3"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w5-f3",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w5-f3"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w5-f3",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w5-f3"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w5-f3"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w0-f4",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w0-f4"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w0-f4",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w0-f4"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w0-f4"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w1-f4",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w1-f4"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w1-f4",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w1-f4"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w1-f4"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w2-f4",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w2-f4"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w2-f4",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w2-f4"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w2-f4"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w3-f4",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w3-f4"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w3-f4",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w3-f4"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w3-f4"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w4-f4",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w4-f4"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w4-f4",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w4-f4"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w4-f4"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w5-f4",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w5-f4"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w5-f4",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w5-f4"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w5-f4"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w0-f5",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w0-f5"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w0-f5",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w0-f5"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w0-f5"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w1-f5",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w1-f5"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w1-f5",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w1-f5"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w1-f5"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w2-f5",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w2-f5"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w2-f5",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w2-f5"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w2-f5"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w3-f5",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w3-f5"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w3-f5",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w3-f5"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w3-f5"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w4-f5",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w4-f5"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w4-f5",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w4-f5"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "weft",
+        "id": "w4-f5"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": "w5-f5",
+      "name": "independent_world_metres",
+      "passed": false
+    },
+    {
+      "detail": {
+        "gap_metres": 1.0,
+        "id": "w5-f5"
+      },
+      "name": "aabb_clearance",
+      "passed": false
+    },
+    {
+      "detail": "w5-f5",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "w5-f5"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "",
+        "expected": "warp",
+        "id": "w5-f5"
+      },
+      "name": "ray_upper_strand",
+      "passed": false
+    },
+    {
+      "detail": 0,
+      "name": "all_ray_identities",
+      "passed": false
+    }
+  ],
+  "counts": {
+    "collision_shapes": 72,
+    "crossings": 36,
+    "meshes": 72,
+    "static_bodies": 72
+  },
+  "crossings": [
+    {
+      "gap_metres": 1.0,
+      "id": "w0-f0",
+      "lower_aabb_metres": {
+        "position": [
+          -2.0,
+          -2.5,
+          -1.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          -1.0,
+          0.5,
+          -2.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.0,
+        1.5,
+        0.0
+      ],
+      "weft_position_metres": [
+        0.0,
+        -1.5,
+        0.0
+      ],
+      "world_position_metres": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w1-f0",
+      "lower_aabb_metres": {
+        "position": [
+          4.0,
+          -2.5,
+          -2.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          3.0,
+          0.5,
+          -1.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        5.0,
+        -1.5,
+        0.0
+      ],
+      "weft_position_metres": [
+        5.0,
+        1.5,
+        0.0
+      ],
+      "world_position_metres": [
+        5.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w2-f0",
+      "lower_aabb_metres": {
+        "position": [
+          8.0,
+          -2.5,
+          -1.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          9.0,
+          0.5,
+          -2.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        10.0,
+        1.5,
+        0.0
+      ],
+      "weft_position_metres": [
+        10.0,
+        -1.5,
+        0.0
+      ],
+      "world_position_metres": [
+        10.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w3-f0",
+      "lower_aabb_metres": {
+        "position": [
+          14.0,
+          -2.5,
+          -2.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          13.0,
+          0.5,
+          -1.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        15.0,
+        -1.5,
+        0.0
+      ],
+      "weft_position_metres": [
+        15.0,
+        1.5,
+        0.0
+      ],
+      "world_position_metres": [
+        15.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w4-f0",
+      "lower_aabb_metres": {
+        "position": [
+          18.0,
+          -2.5,
+          -1.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          19.0,
+          0.5,
+          -2.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        20.0,
+        1.5,
+        0.0
+      ],
+      "weft_position_metres": [
+        20.0,
+        -1.5,
+        0.0
+      ],
+      "world_position_metres": [
+        20.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w5-f0",
+      "lower_aabb_metres": {
+        "position": [
+          24.0,
+          -2.5,
+          -2.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          23.0,
+          0.5,
+          -1.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        25.0,
+        -1.5,
+        0.0
+      ],
+      "weft_position_metres": [
+        25.0,
+        1.5,
+        0.0
+      ],
+      "world_position_metres": [
+        25.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w0-f1",
+      "lower_aabb_metres": {
+        "position": [
+          -1.0,
+          -2.5,
+          3.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          -2.0,
+          0.5,
+          4.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.0,
+        -1.5,
+        5.0
+      ],
+      "weft_position_metres": [
+        0.0,
+        1.5,
+        5.0
+      ],
+      "world_position_metres": [
+        0.0,
+        0.0,
+        5.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w1-f1",
+      "lower_aabb_metres": {
+        "position": [
+          3.0,
+          -2.5,
+          4.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          4.0,
+          0.5,
+          3.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        5.0,
+        1.5,
+        5.0
+      ],
+      "weft_position_metres": [
+        5.0,
+        -1.5,
+        5.0
+      ],
+      "world_position_metres": [
+        5.0,
+        0.0,
+        5.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w2-f1",
+      "lower_aabb_metres": {
+        "position": [
+          9.0,
+          -2.5,
+          3.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          8.0,
+          0.5,
+          4.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        10.0,
+        -1.5,
+        5.0
+      ],
+      "weft_position_metres": [
+        10.0,
+        1.5,
+        5.0
+      ],
+      "world_position_metres": [
+        10.0,
+        0.0,
+        5.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w3-f1",
+      "lower_aabb_metres": {
+        "position": [
+          13.0,
+          -2.5,
+          4.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          14.0,
+          0.5,
+          3.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        15.0,
+        1.5,
+        5.0
+      ],
+      "weft_position_metres": [
+        15.0,
+        -1.5,
+        5.0
+      ],
+      "world_position_metres": [
+        15.0,
+        0.0,
+        5.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w4-f1",
+      "lower_aabb_metres": {
+        "position": [
+          19.0,
+          -2.5,
+          3.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          18.0,
+          0.5,
+          4.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        20.0,
+        -1.5,
+        5.0
+      ],
+      "weft_position_metres": [
+        20.0,
+        1.5,
+        5.0
+      ],
+      "world_position_metres": [
+        20.0,
+        0.0,
+        5.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w5-f1",
+      "lower_aabb_metres": {
+        "position": [
+          23.0,
+          -2.5,
+          4.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          24.0,
+          0.5,
+          3.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        25.0,
+        1.5,
+        5.0
+      ],
+      "weft_position_metres": [
+        25.0,
+        -1.5,
+        5.0
+      ],
+      "world_position_metres": [
+        25.0,
+        0.0,
+        5.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w0-f2",
+      "lower_aabb_metres": {
+        "position": [
+          -2.0,
+          -2.5,
+          9.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          -1.0,
+          0.5,
+          8.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.0,
+        1.5,
+        10.0
+      ],
+      "weft_position_metres": [
+        0.0,
+        -1.5,
+        10.0
+      ],
+      "world_position_metres": [
+        0.0,
+        0.0,
+        10.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w1-f2",
+      "lower_aabb_metres": {
+        "position": [
+          4.0,
+          -2.5,
+          8.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          3.0,
+          0.5,
+          9.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        5.0,
+        -1.5,
+        10.0
+      ],
+      "weft_position_metres": [
+        5.0,
+        1.5,
+        10.0
+      ],
+      "world_position_metres": [
+        5.0,
+        0.0,
+        10.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w2-f2",
+      "lower_aabb_metres": {
+        "position": [
+          8.0,
+          -2.5,
+          9.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          9.0,
+          0.5,
+          8.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        10.0,
+        1.5,
+        10.0
+      ],
+      "weft_position_metres": [
+        10.0,
+        -1.5,
+        10.0
+      ],
+      "world_position_metres": [
+        10.0,
+        0.0,
+        10.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w3-f2",
+      "lower_aabb_metres": {
+        "position": [
+          14.0,
+          -2.5,
+          8.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          13.0,
+          0.5,
+          9.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        15.0,
+        -1.5,
+        10.0
+      ],
+      "weft_position_metres": [
+        15.0,
+        1.5,
+        10.0
+      ],
+      "world_position_metres": [
+        15.0,
+        0.0,
+        10.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w4-f2",
+      "lower_aabb_metres": {
+        "position": [
+          18.0,
+          -2.5,
+          9.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          19.0,
+          0.5,
+          8.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        20.0,
+        1.5,
+        10.0
+      ],
+      "weft_position_metres": [
+        20.0,
+        -1.5,
+        10.0
+      ],
+      "world_position_metres": [
+        20.0,
+        0.0,
+        10.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w5-f2",
+      "lower_aabb_metres": {
+        "position": [
+          24.0,
+          -2.5,
+          8.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          23.0,
+          0.5,
+          9.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        25.0,
+        -1.5,
+        10.0
+      ],
+      "weft_position_metres": [
+        25.0,
+        1.5,
+        10.0
+      ],
+      "world_position_metres": [
+        25.0,
+        0.0,
+        10.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w0-f3",
+      "lower_aabb_metres": {
+        "position": [
+          -1.0,
+          -2.5,
+          13.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          -2.0,
+          0.5,
+          14.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.0,
+        -1.5,
+        15.0
+      ],
+      "weft_position_metres": [
+        0.0,
+        1.5,
+        15.0
+      ],
+      "world_position_metres": [
+        0.0,
+        0.0,
+        15.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w1-f3",
+      "lower_aabb_metres": {
+        "position": [
+          3.0,
+          -2.5,
+          14.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          4.0,
+          0.5,
+          13.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        5.0,
+        1.5,
+        15.0
+      ],
+      "weft_position_metres": [
+        5.0,
+        -1.5,
+        15.0
+      ],
+      "world_position_metres": [
+        5.0,
+        0.0,
+        15.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w2-f3",
+      "lower_aabb_metres": {
+        "position": [
+          9.0,
+          -2.5,
+          13.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          8.0,
+          0.5,
+          14.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        10.0,
+        -1.5,
+        15.0
+      ],
+      "weft_position_metres": [
+        10.0,
+        1.5,
+        15.0
+      ],
+      "world_position_metres": [
+        10.0,
+        0.0,
+        15.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w3-f3",
+      "lower_aabb_metres": {
+        "position": [
+          13.0,
+          -2.5,
+          14.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          14.0,
+          0.5,
+          13.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        15.0,
+        1.5,
+        15.0
+      ],
+      "weft_position_metres": [
+        15.0,
+        -1.5,
+        15.0
+      ],
+      "world_position_metres": [
+        15.0,
+        0.0,
+        15.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w4-f3",
+      "lower_aabb_metres": {
+        "position": [
+          19.0,
+          -2.5,
+          13.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          18.0,
+          0.5,
+          14.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        20.0,
+        -1.5,
+        15.0
+      ],
+      "weft_position_metres": [
+        20.0,
+        1.5,
+        15.0
+      ],
+      "world_position_metres": [
+        20.0,
+        0.0,
+        15.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w5-f3",
+      "lower_aabb_metres": {
+        "position": [
+          23.0,
+          -2.5,
+          14.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          24.0,
+          0.5,
+          13.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        25.0,
+        1.5,
+        15.0
+      ],
+      "weft_position_metres": [
+        25.0,
+        -1.5,
+        15.0
+      ],
+      "world_position_metres": [
+        25.0,
+        0.0,
+        15.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w0-f4",
+      "lower_aabb_metres": {
+        "position": [
+          -2.0,
+          -2.5,
+          19.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          -1.0,
+          0.5,
+          18.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.0,
+        1.5,
+        20.0
+      ],
+      "weft_position_metres": [
+        0.0,
+        -1.5,
+        20.0
+      ],
+      "world_position_metres": [
+        0.0,
+        0.0,
+        20.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w1-f4",
+      "lower_aabb_metres": {
+        "position": [
+          4.0,
+          -2.5,
+          18.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          3.0,
+          0.5,
+          19.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        5.0,
+        -1.5,
+        20.0
+      ],
+      "weft_position_metres": [
+        5.0,
+        1.5,
+        20.0
+      ],
+      "world_position_metres": [
+        5.0,
+        0.0,
+        20.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w2-f4",
+      "lower_aabb_metres": {
+        "position": [
+          8.0,
+          -2.5,
+          19.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          9.0,
+          0.5,
+          18.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        10.0,
+        1.5,
+        20.0
+      ],
+      "weft_position_metres": [
+        10.0,
+        -1.5,
+        20.0
+      ],
+      "world_position_metres": [
+        10.0,
+        0.0,
+        20.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w3-f4",
+      "lower_aabb_metres": {
+        "position": [
+          14.0,
+          -2.5,
+          18.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          13.0,
+          0.5,
+          19.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        15.0,
+        -1.5,
+        20.0
+      ],
+      "weft_position_metres": [
+        15.0,
+        1.5,
+        20.0
+      ],
+      "world_position_metres": [
+        15.0,
+        0.0,
+        20.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w4-f4",
+      "lower_aabb_metres": {
+        "position": [
+          18.0,
+          -2.5,
+          19.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          19.0,
+          0.5,
+          18.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        20.0,
+        1.5,
+        20.0
+      ],
+      "weft_position_metres": [
+        20.0,
+        -1.5,
+        20.0
+      ],
+      "world_position_metres": [
+        20.0,
+        0.0,
+        20.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w5-f4",
+      "lower_aabb_metres": {
+        "position": [
+          24.0,
+          -2.5,
+          18.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          23.0,
+          0.5,
+          19.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        25.0,
+        -1.5,
+        20.0
+      ],
+      "weft_position_metres": [
+        25.0,
+        1.5,
+        20.0
+      ],
+      "world_position_metres": [
+        25.0,
+        0.0,
+        20.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w0-f5",
+      "lower_aabb_metres": {
+        "position": [
+          -1.0,
+          -2.5,
+          23.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          -2.0,
+          0.5,
+          24.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.0,
+        -1.5,
+        25.0
+      ],
+      "weft_position_metres": [
+        0.0,
+        1.5,
+        25.0
+      ],
+      "world_position_metres": [
+        0.0,
+        0.0,
+        25.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w1-f5",
+      "lower_aabb_metres": {
+        "position": [
+          3.0,
+          -2.5,
+          24.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          4.0,
+          0.5,
+          23.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        5.0,
+        1.5,
+        25.0
+      ],
+      "weft_position_metres": [
+        5.0,
+        -1.5,
+        25.0
+      ],
+      "world_position_metres": [
+        5.0,
+        0.0,
+        25.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w2-f5",
+      "lower_aabb_metres": {
+        "position": [
+          9.0,
+          -2.5,
+          23.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          8.0,
+          0.5,
+          24.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        10.0,
+        -1.5,
+        25.0
+      ],
+      "weft_position_metres": [
+        10.0,
+        1.5,
+        25.0
+      ],
+      "world_position_metres": [
+        10.0,
+        0.0,
+        25.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w3-f5",
+      "lower_aabb_metres": {
+        "position": [
+          13.0,
+          -2.5,
+          24.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          14.0,
+          0.5,
+          23.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        15.0,
+        1.5,
+        25.0
+      ],
+      "weft_position_metres": [
+        15.0,
+        -1.5,
+        25.0
+      ],
+      "world_position_metres": [
+        15.0,
+        0.0,
+        25.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w4-f5",
+      "lower_aabb_metres": {
+        "position": [
+          19.0,
+          -2.5,
+          23.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          18.0,
+          0.5,
+          24.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        20.0,
+        -1.5,
+        25.0
+      ],
+      "weft_position_metres": [
+        20.0,
+        1.5,
+        25.0
+      ],
+      "world_position_metres": [
+        20.0,
+        0.0,
+        25.0
+      ]
+    },
+    {
+      "gap_metres": 1.0,
+      "id": "w5-f5",
+      "lower_aabb_metres": {
+        "position": [
+          23.0,
+          -2.5,
+          24.0
+        ],
+        "size": [
+          4.0,
+          2.0,
+          2.0
+        ]
+      },
+      "ray": {
+        "crossing_id": "",
+        "position_metres": [],
+        "strand": ""
+      },
+      "upper_aabb_metres": {
+        "position": [
+          24.0,
+          0.5,
+          23.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          4.0
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        25.0,
+        1.5,
+        25.0
+      ],
+      "weft_position_metres": [
+        25.0,
+        -1.5,
+        25.0
+      ],
+      "world_position_metres": [
+        25.0,
+        0.0,
+        25.0
+      ]
+    }
+  ],
+  "godot_version": {
+    "build": "official",
+    "hash": "14d19694e0c88a3f9e82d899a0400f27a24c176e",
+    "hex": 263681,
+    "major": 4,
+    "minor": 6,
+    "patch": 1,
+    "status": "stable",
+    "string": "4.6.1-stable (official)",
+    "timestamp": 0
+  },
+  "matching_ray_identities": 0,
+  "resources": {
+    "materials": 2,
+    "meshes": 2,
+    "shapes": 2
+  },
+  "scene_sha256": "b3cb476bef6caaa85a1d2c07ba1fa87c78d1cf1e8abfb325c51a5f4e05a4d628",
+  "source_manifest_sha256": "05ff96258db853cfdf31bbe53f4589e0a4d088045449035036123a0577056ab1",
+  "status": "failed"
+}

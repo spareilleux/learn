@@ -1,0 +1,1598 @@
+{
+  "checked_at_utc": "2026-10-22T19:39:10.750974+00:00",
+  "reviewer": "Independent data-audit subagent; no human approval",
+  "verdict": "pass_with_declared_evidence_limits",
+  "input_bindings": [
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/experiment-plan.md",
+      "sha256": "0d6bfd5ac8b66ddd828b7379b612a11e621db37f0a5f2136eaa08f1079a8726d",
+      "bytes": 7134
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/primary-readback.json",
+      "sha256": "ab825fc89a191d5a597b329bfa2aed0d5b3ff5c606fe068d06dd8014a7a163e3",
+      "bytes": 2809
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/native-execution.json",
+      "sha256": "10c10c8ffb379b79ace1feec5bdf3a6b12d2444bdb7ec16cfcff5a8ea7ed5e6e",
+      "bytes": 1285
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/native-positions.json",
+      "sha256": "3176bba742d9d2ebc141116fc26121d9e85d18c7663f9170edf03beb833a335d",
+      "bytes": 10539
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/ga-tuning-probes.json",
+      "sha256": "61a61695002da4b3c819aa32a923130d4dfee77419bc5935164ef46b08c3dfa4",
+      "bytes": 991
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/string-occupancy.json",
+      "sha256": "6356c1bbbe0151940c7df105d48e1cdb42a3ef1aec2d314dc6a5e205580eb1c3",
+      "bytes": 5314
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/repair-options.json",
+      "sha256": "8ff9449ba8a93b9ae2e4a3e95a58473f21f943e2293b7520ef43ed9683c652c1",
+      "bytes": 8539
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/timing-models.json",
+      "sha256": "605d1e22aaf21df7b1c228a0d3f6187f467a74e397d30b9cf09255bfdc71bb1f",
+      "bytes": 5203
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/execution.json",
+      "sha256": "97ba77a3a741ff6a745b1d2d722fec57106914a1c0cdf366194ec8c18455aa53",
+      "bytes": 802
+    }
+  ],
+  "external_bindings": [
+    {
+      "path": "C:\\tmp\\streeling-phrase-fret-native-20261022\\MidiTypes.fs",
+      "sha256": "8614a2a5d466b5bb792c50017ae7a6e09592b158f1362ac6bf8768683c428b36",
+      "bytes": 9522
+    },
+    {
+      "path": "C:\\tmp\\streeling-phrase-fret-native-20261022\\probe.fsx",
+      "sha256": "6e048939e37a5d668d10741ed24c38ccdb2450307fb96297035533d8f87d78ce",
+      "bytes": 996
+    },
+    {
+      "path": "C:\\tmp\\streeling-phrase-fret-native-20261022\\global.json",
+      "sha256": "99c01299d359f9b053f4119acb6d41e13da0311c3eac5b667d4ea65a60067344",
+      "bytes": 59
+    },
+    {
+      "path": "C:\\tmp\\streeling-phrase-fret-native-20261022\\native.stdout.log",
+      "sha256": "b9e54f48ce6f3616309410cb8e5035ffc20758dd48ed393b92cfc60c2e3f469e",
+      "bytes": 2557
+    },
+    {
+      "path": "C:\\tmp\\streeling-phrase-fret-native-20261022\\native.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "C:\\tmp\\streeling-phrase-performance-analysis-20261022.py",
+      "sha256": "3c171bdbb64bf5173c704bbf2c4f9167e691352db4b561839c5a18b1dbada60b",
+      "bytes": 14801
+    }
+  ],
+  "independent_native_reexecution": {
+    "cwd": "C:\\tmp\\streeling-phrase-fret-audit-20261022",
+    "args": [
+      "dotnet",
+      "fsi",
+      "--quiet",
+      "--exec",
+      "probe.fsx"
+    ],
+    "sdk": "10.0.113",
+    "exit_code": 0,
+    "stdout_sha256": "b9e54f48ce6f3616309410cb8e5035ffc20758dd48ed393b92cfc60c2e3f469e",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source_unchanged": true,
+    "scope": "Only the unchanged public MidiTypes.fs helper source and unchanged temporary wrapper were executed. No parser, C# mapper, temporal solver, production build, audio or installation."
+  },
+  "check_count": 179,
+  "checks": [
+    {
+      "check": "primary source pin",
+      "pass_": true,
+      "detail": {
+        "observed": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+        "expected": "dc2e74cbd992a298f67efb928b5b3754615e1924"
+      }
+    },
+    {
+      "check": "anonymous pinned public/Git byte match Common/GA.Business.DSL/Types/MidiTypes.fs",
+      "pass_": true,
+      "detail": {
+        "status": 200,
+        "bytes": 9522,
+        "sha256": "8614a2a5d466b5bb792c50017ae7a6e09592b158f1362ac6bf8768683c428b36"
+      }
+    },
+    {
+      "check": "recorded source hash Common/GA.Business.DSL/Types/MidiTypes.fs",
+      "pass_": true,
+      "detail": {
+        "observed": "8614a2a5d466b5bb792c50017ae7a6e09592b158f1362ac6bf8768683c428b36",
+        "expected": "8614a2a5d466b5bb792c50017ae7a6e09592b158f1362ac6bf8768683c428b36"
+      }
+    },
+    {
+      "check": "recorded source length Common/GA.Business.DSL/Types/MidiTypes.fs",
+      "pass_": true,
+      "detail": {
+        "observed": 9522,
+        "expected": 9522
+      }
+    },
+    {
+      "check": "recorded readback truth Common/GA.Business.DSL/Types/MidiTypes.fs",
+      "pass_": true
+    },
+    {
+      "check": "anonymous pinned public/Git byte match Common/GA.Business.DSL/Parsers/MidiParser.fs",
+      "pass_": true,
+      "detail": {
+        "status": 200,
+        "bytes": 13721,
+        "sha256": "00f812620749834af64988b07cde408fb50936d750623b246dc3e64b1ee0d402"
+      }
+    },
+    {
+      "check": "recorded source hash Common/GA.Business.DSL/Parsers/MidiParser.fs",
+      "pass_": true,
+      "detail": {
+        "observed": "00f812620749834af64988b07cde408fb50936d750623b246dc3e64b1ee0d402",
+        "expected": "00f812620749834af64988b07cde408fb50936d750623b246dc3e64b1ee0d402"
+      }
+    },
+    {
+      "check": "recorded source length Common/GA.Business.DSL/Parsers/MidiParser.fs",
+      "pass_": true,
+      "detail": {
+        "observed": 13721,
+        "expected": 13721
+      }
+    },
+    {
+      "check": "recorded readback truth Common/GA.Business.DSL/Parsers/MidiParser.fs",
+      "pass_": true
+    },
+    {
+      "check": "anonymous pinned public/Git byte match Common/GA.Domain.Services/Fretboard/Analysis/FretboardPositionMapper.cs",
+      "pass_": true,
+      "detail": {
+        "status": 200,
+        "bytes": 3142,
+        "sha256": "818a2ca2e243bcc4e922ac1a3840d6dba0ee1e85aa41172506e10a8aef0d062b"
+      }
+    },
+    {
+      "check": "recorded source hash Common/GA.Domain.Services/Fretboard/Analysis/FretboardPositionMapper.cs",
+      "pass_": true,
+      "detail": {
+        "observed": "818a2ca2e243bcc4e922ac1a3840d6dba0ee1e85aa41172506e10a8aef0d062b",
+        "expected": "818a2ca2e243bcc4e922ac1a3840d6dba0ee1e85aa41172506e10a8aef0d062b"
+      }
+    },
+    {
+      "check": "recorded source length Common/GA.Domain.Services/Fretboard/Analysis/FretboardPositionMapper.cs",
+      "pass_": true,
+      "detail": {
+        "observed": 3142,
+        "expected": 3142
+      }
+    },
+    {
+      "check": "recorded readback truth Common/GA.Domain.Services/Fretboard/Analysis/FretboardPositionMapper.cs",
+      "pass_": true
+    },
+    {
+      "check": "anonymous pinned public/Git byte match Common/GA.Domain.Core/Instruments/Tuning.cs",
+      "pass_": true,
+      "detail": {
+        "status": 200,
+        "bytes": 3329,
+        "sha256": "037c5b48514528d65f59a263136d4fa4d66e5b1ceae7f14453c1868978378b8a"
+      }
+    },
+    {
+      "check": "recorded source hash Common/GA.Domain.Core/Instruments/Tuning.cs",
+      "pass_": true,
+      "detail": {
+        "observed": "037c5b48514528d65f59a263136d4fa4d66e5b1ceae7f14453c1868978378b8a",
+        "expected": "037c5b48514528d65f59a263136d4fa4d66e5b1ceae7f14453c1868978378b8a"
+      }
+    },
+    {
+      "check": "recorded source length Common/GA.Domain.Core/Instruments/Tuning.cs",
+      "pass_": true,
+      "detail": {
+        "observed": 3329,
+        "expected": 3329
+      }
+    },
+    {
+      "check": "recorded readback truth Common/GA.Domain.Core/Instruments/Tuning.cs",
+      "pass_": true
+    },
+    {
+      "check": "native binding MidiTypes.fs",
+      "pass_": true,
+      "detail": {
+        "observed": "8614a2a5d466b5bb792c50017ae7a6e09592b158f1362ac6bf8768683c428b36",
+        "expected": "8614a2a5d466b5bb792c50017ae7a6e09592b158f1362ac6bf8768683c428b36"
+      }
+    },
+    {
+      "check": "native binding probe.fsx",
+      "pass_": true,
+      "detail": {
+        "observed": "6e048939e37a5d668d10741ed24c38ccdb2450307fb96297035533d8f87d78ce",
+        "expected": "6e048939e37a5d668d10741ed24c38ccdb2450307fb96297035533d8f87d78ce"
+      }
+    },
+    {
+      "check": "native binding global.json",
+      "pass_": true,
+      "detail": {
+        "observed": "99c01299d359f9b053f4119acb6d41e13da0311c3eac5b667d4ea65a60067344",
+        "expected": "99c01299d359f9b053f4119acb6d41e13da0311c3eac5b667d4ea65a60067344"
+      }
+    },
+    {
+      "check": "native stdout log hash",
+      "pass_": true,
+      "detail": {
+        "observed": "b9e54f48ce6f3616309410cb8e5035ffc20758dd48ed393b92cfc60c2e3f469e",
+        "expected": "b9e54f48ce6f3616309410cb8e5035ffc20758dd48ed393b92cfc60c2e3f469e"
+      }
+    },
+    {
+      "check": "native stdout log bytes",
+      "pass_": true,
+      "detail": {
+        "observed": 2557,
+        "expected": 2557
+      }
+    },
+    {
+      "check": "native stderr log hash",
+      "pass_": true,
+      "detail": {
+        "observed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "check": "native stderr log bytes",
+      "pass_": true,
+      "detail": {
+        "observed": 0,
+        "expected": 0
+      }
+    },
+    {
+      "check": "native source unchanged from public/Git bytes",
+      "pass_": true
+    },
+    {
+      "check": "independently selected native SDK",
+      "pass_": true,
+      "detail": {
+        "observed": "10.0.113",
+        "expected": "10.0.113"
+      }
+    },
+    {
+      "check": "independent unchanged helper rerun exit",
+      "pass_": true,
+      "detail": {
+        "observed": 0,
+        "expected": 0
+      }
+    },
+    {
+      "check": "independent unchanged helper rerun stderr",
+      "pass_": true,
+      "detail": {
+        "observed": "",
+        "expected": ""
+      }
+    },
+    {
+      "check": "independent native results equal producer native log",
+      "pass_": true
+    },
+    {
+      "check": "native row count",
+      "pass_": true,
+      "detail": {
+        "observed": 16,
+        "expected": 16
+      }
+    },
+    {
+      "check": "stored native row count",
+      "pass_": true,
+      "detail": {
+        "observed": 16,
+        "expected": 16
+      }
+    },
+    {
+      "check": "producer log row count",
+      "pass_": true,
+      "detail": {
+        "observed": 16,
+        "expected": 16
+      }
+    },
+    {
+      "check": "native row 0 stored fields",
+      "pass_": true
+    },
+    {
+      "check": "native row 0 exhaustive pitch candidates",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            1
+          ]
+        ],
+        "expected": [
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "check": "native row 0 default best position",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          5,
+          1
+        ],
+        "expected": [
+          5,
+          1
+        ]
+      }
+    },
+    {
+      "check": "native row 0 pitch round trips",
+      "pass_": true
+    },
+    {
+      "check": "native row 0 authored numbering adapter",
+      "pass_": true
+    },
+    {
+      "check": "native row 1 stored fields",
+      "pass_": true
+    },
+    {
+      "check": "native row 1 exhaustive pitch candidates",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            0
+          ]
+        ],
+        "expected": [
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "check": "native row 1 default best position",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          6,
+          0
+        ],
+        "expected": [
+          6,
+          0
+        ]
+      }
+    },
+    {
+      "check": "native row 1 pitch round trips",
+      "pass_": true
+    },
+    {
+      "check": "native row 1 authored numbering adapter",
+      "pass_": true
+    },
+    {
+      "check": "native row 2 stored fields",
+      "pass_": true
+    },
+    {
+      "check": "native row 2 exhaustive pitch candidates",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          [
+            6,
+            3
+          ]
+        ],
+        "expected": [
+          [
+            6,
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "check": "native row 2 default best position",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          6,
+          3
+        ],
+        "expected": [
+          6,
+          3
+        ]
+      }
+    },
+    {
+      "check": "native row 2 pitch round trips",
+      "pass_": true
+    },
+    {
+      "check": "native row 2 authored numbering adapter",
+      "pass_": true
+    },
+    {
+      "check": "native row 3 stored fields",
+      "pass_": true
+    },
+    {
+      "check": "native row 3 exhaustive pitch candidates",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          [
+            5,
+            3
+          ]
+        ],
+        "expected": [
+          [
+            5,
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "check": "native row 3 default best position",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          5,
+          3
+        ],
+        "expected": [
+          5,
+          3
+        ]
+      }
+    },
+    {
+      "check": "native row 3 pitch round trips",
+      "pass_": true
+    },
+    {
+      "check": "native row 3 authored numbering adapter",
+      "pass_": true
+    },
+    {
+      "check": "native row 4 stored fields",
+      "pass_": true
+    },
+    {
+      "check": "native row 4 exhaustive pitch candidates",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          [
+            3,
+            10
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            1
+          ]
+        ],
+        "expected": [
+          [
+            3,
+            10
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "check": "native row 4 default best position",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          5,
+          1
+        ],
+        "expected": [
+          5,
+          1
+        ]
+      }
+    },
+    {
+      "check": "native row 4 pitch round trips",
+      "pass_": true
+    },
+    {
+      "check": "native row 4 authored numbering adapter",
+      "pass_": true
+    },
+    {
+      "check": "native row 5 stored fields",
+      "pass_": true
+    },
+    {
+      "check": "native row 5 exhaustive pitch candidates",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          [
+            4,
+            9
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            0
+          ]
+        ],
+        "expected": [
+          [
+            4,
+            9
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "check": "native row 5 default best position",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          6,
+          0
+        ],
+        "expected": [
+          6,
+          0
+        ]
+      }
+    },
+    {
+      "check": "native row 5 pitch round trips",
+      "pass_": true
+    },
+    {
+      "check": "native row 5 authored numbering adapter",
+      "pass_": true
+    },
+    {
+      "check": "native row 6 stored fields",
+      "pass_": true
+    },
+    {
+      "check": "native row 6 exhaustive pitch candidates",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          [
+            5,
+            8
+          ],
+          [
+            6,
+            3
+          ]
+        ],
+        "expected": [
+          [
+            5,
+            8
+          ],
+          [
+            6,
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "check": "native row 6 default best position",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          6,
+          3
+        ],
+        "expected": [
+          6,
+          3
+        ]
+      }
+    },
+    {
+      "check": "native row 6 pitch round trips",
+      "pass_": true
+    },
+    {
+      "check": "native row 6 authored numbering adapter",
+      "pass_": true
+    },
+    {
+      "check": "native row 7 stored fields",
+      "pass_": true
+    },
+    {
+      "check": "native row 7 exhaustive pitch candidates",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            3
+          ]
+        ],
+        "expected": [
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "check": "native row 7 default best position",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          5,
+          3
+        ],
+        "expected": [
+          5,
+          3
+        ]
+      }
+    },
+    {
+      "check": "native row 7 pitch round trips",
+      "pass_": true
+    },
+    {
+      "check": "native row 7 authored numbering adapter",
+      "pass_": true
+    },
+    {
+      "check": "native row 8 stored fields",
+      "pass_": true
+    },
+    {
+      "check": "native row 8 exhaustive pitch candidates",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            1
+          ]
+        ],
+        "expected": [
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "check": "native row 8 default best position",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          5,
+          1
+        ],
+        "expected": [
+          5,
+          1
+        ]
+      }
+    },
+    {
+      "check": "native row 8 pitch round trips",
+      "pass_": true
+    },
+    {
+      "check": "native row 8 authored numbering adapter",
+      "pass_": true
+    },
+    {
+      "check": "native row 9 stored fields",
+      "pass_": true
+    },
+    {
+      "check": "native row 9 exhaustive pitch candidates",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            0
+          ]
+        ],
+        "expected": [
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "check": "native row 9 default best position",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          6,
+          0
+        ],
+        "expected": [
+          6,
+          0
+        ]
+      }
+    },
+    {
+      "check": "native row 9 pitch round trips",
+      "pass_": true
+    },
+    {
+      "check": "native row 9 authored numbering adapter",
+      "pass_": true
+    },
+    {
+      "check": "native row 10 stored fields",
+      "pass_": true
+    },
+    {
+      "check": "native row 10 exhaustive pitch candidates",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          [
+            6,
+            3
+          ]
+        ],
+        "expected": [
+          [
+            6,
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "check": "native row 10 default best position",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          6,
+          3
+        ],
+        "expected": [
+          6,
+          3
+        ]
+      }
+    },
+    {
+      "check": "native row 10 pitch round trips",
+      "pass_": true
+    },
+    {
+      "check": "native row 10 authored numbering adapter",
+      "pass_": true
+    },
+    {
+      "check": "native row 11 stored fields",
+      "pass_": true
+    },
+    {
+      "check": "native row 11 exhaustive pitch candidates",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          [
+            5,
+            3
+          ]
+        ],
+        "expected": [
+          [
+            5,
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "check": "native row 11 default best position",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          5,
+          3
+        ],
+        "expected": [
+          5,
+          3
+        ]
+      }
+    },
+    {
+      "check": "native row 11 pitch round trips",
+      "pass_": true
+    },
+    {
+      "check": "native row 11 authored numbering adapter",
+      "pass_": true
+    },
+    {
+      "check": "native row 12 stored fields",
+      "pass_": true
+    },
+    {
+      "check": "native row 12 exhaustive pitch candidates",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          [
+            3,
+            10
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            1
+          ]
+        ],
+        "expected": [
+          [
+            3,
+            10
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "check": "native row 12 default best position",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          5,
+          1
+        ],
+        "expected": [
+          5,
+          1
+        ]
+      }
+    },
+    {
+      "check": "native row 12 pitch round trips",
+      "pass_": true
+    },
+    {
+      "check": "native row 12 authored numbering adapter",
+      "pass_": true
+    },
+    {
+      "check": "native row 13 stored fields",
+      "pass_": true
+    },
+    {
+      "check": "native row 13 exhaustive pitch candidates",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          [
+            4,
+            9
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            0
+          ]
+        ],
+        "expected": [
+          [
+            4,
+            9
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "check": "native row 13 default best position",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          6,
+          0
+        ],
+        "expected": [
+          6,
+          0
+        ]
+      }
+    },
+    {
+      "check": "native row 13 pitch round trips",
+      "pass_": true
+    },
+    {
+      "check": "native row 13 authored numbering adapter",
+      "pass_": true
+    },
+    {
+      "check": "native row 14 stored fields",
+      "pass_": true
+    },
+    {
+      "check": "native row 14 exhaustive pitch candidates",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          [
+            5,
+            8
+          ],
+          [
+            6,
+            3
+          ]
+        ],
+        "expected": [
+          [
+            5,
+            8
+          ],
+          [
+            6,
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "check": "native row 14 default best position",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          6,
+          3
+        ],
+        "expected": [
+          6,
+          3
+        ]
+      }
+    },
+    {
+      "check": "native row 14 pitch round trips",
+      "pass_": true
+    },
+    {
+      "check": "native row 14 authored numbering adapter",
+      "pass_": true
+    },
+    {
+      "check": "native row 15 stored fields",
+      "pass_": true
+    },
+    {
+      "check": "native row 15 exhaustive pitch candidates",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            3
+          ]
+        ],
+        "expected": [
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "check": "native row 15 default best position",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          5,
+          3
+        ],
+        "expected": [
+          5,
+          3
+        ]
+      }
+    },
+    {
+      "check": "native row 15 pitch round trips",
+      "pass_": true
+    },
+    {
+      "check": "native row 15 authored numbering adapter",
+      "pass_": true
+    },
+    {
+      "check": "F# low-first numbering source",
+      "pass_": true
+    },
+    {
+      "check": "C# inspected default ascending tuning reversed for highest-first indexing",
+      "pass_": true
+    },
+    {
+      "check": "C# MapChord unique-string source lacks a timed-event input",
+      "pass_": true
+    },
+    {
+      "check": "parser integer tempo expression source",
+      "pass_": true
+    },
+    {
+      "check": "saved available tunings literal",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          "Standard",
+          "Drop D"
+        ],
+        "expected": [
+          "Standard",
+          "Drop D"
+        ]
+      }
+    },
+    {
+      "check": "saved Standard tuning literal",
+      "pass_": true,
+      "detail": {
+        "observed": "E2,A2,D3,G3,B3,E4",
+        "expected": "E2,A2,D3,G3,B3,E4"
+      }
+    },
+    {
+      "check": "MCP revision not attested",
+      "pass_": true
+    },
+    {
+      "check": "exhaustive assignment count initial_C_E_plans",
+      "pass_": true,
+      "detail": {
+        "observed": 3,
+        "expected": 3
+      }
+    },
+    {
+      "check": "complete exhaustive assignments/spans initial_C_E_plans",
+      "pass_": true
+    },
+    {
+      "check": "exhaustive assignment count base_valid_plans",
+      "pass_": true,
+      "detail": {
+        "observed": 1,
+        "expected": 1
+      }
+    },
+    {
+      "check": "complete exhaustive assignments/spans base_valid_plans",
+      "pass_": true
+    },
+    {
+      "check": "exhaustive assignment count early_D_valid_plans_cap5",
+      "pass_": true,
+      "detail": {
+        "observed": 0,
+        "expected": 0
+      }
+    },
+    {
+      "check": "complete exhaustive assignments/spans early_D_valid_plans_cap5",
+      "pass_": true
+    },
+    {
+      "check": "exhaustive assignment count early_D_valid_plans_cap9",
+      "pass_": true,
+      "detail": {
+        "observed": 0,
+        "expected": 0
+      }
+    },
+    {
+      "check": "complete exhaustive assignments/spans early_D_valid_plans_cap9",
+      "pass_": true
+    },
+    {
+      "check": "exhaustive assignment count early_D_valid_plans_cap10",
+      "pass_": true,
+      "detail": {
+        "observed": 3,
+        "expected": 3
+      }
+    },
+    {
+      "check": "complete exhaustive assignments/spans early_D_valid_plans_cap10",
+      "pass_": true
+    },
+    {
+      "check": "Drop D exhaustive cap5 count",
+      "pass_": true,
+      "detail": {
+        "observed": 0,
+        "expected": 0
+      }
+    },
+    {
+      "check": "Drop D stored complete set",
+      "pass_": true,
+      "detail": {
+        "observed": [],
+        "expected": []
+      }
+    },
+    {
+      "check": "expanded positive-fret span multiset",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          3,
+          7,
+          7
+        ],
+        "expected": [
+          3,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "check": "initial assignments extending through held G",
+      "pass_": true,
+      "detail": {
+        "observed": 1,
+        "expected": 1
+      }
+    },
+    {
+      "check": "all six base overlap records",
+      "pass_": true
+    },
+    {
+      "check": "early four-note / three-string witness",
+      "pass_": true
+    },
+    {
+      "check": "repair count late-attack",
+      "pass_": true,
+      "detail": {
+        "observed": 1,
+        "expected": 1
+      }
+    },
+    {
+      "check": "repair exhaustive plans late-attack",
+      "pass_": true
+    },
+    {
+      "check": "repair preservation flags late-attack",
+      "pass_": true
+    },
+    {
+      "check": "repair count shorten-E",
+      "pass_": true,
+      "detail": {
+        "observed": 1,
+        "expected": 1
+      }
+    },
+    {
+      "check": "repair exhaustive plans shorten-E",
+      "pass_": true
+    },
+    {
+      "check": "repair preservation flags shorten-E",
+      "pass_": true
+    },
+    {
+      "check": "repair count extend-range",
+      "pass_": true,
+      "detail": {
+        "observed": 3,
+        "expected": 3
+      }
+    },
+    {
+      "check": "repair exhaustive plans extend-range",
+      "pass_": true
+    },
+    {
+      "check": "repair preservation flags extend-range",
+      "pass_": true
+    },
+    {
+      "check": "repair count omit-D",
+      "pass_": true,
+      "detail": {
+        "observed": 1,
+        "expected": 1
+      }
+    },
+    {
+      "check": "repair exhaustive plans omit-D",
+      "pass_": true
+    },
+    {
+      "check": "repair preservation flags omit-D",
+      "pass_": true
+    },
+    {
+      "check": "declared half-beat repair change at 120 quarter/min ms",
+      "pass_": true,
+      "detail": {
+        "observed": 250.0,
+        "expected": 250
+      }
+    },
+    {
+      "check": "proxy selected solely by positive fret span",
+      "pass_": true
+    },
+    {
+      "check": "fitted common offbeat fraction exact",
+      "pass_": true,
+      "detail": {
+        "observed": "131/208",
+        "expected": "131/208"
+      }
+    },
+    {
+      "check": "model prediction/residual arrays straight",
+      "pass_": true
+    },
+    {
+      "check": "model exact MAE straight",
+      "pass_": true
+    },
+    {
+      "check": "model numeric MAE straight",
+      "pass_": true,
+      "detail": {
+        "observed": 33.75,
+        "expected": 33.75
+      }
+    },
+    {
+      "check": "model squared residual sum straight",
+      "pass_": true,
+      "detail": {
+        "observed": 0.0185,
+        "expected": 0.0185
+      }
+    },
+    {
+      "check": "model prediction/residual arrays fixed-two-to-one",
+      "pass_": true
+    },
+    {
+      "check": "model exact MAE fixed-two-to-one",
+      "pass_": true
+    },
+    {
+      "check": "model numeric MAE fixed-two-to-one",
+      "pass_": true,
+      "detail": {
+        "observed": 9.583333333333334,
+        "expected": 9.583333333333334
+      }
+    },
+    {
+      "check": "model squared residual sum fixed-two-to-one",
+      "pass_": true,
+      "detail": {
+        "observed": 0.0017444444444444445,
+        "expected": 0.0017444444444444445
+      }
+    },
+    {
+      "check": "model prediction/residual arrays fitted-common-offbeat-fraction",
+      "pass_": true
+    },
+    {
+      "check": "model exact MAE fitted-common-offbeat-fraction",
+      "pass_": true
+    },
+    {
+      "check": "model numeric MAE fitted-common-offbeat-fraction",
+      "pass_": true,
+      "detail": {
+        "observed": 3.75,
+        "expected": 3.75
+      }
+    },
+    {
+      "check": "model squared residual sum fitted-common-offbeat-fraction",
+      "pass_": true,
+      "detail": {
+        "observed": 0.000275,
+        "expected": 0.000275
+      }
+    },
+    {
+      "check": "reference exact quarter-note tempo",
+      "pass_": true,
+      "detail": {
+        "observed": "1500/13",
+        "expected": "1500/13"
+      }
+    },
+    {
+      "check": "reference numeric quarter-note tempo",
+      "pass_": true,
+      "detail": {
+        "observed": 115.38461538461539,
+        "expected": 115.38461538461539
+      }
+    },
+    {
+      "check": "source-assisted integer BPM",
+      "pass_": true,
+      "detail": {
+        "observed": 115,
+        "expected": 115
+      }
+    },
+    {
+      "check": "conditional four-quarter rounding error exact",
+      "pass_": true,
+      "detail": {
+        "observed": "160/23",
+        "expected": "160/23"
+      }
+    },
+    {
+      "check": "conditional four-quarter rounding error ms",
+      "pass_": true,
+      "detail": {
+        "observed": 6.956521739130435,
+        "expected": 6.956521739130435
+      }
+    },
+    {
+      "check": "all common warp anchors equal authored data",
+      "pass_": true
+    },
+    {
+      "check": "common piecewise-linear map strictly positive segment slopes",
+      "pass_": true
+    },
+    {
+      "check": "all warped boundaries exact and correctly labeled seconds",
+      "pass_": true
+    },
+    {
+      "check": "all pairwise overlaps preserved under common warp",
+      "pass_": true
+    },
+    {
+      "check": "warped cap5 exhaustive feasibility",
+      "pass_": true,
+      "detail": {
+        "observed": 0,
+        "expected": 0
+      }
+    },
+    {
+      "check": "warped cap10 exhaustive feasibility",
+      "pass_": true,
+      "detail": {
+        "observed": 3,
+        "expected": 3
+      }
+    },
+    {
+      "check": "no unsupported execution flags",
+      "pass_": true
+    },
+    {
+      "check": "no invented human or performance outcomes",
+      "pass_": true
+    },
+    {
+      "check": "timing source-assisted control explicitly unexecuted",
+      "pass_": true
+    },
+    {
+      "check": "execution row and source totals",
+      "pass_": true,
+      "detail": {
+        "observed": [
+          16,
+          4
+        ],
+        "expected": [
+          16,
+          4
+        ]
+      }
+    },
+    {
+      "check": "execution temporary analysis script binding",
+      "pass_": true,
+      "detail": {
+        "observed": "3c171bdbb64bf5173c704bbf2c4f9167e691352db4b561839c5a18b1dbada60b",
+        "expected": "3c171bdbb64bf5173c704bbf2c4f9167e691352db4b561839c5a18b1dbada60b"
+      }
+    },
+    {
+      "check": "preanalysis predictions recorded as predictions",
+      "pass_": true
+    }
+  ],
+  "findings": [],
+  "fix_requests": [],
+  "limits": [
+    "Saved MCP results are audited as captured evidence, not independently reissued or tied to a runtime source revision.",
+    "Native helper reexecution verifies these sixteen rows under the pinned source and SDK; it does not execute C# MapChord, a MIDI parser, a timed solver or full GA.",
+    "String occupancy is an authored monophonic-per-string fixed-assignment model with half-open intervals; no musician, comfort, technique, timbre or physical impossibility result follows.",
+    "Timing points and repairs are authored/open-loop; residual ranking is in sample and establishes no genre, style quality, listener preference, learning or measured audio effect.",
+    "Source-assisted integer tempo arithmetic is conditional; the parser and playback path were not executed.",
+    "The preserved original preanalysis plan is a declared plan; this audit did not independently establish its wall-clock creation before analysis.",
+    "No human, musician, fluent-language, learner, deployed HTML or approval result is certified."
+  ]
+}

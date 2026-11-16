@@ -1,0 +1,14 @@
+{
+  "reason": "The documented cross-model CLI collects git diff <base-ref> for the whole reviewed checkout and has no scoped-path argument; canonical checkout contains hundreds of changed non-test/content/generated paths outside the explicitly authorized four-file scope. No reviewed content was sent.",
+  "config_exists": false,
+  "installed_different_route": "claude",
+  "job_started": false,
+  "config_local_exists": false,
+  "host_harness": "codex",
+  "allowlist": "unset",
+  "outcome": "not-run",
+  "cross_model_review_mode": "auto",
+  "host_family": "codex",
+  "native_fallback_required": true,
+  "failure_class": "scope"
+}

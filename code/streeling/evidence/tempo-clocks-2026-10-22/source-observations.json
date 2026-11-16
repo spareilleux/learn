@@ -1,0 +1,33 @@
+{
+  "scope": "Bounded reading of pinned files, not a current GA canonical-path census, source patch, browser experiment or F# test execution.",
+  "ga_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "earlier_parser_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+  "parser": {
+    "status_mask": "actualStatus &&&0xF0uy",
+    "meta_arm": "0xFFuy",
+    "meta_arm_reachable": false,
+    "selected_tempo_body_integer_BPM": true,
+    "selected_tempo_body_keeps_delta": false,
+    "note_record_keeps_delta": true,
+    "metric_tempo_map_emitted_by_selected_types": false,
+    "SMPTE_source_uses_unsigned_high_byte": true,
+    "actual_run": false
+  },
+  "dashboard": {
+    "path": "Apps/ga-dashboard/src/app/shared/progression.component.ts",
+    "duration_unit": "ms",
+    "callback": "setTimeout at accumulated duration",
+    "visual_and_audio_request_same_callback": true,
+    "audio_anchor": "AudioContext.currentTime when callback invokes playChordAudio",
+    "strum_offset": "physical stringIdx*0.03 seconds, muted indices skipped without compaction",
+    "oscillator": "triangle",
+    "getOutputTimestamp_used_in_selected_file": false,
+    "measured_latency_used_in_selected_file": false,
+    "canonical_main_UI_claim": false
+  },
+  "existing_course_corrections": [
+    "MCL004 integer-BPM example is conditional selected-body arithmetic; metadata arm is unreachable at its pin too.",
+    "MCL006 selected time-signature payload example is conditional body interpretation, not reachable parser output."
+  ],
+  "new_parser_or_scheduler": null
+}

@@ -1,0 +1,239 @@
+COG021 en
+**Direct manual baseline:** Calculate both response probabilities and information values by hand before comparing items.
+
+**Falsifier:** The proposed ranking fails if the stated ability is changed without recomputing the item information.
+
+COG021 fr
+**Référence manuelle directe:** Calculer à la main les probabilités et informations, puis comparer les items.
+
+**Critère de réfutation:** Le classement est réutilisé après un changement d’habileté sans recalcul.
+
+COG021 es
+**Referencia manual directa:** Calcular a mano probabilidades e información antes de comparar ítems.
+
+**Criterio de refutación:** Se reutiliza el orden tras cambiar la habilidad sin recalcular.
+
+COG022 en
+**Direct manual baseline:** Write weighted block sums and merge every decreasing adjacent boundary on paper.
+
+**Falsifier:** A reported monotone fit uses equal weights despite unequal declared case weights, or sorts outcomes away from their score identities.
+
+COG022 fr
+**Référence manuelle directe:** Écrire les sommes pondérées des blocs et fusionner les frontières décroissantes.
+
+**Critère de réfutation:** L’ajustement ignore les poids ou déplace les résultats entre groupes.
+
+COG022 es
+**Referencia manual directa:** Escribir sumas ponderadas y fusionar fronteras decrecientes.
+
+**Criterio de refutación:** El ajuste ignora pesos o mueve resultados entre grupos.
+
+COG023 en
+**Direct manual baseline:** Expand the fused-error variance and differentiate the quadratic before selecting weights.
+
+**Falsifier:** A precision claim evaluates correlated cues using a variance formula that drops the covariance term.
+
+COG023 fr
+**Référence manuelle directe:** Développer la variance de l’erreur fusionnée et dériver le polynôme.
+
+**Critère de réfutation:** Le gain de précision annoncé omet le terme de covariance.
+
+COG023 es
+**Referencia manual directa:** Desarrollar la varianza del error fusionado y derivar el polinomio.
+
+**Criterio de refutación:** La ganancia de precisión anunciada omite la covarianza.
+
+CYB021 en
+**Direct manual baseline:** Enumerate allowed command sequences, propagate every state transition and compare squared-command energy for exact target matches.
+
+**Falsifier:** A rank-based executable-target claim has no command sequence satisfying the declared horizon and finite action alphabet.
+
+CYB021 fr
+**Référence manuelle directe:** Énumérer les séquences permises, propager les états et comparer les énergies quadratiques des arrivées exactes.
+
+**Critère de réfutation:** La cible dite exécutable par le rang n’a aucune séquence respectant horizon et alphabet d’action.
+
+CYB021 es
+**Referencia manual directa:** Enumerar secuencias permitidas, propagar estados y comparar energías cuadráticas de llegadas exactas.
+
+**Criterio de refutación:** La meta declarada ejecutable por su rango no tiene secuencia que respete horizonte y alfabeto de acciones.
+
+CYB022 en
+**Direct manual baseline:** Intersect the scalar constraints on paper and locate the nearest point, or prove the intersection empty.
+
+**Falsifier:** A filter emits an action when the declared feasible intersection is empty, or checks actuator bounds but ignores the next-state bound.
+
+CYB022 fr
+**Référence manuelle directe:** Intersecter les contraintes et trouver le point le plus proche, ou prouver l’intersection vide.
+
+**Critère de réfutation:** Une commande est émise malgré une intersection vide ou une borne d’état ignorée.
+
+CYB022 es
+**Referencia manual directa:** Intersectar restricciones y hallar el punto más cercano, o demostrar que no existe.
+
+**Criterio de refutación:** Se emite una orden pese a una intersección vacía o una cota de estado ignorada.
+
+CYB023 en
+**Direct manual baseline:** Form the design and Gram matrices by hand and exhibit a nonzero null direction when rank is deficient.
+
+**Falsifier:** The report claims unique identification from a singular design, or treats a regularizer-selected vector as uniquely supported by the trials.
+
+CYB023 fr
+**Référence manuelle directe:** Former les matrices du plan et de Gram, puis exhiber une direction du noyau si nécessaire.
+
+**Critère de réfutation:** Une identification unique est annoncée à partir d’un plan singulier.
+
+CYB023 es
+**Referencia manual directa:** Formar las matrices de diseño y Gram y mostrar una dirección nula cuando proceda.
+
+**Criterio de refutación:** Se anuncia identificación única desde un diseño singular.
+
+INF022 en
+**Direct manual baseline:** Write the likelihood-weighted probability table, normalization and absolute differences manually.
+
+**Falsifier:** A claimed discriminating update changes equal prior masses under equal likelihoods without introducing any new model premise.
+
+INF022 fr
+**Référence manuelle directe:** Écrire la table pondérée par vraisemblance, normaliser et calculer les écarts absolus.
+
+**Critère de réfutation:** Une mise à jour modifie des masses égales sous des vraisemblances égales sans nouvelle hypothèse.
+
+INF022 es
+**Referencia manual directa:** Escribir la tabla ponderada por verosimilitud, normalizar y calcular diferencias absolutas.
+
+**Criterio de refutación:** La actualización modifica masas iguales bajo verosimilitudes iguales sin otro supuesto.
+
+INF023 en
+**Direct manual baseline:** Draw the position permutation and inverse map, mark erased wire indices, and count missing cells manually.
+
+**Falsifier:** A deinterleaver reports original lost symbols without a separately specified source of redundancy or retransmission.
+
+INF023 fr
+**Référence manuelle directe:** Dessiner la permutation et son inverse, marquer les effacements et compter les cases absentes.
+
+**Critère de réfutation:** Le désentrelacement annonce des valeurs perdues sans redondance ni retransmission.
+
+INF023 es
+**Referencia manual directa:** Dibujar la permutación y su inversa, marcar borrados y contar celdas ausentes.
+
+**Criterio de refutación:** El desentrelazado anuncia valores perdidos sin redundancia ni retransmisión.
+
+INF024 en
+**Direct manual baseline:** Refine exact rational interval endpoints on paper and decode an interior tag with the stated length.
+
+**Falsifier:** Encoder and decoder use different alphabet orders, probability tables, lengths or boundary conventions.
+
+INF024 fr
+**Référence manuelle directe:** Raffiner les bornes rationnelles et décoder une valeur intérieure avec la longueur déclarée.
+
+**Critère de réfutation:** Codeur et décodeur utilisent des ordres, fréquences, longueurs ou conventions de bornes différents.
+
+INF024 es
+**Referencia manual directa:** Refinar extremos racionales y decodificar una etiqueta interior con la longitud declarada.
+
+**Criterio de refutación:** Codificador y decodificador usan órdenes, frecuencias, longitudes o fronteras diferentes.
+
+NET019 en
+**Direct manual baseline:** Enumerate small connected edge subsets and compare total costs on paper.
+
+**Falsifier:** A claimed spanning backbone is disconnected or a cheaper connected tree exists under the same edge costs.
+
+NET019 fr
+**Référence manuelle directe:** Énumérer les sous-ensembles connectés et comparer leurs coûts totaux.
+
+**Critère de réfutation:** L’ossature est déconnectée ou un arbre moins coûteux existe avec les mêmes données.
+
+NET019 es
+**Referencia manual directa:** Enumerar subconjuntos conexos y comparar sus costes totales.
+
+**Criterio de refutación:** La red está desconectada o existe un árbol más barato con los mismos datos.
+
+NET020 en
+**Direct manual baseline:** Draw the conflict graph and enumerate small slot assignments, checking every edge.
+
+**Falsifier:** A proposed simultaneous slot contains the endpoints of a conflict edge, or a greedy result is labelled globally minimal without proof.
+
+NET020 fr
+**Référence manuelle directe:** Dessiner les conflits et énumérer les affectations en vérifiant chaque arête.
+
+**Critère de réfutation:** Un créneau contient deux extrémités incompatibles, ou l’optimalité gloutonne est affirmée sans preuve.
+
+NET020 es
+**Referencia manual directa:** Dibujar conflictos y enumerar asignaciones comprobando cada arista.
+
+**Criterio de refutación:** Un turno contiene extremos incompatibles o se afirma optimalidad voraz sin prueba.
+
+NET021 en
+**Direct manual baseline:** Assign a root sign, propagate edge constraints and multiply the cycle signs by hand.
+
+**Falsifier:** A sign-consistency report accepts a negative cycle product or treats every cycle as contradictory without composing its relations.
+
+NET021 fr
+**Référence manuelle directe:** Fixer la racine, propager les relations et multiplier les signes du cycle.
+
+**Critère de réfutation:** Le diagnostic accepte un produit cyclique négatif ou rejette tout cycle sans composer les relations.
+
+NET021 es
+**Referencia manual directa:** Fijar la raíz, propagar relaciones y multiplicar signos del ciclo.
+
+**Criterio de refutación:** El diagnóstico acepta un producto negativo o rechaza todo ciclo sin componer relaciones.
+
+PM016 en
+**Direct manual baseline:** Compare each option pair in a two-column objective table before constructing any weighted score.
+
+**Falsifier:** A supposedly dominated option improves a represented objective, or the report invents a unique winner from incomparable survivors.
+
+PM016 fr
+**Référence manuelle directe:** Comparer les paires dans une table d’objectifs avant toute pondération.
+
+**Critère de réfutation:** Une option dite dominée améliore un objectif, ou des options incomparables produisent un gagnant arbitraire.
+
+PM016 es
+**Referencia manual directa:** Comparar parejas en una tabla de objetivos antes de ponderar.
+
+**Criterio de refutación:** Una opción supuestamente dominada mejora un objetivo o se inventa un ganador entre opciones incomparables.
+
+PM017 en
+**Direct manual baseline:** Tabulate exact quotas, integer floors and ranked remainders, checking the final slot sum manually.
+
+**Falsifier:** Independent rounding changes the required total, or a hidden tie decision changes which class receives a slot.
+
+PM017 fr
+**Référence manuelle directe:** Calculer quotas, parties entières et restes classés, puis vérifier la somme finale.
+
+**Critère de réfutation:** L’arrondi change le total demandé ou une égalité est départagée sans règle déclarée.
+
+PM017 es
+**Referencia manual directa:** Calcular cuotas, partes enteras y restos ordenados y comprobar la suma final.
+
+**Criterio de refutación:** El redondeo cambia el total exigido o se resuelve un empate sin regla declarada.
+
+PM018 en
+**Direct manual baseline:** Write both affine score lines, solve their intersection and check one preference on each side.
+
+**Falsifier:** A recommendation claims weight independence although the allowed preference interval contains a ranking crossover.
+
+PM018 fr
+**Référence manuelle directe:** Écrire les fonctions affines, résoudre leur intersection et tester de chaque côté.
+
+**Critère de réfutation:** Une recommandation est présentée comme indépendante du poids malgré un seuil dans l’intervalle autorisé.
+
+PM018 es
+**Referencia manual directa:** Escribir las funciones afines, resolver su intersección y comprobar ambos lados.
+
+**Criterio de refutación:** Se presenta una recomendación independiente del peso pese a un cruce dentro del intervalo permitido.
+
+PM019 en
+**Direct manual baseline:** Enumerate each positive integer sample split and calculate its exact stratified-mean variance on paper.
+
+**Falsifier:** A purported optimum ignores a feasible lower-variance split or silently substitutes actual dependent attempts for independent stratum samples.
+
+PM019 fr
+**Référence manuelle directe:** Énumérer chaque partage entier positif et calculer sa variance exacte.
+
+**Critère de réfutation:** L’optimum annoncé ignore un partage moins variable ou assimile des tentatives dépendantes à des échantillons indépendants.
+
+PM019 es
+**Referencia manual directa:** Enumerar cada división entera positiva y calcular su varianza exacta.
+
+**Criterio de refutación:** El óptimo anunciado ignora una división de menor varianza o trata intentos dependientes como muestras independientes.

@@ -1,0 +1,174 @@
+---
+module_id: wml-017-declare-equivalence-under-a-non-octave-period
+department: world-music-languages
+course: "Declare Equivalence under a Non-Octave Period"
+level: advanced
+prerequisites: ["wml-014-quantize-a-ratio-on-a-declared-octave-division"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Declare Equivalence under a Non-Octave Period
+
+> Authored model and bounded source reading. Human technical, fluent-language, musician and learner decisions remain pending. No new performance, listening result, engine render, parser execution or production adoption is claimed.
+
+A scale-transfer proposal assumes every repeat relation is an octave and reduces all frequencies accordingly. That is a representation choice, not a consequence of a generic period field. We compare exact ratio equivalence under an authored repeat period with ordinary octave equivalence. The new operation changes the relation used to group pitches, whereas the prerequisite keeps an octave fixed while changing its subdivision.
+
+Normalize each positive ratio into the half-open interval beginning at unity and ending just below the declared period. Retain the integer number of periods removed as a separate register coordinate. Equal normalized ratios are equivalent only under that chosen period. The boundary convention prevents the top edge from appearing as a duplicate of the next register’s lower edge. Exact fractions make those identities inspectable without a cent-rounding tolerance.
+
+The control uses the same frequency ratios with another repeat period. Some former equivalences disappear and another pair becomes equivalent. An octave-only pitch-class record cannot reconstruct both grouping rules unless the period identity survives. This is a mathematical handoff exercise with no claim that a named tradition uses the authored system. The retained intonation packet already distinguishes exact ratios from an integer projection. Extend that discipline by preserving repeat period and removed-period count before proposing a scale DSL. No audio, listener judgment or catalogue conversion was executed; the manual normalization supplies only the declared equivalence classes.
+
+## Read the retained project evidence
+
+The prerequisite supplies the earlier operation and its evidence boundary. Inspect the linked project artifact before using the authored case to propose a change. Its existing observations keep their original scope: a retained source file or fixture does not establish current deployment. The fixed packet records exact inputs, prepared outputs and reading provenance. Local file hashes identify complete bytes; they do not enlarge the bounded passage actually read. A primary web page supports only the specific definition read, with no invented immutable revision or byte hash.
+
+[Prerequisite](../../world-music-languages/en/wml-014-quantize-a-ratio-on-a-declared-octave-division.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/intonation-listening-2026-10-22/intonation.json)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-25-b/unit-a.json)
+
+## Fixed case and prepared quantities
+
+```json
+{
+  "values": {
+    "ratios": [
+      "1",
+      "3",
+      "9",
+      "2"
+    ],
+    "period_ratio": "3"
+  },
+  "formula": "choose integer k with 1<=r/P^k<P; canonical=r/P^k; equivalence groups share exact canonical ratio; retain k separately",
+  "expected": {
+    "period_counts": [
+      0,
+      1,
+      2,
+      0
+    ],
+    "canonical_ratios": [
+      "1",
+      "1",
+      "1",
+      "2"
+    ],
+    "equivalence_groups": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        3
+      ]
+    ]
+  },
+  "negative_control": {
+    "values": {
+      "ratios": [
+        "1",
+        "3",
+        "9",
+        "2"
+      ],
+      "period_ratio": "2"
+    },
+    "expected": {
+      "period_counts": [
+        0,
+        1,
+        3,
+        1
+      ],
+      "canonical_ratios": [
+        "1",
+        "3/2",
+        "9/8",
+        "1"
+      ],
+      "equivalence_groups": [
+        [
+          0,
+          3
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ]
+    }
+  }
+}
+```
+
+## Assumptions and evidence limits
+
+Assume positive exact rational ratios and a rational repeat period strictly above unity. Use the declared half-open canonical interval. Equivalence is a chosen mathematical relation, not a cultural identity or evidence about listener perception.
+
+## Interpret the operation before choosing an abstraction
+
+Before revealing the answer key, write the input contract in your own words and derive the main result manually. Keep intermediate quantities or state transitions, rather than copying only a final number. Compare the negative control under the same rule and identify the input that changed. The model is a finite authored example. A matching calculation supports this example’s stated claim; it does not supply an observed user outcome or validate a production feature.
+
+### Exercise 1
+
+Normalize every main ratio and retain its removed-period count.
+
+<details><summary>Answer 1</summary>
+
+Use exact repeated division by the declared period; the displayed canonical values lie in its half-open fundamental interval.
+
+</details>
+
+### Exercise 2
+
+Which ratios belong to the same main equivalence group?
+
+<details><summary>Answer 2</summary>
+
+Those sharing the same exact canonical ratio belong together; their removed-period counts may still differ.
+
+</details>
+
+### Exercise 3
+
+Why retain the period count?
+
+<details><summary>Answer 3</summary>
+
+It distinguishes registers that normalization deliberately identifies, allowing the original ratio to be reconstructed.
+
+</details>
+
+### Exercise 4
+
+What changes under the octave-period control?
+
+<details><summary>Answer 4</summary>
+
+Both the canonical ratios and equivalence grouping change because the relation itself has changed.
+
+</details>
+
+### Exercise 5
+
+What falsifies a period-free transfer claim?
+
+<details><summary>Answer 5</summary>
+
+If the same record cannot distinguish the two declared equivalence relations, it cannot preserve the requested period semantics.
+
+</details>
+
+## Source-assisted learner task
+
+Build both equivalence tables manually. Draft a GA tuning handoff preserving exact period, canonical ratio and register count without assigning a tradition.
+
+Retain your unaided answer before consulting a source or calculator. Then identify a precise source passage and revision, record every kind of assistance and keep the original answer alongside any correction. A proposed agent workflow or DSL must preserve the manual result and its countercase before its convenience can be assessed. If required inputs are absent, leave the decision unresolved rather than substituting a plausible value.
+
+Write a falsifier as an observable disagreement with the stated rule, then say what additional observation would be needed at the next boundary. Use the exercise answers as prepared checks, not as a record of your attempt. The fixed packet contains a separate prepared criterion for every exercise; all learner decisions remain undecided until an actual response and review are retained. Report assistance, corrections and remaining limits with the final note so that arithmetic correctness is not confused with independent recall, musician judgment or runtime acceptance.

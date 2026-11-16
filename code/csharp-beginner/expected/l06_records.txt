@@ -1,0 +1,9 @@
+Note { Name = C, Octave = 4 }
+Note { Name = C, Octave = 5 }
+c4 == middleC: True
+same object: False
+c4 == c5: False
+two NoteObject: False
+Position { StringNumber = 6, Fret = 3 } -> Position { StringNumber = 6, Fret = 5 }
+g == new Position(6, 3): True
+exit 0

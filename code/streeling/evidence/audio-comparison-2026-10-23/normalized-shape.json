@@ -1,0 +1,116 @@
+{
+  "scope": "Authored real-valued sample descriptors and counterexamples, not f32 byte serialization, measured audio, an installed Pearson pipeline or learner result.",
+  "transform": "y=.5*x+.25",
+  "population_sigma_convention": "sqrt(sum((x-mean)^2)/N), not sample-ddof1",
+  "x": {
+    "samples": [
+      -0.25,
+      0,
+      0.25,
+      0.5
+    ],
+    "N": 4,
+    "mean": 0.125,
+    "population_variance": 0.078125,
+    "population_sigma": 0.2795084971874737,
+    "z": [
+      -1.3416407864998738,
+      -0.4472135954999579,
+      0.4472135954999579,
+      1.3416407864998738
+    ],
+    "reconstructed": [
+      -0.25,
+      0.0,
+      0.25,
+      0.5
+    ]
+  },
+  "y": {
+    "samples": [
+      0.125,
+      0.25,
+      0.375,
+      0.5
+    ],
+    "N": 4,
+    "mean": 0.3125,
+    "population_variance": 0.01953125,
+    "population_sigma": 0.13975424859373686,
+    "z": [
+      -1.3416407864998738,
+      -0.4472135954999579,
+      0.4472135954999579,
+      1.3416407864998738
+    ],
+    "reconstructed": [
+      0.125,
+      0.25,
+      0.375,
+      0.5
+    ]
+  },
+  "pearson_xy": 1.0,
+  "same_z_max_error": 0.0,
+  "raw_difference": [
+    0.375,
+    0.25,
+    0.125,
+    0.0
+  ],
+  "raw_difference_rms": 0.23385358667337133,
+  "reconstruction_max_error_x": 0.0,
+  "reconstruction_max_error_y": 0.0,
+  "inversion": {
+    "record": {
+      "samples": [
+        0.25,
+        0,
+        -0.25,
+        -0.5
+      ],
+      "N": 4,
+      "mean": -0.125,
+      "population_variance": 0.078125,
+      "population_sigma": 0.2795084971874737,
+      "z": [
+        1.3416407864998738,
+        0.4472135954999579,
+        -0.4472135954999579,
+        -1.3416407864998738
+      ],
+      "reconstructed": [
+        0.25,
+        0.0,
+        -0.25,
+        -0.5
+      ]
+    },
+    "pearson": -1.0,
+    "absolute_pearson": 1.0,
+    "sum_samples": [
+      0.0,
+      0,
+      0.0,
+      0.0
+    ]
+  },
+  "constant": {
+    "samples": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "N": 4,
+    "mean": 0.25,
+    "population_variance": 0.0,
+    "population_sigma": 0.0,
+    "z": null,
+    "reconstructed": null
+  },
+  "constant_correlation": null,
+  "constant_rms": 0.25,
+  "positive_affine_family": "For a>0, z(a*x+b)=z(x); without mean/sigma, scale and offset remain unspecified.",
+  "physical_gain_or_DC_measurement": null
+}

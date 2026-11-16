@@ -1,0 +1,101 @@
+---
+module_id: sem-013-align-two-motif-periods-at-a-textile-seam
+department: semiotics
+course: "Align Two Motif Periods at a Textile Seam"
+level: intermediate
+prerequisites: ["sem-008-interpret-layer-order-relative-to-the-reference-normal"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Align Two Motif Periods at a Textile Seam
+
+> Draft for technical and language review. Every scene, count, temperature, timing and outcome introduced below is an authored example. Source inspection and arithmetic do not constitute a physical craft trial, a [Godot](https://docs.godotengine.org/en/4.5/) import, a [Blender](https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md) render, a [ComfyUI](https://docs.comfy.org/) run or a learner observation. Human and runtime decisions remain undecided.
+
+## Project question
+
+A woven panel repeats its crossing order while an embroidered marker repeats on a different cycle. Joining panels at a boundary that matches only the marker can still break the weave. This lesson composes two periodic meaning contracts on one integer grid. It adds a multi-motif phase condition beyond interpreting which strand lies above another at a single crossing.
+
+## Read the retained boundary
+
+The retained weave fixture stores a global-parity variant and grid coordinates. That source motivates a periodic crossing address, but it supplies no embroidered marker cycle. The second period below is an explicit authored addition, not a hidden property of the historical fixture.
+
+Read the prerequisite and the retained project artifact before interpreting the model. The source has its own revision and purpose; it supplies the boundary described here, not the new classroom inputs. Keep a small evidence table separating an inspected field, an assumption, a derived quantity and a proposed scene effect. An agent summary must point back to the field it interprets. A source filename alone cannot establish an earlier result.
+
+## Interpret the model
+
+A translated copy preserves a motif’s phase when the shift is divisible by that motif’s period. To preserve both, require both remainders to vanish. Their least common multiple gives the smallest positive joint repeat under these assumptions. Keep period and phase separate: equal periods can still carry different origins. The present model starts both motifs at zero phase and uses translation only. Turning a textile over, exchanging warp and weft or mirroring the pattern would require another interpretation. A visually similar border cannot replace the address-level condition when motif identity matters to a scene query.
+
+The direct baseline is a labelled sketch and a hand calculation with the answer panels closed. Preserve intermediate values and units, then apply the changed input in the negative control. A disagreement is useful evidence: locate whether it comes from the definition, arithmetic, representation or intended task before changing the model. Agreement on the main case alone does not establish a universal rule. These finite examples deliberately expose an assumption that a smooth preview could conceal.
+
+```text
+{"periods_cells":[2,3],"shift_cells":6}
+phase_remainders=[shift % p for p in periods]; compatible=all(remainder==0); joint_period=lcm(periods)
+```
+
+## Corrected exercises
+
+### Exercise 1
+
+Check both motif remainders for the main shift.
+
+<details><summary>Answer 1</summary>
+
+The phase remainders are `[0,0]`, so the shift preserves both declared phases. This is an address-level equality, not a visual inspection.
+
+</details>
+
+### Exercise 2
+
+Find the smallest positive shift preserving both motifs.
+
+<details><summary>Answer 2</summary>
+
+The joint period is `6` cells. A common multiple works; the least positive common multiple gives the first repeat under the zero-phase assumptions.
+
+</details>
+
+### Exercise 3
+
+Apply the shorter-shift negative control.
+
+<details><summary>Answer 3</summary>
+
+The remainders become `[1,0]`: the marker cycle matches while the other cycle fails. Compatibility is therefore false despite one successful motif.
+
+</details>
+
+### Exercise 4
+
+Would declaring only each period fully identify a seam?
+
+<details><summary>Answer 4</summary>
+
+No. Origins or phase offsets, grid directions and the joining transformation are also needed. The current calculation assumes both initial phases are zero.
+
+</details>
+
+### Exercise 5
+
+Does the modular condition certify a real seamless fabric or texture?
+
+<details><summary>Answer 5</summary>
+
+No. It checks declared discrete phases only. Geometry, thread thickness, sampling, material continuity and fabrication remain separate requirements.
+
+</details>
+
+## Source-assisted learner task
+
+Draw both cycles on a numbered strip and test the two shifts by hand. Locate grid identity in the fixture and mark the added marker cycle as authored. A seam that matches one period but not the other falsifies an unconditional single-motif compatibility rule.
+
+Retain your original answer, source locations, assistance history and any later correction as separate records. State the observable result that would falsify your recommendation before proposing automation. Compare the source-assisted result with your direct manual baseline, including any extra uncertainty it introduces. The fixed packet contains five prepared criteria; each decision stays null until an actual learner attempt and review exist. Prepared answers are checks, not evidence that a learner performed the task.
+
+## Sources and validation journal
+
+- [Prerequisite: sem-008-interpret-layer-order-relative-to-the-reference-normal](../../semiotics/en/sem-008-interpret-layer-order-relative-to-the-reference-normal.md)
+- [Retained project artifact](../../../../code/streeling/evidence/weave-scene-2026-10-22/crossings.json)
+- [Primary reading](https://docs.godotengine.org/en/4.5/tutorials/3d/using_transforms.html)
+- [Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-24/unit-c.json)
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-24/journal.md)

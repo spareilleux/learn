@@ -1,0 +1,69 @@
+# l6
+
+== POST /api/chatbot/chat/stream "Show me Cmaj7 voicings"
+HTTP 200
+  | data: {"type":"routing","agentId":"voicing",…
+  |
+  | data: Found 2 voicings matching chord Cmaj7:
+  | data:
+  | data: - **Cmaj7** `3-0-x-2-3-x` (guitar, score 0.369)
+  | data: ```vextab
+  | data: 6/3 5/0 3/2 2/3
+  | data: ```
+  | data: - **Cmaj7** `3-0-0-2-3-x` (guitar, score 0.369)
+  | data: ```vextab
+  | data: 6/3 5/0 4/0 3/2 2/3
+  | data: ```
+  |
+  | data: [DONE]
+  |
+
+== The same stream, read as the HTML standard says
+event 1  routing  1 line(s)
+event 2  text     10 line(s)
+event 3  [DONE]   1 line(s)
+
+POST /api/chatbot/chat               HTTP 200, answer of 199 characters
+text events joined, equal to it      yes (line breaks as LF)
+the course's copy of the host's writer gives the host's bytes  yes
+
+== "which arpeggio fits Am F C G" with no model server
+POST /api/chatbot/chat         HTTP 500
+POST /api/chatbot/chat/stream  HTTP 200
+  | data: {"error":"Failed to process message. Please try again."}
+  |
+
+reader                 what the user gets
+HTML standard          {"error":"Failed to process message. Please try again."}
+GaChatbot page         {"error":"Failed to process message. Please try again."}
+ga-client chatService  (throws) Failed to process message. Please try again.
+
+== SseChunker.SplitIntoChunks on the improvisation skill's answer (GA at a826864)
+answer: 6 lines of text, 8 line breaks, 558 characters
+chunk 1  "Over **Am – F – C – G**, for each chord:\n\n- **Am** → arpeggio **Am**, play **A Aeolian (natural minor)** (diatonic minor — fits most i chords)."
+chunk 2  "- **F** → arpeggio **F**, play **F Ionian (major)** (diatonic, includes the 7 — careful on the IV chord)."
+chunk 3  "- **C** → arpeggio **C**, play **C Ionian (major)** (diatonic, includes the 7 — careful on the IV chord)."
+chunk 4  "- **G** → arpeggio **G**, play **G Ionian (major)** (diatonic, includes the 7 — careful on the IV chord)."
+chunk 5  "Each arpeggio spells the chord tones; the scale adds the passing notes for lines between them."
+joined: 552 characters, 6 line breaks missing
+joined, as the page renders it:
+  | Over **Am – F – C – G**, for each chord:
+  |
+  | - **Am** → arpeggio **Am**, play **A Aeolian (natural minor)** (diatonic minor — fits most i chords).- **F** → arpeggio **F**, play **F Ionian (major)** (diatonic, includes the 7 — careful on the IV chord).- **C** → arpeggio **C**, play **C Ionian (major)** (diatonic, includes the 7 — careful on the IV chord).- **G** → arpeggio **G**, play **G Ionian (major)** (diatonic, includes the 7 — careful on the IV chord).Each arpeggio spells the chord tones; the scale adds the passing notes for lines between them.
+
+== The same answer split by #743's expression (?<=[.!?]\s+)(?=\S)
+chunk 1  "Over **Am – F – C – G**, for each chord:\n\n- **Am** → arpeggio **Am**, play **A Aeolian (natural minor)** (diatonic minor — fits most i chords).\n"
+chunk 2  "- **F** → arpeggio **F**, play **F Ionian (major)** (diatonic, includes the 7 — careful on the IV chord).\n"
+chunk 3  "- **C** → arpeggio **C**, play **C Ionian (major)** (diatonic, includes the 7 — careful on the IV chord).\n"
+chunk 4  "- **G** → arpeggio **G**, play **G Ionian (major)** (diatonic, includes the 7 — careful on the IV chord).\n\n"
+chunk 5  "Each arpeggio spells the chord tones; the scale adds the passing notes for lines between them.\n"
+joined: 558 characters, exact
+
+== Each writer with each reader, on the improvisation answer
+writer         reader                 chunks at a826864                            chunks after #743
+GaChatbot.Api  HTML standard          6 line breaks missing                        exact
+GaChatbot.Api  GaChatbot page         6 line breaks missing                        exact
+GaChatbot.Api  ga-client chatService  1 of 6 lines missing, 8 line breaks missing  1 of 6 lines missing, 8 line breaks missing
+GaApi          HTML standard          1 of 6 lines missing, 8 line breaks missing  1 of 6 lines missing, 8 line breaks missing
+GaApi          GaChatbot page         1 of 6 lines missing, 8 line breaks missing  1 of 6 lines missing, 8 line breaks missing
+GaApi          ga-client chatService  1 of 6 lines missing, 8 line breaks missing  1 of 6 lines missing, 8 line breaks missing

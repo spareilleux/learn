@@ -1,0 +1,81 @@
+---
+module_id: gtr-009-budget-time-for-a-position-shift
+department: guitar-studies
+course: "Budget Time for a Position Shift"
+level: intermediate
+prerequisites: ["gtr-003-audit-voicing-playability", "gtr-005-plan-which-string-keeps-ringing"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+
+# Budget Time for a Position Shift
+
+> **Draft and evidence boundary.** This lesson contains an authored model and source reading. Human technical, musician, fluent-language and learner decisions remain pending. No new engine render, parser run, playing, listening or learner observation is claimed. Historical failures keep their original status.
+
+## The project question
+
+A voicing can satisfy pitch and string occupancy while leaving no time for the next position. A GA practice suggestion therefore needs a temporal budget in addition to a static shape score. We use an authored shift cost, release and preparation times to identify a narrow infeasibility witness. No cost below is a measured human speed.
+
+## Read the project evidence
+
+Read the linked prerequisite and retained project artifact before applying the model. Locate the particular representation, transformation or exclusion that matters to this question. The fixed packet records source identity, reading scope and authored values; a source location is evidence for its contents at that revision, not proof of current deployment. Keep a source-derived observation separate from an inferred proposal. Where a primary reference is linked, use its stated scope rather than extending it to unsupported cases.
+
+[Prerequisite: gtr-003-audit-voicing-playability](../../guitar-studies/en/gtr-003-audit-voicing-playability.md)
+
+[Prerequisite: gtr-005-plan-which-string-keeps-ringing](../../guitar-studies/en/gtr-005-plan-which-string-keeps-ringing.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/phrase-performance-2026-10-22/string-occupancy.json)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-23/unit-a.json)
+
+[Validation journal](../../../../code/streeling/evidence/batch50-2026-10-23/journal.md)
+
+## 1. Exercise 1
+
+At quarter-note rate 120, a half-quarter gap lasts 250 ms. The gap starts after the held note may be released, not at its attack. Subtracting the wrong event boundary manufactures preparation time. Use the prerequisite's event identities to keep release and next onset distinct.
+
+What is the available time for a gap of .5 quarter beats?
+
+> **Answer.** `0.5*60000/120` gives 250 ms.
+
+## 2. Exercise 2
+
+Stipulate release 40 ms, travel across 4 frets at 30 ms per fret and preparation 60 ms. Assume these stages are sequential and do not overlap. The required total is 220 ms. This cost table is a classroom model, not a physiological law or a calibrated GA service.
+
+Calculate required time and slack.
+
+> **Answer.** Required time is `40+4*30+60=220` ms; slack against 250 ms is 30 ms.
+
+## 3. Exercise 3
+
+Increase only the tempo to 180. The same gap now supplies approximately 166.666667 ms, below the unchanged cost. That negative control falsifies a universal assertion that the shape transition fits whenever the pitches are valid. The model says which premise fails without claiming that every guitarist would fail.
+
+What is the deficit at the faster tempo?
+
+> **Answer.** Required minus available is approximately 53.333333 ms; the declared model cannot fit this transition.
+
+## 4. Exercise 4
+
+A proposed repair can reduce travel, create more release time or change tempo. Each changes a declared input, and the musical request must retain the change. Silently shortening a held note may create a feasible schedule while violating sustain. Compare a manually calculated budget before introducing a planner or new DSL.
+
+Is releasing the note earlier an unchanged realization?
+
+> **Answer.** No. It changes the event offset; record that musical edit and obtain the intended performer decision.
+
+## 5. Exercise 5
+
+The retained occupancy packet excludes hand geometry and motor timing explicitly. Our extension adds a proposed cost calculation, not retrospective musician evidence. A future task must retain observed onset errors, actual fingering and assistance alongside the budget; a successful arithmetic schedule alone establishes none of those outcomes.
+
+What conclusion is supported by positive slack?
+
+> **Answer.** The authored sequential-cost model fits; clean performance, comfort and an actual learning benefit remain undecided.
+
+## Source-assisted learner task
+
+Prepare a short review note from the fixed case before opening the prepared answers. First reproduce the calculation or table manually, keeping the stated units, support and assumptions. That direct result is the baseline for any source-assisted or agent-assisted answer. Then inspect the linked project artifact and identify one precise boundary relevant to the calculation. Record the actual source excerpt or field used, its revision, your proposed answer and every kind of assistance received. A calculator and source lookup are allowed; label them instead of presenting the result as unaided recall.
+
+Apply the negative control as well as the main case. Write the observable result that would falsify your conclusion, and state whether the control actually supplies it. If a model input is absent, retain an unresolved result rather than substituting a plausible value. Compare a proposed abstraction with the manual baseline before recommending a new agent workflow or DSL. The answer key is a prepared check, not a record of your attempt. Keep your original answer before reveal, any correction afterward and the reason for the correction.
+
+The packet contains five prepared learner criteria corresponding to the exercises. Their decisions remain null until actual answers, assistance and review are retained. Correct arithmetic supports only the declared model. A useful project decision still needs the relevant human judgment or runtime observation at its own boundary. Record actual checks, errors and refinements in the linked validation journal; the journal must distinguish executed tests from planned tests.

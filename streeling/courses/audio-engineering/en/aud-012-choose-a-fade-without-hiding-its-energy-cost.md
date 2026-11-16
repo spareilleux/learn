@@ -1,0 +1,81 @@
+---
+module_id: aud-012-choose-a-fade-without-hiding-its-energy-cost
+department: audio-engineering
+course: "Choose a Fade Without Hiding Its Energy Cost"
+level: intermediate
+prerequisites: ["aud-006-calibrate-spectral-amplitudes", "aud-009-declare-alignment-before-a-null-test"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+
+# Choose a Fade Without Hiding Its Energy Cost
+
+> **Draft and evidence boundary.** This lesson contains an authored model and source reading. Human technical, musician, fluent-language and learner decisions remain pending. No new engine render, parser run, playing, listening or learner observation is claimed. Historical failures keep their original status.
+
+## The project question
+
+A fade can reduce a boundary discontinuity while also changing the data used for an amplitude comparison. A GA report that describes only the smoother endpoint omits that cost. We compare two explicit finite envelopes on the same authored samples, preserving support and squared-sample sums. This is a choice of measurement preparation, not an auditory ranking of fades.
+
+## Read the project evidence
+
+Read the linked prerequisite and retained project artifact before applying the model. Locate the particular representation, transformation or exclusion that matters to this question. The fixed packet records source identity, reading scope and authored values; a source location is evidence for its contents at that revision, not proof of current deployment. Keep a source-derived observation separate from an inferred proposal. Where a primary reference is linked, use its stated scope rather than extending it to unsupported cases.
+
+[Prerequisite: aud-006-calibrate-spectral-amplitudes](../../audio-engineering/en/aud-006-calibrate-spectral-amplitudes.md)
+
+[Prerequisite: aud-009-declare-alignment-before-a-null-test](../../audio-engineering/en/aud-009-declare-alignment-before-a-null-test.md)
+
+[Retained project artifact](../../../../code/streeling/guitar-runtime/run.mjs)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-23/unit-a.json)
+
+[Validation journal](../../../../code/streeling/evidence/batch50-2026-10-23/journal.md)
+
+## 1. Exercise 1
+
+Use constant samples `[1,1,1]` on a support of three frames. Their squared-sample sum is 3. Define a linear amplitude envelope `[1,.5,0]`. Both its first and final gains are explicit, and the middle value belongs to this discrete definition. A vaguely specified fade duration would not determine those samples.
+
+Apply the linear envelope and calculate its squared-sample sum.
+
+> **Answer.** The result is `[1,.5,0]` and its sum of squares is 1.25. Both endpoints and the discrete middle gain are part of the authored definition.
+
+## 2. Exercise 2
+
+A second envelope is `[1,sqrt(.5),0]`. Its squared gains are `[1,.5,0]`, so the same unit input produces energy 1.5. The middle gain is approximately .707106781. The two envelopes share endpoint gains and support, yet retain different squared-sample sums. Calling both merely a fade hides a consequential choice.
+
+Calculate the second energy and compare it with the linear-envelope result.
+
+> **Answer.** The second energy is 1.5 versus 1.25. Equal endpoints and duration do not imply equal energy under the declared sample-square measure.
+
+## 3. Exercise 3
+
+Relative to original energy 3, retained fractions are `1.25/3=5/12` and `1.5/3=.5`. These fractions apply to this input. Multiplying the faded audio afterward to recover a chosen RMS introduces another transformation and potentially changes peak bounds. Report that gain separately instead of claiming that the original fade preserved energy.
+
+Give the two retained fractions and identify what later RMS normalization adds.
+
+> **Answer.** They are `5/12` and `.5`. Normalization adds a separate gain operation; it does not make the initial envelope energy preserving.
+
+## 4. Exercise 4
+
+For the negative control, put all input energy in the final frame: `[0,0,1]`. Both envelopes now produce `[0,0,0]`. Their energy retention is zero, despite the earlier different fractions. This directly falsifies a universal retention factor inferred from constant samples. Input placement within the envelope matters as well as the gain curve.
+
+Does the constant-input result establish a universal retention percentage?
+
+> **Answer.** No. The final-frame-only control yields `[0,0,0]` for both envelopes and zero retained energy. A retention fraction must identify its input and support.
+
+## 5. Exercise 5
+
+Inspect how the retained runner selects measurement windows and preserves raw buffers. A future fade comparison should retain the unfaded copy, envelope values, support, optional gain and acceptance criterion. An agent can assist by checking arithmetic, but selecting which preparation answers the guitarist's question still requires a stated task. Neither smoother endpoints nor lower energy supplies a preference verdict.
+
+What must a review note preserve before comparing faded results?
+
+> **Answer.** Preserve original samples, envelope, support, energy definition, any later gain and the decision criterion. No new render or listening preference was observed here.
+
+## Source-assisted learner task
+
+Prepare a short review note from the fixed case before opening the prepared answers. First reproduce the calculation or table manually, keeping the stated units, support and assumptions. That direct result is the baseline for any source-assisted or agent-assisted answer. Then inspect the linked project artifact and identify one precise boundary relevant to the calculation. Record the actual source excerpt or field used, its revision, your proposed answer and every kind of assistance received. A calculator and source lookup are allowed; label them instead of presenting the result as unaided recall.
+
+Apply the negative control as well as the main case. Write the observable result that would falsify your conclusion, and state whether the control actually supplies it. If a model input is absent, retain an unresolved result rather than substituting a plausible value. Compare a proposed abstraction with the manual baseline before recommending a new agent workflow or DSL. The answer key is a prepared check, not a record of your attempt. Keep your original answer before reveal, any correction afterward and the reason for the correction.
+
+The packet contains five prepared learner criteria corresponding to the exercises. Their decisions remain null until actual answers, assistance and review are retained. Correct arithmetic supports only the declared model. A useful project decision still needs the relevant human judgment or runtime observation at its own boundary. Record actual checks, errors and refinements in the linked validation journal; the journal must distinguish executed tests from planned tests.
