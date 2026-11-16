@@ -1,0 +1,185 @@
+{
+  "status": "complete",
+  "verdict": "Ready to merge",
+  "verdict_reasoning": "No primary or actionable findings remain in the seven reviewed code paths. Local regression, build, repeat-sync and browser evidence support this quality gate, with the precise testing limits retained below. R5 is an intentional subsequent parent-owned release step; this verdict does not establish publication or public-route verification.",
+  "scope": {
+    "base": "d37df8408cce7c4f96c4bbfbff33f43f27d3618a",
+    "branch": "codex/streeling-public-count-20261029",
+    "head_sha": "d37df8408cce7c4f96c4bbfbff33f43f27d3618a",
+    "pr_url": null,
+    "files_changed": 7,
+    "files": [
+      "scripts/sync-streeling.mjs",
+      "scripts/tests/sync-streeling.test.mjs",
+      "src/scripts/streeling-nav-counts.mjs",
+      "scripts/tests/streeling-nav-counts.test.mjs",
+      "src/components/Sidebar.astro",
+      "src/components/GlobalMenu.astro",
+      "src/styles/custom.css"
+    ],
+    "mode": "standalone",
+    "reviewed_tree": "working tree against the named base",
+    "untracked_excluded": [
+      "code/streeling/evidence/publication-2026-10-29/ (plan/evidence context only)"
+    ]
+  },
+  "intent": "Show visible generated overview totals from real locale pages, dynamically count course links independently per controlled navigation tree on load and Astro navigation, and widen desktop sidebar while preserving complete navigation and native modal accessibility.",
+  "intent_confidence": "explicit",
+  "reviewers": [
+    "correctness",
+    "project-standards",
+    "testing",
+    "julik-frontend-races",
+    "adversarial"
+  ],
+  "findings": [],
+  "actionable_findings": [],
+  "triage_groups": [],
+  "pre_existing_findings": [],
+  "requirements_completeness": {
+    "plan": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/publication-2026-10-29/plan.md",
+    "plan_source": "explicit",
+    "requirements": [
+      {
+        "id": "R1",
+        "requirement": "Near-top EN/FR/ES overview totals, core quota and optional IX Research separately, table total, actual generated locale pages not fallbacks.",
+        "status": "met",
+        "assessment": "The generator adds near-top EN/FR/ES totals and a table total from actual locale counts, separates the core quota and IX Research, and has missing-translation and optional-research regression coverage. Actual browser totals show 481 / 525 core modules plus 1 IX Research module, 482 distinct modules and 1446 localized pages."
+      },
+      {
+        "id": "R2",
+        "requirement": "Published course-link identities at initial and astro:page-load, independent trees, deduplication, exclude journals/overviews/external/nonmodules, empty groups and reusable badges.",
+        "status": "met",
+        "assessment": "The production module counts unique course identities independently per marked tree at initial import and astro:page-load, excludes non-course routes, retains zero counts and reuses badges. Immutable proof tests and the separate retained nested fixture cover these behaviors. Real browser locale navigation and reload show 22 badges per tree summing to 482; real EventTarget dispatch after browser DOM mutation was not assessed."
+      },
+      {
+        "id": "R3",
+        "requirement": "Desktop sidebar22rem at>=72rem; preserve smaller screens, all links/currentpage/keyboard/mobile/home/theme/lang/native dialog.",
+        "status": "met",
+        "assessment": "The scoped CSS sets the desktop sidebar to 22rem at >=72rem. The actual 1280px browser measurement is 352px; the scoped diff preserves navigation and native dialog code. At 390px the retained browser receipt records dialog autofocus, Escape close, aria-expanded=false and focus return."
+      },
+      {
+        "id": "R4",
+        "requirement": "RED/GREEN evidence, changed runnable code review, regressions, fullbuild/repeatsync, realbrowser appearance/recomputation/ENFRES/mobile.",
+        "status": "met",
+        "assessment": "Retained RED/GREEN evidence, five review lenses, 19 passing final Node tests, the successful 2725-page full build, repeat-sync equality across 1520 files, actual EN/FR/ES browser navigation, sidebar width, reload and mobile dialog checks satisfy the local quality gate. Dynamic changed-link recomputation is evidenced by direct calls to the registered production callback in an in-memory fixture, including 1000 repeated calls. No browser DOM mutation or real EventTarget dispatch was performed; the original testing gaps and subsequent evidence are retained separately."
+      },
+      {
+        "id": "R5",
+        "requirement": "Root-owned subsequent release: publish correction, public counts/nav verification and1518routes pluscurriculum evidence update; no extra courses/navsize redesign.",
+        "status": "not addressed",
+        "assessment": "Intentionally deferred to the parent-owned subsequent release: publication, actual public counters/navigation, anonymous readback of all 1518 article routes and curriculum evidence update. These release actions are outside this report-only seven-code-path review and do not represent missing code implementation.",
+        "intentional_deferment": true,
+        "owner": "release",
+        "within_review_scope": false
+      }
+    ],
+    "implementation_units": [],
+    "unrequested_behavior_rules": []
+  },
+  "learnings": [],
+  "agent_native_gaps": [],
+  "deployment_notes": [],
+  "residual_risks": [],
+  "testing_gaps": [
+    "src/scripts/streeling-nav-counts.mjs:74-77: the Node proof tests import without a document and call updateStreelingNavCounts directly, so they do not exercise initial browser execution or the astro:page-load registration. The actual browser validation being performed by the root should explicitly dispatch astro:page-load after changing navigation links and confirm recomputation without duplicate badges; the recorded 19 passing Node tests alone do not establish that lifecycle contract.",
+    "scripts/tests/streeling-nav-counts.test.mjs:36-41: the DOM fixture contains only flat department groups and returns a group's own links for every querySelectorAll call. It does not exercise a nested parent details containing department details, where removing the production closest('details') ownership filter could attach a department badge to an ancestor. Confirm actual built navigation badges occur only on department summaries during the root browser check. Preserve the immutable proof tests."
+  ],
+  "original_testing_gaps": [
+    {
+      "reviewer": "testing",
+      "text": "src/scripts/streeling-nav-counts.mjs:74-77: the Node proof tests import without a document and call updateStreelingNavCounts directly, so they do not exercise initial browser execution or the astro:page-load registration. The actual browser validation being performed by the root should explicitly dispatch astro:page-load after changing navigation links and confirm recomputation without duplicate badges; the recorded 19 passing Node tests alone do not establish that lifecycle contract."
+    },
+    {
+      "reviewer": "testing",
+      "text": "scripts/tests/streeling-nav-counts.test.mjs:36-41: the DOM fixture contains only flat department groups and returns a group's own links for every querySelectorAll call. It does not exercise a nested parent details containing department details, where removing the production closest('details') ownership filter could attach a department badge to an ancestor. Confirm actual built navigation badges occur only on department summaries during the root browser check. Preserve the immutable proof tests."
+    }
+  ],
+  "testing_gap_assessments": [
+    {
+      "reviewer": "testing",
+      "original_gap": "src/scripts/streeling-nav-counts.mjs:74-77: the Node proof tests import without a document and call updateStreelingNavCounts directly, so they do not exercise initial browser execution or the astro:page-load registration. The actual browser validation being performed by the root should explicitly dispatch astro:page-load after changing navigation links and confirm recomputation without duplicate badges; the recorded 19 passing Node tests alone do not establish that lifecycle contract.",
+      "status": "partially covered by later evidence; browser DOM mutation remains not assessed",
+      "assessment": "The retained adversarial probe imported the actual production module with an in-memory document, verified initial execution and registration, invoked the captured astro:page-load callback 1000 times after adding a course, verified badge reuse and independent trees, then removed courses to zero. These were direct callback invocations, not browser EventTarget dispatches or 1000 navigations. Actual browser evidence separately verifies EN/FR/ES navigation and reload without duplicate badges. No browser DOM mutation followed by synthetic astro:page-load dispatch was performed.",
+      "evidence": [
+        "C:\\tmp\\streeling-count-ui-quality-20261029\\ce-code-review\\20261029-092356-ba2e5943\\adversarial-probes.json",
+        "C:/tmp/streeling-count-ui-browser-20261029/local-checks.json"
+      ],
+      "remaining_limit": "A real browser DOM mutation and synthetic astro:page-load recomputation check remains unassessed; the immutable Node proof tests themselves still do not cover import-time browser initialization or event registration."
+    },
+    {
+      "reviewer": "testing",
+      "original_gap": "scripts/tests/streeling-nav-counts.test.mjs:36-41: the DOM fixture contains only flat department groups and returns a group's own links for every querySelectorAll call. It does not exercise a nested parent details containing department details, where removing the production closest('details') ownership filter could attach a department badge to an ancestor. Confirm actual built navigation badges occur only on department summaries during the root browser check. Preserve the immutable proof tests.",
+      "status": "covered by later fixture and actual-browser evidence; original proof-fixture limitation retained",
+      "assessment": "The retained adversarial probe models nested department groups and asserts zero ancestor badges before and after repeated callback invocation. Actual browser local-checks.json records four parent summaries with zero badges, 22 badges per controlled navigation tree, and sums of 482 in EN/FR/ES. The immutable proof fixture remains flat; it was not changed.",
+      "evidence": [
+        "C:\\tmp\\streeling-count-ui-quality-20261029\\ce-code-review\\20261029-092356-ba2e5943\\adversarial-probes.json",
+        "C:/tmp/streeling-count-ui-browser-20261029/local-checks.json"
+      ],
+      "remaining_limit": "Nested ownership is checked by a separate retained probe and the actual built browser DOM rather than by the immutable proof tests."
+    }
+  ],
+  "coverage": {
+    "depth": "full",
+    "notes": [
+      "Full spine selected for public count/navigation and lifecycle correctness. Helper measured the entire working diff: 97 executable non-test lines, 277 changed lines, size_band small. The explicit seven-path code scope excludes generated/document rows.",
+      "Standards fallback: AGENTS.md; CLAUDE.md is an @AGENTS.md redirect. No designated CODING_STANDARDS.md or local CE config/packs were found.",
+      "All five selected reviewers returned structured artifacts with zero primary findings; no failed reviewers or exceeded bounds were reported.",
+      "The findings-mechanics helper completed with zero primary, pre-existing, malformed, suppressed, or quote-backfilled findings. No semantic reconciliation or settlement suppression changed the set; the explicit plan has no settled decisions.",
+      "19 Node tests passed before and after the comment-only simplification. The retained final test log records 19 passing, zero failed, zero skipped. No project-wide lint or typecheck script is configured.",
+      "The root-owned full build log records 2725 pages built and Complete!; ui-validation.json records repeat-sync equality across 1520 files.",
+      "Actual browser local-checks.json records a 352px sidebar at viewport width 1280, 22 badges in each controlled navigation tree with sum 482 in EN/FR/ES, zero badges on four ancestor summaries, mobile native dialog autofocus/Escape close/aria-expanded=false/focus return at width 390, and reload with 22 badges per tree and no duplicates.",
+      "Original testing-reviewer observations are preserved verbatim in testing_gaps and original_testing_gaps. Later evidence and the remaining browser mutation limit are assessed separately in testing_gap_assessments; no reviewer artifact or proof test was rewritten.",
+      "The retained adversarial probe uses an in-memory document fixture and invokes the registered astro:page-load callback directly 1000 times; it does not dispatch 1000 actual events or navigate a browser 1000 times. It verifies production-module initial import, changed links, badge reuse, independent trees, nested groups and removal to zero. Browser DOM mutation plus synthetic astro:page-load dispatch remains not assessed.",
+      "adversarial-probes.json was retained from prior reviewer execution without rerunning the probe; its SHA256 was verified as 8a07b5cd15747cf8823c0e5b3b50eafb9472aa9518c465f5686e43d34ae32271.",
+      "The explicit plan was read. R1-R3 have corresponding work in the reviewed diff. R4 has local regression, full-build, repeat-sync, browser appearance/navigation/mobile, and fixture lifecycle evidence with the browser mutation limit above. R5 publication and anonymous 1518-route readback are intentional subsequent parent-owned release steps outside this report-only seven-path quality gate.",
+      "No unrequested user-visible behavior rule was identified in the scoped diff. Repeated navigation markup and HTML size optimization are expressly outside scope.",
+      "Untracked code/streeling/evidence/publication-2026-10-29/ is excluded from code review and used only for explicitly supplied plan/evidence context.",
+      "adversarial lens: in-process fallback (cross-model peer not run: bundled peer contract cannot enforce the authorized seven-path read allowlist)",
+      "Validator selection: zero findings selected and zero shortcut-skipped. The primary set is empty; no cross-model corroboration shortcut was used and no validator launch is needed.",
+      "Report leaf read the retained RED/GREEN logs, final 19-test log, full-build log, actual browser receipt, repeat-sync receipt, explicit plan and scoped diff. No additional tests were run. Stage 5c was skipped because local apply is unauthorized."
+    ],
+    "suppressed_by_confidence": {},
+    "first_evidence_backfilled": 0,
+    "first_evidence_demoted": 0,
+    "mode_aware_demotions": 0,
+    "malformed_findings": 0,
+    "malformed_returns": 0,
+    "settled_preference_suppressed": 0,
+    "failed_reviewers": [],
+    "bound_exceeded": [],
+    "compound_packs": {
+      "roots": [],
+      "errors": [],
+      "warnings": []
+    },
+    "validator": {
+      "selected": 0,
+      "shortcut_skipped": 0,
+      "shortcut_evidence_basis": "No findings; no cross-model shortcut used.",
+      "outcome": "empty-batch",
+      "reason": "No primary findings were selected; no validator was launched.",
+      "confirmed": 0,
+      "rejected": 0,
+      "unresolved": 0,
+      "malformed": 0,
+      "failed": 0,
+      "launched": false,
+      "bound_exceeded": false,
+      "protected_subject_reclassifications": 0
+    }
+  },
+  "peer": {
+    "outcome": "in-process-fallback",
+    "coverage": "adversarial lens: in-process fallback (cross-model peer not run: bundled peer contract cannot enforce the authorized seven-path read allowlist)"
+  },
+  "evidence_paths": {
+    "browser": "C:/tmp/streeling-count-ui-browser-20261029/local-checks.json",
+    "adversarial_probes": "C:\\tmp\\streeling-count-ui-quality-20261029\\ce-code-review\\20261029-092356-ba2e5943\\adversarial-probes.json",
+    "repeat_sync": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/publication-2026-10-29/ui-validation.json",
+    "build": "C:/tmp/streeling-count-ui-build-20261029.log",
+    "tests": "C:/tmp/streeling-public-count-final-tests-20261029.log"
+  },
+  "artifact_path": "C:/tmp/streeling-count-ui-quality-20261029/ce-code-review/20261029-092356-ba2e5943",
+  "run_id": "20261029-092356-ba2e5943"
+}

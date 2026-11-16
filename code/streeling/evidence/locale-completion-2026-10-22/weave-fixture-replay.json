@@ -1,0 +1,104 @@
+{
+  "scope": "Unchanged public synthetic Python teaching checker only; no textile mechanics, mesh, Godot scene, release or learner result.",
+  "commit": "f23ccae6c049d9066a1be2221c68f3b0bcf48373",
+  "script_sha256": "43ba4e1a245ebc8c9d2ab34a9219419ad136ef73d021c1073e1f123e69479d9f",
+  "command": [
+    "python",
+    "-B",
+    "-X",
+    "utf8",
+    "evaluate_weave.py"
+  ],
+  "exit_code": 0,
+  "result": {
+    "sample_id": "odd-tile-seam-a",
+    "warp_count": 6,
+    "weft_count": 6,
+    "spacing_to_diameter_ratio": 2.5,
+    "variants": {
+      "global-parity": {
+        "crossing_count": 36,
+        "unique_id_count": 36,
+        "adjacency_violations": 0,
+        "violating_pairs": [],
+        "first_row": [
+          "warp",
+          "weft",
+          "warp",
+          "weft",
+          "warp",
+          "weft"
+        ]
+      },
+      "restarted-tile-parity": {
+        "crossing_count": 36,
+        "unique_id_count": 36,
+        "adjacency_violations": 12,
+        "violating_pairs": [
+          [
+            "w2-f0",
+            "w3-f0"
+          ],
+          [
+            "w2-f1",
+            "w3-f1"
+          ],
+          [
+            "w0-f2",
+            "w0-f3"
+          ],
+          [
+            "w1-f2",
+            "w1-f3"
+          ],
+          [
+            "w2-f2",
+            "w3-f2"
+          ],
+          [
+            "w2-f2",
+            "w2-f3"
+          ],
+          [
+            "w3-f2",
+            "w3-f3"
+          ],
+          [
+            "w4-f2",
+            "w4-f3"
+          ],
+          [
+            "w5-f2",
+            "w5-f3"
+          ],
+          [
+            "w2-f3",
+            "w3-f3"
+          ],
+          [
+            "w2-f4",
+            "w3-f4"
+          ],
+          [
+            "w2-f5",
+            "w3-f5"
+          ]
+        ],
+        "first_row": [
+          "warp",
+          "weft",
+          "warp",
+          "warp",
+          "weft",
+          "warp"
+        ]
+      }
+    }
+  },
+  "invalid_geometry_input_control": {
+    "mutation": "diameter equals spacing",
+    "rejected": true,
+    "error": "invalid sample dimensions or yarn clearance"
+  },
+  "mixed_pin_fixture_bytes_equal": true
+}

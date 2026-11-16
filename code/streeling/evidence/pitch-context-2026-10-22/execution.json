@@ -1,0 +1,41 @@
+{
+  "checked_at_utc": "2026-10-22T20:56:41.426607+00:00",
+  "args": [
+    "dotnet",
+    "C:\\Program Files\\dotnet\\sdk\\10.0.113\\FSharp\\fsi.dll",
+    "--exec",
+    "probe.fsx"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 2.356000400002813,
+  "sdk": "10.0.113",
+  "scope": "Fresh FSI compilation/loading of two unchanged pinned public F# files and temporary authored probe. No full GA build, new service, renderer or audio run.",
+  "source_files": [
+    {
+      "path": "Common/GA.Business.DSL/Types/MusicXmlTypes.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.DSL/Types/MusicXmlTypes.fs",
+      "status": 200,
+      "bytes": 8252,
+      "sha256": "e894f70561db1f4d1bdd378e8ccc0646250793896144f0a7f39a66b18d40cd1a",
+      "temporary_path": "C:/tmp/streeling-pitch-context-inputs-20261022/MusicXmlTypes.fs",
+      "local_immutable_git_bytes_equal": true
+    },
+    {
+      "path": "Common/GA.Business.DSL/Parsers/MusicXmlParser.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.DSL/Parsers/MusicXmlParser.fs",
+      "status": 200,
+      "bytes": 13863,
+      "sha256": "73ab96a59b50831b9930cbb8d37368febd6fc8d124d57ca70a3ff4c289940fee",
+      "temporary_path": "C:/tmp/streeling-pitch-context-inputs-20261022/MusicXmlParser.fs",
+      "local_immutable_git_bytes_equal": true
+    }
+  ],
+  "temporary_probe_sha256": "dba4933c95e956d5009e3aa7c23da36b8e14045b44a22d05ec2ed83893be104a",
+  "stdout_sha256": "5fe106c42e48223dd3447bad2d549accc7e31866c38b4648d604c260d5784ae9",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "authored_inputs_sha256": "e0fa8108e2853faa96ba1f889443ff43eb4669f320682589272b5a8313f54f07",
+  "parser_cases": 10,
+  "new_dependency_install": false,
+  "new_csharp_execution": false,
+  "new_musicxml_schema_validation": false
+}

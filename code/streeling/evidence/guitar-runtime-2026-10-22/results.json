@@ -1,0 +1,223 @@
+{
+  "scope": "Pinned GA Rust module, native and Node WebAssembly, offline fixed E2; no AudioWorklet/browser capture or listening result.",
+  "source_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+  "node": "v24.12.0",
+  "platform": "win32",
+  "arch": "x64",
+  "rustc": "rustc 1.94.0 (4a4ef493e 2026-03-02)\nbinary: rustc\ncommit-hash: 4a4ef493e3a1488c6e321570238084b38948f6db\ncommit-date: 2026-03-02\nhost: x86_64-pc-windows-msvc\nrelease: 1.94.0\nLLVM version: 21.1.8",
+  "commands": [
+    {
+      "command": "rustc",
+      "args": [
+        "--edition=2021",
+        "-D",
+        "warnings",
+        "-O",
+        "native.rs",
+        "-o",
+        "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native.exe"
+      ],
+      "cwd": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\guitar-runtime"
+    },
+    {
+      "command": "rustc",
+      "args": [
+        "--edition=2021",
+        "--crate-type=cdylib",
+        "--target",
+        "wasm32-unknown-unknown",
+        "-C",
+        "panic=abort",
+        "-O",
+        "vendor/lib.rs",
+        "-o",
+        "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\engine.wasm"
+      ],
+      "cwd": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\guitar-runtime"
+    },
+    {
+      "command": "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native.exe",
+      "args": [
+        "176400",
+        "176400",
+        "baseline",
+        "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native-baseline.f32le"
+      ],
+      "cwd": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\guitar-runtime"
+    },
+    {
+      "command": "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native.exe",
+      "args": [
+        "4096",
+        "4096",
+        "baseline",
+        "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native-baseline-probe.f32le"
+      ],
+      "cwd": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\guitar-runtime"
+    },
+    {
+      "command": "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native.exe",
+      "args": [
+        "4096",
+        "128",
+        "baseline",
+        "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native-baseline-chunked.f32le"
+      ],
+      "cwd": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\guitar-runtime"
+    },
+    {
+      "command": "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native.exe",
+      "args": [
+        "176400",
+        "176400",
+        "candidate",
+        "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native-candidate.f32le"
+      ],
+      "cwd": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\guitar-runtime"
+    },
+    {
+      "command": "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native.exe",
+      "args": [
+        "4096",
+        "4096",
+        "candidate",
+        "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native-candidate-probe.f32le"
+      ],
+      "cwd": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\guitar-runtime"
+    },
+    {
+      "command": "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native.exe",
+      "args": [
+        "4096",
+        "128",
+        "candidate",
+        "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native-candidate-chunked.f32le"
+      ],
+      "cwd": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\guitar-runtime"
+    },
+    {
+      "command": "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native.exe",
+      "args": [
+        "4096",
+        "128",
+        "silence",
+        "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native-silence.f32le"
+      ],
+      "cwd": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\guitar-runtime"
+    }
+  ],
+  "sample_rate": 44100,
+  "frames": 176400,
+  "probe_frames": 4096,
+  "frequency_hz_requested": 82.4069,
+  "velocity_requested": 0.1,
+  "reference_sha256": "03a1965f275f0858be70476dab2bf55d2cbf2272ef7a50c61453d45e7f38b248",
+  "reference_decline_db": -3.922115130444098,
+  "observations": {
+    "baseline": {
+      "native_f32le_sha256": "e924c20a4305783870ae6a373b46844c5431a25bad7ec80d76fc1569cdee8363",
+      "wasm_f32le_sha256": "f2a84abd90f7b812c045fc613694d749896f7b2eda5bd8ae73a167dc9ddc9491",
+      "wav_sha256": "a78a70243a81aa79d806d9ef3db7baa1385c479505f7d5e97b8bf0c7866c3f98",
+      "wasm_pcm16_wav_sha256": "a78a70243a81aa79d806d9ef3db7baa1385c479505f7d5e97b8bf0c7866c3f98",
+      "native_wasm_pcm16_wav_bytes_equal": true,
+      "samples": 176400,
+      "native_peak_abs": 0.4601604640483856,
+      "wasm_peak_abs": 0.4601604640483856,
+      "differing_native_wasm_samples": 2918,
+      "maximum_abs_native_wasm_difference": 2.9802322387695312e-8,
+      "native_and_wasm_bit_exact": false,
+      "fresh_native_prefix_equal": true,
+      "native_block_partition_equal": true,
+      "fresh_wasm_prefix_equal": true,
+      "wasm_block_partition_equal": true,
+      "decoded_pcm16_decline_db": -1.0848117418372532,
+      "absolute_reference_decline_error_db": 2.837303388606845
+    },
+    "candidate": {
+      "native_f32le_sha256": "62861da6e0d81a8524624bb69ec57094438529a65494402083a720968741d365",
+      "wasm_f32le_sha256": "f63e100ba95f0f3e3954eb26325a975c142b1c443ac604a679e4812d17caa83b",
+      "wav_sha256": "055e03fb6064f62601b1bbc07942d3e2223da6d2fc614c6f63fa9ec8d964be73",
+      "wasm_pcm16_wav_sha256": "055e03fb6064f62601b1bbc07942d3e2223da6d2fc614c6f63fa9ec8d964be73",
+      "native_wasm_pcm16_wav_bytes_equal": true,
+      "samples": 176400,
+      "native_peak_abs": 0.46006888151168823,
+      "wasm_peak_abs": 0.46006888151168823,
+      "differing_native_wasm_samples": 2926,
+      "maximum_abs_native_wasm_difference": 2.9802322387695312e-8,
+      "native_and_wasm_bit_exact": false,
+      "fresh_native_prefix_equal": true,
+      "native_block_partition_equal": true,
+      "fresh_wasm_prefix_equal": true,
+      "wasm_block_partition_equal": true,
+      "decoded_pcm16_decline_db": -1.198977891431639,
+      "absolute_reference_decline_error_db": 2.723137239012459
+    }
+  },
+  "candidate_decline_error_improvement_db": 0.11416614959438576,
+  "required_improvement_db_from_GAS003": 1,
+  "candidate_passes_decline_gate": false,
+  "native_and_wasm_silence_peak": 0,
+  "pcm_guard_negative_controls_detected": 3,
+  "wasm_binary_sha256": "ee093e1059a2130da663112ca5e43dad4842a3c503bc2d7a3407104c825cc717",
+  "wasm_imports": [],
+  "wasm_exports": [
+    {
+      "name": "memory",
+      "kind": "memory"
+    },
+    {
+      "name": "alloc_buffer",
+      "kind": "function"
+    },
+    {
+      "name": "engine_init",
+      "kind": "function"
+    },
+    {
+      "name": "engine_note_on",
+      "kind": "function"
+    },
+    {
+      "name": "engine_render",
+      "kind": "function"
+    },
+    {
+      "name": "engine_set_attack_decay",
+      "kind": "function"
+    },
+    {
+      "name": "engine_set_brightness",
+      "kind": "function"
+    },
+    {
+      "name": "engine_set_decay",
+      "kind": "function"
+    },
+    {
+      "name": "engine_set_dispersion",
+      "kind": "function"
+    },
+    {
+      "name": "engine_set_guitar_type",
+      "kind": "function"
+    },
+    {
+      "name": "engine_set_reverb_mix",
+      "kind": "function"
+    },
+    {
+      "name": "__data_end",
+      "kind": "global"
+    },
+    {
+      "name": "__heap_base",
+      "kind": "global"
+    }
+  ],
+  "limits": [
+    "Comparison is one fixed E2 velocity and profile, one toolchain and OS.",
+    "PCM16 conversion uses JavaScript Math.round; raw f32 outputs are separately hashed.",
+    "No listening, pitch, partial-track, attack-preservation or whole-product acceptance claim.",
+    "No performance, cancellation, memory-lifetime or browser AudioWorklet certification."
+  ]
+}

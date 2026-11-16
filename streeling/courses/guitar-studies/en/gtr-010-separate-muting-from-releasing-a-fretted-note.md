@@ -1,0 +1,79 @@
+---
+module_id: gtr-010-separate-muting-from-releasing-a-fretted-note
+department: guitar-studies
+course: "Separate Muting from Releasing a Fretted Note"
+level: intermediate
+prerequisites: ["gtr-005-plan-which-string-keeps-ringing"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+
+# Separate Muting from Releasing a Fretted Note
+
+> **Draft and evidence boundary.** This lesson contains an authored model and source reading. Human technical, musician, fluent-language and learner decisions remain pending. No new engine render, parser run, playing, listening or learner observation is claimed. Historical failures keep their original status.
+
+## The project question
+
+A practice instruction says to release a fretted note and assumes silence follows. A note ending in a symbolic schedule and a physical string stopping vibration are different events. We build a deliberately qualitative state table for one string, with authored transitions and no acoustic amplitude prediction. The useful output is an explicit muting requirement for review.
+
+## Read the project evidence
+
+Read the linked prerequisite and retained project artifact before applying the model. Locate the particular representation, transformation or exclusion that matters to this question. The fixed packet records source identity, reading scope and authored values; a source location is evidence for its contents at that revision, not proof of current deployment. Keep a source-derived observation separate from an inferred proposal. Where a primary reference is linked, use its stated scope rather than extending it to unsupported cases.
+
+[Prerequisite: gtr-005-plan-which-string-keeps-ringing](../../guitar-studies/en/gtr-005-plan-which-string-keeps-ringing.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/phrase-performance-2026-10-22/string-occupancy.json)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-23/unit-a.json)
+
+[Validation journal](../../../../code/streeling/evidence/batch50-2026-10-23/journal.md)
+
+## 1. Exercise 1
+
+Stipulate open string note 64 and fret 3, giving fretted note 67. Releasing the fret at beat 1 removes the fretted constraint. It does not mathematically prescribe the remaining vibration amplitude. A possible open-string pitch is relevant to the review, but must not become a fabricated recorded sound.
+
+What pitch would the open string have, and what remains unknown?
+
+> **Answer.** Open pitch is 64; actual remaining amplitude and audible output are unknown.
+
+## 2. Exercise 2
+
+Add a separate damping event at beat 1.25. In the authored model only that event moves the string to the muted state. Between release and damping there is an interval requiring observation. The table deliberately makes no claim that a release always produces an open note, or that a named technique always succeeds.
+
+How long is the interval whose silence is unverified?
+
+> **Answer.** `1.25-1=.25` beats; retain it as unverified rather than filling it with a presumed recording.
+
+## 3. Exercise 3
+
+A note-off in an occupancy table can free a resource while the intended acoustic silence still needs a damping action. Keep resource eligibility and sound state as distinct outputs. Otherwise a later string assignment can be declared conflict-free while the review has never checked unwanted ringing during the transition.
+
+Does a freed string prove an acoustically silent string?
+
+> **Answer.** No. Resource availability follows the schedule; silence requires its own model or measured observation.
+
+## 4. Exercise 4
+
+Remove the damping event as a negative control. The remaining release is insufficient to enter the model's muted state. This is a counterexample to a proposed adapter that converts every note-off into guaranteed silence. It does not identify which physical gesture a particular player should use or establish a safety or comfort recommendation.
+
+What status should a release-only adapter report?
+
+> **Answer.** It should preserve the unresolved acoustic state and the missing damping instruction, rather than label silence as verified.
+
+## 5. Exercise 5
+
+Use the retained phrase packet to locate its explicit exclusions. A future guitarist task should name intended ringing strings, release and damping events, tempo, observed unwanted sounds and assistance. The manual baseline is the state table, with no new simulator necessary. An agent may check completeness without claiming to have heard the result.
+
+What evidence closes the acoustic question?
+
+> **Answer.** A specified actual playing or audio observation under the intended task is needed; no such outcome is retained here.
+
+## Source-assisted learner task
+
+Prepare a short review note from the fixed case before opening the prepared answers. First reproduce the calculation or table manually, keeping the stated units, support and assumptions. That direct result is the baseline for any source-assisted or agent-assisted answer. Then inspect the linked project artifact and identify one precise boundary relevant to the calculation. Record the actual source excerpt or field used, its revision, your proposed answer and every kind of assistance received. A calculator and source lookup are allowed; label them instead of presenting the result as unaided recall.
+
+Apply the negative control as well as the main case. Write the observable result that would falsify your conclusion, and state whether the control actually supplies it. If a model input is absent, retain an unresolved result rather than substituting a plausible value. Compare a proposed abstraction with the manual baseline before recommending a new agent workflow or DSL. The answer key is a prepared check, not a record of your attempt. Keep your original answer before reveal, any correction afterward and the reason for the correction.
+
+The packet contains five prepared learner criteria corresponding to the exercises. Their decisions remain null until actual answers, assistance and review are retained. Correct arithmetic supports only the declared model. A useful project decision still needs the relevant human judgment or runtime observation at its own boundary. Record actual checks, errors and refinements in the linked validation journal; the journal must distinguish executed tests from planned tests.

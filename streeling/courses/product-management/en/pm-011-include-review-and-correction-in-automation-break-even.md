@@ -1,0 +1,145 @@
+---
+module_id: "pm-011-include-review-and-correction-in-automation-break-even"
+department: "product-management"
+course: "Include Review and Correction in Automation Break Even"
+level: "intermediate"
+prerequisites: ["pm-006-test-a-pilot-against-its-decision-horizon", "pm-008-size-a-fifty-course-batch-by-review-capacity"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Include Review and Correction in Automation Break Even
+
+> This lesson uses an authored fixed case and inspected sources. Counts, times, labels and signals are invented teaching inputs. Human technical review, fluent-language review, actual learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A team sees fast generated drafts and proposes automating the next authoring tranche. Drafting speed alone omits setup, review and correction. The pilot-horizon prerequisite values information for later decisions; the capacity prerequisite keeps review from disappearing in a quota. This lesson calculates whether an authored operational cost model ever recovers setup while preserving the same completed task and mandatory review.
+
+Define the manual baseline as active work for an equivalent accepted item, not an unreviewed rough note. The automated path includes drafting and review on every item, plus a correction cost multiplied by its probability. The probability is invented and refers to items needing the declared correction, without claiming that corrections are independent or that every defect is found. A real comparison must measure the entire path and preserve quality failures.
+
+Subtract per-item automated cost from manual cost before calculating a break-even horizon. Only positive savings can repay a positive setup charge. Equality at the break-even item count gives no saving, so a strict-saving recommendation needs the next integer count. If per-item savings vanish, increasing the batch does not eventually make setup free. This boundary is easy to hide when a report quotes only draft latency.
+
+The retained project record explicitly separates authored loss points from measured engineering time and says methodology does not calibrate performance. Our example does use minutes, but they are still invented active-work inputs. [NIST](https://www.itl.nist.gov/div898/handbook/pri/section3/pri332.htm)’s nuisance-factor discussion motivates comparable operators and task conditions in a future measurement. A proposed authoring DSL or agent loop remains a candidate until a dogfood attempt preserves manual and assisted work logs, equivalent scope, correction history and actual accepted output.
+
+## Sources and project boundary
+
+Read the prerequisite before using the model. Inspect the linked retained project artifact at the revision recorded in the packet, and identify the field or branch that supports the stated source observation. The source gives a representation or declared behavior; it does not turn the invented case into an observed project result. The primary reading supplies the named concept within its stated scope.
+
+[Prerequisite: pm-006-test-a-pilot-against-its-decision-horizon](../../product-management/en/pm-006-test-a-pilot-against-its-decision-horizon.md)
+
+[Prerequisite: pm-008-size-a-fifty-course-batch-by-review-capacity](../../product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/pilot-value-2026-10-22/source-observations.json)
+
+[Primary reading: NIST/SEMATECH e-Handbook section 5.3.3.2, read 2026-10-24](https://www.itl.nist.gov/div898/handbook/pri/section3/pri332.htm)
+
+## Fixed model and control
+
+```json
+{
+  "values": {
+    "items": 40,
+    "manual_minutes_per_item": 12,
+    "setup_minutes": 60,
+    "draft_minutes_per_item": 3,
+    "review_minutes_per_item": 5,
+    "correction_probability": 0.25,
+    "correction_minutes_if_needed": 8
+  },
+  "formula": "automated_per_item=draft+review+p*correction; manual_total=n*manual; automated_total=setup+n*automated_per_item; net_saved=manual_total-automated_total; strict break-even requires n>setup/(manual-automated_per_item) when denominator positive.",
+  "expected": {
+    "automated_minutes_per_item": 10,
+    "manual_total_minutes": 480,
+    "automated_total_minutes": 460,
+    "net_saved_minutes": 20,
+    "equal_cost_items": 30,
+    "minimum_integer_items_for_strict_saving": 31
+  },
+  "negative_control": {
+    "values": {
+      "items": 40,
+      "manual_minutes_per_item": 12,
+      "setup_minutes": 60,
+      "draft_minutes_per_item": 3,
+      "review_minutes_per_item": 5,
+      "correction_probability": 0.25,
+      "correction_minutes_if_needed": 16
+    },
+    "expected": {
+      "automated_minutes_per_item": 12,
+      "manual_total_minutes": 480,
+      "automated_total_minutes": 540,
+      "net_saved_minutes": -60,
+      "equal_cost_items": null,
+      "minimum_integer_items_for_strict_saving": null
+    },
+    "why": "Zero per-item savings cannot recover a positive setup cost at any finite batch size."
+  },
+  "assumptions": [
+    "All times are invented active-work minutes on one comparable task.",
+    "Correction probability and conditional cost are stable and review is always performed.",
+    "Quality and completed scope must be comparable before cost comparison."
+  ],
+  "limits": "Expected-cost arithmetic, not measured throughput, real savings, learner value, monetary cost or production adoption."
+}
+```
+
+### Exercise 1
+
+Compute automated expected active work per item.
+
+<details><summary>Answer 1</summary>
+
+It is `3+5+0.25*8=10` minutes. Review is charged on every item and correction only in its stipulated probability-weighted amount. This is an expectation, without an observed timing run.
+
+</details>
+
+### Exercise 2
+
+Compute totals and net saving for the declared batch.
+
+<details><summary>Answer 2</summary>
+
+Manual total is `480` minutes, automated total `460` minutes and net saving `20` minutes. Setup is charged once, while all item work scales with `40` items.
+
+</details>
+
+### Exercise 3
+
+Find equality and the smallest integer batch with strict saving.
+
+<details><summary>Answer 3</summary>
+
+Equality occurs at `30` items because per-item saving is `2` minutes and setup is `60` minutes. The smallest strict-saving integer is `31`. A tie is not a positive saving.
+
+</details>
+
+### Exercise 4
+
+Apply the longer-correction control. Can a larger batch recover setup?
+
+<details><summary>Answer 4</summary>
+
+Expected item cost becomes `12` minutes. At the declared size the total is `540` and net saving `-60`. Per-item saving is zero, so no finite strict break-even exists under the model.
+
+</details>
+
+### Exercise 5
+
+What would falsify a practical automation recommendation?
+
+<details><summary>Answer 5</summary>
+
+Actual end-to-end active work that fails the predicted saving at comparable accepted quality would reject it. Keep setup, review, failed items, correction and assistance logs. Fast generation or these invented times cannot establish real adoption or production efficiency.
+
+</details>
+
+## Source-assisted learner task
+
+Start with a paper table before revealing the answers. Copy the inputs and their units, apply the declared operation, and retain intermediate results. This direct calculation is the manual baseline against which an assistant or a proposed composable notation must be compared. A shorter response has no demonstrated advantage if it loses an input identity, a failure category or the counterexample.
+
+Then inspect the precise source passage recorded in the packet. Quote only the small field or branch needed for your explanation and record its revision. Ask an assistant to challenge one assumption after you have saved your first answer. Retain the prompt, reply, accepted corrections and rejected suggestions. Source lookup and calculator use are allowed; record them as assistance so the result cannot be mistaken for unaided recall.
+
+Apply the changed input in the negative control and state an observable falsifier before making a recommendation. An unexpected control result requires checking the calculation and assumptions before changing a project workflow. Submit the original answer, corrected answer, assistance history and remaining uncertainty together. The packet prepares five learner criteria, one per exercise, with undecided decisions. Prepared solutions and author checks do not fill those decisions. A future dogfood comparison needs actual attempts on the same task and a retained manual baseline; no new agent mechanism or DSL implementation is required by this lesson.
+
+[Fixed unit packet](../../../../code/streeling/evidence/batch50-2026-10-24/unit-b.json) · [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-24/journal.md)

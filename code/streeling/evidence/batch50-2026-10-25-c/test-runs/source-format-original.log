@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\tmp\streeling-batch50-check-20261025-c.py", line 25, in <module>
+    en=parse(root/course['source_paths']['en']);assert en[6]>=650,(course['code'],'English too short',en[6])
+  File "C:\tmp\streeling-batch50-check-20261025-c.py", line 21, in parse
+    assert ex==['1','2','3','4','5'] and len(answers)==5,(p,ex,len(answers))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (WindowsPath('C:/tmp/learn-streeling-craft-transfer-20261022/streeling/courses/data-visualization/en/dv-023-compress-signed-clearance-with-an-invertible-log-scale.md'), ['1', '2', '3', '4', '5'], 10)

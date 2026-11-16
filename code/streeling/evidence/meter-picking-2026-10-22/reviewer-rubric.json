@@ -1,0 +1,120 @@
+{
+  "status": "prepared-not-performed",
+  "scope": "Prepared criterion review is not an actual learner or performed guitar outcome.",
+  "criteria": [
+    {
+      "id": "MCL006-1",
+      "module": "MCL006",
+      "title": "tempo-unit",
+      "acceptance": "Derive7/8 durations1.75s at quarter120 and3.5s at eighth120; identify unspecified tempo note unit.",
+      "decision": null
+    },
+    {
+      "id": "MCL006-2",
+      "module": "MCL006",
+      "title": "group-sum",
+      "acceptance": "Give2,2,3starts0,2,4 versus4,3starts0,4. Equal seven-eighth duration does not establish grouping or played accents.",
+      "decision": null
+    },
+    {
+      "id": "MCL006-3",
+      "module": "MCL006",
+      "title": "score-units",
+      "acceptance": "At24divisions/quarter derive eighth12,7/8bar84,6/8and3/4totals72. Distinguish divisions, MIDI resolution, grouping and metronome unit.",
+      "decision": null
+    },
+    {
+      "id": "MCL006-4",
+      "module": "MCL006",
+      "title": "source-boundary",
+      "acceptance": "State source-predicted plain7/8 values7,8; additive2+2+3 givesNone; two pairs2/4+3/8 retain only2,4. No executed parser or summed normalization claim.",
+      "decision": null
+    },
+    {
+      "id": "MCL006-5",
+      "module": "MCL006",
+      "title": "transfer-check",
+      "acceptance": "Authored MIDIbytes7,3,24,8 predict7/8 and skip24,8 in selected branch; ordered groups not retained by that event. Require actual pinned entered/recovered time/group/unit and score/playback checks without global claims.",
+      "decision": null
+    },
+    {
+      "id": "WML006-1",
+      "module": "WML006",
+      "title": "anchoring",
+      "acceptance": "Derive Astarts0,2,4 and Bstarts0,3,5; total preserved but fixed-origin group alignment changes. Keep Cstarts0,2,5 distinct.",
+      "decision": null
+    },
+    {
+      "id": "WML006-2",
+      "module": "WML006",
+      "title": "rebase",
+      "acceptance": "Old Aorigin4 gives B by subtracting4mod7; old2 gives C. One-track rebase changes relative alignment to unchanged tracks.",
+      "decision": null
+    },
+    {
+      "id": "WML006-3",
+      "module": "WML006",
+      "title": "transformation-set",
+      "acceptance": "Seven distinct pulse shifts differ from three group-start choices. Forward shift1 gives1,3,5 with zero not a group start.",
+      "decision": null
+    },
+    {
+      "id": "WML006-4",
+      "module": "WML006",
+      "title": "classification-scope",
+      "acceptance": "35anchored three-onset sets form5rotation classes of7. Empty/full controls each have1rotation; no universal7phase rule or cultural taxonomy.",
+      "decision": null
+    },
+    {
+      "id": "WML006-5",
+      "module": "WML006",
+      "title": "localization-record",
+      "acceptance": "Retain source/translated orderedgroups,pulseunit,barreference,origintransform,affectedtracks,reason,reviewdecision; cultural/perceptual/arrangement equivalence needs appropriate separate evidence.",
+      "decision": null
+    },
+    {
+      "id": "GTR007-1",
+      "module": "GTR007",
+      "title": "odd-bar",
+      "acceptance": "Strict alternate attacks start D,U,D,U across bars; resetD gives first D/D at6to7; first bar/pick return14. No universal preferred technique.",
+      "decision": null
+    },
+    {
+      "id": "GTR007-2",
+      "module": "GTR007",
+      "title": "full-phase",
+      "acceptance": "At14 markerphase2; first full7/4/2return28pulses or7seconds at quarter120. State what components repeat.",
+      "decision": null
+    },
+    {
+      "id": "GTR007-3",
+      "module": "GTR007",
+      "title": "rest-policy",
+      "acceptance": "Restlocal3: attack-driven directions4U,7D versus pulse-clock4D,7U. Explicit advancing event,initialphase and resets required.",
+      "decision": null
+    },
+    {
+      "id": "GTR007-4",
+      "module": "GTR007",
+      "title": "continuation",
+      "acceptance": "Tieatabsolute7 makes no newattack; pulse8U versus false-reattack8D. SourceTieNone does not certify continuation roundtrip.",
+      "decision": null
+    },
+    {
+      "id": "GTR007-5",
+      "module": "GTR007",
+      "title": "notation-check",
+      "acceptance": "Typecapacity and GPcase7down do not prove bothdirections,phasecontinuity,binaryconformance or roundtrip. Require pinned explicitD/U,oddbar,restpolicy,tie,eventidentity/resetcomparison; notation,playback,player outcomes separate.",
+      "decision": null
+    }
+  ],
+  "pass_policy": "All five criteria per module; record real answers and assistance before individual learner decisions.",
+  "human_technical_review": null,
+  "cultural_review": null,
+  "musician_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "parser_execution": null,
+  "round_trip": null,
+  "deployed_html": null
+}

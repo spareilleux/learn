@@ -1,0 +1,33 @@
+{
+  "reviewer": "comments",
+  "mode": "pipeline-read-only",
+  "findings": [
+    {
+      "location": "src/scripts/streeling-nav-counts.mjs:50",
+      "recommended_action": "delete",
+      "issue": "The comment narrates the immediately following own-group filtering operation.",
+      "failed_keep_list_check": "It is neither an externally forced constraint nor a public API contract, tool directive, issue/spec link, license notice or required standards comment. The existing closest('details') === group filter already expresses the behavior.",
+      "concrete_fix": "Delete only the line-50 comment. Preserve the closest('details') filter and all counting behavior.",
+      "evidence": "Read the live query/filter/map path at lines 49-56. The comment describes the current code rather than adding a separately enforced constraint."
+    }
+  ],
+  "evidence": [
+    "Read the full authoritative references/personas/comment-reviewer.md asset.",
+    "Inspected the tracked diff against HEAD and complete new navigation module.",
+    "Retain the exported-function doc comments at navigation-module lines 1 and 23: they define the helper contracts for accepted department/course identities and locale-variant deduplication.",
+    "The immutable proof-test fixture comment is explicitly excluded from deletion suggestions.",
+    "No other production comments were added or changed in the seven-file scope."
+  ],
+  "coverage": {
+    "files": [
+      "scripts/sync-streeling.mjs",
+      "scripts/tests/sync-streeling.test.mjs",
+      "src/scripts/streeling-nav-counts.mjs",
+      "scripts/tests/streeling-nav-counts.test.mjs",
+      "src/components/Sidebar.astro",
+      "src/components/GlobalMenu.astro",
+      "src/styles/custom.css"
+    ],
+    "mutations": "Only this requested report written outside the repository. No production code, proof tests or Git state changed."
+  }
+}

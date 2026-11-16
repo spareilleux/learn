@@ -1,0 +1,100 @@
+COMMAND C:\Users\spare\AppData\Local\Programs\Python\Python314\python.exe -X utf8 -B C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-25-b\tests\test_unit_a.py
+PYTHON 3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]
+CWD C:\tmp\learn-streeling-craft-transfer-20261022
+test_AUD019 (__main__.UnitA.test_AUD019) ... 
+OBSERVATION {"code": "AUD019", "case": "model", "observed": {"A": [-1, -0.25, 0.25, 1], "B": [-0.5, -0.25, 0.25, 0.5], "residual": [-0.5, 0.0, 0.0, 0.5], "commutes": false}, "expected": {"A": [-1, -0.25, 0.25, 1], "B": [-0.5, -0.25, 0.25, 0.5], "residual": [-0.5, 0, 0, 0.5], "commutes": false}, "scope": "Memoryless symmetric clip; exact finite real sample orders, no reconstruction or listening."}
+
+OBSERVATION {"code": "AUD019", "case": "negative", "observed": {"A": [-0.25, -0.125, 0.125, 0.25], "B": [-0.25, -0.125, 0.125, 0.25], "residual": [0.0, 0.0, 0.0, 0.0], "commutes": true}, "expected": {"A": [-0.25, -0.125, 0.125, 0.25], "B": [-0.25, -0.125, 0.125, 0.25], "residual": [0, 0, 0, 0], "commutes": true}, "scope": "Memoryless symmetric clip; exact finite real sample orders, no reconstruction or listening."}
+ok
+test_AUD020 (__main__.UnitA.test_AUD020) ... 
+OBSERVATION {"code": "AUD020", "case": "model", "observed": {"weight": [1.0, 1.0, 1.0, 1.0], "output": [2.0, 4.0, 6.0, 8.0], "perfect": true}, "expected": {"weight": [1, 1, 1, 1], "output": [2, 4, 6, 8], "perfect": true}, "scope": "Circular unchanged frames; one window, weight sums only, no FFT or finite-edge claim."}
+
+OBSERVATION {"code": "AUD020", "case": "negative", "observed": {"weight": [0.5, 0.5, 0.5, 0.5], "output": [1.0, 2.0, 3.0, 4.0], "perfect": false}, "expected": {"weight": [0.5, 0.5, 0.5, 0.5], "output": [1, 2, 3, 4], "perfect": false}, "scope": "Circular unchanged frames; one window, weight sums only, no FFT or finite-edge claim."}
+ok
+test_AUD021 (__main__.UnitA.test_AUD021) ... 
+OBSERVATION {"code": "AUD021", "case": "model", "observed": {"output": [1, 0, 0.5, 0.0, 0.25, 0.0, 0.125], "stable": true, "absolute_sum_infinite": 2.0}, "expected": {"output": [1, 0, 0.5, 0, 0.25, 0, 0.125], "stable": true, "absolute_sum_infinite": 2}, "scope": "Zero-state positive integer delay and constant real gain; finite impulse plus analytic geometric tail."}
+
+OBSERVATION {"code": "AUD021", "case": "negative", "observed": {"output": [1, 0, 1.1, 0.0, 1.2100000000000002, 0.0, 1.3310000000000004], "stable": false, "absolute_sum_infinite": null}, "expected": {"output": [1, 0, 1.1, 0, 1.21, 0, 1.331], "stable": false, "absolute_sum_infinite": null}, "scope": "Zero-state positive integer delay and constant real gain; finite impulse plus analytic geometric tail."}
+ok
+test_GAA017 (__main__.UnitA.test_GAA017) ... 
+OBSERVATION {"code": "GAA017", "case": "model", "observed": {"pre_update_tempo": [60, 65, 70, 65, 60, 65], "post_update_tempo": [65, 70, 65, 60, 65, 60], "reversal_indices": [2, 4, 5], "stop_index": 5, "estimate_tempo": 65.0}, "expected": {"pre_update_tempo": [60, 65, 70, 65, 60, 65], "post_update_tempo": [65, 70, 65, 60, 65, 60], "reversal_indices": [2, 4, 5], "stop_index": 5, "estimate_tempo": 65}, "scope": "Authored Boolean outcomes, fixed unbounded tempo steps, zero-based reversals and pre-update mean after stopping."}
+
+OBSERVATION {"code": "GAA017", "case": "negative", "observed": {"pre_update_tempo": [60, 65, 70, 75, 80, 85], "post_update_tempo": [65, 70, 75, 80, 85, 90], "reversal_indices": [], "stop_index": null, "estimate_tempo": null}, "expected": {"pre_update_tempo": [60, 65, 70, 75, 80, 85], "post_update_tempo": [65, 70, 75, 80, 85, 90], "reversal_indices": [], "stop_index": null, "estimate_tempo": null}, "scope": "Authored Boolean outcomes, fixed unbounded tempo steps, zero-based reversals and pre-update mean after stopping."}
+ok
+test_GAA018 (__main__.UnitA.test_GAA018) ... 
+OBSERVATION {"code": "GAA018", "case": "model", "observed": {"ledger": [{"attempt_id": "A", "pass": true}, {"attempt_id": "B", "pass": false}], "rejected_ids": [], "unresolved_ids": []}, "expected": {"ledger": [{"attempt_id": "A", "pass": true}, {"attempt_id": "B", "pass": false}], "rejected_ids": [], "unresolved_ids": []}, "scope": "Unique immutable attempt ids, at most one Boolean feedback each; exact identity join, no transport or duplicate policy."}
+
+OBSERVATION {"code": "GAA018", "case": "negative", "observed": {"ledger": [{"attempt_id": "A", "pass": null}, {"attempt_id": "B", "pass": false}], "rejected_ids": ["C"], "unresolved_ids": ["A"]}, "expected": {"ledger": [{"attempt_id": "A", "pass": null}, {"attempt_id": "B", "pass": false}], "rejected_ids": ["C"], "unresolved_ids": ["A"]}, "scope": "Unique immutable attempt ids, at most one Boolean feedback each; exact identity join, no transport or duplicate policy."}
+ok
+test_GAA019 (__main__.UnitA.test_GAA019) ... 
+OBSERVATION {"code": "GAA019", "case": "model", "observed": {"match_starts": [0, 2], "count": 2, "stream_multiset": {"2": 3, "-1": 2}}, "expected": {"match_starts": [0, 2], "count": 2, "stream_multiset": {"2": 3, "-1": 2}}, "scope": "Exact contiguous directed integer semitone motifs; zero-based interval starts, all overlaps; no theme recognition."}
+
+OBSERVATION {"code": "GAA019", "case": "negative", "observed": {"match_starts": [], "count": 0, "stream_multiset": {"2": 3, "-1": 2}}, "expected": {"match_starts": [], "count": 0, "stream_multiset": {"2": 3, "-1": 2}}, "scope": "Exact contiguous directed integer semitone motifs; zero-based interval starts, all overlaps; no theme recognition."}
+ok
+test_GAS018 (__main__.UnitA.test_GAS018) ... 
+OBSERVATION {"code": "GAS018", "case": "model", "observed": {"pressure_reflection": 0.5, "pressure_transmission": 1.5, "reflected_fraction": 0.25, "transmitted_fraction": 0.75, "total": 1.0}, "expected": {"pressure_reflection": 0.5, "pressure_transmission": 1.5, "reflected_fraction": 0.25, "transmitted_fraction": 0.75, "total": 1}, "scope": "Normally incident pressure waves, positive real impedances, lossless stateless junction; power fractions normalized by incident power."}
+
+OBSERVATION {"code": "GAS018", "case": "negative", "observed": {"pressure_reflection": 0.0, "pressure_transmission": 1.0, "reflected_fraction": 0.0, "transmitted_fraction": 1.0, "total": 1.0}, "expected": {"pressure_reflection": 0, "pressure_transmission": 1, "reflected_fraction": 0, "transmitted_fraction": 1, "total": 1}, "scope": "Normally incident pressure waves, positive real impedances, lossless stateless junction; power fractions normalized by incident power."}
+ok
+test_GAS019 (__main__.UnitA.test_GAS019) ... 
+OBSERVATION {"code": "GAS019", "case": "model", "observed": {"relative_power": [0.2, 0.5, 1.0, 0.5, 0.2], "half_power_edges_hz": [95, 105], "bandwidth_hz": 10, "Q": 10.0}, "expected": {"relative_power": [0.2, 0.5, 1, 0.5, 0.2], "half_power_edges_hz": [95, 105], "bandwidth_hz": 10, "Q": 10}, "scope": "Authored Lorentzian POWER, exact half-power edges and defined center/full-bandwidth quotient, no pole conversion."}
+
+OBSERVATION {"code": "GAS019", "case": "negative", "observed": {"relative_power": [0.2, 0.5, 1.0, 0.5, 0.2], "half_power_edges_hz": [90, 110], "bandwidth_hz": 20, "Q": 5.0}, "expected": {"relative_power": [0.2, 0.5, 1, 0.5, 0.2], "half_power_edges_hz": [90, 110], "bandwidth_hz": 20, "Q": 5}, "scope": "Authored Lorentzian POWER, exact half-power edges and defined center/full-bandwidth quotient, no pole conversion."}
+ok
+test_GAS020 (__main__.UnitA.test_GAS020) ... 
+OBSERVATION {"code": "GAS020", "case": "model", "observed": {"point": [1.0, 1.2246467991473532e-16, -1.0, -2.4492935982947064e-16], "aperture": [0.9003163161571061, 7.796343665038751e-17, -0.3001054387190354, 0.0]}, "expected": {"point": [1, 0, -1, 0], "aperture": [0.9003163161571062, 0, -0.3001054387190354, 0]}, "scope": "Ideal signed sine displacement averaged over a uniform normalized aperture wholly on the string; no electromagnetic response."}
+
+OBSERVATION {"code": "GAS020", "case": "negative", "observed": {"point": [1.0, 1.2246467991473532e-16, -1.0, -2.4492935982947064e-16], "aperture": [1.0, 1.2246467991473532e-16, -1.0, -2.4492935982947064e-16]}, "expected": {"point": [1, 0, -1, 0], "aperture": [1, 0, -1, 0]}, "scope": "Ideal signed sine displacement averaged over a uniform normalized aperture wholly on the string; no electromagnetic response."}
+ok
+test_GTR018 (__main__.UnitA.test_GTR018) ... 
+OBSERVATION {"code": "GTR018", "case": "model", "observed": {"transition_legal": [true, false], "plan_legal": false}, "expected": {"transition_legal": [true, false], "plan_legal": false}, "scope": "String 1 highest; D moves toward smaller numbers; continuous equal-stroke sweep only, no air reset or comfort proof."}
+
+OBSERVATION {"code": "GTR018", "case": "negative", "observed": {"transition_legal": [true, true], "plan_legal": true}, "expected": {"transition_legal": [true, true], "plan_legal": true}, "scope": "String 1 highest; D moves toward smaller numbers; continuous equal-stroke sweep only, no air reset or comfort proof."}
+ok
+test_GTR019 (__main__.UnitA.test_GTR019) ... 
+OBSERVATION {"code": "GTR019", "case": "model", "observed": {"length": [1.0, 0.75, 0.5], "frequency_hz": [100.0, 133.33333333333334, 200.0]}, "expected": {"length": [1, 0.75, 0.5], "frequency_hz": [100, 133.33333333333334, 200]}, "scope": "Constant-wave-speed continuous ideal length; explicitly selected length or log-frequency trajectory, no fret contact."}
+
+OBSERVATION {"code": "GTR019", "case": "negative", "observed": {"length": [0.9999999999999996, 0.7071067811865472, 0.4999999999999997], "frequency_hz": [100.00000000000004, 141.42135623730957, 200.0000000000001]}, "expected": {"length": [1, 0.7071067811865475, 0.5], "frequency_hz": [100, 141.4213562373095, 200]}, "scope": "Constant-wave-speed continuous ideal length; explicitly selected length or log-frequency trajectory, no fret contact."}
+ok
+test_GTR020 (__main__.UnitA.test_GTR020) ... 
+OBSERVATION {"code": "GTR020", "case": "model", "observed": {"events_time_s_and_index": [[0.0, 0], [0.02, 2], [0.05, 5]], "spread_s": 0.05}, "expected": {"events_time_s_and_index": [[0, 0], [0.02, 2], [0.05, 5]], "spread_s": 0.05}, "scope": "Fixed mm positions, positive mm/s speed and extreme origin; muted crossings retained in geometry only."}
+
+OBSERVATION {"code": "GTR020", "case": "negative", "observed": {"events_time_s_and_index": [[0.0, 5], [0.03, 2], [0.05, 0]], "spread_s": 0.05}, "expected": {"events_time_s_and_index": [[0, 5], [0.03, 2], [0.05, 0]], "spread_s": 0.05}, "scope": "Fixed mm positions, positive mm/s speed and extreme origin; muted crossings retained in geometry only."}
+ok
+test_MCL018 (__main__.UnitA.test_MCL018) ... 
+OBSERVATION {"code": "MCL018", "case": "model", "observed": {"old_quarter_s": 0.5, "pivot_s": 0.75, "new_quarter_s": 0.75, "new_quarter_bpm": 80.0}, "expected": {"old_quarter_s": 0.5, "pivot_s": 0.75, "new_quarter_s": 0.75, "new_quarter_bpm": 80}, "scope": "Instantaneous pivot duration equality; each pivot in its own quarter coordinates, seconds and quarter BPM."}
+
+OBSERVATION {"code": "MCL018", "case": "negative", "observed": {"old_quarter_s": 0.5, "pivot_s": 0.75, "new_quarter_s": 0.5, "new_quarter_bpm": 120.0}, "expected": {"old_quarter_s": 0.5, "pivot_s": 0.75, "new_quarter_s": 0.5, "new_quarter_bpm": 120}, "scope": "Instantaneous pivot duration equality; each pivot in its own quarter coordinates, seconds and quarter BPM."}
+ok
+test_MCL019 (__main__.UnitA.test_MCL019) ... 
+OBSERVATION {"code": "MCL019", "case": "model", "observed": {"pitches": [60, 62, 60, 62, 60, 62], "onsets_s": [0.0, 0.2, 0.4, 0.6, 0.8, 1.0], "duration_each_s": 0.2, "terminal_pitch": 62}, "expected": {"pitches": [60, 62, 60, 62, 60, 62], "onsets_s": [0, 0.2, 0.4, 0.6, 0.8, 1], "duration_each_s": 0.2, "terminal_pitch": 62}, "scope": "Main start, finite positive count, equal durations and no terminal turn; no historical realization."}
+
+OBSERVATION {"code": "MCL019", "case": "negative", "observed": {"pitches": [60, 62, 60, 62, 60], "onsets_s": [0.0, 0.24, 0.48, 0.72, 0.96], "duration_each_s": 0.24, "terminal_pitch": 60}, "expected": {"pitches": [60, 62, 60, 62, 60], "onsets_s": [0, 0.24, 0.48, 0.72, 0.96], "duration_each_s": 0.24, "terminal_pitch": 60}, "scope": "Main start, finite positive count, equal durations and no terminal turn; no historical realization."}
+ok
+test_MCL020 (__main__.UnitA.test_MCL020) ... 
+OBSERVATION {"code": "MCL020", "case": "model", "observed": {"effective_alters": [0, 0, 1, 1], "pitches": [65, 65, 78, 66]}, "expected": {"effective_alters": [0, 0, 1, 1], "pitches": [65, 65, 78, 66]}, "scope": "Teaching F-only octave-specific state, reset at measure boundary, no tied notes; not MusicXML pitch decoding."}
+
+OBSERVATION {"code": "MCL020", "case": "negative", "observed": {"effective_alters": [0, 0, 1, 0], "pitches": [65, 65, 78, 65]}, "expected": {"effective_alters": [0, 0, 1, 0], "pitches": [65, 65, 78, 65]}, "scope": "Teaching F-only octave-specific state, reset at measure boundary, no tied notes; not MusicXML pitch decoding."}
+ok
+test_WML017 (__main__.UnitA.test_WML017) ... 
+OBSERVATION {"code": "WML017", "case": "model", "observed": {"period_counts": [0, 1, 2, 0], "canonical_ratios": ["1", "1", "1", "2"], "equivalence_groups": [[0, 1, 2], [3]]}, "expected": {"period_counts": [0, 1, 2, 0], "canonical_ratios": ["1", "1", "1", "2"], "equivalence_groups": [[0, 1, 2], [3]]}, "scope": "Exact positive rational ratios, rational period above one and half-open canonical interval; no culture/perception claim."}
+
+OBSERVATION {"code": "WML017", "case": "negative", "observed": {"period_counts": [0, 1, 3, 1], "canonical_ratios": ["1", "3/2", "9/8", "1"], "equivalence_groups": [[0, 3], [1], [2]]}, "expected": {"period_counts": [0, 1, 3, 1], "canonical_ratios": ["1", "3/2", "9/8", "1"], "equivalence_groups": [[0, 3], [1], [2]]}, "scope": "Exact positive rational ratios, rational period above one and half-open canonical interval; no culture/perception claim."}
+ok
+test_WML018 (__main__.UnitA.test_WML018) ... 
+OBSERVATION {"code": "WML018", "case": "model", "observed": {"bend_values": [8192, 9216], "lsb_msb": [[0, 64], [0, 72]], "conflict_pairs": [["A", "B"]]}, "expected": {"bend_values": [8192, 9216], "lsb_msb": [[0, 64], [0, 72]], "conflict_pairs": [["A", "B"]]}, "scope": "Authored interior 14-bit bend mapping and conventional channel scope; half-open notes, equal receiver sensitivity, no tails/device."}
+
+OBSERVATION {"code": "WML018", "case": "negative", "observed": {"bend_values": [8192, 9216], "lsb_msb": [[0, 64], [0, 72]], "conflict_pairs": []}, "expected": {"bend_values": [8192, 9216], "lsb_msb": [[0, 64], [0, 72]], "conflict_pairs": []}, "scope": "Authored interior 14-bit bend mapping and conventional channel scope; half-open notes, equal receiver sensitivity, no tails/device."}
+ok
+test_WML019 (__main__.UnitA.test_WML019) ... 
+OBSERVATION {"code": "WML019", "case": "model", "observed": {"base_onsets": [0, 2, 5], "rotated_onsets": [1, 3, 6], "cyclic_gaps": [2, 3, 3], "balanced": true}, "expected": {"base_onsets": [0, 2, 5], "rotated_onsets": [1, 3, 6], "cyclic_gaps": [2, 3, 3], "balanced": true}, "scope": "Integer floor lattice or explicit onsets, declared rotation, all cyclic gaps; local max-min criterion only."}
+
+OBSERVATION {"code": "WML019", "case": "negative", "observed": {"base_onsets": [0, 1, 2], "rotated_onsets": [1, 2, 3], "cyclic_gaps": [1, 1, 6], "balanced": false}, "expected": {"base_onsets": [0, 1, 2], "rotated_onsets": [1, 2, 3], "cyclic_gaps": [1, 1, 6], "balanced": false}, "scope": "Integer floor lattice or explicit onsets, declared rotation, all cyclic gaps; local max-min criterion only."}
+ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.002s
+
+OK
+
+EXIT 0

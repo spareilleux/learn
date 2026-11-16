@@ -1,0 +1,11 @@
+--- initial-test_unit_c.py
++++ final-test_unit_c.py
+@@ -199,7 +199,7 @@
+                 observed=calculate(code,p['values'])
+             except (ValueError,KeyError,TypeError,ZeroDivisionError) as error:
+                 observed={'diagnostic':str(error)}
+-            print('OBSERVATION '+json.dumps(dict(code=code,case=case,observed=observed,expected=fixed,scope=SCOPE),sort_keys=True),flush=True)
++            print('\nOBSERVATION '+json.dumps(dict(code=code,case=case,observed=observed,expected=fixed,scope=SCOPE),sort_keys=True),flush=True)
+             self.equal_tree(observed,fixed)
+             self.equal_tree(p['expected'],fixed)
+ 

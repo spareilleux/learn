@@ -1,0 +1,85 @@
+{
+  "status": "unexecuted proposed learner scoring guide; withhold from learner until response collection",
+  "source_binding_note": "Both the technical content before the chronology note and the final English source are bound separately. No learner or human subject review has been performed.",
+  "score_each_criterion": "0: absent or incorrect; 1: correct with the required scope distinction. Three criteria per task. Retain the actual response and the reasons for each score.",
+  "approval_policy": "No automatic course approval. Confusing a proposal with a measurement, or native with browser evidence, requires correction and a separately recorded second attempt. Human review and learner status remain pending.",
+  "tasks": [
+    {
+      "module_code": "aud-002",
+      "english_source": "streeling/courses/audio-engineering/en/aud-002-level-matched-guitar-comparison.md",
+      "english_source_sha256_before_transfer_note": "7b6cf3456c9a7e3569c01a8e3c2abf031407b44219dd7a57c1f2b7bd7f334a3a",
+      "criteria": [
+        "GA playback gain is -18.0 dB, with an amplitude multiplier of approximately 0.126. Retain the original WAVs.",
+        "Predicted later GA level is -35.7 dBFS versus -38.5 dBFS for the recording: a 2.8 dB gap. Level matching does not equalize the envelope.",
+        "Listening copies require logged transformations and a blinded, level-matched trial. No such trial was performed."
+      ],
+      "english_source_sha256": "cb50f4e2c5d08e9a3780a1e76281d7810ef92fd4c574c8c61964a7a09d0d4153"
+    },
+    {
+      "module_code": "aud-003",
+      "english_source": "streeling/courses/audio-engineering/en/aud-003-transient-preservation-gate.md",
+      "english_source_sha256_before_transfer_note": "9ce3750ece9a0bc790672d58877f7d86ed9de1a827af368313f619d72af3b639",
+      "criteria": [
+        "A 2,048-sample window at 44,100 Hz spans approximately 46.44 ms and has 1,025 one-sided bins. A 512-sample hop is approximately 11.61 ms.",
+        "IX Haar denoising changes the audio. A Morlet track measures unchanged audio; these outputs are not interchangeable.",
+        "All three archived thresholds failed the provisional 3 dB noise gate. One excerpt and an unattested binary do not certify the pinned IX source or guitar quality."
+      ],
+      "english_source_sha256": "0e67df4177d47bb313014168bf292d89405462cb3539ee2ee43e0dcb5c7ea131"
+    },
+    {
+      "module_code": "aud-004",
+      "english_source": "streeling/courses/audio-engineering/en/aud-004-wavelet-guitar-attack-evidence.md",
+      "english_source_sha256_before_transfer_note": "4da6074e7d555240b6c43645fb1eefd0642fe35a29c1397e7f9cbb7705d1d546",
+      "criteria": [
+        "2.313 - 0.034 = 2.279 ms, below the declared 5 ms threshold. The combined claim fails.",
+        "All four bursts were detected, and 51.021 dB separation exceeds 6 dB. These passes do not override the failed timing condition.",
+        "The Python reproduction is synthetic only. Real-guitar sensitivity, IX binary behavior, browser/WASM benefit and listening remain unknown."
+      ],
+      "english_source_sha256": "5e4ce335e577ffbf8e2894b385b30801d1679e543b62805d5fad115e617b79a7"
+    },
+    {
+      "module_code": "gas-001",
+      "english_source": "streeling/courses/guitar-acoustics/en/gas-001-open-string-audio-evidence.md",
+      "english_source_sha256_before_transfer_note": "d3b0eaf4176e7d3156910f5588025fa3030b12caf3324799b6d4555f9a80ad64",
+      "criteria": [
+        "Recording onset is approximately 1.1 s. The native render is not a browser capture. Preserve full input hashes and attribution.",
+        "The recording first-note FFT interval is approximately 1.3-2.3 s in file time and excludes the later attack near 2.75 s.",
+        "The local partial-ratio and time-course differences are supported. Perceived realism and a working ComfyUI handoff are not established."
+      ],
+      "english_source_sha256": "d5c0adb7e789d9599b46fc51e3c5df45afa352a82027482fd70c2cabaaf10b42"
+    },
+    {
+      "module_code": "gas-002",
+      "english_source": "streeling/courses/guitar-acoustics/en/gas-002-brightness-control-and-evaluation-gate.md",
+      "english_source_sha256_before_transfer_note": "4b41a0acbcbc01e285a6667a3d281e2491a311eb0aa32d008671981c4eac7b8b",
+      "criteria": [
+        "Proposed brightness 0.90 is control arithmetic, not an executed candidate or verified spectral improvement.",
+        "Select the profile before the candidate brightness setter. Hold other controls, seed, frequency, velocity, format and render length fixed.",
+        "A baseline partial-ratio error of 23.9 dB minus a proposed 3.0 dB improvement gives a maximum error of 20.9 dB. A clipping, pitch, attack or other-note guard can still reject the candidate."
+      ],
+      "english_source_sha256": "37fa3982cc852b84dc801b43933e300a281ca3b2bc410444e24248038350cc20"
+    },
+    {
+      "module_code": "gas-003",
+      "english_source": "streeling/courses/guitar-acoustics/en/gas-003-decay-calibration-open-e.md",
+      "english_source_sha256_before_transfer_note": "d9c0b84b0f7309ff2a2cd0904d1f1f5b187d07d3ee9c8c6ab91d5a1673596d67",
+      "criteria": [
+        "The saved absolute error is 2.8 dB. A proposed 1.0 dB improvement allows 1.8 dB error, giving the rounded decline interval [-5.7, -2.1] dB.",
+        "The source feedback coefficient of approximately 1.00009584 alone cannot establish unstable output. The saved measured decline is -1.1 dB.",
+        "Candidate 0.9976 requires a reviewed harness extension calling the decay setter after profile selection and before excitation. No candidate render was executed."
+      ],
+      "english_source_sha256": "1496944af65adcd681a9029c74360b3330d34edcaa041de71f815febf8a529f7"
+    },
+    {
+      "module_code": "phy-002",
+      "english_source": "streeling/courses/physics/en/phy-002-time-frequency-guitar-transients.md",
+      "english_source_sha256_before_transfer_note": "8caad587e09148f80b6b116eb3edfcdffff8f82e298b3b7965082cff837916d4",
+      "criteria": [
+        "The finite DFT is valid for changing audio. A whole-file magnitude spectrum lacks event-time labels.",
+        "A 50 ms window at 44,100 Hz contains 2,205 samples and has a nominal unpadded bin spacing of 20 Hz.",
+        "A smaller hop adds time columns but does not change frequency discrimination or the window span."
+      ],
+      "english_source_sha256": "e224637f8ae217074e3df5cd32576793562c10846ddc970f96117868464607c4"
+    }
+  ]
+}

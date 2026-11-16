@@ -1,0 +1,53 @@
+{
+  "run_id": "20261029-092356-ba2e5943",
+  "run_dir": "C:/tmp/streeling-count-ui-quality-20261029/ce-code-review/20261029-092356-ba2e5943",
+  "findings": [],
+  "selected_findings": [],
+  "selected_count": 0,
+  "skip_count": 0,
+  "shortcut_skipped": 0,
+  "skip_evidence_basis": "No primary findings remain; no independently corroborated finding shortcut was used.",
+  "selection_reason": "Empty primary finding set after Stage 5. No validator launch is required.",
+  "ordering": "severity then stable #",
+  "batch_cap": 8,
+  "diff": "C:/tmp/streeling-count-ui-quality-20261029/ce-code-review/20261029-092356-ba2e5943/full.diff",
+  "scope": {
+    "mode": "standalone",
+    "base": "d37df8408cce7c4f96c4bbfbff33f43f27d3618a",
+    "diff_a": "d37df8408cce7c4f96c4bbfbff33f43f27d3618a",
+    "diff_b": null,
+    "pr": {
+      "number": null,
+      "url": null,
+      "title": null,
+      "body": null,
+      "base_ref_name": null,
+      "head_ref_oid": null,
+      "head_ref": null,
+      "base_ref": null,
+      "has_prior_comments": false
+    },
+    "branch": "codex/streeling-public-count-20261029",
+    "head_sha": "d37df8408cce7c4f96c4bbfbff33f43f27d3618a",
+    "files": "C:/tmp/streeling-count-ui-quality-20261029/ce-code-review/20261029-092356-ba2e5943/files.txt",
+    "diff": "C:/tmp/streeling-count-ui-quality-20261029/ce-code-review/20261029-092356-ba2e5943/full.diff",
+    "tree_is_reviewed_head": true,
+    "untracked_excluded": [
+      "code/streeling/evidence/publication-2026-10-29/ (plan/evidence context only)"
+    ]
+  },
+  "scope_context": {
+    "mode": "standalone",
+    "tree_is_reviewed_head": true,
+    "repository": "C:/tmp/learn-streeling-craft-transfer-20261022",
+    "constraints": [
+      "Report-only; no source/Git/publication changes. Review only scripts/sync-streeling.mjs; scripts/tests/sync-streeling.test.mjs; src/scripts/streeling-nav-counts.mjs; scripts/tests/streeling-nav-counts.test.mjs; src/components/Sidebar.astro; src/components/GlobalMenu.astro; src/styles/custom.css.",
+      "Both changed proof test files immutable. Existing lazy-demo.test.mjs immutable out of scope.",
+      "Preserve PR160 desktop/home/mobile global nav, theme/language controls and native dialog contract.",
+      "Do not optimize HTML bloat; known repeated navigation is outside this change.",
+      "Root owns publication and anonymous 1,518-route readback after this quality gate. Plan requirement 5 is an explicit later release step outside this report-only seven-code-path review, not a missing code implementation.",
+      "Keep simplifier Step5 summary external and exclude it from retained review artifacts."
+    ]
+  },
+  "template": "C:/Users/spare/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.33.2/skills/ce-code-review/references/validator-batch-template.md"
+}

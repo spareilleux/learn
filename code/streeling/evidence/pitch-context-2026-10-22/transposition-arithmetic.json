@@ -1,0 +1,39 @@
+{
+  "scope": "Ordinary single-note additive semitone examples, no double element, staff change or time-varying transpose.",
+  "cases": [
+    {
+      "id": "written-e3",
+      "encoded_midi": 52,
+      "chromatic": 0,
+      "octave_change": -1,
+      "sounding_midi": 40
+    },
+    {
+      "id": "concert-e2",
+      "encoded_midi": 40,
+      "chromatic": 0,
+      "octave_change": 0,
+      "sounding_midi": 40
+    },
+    {
+      "id": "double-application-control",
+      "encoded_midi": 52,
+      "chromatic": 0,
+      "octave_change": -2,
+      "sounding_midi": 28
+    },
+    {
+      "id": "b-flat-instrument-control",
+      "encoded_midi": 60,
+      "chromatic": -2,
+      "octave_change": 0,
+      "sounding_midi": 58
+    }
+  ],
+  "formula": "sounding = encoded + chromatic + 12*octave_change",
+  "full_midi_vs_pc": {
+    "written": 52,
+    "sounding": 40,
+    "both_pc": 4
+  }
+}

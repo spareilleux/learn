@@ -1,0 +1,53 @@
+[
+  {
+    "label": "python-analyses",
+    "args": [
+      "gh",
+      "run",
+      "view",
+      "40225268328",
+      "--repo",
+      "spareilleux/learn",
+      "--job",
+      "121265177060",
+      "--log-failed"
+    ],
+    "exit_code": 0,
+    "path": "C:\\tmp\\streeling-ci-20261029\\python-analyses.log",
+    "sha256": "bebe5b45cff002d007472d845e96e7255a9f9f50f1fb6c68d5b0c95fcc3ee794"
+  },
+  {
+    "label": "python-extracts",
+    "args": [
+      "gh",
+      "run",
+      "view",
+      "40225268328",
+      "--repo",
+      "spareilleux/learn",
+      "--job",
+      "121265177075",
+      "--log-failed"
+    ],
+    "exit_code": 0,
+    "path": "C:\\tmp\\streeling-ci-20261029\\python-extracts.log",
+    "sha256": "3e9fc179f425da085069ba3235b9b19a6216cbf1c7fa7ef5b576c2978c4ef7c7"
+  },
+  {
+    "label": "rust",
+    "args": [
+      "gh",
+      "run",
+      "view",
+      "40225268324",
+      "--repo",
+      "spareilleux/learn",
+      "--job",
+      "121265177291",
+      "--log-failed"
+    ],
+    "exit_code": 0,
+    "path": "C:\\tmp\\streeling-ci-20261029\\rust.log",
+    "sha256": "4113a6f190f38ca06d1995a9f9d70f4934c926210fb2b48df070676d5a9088f2"
+  }
+]

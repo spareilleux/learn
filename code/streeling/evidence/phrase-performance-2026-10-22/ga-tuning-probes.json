@@ -1,0 +1,37 @@
+{
+  "captured_at_utc": "2026-10-22 19:33:33 UTC",
+  "available_tunings": {
+    "tool": "mcp__ga__get_available_tunings",
+    "args": {
+      "instrument": "guitar"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "[\"Standard\",\"Drop D\"]"
+        }
+      ]
+    },
+    "scope": "Actual MCP response; runtime source revision and temporal behavior unattested.",
+    "runtime_source_revision": null
+  },
+  "standard_tuning": {
+    "tool": "mcp__ga__get_tuning",
+    "args": {
+      "instrument": "guitar",
+      "tuningName": "Standard"
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "E2,A2,D3,G3,B3,E4"
+        }
+      ]
+    },
+    "scope": "Actual MCP response; runtime source revision and temporal behavior unattested.",
+    "runtime_source_revision": null
+  },
+  "scope": "Saved actual MCP responses; runtime source revision, numbering adapter and temporal-planner behavior are unattested."
+}

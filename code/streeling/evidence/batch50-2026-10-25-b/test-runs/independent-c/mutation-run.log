@@ -1,0 +1,27 @@
+MUTATION_INPUT {"code": "PHY022", "case": "model", "original_values": {"mass_kg": 0.6, "fluid_density_kg_m3": 1000, "sealed_volume_m3": 0.001, "g_m_s2": 10}, "mutant_values": {"mass_kg": 0.8, "fluid_density_kg_m3": 1000, "sealed_volume_m3": 0.001, "g_m_s2": 10}, "co_mutated_packet_expected": {"weight_N": 8.0, "maximum_buoyancy_N": 10.0, "required_displacement_m3": 0.0008, "required_fraction": 0.8, "feasible": true, "full_submersion_net_N": 2.0}, "computed_observation": {"weight_N": 8.0, "maximum_buoyancy_N": 10.0, "required_displacement_m3": 0.0008, "required_fraction": 0.8, "feasible": true, "full_submersion_net_N": 2.0}, "packet_expected_matches_observation": true, "scope": "In-memory deliberate wrong input; not a failing canonical course."}
+test_phy022 (c16_mutation.UnitC.test_phy022) ... 
+OBSERVATION {"case": "model", "code": "PHY022", "expected": {"feasible": true, "full_submersion_net_N": 4, "maximum_buoyancy_N": 10, "required_displacement_m3": 0.0006, "required_fraction": 0.6, "weight_N": 6}, "observed": {"feasible": true, "full_submersion_net_N": 2.0, "maximum_buoyancy_N": 10.0, "required_displacement_m3": 0.0008, "required_fraction": 0.8, "weight_N": 8.0}, "scope": "Authored finite model/control only; no physical, scene, human, learner or production acceptance."}
+FAIL
+
+======================================================================
+FAIL: test_phy022 (c16_mutation.UnitC.test_phy022)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-25-b\tests\test_unit_c.py", line 227, in test_phy022
+    self.check_course('PHY022',dict(weight_N=6,maximum_buoyancy_N=10,required_displacement_m3=.0006,required_fraction=.6,feasible=True,full_submersion_net_N=4),dict(weight_N=12,maximum_buoyancy_N=10,required_displacement_m3=.0012,required_fraction=1.2,feasible=False,full_submersion_net_N=-2))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-25-b\tests\test_unit_c.py", line 223, in check_course
+    self.equal_tree(observed,fixed)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-25-b\tests\test_unit_c.py", line 201, in equal_tree
+    self.equal_tree(observed[key],expected[key])
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-25-b\tests\test_unit_c.py", line 211, in equal_tree
+    self.assertTrue(math.isclose(observed,expected,rel_tol=1e-11,abs_tol=1e-11),(observed,expected))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : (8.0, 6)
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)

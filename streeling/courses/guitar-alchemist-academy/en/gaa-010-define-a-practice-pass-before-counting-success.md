@@ -1,0 +1,79 @@
+---
+module_id: gaa-010-define-a-practice-pass-before-counting-success
+department: guitar-alchemist-academy
+course: "Define a Practice Pass Before Counting Success"
+level: intermediate
+prerequisites: ["gaa-007-turn-a-voicing-result-into-a-practice-item"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+
+# Define a Practice Pass Before Counting Success
+
+> **Draft and evidence boundary.** This lesson contains an authored model and source reading. Human technical, musician, fluent-language and learner decisions remain pending. No new engine render, parser run, playing, listening or learner observation is claimed. Historical failures keep their original status.
+
+## The project question
+
+A practice dashboard reports successful takes without saying what success means. We define a conjunctive pass rule for an authored four-attempt ledger: correct notes, timing inside a declared tolerance and no disallowed assistance. The rule is deliberately local. Counting its outcomes tests the rubric, while evidence that a musician improved requires another study and actual observations.
+
+## Read the project evidence
+
+Read the linked prerequisite and retained project artifact before applying the model. Locate the particular representation, transformation or exclusion that matters to this question. The fixed packet records source identity, reading scope and authored values; a source location is evidence for its contents at that revision, not proof of current deployment. Keep a source-derived observation separate from an inferred proposal. Where a primary reference is linked, use its stated scope rather than extending it to unsupported cases.
+
+[Prerequisite: gaa-007-turn-a-voicing-result-into-a-practice-item](../../guitar-alchemist-academy/en/gaa-007-turn-a-voicing-result-into-a-practice-item.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-23/unit-a.json)
+
+[Validation journal](../../../../code/streeling/evidence/batch50-2026-10-23/journal.md)
+
+## 1. Exercise 1
+
+Declare a pass as correct notes, absolute onset error at most 50 ms and no disallowed assistance. All conditions must hold. This does not prescribe a universal musical tolerance; it makes a particular task assessable. Changing one condition after seeing the results would define a different endpoint and require another report.
+
+Does correct pitch alone satisfy the rule?
+
+> **Answer.** No. Timing and assistance conditions must also hold.
+
+## 2. Exercise 2
+
+Attempt A has correct notes, error 20 ms and no assistance. Attempt B has correct notes, error 60 ms and no assistance. Only A satisfies the timing criterion. Keep B's correct-note observation rather than erasing it merely because the composite pass is false; component outcomes help explain the result.
+
+Which of A and B passes?
+
+> **Answer.** A passes. B fails because 60 exceeds the declared 50 ms tolerance.
+
+## 3. Exercise 3
+
+Attempt C has incorrect notes and error 10 ms. Attempt D has correct notes, error 20 ms and disallowed assistance. Both fail the composite endpoint for different reasons. Do not collapse them into a vague bad-take label or silently remove the assisted attempt from the denominator after inspecting it.
+
+Why do C and D fail?
+
+> **Answer.** C fails notes; D fails the assistance condition. Their failure reasons remain separate.
+
+## 4. Exercise 4
+
+Across all four retained attempts, one passes: `1/4=.25`. A notes-only score would count three: `3/4=.75`. This negative control exposes the effect of replacing the declared endpoint with an easier component. Neither fraction estimates a population success rate, since this ledger was authored to illustrate the distinction.
+
+Which rate answers the stated pass question?
+
+> **Answer.** `.25` does; `.75` describes note correctness alone and must keep that label.
+
+## 5. Exercise 5
+
+Inspect the retained practice-item cues and accepted answers before designing the performance rubric. A future observation additionally needs a timing measurement definition, permitted assistance and retained takes. An agent can audit the conjunction against a table, while human musical acceptance and delayed learning outcomes remain distinct decisions.
+
+Can the authored pass count be described as observed practice improvement?
+
+> **Answer.** No. There are no actual takes or learner observations here, and no before-and-after comparison.
+
+## Source-assisted learner task
+
+Prepare a short review note from the fixed case before opening the prepared answers. First reproduce the calculation or table manually, keeping the stated units, support and assumptions. That direct result is the baseline for any source-assisted or agent-assisted answer. Then inspect the linked project artifact and identify one precise boundary relevant to the calculation. Record the actual source excerpt or field used, its revision, your proposed answer and every kind of assistance received. A calculator and source lookup are allowed; label them instead of presenting the result as unaided recall.
+
+Apply the negative control as well as the main case. Write the observable result that would falsify your conclusion, and state whether the control actually supplies it. If a model input is absent, retain an unresolved result rather than substituting a plausible value. Compare a proposed abstraction with the manual baseline before recommending a new agent workflow or DSL. The answer key is a prepared check, not a record of your attempt. Keep your original answer before reveal, any correction afterward and the reason for the correction.
+
+The packet contains five prepared learner criteria corresponding to the exercises. Their decisions remain null until actual answers, assistance and review are retained. Correct arithmetic supports only the declared model. A useful project decision still needs the relevant human judgment or runtime observation at its own boundary. Record actual checks, errors and refinements in the linked validation journal; the journal must distinguish executed tests from planned tests.

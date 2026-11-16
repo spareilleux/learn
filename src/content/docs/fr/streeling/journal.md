@@ -10,6 +10,25 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 
 ## Progression
 
+## QA
+
+| Attente | Défaut observé | Correction et mesure | État et preuves |
+| --- | --- | --- | --- |
+| Les descriptions traduites correspondent aux titres. | 32 valeurs de métadonnées FR/ES étaient restées en anglais. | 118 réussites/32 échecs avant ; 150 réussites/0 échec après correction des 32 valeurs. | Corrigé dans ce lot ; [modifications exactes](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/root-metadata-fix.json), [échecs](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/metadata-before-fix.json), [rejeu](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/metadata-after-guard.json). |
+| Les tests détectent les cas manquants et conservent les diagnostics. | Faux succès sur un plan vide ; assertions avant les observations ; délai et couverture attendus affichés sans assertion indépendante. | Contrôle du nombre de cours, observations déplacées, assertions sur les valeurs et longueurs. Rejeu : 69 tests des nouveaux cours et six tests précédents réussis. | Corrigé dans les tests relus ; [diagnostic et essais conservés](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md). Cas construits uniquement ; essais réels du logiciel, écoute et apprenants encore à faire. |
+
+
+## Expériences
+
+| Question | Hypothèse/statut | Résultat observé | Verdict et limites | Trace |
+| --- | --- | --- | --- | --- |
+| Les valeurs ponctuelles de FUT011 sont-elles les milieux des intervalles ? | Vérification du cas construit avant correction du texte. | Deux écarts (échantillons 1 et 5) ; 3 changements pour les valeurs fournies, 1 pour les milieux. | Hypothèse réfutée. Le texte parle désormais de points admissibles, pas nécessairement de milieux ; aucun bénéfice du moteur démontré. | [Échec conservé](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/test-runs/fut011-midpoint-before-fix.json), [rejeu corrigé](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/test-runs/fut011-point-label-after-fix.json) |
+| Les tests de régression existants du générateur Streeling passent-ils encore ? | Contrôle de régression ; aucun préenregistrement scientifique. | 18 réussites, 0 échec ; Node v24.12.0. | Réussi pour ces tests du générateur ; aucune conclusion sur le domaine ou l’apprentissage. | [Exécution conservée](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/generator-initial.json) |
+| Le générateur reste-t-il compatible au départ du prochain lot (2026-10-24) ? | Attente de régression rétrospective ; aucun préenregistrement scientifique. | 18 réussites, aucun échec. | Réussi pour les contrôles du générateur uniquement. | [Exécution réelle](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/test-runs/generator-initial.json) |
+| Le générateur reste-t-il compatible au départ du prochain lot (2026-10-25) ? | Attente de régression rétrospective ; aucun préenregistrement scientifique. | 18 réussites, aucun échec. | Réussi pour les contrôles du générateur uniquement. | [Exécution réelle](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25/test-runs/generator-initial.json) |
+| Le générateur reste-t-il compatible au départ du prochain lot (2026-10-25) ? | Attente de régression rétrospective ; aucun préenregistrement scientifique. | 18 réussites, aucun échec. | Réussi pour les contrôles du générateur uniquement. | [Exécution réelle](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/test-runs/generator-initial.json) |
+
+
 ### Ingénierie audio
 
 - [ ] [AUD-001 · EQ et compression](../audio-engineering/aud-001-eq-compression-order/) <!-- aud-001-eq-compression-order -->
@@ -27,7 +46,7 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 
 - [ ] [CYB-001 · Correspondance entre le modèle du système viable et la gouvernance de l'IA](../cybernetics/cyb-001-vsm-ai-governance-mapping/) <!-- cyb-001-vsm-ai-governance-mapping -->
 - [ ] [CYB-002 · Mécanismes d'amortissement actif pour maîtriser l'oscillation entre dépôts](../cybernetics/cyb-002-active-dampening-cross-repo-oscillation/) <!-- cyb-002-active-dampening-cross-repo-oscillation -->
-- [ ] [CYB-003 · Measuring the Variety Ratio Quantitatively](../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) *(en anglais)* <!-- cyb-003-measuring-variety-ratio-quantitatively -->
+- [ ] [CYB-003 · Mesurer quantitativement le ratio de variété](../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) <!-- cyb-003-measuring-variety-ratio-quantitatively -->
 
 ### Futurologie
 
@@ -47,6 +66,10 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 ### Théorie de l'information
 
 - [ ] [INF-001 · L'entropie de la gouvernance](../information-theory/inf-001-entropy-of-governance/) <!-- inf-001-entropy-of-governance -->
+
+### Recherche sur IX
+
+- [ ] [IXR-001 · Des flux sous budget](../ix-research/ixr-001-streams-under-budgets/) <!-- ixr-001-streams-under-budgets -->
 
 ### Mathématiques
 
@@ -95,6 +118,8 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 - [ ] [MUS-018 · Identification de la tonalité, chiffres romains et cadences](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
 - [ ] [MUS-019 · Transposition, capodastre et équivalence entre instruments](../music/mus-019-transposition-capo-cross-instrument/) <!-- mus-019-transposition-capo-cross-instrument -->
 - [ ] [MUS-020 · Classes d'ensembles, vecteurs d'intervalles, relation Z et formes premières](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
+- [ ] [MUS-021 · La TFD des classes de hauteurs](../music/mus-021-pitch-class-dft-magnitudes-phases-homometry/) <!-- mus-021-pitch-class-dft-magnitudes-phases-homometry -->
+- [ ] [MUS-022 · Les deltas de Grothendieck](../music/mus-022-grothendieck-deltas-icv-distance/) <!-- mus-022-grothendieck-deltas-icv-distance -->
 
 ### Musicologie
 
@@ -121,6 +146,29 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 
 - [ ] [PSY-001 · Introduction à la Capitalisation Fractale](../psychohistory/psy-001-intro-fractal-compounding/) <!-- psy-001-intro-fractal-compounding -->
 - [ ] [PSY-002 · Les transitions de phase de la gouvernance](../psychohistory/psy-002-governance-phase-transitions/) <!-- psy-002-governance-phase-transitions -->
+- [ ] [PSY-003 · Mesurer l'amélioration récursive, de la revue à la publication](../psychohistory/psy-003-review-throughput-and-compounding/) <!-- psy-003-review-throughput-and-compounding -->
+- [ ] [PSY-004 · Qu'est-ce qu'un grand nombre ? La prévisibilité d'un agrégat de quatorze agents](../psychohistory/psy-004-how-large-is-large/) <!-- psy-004-how-large-is-large -->
+- [ ] [PSY-005 · La persistance d'abord](../psychohistory/psy-005-persistence-baseline/) <!-- psy-005-persistence-baseline -->
+- [ ] [PSY-006 · Estimer une matrice de transition à partir de comptages observés](../psychohistory/psy-006-transition-matrix-from-counts/) <!-- psy-006-transition-matrix-from-counts -->
+- [ ] [PSY-007 · Est-ce une loi de puissance ? Dix-huit nombres de citations](../psychohistory/psy-007-power-law-or-not/) <!-- psy-007-power-law-or-not -->
+- [ ] [PSY-008 · Les rafales ne sont pas des taux](../psychohistory/psy-008-bursts-are-not-rates/) <!-- psy-008-bursts-are-not-rates -->
+- [ ] [PSY-009 · Concentration](../psychohistory/psy-009-concentration-and-heavy-tails/) <!-- psy-009-concentration-and-heavy-tails -->
+- [ ] [PSY-010 · Exponentielle, logistique ou en paliers ? Ajuster une croissance à un historique court](../psychohistory/psy-010-growth-curves-short-series/) <!-- psy-010-growth-curves-short-series -->
+- [ ] [PSY-011 · Changement de mesure ou changement du système ? Les rebaselines de la tendance de qualité](../psychohistory/psy-011-measurement-change-or-system-change/) <!-- psy-011-measurement-change-or-system-change -->
+- [ ] [PSY-012 · Les signaux d'alerte précoce et leurs fausses alertes](../psychohistory/psy-012-early-warning-false-alarms/) <!-- psy-012-early-warning-false-alarms -->
+- [ ] [PSY-013 · Quatre scores et une tendance](../psychohistory/psy-013-four-scores-and-a-trend/) <!-- psy-013-four-scores-and-a-trend -->
+- [ ] [PSY-014 · Horizons de prévisibilité](../psychohistory/psy-014-prediction-horizons/) <!-- psy-014-prediction-horizons -->
+- [ ] [PSY-015 · Contagion des croyances dans une petite population](../psychohistory/psy-015-belief-contagion-small-population/) <!-- psy-015-belief-contagion-small-population -->
+- [ ] [PSY-016 · Les prévisions probabilistes et le score de Brier](../psychohistory/psy-016-brier-score/) <!-- psy-016-brier-score -->
+- [ ] [PSY-017 · La calibration à partir de six observations](../psychohistory/psy-017-calibration-with-six-observations/) <!-- psy-017-calibration-with-six-observations -->
+- [ ] [PSY-018 · Tests rétrospectifs sans fuite de données](../psychohistory/psy-018-backtesting-without-leakage/) <!-- psy-018-backtesting-without-leakage -->
+- [ ] [PSY-019 · Combiner des prévisionnistes qui partagent une source](../psychohistory/psy-019-combining-correlated-forecasters/) <!-- psy-019-combining-correlated-forecasters -->
+- [ ] [PSY-020 · Quand la mesure devient la cible](../psychohistory/psy-020-goodhart-and-reflexivity/) <!-- psy-020-goodhart-and-reflexivity -->
+- [ ] [PSY-021 · Des énoncés de conservation que l'on peut vérifier](../psychohistory/psy-021-conservation-claims/) <!-- psy-021-conservation-claims -->
+- [ ] [PSY-022 · Explications concurrentes](../psychohistory/psy-022-competing-explanations/) <!-- psy-022-competing-explanations -->
+- [ ] [PSY-023 · Surveiller un plan](../psychohistory/psy-023-monitoring-a-plan/) <!-- psy-023-monitoring-a-plan -->
+- [ ] [PSY-024 · L'acteur unique](../psychohistory/psy-024-the-single-actor/) <!-- psy-024-the-single-actor -->
+- [ ] [PSY-025 · Projet de synthèse](../psychohistory/psy-025-capstone-preregistered-forecast/) <!-- psy-025-capstone-preregistered-forecast -->
 
 ### Sémiotique
 
@@ -269,3 +317,114 @@ Synchronisé depuis Demerzel à [`0f7a5fd`](https://github.com/GuitarAlchemist/D
 Rien n'y a été exécuté ici.
 
 - **Il n'a pas été étudié ici,** donc sa case ci-dessus reste vide.
+
+## 2026-10-23 — Lot de50 : tester, consigner, affiner et rejouer
+
+Il s’agit de vérification de production, pas d’un essai apprenant terminé. Le lot demandé comprend50 cours anglais distincts, entièrement traduits en français et en espagnol. [Le plan](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/batch-plan.json) fixe les150 sources et la version de départ. La rédaction et la lecture des sources sont en cours dans trois ensembles sans fichiers partagés. Aucune case de cours étudié n’est cochée à ce titre.
+
+Commande exécutée : `node --test scripts/tests/lazy-demo.test.mjs scripts/tests/streeling-copy-source.test.mjs scripts/tests/sync-streeling.test.mjs` ; 18 réussites, 0 échec. La [sortie complète](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/generator-initial.log) et les [empreintes des entrées et le code de sortie](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/generator-initial.json) sont conservés. Cela vérifie le générateur existant, pas les calculs des nouveaux cours.
+
+La demande supplémentaire impose une [boucle de validation des affirmations](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal-validation-plan.md) : construire et exécuter les vérifications, garder les échecs, corriger cours et tests, rejouer et noter les limites. Les tests dédiés aux affirmations et la revue indépendante restent à faire à la date de cette entrée. Aucun nouvel essai audio, de scène, de matériau, humain ou apprenant n’a été réalisé.
+
+## 2026-10-23 — Vérification baseline-audio-01
+
+Exécution de `baseline-audio-01` pour3 cours : code0, 6 tests, couverture cas/contre-exemples True. Verdict : réussi. La [trace](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/baseline-audio-01.json) conserve commande, empreintes et valeurs calculées ; la [sortie complète](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/baseline-audio-01.log) garde les échecs. Le [journal de production](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) conserve l’attente écrite avant l’exécution, le diagnostic, les corrections et les relectures. Ces résultats concernent les cas construits, pas de nouveaux essais du logiciel, de musiciens ou d’apprenants.
+
+## 2026-10-23 — Vérification claims-a-01
+
+Exécution de `claims-a-01` pour18 cours : code0, 36 tests, couverture cas/contre-exemples True. Verdict : réussi. La [trace](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-a-01.json) conserve commande, empreintes et valeurs calculées ; la [sortie complète](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-a-01.log) garde les échecs. Le [journal de production](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) conserve l’attente écrite avant l’exécution, le diagnostic, les corrections et les relectures. Ces résultats concernent les cas construits, pas de nouveaux essais du logiciel, de musiciens ou d’apprenants.
+
+## 2026-10-23 — Vérification claims-c-01
+
+Exécution de `claims-c-01` pour16 cours : code0, 16 tests, couverture cas/contre-exemples True. Verdict : réussi. La [trace](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-c-01.json) conserve commande, empreintes et valeurs calculées ; la [sortie complète](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-c-01.log) garde les échecs. Le [journal de production](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) conserve l’attente écrite avant l’exécution, le diagnostic, les corrections et les relectures. Ces résultats concernent les cas construits, pas de nouveaux essais du logiciel, de musiciens ou d’apprenants.
+
+## 2026-10-23 — Vérification claims-b-01
+
+Exécution de `claims-b-01` pour16 cours : code0, 17 tests, couverture cas/contre-exemples True. Verdict : réussi. La [trace](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-b-01.json) conserve commande, empreintes et valeurs calculées ; la [sortie complète](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-b-01.log) garde les échecs. Le [journal de production](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) conserve l’attente écrite avant l’exécution, le diagnostic, les corrections et les relectures. Ces résultats concernent les cas construits, pas de nouveaux essais du logiciel, de musiciens ou d’apprenants.
+
+## 2026-10-23 — Vérification claims-all-01
+
+Exécution de `claims-all-01` pour50 cours : code0, 69 tests, couverture cas/contre-exemples True. Verdict : réussi. La [trace](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-all-01.json) conserve commande, empreintes et valeurs calculées ; la [sortie complète](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-all-01.log) garde les échecs. Le [journal de production](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) conserve l’attente écrite avant l’exécution, le diagnostic, les corrections et les relectures. Ces résultats concernent les cas construits, pas de nouveaux essais du logiciel, de musiciens ou d’apprenants.
+
+## 2026-10-23 — Vérification claims-all-02
+
+Exécution de `claims-all-02` pour50 cours : code0, 69 tests, couverture cas/contre-exemples True. Verdict : réussi. La [trace](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-all-02.json) conserve commande, empreintes et valeurs calculées ; la [sortie complète](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/claims-all-02.log) garde les échecs. Le [journal de production](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) conserve l’attente écrite avant l’exécution, le diagnostic, les corrections et les relectures. Ces résultats concernent les cas construits, pas de nouveaux essais du logiciel, de musiciens ou d’apprenants.
+
+## 2026-10-23 — Vérification baseline-audio-02
+
+Exécution de `baseline-audio-02` pour3 cours : code0, 6 tests, couverture cas/contre-exemples True. Verdict : réussi. La [trace](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/baseline-audio-02.json) conserve commande, empreintes et valeurs calculées ; la [sortie complète](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/test-runs/baseline-audio-02.log) garde les échecs. Le [journal de production](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-23/journal.md) conserve l’attente écrite avant l’exécution, le diagnostic, les corrections et les relectures. Ces résultats concernent les cas construits, pas de nouveaux essais du logiciel, de musiciens ou d’apprenants.
+
+## 2026-10-24 — Prochain lot de cinquante cours : point de départ
+
+Le lot vise 50 cours anglais distincts et leurs 100 traductions complètes en français et en espagnol : de 281 à 331 sources de cours sur 525. Le [plan](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/production-plan.md) et la [répartition](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/allocation.json) fixent le périmètre. Trois auteurs ont choisi les sujets après lecture du catalogue réel. La rédaction et la lecture de sources ne valent pas validation par un apprenant, un musicien, un rendu ou un essai physique. L’historique et les cases existantes sont conservés.
+
+Commande de régression exécutée : `node --test scripts/tests/lazy-demo.test.mjs scripts/tests/streeling-copy-source.test.mjs scripts/tests/sync-streeling.test.mjs` ; 18 réussites, aucun échec. Cette entrée est rétrospective. La [trace](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/test-runs/generator-initial.json) conserve la version de Node, les entrées et l’empreinte du [journal brut](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/test-runs/generator-initial.log). Le [journal du lot](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/journal.md) conservera les vérifications indépendantes des cas et contre-exemples, les échecs, corrections et rejeux. Ces résultats restent à obtenir à cette étape.
+
+## 2026-10-25 — Vérification resumed-20261025-all
+
+Exécution de `resumed-20261025-all` pour 50 cours : code 0, 50 tests, couverture cas/contre-exemples True. Verdict : réussi. La [trace](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/test-runs/resumed-20261025-all.json) conserve commande, empreintes et valeurs calculées ; la [sortie complète](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/test-runs/resumed-20261025-all.log) garde les échecs. Le [journal de production](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/journal.md) conserve l’attente écrite avant l’exécution, le diagnostic, les corrections et les relectures. Ces résultats concernent les cas construits, pas de nouveaux essais du logiciel, de musiciens ou d’apprenants.
+
+## 2026-10-25 — Vérification final-claims-20261025
+
+Exécution de `final-claims-20261025` pour 50 cours : code 0, 50 tests, couverture cas/contre-exemples True. Verdict : réussi. La [trace](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/test-runs/final-claims-20261025.json) conserve commande, empreintes et valeurs calculées ; la [sortie complète](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/test-runs/final-claims-20261025.log) garde les échecs. Le [journal de production](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/journal.md) conserve l’attente écrite avant l’exécution, le diagnostic, les corrections et les relectures. Ces résultats concernent les cas construits, pas de nouveaux essais du logiciel, de musiciens ou d’apprenants.
+
+## 2026-10-25 — Lot suivant : corrections de revue et rejeu conservés
+
+Le [rejeu complet](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/test-runs/final-claims-20261025.json) passe 50 tests avec 100 observations de cas et contre-exemples ; le [contrôle des métadonnées](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/test-runs/final-metadata-20261025.json) passe pour les 150 sources. Ces résultats ne prouvent pas toutes les phrases. La revue a trouvé que FUT011 appelait milieux des valeurs qui ne l’étaient pas : deux écarts, et un seul changement pour les vrais milieux contre trois pour les valeurs fournies. L’échec reste conservé avec la correction : des valeurs admissibles dans les intervalles, sans être nécessairement leurs milieux. Les nombres n’ont pas été modifiés pour masquer l’écart.
+
+CS018 et CYB012 citent désormais les cours antérieurs et ajoutent une algèbre de fusion et l’intervalle de stabilité avec retard ; FUT011 ajoute la propagation d’états sur des intervalles au cours antérieur sur l’hystérésis. COG014 distingue couverture monotone et risque conditionnel. Le [journal du lot](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-24/journal.md) conserve textes avant/après, empreintes, échecs et limites. Les revues indépendantes et celle des tests sont finalisées séparément ; aucun essai apprenant, écoute, essai matériel ou test dans un moteur n’est déduit de ces calculs.
+
+## 2026-10-25 — Prochain lot de cinquante cours : point de départ
+
+Le lot vise 50 cours anglais distincts et leurs 100 traductions complètes en français et en espagnol : de 331 à 381 sources de cours sur 525. Le [plan](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25/production-plan.md) et la [répartition](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25/allocation.json) fixent le périmètre. Trois auteurs consultent le catalogue réel avant de fixer les sujets. La rédaction et la lecture de sources ne valent pas validation par un apprenant, un musicien, un rendu ou un essai physique. L’historique et les cases existantes sont conservés.
+
+Commande de régression exécutée : `node --test scripts/tests/lazy-demo.test.mjs scripts/tests/streeling-copy-source.test.mjs scripts/tests/sync-streeling.test.mjs` ; 18 réussites, aucun échec. Cette entrée est rétrospective. La [trace](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25/test-runs/generator-initial.json) conserve la version de Node, les entrées et l’empreinte du [journal brut](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25/test-runs/generator-initial.log). Le [journal du lot](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25/journal.md) conservera les vérifications indépendantes des cas et contre-exemples, les échecs, corrections et rejeux. Ces résultats restent à obtenir à cette étape.
+
+## 2026-10-25 — Vérification integrated-final
+
+Exécution de `integrated-final` pour 50 cours : code 0, 50 tests, couverture cas/contre-exemples True. Verdict : réussi. La [trace](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25/test-runs/integrated-final.json) conserve commande, empreintes et valeurs calculées ; la [sortie complète](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25/test-runs/integrated-final.log) garde les échecs. Le [journal de production](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25/journal.md) conserve l’attente écrite avant l’exécution, le diagnostic, les corrections et les relectures. Ces résultats concernent les cas construits, pas de nouveaux essais du logiciel, de musiciens ou d’apprenants.
+
+## 2026-10-25 — Revue indépendante du lot de cinquante cours
+
+Ce lot ajoute 50 sources de cours anglais distincts et 100 traductions complètes en français et en espagnol. Le décompte atteint 381/525 sources principales ; il en reste 144. Le module supplémentaire IX Research porte le total à 382 par langue. Les relecteurs IA indépendants ont examiné 750 corrigés localisés et 250 critères préparés. Les contrôles intégrés ont exécuté 50 tests avec 100 observations de cas et contre-exemples ; les 150 contrôles de métadonnées passent. Les [exécutions sélectionnées](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25/final-claim-runs.json), leurs sorties complètes et les empreintes finales conservent la portée réelle de ces résultats.
+
+Le [journal de production](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25/journal.md) conserve les doublons écartés, l’échec du contrôle CRLF et sa correction, les constats de revue et les rejeux. La [validation](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25/validation.json) consignera l’intégration statique finale ; cette entrée n’en présume pas le résultat. Les tests portent sur des cas construits, pas sur des réponses réelles d’apprenants, des essais d’écoute, de matériaux ou de scènes dans le moteur. Les décisions humaines, linguistiques et d’acceptation par les apprenants restent nulles ; l’utilisateur désignera un relecteur. La publication des sources GitHub et le HTML déployé sont deux étapes distinctes.
+
+
+## 2026-10-25 — Prochain lot de cinquante cours : point de départ
+
+Le lot vise 50 cours anglais distincts et leurs 100 traductions complètes en français et en espagnol : de 381 à 431 sources de cours sur 525. Le [plan](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/production-plan.md) et la [répartition](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/allocation.json) fixent le périmètre. Trois auteurs consultent le catalogue réel avant de fixer les sujets. La rédaction et la lecture de sources ne valent pas validation par un apprenant, un musicien, un rendu ou un essai physique. L’historique et les cases existantes sont conservés.
+
+Commande de régression exécutée : `node --test scripts/tests/lazy-demo.test.mjs scripts/tests/streeling-copy-source.test.mjs scripts/tests/sync-streeling.test.mjs` ; 18 réussites, aucun échec. Cette entrée est rétrospective. La [trace](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/test-runs/generator-initial.json) conserve la version de Node, les entrées et l’empreinte du [journal brut](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/test-runs/generator-initial.log). Le [journal du lot](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/journal.md) conservera les vérifications indépendantes des cas et contre-exemples, les échecs, corrections et rejeux. Ces résultats restent à obtenir à cette étape.
+
+## 2026-10-25 — Vérification integrated-final
+
+Exécution de `integrated-final` pour 50 cours : code 0, 50 tests, couverture cas/contre-exemples True. Verdict : réussi. La [trace](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/test-runs/integrated-final.json) conserve commande, empreintes et valeurs calculées ; la [sortie complète](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/test-runs/integrated-final.log) garde les échecs. Le [journal de production](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/journal.md) conserve l’attente écrite avant l’exécution, le diagnostic, les corrections et les relectures. Ces résultats concernent les cas construits, pas de nouveaux essais du logiciel, de musiciens ou d’apprenants.
+
+## 2026-10-25 — Revue indépendante du lot de cinquante cours
+
+Ce lot ajoute 50 sources de cours anglais distincts et 100 traductions complètes en français et en espagnol. Le décompte atteint 431/525 sources principales ; il en reste 94. Le module supplémentaire IX Research porte le total à 432 par langue. Les relecteurs IA indépendants ont examiné 750 corrigés localisés et 250 critères préparés. Les contrôles intégrés ont exécuté 50 tests avec 100 observations de cas et contre-exemples ; les 150 contrôles de métadonnées passent. Les [exécutions sélectionnées](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/final-claim-runs.json), leurs sorties complètes et les empreintes finales conservent la portée réelle de ces résultats.
+
+Le [journal de production](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/journal.md) conserve les doublons écartés, les constats des vérifications de rédaction et de revue indépendante, ainsi que les rejeux. La [validation](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/validation.json) consignera l’intégration statique finale ; cette entrée n’en présume pas le résultat. Les tests portent sur des cas construits, pas sur des réponses réelles d’apprenants, des essais d’écoute, de matériaux ou de scènes dans le moteur. Les décisions humaines, linguistiques et d’acceptation par les apprenants restent nulles ; l’utilisateur désignera un relecteur. La publication des sources GitHub et le HTML déployé sont deux étapes distinctes.
+
+
+## 2026-10-29 — Revue indépendante du lot de cinquante cours
+
+Ce lot ajoute 50 sources de cours anglais distincts et 100 traductions complètes en français et en espagnol. Le décompte atteint 481/525 sources principales ; il en reste 44. Le module supplémentaire IX Research porte le total à 482 par langue. Les relecteurs IA indépendants ont examiné 750 corrigés localisés et 250 critères préparés. Les contrôles intégrés ont exécuté 50 tests avec 100 observations de cas et contre-exemples ; les 150 contrôles de métadonnées passent. Les [exécutions sélectionnées](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-c/final-claim-runs.json), leurs sorties complètes et les empreintes finales conservent la portée réelle de ces résultats.
+
+Le [journal de production](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-c/journal.md) conserve les doublons écartés, les constats des vérifications de rédaction et de revue indépendante, ainsi que les rejeux. La [validation](https://github.com/spareilleux/learn/blob/codex/streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-c/validation.json) consignera l’intégration statique finale ; cette entrée n’en présume pas le résultat. Les tests portent sur des cas construits, pas sur des réponses réelles d’apprenants, des essais d’écoute, de matériaux ou de scènes dans le moteur. Les décisions humaines, linguistiques et d’acceptation par les apprenants restent nulles ; l’utilisateur désignera un relecteur. La publication des sources GitHub et le HTML déployé sont deux étapes distinctes.
+
+
+## 2026-10-29 — Publication publique et compteurs visibles
+
+Les 482 cours distincts sont déployés en anglais, en français et en espagnol : 481 modules du programme et un module IX Research hors quota, soit 1 446 pages de cours. La lecture anonyme des articles complets a réussi pour les 1 518 URL publiques, sans échec ; les index donnent accès à tous les cours. Le total général manquait sur la page d’accueil. L’utilisateur a aussi demandé une navigation de gauche légèrement plus large et des compteurs par département calculés au chargement depuis les liens de cours réels. Les tests, la revue, les vérifications dans le navigateur et le déploiement de cette correction restent distincts de la publication des cours déjà vérifiée.
+
+[Public URL and body verification / Vérification publique / Verificación pública](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/publication-2026-10-29/public-counts.md).
+
+## À vérifier
+
+Les revues humaines et linguistiques, les essais apprenants et les essais logiciels ou physiques requis restent à vérifier. Le déploiement des cours et la lecture complète des articles publics ont réussi au commit d37df840 ; la correction du compteur visible et de la navigation est vérifiée séparément.
+
+## Questions ouvertes
+
+Quels résultats des cas construits se transfèrent aux tâches réelles du projet ? Le journal détaillé conserve les limites et le travail restant.

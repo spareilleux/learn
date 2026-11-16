@@ -1,0 +1,60 @@
+{
+  "command": [
+    "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "C:\\tmp\\batch25-a-review\\run_checks.py"
+  ],
+  "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+  "probes": [
+    {
+      "label": "substantive DC input with co-mutated packet expectation",
+      "code": "AUD016",
+      "expected_rejection": true,
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "rejected": true,
+      "packet_expected_mutated": true
+    },
+    {
+      "label": "circular record shape",
+      "code": "AUD017",
+      "expected_rejection": true,
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "rejected": true,
+      "packet_expected_mutated": false
+    },
+    {
+      "label": "stereo frame shape",
+      "code": "AUD018",
+      "expected_rejection": true,
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "rejected": true,
+      "packet_expected_mutated": false
+    },
+    {
+      "label": "mode coefficient shape",
+      "code": "GAS015",
+      "expected_rejection": true,
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "rejected": true,
+      "packet_expected_mutated": false
+    }
+  ],
+  "canonical_packet_unchanged": true,
+  "test_sha256": "c6d692259d7fde206df14f7c6bd48f1c443647120639cd6cbd3d2c6665ce63cd",
+  "packet_sha256": "dd20b6310052520a2888d7f51535da54318fba1dfd9eb159815750f0df3c5b58",
+  "full_log": {
+    "path": "C:/tmp/batch25-a-review/mutation-full.log",
+    "sha256": "c85783dfbb4f06825b13737974f5f54db38a5d283b01cc69c5b13793e57115ce"
+  },
+  "scope": "Deliberate in-memory negative experiments; canonical packet unchanged. Substantive sample mutation rejects fixed mean .5 even with packet expected replaced by mutated computation. Three paired-shape diagnostics precede rejection."
+}

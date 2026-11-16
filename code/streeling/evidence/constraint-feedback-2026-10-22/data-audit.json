@@ -1,0 +1,212 @@
+{
+  "schema": "streeling.constraint-feedback.data-audit.v1",
+  "verdict": "pass",
+  "check_count": 21,
+  "checks": [
+    {
+      "id": "source_copy_hash_ix-thickness.rs",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "abae7d9b41cbf5a825b4dbe6f58b6579687c79027f1ae151b24e1b67eee30b8d",
+      "expected": "abae7d9b41cbf5a825b4dbe6f58b6579687c79027f1ae151b24e1b67eee30b8d"
+    },
+    {
+      "id": "source_copy_hash_ix-layers.rs",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "959afa31a4a00b85ee73e37444ea25c358dbcd551996be91e3127dc8f0b17f41",
+      "expected": "959afa31a4a00b85ee73e37444ea25c358dbcd551996be91e3127dc8f0b17f41"
+    },
+    {
+      "id": "source_copy_hash_ix-test-thickness.rs",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "8f480b304eb08aecd5d08f36bbb4a4162039a38ec29a425c0c5e405a3e980e90",
+      "expected": "8f480b304eb08aecd5d08f36bbb4a4162039a38ec29a425c0c5e405a3e980e90"
+    },
+    {
+      "id": "source_copy_hash_ix-0007-origami-thickness-as-parallel-rigid-panels.md",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "bc44c07effa10ec9572d059aec416d343dd269a0e99049cf719f265b1b48a346",
+      "expected": "bc44c07effa10ec9572d059aec416d343dd269a0e99049cf719f265b1b48a346"
+    },
+    {
+      "id": "source_copy_hash_learn-trial.gd",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "9e59b247bacff045398bfc9f00917fc3f0734b4d1e88424801f3f85c78fb8f99",
+      "expected": "9e59b247bacff045398bfc9f00917fc3f0734b4d1e88424801f3f85c78fb8f99"
+    },
+    {
+      "id": "source_copy_hash_learn-directional-response.json",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "13d0dc5cdf0e9d9c55a09c281220d80ad504c4f96e5e2ad6268a08d25d39c849",
+      "expected": "13d0dc5cdf0e9d9c55a09c281220d80ad504c4f96e5e2ad6268a08d25d39c849"
+    },
+    {
+      "id": "all_traces_recurrence_rows_0_to_12",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "5 alpha traces independently recomputed from u[n+1]=u[n]+alpha(F-Ku[n])",
+      "expected": "all 65 rows agree"
+    },
+    {
+      "id": "exact_fraction_fields_present",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "exact strings present for every trace row",
+      "expected": "all rows carry exact arithmetic fields"
+    },
+    {
+      "id": "strict_convergence_interval",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "(0,0.5)",
+      "expected": "0<alpha<2/lambda_max with endpoints excluded"
+    },
+    {
+      "id": "quarter_gain_update8",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "alpha=.25 update 8 exact row",
+      "expected": "published authored row agrees"
+    },
+    {
+      "id": "delayed_recurrence_rows",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "delayed alpha=.4 rows independently match recurrence",
+      "expected": "delayed rows match"
+    },
+    {
+      "id": "delayed_unstable_root",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "root modulus 1.2649110640673518",
+      "expected": "sqrt(1.6)>1"
+    },
+    {
+      "id": "cycle_sum_constraint",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "four-edge cycle sum at t=0 and .5",
+      "expected": "positive thickness contradicts, zero thickness does not"
+    },
+    {
+      "id": "broken_chain_offsets",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "levels 4, offsets [0,.5,1,1.5]",
+      "expected": "highest offset 1.5, extent 2 at t=.5"
+    },
+    {
+      "id": "flat_joint_panel_cycle",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "face DAG then panel cycle after flat-joint merge",
+      "expected": "panel merge can create cycle"
+    },
+    {
+      "id": "unknown_completion_nonexact",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "known chain 2, completion chains 4 and 2",
+      "expected": "unknown overlap prevents exact levels"
+    },
+    {
+      "id": "static_learn_boundary",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "learn trial contains StaticBody3D",
+      "expected": "no stiffness iteration asserted"
+    },
+    {
+      "id": "probe_force_partitions",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "P1+P2 force partitions [[\"T\"],[\"F\"],[\"D\"],[\"I\"]]",
+      "expected": "all four models distinguishable"
+    },
+    {
+      "id": "probe_energy_alias_and_pair",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "P2 energy aliases T/D/I; P1+P3 energy identifies all",
+      "expected": "partition claims agree"
+    },
+    {
+      "id": "heldout_catalogue_boundary",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "M matches four probes but differs at held-out 60 degrees",
+      "expected": "finite catalogue agreement is not learner diagnosis"
+    },
+    {
+      "id": "source_scope_boundaries",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "source observations explicitly bound scope",
+      "expected": "no runtime/material/learner claims"
+    }
+  ],
+  "findings": [],
+  "fix_requests": [],
+  "input_bindings": [
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/constraint-feedback-2026-10-22/primary-readback.json",
+      "sha256": "f1bc026b65f3ad23b1299ad83be63dfd2d16fafda913cbe7f6a6b14ce62edf62"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/constraint-feedback-2026-10-22/panel-graphs.json",
+      "sha256": "c79ce879fd6e3a60eb814a031f4c4002ca2460e9ffc3b508f2fbb3098ad0cb7f"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/constraint-feedback-2026-10-22/residual-iterations.json",
+      "sha256": "f0416c86c9262bb6683bfc9dea7ffdc6d62c62a728bba92f3c32c3ad1ed2182c"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/constraint-feedback-2026-10-22/probe-signatures.json",
+      "sha256": "30744e65154c6ba7dfd4eaa1d17bb746ace378bf5698c981ed15bec2f510bc31"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/constraint-feedback-2026-10-22/source-observations.json",
+      "sha256": "743c191ca4107b3e62040ec961b7b973fffd4a6439289c03cdbb965f622fc0bf"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/constraint-feedback-2026-10-22/primary-reading.json",
+      "sha256": "971852ebc256e9452570e19afcebc6bcec26e9d25b989f1beade0fbc6f974988"
+    },
+    {
+      "path": "C:/tmp/streeling-constraint-feedback-inputs-20261022/ix-thickness.rs",
+      "sha256": "abae7d9b41cbf5a825b4dbe6f58b6579687c79027f1ae151b24e1b67eee30b8d"
+    },
+    {
+      "path": "C:/tmp/streeling-constraint-feedback-inputs-20261022/ix-layers.rs",
+      "sha256": "959afa31a4a00b85ee73e37444ea25c358dbcd551996be91e3127dc8f0b17f41"
+    },
+    {
+      "path": "C:/tmp/streeling-constraint-feedback-inputs-20261022/ix-test-thickness.rs",
+      "sha256": "8f480b304eb08aecd5d08f36bbb4a4162039a38ec29a425c0c5e405a3e980e90"
+    },
+    {
+      "path": "C:/tmp/streeling-constraint-feedback-inputs-20261022/ix-0007-origami-thickness-as-parallel-rigid-panels.md",
+      "sha256": "bc44c07effa10ec9572d059aec416d343dd269a0e99049cf719f265b1b48a346"
+    },
+    {
+      "path": "C:/tmp/streeling-constraint-feedback-inputs-20261022/learn-trial.gd",
+      "sha256": "9e59b247bacff045398bfc9f00917fc3f0734b4d1e88424801f3f85c78fb8f99"
+    },
+    {
+      "path": "C:/tmp/streeling-constraint-feedback-inputs-20261022/learn-directional-response.json",
+      "sha256": "13d0dc5cdf0e9d9c55a09c281220d80ad504c4f96e5e2ad6268a08d25d39c849"
+    }
+  ],
+  "history": [
+    {
+      "status": "resolved",
+      "note": "Independent recomputation from six evidence JSONs and six immutable source copies; no producer-script reuse."
+    }
+  ]
+}
