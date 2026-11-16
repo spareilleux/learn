@@ -1,0 +1,46 @@
+{
+  "kind": "Prepared source-assisted learner answer criteria, not participant results",
+  "criteria_per_task": 5,
+  "tasks": [
+    {
+      "module": "AUD006",
+      "criteria": [
+        "Uses 2*raw/window_sum at the two interior bins to recover approximately 0.25 within 1e-6; attributes approximately 6.02272037 dB raw change to analysis gain under fixed input.",
+        "States unit peak-amplitude reference and approximately -12.0412 dB; distinguishes isolated coherent-tone peak estimator from PSD, RMS, loudness and general guitar-partial measurement.",
+        "Uses undoubled DC and Nyquist estimates of 0.25 and rejects wrong 0.5 endpoint estimates.",
+        "Separates PCM16 /32768 decoding from earlier export multiplier32767 and declines original-float recovery or equality claims.",
+        "Retains prior candidate failure: approximately0.11416615 dB error improvement is less than required1 dB; demands separately declared and executed evidence for another acceptance claim."
+      ],
+      "learner_outcome": null,
+      "reviewer_decisions": null
+    },
+    {
+      "module": "CS013",
+      "criteria": [
+        "Derives341 frames,1025 bins,349525 cells; last start174080, exclusive end176128 and tail272 from complete-frame policy.",
+        "Derives frame50 start approximately0.580499s and bin32 frequency689.0625Hz; distinguishes hop cell from2048-sample support, including display end approximately3.959002s and support end approximately3.993832s.",
+        "Derives sentinel row-major offset14/value204 versus wrong-stride offset10/value200 and rejects total15 as sufficient orientation evidence.",
+        "Requires trusted sample rate for seconds/hertz, and source/decoder, shape/axis/storage, framing, window, value estimator, endpoints, logarithmic reference and floor for this interpretation.",
+        "Labels metadata advisory and matrices numerical analysis; declines ratified-schema, new adapter and executed IX-response claims."
+      ],
+      "learner_outcome": null,
+      "reviewer_decisions": null
+    },
+    {
+      "module": "DV009",
+      "criteria": [
+        "Identifies B/C as earlier actual baseline/candidate treatments and0.5B as a constructed multiplier on decoded baseline, not a third engine render.",
+        "States fixed and per-panel-maximum formulas, common numeric limits[-80,0], distinct references and full-matrix normalization before frequency crop; rejects cross-row color as amplitude equality.",
+        "Derives20log10(0.5) approximately-6.02059991dB and ratio cancellation; interprets6359 common non-floored cells and measured0 relative difference while excluding floor-clipped cells from unchanged-shift claims.",
+        "Explains a crop-dependent maximum can brighten unchanged cells and requires source, estimator, reference domain, crop, floor and color limits in a reproducible comparison.",
+        "Declines actual-candidate equivalence, unchanged-gain and passed-decay claims from matching relative control views; retains failed gate and requests a declared controlled feature or listening test for broader musical conclusions."
+      ],
+      "learner_outcome": null,
+      "reviewer_decisions": null
+    }
+  ],
+  "human_subject_review": null,
+  "fluent_language_review": { "en": null, "fr": null, "es": null },
+  "listening_trial": null,
+  "causal_learning_benefit": null
+}

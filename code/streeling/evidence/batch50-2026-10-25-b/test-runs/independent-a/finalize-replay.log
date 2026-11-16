@@ -1,0 +1,52 @@
+COMMAND C:\Users\spare\AppData\Local\Programs\Python\Python314\python.exe -X utf8 -B C:\tmp\batch25b-a-review\finalize.py
+PYTHON 3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]
+{
+  "review_binding": {
+    "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/batch50-2026-10-25-b/review-a.json",
+    "sha256": "fd91998e81d7e896f29fe8992d62f9537771be1b346f264d7d9d98abf75378ac"
+  },
+  "all_final_bindings_match": true,
+  "historical_selfcheck_matches_original_packet": true,
+  "shared_template_checks": [
+    {
+      "locale": "en",
+      "identical_shared_instructions": true,
+      "sources": 18
+    },
+    {
+      "locale": "fr",
+      "identical_shared_instructions": true,
+      "sources": 18
+    },
+    {
+      "locale": "es",
+      "identical_shared_instructions": true,
+      "sources": 18
+    }
+  ],
+  "correctness_final_snapshots": [
+    {
+      "path": "C:/tmp/batch25b-a-review/correctness-final/code/streeling/evidence/batch50-2026-10-25-b/unit-a.json",
+      "sha256": "af503e8f56f4e808a630db649f08fe7591de22382726da2cfb9098e4567a602b"
+    },
+    {
+      "path": "C:/tmp/batch25b-a-review/correctness-final/code/streeling/evidence/batch50-2026-10-25-b/tests/test_unit_a.py",
+      "sha256": "94f5044d78be4fde078e1762f0577efadf3590c1a4f3630b2aebc644868f4171"
+    },
+    {
+      "path": "C:/tmp/batch25b-a-review/correctness-final/streeling/courses/audio-engineering/en/aud-019-test-whether-clipping-commutes-with-gain.md",
+      "sha256": "1508265a4601e1e6e364e773f546681167d9a4db00b9d2a2c15d932fc02aba91"
+    },
+    {
+      "path": "C:/tmp/batch25b-a-review/correctness-final/streeling/courses/audio-engineering/fr/aud-019-test-whether-clipping-commutes-with-gain.fr.md",
+      "sha256": "dfa51db6166d5df3e8c366b8bd9fe31d9c3953202794db5933a1b3772588af45"
+    },
+    {
+      "path": "C:/tmp/batch25b-a-review/correctness-final/streeling/courses/audio-engineering/es/aud-019-test-whether-clipping-commutes-with-gain.es.md",
+      "sha256": "931fafa01c928ef40a0648005e91342dbff0e8ea66a812ae79df0fe09f842982"
+    }
+  ],
+  "unexpected_course_test_failures": 0
+}
+
+EXIT 0

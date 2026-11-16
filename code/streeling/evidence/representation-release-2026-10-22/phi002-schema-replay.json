@@ -1,0 +1,28 @@
+{
+  "scope": "Python jsonschema validation of the exact synthetic fixture against a publicly downloaded pinned schema. No Demerzel policy engine, real PR or authority test.",
+  "schema_url": "https://github.com/GuitarAlchemist/Demerzel/blob/9ba9a29f6424ac8c1a6654c9b979b282a8cf216f/schemas/advisory-decision.schema.json",
+  "schema_sha256": "c67d220cbcb1aaffbcfb00e10bfa65c08a32fbc9bd74053a8e2ef874fff44293",
+  "jsonschema_version": "4.21.1",
+  "validator_class": "Draft202012Validator",
+  "empty_evidence_fixture_accepted": true,
+  "fixture": {
+    "rule_result": {
+      "rule_id": "SYNTHETIC-PR-READINESS",
+      "subject": "pull_request",
+      "decision": "recommend",
+      "reason_codes": [],
+      "evidence_refs": [],
+      "next_actions": [
+        "ask a human to inspect PR-EXAMPLE"
+      ],
+      "confidence": "high"
+    }
+  },
+  "negative_control": {
+    "mutation": "Remove required confidence key.",
+    "rejected": true,
+    "errors": [
+      "'confidence' is a required property"
+    ]
+  }
+}

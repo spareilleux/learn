@@ -1,0 +1,946 @@
+[
+  {
+    "code": "AUD016",
+    "case": "model",
+    "observed": {
+      "mean": 0.5,
+      "ac_samples": [
+        -0.5,
+        0.5,
+        -0.5,
+        0.5
+      ],
+      "total_ms": 0.5,
+      "ac_ms": 0.25,
+      "total_rms": 0.7071067811865476,
+      "ac_rms": 0.5
+    },
+    "expected": {
+      "mean": 0.5,
+      "ac_samples": [
+        -0.5,
+        0.5,
+        -0.5,
+        0.5
+      ],
+      "total_ms": 0.5,
+      "ac_ms": 0.25,
+      "total_rms": 0.7071067811865476,
+      "ac_rms": 0.5
+    },
+    "scope": "Finite normalized real samples; record mean and squared amplitudes, not streaming filtering or joules."
+  },
+  {
+    "code": "AUD016",
+    "case": "negative",
+    "observed": {
+      "mean": 0.0,
+      "ac_samples": [
+        -0.5,
+        0.5,
+        -0.5,
+        0.5
+      ],
+      "total_ms": 0.25,
+      "ac_ms": 0.25,
+      "total_rms": 0.5,
+      "ac_rms": 0.5
+    },
+    "expected": {
+      "mean": 0,
+      "ac_samples": [
+        -0.5,
+        0.5,
+        -0.5,
+        0.5
+      ],
+      "total_ms": 0.25,
+      "ac_ms": 0.25,
+      "total_rms": 0.5,
+      "ac_rms": 0.5
+    },
+    "scope": "Finite normalized real samples; record mean and squared amplitudes, not streaming filtering or joules."
+  },
+  {
+    "code": "AUD017",
+    "case": "model",
+    "observed": {
+      "correlation": [
+        0,
+        2,
+        0,
+        -2
+      ],
+      "signed_argmax": [
+        1
+      ],
+      "absolute_argmax": [
+        1,
+        3
+      ]
+    },
+    "expected": {
+      "correlation": [
+        0,
+        2,
+        0,
+        -2
+      ],
+      "signed_argmax": [
+        1
+      ],
+      "absolute_argmax": [
+        1,
+        3
+      ]
+    },
+    "scope": "Equal-length circular real records and listed lag direction; no zero padding or latency measurement."
+  },
+  {
+    "code": "AUD017",
+    "case": "negative",
+    "observed": {
+      "correlation": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "signed_argmax": [
+        1
+      ],
+      "absolute_argmax": [
+        1
+      ]
+    },
+    "expected": {
+      "correlation": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "signed_argmax": [
+        1
+      ],
+      "absolute_argmax": [
+        1
+      ]
+    },
+    "scope": "Equal-length circular real records and listed lag direction; no zero padding or latency measurement."
+  },
+  {
+    "code": "AUD018",
+    "case": "model",
+    "observed": {
+      "mid": [
+        0.7071067811865475,
+        0.7071067811865475
+      ],
+      "side": [
+        0.7071067811865475,
+        -0.7071067811865475
+      ],
+      "left_out": [
+        0.9999999999999999,
+        0.0
+      ],
+      "right_out": [
+        0.0,
+        0.9999999999999999
+      ],
+      "input_energy": 2,
+      "output_energy": 1.9999999999999996
+    },
+    "expected": {
+      "mid": [
+        0.7071067811865476,
+        0.7071067811865476
+      ],
+      "side": [
+        0.7071067811865476,
+        -0.7071067811865476
+      ],
+      "left_out": [
+        1,
+        0
+      ],
+      "right_out": [
+        0,
+        1
+      ],
+      "input_energy": 2,
+      "output_energy": 2
+    },
+    "scope": "Synchronous aligned channel pairs, orthonormal mid/side matrix and declared side gain; no perception."
+  },
+  {
+    "code": "AUD018",
+    "case": "negative",
+    "observed": {
+      "mid": [
+        0.7071067811865475,
+        0.7071067811865475
+      ],
+      "side": [
+        0.7071067811865475,
+        -0.7071067811865475
+      ],
+      "left_out": [
+        0.49999999999999994,
+        0.49999999999999994
+      ],
+      "right_out": [
+        0.49999999999999994,
+        0.49999999999999994
+      ],
+      "input_energy": 2,
+      "output_energy": 0.9999999999999998
+    },
+    "expected": {
+      "mid": [
+        0.7071067811865476,
+        0.7071067811865476
+      ],
+      "side": [
+        0.7071067811865476,
+        -0.7071067811865476
+      ],
+      "left_out": [
+        0.5,
+        0.5
+      ],
+      "right_out": [
+        0.5,
+        0.5
+      ],
+      "input_energy": 2,
+      "output_energy": 1
+    },
+    "scope": "Synchronous aligned channel pairs, orthonormal mid/side matrix and declared side gain; no perception."
+  },
+  {
+    "code": "GAA014",
+    "case": "model",
+    "observed": {
+      "overlap": [
+        [
+          0,
+          4,
+          7
+        ]
+      ],
+      "family_disjoint": false,
+      "distinct_item_ids": 4
+    },
+    "expected": {
+      "overlap": [
+        [
+          0,
+          4,
+          7
+        ]
+      ],
+      "family_disjoint": false,
+      "distinct_item_ids": 4
+    },
+    "scope": "Ordered offset keys and cross-partition intersection only; no learner or statistical independence evidence."
+  },
+  {
+    "code": "GAA014",
+    "case": "negative",
+    "observed": {
+      "overlap": [],
+      "family_disjoint": true,
+      "distinct_item_ids": 4
+    },
+    "expected": {
+      "overlap": [],
+      "family_disjoint": true,
+      "distinct_item_ids": 4
+    },
+    "scope": "Ordered offset keys and cross-partition intersection only; no learner or statistical independence evidence."
+  },
+  {
+    "code": "GAA015",
+    "case": "model",
+    "observed": {
+      "rate": 0.8,
+      "lower": 0.49015684672072335,
+      "upper": 0.9433190520193067,
+      "established": false
+    },
+    "expected": {
+      "rate": 0.8,
+      "lower": 0.49015684672072346,
+      "upper": 0.9433190520193067,
+      "established": false
+    },
+    "scope": "Stipulated iid Bernoulli counts, Wilson z=1.96 and prospective lower endpoint rule; no real mastery claim."
+  },
+  {
+    "code": "GAA015",
+    "case": "negative",
+    "observed": {
+      "rate": 0.8,
+      "lower": 0.7111690380734976,
+      "upper": 0.8666340774409012,
+      "established": true
+    },
+    "expected": {
+      "rate": 0.8,
+      "lower": 0.7111690380734976,
+      "upper": 0.8666340774409013,
+      "established": true
+    },
+    "scope": "Stipulated iid Bernoulli counts, Wilson z=1.96 and prospective lower endpoint rule; no real mastery claim."
+  },
+  {
+    "code": "GAA016",
+    "case": "model",
+    "observed": {
+      "scores": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "mean_a": 5.5,
+      "mean_b": 5.5,
+      "contrast": 0.0
+    },
+    "expected": {
+      "scores": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "mean_a": 5.5,
+      "mean_b": 5.5,
+      "contrast": 0
+    },
+    "scope": "Four deterministic equal-spaced trials with linear drift and zero effects; no randomized trial."
+  },
+  {
+    "code": "GAA016",
+    "case": "negative",
+    "observed": {
+      "scores": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "mean_a": 5.0,
+      "mean_b": 6.0,
+      "contrast": 1.0
+    },
+    "expected": {
+      "scores": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "mean_a": 5,
+      "mean_b": 6,
+      "contrast": 1
+    },
+    "scope": "Four deterministic equal-spaced trials with linear drift and zero effects; no randomized trial."
+  },
+  {
+    "code": "GAS015",
+    "case": "model",
+    "observed": {
+      "observed": [
+        1.0,
+        6.123233995736766e-17,
+        -0.25,
+        -3.061616997868383e-17
+      ],
+      "zero_modes": [
+        2,
+        4
+      ]
+    },
+    "expected": {
+      "observed": [
+        1,
+        0,
+        -0.25,
+        0
+      ],
+      "zero_modes": [
+        2,
+        4
+      ]
+    },
+    "scope": "Four fixed-end ideal sine modes and signed point displacement; no pickup voltage or spectrum measurement."
+  },
+  {
+    "code": "GAS015",
+    "case": "negative",
+    "observed": {
+      "observed": [
+        0.7071067811865476,
+        0.5,
+        0.1767766952966369,
+        1.5308084989341915e-17
+      ],
+      "zero_modes": [
+        4
+      ]
+    },
+    "expected": {
+      "observed": [
+        0.7071067811865476,
+        0.5,
+        0.1767766952966369,
+        0
+      ],
+      "zero_modes": [
+        4
+      ]
+    },
+    "scope": "Four fixed-end ideal sine modes and signed point displacement; no pickup voltage or spectrum measurement."
+  },
+  {
+    "code": "GAS016",
+    "case": "model",
+    "observed": {
+      "extension_m": 0.0001999800039989008,
+      "tension_n": 10.1999800039989,
+      "ideal_f_hz": 100.0,
+      "frequency_hz": 100.9747574562156,
+      "error_cents": 16.79361678856818
+    },
+    "expected": {
+      "extension_m": 0.0001999800039989008,
+      "tension_n": 10.1999800039989,
+      "ideal_f_hz": 100,
+      "frequency_hz": 100.9747574562156,
+      "error_cents": 16.79361678856818
+    },
+    "scope": "Symmetric SI geometry, linear axial spring, fixed density, one vibrating half; no setup calibration."
+  },
+  {
+    "code": "GAS016",
+    "case": "negative",
+    "observed": {
+      "extension_m": 0.0,
+      "tension_n": 10.0,
+      "ideal_f_hz": 100.0,
+      "frequency_hz": 100.0,
+      "error_cents": 0.0
+    },
+    "expected": {
+      "extension_m": 0,
+      "tension_n": 10,
+      "ideal_f_hz": 100,
+      "frequency_hz": 100,
+      "error_cents": 0
+    },
+    "scope": "Symmetric SI geometry, linear axial spring, fixed density, one vibrating half; no setup calibration."
+  },
+  {
+    "code": "GAS017",
+    "case": "model",
+    "observed": {
+      "B": 0.010000000000000009,
+      "predicted_third_squared_ratio": 1.0792079207920793,
+      "held_out_residual": 0.0,
+      "valid": true
+    },
+    "expected": {
+      "B": 0.01,
+      "predicted_third_squared_ratio": 1.0792079207920793,
+      "held_out_residual": 0,
+      "valid": true
+    },
+    "scope": "Exact normalized second/third partial ratios and nonnegative coefficient family; no engine mapping."
+  },
+  {
+    "code": "GAS017",
+    "case": "negative",
+    "observed": {
+      "B": -0.0033222591362126277,
+      "valid": false
+    },
+    "expected": {
+      "B": -0.0033222591362126247,
+      "valid": false
+    },
+    "scope": "Exact normalized second/third partial ratios and nonnegative coefficient family; no engine mapping."
+  },
+  {
+    "code": "GTR015",
+    "case": "model",
+    "observed": {
+      "cents": [
+        0.0,
+        25.0,
+        3.061616997868383e-15,
+        -25.0,
+        -6.123233995736766e-15
+      ],
+      "period_s": 0.5,
+      "peak_to_peak_cents": 50
+    },
+    "expected": {
+      "cents": [
+        0,
+        25,
+        0,
+        -25,
+        0
+      ],
+      "period_s": 0.5,
+      "peak_to_peak_cents": 50
+    },
+    "scope": "Sinusoidal authored cents at exact time grid and zero phase; continuous extent distinct from samples."
+  },
+  {
+    "code": "GTR015",
+    "case": "negative",
+    "observed": {
+      "cents": [
+        0.0,
+        3.061616997868383e-15,
+        -6.123233995736766e-15,
+        9.184850993605149e-15,
+        -1.2246467991473532e-14
+      ],
+      "period_s": 0.25,
+      "peak_to_peak_cents": 50
+    },
+    "expected": {
+      "cents": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "period_s": 0.25,
+      "peak_to_peak_cents": 50
+    },
+    "scope": "Sinusoidal authored cents at exact time grid and zero phase; continuous extent distinct from samples."
+  },
+  {
+    "code": "GTR016",
+    "case": "model",
+    "observed": {
+      "vibrating_fraction": 0.6674199270850172,
+      "base_hz": 164.81377845643496,
+      "touch_fraction_from_bridge": 0.3337099635425086,
+      "sounding_hz": 329.6275569128699,
+      "fixed_touch_local": 0.7491535384383408
+    },
+    "expected": {
+      "vibrating_fraction": 0.6674199270850172,
+      "base_hz": 164.81377845643496,
+      "touch_fraction_from_bridge": 0.3337099635425086,
+      "sounding_hz": 329.6275569128699,
+      "fixed_touch_local": 0.7491535384383408
+    },
+    "scope": "Ideal equal-tempered lengths, bridge origin and midpoint mode; no performed harmonic or contact dynamics."
+  },
+  {
+    "code": "GTR016",
+    "case": "negative",
+    "observed": {
+      "vibrating_fraction": 1.0,
+      "base_hz": 110.0,
+      "touch_fraction_from_bridge": 0.5,
+      "sounding_hz": 220.0,
+      "fixed_touch_local": 0.5
+    },
+    "expected": {
+      "vibrating_fraction": 1,
+      "base_hz": 110,
+      "touch_fraction_from_bridge": 0.5,
+      "sounding_hz": 220,
+      "fixed_touch_local": 0.5
+    },
+    "scope": "Ideal equal-tempered lengths, bridge origin and midpoint mode; no performed harmonic or contact dynamics."
+  },
+  {
+    "code": "GTR017",
+    "case": "model",
+    "observed": {
+      "union_s": [
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "gaps_s": [],
+      "overlap_s": 0.1,
+      "continuous": true
+    },
+    "expected": {
+      "union_s": [
+        [
+          0,
+          1
+        ]
+      ],
+      "gaps_s": [],
+      "overlap_s": 0.1,
+      "continuous": true
+    },
+    "scope": "Two same-target half-open contact intervals; necessary schedule coverage only, no clean-sound proof."
+  },
+  {
+    "code": "GTR017",
+    "case": "negative",
+    "observed": {
+      "union_s": [
+        [
+          0.0,
+          0.6
+        ],
+        [
+          0.7,
+          1.0
+        ]
+      ],
+      "gaps_s": [
+        [
+          0.6,
+          0.7
+        ]
+      ],
+      "overlap_s": 0.0,
+      "continuous": false
+    },
+    "expected": {
+      "union_s": [
+        [
+          0,
+          0.6
+        ],
+        [
+          0.7,
+          1
+        ]
+      ],
+      "gaps_s": [
+        [
+          0.6,
+          0.7
+        ]
+      ],
+      "overlap_s": 0,
+      "continuous": false
+    },
+    "scope": "Two same-target half-open contact intervals; necessary schedule coverage only, no clean-sound proof."
+  },
+  {
+    "code": "MCL015",
+    "case": "model",
+    "observed": {
+      "release_times": [
+        2,
+        2
+      ],
+      "scheduled_holds": [
+        2,
+        1
+      ]
+    },
+    "expected": {
+      "release_times": [
+        2,
+        2
+      ],
+      "scheduled_holds": [
+        2,
+        1
+      ]
+    },
+    "scope": "One damper interval and distinct event times; scheduled release commands, not acoustic silence."
+  },
+  {
+    "code": "MCL015",
+    "case": "negative",
+    "observed": {
+      "release_times": [
+        0.75,
+        1.5
+      ],
+      "scheduled_holds": [
+        0.75,
+        0.5
+      ]
+    },
+    "expected": {
+      "release_times": [
+        0.75,
+        1.5
+      ],
+      "scheduled_holds": [
+        0.75,
+        0.5
+      ]
+    },
+    "scope": "One damper interval and distinct event times; scheduled release commands, not acoustic silence."
+  },
+  {
+    "code": "MCL016",
+    "case": "model",
+    "observed": {
+      "note_intervals": {
+        "a": [
+          0,
+          4
+        ],
+        "b": [
+          0,
+          2
+        ]
+      },
+      "cursor_states": [
+        0,
+        4,
+        0,
+        2,
+        4
+      ],
+      "final_cursor": 4,
+      "valid": true
+    },
+    "expected": {
+      "note_intervals": {
+        "a": [
+          0,
+          4
+        ],
+        "b": [
+          0,
+          2
+        ]
+      },
+      "cursor_states": [
+        0,
+        4,
+        0,
+        2,
+        4
+      ],
+      "final_cursor": 4,
+      "valid": true
+    },
+    "scope": "Positive fixed division durations, one measure, note/backup/forward only; no parser conformance."
+  },
+  {
+    "code": "MCL016",
+    "case": "negative",
+    "observed": {
+      "note_intervals": {
+        "a": [
+          0,
+          4
+        ],
+        "b": [
+          2,
+          4
+        ]
+      },
+      "cursor_states": [
+        0,
+        4,
+        2,
+        4,
+        6
+      ],
+      "final_cursor": 6,
+      "valid": false
+    },
+    "expected": {
+      "note_intervals": {
+        "a": [
+          0,
+          4
+        ],
+        "b": [
+          2,
+          4
+        ]
+      },
+      "cursor_states": [
+        0,
+        4,
+        2,
+        4,
+        6
+      ],
+      "final_cursor": 6,
+      "valid": false
+    },
+    "scope": "Positive fixed division durations, one measure, note/backup/forward only; no parser conformance."
+  },
+  {
+    "code": "MCL017",
+    "case": "model",
+    "observed": {
+      "slope_bpm_per_quarter": 15.0,
+      "duration_s": 2.772588722239781,
+      "endpoint_average_duration_s": 2.6666666666666665
+    },
+    "expected": {
+      "slope_bpm_per_quarter": 15,
+      "duration_s": 2.772588722239781,
+      "endpoint_average_duration_s": 2.6666666666666665
+    },
+    "scope": "Positive beat-linear BPM ramp, quarter-beat coordinate and constant limit; no scheduler observation."
+  },
+  {
+    "code": "MCL017",
+    "case": "negative",
+    "observed": {
+      "slope_bpm_per_quarter": 0.0,
+      "duration_s": 4.0,
+      "endpoint_average_duration_s": 4.0
+    },
+    "expected": {
+      "slope_bpm_per_quarter": 0,
+      "duration_s": 4,
+      "endpoint_average_duration_s": 4
+    },
+    "scope": "Positive beat-linear BPM ramp, quarter-beat coordinate and constant limit; no scheduler observation."
+  },
+  {
+    "code": "WML014",
+    "case": "model",
+    "observed": {
+      "target_cents": 386.3137138648348,
+      "step": 6,
+      "represented_cents": 378.94736842105266,
+      "error_cents": -7.366345443782166
+    },
+    "expected": {
+      "target_cents": 386.3137138648348,
+      "step": 6,
+      "represented_cents": 378.94736842105266,
+      "error_cents": -7.366345443782166
+    },
+    "scope": "One positive ratio, equal octave division and nearest ties upward; no cultural or tuning endorsement."
+  },
+  {
+    "code": "WML014",
+    "case": "negative",
+    "observed": {
+      "target_cents": 386.3137138648348,
+      "step": 4,
+      "represented_cents": 400.0,
+      "error_cents": 13.686286135165176
+    },
+    "expected": {
+      "target_cents": 386.3137138648348,
+      "step": 4,
+      "represented_cents": 400,
+      "error_cents": 13.686286135165204
+    },
+    "scope": "One positive ratio, equal octave division and nearest ties upward; no cultural or tuning endorsement."
+  },
+  {
+    "code": "WML015",
+    "case": "model",
+    "observed": {
+      "frequencies_hz": [
+        442.0,
+        884.0
+      ],
+      "calibration_ratio": 1.0045454545454546,
+      "calibration_cents": 7.851415040126504,
+      "octave_ratio": 2.0
+    },
+    "expected": {
+      "frequencies_hz": [
+        442,
+        884
+      ],
+      "calibration_ratio": 1.0045454545454546,
+      "calibration_cents": 7.851415040126504,
+      "octave_ratio": 2
+    },
+    "scope": "Two specified MIDI notes with reference-bearing equal-tempered frequency law; no renderer fidelity."
+  },
+  {
+    "code": "WML015",
+    "case": "negative",
+    "observed": {
+      "frequencies_hz": [
+        440.0,
+        880.0
+      ],
+      "calibration_ratio": 1.0,
+      "calibration_cents": 0.0,
+      "octave_ratio": 2.0
+    },
+    "expected": {
+      "frequencies_hz": [
+        440,
+        880
+      ],
+      "calibration_ratio": 1,
+      "calibration_cents": 0,
+      "octave_ratio": 2
+    },
+    "scope": "Two specified MIDI notes with reference-bearing equal-tempered frequency law; no renderer fidelity."
+  },
+  {
+    "code": "WML016",
+    "case": "model",
+    "observed": {
+      "degrees": {
+        "1": 0,
+        "5": 6,
+        "7": 10,
+        "9": 14
+      },
+      "pitch_classes": [
+        0,
+        2,
+        6,
+        10
+      ],
+      "valid": true
+    },
+    "expected": {
+      "degrees": {
+        "1": 0,
+        "5": 6,
+        "7": 10,
+        "9": 14
+      },
+      "pitch_classes": [
+        0,
+        2,
+        6,
+        10
+      ],
+      "valid": true
+    },
+    "scope": "Root zero, ordered strict add/alter/subtract edits; authored collision policy, not full MusicXML semantics."
+  },
+  {
+    "code": "WML016",
+    "case": "negative",
+    "observed": {
+      "valid": false,
+      "rejected_operation_index": 1,
+      "reason": "duplicate_degree",
+      "degree": 5
+    },
+    "expected": {
+      "valid": false,
+      "rejected_operation_index": 1,
+      "reason": "duplicate_degree",
+      "degree": 5
+    },
+    "scope": "Root zero, ordered strict add/alter/subtract edits; authored collision policy, not full MusicXML semantics."
+  }
+]

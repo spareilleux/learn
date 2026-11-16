@@ -1,0 +1,33 @@
+{
+  "unit": "b",
+  "exceptions": [
+    {
+      "stage": "prior-source reading",
+      "attempt": "Python stdout inherited Windows cp1252 and raised UnicodeEncodeError on U+2192 while printing net-002.",
+      "correction": "Configured Python stdout UTF-8 and repeated the bounded source reading. No source file was changed by the failed read.",
+      "retained_log": "C:/tmp/batch25b-b-author/read-attempt-1.txt"
+    },
+    {
+      "stage": "catalogue exact search",
+      "attempt": "rg given a literal streeling/courses/*/en directory argument failed with Windows os error 123.",
+      "correction": "Searched streeling/courses recursively with Markdown exclusions. Actual result exposed the existing MAT025 Shapley treatment; the proposed Shapley lesson was discarded."
+    },
+    {
+      "stage": "external authoring script creation",
+      "attempt": "An oversized PowerShell here-string write of the external author.py was rejected by tool policy before execution.",
+      "correction": "Used apply_patch to create the same external authoring file. No user escalation was needed and no workspace course file had been written by the rejected command."
+    },
+    {
+      "stage": "primary reading",
+      "attempt": "MacKay book PDF returned 403; a guessed MIT lecture URL and Underactuated linear_algebra URL were inaccessible. The state-estimation page contained only outline headings.",
+      "correction": "Those failed or insufficient readings are not used as supporting references. Used actually read Shannon section 7, Harvard Appendix C and MIT Gershwin inventory motives, each with a bounded scope. No web source hash was invented."
+    },
+    {
+      "stage": "author prose inspection after first structural pass",
+      "attempt": "French COG020 exercise 2 loosely called the grouped correct responses items.",
+      "correction": "Changed that phrase to réponses correctes, rebound bytes and replayed the structural checks. The first actual passed self-check remains retained separately."
+    }
+  ],
+  "failed_structural_selfchecks": 0,
+  "independent_claim_tests_executed": false
+}

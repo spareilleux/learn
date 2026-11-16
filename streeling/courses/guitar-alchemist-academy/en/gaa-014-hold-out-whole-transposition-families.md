@@ -1,0 +1,194 @@
+---
+module_id: gaa-014-hold-out-whole-transposition-families
+department: guitar-alchemist-academy
+course: "Hold Out Whole Transposition Families"
+level: advanced
+prerequisites: ["gaa-009-test-transposition-beyond-a-memorized-fret-pattern"]
+estimated_duration: "60 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Hold Out Whole Transposition Families
+
+> Authored model and source reading. Human technical, fluent-language, musician and learner decisions remain pending. No new performance, listening, parser execution, engine render or production adoption is claimed.
+
+A practice test can contain unseen item identifiers while repeating the same transposed pattern used during rehearsal. [GA](https://github.com/GuitarAlchemist/ga) should state what is withheld before describing a score as transfer. We define a family key from ordered intervals and audit the split. The result identifies exposure structure, while actual learning remains an empirical question.
+
+## Read the retained evidence
+
+The grouped-validation reading explains why dependent samples should not cross a training/test boundary. Here the groups are authored transposition families. The retained practice packet already separates task cues; it contains no evidence that these new items were attempted.
+
+[Prerequisite](../../guitar-alchemist-academy/en/gaa-009-test-transposition-beyond-a-memorized-fret-pattern.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-25/unit-a.json)
+
+[Primary reading](https://scikit-learn.org/stable/modules/cross_validation.html)
+
+## Fixed case and prepared quantities
+
+```json
+{
+  "values": {
+    "train": [
+      {
+        "id": "a",
+        "notes": [
+          60,
+          64,
+          67
+        ]
+      },
+      {
+        "id": "b",
+        "notes": [
+          60,
+          63,
+          67
+        ]
+      }
+    ],
+    "test": [
+      {
+        "id": "c",
+        "notes": [
+          62,
+          66,
+          69
+        ]
+      },
+      {
+        "id": "d",
+        "notes": [
+          62,
+          67,
+          69
+        ]
+      }
+    ]
+  },
+  "formula": "family(notes)=tuple(note-note[0]); overlap=sorted(set(train families) intersect set(test families)); family_disjoint=(overlap empty)",
+  "expected": {
+    "overlap": [
+      [
+        0,
+        4,
+        7
+      ]
+    ],
+    "family_disjoint": false,
+    "distinct_item_ids": 4
+  },
+  "negative_control": {
+    "values": {
+      "train": [
+        {
+          "id": "a",
+          "notes": [
+            60,
+            64,
+            67
+          ]
+        },
+        {
+          "id": "b",
+          "notes": [
+            60,
+            63,
+            67
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "d",
+          "notes": [
+            62,
+            67,
+            69
+          ]
+        },
+        {
+          "id": "e",
+          "notes": [
+            65,
+            70,
+            72
+          ]
+        }
+      ]
+    },
+    "expected": {
+      "overlap": [],
+      "family_disjoint": true,
+      "distinct_item_ids": 4
+    }
+  }
+}
+```
+
+## Define exposure at the level the learning claim needs
+
+An item key and a family key serve different purposes. The item key distinguishes a particular prompt or stimulus file, while the family key groups related material under the transformation selected for this task. Neither key is inherently the right unit for every assessment. The learning claim determines what familiarity would make the assessment too easy, and the grouping rule must be written before looking at the score.
+
+The chosen family rule preserves ordering and offsets from the first note. It groups exact transpositions but does not group inversions, rhythmic variants or octave-displaced individual notes unless their ordered offsets also match. A passing split therefore certifies only this definition. Expanding the rule after inspecting responses could change which test material counts as withheld and would need a new report rather than a silent update.
+
+The control includes related test items on the test side, which is permitted by the narrow cross-partition rule. That does not make their future responses independent observations. A report of performance might need family-level aggregation or another dependence model. Keep this distinction visible: preventing exposure leakage and estimating uncertainty are separate tasks. A direct table of raw notes, keys and partition membership is enough to audit the present boundary. An automatic item generator should preserve that table instead of treating newly minted identifiers as evidence of novelty.
+
+### Exercise 1
+
+Derive a family key for each main item. What ordering information survives?
+
+<details><summary>Answer 1</summary>
+
+Subtract the first pitch from every pitch in order. The key keeps directed offsets and register relationships, rather than replacing the sequence with an unordered pitch-class set.
+
+</details>
+
+### Exercise 2
+
+Intersect the training and test keys. Can unique item identifiers certify separation?
+
+<details><summary>Answer 2</summary>
+
+The displayed overlap rejects family separation. Every identifier can be unique while relatives still occur on both sides of the boundary.
+
+</details>
+
+### Exercise 3
+
+Does the overlap prove that a learner cheated or learned nothing?
+
+<details><summary>Answer 3</summary>
+
+No. It describes the design and limits a transfer interpretation. It supplies no actual learner response, intention or change in ability.
+
+</details>
+
+### Exercise 4
+
+Apply the control. What has been repaired and what remains untested?
+
+<details><summary>Answer 4</summary>
+
+The selected family overlap disappears. Timbre, rhythm, source exposure and actual item difficulty could still connect conditions or provide other cues.
+
+</details>
+
+### Exercise 5
+
+What falsifies a claimed family-disjoint split?
+
+<details><summary>Answer 5</summary>
+
+Any retained family key present in both partitions is a witness. Keep the raw notes and key rule so another reviewer can challenge the grouping itself.
+
+</details>
+
+## Source-assisted learner task
+
+Create the family table manually before using any assistance. Audit both partitions against the retained cue policy, then propose a test-item manifest. Name the overlap witness and an unresolved source of dependence before recommending automated quiz generation.
+
+First retain your unaided derivation before revealing the answers. Then inspect a specific source passage and its revision, record every kind of assistance, and keep the original and corrected responses separately. Use the direct manual result as the baseline for any calculator, DSL or agent proposal. Missing inputs stay unresolved. The fixed packet holds a prepared criterion for each exercise with no learner decision. A correct model answer supports only the declared case; acceptance needs an actual attempt and review. Record a falsifier before choosing an abstraction, then state the additional runtime or human evidence needed at the next boundary.

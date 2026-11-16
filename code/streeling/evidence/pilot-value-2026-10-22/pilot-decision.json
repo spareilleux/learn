@@ -1,0 +1,144 @@
+{
+  "scope": "Authored cardinal loss and signal model, not BRUTAL measurements, empirical likelihoods, money or an adopted policy.",
+  "states": [
+    "F",
+    "U"
+  ],
+  "prior_F": {
+    "exact": "1/2",
+    "value": 0.5
+  },
+  "loss_matrix": {
+    "K": {
+      "F": 4,
+      "U": 4
+    },
+    "S": {
+      "F": 0,
+      "U": 10
+    }
+  },
+  "likelihoods": {
+    "F": {
+      "+": {
+        "exact": "4/5",
+        "value": 0.8
+      },
+      "-": {
+        "exact": "1/5",
+        "value": 0.2
+      }
+    },
+    "U": {
+      "+": {
+        "exact": "1/5",
+        "value": 0.2
+      },
+      "-": {
+        "exact": "4/5",
+        "value": 0.8
+      }
+    }
+  },
+  "prior_decision": {
+    "K": {
+      "exact": "4",
+      "value": 4.0
+    },
+    "S": {
+      "exact": "5",
+      "value": 5.0
+    },
+    "chosen": "K",
+    "minimum": {
+      "exact": "4",
+      "value": 4.0
+    }
+  },
+  "signal_decisions": [
+    {
+      "signal": "+",
+      "probability": {
+        "exact": "1/2",
+        "value": 0.5
+      },
+      "posterior_F": {
+        "exact": "4/5",
+        "value": 0.8
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "2",
+        "value": 2.0
+      },
+      "chosen": "S",
+      "minimum": {
+        "exact": "2",
+        "value": 2.0
+      }
+    },
+    {
+      "signal": "-",
+      "probability": {
+        "exact": "1/2",
+        "value": 0.5
+      },
+      "posterior_F": {
+        "exact": "1/5",
+        "value": 0.2
+      },
+      "K": {
+        "exact": "4",
+        "value": 4.0
+      },
+      "S": {
+        "exact": "8",
+        "value": 8.0
+      },
+      "chosen": "K",
+      "minimum": {
+        "exact": "4",
+        "value": 4.0
+      }
+    }
+  ],
+  "expected_loss_with_noisy_signal": {
+    "exact": "3",
+    "value": 3.0
+  },
+  "expected_loss_with_perfect_signal": {
+    "exact": "2",
+    "value": 2.0
+  },
+  "gross_sample_information_value": {
+    "exact": "1",
+    "value": 1.0
+  },
+  "gross_perfect_information_value": {
+    "exact": "2",
+    "value": 2.0
+  },
+  "pilot_cost": {
+    "exact": "3/5",
+    "value": 0.6
+  },
+  "net_information_value": {
+    "exact": "2/5",
+    "value": 0.4
+  },
+  "action_boundary_F": {
+    "exact": "3/5",
+    "value": 0.6
+  },
+  "ties_keep_K": true,
+  "locked_K_information_value": 0,
+  "perfect_test_cost_control": 3,
+  "perfect_test_net_value": {
+    "exact": "-1",
+    "value": -1.0
+  },
+  "information_can_be_ignored": true
+}

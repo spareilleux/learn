@@ -1,0 +1,77 @@
+{
+  "command": {
+    "args": [
+      "dotnet",
+      "fsi",
+      "--quiet",
+      "--exec",
+      "probe.fsx"
+    ],
+    "cwd": "C:\\tmp\\streeling-scene-frames-native-20261022",
+    "sdk": "10.0.113",
+    "exit_code": 0,
+    "elapsed_seconds": 2.6348036999988835,
+    "stdout": {
+      "path": "C:\\tmp\\streeling-scene-frames-native-20261022\\attempt-1.stdout.log",
+      "bytes": 4192,
+      "sha256": "9f1994fa3c191888f14b03db698b7810e349760b60d8dde6bdd82e73e3822d21"
+    },
+    "stderr": {
+      "path": "C:\\tmp\\streeling-scene-frames-native-20261022\\attempt-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "wrapper": {
+      "path": "C:\\tmp\\streeling-scene-frames-native-20261022\\probe.fsx",
+      "bytes": 4053,
+      "sha256": "0a518efc2209e7825a918cbcea6a6eddf7dd3a8593f0236879f8d43895eed464"
+    },
+    "global_json": {
+      "path": "C:\\tmp\\streeling-scene-frames-native-20261022\\global.json",
+      "bytes": 75,
+      "sha256": "f9aee4db14a75f488639f46464f49ae7a4577fd1ba3c17344fb78e2125483635"
+    },
+    "source_files": [
+      {
+        "path": "Experiments/Brutal/Lego/Space.fs",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Space.fs",
+        "status": 200,
+        "bytes": 1809,
+        "sha256": "c1580d2297f1bfedfac4f8d1adb126d29a4cf4cc2e10857f04eb7d991b6c3acc",
+        "exact_git_bytes_equal": true,
+        "loaded_by_fsi": true
+      },
+      {
+        "path": "Experiments/Brutal/Lego/Seeds.fs",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Seeds.fs",
+        "status": 200,
+        "bytes": 1548,
+        "sha256": "5fc46fef00a42a48963cd4cff4fbf6a58f9e945c0f06e4cb2b87681db4059aad",
+        "exact_git_bytes_equal": true,
+        "loaded_by_fsi": true
+      },
+      {
+        "path": "Experiments/Brutal/Lego/Model.fs",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Model.fs",
+        "status": 200,
+        "bytes": 9322,
+        "sha256": "ac44e7067730897d4fca91617ff68af67e7a1529b56c367d49add89ab6af5228",
+        "exact_git_bytes_equal": true,
+        "loaded_by_fsi": true
+      },
+      {
+        "path": "Experiments/Brutal/Lego/Validate.fs",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Validate.fs",
+        "status": 200,
+        "bytes": 2260,
+        "sha256": "7722806ad2db8e5847753ca6b7211d123d1e0c3319375c5ba14b5e80de72a387",
+        "exact_git_bytes_equal": true,
+        "loaded_by_fsi": true
+      }
+    ]
+  },
+  "scope": "Fresh unchanged Space/Seeds/Model/Validate F# helpers with explicitly authored Drafts; no Generate.run, Colossus, shader, GPU, Blender, Godot or DLSS execution.",
+  "source_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "source_unchanged": true,
+  "new_dependency_install": false
+}

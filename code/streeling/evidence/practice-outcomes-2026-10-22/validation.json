@@ -1,0 +1,187 @@
+{
+  "checked_at_utc": "2026-10-22T23:40:55.187344+00:00",
+  "base_learn_commit": "e49ca670ace0531db5f0b631253205d857f4ecfe",
+  "source_ga_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "scope": "Three practice-item, unaided-recall and counterfactual-learning courses with authored fixed calculations and primary/source interpretation. No query, formatter/test, quiz, real learner, actual randomized study, runnable lab or production change.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "calculation_checks": {
+    "independent_checks": 2393,
+    "passed": 2393,
+    "failed": 0,
+    "findings": [
+      {
+        "id": "raw-display-and-learner-target",
+        "status": "observed-preserved",
+        "finding": "Pinned raw diagram and formatted chart order differ. Retrieval score/confidence clamp, practice goal/tracking labels and RAG metrics do not supply actual unaided learner responses."
+      },
+      {
+        "id": "denominator-and-assistance",
+        "status": "observed-preserved",
+        "finding": "Authored first unaided eligible endpoint2/6 differs from raw first3/7, repeated-row6/11, final6/7 and hinted retry3/3; missing outcomes remain unknown with explicit full-offer bounds."
+      },
+      {
+        "id": "before-after-not-counterfactual",
+        "status": "observed-preserved",
+        "finding": "Same pretest and observed treated posttest fit positive, zero or negative finite-population effects.256binary no-treatment vectors bound effects without assigning probabilities."
+      },
+      {
+        "id": "hypothetical-design-not-observed-study",
+        "status": "observed-preserved",
+        "finding": "Mean contrast across70uniform allocations equals each fixed-worldATE, but a single contrast can have opposite sign. No actual randomization, empirical treatment benefit or p-value observed."
+      }
+    ],
+    "public_ga_source_test_files": 6,
+    "primary_reference_bodies": 2,
+    "full_research_paper_read": false,
+    "voicing_candidates": 4,
+    "practice_offer_attempt_rows": 12,
+    "completed_response_rows": 11,
+    "delayed_offers": 8,
+    "missing_binary_completions": 4,
+    "counterfactual_worlds": 3,
+    "unrestricted_counterfactual_vectors": 256,
+    "attainable_effect_levels": 9,
+    "hypothetical_balanced_allocations_per_world": 70,
+    "allocation_rows": 210,
+    "new_query": false,
+    "new_formatter_or_notation_test": false,
+    "new_quiz": false,
+    "new_learner": false,
+    "new_randomized_study": false,
+    "new_dependency_install": false,
+    "observed_retention": null,
+    "actual_causal_effect": null,
+    "learner_calibration": null
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 28.97686490000342,
+    "log": "C:\\tmp\\streeling-practice-outcomes-tests-20261022.log",
+    "log_sha256": "66da1532569e362c2906e41d0f6bf95ff3b5b8b0ee1ef379e8410168fedf8119",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.177794100018218,
+    "log": "C:\\tmp\\streeling-practice-outcomes-sync-20261022.log",
+    "log_sha256": "5c021f36cb02857ad4128f5d9961575594e3deb833b9b5c89dd6c2cc00cbc825",
+    "idempotent_checked_files": 707
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 161.48381970002083,
+    "log": "C:\\tmp\\streeling-practice-outcomes-build-20261022.log",
+    "log_sha256": "85fe1e48e174e66bd90032d4c11c9a1a9af8700daa63a708bec82cd05c4657eb",
+    "pages": 1903,
+    "dependency_install": "Existing node_modules junction; no install.",
+    "warnings": "Existing highlighting fallback and empty i18n/404 warnings retained in complete log."
+  },
+  "rendered_articles": {
+    "pages": 21,
+    "links": 366,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "data_verdict": "pass",
+    "data_receipt_sha256": "3a096cc1ee49255a5afa40253859f9ee5b23b99a43792ad983e8bb469c3e704c",
+    "content_verdict": "pass",
+    "content_receipt_sha256": "2ef7aaeca10712b6d8450f60fea4c7465cf365409bf88b45467f61889fc1c428",
+    "exercise_pairs_checked": 45,
+    "learner_criteria_checked": 15,
+    "open_course_findings": [],
+    "content_observations": [
+      {
+        "origin": "code/streeling/evidence/practice-outcomes-2026-10-22/data-audit.json",
+        "id": "raw-display-and-learner-target",
+        "status": "observed-preserved",
+        "finding": "Pinned raw diagram and formatted chart order differ. Retrieval score/confidence clamp, practice goal/tracking labels and RAG metrics do not supply actual unaided learner responses."
+      },
+      {
+        "origin": "code/streeling/evidence/practice-outcomes-2026-10-22/data-audit.json",
+        "id": "denominator-and-assistance",
+        "status": "observed-preserved",
+        "finding": "Authored first unaided eligible endpoint2/6 differs from raw first3/7, repeated-row6/11, final6/7 and hinted retry3/3; missing outcomes remain unknown with explicit full-offer bounds."
+      },
+      {
+        "origin": "code/streeling/evidence/practice-outcomes-2026-10-22/data-audit.json",
+        "id": "before-after-not-counterfactual",
+        "status": "observed-preserved",
+        "finding": "Same pretest and observed treated posttest fit positive, zero or negative finite-population effects.256binary no-treatment vectors bound effects without assigning probabilities."
+      },
+      {
+        "origin": "code/streeling/evidence/practice-outcomes-2026-10-22/data-audit.json",
+        "id": "hypothetical-design-not-observed-study",
+        "status": "observed-preserved",
+        "finding": "Mean contrast across70uniform allocations equals each fixed-worldATE, but a single contrast can have opposite sign. No actual randomization, empirical treatment benefit or p-value observed."
+      }
+    ],
+    "content_fix_history": [
+      {
+        "id": "gaa007-task-calibration-elicitation",
+        "status": "resolved",
+        "finding": "Initial GAA007 task asked rejection of the recall-probability inference but did not expressly request the delayed-response calibration evidence in criterion4.",
+        "resolution": "Author added actual defined delayed responses and calibration evidence linking predictions to that event. Final task explicitly elicits all15criteria; no course exercise change was needed.",
+        "source_changes_by_reviewer": false
+      }
+    ],
+    "scope": "Independent AI source/theory/model/content checks; not human approval.",
+    "human_technical": null,
+    "musician": null,
+    "fluent_language": null,
+    "learner": null,
+    "query": null,
+    "formatter_run": null,
+    "quiz": null,
+    "retention": null,
+    "randomized_study": null,
+    "causal_effect": null
+  },
+  "code_review_pipeline": "Documentation/fixed-data-only deliverable with temporary verification wrappers; no new production/lab program emitted and no code-shipping review invoked.",
+  "manual_host_scan": "Read six immutable GA source/test files, APS publisher abstract only and NIST randomized-design body. Preserve raw versus display order, target-specific cues and exact versus restricted-equivalence acceptance, retrieval score versus recall probability, plan labels versus actual attempts. Check assistance/eligibility/item/learner lineage, missing outcomes versus imputation, deterministic bounds versus confidence intervals. Separate eight-unit potential-outcome worlds from one-learner trace, pretest versus same-time counterfactual, possibility counts versus priors and assignment-average contrasts versus a realized effect. No full-paper, source test run, real participant or causal effect claimed",
+  "source_inventory": {
+    "core_english_modules": 210,
+    "target": 525,
+    "original_departments": 21,
+    "remaining_core_source_gaps": 315,
+    "locale_counts": {
+      "en": 211,
+      "fr": 211,
+      "es": 211
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint/typecheck scripts configured; existing generator tests and Astro build used."
+}

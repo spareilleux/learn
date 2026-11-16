@@ -1,0 +1,144 @@
+---
+module_id: gtr-018-check-direction-constraints-at-string-crossings
+department: guitar-studies
+course: "Check Direction Constraints at String Crossings"
+level: advanced
+prerequisites: ["gtr-007-carry-picking-phase-across-bar-lines"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Check Direction Constraints at String Crossings
+
+> Authored model and bounded source reading. Human technical, fluent-language, musician and learner decisions remain pending. No new performance, listening result, engine render, parser execution or production adoption is claimed.
+
+A practice assistant correctly alternates or repeats stroke labels but gives no account of which string the pick must reach next. A direction sequence can be valid as a symbolic clock and still violate a chosen continuous-sweep policy. The new task checks the signed crossing between consecutive strings. It extends the prerequisite’s one-string phase bookkeeping with geometry while leaving actual technique and comfort undecided.
+
+Declare the string-number orientation first. Under this authored policy, repeated downstrokes across different strings must continue toward smaller string numbers. Repeated upstrokes require the opposite direction. A direction change or same-string repetition is outside this particular crossing exclusion, not automatically proven easy. The rule deliberately disallows an unrecorded air reset between equal crossing strokes. A guitarist could choose another motion policy; then the model and its required evidence must change explicitly.
+
+The main phrase contains a reversal while keeping the same stroke label, so one transition passes and another fails. A monotone control removes that reversal while keeping the symbolic strokes identical. This separates the effect of crossing geometry from stroke-phase arithmetic. Keep the actual transition witness rather than reducing the phrase to a count of downstrokes. The retained practice material motivates an instruction ledger, but none of these hypothetical events was played or returned by a live GA solver. A manual arrow diagram is sufficient to judge this narrow policy before any path-planning abstraction is proposed.
+
+## Read the retained project evidence
+
+The prerequisite supplies the earlier operation and its evidence boundary. Inspect the linked project artifact before using the authored case to propose a change. Its existing observations keep their original scope: a retained source file or fixture does not establish current deployment. The fixed packet records exact inputs, prepared outputs and reading provenance. Local file hashes identify complete bytes; they do not enlarge the bounded passage actually read. A primary web page supports only the specific definition read, with no invented immutable revision or byte hash.
+
+[Prerequisite](../../guitar-studies/en/gtr-007-carry-picking-phase-across-bar-lines.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/phrase-performance-2026-10-22/string-occupancy.json)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-25-b/unit-a.json)
+
+## Fixed case and prepared quantities
+
+```json
+{
+  "values": {
+    "strings": [
+      3,
+      2,
+      3
+    ],
+    "strokes": [
+      "D",
+      "D",
+      "D"
+    ]
+  },
+  "formula": "for equal consecutive strokes on different strings: legal iff (D and next_string<previous_string) or (U and next_string>previous_string); otherwise legal; plan_legal=all(transition_legal)",
+  "expected": {
+    "transition_legal": [
+      true,
+      false
+    ],
+    "plan_legal": false
+  },
+  "negative_control": {
+    "values": {
+      "strings": [
+        3,
+        2,
+        1
+      ],
+      "strokes": [
+        "D",
+        "D",
+        "D"
+      ]
+    },
+    "expected": {
+      "transition_legal": [
+        true,
+        true
+      ],
+      "plan_legal": true
+    }
+  }
+}
+```
+
+## Assumptions and evidence limits
+
+Assume the declared conventional string orientation and continuous sweeps for equal successive crossing strokes, with no air reset. This is a restricted instruction policy, not a universal biomechanical law or a comfort judgment.
+
+## Interpret the operation before choosing an abstraction
+
+Before revealing the answer key, write the input contract in your own words and derive the main result manually. Keep intermediate quantities or state transitions, rather than copying only a final number. Compare the negative control under the same rule and identify the input that changed. The model is a finite authored example. A matching calculation supports this example’s stated claim; it does not supply an observed user outcome or validate a production feature.
+
+### Exercise 1
+
+Identify the direction of the first string crossing.
+
+<details><summary>Answer 1</summary>
+
+It moves toward a smaller string number and agrees with the declared repeated downstroke sweep.
+
+</details>
+
+### Exercise 2
+
+Why does the second transition fail the policy?
+
+<details><summary>Answer 2</summary>
+
+It reverses string travel while retaining the same downstroke, requiring a motion the continuous-sweep policy excludes.
+
+</details>
+
+### Exercise 3
+
+Would changing the policy permit an air reset?
+
+<details><summary>Answer 3</summary>
+
+Possibly, but that adds a different action and timing requirement; it cannot be silently inferred from the existing labels.
+
+</details>
+
+### Exercise 4
+
+Why does the monotone control pass?
+
+<details><summary>Answer 4</summary>
+
+Every same-direction crossing follows the permitted string-number direction under the same rule.
+
+</details>
+
+### Exercise 5
+
+What falsifies a universal technique claim from this table?
+
+<details><summary>Answer 5</summary>
+
+The table assumes a restricted motion policy and contains no player observation, so it cannot establish universal physical impossibility or comfort.
+
+</details>
+
+## Source-assisted learner task
+
+Draw each pick-travel arrow manually, then annotate the practice plan with its motion policy. Keep the failed crossing as a review witness.
+
+Retain your unaided answer before consulting a source or calculator. Then identify a precise source passage and revision, record every kind of assistance and keep the original answer alongside any correction. A proposed agent workflow or DSL must preserve the manual result and its countercase before its convenience can be assessed. If required inputs are absent, leave the decision unresolved rather than substituting a plausible value.
+
+Write a falsifier as an observable disagreement with the stated rule, then say what additional observation would be needed at the next boundary. Use the exercise answers as prepared checks, not as a record of your attempt. The fixed packet contains a separate prepared criterion for every exercise; all learner decisions remain undecided until an actual response and review are retained. Report assistance, corrections and remaining limits with the final note so that arithmetic correctness is not confused with independent recall, musician judgment or runtime acceptance.

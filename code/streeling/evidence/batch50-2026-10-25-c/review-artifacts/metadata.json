@@ -1,0 +1,60 @@
+{
+  "branch": "codex/streeling-craft-transfer-20261022",
+  "completed_at": "2026-10-29T12:25:30.417343+00:00",
+  "cost": {
+    "host": "codex",
+    "scope": {
+      "changed_lines": 860,
+      "deleted_band": "none",
+      "depth": "focused",
+      "exec_nontest_lines": 2,
+      "size_band": "small",
+      "unclassified_lines": {
+        ".yml": 1
+      }
+    },
+    "stages": [
+      {
+        "elapsed_seconds": 14.549,
+        "ended_at": "2026-10-29T12:13:50.609969+00:00",
+        "facts": {
+          "changed_lines": 860,
+          "deleted_band": "none",
+          "depth": "focused",
+          "exec_nontest_lines": 2,
+          "size_band": "small",
+          "unclassified_lines": {
+            ".yml": 1
+          }
+        },
+        "stage": "scope",
+        "started_at": "2026-10-29T12:13:36.060635+00:00"
+      },
+      {
+        "candidates": 0,
+        "elapsed_seconds": 699.91,
+        "ended_at": "2026-10-29T12:25:30.520245+00:00",
+        "reviewers": 2,
+        "stage": "review",
+        "started_at": "2026-10-29T12:13:50.609969+00:00"
+      },
+      {
+        "elapsed_seconds": 0.114,
+        "ended_at": "2026-10-29T12:25:30.634438+00:00",
+        "stage": "receipt",
+        "started_at": "2026-10-29T12:25:30.520245+00:00"
+      }
+    ],
+    "status": "complete",
+    "totals": {
+      "artifact_bytes": 152945,
+      "candidates": 0,
+      "elapsed_seconds": 714.573,
+      "reviewers": 2
+    },
+    "truncated_events": 0
+  },
+  "head_sha": "2c0ccbabee05a8c71f49d2f8eee20cc86c99f758",
+  "run_id": "20261029-081335-be85b606",
+  "verdict": "Ready to merge"
+}

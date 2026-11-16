@@ -1,0 +1,379 @@
+{
+  "audit_kind": "Native static content and source review",
+  "status": "No actionable findings in the reviewed scope",
+  "formal_review": false,
+  "human_approval": false,
+  "scope": {
+    "learn_root": "C:/tmp/learn-streeling-craft-transfer-20261022",
+    "archive_commit": "17f82a4b4b913d7c64942a3d3ff670abf4e6f85c",
+    "manifest": "code/streeling/evidence/representation-release-2026-10-22/import.json",
+    "imported_files": 19,
+    "english_lessons": 13,
+    "archived_localizations": 6,
+    "new_translations": "Initial pass excluded 20 new drafts; final_delta now includes their bounded metadata/token/caveat review.",
+    "method": "Static course reads, immutable local Git object reads, source hashes, declared transformation reconstruction, prerequisite enumeration and independent arithmetic. No apps, network, repository executables, build, tests, staging or repository edits.",
+    "only_output": "C:/tmp/streeling-representation-release-content-audit-20261022.json",
+    "reviewed_manifest_sha256": "1e1bc47fa015675f694c077dfe28c0f59cff57f250f102965fbc6467563a75b2"
+  },
+  "prerequisite_closure": "All 13 English lessons' declared prerequisites exist in current Learn English sources. Imported FUT-002 and PHY-003 close the two intra-tranche prerequisite chains. Existing PM-002/003, VC-002/004/005, MCL-002, INF-001, PHI-001, PHY-001/002 and SEM-001 cover the other declared or body-linked dependencies.",
+  "source_checks": [
+    {
+      "module": "FUT-002",
+      "result": "Pinned GA dc2e74c config, Phase 0 report, Phase 2 validation and dated plan agree. The lesson separates proxy from full harness, single-embed from chat latency, and routing config from persisted-store migration.",
+      "arithmetic": "Latency margin 261.72520000545774 ms; bge versus nomic p95 difference 136.8259000009857 ms; accuracy gain 1.2 percentage points; OOS 3/8 to 8/8 gain 62.5 points. The plan separately records 7/8 on a later local run."
+    },
+    {
+      "module": "FUT-003",
+      "result": "Demerzel 74d425d triage generator explicitly grants no approval. Pinned 7892390 evaluator/result require matching source identities and checks; current and portable each admit 3/3 with synthetic medians 40 and 32. Fast admits 1/3. These are imaginary adapters and fictional verdict/check labels.",
+      "historical_fix": "The mutable PR #170 reference is now an immutable Learn 02fc08c experiment link, with closed-unmerged status, current helper absence, Learn source ownership and no approval made explicit. The declared edit reconstructs."
+    },
+    {
+      "module": "INF-003",
+      "result": "IX bd1336b serializes lowercase holds/fails/unknown while its Rust enum variants are Holds/Fails/Unknown. Deadlock discovery yields Fails even if exploration truncates, and a witness limit may be zero. normalize rejects empty, negative, NaN and zero-sum inputs; the lesson adds finite-count validation because positive infinity is not explicitly rejected.",
+      "arithmetic": "For p=[0.8,0,0.2] and q=[0.6,0.2,0.2], KL(p||q)=0.23014565796142483 nats and the reverse errors. Midpoint KL terms are 0.10682511409961822 and 0.04613902821563412; JS=0.07648207115762617 nats, approximately 0.1103403047760241 bits.",
+      "boundary": "A synthetic histogram shift does not establish regression, causality, statistical significance, a deployed threshold or a scheduled DuckDB comparison."
+    },
+    {
+      "module": "MCL-003",
+      "result": "GA dc2e74c progression YAML and ProgressionCorpusItem declarations agree with the quoted fields and counts. ii-V-I, 12-Bar Blues, Rhythm Changes and nested/standalone Pop Loop entries are distinguished correctly. The blues positions 5,6,9,12 are A,A,B,B.",
+      "cultural_boundary": "Catalog genre, AAB, song and UsedBy text are editorial claims, not verified performance history. Required Source/StyleLabel strings do not authenticate attribution. The proposed 10/12 matching rule is not a validated genre criterion."
+    },
+    {
+      "module": "PHI-002",
+      "result": "Demerzel 9ba9a29 advisory prose, schema and AIW rule-pack document have the stated vocabulary drift: recommend_merge/numeric confidence/reasons versus recommend/categorical confidence/reason_codes. The schema permits empty evidence arrays. Its compatible shape cannot establish evidence relevance or merge authority.",
+      "boundary": "The quoted policy keeps advice dry-run and human authority separate. No live service or actual PR decision is established."
+    },
+    {
+      "module": "PHI-003",
+      "result": "Pinned GA schema/theory/ICV sources and Demerzel 50c0d2f fixture support the distinct equivalence relations. C major and C minor share ICV [0,0,1,1,1,0] and supplied root 0 but differ in chroma; (-pc+7) mod 12 maps one set to the other. C diminished has ICV [0,0,2,0,0,1].",
+      "boundary": "Toy binary-chroma cosines are not full STRUCTURE scores. Whole STRUCTURE is not transposition invariant. A 0.75 threshold on scores 0.8/0.8/0.5 fails transitivity. No current retrieval or fingering result is inferred."
+    },
+    {
+      "module": "PHY-003",
+      "result": "The native 44.1 kHz fixture is distinguished from browser context/worklet rate. Static Nyquist arithmetic yields E2 harmonic limits 267 and 291 at 44.1/48 kHz. Ideal 30 kHz folds to 14.1/18 kHz; ideal 23 kHz folds to 21.1 kHz in the stated unfiltered 44.1 kHz model.",
+      "boundary": "The lesson does not claim an observed GA alias, browser capture, listening result or causal diagnosis. Root owns executable/source calculation receipts; this review did not duplicate executions."
+    },
+    {
+      "module": "PHY-004",
+      "result": "Pinned Rust excite/engine_note_on source maps velocity into pick ratio/offset, excitation, pluck mix and attack. With velocity 0.5 and length 535, ratio=0.48 and rounded offset=257. The ideal quarter-string harmonic zeros remain separate from the engine's broad filtered-noise heuristic.",
+      "boundary": "No physical-coordinate calibration, rendered spectrum, audible brightness result or public API change follows. Root owns physics fixture executions."
+    },
+    {
+      "module": "PM-004",
+      "result": "The archived release evaluator checks exactly three targets with four boolean gates each, plus replay/hash gates. A runtime Godot candidate with failed meaning is rejected; other gaps hold for evidence; all modeled gates yield candidacy only. published_tag remains separate.",
+      "boundary": "Source scripts, checked sample reports, plans and synthetic weave counters do not establish an installable extension suite, real human approval or public release."
+    },
+    {
+      "module": "SEM-002",
+      "result": "Pinned GA F# parser, renderer, service, tests and projectChord closure agree: Cmi7→Cm7, D-7→Dm7, EbΔ9→Ebmaj9; Fmaj7/A has Quality=None and an Extension maj7; C13#11b9 has three components. C# and Db spell differently while projecting to pitch class 1.",
+      "boundary": "Canonical spelling loses original glyph choice. Source/test declarations do not establish a fresh test pass, executed closure, voiced performance or UI result."
+    },
+    {
+      "module": "SEM-003",
+      "result": "At Demerzel c453a91, SEM-002 remains in_progress with review/publish false, while its separate bounded AI receipt reports no findings. The reporter requires review.completed AND verdict approved. The preflight has an explicit in_progress flag rule but does not fetch the public site.",
+      "boundary": "Schema compatibility, AI scope, local generation and historical DV-001 public 404 remain separate evidence claims. None grants human review or publication of SEM-002/003."
+    },
+    {
+      "module": "VC-003",
+      "result": "Pinned VoicingCloud/ForceRadiant source supports nine floats for three points, default spread 1.5, default size 0.3, resampling on positive setSpread and unchanged centers under setPointSize. Selected draws produce x=-1.2/1.4 and a 2.6 gap versus 0.2 base gap. A total-three payload with only two copied blocks leaves one zero-filled destination point.",
+      "boundary": "The lesson does not equate jittered display coordinates with full musical similarity or claim a real IX payload, browser frame, seeded layout or usability outcome."
+    },
+    {
+      "module": "VC-006",
+      "result": "Learn 93d424f modeling/material scripts and checked reports contain the cited open-quad/non-manifold examples and per-corner UV/glTF observations on other assets. GA's host/unchecked plan items do not establish a folded scene. Signed errors 2° and 121° are correct; lower comprehension and an incorrect ID reject the synthetic candidate.",
+      "cultural_boundary": "Fold signs, policy meanings and tolerances are declared trial conventions, not historical origami claims, cultural analysis, physically valid motion or an implemented semantic format."
+    }
+  ],
+  "archived_translation_review": {
+    "files": [
+      "streeling/courses/information-theory/fr/inf-003-verdict-distribution-drift.fr.md",
+      "streeling/courses/information-theory/es/inf-003-verdict-distribution-drift.es.md",
+      "streeling/courses/semiotics/fr/sem-003-status-signs-and-evidence.fr.md",
+      "streeling/courses/semiotics/es/sem-003-status-signs-and-evidence.es.md"
+    ],
+    "scope": "Full semantic comparison of the four archived bodies and all five exercises/answers per lesson against English. This is not human fluency approval.",
+    "result": "No substantive omission, altered answer, mistaken wire-label instruction or upgraded authority claim found.",
+    "inf003": "Both locales preserve serialized lowercase tags, actual capitalized Rust variants, fixed-property/order requirements, normalization and finite-count caveats, KL argument direction/error, JS midpoint/values/nats-to-bits conversion, witness/exploration controls, hypothetical threshold and all five exercises. First-paragraph Fails is an actual enum variant, not a claim that the serialized field value is capitalized.",
+    "sem003": "Both locales preserve the communication-word/status-enum distinction, scoped AI review, false review/publish flags, completed AND approved predicate, schema versus preflight gap, dated DV-001 local/public distinction, source-bound handoff chain and all five exercises. Shorter paraphrases do not remove the relevant field predicates or pending human/learner limits.",
+    "canonical_href": "Both physical SEM-003 translations now use sem-001-signs-in-governance.md.",
+    "token_difference_boundary": "Combined formulas or repeated-field paraphrases explain token-count differences. Semantic agreement is not a claim of byte-for-byte token parity.",
+    "reviewed_bindings": [
+      {
+        "path": "streeling/courses/information-theory/fr/inf-003-verdict-distribution-drift.fr.md",
+        "sha256": "b6b8de2a3676a4bfef4d72a3f3d3a2af5b9095060fd7874cd2b5dbeb5cbf7a70"
+      },
+      {
+        "path": "streeling/courses/information-theory/es/inf-003-verdict-distribution-drift.es.md",
+        "sha256": "98866b7cecaed9ea6921504b5315a85d16e1269860bf6eea48d1780c16192334"
+      },
+      {
+        "path": "streeling/courses/semiotics/fr/sem-003-status-signs-and-evidence.fr.md",
+        "sha256": "48295de826cec80e203e0265061d3cb95f8324a156a826d4f14db2d2d5c40b71"
+      },
+      {
+        "path": "streeling/courses/semiotics/es/sem-003-status-signs-and-evidence.es.md",
+        "sha256": "a0972feb1625ff72c71e088104c859053cbc282adc4c58ef32c59a16a6e357ff"
+      }
+    ]
+  },
+  "findings": [],
+  "resolved_findings": [
+    {
+      "id": "RR-CONTENT-001",
+      "title": "Historical Learn PR #170 reference in FUT-003",
+      "status": "Resolved by root and independently rechecked",
+      "resolution": "Immutable 02fc08c links and explicit historical/current tooling boundary replace the mutable draft-PR implication; manifest reconstruction and destination hash agree."
+    }
+  ],
+  "limits": [
+    "This reviewer did not rerun the root public-input or fixture-execution receipts.",
+    "The final_delta covers all 39 source bindings and the revised learner packet; integration/deployment checks remain coordinator-owned.",
+    "This native static review is neither formal review nor human subject/language/learner approval."
+  ],
+  "import_bindings": {
+    "checked": 19,
+    "archive_blobs_and_normalized_sha256": "All match pinned archive",
+    "destination_sha256": "All match physical Learn sources",
+    "declared_reconstruction": "All match archive plus declared link/prose transformations",
+    "failures": []
+  },
+  "final_delta": {
+    "audit_kind": "Bounded final native static pass",
+    "status": "No actionable findings in the reviewed scope",
+    "formal_review": false,
+    "human_approval": false,
+    "scope": "39 final course sources: 19 archive imports and 20 new FR/ES drafts, final chronology notes, import/locale bindings, and the 13-task source-assisted learner packet with its separate rubric.",
+    "results": {
+      "imported_reconstruction": "19/19 physical texts match pinned archive text plus declared link/prose changes, including chronology insertions. All destination hashes match.",
+      "new_translation_bindings": "20/20 destination, English, and pre-chronology hashes match the manifest.",
+      "metadata_and_tokens": "20/20 new drafts preserve fixed frontmatter metadata, Markdown href multisets, inline-code multisets, fenced blocks and numeric-token multisets.",
+      "locale_receipt": "39/39 SHA records match physical sources; 195 exercise headings and 195 answer blocks were independently counted.",
+      "chronology": "All 39 final notes distinguish historical pending draft translations and absent import/build status from current translation drafts, import and checks. Human subject, fluent-language and learner review remain pending.",
+      "caveats": [
+        "FUT-002 preserves single-embed versus chat latency, proxy versus full harness, small OOS denominator and historical config versus live deployment.",
+        "FUT-003 preserves the closed-unmerged historical helper experiment, current Learn source ownership, fictional adapter verdict/check labels and absence of a real production switch.",
+        "MCL-003 preserves catalog labels versus observed performance, unverified historical/song associations and uncalibrated proposed listening criterion.",
+        "PHI-002 preserves schema versus justified advice and final human authority. PHI-003 preserves the difference between toy relations, complete vectors, physical fingering and actual retrieval.",
+        "PHY-004 preserves ideal triangular displacement versus the engine heuristic and arithmetic versus rendered spectra, physical calibration and listening.",
+        "PM-004 preserves experiment versus installable extension, modeled gates versus authentic receipts, release candidate versus public release and independent course review.",
+        "SEM-002 preserves spelling normalization versus musical/performance meaning, lack of explicit EOF checking, test declarations versus fresh execution, and proposed UI versus current behavior.",
+        "VC-003 preserves jittered display versus musical distance and unexecuted payload/usability checks. VC-006 preserves synthetic signed poses, separate geometry/material/meaning, invented policy labels, no cultural authority, and absence of a folded asset/runtime."
+      ],
+      "archived_translation_delta": "The earlier full semantic review of INF-003/SEM-003 FR/ES remains applicable to their technical bodies; final chronology notes are separately bound by this pass."
+    },
+    "learner_packet": {
+      "tasks": 13,
+      "source_hashes": "13/13 physical English hashes match rubric and packet.",
+      "prompts_and_stimuli": "All 13 prompts and supplied stimulus_markdown fields match the learner packet; supplied primary-source links match as well.",
+      "answer_separation": "No expected-answer paragraph from the reviewer rubric is embedded in learner-tasks.md. Source records, formulas and code snippets are deliberately available as input, including source declarations that the task asks learners to inspect.",
+      "missing_input_correction": "The packet now provides the INF-003 count table, PHI-002 exact synthetic JSON and schema/doc lookups, FUT-002 p95 inputs, and suitable formulas/source references for the other source-reading questions.",
+      "coverage": "FUT-003 identity labels, PHI-003 MIDI lists/reference definition and VC-006 missing-identity scenario supply their required case inputs. MCL-003, PHY-003, PM-004, SEM-002/003 and VC-003 explicitly provide or permit the needed source lookup.",
+      "administration": "The learner closes the lesson but receives the input blocks and exact primary files; lesson answer blocks and the separate rubric are withheld.",
+      "empty_outcomes": "All 13 learner_attempt, reviewer_score and reviewer_reasoning fields remain null.",
+      "measurement_limit": "The task is explicitly overlapping, source-assisted reasoning. It supplies no causal learning, independent transfer, full-course mastery, audio quality or live-agent improvement result.",
+      "verified_primary_source_links": 18
+    },
+    "root_receipts": {
+      "scope": "Read as saved coordinator evidence; this reviewer did not rerun commands or make network requests.",
+      "public_inputs": "59 immutable public-blob records are scoped to source availability and byte comparison, not deployed course readback.",
+      "fixture_and_math": "Saved unchanged fixture, KL/JS and ideal-physics receipts retain synthetic/static limits and negative controls.",
+      "phi002_schema": "The additional saved schema replay records acceptance of the exact empty-evidence fixture and rejection after removing required confidence. It explicitly excludes the real policy engine, PR evidence and authority.",
+      "integration": "Sync, script tests, site build, rendered-link checks and public course publication remain coordinator-owned evidence outside this static pass."
+    },
+    "resolved_findings": [
+      {
+        "id": "RR-CONTENT-002",
+        "title": "Learner questions referred to omitted inputs",
+        "resolution": "Root added answer-free input blocks and primary-source lookups, mirrored in rubric stimulus_markdown/primary_sources. Final prompt/stimulus/source binding checks pass.",
+        "status": "Resolved and independently rechecked"
+      }
+    ],
+    "artifact_sha256": {
+      "import.json": "1e1bc47fa015675f694c077dfe28c0f59cff57f250f102965fbc6467563a75b2",
+      "locale-checks.json": "bcc407300cf6727eb31689c44821212404b2919d35f355013585860ef81e7441",
+      "learner-tasks.md": "dfea372f9d770e7e5d4faa0c97cc203422f916dbc0bc743f6586850a8a8512da",
+      "review-rubric.json": "9c83936a4c6102d6e156b96d3d587a1c777e67e72efc8ea5da16dc7cab28aa43",
+      "phi002-schema-replay.json": "04d4924afcbb84c3bf2e1be34bb6b6a5faf27b837a21a26b05617afbe064e2ef"
+    },
+    "final_source_bindings": [
+      {
+        "path": "streeling/courses/futurology/en/fut-002-routing-embedder-revisit-triggers.md",
+        "sha256": "80d8dfa21108fc3ffae971243a53ebfcb5d6d30e8f5289b5c245f0961ccd6042"
+      },
+      {
+        "path": "streeling/courses/futurology/en/fut-003-agent-substitution-readiness-drill.md",
+        "sha256": "3cdeafbc266a8f0ae39cf5f82a6bc7a22d83ffd58c3a4951a0f73bef8b276683"
+      },
+      {
+        "path": "streeling/courses/information-theory/en/inf-003-verdict-distribution-drift.md",
+        "sha256": "66c84ee111e358835be410e04e44f61b653343d3efd2d9626fd5545ab69a8f27"
+      },
+      {
+        "path": "streeling/courses/information-theory/es/inf-003-verdict-distribution-drift.es.md",
+        "sha256": "619044bf091b25cb605b6edad7aa5c0db733cc6c3bbb5f62e5501b5a7dcd27a1"
+      },
+      {
+        "path": "streeling/courses/information-theory/fr/inf-003-verdict-distribution-drift.fr.md",
+        "sha256": "7a8cb832cf442fafe5dd4f9c9878eb03f4ddb1428762b8d1b0566da7df7fdf91"
+      },
+      {
+        "path": "streeling/courses/musicology/en/mcl-003-style-labels-as-evidence.md",
+        "sha256": "2d909db9f674ffd2dfb1d44322d0ee38d603efb2d1f3e9cf980869b4be7b3134"
+      },
+      {
+        "path": "streeling/courses/philosophy/en/phi-002-when-is-an-advisory-decision-justified.md",
+        "sha256": "99200375356de40b214a76b3273daf1a51fded6525611f1d7ff768c0589d1c38"
+      },
+      {
+        "path": "streeling/courses/philosophy/en/phi-003-what-does-the-same-chord-mean.md",
+        "sha256": "bc4e4b3148eb6e10f3809d9275a93f97eedff8aa1e52c9aebc438ce2281fc020"
+      },
+      {
+        "path": "streeling/courses/physics/en/phy-003-sampling-aliasing-guitar-engine.md",
+        "sha256": "67f4d2e28ec8cf0ef646eacb4c7629c9f591600202e002f6e29d3668ba04f0f1"
+      },
+      {
+        "path": "streeling/courses/physics/en/phy-004-velocity-pick-position-guitar-engine.md",
+        "sha256": "30815d970eb5153a4e6d77e9b42a6336fdcfa007d7d2e5c350923c74fc2f8c6d"
+      },
+      {
+        "path": "streeling/courses/physics/es/phy-003-sampling-aliasing-guitar-engine.es.md",
+        "sha256": "5980bfa3b30a2785c2830f23a4b8b51f29b91f4fb0dfa9106d66aabc3f2a3133"
+      },
+      {
+        "path": "streeling/courses/physics/fr/phy-003-sampling-aliasing-guitar-engine.fr.md",
+        "sha256": "692d795d699c195ca63c491db47beff5ebc090a6bfe97bbb49f3686b45d52cc1"
+      },
+      {
+        "path": "streeling/courses/product-management/en/pm-004-craft-extension-release-decision.md",
+        "sha256": "31eff99588c7e7a35084aee798280862f745fff617547c66df337af67e92b855"
+      },
+      {
+        "path": "streeling/courses/semiotics/en/sem-002-chord-symbols-and-canonicalization.md",
+        "sha256": "40b9a12d2c7fc5c6a07c3b77240370e8f5916c34f3577a64cdb9acae817b5ea6"
+      },
+      {
+        "path": "streeling/courses/semiotics/en/sem-003-status-signs-and-evidence.md",
+        "sha256": "3a6a31b47c60b7034cc967132d80c39b8fdaa13c3edec2787c385e3595ff08d8"
+      },
+      {
+        "path": "streeling/courses/semiotics/es/sem-003-status-signs-and-evidence.es.md",
+        "sha256": "0bb43e972791e66eca3f6b53665242bf585c86eb63441ff49fa49c171aadfbd9"
+      },
+      {
+        "path": "streeling/courses/semiotics/fr/sem-003-status-signs-and-evidence.fr.md",
+        "sha256": "c27c541ab7f9b3fdbeef534979f3302013482bf37d58419f4be198571fea6c25"
+      },
+      {
+        "path": "streeling/courses/visual-computing/en/vc-003-jitter-and-voicing-cloud-distance.md",
+        "sha256": "e66350592803bfe2efb65545e219301026a1e04b49208c0df573b138d4cdb032"
+      },
+      {
+        "path": "streeling/courses/visual-computing/en/vc-006-origami-fold-state-scene-trial.md",
+        "sha256": "a54d470cccd50cd4b8c8ca97e89651bce5b99a12d9308e05bf3c8cad9a9a3f83"
+      },
+      {
+        "path": "streeling/courses/futurology/fr/fut-002-routing-embedder-revisit-triggers.fr.md",
+        "sha256": "b9e29b0be8011543a6677ccb061737355539f3b8bca7cf05ceb3cdd6e9392d33"
+      },
+      {
+        "path": "streeling/courses/futurology/es/fut-002-routing-embedder-revisit-triggers.es.md",
+        "sha256": "272013ee39d24e3e10c8fcf264f5a401d6bf83ec4b9bc646fe5f301d6bdd5122"
+      },
+      {
+        "path": "streeling/courses/futurology/fr/fut-003-agent-substitution-readiness-drill.fr.md",
+        "sha256": "9f90aa9c4480c36389db35e83814073cc71262a5b573220d747c208fca4b790b"
+      },
+      {
+        "path": "streeling/courses/futurology/es/fut-003-agent-substitution-readiness-drill.es.md",
+        "sha256": "857fdb6249683967c7b2e96e16b9f61ba90058335967dc1548f18d5b633c4879"
+      },
+      {
+        "path": "streeling/courses/musicology/fr/mcl-003-style-labels-as-evidence.fr.md",
+        "sha256": "9b0122d34959a3e68c8d4ac4341124b2167115037a54de050e2a89e112b24b12"
+      },
+      {
+        "path": "streeling/courses/musicology/es/mcl-003-style-labels-as-evidence.es.md",
+        "sha256": "d705987fd19f6a06eb5a6047c3446ff8af7eb3188de86f4509a0d05a39768313"
+      },
+      {
+        "path": "streeling/courses/philosophy/fr/phi-002-when-is-an-advisory-decision-justified.fr.md",
+        "sha256": "aa8e30f07e9cf506afa844d75a5115a48eff087016658b7c19d666452f20c63f"
+      },
+      {
+        "path": "streeling/courses/philosophy/es/phi-002-when-is-an-advisory-decision-justified.es.md",
+        "sha256": "51007a35a7ffbe13b34b0543d88049c154114b55db079db3025b7b6d474b1480"
+      },
+      {
+        "path": "streeling/courses/philosophy/fr/phi-003-what-does-the-same-chord-mean.fr.md",
+        "sha256": "9807e4c7374298b7d0cc03acbcc534078a7adef647b84f9452c55190885e9cdc"
+      },
+      {
+        "path": "streeling/courses/philosophy/es/phi-003-what-does-the-same-chord-mean.es.md",
+        "sha256": "d47b5cc87a4254a4a30b05cb406e6c8ec5cc1cc9786ed8ebfe47f676ea292d30"
+      },
+      {
+        "path": "streeling/courses/physics/fr/phy-004-velocity-pick-position-guitar-engine.fr.md",
+        "sha256": "0a3911293f176a31ce27086fc98a4ed7e735532e4b81fc7be069dfdc9f3b37f9"
+      },
+      {
+        "path": "streeling/courses/physics/es/phy-004-velocity-pick-position-guitar-engine.es.md",
+        "sha256": "5c798af4e79f6837acb4388bf08a5ab3c69e6d1f643849d617f4ff5136320b8f"
+      },
+      {
+        "path": "streeling/courses/product-management/fr/pm-004-craft-extension-release-decision.fr.md",
+        "sha256": "6812178a95407ae911ec02f9943c111437d9a87b4bd057f8aed80642197c76cc"
+      },
+      {
+        "path": "streeling/courses/product-management/es/pm-004-craft-extension-release-decision.es.md",
+        "sha256": "1ab49121e554950f8b2033d6159f6f2feef0c5f141b23361fede564a31743b98"
+      },
+      {
+        "path": "streeling/courses/semiotics/fr/sem-002-chord-symbols-and-canonicalization.fr.md",
+        "sha256": "c220afca797bb40ef5fb06934c96b96199557324d1a7f5944f5e0e55df61a63d"
+      },
+      {
+        "path": "streeling/courses/semiotics/es/sem-002-chord-symbols-and-canonicalization.es.md",
+        "sha256": "5494ed19ee57fc61fcdc8a6b2ed76af8439b48ac6a566f1db3ae2fd82164666e"
+      },
+      {
+        "path": "streeling/courses/visual-computing/fr/vc-003-jitter-and-voicing-cloud-distance.fr.md",
+        "sha256": "92758950599d6a4f66428a6e7508296cb2f2df1efa83c98f11ad990020aef601"
+      },
+      {
+        "path": "streeling/courses/visual-computing/es/vc-003-jitter-and-voicing-cloud-distance.es.md",
+        "sha256": "d658e3c159f4cdbd6b75514cb141cdc81c18a1973c36a4188833d5e3feb55c86"
+      },
+      {
+        "path": "streeling/courses/visual-computing/fr/vc-006-origami-fold-state-scene-trial.fr.md",
+        "sha256": "52d0375bb95679de3aba8b9c8a0ce8910608f90849f0c4708bab77a24a45f588"
+      },
+      {
+        "path": "streeling/courses/visual-computing/es/vc-006-origami-fold-state-scene-trial.es.md",
+        "sha256": "fc0b21d52dcc693529a7af90d26121ac4098aeda50412d2c84ee07c20b130174"
+      }
+    ],
+    "chronology_update": {
+      "status": "No actionable findings in final chronology delta",
+      "scope": "39 source notes and refreshed hashes only; no whole-body re-review",
+      "source_note_only_proof": "Replacing each new locale note with the previously audited note reproduces all 39 previous whole-file SHA256 values exactly.",
+      "packet_hash_only_proof": "Replacing the 13 refreshed course hashes with their previous values reproduces the previously audited learner packet and rubric SHA256 values exactly. Prompts, answers, stimuli and 18 primary-source URLs are unchanged.",
+      "reconstruction": "19/19 archive transformations reconstruct; 20/20 English/translation/pre-note bindings match; 39/39 locale hashes and notes match; 13/13 packet source hashes and stimuli match.",
+      "localized_meaning": "EN/FR/ES explicitly identify pending draft translations as historical, name the current translation drafts and transfer, and retain pending human subject/fluent-language/learner review. They do not say current drafts are absent or approved.",
+      "notes": {
+        "en": "> **Archive and transfer scope.** The technical text below comes from an archived draft. Historical statements about pending draft translations or an absent Learn import or build refer to that earlier stage; this [transfer record](../../../../code/streeling/evidence/representation-release-2026-10-22/README.md) records the current translation drafts, import and checks. Other unexecuted-experiment boundaries remain in force. Human subject, fluent-language and learner reviews remain pending.\n\n",
+        "fr": "> **Périmètre de la source et du transfert.** Le texte technique ci-dessous provient d’un brouillon archivé. Les mentions historiques de traductions encore à rédiger, d’une absence d’importation ou de compilation dans Learn concernent cette étape antérieure ; ce [dossier de transfert](../../../../code/streeling/evidence/representation-release-2026-10-22/README.md) décrit les brouillons de traduction actuels, l’importation et ses vérifications. Les autres expériences indiquées comme non réalisées le restent. Les revues humaines du contenu et de la langue, ainsi que l’essai avec un apprenant, restent à effectuer.\n\n",
+        "es": "> **Alcance de la fuente y la transferencia.** El texto técnico siguiente procede de un borrador archivado. Las menciones históricas de traducciones todavía no redactadas, de una importación o compilación pendiente en Learn corresponden a aquella etapa; este [registro de transferencia](../../../../code/streeling/evidence/representation-release-2026-10-22/README.md) documenta los borradores traducidos actuales, la importación y sus comprobaciones. Las demás experiencias indicadas como no realizadas siguen pendientes. Aún faltan la revisión humana del contenido y del idioma, y la prueba con un estudiante.\n\n"
+      },
+      "previous_artifact_sha256": {
+        "import.json": "94be7374a69026f1398478c1f95ddba4e76db27b54022b9fba84c4a0cd3290a3",
+        "locale-checks.json": "b5fde74e7f4c79d0ef5936a3d6ccf280d307a34e943fa0e1144cb3dae2410c11",
+        "learner-tasks.md": "675d669ce7b58d2aa78aac0d26cd06aff06cef81133ae84ed85dc7d405d741d9",
+        "review-rubric.json": "41dea5b8b66eaaff705f43459c90a4001eba717607b32afda8f984175ac5cc2c",
+        "phi002-schema-replay.json": "04d4924afcbb84c3bf2e1be34bb6b6a5faf27b837a21a26b05617afbe064e2ef"
+      },
+      "formal_review": false,
+      "human_approval": false
+    }
+  }
+}

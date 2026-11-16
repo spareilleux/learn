@@ -1,0 +1,358 @@
+{
+  "checked_at_utc": "2026-10-25T17:01:58.788702+00:00",
+  "source_catalog_base": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+  "plan_commit": "f93c0356d23c3700ad1ead501eef46802dca2a31",
+  "source_freeze_commit": "1807c1fa2858c3af98e296f1c24f3efb75a477a0",
+  "scope": "Fifty distinct project-useful courses with full EN/FR/ES sources; fixed authored cases and independent AI review. No new production engine, scene, material, listening or learner acceptance.",
+  "new_english_modules": 50,
+  "new_translations": 100,
+  "canonical_sources": 150,
+  "localized_exercise_answer_pairs": 750,
+  "prepared_learner_criteria": 250,
+  "independent_review": {
+    "a": {
+      "courses": 18,
+      "localized_sources": 54,
+      "exercise_answer_pairs": 270,
+      "learner_criteria": 90,
+      "model_control_checks": 36,
+      "receipt": "review-a.json",
+      "receipt_sha256": "fa8afcca05fc18d7c9cfb496735e3a889e65ea9f91c9be7b1a797ad4af49ea75"
+    },
+    "b": {
+      "courses": 16,
+      "localized_sources": 48,
+      "exercise_answer_pairs": 240,
+      "learner_criteria": 80,
+      "model_control_checks": 32,
+      "receipt": "review-b.json",
+      "receipt_sha256": "5f5a5dadfa5f52e9404525ea36d959e17b51dda32ced285726a97d92a62ff96c"
+    },
+    "c": {
+      "courses": 16,
+      "localized_sources": 48,
+      "exercise_answer_pairs": 240,
+      "learner_criteria": 80,
+      "model_control_checks": 32,
+      "receipt": "review-c.json",
+      "receipt_sha256": "ad408ed6227c6d1df566d50ea8e997ef911d42eb8669a9359e65bb40a96eae5a"
+    }
+  },
+  "independent_model_control_checks": 100,
+  "claim_tests": {
+    "receipt": "test-runs/integrated-after-operation-fix.json",
+    "receipt_sha256": "7dd8bed725f05ad3d53e8dac02591ae9bf7b096c70faadb1ce670aa51863f22d",
+    "tests": 50,
+    "observations": 100,
+    "complete_coverage": true
+  },
+  "metadata_tests": {
+    "receipt": "test-runs/metadata-final.json",
+    "receipt_sha256": "b4880a2093e30b045bd2cea74de02ce22ce67c03e9cdb9e6b07b1d17196d4b58",
+    "passed": 150,
+    "failed": 0
+  },
+  "test_code_review": {
+    "status": "complete",
+    "verdict": "pass",
+    "open_findings": [],
+    "review_receipt": {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/review.json",
+      "sha256": "d975023e695e33fbd930891a8b3c3c8468264ce39aa258ab4eb3cb4ed94b9e00"
+    },
+    "original_needs_fixes_summary": {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/final-test-code-review-summary.json",
+      "sha256": "ce5a92559f4408857d97974e4a4918e9fd2bac48abdba64f18cf5b02425edabd"
+    },
+    "finding_resolutions": [
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/finding-resolution.json",
+        "sha256": "24d347dd00c79f866427ea88b0d67103ebee3502acb72951048389a26f0c15f1"
+      }
+    ],
+    "test_bindings": [
+      {
+        "path": "code/streeling/evidence/batch50-2026-10-25/tests/test_course_metadata.mjs",
+        "sha256": "d647cc7c3b9c4dedc988d0de021401522620e6c564a1239f0666470a36a36535"
+      },
+      {
+        "path": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py",
+        "sha256": "28a5208287cc54c383be878e73593d965b1613463ad03590d50e3545cf8aa374"
+      },
+      {
+        "path": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_b.py",
+        "sha256": "77350c60d915ab48b6977b73ed098160baab073df8c0432f3ccff65829a387ef"
+      },
+      {
+        "path": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_c.py",
+        "sha256": "973b9e0f91887e5cfc20f96bc06c6280e077e3787160cad24bb9c25c9c342bc6"
+      }
+    ],
+    "retained_review_artifacts": [
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/adversarial.json",
+        "sha256": "b81be7a0161ca4421f02af19887a17a6c55d14aa18ab4cf1772873ca20cd9e89"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/binding-verification.json",
+        "sha256": "b6f5387c9ea0542923844be6991f13f4a97a0da7e4fbbeb4c9a3bcce76565c5f"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/correctness.json",
+        "sha256": "a471ba991c2205e8f4cd36abac0996f7e06ec0c72529973a41be4802423e38f2"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/criteria-candidates.txt",
+        "sha256": "0b2daaf939459036db9814bbbdfd52f594d2653bdc7e2535081a6ce19f4c6b48"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/excluded-untracked.txt",
+        "sha256": "0c60d397f5041668f3a158e6fb25a86e3178317d9476366089877638a300a378"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/files.txt",
+        "sha256": "5fd2cdf1c62dbad89f4ca4e3a1d1df3b1f9f2a6383d1c9ed865c48598a40d622"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/final-test-code-review-summary.json",
+        "sha256": "ce5a92559f4408857d97974e4a4918e9fd2bac48abdba64f18cf5b02425edabd"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/finding-1-fix.diff",
+        "sha256": "3cb822badc35eb5c5c9e0ab47dafc22eb1866f94373ad63c0acca8f700245cc1"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/finding-1-verification.json",
+        "sha256": "03204e03dcaf58a1f4a49329287ff26505b4d63d7a3eb205e83e08bd53b71a65"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/finding-resolution.json",
+        "sha256": "24d347dd00c79f866427ea88b0d67103ebee3502acb72951048389a26f0c15f1"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/integrated-after-operation-fix.json",
+        "sha256": "7dd8bed725f05ad3d53e8dac02591ae9bf7b096c70faadb1ce670aa51863f22d"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/integrated-after-operation-fix.log",
+        "sha256": "f04a6ac847c92f76778f323df404d56d4de5655df1683771f657836633682eb9"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/integrated-final.json",
+        "sha256": "de678c60a5aa91bc2d942fc0e0ea907e3e426ea0ed95c56eee121421196b0c39"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/integrated-final.log",
+        "sha256": "9a52a0ebd5d3d5086ac90d4416368d8c4dcd7bcf9626c8f5e9e30ed0889a13d4"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/intent.txt",
+        "sha256": "6757832a2afbb63b20c9a433f5e4dbce506296ffa188444dc538b7366043b557"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/metadata-final.json",
+        "sha256": "b4880a2093e30b045bd2cea74de02ce22ce67c03e9cdb9e6b07b1d17196d4b58"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/metadata-final.log",
+        "sha256": "11208fbc27540e695e0e0d707febf48f7118931e276a59f556a610dcca013b41"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/metadata.json",
+        "sha256": "08c8964b2373b3920c8eee70c75bc471304c4064e908c961c824fe654246cf89"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/operation-enum-probe.json",
+        "sha256": "e4812aed2b00ca4fcb0e4a3bed44e4df48b5230e1f3166d1ad1f73d9e34d05cf"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/operation-enum-probe.log",
+        "sha256": "75b553fdb6d071cd23fd64a68e7cc19233c5a2de11e47262a4380eb2a5701b45"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/operations-after-fix.json",
+        "sha256": "420204fd531e0c3686fd2b08e90aab0f08428e5446337e1ee2dbd0039e8c46cd"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/operations-after-fix.log",
+        "sha256": "c07a779185835de426058f57278c7e1fc6f2249d1dc5c791571855d0f0a22b16"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/operations-before-fix.json",
+        "sha256": "816d5981e1aab62533720e3dfa1a8df66c6960928211ab6f7b787328513149ba"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/operations-before-fix.log",
+        "sha256": "46c72b3cdc7fe3ed4ecb9ee569bf34606d566a2f183d391c891b44a9e6ed62ce"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/operations-root-probe.py",
+        "sha256": "631adb79f14302762586afe2fe266340764c2c6e90fbfb87598efafbb6eff4c0"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/peer-scope-outcome.json",
+        "sha256": "0c975255dffc555b221de836b8743a4b125d65a4de30fc0c72d974735baba8f4"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/raw-returns.json",
+        "sha256": "aa106f811076071552c33463dabc39f600187687f3bccb45e27887e3ac18aa84"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/retained-review-artifacts.json",
+        "sha256": "0a70f28bf5a31804c2291a19781a661024426dff7500b175f45cc5eb7cef4e05"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/review.diff",
+        "sha256": "b2dd1c8f69e5b2563ec646fc6d8d5e49cee3ce03cc673df05244fc44e0f03061"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/review.json",
+        "sha256": "d975023e695e33fbd930891a8b3c3c8468264ce39aa258ab4eb3cb4ed94b9e00"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/reviewer-selection.json",
+        "sha256": "8d991731fb9e93e282bab5fd034042263f3cc4c23fbcf7d11380227274700979"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/scope-map.json",
+        "sha256": "280f213e397e098d46cb460a823f10cf624de525e33c9f386ec42ca1953d45db"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/scope-signals.json",
+        "sha256": "7c7e47e0476866897d0f22748959e8c043d7c0ae8c14b40dd29150c3f0f640aa"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/stages.jsonl",
+        "sha256": "bf4a2264ff815b3af859933dc672c31f43d7c09c90433978705b6ab2994f44b4"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/test-bindings.json",
+        "sha256": "489f0714bddab71831f1f07f45a5df8bb95350bfb902a27108f8b724eb7ab675"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/verified-authoritative-receipts.json",
+        "sha256": "64d478775f098fe8207b5ba455646bd53d343c158a7addbb7ef83c3784a9c249"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/verify-finding-1-resolution.py",
+        "sha256": "59e59ba6b78654562907d185ab88982325b902a291cd849ab43327f140dbe9bc"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/verify-review-evidence.py",
+        "sha256": "7574e33e20ab285612ec06ff1ec988f279e65aaa6681a5fbea415b91e8ab9f88"
+      }
+    ],
+    "raw_output_logs": [
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/integrated-after-operation-fix.log",
+        "sha256": "f04a6ac847c92f76778f323df404d56d4de5655df1683771f657836633682eb9"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/integrated-final.log",
+        "sha256": "9a52a0ebd5d3d5086ac90d4416368d8c4dcd7bcf9626c8f5e9e30ed0889a13d4"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/metadata-final.log",
+        "sha256": "11208fbc27540e695e0e0d707febf48f7118931e276a59f556a610dcca013b41"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/operation-enum-probe.log",
+        "sha256": "75b553fdb6d071cd23fd64a68e7cc19233c5a2de11e47262a4380eb2a5701b45"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/operations-after-fix.log",
+        "sha256": "c07a779185835de426058f57278c7e1fc6f2249d1dc5c791571855d0f0a22b16"
+      },
+      {
+        "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/operations-before-fix.log",
+        "sha256": "46c72b3cdc7fe3ed4ecb9ee569bf34606d566a2f183d391c891b44a9e6ed62ce"
+      }
+    ],
+    "verification_type": "Independent focused verification of finding 1 fix; not a fresh full review or CE run",
+    "coverage_limits": "Operation enum guards and explicit subtract dispatch only; authored fixed cases only. No production, human or learner validation. No new test execution was needed; retained same-helper red/green receipts were inspected and byte verified.",
+    "run_id": "20261025-proof-tests-aec2e042",
+    "artifact_path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042"
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 19.763235199963674,
+    "log": "C:\\tmp\\streeling-batch50-tests-20261025-next.log",
+    "log_sha256": "8f3fffa5b13fb7fc332e9d5a12c87369076f39af518956e91ef4d756f124e8e8",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 3.370121400046628,
+    "log": "C:\\tmp\\streeling-batch50-sync-20261025-next.log",
+    "log_sha256": "a9bfe31f886aab544e24c000a03a83e4218d8363025f7ae9ffe411b882a53e32",
+    "idempotent_checked_files": 1220
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 139.3269156999886,
+    "log": "C:\\tmp\\streeling-batch50-build-20261025-next.log",
+    "log_sha256": "7c0440f14530db3c6045cd8ca94a809a369159965522fb4f7e7ad2ac7bb6edc2",
+    "pages": 2416,
+    "dependency_install": "None; existing complete matching-lock dependency tree."
+  },
+  "rendered_articles": {
+    "pages": 210,
+    "article_links": 4794,
+    "source_banners": 150,
+    "unresolved_internal_links": [],
+    "missing_controls_detected": true,
+    "scope": "Built static HTML, not interactive browser or public deployment."
+  },
+  "official_link_transport": {
+    "urls": 42,
+    "direct_failures_retained": 0,
+    "official_body_read_fallbacks": 0,
+    "actual_reading": "Per-unit author and independent-review records; not inferred from status200."
+  },
+  "source_inventory": {
+    "core_english_modules": 381,
+    "target": 525,
+    "remaining_core_source_gaps": 144,
+    "locale_counts": {
+      "en": 382,
+      "fr": 382,
+      "es": 382
+    }
+  },
+  "protected_files_unchanged": [
+    "streeling/source.json"
+  ],
+  "journal_history_preserved": true,
+  "human_technical": null,
+  "artisan_musician": null,
+  "fluent_language": null,
+  "learner_attempts": null,
+  "new_native_runtime": null,
+  "new_scene_runtime": null,
+  "physical_material_trial": null,
+  "listening_trial": null,
+  "new_DSL": null,
+  "public_course_html_readback": null,
+  "lint_typecheck": "No configured package lint/typecheck script; generator regressions and Astro build used."
+}

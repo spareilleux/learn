@@ -1,0 +1,177 @@
+# l16
+
+== Drop voicings of Cmaj7 under B, built from the definition: the course names each one back, GA's VoicingHarmonicAnalyzer.Analyze labels it (GA.Domain.Services, compiled)
+dropped              notes, low to high   spread  course               DropVoicing  IsRootless  IsOpenVoicing  tags (ChordClassificationEngine)
+close                C5 E5 G5 B5          11      close                Drop-2       False       False          closed-voicing drop-2-voicings
+drop-2               G4 C5 E5 B5          16      drop-2               Drop-2       True        False          rootless closed-voicing drop-2-voicings
+drop-3               E4 C5 G5 B5          19      drop-3               Drop-2       True        False          rootless closed-voicing drop-2-voicings
+drop-4               C4 E5 G5 B5          23      drop-4               Drop-2       True        False          rootless closed-voicing drop-2-voicings
+drop-2-and-3         E4 G4 C5 B5          19      drop-2-and-3         (none)       True        False          rootless closed-voicing
+drop-2-and-4         C4 G4 E5 B5          23      drop-2-and-4         (none)       True        False          rootless closed-voicing
+drop-3-and-4         C4 E4 G5 B5          23      drop-3-and-4         (none)       True        False          rootless closed-voicing
+drop-2-and-3-and-4   C4 E4 G4 B5          23      drop-2-and-3-and-4   (none)       True        False          rootless closed-voicing
+
+== All 128: four seventh chords on C × four close positions (one per top note) × eight sets of dropped voices
+dropped              voicings  course right  "Drop-2"  (none)  other  IsRootless  IsOpenVoicing  with the root
+close                16        16            16        0       0      0           0              16
+drop-2               16        16            16        0       0      16          0              16
+drop-3               16        16            16        0       0      16          0              16
+drop-4               16        16            16        0       0      16          0              16
+drop-2-and-3         16        16            0         16      0      16          0              16
+drop-2-and-4         16        16            0         16      0      16          0              16
+drop-3-and-4         16        16            0         16      0      16          0              16
+drop-2-and-3-and-4   16        16            0         16      0      16          0              16
+all                  128       128           64        64      0      112         0              128
+GA says "Drop-2" exactly when at most one voice is dropped: True
+
+== Wikipedia's examples, rebuilt by the course and read down from the top, with GA's label
+Wikipedia  course     check  DropVoicing
+-- drop-2 voicings of the C major triad
+C E G      C E G      ok     (none)
+G C E      G C E      ok     (none)
+E G C      E G C      ok     (none)
+-- drop-2-and-4 voicings of G7
+G D F B    G D F B    ok     (none)
+B F G D    B F G D    ok     (none)
+D G B F    D G B F    ok     (none)
+F B D G    F B D G    ok     (none)
+
+== Guitar shapes through VoicingAnalyzer.Analyze (GA.Domain.Services, compiled): lesson 3's open chords, MUS-005's "Drop-2 Cmaj7" and a drop 2
+shape    chord  notes, low to high    spread  course               root  DropVoicing  IsRootless  IsOpenVoicing  tags (ChordClassificationEngine)
+x32010   C      C3 E3 G3 C4 E4        16      doubled, not named   yes   Drop-2       True        False          rootless closed-voicing drop-2-voicings shell-voicing
+032010   C/E    E2 C3 E3 G3 C4 E4     24      doubled, not named   yes   (none)       True        False          rootless closed-voicing shell-voicing
+x02210   Am     A2 E3 A3 C4 E4        19      doubled, not named   yes   Drop-2       True        False          rootless closed-voicing drop-2-voicings shell-voicing
+022100   E      E2 B2 E3 A♭3 B3 E4    24      doubled, not named   yes   (none)       True        False          rootless closed-voicing shell-voicing
+320003   G      G2 B2 D3 G3 B3 G4     24      doubled, not named   yes   (none)       True        False          rootless closed-voicing shell-voicing
+xx0232   D      D3 A3 D4 F♯4          16      doubled, not named   yes   Drop-2       True        False          rootless closed-voicing drop-2-voicings shell-voicing
+133211   F      F2 C3 F3 A3 C4 F4     24      doubled, not named   yes   (none)       True        False          rootless closed-voicing shell-voicing
+x3200x   Cmaj7  C3 E3 G3 B3           11      close                yes   Drop-2       False       False          closed-voicing drop-2-voicings
+x3545x   Cmaj7  C3 G3 B3 E4           16      drop-2               yes   Drop-2       True        False          rootless closed-voicing drop-2-voicings
+
+== Shells, root, third and seventh on MUS-005's Freddie Green strings, then the shapes above: three rules that name a shell
+shape    chord  degrees, low to high  spread  IsRootless  ShellFamily      physical tag  engine tag    ShellVoicings filter
+3x34xx   G7     1 ♭7 3                16      True        3-4 note shell   shell-voicing shell-voicing True
+3x44xx   Gmaj7  1 7 3                 16      True        3-4 note shell   shell-voicing shell-voicing True
+3x33xx   Gm7    1 ♭7 ♭3               15      True        3-4 note shell   shell-voicing shell-voicing True
+x323xx   C7     1 3 ♭7                10      False       3-4 note shell   shell-voicing -             False
+x324xx   Cmaj7  1 3 7                 11      False       3-4 note shell   shell-voicing -             False
+x313xx   Cm7    1 ♭3 ♭7               10      False       3-4 note shell   shell-voicing -             False
+x32010   C      1 3 5 1 3             16      True        (none)           -             shell-voicing False
+032010   C/E    3 1 3 5 1 3           24      True        (none)           -             shell-voicing False
+x02210   Am     1 5 1 ♭3 5            19      True        (none)           -             shell-voicing False
+022100   E      1 5 1 3 5 1           24      True        (none)           -             shell-voicing False
+320003   G      1 3 5 1 3 1           24      True        (none)           -             shell-voicing False
+xx0232   D      1 5 1 3               16      True        3-4 note shell   shell-voicing shell-voicing False
+133211   F      1 5 1 3 5 1           24      True        (none)           -             shell-voicing False
+x3200x   Cmaj7  1 3 5 7               11      False       3-4 note shell   shell-voicing -             False
+x3545x   Cmaj7  1 5 7 3               16      True        3-4 note shell   shell-voicing -             False
+
+== VoicingGenerator.GenerateAllVoicings (GA.Domain.Services, compiled) on GA's standard guitar, run in sequence
+                       course       GA           check
+voicings               667125       667125       ok
+the course: 21 windows × 46625 − 20 shared × 15600
+
+== Those that play the four notes of a seventh chord on C on four strings: the course's name against GA's label
+voicings: 687
+course               voicings  "Drop-2"  (none)  other
+close                15        15        0       0
+drop-2               111       111       0       0
+drop-3               92        92        0       0
+drop-4               46        46        0       0
+drop-2-and-3         78        0         78      0
+drop-2-and-4         143       0         143     0
+drop-3-and-4         39        0         39      0
+drop-2-and-3-and-4   22        0         22      0
+beyond drop-n        141       0         141     0
+named otherwise: 0
+GA says "Drop-2" exactly on the course's close, drop-2, drop-3 and drop-4 voicings: True
+
+== The string sets of the drop-2 voicings found
+  6-5-4-3: 28
+  6-5-4-2: 5
+  6-4-3-2: 2
+  5-4-3-2: 31
+  5-4-3-1: 8
+  5-3-2-1: 5
+  4-3-2-1: 32
+
+== MUS-005's shapes: quality × inversion (the chord tone in the bass) × string set, found among GA's voicings
+  drop-2 on 6-5-4-3, 5-4-3-2, 4-3-2-1: 48 of 48 shapes, the widest spans 4 frets
+  drop-3 on 6-4-3-2, 5-3-2-1: 32 of 32 shapes, the widest spans 4 frets
+
+== Cmaj7 in each inversion: the lowest drop-2 on strings 5-4-3-2 and the lowest drop-3 on strings 6-4-3-2, written from string 6
+bass  drop-2, 5-4-3-2        drop-3, 6-4-3-2
+1     x-3-5-4-5-x C G B E    8-x-9-9-8-x C B E G
+3     x-7-9-5-8-x E B C G    12-x-10-12-12-x E C G B
+5     x-10-10-9-12-x G C E B 3-x-2-4-1-x G E B C
+7     x-2-2-0-1-x B E G C    7-x-5-5-5-x B G C E
+
+== VoicingFilters.MatchesCriteria (GA.Domain.Services, compiled) on these voicings, one VoicingTypeFilter at a time, against what each name means to the course
+filter          course   GA       check
+Drop2           111      264      DIFF
+Drop3           92       0        DIFF
+Drop2And4       143      0        DIFF
+Rootless        0        672      DIFF
+ShellVoicings   0        0        ok
+ClosedPosition  15       687      DIFF
+OpenPosition    672      0        DIFF
+course: Rootless, no C; ShellVoicings, root, third and seventh alone; ClosedPosition, close; OpenPosition, the others
+GA's Drop2 keeps exactly the course's close, drop-2, drop-3 and drop-4 voicings: True
+GA's Rootless keeps exactly those spread over more than an octave: True
+ShellFamily "3-4 note shell" on all of them: True
+
+== Guide tones in GA's TransposeTables (ChordProgressions.yaml): third and seventh of each chord, and the four moves of a ii–V–I
+-- ii–V–I (Major) — 12 keys
+key  chords               thirds     sevenths   line 1     line 2     moves
+C    Dm7 G7 Cmaj7         F B E      C F B      F F E      C B B      ok
+Db   Ebm7 Ab7 Dbmaj7      Gb C F     Db Gb C    Gb Gb F    Db C C     ok
+D    Em7 A7 Dmaj7         G C# F#    D G C#     G G F#     D C# C#    ok
+Eb   Fm7 Bb7 Ebmaj7       Ab D G     Eb Ab D    Ab Ab G    Eb D D     ok
+E    F#m7 B7 Emaj7        A D# G#    E A D#     A A G#     E D# D#    ok
+F    Gm7 C7 Fmaj7         Bb E A     F Bb E     Bb Bb A    F E E      ok
+Gb   Abm7 Db7 Gbmaj7      Cb F Bb    Gb Cb F    Cb Cb Bb   Gb F F     ok
+G    Am7 D7 Gmaj7         C F# B     G C F#     C C B      G F# F#    ok
+Ab   Bbm7 Eb7 Abmaj7      Db G C     Ab Db G    Db Db C    Ab G G     ok
+A    Bm7 E7 Amaj7         D G# C#    A D G#     D D C#     A G# G#    ok
+Bb   Cm7 F7 Bbmaj7        Eb A D     Bb Eb A    Eb Eb D    Bb A A     ok
+B    C#m7 F#7 Bmaj7       E A# D#    B E A#     E E D#     B A# A#    ok
+rows with the four moves: 12 of 12
+
+== GA's tone inventory: every MusicalVoicingAnalysis of this lesson, from VoicingAnalyzer.AnalyzeEnhanced
+  analyses: 711; HasGuideTones true: 0; Tones not empty: 0; OmittedTones not empty: 0
+
+== GA's GuitarCompingRecipes (ChordProgressions.yaml) through YamlKnowledgeLoader (GA.Business.Config, compiled)
+  36 entries from ChordProgressions.yaml
+  ii–V–I (Major) — Rootless Drop-2 set: an entry with 3 of its 3 fingerings
+  iiø–V–i (Minor) — Rootless Drop-2 set: an entry with 3 of its 3 fingerings
+  12-Bar Blues — Guide-tone shells: an entry with 0 of its 0 fingerings
+  Pop Loop I–V–vi–IV — Triad + 2/9 color: an entry with 4 of its 4 fingerings
+  Mixolydian Rock I–bVII–IV — Quartal/Power: an entry with 3 of its 3 fingerings
+  So What Vamp — Quartal planing: an entry with 2 of its 2 fingerings
+
+== Each fingering read low to high on its string set, standard tuning (the file's conventions, line 464); the notes of its name and degree order
+strings  fingering                    notes, low to high   intervals   name's notes  degree order's notes
+-- ii–V–I (Major) — Rootless Drop-2 set
+6-4-3-2  Dm9: x-5-5-5                 G C E                5 4         no            no
+6-4-3-2  G7(13,#9): x-5-4-6           G B F                4 6         no            no
+6 to 2*  Cmaj9: 8-x-9-9-10            C B E A              11 5 5      no            no
+-- iiø–V–i (Minor) — Rootless Drop-2 set
+5-4-3-2  Dm7b5(11): 5-6-5-6           D A♭ C F             6 4 5       no            no
+5-4-3-2  G7(b9,#9): 5-4-5-5           D F♯ C E             4 6 4       no            no
+5-4-3-2  Cm(maj9): 3-5-4-5            C G B E              7 4 5       no            no
+-- 12-Bar Blues — Guide-tone shells
+-- Pop Loop I–V–vi–IV — Triad + 2/9 color
+5-4-3-2  G(add9): 10-12-12-10         G D G A              7 5 2       no            -
+5-4-3-2  D(add9)/A: 12-11-11-12       A C♯ F♯ B            4 5 5       no            -
+5-4-3-2  Em(add9): 7-9-9-7            E B E F♯             7 5 2       no            -
+5-4-3-2  C(add9)/G: 10-10-9-10        G C E A              5 4 5       no            -
+-- Mixolydian Rock I–bVII–IV — Quartal/Power
+6-5-4-3  A5(add2): 5-7-7-7            A E A D              7 5 5       no            -
+6-5-4-3  Gsus2: 3-5-5-5               G D G C              7 5 5       no            -
+6-5-4-3  Dsus2/F#: 2-5-7-7            F♯ D A D             8 7 5       no            -
+-- So What Vamp — Quartal planing
+5-4-3-2  Dm11: 5-7-9-10               D A E A              7 7 5       no            -
+5-4-3-2  Ebm11: 6-8-10-11             E♭ B♭ F B♭           7 7 5       no            -
+  * five frets for a four-string set: read from string 6 to string 2
+-- 12-Bar Blues — Guide-tone shells, E7: 7th on D string, 3rd on G string
+  the seventh of E7, D: fret 0 of string 4 (D); the third, G♯: fret 1 of string 3 (G)

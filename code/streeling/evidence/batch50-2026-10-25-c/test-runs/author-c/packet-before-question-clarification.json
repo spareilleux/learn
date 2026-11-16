@@ -1,0 +1,2905 @@
+{
+  "schema": "streeling-course-author-unit/1",
+  "unit": "c",
+  "base_learn_commit": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+  "plan_commit": "d687c942ccb1be716375280d112744dcc89cf920",
+  "scope": "Sixteen new craft/scene/interpretation source courses and full FR/ES prose. Authored finite cases; behavior_changed=false. No production engine, DSL, API or learner claim.",
+  "primary_references": [
+    {
+      "id": "math",
+      "url": "https://docs.python.org/3/library/math.html",
+      "version_and_reading_scope": "Python 3.15.1 documentation banner, read 2026-10-26; Actual rendered lines 259-296 and 318-327: exponential, natural logarithm, log1p and finite Euclidean distance. The finite scenario/optimization/edit/ratio constructions are authored derivations, not documented production capabilities.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "stack",
+      "url": "https://d3js.org/d3-shape/stack",
+      "version_and_reading_scope": "D3 documentation 7.9.0 banner, read 2026-10-26; Actual rendered lines 245-248 and 308-334: stacking supplies lower/upper interval positions and their difference carries the layer value. No D3 installation or chart execution.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "wcag",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
+      "version_and_reading_scope": "WCAG 2.2 Understanding SC 1.4.3, read 2026-10-26; Actual rendered lines 32-39, 61-65 and 204-228: text threshold, unrounded comparison, lighter/darker relative-luminance ratio and specified background. No complete conformance assessment.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "combinations",
+      "url": "https://docs.python.org/3/library/itertools.html#itertools.combinations",
+      "version_and_reading_scope": "Python 3.15.1 documentation banner, read 2026-10-26; Actual rendered lines 142-150: finite combinations and lexicographic ordering relative to input order. Objective functions and craft/practice meanings are authored; no production solver run.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "kleene",
+      "url": "https://plato.stanford.edu/entries/logic-manyvalued/",
+      "version_and_reading_scope": "Stanford Encyclopedia of Philosophy, substantive revision 2026-09-29, read 2026-10-26; Actual rendered lines 123-155: strong Kleene minimum/maximum/negation tables and unknown interpretation. This is the entry authors own expository account, not an inspected original Kleene monograph.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "defaults",
+      "url": "https://plato.stanford.edu/entries/logic-nonmonotonic/",
+      "version_and_reading_scope": "Stanford Encyclopedia of Philosophy, substantive revision 2024-11-23, read 2026-10-26; Actual rendered lines 12-17, 38-40 and 208-228: defeasible retraction, default consistency and extension caveats. Lesson restricts itself to one consistent normal default; no general construction algorithm claimed.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "dung",
+      "url": "https://cse-robotics.engr.tamu.edu/dshell/cs631/papers/dung95acceptability.pdf",
+      "version_and_reading_scope": "Dung, Artificial Intelligence 77 (1995) 321-357, read 2026-10-26; Actual extracted PDF page 5 lines 207-224 and page 8 lines 293-316: acceptable means defended against every attack; characteristic operator and grounded least fixed point. Original paper hosted by a university; no claims from uninspected later proofs.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "provenance",
+      "url": "https://www.cs.ucdavis.edu/~green/papers/pods07.pdf",
+      "version_and_reading_scope": "Green, Karvounarakis and Tannen, PODS 2007, read 2026-10-26; Actual extracted PDF page 3 lines 350-405: how-provenance, natural-coefficient polynomials and valuation. W3C PROV abstract was separately read as background only; not the polynomial semantics.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "copy",
+      "url": "https://docs.python.org/3/library/copy.html",
+      "version_and_reading_scope": "Python 3.15.1 documentation banner, updated 2026-10-25, read 2026-10-26; Actual rendered lines 7 and 32-47: assignment versus copies, outer references, recursive copies, memo and limitations. New finite list graph is authored, not host-resource duplication.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    },
+    {
+      "id": "affine",
+      "url": "https://docs.godotengine.org/en/stable/classes/class_transform3d.html",
+      "version_and_reading_scope": "Godot stable Transform3D documentation, read 2026-10-26; Actual rendered lines 6-17 and 32-42: Basis and origin separate the linear part from translation. The page response did not expose an exact stable minor version; no such pin or Godot execution is claimed.",
+      "read_method": "Actual rendered or extracted source passage inspected; HTTP status alone is not reading",
+      "sha256": null
+    }
+  ],
+  "courses": [
+    {
+      "code": "DV023",
+      "department": "data-visualization",
+      "module_id": "dv-023-compress-signed-clearance-with-an-invertible-log-scale",
+      "title": "Compress Signed Clearance with an Invertible Log Scale",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-023-compress-signed-clearance-with-an-invertible-log-scale.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-023-compress-signed-clearance-with-an-invertible-log-scale.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-023-compress-signed-clearance-with-an-invertible-log-scale.es.md"
+      },
+      "novelty_vs_prerequisites": "DV014 preserves clearance sign on a linear axis; this adds an invertible nonlinear signed mapping and scale sensitivity, not another sign classification.",
+      "prerequisites": [
+        "dv-014-plot-signed-craft-clearance"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/data-visualization/en/dv-014-plot-signed-craft-clearance.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "7ec3a671d90b07a3ee78f05c3f2463fb7842a0976a70069ff598c32674b63eb3"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually read first 70 lines: declared frames, material color/roughness writes, object creation/parenting/location and primitive construction. No Blender execution or new timings.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://docs.python.org/3/library/math.html",
+          "pin": "Python 3.15.1 documentation banner, read 2026-10-26",
+          "scope": "Actual rendered lines 259-296 and 318-327: exponential, natural logarithm, log1p and finite Euclidean distance. The finite scenario/optimization/edit/ratio constructions are authored derivations, not documented production capabilities.",
+          "read_method": "Actual rendered or extracted primary passage as scoped",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "clearance": [
+            -3,
+            -1,
+            0,
+            1,
+            3
+          ],
+          "scale": 1
+        },
+        "formula": "y=sign(x)*log(1+abs(x)/scale), sign(0)=0; inverse=sign(y)*scale*(exp(abs(y))-1)",
+        "expected": {
+          "positions": [
+            -1.3862943611198906,
+            -0.6931471805599453,
+            0,
+            0.6931471805599453,
+            1.3862943611198906
+          ],
+          "roundtrip": [
+            -3,
+            -1,
+            0,
+            1,
+            3
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "clearance": [
+              -3,
+              -1,
+              0,
+              1,
+              3
+            ],
+            "scale": 3
+          },
+          "expected": {
+            "positions": [
+              -0.6931471805599453,
+              -0.28768207245178085,
+              0,
+              0.28768207245178085,
+              0.6931471805599453
+            ],
+            "roundtrip": [
+              -3,
+              -1,
+              0,
+              1,
+              3
+            ]
+          },
+          "why": "Changing only display scale changes spacing but preserves recoverable signed clearance."
+        },
+        "assumptions": [
+          "All inputs, identities, rule choices and expected quantities are authored finite teaching premises",
+          "Use only the explicit operation and domain declared in the lesson; no actual project or learner observation"
+        ],
+        "limits": [
+          "Positive scale and finite clearances only; no perceptual or engine validation.",
+          "No human, fluent-language, learner, native runtime, production or publication acceptance supplied"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the inputs and the operation that must be preserved.",
+          "expected_answer": "Use the signed inputs and a positive scale; preserve order and physical units.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the main result, retaining intermediate quantities.",
+          "expected_answer": "The displayed positions are the logarithmic results; the inverse recovers `[-3,-1,0,1,3]` within floating tolerance.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the interpretation trap that a summary could conceal.",
+          "expected_answer": "A compressed gap is not a smaller physical gap; equal visual steps do not imply equal raw differences.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-input control and compare the result.",
+          "expected_answer": "The control moves the outer marks to approximately `-0.6931471805599453` and `0.6931471805599453`, while the round trip is unchanged.",
+          "decision": null
+        },
+        "5": {
+          "question": "State the limit and the evidence needed before project adoption.",
+          "expected_answer": "No collision or perception experiment was run; keep geometry, units and display policy separate.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Identify the inputs and the operation that must be preserved. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the main result, retaining intermediate quantities. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain the interpretation trap that a summary could conceal. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-input control and compare the result. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: State the limit and the evidence needed before project adoption. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Sketch signed clearance positions for an Atlas crossing annotation, then invert them and compare the alternate display scale.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculation with corrected answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "DV024",
+      "department": "data-visualization",
+      "module_id": "dv-024-recover-layer-values-from-stacked-endpoints",
+      "title": "Recover Layer Values from Stacked Endpoints",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-024-recover-layer-values-from-stacked-endpoints.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-024-recover-layer-values-from-stacked-endpoints.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-024-recover-layer-values-from-stacked-endpoints.es.md"
+      },
+      "novelty_vs_prerequisites": "DV006 chooses encodings; this reconstructs offset layer magnitudes and separates two different equality tests.",
+      "prerequisites": [
+        "dv-006-position-length-area-comparisons"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/data-visualization/en/dv-006-position-length-area-comparisons.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "8b04fc5c3b037f53310594333684c36fa0bb1b9efb5592b45db5f0f55e4bae7d"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually read first 70 lines: declared frames, material color/roughness writes, object creation/parenting/location and primitive construction. No Blender execution or new timings.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://d3js.org/d3-shape/stack",
+          "pin": "D3 documentation 7.9.0 banner, read 2026-10-26",
+          "scope": "Actual rendered lines 245-248 and 308-334: stacking supplies lower/upper interval positions and their difference carries the layer value. No D3 installation or chart execution.",
+          "read_method": "Actual rendered or extracted primary passage as scoped",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "endpoints": [
+            [
+              0,
+              2,
+              8
+            ],
+            [
+              0,
+              5,
+              8
+            ]
+          ]
+        },
+        "formula": "layers[j]=endpoints[j+1]-endpoints[j]; compare final endpoints separately from last-layer differences",
+        "expected": {
+          "layers": [
+            [
+              2,
+              6
+            ],
+            [
+              5,
+              3
+            ]
+          ],
+          "equal_totals": true,
+          "equal_last_layers": false
+        },
+        "negative_control": {
+          "values": {
+            "endpoints": [
+              [
+                0,
+                2,
+                8
+              ],
+              [
+                0,
+                5,
+                11
+              ]
+            ]
+          },
+          "expected": {
+            "layers": [
+              [
+                2,
+                6
+              ],
+              [
+                5,
+                6
+              ]
+            ],
+            "equal_totals": false,
+            "equal_last_layers": true
+          },
+          "why": "A changed upper segment reverses which equality holds."
+        },
+        "assumptions": [
+          "All inputs, identities, rule choices and expected quantities are authored finite teaching premises",
+          "Use only the explicit operation and domain declared in the lesson; no actual project or learner observation"
+        ],
+        "limits": [
+          "Nondecreasing cumulative endpoints and common units; no actual processing times.",
+          "No human, fluent-language, learner, native runtime, production or publication acceptance supplied"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the inputs and the operation that must be preserved.",
+          "expected_answer": "The arrays contain cumulative endpoints, including their baseline, not independent layer values.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the main result, retaining intermediate quantities.",
+          "expected_answer": "Adjacent differences recover `[[2,6],[5,3]]`; totals agree but correction layers differ.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the interpretation trap that a summary could conceal.",
+          "expected_answer": "Comparing the upper endpoints compares totals, not correction effort.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-input control and compare the result.",
+          "expected_answer": "The control gives `[[2,6],[5,6]]`; last layers now agree while totals differ.",
+          "decision": null
+        },
+        "5": {
+          "question": "State the limit and the evidence needed before project adoption.",
+          "expected_answer": "Require identified stages, a common unit and actual timing records before claiming workflow improvement.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Identify the inputs and the operation that must be preserved. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the main result, retaining intermediate quantities. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain the interpretation trap that a summary could conceal. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-input control and compare the result. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: State the limit and the evidence needed before project adoption. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the cumulative endpoints as a proposed Atlas processing ledger, recover each stage and compare equal totals with equal last layers.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculation with corrected answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "DV025",
+      "department": "data-visualization",
+      "module_id": "dv-025-check-overlay-contrast-from-linear-luminance",
+      "title": "Check Overlay Contrast from Linear Luminance",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-025-check-overlay-contrast-from-linear-luminance.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-025-check-overlay-contrast-from-linear-luminance.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-025-check-overlay-contrast-from-linear-luminance.es.md"
+      },
+      "novelty_vs_prerequisites": "VC001 addresses equivalent pointer/keyboard/screen-reader meaning; this performs numeric linear-luminance contrast evaluation.",
+      "prerequisites": [
+        "dv-006-position-length-area-comparisons",
+        "vc-001-accessible-fretboard-paths"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/data-visualization/en/dv-006-position-length-area-comparisons.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "8b04fc5c3b037f53310594333684c36fa0bb1b9efb5592b45db5f0f55e4bae7d"
+        },
+        {
+          "path_or_url": "streeling/courses/visual-computing/en/vc-001-accessible-fretboard-paths.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "f59482f6ba34637e0e8012209ba5a0b6dd5682fa7e9fd4d3c25c9029f12cc7fd"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually read first 70 lines: declared frames, material color/roughness writes, object creation/parenting/location and primitive construction. No Blender execution or new timings.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
+          "pin": "WCAG 2.2 Understanding SC 1.4.3, read 2026-10-26",
+          "scope": "Actual rendered lines 32-39, 61-65 and 204-228: text threshold, unrounded comparison, lighter/darker relative-luminance ratio and specified background. No complete conformance assessment.",
+          "read_method": "Actual rendered or extracted primary passage as scoped",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "foreground_luminance": 0.2,
+          "background_luminance": 1,
+          "threshold": 4.5
+        },
+        "formula": "ratio=(max(foreground_luminance,background_luminance)+0.05)/(min(foreground_luminance,background_luminance)+0.05); passes=ratio>=threshold",
+        "expected": {
+          "ratio": 4.2,
+          "passes": false
+        },
+        "negative_control": {
+          "values": {
+            "foreground_luminance": 0.1,
+            "background_luminance": 1,
+            "threshold": 4.5
+          },
+          "expected": {
+            "ratio": 7,
+            "passes": true
+          },
+          "why": "Darkening the foreground changes the specified pair across the declared threshold."
+        },
+        "assumptions": [
+          "All inputs, identities, rule choices and expected quantities are authored finite teaching premises",
+          "Use only the explicit operation and domain declared in the lesson; no actual project or learner observation"
+        ],
+        "limits": [
+          "No full accessibility, native render, color-management or transparency certification.",
+          "No human, fluent-language, learner, native runtime, production or publication acceptance supplied"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the inputs and the operation that must be preserved.",
+          "expected_answer": "Inputs are linear relative luminances and an explicit text threshold, not RGB bytes.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the main result, retaining intermediate quantities.",
+          "expected_answer": "The ratio is `4.2`, below `4.5`; the specified pair fails this criterion.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the interpretation trap that a summary could conceal.",
+          "expected_answer": "A screenshot impression or keyboard test cannot substitute for the specified luminance calculation.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-input control and compare the result.",
+          "expected_answer": "The changed foreground produces ratio `7` and passes the same declared threshold.",
+          "decision": null
+        },
+        "5": {
+          "question": "State the limit and the evidence needed before project adoption.",
+          "expected_answer": "Rendered compositing, background variation and other accessibility criteria require separate observations.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Identify the inputs and the operation that must be preserved. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the main result, retaining intermediate quantities. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain the interpretation trap that a summary could conceal. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-input control and compare the result. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: State the limit and the evidence needed before project adoption. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare an opaque text/background color note for a proposed Atlas scene overlay using the supplied linear luminances.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculation with corrected answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "FUT016",
+      "department": "futurology",
+      "module_id": "fut-016-bound-the-first-capacity-threshold-crossing",
+      "title": "Bound the First Capacity Threshold Crossing",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-016-bound-the-first-capacity-threshold-crossing.md",
+        "fr": "streeling/courses/futurology/fr/fut-016-bound-the-first-capacity-threshold-crossing.fr.md",
+        "es": "streeling/courses/futurology/es/fut-016-bound-the-first-capacity-threshold-crossing.es.md"
+      },
+      "novelty_vs_prerequisites": "FUT010 derives weave counts at a chosen expansion; this solves a bounded discrete first-passage question and preserves finite-horizon censoring.",
+      "prerequisites": [
+        "fut-010-project-weave-density-before-a-scene-expansion"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/futurology/en/fut-010-project-weave-density-before-a-scene-expansion.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "f2798dbc094190d03fcb003da03fd1065b9039e143c40bc0ad3b948668e7fea9"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually read first 70 lines: declared frames, material color/roughness writes, object creation/parenting/location and primitive construction. No Blender execution or new timings.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://docs.python.org/3/library/math.html",
+          "pin": "Python 3.15.1 documentation banner, read 2026-10-26",
+          "scope": "Actual rendered lines 259-296 and 318-327: exponential, natural logarithm, log1p and finite Euclidean distance. The finite scenario/optimization/edit/ratio constructions are authored derivations, not documented production capabilities.",
+          "read_method": "Actual rendered or extracted primary passage as scoped",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "initial": 8,
+          "growth_bounds": [
+            1.25,
+            1.5
+          ],
+          "capacity": 18,
+          "last_period": 4
+        },
+        "formula": "load[t]=initial*growth**t for integer t in [0,last_period]; crossing=min(t with load[t]>=capacity), or null; earliest=min(non-null crossings); latest=max(crossings) only if all cross",
+        "expected": {
+          "paths": [
+            [
+              8,
+              10,
+              12.5,
+              15.625,
+              19.53125
+            ],
+            [
+              8,
+              12,
+              18,
+              27,
+              40.5
+            ]
+          ],
+          "crossings": [
+            4,
+            2
+          ],
+          "earliest": 2,
+          "latest": 4
+        },
+        "negative_control": {
+          "values": {
+            "initial": 8,
+            "growth_bounds": [
+              1.25,
+              1.5
+            ],
+            "capacity": 50,
+            "last_period": 4
+          },
+          "expected": {
+            "paths": [
+              [
+                8,
+                10,
+                12.5,
+                15.625,
+                19.53125
+              ],
+              [
+                8,
+                12,
+                18,
+                27,
+                40.5
+              ]
+            ],
+            "crossings": [
+              null,
+              null
+            ],
+            "earliest": null,
+            "latest": null
+          },
+          "why": "Raising capacity makes both paths remain below it on the retained horizon; absence is not an infinite predicted date."
+        },
+        "assumptions": [
+          "All inputs, identities, rule choices and expected quantities are authored finite teaching premises",
+          "Use only the explicit operation and domain declared in the lesson; no actual project or learner observation"
+        ],
+        "limits": [
+          "Positive authored growth factors; constant capacity and no unloading; no forecast calibration.",
+          "No human, fluent-language, learner, native runtime, production or publication acceptance supplied"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the inputs and the operation that must be preserved.",
+          "expected_answer": "The ordered factors are `1.25` and `1.5`; the horizon includes period `0`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the main result, retaining intermediate quantities.",
+          "expected_answer": "The first crossings are `[4,2]`, so the bounded crossing window is `[2,4]`. Equality with capacity counts.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the interpretation trap that a summary could conceal.",
+          "expected_answer": "Growth bounds are premises, not observed frequencies or a confidence interval.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-input control and compare the result.",
+          "expected_answer": "At capacity `50`, both crossings are `null`; neither path reaches it through period `4`.",
+          "decision": null
+        },
+        "5": {
+          "question": "State the limit and the evidence needed before project adoption.",
+          "expected_answer": "Measure workload and calibrated growth before adopting a date; inventory is not render time.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Identify the inputs and the operation that must be preserved. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the main result, retaining intermediate quantities. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain the interpretation trap that a summary could conceal. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-input control and compare the result. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: State the limit and the evidence needed before project adoption. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Tabulate both proposed Atlas inventory paths and mark the first capacity crossing inside the retained horizon.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculation with corrected answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "FUT017",
+      "department": "futurology",
+      "module_id": "fut-017-separate-unit-learning-cost-from-cumulative-average",
+      "title": "Separate Unit Learning Cost from Cumulative Average",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-017-separate-unit-learning-cost-from-cumulative-average.md",
+        "fr": "streeling/courses/futurology/fr/fut-017-separate-unit-learning-cost-from-cumulative-average.fr.md",
+        "es": "streeling/courses/futurology/es/fut-017-separate-unit-learning-cost-from-cumulative-average.es.md"
+      },
+      "novelty_vs_prerequisites": "FUT013 bounds fixed-work parallelism. This introduces an explicit experience-index unit-cost law and distinguishes its sum from a cumulative-average law.",
+      "prerequisites": [
+        "fut-013-bound-a-future-craft-workflow-by-its-serial-fraction"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/futurology/en/fut-013-bound-a-future-craft-workflow-by-its-serial-fraction.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "31fb73dcefcae165f8bf262627863e02cfcd737276d7a8dc22e23b1808eb9397"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually read first 70 lines: declared frames, material color/roughness writes, object creation/parenting/location and primitive construction. No Blender execution or new timings.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://docs.python.org/3/library/math.html",
+          "pin": "Python 3.15.1 documentation banner, read 2026-10-26",
+          "scope": "Actual rendered lines 259-296 and 318-327: exponential, natural logarithm, log1p and finite Euclidean distance. The finite scenario/optimization/edit/ratio constructions are authored derivations, not documented production capabilities.",
+          "read_method": "Actual rendered or extracted primary passage as scoped",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "first_cost": 16,
+          "doubling_ratio": 0.5,
+          "units": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "formula": "b=log(doubling_ratio)/log(2); unit_cost[n]=first_cost*n**b; total=sum(unit_cost); average=total/count(units)",
+        "expected": {
+          "exponent": -1,
+          "unit_costs": [
+            16,
+            8,
+            5.333333333333333,
+            4
+          ],
+          "total": 33.33333333333333,
+          "average": 8.333333333333332
+        },
+        "negative_control": {
+          "values": {
+            "first_cost": 16,
+            "doubling_ratio": 1,
+            "units": [
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "expected": {
+            "exponent": 0,
+            "unit_costs": [
+              16,
+              16,
+              16,
+              16
+            ],
+            "total": 64,
+            "average": 16
+          },
+          "why": "A no-learning ratio removes the projected decline without changing the requested units."
+        },
+        "assumptions": [
+          "All inputs, identities, rule choices and expected quantities are authored finite teaching premises",
+          "Use only the explicit operation and domain declared in the lesson; no actual project or learner observation"
+        ],
+        "limits": [
+          "Authored positive cost and ratio; no empirical learning rate, staffing or financial forecast.",
+          "No human, fluent-language, learner, native runtime, production or publication acceptance supplied"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the inputs and the operation that must be preserved.",
+          "expected_answer": "The formula assigns cost to each unit index; it does not directly assign cumulative average cost.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the main result, retaining intermediate quantities.",
+          "expected_answer": "The exponent is `-1`; unit costs are `[16,8,5.333333333333333,4]`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the interpretation trap that a summary could conceal.",
+          "expected_answer": "The total is approximately `33.33333333333333`; the final unit cost `4` is not the batch average.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-input control and compare the result.",
+          "expected_answer": "The control exponent is `0`, giving total `64` and average `16`.",
+          "decision": null
+        },
+        "5": {
+          "question": "State the limit and the evidence needed before project adoption.",
+          "expected_answer": "A real estimate needs comparable unit-cost observations and a fitted, revisitable convention.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Identify the inputs and the operation that must be preserved. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the main result, retaining intermediate quantities. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain the interpretation trap that a summary could conceal. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-input control and compare the result. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: State the limit and the evidence needed before project adoption. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Write a proposed Atlas export cost ledger, distinguishing each unit cost, the batch total and the average.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculation with corrected answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "FUT018",
+      "department": "futurology",
+      "module_id": "fut-018-choose-a-reserve-under-a-declared-chance-constraint",
+      "title": "Choose a Reserve under a Declared Chance Constraint",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-018-choose-a-reserve-under-a-declared-chance-constraint.md",
+        "fr": "streeling/courses/futurology/fr/fut-018-choose-a-reserve-under-a-declared-chance-constraint.fr.md",
+        "es": "streeling/courses/futurology/es/fut-018-choose-a-reserve-under-a-declared-chance-constraint.es.md"
+      },
+      "novelty_vs_prerequisites": "FUT012 averages worst-tail severity. This constrains exceedance probability and selects a discrete reserve; it makes no tail-average or confidence claim.",
+      "prerequisites": [
+        "fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/futurology/en/fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "00562dd42c9d7afa4359a3e6e2622d322f93b345eb9531c7cff4e3c7a942869e"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually read first 70 lines: declared frames, material color/roughness writes, object creation/parenting/location and primitive construction. No Blender execution or new timings.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://docs.python.org/3/library/math.html",
+          "pin": "Python 3.15.1 documentation banner, read 2026-10-26",
+          "scope": "Actual rendered lines 259-296 and 318-327: exponential, natural logarithm, log1p and finite Euclidean distance. The finite scenario/optimization/edit/ratio constructions are authored derivations, not documented production capabilities.",
+          "read_method": "Actual rendered or extracted primary passage as scoped",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "demands": [
+            8,
+            10,
+            14
+          ],
+          "probabilities": [
+            0.5,
+            0.3,
+            0.2
+          ],
+          "base_capacity": 10,
+          "reserves": [
+            0,
+            2,
+            4
+          ],
+          "maximum_exceedance": 0.1
+        },
+        "formula": "p_exceed(r)=sum(probability[i] for demand[i]>base_capacity+r); passing=[r where p_exceed(r)<=maximum_exceedance]; choose minimum passing r or null",
+        "expected": {
+          "exceedance": [
+            0.2,
+            0.2,
+            0
+          ],
+          "passing_reserves": [
+            4
+          ],
+          "chosen_reserve": 4
+        },
+        "negative_control": {
+          "values": {
+            "demands": [
+              8,
+              10,
+              14
+            ],
+            "probabilities": [
+              0.5,
+              0.3,
+              0.2
+            ],
+            "base_capacity": 10,
+            "reserves": [
+              0,
+              2,
+              4
+            ],
+            "maximum_exceedance": 0.2
+          },
+          "expected": {
+            "exceedance": [
+              0.2,
+              0.2,
+              0
+            ],
+            "passing_reserves": [
+              0,
+              2,
+              4
+            ],
+            "chosen_reserve": 0
+          },
+          "why": "Changing only the tolerated probability changes the decision without changing the demand distribution."
+        },
+        "assumptions": [
+          "All inputs, identities, rule choices and expected quantities are authored finite teaching premises",
+          "Use only the explicit operation and domain declared in the lesson; no actual project or learner observation"
+        ],
+        "limits": [
+          "Finite authored distribution; no cost optimization, service process or probability calibration.",
+          "No human, fluent-language, learner, native runtime, production or publication acceptance supplied"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the inputs and the operation that must be preserved.",
+          "expected_answer": "Use strictly exceeding demand and normalized scenario probabilities.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the main result, retaining intermediate quantities.",
+          "expected_answer": "The exceedance probabilities are `[0.2,0.2,0]`; only reserve `4` passes the main limit.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the interpretation trap that a summary could conceal.",
+          "expected_answer": "The constraint does not bound overload severity when an overload occurs.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-input control and compare the result.",
+          "expected_answer": "At limit `0.2`, all candidates pass and the smallest reserve is `0`.",
+          "decision": null
+        },
+        "5": {
+          "question": "State the limit and the evidence needed before project adoption.",
+          "expected_answer": "Calibrate scenario masses and reserve costs before a production capacity decision.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Identify the inputs and the operation that must be preserved. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the main result, retaining intermediate quantities. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain the interpretation trap that a summary could conceal. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-input control and compare the result. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: State the limit and the evidence needed before project adoption. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Enumerate reserve candidates for a proposed Atlas capture workload and retain the strict exceedance events for each.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculation with corrected answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "FUT019",
+      "department": "futurology",
+      "module_id": "fut-019-find-minimal-combinations-that-overload-a-craft-plan",
+      "title": "Find Minimal Combinations that Overload a Craft Plan",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-019-find-minimal-combinations-that-overload-a-craft-plan.md",
+        "fr": "streeling/courses/futurology/fr/fut-019-find-minimal-combinations-that-overload-a-craft-plan.fr.md",
+        "es": "streeling/courses/futurology/es/fut-019-find-minimal-combinations-that-overload-a-craft-plan.es.md"
+      },
+      "novelty_vs_prerequisites": "FUT008 propagates queued work over time and PHI013 explains inconsistent constraints. This inverts a numeric capacity condition to enumerate every inclusion-minimal overloading stress subset.",
+      "prerequisites": [
+        "fut-008-stress-test-a-release-plan-against-review-backlogs",
+        "phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/futurology/en/fut-008-stress-test-a-release-plan-against-review-backlogs.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "cd4c36223781dbfc4f79a7764566cebe8512df5ae8075a868569c6a5bb0b8c6b"
+        },
+        {
+          "path_or_url": "streeling/courses/philosophy/en/phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "13f8488c338e67cc9628e2bae2ae35d166f0d0cb815fb7e3c3b9bb4c07210d1f"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually read first 70 lines: declared frames, material color/roughness writes, object creation/parenting/location and primitive construction. No Blender execution or new timings.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://docs.python.org/3/library/itertools.html#itertools.combinations",
+          "pin": "Python 3.15.1 documentation banner, read 2026-10-26",
+          "scope": "Actual rendered lines 142-150: finite combinations and lexicographic ordering relative to input order. Objective functions and craft/practice meanings are authored; no production solver run.",
+          "read_method": "Actual rendered or extracted primary passage as scoped",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "base_load": 5,
+          "capacity": 10,
+          "increments": {
+            "A": 3,
+            "B": 3,
+            "C": 1
+          }
+        },
+        "formula": "load(S)=base_load+sum(increments[x] for x in S); overload iff load(S)>capacity; return inclusion-minimal overloading subsets in lexicographic order",
+        "expected": {
+          "minimal_overloads": [
+            [
+              "A",
+              "B"
+            ]
+          ],
+          "loads": [
+            11
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "base_load": 5,
+            "capacity": 8,
+            "increments": {
+              "A": 3,
+              "B": 3,
+              "C": 1
+            }
+          },
+          "expected": {
+            "minimal_overloads": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "A",
+                "C"
+              ],
+              [
+                "B",
+                "C"
+              ]
+            ],
+            "loads": [
+              11,
+              9,
+              9
+            ]
+          },
+          "why": "Reducing capacity creates additional minimal stress combinations; equality alone still is not overload."
+        },
+        "assumptions": [
+          "All inputs, identities, rule choices and expected quantities are authored finite teaching premises",
+          "Use only the explicit operation and domain declared in the lesson; no actual project or learner observation"
+        ],
+        "limits": [
+          "Additive nonnegative stress only; no dependence model, actual incident or probability assignment.",
+          "No human, fluent-language, learner, native runtime, production or publication acceptance supplied"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the inputs and the operation that must be preserved.",
+          "expected_answer": "Stress increments add to the same baseline; all are nonnegative authored contributions.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the main result, retaining intermediate quantities.",
+          "expected_answer": "Only `[A,B]` is a minimal overload in the main case, with load `11`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the interpretation trap that a summary could conceal.",
+          "expected_answer": "The superset `[A,B,C]` overloads but is not minimal because it contains an overloading subset.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-input control and compare the result.",
+          "expected_answer": "At capacity `8`, the minimal combinations are `[[A,B],[A,C],[B,C]]`, with loads `[11,9,9]`.",
+          "decision": null
+        },
+        "5": {
+          "question": "State the limit and the evidence needed before project adoption.",
+          "expected_answer": "No probability ranking or real causal contribution follows from subset enumeration.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Identify the inputs and the operation that must be preserved. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the main result, retaining intermediate quantities. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain the interpretation trap that a summary could conceal. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-input control and compare the result. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: State the limit and the evidence needed before project adoption. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Build a paper subset lattice for proposed Atlas detail/rework stresses and justify minimality of every retained overload.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculation with corrected answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GAA020",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-020-cover-a-finite-practice-space-with-fixed-centres",
+      "title": "Cover a Finite Practice Space with Fixed Centres",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-020-cover-a-finite-practice-space-with-fixed-centres.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-020-cover-a-finite-practice-space-with-fixed-centres.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-020-cover-a-finite-practice-space-with-fixed-centres.es.md"
+      },
+      "novelty_vs_prerequisites": "GAA013 counts equivalence classes; this optimizes worst-nearest coverage on a declared finite metric. It is not the sequential stopping/streak rule already in CYB005.",
+      "prerequisites": [
+        "gaa-013-choose-a-voicing-diversity-key-for-the-task"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-alchemist-academy/en/gaa-013-choose-a-voicing-diversity-key-for-the-task.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "65ab0f0cd1329dcb7f970fb8108a93d722fe9bb606886d61a5aa6d4494a4959e"
+        },
+        {
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually read first 5000 UTF-8 characters: fixed tuning, candidate frets, exact versus family acceptance, cue policies and confidence boundary. No production query or learner run.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "8b62207df7d7fa84e97053ef4d7c6cea36b7eae73ce7a867d14cfdbfa49b9cc6"
+        },
+        {
+          "path_or_url": "https://docs.python.org/3/library/itertools.html#itertools.combinations",
+          "pin": "Python 3.15.1 documentation banner, read 2026-10-26",
+          "scope": "Actual rendered lines 142-150: finite combinations and lexicographic ordering relative to input order. Objective functions and craft/practice meanings are authored; no production solver run.",
+          "read_method": "Actual rendered or extracted primary passage as scoped",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "positions": {
+            "A": 0,
+            "B": 2,
+            "C": 5,
+            "D": 8
+          },
+          "centres_required": 2
+        },
+        "formula": "for each k-subset S of candidate IDs: radius(S)=max_x min_s abs(position[x]-position[s]); retain all minimum-radius subsets in lexicographic order",
+        "expected": {
+          "best_radius": 3,
+          "optimal_centres": [
+            [
+              "A",
+              "C"
+            ],
+            [
+              "A",
+              "D"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "B",
+              "D"
+            ]
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "positions": {
+              "A": 0,
+              "B": 2,
+              "C": 5,
+              "D": 8
+            },
+            "centres_required": 1
+          },
+          "expected": {
+            "best_radius": 5,
+            "optimal_centres": [
+              [
+                "C"
+              ]
+            ]
+          },
+          "why": "A smaller item budget worsens the best possible worst-case radius under the same metric."
+        },
+        "assumptions": [
+          "All inputs, identities, rule choices and expected quantities are authored finite teaching premises",
+          "Use only the explicit operation and domain declared in the lesson; no actual project or learner observation"
+        ],
+        "limits": [
+          "Finite scalar metric invented for teaching; no production embedding, personalized optimum or learner outcome.",
+          "No human, fluent-language, learner, native runtime, production or publication acceptance supplied"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the inputs and the operation that must be preserved.",
+          "expected_answer": "Locations are authored scalar task features; centres must be existing candidates.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the main result, retaining intermediate quantities.",
+          "expected_answer": "The optimal radius is `3`, attained by `[[A,C],[A,D],[B,C],[B,D]]`; retain all tied optima.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the interpretation trap that a summary could conceal.",
+          "expected_answer": "Different diversity keys alone cannot establish good distance coverage.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-input control and compare the result.",
+          "expected_answer": "With a single centre, `[C]` is optimal and the radius is `5`.",
+          "decision": null
+        },
+        "5": {
+          "question": "State the limit and the evidence needed before project adoption.",
+          "expected_answer": "Validate the feature meaning and actual transfer before claiming useful practice coverage.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Identify the inputs and the operation that must be preserved. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the main result, retaining intermediate quantities. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain the interpretation trap that a summary could conceal. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-input control and compare the result. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: State the limit and the evidence needed before project adoption. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Sketch candidate practice-feature locations beside the retained GA item identities, then enumerate every centre subset.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculation with corrected answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GAA021",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-021-align-a-practice-attempt-with-unit-edit-costs",
+      "title": "Align a Practice Attempt with Unit Edit Costs",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-021-align-a-practice-attempt-with-unit-edit-costs.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-021-align-a-practice-attempt-with-unit-edit-costs.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-021-align-a-practice-attempt-with-unit-edit-costs.es.md"
+      },
+      "novelty_vs_prerequisites": "GAA019 retrieves exact contiguous interval occurrences with multiplicity. This aligns whole ordered sequences allowing edits and computes a minimal edit distance.",
+      "prerequisites": [
+        "gaa-019-retrieve-overlapping-interval-motifs"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-alchemist-academy/en/gaa-019-retrieve-overlapping-interval-motifs.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "dc0c4283e3db61071895ce14d1df0dded85031aa2039ed871e222bc14a1e9aed"
+        },
+        {
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually read first 5000 UTF-8 characters: fixed tuning, candidate frets, exact versus family acceptance, cue policies and confidence boundary. No production query or learner run.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "8b62207df7d7fa84e97053ef4d7c6cea36b7eae73ce7a867d14cfdbfa49b9cc6"
+        },
+        {
+          "path_or_url": "https://docs.python.org/3/library/math.html",
+          "pin": "Python 3.15.1 documentation banner, read 2026-10-26",
+          "scope": "Actual rendered lines 259-296 and 318-327: exponential, natural logarithm, log1p and finite Euclidean distance. The finite scenario/optimization/edit/ratio constructions are authored derivations, not documented production capabilities.",
+          "read_method": "Actual rendered or extracted primary passage as scoped",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "target": [
+            60,
+            62,
+            64
+          ],
+          "attempt": [
+            60,
+            61,
+            62,
+            64
+          ]
+        },
+        "formula": "D[i,0]=i; D[0,j]=j; D[i,j]=min(D[i-1,j]+1,D[i,j-1]+1,D[i-1,j-1]+(target[i-1]!=attempt[j-1])); distance=D[len(target),len(attempt)]",
+        "expected": {
+          "table": [
+            [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            [
+              1,
+              0,
+              1,
+              2,
+              3
+            ],
+            [
+              2,
+              1,
+              1,
+              1,
+              2
+            ],
+            [
+              3,
+              2,
+              2,
+              2,
+              1
+            ]
+          ],
+          "distance": 1
+        },
+        "negative_control": {
+          "values": {
+            "target": [
+              60,
+              62,
+              64
+            ],
+            "attempt": [
+              64,
+              62,
+              60
+            ]
+          },
+          "expected": {
+            "table": [
+              [
+                0,
+                1,
+                2,
+                3
+              ],
+              [
+                1,
+                1,
+                2,
+                2
+              ],
+              [
+                2,
+                2,
+                1,
+                2
+              ],
+              [
+                3,
+                2,
+                2,
+                2
+              ]
+            ],
+            "distance": 2
+          },
+          "why": "A reversed pitch sequence shares the same pitch set but requires nonzero ordered edits."
+        },
+        "assumptions": [
+          "All inputs, identities, rule choices and expected quantities are authored finite teaching premises",
+          "Use only the explicit operation and domain declared in the lesson; no actual project or learner observation"
+        ],
+        "limits": [
+          "Authored MIDI integers and unit edit costs; no timing, expressive quality or unique causal diagnosis.",
+          "No human, fluent-language, learner, native runtime, production or publication acceptance supplied"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the inputs and the operation that must be preserved.",
+          "expected_answer": "Rows index target prefixes and columns index attempt prefixes; empty prefixes supply the boundary.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the main result, retaining intermediate quantities.",
+          "expected_answer": "The lower-right distance is `1`; removing the inserted pitch `61` is a witness.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the interpretation trap that a summary could conceal.",
+          "expected_answer": "The score depends on ordered symbols, not only pitch-class membership.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-input control and compare the result.",
+          "expected_answer": "The reversed control has distance `2`; a matching pitch set does not imply a matching phrase.",
+          "decision": null
+        },
+        "5": {
+          "question": "State the limit and the evidence needed before project adoption.",
+          "expected_answer": "The table cannot attribute an error to motor skill, listening or attention without observations.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Identify the inputs and the operation that must be preserved. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the main result, retaining intermediate quantities. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain the interpretation trap that a summary could conceal. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-input control and compare the result. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: State the limit and the evidence needed before project adoption. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Fill the phrase-prefix alignment table by hand before proposing feedback on an inserted practice note.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculation with corrected answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GAA022",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-022-retain-tempo-while-comparing-onset-ratios",
+      "title": "Retain Tempo while Comparing Onset Ratios",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-022-retain-tempo-while-comparing-onset-ratios.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-022-retain-tempo-while-comparing-onset-ratios.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-022-retain-tempo-while-comparing-onset-ratios.es.md"
+      },
+      "novelty_vs_prerequisites": "MCL017 maps score beats through a tempo clock. This uses a different endpoint: scale-invariant IOI shape plus deliberately retained absolute-duration ratio, without score-time mapping.",
+      "prerequisites": [
+        "gaa-010-define-a-practice-pass-before-counting-success",
+        "mcl-017-integrate-a-tempo-ramp-in-beat-coordinates"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-alchemist-academy/en/gaa-010-define-a-practice-pass-before-counting-success.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "8430b444c193c843ac56e127da5ade544d0c35add69d98343180c6e59ea87e9f"
+        },
+        {
+          "path_or_url": "streeling/courses/musicology/en/mcl-017-integrate-a-tempo-ramp-in-beat-coordinates.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "60703969b0e20404737aa31bc21fd3e93cbef2ae8ba29283373dd2ce45345a97"
+        },
+        {
+          "path_or_url": "code/streeling/evidence/music-phrase-2026-10-22/timed-events.json",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually read first 40 lines: historical authored beat events, fixed tempo and no import/export/learner run. New IOI vectors are independent teaching inputs.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "390485ec3d789336e26e8a727b98733ce12ab39f6b1d5eaf786cde3e6ef1ad10"
+        },
+        {
+          "path_or_url": "https://docs.python.org/3/library/math.html",
+          "pin": "Python 3.15.1 documentation banner, read 2026-10-26",
+          "scope": "Actual rendered lines 259-296 and 318-327: exponential, natural logarithm, log1p and finite Euclidean distance. The finite scenario/optimization/edit/ratio constructions are authored derivations, not documented production capabilities.",
+          "read_method": "Actual rendered or extracted primary passage as scoped",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "target_ioi": [
+            1,
+            2,
+            1
+          ],
+          "attempt_ioi": [
+            2,
+            4,
+            2
+          ]
+        },
+        "formula": "normalize each positive IOI vector by its own sum; errors=abs(target_normalized-attempt_normalized); shape_L1=sum(errors); duration_ratio=sum(attempt)/sum(target)",
+        "expected": {
+          "target_normalized": [
+            0.25,
+            0.5,
+            0.25
+          ],
+          "attempt_normalized": [
+            0.25,
+            0.5,
+            0.25
+          ],
+          "errors": [
+            0,
+            0,
+            0
+          ],
+          "shape_L1": 0,
+          "duration_ratio": 2
+        },
+        "negative_control": {
+          "values": {
+            "target_ioi": [
+              1,
+              2,
+              1
+            ],
+            "attempt_ioi": [
+              2,
+              3,
+              3
+            ]
+          },
+          "expected": {
+            "target_normalized": [
+              0.25,
+              0.5,
+              0.25
+            ],
+            "attempt_normalized": [
+              0.25,
+              0.375,
+              0.375
+            ],
+            "errors": [
+              0,
+              0.125,
+              0.125
+            ],
+            "shape_L1": 0.25,
+            "duration_ratio": 2
+          },
+          "why": "Both attempts have the same total duration but only the main attempt preserves interval proportions."
+        },
+        "assumptions": [
+          "All inputs, identities, rule choices and expected quantities are authored finite teaching premises",
+          "Use only the explicit operation and domain declared in the lesson; no actual project or learner observation"
+        ],
+        "limits": [
+          "Equal-length positive interval vectors; no onset detection, motor assessment, beat map or learner pass decision.",
+          "No human, fluent-language, learner, native runtime, production or publication acceptance supplied"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the inputs and the operation that must be preserved.",
+          "expected_answer": "Positive IOIs are intervals, not absolute onset timestamps; normalize each vector separately.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the main result, retaining intermediate quantities.",
+          "expected_answer": "Both normalized main vectors are `[0.25,0.5,0.25]`, giving shape error `0`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the interpretation trap that a summary could conceal.",
+          "expected_answer": "Duration ratio `2` remains necessary; normalization alone conceals the slower performance.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-input control and compare the result.",
+          "expected_answer": "The control shape error is `0.25` while duration ratio remains `2`.",
+          "decision": null
+        },
+        "5": {
+          "question": "State the limit and the evidence needed before project adoption.",
+          "expected_answer": "Declare tempo tolerance and collect actual onset observations before scoring a guitarist.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Identify the inputs and the operation that must be preserved. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the main result, retaining intermediate quantities. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain the interpretation trap that a summary could conceal. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-input control and compare the result. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: State the limit and the evidence needed before project adoption. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Calculate a proposed practice rhythm shape score beside its duration ratio, preserving the retained event packet as historical context.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculation with corrected answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PHI016",
+      "department": "philosophy",
+      "module_id": "phi-016-compose-unknown-evidence-with-strong-kleene-rules",
+      "title": "Compose Unknown Evidence with Strong Kleene Rules",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-016-compose-unknown-evidence-with-strong-kleene-rules.md",
+        "fr": "streeling/courses/philosophy/fr/phi-016-compose-unknown-evidence-with-strong-kleene-rules.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-016-compose-unknown-evidence-with-strong-kleene-rules.es.md"
+      },
+      "novelty_vs_prerequisites": "PHI001 introduces classical validity and SEM003 separates status from evidence. This composes unresolved values under a different explicitly declared truth table.",
+      "prerequisites": [
+        "phi-001-how-to-argue-well",
+        "sem-003-status-signs-and-evidence"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/philosophy/en/phi-001-how-to-argue-well.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "e8b280a404edebcdf12b3e98d465e6e60d9d21cf5e84bba5a6d88296a5d6e0f4"
+        },
+        {
+          "path_or_url": "streeling/courses/semiotics/en/sem-003-status-signs-and-evidence.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "3a6a31b47c60b7034cc967132d80c39b8fdaa13c3edec2787c385e3595ff08d8"
+        },
+        {
+          "path_or_url": "code/streeling/evidence/representation-release-2026-10-22/phi002-schema-replay.json",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually read complete small replay JSON: historical schema acceptance of empty evidence and missing-confidence rejection, with explicit no-policy-engine scope. No fresh replay.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "04d4924afcbb84c3bf2e1be34bb6b6a5faf27b837a21a26b05617afbe064e2ef"
+        },
+        {
+          "path_or_url": "https://plato.stanford.edu/entries/logic-manyvalued/",
+          "pin": "Stanford Encyclopedia of Philosophy, substantive revision 2026-09-29, read 2026-10-26",
+          "scope": "Actual rendered lines 123-155: strong Kleene minimum/maximum/negation tables and unknown interpretation. This is the entry authors own expository account, not an inspected original Kleene monograph.",
+          "read_method": "Actual rendered or extracted primary passage as scoped",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "p": "U",
+          "q": "F",
+          "order": [
+            "F",
+            "U",
+            "T"
+          ]
+        },
+        "formula": "AND=min and OR=max under F<U<T; NOT swaps F and T and preserves U; excluded_middle=OR(p,NOT(p))",
+        "expected": {
+          "and": "F",
+          "or": "U",
+          "not_p": "U",
+          "excluded_middle": "U"
+        },
+        "negative_control": {
+          "values": {
+            "p": "U",
+            "q": "T",
+            "order": [
+              "F",
+              "U",
+              "T"
+            ]
+          },
+          "expected": {
+            "and": "U",
+            "or": "T",
+            "not_p": "U",
+            "excluded_middle": "U"
+          },
+          "why": "A known true disjunct resolves the disjunction without resolving the unknown proposition."
+        },
+        "assumptions": [
+          "All inputs, identities, rule choices and expected quantities are authored finite teaching premises",
+          "Use only the explicit operation and domain declared in the lesson; no actual project or learner observation"
+        ],
+        "limits": [
+          "No probability, contradiction logic or deployed policy semantics; authorization is separate.",
+          "No human, fluent-language, learner, native runtime, production or publication acceptance supplied"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the inputs and the operation that must be preserved.",
+          "expected_answer": "`U` means unresolved truth status, not false or a confidence score.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the main result, retaining intermediate quantities.",
+          "expected_answer": "Conjunction is `F`, disjunction `U` and negation `U`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the interpretation trap that a summary could conceal.",
+          "expected_answer": "Excluded middle is `U`; importing the classical table would change the declared interpretation.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-input control and compare the result.",
+          "expected_answer": "The control conjunction is `U` and disjunction `T`; negation remains `U`.",
+          "decision": null
+        },
+        "5": {
+          "question": "State the limit and the evidence needed before project adoption.",
+          "expected_answer": "A real policy needs its own action rule and evidence bindings; this table authorizes nothing.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Identify the inputs and the operation that must be preserved. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the main result, retaining intermediate quantities. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain the interpretation trap that a summary could conceal. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-input control and compare the result. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: State the limit and the evidence needed before project adoption. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a truth-value ledger beside the retained Demerzel advisory-schema replay, without reinterpreting that replay as a policy run.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculation with corrected answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PHI017",
+      "department": "philosophy",
+      "module_id": "phi-017-retract-a-craft-default-when-a-defeater-arrives",
+      "title": "Retract a Craft Default when a Defeater Arrives",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-017-retract-a-craft-default-when-a-defeater-arrives.md",
+        "fr": "streeling/courses/philosophy/fr/phi-017-retract-a-craft-default-when-a-defeater-arrives.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-017-retract-a-craft-default-when-a-defeater-arrives.es.md"
+      },
+      "novelty_vs_prerequisites": "PHI008 compares oracles with specifications and PHI009 separates authority. This adds nonmonotonic retraction under a single declared normal default.",
+      "prerequisites": [
+        "phi-008-separate-a-test-oracle-from-a-specification",
+        "phi-009-state-who-may-authorize-an-agent-effect"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/philosophy/en/phi-008-separate-a-test-oracle-from-a-specification.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "ab7be6ab58c9d4dbb3279e4b753badaa6971ea9da0d153ea581373d6e99f626a"
+        },
+        {
+          "path_or_url": "streeling/courses/philosophy/en/phi-009-state-who-may-authorize-an-agent-effect.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "52510a0ae9b58c13a180c42ba1bd5c411c59854c01b7aae3a437bcc5d4aa9598"
+        },
+        {
+          "path_or_url": "code/streeling/evidence/representation-release-2026-10-22/phi002-schema-replay.json",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually read complete small replay JSON: historical schema acceptance of empty evidence and missing-confidence rejection, with explicit no-policy-engine scope. No fresh replay.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "04d4924afcbb84c3bf2e1be34bb6b6a5faf27b837a21a26b05617afbe064e2ef"
+        },
+        {
+          "path_or_url": "https://plato.stanford.edu/entries/logic-nonmonotonic/",
+          "pin": "Stanford Encyclopedia of Philosophy, substantive revision 2024-11-23, read 2026-10-26",
+          "scope": "Actual rendered lines 12-17, 38-40 and 208-228: defeasible retraction, default consistency and extension caveats. Lesson restricts itself to one consistent normal default; no general construction algorithm claimed.",
+          "read_method": "Actual rendered or extracted primary passage as scoped",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "facts": [
+            "asset"
+          ],
+          "strict_rule": [
+            "fragile",
+            "not_usable"
+          ],
+          "normal_default": {
+            "prerequisite": "asset",
+            "justification": "usable",
+            "conclusion": "usable"
+          }
+        },
+        "formula": "close facts under fragile=>not_usable; for this sole normal default, add usable iff asset present and not_usable absent; return sorted literals and default_fired",
+        "expected": {
+          "literals": [
+            "asset",
+            "usable"
+          ],
+          "default_fired": true
+        },
+        "negative_control": {
+          "values": {
+            "facts": [
+              "asset",
+              "fragile"
+            ],
+            "strict_rule": [
+              "fragile",
+              "not_usable"
+            ],
+            "normal_default": {
+              "prerequisite": "asset",
+              "justification": "usable",
+              "conclusion": "usable"
+            }
+          },
+          "expected": {
+            "literals": [
+              "asset",
+              "fragile",
+              "not_usable"
+            ],
+            "default_fired": false
+          },
+          "why": "A strict defeater blocks the consistency justification; the old default conclusion must not persist."
+        },
+        "assumptions": [
+          "All inputs, identities, rule choices and expected quantities are authored finite teaching premises",
+          "Use only the explicit operation and domain declared in the lesson; no actual project or learner observation"
+        ],
+        "limits": [
+          "One normal-default fragment with consistent facts; not a general extension solver or actual material decision.",
+          "No human, fluent-language, learner, native runtime, production or publication acceptance supplied"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the inputs and the operation that must be preserved.",
+          "expected_answer": "The default has a consistency condition; absence of contrary evidence is not observed truth.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the main result, retaining intermediate quantities.",
+          "expected_answer": "The main set is `[asset,usable]` and `default_fired` is `true`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the interpretation trap that a summary could conceal.",
+          "expected_answer": "A strict implication preserves its conclusion after added facts; this default may retract it.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-input control and compare the result.",
+          "expected_answer": "The control yields `[asset,fragile,not_usable]` and `default_fired` is `false`; `usable` is absent.",
+          "decision": null
+        },
+        "5": {
+          "question": "State the limit and the evidence needed before project adoption.",
+          "expected_answer": "A provisional inference does not establish a material property or authorize publication.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Identify the inputs and the operation that must be preserved. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the main result, retaining intermediate quantities. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain the interpretation trap that a summary could conceal. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-input control and compare the result. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: State the limit and the evidence needed before project adoption. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Retain a before/after default-inference ledger for a proposed craft handoff; mark the later defeater and removed conclusion.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculation with corrected answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PHI018",
+      "department": "philosophy",
+      "module_id": "phi-018-compute-grounded-acceptance-before-an-agent-summary",
+      "title": "Compute Grounded Acceptance before an Agent Summary",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-018-compute-grounded-acceptance-before-an-agent-summary.md",
+        "fr": "streeling/courses/philosophy/fr/phi-018-compute-grounded-acceptance-before-an-agent-summary.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-018-compute-grounded-acceptance-before-an-agent-summary.es.md"
+      },
+      "novelty_vs_prerequisites": "Classical validity and oracle adequacy do not compute defense. This adds the least fixed point of an abstract attack operator, not another vote aggregate.",
+      "prerequisites": [
+        "phi-001-how-to-argue-well",
+        "phi-008-separate-a-test-oracle-from-a-specification"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/philosophy/en/phi-001-how-to-argue-well.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "e8b280a404edebcdf12b3e98d465e6e60d9d21cf5e84bba5a6d88296a5d6e0f4"
+        },
+        {
+          "path_or_url": "streeling/courses/philosophy/en/phi-008-separate-a-test-oracle-from-a-specification.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "ab7be6ab58c9d4dbb3279e4b753badaa6971ea9da0d153ea581373d6e99f626a"
+        },
+        {
+          "path_or_url": "code/streeling/evidence/representation-release-2026-10-22/phi002-schema-replay.json",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually read complete small replay JSON: historical schema acceptance of empty evidence and missing-confidence rejection, with explicit no-policy-engine scope. No fresh replay.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "04d4924afcbb84c3bf2e1be34bb6b6a5faf27b837a21a26b05617afbe064e2ef"
+        },
+        {
+          "path_or_url": "https://cse-robotics.engr.tamu.edu/dshell/cs631/papers/dung95acceptability.pdf",
+          "pin": "Dung, Artificial Intelligence 77 (1995) 321-357, read 2026-10-26",
+          "scope": "Actual extracted PDF page 5 lines 207-224 and page 8 lines 293-316: acceptable means defended against every attack; characteristic operator and grounded least fixed point. Original paper hosted by a university; no claims from uninspected later proofs.",
+          "read_method": "Actual rendered or extracted primary passage as scoped",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "arguments": [
+            "A",
+            "B",
+            "C"
+          ],
+          "attacks": [
+            [
+              "A",
+              "B"
+            ],
+            [
+              "B",
+              "C"
+            ]
+          ]
+        },
+        "formula": "F(S)={a: every b attacking a is attacked by some s in S}; iterate S0=empty,S_next=F(S) until equality; out={a attacked by grounded}; undecided=remaining arguments",
+        "expected": {
+          "iterations": [
+            [],
+            [
+              "A"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "A",
+              "C"
+            ]
+          ],
+          "grounded": [
+            "A",
+            "C"
+          ],
+          "out": [
+            "B"
+          ],
+          "undecided": []
+        },
+        "negative_control": {
+          "values": {
+            "arguments": [
+              "A",
+              "B",
+              "C"
+            ],
+            "attacks": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "B",
+                "C"
+              ],
+              [
+                "C",
+                "A"
+              ]
+            ]
+          },
+          "expected": {
+            "iterations": [
+              [],
+              []
+            ],
+            "grounded": [],
+            "out": [],
+            "undecided": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          "why": "The closing attack removes every unattacked starting argument; the cycle has no grounded acceptance."
+        },
+        "assumptions": [
+          "All inputs, identities, rule choices and expected quantities are authored finite teaching premises",
+          "Use only the explicit operation and domain declared in the lesson; no actual project or learner observation"
+        ],
+        "limits": [
+          "Finite authored attack graph; grounded semantics only; no truth, credibility, consensus or authority claim.",
+          "No human, fluent-language, learner, native runtime, production or publication acceptance supplied"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the inputs and the operation that must be preserved.",
+          "expected_answer": "An attack is directed; defense requires counterattacking every attacker.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the main result, retaining intermediate quantities.",
+          "expected_answer": "Iteration gives `[[],[A],[A,C],[A,C]]`, with grounded set `[A,C]`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the interpretation trap that a summary could conceal.",
+          "expected_answer": "The out set `[B]` records attacks from accepted arguments, not proof that a source statement is false.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-input control and compare the result.",
+          "expected_answer": "The control has empty grounded and out sets; `[A,B,C]` remain undecided.",
+          "decision": null
+        },
+        "5": {
+          "question": "State the limit and the evidence needed before project adoption.",
+          "expected_answer": "Actual content, attack completeness and authority require separate review before adoption.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Identify the inputs and the operation that must be preserved. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the main result, retaining intermediate quantities. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain the interpretation trap that a summary could conceal. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-input control and compare the result. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: State the limit and the evidence needed before project adoption. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the proposed agent attack graph and each defense-operator iterate beside the retained advisory evidence boundary.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculation with corrected answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "SEM021",
+      "department": "semiotics",
+      "module_id": "sem-021-retain-alternative-lineages-and-their-multiplicity",
+      "title": "Retain Alternative Lineages and Their Multiplicity",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-021-retain-alternative-lineages-and-their-multiplicity.md",
+        "fr": "streeling/courses/semiotics/fr/sem-021-retain-alternative-lineages-and-their-multiplicity.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-021-retain-alternative-lineages-and-their-multiplicity.es.md"
+      },
+      "novelty_vs_prerequisites": "SEM003 audits status-to-event claims. This adds alternative versus joint derivation and non-idempotent multiplicity; repeated sources are not independent witnesses.",
+      "prerequisites": [
+        "sem-003-status-signs-and-evidence"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/semiotics/en/sem-003-status-signs-and-evidence.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "3a6a31b47c60b7034cc967132d80c39b8fdaa13c3edec2787c385e3595ff08d8"
+        },
+        {
+          "path_or_url": "code/streeling/evidence/representation-release-2026-10-22/phi002-schema-replay.json",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually read complete small replay JSON: historical schema acceptance of empty evidence and missing-confidence rejection, with explicit no-policy-engine scope. No fresh replay.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "04d4924afcbb84c3bf2e1be34bb6b6a5faf27b837a21a26b05617afbe064e2ef"
+        },
+        {
+          "path_or_url": "https://www.cs.ucdavis.edu/~green/papers/pods07.pdf",
+          "pin": "Green, Karvounarakis and Tannen, PODS 2007, read 2026-10-26",
+          "scope": "Actual extracted PDF page 3 lines 350-405: how-provenance, natural-coefficient polynomials and valuation. W3C PROV abstract was separately read as background only; not the polynomial semantics.",
+          "read_method": "Actual rendered or extracted primary passage as scoped",
+          "sha256": null
+        },
+        {
+          "path_or_url": "https://www.w3.org/TR/prov-dm/",
+          "pin": "W3C Recommendation 30 April 2013, read 2026-10-26",
+          "scope": "Actual rendered abstract lines 34-38, provenance entities/activities/people and domain-agnostic data model. Background only; not the polynomial definition.",
+          "read_method": "Actual rendered abstract read",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "derivations": [
+            [
+              "a",
+              "b"
+            ],
+            [
+              "a",
+              "b"
+            ],
+            [
+              "c"
+            ]
+          ],
+          "valuation": {
+            "a": 1,
+            "b": 1,
+            "c": 0
+          }
+        },
+        "formula": "sort tokens inside products; collect equal monomials with integer multiplicity; evaluate sum over products of supplied token values; do not erase repeated derivations",
+        "expected": {
+          "coefficients": {
+            "a*b": 2,
+            "c": 1
+          },
+          "evaluated_multiplicity": 2
+        },
+        "negative_control": {
+          "values": {
+            "derivations": [
+              [
+                "a",
+                "b"
+              ],
+              [
+                "c"
+              ]
+            ],
+            "valuation": {
+              "a": 1,
+              "b": 1,
+              "c": 0
+            }
+          },
+          "expected": {
+            "coefficients": {
+              "a*b": 1,
+              "c": 1
+            },
+            "evaluated_multiplicity": 1
+          },
+          "why": "Removing an alternative changes multiplicity while leaving the set of source names unchanged."
+        },
+        "assumptions": [
+          "All inputs, identities, rule choices and expected quantities are authored finite teaching premises",
+          "Use only the explicit operation and domain declared in the lesson; no actual project or learner observation"
+        ],
+        "limits": [
+          "Positive polynomial algebra with natural coefficients; no negation, trust, probability or PROV conformance.",
+          "No human, fluent-language, learner, native runtime, production or publication acceptance supplied"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the inputs and the operation that must be preserved.",
+          "expected_answer": "Tokens denote source occurrences in a declared algebra, not trusted probabilities.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the main result, retaining intermediate quantities.",
+          "expected_answer": "The collected polynomial is `2*a*b+c` and its evaluated multiplicity is `2`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the interpretation trap that a summary could conceal.",
+          "expected_answer": "A set `[a,b,c]` loses joint versus alternative use and repeated derivations.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-input control and compare the result.",
+          "expected_answer": "The control polynomial is `a*b+c` and evaluates to `1`; source-name membership is unchanged.",
+          "decision": null
+        },
+        "5": {
+          "question": "State the limit and the evidence needed before project adoption.",
+          "expected_answer": "The algebra supplies neither independent corroboration nor a deployed lineage implementation.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Identify the inputs and the operation that must be preserved. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the main result, retaining intermediate quantities. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain the interpretation trap that a summary could conceal. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-input control and compare the result. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: State the limit and the evidence needed before project adoption. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw alternative derivation paths for a proposed craft evidence handoff, retaining repeated paths before collecting monomials.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculation with corrected answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "SEM022",
+      "department": "semiotics",
+      "module_id": "sem-022-distinguish-an-independent-wrapper-from-independent-state",
+      "title": "Distinguish an Independent Wrapper from Independent State",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-022-distinguish-an-independent-wrapper-from-independent-state.md",
+        "fr": "streeling/courses/semiotics/fr/sem-022-distinguish-an-independent-wrapper-from-independent-state.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-022-distinguish-an-independent-wrapper-from-independent-state.es.md"
+      },
+      "novelty_vs_prerequisites": "SEM014 defines field overwrite order and CS019 lexical scope. This adds outer versus child object identity and mutable aliasing after copying.",
+      "prerequisites": [
+        "sem-014-declare-material-patch-precedence",
+        "cs-019-preserve-lexical-bindings-when-composing-fragments"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/semiotics/en/sem-014-declare-material-patch-precedence.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "e2b04eaa58d948d1944ef605e75b56f043719968f0eb4983fb3ad396bd0a2996"
+        },
+        {
+          "path_or_url": "streeling/courses/computer-science/en/cs-019-preserve-lexical-bindings-when-composing-fragments.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "1a0fc3487a06266191ac370f527f3c8e6eec02f20b705c98b64ec23eb29fef37"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually read first 70 lines: declared frames, material color/roughness writes, object creation/parenting/location and primitive construction. No Blender execution or new timings.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://docs.python.org/3/library/copy.html",
+          "pin": "Python 3.15.1 documentation banner, updated 2026-10-25, read 2026-10-26",
+          "scope": "Actual rendered lines 7 and 32-47: assignment versus copies, outer references, recursive copies, memo and limitations. New finite list graph is authored, not host-resource duplication.",
+          "read_method": "Actual rendered or extracted primary passage as scoped",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "original": [
+            [
+              1,
+              2
+            ],
+            [
+              3
+            ]
+          ],
+          "copy_mode": "shallow",
+          "mutation": {
+            "row": 0,
+            "column": 0,
+            "value": 9
+          }
+        },
+        "formula": "copy outer list; shallow retains child references, deep recursively copies list children; mutate copied child at supplied row/column; compare original and copy after mutation",
+        "expected": {
+          "original_after": [
+            [
+              9,
+              2
+            ],
+            [
+              3
+            ]
+          ],
+          "copy_after": [
+            [
+              9,
+              2
+            ],
+            [
+              3
+            ]
+          ],
+          "same_outer": false,
+          "same_first_child": true
+        },
+        "negative_control": {
+          "values": {
+            "original": [
+              [
+                1,
+                2
+              ],
+              [
+                3
+              ]
+            ],
+            "copy_mode": "deep",
+            "mutation": {
+              "row": 0,
+              "column": 0,
+              "value": 9
+            }
+          },
+          "expected": {
+            "original_after": [
+              [
+                1,
+                2
+              ],
+              [
+                3
+              ]
+            ],
+            "copy_after": [
+              [
+                9,
+                2
+              ],
+              [
+                3
+              ]
+            ],
+            "same_outer": false,
+            "same_first_child": false
+          },
+          "why": "Recursive copying isolates this child edit; a distinct wrapper alone does not."
+        },
+        "assumptions": [
+          "All inputs, identities, rule choices and expected quantities are authored finite teaching premises",
+          "Use only the explicit operation and domain declared in the lesson; no actual project or learner observation"
+        ],
+        "limits": [
+          "Simple acyclic list structure; no arbitrary host objects, resource duplication or concurrency isolation.",
+          "No human, fluent-language, learner, native runtime, production or publication acceptance supplied"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the inputs and the operation that must be preserved.",
+          "expected_answer": "Wrapper identity and nested child identity are different questions.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the main result, retaining intermediate quantities.",
+          "expected_answer": "The shallow case changes both values to `[[9,2],[3]]` because the first child is shared.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the interpretation trap that a summary could conceal.",
+          "expected_answer": "`same_outer` is `false` but `same_first_child` is `true`; new wrappers do not prove isolation.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-input control and compare the result.",
+          "expected_answer": "The deep control retains original `[[1,2],[3]]` and changes only the copy to `[[9,2],[3]]`.",
+          "decision": null
+        },
+        "5": {
+          "question": "State the limit and the evidence needed before project adoption.",
+          "expected_answer": "Other object types and intended sharing require a separate copy contract.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Identify the inputs and the operation that must be preserved. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the main result, retaining intermediate quantities. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain the interpretation trap that a summary could conceal. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-input control and compare the result. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: State the limit and the evidence needed before project adoption. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw an object-identity diagram for a proposed Atlas material patch before and after a copied-child mutation.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculation with corrected answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "SEM023",
+      "department": "semiotics",
+      "module_id": "sem-023-keep-points-and-displacements-distinct-under-translation",
+      "title": "Keep Points and Displacements Distinct under Translation",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-023-keep-points-and-displacements-distinct-under-translation.md",
+        "fr": "streeling/courses/semiotics/fr/sem-023-keep-points-and-displacements-distinct-under-translation.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-023-keep-points-and-displacements-distinct-under-translation.es.md"
+      },
+      "novelty_vs_prerequisites": "SEM009 checks units and SEM006 orientation. This adds affine point versus displacement roles that identical length units cannot distinguish, with translation cancellation.",
+      "prerequisites": [
+        "sem-009-keep-units-in-a-composed-craft-instruction",
+        "sem-006-preserve-orientation-across-scene-frames"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/semiotics/en/sem-009-keep-units-in-a-composed-craft-instruction.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "f57e3b42ea9c51b419233b011236a821abae04760b1b57e64273935c75ae960e"
+        },
+        {
+          "path_or_url": "streeling/courses/semiotics/en/sem-006-preserve-orientation-across-scene-frames.md",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually inspected introduction and operation/interpretation excerpts, bounded to the first 2400 UTF-8 characters in the selected catalogue pass; separately inspected first 3200 for CS019/MCL017/PHI013/VC001. No claim of reading every line.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "498533e3d3e5c4e8f7b009b1d6a0aeedfe04ae37853069e9be613e0d68336d78"
+        },
+        {
+          "path_or_url": "code/blender/scripts/atlas/kit.py",
+          "pin": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+          "scope": "Actually read first 70 lines: declared frames, material color/roughness writes, object creation/parenting/location and primitive construction. No Blender execution or new timings.",
+          "read_method": "Actual local UTF-8 text passage inspected, complete raw-file SHA bound and baseline blob compared; no runtime replay",
+          "sha256": "a92d06daec2bfb1c154dc6de0d14d040df48ea3b8fa4f4535820417c4fba6fbc"
+        },
+        {
+          "path_or_url": "https://docs.godotengine.org/en/stable/classes/class_transform3d.html",
+          "pin": "Godot stable Transform3D documentation, read 2026-10-26",
+          "scope": "Actual rendered lines 6-17 and 32-42: Basis and origin separate the linear part from translation. The page response did not expose an exact stable minor version; no such pin or Godot execution is claimed.",
+          "read_method": "Actual rendered or extracted primary passage as scoped",
+          "sha256": null
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "p": [
+            1,
+            2,
+            0
+          ],
+          "q": [
+            4,
+            6,
+            0
+          ],
+          "translation": [
+            10,
+            -2,
+            5
+          ]
+        },
+        "formula": "point_world=p+translation componentwise; displacement=q-p; translated_difference=(q+translation)-(p+translation); never add translation to a displacement",
+        "expected": {
+          "p_world": [
+            11,
+            0,
+            5
+          ],
+          "q_world": [
+            14,
+            4,
+            5
+          ],
+          "displacement": [
+            3,
+            4,
+            0
+          ],
+          "translated_difference": [
+            3,
+            4,
+            0
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "p": [
+              1,
+              2,
+              0
+            ],
+            "q": [
+              4,
+              6,
+              0
+            ],
+            "translation": [
+              -5,
+              8,
+              1
+            ]
+          },
+          "expected": {
+            "p_world": [
+              -4,
+              10,
+              1
+            ],
+            "q_world": [
+              -1,
+              14,
+              1
+            ],
+            "displacement": [
+              3,
+              4,
+              0
+            ],
+            "translated_difference": [
+              3,
+              4,
+              0
+            ]
+          },
+          "why": "Changing the frame origin changes both point coordinates but preserves their displacement."
+        },
+        "assumptions": [
+          "All inputs, identities, rule choices and expected quantities are authored finite teaching premises",
+          "Use only the explicit operation and domain declared in the lesson; no actual project or learner observation"
+        ],
+        "limits": [
+          "Identity linear basis and finite authored coordinates; no normal transform, full frame conversion or import observation.",
+          "No human, fluent-language, learner, native runtime, production or publication acceptance supplied"
+        ]
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the inputs and the operation that must be preserved.",
+          "expected_answer": "Both operands have length units but different affine roles.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the main result, retaining intermediate quantities.",
+          "expected_answer": "World points are `[11,0,5]` and `[14,4,5]`; subtraction gives `[3,4,0]`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Explain the interpretation trap that a summary could conceal.",
+          "expected_answer": "Translating the displacement would incorrectly attach an origin to a relative difference.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-input control and compare the result.",
+          "expected_answer": "Control points are `[-4,10,1]` and `[-1,14,1]`; the difference remains `[3,4,0]`.",
+          "decision": null
+        },
+        "5": {
+          "question": "State the limit and the evidence needed before project adoption.",
+          "expected_answer": "Rotation, scale, normals and actual import require additional declared transformations and evidence.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Correctly answers exercise 1: Identify the inputs and the operation that must be preserved. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 2: Derive the main result, retaining intermediate quantities. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 3: Explain the interpretation trap that a summary could conceal. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 4: Apply the changed-input control and compare the result. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Correctly answers exercise 5: State the limit and the evidence needed before project adoption. Retains intermediate reasoning and the stated claim boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Annotate Atlas positions and relative differences with affine roles before changing only the proposed frame origin.",
+        "direct_manual_baseline": "Handwritten operation-specific table or diagram and intermediate calculation with corrected answers hidden, retained before source or assistant consultation.",
+        "falsifier": "A proposed answer is rejected if applying the displayed operation to either retained input yields a result inconsistent with the fixed expected record, or if its explanation presents that record as a completed project observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    }
+  ]
+}

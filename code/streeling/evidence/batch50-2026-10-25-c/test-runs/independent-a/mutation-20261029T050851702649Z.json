@@ -1,0 +1,28 @@
+{
+  "command": [
+    "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "C:\\tmp\\batch25c-a-review\\mutation-probe.py"
+  ],
+  "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+  "scope": "Deliberate in-memory numerator-scale mutation 1 to 2, expected co-mutated to computed 1.6-1.2j/magnitude 2; independent fixed model oracle remains 0.8-0.6j/magnitude 1. Canonical packet unchanged. This is detector evidence, not a real lesson failure.",
+  "rejected_by_independent_oracle": true,
+  "computed_observation": {
+    "H_real": 1.6,
+    "H_imag": -1.2,
+    "magnitude": 2.0,
+    "identity": false
+  },
+  "fixed_oracle": {
+    "H_real": 0.8,
+    "H_imag": -0.6,
+    "magnitude": 1,
+    "identity": false
+  },
+  "log": "C:\\tmp\\batch25c-a-review\\mutation-20261029T050851702649Z.log",
+  "log_sha256": "0e268f5082827ee2cbeee74858dea26012497f810a42575721b40bd60d8acc53",
+  "test_sha256": "f9636d3e9fe4dd6df3a1f0e369ead0c1ca3bef5e9e495b469717fe74b48130d1",
+  "packet_sha256": "fa68e6b44c86f97fc143b5d3db879be76f3df465380fcdc8e208fd783a7c05f7"
+}

@@ -1,0 +1,474 @@
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	﻿2026-10-25T19:16:49.7405636Z Current runner version: '2.338.0'
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7439837Z ##[group]Runner Image Provisioner
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7441248Z Hosted Compute Agent
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7442222Z Version: 20261021.618
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7443322Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7444571Z Build Date: 2026-10-21T00:45:21Z
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7445725Z Worker ID: {58389659-6baa-474b-92f7-6c6ecc81fc64}
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7447008Z Region: eastus2
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7448306Z Cloud: Azure
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7449338Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7451799Z ##[group]Operating System
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7452981Z Ubuntu
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7453840Z 24.04.5
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7454615Z LTS
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7455564Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7456533Z ##[group]Runner Image
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7457796Z Image: ubuntu-24.04
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7458889Z Version: 20261012.334.1
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7460968Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7463759Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7465490Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7467608Z ##[group]GITHUB_TOKEN Permissions
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7470305Z Contents: read
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7471729Z Metadata: read
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7472726Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7475693Z Secret source: Actions
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7477449Z Cache mode: write
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7478796Z Prepare workflow directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.7958377Z Prepare all required actions
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:49.8030480Z Getting action download info
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.0073178Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.1323914Z Download action repository 'actions/setup-python@v6' (SHA:ece7cb06caefa5fff74198d8649806c4678c61a1)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.3509552Z Complete job name: extracts (ubuntu-latest, Python 3.14)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4437674Z ##[group]Run actions/checkout@v7
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4438636Z with:
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4439118Z   repository: spareilleux/learn
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4442792Z   token: ***
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4443220Z   ssh-strict: true
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4443661Z   ssh-user: git
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4444098Z   persist-credentials: true
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4444579Z   clean: true
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4445019Z   sparse-checkout-cone-mode: true
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4445531Z   fetch-depth: 1
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4445960Z   fetch-tags: false
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4446395Z   show-progress: true
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4446837Z   lfs: false
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4447551Z   submodules: false
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4448027Z   set-safe-directory: true
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4448541Z   allow-unsafe-pr-checkout: false
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.4449380Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5499392Z Syncing repository: spareilleux/learn
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5501821Z ##[group]Getting Git version info
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5503062Z Working directory is '/home/runner/work/learn/learn'
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5504803Z [command]/usr/bin/git version
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5609260Z git version 2.55.0
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5635618Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5647909Z Temporarily overriding HOME='/home/runner/work/_temp/47942fb4-2fd1-4852-883d-3384e76a3bff' before making global git config changes
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5650327Z Adding repository directory to the temporary git global config as a safe directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5655021Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/learn/learn
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5710518Z Deleting the contents of '/home/runner/work/learn/learn'
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5714149Z ##[group]Determining repository object format
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5715716Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5716941Z ##[group]Initializing the repository
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5721278Z [command]/usr/bin/git init /home/runner/work/learn/learn
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5858101Z hint: Using 'master' as the name for the initial branch. This default branch name
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5860206Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5861852Z hint: to use in all of your new repositories, which will suppress this warning,
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5862799Z hint: call:
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5863245Z hint:
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5864071Z hint: 	git config --global init.defaultBranch <name>
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5865226Z hint:
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5866235Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5867567Z hint: 'development'. The just-created branch can be renamed via this command:
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5868390Z hint:
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5868898Z hint: 	git branch -m <name>
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5869423Z hint:
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5870079Z hint: Disable this message with "git config set advice.defaultBranchName false"
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5871087Z Initialized empty Git repository in /home/runner/work/learn/learn/.git/
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5884902Z [command]/usr/bin/git remote add origin https://github.com/spareilleux/learn
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5933508Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5934309Z ##[group]Disabling automatic garbage collection
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5938071Z [command]/usr/bin/git config --local gc.auto 0
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5974099Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5975310Z ##[group]Setting up auth
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5975970Z Removing SSH command configuration
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.5983669Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.6023662Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.6416268Z Removing HTTP extra header
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.6421842Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.6460209Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.6680356Z Removing includeIf entries pointing to credentials config files
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.6687684Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.6726642Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.6959709Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-644e1ceb-e29d-42b9-9d2b-e8f8dd1f5c6e.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.7019209Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/learn/learn/.git.path /home/runner/work/_temp/git-credentials-644e1ceb-e29d-42b9-9d2b-e8f8dd1f5c6e.config
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.7053881Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/learn/learn/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-644e1ceb-e29d-42b9-9d2b-e8f8dd1f5c6e.config
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.7092274Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-644e1ceb-e29d-42b9-9d2b-e8f8dd1f5c6e.config
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.7127816Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-644e1ceb-e29d-42b9-9d2b-e8f8dd1f5c6e.config
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.7160947Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.7161698Z ##[group]Fetching the repository
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:50.7168171Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +74718c003727e816cf9afc90b5e8be58a1074bd4:refs/remotes/pull/201/merge
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:58.2226484Z From https://github.com/spareilleux/learn
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:58.2228872Z  * [new ref]         74718c003727e816cf9afc90b5e8be58a1074bd4 -> pull/201/merge
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:58.2232668Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:58.2234612Z ##[group]Determining the checkout info
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:58.2236263Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:58.2268489Z [command]/usr/bin/git sparse-checkout disable
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:58.2307998Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:58.2350400Z ##[group]Checking out the ref
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:58.2356666Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/201/merge
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.2720787Z Updating files:  59% (6115/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.2815293Z Updating files:  60% (6164/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.2959157Z Updating files:  61% (6267/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.3096965Z Updating files:  62% (6370/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.3259507Z Updating files:  63% (6472/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.3437421Z Updating files:  64% (6575/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.3529773Z Updating files:  65% (6678/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.3609268Z Updating files:  66% (6781/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.3748308Z Updating files:  67% (6883/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.3828104Z Updating files:  68% (6986/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.3945891Z Updating files:  69% (7089/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.4060835Z Updating files:  70% (7192/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.4160821Z Updating files:  71% (7294/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.4274214Z Updating files:  72% (7397/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.4356482Z Updating files:  73% (7500/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.4439932Z Updating files:  74% (7603/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.4559543Z Updating files:  75% (7705/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.4647596Z Updating files:  76% (7808/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.4744582Z Updating files:  77% (7911/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.4866529Z Updating files:  78% (8013/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.4989098Z Updating files:  79% (8116/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.5100392Z Updating files:  80% (8219/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.5178531Z Updating files:  81% (8322/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.5256446Z Updating files:  82% (8424/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.5372625Z Updating files:  83% (8527/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.5455032Z Updating files:  84% (8630/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.5556755Z Updating files:  85% (8733/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.5633700Z Updating files:  86% (8835/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.5717244Z Updating files:  87% (8938/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.5804791Z Updating files:  88% (9041/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.5882773Z Updating files:  89% (9143/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.5961894Z Updating files:  90% (9246/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6043284Z Updating files:  91% (9349/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6168435Z Updating files:  92% (9452/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6334832Z Updating files:  93% (9554/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6425101Z Updating files:  94% (9657/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6509440Z Updating files:  95% (9760/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6604768Z Updating files:  96% (9863/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6701148Z Updating files:  97% (9965/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6782737Z Updating files:  98% (10068/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6852167Z Updating files:  99% (10171/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6852822Z Updating files: 100% (10273/10273)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6853200Z Updating files: 100% (10273/10273), done.
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6964681Z Note: switching to 'refs/remotes/pull/201/merge'.
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6965289Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6966639Z You are in 'detached HEAD' state. You can look around, make experimental
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6968090Z changes and commit them, and you can discard any commits you make in this
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6969173Z state without impacting any branches by switching back to a branch.
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6969860Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6970338Z If you want to create a new branch to retain commits you create, you may
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6971428Z do so (now or later) by using -c with the switch command. Example:
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6972095Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6972372Z   git switch -c <new-branch-name>
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6972826Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6973091Z Or undo this operation with:
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6973480Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6973728Z   git switch -
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6974398Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6974896Z Turn off this advice by setting config variable advice.detachedHead to false
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6975633Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.6976406Z HEAD is now at 74718c0 Merge b77f44f82e1ad4547e6efd3aa2e4448cce6b2809 into 8c57097d363e29c5fb11cba9eabd7d8a6813a7d6
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.7022228Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.7094142Z [command]/usr/bin/git log -1 --format=%H
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.7130734Z 74718c003727e816cf9afc90b5e8be58a1074bd4
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.7500085Z ##[group]Run actions/setup-python@v6
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.7500414Z with:
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.7500625Z   python-version: 3.14
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.7500864Z   check-latest: false
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.7503362Z   token: ***
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.7503603Z   update-environment: true
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.7503865Z   allow-prereleases: false
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.7504108Z   freethreaded: false
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.7504359Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.8794722Z ##[group]Installed versions
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.8895735Z Successfully set up CPython (3.14.8)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.8896790Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.9074256Z ##[group]Run git clone -q --filter=blob:none --no-checkout https://github.com/GuitarAlchemist/Demerzel.git "$RUNNER_TEMP/demerzel"
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.9075935Z [36;1mgit clone -q --filter=blob:none --no-checkout https://github.com/GuitarAlchemist/Demerzel.git "$RUNNER_TEMP/demerzel"[0m
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.9424134Z shell: /usr/bin/bash -e {0}
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.9424454Z env:
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.9424763Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.8/x64
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.9425284Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.8/x64/lib/pkgconfig
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.9425766Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.9426198Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.9426640Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.9427080Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.8/x64/lib
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:16:59.9427695Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:17:00.3905288Z ##[group]Run python code/streeling/check.py --demerzel "$RUNNER_TEMP/demerzel"
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:17:00.3905923Z [36;1mpython code/streeling/check.py --demerzel "$RUNNER_TEMP/demerzel"[0m
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:17:00.3971954Z shell: /usr/bin/bash -e {0}
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:17:00.3972221Z env:
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:17:00.3972496Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.8/x64
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:17:00.3972938Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.8/x64/lib/pkgconfig
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:17:00.3973369Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:17:00.3973761Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:17:00.3974150Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:17:00.3974539Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.8/x64/lib
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:17:00.3974873Z ##[endgroup]
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7464955Z FAIL evidence/agentic-composition-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7466818Z FAIL evidence/audio-comparison-2026-10-23: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7469280Z evidence/agentic-composition-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7470187Z evidence/audio-comparison-2026-10-23: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7471032Z evidence/batch50-2026-10-23: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7471838Z evidence/batch50-2026-10-24: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7472625Z evidence/batch50-2026-10-25: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7473455Z evidence/batch50-2026-10-25-b: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7474337Z evidence/bend-development-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7475316Z evidence/brutal-composition-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7476242Z evidence/capo-spelling-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7477865Z evidence/color-contract-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7478836Z evidence/constraint-feedback-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7479753Z evidence/craft-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7480619Z evidence/data-visualization-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7481599Z evidence/feedback-projections-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7482325Z evidence/filter-phase-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7482852Z evidence/functional-composition-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7483913Z FAIL evidence/batch50-2026-10-23: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7484508Z evidence/guitar-audio-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7485361Z FAIL evidence/batch50-2026-10-24: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7486008Z evidence/guitar-runtime-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7486909Z FAIL evidence/batch50-2026-10-25: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7487668Z evidence/intonation-listening-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7488578Z FAIL evidence/batch50-2026-10-25-b: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7489191Z evidence/locale-completion-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7490162Z FAIL evidence/bend-development-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7490738Z evidence/meter-picking-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7491669Z FAIL evidence/brutal-composition-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7492251Z evidence/music-phrase-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7493420Z FAIL evidence/capo-spelling-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7494054Z evidence/observatory-decisions-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7495043Z FAIL evidence/color-contract-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7495646Z evidence/origami-local-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7496589Z FAIL evidence/constraint-feedback-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7497746Z evidence/phrase-performance-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7498619Z FAIL evidence/craft-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7499571Z FAIL evidence/data-visualization-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7500827Z FAIL evidence/feedback-projections-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7502057Z FAIL evidence/filter-phase-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7503275Z FAIL evidence/functional-composition-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7504432Z FAIL evidence/guitar-audio-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7505446Z FAIL evidence/guitar-runtime-2026-10-22: missing analyze.py, scenarios.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7506510Z FAIL evidence/intonation-listening-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7507932Z FAIL evidence/locale-completion-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7509008Z FAIL evidence/meter-picking-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7509633Z FAIL evidence/music-phrase-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7510266Z FAIL evidence/observatory-decisions-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7511100Z FAIL evidence/origami-local-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7511717Z FAIL evidence/phrase-performance-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7512323Z FAIL evidence/pilot-value-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7512934Z FAIL evidence/pitch-context-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7513544Z FAIL evidence/pitch-estimates-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7514212Z FAIL evidence/pluck-coordinates-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7514840Z FAIL evidence/practice-outcomes-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7515450Z FAIL evidence/public-readback-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7516113Z FAIL evidence/representation-release-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7516757Z FAIL evidence/retry-admission-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7517627Z FAIL evidence/scene-frames-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7518226Z FAIL evidence/spectral-views-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7518816Z FAIL evidence/tempo-clocks-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7519438Z FAIL evidence/voice-leading-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7520059Z FAIL evidence/voicing-learning-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7520689Z FAIL evidence/weave-material-2026-10-22: missing analyze.py, scenarios.json, results.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7521242Z FAIL evidence/weave-scene-2026-10-22: missing analyze.py, scenarios.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7521982Z FAIL fixtures/computer-science: missing analyze.py, scenarios.json, results.json, README.md
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7522695Z FAIL fixtures/data-visualization: missing analyze.py, scenarios.json, results.json, README.md
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7523295Z FAIL fixtures/physics: missing analyze.py, scenarios.json, results.json, README.md
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7523849Z FAIL fixtures/semiotics: missing analyze.py, scenarios.json, results.json, README.md
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7524465Z FAIL functional-composition/vendor: missing analyze.py, scenarios.json, results.json, README.md
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7525082Z FAIL guitar-runtime/vendor: missing analyze.py, scenarios.json, results.json, README.md
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7525658Z FAIL voice-leading/vendor: missing analyze.py, scenarios.json, results.json, README.md
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7526912Z FAIL evidence/agentic-composition-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/agentic-composition-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7528256Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7529155Z FAIL evidence/audio-comparison-2026-10-23: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/audio-comparison-2026-10-23/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7530118Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7530898Z FAIL evidence/batch50-2026-10-23: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/batch50-2026-10-23/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7531780Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7532553Z FAIL evidence/batch50-2026-10-24: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/batch50-2026-10-24/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7533587Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7534370Z FAIL evidence/batch50-2026-10-25: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/batch50-2026-10-25/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7535241Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7536027Z FAIL evidence/batch50-2026-10-25-b: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/batch50-2026-10-25-b/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7536911Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7538029Z FAIL evidence/bend-development-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/bend-development-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7539022Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7539917Z FAIL evidence/brutal-composition-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/brutal-composition-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7540898Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7541727Z FAIL evidence/capo-spelling-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/capo-spelling-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7542642Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7543473Z FAIL evidence/color-contract-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/color-contract-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7544425Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7545441Z FAIL evidence/constraint-feedback-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/constraint-feedback-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7546489Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7547504Z FAIL evidence/craft-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/craft-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7548390Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7549284Z FAIL evidence/data-visualization-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/data-visualization-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7550269Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7551183Z FAIL evidence/feedback-projections-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/feedback-projections-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7552193Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7553036Z FAIL evidence/filter-phase-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/filter-phase-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7553943Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7554864Z FAIL evidence/functional-composition-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/functional-composition-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7555864Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7556704Z FAIL evidence/guitar-audio-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/guitar-audio-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7558011Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7558853Z FAIL evidence/guitar-runtime-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/guitar-runtime-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7559787Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7561083Z FAIL evidence/intonation-listening-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/intonation-listening-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7562944Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7564164Z FAIL evidence/locale-completion-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/locale-completion-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7565356Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7566190Z FAIL evidence/meter-picking-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/meter-picking-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7567322Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7568322Z FAIL evidence/music-phrase-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/music-phrase-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7569286Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7570358Z FAIL evidence/observatory-decisions-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/observatory-decisions-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7571365Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7572192Z FAIL evidence/origami-local-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/origami-local-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7573109Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7573986Z FAIL evidence/phrase-performance-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/phrase-performance-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7574959Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7575779Z FAIL evidence/pilot-value-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/pilot-value-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7576695Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7577764Z FAIL evidence/pitch-context-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/pitch-context-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7578695Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7579544Z FAIL evidence/pitch-estimates-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/pitch-estimates-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7580482Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7581345Z FAIL evidence/pluck-coordinates-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/pluck-coordinates-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7582525Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7583406Z FAIL evidence/practice-outcomes-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/practice-outcomes-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7584362Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7585203Z FAIL evidence/public-readback-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/public-readback-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7586135Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7587043Z FAIL evidence/representation-release-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/representation-release-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7588288Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7589137Z FAIL evidence/retry-admission-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/retry-admission-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7590074Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7590894Z FAIL evidence/scene-frames-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/scene-frames-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7591797Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7592639Z FAIL evidence/spectral-views-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/spectral-views-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7593580Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7594522Z FAIL evidence/tempo-clocks-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/tempo-clocks-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7595444Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7596265Z FAIL evidence/voice-leading-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/voice-leading-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7597405Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7598273Z FAIL evidence/voicing-learning-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/voicing-learning-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7599222Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7600057Z FAIL evidence/weave-material-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/weave-material-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7600989Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7601786Z FAIL evidence/weave-scene-2026-10-22: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/evidence/weave-scene-2026-10-22/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7602689Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7603472Z FAIL fixtures/computer-science: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/fixtures/computer-science/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7604347Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7605147Z FAIL fixtures/data-visualization: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/fixtures/data-visualization/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7606162Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7606874Z FAIL fixtures/physics: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/fixtures/physics/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7607920Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7608651Z FAIL fixtures/semiotics: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/fixtures/semiotics/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7609466Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7610295Z FAIL functional-composition/vendor: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/functional-composition/vendor/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7611212Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7611968Z FAIL guitar-runtime/vendor: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/guitar-runtime/vendor/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7612808Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7613541Z FAIL voice-leading/vendor: analyze.py --check exit 2: /opt/hostedtoolcache/Python/3.14.8/x64/bin/python: can't open file '/home/runner/work/learn/learn/code/streeling/voice-leading/vendor/analyze.py': [Errno 2] No such file or directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7614400Z 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7614600Z evidence/pilot-value-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7615107Z evidence/pitch-context-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7615593Z evidence/pitch-estimates-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7616094Z evidence/pluck-coordinates-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7616733Z evidence/practice-outcomes-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7617499Z evidence/public-readback-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7618047Z evidence/representation-release-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7618577Z evidence/retry-admission-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7619055Z evidence/scene-frames-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7619524Z evidence/spectral-views-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7619993Z evidence/tempo-clocks-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7620452Z evidence/voice-leading-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7620939Z evidence/voicing-learning-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7621427Z evidence/weave-material-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7621896Z evidence/weave-scene-2026-10-22: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7622359Z fixtures/computer-science: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7622799Z fixtures/data-visualization: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7623202Z fixtures/physics: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7623567Z fixtures/semiotics: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7623979Z functional-composition/vendor: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7624411Z guitar-runtime/vendor: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7625034Z psychohistory/psy-003: analyze.py --check, exit 0, 0.1 s: analyze.py: results.json matches a fresh run (5 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7625852Z psychohistory/psy-004: analyze.py --check, exit 0, 4.4 s: analyze.py: results.json matches a fresh run (64 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7626643Z psychohistory/psy-005: analyze.py --check, exit 0, 0.2 s: analyze.py: results.json matches a fresh run (26 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7627775Z psychohistory/psy-006: analyze.py --check, exit 0, 0.7 s: analyze.py: results.json matches a fresh run (47 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7628570Z psychohistory/psy-007: analyze.py --check, exit 0, 4.5 s: analyze.py: results.json matches a fresh run (46 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7629353Z psychohistory/psy-008: analyze.py --check, exit 0, 0.1 s: analyze.py: results.json matches a fresh run (35 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7630131Z psychohistory/psy-009: analyze.py --check, exit 0, 1.6 s: analyze.py: results.json matches a fresh run (41 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7630910Z psychohistory/psy-010: analyze.py --check, exit 0, 2.6 s: analyze.py: results.json matches a fresh run (39 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7631687Z psychohistory/psy-011: analyze.py --check, exit 0, 0.2 s: analyze.py: results.json matches a fresh run (64 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7632661Z psychohistory/psy-012: analyze.py --check, exit 0, 47.2 s: check passed: /home/runner/work/learn/learn/code/streeling/psychohistory/psy-012/results.json equals a fresh run
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7633634Z psychohistory/psy-013: analyze.py --check, exit 0, 0.5 s: analyze.py: results.json matches a fresh run (63 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7634429Z psychohistory/psy-014: analyze.py --check, exit 0, 11.1 s: analyze.py: results.json matches a fresh run (41 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7635211Z psychohistory/psy-015: analyze.py --check, exit 0, 7.4 s: analyze.py: results.json matches a fresh run (42 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7635991Z psychohistory/psy-016: analyze.py --check, exit 0, 0.2 s: analyze.py: results.json matches a fresh run (30 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7636781Z psychohistory/psy-017: analyze.py --check, exit 0, 3.9 s: analyze.py: results.json matches a fresh run (32 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7637972Z psychohistory/psy-018: analyze.py --check, exit 0, 0.5 s: analyze.py: results.json matches a fresh run (35 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7638800Z psychohistory/psy-019: analyze.py --check, exit 0, 9.1 s: analyze.py: results.json matches a fresh run (35 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7639591Z psychohistory/psy-020: analyze.py --check, exit 0, 0.1 s: analyze.py: results.json matches a fresh run (25 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7640377Z psychohistory/psy-021: analyze.py --check, exit 0, 0.1 s: analyze.py: results.json matches a fresh run (21 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7641162Z psychohistory/psy-022: analyze.py --check, exit 0, 18.3 s: analyze.py: results.json matches a fresh run (37 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7641948Z psychohistory/psy-023: analyze.py --check, exit 0, 13.7 s: analyze.py: results.json matches a fresh run (24 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7642733Z psychohistory/psy-024: analyze.py --check, exit 0, 0.2 s: analyze.py: results.json matches a fresh run (37 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7643537Z psychohistory/psy-025: analyze.py --check, exit 0, 0.2 s: analyze.py: results.json matches a fresh run (22 self-checks passed)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7644160Z voice-leading/vendor: analyze.py --check, exit 2, 0.0 s: 
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7644640Z psychohistory/psy-004: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7645210Z psychohistory/psy-005: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7645770Z psychohistory/psy-006: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7646323Z psychohistory/psy-007: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7646872Z psychohistory/psy-008: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7647684Z psychohistory/psy-009: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7648240Z psychohistory/psy-010: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7648927Z psychohistory/psy-011: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7649478Z psychohistory/psy-012: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7650026Z psychohistory/psy-013: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7650571Z psychohistory/psy-015: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7651121Z psychohistory/psy-016: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7651670Z psychohistory/psy-017: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7652221Z psychohistory/psy-018: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7652766Z psychohistory/psy-019: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7653322Z psychohistory/psy-020: extract.py at 4b03838, exit 0, 0.3 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7653875Z psychohistory/psy-021: extract.py at 4b03838, exit 0, 0.2 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7654425Z psychohistory/psy-022: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7654976Z psychohistory/psy-024: extract.py at 4b03838, exit 0, 0.6 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7655523Z psychohistory/psy-025: extract.py at 4b03838, exit 0, 0.1 s, same as observed-input.json
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7655952Z 70 modules, 94 failure(s)
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7666476Z ##[error]Process completed with exit code 1.
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.7839926Z Post job cleanup.
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.8702645Z [command]/usr/bin/git version
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.8750041Z git version 2.55.0
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.8793184Z Temporarily overriding HOME='/home/runner/work/_temp/92cdb039-e32f-41ab-bdcb-025ee3e0bf55' before making global git config changes
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.8794264Z Adding repository directory to the temporary git global config as a safe directory
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.8797443Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/learn/learn
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.8830412Z Removing SSH command configuration
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.8837339Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.8876260Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9148482Z Removing HTTP extra header
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9158533Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9207030Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9521413Z Removing includeIf entries pointing to credentials config files
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9532780Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9569785Z includeif.gitdir:/home/runner/work/learn/learn/.git.path
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9570651Z includeif.gitdir:/home/runner/work/learn/learn/.git/worktrees/*.path
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9571475Z includeif.gitdir:/github/workspace/.git.path
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9572184Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9580303Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/learn/learn/.git.path
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9609745Z /home/runner/work/_temp/git-credentials-644e1ceb-e29d-42b9-9d2b-e8f8dd1f5c6e.config
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9621805Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/learn/learn/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-644e1ceb\-e29d\-42b9\-9d2b\-e8f8dd1f5c6e\.config
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9663512Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/learn/learn/.git/worktrees/*.path
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9692250Z /home/runner/work/_temp/git-credentials-644e1ceb-e29d-42b9-9d2b-e8f8dd1f5c6e.config
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9701618Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/learn/learn/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-644e1ceb\-e29d\-42b9\-9d2b\-e8f8dd1f5c6e\.config
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9738136Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9764745Z /github/runner_temp/git-credentials-644e1ceb-e29d-42b9-9d2b-e8f8dd1f5c6e.config
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9771878Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-644e1ceb\-e29d\-42b9\-9d2b\-e8f8dd1f5c6e\.config
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9807689Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9833828Z /github/runner_temp/git-credentials-644e1ceb-e29d-42b9-9d2b-e8f8dd1f5c6e.config
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9841818Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-644e1ceb\-e29d\-42b9\-9d2b\-e8f8dd1f5c6e\.config
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:12.9879916Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:13.0118954Z Removing credentials config '/home/runner/work/_temp/git-credentials-644e1ceb-e29d-42b9-9d2b-e8f8dd1f5c6e.config'
+extracts (ubuntu-latest, Python 3.14)	UNKNOWN STEP	2026-10-25T19:19:13.0268893Z Cleaning up orphan processes

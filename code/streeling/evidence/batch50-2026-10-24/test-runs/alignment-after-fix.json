@@ -1,0 +1,53 @@
+{
+  "checked_at_utc": "2026-10-25T14:55:01.780356+00:00",
+  "tag": "alignment-after-fix",
+  "command": [
+    "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "C:\\tmp\\streeling-batch50-alignment-probe-20261025.py",
+    "alignment-after-fix"
+  ],
+  "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+  "mutation": {
+    "code": "AUD014",
+    "case": "model",
+    "field": "values.a",
+    "appended": 0.8,
+    "a_length": 4,
+    "b_length": 3,
+    "canonical_data_unchanged": true,
+    "mutated_snapshot_sha256": "03dee81b852cd6a2893847b2d96dc2d83415f3e5a10ce4d3ae24910b4c9d9b05"
+  },
+  "desired_wrong_input_rejection": true,
+  "exit_code": 0,
+  "observations": [
+    {
+      "code": "AUD014",
+      "case": "model",
+      "observed": {
+        "aligned_sample_counts": false,
+        "a_length": 4,
+        "b_length": 3
+      },
+      "expected": {
+        "aligned_sample_counts": true
+      },
+      "scope": "Three aligned authored mono samples; linear summation and hard clipping only; no loudness."
+    }
+  ],
+  "input_bindings": [
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-24/tests/test_unit_a.py",
+      "sha256": "c2eb73be2f024bab8ec53e958e0c6e18d3b00f9c78d895379bacb2e70f1a9082"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-24/unit-a.json",
+      "sha256": "d02838183a7161a34cb9ebd4a0c0a70f4fb572c20d03ea033b19ffe06a6e7987"
+    }
+  ],
+  "log": "code/streeling/evidence/batch50-2026-10-24/test-runs/alignment-after-fix.log",
+  "log_sha256": "b50eabb9bba4050240c24ff4e89b50b9d613c22152204acf6a106a599eeb91e9",
+  "scope": "Actual test-harness defect probe using an in-memory extra sample. Before false green is a detector defect, not a canonical course failure. After must retain length diagnostics before rejection."
+}

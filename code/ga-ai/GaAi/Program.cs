@@ -21,6 +21,19 @@ public static class Entry
             ["l12"] = Lesson12.Run,
             ["l13"] = Lesson13.Run,
             ["l14"] = Lesson14.Run,
+            ["l15"] = Lesson15.Run,
+            ["l16"] = Lesson16.Run,
+            ["l17"] = Lesson17.Run,
+            ["l18"] = Lesson18.Run,
+            ["l19"] = Lesson19.Run,
+            ["l20"] = Lesson20.Run,
+            ["l21"] = Lesson21.Run,
+            ["l22"] = Lesson22.Run,
+            ["l23"] = Lesson23.Run,
+            ["l24"] = Lesson24.Run,
+            ["l25"] = Lesson25.Run,
+            ["l26"] = Lesson26.Run,
+            ["l27"] = Lesson27.Run,
         };
 
         if (args.Length != 1 || !lessons.TryGetValue(args[0], out var run))

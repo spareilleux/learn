@@ -1,0 +1,153 @@
+# l18
+
+== Without embeddings: the first skill, in registration order, whose CanHandle accepts each example prompt
+prompt                                       first skill that accepts it
+voice leading from C to F                    none
+smooth voice leading C to Am                 none
+best voicing from G7 to Cmaj7                skill.chordvoicings
+how do I voice lead Dm7 to G7                none
+voice leading C major to G major             none
+smoothest voicing from Em to A7              skill.chordvoicings
+voice leading Fmaj7 to Bm7b5                 none
+what's the smoothest voicing from D to A     none
+voice lead C7 to F                           none
+best way to move from G7 to C                none
+skill intents 32; CanHandle of skill.voiceleading accepts 0 of its 10 example prompts
+
+== VoiceLeadingSkill's example prompts: the chords read, the total motion, and the least motion
+prompt                                     asks           reads          total   least  best pairings
+voice leading from C to F                  C → F          C → F          3       3      1
+smooth voice leading C to Am               C → Am         C → Am         2       2      1
+best voicing from G7 to Cmaj7              G7 → Cmaj7     G7 → Cmaj7     3       3      1
+how do I voice lead Dm7 to G7              Dm7 → G7       Dm7 → G7       3       3      1
+voice leading C major to G major           C → G          declined       -       -      -
+smoothest voicing from Em to A7            Em → A7        Em → A7        5       4      1
+voice leading Fmaj7 to Bm7b5               Fmaj7 → Bm7b5  Fmaj7 → Bm7b5  3       3      1
+what's the smoothest voicing from D to A   D → A          D → A          3       3      1
+voice lead C7 to F                         C7 → F         C7 → F         4       4      1
+best way to move from G7 to C              G7 → C         G7 → C         4       4      1
+
+== Each chord symbol on C, as the first chord ("voice leading C<symbol> to F") and as the last ("voice leading F to C<symbol>")
+written    means      first                  last
+C          C          right                  right
+Cmaj       C          right                  right
+C major    C          declined               right
+Cm         Cm         right                  right
+Cmin       Cm         right                  right
+C minor    Cm         declined               reads C
+C-         Cm         declined               reads C
+Cdim       Cdim       right                  right
+C°         Cdim       right                  reads C
+Co         Cdim       declined               declined
+Caug       Caug       right                  right
+C+         Caug       declined               reads C
+Csus2      Csus2      right                  right
+Csus4      Csus4      right                  right
+Csus       Csus4      right                  right
+C7         C7         right                  right
+Cdom7      C7         declined               declined
+Cm7        Cm7        right                  right
+Cmin7      Cm7        right                  right
+C-7        Cm7        declined               reads C
+Cmaj7      Cmaj7      right                  right
+CM7        Cmaj7      reads Cm7              reads Cm7
+CΔ7        Cmaj7      declined               declined
+CΔ         Cmaj7      declined               declined
+Cmajor7    Cmaj7      declined               declined
+Cm7b5      Cm7b5      right                  right
+Cmin7b5    Cm7b5      right                  right
+Cø         Cm7b5      declined               declined
+Cø7        Cm7b5      declined               declined
+Cdim7      Cdim7      right                  right
+C°7        Cdim7      declined               reads Cdim
+Co7        Cdim7      declined               declined
+C6         C6         right                  right
+Cm6        Cm6        right                  right
+Cmin6      Cm6        right                  right
+C9         C9         right                  right
+Cmaj9      Cmaj9      right                  right
+Cm9        Cm9        right                  right
+Cmin9      Cm9        right                  right
+Cadd9      Cadd9      declined               declined
+C7sus4     C7sus4     declined               declined
+C7b9       C7b9       declined               declined
+C7#9       C7#9       declined               declined
+CmMaj7     CmMaj7     declined               declined
+C11        C11        declined               declined
+C13        C13        declined               declined
+symbols 46: read right as the first chord 24, as the last 24
+
+== A root with an accidental, first ("voice leading <root> to C") and last ("voice leading C to <root>", "… to <root>m")
+notation   first    last     last, m   the root first, spelled   the last, misread as
+ASCII #    5 of 5   0 of 5   5 of 5    C#, D#, F#, G#, A#        C, D, F, G, A
+♯          5 of 5   0 of 5   5 of 5    C#, D#, F#, G#, A#        C, D, F, G, A
+ASCII b    5 of 5   5 of 5   5 of 5    Db, Eb, Gb, Ab, A#        -
+♭          5 of 5   0 of 5   5 of 5    Db, Eb, Gb, Ab, Bb        D, E, G, A, B
+
+== "voice leading C<quality> to <root><quality>": the 16 qualities the skill builds, on C and on each of the 12 roots
+voices   prompts   read right   least motion   more than the least   most extra   several best pairings
+3 → 3    432       432          432            0                     0            54
+3 → 4    504       504          266            238                   5            69
+3 → 5    216       216          34             182                   7            67
+4 → 3    504       504          266            238                   5            69
+4 → 4    588       588          588            0                     0            56
+4 → 5    252       252          79             173                   5            88
+5 → 3    216       216          34             182                   7            67
+5 → 4    252       252          79             173                   5            88
+5 → 5    108       108          108            0                     0            49
+prompts 3072: closing on "every other voicing … requires more total semitone movement" 3072, more motion than the least 1186, several best pairings 607
+by how much more: 1 semitone 512, 2 semitones 294, 3 semitones 240, 4 semitones 94, 5 semitones 24, 6 semitones 20, 7 semitones 2
+the first answers with the most extra motion:
+  Csus2 to Em9: 11 semitones, least 4
+  Cm9 to Absus2: 11 semitones, least 4
+  Cm to Emaj9: 10 semitones, least 4
+  Cm to Em9: 10 semitones, least 4
+  Cm to Fm9: 9 semitones, least 3
+the first answers with the most best pairings:
+  Cmaj9 to Em9: 7 pairings
+  Cm9 to Abmaj9: 7 pairings
+  Csus2 to Em9: 5 pairings
+
+== Spelling: ii7 to V7 and V7 to Imaj7 in the 12 major keys, the notes spelled otherwise than in their chord
+key   ii7 to V7                          V7 to Imaj7
+C     as spelled                         as spelled
+G     as spelled                         as spelled
+D     as spelled                         as spelled
+A     as spelled                         as spelled
+E     as spelled                         as spelled
+B     as spelled                         as spelled
+F#    F for E#                           F for E#
+F     A# for Bb                          A# for Bb
+Bb    D# for Eb, A# for Bb               A# for Bb, D# for Eb
+Eb    G# for Ab, A# for Bb, D# for Eb    as spelled
+Ab    as spelled                         as spelled
+Db    as spelled                         as spelled
+
+== Spelling: V7 to i in the 12 minor keys
+key   V7 to i
+Cm    D# for Eb
+Gm    A# for Bb
+Dm    as spelled
+Am    as spelled
+Em    as spelled
+Bm    as spelled
+F#m   F for E#
+C#m   C for B#
+G#m   G for F##
+Fm    A# for Bb, G# for Ab
+Bbm   A# for Bb, D# for Eb, C# for Db
+Ebm   as spelled
+prompts 36: every note spelled as in its chord 22
+
+== Other phrasings
+prompt                                         asks                   reads            verdict
+how do I get from G7 to a C chord              G7 → C                 G7 → A           wrong chord
+voice leading Dm7 to G7 to Cmaj7               Dm7 → G7 → Cmaj7       Dm7 → G7         reads 2 of 3 chords
+voice leading CM7 to FM7                       Cmaj7 → Fmaj7          Cm7 → Fm7        wrong chord
+voice leading G7 → C                           G7 → C                 G7 → C           right
+voice leading G7 - C                           G7 → C                 declined         declined
+voice leading from G7 into C                   G7 → C                 declined         declined
+voice leading from C to F#                     C → F#                 C → F            wrong chord
+voice leading from G to B°                     G → Bdim               G → B            wrong chord
+smooth voice leading from C major to A minor   C → Am                 declined         declined
+how do I voice lead Bb to Eb                   Bb → Eb                Bb → Eb          right

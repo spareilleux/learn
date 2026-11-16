@@ -1,0 +1,77 @@
+<!--
+  The Observatory as a Windows Installer package (build-msi.ps1).
+
+  The Windows export (Observatory.exe, Observatory.pck) and its notices, installed for the current user
+  only: no administrator rights, nothing under Program Files, into %LOCALAPPDATA%\Programs\Observatory,
+  with a Start menu shortcut and an entry in Settings > Apps > Installed apps. Its own upgrade code and
+  folder: it sits beside Observatory RTX (artpass/publish/rtx/msi in the author's copy) without touching it.
+
+  Built with WiX Toolset 5.0.2 (MS-RL), installed as a local .NET tool, never a global one: from WiX 6
+  the Open Source Maintenance Fee applies.
+-->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="Observatory"
+           Manufacturer="Stephane Pareilleux"
+           Version="$(var.Version)"
+           UpgradeCode="1B0C8B9E-4F2D-4E7A-9C5B-3A6D2E8F7C41"
+           Scope="perUser"
+           Language="1033">
+    <SummaryInformation Description="Observatory $(var.Version): the Observatory of spareilleux.github.io/learn, native" />
+
+    <!-- A newer package replaces an older one; an older one refuses to go over a newer one. The newer one
+         is installed before the older one is removed, and writes every file (REINSTALLMODE a): Godot's
+         template gives the program the same file version from one scene version to the next. -->
+    <MajorUpgrade Schedule="afterInstallExecute"
+                  DowngradeErrorMessage="A newer version of the Observatory is already installed." />
+    <Property Id="REINSTALLMODE" Value="amus" />
+    <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
+
+    <Icon Id="Observatory.ico" SourceFile="$(var.Icon)" />
+    <Property Id="ARPPRODUCTICON" Value="Observatory.ico" />
+    <Property Id="ARPURLINFOABOUT" Value="https://spareilleux.github.io/learn/observatory/" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/spareilleux/learn/releases" />
+    <Property Id="ARPNOMODIFY" Value="1" />
+
+    <StandardDirectory Id="LocalAppDataFolder">
+      <Directory Id="ProgramsDir" Name="Programs">
+        <Directory Id="INSTALLFOLDER" Name="Observatory" />
+      </Directory>
+    </StandardDirectory>
+
+    <!-- Files under the user's profile: a registry value under HKCU is the component's key path (ICE38),
+         and the folders created there are removed on uninstall (ICE64). Files and a registry key path
+         together: WiX cannot derive the component's code, so it is fixed here. -->
+    <Component Id="Program" Directory="INSTALLFOLDER" Guid="6A1E2C7D-0B94-4F38-8E25-D7C3B9A41F06">
+      <RegistryValue Root="HKCU" Key="Software\spareilleux\Observatory" Name="InstallFolder"
+                     Type="string" Value="[INSTALLFOLDER]" KeyPath="yes" />
+      <File Id="Exe" Source="$(var.ExportDir)\Observatory.exe" />
+      <File Id="Pck" Source="$(var.ExportDir)\Observatory.pck" />
+      <File Id="Readme" Source="$(var.ExportDir)\README.txt" />
+      <File Id="Licenses" Source="$(var.ExportDir)\LICENSES.txt" />
+      <File Id="GodotCopyright" Source="$(var.ExportDir)\GODOT_COPYRIGHT.txt" />
+      <RemoveFolder Id="RmInstallFolder" On="uninstall" />
+      <RemoveFolder Id="RmProgramsDir" Directory="ProgramsDir" On="uninstall" />
+    </Component>
+
+    <Component Id="StartMenu" Directory="ProgramMenuFolder">
+      <RegistryValue Root="HKCU" Key="Software\spareilleux\Observatory" Name="StartMenuShortcut"
+                     Type="integer" Value="1" KeyPath="yes" />
+      <Shortcut Id="StartShortcut" Name="Observatory" Description="The Observatory, native"
+                Target="[INSTALLFOLDER]Observatory.exe" WorkingDirectory="INSTALLFOLDER" Icon="Observatory.ico" />
+    </Component>
+
+    <!-- Removes the key once the last component goes. Not under HKCU\Software\Observatory: uninstalling
+         Observatory RTX 0.1.0 deletes that whole key. -->
+    <Component Id="RegistryCleanup" Directory="INSTALLFOLDER">
+      <RegistryValue Root="HKCU" Key="Software\spareilleux\Observatory" Name="Version"
+                     Type="string" Value="$(var.Version)" KeyPath="yes" />
+      <RemoveRegistryKey Root="HKCU" Key="Software\spareilleux\Observatory" Action="removeOnUninstall" />
+    </Component>
+
+    <Feature Id="Main">
+      <ComponentRef Id="Program" />
+      <ComponentRef Id="StartMenu" />
+      <ComponentRef Id="RegistryCleanup" />
+    </Feature>
+  </Package>
+</Wix>

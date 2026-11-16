@@ -1,0 +1,1510 @@
+{
+  "reviewer": "independent-pedagogical-source-review-agent",
+  "checked_at_utc": "2026-10-23T00:51:31.177836+00:00",
+  "verdict": "pass",
+  "findings": [
+    {
+      "id": "independent-data-scope",
+      "status": "observed-preserved",
+      "finding": "Independent18grouped checks bind seven fixed JSON inputs and four public source copies. Static control-flow and arithmetic are not parser execution, complete MIDI conformance, a current capability census or a GA repair."
+    },
+    {
+      "id": "separate-dispatch-and-projection",
+      "status": "observed-preserved",
+      "finding": "The unreachable metadata arm and hypothetical tempo-event delta loss are independent concerns. Correct dispatch alone would not recover erased locations. Modeled projected lists must not be relabeled actual parser output."
+    },
+    {
+      "id": "bounded-SMPTE-example",
+      "status": "observed-preserved",
+      "finding": "Nonnegative header reading yields unsigned high-byte231 and source negation-231, unlike explicit signed-byte decoding-25 followed by positive format25. The750-tick calculation is limited to25non-drop frames/s; no full/drop-frame decoder was validated."
+    },
+    {
+      "id": "authored-clock-falsifier",
+      "status": "observed-preserved",
+      "finding": "Affine anchors, apparent100ppm and deterministic held-out contradiction are authored assumptions. The incompatible intervals reject the combined affine/coordinate/error model without isolating drift, origin reset or another cause; no synchronization or confidence interval is measured."
+    },
+    {
+      "id": "endpoint-and-physical-boundary",
+      "status": "observed-preserved",
+      "finding": "Callback times, latency records and80ms gate are invented. Physical string indices are preserved by the selected demonstrator, whose triangle oscillator requests and visual state do not acquire physical onsets. No causal GA improvement or production approval follows."
+    },
+    {
+      "id": "specification-and-access-boundary",
+      "status": "observed-preserved",
+      "finding": "Dated Web Audio and High Resolution Time documents remain Working Drafts. API timestamp/latency estimates do not measure action-to-acoustic latency or establish actual browser support. Publisher direct403 remains403; separate actual abstract reading does not establish full-paper/PDF/audio access."
+    },
+    {
+      "id": "plan-chronology",
+      "status": "observed-preserved",
+      "finding": "Production plan follows initial source reading and hand-worked examples and precedes external numerical verification. It does not claim preregistration of physical/browser experiments."
+    }
+  ],
+  "fix_requests": [],
+  "fix_history": [
+    {
+      "id": "MCL004-unreachable-tempo-body",
+      "origin": "root control-flow review, independently confirmed",
+      "status": "resolved",
+      "finding": "Earlier wording could promote the selected integer-BPM construction body to successful parser behavior. All three MCL004 locales now explicitly state metadata dispatch is unreachable at its prior pin and the numerical downstream reconstruction is conditional. No GA source fix or runtime capture was made."
+    },
+    {
+      "id": "MCL006-unreachable-signature-body",
+      "origin": "root control-flow review, independently confirmed",
+      "status": "resolved",
+      "finding": "All three MCL006 locales now qualify7/8and skipped-payload interpretation as conditional on reaching the metadata body; the shown dispatch does not reach it. Distinct scalar MusicXML predictions are retained with source-only scope."
+    },
+    {
+      "id": "dispatcher-citation-range",
+      "origin": "independent source/content review",
+      "status": "resolved",
+      "finding": "The MCL007 dispatcher highlight stopped at114 and omitted the full0xFFuy meta-arm label at169. Root and translator extended all three source links to98–173; final ordered URLs and actual source lines checked."
+    }
+  ],
+  "coverage": {
+    "exercise_answer_pairs": 75,
+    "learner_criteria": 15
+  },
+  "scope": {
+    "reviewed": "All fifteen EN/FR/ES course bodies and75localized exercise-answer pairs: three new and two source-scope amendments. Final fifteen-criterion new-course rubric/task, fixed parser/tempo/clock/endpoint/source data, four current packet immutable sources and two prior pinned MusicXML source/type snippets reviewed.",
+    "method": "Independent agent semantic/source review and mathematical checks against independently reviewed18grouped data decisions. Exact input hashes verified. No content-reviewer build, parser/test/browser/audio/hardware/GPU experiment, dependency installation, source patch or paid call.",
+    "prerequisite_progression": "MCL004/006, NET004 and PM005 actual English sources read. Tempo-map integration and dispatch reachability add event-location/control-flow analysis; affine clock/error mapping adds coordinate semantics beyond receipt dependencies; playback user-boundary measurement adds concrete scheduling/physical-output distinctions beyond producer-speed and historical coexistence analysis.",
+    "amendment_history": "MCL004/006 useful arithmetic is preserved with corrected reachability interpretation. Historical packet receipts are not rewritten into current-source approval. Their source/type reference receipts support the distinct MusicXML interpretation; old genre-wide or unrelated historical claims are not newly certified.",
+    "localization": "Full ten locale bodies and all answers directly reviewed, plus ordered URL/code and UTF8LF checks. This is agent semantic review, not human fluent-language, musician or learner assessment.",
+    "publication": "Source/evidence review only; root sync/build/rendered-links/idempotence/publication gates excluded as circular inputs. No deployed HTML or actual playback outcome is supplied."
+  },
+  "exercise_answer_checks": [
+    {
+      "id": "MCL007-en-exercise-1",
+      "module": "MCL007",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/en/mcl-007-integrate-a-midi-tempo-map-before-scheduling.md",
+      "heading_line": 30,
+      "exercise_answer_sha256": "f93544ef5d253cf4aae3678e3d19d41bdd06a1bdfb91372ce251ade8579f5617",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "With Q480 and tempo locations0/480/960, ticks0/240/480/720/960/1200 map to seconds0/0.25/0.5/1/1.5/1.625. Applying the last250000-microsecond tempo to all ticks falsely gives0.625 at1200. Accumulate delta ticks before projection; simultaneous order and multitrack merging need declared rules."
+    },
+    {
+      "id": "MCL007-en-exercise-2",
+      "module": "MCL007",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/en/mcl-007-integrate-a-midi-tempo-map-before-scheduling.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "dcae4c0b9e8237c27916e01031099b39c4b3826d700d0d2c424551032532ab0c",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The note from tick240 to1200 spans240/480/240 ticks under three rates, giving0.25+1+0.125=1.375 seconds, also1.625-0.25. Applying its onset rate globally gives1 second. No played duration, swing or runtime scheduling result is measured."
+    },
+    {
+      "id": "MCL007-en-exercise-3",
+      "module": "MCL007",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/en/mcl-007-integrate-a-midi-tempo-map-before-scheduling.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "d1cfc7c430e42ce1e12bf505a75c612ccf9774b259b3dbc224c0ee163e914421",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The bounded25fps non-drop example with40ticks/frame gives1000ticks/s and750ticks=0.75seconds, independent of tempo. E728 high byte231 explicitly sign-decodes to-25 and then positive format25. The selected unsigned source shift/negation predicts-231; no executed decoder or drop-frame conformance is established."
+    },
+    {
+      "id": "MCL007-en-exercise-4",
+      "module": "MCL007",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/en/mcl-007-integrate-a-midi-tempo-map-before-scheduling.md",
+      "heading_line": 69,
+      "exercise_answer_sha256": "2e492f98e325819b88b8b315d514ab6d75c4b06a6be4ee295519c4631bb70330",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "StreamA places tempo change at480 and note-off at960ticks/1.5seconds;B uses240 and720ticks/1.25seconds. Hypothetical correctly routed construction-body projections keep identical tempo integers and note-local deltas while dropping tempo deltas. This proves loss in that modeled projection, not actual outputs of the unreachable parser path."
+    },
+    {
+      "id": "MCL007-en-exercise-5",
+      "module": "MCL007",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/en/mcl-007-integrate-a-midi-tempo-map-before-scheduling.md",
+      "heading_line": 86,
+      "exercise_answer_sha256": "481cbc4a7d5454aec8eff467c8f86c144c083a064e870abd1264a574e86ce2ba",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual eventType=actualStatus &0xF0 cannot equal0xFF, so metadata dispatch is unreachable at both hash-identical pins. Correct routing would not repair separate event-location loss. Candidate retained event/time/raw units/division/order/source fields need actual boundary-fixture execution before a working-import claim; no parser patch, contract or scheduler was delivered."
+    },
+    {
+      "id": "MCL007-fr-exercise-1",
+      "module": "MCL007",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/fr/mcl-007-integrate-a-midi-tempo-map-before-scheduling.fr.md",
+      "heading_line": 30,
+      "exercise_answer_sha256": "f268e4de5ffce037a18c123c3e44da8badddd49da3f18c3351b2d2ec216cf45c",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "With Q480 and tempo locations0/480/960, ticks0/240/480/720/960/1200 map to seconds0/0.25/0.5/1/1.5/1.625. Applying the last250000-microsecond tempo to all ticks falsely gives0.625 at1200. Accumulate delta ticks before projection; simultaneous order and multitrack merging need declared rules."
+    },
+    {
+      "id": "MCL007-fr-exercise-2",
+      "module": "MCL007",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/fr/mcl-007-integrate-a-midi-tempo-map-before-scheduling.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "f908edca1997752d5aca608050ab377a45c660c60aa6ce92803f508edb0a620a",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The note from tick240 to1200 spans240/480/240 ticks under three rates, giving0.25+1+0.125=1.375 seconds, also1.625-0.25. Applying its onset rate globally gives1 second. No played duration, swing or runtime scheduling result is measured."
+    },
+    {
+      "id": "MCL007-fr-exercise-3",
+      "module": "MCL007",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/fr/mcl-007-integrate-a-midi-tempo-map-before-scheduling.fr.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "aba2e60a94fe8b64dd3fbca720c51ccc923b96f05ba56e7629ea608ea9c49260",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The bounded25fps non-drop example with40ticks/frame gives1000ticks/s and750ticks=0.75seconds, independent of tempo. E728 high byte231 explicitly sign-decodes to-25 and then positive format25. The selected unsigned source shift/negation predicts-231; no executed decoder or drop-frame conformance is established."
+    },
+    {
+      "id": "MCL007-fr-exercise-4",
+      "module": "MCL007",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/fr/mcl-007-integrate-a-midi-tempo-map-before-scheduling.fr.md",
+      "heading_line": 69,
+      "exercise_answer_sha256": "70a62976c2ef67347cbd5c271e71547d238d7ec986fdf6ce0f6243ba27687d81",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "StreamA places tempo change at480 and note-off at960ticks/1.5seconds;B uses240 and720ticks/1.25seconds. Hypothetical correctly routed construction-body projections keep identical tempo integers and note-local deltas while dropping tempo deltas. This proves loss in that modeled projection, not actual outputs of the unreachable parser path."
+    },
+    {
+      "id": "MCL007-fr-exercise-5",
+      "module": "MCL007",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/fr/mcl-007-integrate-a-midi-tempo-map-before-scheduling.fr.md",
+      "heading_line": 86,
+      "exercise_answer_sha256": "16012a96f045c2c6becf19e5ef07d0efc978c8085d475c6009682a8e91655a41",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual eventType=actualStatus &0xF0 cannot equal0xFF, so metadata dispatch is unreachable at both hash-identical pins. Correct routing would not repair separate event-location loss. Candidate retained event/time/raw units/division/order/source fields need actual boundary-fixture execution before a working-import claim; no parser patch, contract or scheduler was delivered."
+    },
+    {
+      "id": "MCL007-es-exercise-1",
+      "module": "MCL007",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/es/mcl-007-integrate-a-midi-tempo-map-before-scheduling.es.md",
+      "heading_line": 30,
+      "exercise_answer_sha256": "f18fd14518275ee54ae8a9fe00d207d531b69ee05a7899310888719a2d7a2e68",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "With Q480 and tempo locations0/480/960, ticks0/240/480/720/960/1200 map to seconds0/0.25/0.5/1/1.5/1.625. Applying the last250000-microsecond tempo to all ticks falsely gives0.625 at1200. Accumulate delta ticks before projection; simultaneous order and multitrack merging need declared rules."
+    },
+    {
+      "id": "MCL007-es-exercise-2",
+      "module": "MCL007",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/es/mcl-007-integrate-a-midi-tempo-map-before-scheduling.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "2a9c242bc2e2df81788c03165b39431c984f542175ddab08c28493cef6d0de08",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The note from tick240 to1200 spans240/480/240 ticks under three rates, giving0.25+1+0.125=1.375 seconds, also1.625-0.25. Applying its onset rate globally gives1 second. No played duration, swing or runtime scheduling result is measured."
+    },
+    {
+      "id": "MCL007-es-exercise-3",
+      "module": "MCL007",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/es/mcl-007-integrate-a-midi-tempo-map-before-scheduling.es.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "6174554fa4db13896666a0bfce4f52c9f8fbe64ac1f45fa441f03bc875aa5f63",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The bounded25fps non-drop example with40ticks/frame gives1000ticks/s and750ticks=0.75seconds, independent of tempo. E728 high byte231 explicitly sign-decodes to-25 and then positive format25. The selected unsigned source shift/negation predicts-231; no executed decoder or drop-frame conformance is established."
+    },
+    {
+      "id": "MCL007-es-exercise-4",
+      "module": "MCL007",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/es/mcl-007-integrate-a-midi-tempo-map-before-scheduling.es.md",
+      "heading_line": 69,
+      "exercise_answer_sha256": "3bfeef7c57c41a3cb0220220c54dd132a9236d497f9c42891860bdf8a581b139",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "StreamA places tempo change at480 and note-off at960ticks/1.5seconds;B uses240 and720ticks/1.25seconds. Hypothetical correctly routed construction-body projections keep identical tempo integers and note-local deltas while dropping tempo deltas. This proves loss in that modeled projection, not actual outputs of the unreachable parser path."
+    },
+    {
+      "id": "MCL007-es-exercise-5",
+      "module": "MCL007",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/es/mcl-007-integrate-a-midi-tempo-map-before-scheduling.es.md",
+      "heading_line": 86,
+      "exercise_answer_sha256": "59c4f577e2850ab2bce4e9462d7ddbe4ea3e95766a3dd24e596b05070f8bd7b8",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual eventType=actualStatus &0xF0 cannot equal0xFF, so metadata dispatch is unreachable at both hash-identical pins. Correct routing would not repair separate event-location loss. Candidate retained event/time/raw units/division/order/source fields need actual boundary-fixture execution before a working-import claim; no parser patch, contract or scheduler was delivered."
+    },
+    {
+      "id": "NET008-en-exercise-1",
+      "module": "NET008",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/network-science/en/net-008-map-clock-domains-before-ordering-events.md",
+      "heading_line": 34,
+      "exercise_answer_sha256": "1d15fc051e54462b02d2a60a9f740cf16a40ba50c480fba07871109a331778f2",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Authored p=10000+1000.1c maps context10seconds to performance20001ms; the call19980ms leads it by21ms. Raw subtraction mixes units and origins; unit conversion alone does not establish offset or rate mapping. This is conditional arithmetic, not an observed scheduling margin."
+    },
+    {
+      "id": "NET008-en-exercise-2",
+      "module": "NET008",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/network-science/en/net-008-map-clock-domains-before-ordering-events.md",
+      "heading_line": 46,
+      "exercise_answer_sha256": "6edca1c2ec86102c17c920295a9e928c2430db292ad59979afbb34d5ae8906b2",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Anchors(0,10000) and(60,70006) determine slope1000.1ms/context-second and intercept10000ms, apparent difference100ppm from nominal1000. One anchor admits infinitely many rate/intercept choices; two anchors fit a line without measuring stability, hardware drift or sample noise."
+    },
+    {
+      "id": "NET008-en-exercise-3",
+      "module": "NET008",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/network-science/en/net-008-map-clock-domains-before-ordering-events.md",
+      "heading_line": 56,
+      "exercise_answer_sha256": "eaef9c9b1c9425c70d967592d3f2433dc38404a09a32aa39fc4d832646a7f3ca",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "At context30 and120 the fitted model predicts40003 and130012ms. Nominal slope1000 at120 gives130000ms, a12ms difference. Interpolation and extrapolation remain distinct; neither prediction is an observed event or independently validated uncertainty estimate."
+    },
+    {
+      "id": "NET008-en-exercise-4",
+      "module": "NET008",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/network-science/en/net-008-map-clock-domains-before-ordering-events.md",
+      "heading_line": 68,
+      "exercise_answer_sha256": "c7c6c4d10a4c44177dab7f7ed68a00e95a771a9da0b91089255dc46fc1d6de10",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "At90 the anchor weights-0.5/1.5 yield central100009ms and bound0.5*(0.5+1.5)=1ms. Held-out100011±0.5 has residual2 exceeding combined1.5; intervals100008..100010 and100010.5..100011.5 are disjoint. Reject combined affine/coordinate/error assumptions, without identifying drift or another cause; bounds are deterministic, not confidence intervals."
+    },
+    {
+      "id": "NET008-en-exercise-5",
+      "module": "NET008",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/network-science/en/net-008-map-clock-domains-before-ordering-events.md",
+      "heading_line": 80,
+      "exercise_answer_sha256": "60852001033465dedfa05a45b3495cd92c4fb23f4cd87d25cbc7243b31727630",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Retain clock identities,units,origins,anchors,model/error assumptions,validity,lifecycle,source and endpoints. A common monotonic acquisition clock may be simpler than a DSL. Reject stale or failed mappings and require independently defined calibrated physical-output observations for acoustic latency. Working Draft APIs and selected demonstrator code are not measured synchronization or a deployed schema."
+    },
+    {
+      "id": "NET008-fr-exercise-1",
+      "module": "NET008",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/network-science/fr/net-008-map-clock-domains-before-ordering-events.fr.md",
+      "heading_line": 34,
+      "exercise_answer_sha256": "afc1ea18dcd22264aec63aea6772f67412021c7a16a7a84984b35706cdae8105",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Authored p=10000+1000.1c maps context10seconds to performance20001ms; the call19980ms leads it by21ms. Raw subtraction mixes units and origins; unit conversion alone does not establish offset or rate mapping. This is conditional arithmetic, not an observed scheduling margin."
+    },
+    {
+      "id": "NET008-fr-exercise-2",
+      "module": "NET008",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/network-science/fr/net-008-map-clock-domains-before-ordering-events.fr.md",
+      "heading_line": 46,
+      "exercise_answer_sha256": "245e71d43276417c228a2a6e7ca1eff9071384787668776ef0293deca05b2658",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Anchors(0,10000) and(60,70006) determine slope1000.1ms/context-second and intercept10000ms, apparent difference100ppm from nominal1000. One anchor admits infinitely many rate/intercept choices; two anchors fit a line without measuring stability, hardware drift or sample noise."
+    },
+    {
+      "id": "NET008-fr-exercise-3",
+      "module": "NET008",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/network-science/fr/net-008-map-clock-domains-before-ordering-events.fr.md",
+      "heading_line": 56,
+      "exercise_answer_sha256": "d7836346045cce19ad2910aaaaa1fd603d1dc8d2f134d6d3111f453627be7d42",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "At context30 and120 the fitted model predicts40003 and130012ms. Nominal slope1000 at120 gives130000ms, a12ms difference. Interpolation and extrapolation remain distinct; neither prediction is an observed event or independently validated uncertainty estimate."
+    },
+    {
+      "id": "NET008-fr-exercise-4",
+      "module": "NET008",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/network-science/fr/net-008-map-clock-domains-before-ordering-events.fr.md",
+      "heading_line": 68,
+      "exercise_answer_sha256": "8d694b88dd47fee68f1d70ffcb94049c15308ed27dc7a404e7a8b74b948fa9c8",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "At90 the anchor weights-0.5/1.5 yield central100009ms and bound0.5*(0.5+1.5)=1ms. Held-out100011±0.5 has residual2 exceeding combined1.5; intervals100008..100010 and100010.5..100011.5 are disjoint. Reject combined affine/coordinate/error assumptions, without identifying drift or another cause; bounds are deterministic, not confidence intervals."
+    },
+    {
+      "id": "NET008-fr-exercise-5",
+      "module": "NET008",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/network-science/fr/net-008-map-clock-domains-before-ordering-events.fr.md",
+      "heading_line": 80,
+      "exercise_answer_sha256": "40b16d6566171b8fd1933b352cf96cbb3b071ccbb3ed755535ed026bd0e4078e",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Retain clock identities,units,origins,anchors,model/error assumptions,validity,lifecycle,source and endpoints. A common monotonic acquisition clock may be simpler than a DSL. Reject stale or failed mappings and require independently defined calibrated physical-output observations for acoustic latency. Working Draft APIs and selected demonstrator code are not measured synchronization or a deployed schema."
+    },
+    {
+      "id": "NET008-es-exercise-1",
+      "module": "NET008",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/network-science/es/net-008-map-clock-domains-before-ordering-events.es.md",
+      "heading_line": 34,
+      "exercise_answer_sha256": "f96c13d044ce6fb9abda8574ba0fe6d6764f45f46e5930160c025c1bf728c2bd",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Authored p=10000+1000.1c maps context10seconds to performance20001ms; the call19980ms leads it by21ms. Raw subtraction mixes units and origins; unit conversion alone does not establish offset or rate mapping. This is conditional arithmetic, not an observed scheduling margin."
+    },
+    {
+      "id": "NET008-es-exercise-2",
+      "module": "NET008",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/network-science/es/net-008-map-clock-domains-before-ordering-events.es.md",
+      "heading_line": 46,
+      "exercise_answer_sha256": "c0267cf3a284a7dd06f2acdd821dbe6b7d822fc70898d9a843711dd94630dc44",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Anchors(0,10000) and(60,70006) determine slope1000.1ms/context-second and intercept10000ms, apparent difference100ppm from nominal1000. One anchor admits infinitely many rate/intercept choices; two anchors fit a line without measuring stability, hardware drift or sample noise."
+    },
+    {
+      "id": "NET008-es-exercise-3",
+      "module": "NET008",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/network-science/es/net-008-map-clock-domains-before-ordering-events.es.md",
+      "heading_line": 56,
+      "exercise_answer_sha256": "3aa86fa440afd9d921813ba8514089ae96a4aafd26b8a8669b7e51a93d9e021a",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "At context30 and120 the fitted model predicts40003 and130012ms. Nominal slope1000 at120 gives130000ms, a12ms difference. Interpolation and extrapolation remain distinct; neither prediction is an observed event or independently validated uncertainty estimate."
+    },
+    {
+      "id": "NET008-es-exercise-4",
+      "module": "NET008",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/network-science/es/net-008-map-clock-domains-before-ordering-events.es.md",
+      "heading_line": 68,
+      "exercise_answer_sha256": "4558b1da86925de0e0cc1b7583769aff35ab18f811b22e3f1ddcf6d07aa813a3",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "At90 the anchor weights-0.5/1.5 yield central100009ms and bound0.5*(0.5+1.5)=1ms. Held-out100011±0.5 has residual2 exceeding combined1.5; intervals100008..100010 and100010.5..100011.5 are disjoint. Reject combined affine/coordinate/error assumptions, without identifying drift or another cause; bounds are deterministic, not confidence intervals."
+    },
+    {
+      "id": "NET008-es-exercise-5",
+      "module": "NET008",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/network-science/es/net-008-map-clock-domains-before-ordering-events.es.md",
+      "heading_line": 80,
+      "exercise_answer_sha256": "c5a6b458e97358a6e4fa27e45f71cf75eba0a3850ae196ea7296f9c3983e07fe",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Retain clock identities,units,origins,anchors,model/error assumptions,validity,lifecycle,source and endpoints. A common monotonic acquisition clock may be simpler than a DSL. Reject stale or failed mappings and require independently defined calibrated physical-output observations for acoustic latency. Working Draft APIs and selected demonstrator code are not measured synchronization or a deployed schema."
+    },
+    {
+      "id": "PM007-en-exercise-1",
+      "module": "PM007",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/product-management/en/pm-007-measure-playback-latency-at-the-user-boundary.md",
+      "heading_line": 26,
+      "exercise_answer_sha256": "887036dc4d8334c166842dcb584e70c0f66deb933cf905c02d08cc0ac7ab9916",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Requested callbacks0/1000/2000 versus authored12/1080/2015ms give lateness12/80/15 and intervals1068/935ms. A timer request establishes neither executed spacing nor audible-onset spacing. These records are invented, not extracted from the current machine."
+    },
+    {
+      "id": "PM007-en-exercise-2",
+      "module": "PM007",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/product-management/en/pm-007-measure-playback-latency-at-the-user-boundary.md",
+      "heading_line": 42,
+      "exercise_answer_sha256": "2e03b7ae1972f906ef429c3ee1282e5c5a45dd1cc2cc822b0a1394d7b94be1dd",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Sounding zero-based physical string indices1/3/4 request offsets0.03/0.09/0.12seconds and gaps0.06/0.03. Compact ranks request0/0.03/0.06 and change the source schedule. Muted positions are skipped without index compaction; triangle oscillators and requested start times are not physical guitar onsets."
+    },
+    {
+      "id": "PM007-en-exercise-3",
+      "module": "PM007",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/product-management/en/pm-007-measure-playback-latency-at-the-user-boundary.md",
+      "heading_line": 59,
+      "exercise_answer_sha256": "9f44a8ab292612f40bea78d2af7d662c3ee0c998cf33fe75059249c517216ac5",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Median computationA4/B6ms ranksA faster; median stipulated action-to-outputA97.5/B67.5ms ranksB faster, with all four paired reductions30ms. Sequential non-overlapping endpoints include deliberate scheduling wait. This illustrates endpoint dependence, not measured causal GA improvement."
+    },
+    {
+      "id": "PM007-en-exercise-4",
+      "module": "PM007",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/product-management/en/pm-007-measure-playback-latency-at-the-user-boundary.md",
+      "heading_line": 69,
+      "exercise_answer_sha256": "065900674f2ce89c908d7d0f2ff85d7a60f907ab0fd62bfa214114eb9244360b",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Under the invented all-trial<=80ms rule A passes0/4 andB4/4; both observed-in-model ranges span15ms. This latency-only teaching rule establishes no production tail, musical fidelity, user preference or real release approval. Actual failures/missing output and matched effective-state acquisition remain required."
+    },
+    {
+      "id": "PM007-en-exercise-5",
+      "module": "PM007",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/product-management/en/pm-007-measure-playback-latency-at-the-user-boundary.md",
+      "heading_line": 79,
+      "exercise_answer_sha256": "543350289c3d4cf20938b59b381356eb83c191bce588f620b710d36df6820690",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "A real proposed comparison must define input action and independent output onset,calibrated clocks,detection/uncertainty/raw and missing records,source and effective browser/device/context/load,matched order-balanced runs and prior latency/quality/strum guards. Reject failed guards or invalid evidence. Common-clock loopback may be simpler than telemetry DSL; API estimates and highlight/start requests are not action-to-acoustic measurements."
+    },
+    {
+      "id": "PM007-fr-exercise-1",
+      "module": "PM007",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/product-management/fr/pm-007-measure-playback-latency-at-the-user-boundary.fr.md",
+      "heading_line": 26,
+      "exercise_answer_sha256": "9dc10a23cd12e0a0b65d35b816b7ca676284a3b27ccb114d060bc13d9d758c90",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Requested callbacks0/1000/2000 versus authored12/1080/2015ms give lateness12/80/15 and intervals1068/935ms. A timer request establishes neither executed spacing nor audible-onset spacing. These records are invented, not extracted from the current machine."
+    },
+    {
+      "id": "PM007-fr-exercise-2",
+      "module": "PM007",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/product-management/fr/pm-007-measure-playback-latency-at-the-user-boundary.fr.md",
+      "heading_line": 42,
+      "exercise_answer_sha256": "67a96a4c612da83181cbaae8e2db147caa8ffd337e5a6f9eb22cb18aeabc68d1",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Sounding zero-based physical string indices1/3/4 request offsets0.03/0.09/0.12seconds and gaps0.06/0.03. Compact ranks request0/0.03/0.06 and change the source schedule. Muted positions are skipped without index compaction; triangle oscillators and requested start times are not physical guitar onsets."
+    },
+    {
+      "id": "PM007-fr-exercise-3",
+      "module": "PM007",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/product-management/fr/pm-007-measure-playback-latency-at-the-user-boundary.fr.md",
+      "heading_line": 59,
+      "exercise_answer_sha256": "96bf6f46e56c8cedcc1ef0777fcb9b2642d8646d03c548c566aa16763c71914b",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Median computationA4/B6ms ranksA faster; median stipulated action-to-outputA97.5/B67.5ms ranksB faster, with all four paired reductions30ms. Sequential non-overlapping endpoints include deliberate scheduling wait. This illustrates endpoint dependence, not measured causal GA improvement."
+    },
+    {
+      "id": "PM007-fr-exercise-4",
+      "module": "PM007",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/product-management/fr/pm-007-measure-playback-latency-at-the-user-boundary.fr.md",
+      "heading_line": 69,
+      "exercise_answer_sha256": "77278b2064f45def0e369377573c9e8aa2941c6bc063b46885611264e61ccb81",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Under the invented all-trial<=80ms rule A passes0/4 andB4/4; both observed-in-model ranges span15ms. This latency-only teaching rule establishes no production tail, musical fidelity, user preference or real release approval. Actual failures/missing output and matched effective-state acquisition remain required."
+    },
+    {
+      "id": "PM007-fr-exercise-5",
+      "module": "PM007",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/product-management/fr/pm-007-measure-playback-latency-at-the-user-boundary.fr.md",
+      "heading_line": 79,
+      "exercise_answer_sha256": "65b5b3a7f0caf8107237ffbc71c0a90da9e306249a265cdfcff628649cbfd0e2",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "A real proposed comparison must define input action and independent output onset,calibrated clocks,detection/uncertainty/raw and missing records,source and effective browser/device/context/load,matched order-balanced runs and prior latency/quality/strum guards. Reject failed guards or invalid evidence. Common-clock loopback may be simpler than telemetry DSL; API estimates and highlight/start requests are not action-to-acoustic measurements."
+    },
+    {
+      "id": "PM007-es-exercise-1",
+      "module": "PM007",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/product-management/es/pm-007-measure-playback-latency-at-the-user-boundary.es.md",
+      "heading_line": 26,
+      "exercise_answer_sha256": "2eb87c88b8d5354aee0a89c72b7970f158d3567ea08f1795020cd94ba9490514",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Requested callbacks0/1000/2000 versus authored12/1080/2015ms give lateness12/80/15 and intervals1068/935ms. A timer request establishes neither executed spacing nor audible-onset spacing. These records are invented, not extracted from the current machine."
+    },
+    {
+      "id": "PM007-es-exercise-2",
+      "module": "PM007",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/product-management/es/pm-007-measure-playback-latency-at-the-user-boundary.es.md",
+      "heading_line": 42,
+      "exercise_answer_sha256": "303c859609a7a1c5bbadf0097dd3bfab4531675b8ac20f8bca15bbc9a361daa3",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Sounding zero-based physical string indices1/3/4 request offsets0.03/0.09/0.12seconds and gaps0.06/0.03. Compact ranks request0/0.03/0.06 and change the source schedule. Muted positions are skipped without index compaction; triangle oscillators and requested start times are not physical guitar onsets."
+    },
+    {
+      "id": "PM007-es-exercise-3",
+      "module": "PM007",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/product-management/es/pm-007-measure-playback-latency-at-the-user-boundary.es.md",
+      "heading_line": 59,
+      "exercise_answer_sha256": "c52faa0c3317103149ba3ef964e67ececf284eeb2858b5bc4bca0c16fb58c909",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Median computationA4/B6ms ranksA faster; median stipulated action-to-outputA97.5/B67.5ms ranksB faster, with all four paired reductions30ms. Sequential non-overlapping endpoints include deliberate scheduling wait. This illustrates endpoint dependence, not measured causal GA improvement."
+    },
+    {
+      "id": "PM007-es-exercise-4",
+      "module": "PM007",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/product-management/es/pm-007-measure-playback-latency-at-the-user-boundary.es.md",
+      "heading_line": 69,
+      "exercise_answer_sha256": "be259179a3bb9d2106a198eccad98ffa0600c9b4390a3912c42ab0c2e8864ec5",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Under the invented all-trial<=80ms rule A passes0/4 andB4/4; both observed-in-model ranges span15ms. This latency-only teaching rule establishes no production tail, musical fidelity, user preference or real release approval. Actual failures/missing output and matched effective-state acquisition remain required."
+    },
+    {
+      "id": "PM007-es-exercise-5",
+      "module": "PM007",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/product-management/es/pm-007-measure-playback-latency-at-the-user-boundary.es.md",
+      "heading_line": 79,
+      "exercise_answer_sha256": "c1f16418b3239e6d96522d9a24171271d999b3a38b926500e4796ebb28b5b2d4",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "A real proposed comparison must define input action and independent output onset,calibrated clocks,detection/uncertainty/raw and missing records,source and effective browser/device/context/load,matched order-balanced runs and prior latency/quality/strum guards. Reject failed guards or invalid evidence. Common-clock loopback may be simpler than telemetry DSL; API estimates and highlight/start requests are not action-to-acoustic measurements."
+    },
+    {
+      "id": "MCL004-en-exercise-1",
+      "module": "MCL004",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+      "heading_line": 37,
+      "exercise_answer_sha256": "7e9b16f76d3dabc3afca3801fe5f538cc5dd158b7c85eeb52394ea1a406f9562",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Equal subdivision under0.52-second anchors predicts0.26seconds; invented0.34 onset is0.08seconds/80ms later. This is residual to a stated model, not a performed error, style attribution or demand to change a musician."
+    },
+    {
+      "id": "MCL004-en-exercise-2",
+      "module": "MCL004",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+      "heading_line": 49,
+      "exercise_answer_sha256": "09cb22faf9e5c0c53338ab69412d8926e941bbf50c71faf8c401acec100a4531",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Offsets0.34/0.32/0.33/0.32 average0.3275; divided by0.52 gives131/208. The fitted mean absolute residual over eight onsets is3.75ms versus33.75ms straight and9.583333333ms fixed2:1. Same-data fitting does not validate style, quality, skill or listener benefit."
+    },
+    {
+      "id": "MCL004-en-exercise-3",
+      "module": "MCL004",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+      "heading_line": 61,
+      "exercise_answer_sha256": "1c465b192d5b0db058157c4698638bf0ea462da82fe63610111bf0b1c11cfd60",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "MusicXML2:1 playback gives common offset0.346666667seconds and cannot recreate four distinct invented offsets. Applicability, retained details, tested conversion and observed output remain needed; no importer/exporter or playback was run."
+    },
+    {
+      "id": "MCL004-en-exercise-4",
+      "module": "MCL004",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+      "heading_line": 75,
+      "exercise_answer_sha256": "759ebd5593d4427211fbcc4ef5862a71472c019362831a0361a698224070614a",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The selected body integer expression60000000/520000 gives115BPM, and hypothetical four-quarter reconstruction240/115≈2.086956522seconds differs from2.08 by6.956521739ms. Amended reachability warning correctly says metadata arm is unreachable at the prior pin; this is conditional body arithmetic, not successful parsing, drift or observed failure."
+    },
+    {
+      "id": "MCL004-en-exercise-5",
+      "module": "MCL004",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+      "heading_line": 87,
+      "exercise_answer_sha256": "79d46cd8fcc9129429692c9c4b23a7c7210144d0c6bd5b640ce9ab5a2785af31",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "A common strictly increasing map applied to every onset/offset preserves interval overlaps and stated occupancy/fret-cap feasibility. Editing only one onset can change overlap and duration. Moving the authored D onset0.84to1.04seconds is200ms; the separate250ms example uses constant120quarter/minute. No style improvement follows."
+    },
+    {
+      "id": "MCL004-fr-exercise-1",
+      "module": "MCL004",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/fr/mcl-004-model-timing-without-inventing-a-style.fr.md",
+      "heading_line": 37,
+      "exercise_answer_sha256": "376f348fe15c33b0980ff9afd5c52c5098033fa1838acc4ae0095fe1caff5632",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Equal subdivision under0.52-second anchors predicts0.26seconds; invented0.34 onset is0.08seconds/80ms later. This is residual to a stated model, not a performed error, style attribution or demand to change a musician."
+    },
+    {
+      "id": "MCL004-fr-exercise-2",
+      "module": "MCL004",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/fr/mcl-004-model-timing-without-inventing-a-style.fr.md",
+      "heading_line": 49,
+      "exercise_answer_sha256": "b4c722ba18723a0a39c2e637144cf475185fd9a33a59a08d315471c2ed4a148f",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Offsets0.34/0.32/0.33/0.32 average0.3275; divided by0.52 gives131/208. The fitted mean absolute residual over eight onsets is3.75ms versus33.75ms straight and9.583333333ms fixed2:1. Same-data fitting does not validate style, quality, skill or listener benefit."
+    },
+    {
+      "id": "MCL004-fr-exercise-3",
+      "module": "MCL004",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/fr/mcl-004-model-timing-without-inventing-a-style.fr.md",
+      "heading_line": 61,
+      "exercise_answer_sha256": "448fe0c98731d6c04799acd571a4c278ecfaf7a609cdddb2f78eaba0b524d458",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "MusicXML2:1 playback gives common offset0.346666667seconds and cannot recreate four distinct invented offsets. Applicability, retained details, tested conversion and observed output remain needed; no importer/exporter or playback was run."
+    },
+    {
+      "id": "MCL004-fr-exercise-4",
+      "module": "MCL004",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/fr/mcl-004-model-timing-without-inventing-a-style.fr.md",
+      "heading_line": 75,
+      "exercise_answer_sha256": "cdb8824d4d71c7b21a41be74ddc4ba7dd82f61dc297caa860a79694847a498cc",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The selected body integer expression60000000/520000 gives115BPM, and hypothetical four-quarter reconstruction240/115≈2.086956522seconds differs from2.08 by6.956521739ms. Amended reachability warning correctly says metadata arm is unreachable at the prior pin; this is conditional body arithmetic, not successful parsing, drift or observed failure."
+    },
+    {
+      "id": "MCL004-fr-exercise-5",
+      "module": "MCL004",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/fr/mcl-004-model-timing-without-inventing-a-style.fr.md",
+      "heading_line": 87,
+      "exercise_answer_sha256": "873dba75f5f286b18cc0516675425a25e91ba4113bc69e39c131df9c87ce6760",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "A common strictly increasing map applied to every onset/offset preserves interval overlaps and stated occupancy/fret-cap feasibility. Editing only one onset can change overlap and duration. Moving the authored D onset0.84to1.04seconds is200ms; the separate250ms example uses constant120quarter/minute. No style improvement follows."
+    },
+    {
+      "id": "MCL004-es-exercise-1",
+      "module": "MCL004",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/es/mcl-004-model-timing-without-inventing-a-style.es.md",
+      "heading_line": 37,
+      "exercise_answer_sha256": "21697e438d63bb15ca333bbce9822aba633d2d62262043c68fe84c633666a6eb",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Equal subdivision under0.52-second anchors predicts0.26seconds; invented0.34 onset is0.08seconds/80ms later. This is residual to a stated model, not a performed error, style attribution or demand to change a musician."
+    },
+    {
+      "id": "MCL004-es-exercise-2",
+      "module": "MCL004",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/es/mcl-004-model-timing-without-inventing-a-style.es.md",
+      "heading_line": 49,
+      "exercise_answer_sha256": "c5bc2928dfaaebb588412abcc33f1b307533d6789883fa2405190f1432b67d3d",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Offsets0.34/0.32/0.33/0.32 average0.3275; divided by0.52 gives131/208. The fitted mean absolute residual over eight onsets is3.75ms versus33.75ms straight and9.583333333ms fixed2:1. Same-data fitting does not validate style, quality, skill or listener benefit."
+    },
+    {
+      "id": "MCL004-es-exercise-3",
+      "module": "MCL004",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/es/mcl-004-model-timing-without-inventing-a-style.es.md",
+      "heading_line": 61,
+      "exercise_answer_sha256": "0f25e442a826a204a79e762bc0481a2f274fc13eb9455dd17e140e42c0443ab2",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "MusicXML2:1 playback gives common offset0.346666667seconds and cannot recreate four distinct invented offsets. Applicability, retained details, tested conversion and observed output remain needed; no importer/exporter or playback was run."
+    },
+    {
+      "id": "MCL004-es-exercise-4",
+      "module": "MCL004",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/es/mcl-004-model-timing-without-inventing-a-style.es.md",
+      "heading_line": 75,
+      "exercise_answer_sha256": "a664e97c51002b5c25a87a53711a5941b6ffb176ae403c371768e2d70240e4a5",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The selected body integer expression60000000/520000 gives115BPM, and hypothetical four-quarter reconstruction240/115≈2.086956522seconds differs from2.08 by6.956521739ms. Amended reachability warning correctly says metadata arm is unreachable at the prior pin; this is conditional body arithmetic, not successful parsing, drift or observed failure."
+    },
+    {
+      "id": "MCL004-es-exercise-5",
+      "module": "MCL004",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/es/mcl-004-model-timing-without-inventing-a-style.es.md",
+      "heading_line": 87,
+      "exercise_answer_sha256": "ce58a000f1b1cce69e2b1ceb5326afb1cf765a815140a934ae42856437162166",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "A common strictly increasing map applied to every onset/offset preserves interval overlaps and stated occupancy/fret-cap feasibility. Editing only one onset can change overlap and duration. Moving the authored D onset0.84to1.04seconds is200ms; the separate250ms example uses constant120quarter/minute. No style improvement follows."
+    },
+    {
+      "id": "MCL006-en-exercise-1",
+      "module": "MCL006",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "00effb039212bf39ca2a64457006b7e32c5f920d43bf6b52e44a9ce218bd78d3",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Complete7/8 at quarter-note120/minute lasts1.75seconds; eighth-note120/minute lasts3.5seconds. Signature denominator does not identify the metronome note unit. Arbitrary per-minute text is not silently interpreted as numeric120."
+    },
+    {
+      "id": "MCL006-en-exercise-2",
+      "module": "MCL006",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "93d844759b9a2d5ea0a6282f04cb7a9e96698292d1038ee71fb4dc73d321c0eb",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Groups2+2+3eighths have starts0/2/4; mixed2/4+3/8 has lengths4/3 and starts0/4. Both total7eighths but equal duration proves neither equal grouping nor performed accents or cultural identity."
+    },
+    {
+      "id": "MCL006-en-exercise-3",
+      "module": "MCL006",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "ad92a6fe9cbba5842c58a2b726d3d6938fc7bfd7b639165b62b73e75fd20ed69",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "At24divisions/quarter an eighth is12,7/8is84,and6/8and3/4each72divisions. Equal totals do not identify grouping,conducted pulse or metronome unit. Score divisions are not automatically MIDI tick resolution; multivoice/chord timing needs separate handling."
+    },
+    {
+      "id": "MCL006-en-exercise-4",
+      "module": "MCL006",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "a7e1483a80921eabf2a0d1faad9a94e09439b885f2cbf0b69394ffcf324bf9da",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual scalar MusicXML time type and first-child integer parsing predict plain7/8as7and8,additive2+2+3as no value,and mixed2/4+3/8as first pair2and4. This is bounded source interpretation, not faithful normalization, runtime result or a system-wide absence claim."
+    },
+    {
+      "id": "MCL006-en-exercise-5",
+      "module": "MCL006",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "e75cc1202a448a1513ebb22aacd43cd7f8bd39969cefde928918c078b926ab52",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Conditionally reached MIDI time-signature body would interpret7,3,24,8as numerator7,denominator8 and skip24/8, without ordered grouping. Amended source warning correctly blocks calling it actual parser output because mask prevents meta dispatch. Faithful transfer needs a pinned executed path, retained groups/units/metronome data,score and intended playback checks."
+    },
+    {
+      "id": "MCL006-fr-exercise-1",
+      "module": "MCL006",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/fr/mcl-006-preserve-meter-grouping-and-tempo-units.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "5544bb703efef2bb1cb1dd37f00ca2691eb7f41d32b655f932c2f69fb913b351",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Complete7/8 at quarter-note120/minute lasts1.75seconds; eighth-note120/minute lasts3.5seconds. Signature denominator does not identify the metronome note unit. Arbitrary per-minute text is not silently interpreted as numeric120."
+    },
+    {
+      "id": "MCL006-fr-exercise-2",
+      "module": "MCL006",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/fr/mcl-006-preserve-meter-grouping-and-tempo-units.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "7faa33f09b525c2577720f76bad5e1918f1dac9e78f4b5e60c4fc6bfd832a9b5",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Groups2+2+3eighths have starts0/2/4; mixed2/4+3/8 has lengths4/3 and starts0/4. Both total7eighths but equal duration proves neither equal grouping nor performed accents or cultural identity."
+    },
+    {
+      "id": "MCL006-fr-exercise-3",
+      "module": "MCL006",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/fr/mcl-006-preserve-meter-grouping-and-tempo-units.fr.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "63c5b09ed302fd9342f9929c9f376419a15905a20e8e6dbafa8937ef464f57bc",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "At24divisions/quarter an eighth is12,7/8is84,and6/8and3/4each72divisions. Equal totals do not identify grouping,conducted pulse or metronome unit. Score divisions are not automatically MIDI tick resolution; multivoice/chord timing needs separate handling."
+    },
+    {
+      "id": "MCL006-fr-exercise-4",
+      "module": "MCL006",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/fr/mcl-006-preserve-meter-grouping-and-tempo-units.fr.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "fc1b2250fcac379b22d4aa47a7b0e1c42e2adb45113797e424170eca043b5e5b",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual scalar MusicXML time type and first-child integer parsing predict plain7/8as7and8,additive2+2+3as no value,and mixed2/4+3/8as first pair2and4. This is bounded source interpretation, not faithful normalization, runtime result or a system-wide absence claim."
+    },
+    {
+      "id": "MCL006-fr-exercise-5",
+      "module": "MCL006",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/fr/mcl-006-preserve-meter-grouping-and-tempo-units.fr.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "ecf13588b55065c30d9c90ba76727f8131529d5fba87f33046930b0406446f9f",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Conditionally reached MIDI time-signature body would interpret7,3,24,8as numerator7,denominator8 and skip24/8, without ordered grouping. Amended source warning correctly blocks calling it actual parser output because mask prevents meta dispatch. Faithful transfer needs a pinned executed path, retained groups/units/metronome data,score and intended playback checks."
+    },
+    {
+      "id": "MCL006-es-exercise-1",
+      "module": "MCL006",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/es/mcl-006-preserve-meter-grouping-and-tempo-units.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "b0832c4b02792acaee30bfd9c66996049a4f493701dca14b529a8c489cec83f6",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Complete7/8 at quarter-note120/minute lasts1.75seconds; eighth-note120/minute lasts3.5seconds. Signature denominator does not identify the metronome note unit. Arbitrary per-minute text is not silently interpreted as numeric120."
+    },
+    {
+      "id": "MCL006-es-exercise-2",
+      "module": "MCL006",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/es/mcl-006-preserve-meter-grouping-and-tempo-units.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "5d0ed84cf087832e20d8b508fbc7c0a1057fe2a8d418b19a1e79a8ad48ae80d4",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Groups2+2+3eighths have starts0/2/4; mixed2/4+3/8 has lengths4/3 and starts0/4. Both total7eighths but equal duration proves neither equal grouping nor performed accents or cultural identity."
+    },
+    {
+      "id": "MCL006-es-exercise-3",
+      "module": "MCL006",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/es/mcl-006-preserve-meter-grouping-and-tempo-units.es.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "6cc0c9fcbea95bf88bebae037da7ff62b19a93d38bb9fe75c5830e52cf5bf621",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "At24divisions/quarter an eighth is12,7/8is84,and6/8and3/4each72divisions. Equal totals do not identify grouping,conducted pulse or metronome unit. Score divisions are not automatically MIDI tick resolution; multivoice/chord timing needs separate handling."
+    },
+    {
+      "id": "MCL006-es-exercise-4",
+      "module": "MCL006",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/es/mcl-006-preserve-meter-grouping-and-tempo-units.es.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "9a4fcc55a5deaef4ef56dc36414907735ab0b138693dc01d0694596caab2e3b0",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual scalar MusicXML time type and first-child integer parsing predict plain7/8as7and8,additive2+2+3as no value,and mixed2/4+3/8as first pair2and4. This is bounded source interpretation, not faithful normalization, runtime result or a system-wide absence claim."
+    },
+    {
+      "id": "MCL006-es-exercise-5",
+      "module": "MCL006",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/es/mcl-006-preserve-meter-grouping-and-tempo-units.es.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "74d5c991ad310b5b46ee67f9f0b89948971765d6c9d454a2e4adeb9ad296f44f",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Conditionally reached MIDI time-signature body would interpret7,3,24,8as numerator7,denominator8 and skip24/8, without ordered grouping. Amended source warning correctly blocks calling it actual parser output because mask prevents meta dispatch. Faithful transfer needs a pinned executed path, retained groups/units/metronome data,score and intended playback checks."
+    }
+  ],
+  "learner_criterion_checks": [
+    {
+      "id": "MCL007-1",
+      "module": "MCL007",
+      "title": "tempo-locations",
+      "acceptance_reviewed": "At Q=480, map ticks0,240,480,720,960,1200 to seconds0,0.25,0.5,1,1.5,1.625. Applying the final tempo globally gives0.625 seconds at1200 and is invalid.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "With Q480 and tempo locations0/480/960, ticks0/240/480/720/960/1200 map to seconds0/0.25/0.5/1/1.5/1.625. Applying the last250000-microsecond tempo to all ticks falsely gives0.625 at1200. Accumulate delta ticks before projection; simultaneous order and multitrack merging need declared rules.",
+      "task_alignment": "Final standalone task and course source-assisted task explicitly elicit this new-course criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "MCL007-2",
+      "module": "MCL007",
+      "title": "spanning-note",
+      "acceptance_reviewed": "Integrate tick240 to1200 in pieces240/480/240 with durations0.25/1/0.125 seconds: total1.375. Applying the onset tempo globally gives1 second.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "The note from tick240 to1200 spans240/480/240 ticks under three rates, giving0.25+1+0.125=1.375 seconds, also1.625-0.25. Applying its onset rate globally gives1 second. No played duration, swing or runtime scheduling result is measured.",
+      "task_alignment": "Final standalone task and course source-assisted task explicitly elicit this new-course criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "MCL007-3",
+      "module": "MCL007",
+      "title": "division-mode",
+      "acceptance_reviewed": "For25 non-drop frames/s and40 ticks/frame,750 ticks give0.75 seconds independent of tempo. E728 high byte231 sign-decodes to-25, format25; the selected source expression instead predicts-231. Do not claim a fresh parser run or general drop-frame support.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "The bounded25fps non-drop example with40ticks/frame gives1000ticks/s and750ticks=0.75seconds, independent of tempo. E728 high byte231 explicitly sign-decodes to-25 and then positive format25. The selected unsigned source shift/negation predicts-231; no executed decoder or drop-frame conformance is established.",
+      "task_alignment": "Final standalone task and course source-assisted task explicitly elicit this new-course criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "MCL007-4",
+      "module": "MCL007",
+      "title": "event-projection",
+      "acceptance_reviewed": "Streams A and B place the tempo change at480 and240; note-offs at960/720 occur at1.5/1.25 seconds. Their hypothetical construction-body projections coincide, so erased tempo deltas cannot be recovered. The arrays are not actual parser output.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "StreamA places tempo change at480 and note-off at960ticks/1.5seconds;B uses240 and720ticks/1.25seconds. Hypothetical correctly routed construction-body projections keep identical tempo integers and note-local deltas while dropping tempo deltas. This proves loss in that modeled projection, not actual outputs of the unreachable parser path.",
+      "task_alignment": "Final standalone task and course source-assisted task explicitly elicit this new-course criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "MCL007-5",
+      "module": "MCL007",
+      "title": "dispatch-and-validation",
+      "acceptance_reviewed": "Show FF&F0=F0 cannot match FF, at both identical parser pins. Distinguish unreachable dispatch from the separate representation loss. Propose retained time/raw units/division/order/source fields and a falsifying actual fixture check before claiming a working import; no implemented contract.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Actual eventType=actualStatus &0xF0 cannot equal0xFF, so metadata dispatch is unreachable at both hash-identical pins. Correct routing would not repair separate event-location loss. Candidate retained event/time/raw units/division/order/source fields need actual boundary-fixture execution before a working-import claim; no parser patch, contract or scheduler was delivered.",
+      "task_alignment": "Final standalone task and course source-assisted task explicitly elicit this new-course criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "NET008-1",
+      "module": "NET008",
+      "title": "coordinates",
+      "acceptance_reviewed": "Map context10 seconds to performance20001 ms and compare call19980 ms: lead21 ms. Raw subtraction or unit conversion alone omits origin/rate assumptions.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Authored p=10000+1000.1c maps context10seconds to performance20001ms; the call19980ms leads it by21ms. Raw subtraction mixes units and origins; unit conversion alone does not establish offset or rate mapping. This is conditional arithmetic, not an observed scheduling margin.",
+      "task_alignment": "Final standalone task and course source-assisted task explicitly elicit this new-course criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "NET008-2",
+      "module": "NET008",
+      "title": "anchor-fit",
+      "acceptance_reviewed": "Derive slope1000.1 ms/context-second, intercept10000 ms and apparent100 ppm from authored anchors0/10000 and60/70006. One anchor cannot identify rate; no observed hardware drift.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Anchors(0,10000) and(60,70006) determine slope1000.1ms/context-second and intercept10000ms, apparent difference100ppm from nominal1000. One anchor admits infinitely many rate/intercept choices; two anchors fit a line without measuring stability, hardware drift or sample noise.",
+      "task_alignment": "Final standalone task and course source-assisted task explicitly elicit this new-course criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "NET008-3",
+      "module": "NET008",
+      "title": "prediction",
+      "acceptance_reviewed": "At context30 and120 predict40003/130012 ms; nominal1000 slope gives130000 at120, discrepancy12 ms. Interpolation versus extrapolation and predictions versus observations remain distinct.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "At context30 and120 the fitted model predicts40003 and130012ms. Nominal slope1000 at120 gives130000ms, a12ms difference. Interpolation and extrapolation remain distinct; neither prediction is an observed event or independently validated uncertainty estimate.",
+      "task_alignment": "Final standalone task and course source-assisted task explicitly elicit this new-course criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "NET008-4",
+      "module": "NET008",
+      "title": "bounded-falsifier",
+      "acceptance_reviewed": "At90 weights-0.5/1.5 and assumed anchor bounds0.5 ms give prediction100009±1 ms. Held-out100011±0.5 has residual2 exceeding combined1.5; intervals disjoint. Reject the combined affine/coordinate/error assumptions without diagnosing the cause; bounds are not probabilities.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "At90 the anchor weights-0.5/1.5 yield central100009ms and bound0.5*(0.5+1.5)=1ms. Held-out100011±0.5 has residual2 exceeding combined1.5; intervals100008..100010 and100010.5..100011.5 are disjoint. Reject combined affine/coordinate/error assumptions, without identifying drift or another cause; bounds are deterministic, not confidence intervals.",
+      "task_alignment": "Final standalone task and course source-assisted task explicitly elicit this new-course criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "NET008-5",
+      "module": "NET008",
+      "title": "handoff",
+      "acceptance_reviewed": "Retain clock IDs, units, origins, anchors, assumptions, validity and lifecycle identities plus comparison endpoints. Common monotonic acquisition may be simpler than a DSL. Reject stale/failed mapping and require independent physical-output observation for acoustic latency. No implemented sync service or schema.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Retain clock identities,units,origins,anchors,model/error assumptions,validity,lifecycle,source and endpoints. A common monotonic acquisition clock may be simpler than a DSL. Reject stale or failed mappings and require independently defined calibrated physical-output observations for acoustic latency. Working Draft APIs and selected demonstrator code are not measured synchronization or a deployed schema.",
+      "task_alignment": "Final standalone task and course source-assisted task explicitly elicit this new-course criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "PM007-1",
+      "module": "PM007",
+      "title": "callbacks",
+      "acceptance_reviewed": "For requested0/1000/2000 and authored12/1080/2015 ms, lateness12/80/15 and executed intervals1068/935. Requests are not callbacks or acoustic events.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Requested callbacks0/1000/2000 versus authored12/1080/2015ms give lateness12/80/15 and intervals1068/935ms. A timer request establishes neither executed spacing nor audible-onset spacing. These records are invented, not extracted from the current machine.",
+      "task_alignment": "Final standalone task and course source-assisted task explicitly elicit this new-course criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "PM007-2",
+      "module": "PM007",
+      "title": "string-index",
+      "acceptance_reviewed": "Sounding physical indices1/3/4 request offsets0.03/0.09/0.12 seconds and gaps0.06/0.03. Compact ranks would request0/0.03/0.06. These are source-assisted requests, not measured onsets or a real guitar.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Sounding zero-based physical string indices1/3/4 request offsets0.03/0.09/0.12seconds and gaps0.06/0.03. Compact ranks request0/0.03/0.06 and change the source schedule. Muted positions are skipped without index compaction; triangle oscillators and requested start times are not physical guitar onsets.",
+      "task_alignment": "Final standalone task and course source-assisted task explicitly elicit this new-course criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "PM007-3",
+      "module": "PM007",
+      "title": "metric-boundary",
+      "acceptance_reviewed": "Compute median computationA4/B6 ms versus action-to-output97.5/67.5 ms; four paired differences30 ms. Distinguish sequential declared stages and invented records from actual causal GA improvement.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Median computationA4/B6ms ranksA faster; median stipulated action-to-outputA97.5/B67.5ms ranksB faster, with all four paired reductions30ms. Sequential non-overlapping endpoints include deliberate scheduling wait. This illustrates endpoint dependence, not measured causal GA improvement.",
+      "task_alignment": "Final standalone task and course source-assisted task explicitly elicit this new-course criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "PM007-4",
+      "module": "PM007",
+      "title": "latency-rule",
+      "acceptance_reviewed": "Under authored all-trial<=80 ms gate, A passes0/4 and B4/4; both ranges15 ms. This does not establish production tails, musical fidelity, user preference or a real release approval.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Under the invented all-trial<=80ms rule A passes0/4 andB4/4; both observed-in-model ranges span15ms. This latency-only teaching rule establishes no production tail, musical fidelity, user preference or real release approval. Actual failures/missing output and matched effective-state acquisition remain required.",
+      "task_alignment": "Final standalone task and course source-assisted task explicitly elicit this new-course criterion. Actual answers and assistance are required before learner decisions."
+    },
+    {
+      "id": "PM007-5",
+      "module": "PM007",
+      "title": "acquisition",
+      "acceptance_reviewed": "Define input action/output onset, calibrated clocks, raw evidence and detection uncertainty, missing-output records, effective source/browser/device/context, matched order-balanced workloads and prior latency/quality guards. A simpler common-clock loopback may suffice; reject failed guards or invalid evidence. No actual instrument or telemetry DSL.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "A real proposed comparison must define input action and independent output onset,calibrated clocks,detection/uncertainty/raw and missing records,source and effective browser/device/context/load,matched order-balanced runs and prior latency/quality/strum guards. Reject failed guards or invalid evidence. Common-clock loopback may be simpler than telemetry DSL; API estimates and highlight/start requests are not action-to-acoustic measurements.",
+      "task_alignment": "Final standalone task and course source-assisted task explicitly elicit this new-course criterion. Actual answers and assistance are required before learner decisions."
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "streeling/courses/musicology/en/mcl-007-integrate-a-midi-tempo-map-before-scheduling.md",
+      "sha256": "00fb1aab5455d884d2b31ad0f05dd9cbf5df4bb087a8042a4c6a5387cf64e2c1"
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-007-integrate-a-midi-tempo-map-before-scheduling.fr.md",
+      "sha256": "e634d29583427adacb0d8a608623a92498395fee6efde0076b437e88723a24b7"
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-007-integrate-a-midi-tempo-map-before-scheduling.es.md",
+      "sha256": "cf86319e80a5d782e88beb80bae1e2b5249b8b2a2e625345cd0b5d0d0cc71bcc"
+    },
+    {
+      "path": "streeling/courses/network-science/en/net-008-map-clock-domains-before-ordering-events.md",
+      "sha256": "b039b58ec8eaf543b002a674b0f9abc150550c0fb1afa3096e98e77c7037a619"
+    },
+    {
+      "path": "streeling/courses/network-science/fr/net-008-map-clock-domains-before-ordering-events.fr.md",
+      "sha256": "4a8e01f2041262f0cf9c65bcbb3c28650f76bfde5bcba8bad4a7eaa44939675b"
+    },
+    {
+      "path": "streeling/courses/network-science/es/net-008-map-clock-domains-before-ordering-events.es.md",
+      "sha256": "74c106fd22a5236884973e0378cb4ac06da5e9154df52d94b723c6aca2c56b0b"
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-007-measure-playback-latency-at-the-user-boundary.md",
+      "sha256": "5502c7d10eadfec7d4a4fca41e30843230e3e8d47779b58d38d4048d023a5fe4"
+    },
+    {
+      "path": "streeling/courses/product-management/fr/pm-007-measure-playback-latency-at-the-user-boundary.fr.md",
+      "sha256": "2cd55d430577e8e3f923c3cf5baa3d193e2d52f681eda160aa96ac262bc3aabc"
+    },
+    {
+      "path": "streeling/courses/product-management/es/pm-007-measure-playback-latency-at-the-user-boundary.es.md",
+      "sha256": "35b73639303ec41656ef61cb4f5be6d1fab749b345ea0b6eeef85b2eab40ef8b"
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+      "sha256": "7ace697db10e92593203a2ad956ba94816925f119d5f41934d15018d6374b2af"
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-004-model-timing-without-inventing-a-style.fr.md",
+      "sha256": "ea51754e301d8a2c7798c1187c7be60425f491642b356a4b8c4ce0ffd0b9f2af"
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-004-model-timing-without-inventing-a-style.es.md",
+      "sha256": "24c03662436c51eaf9ddabb3d127076b26d0d6e8af4d0645c2761df70e8eff6e"
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+      "sha256": "41fae9c94fe4e7472414d2f9bc340d1a032a1302058a1ccd4f135ffff1acc8c5"
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-006-preserve-meter-grouping-and-tempo-units.fr.md",
+      "sha256": "4c3d873a62f312688fe47b6efc3da8249a44409df6cf3ba469ab6003c40cf766"
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-006-preserve-meter-grouping-and-tempo-units.es.md",
+      "sha256": "930375b250e77473d85abebaf33f07cd4c496b1ce6813112dce7805927074117"
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/tempo-clocks-2026-10-22/production-plan.md",
+      "sha256": "963d0c0882a225216ba2638d8ee5c965b6ff2882526411caf038c46cc82d94a7"
+    },
+    {
+      "path": "code/streeling/evidence/tempo-clocks-2026-10-22/README.md",
+      "sha256": "a783841e934c245870e12efc00c867718a0960df739a01fa8e3f66da54c1731c"
+    },
+    {
+      "path": "code/streeling/evidence/tempo-clocks-2026-10-22/primary-readback.json",
+      "sha256": "081f6f1c423c5144536a2f5fd35ed6f6502af5d1e38a83fcdcd8addbe4ed6075"
+    },
+    {
+      "path": "code/streeling/evidence/tempo-clocks-2026-10-22/primary-reading.json",
+      "sha256": "245fad5e5199d0901038a2cc201d6c2012177d6b28ff49be4e57dfdc87359f9c"
+    },
+    {
+      "path": "code/streeling/evidence/tempo-clocks-2026-10-22/tempo-map.json",
+      "sha256": "a3a707315c496369b326c5a6561c1e346325135c5123d9f26297b1a3975a673f"
+    },
+    {
+      "path": "code/streeling/evidence/tempo-clocks-2026-10-22/parser-boundaries.json",
+      "sha256": "b8d58152503a77fd971d9ffb306f601c2f6c14773dde973342807035f259087c"
+    },
+    {
+      "path": "code/streeling/evidence/tempo-clocks-2026-10-22/clock-map.json",
+      "sha256": "eecbcac9db1f43da4c2fd35378aac7bde520af8a5f1f9d8b55e546a2893a0d16"
+    },
+    {
+      "path": "code/streeling/evidence/tempo-clocks-2026-10-22/playback-endpoints.json",
+      "sha256": "a57287b184038c3ffacca21e91a506da9a9b16fafb7fc685fb187d04dd5ce963"
+    },
+    {
+      "path": "code/streeling/evidence/tempo-clocks-2026-10-22/source-observations.json",
+      "sha256": "09908593d4222ed968db4224b4d0999be53961d6d897e670dfb8224c96e8633c"
+    },
+    {
+      "path": "code/streeling/evidence/tempo-clocks-2026-10-22/data-audit.json",
+      "sha256": "1a75d2b9dc58e2d59fb2ebbb8bde8cc79c3c14025af236e9c4bc80e3a7db9d58"
+    },
+    {
+      "path": "code/streeling/evidence/tempo-clocks-2026-10-22/learner-task.md",
+      "sha256": "1c37d9f9c2de10b75e58e0f0c3e319e16f8ab8c4a310470d4ee1ea6792a226db"
+    },
+    {
+      "path": "code/streeling/evidence/tempo-clocks-2026-10-22/reviewer-rubric.json",
+      "sha256": "806907e6e9d8d1311e557fbc5f98267412590b7d2d217e7728218ed4089fffea"
+    },
+    {
+      "path": "code/streeling/evidence/tempo-clocks-2026-10-22/official-links.json",
+      "sha256": "0d67a3dda7c368fd8182924bedfcbf0dc52e670f1e2ef1f675e4b12a747d7cb2"
+    },
+    {
+      "path": "code/streeling/evidence/meter-picking-2026-10-22/primary-readback.json",
+      "sha256": "9938db465961ae5b2835539519aab07e302fdd1c4f64c70ff093cf6c5a961bb2"
+    },
+    {
+      "path": "code/streeling/evidence/meter-picking-2026-10-22/primary-reading.json",
+      "sha256": "fc2ad193fbe608cada6828c63e1ee0f5e1ef293172199f9f0c9fe6989b67deee"
+    }
+  ],
+  "prerequisite_bindings": [
+    {
+      "path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+      "sha256": "7ace697db10e92593203a2ad956ba94816925f119d5f41934d15018d6374b2af"
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+      "sha256": "41fae9c94fe4e7472414d2f9bc340d1a032a1302058a1ccd4f135ffff1acc8c5"
+    },
+    {
+      "path": "streeling/courses/network-science/en/net-004-semantic-backpressure-and-evidence-dependencies.md",
+      "sha256": "29ddd453877a166b5fa5ba7759e38c3cf0d07347f2de3e80dddb7b72b5e9fab1"
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-005-interpret-brutal-coexistence-experiments.md",
+      "sha256": "313dc1577766294680bc96db230645f4635af05d5b10354dd106b3d044a6d10f"
+    }
+  ],
+  "locale_url_and_format_checks": [
+    {
+      "path": "streeling/courses/musicology/en/mcl-007-integrate-a-midi-tempo-map-before-scheduling.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-007-integrate-a-midi-tempo-map-before-scheduling.fr.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-007-integrate-a-midi-tempo-map-before-scheduling.es.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/network-science/en/net-008-map-clock-domains-before-ordering-events.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/network-science/fr/net-008-map-clock-domains-before-ordering-events.fr.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/network-science/es/net-008-map-clock-domains-before-ordering-events.es.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-007-measure-playback-latency-at-the-user-boundary.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/product-management/fr/pm-007-measure-playback-latency-at-the-user-boundary.fr.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/product-management/es/pm-007-measure-playback-latency-at-the-user-boundary.es.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-004-model-timing-without-inventing-a-style.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-004-model-timing-without-inventing-a-style.fr.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-004-model-timing-without-inventing-a-style.es.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-006-preserve-meter-grouping-and-tempo-units.fr.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-006-preserve-meter-grouping-and-tempo-units.es.md",
+      "ordered_urls_match_english": true,
+      "fenced_math_and_inline_code_match_english": true,
+      "utf8_lf_no_bom": true
+    }
+  ],
+  "primary_source_review": [
+    {
+      "repo": "ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Common/GA.Business.DSL/Types/MidiTypes.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Types/MidiTypes.fs",
+      "sha256": "8614a2a5d466b5bb792c50017ae7a6e09592b158f1362ac6bf8768683c428b36",
+      "review_scope": "Actual immutable source directly read for nonnegative header word, unsigned SMPTE shift, dispatch mask and full meta label, conditional metadata constructors, timed note types, track ordering and dashboard callback/physical-string-index oscillator requests. No F# or browser execution."
+    },
+    {
+      "repo": "ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Common/GA.Business.DSL/Parsers/MidiParser.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Parsers/MidiParser.fs",
+      "sha256": "00f812620749834af64988b07cde408fb50936d750623b246dc3e64b1ee0d402",
+      "review_scope": "Actual immutable source directly read for nonnegative header word, unsigned SMPTE shift, dispatch mask and full meta label, conditional metadata constructors, timed note types, track ordering and dashboard callback/physical-string-index oscillator requests. No F# or browser execution."
+    },
+    {
+      "repo": "ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Apps/ga-dashboard/src/app/shared/progression.component.ts",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Apps/ga-dashboard/src/app/shared/progression.component.ts",
+      "sha256": "545b627ea30997b669077e8310893121b5ee5ff18e73d3cb24efd08692e71934",
+      "review_scope": "Actual immutable source directly read for nonnegative header word, unsigned SMPTE shift, dispatch mask and full meta label, conditional metadata constructors, timed note types, track ordering and dashboard callback/physical-string-index oscillator requests. No F# or browser execution."
+    },
+    {
+      "repo": "ga",
+      "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "path": "Common/GA.Business.DSL/Parsers/MidiParser.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.DSL/Parsers/MidiParser.fs",
+      "sha256": "00f812620749834af64988b07cde408fb50936d750623b246dc3e64b1ee0d402",
+      "review_scope": "Actual immutable source directly read for nonnegative header word, unsigned SMPTE shift, dispatch mask and full meta label, conditional metadata constructors, timed note types, track ordering and dashboard callback/physical-string-index oscillator requests. No F# or browser execution."
+    },
+    {
+      "repo": "ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Common/GA.Business.DSL/Types/MusicXmlTypes.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Types/MusicXmlTypes.fs",
+      "sha256": "e894f70561db1f4d1bdd378e8ccc0646250793896144f0a7f39a66b18d40cd1a",
+      "review_scope": "Re-read actual scalar MusicXML time type and first-child integer parse to verify the amended course keeps these predictions separate from MIDI dispatch reachability. Source interpretation only."
+    },
+    {
+      "repo": "ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Common/GA.Business.DSL/Parsers/MusicXmlParser.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Parsers/MusicXmlParser.fs",
+      "sha256": "73ab96a59b50831b9930cbb8d37368febd6fc8d124d57ca70a3ff4c289940fee",
+      "review_scope": "Re-read actual scalar MusicXML time type and first-child integer parse to verify the amended course keeps these predictions separate from MIDI dispatch reachability. Source interpretation only."
+    }
+  ],
+  "official_document_review": [
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/multimedia/timing-information",
+      "actual_read": "Actual primary timing body read: quarter-note tempo units versus SMPTE signed format and ticks/frame. Not a complete MIDI conformance certificate."
+    },
+    {
+      "url": "https://mido.readthedocs.io/en/stable/files/midi.html",
+      "actual_read": "Actual Mido1.3.2 documentation body read: track delta ticks, merged iteration seconds, file types and tempo/time-resolution sections. No library run."
+    },
+    {
+      "url": "https://midi.org/standard-midi-files",
+      "actual_read": "Actual public introduction/specification listing read; linked complete specification PDF not read."
+    },
+    {
+      "url": "https://www.w3.org/TR/2026/WD-webaudio-1.1-20260922/",
+      "actual_read": "Actual22September2026 Working Draft status and baseLatency/outputLatency/getOutputTimestamp sections, local-estimate example and unreliable currentTime-difference warning read. No effective browser or device claim."
+    },
+    {
+      "url": "https://www.w3.org/TR/2026/WD-hr-time-3-20260901/",
+      "actual_read": "Actual1September2026 Working Draft status and monotonic-clock/time-origin/millisecond timestamp concepts read. Origins and cross-execution scope remain explicit."
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers",
+      "actual_read": "Actual timer section read, including requested-delay semantics and absence of exact callback-time guarantee."
+    },
+    {
+      "url": "https://online.ucpress.edu/mp/article-abstract/19/3/333/61900/Swing-Ratios-and-Ensemble-Timing-in-Jazz?redirectedFrom=fulltext",
+      "actual_read": "Actual publisher article identity and abstract at97–100 independently visible/read through web.open. No full PDF/paper or audio access; official direct403 preserved."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/swing/",
+      "actual_read": "Actual playback-ratio and applicability body read for MCL004; no played performance or import/export result."
+    }
+  ],
+  "MusicXML_reference_review": {
+    "actual_read": [
+      "time",
+      "metronome",
+      "beat-unit",
+      "per-minute",
+      "divisions",
+      "duration"
+    ],
+    "scope": "Actual primary reference bodies independently read for amended MCL006 units/groupings and score-position rules; these are specification meanings, not project conformance."
+  },
+  "author_page_recheck": {
+    "url": "https://www.speech.kth.se/music/performance/Texts/ensemble_swing.htm",
+    "content_review_recheck": "web.open timed out. No new author-page body reading claimed in this review; actual primary abstract supports the bounded recording/ensemble-role caution. Official direct transport result and earlier author-reading history remain distinct."
+  },
+  "pending": {
+    "human_technical_review": null,
+    "musician_review": null,
+    "fluent_language_review": null,
+    "learner_attempts": null,
+    "independent_learner_transfer": null,
+    "runtime_validation": null,
+    "parser_run": null,
+    "FSharp_test_run": null,
+    "browser_run": null,
+    "MIDI_playback": null,
+    "clock_calibration": null,
+    "hardware_drift": null,
+    "physical_output": null,
+    "user_latency": null,
+    "listener_trial": null,
+    "causal_improvement": null,
+    "parser_repair": null,
+    "scheduler_implementation": null,
+    "synchronization_service": null,
+    "telemetry_DSL": null,
+    "production_contract": null,
+    "release_approval": null,
+    "deployed_html": null
+  },
+  "human_technical_review": null,
+  "musician_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "independent_learner_transfer": null,
+  "runtime_validation": null,
+  "parser_run": null,
+  "FSharp_test_run": null,
+  "browser_run": null,
+  "MIDI_playback": null,
+  "clock_calibration": null,
+  "hardware_drift": null,
+  "physical_output": null,
+  "user_latency": null,
+  "listener_trial": null,
+  "causal_improvement": null,
+  "parser_repair": null,
+  "scheduler_implementation": null,
+  "synchronization_service": null,
+  "telemetry_DSL": null,
+  "production_contract": null,
+  "release_approval": null,
+  "deployed_html": null
+}

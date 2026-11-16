@@ -11,7 +11,28 @@ sidebar:
 
 ## Modules
 
-No modules produced yet.
+- [VC-001 · One Fretboard, Three Access Paths](vc-001-accessible-fretboard-paths/)
+- [VC-002 · Evidence for a Godot and React Observatory Bridge](vc-002-godot-react-bridge-evidence/)
+- [VC-003 · When Does Jitter Help a Voicing Cloud?](vc-003-jitter-and-voicing-cloud-distance/)
+- [VC-004 · A Capture Gate for the Godot Observatory](vc-004-godot-observatory-capture-gate/)
+- [VC-005 · Keep Craft Details through a Blender-to-Godot Asset Trial](vc-005-craft-details-through-blender-to-godot/)
+- [VC-006 · Test Fold-State Meaning in a Blender-to-Godot Scene](vc-006-origami-fold-state-scene-trial/)
+- [VC-007 · Keep Weave Crossings Correct across a Godot Scene Boundary](vc-007-weave-seams-as-scene-contracts/)
+- [VC-008 · Save and Query a Weave Scene](vc-008-save-and-query-a-weave-scene/)
+- [VC-009 · Budget BRUTAL Scene Expansion Before Rendering](vc-009-budget-brutal-scene-expansion/)
+- [VC-010 · Preserve Packed Texture Channel Contracts](vc-010-preserve-packed-texture-channel-contracts/)
+- [VC-011 · Preserve Tangent Handedness After a Mirror](vc-011-preserve-tangent-handedness-after-a-mirror/)
+- [VC-012 · Separate Mesh Instances from Draw Calls](vc-012-separate-mesh-instances-from-draw-calls/)
+- [VC-013 · Keep Triangle Winding Consistent with Transforms](vc-013-keep-triangle-winding-consistent-with-transforms/)
+- [VC-014 · Predict an Embroidered Stitch Pixel Footprint](vc-014-predict-an-embroidered-stitch-pixel-footprint/)
+- [VC-015 · Budget a Sculpture Profile Chord Error](vc-015-budget-a-sculpture-profile-chord-error/)
+- [VC-016 · Track UV Gutters through Mip Levels](vc-016-track-uv-gutters-through-mip-levels/)
+- [VC-017 · Bound Relief Depth Separation under a Declared Quantizer](vc-017-bound-relief-depth-separation-under-a-declared-quantizer/)
+- [VC-018 · Carry Alpha Association through a Textile Edge](vc-018-carry-alpha-association-through-a-textile-edge/)
+- [VC-019 · Measure Directional UV Stretch before Reusing a Motif](vc-019-measure-directional-uv-stretch-before-reusing-a-motif/)
+- [VC-020 · Intersect a Scene Picking Ray with Box Slabs](vc-020-intersect-a-scene-picking-ray-with-box-slabs/)
+- [VC-021 · Fold the Lower Hemisphere in a Normal Encoding](vc-021-fold-the-lower-hemisphere-in-a-normal-encoding/)
+- [VC-022 · Project a Craft Shadow onto a Declared Plane](vc-022-project-a-craft-shadow-onto-a-declared-plane/)
 
 ## Course catalog (planned)
 

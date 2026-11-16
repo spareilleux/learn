@@ -1,0 +1,24 @@
+{
+  "recorded_before_implementation": "2026-10-22",
+  "fixture": "odd-tile-seam-a",
+  "semantic": {"global-parity": 0, "restarted-tile-parity": 12},
+  "loaded_scene": {
+    "crossings": 36,
+    "meshes": 72,
+    "static_bodies": 72,
+    "collision_shapes": 72,
+    "shared_mesh_resources": 2,
+    "shared_shape_resources": 2,
+    "shared_material_resources": 2,
+    "w2-f0_upper": "warp",
+    "w3-f0_upper": "weft",
+    "w3_f0_centre_x_metres": 0.015,
+    "aabb_gap_metres": 0.001,
+    "matching_ray_identities": 36
+  },
+  "negative_controls": {
+    "builder_unit_scale": "independent_world_metres must fail",
+    "collider_crossing_binding": "ray_crossing_identity must fail",
+    "restarted-tile-parity": "semantic_admission must fail before scene creation"
+  }
+}

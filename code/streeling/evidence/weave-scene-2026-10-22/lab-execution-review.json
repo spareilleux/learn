@@ -1,0 +1,186 @@
+{
+  "kind": "independent-native-factual-audit",
+  "checked_at_utc": "2026-10-22T14:30:05.692742+00:00",
+  "status": "passed",
+  "repository": "C:\\tmp\\learn-streeling-craft-transfer-20261022",
+  "lab_hashes": {
+    "code/streeling/weave-godot/README.md": "8aa42aaac1e23d103fdc81d531264ac697d03e03ba7647bbc03cd852e5608b06",
+    "code/streeling/weave-godot/run.mjs": "4a51d925831e24536894cfe5043fbc288dabbc274936c7c331f4922898f0de7a",
+    "code/streeling/weave-godot/trial.gd": "9e59b247bacff045398bfc9f00917fc3f0734b4d1e88424801f3f85c78fb8f99",
+    "code/streeling/weave-godot/project.godot": "0ba0ec9494527550d9b099e48c31d98157b15487c92f1e6332dd2e02bf56852d",
+    "code/streeling/weave-godot/expected-cases.json": "1ae7daf03475b6b689ddaad6ce5567320bf81fa8f8e4ffd0d20b54570944236f"
+  },
+  "evidence_hashes": {
+    "code/streeling/evidence/weave-scene-2026-10-22/execution.json": "f27c61b029e65adefc67bf5f4117a384ffdd2e00c9ae6b2cd4febeb492ca4aeb",
+    "code/streeling/evidence/weave-scene-2026-10-22/results.json": "f7f5875aba2fffb7111aa8e63d8c69fa1f701fe1387252656b27b81c317bdde3",
+    "code/streeling/evidence/weave-scene-2026-10-22/good-run-report.json": "0d2b4d41fdd2a6eafc341f97972500e2f8f85665ec0e860ce2a8af44215c0016",
+    "code/streeling/evidence/weave-scene-2026-10-22/good-godot-report.json": "2bf6f11c476e1aa37c228bd63478f2cdc89630cfb75f339fe5237e8c2c93ea6c",
+    "code/streeling/evidence/weave-scene-2026-10-22/crossings.json": "05ff96258db853cfdf31bbe53f4589e0a4d088045449035036123a0577056ab1",
+    "code/streeling/evidence/weave-scene-2026-10-22/native-scene.tscn": "7c8003a9e7ea1433cd7e7e18ed83512ca2c436ea0af70bb7415e01e43c3bb4ca",
+    "code/streeling/evidence/weave-scene-2026-10-22/scale-run-report.json": "687cd6ec57682b58f75894d802817642e228ad8921e373089f1e988710178c6a",
+    "code/streeling/evidence/weave-scene-2026-10-22/scale-godot-report.json": "fb9c64b9a70437af89a9471631881edf996e4379c446eecd8da5ec94af87a0b4",
+    "code/streeling/evidence/weave-scene-2026-10-22/binding-run-report.json": "ab9a106a58de93ce6046e83f00c6c8e3c8a679d3d6a0d289dddd90d3626696fb",
+    "code/streeling/evidence/weave-scene-2026-10-22/binding-godot-report.json": "399a2c45d542226eaa3f3fcaf46978beb7c4daa46e005bf56d177a439b371dc9",
+    "code/streeling/evidence/weave-scene-2026-10-22/semantic-run-report.json": "69dc18127a3f28294f5697cbde406eea6d3a117a5fb71b66b2d34f5cf0be4f94",
+    "code/streeling/evidence/weave-scene-2026-10-22/semantic-report.json": "ca9bbedd31269dc2edb2e8802d4b69374a2eba4ec0ad00d928e0c0d4a60a64e0",
+    "code/streeling/evidence/weave-scene-2026-10-22/public-input-readback.json": "485385d192110926755fae914f0b85e1e9499566b5cb49b7496aedf95f53a1e9"
+  },
+  "external_input_hashes": {
+    "evaluate_weave.py": "43ba4e1a245ebc8c9d2ab34a9219419ad136ef73d021c1073e1f123e69479d9f",
+    "weave-trial.json": "da33830148b1ee98a1c004e0b89a86770f438da369e059cbdad06803da3a1955"
+  },
+  "source_checks": {
+    "execution_binds_all_five_lab_files": true,
+    "runs_bind_external_and_teaching_bytes": true,
+    "public_input_receipt_matches_local_bytes": true,
+    "manifest_bytes_bound": true,
+    "scene_bytes_bound": true
+  },
+  "control_checks": [
+    {
+      "name": "scale",
+      "recorded_exit": 1,
+      "reconstructed_mutation_sha256": "2a3b3d99247f353e18753a20d0c730ee81dace000b90dff5cea074e9d43a8860",
+      "one_replacement_only": true,
+      "failed_native_gates": [
+        "aabb_clearance",
+        "all_ray_identities",
+        "independent_world_metres",
+        "ray_crossing_identity",
+        "ray_upper_strand"
+      ]
+    },
+    {
+      "name": "binding",
+      "recorded_exit": 1,
+      "reconstructed_mutation_sha256": "a06322404d87659d0adb9ded29ee5b3377950fdf6a013623b84590463afa6452",
+      "one_replacement_only": true,
+      "failed_native_gates": [
+        "all_ray_identities",
+        "ray_crossing_identity"
+      ],
+      "preserved_checks": {
+        "independent_world_metres": true,
+        "aabb_clearance": true,
+        "ray_upper_strand": true
+      }
+    },
+    {
+      "name": "semantic",
+      "recorded_exit": 1,
+      "failed_controller_gates": [
+        "semantic_admission"
+      ],
+      "godot_command_absent": true,
+      "note": "No native project existence claim independently checked outside allowed inputs."
+    }
+  ],
+  "binary_checks": {
+    "path_alias": "C:\\Users\\spare\\AppData\\Local\\Microsoft\\WinGet\\Links\\godot.exe",
+    "resolved_executable": "C:\\Users\\spare\\AppData\\Local\\Microsoft\\WinGet\\Packages\\GodotEngine.GodotEngine.Mono_Microsoft.Winget.Source_8wekyb3d8bbwe\\Godot_v4.6.1-stable_mono_win64\\Godot_v4.6.1-stable_mono_win64.exe",
+    "resolved_target_matches_controller": true,
+    "executable_sha256": "48325f4f0cd93210dc9706c003f4c3a306b998bdee9accdfaba52f59ce2aa9b6",
+    "version_from_native_run": {
+      "build": "official",
+      "hash": "14d19694e0c88a3f9e82d899a0400f27a24c176e",
+      "hex": 263681,
+      "major": 4,
+      "minor": 6,
+      "patch": 1,
+      "status": "stable",
+      "string": "4.6.1-stable (official)",
+      "timestamp": 0
+    },
+    "launch_change_review": "Windows finds first existing godot.exe in PATH and resolves its filesystem target before spawnSync; ordinary public command exercised successfully. No obvious defect observed within the fixed Windows fixture."
+  },
+  "independent_execution": {
+    "command": [
+      "node",
+      "code/streeling/weave-godot/run.mjs",
+      "C:\\tmp\\streeling-weave-godot-independent-audit-20261022",
+      "C:\\tmp\\streeling-weave-scene-20261022\\evaluate_weave.py",
+      "C:\\tmp\\streeling-weave-scene-20261022\\weave-trial.json"
+    ],
+    "working_directory": "C:\\tmp\\learn-streeling-craft-transfer-20261022",
+    "actual_exit": 0,
+    "public_controller_invocations": 1,
+    "captured_tool_wall_seconds": 0.6488319,
+    "run_report_sha256": "58e85feb289b2d3a9870ac55fb1a73007d80495ef8a59f9c7c452e6076d52a28",
+    "native_report_sha256": "eae9bb9cfad5620481811155764b208ee7ed4c3e9050ec5a5d9344873c6748fc",
+    "native_check_count": 190,
+    "all_native_checks_passed": true
+  },
+  "native_observations": {
+    "counts": {
+      "collision_shapes": 72,
+      "crossings": 36,
+      "meshes": 72,
+      "static_bodies": 72
+    },
+    "shared_resources": {
+      "materials": 2,
+      "meshes": 2,
+      "shapes": 2
+    },
+    "matching_ray_identities": 36,
+    "all_36_aabb_gaps_within_1e_minus_7_of_0_001_metres": true,
+    "w3_f0_x_metres": 0.0150000005960464,
+    "independently_parsed_scenes": {
+      "recorded": {
+        "crossings": 36,
+        "typed_nodes": {
+          "Node3D": 37,
+          "MeshInstance3D": 72,
+          "StaticBody3D": 72,
+          "CollisionShape3D": 72
+        },
+        "subresources": {
+          "StandardMaterial3D": 2,
+          "BoxMesh": 2,
+          "BoxShape3D": 2
+        },
+        "w3_f0_position_metres": [
+          0.015000001,
+          0.0,
+          0.0
+        ],
+        "sha256": "7c8003a9e7ea1433cd7e7e18ed83512ca2c436ea0af70bb7415e01e43c3bb4ca"
+      },
+      "independent": {
+        "crossings": 36,
+        "typed_nodes": {
+          "Node3D": 37,
+          "MeshInstance3D": 72,
+          "StaticBody3D": 72,
+          "CollisionShape3D": 72
+        },
+        "subresources": {
+          "StandardMaterial3D": 2,
+          "BoxMesh": 2,
+          "BoxShape3D": 2
+        },
+        "w3_f0_position_metres": [
+          0.015000001,
+          0.0,
+          0.0
+        ],
+        "sha256": "733cb5cac2e685bf4bc1595f236cfe59723b1ed2b62484654fc1c923a762eb38"
+      }
+    },
+    "seam_upper_strands": {
+      "w2-f0": "warp",
+      "w3-f0": "weft"
+    }
+  },
+  "scope_and_limits": [
+    "Standalone fixed-fixture native teaching/proof lab; source code and supplied evidence only.",
+    "Windows final controller run once, with preinstalled Godot 4.6.1; no installations, network calls, repository writes, Git mutations, broad suites, other apps, or delegated work.",
+    "Control runs were not rerun; source mutation hashes reconstructed independently against final trial bytes and actual named-gate reports checked.",
+    "Public input receipt checked against local bytes; upstream HTTP readback not independently repeated.",
+    "Prior symlink timeout and 0.5687-second direct run are supplied historical measurements; this audit does not infer cross-platform performance.",
+    "No C# assembly validation, rendered view, continuous yarn or cloth mechanics, IX runtime/export, learner study, publication, or language review.",
+    "All proof checks and independent metre expectations are protected; no deletion recommendations."
+  ],
+  "test_value_findings": [],
+  "native_factual_findings": []
+}

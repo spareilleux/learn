@@ -1,0 +1,120 @@
+---
+module_id: gas-007-distinguish-body-poles-from-string-partials
+department: guitar-acoustics
+course: "Distinguish Body Poles from String Partials"
+level: intermediate
+prerequisites: ["gas-005-separate-a-partial-peak-from-a-period", "gas-006-relate-pluck-position-to-string-modes", "aud-007-translate-attack-coefficients-into-time"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Distinguish Body Poles from String Partials
+
+> **Draft scope.** Public source inspection and authored real-arithmetic filter calculations. Human technical, fluent-language, musician and learner reviews and deployed course HTML verification remain pending. No new guitar recording, native/WASM render or [ComfyUI](https://docs.comfy.org/) workflow was run.
+
+## The project question
+
+An agent sees a spectral peak and proposes changing a guitar's body frequency. Which model parameter would that change, and does that parameter equal the observed peak? [GAS-005](gas-005-separate-a-partial-peak-from-a-period.md) separates a partial from a period; [GAS-006](gas-006-relate-pluck-position-to-string-modes.md) models excitation. Here we inspect the subsequent body stage at public GA commit `76efbffd5af82b46c3146957a6bd4504008eeb89`.
+
+The [constructor](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs#L124-L135) installs five sections. These are source parameters, not measured body modes:
+
+| Pole-frequency parameter, Hz | Pole radius r | Numerator gain g |
+| --- | --- | --- |
+| 110 | 0.95 | 0.08 |
+| 240 | 0.96 | 0.10 |
+| 530 | 0.97 | 0.08 |
+| 1200 | 0.98 | 0.03 |
+| 2400 | 0.92 | 0.02 |
+
+## 1. Derive the section before interpreting its name
+
+The [recurrence](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs#L23-L44) has two delayed output states, initially zero. For a declared sample rate Fs and pole frequency f0:
+
+```text
+omega0 = 2*pi*f0/Fs
+a1 = 2*r*cos(omega0)
+a2 = -r^2
+y[n] = g*x[n] + a1*y[n-1] + a2*y[n-2]
+H(z) = g / (1 - a1*z^-1 - a2*z^-2)
+     = g / (1 - 2*r*cos(omega0)*z^-1 + r^2*z^-2)
+```
+
+The poles are at radius r and angles plus and minus omega0. All listed radii are below 1, so the ideal isolated linear sections are stable. The [W3C biquad convention](https://www.w3.org/TR/audio-eq-cookbook/) writes denominator coefficients with plus signs and subtracts their delayed outputs. Its denominator signs must not be copied directly into this source's additive recurrence.
+
+### Exercise 1 — Map the signs
+
+For the 110 Hz section, give the recurrence's a2 and the coefficient of z^-2 in the denominator. Does g = 0.08 mean an amplitude gain of 0.08 at every frequency?
+
+> **Answer.** a2 = -0.9025; the denominator coefficient is +0.9025. No: g is a numerator coefficient. The feedback denominator changes the frequency response.
+
+## 2. A pole angle is not necessarily a gain maximum
+
+[Julius O. Smith's two-pole derivation](https://www.dsprelated.com/freebooks/filters/Two_Pole.html) explicitly distinguishes pole frequency from exact peak gain. For this constant-numerator section, minimizing the squared denominator over frequencies from 0 to Nyquist gives:
+
+```text
+c = cos(omega0)*(1+r^2)/(2*r)
+omega_peak = acos(clamp(c, -1, 1))
+f_peak = Fs*omega_peak/(2*pi)
+```
+
+At Fs = 44100 Hz, the [authored response calculations](../../../../code/streeling/evidence/filter-phase-2026-10-22/body-response.json) give:
+
+| Pole-frequency parameter, Hz | Isolated maximum, Hz, approximately |
+| --- | --- |
+| 110 | 0 |
+| 240 | 0 |
+| 530 | 485.059638 |
+| 1200 | 1191.675201 |
+| 2400 | 2330.439876 |
+
+The first section has magnitude about 29.268259 at DC and 27.306424 at 110 Hz. A damped oscillatory impulse response can have its largest frequency-response magnitude at DC. This result describes the isolated mathematical section, not a new recording, the entire bank's peaks or the complete nonlinear engine.
+
+### Exercise 2 — Read the 110 Hz label
+
+At Fs = 44100 Hz, is “the 110 Hz section's maximum must be at 110 Hz” supported? Explain what the clipped cosine above means when c is greater than 1.
+
+> **Answer.** No. The minimum denominator occurs at the endpoint omega = 0 when the unconstrained optimal cosine exceeds 1. The parameter sets the pole angle; the resulting isolated gain maximum is at DC in this model. Clamping selects the frequency-domain endpoint, not a repaired physical calibration.
+
+## 3. Sum complex responses before taking magnitude
+
+The [mixing source](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs#L483-L496) sends the normalized string sum through every section, adds their outputs, then combines body and string signals:
+
+```text
+H_body(omega) = sum_i H_i(omega)
+H_dry(omega) = 0.55 + 0.45*H_body(omega)
+```
+
+At 110 Hz, the mathematical dry magnitude is about 34.953699. Adding mode magnitudes instead gives about 35.364828. Relative phases account for the difference. Neither number is a measured full-engine output gain: reverb and output nonlinearities follow this stage, and active-voice normalization can change upstream behavior.
+
+### Exercise 3 — Combine the bank
+
+Choose the correct expression: the magnitude of the complex dry response above, or 0.55 plus 0.45 times the sum of section magnitudes. Explain why the other expression is only an upper bound here.
+
+> **Answer.** Take the magnitude after the complex sum. The triangle inequality bounds it by 0.55 plus 0.45 times the sum of magnitudes, but equality requires aligned phases. The 110 Hz calculation shows that equality does not hold there.
+
+## 4. A linear body filter does not retune a steady sinusoid
+
+Consider an authored steady input containing only 82.4069 Hz and 164.8138 Hz. Under the isolated linear time-invariant body model, each sinusoid keeps its frequency and acquires a complex gain. A pole-frequency parameter of 110 Hz does not insert a new steady 110 Hz spectral line. Startup transients can ring; reverb, time variation and output clipping must be assessed separately.
+
+### Exercise 4 — Separate steady response from startup
+
+An agent says that the 110 Hz pole parameter makes every open-E input contain a new steady 110 Hz tone. Give a counterexample using the two-tone input above, and state why an initial ringing transient would not invalidate it.
+
+> **Answer.** The steady output of this LTI stage still contains only 82.4069 Hz and 164.8138 Hz, with modified amplitudes and phases. Its decaying natural response can occur during startup; that is different from an additional sustained input-driven spectral line. This argument does not cover nonlinear clipping in the complete engine.
+
+## 5. Keep a physical claim separate from a useful synthetic filter
+
+Smith's [bridge-model discussion](https://dsprelated.com/freebooks/pasp/Building_Synthetic_Guitar_Bridge.html) distinguishes bridge admittance, string coupling and radiation. The inspected engine stage is an output filter bank fed by the string sum. Names such as top plate in comments do not establish measured geometry, calibrated modal gains or a passive bridge model coupled back into each string.
+
+### Exercise 5 — Bound the next experiment
+
+Before calling a changed bank “a more accurate guitar body,” identify the current evidence and name missing measurements and comparison controls. Where should paired signals be retained for an isolated test?
+
+> **Answer.** Current evidence consists of pinned code and authored filter calculations. A physical accuracy claim needs a defined instrument and measurement path, calibrated response data, excitation and observation locations, fitting criteria and held-out comparisons. Preserve the normalized string-sum input and pre-reverb dry output with matching clocks and scales; keep downstream clipping and reverb separate. A listener preference requires its own controlled assessment. [AUD-008](../../audio-engineering/en/aud-008-measure-a-filter-with-paired-input-and-output.md) develops the paired measurement.
+
+## Source-assisted learner task
+
+Without copying the answers, prepare a short review of a proposed “110 Hz body peak” control. Include the recurrence signs, the endpoint peak calculations for the 110 Hz and 240 Hz sections at Fs = 44100 Hz, the first section's DC and 110 Hz gains, and the bank's dry magnitude at 110 Hz compared with the sum-of-magnitudes alternative. Add the steady two-tone counterexample and a bounded measurement plan. Record assistance and uncertainty. The [reviewer rubric](../../../../code/streeling/evidence/filter-phase-2026-10-22/reviewer-rubric.json) is prepared; no learner attempt is recorded.
+
+The [source receipt](../../../../code/streeling/evidence/filter-phase-2026-10-22/primary-readback.json) binds immutable public files. The calculations use higher-precision arithmetic on decimal source parameters, not a bit-exact Rust f32 reproduction. No source change, runtime repair or acoustical improvement follows from this lesson alone.

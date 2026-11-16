@@ -1,0 +1,417 @@
+{
+  "audit": "music_phrase_fixture_calculations_and_pinned_source_claims",
+  "checked_at_utc": "2026-10-22T16:27:12.751322+00:00",
+  "result": "pass",
+  "actionable_findings": [],
+  "fixture_root": "C:/tmp/learn-streeling-craft-transfer-20261022",
+  "fixtures": [
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/experiment-plan.md",
+      "sha256": "60d1dbdb304e6b76f8d51b56389cb378aa5fd3f65182f975b1801a6e50573db5",
+      "bytes": 4658
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/phrase-paths.json",
+      "sha256": "39bfa9703e564e752ef8a990d258cc25e88f7b63b5c904be177e06e966aac343",
+      "bytes": 3280
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/timed-events.json",
+      "sha256": "390485ec3d789336e26e8a727b98733ce12ab39f6b1d5eaf786cde3e6ef1ad10",
+      "bytes": 3204
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/melody-constraints.json",
+      "sha256": "33447cadc0d9e6f5cdca4939d3afb8c842edc46e428e55be64d65ecf2c15bbd2",
+      "bytes": 5237
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/ga-voicings-probe.json",
+      "sha256": "dc44bf59b8c6edde19ddb103facd7730fc392fd004d37c153cfe5e3efe3bcf06",
+      "bytes": 456
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/primary-readback.json",
+      "sha256": "cb7dc22f967ddf0bdd730274175ddd395e678940566dfd90f4e1fec336628390",
+      "bytes": 2374
+    }
+  ],
+  "source_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+  "pinned_git_sources": [
+    {
+      "path": "Common/GA.Business.ML/Tabs/AdvancedTabSolver.cs",
+      "sha256": "dbfec81179024374563e2f90af0895e7cf4f2be710688bb9d0823f857a130b71",
+      "bytes": 11169
+    },
+    {
+      "path": "Common/GA.Domain.Core/Theory/Harmony/Progressions/ProgressionStep.cs",
+      "sha256": "07fadf265bdfdfd77ceffe4f419fed1c577e1117c1fcdee30cd18805a4d945b6",
+      "bytes": 965
+    },
+    {
+      "path": "Common/GA.Business.DSL/Types/MusicXmlTypes.fs",
+      "sha256": "e894f70561db1f4d1bdd378e8ccc0646250793896144f0a7f39a66b18d40cd1a",
+      "bytes": 8252
+    },
+    {
+      "path": "Common/GA.Domain.Core/Instruments/Tuning.cs",
+      "sha256": "037c5b48514528d65f59a263136d4fa4d66e5b1ceae7f14453c1868978378b8a",
+      "bytes": 3329
+    }
+  ],
+  "checks": [
+    {
+      "name": "analysis_plan_binding",
+      "status": "pass",
+      "result": "60d1dbdb304e6b76f8d51b56389cb378aa5fd3f65182f975b1801a6e50573db5"
+    },
+    {
+      "name": "path_required_high_low",
+      "status": "pass",
+      "result": {
+        "edges": [
+          2,
+          1,
+          23
+        ],
+        "total": 26
+      }
+    },
+    {
+      "name": "path_required_high_high",
+      "status": "pass",
+      "result": {
+        "edges": [
+          2,
+          11,
+          11
+        ],
+        "total": 24
+      }
+    },
+    {
+      "name": "endpoint_selection_required_high",
+      "status": "pass",
+      "result": {
+        "greedy": "low",
+        "minimum": "high"
+      }
+    },
+    {
+      "name": "path_changed_low_low",
+      "status": "pass",
+      "result": {
+        "edges": [
+          2,
+          1,
+          1
+        ],
+        "total": 4
+      }
+    },
+    {
+      "name": "path_changed_low_high",
+      "status": "pass",
+      "result": {
+        "edges": [
+          2,
+          11,
+          13
+        ],
+        "total": 26
+      }
+    },
+    {
+      "name": "endpoint_selection_changed_low",
+      "status": "pass",
+      "result": {
+        "greedy": "low",
+        "minimum": "low"
+      }
+    },
+    {
+      "name": "dp_prefixes_and_global_beam_counterexample",
+      "status": "pass",
+      "result": {
+        "prefixes": {
+          "start": 0,
+          "Dm7": 2,
+          "G7_low": 3,
+          "G7_high": 13
+        },
+        "per_state_k1_high_endpoint": 24,
+        "global_one_state_high_endpoint": 26
+      }
+    },
+    {
+      "name": "half_open_snapshot_0",
+      "status": "pass",
+      "result": {
+        "sounding": 4,
+        "attacks": [
+          43,
+          59,
+          62,
+          65
+        ],
+        "held": [],
+        "released": []
+      }
+    },
+    {
+      "name": "half_open_snapshot_1.5",
+      "status": "pass",
+      "result": {
+        "sounding": 5,
+        "attacks": [
+          76
+        ],
+        "held": [
+          "g_bass",
+          "b_shared",
+          "d_inner",
+          "f_inner"
+        ],
+        "released": []
+      }
+    },
+    {
+      "name": "half_open_snapshot_2",
+      "status": "pass",
+      "result": {
+        "sounding": 5,
+        "attacks": [
+          48,
+          64,
+          67
+        ],
+        "held": [
+          "b_shared",
+          "e_anticipation"
+        ],
+        "released": [
+          43,
+          62,
+          65
+        ]
+      }
+    },
+    {
+      "name": "attacks_versus_snapshot_retriggering",
+      "status": "pass",
+      "result": {
+        "sounding_counts": [
+          4,
+          5,
+          5
+        ],
+        "note_ons": 8,
+        "hypothetical_retriggers": 14
+      }
+    },
+    {
+      "name": "beats_to_milliseconds",
+      "status": "pass",
+      "result": {
+        "one_and_half_beats": 750.0,
+        "two_beats": 1000.0,
+        "full_phrase": 2000.0
+      }
+    },
+    {
+      "name": "authored_harmonic_boundaries",
+      "status": "pass",
+      "result": "The 1.5-beat attack creates no authored harmonic boundary; anticipation remains an authored annotation."
+    },
+    {
+      "name": "explicit_low_to_high_fixture_tuning",
+      "status": "pass",
+      "result": "C4=60; each unmuted pitch = open-string pitch + fret."
+    },
+    {
+      "name": "placement_A",
+      "status": "pass",
+      "result": {
+        "pitches": [
+          48,
+          52,
+          55,
+          59,
+          64
+        ],
+        "pitch_classes": [
+          0,
+          4,
+          7,
+          11
+        ],
+        "highest": 64,
+        "last_string_pitch": 64,
+        "minimum_positive_fret": 2,
+        "constructed_penalty": 1
+      }
+    },
+    {
+      "name": "placement_B",
+      "status": "pass",
+      "result": {
+        "pitches": [
+          48,
+          55,
+          59,
+          64,
+          67
+        ],
+        "pitch_classes": [
+          0,
+          4,
+          7,
+          11
+        ],
+        "highest": 67,
+        "last_string_pitch": 67,
+        "minimum_positive_fret": 3,
+        "constructed_penalty": 0
+      }
+    },
+    {
+      "name": "placement_C",
+      "status": "pass",
+      "result": {
+        "pitches": [
+          48,
+          52,
+          55,
+          59
+        ],
+        "pitch_classes": [
+          0,
+          4,
+          7,
+          11
+        ],
+        "highest": 59,
+        "last_string_pitch": 59,
+        "minimum_positive_fret": 2,
+        "constructed_penalty": 1
+      }
+    },
+    {
+      "name": "placement_D",
+      "status": "pass",
+      "result": {
+        "pitches": [
+          48,
+          55,
+          59,
+          67,
+          64
+        ],
+        "pitch_classes": [
+          0,
+          4,
+          7,
+          11
+        ],
+        "highest": 67,
+        "last_string_pitch": 64,
+        "minimum_positive_fret": 3,
+        "constructed_penalty": 0
+      }
+    },
+    {
+      "name": "strict_registered_melody_and_unconstrained_selection",
+      "status": "pass",
+      "result": {
+        "highest64": [
+          "A"
+        ],
+        "highest76": [],
+        "unconstrained_minimum_penalty": [
+          "B",
+          "D"
+        ]
+      }
+    },
+    {
+      "name": "recorded_failed_live_probe",
+      "status": "pass",
+      "result": "Recorded tool error only; no candidates or service revision; no live retry performed."
+    },
+    {
+      "name": "pinned_source_commit",
+      "status": "pass",
+      "result": "dc2e74cbd992a298f67efb928b5b3754615e1924"
+    },
+    {
+      "name": "pinned_git_bytes_Common/GA.Business.ML/Tabs/AdvancedTabSolver.cs",
+      "status": "pass",
+      "result": "Pinned Git bytes independently match the recorded anonymous response SHA256 and byte count; network status is recorded evidence."
+    },
+    {
+      "name": "pinned_git_bytes_Common/GA.Domain.Core/Theory/Harmony/Progressions/ProgressionStep.cs",
+      "status": "pass",
+      "result": "Pinned Git bytes independently match the recorded anonymous response SHA256 and byte count; network status is recorded evidence."
+    },
+    {
+      "name": "pinned_git_bytes_Common/GA.Business.DSL/Types/MusicXmlTypes.fs",
+      "status": "pass",
+      "result": "Pinned Git bytes independently match the recorded anonymous response SHA256 and byte count; network status is recorded evidence."
+    },
+    {
+      "name": "pinned_git_bytes_Common/GA.Domain.Core/Instruments/Tuning.cs",
+      "status": "pass",
+      "result": "Pinned Git bytes independently match the recorded anonymous response SHA256 and byte count; network status is recorded evidence."
+    },
+    {
+      "name": "solver_candidate_generation_and_pruning",
+      "status": "pass",
+      "result": "AdvancedTabSolver.cs:52-110; mapped candidates, static >200 rejection, top40 pre-pruning, then DP."
+    },
+    {
+      "name": "solver_per_state_top_k_and_objective",
+      "status": "pass",
+      "result": "AdvancedTabSolver.cs:113-188 retains K prefixes for each current state; 199-211 chooses global K only after the final step. Exactness is within retained candidate states."
+    },
+    {
+      "name": "reported_total_physical_cost_scope",
+      "status": "pass",
+      "result": "AdvancedTabSolver.cs:23-45,284: reported TotalPhysicalCost sums adjacent physical transition costs; it does not expose the full DP selection objective."
+    },
+    {
+      "name": "progression_duration_units",
+      "status": "pass",
+      "result": "ProgressionStep.cs:16-20: integer milliseconds, default1000."
+    },
+    {
+      "name": "musicxml_type_fields",
+      "status": "pass",
+      "result": "MusicXmlTypes.fs:37-38,93-109 defines divisions duration, optional voice and tie; type inspection establishes no parse/export behavior."
+    },
+    {
+      "name": "tuning_source_and_order_boundary",
+      "status": "pass",
+      "result": "Tuning.cs:21-23 default names match fixture MIDI tuning under C4=60; 66-84,86-108 internally expose highest string first. Fixture explicitly uses low-to-high labels and is not copied from AsSpan ordering."
+    },
+    {
+      "name": "official_document_fetch_record_only",
+      "status": "pass",
+      "result": "Recorded W3C official duration/tie references both HTTP200; no fetch repeated and no independent document-byte/content validation asserted."
+    }
+  ],
+  "source_references": [
+    "Common/GA.Business.ML/Tabs/AdvancedTabSolver.cs:23-45,52-110,113-188,199-211,242-246,284",
+    "Common/GA.Domain.Core/Theory/Harmony/Progressions/ProgressionStep.cs:16-20",
+    "Common/GA.Business.DSL/Types/MusicXmlTypes.fs:37-38,93-109",
+    "Common/GA.Domain.Core/Instruments/Tuning.cs:21-23,66-84,86-108"
+  ],
+  "scope_limits": [
+    "Read-only fixture/source audit; sole write is this external receipt.",
+    "No changing course or learner packet inspected; no learner/language/player review implied.",
+    "Pinned Git blobs read with git show; primary checkout worktree/index not changed.",
+    "Existing anonymous network responses and W3C HTTP statuses are recorded evidence, not repeated network observations.",
+    "Constructed examples only; no GA candidate generation, solver execution, MusicXML parse/export, build, install, audio, physical comfort, or participant/learning results.",
+    "Temporary Python standard-library arithmetic independently recomputes fixtures; no new program added to the repository."
+  ],
+  "ownership": "released_after_receipt_write"
+}

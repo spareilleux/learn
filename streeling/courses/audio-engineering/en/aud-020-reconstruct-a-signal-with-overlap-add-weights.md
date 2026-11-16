@@ -1,0 +1,173 @@
+---
+module_id: aud-020-reconstruct-a-signal-with-overlap-add-weights
+department: audio-engineering
+course: "Reconstruct a Signal with Overlap-Add Weights"
+level: advanced
+prerequisites: ["aud-006-calibrate-spectral-amplitudes"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Reconstruct a Signal with Overlap-Add Weights
+
+> Authored model and bounded source reading. Human technical, fluent-language, musician and learner decisions remain pending. No new performance, listening result, engine render, parser execution or production adoption is claimed.
+
+An IX analysis view can display plausible spectra while a proposed resynthesis quietly changes the guitar’s amplitude. Analysis calibration alone cannot certify the reconstruction. Here the unmodified frames are added with declared window weights, and the resulting coefficient is checked at every retained sample. The circular boundary removes startup and shutdown ambiguity so that the first task is a finite table, rather than a full audio implementation.
+
+The relevant invariant is the sum of all weights touching a sample. A window name or an overlap percentage is insufficient without the exact sequence, starts and synthesis policy. Our constant window is intentionally easy to inspect. With the main frame list the total coefficient is unity everywhere. Removing a frame leaves complete coverage but changes that coefficient, so “every sample was covered” is weaker than “every sample was reconstructed.”
+
+A receiver could divide by a nonzero weight sum under another declared policy. That would be a different operation and should preserve its denominator, especially near edges. A zero coefficient cannot recover an unknown sample by division. Real spectral editing also changes what is being added; successful identity reconstruction would be a preliminary gate, not a promise that arbitrary edits preserve waveform or timbre. The retained runner’s block-partition equality concerns rendering state, not this windowed synthesis calculation.
+
+## Read the retained project evidence
+
+The prerequisite supplies the earlier operation and its evidence boundary. Inspect the linked project artifact before using the authored case to propose a change. Its existing observations keep their original scope: a retained source file or fixture does not establish current deployment. The fixed packet records exact inputs, prepared outputs and reading provenance. Local file hashes identify complete bytes; they do not enlarge the bounded passage actually read. A primary web page supports only the specific definition read, with no invented immutable revision or byte hash.
+
+[Prerequisite](../../audio-engineering/en/aud-006-calibrate-spectral-amplitudes.md)
+
+[Retained project artifact](../../../../code/streeling/guitar-runtime/run.mjs)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-25-b/unit-a.json)
+
+[Primary reading](https://www.dsprelated.com/freebooks/sasp/Overlap_Add_OLA_STFT_Processing.html)
+
+## Fixed case and prepared quantities
+
+```json
+{
+  "values": {
+    "samples": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "window": [
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "circular_starts": [
+      0,
+      2
+    ]
+  },
+  "formula": "weight[n]=sum_m window[(n-start[m])%N]; output[n]=samples[n]*weight[n]; perfect=all(weight[n]==1)",
+  "expected": {
+    "weight": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "output": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "perfect": true
+  },
+  "negative_control": {
+    "values": {
+      "samples": [
+        2,
+        4,
+        6,
+        8
+      ],
+      "window": [
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "circular_starts": [
+        0
+      ]
+    },
+    "expected": {
+      "weight": [
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "output": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "perfect": false
+    }
+  }
+}
+```
+
+## Assumptions and evidence limits
+
+Assume a circular record, one applied window and unchanged frames. There is no second synthesis window. Finite edges, transform implementation and spectral editing remain outside the model.
+
+## Interpret the operation before choosing an abstraction
+
+Before revealing the answer key, write the input contract in your own words and derive the main result manually. Keep intermediate quantities or state transitions, rather than copying only a final number. Compare the negative control under the same rule and identify the input that changed. The model is a finite authored example. A matching calculation supports this example’s stated claim; it does not supply an observed user outcome or validate a production feature.
+
+### Exercise 1
+
+List the main weight sum at each retained sample.
+
+<details><summary>Answer 1</summary>
+
+Each sum is unity, so multiplying the input by those sums returns the original sequence.
+
+</details>
+
+### Exercise 2
+
+Does complete sample coverage guarantee identity reconstruction?
+
+<details><summary>Answer 2</summary>
+
+No. Coverage only requires a nonzero sum; identity under this policy requires the declared unit coefficient.
+
+</details>
+
+### Exercise 3
+
+What changes when the control removes a frame?
+
+<details><summary>Answer 3</summary>
+
+Every coefficient is halved, and every output sample is halved even though no sample becomes uncovered.
+
+</details>
+
+### Exercise 4
+
+Would a second synthesis window preserve this calculation?
+
+<details><summary>Answer 4</summary>
+
+Not automatically. Its product with the analysis window changes the weight sum and requires a new derivation.
+
+</details>
+
+### Exercise 5
+
+What falsifies an identity-synthesis claim?
+
+<details><summary>Answer 5</summary>
+
+A differing retained sample under an unmodified-frame experiment falsifies that claim for the declared support.
+
+</details>
+
+## Source-assisted learner task
+
+Draw the circular frame placement and weight ledger before proposing an IX synthesis extension. Keep identity reconstruction separate from the existing render-block check.
+
+Retain your unaided answer before consulting a source or calculator. Then identify a precise source passage and revision, record every kind of assistance and keep the original answer alongside any correction. A proposed agent workflow or DSL must preserve the manual result and its countercase before its convenience can be assessed. If required inputs are absent, leave the decision unresolved rather than substituting a plausible value.
+
+Write a falsifier as an observable disagreement with the stated rule, then say what additional observation would be needed at the next boundary. Use the exercise answers as prepared checks, not as a record of your attempt. The fixed packet contains a separate prepared criterion for every exercise; all learner decisions remain undecided until an actual response and review are retained. Report assistance, corrections and remaining limits with the final note so that arithmetic correctness is not confused with independent recall, musician judgment or runtime acceptance.

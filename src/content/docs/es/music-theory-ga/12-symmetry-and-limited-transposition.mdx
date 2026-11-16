@@ -1,0 +1,454 @@
+---
+title: "Lección 12: La simetría y los modos de transposición limitada"
+description: Los conjuntos que una transposición o una inversión devuelve sobre sí mismos, los modos de transposición limitada de Messiaen y la escala de tritono, comparados con las clases de modos simétricos de Guitar Alchemist y las pruebas que su código llama simétricas.
+sidebar:
+  label: 12. La simetría
+  order: 12
+---
+
+import BraceletTritone from '../../../../assets/music-theory-ga/l12-bracelet-tritone.svg';
+import BraceletMirrors from '../../../../assets/music-theory-ga/l12-bracelet-mirrors.svg';
+
+La lección 2 contó los modos de dos escalas simétricas: uno para la escala de tonos enteros, dos para la escala octatónica. Esta lección pregunta qué conjuntos son simétricos. Algunos vuelven sobre sí mismos con una transposición, un giro del brazalete: Messiaen llamó a las escalas de entre ellos «modos de transposición limitada». Otros vuelven con una inversión, un espejo. [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) tiene clases de modos para tres escalas simétricas, un servicio que reconoce los modos de Messiaen, y varias pruebas que su código llama pruebas de simetría. El programa del curso encuentra cada conjunto simétrico entre los 4096, y luego comprueba cada una de las respuestas de GA, con el propio código de GA siempre que puede.
+
+Todos los enlaces a GA apuntan al commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Las salidas proceden del comando de abajo; el punto de entrada es `l14`.
+
+```bash
+dotnet run --project code/music-theory-ga/GaTheory -c Release -- l14
+```
+
+## La transposición limitada
+
+### La idea
+
+Wikipedia: "Modes of limited transposition are musical modes or scales that fulfill specific criteria relating to their symmetry and the repetition of their interval groups. These scales may be transposed to all twelve notes of the chromatic scale, but at least two of these transpositions must result in the same pitch classes, thus their transpositions are "limited"" ([Mode of limited transposition](https://en.wikipedia.org/wiki/Mode_of_limited_transposition)). La escala de tonos enteros C D E F♯ G♯ A♯ subida un tono da las mismas notas, así que "has only 2 transpositions". El módulo Streeling [MUS-006 · El universo de las escalas](../../streeling/music/mus-006-the-scale-universe/) lo dice con el brazalete: "A scale has **rotational symmetry** if rotating it by some k semitones produces the same scale. The scale's symmetry order tells you how many distinct transpositions it has."
+
+El curso cuenta, para cada conjunto, cuántas de las doce transposiciones T0 a T11 lo dejan igual ([`Lesson14.Fixing`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L22-L27)). T0 siempre lo hace. Si T*a* y T*b* lo hacen, T*a*+*b* también, así que ese número es siempre un divisor de 12, y el conjunto tiene 12 dividido por ese número transposiciones distintas. Un conjunto es limitado cuando ese número es mayor que 1. El programa hace la cuenta sobre los 4096 conjuntos ([`Lesson14.cs#L158-L170`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L158-L170)):
+
+```text
+== Limited transposition: the 4096 sets, by how many of the twelve transpositions map each onto itself
+fixing  transpositions  sets   transposition classes
+1       12              4020   335
+2       6               54     9
+3       4               12     3
+4       3               6      2
+6       2               2      1
+12      1               2      2
+
+sets with limited transpositions: 76, in 17 transposition classes
+without the empty set and the chromatic scale: 15 classes, 14 set classes
+```
+
+Setenta y seis conjuntos de 4096. Los dos conjuntos que todas las transposiciones fijan son el conjunto vacío y la escala cromática. Sin ellos quedan 15 clases: la cuenta de Wikipedia, "If one excludes modes with 0, 1, 11 or 12 notes which can be construed as too extreme, there are 15 generalized Messiaen modes". Forman 14 clases de conjuntos, porque una de ellas, la escala de tritono de más abajo, no es su propia imagen especular: ella y su inversión son dos clases de transposición de una misma clase de conjuntos. La sección siguiente las enumera.
+
+### Las quince clases
+
+Cada clase se escribe desde 0, con su forma prima y su número de Forte tomados de la [List of set classes](https://en.wikipedia.org/wiki/List_of_set_classes) de Wikipedia, sus pasos, sus transposiciones y modos distintos (la cuenta de rotaciones distintas de la lección 2), y sus ejes especulares, que llegan más adelante ([`Lesson14.cs#L172-L177`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L172-L177)):
+
+```text
+== The fifteen classes: notes from 0, steps, distinct transpositions and modes, mirror axes
+prime form         pitch classes        steps                transp.  modes  mirrors  name
+(02468T) 6-35      0 2 4 6 8 T          2 2 2 2 2 2          2        1      6        whole-tone scale, Messiaen 1
+(0369) 4-28        0 3 6 9              3 3 3 3              3        1      4        diminished seventh
+(0134679T) 8-28    0 1 3 4 6 7 9 T      1 2 1 2 1 2 1 2      3        2      4        octatonic scale, Messiaen 2
+(048) 3-12         0 4 8                4 4 4                4        1      3        augmented triad
+(014589) 6-20      0 1 4 5 8 9          1 3 1 3 1 3          4        2      3        augmented scale
+(01245689T) 9-12   0 1 2 4 5 6 8 9 T    1 1 2 1 1 2 1 1 2    4        3      3        Messiaen 3
+(06) 2-6           0 6                  6 6                  6        1      2        tritone
+(0167) 4-9         0 1 6 7              1 5 1 5              6        2      2
+(0268) 4-25        0 2 6 8              2 4 2 4              6        2      2
+(012678) 6-7       0 1 2 6 7 8          1 1 4 1 1 4          6        3      2        Messiaen 5
+(013679) 6-30      0 1 3 6 7 9          1 2 3 1 2 3          6        3      0        tritone scale, inverted
+(013679) 6-30      0 2 3 6 8 9          2 1 3 2 1 3          6        3      0        tritone scale
+(01236789) 8-9     0 1 2 3 6 7 8 9      1 1 1 3 1 1 1 3      6        4      2        Messiaen 4
+(0124678T) 8-25    0 1 2 4 6 7 8 T      1 1 2 2 1 1 2 2      6        4      2        Messiaen 6
+(012346789T) 10-6  0 1 2 3 4 6 7 8 9 T  1 1 1 1 2 1 1 1 1 2  6        5      2        Messiaen 7
+```
+
+Los pasos muestran la simetría: una clase con 2 transposiciones repite sus pasos cada 2 semitonos, una con 6 cada 6. Y en cada fila, el número de modos es el número de notas dividido por el número de transposiciones que fijan el conjunto: la escala octatónica tiene 8 notas y 4 transposiciones que la fijan, 2 modos. Además de los siete de Messiaen, la tabla contiene lo que Wikipedia llama truncamientos, los conjuntos que quedan al quitar notas de forma simétrica: el tritono, la tríada aumentada, la séptima disminuida, "major third, tone, major third, tone", que es 4-25, "perfect fourth, semitone, perfect fourth, semitone", que es 4-9, la escala aumentada, y dos conjuntos de seis notas que son imágenes especulares uno del otro, "(Modes are "mirror" inversions of Petrushka Chord modes.)". La escala aumentada, 6-20, es "arguably of musical importance", dice el artículo, y "a truncated version of his Third Mode".
+
+### Los siete modos de Messiaen
+
+El programa construye los modos de Messiaen a partir de los intervalos que Wikipedia da para cada uno, y compara sus cuentas con las transposiciones y los modos que da el artículo ([`Lesson14.cs#L47-L60`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L47-L60), [`#L179-L187`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L179-L187)):
+
+```text
+== Messiaen's seven modes, from Wikipedia's intervals: the course's counts against his list
+mode  steps                transp.  modes  his list  check
+1     2 2 2 2 2 2          2        1      2 1       ok
+2     1 2 1 2 1 2 1 2      3        2      3 2       ok
+3     2 1 1 2 1 1 2 1 1    4        3      4 3       ok
+4     1 1 3 1 1 1 3 1      6        4      6 4       ok
+5     1 4 1 1 4 1          6        3      6 3       ok
+6     2 2 1 1 2 2 1 1      6        4      6 4       ok
+7     1 1 1 2 1 1 1 1 2 1  6        5      6 5       ok
+```
+
+Siete de siete. Open Music Theory da la misma tabla, con una columna para el "Number of unique transpositions" y otra para el "Number of unique rotations" ([Open Music Theory, "Collections"](https://viva.pressbooks.pub/openmusictheory/chapter/collections/)).
+
+### En GA: una prueba, y una búsqueda
+
+[`UnifiedModeService`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Unified/UnifiedModeService.cs), que la lección 11 compiló, tiene un [`IsSymmetricSet`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Unified/UnifiedModeService.cs#L349-L362) privado: "A set is rotationally symmetric if there exists k (1..11) such that Transpose(k) == set". Es la transposición limitada. `FromPitchClassSet` guarda su respuesta en la clase de modo que construye ([`#L43-L69`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Unified/UnifiedModeService.cs#L43-L69)), y el programa la lee allí para cada conjunto ([`Lesson14.cs#L113-L124`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L113-L124), [`#L189-L194`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L189-L194)):
+
+```text
+== UnifiedModeService (GA.Domain.Services, compiled): IsSymmetricSet over the 4096 sets, through FromPitchClassSet
+                       course   GA       check
+sets                   76       76       ok
+agree                  4096     4096     ok
+sets FromPitchClassSet throws on: 0
+```
+
+GA coincide en los 4096 conjuntos. `Describe` nombra luego el modo de Messiaen, si el conjunto es uno: pasa la forma prima del conjunto a [`IdentifyMessiaenMode`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Unified/UnifiedModeService.cs#L277-L347) ([`#L136`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Unified/UnifiedModeService.cs#L136)), que compara su identificador con ocho constantes. La forma prima de GA es el menor identificador entre las 24 transposiciones e inversiones (lección 4). El programa pregunta por cada uno de los siete modos, y lista las constantes ([`Lesson14.cs#L196-L212`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L196-L212)):
+
+```text
+== UnifiedModeService.Describe(...).MessiaenModeIndex for Messiaen's seven modes, with each prime form's id
+mode             course   GA       check
+1 (1365)         1        1        ok
+2 (1755)         2        2        ok
+3 (1911)         3        3        ok
+4 (975)          4        (none)   DIFF
+5 (455)          5        (none)   DIFF
+6 (1495)         6        (none)   DIFF
+7 (2015)         7        (none)   DIFF
+
+The ids IdentifyMessiaenMode compares the prime form with (UnifiedModeService.cs, lines 298-341):
+GA's mode  id     pitch classes          the course's mode  prime form
+1          1365   0 2 4 6 8 T            1                  yes
+2          1755   0 1 3 4 6 7 9 T        2                  yes
+2          2925   0 2 3 5 6 8 9 E        2                  no, 1755
+3          1911   0 1 2 4 5 6 8 9 T      3                  yes
+4          2535   0 1 2 5 6 7 8 E        4                  no, 975
+5          2275   0 1 5 6 7 E            5                  no, 455
+6          3315   0 1 4 5 6 7 T E        4                  no, 975
+7          3055   0 1 2 3 5 6 7 8 9 E    7                  no, 2015
+```
+
+Para los modos 1 a 3, las constantes son formas primas, y GA encuentra los modos. Para los modos 4, 5 y 7, son los modos escritos desde C, cosa que una forma prima nunca es: el método recibe 975, 455 o 2015 y no devuelve nada. La constante del modo 6, 3315, no es el modo 6 en absoluto sino otra rotación del modo 4; el comentario de encima duda entre las notas del modo 4, `[0,1,2,5,6,7,8,11]`, y ese conjunto. La segunda constante del modo 2, 2925, tampoco puede coincidir nunca. El comentario del método da al modo 3 "3 transpositions"; tiene 4. Las pruebas de GA para los modos 5 a 7 pasan igualmente: cada una afirma `Is.Null.Or.EqualTo(5)` (o 6, o 7), que acepta la ausencia de respuesta, y la del modo 6 también construye 3315 ([`UnifiedModeAdvancedTests.cs#L87-L119`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Tests/Common/GA.Business.Core.Tests/Unified/UnifiedModeAdvancedTests.cs#L87-L119)).
+
+## Las clases de escalas simétricas de GA
+
+### La idea
+
+Una clase de modos para una escala simétrica debería tener un modo por rotación distinta: uno para la escala de tonos enteros, dos para la escala octatónica ("Each octatonic scale has exactly two modes", el artículo [Octatonic scale](https://en.wikipedia.org/wiki/Octatonic_scale) de Wikipedia), dos para la escala aumentada, cuyos pasos alternan 3 y 1. Sus transposiciones son 2, 3 y 4: "hexatonic collections can only be transposed four times before returning to the same group of notes again" ([Open Music Theory, "Collections"](https://viva.pressbooks.pub/openmusictheory/chapter/collections/)).
+
+### En GA
+
+[`SymmetricScaleMode<TScaleDegree>`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Modes/SymmetricScaleMode.cs#L20-L38) es el `ScaleMode<TScaleDegree>` de la lección 11 con dos propiedades más: `HasLimitedTranspositions`, verdadera "when it maps onto itself before all 12 transpositions are exhausted", y `TranspositionCount`. Tres clases con nombre derivan de ella, sobre las escalas de [`Scale.cs#L59-L62`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Scales/Scale.cs#L59-L62): [`WholeToneScaleMode`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Modes/Symmetric/WholeToneScaleMode.cs#L7-L44), [`DiminishedScaleMode`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Modes/Symmetric/DiminishedScaleMode.cs#L7-L26) y [`AugmentedScaleMode`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Modes/Symmetric/AugmentedScaleMode.cs#L7-L28). Una cuarta, [`GenericSymmetricScaleMode`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Modes/Symmetric/GenericSymmetricScaleMode.cs#L13), admite cualquier escala y aquí queda aparte. Los `Items` de las tres clases con nombre contienen un modo por grado, y los tipos de grado van de 1 al número de notas, como los de la lección 11 ([`DiminishedScaleDegree.cs#L14-L15`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Primitives/Symmetric/DiminishedScaleDegree.cs#L14-L15)). El programa lleva cada modo a C y compara las tres clases con las cuentas del curso, con un solo método genérico ([`Lesson14.ModeClass`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L135-L150)):
+
+```text
+== WholeToneScaleMode: GA's 6 modes, each moved to C, against the course's count
+degree  GA's Name                notes                      steps             set on C
+1       Whole-tone               C D E F# G# A#             2 2 2 2 2 2       1365
+2       Whole-tone 2             D E F# G# A# C             2 2 2 2 2 2       1365
+3       Whole-tone 3             E F# G# A# C D             2 2 2 2 2 2       1365
+4       Whole-tone 4             F# G# A# C D E             2 2 2 2 2 2       1365
+5       Whole-tone 5             G# A# C D E F#             2 2 2 2 2 2       1365
+6       Whole-tone 6             A# C D E F# G#             2 2 2 2 2 2       1365
+
+                 course   GA       check
+transpositions   2        2        ok
+limited          True     True     ok
+distinct modes   1        1        ok
+
+== DiminishedScaleMode: GA's 8 modes, each moved to C, against the course's count
+degree  GA's Name                notes                      steps             set on C
+1       Half-whole diminished    C D Eb F Gb Ab A B         2 1 2 1 2 1 2 1   2925
+2       Whole-half diminished    D Eb F Gb Ab A B C         1 2 1 2 1 2 1 2   1755
+3       Diminished mode 3        Eb F Gb Ab A B C D         2 1 2 1 2 1 2 1   2925
+4       Diminished mode 4        F Gb Ab A B C D Eb         1 2 1 2 1 2 1 2   1755
+5       Diminished mode 5        Gb Ab A B C D Eb F         2 1 2 1 2 1 2 1   2925
+6       Diminished mode 6        Ab A B C D Eb F Gb         1 2 1 2 1 2 1 2   1755
+7       Diminished mode 7        A B C D Eb F Gb Ab         2 1 2 1 2 1 2 1   2925
+8       Diminished mode 8        B C D Eb F Gb Ab A         1 2 1 2 1 2 1 2   1755
+
+                 course   GA       check
+transpositions   3        3        ok
+limited          True     True     ok
+distinct modes   2        2        ok
+
+== AugmentedScaleMode: GA's 6 modes, each moved to C, against the course's count
+degree  GA's Name                notes                      steps             set on C
+1       Augmented                C D# E G G# B              3 1 3 1 3 1       2457
+2       Augmented inversed       D# E G G# B C              1 3 1 3 1 3       819
+3       Augmented dominant       E G G# B C D#              3 1 3 1 3 1       2457
+4       Augmented Lydian         G G# B C D# E              1 3 1 3 1 3       819
+5       Augmented mode 5         G# B C D# E G              3 1 3 1 3 1       2457
+6       Augmented mode 6         B C D# E G G#              1 3 1 3 1 3       819
+
+                 course   GA       check
+transpositions   4        4        ok
+limited          True     True     ok
+distinct modes   2        2        ok
+```
+
+Las propiedades son correctas: 2, 3 y 4 transposiciones, todas limitadas. Pero las clases listan 6, 8 y 6 modos, que forman 1, 2 y 2 conjuntos distintos sobre C. Los comentarios cuentan otra cosa: la escala de tonos enteros "has only two distinct modes" ([`WholeToneScaleMode.cs#L12`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Modes/Symmetric/WholeToneScaleMode.cs#L12)), la escala disminuida "has only two distinct modes: half-whole and whole-half", correcto, y la escala aumentada "has only four distinct modes" ([`AugmentedScaleMode.cs#L12`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Modes/Symmetric/AugmentedScaleMode.cs#L12)), con cuatro instancias con nombre, «Augmented», «Augmented inversed», «Augmented dominant» y «Augmented Lydian», para dos conjuntos. El código que recorre los modos recibe las repeticiones: [`ChordTemplateFactory.GenerateFromSymmetricalScales`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/ChordTemplateFactory.cs#L168-L199) construye acordes a partir de los 20, y [`ModalCharacteristicIntervalService`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Musical/Enrichment/ModalCharacteristicIntervalService.cs#L114-L148) guarda cada modo en un índice base más su grado menos uno, con las bases 206, 208 y 212: seis modos de tonos enteros ocupan 206 a 211, ocho modos disminuidos 208 a 215 y seis modos aumentados 212 a 217, así que los índices 208 a 211 y 212 a 215 se escriben dos veces cada uno y gana la última escritura. Leído, no ejecutado.
+
+Dos de los nombres disminuidos están intercambiados. `Scale.Diminished` es `new("C D Eb F Gb Ab A B")`: primero el tono. El nombre de cada grado viene de [`DiminishedScaleDegree.ToName`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Primitives/Symmetric/DiminishedScaleDegree.cs#L47-L52) ([`Lesson14.cs#L220-L226`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L220-L226)):
+
+```text
+== DiminishedScaleMode: GA's names for degrees 1 and 2 against the name of their step pattern
+degree   course                   GA                       check
+1        Whole-half diminished    Half-whole diminished    DIFF
+2        Half-whole diminished    Whole-half diminished    DIFF
+```
+
+Wikipedia: "the first begins its ascent with a whole step, while the second begins its ascent with a half step (semitone). These modes are sometimes referred to as the whole step/half-step diminished scale and the half-step/whole step diminished scale, respectively." La instancia estática `DiminishedScaleMode.HalfWhole` de GA es la escala tono-semitono.
+
+## La escala de tritono
+
+### La idea
+
+El acorde de Petrushka de Stravinsky es do mayor sobre fa♯ mayor. Wikipedia: "The device uses tones that, together, make up a synthetic hexatonic scale (0 1 4 6 7 t). When enharmonically spelled C–D♭–E–G♭–G(♮)–B♭, it is called the tritone scale" ([Petrushka chord](https://en.wikipedia.org/wiki/Petrushka_chord); también [Hexatonic scale](https://en.wikipedia.org/wiki/Hexatonic_scale)). Sus pasos, 1 3 2 1 3 2, se repiten tras un tritono: 6 transposiciones y 3 modos. Es una de las dos filas 6-30 de la tabla de arriba.
+
+### En GA
+
+[`Scale.Tritone`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Scales/Scale.cs#L67) es `new("C Db E F# G A")`, y el comentario de [`TritoneScaleMode`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Modes/Exotic/TritoneScaleMode.cs#L7-L16), "(Petrushka scale)", dice lo mismo: "It consists of the notes C, Db, E, F#, G, A." El programa compara las dos escalas ([`Lesson14.cs#L228-L242`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L228-L242)):
+
+```text
+== Scale.Tritone against the tritone scale, C D♭ E G♭ G B♭
+                       Scale.Tritone          tritone scale
+notes                  C Db E F# G A          C Db E Gb G Bb
+pitch classes          0 1 4 6 7 9            0 1 4 6 7 T
+steps                  1 3 2 1 2 3            1 3 2 1 3 2
+prime form             (014679) 6-Z50         (013679) 6-30
+vector, course         <2 2 4 2 3 2>          <2 2 4 2 2 3>
+vector, GA             <2 2 4 2 3 2>          <2 2 4 2 2 3>
+transpositions         12                     6
+modes                  6                      3
+GA's IsSymmetricSet    False                  True
+
+TritoneScaleMode.Items: 6 modes, 6 distinct sets on C
+```
+
+<BraceletTritone role="img" aria-label="Dos brazaletes. 1235, la escala de tritono: 0 1 4 6 7 10, una forma que vuelve sobre sí misma tras media vuelta. 723, el Scale.Tritone de GA: 0 1 4 6 7 9, la misma forma con si bemol bajado a la, que solo vuelve sobre sí misma tras una vuelta completa." />
+
+Una nota difiere: A en lugar de B♭. Basta para romper la simetría. La escala de GA es 6-Z50, con 12 transposiciones y 6 modos distintos, y el propio `IsSymmetricSet` de GA responde False. Las demás afirmaciones del comentario no encajan con ninguna de las dos escalas: estaría "built from alternating half steps and minor thirds", lo que describe la escala aumentada, y "Due to its symmetrical structure, it has only two distinct modes" ([`#L11-L14`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Modes/Exotic/TritoneScaleMode.cs#L11-L14)), cuando la escala de tritono tiene 3 y la de GA 6. GA y el curso calculan el mismo vector para cada escala; los dos vectores solo difieren en sus dos últimas cifras.
+
+## Lo que GA llama simétrico
+
+### La idea
+
+Para el curso, un conjunto es simétrico por transposición cuando tiene transposiciones limitadas, y por inversión cuando tiene un eje especular, que llega en la sección siguiente. Ninguna de las dos cosas depende de cómo se escriben las notas ni de qué nota va primero.
+
+### En GA: tres pruebas sobre los 4096 conjuntos
+
+Además de `IsSymmetricSet`, otras dos pruebas dicen encontrar los conjuntos simétricos:
+
+- [`PitchClassSet.IsMonomodal`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs#L186-L189), "True if this set is the only member of its modal family (e.g. Whole Tone, Diminished)", es `FamilySize == 1`. Las lecciones 2 y 11 mostraron qué es una familia modal de GA: los conjuntos que contienen 0 y comparten un vector de intervalos. Alimenta una dimensión de los embeddings de GA, "Is Symmetric/Monomodal" ([`EmbeddingSchema.cs#L881-L882`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Embeddings/EmbeddingSchema.cs#L881-L882), [`ModalVectorService.cs#L132`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Embeddings/Services/ModalVectorService.cs#L132)).
+- [`AtonalChordAnalysisService.IsSymmetricalSet`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/Analysis/Atonal/AtonalChordAnalysisService.cs#L217-L233), privado, dice "Check for equal divisions of the octave": ordena las clases de altura y comprueba que las distancias entre vecinas son todas iguales, sin cerrar el círculo. Fija el `IsSymmetrical` del análisis atonal de acordes de GA y añade «Symmetrical structure» a su descripción ([`#L201-L204`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/Analysis/Atonal/AtonalChordAnalysisService.cs#L201-L204)). El programa compila el servicio tal cual y llama al método por reflexión ([`Lesson14.cs#L105-L109`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L105-L109)).
+
+El programa cuenta lo que marca cada prueba ([`Lesson14.cs#L246-L264`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L246-L264)):
+
+```text
+== Three tests GA calls symmetric, over the 4096 sets, against limited transposition
+test                                         sets   limited  not limited  limited, not flagged
+course: limited transpositions               76     76       0            0
+UnifiedModeService.IsSymmetricSet            76     76       0            0
+PitchClassSet.IsMonomodal                    29     17       12           59
+AtonalChordAnalysisService.IsSymmetricalSet  156    16       140          60
+
+IsMonomodal, by number of notes: 0: 1, 1: 12, 2: 6, 3: 4, 4: 3, 6: 2, 12: 1
+IsSymmetricalSet: C D E True, B♭ C D False
+sets whose SetClass.IsModal is false, the only way into GenerateAtonalName's symmetry branch: 0
+```
+
+`IsMonomodal` marca 29 conjuntos: las 12 notas sueltas, que tienen 12 transposiciones, y 17 conjuntos limitados cuya familia tiene un solo miembro: los 6 tritonos, las 4 tríadas aumentadas, las 3 séptimas disminuidas, las 2 escalas de tonos enteros, el conjunto vacío y la escala cromática. Su propio ejemplo falla: la escala octatónica tiene dos modos, así que su familia tiene dos miembros y la prueba dice que no. Quedan 59 conjuntos limitados sin marcar.
+
+`IsSymmetricalSet` marca 156 conjuntos, 140 de ellos con 12 transposiciones. C D E tiene distancias iguales, 2 y 2, así que es «simétrico». B♭ C D es la misma forma de acorde, pero ordenado da 0 2 10, con distancias de 2 y 8. Todo conjunto de dos notas pasa, porque una sola distancia siempre es igual a sí misma. Se le escapan 60 conjuntos limitados, entre ellos la escala octatónica y la escala aumentada. En [`GenerateAtonalName`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/Analysis/Atonal/AtonalChordAnalysisService.cs#L151-L183), la prueba también daría nombre al acorde, mediante [`GetSymmetryType`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/Analysis/Atonal/AtonalChordAnalysisService.cs#L235-L250), que llama «tritone» a todo conjunto de dos notas, y «whole tone» a seis notas cualesquiera con distancias iguales, C C♯ D D♯ E F incluidas. Esa rama nunca se alcanza: viene después de `setClass.IsModal`, que es verdadero para los 4096 conjuntos ([`SetClass.cs#L93-L96`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/SetClass.cs#L93-L96)). Otra prueba, [`HasSymmetricalStructure`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/Analysis/Atonal/AtonalChordAnalysisService.cs#L109-L124), es una de las cinco comprobaciones con las que [`RequiresAtonalAnalysis`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/Analysis/Atonal/AtonalChordAnalysisService.cs#L13-L51) envía un acorde al análisis atonal: se cumple cuando los intervalos del acorde sobre la fundamental son todos múltiplos de 2, de 3 o de 4. Leído, no ejecutado.
+
+### En GA: un catálogo de familias atonales
+
+[`AtonalModalFamilies.yaml`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/AtonalModalFamilies.yaml#L1-L18) se genera a partir de las familias modales de GA y está "cross-referenced against GA.Business.Config/Modes.yaml for tonal analogs". Cada familia tiene un campo `IsSymmetric`, y `AtonalModalFamiliesConfig.GetSymmetricFamilies` devuelve "Every family with a single distinct mode (symmetric sets — whole tone, diminished chord, augmented triad, chromatic, etc.)" ([`AtonalModalFamiliesConfig.fs#L198-L201`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/AtonalModalFamiliesConfig.fs#L198-L201)). El programa lee el archivo con el cargador de GA y lista las familias que tienen `IsSymmetric` o transposiciones limitadas ([`Lesson14.cs#L266-L274`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L266-L274)):
+
+```text
+== AtonalModalFamilies.yaml (GA.Business.Config, read by AtonalModalFamiliesConfig): IsSymmetric against limited transposition
+families: 200; IsSymmetric: 6; with limited transpositions: 15
+
+first mode, family                                   course   GA       check
+0  Family-1-1                                        False    True     DIFF
+0 6  Family-2-1                                      True     True     ok
+0 4 8  Augmented Triad Family                        True     True     ok
+0 3 6 9  Major Seventh Chord Family                  True     True     ok
+0 2 6 8  Family-4-4                                  True     False    DIFF
+0 1 6 7  Family-4-21                                 True     False    DIFF
+0 2 4 6 8 T  Whole Tone Family                       True     True     ok
+0 1 3 6 7 9  Family-6-6                              True     False    DIFF
+0 1 4 5 8 9  Augmented (Hexatonic) Family            True     False    DIFF
+0 1 2 6 7 8  Family-6-41                             True     False    DIFF
+0 1 3 4 6 7 9 T  Diminished Family                   True     False    DIFF
+0 1 2 4 6 7 8 T  Family-8-4                          True     False    DIFF
+0 1 2 3 6 7 8 9  Major Bebop Family                  True     False    DIFF
+0 1 2 4 5 6 8 9 T  Family-9-1                        True     False    DIFF
+0 1 2 3 4 6 7 8 9 T  Family-10-1                     True     False    DIFF
+0 1 2 3 4 5 6 7 8 9 T E  Chromatic Family            True     True     ok
+```
+
+El generador fija `IsSymmetric` cuando una familia tiene un solo miembro: "Truly symmetric sets yield Modes.Count == 1" ([`Program.cs#L249-L253`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Demos/AtonalModalFamiliesGenerator/Program.cs#L249-L253)). Es otra vez la prueba monomodal, con los mismos dos errores: la nota suelta es simétrica, y las familias limitadas con más de un modo no lo son, la de la escala octatónica incluida. Los nombres son otra historia. Una familia toma el nombre de la familia de `Modes.yaml` que lista más de sus miembros ([`#L187-L209`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Demos/AtonalModalFamiliesGenerator/Program.cs#L187-L209)), así que la familia de la séptima disminuida se llama «Major Seventh Chord Family»: la familia Major Seventh Chord de la lección 11 lista una «Diminished Seventh» ([`Modes.yaml#L531`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Modes.yaml#L531)). El cuarto modo de Messiaen es «Major Bebop Family»; la última sección de esta lección vuelve sobre los nombres.
+
+### En GA: la respuesta a «modes of limited transposition»
+
+`ModesSkill`, una habilidad del agente de teoría de GA, responde a una pregunta que contiene "modes of limited transposition" con esas familias ([`ModesSkill.cs#L596-L601`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ModesSkill.cs#L596-L601)), con el formato de [`FormatAtonalSymmetricListing`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ModesSkill.cs#L687-L705) y una confianza de 1,0. El curso no compila `GA.Business.ML`, así que el programa reconstruye la respuesta a partir del mismo formato y los mismos datos ([`Lesson14.cs#L276-L285`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L276-L285)):
+
+```text
+== ModesSkill's answer to "modes of limited transposition" (GA.Business.ML, not compiled), rebuilt from its format and the same data
+**6 symmetric / modes-of-limited-transposition families** in the atonal catalog:
+
+- **Family-1-1** — ICV `<0 0 0 0 0 0>` — 1 notes (Forte 1-1)
+- **Family-2-1** — ICV `<0 0 0 0 0 1>` — 2 notes (Forte 2-1)
+- **Augmented Triad Family** — ICV `<0 0 0 3 0 0>` — 3 notes (Forte 3-1)
+- **Major Seventh Chord Family** — ICV `<0 0 4 0 0 2>` — 4 notes (Forte 4-1)
+- **Whole Tone Family** — ICV `<0 6 0 6 0 3>` — 6 notes (Forte 6-1)
+- **Chromatic Family** — ICV `<1 1 1 1 0 6>` — 12 notes (Forte 12-1)
+
+These are Messiaen's classical category — scales that repeat under rotation by fewer than 12 transpositions. The whole-tone scale (2 transpositions), octatonic (3), and hexatonic (4) are the most common in jazz / film vocabulary.
+```
+
+Seis familias, una nota suelta entre ellas; las escalas octatónica y hexatónica que nombra la última frase no están en la lista. El vector de la familia cromática es el desbordamiento de la lección 11, `<1 1 1 1 0 6>` por `<12 12 12 12 12 6>`.
+
+### En GA: los números de Forte
+
+La respuesta da al tritono el número de Forte 2-1, a la tríada aumentada 3-1, a la séptima disminuida 4-1. Los números de Forte, en la lista de Wikipedia y en la tabla de las quince clases, son 2-6, 3-12 y 4-28. La cabecera del archivo dice por qué: "Forte numbers come from ProgrammaticForteCatalog (Rahn ordering)". [`ProgrammaticForteCatalog`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/ProgrammaticForteCatalog.cs#L5-L20) numera las clases de conjuntos de cada tamaño por vector, y luego por forma prima ([`#L123-L127`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/ProgrammaticForteCatalog.cs#L123-L127)), y su comentario dice que ese orden "may differ from Allen Forte's historical 1973 numbering for some set classes. For most practical purposes, the differences are minor". El comentario de [`ForteCatalog`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/ForteCatalog.cs#L3-L13), que la lección 4 comprobó contra los números de Forte, lo contradice: "That ordinal is NOT Forte's catalog number — it diverges for most set classes — so it must not be surfaced to users or cross-joined with external Forte-numbered data." El programa compara las etiquetas del archivo con `ForteCatalog` para las 200 familias ([`Lesson14.cs#L287-L302`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L287-L302)):
+
+```text
+== The Forte labels of AtonalModalFamilies.yaml against GA's ForteCatalog (CanonicalForteCatalog, lesson 4)
+notes  families  same labels
+1      1         1
+2      6         0
+3      12        0
+4      28        0
+5      35        0
+6      35        1
+7      35        0
+8      28        0
+9      12        0
+10     6         0
+11     1         1
+12     1         1
+all    200       4
+
+symmetric family       ForteCatalog  the file  check
+0                      1-1           1-1       ok
+0 6                    2-6           2-1       DIFF
+0 4 8                  3-12          3-1       DIFF
+0 3 6 9                4-28          4-1       DIFF
+0 2 4 6 8 T            6-35          6-1       DIFF
+0 1 2 3 4 5 6 7 8 9 T E 12-1          12-1      ok
+```
+
+Cuatro etiquetas de 200 coinciden: los tres tamaños que tienen una sola clase, y un hexacordio. El aviso de `ForteCatalog` tiene razón, y el archivo, igual que la respuesta del agente, hace lo que prohíbe. GA ya ha corregido la causa: desde [GA #436](https://github.com/GuitarAlchemist/ga/pull/436), fusionada antes de `a826864`, el generador llama a `ForteCatalog` ([`Program.cs#L183`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Demos/AtonalModalFamiliesGenerator/Program.cs#L183)) y lo dice en la cabecera que escribe ([`#L413`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Demos/AtonalModalFamiliesGenerator/Program.cs#L413)). Esa pull request dejó para más adelante regenerar el archivo, que no ha cambiado desde que se generó en [`7a4308a`](https://github.com/GuitarAlchemist/ga/commit/7a4308ad1549cbe47c60bfb710870207e341a40c): sus etiquetas son una salida desfasada.
+
+## La simetría especular
+
+### La idea
+
+Un conjunto también puede volver sobre sí mismo con una inversión I*n*, que lleva la clase de altura *p* a *n* − *p* (lección 4). En el brazalete, I*n* es un espejo respecto a la recta que pasa por *n*/2 y *n*/2 + 6. Ian Ring lista esas rectas como "Reflection Axes": `[0, 1, 2, 3, 4, 5]` para [la escala de tonos enteros](https://ianring.com/musictheory/scales/1365), `[1, 2.5, 4, 5.5]` para [la escala octatónica 2925](https://ianring.com/musictheory/scales/2925), `[0.5, 2.5, 4.5]` para [la escala aumentada 819](https://ianring.com/musictheory/scales/819). El curso cuenta las inversiones que dejan el conjunto igual ([`Lesson14.Mirrors`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L32-L34)), y las dibuja:
+
+<BraceletMirrors role="img" aria-label="Tres brazaletes con sus ejes especulares a trazos. 1365, la escala de tonos enteros, 0 2 4 6 8 10: seis ejes. 2925, la escala octatónica, 0 2 3 5 6 8 9 11: cuatro ejes. 2457, la escala aumentada de GA, 0 3 4 7 8 11: tres ejes." />
+
+Seis, cuatro y tres: tantos ejes como transposiciones que fijan cada escala. No es casualidad. Dos espejos seguidos forman una transposición, así que si un conjunto tiene un eje, cada transposición que lo fija convierte ese eje en otro. Un conjunto no tiene ningún eje, o tiene tantos como transposiciones que lo fijan.
+
+### En GA
+
+[`TranspositionClass.IsInversionallySymmetric`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/TranspositionClass.cs#L47-L53) dice si una clase de transposición es "equal to its own inversion's transposition class (e.g. an augmented triad)". El programa lo compara con los ejes del curso para cada clase, y cuenta los ejes de algunas escalas ([`Lesson14.cs#L306-L330`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L306-L330)):
+
+```text
+== Mirror symmetry: TranspositionClass.IsInversionallySymmetric (GA.Domain.Core) against the course's mirror axes
+                         course   GA       check
+transposition classes    352      352      ok
+mirror-symmetric         96       96       ok
+agree                    352      352      ok
+
+sets with mirror axes but not as many as the transpositions that fix them: 0
+
+scale              fixing transpositions  mirror axes
+major              1                      1
+harmonic minor     1                      0
+melodic minor      1                      1
+whole-tone         6                      6
+octatonic          4                      4
+augmented scale    3                      3
+tritone scale      2                      0
+Scale.Tritone      1                      1
+```
+
+GA coincide en las 352 clases; 96 son su propia imagen especular. De las 15 clases limitadas, 13 lo son, y la tabla de las quince clases de arriba muestra sus ejes. Las otras dos son la escala de tritono y su inversión: limitadas, y sin embargo sin espejo, por eso ocupa dos filas. MUS-006 dice que la mayoría de las escalas son quirales, su imagen especular no es una rotación de sí mismas, y que las excepciones incluyen "the major scale (whose inversion is the Phrygian mode, which IS a rotation) and symmetric scales". Para la simetría por transposición, la escala de tritono es el contraejemplo. La escala mayor tiene un eje, que pasa por D: el dórico, 2 1 2 2 2 1 2, se lee igual en los dos sentidos. La menor melódica tiene uno, que pasa por su quinto grado; la menor armónica ninguno, por eso su imagen especular, la mayor armónica, es otra escala (lección 2). El `Scale.Tritone` de GA no tiene transposiciones limitadas pero tiene un eje.
+
+## Añadido después de la primera ejecución: los nombres
+
+La primera ejecución mostró que AtonalModalFamilies.yaml llama al cuarto modo de Messiaen «Major Bebop Family». El programa preguntó entonces a los dos catálogos de modos de GA cómo llaman a cada una de las quince clases, en un commit aparte después de la primera ejecución: el archivo atonal, por la familia que tiene el vector de GA, y `ModesConfig.TryGetModeByIntervalClassVector`, la búsqueda de la lección 11 detrás de la línea «Scale:» de `ga_chord_to_set` ([`Lesson14.cs#L332-L358`](https://github.com/spareilleux/learn/blob/6b4039a/code/music-theory-ga/GaTheory/Lesson14.cs#L332-L358)):
+
+```text
+== Added after the first run: what GA's two mode catalogs call the fifteen classes
+AtonalModalFamilies.yaml: the family with GA's vector; ModesConfig: TryGetModeByIntervalClassVector, the "Scale:" line of ga_chord_to_set
+class                          AtonalModalFamilies.yaml       ModesConfig
+whole-tone scale, Messiaen 1   Whole Tone Family              (none)
+diminished seventh             Major Seventh Chord Family     (none)
+octatonic scale, Messiaen 2    Diminished Family              (none)
+augmented triad                Augmented Triad Family         (none)
+augmented scale                Augmented (Hexatonic) Family   (none)
+Messiaen 3                     Family-9-1                     (none)
+tritone                        Family-2-1                     (none)
+(0167) 4-9                     Family-4-21                    (none)
+(0268) 4-25                    Family-4-4                     (none)
+Messiaen 5                     Family-6-41                    (none)
+tritone scale, inverted        Family-6-6                     (none)
+tritone scale                  Family-6-6                     (none)
+Messiaen 4                     Major Bebop Family             (none)
+Messiaen 6                     Family-8-4                     Diminished (Half-Whole)
+Messiaen 7                     Family-10-1                    (none)
+
+The modes of Modes.yaml whose notes form one of the fifteen classes:
+  Whole Tone                                   C D E F# G# Bb         whole-tone scale, Messiaen 1
+  Diminished (Half-Whole)                      C Db Eb E F# G A Bb    octatonic scale, Messiaen 2
+  Diminished (Whole-Half)                      C D Eb F Gb Ab A B     octatonic scale, Messiaen 2
+  Augmented Triad                              C E G#                 augmented triad
+  Diminished Seventh                           C Eb Gb A              diminished seventh
+  Major Bebop Mode 8                           C Db D F Gb G Ab B     Messiaen 4
+  Whole-Half Diminished                        C D Eb F Gb Ab A B     octatonic scale, Messiaen 2
+  Half-Whole Diminished (Dominant Diminished)  C Db Eb E F# G A Bb    octatonic scale, Messiaen 2
+  Whole-Half Diminished (Inv 1)                C D Eb F Gb Ab A B     octatonic scale, Messiaen 2
+  Half-Whole Diminished (Inv 1)                C Db Eb E F# G A Bb    octatonic scale, Messiaen 2
+  Whole-Half Diminished (Inv 2)                C D Eb F Gb Ab A B     octatonic scale, Messiaen 2
+  Half-Whole Diminished (Inv 2)                C Db Eb E F# G A Bb    octatonic scale, Messiaen 2
+  Whole-Half Diminished (Inv 3)                C D Eb F Gb Ab A B     octatonic scale, Messiaen 2
+  Half-Whole Diminished (Inv 3)                C Db Eb E F# G A Bb    octatonic scale, Messiaen 2
+  Augmented Scale                              C Eb E G Ab B          augmented scale
+  Augmented Scale (Inv 1)                      C Db E F G# A          augmented scale
+  Augmented Scale (Inv 2)                      C Eb E G Ab B          augmented scale
+  Augmented Scale (Inv 3)                      C Db E F G# A          augmented scale
+  Augmented Scale (Inv 4)                      C Eb E G Ab B          augmented scale
+  Augmented Scale (Inv 5)                      C Db E F G# A          augmented scale
+```
+
+El archivo atonal nombra seis clases según `Modes.yaml`. El cuarto modo de Messiaen es «Major Bebop Family» porque la familia Major Bebop de `Modes.yaml` termina con «Major Bebop Mode 8», C D♭ D F G♭ G A♭ B ([`Modes.yaml#L709-L726`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Modes.yaml#L709-L726)): no una rotación de la escala bebop mayor, C D E F G G♯ A B, sino el cuarto modo de Messiaen. La búsqueda por vector solo encuentra una clase, el sexto modo de Messiaen, y la llama «Diminished (Half-Whole)»: la familia Diminished declara `<4 6 4 6 4 4>` ([`#L328-L329`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Modes.yaml#L328-L329)), que es el vector del sexto modo de Messiaen, no el de la escala octatónica, `<4 4 8 4 4 4>` (lección 11). La escala octatónica no se encuentra en ninguna parte. Y `Modes.yaml` lista veinte modos para estas clases, diez de ellos para la escala octatónica: la familia Diminished (Octatonic) da ocho nombres a sus dos modos, y la familia Augmented (Hexatonic) seis nombres a los suyos ([`#L797-L828`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Modes.yaml#L797-L828)), las mismas repeticiones que las clases de modos de arriba. La herramienta MCP en sí no se ejecutó.
+
+## Ejercicios
+
+1. ¿Cuántas transposiciones distintas tiene el acorde de séptima disminuida C E♭ G♭ A? ¿Cuántos modos, y cuántos ejes especulares?
+2. La sexta francesa A♭ C D F♯ tiene los pasos "major third, tone, major third, tone". Da sus transposiciones, sus modos y sus ejes especulares, y encuentra su fila en la tabla de las quince clases.
+3. ¿Qué responde `IsSymmetricalSet` para C E G♯, para E G♯ C, y para C D? ¿Cómo llamaría `GetSymmetryType` a C D?
+4. El quinto modo de Messiaen sobre C es C D♭ F G♭ G B. ¿Por qué `UnifiedModeService.Describe` no le da ningún `MessiaenModeIndex`?
+
+<details>
+<summary>Soluciones</summary>
+
+1. T0, T3, T6 y T9 lo devuelven sobre sí mismo: 4 transposiciones que lo fijan, así que 12 / 4 = 3 transposiciones distintas. Tiene 4 notas y 4 transposiciones que lo fijan: 1 modo. Es su propia imagen especular, así que tiene tantos ejes como transposiciones que lo fijan: 4. La fila (0369) 4-28 de la tabla dice 3, 1 y 4.
+2. A♭ C D F♯ es 8 0 2 6, que T6 devuelve sobre sí mismo: 2 transposiciones que lo fijan, 6 transposiciones distintas, 4 / 2 = 2 modos (pasos 4 2 4 2 y 2 4 2 4), y 2 ejes especulares. Es la fila (0268) 4-25.
+3. True en los dos órdenes, porque el método ordena primero las clases de altura: 0 4 8, distancias 4 y 4. True también para C D, como para todo conjunto de dos notas. `GetSymmetryType` lo llamaría «tritone», pero la rama que lo llama nunca se alcanza.
+4. `Describe` pasa la forma prima, 0 1 2 6 7 8, identificador 455. `IdentifyMessiaenMode` busca 2275, que es el propio C D♭ F G♭ G B: 0 1 5 6 7 11. La forma prima nunca tiene ese identificador.
+
+</details>
+
+## Puntos clave
+
+- Un conjunto tiene transposiciones limitadas cuando una transposición distinta de T0 lo devuelve sobre sí mismo. El número de esas transposiciones divide a 12; el conjunto tiene 12 dividido por él transposiciones distintas, y su número de notas dividido por él modos distintos. Setenta y seis conjuntos lo cumplen, en 17 clases de transposición; sin el conjunto vacío ni la escala cromática quedan 15 clases, los siete modos de Messiaen y ocho truncamientos, entre ellos la escala aumentada y la escala de tritono.
+- Un conjunto con un eje especular tiene exactamente tantos ejes como transposiciones que lo fijan. Trece de las 15 clases los tienen; la escala de tritono no, así que ella y su imagen especular son dos clases.
+- `IsSymmetricSet` e `IsInversionallySymmetric` de GA coinciden con el curso en cada conjunto. `IdentifyMessiaenMode` compara formas primas con identificadores que no lo son, y solo encuentra los modos 1 a 3; sus pruebas aceptan la ausencia de respuesta.
+- Las tres clases de modos simétricos de GA tienen bien las transposiciones pero listan un modo por grado, 6, 8 y 6, para 1, 2 y 2 modos distintos; dos nombres disminuidos están intercambiados. `Scale.Tritone` tiene A donde la escala de tritono tiene B♭, lo que rompe su simetría.
+- `IsMonomodal`, el `IsSymmetric` del archivo atonal e `IsSymmetricalSet` no son pruebas de simetría: cuentan miembros únicos o distancias iguales. La respuesta del agente a "modes of limited transposition" lista una nota suelta y omite la escala octatónica, con números de Forte que su propio catálogo dice que no se deben mostrar.
+
+## Fuentes
+
+- Mark Gotham et al., [*Open Music Theory*](https://viva.pressbooks.pub/openmusictheory/), versión 2, 2023, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/): [Collections](https://viva.pressbooks.pub/openmusictheory/chapter/collections/) (las colecciones de tonos enteros, octatónica y hexatónica, y la tabla de los modos de Messiaen).
+- Wikipedia: [Mode of limited transposition](https://en.wikipedia.org/wiki/Mode_of_limited_transposition), [Octatonic scale](https://en.wikipedia.org/wiki/Octatonic_scale), [Whole-tone scale](https://en.wikipedia.org/wiki/Whole-tone_scale), [Hexatonic scale](https://en.wikipedia.org/wiki/Hexatonic_scale), [Petrushka chord](https://en.wikipedia.org/wiki/Petrushka_chord), [List of set classes](https://en.wikipedia.org/wiki/List_of_set_classes).
+- Ian Ring, [*A Study of Musical Scales*](https://ianring.com/musictheory/scales/): escalas [1365](https://ianring.com/musictheory/scales/1365), [2925](https://ianring.com/musictheory/scales/2925) y [819](https://ianring.com/musictheory/scales/819).
+- GuitarAlchemist/ga en el commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6): `Common/GA.Domain.Core/Theory/Tonal/Modes/SymmetricScaleMode.cs`, `Theory/Tonal/Modes/Symmetric/WholeToneScaleMode.cs`, `DiminishedScaleMode.cs`, `AugmentedScaleMode.cs`, `GenericSymmetricScaleMode.cs`, `Theory/Tonal/Modes/Exotic/TritoneScaleMode.cs`, `Theory/Tonal/Primitives/Symmetric/DiminishedScaleDegree.cs`, `Theory/Tonal/Scales/Scale.cs`, `Theory/Atonal/PitchClassSet.cs`, `SetClass.cs`, `TranspositionClass.cs`, `ForteCatalog.cs`, `ProgrammaticForteCatalog.cs`, `Common/GA.Domain.Services/Unified/UnifiedModeService.cs`, `Chords/Analysis/Atonal/AtonalChordAnalysisService.cs`, `Chords/ChordTemplateFactory.cs`, `Common/GA.Business.Config/AtonalModalFamilies.yaml`, `AtonalModalFamiliesConfig.fs`, `Modes.yaml`, `Demos/AtonalModalFamiliesGenerator/Program.cs`, `Common/GA.Business.ML/Agents/Skills/ModesSkill.cs`, `Musical/Enrichment/ModalCharacteristicIntervalService.cs`, `Embeddings/EmbeddingSchema.cs`, `Embeddings/Services/ModalVectorService.cs`, `Tests/Common/GA.Business.Core.Tests/Unified/UnifiedModeAdvancedTests.cs`.

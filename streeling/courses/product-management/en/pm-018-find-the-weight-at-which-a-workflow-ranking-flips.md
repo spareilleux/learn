@@ -1,0 +1,175 @@
+---
+module_id: "pm-018-find-the-weight-at-which-a-workflow-ranking-flips"
+department: "product-management"
+course: "Find the Weight at Which a Workflow Ranking Flips"
+title: "Find the Weight at Which a Workflow Ranking Flips"
+level: "intermediate"
+prerequisites: ["pm-011-include-review-and-correction-in-automation-break-even", "pm-004-craft-extension-release-decision"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Find the Weight at Which a Workflow Ranking Flips
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+A team ranks verification workflows by a weighted mixture of latency points and rework points. An assistant can make a preference appear objective by hiding the chosen weight inside a composite score. Sensitivity analysis asks which preference assumptions actually support the recommendation. Both coordinates must already be on declared comparable scales; multiplying raw unlike units does not justify a utility model.
+
+Write each workflow score as an affine function of the latency weight, with the remaining weight assigned to rework. Set the two score functions equal and solve for the crossover. Check whether that weight lies in the allowed unit interval. Evaluate a point on each side to determine the preferred option, and retain both options at exact equality.
+
+The fixed weight favours one workflow while the control favours the other. Neither result establishes a universal winner. The crossover exposes a decision boundary that a stakeholder can inspect before a policy is adopted. Actual latency distributions, correction quality and uncertainty in the point scales remain unmeasured. The primary scalarization reading supplies the weighted-objective concept; the finite affine comparison is authored. A future agent recommendation should state its weight and show whether plausible preference changes reverse the ranking.
+
+## Sources and project boundary
+
+[Prerequisite: pm-011-include-review-and-correction-in-automation-break-even](../../product-management/en/pm-011-include-review-and-correction-in-automation-break-even.md)
+
+[Prerequisite: pm-004-craft-extension-release-decision](../../product-management/en/pm-004-craft-extension-release-decision.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading](https://web.stanford.edu/~boyd/cvxbook/bv_cvxslides.pdf)
+
+## Fixed model and negative control
+
+```json
+{
+  "values": {
+    "names": [
+      "A",
+      "B"
+    ],
+    "latency": [
+      2,
+      6
+    ],
+    "rework": [
+      8,
+      2
+    ],
+    "latency_weight": "1/4"
+  },
+  "formula": "score[i]=w*latency[i]+(1-w)*rework[i], minimize. Solve equal affine scores for crossover w; report scores there and all tied winners. Exact rationals.",
+  "expected": {
+    "scores": [
+      "13/2",
+      "3"
+    ],
+    "winners": [
+      "B"
+    ],
+    "crossover_weight": "3/5",
+    "crossover_scores": [
+      "22/5",
+      "22/5"
+    ],
+    "crossover_winners": [
+      "A",
+      "B"
+    ]
+  },
+  "negative_control": {
+    "values": {
+      "names": [
+        "A",
+        "B"
+      ],
+      "latency": [
+        2,
+        6
+      ],
+      "rework": [
+        8,
+        2
+      ],
+      "latency_weight": "3/4"
+    },
+    "expected": {
+      "scores": [
+        "7/2",
+        "5"
+      ],
+      "winners": [
+        "A"
+      ],
+      "crossover_weight": "3/5",
+      "crossover_scores": [
+        "22/5",
+        "22/5"
+      ],
+      "crossover_winners": [
+        "A",
+        "B"
+      ]
+    },
+    "why": "Different declared preferences reverse the winner without changing either workflow coordinate."
+  },
+  "input_types": {
+    "names": "two distinct option strings",
+    "latency": "two finite rational points on declared comparable scale",
+    "rework": "two finite rational points on declared comparable scale",
+    "latency_weight": "rational string in closed unit interval"
+  },
+  "assumptions": [
+    "All inputs are stipulated teaching values, not measured project events.",
+    "Only the declared finite objective and constraints are represented."
+  ],
+  "limits": "No measured workflow cost, accepted utility scale, stakeholder preference or production recommendation is established."
+}
+```
+
+## Source-assisted task and journal
+
+**Direct manual baseline:** Write both affine score lines, solve their intersection and check one preference on each side.
+
+**Falsifier:** A recommendation claims weight independence although the allowed preference interval contains a ranking crossover.
+
+Read the prerequisite and the retained project representation before treating this example as a proposed feature. The linked Learn source helper extracts metadata, title and body, then indexes English module identities. That is an actual representation boundary to inspect; it supplies neither the invented inputs nor an implementation of this mathematical operation. Keep the source revision attached to the reading note so that a later change cannot silently inherit this inspection.
+
+For the source-assisted task, reproduce the fixed case directly before asking an assistant to explain it. Use the input types and assumptions in the packet as part of the question, preserve intermediate quantities and compare the declared negative control. Ask the assistant to identify which premise makes the two results differ. A plausible explanation that never calculates the changed input has not demonstrated the operation.
+
+Record the exact question, supplied sources, answer, assistance history and any correction in the journal. The prepared corrected answers below are an answer key, not a learner attempt. An independent model check can establish the finite arithmetic while still missing a poor prompt or a misleading translation. Human technical review, fluent-language review, learner acceptance, native runtime behavior, production adoption and publication decisions therefore remain undecided. Retain a failed check and its diagnosis before recording a successful replay; do not replace an original failure with the corrected result.
+
+## Corrected exercises
+
+### Exercise 1
+
+Compute the fixed ranking.
+
+> **Answer:** At weight `1/4`, scores are `[13/2,3]`; minimizing selects `B`.
+
+### Exercise 2
+
+Find the crossover and control.
+
+> **Answer:** The crossover is `3/5`, where both scores are `22/5`. At `3/4`, scores `[7/2,5]` select `A`.
+
+### Exercise 3
+
+What does the tie authorize?
+
+> **Answer:** It authorizes reporting both minimizers under that objective. A unique recommendation needs an additional declared criterion, not an arbitrary hidden tie-break.
+
+### Exercise 4
+
+What does the retained project helper actually establish?
+
+> **Answer:** It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.
+
+### Exercise 5
+
+Which acceptance decisions can the corrected answer key close?
+
+> **Answer:** None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.
+
+## Prepared learner criteria
+
+These criteria are prepared; every learner decision remains undecided.
+
+- Exercise 1: At weight `1/4`, scores are `[13/2,3]`; minimizing selects `B`.
+- Exercise 2: The crossover is `3/5`, where both scores are `22/5`. At `3/4`, scores `[7/2,5]` select `A`.
+- Exercise 3: It authorizes reporting both minimizers under that objective. A unique recommendation needs an additional declared criterion, not an arbitrary hidden tie-break.
+- Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.
+- Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.
+
+[Fixed unit packet](../../../../code/streeling/evidence/batch50-2026-10-25-c/unit-b.json) · [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25-c/journal.md)

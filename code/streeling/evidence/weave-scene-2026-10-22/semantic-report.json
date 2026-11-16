@@ -1,0 +1,85 @@
+{
+  "sample_id": "odd-tile-seam-a",
+  "warp_count": 6,
+  "weft_count": 6,
+  "spacing_to_diameter_ratio": 2.5,
+  "variants": {
+    "global-parity": {
+      "crossing_count": 36,
+      "unique_id_count": 36,
+      "adjacency_violations": 0,
+      "violating_pairs": [],
+      "first_row": [
+        "warp",
+        "weft",
+        "warp",
+        "weft",
+        "warp",
+        "weft"
+      ]
+    },
+    "restarted-tile-parity": {
+      "crossing_count": 36,
+      "unique_id_count": 36,
+      "adjacency_violations": 12,
+      "violating_pairs": [
+        [
+          "w2-f0",
+          "w3-f0"
+        ],
+        [
+          "w2-f1",
+          "w3-f1"
+        ],
+        [
+          "w0-f2",
+          "w0-f3"
+        ],
+        [
+          "w1-f2",
+          "w1-f3"
+        ],
+        [
+          "w2-f2",
+          "w3-f2"
+        ],
+        [
+          "w2-f2",
+          "w2-f3"
+        ],
+        [
+          "w3-f2",
+          "w3-f3"
+        ],
+        [
+          "w4-f2",
+          "w4-f3"
+        ],
+        [
+          "w5-f2",
+          "w5-f3"
+        ],
+        [
+          "w2-f3",
+          "w3-f3"
+        ],
+        [
+          "w2-f4",
+          "w3-f4"
+        ],
+        [
+          "w2-f5",
+          "w3-f5"
+        ]
+      ],
+      "first_row": [
+        "warp",
+        "weft",
+        "warp",
+        "warp",
+        "weft",
+        "warp"
+      ]
+    }
+  }
+}

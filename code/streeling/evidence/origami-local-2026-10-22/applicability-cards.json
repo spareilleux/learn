@@ -1,0 +1,59 @@
+{
+  "scope": "Hand-specified local applicability/count projection of local.rs. Does not fabricate a complete crease/folded frame, whole-analyser result or scene.",
+  "base_vertices": "center0, outer1..4 on boundary ring, isolated5",
+  "central_creases": "0->1,0->2,0->3,0->4",
+  "boundary_ring": "1->2,2->3,3->4,4->1; all B",
+  "base_central_labels": "MVMM",
+  "cards": [
+    {
+      "name": "assigned",
+      "total_vertices": 6,
+      "applicable": 1,
+      "skipped_border": 4,
+      "skipped_other_creases": 0,
+      "skipped_isolated": 1,
+      "kawasaki_failing": [],
+      "maekawa_failing": [],
+      "kawasaki_max_abs_alt_sum": 0.0,
+      "scope": "Authored source-branch incidence/count model; no parsed full FOLD file or Rust output."
+    },
+    {
+      "name": "one-U",
+      "total_vertices": 6,
+      "applicable": 0,
+      "skipped_border": 4,
+      "skipped_other_creases": 1,
+      "skipped_isolated": 1,
+      "kawasaki_failing": [],
+      "maekawa_failing": [],
+      "kawasaki_max_abs_alt_sum": 0.0,
+      "scope": "Authored source-branch incidence/count model; no parsed full FOLD file or Rust output."
+    },
+    {
+      "name": "one-F",
+      "total_vertices": 6,
+      "applicable": 0,
+      "skipped_border": 4,
+      "skipped_other_creases": 1,
+      "skipped_isolated": 1,
+      "kawasaki_failing": [],
+      "maekawa_failing": [],
+      "kawasaki_max_abs_alt_sum": 0.0,
+      "scope": "Authored source-branch incidence/count model; no parsed full FOLD file or Rust output."
+    },
+    {
+      "name": "one-border",
+      "total_vertices": 6,
+      "applicable": 0,
+      "skipped_border": 5,
+      "skipped_other_creases": 0,
+      "skipped_isolated": 1,
+      "kawasaki_failing": [],
+      "maekawa_failing": [],
+      "kawasaki_max_abs_alt_sum": 0.0,
+      "scope": "Authored source-branch incidence/count model; no parsed full FOLD file or Rust output."
+    }
+  ],
+  "empty_checked_domain_value": "Applicable0 gives empty failures and max initialized0; not an assessed completed assignment.",
+  "physical_coverage": null
+}
