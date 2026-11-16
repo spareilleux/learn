@@ -12,7 +12,6 @@ Requested, delegated, implemented locally, merged, deployed and publicly verifie
 | Verified publication | Awaiting publication or verification | Requested, not delivered |
 | --- | --- | --- |
 | [LadybugDB lesson 9, graph lab](../ladybugdb/09-graph-lab/): PR #25 merged as `438b320`, Pages deployment succeeded, EN/FR/ES lesson and journal entry read back anonymously | [Streeling MAT-003](../streeling/mathematics/): source merged in Demerzel (`89a1bdb`); generator PR #26 merged as `67ffd4e` and Learn lab PR #24 as `00ae641`; the canonical sync awaits review | Streeling mathematics modules beyond MAT-001 and MAT-003: none exists in the canonical source yet; MAT-002 and MAT-004 are queued |
-| | [Advanced Rust tracer-bullet](../rust-advanced/): mission, first measured lesson and three-language journal prepared on `codex/rust-advanced-tracer-20260927`; awaiting PR, CI, merge, Pages deployment and anonymous readback | |
 
 This board adds what was settled or opened on 2026-09-27; the 2026-09-26 board below is unchanged.
 
@@ -56,7 +55,7 @@ These two items therefore move from awaiting to verified. The mathematics catalo
 
 The [Advanced Rust course](../rust-advanced/) now has a twelve-lesson evidence plan and one complete vertical slice: memory layout and representation, an independent Cargo crate, captured output and a compile-fail contract. The same mission, lesson and [course journal](../rust-advanced/journal/) exist in English, French and Spanish.
 
-The local gate passed on Windows with Rust 1.94.0. This is a candidate, not a publication: the branch still needs a pull request, hosted CI on three operating systems, merge, Pages deployment and anonymous public readback. The delivery board therefore keeps it under **Awaiting publication or verification**.
+The local gate passed on Windows with Rust 1.94.0: formatting, Clippy with warnings denied, the unit test, the compile-fail doctest and the captured-output comparison. The course goes out with lesson 1 of its plan; lessons 2 to 12 are planned and not yet written, as the [course outline](../rust-advanced/) shows.
 
 ## 2026-09-27 — The homepage and IX illustrations published
 
