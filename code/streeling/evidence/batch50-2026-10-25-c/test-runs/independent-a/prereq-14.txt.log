@@ -1,0 +1,80 @@
+---
+module_id: gtr-008-count-a-capo-offset-once
+department: guitar-studies
+course: "Count a Capo Offset Once"
+level: intermediate
+prerequisites: ["gtr-001-the-fretboard-map", "gtr-003-audit-voicing-playability", "wml-005-declare-note-name-conventions", "gaa-006-separate-capo-shapes-from-sounding-pitches"]
+estimated_duration: "40 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Count a Capo Offset Once
+
+> **Draft scope.** Authored equal-tempered fret/pitch arithmetic, pinned source reading and three actual chord-transposition tool responses. No new capo adapter, native skill execution, MusicXML import, instrument measurement or playing trial was performed. Human technical, musician, fluent-language and learner reviews and deployed course HTML verification remain pending.
+
+## The project question
+
+A player requests a C shape with capo 2. Does a displayed fret 3 mean the third physical fret from the nut or the third fret above the capo? [MusicXML's capo definition](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/capo/) describes a change to open tuning. Its [fret definition](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fret/) starts with zero for an open string; that statement alone does not choose a consumer's capo-coordinate policy.
+
+[GAA-006](../../guitar-alchemist-academy/en/gaa-006-separate-capo-shapes-from-sounding-pitches.md) already establishes shape-versus-sounding root direction and register. This lesson extends that distinction to per-string fret origins, invalid positions and partial coverage.
+
+Declare an ideal full capo, twelve-tone equal temperament and arrays ordered from low E to high E. Open note numbers are `[40,45,50,55,59,64]`, with C4 equal to 60. The authored C shape is `[-1,3,2,0,1,0]`: -1 marks a muted string and the other numbers are distances above the effective open end.
+
+## 1. Retain the fret origin
+
+For each sounding string, let nut-relative physical fret be `a`, capo fret be `c`, capo-relative fret be `r` and original open note number be `T`. Then `a=c+r` and the sounding number is `T+a=(T+c)+r`. Either expression is valid under the declared model.
+
+At capo 2, the physical C-shape array becomes `[-1,5,4,2,3,2]`. The resulting notes are `[null,50,54,57,62,66]`. Here null means a muted string has no sounding pitch in the teaching record; it is not a zero-frequency observation.
+
+### Practice exercise 1: map the complete shape
+
+Convert the capo-relative C shape to physical frets and sounding note numbers. Where is a relative open string located? What happens to the muted marker?
+
+> **Answer:** Physical frets are `[-1,5,4,2,3,2]`; sounding notes are `[null,50,54,57,62,66]`. Relative fret 0 is located at physical fret 2 under this full capo. The muted -1 remains a muted status; adding the capo to it would invent a sounding fret.
+
+## 2. Do not retune and shift the physical frets again
+
+Retuning the open array by the capo gives `[42,47,52,57,61,66]`. Adding the original relative frets produces the same correct notes. Adding the already-shifted physical array instead produces `[null,52,56,59,64,68]`: every sounding note is two semitones too high.
+
+### Practice exercise 2: find the double count
+
+Calculate both results for the fifth string, whose original open note is 45, relative fret is 3 and physical fret is 5. Which quantity has already absorbed the capo offset?
+
+> **Answer:** The correct result is `45+5=50` or `(45+2)+3=50`. The incorrect result is `(45+2)+5=52`. Both the retuned open note and the physical fret already include the offset, so combining them counts it twice.
+
+## 3. Preserve direction and absolute register
+
+The pinned [GA CapoSkill](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.ML/Agents/Skills/CapoSkill.cs) computes sounding root as shape root plus capo, and shape root as sounding root minus capo, modulo 12. It retains major/minor quality for its supported cases and accepts capo integers from 0 through 12. Its selected code contains no per-string fret array or physical placement calculation.
+
+Three [actual theory-tool probes](../../../../code/streeling/evidence/capo-spelling-2026-10-22/theory-tool-probes.json) returned C up 2 as D, B down 4 as G, and Bb up 2 as C. The service revision is unknown. They are not executions of the inspected skill or a capo-to-fret adapter. At capo 12, a shape's pitch classes repeat but its sounding notes rise one octave in our model.
+
+### Practice exercise 3: invert the musical request
+
+For sounding B major with capo 4, which root/quality should the shape have under the declared English naming convention? Would a modulo-only comparison detect a missing capo 12 octave?
+
+> **Answer:** The shape is G major because `11-4=7`. The observed B down 4 tool result agrees at the root level; the selected skill source handles the quality separately. A modulo-only comparison cannot detect the capo 12 register change: every sounding note rises 12 while retaining its pitch class.
+
+## 4. Keep invalid positions separate from mute status
+
+With capo 2, physical fret 5 corresponds to relative fret 3, and physical fret 2 to relative fret 0. Physical fret 1 would give a negative relative distance and is outside this full-capo model. Its arithmetic difference of -1 must not be reinterpreted as the existing muted marker.
+
+A separate authored partial-capo example shifts the strings by `[0,2,2,2,2,2]`. Apply relative E-shape frets `[0,2,2,1,0,0]`: sounding notes are `[40,49,54,58,61,66]`. A full capo 2 instead gives `[42,49,54,58,61,66]`. The lowest string disproves a uniform-transposition description of this partial example.
+
+### Practice exercise 4: retain two counterexamples
+
+Classify physical fret 1 under capo 2. Then compare the two E-shape sounding arrays and identify why whole-chord root transposition cannot describe the partial example completely.
+
+> **Answer:** Physical fret 1 is behind the declared full capo and is invalid here, not a muted string inferred from subtraction. The partial example leaves the lowest note at 40 while the full capo gives 42; the other notes agree. A uniform root shift does not retain this per-string distinction. Neither array proves intonation or physical playability.
+
+## 5. Read the destination contract
+
+The pinned [MusicXML parser](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Parsers/MusicXmlParser.fs#L59-L78) stores technical string and fret independently. Its selected attributes do not retain a capo. The [RelativeFret type](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Domain.Core/Instruments/Primitives/RelativeFret.cs#L9-L18) is a generic fret distance; its name does not establish a capo origin. The [navigation parser](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Parsers/FretboardNavigationParser.fs#L25-L41) parses explicit coordinates without applying a capo offset.
+
+### Practice exercise 5: prepare a source-assisted handoff
+
+Read those sources and the [MusicXML string definition](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/string/). Specify the minimum information needed to move the authored array into another tool without guessing its convention.
+
+> **Answer:** Retain tuning, string order/numbering, capo coverage and offsets, fret origin, muted/invalid statuses, intended absolute pitches and source revision. MusicXML string 1 is the highest pitched full-length string; our array runs in the opposite physical order. Convert that indexing explicitly. Compare a small typed record and checked arithmetic before proposing a DSL. Import, rendering, playback and a musician's playing review remain unperformed.
+
+The [fixed coordinate record](../../../../code/streeling/evidence/capo-spelling-2026-10-22/capo-coordinates.json) retains all eight full-capo cases and the separate partial control.

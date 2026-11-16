@@ -1,0 +1,107 @@
+# l22
+
+== IcvNeighborsSkill's example prompts and GA's other phrasings for it, at the pin
+prompt                                             from           the skill's answer       routing hints, +0.06 each
+which chords are most similar to Dm7               anchor         declined                 none
+what other chords resemble Cmaj7                   anchor         declined                 none
+find chords with a similar sound to G7             anchor         declined                 none
+chords related to F major by interval content      anchor         declined                 none
+what chords share Gmaj7's interval profile         anchor         declined                 none
+list chords most like E minor                      anchor         declined                 none
+chords with similar interval content to Bm7b5      anchor         declined                 none
+what voicings are most similar to Am               anchor         declined                 none
+which chords are closest in interval content to Fmaj7 anchor         declined                 none
+chords that resemble Cmaj7 harmonically            anchor         declined                 none
+What chords are harmonically close to Cmaj7        doc comment    neighbors of Cmaj7       skill.icvneighbors
+Nearby pitch-class sets to C major                 doc comment    declined                 none
+Find ICV neighbors of Dm7                          doc comment    neighbors of Dm7         skill.icvneighbors, skill.intervalclassvector
+Closest chord to G7 in ICV space                   doc comment    declined                 skill.intervalclassvector
+ICV neighbors of Cmaj7                             refusal        neighbors of Cmaj7       skill.icvneighbors, skill.intervalclassvector
+what chords are harmonically close to Dm7          refusal        neighbors of Dm7         skill.icvneighbors
+Harmonically similar chords to Cmaj7               parked draft   declined                 none
+ICV neighbours of [0,3,6,9]                        parked draft   declined                 skill.intervalclassvector
+What's close to a half-diminished chord?           parked draft   neighbors of a           skill.interval
+anchors 10: answered 0, declined 10, hinted toward skill.icvneighbors 0
+CanHandle accepts 0 of them
+
+== IntervalClassVectorSkill's example prompts, at the pin
+prompt                                             the skill's answer
+what is the interval-class vector of Cmaj7         ICV of Cmaj7
+interval class vector of Dm7                       ICV of Dm7
+compute the ICV of the major scale                 ICV of the major scale
+interval-class vector of {0,2,4,5,7,9,11}          ICV of {0,2,4,5,7,9,11}
+what's the interval vector for G7                  ICV of G7
+how many tritones does Cmaj7 contain               declined
+compute the interval-class vector of Fmaj7         ICV of Fmaj7
+ICV of the dorian mode                             ICV of the dorian
+interval class vector for {0,1,4,8}                ICV of {0,1,4,8}
+what's the interval content of Am                  declined
+anchors 10: answered 8
+
+== The chords the skill reads, after "ICV neighbors of", at the pin
+chord      its notes          read as          notes built        right
+C          C E G              C                C E G              yes
+Cm         C D# G             Cm               C D# G             yes
+Cmaj7      C E G B            Cmaj7            C E G B            yes
+CM7        C E G B            CM7              C D# G A#          no
+Cmin7      C D# G A#          Cmin7            C D# G A#          yes
+Cdom7      C E G A#           Cdom7            C E G              no
+Cm7b5      C D# F# A#         Cm7b5            C D# F# A#         yes
+Cø7        C D# F# A#         declined         -                  no
+Cdim       C D# F#            Cdim             C D# F#            yes
+C°         C D# F#            C                C E G              no
+Cdim7      C D# F# A          Cdim7            C D# F# A          yes
+C°7        C D# F# A          C°               C D# F#            no
+Caug       C E G#             Caug             C E G#             yes
+C+         C E G#             C                C E G              no
+Cadd9      C D E G            Cadd9            C E G              no
+C7sus4     C F G A#           declined         -                  no
+C7b9       C C# E G A#        C7b9             C E G              no
+C7#9       C D# E G A#        C7#9             C E G              no
+Cm11       C D D# F G A#      Cm11             C E G              no
+C13        C D E G A A#       C13              C E G              no
+CmMaj7     C D# G B           declined         -                  no
+C5         C G                C5               C E G              no
+F#m7b5     C E F# A           F#m7b5           C E F# A           yes
+B♭7        D F G# A#          B♭7              D F G# A#          yes
+C minor    C D# G             C                C E G              no
+A minor    C E A              A                C# E A             no
+a Cmaj7    C E G B            a                C# E A             no
+chords 27: built right 10
+
+== The neighbors the skill lists for a chord, at the pin
+chord   its vector      sets 1-2 off  set classes  of notes  rows   of notes  L1, cost   set classes   with a C   the first by id
+C       <0 0 1 1 1 0>   108           6            2, 3      8      2, 3      2, 1.20    5             6          yes
+Cm      <0 0 1 1 1 0>   108           6            2, 3      8      2, 3      2, 1.20    5             6          yes
+Cdim    <0 0 2 0 0 1>   18            2            2         8      2         2, 1.20    2             2          yes
+Caug    <0 0 0 3 0 0>   12            1            2         8      2         2, 1.20    1             2          yes
+C7      <0 1 2 1 1 1>   132           6            4         8      4         2, 1.20    5             8          yes
+Cm7     <0 1 2 1 2 0>   72            3            4         8      4         2, 1.20    3             6          yes
+Cmaj7   <1 0 1 2 2 0>   72            4            4         8      4         2, 1.20    4             6          yes
+Cm7b5   <0 1 2 1 1 1>   132           6            4         8      4         2, 1.20    5             8          yes
+Cdim7   <0 0 4 0 0 2>   0             0                      0      -         -          0             0          -
+Csus2   <0 1 0 0 2 0>   48            3            2, 3      8      2, 3      2, 1.20    3             4          yes
+Csus4   <0 1 0 0 2 0>   48            3            2, 3      8      2, 3      2, 1.20    3             4          yes
+C6      <0 1 2 1 2 0>   72            3            4         8      4         2, 1.20    3             6          yes
+Cm6     <0 1 2 1 1 1>   132           6            4         8      4         2, 1.20    5             8          yes
+C9      <0 3 2 2 2 1>   24            1            5         8      5         2, 1.20    1             4          yes
+Cmaj9   <1 2 2 2 3 0>   72            3            5         8      5         2, 1.20    3             5          yes
+Cm9     <1 2 2 2 3 0>   72            3            5         8      5         2, 1.20    3             5          yes
+the rows for C:
+  {0,3}     C D#       2-3    <0 0 1 0 0 0>
+  {0,4}     C E        2-4    <0 0 0 1 0 0>
+  {1,4}     C# E       2-3    <0 0 1 0 0 0>
+  {0,1,4}   C C# E     3-3    <1 0 1 1 0 0>
+  {0,3,4}   C D# E     3-3    <1 0 1 1 0 0>
+  {0,5}     C F        2-5    <0 0 0 0 1 0>
+  {1,5}     C# F       2-4    <0 0 0 1 0 0>
+  {0,1,5}   C C# F     3-4    <1 0 0 1 1 0>
+Cdim7: No pitch-class sets within L1 = 2. Try a wider radius.
+chords 192: qualities whose 12 roots get the same rows 16 of 16; different answers 10, different vectors 10
+
+== The parked draft's example for Cmaj7, at the pin
+chord                  notes          vector           Forte  L1     the draft
+Cmaj7                  C E G B        <1 0 1 2 2 0>    4-20   0      [1, 0, 1, 2, 2, 0], 4-20
+Am7                    A C E G        <0 1 2 1 2 0>    4-26   4      [1,0,1,2,2,0], distance 0.0, same set class
+Cm9 without its root   D# G A# D      <1 0 1 2 2 0>    4-20   0      distance 0.6
+Fmaj7                  F A C E        <1 0 1 2 2 0>    4-20   0      distance 0.0, same set class

@@ -1,0 +1,3020 @@
+{
+  "schema": "streeling.authored-course-unit.v1",
+  "unit": "a",
+  "base_learn_commit": "5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+  "plan_commit": "894486c7e69af7a161d8f75d32a27f7972d1ebce",
+  "scope": "18 new project-useful audio/music operations with full EN/FR/ES source translations. Content authoring only; independent model proof/review, human/fluent-language/learner decisions and publication pending.",
+  "primary_references": [
+    {
+      "path_or_url": "https://www.dsprelated.com/freebooks/sasp/Overlap_Add_OLA_STFT_Processing.html",
+      "pin": "Julius O. Smith, Spectral Audio Signal Processing, live rendered HTML read 2026-10-25; immutable revision unavailable",
+      "scope": "Opening STFT and constant overlap-add equations, lines 20-56. Only window-sum reconstruction is used; no performance comparison or FFT execution.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body; HTTP accessibility and actual reading recorded separately; no web byte hash."
+    },
+    {
+      "path_or_url": "https://www.dsprelated.com/freebooks/pasp/Feedback_Comb_Filters.html",
+      "pin": "Julius O. Smith, Physical Audio Signal Processing, live rendered HTML read 2026-10-25; immutable revision unavailable",
+      "scope": "Feedback recurrence, delay and strict magnitude stability condition, lines 20-39. Authored finite impulse calculation only.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body; no raw web byte hash."
+    },
+    {
+      "path_or_url": "https://www.dsprelated.com/freebooks/pasp/Scattering_Impedance_Changes.html",
+      "pin": "Julius O. Smith, Physical Audio Signal Processing, live rendered HTML read 2026-10-25; immutable revision unavailable",
+      "scope": "Plane-wave pressure and velocity continuity and real-positive impedance solution, lines 20-81. Not a calibrated guitar bridge model.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body; no raw web byte hash."
+    },
+    {
+      "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/slide/",
+      "pin": "MusicXML 4.0 reference",
+      "scope": "Definition of continuous slide and playback discretization attributes, lines 52-82. Our geometric interpolation is independently authored.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body; no raw web byte hash."
+    },
+    {
+      "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome-note/",
+      "pin": "MusicXML 4.0 reference",
+      "scope": "Metric relationship note appearance and children, lines 52-66. Duration-equivalence arithmetic is an authored policy, not importer output.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body; no raw web byte hash."
+    },
+    {
+      "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/trill-mark/",
+      "pin": "MusicXML 4.0 reference",
+      "scope": "Trill playback count, starting-note and terminal-turn attributes, lines 52-83. Our equal-duration schedule is explicitly stipulated.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body; no raw web byte hash."
+    },
+    {
+      "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accidental/",
+      "pin": "MusicXML 4.0 reference",
+      "scope": "Notated accidental and cautionary/editorial display attributes, lines 52-81. The teaching state machine is not a universal engraving rule.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body; no raw web byte hash."
+    },
+    {
+      "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/alter/",
+      "pin": "MusicXML 4.0 reference",
+      "scope": "Pitch alteration expressed in semitones and decimal support, lines 52-60. Display-symbol state must not replace explicit pitch.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body; no raw web byte hash."
+    },
+    {
+      "path_or_url": "https://midi.org/summary-of-midi-1-0-messages",
+      "pin": "MIDI Association official MIDI 1.0 message overview, live rendered HTML read 2026-10-25; immutable revision unavailable",
+      "scope": "Channel-voice scope and pitch-bend least/most significant bytes, center and receiver sensitivity, lines 55-71. This is an overview, not the complete MIDI specification.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body; no raw web byte hash."
+    }
+  ],
+  "courses": [
+    {
+      "code": "AUD019",
+      "department": "audio-engineering",
+      "module_id": "aud-019-test-whether-clipping-commutes-with-gain",
+      "title": "Test Whether Clipping Commutes with Gain",
+      "source_paths": {
+        "en": "streeling/courses/audio-engineering/en/aud-019-test-whether-clipping-commutes-with-gain.md",
+        "fr": "streeling/courses/audio-engineering/fr/aud-019-test-whether-clipping-commutes-with-gain.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-019-test-whether-clipping-commutes-with-gain.es.md"
+      },
+      "novelty_vs_prerequisites": "AUD005 rejects invalid PCM; this adds a two-order nonlinearity witness that cannot be recovered from peak guards or a linear transfer ratio.",
+      "prerequisites": [
+        "aud-005-pcm-guards-and-format-boundaries"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/audio-engineering/en/aud-005-pcm-guards-and-format-boundaries.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "1f15d25a97ddff5b2f2ca57e1af9ababcc2a6c4a4b368306eb8b775316f35341",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/guitar-runtime/run.mjs",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "samples": [
+            -2,
+            -0.5,
+            0.5,
+            2
+          ],
+          "gain": 0.5,
+          "threshold": 1
+        },
+        "formula": "clip(x)=max(-T,min(T,x)); A=clip(g*x); B=g*clip(x); residual=A-B",
+        "expected": {
+          "A": [
+            -1,
+            -0.25,
+            0.25,
+            1
+          ],
+          "B": [
+            -0.5,
+            -0.25,
+            0.25,
+            0.5
+          ],
+          "residual": [
+            -0.5,
+            0,
+            0,
+            0.5
+          ],
+          "commutes": false
+        },
+        "negative_control": {
+          "values": {
+            "samples": [
+              -0.5,
+              -0.25,
+              0.25,
+              0.5
+            ],
+            "gain": 0.5,
+            "threshold": 1
+          },
+          "expected": {
+            "A": [
+              -0.25,
+              -0.125,
+              0.125,
+              0.25
+            ],
+            "B": [
+              -0.25,
+              -0.125,
+              0.125,
+              0.25
+            ],
+            "residual": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "commutes": true
+          },
+          "why": "The control keeps every sample inside the linear region in both orders."
+        },
+        "assumptions": [
+          "Memoryless symmetric hard clipping with positive threshold; real exact samples; no oversampling or reconstruction."
+        ],
+        "limits": "A witness for this operator does not describe the engine output nonlinearity, intersample peaks, harmonics or audible distortion."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate both orders for the largest positive sample.",
+          "expected_answer": "For `x=2`, `A=clip(0.5*2)=1`, `B=0.5*clip(2)=0.5` and `A-B=0.5`. The two outputs differ because attenuation before clipping retains a value that clipping before attenuation has already removed.",
+          "decision": null
+        },
+        "2": {
+          "question": "Why do the interior samples agree?",
+          "expected_answer": "They remain inside the declared clipping interval throughout both routes, where the operator acts as the identity.",
+          "decision": null
+        },
+        "3": {
+          "question": "Does the main residual refute a universal reorder claim?",
+          "expected_answer": "Yes. A single differing sample is a sufficient counterexample, even though other samples agree.",
+          "decision": null
+        },
+        "4": {
+          "question": "Does agreement in the smaller-input control prove linearity globally?",
+          "expected_answer": "No. It establishes equality only in that tested region; the larger-input witness remains valid.",
+          "decision": null
+        },
+        "5": {
+          "question": "What rejects the proposed transparent reorder?",
+          "expected_answer": "Any retained unequal output sample with the same input and declared operators rejects sample transparency.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The two outputs differ because attenuation before clipping retains a value that clipping before attenuation has already removed.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: They remain inside the declared clipping interval throughout both routes, where the operator acts as the identity.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Yes. A single differing sample is a sufficient counterexample, even though other samples agree.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: No. It establishes equality only in that tested region; the larger-input witness remains valid.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Any retained unequal output sample with the same input and declared operators rejects sample transparency.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a GA audio-review note retaining both order traces and the exact range guard. Reject an unqualified reorder before proposing an audio-chain DSL.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: clip(x)=max(-T,min(T,x)); A=clip(g*x); B=g*clip(x); residual=A-B",
+        "falsifier": "Any retained unequal output sample with the same input and declared operators rejects sample transparency.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "AUD020",
+      "department": "audio-engineering",
+      "module_id": "aud-020-reconstruct-a-signal-with-overlap-add-weights",
+      "title": "Reconstruct a Signal with Overlap-Add Weights",
+      "source_paths": {
+        "en": "streeling/courses/audio-engineering/en/aud-020-reconstruct-a-signal-with-overlap-add-weights.md",
+        "fr": "streeling/courses/audio-engineering/fr/aud-020-reconstruct-a-signal-with-overlap-add-weights.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-020-reconstruct-a-signal-with-overlap-add-weights.es.md"
+      },
+      "novelty_vs_prerequisites": "AUD006 calibrates analysis amplitudes; this adds synthesis reconstruction through per-sample window sums and distinguishes covered support from frame counting.",
+      "prerequisites": [
+        "aud-006-calibrate-spectral-amplitudes"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/audio-engineering/en/aud-006-calibrate-spectral-amplitudes.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "b2fe07f89c5cf3c9f46cd1204a8a8ca1e22559338e57c033309fcd7996966d54",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/guitar-runtime/run.mjs",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "https://www.dsprelated.com/freebooks/sasp/Overlap_Add_OLA_STFT_Processing.html",
+          "pin": "Julius O. Smith, Spectral Audio Signal Processing, live rendered HTML read 2026-10-25; immutable revision unavailable",
+          "scope": "Opening STFT and constant overlap-add equations, lines 20-56. Only window-sum reconstruction is used; no performance comparison or FFT execution.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body; HTTP accessibility and actual reading recorded separately; no web byte hash."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "samples": [
+            2,
+            4,
+            6,
+            8
+          ],
+          "window": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "circular_starts": [
+            0,
+            2
+          ]
+        },
+        "formula": "weight[n]=sum_m window[(n-start[m])%N]; output[n]=samples[n]*weight[n]; perfect=all(weight[n]==1)",
+        "expected": {
+          "weight": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "output": [
+            2,
+            4,
+            6,
+            8
+          ],
+          "perfect": true
+        },
+        "negative_control": {
+          "values": {
+            "samples": [
+              2,
+              4,
+              6,
+              8
+            ],
+            "window": [
+              0.5,
+              0.5,
+              0.5,
+              0.5
+            ],
+            "circular_starts": [
+              0
+            ]
+          },
+          "expected": {
+            "weight": [
+              0.5,
+              0.5,
+              0.5,
+              0.5
+            ],
+            "output": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "perfect": false
+          },
+          "why": "Removing a frame changes every overlap weight while retaining the input."
+        },
+        "assumptions": [
+          "Circular record; window applied once; perfect unmodified frame reconstruction; no synthesis window."
+        ],
+        "limits": "No FFT, IX resynthesis, spectral modification, streaming boundary policy or finite-edge extension was executed."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "List the main weight sum at each retained sample.",
+          "expected_answer": "Each sum is unity, so multiplying the input by those sums returns the original sequence.",
+          "decision": null
+        },
+        "2": {
+          "question": "Does complete sample coverage guarantee identity reconstruction?",
+          "expected_answer": "No. Coverage only requires a nonzero sum; identity under this policy requires the declared unit coefficient.",
+          "decision": null
+        },
+        "3": {
+          "question": "What changes when the control removes a frame?",
+          "expected_answer": "Every coefficient is halved, and every output sample is halved even though no sample becomes uncovered.",
+          "decision": null
+        },
+        "4": {
+          "question": "Would a second synthesis window preserve this calculation?",
+          "expected_answer": "Not automatically. Its product with the analysis window changes the weight sum and requires a new derivation.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies an identity-synthesis claim?",
+          "expected_answer": "A differing retained sample under an unmodified-frame experiment falsifies that claim for the declared support.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Each sum is unity, so multiplying the input by those sums returns the original sequence.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: No. Coverage only requires a nonzero sum; identity under this policy requires the declared unit coefficient.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Every coefficient is halved, and every output sample is halved even though no sample becomes uncovered.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Not automatically. Its product with the analysis window changes the weight sum and requires a new derivation.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: A differing retained sample under an unmodified-frame experiment falsifies that claim for the declared support.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the circular frame placement and weight ledger before proposing an IX synthesis extension. Keep identity reconstruction separate from the existing render-block check.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: weight[n]=sum_m window[(n-start[m])%N]; output[n]=samples[n]*weight[n]; perfect=all(weight[n]==1)",
+        "falsifier": "A differing retained sample under an unmodified-frame experiment falsifies that claim for the declared support.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "AUD021",
+      "department": "audio-engineering",
+      "module_id": "aud-021-bound-feedback-delay-repeats",
+      "title": "Bound Feedback-Delay Repeats",
+      "source_paths": {
+        "en": "streeling/courses/audio-engineering/en/aud-021-bound-feedback-delay-repeats.md",
+        "fr": "streeling/courses/audio-engineering/fr/aud-021-bound-feedback-delay-repeats.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-021-bound-feedback-delay-repeats.es.md"
+      },
+      "novelty_vs_prerequisites": "AUD007 converts per-sample envelope multipliers to time; this adds delayed-output recursion, impulse support and the infinite absolute-sum stability condition.",
+      "prerequisites": [
+        "aud-007-translate-attack-coefficients-into-time"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/audio-engineering/en/aud-007-translate-attack-coefficients-into-time.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "05d20b64e402b7150293290cc13114d9e6e278315cb66779da4440709d8d2f23",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/guitar-runtime/run.mjs",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "https://www.dsprelated.com/freebooks/pasp/Feedback_Comb_Filters.html",
+          "pin": "Julius O. Smith, Physical Audio Signal Processing, live rendered HTML read 2026-10-25; immutable revision unavailable",
+          "scope": "Feedback recurrence, delay and strict magnitude stability condition, lines 20-39. Authored finite impulse calculation only.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body; no raw web byte hash."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "delay_samples": 2,
+          "gain": 0.5,
+          "count": 7,
+          "impulse": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "formula": "y[n]=x[n]+g*y[n-M]; y[n<0]=0; stable=abs(g)<1; absolute_sum_infinite=1/(1-abs(g)) if stable else null",
+        "expected": {
+          "output": [
+            1,
+            0,
+            0.5,
+            0,
+            0.25,
+            0,
+            0.125
+          ],
+          "stable": true,
+          "absolute_sum_infinite": 2
+        },
+        "negative_control": {
+          "values": {
+            "delay_samples": 2,
+            "gain": 1.1,
+            "count": 7,
+            "impulse": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "expected": {
+            "output": [
+              1,
+              0,
+              1.1,
+              0,
+              1.21,
+              0,
+              1.331
+            ],
+            "stable": false,
+            "absolute_sum_infinite": null
+          },
+          "why": "The control keeps the delay and input but makes successive repeats grow."
+        },
+        "assumptions": [
+          "Positive integer delay; zero initial state; real constant gain; isolated linear recurrence without limiter."
+        ],
+        "limits": "A finite quiet prefix alone cannot prove stability; no full reverb, guitar engine or floating-point robustness result is supplied."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Trace the first impulse returns and the intervening samples.",
+          "expected_answer": "The listed nonzero returns are separated by the declared delay; all intervening samples remain zero with this initial state.",
+          "decision": null
+        },
+        "2": {
+          "question": "Which input sets repeat spacing, and which sets its amplitude ratio?",
+          "expected_answer": "The delay controls spacing. The constant feedback gain controls the ratio of consecutive impulse returns.",
+          "decision": null
+        },
+        "3": {
+          "question": "Why is the stable case absolutely summable?",
+          "expected_answer": "The absolute gain is strictly below unity, so the echo magnitudes have the displayed convergent geometric sum.",
+          "decision": null
+        },
+        "4": {
+          "question": "Can a short finite render certify the growing control?",
+          "expected_answer": "No. Its finite prefix is finite, but successive returns grow and the infinite absolute sum does not converge.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies a proposed stable recurrence?",
+          "expected_answer": "A gain outside the strict bound, or a trace inconsistent with the declared recurrence, rejects the claim under this model.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The listed nonzero returns are separated by the declared delay; all intervening samples remain zero with this initial state.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The delay controls spacing. The constant feedback gain controls the ratio of consecutive impulse returns.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The absolute gain is strictly below unity, so the echo magnitudes have the displayed convergent geometric sum.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: No. Its finite prefix is finite, but successive returns grow and the infinite absolute sum does not converge.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: A gain outside the strict bound, or a trace inconsistent with the declared recurrence, rejects the claim under this model.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare the impulse ledger and separate the mathematical tail bound from a future PCM export gate. Recommend no engine change from this authored case alone.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: y[n]=x[n]+g*y[n-M]; y[n<0]=0; stable=abs(g)<1; absolute_sum_infinite=1/(1-abs(g)) if stable else null",
+        "falsifier": "A gain outside the strict bound, or a trace inconsistent with the declared recurrence, rejects the claim under this model.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GAS018",
+      "department": "guitar-acoustics",
+      "module_id": "gas-018-account-for-energy-at-an-impedance-junction",
+      "title": "Account for Energy at an Impedance Junction",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-018-account-for-energy-at-an-impedance-junction.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-018-account-for-energy-at-an-impedance-junction.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-018-account-for-energy-at-an-impedance-junction.es.md"
+      },
+      "novelty_vs_prerequisites": "GAS011 fixes displacement reflection polarity; this separately tracks pressure-wave transmission and impedance-weighted power at a real-positive junction.",
+      "prerequisites": [
+        "gas-011-track-reflection-polarity-at-string-boundaries"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-acoustics/en/gas-011-track-reflection-polarity-at-string-boundaries.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "dc0dcb4f0bad6ba292635d48db2f08fa1135e4089197d440b51f791ab6acc369",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/guitar-runtime/run.mjs",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "https://www.dsprelated.com/freebooks/pasp/Scattering_Impedance_Changes.html",
+          "pin": "Julius O. Smith, Physical Audio Signal Processing, live rendered HTML read 2026-10-25; immutable revision unavailable",
+          "scope": "Plane-wave pressure and velocity continuity and real-positive impedance solution, lines 20-81. Not a calibrated guitar bridge model.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body; no raw web byte hash."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "incident_pressure": 1,
+          "impedance_left": 1,
+          "impedance_right": 3
+        },
+        "formula": "r=(Z2-Z1)/(Z1+Z2); t=1+r; reflected_fraction=r^2; transmitted_fraction=(Z1/Z2)*t^2; total=reflected_fraction+transmitted_fraction",
+        "expected": {
+          "pressure_reflection": 0.5,
+          "pressure_transmission": 1.5,
+          "reflected_fraction": 0.25,
+          "transmitted_fraction": 0.75,
+          "total": 1
+        },
+        "negative_control": {
+          "values": {
+            "incident_pressure": 1,
+            "impedance_left": 1,
+            "impedance_right": 1
+          },
+          "expected": {
+            "pressure_reflection": 0,
+            "pressure_transmission": 1,
+            "reflected_fraction": 0,
+            "transmitted_fraction": 1,
+            "total": 1
+          },
+          "why": "Matched impedances remove the reflected pressure wave without removing transmitted power."
+        },
+        "assumptions": [
+          "Normally incident plane pressure waves; real positive impedances; lossless memoryless junction; no incoming right wave."
+        ],
+        "limits": "The pressure convention differs from string displacement. No frequency-dependent guitar bridge impedance, radiation or measured energy transfer is inferred."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Derive the pressure reflection and transmission ratios.",
+          "expected_answer": "Use the impedance difference over its sum for reflection, then add unity for pressure transmission under this convention.",
+          "decision": null
+        },
+        "2": {
+          "question": "Why is transmitted amplitude above unity not an energy violation?",
+          "expected_answer": "The transmitted power uses the impedance ratio as well as squared pressure; amplitude alone is not a power fraction.",
+          "decision": null
+        },
+        "3": {
+          "question": "Check the complete power balance.",
+          "expected_answer": "The displayed reflected and transmitted fractions sum to the full incoming fraction for the lossless junction.",
+          "decision": null
+        },
+        "4": {
+          "question": "What happens in the matched control?",
+          "expected_answer": "Reflection vanishes while the pressure and power pass through under the matched boundary.",
+          "decision": null
+        },
+        "5": {
+          "question": "What rejects an unqualified guitar-bridge interpretation?",
+          "expected_answer": "Missing wave-variable identity or a missing measured impedance model prevents carrying this plane-wave result into a calibrated bridge claim.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Use the impedance difference over its sum for reflection, then add unity for pressure transmission under this convention.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The transmitted power uses the impedance ratio as well as squared pressure; amplitude alone is not a power fraction.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The displayed reflected and transmitted fractions sum to the full incoming fraction for the lossless junction.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Reflection vanishes while the pressure and power pass through under the matched boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Missing wave-variable identity or a missing measured impedance model prevents carrying this plane-wave result into a calibrated bridge claim.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Annotate a proposed GA scattering diagram with wave-variable types and a weighted-power ledger. Keep the matched boundary as a required countercase.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: r=(Z2-Z1)/(Z1+Z2); t=1+r; reflected_fraction=r^2; transmitted_fraction=(Z1/Z2)*t^2; total=reflected_fraction+transmitted_fraction",
+        "falsifier": "Missing wave-variable identity or a missing measured impedance model prevents carrying this plane-wave result into a calibrated bridge claim.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GAS019",
+      "department": "guitar-acoustics",
+      "module_id": "gas-019-measure-half-power-bandwidth-before-reporting-q",
+      "title": "Measure Half-Power Bandwidth before Reporting Q",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-019-measure-half-power-bandwidth-before-reporting-q.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-019-measure-half-power-bandwidth-before-reporting-q.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-019-measure-half-power-bandwidth-before-reporting-q.es.md"
+      },
+      "novelty_vs_prerequisites": "GAS007 separates pole angle and response maximum; this adds explicit power-versus-amplitude threshold selection and bandwidth extraction from a declared response curve.",
+      "prerequisites": [
+        "gas-007-distinguish-body-poles-from-string-partials"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-acoustics/en/gas-007-distinguish-body-poles-from-string-partials.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "20430f16f872fd3d84c1f7caf46aaddfdc3dd3179ca052b052e118b52de1adda",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/guitar-runtime/run.mjs",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "center_hz": 100,
+          "halfwidth_hz": 5,
+          "frequencies_hz": [
+            90,
+            95,
+            100,
+            105,
+            110
+          ]
+        },
+        "formula": "P(f)=1/(1+((f-f0)/b)^2); half_power_edges=[f0-b,f0+b]; bandwidth=2*b; Q=f0/bandwidth",
+        "expected": {
+          "relative_power": [
+            0.2,
+            0.5,
+            1,
+            0.5,
+            0.2
+          ],
+          "half_power_edges_hz": [
+            95,
+            105
+          ],
+          "bandwidth_hz": 10,
+          "Q": 10
+        },
+        "negative_control": {
+          "values": {
+            "center_hz": 100,
+            "halfwidth_hz": 10,
+            "frequencies_hz": [
+              80,
+              90,
+              100,
+              110,
+              120
+            ]
+          },
+          "expected": {
+            "relative_power": [
+              0.2,
+              0.5,
+              1,
+              0.5,
+              0.2
+            ],
+            "half_power_edges_hz": [
+              90,
+              110
+            ],
+            "bandwidth_hz": 20,
+            "Q": 5
+          },
+          "why": "The center and peak remain fixed while the width doubles, separating sharpness from resonance location."
+        },
+        "assumptions": [
+          "Authored normalized Lorentzian power curve; positive halfwidth; isolated peak; exact continuous crossings."
+        ],
+        "limits": "This defines a teaching bandwidth Q, not a fitted GA pole radius, a measured guitar mode or a universal decay conversion."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Locate the exact half-power edges in the main case.",
+          "expected_answer": "Set the normalized power to half its peak; the edges lie one declared halfwidth on either side of the center.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the full bandwidth and its Q quotient.",
+          "expected_answer": "Subtract the two edges, then divide the center frequency by that full width, as displayed in the fixed case.",
+          "decision": null
+        },
+        "3": {
+          "question": "Why must the ordinate say power rather than amplitude?",
+          "expected_answer": "Taking a half-amplitude threshold on this curve would change the selected frequencies and the reported width.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the broader control preserve and change?",
+          "expected_answer": "It preserves center and maximum but doubles bandwidth and halves the declared Q quotient.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies a peak-only sharpness report?",
+          "expected_answer": "The equal-center, unequal-width pair demonstrates that the peak center alone cannot determine this Q.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Set the normalized power to half its peak; the edges lie one declared halfwidth on either side of the center.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Subtract the two edges, then divide the center frequency by that full width, as displayed in the fixed case.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Taking a half-amplitude threshold on this curve would change the selected frequencies and the reported width.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It preserves center and maximum but doubles bandwidth and halves the declared Q quotient.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The equal-center, unequal-width pair demonstrates that the peak center alone cannot determine this Q.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a proposed resonance report with both axes, threshold type and crossing rule. Leave any conversion to the GA filter coefficients unresolved.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: P(f)=1/(1+((f-f0)/b)^2); half_power_edges=[f0-b,f0+b]; bandwidth=2*b; Q=f0/bandwidth",
+        "falsifier": "The equal-center, unequal-width pair demonstrates that the peak center alone cannot determine this Q.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GAS020",
+      "department": "guitar-acoustics",
+      "module_id": "gas-020-average-a-mode-over-a-pickup-aperture",
+      "title": "Average a Mode over a Pickup Aperture",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-020-average-a-mode-over-a-pickup-aperture.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-020-average-a-mode-over-a-pickup-aperture.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-020-average-a-mode-over-a-pickup-aperture.es.md"
+      },
+      "novelty_vs_prerequisites": "GAS015 samples modal displacement at a point; this integrates a spatial observation kernel and exposes cancellation caused by aperture width while the center stays fixed.",
+      "prerequisites": [
+        "gas-015-separate-mode-excitation-from-observation"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-acoustics/en/gas-015-separate-mode-excitation-from-observation.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "db80dfc92762cc87c5dac4b4abff69e84bd9f5d07c0f8bd68478d31f6c2ca427",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/guitar-runtime/run.mjs",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "center_fraction": 0.5,
+          "width_fraction": 0.5,
+          "modes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "formula": "point_n=sin(n*pi*c); aperture_n=point_n*sin(n*pi*w/2)/(n*pi*w/2); aperture_n=point_n when w=0",
+        "expected": {
+          "point": [
+            1,
+            0,
+            -1,
+            0
+          ],
+          "aperture": [
+            0.9003163161571061,
+            0,
+            -0.3001054387190354,
+            0
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "center_fraction": 0.5,
+            "width_fraction": 0,
+            "modes": [
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "expected": {
+            "point": [
+              1,
+              0,
+              -1,
+              0
+            ],
+            "aperture": [
+              1,
+              0,
+              -1,
+              0
+            ]
+          },
+          "why": "The zero-width limit removes spatial averaging while retaining the observation center and mode identities."
+        },
+        "assumptions": [
+          "Ideal sine displacement modes; uniform normalized spatial average; aperture stays inside the vibrating string; signed modal amplitude."
+        ],
+        "limits": "This is not an electromagnetic pickup law, a coil measurement, velocity sensing or a calibrated model of the GA output."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the signed point values at the declared center.",
+          "expected_answer": "The listed sine values alternate through center antinodes and nodes; retain their signs rather than only magnitudes.",
+          "decision": null
+        },
+        "2": {
+          "question": "Why divide the aperture integral by its width?",
+          "expected_answer": "The model is an average, not a total. Without division a change of width would also change the normalization.",
+          "decision": null
+        },
+        "3": {
+          "question": "Which nonzero mode is more attenuated in the fixed example?",
+          "expected_answer": "The higher listed odd mode loses a larger fraction of its point amplitude through spatial cancellation.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the zero-width control recover?",
+          "expected_answer": "The declared limit recovers every point value while retaining the same modal excitation and center.",
+          "decision": null
+        },
+        "5": {
+          "question": "What rejects a point-only claim about aperture fidelity?",
+          "expected_answer": "Equal center locations with unequal averaged modal values demonstrate that center alone cannot specify this observation.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The listed sine values alternate through center antinodes and nodes; retain their signs rather than only magnitudes.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The model is an average, not a total. Without division a change of width would also change the normalization.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The higher listed odd mode loses a larger fraction of its point amplitude through spatial cancellation.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The declared limit recovers every point value while retaining the same modal excitation and center.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Equal center locations with unequal averaged modal values demonstrate that center alone cannot specify this observation.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Derive the integral manually and draft a pickup-model review that retains aperture width. Label electromagnetic and measured-response questions as unresolved.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: point_n=sin(n*pi*c); aperture_n=point_n*sin(n*pi*w/2)/(n*pi*w/2); aperture_n=point_n when w=0",
+        "falsifier": "Equal center locations with unequal averaged modal values demonstrate that center alone cannot specify this observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GTR018",
+      "department": "guitar-studies",
+      "module_id": "gtr-018-check-direction-constraints-at-string-crossings",
+      "title": "Check Direction Constraints at String Crossings",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-018-check-direction-constraints-at-string-crossings.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-018-check-direction-constraints-at-string-crossings.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-018-check-direction-constraints-at-string-crossings.es.md"
+      },
+      "novelty_vs_prerequisites": "GTR007 advances picking phase on one string; this adds an explicit geometric sweep constraint between strings while preserving stroke identity.",
+      "prerequisites": [
+        "gtr-007-carry-picking-phase-across-bar-lines"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-studies/en/gtr-007-carry-picking-phase-across-bar-lines.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "c21c74be0099fdff53d741d69220aa50bde3d476fbff69f130cc00eada773c96",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/phrase-performance-2026-10-22/string-occupancy.json",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "6356c1bbbe0151940c7df105d48e1cdb42a3ef1aec2d314dc6a5e205580eb1c3",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "strings": [
+            3,
+            2,
+            3
+          ],
+          "strokes": [
+            "D",
+            "D",
+            "D"
+          ]
+        },
+        "formula": "for equal consecutive strokes on different strings: legal iff (D and next_string<previous_string) or (U and next_string>previous_string); otherwise legal; plan_legal=all(transition_legal)",
+        "expected": {
+          "transition_legal": [
+            true,
+            false
+          ],
+          "plan_legal": false
+        },
+        "negative_control": {
+          "values": {
+            "strings": [
+              3,
+              2,
+              1
+            ],
+            "strokes": [
+              "D",
+              "D",
+              "D"
+            ]
+          },
+          "expected": {
+            "transition_legal": [
+              true,
+              true
+            ],
+            "plan_legal": true
+          },
+          "why": "A monotone crossing removes the reversal conflict under the same constrained sweep policy."
+        },
+        "assumptions": [
+          "Conventional string numbers with highest string numbered one; D travels toward smaller numbers; equal adjacent strokes use one continuous sweep; no air reset."
+        ],
+        "limits": "This is a declared sweep-only feasibility check, not a universal picking law, speed estimate or musician comfort result."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the direction of the first string crossing.",
+          "expected_answer": "It moves toward a smaller string number and agrees with the declared repeated downstroke sweep.",
+          "decision": null
+        },
+        "2": {
+          "question": "Why does the second transition fail the policy?",
+          "expected_answer": "It reverses string travel while retaining the same downstroke, requiring a motion the continuous-sweep policy excludes.",
+          "decision": null
+        },
+        "3": {
+          "question": "Would changing the policy permit an air reset?",
+          "expected_answer": "Possibly, but that adds a different action and timing requirement; it cannot be silently inferred from the existing labels.",
+          "decision": null
+        },
+        "4": {
+          "question": "Why does the monotone control pass?",
+          "expected_answer": "Every same-direction crossing follows the permitted string-number direction under the same rule.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies a universal technique claim from this table?",
+          "expected_answer": "The table assumes a restricted motion policy and contains no player observation, so it cannot establish universal physical impossibility or comfort.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It moves toward a smaller string number and agrees with the declared repeated downstroke sweep.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It reverses string travel while retaining the same downstroke, requiring a motion the continuous-sweep policy excludes.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Possibly, but that adds a different action and timing requirement; it cannot be silently inferred from the existing labels.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Every same-direction crossing follows the permitted string-number direction under the same rule.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The table assumes a restricted motion policy and contains no player observation, so it cannot establish universal physical impossibility or comfort.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw each pick-travel arrow manually, then annotate the practice plan with its motion policy. Keep the failed crossing as a review witness.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: for equal consecutive strokes on different strings: legal iff (D and next_string<previous_string) or (U and next_string>previous_string); otherwise legal; plan_legal=all(transition_legal)",
+        "falsifier": "The table assumes a restricted motion policy and contains no player observation, so it cannot establish universal physical impossibility or comfort.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GTR019",
+      "department": "guitar-studies",
+      "module_id": "gtr-019-declare-the-coordinate-of-a-continuous-slide",
+      "title": "Declare the Coordinate of a Continuous Slide",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-019-declare-the-coordinate-of-a-continuous-slide.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-019-declare-the-coordinate-of-a-continuous-slide.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-019-declare-the-coordinate-of-a-continuous-slide.es.md"
+      },
+      "novelty_vs_prerequisites": "GTR014 separates note events from attacks; this adds continuous path interpolation and distinguishes uniform physical motion from uniform logarithmic pitch motion.",
+      "prerequisites": [
+        "gtr-014-count-legato-notes-separately-from-pick-attacks"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-studies/en/gtr-014-count-legato-notes-separately-from-pick-attacks.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "9b6d41b7d6dbe804bdc4a6d7aed23edaa3604b237f2fa4de16b0b08d36bf8bc5",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/phrase-performance-2026-10-22/string-occupancy.json",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "6356c1bbbe0151940c7df105d48e1cdb42a3ef1aec2d314dc6a5e205580eb1c3",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/slide/",
+          "pin": "MusicXML 4.0 reference",
+          "scope": "Definition of continuous slide and playback discretization attributes, lines 52-82. Our geometric interpolation is independently authored.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body; no raw web byte hash."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "start_length": 1,
+          "end_length": 0.5,
+          "start_frequency_hz": 100,
+          "duration_s": 1,
+          "times_s": [
+            0,
+            0.5,
+            1
+          ],
+          "policy": "linear_length"
+        },
+        "formula": "u=t/duration; linear_length: L=(1-u)*L0+u*L1; f=f0*L0/L; linear_log_frequency: f=f0*(L0/L1)^u; L=f0*L0/f",
+        "expected": {
+          "length": [
+            1,
+            0.75,
+            0.5
+          ],
+          "frequency_hz": [
+            100,
+            133.33333333333334,
+            200
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "start_length": 1,
+            "end_length": 0.5,
+            "start_frequency_hz": 100,
+            "duration_s": 1,
+            "times_s": [
+              0,
+              0.5,
+              1
+            ],
+            "policy": "linear_log_frequency"
+          },
+          "expected": {
+            "length": [
+              1,
+              0.7071067811865475,
+              0.5
+            ],
+            "frequency_hz": [
+              100,
+              141.4213562373095,
+              200
+            ]
+          },
+          "why": "Both routes share endpoints and duration but differ between them."
+        },
+        "assumptions": [
+          "Ideal flexible string at constant wave speed; continuous effective speaking length; no fret interruptions; authored interpolation paths."
+        ],
+        "limits": "This is an ideal path comparison, not a normal fretted-slide acoustic prediction, MusicXML playback implementation or measured finger trajectory."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Derive the length at the interior time for linear length motion.",
+          "expected_answer": "It is the arithmetic interpolation of the endpoint lengths, as listed in the fixed case.",
+          "decision": null
+        },
+        "2": {
+          "question": "Convert that length to frequency under constant wave speed.",
+          "expected_answer": "Use the inverse-length relation; an arithmetic midpoint in length is not an arithmetic midpoint in frequency.",
+          "decision": null
+        },
+        "3": {
+          "question": "How does the control interpolate pitch?",
+          "expected_answer": "It interpolates logarithmic frequency, giving a geometric frequency midpoint and a different speaking length.",
+          "decision": null
+        },
+        "4": {
+          "question": "Can shared endpoints establish shared slide behavior?",
+          "expected_answer": "No. The interior values differ under the two declared policies despite identical endpoints and duration.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies an endpoint-only fidelity claim?",
+          "expected_answer": "A receiver unable to distinguish these two interior trajectories cannot recover which authored slide path was requested.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It is the arithmetic interpolation of the endpoint lengths, as listed in the fixed case.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Use the inverse-length relation; an arithmetic midpoint in length is not an arithmetic midpoint in frequency.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It interpolates logarithmic frequency, giving a geometric frequency midpoint and a different speaking length.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: No. The interior values differ under the two declared policies despite identical endpoints and duration.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: A receiver unable to distinguish these two interior trajectories cannot recover which authored slide path was requested.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw both paths before opening the answers. Draft a GA phrase note that names the interpolation coordinate and explicitly excludes normal fret-contact prediction.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: u=t/duration; linear_length: L=(1-u)*L0+u*L1; f=f0*L0/L; linear_log_frequency: f=f0*(L0/L1)^u; L=f0*L0/f",
+        "falsifier": "A receiver unable to distinguish these two interior trajectories cannot recover which authored slide path was requested.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GTR020",
+      "department": "guitar-studies",
+      "module_id": "gtr-020-derive-strum-onsets-from-a-sweep",
+      "title": "Derive Strum Onsets from a Sweep",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-020-derive-strum-onsets-from-a-sweep.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-020-derive-strum-onsets-from-a-sweep.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-020-derive-strum-onsets-from-a-sweep.es.md"
+      },
+      "novelty_vs_prerequisites": "GTR010 distinguishes release and mute; this adds a spatial-to-temporal sweep map in which muted strings preserve travel distance and reversal changes onset order.",
+      "prerequisites": [
+        "gtr-010-separate-muting-from-releasing-a-fretted-note"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-studies/en/gtr-010-separate-muting-from-releasing-a-fretted-note.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "8711f3f36a829c7780dad26520c04701fb8977fb07365cd269014b684deb8f04",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/phrase-performance-2026-10-22/string-occupancy.json",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "6356c1bbbe0151940c7df105d48e1cdb42a3ef1aec2d314dc6a5e205580eb1c3",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "positions_mm": [
+            0,
+            10,
+            20,
+            30,
+            40,
+            50
+          ],
+          "sounding_indices": [
+            0,
+            2,
+            5
+          ],
+          "speed_mm_s": 1000,
+          "direction": 1
+        },
+        "formula": "origin=min(positions) if direction=1 else max(positions); t[i]=abs(position[i]-origin)/speed; events=sort((t[i],i) for sounding i); spread=max(t)-min(t)",
+        "expected": {
+          "events_time_s_and_index": [
+            [
+              0,
+              0
+            ],
+            [
+              0.02,
+              2
+            ],
+            [
+              0.05,
+              5
+            ]
+          ],
+          "spread_s": 0.05
+        },
+        "negative_control": {
+          "values": {
+            "positions_mm": [
+              0,
+              10,
+              20,
+              30,
+              40,
+              50
+            ],
+            "sounding_indices": [
+              0,
+              2,
+              5
+            ],
+            "speed_mm_s": 1000,
+            "direction": -1
+          },
+          "expected": {
+            "events_time_s_and_index": [
+              [
+                0,
+                5
+              ],
+              [
+                0.03,
+                2
+              ],
+              [
+                0.05,
+                0
+              ]
+            ],
+            "spread_s": 0.05
+          },
+          "why": "Reversing the same sweep preserves its full span but changes event order and the interior onset."
+        },
+        "assumptions": [
+          "Parallel equally positioned authored string crossings; constant positive sweep speed; origin at the extreme string; instantaneous excitation at crossing; muted strings produce no pitched event."
+        ],
+        "limits": "No physical pick compliance, acoustic onset latency, velocity dynamics, real spacing or performed strum is measured."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the sounding crossing times in the main direction.",
+          "expected_answer": "Use the original string coordinates and speed; the skipped muted coordinates still contribute to travel distance.",
+          "decision": null
+        },
+        "2": {
+          "question": "Why must a muted string remain in the geometry?",
+          "expected_answer": "It removes an excitation event but does not move the other strings closer together.",
+          "decision": null
+        },
+        "3": {
+          "question": "What does reversing the sweep preserve?",
+          "expected_answer": "It preserves the extreme-to-extreme travel time and the total onset spread in this symmetric origin convention.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the reversed control change?",
+          "expected_answer": "It reverses event order and changes the interior event’s delay relative to the first onset.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies a spread-only articulation handoff?",
+          "expected_answer": "The same-spread control has a different ordered onset list, so spread alone cannot reconstruct the requested articulation.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Use the original string coordinates and speed; the skipped muted coordinates still contribute to travel distance.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It removes an excitation event but does not move the other strings closer together.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It preserves the extreme-to-extreme travel time and the total onset spread in this symmetric origin convention.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It reverses event order and changes the interior event’s delay relative to the first onset.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The same-spread control has a different ordered onset list, so spread alone cannot reconstruct the requested articulation.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the full string-coordinate line, including muted strings, before converting it to ordered events. Compare both directions in a proposed GA practice record.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: origin=min(positions) if direction=1 else max(positions); t[i]=abs(position[i]-origin)/speed; events=sort((t[i],i) for sounding i); spread=max(t)-min(t)",
+        "falsifier": "The same-spread control has a different ordered onset list, so spread alone cannot reconstruct the requested articulation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GAA017",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-017-audit-a-practice-staircase-stopping-rule",
+      "title": "Audit a Practice Staircase Stopping Rule",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-017-audit-a-practice-staircase-stopping-rule.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-017-audit-a-practice-staircase-stopping-rule.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-017-audit-a-practice-staircase-stopping-rule.es.md"
+      },
+      "novelty_vs_prerequisites": "GAA010 defines whether attempts pass; this adds sequential level updates, direction reversals and explicit stopping without asserting a validated psychometric threshold.",
+      "prerequisites": [
+        "gaa-010-define-a-practice-pass-before-counting-success"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-alchemist-academy/en/gaa-010-define-a-practice-pass-before-counting-success.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "8430b444c193c843ac56e127da5ade544d0c35add69d98343180c6e59ea87e9f",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "8b62207df7d7fa84e97053ef4d7c6cea36b7eae73ce7a867d14cfdbfa49b9cc6",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "initial_tempo": 60,
+          "step": 5,
+          "passes": [
+            true,
+            true,
+            false,
+            false,
+            true,
+            false
+          ],
+          "required_reversals": 3
+        },
+        "formula": "direction=1 if pass else -1; next_tempo=current_tempo+step*direction; reversal occurs when direction differs from previous direction; stop at required_reversals; estimate=mean(pre_update_tempo at reversals) only after stop",
+        "expected": {
+          "pre_update_tempo": [
+            60,
+            65,
+            70,
+            65,
+            60,
+            65
+          ],
+          "post_update_tempo": [
+            65,
+            70,
+            65,
+            60,
+            65,
+            60
+          ],
+          "reversal_indices": [
+            2,
+            4,
+            5
+          ],
+          "stop_index": 5,
+          "estimate_tempo": 65
+        },
+        "negative_control": {
+          "values": {
+            "initial_tempo": 60,
+            "step": 5,
+            "passes": [
+              true,
+              true,
+              true,
+              true,
+              true,
+              true
+            ],
+            "required_reversals": 3
+          },
+          "expected": {
+            "pre_update_tempo": [
+              60,
+              65,
+              70,
+              75,
+              80,
+              85
+            ],
+            "post_update_tempo": [
+              65,
+              70,
+              75,
+              80,
+              85,
+              90
+            ],
+            "reversal_indices": [],
+            "stop_index": null,
+            "estimate_tempo": null
+          },
+          "why": "An all-success trace has many trials but no reversals and cannot satisfy the stated stopping rule."
+        },
+        "assumptions": [
+          "Authored complete Boolean outcomes; fixed step; no bounds reached; first step has no prior direction; zero-based trial indices."
+        ],
+        "limits": "The computed level summary is not a measured learner threshold, optimal practice tempo or evidence of improved performance."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Trace the tempos before and after each response.",
+          "expected_answer": "Apply the fixed step in the response’s direction, preserving the distinction between tested level and next scheduled level.",
+          "decision": null
+        },
+        "2": {
+          "question": "Which response directions are actual reversals?",
+          "expected_answer": "Only changes from the preceding update direction count; repeated successes or repeated failures are not new reversals.",
+          "decision": null
+        },
+        "3": {
+          "question": "When does the main trace stop?",
+          "expected_answer": "It stops at the displayed trial where the required reversal count is first reached; the prepared estimate uses the stated pre-update levels.",
+          "decision": null
+        },
+        "4": {
+          "question": "Why is the all-success control estimate unresolved?",
+          "expected_answer": "It never meets the reversal stopping condition, even though every supplied trial is complete and a final scheduled level exists.",
+          "decision": null
+        },
+        "5": {
+          "question": "What rejects a claimed learner threshold?",
+          "expected_answer": "Without actual participant outcomes and validation of the staircase interpretation, the authored level summary cannot establish a learner threshold.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Apply the fixed step in the response’s direction, preserving the distinction between tested level and next scheduled level.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Only changes from the preceding update direction count; repeated successes or repeated failures are not new reversals.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It stops at the displayed trial where the required reversal count is first reached; the prepared estimate uses the stated pre-update levels.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It never meets the reversal stopping condition, even though every supplied trial is complete and a final scheduled level exists.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Without actual participant outcomes and validation of the staircase interpretation, the authored level summary cannot establish a learner threshold.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Make the staircase ledger unaided, then draft a practice-state record with tested and scheduled levels. Leave learner threshold and adoption undecided.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: direction=1 if pass else -1; next_tempo=current_tempo+step*direction; reversal occurs when direction differs from previous direction; stop at required_reversals; estimate=mean(pre_update_tempo at reversals) only after stop",
+        "falsifier": "Without actual participant outcomes and validation of the staircase interpretation, the authored level summary cannot establish a learner threshold.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GAA018",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-018-bind-delayed-feedback-to-the-original-attempt",
+      "title": "Bind Delayed Feedback to the Original Attempt",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-018-bind-delayed-feedback-to-the-original-attempt.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-018-bind-delayed-feedback-to-the-original-attempt.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-018-bind-delayed-feedback-to-the-original-attempt.es.md"
+      },
+      "novelty_vs_prerequisites": "GAA007 specifies a practice item and COG002 checks answer-key integrity; this adds an explicit out-of-order feedback join, unknown-attempt rejection and unresolved-attempt retention.",
+      "prerequisites": [
+        "gaa-007-turn-a-voicing-result-into-a-practice-item"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-alchemist-academy/en/gaa-007-turn-a-voicing-result-into-a-practice-item.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "5e8990aff651d79bc42e376adcb27b2ff6b0c130b8206b0dc344dedecca8b5d6",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "8b62207df7d7fa84e97053ef4d7c6cea36b7eae73ce7a867d14cfdbfa49b9cc6",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "attempt_ids": [
+            "A",
+            "B"
+          ],
+          "feedback": [
+            {
+              "attempt_id": "B",
+              "pass": false
+            },
+            {
+              "attempt_id": "A",
+              "pass": true
+            }
+          ]
+        },
+        "formula": "initialize every attempt to null; process feedback in arrival order; update only matching attempt_id; unknown ids are rejected; output ledger in original attempt order",
+        "expected": {
+          "ledger": [
+            {
+              "attempt_id": "A",
+              "pass": true
+            },
+            {
+              "attempt_id": "B",
+              "pass": false
+            }
+          ],
+          "rejected_ids": [],
+          "unresolved_ids": []
+        },
+        "negative_control": {
+          "values": {
+            "attempt_ids": [
+              "A",
+              "B"
+            ],
+            "feedback": [
+              {
+                "attempt_id": "B",
+                "pass": false
+              },
+              {
+                "attempt_id": "C",
+                "pass": true
+              }
+            ]
+          },
+          "expected": {
+            "ledger": [
+              {
+                "attempt_id": "A",
+                "pass": null
+              },
+              {
+                "attempt_id": "B",
+                "pass": false
+              }
+            ],
+            "rejected_ids": [
+              "C"
+            ],
+            "unresolved_ids": [
+              "A"
+            ]
+          },
+          "why": "An unknown feedback identity must not overwrite the current item or fill the unresolved original attempt."
+        },
+        "assumptions": [
+          "Unique immutable attempt ids; at most one feedback per id in these fixtures; complete Boolean feedback; no duplicate conflict resolution."
+        ],
+        "limits": "No network race, tutor runtime or actual attempt was observed. A production duplicate/conflicting-feedback policy remains unspecified."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Initialize the attempt ledger before feedback arrives.",
+          "expected_answer": "Every declared attempt begins unresolved; the ledger’s order is the practice order rather than message arrival order.",
+          "decision": null
+        },
+        "2": {
+          "question": "Join the main feedback messages to their attempts.",
+          "expected_answer": "Match exact identity, yielding the displayed outcomes despite the reversed arrival order.",
+          "decision": null
+        },
+        "3": {
+          "question": "What would a latest-prompt attribution lose?",
+          "expected_answer": "It could overwrite the current prompt with another attempt’s result, destroying the evidence binding even if the Boolean were correct.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the unknown-identity control.",
+          "expected_answer": "Reject the unknown update, preserve the known result and leave the unmatched original attempt unresolved.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies correct feedback attribution?",
+          "expected_answer": "Any result assigned to a different attempt identity or revision rejects the attribution claim; an unresolved result must not become an invented failure.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Every declared attempt begins unresolved; the ledger’s order is the practice order rather than message arrival order.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Match exact identity, yielding the displayed outcomes despite the reversed arrival order.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It could overwrite the current prompt with another attempt’s result, destroying the evidence binding even if the Boolean were correct.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Reject the unknown update, preserve the known result and leave the unmatched original attempt unresolved.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Any result assigned to a different attempt identity or revision rejects the attribution claim; an unresolved result must not become an invented failure.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Build the feedback join table before assistance. Propose the smallest practice receipt binding attempt, prompt revision, answer and review without implementing a queue.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: initialize every attempt to null; process feedback in arrival order; update only matching attempt_id; unknown ids are rejected; output ledger in original attempt order",
+        "falsifier": "Any result assigned to a different attempt identity or revision rejects the attribution claim; an unresolved result must not become an invented failure.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GAA019",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-019-retrieve-overlapping-interval-motifs",
+      "title": "Retrieve Overlapping Interval Motifs",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-019-retrieve-overlapping-interval-motifs.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-019-retrieve-overlapping-interval-motifs.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-019-retrieve-overlapping-interval-motifs.es.md"
+      },
+      "novelty_vs_prerequisites": "GAA009 checks transposition transfer; this adds exact contiguous motif occurrence, overlapping matches and multiplicity that unordered pitch or interval summaries cannot retain.",
+      "prerequisites": [
+        "gaa-009-test-transposition-beyond-a-memorized-fret-pattern"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-alchemist-academy/en/gaa-009-test-transposition-beyond-a-memorized-fret-pattern.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "2322558da7c6e76ce88ceea7355c683c7c68eae5323f5ea675ee4df865477dfc",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "8b62207df7d7fa84e97053ef4d7c6cea36b7eae73ce7a867d14cfdbfa49b9cc6",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "interval_stream": [
+            2,
+            -1,
+            2,
+            -1,
+            2
+          ],
+          "motif": [
+            2,
+            -1,
+            2
+          ]
+        },
+        "formula": "matches=[i for i in range(len(stream)-len(motif)+1) if stream[i:i+len(motif)]==motif]; count=len(matches); overlap is permitted",
+        "expected": {
+          "match_starts": [
+            0,
+            2
+          ],
+          "count": 2,
+          "stream_multiset": {
+            "2": 3,
+            "-1": 2
+          }
+        },
+        "negative_control": {
+          "values": {
+            "interval_stream": [
+              2,
+              2,
+              -1,
+              -1,
+              2
+            ],
+            "motif": [
+              2,
+              -1,
+              2
+            ]
+          },
+          "expected": {
+            "match_starts": [],
+            "count": 0,
+            "stream_multiset": {
+              "2": 3,
+              "-1": 2
+            }
+          },
+          "why": "The control preserves every interval count but changes order so that the contiguous motif disappears."
+        },
+        "assumptions": [
+          "Integer directed semitone intervals; zero-based starts; exact contiguous equality; all overlaps retained; no rhythmic or pitch-register matching."
+        ],
+        "limits": "No GA retrieval result, melody-recognition accuracy, musical theme identity or learned representation is established."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Inspect every possible start without skipping after a match.",
+          "expected_answer": "The displayed start positions retain both exact occurrences, including the overlapping one.",
+          "decision": null
+        },
+        "2": {
+          "question": "Which source element do the occurrences share?",
+          "expected_answer": "They overlap at a boundary interval; overlap is permitted by the task rather than treated as duplicate evidence.",
+          "decision": null
+        },
+        "3": {
+          "question": "Why retain start positions as well as the total?",
+          "expected_answer": "Positions identify the selected phrase regions and make overlap auditable; the total alone cannot reconstruct them.",
+          "decision": null
+        },
+        "4": {
+          "question": "Why does the same-multiset control have no match?",
+          "expected_answer": "Its interval order differs, so none of its complete contiguous slices equals the motif.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies a bag-only retrieval claim for this task?",
+          "expected_answer": "The equal-count streams have different exact occurrence sets, proving that an unordered summary is insufficient.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The displayed start positions retain both exact occurrences, including the overlapping one.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: They overlap at a boundary interval; overlap is permitted by the task rather than treated as duplicate evidence.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Positions identify the selected phrase regions and make overlap auditable; the total alone cannot reconstruct them.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Its interval order differs, so none of its complete contiguous slices equals the motif.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The equal-count streams have different exact occurrence sets, proving that an unordered summary is insufficient.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Mark motif occurrences manually and keep the overlapping spans. Draft a GA search request that distinguishes exact interval sequence from unordered similarity.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: matches=[i for i in range(len(stream)-len(motif)+1) if stream[i:i+len(motif)]==motif]; count=len(matches); overlap is permitted",
+        "falsifier": "The equal-count streams have different exact occurrence sets, proving that an unordered summary is insufficient.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "MCL018",
+      "department": "musicology",
+      "module_id": "mcl-018-convert-tempo-through-a-metric-modulation-pivot",
+      "title": "Convert Tempo through a Metric-Modulation Pivot",
+      "source_paths": {
+        "en": "streeling/courses/musicology/en/mcl-018-convert-tempo-through-a-metric-modulation-pivot.md",
+        "fr": "streeling/courses/musicology/fr/mcl-018-convert-tempo-through-a-metric-modulation-pivot.fr.md",
+        "es": "streeling/courses/musicology/es/mcl-018-convert-tempo-through-a-metric-modulation-pivot.es.md"
+      },
+      "novelty_vs_prerequisites": "MCL006 names metronome units at a fixed tempo; this adds an equality linking old and new note-unit durations and derives the destination tempo from that pivot.",
+      "prerequisites": [
+        "mcl-006-preserve-meter-grouping-and-tempo-units"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "41fae9c94fe4e7472414d2f9bc340d1a032a1302058a1ccd4f135ffff1acc8c5",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/music-phrase-2026-10-22/melody-constraints.json",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "33447cadc0d9e6f5cdca4939d3afb8c842edc46e428e55be64d65ecf2c15bbd2",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome-note/",
+          "pin": "MusicXML 4.0 reference",
+          "scope": "Metric relationship note appearance and children, lines 52-66. Duration-equivalence arithmetic is an authored policy, not importer output.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body; no raw web byte hash."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "old_quarter_bpm": 120,
+          "old_pivot_quarters": 1.5,
+          "new_pivot_quarters": 1
+        },
+        "formula": "old_quarter_s=60/old_bpm; pivot_s=old_pivot*old_quarter_s; new_quarter_s=pivot_s/new_pivot; new_bpm=old_bpm*new_pivot/old_pivot",
+        "expected": {
+          "old_quarter_s": 0.5,
+          "pivot_s": 0.75,
+          "new_quarter_s": 0.75,
+          "new_quarter_bpm": 80
+        },
+        "negative_control": {
+          "values": {
+            "old_quarter_bpm": 120,
+            "old_pivot_quarters": 1.5,
+            "new_pivot_quarters": 1.5
+          },
+          "expected": {
+            "old_quarter_s": 0.5,
+            "pivot_s": 0.75,
+            "new_quarter_s": 0.5,
+            "new_quarter_bpm": 120
+          },
+          "why": "An identical old/new pivot unit leaves the quarter-note rate unchanged."
+        },
+        "assumptions": [
+          "Exact duration equality at an instantaneous modulation; old and new unit lengths are measured in their own quarter-note coordinates; no gradual ramp."
+        ],
+        "limits": "No score importer, conductor interpretation, performed tempo transition or MusicXML relationship playback was executed."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Convert the old quarter and pivot into seconds.",
+          "expected_answer": "Use the old quarter rate first, then multiply by the old pivot length in quarter units.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the destination quarter duration.",
+          "expected_answer": "Divide the shared pivot duration by the destination pivot length in new-quarter units.",
+          "decision": null
+        },
+        "3": {
+          "question": "Which direction does the quarter rate move in the main case?",
+          "expected_answer": "It decreases because one new quarter occupies the longer old dotted-quarter duration.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the identity control establish?",
+          "expected_answer": "Equal pivot lengths preserve the old quarter duration and rate under this equality rule.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies a reported modulation?",
+          "expected_answer": "If the old and new pivot durations in seconds differ, the stated equality and derived tempo are inconsistent.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Use the old quarter rate first, then multiply by the old pivot length in quarter units.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Divide the shared pivot duration by the destination pivot length in new-quarter units.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It decreases because one new quarter occupies the longer old dotted-quarter duration.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Equal pivot lengths preserve the old quarter duration and rate under this equality rule.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: If the old and new pivot durations in seconds differ, the stated equality and derived tempo are inconsistent.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a two-clock duration note for a proposed GA exercise import. Retain the exact pivot equality before choosing a destination tempo.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: old_quarter_s=60/old_bpm; pivot_s=old_pivot*old_quarter_s; new_quarter_s=pivot_s/new_pivot; new_bpm=old_bpm*new_pivot/old_pivot",
+        "falsifier": "If the old and new pivot durations in seconds differ, the stated equality and derived tempo are inconsistent.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "MCL019",
+      "department": "musicology",
+      "module_id": "mcl-019-expand-a-trill-with-an-explicit-terminal-note",
+      "title": "Expand a Trill with an Explicit Terminal Note",
+      "source_paths": {
+        "en": "streeling/courses/musicology/en/mcl-019-expand-a-trill-with-an-explicit-terminal-note.md",
+        "fr": "streeling/courses/musicology/fr/mcl-019-expand-a-trill-with-an-explicit-terminal-note.fr.md",
+        "es": "streeling/courses/musicology/es/mcl-019-expand-a-trill-with-an-explicit-terminal-note.es.md"
+      },
+      "novelty_vs_prerequisites": "MCL014 allocates grace-note time; this adds finite alternating ornament expansion, exact event count and terminal-note parity without assuming a style-specific realization.",
+      "prerequisites": [
+        "mcl-014-declare-where-grace-notes-take-their-time"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/musicology/en/mcl-014-declare-where-grace-notes-take-their-time.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "c6028750712d9e0646dce78bd21bacf523a107efc9294c1cb3b6fe7e7ae9e164",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/music-phrase-2026-10-22/melody-constraints.json",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "33447cadc0d9e6f5cdca4939d3afb8c842edc46e428e55be64d65ecf2c15bbd2",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/trill-mark/",
+          "pin": "MusicXML 4.0 reference",
+          "scope": "Trill playback count, starting-note and terminal-turn attributes, lines 52-83. Our equal-duration schedule is explicitly stipulated.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body; no raw web byte hash."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "main_pitch": 60,
+          "alternate_pitch": 62,
+          "note_count": 6,
+          "duration_s": 1.2
+        },
+        "formula": "pitch[i]=main if i%2==0 else alternate; onset[i]=i*duration/count for i=0..count-1; duration_each=duration/count; terminal=pitch[count-1]",
+        "expected": {
+          "pitches": [
+            60,
+            62,
+            60,
+            62,
+            60,
+            62
+          ],
+          "onsets_s": [
+            0,
+            0.2,
+            0.4,
+            0.6,
+            0.8,
+            1
+          ],
+          "duration_each_s": 0.2,
+          "terminal_pitch": 62
+        },
+        "negative_control": {
+          "values": {
+            "main_pitch": 60,
+            "alternate_pitch": 62,
+            "note_count": 5,
+            "duration_s": 1.2
+          },
+          "expected": {
+            "pitches": [
+              60,
+              62,
+              60,
+              62,
+              60
+            ],
+            "onsets_s": [
+              0,
+              0.24,
+              0.48,
+              0.72,
+              0.96
+            ],
+            "duration_each_s": 0.24,
+            "terminal_pitch": 60
+          },
+          "why": "Changing count parity changes the terminal pitch even when the same pitches and overall duration are retained."
+        },
+        "assumptions": [
+          "Positive integer note count; starts on main note; equal durations; no terminal turn; fixed authored pitches and total support."
+        ],
+        "limits": "No historically preferred trill realization, MusicXML importer, guitar articulation engine or performed ornament is asserted."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Expand the main pitch sequence without skipping the first event.",
+          "expected_answer": "It begins on the principal pitch and alternates exactly for the declared number of events.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the onset array and event duration.",
+          "expected_answer": "Divide total support by count and place onsets at successive multiples; the final event ends at the support boundary.",
+          "decision": null
+        },
+        "3": {
+          "question": "Does the main case finish on the main pitch?",
+          "expected_answer": "No. Its even count, starting on main, ends on the alternate under the stated policy.",
+          "decision": null
+        },
+        "4": {
+          "question": "What changes in the odd-count control?",
+          "expected_answer": "It finishes on the main pitch and uses longer equal event durations while retaining the same total support.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies a claimed ornament-preserving handoff?",
+          "expected_answer": "A different terminal pitch, count or support under the declared policy rejects the corresponding preservation claim.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It begins on the principal pitch and alternates exactly for the declared number of events.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Divide total support by count and place onsets at successive multiples; the final event ends at the support boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: No. Its even count, starting on main, ends on the alternate under the stated policy.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It finishes on the main pitch and uses longer equal event durations while retaining the same total support.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: A different terminal pitch, count or support under the declared policy rejects the corresponding preservation claim.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Expand the ornament by hand and compare the ending against the practice instruction. Propose a record that keeps count, start and any terminal turn separate.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: pitch[i]=main if i%2==0 else alternate; onset[i]=i*duration/count for i=0..count-1; duration_each=duration/count; terminal=pitch[count-1]",
+        "falsifier": "A different terminal pitch, count or support under the declared policy rejects the corresponding preservation claim.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "MCL020",
+      "department": "musicology",
+      "module_id": "mcl-020-reset-an-accidental-state-at-the-bar-boundary",
+      "title": "Reset an Accidental State at the Bar Boundary",
+      "source_paths": {
+        "en": "streeling/courses/musicology/en/mcl-020-reset-an-accidental-state-at-the-bar-boundary.md",
+        "fr": "streeling/courses/musicology/fr/mcl-020-reset-an-accidental-state-at-the-bar-boundary.fr.md",
+        "es": "streeling/courses/musicology/es/mcl-020-reset-an-accidental-state-at-the-bar-boundary.es.md"
+      },
+      "novelty_vs_prerequisites": "MCL005 retains encoded and sounding pitch; this adds an explicitly scoped notation-state exercise with octave-specific overrides and measure resets, kept distinct from MusicXML alter fields.",
+      "prerequisites": [
+        "mcl-005-preserve-written-and-sounding-pitch"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/musicology/en/mcl-005-preserve-written-and-sounding-pitch.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "b4bcf44717f388103507ea2679cbe143bc01251cbd1079a1e6a5c8e89c5fd5dd",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/pitch-context-2026-10-22/transposition-arithmetic.json",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "b7fa65403f7a82db717dca2bcfcb0b989c86bdc7a91369839abc9279efb5f4e6",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accidental/",
+          "pin": "MusicXML 4.0 reference",
+          "scope": "Notated accidental and cautionary/editorial display attributes, lines 52-81. The teaching state machine is not a universal engraving rule.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body; no raw web byte hash."
+        },
+        {
+          "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/alter/",
+          "pin": "MusicXML 4.0 reference",
+          "scope": "Pitch alteration expressed in semitones and decimal support, lines 52-60. Display-symbol state must not replace explicit pitch.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body; no raw web byte hash."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "key_F_alter": 1,
+          "reset_at_bar": true,
+          "events": [
+            {
+              "measure": 1,
+              "octave": 4,
+              "explicit_alter": 0
+            },
+            {
+              "measure": 1,
+              "octave": 4,
+              "explicit_alter": null
+            },
+            {
+              "measure": 1,
+              "octave": 5,
+              "explicit_alter": null
+            },
+            {
+              "measure": 2,
+              "octave": 4,
+              "explicit_alter": null
+            }
+          ]
+        },
+        "formula": "state keyed by letter and octave; clear overrides at each new measure iff reset_at_bar; explicit_alter updates state; missing alter uses override else key; F4_base=65; F5_base=77; pitch=base+effective_alter",
+        "expected": {
+          "effective_alters": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "pitches": [
+            65,
+            65,
+            78,
+            66
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "key_F_alter": 1,
+            "reset_at_bar": false,
+            "events": [
+              {
+                "measure": 1,
+                "octave": 4,
+                "explicit_alter": 0
+              },
+              {
+                "measure": 1,
+                "octave": 4,
+                "explicit_alter": null
+              },
+              {
+                "measure": 1,
+                "octave": 5,
+                "explicit_alter": null
+              },
+              {
+                "measure": 2,
+                "octave": 4,
+                "explicit_alter": null
+              }
+            ]
+          },
+          "expected": {
+            "effective_alters": [
+              0,
+              0,
+              1,
+              0
+            ],
+            "pitches": [
+              65,
+              65,
+              78,
+              65
+            ]
+          },
+          "why": "Disabling the reset leaks the prior measure override into a new measure."
+        },
+        "assumptions": [
+          "Authored conventional exercise policy for F only; no ties across bars; overrides keyed by exact octave; explicit event fields are teaching instructions, not raw MusicXML."
+        ],
+        "limits": "Real notation conventions may differ. MusicXML explicit pitch alteration is not to be inferred from display accidentals or this shorthand state machine."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Resolve the first explicit instruction and its same-octave continuation.",
+          "expected_answer": "Both use the explicit natural override within the current measure under the stipulated policy.",
+          "decision": null
+        },
+        "2": {
+          "question": "Why does the event in the other octave retain the key alteration?",
+          "expected_answer": "Overrides are keyed by letter and octave, so an override in another octave does not match.",
+          "decision": null
+        },
+        "3": {
+          "question": "Resolve the first event after the bar boundary.",
+          "expected_answer": "Clear the prior override, then use the key alteration because no new explicit instruction is present.",
+          "decision": null
+        },
+        "4": {
+          "question": "Where does the disabled-reset control first differ?",
+          "expected_answer": "It differs at the new-measure event, which incorrectly retains the earlier natural override under the intended reset policy.",
+          "decision": null
+        },
+        "5": {
+          "question": "May display accidental state replace explicit MusicXML pitch alteration?",
+          "expected_answer": "No. The display symbol and encoded pitch are distinct; this exercise shorthand must not overwrite explicit pitch information.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Both use the explicit natural override within the current measure under the stipulated policy.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Overrides are keyed by letter and octave, so an override in another octave does not match.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Clear the prior override, then use the key alteration because no new explicit instruction is present.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It differs at the new-measure event, which incorrectly retains the earlier natural override under the intended reset policy.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: No. The display symbol and encoded pitch are distinct; this exercise shorthand must not overwrite explicit pitch information.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a notation-state trace and identify the first leaking event. Keep a separate column for explicit encoded pitch before proposing a GA importer or practice change.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: state keyed by letter and octave; clear overrides at each new measure iff reset_at_bar; explicit_alter updates state; missing alter uses override else key; F4_base=65; F5_base=77; pitch=base+effective_alter",
+        "falsifier": "No. The display symbol and encoded pitch are distinct; this exercise shorthand must not overwrite explicit pitch information.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "WML017",
+      "department": "world-music-languages",
+      "module_id": "wml-017-declare-equivalence-under-a-non-octave-period",
+      "title": "Declare Equivalence under a Non-Octave Period",
+      "source_paths": {
+        "en": "streeling/courses/world-music-languages/en/wml-017-declare-equivalence-under-a-non-octave-period.md",
+        "fr": "streeling/courses/world-music-languages/fr/wml-017-declare-equivalence-under-a-non-octave-period.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-017-declare-equivalence-under-a-non-octave-period.es.md"
+      },
+      "novelty_vs_prerequisites": "WML014 quantizes ratios within an octave grid; this changes the equivalence relation itself and retains period count separately from normalized ratio without assigning a cultural label.",
+      "prerequisites": [
+        "wml-014-quantize-a-ratio-on-a-declared-octave-division"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/world-music-languages/en/wml-014-quantize-a-ratio-on-a-declared-octave-division.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "7f1668b45a30d438b1764b4b9d505e10eeb9d94421499a1cc72a3982444cf1bb",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/intonation-listening-2026-10-22/intonation.json",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "88e77c28a2b03d1fab494fa2572e4a7eb1ec8414b39a57254823fb33a35d1a16",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "ratios": [
+            "1",
+            "3",
+            "9",
+            "2"
+          ],
+          "period_ratio": "3"
+        },
+        "formula": "choose integer k with 1<=r/P^k<P; canonical=r/P^k; equivalence groups share exact canonical ratio; retain k separately",
+        "expected": {
+          "period_counts": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "canonical_ratios": [
+            "1",
+            "1",
+            "1",
+            "2"
+          ],
+          "equivalence_groups": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "ratios": [
+              "1",
+              "3",
+              "9",
+              "2"
+            ],
+            "period_ratio": "2"
+          },
+          "expected": {
+            "period_counts": [
+              0,
+              1,
+              3,
+              1
+            ],
+            "canonical_ratios": [
+              "1",
+              "3/2",
+              "9/8",
+              "1"
+            ],
+            "equivalence_groups": [
+              [
+                0,
+                3
+              ],
+              [
+                1
+              ],
+              [
+                2
+              ]
+            ]
+          },
+          "why": "Changing the repeat period changes which exact ratios are equivalent, rather than merely renaming step integers."
+        },
+        "assumptions": [
+          "Positive rational frequency ratios; rational repeat period strictly above unity; canonical interval includes its lower boundary and excludes its upper boundary."
+        ],
+        "limits": "No musical tradition, tuning preference, octave perception, equal division or GA renderer support is inferred from this equivalence convention."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Normalize every main ratio and retain its removed-period count.",
+          "expected_answer": "Use exact repeated division by the declared period; the displayed canonical values lie in its half-open fundamental interval.",
+          "decision": null
+        },
+        "2": {
+          "question": "Which ratios belong to the same main equivalence group?",
+          "expected_answer": "Those sharing the same exact canonical ratio belong together; their removed-period counts may still differ.",
+          "decision": null
+        },
+        "3": {
+          "question": "Why retain the period count?",
+          "expected_answer": "It distinguishes registers that normalization deliberately identifies, allowing the original ratio to be reconstructed.",
+          "decision": null
+        },
+        "4": {
+          "question": "What changes under the octave-period control?",
+          "expected_answer": "Both the canonical ratios and equivalence grouping change because the relation itself has changed.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies a period-free transfer claim?",
+          "expected_answer": "If the same record cannot distinguish the two declared equivalence relations, it cannot preserve the requested period semantics.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Use exact repeated division by the declared period; the displayed canonical values lie in its half-open fundamental interval.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Those sharing the same exact canonical ratio belong together; their removed-period counts may still differ.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It distinguishes registers that normalization deliberately identifies, allowing the original ratio to be reconstructed.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Both the canonical ratios and equivalence grouping change because the relation itself has changed.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: If the same record cannot distinguish the two declared equivalence relations, it cannot preserve the requested period semantics.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Build both equivalence tables manually. Draft a GA tuning handoff preserving exact period, canonical ratio and register count without assigning a tradition.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: choose integer k with 1<=r/P^k<P; canonical=r/P^k; equivalence groups share exact canonical ratio; retain k separately",
+        "falsifier": "If the same record cannot distinguish the two declared equivalence relations, it cannot preserve the requested period semantics.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "WML018",
+      "department": "world-music-languages",
+      "module_id": "wml-018-detect-channel-scoped-tuning-conflicts",
+      "title": "Detect Channel-Scoped Tuning Conflicts",
+      "source_paths": {
+        "en": "streeling/courses/world-music-languages/en/wml-018-detect-channel-scoped-tuning-conflicts.md",
+        "fr": "streeling/courses/world-music-languages/fr/wml-018-detect-channel-scoped-tuning-conflicts.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-018-detect-channel-scoped-tuning-conflicts.es.md"
+      },
+      "novelty_vs_prerequisites": "WML004 retains cent residuals beyond integer notes; this adds MIDI pitch-bend byte encoding with explicit sensitivity and detects incompatible concurrent offsets on the same channel.",
+      "prerequisites": [
+        "wml-004-preserve-intonation-beyond-pitch-classes"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/world-music-languages/en/wml-004-preserve-intonation-beyond-pitch-classes.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "1f43c926a8c86cd07402c0436991f13356bbd57572909825b98f57f76d545468",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/intonation-listening-2026-10-22/intonation.json",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "88e77c28a2b03d1fab494fa2572e4a7eb1ec8414b39a57254823fb33a35d1a16",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "https://midi.org/summary-of-midi-1-0-messages",
+          "pin": "MIDI Association official MIDI 1.0 message overview, live rendered HTML read 2026-10-25; immutable revision unavailable",
+          "scope": "Channel-voice scope and pitch-bend least/most significant bytes, center and receiver sensitivity, lines 55-71. This is an overview, not the complete MIDI specification.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body; no raw web byte hash."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "sensitivity_cents": 200,
+          "notes": [
+            {
+              "id": "A",
+              "channel": 0,
+              "start": 0,
+              "end": 1,
+              "offset_cents": 0
+            },
+            {
+              "id": "B",
+              "channel": 0,
+              "start": 0,
+              "end": 1,
+              "offset_cents": 25
+            }
+          ]
+        },
+        "formula": "bend=8192+floor(8192*cents/sensitivity+0.5); LSB=bend%128; MSB=bend//128; conflict iff same channel and max(starts)<min(ends) and unequal bend; note support is half-open",
+        "expected": {
+          "bend_values": [
+            8192,
+            9216
+          ],
+          "lsb_msb": [
+            [
+              0,
+              64
+            ],
+            [
+              0,
+              72
+            ]
+          ],
+          "conflict_pairs": [
+            [
+              "A",
+              "B"
+            ]
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "sensitivity_cents": 200,
+            "notes": [
+              {
+                "id": "A",
+                "channel": 0,
+                "start": 0,
+                "end": 1,
+                "offset_cents": 0
+              },
+              {
+                "id": "B",
+                "channel": 1,
+                "start": 0,
+                "end": 1,
+                "offset_cents": 25
+              }
+            ]
+          },
+          "expected": {
+            "bend_values": [
+              8192,
+              9216
+            ],
+            "lsb_msb": [
+              [
+                0,
+                64
+              ],
+              [
+                0,
+                72
+              ]
+            ],
+            "conflict_pairs": []
+          },
+          "why": "Distinct channels remove the stipulated shared-bend conflict while keeping both requested tuning offsets unchanged."
+        },
+        "assumptions": [
+          "Declared symmetric cent mapping and nearest rounding; encoded bends inside valid unsigned range; conventional channel-scoped bend; equal receiver sensitivity assumed; no sustaining tails."
+        ],
+        "limits": "No MIDI device, MPE implementation, channel allocator, actual tuning accuracy or live GA playback was tested. Receiver capability remains a separate gate."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Encode both cent offsets using the declared sensitivity.",
+          "expected_answer": "The displayed integer bends preserve the neutral center and the positive offset under the stated mapping.",
+          "decision": null
+        },
+        "2": {
+          "question": "Split each bend into the ordered data bytes.",
+          "expected_answer": "The low byte contains the remainder under the byte radix and the high byte its integer quotient, as displayed.",
+          "decision": null
+        },
+        "3": {
+          "question": "Why do the simultaneous main notes conflict?",
+          "expected_answer": "Their half-open supports overlap on the same channel while requiring different channel bend values.",
+          "decision": null
+        },
+        "4": {
+          "question": "What does the distinct-channel control establish?",
+          "expected_answer": "It removes this modeled scope conflict without changing offsets or byte values; receiver configuration remains untested.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies the proposed shared-channel realization?",
+          "expected_answer": "Concurrent unequal bend requirements on one conventional channel reject simultaneous independent realization under the declared model.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The displayed integer bends preserve the neutral center and the positive offset under the stated mapping.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The low byte contains the remainder under the byte radix and the high byte its integer quotient, as displayed.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Their half-open supports overlap on the same channel while requiring different channel bend values.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: It removes this modeled scope conflict without changing offsets or byte values; receiver configuration remains untested.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Concurrent unequal bend requirements on one conventional channel reject simultaneous independent realization under the declared model.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Build the note/channel/offset table unaided, then draft a GA tuning transport note with sensitivity and byte order. Leave receiver support and channel allocation open.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: bend=8192+floor(8192*cents/sensitivity+0.5); LSB=bend%128; MSB=bend//128; conflict iff same channel and max(starts)<min(ends) and unequal bend; note support is half-open",
+        "falsifier": "Concurrent unequal bend requirements on one conventional channel reject simultaneous independent realization under the declared model.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "WML019",
+      "department": "world-music-languages",
+      "module_id": "wml-019-distribute-onsets-with-a-floor-lattice",
+      "title": "Distribute Onsets with a Floor Lattice",
+      "source_paths": {
+        "en": "streeling/courses/world-music-languages/en/wml-019-distribute-onsets-with-a-floor-lattice.md",
+        "fr": "streeling/courses/world-music-languages/fr/wml-019-distribute-onsets-with-a-floor-lattice.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-019-distribute-onsets-with-a-floor-lattice.es.md"
+      },
+      "novelty_vs_prerequisites": "WML006 preserves an already supplied additive cycle origin; this constructs onset locations from pulse and event counts, audits cyclic gap balance and only then applies a declared rotation.",
+      "prerequisites": [
+        "wml-006-preserve-the-origin-of-an-additive-cycle"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/world-music-languages/en/wml-006-preserve-the-origin-of-an-additive-cycle.md",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "529c1f410f2906b8af71cb2dadd007c143e558f30d5a2001eb87f8745a30386d",
+          "scope": "Lines 1-24: metadata, project question and opening evidence boundary, directly read.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json",
+          "pin": "Learn 5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f",
+          "sha256": "8b62207df7d7fa84e97053ef4d7c6cea36b7eae73ce7a867d14cfdbfa49b9cc6",
+          "scope": "Complete source read for run.mjs; complete authored evidence packet read for JSON artifacts. Existing scope, typed values, boundary exclusions and task-specific keys inspected; no execution this batch.",
+          "read_method": "Direct UTF-8 source read; complete-file raw-byte hash identifies bytes, not a broader reading claim."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "pulse_count": 8,
+          "onset_count": 3,
+          "rotation": 1,
+          "policy": "floor_lattice",
+          "supplied_onsets": null
+        },
+        "formula": "base[i]=floor(i*N/K) for i=0..K-1 in floor_lattice, else supplied_onsets; rotated=sorted((base+rotation)%N); gaps=cyclic differences including wrap; balanced=max(gaps)-min(gaps)<=1",
+        "expected": {
+          "base_onsets": [
+            0,
+            2,
+            5
+          ],
+          "rotated_onsets": [
+            1,
+            3,
+            6
+          ],
+          "cyclic_gaps": [
+            2,
+            3,
+            3
+          ],
+          "balanced": true
+        },
+        "negative_control": {
+          "values": {
+            "pulse_count": 8,
+            "onset_count": 3,
+            "rotation": 1,
+            "policy": "supplied",
+            "supplied_onsets": [
+              0,
+              1,
+              2
+            ]
+          },
+          "expected": {
+            "base_onsets": [
+              0,
+              1,
+              2
+            ],
+            "rotated_onsets": [
+              1,
+              2,
+              3
+            ],
+            "cyclic_gaps": [
+              1,
+              1,
+              6
+            ],
+            "balanced": false
+          },
+          "why": "The same pulse and onset counts can cluster events; cardinality alone does not imply balanced gaps."
+        },
+        "assumptions": [
+          "Positive integer counts with onset count no greater than pulse count; distinct integer onsets; uniform pulse grid; rotation declared separately."
+        ],
+        "limits": "Gap balance is the stated local criterion, not a cultural identity, full musical evenness theorem, accent pattern or performed timing result."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Construct every unrotated onset using the floor rule.",
+          "expected_answer": "Use each event index rather than repeatedly rounding a running sum; the fixed starts are listed above.",
+          "decision": null
+        },
+        "2": {
+          "question": "Apply the declared rotation without changing event count.",
+          "expected_answer": "Add the rotation modulo the cycle to every start and sort the resulting distinct anchored positions.",
+          "decision": null
+        },
+        "3": {
+          "question": "Compute all cyclic gaps, including the final wrap.",
+          "expected_answer": "The gaps sum to the pulse count and satisfy the displayed maximum-minus-minimum criterion in the main case.",
+          "decision": null
+        },
+        "4": {
+          "question": "Why does the clustered control fail?",
+          "expected_answer": "Its wrap gap is much larger than its adjacent gaps despite identical cycle and event counts.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies a count-only rhythm-preservation claim?",
+          "expected_answer": "Equal event counts with unequal cyclic gap patterns show that cardinality alone cannot reconstruct the spacing.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Use each event index rather than repeatedly rounding a running sum; the fixed starts are listed above.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Add the rotation modulo the cycle to every start and sort the resulting distinct anchored positions.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: The gaps sum to the pulse count and satisfy the displayed maximum-minus-minimum criterion in the main case.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Its wrap gap is much larger than its adjacent gaps despite identical cycle and event counts.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive the exercise result, retain its input convention and explain its boundary: Equal event counts with unequal cyclic gap patterns show that cardinality alone cannot reconstruct the spacing.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw both onset circles before assistance. Draft a GA practice instruction retaining generator rule, rotation and cyclic gaps without assigning a tradition.",
+        "direct_manual_baseline": "Before assistance, derive both fixed cases by hand under: base[i]=floor(i*N/K) for i=0..K-1 in floor_lattice, else supplied_onsets; rotated=sorted((base+rotation)%N); gaps=cyclic differences including wrap; balanced=max(gaps)-min(gaps)<=1",
+        "falsifier": "Equal event counts with unequal cyclic gap patterns show that cardinality alone cannot reconstruct the spacing.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    }
+  ]
+}

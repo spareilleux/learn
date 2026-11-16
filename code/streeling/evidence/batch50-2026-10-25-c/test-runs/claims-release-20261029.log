@@ -1,0 +1,255 @@
+test_AUD022 (test_unit_a.UnitA.test_AUD022) ... 
+OBSERVATION {"code": "AUD022", "case": "model", "observed": {"full": [1, 2.5, 1.25, 0.5], "emitted": [1, 2.5, 1.25, 0.5], "lost": [], "complete": true, "phases": ["input", "input", "flush", "flush"], "final_history": [0, 0], "pending_flush_frames": 0}, "expected": {"full": [1, 2.5, 1.25, 0.5], "emitted": [1, 2.5, 1.25, 0.5], "lost": [], "complete": true, "phases": ["input", "input", "flush", "flush"], "final_history": [0, 0], "pending_flush_frames": 0}, "scope": "Causal finite real convolution, zero history, bounded input/flush schedule; no streaming engine or export."}
+
+OBSERVATION {"code": "AUD022", "case": "negative", "observed": {"full": [1, 2.5, 1.25, 0.5], "emitted": [1, 2.5], "lost": [1.25, 0.5], "complete": false, "phases": ["input", "input"], "final_history": [2, 1], "pending_flush_frames": 2}, "expected": {"full": [1, 2.5, 1.25, 0.5], "emitted": [1, 2.5], "lost": [1.25, 0.5], "complete": false, "phases": ["input", "input"], "final_history": [2, 1], "pending_flush_frames": 2}, "scope": "Causal finite real convolution, zero history, bounded input/flush schedule; no streaming engine or export."}
+ok
+test_AUD023 (test_unit_a.UnitA.test_AUD023) ... 
+OBSERVATION {"code": "AUD023", "case": "model", "observed": {"H_real": 0.8, "H_imag": -0.6, "magnitude": 1.0, "identity": false}, "expected": {"H_real": 0.8, "H_imag": -0.6, "magnitude": 1, "identity": false}, "scope": "Stable real first-order steady complex response at one frequency; no transient or audibility claim."}
+
+OBSERVATION {"code": "AUD023", "case": "negative", "observed": {"H_real": 1.6, "H_imag": -1.2, "magnitude": 2.0, "identity": false}, "expected": {"H_real": 1.6, "H_imag": -1.2, "magnitude": 2, "identity": false}, "scope": "Stable real first-order steady complex response at one frequency; no transient or audibility claim."}
+ok
+test_AUD024 (test_unit_a.UnitA.test_AUD024) ... 
+OBSERVATION {"code": "AUD024", "case": "model", "observed": {"analog_rad_s": 15.999999999999998, "achieved_hz": 2.0, "error_hz": 0.0}, "expected": {"analog_rad_s": 16, "achieved_hz": 2, "error_hz": 0}, "scope": "Bilinear frequency map with factor 2*fs and principal atan; one target below Nyquist, no coefficients generated."}
+
+OBSERVATION {"code": "AUD024", "case": "negative", "observed": {"analog_rad_s": 12.566370614359172, "achieved_hz": 1.6953789327654465, "error_hz": -0.3046210672345535}, "expected": {"analog_rad_s": 12.566370614359172, "achieved_hz": 1.6953789327654465, "error_hz": -0.3046210672345535}, "scope": "Bilinear frequency map with factor 2*fs and principal atan; one target below Nyquist, no coefficients generated."}
+ok
+test_AUD025 (test_unit_a.UnitA.test_AUD025) ... 
+OBSERVATION {"code": "AUD025", "case": "model", "observed": {"encoded": [0, 0, 0, 0], "decoded": [0.375, 0.125, -0.125, -0.375], "errors": [0.375, 0.125, -0.125, -0.375], "mean": 0.0, "mse": 0.078125}, "expected": {"encoded": [0, 0, 0, 0], "decoded": [0.375, 0.125, -0.125, -0.375], "errors": [0.375, 0.125, -0.125, -0.375], "mean": 0, "mse": 0.078125}, "scope": "Unbounded unit quantizer, floor(v+0.5), fixed deterministic ensemble; no stochastic independence or audio export."}
+
+OBSERVATION {"code": "AUD025", "case": "negative", "observed": {"encoded": [0, 0, 0, 1], "decoded": [0, 0, 0, 1], "errors": [-0.25, -0.25, -0.25, 0.75], "mean": 0.0, "mse": 0.1875}, "expected": {"encoded": [0, 0, 0, 1], "decoded": [0, 0, 0, 1], "errors": [-0.25, -0.25, -0.25, 0.75], "mean": 0, "mse": 0.1875}, "scope": "Unbounded unit quantizer, floor(v+0.5), fixed deterministic ensemble; no stochastic independence or audio export."}
+ok
+test_GAS021 (test_unit_a.UnitA.test_GAS021) ... 
+OBSERVATION {"code": "GAS021", "case": "model", "observed": {"modal_mass": 3.0, "mass_normalized_amplitude": 0.8660254037844386, "energy": 5.999999999999999, "reported_energy": 6.0}, "expected": {"modal_mass": 3, "mass_normalized_amplitude": 0.8660254037844386, "energy": 6, "reported_energy": 6}, "scope": "Uniform ideal integer sine mode, peak normalization and turning-point mechanical energy in SI units."}
+
+OBSERVATION {"code": "GAS021", "case": "negative", "observed": {"modal_mass": 3.0, "mass_normalized_amplitude": 0.8660254037844386, "energy": 5.999999999999999, "reported_energy": 12.0}, "expected": {"modal_mass": 3, "mass_normalized_amplitude": 0.8660254037844386, "energy": 6, "reported_energy": 12}, "scope": "Uniform ideal integer sine mode, peak normalization and turning-point mechanical energy in SI units."}
+ok
+test_GAS022 (test_unit_a.UnitA.test_GAS022) ... 
+OBSERVATION {"code": "GAS022", "case": "model", "observed": {"frequency_ratio": 0.49999999999999994}, "expected": {"frequency_ratio": 0.5}, "scope": "Same sound speed and compact small-motion Helmholtz cavity; positive dimensionless ratios and effective neck length."}
+
+OBSERVATION {"code": "GAS022", "case": "negative", "observed": {"frequency_ratio": 0.7071067811865475}, "expected": {"frequency_ratio": 0.7071067811865475}, "scope": "Same sound speed and compact small-motion Helmholtz cavity; positive dimensionless ratios and effective neck length."}
+ok
+test_GAS023 (test_unit_a.UnitA.test_GAS023) ... 
+OBSERVATION {"code": "GAS023", "case": "model", "observed": {"omega": 18, "phase_speed": 6.0, "group_speed": 12.0}, "expected": {"omega": 18, "phase_speed": 6, "group_speed": 12}, "scope": "Positive-k ideal power-law dispersion; local narrow-band derivative, no material or broadband pulse model."}
+
+OBSERVATION {"code": "GAS023", "case": "negative", "observed": {"omega": 6, "phase_speed": 2.0, "group_speed": 2.0}, "expected": {"omega": 6, "phase_speed": 2, "group_speed": 2}, "scope": "Positive-k ideal power-law dispersion; local narrow-band derivative, no material or broadband pulse model."}
+ok
+test_GAS024 (test_unit_a.UnitA.test_GAS024) ... 
+OBSERVATION {"code": "GAS024", "case": "model", "observed": {"lower": [6.39444872453601, 8.0, 6.39444872453601], "upper": [13.60555127546399, 12.0, 13.60555127546399], "gaps": [7.211102550927979, 4.0, 7.211102550927979], "minimum_gap": 4.0}, "expected": {"lower": [6.39444872453601, 8, 6.39444872453601], "upper": [13.60555127546399, 12, 13.60555127546399], "gaps": [7.211102550927978, 4, 7.211102550927978], "minimum_gap": 4}, "scope": "Positive real symmetric squared-frequency eigenvalues over supplied finite detunings, no damping or physical fit."}
+
+OBSERVATION {"code": "GAS024", "case": "negative", "observed": {"lower": [7.0, 10.0, 7.0], "upper": [13.0, 10.0, 13.0], "gaps": [6.0, 0.0, 6.0], "minimum_gap": 0.0}, "expected": {"lower": [7, 10, 7], "upper": [13, 10, 13], "gaps": [6, 0, 6], "minimum_gap": 0}, "scope": "Positive real symmetric squared-frequency eigenvalues over supplied finite detunings, no damping or physical fit."}
+ok
+test_GAS025 (test_unit_a.UnitA.test_GAS025) ... 
+OBSERVATION {"code": "GAS025", "case": "model", "observed": {"complex_power": [0.0, -1.0], "active": 0.0, "reactive": -1.0}, "expected": {"complex_power": [0, -1], "active": 0, "reactive": -1}, "scope": "Same-port pressure and volume velocity, peak exp(j*omega*t) phasors, flow into port; no intensity field."}
+
+OBSERVATION {"code": "GAS025", "case": "negative", "observed": {"complex_power": [1.0, 0.0], "active": 1.0, "reactive": 0.0}, "expected": {"complex_power": [1, 0], "active": 1, "reactive": 0}, "scope": "Same-port pressure and volume velocity, peak exp(j*omega*t) phasors, flow into port; no intensity field."}
+ok
+test_GTR021 (test_unit_a.UnitA.test_GTR021) ... 
+OBSERVATION {"code": "GTR021", "case": "model", "observed": {"intervals": [[-1, 7], [8, 11]], "gap": 1, "clear": true}, "expected": {"intervals": [[-1, 7], [8, 11]], "gap": 1, "clear": true}, "scope": "Two independent lateral swept intervals in one slice and common length units; touching is not clear."}
+
+OBSERVATION {"code": "GTR021", "case": "negative", "observed": {"intervals": [[-1, 9], [8, 11]], "gap": -1, "clear": false}, "expected": {"intervals": [[-1, 9], [8, 11]], "gap": -1, "clear": false}, "scope": "Two independent lateral swept intervals in one slice and common length units; touching is not clear."}
+ok
+test_GTR022 (test_unit_a.UnitA.test_GTR022) ... 
+OBSERVATION {"code": "GTR022", "case": "model", "observed": {"positions": [300.0, 350.0], "slope": 5.0}, "expected": {"positions": [300, 350], "slope": 5}, "scope": "Two parallel ideal string axes, per-string nut/scale and equal temperament; no compensation or manufactured fret."}
+
+OBSERVATION {"code": "GTR022", "case": "negative", "observed": {"positions": [300.0, 320.0], "slope": 2.0}, "expected": {"positions": [300, 320], "slope": 2}, "scope": "Two parallel ideal string axes, per-string nut/scale and equal temperament; no compensation or manufactured fret."}
+ok
+test_GTR023 (test_unit_a.UnitA.test_GTR023) ... 
+OBSERVATION {"code": "GTR023", "case": "model", "observed": {"intercept": 3.0, "slope": 1.0, "residuals": [0.0, 0.0, 0.0], "fits": true}, "expected": {"intercept": 3, "slope": 1, "residuals": [0, 0, 0], "fits": true}, "scope": "Unweighted physical-length least squares for a rigid affine bar; maximum residual policy, no pitch optimization."}
+
+OBSERVATION {"code": "GTR023", "case": "negative", "observed": {"intercept": 2.8333333333333335, "slope": 1.5, "residuals": [0.16666666666666666, -0.3333333333333333, 0.16666666666666666], "fits": false}, "expected": {"intercept": 2.8333333333333335, "slope": 1.5, "residuals": [0.16666666666666666, -0.3333333333333333, 0.16666666666666666], "fits": false}, "scope": "Unweighted physical-length least squares for a rigid affine bar; maximum residual policy, no pitch optimization."}
+ok
+test_GTR024 (test_unit_a.UnitA.test_GTR024) ... 
+OBSERVATION {"code": "GTR024", "case": "model", "observed": {"ready": [true, true, true], "violations": []}, "expected": {"ready": [true, true, true], "violations": []}, "scope": "Sorted stipulated finger deadlines, equality allowed; held support validated separately and not a recovery resource."}
+
+OBSERVATION {"code": "GTR024", "case": "negative", "observed": {"ready": [true, true, false], "violations": [2]}, "expected": {"ready": [true, true, false], "violations": [2]}, "scope": "Sorted stipulated finger deadlines, equality allowed; held support validated separately and not a recovery resource."}
+ok
+test_GTR025 (test_unit_a.UnitA.test_GTR025) ... 
+OBSERVATION {"code": "GTR025", "case": "model", "observed": {"join_ab": [2, 3, 4], "join_abc": [2, 3, 4], "commutative": true, "associative": true, "idempotent": true, "alternate_join": [2, 3, 2], "aggregate_distinguishes": true}, "expected": {"join_ab": [2, 3, 4], "join_abc": [2, 3, 4], "commutative": true, "associative": true, "idempotent": true, "alternate_join": [2, 3, 2], "aggregate_distinguishes": true}, "scope": "Equal nonnegative integer stop maps, component maximum and retained device distinction; no physical capo fit."}
+
+OBSERVATION {"code": "GTR025", "case": "negative", "observed": {"join_ab": [2, 3, 4], "join_abc": [2, 3, 4], "commutative": true, "associative": true, "idempotent": true, "alternate_join": [2, 3, 4], "aggregate_distinguishes": false}, "expected": {"join_ab": [2, 3, 4], "join_abc": [2, 3, 4], "commutative": true, "associative": true, "idempotent": true, "alternate_join": [2, 3, 4], "aggregate_distinguishes": false}, "scope": "Equal nonnegative integer stop maps, component maximum and retained device distinction; no physical capo fit."}
+ok
+test_WML020 (test_unit_a.UnitA.test_WML020) ... 
+OBSERVATION {"code": "WML020", "case": "model", "observed": {"occupancy": [1, 1, 1, 1], "collisions": [], "gaps": [], "exclusive_complete": true}, "expected": {"occupancy": [1, 1, 1, 1], "collisions": [], "gaps": [], "exclusive_complete": true}, "scope": "Unique integer onsets per voice on a finite grid; exactly one voice at every declared slot, no duration/cultural claim."}
+
+OBSERVATION {"code": "WML020", "case": "negative", "observed": {"occupancy": [1, 0, 2, 1], "collisions": [2], "gaps": [1], "exclusive_complete": false}, "expected": {"occupancy": [1, 0, 2, 1], "collisions": [2], "gaps": [1], "exclusive_complete": false}, "scope": "Unique integer onsets per voice on a finite grid; exactly one voice at every declared slot, no duration/cultural claim."}
+ok
+test_WML021 (test_unit_a.UnitA.test_WML021) ... 
+OBSERVATION {"code": "WML021", "case": "model", "observed": {"common": [[300, 3, 2]]}, "expected": {"common": [[300, 3, 2]]}, "scope": "Two positive integer fundamentals, exact harmonic inventory intersection at bounded indices, no near matches."}
+
+OBSERVATION {"code": "WML021", "case": "negative", "observed": {"common": []}, "expected": {"common": []}, "scope": "Two positive integer fundamentals, exact harmonic inventory intersection at bounded indices, no near matches."}
+ok
+test_WML022 (test_unit_a.UnitA.test_WML022) ... 
+OBSERVATION {"code": "WML022", "case": "model", "observed": {"shifts": [2], "unique": true}, "expected": {"shifts": [2], "unique": true}, "scope": "Equal nonempty exact directed label cycles; all shifts target[i]=source[(i+s)%N], no accent/timing equivalence."}
+
+OBSERVATION {"code": "WML022", "case": "negative", "observed": {"shifts": [0, 2], "unique": false}, "expected": {"shifts": [0, 2], "unique": false}, "scope": "Equal nonempty exact directed label cycles; all shifts target[i]=source[(i+s)%N], no accent/timing equivalence."}
+ok
+test_WML023 (test_unit_a.UnitA.test_WML023) ... 
+OBSERVATION {"code": "WML023", "case": "model", "observed": {"witness": [0, 2, 4], "consumed": 3, "accepted": true}, "expected": {"witness": [0, 2, 4], "consumed": 3, "accepted": true}, "scope": "Finite ordered-subsequence scan, extra events ignored and repeated landmarks consume distinct events; no style claim."}
+
+OBSERVATION {"code": "WML023", "case": "negative", "observed": {"witness": [4], "consumed": 1, "accepted": false}, "expected": {"witness": [4], "consumed": 1, "accepted": false}, "scope": "Finite ordered-subsequence scan, extra events ignored and repeated landmarks consume distinct events; no style claim."}
+ok
+test_cog021 (test_unit_b.UnitB.test_cog021) ... 
+OBSERVATION {"case": "model", "code": "COG021", "expected": {"best_indices": [1], "information": [0.25, 0.419974341614], "probabilities": [0.5, 0.119202922022]}, "observed": {"best_indices": [1], "information": [0.25, 0.419974341614], "probabilities": [0.5, 0.119202922022]}, "scope": "Stipulated one-dimensional Bernoulli logistic item curves, fixed ability and no guessing; no fitted learner result."}
+
+OBSERVATION {"case": "negative", "code": "COG021", "expected": {"best_indices": [0], "information": [0.196611933241, 0.070650824853], "probabilities": [0.26894142137, 0.017986209962]}, "observed": {"best_indices": [0], "information": [0.196611933241, 0.070650824853], "probabilities": [0.26894142137, 0.017986209962]}, "scope": "Stipulated one-dimensional Bernoulli logistic item curves, fixed ability and no guessing; no fitted learner result."}
+ok
+test_cog022 (test_unit_b.UnitB.test_cog022) ... 
+OBSERVATION {"case": "model", "code": "COG022", "expected": {"fit": [0.2, 0.5, 0.5, 0.9], "weighted_squared_error": 0.12}, "observed": {"fit": [0.2, 0.5, 0.5, 0.9], "weighted_squared_error": 0.12}, "scope": "Four ordered training frequencies with positive case weights, weighted nondecreasing least squares; no held-out calibration."}
+
+OBSERVATION {"case": "negative", "code": "COG022", "expected": {"fit": [0.2, 0.7, 0.7, 0.9], "weighted_squared_error": 0.12}, "observed": {"fit": [0.2, 0.7, 0.7, 0.9], "weighted_squared_error": 0.12}, "scope": "Four ordered training frequencies with positive case weights, weighted nondecreasing least squares; no held-out calibration."}
+ok
+test_cog023 (test_unit_b.UnitB.test_cog023) ... 
+OBSERVATION {"case": "model", "code": "COG023", "expected": {"fused": 9, "independence_weight_variance": 1.28, "variance": 0.875, "weights": [1.25, -0.25]}, "observed": {"fused": 9, "independence_weight_variance": 1.28, "variance": 0.875, "weights": [1.25, -0.25]}, "scope": "Two unbiased scalar estimates, known positive-definite covariance and unconstrained weights summing to one; no measured perception."}
+
+OBSERVATION {"case": "negative", "code": "COG023", "expected": {"fused": 10.8, "independence_weight_variance": 0.8, "variance": 0.8, "weights": [0.8, 0.2]}, "observed": {"fused": 10.8, "independence_weight_variance": 0.8, "variance": 0.8, "weights": [0.8, 0.2]}, "scope": "Two unbiased scalar estimates, known positive-definite covariance and unconstrained weights summing to one; no measured perception."}
+ok
+test_cyb021 (test_unit_b.UnitB.test_cyb021) ... 
+OBSERVATION {"case": "model", "code": "CYB021", "expected": {"feasible_sequences": [[1, 0, 0]], "final_state": [2, 1], "minimum_energy": 1, "optimal_controls": [[1, 0, 0]], "rank": 2, "reachability_matrix": [[2, 1, 0], [1, 1, 1]]}, "observed": {"feasible_sequences": [[1, 0, 0]], "final_state": [2, 1], "minimum_energy": 1, "optimal_controls": [[1, 0, 0]], "rank": 2, "reachability_matrix": [[2, 1, 0], [1, 1, 1]]}, "scope": "Exact two-dimensional discrete recurrence, finite horizon and bounded finite action alphabet; energy is squared commands."}
+
+OBSERVATION {"case": "negative", "code": "CYB021", "expected": {"feasible_sequences": [], "final_state": null, "minimum_energy": null, "optimal_controls": [], "rank": 2, "reachability_matrix": [[1, 0], [1, 1]]}, "observed": {"feasible_sequences": [], "final_state": null, "minimum_energy": null, "optimal_controls": [], "rank": 2, "reachability_matrix": [[1, 0], [1, 1]]}, "scope": "Exact two-dimensional discrete recurrence, finite horizon and bounded finite action alphabet; energy is squared commands."}
+ok
+test_cyb022 (test_unit_b.UnitB.test_cyb022) ... 
+OBSERVATION {"case": "model", "code": "CYB022", "expected": {"action": 1, "feasible": true, "feasible_interval": [-2, 1], "next_state": 1, "squared_change": 4}, "observed": {"action": 1, "feasible": true, "feasible_interval": [-2, 1], "next_state": 1, "squared_change": 4}, "scope": "Scalar exact next-state equation and one actuator interval; no disturbance or physical safety certification."}
+
+OBSERVATION {"case": "negative", "code": "CYB022", "expected": {"action": null, "feasible": false, "feasible_interval": null, "next_state": null, "squared_change": null}, "observed": {"action": null, "feasible": false, "feasible_interval": null, "next_state": null, "squared_change": null}, "scope": "Scalar exact next-state equation and one actuator interval; no disturbance or physical safety certification."}
+ok
+test_cyb023 (test_unit_b.UnitB.test_cyb023) ... 
+OBSERVATION {"case": "model", "code": "CYB023", "expected": {"determinant": 3, "gram": [[2, 1], [1, 2]], "rank": 2, "rhs": [7, 8], "unique_parameters": [2, 3]}, "observed": {"determinant": 3, "gram": [[2, 1], [1, 2]], "rank": 2, "rhs": [7, 8], "unique_parameters": [2, 3]}, "scope": "Finite exact two-column design and normal equations; rank is not an infinite persistent-excitation guarantee."}
+
+OBSERVATION {"case": "negative", "code": "CYB023", "expected": {"determinant": 0, "gram": [[14, 14], [14, 14]], "rank": 1, "rhs": [70, 70], "unique_parameters": null}, "observed": {"determinant": 0, "gram": [[14, 14], [14, 14]], "rank": 1, "rhs": [70, 70], "unique_parameters": null}, "scope": "Finite exact two-column design and normal equations; rank is not an infinite persistent-excitation guarantee."}
+ok
+test_inf022 (test_unit_b.UnitB.test_inf022) ... 
+OBSERVATION {"case": "model", "code": "INF022", "expected": {"normalizer": "1/2", "posterior": ["4/5", "1/5"], "total_variation": "3/10", "unnormalized": ["2/5", "1/10"]}, "observed": {"normalizer": "1/2", "posterior": ["4/5", "1/5"], "total_variation": "3/10", "unnormalized": ["2/5", "1/10"]}, "scope": "Complete finite prior/likelihood vectors and positive marginal; total variation measures movement, not truth."}
+
+OBSERVATION {"case": "negative", "code": "INF022", "expected": {"normalizer": "2/5", "posterior": ["1/2", "1/2"], "total_variation": "0", "unnormalized": ["1/5", "1/5"]}, "observed": {"normalizer": "2/5", "posterior": ["1/2", "1/2"], "total_variation": "0", "unnormalized": ["1/5", "1/5"]}, "scope": "Complete finite prior/likelihood vectors and positive marginal; total variation measures movement, not truth."}
+ok
+test_inf023 (test_unit_b.UnitB.test_inf023) ... 
+OBSERVATION {"case": "model", "code": "INF023", "expected": {"missing_per_block": [1, 1, 1], "missing_total": 3, "reconstructed": [[null, "B", "C"], [null, "E", "F"], [null, "H", "I"]], "wire": ["A", "D", "G", "B", "E", "H", "C", "F", "I"]}, "observed": {"missing_per_block": [1, 1, 1], "missing_total": 3, "reconstructed": [[null, "B", "C"], [null, "E", "F"], [null, "H", "I"]], "wire": ["A", "D", "G", "B", "E", "H", "C", "F", "I"]}, "scope": "Rectangular position permutation and known erasure indices; no redundancy, symbol recovery or measured audio quality."}
+
+OBSERVATION {"case": "negative", "code": "INF023", "expected": {"missing_per_block": [3, 0, 0], "missing_total": 3, "reconstructed": [[null, null, null], ["D", "E", "F"], ["G", "H", "I"]], "wire": ["A", "B", "C", "D", "E", "F", "G", "H", "I"]}, "observed": {"missing_per_block": [3, 0, 0], "missing_total": 3, "reconstructed": [[null, null, null], ["D", "E", "F"], ["G", "H", "I"]], "wire": ["A", "B", "C", "D", "E", "F", "G", "H", "I"]}, "scope": "Rectangular position permutation and known erasure indices; no redundancy, symbol recovery or measured audio quality."}
+ok
+test_inf024 (test_unit_b.UnitB.test_inf024) ... 
+OBSERVATION {"case": "model", "code": "INF024", "expected": {"decoded": "ABA", "intervals": [["0", "1/4"], ["1/16", "1/4"], ["1/16", "7/64"]], "tag_inside": true, "width": "3/64"}, "observed": {"decoded": "ABA", "intervals": [["0", "1/4"], ["1/16", "1/4"], ["1/16", "7/64"]], "tag_inside": true, "width": "3/64"}, "scope": "Exact rational half-open interval coding with declared single-character alphabet, frequencies and message length; no bitstream implementation."}
+
+OBSERVATION {"case": "negative", "code": "INF024", "expected": {"decoded": "ABB", "intervals": [["0", "1/4"], ["1/16", "1/4"], ["7/64", "1/4"]], "tag_inside": true, "width": "9/64"}, "observed": {"decoded": "ABB", "intervals": [["0", "1/4"], ["1/16", "1/4"], ["7/64", "1/4"]], "tag_inside": true, "width": "9/64"}, "scope": "Exact rational half-open interval coding with declared single-character alphabet, frequencies and message length; no bitstream implementation."}
+ok
+test_net019 (test_unit_b.UnitB.test_net019) ... 
+OBSERVATION {"case": "model", "code": "NET019", "expected": {"minimum_cost": 6, "optimal_trees": [["AB", "BC", "CD"]]}, "observed": {"minimum_cost": 6, "optimal_trees": [["AB", "BC", "CD"]]}, "scope": "Connected simple undirected four-node graph and stipulated setup costs; minimum spanning trees do not provide failover."}
+
+OBSERVATION {"case": "negative", "code": "NET019", "expected": {"minimum_cost": 8, "optimal_trees": [["AB", "BC", "BD"]]}, "observed": {"minimum_cost": 8, "optimal_trees": [["AB", "BC", "BD"]]}, "scope": "Connected simple undirected four-node graph and stipulated setup costs; minimum spanning trees do not provide failover."}
+ok
+test_net020 (test_unit_b.UnitB.test_net020) ... 
+OBSERVATION {"case": "model", "code": "NET020", "expected": {"chromatic_number": 2, "colors": [0, 1, 0, 1]}, "observed": {"chromatic_number": 2, "colors": [0, 1, 0, 1]}, "scope": "Finite undirected conflict graph, exact color enumeration; slots are not workers and durations are absent."}
+
+OBSERVATION {"case": "negative", "code": "NET020", "expected": {"chromatic_number": 3, "colors": [0, 1, 2, 1]}, "observed": {"chromatic_number": 3, "colors": [0, 1, 2, 1]}, "scope": "Finite undirected conflict graph, exact color enumeration; slots are not workers and durations are absent."}
+ok
+test_net021 (test_unit_b.UnitB.test_net021) ... 
+OBSERVATION {"case": "model", "code": "NET021", "expected": {"consistent": true, "cycle_product": 1, "labels": [1, 1, -1]}, "observed": {"consistent": true, "cycle_product": 1, "labels": [1, 1, -1]}, "scope": "Three-node scalar-sign triangle with fixed root convention; no noncommuting spatial transformation claim."}
+
+OBSERVATION {"case": "negative", "code": "NET021", "expected": {"consistent": false, "cycle_product": -1, "labels": null}, "observed": {"consistent": false, "cycle_product": -1, "labels": null}, "scope": "Three-node scalar-sign triangle with fixed root convention; no noncommuting spatial transformation claim."}
+ok
+test_pm016 (test_unit_b.UnitB.test_pm016) ... 
+OBSERVATION {"case": "model", "code": "PM016", "expected": {"dominance_pairs": [["A", "C"], ["B", "C"], ["D", "C"]], "nondominated": ["A", "B", "D"]}, "observed": {"dominance_pairs": [["A", "C"], ["B", "C"], ["D", "C"]], "nondominated": ["A", "B", "D"]}, "scope": "Fictional comparable minimization coordinates, strict Pareto dominance; no unique preference or release decision."}
+
+OBSERVATION {"case": "negative", "code": "PM016", "expected": {"dominance_pairs": [["A", "C"], ["A", "D"], ["B", "C"], ["B", "D"], ["D", "C"]], "nondominated": ["A", "B"]}, "observed": {"dominance_pairs": [["A", "C"], ["A", "D"], ["B", "C"], ["B", "D"], ["D", "C"]], "nondominated": ["A", "B"]}, "scope": "Fictional comparable minimization coordinates, strict Pareto dominance; no unique preference or release decision."}
+ok
+test_pm017 (test_unit_b.UnitB.test_pm017) ... 
+OBSERVATION {"case": "model", "code": "PM017", "expected": {"allocation": [4, 2, 1], "floors": [3, 2, 1], "quotas": ["7/2", "21/10", "7/5"], "remainder_order": [0, 2, 1]}, "observed": {"allocation": [4, 2, 1], "floors": [3, 2, 1], "quotas": ["7/2", "21/10", "7/5"], "remainder_order": [0, 2, 1]}, "scope": "Indivisible fictional slots, exact nonnegative integer weights and lower-index tie rule; no universal fairness."}
+
+OBSERVATION {"case": "negative", "code": "PM017", "expected": {"allocation": [4, 2, 2], "floors": [4, 2, 1], "quotas": ["4", "12/5", "8/5"], "remainder_order": [2, 1, 0]}, "observed": {"allocation": [4, 2, 2], "floors": [4, 2, 1], "quotas": ["4", "12/5", "8/5"], "remainder_order": [2, 1, 0]}, "scope": "Indivisible fictional slots, exact nonnegative integer weights and lower-index tie rule; no universal fairness."}
+ok
+test_pm018 (test_unit_b.UnitB.test_pm018) ... 
+OBSERVATION {"case": "model", "code": "PM018", "expected": {"crossover_scores": ["22/5", "22/5"], "crossover_weight": "3/5", "crossover_winners": ["A", "B"], "scores": ["13/2", "3"], "winners": ["B"]}, "observed": {"crossover_scores": ["22/5", "22/5"], "crossover_weight": "3/5", "crossover_winners": ["A", "B"], "scores": ["13/2", "3"], "winners": ["B"]}, "scope": "Two comparable point-scale affine scores with unit-interval preference weight; no measured workflow recommendation."}
+
+OBSERVATION {"case": "negative", "code": "PM018", "expected": {"crossover_scores": ["22/5", "22/5"], "crossover_weight": "3/5", "crossover_winners": ["A", "B"], "scores": ["7/2", "5"], "winners": ["A"]}, "observed": {"crossover_scores": ["22/5", "22/5"], "crossover_weight": "3/5", "crossover_winners": ["A", "B"], "scores": ["7/2", "5"], "winners": ["A"]}, "scope": "Two comparable point-scale affine scores with unit-interval preference weight; no measured workflow recommendation."}
+ok
+test_pm019 (test_unit_b.UnitB.test_pm019) ... 
+OBSERVATION {"case": "model", "code": "PM019", "expected": {"candidate_variances": ["4/7", "1/2", "8/15", "5/8", "4/5", "7/6", "16/7"], "minimum_variance": "1/2", "optimal_allocations": [[2, 6]]}, "observed": {"candidate_variances": ["4/7", "1/2", "8/15", "5/8", "4/5", "7/6", "16/7"], "minimum_variance": "1/2", "optimal_allocations": [[2, 6]]}, "scope": "Two independent strata, known positive variances, with-replacement samples and positive integer splits of eight; no actual study."}
+
+OBSERVATION {"case": "negative", "code": "PM019", "expected": {"candidate_variances": ["16/7", "7/6", "4/5", "5/8", "8/15", "1/2", "4/7"], "minimum_variance": "1/2", "optimal_allocations": [[6, 2]]}, "observed": {"candidate_variances": ["16/7", "7/6", "4/5", "5/8", "8/15", "1/2", "4/7"], "minimum_variance": "1/2", "optimal_allocations": [[6, 2]]}, "scope": "Two independent strata, known positive variances, with-replacement samples and positive integer splits of eight; no actual study."}
+ok
+test_dv023 (test_unit_c.UnitC.test_dv023) ... 
+OBSERVATION {"case": "model", "code": "DV023", "expected": {"positions": [-1.3862943611198906, -0.6931471805599453, 0, 0.6931471805599453, 1.3862943611198906], "roundtrip": [-3, -1, 0, 1, 3]}, "observed": {"positions": [-1.3862943611198906, -0.6931471805599453, 0.0, 0.6931471805599453, 1.3862943611198906], "roundtrip": [-3.0, -1.0, 0.0, 1.0, 3.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "DV023", "expected": {"positions": [-0.6931471805599453, -0.28768207245178085, 0, 0.28768207245178085, 0.6931471805599453], "roundtrip": [-3, -1, 0, 1, 3]}, "observed": {"positions": [-0.6931471805599453, -0.2876820724517809, 0.0, 0.2876820724517809, 0.6931471805599453], "roundtrip": [-3.0, -0.9999999999999998, 0.0, 0.9999999999999998, 3.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+ok
+test_dv024 (test_unit_c.UnitC.test_dv024) ... 
+OBSERVATION {"case": "model", "code": "DV024", "expected": {"equal_last_layers": false, "equal_totals": true, "layers": [[2, 6], [5, 3]]}, "observed": {"equal_last_layers": false, "equal_totals": true, "layers": [[2.0, 6.0], [5.0, 3.0]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "DV024", "expected": {"equal_last_layers": true, "equal_totals": false, "layers": [[2, 6], [5, 6]]}, "observed": {"equal_last_layers": true, "equal_totals": false, "layers": [[2.0, 6.0], [5.0, 6.0]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+ok
+test_dv025 (test_unit_c.UnitC.test_dv025) ... 
+OBSERVATION {"case": "model", "code": "DV025", "expected": {"passes": false, "ratio": 4.2}, "observed": {"passes": false, "ratio": 4.2}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "DV025", "expected": {"passes": true, "ratio": 7}, "observed": {"passes": true, "ratio": 7.0}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+ok
+test_fut016 (test_unit_c.UnitC.test_fut016) ... 
+OBSERVATION {"case": "model", "code": "FUT016", "expected": {"crossings": [4, 2], "earliest": 2, "latest": 4, "paths": [[8, 10, 12.5, 15.625, 19.53125], [8, 12, 18, 27, 40.5]]}, "observed": {"crossings": [4, 2], "earliest": 2, "latest": 4, "paths": [[8.0, 10.0, 12.5, 15.625, 19.53125], [8.0, 12.0, 18.0, 27.0, 40.5]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "FUT016", "expected": {"crossings": [null, null], "earliest": null, "latest": null, "paths": [[8, 10, 12.5, 15.625, 19.53125], [8, 12, 18, 27, 40.5]]}, "observed": {"crossings": [null, null], "earliest": null, "latest": null, "paths": [[8.0, 10.0, 12.5, 15.625, 19.53125], [8.0, 12.0, 18.0, 27.0, 40.5]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+ok
+test_fut017 (test_unit_c.UnitC.test_fut017) ... 
+OBSERVATION {"case": "model", "code": "FUT017", "expected": {"average": 8.333333333333334, "exponent": -1, "total": 33.333333333333336, "unit_costs": [16, 8, 5.333333333333333, 4]}, "observed": {"average": 8.333333333333334, "exponent": -1.0, "total": 33.333333333333336, "unit_costs": [16.0, 8.0, 5.333333333333333, 4.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "FUT017", "expected": {"average": 16, "exponent": 0, "total": 64, "unit_costs": [16, 16, 16, 16]}, "observed": {"average": 16.0, "exponent": 0.0, "total": 64.0, "unit_costs": [16.0, 16.0, 16.0, 16.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+ok
+test_fut018 (test_unit_c.UnitC.test_fut018) ... 
+OBSERVATION {"case": "model", "code": "FUT018", "expected": {"chosen_reserve": 4, "exceedance": [0.2, 0.2, 0], "passing_reserves": [4]}, "observed": {"chosen_reserve": 4.0, "exceedance": [0.2, 0.2, 0.0], "passing_reserves": [4.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "FUT018", "expected": {"chosen_reserve": 0, "exceedance": [0.2, 0.2, 0], "passing_reserves": [0, 2, 4]}, "observed": {"chosen_reserve": 0.0, "exceedance": [0.2, 0.2, 0.0], "passing_reserves": [0.0, 2.0, 4.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+ok
+test_fut019 (test_unit_c.UnitC.test_fut019) ... 
+OBSERVATION {"case": "model", "code": "FUT019", "expected": {"loads": [11], "minimal_overloads": [["A", "B"]]}, "observed": {"loads": [11.0], "minimal_overloads": [["A", "B"]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "FUT019", "expected": {"loads": [11, 9, 9], "minimal_overloads": [["A", "B"], ["A", "C"], ["B", "C"]]}, "observed": {"loads": [11.0, 9.0, 9.0], "minimal_overloads": [["A", "B"], ["A", "C"], ["B", "C"]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+ok
+test_gaa020 (test_unit_c.UnitC.test_gaa020) ... 
+OBSERVATION {"case": "model", "code": "GAA020", "expected": {"best_radius": 3, "optimal_centres": [["A", "C"], ["A", "D"], ["B", "C"], ["B", "D"]]}, "observed": {"best_radius": 3.0, "optimal_centres": [["A", "C"], ["A", "D"], ["B", "C"], ["B", "D"]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "GAA020", "expected": {"best_radius": 5, "optimal_centres": [["C"]]}, "observed": {"best_radius": 5.0, "optimal_centres": [["C"]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+ok
+test_gaa021 (test_unit_c.UnitC.test_gaa021) ... 
+OBSERVATION {"case": "model", "code": "GAA021", "expected": {"distance": 1, "table": [[0, 1, 2, 3, 4], [1, 0, 1, 2, 3], [2, 1, 1, 1, 2], [3, 2, 2, 2, 1]]}, "observed": {"distance": 1, "table": [[0, 1, 2, 3, 4], [1, 0, 1, 2, 3], [2, 1, 1, 1, 2], [3, 2, 2, 2, 1]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "GAA021", "expected": {"distance": 2, "table": [[0, 1, 2, 3], [1, 1, 2, 2], [2, 2, 1, 2], [3, 2, 2, 2]]}, "observed": {"distance": 2, "table": [[0, 1, 2, 3], [1, 1, 2, 2], [2, 2, 1, 2], [3, 2, 2, 2]]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+ok
+test_gaa022 (test_unit_c.UnitC.test_gaa022) ... 
+OBSERVATION {"case": "model", "code": "GAA022", "expected": {"attempt_normalized": [0.25, 0.5, 0.25], "duration_ratio": 2, "errors": [0, 0, 0], "shape_L1": 0, "target_normalized": [0.25, 0.5, 0.25]}, "observed": {"attempt_normalized": [0.25, 0.5, 0.25], "duration_ratio": 2.0, "errors": [0.0, 0.0, 0.0], "shape_L1": 0.0, "target_normalized": [0.25, 0.5, 0.25]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "GAA022", "expected": {"attempt_normalized": [0.25, 0.375, 0.375], "duration_ratio": 2, "errors": [0, 0.125, 0.125], "shape_L1": 0.25, "target_normalized": [0.25, 0.5, 0.25]}, "observed": {"attempt_normalized": [0.25, 0.375, 0.375], "duration_ratio": 2.0, "errors": [0.0, 0.125, 0.125], "shape_L1": 0.25, "target_normalized": [0.25, 0.5, 0.25]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+ok
+test_phi016 (test_unit_c.UnitC.test_phi016) ... 
+OBSERVATION {"case": "model", "code": "PHI016", "expected": {"and": "F", "excluded_middle": "U", "not_p": "U", "or": "U"}, "observed": {"and": "F", "excluded_middle": "U", "not_p": "U", "or": "U"}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "PHI016", "expected": {"and": "U", "excluded_middle": "U", "not_p": "U", "or": "T"}, "observed": {"and": "U", "excluded_middle": "U", "not_p": "U", "or": "T"}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+ok
+test_phi017 (test_unit_c.UnitC.test_phi017) ... 
+OBSERVATION {"case": "model", "code": "PHI017", "expected": {"default_fired": true, "literals": ["asset", "usable"]}, "observed": {"default_fired": true, "literals": ["asset", "usable"]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "PHI017", "expected": {"default_fired": false, "literals": ["asset", "fragile", "not_usable"]}, "observed": {"default_fired": false, "literals": ["asset", "fragile", "not_usable"]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+ok
+test_phi018 (test_unit_c.UnitC.test_phi018) ... 
+OBSERVATION {"case": "model", "code": "PHI018", "expected": {"grounded": ["A", "C"], "iterations": [[], ["A"], ["A", "C"], ["A", "C"]], "out": ["B"], "undecided": []}, "observed": {"grounded": ["A", "C"], "iterations": [[], ["A"], ["A", "C"], ["A", "C"]], "out": ["B"], "undecided": []}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "PHI018", "expected": {"grounded": [], "iterations": [[], []], "out": [], "undecided": ["A", "B", "C"]}, "observed": {"grounded": [], "iterations": [[], []], "out": [], "undecided": ["A", "B", "C"]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+ok
+test_sem021 (test_unit_c.UnitC.test_sem021) ... 
+OBSERVATION {"case": "model", "code": "SEM021", "expected": {"coefficients": {"a*b": 2, "c": 1}, "evaluated_multiplicity": 2}, "observed": {"coefficients": {"a*b": 2, "c": 1}, "evaluated_multiplicity": 2}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "SEM021", "expected": {"coefficients": {"a*b": 1, "c": 1}, "evaluated_multiplicity": 1}, "observed": {"coefficients": {"a*b": 1, "c": 1}, "evaluated_multiplicity": 1}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+ok
+test_sem022 (test_unit_c.UnitC.test_sem022) ... 
+OBSERVATION {"case": "model", "code": "SEM022", "expected": {"copy_after": [[9, 2], [3]], "original_after": [[9, 2], [3]], "same_first_child": true, "same_outer": false}, "observed": {"copy_after": [[9, 2], [3]], "original_after": [[9, 2], [3]], "same_first_child": true, "same_outer": false}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "SEM022", "expected": {"copy_after": [[9, 2], [3]], "original_after": [[1, 2], [3]], "same_first_child": false, "same_outer": false}, "observed": {"copy_after": [[9, 2], [3]], "original_after": [[1, 2], [3]], "same_first_child": false, "same_outer": false}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+ok
+test_sem023 (test_unit_c.UnitC.test_sem023) ... 
+OBSERVATION {"case": "model", "code": "SEM023", "expected": {"displacement": [3, 4, 0], "p_world": [11, 0, 5], "q_world": [14, 4, 5], "translated_difference": [3, 4, 0]}, "observed": {"displacement": [3.0, 4.0, 0.0], "p_world": [11.0, 0.0, 5.0], "q_world": [14.0, 4.0, 5.0], "translated_difference": [3.0, 4.0, 0.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+
+OBSERVATION {"case": "negative", "code": "SEM023", "expected": {"displacement": [3, 4, 0], "p_world": [-4, 10, 1], "q_world": [-1, 14, 1], "translated_difference": [3, 4, 0]}, "observed": {"displacement": [3.0, 4.0, 0.0], "p_world": [-4.0, 10.0, 1.0], "q_world": [-1.0, 14.0, 1.0], "translated_difference": [3.0, 4.0, 0.0]}, "scope": "Authored finite model/control only; no scene, physical, musician, human, learner or production acceptance."}
+ok
+
+----------------------------------------------------------------------
+Ran 50 tests in 0.007s
+
+OK

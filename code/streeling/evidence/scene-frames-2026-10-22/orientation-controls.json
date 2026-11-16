@@ -1,0 +1,54 @@
+{
+  "scope": "Authored exact triangle/cross-product reasoning, native matrix determinants; not imported geometry, camera visibility, Godot winding test or host render.",
+  "local_triangle": [
+    [
+      1,
+      -1,
+      -1
+    ],
+    [
+      1,
+      1,
+      -1
+    ],
+    [
+      1,
+      -1,
+      1
+    ]
+  ],
+  "input_cross": [
+    4,
+    0,
+    0
+  ],
+  "reflection_x": {
+    "determinant": -1,
+    "transformed_vertex_cross": [
+      4,
+      0,
+      0
+    ],
+    "inverse_transpose_outward": [
+      -1,
+      0,
+      0
+    ],
+    "cross_after_swapping_last_indices": [
+      -4,
+      0,
+      0
+    ]
+  },
+  "reflection_xz": {
+    "determinant": 1
+  },
+  "yaw_180": {
+    "determinant": 1,
+    "meaning": "Rotation flips X and Z together; not one-axis reflection."
+  },
+  "zero_x": {
+    "determinant": 0,
+    "inverse_success": false
+  }
+}

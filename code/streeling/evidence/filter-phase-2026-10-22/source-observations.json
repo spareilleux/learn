@@ -1,0 +1,41 @@
+{
+  "scope": "Pinned source/test inspection only; no fresh Rust or C# test execution and no complete source-capability audit.",
+  "ga": {
+    "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+    "body_modes": 5,
+    "body_state_per_mode": [
+      "y1",
+      "y2"
+    ],
+    "body_input": "string_sum after active voice normalization",
+    "body_mix": [
+      0.55,
+      0.45
+    ],
+    "downstream": [
+      "reverb blend",
+      "soft knee",
+      "hard clamp"
+    ],
+    "physical_calibration_in_selected_body_constructor": false,
+    "SetClass_input": "GetSpectralPrimeForm().ToBinaryVector()",
+    "SetClass_magnitude": "complex coefficient Magnitude",
+    "SetClass_phase": "phase of same canonical input, not recovery of erased original transposition",
+    "SpectralPhaseAlignment_input": "actual chroma",
+    "SpectralPhaseAlignment_operation": "fa[k]*conj(fb[k]) and trial rotations",
+    "source_test_observations": [
+      "magnitude transposition invariance test",
+      "actual-chroma alignment major triads includes10",
+      "chirality comparison test"
+    ],
+    "tests_executed": false
+  },
+  "ix": {
+    "commit": "bd1336b7c4045e427dcdbe80b102790e45da5ce1",
+    "stft_returns": "complex spectra",
+    "spectrogram_returns": "magnitude or20log10(max(magnitude,1e-10))",
+    "scalar_spectrogram_preserves_complex_phase": false,
+    "all_overlapping_magnitude_phase_retrieval_impossible_claim": false
+  },
+  "new_DSL_or_adapter": null
+}

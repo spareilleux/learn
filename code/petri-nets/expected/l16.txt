@@ -1,0 +1,24 @@
+
+== E1: the admission net, read, written and read again ==
+places:      waiting tested capacity running done
+transitions: test admit finish
+initial:     waiting=2 tested=0 capacity=2 running=0 done=0
+arcs:        waiting->test, test->tested, tested->admit, capacity->admit x2, admit->running, running->finish, finish->done, finish->capacity x2
+enabled:     test
+states:      9
+dead:        waiting=0 tested=0 capacity=2 running=0 done=2  after test test admit finish admit finish
+bounds:      waiting<=2 tested<=2 capacity<=2 running<=1 done<=2
+capacity + 2*running = 2 in every state: yes
+after the round trip, same meaning: yes
+second write identical to the first: yes
+positions in the input: 9, in the output: 0
+
+== E2: the same net with the release forgotten ==
+states:      7
+dead:        waiting=0 tested=1 capacity=0 running=0 done=1  after test test admit finish
+bounds:      waiting<=2 tested<=2 capacity<=2 running<=1 done<=1
+
+== E3 and E4: files the reader must not accept as they are ==
+malformed-arc.pnml      refused: ArgumentException: Arc finish -> finished does not join a place and a transition. (Parameter 'arcs')
+malformed-marking.pnml  refused: FormatException: The input string 'two' was not in a correct format.
+inhibitor-arc.pnml      refused: NotSupportedException: Arc r-inhibits-admit is of type inhibitor; the P/T reader reads ordinary arcs only.

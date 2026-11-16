@@ -1,0 +1,27 @@
+# bash retest/recheck.sh 5.2.1 — Windows 11, Git Bash, Node v24.12.0, 2026-10-10; processor at 79 % when sampled after the runs
+node v24.12.0, MINGW64_NT-10.0-26300, slashforge 5.2.1
+tag v5.2.1 at 7e0e26a78bdfe7e9375a27a17b441d44280325ac
+npm package bin/ == tag bin/
+npm package templates/ == tag templates/
+dry run lists 133, install writes 133
+  written, not announced: 0
+  announced, not written: 0
+files per root: .agents 86  .claude 47  
+dry-run labels: 106 render, 15 copy, 12 write
+closing message names /slashforge-test or /slashforge-refactor: 0 lines
+status lists 8 Claude Code commands
+disable-model-invocation: 0 of 17 Claude Code files, 8 of 17 Cursor and Codex skills
+warnings on a --project install with a global one present: 2
+uninstall with no terminal: Refusing to uninstall without a terminal to confirm on. Re-run with --yes to remove the kit. (exit 1)
+left after uninstall --yes, from two files of mine: ./.claude/setup/slashforge/my-notes.md 
+frontmatter, folded-description: install exit 0
+frontmatter, fence-trailing-space: install exit 0
+  over 200: 210 .claude/commands/mine.md
+  over 200: 250 .claude/rules/api.md
+  over 500: 600 .claude/skills/big/SKILL.md
+step 9 exit 1
+node --test: exit 1, wall 90.0 s
+# tests 278 # pass 269 # fail 2 # skipped 7 
+not ok 30 - installPathFor matches what the installer actually does
+not ok 212 - a dangling symlink in the .agents guides root does not break the install
+slowest: 14016.62 setup verify step fails on oversized files for cursor and codex

@@ -1,0 +1,54 @@
+# l19, GA's main
+
+== The 15 candidates the tool pairs for each chord, on main, against the chord a textbook spells
+chord    exact   no fifth   more   part   other   exact in the index  first exact candidate
+C        15      0          0      0      0       63                  rank 1
+F        15      0          0      0      0       35                  rank 1
+Am       15      0          0      0      0       35                  rank 1
+G7       15      0          0      0      0       49                  rank 1
+Cmaj7    15      0          0      0      0       42                  rank 1
+Dm7      15      0          0      0      0       25                  rank 1
+G        15      0          0      0      0       35                  rank 1
+Em       15      0          0      0      0       63                  rank 1
+A7       15      0          0      0      0       35                  rank 1
+Fmaj7    15      0          0      0      0       60                  rank 1
+Bm7b5    15      0          0      0      0       25                  rank 1
+D        15      0          0      0      0       27                  rank 1
+A        15      0          0      0      0       21                  rank 1
+C7       15      0          0      0      0       49                  rank 1
+candidates 210: exact 210, no fifth 0, more 0, part 0, other 0
+
+== The tool's first pair for each prompt, on main, and the smoothest pair of exact voicings in the index
+prompt         first pair: from                           to                                   both right   smoothest exact pair in the index    least in pitch classes
+C → F          3: x-x-x-0-1-0 C/G, exact                  x-x-x-2-1-1 F/A, exact               5 of 5       3: x-x-x-0-1-0 → x-x-x-2-1-1         3
+C → Am         2: x-x-x-0-1-0 C/G, exact                  x-x-x-2-1-0 Am, exact                5 of 5       2: x-x-x-0-1-0 → x-x-x-2-1-0         2
+G7 → Cmaj7     3: x-x-0-0-0-1 G7/D, exact                 x-3-x-0-0-0 Cmaj7, exact             5 of 5       3: x-x-0-0-0-1 → x-3-x-0-0-0         3
+Dm7 → G7       3: x-x-0-2-1-1 Dm7, exact                  x-x-0-0-0-1 G7/D, exact              5 of 5       3: x-x-0-2-1-1 → x-x-0-0-0-1         3
+C → G          3: x-x-2-x-1-3 C/E, exact                  x-x-0-x-0-3 G/D, exact               5 of 5       3: x-x-2-x-1-3 → x-x-0-x-0-3         3
+Em → A7        4: x-x-2-0-0-3 Em, exact                   x-x-2-2-2-3 A7/E, exact              5 of 5       4: x-x-2-0-0-3 → x-x-2-2-2-3         4
+Fmaj7 → Bm7b5  3: x-x-2-2-1-1 Fmaj7/E, exact              x-x-0-2-0-1 Bm7b5/D, exact           5 of 5       3: x-x-2-2-1-1 → x-x-0-2-0-1         3
+D → A          3: x-x-x-2-3-2 D/A, exact                  x-x-x-2-2-0 A, exact                 5 of 5       3: x-x-x-2-3-2 → x-x-x-2-2-0         3
+C7 → F         4: x-x-2-3-1-3 C7/E, exact                 x-x-3-2-1-1 F, exact                 5 of 5       4: x-x-2-3-1-3 → x-x-3-2-1-1         4
+G7 → C         4: x-x-0-0-0-1 G7/D, exact                 x-x-2-0-1-0 C/E, exact               5 of 5       4: x-x-0-0-0-1 → x-x-2-0-1-0         4
+prompts 10: first pair right on both sides 10, moves more than the smoothest exact pair 0; that pair moves the least in pitch classes 10
+the first pair for C → F, as the tool returns it: diagram 0-1-0-x-x-x → 1-1-2-x-x-x
+
+== The first pair with 50 candidates per chord, the most the tool allows, on main
+prompt         distance   from         to           first pair
+C → F          3          exact        exact        x-x-x-0-1-0 C/G → x-x-x-2-1-1 F/A
+C → Am         2          exact        exact        x-x-x-0-1-0 C/G → x-x-x-2-1-0 Am
+G7 → Cmaj7     2          more         more         x-2-2-0-3-1 G7/B → x-2-2-0-1-1 Cmaj7/B
+Dm7 → G7       3          exact        exact        x-x-0-2-1-1 Dm7 → x-x-0-0-0-1 G7/D
+C → G          3          exact        exact        x-x-2-x-1-3 C/E → x-x-0-x-0-3 G/D
+Em → A7        4          exact        exact        x-x-2-0-0-3 Em → x-x-2-2-2-3 A7/E
+Fmaj7 → Bm7b5  3          exact        exact        x-x-2-2-1-1 Fmaj7/E → x-x-0-2-0-1 Bm7b5/D
+D → A          2          more         more         x-x-0-2-2-2 Dmaj7 → x-x-0-2-2-0 Aadd11/D
+C7 → F         4          exact        exact        x-x-2-3-1-3 C7/E → x-x-3-2-1-1 F
+G7 → C         4          exact        exact        x-x-0-0-0-1 G7/D → x-x-2-0-1-0 C/E
+prompts 10: first pair right on both sides 8
+
+== The tool's distance on every pair it weighs for the ten prompts, on main, against the least motion
+pairs of equal size 890: the distance is the least over every pairing 890
+pairs of unequal size 1360: the distance is the least over every choice of notes 340
+the largest gap, 39 semitones: x-x-2-x-0-3 Em [52 59 67] → 0-0-2-x-2-3 A7/E [40 45 52 61 67], distance 47, least 8
+prompts whose first pair would move less with the least over every choice of notes: 0 of 10

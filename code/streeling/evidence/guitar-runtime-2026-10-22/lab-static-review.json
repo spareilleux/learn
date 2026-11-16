@@ -1,0 +1,33 @@
+{
+  "reviewer": "Code Quality Reviewer",
+  "mode": "native static review",
+  "scope": [
+    "code/streeling/guitar-runtime/run.mjs",
+    "code/streeling/guitar-runtime/native.rs"
+  ],
+  "findings": [],
+  "conclusion": "No actionable quality or concrete correctness findings for the fixed pinned-input teaching experiment.",
+  "reviewedSHA256s": {
+    "code/streeling/guitar-runtime/run.mjs": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+    "code/streeling/guitar-runtime/native.rs": "8a6d911fb7d9333ed7b19222198bb383d7156ac7169e0b239409a156cc7b7c1d",
+    "code/streeling/guitar-runtime/vendor/lib.rs": "d693e1ea1a5ca42d080c5829336bcc8423396c104ebee64d2e76ccd9bb503562",
+    "code/streeling/guitar-runtime/README.md": "0f3a417b3d1bb36399b23b4fc2db29e5a288ccfe58c83184a945273bc5a2e0cb",
+    "code/streeling/guitar-runtime/source.json": "0b710e34f14dfec45726ae4f811a27a5c732dad70276890add5211d72ea7f338",
+    "code/streeling/evidence/guitar-runtime-2026-10-22/results.json": "d564b476e0fccaff1a435548b5ae795807337622fdff69fb19ce0ace0d320506",
+    "code/streeling/evidence/guitar-runtime-2026-10-22/execution.json": "1d64a71891cc91743cc872d964907ae2d1e9cb906275167dcf38ce382eaf39d4",
+    "code/streeling/evidence/guitar-runtime-2026-10-22/primary-measurement-replay.json": "5d35ca7d3b478a03636acb8895c4f1e1cbe00162e007efe6d05dd3f4c4c54202"
+  },
+  "checks": [
+    "Current runner/native/vendor hashes match execution.json; local vendor source and license hashes match source.json.",
+    "Native Box::from_raw matches the exact pinned Box::into_raw allocation, with no intervening free or owning reconstruction.",
+    "WASM instances are fresh per render, buffer allocation is block-sized, final render length never exceeds allocation, and Float32Array is reconstructed after each render.",
+    "PCM16 generation is guarded by finite normalized f32 checks; fixed reference SHA is checked and PCM16/IEEE-float32 branches are distinct.",
+    "RMS windows and absolute-reference error comparison match saved primary-measurement evidence; candidate gate correctly records false at improvement 0.11416614959438576 dB.",
+    "Raw native/WASM inequality is recorded separately from identical quantized PCM16 hashes; within-runtime fresh-prefix and partition assertions are present."
+  ],
+  "limitations": [
+    "Static code and saved evidence review only; no builds, execution, network, Git, session operations, or production changes.",
+    "No generic importer hardening recommendations beyond fixed SHA input.",
+    "Not formal ce-code-review, human approval, browser certification, performance certification, or listening assessment."
+  ]
+}

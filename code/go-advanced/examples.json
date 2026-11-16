@@ -1,0 +1,72 @@
+[
+  {
+    "lesson": "01-package-and-module-boundaries.md",
+    "command": "./cmd/l01",
+    "stdout": "sum 5\n"
+  },
+  {
+    "lesson": "02-memory-escape-and-gc.md",
+    "command": "./cmd/l02",
+    "stdout": "[9 2] [1 2]\n"
+  },
+  {
+    "lesson": "03-generics-and-iterators.md",
+    "command": "./cmd/l03",
+    "stdout": "[2 4 6]\n"
+  },
+  {
+    "lesson": "04-error-contracts-and-typed-nil.md",
+    "command": "./cmd/l04",
+    "stdout": "false true\ntrue name\n"
+  },
+  {
+    "lesson": "05-memory-model-sync-and-atomics.md",
+    "command": "./cmd/l05",
+    "stdout": "100\n"
+  },
+  {
+    "lesson": "06-bounded-pipelines.md",
+    "command": "./cmd/l06",
+    "stdout": "[1 4 9]\n"
+  },
+  {
+    "lesson": "07-cancellation-deadlines-and-shutdown.md",
+    "command": "./cmd/l07",
+    "stdout": "requested\n"
+  },
+  {
+    "lesson": "08-production-http.md",
+    "command": "./cmd/l08",
+    "stdout": "200\n{\"total\":5}\n"
+  },
+  {
+    "lesson": "09-streaming-and-framing.md",
+    "command": "./cmd/l09",
+    "stdout": "Go\n"
+  },
+  {
+    "lesson": "10-race-fuzz-and-property-tests.md",
+    "command": "./cmd/l10",
+    "stdout": "oG été\ntrue\n"
+  },
+  {
+    "lesson": "11-benchmarks-pprof-and-trace.md",
+    "command": "./cmd/l11",
+    "stdout": "6\n"
+  },
+  {
+    "lesson": "12-reflection-and-encoding.md",
+    "command": "./cmd/l12",
+    "stdout": "{\"name\":\"sum\",\"values\":[2,3]}\nsum 2\n"
+  },
+  {
+    "lesson": "13-dependencies-builds-and-security.md",
+    "command": "./cmd/l13",
+    "stdout": "example.com/learn/go-advanced\n"
+  },
+  {
+    "lesson": "14-service-capstone.md",
+    "command": "./cmd/l14",
+    "stdout": "200\n{\"total\":9}\n503\n"
+  }
+]

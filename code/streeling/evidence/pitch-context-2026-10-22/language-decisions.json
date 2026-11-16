@@ -1,0 +1,53 @@
+{
+  "scope": "Authored decision table for two declared spelling conventions, not implemented GA normalization or a claim about every speaker.",
+  "cases": [
+    {
+      "id": "en-b",
+      "convention": "english",
+      "token": "B",
+      "canonical": "B",
+      "pitch_class": 11,
+      "status": "resolved"
+    },
+    {
+      "id": "en-bb",
+      "convention": "english",
+      "token": "Bb",
+      "canonical": "Bb",
+      "pitch_class": 10,
+      "status": "resolved"
+    },
+    {
+      "id": "de-b",
+      "convention": "deutsch",
+      "token": "B",
+      "canonical": "Bb",
+      "pitch_class": 10,
+      "status": "resolved"
+    },
+    {
+      "id": "de-h",
+      "convention": "deutsch",
+      "token": "H",
+      "canonical": "B",
+      "pitch_class": 11,
+      "status": "resolved"
+    },
+    {
+      "id": "unknown-b",
+      "convention": null,
+      "token": "B",
+      "canonical": null,
+      "pitch_class": null,
+      "status": "needs-convention"
+    },
+    {
+      "id": "en-h",
+      "convention": "english",
+      "token": "H",
+      "canonical": null,
+      "pitch_class": null,
+      "status": "outside-declared-vocabulary"
+    }
+  ]
+}

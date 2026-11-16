@@ -1,0 +1,96 @@
+# l23
+
+== GrothendieckDeltaSkill's and IcvShortestPathSkill's example prompts and GA's other phrasings for them, at the pin
+prompt                                           skill   from          its answer       the other's      routing hints, +0.06 each
+how harmonically far is Am from D7               delta   anchor        declined         declined         skill.grothendieckdelta
+harmonic distance from Cmaj7 to G7               delta   anchor        Cmaj7 → G7       declined         skill.grothendieckdelta
+how far apart are Cmaj7 and Dm7 harmonically     delta   anchor        Cmaj7 → Dm7      declined         none
+harmonic cost to move from C to G                delta   anchor        C → G            declined         skill.transpose
+how different are C major and F major harmonically delta   anchor        declined         declined         none
+harmonic distance between Am and Em              delta   anchor        Am → Em          declined         skill.grothendieckdelta
+how close are Cmaj7 and Fmaj7 harmonically       delta   anchor        Cmaj7 → Fmaj7    declined         none
+L1 distance from Gmaj7 to Bm7b5                  delta   anchor        Gmaj7 → Bm7b5    declined         none
+Grothendieck delta from C to F                   delta   anchor        C → F            declined         skill.grothendieckdelta
+measure the harmonic gap between Dm7 and G7      delta   anchor        Dm7 → G7         declined         none
+shortest harmonic path from Cmaj7 to G7          path    anchor        Cmaj7 → G7       Cmaj7 → G7       skill.icvshortestpath
+shortest path from C major to F major            path    anchor        declined         declined         skill.icvshortestpath
+shortest harmonic route from Am to D7            path    anchor        Am → D7          Am → D7          skill.icvshortestpath
+shortest path from Cmaj7 to Bm7b5                path    anchor        Cmaj7 → Bm7b5    Cmaj7 → Bm7b5    skill.icvshortestpath
+step-by-step harmonic route from C to G          path    anchor        C → G            C → G            skill.icvshortestpath
+shortest chord path from Dm7 to Gmaj7            path    anchor        declined         Dm7 → Gmaj7      none
+shortest route from C to A minor                 path    anchor        C → A            C → A            skill.icvshortestpath
+harmonic stepping stones from Cmaj7 to Fmaj7     path    anchor        declined         Cmaj7 → Fmaj7    none
+shortest path from Gmaj7 to Em                   path    anchor        Gmaj7 → Em       Gmaj7 → Em       skill.icvshortestpath
+shortest harmonic path of chords from C to F     path    anchor        C → F            C → F            skill.icvshortestpath
+Harmonic distance from Cmaj7 to G7               delta   doc comment   Cmaj7 → G7       declined         skill.grothendieckdelta
+Grothendieck delta C to F                        delta   doc comment   C → F            declined         skill.grothendieckdelta
+How harmonically far is Am from D7               delta   doc comment   declined         declined         skill.grothendieckdelta
+Compare the ICVs of Cmaj7 and Dm7                delta   doc comment   Cmaj7 → Dm7      declined         none
+harmonic distance from Cmaj7 to G7               delta   refusal       Cmaj7 → G7       declined         skill.grothendieckdelta
+delta C to F                                     delta   refusal       C → F            declined         none
+Shortest harmonic path from Cmaj7 to G7          path    doc comment   Cmaj7 → G7       Cmaj7 → G7       skill.icvshortestpath
+Path from C major to F major                     path    doc comment   declined         declined         none
+How do I get from Am to D7 harmonically          path    doc comment   Am → D7          Am → D7          none
+shortest path from Cmaj7 to G7                   path    refusal       Cmaj7 → G7       Cmaj7 → G7       skill.icvshortestpath
+how do I get from C to F harmonically            path    refusal       C → F            C → F            none
+GrothendieckDeltaSkill: anchors 10, answered 8, hinted toward skill.grothendieckdelta 4; the other skill answers 0 of them; CanHandle accepts 0
+IcvShortestPathSkill: anchors 10, answered 7, hinted toward skill.icvshortestpath 8; the other skill answers 9 of them; CanHandle accepts 0
+
+== The chords the two skills read, at the pin
+chord tokens 36: built alike by IcvNeighborsSkill, GrothendieckDeltaSkill and IcvShortestPathSkill 36
+prompt                                     skill   read as      first built    second built   right
+harmonic distance from C major to F major  delta   declined     -              -              no
+harmonic distance from C to A minor        delta   C → A        C E G          C# E A         no
+harmonic distance from Cmaj7 to a G7       delta   Cmaj7 → a    C E G B        C# E A         no
+harmonic distance between CM7 and G7       delta   CM7 → G7     C D# G A#      D F G B        no
+harmonic distance from C° to C+            delta   C° → C       C D# F#        C E G          no
+shortest path from C major to F major      path    declined     -              -              no
+shortest route from C to A minor           path    C → A        C E G          C# E A         no
+shortest path from C to a G                path    C → a        C E G          C# E A         no
+shortest path from CM7 to G7               path    CM7 → G7     C D# G A#      D F G B        no
+
+== The deltas GrothendieckDeltaSkill gives, at the pin
+pair             first vector    second vector   L1     the skill's delta      L1   L2      cost   its interpretation
+Cmaj7 → G7       <1 0 1 2 2 0>   <0 1 2 1 1 1>   6      [-1, +1, +1, -1, -1, +1] 6    2.449   3.60   -1 ic1 (semitone), +1 ic2 (whole tone), +1 ic3 (minor 3rd), -1 ic4 (major 3rd), -1 ic5 (perfect 4th), +1 ic6 (tritone) â†’ more chromatic color
+G7 → Cmaj7       <0 1 2 1 1 1>   <1 0 1 2 2 0>   6      [+1, -1, -1, +1, +1, -1] 6    2.449   3.60   +1 ic1 (semitone), -1 ic2 (whole tone), -1 ic3 (minor 3rd), +1 ic4 (major 3rd), +1 ic5 (perfect 4th), -1 ic6 (tritone) â†’ more chromatic color
+Cmaj7 → Dm7      <1 0 1 2 2 0>   <0 1 2 1 2 0>   4      [-1, +1, +1, -1, 0, 0] 4    2.000   2.40   -1 ic1 (semitone), +1 ic2 (whole tone), +1 ic3 (minor 3rd), -1 ic4 (major 3rd) â†’ more chromatic color
+Dm7 → Cmaj7      <0 1 2 1 2 0>   <1 0 1 2 2 0>   4      [+1, -1, -1, +1, 0, 0] 4    2.000   2.40   +1 ic1 (semitone), -1 ic2 (whole tone), -1 ic3 (minor 3rd), +1 ic4 (major 3rd) â†’ more chromatic color
+C → G            <0 0 1 1 1 0>   <0 0 1 1 1 0>   0      [+1, 0, 0, 0, 0, 0]    1    1.000   0.60   +1 ic1 (semitone) â†’ more chromatic color
+G → C            <0 0 1 1 1 0>   <0 0 1 1 1 0>   0      [+1, 0, 0, 0, 0, 0]    1    1.000   0.60   +1 ic1 (semitone) â†’ more chromatic color
+Am → Em          <0 0 1 1 1 0>   <0 0 1 1 1 0>   0      [+1, 0, 0, 0, 0, 0]    1    1.000   0.60   +1 ic1 (semitone) â†’ more chromatic color
+Em → Am          <0 0 1 1 1 0>   <0 0 1 1 1 0>   0      [+1, 0, 0, 0, 0, 0]    1    1.000   0.60   +1 ic1 (semitone) â†’ more chromatic color
+Cmaj7 → Fmaj7    <1 0 1 2 2 0>   <1 0 1 2 2 0>   0      [+1, 0, 0, 0, 0, 0]    1    1.000   0.60   +1 ic1 (semitone) â†’ more chromatic color
+Fmaj7 → Cmaj7    <1 0 1 2 2 0>   <1 0 1 2 2 0>   0      [+1, 0, 0, 0, 0, 0]    1    1.000   0.60   +1 ic1 (semitone) â†’ more chromatic color
+Gmaj7 → Bm7b5    <1 0 1 2 2 0>   <0 1 2 1 1 1>   6      [-1, +1, +1, -1, -1, +1] 6    2.449   3.60   -1 ic1 (semitone), +1 ic2 (whole tone), +1 ic3 (minor 3rd), -1 ic4 (major 3rd), -1 ic5 (perfect 4th), +1 ic6 (tritone) â†’ more chromatic color
+Bm7b5 → Gmaj7    <0 1 2 1 1 1>   <1 0 1 2 2 0>   6      [+1, -1, -1, +1, +1, -1] 6    2.449   3.60   +1 ic1 (semitone), -1 ic2 (whole tone), -1 ic3 (minor 3rd), +1 ic4 (major 3rd), +1 ic5 (perfect 4th), -1 ic6 (tritone) â†’ more chromatic color
+C → F            <0 0 1 1 1 0>   <0 0 1 1 1 0>   0      [+1, 0, 0, 0, 0, 0]    1    1.000   0.60   +1 ic1 (semitone) â†’ more chromatic color
+F → C            <0 0 1 1 1 0>   <0 0 1 1 1 0>   0      [+1, 0, 0, 0, 0, 0]    1    1.000   0.60   +1 ic1 (semitone) â†’ more chromatic color
+Dm7 → G7         <0 1 2 1 2 0>   <0 1 2 1 1 1>   2      [0, 0, 0, 0, -1, +1]   2    1.414   1.20   -1 ic5 (perfect 4th), +1 ic6 (tritone) â†’ increased tension
+G7 → Dm7         <0 1 2 1 1 1>   <0 1 2 1 2 0>   2      [0, 0, 0, 0, +1, -1]   2    1.414   1.20   +1 ic5 (perfect 4th), -1 ic6 (tritone) â†’ more consonant
+C → C            <0 0 1 1 1 0>   <0 0 1 1 1 0>   0      [+1, 0, 0, 0, 0, 0]    1    1.000   0.60   +1 ic1 (semitone) â†’ more chromatic color
+Cmaj7 → Cmaj7    <1 0 1 2 2 0>   <1 0 1 2 2 0>   0      [+1, 0, 0, 0, 0, 0]    1    1.000   0.60   +1 ic1 (semitone) â†’ more chromatic color
+ordered pairs 36864: with the same vector 4320, answered L1 1 4320, delta [+1, 0, 0, 0, 0, 0] 4320; with different vectors 32544, L1 right 32544
+pairs with different vectors 16272: "more chromatic color" both ways 1440
+
+== The paths IcvShortestPathSkill finds, at the pin
+pair             notes   the answer says                        moves  L1 per move  common notes   same vector
+Cmaj7 → G7       4, 4    4 steps total (3 intermediate moves)   3      2,2,2        2,1,0          0
+Am → D7          3, 4    No path found within 5 steps           0      -            -              0
+Cmaj7 → Bm7b5    4, 4    4 steps total (3 intermediate moves)   3      2,2,2        2,1,0          0
+C → G            3, 3    2 steps total (1 intermediate move)    1      0            1              1
+C → A            3, 3    2 steps total (1 intermediate move)    1      0            1              1
+Gmaj7 → Em       4, 3    No path found within 5 steps           0      -            -              0
+C → F            3, 3    2 steps total (1 intermediate move)    1      0            1              1
+C → C            3, 3    1 step total (0 intermediate moves)    0      -            -              0
+C → Cm           3, 3    2 steps total (1 intermediate move)    1      0            2              1
+Cdim7 → Cmaj7    4, 4    No path found within 5 steps           0      -            -              0
+Caug → C         3, 3    No path found within 5 steps           0      -            -              0
+before "No path" for Am → D7: sets expanded 168 of the 220 of 3 notes, each a scan of the 4096 sets
+before "No path" for Gmaj7 → Em: sets expanded 462 of the 495 of 4 notes, each a scan of the 4096 sets
+before "No path" for Cdim7 → Cmaj7: sets expanded 3 of the 495 of 4 notes, each a scan of the 4096 sets
+before "No path" for Caug → C: sets expanded 4 of the 220 of 3 notes, each a scan of the 4096 sets
+the path for "shortest harmonic path from Cmaj7 to G7":
+  {0,4,7,11}   C E G B        4-20   <1 0 1 2 2 0>
+  {0,2,3,7}    C D D# G       4-14   <1 1 1 1 2 0>  L1 2, common notes 2
+  {0,1,4,6}    C C# E F#      4-Z15  <1 1 1 1 1 1>  L1 2, common notes 1
+  {2,5,7,11}   D F G B        4-27   <0 1 2 1 1 1>  L1 2, common notes 0

@@ -1,0 +1,107 @@
+{
+  "scope": "New analysis of hash-verified retained generated buffers; no new render, recorded reference, browser or listening trial.",
+  "node": "v24.12.0",
+  "base_learn_commit": "7eaa68f8d4d32e8d1b495a93775d18135e709811",
+  "encoder": "Math.round(sample * 32767), then signed int16 little-endian",
+  "accepted_input_domain": "finite decoded float32 within [-1,1]",
+  "real_arithmetic_half_step_bound": 0.000015259254737998596,
+  "possible_integer_codes_in_declared_encoder": 65535,
+  "most_negative_code_emitted": -32767,
+  "rows": [
+    {
+      "mode": "baseline",
+      "samples": 176400,
+      "native_sha256": "e924c20a4305783870ae6a373b46844c5431a25bad7ec80d76fc1569cdee8363",
+      "wasm_sha256": "f2a84abd90f7b812c045fc613694d749896f7b2eda5bd8ae73a167dc9ddc9491",
+      "raw_differing_samples": 2918,
+      "pcm16_differing_samples": 0,
+      "max_raw_difference": 2.9802322387695312e-8,
+      "max_native_reconstruction_error": 0.000015258982790783415,
+      "exact_committed_pcm16_payload_match": true,
+      "pcm16_payload_sha256": "a24121da0bde439bb553f35712cd6880cc9e8d1adf978f838bfeb76412ff42f8",
+      "examples": [
+        {
+          "zero_based_frame": 646,
+          "native": 0.000552888261154294,
+          "wasm": 0.0005528881447389722,
+          "native_f32le_hex": "b4ef103a",
+          "wasm_f32le_hex": "b2ef103a",
+          "native_pcm16": 18,
+          "wasm_pcm16": 18
+        },
+        {
+          "zero_based_frame": 689,
+          "native": 0.0016998229548335075,
+          "wasm": 0.0016998227220028639,
+          "native_f32le_hex": "98ccde3a",
+          "wasm_f32le_hex": "96ccde3a",
+          "native_pcm16": 56,
+          "wasm_pcm16": 56
+        },
+        {
+          "zero_based_frame": 786,
+          "native": -0.0010487496620044112,
+          "wasm": -0.0010487495455890894,
+          "native_f32le_hex": "337689ba",
+          "wasm_f32le_hex": "327689ba",
+          "native_pcm16": -34,
+          "wasm_pcm16": -34
+        }
+      ]
+    },
+    {
+      "mode": "candidate",
+      "samples": 176400,
+      "native_sha256": "62861da6e0d81a8524624bb69ec57094438529a65494402083a720968741d365",
+      "wasm_sha256": "f63e100ba95f0f3e3954eb26325a975c142b1c443ac604a679e4812d17caa83b",
+      "raw_differing_samples": 2926,
+      "pcm16_differing_samples": 0,
+      "max_raw_difference": 2.9802322387695312e-8,
+      "max_native_reconstruction_error": 0.00001525887933261083,
+      "exact_committed_pcm16_payload_match": true,
+      "pcm16_payload_sha256": "230a1d7956e9c8f81c5a0624ff8893477c90e61bb6cf806d466043c17003fb21",
+      "examples": [
+        {
+          "zero_based_frame": 690,
+          "native": 0.0016457438468933105,
+          "wasm": 0.001645743614062667,
+          "native_f32le_hex": "00b6d73a",
+          "wasm_f32le_hex": "feb5d73a",
+          "native_pcm16": 54,
+          "wasm_pcm16": 54
+        },
+        {
+          "zero_based_frame": 707,
+          "native": 0.0007097600027918816,
+          "wasm": 0.0007097598863765597,
+          "native_f32le_hex": "300f3a3a",
+          "wasm_f32le_hex": "2e0f3a3a",
+          "native_pcm16": 23,
+          "wasm_pcm16": 23
+        },
+        {
+          "zero_based_frame": 710,
+          "native": 0.0006366895395331085,
+          "wasm": 0.0006366894231177866,
+          "native_f32le_hex": "83e7263a",
+          "wasm_f32le_hex": "81e7263a",
+          "native_pcm16": 21,
+          "wasm_pcm16": 21
+        }
+      ]
+    }
+  ],
+  "toy": {
+    "label": "Constructed float32 pair, not a captured guitar sample",
+    "x": 0.25,
+    "y": 0.2500000298023224,
+    "qx": 8192,
+    "qy": 8192
+  },
+  "rounding_control": {
+    "positive_half": 1,
+    "negative_half_is_negative_zero": true,
+    "negative_one_and_half": -1
+  },
+  "interpretation": "Equal PCM16 payloads do not reconstruct unique float32 inputs or prove raw equality, auditory equivalence, or entropy in bits."
+}

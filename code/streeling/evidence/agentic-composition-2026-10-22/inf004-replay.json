@@ -1,0 +1,30 @@
+{
+  "scope": "Unchanged publicly downloaded synthetic teaching fixture; not observed agent behavior.",
+  "exit_code": 0,
+  "result": {
+    "count": 4,
+    "headline": "ready",
+    "eligible": [
+      "A"
+    ],
+    "ineligible": [
+      "B",
+      "C",
+      "D"
+    ],
+    "accept_all_mean_cost": 7.5,
+    "reject_all_mean_cost": 0.25,
+    "full_evidence_mean_cost": 0
+  },
+  "fractional_cost_control": {
+    "false_accept_cost": 0.1,
+    "rejected": true,
+    "error": "costs must be nonnegative integers"
+  },
+  "separate_hand_calculation": {
+    "false_accept_cost": 0.1,
+    "accept_all_mean_cost": 0.075,
+    "reject_all_mean_cost": 0.25,
+    "not_evaluator_output": true
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "scope": "Original scientific figure from the complete authored trace, not native-guitar measurements or confidence intervals.",
+  "input_trace_sha256": "52cbcf7fd045ba36b154981843697c587a7df62c7b00c6b127548a880bf0107b",
+  "figure": {
+    "path": "code/streeling/evidence/pitch-estimates-2026-10-22/pitch-errors-and-availability.png",
+    "sha256": "c553be8580299dec3e7d74e80cee1750edaa42f76dfaa20233a04eb198279d0f",
+    "width": 1600,
+    "height": 960
+  },
+  "upper_panel": {
+    "points": [
+      {
+        "time_seconds": 0.0,
+        "signed_cents": 0.0
+      },
+      {
+        "time_seconds": 0.1,
+        "signed_cents": 1200.0
+      },
+      {
+        "time_seconds": 0.3,
+        "signed_cents": 8.634601685044519
+      },
+      {
+        "time_seconds": 0.5,
+        "signed_cents": -8.677883077291035
+      }
+    ],
+    "y_limits": [
+      -65,
+      1300
+    ],
+    "all_valid_reports_shown": true,
+    "lines_between_points": false,
+    "error_bars": false,
+    "octave_outlier_visible": true
+  },
+  "lower_panel": {
+    "points": [
+      {
+        "time_seconds": 0.0,
+        "status": "reported",
+        "category_value": 2
+      },
+      {
+        "time_seconds": 0.1,
+        "status": "reported",
+        "category_value": 2
+      },
+      {
+        "time_seconds": 0.2,
+        "status": "missing",
+        "category_value": 1
+      },
+      {
+        "time_seconds": 0.3,
+        "status": "reported",
+        "category_value": 2
+      },
+      {
+        "time_seconds": 0.4,
+        "status": "invalid",
+        "category_value": 0
+      },
+      {
+        "time_seconds": 0.5,
+        "status": "reported",
+        "category_value": 2
+      }
+    ],
+    "categories": {
+      "reported": 2,
+      "missing": 1,
+      "invalid": 0
+    },
+    "numeric_category_values_are_not_pitch_errors": true
+  }
+}

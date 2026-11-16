@@ -1,0 +1,1584 @@
+
+SOURCE COG021 en streeling/courses/cognitive-science/en/cog-021-compare-logistic-item-information-at-a-stated-ability.md 
+ 
+
+# Compare Logistic Item Information at a Stated Ability
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+A GA practice designer wants to choose between pitch questions before collecting answers. A raw success percentage does not show where an item distinguishes nearby levels of ability. The logistic response model makes that dependence explicit. Difficulty moves the response curve along the ability axis, while discrimination changes its slope. These parameters are assumptions here, not fitted properties of a real exercise.
+
+For a Bernoulli response, differentiate its log likelihood with respect to ability. Taking the expected squared derivative gives discrimination squared times success probability times failure probability. Information is local: it concerns small changes around the stated ability, under this particular response model. It is not the Shannon entropy of a message, an accuracy score or evidence that a learner mastered the concept.
+
+Calculate both candidates at each declared ability and retain the probabilities as well as information. The item with the larger discrimination is not uniformly best when its difficulty lies away from the learner. Moving the hypothetical ability changes the ranking in the control. This is a model comparison before adaptive selection, not an implemented adaptive tutor. Parameter uncertainty, multidimensional skill and guessing would require a different analysis.
+
+ ### Exercise 1
+
+Which item is more informative in the fixed case?
+
+> **Answer:** Index `1` wins: information is `0.419974341614` versus `0.25`. Its success probability is lower, so information and ease are different.
+
+### Exercise 2
+
+Apply the ability control.
+
+> **Answer:** At `theta=-1`, index `0` wins with `0.196611933241` versus `0.070650824853`. The ordering is conditional, not universal.
+
+### Exercise 3
+
+Does the calculation estimate ability?
+
+> **Answer:** No. Ability and item parameters are stipulated inputs. A real estimate requires responses and a justified measurement model.
+
+
+
+SOURCE COG021 fr streeling/courses/cognitive-science/fr/cog-021-compare-logistic-item-information-at-a-stated-ability.fr.md 
+ 
+
+# Comparer l’information des items logistiques à un niveau donné
+
+> Ce cas mathématique ou logique fini est créé pour le cours et appuyé par une lecture délimitée des sources. Revue technique humaine, revue linguistique, tentatives apprenantes, exécution native, adoption et publication restent indécidées.
+
+Un concepteur d’exercices GA souhaite comparer des questions de hauteur avant de recueillir des réponses. Le taux de réussite seul ne montre pas où un item distingue des niveaux voisins. Le modèle logistique rend cette dépendance explicite. La difficulté déplace la courbe sur l’axe d’habileté, tandis que la discrimination en modifie la pente. Ces paramètres sont ici des hypothèses, pas des propriétés estimées d’un exercice réel.
+
+Pour une réponse de Bernoulli, on dérive la log-vraisemblance par rapport à l’habileté. L’espérance du carré de cette dérivée donne le carré de la discrimination multiplié par la probabilité de réussite et celle d’échec. Cette information est locale et dépend du modèle choisi. Ce n’est ni l’entropie d’un message, ni une note de précision, ni une preuve de maîtrise.
+
+Calculez les probabilités et les informations de chaque candidat au niveau annoncé. Une discrimination plus forte ne suffit pas si la difficulté est trop éloignée de l’habileté. Le contrôle déplace cette dernière et inverse le classement. L’exemple prépare une comparaison avant sélection adaptative ; il ne constitue pas un tuteur adaptatif. L’incertitude des paramètres, les compétences multiples et les réponses au hasard demanderaient une autre analyse.
+
+ ### Exercice 1
+
+Quel item apporte le plus d’information dans le cas fixé ?
+
+> **Réponse:** L’indice `1` gagne : son information vaut `0.419974341614`, contre `0.25`. Sa probabilité de réussite est inférieure ; information et facilité diffèrent.
+
+### Exercice 2
+
+Appliquez le contrôle sur l’habileté.
+
+> **Réponse:** À `theta=-1`, l’indice `0` gagne avec `0.196611933241`, contre `0.070650824853`. Le classement est conditionnel.
+
+### Exercice 3
+
+Le calcul estime-t-il l’habileté ?
+
+> **Réponse:** Non. Habileté et paramètres sont imposés. Une estimation réelle exige des réponses et un modèle de mesure justifié.
+
+
+
+SOURCE COG021 es streeling/courses/cognitive-science/es/cog-021-compare-logistic-item-information-at-a-stated-ability.es.md 
+ 
+
+# Comparar la información de ítems logísticos a una habilidad dada
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Un diseñador de práctica de GA quiere comparar preguntas de altura antes de recoger respuestas. La proporción de aciertos no indica dónde un ítem distingue habilidades cercanas. El modelo logístico explicita esa dependencia: la dificultad desplaza la curva en el eje de habilidad y la discriminación modifica su pendiente. Aquí son supuestos, no propiedades estimadas de un ejercicio real.
+
+Para una respuesta de Bernoulli, se deriva la log-verosimilitud respecto a la habilidad. La esperanza del cuadrado de esa derivada produce la discriminación al cuadrado por las probabilidades de acierto y error. La información es local y depende del modelo elegido. No es la entropía de un mensaje, una medida de exactitud ni evidencia de dominio del contenido.
+
+Calcule las probabilidades y la información de ambos candidatos en cada nivel declarado. Una discriminación mayor no garantiza una ventaja cuando la dificultad queda lejos de la habilidad. El control desplaza esta última y cambia el orden. Se trata de comparar modelos antes de seleccionar preguntas, no de un tutor adaptativo implementado. La incertidumbre de los parámetros, las habilidades múltiples y las respuestas por azar exigirían otro análisis.
+
+ ### Ejercicio 1
+
+¿Qué ítem aporta más información en el caso fijo?
+
+> **Respuesta:** Gana el índice `1`: la información es `0.419974341614`, frente a `0.25`. Su probabilidad de acierto es menor; información y facilidad son distintas.
+
+### Ejercicio 2
+
+Aplique el control de habilidad.
+
+> **Respuesta:** Con `theta=-1`, gana el índice `0` con `0.196611933241`, frente a `0.070650824853`. El orden es condicional.
+
+### Ejercicio 3
+
+¿El cálculo estima la habilidad?
+
+> **Respuesta:** No. La habilidad y los parámetros son entradas estipuladas. Estimarlos requiere respuestas y un modelo de medición justificado.
+
+
+
+SOURCE COG022 en streeling/courses/cognitive-science/en/cog-022-pool-adjacent-calibration-violations-with-case-weights.md 
+ 
+
+# Pool Adjacent Calibration Violations with Case Weights
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+An agentic review report sorts confidence bins but its observed success frequencies decrease between neighbouring bins. A monotone calibration fit can remove that ordering conflict while preserving the contribution of each bin. It does not repair sampling bias or prove that the forecasts are reliable. Retain the original frequencies and sample weights beside the fitted curve.
+
+Start with one block per ordered score. When a block mean exceeds the next mean, merge them and replace both by their weighted mean. Recheck the preceding boundary after a merge: a local repair can expose another violation. The final block value minimizes weighted squared error under the nondecreasing constraint. Sorting response values instead would detach outcomes from their original confidence bins.
+
+The central bins in this authored case violate the requested order. Changing their weights moves the pooled level while leaving their order and outcomes intact. Equal weighting would answer a different question. The fixed curve only describes the finite training bins: validation on held-out attempts, assistance tracking and support for unseen scores remain separate obligations. A future DSL stage would need to carry ordered bin identities and weights, not merely a smooth-looking chart.
+
+ ### Exercise 1
+
+Compute the pooled block.
+
+> **Answer:** The violating values pool to `(1*0.8+3*0.4)/4=0.5`; the fit is `[0.2,0.5,0.5,0.9]`.
+
+### Exercise 2
+
+Apply the swapped-weight control.
+
+> **Answer:** The pooled value becomes `(3*0.8+1*0.4)/4=0.7`. Both weighted objectives are `0.12`, but the fitted sequences differ.
+
+### Exercise 3
+
+Why keep the original bin order?
+
+> **Answer:** The ordering belongs to confidence scores. Sorting success frequencies would move outcomes to different scores and change the problem.
+
+
+
+SOURCE COG022 fr streeling/courses/cognitive-science/fr/cog-022-pool-adjacent-calibration-violations-with-case-weights.fr.md 
+ 
+
+# Regrouper les violations de calibration avec leurs poids
+
+> Ce cas mathématique ou logique fini est créé pour le cours et appuyé par une lecture délimitée des sources. Revue technique humaine, revue linguistique, tentatives apprenantes, exécution native, adoption et publication restent indécidées.
+
+Un rapport de revue agentique trie les niveaux de confiance, mais les fréquences de réussite diminuent entre deux groupes voisins. Un ajustement monotone peut supprimer ce conflit d’ordre en conservant le poids de chaque groupe. Il ne corrige pas un biais d’échantillonnage et ne prouve pas la fiabilité des prévisions. Gardez les fréquences originales et leurs poids à côté de la courbe ajustée.
+
+Commencez par un bloc pour chaque score ordonné. Si la moyenne d’un bloc dépasse celle du suivant, fusionnez-les et prenez leur moyenne pondérée. Vérifiez ensuite la frontière précédente : une fusion peut révéler une autre violation. Les valeurs finales minimisent l’erreur quadratique pondérée sous la contrainte de croissance. Trier les fréquences à la place détacherait les résultats de leurs groupes de confiance.
+
+Les groupes centraux du cas proposé violent l’ordre demandé. Modifier leurs poids déplace la valeur commune sans changer les résultats observés ni l’ordre des scores. Des poids égaux répondraient à une autre question. La courbe ne décrit que les groupes d’entraînement : validation sur des tentatives réservées, suivi de l’assistance et traitement des scores inédits restent nécessaires. Un futur DSL devrait conserver les identités et les poids des groupes.
+
+ ### Exercice 1
+
+Calculez le bloc fusionné.
+
+> **Réponse:** Les valeurs en conflit donnent `(1*0.8+3*0.4)/4=0.5` ; l’ajustement est `[0.2,0.5,0.5,0.9]`.
+
+### Exercice 2
+
+Appliquez le contrôle qui échange les poids.
+
+> **Réponse:** La valeur commune devient `(3*0.8+1*0.4)/4=0.7`. Les deux objectifs valent `0.12`, mais les séquences ajustées diffèrent.
+
+### Exercice 3
+
+Pourquoi conserver l’ordre initial des groupes ?
+
+> **Réponse:** L’ordre est celui des scores de confiance. Trier les fréquences déplacerait les résultats vers d’autres scores.
+
+
+
+SOURCE COG022 es streeling/courses/cognitive-science/es/cog-022-pool-adjacent-calibration-violations-with-case-weights.es.md 
+ 
+
+# Agrupar violaciones adyacentes de calibración con pesos
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Un informe de revisión agéntica ordena intervalos de confianza, pero sus frecuencias de éxito disminuyen entre grupos vecinos. Un ajuste monótono puede eliminar ese conflicto conservando el peso de cada grupo. No corrige el sesgo de muestreo ni demuestra que las previsiones sean fiables. Mantenga las frecuencias originales y sus pesos junto a la curva ajustada.
+
+Empiece con un bloque por puntuación ordenada. Cuando la media de un bloque supera la siguiente, fusiónelos y calcule su media ponderada. Revise después la frontera anterior: una fusión puede descubrir otra violación. Los valores finales minimizan el error cuadrático ponderado sujeto a un orden no decreciente. Ordenar las respuestas separaría los resultados de sus grupos originales de confianza.
+
+Los grupos centrales del caso propuesto violan el orden. Cambiar sus pesos desplaza el nivel común sin alterar los resultados ni el orden de las puntuaciones. Usar pesos iguales respondería otra pregunta. La curva describe solo los grupos de entrenamiento: validar con intentos reservados, registrar la ayuda y tratar puntuaciones nuevas siguen siendo tareas distintas. Un futuro DSL necesitaría conservar las identidades y los pesos de los grupos.
+
+ ### Ejercicio 1
+
+Calcule el bloque agrupado.
+
+> **Respuesta:** Los valores en conflicto dan `(1*0.8+3*0.4)/4=0.5`; el ajuste es `[0.2,0.5,0.5,0.9]`.
+
+### Ejercicio 2
+
+Aplique el control que intercambia los pesos.
+
+> **Respuesta:** El valor común pasa a `(3*0.8+1*0.4)/4=0.7`. Ambos objetivos valen `0.12`, pero las secuencias ajustadas son distintas.
+
+### Ejercicio 3
+
+¿Por qué conservar el orden original de los grupos?
+
+> **Respuesta:** El orden pertenece a las puntuaciones de confianza. Ordenar las frecuencias movería los resultados a otras puntuaciones.
+
+
+
+SOURCE COG023 en streeling/courses/cognitive-science/en/cog-023-carry-cue-covariance-into-linear-fusion.md 
+ 
+
+# Carry Cue Covariance into Linear Fusion
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+A guitar interface may show both a pitch estimate and a visual cue derived partly from the same recording. Treating those estimates as independent can overstate the precision gained by combining them. This lesson assumes that both estimate the same scalar quantity without bias. Their variances and covariance are stipulated, allowing the fusion decision to be examined before collecting any perceptual data.
+
+Write the fused estimate as a weighted sum whose weights add to unity. Expanding its error variance exposes a covariance term. Differentiate that quadratic with respect to the first weight to find the unconstrained minimum. Positive covariance can make an unconstrained weight negative: the noisier cue then helps subtract shared error rather than receiving an ordinary positive reliability vote. This is not a recommendation to deploy negative weights without checking bias and covariance estimates.
+
+The fixed covariance matrix is positive definite. The control removes its off-diagonal terms and recovers inverse-variance weights. Reusing those independent-cue weights in the correlated case gives a worse actual variance. Compare against the better individual cue as well as the other fusion rule. The cited perceptual abstract motivates careful comparator choice; the covariance optimization is derived here, not claimed as an inspected equation from that paper.
+
+ ### Exercise 1
+
+Find the correlated-case weights.
+
+> **Answer:** Weights `[1.25,-0.25]` sum to `1`; fused estimate is `9` and variance `0.875`. Negative weight is allowed by the stated unconstrained model.
+
+### Exercise 2
+
+Apply the independence control.
+
+> **Answer:** With covariance `0`, weights are `[0.8,0.2]`, estimate `10.8`, variance `0.8`. Those weights yield variance `1.28` under the original covariance.
+
+### Exercise 3
+
+Does a negative weight prove the input is invalid?
+
+> **Answer:** No. The covariance matrix is positive definite and weights are unconstrained. Requiring nonnegative weights would define a different optimization problem.
+
+
+
+SOURCE COG023 fr streeling/courses/cognitive-science/fr/cog-023-carry-cue-covariance-into-linear-fusion.fr.md 
+ 
+
+# Intégrer la covariance des indices à leur fusion linéaire
+
+> Ce cas mathématique ou logique fini est créé pour le cours et appuyé par une lecture délimitée des sources. Revue technique humaine, revue linguistique, tentatives apprenantes, exécution native, adoption et publication restent indécidées.
+
+Une interface de guitare peut afficher une estimation de hauteur et un indice visuel tirés en partie du même enregistrement. Les traiter comme indépendants peut exagérer le gain de précision de leur combinaison. On suppose ici qu’ils estiment la même grandeur scalaire sans biais. Variances et covariance sont imposées afin d’examiner la décision avant toute collecte perceptive.
+
+Écrivez l’estimation fusionnée comme une somme pondérée dont les poids totalisent l’unité. Le développement de sa variance fait apparaître un terme de covariance. Dérivez ce polynôme par rapport au premier poids pour trouver le minimum sans contrainte de positivité. Une covariance positive peut produire un poids négatif : l’indice le plus bruité aide alors à soustraire une erreur commune. Cela ne justifie pas un déploiement sans vérifier les biais et les estimations de covariance.
+
+La matrice fixée est définie positive. Le contrôle annule les termes hors diagonale et retrouve les poids fondés sur les variances inverses. Réutiliser ces poids dans le cas corrélé donne une variance réelle moins favorable. Comparez aussi à l’indice individuel le plus précis. Le résumé perceptif cité motive le choix du comparateur ; l’optimisation avec covariance est dérivée ici, sans prétendre avoir lu cette équation dans l’article.
+
+ ### Exercice 1
+
+Trouvez les poids du cas corrélé.
+
+> **Réponse:** Les poids `[1.25,-0.25]` totalisent `1` ; l’estimation vaut `9` et la variance `0.875`. Le modèle autorise un poids négatif.
+
+### Exercice 2
+
+Appliquez le contrôle d’indépendance.
+
+> **Réponse:** Avec une covariance de `0`, les poids sont `[0.8,0.2]`, l’estimation `10.8` et la variance `0.8`. Ces poids donnent `1.28` avec la covariance initiale.
+
+### Exercice 3
+
+Un poids négatif prouve-t-il que l’entrée est invalide ?
+
+> **Réponse:** Non. La matrice est définie positive et les poids ne sont pas contraints. Exiger leur positivité définirait un autre problème.
+
+
+
+SOURCE COG023 es streeling/courses/cognitive-science/es/cog-023-carry-cue-covariance-into-linear-fusion.es.md 
+ 
+
+# Incorporar la covarianza de las señales a su fusión lineal
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Una interfaz de guitarra puede mostrar una estimación de altura y una señal visual obtenidas en parte de la misma grabación. Suponer independencia puede exagerar la ganancia de precisión al combinarlas. Aquí ambas estiman sin sesgo la misma magnitud escalar. Sus varianzas y covarianza se estipulan para examinar la decisión antes de recoger datos perceptivos.
+
+Escriba la estimación fusionada como una suma cuyos pesos suman la unidad. Al desarrollar su varianza aparece un término de covarianza. Derive el polinomio respecto al primer peso para hallar el mínimo sin exigir pesos positivos. Una covarianza positiva puede producir un peso negativo: la señal más ruidosa ayuda entonces a restar error compartido. Esto no justifica desplegar esos pesos sin comprobar sesgos y estimaciones de covarianza.
+
+La matriz fija es definida positiva. El control elimina los términos fuera de la diagonal y recupera pesos de varianza inversa. Reutilizarlos en el caso correlacionado produce una varianza real peor. Compare también con la señal individual más precisa. El resumen perceptivo citado motiva elegir bien el comparador; la optimización con covarianza se deriva aquí, sin atribuirle una ecuación no leída del artículo.
+
+ ### Ejercicio 1
+
+Halle los pesos del caso correlacionado.
+
+> **Respuesta:** Los pesos `[1.25,-0.25]` suman `1`; la estimación vale `9` y la varianza `0.875`. El modelo permite un peso negativo.
+
+### Ejercicio 2
+
+Aplique el control de independencia.
+
+> **Respuesta:** Con covarianza `0`, los pesos son `[0.8,0.2]`, la estimación `10.8` y la varianza `0.8`. Esos pesos dan `1.28` bajo la covarianza original.
+
+### Ejercicio 3
+
+¿Un peso negativo demuestra que la entrada es inválida?
+
+> **Respuesta:** No. La matriz es definida positiva y los pesos no están restringidos. Exigir pesos no negativos definiría otro problema.
+
+
+
+SOURCE CYB021 en streeling/courses/cybernetics/en/cyb-021-test-finite-horizon-control-reachability.md 
+ 
+
+# Test Finite-Horizon Control Reachability
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+An agent coordinator can observe a queue state without having actions that reach a requested endpoint within a deadline. Even full linear controllability rank does not settle that operational question when commands are bounded or discrete. The baseline mathematics course already teaches the double-integrator rank test. This lesson adds a different operation: enumerate permitted finite command sequences, test the specific endpoint and minimize a declared command-energy cost.
+
+Expand the state recurrence in input-time order. Earlier commands undergo more transitions before the endpoint, so their columns differ from those of later commands. Keep that linear reachability matrix as a diagnostic, but enforce the allowed action alphabet during enumeration. Propagate every candidate through the recurrence, retain only exact target matches and compare sums of squared commands. This finite search gives a reproducible optimum for the declared alphabet; it is not a continuous optimal-control solver.
+
+The fixed horizon permits an early command to accumulate enough position change without exceeding its allowed magnitude. The shorter-horizon control retains full rank yet requires an unrestricted command outside the allowed alphabet. No bounded sequence succeeds. More telemetry does not create a missing admissible action, and a rank certificate must not override the explicit refusal. A future control DSL should retain the horizon, action domain and empty-feasible-set result before any scheduler can treat a target as executable.
+
+ ### Exercise 1
+
+Why keep command-time order?
+
+> **Answer:** The fixed matrix is `[A*A*B,A*B,B]` for `[u0,u1,u2]`. Earlier commands propagate longer, so equal command magnitudes can have different endpoint effects.
+
+### Exercise 2
+
+Find the bounded fixed optimum.
+
+> **Answer:** The matrix `[[2,1,0],[1,1,1]]` has rank `2`. The sole feasible sequence `[1,0,0]` reaches `[2,1]` with squared-command energy `1`.
+
+### Exercise 3
+
+Why does full rank not rescue the shorter-horizon control?
+
+> **Answer:** At horizon `2`, the matrix still has rank `2`, but its unrestricted solution `[2,-1]` uses forbidden action `2`. The feasible sequence set is empty; minimum energy is `null`.
+
+
+
+SOURCE CYB021 fr streeling/courses/cybernetics/fr/cyb-021-test-finite-horizon-control-reachability.fr.md 
+ 
+
+# Tester l’atteignabilité sur un horizon fini
+
+> Ce cas mathématique ou logique fini est créé pour le cours et appuyé par une lecture délimitée des sources. Revue technique humaine, revue linguistique, tentatives apprenantes, exécution native, adoption et publication restent indécidées.
+
+Un coordinateur agentique peut observer une file sans disposer d’actions qui atteignent la cible avant une échéance. Même un rang de commandabilité complet ne règle pas la question lorsque les commandes sont bornées ou discrètes. Le cours de mathématiques enseigne déjà ce test pour le double intégrateur. On ajoute ici une autre opération : énumérer les séquences permises, vérifier une cible précise et minimiser une énergie de commande déclarée.
+
+Développez la récurrence dans l’ordre temporel des entrées. Les premières commandes subissent davantage de transitions ; leurs colonnes diffèrent de celles des commandes tardives. Gardez cette matrice comme diagnostic, mais imposez l’alphabet d’actions pendant l’énumération. Propagez chaque candidat, conservez les arrivées exactes sur la cible et comparez les sommes des carrés des commandes. Cette recherche finie fournit un optimum reproductible pour l’alphabet déclaré, pas une solution de commande continue.
+
+L’horizon fixé laisse à une commande précoce le temps d’accumuler le déplacement sans dépasser sa magnitude permise. Le contrôle raccourcit l’horizon : le rang reste complet, mais la solution sans borne exige une commande interdite. Aucune séquence admissible ne réussit. Plus de télémétrie ne crée pas l’action manquante, et le rang ne doit pas annuler ce refus. Un futur DSL devrait conserver horizon, domaine d’action et ensemble admissible vide avant de déclarer la cible exécutable.
+
+ ### Exercice 1
+
+Pourquoi conserver l’ordre temporel des commandes ?
+
+> **Réponse:** La matrice fixée est `[A*A*B,A*B,B]` pour `[u0,u1,u2]`. Les premières commandes se propagent plus longtemps et ont des effets finaux différents.
+
+### Exercice 2
+
+Trouvez l’optimum borné fixé.
+
+> **Réponse:** La matrice `[[2,1,0],[1,1,1]]` a le rang `2`. La seule séquence admissible `[1,0,0]` atteint `[2,1]` avec une énergie quadratique de `1`.
+
+### Exercice 3
+
+Pourquoi le rang complet ne sauve-t-il pas le contrôle raccourci ?
+
+> **Réponse:** À l’horizon `2`, la matrice garde le rang `2`, mais la solution sans borne `[2,-1]` utilise l’action interdite `2`. L’ensemble admissible est vide ; l’énergie minimale est `null`.
+
+
+
+SOURCE CYB021 es streeling/courses/cybernetics/es/cyb-021-test-finite-horizon-control-reachability.es.md 
+ 
+
+# Comprobar la alcanzabilidad en un horizonte finito
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Un coordinador agéntico puede observar una cola sin disponer de acciones que alcancen una meta antes del plazo. Ni siquiera un rango completo de controlabilidad resuelve la cuestión cuando las órdenes son acotadas o discretas. El curso de matemáticas ya enseña ese criterio para el doble integrador. Aquí se añade otra operación: enumerar secuencias permitidas, comprobar el punto final y minimizar una energía de mando declarada.
+
+Desarrolle la recurrencia en orden temporal de entradas. Las primeras órdenes atraviesan más transiciones y tienen columnas distintas de las últimas. Conserve la matriz como diagnóstico, pero imponga el alfabeto de acciones durante la enumeración. Propague cada candidato, retenga coincidencias exactas con la meta y compare las sumas de cuadrados de órdenes. La búsqueda finita da un óptimo reproducible para ese alfabeto, no una solución de control continuo.
+
+El horizonte fijo permite que una orden temprana acumule desplazamiento sin superar su magnitud permitida. El control acorta el horizonte: conserva rango completo, pero la solución sin límites requiere una orden prohibida. Ninguna secuencia admisible funciona. Más telemetría no crea la acción ausente y el rango no debe anular el rechazo. Un futuro DSL debería conservar horizonte, dominio de acciones y conjunto factible vacío antes de declarar ejecutable la meta.
+
+ ### Ejercicio 1
+
+¿Por qué conservar el orden temporal de las órdenes?
+
+> **Respuesta:** La matriz fija es `[A*A*B,A*B,B]` para `[u0,u1,u2]`. Las primeras órdenes se propagan más tiempo y tienen efectos finales distintos.
+
+### Ejercicio 2
+
+Halle el óptimo acotado fijo.
+
+> **Respuesta:** La matriz `[[2,1,0],[1,1,1]]` tiene rango `2`. La única secuencia factible `[1,0,0]` alcanza `[2,1]` con energía cuadrática `1`.
+
+### Ejercicio 3
+
+¿Por qué el rango completo no salva el control de horizonte corto?
+
+> **Respuesta:** Con horizonte `2`, la matriz mantiene rango `2`, pero la solución sin límites `[2,-1]` usa la acción prohibida `2`. El conjunto factible está vacío; la energía mínima es `null`.
+
+
+
+SOURCE CYB022 en streeling/courses/cybernetics/en/cyb-022-project-proposed-actions-onto-a-declared-feasible-set.md 
+ 
+
+# Project Proposed Actions onto a Declared Feasible Set
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+An assistant may propose an action that exceeds the allowed next-state bound even when it respects an actuator limit. Clamping only the actuator misses that extra obligation. A feasibility filter first intersects all declared restrictions and then chooses the admissible action nearest the proposal. The restrictions must come from the actual operating contract before such a filter could be useful.
+
+Here the next state is the current scalar state plus the chosen action. Translate the next-state upper bound into an action upper bound, intersect it with the actuator interval, and minimize squared distance to the proposal. For a nonempty closed interval, the nearest point is the proposal if it lies inside and the closer endpoint otherwise. This is an explicit tiny optimization rather than a guarantee about a general safety-filter implementation.
+
+The control moves the required state bound beyond what the actuator can achieve. The feasible set is empty, so an implementation must return an infeasibility result instead of inventing a supposedly safe command. Nearest action does not mean safe in an unmodelled world: disturbances, delayed observations and model error remain absent. Preserve the proposed action, active restrictions and refusal reason in a future agent artifact; otherwise a clipped command may conceal an impossible request.
+
+ ### Exercise 1
+
+Find the admissible interval.
+
+> **Answer:** Intersecting action limits and next-state bound gives `[-2,1]`, not merely `[-2,2]`.
+
+### Exercise 2
+
+Project the fixed proposal.
+
+> **Answer:** Proposal `3` projects to `1`; the next state is `1` and squared change is `4`.
+
+### Exercise 3
+
+Handle the impossible control.
+
+> **Answer:** The upper action bound becomes `-3`, below the lower bound `-2`. The intersection is empty; action and next-state fields remain `null`.
+
+
+
+SOURCE CYB022 fr streeling/courses/cybernetics/fr/cyb-022-project-proposed-actions-onto-a-declared-feasible-set.fr.md 
+ 
+
+# Projeter une action proposée sur un ensemble admissible
+
+> Ce cas mathématique ou logique fini est créé pour le cours et appuyé par une lecture délimitée des sources. Revue technique humaine, revue linguistique, tentatives apprenantes, exécution native, adoption et publication restent indécidées.
+
+Un assistant peut proposer une action qui dépasse la borne du prochain état tout en respectant celle de l’actionneur. Limiter seulement l’actionneur oublie cette autre obligation. Un filtre de faisabilité intersecte d’abord toutes les restrictions déclarées, puis choisit l’action admissible la plus proche de la proposition. Les restrictions devraient venir du contrat réel avant toute utilisation.
+
+Le prochain état est ici l’état scalaire courant augmenté de l’action choisie. Transformez la borne d’état en borne d’action, puis intersectez-la avec l’intervalle de l’actionneur. Minimisez ensuite la distance quadratique à la proposition. Sur un intervalle fermé non vide, on garde la proposition si elle appartient à l’intervalle ; sinon on prend l’extrémité la plus proche. Ce petit problème explicite ne certifie aucun filtre général.
+
+Le contrôle impose une borne d’état que l’actionneur ne peut atteindre. L’ensemble admissible devient vide : il faut annoncer l’impossibilité plutôt qu’inventer une commande prétendument sûre. Une action proche n’est pas sûre dans un monde non modélisé ; perturbations, observations anciennes et erreurs de modèle sont absentes. Un futur artefact agentique devrait conserver la proposition, les restrictions actives et le motif du refus, pour ne pas masquer une demande impossible.
+
+ ### Exercice 1
+
+Trouvez l’intervalle admissible.
+
+> **Réponse:** L’intersection donne `[-2,1]`, pas seulement `[-2,2]`.
+
+### Exercice 2
+
+Projetez la proposition fixée.
+
+> **Réponse:** La proposition `3` se projette sur `1` ; l’état suivant vaut `1` et la modification quadratique `4`.
+
+### Exercice 3
+
+Traitez le contrôle impossible.
+
+> **Réponse:** La borne supérieure devient `-3`, sous la borne inférieure `-2`. L’intersection est vide ; action et état suivant restent `null`.
+
+
+
+SOURCE CYB022 es streeling/courses/cybernetics/es/cyb-022-project-proposed-actions-onto-a-declared-feasible-set.es.md 
+ 
+
+# Proyectar acciones propuestas sobre un conjunto factible
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Un asistente puede proponer una acción que exceda el límite del estado siguiente aunque respete el del actuador. Limitar solo el actuador omite esa otra obligación. Un filtro de viabilidad intersecta todas las restricciones declaradas y elige la acción factible más cercana a la propuesta. Las restricciones deberían provenir del contrato operativo real antes de usarlo.
+
+El estado siguiente es aquí el estado escalar actual más la acción elegida. Transforme la cota del estado en una cota de acción e interséquela con el intervalo del actuador. Después minimice la distancia cuadrática a la propuesta. Para un intervalo cerrado no vacío, se conserva la propuesta interior y, si está fuera, se elige el extremo más próximo. Este pequeño problema explícito no certifica un filtro general.
+
+El control exige una cota que el actuador no puede alcanzar. El conjunto factible queda vacío: debe declararse la imposibilidad en vez de inventar una orden supuestamente segura. Cercanía no significa seguridad en un mundo no modelado; faltan perturbaciones, antigüedad de observaciones y error de modelo. Un futuro artefacto agéntico debería conservar la propuesta, las restricciones activas y la razón del rechazo para no ocultar una solicitud imposible.
+
+ ### Ejercicio 1
+
+Halle el intervalo factible.
+
+> **Respuesta:** La intersección da `[-2,1]`, no solo `[-2,2]`.
+
+### Ejercicio 2
+
+Proyecte la propuesta fija.
+
+> **Respuesta:** La propuesta `3` se proyecta a `1`; el estado siguiente es `1` y el cambio cuadrático vale `4`.
+
+### Ejercicio 3
+
+Trate el control imposible.
+
+> **Respuesta:** La cota superior pasa a `-3`, por debajo de la inferior `-2`. La intersección está vacía; acción y estado siguiente quedan en `null`.
+
+
+
+SOURCE CYB023 en streeling/courses/cybernetics/en/cyb-023-check-regressor-rank-before-identifying-a-controller.md 
+ 
+
+# Check Regressor Rank before Identifying a Controller
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+Before an agent tunes a response rule, it must know whether the recorded experiments can distinguish the unknown parameters. More rows do not necessarily create more independent information. Repeating the same ratio of input components can leave several parameter vectors observationally identical, even when every fitted response is exact.
+
+Write the stipulated response as a design matrix times a parameter vector. Inspect the Gram matrix and its rank before solving the normal equations. A nonsingular Gram matrix gives a unique least-squares solution for this finite linear problem. A singular matrix exposes directions in parameter space that the experiments never distinguish. Reporting an arbitrary inverse or silently adding a regularizer would change the question from identification by data to selection by another assumption.
+
+The fixed design excites independent directions and recovers the declared parameter pair. The control has proportional columns: different pairs with the same relevant sum reproduce every response. The course uses finite full rank as a concrete excitation check; it does not establish a uniform persistent-excitation condition over an infinite signal. Measurement noise, model mismatch and conditioning would need separate evidence. A future experiment DSL should preserve regressors and trial identity, not just a small residual.
+
+ ### Exercise 1
+
+Compute the fixed Gram matrix.
+
+> **Answer:** The Gram matrix is `[[2,1],[1,2]]`, determinant `3`, rank `2`; the unique parameters are `[2,3]`.
+
+### Exercise 2
+
+Diagnose the collinear control.
+
+> **Answer:** The Gram matrix `[[14,14],[14,14]]` has determinant `0` and rank `1`. Parameter pairs `[2,3]` and `[1,4]` both fit.
+
+### Exercise 3
+
+Would duplicating the control rows identify both parameters?
+
+> **Answer:** No. Duplicating proportional rows changes their weight but not the missing direction. A new independent regressor is needed.
+
+
+
+SOURCE CYB023 fr streeling/courses/cybernetics/fr/cyb-023-check-regressor-rank-before-identifying-a-controller.fr.md 
+ 
+
+# Vérifier le rang des régresseurs avant l’identification
+
+> Ce cas mathématique ou logique fini est créé pour le cours et appuyé par une lecture délimitée des sources. Revue technique humaine, revue linguistique, tentatives apprenantes, exécution native, adoption et publication restent indécidées.
+
+Avant qu’un agent ajuste une règle de réponse, il faut savoir si les expériences distinguent les paramètres inconnus. Ajouter des lignes ne crée pas forcément d’information indépendante. Répéter le même rapport entre composantes d’entrée peut rendre plusieurs vecteurs de paramètres indiscernables, même avec des réponses ajustées exactement.
+
+Écrivez la réponse imposée comme le produit d’une matrice de plan par un vecteur de paramètres. Examinez la matrice de Gram et son rang avant de résoudre les équations normales. Une matrice non singulière donne une solution de moindres carrés unique pour ce problème fini. Une matrice singulière révèle des directions de paramètres que les essais ne distinguent jamais. Ajouter silencieusement une régularisation sélectionnerait une solution grâce à une hypothèse supplémentaire.
+
+Le plan fixé excite des directions indépendantes et retrouve la paire annoncée. Le contrôle a des colonnes proportionnelles : plusieurs paires de même somme pertinente reproduisent toutes les réponses. Le rang fini sert ici de contrôle concret d’excitation ; il ne prouve pas une excitation persistante uniforme sur un signal infini. Bruit, erreur de modèle et conditionnement demandent d’autres éléments. Un futur DSL devrait conserver régresseurs et identités des essais, pas seulement un petit résidu.
+
+ ### Exercice 1
+
+Calculez la matrice de Gram fixée.
+
+> **Réponse:** La matrice est `[[2,1],[1,2]]`, de déterminant `3` et de rang `2` ; les paramètres uniques sont `[2,3]`.
+
+### Exercice 2
+
+Diagnostiquez le contrôle colinéaire.
+
+> **Réponse:** La matrice `[[14,14],[14,14]]` a le déterminant `0` et le rang `1`. Les paires `[2,3]` et `[1,4]` conviennent toutes deux.
+
+### Exercice 3
+
+Dupliquer les lignes du contrôle identifierait-il les deux paramètres ?
+
+> **Réponse:** Non. Dupliquer des lignes proportionnelles change leur poids, pas la direction absente. Il faut un régresseur indépendant.
+
+
+
+SOURCE CYB023 es streeling/courses/cybernetics/es/cyb-023-check-regressor-rank-before-identifying-a-controller.es.md 
+ 
+
+# Comprobar el rango de los regresores antes de identificar un controlador
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Antes de que un agente ajuste una regla de respuesta, debe comprobar si los experimentos distinguen los parámetros desconocidos. Más filas no crean necesariamente información independiente. Repetir la misma proporción entre componentes de entrada puede dejar varios vectores de parámetros indistinguibles, incluso con respuestas ajustadas exactamente.
+
+Escriba la respuesta estipulada como matriz de diseño por vector de parámetros. Examine la matriz de Gram y su rango antes de resolver las ecuaciones normales. Una matriz no singular da una solución única de mínimos cuadrados para este problema finito. Una matriz singular revela direcciones paramétricas que los ensayos nunca distinguen. Añadir silenciosamente regularización seleccionaría una solución mediante otro supuesto.
+
+El diseño fijo excita direcciones independientes y recupera la pareja indicada. El control tiene columnas proporcionales: varias parejas con la misma suma pertinente reproducen todas las respuestas. El rango finito sirve como comprobación concreta de excitación; no demuestra excitación persistente uniforme en una señal infinita. Ruido, error de modelo y condicionamiento necesitan otras evidencias. Un futuro DSL debería conservar regresores e identidades de ensayo, no solo un residuo pequeño.
+
+ ### Ejercicio 1
+
+Calcule la matriz de Gram fija.
+
+> **Respuesta:** La matriz es `[[2,1],[1,2]]`, con determinante `3` y rango `2`; los parámetros únicos son `[2,3]`.
+
+### Ejercicio 2
+
+Diagnostique el control colineal.
+
+> **Respuesta:** La matriz `[[14,14],[14,14]]` tiene determinante `0` y rango `1`. Las parejas `[2,3]` y `[1,4]` ajustan igualmente.
+
+### Ejercicio 3
+
+¿Duplicar las filas del control identificaría ambos parámetros?
+
+> **Respuesta:** No. Duplicar filas proporcionales cambia su peso, no la dirección ausente. Se necesita un regresor independiente.
+
+
+
+SOURCE INF022 en streeling/courses/information-theory/en/inf-022-measure-posterior-movement-with-total-variation.md 
+ 
+
+# Measure Posterior Movement with Total Variation
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+An agent handoff may announce that a new observation changed its belief. How far did the declared distribution actually move? A longer explanation need not move it at all when both hypotheses predict the observation equally. This lesson combines a transparent finite Bayes update with a bounded distance between the prior and posterior.
+
+Multiply each prior mass by the likelihood of the stated observation under that hypothesis. Sum those products to obtain its marginal probability, then normalize. Likelihoods do not need to sum to unity across hypotheses: each belongs to a different conditional experiment. A zero normalizer would make the stated observation impossible under the supplied model and must not be repaired by silently inventing a posterior.
+
+Total variation is half the sum of absolute coordinate differences. It measures the largest changed probability assigned to an event in this finite hypothesis space. The fixed informative likelihood shifts mass toward a hypothesis; the equal-likelihood control leaves the prior unchanged. Neither result proves that the favoured hypothesis is true. Probe identity, model adequacy and whether evidence was counted before remain separate checks. This is a conditional distribution calculation, not an observation from an actual belief service.
+
+ ### Exercise 1
+
+Normalize the fixed products.
+
+> **Answer:** Products are `[2/5,1/10]`, normalizer `1/2`, posterior `[4/5,1/5]`.
+
+### Exercise 2
+
+Compute movement and the control.
+
+> **Answer:** Fixed total variation is `3/10`. Equal likelihoods give posterior `[1/2,1/2]` and movement `0`.
+
+### Exercise 3
+
+Should likelihoods be normalized across hypotheses first?
+
+> **Answer:** No. They are probabilities of the same observation conditional on different hypotheses. Normalize the prior-weighted products, retaining the original likelihood model.
+
+
+
+SOURCE INF022 fr streeling/courses/information-theory/fr/inf-022-measure-posterior-movement-with-total-variation.fr.md 
+ 
+
+# Mesurer le déplacement a posteriori par variation totale
+
+> Ce cas mathématique ou logique fini est créé pour le cours et appuyé par une lecture délimitée des sources. Revue technique humaine, revue linguistique, tentatives apprenantes, exécution native, adoption et publication restent indécidées.
+
+Un compte rendu agentique annonce qu’une observation a changé une croyance. De combien la distribution déclarée a-t-elle réellement bougé ? Une explication plus longue peut ne rien modifier si les hypothèses prédisent aussi bien l’observation. Ce cours associe une mise à jour bayésienne finie à une distance bornée entre distributions.
+
+Multipliez chaque masse a priori par la vraisemblance de l’observation sous cette hypothèse. Additionnez les produits pour obtenir sa probabilité marginale, puis normalisez. Les vraisemblances n’ont pas à totaliser l’unité entre hypothèses : elles relèvent d’expériences conditionnelles différentes. Un normalisateur nul rendrait l’observation impossible dans le modèle fourni ; il ne faudrait pas inventer une distribution pour masquer ce problème.
+
+La variation totale est la moitié de la somme des différences absolues entre coordonnées. Elle mesure le plus grand changement de probabilité d’un événement dans cet espace fini. Le cas informatif déplace de la masse vers une hypothèse ; le contrôle à vraisemblances égales conserve l’a priori. Aucun résultat ne prouve l’hypothèse favorisée. Identité de la mesure, adéquation du modèle et absence de double comptage restent à vérifier séparément. Aucun service de croyances réel n’est exécuté.
+
+ ### Exercice 1
+
+Normalisez les produits fixés.
+
+> **Réponse:** Les produits sont `[2/5,1/10]`, le normalisateur `1/2` et l’a posteriori `[4/5,1/5]`.
+
+### Exercice 2
+
+Calculez le déplacement et le contrôle.
+
+> **Réponse:** La variation totale fixée vaut `3/10`. Les vraisemblances égales donnent `[1/2,1/2]` et un déplacement de `0`.
+
+### Exercice 3
+
+Faut-il normaliser d’abord les vraisemblances entre hypothèses ?
+
+> **Réponse:** Non. Elles conditionnent la même observation sur différentes hypothèses. Normalisez les produits pondérés par l’a priori et conservez le modèle de vraisemblance.
+
+
+
+SOURCE INF022 es streeling/courses/information-theory/es/inf-022-measure-posterior-movement-with-total-variation.es.md 
+ 
+
+# Medir el cambio posterior con variación total
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Un informe agéntico anuncia que una observación modificó una creencia. ¿Cuánto cambió realmente la distribución declarada? Una explicación más larga puede no moverla si las hipótesis predicen igualmente la observación. Esta lección combina una actualización bayesiana finita con una distancia acotada entre distribuciones.
+
+Multiplique cada masa previa por la verosimilitud de la observación bajo esa hipótesis. Sume los productos para obtener la probabilidad marginal y normalice. Las verosimilitudes no deben sumar la unidad entre hipótesis: pertenecen a experimentos condicionales distintos. Un normalizador nulo haría imposible la observación bajo el modelo; no debe ocultarse inventando una distribución posterior.
+
+La variación total es la mitad de la suma de diferencias absolutas entre coordenadas. Mide el mayor cambio de probabilidad de un evento en este espacio finito. El caso informativo desplaza masa hacia una hipótesis; el control de verosimilitudes iguales conserva la distribución previa. Ningún resultado demuestra la hipótesis favorecida. Identidad de la observación, adecuación del modelo y ausencia de doble conteo necesitan comprobaciones separadas. No se ejecuta ningún servicio real de creencias.
+
+ ### Ejercicio 1
+
+Normalice los productos fijos.
+
+> **Respuesta:** Los productos son `[2/5,1/10]`, el normalizador `1/2` y la posterior `[4/5,1/5]`.
+
+### Ejercicio 2
+
+Calcule el cambio y el control.
+
+> **Respuesta:** La variación total fija es `3/10`. Verosimilitudes iguales dan `[1/2,1/2]` y cambio `0`.
+
+### Ejercicio 3
+
+¿Hay que normalizar primero las verosimilitudes entre hipótesis?
+
+> **Respuesta:** No. Condicionan la misma observación a hipótesis distintas. Normalice los productos ponderados por la previa y conserve el modelo de verosimilitud.
+
+
+
+SOURCE INF023 en streeling/courses/information-theory/en/inf-023-deinterleave-burst-erasures-without-inventing-recovery.md 
+ 
+
+# Deinterleave Burst Erasures without Inventing Recovery
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+A future guitar-audio transport may need to spread the effect of a short packet-loss burst. Interleaving changes where consecutive transmitted positions came from in the original block layout. That can reduce concentration of missing symbols within a block. It cannot recreate values that were never received, and no perceptual quality improvement follows from position counts alone.
+
+Write the source blocks as a rectangular array and read columns for the interleaved wire order. Each wire index maps to a unique original row and column. Apply the declared erasure positions on the wire, then invert that position map into the source layout. Preserve an explicit missing marker. The reconstruction is a layout reconstruction, not reconstruction of the missing symbol values.
+
+The control transmits the same symbols in row order. The identical burst now erases an entire original block rather than scattering losses across blocks. The total number of missing symbols stays unchanged. Any later error-correcting stage would need actual redundancy, a code specification and its own decoder tests. Buffering latency and receiver memory are also absent from the model; the RFC cautions that interleaving can add delay. A paper permutation table is the baseline before changing a live low-latency audio path.
+
+ ### Exercise 1
+
+Write the interleaved wire order.
+
+> **Answer:** Column reading gives `[A,D,G,B,E,H,C,F,I]`; indices `[0,1,2]` erase the first symbol of each block.
+
+### Exercise 2
+
+Compare the control loss counts.
+
+> **Answer:** Interleaving gives `[1,1,1]` missing symbols per block; row order gives `[3,0,0]`. Both totals are `3`.
+
+### Exercise 3
+
+Can inverse permutation fill the missing values?
+
+> **Answer:** No. Missing positions stay `null`; the permutation changes location but adds no redundant information.
+
+
+
+SOURCE INF023 fr streeling/courses/information-theory/fr/inf-023-deinterleave-burst-erasures-without-inventing-recovery.fr.md 
+ 
+
+# Désentrelacer les effacements en rafale sans inventer de récupération
+
+> Ce cas mathématique ou logique fini est créé pour le cours et appuyé par une lecture délimitée des sources. Revue technique humaine, revue linguistique, tentatives apprenantes, exécution native, adoption et publication restent indécidées.
+
+Un futur transport audio de guitare pourrait vouloir répartir l’effet d’une brève perte de paquets en rafale. L’entrelacement modifie l’origine des positions transmises consécutivement. Il peut réduire la concentration des symboles manquants dans un bloc. Il ne recrée pas les valeurs jamais reçues, et compter des positions ne démontre aucun gain perceptif.
+
+Écrivez les blocs sources dans un tableau rectangulaire et lisez les colonnes pour obtenir l’ordre entrelacé. Chaque indice transmis correspond à une ligne et une colonne d’origine. Effacez les positions déclarées, puis inversez cette correspondance pour retrouver la disposition source. Gardez un marqueur explicite d’absence. On reconstruit la disposition, pas les valeurs des symboles perdus.
+
+Le contrôle transmet les mêmes symboles par lignes. La même rafale efface alors un bloc entier au lieu de répartir les pertes. Le nombre total de symboles absents ne change pas. Une correction ultérieure exigerait une redondance réelle, un code spécifié et des tests de décodage distincts. Latence de mise en tampon et mémoire du récepteur ne sont pas modélisées ; la RFC rappelle que l’entrelacement peut ajouter du retard. Un tableau de permutation sur papier précède toute modification d’un transport audio réel.
+
+ ### Exercice 1
+
+Écrivez l’ordre transmis entrelacé.
+
+> **Réponse:** La lecture par colonnes donne `[A,D,G,B,E,H,C,F,I]` ; les indices `[0,1,2]` effacent le premier symbole de chaque bloc.
+
+### Exercice 2
+
+Comparez les pertes du contrôle.
+
+> **Réponse:** L’entrelacement donne `[1,1,1]` absences par bloc ; l’ordre par lignes donne `[3,0,0]`. Les deux totaux valent `3`.
+
+### Exercice 3
+
+La permutation inverse peut-elle remplir les valeurs absentes ?
+
+> **Réponse:** Non. Les positions absentes restent `null` ; la permutation déplace sans ajouter d’information redondante.
+
+
+
+SOURCE INF023 es streeling/courses/information-theory/es/inf-023-deinterleave-burst-erasures-without-inventing-recovery.es.md 
+ 
+
+# Desentrelazar borrados en ráfaga sin inventar recuperación
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Un futuro transporte de audio de guitarra podría repartir el efecto de una breve pérdida de paquetes en ráfaga. El entrelazado cambia de dónde provienen posiciones transmitidas consecutivamente. Puede reducir la concentración de símbolos ausentes dentro de un bloque. No recrea valores nunca recibidos, y contar posiciones no demuestra mejoras perceptivas.
+
+Escriba los bloques originales en una matriz rectangular y lea las columnas para obtener el orden entrelazado. Cada índice transmitido corresponde a una fila y columna originales. Borre las posiciones declaradas e invierta después la correspondencia para recuperar la disposición original. Conserve un marcador explícito de ausencia. Se reconstruye la disposición, no los valores perdidos.
+
+El control transmite los mismos símbolos por filas. La misma ráfaga borra entonces un bloque completo en vez de repartir las pérdidas. La cantidad total de símbolos ausentes no cambia. Una corrección posterior necesitaría redundancia real, una especificación del código y pruebas independientes del decodificador. Tampoco se modelan latencia de almacenamiento ni memoria del receptor; la RFC advierte que el entrelazado puede añadir demora. Una tabla manual de permutación precede cualquier cambio del transporte real de audio.
+
+ ### Ejercicio 1
+
+Escriba el orden transmitido entrelazado.
+
+> **Respuesta:** Leer columnas da `[A,D,G,B,E,H,C,F,I]`; los índices `[0,1,2]` borran el primer símbolo de cada bloque.
+
+### Ejercicio 2
+
+Compare las pérdidas del control.
+
+> **Respuesta:** El entrelazado deja `[1,1,1]` ausencias por bloque; el orden por filas deja `[3,0,0]`. Ambos totales son `3`.
+
+### Ejercicio 3
+
+¿Puede la permutación inversa rellenar los valores ausentes?
+
+> **Respuesta:** No. Las posiciones ausentes siguen en `null`; la permutación cambia la ubicación sin añadir información redundante.
+
+
+
+SOURCE INF024 en streeling/courses/information-theory/en/inf-024-refine-arithmetic-code-intervals-with-exact-rationals.md 
+ 
+
+# Refine Arithmetic-Code Intervals with Exact Rationals
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+An agent artifact can contain a repeated symbolic stream whose declared alphabet frequencies suggest a compact representation. Arithmetic coding assigns an interval to the whole sequence rather than a separate bit string to each symbol. This lesson examines exact interval semantics before any practical compression or serializer integration. The frequency table is part of the decoding contract.
+
+Partition the current half-open interval according to the ordered cumulative symbol frequencies. Select the subinterval for the next symbol and repeat using both endpoints from the previous step. Exact rational arithmetic prevents rounded boundaries from silently admitting a different symbol. The left endpoint is included and the right endpoint excluded, so a tag exactly on a boundary has a declared owner.
+
+The fixed sequence and its control share a prefix, then finish in different nonoverlapping intervals. A tag inside each final interval decodes the corresponding sequence when the decoder knows its length. Tag representation cost, termination symbols, renormalization and finite precision are outside this small model. Interval width alone is not a measured compressed file size. Preserve alphabet order, frequencies and length before proposing a composable coding stage: a numerical tag without those premises is not a self-describing artifact.
+
+ ### Exercise 1
+
+Find the fixed final interval.
+
+> **Answer:** The final interval is `[1/16,7/64)` and its width is `3/64`. Tag `3/32` lies inside and decodes to `ABA`.
+
+### Exercise 2
+
+Apply the changed-suffix control.
+
+> **Answer:** Sequence `ABB` ends in `[7/64,1/4)`, width `9/64`; tag `3/16` decodes to `ABB`.
+
+### Exercise 3
+
+Who owns the shared boundary?
+
+> **Answer:** Boundary `7/64` is excluded from the `ABA` interval and included in the `ABB` interval. Half-open boundaries prevent ambiguity.
+
+
+
+SOURCE INF024 fr streeling/courses/information-theory/fr/inf-024-refine-arithmetic-code-intervals-with-exact-rationals.fr.md 
+ 
+
+# Raffiner les intervalles de codage arithmétique en rationnels exacts
+
+> Ce cas mathématique ou logique fini est créé pour le cours et appuyé par une lecture délimitée des sources. Revue technique humaine, revue linguistique, tentatives apprenantes, exécution native, adoption et publication restent indécidées.
+
+Un artefact agentique peut contenir un flux symbolique répétitif dont les fréquences déclarées suggèrent une représentation compacte. Le codage arithmétique attribue un intervalle à la séquence entière plutôt qu’un mot binaire à chaque symbole. Ce cours examine la sémantique exacte des intervalles avant toute compression pratique. La table de fréquences fait partie du contrat de décodage.
+
+Découpez l’intervalle semi-ouvert courant selon les fréquences cumulées ordonnées. Choisissez le sous-intervalle du symbole suivant, puis recommencez avec les deux anciennes bornes. Les rationnels exacts empêchent un arrondi de frontière d’admettre silencieusement un autre symbole. La borne gauche appartient à l’intervalle et la droite en est exclue ; une valeur sur une frontière a donc un propriétaire déclaré.
+
+La séquence fixée et son contrôle partagent un préfixe, puis aboutissent à des intervalles disjoints. Une valeur intérieure décode la séquence correspondante si sa longueur est connue. Coût de représentation, terminaison, renormalisation et précision finie restent hors du modèle. Une largeur d’intervalle n’est pas une taille de fichier mesurée. Conservez ordre de l’alphabet, fréquences et longueur : une valeur numérique isolée ne décrit pas son propre décodage.
+
+ ### Exercice 1
+
+Trouvez l’intervalle final fixé.
+
+> **Réponse:** L’intervalle final est `[1/16,7/64)` et sa largeur vaut `3/64`. La valeur `3/32` est intérieure et décode `ABA`.
+
+### Exercice 2
+
+Appliquez le contrôle de suffixe modifié.
+
+> **Réponse:** La séquence `ABB` aboutit à `[7/64,1/4)`, de largeur `9/64` ; la valeur `3/16` décode `ABB`.
+
+### Exercice 3
+
+À qui appartient la frontière commune ?
+
+> **Réponse:** La frontière `7/64` est exclue de l’intervalle `ABA` et incluse dans celui de `ABB`. Les intervalles semi-ouverts évitent l’ambiguïté.
+
+
+
+SOURCE INF024 es streeling/courses/information-theory/es/inf-024-refine-arithmetic-code-intervals-with-exact-rationals.es.md 
+ 
+
+# Refinar intervalos de codificación aritmética con racionales exactos
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Un artefacto agéntico puede contener un flujo simbólico repetitivo cuyas frecuencias declaradas sugieren una representación compacta. La codificación aritmética asigna un intervalo a toda la secuencia en vez de una palabra binaria por símbolo. Esta lección examina la semántica exacta de intervalos antes de comprimir datos reales. La tabla de frecuencias pertenece al contrato de decodificación.
+
+Divida el intervalo semiabierto actual según las frecuencias acumuladas ordenadas. Elija el subintervalo del símbolo siguiente y repita usando ambos extremos anteriores. La aritmética racional exacta evita que un redondeo de frontera admita silenciosamente otro símbolo. Se incluye el extremo izquierdo y se excluye el derecho; una etiqueta situada en una frontera tiene así un propietario declarado.
+
+La secuencia fija y su control comparten un prefijo y terminan en intervalos distintos sin solapamiento. Una etiqueta interior decodifica la secuencia correspondiente cuando se conoce su longitud. El coste de representación, la terminación, la renormalización y la precisión finita quedan fuera. La anchura no es un tamaño de archivo medido. Conserve orden alfabético, frecuencias y longitud: una etiqueta numérica sola no describe cómo decodificarla.
+
+ ### Ejercicio 1
+
+Halle el intervalo final fijo.
+
+> **Respuesta:** El intervalo final es `[1/16,7/64)` y su anchura es `3/64`. La etiqueta `3/32` está dentro y decodifica `ABA`.
+
+### Ejercicio 2
+
+Aplique el control de sufijo modificado.
+
+> **Respuesta:** La secuencia `ABB` termina en `[7/64,1/4)`, con anchura `9/64`; la etiqueta `3/16` decodifica `ABB`.
+
+### Ejercicio 3
+
+¿A quién pertenece la frontera compartida?
+
+> **Respuesta:** La frontera `7/64` queda fuera del intervalo `ABA` y dentro del de `ABB`. Los intervalos semiabiertos evitan ambigüedad.
+
+
+
+SOURCE NET019 en streeling/courses/network-science/en/net-019-connect-a-diagnostic-backbone-at-minimum-edge-cost.md 
+ 
+
+# Connect a Diagnostic Backbone at Minimum Edge Cost
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+An observatory sketch needs a small diagnostic backbone connecting several components. Candidate links have stipulated setup costs. Choosing the cheapest link for every component separately can introduce cycles or leave groups disconnected. A spanning tree makes global connectivity explicit while avoiding redundant edges under this particular objective.
+
+Enumerate edge subsets of the required tree size, reject disconnected subsets and compare their summed cost. For a connected undirected graph, a connected subset with that edge count is a tree. The small authored graph makes exhaustive comparison practical and independently checkable. Keep every minimum-cost tree if the data produce ties; endpoint names alone are not an authority for choosing among equivalent optima.
+
+The control raises a link cost enough that another backbone becomes cheaper. The old tree stays connected, but it is no longer optimal under the revised costs. This is a cost-sensitivity result, not a measured network deployment. A tree has no redundant route when one of its edges fails, so minimum setup cost cannot certify resilience. The primary documentation also distinguishes disconnected inputs, which yield a forest rather than a complete spanning tree. A future topology DSL must retain those objective and connectivity premises.
+
+ ### Exercise 1
+
+Find the fixed minimum backbone.
+
+> **Answer:** Edges `[AB,BC,CD]` connect all nodes at cost `6`. Their subset is connected and has no cycle.
+
+### Exercise 2
+
+Apply the expensive-link control.
+
+> **Answer:** The optimum becomes `[AB,BC,BD]`, cost `8`. Keeping the previous tree would cost `11`.
+
+### Exercise 3
+
+Does minimum cost imply a failover route?
+
+> **Answer:** No. Removing any tree edge disconnects it. Resilience needs an additional connectivity objective or constraint.
+
+
+
+SOURCE NET019 fr streeling/courses/network-science/fr/net-019-connect-a-diagnostic-backbone-at-minimum-edge-cost.fr.md 
+ 
+
+# Relier une ossature de diagnostic au coût minimal
+
+> Ce cas mathématique ou logique fini est créé pour le cours et appuyé par une lecture délimitée des sources. Revue technique humaine, revue linguistique, tentatives apprenantes, exécution native, adoption et publication restent indécidées.
+
+Une esquisse d’observatoire cherche une petite ossature de diagnostic reliant plusieurs composants. Les liens candidats ont des coûts de mise en place imposés. Choisir séparément le lien le moins cher de chaque composant peut créer des cycles ou laisser des groupes isolés. Un arbre couvrant exprime la connectivité globale sans liens redondants pour cet objectif précis.
+
+Énumérez les sous-ensembles ayant le nombre d’arêtes requis, rejetez ceux qui sont déconnectés et comparez les sommes de coûts. Dans un graphe non orienté, un sous-ensemble connecté de cette taille est un arbre. Le petit exemple permet une comparaison exhaustive vérifiable. Si plusieurs arbres minimisent le coût, conservez-les tous ; le nom des sommets n’autorise pas à choisir arbitrairement.
+
+Le contrôle augmente le coût d’un lien jusqu’à rendre une autre ossature préférable. L’ancien arbre reste connecté, mais n’est plus optimal avec les nouveaux coûts. Ce n’est pas un déploiement réseau mesuré. Un arbre n’offre aucune route de secours si une arête tombe : coût minimal ne signifie pas résilience. La documentation distingue aussi les entrées déconnectées, qui donnent une forêt. Un futur DSL de topologie devrait conserver ces hypothèses de coût et de connectivité.
+
+ ### Exercice 1
+
+Trouvez l’ossature minimale fixée.
+
+> **Réponse:** Les arêtes `[AB,BC,CD]` relient tous les sommets au coût `6`. Le sous-ensemble est connecté sans cycle.
+
+### Exercice 2
+
+Appliquez le contrôle du lien coûteux.
+
+> **Réponse:** L’optimum devient `[AB,BC,BD]`, au coût `8`. Garder l’ancien arbre coûterait `11`.
+
+### Exercice 3
+
+Le coût minimal implique-t-il une route de secours ?
+
+> **Réponse:** Non. Retirer une arête de l’arbre le déconnecte. La résilience demande un autre objectif ou une autre contrainte.
+
+
+
+SOURCE NET019 es streeling/courses/network-science/es/net-019-connect-a-diagnostic-backbone-at-minimum-edge-cost.es.md 
+ 
+
+# Conectar una red de diagnóstico con coste mínimo
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Un boceto del observatorio necesita una pequeña red de diagnóstico que conecte varios componentes. Los enlaces candidatos tienen costes de instalación estipulados. Elegir por separado el enlace más barato de cada componente puede crear ciclos o dejar grupos desconectados. Un árbol de expansión expresa conectividad global sin enlaces redundantes para este objetivo concreto.
+
+Enumere subconjuntos con la cantidad de aristas requerida, descarte los desconectados y compare la suma de costes. En un grafo no dirigido, un subconjunto conectado de ese tamaño es un árbol. El ejemplo pequeño permite comparación exhaustiva verificable. Si hay varios árboles de coste mínimo, consérvelos todos; los nombres de vértices no autorizan una selección arbitraria.
+
+El control aumenta el coste de un enlace hasta que otra red resulta preferible. El árbol anterior sigue conectado, pero ya no es óptimo con esos costes. No se trata de un despliegue de red medido. Un árbol carece de ruta alternativa cuando falla una arista: coste mínimo no implica resiliencia. La documentación también distingue entradas desconectadas, que producen un bosque. Un futuro DSL de topología debería conservar estos supuestos de coste y conectividad.
+
+ ### Ejercicio 1
+
+Halle la red mínima fija.
+
+> **Respuesta:** Las aristas `[AB,BC,CD]` conectan todos los nodos con coste `6`. El subconjunto es conexo y sin ciclos.
+
+### Ejercicio 2
+
+Aplique el control del enlace caro.
+
+> **Respuesta:** El óptimo pasa a `[AB,BC,BD]`, con coste `8`. Mantener el árbol anterior costaría `11`.
+
+### Ejercicio 3
+
+¿El coste mínimo implica una ruta alternativa?
+
+> **Respuesta:** No. Quitar cualquier arista del árbol lo desconecta. La resiliencia necesita otro objetivo o restricción.
+
+
+
+SOURCE NET020 en streeling/courses/network-science/en/net-020-color-conflicting-agent-tasks-with-an-exact-small-search.md 
+ 
+
+# Color Conflicting Agent Tasks with an Exact Small Search
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+Several ready agent tasks may still be unable to run in the same slot because they edit the same resource. A precedence DAG does not capture every such incompatibility. An undirected conflict graph places an edge between tasks that cannot share a slot. A color identifies a slot; it does not identify a worker or prove that any worker has the required capability.
+
+Search assignments with increasing numbers of colors. Accept an assignment only if every edge has differently colored endpoints. The first feasible color count proves optimality for this fully enumerated small graph. To make the displayed assignment deterministic, keep the lexicographically first color vector in the declared node order. Equivalent color renamings do not change the minimum slot count.
+
+The fixed cycle needs fewer slots than its control, which adds a diagonal and therefore a triangle. A triangle provides a direct lower bound because all its vertices conflict with one another. The documentation describes greedy coloring as an attempt to use few colors; it does not promise the exact optimum supplied by our exhaustive search. Task duration, worker availability, memory limits and dependencies between slots are absent. A future scheduling DSL must not treat this simplified coloring as a complete concurrent-execution plan.
+
+ ### Exercise 1
+
+Color the fixed conflict cycle.
+
+> **Answer:** The first minimum coloring is `[0,1,0,1]`, using `2` slots. Every edge has distinct endpoint colors.
+
+### Exercise 2
+
+Explain the diagonal control.
+
+> **Answer:** Adding `[A,C]` creates a triangle. The minimum is `3`, with first coloring `[0,1,2,1]`.
+
+### Exercise 3
+
+Can a greedy result certify the minimum here?
+
+> **Answer:** Not by itself. The exact search and graph lower bounds justify the minimum; a greedy assignment only demonstrates feasibility.
+
+
+
+SOURCE NET020 fr streeling/courses/network-science/fr/net-020-color-conflicting-agent-tasks-with-an-exact-small-search.fr.md 
+ 
+
+# Colorier les tâches agentiques incompatibles par recherche exacte
+
+> Ce cas mathématique ou logique fini est créé pour le cours et appuyé par une lecture délimitée des sources. Revue technique humaine, revue linguistique, tentatives apprenantes, exécution native, adoption et publication restent indécidées.
+
+Plusieurs tâches agentiques prêtes peuvent rester incompatibles dans un même créneau parce qu’elles modifient la même ressource. Un DAG de précédence ne décrit pas toutes ces incompatibilités. Un graphe de conflits non orienté relie les tâches qui ne peuvent partager un créneau. Une couleur désigne un créneau, pas un agent ni une preuve de compétence.
+
+Cherchez les affectations en augmentant le nombre de couleurs. Acceptez une affectation seulement si les extrémités de chaque arête ont des couleurs distinctes. Le premier nombre réalisable prouve l’optimalité pour ce petit graphe entièrement énuméré. L’affectation affichée est le premier vecteur lexicographique dans l’ordre déclaré des sommets. Renommer les couleurs ne change pas le nombre minimal de créneaux.
+
+Le cycle fixé demande moins de créneaux que le contrôle, qui ajoute une diagonale et forme un triangle. Ce triangle fournit une borne inférieure immédiate : tous ses sommets sont mutuellement incompatibles. La documentation présente la coloration gloutonne comme une tentative d’utiliser peu de couleurs, sans garantie d’optimum exact. Durées, disponibilités, mémoire et dépendances entre créneaux sont absentes. Un futur DSL ne devrait pas prendre cette coloration pour un plan d’exécution complet.
+
+ ### Exercice 1
+
+Coloriez le cycle de conflits fixé.
+
+> **Réponse:** La première coloration minimale est `[0,1,0,1]`, avec `2` créneaux. Chaque arête sépare deux couleurs.
+
+### Exercice 2
+
+Expliquez le contrôle avec diagonale.
+
+> **Réponse:** Ajouter `[A,C]` crée un triangle. Le minimum vaut `3`, avec la première coloration `[0,1,2,1]`.
+
+### Exercice 3
+
+Un résultat glouton certifie-t-il le minimum ici ?
+
+> **Réponse:** Pas à lui seul. Recherche exacte et bornes du graphe justifient le minimum ; une affectation gloutonne démontre seulement la faisabilité.
+
+
+
+SOURCE NET020 es streeling/courses/network-science/es/net-020-color-conflicting-agent-tasks-with-an-exact-small-search.es.md 
+ 
+
+# Colorear tareas agénticas incompatibles con búsqueda exacta
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Varias tareas agénticas listas pueden ser incompatibles en el mismo turno porque modifican un recurso compartido. Un DAG de precedencia no captura todas esas incompatibilidades. Un grafo no dirigido conecta tareas que no pueden compartir turno. Un color representa un turno, no un trabajador ni una prueba de capacidad.
+
+Busque asignaciones aumentando el número de colores. Acepte una asignación solo si cada arista tiene extremos de colores distintos. La primera cantidad factible demuestra optimalidad para este pequeño grafo enumerado por completo. Para mostrar un resultado determinista, conserve el primer vector lexicográfico en el orden de nodos declarado. Renombrar colores no altera la cantidad mínima de turnos.
+
+El ciclo fijo necesita menos turnos que el control, que añade una diagonal y forma un triángulo. Este da una cota inferior inmediata porque sus vértices son incompatibles entre sí. La documentación presenta la coloración voraz como un intento de usar pocos colores, sin prometer el óptimo exacto de nuestra enumeración. Faltan duraciones, disponibilidad, memoria y dependencias entre turnos. Un futuro DSL no debería confundir esta coloración con un plan completo de ejecución concurrente.
+
+ ### Ejercicio 1
+
+Coloree el ciclo de conflictos fijo.
+
+> **Respuesta:** La primera coloración mínima es `[0,1,0,1]`, con `2` turnos. Cada arista separa colores distintos.
+
+### Ejercicio 2
+
+Explique el control con diagonal.
+
+> **Respuesta:** Añadir `[A,C]` crea un triángulo. El mínimo es `3`, con primera coloración `[0,1,2,1]`.
+
+### Ejercicio 3
+
+¿Un resultado voraz certifica aquí el mínimo?
+
+> **Respuesta:** Por sí solo, no. La búsqueda exacta y las cotas justifican el mínimo; una asignación voraz solo demuestra factibilidad.
+
+
+
+SOURCE NET021 en streeling/courses/network-science/en/net-021-check-signed-transform-consistency-around-a-cycle.md 
+ 
+
+# Check Signed Transform Consistency around a Cycle
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+Craft panels or coordinate conventions can impose pairwise orientation relationships. One relation preserves a sign and another reverses it. A diagram may contain a cycle without being contradictory: consistency depends on the transformations composed around it. This differs from a precedence cycle, where circular ordering itself prevents a valid schedule.
+
+Assign each vertex a sign and require that endpoint signs multiply to the edge sign. Fix one root sign to remove the global reversal ambiguity. Propagate along a spanning path, then verify every remaining edge rather than assuming it agrees. Multiplying relations around a cycle cancels all vertex signs, so the product of edge signs must be positive. For the declared triangle, that product is also sufficient for a consistent assignment.
+
+The fixed triangle contains reversing relations in a compatible pattern. Flipping a single edge in the control creates an impossible cycle product. Reversing every node label cannot fix it because endpoint products are unchanged. This tiny sign model is not a complete geometric transform system: rotations in space may fail to commute and require matrices or quaternions. A future craft DSL should retain edge meaning and revision before using a signed consistency check as a diagnostic.
+
+ ### Exercise 1
+
+Propagate the fixed signs.
+
+> **Answer:** With root `A=1`, labels `[1,1,-1]` satisfy every edge and the cycle product is `1`.
+
+### Exercise 2
+
+Why does the control fail?
+
+> **Answer:** Its cycle product is `-1`. Multiplying all endpoint equations would require `1=-1`, so no labeling exists.
+
+### Exercise 3
+
+Would reversing every node label repair the control?
+
+> **Answer:** No. Global reversal preserves endpoint products. The conflicting edge relation must be inspected, not hidden by changing the root convention.
+
+
+
+SOURCE NET021 fr streeling/courses/network-science/fr/net-021-check-signed-transform-consistency-around-a-cycle.fr.md 
+ 
+
+# Vérifier la cohérence des transformations signées sur un cycle
+
+> Ce cas mathématique ou logique fini est créé pour le cours et appuyé par une lecture délimitée des sources. Revue technique humaine, revue linguistique, tentatives apprenantes, exécution native, adoption et publication restent indécidées.
+
+Des panneaux d’artisanat ou des conventions de coordonnées peuvent imposer des relations d’orientation par paires. Une relation conserve un signe, une autre l’inverse. Un schéma peut contenir un cycle sans contradiction : la cohérence dépend de la composition des transformations. Cela diffère d’un cycle de précédence, où l’ordre circulaire empêche un planning valide.
+
+Attribuez un signe à chaque sommet et exigez que le produit des signes aux extrémités égale celui de l’arête. Fixez le signe racine pour éliminer l’ambiguïté d’inversion globale. Propagez les signes sur un chemin couvrant, puis vérifiez toutes les arêtes restantes. Multiplier les relations sur un cycle annule les signes des sommets : le produit des signes des arêtes doit être positif. Pour le triangle déclaré, cette condition est aussi suffisante.
+
+Le triangle fixé contient des inversions compatibles. Changer une seule arête dans le contrôle rend le produit cyclique impossible. Inverser tous les signes de sommets ne répare rien, puisque leurs produits restent inchangés. Ce modèle ne représente pas toutes les transformations géométriques : les rotations spatiales peuvent ne pas commuter et exigent des matrices ou des quaternions. Un futur DSL devrait conserver la signification et la révision des relations.
+
+ ### Exercice 1
+
+Propagez les signes fixés.
+
+> **Réponse:** Avec la racine `A=1`, les signes `[1,1,-1]` satisfont les arêtes ; le produit cyclique vaut `1`.
+
+### Exercice 2
+
+Pourquoi le contrôle échoue-t-il ?
+
+> **Réponse:** Son produit cyclique vaut `-1`. Multiplier les équations exigerait `1=-1` ; aucune affectation n’existe.
+
+### Exercice 3
+
+Inverser tous les signes réparerait-il le contrôle ?
+
+> **Réponse:** Non. L’inversion globale conserve les produits aux extrémités. Il faut examiner la relation en conflit, pas changer seulement la convention racine.
+
+
+
+SOURCE NET021 es streeling/courses/network-science/es/net-021-check-signed-transform-consistency-around-a-cycle.es.md 
+ 
+
+# Comprobar la coherencia de transformaciones con signo en un ciclo
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Los paneles artesanales o las convenciones de coordenadas pueden imponer relaciones de orientación por pares. Una conserva un signo y otra lo invierte. Un diagrama puede contener un ciclo sin contradicción: la coherencia depende de las transformaciones compuestas. Esto difiere de un ciclo de precedencia, donde el orden circular impide una planificación válida.
+
+Asigne un signo a cada vértice y exija que el producto de los signos extremos coincida con el de la arista. Fije la raíz para eliminar la ambigüedad de inversión global. Propague por un camino de expansión y compruebe todas las aristas restantes. Multiplicar relaciones alrededor del ciclo cancela los signos de vértices; por tanto, el producto de las aristas debe ser positivo. Para el triángulo declarado también es condición suficiente.
+
+El triángulo fijo contiene inversiones compatibles. Cambiar una arista en el control hace imposible el producto cíclico. Invertir todos los signos de vértices no lo repara porque sus productos no cambian. Este modelo no representa transformaciones geométricas generales: las rotaciones espaciales pueden no conmutar y necesitan matrices o cuaterniones. Un futuro DSL debería conservar el significado y la revisión de las relaciones.
+
+ ### Ejercicio 1
+
+Propague los signos fijos.
+
+> **Respuesta:** Con raíz `A=1`, los signos `[1,1,-1]` satisfacen las aristas; el producto cíclico es `1`.
+
+### Ejercicio 2
+
+¿Por qué falla el control?
+
+> **Respuesta:** Su producto cíclico es `-1`. Multiplicar las ecuaciones exigiría `1=-1`; no existe asignación.
+
+### Ejercicio 3
+
+¿Invertir todos los signos repararía el control?
+
+> **Respuesta:** No. La inversión global conserva los productos extremos. Hay que examinar la relación conflictiva, no ocultarla cambiando la raíz.
+
+
+
+SOURCE PM016 en streeling/courses/product-management/en/pm-016-retain-pareto-incomparable-verification-options.md 
+ 
+
+# Retain Pareto-Incomparable Verification Options
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+A Learn coordinator compares optional verification workflows using setup effort and a stipulated defect count. One option can be cheaper while another has fewer defects. A single headline score would need an explicit exchange rule between those dimensions. Pareto comparison first identifies options that are unambiguously worse under all represented objectives.
+
+Every objective in this case is minimized. An option dominates another when it is no worse in every coordinate and strictly better in at least one. Equality across all coordinates is not strict dominance. Compare every pair and retain the nondominated options. This partial order can leave several candidates, which is an honest result rather than an optimizer failure.
+
+The fixed set contains a dominated option and several genuine tradeoffs. The control worsens another option enough that it becomes dominated too. Removing dominated choices does not decide among the remaining tradeoffs or show that they meet required release gates. Unrepresented dimensions, uncertain measurements and stakeholder priorities could change a real decision. The course uses fictional comparable coordinates, not measured course defects. A planning DSL should expose the nondominated set and the missing preference rule before announcing a unique recommendation.
+
+ ### Exercise 1
+
+Find the fixed nondominated set.
+
+> **Answer:** The survivors are `[A,B,D]`. Each dominates `C`, but none dominates another survivor.
+
+### Exercise 2
+
+Apply the worsened-option control.
+
+> **Answer:** With `D=[4,5]`, both `A` and `B` dominate `D`. The nondominated set is `[A,B]`.
+
+### Exercise 3
+
+Can the surviving set justify a unique choice?
+
+> **Answer:** No. Pareto filtering retains tradeoffs. Choosing among them requires declared priorities and all mandatory constraints.
+
+
+
+SOURCE PM016 fr streeling/courses/product-management/fr/pm-016-retain-pareto-incomparable-verification-options.fr.md 
+ 
+
+# Conserver les options de vérification incomparables au sens de Pareto
+
+> Ce cas mathématique ou logique fini est créé pour le cours et appuyé par une lecture délimitée des sources. Revue technique humaine, revue linguistique, tentatives apprenantes, exécution native, adoption et publication restent indécidées.
+
+Un coordinateur Learn compare des processus de vérification optionnels selon l’effort initial et un nombre de défauts imposé. Une option peut coûter moins et une autre présenter moins de défauts. Une note unique exigerait une règle explicite d’échange entre ces dimensions. La comparaison de Pareto commence par écarter les options sans avantage sur les objectifs représentés.
+
+Tous les objectifs sont ici à minimiser. Une option en domine une autre si elle n’est pire sur aucune coordonnée et s’améliore strictement sur au moins une. L’égalité complète n’est pas une dominance stricte. Comparez toutes les paires et conservez les options non dominées. Cet ordre partiel peut laisser plusieurs candidats ; c’est un résultat honnête, pas un échec d’optimisation.
+
+Le cas fixé contient une option dominée et plusieurs compromis réels. Le contrôle dégrade une autre option jusqu’à la rendre dominée. Supprimer ces options ne choisit pas entre les compromis restants et ne prouve pas le respect des critères de publication. Dimensions absentes, incertitudes et priorités pourraient modifier la décision réelle. Les coordonnées sont fictives, pas des défauts de cours mesurés. Un DSL devrait afficher l’ensemble non dominé et la préférence manquante avant une recommandation unique.
+
+ ### Exercice 1
+
+Trouvez l’ensemble non dominé fixé.
+
+> **Réponse:** Les survivants sont `[A,B,D]`. Chacun domine `C`, mais aucun ne domine un autre survivant.
+
+### Exercice 2
+
+Appliquez le contrôle d’option dégradée.
+
+> **Réponse:** Avec `D=[4,5]`, `A` et `B` dominent `D`. L’ensemble non dominé devient `[A,B]`.
+
+### Exercice 3
+
+L’ensemble restant justifie-t-il un choix unique ?
+
+> **Réponse:** Non. Le filtre de Pareto conserve les compromis. Choisir demande des priorités déclarées et toutes les contraintes obligatoires.
+
+
+
+SOURCE PM016 es streeling/courses/product-management/es/pm-016-retain-pareto-incomparable-verification-options.es.md 
+ 
+
+# Conservar opciones de verificación incomparables según Pareto
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Un coordinador de Learn compara procesos opcionales de verificación según esfuerzo inicial y una cantidad estipulada de defectos. Una opción puede ser más barata y otra presentar menos defectos. Una puntuación única necesitaría una regla explícita de intercambio entre dimensiones. La comparación de Pareto empieza descartando opciones que no ofrecen ventaja en los objetivos representados.
+
+Aquí se minimizan todos los objetivos. Una opción domina a otra cuando no es peor en ninguna coordenada y mejora estrictamente al menos una. La igualdad completa no es dominancia estricta. Compare cada pareja y conserve las opciones no dominadas. Este orden parcial puede dejar varios candidatos: es un resultado honesto, no un fallo del optimizador.
+
+El caso fijo contiene una opción dominada y varios compromisos genuinos. El control empeora otra opción hasta hacerla dominada. Descartarlas no decide entre los compromisos restantes ni demuestra cumplimiento de los criterios de publicación. Dimensiones ausentes, incertidumbre y prioridades podrían cambiar una decisión real. Las coordenadas son ficticias, no defectos medidos de los cursos. Un DSL debería mostrar el conjunto no dominado y la preferencia pendiente antes de recomendar una opción única.
+
+ ### Ejercicio 1
+
+Halle el conjunto no dominado fijo.
+
+> **Respuesta:** Los supervivientes son `[A,B,D]`. Cada uno domina a `C`, pero ninguno domina a otro superviviente.
+
+### Ejercicio 2
+
+Aplique el control de opción empeorada.
+
+> **Respuesta:** Con `D=[4,5]`, tanto `A` como `B` dominan a `D`. El conjunto no dominado es `[A,B]`.
+
+### Ejercicio 3
+
+¿El conjunto restante justifica una elección única?
+
+> **Respuesta:** No. El filtro de Pareto conserva compromisos. Elegir exige prioridades declaradas y todas las restricciones obligatorias.
+
+
+
+SOURCE PM017 en streeling/courses/product-management/en/pm-017-allocate-whole-review-slots-by-largest-remainders.md 
+ 
+
+# Allocate Whole Review Slots by Largest Remainders
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+A future review plan has a fixed number of indivisible slots and a declared mixture of task classes. Multiplying the total by the target proportions usually produces fractional quotas. Rounding every quota independently may produce the wrong total. The largest-remainder method preserves the fixed slot count while making the final rounding decisions visible.
+
+Compute exact quotas from nonnegative weights and their sum. Allocate the floor of every quota, then distribute the remaining slots in descending order of fractional remainder. Declare an index-order tie rule before inspecting a tie. Recompute the full allocation when the total changes rather than appending a slot to an earlier result by intuition.
+
+The control increases the total and changes which class has the largest residual entitlement. These are fictional planning slots, not claims about actual reviewer availability. This method does not minimize estimator variance, guarantee fairness under every definition, or satisfy specialized skill constraints automatically. Quotas encode a chosen policy and require a reason. A future planning DSL would carry the weights, total, floor allocation and tie rule so that another agent can reproduce the exact integer result.
+
+ ### Exercise 1
+
+Allocate the fixed total.
+
+> **Answer:** Quotas `[7/2,21/10,7/5]` have floors `[3,2,1]`. The remaining slot goes to index `0`, giving `[4,2,1]`.
+
+### Exercise 2
+
+Recompute the larger-total control.
+
+> **Answer:** For `8` slots, quotas are `[4,12/5,8/5]`; index `2` gets the surplus and allocation is `[4,2,2]`.
+
+### Exercise 3
+
+Why declare a tie rule?
+
+> **Answer:** Equal remainders may compete for fewer remaining slots. A fixed rule makes the result reproducible without claiming that the rule is uniquely fair.
+
+
+
+SOURCE PM017 fr streeling/courses/product-management/fr/pm-017-allocate-whole-review-slots-by-largest-remainders.fr.md 
+ 
+
+# Répartir les créneaux entiers par les plus forts restes
+
+> Ce cas mathématique ou logique fini est créé pour le cours et appuyé par une lecture délimitée des sources. Revue technique humaine, revue linguistique, tentatives apprenantes, exécution native, adoption et publication restent indécidées.
+
+Un futur plan de revue possède un total fixé de créneaux indivisibles et une répartition déclarée des catégories de tâches. Multiplier le total par les proportions donne souvent des quotas fractionnaires. Arrondir chaque quota indépendamment peut produire un mauvais total. La méthode des plus forts restes conserve le nombre prévu en rendant les décisions d’arrondi visibles.
+
+Calculez les quotas exacts à partir de poids non négatifs et de leur somme. Attribuez d’abord la partie entière de chaque quota, puis distribuez les créneaux restants par reste fractionnaire décroissant. Déclarez une règle d’égalité fondée sur l’ordre des indices avant d’examiner un cas ex æquo. Si le total change, recalculez toute la répartition plutôt que d’ajouter intuitivement un créneau.
+
+Le contrôle augmente le total et change la catégorie ayant le plus grand reste. Les créneaux sont fictifs ; ils ne décrivent aucune disponibilité réelle. La méthode ne minimise pas une variance et ne garantit ni toute conception de l’équité ni les compétences requises. Les quotas expriment une politique à justifier. Un futur DSL devrait conserver poids, total, parties entières et règle d’égalité pour rendre le résultat entier reproductible.
+
+ ### Exercice 1
+
+Répartissez le total fixé.
+
+> **Réponse:** Les quotas `[7/2,21/10,7/5]` ont pour parties entières `[3,2,1]`. Le créneau restant va à l’indice `0`, donnant `[4,2,1]`.
+
+### Exercice 2
+
+Recalculez le contrôle au total augmenté.
+
+> **Réponse:** Pour `8` créneaux, les quotas sont `[4,12/5,8/5]` ; l’indice `2` reçoit le surplus et la répartition vaut `[4,2,2]`.
+
+### Exercice 3
+
+Pourquoi déclarer une règle d’égalité ?
+
+> **Réponse:** Des restes égaux peuvent se disputer trop peu de créneaux. Une règle fixée rend le résultat reproductible sans se prétendre seule équitable.
+
+
+
+SOURCE PM017 es streeling/courses/product-management/es/pm-017-allocate-whole-review-slots-by-largest-remainders.es.md 
+ 
+
+# Asignar turnos enteros por mayores restos
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Un futuro plan de revisión tiene una cantidad fija de turnos indivisibles y una mezcla declarada de clases de tareas. Multiplicar el total por las proporciones suele producir cuotas fraccionarias. Redondearlas independientemente puede dar un total incorrecto. El método de mayores restos conserva la cantidad prevista y hace visibles las decisiones de redondeo.
+
+Calcule cuotas exactas a partir de pesos no negativos y su suma. Asigne la parte entera de cada cuota y distribuya los turnos restantes por resto fraccionario descendente. Declare de antemano una regla de empate basada en el orden de índices. Si cambia el total, recalcule toda la asignación en vez de añadir intuitivamente un turno al resultado anterior.
+
+El control aumenta el total y cambia la clase con mayor resto. Son turnos ficticios, no disponibilidad observada de revisores. El método no minimiza la varianza ni garantiza toda definición de equidad o las habilidades necesarias. Las cuotas expresan una política que debe justificarse. Un futuro DSL debería conservar pesos, total, partes enteras y regla de empate para que otro agente reproduzca el resultado entero.
+
+ ### Ejercicio 1
+
+Asigne el total fijo.
+
+> **Respuesta:** Las cuotas `[7/2,21/10,7/5]` tienen partes enteras `[3,2,1]`. El turno restante va al índice `0`, dando `[4,2,1]`.
+
+### Ejercicio 2
+
+Recalcule el control de total mayor.
+
+> **Respuesta:** Para `8` turnos, las cuotas son `[4,12/5,8/5]`; el índice `2` recibe el sobrante y la asignación es `[4,2,2]`.
+
+### Ejercicio 3
+
+¿Por qué declarar una regla de empate?
+
+> **Respuesta:** Restos iguales pueden competir por menos turnos disponibles. Una regla fija permite reproducir el resultado sin declararla la única justa.
+
+
+
+SOURCE PM018 en streeling/courses/product-management/en/pm-018-find-the-weight-at-which-a-workflow-ranking-flips.md 
+ 
+
+# Find the Weight at Which a Workflow Ranking Flips
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+A team ranks verification workflows by a weighted mixture of latency points and rework points. An assistant can make a preference appear objective by hiding the chosen weight inside a composite score. Sensitivity analysis asks which preference assumptions actually support the recommendation. Both coordinates must already be on declared comparable scales; multiplying raw unlike units does not justify a utility model.
+
+Write each workflow score as an affine function of the latency weight, with the remaining weight assigned to rework. Set the two score functions equal and solve for the crossover. Check whether that weight lies in the allowed unit interval. Evaluate a point on each side to determine the preferred option, and retain both options at exact equality.
+
+The fixed weight favours one workflow while the control favours the other. Neither result establishes a universal winner. The crossover exposes a decision boundary that a stakeholder can inspect before a policy is adopted. Actual latency distributions, correction quality and uncertainty in the point scales remain unmeasured. The primary scalarization reading supplies the weighted-objective concept; the finite affine comparison is authored. A future agent recommendation should state its weight and show whether plausible preference changes reverse the ranking.
+
+ ### Exercise 1
+
+Compute the fixed ranking.
+
+> **Answer:** At weight `1/4`, scores are `[13/2,3]`; minimizing selects `B`.
+
+### Exercise 2
+
+Find the crossover and control.
+
+> **Answer:** The crossover is `3/5`, where both scores are `22/5`. At `3/4`, scores `[7/2,5]` select `A`.
+
+### Exercise 3
+
+What does the tie authorize?
+
+> **Answer:** It authorizes reporting both minimizers under that objective. A unique recommendation needs an additional declared criterion, not an arbitrary hidden tie-break.
+
+
+
+SOURCE PM018 fr streeling/courses/product-management/fr/pm-018-find-the-weight-at-which-a-workflow-ranking-flips.fr.md 
+ 
+
+# Trouver le poids qui inverse le classement des processus
+
+> Ce cas mathématique ou logique fini est créé pour le cours et appuyé par une lecture délimitée des sources. Revue technique humaine, revue linguistique, tentatives apprenantes, exécution native, adoption et publication restent indécidées.
+
+Une équipe classe des processus de vérification en combinant des points de latence et de reprise. Un assistant peut donner une apparence objective à une préférence en cachant son poids dans une note composite. L’analyse de sensibilité demande quelles préférences soutiennent réellement la recommandation. Les coordonnées doivent déjà suivre des échelles comparables déclarées ; multiplier des unités hétérogènes ne justifie pas une utilité.
+
+Écrivez chaque note comme une fonction affine du poids de latence, le poids restant étant attribué à la reprise. Égalisez les deux fonctions et résolvez le seuil de bascule. Vérifiez qu’il appartient à l’intervalle autorisé. Évaluez un point de chaque côté pour déterminer l’option préférable, puis gardez les deux à égalité exacte.
+
+Le poids fixé favorise un processus et le contrôle favorise l’autre. Aucun résultat ne donne de gagnant universel. Le seuil rend visible une frontière de décision avant l’adoption d’une politique. Distributions réelles de latence, qualité des corrections et incertitude des échelles ne sont pas mesurées. La lecture sur la scalarisation fournit le concept d’objectif pondéré ; la comparaison affine finie est créée ici. Une recommandation devrait afficher son poids et signaler les préférences qui inversent le classement.
+
+ ### Exercice 1
+
+Calculez le classement fixé.
+
+> **Réponse:** Au poids `1/4`, les notes sont `[13/2,3]` ; la minimisation choisit `B`.
+
+### Exercice 2
+
+Trouvez le seuil et le contrôle.
+
+> **Réponse:** Le seuil vaut `3/5`, où les notes valent `22/5`. À `3/4`, les notes `[7/2,5]` choisissent `A`.
+
+### Exercice 3
+
+Que permet l’égalité ?
+
+> **Réponse:** Elle permet d’annoncer les deux minima de cet objectif. Une recommandation unique exige un autre critère déclaré.
+
+
+
+SOURCE PM018 es streeling/courses/product-management/es/pm-018-find-the-weight-at-which-a-workflow-ranking-flips.es.md 
+ 
+
+# Hallar el peso que invierte el orden de procesos
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Un equipo ordena procesos de verificación mediante una mezcla ponderada de puntos de latencia y retrabajo. Un asistente puede hacer que una preferencia parezca objetiva ocultando el peso en una puntuación compuesta. El análisis de sensibilidad pregunta qué preferencias sostienen realmente la recomendación. Las coordenadas deben usar escalas comparables declaradas; ponderar unidades incompatibles no justifica un modelo de utilidad.
+
+Escriba cada puntuación como función afín del peso de latencia y asigne el peso restante al retrabajo. Iguale ambas funciones y resuelva el cruce. Compruebe que el peso pertenece al intervalo permitido. Evalúe un punto a cada lado para identificar la opción preferida y conserve ambas cuando hay igualdad exacta.
+
+El peso fijo favorece un proceso y el control favorece el otro. Ningún resultado establece un ganador universal. El cruce expone una frontera de decisión antes de adoptar una política. No se miden distribuciones reales de latencia, calidad de correcciones ni incertidumbre de las escalas. La lectura sobre escalarización aporta el concepto ponderado; la comparación afín finita es propia. Una recomendación debería mostrar su peso y advertir qué preferencias invierten el orden.
+
+ ### Ejercicio 1
+
+Calcule el orden fijo.
+
+> **Respuesta:** Con peso `1/4`, las puntuaciones son `[13/2,3]`; minimizar elige `B`.
+
+### Ejercicio 2
+
+Halle el cruce y el control.
+
+> **Respuesta:** El cruce es `3/5`, donde ambas puntuaciones son `22/5`. Con `3/4`, las puntuaciones `[7/2,5]` eligen `A`.
+
+### Ejercicio 3
+
+¿Qué autoriza el empate?
+
+> **Respuesta:** Permite informar ambos mínimos bajo ese objetivo. Recomendar uno exige otro criterio declarado, no un desempate oculto.
+
+
+
+SOURCE PM019 en streeling/courses/product-management/en/pm-019-minimize-stratified-review-variance-over-integer-allocations.md 
+ 
+
+# Minimize Stratified Review Variance over Integer Allocations
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+A review study must distribute a fixed sample budget between task strata with different variability. Giving every stratum the same number of observations can waste precision when their contributions differ. This lesson asks a narrow design question: which positive integer allocation minimizes the stipulated variance of a stratified mean under the declared sampling assumptions?
+
+The target mean is a weighted sum of independent stratum sample means. Under independent sampling with replacement and known within-stratum variances, its variance is the sum of squared target weights times stratum variance divided by stratum sample count. Enumerate every positive integer split of the fixed total. Compare exact rational values and retain all minimizing splits. The continuous allocation is useful intuition but rounding it is not a general proof of the integer optimum.
+
+The fixed variances favour more sampling in the more variable stratum; the control swaps those variances and reverses the allocation. No observed defect rate or actual reviewer availability supplies these numbers. Mandatory content coverage, dependent repeated learners, unequal observation costs and finite-population corrections would change the design. The primary abstract explicitly distinguishes exact integer allocation from rounded continuous allocation. A future review planner should retain the full feasible split table before presenting an optimality claim.
+
+ ### Exercise 1
+
+Find the exact fixed optimum.
+
+> **Answer:** Allocation `[2,6]` gives variance `1/2`, the minimum over all positive integer splits. Equal allocation gives `5/8`.
+
+### Exercise 2
+
+Apply the variance-swapped control.
+
+> **Answer:** The optimum becomes `[6,2]` with minimum `1/2`. The target weights and total sample count are unchanged.
+
+### Exercise 3
+
+Does proportional allocation solve this objective?
+
+> **Answer:** Not generally. It uses target weights alone, while this variance objective also depends on within-stratum variability and integer feasibility.
+
+
+
+SOURCE PM019 fr streeling/courses/product-management/fr/pm-019-minimize-stratified-review-variance-over-integer-allocations.fr.md 
+ 
+
+# Minimiser la variance d’une revue stratifiée par allocations entières
+
+> Ce cas mathématique ou logique fini est créé pour le cours et appuyé par une lecture délimitée des sources. Revue technique humaine, revue linguistique, tentatives apprenantes, exécution native, adoption et publication restent indécidées.
+
+Une étude de revue répartit un budget d’échantillonnage fixé entre des catégories de variabilité différente. Donner le même nombre d’observations à chaque catégorie peut gaspiller de la précision. La question est limitée : quelle allocation entière strictement positive minimise la variance imposée d’une moyenne stratifiée sous les hypothèses annoncées ?
+
+La moyenne cible est une somme pondérée de moyennes d’échantillons indépendants. Avec tirage indépendant avec remise et variances internes connues, sa variance est la somme des poids cibles au carré multipliés par la variance de catégorie, puis divisés par son effectif. Énumérez tous les partages entiers positifs du total. Comparez les rationnels exacts et conservez tous les minima. L’allocation continue éclaire le problème, mais son arrondi ne prouve pas en général l’optimum entier.
+
+Les variances fixées favorisent davantage d’observations dans la catégorie variable ; le contrôle les échange et inverse la répartition. Les nombres ne proviennent ni de défauts observés ni de disponibilités réelles. Couverture obligatoire, apprenants répétés dépendants, coûts inégaux et correction de population finie changeraient le plan. Le résumé primaire distingue allocation entière exacte et arrondi continu. Un futur planificateur devrait conserver la table complète des partages admissibles.
+
+ ### Exercice 1
+
+Trouvez l’optimum exact fixé.
+
+> **Réponse:** L’allocation `[2,6]` donne la variance `1/2`, minimale sur les partages entiers positifs. Le partage égal donne `5/8`.
+
+### Exercice 2
+
+Appliquez le contrôle de variances échangées.
+
+> **Réponse:** L’optimum devient `[6,2]` avec un minimum de `1/2`. Les poids cibles et l’effectif total ne changent pas.
+
+### Exercice 3
+
+L’allocation proportionnelle résout-elle cet objectif ?
+
+> **Réponse:** Pas en général. Elle utilise les poids cibles seuls, alors que la variance dépend aussi de la variabilité interne et des contraintes entières.
+
+
+
+SOURCE PM019 es streeling/courses/product-management/es/pm-019-minimize-stratified-review-variance-over-integer-allocations.es.md 
+ 
+
+# Minimizar la varianza de revisión estratificada con asignaciones enteras
+
+> Este caso matemático o lógico finito se ha creado para la lección y se apoya en una lectura acotada de fuentes. Revisión técnica humana, revisión lingüística, intentos de aprendizaje, ejecución nativa, adopción y publicación siguen sin decidirse.
+
+Un estudio de revisión reparte un presupuesto fijo de muestreo entre clases con distinta variabilidad. Dar el mismo número de observaciones a todas puede desperdiciar precisión. La pregunta es limitada: ¿qué asignación entera positiva minimiza la varianza estipulada de una media estratificada bajo los supuestos declarados?
+
+La media objetivo es una suma ponderada de medias muestrales independientes. Con muestreo independiente con reemplazo y varianzas internas conocidas, su varianza suma los pesos objetivo al cuadrado por la varianza del estrato, dividido por su tamaño muestral. Enumere todas las divisiones enteras positivas del total. Compare racionales exactos y conserve todos los mínimos. La asignación continua aporta intuición, pero redondearla no demuestra en general el óptimo entero.
+
+Las varianzas fijas favorecen más observaciones en el estrato más variable; el control las intercambia e invierte la asignación. Los valores no provienen de defectos observados ni de disponibilidad real. Cobertura obligatoria, aprendices repetidos dependientes, costes desiguales y correcciones de población finita cambiarían el diseño. El resumen primario distingue asignación entera exacta de redondeo continuo. Un futuro planificador debería conservar la tabla completa de divisiones factibles.
+
+ ### Ejercicio 1
+
+Halle el óptimo exacto fijo.
+
+> **Respuesta:** La asignación `[2,6]` da varianza `1/2`, mínima entre divisiones enteras positivas. La asignación igual da `5/8`.
+
+### Ejercicio 2
+
+Aplique el control de varianzas intercambiadas.
+
+> **Respuesta:** El óptimo pasa a `[6,2]` con mínimo `1/2`. Los pesos objetivo y el total muestral no cambian.
+
+### Ejercicio 3
+
+¿La asignación proporcional resuelve este objetivo?
+
+> **Respuesta:** En general, no. Usa solo los pesos objetivo; esta varianza depende también de la variabilidad interna y de la factibilidad entera.
+
+

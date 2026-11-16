@@ -1,0 +1,36 @@
+{
+  "observed_at_utc": "2026-10-26T12:53:41.484301+00:00",
+  "finding": "GAA020 prepared optimum list omitted tied minimizers A,C and B,C. Enumerating all six centre pairs yields radius 3 for four pairs.",
+  "author_draft_observation": "The writer was already running when the author noticed the candidate-tie enumeration risk. The first actual model self-check then retained the complete mismatch. This was not an independently discovered finding.",
+  "correction": "Kept the distance objective and authored positions unchanged; corrected complete optimum set and exercise 2 in EN/FR/ES plus packet. Radius and single-centre control unchanged.",
+  "rows": [
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-020-cover-a-finite-practice-space-with-fixed-centres.md",
+      "before_retained": "C:\\tmp\\batch25c-c-author\\before-kcentre\\streeling\\courses\\guitar-alchemist-academy\\en\\gaa-020-cover-a-finite-practice-space-with-fixed-centres.md.log",
+      "before_sha256": "d9d635ccf0559fdab30d834e2ebc433e172ca8ee6558c9fe16e1c644be6ce135",
+      "after_sha256": "c04c780090b8f24caf2d3c020592e1a96cc5d8a9f4f981f907a8f71763c93c64",
+      "diff": "C:\\tmp\\batch25c-c-author\\kcentre-diffs\\gaa-020-cover-a-finite-practice-space-with-fixed-centres.md.diff.log"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-020-cover-a-finite-practice-space-with-fixed-centres.fr.md",
+      "before_retained": "C:\\tmp\\batch25c-c-author\\before-kcentre\\streeling\\courses\\guitar-alchemist-academy\\fr\\gaa-020-cover-a-finite-practice-space-with-fixed-centres.fr.md.log",
+      "before_sha256": "1169db1daa514faaf859432ba980458d8ea56113bc9e8d95f4da551971fc002c",
+      "after_sha256": "687963baa2554aae5a33d3883a22d451ed95c7a55c6a9e672af098bf4eaa87f8",
+      "diff": "C:\\tmp\\batch25c-c-author\\kcentre-diffs\\gaa-020-cover-a-finite-practice-space-with-fixed-centres.fr.md.diff.log"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-020-cover-a-finite-practice-space-with-fixed-centres.es.md",
+      "before_retained": "C:\\tmp\\batch25c-c-author\\before-kcentre\\streeling\\courses\\guitar-alchemist-academy\\es\\gaa-020-cover-a-finite-practice-space-with-fixed-centres.es.md.log",
+      "before_sha256": "b79384847b843426714af28fd3d3bb2b540627e9e46054844812d4bee16c48af",
+      "after_sha256": "bd37146f280604291fe37271a1491c11c499cbafbe3586ca728b5b3a7c5a2f85",
+      "diff": "C:\\tmp\\batch25c-c-author\\kcentre-diffs\\gaa-020-cover-a-finite-practice-space-with-fixed-centres.es.md.diff.log"
+    },
+    {
+      "path": "code\\streeling\\evidence\\batch50-2026-10-25-c\\unit-c.json",
+      "before_retained": "C:\\tmp\\batch25c-c-author\\before-kcentre\\code\\streeling\\evidence\\batch50-2026-10-25-c\\unit-c.json.log",
+      "before_sha256": "92df95e3b92fb143678cea998de2d0ee8cdbeed7486415abd944e4b5a0659d12",
+      "after_sha256": "d4ad9c2a1e2b1b573933580193e5ca8bced92a73a16697181368fc98850961be"
+    }
+  ],
+  "replay": "Run self_check.py 2; do not infer replay success from this correction."
+}

@@ -1,0 +1,267 @@
+=== GTR021 en streeling/courses/guitar-studies/en/gtr-021-check-lateral-clearance-between-string-envelopes.md ===
+---
+module_id: gtr-021-check-lateral-clearance-between-string-envelopes
+department: guitar-studies
+course: "Check Lateral Clearance Between String Envelopes"
+level: advanced
+prerequisites: ["gtr-013-judge-a-bend-with-an-uncertainty-budget"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Check Lateral Clearance Between String Envelopes
+
+A correct bend pitch does not guarantee lateral clearance from a neighboring string. Retain both string radii and both swept displacements before comparing their envelopes. The interval gap includes the closest permitted approach, rather than just the resting center distance. This conservative geometric check could inform a [GA](https://github.com/GuitarAlchemist/ga) fingering explanation or a [Godot](https://godotengine.org/) teaching overlay. It does not reproduce vertical lifting, player technique, elastic collision or the shape along the whole string. A positive modeled gap is a conditional clearance statement.
+
+The check concerns a single lateral slice with independent swept displacement ranges. Touching is not clear, and all lengths share one unit. Vertical avoidance, full-string geometry and a player trial are absent.
+
+[Prerequisite](../../guitar-studies/en/gtr-013-judge-a-bend-with-an-uncertainty-budget.md)
+
+> **Answer:** The swept intervals are `[-1,7]` and `[8,11]`; their gap is 1 and clearance is true.
+
+> **Answer:** Resting center distance is not edge clearance; radii and motion ranges both consume it.
+
+> **Answer:** The independent ranges give a conservative envelope; actual time-correlated motions need a trajectory model.
+
+> **Answer:** The control gap is -1, so the envelopes overlap and the clearance claim fails.
+
+> **Answer:** An admitted displacement producing intersecting envelopes refutes universal lateral clearance in this slice.
+=== GTR021 fr streeling/courses/guitar-studies/fr/gtr-021-check-lateral-clearance-between-string-envelopes.fr.md ===
+---
+module_id: gtr-021-check-lateral-clearance-between-string-envelopes
+department: guitar-studies
+course: "Vérifier le dégagement latéral entre cordes"
+level: advanced
+prerequisites: ["gtr-013-judge-a-bend-with-an-uncertainty-budget"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Vérifier le dégagement latéral entre cordes
+
+Une hauteur de bend correcte ne garantit pas le dégagement par rapport à la corde voisine. Conservez rayons et déplacements balayés des deux cordes avant de comparer leurs enveloppes. L’écart des intervalles représente le rapprochement maximal autorisé, pas seulement la distance des centres au repos. Ce contrôle géométrique conservateur peut aider une explication de doigté [GA](https://github.com/GuitarAlchemist/ga) ou une surimpression [Godot](https://godotengine.org/). Il ne reproduit ni soulèvement vertical, ni technique, ni collision élastique, ni forme sur toute la corde. Un écart positif reste conditionnel.
+
+Le contrôle porte sur une seule coupe latérale avec des plages de déplacement indépendantes. Le contact n’est pas un dégagement ; toutes les longueurs partagent une unité. Évitement vertical, géométrie complète et essai instrumental sont absents.
+
+[Prérequis](../../guitar-studies/en/gtr-013-judge-a-bend-with-an-uncertainty-budget.md)
+
+> **Réponse:** Les intervalles balayés sont `[-1,7]` et `[8,11]` ; l’écart vaut 1 et le dégagement est vrai.
+
+> **Réponse:** La distance des centres au repos n’est pas le dégagement des bords ; rayons et mouvements la réduisent.
+
+> **Réponse:** Les plages indépendantes donnent une enveloppe conservatrice ; des mouvements corrélés dans le temps demandent des trajectoires.
+
+> **Réponse:** L’écart témoin vaut -1 : les enveloppes se recouvrent et le dégagement annoncé échoue.
+
+> **Réponse:** Un déplacement admis créant une intersection réfute le dégagement latéral universel dans cette coupe.
+=== GTR021 es streeling/courses/guitar-studies/es/gtr-021-check-lateral-clearance-between-string-envelopes.es.md ===
+---
+module_id: gtr-021-check-lateral-clearance-between-string-envelopes
+department: guitar-studies
+course: "Comprobar la holgura lateral entre cuerdas"
+level: advanced
+prerequisites: ["gtr-013-judge-a-bend-with-an-uncertainty-budget"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Comprobar la holgura lateral entre cuerdas
+
+Una altura correcta en un bend no garantiza holgura respecto a la cuerda vecina. Conserve radios y desplazamientos barridos de ambas cuerdas antes de comparar sus envolventes. La separación entre intervalos representa el acercamiento máximo permitido, no solo la distancia entre centros en reposo. Esta comprobación geométrica conservadora puede ayudar a explicar digitaciones en [GA](https://github.com/GuitarAlchemist/ga) o una superposición [Godot](https://godotengine.org/). No reproduce elevación vertical, técnica, colisión elástica ni forma de toda la cuerda. Una separación positiva sigue siendo condicional.
+
+La comprobación trata una sola sección lateral con rangos de desplazamiento independientes. El contacto no cuenta como holgura y las longitudes comparten unidad. Faltan evitación vertical, geometría completa y ensayo instrumental.
+
+[Prerrequisito](../../guitar-studies/en/gtr-013-judge-a-bend-with-an-uncertainty-budget.md)
+
+> **Respuesta:** Los intervalos barridos son `[-1,7]` y `[8,11]`; la separación es 1 y hay holgura.
+
+> **Respuesta:** La distancia entre centros en reposo no es holgura entre bordes; radios y movimientos la reducen.
+
+> **Respuesta:** Los rangos independientes dan una envolvente conservadora; los movimientos correlacionados necesitan trayectorias.
+
+> **Respuesta:** La separación del control es -1: las envolventes se solapan y falla la holgura anunciada.
+
+> **Respuesta:** Un desplazamiento admitido que produzca intersección refuta la holgura lateral universal en esta sección.
+=== GTR022 en streeling/courses/guitar-studies/en/gtr-022-place-multiscale-frets-in-physical-coordinates.md ===
+---
+module_id: gtr-022-place-multiscale-frets-in-physical-coordinates
+department: guitar-studies
+course: "Place Multiscale Frets in Physical Coordinates"
+level: advanced
+prerequisites: ["gtr-006-keep-picking-distance-relative-to-frets"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Place Multiscale Frets in Physical Coordinates
+
+The same fret number need not have the same physical coordinate on every string of a multiscale guitar. Each string retains its nut origin and scale length. Apply the equal-tempered fraction in that local coordinate, then return to a common scene axis. A line joining fret contacts can be angled even when the musical interval is identical. This construction helps review a proposed [GA](https://github.com/GuitarAlchemist/ga) fretboard scene without equating a rendered straight line to a compensated manufactured fret.
+
+Assume straight parallel string axes, a common length unit and ideal equal-tempered fret ratios. The control deliberately borrows the first string scale for every string. Compensation, fretwire fitting and manufacturing tolerances remain untested.
+
+[Prerequisite](../../guitar-studies/en/gtr-006-keep-picking-distance-relative-to-frets.md)
+
+[Primary reading](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fret/)
+
+> **Answer:** The positions are `[300,350]` and the line slope is 5 in the common coordinate axes.
+
+> **Answer:** Nut origin and vibrating scale are independent inputs; changing one does not automatically change the other.
+
+> **Answer:** Ideal fret ratios omit stiffness, action and compensation; the coordinates do not certify intonation.
+
+> **Answer:** The common-scale control gives `[300,320]` and slope 2, so the second contact is misplaced.
+
+> **Answer:** A scene contact differing from the independent per-string coordinate rejects faithful geometric mapping.
+=== GTR022 fr streeling/courses/guitar-studies/fr/gtr-022-place-multiscale-frets-in-physical-coordinates.fr.md ===
+---
+module_id: gtr-022-place-multiscale-frets-in-physical-coordinates
+department: guitar-studies
+course: "Placer les frettes multidiapasons dans l’espace physique"
+level: advanced
+prerequisites: ["gtr-006-keep-picking-distance-relative-to-frets"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Placer les frettes multidiapasons dans l’espace physique
+
+Le même numéro de frette ne correspond pas forcément à la même coordonnée sur chaque corde d’une guitare multidiapason. Chaque corde conserve son origine au sillet et son diapason. Appliquez la fraction tempérée localement, puis revenez à l’axe commun de la scène. La ligne joignant les contacts peut être oblique malgré le même intervalle musical. Cette construction aide à examiner une scène de manche [GA](https://github.com/GuitarAlchemist/ga) sans confondre ligne affichée et frette fabriquée compensée.
+
+Supposez des axes de cordes droits et parallèles, une unité commune et des rapports de frettes tempérés idéaux. Le témoin réutilise volontairement le premier diapason partout. Compensation, ajustement des frettes et tolérances de fabrication restent à tester.
+
+[Prérequis](../../guitar-studies/en/gtr-006-keep-picking-distance-relative-to-frets.md)
+
+[Lecture primaire](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fret/)
+
+> **Réponse:** Les positions valent `[300,350]` et la pente de la ligne vaut 5 dans les axes communs.
+
+> **Réponse:** Origine au sillet et diapason vibrant sont indépendants ; modifier l’un ne modifie pas automatiquement l’autre.
+
+> **Réponse:** Les rapports idéaux omettent raideur, action et compensation ; ces coordonnées ne certifient pas la justesse.
+
+> **Réponse:** Le témoin à diapason commun donne `[300,320]` et une pente de 2 ; le second contact est déplacé.
+
+> **Réponse:** Un contact de scène différent du calcul indépendant par corde réfute la fidélité de la transformation.
+=== GTR022 es streeling/courses/guitar-studies/es/gtr-022-place-multiscale-frets-in-physical-coordinates.es.md ===
+---
+module_id: gtr-022-place-multiscale-frets-in-physical-coordinates
+department: guitar-studies
+course: "Situar trastes multiescala en coordenadas físicas"
+level: advanced
+prerequisites: ["gtr-006-keep-picking-distance-relative-to-frets"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Situar trastes multiescala en coordenadas físicas
+
+El mismo número de traste no tiene por qué corresponder a igual coordenada en cada cuerda de una guitarra multiescala. Cada cuerda conserva origen en cejuela y longitud de escala. Aplique localmente la fracción temperada y vuelva al eje común de la escena. La línea entre contactos puede ser oblicua pese al mismo intervalo musical. Esta construcción ayuda a revisar una escena [GA](https://github.com/GuitarAlchemist/ga) sin equiparar una línea renderizada a un traste fabricado y compensado.
+
+Suponga ejes de cuerda rectos y paralelos, unidad común y razones temperadas ideales. El control reutiliza deliberadamente la primera escala en todas las cuerdas. Compensación, ajuste de trastes y tolerancias de fabricación quedan pendientes.
+
+[Prerrequisito](../../guitar-studies/en/gtr-006-keep-picking-distance-relative-to-frets.md)
+
+[Lectura primaria](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fret/)
+
+> **Respuesta:** Las posiciones son `[300,350]` y la pendiente es 5 en los ejes comunes.
+
+> **Respuesta:** Origen de cejuela y escala vibrante son independientes; cambiar uno no cambia automáticamente el otro.
+
+> **Respuesta:** Las razones ideales omiten rigidez, acción y compensación; las coordenadas no certifican afinación.
+
+> **Respuesta:** El control de escala común da `[300,320]` y pendiente 2; el segundo contacto queda desplazado.
+
+> **Respuesta:** Un contacto de escena distinto del cálculo independiente por cuerda refuta la fidelidad geométrica.
+=== GTR023 en streeling/courses/guitar-studies/en/gtr-023-fit-a-straight-slide-bar-to-contact-targets.md ===
+---
+module_id: gtr-023-fit-a-straight-slide-bar-to-contact-targets
+department: guitar-studies
+course: "Fit a Straight Slide Bar to Contact Targets"
+level: advanced
+prerequisites: ["gtr-019-declare-the-coordinate-of-a-continuous-slide"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Fit a Straight Slide Bar to Contact Targets
+
+A diagram can show individually valid slide positions that one rigid straight bar cannot reach simultaneously. Fit the physical contact coordinate as an affine function of transverse string position. Least squares gives a transparent baseline, and the maximum absolute residual checks the declared geometric tolerance. Musical pitch closeness is a different objective and would require a different weighting. The authored fit constrains a future [GA](https://github.com/GuitarAlchemist/ga) slide suggestion or a teaching scene; it is not a hand or bottleneck contact simulation.
+
+Transverse coordinates are distinct; least squares is unweighted and operates in physical length units. The rigid bar is straight. Signed residual means target minus fitted contact. No deflection, pitch optimization or playing trial is included.
+
+[Prerequisite](../../guitar-studies/en/gtr-019-declare-the-coordinate-of-a-continuous-slide.md)
+
+> **Answer:** The fitted intercept is 3 and slope is 1; every residual is 0.
+
+> **Answer:** Geometric length error and pitch error are different objectives; the fit does not minimize cents.
+
+> **Answer:** A rigid straight bar imposes an affine contact line; curved or independently articulated contacts need another model.
+
+> **Answer:** The control residuals are `[1/6,-1/3,1/6]`; their largest magnitude exceeds 0.1.
+
+> **Answer:** A retained maximum residual larger than tolerance rejects a simultaneous straight-bar fit under this policy.
+=== GTR023 fr streeling/courses/guitar-studies/fr/gtr-023-fit-a-straight-slide-bar-to-contact-targets.fr.md ===
+---
+module_id: gtr-023-fit-a-straight-slide-bar-to-contact-targets
+department: guitar-studies
+course: "Ajuster un bottleneck droit à des cibles de contact"
+level: advanced
+prerequisites: ["gtr-019-declare-the-coordinate-of-a-continuous-slide"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Ajuster un bottleneck droit à des cibles de contact
+
+Un diagramme peut montrer des positions de slide valides séparément mais inaccessibles simultanément à une barre droite rigide. Ajustez la coordonnée de contact par une fonction affine de la position transversale. Les moindres carrés donnent une référence explicite, puis le résidu absolu maximal teste la tolérance géométrique. La proximité des hauteurs est un autre objectif, avec d’autres poids. L’ajustement construit contraint une future suggestion [GA](https://github.com/GuitarAlchemist/ga) ou une scène pédagogique ; il ne simule ni main ni contact du bottleneck.
+
+Les coordonnées transversales sont distinctes ; les moindres carrés sont non pondérés et exprimés en longueur physique. La barre rigide est droite. Le résidu signé vaut cible moins contact ajusté. Déformation, optimisation de hauteur et essai de jeu sont exclus.
+
+[Prérequis](../../guitar-studies/en/gtr-019-declare-the-coordinate-of-a-continuous-slide.md)
+
+> **Réponse:** L’ordonnée à l’origine vaut 3 et la pente 1 ; chaque résidu vaut 0.
+
+> **Réponse:** Erreur géométrique et erreur de hauteur sont des objectifs différents ; cet ajustement ne minimise pas des cents.
+
+> **Réponse:** Une barre droite rigide impose une ligne affine ; des contacts courbes ou articulés demandent un autre modèle.
+
+> **Réponse:** Les résidus témoins sont `[1/6,-1/3,1/6]` ; leur amplitude maximale dépasse 0.1.
+
+> **Réponse:** Un résidu maximal conservé supérieur à la tolérance réfute un ajustement simultané selon cette règle.
+=== GTR023 es streeling/courses/guitar-studies/es/gtr-023-fit-a-straight-slide-bar-to-contact-targets.es.md ===
+---
+module_id: gtr-023-fit-a-straight-slide-bar-to-contact-targets
+department: guitar-studies
+course: "Ajustar una barra de slide recta a contactos objetivo"
+level: advanced
+prerequisites: ["gtr-019-declare-the-coordinate-of-a-continuous-slide"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Ajustar una barra de slide recta a contactos objetivo
+
+Un diagrama puede mostrar posiciones de slide válidas por separado que una barra recta rígida no alcanza simultáneamente. Ajuste la coordenada de contacto como función afín de la posición transversal. Los mínimos cuadrados dan una referencia explícita y el residuo absoluto máximo comprueba la tolerancia geométrica. La cercanía de alturas es otro objetivo y necesita otros pesos. El ajuste elaborado limita una futura sugerencia [GA](https://github.com/GuitarAlchemist/ga) o escena didáctica; no simula mano ni contacto de la barra.
+
+Las coordenadas transversales son distintas; los mínimos cuadrados no llevan pesos y usan longitud física. La barra rígida es recta. El residuo firmado es objetivo menos contacto ajustado. Se excluyen deformación, optimización de altura y ensayo instrumental.
+
+[Prerrequisito](../../guitar-studies/en/gtr-019-declare-the-coordinate-of-a-continuous-slide.md)
+
+> **Respuesta:** La ordenada en origen es 3 y la pendiente 1; todos los residuos son 0.
+
+> **Respuesta:** Error geométrico y error de altura son objetivos distintos; este ajuste no minimiza cents.
+
+> **Respuesta:** Una barra recta rígida impone una línea afín; contactos curvos o articulados necesitan otro modelo.
+
+> **Respuesta:** Los residuos del control son `[1/6,-1/3,1/6]`; su magnitud máxima supera 0.1.
+
+> **Respuesta:** Un residuo máximo conservado mayor que la tolerancia refuta un ajuste simultáneo bajo esta regla.

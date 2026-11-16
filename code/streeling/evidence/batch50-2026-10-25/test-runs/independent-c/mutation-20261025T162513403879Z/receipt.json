@@ -1,0 +1,28 @@
+{
+  "command": [
+    "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "C:\\tmp\\batch25-c-review\\mutation_probe.py"
+  ],
+  "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+  "exit_code": 0,
+  "stdout": {
+    "path": "C:\\tmp\\batch25-c-review\\mutation-20261025T162513403879Z\\stdout.log",
+    "sha256": "45bb36132eaf0e10fa773cedbe410e074bc18d00ab8a2a4121bf100df08fe04f"
+  },
+  "helper": {
+    "path": "C:\\tmp\\batch25-c-review\\mutation_probe.py",
+    "sha256": "686fa527f0bd6a539ecf12abbc7d5bbebdc12c0281f7a061c43bbc299597d878"
+  },
+  "result": {
+    "rejected": true,
+    "tests": 1,
+    "failures": 1,
+    "errors": 0,
+    "canonical_input_sha256_after": "43f7e610a772c0d4863eb158d3ecf947b8117a75b3dfaa8e38a999d494bb0ef8",
+    "canonical_unchanged": true,
+    "scope": "One substantive in-memory wrong input with matching mutated packet expectation; deliberate rejection is not a failing course."
+  }
+}

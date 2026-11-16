@@ -1,0 +1,130 @@
+{
+  "scope": "Authored deterministic attempts lasting3ticks; starts0,1,2 are externally scheduled after one-tick observation timeouts. No actual timeout/cancellation or external writes were run.",
+  "duration_ticks": 3,
+  "unbounded": {
+    "starts": [
+      0,
+      1,
+      2
+    ],
+    "completions": [
+      3,
+      4,
+      5
+    ],
+    "peak_active": 3,
+    "trace": [
+      {
+        "tick": 0,
+        "active_attempts": [
+          0
+        ],
+        "completions": []
+      },
+      {
+        "tick": 1,
+        "active_attempts": [
+          0,
+          1
+        ],
+        "completions": []
+      },
+      {
+        "tick": 2,
+        "active_attempts": [
+          0,
+          1,
+          2
+        ],
+        "completions": []
+      },
+      {
+        "tick": 3,
+        "active_attempts": [
+          1,
+          2
+        ],
+        "completions": [
+          0
+        ]
+      },
+      {
+        "tick": 4,
+        "active_attempts": [
+          2
+        ],
+        "completions": [
+          1
+        ]
+      },
+      {
+        "tick": 5,
+        "active_attempts": [],
+        "completions": [
+          2
+        ]
+      }
+    ]
+  },
+  "two_slot": {
+    "admitted_starts": [
+      0,
+      1
+    ],
+    "rejected_start": 2,
+    "completions": [
+      3,
+      4
+    ],
+    "peak_active": 2,
+    "trace": [
+      {
+        "tick": 0,
+        "active_attempts": [
+          0
+        ],
+        "completions": []
+      },
+      {
+        "tick": 1,
+        "active_attempts": [
+          0,
+          1
+        ],
+        "completions": []
+      },
+      {
+        "tick": 2,
+        "active_attempts": [
+          0,
+          1
+        ],
+        "completions": []
+      },
+      {
+        "tick": 3,
+        "active_attempts": [
+          1
+        ],
+        "completions": [
+          0
+        ]
+      },
+      {
+        "tick": 4,
+        "active_attempts": [],
+        "completions": [
+          1
+        ]
+      },
+      {
+        "tick": 5,
+        "active_attempts": [],
+        "completions": []
+      }
+    ],
+    "first_result_accepted_at": 3,
+    "second_attempt_stopped": false
+  },
+  "observation_at_tick1": "No completion has been observed, but the original attempt remains active by construction."
+}

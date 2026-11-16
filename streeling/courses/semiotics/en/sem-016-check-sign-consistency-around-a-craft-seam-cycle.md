@@ -1,0 +1,180 @@
+---
+module_id: "sem-016-check-sign-consistency-around-a-craft-seam-cycle"
+department: "semiotics"
+course: "Check Sign Consistency around a Craft Seam Cycle"
+level: "advanced"
+prerequisites: ["sem-013-align-two-motif-periods-at-a-textile-seam", "net-009-detect-global-cycles-in-a-panel-stack"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+
+# Check Sign Consistency around a Craft Seam Cycle
+
+> Draft for technical and language review. The case is authored, including its numeric inputs, labels and expected results. It is not a physical craft trial, a [Godot](https://docs.godotengine.org/en/4.5/tutorials/shaders/advanced_postprocessing.html) observation, a [Blender](https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md) render, a [ComfyUI](https://github.com/Comfy-Org/ComfyUI) run or a learner result. All human and learner decisions remain undecided.
+
+## Project question
+
+A craft composition can contain a cycle of seam links without being contradictory. What matters is the meaning carried by each link. The stack prerequisite forbids cycles of strict height ordering; this lesson instead uses undirected binary same-or-opposite constraints, where some cycles are consistent. Reusing a generic cycle refusal would reject valid compositions.
+
+Read the committed prerequisite and the retained source passage before calculating. Make an evidence table that separates a source definition, an authored premise, a derived result and a proposed future observation. The source revision and reading scope are recorded in the packet. An inspected parameter is evidence that a representation exposes that parameter; it cannot supply an unmeasured material coefficient, visibility judgement or processing time. Preserve that distinction when an assistant summarizes the source. The primary reference supports only the concept and passage named in the reading record.
+
+## Derive the operation before proposing automation
+
+Choose a bit for one patch and propagate each required equality or difference. Returning to the starting patch must reproduce its original bit. Around the declared triangle, exclusive-or of edge labels must vanish. The primary logic guide defines xor and satisfiability, without claiming that a craft seam uses this encoding. Atlas parenting is a different relation and supplies no seam solution. Complementing every patch bit preserves all constraints, explaining the paired solutions and the absence of an absolute orientation anchor.
+
+## Fixed authored model and changed-input control
+
+```json
+{
+  "values": {
+    "nodes": [
+      "A",
+      "B",
+      "C"
+    ],
+    "edges": [
+      [
+        "A",
+        "B",
+        1
+      ],
+      [
+        "B",
+        "C",
+        1
+      ],
+      [
+        "C",
+        "A",
+        0
+      ]
+    ]
+  },
+  "formula": "Enumerate bit assignments in node order, require bit[u] XOR bit[v] == edge parity for every edge; return assignments lexicographically; cycle_parity=XOR of the three supplied edge bits",
+  "expected": {
+    "assignments": [
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        0,
+        1
+      ]
+    ],
+    "cycle_parity": 0,
+    "consistent": true
+  },
+  "negative_control": {
+    "values": {
+      "nodes": [
+        "A",
+        "B",
+        "C"
+      ],
+      "edges": [
+        [
+          "A",
+          "B",
+          1
+        ],
+        [
+          "B",
+          "C",
+          1
+        ],
+        [
+          "C",
+          "A",
+          1
+        ]
+      ]
+    },
+    "expected": {
+      "assignments": [],
+      "cycle_parity": 1,
+      "consistent": false
+    }
+  }
+}
+```
+
+### Exercise 1
+
+Solve the main constraints.
+
+<details><summary>Answer 1</summary>
+
+The assignments are `[0,1,0]` and `[1,0,1]` in node order. Both satisfy every edge.
+
+</details>
+
+### Exercise 2
+
+Why does the existing graph cycle not force refusal?
+
+<details><summary>Answer 2</summary>
+
+Its cycle parity is `0`. The edges mean same or opposite, not strict above; the stack-order theorem concerns a different relation.
+
+</details>
+
+### Exercise 3
+
+Apply the changed closing edge.
+
+<details><summary>Answer 3</summary>
+
+Cycle parity becomes `1`, assignments are `[]`, and `consistent=false`. Local edge satisfiability survives while global consistency fails.
+
+</details>
+
+### Exercise 4
+
+Does a solution choose an absolute orientation?
+
+<details><summary>Answer 4</summary>
+
+No. Complementing all bits gives another solution. An external reference patch would be needed to fix that freedom.
+
+</details>
+
+### Exercise 5
+
+What should an agent preserve when composing seam descriptions?
+
+<details><summary>Answer 5</summary>
+
+Keep node identities, relation type, parity convention and any anchor. Do not reinterpret a sign graph as a directed height graph.
+
+</details>
+
+## Source-assisted learner task
+
+Trace bit propagation around the seam triangle on paper, then inspect Atlas parent links and label why they are not parity edges. Retain a contradictory closed walk as the refusal witness.
+
+Begin with a direct manual baseline: close the answer panels, draw the diagram or table required by the task, and derive intermediate quantities with their units. Retain that first answer before asking an assistant for help. Then use the linked source to challenge a specific assumption, retaining the question, the source location, the assistance received and any rejected suggestion. Compare the assisted answer with your original calculation on the same task and inputs. A shorter explanation is not a demonstrated improvement if it drops a boundary condition or invents an observation.
+
+Apply the structured control as a separate case, rather than editing the main inputs in place. Record what changes and what remains invariant, and state whether a discrepancy concerns arithmetic, an interpretation or the model premises. Preserve any failed attempt and its correction separately. The packet prepares a criterion for each corrected exercise; every learner decision remains null until an actual attempt is retained and reviewed. Source lookup and a prepared answer are not evidence that a learner performed the task. No new DSL, agent workflow, scene adapter or production integration is required to complete this paper exercise.
+
+## Prospective falsifier
+
+The rule that any graph cycle invalidates a craft composition fails on the consistent main parity cycle; the opposite rule that locally valid seams always compose fails on the control.
+
+## Sources and validation boundary
+
+- [Committed prerequisite: sem-013-align-two-motif-periods-at-a-textile-seam](../../semiotics/en/sem-013-align-two-motif-periods-at-a-textile-seam.md)
+
+- [Committed prerequisite: net-009-detect-global-cycles-in-a-panel-stack](../../network-science/en/net-009-detect-global-cycles-in-a-panel-stack.md)
+
+- [Retained project source](../../../../code/blender/scripts/atlas/kit.py)
+
+- [Primary reading](https://microsoft.github.io/z3guide/docs/logic/propositional-logic/)
+
+- [Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-25/unit-c.json)
+
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25/journal.md)

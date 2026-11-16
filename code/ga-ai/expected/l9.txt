@@ -1,0 +1,111 @@
+# l9
+
+== IntervalSkill, "What is the interval from X to Y?" for the 21 x 21 note names
+. right   # a note read as another   a right interval, quality abbreviated   x wrong interval
+
+from\to Cb C  C# Db D  D# Eb E  E# Fb F  F# Gb G  G# Ab A  A# Bb B  B#
+Cb      .  .  #  .  .  #  .  .  #  .  .  #  .  .  #  .  .  #  .  x  # 
+C       x  .  #  .  .  #  .  .  #  .  .  #  .  .  #  .  .  #  .  .  # 
+C#      x  x  #  .  .  #  .  .  #  a  .  #  a  .  #  .  .  #  .  .  # 
+Db      .  .  #  .  .  #  .  .  #  .  .  #  .  .  #  .  .  #  .  .  # 
+D       .  .  #  x  .  #  .  .  #  .  .  #  .  .  #  .  .  #  .  .  # 
+D#      a  .  #  x  x  #  .  .  #  a  .  #  a  .  #  a  .  #  .  .  # 
+Eb      .  .  #  .  .  #  .  .  #  .  .  #  .  .  #  .  .  #  .  .  # 
+E       .  .  #  .  .  #  x  .  #  .  .  #  .  .  #  .  .  #  .  .  # 
+E#      a  .  #  a  .  #  x  x  #  x  .  #  a  .  #  a  .  #  a  .  # 
+Fb      .  .  #  .  .  #  .  x  #  .  .  #  .  .  #  .  .  #  .  a  # 
+F       .  .  #  .  .  #  .  .  #  x  .  #  .  .  #  .  .  #  .  .  # 
+F#      a  .  #  .  .  #  .  .  #  x  x  #  .  .  #  .  .  #  .  .  # 
+Gb      .  .  #  .  .  #  .  .  #  .  .  #  .  .  #  .  .  #  .  .  # 
+G       .  .  #  .  .  #  .  .  #  .  .  #  x  .  #  .  .  #  .  .  # 
+G#      a  .  #  a  .  #  .  .  #  a  .  #  x  x  #  .  .  #  .  .  # 
+Ab      .  .  #  .  .  #  .  .  #  .  .  #  .  .  #  .  .  #  .  .  # 
+A       .  .  #  .  .  #  .  .  #  .  .  #  .  .  #  x  .  #  .  .  # 
+A#      a  .  #  a  .  #  a  .  #  a  .  #  a  .  #  x  x  #  .  .  # 
+Bb      .  .  #  .  .  #  .  .  #  .  .  #  .  .  #  .  .  #  .  .  # 
+B       .  .  #  .  .  #  .  .  #  a  .  #  .  .  #  .  .  #  x  .  # 
+B#      x  .  #  a  .  #  a  .  #  x  a  #  a  .  #  a  .  #  x  x  # 
+
+441 questions: 241 right, 147 with a note read as another, 27 right with the quality abbreviated, 26 wrong
+
+== The note names read right, the interval wrong
+Cb to B   GA major seventh (M7, 11)           textbook augmented seventh (A7, 12)
+C  to Cb  GA perfect unison (P1, 0)           textbook diminished unison (d1, -1)
+C# to Cb  GA perfect unison (P1, 0)           textbook doubly diminished unison (dd1, -2)
+C# to C   GA perfect unison (P1, 0)           textbook diminished unison (d1, -1)
+D  to Db  GA perfect unison (P1, 0)           textbook diminished unison (d1, -1)
+D# to Db  GA perfect unison (P1, 0)           textbook doubly diminished unison (dd1, -2)
+D# to D   GA perfect unison (P1, 0)           textbook diminished unison (d1, -1)
+E  to Eb  GA perfect unison (P1, 0)           textbook diminished unison (d1, -1)
+E# to Eb  GA perfect unison (P1, 0)           textbook doubly diminished unison (dd1, -2)
+E# to E   GA perfect unison (P1, 0)           textbook diminished unison (d1, -1)
+E# to Fb  GA major second (M2, 2)             textbook doubly diminished second (dd2, -1)
+Fb to E   GA major seventh (M7, 11)           textbook augmented seventh (A7, 12)
+F  to Fb  GA perfect unison (P1, 0)           textbook diminished unison (d1, -1)
+F# to Fb  GA perfect unison (P1, 0)           textbook doubly diminished unison (dd1, -2)
+F# to F   GA perfect unison (P1, 0)           textbook diminished unison (d1, -1)
+G  to Gb  GA perfect unison (P1, 0)           textbook diminished unison (d1, -1)
+G# to Gb  GA perfect unison (P1, 0)           textbook doubly diminished unison (dd1, -2)
+G# to G   GA perfect unison (P1, 0)           textbook diminished unison (d1, -1)
+A  to Ab  GA perfect unison (P1, 0)           textbook diminished unison (d1, -1)
+A# to Ab  GA perfect unison (P1, 0)           textbook doubly diminished unison (dd1, -2)
+A# to A   GA perfect unison (P1, 0)           textbook diminished unison (d1, -1)
+B  to Bb  GA perfect unison (P1, 0)           textbook diminished unison (d1, -1)
+B# to Cb  GA major second (M2, 2)             textbook doubly diminished second (dd2, -1)
+B# to Fb  GA perfect fifth (P5, 7)            textbook triply diminished fifth (ddd5, 4)
+B# to Bb  GA perfect unison (P1, 0)           textbook doubly diminished unison (dd1, -2)
+B# to B   GA perfect unison (P1, 0)           textbook diminished unison (d1, -1)
+
+== The same question, written another way
+What is the interval between E and G#?
+  | From **E** to **G** is a **minor third** (m3, 3 semitones).
+What is the interval from C to F♯?
+  | From **C** to **F** is a **perfect fourth** (P4, 5 semitones).
+What is the interval from B♭ to D?
+  | Could not parse two note names from your question.
+
+== ScaleInfoSkill and RelativeKeySkill on the 30 keys with at most seven sharps or flats
+key         notes  relative key: ScaleInfoSkill  RelativeKeySkill  textbook      signature
+Cb major    right  Ab minor                        Ab minor          Ab minor      not read as a key
+B major     right  Ab minor                        G# minor          G# minor      5 sharps
+F# major    right  Eb minor                        D# minor          D# minor      6 sharps
+C# major    right  Bb minor                        A# minor          A# minor      7 sharps
+G# minor    right  Cb major                        B major           B major       5 sharps
+D# minor    right  Gb major                        F# major          F# major      6 sharps
+A# minor    right  Db major                        C# major          C# major      7 sharps
+
+30 keys: notes right 30, relative key right: ScaleInfoSkill 24, RelativeKeySkill 30; signature right 29
+How many flats in Cb major?
+  | I couldn't identify 'Cb' as a key. Try a single pitch letter optionally followed by # or b (e.g. C, G, F#, Bb).
+
+== Keys past seven sharps or flats that RelativeKeySkill reads
+What notes are in G# major?
+  | I don't recognise "G# major" as a standard key. Try a key like C major, F# minor, or Bb major.
+How many sharps in D# major?  textbook 9 sharps, usually written Eb major
+  | **D# major** has no sharps or flats.
+How many sharps in G# major?  textbook 8 sharps, usually written Ab major
+  | **G# major** has no sharps or flats.
+How many sharps in A# major?  textbook 10 sharps, usually written Bb major
+  | **A# major** has no sharps or flats.
+How many sharps in Db minor?  textbook 8 flats, usually written C# minor
+  | **Db minor** has no sharps or flats.
+How many sharps in Gb minor?  textbook 9 flats, usually written F# minor
+  | **Gb minor** has no sharps or flats.
+What is the parallel minor of G# major?  textbook: G# minor has 5 sharps
+  | Same root note (**G#**) but different scales — the parallel minor lowers the 3rd, 6th, and 7th degrees. G# major has no sharps or flats; G# minor has 3 flats (three positions counter-clockwise on the circle of fifths).
+
+== Each skill's example prompts, which the intent router matches questions against, sent to that skill
+skill.interval: 5 of 13 answered
+  What's a perfect fifth?                  | Could not parse two note names from your question.
+  What is a major sixth?                   | Could not parse two note names from your question.
+  Define a minor third                     | Could not parse two note names from your question.
+  Minor third up from D                    | Could not parse two note names from your question.
+  Perfect fourth above C                   | Could not parse two note names from your question.
+  Major sixth above G                      | Could not parse two note names from your question.
+  augmented fourth definition              | Could not parse two note names from your question.
+  semitones in a major sixth               | Could not parse two note names from your question.
+skill.scaleinfo: 21 of 24 answered
+  What's the formula for harmonic minor    | Could not parse a key name from your question.
+  Formula for melodic minor scale          | Could not parse a key name from your question.
+  what notes are in the B flat major scale | Could not parse a key name from your question.
+skill.relativekey: 12 of 12 answered

@@ -1,0 +1,31 @@
+{
+  "scope": "Reviewer-only expected criteria; no learner attempt or approval.",
+  "learner_id": null,
+  "attempted_at": null,
+  "elapsed_minutes": null,
+  "score": null,
+  "verdict": null,
+  "criteria": {
+    "cs-010": [
+      "A returns ready:11 with double then increment; B retains invalid-pitch and empty trace.",
+      "Associativity preserves order and two examples do not prove all inputs/effects.",
+      "mapError changes the failed channel, not recovery to Ok.",
+      "Earlier effects are not compensated.",
+      "Successful computation is not approval or publication."
+    ],
+    "cs-011": [
+      "None gives missing-note; Some0 is present then rejected nonpositive-note; Some5 succeeds.",
+      "Caller supplies absence context; two different failures project to None.",
+      "None alone does not determine transport retryability.",
+      "fromAsync retains exception message/object; broad wrapper name does not diagnose cause.",
+      "Cancellation needs a separate tested contract, absent here."
+    ],
+    "net-005": [
+      "PartialFailure retains100,300 and error; E lacks B, D has A; no execution authority follows.",
+      "zip chooses left returned error; both branches may run.",
+      "Ok[] does not prove expected coverage; all failures can still be PartialFailure with0successes.",
+      "Unwrapped IOException escapes; wrapped exception retained with success1; obj list lacks producer/revision identity.",
+      "Reject false admission or erased failure distinctions; measure maintenance and explanatory benefit against simpler baseline."
+    ]
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "status": "prepared-not-performed",
+  "scope": "Source-assisted learner task; criterion review is not participant performance.",
+  "criteria": [
+    {
+      "id": "PHY009-1",
+      "module": "PHY009",
+      "title": "coordinate",
+      "acceptance": "Distinguish encoded 0.5 \u2192 linear 0.21404114048223255 from linear 0.5 \u2192 encoded 0.7353569830524495; state the nonnegative reference domain and absence of measured physical luminance.",
+      "decision": null
+    },
+    {
+      "id": "PHY009-2",
+      "module": "PHY009",
+      "title": "mixture-and-quantization",
+      "acceptance": "Derive black/white encoded versus linear averages, rounded bytes 128/188 and decoded quantized values 0.21586050011389926/0.5028864580325687. Do not equate finite quantization with the unquantized 0.5.",
+      "decision": null
+    },
+    {
+      "id": "PHY009-3",
+      "module": "PHY009",
+      "title": "source-approximation",
+      "acceptance": "Compare power 2.2 at 0.5 with the piecewise reference and difference 0.003596500341798453; identify selected material paths and cladding exception, without inferring visual objection or uniform policy.",
+      "decision": null
+    },
+    {
+      "id": "PHY009-4",
+      "module": "PHY009",
+      "title": "nonlinear-order",
+      "acceptance": "Derive isolated exposure-before-curve 0.6163069544364508 versus curve-then-double 0.7482219061166429 for input 0.25/exposure 2. Preserve omitted composite stages and no full ACES-conformance claim.",
+      "decision": null
+    },
+    {
+      "id": "PHY009-5",
+      "module": "PHY009",
+      "title": "verification-scope",
+      "acceptance": "All 256 byte round trips support the stated finite calculations, not host-transfer fidelity. Specify source/data/view interpretation and actual import/render/display evidence still needed.",
+      "decision": null
+    },
+    {
+      "id": "VC010-1",
+      "module": "VC010",
+      "title": "channel-roles",
+      "acceptance": "Identify R/G baked normal X/Y, B roughness, A image-derived height proxy, omitted baked Z; neither alpha opacity nor blue normal Z nor physical thickness follows.",
+      "decision": null
+    },
+    {
+      "id": "VC010-2",
+      "module": "VC010",
+      "title": "data-decoding",
+      "acceptance": "Decode authored 128,128,128,64 as normalized data and signed RG 0.0039215686274509665, compare wrong sRGB-first RG-0.5682789997722015; alpha 0.25098039215686274 is not transparency under this contract.",
+      "decision": null
+    },
+    {
+      "id": "VC010-3",
+      "module": "VC010",
+      "title": "consumer-use",
+      "acceptance": "Locate named shader RG/B reads and absence of alpha displacement/Z reconstruction there. Derive concrete no-rain roughness 0.850392156862745 versus incorrect 0.7931721000227798; no complete rendered-output claim.",
+      "decision": null
+    },
+    {
+      "id": "VC010-4",
+      "module": "VC010",
+      "title": "metadata-disagreement",
+      "acceptance": "Both existing 512 x 512 RGBA 8 PNGs contain color chunks; preserve packed NRH sRGB/gAMA/cHRM versus declared Non-Color. Do not invent fresh bake or exact generation history, whole-repo defect or actual importer interpretation.",
+      "decision": null
+    },
+    {
+      "id": "VC010-5",
+      "module": "VC010",
+      "title": "target-check",
+      "acceptance": "Propose known-texel destination checks under explicit color/data/channel/remapping policy; Godot 4.6 source_color guidance is renderer-specific, and a standard full normal contract does not match packed blue roughness. No actual host import delivered.",
+      "decision": null
+    },
+    {
+      "id": "COG006-1",
+      "module": "COG006",
+      "title": "digital-region",
+      "acceptance": "Verify each 160 x 160 target has 25600 RGB 128 pixels under recorded half-open bounds and matching crop hashes; unequal surrounds remain distinct, no display-luminance or observer result inferred.",
+      "decision": null
+    },
+    {
+      "id": "COG006-2",
+      "module": "COG006",
+      "title": "task-and-appearance",
+      "acceptance": "Separate byte equality, perceived light intensity/brightness and perceived reflectance/lightness. Cite primary study at its actual scope; original two-surround control is not a replication and has no prescribed observer answer.",
+      "decision": null
+    },
+    {
+      "id": "COG006-3",
+      "module": "COG006",
+      "title": "display-boundary",
+      "acceptance": "Our PNG carries sRGB intent 0 while inspected capture writer emits no color-space chunk; neither alone calibrates a display or proves a visual match/browser behavior.",
+      "decision": null
+    },
+    {
+      "id": "COG006-4",
+      "module": "COG006",
+      "title": "procedure",
+      "acceptance": "Use neutral wording, counterbalance surround side and allow equal/unsure; only first layout rendered, no swapped layout/participants/responses. No population effect or magnitude invented.",
+      "decision": null
+    },
+    {
+      "id": "COG006-5",
+      "module": "COG006",
+      "title": "handoff",
+      "acceptance": "Report digital hash/crop equality, declared encoding, observed display settings and actual observer result separately. Missing outcomes remain missing; no normative schema or craft-quality equivalence is established.",
+      "decision": null
+    }
+  ],
+  "pass_policy": "All five criteria per module; record actual answers, assistance, reviewer, evidence and individual decisions. Preserve failures and unresolved observations.",
+  "human_technical_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "host_import": null,
+  "display_calibration": null,
+  "observer_responses": null,
+  "deployed_html": null
+}

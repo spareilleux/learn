@@ -1,0 +1,66 @@
+{
+  "status": "failed",
+  "checks": [
+    {
+      "name": "semantic_execution",
+      "passed": true,
+      "detail": "exit 0"
+    },
+    {
+      "name": "semantic_baselines",
+      "passed": true,
+      "detail": "Expected global 0 and restarted 12 adjacency violations"
+    },
+    {
+      "name": "semantic_admission",
+      "passed": true,
+      "detail": "Selected global-parity: 0 adjacency violations"
+    },
+    {
+      "name": "fixed_fixture",
+      "passed": true,
+      "detail": "This teaching adapter supports only the recorded 6 by 6, phase 0, 5 mm pitch, 2 mm fixture"
+    },
+    {
+      "name": "godot_execution",
+      "passed": false,
+      "detail": "spawnSync godot ETIMEDOUT"
+    }
+  ],
+  "platform": "win32",
+  "selected_variant": "global-parity",
+  "sources": {
+    "evaluator": {
+      "path": "C:\\tmp\\streeling-weave-scene-20261022\\evaluate_weave.py",
+      "sha256": "43ba4e1a245ebc8c9d2ab34a9219419ad136ef73d021c1073e1f123e69479d9f"
+    },
+    "spec": {
+      "path": "C:\\tmp\\streeling-weave-scene-20261022\\weave-trial.json",
+      "sha256": "da33830148b1ee98a1c004e0b89a86770f438da369e059cbdad06803da3a1955"
+    },
+    "teaching_files": {
+      "run.mjs": "e98d3ce11f6f72aea263d24813601e9b074b27b3ec01d8a5b3c4e6dec3faea08",
+      "trial.gd": "acb8f28ff5c9075c30d908b611c9599cd598571ffeaf961458e61de704bcf729",
+      "project.godot": "df8243112f4c954d5c7728a9a1fdcbc583a5d0f3a534159e2c2de3d0885e0b7a",
+      "expected-cases.json": "1ae7daf03475b6b689ddaad6ce5567320bf81fa8f8e4ffd0d20b54570944236f"
+    },
+    "evaluator_provenance": "Demerzel f23ccae6c049d9066a1be2221c68f3b0bcf48373 (caller-supplied file; hashes identify the actual input)"
+  },
+  "manifest_sha256": "05ff96258db853cfdf31bbe53f4589e0a4d088045449035036123a0577056ab1",
+  "godot_command": [
+    "godot",
+    "--headless",
+    "--path",
+    "C:\\tmp\\streeling-weave-godot-root-realpath-20261022\\project",
+    "--script",
+    "res://trial.gd",
+    "--",
+    "--manifest",
+    "C:\\tmp\\streeling-weave-godot-root-realpath-20261022\\crossings.json",
+    "--report",
+    "C:\\tmp\\streeling-weave-godot-root-realpath-20261022\\godot-report.json",
+    "--manifest-sha256",
+    "05ff96258db853cfdf31bbe53f4589e0a4d088045449035036123a0577056ab1"
+  ],
+  "error": "godot_execution: spawnSync godot ETIMEDOUT"
+}

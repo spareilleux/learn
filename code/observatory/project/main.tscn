@@ -1,0 +1,74 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/observatory.gd" id="1_obs"]
+[ext_resource type="Script" path="res://scripts/steel_cube.gd" id="2_cube"]
+[ext_resource type="Script" path="res://scripts/fly_camera.gd" id="3_cam"]
+[ext_resource type="Script" path="res://scripts/capture.gd" id="4_cap"]
+[ext_resource type="Texture2D" path="res://assets/pier_ornament.png" id="5_orn"]
+
+[sub_resource type="Environment" id="Environment_night"]
+background_mode = 1
+background_color = Color(0.008, 0.016, 0.04, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.32, 0.42, 0.62, 1)
+ambient_light_energy = 0.45
+tonemap_mode = 3
+tonemap_exposure = 0.95
+ssr_enabled = false
+ssao_enabled = true
+ssil_enabled = false
+ssil_radius = 1.5
+ssil_intensity = 0.7
+glow_enabled = true
+glow_intensity = 0.75
+glow_bloom = 0.05
+volumetric_fog_enabled = false
+volumetric_fog_density = 0.012
+volumetric_fog_albedo = Color(0.6, 0.7, 0.9, 1)
+volumetric_fog_emission = Color(0.01, 0.025, 0.06, 1)
+volumetric_fog_length = 48.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud"]
+bg_color = Color(0.015, 0.025, 0.045, 0.78)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+
+[node name="Observatory" type="Node3D"]
+script = ExtResource("1_obs")
+pier_ornament = ExtResource("5_orn")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_night")
+
+[node name="SteelCube" type="Node3D" parent="."]
+script = ExtResource("2_cube")
+
+[node name="FlyCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.92412, -0.38209, 0, 0.38209, 0.92412, 0, 1.7, 10.4)
+current = true
+fov = 64.0
+script = ExtResource("3_cam")
+
+[node name="Capture" type="Node" parent="."]
+script = ExtResource("4_cap")
+
+[node name="ControlsHud" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="PanelContainer" parent="ControlsHud"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 900.0
+offset_bottom = 78.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hud")
+
+[node name="Hint" type="Label" parent="ControlsHud/Panel"]
+mouse_filter = 2
+theme_override_font_sizes/font_size = 15
+text = "Click: mouse look  ·  Esc: release  ·  WASD/ZQSD/arrows: walk  ·  Shift: sprint  ·  F: fly  ·  1–7: views"

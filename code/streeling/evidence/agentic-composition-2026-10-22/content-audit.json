@@ -1,0 +1,229 @@
+{
+  "final_delta": {
+    "kind": "bounded_final_static_pass",
+    "status": "no_actionable_findings_in_reviewed_scope",
+    "formal_or_human_approval": false,
+    "source_files": 33,
+    "scope": "17 imported files plus16new FR/ES translation drafts, final chronology notes, import/locale receipts, learner packet, and separate reviewer rubric.",
+    "checks": {
+      "imported_reconstruction": "17/17 final imported texts reconstruct from archive LF-normalized bytes plus declared ordered link/prose transformations, including chronology insertions; destination hashes match.",
+      "new_translation_bindings": "16/16 translation hashes, English source hashes, and pre-chronology English/translation hashes match the manifest. The final two INF-002 URL corrections are explicitly recorded.",
+      "locale_receipt": "33/33 recorded destination SHA256 values match physical files.",
+      "exercises": "168 exercise headings and168 answer blocks across33sources; archived CS-003/004 FR/ES use shorter Exercice/Ejercicio headings, while new translations use Exercice pratique/Ejercicio práctico.",
+      "preservation": "All16new translations preserve English URL multisets and inline-code multisets exactly; fenced blocks match. Natural-language order changes some inline token order in NET-002/004 without changing the tokens.",
+      "chronology": "All33source chronology notes point to the existing transfer README and explicitly preserve pending human subject/fluent-language/learner gates.",
+      "caveats": [
+        "CS-007/NET-004 FR/ES preserve the proposed/hypothetical status of typed composition and semantic backpressure, separating source declarations from executed effects.",
+        "CS-008 FR/ES preserve historical02fc08c helper status, current absence, three closed/unmerged PRs, current Learn authoring paths and retained historical Demerzel commands.",
+        "INF-004 FR/ES explicitly retain0.1 sensitivity as hand calculation and unchanged evaluator integer-only rejection.",
+        "INF-002 FR/ES retain240raw/124compact/116omitted coordinates, ROOT112-123 compact offsets,1.15self score/1.10orthogonalROOT score, normalization loss and production-retrieval limits.",
+        "NET-002 FR/ES links use5c4967454ddc740ed937c87719ca4d71a3522e4b; PM-002 uses6bc584d7ca1cd9eb1b1481e1100eeeb74e983863 and PM-003 uses0220ca84a25f59973bd6b9236cc00b7f68631a50.",
+        "PM-002/003 FR/ES distinguish historical Demerzel imports/inventory from current Learn ownership, retaining draft-vs-review-vs-publication and synthetic-ledger boundaries."
+      ]
+    },
+    "learner_packet": {
+      "tasks": 11,
+      "hashes": "11/11rubric source hashes equal physical English sources and the learner packet's source hashes.",
+      "prompts": "11/11packet prompts equal the corresponding rubric prompts.",
+      "answer_separation": "Manual reading and exact expected-answer comparison find no reviewer answer block in learner-tasks.md; expected answers remain in review-rubric.json.",
+      "results": "All11learner_attempt/reviewer_score/reviewer_reasoning entries are null; no outcome is claimed.",
+      "measurement_limit": "Administration explicitly calls these overlapping, lesson-exposed tasks and withholds causal learning, independent transfer, mastery, or live-agent improvement claims pending unseen tasks and a declared comparison."
+    },
+    "supporting_receipts_read": {
+      "public_inputs": "Saved public-input-readback.json has26records, all HTTP200 and matches_git_bytes:true. This audit read the saved receipt and did not perform network requests.",
+      "selector": "Saved NET-003 replay is scoped to unchanged advisory selector execution, not live wmux/session operations; its values match the static source audit.",
+      "inf004": "Saved replay retains integer-cost baseline and separate fractional-cost rejection/hand calculation.",
+      "arithmetic": "Saved INF-002, NET-002 and PM-003 calculations retain explicit synthetic/static limits.",
+      "historical_prs": "Saved receipt records Demerzel1207/1211 and Learn170 CLOSED with mergedAt:null on2026-10-21.",
+      "prototype": "Saved receipt records ComfyUI pinned audio/server sources HTTP200 and the exact GA6fac comparator URL404, with local tracer object existence separately stated.",
+      "audit_limit": "These are coordinator-generated observations inspected statically; this audit did not rerun their commands or independently observe public endpoints."
+    },
+    "resolved_delta": {
+      "id": "AC-CONTENT-002",
+      "issue": "INF-002 new FR/ES localized prerequisite href spellings differed from canonical English href and the exact-preservation claim.",
+      "resolution": "Coordinator restored both hrefs to inf-001-entropy-of-governance.md, refreshed final/pre-chronology/locale hashes, and recorded editorial corrections. Independent final recheck confirms matching URL multisets and hashes."
+    },
+    "artifact_sha256": {
+      "import.json": "e46e47b8988784b66fc4041ee8d76016cfc9f8455f1f41be494827d2b8643879",
+      "locale-checks.json": "f744f01f4aa486ece52d90c073af9737f026b7bb1e0613983ff116cd60e1f915",
+      "learner-tasks.md": "196228706dad85a32aca38ad5a3bda59970ff92f629fb07b9b33a996e8a9d2a8",
+      "review-rubric.json": "337f0bf87e05d1a6a90c0ea9af51873efe2d01bb34d07f347a625670373d47a7"
+    },
+    "remaining_boundary": "Generation, script tests, site build, rendered/public course readback and human reviews remain coordinator-owned checks. This static pass does not certify them."
+  },
+  "audit_kind": "independent_static_content_and_source_audit",
+  "status": "no_actionable_findings_in_reviewed_scope",
+  "human_approval": false,
+  "scope": {
+    "learn_root": "C:/tmp/learn-streeling-craft-transfer-20261022",
+    "learn_base_commit": "d6aea93ee980e49b7510708f5fae0f667b1ad9de",
+    "archive_root": "C:/Users/spare/source/repos/Demerzel-streeling-project-pilot",
+    "archive_commit": "17f82a4b4b913d7c64942a3d3ff670abf4e6f85c",
+    "manifest": "code/streeling/evidence/agentic-composition-2026-10-22/import.json",
+    "reviewed_imports": 17,
+    "reviewed_english_modules": 11,
+    "reviewed_archived_translations": 6,
+    "new_translations": "The initial pass excluded16new translations; final_delta now includes their bounded static binding/caveat review. Other workers authored them.",
+    "execution_boundary": "Only static text, Git object/tree reads, hash comparisons, and elementary arithmetic on source data. No course/repository executable, build, tests, network, staging, or repository edits.",
+    "output": "C:/tmp/streeling-agentic-composition-content-audit-20261022.json"
+  },
+  "binding_checks": {
+    "archive_git_blob_ids": "17/17 match the pinned archive tree",
+    "archive_sha256": "17/17 match after CRLF-to-LF normalization; some Windows working-tree raw-byte hashes differ because of line endings",
+    "learn_sha256": "17/17 match destination file bytes",
+    "declared_transform_reconstruction": "17/17 destination texts equal archived LF-normalized text with declared link rewrites and ordered prose changes",
+    "prerequisite_closure": "11 imported EN modules close the missing prerequisites against existing Learn CS-002/005/006, GAS-001, INF-001, NET-001, and PM-001",
+    "direct_relative_body_links": "All referenced archive targets exist; source-identity issue for changed PM evidence is listed separately.",
+    "first_correction_delta": "NET-002 now explicitly links5c4967454ddc740ed937c87719ca4d71a3522e4b with matching evidence_commit/blob metadata and matching manifest transforms/destination hash. PM-002/003 still contained archive17f82 links at the subsequent read; AC-CONTENT-001 remains open.",
+    "final_historical_url_delta": "Physical NET-002 links use5c4967454ddc740ed937c87719ca4d71a3522e4b; PM-002 uses6bc584d7ca1cd9eb1b1481e1100eeeb74e983863; PM-003 uses0220ca84a25f59973bd6b9236cc00b7f68631a50. All29 evidence_commit/evidence_git_blob entries match local immutable Git trees. All3 reconstructed texts and destination SHA256 values match updated manifest. AC-CONTENT-001 is resolved. New16translation drafts remain outside this pass."
+  },
+  "checks": [
+    {
+      "subject": "CS-003 parser, eight corpus cases, service, controller, and Core Chord",
+      "result": "Static source trace agrees",
+      "source_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+      "evidence": [
+        "Common/GA.Domain.Services/Chords/Parsing/ChordSymbolParser.cs:11-36 accepts root A-G and any suffix, preserving the original symbol.",
+        "ChordSymbolParser.cs:56-95 selects empty suffix Major, m Minor, and 7 Dominant7.",
+        "ChordSymbolParser.cs:103-139 accepts substring alt/b5 and defaults unknown suffix to Major.",
+        "ChordSymbolParser.cs:176-179 builds Altered Dominant [4,7,10,13,15] or Flat5 [4,6].",
+        "Common/GA.Domain.Core/Theory/Harmony/CommonChordFormulas.cs:11,16,41 defines Major [4,7], Minor [3,7], Dominant7 [4,7,10].",
+        "Common/GA.Domain.Core/Theory/Harmony/Chord.cs:27-43 puts root first, appends formula intervals, derives PitchClassSet, and retains supplied symbol; Bass is Notes[0].",
+        "Apps/ga-server/GaApi/Services/VoicingFilterService.cs:28-31 rejects failed TryParse then generates positions from PitchClassSet; lines56-57 retain chordName in responses.",
+        "Apps/ga-server/GaApi/Controllers/ContextualChordsController.cs:54-68 maps successful service result to Ok, ArgumentException to generic BadRequest, other exceptions to 500.",
+        "Tests/Common/GA.Business.Core.Tests/Chords/ChordSymbolParserTests.cs includes C7b5/C/E in valid symbols and asserts construction/root/symbol rather than intended intervals or bass.",
+        "Chord.TryFromSymbol/TryParseSuffix rejects unknown suffix through null formula and supports fewer exact suffix forms than the service parser."
+      ],
+      "cases": [
+        {
+          "input": "C",
+          "expected_source_trace": "C major; pitch classes C/E/G"
+        },
+        {
+          "input": "Am",
+          "expected_source_trace": "A minor; pitch classes A/C/E"
+        },
+        {
+          "input": "G7",
+          "expected_source_trace": "G dominant seventh; pitch classes G/B/D/F"
+        },
+        {
+          "input": "Hmaj7",
+          "expected_source_trace": "Invalid root; regex fails and TryParse returns false"
+        },
+        {
+          "input": "Cnope",
+          "expected_source_trace": "Unknown suffix becomes Major rather than rejection"
+        },
+        {
+          "input": "Galtxyz",
+          "expected_source_trace": "Contains alt selects Altered Dominant despite trailing xyz"
+        },
+        {
+          "input": "C7b5",
+          "expected_source_trace": "Contains b5 selects intervals4,6; dominant seventh is absent"
+        },
+        {
+          "input": "C/E",
+          "expected_source_trace": "Unknown /e suffix becomes Major; symbol remains C/E; constructed Bass remains root C"
+        }
+      ],
+      "limits": "No parser executable, generator, HTTP route, or musician workflow was run. Source binding correctly does not retroactively pin the original local observation."
+    },
+    {
+      "subject": "INF-002 compact-vector table and scores",
+      "result": "Source and elementary arithmetic agree",
+      "source": "GA dc2e74cbd992a298f67efb928b5b3754615e1924 Common/GA.Business.ML/Embeddings/EmbeddingSchema.cs:117-148,235-303",
+      "observations": [
+        "Retained widths24+24+12+12+40+12=124; omitted6+18+13+15+64=116.",
+        "ROOT raw228-239 maps to compact112-123.",
+        "Weights sum0.45+0.25+0.20+0.10+0.10+0.05=1.15.",
+        "A/B and A/D collisions, A/A1.15 and A/C1.10 follow for the stated constructed one-hot fixtures.",
+        "Pinned SchemaLayoutContractTests.cs:31-50 asserts compact-dot/weighted-score agreement within1e-6; this audit did not run it."
+      ]
+    },
+    {
+      "subject": "INF-004 toy loss and evaluator boundary",
+      "result": "Arithmetic and revised hand-only sensitivity wording agree",
+      "observations": [
+        "A alone eligible; three false accepts at10 units yield30/4=7.5; rejecting A yields1/4=0.25.",
+        "At fractional false-accept cost0.1, accept-all mean is0.075 versus0.25.",
+        "Archived evaluate_handoffs.py:16-19 accepts nonnegative integer costs only. New wording explicitly keeps fractional sensitivity as hand calculation."
+      ]
+    },
+    {
+      "subject": "NET-002/003/004 source and graph boundaries",
+      "result": "Static graph claims agree; no runtime or authority claim follows",
+      "observations": [
+        "NET-002 three evidence files have identical Git blobs at its claimed5c4967454ddc740ed937c87719ca4d71a3522e4b and archive17f82a4.",
+        "Pinned capability registry has27 ix,4 tars,5 ga family labels, with grammar the ix/tars shared label.",
+        "Pinned ecdc6c2 worker policy declares22 assigned primary/secondary role paths.",
+        "NORMAL/CONSTRAINED/DRAINING/HALTED unblocked paths22/21/21/8, projected edges9/8/8/3, primary paths5/4/4/1 agree with policy reading.",
+        "Pinned selector checks forbidden role before membership and mode blocks; allow/recommend are advisory payloads, exit0 means evaluated.",
+        "NET-004 AND-prerequisite notation and semantic backpressure remain proposed teaching contracts."
+      ]
+    },
+    {
+      "subject": "CS-007 Phase0 declarations and proposed typed composition",
+      "result": "Pinned source agrees with stated source-only limits",
+      "evidence": [
+        "Demerzel c3bf6224386374fc0f74cfb36643e543b4bdcce2 pipelines/qa-architect-cycle.ixql declares Phase0 skeleton, default trigger, empty blast radius, one placeholder reviewer and manual_note/n/a.",
+        "The source places ix.io.write before tars.validate of schema_version1.",
+        "Vendored qa-verdict.schema.json requires full fields, permits manual_note/n/a and reviewer minItems1, and conditional informational/P3.",
+        "The two-slot A/B/C teaching example admits B only; one filled slot, two unresolved bundles, one unused slot."
+      ],
+      "limits": "No schema validation, pipeline executor, write trace, reviewer call, rollback, or measured semantic backpressure was run."
+    },
+    {
+      "subject": "CS-008 historical helper applicability",
+      "result": "Immutable helper and schema support lesson predicates; new historical/current boundary is appropriate",
+      "evidence": [
+        "Learn02fc08c8f73e017412d1a623415ac4ab08645eb0 scripts/streeling-review-status.mjs was read from local Git objects.",
+        "Helper matches source_blob and language source_english_blob, validates shape, and checks relevant blobs in reviewed_commit only for matching claims.",
+        "Demerzel5d7c1d1bd9972fe9d6d2e7a90ab3cdddabb8ed44 schemas/streeling-review-receipt.schema.json declares the described source bindings and kinds.",
+        "Current Learn has no scripts/streeling-review-status.mjs and its sync generator uses general unreviewed notices.",
+        "New text retains historical Demerzel state/streeling commands and supplies current Learn streeling/courses blob instructions."
+      ],
+      "supplied_not_independently_network_verified": "Parent reports three cited PRs closed without merge on2026-10-21. This audit did not query GitHub and does not independently certify PR status or timestamp."
+    },
+    {
+      "subject": "PM-003 inventory and synthetic ledger",
+      "result": "Pinned-tree inventory and ledger arithmetic agree",
+      "evidence": [
+        "Static enumeration at Demerzel0220ca84a25f59973bd6b9236cc00b7f68631a50 finds81EN modules,21 course directories,16 six-language-complete modules,23 department records.",
+        "Twelve production JSON records at that revision comprise11in_progress and1review_pending; none has review.completed true plus verdict approved.",
+        "Synthetic window closes with2+2-1-1=2 WIP(B,E), one approved completion(A), one withdrawal(C), and one authored draft without review entry(D).",
+        "E age fromOct10 12:00UTC toOct12 00:00UTC is36hours; A lead time and B age are unspecified."
+      ],
+      "limits": "The progress script was not run; source-tree and JSON counts were inspected directly. No real review throughput or current deployment was measured."
+    }
+  ],
+  "findings": [],
+  "nonblocking_limits": [
+    "The CS-004 anonymous404 and cited PR closures were supplied by the parent, not independently network-verified by this static audit. Preserve the parent's raw receipts in final transfer evidence.",
+    "CS-004 original full local reviewer receipt, transformed candidate WAVs and raw comparator JSON remain outside the archive; source summaries support only the bounded historical observations they describe.",
+    "No human subject, fluent-language, learner, publication, or public-readback approval is issued.",
+    "The final translation and evidence-note delta needs a separate bounded pass after other writers finish."
+  ],
+  "resolved_findings": [
+    {
+      "id": "AC-CONTENT-001",
+      "priority": "P2",
+      "title": "Historical PM source links select different evidence bytes",
+      "paths": [
+        "streeling/courses/product-management/en/pm-002-release-evidence-gate.md",
+        "streeling/courses/product-management/en/pm-003-review-queue-flow-metrics.md"
+      ],
+      "problem": "Blanket relative-link rewrites select archive17f82a4 even where the prose explicitly identifies older historical source commits. Several files changed between those commits and the archive. The source migration note does not identify that evidence substitution.",
+      "evidence": [
+        "PM-003:31,45,102 names0220ca8 but scripts/streeling_course_progress.py is old blobc0b833c620f3a91d9dfacafc0852e0a66ab75c29 versus archive d467443a57c298abdb54d2a0b188eec849150713.",
+        "PM-003 curriculum old blob179342a46589d3d68372eeafc1121d62d20e4b1d versus archive10bdcd110aaf92acf508ddf96e93616b7a9e500b.",
+        "PM-003 review brief old blob4ddef4ba935a98d72f3fe6a97a92f4e6761079de versus archive327269ab74f609083987a7ff04f66d2fe356f252.",
+        "PM-002 claims6bc584d historical receipts; its DV-001 review brief has that same old/archive blob mismatch.",
+        "PM-002 schema, production record, subject receipt, preflight and public-baseline blobs are identical between claimed6bc584d and archive17f82a4."
+      ],
+      "recommendation": "Point cited PM historical evidence links to the exact source revision named by the surrounding claim, at least the differing script/curriculum/review-brief files; record these deliberate URL corrections in import.json and propagate them to translations.",
+      "status": "resolved_by_root_and_independently_rechecked"
+    }
+  ]
+}

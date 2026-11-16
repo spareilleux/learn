@@ -1,0 +1,236 @@
+{
+  "status": "AI locale draft completion; human subject, fluent-language and learner review and publication pending.",
+  "base_learn_commit": "0eca002201ba273dfe7348c724bd57ddea9b0568",
+  "source_policy": "Existing canonical Learn English sources, not a new Demerzel import. No initial-copy provenance or personal journal changes.",
+  "existing_english_sources": [
+    {
+      "learn_path": "streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md",
+      "base_git_blob": "dea984b98f18515ced457e4d114547471162141a",
+      "base_sha256": "07b816b0fb6756c8552ceb24ef9d88d312e5425020c093247b9985b87c46d175",
+      "learn_sha256": "34b464061549b75e54058e76896bbec739e197a1f8cf7e54b837a5698e01f531",
+      "prose_changes": [
+        {
+          "kind": "insertion_after_h1",
+          "new": "> **Draft and localization scope.** The technical text below is a dated source draft. Historical statements about pending translations, Learn integration or publication checks describe the earlier stage; this [localization record](../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md) records current draft translations and checks. Unperformed runtime experiments remain unperformed. Human subject, fluent-language and learner reviews remain pending.\n\n",
+          "reason": "Separate dated draft/localization/publication statements from current source work and preserve pending human/runtime gates."
+        }
+      ]
+    },
+    {
+      "learn_path": "streeling/courses/computer-science/en/cs-006-ixql-pipeline-composition.md",
+      "base_git_blob": "2fe650c1e49b0c559b6d587abe8b4fddd8d93b7f",
+      "base_sha256": "49ba1f2da3a2f007d81d41c68309e660917f953dffa9d8856243b23714ad5728",
+      "learn_sha256": "7077ccb18a5e5ac03bc3d0e0eaa89dc12e4c64ec09abcd143967da515f484117",
+      "prose_changes": [
+        {
+          "kind": "insertion_after_h1",
+          "new": "> **Draft and localization scope.** The technical text below is a dated source draft. Historical statements about pending translations, Learn integration or publication checks describe the earlier stage; this [localization record](../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md) records current draft translations and checks. Unperformed runtime experiments remain unperformed. Human subject, fluent-language and learner reviews remain pending.\n\n",
+          "reason": "Separate dated draft/localization/publication statements from current source work and preserve pending human/runtime gates."
+        }
+      ]
+    },
+    {
+      "learn_path": "streeling/courses/visual-computing/en/vc-002-godot-react-bridge-evidence.md",
+      "base_git_blob": "8424732f10d7be80cc288ee12a9d091e45fffe1f",
+      "base_sha256": "a7367d45880c6731a19c598b4117a2047fe54b03bea169ff64559cf218b48a29",
+      "learn_sha256": "aa5e1f7baeea211521c44ac7ee406be35d810d9386484d2d99e774a88afd2e56",
+      "prose_changes": [
+        {
+          "kind": "insertion_after_h1",
+          "new": "> **Draft and localization scope.** The technical text below is a dated source draft. Historical statements about pending translations, Learn integration or publication checks describe the earlier stage; this [localization record](../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md) records current draft translations and checks. Unperformed runtime experiments remain unperformed. Human subject, fluent-language and learner reviews remain pending.\n\n",
+          "reason": "Separate dated draft/localization/publication statements from current source work and preserve pending human/runtime gates."
+        }
+      ]
+    },
+    {
+      "learn_path": "streeling/courses/visual-computing/en/vc-004-godot-observatory-capture-gate.md",
+      "base_git_blob": "fb1d96c58df78e732c51a2b755805ca166bd4e89",
+      "base_sha256": "bec735bd24232900c16b0d68ded5b7adf7ce5bfedc03d7eae83fdd5e8fd832ad",
+      "learn_sha256": "670c1ad35ba5231fe812e3b4144934ae5bd56faad92b2177bd4bb73a87c0eaa7",
+      "prose_changes": [
+        {
+          "kind": "insertion_after_h1",
+          "new": "> **Draft and localization scope.** The technical text below is a dated source draft. Historical statements about pending translations, Learn integration or publication checks describe the earlier stage; this [localization record](../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md) records current draft translations and checks. Unperformed runtime experiments remain unperformed. Human subject, fluent-language and learner reviews remain pending.\n\n",
+          "reason": "Separate dated draft/localization/publication statements from current source work and preserve pending human/runtime gates."
+        }
+      ]
+    },
+    {
+      "learn_path": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md",
+      "base_git_blob": "03607cf80476ded0ff5fd09d74cdb03ff6e2f813",
+      "base_sha256": "ddce8fdcb5ccf6a187026c10d183605281f0cf4161f3aa3334c99ac91e407f27",
+      "learn_sha256": "5fbad318a7815657d4cc1be13c1d6a7c265a732e3121d901bd35c994c9227d8d",
+      "prose_changes": [
+        {
+          "kind": "replacement",
+          "from": "A [draft Learn fix](https://github.com/spareilleux/learn/pull/168) corrects the return shape but has not been through a Blender run on this host.",
+          "to": "The [proposed fix at Learn `deac6e1`](https://github.com/spareilleux/learn/blob/deac6e12a64864703300e5645cd5a9d1d374e062/code/blender/scripts/glb_pipeline.py) returns a pair on that early path. PR #168 was observed open and in draft during this localization pass; it is unmerged. A source-only call confirms the pair; a Blender run remains unverified.",
+          "reason": "Replace mutable draft-PR/current-main wording with immutable sources and a bounded observed unmerged status."
+        },
+        {
+          "kind": "replacement",
+          "from": "Source inspection of the current Learn main also confirmed the zero-filter return-shape defect; draft PR #168 proposes its one-line fix, verified only by a focused source-level call here.",
+          "to": "At [Learn `0eca0022`](https://github.com/spareilleux/learn/blob/0eca002201ba273dfe7348c724bd57ddea9b0568/code/blender/scripts/glb_pipeline.py), the early-return defect is still present. A focused source-only call of the proposed `deac6e1` function confirms the pair return; this does not execute Blender or validate the full pipeline. The PR is not treated as merged.",
+          "reason": "Replace mutable draft-PR/current-main wording with immutable sources and a bounded observed unmerged status."
+        },
+        {
+          "kind": "insertion_after_h1",
+          "new": "> **Draft and localization scope.** The technical text below is a dated source draft. Historical statements about pending translations, Learn integration or publication checks describe the earlier stage; this [localization record](../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md) records current draft translations and checks. Unperformed runtime experiments remain unperformed. Human subject, fluent-language and learner reviews remain pending.\n\n",
+          "reason": "Separate dated draft/localization/publication statements from current source work and preserve pending human/runtime gates."
+        }
+      ]
+    },
+    {
+      "learn_path": "streeling/courses/visual-computing/en/vc-007-weave-seams-as-scene-contracts.md",
+      "base_git_blob": "91a7abad3a5c6f6ab3095096d920077560ad75c7",
+      "base_sha256": "4ddf40807c786699261f11f3e6e19eed19e33845ee6de5c3a6e6c613fe4d6275",
+      "learn_sha256": "7fb0cf78216e9a35e4b27d84bb9327efe1f8aa42f3bb861d4e9bee8200e0c2a5",
+      "prose_changes": [
+        {
+          "kind": "insertion_after_h1",
+          "new": "> **Draft and localization scope.** The technical text below is a dated source draft. Historical statements about pending translations, Learn integration or publication checks describe the earlier stage; this [localization record](../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md) records current draft translations and checks. Unperformed runtime experiments remain unperformed. Human subject, fluent-language and learner reviews remain pending.\n\n",
+          "reason": "Separate dated draft/localization/publication statements from current source work and preserve pending human/runtime gates."
+        }
+      ]
+    }
+  ],
+  "new_translations": [
+    {
+      "learn_path": "streeling/courses/computer-science/fr/cs-005-agent-handoff-evidence-contract.fr.md",
+      "locale": "fr",
+      "english_source": "streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md",
+      "english_sha256_before_chronology": "07b816b0fb6756c8552ceb24ef9d88d312e5425020c093247b9985b87c46d175",
+      "translation_sha256_before_chronology": "049b60d274d39e4cf7edcef4398fcd97b10c7ea7734c2dce88190624f9615aa6",
+      "status": "AI translation draft; human subject, fluent-language and learner review pending.",
+      "human_fluent_approval": false,
+      "learn_sha256": "9d04890ef24629c532bcd25ff9f8bac455cd6ea90063b1aca0b8ba7ff3d4903d",
+      "english_sha256": "34b464061549b75e54058e76896bbec739e197a1f8cf7e54b837a5698e01f531"
+    },
+    {
+      "learn_path": "streeling/courses/computer-science/es/cs-005-agent-handoff-evidence-contract.es.md",
+      "locale": "es",
+      "english_source": "streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md",
+      "english_sha256_before_chronology": "07b816b0fb6756c8552ceb24ef9d88d312e5425020c093247b9985b87c46d175",
+      "translation_sha256_before_chronology": "9b2af01d6e9b51b32289eba20eebd4a5e3eee4c9c6996df662397a4d6dcfd47a",
+      "status": "AI translation draft; human subject, fluent-language and learner review pending.",
+      "human_fluent_approval": false,
+      "learn_sha256": "8c360796f4c33774a77502ee7ed135ef9e8616854572b98ad827c3dacec969ee",
+      "english_sha256": "34b464061549b75e54058e76896bbec739e197a1f8cf7e54b837a5698e01f531"
+    },
+    {
+      "learn_path": "streeling/courses/computer-science/fr/cs-006-ixql-pipeline-composition.fr.md",
+      "locale": "fr",
+      "english_source": "streeling/courses/computer-science/en/cs-006-ixql-pipeline-composition.md",
+      "english_sha256_before_chronology": "49ba1f2da3a2f007d81d41c68309e660917f953dffa9d8856243b23714ad5728",
+      "translation_sha256_before_chronology": "c0bb76f7d91c9f1afb40a154d4581194e5e20734835bcd05a2e1dccd24088569",
+      "status": "AI translation draft; human subject, fluent-language and learner review pending.",
+      "human_fluent_approval": false,
+      "learn_sha256": "0c61d00d9ebdd8bec5b3016295de2cbeb6c1a6788d295e4e29cfa4f61bac250c",
+      "english_sha256": "7077ccb18a5e5ac03bc3d0e0eaa89dc12e4c64ec09abcd143967da515f484117"
+    },
+    {
+      "learn_path": "streeling/courses/computer-science/es/cs-006-ixql-pipeline-composition.es.md",
+      "locale": "es",
+      "english_source": "streeling/courses/computer-science/en/cs-006-ixql-pipeline-composition.md",
+      "english_sha256_before_chronology": "49ba1f2da3a2f007d81d41c68309e660917f953dffa9d8856243b23714ad5728",
+      "translation_sha256_before_chronology": "92f4a8e43b55e19a7b2503d995ead1b828059e1ed600630631103ec30de9491e",
+      "status": "AI translation draft; human subject, fluent-language and learner review pending.",
+      "human_fluent_approval": false,
+      "learn_sha256": "4d0aa67259fce61f255707ffe758df110fce766639b2bc79eaa33de838596180",
+      "english_sha256": "7077ccb18a5e5ac03bc3d0e0eaa89dc12e4c64ec09abcd143967da515f484117"
+    },
+    {
+      "learn_path": "streeling/courses/visual-computing/fr/vc-002-godot-react-bridge-evidence.fr.md",
+      "locale": "fr",
+      "english_source": "streeling/courses/visual-computing/en/vc-002-godot-react-bridge-evidence.md",
+      "english_sha256_before_chronology": "a7367d45880c6731a19c598b4117a2047fe54b03bea169ff64559cf218b48a29",
+      "translation_sha256_before_chronology": "90bfbfccb111c9b90d2b51759fb0859189879b14f713b02e0e2b8cf7a73e508e",
+      "status": "AI translation draft; human subject, fluent-language and learner review pending.",
+      "human_fluent_approval": false,
+      "learn_sha256": "b2d4f109c5b19c1afb17a922e3c6888d89014136ab7f737637577747edd37f80",
+      "english_sha256": "aa5e1f7baeea211521c44ac7ee406be35d810d9386484d2d99e774a88afd2e56"
+    },
+    {
+      "learn_path": "streeling/courses/visual-computing/es/vc-002-godot-react-bridge-evidence.es.md",
+      "locale": "es",
+      "english_source": "streeling/courses/visual-computing/en/vc-002-godot-react-bridge-evidence.md",
+      "english_sha256_before_chronology": "a7367d45880c6731a19c598b4117a2047fe54b03bea169ff64559cf218b48a29",
+      "translation_sha256_before_chronology": "75557e2bd99bf2bdf075d21ce5472ff0e8ef6489c75e9bb937e143175146cdf9",
+      "status": "AI translation draft; human subject, fluent-language and learner review pending.",
+      "human_fluent_approval": false,
+      "learn_sha256": "ed6d1e420afae5969dc41ad4a82d1f6799e48100c853cc8a34c441232a213573",
+      "english_sha256": "aa5e1f7baeea211521c44ac7ee406be35d810d9386484d2d99e774a88afd2e56"
+    },
+    {
+      "learn_path": "streeling/courses/visual-computing/fr/vc-004-godot-observatory-capture-gate.fr.md",
+      "locale": "fr",
+      "english_source": "streeling/courses/visual-computing/en/vc-004-godot-observatory-capture-gate.md",
+      "english_sha256_before_chronology": "bec735bd24232900c16b0d68ded5b7adf7ce5bfedc03d7eae83fdd5e8fd832ad",
+      "translation_sha256_before_chronology": "c82b4a0ceee487972b1f79038867177be8842d682213b187eb22b9283dc1feb1",
+      "status": "AI translation draft; human subject, fluent-language and learner review pending.",
+      "human_fluent_approval": false,
+      "learn_sha256": "23a82cc934e562923822bf8476a2944cdb4c4334fa0dc4daa2ee8fc9fd7a98ff",
+      "english_sha256": "670c1ad35ba5231fe812e3b4144934ae5bd56faad92b2177bd4bb73a87c0eaa7"
+    },
+    {
+      "learn_path": "streeling/courses/visual-computing/es/vc-004-godot-observatory-capture-gate.es.md",
+      "locale": "es",
+      "english_source": "streeling/courses/visual-computing/en/vc-004-godot-observatory-capture-gate.md",
+      "english_sha256_before_chronology": "bec735bd24232900c16b0d68ded5b7adf7ce5bfedc03d7eae83fdd5e8fd832ad",
+      "translation_sha256_before_chronology": "3988ffdf4eb493834241636407ac646994fac45533e946a16e4620cfd1ca75dc",
+      "status": "AI translation draft; human subject, fluent-language and learner review pending.",
+      "human_fluent_approval": false,
+      "learn_sha256": "fc864ead1ec1c201a1a990166cdd1f8bfd2df632c1bf6990f5032e0598d06d8d",
+      "english_sha256": "670c1ad35ba5231fe812e3b4144934ae5bd56faad92b2177bd4bb73a87c0eaa7"
+    },
+    {
+      "learn_path": "streeling/courses/visual-computing/fr/vc-005-craft-details-through-blender-to-godot.fr.md",
+      "locale": "fr",
+      "english_source": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md",
+      "english_sha256_before_chronology": "bde01b139bddc60468e3bcdf18ef8adae7d5863077b56b3f3257456a22c73351",
+      "translation_sha256_before_chronology": "cb11cf0d79250e95a47265a25e2f506e6f18cac1164e133481f7748cb52f0961",
+      "status": "AI translation draft; human subject, fluent-language and learner review pending.",
+      "human_fluent_approval": false,
+      "learn_sha256": "835b923c7db70d559564540f2a22ffd1692f6d1e45fe5c00d943ed741bad1ae5",
+      "english_sha256": "5fbad318a7815657d4cc1be13c1d6a7c265a732e3121d901bd35c994c9227d8d"
+    },
+    {
+      "learn_path": "streeling/courses/visual-computing/es/vc-005-craft-details-through-blender-to-godot.es.md",
+      "locale": "es",
+      "english_source": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md",
+      "english_sha256_before_chronology": "bde01b139bddc60468e3bcdf18ef8adae7d5863077b56b3f3257456a22c73351",
+      "translation_sha256_before_chronology": "06bb41773a32a1e25bccbc7e903317737a18a082ed5c3ef952f4402089a1758c",
+      "status": "AI translation draft; human subject, fluent-language and learner review pending.",
+      "human_fluent_approval": false,
+      "learn_sha256": "b1989d501b28fd34f2faf4ac1109d238e897d14482edde5a43d52aa2199bd98c",
+      "english_sha256": "5fbad318a7815657d4cc1be13c1d6a7c265a732e3121d901bd35c994c9227d8d"
+    },
+    {
+      "learn_path": "streeling/courses/visual-computing/fr/vc-007-weave-seams-as-scene-contracts.fr.md",
+      "locale": "fr",
+      "english_source": "streeling/courses/visual-computing/en/vc-007-weave-seams-as-scene-contracts.md",
+      "english_sha256_before_chronology": "4ddf40807c786699261f11f3e6e19eed19e33845ee6de5c3a6e6c613fe4d6275",
+      "translation_sha256_before_chronology": "0c10ae28feb4e8863a5bd873138ab05021b36b08ad1b6e8b1d641cdb6f6b8564",
+      "status": "AI translation draft; human subject, fluent-language and learner review pending.",
+      "human_fluent_approval": false,
+      "learn_sha256": "66ed91138f9e8ba6bf5769cc72cd747c1f41df2a690b805ed3f53ba4418dbc87",
+      "english_sha256": "7fb0cf78216e9a35e4b27d84bb9327efe1f8aa42f3bb861d4e9bee8200e0c2a5"
+    },
+    {
+      "learn_path": "streeling/courses/visual-computing/es/vc-007-weave-seams-as-scene-contracts.es.md",
+      "locale": "es",
+      "english_source": "streeling/courses/visual-computing/en/vc-007-weave-seams-as-scene-contracts.md",
+      "english_sha256_before_chronology": "4ddf40807c786699261f11f3e6e19eed19e33845ee6de5c3a6e6c613fe4d6275",
+      "translation_sha256_before_chronology": "31dbdaa646ad4330f09fa821ccc86745ba80c03af10eb83e40a8089a716df92b",
+      "status": "AI translation draft; human subject, fluent-language and learner review pending.",
+      "human_fluent_approval": false,
+      "learn_sha256": "66cddf78a85c2b8cede85f0f2d65a29b945d2b8f76cd2618c9b73f13b0c8bbde",
+      "english_sha256": "7fb0cf78216e9a35e4b27d84bb9327efe1f8aa42f3bb861d4e9bee8200e0c2a5"
+    }
+  ],
+  "chronology_notes": {
+    "en": "> **Draft and localization scope.** The technical text below is a dated source draft. Historical statements about pending translations, Learn integration or publication checks describe the earlier stage; this [localization record](../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md) records current draft translations and checks. Unperformed runtime experiments remain unperformed. Human subject, fluent-language and learner reviews remain pending.\n\n",
+    "fr": "> **Périmètre du brouillon et des traductions.** Le texte technique ci-dessous est un brouillon daté. Les mentions historiques de traductions, d’intégration dans Learn ou de vérifications de publication encore à faire concernent cette étape antérieure ; ce [dossier de traduction](../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md) recense les brouillons actuels et les contrôles effectués. Les essais en conditions réelles encore non réalisés le restent. Les revues humaines du contenu et de la langue, ainsi que l’essai avec un apprenant, restent à effectuer.\n\n",
+    "es": "> **Alcance del borrador y las traducciones.** El texto técnico siguiente es un borrador fechado. Las menciones históricas de traducciones, integración en Learn o comprobaciones de publicación pendientes corresponden a aquella etapa; este [registro de traducción](../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md) documenta los borradores actuales y las comprobaciones realizadas. Los ensayos de ejecución no realizados siguen pendientes. Aún faltan la revisión humana del contenido y del idioma, y la prueba con un estudiante.\n\n"
+  }
+}

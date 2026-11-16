@@ -11,9 +11,28 @@ sidebar:
 
 ## Módulos
 
-- [MUS-001 · Que es un acorde?](mus-001-what-is-a-chord/)
-- [MUS-002 · Beyond Tonality: Post-Tonal Theory for Guitarists](mus-002-beyond-tonality/) *(en inglés)*
-- [MUS-003 · How Harmony Works — Functional Harmony for Guitarists](mus-003-functional-harmony/) *(en inglés)*
-- [MUS-004 · Rhythm, Meter, and Groove: The Time Dimension of Music](mus-004-rhythm-and-groove/) *(en inglés)*
-- [MUS-005 · Jazz Harmony for Guitar: From ii-V-I to Coltrane Changes](mus-005-jazz-harmony/) *(en inglés)*
-- [MUS-006 · The Scale Universe: 4,096 Possibilities From 12 Notes](mus-006-the-scale-universe/) *(en inglés)*
+- [MUS-001 · ¿Qué es un acorde?](mus-001-what-is-a-chord/)
+- [MUS-002 · Más allá de la tonalidad: teoría postonal para guitarristas](mus-002-beyond-tonality/)
+- [MUS-003 · Cómo funciona la armonía — Armonía funcional para guitarristas](mus-003-functional-harmony/)
+- [MUS-004 · Ritmo, métrica y groove: la dimensión temporal de la música](mus-004-rhythm-and-groove/)
+- [MUS-005 · Armonía de jazz para guitarra: del ii-V-I a los Coltrane Changes](mus-005-jazz-harmony/)
+- [MUS-006 · El universo de las escalas: 4096 posibilidades a partir de 12 notas](mus-006-the-scale-universe/)
+- [MUS-007 · Altura, grafía e identidad enarmónica — Un sonido, varios nombres](mus-007-pitch-spelling-enharmonic-identity/)
+- [MUS-008 · Intervalos, inversión e intervalos compuestos — Contar más allá de la octava](mus-008-intervals-inversion-compound/)
+- [MUS-009 · Afinación y geometría del mástil — Una altura, muchos lugares](mus-009-tuning-fretboard-geometry/)
+- [MUS-010 · Fórmulas de escalas, conjuntos y vector interválico diatónico — Lo que la escala mayor tiene de raro](mus-010-scales-pattern-set-interval-vector/)
+- [MUS-011 · Modos y familias modales — La rotación frente al vector interválico compartido](mus-011-modes-modal-families/)
+- [MUS-012 · Fórmulas de acordes, notas esenciales y duplicaciones — Lo que un acorde puede perder](mus-012-chord-formulas-essential-tones-doubling/)
+- [MUS-013 · Fundamental, bajo y conjunto de clases de altura — Un conjunto, varios nombres](mus-013-root-bass-pitch-class-set/)
+- [MUS-014 · Inversiones y línea de bajo — Las mismas notas, otro bajo](mus-014-inversions-bass-line/)
+- [MUS-015 · Elegir qué ignora una distancia de conducción de voces](mus-015-choose-voice-leading-equivalences/)
+- [MUS-016 · Una distancia mínima no identifica las voces](mus-016-recover-voice-correspondence/)
+- [MUS-017 · Auditar una clasificación de disposiciones de voces según su contrato de distancia](mus-017-audit-voice-leading-rankings/)
+- [MUS-018 · Identificación de la tonalidad, números romanos y cadencias — Lo que un recuento de acordes puede decidir y lo que no](mus-018-key-finding-roman-numerals-cadences/)
+- [MUS-019 · Transposición, capotraste y equivalencia entre instrumentos — Tres clases de identidad](mus-019-transposition-capo-cross-instrument/)
+- [MUS-020 · Clases de conjuntos, vectores interválicos, relación Z y formas primas — Dos compactaciones, un catálogo](mus-020-set-classes-interval-vectors-prime-forms/)
+- [MUS-021 · La TDF de las clases de altura — Lo que conservan los módulos y lo que añaden las fases](mus-021-pitch-class-dft-magnitudes-phases-homometry/)
+- [MUS-022 · Los deltas de Grothendieck — Lo que mide la distancia de contenido interválico, y lo que no puede ver](mus-022-grothendieck-deltas-icv-distance/)
+- [MUS-023 · Planificar la conducción de voces en una frase completa](mus-023-plan-voice-leading-across-a-phrase/)
+- [MUS-024 · Preservar los ataques y los límites armónicos](mus-024-preserve-attacks-and-harmonic-boundaries/)
+- [MUS-025 · Mantener la melodía exigida en un voicing](mus-025-keep-the-melody-in-a-voicing/)

@@ -22,6 +22,7 @@ sidebar:
 - [x] Lección 13 — Frente a otros formalismos
 - [x] Lección 14 — Sobre nuestros propios sistemas
 - [x] Lección 15 — Límites y qué viene después
+- [x] Lección 16 — Interoperabilidad: preservar el comportamiento, no solo el dibujo (su parte con TINA es una receta pendiente)
 
 ## QA
 
@@ -41,6 +42,9 @@ Este curso enseña un formalismo y se ejecuta sobre un analizador que escribí y
 | El árbol de cobertura de una red pequeña y acotada es calculable | `CoverabilityTree.Build(Nets.Kanban(1))`, una red con 160 marcados alcanzables, no vuelve: limitado a 2 GiB lanza `OutOfMemoryException` a los 15,5 s, sin límite llegó a 35,7 GB y doce minutos de CPU | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs) | 160 marcados, ningún resultado; el árbol nunca fusiona dos ramas que llegan al mismo marcado, así que su tamaño sigue al número de caminos | Ni un defecto ni arreglable: la lección 12 imprime dos columnas de cotas en vez de tres, y dice por qué (2026-09-22) |
 | Un verificador de modelos dice cuándo no comprobó nada | TLC con una restricción de estado que excluye el marcado inicial imprime `Model checking completed. No error has been found.` y `0 distinct states found`, sin ninguna línea que lo distinga de una ejecución completa | `tla2tools.jar` 2.19, [herramientas TLA+](https://github.com/tlaplus/tlaplus) | `queue_5.tla` con `Cap == 2` frente a un marcado inicial de 5 marcas: 1 estado generado, 0 distintos, salida 0 | Reproducido el 2026-09-22; no comunicado aguas arriba — comunicarlo necesita el visto bueno del autor. La lección deduce el tope de los invariantes de plaza en su lugar (2026-09-22) |
 | El árbol de cobertura aproxima, y se equivoca del lado seguro | En una red con un arco inhibidor responde omega para una plaza que nunca lleva dos marcas. La aceleración de Karp y Miller supone que la secuencia que alcanza un marcado que cubre puede repetirse, y un arco inhibidor lo rompe | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs), [`Inhibitor.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/Inhibitor.cs) | `self-inhibited`: el árbol dice no acotada, el conjunto alcanzable son 2 marcados con p <= 1 | Ni un defecto ni arreglable — la acotación es indecidible para estas redes. `InhibitorNet` viene sin contrapartida de cobertura, e `InhibitorTests` conserva la contradicción para que nadie añada una (2026-09-22) |
+| Un arco PNML que el lector P/T no modela se rechaza | Un arco marcado `<type value="inhibitor"/>` se leía como un arco ordinario que consume: la red de admisión de la lección 16 se volvía una red que no admite a nadie, sin error. Tras esa corrección, la revisión encontró el mismo silencio para `<type><text>inhibitor</text></type>`, un hijo `<arctype>` y un `<type/>` vacío | [`Pnml.cs:68-73`](https://github.com/spareilleux/learn/blob/3242df6132daba4f16e1cbc73cfb5722bcea37d1/code/petri-nets/PetriNets/Pnml.cs#L68-L73); pruebas [`PetriNetTests.cs:626`](https://github.com/spareilleux/learn/blob/3242df6132daba4f16e1cbc73cfb5722bcea37d1/code/petri-nets/Tests/PetriNetTests.cs#L626), [`PetriNetTests.cs:644`](https://github.com/spareilleux/learn/blob/3242df6132daba4f16e1cbc73cfb5722bcea37d1/code/petri-nets/Tests/PetriNetTests.cs#L644) | `l16` antes de la corrección: `READ: 3 states`, muerta con los dos jobs probados. `PnmlTests`: fallaba 1 de 5, luego 5 de 5; tras la revisión, fallaban 4 casos nuevos, luego 12 de 12 | Reproducido, corregido localmente para un hijo `<type>` o `<arctype>`, como atributo o etiqueta; un tipo anotado en `<toolspecific>` sigue sin reconocerse (2026-09-27); no verificado de forma independiente |
+| Un marcado rechazado nombra su plaza | `FormatException: The input string 'two' was not in a correct format.`, el mensaje de `int.Parse` | [`Pnml.cs:50`](https://github.com/spareilleux/learn/blob/3242df6132daba4f16e1cbc73cfb5722bcea37d1/code/petri-nets/PetriNets/Pnml.cs#L50) | `l16`, E3 | Observado, sin corregir (2026-09-27) |
+| El viaje de ida y vuelta de la lección 16 señala cada línea que cambia | Las dos listas se emparejaban con `Zip`, que se detiene en la más corta. En la lista de E1, un marcado muerto añadido o perdido se seguía viendo, porque la línea de cotas va después, pero contaba una vez y nunca se imprimía; una última línea perdida daba `same meaning: yes` | [`Report.cs:321`](https://github.com/spareilleux/learn/blob/3242df6132daba4f16e1cbc73cfb5722bcea37d1/code/petri-nets/PetriNets/Report.cs#L321), [`Program.cs:1130`](https://github.com/spareilleux/learn/blob/3242df6132daba4f16e1cbc73cfb5722bcea37d1/code/petri-nets/Examples/Program.cs#L1130); prueba [`PetriNetTests.cs:663`](https://github.com/spareilleux/learn/blob/3242df6132daba4f16e1cbc73cfb5722bcea37d1/code/petri-nets/Tests/PetriNetTests.cs#L663) | Encontrado en la revisión, no en una ejecución. La prueba fallaba con `Zip` y pasa después. Repetido sobre las 8 líneas de E1: 1 diferencia en vez de 2 para una línea muerta añadida o perdida, 0 en vez de 1 para una última línea perdida | Corregido localmente (2026-09-27); no verificado de forma independiente |
 
 ## Experimentos
 
@@ -75,6 +79,10 @@ Una advertencia antes de la tabla: a diferencia del [laboratorio GA](../../ga-la
 | ¿Cómo crece el coste de la enumeración al añadir componentes? | Como los marcados, que es lo que todo el mundo cita | Como los **arcos por marcado**: de 1,3 a 3,9 en seis filósofos, de 3,9 a 8,8 en cuatro tarjetas Kanban, porque cada componente multiplica las maneras de abandonar cada estado existente | Confirmada como forma, y se aplana: la razón es un grado de salida medio y no puede superar el número de transiciones (2026-09-22) |
 | ¿Qué cuesta la atomicidad en espacio de estados? | Un factor constante | Filósofos tomando los dos tenedores de golpe: 29 marcados con siete. Un tenedor cada vez: 198 con seis. La diferencia es entrelazado, y es lo que quitan los desplegados | Medida; ni desplegado ni reducción de orden parcial está implementado aquí, y la lección lo dice (2026-09-22) |
 | ¿Sigue siendo el árbol de cobertura una aproximación segura cuando la red gana un arco inhibidor? | Sí — sobreaproxima por construcción, así que debería responder omega demasiado a menudo, nunca equivocadamente | Responde omega para una plaza que nunca lleva dos marcas. `self-inhibited` tiene 2 marcados alcanzables y el árbol dice no acotada | Refutada. La premisa de la aceleración falla, y falla porque la acotación es indecidible aquí, así que no hay nada que arreglar (2026-09-22) |
+| ¿Conserva una red PNML escrita a mano su comportamiento a través de una lectura, una escritura y una relectura? | Sí: mismos identificadores, marcado, pesos y transiciones habilitadas, 9 marcados, un marcado muerto, `running<=1`; las posiciones descartadas | Exactamente eso, y la segunda escritura es idéntica byte a byte a la primera; 9 posiciones de entrada, 0 de salida | Confirmado, prerregistrado en un fichero (2026-09-27) |
+| ¿Qué hace olvidar la liberación? | 7 marcados, y un marcado muerto con un job probado y nunca admitido, a 4 disparos | `waiting=0 tested=1 capacity=0 running=0 done=1` tras `test test admit finish` | Confirmado (2026-09-27) |
+| ¿Se rechazan los ficheros mal formados? | Los dos: un arco hacia un nodo inexistente, y un marcado escrito `two` | Rechazados, con `ArgumentException` y `FormatException` | Confirmado (2026-09-27) |
+| ¿Se rechaza un tipo de arco que el lector no modela? | No: según la lectura de `Pnml.Parse`, un arco inhibidor se lee como uno ordinario, lo que da 3 marcados | `READ: 3 states`, muerta con `tested=2` | Confirmado, y era un defecto: los arcos marcados con un hijo `<type>` o `<arctype>` ahora se rechazan (2026-09-27) |
 
 ## 2026-09-15 — Lecciones 1 a 4, y el analizador sobre el que se ejecutan
 
@@ -241,6 +249,40 @@ El coste llega de inmediato. `self-inhibited` es una plaza, una transición, y u
 
 Esa es también la respuesta a por qué todas las demás redes de este repositorio son redes plaza/transición ordinarias. No es conservadurismo. Es la línea más allá de la cual los veredictos del analizador dejan de significar nada.
 
+## 2026-09-27 — Lección 16, y un fichero que se leía y significaba otra cosa
+
+La pregunta vino de fuera del curso: ¿conserva una red su **comportamiento** de una herramienta a otra, y no solo su dibujo? Todo se ejecutó en `e3cb4be`, solo con el analizador de este curso. TINA, pm4py y Graphviz no están instalados en esta máquina, así que la parte de la lección con TINA es una receta, y lo dice.
+
+Por una vez, las predicciones fueron a un fichero antes de la primera ejecución: `interop/preregistration.md`, con hash tomado a las 10:54:11 EDT (SHA-256 `44fd0d02…`). Cuatro experimentos, cada uno con sus números escritos primero:
+
+- **E1, la ida y vuelta de una red de admisión escrita a mano.** Reproducido como se predijo:
+  - 9 marcados, y un marcado muerto, que es el final previsto;
+  - `running<=1`;
+  - el mismo significado tras escribir la red y releerla;
+  - 9 posiciones descartadas.
+- **E2, la liberación olvidada.** Reproducido: 7 marcados, y un marcado muerto tras 4 disparos, `test test admit finish`.
+- **E3, dos ficheros mal formados:** un arco hacia un nodo inexistente, y un marcado escrito `two`.
+  - Los dos se rechazan. **Reproducido.**
+  - El segundo rechazo es el mensaje de `int.Parse`, que no nombra la plaza. **Observado**, se deja así.
+- **E4, un arco inhibidor marcado `<type value="inhibitor"/>`.**
+  - Se predijo, leyendo `Pnml.Parse`, que se leería como un arco ordinario. Así fue: `READ: 3 states`, una red que no admite a nadie. **Reproducido.**
+  - Luego **corregido localmente**: el lector ahora rechaza cualquier tipo de arco que no sea `normal`.
+  - La prueba unitaria falló primero (1 de las 5 pruebas PNML) y pasó tras la corrección (5 de 5). `check.sh` pasa 92 pruebas y 19 salidas comparadas, `l16` incluida.
+
+Tiempos: el build de Examples tardó 5 s, cada ejecución de `l16` menos de un segundo, y el `check.sh` completo 47 s.
+
+Límites: es el espacio de estados de una red de 9 marcados. No es una ejecución de jobs reales, ni una prueba de equidad. Nada de esto está aún **verificado de forma independiente** ni **publicado**.
+
+
+## 2026-09-27 — Lección 16 tras la revisión
+
+Codex revisó la PR #28 en `3c1ff61` y pidió tres reparaciones. Las tres están hechas en `3242df6`, con las pruebas escritas antes de las correcciones:
+- **La comparación del viaje de ida y vuelta truncaba.** Emparejaba las dos listas con `Zip`, que se detiene en la más corta. En la lista de E1 eso no ocultaba del todo un cambio, porque la línea de cotas va al final, pero una última línea perdida habría impreso `same meaning: yes`. `Report.LineDifferences` empareja ahora cada línea.
+- **La guarda sobre el tipo de arco leía una sola codificación,** `<type value="…"/>`. Ahora también rechaza una etiqueta `<type>`, un hijo `<arctype>` en sus dos formas y un `<type/>` vacío. Un tipo anotado en un bloque `<toolspecific>` sigue sin reconocerse, y la lección 16 ahora lo dice.
+- **Las filas de QA enlazaban `blob/main`.** Ahora apuntan a líneas de `3242df6`.
+
+Antes de las correcciones fallaban 5 de las 12 `PnmlTests`: los 4 casos de tipo de arco y la comparación. Después pasan las 12. `check.sh` pasa 99 pruebas y 19 salidas comparadas, y `expected/` no cambió. El sitio se construye (1231 páginas) y su comprobación de enlaces no encuentra ningún enlace roto. Nada de esto está aún verificado de forma independiente.
+
 ## Por verificar
 
 - La lección 15 nombra los desplegados, la reducción de orden parcial y los diagramas de decisión y no implementa ninguno de los tres. La afirmación de que un desplegado es exponencialmente más pequeño para la familia de los filósofos es el resultado publicado, no una medición de este repositorio; los artículos de Karp y Miller y de Araki y Kasami están confirmados por Crossref pero tras un muro de pago y sin leer.
@@ -251,6 +293,9 @@ Esa es también la respuesta a por qué todas las demás redes de este repositor
 - Murata 1989 sigue tras muro de pago y sin leer; toda atribución a él en las lecciones 1 a 8 está marcada en la página.
 - Lección 7, ejercicio 3: construir los filósofos con un tiempo de espera y comprobar que la red está libre de interbloqueo y tiene una ejecución infinita en la que nadie come.
 - La afirmación de que la enumeración de sifones minimales es NP-difícil se enuncia en la lección 6 a partir de conocimiento general y no está anclada a ningún artículo.
+- La parte de la lección 16 con TINA. `tina -R interop/admission.pnml` debería dar 9 marcados y un marcado muerto; TINA no está instalado aquí. Lo mismo para `inhibitor-arc.pnml`, que TINA sí modela, con y sin `-inh`.
+- Qué herramientas escriben el tipo de un arco como `<type value="…"/>` en PNML no está respaldado por ninguna fuente. La lección 16 dice «las herramientas que modelan más que redes P/T» y no nombra ninguna. Las formas de etiqueta y `<arctype>` que ahora rechaza vienen de la revisión, no de un fichero visto en otro lugar.
+- Un registro XES de ejecuciones simuladas de la red de admisión, contrastado con el modelo, y una exportación DOT. Ni pm4py ni Graphviz están instalados aquí.
 
 ## Preguntas abiertas
 

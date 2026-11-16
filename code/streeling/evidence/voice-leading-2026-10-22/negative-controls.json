@@ -1,0 +1,35 @@
+{
+  "scope": "Root-run scratch mutation and existing-output controls; not broad mutation coverage.",
+  "oracle_substitution": {
+    "scratch_only": true,
+    "production_and_vendor_unchanged": true,
+    "mutation_before": "return new(minimum, count, witnesses);",
+    "mutation_after": "return new(new VoiceLeadingSpace(c.A.Length, c.O, c.P, c.T, c.I).Distance(c.A, c.B), count, witnesses);",
+    "entrypoint": [
+      "node",
+      "C:\\tmp\\streeling-voiceleading-root-mutant-repo-20261022-1\\code\\streeling\\voice-leading\\run.mjs",
+      "C:/tmp/streeling-voiceleading-root-mutant-output-20261022-1"
+    ],
+    "exit_code": 1,
+    "probe_exit_code": 1,
+    "named_gate": {
+      "id": "oracle_zero_known_case",
+      "pass": false,
+      "expected": 0,
+      "actual": 4
+    },
+    "stdout": "",
+    "stderr": "probe failed (exit 1): \n",
+    "commands_sha256": "fe81e005fad8a3049e20ac91cb22e6585e4303856a52840b4cc6a7e6edd9ed02"
+  },
+  "existing_output": {
+    "command": [
+      "node",
+      "code/streeling/voice-leading/run.mjs",
+      "C:\\tmp\\streeling-voiceleading-root-native-20261022-1"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "EEXIST: file already exists, mkdir 'C:\\tmp\\streeling-voiceleading-root-native-20261022-1'\n"
+  }
+}

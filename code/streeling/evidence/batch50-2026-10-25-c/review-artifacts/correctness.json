@@ -1,0 +1,19 @@
+{
+  "reviewer": "correctness",
+  "findings": [],
+  "scope": "seven named code paths only",
+  "checks": [
+    "Read all three complete finite-model test files, metadata test, checker, discovery tests and workflow.",
+    "Verified fixed independent expectations and packet agreements across all 50 cases; model and negative observations precede assertions.",
+    "Verified fixture selector keeps shallow deterministic ordering and actual incomplete-module detection; regression and all23 real fixtures pass.",
+    "CI discovery test uses standard-library unittest and imports current checker from discovery start directory; existing OS/Python matrix preserved.",
+    "Metadata test unchanged from explicit base, retained as context;150 checks passed.",
+    "Only source change after independent review is root newline fix in B; byte-delta record names it."
+  ],
+  "limits": [
+    "No production engine or learner/audio/scene/material acceptance.",
+    "No configured project-wide lint/typecheck scripts.",
+    "Native adversarial review is same serving family; no cross-model promotion.",
+    "Publication/static build gates belong to root."
+  ]
+}

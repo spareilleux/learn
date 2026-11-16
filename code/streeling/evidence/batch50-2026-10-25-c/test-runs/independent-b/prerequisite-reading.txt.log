@@ -1,0 +1,437 @@
+
+PREREQUISITE streeling/courses/cognitive-science/en/cog-020-screen-an-item-using-the-rest-score.md
+
+
+# Screen an Item Using the Rest Score
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A Learn quiz item is answered correctly by about half of an authored group. That does not show it distinguishes the intended skill. A mislabeled key or ambiguous prompt could reward the lower-scoring group more often. Before reusing the item in an agent-assisted explanation task, compare its outcome with performance on the other items and inspect the actual prompt.
+
+Build the ranking from the rest score, excluding the target item. Including the item in its own ranking creates a part-whole association and can obscure the question being asked. Our deliberately small diagnostic splits the distinct rest scores into equal halves. It then subtracts the lower group’s success fraction from the upper group’s fraction. Overall ease is a separate summary of all responses.
+
+The fixed case yields a negative contrast despite middling overall ease. The control reverses the item outcomes and keeps the overall proportion unchanged. Its contrast changes sign. The pair therefore shows why total correct count cannot replace the rest-score association. Preserve each row so a reviewer can inspect whether the scoring key, content alignment or wording could explain the pattern.
+
+The primary teaching text discusses item-rest scoring, sample dependence and the dimensionality assumption behind traditional discrimination summaries. Our equal-half calculation is a declared finite diagnostic, not its full psychometric method. A low or negative result is a reason to investigate, not automatic permission to delete a conceptually necessary item. Real learners, appropriate consent, sufficiently representative responses and content review are still absent. A proposed adaptive DSL should preserve this uncertainty rather than turn the contrast into a universal item-quality label.
+
+
+PREREQUISITE scripts/streeling-lib.mjs
+// Module parsing and link handling shared by sync-streeling.mjs (the pages, from streeling/) and
+// streeling-copy-source.mjs (the one-time copy of the source from GuitarAlchemist/Demerzel).
+
+import fs from 'node:fs';
+import path from 'node:path';
+import YAML from 'yaml';
+
+export const readText = (file) => fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
+
+/** Split frontmatter, extract the first H1 outside code fences, and return the remaining body. */
+export function parseModule(file) {
+	let raw = readText(file);
+	let meta = {};
+	const fm = raw.match(/^---\n([\s\S]*?)\n---\n/);
+	if (fm) {
+		meta = YAML.parse(fm[1]) ?? {};
+		raw = raw.slice(fm[0].length);
+	}
+	const lines = raw.split('\n');
+	let fence = null;
+	let title = null;
+	for (let i = 0; i < lines.length; i++) {
+		const marker = lines[i].trimStart().match(/^(```|~~~)/)?.[1];
+		if (marker) {
+			if (!fence) fence = marker;
+			else if (marker === fence) fence = null;
+			continue;
+		}
+		if (!fence && lines[i].startsWith('# ')) {
+			title = lines[i].slice(2).trim();
+			lines.splice(i, 1);
+			break;
+		}
+	}
+	const body = lines.join('\n').replace(/^\n+/, '');
+	// Research-cycle modules (e.g. CYB-*) carry metadata as bold fields instead of frontmatter.
+	const field = (name) => body.match(new RegExp(`^\\*\\*${name}:\\*\\*\\s*(.+)$`, 'm'))?.[1].trim();
+	meta.date ??= field('Date');
+	return { meta, title, body };
+}
+
+/**
+ * Call `replace(href, anchor, match)` for each relative Markdown link `](href#anchor)` outside code fences and put
+ * its return value in place of the link; `match` keeps it as it is.
+ */
+export function mapRelativeLinks(text, replace) {
+	let fence = null;
+	return text
+		.split('\n')
+		.map((line) => {
+			const marker = line.trimStart().match(/^(```|~~~)/)?.[1];
+			if (marker) {
+				if (!fence) fence = marker;
+				else if (marker === fence) fence = null;
+				return line;
+			}
+			if (fence) return line;
+			return line.replace(/\]\(([^)\s#]+)(#[^)\s]*)?\)/g, (match, href, anchor = '') =>
+				/^[a-z]+:/i.test(href) ? match : replace(href, anchor, match),
+			);
+		})
+		.join('\n');
+}
+
+/** Resolve a link of the file at `fromRepoPath` to a repository path. */
+export const linkTarget = (fromRepoPath, href) => path.posix.normalize(path.posix.join(path.posix.dirname(fromRepoPath), href));
+
+/** The key a link target has in the module index: its file name without the language suffix and `.md`. */
+export const moduleKey = (target) => path.posix.basename(target).replace(/(\.[a-z]{2})?\.md$/i, '').toLowerCase();
+
+/** The English modules of a courses folder, indexed by module id and by file stem, as links name them. */
+export function englishModuleKeys(coursesDir) {
+	const keys = new Set();
+	for (const dept of fs.readdirSync(coursesDir).sort()) {
+		const enDir = path.join(coursesDir, dept, 'en');
+		if (!fs.existsSync(enDir)) continue;
+		for (const file of fs.readdirSync(enDir)) {
+			if (!file.endsWith('.md') || file === 'README.md') continue;
+			const stem = file.replace(/\.md$/, '');
+			keys.add(stem.toLowerCase());
+			keys.add(String(parseModule(path.join(enDir, file)).meta.module_id ?? stem).toLowerCase());
+		}
+	}
+	return keys;
+}
+
+
+PREREQUISITE streeling/courses/cognitive-science/en/cog-003-calibrating-fretboard-confidence.md
+
+
+# Calibrating Confidence in Fretboard Note Identification
+
+> **Archive and transfer scope.** The technical text below comes from an archived draft. Historical statements about an absent Learn import or build refer to that earlier stage; this [transfer record](../../../../code/streeling/evidence/voicing-learning-2026-10-22/README.md) records the current import and checks. Other unexecuted-experiment boundaries remain in force. Human subject, fluent-language and learner reviews remain pending.
+
+> **Department of Cognitive Science** | Intermediate | 40 minutes | English draft; review and publication pending
+
+
+PREREQUISITE streeling/courses/psychohistory/en/psy-017-calibration-with-six-observations.md
+
+
+# Calibration with Six Observations
+
+> **Department of Psychohistory** | Intermediate | 45 minutes | English draft; human subject and learner review pending
+
+
+PREREQUISITE streeling/courses/cognitive-science/en/cog-005-separate-pitch-estimates-from-listener-reports.md
+
+
+# Separate Pitch Estimates from Listener Reports
+
+> **Draft scope.** Original mathematical signal contrasts and a prepared listening-task design. Human technical, musician/listener, fluent-language and learner reviews and deployed course HTML verification remain pending. No participant, played stimulus, perceptual response or learning outcome was observed.
+
+
+PREREQUISITE streeling/courses/cybernetics/en/cyb-015-carry-covariance-through-smoothed-telemetry.md
+
+
+# Carry Covariance Through Smoothed Telemetry
+
+> This lesson uses authored fixed inputs and inspected source passages. The numbers, histories and labels are teaching constructions. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A quiet agent dashboard is not necessarily a precise dashboard. Successive measurements can share an error source. Applying an independent-sample variance formula to correlated inputs can understate uncertainty even when the smoothing arithmetic is correct. The earlier derivative course already gives a recurrence; this lesson adds its finite uncertainty accounting.
+
+NIST states an EWMA variance approximation for a long-running sequence and names independence conditions. Here only a short initialized sequence exists. Expand the recurrence into weights first, then apply the full covariance matrix. The off-diagonal terms matter because the errors can move together. A deterministic initial value also retains weight and can cause bias before the weights approach their long-run limit.
+
+Use symbolic monitoring units throughout. Our expected level is a mathematical expectation under stipulated errors, not an observed average of project traces. Before proposing an agent smoothing default, retain initialization, covariance assumptions and the response delay that this constant-level model leaves out.
+
+
+PREREQUISITE streeling/courses/mathematics/en/mat-024-dynamical-systems-stability-feedback.md
+
+
+# Dynamical Systems, Stability and Feedback — What a Derivative, an Exponent and a Rank Can Tell
+
+> **Department of Mathematics** | Stage: Albedo (Intermediate) | Estimated duration: 60 minutes
+
+
+PREREQUISITE streeling/courses/cybernetics/en/cyb-018-reconstruct-hidden-state-from-distinct-dynamics.md
+
+
+# Reconstruct Hidden State from Distinct Dynamics
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A Demerzel dashboard reports one combined amount of unresolved work. The same total could hide different proportions of drafting and review work, which would suggest different interventions. Repeating the same aggregate is not automatically a second independent view. Ask whether known state dynamics make the later observation distinguish the hidden components before designing an estimator or blaming a stalled agent.
+
+The earlier guitar lesson makes a mode invisible at one observer position. Here the new issue is temporal: a sensor sees a sum now and another sum after a known update. Write the current observation as the sensor row applied to the initial state. Substitute the transition into the later observation. Stacking those rows creates a small linear system whose determinant tells us whether this exact reconstruction is unique.
+
+In the fixed model the hidden components evolve at different rates. The later total therefore adds a genuinely different equation, and subtraction recovers the second component before the first. In the control both components evolve identically. Any initial pair with the same sum produces the same observed pair. More repeated identical totals cannot recover the missing distinction under that model.
+
+The Harvard notes define the observability matrix; our finite discrete equations show the calculation directly. The two hidden components are pedagogical state coordinates, not calibrated counts of real drafting and review queues. Actual queues have inputs, completions and noise. A future agentic application must identify those effects and test the assumed transition. An exact determinant in an invented case cannot establish live observability or justify acting on reconstructed values without receipts.
+
+
+PREREQUISITE streeling/courses/cybernetics/en/cyb-019-test-coupled-feedback-eigenmodes.md
+
+
+# Test Coupled Feedback Eigenmodes
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+GA and IX agents can each reduce their local deviation while triggering extra corrective work in the other repository. Reviewing each local multiplier in isolation can miss this interaction. The question is whether the joint update shrinks every mode, including a mode in which both deviations rise together. Define the coupling explicitly before applying a scalar convergence rule to a multi-agent workflow.
+
+Use a symmetric transition with identical diagonal terms and a cross term in each off-diagonal position. Adding the coordinate equations gives a common-mode multiplier; subtracting them gives an opposing-mode multiplier. These calculations expose the eigenvectors directly, so a general numerical eigensolver is unnecessary. A diagonal entry smaller than unity describes only the system with its neighbour held fixed.
+
+In the fixed case the common mode grows while the opposing mode shrinks and alternates. Starting with equal positive coordinates excites the growing mode, making a short exact trajectory a visible witness. The control reduces the cross term and shrinks both modes. Checking only the displayed starting trajectory would still be weaker than checking both multipliers, because another starting state could excite the other mode.
+
+The earlier convergence lesson supplies error dynamics for a diagonal material calculation. This lesson changes the dependency structure, rather than retuning that example. Harvard’s discrete-time criterion applies to the diagonalizable matrix here. Actual agent handoffs can be delayed, nonlinear and discontinuous; their observed local improvements do not identify these coefficients. A future dogfood study needs aligned revision-bound changes and a measured transition before this algebra could inform coordination.
+
+
+PREREQUISITE streeling/courses/cybernetics/en/cyb-017-limit-command-change-separately-from-amplitude.md
+
+
+# Limit Command Change Separately from Amplitude
+
+> This lesson uses authored fixed inputs and inspected source passages. The numbers, histories and labels are teaching constructions. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A command can stay inside its allowed range and still jump too quickly. The saturation prerequisite caps magnitude and tracks an integrator. This lesson introduces no integrator: it limits the difference between successive applied commands. An agent must retain the previous applied value and sampling interval to calculate that constraint.
+
+The cited rate-constraint paper’s abstract distinguishes rate constraints as a modeling concern. Our two clipping steps are independently declared and are not that paper’s optimization method. First satisfy the amplitude interval, then the interval reachable from the previous command. Starting inside the amplitude bounds ensures these intervals overlap.
+
+The output need not equal the request at the end of a short sequence. That remaining discrepancy is an intended consequence of the constraint. Reporting only whether the amplitude stayed in range hides the new requirement. A proposed controller DSL should name both units and carry the applied state; substituting the last requested value would change the next feasible interval.
+
+
+PREREQUISITE streeling/courses/cybernetics/en/cyb-020-check-disturbance-robust-set-closure.md
+
+
+# Check Disturbance-Robust Set Closure
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A Demerzel coordinator proposes keeping pending work within a small set of admissible states. One quiet trace does not show that the policy survives every allowed arrival. The useful question is whether each safe state maps back into the safe set for every disturbance the model permits. This changes a reassuring example into a quantified safety argument.
+
+Declare the step order first. Our controller serves existing work, clips the remaining queue at zero, and then admits the arriving work. Reversing those operations changes the boundary calculation. List the successors for every state and disturbance pair. If none escapes, the set is closed under the specified transition. Starting inside that set, repeated application stays inside by induction.
+
+The fixed disturbance set permits at most the service quantity on each step. The control enlarges the disturbance set while preserving the controller and proposed safe states. A boundary state then has an escaping successor. Keep that exact pair as a witness rather than averaging it away with more favourable arrivals. The model requires every permitted case, so a rare but allowed witness is decisive.
+
+The source notes distinguish worst-case set assumptions from probability-based constraints. Our finite enumeration has no arrival distribution and therefore cannot report a failure probability. The stale-observation prerequisite asks where a current value could lie; this lesson asks whether a whole set remains safe indefinitely under a known transition. Neither supplies real queue service guarantees. Before proposing a DSL guard, check the manual successor table and identify what actual observations would justify the disturbance and service bounds.
+
+
+PREREQUISITE streeling/courses/cybernetics/en/cyb-016-test-feedforward-against-disturbance-mismatch.md
+
+
+# Test Feedforward Against Disturbance Mismatch
+
+> This lesson uses authored fixed inputs and inspected source passages. The numbers, histories and labels are teaching constructions. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+An agent knows an incoming load is expected and proposes compensating before observing an output error. That is a different information path from residual feedback. The direct baseline ignores the disturbance estimate; the proposed command subtracts it before scaling by the assumed plant gain.
+
+The inspected official Caltech extraction describes measured-disturbance feedforward and its dependence on plant knowledge. The inspected search extraction is from the 2009-02-22 text linked below; fetching the originally considered 2007 draft failed. Only the extracted passage was read, not the complete chapter. Our static scalar equation is an authored simplification, with no transfer functions or production tuning inferred from the reading. It makes measurement mismatch visible without hiding it in a controller trace.
+
+Calculate actual output using actual disturbance, not the estimate used to choose the command. Otherwise the model would certify its own prediction. Compare absolute residuals with the direct baseline. The changed-input control deliberately supplies a bad estimate: a mechanism that helps one case can harm another. Any DSL shorthand must retain which quantities are assumed and which would need measurement.
+
+
+PREREQUISITE streeling/courses/information-theory/en/inf-013-value-an-evidence-probe-by-expected-information.md
+
+
+# Value an Evidence Probe by Expected Information
+
+> This lesson uses an authored fixed case and inspected sources. Counts, times, labels and signals are invented teaching inputs. Human technical review, fluent-language review, actual learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+Several explanations fit a failed agent handoff. A teammate proposes another probe because it produces a detailed report. Detail is useful only if the outcome distinguishes the explanations that matter. The probe-design prerequisite looks for separating responses; this lesson calculates the expected uncertainty left by a declared partition of hypotheses. It keeps the probability model explicit instead of treating the longest report as the most informative one.
+
+The prior assigns equal probability to the authored alternatives. A deterministic probe groups hypotheses by the outcome they predict. Within each group, renormalize the original probabilities before calculating entropy. Average those posterior entropies using the probability of each outcome. This expectation is formed before seeing the probe result. It does not describe a measured report or justify changing the prior after an unrecorded conversation.
+
+[Shannon](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf)’s original entropy definition supplies the logarithmic uncertainty measure. Here base choice gives bits, and equally likely alternatives permit a direct counting check. The balanced partition leaves the same number of alternatives after either outcome. The constant-output control leaves all alternatives possible. That contrast explains why repeating a summary with no new distinguishing observation can add words without adding information under the model.
+
+The retained project record explicitly rejects treating a reread as another trial. It also warns that historical renderer results do not calibrate an authored prior. A composable probe stage could carry the hypothesis set, likelihood model and outcome identity; whether that makes review easier remains a dogfood hypothesis. The direct baseline is a handwritten partition and entropy table. Information gain alone cannot choose the best product action because probe cost and the consequences of remaining errors require another decision model.
+
+
+PREREQUISITE streeling/courses/information-theory/en/inf-003-verdict-distribution-drift.md
+
+
+# Measuring Verdict Distribution Drift with Jensen-Shannon Divergence
+
+> **Archive and transfer scope.** The technical text below comes from an archived draft. Historical statements about pending draft translations or an absent Learn import or build refer to that earlier stage; this [transfer record](../../../../code/streeling/evidence/representation-release-2026-10-22/README.md) records the current translation drafts, import and checks. Other unexecuted-experiment boundaries remain in force. Human subject, fluent-language and learner reviews remain pending.
+
+> **Department of Information Theory** | Level: Intermediate | Estimated duration: 35 minutes | Status: English draft; subject, learner, localization, and publication review pending
+
+
+PREREQUISITE streeling/courses/information-theory/en/inf-020-separate-parity-detection-from-correction.md
+
+
+# Separate Parity Detection from Correction
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+An agent receives a compact evidence tag and observes that the record parses correctly. Parsing does not establish that the transmitted bits were preserved. The codebook lesson examines a different problem, where intact bits are interpreted under the wrong mapping. Here sender and receiver agree on meaning, and the channel changes selected bits before decoding.
+
+Append a bit chosen to make the total number of set bits even. On reception, compute the same parity condition. Flipping one bit changes the total parity, so the checker detects a violated condition. It does not reveal which position changed. Multiple candidate original messages can satisfy the condition, so choosing a repair without extra information would be guessing.
+
+The fixed input changes one data position. The control changes two positions and passes the parity check while carrying a different message. Keep both the syndrome and actual Hamming distance in the teaching record: the sender-side comparison knows which bits changed, whereas an ordinary receiver does not possess that reference. A zero syndrome means only that this check did not detect a violation.
+
+The University of New Brunswick course states the single-error detection and even-error limitation. Our short codeword makes both boundaries inspectable by hand. It supplies neither a cryptographic digest nor a transport recommendation for Demerzel evidence. A production receipt needs identity, authorization and semantic revision binding as separate questions. Before adding a composable check stage, name its failure model and ensure its output says detection status rather than claiming a correct, trusted or repaired message.
+
+
+PREREQUISITE streeling/courses/information-theory/en/inf-012-retain-event-order-in-a-handoff-summary.md
+
+
+# Retain Event Order in a Handoff Summary
+
+> **Draft scope.** Source-assisted authored fixed models. Human technical, fluent-language and learner decisions remain pending. No live fleet, production controller, user telemetry or learning improvement is claimed. The validation journal distinguishes tests actually executed from source reading and planned checks.
+
+
+PREREQUISITE streeling/courses/information-theory/en/inf-019-check-concatenated-codeword-ambiguity.md
+
+
+# Check Concatenated Codeword Ambiguity
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+An agent handoff compresses status symbols into short bit strings. Both ends select the same codebook, and the transmitted bits arrive intact. The receiving agent can still be unable to tell where one symbol ends and the next begins. Agreement on meaning and integrity of bytes do not by themselves establish a uniquely decodable symbol sequence.
+
+Write the codeword beside every symbol before concatenating anything. A prefix-free codebook has no codeword that starts another complete codeword. A left-to-right decoder can therefore finish a symbol without waiting for an unseen separator. For the fixed codebook, trace the supplied bit stream and retain the boundary positions. This is an elementary argument about the declared finite mapping, not an implementation of an internet compression protocol.
+
+The control supplies an explicit ambiguous stream. It can name one symbol or a pair of symbols, both consuming all bits. Stopping at the first plausible parse would hide the ambiguity. Enumerate every complete parse before reporting a unique decoding. A prefix violation is a useful warning, but some non-prefix codes remain uniquely decodable; do not replace a sufficient condition with an unsupported equivalence.
+
+RFC HPACK describes concatenated Huffman codes with their own framing and padding requirements. Our toy mapping borrows the communication question, not its wire format or code table. The prior lessons retain codebook versions and byte lengths; this operation concerns boundaries inside a concatenated code stream. A future DSL shorthand must make separators, lengths or a decoding convention explicit. The direct manual baseline is small enough to examine every alternative without creating a transport service.
+
+
+PREREQUISITE streeling/courses/information-theory/en/inf-014-retain-message-codebook-versions.md
+
+
+# Retain Message Codebook Versions
+
+> This lesson uses an authored fixed case and inspected sources. Counts, times, labels and signals are invented teaching inputs. Human technical review, fluent-language review, actual learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A compact handoff replaces verdict words with small tags. Every tag arrives intact, yet the receiving agent reports the opposite verdict. The information-loss prerequisite asks which fields disappear from a summary. This lesson isolates a different failure: the same symbols have different meanings under two perfectly invertible codebooks. Nothing in a successful byte transfer establishes that sender and receiver selected the same interpretation.
+
+The codebook version is part of the message context. Decode using the sender’s declared mapping to obtain the intended labels, then decode the unchanged tags using the receiver’s mapping. Count mismatches by position rather than comparing only totals. Reversing the mapping can preserve tag frequency and message length while changing every verdict. A checksum over tags would detect neither this stipulated disagreement nor a missing semantic version.
+
+[Shannon](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf)’s communication problem separates a selected message from its transmitted representation. Our case assumes an error-free channel and concentrates on the chosen mappings. [W3C](https://www.w3.org/TR/2013/REC-prov-dm-20130430/) provenance motivates retaining the identity of the entity that supplies a derivation rule. Neither reference defines a new GA message schema. The Learn parser’s separate metadata and body fields provide a concrete project representation to inspect, without claiming they implement these binary tags.
+
+The control changes the receiver’s codebook selection while preserving every tag. This makes the missing agreement explicit and gives a direct manual baseline. A proposed DSL may abbreviate the mapping, but it must keep codebook identity recoverable and leave an unknown version unresolved. Guessing from a plausible verdict reverses the evidential direction: the desired meaning should not select the decoder after seeing the answer. No version migration or production compatibility policy is implemented here.
+
+
+PREREQUISITE streeling/courses/network-science/en/net-014-bound-throughput-with-a-capacity-cut.md
+
+
+# Bound Throughput with a Capacity Cut
+
+> This lesson uses authored fixed inputs and inspected source passages. The numbers, histories and labels are teaching constructions. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A coordinator adds routes between fictional evidence stages and claims more throughput because more paths exist. Several paths can share their final link. Reachability and route count do not account for capacity conservation. The scheduling prerequisite measures a finite completion horizon; this model instead bounds an idealized steady rate.
+
+NetworkX’s official flow documentation defines capacities and returns a flow value. We use that concept without calling the package. Show a feasible flow and a cut of equal capacity: the former is a lower witness, the latter an upper bound. Their agreement certifies the optimum for this authored graph. Counting paths alone supplies neither witness.
+
+The sink cut is especially easy to inspect here. Every delivered unit must enter the sink on one of its incoming edges. The control reduces an incoming capacity while keeping every edge present, so all routes still exist but the rate bound drops. Translating this result into a real agent pipeline would require compatible units, actual capacities and workload assumptions; no such measurements are supplied.
+
+
+PREREQUISITE streeling/courses/mathematics/en/mat-019-graphs-centrality-spectral.md
+
+
+# Graphs, Centrality and Spectral Structure — Which Vertex Matters, and What the Laplacian Counts
+
+> **Department of Mathematics** | Stage: Albedo (Intermediate) | Estimated duration: 50 minutes
+
+
+PREREQUISITE streeling/courses/network-science/en/net-017-match-simultaneous-roles-without-double-booking.md
+
+
+# Match Simultaneous Roles without Double Booking
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A Demerzel capability table gives every requested role at least one named candidate. A coordinator then assumes the roles can all run together. That inference double-books a worker when several roles have only the same candidate. The earlier coverage course counts available routes per class; this lesson asks whether distinct workers can occupy all simultaneous roles.
+
+Draw a bipartite graph with roles on one side and workers on the other. An edge means the declared worker may fill that role. A matching uses no vertex twice. To show feasibility, write the complete matching. To show infeasibility, find a subset of roles whose combined candidate set is smaller than the subset. Those roles cannot receive distinct workers, regardless of how flexible unrelated roles are.
+
+In the fixed case, drafting and review each have a candidate but share the same sole candidate. The translation role has alternatives, which do not repair that obstruction. The control adds a review edge and permits a full assignment. Retain both the assignment witness and the deficient subset; a headline count of covered roles loses the reason that the first case fails.
+
+NetworkX documents maximum-cardinality bipartite matching. Our tiny example is solved by inspection and explicit neighbour counting, without installing or executing the package. The throughput prerequisite concerns capacities across a network; here worker exclusivity and role identity are the central contract. Real human review may additionally require independence, expertise and consent. Candidate declarations do not establish any of those conditions. A future agent scheduler must preserve such constraints before treating this finite matching as permission to dispatch work.
+
+
+PREREQUISITE streeling/courses/network-science/en/net-007-separate-dag-readiness-from-admission.md
+
+
+# Separate DAG Readiness from Worker Admission
+
+> **Draft scope.** Five pinned public IX files, three actual topology-tool responses, three bounded execution-tool responses and authored schedules. Human technical review, fluent-language review, learner attempts and deployed course HTML verification remain pending. No production scheduler, worker limit, retry mechanism or editor change was implemented; actual worker concurrency was not measured.
+
+
+PREREQUISITE streeling/courses/network-science/en/net-009-detect-global-cycles-in-a-panel-stack.md
+
+
+# Detect Global Cycles in a Panel Stack
+
+> **Draft scope.** Authored abstract graphs and pinned source/test reading. No new FOLD geometry, native IX run, physical panel test or manufacturing trial was produced. Human technical, artisan, fluent-language and learner reviews remain pending; deployed course HTML is a separate check.
+
+
+PREREQUISITE streeling/courses/network-science/en/net-011-separate-reachability-from-semantic-compatibility.md
+
+
+# Separate Reachability from Semantic Compatibility
+
+> **Draft scope.** Source-assisted authored fixed models. Human technical, fluent-language and learner decisions remain pending. No live fleet, production controller, user telemetry or learning improvement is claimed. The validation journal distinguishes tests actually executed from source reading and planned checks.
+
+
+PREREQUISITE streeling/courses/product-management/en/pm-014-select-a-budgeted-portfolio-with-prerequisite-closure.md
+
+
+# Select a Budgeted Portfolio with Prerequisite Closure
+
+> This is an authored mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A Learn coordinator must compare optional verification improvements for a future workflow. An attractive feature requires a shared foundation, but its headline estimate lists only the feature’s own cost. Choosing the best-looking value ratio can then produce a portfolio that fits the budget on paper while omitting its prerequisite. Count the whole selected dependency closure before comparing benefit.
+
+The authored catalogue contains a foundation with no independent value, an improvement that requires it, and independent alternatives. Each chosen item contributes its cost and value once. A subset is admissible only when its prerequisites are also selected and its total resource charge fits the budget. Enumerating the small catalogue makes every rejected proposal inspectable and retains ties instead of inventing a unique optimum.
+
+The fixed optimum chooses the independent alternatives. A tempting feature-plus-small-item proposal fails closure once its foundation is included. The control removes the prerequisite and changes the optimum. That altered premise is intentionally consequential: it cannot be justified by renaming the foundation an implementation detail or charging it to an unspecified future budget.
+
+Google’s knapsack guide defines the ordinary capacity-constrained value problem. Our extra closure rule is an explicitly authored extension, not a claim about that solver’s input schema. The capacity prerequisite evaluates a fixed production request; this lesson evaluates optional work under invented comparable points. It does not reduce the user-requested course scope or waive required review. A real portfolio decision would need defensible value scales, measured costs, dependency evidence and authority to choose among admissible alternatives. A direct subset table is the baseline before proposing any agent optimizer or planning DSL.
+
+
+PREREQUISITE streeling/courses/product-management/en/pm-004-craft-extension-release-decision.md
+
+
+# Decide When Craft Extensions Are Ready for a Release
+
+> **Archive and transfer scope.** The technical text below comes from an archived draft. Historical statements about pending draft translations or an absent Learn import or build refer to that earlier stage; this [transfer record](../../../../code/streeling/evidence/representation-release-2026-10-22/README.md) records the current translation drafts, import and checks. Other unexecuted-experiment boundaries remain in force. Human subject, fluent-language and learner reviews remain pending.
+
+> **Department of Product and Project Management** | Intermediate | 35 minutes | English source draft; no extension release, human review, learner trial, or public course publication
+
+
+PREREQUISITE streeling/courses/product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md
+
+
+# Size a Fifty Course Batch by Review Capacity
+
+> **Draft scope.** Source-assisted authored fixed models. Human technical, fluent-language and learner decisions remain pending. No live fleet, production controller, user telemetry or learning improvement is claimed. The validation journal distinguishes tests actually executed from source reading and planned checks.
+
+
+PREREQUISITE streeling/courses/product-management/en/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.md
+
+
+# Standardize Dogfood Failures to a Declared Task Mix
+
+> This lesson uses an authored fixed case and inspected sources. Counts, times, labels and signals are invented teaching inputs. Human technical review, fluent-language review, actual learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A team compares two dogfood reports and celebrates a lower pooled failure percentage. One report may simply contain more routine tasks and fewer difficult edge cases. The adoption prerequisite defines who and what belongs in a denominator; this lesson asks how the mixture of task classes changes the summary even when each class performs identically. A comparison needs a declared target mixture before the pooled headline is interpreted.
+
+Calculate failure rate within each task stratum first. Those rates preserve the different difficulty profiles represented by the authored data. The pooled rate weights strata by the actual attempt counts. The standardized rate instead weights them by the declared target mix. These are different questions: what happened in the sample, and what summary would these stratum rates imply under the target weights? Neither automatically estimates the distribution of future users.
+
+[NIST](https://www.itl.nist.gov/div898/handbook/pri/section3/pri332.htm)’s blocking discussion motivates retaining nuisance groups and comparing within them. Our fixed mixture arithmetic is not itself a randomized experiment or a causal adjustment for every confounder. A stratum may still contain varied tasks, assisted attempts or repeated learners. Keep those limitations explicit instead of treating standardization as proof that all comparisons are fair. The target mix is an authored choice requiring a project reason.
+
+The control changes sample counts while keeping both within-stratum rates equal. Its pooled percentage moves toward the standardized value without any improvement in either class. This is the falsifier for a naive improvement headline. The retained project source lists exercise fields but supplies no actual learner-answer events, so it cannot calibrate our counts. Before asking an agent to report a rollout, compute both summaries manually and keep task identity, source revision and assistance visible.
+
+
+PREREQUISITE streeling/courses/product-management/en/pm-011-include-review-and-correction-in-automation-break-even.md
+
+
+# Include Review and Correction in Automation Break Even
+
+> This lesson uses an authored fixed case and inspected sources. Counts, times, labels and signals are invented teaching inputs. Human technical review, fluent-language review, actual learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+A team sees fast generated drafts and proposes automating the next authoring tranche. Drafting speed alone omits setup, review and correction. The pilot-horizon prerequisite values information for later decisions; the capacity prerequisite keeps review from disappearing in a quota. This lesson calculates whether an authored operational cost model ever recovers setup while preserving the same completed task and mandatory review.
+
+Define the manual baseline as active work for an equivalent accepted item, not an unreviewed rough note. The automated path includes drafting and review on every item, plus a correction cost multiplied by its probability. The probability is invented and refers to items needing the declared correction, without claiming that corrections are independent or that every defect is found. A real comparison must measure the entire path and preserve quality failures.
+
+Subtract per-item automated cost from manual cost before calculating a break-even horizon. Only positive savings can repay a positive setup charge. Equality at the break-even item count gives no saving, so a strict-saving recommendation needs the next integer count. If per-item savings vanish, increasing the batch does not eventually make setup free. This boundary is easy to hide when a report quotes only draft latency.
+
+The retained project record explicitly separates authored loss points from measured engineering time and says methodology does not calibrate performance. Our example does use minutes, but they are still invented active-work inputs. [NIST](https://www.itl.nist.gov/div898/handbook/pri/section3/pri332.htm)’s nuisance-factor discussion motivates comparable operators and task conditions in a future measurement. A proposed authoring DSL or agent loop remains a candidate until a dogfood attempt preserves manual and assisted work logs, equivalent scope, correction history and actual accepted output.

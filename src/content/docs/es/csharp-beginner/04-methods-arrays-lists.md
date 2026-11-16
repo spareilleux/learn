@@ -92,7 +92,7 @@ Tres comodidades:
 - Los **argumentos con nombre**, `times: 2, text: "do"`, indican qué parámetro recibe qué valor, en cualquier orden.
 - Cuando el cuerpo es una sola expresión, `=>` sustituye a las llaves y al `return`: es un [miembro con cuerpo de expresión](https://learn.microsoft.com/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members). `Enumerable.Repeat(text, times)` crea una secuencia de `times` copias de `text`, y `string.Concat` las une.
 
-En un archivo con instrucciones de nivel superior, los métodos pueden declararse después de las líneas que los llaman, como aquí. La documentación de C# los llama [funciones locales](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/local-functions): pertenecen al código de nivel superior del programa. La [lección 5](../#plan) pone los métodos dentro de clases, su lugar habitual en los programas más grandes.
+En un archivo con instrucciones de nivel superior, los métodos pueden declararse después de las líneas que los llaman, como aquí. La documentación de C# los llama [funciones locales](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/local-functions): pertenecen al código de nivel superior del programa. La [lección 5](../05-classes-and-objects/) pone los métodos dentro de clases, su lugar habitual en los programas más grandes.
 
 ### Lo que comprueba el compilador
 
@@ -186,7 +186,7 @@ After AddOctave: 5
 After AddOctaveToAll: 12 14 14 13 12 12
 ```
 
-Un parámetro recibe una **copia** del argumento. Cambiar `value` dentro de `AddOctave` no cambia `fret`. Pero una variable de tipo array no guarda el array en sí: guarda una *referencia*, la dirección donde vive el array. La copia es una copia de la dirección, así que `values` y `frets` apuntan al mismo array, y el método lo cambia. El acorde de mi mayor subió una octava, al traste 12. Los tipos que se comportan como `int` son **tipos de valor**; los que se comportan como los arrays son **tipos de referencia**. La [lección 6](../#plan) vuelve sobre la diferencia.
+Un parámetro recibe una **copia** del argumento. Cambiar `value` dentro de `AddOctave` no cambia `fret`. Pero una variable de tipo array no guarda el array en sí: guarda una *referencia*, la dirección donde vive el array. La copia es una copia de la dirección, así que `values` y `frets` apuntan al mismo array, y el método lo cambia. El acorde de mi mayor subió una octava, al traste 12. Los tipos que se comportan como `int` son **tipos de valor**; los que se comportan como los arrays son **tipos de referencia**. La [lección 6](../06-records-structs-enums/) vuelve sobre la diferencia.
 
 ## Arrays
 
@@ -426,7 +426,7 @@ string Longest(string[] values)
 Longest name: GA.Business.ProbabilisticGrammar
 ```
 
-Cada método hace una sola cosa y tiene un nombre que dice cuál: contar, filtrar, encontrar el más largo. `ProjectsIn` usa un `for` en lugar de un `foreach` porque necesita el índice `i` para leer la misma posición en los dos arrays. Dos arrays que deben ir a la par son frágiles: añade un nombre, olvida su lenguaje, y todos los lenguajes siguientes quedan mal. La [lección 5](../#plan) los sustituye por una sola lista de proyectos, cada uno con un nombre y un lenguaje. La [lección 10](../#plan) lee el archivo CSV completo en lugar de copiarlo a mano.
+Cada método hace una sola cosa y tiene un nombre que dice cuál: contar, filtrar, encontrar el más largo. `ProjectsIn` usa un `for` en lugar de un `foreach` porque necesita el índice `i` para leer la misma posición en los dos arrays. Dos arrays que deben ir a la par son frágiles: añade un nombre, olvida su lenguaje, y todos los lenguajes siguientes quedan mal. La [lección 9](../09-collections-and-linq/) los sustituye por una sola lista de records, cada uno con un nombre y un lenguaje, y responde a las mismas preguntas con LINQ. La [lección 10](../#plan) lee el archivo CSV completo en lugar de copiarlo a mano.
 
 ## `null`: ningún valor
 
@@ -506,7 +506,7 @@ Unhandled exception. System.NullReferenceException: Object reference not set to 
    at Program.<Main>$(String[] args) in C:\Users\spare\source\repos\learn\code\csharp-beginner\examples\l04_null_warning.cs:line 11
 ```
 
-Es solo una advertencia, así que el programa se ejecuta, y falla en la línea 11. La solución es tratar el caso `null`, por ejemplo `tuning?.Length ?? 0`, o un `if (tuning is null)` antes de usarla. En el primer ejemplo, `capo.Length` después de `capo ??= "fret 2"` no recibe advertencia: el compilador entendió que `capo` ya no puede ser `null`. La [lección 8](../#plan) trata a fondo las excepciones y la seguridad frente a null.
+Es solo una advertencia, así que el programa se ejecuta, y falla en la línea 11. La solución es tratar el caso `null`, por ejemplo `tuning?.Length ?? 0`, o un `if (tuning is null)` antes de usarla. En el primer ejemplo, `capo.Length` después de `capo ??= "fret 2"` no recibe advertencia: el compilador entendió que `capo` ya no puede ser `null`. La [lección 8](../08-exceptions-and-null-safety/) trata a fondo las excepciones y la seguridad frente a null.
 
 ## Puntos clave
 

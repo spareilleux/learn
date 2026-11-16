@@ -1,0 +1,266 @@
+{
+  "scope": "Authored fixtures and key/acceptance calculations; no query returned these shapes, no quiz implementation or player outcome.",
+  "tuning_low_to_high_midi": [
+    40,
+    45,
+    50,
+    55,
+    59,
+    64
+  ],
+  "raw_high_to_low": "0-1-0-2-3-x",
+  "display_low_to_high": "x-3-2-0-1-0",
+  "source_raw_data_remains_high_to_low": true,
+  "candidates": [
+    {
+      "id": "A",
+      "low_to_high_frets": [
+        null,
+        3,
+        2,
+        0,
+        1,
+        0
+      ],
+      "sounding": [
+        {
+          "string": 5,
+          "open_midi": 45,
+          "fret": 3,
+          "midi": 48,
+          "pitch_class": 0
+        },
+        {
+          "string": 4,
+          "open_midi": 50,
+          "fret": 2,
+          "midi": 52,
+          "pitch_class": 4
+        },
+        {
+          "string": 3,
+          "open_midi": 55,
+          "fret": 0,
+          "midi": 55,
+          "pitch_class": 7
+        },
+        {
+          "string": 2,
+          "open_midi": 59,
+          "fret": 1,
+          "midi": 60,
+          "pitch_class": 0
+        },
+        {
+          "string": 1,
+          "open_midi": 64,
+          "fret": 0,
+          "midi": 64,
+          "pitch_class": 4
+        }
+      ],
+      "distinct_pitch_classes": [
+        0,
+        4,
+        7
+      ],
+      "exact_A": true,
+      "restricted_any_C_major_triad": true
+    },
+    {
+      "id": "B",
+      "low_to_high_frets": [
+        null,
+        3,
+        5,
+        5,
+        5,
+        3
+      ],
+      "sounding": [
+        {
+          "string": 5,
+          "open_midi": 45,
+          "fret": 3,
+          "midi": 48,
+          "pitch_class": 0
+        },
+        {
+          "string": 4,
+          "open_midi": 50,
+          "fret": 5,
+          "midi": 55,
+          "pitch_class": 7
+        },
+        {
+          "string": 3,
+          "open_midi": 55,
+          "fret": 5,
+          "midi": 60,
+          "pitch_class": 0
+        },
+        {
+          "string": 2,
+          "open_midi": 59,
+          "fret": 5,
+          "midi": 64,
+          "pitch_class": 4
+        },
+        {
+          "string": 1,
+          "open_midi": 64,
+          "fret": 3,
+          "midi": 67,
+          "pitch_class": 7
+        }
+      ],
+      "distinct_pitch_classes": [
+        0,
+        4,
+        7
+      ],
+      "exact_A": false,
+      "restricted_any_C_major_triad": true
+    },
+    {
+      "id": "C",
+      "low_to_high_frets": [
+        null,
+        3,
+        2,
+        0,
+        0,
+        0
+      ],
+      "sounding": [
+        {
+          "string": 5,
+          "open_midi": 45,
+          "fret": 3,
+          "midi": 48,
+          "pitch_class": 0
+        },
+        {
+          "string": 4,
+          "open_midi": 50,
+          "fret": 2,
+          "midi": 52,
+          "pitch_class": 4
+        },
+        {
+          "string": 3,
+          "open_midi": 55,
+          "fret": 0,
+          "midi": 55,
+          "pitch_class": 7
+        },
+        {
+          "string": 2,
+          "open_midi": 59,
+          "fret": 0,
+          "midi": 59,
+          "pitch_class": 11
+        },
+        {
+          "string": 1,
+          "open_midi": 64,
+          "fret": 0,
+          "midi": 64,
+          "pitch_class": 4
+        }
+      ],
+      "distinct_pitch_classes": [
+        0,
+        4,
+        7,
+        11
+      ],
+      "exact_A": false,
+      "restricted_any_C_major_triad": false
+    },
+    {
+      "id": "D",
+      "low_to_high_frets": [
+        null,
+        3,
+        2,
+        0,
+        1,
+        null
+      ],
+      "sounding": [
+        {
+          "string": 5,
+          "open_midi": 45,
+          "fret": 3,
+          "midi": 48,
+          "pitch_class": 0
+        },
+        {
+          "string": 4,
+          "open_midi": 50,
+          "fret": 2,
+          "midi": 52,
+          "pitch_class": 4
+        },
+        {
+          "string": 3,
+          "open_midi": 55,
+          "fret": 0,
+          "midi": 55,
+          "pitch_class": 7
+        },
+        {
+          "string": 2,
+          "open_midi": 59,
+          "fret": 1,
+          "midi": 60,
+          "pitch_class": 0
+        }
+      ],
+      "distinct_pitch_classes": [
+        0,
+        4,
+        7
+      ],
+      "exact_A": false,
+      "restricted_any_C_major_triad": true
+    }
+  ],
+  "cue_policies": [
+    {
+      "target": "name-the-chord",
+      "diagram_visible": true,
+      "chord_name_visible": false
+    },
+    {
+      "target": "give-any-C-major-triad-shape",
+      "diagram_visible": false,
+      "chord_name_visible": true
+    },
+    {
+      "target": "reproduce-the-learned-exact-A",
+      "diagram_visible": false,
+      "chord_name_visible": true,
+      "exact_target_explicit": true
+    }
+  ],
+  "confidence_controls": [
+    {
+      "retrieval_score": -0.2,
+      "clamped_response_confidence": 0,
+      "learner_recall_probability": null
+    },
+    {
+      "retrieval_score": 0.8,
+      "clamped_response_confidence": 0.8,
+      "learner_recall_probability": null
+    },
+    {
+      "retrieval_score": 1.2,
+      "clamped_response_confidence": 1,
+      "learner_recall_probability": null
+    }
+  ],
+  "musician_outcome": null
+}

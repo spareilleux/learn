@@ -1,0 +1,181 @@
+---
+module_id: "inf-017-merge-sum-count-summaries-before-taking-means"
+department: "information-theory"
+course: "Merge Sum and Count Summaries Before Taking Means"
+level: "intermediate"
+prerequisites: ["inf-015-weight-sampled-telemetry-before-summarizing-failures"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Merge Sum and Count Summaries Before Taking Means
+
+> This lesson uses authored fixed inputs and inspected source passages. The numbers, histories and labels are teaching constructions. Human technical review, fluent-language review, learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+Parallel review stages summarize different numbers of fictional Learn items. Averaging their averages gives each stage equal weight, which can give each item unequal weight. The sampling prerequisite corrects unequal observation probabilities; here every item is present and the error comes entirely from partitioning.
+
+Retain a sum and a count as the composable summary. Componentwise addition supplies a neutral empty summary and preserves the total under regrouping of disjoint partitions. Divide only after merging. SQLite’s SELECT reading distinguishes input rows and aggregate outputs, but it does not justify changing the unit of an average from items to workers.
+
+The fixed main case is deliberately unbalanced. The control repartitions the same values into equal-size groups so the naive and correct answers coincide. Passing only that control would hide the bug. A proposed agent DSL should retain the summary’s supported query: sum and count can answer a mean, but cannot reconstruct individual source identities or an exact median. The compact state must be judged against the actual downstream question.
+
+## Sources and project boundary
+
+The retained Learn helper separates frontmatter, heading and body in `parseModule`, and indexes English module names in `englishModuleKeys`. Those inspected representations let a task name its source and metadata; they do not implement the authored operation. The retained practice record instead distinguishes retrieval metrics from learner evidence. Inspect the particular file linked below and retain only the observation it actually supports. No model input in this lesson was estimated from that file.
+
+[Prerequisite: inf-015-weight-sampled-telemetry-before-summarizing-failures](../../information-theory/en/inf-015-weight-sampled-telemetry-before-summarizing-failures.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Retained project artifact](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json)
+
+[Primary reading](https://www.sqlite.org/lang_select.html)
+
+## Fixed model and control
+
+```json
+{
+  "values": {
+    "partitions": [
+      [
+        2
+      ],
+      [
+        4,
+        6,
+        8
+      ]
+    ]
+  },
+  "formula": "Each partition summary=(sum,count). Merge by componentwise addition; mean=total_sum/total_count. Naive mean averages nonempty partition means with equal partition weights.",
+  "expected": {
+    "summaries": [
+      [
+        2,
+        1
+      ],
+      [
+        18,
+        3
+      ]
+    ],
+    "merged": [
+      20,
+      4
+    ],
+    "mean": 5,
+    "naive_mean": 4
+  },
+  "negative_control": {
+    "values": {
+      "partitions": [
+        [
+          2,
+          4
+        ],
+        [
+          6,
+          8
+        ]
+      ]
+    },
+    "expected": {
+      "summaries": [
+        [
+          6,
+          2
+        ],
+        [
+          14,
+          2
+        ]
+      ],
+      "merged": [
+        20,
+        4
+      ],
+      "mean": 5,
+      "naive_mean": 5
+    },
+    "why": "Equal-sized partitions hide the naive reducer error; the unequal main case exposes it."
+  },
+  "assumptions": [
+    "Disjoint partitions cover the same exact numeric items once.",
+    "Arithmetic exact; empty summary is [0,0] and final empty mean undefined."
+  ],
+  "limits": "Sufficient only for arithmetic mean, not variance, quantiles, identity audits or unbiased population estimates.",
+  "input_types": {
+    "partitions": "list<list<real>>"
+  }
+}
+```
+
+### Exercise 1
+
+Compute the partition summaries.
+
+<details><summary>Answer 1</summary>
+
+They are `[2,1]` and `[18,3]`, written as sum then count. Keep the units and ordering explicit.
+
+</details>
+
+### Exercise 2
+
+Merge and compute the global mean.
+
+<details><summary>Answer 2</summary>
+
+The merged pair is `[20,4]`, giving mean `5`. Partition size determines each group’s contribution.
+
+</details>
+
+### Exercise 3
+
+Compute the naive average of averages.
+
+<details><summary>Answer 3</summary>
+
+Partition means are `2` and `6`; their equal-weight mean is `4`. It answers a different weighting question.
+
+</details>
+
+### Exercise 4
+
+Apply the equal-size control.
+
+<details><summary>Answer 4</summary>
+
+Summaries `[6,2]` and `[14,2]` merge to `[20,4]`. Both methods give `5`, so this control alone cannot detect the error.
+
+</details>
+
+### Exercise 5
+
+Can the merged pair answer an exact median?
+
+<details><summary>Answer 5</summary>
+
+No. Many item collections share a sum and count. Retain richer data when the requested query needs order information or identities.
+
+</details>
+
+## Source-assisted learner task
+
+Write a composable summary card for fictional Learn review-item durations without adding a runtime reducer.
+
+**Direct manual baseline:** Calculate each sum and count on paper, add pairs and divide once.
+
+**Falsifier:** Changing only the partition boundaries changes the reported item mean.
+
+Save a first answer before opening the corrected exercises. Copy the input identities and units, write the intermediate quantities, and distinguish the calculation from the interpretation. A correct number with the wrong denominator, state boundary or counting unit does not meet the task. Retain a surprising intermediate result rather than changing the input to make the final answer look plausible.
+
+Read the cited primary passage within the scope recorded in the packet. Compare its actual definition with the authored rule in the fixed model. The reference may motivate a concept without specifying our entire model. Record the version or date, the passage used and the exact assumption you imported. An accessible page or a successful file read is not evidence that a claim has been verified.
+
+Inspect the retained project artifact and one prerequisite. Separate what the file actually represents from what this new task hypothesizes. Preserve source revision and assistance history. Ask an assistant to challenge an assumption only after saving the manual baseline, then keep its prompt, reply, accepted correction and rejected suggestion. Source lookup and calculator use are permitted assistance, not unaided recall.
+
+Run the changed input through the same reasoning on paper. State the falsifier before proposing an agent abstraction or a composable DSL expression. If an abstraction drops the counterexample or changes the accepted endpoint, it fails this task even if its response is shorter. Compare a direct table or typed record first; no new language or production engine is required.
+
+Submit original and corrected answers together with the control result, source passage and remaining uncertainty. The packet prepares a separate criterion for each exercise, with every learner decision undecided. An answer key, a byte hash and an author self-check are different evidence from an actual learner attempt. A future dogfood comparison must retain actual attempts on the same versioned task and the direct baseline before claiming a useful change.
+
+[Fixed unit packet](../../../../code/streeling/evidence/batch50-2026-10-25/unit-b.json) · [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25/journal.md)

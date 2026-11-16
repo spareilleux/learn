@@ -1,0 +1,85 @@
+---
+module_id: phy-010-check-local-flat-fold-angles
+department: physics
+course: "Check Local Flat-Fold Angles"
+level: intermediate
+prerequisites: ["phy-005-sheet-thickness-and-scene-units", "cs-009-composing-origami-panel-constraints"]
+estimated_duration: "40 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Check Local Flat-Fold Angles
+
+> **Draft scope.** Pinned public IX source, primary theorem reading and authored angle/assignment calculations. Human technical, fluent-language and learner reviews and deployed course HTML verification remain pending. No Rust analyzer, physical paper, folded mesh or host scene was run or produced for this lesson.
+
+## The project question
+
+Before a craft agent sends a crease pattern toward a scene, which angular checks are useful? [CS-009](../../computer-science/en/cs-009-composing-origami-panel-constraints.md) already treats global panel-order constraints. Here we examine a different object: a small neighborhood of one interior vertex on ideal zero-thickness flat material, with every listed crease used in a flat fold. The [pinned IX local module](https://github.com/GuitarAlchemist/ix/blob/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/local.rs) provides concrete numerical filters. All project source observations use IX commit `d7c22fdd6a62becb66b9d7246ea85850e7c55854`.
+
+## 1. Recover cyclic sector order
+
+Use four labeled outgoing rays from a central vertex. Their directions are measured counterclockwise from a declared axis:
+
+| Ray | Direction, degrees | Sector to next ray, degrees |
+| --- | --- | --- |
+| e0 | 0 | 60 |
+| e1 | 60 | 90 |
+| e2 | 150 | 120 |
+| e3 | 270 | 90 |
+
+The final sector wraps around to the first ray. IX [sorts geometric directions](https://github.com/GuitarAlchemist/ix/blob/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/local.rs#L45-L71) from `atan2` and uses a positive full-turn remainder. Input edge-list order alone does not define neighboring sectors. The [fixed angular record](../../../../code/streeling/evidence/origami-local-2026-10-22/sector-calculations.json) checks all 24 permutations of the four input rays; those permutations preserve the same geometry.
+
+### Practice exercise 1: close the angular circuit
+
+Recover the four sectors from the ray directions, including the wraparound. What is their total? Would taking differences in an arbitrary edge-list order preserve this neighborhood?
+
+> **Answer:** The sectors are 60, 90, 120 and 90 degrees, totaling 360. Arbitrary list neighbors need not be geometric neighbors; sort around the vertex and include the wraparound before applying the sector test.
+
+## 2. Apply Kawasaki with its hypotheses
+
+For an unassigned ideal single interior vertex, Kawasaki's condition requires even degree and zero alternating sum of consecutive sectors. On flat material, this is equivalent to each alternating group summing to 180 degrees. The [Demaine survey, section 3.1](https://erikdemaine.org/papers/OSME2001/paper.pdf#page=6), explicitly leaves the mountain/valley directions unspecified in this existence statement.
+
+Our sectors give `60-90+120-90=0`, with alternating totals 180 and 180. A cyclic change of starting ray can flip a nonzero residual's sign; its absolute value is unchanged for even degree. A boundary vertex or a vertex containing an unused flat crease does not automatically satisfy these hypotheses. Nor does an angle pass establish a particular assignment or a physical thick-panel motion.
+
+### Practice exercise 2: state the angular conclusion
+
+Compute the alternating totals for the authored vertex. What does the unassigned single-vertex theorem establish under its assumptions? Does it establish every possible mountain/valley labeling?
+
+> **Answer:** The totals are `60+120=180` and `90+90=180`. Under the stated ideal single-vertex assumptions, some mountain/valley assignment admits a local flat folding. This is an existence claim, not a statement that every assignment works or that a whole sheet or thick object is validated.
+
+## 3. Keep the tolerance in radians
+
+The lower-level IX function accepts a tolerance in radians; the [aggregate call](https://github.com/GuitarAlchemist/ix/blob/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/layers.rs#L879-L889) uses `1e-9`. Its angular predicate fails when degree is odd or the absolute residual exceeds that tolerance.
+
+Perturb ray e1 by positive delta radians while keeping the other directions fixed. The two neighboring sectors change by plus delta and minus delta, so the absolute alternating residual becomes `2*abs(delta)` in exact arithmetic. Delta `1e-10` gives `2e-10`, within the tolerance; delta `1e-8` gives `2e-8`, outside it. The saved transcription uses ordinary floating-point angle operations, so retain its computed residual rather than presenting the ideal expression as an executed Rust result. This numerical tolerance is not a measured paper-folding or manufacturing allowance.
+
+### Practice exercise 3: compare perturbations
+
+Apply tolerance `1e-9` radians to the two deltas `1e-10` and `1e-8` radians. Which numerical cases pass? May the tolerance be read directly as degrees or as a workshop specification?
+
+> **Answer:** The residuals are approximately `2e-10` and `2e-8` radians, so the first passes and the second fails the declared numerical rule. Radians cannot be silently relabeled degrees, and no material/process measurement supports a workshop tolerance here.
+
+## 4. Check labels as well as angles
+
+For a prescribed mountain/valley assignment, Maekawa requires `abs(M-V)=2`. With four creases, that permits three of one type and one of the other. It does not constrain where the odd label occurs. [Hull's primary survey](https://arxiv.org/pdf/1307.1065#page=8) gives further assignment restrictions, including the smallest-angle construction with its neighboring-angle hypotheses.
+
+Here the 60-degree sector between e0 and e1 is strictly smaller than both 90-degree neighbors. Its bounding creases must have opposite mountain/valley types in a valid ideal flat assignment. The authored labeling `MMMV`, in ray order e0 through e3, has `M-V=2` and passes the angular condition. Yet e0 and e1 are both mountains, violating that additional necessary restriction. Thus these two numerical filters alone do not certify this prescribed assignment.
+
+### Practice exercise 4: reject a sufficient-condition shortcut
+
+For `MMMV`, calculate the mountain/valley difference and identify the violated additional rule. Does this show that the angular geometry itself has no possible assignment? Did the complete IX analyzer accept this object here?
+
+> **Answer:** Three mountains minus one valley gives 2, but the creases bounding the strict 60-degree minimum are both mountains. That prescribed assignment violates the additional rule; the angular geometry can still have another valid assignment under the single-vertex theorem. No complete IX object or analyzer run was supplied, so no full analyzer acceptance is claimed.
+
+## 5. Preserve the tested domain
+
+The [local applicability wrapper](https://github.com/GuitarAlchemist/ix/blob/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/local.rs#L106-L143) includes only interior vertices whose incident creases are all mountains or valleys. [FOLD's pinned specification](https://raw.githubusercontent.com/edemaine/fold/824f9fa6f944248787b0b2077ef622761489201e/doc/spec.md) distinguishes unknown `U`, flat `F` and border `B` from those assigned folds. An unknown is not silently a mountain or valley.
+
+Our incidence card has a center, four outer vertices on a boundary ring and one isolated vertex. With assigned center creases, its modeled counts are 1 applicable, 4 border-skipped and 1 isolated-skipped. Changing one center crease to `U` gives 0 applicable and 1 other-crease-skipped, while failures remain empty and the maximum residual is initialized to 0. These are authored source-branch counts, not an executed or parsed complete FOLD file. [PHI-006](../../philosophy/en/phi-006-preserve-the-quantifier-in-a-fold-verdict.md) explains the logical difference between no failures and a tested assignment.
+
+### Practice exercise 5: read an empty checked set
+
+In the unknown-crease card, what happened to the center's coverage? Do empty failures and maximum residual 0 prove it was checked and passed? What must a downstream agent retain?
+
+> **Answer:** The center is skipped because of the unknown incident crease, leaving 0 applicable vertices. Empty failures and maximum 0 describe an empty checked set; they do not establish a tested completed assignment. Retain applicability and skipped counts, original assignment labels, source identity, tolerance and the local scope of the predicate. Physical folding and scene transfer remain unobserved.

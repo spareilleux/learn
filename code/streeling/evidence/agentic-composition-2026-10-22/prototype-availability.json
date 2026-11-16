@@ -1,0 +1,52 @@
+{
+  "checked_at_utc": "2026-10-22T03:22:43.519146+00:00",
+  "scope": "Immutable public source availability and static inspection only. No ComfyUI server or local comparator execution.",
+  "checks": [
+    {
+      "url": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI/46aad33e4d4c0696582611bf450dd93742fa9090/comfy_extras/nodes_audio.py",
+      "status": 200,
+      "sha256": "483466af050a43bf96f9fcdfa56ab2759dbf8611dd6a14a9543f6d136ecbdf43",
+      "bytes": 35175,
+      "top_level_classes": [
+        "EmptyLatentAudio",
+        "ConditioningStableAudio",
+        "VAEEncodeAudio",
+        "VAEDecodeAudio",
+        "GetAudioLatentSize",
+        "VAEDecodeAudioTiled",
+        "SaveAudio",
+        "SaveAudioMP3",
+        "SaveAudioOpus",
+        "SaveAudioAdvanced",
+        "PreviewAudio",
+        "LoadAudio",
+        "RecordAudio",
+        "TrimAudioDuration",
+        "SplitAudioChannels",
+        "JoinAudioChannels",
+        "AudioConcat",
+        "AudioMerge",
+        "AudioAdjustVolume",
+        "EmptyAudio",
+        "AudioEqualizer3Band",
+        "AudioExtension"
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI/46aad33e4d4c0696582611bf450dd93742fa9090/server.py",
+      "status": 200,
+      "sha256": "b2ff22d5464bdc7fde71f2e7ed349363458c2ce1aad92ecced446e25a99d5440",
+      "bytes": 70340,
+      "top_level_classes": [
+        "PromptServer"
+      ],
+      "contains_prompt_post_route": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/6fac5735f7ffbb4116ebee05cfc9d7911bb12ce9/Rust/guitar-web-wasm-demo/scripts/compare-audio.js",
+      "status": 404,
+      "availability": "not anonymously available at this exact URL"
+    }
+  ],
+  "ga_local_tracer_exists": true
+}
