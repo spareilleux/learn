@@ -1,0 +1,91 @@
+# l25, GA's main
+
+== Transpose phrasings: the intents whose routing hint fires, and the triggers of transpose's SKILL.md they contain (on main)
+source   phrasing                                     hints, +0.06 each                        SKILL.md triggers
+example  transpose this progression down a half step  skill.transpose                          transpose, down a
+example  transpose this progression up a whole step   skill.transpose                          transpose, up a
+example  transpose C-Am-F-G to G major                skill.transpose                          transpose
+example  shift this progression up a half step        skill.transpose                          up a
+example  bring D minor down to A minor                skill.transpose                          none
+example  Transpose Cmaj7 up a perfect fourth          skill.interval, skill.transpose          transpose, up a
+example  Move this F chord down a minor third         skill.interval, skill.transpose          down a
+example  What's Dm7 up a whole step?                  none                                     up a
+example  Transpose G7 to Eb                           skill.transpose                          transpose
+example  Shift Am7 up a fifth                         skill.transpose                          up a
+example  raise the key by two semitones               none                                     none
+example  lower the key by a half step                 none                                     none
+example  transposing the chorus down a tone           skill.transpose                          down a
+SKILL.md Cmaj7 in the key of G                        none                                     in the key of
+corpus   Transpose C E G to D                         skill.transpose                          transpose
+corpus   Transpose C major to E                       skill.transpose                          transpose
+corpus   Transpose this progression to capo 3         skill.capo, skill.transpose              transpose
+corpus   Transpose A minor to C minor                 skill.transpose                          transpose
+course   Transpose Dm7 down a half step               skill.transpose                          transpose, down a
+course   Move Am up two frets                         skill.transpose                          none
+course   Shift the song to the key of E               none                                     none
+course   Put Cmaj7 in the key of A                    none                                     in the key of
+course   Raise Bb7 by a minor third                   skill.interval                           none
+course   Lower G by a tritone                         skill.interval                           none
+course   Play this song a whole step down             skill.alternatetunings                   none
+course   Take F#m up a fourth                         none                                     up a
+26 phrasings: the transpose hint fires on 16; another intent's hint on 6, 3 of them without the transpose hint; no hint on 7; a SKILL.md trigger in 18
+
+== The other intents' example prompts that the transpose hint or transpose's SKILL.md triggers claim (on main)
+intent                     example prompt                                             hint  SKILL.md triggers
+skill.chordinfo            what notes make up a G7 chord                              no    up a
+skill.modes                What are modes of limited transposition                    yes   none
+skill.progressionmood      Brighten up a minor key tune                               no    up a
+skill.diatonicchords       All chords in the key of D                                 no    in the key of
+skill.settheoryequivalence Are pitch class sets 0,1,3 and 0,2,3 equivalent under tr…  yes   none
+skill.settheoryequivalence Are pitch classes 0,2,4 and 1,3,5 transpositionally equi…  yes   none
+skill.voiceleading         best way to move from G7 to C                              yes   none
+skill.grothendieckdelta    harmonic cost to move from C to G                          yes   none
+skill.grothendieckparse    what does Transpose(C ⊗ G) mean                            yes   transpose
+skill.grothendieckparse    parse Transpose ∘ Invert                                   yes   transpose
+skill.grothendieckparse    parse pullback(Cmaj7, Transpose, Gmaj7)                    yes   transpose
+skill.grothendieckparse    parse functor Transpose: Chords -> Chords                  yes   transpose
+skill.grothendieckparse    parse equalizer Transpose Invert                           yes   transpose
+412 example prompts of 35 other intents: the transpose hint fires on 10, a SKILL.md trigger is in 8
+
+== The skills registered under the name Transpose, and the intent the router can pick for each (on main)
+skill                name         intent                 CanHandle accepts
+SkillMdDrivenSkill   transpose    none                   18 of the 26 phrasings
+TransposeSkill       Transpose    skill.transpose        0 of the 26 phrasings
+IOrchestratorSkill registrations 50, of them built from a SKILL.md 18, behind an intent 0
+
+== Without embeddings: the intent SemanticIntentRouter picks for each phrasing, and what POST /api/chatbot/chat answers (on main)
+phrasing                                     router picks             chat: agent (routing method)                  first line of the answer
+transpose this progression down a half step  none                     voicing (keyword)                             Found 10 voicings matching tags [half]:
+transpose this progression up a whole step   none                     voicing (keyword)                             Found 10 voicings matching tags [whole]:
+transpose C-Am-F-G to G major                none                     voicing (keyword)                             Found 10 voicings matching chord G + mode major +…
+shift this progression up a half step        none                     voicing (keyword)                             Found 10 voicings matching tags [half]:
+bring D minor down to A minor                none                     voicing (keyword)                             Found 10 voicings matching chord D + mode minor +…
+Transpose Cmaj7 up a perfect fourth          none                     voicing (keyword)                             Found 10 voicings matching chord Cmaj7 + tags [fo…
+Move this F chord down a minor third         skill.chordinfo          skill.chordinfo (orchestrator-skill-semantic) F major chord contains F, A, and C.
+What's Dm7 up a whole step?                  skill.chordinfo          skill.chordinfo (orchestrator-skill-semantic) D minor 7 chord contains D, F, A, and C.
+Transpose G7 to Eb                           none                     voicing (keyword)                             Found 10 voicings matching chord G7:
+Shift Am7 up a fifth                         none                     voicing (keyword)                             Found 10 voicings matching chord Am7 + tags [fift…
+raise the key by two semitones               none                     fallback-direct (error-fallback-unavailable)  Our reasoning service is currently unavailable, s…
+lower the key by a half step                 none                     fallback-direct (error-fallback-unavailable)  Our reasoning service is currently unavailable, s…
+transposing the chorus down a tone           none                     voicing (keyword)                             Found 10 voicings matching tags [the, tone]:
+Cmaj7 in the key of G                        none                     fallback-direct (error-fallback-unavailable)  Our reasoning service is currently unavailable, s…
+Transpose C E G to D                         none                     voicing (keyword)                             Found 10 voicings matching chord C:
+Transpose C major to E                       none                     voicing (keyword)                             Found 10 voicings matching chord C + mode major:
+Transpose this progression to capo 3         none                     voicing (keyword)                             I couldn't find a chord name, mode, or style tag …
+Transpose A minor to C minor                 none                     voicing (keyword)                             Found 10 voicings matching chord A + mode minor +…
+Transpose Dm7 down a half step               none                     voicing (keyword)                             Found 10 voicings matching chord Dm7 + tags [half…
+Move Am up two frets                         none                     fallback-direct (error-fallback-unavailable)  Our reasoning service is currently unavailable, s…
+Shift the song to the key of E               none                     fallback-direct (error-fallback-unavailable)  Our reasoning service is currently unavailable, s…
+Put Cmaj7 in the key of A                    none                     fallback-direct (error-fallback-unavailable)  Our reasoning service is currently unavailable, s…
+Raise Bb7 by a minor third                   none                     voicing (keyword)                             Found 10 voicings matching chord Bb7 + mode minor…
+Lower G by a tritone                         skill.chordsubstitution  skill.chordsubstitution (orchestrator-skill-semantic) Harmonic substitutions for **G** (ranked by ICV d…
+Play this song a whole step down             none                     fallback-direct (error-fallback-unavailable)  Our reasoning service is currently unavailable, s…
+Take F#m up a fourth                         none                     voicing (keyword)                             Found 10 voicings matching chord F#m + tags [four…
+26 phrasings; the router picks none 23, skill.chordinfo 2, skill.chordsubstitution 1; the chat endpoint answers with voicing (keyword) 16, fallback-direct (error-fallback-unavailable) 7, skill.chordinfo (orchestrator-skill-semantic) 2, skill.chordsubstitution (orchestrator-skill-semantic) 1
+
+== TransposeSkill called directly with "Transpose Cmaj7 up a perfect fourth" (on main)
+confidence 0.00
+  | I encountered an error processing your request. Please try again.
+  evidence: Source: skills/transpose/SKILL.md
+  evidence: Closure: domain.transposeChord (via ga_dsl_eval)
+  evidence: warning: ga_dsl_eval was NOT invoked — answer is LLM-only, not deterministic

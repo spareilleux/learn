@@ -1,0 +1,27 @@
+PitfallTests.cs(26,9): warning xUnit2000: The literal or constant value 164.8 should be passed as the 'expected' argument in the call to 'Assert.Equal(expected, actual)' in method 'Equal_WithTheArgumentsSwapped' on type 'PitfallTests'. Swap the parameter values. (https://xunit.net/xunit.analyzers/rules/xUnit2000)
+  Failed Pitfalls.Tests.PitfallTests.Doubles_ComparedBitForBit
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: 0.29999999999999999
+Actual:   0.30000000000000004
+  Failed Pitfalls.Tests.PitfallTests.Equal_WithTheArgumentsSwapped
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: 164.81
+Actual:   164.80000000000001
+  Failed Pitfalls.Tests.PitfallTests.Throws_WithTheBaseType
+  Error Message:
+   Assert.Throws() Failure: Exception type was not an exact match
+Expected: typeof(System.ArgumentException)
+Actual:   typeof(System.ArgumentOutOfRangeException)
+---- System.ArgumentOutOfRangeException : fret ('25') must be less than or equal to '24'. (Parameter 'fret')
+Actual value was 25.
+  Failed Pitfalls.Tests.PitfallTests.Transpose_OneNote(note: "E", semitones: 1, expected: "F#")
+  Error Message:
+   Assert.Equal() Failure: Collections differ
+           ↓ (pos 0)
+Expected: ["F#"]
+Actual:   ["F"]
+           ↑ (pos 0)
+Failed!  - Failed:     4, Passed:     2, Skipped:     0, Total:     6 - Pitfalls.Tests.dll (net10.0)
+exit 1

@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- GA's voicing pipeline on main, from the generator to the chord voicings skill, its tunings
+       skill and its chatbot host, built from the second clone that ../fetch-ga.sh checks out at
+       MAIN_SHA. It runs as its own program because its GA assemblies have the same names as the
+       pinned ones GaAi loads -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <!-- GA.Business.ML marks its whole assembly [Experimental("SKEXP0001")] -->
+    <NoWarn>$(NoWarn);SKEXP0001</NoWarn>
+    <GaRoot>$(MSBuildThisFileDirectory)../.ga-main/</GaRoot>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="../GaAi/Report.cs" />
+    <Compile Include="../Shared/*.cs" />
+    <!-- GaMcpServer's tools, outside the projects they reference: the composition tools for lessons
+         19 and 20, the voicing search they read their strategy from and its vocabulary for lesson 21 -->
+    <Compile Include="$(GaRoot)GaMcpServer/Tools/CompositionTools.cs" />
+    <Compile Include="$(GaRoot)GaMcpServer/Tools/VoicingSearchTool.cs" />
+    <Compile Include="$(GaRoot)GaMcpServer/Tools/VoicingVocabularyTool.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Where WebApplicationFactory finds main's chatbot host's content root, for lesson 25 -->
+    <AssemblyAttribute Include="Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute">
+      <_Parameter1>GaChatbot.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</_Parameter1>
+      <_Parameter2>$(GaRoot)Apps/GaChatbot.Api</_Parameter2>
+      <_Parameter3>Program.cs</_Parameter3>
+      <_Parameter4>0</_Parameter4>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(GaRoot)Apps/GaChatbot.Api/GaChatbot.Api.csproj" />
+    <ProjectReference Include="$(GaRoot)Common/GA.Business.ML/GA.Business.ML.csproj" />
+    <ProjectReference Include="$(GaRoot)Demos/Music Theory/FretboardVoicingsCLI/FretboardVoicingsCLI.csproj" />
+  </ItemGroup>
+
+</Project>

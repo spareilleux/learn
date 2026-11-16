@@ -1,0 +1,163 @@
+# l14
+
+== The skill's own example prompts
+skill.chordsubstitution: ChordSubstitutionSkill, 12 example prompts
+"Tritone substitution for G7"  CanHandle yes
+  list for G7: Dm7b5 Ab7 F7 D7 Ebm7b5
+  the textbook answer: Db7
+"What can I substitute for Cmaj7 in a ii-V-I?"  CanHandle no
+  list for Cmaj7: Dbmaj7 Abmaj7 Fmaj7 Dmaj7 Amaj7
+"Reharmonize Dm7 in a jazz context"  CanHandle no
+  list for Dm7: Fm7 F#m7 Am7 Ebm7 Cm7
+"Alternative chord for F major in C"  CanHandle yes
+  compares F with C: Set-Class Equivalent, ICV Neighbor (L1 = 1)
+"What's the secondary dominant of Am?"  CanHandle no
+  list for Am: Cm C Ab Dbm Fm
+  the textbook answer: E7
+"Show me a backdoor dominant for C major"  CanHandle no
+  list for C: Cm Ab Dbm Fm Db
+  the textbook answer: Bb7
+"Alternative chord for Cmaj7"  CanHandle yes
+  list for Cmaj7: Dbmaj7 Abmaj7 Fmaj7 Dmaj7 Amaj7
+"What can replace Dm7?"  CanHandle no
+  list for Dm7: Fm7 F#m7 Am7 Ebm7 Cm7
+"Swap chord for G7"  CanHandle yes
+  list for G7: Dm7b5 Ab7 F7 D7 Ebm7b5
+"Modal interchange substitutes for C major"  CanHandle no
+  list for C: Cm Ab Dbm Fm Db
+"Borrow a chord from parallel minor"  CanHandle no
+  Could not identify a chord symbol in your message.
+"Modal interchange options in F major"  CanHandle no
+  list for F: Cm C Ab Dbm Fm
+CanHandle accepts 4 of 12
+
+== One chord: "Substitute for <chord>" on the 12 roots
+major (C ... B): the 12 lists name 6 chords, Cm Ab Dbm Fm Db C
+  a textbook substitute listed for 5 of 12 roots, e.g. for C: Am, Em
+  notes each listed chord shares with its source: 0 for 29, 1 for 22, 2 for 9
+minor (Cm ... Bm): the 12 lists name 6 chords, C Ab Dbm Fm Db Cm
+  a textbook substitute listed for 4 of 12 roots, e.g. for Cm: Eb, Ab
+  notes each listed chord shares with its source: 0 for 28, 1 for 24, 2 for 8
+dominant 7th (C7 ... B7): the 12 lists name 6 chords, Dm7b5 Ab7 F7 D7 Ebm7b5 F#m7b5
+  a textbook substitute listed for 4 of 12 roots, e.g. for C7: F#7, Em7b5
+  notes each listed chord shares with its source: 0 for 14, 1 for 20, 2 for 23, 3 for 3
+major 7th (Cmaj7 ... Bmaj7): the 12 lists name 6 chords, Dbmaj7 Abmaj7 Fmaj7 Dmaj7 Amaj7 F#maj7
+  a textbook substitute listed for 0 of 12 roots, e.g. for Cmaj7: Em7, Am7
+  notes each listed chord shares with its source: 0 for 16, 1 for 22, 2 for 22
+minor 7th (Cm7 ... Bm7): the 12 lists name 6 chords, Fm7 Dm7 F#m7 Am7 Ebm7 Cm7
+  a textbook substitute listed for 0 of 12 roots, e.g. for Cm7: Ebmaj7, Abmaj7
+  notes each listed chord shares with its source: 0 for 16, 1 for 21, 2 for 23
+half-diminished (Cm7b5 ... Bm7b5): the 12 lists name 6 chords, Dm7b5 Ab7 F7 D7 Ebm7b5 F#m7b5
+  a textbook substitute listed for 3 of 12 roots, e.g. for Cm7b5: Ab7, Ebm7
+  notes each listed chord shares with its source: 0 for 16, 1 for 16, 2 for 25, 3 for 3
+diminished (Cdim ... Bdim): the 12 lists name 6 chords, Dbdim Ddim Adim F#dim Ebdim Cdim
+  no textbook substitute of the same size
+  notes each listed chord shares with its source: 0 for 42, 2 for 18
+augmented (Caug ... Baug): the 12 lists name 4 chords, Dbaug Daug Ebaug Caug
+  no textbook substitute of the same size
+  notes each listed chord shares with its source: 0 for 36
+diminished 7th (Cdim7 ... Bdim7): the 12 lists name 3 chords, Dbdim7 Ddim7 Cdim7
+  no textbook substitute of the same size
+  notes each listed chord shares with its source: 0 for 24
+Cost and L1 of every listed chord: cost 0.60, L1 1
+ga_chord_substitutions returns the same chords, costs and L1 for 108 of 108 chords
+ICV C <001110>, Am <001110>: ComputeDelta(...).L1Norm = 1
+ICV C <001110>, F# <001110>: ComputeDelta(...).L1Norm = 1
+ICV G7 <012111>, Db7 <012111>: ComputeDelta(...).L1Norm = 1
+ICV C <001110>, C <001110>: ComputeDelta(...).L1Norm = 1
+
+== Two chords: "How are <A> and <B> related?" on the 12 roots
+the same chord twice, e.g. C and C: common notes 3; textbook: the same chord
+  12 of 12 roots: Set-Class Equivalent, ICV Neighbor (L1 = 1)
+  ga_chord_compare gives the same labels for 12 of 12
+V7 and I, e.g. G7 and C: common notes 1; textbook: V7 of I
+  12 of 12 roots: Secondary Dominant
+  ga_chord_compare gives the same labels for 12 of 12
+v and i, e.g. Gm and Cm: common notes 1; textbook: a minor v is not a dominant
+  12 of 12 roots: Secondary Dominant, Set-Class Equivalent, ICV Neighbor (L1 = 1)
+  ga_chord_compare gives the same labels for 12 of 12
+bVII7 and I, e.g. Bb7 and C: common notes 0; textbook: backdoor dominant
+  12 of 12 roots: Backdoor Dominant
+  ga_chord_compare gives the same labels for 12 of 12
+dominant 7ths a tritone apart, e.g. F#7 and C7: common notes 2; textbook: tritone substitution
+  12 of 12 roots: Tritone Substitution, Set-Class Equivalent, ICV Neighbor (L1 = 1)
+  ga_chord_compare gives the same labels for 12 of 12
+relative minor and major, e.g. Am and C: common notes 2; textbook: relative chords
+  12 of 12 roots: Set-Class Equivalent, ICV Neighbor (L1 = 1)
+  ga_chord_compare gives the same labels for 12 of 12
+triads a tritone apart, e.g. F#m and C: common notes 0; textbook: no common note
+  12 of 12 roots: Set-Class Equivalent, ICV Neighbor (L1 = 1)
+  ga_chord_compare gives the same labels for 12 of 12
+viiø7 and V7, e.g. Em7b5 and C7: common notes 3; textbook: viiø7 is V9 without its root
+  12 of 12 roots: Set-Class Equivalent, ICV Neighbor (L1 = 1)
+  ga_chord_compare gives the same labels for 12 of 12
+
+== What the skill reads as a chord
+"A substitute for G7?"  CanHandle no, 200 characters
+  compares A with G7: Harmonic Distance
+"Substitute for B♭7"  CanHandle no, 254 characters
+  list for B: Cm C Ab Dbm Fm
+"Substitute for Cmin7"  CanHandle no, 50 characters
+  Could not identify a chord symbol in your message.
+"Suggest substitutions for G7 in a ii-V-I"  CanHandle no, 263 characters
+  list for G7: Dm7b5 Ab7 F7 D7 Ebm7b5
+SKILL.md: | `m7` / `min7` | minor 7 |
+ga_chord_substitutions("Cmin7"): Could not parse 'Cmin7' as a chord symbol. Try Cmaj7, F#m, Bb7, etc.
+
+== domain.chordSubstitutions, through ga_dsl_eval at a826864 and as it is on main
+input  key: string? — key root (e.g. 'C', 'G'). Defaults to chord root.
+input  scale: string? — 'major' or 'minor'. Defaults to 'major'.
+input  symbol: string — chord to substitute (e.g. 'Am', 'G7')
+5 inputs of 15 closures are marked optional: domain.chordSubstitutions.key, domain.chordSubstitutions.scale, domain.queryChords.degree, domain.queryChords.hasInterval, domain.queryChords.quality
+symbol=Am
+  a826864  missing-required-arg: closure 'domain.chordSubs…' requires argument 'key' (declared type: string? — key root (e.g. 'C', 'G'). Defaults to chord root.)
+  6baf32e  Substitutions for Am in key of A major:
+             ★★  A      — 2 shared: A(P1/P1) E(P5/P5)
+             ★   C#m    — 1 shared: E(P5/m3)
+             ★   D      — 1 shared: A(P1/P5)
+             ★   E      — 1 shared: E(P5/P1)
+             ★   F#m    — 1 shared: A(P1/m3)
+symbol=Am, key=C
+  a826864  missing-required-arg: closure 'domain.chordSubs…' requires argument 'scale' (declared type: string? — 'major' or 'minor'. Defaults to 'major'.)
+  6baf32e  Substitutions for Am in key of C major:
+             ★★  C      — 2 shared: C(m3/P1) E(P5/M3)
+             ★★  F      — 2 shared: A(P1/M3) C(m3/P5)
+             ★   Dm     — 1 shared: A(P1/P5)
+             ★   Em     — 1 shared: E(P5/P1)
+symbol=Am, key=C, scale=major
+  a826864  Substitutions for Am in key of C major:
+             ★★  C      — 2 shared: C(m3/P1) E(P5/M3)
+             ★★  F      — 2 shared: A(P1/M3) C(m3/P5)
+             ★   Dm     — 1 shared: A(P1/P5)
+             ★   Em     — 1 shared: E(P5/P1)
+  6baf32e  the same
+symbol=G7, key=C, scale=major
+  a826864  Substitutions for G7 in key of C major:
+             ★★★ Bdim   — 3 shared: B(M3/P1) D(P5/m3) F(m7/TT)
+             ★★  Dm     — 2 shared: D(P5/P1) F(m7/m3)
+             ★★  Em     — 2 shared: G(P1/m3) B(M3/P5)
+             ★   C      — 1 shared: G(P1/P5)
+             ★   F      — 1 shared: F(m7/P1)
+             ◈  Db7    — tritone sub (shares guide tones enharmonically)
+  6baf32e  Substitutions for G7 in key of C major:
+             ★★★ Bdim   — 3 shared: B(M3/P1) D(P5/m3) F(m7/d5)
+             ★★  Dm     — 2 shared: D(P5/P1) F(m7/m3)
+             ★★  Em     — 2 shared: G(P1/m3) B(M3/P5)
+             ★   C      — 1 shared: G(P1/P5)
+             ★   F      — 1 shared: F(m7/P1)
+             ◈  Db7    — tritone sub (shares guide tones enharmonically)
+symbol=F#7, key=B, scale=major
+  a826864  Substitutions for F#7 in key of B major:
+             ★★★ A#dim  — 3 shared: Bb(M3/P1) Db(P5/m3) E(m7/TT)
+             ★★  C#m    — 2 shared: Db(P5/P1) E(m7/m3)
+             ★★  D#m    — 2 shared: F#(P1/m3) Bb(M3/P5)
+             ★   B      — 1 shared: F#(P1/P5)
+             ★   E      — 1 shared: E(m7/P1)
+             ◈  C7     — tritone sub (shares guide tones enharmonically)
+  6baf32e  Substitutions for F#7 in key of B major:
+             ★★★ A#dim  — 3 shared: Bb(M3/P1) Db(P5/m3) E(m7/d5)
+             ★★  C#m    — 2 shared: Db(P5/P1) E(m7/m3)
+             ★★  D#m    — 2 shared: F#(P1/m3) Bb(M3/P5)
+             ★   B      — 1 shared: F#(P1/P5)
+             ★   E      — 1 shared: E(m7/P1)
+             ◈  C7     — tritone sub (shares guide tones enharmonically)

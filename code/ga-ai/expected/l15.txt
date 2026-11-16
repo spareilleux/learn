@@ -1,0 +1,175 @@
+# l15
+
+== The skill's own example prompts
+skill.chordinfo: ChordInfoSkill, 32 example prompts
+"What is a C major chord?"  CanHandle yes
+  C major: C E G
+"What notes are in Dm7?"  CanHandle yes
+  D minor 7: D F A C
+"Notes in an F minor chord"  CanHandle yes
+  F minor: F Ab C
+"What chord contains C E G?"  CanHandle yes
+  C major: C E G
+"Spell a B7 chord"  CanHandle yes
+  B dominant 7: B D# F# A
+"What notes are in a Cmaj7?"  CanHandle yes
+  C major 7: C E G B
+"Tell me the tones in F#m7b5"  CanHandle no
+  F# half-diminished: F# A C E
+"tell me about Dm7"  CanHandle yes
+  D minor 7: D F A C
+"tell me about a Cmaj7 chord"  CanHandle yes
+  C major 7: C E G B
+"what makes a chord a major seventh"  CanHandle yes
+  A major: A C# E
+  the question names a quality, no root
+"what makes a chord diminished"  CanHandle yes
+  A major: A C# E
+  the question names a quality, no root
+"what makes a chord a dominant seventh"  CanHandle yes
+  A major: A C# E
+  the question names a quality, no root
+"What chord is C E G"  CanHandle yes
+  C major: C E G
+"What chord is F A C E"  CanHandle yes
+  F major 7: F A C E
+"Which chord contains the notes G B D F"  CanHandle yes
+  G dominant 7: G B D F
+"What chord is C E G Bb D"  CanHandle yes
+  C dominant 9: C E G Bb D
+"anatomy of a D7sus4 chord"  CanHandle no
+  no chord: "Could not parse a chord name from your question."
+  the textbook: D G A C
+"break down Gmaj13 for me"  CanHandle no
+  G major 13: G B D F# A C E
+"what is a C add 9 chord"  CanHandle no
+  no chord: "Could not parse a chord name from your question."
+  the textbook: C E G D
+"give me the notes of an F#m7b5"  CanHandle yes
+  F# half-diminished: F# A C E
+"tones in a Bb diminished seventh"  CanHandle no
+  no chord: "Could not parse a chord name from your question."
+  the textbook: Bb Db Fb Abb
+"What is C7b9"  CanHandle yes
+  C dominant 7 flat 9: C E G Bb Db
+"What is Cmaj9"  CanHandle yes
+  C major 9: C E G B D
+"What is Dm7b5"  CanHandle yes
+  D half-diminished: D F Ab C
+"What is F#m7"  CanHandle yes
+  F# minor 7: F# A C# E
+"What is Bbdim7"  CanHandle yes
+  Bb diminished 7: Bb Db Fb Abb
+"what notes are in a C major triad"  CanHandle yes
+  C major: C E G
+"what are the notes of an A minor triad"  CanHandle yes
+  A minor: A C E
+"what notes make up a G7 chord"  CanHandle yes
+  G dominant 7: G B D F
+"which notes form a B diminished triad"  CanHandle yes
+  B diminished: B D F
+"spell a G7 chord"  CanHandle yes
+  G dominant 7: G B D F
+"what notes are in an E major chord"  CanHandle yes
+  E major: E G# B
+The intent's answer is the skill's Result for 32 of 32
+The textbook's notes for 26 of the 29 prompts that name a chord or its notes
+CanHandle accepts 27 of 32
+
+== Every suffix the vocabulary knows
+"What notes are in C+?"  the vocabulary: augmented, the skill: no chord
+"What notes are in C5?"  the vocabulary: power, the skill: no chord
+"What notes are in Cno3?"  the vocabulary: power, the skill: no chord
+"What notes are in Cdom7?"  the vocabulary: dominant 7, the skill: no chord
+"What notes are in Cma7?"  the vocabulary: major 7, the skill: no chord
+"What notes are in CΔ7?"  the vocabulary: major, the skill: no chord
+"What notes are in C-7?"  the vocabulary: minor 7, the skill: no chord
+"What notes are in C°7?"  the vocabulary: diminished 7, the skill: no chord
+"What notes are in Cmin7b5?"  the vocabulary: half-diminished, the skill: no chord
+"What notes are in Cø?"  the vocabulary: half-diminished, the skill: no chord
+"What notes are in Cø7?"  the vocabulary: half-diminished, the skill: no chord
+"What notes are in C7+5?"  the vocabulary: dominant 7 sharp 5, the skill: dominant 7
+"What notes are in a C power chord?"  the vocabulary: power, the skill: no chord
+"What notes are in a C dominant chord?"  the vocabulary: dominant 7, the skill: no chord
+"What notes are in a C diminished 7 chord?"  the vocabulary: diminished 7, the skill: no chord
+"What notes are in a C diminished7 chord?"  the vocabulary: diminished 7, the skill: no chord
+"What notes are in a C minor 7 flat 5 chord?"  the vocabulary: half-diminished, the skill: no chord
+"What notes are in a C dominant 7 flat 5 chord?"  the vocabulary: dominant 7 flat 5, the skill: no chord
+"What notes are in a C dominant 7 sharp 5 chord?"  the vocabulary: dominant 7 sharp 5, the skill: no chord
+"What notes are in a C dominant 7 flat 9 chord?"  the vocabulary: dominant 7 flat 9, the skill: no chord
+"What notes are in a C dominant 7 sharp 9 chord?"  the vocabulary: dominant 7 sharp 9, the skill: no chord
+"What notes are in a C altered chord?"  the vocabulary: altered dominant, the skill: no chord
+The skill reads 60 of 82 suffixes as the vocabulary does (51 symbols, 31 words)
+NormalizeQuality("Δ7") returns "δ7", which GetFormula doesn't know
+ga_chord_info reads 14 of the 51 symbols: M M7 maj m min dim aug 7 maj7 m7 min7 dim7 m7b5 min7b5
+
+== Beyond the vocabulary
+"What notes are in Cmaj7#11?"
+  C major 7: C E G B
+  the textbook: C E G B F#
+"What notes are in C7#11?"
+  C dominant 7: C E G Bb
+  the textbook: C E G Bb F#
+"What notes are in C7(b9)?"
+  C dominant 7: C E G Bb
+  the textbook: C E G Bb Db
+"What notes are in Cm(maj7)?"
+  C minor: C Eb G
+  the textbook: C Eb G B
+"What notes are in C6/9?"
+  C major 6: C E G A
+  the textbook: C E G A D
+"What notes are in C7#5#9?"
+  C dominant 7 sharp 5: C E G# Bb
+  the textbook: C E G# Bb D#
+"What notes are in C7sus4?"
+  no chord: "Could not parse a chord name from your question."
+  the textbook: C F G Bb
+"What notes are in C/E?"
+  no chord: "Could not parse a chord name from your question."
+  the textbook: C E G
+"What notes are in B♭7?"
+  no chord: "Could not parse a chord name from your question."
+  the textbook: Bb D F Ab
+"What notes are in an E♭ major chord?"
+  no chord: "Could not parse a chord name from your question."
+  the textbook: Eb G Bb
+"I am learning Cmaj7, what notes are in it?"
+  A minor: A C E
+  the textbook: C E G B
+"Am I right that G7 has an F?"
+  A minor: A C E
+  the textbook: G B D F
+
+== Spelling: 21 roots, 28 qualities
+The skill spells 567 of 588 chords as the textbook does
+  C7alt: skill C E F# G# Bb Db D#, textbook C E Gb G# Bb Db D#
+  C#7alt: skill C# E# F## G## B D D##, textbook C# E# G G## B D D##
+  Db7alt: skill Db F G A Cb Ebb E, textbook Db F Abb A Cb Ebb E
+  … and 18 more
+The chords that differ: 21 7alt
+C7alt: Intervals: root, major third, flat fifth, sharp fifth, minor seventh, flat ninth, sharp ninth
+Chords with a double or triple accidental: 175 of 588
+
+== The skill's own spellings, asked back as notes
+It names 19 qualities from notes; not dominant 7 flat 9, dominant 7 sharp 9, altered dominant, dominant 11, major 11, minor 11, dominant 13, major 13, minor 13
+a quality it names, single accidentals: 293 chords, named back 293, as another chord 0, not named 0
+a quality it names, a double or triple accidental: 106 chords, named back 0, as another chord 58, not named 48
+  "What chord is D# F## A#" → D# minor: D# F# A#
+a quality it doesn't name, 3 to 5 notes: 42 chords, named back 0, as another chord 12, not named 30
+  "What chord is C E G Bb Db" → no chord: "Could not parse a chord name from your question."
+6 or 7 notes: 147 chords, named back 0, as another chord 3, not named 144
+  "What chord is C E F# G# Bb Db D#" → no chord: "Could not parse a chord name from your question."
+
+== Lists of notes
+"What chord is C E G# B" → no chord: "Could not parse a chord name from your question."
+"What chord is C E G Bb Db" → no chord: "Could not parse a chord name from your question."
+"What chord is C Eb Gb Bbb" → C diminished: C Eb Gb
+"What chord is F# A# C##" → F# major: F# A# C#
+"Which chord has a C, an E and a G?" → A minor 7: A C E G
+"What chord is C E G B♭" → C major 7: C E G B
+
+== ga_chord_info, the tool of the SKILL.md
+The SKILL.md's table lists 16 symbols, the tool reads 15
+  Cdom7: "Could not parse 'Cdom7' as a chord symbol. Try C, Cm, Cmaj7, F#dim, Bbm7, etc."
+The tool returns the notes its description gives for 5 of its 5 examples

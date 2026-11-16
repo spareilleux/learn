@@ -1,0 +1,333 @@
+=== AUD025 en streeling/courses/audio-engineering/en/aud-025-separate-subtractive-dither-error-from-bias.md ===
+---
+module_id: aud-025-separate-subtractive-dither-error-from-bias
+department: audio-engineering
+course: "Separate Subtractive-Dither Error from Bias"
+level: advanced
+prerequisites: ["aud-015-bound-quantization-error-before-comparing-wavs"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Separate Subtractive-Dither Error from Bias
+
+A dither proposal can confuse added noise with the residual error after subtracting the same offset. Keep the encoder and decoder equations together. The fixed offsets are a deliberately finite teaching ensemble, not a random generator or a sample of independent uniform noise. A zero mean for this ensemble does not prove independence from every input. For a future [GA](https://github.com/GuitarAlchemist/ga) export, losing the offset correspondence would implement a different converter.
+
+Use an unbounded unit-step quantizer with the displayed rounding rule. The offsets are fixed, with no clipping and no random draw. No probability-density, independence, inaudibility or actual export claim follows from the finite error table.
+
+[Prerequisite](../../audio-engineering/en/aud-015-bound-quantization-error-before-comparing-wavs.md)
+
+Compute the subtractive decoded values.
+
+> **Answer:** They are `[0.375,0.125,-0.125,-0.375]`, although every encoded integer is 0.
+
+What are the finite mean and mean-square error?
+
+> **Answer:** The mean is 0 and the mean-square error is 0.078125 for this fixed ensemble.
+
+Does this establish a stochastic independence theorem?
+
+> **Answer:** No. A deterministic ensemble at one input cannot establish a distribution for every input.
+
+Why is mean alone insufficient in the control?
+
+> **Answer:** Its mean remains 0 while mean-square error becomes 0.1875 and individual errors change.
+
+What falsifies exact subtractive recovery?
+
+> **Answer:** A decoder offset not matching the encoder offset rejects the stipulated converter contract.
+=== AUD025 fr streeling/courses/audio-engineering/fr/aud-025-separate-subtractive-dither-error-from-bias.fr.md ===
+---
+module_id: aud-025-separate-subtractive-dither-error-from-bias
+department: audio-engineering
+course: "Séparer erreur et biais avec un dither soustractif"
+level: advanced
+prerequisites: ["aud-015-bound-quantization-error-before-comparing-wavs"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Séparer erreur et biais avec un dither soustractif
+
+Une proposition de dither peut confondre bruit ajouté et erreur résiduelle après soustraction du même décalage. Gardez ensemble les équations du codeur et du décodeur. Les décalages fixes forment un ensemble pédagogique fini, pas un générateur aléatoire ni un échantillon uniforme indépendant. Une moyenne nulle ici ne prouve pas l’indépendance pour toute entrée. Dans un futur export [GA](https://github.com/GuitarAlchemist/ga), perdre la correspondance des décalages changerait le convertisseur.
+
+Utilisez un quantificateur non borné à pas unitaire avec l’arrondi affiché. Les décalages sont fixes, sans écrêtage ni tirage aléatoire. La table finie ne démontre ni densité de probabilité, ni indépendance, ni inaudibilité, ni export réel.
+
+[Prérequis](../../audio-engineering/en/aud-015-bound-quantization-error-before-comparing-wavs.md)
+
+Calculez les valeurs décodées avec soustraction.
+
+> **Réponse:** Elles valent `[0.375,0.125,-0.125,-0.375]`, même si tous les entiers codés valent 0.
+
+Quelles sont la moyenne et l’erreur quadratique moyenne finies ?
+
+> **Réponse:** La moyenne vaut 0 et l’erreur quadratique moyenne vaut 0.078125 pour cet ensemble fixe.
+
+Cela établit-il un théorème d’indépendance stochastique ?
+
+> **Réponse:** Non. Un ensemble déterministe à une entrée ne définit pas une distribution pour toute entrée.
+
+Pourquoi la moyenne ne suffit-elle pas dans le témoin ?
+
+> **Réponse:** Elle reste égale à 0 alors que l’erreur quadratique moyenne devient 0.1875 et que les erreurs individuelles changent.
+
+Qu’est-ce qui réfute la récupération soustractive déclarée ?
+
+> **Réponse:** Un décalage de décodage différent du décalage de codage réfute le contrat stipulé.
+=== AUD025 es streeling/courses/audio-engineering/es/aud-025-separate-subtractive-dither-error-from-bias.es.md ===
+---
+module_id: aud-025-separate-subtractive-dither-error-from-bias
+department: audio-engineering
+course: "Separar error y sesgo con dither sustractivo"
+level: advanced
+prerequisites: ["aud-015-bound-quantization-error-before-comparing-wavs"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Separar error y sesgo con dither sustractivo
+
+Una propuesta de dither puede confundir el ruido añadido con el error residual tras restar el mismo desplazamiento. Mantenga juntas las ecuaciones del codificador y del decodificador. Los desplazamientos fijos forman un conjunto didáctico finito, no un generador aleatorio ni una muestra uniforme independiente. Una media nula aquí no demuestra independencia para toda entrada. En una futura exportación [GA](https://github.com/GuitarAlchemist/ga), perder la correspondencia de desplazamientos cambiaría el convertidor.
+
+Use un cuantificador no acotado de paso unitario con el redondeo mostrado. Los desplazamientos son fijos, sin recorte ni sorteo aleatorio. La tabla finita no demuestra densidad probabilística, independencia, inaudibilidad ni exportación real.
+
+[Prerrequisito](../../audio-engineering/en/aud-015-bound-quantization-error-before-comparing-wavs.md)
+
+Calcule los valores decodificados con sustracción.
+
+> **Respuesta:** Son `[0.375,0.125,-0.125,-0.375]`, aunque todos los enteros codificados valen 0.
+
+¿Cuáles son la media y el error cuadrático medio finitos?
+
+> **Respuesta:** La media es 0 y el error cuadrático medio es 0.078125 para este conjunto fijo.
+
+¿Establece un teorema de independencia estocástica?
+
+> **Respuesta:** No. Un conjunto determinista en una entrada no establece una distribución para toda entrada.
+
+¿Por qué no basta la media en el control?
+
+> **Respuesta:** Sigue siendo 0 mientras el error cuadrático medio pasa a 0.1875 y cambian los errores individuales.
+
+¿Qué refuta la recuperación sustractiva declarada?
+
+> **Respuesta:** Un desplazamiento de decodificación distinto del usado al codificar refuta el contrato estipulado.
+=== GAS021 en streeling/courses/guitar-acoustics/en/gas-021-normalize-modal-energy-before-comparing-amplitudes.md ===
+---
+module_id: gas-021-normalize-modal-energy-before-comparing-amplitudes
+department: guitar-acoustics
+course: "Normalize Modal Energy Before Comparing Amplitudes"
+level: advanced
+prerequisites: ["gas-015-separate-mode-excitation-from-observation"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Normalize Modal Energy Before Comparing Amplitudes
+
+A guitar mode coefficient depends on the chosen shape normalization. Comparing coefficients without the modal mass can reverse an energy ranking. Integrate the squared sine shape along an ideal uniform string, then retain both generalized displacement and mass-normalized displacement. The physical displacement must stay unchanged when the coordinate basis changes. A [GA](https://github.com/GuitarAlchemist/ga) parameter report should identify its normalization before suggesting that one mode received more energy. The calculation concerns mechanical energy in an ideal model, not a pickup amplitude or loudness judgment.
+
+The string is uniform and uses peak-normalized integer sine modes in consistent mechanical units. At the turning point velocity vanishes. This is modal energy, without calibrated pickup gain, acoustic radiation or measured guitar damping.
+
+[Prerequisite](../../guitar-acoustics/en/gas-015-separate-mode-excitation-from-observation.md)
+
+[Primary reading](https://www.phys.unsw.edu.au/jw/strings.html)
+
+Calculate the main result and name its convention.
+
+> **Answer:** The effective mass is 3 and turning-point energy is 6; peak normalization sets the sine antinode to unity.
+
+Which quantity must remain separate?
+
+> **Answer:** Generalized amplitude is 0.5; mass-normalized amplitude is `sqrt(3)/2`. They are different coordinates of the same displacement.
+
+What assumption prevents a stronger conclusion?
+
+> **Answer:** The sine shape and uniform density supply the modal-mass integral; arbitrary body modes need their own shape and mass matrix.
+
+Explain the negative control.
+
+> **Answer:** The assumed mass 6 reports energy 12 although the correct mode still has energy 6.
+
+What observation would reject the proposed claim?
+
+> **Answer:** A basis rescaling that changes reconstructed displacement or energy rejects a claimed normalization-preserving conversion.
+=== GAS021 fr streeling/courses/guitar-acoustics/fr/gas-021-normalize-modal-energy-before-comparing-amplitudes.fr.md ===
+---
+module_id: gas-021-normalize-modal-energy-before-comparing-amplitudes
+department: guitar-acoustics
+course: "Normaliser l’énergie modale avant de comparer les amplitudes"
+level: advanced
+prerequisites: ["gas-015-separate-mode-excitation-from-observation"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Normaliser l’énergie modale avant de comparer les amplitudes
+
+Le coefficient d’un mode de guitare dépend de la normalisation de sa forme. Comparer des coefficients sans la masse modale peut inverser un classement énergétique. Intégrez le carré du sinus sur une corde uniforme idéale, puis conservez le déplacement généralisé et le déplacement normalisé par la masse. Le déplacement physique doit rester inchangé lors du changement de coordonnées. Un rapport [GA](https://github.com/GuitarAlchemist/ga) doit préciser la normalisation avant de comparer les énergies. Le calcul porte sur une énergie mécanique idéale, pas sur une amplitude de capteur ni un jugement sonore.
+
+La corde est uniforme et emploie des modes sinus entiers normalisés en crête, dans des unités mécaniques cohérentes. Au retournement, la vitesse s’annule. C’est une énergie modale, sans gain de capteur étalonné, rayonnement acoustique ni amortissement de guitare mesuré.
+
+[Prérequis](../../guitar-acoustics/en/gas-015-separate-mode-excitation-from-observation.md)
+
+[Lecture primaire](https://www.phys.unsw.edu.au/jw/strings.html)
+
+Calculez le résultat principal et nommez sa convention.
+
+> **Réponse:** La masse effective vaut 3 et l’énergie au point de retournement vaut 6 ; le sinus a un ventre unitaire.
+
+Quelle grandeur faut-il distinguer ?
+
+> **Réponse:** L’amplitude généralisée vaut 0.5 ; l’amplitude normalisée vaut `sqrt(3)/2`. Ce sont des coordonnées différentes du même déplacement.
+
+Quelle hypothèse limite la conclusion ?
+
+> **Réponse:** Le sinus et la densité uniforme donnent l’intégrale de masse ; des modes de caisse demandent leurs propres formes et matrice.
+
+Expliquez le témoin négatif.
+
+> **Réponse:** La masse supposée 6 donne une énergie annoncée de 12, alors que l’énergie correcte reste 6.
+
+Quelle observation réfuterait la proposition ?
+
+> **Réponse:** Un changement de base qui modifie déplacement reconstruit ou énergie réfute une conversion censée préserver la normalisation.
+=== GAS021 es streeling/courses/guitar-acoustics/es/gas-021-normalize-modal-energy-before-comparing-amplitudes.es.md ===
+---
+module_id: gas-021-normalize-modal-energy-before-comparing-amplitudes
+department: guitar-acoustics
+course: "Normalizar la energía modal antes de comparar amplitudes"
+level: advanced
+prerequisites: ["gas-015-separate-mode-excitation-from-observation"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Normalizar la energía modal antes de comparar amplitudes
+
+El coeficiente de un modo de guitarra depende de la normalización de su forma. Comparar coeficientes sin la masa modal puede invertir una clasificación energética. Integre el cuadrado del seno en una cuerda uniforme ideal y conserve el desplazamiento generalizado y el normalizado por masa. El desplazamiento físico debe permanecer igual al cambiar de coordenadas. Un informe [GA](https://github.com/GuitarAlchemist/ga) debe declarar la normalización antes de comparar energías. Se calcula energía mecánica ideal, no amplitud de pastilla ni sonoridad.
+
+La cuerda es uniforme y usa modos seno enteros normalizados en pico con unidades mecánicas coherentes. En el extremo la velocidad se anula. Es energía modal, sin ganancia de pastilla calibrada, radiación acústica ni amortiguamiento medido.
+
+[Prerrequisito](../../guitar-acoustics/en/gas-015-separate-mode-excitation-from-observation.md)
+
+[Lectura primaria](https://www.phys.unsw.edu.au/jw/strings.html)
+
+Calcule el resultado principal y nombre su convención.
+
+> **Respuesta:** La masa efectiva es 3 y la energía en el extremo es 6; el seno tiene antinodo unitario.
+
+¿Qué magnitud debe mantenerse separada?
+
+> **Respuesta:** La amplitud generalizada es 0.5; la normalizada es `sqrt(3)/2`. Son coordenadas distintas del mismo desplazamiento.
+
+¿Qué supuesto limita la conclusión?
+
+> **Respuesta:** El seno y la densidad uniforme proporcionan la integral; los modos de caja necesitan sus propias formas y matriz.
+
+Explique el control negativo.
+
+> **Respuesta:** La masa supuesta 6 produce energía declarada 12, aunque la correcta sigue siendo 6.
+
+¿Qué observación refutaría la propuesta?
+
+> **Respuesta:** Un cambio de base que altere desplazamiento reconstruido o energía refuta una conversión que promete conservarlos.
+=== GAS022 en streeling/courses/guitar-acoustics/en/gas-022-scale-a-helmholtz-cavity-with-effective-neck-length.md ===
+---
+module_id: gas-022-scale-a-helmholtz-cavity-with-effective-neck-length
+department: guitar-acoustics
+course: "Scale a Helmholtz Cavity with Effective Neck Length"
+level: advanced
+prerequisites: ["gas-007-distinguish-body-poles-from-string-partials"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Scale a Helmholtz Cavity with Effective Neck Length
+
+A guitar-body redesign changes the sound-hole area as well as cavity volume and neck end correction. Volume alone cannot predict the frequency shift. Use the lumped Helmholtz ratio to separate those contributions. Similar shapes scaled uniformly obey an inverse-length frequency rule because area, volume and effective neck length scale differently. This is a cavity-only approximation: flexible plates and radiation can couple to it. The direct ratio is a review baseline for a future acoustic scene parameter, not an identified body pole.
+
+Assume unchanged sound speed, small acoustic motion and a cavity compact relative to wavelength. All ratios are positive and neck length is effective. No plate vibration, radiation loss or measured guitar resonance is included.
+
+[Prerequisite](../../guitar-acoustics/en/gas-007-distinguish-body-poles-from-string-partials.md)
+
+[Primary reading](https://www.phys.unsw.edu.au/jw/Helmholtz.html)
+
+> **Answer:** The frequency ratio is 0.5 from the declared geometric ratios.
+
+> **Answer:** Effective neck length includes moving external air; geometric wall thickness alone need not equal it.
+
+> **Answer:** The compact-cavity approximation excludes arbitrary pressure variation and flexible-body coupling.
+
+> **Answer:** Holding length ratio at 1 gives `sqrt(0.5)`, which is not the similarity result 0.5.
+
+> **Answer:** An independently computed ratio inconsistent with the stated area, volume and effective length rejects the scaling claim.
+=== GAS022 fr streeling/courses/guitar-acoustics/fr/gas-022-scale-a-helmholtz-cavity-with-effective-neck-length.fr.md ===
+---
+module_id: gas-022-scale-a-helmholtz-cavity-with-effective-neck-length
+department: guitar-acoustics
+course: "Redimensionner une cavité de Helmholtz avec sa longueur effective"
+level: advanced
+prerequisites: ["gas-007-distinguish-body-poles-from-string-partials"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Redimensionner une cavité de Helmholtz avec sa longueur effective
+
+Une modification de caisse change l’aire de l’ouverture, le volume et la correction d’extrémité du col. Le volume seul ne prédit pas le déplacement fréquentiel. Utilisez le rapport de Helmholtz pour séparer ces contributions. Des formes semblables agrandies uniformément suivent une fréquence inversement proportionnelle à la longueur. Il s’agit d’une approximation de cavité seule : tables flexibles et rayonnement peuvent s’y coupler. Le rapport direct sert de référence pour un futur paramètre acoustique de scène, pas de pôle identifié.
+
+Supposez une célérité inchangée, de faibles mouvements acoustiques et une cavité petite devant la longueur d’onde. Les rapports sont positifs et la longueur du col est effective. Ni vibration de table, ni pertes de rayonnement, ni résonance mesurée ne sont incluses.
+
+[Prérequis](../../guitar-acoustics/en/gas-007-distinguish-body-poles-from-string-partials.md)
+
+[Lecture primaire](https://www.phys.unsw.edu.au/jw/Helmholtz.html)
+
+> **Réponse:** Le rapport fréquentiel vaut 0.5 avec les rapports géométriques déclarés.
+
+> **Réponse:** La longueur effective inclut l’air extérieur entraîné ; elle ne se réduit pas forcément à l’épaisseur de la paroi.
+
+> **Réponse:** L’approximation de cavité compacte exclut des variations de pression arbitraires et le couplage à une caisse flexible.
+
+> **Réponse:** Garder un rapport de longueur de 1 donne `sqrt(0.5)`, différent du résultat de similitude 0.5.
+
+> **Réponse:** Un rapport indépendant incompatible avec aire, volume et longueur effective réfute le redimensionnement annoncé.
+=== GAS022 es streeling/courses/guitar-acoustics/es/gas-022-scale-a-helmholtz-cavity-with-effective-neck-length.es.md ===
+---
+module_id: gas-022-scale-a-helmholtz-cavity-with-effective-neck-length
+department: guitar-acoustics
+course: "Redimensionar una cavidad de Helmholtz con longitud efectiva"
+level: advanced
+prerequisites: ["gas-007-distinguish-body-poles-from-string-partials"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Redimensionar una cavidad de Helmholtz con longitud efectiva
+
+Una modificación de caja cambia el área de abertura, el volumen y la corrección de extremo del cuello. El volumen por sí solo no predice el cambio frecuencial. Use la razón de Helmholtz para separar esas contribuciones. Las formas semejantes ampliadas uniformemente siguen una frecuencia inversa a la longitud. Es una aproximación de cavidad aislada: placas flexibles y radiación pueden acoplarse. La razón directa sirve de referencia para un futuro parámetro acústico de escena, no de polo identificado.
+
+Suponga velocidad del sonido invariable, movimientos acústicos pequeños y cavidad pequeña respecto a la longitud de onda. Las razones son positivas y la longitud del cuello es efectiva. No se incluyen vibración de placa, pérdidas de radiación ni resonancia medida.
+
+[Prerrequisito](../../guitar-acoustics/en/gas-007-distinguish-body-poles-from-string-partials.md)
+
+[Lectura primaria](https://www.phys.unsw.edu.au/jw/Helmholtz.html)
+
+> **Respuesta:** La razón frecuencial es 0.5 con las razones geométricas declaradas.
+
+> **Respuesta:** La longitud efectiva incluye aire exterior arrastrado; no equivale necesariamente al grosor de la pared.
+
+> **Respuesta:** La aproximación de cavidad compacta excluye variación arbitraria de presión y acoplamiento con una caja flexible.
+
+> **Respuesta:** Mantener razón de longitud 1 da `sqrt(0.5)`, distinto del resultado de semejanza 0.5.
+
+> **Respuesta:** Una razón independiente incompatible con área, volumen y longitud efectiva refuta el escalado anunciado.

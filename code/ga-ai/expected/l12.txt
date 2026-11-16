@@ -1,0 +1,154 @@
+# l12
+
+== The intents that take a chord progression
+skill.progressionmood          ProgressionMoodSkill         15 example prompts
+skill.progressioncompletion    ProgressionCompletionSkill   5 example prompts
+
+== ProgressionMoodSkill's example prompts: what each asks for, and the answer it gets
+prompt                                                     asks       gets
+How do I make this progression sound darker?               darken     darken
+Make this progression sound moodier                        darken     darken
+How can I make my chords sound sadder?                     darken     darken
+What can I do to make a song sound more melancholy?        darken     darken
+How to add a darker feel to a chord progression            darken     darken
+Techniques to make a major progression minor-sounding      darken     darken
+Make my song sound brighter                                brighten   brighten
+How to make a progression more uplifting                   brighten   brighten
+Brighten up a minor key tune                               brighten   darken
+Brighten this minor song                                   brighten   darken
+How do I lift the mood of a minor progression?             brighten   darken
+How does Mixolydian flavor brighten rock progressions?     brighten   darken
+Use Lydian color to brighten a major progression           brighten   darken
+Phrygian flavor to darken a progression                    darken     darken
+What mode adds the most brightness to a major key tune?    brighten   darken
+7 prompts ask to darken: 7 get the darken answer
+8 prompts ask to brighten: 2 get the brighten answer
+
+== The progressions each text writes out
+ProgressionMoodSkill, darken answer:
+  C F G
+  C Fm G
+  C bA G   <- bA: neither a chord symbol nor a Roman numeral
+  C bB F   <- bB: neither a chord symbol nor a Roman numeral
+  C G F
+ProgressionMoodSkill, brighten answer:
+  I bVII IV I
+skills/progression-mood/SKILL.md, the progressions written with chord names:
+  C F G
+  C Fm G
+  C F Gm
+  C Am F G
+  C Am Ab G
+  C Bb F
+  C G F
+
+== CanHandle, the keyword test main's router falls back on when it has no embeddings
+ProgressionMoodSkill: 0 of 15 example prompts accepted
+ProgressionCompletionSkill: 3 of 5 example prompts accepted
+  rejected: What chord comes next after C G Am?
+  rejected: Help me end Am F G
+
+== ProgressionCompletionSkill's example prompts: the key and the chords the model may suggest
+"What chord comes next after C G Am?"
+  a826864  reads C G Am; key: A minor / C major / E minor / G major (3/3)
+           may suggest: Am, Bdim, C, Dm, Em, F, G
+  6baf32e  reads C G Am; key: C major / G major / A minor / E minor (3/3)
+           may suggest: C, Dm, Em, F, G, Am, Bdim
+"How do I finish this progression: Em D C"
+  a826864  reads Em D C; key: E minor / G major (3/3)
+           may suggest: Em, F#dim, G, Am, Bm, C, D
+  6baf32e  reads Em D C; key: E minor / G major (3/3)
+           may suggest: Em, F#dim, G, Am, Bm, C, D
+"Help me end Am F G"
+  a826864  reads Am F G; key: A minor / C major (3/3)
+           may suggest: Am, Bdim, C, Dm, Em, F, G
+  6baf32e  reads Am F G; key: A minor / C major (3/3)
+           may suggest: Am, Bdim, C, Dm, Em, F, G
+"What should follow Dm G C?"
+  a826864  reads Dm G C; key: A minor / C major (3/3)
+           may suggest: Am, Bdim, C, Dm, Em, F, G
+  6baf32e  reads Dm G C; key: C major / A minor (3/3)
+           may suggest: C, Dm, Em, F, G, Am, Bdim
+"Continue this progression: F C G"
+  a826864  reads F C G; key: A minor / C major (3/3)
+           may suggest: Am, Bdim, C, Dm, Em, F, G
+  6baf32e  reads F C G; key: C major / A minor (3/3)
+           may suggest: C, Dm, Em, F, G, Am, Bdim
+"C G Am"
+  a826864  reads C G Am; key: A minor / C major / E minor / G major (3/3)
+           may suggest: Am, Bdim, C, Dm, Em, F, G
+  6baf32e  reads C G Am; key: C major / G major / A minor / E minor (3/3)
+           may suggest: C, Dm, Em, F, G, Am, Bdim
+
+== What the model reads for "What chord comes next after C G Am?", pinned
+  | The input progression is: [C, G, Am]
+  | Detected key: A minor / C major / E minor / G major  (3/3 chords diatonic)
+  |
+  | AVAILABLE DIATONIC CHORDS — you may ONLY suggest chords from this list:
+  | Am, Bdim, C, Dm, Em, F, G
+  |
+  | Task: Suggest 2-3 chord completions (each 1-2 chords) that cadence naturally
+  | to end or continue the progression in A minor / C major / E minor / G major.
+  |
+  | For each suggestion:
+  |   - Name the cadence type (authentic, half, deceptive, or plagal)
+  |   - Give the Roman numeral(s)
+  |   - Write a one-sentence guitarist-friendly explanation
+  |
+  | IMPORTANT: Every chord you suggest MUST appear in the AVAILABLE DIATONIC CHORDS list.
+  | You may substitute the plain V chord with V7 even if only V appears in the diatonic list
+  | (this is the standard harmonic minor adjustment).
+  |
+  | { "chords": ["E7"], "cadence": "authentic", "roman": "V7-i", "explanation": "Strongest resolution back to Am." },
+  | { "chords": ["G"],  "cadence": "half",      "roman": "bVII-i", "explanation": "Open loop, floats back to the top." }
+
+== "What chord comes next after ...?" for two textbook progressions in the 30 keys
+
+I vi IV             Cb Gb Db Ab Eb Bb F  C  G  D  A  E  B  F# C#
+           a826864  =  x  e  x  x  =  x  =  x  =  =  x  e  r  r
+           6baf32e  e  e  e  =  =  =  =  =  =  =  =  =  =  r  r
+
+i VI VII            Ab Eb Bb F  C  G  D  A  E  B  F# C# G# D# A#
+           a826864  =  e  e  =  =  =  =  =  =  =  =  =  r  r  r
+           6baf32e  =  e  e  =  =  =  =  =  =  =  =  =  r  r  r
+
+= the chords read as written, and the model may suggest the key's chords as the textbook spells them;
+e the same chords, spelled from the enharmonic key; x other chords; r a chord dropped or read as another chord
+a826864: 30 questions, = 15, e 4, x 6, r 5; a key of another scale tied at the top in 13 of the 25 read as written
+6baf32e: 30 questions, = 20, e 5, x 0, r 5; a key of another scale tied at the top in 13 of the 25 read as written
+
+C major, I vi IV: "What chord comes next after C Am F?"
+  a826864  reads C Am F; key: A minor / C major / D minor / F major (3/3)
+           may suggest: Am, Bdim, C, Dm, Em, F, G
+  6baf32e  reads C Am F; key: C major / F major / A minor / D minor (3/3)
+           may suggest: C, Dm, Em, F, G, Am, Bdim
+G major, I vi IV: "What chord comes next after G Em C?"
+  a826864  reads G Em C; key: A minor / C major / E minor / G major (3/3)
+           may suggest: Am, Bdim, C, Dm, Em, F, G
+  6baf32e  reads G Em C; key: G major / C major / A minor / E minor (3/3)
+           may suggest: G, Am, Bm, C, D, Em, F#dim
+Db major, I vi IV: "What chord comes next after Db Bbm Gb?"
+  a826864  reads Db Bbm Gb; key: A# minor / Bb minor / C# major / D# minor / Db major / Eb minor / F# major / Gb major (3/3)
+           may suggest: A#m, B#dim, C#, D#m, E#m, F#, G#
+  6baf32e  reads Db Bbm Gb; key: C# major / Db major / F# major / Gb major / A# minor / Bb minor / D# minor / Eb minor (3/3)
+           may suggest: C#, D#m, E#m, F#, G#, A#m, B#dim
+F# major, I vi IV: "What chord comes next after F# D#m B?"
+  a826864  reads F D#m B; key: Ab minor / B major / Cb major / D# minor / Eb minor / F# major / G# minor / Gb major (2/3)
+           may suggest: Abm, Bbdim, Cb, Dbm, Ebm, Fb, Gb
+  6baf32e  reads F D#m B; key: B major / Cb major / F# major / Gb major / Ab minor / D# minor / Eb minor / G# minor (2/3)
+           may suggest: B, C#m, D#m, E, F#, G#m, A#dim
+G# minor, i VI VII: "What chord comes next after G#m E F#?"
+  a826864  reads G#m E F; key: Ab minor / B major / C# minor / Cb major / E major / G# minor (2/3)
+           may suggest: Abm, Bbdim, Cb, Dbm, Ebm, Fb, Gb
+  6baf32e  reads G#m E F; key: Ab minor / G# minor / B major / Cb major / E major / C# minor (2/3)
+           may suggest: Abm, Bbdim, Cb, Dbm, Ebm, Fb, Gb
+
+== The dominant the list holds, in each key's own list
+15 major keys: the major triad on the fifth degree in 15, the minor one in 0
+15 minor keys: the major triad on the fifth degree in 0, the minor one in 15
+A minor: Am, Bdim, C, Dm, Em, F, G
+  the prompt's example suggests E7 ("V7-i"): E7 in the list: no; E: no
+  and G as a half cadence ("bVII-i"): G is degree 7 of the list; a half cadence ends on degree 5, Em
+
+== The pinned prompts, checked against ProgressionCompletionSkill.BuildPrompt
+36 questions: the prompt names the same keys and the same chords

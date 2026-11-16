@@ -17,6 +17,7 @@ sidebar:
 - [x] Traducciones al francés y al español
 - [x] Un pipeline de limpieza para modelos `.glb` generados en ComfyUI, probado con dos modelos de Hunyuan3D
 - [x] Dos modelos procedurales en `bpy`, comparados con los generados
+- [x] Cuatro figuras para la multitud de un motor de juego, su paso llevado en las UV
 - [ ] Lección 5: scripts con `bpy`
 
 ## QA
@@ -49,6 +50,7 @@ Cada fila es una pregunta que el curso midió. La hipótesis es la que quedó co
 | ¿Basta una vista previa en procesador con pocas muestras para juzgar un encuadre antes de gastar tiempo de GPU? | Escrita de antemano, en la entrada misma: una vista previa con pocas muestras basta para juzgar un encuadre. | 6,698 s y 7,025 s con 24 muestras; el primer encuadre ponía pilares atravesando los anillos focales y se rechazó a ojo. | Confirmada para el encuadre, no para la calidad final de la imagen | [2026-09-19](#2026-09-19--catedral-orbital-encuadre-antes-de-la-generación) · [`orbital_cathedral.py`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/scripts/orbital_cathedral.py) |
 | ¿Qué aporta modelar en `bpy` frente a imagen→3D, para los dos mismos objetos? | No escrita de antemano como predicción: la comparación era ella misma el objeto del ejercicio. | 3.370 y 5.950 triángulos frente a 890.140 y 1.017.760; 0 aristas no manifold frente a 19.084 y 189.748; piezas nombradas, materiales y animaciones, por unas 510 líneas. | Confirmada | [2026-09-22](#2026-09-22--modelar-en-bpy-frente-a-imagen3d) · [`atlas_check.py`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/scripts/atlas_check.py) |
 | ¿Vale una oclusión horneada por vértice sus 40 KB en una página en tiempo real? | Escrita de antemano: sí, sobre el término ambiental — por eso ese camino se midió primero. | Sobre el término ambiental, del 4 al 5 % de los píxeles se mueven una media de 1,2/255 — nada. Sobre el término difuso, con la exposición fijada, la dispersión de la luminancia crece de 1,44 a 1,95. | Refutada sobre el término ambiental, confirmada sobre el difuso | [2026-09-22](#2026-09-22--oclusión-horneada-en-los-vértices-y-distinguir-un-efecto-real-de-una-imagen-más-oscura) · scripts no publicados |
+| ¿La distancia de un vértice al centro distingue el brazo de una figura de su pierna? | No escrita de antemano como predicción: la primera versión del script lo suponía. | La parte alta de una pierna llega a 0,170 m del centro y el borde interior de un brazo en el hombro a 0,145 m: se solapan 0,025 m. Las UV marcan las extremidades en su lugar. | Refutada | [2026-10-04](#2026-10-04--una-multitud-para-un-motor-de-juego-su-paso-llevado-en-las-uv) · [`crowd_kit.py`](https://github.com/spareilleux/learn/blob/246c993/code/blender/scripts/crowd_kit.py) |
 
 ## 2026-09-16 — Versiones y configuración
 
@@ -168,6 +170,24 @@ La pregunta viene de otra página de este proyecto, el [Banc de Placement](../..
 - **Veredicto: confirmado.** La oclusión horneada por vértice compra aquí sombras de contacto reales, por unos 40 KB, pero solo en el segundo camino: sobre el término difuso, no sobre el ambiental solo.
 - **Dónde se detiene, al mismo nivel que el resultado.** Tres vistas de una sola escena. Y solo están horneados los 220 dibujos estáticos: una sombra horneada está pegada a su geometría, de modo que un objeto movido sobre un suelo horneado ni se lleva su sombra ni recibe ninguna. La técnica solo vale para lo que no se mueve, y quien la retome debe saberlo antes de presupuestar los bytes.
 - **Sin publicar.** El horneado, la página parcheada y el script de medición viven fuera del repositorio y no se publican; el artefacto mismo no se tocó.
+
+## 2026-10-04 — Una multitud para un motor de juego, su paso llevado en las UV
+
+Los jardines del palacio de la demo [Observatory](../../observatory/) recibieron una multitud dispersa en la versión 38: un centenar de personas que caminan a la vez en una página web. [Godot](https://godotengine.org/) dibuja cada tipo de figura como un solo [MultiMesh](https://docs.godotengine.org/en/stable/classes/class_multimesh.html), cada persona una instancia, y un vertex shader mueve las extremidades. Ese shader no ve ni esqueleto ni nombres de piezas, solo vértices: es la malla misma la que debe decir, vértice a vértice, qué se mueve y cómo. [`scripts/crowd_kit.py`](https://github.com/spareilleux/learn/blob/246c993/code/blender/scripts/crowd_kit.py) construye las cuatro figuras con cajas, tubos ahusados y esferas aplastadas, y escribe el paso en sus UV.
+
+| | Cortesano | Dama | Paseante | Jardinero |
+|---|---|---|---|---|
+| Triángulos | 436 | 392 | 380 | 412 |
+| Altura | 1,736 m | 1,745 m | 1,736 m | 1,790 m |
+| `.glb` | 19.384 bytes | 18.480 bytes | 17.900 bytes | 18.848 bytes |
+| Triángulos que se balancean como piernas (con los pies), como brazos (con las manos), como tela que cuelga | 64 bajo una túnica larga, 80, 48 | 64 bajo una túnica larga, 80, 48 | 64, 80, 20 | 64, 80, 20 |
+
+- **Las UV como canal.** Ninguna textura las lee: las figuras se colorean por instancia. `u` es el balanceo de una pierna, `+` para la izquierda y `−` para la derecha, su valor la zancada: 1, o 0,6 bajo una túnica larga, donde el paso es más corto. `±2` marca un brazo, que se balancea al contrario que la pierna de su lado. `v` dice cuánto cuelga una túnica bajo la cintura, 0 en la cintura y 1 en el dobladillo, para su vaivén.
+- **La primera idea, refutada.** Los brazos debían distinguirse de las piernas por la distancia de un vértice al centro. El [informe](https://github.com/spareilleux/learn/blob/246c993/code/blender/expected/crowd_kit.txt) muestra por qué no puede funcionar: la parte alta de una pierna llega a 0,170 m del centro y el borde interior de un brazo en el hombro a 0,145 m. Se solapan 0,025 m, así que el script marca los brazos con `±2`.
+- **glTF invierte `v`.** La `v` de glTF es 1 menos la de Blender: el script guarda 1 − peso y el motor lee el peso. Leídos de nuevo con el importador de Blender, que la vuelve a invertir, los tres materiales vuelven como una sola malla, y cada marca y cada peso quedan iguales.
+- **Tela suavizada.** Con sombreado plano, una túnica de doce caras se veía en el juego como doce franjas, una de ellas negra en la sombra. La piel y la tela van suavizadas; zapatos y sombreros quedan planos.
+- **Los mismos archivos.** La CI reconstruye las cuatro figuras con los demás scripts. En la máquina del autor, los archivos que escribe son, byte a byte, los de la versión publicada.
+- **Lo que el archivo no contiene.** Ni esqueleto ni animación: el paso vive en el shader del motor, que no está en este repositorio. Las caras están vacías a propósito, y ningún traje viene de una película o una serie.
 
 ## Por verificar
 

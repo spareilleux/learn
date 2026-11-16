@@ -1,0 +1,46 @@
+{
+  "plan": "code/streeling/evidence/publication-2026-10-29/plan.md",
+  "intent": "Show visible generated overview totals from real locale pages, dynamically count course links independently per controlled navigation tree on load and Astro navigation, and widen desktop sidebar while preserving the existing complete navigation and native modal accessibility.",
+  "head_sha": "d37df8408cce7c4f96c4bbfbff33f43f27d3618a",
+  "files_changed": 7,
+  "proof_tests": [
+    "scripts/tests/sync-streeling.test.mjs",
+    "scripts/tests/streeling-nav-counts.test.mjs"
+  ],
+  "standards_paths": {
+    "AGENTS.md": [
+      "scripts/sync-streeling.mjs",
+      "scripts/tests/sync-streeling.test.mjs",
+      "src/scripts/streeling-nav-counts.mjs",
+      "scripts/tests/streeling-nav-counts.test.mjs",
+      "src/components/Sidebar.astro",
+      "src/components/GlobalMenu.astro",
+      "src/styles/custom.css"
+    ],
+    "CLAUDE.md": [
+      "scripts/sync-streeling.mjs",
+      "scripts/tests/sync-streeling.test.mjs",
+      "src/scripts/streeling-nav-counts.mjs",
+      "scripts/tests/streeling-nav-counts.test.mjs",
+      "src/components/Sidebar.astro",
+      "src/components/GlobalMenu.astro",
+      "src/styles/custom.css"
+    ]
+  },
+  "base": "d37df8408cce7c4f96c4bbfbff33f43f27d3618a",
+  "exclusions": [
+    "Generated overview and hand-written journal documents outside named code scope.",
+    "Untracked code/streeling/evidence/publication-2026-10-29 is plan/evidence context only."
+  ],
+  "scope_mode": "local-aligned",
+  "plan_source": "explicit",
+  "branch": "codex/streeling-public-count-20261029",
+  "intent_confidence": "explicit",
+  "reviewer_models": {
+    "julik-frontend-races": "gpt-6.1-sol",
+    "project-standards": "gpt-6.1-sol",
+    "adversarial": "inherit",
+    "testing": "gpt-6.1-sol",
+    "correctness": "inherit"
+  }
+}

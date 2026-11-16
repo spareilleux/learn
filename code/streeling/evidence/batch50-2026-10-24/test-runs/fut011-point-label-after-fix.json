@@ -1,0 +1,86 @@
+{
+  "checked_at_utc": "2026-10-25T14:39:39.646793+00:00",
+  "tag": "fut011-point-label-after-fix",
+  "mode": "after",
+  "command": [
+    "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+    "-X",
+    "utf8",
+    "C:\\tmp\\streeling-batch50-point-label-probe-20261025.py",
+    "fut011-point-label-after-fix",
+    "after"
+  ],
+  "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+  "exit_code": 0,
+  "passed": true,
+  "observations": {
+    "course": "FUT011",
+    "supplied_point_widths": [
+      "5/2",
+      "19/10",
+      "21/10",
+      "9/5",
+      "11/10",
+      "7/5",
+      "5/2"
+    ],
+    "actual_interval_midpoints": [
+      "12/5",
+      "19/10",
+      "21/10",
+      "9/5",
+      "6/5",
+      "7/5",
+      "5/2"
+    ],
+    "nonmidpoint_samples": [
+      1,
+      5
+    ],
+    "all_supplied_points_admissible": true,
+    "supplied_replay": {
+      "states": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true
+      ],
+      "switches": 3
+    },
+    "midpoint_replay": {
+      "states": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "switches": 1
+    },
+    "assumptions": [
+      "Widths already supplied, not measured",
+      "Ordered samples and explicit initial state",
+      "True means mesh representation; false means texture",
+      "Closed independent per-sample intervals are authored feasible footprint sets, not calibrated confidence intervals; supplied point widths lie within their respective intervals but are not necessarily midpoints",
+      "Reachable-state sets propagate all admissible previous states; robust replay is a separate conservative policy, not a claim of equality with the unknown exact-width policy"
+    ]
+  },
+  "input_bindings": [
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-24/unit-c.json",
+      "sha256": "1805f12e9f6257fad9706c4435468c1463aa2372afeec5f39beefebb04477d0e"
+    },
+    {
+      "path": "C:\\tmp\\streeling-batch50-point-label-probe-20261025.py",
+      "sha256": "6409139cff8edc97bb79b76f4ff7a56dbc577b285e8fd3b28a2a4126d66f24e7"
+    }
+  ],
+  "log": "code/streeling/evidence/batch50-2026-10-24/test-runs/fut011-point-label-after-fix.log",
+  "log_sha256": "b673516733843b75073e67657a4b891fe611bca980410a33e918a780f74b8148",
+  "scope": "Actual authored classroom data, exact decimal rational arithmetic. Before: real supplied-point/midpoint interpretation defect, not a deliberately mutated input. After: corrected admissible-point claim, not an engine or learner observation."
+}

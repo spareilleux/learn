@@ -64,16 +64,52 @@ export const GET: APIRoute = async () => {
 		return { id: dir, title: translate(group), description, lessons, unit: auto ? 'lessons' : 'pages', url };
 	}
 
+	// The courses of a university that nests them in departments (Streeling University): each page of
+	// a department is a course of its own, a book in its bay, in the sidebar's order. group names its
+	// department, code its catalogue number (AUD-001) and spine the short title its spine carries;
+	// the title, description and URL are each locale's page, or the English one where a page is not
+	// translated yet (the site serves the English text at the translated address). A department with
+	// no page yet in English has no book.
+	function departments(group: Item) {
+		return (group.items ?? []).flatMap((item) => {
+			const dir = item.items?.find((sub) => sub.autogenerate)?.autogenerate?.directory;
+			if (!dir) return [];
+			const pages = docs
+				.filter((entry) => entry.id.startsWith(`${dir}/`) && !/\/(index|journal)$/.test(entry.id))
+				.sort((a, b) => (a.data.sidebar?.order ?? 0) - (b.data.sidebar?.order ?? 0) || a.id.localeCompare(b.id));
+			return pages.map((page) => {
+				const code = page.data.sidebar?.label?.split(' · ')[0] ?? '';
+				const title: Record<string, string> = {};
+				const spine: Record<string, string> = {};
+				const description: Record<string, string> = {};
+				const lessons: Record<string, number> = {};
+				const url: Record<string, string> = {};
+				for (const { prefix, lang } of LOCALES) {
+					const entry = byId.get(`${prefix}${page.id}`) ?? page;
+					const label = entry.data.sidebar?.label ?? '';
+					title[lang] = entry.data.title;
+					spine[lang] = label.includes(' · ') ? label.split(' · ').slice(1).join(' · ') : entry.data.title;
+					description[lang] = (entry.data.description as string | undefined) ?? '';
+					lessons[lang] = 1;
+					url[lang] = `${prefix}${page.id}/`;
+				}
+				return { id: page.id, title, spine, group: translate(item), code, description, lessons, unit: 'lessons', url };
+			});
+		});
+	}
+
 	// Walk the sidebar: a course joins the area named by its ancestors, and a course at the top level
-	// (Streeling University) is an area of its own. Plain pages (Method, Artifacts, the observatory)
-	// and links are not courses.
+	// (Streeling University) is an area of its own, whose departments' courses are its books. Plain
+	// pages (Method, Artifacts, the observatory) and links are not courses.
 	function walk(items: Item[], path: Item[]) {
 		const courses: object[] = [];
 		for (const item of items) {
 			if (!item.items) continue;
 			const found = courseDir(item);
-			if (found && path.length === 0) areas.push({ label: translate(item), courses: [course(item, found)] });
-			else if (found) courses.push(course(item, found));
+			if (found && path.length === 0) {
+				const nested = found.auto ? [] : departments(item);
+				areas.push({ label: translate(item), courses: nested.length > 0 ? nested : [course(item, found)] });
+			} else if (found) courses.push(course(item, found));
 			else walk(item.items, [...path, item]);
 		}
 		if (courses.length === 0) return;

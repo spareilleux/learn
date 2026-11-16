@@ -1,0 +1,25 @@
+# bash retest/recheck.sh 5.3.1 — Ubuntu 26.04 under WSL2, Node v24.12.0 from nodejs.org (SHA-256 checked), 2026-10-10
+node v24.12.0, Linux, slashforge 5.3.1
+tag v5.3.1 at c39064495ce1feb45c9d0612ef2f028d6627594b
+npm package bin/ == tag bin/
+npm package templates/ == tag templates/
+dry run lists 127, install writes 127
+  written, not announced: 0
+  announced, not written: 0
+files per root: .agents 82  .claude 45  
+dry-run labels: 109 render, 6 copy, 12 write
+closing message names /slashforge-test or /slashforge-refactor: 2 lines
+status lists 8 Claude Code commands
+disable-model-invocation: 0 of 17 Claude Code files, 8 of 17 Cursor and Codex skills
+warnings on a --project install with a global one present: 2
+uninstall with no terminal: Refusing to uninstall without a terminal to confirm on. Re-run with --yes to remove the kit. (exit 1)
+left after uninstall --yes, from two files of mine: ./.claude/setup/slashforge/my-notes.md 
+frontmatter, folded-description: install exit 0
+frontmatter, fence-trailing-space: install exit 0
+  over 200: 210 .claude/commands/mine.md
+  over 200: 250 .claude/rules/api.md
+  over 500: 600 .claude/skills/big/SKILL.md
+step 9 exit 1
+node --test: exit 0, wall 2.5 s
+# tests 282 # pass 275 # fail 0 # skipped 7 
+slowest: 118.302597 status and a project install warn when a global install shadows the project one

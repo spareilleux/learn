@@ -1,0 +1,137 @@
+{
+  "status": "Prepared; no learner attempt or human verdict recorded.",
+  "scope": "One overlapping, source-assisted task per existing module; no causal learning, independent transfer, full-course mastery or live runtime claim.",
+  "scoring": {
+    "0": "Incorrect or unsupported conclusion.",
+    "1": "Core answer correct but omits a requested evidence condition, unit or limitation.",
+    "2": "Core answer and requested limitations correct; retain reviewer reasoning."
+  },
+  "tasks": [
+    {
+      "module": "CS-005",
+      "source_path": "streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md",
+      "source_sha256": "34b464061549b75e54058e76896bbec739e197a1f8cf7e54b837a5698e01f531",
+      "stimulus_markdown": "Inspect these exact bridge and guidance files. The task supplies no test execution log or live checkout observation.",
+      "primary_sources": [
+        {
+          "label": "Pinned bridge",
+          "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Scripts/antigravity-bridge.ps1"
+        },
+        {
+          "label": "Pinned workspace guidance",
+          "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/CLAUDE.md"
+        }
+      ],
+      "prompt": "From the pinned bridge source, list three fields generated from Git and three things that a receiver still needs to obtain independently before treating “tests passed” as a verified result.",
+      "expected_answer": "The script generates `branch`, abbreviated `head`, and `working_tree_dirty_lines`. The receiver still needs the full commit SHA (and current checkout), the exact test command with a result tied to that revision, and the actual diff or artifact plus its location and identity. The free-text message can name these, but the script does not verify them.",
+      "learner_attempt": null,
+      "reviewer_score": null,
+      "reviewer_reasoning": null
+    },
+    {
+      "module": "CS-006",
+      "source_path": "streeling/courses/computer-science/en/cs-006-ixql-pipeline-composition.md",
+      "source_sha256": "7077ccb18a5e5ac03bc3d0e0eaa89dc12e4c64ec09abcd143967da515f484117",
+      "stimulus_markdown": "The first declaration in the explanatory excerpt is:\n\n```ixql\ndepartments <- ix.io.read(\"state/streeling/departments/*.department.json\")\n```\n\nThe excerpt is a source declaration, not a run trace. Its full example and grammar are available as inputs.",
+      "primary_sources": [
+        {
+          "label": "Pinned example",
+          "url": "https://github.com/GuitarAlchemist/Demerzel/blob/0220ca84a25f59973bd6b9236cc00b7f68631a50/examples/ixql/research-to-course.ixql"
+        },
+        {
+          "label": "Pinned grammar",
+          "url": "https://github.com/GuitarAlchemist/Demerzel/blob/0220ca84a25f59973bd6b9236cc00b7f68631a50/grammars/sci-ml-pipelines.ebnf"
+        }
+      ],
+      "prompt": "In the first line, what is bound to `departments`, and what evidence would prove the read succeeded in a real run? Does the line itself supply that evidence?",
+      "expected_answer": "It binds the declared result of reading department JSON files matching the path. A real run would need a trace or receipt showing the resolved paths, input revisions or hashes, success or failure, and returned shape. The line describes the read but supplies none of that runtime evidence.",
+      "learner_attempt": null,
+      "reviewer_score": null,
+      "reviewer_reasoning": null
+    },
+    {
+      "module": "VC-002",
+      "source_path": "streeling/courses/visual-computing/en/vc-002-godot-react-bridge-evidence.md",
+      "source_sha256": "aa5e1f7baeea211521c44ac7ee406be35d810d9386484d2d99e774a88afd2e56",
+      "stimulus_markdown": "Use the pinned React component and integration plan as source inputs. No scene capture, exported build, callback log or DLSS measurement is supplied.",
+      "primary_sources": [
+        {
+          "label": "Pinned iframe host",
+          "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/ReactComponents/ga-react-components/src/components/PrimeRadiant/GodotScene.tsx"
+        },
+        {
+          "label": "Pinned integration plan",
+          "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/docs/plans/parked/2026-03-28-feat-godot-integration-plan.md"
+        }
+      ],
+      "prompt": "Classify each claim as **source-supported**, **planned or unverified**, or **requires a live run**: (a) React declares an iframe defaulting to `/godot/index.html`; (b) the Godot gravity scene renders policy nodes; (c) clicking a real Godot node selects the corresponding React record; (d) forked DLSS improves the observatory image.",
+      "expected_answer": "(a) is source-supported by the pinned React component. (b) is a planned scene with unchecked work in the pinned plan. (c) requires a real scene/export and an observed callback trace; the host declaration alone cannot prove it. (d) is unverified in the inspected tree and requires a separately identified implementation and measurement.",
+      "learner_attempt": null,
+      "reviewer_score": null,
+      "reviewer_reasoning": null
+    },
+    {
+      "module": "VC-004",
+      "source_path": "streeling/courses/visual-computing/en/vc-004-godot-observatory-capture-gate.md",
+      "source_sha256": "670c1ad35ba5231fe812e3b4144934ae5bd56faad92b2177bd4bb73a87c0eaa7",
+      "stimulus_markdown": "Use the host declaration and plan below. No actual capture manifest, repeated PNGs or readability task result is supplied.",
+      "primary_sources": [
+        {
+          "label": "Pinned iframe host",
+          "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/ReactComponents/ga-react-components/src/components/PrimeRadiant/GodotScene.tsx"
+        },
+        {
+          "label": "Pinned integration plan",
+          "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/docs/plans/parked/2026-03-28-feat-godot-integration-plan.md"
+        }
+      ],
+      "prompt": "Classify these statements as **source-supported**, **planned**, or **requires a run**: (a) the host declares an iframe defaulting to `/godot/index.html`; (b) the constitutional-gravity scene has been captured three times in the same browser; (c) the pinned plan includes a screenshot-to-critic loop; (d) a new camera pose improves node readability.",
+      "expected_answer": "(a) is source-supported by `GodotScene.tsx`. (c) is planned in unchecked Phase 5. (b) requires a real export, browser, and three saved captures; none was observed here. (d) requires a defined readability task and comparison data. A plan entry or iframe source string does not satisfy those observations.",
+      "learner_attempt": null,
+      "reviewer_score": null,
+      "reviewer_reasoning": null
+    },
+    {
+      "module": "VC-005",
+      "source_path": "streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md",
+      "source_sha256": "5fbad318a7815657d4cc1be13c1d6a7c265a732e3121d901bd35c994c9227d8d",
+      "stimulus_markdown": "Inspect the sample pipeline, checker and checked-in report as separate artifacts. No woven-node GLB or Godot import receipt is supplied.",
+      "primary_sources": [
+        {
+          "label": "Pinned cleanup pipeline",
+          "url": "https://github.com/spareilleux/learn/blob/93d424f872a576ba8bbcd3dd44c9733292373654/code/blender/scripts/glb_pipeline.py"
+        },
+        {
+          "label": "Pinned sample checker",
+          "url": "https://github.com/spareilleux/learn/blob/93d424f872a576ba8bbcd3dd44c9733292373654/code/blender/scripts/pipeline_check.py"
+        },
+        {
+          "label": "Pinned reference report",
+          "url": "https://github.com/spareilleux/learn/blob/93d424f872a576ba8bbcd3dd44c9733292373654/code/blender/expected/pipeline_check.txt"
+        }
+      ],
+      "prompt": "A colleague says, “The Learn cleanup report proves our woven node is safe in Godot.” Which part is supported, and what is still missing?",
+      "expected_answer": "The source and expected report show that a sample guitar-pick mesh can be processed under declared Blender settings. They do not contain a woven-node asset or a Godot import. To test the claim, version the candidate `.glb`, record its source and cleanup settings, import it into a versioned Godot scene, capture the intended views, and run a feature-recognition task against a baseline. The checked-in report alone cannot certify that a knot remains recognizable.",
+      "learner_attempt": null,
+      "reviewer_score": null,
+      "reviewer_reasoning": null
+    },
+    {
+      "module": "VC-007",
+      "source_path": "streeling/courses/visual-computing/en/vc-007-weave-seams-as-scene-contracts.md",
+      "source_sha256": "7fb0cf78216e9a35e4b27d84bb9327efe1f8aa42f3bb861d4e9bee8200e0c2a5",
+      "stimulus_markdown": "Synthetic rule: use global integer coordinates `(x,y)`, `phase = 0`, crossing ID `w<x>-f<y>`, and warp-over iff `(x+y+phase) % 2 == 0`; otherwise weft-over. No mesh or rendered scene is supplied. The program input remains available.",
+      "primary_sources": [
+        {
+          "label": "Pinned trial input",
+          "url": "https://github.com/GuitarAlchemist/Demerzel/blob/17f82a4b4b913d7c64942a3d3ff670abf4e6f85c/state/streeling/fixtures/visual-computing/vc-007/weave-trial.json"
+        }
+      ],
+      "prompt": "Under phase zero, what are the IDs and over/under values at `(2, 0)` and `(3, 0)`? Why must the IDs be assigned before the scene is rendered?",
+      "expected_answer": "The IDs are `w2-f0` and `w3-f0`. Since `2 + 0` is even, warp is over at `w2-f0`; since `3 + 0` is odd, weft is over at `w3-f0`. Stable IDs let an import test compare the scene to the source manifest and locate a wrong crossing. A screenshot alone cannot establish which crossing a visible highlight represents.",
+      "learner_attempt": null,
+      "reviewer_score": null,
+      "reviewer_reasoning": null
+    }
+  ]
+}

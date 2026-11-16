@@ -1,0 +1,59 @@
+{
+  "status": "pass",
+  "unit": "c",
+  "coverage": {
+    "courses": 16,
+    "localized_sources": 48,
+    "exercise_answer_pairs": 240,
+    "learner_criteria": 80
+  },
+  "source_bindings_checked": 48,
+  "supporting_bindings_checked": 13,
+  "baseline_blob_bindings_checked": 20,
+  "unittest_methods": [
+    "test_phy022",
+    "test_phy023",
+    "test_phy024",
+    "test_vc020",
+    "test_vc021",
+    "test_vc022",
+    "test_dv020",
+    "test_dv021",
+    "test_dv022",
+    "test_sem018",
+    "test_sem019",
+    "test_sem020",
+    "test_phi014",
+    "test_phi015",
+    "test_fut014",
+    "test_fut015"
+  ],
+  "observation_rows": 32,
+  "co_mutated_wrong_input_rejected": true,
+  "review_sha256": "27e38ad6fddc604ad727a55a59d3a582f8e8ef9fd3b6d43253282cd4c3a06322",
+  "content_diagnostic": {
+    "kind": "Retrospective mathematical check of preserved original prose, not a failing canonical numeric model or deliberate input mutant.",
+    "original_claim": "Silently discarding a zero run changes the motif\u2019s period and phase addresses instead of rejecting the malformed authored instruction.",
+    "valid_sum": 6,
+    "malformed_sum": 5,
+    "after_zero_deletion_sum": 5,
+    "expanded_before_zero_deletion": [
+      "warp",
+      "warp",
+      "warp",
+      "warp",
+      "warp"
+    ],
+    "expanded_after_zero_deletion": [
+      "warp",
+      "warp",
+      "warp",
+      "warp",
+      "warp"
+    ],
+    "deletion_changes_sum": false,
+    "deletion_changes_expansion": false,
+    "correction": "Changing 1 to 0 caused the sum change from 6 to 5. Deletion adds no arithmetic change; refusal follows from the declared positive-run/provenance contract."
+  },
+  "scope": "Artifact consistency and actual-byte audit after completed manual reading/calculations; not a replacement for those substantive reviews."
+}

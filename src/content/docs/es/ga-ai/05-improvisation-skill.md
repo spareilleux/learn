@@ -216,7 +216,7 @@ El oráculo tampoco comprueba el resto de la teoría acorde–escala: las tensio
 ## Comunicado upstream
 
 - Las escalas ciegas a la tonalidad de la vía de progresión: issue de GA [#744](https://github.com/GuitarAlchemist/ga/issues/744), abierta el 2026-09-28 a partir de un tracer ejecutado contra el chatbot público, con los casos Am F C G y C A Dm G de esta lección.
-- Los defectos de "Un acorde cada vez", el tokenizador, el orden de `InferQuality`, los acordes suspendidos y de quinta desconocidos y el arpegio de `m6`: no se habían comunicado upstream cuando se escribió esta lección. Están listados en el [diario](../journal/).
+- Los defectos de "Un acorde cada vez", el tokenizador, el orden de `InferQuality`, los acordes suspendidos y de quinta desconocidos y el arpegio de `m6`: se comunicaron después de escribir esta lección, el tokenizador en la issue de GA [#757](https://github.com/GuitarAlchemist/ga/issues/757) y los demás en la [#758](https://github.com/GuitarAlchemist/ga/issues/758). Están listados en el [diario](../journal/).
 
 ## Ejercicios
 

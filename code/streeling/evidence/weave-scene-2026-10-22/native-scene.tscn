@@ -1,0 +1,1209 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_waucl"]
+albedo_color = Color(0.2509804, 0.43529412, 0.627451, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jk82c"]
+size = Vector3(0.002, 0.002, 0.004)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ly8rt"]
+size = Vector3(0.002, 0.002, 0.004)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iksmk"]
+albedo_color = Color(0.84705883, 0.6392157, 0.3019608, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_douni"]
+size = Vector3(0.004, 0.002, 0.002)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_os7eo"]
+size = Vector3(0.004, 0.002, 0.002)
+
+[node name="Weave" type="Node3D" unique_id=2041821385]
+metadata/source_manifest_sha256 = "05ff96258db853cfdf31bbe53f4589e0a4d088045449035036123a0577056ab1"
+
+[node name="w0-f0" type="Node3D" parent="." unique_id=771426931]
+metadata/crossing_id = "w0-f0"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w0-f0" unique_id=889772683]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w0-f0"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w0-f0/warp" unique_id=836179204]
+metadata/crossing_id = "w0-f0"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w0-f0/warp/Body" unique_id=1984050436]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w0-f0" unique_id=44696317]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w0-f0"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w0-f0/weft" unique_id=726394794]
+metadata/crossing_id = "w0-f0"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w0-f0/weft/Body" unique_id=859975830]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w1-f0" type="Node3D" parent="." unique_id=2106845027]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0050000004, 0, 0)
+metadata/crossing_id = "w1-f0"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w1-f0" unique_id=91473378]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w1-f0"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w1-f0/warp" unique_id=1706899601]
+metadata/crossing_id = "w1-f0"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w1-f0/warp/Body" unique_id=1542580112]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w1-f0" unique_id=1116477845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w1-f0"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w1-f0/weft" unique_id=112124151]
+metadata/crossing_id = "w1-f0"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w1-f0/weft/Body" unique_id=10331070]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w2-f0" type="Node3D" parent="." unique_id=759956509]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010000001, 0, 0)
+metadata/crossing_id = "w2-f0"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w2-f0" unique_id=1593443932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w2-f0"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w2-f0/warp" unique_id=404990884]
+metadata/crossing_id = "w2-f0"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w2-f0/warp/Body" unique_id=799990262]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w2-f0" unique_id=379533210]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w2-f0"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w2-f0/weft" unique_id=781918850]
+metadata/crossing_id = "w2-f0"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w2-f0/weft/Body" unique_id=1768897897]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w3-f0" type="Node3D" parent="." unique_id=1345635659]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015000001, 0, 0)
+metadata/crossing_id = "w3-f0"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w3-f0" unique_id=221767484]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w3-f0"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w3-f0/warp" unique_id=693109098]
+metadata/crossing_id = "w3-f0"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w3-f0/warp/Body" unique_id=69819441]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w3-f0" unique_id=445276277]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w3-f0"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w3-f0/weft" unique_id=1879313862]
+metadata/crossing_id = "w3-f0"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w3-f0/weft/Body" unique_id=1948019529]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w4-f0" type="Node3D" parent="." unique_id=1758719319]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.020000001, 0, 0)
+metadata/crossing_id = "w4-f0"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w4-f0" unique_id=1159064992]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w4-f0"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w4-f0/warp" unique_id=14913512]
+metadata/crossing_id = "w4-f0"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w4-f0/warp/Body" unique_id=2091637282]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w4-f0" unique_id=682070704]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w4-f0"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w4-f0/weft" unique_id=100591895]
+metadata/crossing_id = "w4-f0"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w4-f0/weft/Body" unique_id=1231489824]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w5-f0" type="Node3D" parent="." unique_id=217840188]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025, 0, 0)
+metadata/crossing_id = "w5-f0"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w5-f0" unique_id=2100238934]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w5-f0"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w5-f0/warp" unique_id=1380664917]
+metadata/crossing_id = "w5-f0"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w5-f0/warp/Body" unique_id=2058628024]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w5-f0" unique_id=805812699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w5-f0"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w5-f0/weft" unique_id=448321094]
+metadata/crossing_id = "w5-f0"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w5-f0/weft/Body" unique_id=276647683]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w0-f1" type="Node3D" parent="." unique_id=174490149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0050000004)
+metadata/crossing_id = "w0-f1"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w0-f1" unique_id=1334775261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w0-f1"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w0-f1/warp" unique_id=862802560]
+metadata/crossing_id = "w0-f1"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w0-f1/warp/Body" unique_id=1634106537]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w0-f1" unique_id=885724049]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w0-f1"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w0-f1/weft" unique_id=890154495]
+metadata/crossing_id = "w0-f1"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w0-f1/weft/Body" unique_id=190000250]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w1-f1" type="Node3D" parent="." unique_id=1470079974]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0050000004, 0, 0.0050000004)
+metadata/crossing_id = "w1-f1"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w1-f1" unique_id=252859387]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w1-f1"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w1-f1/warp" unique_id=1780911051]
+metadata/crossing_id = "w1-f1"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w1-f1/warp/Body" unique_id=1629938050]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w1-f1" unique_id=253862633]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w1-f1"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w1-f1/weft" unique_id=1587062047]
+metadata/crossing_id = "w1-f1"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w1-f1/weft/Body" unique_id=1121073036]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w2-f1" type="Node3D" parent="." unique_id=1011932945]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010000001, 0, 0.0050000004)
+metadata/crossing_id = "w2-f1"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w2-f1" unique_id=160355378]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w2-f1"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w2-f1/warp" unique_id=63312937]
+metadata/crossing_id = "w2-f1"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w2-f1/warp/Body" unique_id=38238669]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w2-f1" unique_id=2061418406]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w2-f1"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w2-f1/weft" unique_id=1648551644]
+metadata/crossing_id = "w2-f1"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w2-f1/weft/Body" unique_id=1887801941]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w3-f1" type="Node3D" parent="." unique_id=1259272547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015000001, 0, 0.0050000004)
+metadata/crossing_id = "w3-f1"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w3-f1" unique_id=2026122079]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w3-f1"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w3-f1/warp" unique_id=1596164909]
+metadata/crossing_id = "w3-f1"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w3-f1/warp/Body" unique_id=1885942441]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w3-f1" unique_id=313155341]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w3-f1"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w3-f1/weft" unique_id=26987646]
+metadata/crossing_id = "w3-f1"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w3-f1/weft/Body" unique_id=1789594772]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w4-f1" type="Node3D" parent="." unique_id=1202812681]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.020000001, 0, 0.0050000004)
+metadata/crossing_id = "w4-f1"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w4-f1" unique_id=1466860901]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w4-f1"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w4-f1/warp" unique_id=1445084534]
+metadata/crossing_id = "w4-f1"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w4-f1/warp/Body" unique_id=1691954008]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w4-f1" unique_id=666866128]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w4-f1"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w4-f1/weft" unique_id=920879337]
+metadata/crossing_id = "w4-f1"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w4-f1/weft/Body" unique_id=1606874334]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w5-f1" type="Node3D" parent="." unique_id=358880326]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025, 0, 0.0050000004)
+metadata/crossing_id = "w5-f1"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w5-f1" unique_id=488121587]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w5-f1"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w5-f1/warp" unique_id=61014169]
+metadata/crossing_id = "w5-f1"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w5-f1/warp/Body" unique_id=420735181]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w5-f1" unique_id=395220994]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w5-f1"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w5-f1/weft" unique_id=1861188918]
+metadata/crossing_id = "w5-f1"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w5-f1/weft/Body" unique_id=1212010265]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w0-f2" type="Node3D" parent="." unique_id=1054673816]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.010000001)
+metadata/crossing_id = "w0-f2"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w0-f2" unique_id=1180411555]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w0-f2"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w0-f2/warp" unique_id=1026019423]
+metadata/crossing_id = "w0-f2"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w0-f2/warp/Body" unique_id=597261012]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w0-f2" unique_id=1816674769]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w0-f2"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w0-f2/weft" unique_id=1255465313]
+metadata/crossing_id = "w0-f2"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w0-f2/weft/Body" unique_id=1046191165]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w1-f2" type="Node3D" parent="." unique_id=459071694]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0050000004, 0, 0.010000001)
+metadata/crossing_id = "w1-f2"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w1-f2" unique_id=1058975671]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w1-f2"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w1-f2/warp" unique_id=1518408253]
+metadata/crossing_id = "w1-f2"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w1-f2/warp/Body" unique_id=2091592663]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w1-f2" unique_id=11243289]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w1-f2"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w1-f2/weft" unique_id=1860101475]
+metadata/crossing_id = "w1-f2"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w1-f2/weft/Body" unique_id=396049390]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w2-f2" type="Node3D" parent="." unique_id=1751212156]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010000001, 0, 0.010000001)
+metadata/crossing_id = "w2-f2"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w2-f2" unique_id=1429847632]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w2-f2"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w2-f2/warp" unique_id=1408437100]
+metadata/crossing_id = "w2-f2"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w2-f2/warp/Body" unique_id=90782815]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w2-f2" unique_id=796090880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w2-f2"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w2-f2/weft" unique_id=484815656]
+metadata/crossing_id = "w2-f2"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w2-f2/weft/Body" unique_id=1006670891]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w3-f2" type="Node3D" parent="." unique_id=337254998]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015000001, 0, 0.010000001)
+metadata/crossing_id = "w3-f2"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w3-f2" unique_id=1478727358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w3-f2"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w3-f2/warp" unique_id=538997138]
+metadata/crossing_id = "w3-f2"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w3-f2/warp/Body" unique_id=1759206746]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w3-f2" unique_id=1970147544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w3-f2"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w3-f2/weft" unique_id=1023457926]
+metadata/crossing_id = "w3-f2"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w3-f2/weft/Body" unique_id=1725354699]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w4-f2" type="Node3D" parent="." unique_id=1391525450]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.020000001, 0, 0.010000001)
+metadata/crossing_id = "w4-f2"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w4-f2" unique_id=512384098]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w4-f2"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w4-f2/warp" unique_id=1650437401]
+metadata/crossing_id = "w4-f2"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w4-f2/warp/Body" unique_id=1009282607]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w4-f2" unique_id=626253773]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w4-f2"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w4-f2/weft" unique_id=213171332]
+metadata/crossing_id = "w4-f2"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w4-f2/weft/Body" unique_id=144914183]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w5-f2" type="Node3D" parent="." unique_id=1790064089]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025, 0, 0.010000001)
+metadata/crossing_id = "w5-f2"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w5-f2" unique_id=597160538]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w5-f2"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w5-f2/warp" unique_id=1594770434]
+metadata/crossing_id = "w5-f2"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w5-f2/warp/Body" unique_id=368990948]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w5-f2" unique_id=842810147]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w5-f2"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w5-f2/weft" unique_id=1824984916]
+metadata/crossing_id = "w5-f2"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w5-f2/weft/Body" unique_id=884887175]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w0-f3" type="Node3D" parent="." unique_id=1188722951]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.015000001)
+metadata/crossing_id = "w0-f3"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w0-f3" unique_id=1744940929]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w0-f3"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w0-f3/warp" unique_id=1300876425]
+metadata/crossing_id = "w0-f3"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w0-f3/warp/Body" unique_id=1750808542]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w0-f3" unique_id=1779362815]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w0-f3"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w0-f3/weft" unique_id=1691949652]
+metadata/crossing_id = "w0-f3"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w0-f3/weft/Body" unique_id=1000989168]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w1-f3" type="Node3D" parent="." unique_id=1861837145]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0050000004, 0, 0.015000001)
+metadata/crossing_id = "w1-f3"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w1-f3" unique_id=849681209]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w1-f3"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w1-f3/warp" unique_id=1865585058]
+metadata/crossing_id = "w1-f3"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w1-f3/warp/Body" unique_id=299333545]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w1-f3" unique_id=707617429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w1-f3"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w1-f3/weft" unique_id=1966106671]
+metadata/crossing_id = "w1-f3"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w1-f3/weft/Body" unique_id=334285370]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w2-f3" type="Node3D" parent="." unique_id=1595529122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010000001, 0, 0.015000001)
+metadata/crossing_id = "w2-f3"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w2-f3" unique_id=1212073203]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w2-f3"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w2-f3/warp" unique_id=1125853217]
+metadata/crossing_id = "w2-f3"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w2-f3/warp/Body" unique_id=1551469968]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w2-f3" unique_id=1669259021]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w2-f3"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w2-f3/weft" unique_id=974636288]
+metadata/crossing_id = "w2-f3"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w2-f3/weft/Body" unique_id=1177870643]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w3-f3" type="Node3D" parent="." unique_id=326046843]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015000001, 0, 0.015000001)
+metadata/crossing_id = "w3-f3"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w3-f3" unique_id=873890387]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w3-f3"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w3-f3/warp" unique_id=1727195328]
+metadata/crossing_id = "w3-f3"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w3-f3/warp/Body" unique_id=632406917]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w3-f3" unique_id=1015031695]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w3-f3"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w3-f3/weft" unique_id=936030020]
+metadata/crossing_id = "w3-f3"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w3-f3/weft/Body" unique_id=1905938877]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w4-f3" type="Node3D" parent="." unique_id=545308777]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.020000001, 0, 0.015000001)
+metadata/crossing_id = "w4-f3"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w4-f3" unique_id=1816036432]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w4-f3"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w4-f3/warp" unique_id=1194454189]
+metadata/crossing_id = "w4-f3"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w4-f3/warp/Body" unique_id=608645513]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w4-f3" unique_id=1940816419]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w4-f3"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w4-f3/weft" unique_id=1402331283]
+metadata/crossing_id = "w4-f3"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w4-f3/weft/Body" unique_id=1113252389]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w5-f3" type="Node3D" parent="." unique_id=1952178955]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025, 0, 0.015000001)
+metadata/crossing_id = "w5-f3"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w5-f3" unique_id=25016379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w5-f3"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w5-f3/warp" unique_id=1032583371]
+metadata/crossing_id = "w5-f3"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w5-f3/warp/Body" unique_id=352000435]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w5-f3" unique_id=1842993747]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w5-f3"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w5-f3/weft" unique_id=1723447637]
+metadata/crossing_id = "w5-f3"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w5-f3/weft/Body" unique_id=253674721]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w0-f4" type="Node3D" parent="." unique_id=1578076304]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.020000001)
+metadata/crossing_id = "w0-f4"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w0-f4" unique_id=1122409844]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w0-f4"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w0-f4/warp" unique_id=1347743756]
+metadata/crossing_id = "w0-f4"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w0-f4/warp/Body" unique_id=856470869]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w0-f4" unique_id=1534819666]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w0-f4"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w0-f4/weft" unique_id=1848657570]
+metadata/crossing_id = "w0-f4"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w0-f4/weft/Body" unique_id=341615347]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w1-f4" type="Node3D" parent="." unique_id=1151567175]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0050000004, 0, 0.020000001)
+metadata/crossing_id = "w1-f4"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w1-f4" unique_id=1340747838]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w1-f4"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w1-f4/warp" unique_id=1764407119]
+metadata/crossing_id = "w1-f4"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w1-f4/warp/Body" unique_id=1347722167]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w1-f4" unique_id=236044385]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w1-f4"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w1-f4/weft" unique_id=1965488420]
+metadata/crossing_id = "w1-f4"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w1-f4/weft/Body" unique_id=1977707246]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w2-f4" type="Node3D" parent="." unique_id=799796521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010000001, 0, 0.020000001)
+metadata/crossing_id = "w2-f4"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w2-f4" unique_id=1251802439]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w2-f4"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w2-f4/warp" unique_id=2033436253]
+metadata/crossing_id = "w2-f4"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w2-f4/warp/Body" unique_id=754701406]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w2-f4" unique_id=1068494057]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w2-f4"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w2-f4/weft" unique_id=1360536434]
+metadata/crossing_id = "w2-f4"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w2-f4/weft/Body" unique_id=1030402617]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w3-f4" type="Node3D" parent="." unique_id=312810937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015000001, 0, 0.020000001)
+metadata/crossing_id = "w3-f4"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w3-f4" unique_id=1382407454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w3-f4"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w3-f4/warp" unique_id=767189033]
+metadata/crossing_id = "w3-f4"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w3-f4/warp/Body" unique_id=805827230]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w3-f4" unique_id=515036640]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w3-f4"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w3-f4/weft" unique_id=1256946820]
+metadata/crossing_id = "w3-f4"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w3-f4/weft/Body" unique_id=2050333853]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w4-f4" type="Node3D" parent="." unique_id=1409124777]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.020000001, 0, 0.020000001)
+metadata/crossing_id = "w4-f4"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w4-f4" unique_id=494685]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w4-f4"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w4-f4/warp" unique_id=1645091464]
+metadata/crossing_id = "w4-f4"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w4-f4/warp/Body" unique_id=1281567190]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w4-f4" unique_id=1668880304]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w4-f4"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w4-f4/weft" unique_id=1365134655]
+metadata/crossing_id = "w4-f4"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w4-f4/weft/Body" unique_id=1356029320]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w5-f4" type="Node3D" parent="." unique_id=828489346]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025, 0, 0.020000001)
+metadata/crossing_id = "w5-f4"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w5-f4" unique_id=819084611]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w5-f4"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w5-f4/warp" unique_id=1574084558]
+metadata/crossing_id = "w5-f4"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w5-f4/warp/Body" unique_id=1686069402]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w5-f4" unique_id=1656043550]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w5-f4"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w5-f4/weft" unique_id=1103325130]
+metadata/crossing_id = "w5-f4"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w5-f4/weft/Body" unique_id=1490386465]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w0-f5" type="Node3D" parent="." unique_id=232698468]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.025)
+metadata/crossing_id = "w0-f5"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w0-f5" unique_id=1308998655]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w0-f5"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w0-f5/warp" unique_id=1288526115]
+metadata/crossing_id = "w0-f5"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w0-f5/warp/Body" unique_id=860413291]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w0-f5" unique_id=593230775]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w0-f5"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w0-f5/weft" unique_id=12781771]
+metadata/crossing_id = "w0-f5"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w0-f5/weft/Body" unique_id=750355274]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w1-f5" type="Node3D" parent="." unique_id=731970455]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0050000004, 0, 0.025)
+metadata/crossing_id = "w1-f5"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w1-f5" unique_id=234031224]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w1-f5"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w1-f5/warp" unique_id=1318525924]
+metadata/crossing_id = "w1-f5"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w1-f5/warp/Body" unique_id=920011283]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w1-f5" unique_id=623082326]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w1-f5"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w1-f5/weft" unique_id=379177076]
+metadata/crossing_id = "w1-f5"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w1-f5/weft/Body" unique_id=2100603172]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w2-f5" type="Node3D" parent="." unique_id=1319559846]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010000001, 0, 0.025)
+metadata/crossing_id = "w2-f5"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w2-f5" unique_id=1349300959]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w2-f5"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w2-f5/warp" unique_id=238962171]
+metadata/crossing_id = "w2-f5"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w2-f5/warp/Body" unique_id=570643367]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w2-f5" unique_id=28178070]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w2-f5"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w2-f5/weft" unique_id=1274861743]
+metadata/crossing_id = "w2-f5"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w2-f5/weft/Body" unique_id=2683869]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w3-f5" type="Node3D" parent="." unique_id=176811247]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015000001, 0, 0.025)
+metadata/crossing_id = "w3-f5"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w3-f5" unique_id=1794858170]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w3-f5"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w3-f5/warp" unique_id=91457246]
+metadata/crossing_id = "w3-f5"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w3-f5/warp/Body" unique_id=773601615]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w3-f5" unique_id=121683168]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w3-f5"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w3-f5/weft" unique_id=859156685]
+metadata/crossing_id = "w3-f5"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w3-f5/weft/Body" unique_id=1287703354]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w4-f5" type="Node3D" parent="." unique_id=572266100]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.020000001, 0, 0.025)
+metadata/crossing_id = "w4-f5"
+metadata/warp_over = false
+
+[node name="warp" type="MeshInstance3D" parent="w4-f5" unique_id=1036571068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w4-f5"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w4-f5/warp" unique_id=1850814926]
+metadata/crossing_id = "w4-f5"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w4-f5/warp/Body" unique_id=627192732]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w4-f5" unique_id=1358380805]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w4-f5"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w4-f5/weft" unique_id=731049041]
+metadata/crossing_id = "w4-f5"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w4-f5/weft/Body" unique_id=1088084488]
+shape = SubResource("BoxShape3D_os7eo")
+
+[node name="w5-f5" type="Node3D" parent="." unique_id=1651457281]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025, 0, 0.025)
+metadata/crossing_id = "w5-f5"
+metadata/warp_over = true
+
+[node name="warp" type="MeshInstance3D" parent="w5-f5" unique_id=1451729336]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0015, 0)
+material_override = SubResource("StandardMaterial3D_waucl")
+mesh = SubResource("BoxMesh_jk82c")
+metadata/crossing_id = "w5-f5"
+metadata/strand = "warp"
+
+[node name="Body" type="StaticBody3D" parent="w5-f5/warp" unique_id=558372775]
+metadata/crossing_id = "w5-f5"
+metadata/strand = "warp"
+
+[node name="Shape" type="CollisionShape3D" parent="w5-f5/warp/Body" unique_id=1628513421]
+shape = SubResource("BoxShape3D_ly8rt")
+
+[node name="weft" type="MeshInstance3D" parent="w5-f5" unique_id=1043881215]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015, 0)
+material_override = SubResource("StandardMaterial3D_iksmk")
+mesh = SubResource("BoxMesh_douni")
+metadata/crossing_id = "w5-f5"
+metadata/strand = "weft"
+
+[node name="Body" type="StaticBody3D" parent="w5-f5/weft" unique_id=1937585456]
+metadata/crossing_id = "w5-f5"
+metadata/strand = "weft"
+
+[node name="Shape" type="CollisionShape3D" parent="w5-f5/weft/Body" unique_id=1000216306]
+shape = SubResource("BoxShape3D_os7eo")

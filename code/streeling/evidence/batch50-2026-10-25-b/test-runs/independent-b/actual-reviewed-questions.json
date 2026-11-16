@@ -1,0 +1,1682 @@
+[
+  {
+    "code": "CS024",
+    "locale": "en",
+    "exercise": 1,
+    "question": "What is the source tree?",
+    "answer": "Its root is `add`, with left child `lit(1)` and right child `mul(lit(2),lit(3))`. Multiplication binds first; the source evaluates to `7`."
+  },
+  {
+    "code": "CS024",
+    "locale": "en",
+    "exercise": 2,
+    "question": "Does the fixed printer preserve the contract?",
+    "answer": "Yes: the parsed trees agree and both values are `7`, while text equality is `false`. A whitespace difference is permitted by this semantic contract."
+  },
+  {
+    "code": "CS024",
+    "locale": "en",
+    "exercise": 3,
+    "question": "Evaluate the changed grouping.",
+    "answer": "The control has root `mul` and value `9`. Its differing tree is a counterexample to the proposed round-trip guarantee, regardless of its attractive formatting."
+  },
+  {
+    "code": "CS024",
+    "locale": "en",
+    "exercise": 4,
+    "question": "Would one equal value prove tree equality?",
+    "answer": "No. Distinct operations can coincide on selected inputs. Preserve node tags and ordered children, and state separately whether comments and layout need a lossless representation."
+  },
+  {
+    "code": "CS024",
+    "locale": "en",
+    "exercise": 5,
+    "question": "What evidence would justify using an agent rewrite?",
+    "answer": "A versioned grammar, the manual trees, the rejected grouping and coverage of relevant syntax. This case supports only its declared expressions; it supplies no production parser execution."
+  },
+  {
+    "code": "CS024",
+    "locale": "fr",
+    "exercise": 1,
+    "question": "Quel est l’arbre source ?",
+    "answer": "Sa racine est `add`, son fils gauche `lit(1)` et son fils droit `mul(lit(2),lit(3))`. La multiplication est prioritaire ; la source vaut `7`."
+  },
+  {
+    "code": "CS024",
+    "locale": "fr",
+    "exercise": 2,
+    "question": "L’imprimeur fixé respecte-t-il le contrat ?",
+    "answer": "Oui : les arbres analysés concordent et valent tous deux `7`, tandis que l’égalité textuelle vaut `false`. Ce contrat sémantique permet une différence d’espacement."
+  },
+  {
+    "code": "CS024",
+    "locale": "fr",
+    "exercise": 3,
+    "question": "Évaluez le groupement modifié.",
+    "answer": "Le contrôle a pour racine `mul` et vaut `9`. Son arbre différent réfute la garantie d’aller-retour, même si la présentation paraît agréable."
+  },
+  {
+    "code": "CS024",
+    "locale": "fr",
+    "exercise": 4,
+    "question": "Une valeur égale prouverait-elle l’égalité des arbres ?",
+    "answer": "Non. Des opérations distinctes peuvent coïncider sur certaines entrées. Gardez les étiquettes et l’ordre des fils ; précisez séparément si commentaires et disposition exigent une représentation sans perte."
+  },
+  {
+    "code": "CS024",
+    "locale": "fr",
+    "exercise": 5,
+    "question": "Quelles preuves justifieraient une réécriture par agent ?",
+    "answer": "Une grammaire versionnée, les arbres manuels, le groupement rejeté et une couverture des constructions pertinentes. Ce cas ne couvre que les expressions déclarées, sans exécution de l’analyseur de production."
+  },
+  {
+    "code": "CS024",
+    "locale": "es",
+    "exercise": 1,
+    "question": "¿Cuál es el árbol fuente?",
+    "answer": "La raíz es `add`, con hijo izquierdo `lit(1)` y derecho `mul(lit(2),lit(3))`. La multiplicación tiene prioridad; la fuente vale `7`."
+  },
+  {
+    "code": "CS024",
+    "locale": "es",
+    "exercise": 2,
+    "question": "¿Respeta el impresor fijo el contrato?",
+    "answer": "Sí: los árboles coinciden y ambos valores son `7`, mientras que la igualdad textual es `false`. Este contrato semántico permite cambios de espacios."
+  },
+  {
+    "code": "CS024",
+    "locale": "es",
+    "exercise": 3,
+    "question": "Evalúe la agrupación modificada.",
+    "answer": "El control tiene raíz `mul` y valor `9`. El árbol distinto refuta la garantía del recorrido, aunque su presentación resulte atractiva."
+  },
+  {
+    "code": "CS024",
+    "locale": "es",
+    "exercise": 4,
+    "question": "¿Probaría un valor igual la igualdad de árboles?",
+    "answer": "No. Operaciones distintas pueden coincidir en algunas entradas. Conserve etiquetas y orden de los hijos; indique por separado si comentarios y disposición requieren una representación sin pérdidas."
+  },
+  {
+    "code": "CS024",
+    "locale": "es",
+    "exercise": 5,
+    "question": "¿Qué evidencia justificaría una reescritura mediante agente?",
+    "answer": "Una gramática versionada, árboles manuales, la agrupación rechazada y cobertura de la sintaxis pertinente. El caso solo cubre las expresiones declaradas y no ejecuta un analizador de producción."
+  },
+  {
+    "code": "CS025",
+    "locale": "en",
+    "exercise": 1,
+    "question": "Find the rejected key’s witness.",
+    "answer": "Rows `[0,1]` share item `x` but have scores `4` and `9`. Thus the item-only key is insufficient even though both records have plausible identities."
+  },
+  {
+    "code": "CS025",
+    "locale": "en",
+    "exercise": 2,
+    "question": "Apply the control key.",
+    "answer": "With fields `[item,revision]`, the witness list is `[]` and sufficiency is `true` for this catalogue. The conclusion is conditional on the declared pure results."
+  },
+  {
+    "code": "CS025",
+    "locale": "en",
+    "exercise": 3,
+    "question": "Would a unique key per row always be useful?",
+    "answer": "It avoids these collisions but can eliminate reuse. Correctness and hit rate are separate questions; first establish result preservation, then measure useful reuse on comparable work."
+  },
+  {
+    "code": "CS025",
+    "locale": "en",
+    "exercise": 4,
+    "question": "What if locale changes the score?",
+    "answer": "Add that premise to the input contract and search again. A revision field cannot stand in for an undeclared variable; do not call the existing control a universal key proof."
+  },
+  {
+    "code": "CS025",
+    "locale": "en",
+    "exercise": 5,
+    "question": "Why keep the uncached baseline?",
+    "answer": "It supplies the reference result for each original record. A cache judged only against its own earlier entries can repeat a stale result consistently while remaining wrong."
+  },
+  {
+    "code": "CS025",
+    "locale": "fr",
+    "exercise": 1,
+    "question": "Trouvez le témoin contre la clé.",
+    "answer": "Les lignes `[0,1]` partagent l’élément `x`, mais leurs scores valent `4` et `9`. La clé limitée à l’élément est insuffisante malgré des identités plausibles."
+  },
+  {
+    "code": "CS025",
+    "locale": "fr",
+    "exercise": 2,
+    "question": "Appliquez la clé du contrôle.",
+    "answer": "Avec les champs `[item,revision]`, la liste des témoins vaut `[]` et la suffisance vaut `true` pour ce catalogue. La conclusion dépend des résultats purs déclarés."
+  },
+  {
+    "code": "CS025",
+    "locale": "fr",
+    "exercise": 3,
+    "question": "Une clé unique par ligne serait-elle toujours utile ?",
+    "answer": "Elle évite ces collisions mais peut supprimer la réutilisation. Correction et taux de succès sont deux questions : établissez la préservation des résultats avant de mesurer une réutilisation utile."
+  },
+  {
+    "code": "CS025",
+    "locale": "fr",
+    "exercise": 4,
+    "question": "Et si la langue change le score ?",
+    "answer": "Ajoutez cette prémisse au contrat d’entrée et recommencez la recherche. La révision ne remplace pas une variable non déclarée ; le contrôle actuel ne prouve pas une clé universelle."
+  },
+  {
+    "code": "CS025",
+    "locale": "fr",
+    "exercise": 5,
+    "question": "Pourquoi garder la référence sans cache ?",
+    "answer": "Elle fournit le résultat de référence pour chaque entrée initiale. Un cache comparé uniquement à ses propres entrées peut répéter fidèlement une réponse périmée et rester erroné."
+  },
+  {
+    "code": "CS025",
+    "locale": "es",
+    "exercise": 1,
+    "question": "Encuentre el testigo contra la clave.",
+    "answer": "Las filas `[0,1]` comparten el elemento `x`, pero sus puntuaciones son `4` y `9`. La clave basada solo en el elemento es insuficiente aunque las identidades parezcan válidas."
+  },
+  {
+    "code": "CS025",
+    "locale": "es",
+    "exercise": 2,
+    "question": "Aplique la clave del control.",
+    "answer": "Con los campos `[item,revision]`, la lista de testigos es `[]` y la suficiencia es `true` para este catálogo. La conclusión depende de los resultados puros declarados."
+  },
+  {
+    "code": "CS025",
+    "locale": "es",
+    "exercise": 3,
+    "question": "¿Siempre serviría una clave única por fila?",
+    "answer": "Evita estas colisiones, pero puede eliminar la reutilización. Corrección y tasa de aciertos son cuestiones distintas: establezca la conservación del resultado antes de medir reutilización útil."
+  },
+  {
+    "code": "CS025",
+    "locale": "es",
+    "exercise": 4,
+    "question": "¿Y si el idioma cambia la puntuación?",
+    "answer": "Incorpore esa premisa al contrato de entrada y repita la búsqueda. La revisión no sustituye una variable no declarada; el control actual no prueba una clave universal."
+  },
+  {
+    "code": "CS025",
+    "locale": "es",
+    "exercise": 5,
+    "question": "¿Por qué conservar la referencia sin caché?",
+    "answer": "Proporciona el resultado de referencia de cada registro original. Una caché comparada solo con sus propias entradas puede repetir de forma consistente un resultado obsoleto y seguir equivocada."
+  },
+  {
+    "code": "CYB018",
+    "locale": "en",
+    "exercise": 1,
+    "question": "Form the stacked observation matrix.",
+    "answer": "The rows are `[1,1]` and `[1,2]`, giving determinant `1` and rank `2`. Two independent equations can identify both unknown coordinates under the stated assumptions."
+  },
+  {
+    "code": "CYB018",
+    "locale": "en",
+    "exercise": 2,
+    "question": "Reconstruct the state from the outputs.",
+    "answer": "The observations are `[7,11]`. Subtracting gives the second component `4`; the first is `3`. This is exact reconstruction in the model, not a measured queue estimate."
+  },
+  {
+    "code": "CYB018",
+    "locale": "en",
+    "exercise": 3,
+    "question": "Apply the equal-dynamics control.",
+    "answer": "Its determinant is `0`, rank is `1` and outputs are `[7,7]`. Reconstruction is `null` because a unique initial pair cannot be selected."
+  },
+  {
+    "code": "CYB018",
+    "locale": "en",
+    "exercise": 4,
+    "question": "Would an unknown arrival preserve this calculation?",
+    "answer": "No. It adds an unmodeled contribution to the later output. Record that input or redesign the observation contract before interpreting the reconstructed components."
+  },
+  {
+    "code": "CYB018",
+    "locale": "en",
+    "exercise": 5,
+    "question": "What additional evidence does a real dashboard need?",
+    "answer": "A justified transition, known inputs, observation times, source-bound receipts and noise limits. Observability of an authored matrix does not establish the identity or health of a live worker."
+  },
+  {
+    "code": "CYB018",
+    "locale": "fr",
+    "exercise": 1,
+    "question": "Formez la matrice des observations.",
+    "answer": "Les lignes sont `[1,1]` et `[1,2]`, d’où un déterminant de `1` et un rang de `2`. Deux équations indépendantes identifient les coordonnées sous les hypothèses annoncées."
+  },
+  {
+    "code": "CYB018",
+    "locale": "fr",
+    "exercise": 2,
+    "question": "Reconstruisez l’état à partir des sorties.",
+    "answer": "Les observations sont `[7,11]`. Leur différence donne la seconde composante `4` ; la première vaut `3`. C’est une reconstruction exacte du modèle, pas une estimation mesurée d’une file."
+  },
+  {
+    "code": "CYB018",
+    "locale": "fr",
+    "exercise": 3,
+    "question": "Appliquez le contrôle à dynamiques égales.",
+    "answer": "Son déterminant vaut `0`, son rang `1` et ses sorties `[7,7]`. La reconstruction vaut `null`, car aucune paire initiale unique ne peut être choisie."
+  },
+  {
+    "code": "CYB018",
+    "locale": "fr",
+    "exercise": 4,
+    "question": "Une arrivée inconnue préserverait-elle le calcul ?",
+    "answer": "Non. Elle ajoute une contribution non modélisée à la sortie suivante. Enregistrez cette entrée ou revoyez le contrat d’observation avant d’interpréter les composantes reconstruites."
+  },
+  {
+    "code": "CYB018",
+    "locale": "fr",
+    "exercise": 5,
+    "question": "Qu’exige un vrai tableau de bord ?",
+    "answer": "Une transition justifiée, des entrées connues, des dates d’observation, des preuves liées aux sources et des limites de bruit. L’observabilité d’une matrice construite n’établit ni identité ni santé d’un worker réel."
+  },
+  {
+    "code": "CYB018",
+    "locale": "es",
+    "exercise": 1,
+    "question": "Forme la matriz de observaciones.",
+    "answer": "Las filas son `[1,1]` y `[1,2]`, con determinante `1` y rango `2`. Dos ecuaciones independientes identifican las coordenadas bajo los supuestos declarados."
+  },
+  {
+    "code": "CYB018",
+    "locale": "es",
+    "exercise": 2,
+    "question": "Reconstruya el estado a partir de las salidas.",
+    "answer": "Las observaciones son `[7,11]`. Restarlas da el segundo componente `4`; el primero es `3`. Es una reconstrucción exacta del modelo, no una estimación medida de una cola."
+  },
+  {
+    "code": "CYB018",
+    "locale": "es",
+    "exercise": 3,
+    "question": "Aplique el control con dinámicas iguales.",
+    "answer": "Su determinante es `0`, rango `1` y salidas `[7,7]`. La reconstrucción es `null` porque no puede elegirse un par inicial único."
+  },
+  {
+    "code": "CYB018",
+    "locale": "es",
+    "exercise": 4,
+    "question": "¿Conservaría el cálculo una llegada desconocida?",
+    "answer": "No. Añade una contribución no modelada a la salida posterior. Registre esa entrada o revise el contrato de observación antes de interpretar los componentes reconstruidos."
+  },
+  {
+    "code": "CYB018",
+    "locale": "es",
+    "exercise": 5,
+    "question": "¿Qué necesita un panel real?",
+    "answer": "Una transición justificada, entradas conocidas, tiempos de observación, evidencias ligadas a las fuentes y límites de ruido. La observabilidad de una matriz construida no demuestra la identidad ni el estado de un worker real."
+  },
+  {
+    "code": "CYB019",
+    "locale": "en",
+    "exercise": 1,
+    "question": "Find both mode multipliers.",
+    "answer": "They are `1.25` and `-0.25`; the spectral radius is `1.25`. The matrix is unstable despite diagonal entries `0.5`."
+  },
+  {
+    "code": "CYB019",
+    "locale": "en",
+    "exercise": 2,
+    "question": "Trace the common-mode witness.",
+    "answer": "Starting from `[1,1]`, the final vector after `3` steps is `[1.953125,1.953125]`. Each step amplifies the shared deviation."
+  },
+  {
+    "code": "CYB019",
+    "locale": "en",
+    "exercise": 3,
+    "question": "Apply the reduced-coupling control.",
+    "answer": "The eigenvalues become `[0.75,0.25]`, both strictly inside the unit circle. The final common-mode vector is `[0.421875,0.421875]`; stability is `true`."
+  },
+  {
+    "code": "CYB019",
+    "locale": "en",
+    "exercise": 4,
+    "question": "Can a shrinking opposing trajectory certify stability?",
+    "answer": "No. It excites only its own mode. The unexcited common mode can still grow; check every eigenmode under the declared linear model."
+  },
+  {
+    "code": "CYB019",
+    "locale": "en",
+    "exercise": 5,
+    "question": "What would reject the proposed real coordination rule?",
+    "answer": "A measured transition outside the assumed model, an amplifying mode, or unacceptable boundary behaviour. Scalar local progress alone cannot validate the coupled rule."
+  },
+  {
+    "code": "CYB019",
+    "locale": "fr",
+    "exercise": 1,
+    "question": "Trouvez les multiplicateurs des modes.",
+    "answer": "Ils valent `1.25` et `-0.25` ; le rayon spectral vaut `1.25`. La matrice est instable malgré ses diagonales de `0.5`."
+  },
+  {
+    "code": "CYB019",
+    "locale": "fr",
+    "exercise": 2,
+    "question": "Suivez le témoin du mode commun.",
+    "answer": "Depuis `[1,1]`, le vecteur après `3` étapes vaut `[1.953125,1.953125]`. Chaque étape amplifie l’écart commun."
+  },
+  {
+    "code": "CYB019",
+    "locale": "fr",
+    "exercise": 3,
+    "question": "Appliquez le contrôle au couplage réduit.",
+    "answer": "Les valeurs propres deviennent `[0.75,0.25]`, strictement dans le cercle unité. Le vecteur final commun vaut `[0.421875,0.421875]` ; la stabilité vaut `true`."
+  },
+  {
+    "code": "CYB019",
+    "locale": "fr",
+    "exercise": 4,
+    "question": "Une trajectoire opposée décroissante certifie-t-elle la stabilité ?",
+    "answer": "Non. Elle n’excite que son mode. Le mode commun peut encore croître ; vérifiez chaque mode propre du modèle linéaire déclaré."
+  },
+  {
+    "code": "CYB019",
+    "locale": "fr",
+    "exercise": 5,
+    "question": "Qu’est-ce qui rejetterait la règle réelle proposée ?",
+    "answer": "Une transition mesurée hors modèle, un mode amplificateur ou un comportement inacceptable aux limites. Le seul progrès scalaire local ne valide pas une règle couplée."
+  },
+  {
+    "code": "CYB019",
+    "locale": "es",
+    "exercise": 1,
+    "question": "Obtenga los multiplicadores de los modos.",
+    "answer": "Son `1.25` y `-0.25`; el radio espectral es `1.25`. La matriz es inestable pese a sus diagonales de `0.5`."
+  },
+  {
+    "code": "CYB019",
+    "locale": "es",
+    "exercise": 2,
+    "question": "Siga el testigo del modo común.",
+    "answer": "Desde `[1,1]`, el vector tras `3` pasos es `[1.953125,1.953125]`. Cada paso amplifica la desviación compartida."
+  },
+  {
+    "code": "CYB019",
+    "locale": "es",
+    "exercise": 3,
+    "question": "Aplique el control de menor acoplamiento.",
+    "answer": "Los valores propios son `[0.75,0.25]`, estrictamente dentro del círculo unidad. El vector común final es `[0.421875,0.421875]`; la estabilidad es `true`."
+  },
+  {
+    "code": "CYB019",
+    "locale": "es",
+    "exercise": 4,
+    "question": "¿Certifica estabilidad una trayectoria opuesta decreciente?",
+    "answer": "No. Solo excita su propio modo. El modo común no excitado aún puede crecer; compruebe todos los modos propios del modelo lineal declarado."
+  },
+  {
+    "code": "CYB019",
+    "locale": "es",
+    "exercise": 5,
+    "question": "¿Qué rechazaría la regla real propuesta?",
+    "answer": "Una transición medida fuera del modelo, un modo amplificador o un comportamiento inadmisible en los límites. El progreso escalar local no valida por sí solo la regla acoplada."
+  },
+  {
+    "code": "CYB020",
+    "locale": "en",
+    "exercise": 1,
+    "question": "List the fixed successor set.",
+    "answer": "It is `[0,1,2]`, entirely inside the safe set. The escaping list is `[]`; closure is `true` under the stipulated step order."
+  },
+  {
+    "code": "CYB020",
+    "locale": "en",
+    "exercise": 2,
+    "question": "Find the control’s escaping transition.",
+    "answer": "The triple `[2,2,3]` starts at the upper safe state and ends outside. The successor set is `[0,1,2,3]`, so closure is `false`."
+  },
+  {
+    "code": "CYB020",
+    "locale": "en",
+    "exercise": 3,
+    "question": "Why does closure extend to every finite horizon?",
+    "answer": "The initial state is inside and each allowed step preserves membership. Induction therefore preserves membership after every finite number of steps, conditional on unchanged assumptions."
+  },
+  {
+    "code": "CYB020",
+    "locale": "en",
+    "exercise": 4,
+    "question": "Can the table estimate outage probability?",
+    "answer": "No. Disturbances are a set of possibilities without probabilities. Closure or an escaping witness addresses worst-case membership, not how frequently an event occurs."
+  },
+  {
+    "code": "CYB020",
+    "locale": "en",
+    "exercise": 5,
+    "question": "What must precede operational adoption?",
+    "answer": "Evidence for step order, service bound, disturbance set and initial membership, plus direct checks of omitted transitions. An agent assertion cannot supply those missing premises."
+  },
+  {
+    "code": "CYB020",
+    "locale": "fr",
+    "exercise": 1,
+    "question": "Donnez l’ensemble des successeurs fixés.",
+    "answer": "Il vaut `[0,1,2]`, inclus dans l’ensemble sûr. La liste des sorties vaut `[]` ; la fermeture vaut `true` selon l’ordre stipulé."
+  },
+  {
+    "code": "CYB020",
+    "locale": "fr",
+    "exercise": 2,
+    "question": "Trouvez la transition qui sort dans le contrôle.",
+    "answer": "Le triplet `[2,2,3]` part de l’état sûr supérieur et aboutit dehors. Les successeurs sont `[0,1,2,3]` ; la fermeture vaut donc `false`."
+  },
+  {
+    "code": "CYB020",
+    "locale": "fr",
+    "exercise": 3,
+    "question": "Pourquoi la fermeture vaut-elle à tout horizon fini ?",
+    "answer": "L’état initial est intérieur et chaque étape autorisée préserve l’appartenance. La récurrence la conserve après tout nombre fini d’étapes, tant que les hypothèses restent vraies."
+  },
+  {
+    "code": "CYB020",
+    "locale": "fr",
+    "exercise": 4,
+    "question": "Le tableau estime-t-il une probabilité de panne ?",
+    "answer": "Non. Les perturbations sont des possibilités sans probabilités. La fermeture ou un témoin de sortie traite l’appartenance au pire cas, pas la fréquence des événements."
+  },
+  {
+    "code": "CYB020",
+    "locale": "fr",
+    "exercise": 5,
+    "question": "Que faut-il avant une adoption opérationnelle ?",
+    "answer": "Des preuves de l’ordre des étapes, de la borne de service, des perturbations et de l’état initial, puis des vérifications des transitions omises. Une affirmation d’agent ne fournit pas ces prémisses."
+  },
+  {
+    "code": "CYB020",
+    "locale": "es",
+    "exercise": 1,
+    "question": "Enumere el conjunto de sucesores fijo.",
+    "answer": "Es `[0,1,2]`, incluido en el conjunto seguro. La lista de escapes es `[]`; el cierre es `true` con el orden estipulado."
+  },
+  {
+    "code": "CYB020",
+    "locale": "es",
+    "exercise": 2,
+    "question": "Encuentre la transición que escapa en el control.",
+    "answer": "El triple `[2,2,3]` empieza en el estado seguro superior y termina fuera. Los sucesores son `[0,1,2,3]`; por tanto, el cierre es `false`."
+  },
+  {
+    "code": "CYB020",
+    "locale": "es",
+    "exercise": 3,
+    "question": "¿Por qué se extiende el cierre a todo horizonte finito?",
+    "answer": "El estado inicial está dentro y cada paso permitido conserva la pertenencia. La inducción la mantiene tras cualquier número finito de pasos si los supuestos no cambian."
+  },
+  {
+    "code": "CYB020",
+    "locale": "es",
+    "exercise": 4,
+    "question": "¿Estima la tabla una probabilidad de interrupción?",
+    "answer": "No. Las perturbaciones forman un conjunto sin probabilidades. El cierre o un testigo de escape trata pertenencia en el peor caso, no frecuencia de eventos."
+  },
+  {
+    "code": "CYB020",
+    "locale": "es",
+    "exercise": 5,
+    "question": "¿Qué debe preceder a la adopción operativa?",
+    "answer": "Evidencias del orden, la cota de servicio, el conjunto de perturbaciones y el estado inicial, además de comprobaciones de transiciones omitidas. Una afirmación de agente no aporta esas premisas."
+  },
+  {
+    "code": "COG018",
+    "locale": "en",
+    "exercise": 1,
+    "question": "Which denominator belongs to each calculation?",
+    "answer": "There are `12` matched items but `8` discordant pairs. Accuracy uses the full matched set; the conditional binomial test uses the discordant set."
+  },
+  {
+    "code": "COG018",
+    "locale": "en",
+    "exercise": 2,
+    "question": "Compute the descriptive change.",
+    "answer": "Old correct is `3`, new correct is `9`, and the difference is `0.5`. Keep the paired table: these totals alone do not retain which items changed."
+  },
+  {
+    "code": "COG018",
+    "locale": "en",
+    "exercise": 3,
+    "question": "Compute the exact two-sided probability.",
+    "answer": "It is `0.0703125`, obtained from both symmetric tails. It is not a posterior probability that the explanations are equivalent or that assistance failed."
+  },
+  {
+    "code": "COG018",
+    "locale": "en",
+    "exercise": 4,
+    "question": "Apply the balanced control.",
+    "answer": "Both versions have `6` correct, the difference is `0`, and the probability is `1`. The control still contains disagreements; they simply balance in direction."
+  },
+  {
+    "code": "COG018",
+    "locale": "en",
+    "exercise": 5,
+    "question": "What causal conclusion is justified?",
+    "answer": "None from invented counts alone. A real comparison needs appropriate allocation, matched identities, common scoring and an independence argument; repeated items from one learner may violate that argument."
+  },
+  {
+    "code": "COG018",
+    "locale": "fr",
+    "exercise": 1,
+    "question": "Quel dénominateur correspond à chaque calcul ?",
+    "answer": "Il y a `12` items appariés, mais `8` paires discordantes. La précision utilise tous les items ; le test binomial conditionnel utilise les discordances."
+  },
+  {
+    "code": "COG018",
+    "locale": "fr",
+    "exercise": 2,
+    "question": "Calculez le changement descriptif.",
+    "answer": "L’ancienne version réussit `3` items, la nouvelle `9`, et la différence vaut `0.5`. Gardez le tableau : les totaux seuls perdent l’identité des changements."
+  },
+  {
+    "code": "COG018",
+    "locale": "fr",
+    "exercise": 3,
+    "question": "Calculez la probabilité bilatérale exacte.",
+    "answer": "Elle vaut `0.0703125`, à partir des deux queues symétriques. Ce n’est pas une probabilité a posteriori d’équivalence des explications ou d’échec de l’aide."
+  },
+  {
+    "code": "COG018",
+    "locale": "fr",
+    "exercise": 4,
+    "question": "Appliquez le contrôle équilibré.",
+    "answer": "Les deux versions réussissent `6` items ; la différence vaut `0` et la probabilité `1`. Des désaccords subsistent, mais leurs directions s’équilibrent."
+  },
+  {
+    "code": "COG018",
+    "locale": "fr",
+    "exercise": 5,
+    "question": "Quelle conclusion causale est justifiée ?",
+    "answer": "Aucune à partir de comptes inventés. Il faut attribution appropriée, identités appariées, notation commune et justification d’indépendance ; des items répétés d’un apprenant peuvent la violer."
+  },
+  {
+    "code": "COG018",
+    "locale": "es",
+    "exercise": 1,
+    "question": "¿Qué denominador corresponde a cada cálculo?",
+    "answer": "Hay `12` ítems emparejados, pero `8` pares discordantes. La exactitud usa todos los ítems; el contraste binomial condicional usa las discordancias."
+  },
+  {
+    "code": "COG018",
+    "locale": "es",
+    "exercise": 2,
+    "question": "Calcule el cambio descriptivo.",
+    "answer": "La versión anterior acierta `3`, la nueva `9`, y la diferencia es `0.5`. Conserve la tabla: los totales solos no mantienen qué ítems cambiaron."
+  },
+  {
+    "code": "COG018",
+    "locale": "es",
+    "exercise": 3,
+    "question": "Calcule la probabilidad bilateral exacta.",
+    "answer": "Es `0.0703125`, obtenida de ambas colas simétricas. No es una probabilidad posterior de equivalencia de las explicaciones ni de fracaso de la ayuda."
+  },
+  {
+    "code": "COG018",
+    "locale": "es",
+    "exercise": 4,
+    "question": "Aplique el control equilibrado.",
+    "answer": "Ambas versiones aciertan `6`; la diferencia es `0` y la probabilidad `1`. Siguen existiendo desacuerdos, pero sus direcciones se equilibran."
+  },
+  {
+    "code": "COG018",
+    "locale": "es",
+    "exercise": 5,
+    "question": "¿Qué conclusión causal se justifica?",
+    "answer": "Ninguna con recuentos inventados. Hacen falta asignación adecuada, identidades emparejadas, evaluación común y justificación de independencia; varios ítems de un mismo alumno pueden incumplirla."
+  },
+  {
+    "code": "COG019",
+    "locale": "en",
+    "exercise": 1,
+    "question": "Compute observed agreement.",
+    "answer": "The diagonal has `8` of `10` items, giving `0.8`. This describes matching labels, not correctness of the answers or independent provenance of the ratings."
+  },
+  {
+    "code": "COG019",
+    "locale": "en",
+    "exercise": 2,
+    "question": "Compute expected agreement from separate marginals.",
+    "answer": "Passing fractions are `0.8` and `0.6`; expected agreement is `0.56`. Pooling the marginals would implement a different reference model."
+  },
+  {
+    "code": "COG019",
+    "locale": "en",
+    "exercise": 3,
+    "question": "Calculate the corrected score.",
+    "answer": "Kappa is `6/11`. Keep the raw table beside it; a corrected scalar does not identify the disputed artifacts needed for adjudication."
+  },
+  {
+    "code": "COG019",
+    "locale": "en",
+    "exercise": 4,
+    "question": "Apply the all-pass control.",
+    "answer": "Observed and expected agreement both equal `1`; the corrected score is `null`. The denominator vanishes, so a perfect numeric kappa must not be manufactured."
+  },
+  {
+    "code": "COG019",
+    "locale": "en",
+    "exercise": 5,
+    "question": "May the score authorize publication?",
+    "answer": "No. Correctness, artifact identity, rating independence and release authority require their own evidence. A statistic cannot replace any missing technical or language review."
+  },
+  {
+    "code": "COG019",
+    "locale": "fr",
+    "exercise": 1,
+    "question": "Calculez l’accord observé.",
+    "answer": "La diagonale contient `8` items sur `10`, soit `0.8`. Cela décrit des étiquettes concordantes, pas la justesse des réponses ni l’origine indépendante des notes."
+  },
+  {
+    "code": "COG019",
+    "locale": "fr",
+    "exercise": 2,
+    "question": "Calculez l’accord attendu avec les marges séparées.",
+    "answer": "Les proportions d’acceptation valent `0.8` et `0.6` ; l’accord attendu vaut `0.56`. Fusionner les marges définirait un autre modèle de référence."
+  },
+  {
+    "code": "COG019",
+    "locale": "fr",
+    "exercise": 3,
+    "question": "Calculez le score corrigé.",
+    "answer": "Kappa vaut `6/11`. Gardez le tableau brut à côté : un scalaire corrigé n’identifie pas les artefacts contestés nécessaires à l’arbitrage."
+  },
+  {
+    "code": "COG019",
+    "locale": "fr",
+    "exercise": 4,
+    "question": "Appliquez le contrôle où tout passe.",
+    "answer": "Accords observé et attendu valent tous deux `1` ; le score corrigé vaut `null`. Le dénominateur s’annule, il ne faut pas fabriquer un kappa parfait."
+  },
+  {
+    "code": "COG019",
+    "locale": "fr",
+    "exercise": 5,
+    "question": "Le score autorise-t-il la publication ?",
+    "answer": "Non. Justesse, identité de l’artefact, indépendance et autorité de publication demandent leurs propres preuves. Une statistique ne remplace aucune revue technique ou linguistique manquante."
+  },
+  {
+    "code": "COG019",
+    "locale": "es",
+    "exercise": 1,
+    "question": "Calcule el acuerdo observado.",
+    "answer": "La diagonal contiene `8` de `10` ítems, dando `0.8`. Describe etiquetas coincidentes, no la corrección de respuestas ni el origen independiente de las calificaciones."
+  },
+  {
+    "code": "COG019",
+    "locale": "es",
+    "exercise": 2,
+    "question": "Calcule el acuerdo esperado con marginales separados.",
+    "answer": "Las fracciones de aprobación son `0.8` y `0.6`; el acuerdo esperado es `0.56`. Agrupar los marginales implementaría otro modelo de referencia."
+  },
+  {
+    "code": "COG019",
+    "locale": "es",
+    "exercise": 3,
+    "question": "Calcule la puntuación corregida.",
+    "answer": "Kappa es `6/11`. Conserve la tabla bruta: un escalar corregido no identifica los artefactos discutidos necesarios para adjudicación."
+  },
+  {
+    "code": "COG019",
+    "locale": "es",
+    "exercise": 4,
+    "question": "Aplique el control de aprobación total.",
+    "answer": "Los acuerdos observado y esperado son `1`; la puntuación corregida es `null`. Se anula el denominador y no debe fabricarse un kappa perfecto."
+  },
+  {
+    "code": "COG019",
+    "locale": "es",
+    "exercise": 5,
+    "question": "¿Autoriza la puntuación la publicación?",
+    "answer": "No. Corrección, identidad del artefacto, independencia y autoridad necesitan evidencias propias. Una estadística no sustituye una revisión técnica o lingüística ausente."
+  },
+  {
+    "code": "COG020",
+    "locale": "en",
+    "exercise": 1,
+    "question": "Compute overall ease.",
+    "answer": "There are `4` correct responses among `8`, so the fraction is `0.5`. This quantity ignores which rest-score group answered correctly."
+  },
+  {
+    "code": "COG020",
+    "locale": "en",
+    "exercise": 2,
+    "question": "Compute the signed contrast.",
+    "answer": "The lower group has `3` correct and the upper group `1`, each among `4`. The contrast is `-0.5`, a flag for investigation under this declared diagnostic."
+  },
+  {
+    "code": "COG020",
+    "locale": "en",
+    "exercise": 3,
+    "question": "Apply the response-reversal control.",
+    "answer": "Its overall fraction stays `0.5`, but the contrast becomes `0.5`. Equal totals therefore do not establish equal discrimination patterns."
+  },
+  {
+    "code": "COG020",
+    "locale": "en",
+    "exercise": 4,
+    "question": "Why exclude the target from ranking?",
+    "answer": "It prevents the target outcome from helping define its own comparison groups. It does not establish that the remaining score measures one valid skill or removes all sampling uncertainty."
+  },
+  {
+    "code": "COG020",
+    "locale": "en",
+    "exercise": 5,
+    "question": "Should an agent delete the item automatically?",
+    "answer": "No. Preserve the prompt, scoring key and row identities, then investigate content alignment, ambiguity and sample composition. A descriptive negative contrast does not itself identify the cause."
+  },
+  {
+    "code": "COG020",
+    "locale": "fr",
+    "exercise": 1,
+    "question": "Calculez la facilité globale.",
+    "answer": "Il y a `4` bonnes réponses sur `8`, soit `0.5`. Cette quantité ignore quel groupe de score restant a réussi."
+  },
+  {
+    "code": "COG020",
+    "locale": "fr",
+    "exercise": 2,
+    "question": "Calculez le contraste signé.",
+    "answer": "Le groupe inférieur donne `3` réponses correctes et le supérieur `1`, chacun sur `4`. Le contraste vaut `-0.5`, un signal à examiner selon ce diagnostic déclaré."
+  },
+  {
+    "code": "COG020",
+    "locale": "fr",
+    "exercise": 3,
+    "question": "Appliquez le contrôle inversant les réponses.",
+    "answer": "Sa proportion globale reste `0.5`, mais le contraste devient `0.5`. Des totaux égaux ne donnent donc pas des profils de discrimination égaux."
+  },
+  {
+    "code": "COG020",
+    "locale": "fr",
+    "exercise": 4,
+    "question": "Pourquoi exclure la cible du classement ?",
+    "answer": "Pour éviter que sa réponse définisse en partie ses propres groupes de comparaison. Cela ne prouve ni l’unidimensionnalité valide du reste ni l’absence d’incertitude d’échantillonnage."
+  },
+  {
+    "code": "COG020",
+    "locale": "fr",
+    "exercise": 5,
+    "question": "L’agent doit-il supprimer automatiquement l’item ?",
+    "answer": "Non. Gardez consigne, corrigé et identités des lignes ; examinez adéquation, ambiguïté et composition du groupe. Un contraste négatif descriptif n’en identifie pas la cause."
+  },
+  {
+    "code": "COG020",
+    "locale": "es",
+    "exercise": 1,
+    "question": "Calcule la facilidad global.",
+    "answer": "Hay `4` respuestas correctas de `8`, dando `0.5`. Esta cantidad ignora qué grupo de puntuación restante respondió correctamente."
+  },
+  {
+    "code": "COG020",
+    "locale": "es",
+    "exercise": 2,
+    "question": "Calcule el contraste con signo.",
+    "answer": "El grupo inferior acierta `3` y el superior `1`, cada uno entre `4`. El contraste es `-0.5`, una señal para investigar bajo este diagnóstico declarado."
+  },
+  {
+    "code": "COG020",
+    "locale": "es",
+    "exercise": 3,
+    "question": "Aplique el control de respuestas invertidas.",
+    "answer": "La fracción global sigue siendo `0.5`, pero el contraste pasa a `0.5`. Totales iguales no establecen patrones de discriminación iguales."
+  },
+  {
+    "code": "COG020",
+    "locale": "es",
+    "exercise": 4,
+    "question": "¿Por qué excluir el objetivo de la clasificación?",
+    "answer": "Evita que su resultado ayude a definir sus propios grupos de comparación. No demuestra que la puntuación restante mida una habilidad válida única ni elimina la incertidumbre muestral."
+  },
+  {
+    "code": "COG020",
+    "locale": "es",
+    "exercise": 5,
+    "question": "¿Debe el agente eliminar automáticamente el ítem?",
+    "answer": "No. Conserve consigna, clave e identidades y examine adecuación, ambigüedad y composición de la muestra. Un contraste negativo descriptivo no identifica por sí solo la causa."
+  },
+  {
+    "code": "INF019",
+    "locale": "en",
+    "exercise": 1,
+    "question": "Decode the fixed stream completely.",
+    "answer": "The only complete sequence is `[A,B,C]`. Its boundaries follow the codewords `0`, `10`, `11`; no other symbol sequence consumes the stream."
+  },
+  {
+    "code": "INF019",
+    "locale": "en",
+    "exercise": 2,
+    "question": "Identify the control’s prefix violation.",
+    "answer": "Symbol `A` is a proper prefix of `B`. The ordered violation list is `[[A,B]]`; the codebook is not prefix-free."
+  },
+  {
+    "code": "INF019",
+    "locale": "en",
+    "exercise": 3,
+    "question": "Exhibit both complete control parses.",
+    "answer": "Stream `01` decodes as `[A,C]` or `[B]`, giving `2` complete parses. Both must remain visible; choosing the preferred verdict would invent information."
+  },
+  {
+    "code": "INF019",
+    "locale": "en",
+    "exercise": 4,
+    "question": "Does every prefix violation prove ambiguous decoding?",
+    "answer": "No. Prefix-free is a sufficient immediate-decoding property. For this control, ambiguity is established by the actual colliding sequences, not by an overgeneralized converse."
+  },
+  {
+    "code": "INF019",
+    "locale": "en",
+    "exercise": 5,
+    "question": "Would a byte checksum solve this ambiguity?",
+    "answer": "No. Both interpretations use the same intact bits. Specify symbol boundaries or a suitable code before discussing integrity checks; those checks address a different failure."
+  },
+  {
+    "code": "INF019",
+    "locale": "fr",
+    "exercise": 1,
+    "question": "Décodez entièrement le flux fixé.",
+    "answer": "La seule séquence complète est `[A,B,C]`. Ses frontières suivent `0`, `10`, `11` ; aucune autre séquence ne consomme le flux."
+  },
+  {
+    "code": "INF019",
+    "locale": "fr",
+    "exercise": 2,
+    "question": "Repérez la violation de préfixe du contrôle.",
+    "answer": "Le symbole `A` est un préfixe propre de `B`. La liste ordonnée vaut `[[A,B]]` ; le dictionnaire n’est pas préfixe."
+  },
+  {
+    "code": "INF019",
+    "locale": "fr",
+    "exercise": 3,
+    "question": "Donnez les analyses complètes du contrôle.",
+    "answer": "Le flux `01` donne `[A,C]` ou `[B]`, soit `2` analyses complètes. Gardez les deux ; choisir le verdict préféré inventerait une information."
+  },
+  {
+    "code": "INF019",
+    "locale": "fr",
+    "exercise": 4,
+    "question": "Toute violation prouve-t-elle un décodage ambigu ?",
+    "answer": "Non. Être préfixe suffit au décodage immédiat. Ici, l’ambiguïté est établie par les séquences réellement concurrentes, pas par une réciproque abusivement généralisée."
+  },
+  {
+    "code": "INF019",
+    "locale": "fr",
+    "exercise": 5,
+    "question": "Une somme de contrôle résoudrait-elle l’ambiguïté ?",
+    "answer": "Non. Les interprétations utilisent les mêmes bits intacts. Spécifiez frontières ou code adapté avant les contrôles d’intégrité, qui traitent un autre échec."
+  },
+  {
+    "code": "INF019",
+    "locale": "es",
+    "exercise": 1,
+    "question": "Decodifique por completo el flujo fijo.",
+    "answer": "La única secuencia completa es `[A,B,C]`. Sus fronteras siguen `0`, `10`, `11`; ninguna otra secuencia consume el flujo."
+  },
+  {
+    "code": "INF019",
+    "locale": "es",
+    "exercise": 2,
+    "question": "Identifique la violación de prefijo del control.",
+    "answer": "El símbolo `A` es prefijo propio de `B`. La lista ordenada es `[[A,B]]`; el diccionario no es libre de prefijos."
+  },
+  {
+    "code": "INF019",
+    "locale": "es",
+    "exercise": 3,
+    "question": "Muestre ambos análisis completos del control.",
+    "answer": "El flujo `01` se decodifica como `[A,C]` o `[B]`, con `2` análisis completos. Deben conservarse ambos; elegir el veredicto preferido inventaría información."
+  },
+  {
+    "code": "INF019",
+    "locale": "es",
+    "exercise": 4,
+    "question": "¿Toda violación prueba decodificación ambigua?",
+    "answer": "No. Ser libre de prefijos basta para decodificación inmediata. Aquí la ambigüedad se demuestra con las secuencias concretas en conflicto, no con una recíproca generalizada indebidamente."
+  },
+  {
+    "code": "INF019",
+    "locale": "es",
+    "exercise": 5,
+    "question": "¿Resolvería la ambigüedad una suma de comprobación?",
+    "answer": "No. Ambas interpretaciones usan los mismos bits intactos. Especifique fronteras o un código adecuado antes de tratar comprobaciones de integridad, que abordan otro fallo."
+  },
+  {
+    "code": "INF020",
+    "locale": "en",
+    "exercise": 1,
+    "question": "Encode the data with even parity.",
+    "answer": "The parity bit is `1`, and the complete codeword is `[1,0,1,1,1]`. Count the appended bit as part of the checked word, not as another data symbol."
+  },
+  {
+    "code": "INF020",
+    "locale": "en",
+    "exercise": 2,
+    "question": "Check the single substitution.",
+    "answer": "The received word is `[1,1,1,1,1]`, syndrome `1`, and detection `true`. Its Hamming distance from the reference is `1`; the syndrome alone does not name the position."
+  },
+  {
+    "code": "INF020",
+    "locale": "en",
+    "exercise": 3,
+    "question": "Apply the double-substitution control.",
+    "answer": "The received word is `[1,1,0,1,1]`, syndrome `0`, detection `false`, and Hamming distance `2`. A passing parity condition can accompany altered data."
+  },
+  {
+    "code": "INF020",
+    "locale": "en",
+    "exercise": 4,
+    "question": "Can the receiver correct a detected error?",
+    "answer": "Not from this syndrome alone. It does not identify the changed bit. Retain the refusal to guess a correction and request the information required by the actual channel protocol."
+  },
+  {
+    "code": "INF020",
+    "locale": "en",
+    "exercise": 5,
+    "question": "Does passing establish trusted evidence?",
+    "answer": "No. The check addresses a narrow corruption pattern. It establishes neither sender identity, revision meaning, authorization nor the truth of the encoded claim."
+  },
+  {
+    "code": "INF020",
+    "locale": "fr",
+    "exercise": 1,
+    "question": "Encodez les données avec parité paire.",
+    "answer": "Le bit de parité vaut `1` et le mot complet est `[1,0,1,1,1]`. Le bit ajouté fait partie du mot vérifié, pas des symboles de données."
+  },
+  {
+    "code": "INF020",
+    "locale": "fr",
+    "exercise": 2,
+    "question": "Vérifiez la substitution simple.",
+    "answer": "Le mot reçu est `[1,1,1,1,1]`, le syndrome `1` et la détection `true`. La distance à la référence vaut `1` ; le syndrome seul n’indique pas la position."
+  },
+  {
+    "code": "INF020",
+    "locale": "fr",
+    "exercise": 3,
+    "question": "Appliquez le contrôle à double substitution.",
+    "answer": "Le mot reçu est `[1,1,0,1,1]`, le syndrome `0`, la détection `false` et la distance `2`. Une parité conforme peut accompagner des données modifiées."
+  },
+  {
+    "code": "INF020",
+    "locale": "fr",
+    "exercise": 4,
+    "question": "Le récepteur peut-il corriger l’erreur détectée ?",
+    "answer": "Pas avec ce seul syndrome, qui n’identifie pas le bit modifié. Refusez de deviner la correction et demandez l’information nécessaire au vrai protocole du canal."
+  },
+  {
+    "code": "INF020",
+    "locale": "fr",
+    "exercise": 5,
+    "question": "Réussir le contrôle établit-il une preuve fiable ?",
+    "answer": "Non. Il traite un motif restreint de corruption, sans établir identité de l’émetteur, sens de la révision, autorisation ni vérité de l’affirmation encodée."
+  },
+  {
+    "code": "INF020",
+    "locale": "es",
+    "exercise": 1,
+    "question": "Codifique los datos con paridad par.",
+    "answer": "El bit de paridad es `1` y la palabra completa es `[1,0,1,1,1]`. El bit añadido forma parte de la palabra comprobada, no de los símbolos de datos."
+  },
+  {
+    "code": "INF020",
+    "locale": "es",
+    "exercise": 2,
+    "question": "Compruebe la sustitución única.",
+    "answer": "La palabra recibida es `[1,1,1,1,1]`, síndrome `1` y detección `true`. Su distancia a la referencia es `1`; el síndrome solo no identifica la posición."
+  },
+  {
+    "code": "INF020",
+    "locale": "es",
+    "exercise": 3,
+    "question": "Aplique el control de doble sustitución.",
+    "answer": "La palabra recibida es `[1,1,0,1,1]`, síndrome `0`, detección `false` y distancia de Hamming `2`. Una paridad válida puede acompañar datos alterados."
+  },
+  {
+    "code": "INF020",
+    "locale": "es",
+    "exercise": 4,
+    "question": "¿Puede el receptor corregir el error detectado?",
+    "answer": "No con este síndrome solo: no identifica el bit cambiado. Mantenga el rechazo a adivinar una corrección y solicite la información que necesite el protocolo real."
+  },
+  {
+    "code": "INF020",
+    "locale": "es",
+    "exercise": 5,
+    "question": "¿Superar la prueba establece evidencia confiable?",
+    "answer": "No. Comprueba un patrón limitado de corrupción, sin establecer identidad del emisor, significado de la revisión, autorización ni verdad de la afirmación codificada."
+  },
+  {
+    "code": "INF021",
+    "locale": "en",
+    "exercise": 1,
+    "question": "What is the marginal entropy?",
+    "answer": "It is `1` bit because each isolated label has probability `0.5`. This does not assert independence of consecutive labels."
+  },
+  {
+    "code": "INF021",
+    "locale": "en",
+    "exercise": 2,
+    "question": "Compute the source rate.",
+    "answer": "The binary conditional entropy is `0.8112781244591328` bits per symbol. Knowledge of the previous label reduces the modeled next-label uncertainty."
+  },
+  {
+    "code": "INF021",
+    "locale": "en",
+    "exercise": 3,
+    "question": "Compute finite-block entropy.",
+    "answer": "For length `4`, retain the initial bit and the later conditional contributions, giving `3.4338343733773984` bits. Rate times the full length omits that initial-state distinction."
+  },
+  {
+    "code": "INF021",
+    "locale": "en",
+    "exercise": 4,
+    "question": "Apply the independent-label control.",
+    "answer": "Its rate is `1` and block entropy is `4`, while marginal entropy remains `1`. Identical label proportions do not establish identical process uncertainty."
+  },
+  {
+    "code": "INF021",
+    "locale": "en",
+    "exercise": 5,
+    "question": "May repeated warnings be discarded as low information?",
+    "answer": "No. Mathematical unpredictability and operational importance differ. A repeated warning can remain necessary; an actual omission policy needs its own meaning, evidence and authority contract."
+  },
+  {
+    "code": "INF021",
+    "locale": "fr",
+    "exercise": 1,
+    "question": "Quelle est l’entropie marginale ?",
+    "answer": "Elle vaut `1` bit puisque chaque étiquette isolée a une probabilité de `0.5`. Cela n’affirme pas l’indépendance des étiquettes successives."
+  },
+  {
+    "code": "INF021",
+    "locale": "fr",
+    "exercise": 2,
+    "question": "Calculez le taux de la source.",
+    "answer": "L’entropie conditionnelle binaire vaut `0.8112781244591328` bits par symbole. Connaître l’étiquette précédente réduit l’incertitude modélisée sur la suivante."
+  },
+  {
+    "code": "INF021",
+    "locale": "fr",
+    "exercise": 3,
+    "question": "Calculez l’entropie du bloc fini.",
+    "answer": "Pour la longueur `4`, gardez le bit initial et les contributions conditionnelles suivantes : `3.4338343733773984` bits. Multiplier le taux par toute la longueur perd cette distinction initiale."
+  },
+  {
+    "code": "INF021",
+    "locale": "fr",
+    "exercise": 4,
+    "question": "Appliquez le contrôle indépendant.",
+    "answer": "Son taux vaut `1` et l’entropie du bloc `4`, avec une entropie marginale toujours de `1`. Des proportions identiques ne donnent pas une incertitude de processus identique."
+  },
+  {
+    "code": "INF021",
+    "locale": "fr",
+    "exercise": 5,
+    "question": "Peut-on supprimer des alertes répétées comme peu informatives ?",
+    "answer": "Non. Imprévisibilité mathématique et importance opérationnelle diffèrent. Une alerte répétée peut rester nécessaire ; toute omission exige son propre contrat de sens, de preuve et d’autorité."
+  },
+  {
+    "code": "INF021",
+    "locale": "es",
+    "exercise": 1,
+    "question": "¿Cuál es la entropía marginal?",
+    "answer": "Es `1` bit porque cada etiqueta aislada tiene probabilidad `0.5`. Eso no afirma independencia entre etiquetas consecutivas."
+  },
+  {
+    "code": "INF021",
+    "locale": "es",
+    "exercise": 2,
+    "question": "Calcule la tasa de la fuente.",
+    "answer": "La entropía condicional binaria es `0.8112781244591328` bits por símbolo. Conocer la etiqueta anterior reduce la incertidumbre modelada de la siguiente."
+  },
+  {
+    "code": "INF021",
+    "locale": "es",
+    "exercise": 3,
+    "question": "Calcule la entropía del bloque finito.",
+    "answer": "Para longitud `4`, conserve el bit inicial y las contribuciones condicionales posteriores: `3.4338343733773984` bits. Multiplicar la tasa por toda la longitud pierde esa distinción inicial."
+  },
+  {
+    "code": "INF021",
+    "locale": "es",
+    "exercise": 4,
+    "question": "Aplique el control independiente.",
+    "answer": "La tasa es `1` y la entropía del bloque `4`, mientras la marginal sigue en `1`. Proporciones idénticas no establecen idéntica incertidumbre del proceso."
+  },
+  {
+    "code": "INF021",
+    "locale": "es",
+    "exercise": 5,
+    "question": "¿Pueden descartarse avisos repetidos por poca información?",
+    "answer": "No. Imprevisibilidad matemática e importancia operativa difieren. Un aviso repetido puede seguir siendo necesario; una política de omisión necesita su propio contrato de significado, evidencia y autoridad."
+  },
+  {
+    "code": "NET016",
+    "locale": "en",
+    "exercise": 1,
+    "question": "Find the fixed target’s dominators.",
+    "answer": "In the declared node order they are `[S,R,P]`. Every allowed route reaches the review node; the entry and target also belong by definition."
+  },
+  {
+    "code": "NET016",
+    "locale": "en",
+    "exercise": 2,
+    "question": "Exhibit the control’s bypass.",
+    "answer": "The path `[S,B,P]` omits `R`. Dominators become `[S,P]`, and the mandatory-gate claim becomes `false`."
+  },
+  {
+    "code": "NET016",
+    "locale": "en",
+    "exercise": 3,
+    "question": "Does dominance prove review success?",
+    "answer": "No. It proves route membership under the graph interpretation. The gate’s actual predicate, evidence identity and authority still need separate validation."
+  },
+  {
+    "code": "NET016",
+    "locale": "en",
+    "exercise": 4,
+    "question": "May the same graph represent an all-required join?",
+    "answer": "Only after redefining its semantics. Allowed-choice paths and conjunctive prerequisite edges answer different questions; a route bypass is not automatically an unsatisfied AND condition."
+  },
+  {
+    "code": "NET016",
+    "locale": "en",
+    "exercise": 5,
+    "question": "What happens if publication is unreachable?",
+    "answer": "Do not report a satisfied gate from an empty path intersection. Report the unreachable target separately; our model requires a reachable target before evaluating necessity."
+  },
+  {
+    "code": "NET016",
+    "locale": "fr",
+    "exercise": 1,
+    "question": "Trouvez les dominateurs de la cible fixée.",
+    "answer": "Dans l’ordre déclaré, ce sont `[S,R,P]`. Tous les chemins passent par la revue ; entrée et cible appartiennent aussi à l’ensemble par définition."
+  },
+  {
+    "code": "NET016",
+    "locale": "fr",
+    "exercise": 2,
+    "question": "Donnez le contournement du contrôle.",
+    "answer": "Le chemin `[S,B,P]` omet `R`. Les dominateurs deviennent `[S,P]` et l’affirmation de garde obligatoire vaut `false`."
+  },
+  {
+    "code": "NET016",
+    "locale": "fr",
+    "exercise": 3,
+    "question": "La dominance prouve-t-elle une revue réussie ?",
+    "answer": "Non. Elle prouve une présence sur les chemins selon le graphe. Le prédicat réel, l’identité des preuves et l’autorité exigent encore une validation séparée."
+  },
+  {
+    "code": "NET016",
+    "locale": "fr",
+    "exercise": 4,
+    "question": "Le même graphe peut-il représenter une jointure obligatoire ?",
+    "answer": "Seulement en redéfinissant son sens. Chemins de choix et prérequis conjonctifs répondent à des questions différentes ; un contournement n’est pas automatiquement une condition AND manquante."
+  },
+  {
+    "code": "NET016",
+    "locale": "fr",
+    "exercise": 5,
+    "question": "Et si la publication est inaccessible ?",
+    "answer": "N’annoncez pas une garde satisfaite à partir d’une intersection vide de chemins. Signalez la cible inaccessible ; le modèle exige une cible accessible avant de juger la nécessité."
+  },
+  {
+    "code": "NET016",
+    "locale": "es",
+    "exercise": 1,
+    "question": "Obtenga los dominadores del destino fijo.",
+    "answer": "En el orden declarado son `[S,R,P]`. Toda ruta permitida pasa por revisión; entrada y destino también pertenecen por definición."
+  },
+  {
+    "code": "NET016",
+    "locale": "es",
+    "exercise": 2,
+    "question": "Muestre el desvío del control.",
+    "answer": "La ruta `[S,B,P]` omite `R`. Los dominadores pasan a `[S,P]` y la afirmación de guarda obligatoria es `false`."
+  },
+  {
+    "code": "NET016",
+    "locale": "es",
+    "exercise": 3,
+    "question": "¿Demuestra la dominancia una revisión correcta?",
+    "answer": "No. Demuestra pertenencia a rutas según el grafo. El predicado real, la identidad de evidencias y la autoridad necesitan validación aparte."
+  },
+  {
+    "code": "NET016",
+    "locale": "es",
+    "exercise": 4,
+    "question": "¿Puede el mismo grafo representar una unión de requisitos?",
+    "answer": "Solo tras redefinir su semántica. Rutas de elección y requisitos conjuntivos responden a preguntas distintas; un desvío no es automáticamente una condición AND incumplida."
+  },
+  {
+    "code": "NET016",
+    "locale": "es",
+    "exercise": 5,
+    "question": "¿Qué ocurre si publicación es inalcanzable?",
+    "answer": "No informe una guarda satisfecha desde una intersección vacía de rutas. Señale el destino inalcanzable; el modelo exige accesibilidad antes de evaluar necesidad."
+  },
+  {
+    "code": "NET017",
+    "locale": "en",
+    "exercise": 1,
+    "question": "Does marginal coverage pass?",
+    "answer": "Yes: every role has at least one candidate, so coverage is `true`. This says nothing yet about distinct simultaneous assignments."
+  },
+  {
+    "code": "NET017",
+    "locale": "en",
+    "exercise": 2,
+    "question": "Find the allocation obstruction.",
+    "answer": "Roles `[draft,review]` have neighbours `[w1]`, giving deficiency `1`. No injective assignment can fill both roles in the same window."
+  },
+  {
+    "code": "NET017",
+    "locale": "en",
+    "exercise": 3,
+    "question": "Give a maximum fixed matching.",
+    "answer": "The declared tie rule selects `[[draft,w1],[translate,w2]]`, with size `2`. Leaving review unfilled is explicit; silently reusing the drafting worker would violate exclusivity."
+  },
+  {
+    "code": "NET017",
+    "locale": "en",
+    "exercise": 4,
+    "question": "Apply the extra-edge control.",
+    "answer": "The full matching is `[[draft,w1],[review,w2],[translate,w3]]`, with size `3`; the deficient-subset field is `null`. All worker identities remain distinct."
+  },
+  {
+    "code": "NET017",
+    "locale": "en",
+    "exercise": 5,
+    "question": "Does a matching prove independent review?",
+    "answer": "No. Distinct identifiers do not establish distinct humans, independent sources, expertise or authorization. Add those constraints explicitly and retain their evidence before dispatch."
+  },
+  {
+    "code": "NET017",
+    "locale": "fr",
+    "exercise": 1,
+    "question": "La couverture marginale est-elle satisfaite ?",
+    "answer": "Oui : chaque rôle a au moins un candidat, donc elle vaut `true`. Cela ne dit encore rien des affectations simultanées distinctes."
+  },
+  {
+    "code": "NET017",
+    "locale": "fr",
+    "exercise": 2,
+    "question": "Trouvez l’obstacle d’affectation.",
+    "answer": "Les rôles `[draft,review]` ont pour voisins `[w1]`, d’où une déficience de `1`. Aucune affectation injective ne remplit les deux dans la même fenêtre."
+  },
+  {
+    "code": "NET017",
+    "locale": "fr",
+    "exercise": 3,
+    "question": "Donnez un couplage maximal du cas fixé.",
+    "answer": "La règle d’égalité choisit `[[draft,w1],[translate,w2]]`, de taille `2`. La revue reste explicitement vide ; réutiliser le worker de rédaction violerait l’exclusivité."
+  },
+  {
+    "code": "NET017",
+    "locale": "fr",
+    "exercise": 4,
+    "question": "Appliquez le contrôle avec une arête ajoutée.",
+    "answer": "Le couplage complet est `[[draft,w1],[review,w2],[translate,w3]]`, de taille `3` ; le champ déficient vaut `null`. Les workers restent distincts."
+  },
+  {
+    "code": "NET017",
+    "locale": "fr",
+    "exercise": 5,
+    "question": "Le couplage prouve-t-il une revue indépendante ?",
+    "answer": "Non. Des identifiants différents ne prouvent ni humains distincts, ni sources indépendantes, ni expertise, ni autorisation. Ajoutez ces contraintes et leurs preuves avant le dispatch."
+  },
+  {
+    "code": "NET017",
+    "locale": "es",
+    "exercise": 1,
+    "question": "¿Se cumple la cobertura marginal?",
+    "answer": "Sí: cada rol tiene algún candidato, así que es `true`. Todavía no afirma nada sobre asignaciones simultáneas distintas."
+  },
+  {
+    "code": "NET017",
+    "locale": "es",
+    "exercise": 2,
+    "question": "Encuentre el obstáculo de asignación.",
+    "answer": "Los roles `[draft,review]` tienen vecinos `[w1]`, con deficiencia `1`. Ninguna asignación inyectiva cubre ambos en la misma ventana."
+  },
+  {
+    "code": "NET017",
+    "locale": "es",
+    "exercise": 3,
+    "question": "Dé un emparejamiento máximo fijo.",
+    "answer": "La regla de desempate elige `[[draft,w1],[translate,w2]]`, de tamaño `2`. Revisión queda vacía explícitamente; reutilizar su worker violaría la exclusividad."
+  },
+  {
+    "code": "NET017",
+    "locale": "es",
+    "exercise": 4,
+    "question": "Aplique el control con una arista adicional.",
+    "answer": "El emparejamiento completo es `[[draft,w1],[review,w2],[translate,w3]]`, de tamaño `3`; el campo de subconjunto deficiente es `null`. Los workers siguen siendo distintos."
+  },
+  {
+    "code": "NET017",
+    "locale": "es",
+    "exercise": 5,
+    "question": "¿Demuestra el emparejamiento una revisión independiente?",
+    "answer": "No. Identificadores distintos no prueban personas distintas, fuentes independientes, experiencia ni autorización. Añada esas restricciones y sus evidencias antes de despachar."
+  },
+  {
+    "code": "NET018",
+    "locale": "en",
+    "exercise": 1,
+    "question": "Give the fixed reduced edge set.",
+    "answer": "It is `[[A,B],[B,C],[C,D]]`. The removed shortcuts are `[[A,C],[A,D],[B,D]]`; each has an alternate directed path in the fixed graph."
+  },
+  {
+    "code": "NET018",
+    "locale": "en",
+    "exercise": 2,
+    "question": "Check the preservation target.",
+    "answer": "There are `6` ordered distinct reachable pairs before and `6` after. Equal counts alone are insufficient in general; the actual pair sets must also agree."
+  },
+  {
+    "code": "NET018",
+    "locale": "en",
+    "exercise": 3,
+    "question": "Which control edges remain necessary?",
+    "answer": "The reduction is `[[A,B],[A,C],[B,D],[C,D]]`; only `[[A,D]]` is removed. Reachable-pair counts remain `5` before and `5` after."
+  },
+  {
+    "code": "NET018",
+    "locale": "en",
+    "exercise": 4,
+    "question": "May a redundant arrow’s receipt be deleted?",
+    "answer": "No. Precedence reachability does not encode receipt identity, direct data transfer or authority. Retain those records separately and keep the unreduced graph available."
+  },
+  {
+    "code": "NET018",
+    "locale": "en",
+    "exercise": 5,
+    "question": "Why reject cyclic input to this operation?",
+    "answer": "The declared reduction rule assumes a DAG. Condense or otherwise resolve cycles with an explicitly justified model before applying it; do not silently reuse the same uniqueness claim."
+  },
+  {
+    "code": "NET018",
+    "locale": "fr",
+    "exercise": 1,
+    "question": "Donnez les arêtes réduites du cas fixé.",
+    "answer": "Ce sont `[[A,B],[B,C],[C,D]]`. Les raccourcis retirés sont `[[A,C],[A,D],[B,D]]` ; chacun possède un chemin dirigé alternatif."
+  },
+  {
+    "code": "NET018",
+    "locale": "fr",
+    "exercise": 2,
+    "question": "Vérifiez la propriété préservée.",
+    "answer": "Il y a `6` paires ordonnées accessibles avant et `6` après. L’égalité des comptes ne suffit pas en général : les ensembles réels doivent aussi concorder."
+  },
+  {
+    "code": "NET018",
+    "locale": "fr",
+    "exercise": 3,
+    "question": "Quelles arêtes du contrôle restent nécessaires ?",
+    "answer": "La réduction vaut `[[A,B],[A,C],[B,D],[C,D]]` ; seul `[[A,D]]` disparaît. Les comptes accessibles restent `5` avant et `5` après."
+  },
+  {
+    "code": "NET018",
+    "locale": "fr",
+    "exercise": 4,
+    "question": "Peut-on supprimer la preuve d’une flèche redondante ?",
+    "answer": "Non. L’accessibilité de précédence n’encode ni identité des preuves, ni données directes, ni autorité. Gardez ces enregistrements séparément et le graphe original disponible."
+  },
+  {
+    "code": "NET018",
+    "locale": "fr",
+    "exercise": 5,
+    "question": "Pourquoi refuser une entrée cyclique ?",
+    "answer": "La règle déclarée suppose un DAG. Condensez ou résolvez les cycles avec un modèle justifié avant de l’appliquer ; ne réutilisez pas silencieusement sa garantie d’unicité."
+  },
+  {
+    "code": "NET018",
+    "locale": "es",
+    "exercise": 1,
+    "question": "Dé el conjunto reducido fijo.",
+    "answer": "Es `[[A,B],[B,C],[C,D]]`. Los atajos retirados son `[[A,C],[A,D],[B,D]]`; cada uno tiene otra ruta dirigida en el grafo fijo."
+  },
+  {
+    "code": "NET018",
+    "locale": "es",
+    "exercise": 2,
+    "question": "Compruebe la propiedad conservada.",
+    "answer": "Hay `6` pares ordenados alcanzables antes y `6` después. Igualar recuentos no basta en general: deben coincidir los conjuntos reales."
+  },
+  {
+    "code": "NET018",
+    "locale": "es",
+    "exercise": 3,
+    "question": "¿Qué aristas del control siguen siendo necesarias?",
+    "answer": "La reducción es `[[A,B],[A,C],[B,D],[C,D]]`; solo se retira `[[A,D]]`. Los recuentos alcanzables siguen en `5` antes y `5` después."
+  },
+  {
+    "code": "NET018",
+    "locale": "es",
+    "exercise": 4,
+    "question": "¿Puede borrarse el recibo de una flecha redundante?",
+    "answer": "No. La accesibilidad de precedencia no codifica identidad del recibo, datos directos ni autoridad. Conserve esos registros aparte y mantenga disponible el grafo original."
+  },
+  {
+    "code": "NET018",
+    "locale": "es",
+    "exercise": 5,
+    "question": "¿Por qué rechazar una entrada cíclica?",
+    "answer": "La regla declarada supone un DAG. Condense o resuelva ciclos con un modelo justificado antes de aplicarla; no reutilice silenciosamente la misma garantía de unicidad."
+  },
+  {
+    "code": "PM014",
+    "locale": "en",
+    "exercise": 1,
+    "question": "Why is the tempting feature pair infeasible?",
+    "answer": "Subset `[B,D]` costs `5` directly but omits prerequisite `A`. Its closure `[A,B,D]` costs `8`, exceeding budget `6`. The apparent saving comes from a missing obligation."
+  },
+  {
+    "code": "PM014",
+    "locale": "en",
+    "exercise": 2,
+    "question": "Find the fixed optimal portfolio.",
+    "answer": "There are `7` feasible subsets. The optimum is `[C,D]`, costing `6` with value `10`. Both prerequisites and budget are satisfied."
+  },
+  {
+    "code": "PM014",
+    "locale": "en",
+    "exercise": 3,
+    "question": "Apply the prerequisite-free control.",
+    "answer": "There are `9` feasible subsets; `[B,D]` now costs `5` and has value `11`. This result requires the altered dependency premise, not a faster optimizer."
+  },
+  {
+    "code": "PM014",
+    "locale": "en",
+    "exercise": 4,
+    "question": "May a shared foundation be charged repeatedly?",
+    "answer": "Not under the declared model: each selected item is charged once. Repeated charging would define another cost model and could reverse the portfolio comparison."
+  },
+  {
+    "code": "PM014",
+    "locale": "en",
+    "exercise": 5,
+    "question": "Does this optimize the current course delivery scope?",
+    "answer": "No. The actual requested batch remains the scope authority. These fictional optional improvements illustrate closure; applying a real selection requires actual costs, values and explicit decision authority."
+  },
+  {
+    "code": "PM014",
+    "locale": "fr",
+    "exercise": 1,
+    "question": "Pourquoi la paire séduisante est-elle impossible ?",
+    "answer": "Le sous-ensemble `[B,D]` coûte directement `5`, mais omet `A`. Sa fermeture `[A,B,D]` coûte `8`, au-delà du budget `6`. L’économie apparente vient d’une obligation oubliée."
+  },
+  {
+    "code": "PM014",
+    "locale": "fr",
+    "exercise": 2,
+    "question": "Trouvez le portefeuille optimal fixé.",
+    "answer": "Il existe `7` sous-ensembles admissibles. L’optimum est `[C,D]`, de coût `6` et de valeur `10`. Prérequis et budget sont respectés."
+  },
+  {
+    "code": "PM014",
+    "locale": "fr",
+    "exercise": 3,
+    "question": "Appliquez le contrôle sans prérequis.",
+    "answer": "Il y a `9` sous-ensembles admissibles ; `[B,D]` coûte maintenant `5` et vaut `11`. Ce résultat exige la dépendance modifiée, pas un optimiseur plus rapide."
+  },
+  {
+    "code": "PM014",
+    "locale": "fr",
+    "exercise": 4,
+    "question": "Peut-on facturer plusieurs fois une fondation commune ?",
+    "answer": "Pas selon ce modèle : chaque élément choisi est facturé une seule fois. Le répéter définirait un autre coût et pourrait inverser la comparaison."
+  },
+  {
+    "code": "PM014",
+    "locale": "fr",
+    "exercise": 5,
+    "question": "Cela optimise-t-il le périmètre actuel de livraison ?",
+    "answer": "Non. La demande réelle fixe le périmètre. Ces améliorations facultatives fictives illustrent la fermeture ; une sélection réelle exige coûts, valeurs et autorité explicite."
+  },
+  {
+    "code": "PM014",
+    "locale": "es",
+    "exercise": 1,
+    "question": "¿Por qué es inviable la pareja atractiva?",
+    "answer": "El subconjunto `[B,D]` cuesta directamente `5`, pero omite `A`. Su cierre `[A,B,D]` cuesta `8`, superando el presupuesto `6`. El ahorro aparente procede de una obligación ausente."
+  },
+  {
+    "code": "PM014",
+    "locale": "es",
+    "exercise": 2,
+    "question": "Encuentre la cartera óptima fija.",
+    "answer": "Hay `7` subconjuntos admisibles. El óptimo es `[C,D]`, con coste `6` y valor `10`. Cumple requisitos y presupuesto."
+  },
+  {
+    "code": "PM014",
+    "locale": "es",
+    "exercise": 3,
+    "question": "Aplique el control sin requisito.",
+    "answer": "Hay `9` subconjuntos admisibles; `[B,D]` cuesta ahora `5` y vale `11`. El resultado exige cambiar la dependencia, no acelerar el optimizador."
+  },
+  {
+    "code": "PM014",
+    "locale": "es",
+    "exercise": 4,
+    "question": "¿Puede cobrarse varias veces una base compartida?",
+    "answer": "No en este modelo: cada elemento elegido se cobra una sola vez. Cobrarlo repetidamente definiría otro modelo de costes y podría invertir la comparación."
+  },
+  {
+    "code": "PM014",
+    "locale": "es",
+    "exercise": 5,
+    "question": "¿Optimiza esto el alcance actual de entrega?",
+    "answer": "No. La solicitud real sigue definiendo el alcance. Las mejoras opcionales ficticias ilustran el cierre; una selección real exige costes, valores y autoridad explícita."
+  },
+  {
+    "code": "PM015",
+    "locale": "en",
+    "exercise": 1,
+    "question": "Derive the waiting charge for the interior candidate.",
+    "answer": "For size `4`, total waiting is `18` item-ticks and there are `3` setups. Setup costs `27`, so total cost is `45` points under the declared conversion."
+  },
+  {
+    "code": "PM015",
+    "locale": "en",
+    "exercise": 2,
+    "question": "Find every fixed optimum.",
+    "answer": "The candidate costs are `[108,60,48,45,48,75]`; only size `[4]` minimizes them. Minimizing setup count alone would choose a different and more costly candidate."
+  },
+  {
+    "code": "PM015",
+    "locale": "en",
+    "exercise": 3,
+    "question": "Apply the low-setup control.",
+    "answer": "Costs become `[12,12,16,21,32,67]`. The optimal sizes are `[1,2]`, both at `12` points. Retain the tie instead of inventing an unannounced preference."
+  },
+  {
+    "code": "PM015",
+    "locale": "en",
+    "exercise": 4,
+    "question": "Can item-ticks be added directly to minutes?",
+    "answer": "No. The model explicitly converts waiting and setup to a common point scale. A real tradeoff needs justified conversion or a different decision objective, not mixed units."
+  },
+  {
+    "code": "PM015",
+    "locale": "en",
+    "exercise": 5,
+    "question": "Does the tiny optimum change the actual batch scope?",
+    "answer": "No. It is conditional authored arithmetic for a future cadence question. Actual requested delivery, review authority and quality requirements remain the operative constraints; real costs have not been measured."
+  },
+  {
+    "code": "PM015",
+    "locale": "fr",
+    "exercise": 1,
+    "question": "Dérivez l’attente du candidat intérieur.",
+    "answer": "Pour la taille `4`, l’attente totale vaut `18` items-ticks et il y a `3` préparations. Elles coûtent `27`, soit un total de `45` points selon la conversion déclarée."
+  },
+  {
+    "code": "PM015",
+    "locale": "fr",
+    "exercise": 2,
+    "question": "Trouvez tous les optima fixés.",
+    "answer": "Les coûts sont `[108,60,48,45,48,75]` ; seule la taille `[4]` les minimise. Réduire uniquement le nombre de préparations choisirait un candidat différent et plus coûteux."
+  },
+  {
+    "code": "PM015",
+    "locale": "fr",
+    "exercise": 3,
+    "question": "Appliquez le contrôle de préparation réduite.",
+    "answer": "Les coûts deviennent `[12,12,16,21,32,67]`. Les tailles optimales sont `[1,2]`, toutes deux à `12` points. Gardez l’égalité sans inventer de préférence."
+  },
+  {
+    "code": "PM015",
+    "locale": "fr",
+    "exercise": 4,
+    "question": "Peut-on ajouter directement items-ticks et minutes ?",
+    "answer": "Non. Le modèle convertit explicitement attente et préparation en points communs. Un arbitrage réel exige une conversion justifiée ou un autre objectif, pas des unités mélangées."
+  },
+  {
+    "code": "PM015",
+    "locale": "fr",
+    "exercise": 5,
+    "question": "Le petit optimum change-t-il le périmètre demandé ?",
+    "answer": "Non. C’est un calcul construit conditionnel pour une future cadence. Demande réelle, autorité de revue et exigences de qualité restent les contraintes applicables ; aucun coût réel n’a été mesuré."
+  },
+  {
+    "code": "PM015",
+    "locale": "es",
+    "exercise": 1,
+    "question": "Derive la espera del candidato interior.",
+    "answer": "Con tamaño `4`, la espera total es `18` ítems-ticks y hay `3` preparaciones. Cuestan `27`, dando un total de `45` puntos con la conversión declarada."
+  },
+  {
+    "code": "PM015",
+    "locale": "es",
+    "exercise": 2,
+    "question": "Encuentre todos los óptimos fijos.",
+    "answer": "Los costes son `[108,60,48,45,48,75]`; solo el tamaño `[4]` los minimiza. Minimizar solo el número de preparaciones elegiría otro candidato más costoso."
+  },
+  {
+    "code": "PM015",
+    "locale": "es",
+    "exercise": 3,
+    "question": "Aplique el control de menor preparación.",
+    "answer": "Los costes pasan a `[12,12,16,21,32,67]`. Los tamaños óptimos son `[1,2]`, ambos con `12` puntos. Conserve el empate sin inventar una preferencia."
+  },
+  {
+    "code": "PM015",
+    "locale": "es",
+    "exercise": 4,
+    "question": "¿Pueden sumarse directamente ítems-ticks y minutos?",
+    "answer": "No. El modelo convierte explícitamente espera y preparación a puntos comunes. Un equilibrio real exige una conversión justificada u otro objetivo, no unidades mezcladas."
+  },
+  {
+    "code": "PM015",
+    "locale": "es",
+    "exercise": 5,
+    "question": "¿Cambia el óptimo pequeño el alcance solicitado?",
+    "answer": "No. Es aritmética construida condicional para una cadencia futura. Solicitud real, autoridad de revisión y calidad siguen siendo restricciones vigentes; no se han medido costes reales."
+  }
+]

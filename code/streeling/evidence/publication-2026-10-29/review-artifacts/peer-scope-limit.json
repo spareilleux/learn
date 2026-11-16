@@ -1,0 +1,9 @@
+{
+  "coverage": "adversarial lens: in-process fallback (cross-model peer not run: bundled peer contract cannot enforce the authorized seven-path read allowlist)",
+  "host_harness": "codex",
+  "observed_scope_limit": "Repository-wide git diff and reads cannot guarantee seven named paths.",
+  "host_family": "codex",
+  "installed_route": "claude",
+  "evidence": "cross-model-review.md exact start invocation accepts base and repo-wide tree, with no path scope; cross-model-recovery.md trust table permits read-anywhere for installed Claude route. No code sent, no job created.",
+  "outcome": "in-process-fallback"
+}

@@ -1,0 +1,88 @@
+{
+  "scope": "New analysis of retained WAVs plus a constructed exact half-gain control; not a new engine render, listening test or IX execution.",
+  "fixed": {
+    "formula": "20*log10(max(A/1,1e-4))",
+    "reference_peak_amplitude": 1,
+    "color_limits_db": [
+      -80,
+      0
+    ]
+  },
+  "relative": {
+    "formula": "20*log10(max(A/max(A),1e-4))",
+    "reference": "Each full matrix has its own maximum before display frequency cropping.",
+    "color_limits_db": [
+      -80,
+      0
+    ]
+  },
+  "constructed_half_gain": {
+    "label": "0.5B",
+    "source": "B",
+    "gain": 0.5,
+    "expected_unfloored_db_shift": -6.020599913279624,
+    "common_unfloored_cells": 6359,
+    "measured_shift_min_db": -6.020599913279632,
+    "measured_shift_max_db": -6.020599913279611,
+    "maximum_relative_view_difference_db": 0.0
+  },
+  "panels": [
+    {
+      "label": "B",
+      "shape": [
+        341,
+        1025
+      ],
+      "max_amplitude": 0.1396993289223481,
+      "matrix_float64le_sha256": "f80715e30113072c89de448ae844a09f42770f73d6fe3ed10e22fb33486064a8",
+      "cells_at_or_below_fixed_floor": 340939,
+      "selected_cell_frame0_bin4": {
+        "amplitude": 0.1396993289223481,
+        "fixed_db": -17.096113602272005,
+        "relative_db": 0.0
+      }
+    },
+    {
+      "label": "C",
+      "shape": [
+        341,
+        1025
+      ],
+      "max_amplitude": 0.13964252163655008,
+      "matrix_float64le_sha256": "c23fb79c84e14ccd1b0f8def3db4f4ae6c04c830797b3d23a9a945920a84c611",
+      "cells_at_or_below_fixed_floor": 340959,
+      "selected_cell_frame0_bin4": {
+        "amplitude": 0.13964252163655008,
+        "fixed_db": -17.099646347694105,
+        "relative_db": 0.0
+      }
+    },
+    {
+      "label": "0.5B",
+      "shape": [
+        341,
+        1025
+      ],
+      "max_amplitude": 0.06984966446117405,
+      "matrix_float64le_sha256": "5dd614ce79be0f753c0efa84e47deb72a4e140565051aff988a9d771ce10dc03",
+      "cells_at_or_below_fixed_floor": 343166,
+      "selected_cell_frame0_bin4": {
+        "amplitude": 0.06984966446117405,
+        "fixed_db": -23.116713515551627,
+        "relative_db": 0.0
+      }
+    }
+  ],
+  "prior_decay_gate": {
+    "results_json_sha256": "d564b476e0fccaff1a435548b5ae795807337622fdff69fb19ce0ace0d320506",
+    "improvement_db": 0.11416614959438576,
+    "required_improvement_db": 1,
+    "candidate_passes": false
+  },
+  "limits": [
+    "The amplitude estimator is calibrated on isolated coherent tones, not validated as a general guitar-partial or loudness estimator.",
+    "Fixed and panel-relative rows have different references; identical numeric color limits do not make their units interchangeable.",
+    "Values below the display floor hide differences; the gain-shift comparison excludes floor-clipped cells.",
+    "C is the actual decay candidate; 0.5B is a constructed control, not a third physical render."
+  ]
+}

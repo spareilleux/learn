@@ -1,0 +1,61 @@
+# l21, GA's main
+
+== The vocabulary's five examples, as the user said them and as it rewrites them, on main
+the user said                read as                            rewritten         read as                    same voicings   top scores
+Cmaj7 jazz voicing           chord Cmaj7, tags jazz             Cmaj7 jazz        chord Cmaj7, tags jazz     yes             0.6447, 0.6447
+F# Lydian drop 2             chord F#, mode Lydian, tags drop   F# Lydian drop2   chord F#, mode Lydian, tags drop2 yes             0.6500, 0.6500
+rootless Dm7                 chord Dm7, tags rootless           Dm7 rootless      chord Dm7, tags rootless   yes             0.6408, 0.6408
+something jazzy in F minor   chord F, mode minor, tags jazzy    Fm jazz           chord Fm, tags jazz        no              0.6000, 0.6000
+shell voicing for G7         chord G7, tags shell for           G7 shell          chord G7, tags shell       yes             0.6316, 0.6447
+F minor, read as chord F, mode minor: x-x-x-2-1-1 F/A, x-x-3-2-1-x F, x-x-3-2-1-1 F
+Fm, read as chord Fm: x-x-x-1-1-1 Fm/Ab, x-x-3-1-1-x Fm, x-x-3-1-1-1 Fm
+
+== The 23 modes after a chord, and alone, on main
+chord   modes  the same ten voicings as alone the others, as read
+C       23     19                             harmonic minor: mode harmonic minor, tags minor; lydian dominant: mode lydian, tags dominant; melodic minor: mode melodic minor, tags minor; phrygian dominant: mode phrygian, tags dominant
+Am      23     19                             harmonic minor: mode harmonic minor, tags minor; lydian dominant: mode lydian, tags dominant; melodic minor: mode melodic minor, tags minor; phrygian dominant: mode phrygian, tags dominant
+G7      23     21                             lydian dominant: mode lydian, tags dominant; phrygian dominant: mode phrygian, tags dominant
+Dm7     23     18                             harmonic minor: mode harmonic minor, tags minor; lydian dominant: mode lydian, tags dominant; melodic minor: mode melodic minor, tags minor; phrygian dominant: mode phrygian, tags dominant; whole tone: mode whole tone, tags tone
+modes alone: 18 of 23 answer with every score 0.0000, all the same ten voicings: yes, the index's first ten: yes
+  x-x-x-0-0-0 Em/G, x-x-x-0-0-1 G7(shell), x-x-x-0-0-2 Gmaj7(shell), x-x-x-0-0-3 G + B (Major 3rd), x-x-x-0-1-0 C/G, x-x-x-0-1-1 Csus4/G, x-x-x-0-1-2 C5/G, x-x-x-0-1-3 C5, x-x-x-0-2-0 Dbdim/G, x-x-x-0-2-1 Gm7b5
+  harmonic minor: mode harmonic minor, tags minor, top score 0.0577
+  lydian dominant: mode lydian, tags dominant, top score 0.0577
+  melodic minor: mode melodic minor, tags minor, top score 0.0577
+  phrygian dominant: mode phrygian, tags dominant, top score 0.0577
+  whole tone: mode whole tone, tags tone, top score 0.0577
+
+== The 188 symbolic tags after a chord, on main
+chord   tags   different answers  the same ten as the chord alone  bits whose tags all answer alike
+Cmaj7   188    5                  76                               12 of 12
+Dm7     188    4                  53                               12 of 12
+G7      188    3                  135                              12 of 12
+for Cmaj7, the bits whose tags change nothing: 3, 4, 5, 8, 10
+for Cmaj7, jazz and rock-guitar: the same answer yes
+for Cmaj7, shell-voicing and rootless: the same answer yes
+for Cmaj7, jazz and shell-voicing: the same answer yes
+
+== "rootless" after a seventh chord, on main
+chord   ten voicings, rootless rootless in the index  the first three
+Cmaj7   0 of 10                63                     x-2-2-x-1-3 Cmaj7/B, x-3-2-x-0-3 Cmaj7, x-3-2-0-0-3 Cmaj7
+Dm7     0 of 10                35                     x-3-0-2-3-1 Dm7/C, 1-3-x-2-3-x Dm7/F, 1-3-x-2-3-1 Dm7/F
+Em7     0 of 10                35                     x-2-0-0-x-0 Em7/B, x-2-0-0-0-0 Em7/B, x-2-0-0-3-0 Em7/B
+Fmaj7   0 of 10                35                     1-0-3-2-1-0 Fmaj7, x-3-2-2-x-1 Fmaj7/C, x-3-2-2-1-1 Fmaj7/C
+G7      0 of 10                19                     x-2-3-0-3-1 G7/B, 1-2-x-x-3-3 G7/F, 1-2-x-0-3-1 G7/F
+Am7     0 of 10                63                     x-3-2-2-1-3 Am7/C, 0-3-x-2-1-3 Am7/E, 0-3-2-2-1-3 Am7/E
+C7      0 of 10                35                     x-x-2-3-1-3 C7/E, x-1-2-x-1-3 C7/Bb, x-1-2-0-1-3 C7/Bb
+D7      0 of 10                15                     x-3-0-2-1-2 D7/C, 2-3-x-2-3-2 D7/Gb, 2-3-0-2-1-x D7/Gb
+E7      0 of 10                5                      x-2-2-1-3-x E7/B, x-x-0-1-0-0 E7/D, x-2-x-1-3-0 E7/B
+A7      0 of 10                21                     x-x-2-2-2-3 A7/E, x-0-x-0-2-0 A7, x-0-2-x-2-3 A7
+voicings answered 100: rootless 0
+
+== The scores, on main
+partitions a query fills: STRUCTURE 0.45, SYMBOLIC 0.10, MODAL 0.10, ROOT 0.05; always empty: MORPHOLOGY 0.25, CONTEXT 0.20
+the highest score a query can reach: 0.70
+chord queries 828: the highest top score 0.6000, for A
+  Cmaj7: 0.6000
+  Cmaj7 jazz: 0.6447
+  Cmaj7 drop2 jazz: 0.6577
+  Cmaj7 shell dreamy jazz: 0.6775
+  G7: 0.6000
+  G7 shell: 0.6447
+  G7 shell for: 0.6316

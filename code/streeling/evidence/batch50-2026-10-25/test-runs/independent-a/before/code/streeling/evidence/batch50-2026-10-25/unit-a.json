@@ -1,0 +1,2986 @@
+{
+  "schema": "streeling.authored-course-unit.v1",
+  "unit": "a",
+  "base_learn_commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+  "plan_commit": "f93c0356d23c3700ad1ead501eef46802dca2a31",
+  "scope": "18 project-useful authored audio/music courses in EN/FR/ES; author content checks only, independent claim implementation/review, human/fluent-language/learner decisions and publication remain pending.",
+  "primary_references": [
+    {
+      "path_or_url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.correlate.html",
+      "pin": "SciPy 1.18.0 manual, read 2026-10-25",
+      "scope": "Definition and zero-padded linear convention, Notes lines 90-118. Our circular sum is explicitly a different authored convention; SciPy was not executed.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+    },
+    {
+      "path_or_url": "https://www.phys.unsw.edu.au/jw/strings.html",
+      "pin": "UNSW Music Acoustics live HTML, read 2026-10-25; immutable revision unavailable",
+      "scope": "Standing-wave nodes and antinodes, mode wavelengths and frequencies, browser lines 46-65. No real pickup calibration or recorded harmonic result.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+    },
+    {
+      "path_or_url": "https://openstax.org/books/university-physics-volume-1/pages/12-3-stress-strain-and-elastic-modulus",
+      "pin": "OpenStax University Physics Volume 1 live HTML, read 2026-10-25; immutable revision unavailable",
+      "scope": "Stress, strain and linear elastic scope, lines 29-49. The axial stiffness, geometry and constant density below are authored assumptions, not material measurements.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+    },
+    {
+      "path_or_url": "https://www.dsprelated.com/freebooks/pasp/Stiff_String.html",
+      "pin": "Julius O. Smith, Physical Audio Signal Processing, live HTML read 2026-10-25; immutable revision unavailable",
+      "scope": "Stiff-string dispersive propagation and LTI allpass modeling, lines 20-48. No calibration between fitted teaching coefficient and production control.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+    },
+    {
+      "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/harmonic/",
+      "pin": "MusicXML 4.0 reference",
+      "scope": "Element definition and natural/artificial, base/touching/sounding-pitch children, lines 52-66.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+    },
+    {
+      "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/wavy-line/",
+      "pin": "MusicXML 4.0 reference",
+      "scope": "Definition and playback attributes, lines 52-82. Trill beat counts and percentages are not assumed to specify our sinusoidal cent curve.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+    },
+    {
+      "path_or_url": "https://scikit-learn.org/stable/modules/cross_validation.html",
+      "pin": "scikit-learn 1.9.1 documentation, live HTML read 2026-10-25",
+      "scope": "Group cross-validation discussion: dependence between samples and keeping group identities out of both train/test. We use a manual family partition, no library execution.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+    },
+    {
+      "path_or_url": "https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm",
+      "pin": "NIST/SEMATECH e-Handbook section 7.2.4.1, read 2026-10-25",
+      "scope": "Wilson limits formula and terminology, lines 4-14 and 44. No normal-approximation Wald interval substituted.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+    },
+    {
+      "path_or_url": "https://www.itl.nist.gov/div898/handbook/pri/section3/pri331.htm",
+      "pin": "NIST/SEMATECH e-Handbook section 5.3.3.1, read 2026-10-25",
+      "scope": "Randomized run sequence and balanced replication, lines 7-16. The deterministic order examples here do not claim randomization.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+    },
+    {
+      "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sound/",
+      "pin": "MusicXML 4.0 reference",
+      "scope": "Playback distinction, offset, damper-pedal and tempo attributes, lines 52-58, 78 and 92. Continuous ramp and release policies are authored, not specified by those attributes.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+    },
+    {
+      "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/backup/",
+      "pin": "MusicXML 4.0 reference",
+      "scope": "Definition, positive duration, measure/divisions restrictions and required duration child, lines 52-65.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+    },
+    {
+      "path_or_url": "https://www.nist.gov/pml/time-and-frequency-division/popular-links/time-frequency-z",
+      "pin": "NIST Time and Frequency from A to Z, updated 2023-03-01; read 2026-10-25",
+      "scope": "A440 and multiplicative cent relationship, lines 141-145. Listening-threshold statements are not used as acceptance thresholds.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+    },
+    {
+      "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/degree-type-value/",
+      "pin": "MusicXML 4.0 reference",
+      "scope": "Addition, alteration and subtraction relative to chord kind, lines 52-62. Missing-degree rejection is our declared teaching policy.",
+      "sha256": null,
+      "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+    }
+  ],
+  "courses": [
+    {
+      "code": "AUD016",
+      "department": "audio-engineering",
+      "module_id": "aud-016-separate-dc-offset-from-ac-energy",
+      "title": "Separate DC Offset from AC Energy",
+      "source_paths": {
+        "en": "streeling/courses/audio-engineering/en/aud-016-separate-dc-offset-from-ac-energy.md",
+        "fr": "streeling/courses/audio-engineering/fr/aud-016-separate-dc-offset-from-ac-energy.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-016-separate-dc-offset-from-ac-energy.es.md"
+      },
+      "novelty_vs_prerequisites": "AUD005 guards individual samples and formats; this adds finite-record mean removal, orthogonal DC/AC energy decomposition and its comparison consequences.",
+      "prerequisites": [
+        "aud-005-pcm-guards-and-format-boundaries"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/audio-engineering/en/aud-005-pcm-guards-and-format-boundaries.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "1f15d25a97ddff5b2f2ca57e1af9ababcc2a6c4a4b368306eb8b775316f35341",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/guitar-runtime/run.mjs",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+          "scope": "Complete source read: guard, mono header, RMS accumulation and retained comparison construction; no execution this batch.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "samples": [
+            0,
+            1,
+            0,
+            1
+          ]
+        },
+        "formula": "mean=sum(x)/N; ac_i=x_i-mean; total_ms=sum(x_i^2)/N; ac_ms=sum(ac_i^2)/N; total_ms=mean^2+ac_ms",
+        "expected": {
+          "mean": 0.5,
+          "ac_samples": [
+            -0.5,
+            0.5,
+            -0.5,
+            0.5
+          ],
+          "total_ms": 0.5,
+          "ac_ms": 0.25,
+          "total_rms": 0.7071067811865476,
+          "ac_rms": 0.5
+        },
+        "negative_control": {
+          "values": {
+            "samples": [
+              -0.5,
+              0.5,
+              -0.5,
+              0.5
+            ]
+          },
+          "expected": {
+            "mean": 0,
+            "ac_samples": [
+              -0.5,
+              0.5,
+              -0.5,
+              0.5
+            ],
+            "total_ms": 0.25,
+            "ac_ms": 0.25,
+            "total_rms": 0.5,
+            "ac_rms": 0.5
+          },
+          "why": "The control removes the offset while retaining the entire AC sequence."
+        },
+        "assumptions": [
+          "Finite nonempty real sequence; arithmetic mean over exactly the retained support; normalized amplitude units."
+        ],
+        "limits": "Subtracting one record mean is not a streaming high-pass filter or proof of inaudibility."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate the mean and the centered sequence. Why must the record support be retained?",
+          "expected_answer": "The main mean and AC sequence are listed below. Changing the support changes the mean, so a filename or a peak guard cannot supply this calculation.",
+          "decision": null
+        },
+        "2": {
+          "question": "Decompose mean square into constant and alternating contributions. Is this a subtraction of RMS amplitudes?",
+          "expected_answer": "Use the displayed identity for mean squares. The cross term vanishes because the centered sequence sums to zero. Subtracting RMS amplitudes would give a different result.",
+          "decision": null
+        },
+        "3": {
+          "question": "Compare total RMS and AC RMS in the main case. Which one measures the centered component?",
+          "expected_answer": "AC RMS measures the centered component. Total RMS also includes the constant contribution; equal total RMS therefore need not mean equal alternating energy.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the control. Which component changed, and which comparison is preserved?",
+          "expected_answer": "The mean becomes zero, while the centered samples and their RMS stay unchanged. A comparison that reports an AC difference for these exact sequences has mixed up its quantities.",
+          "decision": null
+        },
+        "5": {
+          "question": "Can subtracting this mean certify the streaming chain or the listening result?",
+          "expected_answer": "No. Record centering can change boundaries and does not establish a filter’s transient response. A listening judgment and a streaming implementation need their own observations.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: The main mean and AC sequence are listed below. Changing the support changes the mean, so a filename or a peak guard cannot supply this calculation.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Use the displayed identity for mean squares. The cross term vanishes because the centered sequence sums to zero. Subtracting RMS amplitudes would give a different result.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: AC RMS measures the centered component. Total RMS also includes the constant contribution; equal total RMS therefore need not mean equal alternating energy.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The mean becomes zero, while the centered samples and their RMS stay unchanged. A comparison that reports an AC difference for these exact sequences has mixed up its quantities.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: No. Record centering can change boundaries and does not establish a filter’s transient response. A listening judgment and a streaming implementation need their own observations.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Write a level-comparison note for the runner. Compute both decompositions by hand, then identify the accumulation expression. State whether a proposed gain targets total or AC RMS. Reject a report that changes its denominator or silently centers only one input.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: mean=sum(x)/N; ac_i=x_i-mean; total_ms=sum(x_i^2)/N; ac_ms=sum(ac_i^2)/N; total_ms=mean^2+ac_ms",
+        "falsifier": "No. Record centering can change boundaries and does not establish a filter’s transient response. A listening judgment and a streaming implementation need their own observations.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "AUD017",
+      "department": "audio-engineering",
+      "module_id": "aud-017-report-ambiguous-correlation-lags",
+      "title": "Report Ambiguous Correlation Lags",
+      "source_paths": {
+        "en": "streeling/courses/audio-engineering/en/aud-017-report-ambiguous-correlation-lags.md",
+        "fr": "streeling/courses/audio-engineering/fr/aud-017-report-ambiguous-correlation-lags.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-017-report-ambiguous-correlation-lags.es.md"
+      },
+      "novelty_vs_prerequisites": "AUD009 checks a declared shift; this tests whether the data uniquely identify a lag and retains polarity-sensitive versus absolute objectives.",
+      "prerequisites": [
+        "aud-009-declare-alignment-before-a-null-test"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/audio-engineering/en/aud-009-declare-alignment-before-a-null-test.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ca5b9928bc5376c52ad6b2eaa55574ed989e5f3772e17c294ef78c9d9731a1ea",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/guitar-runtime/run.mjs",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+          "scope": "Complete source read: guard, mono header, RMS accumulation and retained comparison construction; no execution this batch.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.correlate.html",
+          "pin": "SciPy 1.18.0 manual, read 2026-10-25",
+          "scope": "Definition and zero-padded linear convention, Notes lines 90-118. Our circular sum is explicitly a different authored convention; SciPy was not executed.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "x": [
+            1,
+            0,
+            -1,
+            0
+          ],
+          "y": [
+            0,
+            1,
+            0,
+            -1
+          ],
+          "lags": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "formula": "C(k)=sum_n x[n]*y[(n+k)%N]; signed_argmax=argmax(C); absolute_argmax=argmax(abs(C))",
+        "expected": {
+          "correlation": [
+            0,
+            2,
+            0,
+            -2
+          ],
+          "signed_argmax": [
+            1
+          ],
+          "absolute_argmax": [
+            1,
+            3
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "x": [
+              1,
+              0,
+              0,
+              0
+            ],
+            "y": [
+              0,
+              1,
+              0,
+              0
+            ],
+            "lags": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "expected": {
+            "correlation": [
+              0,
+              1,
+              0,
+              0
+            ],
+            "signed_argmax": [
+              1
+            ],
+            "absolute_argmax": [
+              1
+            ]
+          },
+          "why": "A single circular impulse has a unique maximum, exposing ambiguity specific to the periodic main signal."
+        },
+        "assumptions": [
+          "Real equal-length circular records; no zero padding; all listed lags retained."
+        ],
+        "limits": "No linear-correlation library call, onset detection, unknown-delay estimate or engine comparison was run."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Evaluate the circular sum at every declared lag. Why is the convention part of the answer?",
+          "expected_answer": "The correlation vector appears below. Wrapping indices uses another support rule from zero padding, and reversing the lag sign would change its interpretation.",
+          "decision": null
+        },
+        "2": {
+          "question": "Find every maximum of the signed objective. What does its sign retain?",
+          "expected_answer": "The signed maximum selects the positive match. Its sign distinguishes a matching waveform from a polarity-reversed one under the declared product.",
+          "decision": null
+        },
+        "3": {
+          "question": "Now maximize magnitude. Can the program return one shift as uniquely identified?",
+          "expected_answer": "The absolute objective has the listed pair of maximizers. Returning only the first may be deterministic, but does not remove the ambiguity in the data.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the impulse control. What makes its result diagnostically useful?",
+          "expected_answer": "Both objectives have the same unique maximum. A method that still reports a tie has mishandled this control; uniqueness here does not validate uniqueness for periodic input.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would falsify an alignment receipt claiming a unique absolute maximum?",
+          "expected_answer": "A second lag with the same retained objective value rejects uniqueness. Keep the full objective, permitted lag range and polarity policy before choosing a compensating shift.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: The correlation vector appears below. Wrapping indices uses another support rule from zero padding, and reversing the lag sign would change its interpretation.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The signed maximum selects the positive match. Its sign distinguishes a matching waveform from a polarity-reversed one under the declared product.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The absolute objective has the listed pair of maximizers. Returning only the first may be deterministic, but does not remove the ambiguity in the data.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Both objectives have the same unique maximum. A method that still reports a tie has mishandled this control; uniqueness here does not validate uniqueness for periodic input.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: A second lag with the same retained objective value rejects uniqueness. Keep the full objective, permitted lag range and polarity policy before choosing a compensating shift.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Compute both vectors manually and draft a lag receipt for a proposed GA comparison. Preserve ties and explain when the task permits polarity inversion. Compare that receipt against a direct unaligned comparison; leave actual latency and audio fidelity unresolved.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: C(k)=sum_n x[n]*y[(n+k)%N]; signed_argmax=argmax(C); absolute_argmax=argmax(abs(C))",
+        "falsifier": "A second lag with the same retained objective value rejects uniqueness. Keep the full objective, permitted lag range and polarity policy before choosing a compensating shift.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "AUD018",
+      "department": "audio-engineering",
+      "module_id": "aud-018-recover-stereo-from-mid-and-side",
+      "title": "Recover Stereo from Mid and Side",
+      "source_paths": {
+        "en": "streeling/courses/audio-engineering/en/aud-018-recover-stereo-from-mid-and-side.md",
+        "fr": "streeling/courses/audio-engineering/fr/aud-018-recover-stereo-from-mid-and-side.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-018-recover-stereo-from-mid-and-side.es.md"
+      },
+      "novelty_vs_prerequisites": "AUD010 exposes destructive averaging; this adds a complete orthonormal mid-side transform, exact inverse and side-gain energy accounting.",
+      "prerequisites": [
+        "aud-010-preserve-channels-before-downmixing"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/audio-engineering/en/aud-010-preserve-channels-before-downmixing.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "76c9a5f562dd98a7aab9c12938ed4b8f2a4d11670e72b84e66a786eefd4ec462",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/guitar-runtime/run.mjs",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+          "scope": "Complete source read: guard, mono header, RMS accumulation and retained comparison construction; no execution this batch.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "left": [
+            1,
+            0
+          ],
+          "right": [
+            0,
+            1
+          ],
+          "side_gain": 1
+        },
+        "formula": "M=(L+R)/sqrt(2); S=(L-R)/sqrt(2); L_out=(M+g*S)/sqrt(2); R_out=(M-g*S)/sqrt(2); E=sum(L_out^2+R_out^2)",
+        "expected": {
+          "mid": [
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "side": [
+            0.7071067811865476,
+            -0.7071067811865476
+          ],
+          "left_out": [
+            1,
+            0
+          ],
+          "right_out": [
+            0,
+            1
+          ],
+          "input_energy": 2,
+          "output_energy": 2
+        },
+        "negative_control": {
+          "values": {
+            "left": [
+              1,
+              0
+            ],
+            "right": [
+              0,
+              1
+            ],
+            "side_gain": 0
+          },
+          "expected": {
+            "mid": [
+              0.7071067811865476,
+              0.7071067811865476
+            ],
+            "side": [
+              0.7071067811865476,
+              -0.7071067811865476
+            ],
+            "left_out": [
+              0.5,
+              0.5
+            ],
+            "right_out": [
+              0.5,
+              0.5
+            ],
+            "input_energy": 2,
+            "output_energy": 1
+          },
+          "why": "Discarding the side channel destroys invertibility although two output channels remain."
+        },
+        "assumptions": [
+          "Synchronous real channel pairs; orthonormal scaling; no clipping, quantization or gain outside the declared side gain."
+        ],
+        "limits": "No perceived stereo width, loudness, room response or stereo production support is established."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Form the mid and side arrays. Why specify the normalization?",
+          "expected_answer": "Both arrays are listed below. The square-root normalization makes this particular matrix orthonormal; another common convention would need different inverse and energy formulas.",
+          "decision": null
+        },
+        "2": {
+          "question": "Invert the main case and compare every original channel sample.",
+          "expected_answer": "The inverse restores both original arrays. Retaining mid and side preserves the missing difference that a mono average alone cannot reconstruct.",
+          "decision": null
+        },
+        "3": {
+          "question": "Check total squared energy before and after the main transform. Does this prove equal loudness?",
+          "expected_answer": "The displayed energies agree. This follows from the orthonormal matrix, while perceived loudness also depends on reproduction and listening conditions.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the zero-side control. Can two equal output channels reconstruct the originals?",
+          "expected_answer": "No. Both outputs become the same average and energy decreases by the displayed amount. The side information has been discarded, not stored redundantly.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would reject a proposed lossless stereo handoff?",
+          "expected_answer": "Failure to recover any retained sample with the declared inverse rejects numerical losslessness. A mono runner result cannot establish the stereo handoff in the first place.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: Both arrays are listed below. The square-root normalization makes this particular matrix orthonormal; another common convention would need different inverse and energy formulas.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The inverse restores both original arrays. Retaining mid and side preserves the missing difference that a mono average alone cannot reconstruct.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The displayed energies agree. This follows from the orthonormal matrix, while perceived loudness also depends on reproduction and listening conditions.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: No. Both outputs become the same average and energy decreases by the displayed amount. The side information has been discarded, not stored redundantly.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Failure to recover any retained sample with the declared inverse rejects numerical losslessness. A mono runner result cannot establish the stereo handoff in the first place.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the forward and inverse channel maps manually. Compare retaining both coordinates with retaining only their sum, and inspect the mono header declaration. Propose the smallest reversible record before recommending a width workflow; preserve original channel order and scaling.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: M=(L+R)/sqrt(2); S=(L-R)/sqrt(2); L_out=(M+g*S)/sqrt(2); R_out=(M-g*S)/sqrt(2); E=sum(L_out^2+R_out^2)",
+        "falsifier": "Failure to recover any retained sample with the declared inverse rejects numerical losslessness. A mono runner result cannot establish the stereo handoff in the first place.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GAS015",
+      "department": "guitar-acoustics",
+      "module_id": "gas-015-separate-mode-excitation-from-observation",
+      "title": "Separate Mode Excitation from Observation",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-015-separate-mode-excitation-from-observation.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-015-separate-mode-excitation-from-observation.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-015-separate-mode-excitation-from-observation.es.md"
+      },
+      "novelty_vs_prerequisites": "GAS006 derives excited displacement coefficients; this adds a spatial observation operator and demonstrates an unobservable excited mode.",
+      "prerequisites": [
+        "gas-006-relate-pluck-position-to-string-modes"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-acoustics/en/gas-006-relate-pluck-position-to-string-modes.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "0eb9f99878d0d2714a8e09b59b0a8b25e76d8f546d7d2bd5b0454743196c404f",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/guitar-runtime/vendor/lib.rs",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d693e1ea1a5ca42d080c5829336bcc8423396c104ebee64d2e76ccd9bb503562",
+          "scope": "Lines 1-70 read: resonator and voice state including frequency, filter, pluck and activity fields; no whole-engine behavior inferred.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "https://www.phys.unsw.edu.au/jw/strings.html",
+          "pin": "UNSW Music Acoustics live HTML, read 2026-10-25; immutable revision unavailable",
+          "scope": "Standing-wave nodes and antinodes, mode wavelengths and frequencies, browser lines 46-65. No real pickup calibration or recorded harmonic result.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "amplitudes": [
+            1,
+            0.5,
+            0.25,
+            0.125
+          ],
+          "modes": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "position_fraction": 0.5
+        },
+        "formula": "observed_n=A_n*sin(n*pi*u)",
+        "expected": {
+          "observed": [
+            1,
+            0,
+            -0.25,
+            0
+          ],
+          "zero_modes": [
+            2,
+            4
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "amplitudes": [
+              1,
+              0.5,
+              0.25,
+              0.125
+            ],
+            "modes": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "position_fraction": 0.25
+          },
+          "expected": {
+            "observed": [
+              0.7071067811865476,
+              0.5,
+              0.1767766952966369,
+              0
+            ],
+            "zero_modes": [
+              4
+            ]
+          },
+          "why": "Moving the observation point recovers the second mode without changing excitation."
+        },
+        "assumptions": [
+          "Ideal fixed-end sine modes; signed displacement coefficients; ideal point displacement observer; common time convention."
+        ],
+        "limits": "Not a magnetic pickup voltage model: velocity sensitivity, aperture, body transfer and actual recorded spectra are excluded."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Apply the displayed operator at the main position. Which listed modes are invisible?",
+          "expected_answer": "The zero-mode list gives the even modes in this finite example. Their authored excitation coefficients are nonzero, so observation alone cannot prove absence of excitation.",
+          "decision": null
+        },
+        "2": {
+          "question": "Interpret the negative observed coefficient. Is it negative loudness?",
+          "expected_answer": "It is a signed displacement coefficient relative to the declared modal phase. Loudness is not a signed displacement and was not measured.",
+          "decision": null
+        },
+        "3": {
+          "question": "Can the main observation uniquely recover all the original amplitudes?",
+          "expected_answer": "No. Multiplication by a zero observation weight erases that mode’s amplitude. Many excitation arrays give the same observation at those indices.",
+          "decision": null
+        },
+        "4": {
+          "question": "Move to the control position. Which formerly invisible mode becomes available?",
+          "expected_answer": "The second mode becomes nonzero while the fourth remains invisible. The excitation was unchanged; the changed observation explains the new coefficient.",
+          "decision": null
+        },
+        "5": {
+          "question": "What rejects a claim that a missing observed mode proves zero excitation?",
+          "expected_answer": "The main case itself supplies a nonzero excitation coefficient with zero observed displacement. A real diagnosis needs a known observation transfer and additional positions or measurements.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: The zero-mode list gives the even modes in this finite example. Their authored excitation coefficients are nonzero, so observation alone cannot prove absence of excitation.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: It is a signed displacement coefficient relative to the declared modal phase. Loudness is not a signed displacement and was not measured.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: No. Multiplication by a zero observation weight erases that mode’s amplitude. Many excitation arrays give the same observation at those indices.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The second mode becomes nonzero while the fourth remains invisible. The excitation was unchanged; the changed observation explains the new coefficient.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The main case itself supplies a nonzero excitation coefficient with zero observed displacement. A real diagnosis needs a known observation transfer and additional positions or measurements.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the sine-mode nodes and reproduce both signed tables manually. Propose a second observation position for a future guitar experiment. State which remaining zero prevents full recovery, and keep the physical pickup transfer unresolved before suggesting an engine parameter change.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: observed_n=A_n*sin(n*pi*u)",
+        "falsifier": "The main case itself supplies a nonzero excitation coefficient with zero observed displacement. A real diagnosis needs a known observation transfer and additional positions or measurements.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GAS016",
+      "department": "guitar-acoustics",
+      "module_id": "gas-016-couple-fretting-geometry-to-elastic-tension",
+      "title": "Couple Fretting Geometry to Elastic Tension",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-016-couple-fretting-geometry-to-elastic-tension.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-016-couple-fretting-geometry-to-elastic-tension.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-016-couple-fretting-geometry-to-elastic-tension.es.md"
+      },
+      "novelty_vs_prerequisites": "GAS013 changes tension or length independently; this couples a displaced midpoint geometry to an authored axial stiffness and quantifies the combined frequency error.",
+      "prerequisites": [
+        "gas-013-retune-with-an-explicit-tension-assumption"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-acoustics/en/gas-013-retune-with-an-explicit-tension-assumption.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "6cfd55b4319dcdf7d0817abdc3746292f5ddf6ad79f12a2ddff2a09aba8b25fd",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/guitar-runtime/vendor/lib.rs",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d693e1ea1a5ca42d080c5829336bcc8423396c104ebee64d2e76ccd9bb503562",
+          "scope": "Lines 1-70 read: resonator and voice state including frequency, filter, pluck and activity fields; no whole-engine behavior inferred.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "https://openstax.org/books/university-physics-volume-1/pages/12-3-stress-strain-and-elastic-modulus",
+          "pin": "OpenStax University Physics Volume 1 live HTML, read 2026-10-25; immutable revision unavailable",
+          "scope": "Stress, strain and linear elastic scope, lines 29-49. The axial stiffness, geometry and constant density below are authored assumptions, not material measurements.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        },
+        {
+          "path_or_url": "https://www.phys.unsw.edu.au/jw/strings.html",
+          "pin": "UNSW Music Acoustics live HTML, read 2026-10-25; immutable revision unavailable",
+          "scope": "Standing-wave nodes and antinodes, mode wavelengths and frequencies, browser lines 46-65. No real pickup calibration or recorded harmonic result.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "length_m": 1,
+          "midpoint_displacement_m": 0.01,
+          "axial_stiffness_n_per_m": 1000,
+          "initial_tension_n": 10,
+          "linear_density_kg_per_m": 0.001
+        },
+        "formula": "segment=sqrt((L/2)^2+h^2); extension=2*segment-L; tension=T0+K*extension; f=sqrt(tension/mu)/(2*segment); ideal_f=sqrt(T0/mu)/L; cents=1200*log2(f/ideal_f)",
+        "expected": {
+          "extension_m": 0.0001999800039989008,
+          "tension_n": 10.1999800039989,
+          "ideal_f_hz": 100,
+          "frequency_hz": 100.9747574562156,
+          "error_cents": 16.79361678856818
+        },
+        "negative_control": {
+          "values": {
+            "length_m": 1,
+            "midpoint_displacement_m": 0,
+            "axial_stiffness_n_per_m": 1000,
+            "initial_tension_n": 10,
+            "linear_density_kg_per_m": 0.001
+          },
+          "expected": {
+            "extension_m": 0,
+            "tension_n": 10,
+            "ideal_f_hz": 100,
+            "frequency_hz": 100,
+            "error_cents": 0
+          },
+          "why": "Zero transverse displacement removes the extra path and the elastic increment."
+        },
+        "assumptions": [
+          "Authored symmetric geometry, rigid supports, linear axial spring, uniform tension; fixed linear density approximation; one vibrating half."
+        ],
+        "limits": "No measured action height, actual fret location, wound-string calibration, setup instruction or material safety inference."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Find the displaced segment length and total extension. Why use both segments?",
+          "expected_answer": "The string path contains the symmetric pair, although only one half is declared vibrating. Ignoring the other segment undercounts the total elastic extension.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive the new tension from extension and axial stiffness. Is the stiffness a Young modulus?",
+          "expected_answer": "The displayed tension follows the declared spring law. Its stiffness has force-per-length units; a Young modulus would require area and reference length before becoming this coefficient.",
+          "decision": null
+        },
+        "3": {
+          "question": "Compare actual modeled frequency with the ideal half-length value. Which effects compete?",
+          "expected_answer": "Extra tension raises the wave speed, while the displaced segment is longer than its projected half. Both enter the frequency formula; the stated net cent error follows this authored case.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply zero displacement. Which residual must vanish?",
+          "expected_answer": "Extension, tension increment and cent error all vanish. A nonzero residual in this control rejects the geometry or reference arithmetic.",
+          "decision": null
+        },
+        "5": {
+          "question": "Can this calculation select a real action height or prove a GA control is physical?",
+          "expected_answer": "No. Compliance, density change, contact location and material response need measurement. The retained software frequency parameter does not supply those inputs.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: The string path contains the symmetric pair, although only one half is declared vibrating. Ignoring the other segment undercounts the total elastic extension.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The displayed tension follows the declared spring law. Its stiffness has force-per-length units; a Young modulus would require area and reference length before becoming this coefficient.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Extra tension raises the wave speed, while the displaced segment is longer than its projected half. Both enter the frequency formula; the stated net cent error follows this authored case.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Extension, tension increment and cent error all vanish. A nonzero residual in this control rejects the geometry or reference arithmetic.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: No. Compliance, density change, contact location and material response need measurement. The retained software frequency parameter does not supply those inputs.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Sketch both segments, derive the main and control values manually, then identify the software field that remains only a requested frequency. Write a falsifier based on a measured geometry and frequency discrepancy, with uncertainty stated before any proposed calibration.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: segment=sqrt((L/2)^2+h^2); extension=2*segment-L; tension=T0+K*extension; f=sqrt(tension/mu)/(2*segment); ideal_f=sqrt(T0/mu)/L; cents=1200*log2(f/ideal_f)",
+        "falsifier": "No. Compliance, density change, contact location and material response need measurement. The retained software frequency parameter does not supply those inputs.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GAS017",
+      "department": "guitar-acoustics",
+      "module_id": "gas-017-recover-a-stiffness-coefficient-from-partial-ratios",
+      "title": "Recover a Stiffness Coefficient from Partial Ratios",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-017-recover-a-stiffness-coefficient-from-partial-ratios.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-017-recover-a-stiffness-coefficient-from-partial-ratios.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-017-recover-a-stiffness-coefficient-from-partial-ratios.es.md"
+      },
+      "novelty_vs_prerequisites": "GAS010 predicts partials from a stipulated coefficient; this solves the inverse problem, checks a held-out partial and rejects incompatible nonnegative coefficients.",
+      "prerequisites": [
+        "gas-010-distinguish-stiff-string-partials-from-harmonics"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-acoustics/en/gas-010-distinguish-stiff-string-partials-from-harmonics.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "7557634ea11b4ca8a3a491a512c2ec1f2bece93c738495fda1424ffbe013de32",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/guitar-runtime/vendor/lib.rs",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d693e1ea1a5ca42d080c5829336bcc8423396c104ebee64d2e76ccd9bb503562",
+          "scope": "Lines 1-70 read: resonator and voice state including frequency, filter, pluck and activity fields; no whole-engine behavior inferred.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "https://www.dsprelated.com/freebooks/pasp/Stiff_String.html",
+          "pin": "Julius O. Smith, Physical Audio Signal Processing, live HTML read 2026-10-25; immutable revision unavailable",
+          "scope": "Stiff-string dispersive propagation and LTI allpass modeling, lines 20-48. No calibration between fitted teaching coefficient and production control.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "squared_normalized_second_ratio": 1.0297029702970297,
+          "squared_normalized_third_ratio": 1.0792079207920793
+        },
+        "formula": "r=(f2/(2*f1))^2; B=(r-1)/(4-r); predicted_third_squared_ratio=(1+9*B)/(1+B); valid=1<=r<4 and B>=0",
+        "expected": {
+          "B": 0.01,
+          "predicted_third_squared_ratio": 1.0792079207920793,
+          "held_out_residual": 0,
+          "valid": true
+        },
+        "negative_control": {
+          "values": {
+            "squared_normalized_second_ratio": 0.99,
+            "squared_normalized_third_ratio": 1
+          },
+          "expected": {
+            "B": -0.0033222591362126247,
+            "valid": false
+          },
+          "why": "A second partial below its harmonic reference requires a negative coefficient, outside the stipulated nonnegative stiffness family."
+        },
+        "assumptions": [
+          "Correct partial identities and a nonzero first partial; exact authored ratios; normalized nonnegative-coefficient family."
+        ],
+        "limits": "No peak estimator, noisy regression, material inference or mapping to the engine dispersion control is supplied."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Rearrange the squared second-partial ratio to solve for the coefficient. What must not vanish?",
+          "expected_answer": "Move the coefficient terms to obtain the displayed inverse. Its denominator must be nonzero; a singular or excluded ratio cannot be repaired by silently clipping the fit.",
+          "decision": null
+        },
+        "2": {
+          "question": "Use the main ratio and state the recovered coefficient. What was fitted?",
+          "expected_answer": "The expected coefficient is listed below. Only the normalized second-partial relationship was fitted; the overall frequency scale remains anchored by the first partial.",
+          "decision": null
+        },
+        "3": {
+          "question": "Predict the held-out third-partial ratio. Why retain that separate input?",
+          "expected_answer": "The predicted and supplied ratios agree in this authored case. Reusing the second-partial equation as its own validation would not test the family’s higher-partial consequence.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the control. Why reject the coefficient even though algebra returns a number?",
+          "expected_answer": "The coefficient is negative and violates the selected nonnegative family. A finite algebraic result does not establish physical admissibility under the declared assumptions.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would falsify a useful fit before engine calibration?",
+          "expected_answer": "A held-out partial ratio inconsistent with the prediction beyond declared estimation uncertainty rejects this fit. Incorrect partial identity also invalidates the input rather than proving an engine defect.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: Move the coefficient terms to obtain the displayed inverse. Its denominator must be nonzero; a singular or excluded ratio cannot be repaired by silently clipping the fit.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The expected coefficient is listed below. Only the normalized second-partial relationship was fitted; the overall frequency scale remains anchored by the first partial.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The predicted and supplied ratios agree in this authored case. Reusing the second-partial equation as its own validation would not test the family’s higher-partial consequence.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The coefficient is negative and violates the selected nonnegative family. A finite algebraic result does not establish physical admissibility under the declared assumptions.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: A held-out partial ratio inconsistent with the prediction beyond declared estimation uncertainty rejects this fit. Incorrect partial identity also invalidates the input rather than proving an engine defect.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Derive the inverse by hand and retain the held-out check separately. Compare the result with the retained software state. Propose a measurement record with partial identity and uncertainty before any parameter recommendation; leave the engine mapping and audibility unassessed.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: r=(f2/(2*f1))^2; B=(r-1)/(4-r); predicted_third_squared_ratio=(1+9*B)/(1+B); valid=1<=r<4 and B>=0",
+        "falsifier": "A held-out partial ratio inconsistent with the prediction beyond declared estimation uncertainty rejects this fit. Incorrect partial identity also invalidates the input rather than proving an engine defect.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GTR015",
+      "department": "guitar-studies",
+      "module_id": "gtr-015-sample-a-vibrato-without-erasing-its-motion",
+      "title": "Sample a Vibrato Without Erasing Its Motion",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-015-sample-a-vibrato-without-erasing-its-motion.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-015-sample-a-vibrato-without-erasing-its-motion.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-015-sample-a-vibrato-without-erasing-its-motion.es.md"
+      },
+      "novelty_vs_prerequisites": "GTR013 scores a bounded static bend estimate; this specifies a time-varying cent trajectory and exposes a sampling grid that hides motion.",
+      "prerequisites": [
+        "gtr-013-judge-a-bend-with-an-uncertainty-budget"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-studies/en/gtr-013-judge-a-bend-with-an-uncertainty-budget.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "bae9dde9a8dcead487fce999094cf1a472a7cddab90456d3a9dd94c96402aa36",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/intonation-listening-2026-10-22/intonation.json",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "88e77c28a2b03d1fab494fa2572e4a7eb1ec8414b39a57254823fb33a35d1a16",
+          "scope": "Lines 1-65 read: reference, constructed ratios, discrete projection and source-boundary statements.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/wavy-line/",
+          "pin": "MusicXML 4.0 reference",
+          "scope": "Definition and playback attributes, lines 52-82. Trill beat counts and percentages are not assumed to specify our sinusoidal cent curve.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        },
+        {
+          "path_or_url": "https://www.nist.gov/pml/time-and-frequency-division/popular-links/time-frequency-z",
+          "pin": "NIST Time and Frequency from A to Z, updated 2023-03-01; read 2026-10-25",
+          "scope": "A440 and multiplicative cent relationship, lines 141-145. Listening-threshold statements are not used as acceptance thresholds.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "base_hz": 440,
+          "extent_cents": 25,
+          "rate_hz": 2,
+          "times_s": [
+            0,
+            0.125,
+            0.25,
+            0.375,
+            0.5
+          ]
+        },
+        "formula": "c(t)=extent*sin(2*pi*rate*t); f(t)=base*2^(c(t)/1200)",
+        "expected": {
+          "cents": [
+            0,
+            25,
+            0,
+            -25,
+            0
+          ],
+          "period_s": 0.5,
+          "peak_to_peak_cents": 50
+        },
+        "negative_control": {
+          "values": {
+            "base_hz": 440,
+            "extent_cents": 25,
+            "rate_hz": 4,
+            "times_s": [
+              0,
+              0.125,
+              0.25,
+              0.375,
+              0.5
+            ]
+          },
+          "expected": {
+            "cents": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "period_s": 0.25,
+            "peak_to_peak_cents": 50
+          },
+          "why": "The control still moves continuously but this phase-locked grid hits only zero crossings."
+        },
+        "assumptions": [
+          "Authored sinusoidal cents; fixed phase zero; instantaneous ideal samples; exact zeros interpreted with numerical tolerance."
+        ],
+        "limits": "No recorded vibrato, actual pitch tracking or claim that notation ornament defaults encode this trajectory."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Distinguish extent from peak-to-peak excursion in the main trajectory.",
+          "expected_answer": "Extent is the one-sided cent amplitude. Peak-to-peak excursion is twice that value, as shown in the authored results; neither is a measurement of a player.",
+          "decision": null
+        },
+        "2": {
+          "question": "Evaluate the main trajectory at the declared times and identify its period.",
+          "expected_answer": "The listed cent vector alternates through the positive and negative extrema. The period follows the reciprocal of the rate; it is independent of the carrier frequency.",
+          "decision": null
+        },
+        "3": {
+          "question": "How does the cent curve become a frequency curve?",
+          "expected_answer": "Use the displayed exponential relationship. Adding a constant number of hertz instead would not preserve a symmetric cent excursion around the reference.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the faster control. Does its all-zero sample vector prove no vibrato?",
+          "expected_answer": "No. The observation grid lands on zero crossings, while the continuous extent remains unchanged. This is a concrete counterexample to inferring no motion from these samples.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would reject a claim that this grid identifies vibrato extent?",
+          "expected_answer": "Different continuous extents or rates compatible with the same sampled vector defeat identification. Retain sampling times, phase assumptions and a denser independent observation before scoring a performance.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: Extent is the one-sided cent amplitude. Peak-to-peak excursion is twice that value, as shown in the authored results; neither is a measurement of a player.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The listed cent vector alternates through the positive and negative extrema. The period follows the reciprocal of the rate; it is independent of the carrier frequency.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Use the displayed exponential relationship. Adding a constant number of hertz instead would not preserve a symmetric cent excursion around the reference.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: No. The observation grid lands on zero crossings, while the continuous extent remains unchanged. This is a concrete counterexample to inferring no motion from these samples.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Different continuous extents or rates compatible with the same sampled vector defeat identification. Retain sampling times, phase assumptions and a denser independent observation before scoring a performance.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Sketch both continuous curves and mark the sample instants before using a calculator. Explain the control’s hidden motion, then propose a pitch-trace receipt for a future practice tool. Compare a direct manual plot with any notation or agent proposal; do not claim a recording was analyzed.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: c(t)=extent*sin(2*pi*rate*t); f(t)=base*2^(c(t)/1200)",
+        "falsifier": "Different continuous extents or rates compatible with the same sampled vector defeat identification. Retain sampling times, phase assumptions and a denser independent observation before scoring a performance.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GTR016",
+      "department": "guitar-studies",
+      "module_id": "gtr-016-move-the-boundary-for-an-artificial-harmonic",
+      "title": "Move the Boundary for an Artificial Harmonic",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-016-move-the-boundary-for-an-artificial-harmonic.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-016-move-the-boundary-for-an-artificial-harmonic.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-016-move-the-boundary-for-an-artificial-harmonic.es.md"
+      },
+      "novelty_vs_prerequisites": "GTR012 keeps the original full-length boundary for natural harmonics; this recomputes the touch node after a firm fret creates a new vibrating length.",
+      "prerequisites": [
+        "gtr-012-select-natural-harmonics-with-a-touch-node"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-studies/en/gtr-012-select-natural-harmonics-with-a-touch-node.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "a756d4bba6f94f1d2f400107d15f7a0fd056d5ed125ecae7c45fd38b91487f89",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/guitar-runtime/vendor/lib.rs",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d693e1ea1a5ca42d080c5829336bcc8423396c104ebee64d2e76ccd9bb503562",
+          "scope": "Lines 1-70 read: resonator and voice state including frequency, filter, pluck and activity fields; no whole-engine behavior inferred.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/harmonic/",
+          "pin": "MusicXML 4.0 reference",
+          "scope": "Element definition and natural/artificial, base/touching/sounding-pitch children, lines 52-66.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        },
+        {
+          "path_or_url": "https://www.phys.unsw.edu.au/jw/strings.html",
+          "pin": "UNSW Music Acoustics live HTML, read 2026-10-25; immutable revision unavailable",
+          "scope": "Standing-wave nodes and antinodes, mode wavelengths and frequencies, browser lines 46-65. No real pickup calibration or recorded harmonic result.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "open_hz": 110,
+          "fretted_semitones": 7,
+          "touch_mode": 2,
+          "fixed_absolute_touch_fraction": 0.5
+        },
+        "formula": "vibrating_fraction=2^(-fret/12); base_hz=open*2^(fret/12); touch_fraction_from_bridge=vibrating_fraction/mode; sounding_hz=mode*base_hz; fixed_touch_local=fixed_absolute_touch_fraction/vibrating_fraction",
+        "expected": {
+          "vibrating_fraction": 0.6674199270850172,
+          "base_hz": 164.81377845643496,
+          "touch_fraction_from_bridge": 0.3337099635425086,
+          "sounding_hz": 329.6275569128699,
+          "fixed_touch_local": 0.7491535384383408
+        },
+        "negative_control": {
+          "values": {
+            "open_hz": 110,
+            "fretted_semitones": 0,
+            "touch_mode": 2,
+            "fixed_absolute_touch_fraction": 0.5
+          },
+          "expected": {
+            "vibrating_fraction": 1,
+            "base_hz": 110,
+            "touch_fraction_from_bridge": 0.5,
+            "sounding_hz": 220,
+            "fixed_touch_local": 0.5
+          },
+          "why": "At the open-string boundary the old and new midpoint coincide, hiding a mistaken fixed touch location."
+        },
+        "assumptions": [
+          "Ideal equal-tempered fret lengths, unchanged tension/density; coordinate measured from bridge; exact point touch at new midpoint."
+        ],
+        "limits": "No actual artificial or pinch harmonic performance, contact force, radiated amplitude or importer support."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate the remaining vibrating fraction after fretting. Which endpoint is fixed in the coordinate?",
+          "expected_answer": "The fraction is listed below and the bridge remains the origin. The fretted endpoint moves; a fraction of the original string is not automatically a fraction of the remaining string.",
+          "decision": null
+        },
+        "2": {
+          "question": "Locate the new midpoint touch and compute the fretted base frequency.",
+          "expected_answer": "Use the main results. The touch lies halfway along the remaining segment, and the base frequency follows the stipulated equal-tempered length law.",
+          "decision": null
+        },
+        "3": {
+          "question": "Give the sounding frequency and distinguish it from base and touching pitch roles.",
+          "expected_answer": "The sounding result is the selected mode times the fretted base. A diagram’s touch position and a notated pitch role must not be substituted for the resulting sound frequency.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the open-string control. Why is it too weak to detect the fixed-location mistake?",
+          "expected_answer": "The remaining length is the full string, so both midpoint constructions coincide. The fretted case separates them, as its fixed touch has the displayed different local coordinate.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would reject a diagram claiming the same midpoint instruction for every fret?",
+          "expected_answer": "Failure to scale its bridge distance with the remaining length rejects that geometry. Clean excitation and the performer’s technique still require an actual trial.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: The fraction is listed below and the bridge remains the origin. The fretted endpoint moves; a fraction of the original string is not automatically a fraction of the remaining string.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Use the main results. The touch lies halfway along the remaining segment, and the base frequency follows the stipulated equal-tempered length law.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The sounding result is the selected mode times the fretted base. A diagram’s touch position and a notated pitch role must not be substituted for the resulting sound frequency.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The remaining length is the full string, so both midpoint constructions coincide. The fretted case separates them, as its fixed touch has the displayed different local coordinate.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Failure to scale its bridge distance with the remaining length rejects that geometry. Clean excitation and the performer’s technique still require an actual trial.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the open and fretted segments, compute both touch coordinates manually and identify the notation’s separate pitch roles. Propose an instruction that preserves the moving origin relationship. Treat a fixed original midpoint as a falsifying control, without claiming a played result.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: vibrating_fraction=2^(-fret/12); base_hz=open*2^(fret/12); touch_fraction_from_bridge=vibrating_fraction/mode; sounding_hz=mode*base_hz; fixed_touch_local=fixed_absolute_touch_fraction/vibrating_fraction",
+        "falsifier": "Failure to scale its bridge distance with the remaining length rejects that geometry. Clean excitation and the performer’s technique still require an actual trial.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GTR017",
+      "department": "guitar-studies",
+      "module_id": "gtr-017-check-contact-continuity-during-finger-substitution",
+      "title": "Check Contact Continuity During Finger Substitution",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-017-check-contact-continuity-during-finger-substitution.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-017-check-contact-continuity-during-finger-substitution.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-017-check-contact-continuity-during-finger-substitution.es.md"
+      },
+      "novelty_vs_prerequisites": "GTR011 checks static contact coverage; this checks time coverage when finger identity changes while the intended sounding fret remains fixed.",
+      "prerequisites": [
+        "gtr-011-test-barre-coverage-before-calling-a-shape-playable"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-studies/en/gtr-011-test-barre-coverage-before-calling-a-shape-playable.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "c0c5ec20af0dfc6fae1ef652652dc752848ac60c47e9feb748d6572230d219ae",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/phrase-performance-2026-10-22/string-occupancy.json",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "6356c1bbbe0151940c7df105d48e1cdb42a3ef1aec2d314dc6a5e205580eb1c3",
+          "scope": "Complete retained packet read: event intervals, string assignments, overlap witnesses and limits.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "required_interval_s": [
+            0,
+            1
+          ],
+          "contacts": [
+            {
+              "finger": "index",
+              "interval_s": [
+                0,
+                0.6
+              ]
+            },
+            {
+              "finger": "ring",
+              "interval_s": [
+                0.5,
+                1
+              ]
+            }
+          ]
+        },
+        "formula": "merge half-open contact intervals at the same string/fret; gaps=required_interval minus union; overlap=max(0,min(ends)-max(starts)); continuous=(gaps empty)",
+        "expected": {
+          "union_s": [
+            [
+              0,
+              1
+            ]
+          ],
+          "gaps_s": [],
+          "overlap_s": 0.1,
+          "continuous": true
+        },
+        "negative_control": {
+          "values": {
+            "required_interval_s": [
+              0,
+              1
+            ],
+            "contacts": [
+              {
+                "finger": "index",
+                "interval_s": [
+                  0,
+                  0.6
+                ]
+              },
+              {
+                "finger": "ring",
+                "interval_s": [
+                  0.7,
+                  1
+                ]
+              }
+            ]
+          },
+          "expected": {
+            "union_s": [
+              [
+                0,
+                0.6
+              ],
+              [
+                0.7,
+                1
+              ]
+            ],
+            "gaps_s": [
+              [
+                0.6,
+                0.7
+              ]
+            ],
+            "overlap_s": 0,
+            "continuous": false
+          },
+          "why": "A delayed replacement creates a gap even though pitch, string and fret labels are unchanged."
+        },
+        "assumptions": [
+          "All contacts refer to the same target string/fret; half-open intervals; effective contact immediately at stated onset; no new picking."
+        ],
+        "limits": "Coverage is only a necessary contact condition: pressure, buzz, tone, biomechanics and actual sustain are not observed."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify what stays fixed and what changes in the main ledger.",
+          "expected_answer": "The intended string, fret and held-note interval stay fixed; finger identity changes. A pitch list alone has no field that can express this handoff.",
+          "decision": null
+        },
+        "2": {
+          "question": "Merge the contact intervals. Is every required instant covered?",
+          "expected_answer": "The main union covers the required half-open interval. The overlap provides simultaneous modeled contact during the substitution rather than a new musical attack.",
+          "decision": null
+        },
+        "3": {
+          "question": "Calculate overlap duration. Does overlap prove clean sound?",
+          "expected_answer": "The duration is listed below. It establishes scheduled contact coexistence only; pressure and contact quality were not specified or measured.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the delayed control and locate its uncovered interval.",
+          "expected_answer": "The displayed gap breaks continuity despite unchanged pitch labels. A checker that compares only target notes cannot distinguish this failure.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would falsify a claimed continuous contact plan?",
+          "expected_answer": "Any uncovered portion of the required interval rejects the schedule. Observed buzz or interruption could separately reject physical success even when this necessary condition passes.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: The intended string, fret and held-note interval stay fixed; finger identity changes. A pitch list alone has no field that can express this handoff.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The main union covers the required half-open interval. The overlap provides simultaneous modeled contact during the substitution rather than a new musical attack.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The duration is listed below. It establishes scheduled contact coexistence only; pressure and contact quality were not specified or measured.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The displayed gap breaks continuity despite unchanged pitch labels. A checker that compares only target notes cannot distinguish this failure.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Any uncovered portion of the required interval rejects the schedule. Observed buzz or interruption could separately reject physical success even when this necessary condition passes.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw both timelines manually before consulting answers. Compare musical-event occupancy with finger contact, then propose the smallest additional handoff record. Retain the gap control and distinguish a failed schedule from a failed performance; neither performance has been attempted.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: merge half-open contact intervals at the same string/fret; gaps=required_interval minus union; overlap=max(0,min(ends)-max(starts)); continuous=(gaps empty)",
+        "falsifier": "Any uncovered portion of the required interval rejects the schedule. Observed buzz or interruption could separately reject physical success even when this necessary condition passes.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GAA014",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-014-hold-out-whole-transposition-families",
+      "title": "Hold Out Whole Transposition Families",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-014-hold-out-whole-transposition-families.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-014-hold-out-whole-transposition-families.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-014-hold-out-whole-transposition-families.es.md"
+      },
+      "novelty_vs_prerequisites": "GAA009 defines a transfer item; this audits the partition of multiple items by transposition family to prevent training/test relatives leaking across the boundary.",
+      "prerequisites": [
+        "gaa-009-test-transposition-beyond-a-memorized-fret-pattern"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-alchemist-academy/en/gaa-009-test-transposition-beyond-a-memorized-fret-pattern.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "2322558da7c6e76ce88ceea7355c683c7c68eae5323f5ea675ee4df865477dfc",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "8b62207df7d7fa84e97053ef4d7c6cea36b7eae73ce7a867d14cfdbfa49b9cc6",
+          "scope": "Lines 1-120 read: authored fixture scope, tuning/string order, target-specific acceptance and initial candidates.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "https://scikit-learn.org/stable/modules/cross_validation.html",
+          "pin": "scikit-learn 1.9.1 documentation, live HTML read 2026-10-25",
+          "scope": "Group cross-validation discussion: dependence between samples and keeping group identities out of both train/test. We use a manual family partition, no library execution.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "train": [
+            {
+              "id": "a",
+              "notes": [
+                60,
+                64,
+                67
+              ]
+            },
+            {
+              "id": "b",
+              "notes": [
+                60,
+                63,
+                67
+              ]
+            }
+          ],
+          "test": [
+            {
+              "id": "c",
+              "notes": [
+                62,
+                66,
+                69
+              ]
+            },
+            {
+              "id": "d",
+              "notes": [
+                62,
+                67,
+                69
+              ]
+            }
+          ]
+        },
+        "formula": "family(notes)=tuple(note-note[0]); overlap=sorted(set(train families) intersect set(test families)); family_disjoint=(overlap empty)",
+        "expected": {
+          "overlap": [
+            [
+              0,
+              4,
+              7
+            ]
+          ],
+          "family_disjoint": false,
+          "distinct_item_ids": 4
+        },
+        "negative_control": {
+          "values": {
+            "train": [
+              {
+                "id": "a",
+                "notes": [
+                  60,
+                  64,
+                  67
+                ]
+              },
+              {
+                "id": "b",
+                "notes": [
+                  60,
+                  63,
+                  67
+                ]
+              }
+            ],
+            "test": [
+              {
+                "id": "d",
+                "notes": [
+                  62,
+                  67,
+                  69
+                ]
+              },
+              {
+                "id": "e",
+                "notes": [
+                  65,
+                  70,
+                  72
+                ]
+              }
+            ]
+          },
+          "expected": {
+            "overlap": [],
+            "family_disjoint": true,
+            "distinct_item_ids": 4
+          },
+          "why": "New item identifiers do not prevent family leakage; replacing the test family removes this specific overlap."
+        },
+        "assumptions": [
+          "Ordered absolute notes; nonempty lists; transposition family defined by offsets from first note, including register."
+        ],
+        "limits": "No learner transfer, generalization score or trained classifier is measured; disjointness covers only the declared family rule."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Derive a family key for each main item. What ordering information survives?",
+          "expected_answer": "Subtract the first pitch from every pitch in order. The key keeps directed offsets and register relationships, rather than replacing the sequence with an unordered pitch-class set.",
+          "decision": null
+        },
+        "2": {
+          "question": "Intersect the training and test keys. Can unique item identifiers certify separation?",
+          "expected_answer": "The displayed overlap rejects family separation. Every identifier can be unique while relatives still occur on both sides of the boundary.",
+          "decision": null
+        },
+        "3": {
+          "question": "Does the overlap prove that a learner cheated or learned nothing?",
+          "expected_answer": "No. It describes the design and limits a transfer interpretation. It supplies no actual learner response, intention or change in ability.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the control. What has been repaired and what remains untested?",
+          "expected_answer": "The selected family overlap disappears. Timbre, rhythm, source exposure and actual item difficulty could still connect conditions or provide other cues.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies a claimed family-disjoint split?",
+          "expected_answer": "Any retained family key present in both partitions is a witness. Keep the raw notes and key rule so another reviewer can challenge the grouping itself.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: Subtract the first pitch from every pitch in order. The key keeps directed offsets and register relationships, rather than replacing the sequence with an unordered pitch-class set.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The displayed overlap rejects family separation. Every identifier can be unique while relatives still occur on both sides of the boundary.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: No. It describes the design and limits a transfer interpretation. It supplies no actual learner response, intention or change in ability.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The selected family overlap disappears. Timbre, rhythm, source exposure and actual item difficulty could still connect conditions or provide other cues.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Any retained family key present in both partitions is a witness. Keep the raw notes and key rule so another reviewer can challenge the grouping itself.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Create the family table manually before using any assistance. Audit both partitions against the retained cue policy, then propose a test-item manifest. Name the overlap witness and an unresolved source of dependence before recommending automated quiz generation.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: family(notes)=tuple(note-note[0]); overlap=sorted(set(train families) intersect set(test families)); family_disjoint=(overlap empty)",
+        "falsifier": "Any retained family key present in both partitions is a witness. Keep the raw notes and key rule so another reviewer can challenge the grouping itself.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GAA015",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-015-keep-uncertainty-with-a-practice-pass-rate",
+      "title": "Keep Uncertainty with a Practice Pass Rate",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-015-keep-uncertainty-with-a-practice-pass-rate.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-015-keep-uncertainty-with-a-practice-pass-rate.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-015-keep-uncertainty-with-a-practice-pass-rate.es.md"
+      },
+      "novelty_vs_prerequisites": "GAA010 defines individual pass outcomes; this adds a Wilson interval and a prospective lower-bound decision for an authored binomial pass-rate model.",
+      "prerequisites": [
+        "gaa-010-define-a-practice-pass-before-counting-success"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-alchemist-academy/en/gaa-010-define-a-practice-pass-before-counting-success.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "8430b444c193c843ac56e127da5ade544d0c35add69d98343180c6e59ea87e9f",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "8b62207df7d7fa84e97053ef4d7c6cea36b7eae73ce7a867d14cfdbfa49b9cc6",
+          "scope": "Lines 1-120 read: authored fixture scope, tuning/string order, target-specific acceptance and initial candidates.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm",
+          "pin": "NIST/SEMATECH e-Handbook section 7.2.4.1, read 2026-10-25",
+          "scope": "Wilson limits formula and terminology, lines 4-14 and 44. No normal-approximation Wald interval substituted.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "passes": 8,
+          "attempts": 10,
+          "z": 1.96,
+          "required_lower_bound": 0.7
+        },
+        "formula": "p=k/n; d=1+z^2/n; center=(p+z^2/(2*n))/d; half=z*sqrt(p*(1-p)/n+z^2/(4*n^2))/d; lower=center-half; upper=center+half; established=lower>=required_lower_bound",
+        "expected": {
+          "rate": 0.8,
+          "lower": 0.49015684672072346,
+          "upper": 0.9433190520193067,
+          "established": false
+        },
+        "negative_control": {
+          "values": {
+            "passes": 80,
+            "attempts": 100,
+            "z": 1.96,
+            "required_lower_bound": 0.7
+          },
+          "expected": {
+            "rate": 0.8,
+            "lower": 0.7111690380734976,
+            "upper": 0.8666340774409013,
+            "established": true
+          },
+          "why": "The point rate stays fixed while increased stipulated independent sample size changes the lower-bound decision."
+        },
+        "assumptions": [
+          "Prospective fixed rubric and sample count; independent identically distributed Bernoulli outcomes; selected z and threshold authored before results."
+        ],
+        "limits": "Repeated practice can violate stationarity and independence; no actual learner interval, mastery certificate or probability assigned to a fixed parameter."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the main point rate. Why is that insufficient for the declared decision?",
+          "expected_answer": "The rate is shown below, but the rule compares the lower interval endpoint with the prospective threshold. A percentage alone does not contain that uncertainty information.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the Wilson limits using the stated constant. Is this the symmetric Wald interval?",
+          "expected_answer": "Use the displayed center and half-width. The construction adjusts both denominator and center; replacing it with a point-rate standard-error interval changes the method.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the lower-bound rule. What exactly has not been established?",
+          "expected_answer": "The main lower bound misses the threshold. That is a decision under this interval rule, not proof that the underlying rate lies below the threshold.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the control with the same point rate. Why does the decision change?",
+          "expected_answer": "The larger stipulated sample narrows the interval and raises its lower endpoint past the threshold. The arithmetic depends on the independence and common-rate assumptions.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would invalidate reporting this as a learner mastery interval?",
+          "expected_answer": "Unknown denominators, changed rubrics, dependent repeated takes or learning during sampling undermine the selected model. An authored count is never evidence that a learner completed those attempts.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: The rate is shown below, but the rule compares the lower interval endpoint with the prospective threshold. A percentage alone does not contain that uncertainty information.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Use the displayed center and half-width. The construction adjusts both denominator and center; replacing it with a point-rate standard-error interval changes the method.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The main lower bound misses the threshold. That is a decision under this interval rule, not proof that the underlying rate lies below the threshold.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The larger stipulated sample narrows the interval and raises its lower endpoint past the threshold. The arithmetic depends on the independence and common-rate assumptions.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Unknown denominators, changed rubrics, dependent repeated takes or learning during sampling undermine the selected model. An authored count is never evidence that a learner completed those attempts.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Calculate both intervals manually, record the prospective rule and explain its sampling assumptions. Inspect the retained assistance boundary. Propose a report that retains counts and unresolved dependence rather than only a percentage; state when the binomial interpretation must be withdrawn.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: p=k/n; d=1+z^2/n; center=(p+z^2/(2*n))/d; half=z*sqrt(p*(1-p)/n+z^2/(4*n^2))/d; lower=center-half; upper=center+half; established=lower>=required_lower_bound",
+        "falsifier": "Unknown denominators, changed rubrics, dependent repeated takes or learning during sampling undermine the selected model. An authored count is never evidence that a learner completed those attempts.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "GAA016",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-016-separate-order-drift-from-a-practice-condition",
+      "title": "Separate Order Drift from a Practice Condition",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-016-separate-order-drift-from-a-practice-condition.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-016-separate-order-drift-from-a-practice-condition.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-016-separate-order-drift-from-a-practice-condition.es.md"
+      },
+      "novelty_vs_prerequisites": "GAA012 crosses stimulus factors; this adds temporal nuisance structure and compares condition means under a fixed linear drift.",
+      "prerequisites": [
+        "gaa-012-cross-timbre-with-interval-in-an-ear-trial"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/guitar-alchemist-academy/en/gaa-012-cross-timbre-with-interval-in-an-ear-trial.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ef8d7c00629ae3183bae2498d32f8897157ac6ed85899230a5851857ed6dd82d",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "8b62207df7d7fa84e97053ef4d7c6cea36b7eae73ce7a867d14cfdbfa49b9cc6",
+          "scope": "Lines 1-120 read: authored fixture scope, tuning/string order, target-specific acceptance and initial candidates.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "https://www.itl.nist.gov/div898/handbook/pri/section3/pri331.htm",
+          "pin": "NIST/SEMATECH e-Handbook section 5.3.3.1, read 2026-10-25",
+          "scope": "Randomized run sequence and balanced replication, lines 7-16. The deterministic order examples here do not claim randomization.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "order": [
+            "A",
+            "B",
+            "B",
+            "A"
+          ],
+          "base": 4,
+          "drift_per_trial": 1,
+          "condition_effect": {
+            "A": 0,
+            "B": 0
+          }
+        },
+        "formula": "score_i=base+drift*i+effect[condition_i], i starts at 0; contrast=mean(B)-mean(A)",
+        "expected": {
+          "scores": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "mean_a": 5.5,
+          "mean_b": 5.5,
+          "contrast": 0
+        },
+        "negative_control": {
+          "values": {
+            "order": [
+              "A",
+              "B",
+              "A",
+              "B"
+            ],
+            "base": 4,
+            "drift_per_trial": 1,
+            "condition_effect": {
+              "A": 0,
+              "B": 0
+            }
+          },
+          "expected": {
+            "scores": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "mean_a": 5,
+            "mean_b": 6,
+            "contrast": 1
+          },
+          "why": "Equal replication under the control order still confounds the condition mean with linear order drift."
+        },
+        "assumptions": [
+          "Authored deterministic linear drift; no carryover; no random noise; equal trial spacing; no true condition effect."
+        ],
+        "limits": "The symmetric order cancels this linear trend only, not fatigue curvature, carryover or arbitrary time effects; no participant data."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Generate the main score sequence from the stated drift. Which effect was deliberately set absent?",
+          "expected_answer": "The listed scores rise with trial position. Both condition effects are stipulated zero, so a condition difference here must come from the schedule or calculation.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the main condition means. Why does this order cancel the selected trend?",
+          "expected_answer": "Each condition’s average trial position is the same. Therefore this particular linear drift contributes the same amount to both means.",
+          "decision": null
+        },
+        "3": {
+          "question": "Does a zero main contrast prove the conditions equivalent for musicians?",
+          "expected_answer": "No. It is an exact result of an authored nuisance model. Real outcomes, uncertainty, carryover and musical relevance were not observed.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the alternating-order control. Does equal replication remove its spurious contrast?",
+          "expected_answer": "No. The later average position of the second condition produces the displayed nonzero contrast despite equal trial counts and no stipulated treatment effect.",
+          "decision": null
+        },
+        "5": {
+          "question": "What rejects a claim that marginal balance controls every order effect?",
+          "expected_answer": "The control already supplies a linear-drift counterexample. Nonlinear drift could also defeat the symmetric schedule; retain order and test that assumption before interpreting a real comparison.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: The listed scores rise with trial position. Both condition effects are stipulated zero, so a condition difference here must come from the schedule or calculation.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Each condition’s average trial position is the same. Therefore this particular linear drift contributes the same amount to both means.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: No. It is an exact result of an authored nuisance model. Real outcomes, uncertainty, carryover and musical relevance were not observed.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: No. The later average position of the second condition produces the displayed nonzero contrast despite equal trial counts and no stipulated treatment effect.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The control already supplies a linear-drift counterexample. Nonlinear drift could also defeat the symmetric schedule; retain order and test that assumption before interpreting a real comparison.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw the trial-position tables by hand, calculate means and inspect the retained pass rubric. Propose a future report that preserves order and a prospective nuisance hypothesis. Compare that direct table against any generated schedule before making claims about instruction quality.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: score_i=base+drift*i+effect[condition_i], i starts at 0; contrast=mean(B)-mean(A)",
+        "falsifier": "The control already supplies a linear-drift counterexample. Nonlinear drift could also defeat the symmetric schedule; retain order and test that assumption before interpreting a real comparison.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "MCL015",
+      "department": "musicology",
+      "module_id": "mcl-015-separate-key-release-from-pedal-release",
+      "title": "Separate Key Release from Pedal Release",
+      "source_paths": {
+        "en": "streeling/courses/musicology/en/mcl-015-separate-key-release-from-pedal-release.md",
+        "fr": "streeling/courses/musicology/fr/mcl-015-separate-key-release-from-pedal-release.fr.md",
+        "es": "streeling/courses/musicology/es/mcl-015-separate-key-release-from-pedal-release.es.md"
+      },
+      "novelty_vs_prerequisites": "MCL012 merges tied symbolic events; this adds a damper-held release state distinct from key release, without predicting an acoustic decay tail.",
+      "prerequisites": [
+        "mcl-012-merge-ties-without-merging-slurs"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/musicology/en/mcl-012-merge-ties-without-merging-slurs.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "9360f9221b5551ccd549e6db68e936a073206eae42efd06d2c0fd1e809e01f87",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/music-phrase-2026-10-22/timed-events.json",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "390485ec3d789336e26e8a727b98733ce12ab39f6b1d5eaf786cde3e6ef1ad10",
+          "scope": "Lines 1-65 read: scope, event identity, absolute onset/offset and clock convention.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sound/",
+          "pin": "MusicXML 4.0 reference",
+          "scope": "Playback distinction, offset, damper-pedal and tempo attributes, lines 52-58, 78 and 92. Continuous ramp and release policies are authored, not specified by those attributes.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "notes": [
+            {
+              "id": "a",
+              "on": 0,
+              "key_off": 0.5
+            },
+            {
+              "id": "b",
+              "on": 1,
+              "key_off": 1.5
+            }
+          ],
+          "pedal_down": 0.25,
+          "pedal_up": 2
+        },
+        "formula": "release_i=pedal_up if pedal_down<=key_off_i<pedal_up else key_off_i; scheduled_hold_i=release_i-on_i",
+        "expected": {
+          "release_times": [
+            2,
+            2
+          ],
+          "scheduled_holds": [
+            2,
+            1
+          ]
+        },
+        "negative_control": {
+          "values": {
+            "notes": [
+              {
+                "id": "a",
+                "on": 0,
+                "key_off": 0.5
+              },
+              {
+                "id": "b",
+                "on": 1,
+                "key_off": 1.5
+              }
+            ],
+            "pedal_down": 0.25,
+            "pedal_up": 0.75
+          },
+          "expected": {
+            "release_times": [
+              0.75,
+              1.5
+            ],
+            "scheduled_holds": [
+              0.75,
+              0.5
+            ]
+          },
+          "why": "The earlier pedal release extends only the first note; later key releases are no longer held."
+        },
+        "assumptions": [
+          "Single damper interval; distinct note identities; no retriggered same pitch; all events have different relevant boundary times; release command semantics only."
+        ],
+        "limits": "No acoustic silence time, half pedal, sostenuto, mechanical guitar sustain or actual playback is modeled."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Identify the release-related events for each main note. Are key release and scheduled release identical?",
+          "expected_answer": "They are different in the main case. Both key releases occur while the damper is down, so the authored rule holds their release commands until pedal-up.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the main release times and scheduled hold durations.",
+          "expected_answer": "The arrays appear below. Subtract each onset from its scheduled release; do not subtract the first onset from every note or replace note identity with pitch alone.",
+          "decision": null
+        },
+        "3": {
+          "question": "Does a scheduled release mean the acoustic waveform becomes zero at that instant?",
+          "expected_answer": "No. It marks a command boundary. An envelope or physical instrument can continue decaying afterward, and no tail was supplied or measured.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the early pedal-up control. Why is the later note not extended?",
+          "expected_answer": "Its key release occurs after pedal-up. The first note remains extended to the earlier pedal boundary, while the later note releases at its own key-off.",
+          "decision": null
+        },
+        "5": {
+          "question": "What rejects an export claiming to preserve the release schedule?",
+          "expected_answer": "Omitting the pedal interval or giving the main and control cases identical release arrays loses the required distinction. Actual acoustic fidelity needs another observation.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: They are different in the main case. Both key releases occur while the damper is down, so the authored rule holds their release commands until pedal-up.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The arrays appear below. Subtract each onset from its scheduled release; do not subtract the first onset from every note or replace note identity with pitch alone.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: No. It marks a command boundary. An envelope or physical instrument can continue decaying afterward, and no tail was supplied or measured.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Its key release occurs after pedal-up. The first note remains extended to the earlier pedal boundary, while the later note releases at its own key-off.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Omitting the pedal interval or giving the main and control cases identical release arrays loses the required distinction. Actual acoustic fidelity needs another observation.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw a state timeline manually for each note and pedal. Inspect the retained endpoint meaning, then propose a separate release-command record. Use the control to challenge an export before suggesting playback automation; leave real decay and sustained guitar technique unassessed.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: release_i=pedal_up if pedal_down<=key_off_i<pedal_up else key_off_i; scheduled_hold_i=release_i-on_i",
+        "falsifier": "Omitting the pedal interval or giving the main and control cases identical release arrays loses the required distinction. Actual acoustic fidelity needs another observation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "MCL016",
+      "department": "musicology",
+      "module_id": "mcl-016-reconstruct-polyphonic-score-cursors",
+      "title": "Reconstruct Polyphonic Score Cursors",
+      "source_paths": {
+        "en": "streeling/courses/musicology/en/mcl-016-reconstruct-polyphonic-score-cursors.md",
+        "fr": "streeling/courses/musicology/fr/mcl-016-reconstruct-polyphonic-score-cursors.fr.md",
+        "es": "streeling/courses/musicology/es/mcl-016-reconstruct-polyphonic-score-cursors.es.md"
+      },
+      "novelty_vs_prerequisites": "MCL007 accumulates event clocks; this reconstructs overlapping voices from a serialized cursor with backup/forward operations and checks measure bounds.",
+      "prerequisites": [
+        "mcl-007-integrate-a-midi-tempo-map-before-scheduling"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/musicology/en/mcl-007-integrate-a-midi-tempo-map-before-scheduling.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "00fb1aab5455d884d2b31ad0f05dd9cbf5df4bb087a8042a4c6a5387cf64e2c1",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/music-phrase-2026-10-22/timed-events.json",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "390485ec3d789336e26e8a727b98733ce12ab39f6b1d5eaf786cde3e6ef1ad10",
+          "scope": "Lines 1-65 read: scope, event identity, absolute onset/offset and clock convention.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/backup/",
+          "pin": "MusicXML 4.0 reference",
+          "scope": "Definition, positive duration, measure/divisions restrictions and required duration child, lines 52-65.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "measure_units": 4,
+          "operations": [
+            {
+              "op": "note",
+              "id": "a",
+              "duration": 4
+            },
+            {
+              "op": "backup",
+              "duration": 4
+            },
+            {
+              "op": "note",
+              "id": "b",
+              "duration": 2
+            },
+            {
+              "op": "forward",
+              "duration": 2
+            }
+          ]
+        },
+        "formula": "cursor=0; note records [cursor,cursor+duration) then advances; backup subtracts duration; forward adds duration; valid=all cursor states within [0,measure_units]",
+        "expected": {
+          "note_intervals": {
+            "a": [
+              0,
+              4
+            ],
+            "b": [
+              0,
+              2
+            ]
+          },
+          "cursor_states": [
+            0,
+            4,
+            0,
+            2,
+            4
+          ],
+          "final_cursor": 4,
+          "valid": true
+        },
+        "negative_control": {
+          "values": {
+            "measure_units": 4,
+            "operations": [
+              {
+                "op": "note",
+                "id": "a",
+                "duration": 4
+              },
+              {
+                "op": "backup",
+                "duration": 2
+              },
+              {
+                "op": "note",
+                "id": "b",
+                "duration": 2
+              },
+              {
+                "op": "forward",
+                "duration": 2
+              }
+            ]
+          },
+          "expected": {
+            "note_intervals": {
+              "a": [
+                0,
+                4
+              ],
+              "b": [
+                2,
+                4
+              ]
+            },
+            "cursor_states": [
+              0,
+              4,
+              2,
+              4,
+              6
+            ],
+            "final_cursor": 6,
+            "valid": false
+          },
+          "why": "A shorter backup changes voice placement and overflows the declared measure after the final forward."
+        },
+        "assumptions": [
+          "Positive durations in fixed common division units; one measure; no chord/grace semantics or divisions changes; explicit operations."
+        ],
+        "limits": "No MusicXML parser execution, complete conformance or sounding voice assignment is claimed."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Walk the main stream and record every cursor state. Why is backup not negative-duration music?",
+          "expected_answer": "The cursor states are listed below. Backup repositions the serialization cursor; it does not create a note with negative sounding duration.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive both note intervals. Are the notes sequential or overlapping?",
+          "expected_answer": "They begin together in the main case and overlap for the shorter note’s duration. Document order alone does not establish playback order.",
+          "decision": null
+        },
+        "3": {
+          "question": "What does the forward operation add?",
+          "expected_answer": "It advances the cursor without adding a sounding event in this authored stream. Keep silent time separate from a new note and from the previous note’s duration.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the shortened-backup control. Locate the placement change and the boundary failure.",
+          "expected_answer": "The later voice starts later, and the final cursor exceeds the declared measure. Retain both facts rather than clamping the cursor and hiding the invalid stream.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would reject an export claiming to preserve polyphony?",
+          "expected_answer": "An interval list that serializes the main notes or gives the control the same start times loses required timing. An out-of-bounds cursor rejects this bounded input before scheduling.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: The cursor states are listed below. Backup repositions the serialization cursor; it does not create a note with negative sounding duration.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: They begin together in the main case and overlap for the shorter note’s duration. Document order alone does not establish playback order.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: It advances the cursor without adding a sounding event in this authored stream. Keep silent time separate from a new note and from the previous note’s duration.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The later voice starts later, and the final cursor exceeds the declared measure. Retain both facts rather than clamping the cursor and hiding the invalid stream.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: An interval list that serializes the main notes or gives the control the same start times loses required timing. An out-of-bounds cursor rejects this bounded input before scheduling.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Reconstruct both cursor tables manually before opening answers. Compare their absolute intervals with the retained event packet. Propose a handoff retaining division units and voice identity, with the measure overflow as a falsifier before any importer or DSL implementation.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: cursor=0; note records [cursor,cursor+duration) then advances; backup subtracts duration; forward adds duration; valid=all cursor states within [0,measure_units]",
+        "falsifier": "An interval list that serializes the main notes or gives the control the same start times loses required timing. An out-of-bounds cursor rejects this bounded input before scheduling.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "MCL017",
+      "department": "musicology",
+      "module_id": "mcl-017-integrate-a-tempo-ramp-in-beat-coordinates",
+      "title": "Integrate a Tempo Ramp in Beat Coordinates",
+      "source_paths": {
+        "en": "streeling/courses/musicology/en/mcl-017-integrate-a-tempo-ramp-in-beat-coordinates.md",
+        "fr": "streeling/courses/musicology/fr/mcl-017-integrate-a-tempo-ramp-in-beat-coordinates.fr.md",
+        "es": "streeling/courses/musicology/es/mcl-017-integrate-a-tempo-ramp-in-beat-coordinates.es.md"
+      },
+      "novelty_vs_prerequisites": "MCL007 integrates stepwise constant tempo; this integrates a continuous BPM ramp defined over beat position and contrasts it with averaging endpoint BPM.",
+      "prerequisites": [
+        "mcl-007-integrate-a-midi-tempo-map-before-scheduling"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/musicology/en/mcl-007-integrate-a-midi-tempo-map-before-scheduling.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "00fb1aab5455d884d2b31ad0f05dd9cbf5df4bb087a8042a4c6a5387cf64e2c1",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/music-phrase-2026-10-22/timed-events.json",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "390485ec3d789336e26e8a727b98733ce12ab39f6b1d5eaf786cde3e6ef1ad10",
+          "scope": "Lines 1-65 read: scope, event identity, absolute onset/offset and clock convention.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sound/",
+          "pin": "MusicXML 4.0 reference",
+          "scope": "Playback distinction, offset, damper-pedal and tempo attributes, lines 52-58, 78 and 92. Continuous ramp and release policies are authored, not specified by those attributes.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "start_bpm": 60,
+          "end_bpm": 120,
+          "quarter_beats": 4
+        },
+        "formula": "slope=(B1-B0)/Q; duration=60*log(B1/B0)/slope if slope!=0 else 60*Q/B0; endpoint_average_duration=60*Q/((B0+B1)/2)",
+        "expected": {
+          "slope_bpm_per_quarter": 15,
+          "duration_s": 2.772588722239781,
+          "endpoint_average_duration_s": 2.6666666666666665
+        },
+        "negative_control": {
+          "values": {
+            "start_bpm": 60,
+            "end_bpm": 60,
+            "quarter_beats": 4
+          },
+          "expected": {
+            "slope_bpm_per_quarter": 0,
+            "duration_s": 4,
+            "endpoint_average_duration_s": 4
+          },
+          "why": "The constant-tempo limit needs its own branch and hides the endpoint-average shortcut’s error."
+        },
+        "assumptions": [
+          "Positive BPM everywhere; tempo linear in quarter-beat position, not elapsed seconds; continuous ideal clock."
+        ],
+        "limits": "No measured expressive timing, tempo-ramp interchange standard, scheduler implementation or MusicXML import is provided."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Derive the BPM slope over the authored beat span. What coordinate does it use?",
+          "expected_answer": "The listed slope is per quarter-beat position. Reusing it as BPM change per second would define another trajectory and generally another duration.",
+          "decision": null
+        },
+        "2": {
+          "question": "Derive elapsed time by integrating seconds per beat. Why does a logarithm appear?",
+          "expected_answer": "Seconds per beat is the reciprocal of the linear tempo times the minute conversion. Its integral is logarithmic, yielding the displayed duration for this positive ramp.",
+          "decision": null
+        },
+        "3": {
+          "question": "Compare the endpoint-average shortcut with the integrated result.",
+          "expected_answer": "The shortcut underestimates the authored duration. Averaging BPM and then taking its reciprocal is not the same as averaging the reciprocal along the beat interval.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the constant-tempo control. Why must the implementation avoid dividing by zero slope?",
+          "expected_answer": "The constant branch gives the stated duration and agrees with the shortcut. Directly using the nonconstant expression would be undefined even though the physical limit is finite.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies a claimed beat-linear conversion?",
+          "expected_answer": "A reconstructed endpoint time inconsistent with the integrated duration rejects this model’s conversion. A different declared time-linear ramp must be assessed against its own equation instead.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: The listed slope is per quarter-beat position. Reusing it as BPM change per second would define another trajectory and generally another duration.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Seconds per beat is the reciprocal of the linear tempo times the minute conversion. Its integral is logarithmic, yielding the displayed duration for this positive ramp.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The shortcut underestimates the authored duration. Averaging BPM and then taking its reciprocal is not the same as averaging the reciprocal along the beat interval.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The constant branch gives the stated duration and agrees with the shortcut. Directly using the nonconstant expression would be undefined even though the physical limit is finite.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: A reconstructed endpoint time inconsistent with the integrated duration rejects this model’s conversion. A different declared time-linear ramp must be assessed against its own equation instead.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Derive the integral and constant limit manually, then compare the phrase packet’s fixed clock. Propose a ramp record naming its coordinate and interpolation policy. Use the endpoint-average discrepancy as a falsifier before recommending a scheduling abstraction.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: slope=(B1-B0)/Q; duration=60*log(B1/B0)/slope if slope!=0 else 60*Q/B0; endpoint_average_duration=60*Q/((B0+B1)/2)",
+        "falsifier": "A reconstructed endpoint time inconsistent with the integrated duration rejects this model’s conversion. A different declared time-linear ramp must be assessed against its own equation instead.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "WML014",
+      "department": "world-music-languages",
+      "module_id": "wml-014-quantize-a-ratio-on-a-declared-octave-division",
+      "title": "Quantize a Ratio on a Declared Octave Division",
+      "source_paths": {
+        "en": "streeling/courses/world-music-languages/en/wml-014-quantize-a-ratio-on-a-declared-octave-division.md",
+        "fr": "streeling/courses/world-music-languages/fr/wml-014-quantize-a-ratio-on-a-declared-octave-division.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-014-quantize-a-ratio-on-a-declared-octave-division.es.md"
+      },
+      "novelty_vs_prerequisites": "WML004 exposes one twelve-step projection; this compares nearest-step quantization on different declared octave divisions and retains signed approximation error.",
+      "prerequisites": [
+        "wml-004-preserve-intonation-beyond-pitch-classes"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/world-music-languages/en/wml-004-preserve-intonation-beyond-pitch-classes.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "1f43c926a8c86cd07402c0436991f13356bbd57572909825b98f57f76d545468",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/intonation-listening-2026-10-22/intonation.json",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "88e77c28a2b03d1fab494fa2572e4a7eb1ec8414b39a57254823fb33a35d1a16",
+          "scope": "Lines 1-65 read: reference, constructed ratios, discrete projection and source-boundary statements.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "https://www.nist.gov/pml/time-and-frequency-division/popular-links/time-frequency-z",
+          "pin": "NIST Time and Frequency from A to Z, updated 2023-03-01; read 2026-10-25",
+          "scope": "A440 and multiplicative cent relationship, lines 141-145. Listening-threshold statements are not used as acceptance thresholds.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "target_ratio": 1.25,
+          "octave_divisions": 19
+        },
+        "formula": "target_cents=1200*log2(ratio); step=floor(divisions*log2(ratio)+0.5); represented_cents=1200*step/divisions; error_cents=represented_cents-target_cents",
+        "expected": {
+          "target_cents": 386.3137138648348,
+          "step": 6,
+          "represented_cents": 378.94736842105266,
+          "error_cents": -7.366345443782166
+        },
+        "negative_control": {
+          "values": {
+            "target_ratio": 1.25,
+            "octave_divisions": 12
+          },
+          "expected": {
+            "target_cents": 386.3137138648348,
+            "step": 4,
+            "represented_cents": 400,
+            "error_cents": 13.686286135165204
+          },
+          "why": "Changing the division preserves the target but changes both chosen step and signed residual."
+        },
+        "assumptions": [
+          "Positive frequency ratio within one octave; positive integer equal octave divisions; nearest-step rounding ties upward."
+        ],
+        "limits": "No claim that either grid describes a named tradition, fret layout, listener preference or supported GA tuning mode."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Convert the target ratio to cents. Does the destination grid change that target?",
+          "expected_answer": "The target cent value stays the same in both cases. It describes the requested frequency ratio before quantization, independently of the chosen grid.",
+          "decision": null
+        },
+        "2": {
+          "question": "Choose the nearest step on the main grid. Which rounding convention matters at a tie?",
+          "expected_answer": "Use the displayed step. The authored rule rounds ties upward; although this input is not a tie, the convention belongs in a reproducible handoff.",
+          "decision": null
+        },
+        "3": {
+          "question": "Compute the represented interval and signed error. What does a negative residual mean?",
+          "expected_answer": "The represented interval lies below the target. Its residual is an approximation error under this grid, not an observed guitarist playing flat.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the alternative-grid control. Which values must change?",
+          "expected_answer": "The step, represented cents and residual change, while the target remains fixed. Comparing raw step integers across grids would compare incompatible units.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies a handoff claiming to preserve the exact ratio?",
+          "expected_answer": "Replacing the target with either approximate step alone loses the nonzero residual. Retain the ratio and grid together; musical suitability still needs tradition-specific evidence and human judgment.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: The target cent value stays the same in both cases. It describes the requested frequency ratio before quantization, independently of the chosen grid.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Use the displayed step. The authored rule rounds ties upward; although this input is not a tie, the convention belongs in a reproducible handoff.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The represented interval lies below the target. Its residual is an approximation error under this grid, not an observed guitarist playing flat.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The step, represented cents and residual change, while the target remains fixed. Comparing raw step integers across grids would compare incompatible units.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Replacing the target with either approximate step alone loses the nonzero residual. Retain the ratio and grid together; musical suitability still needs tradition-specific evidence and human judgment.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Build the target/grid/error table manually before assistance. Inspect the retained projection boundary, then propose a record preserving ratio and grid identity. Reject an exactness claim when its residual is discarded; leave cultural interpretation and tuning support undecided.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: target_cents=1200*log2(ratio); step=floor(divisions*log2(ratio)+0.5); represented_cents=1200*step/divisions; error_cents=represented_cents-target_cents",
+        "falsifier": "Replacing the target with either approximate step alone loses the nonzero residual. Retain the ratio and grid together; musical suitability still needs tradition-specific evidence and human judgment.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "WML015",
+      "department": "world-music-languages",
+      "module_id": "wml-015-carry-the-concert-reference-through-a-frequency-handoff",
+      "title": "Carry the Concert Reference Through a Frequency Handoff",
+      "source_paths": {
+        "en": "streeling/courses/world-music-languages/en/wml-015-carry-the-concert-reference-through-a-frequency-handoff.md",
+        "fr": "streeling/courses/world-music-languages/fr/wml-015-carry-the-concert-reference-through-a-frequency-handoff.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-015-carry-the-concert-reference-through-a-frequency-handoff.es.md"
+      },
+      "novelty_vs_prerequisites": "WML004 keeps a reference with one interval; this changes concert calibration across an entire note list and separates preserved internal intervals from changed absolute frequencies.",
+      "prerequisites": [
+        "wml-004-preserve-intonation-beyond-pitch-classes"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/world-music-languages/en/wml-004-preserve-intonation-beyond-pitch-classes.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "1f43c926a8c86cd07402c0436991f13356bbd57572909825b98f57f76d545468",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/intonation-listening-2026-10-22/intonation.json",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "88e77c28a2b03d1fab494fa2572e4a7eb1ec8414b39a57254823fb33a35d1a16",
+          "scope": "Lines 1-65 read: reference, constructed ratios, discrete projection and source-boundary statements.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "https://www.nist.gov/pml/time-and-frequency-division/popular-links/time-frequency-z",
+          "pin": "NIST Time and Frequency from A to Z, updated 2023-03-01; read 2026-10-25",
+          "scope": "A440 and multiplicative cent relationship, lines 141-145. Listening-threshold statements are not used as acceptance thresholds.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "reference_a_hz": 442,
+          "comparison_a_hz": 440,
+          "midi_notes": [
+            69,
+            81
+          ]
+        },
+        "formula": "f(n)=reference*2^((n-69)/12); calibration_ratio=reference/comparison; calibration_cents=1200*log2(calibration_ratio); octave_ratio=f(81)/f(69)",
+        "expected": {
+          "frequencies_hz": [
+            442,
+            884
+          ],
+          "calibration_ratio": 1.0045454545454546,
+          "calibration_cents": 7.851415040126504,
+          "octave_ratio": 2
+        },
+        "negative_control": {
+          "values": {
+            "reference_a_hz": 440,
+            "comparison_a_hz": 440,
+            "midi_notes": [
+              69,
+              81
+            ]
+          },
+          "expected": {
+            "frequencies_hz": [
+              440,
+              880
+            ],
+            "calibration_ratio": 1,
+            "calibration_cents": 0,
+            "octave_ratio": 2
+          },
+          "why": "Internal octave agreement survives a forgotten reference; absolute-frequency comparison reveals the loss."
+        },
+        "assumptions": [
+          "Equal-tempered note law under a declared reference; numeric note convention fixed; ideal frequencies, not estimated recordings."
+        ],
+        "limits": "No endorsement of a concert standard, tradition-specific tuning, instrument retuning safety or rendered pitch fidelity."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Convert the main note list into frequencies under its declared reference.",
+          "expected_answer": "The expected frequencies appear below. The note numbers alone do not determine them unless the receiving tool knows the reference used in the conversion.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the calibration ratio and cent offset against the comparison reference.",
+          "expected_answer": "Both apply equally to every note under this model. An additive frequency offset would not preserve the same cent shift across registers.",
+          "decision": null
+        },
+        "3": {
+          "question": "Check the octave ratio. Can that check detect a forgotten reference?",
+          "expected_answer": "The octave remains exact in the main and control cases. An interval-only test therefore cannot identify this absolute-frequency mismatch.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the comparison-reference control. Which discrepancy disappears?",
+          "expected_answer": "The calibration offset becomes zero and the absolute frequencies change. Written note identities and the octave ratio remain unchanged.",
+          "decision": null
+        },
+        "5": {
+          "question": "What rejects a receiver’s claim to retain the original calibration?",
+          "expected_answer": "Reconstructing the control frequencies from the main reference-bearing input rejects preservation. A correctly retained request still needs a measured output frequency before claiming renderer fidelity.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: The expected frequencies appear below. The note numbers alone do not determine them unless the receiving tool knows the reference used in the conversion.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Both apply equally to every note under this model. An additive frequency offset would not preserve the same cent shift across registers.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The octave remains exact in the main and control cases. An interval-only test therefore cannot identify this absolute-frequency mismatch.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The calibration offset becomes zero and the absolute frequencies change. Written note identities and the octave ratio remain unchanged.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Reconstructing the control frequencies from the main reference-bearing input rejects preservation. A correctly retained request still needs a measured output frequency before claiming renderer fidelity.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Compute both frequency tables manually, then trace the retained reference field. Propose a handoff receipt that distinguishes written identity, calibration and intended frequency. State the absolute-frequency falsifier before an agent recommends tuning or transposition.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: f(n)=reference*2^((n-69)/12); calibration_ratio=reference/comparison; calibration_cents=1200*log2(calibration_ratio); octave_ratio=f(81)/f(69)",
+        "falsifier": "Reconstructing the control frequencies from the main reference-bearing input rejects preservation. A correctly retained request still needs a measured output frequency before claiming renderer fidelity.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "WML016",
+      "department": "world-music-languages",
+      "module_id": "wml-016-keep-chord-degree-operations-distinct",
+      "title": "Keep Chord Degree Operations Distinct",
+      "source_paths": {
+        "en": "streeling/courses/world-music-languages/en/wml-016-keep-chord-degree-operations-distinct.md",
+        "fr": "streeling/courses/world-music-languages/fr/wml-016-keep-chord-degree-operations-distinct.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-016-keep-chord-degree-operations-distinct.es.md"
+      },
+      "novelty_vs_prerequisites": "WML011 preserves a chord kind; this applies an ordered degree-edit program and distinguishes addition, alteration and subtraction before pitch-class projection.",
+      "prerequisites": [
+        "wml-011-preserve-the-kind-of-a-seventh-chord"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/world-music-languages/en/wml-011-preserve-the-kind-of-a-seventh-chord.md",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "0a3322678aaee6b794ca85c475fd55e760ddf7461a0abd6ed51af828eab1ff0d",
+          "scope": "Lines 1-24 read: metadata, project question and initial evidence boundary.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json",
+          "pin": "Learn bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "8b62207df7d7fa84e97053ef4d7c6cea36b7eae73ce7a867d14cfdbfa49b9cc6",
+          "scope": "Lines 1-120 read: authored fixture scope, tuning/string order, target-specific acceptance and initial candidates.",
+          "read_method": "Direct Get-Content source read; complete-file byte SHA256 does not enlarge stated reading scope."
+        },
+        {
+          "path_or_url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/degree-type-value/",
+          "pin": "MusicXML 4.0 reference",
+          "scope": "Addition, alteration and subtraction relative to chord kind, lines 52-62. Missing-degree rejection is our declared teaching policy.",
+          "sha256": null,
+          "read_method": "web.open primary rendered body read; raw-byte hash not claimed."
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "degrees": {
+            "1": 0,
+            "3": 4,
+            "5": 7,
+            "7": 10
+          },
+          "operations": [
+            {
+              "op": "add",
+              "degree": 9,
+              "semitones": 14
+            },
+            {
+              "op": "alter",
+              "degree": 5,
+              "delta": -1
+            },
+            {
+              "op": "subtract",
+              "degree": 3
+            }
+          ]
+        },
+        "formula": "add requires absent degree and inserts declared offset; alter requires present degree and adds delta; subtract requires present degree and removes it; pcs=sorted(set(offset%12))",
+        "expected": {
+          "degrees": {
+            "1": 0,
+            "5": 6,
+            "7": 10,
+            "9": 14
+          },
+          "pitch_classes": [
+            0,
+            2,
+            6,
+            10
+          ],
+          "valid": true
+        },
+        "negative_control": {
+          "values": {
+            "degrees": {
+              "1": 0,
+              "3": 4,
+              "5": 7,
+              "7": 10
+            },
+            "operations": [
+              {
+                "op": "add",
+                "degree": 9,
+                "semitones": 14
+              },
+              {
+                "op": "add",
+                "degree": 5,
+                "semitones": 6
+              },
+              {
+                "op": "subtract",
+                "degree": 3
+              }
+            ]
+          },
+          "expected": {
+            "valid": false,
+            "rejected_operation_index": 1,
+            "reason": "duplicate_degree",
+            "degree": 5
+          },
+          "why": "Replacing an alteration with addition collides with an existing degree under the declared strict policy."
+        },
+        "assumptions": [
+          "Root pitch class zero; explicit ordered edits; compound degree identity retained; strict absent/present guards are authored policy."
+        ],
+        "limits": "Not a complete MusicXML harmony interpreter, universal chord-symbol grammar, voicing prescription or musician convention."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Start from the degree map and apply the addition. Why retain the compound degree key?",
+          "expected_answer": "The added degree has its stated octave-aware offset. Its pitch class may later coincide with another degree label, so projecting early would erase the edit’s identity.",
+          "decision": null
+        },
+        "2": {
+          "question": "Apply the alteration to the existing degree. Does this add another copy of it?",
+          "expected_answer": "No. It changes the existing degree’s offset under the declared program. Keeping both old and new offsets would perform another musical operation.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply subtraction and then derive the pitch-class set.",
+          "expected_answer": "The final map and set appear below. The removed degree is absent; deriving a union of every intermediate pitch would incorrectly retain it.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the control with addition instead of alteration. Why reject it?",
+          "expected_answer": "The target degree already exists. The strict policy rejects that indexed operation rather than guessing replacement semantics or silently producing another chord.",
+          "decision": null
+        },
+        "5": {
+          "question": "What falsifies an export claiming to preserve the edit program?",
+          "expected_answer": "Treating the main and control programs as the same valid operation loses the required distinction. Retain the original symbol, kind and degree edits before claiming successful interpretation.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Independently derive and explain the result and boundary: The added degree has its stated octave-aware offset. Its pitch class may later coincide with another degree label, so projecting early would erase the edit’s identity.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: No. It changes the existing degree’s offset under the declared program. Keeping both old and new offsets would perform another musical operation.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The final map and set appear below. The removed degree is absent; deriving a union of every intermediate pitch would incorrectly retain it.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: The target degree already exists. The strict policy rejects that indexed operation rather than guessing replacement semantics or silently producing another chord.",
+          "decision": null
+        },
+        {
+          "criterion": "Independently derive and explain the result and boundary: Treating the main and control programs as the same valid operation loses the required distinction. Retain the original symbol, kind and degree edits before claiming successful interpretation.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Execute both programs manually and retain intermediate maps. Compare their acceptance with the existing task-specific chord rules. Propose a compact handoff preserving operations and provenance, with the collision as a falsifier before any grammar or agent abstraction.",
+        "direct_manual_baseline": "Before source or agent assistance, manually derive the main and negative-control quantities using: add requires absent degree and inserts declared offset; alter requires present degree and adds delta; subtract requires present degree and removes it; pcs=sorted(set(offset%12))",
+        "falsifier": "Treating the main and control programs as the same valid operation loses the required distinction. Retain the original symbol, kind and degree edits before claiming successful interpretation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    }
+  ]
+}

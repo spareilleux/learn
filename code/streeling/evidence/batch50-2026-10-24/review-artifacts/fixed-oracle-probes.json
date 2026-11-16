@@ -1,0 +1,21 @@
+{
+  "purpose": "Demonstrate independent fixed oracle rejects mutually consistent wrong input plus packet expected, for both model and negative.",
+  "probes": [
+    {
+      "case": "model",
+      "rejected": true,
+      "changed_input_and_packet_expected_together": true,
+      "exception": "False is not true : result.mixed[0]: 0.4 != 0.8",
+      "stdout": "OBSERVATION {\"code\": \"AUD014\", \"case\": \"model\", \"observed\": {\"raw\": [1.6, -1.6, 0.8], \"mixed\": [0.4, -0.4, 0.2], \"peak\": 0.4, \"clipped_raw\": [1, -1, 0.8]}, \"expected\": {\"raw\": [1.6, -1.6, 0.8], \"mixed\": [0.8, -0.8, 0.4], \"peak\": 0.8, \"clipped_raw\": [1, -1, 0.8]}, \"scope\": \"Three aligned authored mono samples; linear summation and hard clipping only; no loudness.\"}\n"
+    },
+    {
+      "case": "negative",
+      "rejected": true,
+      "changed_input_and_packet_expected_together": true,
+      "exception": "False is not true : result.raw[0]: 1.6 != 0",
+      "stdout": "OBSERVATION {\"code\": \"AUD014\", \"case\": \"model\", \"observed\": {\"raw\": [1.6, -1.6, 0.8], \"mixed\": [0.8, -0.8, 0.4], \"peak\": 0.8, \"clipped_raw\": [1, -1, 0.8]}, \"expected\": {\"raw\": [1.6, -1.6, 0.8], \"mixed\": [0.8, -0.8, 0.4], \"peak\": 0.8, \"clipped_raw\": [1, -1, 0.8]}, \"scope\": \"Three aligned authored mono samples; linear summation and hard clipping only; no loudness.\"}\nOBSERVATION {\"code\": \"AUD014\", \"case\": \"negative\", \"observed\": {\"raw\": [1.6, 0.0, 0.0], \"mixed\": [0.8, 0.0, 0.0], \"peak\": 0.8, \"clipped_raw\": [1, 0.0, 0.0]}, \"expected\": {\"raw\": [0, 0, 0], \"mixed\": [0, 0, 0], \"peak\": 0, \"clipped_raw\": [0, 0, 0]}, \"scope\": \"Three aligned authored mono samples; linear summation and hard clipping only; no loudness.\"}\n"
+    }
+  ],
+  "canonical_packet_sha256_before": "d02838183a7161a34cb9ebd4a0c0a70f4fb572c20d03ea033b19ffe06a6e7987",
+  "canonical_packet_sha256_after": "d02838183a7161a34cb9ebd4a0c0a70f4fb572c20d03ea033b19ffe06a6e7987"
+}

@@ -1,0 +1,54 @@
+✔ every link leads to a page the site serves (33.7488ms)
+✔ a link to a module with no page in the reader’s language says it is in English (23.3953ms)
+✔ translations are neither invented nor hidden (13.7064ms)
+✖ the public overview shows distinct modules and actual translation totals (1.0177ms)
+✖ IX Research is published but stays outside the departmental quota (833.095ms)
+✔ hand-written journals are left alone (1.762ms)
+✔ generated course banners localize the duration unit (1.7441ms)
+✔ View source and Edit page lead to the module’s own source file on main (1.8474ms)
+✔ a link to another file of the repository leads to that file on GitHub, anchor kept (0.8265ms)
+✔ the overview and the lock name the Demerzel commit the source was copied from (2.4654ms)
+✔ overviews distinguish the initial source copy from supplemental source provenance (3449.2228ms)
+✔ the same source gives the same files (33.2027ms)
+✔ a broken relative link stops the sync before any page changes (998.4624ms)
+✔ the old Demerzel import option says where the source went (140.3314ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 12
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10906.4598
+
+✖ failing tests:
+
+test at scripts\tests\sync-streeling.test.mjs:143:1
+✖ the public overview shows distinct modules and actual translation totals (1.0177ms)
+  AssertionError [ERR_ASSERTION]: en visible count heading
+      at TestContext.<anonymous> (file:///C:/tmp/learn-streeling-craft-transfer-20261022/scripts/tests/sync-streeling.test.mjs:147:10)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at scripts\tests\sync-streeling.test.mjs:155:1
+✖ IX Research is published but stays outside the departmental quota (833.095ms)
+  AssertionError [ERR_ASSERTION]: en optional research does not enlarge the quota
+      at TestContext.<anonymous> (file:///C:/tmp/learn-streeling-craft-transfer-20261022/scripts/tests/sync-streeling.test.mjs:165:10)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

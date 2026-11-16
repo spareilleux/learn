@@ -1,0 +1,190 @@
+{
+  "status": "complete",
+  "verdict": "Ready to merge",
+  "scope": {
+    "base": "2c0ccbabee05a8c71f49d2f8eee20cc86c99f758",
+    "branch": "codex/streeling-craft-transfer-20261022",
+    "head_sha": "2c0ccbabee05a8c71f49d2f8eee20cc86c99f758",
+    "pr_url": null,
+    "files_changed": 6,
+    "files_reviewed": 7,
+    "mode": "local-aligned",
+    "explicit_paths": [
+      "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_a.py",
+      "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_b.py",
+      "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_c.py",
+      "code/streeling/evidence/batch50-2026-10-25-c/tests/test_course_metadata.mjs",
+      "code/streeling/check.py",
+      "code/streeling/test_check.py",
+      ".github/workflows/streeling-fixtures.yml"
+    ],
+    "unchanged_context": [
+      "code/streeling/evidence/batch50-2026-10-25-c/tests/test_course_metadata.mjs"
+    ]
+  },
+  "intent": "Intent: Retain fifty independent finite-case characterizations and 100 actual observations, fixed independent expected values plus packet agreement, substantive co-mutated input/expected rejection, and the existing 150 locale metadata checks. Repair fixture directory discovery so evidence/vendor directories are skipped while incomplete real module IDs remain visible, and run its regression in the existing CI matrix. Scope is only the seven named code paths; course content/production engines/runtime acceptance are not reviewed here.",
+  "intent_confidence": "explicit",
+  "reviewers": [
+    "correctness",
+    "adversarial"
+  ],
+  "findings": [],
+  "actionable_findings": [],
+  "triage_groups": [],
+  "pre_existing_findings": [],
+  "requirements_completeness": {
+    "plan_path": "code/streeling/evidence/batch50-2026-10-25-c/production-plan.md",
+    "protocol_path": "code/streeling/evidence/batch50-2026-10-25-c/review-protocol.md",
+    "plan_source": "explicit",
+    "formal_requirement_ids": [],
+    "status": "complete_for_explicit_code_substep",
+    "checks": [
+      {
+        "requirement": "50 independently authored finite-model proof tests and 100 model/control observations",
+        "status": "met",
+        "evidence": "50 tests pass; final normal merged captures contain 36+32+32 clean prefixed JSON observations."
+      },
+      {
+        "requirement": "Independent fixed expectations plus packet agreement and substantive mutant rejection",
+        "status": "met",
+        "evidence": "Read all three proof files; native reviewer tested co-mutated AUD023/COG023/DV025 cases; independently replayed COG023 probe rejects despite packet agreement."
+      },
+      {
+        "requirement": "Preserve locale metadata contract",
+        "status": "met",
+        "evidence": "Unchanged author-freeze metadata test passes all150 checks."
+      },
+      {
+        "requirement": "Repair auxiliary-directory discovery while retaining incomplete real module IDs",
+        "status": "met",
+        "evidence": "Both regression cases pass; all23 actual fixture analyses pass. Checker/workflow changes remain within explicit boundary."
+      },
+      {
+        "requirement": "Review before publication with exact final byte bindings",
+        "status": "met",
+        "evidence": "Focused native correctness/adversarial review complete; all7 current file SHA256 values checked."
+      }
+    ],
+    "out_of_scope": [
+      "Course exercise/answer acceptance",
+      "Generator/build outputs",
+      "Production runtime validation",
+      "Merge, deploy and public-site readback"
+    ],
+    "unrequested_behavior_rules": []
+  },
+  "learnings": [],
+  "agent_native_gaps": [],
+  "deployment_notes": [],
+  "residual_risks": [],
+  "testing_gaps": [],
+  "coverage": {
+    "depth": "focused",
+    "scope": "Seven explicit code paths; six changed from base and one unchanged metadata context file.",
+    "criteria": [
+      "AGENTS.md",
+      "CLAUDE.md"
+    ],
+    "criteria_selection": "No CODING_STANDARDS.md found; AGENTS.md governs all paths and CLAUDE.md references it.",
+    "scope_helper": "Installed helper ran as documented. It rejected --paths; a retained read-only adapter adds only the exact seven pathspecs to helper git diff calls. All metrics come from the unmodified installed helper.",
+    "scope_signals": {
+      "agent_surface": false,
+      "changed_files": [
+        ".github/workflows/streeling-fixtures.yml",
+        "code/streeling/check.py",
+        "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_a.py",
+        "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_b.py",
+        "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_c.py",
+        "code/streeling/test_check.py"
+      ],
+      "changed_lines": 860,
+      "declared_packs": false,
+      "deleted_band": "none",
+      "deleted_exec_nontest_lines": 0,
+      "deleted_files": [],
+      "exec_lines": 859,
+      "exec_nontest_lines": 2,
+      "hard_block_classes": [],
+      "hard_block_full": false,
+      "has_learnings_corpus": false,
+      "pack_roots": 0,
+      "reason": null,
+      "signals": [],
+      "silent_pass_classes": [
+        "ci"
+      ],
+      "size_band": "small",
+      "status": "complete",
+      "test_files_changed": true,
+      "unclassified_lines": {
+        ".yml": 1
+      },
+      "uncounted_files": 0
+    },
+    "depth_reason": "CI silent-pass guard requires independent adversarial read; two executable non-test changed lines and no auth/money/public-contract boundary or full-depth floor.",
+    "independent_read": "Native separately dispatched adversarial context; no cross-model identity/promotion claim.",
+    "validator": "No validator batch on focused path. Original P2 independently reproduced, fixed by root and rechecked by reviewer before receipt.",
+    "compound_packs": "No packs declared; none applied.",
+    "not_assessed": [
+      "learnings corpus",
+      "agent-native gaps",
+      "deployment notes",
+      "production/learner/audio/scene/material acceptance",
+      "full historical branch diff"
+    ],
+    "typecheck": "No configured package.json typecheck script.",
+    "lint": "No configured package.json lint script."
+  },
+  "peer": {
+    "outcome": "in-process-fallback",
+    "coverage": "Cross-model pass not run: the installed worker contract binds an unbounded git diff at the base and cannot restrict egress to the seven explicitly authorized paths. No external job or provider authentication probe started and no content left the machine. A separately dispatched native adversarial reviewer covered the lens; this is same-family corroboration, not cross-model independence."
+  },
+  "resolved_findings": [
+    {
+      "title": "Merged logs break Unit B observation line prefixes",
+      "severity": "P2",
+      "file": "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_b.py",
+      "line": 309,
+      "original_artifact": {
+        "path": "C:\\Users\\spare\\AppData\\Local\\Temp\\compound-engineering-197609\\ce-code-review\\20261029-081335-be85b606\\adversarial-before-fix.json",
+        "sha256": "811d9bd6350196a07cf2be5555e4e05229a439fda1c503b34f754680d3bfa4bd"
+      },
+      "resolution": "Root prepended a newline to observation print; no arithmetic/assertion/oracle change. Native reviewer recheck returned zero findings.",
+      "before": "84/100 clean line-prefixed records in merged normal captures, including16/32 for B.",
+      "after": "100/100 clean line-prefixed records: A36 B32 C32; all50 tests exit0.",
+      "verification": "C:\\tmp\\batch25c-code-quality-20261029\\observation-line-verification.json"
+    }
+  ],
+  "final_bindings": [
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_a.py",
+      "sha256": "f9636d3e9fe4dd6df3a1f0e369ead0c1ca3bef5e9e495b469717fe74b48130d1"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_b.py",
+      "sha256": "b0fae0eddf970831c4a735ebc92d96be5fb8827239daf285a0536121510af88b"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25-c/tests/test_unit_c.py",
+      "sha256": "481167b61423dd6cbbff69304ba6850c0b76cbe18e1c0aaf9103f8a264c1a4d1"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25-c/tests/test_course_metadata.mjs",
+      "sha256": "d647cc7c3b9c4dedc988d0de021401522620e6c564a1239f0666470a36a36535"
+    },
+    {
+      "path": "code/streeling/check.py",
+      "sha256": "6ab74de4895c8974288d0818dc33ff62e2bcb5d90aa31f0e95cfd29b24855001"
+    },
+    {
+      "path": "code/streeling/test_check.py",
+      "sha256": "df434fd8efe1c4d9e5e757a245efe7307ae53596bbe173fd988045099af4c6b5"
+    },
+    {
+      "path": ".github/workflows/streeling-fixtures.yml",
+      "sha256": "b47f32200bd0138314df6cfc613378211ee93b94ddeaff43a6647e0afcf6e658"
+    }
+  ],
+  "artifact_path": "C:/Users/spare/AppData/Local/Temp/compound-engineering-197609/ce-code-review/20261029-081335-be85b606",
+  "run_id": "20261029-081335-be85b606"
+}

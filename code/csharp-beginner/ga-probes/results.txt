@@ -1,0 +1,68 @@
+=== Experiment 2: Fret with out-of-range numbers ===
+
+--- n = 50
+new Fret(50)
+    exception type: System.ArgumentOutOfRangeException
+    Message: GA.Domain.Core.Instruments.Primitives.Fret value (50) cannot be greater than _maxValue (36). (Parameter 'value')
+    ParamName: value
+    ActualValue: (null)
+    frame: at GA.Core.Abstractions.IRangeValueObject`1.EnsureValueInRange(Int32 value, Int32 minValue, Int32 maxValue, Boolean normalize, String valueExpression, String minValueExpression, String maxValueExpression) in IRangeValueObject.cs:line 72
+    frame: at GA.Domain.Core.Instruments.Primitives.Fret.CheckRange(Int32 value) in Fret.cs:line 97
+    frame: at GA.Domain.Core.Instruments.Primitives.Fret..ctor(Int32 value) in Fret.cs:line 43
+Fret.FromValue(50)
+    exception type: System.ArgumentOutOfRangeException
+    Message: GA.Domain.Core.Instruments.Primitives.Fret value (50) cannot be greater than _maxValue (36). (Parameter 'value')
+    ParamName: value
+    ActualValue: (null)
+    frame: at GA.Core.Abstractions.IRangeValueObject`1.EnsureValueInRange(Int32 value, Int32 minValue, Int32 maxValue, Boolean normalize, String valueExpression, String minValueExpression, String maxValueExpression) in IRangeValueObject.cs:line 72
+    frame: at GA.Domain.Core.Instruments.Primitives.Fret.CheckRange(Int32 value) in Fret.cs:line 97
+    frame: at GA.Domain.Core.Instruments.Primitives.Fret.set_Value(Int32 value) in Fret.cs:line 170
+Fret f = 50; (implicit conversion)
+    exception type: System.ArgumentOutOfRangeException
+    Message: GA.Domain.Core.Instruments.Primitives.Fret value (50) cannot be greater than _maxValue (36). (Parameter 'value')
+    ParamName: value
+    ActualValue: (null)
+    frame: at GA.Core.Abstractions.IRangeValueObject`1.EnsureValueInRange(Int32 value, Int32 minValue, Int32 maxValue, Boolean normalize, String valueExpression, String minValueExpression, String maxValueExpression) in IRangeValueObject.cs:line 72
+    frame: at GA.Domain.Core.Instruments.Primitives.Fret.CheckRange(Int32 value) in Fret.cs:line 97
+    frame: at GA.Domain.Core.Instruments.Primitives.Fret.set_Value(Int32 value) in Fret.cs:line 170
+    frame: at GA.Domain.Core.Instruments.Primitives.Fret.op_Implicit(Int32 value) in Fret.cs:line 72
+Fret.TryCreate(50)
+    IsSuccess: False
+    ToString(): Failure(Fret number must be between -1 (muted) and 36, got 50)
+    GetErrorOrThrow(): Fret number must be between -1 (muted) and 36, got 50
+
+--- n = -2
+new Fret(-2)
+    exception type: System.ArgumentOutOfRangeException
+    Message: GA.Domain.Core.Instruments.Primitives.Fret value (-2) cannot be less than _minValue (-1). (Parameter 'value')
+    ParamName: value
+    ActualValue: (null)
+    frame: at GA.Core.Abstractions.IRangeValueObject`1.EnsureValueInRange(Int32 value, Int32 minValue, Int32 maxValue, Boolean normalize, String valueExpression, String minValueExpression, String maxValueExpression) in IRangeValueObject.cs:line 64
+    frame: at GA.Domain.Core.Instruments.Primitives.Fret.CheckRange(Int32 value) in Fret.cs:line 97
+    frame: at GA.Domain.Core.Instruments.Primitives.Fret..ctor(Int32 value) in Fret.cs:line 43
+Fret.FromValue(-2)
+    exception type: System.ArgumentOutOfRangeException
+    Message: GA.Domain.Core.Instruments.Primitives.Fret value (-2) cannot be less than _minValue (-1). (Parameter 'value')
+    ParamName: value
+    ActualValue: (null)
+    frame: at GA.Core.Abstractions.IRangeValueObject`1.EnsureValueInRange(Int32 value, Int32 minValue, Int32 maxValue, Boolean normalize, String valueExpression, String minValueExpression, String maxValueExpression) in IRangeValueObject.cs:line 64
+    frame: at GA.Domain.Core.Instruments.Primitives.Fret.CheckRange(Int32 value) in Fret.cs:line 97
+    frame: at GA.Domain.Core.Instruments.Primitives.Fret.set_Value(Int32 value) in Fret.cs:line 170
+Fret f = -2; (implicit conversion)
+    exception type: System.ArgumentOutOfRangeException
+    Message: GA.Domain.Core.Instruments.Primitives.Fret value (-2) cannot be less than _minValue (-1). (Parameter 'value')
+    ParamName: value
+    ActualValue: (null)
+    frame: at GA.Core.Abstractions.IRangeValueObject`1.EnsureValueInRange(Int32 value, Int32 minValue, Int32 maxValue, Boolean normalize, String valueExpression, String minValueExpression, String maxValueExpression) in IRangeValueObject.cs:line 64
+    frame: at GA.Domain.Core.Instruments.Primitives.Fret.CheckRange(Int32 value) in Fret.cs:line 97
+    frame: at GA.Domain.Core.Instruments.Primitives.Fret.set_Value(Int32 value) in Fret.cs:line 170
+    frame: at GA.Domain.Core.Instruments.Primitives.Fret.op_Implicit(Int32 value) in Fret.cs:line 72
+Fret.TryCreate(-2)
+    IsSuccess: False
+    ToString(): Failure(Fret number must be between -1 (muted) and 36, got -2)
+    GetErrorOrThrow(): Fret number must be between -1 (muted) and 36, got -2
+
+=== Experiment 3: PositionLocation with plain ints ===
+new PositionLocation(3, 5) -> ToString(): 3,5; Str: 3 (Value 3); Fret: 5 (Value 5)
+new PositionLocation(5, 3) -> ToString(): 5,3; Str: 5 (Value 5); Fret: 3 (Value 3)
+asWritten == swapped: False

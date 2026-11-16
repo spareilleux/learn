@@ -1,0 +1,314 @@
+{
+  "scope": "Authored candidate prediction laws and exact signatures, not participant responses, psychometric validation or learner diagnosis.",
+  "model_definitions": {
+    "T": "Full rotated K from PHY012",
+    "F": "Fixed unrotated global K at every angle",
+    "D": "Rotated K with off-diagonal entries removed",
+    "I": "Isotropic2.5I at every angle"
+  },
+  "probes": [
+    {
+      "id": "P0",
+      "angle": 0,
+      "u": [
+        1,
+        0
+      ],
+      "predictions": {
+        "T": {
+          "force_N": [
+            4,
+            0
+          ],
+          "energy_N_mm": 2.0
+        },
+        "F": {
+          "force_N": [
+            4,
+            0
+          ],
+          "energy_N_mm": 2.0
+        },
+        "D": {
+          "force_N": [
+            4,
+            0
+          ],
+          "energy_N_mm": 2.0
+        },
+        "I": {
+          "force_N": [
+            2.5,
+            0.0
+          ],
+          "energy_N_mm": 1.25
+        }
+      }
+    },
+    {
+      "id": "P1",
+      "angle": 90,
+      "u": [
+        1,
+        0
+      ],
+      "predictions": {
+        "T": {
+          "force_N": [
+            1,
+            0
+          ],
+          "energy_N_mm": 0.5
+        },
+        "F": {
+          "force_N": [
+            4,
+            0
+          ],
+          "energy_N_mm": 2.0
+        },
+        "D": {
+          "force_N": [
+            1,
+            0
+          ],
+          "energy_N_mm": 0.5
+        },
+        "I": {
+          "force_N": [
+            2.5,
+            0.0
+          ],
+          "energy_N_mm": 1.25
+        }
+      }
+    },
+    {
+      "id": "P2",
+      "angle": 45,
+      "u": [
+        1,
+        0
+      ],
+      "predictions": {
+        "T": {
+          "force_N": [
+            2.5,
+            1.5
+          ],
+          "energy_N_mm": 1.25
+        },
+        "F": {
+          "force_N": [
+            4,
+            0
+          ],
+          "energy_N_mm": 2.0
+        },
+        "D": {
+          "force_N": [
+            2.5,
+            0.0
+          ],
+          "energy_N_mm": 1.25
+        },
+        "I": {
+          "force_N": [
+            2.5,
+            0.0
+          ],
+          "energy_N_mm": 1.25
+        }
+      }
+    },
+    {
+      "id": "P3",
+      "angle": 45,
+      "u": [
+        1,
+        -1
+      ],
+      "predictions": {
+        "T": {
+          "force_N": [
+            1.0,
+            -1.0
+          ],
+          "energy_N_mm": 1.0
+        },
+        "F": {
+          "force_N": [
+            4,
+            -1
+          ],
+          "energy_N_mm": 2.5
+        },
+        "D": {
+          "force_N": [
+            2.5,
+            -2.5
+          ],
+          "energy_N_mm": 2.5
+        },
+        "I": {
+          "force_N": [
+            2.5,
+            -2.5
+          ],
+          "energy_N_mm": 2.5
+        }
+      }
+    }
+  ],
+  "partitions": [
+    {
+      "probes": [
+        "P0"
+      ],
+      "observation": "force_N",
+      "classes": [
+        [
+          "T",
+          "F",
+          "D"
+        ],
+        [
+          "I"
+        ]
+      ]
+    },
+    {
+      "probes": [
+        "P1"
+      ],
+      "observation": "force_N",
+      "classes": [
+        [
+          "T",
+          "D"
+        ],
+        [
+          "F"
+        ],
+        [
+          "I"
+        ]
+      ]
+    },
+    {
+      "probes": [
+        "P2"
+      ],
+      "observation": "force_N",
+      "classes": [
+        [
+          "T"
+        ],
+        [
+          "F"
+        ],
+        [
+          "D",
+          "I"
+        ]
+      ]
+    },
+    {
+      "probes": [
+        "P1",
+        "P2"
+      ],
+      "observation": "force_N",
+      "classes": [
+        [
+          "T"
+        ],
+        [
+          "F"
+        ],
+        [
+          "D"
+        ],
+        [
+          "I"
+        ]
+      ]
+    },
+    {
+      "probes": [
+        "P2"
+      ],
+      "observation": "energy_N_mm",
+      "classes": [
+        [
+          "T",
+          "D",
+          "I"
+        ],
+        [
+          "F"
+        ]
+      ]
+    },
+    {
+      "probes": [
+        "P1",
+        "P3"
+      ],
+      "observation": "energy_N_mm",
+      "classes": [
+        [
+          "T"
+        ],
+        [
+          "F"
+        ],
+        [
+          "D"
+        ],
+        [
+          "I"
+        ]
+      ]
+    }
+  ],
+  "fictional_signature": {
+    "P1_force_N": [
+      1,
+      0
+    ],
+    "P2_force_N": [
+      2.5,
+      0
+    ],
+    "matching_catalogue_models": [
+      "D"
+    ],
+    "actual_learner": null
+  },
+  "uncatalogued_law": {
+    "name": "M",
+    "definition": "Same asT except at60degrees, where it uses2.5I",
+    "agrees_on": [
+      "P0",
+      "P1",
+      "P2",
+      "P3"
+    ],
+    "held_out_angle": 60,
+    "held_out_u_mm": [
+      1,
+      0
+    ],
+    "T_force_N": [
+      1.75,
+      1.299038105676658
+    ],
+    "M_force_N": [
+      2.5,
+      0
+    ]
+  },
+  "instrument_validation": null,
+  "learning_benefit": null
+}

@@ -1,0 +1,118 @@
+{
+  "scope": "Authored equal-amplitude two-tone model with common positive damping and a defined modulation envelope; the complex reference is not a measured or Hilbert-extracted analytic signal. Not measured guitar partials, PCM capture, listener evidence or engine output.",
+  "component_amplitude": 0.25,
+  "component_damping_per_s": 1.0,
+  "frequencies_Hz": [
+    100.0,
+    102.0
+  ],
+  "carrier_Hz": 101,
+  "beat_Hz": 2,
+  "model": "x(t)=.25*exp(-t)*(cos(2*pi*100*t)+cos(2*pi*102*t))",
+  "product": "x(t)=.5*exp(-t)*cos(2*pi*101*t)*cos(2*pi*t)",
+  "envelope": "E(t)=.5*exp(-t)*abs(cos(2*pi*t))",
+  "grid_sample_rate_Hz": 1000,
+  "points": [
+    {
+      "time_s": 0,
+      "component_envelope_each": 0.25,
+      "defined_modulation_envelope": 0.5,
+      "evaluated_float_envelope": 0.5,
+      "exact_modulation_zero": false
+    },
+    {
+      "time_s": 0.1,
+      "component_envelope_each": 0.22620935450898988,
+      "defined_modulation_envelope": 0.36601442416871993,
+      "evaluated_float_envelope": 0.36601442416871993,
+      "exact_modulation_zero": false
+    },
+    {
+      "time_s": 0.2,
+      "component_envelope_each": 0.20468268826949546,
+      "defined_modulation_envelope": 0.1265008582592476,
+      "evaluated_float_envelope": 0.1265008582592476,
+      "exact_modulation_zero": false
+    },
+    {
+      "time_s": 0.25,
+      "component_envelope_each": 0.19470019576785122,
+      "defined_modulation_envelope": 0,
+      "evaluated_float_envelope": 2.3843897154046203e-17,
+      "exact_modulation_zero": true
+    },
+    {
+      "time_s": 0.3,
+      "component_envelope_each": 0.18520455517042947,
+      "defined_modulation_envelope": 0.11446270996663045,
+      "evaluated_float_envelope": 0.11446270996663045,
+      "exact_modulation_zero": false
+    },
+    {
+      "time_s": 0.4,
+      "component_envelope_each": 0.16758001150890983,
+      "defined_modulation_envelope": 0.27115015445651464,
+      "evaluated_float_envelope": 0.27115015445651464,
+      "exact_modulation_zero": false
+    },
+    {
+      "time_s": 0.5,
+      "component_envelope_each": 0.15163266492815836,
+      "defined_modulation_envelope": 0.3032653298563167,
+      "evaluated_float_envelope": 0.3032653298563167,
+      "exact_modulation_zero": false
+    },
+    {
+      "time_s": 0.6,
+      "component_envelope_each": 0.13720290902350663,
+      "defined_modulation_envelope": 0.22199897015539338,
+      "evaluated_float_envelope": 0.22199897015539338,
+      "exact_modulation_zero": false
+    },
+    {
+      "time_s": 0.75,
+      "component_envelope_each": 0.11809163818525367,
+      "defined_modulation_envelope": 0,
+      "evaluated_float_envelope": 4.338616401289147e-17,
+      "exact_modulation_zero": true
+    },
+    {
+      "time_s": 1.0,
+      "component_envelope_each": 0.09196986029286058,
+      "defined_modulation_envelope": 0.18393972058572117,
+      "evaluated_float_envelope": 0.18393972058572117,
+      "exact_modulation_zero": false
+    }
+  ],
+  "identity_checks": {
+    "points": 1001,
+    "max_real_identity_error": 1.1379786002407855e-14,
+    "max_envelope_identity_error": 1.2004286453759505e-14
+  },
+  "misleading_interval": {
+    "start_s": 0.2,
+    "end_s": 0.4,
+    "start_envelope": 0.1265008582592476,
+    "end_envelope": 0.27115015445651464,
+    "ratio": 2.143464939192954,
+    "naive_damping_per_s": -3.8121182505960336
+  },
+  "same_beat_phase": {
+    "times_s": [
+      0,
+      0.5
+    ],
+    "amplitude_ratio": 0.6065306597126334,
+    "inferred_damping_per_s": 1.0,
+    "energy_envelope_ratio": 0.36787944117144233,
+    "not_asserted_local_maxima": true
+  },
+  "zero_log_fit": {
+    "time_s": 0.25,
+    "envelope": 0,
+    "log_envelope": null,
+    "decision": "undefined logarithm, not infinite observed damping"
+  },
+  "actual_guitar_beating": null,
+  "new_render": null
+}

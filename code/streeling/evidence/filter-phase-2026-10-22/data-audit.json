@@ -1,0 +1,669 @@
+{
+  "schema": "streeling.filter-phase.data-audit.v1",
+  "audited_at_utc": "2026-10-23T00:19:20.093Z",
+  "verdict": "pass",
+  "check_count": 28,
+  "checks": [
+    {
+      "id": "pinned_source_bytes_match_primary_readback",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "path": "C:/tmp/streeling-filter-phase-inputs-20261022/lib.rs",
+          "sha256": "2d4155cbfe26c4074ea701d0abb7cfd727fa4648d4d5109347fa442656e1f943",
+          "bytes": 20153,
+          "expected_sha256": "2d4155cbfe26c4074ea701d0abb7cfd727fa4648d4d5109347fa442656e1f943",
+          "expected_bytes": 20153
+        },
+        {
+          "path": "C:/tmp/streeling-filter-phase-inputs-20261022/SetClass.cs",
+          "sha256": "edca24703a5b74385875274fd6e5f7f0a497e69e4970bfadfb48f221f8380375",
+          "bytes": 11002,
+          "expected_sha256": "edca24703a5b74385875274fd6e5f7f0a497e69e4970bfadfb48f221f8380375",
+          "expected_bytes": 11002
+        },
+        {
+          "path": "C:/tmp/streeling-filter-phase-inputs-20261022/SpectralPhaseAlignment.cs",
+          "sha256": "6129bc25c5e4ece19c54a266910bd007e9e9edcab03e0f848a6cf7676d193a79",
+          "bytes": 7104,
+          "expected_sha256": "6129bc25c5e4ece19c54a266910bd007e9e9edcab03e0f848a6cf7676d193a79",
+          "expected_bytes": 7104
+        },
+        {
+          "path": "C:/tmp/streeling-filter-phase-inputs-20261022/SetClassTests.cs",
+          "sha256": "074d5ad8f23a0239f36ebd680efabff3980054cd48f0400898df5d008221db8e",
+          "bytes": 5367,
+          "expected_sha256": "074d5ad8f23a0239f36ebd680efabff3980054cd48f0400898df5d008221db8e",
+          "expected_bytes": 5367
+        },
+        {
+          "path": "C:/tmp/streeling-filter-phase-inputs-20261022/SpectralPhaseAlignmentTests.cs",
+          "sha256": "449bc32c1f6e745af537f34d628227be5e4e3d635e0c5427473b204dd1ae627d",
+          "bytes": 7209,
+          "expected_sha256": "449bc32c1f6e745af537f34d628227be5e4e3d635e0c5427473b204dd1ae627d",
+          "expected_bytes": 7209
+        },
+        {
+          "path": "C:/tmp/streeling-filter-phase-inputs-20261022/spectral.rs",
+          "sha256": "32eb7cfb68af526e955fa7a517b47472579d77ecfee4ceba830ea31e49846141",
+          "bytes": 3746,
+          "expected_sha256": "32eb7cfb68af526e955fa7a517b47472579d77ecfee4ceba830ea31e49846141",
+          "expected_bytes": 3746
+        },
+        {
+          "path": "C:/tmp/streeling-filter-phase-inputs-20261022/window.rs",
+          "sha256": "2e619dc55133c53a824c3196b2f3b6997cff4424eb19faa961d1edb3e78089fc",
+          "bytes": 2912,
+          "expected_sha256": "2e619dc55133c53a824c3196b2f3b6997cff4424eb19faa961d1edb3e78089fc",
+          "expected_bytes": 2912
+        }
+      ],
+      "expected": "all seven temporary source files exist with declared bytes and SHA256"
+    },
+    {
+      "id": "source_observations_match_pinned_bytes",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "ga": {
+          "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+          "body_modes": 5,
+          "body_state_per_mode": [
+            "y1",
+            "y2"
+          ],
+          "body_input": "string_sum after active voice normalization",
+          "body_mix": [
+            0.55,
+            0.45
+          ],
+          "downstream": [
+            "reverb blend",
+            "soft knee",
+            "hard clamp"
+          ],
+          "physical_calibration_in_selected_body_constructor": false,
+          "SetClass_input": "GetSpectralPrimeForm().ToBinaryVector()",
+          "SetClass_magnitude": "complex coefficient Magnitude",
+          "SetClass_phase": "phase of same canonical input, not recovery of erased original transposition",
+          "SpectralPhaseAlignment_input": "actual chroma",
+          "SpectralPhaseAlignment_operation": "fa[k]*conj(fb[k]) and trial rotations",
+          "source_test_observations": [
+            "magnitude transposition invariance test",
+            "actual-chroma alignment major triads includes10",
+            "chirality comparison test"
+          ],
+          "tests_executed": false
+        },
+        "ix": {
+          "commit": "bd1336b7c4045e427dcdbe80b102790e45da5ce1",
+          "stft_returns": "complex spectra",
+          "spectrogram_returns": "magnitude or20log10(max(magnitude,1e-10))",
+          "scalar_spectrogram_preserves_complex_phase": false,
+          "all_overlapping_magnitude_phase_retrieval_impossible_claim": false
+        }
+      },
+      "expected": "observations are supported by actual pinned source bytes"
+    },
+    {
+      "id": "five_resonators_and_parameters",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        [
+          110,
+          0.95,
+          0.08
+        ],
+        [
+          240,
+          0.96,
+          0.1
+        ],
+        [
+          530,
+          0.97,
+          0.08
+        ],
+        [
+          1200,
+          0.98,
+          0.03
+        ],
+        [
+          2400,
+          0.92,
+          0.02
+        ]
+      ],
+      "expected": [
+        [
+          110,
+          0.95,
+          0.08
+        ],
+        [
+          240,
+          0.96,
+          0.1
+        ],
+        [
+          530,
+          0.97,
+          0.08
+        ],
+        [
+          1200,
+          0.98,
+          0.03
+        ],
+        [
+          2400,
+          0.92,
+          0.02
+        ]
+      ]
+    },
+    {
+      "id": "recurrence_coefficients_binary64",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "a1": 0,
+          "a2": 0
+        },
+        {
+          "a1": 0,
+          "a2": 0
+        },
+        {
+          "a1": 0,
+          "a2": 0
+        },
+        {
+          "a1": 0,
+          "a2": 0
+        },
+        {
+          "a1": 0,
+          "a2": 0
+        }
+      ],
+      "expected": "a1=2*r*cos(omega0), a2=-r^2"
+    },
+    {
+      "id": "denominator_sign_boundary",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        [
+          -1.899766663518941,
+          0.9025
+        ],
+        [
+          -1.9188776354073862,
+          0.9216
+        ],
+        [
+          -1.9344715974857256,
+          0.9409
+        ],
+        [
+          -1.9314232418562753,
+          0.9603999999999999
+        ],
+        [
+          -1.7334736360349816,
+          0.8464
+        ]
+      ],
+      "expected": "D(z)=1+a1_den*z^-1+a2_den*z^-2"
+    },
+    {
+      "id": "isolated_peak_cosine_and_110_240_dc",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "pole": 110,
+          "c": 1.0011928192090818,
+          "predictedHz": 0
+        },
+        {
+          "pole": 240,
+          "c": 1.000248281303937,
+          "predictedHz": 0
+        },
+        {
+          "pole": 530,
+          "c": 0.997612903486036,
+          "predictedHz": 485.0596375940993
+        },
+        {
+          "pole": 1200,
+          "c": 0.9856211274820497,
+          "predictedHz": 1191.6752008147962
+        },
+        {
+          "pole": 2400,
+          "c": 0.9453821247563179,
+          "predictedHz": 2330.439875698328
+        }
+      ],
+      "expected": "110 and 240 Hz cosine arguments exceed 1 and clip to 0 Hz"
+    },
+    {
+      "id": "transfer_matches_direct_2048_impulse_sum",
+      "pass_": true,
+      "status": "pass",
+      "observed": 1.9384180143677147e-12,
+      "expected": "<1e-8 binary64 absolute complex error"
+    },
+    {
+      "id": "ten_complex_summed_body_rows",
+      "pass_": true,
+      "status": "pass",
+      "observed": 1.1680896982650316e-13,
+      "expected": "complex sum of five H_i per row"
+    },
+    {
+      "id": "ten_complex_summed_dry_rows",
+      "pass_": true,
+      "status": "pass",
+      "observed": 5.0634447224936356e-14,
+      "expected": "0.55*input + 0.45*complex body sum"
+    },
+    {
+      "id": "magnitude_sum_is_not_complex_sum",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        82.4069,
+        110,
+        164.8138,
+        240,
+        530,
+        1200,
+        2400,
+        5000
+      ],
+      "expected": "at least one non-DC row differs"
+    },
+    {
+      "id": "binary64_authorship_vs_rust_f32_boundary",
+      "pass_": true,
+      "status": "pass",
+      "observed": 6.460887358450407e-8,
+      "expected": "nonzero representation delta; calculations here are binary64, engine coefficients are f32"
+    },
+    {
+      "id": "reversed_two_tap_same_magnitudes",
+      "pass_": true,
+      "status": "pass",
+      "observed": 1.1102230246251565e-16,
+      "expected": "all N=8 DFT magnitudes equal"
+    },
+    {
+      "id": "reversed_two_tap_phases_differ",
+      "pass_": true,
+      "status": "pass",
+      "observed": 3.141592653589793,
+      "expected": "at least one phase differs"
+    },
+    {
+      "id": "inverse_reconstructs_both",
+      "pass_": true,
+      "status": "pass",
+      "observed": "inverse error <1e-12",
+      "expected": "exact inverse DFT reconstruction"
+    },
+    {
+      "id": "all_integer_circular_shifts_preserve_magnitude_and_inverse",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        {
+          "magnitudeError": 0,
+          "inverseError": 3.608224830031759e-16
+        },
+        {
+          "magnitudeError": 1.1102230246251565e-16,
+          "inverseError": 3.122502256758253e-16
+        },
+        {
+          "magnitudeError": 1.1102230246251565e-16,
+          "inverseError": 4.996003610813204e-16
+        },
+        {
+          "magnitudeError": 3.3306690738754696e-16,
+          "inverseError": 4.787836793695988e-16
+        },
+        {
+          "magnitudeError": 5.551115123125783e-16,
+          "inverseError": 4.163336342344337e-16
+        },
+        {
+          "magnitudeError": 4.440892098500626e-16,
+          "inverseError": 4.718447854656915e-16
+        },
+        {
+          "magnitudeError": 7.771561172376096e-16,
+          "inverseError": 1.6653345369377348e-16
+        },
+        {
+          "magnitudeError": 6.661338147750939e-16,
+          "inverseError": 4.718447854656915e-16
+        }
+      ],
+      "expected": "all eight integer circular shifts preserve DFT magnitudes and independently inverse-reconstruct"
+    },
+    {
+      "id": "no_integer_circular_shift_of_A_equals_B",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "computed": [
+          {
+            "circular_shift": 0,
+            "max_abs_error_to_B": 0.5
+          },
+          {
+            "circular_shift": 1,
+            "max_abs_error_to_B": 0.25
+          },
+          {
+            "circular_shift": 2,
+            "max_abs_error_to_B": 0.75
+          },
+          {
+            "circular_shift": 3,
+            "max_abs_error_to_B": 0.75
+          },
+          {
+            "circular_shift": 4,
+            "max_abs_error_to_B": 0.75
+          },
+          {
+            "circular_shift": 5,
+            "max_abs_error_to_B": 0.75
+          },
+          {
+            "circular_shift": 6,
+            "max_abs_error_to_B": 0.75
+          },
+          {
+            "circular_shift": 7,
+            "max_abs_error_to_B": 0.75
+          }
+        ],
+        "declared": [
+          {
+            "circular_shift": 0,
+            "max_abs_error_to_B": 0.5
+          },
+          {
+            "circular_shift": 1,
+            "max_abs_error_to_B": 0.25
+          },
+          {
+            "circular_shift": 2,
+            "max_abs_error_to_B": 0.75
+          },
+          {
+            "circular_shift": 3,
+            "max_abs_error_to_B": 0.75
+          },
+          {
+            "circular_shift": 4,
+            "max_abs_error_to_B": 0.75
+          },
+          {
+            "circular_shift": 5,
+            "max_abs_error_to_B": 0.75
+          },
+          {
+            "circular_shift": 6,
+            "max_abs_error_to_B": 0.75
+          },
+          {
+            "circular_shift": 7,
+            "max_abs_error_to_B": 0.75
+          }
+        ]
+      },
+      "expected": "all eight A shifts remain distinct from B; minimum max-abs error is positive"
+    },
+    {
+      "id": "zero_phase_reconstruction_is_real",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "maxImag": 0,
+        "energy": 0.6250000000000001,
+        "centroid": 0.1957812764165841
+      },
+      "expected": "real zero-phase inverse with finite energy"
+    },
+    {
+      "id": "energy_centroids_match_phase_pair",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "energyA": 0.625,
+        "energyB": 0.625,
+        "centroidA": 0.1,
+        "centroidB": 0.9
+      },
+      "expected": "phase-pair energy and centroid fields"
+    },
+    {
+      "id": "finite_linear_9_to_8_truncation_control",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "real": 0.7187499999999999,
+        "imag": -0.21875,
+        "magnitude": 0.7513009550107067,
+        "phase_rad": -0.29544083714372005
+      },
+      "expected": "finite zero-initial 9-sample convolution truncated to 8 gives 0.71875-0.21875i"
+    },
+    {
+      "id": "periodic_cosine_true_complex_gain",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "real": 0.75,
+        "imag": -0.25,
+        "magnitude": 0.7905694150420949,
+        "phase_rad": -0.3217505543966422
+      },
+      "expected": "single-trial output/input transfer is 0.75-0.25i"
+    },
+    {
+      "id": "between_trial_complex_transfer_ratio_is_unity",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "real": 1,
+        "imag": 0,
+        "magnitude": 1,
+        "phase_rad": 0
+      },
+      "expected": "same linear filter across doubled trials has complex transfer ratio 1+0i"
+    },
+    {
+      "id": "periodic_trials_scale_linearly",
+      "pass_": true,
+      "status": "pass",
+      "observed": 2,
+      "expected": "doubling input amplitude doubles output amplitude"
+    },
+    {
+      "id": "unexcited_bin_ratio_is_undefined",
+      "pass_": true,
+      "status": "pass",
+      "observed": [
+        null,
+        null
+      ],
+      "expected": "null rather than division by zero"
+    },
+    {
+      "id": "weak_excitation_noise_control",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "real": 10000.750000000002,
+        "imag": -0.25,
+        "magnitude": 10000.750003124767,
+        "phase_rad": -0.00002499812513540729
+      },
+      "expected": "noise-dominated naive ratio rejected; analytic ratio retained"
+    },
+    {
+      "id": "ix_complex_stft_vs_scalar_spectrogram",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "commit": "bd1336b7c4045e427dcdbe80b102790e45da5ce1",
+        "stft_returns": "complex spectra",
+        "spectrogram_returns": "magnitude or20log10(max(magnitude,1e-10))",
+        "scalar_spectrogram_preserves_complex_phase": false,
+        "all_overlapping_magnitude_phase_retrieval_impossible_claim": false
+      },
+      "expected": "STFT retains complex values; scalar spectrogram projects magnitude/log magnitude"
+    },
+    {
+      "id": "ga_prime_form_vs_actual_chroma_phase_boundary",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+        "body_modes": 5,
+        "body_state_per_mode": [
+          "y1",
+          "y2"
+        ],
+        "body_input": "string_sum after active voice normalization",
+        "body_mix": [
+          0.55,
+          0.45
+        ],
+        "downstream": [
+          "reverb blend",
+          "soft knee",
+          "hard clamp"
+        ],
+        "physical_calibration_in_selected_body_constructor": false,
+        "SetClass_input": "GetSpectralPrimeForm().ToBinaryVector()",
+        "SetClass_magnitude": "complex coefficient Magnitude",
+        "SetClass_phase": "phase of same canonical input, not recovery of erased original transposition",
+        "SpectralPhaseAlignment_input": "actual chroma",
+        "SpectralPhaseAlignment_operation": "fa[k]*conj(fb[k]) and trial rotations",
+        "source_test_observations": [
+          "magnitude transposition invariance test",
+          "actual-chroma alignment major triads includes10",
+          "chirality comparison test"
+        ],
+        "tests_executed": false
+      },
+      "expected": "SetClass canonical prime-form DFT differs from phase-alignment actual-chroma input"
+    },
+    {
+      "id": "staging_path_binding_resolved",
+      "pass_": true,
+      "status": "pass",
+      "observed": "all seven temporary_path files were read and hash-checked",
+      "expected": "all input paths resolve to immutable local files"
+    },
+    {
+      "id": "between_trial_ratio_binding_resolved",
+      "pass_": true,
+      "status": "pass",
+      "observed": {
+        "real": 1,
+        "imag": 0,
+        "magnitude": 1,
+        "phase_rad": 0
+      },
+      "expected": "true_gain_ratio is interpreted as the between-trial transfer ratio, which is 1+0i"
+    }
+  ],
+  "findings": [],
+  "fix_requests": [],
+  "input_bindings": [
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/filter-phase-2026-10-22/primary-readback.json",
+      "sha256": "4228b30ff376c5895cbdaf5a9ff36ac9a43191d2bddf2d32f467a1a5a5421294"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/filter-phase-2026-10-22/body-response.json",
+      "sha256": "2a8aca8bc0124e3e5bc88285a338cf3bcb39b362038f117acec1490f3fc0b461"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/filter-phase-2026-10-22/phase-pair.json",
+      "sha256": "f2cea561fe137d403202618cad736c4f641c737ad87fad0cb306b9e9a0efbdc3"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/filter-phase-2026-10-22/paired-transfer.json",
+      "sha256": "344088860435fc3dde0810036b0eac50433689a00e073c7361e5cefdd084bb63"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/filter-phase-2026-10-22/source-observations.json",
+      "sha256": "34e8f3a4c7ca3353bae454990693dc8df83ff5c6deba6b8eff15d2022baa0c1f"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/filter-phase-2026-10-22/primary-reading.json",
+      "sha256": "10deda0ce8f67eff956379a0a471d94d9714f62fe9ef6fda14b0e641b569329d"
+    },
+    {
+      "path": "C:/tmp/streeling-filter-phase-inputs-20261022/lib.rs",
+      "sha256": "2d4155cbfe26c4074ea701d0abb7cfd727fa4648d4d5109347fa442656e1f943"
+    },
+    {
+      "path": "C:/tmp/streeling-filter-phase-inputs-20261022/SetClass.cs",
+      "sha256": "edca24703a5b74385875274fd6e5f7f0a497e69e4970bfadfb48f221f8380375"
+    },
+    {
+      "path": "C:/tmp/streeling-filter-phase-inputs-20261022/SpectralPhaseAlignment.cs",
+      "sha256": "6129bc25c5e4ece19c54a266910bd007e9e9edcab03e0f848a6cf7676d193a79"
+    },
+    {
+      "path": "C:/tmp/streeling-filter-phase-inputs-20261022/SetClassTests.cs",
+      "sha256": "074d5ad8f23a0239f36ebd680efabff3980054cd48f0400898df5d008221db8e"
+    },
+    {
+      "path": "C:/tmp/streeling-filter-phase-inputs-20261022/SpectralPhaseAlignmentTests.cs",
+      "sha256": "449bc32c1f6e745af537f34d628227be5e4e3d635e0c5427473b204dd1ae627d"
+    },
+    {
+      "path": "C:/tmp/streeling-filter-phase-inputs-20261022/spectral.rs",
+      "sha256": "32eb7cfb68af526e955fa7a517b47472579d77ecfee4ceba830ea31e49846141"
+    },
+    {
+      "path": "C:/tmp/streeling-filter-phase-inputs-20261022/window.rs",
+      "sha256": "2e619dc55133c53a824c3196b2f3b6997cff4424eb19faa961d1edb3e78089fc"
+    }
+  ],
+  "audit_history": [
+    {
+      "event": "prior_staging_path_report",
+      "status": "invalidated",
+      "resolution": "seven declared temporary source files were directly read and SHA256-verified"
+    },
+    {
+      "event": "ambiguous_true_gain_ratio",
+      "status": "resolved",
+      "resolution": "bound to between_trial_complex_transfer_ratio, independently verified as 1+0i"
+    }
+  ],
+  "scope": {
+    "arithmetic": "independent binary64 recomputation from pinned decimal/source observation data",
+    "runtime": "no Rust/C# builds, tests, audio, GPU, or host probes",
+    "boundary": "Rust engine source is f32; authored audit arithmetic is binary64",
+    "source_paths": "seven pinned source temporary paths were read and hash-checked; six derived JSON evidence inputs were hash-bound"
+  }
+}

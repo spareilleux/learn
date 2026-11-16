@@ -1,0 +1,1056 @@
+{
+  "reviewer": "independent-pedagogical-source-review-agent",
+  "checked_at_utc": "2026-10-22T22:17:34.041067+00:00",
+  "verdict": "pass",
+  "findings": [
+    {
+      "origin": "code/streeling/evidence/pluck-coordinates-2026-10-22/data-audit.json",
+      "id": "profile0-overwrites-default",
+      "status": "observed-preserved",
+      "finding": "Constructor0.988 is overwritten by set_guitar_profile(0) to0.986; original prediction is refuted and fixed calculations use correct profile value."
+    },
+    {
+      "origin": "code/streeling/evidence/pluck-coordinates-2026-10-22/data-audit.json",
+      "id": "retained-positive-attack-state",
+      "status": "observed-preserved",
+      "finding": "All six positive cases stop above5e-5 after threshold1e-3; the deactivation attack conjunct cannot become true through this envelope branch alone.",
+      "runtime_reproduced": false,
+      "production_fix": null
+    }
+  ],
+  "fix_history": [
+    {
+      "origin": "code/streeling/evidence/pluck-coordinates-2026-10-22/data-audit.json",
+      "id": "recursive-noise-filter-wording",
+      "status": "resolved",
+      "finding": "The recurrence feeds back the previous filtered output; two-tap FIR wording was inaccurate.",
+      "resolution": "Requested first-order recursive smoother wording; exact final packet bytes bound below."
+    },
+    {
+      "id": "excitation-feedback-citation",
+      "status": "resolved",
+      "finding": "Initial data-audit source-recursive-feedback line159 identified the constructor reverb loop rather than the excitation recurrence paired with line369.",
+      "resolution": "Data owner corrected anchor to370. Verified actual pinned line370 is prev=filtered in excitation, and all399checks remain pass.",
+      "source_changes_by_reviewer": false
+    },
+    {
+      "id": "learner-task-explicit-elicitation",
+      "status": "resolved",
+      "finding": "Initial task did not explicitly ask all rubric requirements: GAS initial state/formula/two positions/midpoint, GTR fret24fixed fraction, and AUD330Hz/exact-E2 distinction.",
+      "resolution": "Author expanded all three answer-free task paragraphs. Independently reviewed final task against every criterion; no unasked rubric demands remain in the reviewed scope.",
+      "source_changes_by_reviewer": false
+    },
+    {
+      "id": "explicit-prerequisite-progression",
+      "status": "resolved",
+      "finding": "Existing PHY004 already introduces proportional ideal coefficients/nulls, velocity coupling and source-window/noise limits. GAS006 progression needed an explicit dependency rather than implying first discovery.",
+      "resolution": "Author added PHY004 prerequisite and a linked progression sentence across all three GAS006 locales, identifying normalized coefficients/signed ratios/fixedh and independently checked modes as the added scope. Existing PHY004 source directly read for this decision.",
+      "source_changes_by_reviewer": false
+    }
+  ],
+  "coverage": {
+    "exercise_answer_pairs": 45,
+    "learner_criteria": 15
+  },
+  "scope": {
+    "reviewed": "All nine EN/FR/ES course sources and45localized exercise-answer pairs, final learner task and15criteria, fixed evidence, all three pinned source files, JOS ideal-string and one-pole pages, Princeton scanned page5 and W3C sample-rate property.",
+    "data_audit": "Independent399/399source/numerical checks read and current input hashes verified. Content reviewer did not rerun quadrature, synth or any runtime experiment.",
+    "primary_math": "Princeton downloaded PDF hash verified and provided page5/printed228 directly visually read, including Fourier integral, coefficient notation, at-rest condition and modal suppression. Failed web502 and empty extraction remain separate from actual visual reading.",
+    "localization": "Agent semantic review and ordered URL parity. Human fluent-language, musician and learner outcomes remain absent.",
+    "prerequisites": "Existing English prerequisites read for background/continuity only. Their wider historical source/experimental/pedagogical claims were not reapproved by this receipt.",
+    "publication": "Source review only; generated mechanical/build/rendered-link/idempotence/publication receipts are separate root gates, not circular inputs to this receipt."
+  },
+  "exercise_answer_checks": [
+    {
+      "id": "GAS006-en-exercise-1",
+      "module": "GAS006",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-acoustics/en/gas-006-relate-pluck-position-to-string-modes.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "1d07730fb4cdd1f9520ddf8d362781c73fa79765d421e2859b02aa577c5390ac",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Ideal flexible uniform fixed-end linear displacement at p=1/5 has normalized endpoint/peak/endpoint values0,1,0 and zero initial velocity. Bridge-origin coordinate, fixed peak h and assumptions are explicit; bright attack alone does not specify an initial condition."
+    },
+    {
+      "id": "GAS006-en-exercise-2",
+      "module": "GAS006",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-acoustics/en/gas-006-relate-pluck-position-to-string-modes.md",
+      "heading_line": 42,
+      "exercise_answer_sha256": "b38bf5bffb06d91d33f09d84cdfe7e2e1ca30f90abd2539fa4ac29381a0ccc76",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Triangular displacement coefficient2sin(n*pi*p)/(pi^2*n^2*p*(1-p)) gives integer n*p nulls: multiples5at1/5 and10at1/10. Midpoint retains third with signed ratio-1/9 and magnitude1/9. These are displacement coefficients, not microphone amplitudes or negative loudness."
+    },
+    {
+      "id": "GAS006-en-exercise-3",
+      "module": "GAS006",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-acoustics/en/gas-006-relate-pluck-position-to-string-modes.md",
+      "heading_line": 54,
+      "exercise_answer_sha256": "0b706d09d72327ac0e6ba50c4be28f486e72d694a48f2a804bf75bad157db200",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Second/first ratio cos(pi*p)/2 is0.40450849718747367at1/5 and0.4755282581475768at1/10. Peak h is fixed, not force or energy; no preference/radiated spectrum was measured."
+    },
+    {
+      "id": "GAS006-en-exercise-4",
+      "module": "GAS006",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-acoustics/en/gas-006-relate-pluck-position-to-string-modes.md",
+      "heading_line": 66,
+      "exercise_answer_sha256": "2d8dd1fe3f8ba266df5d7090653c9470359e6ac416bc4e0eba94d1c3e8ebf53d",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Length100/velocity0.5 gives source ratio0.48 and quantized offset48; at index88 compact tent is0 versus ideal triangle0.23076923076923075. Recursive noise times window is not the physical full-length triangular displacement at rest, and bridge orientation is undocumented."
+    },
+    {
+      "id": "GAS006-en-exercise-5",
+      "module": "GAS006",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-acoustics/en/gas-006-relate-pluck-position-to-string-modes.md",
+      "heading_line": 78,
+      "exercise_answer_sha256": "77d0d829003127e7a94fe28b7d0259e821f7b8fc12eaffd090a939f9ab675b53",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Velocity changes amplitude, heuristic buffer ratio and attack level, so it confounds location. Proposed separate physical-position control must define frame, units, endpoints and bandlimit while holding other settings fixed; no strict source anti-alias cutoff, implementation, render or sound-quality outcome is claimed."
+    },
+    {
+      "id": "GAS006-fr-exercise-1",
+      "module": "GAS006",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-acoustics/fr/gas-006-relate-pluck-position-to-string-modes.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "b368a0371ec4c3efab5414f7487c9d78dc64ec41ab4f18039ce9c30a8abd55b8",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Ideal flexible uniform fixed-end linear displacement at p=1/5 has normalized endpoint/peak/endpoint values0,1,0 and zero initial velocity. Bridge-origin coordinate, fixed peak h and assumptions are explicit; bright attack alone does not specify an initial condition."
+    },
+    {
+      "id": "GAS006-fr-exercise-2",
+      "module": "GAS006",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-acoustics/fr/gas-006-relate-pluck-position-to-string-modes.fr.md",
+      "heading_line": 42,
+      "exercise_answer_sha256": "12797af2b807c1d1eacc431f9ffb3274bdba1d92115a0a12f5f9642c29385e8d",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Triangular displacement coefficient2sin(n*pi*p)/(pi^2*n^2*p*(1-p)) gives integer n*p nulls: multiples5at1/5 and10at1/10. Midpoint retains third with signed ratio-1/9 and magnitude1/9. These are displacement coefficients, not microphone amplitudes or negative loudness."
+    },
+    {
+      "id": "GAS006-fr-exercise-3",
+      "module": "GAS006",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-acoustics/fr/gas-006-relate-pluck-position-to-string-modes.fr.md",
+      "heading_line": 54,
+      "exercise_answer_sha256": "f28a0b5dd52a58d44a4e1e73b99d934893fa8a714a59a9d0ac2ba97a78e19fce",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Second/first ratio cos(pi*p)/2 is0.40450849718747367at1/5 and0.4755282581475768at1/10. Peak h is fixed, not force or energy; no preference/radiated spectrum was measured."
+    },
+    {
+      "id": "GAS006-fr-exercise-4",
+      "module": "GAS006",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-acoustics/fr/gas-006-relate-pluck-position-to-string-modes.fr.md",
+      "heading_line": 66,
+      "exercise_answer_sha256": "8f06a7ebe503bbfbcde739fdaebb1c2f1644767444cc0e92bc45040343b70323",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Length100/velocity0.5 gives source ratio0.48 and quantized offset48; at index88 compact tent is0 versus ideal triangle0.23076923076923075. Recursive noise times window is not the physical full-length triangular displacement at rest, and bridge orientation is undocumented."
+    },
+    {
+      "id": "GAS006-fr-exercise-5",
+      "module": "GAS006",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-acoustics/fr/gas-006-relate-pluck-position-to-string-modes.fr.md",
+      "heading_line": 78,
+      "exercise_answer_sha256": "c9c0d4098ebd6c004dafa76bb4980b2822593094554a10a3e26b2b18046ea57f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Velocity changes amplitude, heuristic buffer ratio and attack level, so it confounds location. Proposed separate physical-position control must define frame, units, endpoints and bandlimit while holding other settings fixed; no strict source anti-alias cutoff, implementation, render or sound-quality outcome is claimed."
+    },
+    {
+      "id": "GAS006-es-exercise-1",
+      "module": "GAS006",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-acoustics/es/gas-006-relate-pluck-position-to-string-modes.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "56a4c960e1200bfe88e063011e06500238530a407ca03b38ac6edb54810790f8",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Ideal flexible uniform fixed-end linear displacement at p=1/5 has normalized endpoint/peak/endpoint values0,1,0 and zero initial velocity. Bridge-origin coordinate, fixed peak h and assumptions are explicit; bright attack alone does not specify an initial condition."
+    },
+    {
+      "id": "GAS006-es-exercise-2",
+      "module": "GAS006",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-acoustics/es/gas-006-relate-pluck-position-to-string-modes.es.md",
+      "heading_line": 42,
+      "exercise_answer_sha256": "082e47c73d088ac309f1a151df2611773af784658a0d58ab88a55bb49fef8e5a",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Triangular displacement coefficient2sin(n*pi*p)/(pi^2*n^2*p*(1-p)) gives integer n*p nulls: multiples5at1/5 and10at1/10. Midpoint retains third with signed ratio-1/9 and magnitude1/9. These are displacement coefficients, not microphone amplitudes or negative loudness."
+    },
+    {
+      "id": "GAS006-es-exercise-3",
+      "module": "GAS006",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-acoustics/es/gas-006-relate-pluck-position-to-string-modes.es.md",
+      "heading_line": 54,
+      "exercise_answer_sha256": "b042a9e9cf43a1ba55ca5de86951dcb5966cdc1cfd1983cb689382c8b9255e8e",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Second/first ratio cos(pi*p)/2 is0.40450849718747367at1/5 and0.4755282581475768at1/10. Peak h is fixed, not force or energy; no preference/radiated spectrum was measured."
+    },
+    {
+      "id": "GAS006-es-exercise-4",
+      "module": "GAS006",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-acoustics/es/gas-006-relate-pluck-position-to-string-modes.es.md",
+      "heading_line": 66,
+      "exercise_answer_sha256": "af56c86e05722a5dd9c0c368f7de7eae526ae87f219a85530d1f20b30e380020",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Length100/velocity0.5 gives source ratio0.48 and quantized offset48; at index88 compact tent is0 versus ideal triangle0.23076923076923075. Recursive noise times window is not the physical full-length triangular displacement at rest, and bridge orientation is undocumented."
+    },
+    {
+      "id": "GAS006-es-exercise-5",
+      "module": "GAS006",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-acoustics/es/gas-006-relate-pluck-position-to-string-modes.es.md",
+      "heading_line": 78,
+      "exercise_answer_sha256": "8c18832d3e740fbbcbb973e71bd5ee196faf8bde077e1ca4d0623073482935f6",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Velocity changes amplitude, heuristic buffer ratio and attack level, so it confounds location. Proposed separate physical-position control must define frame, units, endpoints and bandlimit while holding other settings fixed; no strict source anti-alias cutoff, implementation, render or sound-quality outcome is claimed."
+    },
+    {
+      "id": "GTR006-en-exercise-1",
+      "module": "GTR006",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-studies/en/gtr-006-keep-picking-distance-relative-to-frets.md",
+      "heading_line": 32,
+      "exercise_answer_sha256": "1e81d50d263d773393db9eb79c7abd388537714847e3d7ad61b0bed7adac9aa6",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Ideal equal-tempered fixed-wave-speed geometry gives650/2=325mm and frequency ratio2atfret12. No compensation/stretching/intonation or whole instrument measurement follows."
+    },
+    {
+      "id": "GTR006-en-exercise-2",
+      "module": "GTR006",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-studies/en/gtr-006-keep-picking-distance-relative-to-frets.md",
+      "heading_line": 50,
+      "exercise_answer_sha256": "6dc877ae2a19e8b02e78ffeeb264c9fc1761817f9e5549118f23c6a1daa90da9",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Fixed65mm bridge distance gives p1/10open and1/5atfret12; mode5is nonzero then zero under the declared ideal triangle, since5pchanges from1/2to1. This is not a measured player spectrum or natural-harmonic-touch instruction."
+    },
+    {
+      "id": "GTR006-en-exercise-3",
+      "module": "GTR006",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-studies/en/gtr-006-keep-picking-distance-relative-to-frets.md",
+      "heading_line": 62,
+      "exercise_answer_sha256": "cbe98050efb7cb6761905a15c51cea9bf5b363268b4a6f47fa2bb8d90e75e705",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Fixed fraction1/10requires32.5mm atfret12 and16.25mm atfret24. Leaving65mm produces1/5and2/5instead. Normalized ideal pattern preservation is distinct from performed timbre/loudness/force."
+    },
+    {
+      "id": "GTR006-en-exercise-4",
+      "module": "GTR006",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-studies/en/gtr-006-keep-picking-distance-relative-to-frets.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "f2f89dd814be4ead1c775199b04d8604d9e82d4df1ddb59c61aa1bb770db29dd",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Fraction2/5also suppresses mode5, refuting unique1/5location from one null. Observation-path attenuation can add ambiguity; more modes, a declared observation model and independent position evidence are needed."
+    },
+    {
+      "id": "GTR006-en-exercise-5",
+      "module": "GTR006",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-studies/en/gtr-006-keep-picking-distance-relative-to-frets.md",
+      "heading_line": 86,
+      "exercise_answer_sha256": "2de229dd7b76115844bdf233cb4bac50d86fb0a0b999388bfc590e0770e6aed7",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Two explicit requests are fixed65mm bridge distance versus fixed1/10fraction across frets0/12. Frequency/velocity API lacks physical length, string/fret and distance fields. Candidate physical mapping requires realization/frame/units and validation; documented synthetic control remains an alternative."
+    },
+    {
+      "id": "GTR006-fr-exercise-1",
+      "module": "GTR006",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-studies/fr/gtr-006-keep-picking-distance-relative-to-frets.fr.md",
+      "heading_line": 32,
+      "exercise_answer_sha256": "9f4946d9d1faac4c66c4202fa4d894a196a79f67eefb42cecc96ad33596267b1",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Ideal equal-tempered fixed-wave-speed geometry gives650/2=325mm and frequency ratio2atfret12. No compensation/stretching/intonation or whole instrument measurement follows."
+    },
+    {
+      "id": "GTR006-fr-exercise-2",
+      "module": "GTR006",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-studies/fr/gtr-006-keep-picking-distance-relative-to-frets.fr.md",
+      "heading_line": 50,
+      "exercise_answer_sha256": "56971adf2b1545df8e8b951bbed646b4a0c2900e6718670705e7efb623d5bcd3",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Fixed65mm bridge distance gives p1/10open and1/5atfret12; mode5is nonzero then zero under the declared ideal triangle, since5pchanges from1/2to1. This is not a measured player spectrum or natural-harmonic-touch instruction."
+    },
+    {
+      "id": "GTR006-fr-exercise-3",
+      "module": "GTR006",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-studies/fr/gtr-006-keep-picking-distance-relative-to-frets.fr.md",
+      "heading_line": 62,
+      "exercise_answer_sha256": "fa80e42c85297981afa6d1243a9bc034b41287836b409829f72586f88ad29a70",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Fixed fraction1/10requires32.5mm atfret12 and16.25mm atfret24. Leaving65mm produces1/5and2/5instead. Normalized ideal pattern preservation is distinct from performed timbre/loudness/force."
+    },
+    {
+      "id": "GTR006-fr-exercise-4",
+      "module": "GTR006",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-studies/fr/gtr-006-keep-picking-distance-relative-to-frets.fr.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "090bf12574d3bd4721604f5e9424c38ac42949a505364fec304daf373bfe529d",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Fraction2/5also suppresses mode5, refuting unique1/5location from one null. Observation-path attenuation can add ambiguity; more modes, a declared observation model and independent position evidence are needed."
+    },
+    {
+      "id": "GTR006-fr-exercise-5",
+      "module": "GTR006",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-studies/fr/gtr-006-keep-picking-distance-relative-to-frets.fr.md",
+      "heading_line": 86,
+      "exercise_answer_sha256": "81a075822c07f11a2a227429554b883d8ecc0d12e59a2b84791fbaeec37ef7a7",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Two explicit requests are fixed65mm bridge distance versus fixed1/10fraction across frets0/12. Frequency/velocity API lacks physical length, string/fret and distance fields. Candidate physical mapping requires realization/frame/units and validation; documented synthetic control remains an alternative."
+    },
+    {
+      "id": "GTR006-es-exercise-1",
+      "module": "GTR006",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-studies/es/gtr-006-keep-picking-distance-relative-to-frets.es.md",
+      "heading_line": 32,
+      "exercise_answer_sha256": "f6bb4f7baf8d5e03a12c2c8cd838530461e0490632862c66769701b8000e1f3e",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Ideal equal-tempered fixed-wave-speed geometry gives650/2=325mm and frequency ratio2atfret12. No compensation/stretching/intonation or whole instrument measurement follows."
+    },
+    {
+      "id": "GTR006-es-exercise-2",
+      "module": "GTR006",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-studies/es/gtr-006-keep-picking-distance-relative-to-frets.es.md",
+      "heading_line": 50,
+      "exercise_answer_sha256": "09e40e7e15c3a649f3c507816000b3e5691a9ceef08573c6aab472fdb8ab92c5",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Fixed65mm bridge distance gives p1/10open and1/5atfret12; mode5is nonzero then zero under the declared ideal triangle, since5pchanges from1/2to1. This is not a measured player spectrum or natural-harmonic-touch instruction."
+    },
+    {
+      "id": "GTR006-es-exercise-3",
+      "module": "GTR006",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-studies/es/gtr-006-keep-picking-distance-relative-to-frets.es.md",
+      "heading_line": 62,
+      "exercise_answer_sha256": "e0e0a5c89b575ad771f34223425e552291143897f367c122c7d64d3c14c20d2d",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Fixed fraction1/10requires32.5mm atfret12 and16.25mm atfret24. Leaving65mm produces1/5and2/5instead. Normalized ideal pattern preservation is distinct from performed timbre/loudness/force."
+    },
+    {
+      "id": "GTR006-es-exercise-4",
+      "module": "GTR006",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-studies/es/gtr-006-keep-picking-distance-relative-to-frets.es.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "95a20f11a071f7bbda2dacdb457b02c0e5563d396b68fc76339739f7ec7d9a48",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Fraction2/5also suppresses mode5, refuting unique1/5location from one null. Observation-path attenuation can add ambiguity; more modes, a declared observation model and independent position evidence are needed."
+    },
+    {
+      "id": "GTR006-es-exercise-5",
+      "module": "GTR006",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-studies/es/gtr-006-keep-picking-distance-relative-to-frets.es.md",
+      "heading_line": 86,
+      "exercise_answer_sha256": "a7cf381ca40a922561e58420f2b303a57dc8dd74e9a843bfad5818a94338ad0a",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Two explicit requests are fixed65mm bridge distance versus fixed1/10fraction across frets0/12. Frequency/velocity API lacks physical length, string/fret and distance fields. Candidate physical mapping requires realization/frame/units and validation; documented synthetic control remains an alternative."
+    },
+    {
+      "id": "AUD007-en-exercise-1",
+      "module": "AUD007",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/audio-engineering/en/aud-007-translate-attack-coefficients-into-time.md",
+      "heading_line": 26,
+      "exercise_answer_sha256": "96e40ecee3959c123e9d062b927c27cf1be19b78782588fd235558cdc1013c76",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Constructor0.988 is overwritten by profile0to0.986. At exact82Hz f_norm0gives effective r0.986; at330Hz f_norm1gives0.982. Exact82Hz anchor remains distinct from82.4069Hz E2, and values are source arithmetic rather than observed audio."
+    },
+    {
+      "id": "AUD007-en-exercise-2",
+      "module": "AUD007",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/audio-engineering/en/aud-007-translate-attack-coefficients-into-time.md",
+      "heading_line": 38,
+      "exercise_answer_sha256": "88ec89fb0ba1795e9eb5de8f0e55fd5035c927acd4d1f9a018add48d3cacc370",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Exact isolated continuous-extension tau=-1/(Fs*ln(r)); r0.986gives1.6083309868956657ms at44100 and1.4776540942103929ms at48000. More updates per second shorten the time; this is not silence time,60dB decay or full note/body/reverb duration."
+    },
+    {
+      "id": "AUD007-en-exercise-3",
+      "module": "AUD007",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/audio-engineering/en/aud-007-translate-attack-coefficients-into-time.md",
+      "heading_line": 50,
+      "exercise_answer_sha256": "6e3bd4697551d30a3d36d807ea0d10bf3a655050fc0742f14e5a1dfb2bb6de5e",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "A0.06and r.986 remain above1e-3after290updates and cross after291to0.0009915931050406854. Contributions use pre-update indices0..290, then branch stops with retained state above5e-5. It fails that deactivation conjunct through this branch, without runtime/CPU/all-lifecycle proof."
+    },
+    {
+      "id": "AUD007-en-exercise-4",
+      "module": "AUD007",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/audio-engineering/en/aud-007-translate-attack-coefficients-into-time.md",
+      "heading_line": 62,
+      "exercise_answer_sha256": "6f0fe003e303190c75b1099ce3b109f25ea3dbc64e5f7774a2b2c17b22c2c48f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Effective rate translation r_new=r_old^(Fs_old/Fs_new) yields0.9871301472688642at48000 and preserves isolated continuous tau. Integer threshold rounding, base setter, frequency subtraction/clamps/profile order and other DSP states prevent a whole-engine correction claim."
+    },
+    {
+      "id": "AUD007-en-exercise-5",
+      "module": "AUD007",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/audio-engineering/en/aud-007-translate-attack-coefficients-into-time.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "b8535a6f792b841227e053e05950ac92ff637af9a16fb85772e5a734ce8a2b3f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Bridge sends actual audioContext.sampleRate; worklet forwards supplied numeric rate with host fallback. Future check needs initialization/ready, profile/setter order, frequency/velocity, effective coefficient and sample/output identities; fixed-r two-rate negative control changes milliseconds. No browser capture or perceptual comparison occurred."
+    },
+    {
+      "id": "AUD007-fr-exercise-1",
+      "module": "AUD007",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/audio-engineering/fr/aud-007-translate-attack-coefficients-into-time.fr.md",
+      "heading_line": 26,
+      "exercise_answer_sha256": "488cd30eb60c06c3b3d881ee7bd204bb3ffca84e4c576cfb7e187edfbec5e145",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Constructor0.988 is overwritten by profile0to0.986. At exact82Hz f_norm0gives effective r0.986; at330Hz f_norm1gives0.982. Exact82Hz anchor remains distinct from82.4069Hz E2, and values are source arithmetic rather than observed audio."
+    },
+    {
+      "id": "AUD007-fr-exercise-2",
+      "module": "AUD007",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/audio-engineering/fr/aud-007-translate-attack-coefficients-into-time.fr.md",
+      "heading_line": 38,
+      "exercise_answer_sha256": "d9092337b1d3405392f72441caf25ef336d1f7f2f8a33b3d23518cfaa570a699",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Exact isolated continuous-extension tau=-1/(Fs*ln(r)); r0.986gives1.6083309868956657ms at44100 and1.4776540942103929ms at48000. More updates per second shorten the time; this is not silence time,60dB decay or full note/body/reverb duration."
+    },
+    {
+      "id": "AUD007-fr-exercise-3",
+      "module": "AUD007",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/audio-engineering/fr/aud-007-translate-attack-coefficients-into-time.fr.md",
+      "heading_line": 50,
+      "exercise_answer_sha256": "8d90997bfee31e737356a12a7867126d7755e507f3d5229bd682b904106e6146",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "A0.06and r.986 remain above1e-3after290updates and cross after291to0.0009915931050406854. Contributions use pre-update indices0..290, then branch stops with retained state above5e-5. It fails that deactivation conjunct through this branch, without runtime/CPU/all-lifecycle proof."
+    },
+    {
+      "id": "AUD007-fr-exercise-4",
+      "module": "AUD007",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/audio-engineering/fr/aud-007-translate-attack-coefficients-into-time.fr.md",
+      "heading_line": 62,
+      "exercise_answer_sha256": "4eddbc1a09a7b488f7096bfef10e357706f5d3e2c7095fbaa1f529ce05a8126c",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Effective rate translation r_new=r_old^(Fs_old/Fs_new) yields0.9871301472688642at48000 and preserves isolated continuous tau. Integer threshold rounding, base setter, frequency subtraction/clamps/profile order and other DSP states prevent a whole-engine correction claim."
+    },
+    {
+      "id": "AUD007-fr-exercise-5",
+      "module": "AUD007",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/audio-engineering/fr/aud-007-translate-attack-coefficients-into-time.fr.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "1accf6d960ec16a89269eca9b4487b9805f2cde12a2e57ba334ecb56283d60ee",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Bridge sends actual audioContext.sampleRate; worklet forwards supplied numeric rate with host fallback. Future check needs initialization/ready, profile/setter order, frequency/velocity, effective coefficient and sample/output identities; fixed-r two-rate negative control changes milliseconds. No browser capture or perceptual comparison occurred."
+    },
+    {
+      "id": "AUD007-es-exercise-1",
+      "module": "AUD007",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/audio-engineering/es/aud-007-translate-attack-coefficients-into-time.es.md",
+      "heading_line": 26,
+      "exercise_answer_sha256": "59cfa9cee576baee48e07e08d018356c6683db36c7203800fbe16aec7ae5dc3d",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Constructor0.988 is overwritten by profile0to0.986. At exact82Hz f_norm0gives effective r0.986; at330Hz f_norm1gives0.982. Exact82Hz anchor remains distinct from82.4069Hz E2, and values are source arithmetic rather than observed audio."
+    },
+    {
+      "id": "AUD007-es-exercise-2",
+      "module": "AUD007",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/audio-engineering/es/aud-007-translate-attack-coefficients-into-time.es.md",
+      "heading_line": 38,
+      "exercise_answer_sha256": "a7364f1382194af77a99a75507542d4c3c4a19220859ade45b31334286c8dfbe",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Exact isolated continuous-extension tau=-1/(Fs*ln(r)); r0.986gives1.6083309868956657ms at44100 and1.4776540942103929ms at48000. More updates per second shorten the time; this is not silence time,60dB decay or full note/body/reverb duration."
+    },
+    {
+      "id": "AUD007-es-exercise-3",
+      "module": "AUD007",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/audio-engineering/es/aud-007-translate-attack-coefficients-into-time.es.md",
+      "heading_line": 50,
+      "exercise_answer_sha256": "7502888fca84e2e5f210bcb1a1673c38ac176f5a13b820b524acfc5635f116a1",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "A0.06and r.986 remain above1e-3after290updates and cross after291to0.0009915931050406854. Contributions use pre-update indices0..290, then branch stops with retained state above5e-5. It fails that deactivation conjunct through this branch, without runtime/CPU/all-lifecycle proof."
+    },
+    {
+      "id": "AUD007-es-exercise-4",
+      "module": "AUD007",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/audio-engineering/es/aud-007-translate-attack-coefficients-into-time.es.md",
+      "heading_line": 62,
+      "exercise_answer_sha256": "0358ddec9ed4e63013c971ae4a41a7092ef734cb028d943c2f17a39217d2d5cd",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Effective rate translation r_new=r_old^(Fs_old/Fs_new) yields0.9871301472688642at48000 and preserves isolated continuous tau. Integer threshold rounding, base setter, frequency subtraction/clamps/profile order and other DSP states prevent a whole-engine correction claim."
+    },
+    {
+      "id": "AUD007-es-exercise-5",
+      "module": "AUD007",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/audio-engineering/es/aud-007-translate-attack-coefficients-into-time.es.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "d7c336762e5eeb9576d55aca4d99c2d6cb970cf3778d3e86e397f30ef80acfb1",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, fixed packet, pinned code and primary references. Not a human fluency, musician, runtime or learner outcome.",
+      "checked_conclusion": "Bridge sends actual audioContext.sampleRate; worklet forwards supplied numeric rate with host fallback. Future check needs initialization/ready, profile/setter order, frequency/velocity, effective coefficient and sample/output identities; fixed-r two-rate negative control changes milliseconds. No browser capture or perceptual comparison occurred."
+    }
+  ],
+  "learner_criterion_checks": [
+    {
+      "id": "GAS006-1",
+      "module": "GAS006",
+      "title": "initial-condition",
+      "acceptance_reviewed": "Declare uniform flexible fixed ends, small displacement, zero initial velocity, bridge-origin u and peak h; evaluate endpoint and peak shape correctly.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Ideal flexible uniform fixed-end linear displacement at p=1/5 has normalized endpoint/peak/endpoint values0,1,0 and zero initial velocity. Bridge-origin coordinate, fixed peak h and assumptions are explicit; bright attack alone does not specify an initial condition.",
+      "task_alignment": "Expanded final learner-task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "GAS006-2",
+      "module": "GAS006",
+      "title": "modal-nulls",
+      "acceptance_reviewed": "Derive the normalized triangular displacement coefficient and integer n*p null criterion. Identify multiples5/10 and midpoint third signed ratio-1/9, not a microphone spectrum.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Triangular displacement coefficient2sin(n*pi*p)/(pi^2*n^2*p*(1-p)) gives integer n*p nulls: multiples5at1/5 and10at1/10. Midpoint retains third with signed ratio-1/9 and magnitude1/9. These are displacement coefficients, not microphone amplitudes or negative loudness.",
+      "task_alignment": "Expanded final learner-task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "GAS006-3",
+      "module": "GAS006",
+      "title": "ratio-and-control",
+      "acceptance_reviewed": "Compare second/first0.40450849718747367 versus0.4755282581475768 with fixed peak h; do not claim constant energy or measured preference.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Second/first ratio cos(pi*p)/2 is0.40450849718747367at1/5 and0.4755282581475768at1/10. Peak h is fixed, not force or energy; no preference/radiated spectrum was measured.",
+      "task_alignment": "Expanded final learner-task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "GAS006-4",
+      "module": "GAS006",
+      "title": "producer-difference",
+      "acceptance_reviewed": "Distinguish quantized velocity-derived buffer coordinate, compact tent and recursive-noise product from physical triangular displacement; index88 contrast must not imply a source harmonic null.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Length100/velocity0.5 gives source ratio0.48 and quantized offset48; at index88 compact tent is0 versus ideal triangle0.23076923076923075. Recursive noise times window is not the physical full-length triangular displacement at rest, and bridge orientation is undocumented.",
+      "task_alignment": "Expanded final learner-task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "GAS006-5",
+      "module": "GAS006",
+      "title": "new-comparison",
+      "acceptance_reviewed": "State velocity confounds and a separately declared position/bandlimit comparison; preserve unimplemented control, no strict source anti-alias or audio result.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Velocity changes amplitude, heuristic buffer ratio and attack level, so it confounds location. Proposed separate physical-position control must define frame, units, endpoints and bandlimit while holding other settings fixed; no strict source anti-alias cutoff, implementation, render or sound-quality outcome is claimed.",
+      "task_alignment": "Expanded final learner-task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "GTR006-1",
+      "module": "GTR006",
+      "title": "fret-length",
+      "acceptance_reviewed": "Derive650/2=325mm and frequency ratio2 at fret12 under fixed wave speed, with no measured instrument claim.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Ideal equal-tempered fixed-wave-speed geometry gives650/2=325mm and frequency ratio2atfret12. No compensation/stretching/intonation or whole instrument measurement follows.",
+      "task_alignment": "Expanded final learner-task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "GTR006-2",
+      "module": "GTR006",
+      "title": "fixed-distance",
+      "acceptance_reviewed": "Compute fixed65mm fractions1/10 and1/5 at frets0/12; explain ideal mode5 suppression and its limited physical assumptions.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Fixed65mm bridge distance gives p1/10open and1/5atfret12; mode5is nonzero then zero under the declared ideal triangle, since5pchanges from1/2to1. This is not a measured player spectrum or natural-harmonic-touch instruction.",
+      "task_alignment": "Expanded final learner-task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "GTR006-3",
+      "module": "GTR006",
+      "title": "fixed-fraction",
+      "acceptance_reviewed": "Derive32.5/16.25mm to preserve1/10 at frets12/24; distinguish fixed distance from fraction and actual performance.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Fixed fraction1/10requires32.5mm atfret12 and16.25mm atfret24. Leaving65mm produces1/5and2/5instead. Normalized ideal pattern preservation is distinct from performed timbre/loudness/force.",
+      "task_alignment": "Expanded final learner-task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "GTR006-4",
+      "module": "GTR006",
+      "title": "inverse-ambiguity",
+      "acceptance_reviewed": "Use2/5 as a counterexample to unique position from fifth-mode suppression; include observation-path alternatives and more evidence.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Fraction2/5also suppresses mode5, refuting unique1/5location from one null. Observation-path attenuation can add ambiguity; more modes, a declared observation model and independent position evidence are needed.",
+      "task_alignment": "Expanded final learner-task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "GTR006-5",
+      "module": "GTR006",
+      "title": "future-interface",
+      "acceptance_reviewed": "Specify the two requests with frame/units and string realization; inspected frequency/velocity entrypoint lacks physical fields. Treat mapping as candidate with synthetic alternative, not implemented normative DSL.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Two explicit requests are fixed65mm bridge distance versus fixed1/10fraction across frets0/12. Frequency/velocity API lacks physical length, string/fret and distance fields. Candidate physical mapping requires realization/frame/units and validation; documented synthetic control remains an alternative.",
+      "task_alignment": "Expanded final learner-task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "AUD007-1",
+      "module": "AUD007",
+      "title": "effective-source-value",
+      "acceptance_reviewed": "Trace constructor0.988 overwritten by profile0.986; effective r0.986 at82Hz and0.982 at330Hz, preserving exact-E2 distinction.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Constructor0.988 is overwritten by profile0to0.986. At exact82Hz f_norm0gives effective r0.986; at330Hz f_norm1gives0.982. Exact82Hz anchor remains distinct from82.4069Hz E2, and values are source arithmetic rather than observed audio.",
+      "task_alignment": "Expanded final learner-task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "AUD007-2",
+      "module": "AUD007",
+      "title": "clock",
+      "acceptance_reviewed": "Derive exact isolated tau and compare1.6083309868956657ms at44100 with1.4776540942103929ms at48000; neither complete sound duration nor60dB decay.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Exact isolated continuous-extension tau=-1/(Fs*ln(r)); r0.986gives1.6083309868956657ms at44100 and1.4776540942103929ms at48000. More updates per second shorten the time; this is not silence time,60dB decay or full note/body/reverb duration.",
+      "task_alignment": "Expanded final learner-task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "AUD007-3",
+      "module": "AUD007",
+      "title": "threshold",
+      "acceptance_reviewed": "Verify290/291 states and291pre-update contributions; retained0.0009915931050406854 is notzero and above5e-5. Lifecycle concern is source-derived, no runtime orCPU claim.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "A0.06and r.986 remain above1e-3after290updates and cross after291to0.0009915931050406854. Contributions use pre-update indices0..290, then branch stops with retained state above5e-5. It fails that deactivation conjunct through this branch, without runtime/CPU/all-lifecycle proof.",
+      "task_alignment": "Expanded final learner-task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "AUD007-4",
+      "module": "AUD007",
+      "title": "translation",
+      "acceptance_reviewed": "Derive effective r_new0.9871301472688642; distinguish same continuous tau from sample-rounded threshold duration, base setter, clamps and whole-engine compensation.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Effective rate translation r_new=r_old^(Fs_old/Fs_new) yields0.9871301472688642at48000 and preserves isolated continuous tau. Integer threshold rounding, base setter, frequency subtraction/clamps/profile order and other DSP states prevent a whole-engine correction claim.",
+      "task_alignment": "Expanded final learner-task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "AUD007-5",
+      "module": "AUD007",
+      "title": "host-trial",
+      "acceptance_reviewed": "Trace actual context sampleRate init route; specify profile/setter/ready/format identities and fixed-r negative control. No browser/audio/listening trial inferred.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Bridge sends actual audioContext.sampleRate; worklet forwards supplied numeric rate with host fallback. Future check needs initialization/ready, profile/setter order, frequency/velocity, effective coefficient and sample/output identities; fixed-r two-rate negative control changes milliseconds. No browser capture or perceptual comparison occurred.",
+      "task_alignment": "Expanded final learner-task explicitly elicits this criterion; no participant assessed."
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-006-relate-pluck-position-to-string-modes.md",
+      "sha256": "0eb9f99878d0d2714a8e09b59b0a8b25e76d8f546d7d2bd5b0454743196c404f"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-006-relate-pluck-position-to-string-modes.fr.md",
+      "sha256": "3a3babd10708b9e21327bbbae4e0e790844dfff14ec2d2288d8e058ae3158276"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-006-relate-pluck-position-to-string-modes.es.md",
+      "sha256": "7c2327b16b666f73a3d0b8167070645df90a97df7b8a1d13c33b36bb7c078314"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-006-keep-picking-distance-relative-to-frets.md",
+      "sha256": "189a24ba18a8538903ab5258174ca7f1bd4a69211c02d447a1160d910910a64b"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/fr/gtr-006-keep-picking-distance-relative-to-frets.fr.md",
+      "sha256": "c8ecd8a5b0b1e094d2d9e5c2088de10af44c17b54bbe8b71ebc707c6c5498e0b"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/es/gtr-006-keep-picking-distance-relative-to-frets.es.md",
+      "sha256": "08a624591a347abbc1ff904f42f732e13d97c7400602d45ecf9df8c4f314d6ba"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-007-translate-attack-coefficients-into-time.md",
+      "sha256": "05d20b64e402b7150293290cc13114d9e6e278315cb66779da4440709d8d2f23"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-007-translate-attack-coefficients-into-time.fr.md",
+      "sha256": "d7809c136b2b29c7b42d602e5a21d9a1ac9bd4f2776a36d392e5132c825ca777"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-007-translate-attack-coefficients-into-time.es.md",
+      "sha256": "e863f68e0624e9d5a0da9482b5530f68d222eae14b6bec3814bedb41c712cab3"
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/production-plan.md",
+      "sha256": "781752bcc7b2b97f064bb35e4a7627f5e7b272ea0ce42d0ee28180435292aec0"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/README.md",
+      "sha256": "33f1452f5c974c721c9cd101dd096c777417cf69ac1c227ba1b5a02e36411b62"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/primary-readback.json",
+      "sha256": "7f84cb1f4ce70fac8b220c2829bbf8bc5671f7e7f712194509d063c0af50fc6c"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/primary-reading.json",
+      "sha256": "74bf882ce6f739ba21b58506f4e3352b7c69eb1ab9792750297456f5d473671a"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/ideal-pluck-modes.json",
+      "sha256": "bddd74cbaad03be1d820f123d78ab5ab0c4a2feff6140eb7304d230ef9c653d2"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/fret-geometry.json",
+      "sha256": "2459a7be396b5bb44d5280bae2dbe37649cbe1b29bdc5d562c68d984ca36d696"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/source-excitation-model.json",
+      "sha256": "756d2bf85d25df985b26d018d2eb36ae6bc0dbde07838fee8921aae2d91361d8"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/attack-clock.json",
+      "sha256": "e2cb9d4ee0fbf0cc72d15c1287a84131d6fd0a765490815453e889fe4ca2d145"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/source-observations.json",
+      "sha256": "78cded86908fd52b124a23085959b8678639e7d13150eeb91a9926653f81c764"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/data-audit.json",
+      "sha256": "cc882e3500975d42ee23c4311880b1ec4d2ecbc9848178f653a8b3f2d8a27e01"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/learner-task.md",
+      "sha256": "6fee07fb4e050be789669e289f0b6aff8ecb36b92b4893b406e338683cc94997"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/reviewer-rubric.json",
+      "sha256": "07cd38584a2c650c5b0f8f8c992931bc6fd7a47ec4017c3ecb753cc092c7d70a"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/official-links.json",
+      "sha256": "48bc3a66d3abbedbaf9d3e98fa62c8880c8fac7b76154b9ea529b2b5cd67949d"
+    }
+  ],
+  "prerequisite_bindings": [
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-002-brightness-control-and-evaluation-gate.md",
+      "sha256": "37fa3982cc852b84dc801b43933e300a281ca3b2bc410444e24248038350cc20"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-005-separate-a-partial-peak-from-a-period.md",
+      "sha256": "074fcd679fe05c9ec0592b6d4d0589fb7edc7c21dd1769002609335f14c42e79"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-001-the-fretboard-map.md",
+      "sha256": "ab28c76d3aaafdd716c80913ccab851bf1c666ae3cc59302b15883cee45dd633"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-005-pcm-guards-and-format-boundaries.md",
+      "sha256": "1f15d25a97ddff5b2f2ca57e1af9ababcc2a6c4a4b368306eb8b775316f35341"
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-004-velocity-pick-position-guitar-engine.md",
+      "sha256": "30815d970eb5153a4e6d77e9b42a6336fdcfa007d7d2e5c350923c74fc2f8c6d"
+    }
+  ],
+  "locale_url_and_format_checks": [
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-006-relate-pluck-position-to-string-modes.md",
+      "ordered_urls_match_english": true,
+      "first_scope_comfyui_official_link": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-006-relate-pluck-position-to-string-modes.fr.md",
+      "ordered_urls_match_english": true,
+      "first_scope_comfyui_official_link": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-006-relate-pluck-position-to-string-modes.es.md",
+      "ordered_urls_match_english": true,
+      "first_scope_comfyui_official_link": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-006-keep-picking-distance-relative-to-frets.md",
+      "ordered_urls_match_english": true,
+      "first_scope_comfyui_official_link": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/guitar-studies/fr/gtr-006-keep-picking-distance-relative-to-frets.fr.md",
+      "ordered_urls_match_english": true,
+      "first_scope_comfyui_official_link": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/guitar-studies/es/gtr-006-keep-picking-distance-relative-to-frets.es.md",
+      "ordered_urls_match_english": true,
+      "first_scope_comfyui_official_link": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-007-translate-attack-coefficients-into-time.md",
+      "ordered_urls_match_english": true,
+      "first_scope_comfyui_official_link": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-007-translate-attack-coefficients-into-time.fr.md",
+      "ordered_urls_match_english": true,
+      "first_scope_comfyui_official_link": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-007-translate-attack-coefficients-into-time.es.md",
+      "ordered_urls_match_english": true,
+      "first_scope_comfyui_official_link": true,
+      "utf8_lf_no_bom": true
+    }
+  ],
+  "primary_source_review": [
+    {
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "sha256": "2d4155cbfe26c4074ea701d0abb7cfd727fa4648d4d5109347fa442656e1f943",
+      "review_scope": "Actual pinned Rust constructor/profile/excite/render/setters and complete JS bridge/worklet directly read. No compiled execution or deployed attestation."
+    },
+    {
+      "path": "Rust/guitar-web-wasm-demo/src/audio/audioEngine.js",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/src/audio/audioEngine.js",
+      "sha256": "d8b72ae1b4a1d347733f7788500b9d6117130aae256301b15099850fbbd98d7a",
+      "review_scope": "Actual pinned Rust constructor/profile/excite/render/setters and complete JS bridge/worklet directly read. No compiled execution or deployed attestation."
+    },
+    {
+      "path": "Rust/guitar-web-wasm-demo/src/audio/guitar-worklet.js",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/src/audio/guitar-worklet.js",
+      "sha256": "f76c722f16991d17f4b6202a30707af943fdc6c218bb1c960c43c85598da37f0",
+      "review_scope": "Actual pinned Rust constructor/profile/excite/render/setters and complete JS bridge/worklet directly read. No compiled execution or deployed attestation."
+    }
+  ],
+  "primary_visual_read": {
+    "pdf_path": "C:\\tmp\\streeling-pluck-princeton-20261022.pdf",
+    "pdf_sha256": "3d3feddaaef8069f62a5dce360745880382fb8e770cfa1a0ff04a41733ce1d15",
+    "page": 5,
+    "printed_page": 228,
+    "rendered_page_path": "C:/tmp/streeling-pluck-princeton-page5-20261022.png",
+    "actual_viewed": true,
+    "scope": "Read supplied scanned-page rendering. No additional experiment, render or host execution by this reviewer."
+  },
+  "official_document_review": [
+    {
+      "url": "https://dsprelated.com/freebooks/pasp/Ideal_Plucked_String.html",
+      "actual_read": "Direct page body read: physical initial displacement/zero initial velocity, travelling-wave distinctions and sharp-corner sampled bandlimit requirement."
+    },
+    {
+      "url": "https://www.dsprelated.com/freebooks/filters/Time_Constant_One_Pole.html",
+      "actual_read": "Direct page body read: exact R=exp(-T/tau) distinguished from approximate tau=T/(1-R)."
+    },
+    {
+      "url": "https://kirkmcd.princeton.edu/examples/Ph205/ph205l21.pdf#page=5",
+      "actual_read": "Local scanned page5 visually read; lecture displacement coefficientA_n explicitly distinguished from courseB_n. Direct download200/failed web502/empty text extraction correctly scoped."
+    },
+    {
+      "url": "https://www.w3.org/TR/webaudio/#dom-baseaudiocontext-samplerate",
+      "actual_read": "Direct web.open/find read sampleRate as BaseAudioContext sample-frames per second; current response is Web Audio API1.1 Working Draft22September2026, not implementation/conformance evidence."
+    },
+    {
+      "url": "https://docs.comfy.org/",
+      "actual_read": "Official documentation landing page already directly read in this review session; current packet transport200. No workflow performed."
+    }
+  ],
+  "pending": {
+    "human_technical_review": null,
+    "fluent_language_review": null,
+    "musician": null,
+    "learner_attempts": null,
+    "independent_learner_transfer": null,
+    "native_wasm_execution": null,
+    "browser_capture": null,
+    "host_observation": null,
+    "audio_render": null,
+    "player_performance": null,
+    "listening_response": null,
+    "runtime_reproduction": null,
+    "cpu_effect": null,
+    "production_fix": null,
+    "deployed_html": null
+  },
+  "human_technical_review": null,
+  "fluent_language_review": null,
+  "musician": null,
+  "learner_attempts": null,
+  "runtime_reproduction": null,
+  "deployed_html": null,
+  "boundaries": [
+    "Fixed-end ideal modal displacement is not bridge-force, microphone, radiated-spectrum or listener evidence; fixed peak displacement is not fixed energy/force.",
+    "Source compact tent times recursive one-pole-smoothed noise is not a physical full-length triangle at rest or an established strict anti-alias bandlimit.",
+    "Velocity-derived quantized buffer coordinate has no documented physical bridge origin or string/fret/distance contract.",
+    "Fret lengths/distances are ideal authored geometry under fixed wave speed, not instrument compensation/intonation or observed hand movement.",
+    "Constructor0.988 is overwritten by profile0.986; exact82Hz differs from82.4069Hz, and frequency adjustment/clamps/order matter.",
+    "First threshold crossing after291updates uses291pre-update contributions0..290; retained state is above5e-5 for tested positive cases. This is not reproduced runtime failure or CPU impact.",
+    "Exact isolated tau and effective-r rate translation do not supply a whole waveform,60dB decay, setter-independent compensation or production patch.",
+    "No synth/host/player/browser/ComfyUI/paid call, dependency install, audio render or additional experiment performed by this reviewer."
+  ]
+}

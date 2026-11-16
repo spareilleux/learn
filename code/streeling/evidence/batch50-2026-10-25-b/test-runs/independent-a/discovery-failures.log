@@ -1,0 +1,17 @@
+Preserved original tool-console failures; these are discovery-helper failures, not course tests.
+
+ATTEMPT 1: one-line Python catalogue command, before creation of catalogue.py.
+COMMAND python -X utf8 -B -c "import json,re,subprocess; from pathlib import Path; r=Path('.'); base='5bcbd3c5c59cfb3f8f1ab7abcfd69f7073b00f8f'; paths=subprocess.check_output(['git','ls-tree','-r','--name-only',base,'streeling/courses'],text=True).splitlines(); files=[p for p in paths if '/en/' in p and p.endswith('.md')]; print('BASELINE CATALOGUE',len(files)); [print(p,re.search(r'^course: (.*)',(r/p).read_text(encoding='utf8'),re.M).group(1)) for p in files if any('/'+d+'/' in p for d in ('audio-engineering','guitar-acoustics','guitar-studies','guitar-alchemist-academy','musicology','world-music-languages'))]; print('\nCROSS-DEPARTMENT POTENTIAL PRIOR ART'); [print(p) for p in files if any(w in p for w in ('feedback','motif','sequence','matching','join','staircase','sweep','resonan','bandwidth','overlap')))]"
+Observed full Python diagnostic (the echoed code line is the command above):
+SyntaxError: closing parenthesis ')' does not match opening parenthesis '['
+The malformed list-comprehension ending was replaced by ordinary loops in catalogue.py.
+
+ATTEMPT 2: python -X utf8 -B C:/tmp/batch25b-a-review/catalogue.py
+BASELINE ENGLISH CATALOGUE 384
+The command printed AUD001 through AUD018 titles before this complete traceback:
+Traceback (most recent call last):
+  File "C:\tmp\batch25b-a-review\catalogue.py", line 10, in <module>
+    print(p,re.search(r'^course: (.*)',b,re.M).group(1))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'group'
+The inventory included Markdown without course metadata. Correction: report those paths explicitly instead of assuming every English Markdown file is a course. This transcript excerpt preserves the complete error, not an independent full stdout capture; the successful replay below has a full captured log.

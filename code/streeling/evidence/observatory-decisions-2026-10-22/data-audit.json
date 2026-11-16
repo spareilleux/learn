@@ -1,0 +1,430 @@
+{
+  "schema_version": "1.0",
+  "reviewed_at_utc": "2026-10-22T19:04:50.484082+00:00",
+  "reviewer": "independent fixed-data/source/figure audit agent",
+  "verdict": "pass_with_declared_evidence_limits",
+  "scope": "Independent numerical/source/static figure review of fixed teaching evidence only; no native/source-controller execution, renderer, plant, participant study, preference elicitation or deployment verification.",
+  "input_bindings": [
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/experiment-plan.md",
+      "bytes": 6135,
+      "sha256": "09c44ce06edb50763131d371b6b2a06eeaaa875fe0122ce96fa70402b7fd0916"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/primary-readback.json",
+      "bytes": 2150,
+      "sha256": "435044bd594d49b874b7978627696fbc9724e101ac33125c1d19b4298fd2fc75"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/source-controller.json",
+      "bytes": 1507,
+      "sha256": "01646d626ee3e98fd5181df0cb90a916295171a7eee10336189458221d7d6512"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/control-traces.json",
+      "bytes": 24100,
+      "sha256": "2847616ff3fde062031ff40d0c8d832c347344e43616547a7cda8b304b225674"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/scenario-decisions.json",
+      "bytes": 2534,
+      "sha256": "b90a355d4337e2b6cfae3e401cd037cf5d2044879c2d5ccbfb08a06dcacf989a"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/value-tradeoffs.json",
+      "bytes": 2912,
+      "sha256": "5fcdefd9755fb6d8a2d88fd21a714207b9debaf1cfeca972b3b32f7f0d808c55"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/execution.json",
+      "bytes": 1177,
+      "sha256": "28af163d6550d7b508e050a8f3532dab7561c5d7dea192c8abcac0aa407155ff"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/control-state-traces.png",
+      "bytes": 57290,
+      "sha256": "abe594d339328b26b8b02e767a269b6dd642f7df10b75933d7377598837c0ee0"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/two-attribute-options.png",
+      "bytes": 25375,
+      "sha256": "eb30cfbc92ca73c5b7f72c8e1aa6172b1df0f3ac102594bc460b7dbea16cfca8"
+    }
+  ],
+  "source_checks": [
+    {
+      "path": "Experiments/Brutal/Colossus/Program.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs",
+      "bytes": 261839,
+      "sha256": "2ae759eace2d9037f2771bc82b5f901c02bf4ec2751ff4e510f4e1aa4ab60c15",
+      "status": 200,
+      "pass_": true
+    },
+    {
+      "path": "Experiments/Brutal/README.md",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/README.md",
+      "bytes": 80539,
+      "sha256": "4cb7e4e068eb000e97b5cd4bb323fbfd8a929749ad14ec3b96127f2d303d3fe7",
+      "status": 200,
+      "pass_": true
+    },
+    {
+      "path": "Experiments/Brutal/evidence/m3-20261020-000727.md",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/evidence/m3-20261020-000727.md",
+      "bytes": 2755,
+      "sha256": "7da3fd920f42caeba1cbb83a18980cd37670b4a20787253a16803814c7a1b7d6",
+      "status": 200,
+      "pass_": true
+    }
+  ],
+  "figure_checks": [
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/control-state-traces.png",
+      "size": [
+        1600,
+        960
+      ],
+      "title": "Authored GPU-time observation and decision traces",
+      "description": "Open-loop synthetic input, no renderer or physical plant response. q1 high detail, q0 low detail; guarded policy is a teaching candidate.",
+      "sha256": "abe594d339328b26b8b02e767a269b6dd642f7df10b75933d7377598837c0ee0",
+      "pass_": true
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/two-attribute-options.png",
+      "size": [
+        1120,
+        720
+      ],
+      "title": "Authored detail and adjacent-task overhead options",
+      "description": "Hypothetical attributes, not measured image quality or latency. D higher preferred, O lower preferred; dashed boundary O6ms is an authored constraint.",
+      "sha256": "eb30cfbc92ca73c5b7f72c8e1aa6172b1df0f3ac102594bc460b7dbea16cfca8",
+      "pass_": true
+    }
+  ],
+  "checks": [
+    {
+      "name": "authored_observation_vector",
+      "pass_": true,
+      "evidence": "17 constructed observations, initial state1 at time0."
+    },
+    {
+      "name": "naive_all_rows",
+      "pass_": true,
+      "evidence": "All fields of 17 observation/decision rows independently replayed."
+    },
+    {
+      "name": "naive_change_times_and_count",
+      "pass_": true,
+      "evidence": "[2, 3, 4, 5, 7, 9, 13, 15]"
+    },
+    {
+      "name": "guarded_all_rows",
+      "pass_": true,
+      "evidence": "All fields of 17 observation/decision rows independently replayed."
+    },
+    {
+      "name": "guarded_change_times_and_count",
+      "pass_": true,
+      "evidence": "[8, 11, 14, 17]"
+    },
+    {
+      "name": "missing_resets_streak",
+      "pass_": true,
+      "evidence": "The qualifying run cannot bridge second2 missing data."
+    },
+    {
+      "name": "invalid_missing_all_rows",
+      "pass_": true,
+      "evidence": "missing holds state and resets the run; second4 is the change."
+    },
+    {
+      "name": "invalid_zero_all_rows",
+      "pass_": true,
+      "evidence": "zero holds state and resets the run; second4 is the change."
+    },
+    {
+      "name": "invalid_negative_all_rows",
+      "pass_": true,
+      "evidence": "negative holds state and resets the run; second4 is the change."
+    },
+    {
+      "name": "invalid_nonfinite_all_rows",
+      "pass_": true,
+      "evidence": "nonfinite holds state and resets the run; second4 is the change."
+    },
+    {
+      "name": "authored_policy_constants",
+      "pass_": true,
+      "evidence": "Two state candidate, two observations, three-second elapsed >= guard."
+    },
+    {
+      "name": "independent_dwell_boundary_control",
+      "pass_": true,
+      "evidence": "At second2 an eligible run is blocked; at elapsed3 it changes and resets. Control independently constructed by auditor."
+    },
+    {
+      "name": "independent_strict_threshold_controls",
+      "pass_": true,
+      "evidence": "Exactly16 never causes down; after down, exactly10.4 never causes up. Controls independently constructed by auditor."
+    },
+    {
+      "name": "noop_counterexample",
+      "pass_": true,
+      "evidence": "Minimum switch count alone cannot meet the declared responsiveness requirement."
+    },
+    {
+      "name": "immutable_source_Experiments/Brutal/Colossus/Program.cs",
+      "pass_": true,
+      "evidence": "Independent anonymous current raw fetch == git show bytes == producer SHA-256; no working-copy read."
+    },
+    {
+      "name": "immutable_source_Experiments/Brutal/README.md",
+      "pass_": true,
+      "evidence": "Independent anonymous current raw fetch == git show bytes == producer SHA-256; no working-copy read."
+    },
+    {
+      "name": "immutable_source_Experiments/Brutal/evidence/m3-20261020-000727.md",
+      "pass_": true,
+      "evidence": "Independent anonymous current raw fetch == git show bytes == producer SHA-256; no working-copy read."
+    },
+    {
+      "name": "source_adaptive_block_guard_and_measurement",
+      "pass_": true,
+      "evidence": "Program.cs:2916-2936 inspected verbatim; one-step 1..3 bounce changes, source .05 EMA and >1 second differ from teaching model."
+    },
+    {
+      "name": "source_configured_variant_vs_runtime_toggle",
+      "pass_": true,
+      "evidence": "Program.cs:1828 configures pt from RTX capability and --pt;2371 initializes separate runtime rtxOn,2747 permits checkbox changes,2902 passes zero bounce parameter when rtxOn false. Adaptive block2916-2936 guards pt.Length but never rtxOn. Configured variant presence does not attest active path tracing."
+    },
+    {
+      "name": "source_no_explicit_numeric_validity_check",
+      "pass_": true,
+      "evidence": "No explicit finite/nonnegative elapsed-time check in this exact block; API query success is availability, not arbitrary numeric validation."
+    },
+    {
+      "name": "source_clock_and_unavailable_state",
+      "pass_": true,
+      "evidence": "now is computed before query success; inspected smooth/bounce/change assignments are inside success branch. No global claim about the rest of the program."
+    },
+    {
+      "name": "source_tuple_initialization",
+      "pass_": true,
+      "evidence": "Immutable Program.cs:2430 initializes bounce3, last change0, EMA0 and configurable default16ms budget in one tuple."
+    },
+    {
+      "name": "source_summary_constants",
+      "pass_": true,
+      "evidence": "Summary agrees with inspected declarations/predicates."
+    },
+    {
+      "name": "source_predicate_strict_time_equality",
+      "pass_": true,
+      "evidence": "Independent arithmetic of the inspected branch, not C# execution. pt_variant_present models configured variant presence; no runtime activation inference."
+    },
+    {
+      "name": "source_predicate_past_time_guard",
+      "pass_": true,
+      "evidence": "Independent arithmetic of the inspected branch, not C# execution. pt_variant_present models configured variant presence; no runtime activation inference."
+    },
+    {
+      "name": "source_predicate_strict_down_equality",
+      "pass_": true,
+      "evidence": "Independent arithmetic of the inspected branch, not C# execution. pt_variant_present models configured variant presence; no runtime activation inference."
+    },
+    {
+      "name": "source_predicate_strict_up_equality",
+      "pass_": true,
+      "evidence": "Independent arithmetic of the inspected branch, not C# execution. pt_variant_present models configured variant presence; no runtime activation inference."
+    },
+    {
+      "name": "source_predicate_up_below_threshold",
+      "pass_": true,
+      "evidence": "Independent arithmetic of the inspected branch, not C# execution. pt_variant_present models configured variant presence; no runtime activation inference."
+    },
+    {
+      "name": "source_predicate_down_lower_bound",
+      "pass_": true,
+      "evidence": "Independent arithmetic of the inspected branch, not C# execution. pt_variant_present models configured variant presence; no runtime activation inference."
+    },
+    {
+      "name": "source_predicate_up_upper_bound",
+      "pass_": true,
+      "evidence": "Independent arithmetic of the inspected branch, not C# execution. pt_variant_present models configured variant presence; no runtime activation inference."
+    },
+    {
+      "name": "source_predicate_configured_variant_absent",
+      "pass_": true,
+      "evidence": "Independent arithmetic of the inspected branch, not C# execution. pt_variant_present models configured variant presence; no runtime activation inference."
+    },
+    {
+      "name": "source_predicate_query_unavailable",
+      "pass_": true,
+      "evidence": "Independent arithmetic of the inspected branch, not C# execution. pt_variant_present models configured variant presence; no runtime activation inference."
+    },
+    {
+      "name": "source_like_ema_all_rows",
+      "pass_": true,
+      "evidence": "Closed-form rational 20*(1-(19/20)^n) independently compared with every recurrence row."
+    },
+    {
+      "name": "source_like_ema_crossing",
+      "pass_": true,
+      "evidence": "Sample32, not32 seconds; sample cadence and other guards unspecified."
+    },
+    {
+      "name": "historical_coexistence_remains_inconclusive",
+      "pass_": true,
+      "evidence": "README explicit inconclusive verdict retained. This control report has two control drops and one uncapped drop; dirty historical source/binary not attested."
+    },
+    {
+      "name": "base_losses_and_regret",
+      "pass_": true,
+      "evidence": "Per-state [3,0,5], maxima C6/P9/A3, minimax A."
+    },
+    {
+      "name": "assumed_expected_loss",
+      "pass_": true,
+      "evidence": "Assumed probabilities, not empirical estimates: C5.7/P2.2/A3.3; P."
+    },
+    {
+      "name": "crossover_exact",
+      "pass_": true,
+      "evidence": "Independently derived affine coefficients C(4.5,1.5), P(11,-11), A(4.5,-1.5). P/A cross within0..1; C worse there."
+    },
+    {
+      "name": "omitted_scenario_reversal",
+      "pass_": true,
+      "evidence": "Fourth invented state makes maxima C6/P9/A16 and minimax C; criterion depends on scenario/cell assumptions."
+    },
+    {
+      "name": "scenario_epistemic_limits",
+      "pass_": true,
+      "evidence": "No strategy label certifies an installed implementation; cardinal comparability and scenario completeness explicit."
+    },
+    {
+      "name": "attribute_table",
+      "pass_": true,
+      "evidence": "All four constructed attribute cells checked."
+    },
+    {
+      "name": "dominance",
+      "pass_": true,
+      "evidence": "W dominated by L and B; L/B/H nondominated only for declared directions/attributes."
+    },
+    {
+      "name": "weight_1/2",
+      "pass_": true,
+      "evidence": "Computed every utility, feasible set and constrained winner."
+    },
+    {
+      "name": "weight_2",
+      "pass_": true,
+      "evidence": "Computed every utility, feasible set and constrained winner."
+    },
+    {
+      "name": "weight_6",
+      "pass_": true,
+      "evidence": "Computed every utility, feasible set and constrained winner."
+    },
+    {
+      "name": "tie_10/7",
+      "pass_": true,
+      "evidence": "Exact rational arithmetic establishes all top-scoring ties, not rounded equality."
+    },
+    {
+      "name": "tie_5",
+      "pass_": true,
+      "evidence": "Exact rational arithmetic establishes all top-scoring ties, not rounded equality."
+    },
+    {
+      "name": "unit_conversion",
+      "pass_": true,
+      "evidence": "All utility scores reproduce; correct dimension conversion preserves B, wrong coefficient changes to H."
+    },
+    {
+      "name": "value_epistemic_limits",
+      "pass_": true,
+      "evidence": "No measured image quality, calibrated preference, consent, complete attribute set or universal ethical mandate inferred."
+    },
+    {
+      "name": "figure_control-state-traces.png",
+      "pass_": true,
+      "evidence": "Valid PNG, dimensions, explicit hypothetical/synthetic metadata and execution digest checked."
+    },
+    {
+      "name": "figure_two-attribute-options.png",
+      "pass_": true,
+      "evidence": "Valid PNG, dimensions, explicit hypothetical/synthetic metadata and execution digest checked."
+    },
+    {
+      "name": "figure_control_visual_review",
+      "pass_": true,
+      "evidence": "Viewed actual PNG: g(ms) vs t(s),17 sample points match vector, dashed16 and dotted10.4 thresholds; qN solid and qH dashed post-step states match independent replay; labels readable, unclipped. Connecting observation segments do not constitute measured continuous response."
+    },
+    {
+      "name": "figure_attributes_visual_review",
+      "pass_": true,
+      "evidence": "Viewed actual PNG: O(ms) horizontal and D vertical; L(2,70),B(5,85),H(12,95),W(8,70); dashed vertical6ms guard matches metadata, readable labels, no claimed measurements."
+    },
+    {
+      "name": "execution_declared_limits",
+      "pass_": true,
+      "evidence": "Recorded execution is temporary numerical analysis and original figures. No human/learner/renderer outcome claimed; audit itself performed no such run."
+    },
+    {
+      "name": "producer_script_binding",
+      "pass_": true,
+      "evidence": "Temporary producer bytes match declared execution digest; producer not imported or rerun for audit."
+    },
+    {
+      "name": "encoding_experiment-plan.md",
+      "pass_": true,
+      "evidence": "UTF8 decoded by reader; no BOM, LF only."
+    },
+    {
+      "name": "encoding_primary-readback.json",
+      "pass_": true,
+      "evidence": "UTF8 decoded by reader; no BOM, LF only."
+    },
+    {
+      "name": "encoding_source-controller.json",
+      "pass_": true,
+      "evidence": "UTF8 decoded by reader; no BOM, LF only."
+    },
+    {
+      "name": "encoding_control-traces.json",
+      "pass_": true,
+      "evidence": "UTF8 decoded by reader; no BOM, LF only."
+    },
+    {
+      "name": "encoding_scenario-decisions.json",
+      "pass_": true,
+      "evidence": "UTF8 decoded by reader; no BOM, LF only."
+    },
+    {
+      "name": "encoding_value-tradeoffs.json",
+      "pass_": true,
+      "evidence": "UTF8 decoded by reader; no BOM, LF only."
+    },
+    {
+      "name": "encoding_execution.json",
+      "pass_": true,
+      "evidence": "UTF8 decoded by reader; no BOM, LF only."
+    }
+  ],
+  "check_count": 62,
+  "all_checks_pass": true,
+  "findings": [],
+  "fix_requests": [],
+  "limits": [
+    "All observations, losses, probabilities and attribute cells are authored. These exercises establish no closed-loop stability, speedup, frame-pacing improvement, image quality or policy recommendation.",
+    "Three-level source adaptive controller with .05 EMA and strict >1 second guard differs from the advisory two-state, two-observation, >=3 second model.",
+    "Unavailable query skips inspected assignments while time advances; successful query is not proof of finite/nonnegative numeric input.",
+    "Historical M3 remains inconclusive and historical binary/source dirtiness is not attested away.",
+    "External documentation semantic reading is outside this fixed-data audit. The producer records direct403 for MathWorks and RAND; this audit does not upgrade those into a byte-level200 claim.",
+    "Human, fluent-language, learner, accessibility, preferences and live-renderer outcomes remain unverified."
+  ],
+  "human_approval": null,
+  "learner_outcome": null
+}
