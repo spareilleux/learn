@@ -1,0 +1,29 @@
+# Speaking in knots course: the Python state sum against the values IX's tests assert, the braid words the lessons
+# quote and the mutation check, each output compared with code/speaking-in-knots/expected/. Standard library only.
+name: Speaking in knots course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/speaking-in-knots/**', '.github/workflows/speaking-in-knots-examples.yml']
+  pull_request:
+    paths: ['code/speaking-in-knots/**', '.github/workflows/speaking-in-knots-examples.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: speaking-in-knots (ubuntu-latest)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+      - name: State sum, braid words and mutation check
+        env:
+          PYTHON: python
+        run: bash code/speaking-in-knots/check.sh
