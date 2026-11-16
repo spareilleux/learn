@@ -84,3 +84,68 @@ test('a successfully saved long note survives reload unchanged', () => {
     else globalThis.window = previousWindow;
   }
 });
+
+test('page and section bookmarks refuse encoded, Unicode and attribute-breaking path variants', () => {
+  const paths = [
+    '/learn/%2E%2E/other/', '/learn/.%2e/other/', '/learn/x/..', '/learn/x/%2e', '/learn/fr/..',
+    '/learn/%c0%ae%c0%ae/other/', '/learn/x%2F..%2F..%2Fevil/', '/learn/%2f%2fevil.com/', '/learn/%5c%5cevil/',
+    '/learn//evil.com/', '/learn/fr//evil.com/', '/learn/\\\\evil/', '/learn/x%3Ay/', '/learn/x%23y/', '/learn/x%3Fy/',
+    '/learn/..%00/', '/learn/%00/', '/learn/%09/', '/learn/\t/', '/learn/x\r/', '/learn/%20/', '/learn/%25/',
+    '/learn/x" onmouseover=alert(1)/', '/learn/x"onmouseover=alert(1)/', '/learn/<script>/', '/learn/x`y/', '/learn/{x}/',
+    '/learn/javascript：alert(1)/', '/learn/ /', '/learn/ /', '/learn/é/', '/learn',
+    `/learn/${'a'.repeat(100_001)}/`,
+  ];
+  for (const path of paths) {
+    for (const hash of ['', 'section']) {
+      const b = bookmark(path, hash);
+      const imported = store.sanitize({ bookmarks: { [b.key]: b }, notes: { [store.splitPath(path).key]: note(path) } });
+      assert.deepEqual(Object.keys(imported.bookmarks), [], JSON.stringify(path).slice(0, 80));
+      assert.deepEqual(Object.keys(imported.notes), [], JSON.stringify(path).slice(0, 80));
+    }
+  }
+});
+
+test('every link built from an accepted entry stays on this site under /learn/', () => {
+  // Characters the path check lets through, and fragments a hostile file could carry; the library assigns
+  // these links to a.href, so only the resolved URL matters, not quoting.
+  const paths = ["/learn/x'onmouseover=alert(1)/", '/learn/x;y/', '/learn/x@evil.com/', '/learn/x|y/', '/learn/x(y)/',
+    '/learn/%E2%80%AE/', '/learn/%C3%A9/', '/learn/%66r/', '/learn/', '/learn/fr/', '/learn/es/course/lesson/'];
+  const hashes = ['', 'sec', '"><img src=x onerror=alert(1)>', 'javascript:alert(1)', "x'y", '%2e', '‮'];
+  const site = 'https://spareilleux.github.io';
+  let accepted = 0;
+  for (const path of paths) {
+    for (const hash of hashes) {
+      const b = { ...bookmark(path, hash), section: '<img src=x onerror=alert(1)>', page: '<script>alert(1)</script>' };
+      const imported = store.sanitize({ bookmarks: { [b.key]: b }, notes: { [store.splitPath(path).key]: { ...note(path), text: '<script>alert(1)</script>' } } });
+      const kept = imported.bookmarks[b.key];
+      if (!kept) continue;
+      accepted++;
+      // Display fields are data: kept as typed, and drawn with textContent by the components
+      assert.equal(kept.page, '<script>alert(1)</script>');
+      for (const locale of ['', 'fr', 'es']) {
+        const links = [
+          [kept.hash ? `${kept.path}#${encodeURIComponent(kept.hash)}` : store.localHref(store.splitPath(kept.path).key, locale), kept.hash],
+          ...Object.keys(imported.notes).map((key) => [`${store.localHref(key, locale)}#reader-notes`, 'reader-notes']),
+        ];
+        for (const [href, fragment] of links) {
+          assert.ok(href.startsWith('/learn/'), href);
+          const url = new URL(href, `${site}/learn/my-notes/`);
+          assert.equal(url.origin, site, href);
+          assert.ok(url.pathname.startsWith('/learn/'), href);
+          assert.equal(decodeURIComponent(url.hash.slice(1)), fragment, href);
+        }
+      }
+    }
+  }
+  assert.ok(accepted >= paths.length * 5, `only ${accepted} accepted`);
+});
+
+test('the reader components never write stored values as HTML', () => {
+  // Every bookmark and note field reaches the page through textContent, value, href or setAttribute; the only
+  // HTML string is the constant bookmark icon.
+  for (const name of ['ReaderLibrary.astro', 'ReaderTools.astro']) {
+    const code = readFileSync(new URL(`../../components/${name}`, import.meta.url), 'utf8');
+    const sinks = code.match(/\.(innerHTML|outerHTML)\s*=[^;]*|insertAdjacentHTML|document\.write|\.srcdoc\b|new Function|\beval\(/g) ?? [];
+    for (const sink of sinks) assert.match(sink, /^\.innerHTML =\s*'<svg [^'$`]*<\/svg>'$/, `${name}: ${sink}`);
+  }
+});
