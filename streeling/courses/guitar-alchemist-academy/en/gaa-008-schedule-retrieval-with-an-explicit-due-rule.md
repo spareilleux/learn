@@ -1,0 +1,79 @@
+---
+module_id: gaa-008-schedule-retrieval-with-an-explicit-due-rule
+department: guitar-alchemist-academy
+course: "Schedule Retrieval with an Explicit Due Rule"
+level: intermediate
+prerequisites: ["gaa-007-turn-a-voicing-result-into-a-practice-item"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+
+# Schedule Retrieval with an Explicit Due Rule
+
+> **Draft and evidence boundary.** This lesson contains an authored model and source reading. Human technical, musician, fluent-language and learner decisions remain pending. No new engine render, parser run, playing, listening or learner observation is claimed. Historical failures keep their original status.
+
+## The project question
+
+A GA practice item exists, but existence does not tell the practice queue when to show it again. This lesson defines a small scheduling rule whose inputs and missing outcomes are visible. It is an authored queue policy, with no claim to optimize memory. Arithmetic due dates and actual delayed recall must remain separate records.
+
+## Read the project evidence
+
+Read the linked prerequisite and retained project artifact before applying the model. Locate the particular representation, transformation or exclusion that matters to this question. The fixed packet records source identity, reading scope and authored values; a source location is evidence for its contents at that revision, not proof of current deployment. Keep a source-derived observation separate from an inferred proposal. Where a primary reference is linked, use its stated scope rather than extending it to unsupported cases.
+
+[Prerequisite: gaa-007-turn-a-voicing-result-into-a-practice-item](../../guitar-alchemist-academy/en/gaa-007-turn-a-voicing-result-into-a-practice-item.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-23/unit-a.json)
+
+[Validation journal](../../../../code/streeling/evidence/batch50-2026-10-23/journal.md)
+
+## 1. Exercise 1
+
+Use integer day coordinates. An item last reviewed on day 10 has interval 4 days, so due day is 14. The declared comparison is inclusive: an item is due when the current day reaches the due day. This removes a boundary ambiguity before anyone evaluates the queue.
+
+Is the item due on day 14, and on day 13?
+
+> **Answer.** It is due on day 14 and not due on day 13 under the inclusive rule.
+
+## 2. Exercise 2
+
+Stipulate a successful actual attempt on day 14. The proposed rule doubles the interval up to a cap of 16 days. The next interval becomes 8 and the next due day 22. These are consequences of the chosen policy, not estimates of the probability that this learner remembers a chord.
+
+Calculate the successful branch.
+
+> **Answer.** The interval is 8 days and due day is 22. No retention probability follows from either number.
+
+## 3. Exercise 3
+
+For the failure branch, stipulate the same attempt day but a failed response. Reset the interval to 1 day and obtain due day 15. Preserve the answer and permitted assistance that generated that result. A revealed solution copied correctly is not automatically an unaided success under a retrieval endpoint.
+
+Calculate the failure branch and state the needed attempt evidence.
+
+> **Answer.** Due day is 15; retain the actual answer before reveal, assistance and scoring rule.
+
+## 4. Exercise 4
+
+A missing attempt is neither successful nor failed under this binary update rule. Keep the item overdue or unresolved according to a separately stated queue policy, but do not invent an outcome to advance it. This negative control separates elapsed time from observed retrieval. Opening a page alone does not supply the missing answer.
+
+What next due date follows from no recorded outcome?
+
+> **Answer.** No updated due date is determined. Preserve the missing outcome; do not choose either branch.
+
+## 5. Exercise 5
+
+The retained practice packet verifies item coordinates and cue policies; it contains no observed learner success for our scheduling example. Compare a handwritten due-date table with any proposed automated queue before introducing a new abstraction. A future evaluation needs delayed responses and a justified comparison, beyond a queue correctly applying its own rule.
+
+What can correct scheduling arithmetic establish?
+
+> **Answer.** Policy conformance only. Learning benefit, optimal intervals and actual learner acceptance remain unobserved.
+
+## Source-assisted learner task
+
+Prepare a short review note from the fixed case before opening the prepared answers. First reproduce the calculation or table manually, keeping the stated units, support and assumptions. That direct result is the baseline for any source-assisted or agent-assisted answer. Then inspect the linked project artifact and identify one precise boundary relevant to the calculation. Record the actual source excerpt or field used, its revision, your proposed answer and every kind of assistance received. A calculator and source lookup are allowed; label them instead of presenting the result as unaided recall.
+
+Apply the negative control as well as the main case. Write the observable result that would falsify your conclusion, and state whether the control actually supplies it. If a model input is absent, retain an unresolved result rather than substituting a plausible value. Compare a proposed abstraction with the manual baseline before recommending a new agent workflow or DSL. The answer key is a prepared check, not a record of your attempt. Keep your original answer before reveal, any correction afterward and the reason for the correction.
+
+The packet contains five prepared learner criteria corresponding to the exercises. Their decisions remain null until actual answers, assistance and review are retained. Correct arithmetic supports only the declared model. A useful project decision still needs the relevant human judgment or runtime observation at its own boundary. Record actual checks, errors and refinements in the linked validation journal; the journal must distinguish executed tests from planned tests.

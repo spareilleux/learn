@@ -1,0 +1,5 @@
+["password: hunter2hunter2", "[REDACTED:secret:api_key_assignment]"]
+["{\"password\": \"hunter2hunter2\"}", "{\"password\": \"hunter2hunter2\"}"]
+["Authorization: Bearer abcdefghijklmnopqrstuvwxyz0123", "Authorization: [REDACTED:[REDACTED:secret:api_key_assignment]]"]
+["{\"headers\": {\"Authorization\": \"Bearer abcdefghijklmnopqrstuvwxyz0123\"}}", "{\"headers\": {\"Authorization\": \"[REDACTED:[REDACTED:secret:api_key_assignment]]\"}}"]
+["postgres://admin:hunter2hunter2@db.example.com/prod", "postgres://admin:[REDACTED:pii:email]/prod"]

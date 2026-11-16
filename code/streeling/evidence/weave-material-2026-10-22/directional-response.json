@@ -1,0 +1,1377 @@
+{
+  "scope": "Authored two-degree-of-freedom linear spring model, not a measured cloth, continuum stress-strain tensor, Godot physics response or manufacturing model.",
+  "local_stiffness_N_per_mm": [
+    [
+      4.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "force": "f=K*u",
+  "energy": "E=0.5*u^T*K*u in N*mm",
+  "rotation_convention": "Active mathematical planar R; u_world=R*u_local, K_world=R*K_local*R^T. No receiving-host Euler convention is prescribed.",
+  "rotations": [
+    {
+      "angle_degrees": 0,
+      "R": [
+        [
+          1.0,
+          -0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "world_stiffness_N_per_mm": [
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "covariance_cases": [
+        {
+          "local_displacement_mm": [
+            0,
+            0
+          ],
+          "local_force_N": [
+            0.0,
+            0.0
+          ],
+          "local_energy_N_mm": 0.0,
+          "world_displacement_mm": [
+            0.0,
+            0.0
+          ],
+          "world_force_N": [
+            0.0,
+            0.0
+          ],
+          "rotated_expected_force_N": [
+            0.0,
+            0.0
+          ],
+          "world_energy_N_mm": 0.0,
+          "max_force_covariance_error_N": 0.0,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            0
+          ],
+          "local_force_N": [
+            4.0,
+            0.0
+          ],
+          "local_energy_N_mm": 2.0,
+          "world_displacement_mm": [
+            1.0,
+            0.0
+          ],
+          "world_force_N": [
+            4.0,
+            0.0
+          ],
+          "rotated_expected_force_N": [
+            4.0,
+            0.0
+          ],
+          "world_energy_N_mm": 2.0,
+          "max_force_covariance_error_N": 0.0,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            0,
+            1
+          ],
+          "local_force_N": [
+            0.0,
+            1.0
+          ],
+          "local_energy_N_mm": 0.5,
+          "world_displacement_mm": [
+            0.0,
+            1.0
+          ],
+          "world_force_N": [
+            0.0,
+            1.0
+          ],
+          "rotated_expected_force_N": [
+            0.0,
+            1.0
+          ],
+          "world_energy_N_mm": 0.5,
+          "max_force_covariance_error_N": 0.0,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            1
+          ],
+          "local_force_N": [
+            4.0,
+            1.0
+          ],
+          "local_energy_N_mm": 2.5,
+          "world_displacement_mm": [
+            1.0,
+            1.0
+          ],
+          "world_force_N": [
+            4.0,
+            1.0
+          ],
+          "rotated_expected_force_N": [
+            4.0,
+            1.0
+          ],
+          "world_energy_N_mm": 2.5,
+          "max_force_covariance_error_N": 0.0,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            -1
+          ],
+          "local_force_N": [
+            4.0,
+            -1.0
+          ],
+          "local_energy_N_mm": 2.5,
+          "world_displacement_mm": [
+            1.0,
+            -1.0
+          ],
+          "world_force_N": [
+            4.0,
+            -1.0
+          ],
+          "rotated_expected_force_N": [
+            4.0,
+            -1.0
+          ],
+          "world_energy_N_mm": 2.5,
+          "max_force_covariance_error_N": 0.0,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            -2,
+            1
+          ],
+          "local_force_N": [
+            -8.0,
+            1.0
+          ],
+          "local_energy_N_mm": 8.5,
+          "world_displacement_mm": [
+            -2.0,
+            1.0
+          ],
+          "world_force_N": [
+            -8.0,
+            1.0
+          ],
+          "rotated_expected_force_N": [
+            -8.0,
+            1.0
+          ],
+          "world_energy_N_mm": 8.5,
+          "max_force_covariance_error_N": 0.0,
+          "energy_covariance_error_N_mm": 0.0
+        }
+      ],
+      "fixed_world_probes": [
+        {
+          "fixed_world_displacement_mm": [
+            1,
+            0
+          ],
+          "force_N": [
+            4.0,
+            0.0
+          ],
+          "energy_N_mm": 2.0
+        },
+        {
+          "fixed_world_displacement_mm": [
+            0,
+            1
+          ],
+          "force_N": [
+            0.0,
+            1.0
+          ],
+          "energy_N_mm": 0.5
+        },
+        {
+          "fixed_world_displacement_mm": [
+            1,
+            -1
+          ],
+          "force_N": [
+            4.0,
+            -1.0
+          ],
+          "energy_N_mm": 2.5
+        }
+      ]
+    },
+    {
+      "angle_degrees": 30,
+      "R": [
+        [
+          0.8660254037844387,
+          -0.49999999999999994
+        ],
+        [
+          0.49999999999999994,
+          0.8660254037844387
+        ]
+      ],
+      "world_stiffness_N_per_mm": [
+        [
+          3.2500000000000004,
+          1.299038105676658
+        ],
+        [
+          1.299038105676658,
+          1.75
+        ]
+      ],
+      "covariance_cases": [
+        {
+          "local_displacement_mm": [
+            0,
+            0
+          ],
+          "local_force_N": [
+            0.0,
+            0.0
+          ],
+          "local_energy_N_mm": 0.0,
+          "world_displacement_mm": [
+            0.0,
+            0.0
+          ],
+          "world_force_N": [
+            0.0,
+            0.0
+          ],
+          "rotated_expected_force_N": [
+            0.0,
+            0.0
+          ],
+          "world_energy_N_mm": 0.0,
+          "max_force_covariance_error_N": 0.0,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            0
+          ],
+          "local_force_N": [
+            4.0,
+            0.0
+          ],
+          "local_energy_N_mm": 2.0,
+          "world_displacement_mm": [
+            0.8660254037844387,
+            0.49999999999999994
+          ],
+          "world_force_N": [
+            3.4641016151377553,
+            2.0
+          ],
+          "rotated_expected_force_N": [
+            3.464101615137755,
+            1.9999999999999998
+          ],
+          "world_energy_N_mm": 2.0000000000000004,
+          "max_force_covariance_error_N": 4.440892098500626e-16,
+          "energy_covariance_error_N_mm": 4.440892098500626e-16
+        },
+        {
+          "local_displacement_mm": [
+            0,
+            1
+          ],
+          "local_force_N": [
+            0.0,
+            1.0
+          ],
+          "local_energy_N_mm": 0.5,
+          "world_displacement_mm": [
+            -0.49999999999999994,
+            0.8660254037844387
+          ],
+          "world_force_N": [
+            -0.5,
+            0.8660254037844389
+          ],
+          "rotated_expected_force_N": [
+            -0.49999999999999994,
+            0.8660254037844387
+          ],
+          "world_energy_N_mm": 0.5000000000000001,
+          "max_force_covariance_error_N": 2.220446049250313e-16,
+          "energy_covariance_error_N_mm": 1.1102230246251565e-16
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            1
+          ],
+          "local_force_N": [
+            4.0,
+            1.0
+          ],
+          "local_energy_N_mm": 2.5,
+          "world_displacement_mm": [
+            0.36602540378443876,
+            1.3660254037844386
+          ],
+          "world_force_N": [
+            2.9641016151377553,
+            2.8660254037844384
+          ],
+          "rotated_expected_force_N": [
+            2.964101615137755,
+            2.8660254037844384
+          ],
+          "world_energy_N_mm": 2.5,
+          "max_force_covariance_error_N": 4.440892098500626e-16,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            -1
+          ],
+          "local_force_N": [
+            4.0,
+            -1.0
+          ],
+          "local_energy_N_mm": 2.5,
+          "world_displacement_mm": [
+            1.3660254037844386,
+            -0.36602540378443876
+          ],
+          "world_force_N": [
+            3.9641016151377553,
+            1.1339745962155612
+          ],
+          "rotated_expected_force_N": [
+            3.964101615137755,
+            1.1339745962155612
+          ],
+          "world_energy_N_mm": 2.5000000000000004,
+          "max_force_covariance_error_N": 4.440892098500626e-16,
+          "energy_covariance_error_N_mm": 4.440892098500626e-16
+        },
+        {
+          "local_displacement_mm": [
+            -2,
+            1
+          ],
+          "local_force_N": [
+            -8.0,
+            1.0
+          ],
+          "local_energy_N_mm": 8.5,
+          "world_displacement_mm": [
+            -2.232050807568877,
+            -0.13397459621556118
+          ],
+          "world_force_N": [
+            -7.42820323027551,
+            -3.133974596215561
+          ],
+          "rotated_expected_force_N": [
+            -7.42820323027551,
+            -3.1339745962155607
+          ],
+          "world_energy_N_mm": 8.5,
+          "max_force_covariance_error_N": 4.440892098500626e-16,
+          "energy_covariance_error_N_mm": 0.0
+        }
+      ],
+      "fixed_world_probes": [
+        {
+          "fixed_world_displacement_mm": [
+            1,
+            0
+          ],
+          "force_N": [
+            3.2500000000000004,
+            1.299038105676658
+          ],
+          "energy_N_mm": 1.6250000000000002
+        },
+        {
+          "fixed_world_displacement_mm": [
+            0,
+            1
+          ],
+          "force_N": [
+            1.299038105676658,
+            1.75
+          ],
+          "energy_N_mm": 0.875
+        },
+        {
+          "fixed_world_displacement_mm": [
+            1,
+            -1
+          ],
+          "force_N": [
+            1.9509618943233424,
+            -0.450961894323342
+          ],
+          "energy_N_mm": 1.2009618943233422
+        }
+      ]
+    },
+    {
+      "angle_degrees": 45,
+      "R": [
+        [
+          0.7071067811865476,
+          -0.7071067811865476
+        ],
+        [
+          0.7071067811865476,
+          0.7071067811865476
+        ]
+      ],
+      "world_stiffness_N_per_mm": [
+        [
+          2.5000000000000004,
+          1.5000000000000004
+        ],
+        [
+          1.5000000000000004,
+          2.5000000000000004
+        ]
+      ],
+      "covariance_cases": [
+        {
+          "local_displacement_mm": [
+            0,
+            0
+          ],
+          "local_force_N": [
+            0.0,
+            0.0
+          ],
+          "local_energy_N_mm": 0.0,
+          "world_displacement_mm": [
+            0.0,
+            0.0
+          ],
+          "world_force_N": [
+            0.0,
+            0.0
+          ],
+          "rotated_expected_force_N": [
+            0.0,
+            0.0
+          ],
+          "world_energy_N_mm": 0.0,
+          "max_force_covariance_error_N": 0.0,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            0
+          ],
+          "local_force_N": [
+            4.0,
+            0.0
+          ],
+          "local_energy_N_mm": 2.0,
+          "world_displacement_mm": [
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "world_force_N": [
+            2.8284271247461907,
+            2.8284271247461907
+          ],
+          "rotated_expected_force_N": [
+            2.8284271247461903,
+            2.8284271247461903
+          ],
+          "world_energy_N_mm": 2.0000000000000004,
+          "max_force_covariance_error_N": 4.440892098500626e-16,
+          "energy_covariance_error_N_mm": 4.440892098500626e-16
+        },
+        {
+          "local_displacement_mm": [
+            0,
+            1
+          ],
+          "local_force_N": [
+            0.0,
+            1.0
+          ],
+          "local_energy_N_mm": 0.5,
+          "world_displacement_mm": [
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "world_force_N": [
+            -0.7071067811865477,
+            0.7071067811865477
+          ],
+          "rotated_expected_force_N": [
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "world_energy_N_mm": 0.5000000000000001,
+          "max_force_covariance_error_N": 1.1102230246251565e-16,
+          "energy_covariance_error_N_mm": 1.1102230246251565e-16
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            1
+          ],
+          "local_force_N": [
+            4.0,
+            1.0
+          ],
+          "local_energy_N_mm": 2.5,
+          "world_displacement_mm": [
+            0.0,
+            1.4142135623730951
+          ],
+          "world_force_N": [
+            2.1213203435596433,
+            3.5355339059327386
+          ],
+          "rotated_expected_force_N": [
+            2.121320343559643,
+            3.5355339059327378
+          ],
+          "world_energy_N_mm": 2.500000000000001,
+          "max_force_covariance_error_N": 8.881784197001252e-16,
+          "energy_covariance_error_N_mm": 8.881784197001252e-16
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            -1
+          ],
+          "local_force_N": [
+            4.0,
+            -1.0
+          ],
+          "local_energy_N_mm": 2.5,
+          "world_displacement_mm": [
+            1.4142135623730951,
+            0.0
+          ],
+          "world_force_N": [
+            3.5355339059327386,
+            2.1213203435596433
+          ],
+          "rotated_expected_force_N": [
+            3.5355339059327378,
+            2.121320343559643
+          ],
+          "world_energy_N_mm": 2.500000000000001,
+          "max_force_covariance_error_N": 8.881784197001252e-16,
+          "energy_covariance_error_N_mm": 8.881784197001252e-16
+        },
+        {
+          "local_displacement_mm": [
+            -2,
+            1
+          ],
+          "local_force_N": [
+            -8.0,
+            1.0
+          ],
+          "local_energy_N_mm": 8.5,
+          "world_displacement_mm": [
+            -2.121320343559643,
+            -0.7071067811865476
+          ],
+          "world_force_N": [
+            -6.36396103067893,
+            -4.9497474683058345
+          ],
+          "rotated_expected_force_N": [
+            -6.3639610306789285,
+            -4.949747468305833
+          ],
+          "world_energy_N_mm": 8.500000000000004,
+          "max_force_covariance_error_N": 1.7763568394002505e-15,
+          "energy_covariance_error_N_mm": 3.552713678800501e-15
+        }
+      ],
+      "fixed_world_probes": [
+        {
+          "fixed_world_displacement_mm": [
+            1,
+            0
+          ],
+          "force_N": [
+            2.5000000000000004,
+            1.5000000000000004
+          ],
+          "energy_N_mm": 1.2500000000000002
+        },
+        {
+          "fixed_world_displacement_mm": [
+            0,
+            1
+          ],
+          "force_N": [
+            1.5000000000000004,
+            2.5000000000000004
+          ],
+          "energy_N_mm": 1.2500000000000002
+        },
+        {
+          "fixed_world_displacement_mm": [
+            1,
+            -1
+          ],
+          "force_N": [
+            1.0,
+            -1.0
+          ],
+          "energy_N_mm": 1.0
+        }
+      ]
+    },
+    {
+      "angle_degrees": 60,
+      "R": [
+        [
+          0.5000000000000001,
+          -0.8660254037844386
+        ],
+        [
+          0.8660254037844386,
+          0.5000000000000001
+        ]
+      ],
+      "world_stiffness_N_per_mm": [
+        [
+          1.7500000000000004,
+          1.2990381056766582
+        ],
+        [
+          1.2990381056766582,
+          3.2499999999999996
+        ]
+      ],
+      "covariance_cases": [
+        {
+          "local_displacement_mm": [
+            0,
+            0
+          ],
+          "local_force_N": [
+            0.0,
+            0.0
+          ],
+          "local_energy_N_mm": 0.0,
+          "world_displacement_mm": [
+            0.0,
+            0.0
+          ],
+          "world_force_N": [
+            0.0,
+            0.0
+          ],
+          "rotated_expected_force_N": [
+            0.0,
+            0.0
+          ],
+          "world_energy_N_mm": 0.0,
+          "max_force_covariance_error_N": 0.0,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            0
+          ],
+          "local_force_N": [
+            4.0,
+            0.0
+          ],
+          "local_energy_N_mm": 2.0,
+          "world_displacement_mm": [
+            0.5000000000000001,
+            0.8660254037844386
+          ],
+          "world_force_N": [
+            2.000000000000001,
+            3.4641016151377544
+          ],
+          "rotated_expected_force_N": [
+            2.0000000000000004,
+            3.4641016151377544
+          ],
+          "world_energy_N_mm": 2.0,
+          "max_force_covariance_error_N": 4.440892098500626e-16,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            0,
+            1
+          ],
+          "local_force_N": [
+            0.0,
+            1.0
+          ],
+          "local_energy_N_mm": 0.5,
+          "world_displacement_mm": [
+            -0.8660254037844386,
+            0.5000000000000001
+          ],
+          "world_force_N": [
+            -0.8660254037844386,
+            0.5
+          ],
+          "rotated_expected_force_N": [
+            -0.8660254037844386,
+            0.5000000000000001
+          ],
+          "world_energy_N_mm": 0.5,
+          "max_force_covariance_error_N": 1.1102230246251565e-16,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            1
+          ],
+          "local_force_N": [
+            4.0,
+            1.0
+          ],
+          "local_energy_N_mm": 2.5,
+          "world_displacement_mm": [
+            -0.3660254037844385,
+            1.3660254037844388
+          ],
+          "world_force_N": [
+            1.133974596215562,
+            3.9641016151377544
+          ],
+          "rotated_expected_force_N": [
+            1.1339745962155618,
+            3.9641016151377544
+          ],
+          "world_energy_N_mm": 2.5000000000000004,
+          "max_force_covariance_error_N": 2.220446049250313e-16,
+          "energy_covariance_error_N_mm": 4.440892098500626e-16
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            -1
+          ],
+          "local_force_N": [
+            4.0,
+            -1.0
+          ],
+          "local_energy_N_mm": 2.5,
+          "world_displacement_mm": [
+            1.3660254037844388,
+            0.3660254037844385
+          ],
+          "world_force_N": [
+            2.8660254037844397,
+            2.9641016151377544
+          ],
+          "rotated_expected_force_N": [
+            2.8660254037844393,
+            2.9641016151377544
+          ],
+          "world_energy_N_mm": 2.500000000000001,
+          "max_force_covariance_error_N": 4.440892098500626e-16,
+          "energy_covariance_error_N_mm": 8.881784197001252e-16
+        },
+        {
+          "local_displacement_mm": [
+            -2,
+            1
+          ],
+          "local_force_N": [
+            -8.0,
+            1.0
+          ],
+          "local_energy_N_mm": 8.5,
+          "world_displacement_mm": [
+            -1.8660254037844388,
+            -1.2320508075688772
+          ],
+          "world_force_N": [
+            -4.86602540378444,
+            -6.42820323027551
+          ],
+          "rotated_expected_force_N": [
+            -4.866025403784439,
+            -6.428203230275509
+          ],
+          "world_energy_N_mm": 8.500000000000002,
+          "max_force_covariance_error_N": 8.881784197001252e-16,
+          "energy_covariance_error_N_mm": 1.7763568394002505e-15
+        }
+      ],
+      "fixed_world_probes": [
+        {
+          "fixed_world_displacement_mm": [
+            1,
+            0
+          ],
+          "force_N": [
+            1.7500000000000004,
+            1.2990381056766582
+          ],
+          "energy_N_mm": 0.8750000000000002
+        },
+        {
+          "fixed_world_displacement_mm": [
+            0,
+            1
+          ],
+          "force_N": [
+            1.2990381056766582,
+            3.2499999999999996
+          ],
+          "energy_N_mm": 1.6249999999999998
+        },
+        {
+          "fixed_world_displacement_mm": [
+            1,
+            -1
+          ],
+          "force_N": [
+            0.4509618943233422,
+            -1.9509618943233413
+          ],
+          "energy_N_mm": 1.2009618943233418
+        }
+      ]
+    },
+    {
+      "angle_degrees": 90,
+      "R": [
+        [
+          6.123233995736766e-17,
+          -1.0
+        ],
+        [
+          1.0,
+          6.123233995736766e-17
+        ]
+      ],
+      "world_stiffness_N_per_mm": [
+        [
+          1.0,
+          1.8369701987210297e-16
+        ],
+        [
+          1.8369701987210297e-16,
+          4.0
+        ]
+      ],
+      "covariance_cases": [
+        {
+          "local_displacement_mm": [
+            0,
+            0
+          ],
+          "local_force_N": [
+            0.0,
+            0.0
+          ],
+          "local_energy_N_mm": 0.0,
+          "world_displacement_mm": [
+            0.0,
+            0.0
+          ],
+          "world_force_N": [
+            0.0,
+            0.0
+          ],
+          "rotated_expected_force_N": [
+            0.0,
+            0.0
+          ],
+          "world_energy_N_mm": 0.0,
+          "max_force_covariance_error_N": 0.0,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            0
+          ],
+          "local_force_N": [
+            4.0,
+            0.0
+          ],
+          "local_energy_N_mm": 2.0,
+          "world_displacement_mm": [
+            6.123233995736766e-17,
+            1.0
+          ],
+          "world_force_N": [
+            2.4492935982947064e-16,
+            4.0
+          ],
+          "rotated_expected_force_N": [
+            2.4492935982947064e-16,
+            4.0
+          ],
+          "world_energy_N_mm": 2.0,
+          "max_force_covariance_error_N": 0.0,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            0,
+            1
+          ],
+          "local_force_N": [
+            0.0,
+            1.0
+          ],
+          "local_energy_N_mm": 0.5,
+          "world_displacement_mm": [
+            -1.0,
+            6.123233995736766e-17
+          ],
+          "world_force_N": [
+            -1.0,
+            6.123233995736767e-17
+          ],
+          "rotated_expected_force_N": [
+            -1.0,
+            6.123233995736766e-17
+          ],
+          "world_energy_N_mm": 0.5,
+          "max_force_covariance_error_N": 1.232595164407831e-32,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            1
+          ],
+          "local_force_N": [
+            4.0,
+            1.0
+          ],
+          "local_energy_N_mm": 2.5,
+          "world_displacement_mm": [
+            -0.9999999999999999,
+            1.0
+          ],
+          "world_force_N": [
+            -0.9999999999999997,
+            4.0
+          ],
+          "rotated_expected_force_N": [
+            -0.9999999999999998,
+            4.0
+          ],
+          "world_energy_N_mm": 2.5,
+          "max_force_covariance_error_N": 1.1102230246251565e-16,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            -1
+          ],
+          "local_force_N": [
+            4.0,
+            -1.0
+          ],
+          "local_energy_N_mm": 2.5,
+          "world_displacement_mm": [
+            1.0,
+            0.9999999999999999
+          ],
+          "world_force_N": [
+            1.0000000000000002,
+            3.9999999999999996
+          ],
+          "rotated_expected_force_N": [
+            1.0000000000000002,
+            4.0
+          ],
+          "world_energy_N_mm": 2.4999999999999996,
+          "max_force_covariance_error_N": 4.440892098500626e-16,
+          "energy_covariance_error_N_mm": 4.440892098500626e-16
+        },
+        {
+          "local_displacement_mm": [
+            -2,
+            1
+          ],
+          "local_force_N": [
+            -8.0,
+            1.0
+          ],
+          "local_energy_N_mm": 8.5,
+          "world_displacement_mm": [
+            -1.0000000000000002,
+            -2.0
+          ],
+          "world_force_N": [
+            -1.0000000000000007,
+            -8.0
+          ],
+          "rotated_expected_force_N": [
+            -1.0000000000000004,
+            -8.0
+          ],
+          "world_energy_N_mm": 8.5,
+          "max_force_covariance_error_N": 2.220446049250313e-16,
+          "energy_covariance_error_N_mm": 0.0
+        }
+      ],
+      "fixed_world_probes": [
+        {
+          "fixed_world_displacement_mm": [
+            1,
+            0
+          ],
+          "force_N": [
+            1.0,
+            1.8369701987210297e-16
+          ],
+          "energy_N_mm": 0.5
+        },
+        {
+          "fixed_world_displacement_mm": [
+            0,
+            1
+          ],
+          "force_N": [
+            1.8369701987210297e-16,
+            4.0
+          ],
+          "energy_N_mm": 2.0
+        },
+        {
+          "fixed_world_displacement_mm": [
+            1,
+            -1
+          ],
+          "force_N": [
+            0.9999999999999998,
+            -4.0
+          ],
+          "energy_N_mm": 2.5
+        }
+      ]
+    },
+    {
+      "angle_degrees": 180,
+      "R": [
+        [
+          -1.0,
+          -1.2246467991473532e-16
+        ],
+        [
+          1.2246467991473532e-16,
+          -1.0
+        ]
+      ],
+      "world_stiffness_N_per_mm": [
+        [
+          4.0,
+          -3.6739403974420594e-16
+        ],
+        [
+          -3.6739403974420594e-16,
+          1.0
+        ]
+      ],
+      "covariance_cases": [
+        {
+          "local_displacement_mm": [
+            0,
+            0
+          ],
+          "local_force_N": [
+            0.0,
+            0.0
+          ],
+          "local_energy_N_mm": 0.0,
+          "world_displacement_mm": [
+            0.0,
+            0.0
+          ],
+          "world_force_N": [
+            0.0,
+            0.0
+          ],
+          "rotated_expected_force_N": [
+            0.0,
+            0.0
+          ],
+          "world_energy_N_mm": 0.0,
+          "max_force_covariance_error_N": 0.0,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            0
+          ],
+          "local_force_N": [
+            4.0,
+            0.0
+          ],
+          "local_energy_N_mm": 2.0,
+          "world_displacement_mm": [
+            -1.0,
+            1.2246467991473532e-16
+          ],
+          "world_force_N": [
+            -4.0,
+            4.898587196589413e-16
+          ],
+          "rotated_expected_force_N": [
+            -4.0,
+            4.898587196589413e-16
+          ],
+          "world_energy_N_mm": 2.0,
+          "max_force_covariance_error_N": 0.0,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            0,
+            1
+          ],
+          "local_force_N": [
+            0.0,
+            1.0
+          ],
+          "local_energy_N_mm": 0.5,
+          "world_displacement_mm": [
+            -1.2246467991473532e-16,
+            -1.0
+          ],
+          "world_force_N": [
+            -1.2246467991473535e-16,
+            -1.0
+          ],
+          "rotated_expected_force_N": [
+            -1.2246467991473532e-16,
+            -1.0
+          ],
+          "world_energy_N_mm": 0.5,
+          "max_force_covariance_error_N": 2.465190328815662e-32,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            1
+          ],
+          "local_force_N": [
+            4.0,
+            1.0
+          ],
+          "local_energy_N_mm": 2.5,
+          "world_displacement_mm": [
+            -1.0000000000000002,
+            -0.9999999999999999
+          ],
+          "world_force_N": [
+            -4.000000000000001,
+            -0.9999999999999996
+          ],
+          "rotated_expected_force_N": [
+            -4.0,
+            -0.9999999999999996
+          ],
+          "world_energy_N_mm": 2.5000000000000004,
+          "max_force_covariance_error_N": 8.881784197001252e-16,
+          "energy_covariance_error_N_mm": 4.440892098500626e-16
+        },
+        {
+          "local_displacement_mm": [
+            1,
+            -1
+          ],
+          "local_force_N": [
+            4.0,
+            -1.0
+          ],
+          "local_energy_N_mm": 2.5,
+          "world_displacement_mm": [
+            -0.9999999999999999,
+            1.0000000000000002
+          ],
+          "world_force_N": [
+            -4.0,
+            1.0000000000000007
+          ],
+          "rotated_expected_force_N": [
+            -4.0,
+            1.0000000000000004
+          ],
+          "world_energy_N_mm": 2.5,
+          "max_force_covariance_error_N": 2.220446049250313e-16,
+          "energy_covariance_error_N_mm": 0.0
+        },
+        {
+          "local_displacement_mm": [
+            -2,
+            1
+          ],
+          "local_force_N": [
+            -8.0,
+            1.0
+          ],
+          "local_energy_N_mm": 8.5,
+          "world_displacement_mm": [
+            1.9999999999999998,
+            -1.0000000000000002
+          ],
+          "world_force_N": [
+            7.999999999999999,
+            -1.0000000000000009
+          ],
+          "rotated_expected_force_N": [
+            8.0,
+            -1.0000000000000009
+          ],
+          "world_energy_N_mm": 8.499999999999998,
+          "max_force_covariance_error_N": 8.881784197001252e-16,
+          "energy_covariance_error_N_mm": 1.7763568394002505e-15
+        }
+      ],
+      "fixed_world_probes": [
+        {
+          "fixed_world_displacement_mm": [
+            1,
+            0
+          ],
+          "force_N": [
+            4.0,
+            -3.6739403974420594e-16
+          ],
+          "energy_N_mm": 2.0
+        },
+        {
+          "fixed_world_displacement_mm": [
+            0,
+            1
+          ],
+          "force_N": [
+            -3.6739403974420594e-16,
+            1.0
+          ],
+          "energy_N_mm": 0.5
+        },
+        {
+          "fixed_world_displacement_mm": [
+            1,
+            -1
+          ],
+          "force_N": [
+            4.0,
+            -1.0000000000000004
+          ],
+          "energy_N_mm": 2.5
+        }
+      ]
+    }
+  ],
+  "exact_quarter_turn_stiffness_N_per_mm": [
+    [
+      1,
+      0
+    ],
+    [
+      0,
+      4
+    ]
+  ],
+  "exact_45_degree_stiffness_N_per_mm": [
+    [
+      2.5,
+      1.5
+    ],
+    [
+      1.5,
+      2.5
+    ]
+  ],
+  "exact_45_degree_x_probe": {
+    "displacement_mm": [
+      1,
+      0
+    ],
+    "force_N": [
+      2.5,
+      1.5
+    ],
+    "energy_N_mm": 1.25
+  },
+  "exact_45_degree_diagonal_probe": {
+    "displacement_mm": [
+      1,
+      -1
+    ],
+    "force_N": [
+      1,
+      -1
+    ],
+    "energy_N_mm": 1,
+    "wrong_off_diagonal_dropped_energy_N_mm": 2.5
+  },
+  "same_geometry_different_response": {
+    "force_N": [
+      1,
+      0
+    ],
+    "unrotated_displacement_mm": [
+      0.25,
+      0
+    ],
+    "quarter_turned_material_displacement_mm": [
+      1,
+      0
+    ],
+    "geometry_or_colour_does_not_identify_K": true
+  },
+  "eigenvalues_N_per_mm": [
+    1,
+    4
+  ],
+  "physical_calibration": null
+}

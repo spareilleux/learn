@@ -4,12 +4,13 @@ description: Fondements de la musicologie — Musicologie
 sidebar:
   label: MCL-001 · Comment la musique évolue
   order: 1
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musicology/fr/mcl-001-how-music-evolves.fr.md
 ---
 
 :::note[Streeling University]
 **MCL-001** · Fondements de la musicologie · débutant · 30 minutes
 
-Généré par le département *Musicologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/89a1bdb2801d32424dd17287ba67185572610277/state/streeling/courses/musicology/fr/mcl-001-how-music-evolves.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musicologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-001-how-music-evolves.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de musicologie** | Niveau : Débutant | Durée : 30 minutes

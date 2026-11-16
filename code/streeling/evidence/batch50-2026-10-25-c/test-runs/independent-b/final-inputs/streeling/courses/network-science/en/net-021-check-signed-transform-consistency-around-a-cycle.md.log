@@ -1,0 +1,172 @@
+---
+module_id: "net-021-check-signed-transform-consistency-around-a-cycle"
+department: "network-science"
+course: "Check Signed Transform Consistency around a Cycle"
+title: "Check Signed Transform Consistency around a Cycle"
+level: "intermediate"
+prerequisites: ["net-009-detect-global-cycles-in-a-panel-stack", "net-011-separate-reachability-from-semantic-compatibility"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Check Signed Transform Consistency around a Cycle
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+Craft panels or coordinate conventions can impose pairwise orientation relationships. One relation preserves a sign and another reverses it. A diagram may contain a cycle without being contradictory: consistency depends on the transformations composed around it. This differs from a precedence cycle, where circular ordering itself prevents a valid schedule.
+
+Assign each vertex a sign and require that endpoint signs multiply to the edge sign. Fix one root sign to remove the global reversal ambiguity. Propagate along a spanning path, then verify every remaining edge rather than assuming it agrees. Multiplying relations around a cycle cancels all vertex signs, so the product of edge signs must be positive. For the declared triangle, that product is also sufficient for a consistent assignment.
+
+The fixed triangle contains reversing relations in a compatible pattern. Flipping a single edge in the control creates an impossible cycle product. Reversing every node label cannot fix it because endpoint products are unchanged. This tiny sign model is not a complete geometric transform system: rotations in space may fail to commute and require matrices or quaternions. A future craft DSL should retain edge meaning and revision before using a signed consistency check as a diagnostic.
+
+## Sources and project boundary
+
+[Prerequisite: net-009-detect-global-cycles-in-a-panel-stack](../../network-science/en/net-009-detect-global-cycles-in-a-panel-stack.md)
+
+[Prerequisite: net-011-separate-reachability-from-semantic-compatibility](../../network-science/en/net-011-separate-reachability-from-semantic-compatibility.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading](https://arxiv.org/abs/1701.07963)
+
+## Fixed model and negative control
+
+```json
+{
+  "values": {
+    "nodes": [
+      "A",
+      "B",
+      "C"
+    ],
+    "edges": [
+      [
+        "A",
+        "B",
+        1
+      ],
+      [
+        "B",
+        "C",
+        -1
+      ],
+      [
+        "A",
+        "C",
+        -1
+      ]
+    ],
+    "root_sign": 1
+  },
+  "formula": "Require label[u]*label[v]=edge_sign with root label fixed. Enumerate remaining signs in order [1,-1]; report first satisfying assignment or null. For this triangle cycle_product is product of its three edge signs.",
+  "expected": {
+    "cycle_product": 1,
+    "consistent": true,
+    "labels": [
+      1,
+      1,
+      -1
+    ]
+  },
+  "negative_control": {
+    "values": {
+      "nodes": [
+        "A",
+        "B",
+        "C"
+      ],
+      "edges": [
+        [
+          "A",
+          "B",
+          1
+        ],
+        [
+          "B",
+          "C",
+          -1
+        ],
+        [
+          "A",
+          "C",
+          1
+        ]
+      ],
+      "root_sign": 1
+    },
+    "expected": {
+      "cycle_product": -1,
+      "consistent": false,
+      "labels": null
+    },
+    "why": "One changed edge makes closed-loop sign transport contradictory."
+  },
+  "input_types": {
+    "nodes": "ordered three distinct node strings",
+    "edges": "triangle undirected pairs with sign integer +1 or -1",
+    "root_sign": "fixed first-node sign +1 or -1"
+  },
+  "assumptions": [
+    "All inputs are stipulated teaching values, not measured project events.",
+    "Only the declared finite objective and constraints are represented."
+  ],
+  "limits": "Only commuting scalar sign relations are modeled; no 3D transform, social trust, knot type or physical panel is validated."
+}
+```
+
+## Source-assisted task and journal
+
+**Direct manual baseline:** Assign a root sign, propagate edge constraints and multiply the cycle signs by hand.
+
+**Falsifier:** A sign-consistency report accepts a negative cycle product or treats every cycle as contradictory without composing its relations.
+
+Read the prerequisite and the retained project representation before treating this example as a proposed feature. The linked Learn source helper extracts metadata, title and body, then indexes English module identities. That is an actual representation boundary to inspect; it supplies neither the invented inputs nor an implementation of this mathematical operation. Keep the source revision attached to the reading note so that a later change cannot silently inherit this inspection.
+
+For the source-assisted task, reproduce the fixed case directly before asking an assistant to explain it. Use the input types and assumptions in the packet as part of the question, preserve intermediate quantities and compare the declared negative control. Ask the assistant to identify which premise makes the two results differ. A plausible explanation that never calculates the changed input has not demonstrated the operation.
+
+Record the exact question, supplied sources, answer, assistance history and any correction in the journal. The prepared corrected answers below are an answer key, not a learner attempt. An independent model check can establish the finite arithmetic while still missing a poor prompt or a misleading translation. Human technical review, fluent-language review, learner acceptance, native runtime behavior, production adoption and publication decisions therefore remain undecided. Retain a failed check and its diagnosis before recording a successful replay; do not replace an original failure with the corrected result.
+
+## Corrected exercises
+
+### Exercise 1
+
+Propagate the fixed signs.
+
+> **Answer:** With root `A=1`, labels `[1,1,-1]` satisfy every edge and the cycle product is `1`.
+
+### Exercise 2
+
+Why does the control fail?
+
+> **Answer:** Its cycle product is `-1`. Multiplying all endpoint equations would require `1=-1`, so no labeling exists.
+
+### Exercise 3
+
+Would reversing every node label repair the control?
+
+> **Answer:** No. Global reversal preserves endpoint products. The conflicting edge relation must be inspected, not hidden by changing the root convention.
+
+### Exercise 4
+
+What does the retained project helper actually establish?
+
+> **Answer:** It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.
+
+### Exercise 5
+
+Which acceptance decisions can the corrected answer key close?
+
+> **Answer:** None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.
+
+## Prepared learner criteria
+
+These criteria are prepared; every learner decision remains undecided.
+
+- Exercise 1: With root `A=1`, labels `[1,1,-1]` satisfy every edge and the cycle product is `1`.
+- Exercise 2: Its cycle product is `-1`. Multiplying all endpoint equations would require `1=-1`, so no labeling exists.
+- Exercise 3: No. Global reversal preserves endpoint products. The conflicting edge relation must be inspected, not hidden by changing the root convention.
+- Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.
+- Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.
+
+[Fixed unit packet](../../../../code/streeling/evidence/batch50-2026-10-25-c/unit-b.json) · [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25-c/journal.md)

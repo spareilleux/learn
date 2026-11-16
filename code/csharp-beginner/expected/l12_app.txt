@@ -1,0 +1,19 @@
+> fret 110 7
+164.81
+-> exit code 0
+> transpose 2 C E G
+D F# A
+-> exit code 0
+> projects data/ga-projects.csv
+12 projects, 632 source files
+-> exit code 0
+> fret 110 25
+error: fret ('25') must be less than or equal to '24'. (Parameter 'fret')
+Actual value was 25.
+-> exit code 1
+> projects missing.csv
+error: Could not find file 'missing.csv'.
+-> exit code 1
+> (no arguments)
+usage: fret <open-string-hz> <fret> | transpose <semitones> <notes...> | projects <file.csv>
+-> exit code 1

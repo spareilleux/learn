@@ -1,0 +1,2728 @@
+{
+  "schema": "streeling-batch50-unit-evidence-v1",
+  "unit": "b",
+  "base_learn_commit": "b7a402c162c15e77fd76e6c57360994308e33279",
+  "plan_commit": "212ffe4351633588efbe46938cbceec80aded31e",
+  "scope": "Sixteen authored agentic/system lessons and full EN/FR/ES sources; mathematical cases are invented, source inspection is not execution, author self-check is not independent review.",
+  "primary_references": [
+    {
+      "key": "fsharp",
+      "url": "https://learn.microsoft.com/dotnet/fsharp/",
+      "version": "Microsoft F# documentation, read 2026-10-24",
+      "read_scope_and_method": "Official documentation landing, function/pattern matching/async guide entry points; no new language feature or compilation claim.",
+      "sha256": null
+    },
+    {
+      "key": "ga-adaptive",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs",
+      "version": "GA 76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "read_scope_and_method": "Browser-rendered raw source, query-result and adaptive-bounce block around gpuSmooth/bounceChanged; exposed browser lines 2739-2762. Successful query guards smoothing and bounce updates, integer step and strict dwell test. No raw-byte hash claimed; no renderer executed.",
+      "sha256": null
+    },
+    {
+      "key": "http",
+      "url": "https://www.rfc-editor.org/rfc/rfc9110.html#name-idempotent-methods",
+      "version": "RFC 9110, June 2022, section 9.2.2",
+      "read_scope_and_method": "Intended effect of identical requests and distinction from request logging; browser-rendered official RFC text.",
+      "sha256": null
+    },
+    {
+      "key": "racket",
+      "url": "https://docs.racket-lang.org/guide/pattern-macros.html",
+      "version": "Racket Guide, section 16.1.2, read 2026-10-24",
+      "read_scope_and_method": "Lexical scope, introduced temporary names, and preservation of binding; official browser-rendered guide. Initial /guide/hygiene.html inaccessible via web tool; fallback read this actual page.",
+      "sha256": null
+    },
+    {
+      "key": "sql",
+      "url": "https://www.sqlite.org/lang_select.html",
+      "version": "SQLite SELECT documentation, section 2.1, read 2026-10-24",
+      "read_scope_and_method": "Cartesian product and ON/USING row filtering, paragraphs defining joined row multiplicity; browser-rendered official text.",
+      "sha256": null
+    },
+    {
+      "key": "prov",
+      "url": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+      "version": "W3C Recommendation 2013-04-30",
+      "read_scope_and_method": "Abstract, core entities/activities/agents, usage/derivation relations and Table 4; browser-rendered official Recommendation.",
+      "sha256": null
+    },
+    {
+      "key": "nist",
+      "url": "https://www.itl.nist.gov/div898/handbook/pri/section3/pri332.htm",
+      "version": "NIST/SEMATECH e-Handbook section 5.3.3.2, read 2026-10-24",
+      "read_scope_and_method": "Nuisance factors, homogeneous blocks, within-block comparisons and randomization; browser-rendered official handbook.",
+      "sha256": null
+    },
+    {
+      "key": "matrix",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html",
+      "version": "scikit-learn 1.9.1 documentation, read 2026-10-24",
+      "read_scope_and_method": "Definition C[i,j] with true class in rows and predicted class in columns; binary TN/FN/TP/FP mapping. Library not executed.",
+      "sha256": null
+    },
+    {
+      "key": "selective",
+      "url": "https://arxiv.org/abs/1705.08500",
+      "version": "Geifman and El-Yaniv, 1705.08500v2, 2017-06-01",
+      "read_scope_and_method": "Author abstract on selective prediction trading coverage for risk; abstract only, no theorem or numerical guarantee borrowed.",
+      "sha256": null
+    },
+    {
+      "key": "shannon",
+      "url": "https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf",
+      "version": "Shannon 1948 corrected reprint, section 6",
+      "read_scope_and_method": "Entropy definition and equally likely alternatives in section 6; browser-extracted original paper PDF. Cornell /courses/cs722/2000sp/shannon.pdf inspected but is a student presentation, excluded as original-paper support.",
+      "sha256": null
+    },
+    {
+      "key": "otel",
+      "url": "https://opentelemetry.io/docs/specs/otel/trace/tracestate-handling/",
+      "version": "OpenTelemetry specification 1.62.0 displayed, read 2026-10-24",
+      "read_scope_and_method": "Sampling threshold, effective probability and adjusted count as inverse probability; browser-rendered official specification.",
+      "sha256": null
+    },
+    {
+      "key": "lamport",
+      "url": "https://lamport.azurewebsites.net/pubs/time-clocks.pdf",
+      "version": "Lamport 1978, Communications of ACM 21(7), pp. 558-565",
+      "read_scope_and_method": "Pages 558-559, process order, send/receive and transitivity defining happened-before; original-author PDF via browser extraction.",
+      "sha256": null
+    },
+    {
+      "key": "vector",
+      "url": "https://www.cl.cam.ac.uk/teaching/2021/ConcDisSys/dist-sys-notes.pdf",
+      "version": "Kleppmann, Cambridge Distributed Systems 2020/21",
+      "read_scope_and_method": "Slides 69-72, componentwise maximum receive rule and componentwise partial order; author course notes PDF via browser extraction.",
+      "sha256": null
+    }
+  ],
+  "courses": [
+    {
+      "code": "CS018",
+      "department": "computer-science",
+      "module_id": "cs-018-merge-replayed-agent-messages-by-identity",
+      "title": "Merge Replayed Agent Messages by Identity",
+      "source_paths": {
+        "en": "streeling/courses/computer-science/en/cs-018-merge-replayed-agent-messages-by-identity.md",
+        "fr": "streeling/courses/computer-science/fr/cs-018-merge-replayed-agent-messages-by-identity.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-018-merge-replayed-agent-messages-by-identity.es.md"
+      },
+      "novelty_vs_prerequisites": "CS005 defines a handoff envelope; CS015 already assigns overlapping frame ownership, assumes equal duplicate payloads and retains conflicts. This course adds an order-independent identity-to-payload-set merge: pointwise union is associative, commutative and idempotent, and a conflict persists under further merge; accepted totals are derived only after validation.",
+      "prerequisites": [
+        "cs-005-agent-handoff-evidence-contract"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "34b464061549b75e54058e76896bbec739e197a1f8cf7e54b837a5698e01f531",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "englishModuleKeys builds a Set from English module ids and filename stems; parseModule returns metadata/title/body. Lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path_or_url": "https://www.rfc-editor.org/rfc/rfc9110.html#name-idempotent-methods",
+          "pin": "RFC 9110, June 2022, section 9.2.2",
+          "sha256": null,
+          "scope": "Intended effect of identical requests and distinction from request logging; browser-rendered official RFC text.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        },
+        {
+          "path_or_url": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+          "pin": "W3C Recommendation 2013-04-30",
+          "sha256": null,
+          "scope": "Abstract, core entities/activities/agents, usage/derivation relations and Table 4; browser-rendered official Recommendation.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "messages": [
+            {
+              "id": "a",
+              "value": 3
+            },
+            {
+              "id": "b",
+              "value": 5
+            },
+            {
+              "id": "a",
+              "value": 3
+            }
+          ],
+          "initial": {}
+        },
+        "formula": "Group by id; equal repeated values collapse; any unequal values for one id produce conflict; sum unique values only when no conflict.",
+        "expected": {
+          "unique_count": 2,
+          "sum": 8,
+          "conflict": false
+        },
+        "negative_control": {
+          "values": {
+            "messages": [
+              {
+                "id": "a",
+                "value": 3
+              },
+              {
+                "id": "b",
+                "value": 5
+              },
+              {
+                "id": "a",
+                "value": 4
+              }
+            ],
+            "initial": {}
+          },
+          "expected": {
+            "unique_count": 2,
+            "sum": null,
+            "conflict": true
+          },
+          "why": "Same identity now names unequal content, so replay equivalence fails."
+        },
+        "assumptions": [
+          "Identity is stable for one logical result.",
+          "Payload equality is exact; no partial effects are applied before validation."
+        ],
+        "limits": "An authored merge rule, not an exactly-once transport, authorization or existing GA deduplication implementation."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the ordinary delivery sum and the identity-based sum. Which quantity answers the logical-result question?",
+          "expected_answer": "The delivery sum is `11`; the unique-result sum is `8` with `2` identities. The former counts notifications. Neither sum establishes independent experiments; the stated identity contract supplies only replay grouping.",
+          "decision": null
+        },
+        "2": {
+          "question": "Replay the first message again without changing its content. What should the accepted sum do?",
+          "expected_answer": "It remains `8`. Adding an equal member to an already consistent identity group changes delivery count but not the unique payload. This is the precise bounded idempotency claim being proposed.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the changed payload in the control. Can a first-writer choice silently produce a valid total?",
+          "expected_answer": "No. Identity `a` names `3` and `4`, so `conflict=true` and `sum=null`. Choosing a winner would add a conflict-resolution rule that this model does not contain.",
+          "decision": null
+        },
+        "4": {
+          "question": "Could two genuine trials both return the same payload and still count separately?",
+          "expected_answer": "Yes, if their logical identities differ. Payload equality alone cannot establish duplicate work. The trial identity and source revision must be retained before interpreting a count as evidence.",
+          "decision": null
+        },
+        "5": {
+          "question": "What source-assisted check could reject a proposed DSL merge?",
+          "expected_answer": "Build the identity groups manually and compare both cases. A total for the conflicting case, or a changed total after an equal replay, refutes this contract. No installed transport or production effect was tested.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Separate delivery count from logical identities.",
+          "decision": null
+        },
+        {
+          "criterion": "Demonstrate equal-replay invariance.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain conflict rather than silently choosing a value.",
+          "decision": null
+        },
+        {
+          "criterion": "Distinguish equal payload from shared trial identity.",
+          "decision": null
+        },
+        {
+          "criterion": "Bind the proposed semantics to inspected source and limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Write an identity-scoped merge note for fictional completion messages, then challenge an assistant to preserve the conflict.",
+        "direct_manual_baseline": "Group by id on paper, compare payloads, sum only consistent unique groups.",
+        "falsifier": "Equal replay changes the unique total or a conflicting identity receives an accepted total.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CS019",
+      "department": "computer-science",
+      "module_id": "cs-019-preserve-lexical-bindings-when-composing-fragments",
+      "title": "Preserve Lexical Bindings When Composing Fragments",
+      "source_paths": {
+        "en": "streeling/courses/computer-science/en/cs-019-preserve-lexical-bindings-when-composing-fragments.md",
+        "fr": "streeling/courses/computer-science/fr/cs-019-preserve-lexical-bindings-when-composing-fragments.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-019-preserve-lexical-bindings-when-composing-fragments.es.md"
+      },
+      "novelty_vs_prerequisites": "CS006 follows dependency stages; CS017 compares function order and guard placement. This lesson instead tracks free versus bound identifiers and alpha-renaming when composing textual fragments.",
+      "prerequisites": [
+        "cs-006-ixql-pipeline-composition"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/computer-science/en/cs-006-ixql-pipeline-composition.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "7077ccb18a5e5ac03bc3d0e0eaa89dc12e4c64ec09abcd143967da515f484117",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "code/streeling/functional-composition/vendor/GaAsync.fs",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "d07792410d218d660ae9875366ce6255a4eb5bd422ad85b9355b5deec505a641",
+          "scope": "GaAsync bind/map/apply use lexical function parameters and match branches, lines 28-69; source reading only."
+        },
+        {
+          "path_or_url": "https://docs.racket-lang.org/guide/pattern-macros.html",
+          "pin": "Racket Guide, section 16.1.2, read 2026-10-24",
+          "sha256": null,
+          "scope": "Lexical scope, introduced temporary names, and preservation of binding; official browser-rendered guide. Initial /guide/hygiene.html inaccessible via web tool; fallback read this actual page.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        },
+        {
+          "path_or_url": "https://learn.microsoft.com/dotnet/fsharp/",
+          "pin": "Microsoft F# documentation, read 2026-10-24",
+          "sha256": null,
+          "scope": "Official documentation landing, function/pattern matching/async guide entry points; no new language feature or compilation claim.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "outer_x": 10,
+          "argument": 3,
+          "local_name": "x",
+          "local_increment": 1
+        },
+        "formula": "local=argument+local_increment; lexical_result=local+outer_x; captured_result=local+local; renamed_result=local+outer_x, renaming only the bound local identifier.",
+        "expected": {
+          "lexical_result": 14,
+          "captured_result": 8,
+          "renamed_result": 14
+        },
+        "negative_control": {
+          "values": {
+            "outer_x": 4,
+            "argument": 3,
+            "local_name": "x",
+            "local_increment": 1
+          },
+          "expected": {
+            "lexical_result": 8,
+            "captured_result": 8,
+            "renamed_result": 8
+          },
+          "why": "Coincidental equal values hide capture; one agreeing execution is not proof of hygiene."
+        },
+        "assumptions": [
+          "One local binding and one intended free outer reference.",
+          "Exact integers and pure expressions; this is explanatory notation, not IXQL syntax."
+        ],
+        "limits": "No parser, macro expander or GA DSL change is supplied; capture must be reasoned about by binding identity."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the local value and the intended lexical result from the main case.",
+          "expected_answer": "The local value is `4`; the intended result is `14`. The outer contribution remains `10` because the free reference keeps its surrounding binding. The argument is not itself the outer value.",
+          "decision": null
+        },
+        "2": {
+          "question": "What answer does the stipulated captured interpretation produce, and why?",
+          "expected_answer": "It produces `8`, adding local `4` twice. The arithmetic is internally consistent but the reference denotes the wrong binding. A numeric discrepancy exposes the semantic error rather than a calculation mistake.",
+          "decision": null
+        },
+        "3": {
+          "question": "What must a valid alpha-renaming change?",
+          "expected_answer": "It changes the bound local name and only occurrences bound by that definition. It preserves the free outer reference and yields `14`. Global spelling replacement does not by itself establish this relationship.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the control. Why does agreement fail to prove safe composition?",
+          "expected_answer": "Both interpretations yield `8` when the outer value is `4`. Equal values hide different bindings. The control is an agreement trap, so structural scope analysis must accompany the main counterexample.",
+          "decision": null
+        },
+        "5": {
+          "question": "What should an assistant retain when proposing a reusable fragment?",
+          "expected_answer": "Retain its inputs, free identifiers, local binding identities and intended source context. Reject the proposal if renaming changes a free reference or if it cites this fixed table as proof of an implemented hygienic DSL.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Identify the intended free reference.",
+          "decision": null
+        },
+        {
+          "criterion": "Distinguish capture from arithmetic error.",
+          "decision": null
+        },
+        {
+          "criterion": "Apply alpha-renaming only to bound occurrences.",
+          "decision": null
+        },
+        {
+          "criterion": "Explain the deceptive equal-value control.",
+          "decision": null
+        },
+        {
+          "criterion": "Respect the source and implementation boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Annotate bindings in two explanatory pipeline fragments and critique text concatenation.",
+        "direct_manual_baseline": "Draw binding arrows and calculate the lexical and captured expressions.",
+        "falsifier": "A claimed hygienic composition changes a free reference or the unequal-value witness.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CS020",
+      "department": "computer-science",
+      "module_id": "cs-020-audit-evidence-join-multiplicity",
+      "title": "Audit Evidence Join Multiplicity",
+      "source_paths": {
+        "en": "streeling/courses/computer-science/en/cs-020-audit-evidence-join-multiplicity.md",
+        "fr": "streeling/courses/computer-science/fr/cs-020-audit-evidence-join-multiplicity.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-020-audit-evidence-join-multiplicity.es.md"
+      },
+      "novelty_vs_prerequisites": "Exact-source verdicts check matching identity; INF010 retains paired outcomes. This course counts many-to-many join rows and distinguishes row totals from distinct artifacts and reviewer independence.",
+      "prerequisites": [
+        "cs-008-compose-exact-source-review-verdicts",
+        "inf-010-keep-joint-outcomes-when-composing-verdicts"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/computer-science/en/cs-008-compose-exact-source-review-verdicts.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "fe241266735f1864f854fa1b74e17d0c0208cb068d255dce51a1e2a8bd99c0c8",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "streeling/courses/information-theory/en/inf-010-keep-joint-outcomes-when-composing-verdicts.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "4dcdc388dca745b3563e5e8c639862d20b065bbd23355f0e84895f13c59e72e2",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "englishModuleKeys Set insertion for id and file stem, lines 77-92, contrasted with authored bag join; no database run."
+        },
+        {
+          "path_or_url": "https://www.sqlite.org/lang_select.html",
+          "pin": "SQLite SELECT documentation, section 2.1, read 2026-10-24",
+          "sha256": null,
+          "scope": "Cartesian product and ON/USING row filtering, paragraphs defining joined row multiplicity; browser-rendered official text.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        },
+        {
+          "path_or_url": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+          "pin": "W3C Recommendation 2013-04-30",
+          "sha256": null,
+          "scope": "Abstract, core entities/activities/agents, usage/derivation relations and Table 4; browser-rendered official Recommendation.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "left": [
+            {
+              "artifact": "a",
+              "review": "r1"
+            },
+            {
+              "artifact": "a",
+              "review": "r2"
+            },
+            {
+              "artifact": "b",
+              "review": "r3"
+            }
+          ],
+          "right": [
+            {
+              "artifact": "a",
+              "check": "t1"
+            },
+            {
+              "artifact": "a",
+              "check": "t2"
+            },
+            {
+              "artifact": "b",
+              "check": "t3"
+            }
+          ]
+        },
+        "formula": "Inner equality join on artifact emits every matching row pair; count rows and distinct artifact keys separately.",
+        "expected": {
+          "joined_rows": 5,
+          "distinct_artifacts": 2,
+          "rows_per_artifact": {
+            "a": 4,
+            "b": 1
+          }
+        },
+        "negative_control": {
+          "values": {
+            "left": [
+              {
+                "artifact": "a",
+                "review": "r1"
+              },
+              {
+                "artifact": "a",
+                "review": "r2"
+              },
+              {
+                "artifact": "b",
+                "review": "r3"
+              }
+            ],
+            "right": [
+              {
+                "artifact": "a",
+                "check": "t1"
+              },
+              {
+                "artifact": "b",
+                "check": "t3"
+              }
+            ]
+          },
+          "expected": {
+            "joined_rows": 3,
+            "distinct_artifacts": 2,
+            "rows_per_artifact": {
+              "a": 2,
+              "b": 1
+            }
+          },
+          "why": "Removing one check changes join multiplicity without changing artifact coverage."
+        },
+        "assumptions": [
+          "Bag semantics; exact equality on retained artifact key.",
+          "Review rows and check rows are not assumed independent trials."
+        ],
+        "limits": "Artifact key is simplified; real matching also requires revision and scope. No query or production data was executed."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Enumerate how many joined rows each artifact contributes.",
+          "expected_answer": "Artifact `a` contributes `4` pairs and `b` contributes `1`, giving `5` joined rows. Each review of an artifact pairs with each check of that artifact; this is not one row per artifact.",
+          "decision": null
+        },
+        "2": {
+          "question": "How many distinct artifacts are represented, and does the joined count prove independent review?",
+          "expected_answer": "There are `2` distinct artifacts. A joined row repeats source receipts in several combinations. It supplies no new reviewer identity, independence guarantee or executed test beyond those original receipts.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the control that removes one check. What changes and what stays equal?",
+          "expected_answer": "The joined count becomes `3`, with `2` rows for `a` and `1` for `b`. Distinct artifacts remain `2`. Multiplicity changes while coverage under this key remains unchanged.",
+          "decision": null
+        },
+        "4": {
+          "question": "Why can taking a percentage over joined rows distort an artifact-level summary?",
+          "expected_answer": "An artifact with more matching receipts receives more weight. Define whether the denominator is artifacts, reviews, checks or joined pairs before aggregating. A correct row calculation cannot repair an unstated counting unit.",
+          "decision": null
+        },
+        "5": {
+          "question": "What must be added before applying this simplified key to exact-source evidence?",
+          "expected_answer": "Retain source revision and receipt scope along with artifact identity, then check the intended matching relation manually. This table does not authorize matching different revisions or promote a declaration into a runtime observation.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Enumerate all matching pairs.",
+          "decision": null
+        },
+        {
+          "criterion": "Count distinct artifact keys separately.",
+          "decision": null
+        },
+        {
+          "criterion": "Calculate control multiplicity and unchanged coverage.",
+          "decision": null
+        },
+        {
+          "criterion": "Explain implicit weighting by receipt count.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain revision, scope and runtime boundary.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare an evidence-table audit that exposes many-to-many multiplicity.",
+        "direct_manual_baseline": "Write every matching pair on paper and count rows and unique artifact keys separately.",
+        "falsifier": "A row-based report changes artifact coverage when only receipt multiplicity changes.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CYB012",
+      "department": "cybernetics",
+      "module_id": "cyb-012-test-feedback-delay-before-reusing-a-gain",
+      "title": "Test Feedback Delay Before Reusing a Gain",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-012-test-feedback-delay-before-reusing-a-gain.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-012-test-feedback-delay-before-reusing-a-gain.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-012-test-feedback-delay-before-reusing-a-gain.es.md"
+      },
+      "novelty_vs_prerequisites": "CYB008 section 4 already introduces a one-update residual delay and derives an unstable root counterexample. This course adds the complete scalar delayed-gain stability interval 0 < gain < 1, proves real, repeated and complex root cases and excluded boundaries, then compares stable and nondecaying exact traces. Finite traces illustrate the proof; they do not prove general stability.",
+      "prerequisites": [
+        "cyb-008-check-convergence-before-repeating-a-correction"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-008-check-convergence-before-repeating-a-correction.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "0a0cbc4fa4266b833ae8d5fa2bc7d9e97360df8712ff55471815ebc7c29e6702",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/pilot-value-2026-10-22/source-observations.json",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "1059ca60f45178942a810a54500202331c8200d7246a0e5be06b9b506124cbae",
+          "scope": "historical-not-calibrated and trial-not-summary observations; no new controller or probe fields retained."
+        },
+        {
+          "path_or_url": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+          "pin": "W3C Recommendation 2013-04-30",
+          "sha256": null,
+          "scope": "Abstract, core entities/activities/agents, usage/derivation relations and Table 4; browser-rendered official Recommendation.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs",
+          "pin": "GA 76efbffd5af82b46c3146957a6bd4504008eeb89",
+          "sha256": null,
+          "scope": "Browser-rendered raw source, query-result and adaptive-bounce block around gpuSmooth/bounceChanged; exposed browser lines 2739-2762. Successful query guards smoothing and bounce updates, integer step and strict dwell test. No raw-byte hash claimed; no renderer executed.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "gain": 0.5,
+          "initial_previous": 1,
+          "initial_current": 1,
+          "steps": 6,
+          "delay_updates": 1
+        },
+        "formula": "x[k+1]=x[k]-gain*x[k-1], initialized x[-1]=x[0]=1; roots solve r^2-r+gain=0.",
+        "expected": {
+          "trace_from_k0": [
+            1,
+            0.5,
+            0,
+            -0.25,
+            -0.25,
+            -0.125,
+            0
+          ],
+          "root_modulus": 0.7071067811865476,
+          "asymptotically_stable": true
+        },
+        "negative_control": {
+          "values": {
+            "gain": 1,
+            "initial_previous": 1,
+            "initial_current": 1,
+            "steps": 6,
+            "delay_updates": 1
+          },
+          "expected": {
+            "trace_from_k0": [
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              1,
+              1
+            ],
+            "root_modulus": 1,
+            "asymptotically_stable": false
+          },
+          "why": "Gain that zeros an immediate-feedback scalar error gives a nondecaying delayed cycle."
+        },
+        "assumptions": [
+          "Exact linear scalar recurrence, fixed gain, one-update delay and no saturation or noise.",
+          "Update index is dimensionless; no seconds or worker latency are inferred."
+        ],
+        "limits": "Root argument concerns this recurrence only; finite trace does not establish real fleet stability."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the first three new values using the delayed recurrence.",
+          "expected_answer": "They are `0.5`, `0` and `-0.25`. Each correction uses the previous error, including the declared initialization. Using the just-computed current value instead would silently remove the delay.",
+          "decision": null
+        },
+        "2": {
+          "question": "Explain the characteristic polynomial and the main-case root modulus.",
+          "expected_answer": "Substituting a geometric sequence gives `r^2-r+0.5=0`. The conjugate roots have modulus `sqrt(0.5)=0.7071067811865476`, below unity. This supports asymptotic convergence only for the exact fixed linear recurrence.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the control gain and retain the complete declared trace.",
+          "expected_answer": "The trace is `[1,0,-1,-1,0,1,1]`. Root modulus is `1`, so convergence for arbitrary starting errors fails. Returning to the initial pair exposes a nondecaying cycle rather than progress.",
+          "decision": null
+        },
+        "4": {
+          "question": "Would the control gain also fail for the immediate-feedback equation?",
+          "expected_answer": "No. For `x[k+1]=(1-gain)*x[k]` and `gain=1`, the next error is zero. A gain conclusion depends on observation timing; the delay changes the state transition being analyzed.",
+          "decision": null
+        },
+        "5": {
+          "question": "What actual evidence is needed before applying this lesson to an agent loop?",
+          "expected_answer": "Retain action identity, observation identity and their causal association, plus the measured delay and real update rule. Source reading and an authored update-index trace do not measure worker latency or establish production stability.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Use previous rather than current error.",
+          "decision": null
+        },
+        {
+          "criterion": "Derive the characteristic roots under exact assumptions.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain the nondecaying control trace.",
+          "decision": null
+        },
+        {
+          "criterion": "Contrast the immediate-feedback equation.",
+          "decision": null
+        },
+        {
+          "criterion": "Require actual action-observation association.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Compare immediate and delayed scalar corrections before proposing a feedback gain.",
+        "direct_manual_baseline": "Tabulate previous/current/next errors and derive polynomial roots.",
+        "falsifier": "A gain claimed to contract every delayed error produces the periodic control trace.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CYB013",
+      "department": "cybernetics",
+      "module_id": "cyb-013-bound-observation-age-before-a-control-decision",
+      "title": "Bound Observation Age Before a Control Decision",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-013-bound-observation-age-before-a-control-decision.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-013-bound-observation-age-before-a-control-decision.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-013-bound-observation-age-before-a-control-decision.es.md"
+      },
+      "novelty_vs_prerequisites": "CYB004 distinguishes observation from correction and NET008 aligns clock domains. This course propagates a declared rate bound over observation age to a decision interval, without fitting dynamics or adding a timeout.",
+      "prerequisites": [
+        "cyb-004-observe-before-correcting-a-feedback-loop",
+        "net-008-map-clock-domains-before-ordering-events"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-004-observe-before-correcting-a-feedback-loop.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "6422d5e4ca7197fa0a7f9fb855d4f11f4fac337f4fb167e94289fed90bf4a27e",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "streeling/courses/network-science/en/net-008-map-clock-domains-before-ordering-events.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "b039b58ec8eaf543b002a674b0f9abc150550c0fb1afa3096e98e77c7037a619",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/pilot-value-2026-10-22/source-observations.json",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "1059ca60f45178942a810a54500202331c8200d7246a0e5be06b9b506124cbae",
+          "scope": "trial-not-summary and new_belief_controller=false; separates reports from new observations."
+        },
+        {
+          "path_or_url": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+          "pin": "W3C Recommendation 2013-04-30",
+          "sha256": null,
+          "scope": "Abstract, core entities/activities/agents, usage/derivation relations and Table 4; browser-rendered official Recommendation.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs",
+          "pin": "GA 76efbffd5af82b46c3146957a6bd4504008eeb89",
+          "sha256": null,
+          "scope": "Browser-rendered raw source, query-result and adaptive-bounce block around gpuSmooth/bounceChanged; exposed browser lines 2739-2762. Successful query guards smoothing and bounce updates, integer step and strict dwell test. No raw-byte hash claimed; no renderer executed.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "now_seconds": 10,
+          "observed_at_seconds": 6,
+          "observed_value": 4,
+          "max_change_per_second": 0.5,
+          "upper_limit": 5
+        },
+        "formula": "age=now-observed_at; radius=max_change_per_second*age; possible current interval=[observed_value-radius,observed_value+radius]; safe iff interval upper<=upper_limit.",
+        "expected": {
+          "age_seconds": 4,
+          "radius": 2,
+          "interval": [
+            2,
+            6
+          ],
+          "safe_certified": false
+        },
+        "negative_control": {
+          "values": {
+            "now_seconds": 10,
+            "observed_at_seconds": 9,
+            "observed_value": 4,
+            "max_change_per_second": 0.5,
+            "upper_limit": 5
+          },
+          "expected": {
+            "age_seconds": 1,
+            "radius": 0.5,
+            "interval": [
+              3.5,
+              4.5
+            ],
+            "safe_certified": true
+          },
+          "why": "Same displayed value with a younger timestamp gives a smaller worst-case interval."
+        },
+        "assumptions": [
+          "Same monotonic clock; exact initial measurement.",
+          "Absolute rate bound holds throughout the elapsed interval.",
+          "Safe means at or below the authored upper limit."
+        ],
+        "limits": "Failure to certify is uncertainty, not observed violation. No rate bound or real sensor was measured."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute age and the worst-case radius for the main case.",
+          "expected_answer": "Age is `4` seconds and radius is `2` value units. The rate has units of value units per second, so multiplying by elapsed seconds gives a compatible displacement bound, not a new observed value.",
+          "decision": null
+        },
+        "2": {
+          "question": "What current interval follows, and can safety be certified?",
+          "expected_answer": "The interval is `[2,6]`. Since its upper endpoint exceeds `5`, `safe_certified=false`. The sample cannot establish the desired certificate under the declared rate bound.",
+          "decision": null
+        },
+        "3": {
+          "question": "Does this failure to certify prove a current violation?",
+          "expected_answer": "No. The constant path at `4` and paths up to `6` are both allowed. The conclusion is unresolved current safety, not an observed threshold breach or an instruction to actuate.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the fresher-observation control and compare the decision.",
+          "expected_answer": "Age becomes `1`, radius `0.5` and interval `[3.5,4.5]`. Therefore `safe_certified=true`. Identical displayed values can support different certificates because their ages differ.",
+          "decision": null
+        },
+        "5": {
+          "question": "What source and measurement fields must a real dogfood attempt retain?",
+          "expected_answer": "Keep the underlying observation identity and timestamp, reading time, clock mapping, units and evidence for the rate bound. A newly written summary is insufficient. No real sensor, bound validation or corrective action was observed here.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Calculate compatible age and rate units.",
+          "decision": null
+        },
+        {
+          "criterion": "Propagate the full reachable interval.",
+          "decision": null
+        },
+        {
+          "criterion": "Distinguish uncertified from observed unsafe.",
+          "decision": null
+        },
+        {
+          "criterion": "Recompute the younger-sample control.",
+          "decision": null
+        },
+        {
+          "criterion": "Require underlying observation rather than summary freshness.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Write a freshness-aware decision note from an old value and a stipulated rate bound.",
+        "direct_manual_baseline": "Calculate elapsed age, radius and both interval endpoints on paper.",
+        "falsifier": "A claimed safety certificate allows a reachable value above the upper limit.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CYB014",
+      "department": "cybernetics",
+      "module_id": "cyb-014-test-deadbands-with-quantized-actions",
+      "title": "Test Deadbands with Quantized Actions",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-014-test-deadbands-with-quantized-actions.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-014-test-deadbands-with-quantized-actions.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-014-test-deadbands-with-quantized-actions.es.md"
+      },
+      "novelty_vs_prerequisites": "CYB005 studies hysteresis, persistence and dwell; CYB011 prevents integrator windup. This course uses a memoryless deadband and a fixed-size actuator step to expose residual error and a deterministic two-cycle.",
+      "prerequisites": [
+        "cyb-005-stop-render-policy-flapping",
+        "cyb-011-prevent-integral-accumulation-under-saturation"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-005-stop-render-policy-flapping.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "b2d9936c3f7a35103f14cb995033654e4a177e36e43f3b2acd1cf22b45a89a1a",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-011-prevent-integral-accumulation-under-saturation.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "a73711166ecc017b610e2a8c51853bb951d9257ad5829d9432ecf5bb718114cf",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/pilot-value-2026-10-22/source-observations.json",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "1059ca60f45178942a810a54500202331c8200d7246a0e5be06b9b506124cbae",
+          "scope": "new_belief_controller=false and historical-not-calibrated; scope retained as source evidence."
+        },
+        {
+          "path_or_url": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+          "pin": "W3C Recommendation 2013-04-30",
+          "sha256": null,
+          "scope": "Abstract, core entities/activities/agents, usage/derivation relations and Table 4; browser-rendered official Recommendation.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        },
+        {
+          "path_or_url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs",
+          "pin": "GA 76efbffd5af82b46c3146957a6bd4504008eeb89",
+          "sha256": null,
+          "scope": "Browser-rendered raw source, query-result and adaptive-bounce block around gpuSmooth/bounceChanged; exposed browser lines 2739-2762. Successful query guards smoothing and bounce updates, integer step and strict dwell test. No raw-byte hash claimed; no renderer executed.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "initial_error": 0.6,
+          "action_step": 1,
+          "deadband": 0.5,
+          "updates": 4
+        },
+        "formula": "If abs(x)>deadband, x_next=x-action_step*sign(x); otherwise x_next=x. Equality retains the state.",
+        "expected": {
+          "trace": [
+            0.6,
+            -0.4,
+            -0.4,
+            -0.4,
+            -0.4
+          ],
+          "final_error": -0.4,
+          "action_count": 1
+        },
+        "negative_control": {
+          "values": {
+            "initial_error": 0.6,
+            "action_step": 1,
+            "deadband": 0.3,
+            "updates": 4
+          },
+          "expected": {
+            "trace": [
+              0.6,
+              -0.4,
+              0.6,
+              -0.4,
+              0.6
+            ],
+            "final_error": 0.6,
+            "action_count": 4
+          },
+          "why": "A narrower deadband excludes both quantized residuals and sustains alternating action."
+        },
+        "assumptions": [
+          "Exact decimal arithmetic and instantaneous fixed-size actions.",
+          "No noise, plant lag, integral term or actuator saturation."
+        ],
+        "limits": "Deadband reduces action in this example at the cost of nonzero residual; no production threshold or stability guarantee follows."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Apply the first action and explain the sign change.",
+          "expected_answer": "Starting at `0.6`, subtracting step `1` gives `-0.4`. The sign change results from an action larger than the error. It is consistent with the declared quantized actuator and is not a rounding artifact.",
+          "decision": null
+        },
+        "2": {
+          "question": "Complete the main trace and count actions.",
+          "expected_answer": "The trace is `[0.6,-0.4,-0.4,-0.4,-0.4]` and action count is `1`. Once inside deadband `0.5`, the rule retains the state. It does not drive the remaining error to zero.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the narrower control and explain its alternating behavior.",
+          "expected_answer": "With deadband `0.3`, the trace is `[0.6,-0.4,0.6,-0.4,0.6]` and action count is `4`. Both residual magnitudes exceed the band, so the fixed step keeps crossing the target.",
+          "decision": null
+        },
+        "4": {
+          "question": "Does the deadband have the same memory as the prerequisite’s hysteresis?",
+          "expected_answer": "No. This decision depends only on the present error magnitude and the fixed threshold. It contains no retained mode, persistence count or dwell time. Treating those mechanisms as synonyms would change the transition contract.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would make the quieter main trace useful to a real project?",
+          "expected_answer": "A stated acceptable residual, action cost, measured actuator behavior and a retained comparison task are required. Reject a recommendation that calls the nonzero residual exact convergence or adopts the authored band without project evidence.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Calculate the fixed-step overshoot.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain nonzero residual and action count.",
+          "decision": null
+        },
+        {
+          "criterion": "Expose the narrower-band two-cycle.",
+          "decision": null
+        },
+        {
+          "criterion": "Distinguish deadband from stateful hysteresis.",
+          "decision": null
+        },
+        {
+          "criterion": "Require task-specific residual tolerance.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Compare quantized correction policies using residual and action count.",
+        "direct_manual_baseline": "Trace the strict threshold and full-size action by hand.",
+        "falsifier": "A claim of zero-error convergence leaves the retained nonzero residual or periodic control.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "COG012",
+      "department": "cognitive-science",
+      "module_id": "cog-012-separate-review-alert-hit-rate-from-response-bias",
+      "title": "Separate Review Alert Hit Rate from Response Bias",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-012-separate-review-alert-hit-rate-from-response-bias.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-012-separate-review-alert-hit-rate-from-response-bias.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-012-separate-review-alert-hit-rate-from-response-bias.es.md"
+      },
+      "novelty_vs_prerequisites": "COG011 measures paired reviewer agreement without a correctness oracle. This lesson stipulates an external defect key and separates hit and false-alarm rates from alert propensity; it does not estimate Gaussian d-prime or cognition.",
+      "prerequisites": [
+        "cog-011-measure-rubric-disagreement-before-adjudication"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/cognitive-science/en/cog-011-measure-rubric-disagreement-before-adjudication.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "4a5c0fec641fa1c12758f2dcdac7eaab996bbbbc3feb716f7c130030e6761786",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "voicing confidence is clamped retrieval score; learner_answer_in_selected_data=false; no new rater observation."
+        },
+        {
+          "path_or_url": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html",
+          "pin": "scikit-learn 1.9.1 documentation, read 2026-10-24",
+          "sha256": null,
+          "scope": "Definition C[i,j] with true class in rows and predicted class in columns; binary TN/FN/TP/FP mapping. Library not executed.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "true_positive": 8,
+          "false_negative": 2,
+          "false_positive": 4,
+          "true_negative": 6
+        },
+        "formula": "hit=TP/(TP+FN); false_alarm=FP/(FP+TN); alert=(TP+FP)/N; accuracy=(TP+TN)/N; separation=hit-false_alarm.",
+        "expected": {
+          "hit_rate": 0.8,
+          "false_alarm_rate": 0.4,
+          "alert_rate": 0.6,
+          "accuracy": 0.7,
+          "separation": 0.4
+        },
+        "negative_control": {
+          "values": {
+            "true_positive": 10,
+            "false_negative": 0,
+            "false_positive": 10,
+            "true_negative": 0
+          },
+          "expected": {
+            "hit_rate": 1,
+            "false_alarm_rate": 1,
+            "alert_rate": 1,
+            "accuracy": 0.5,
+            "separation": 0
+          },
+          "why": "Alerting on every item maximizes hits while destroying discrimination under this rate contrast."
+        },
+        "assumptions": [
+          "Independent external defect key is stipulated correct.",
+          "Positive means flagging a defect; both true classes are nonempty."
+        ],
+        "limits": "Authored confusion table, not a human sensitivity estimate or evidence of psychological response bias; no signal-distribution model is assumed."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate the hit and false-alarm rates with their own denominators.",
+          "expected_answer": "Hit rate is `8/10=0.8`; false-alarm rate is `4/10=0.4`. Both condition on actual status. Dividing both counts by the entire collection would answer a different joint-frequency question.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute alert frequency, accuracy and the declared separation measure.",
+          "expected_answer": "They are `0.6`, `0.7` and `0.4`. Alert frequency counts decisions to flag; accuracy counts matches to the key; separation contrasts conditional rates. None is a measured psychological trait.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the always-alert control. What happens to the apparently impressive hit rate?",
+          "expected_answer": "Hit rate becomes `1`, but false-alarm rate also becomes `1`, accuracy is `0.5` and separation is `0`. Perfect hits alone do not demonstrate discrimination when all clean items are flagged.",
+          "decision": null
+        },
+        "4": {
+          "question": "Would the prerequisite’s rater agreement table supply the same conclusion?",
+          "expected_answer": "No. Agreement needs paired rater labels, while this calculation needs an external correctness key. Two raters can agree on the wrong alert, and an adjudicated key can itself require independent validation.",
+          "decision": null
+        },
+        "5": {
+          "question": "What must a real review study retain before discussing response bias?",
+          "expected_answer": "Retain defect status, original alerts, item mix, key construction, task instructions and any assistance. These rates motivate a response-pattern question; they do not diagnose cognition or establish a production improvement from invented counts.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Use true-status conditional denominators.",
+          "decision": null
+        },
+        {
+          "criterion": "Separate alert propensity, accuracy and rate contrast.",
+          "decision": null
+        },
+        {
+          "criterion": "Explain always-alert control.",
+          "decision": null
+        },
+        {
+          "criterion": "Distinguish external key from rater agreement.",
+          "decision": null
+        },
+        {
+          "criterion": "Avoid psychological or runtime inference.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Audit a fictional review assistant using defect and clean-item responses.",
+        "direct_manual_baseline": "Fill the confusion matrix and calculate conditional rates by hand.",
+        "falsifier": "An allegedly discriminating rule flags every item and has zero hit-minus-false-alarm separation.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "COG013",
+      "department": "cognitive-science",
+      "module_id": "cog-013-retain-catch-trial-misses-in-assisted-review",
+      "title": "Retain Catch Trial Misses in Assisted Review",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-013-retain-catch-trial-misses-in-assisted-review.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-013-retain-catch-trial-misses-in-assisted-review.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-013-retain-catch-trial-misses-in-assisted-review.es.md"
+      },
+      "novelty_vs_prerequisites": "COG007 separates aided and unaided success and COG009 counterbalances order. This lesson pairs intentionally wrong assistant suggestions on catch items and retains discordant missed-defect identities rather than only aggregate success.",
+      "prerequisites": [
+        "cog-007-separate-unaided-recall-from-assisted-success",
+        "cog-009-counterbalance-practice-order-before-comparing-interfaces"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/cognitive-science/en/cog-007-separate-unaided-recall-from-assisted-success.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "cc28d8be51e0d2c7ab4ad9d8f2cd14da93b148a14904f12e742e6d9024810f54",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "streeling/courses/cognitive-science/en/cog-009-counterbalance-practice-order-before-comparing-interfaces.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "6156f1beacc64b6863a18c3b07834869920390db8e55850c346475ff1d5fb4a0",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "learner_answer_events_shown=false and implemented_quiz_or_study=null, not a learning dataset."
+        },
+        {
+          "path_or_url": "https://www.itl.nist.gov/div898/handbook/pri/section3/pri332.htm",
+          "pin": "NIST/SEMATECH e-Handbook section 5.3.3.2, read 2026-10-24",
+          "sha256": null,
+          "scope": "Nuisance factors, homogeneous blocks, within-block comparisons and randomization; browser-rendered official handbook.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "item_ids": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "manual_miss": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "assisted_miss": [
+            1,
+            1,
+            1,
+            0
+          ]
+        },
+        "formula": "Miss=1 means accepting the planted wrong suggestion; miss_rate=sum(miss)/n; paired excess=(assisted misses-manual misses)/n; count discordant paired items.",
+        "expected": {
+          "manual_miss_rate": 0.25,
+          "assisted_miss_rate": 0.75,
+          "paired_excess": 0.5,
+          "assisted_only_misses": [
+            "b",
+            "c"
+          ],
+          "manual_only_misses": []
+        },
+        "negative_control": {
+          "values": {
+            "item_ids": [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            "manual_miss": [
+              1,
+              0,
+              0,
+              0
+            ],
+            "assisted_miss": [
+              1,
+              0,
+              0,
+              0
+            ]
+          },
+          "expected": {
+            "manual_miss_rate": 0.25,
+            "assisted_miss_rate": 0.25,
+            "paired_excess": 0,
+            "assisted_only_misses": [],
+            "manual_only_misses": []
+          },
+          "why": "Equal paired outcomes remove the excess without manufacturing independent human observations."
+        },
+        "assumptions": [
+          "Same stipulated item key and paired item identities.",
+          "Vectors are authored; no causal effect of assistance is inferred."
+        ],
+        "limits": "Catch items assess these planted errors; tiny paired counts and unobserved order cannot establish automation complacency in users."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute both miss rates under the stated miss definition.",
+          "expected_answer": "The manual miss rate is `0.25`; the assisted miss rate is `0.75`. A miss records acceptance of the planted wrong answer. These are authored response vectors, not observations of real reviewers.",
+          "decision": null
+        },
+        "2": {
+          "question": "Calculate paired excess and name the discordant items.",
+          "expected_answer": "Paired excess is `0.5`. Items `b` and `c` are assisted-only misses, while there are no manual-only misses. Keep their identities so the actual reasoning could later be inspected.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the matched-vector control. Does a copied vector become another reviewer?",
+          "expected_answer": "Both miss rates become `0.25` and excess becomes `0`. There are no discordant items. Copying is a mathematical control; it does not create independent review or a real second condition.",
+          "decision": null
+        },
+        "4": {
+          "question": "Can the main difference prove that assistance causes complacency?",
+          "expected_answer": "No. The data are invented, and order, familiarity, item equivalence and assignment have not been observed. The calculation identifies a possible oversight signal without diagnosing its psychological cause.",
+          "decision": null
+        },
+        "5": {
+          "question": "What must a real dogfood record preserve before a correction is revealed?",
+          "expected_answer": "Retain the original suggestion, keyed error, reviewer answer, item identity, mode, order and other assistance. Keep the initial miss before the corrected response; replacing it with the final answer would erase the event being evaluated.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Use the planted-error miss definition.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain discordant item identities.",
+          "decision": null
+        },
+        {
+          "criterion": "Interpret copied-vector control without independence claims.",
+          "decision": null
+        },
+        {
+          "criterion": "Reject causal psychological inference.",
+          "decision": null
+        },
+        {
+          "criterion": "Preserve original responses before correction.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare paired catch-item oversight accounting before an assisted review pilot.",
+        "direct_manual_baseline": "Pair miss indicators by item and list discordances manually.",
+        "falsifier": "A completion-based success claim conceals retained assisted-only missed errors.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "COG014",
+      "department": "cognitive-science",
+      "module_id": "cog-014-report-risk-and-coverage-when-an-agent-abstains",
+      "title": "Report Risk and Coverage When an Agent Abstains",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-014-report-risk-and-coverage-when-an-agent-abstains.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-014-report-risk-and-coverage-when-an-agent-abstains.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-014-report-risk-and-coverage-when-an-agent-abstains.es.md"
+      },
+      "novelty_vs_prerequisites": "COG003 scores probability calibration with Brier loss. This course instead evaluates which answers are emitted under a threshold, conditional error among emitted answers, and abstention coverage; confidence need not be calibrated.",
+      "prerequisites": [
+        "cog-003-calibrating-fretboard-confidence"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/cognitive-science/en/cog-003-calibrating-fretboard-confidence.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "9610552ea1f8bf2727e820232fa1ad17f9914feb229b4f275173d5b861561e16",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "confidence_is_clamped_top_retrieval_score=true, scores_are_learner_retention=false, selected learner answer absence."
+        },
+        {
+          "path_or_url": "https://arxiv.org/abs/1705.08500",
+          "pin": "Geifman and El-Yaniv, 1705.08500v2, 2017-06-01",
+          "sha256": null,
+          "scope": "Author abstract on selective prediction trading coverage for risk; abstract only, no theorem or numerical guarantee borrowed.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "confidence": [
+            0.95,
+            0.9,
+            0.8,
+            0.6,
+            0.4
+          ],
+          "correct": [
+            1,
+            0,
+            1,
+            0,
+            1
+          ],
+          "threshold": 0.8
+        },
+        "formula": "Accept when confidence>=threshold; coverage=accepted/n; risk=accepted_errors/accepted, null if accepted=0.",
+        "expected": {
+          "accepted_indices": [
+            0,
+            1,
+            2
+          ],
+          "accepted": 3,
+          "errors": 1,
+          "coverage": 0.6,
+          "risk": 0.3333333333333333
+        },
+        "negative_control": {
+          "values": {
+            "confidence": [
+              0.95,
+              0.9,
+              0.8,
+              0.6,
+              0.4
+            ],
+            "correct": [
+              1,
+              0,
+              1,
+              0,
+              1
+            ],
+            "threshold": 0.99
+          },
+          "expected": {
+            "accepted_indices": [],
+            "accepted": 0,
+            "errors": 0,
+            "coverage": 0,
+            "risk": null
+          },
+          "why": "Abstaining on everything supplies no conditional error estimate, rather than perfect answers."
+        },
+        "assumptions": [
+          "Correctness key is stipulated external and fixed.",
+          "Equality at threshold is accepted; original item order retained."
+        ],
+        "limits": "Finite authored risk/coverage point, not calibrated confidence, statistical risk guarantee or measured GA use."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Which indices are accepted at the declared threshold, including its boundary?",
+          "expected_answer": "Indices `[0,1,2]` are accepted. There are `3` accepted answers and `1` error. The item at confidence `0.8` is included because the comparison uses greater than or equal, not strict greater than.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute coverage and conditional risk for the main case.",
+          "expected_answer": "Coverage is `0.6`; risk is `1/3=0.3333333333333333`. The former uses all eligible items, while the latter uses only emitted answers. Keep the denominators explicit in a status report.",
+          "decision": null
+        },
+        "3": {
+          "question": "If the threshold is lowered to `0.4`, what happens on this exact table?",
+          "expected_answer": "All `5` items are accepted, coverage is `1` and risk is `2/5=0.4`. This comparison concerns one fixed ranking, not a universal monotonic law for empirical conditional risk.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the all-abstain control. Is its risk zero?",
+          "expected_answer": "No. Coverage is `0` and risk is `null` because no answers were emitted. An empty conditional denominator supplies no error estimate; calling it perfect performance would reward withholding every answer.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would justify a real threshold recommendation?",
+          "expected_answer": "Retain the eligible task set, actual correctness key, emitted and withheld answers, assistance and the cost of abstention. Compare with the manual baseline. Neither a retrieval score nor these invented vectors demonstrates learner ability or production risk guarantees.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Apply inclusive selection threshold.",
+          "decision": null
+        },
+        {
+          "criterion": "Calculate risk and coverage with distinct denominators.",
+          "decision": null
+        },
+        {
+          "criterion": "Compare the lower threshold without a universal monotonicity claim.",
+          "decision": null
+        },
+        {
+          "criterion": "Keep empty-denominator risk null.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain abstentions and actual key in a future task.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Compare a confidence-filtered answer policy with full manual task coverage.",
+        "direct_manual_baseline": "Mark accepted rows and count accepted errors and all eligible items.",
+        "falsifier": "A claim of perfect performance uses empty coverage or omits withheld eligible tasks.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "INF013",
+      "department": "information-theory",
+      "module_id": "inf-013-value-an-evidence-probe-by-expected-information",
+      "title": "Value an Evidence Probe by Expected Information",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-013-value-an-evidence-probe-by-expected-information.md",
+        "fr": "streeling/courses/information-theory/fr/inf-013-value-an-evidence-probe-by-expected-information.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-013-value-an-evidence-probe-by-expected-information.es.md"
+      },
+      "novelty_vs_prerequisites": "COG008 finds probes separating response models; INF001 introduces entropy. This course computes expected entropy after a deterministic probe partition and distinguishes information gain from decision value and observed outcome.",
+      "prerequisites": [
+        "inf-001-entropy-of-governance",
+        "cog-008-choose-probes-that-distinguish-reasoning-models"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/information-theory/en/inf-001-entropy-of-governance.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "909cc7900568651d75287a168187e9465152ca1c295799929fa71ddbf8bb5dd5",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "streeling/courses/cognitive-science/en/cog-008-choose-probes-that-distinguish-reasoning-models.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "bbf93d2068d19a69c8326a30ce2772d56d8690efb1abb0ad48d0a85ad7a0444e",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/pilot-value-2026-10-22/source-observations.json",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "1059ca60f45178942a810a54500202331c8200d7246a0e5be06b9b506124cbae",
+          "scope": "historical-not-calibrated and trial-not-summary prevent deriving authored prior from historical report repetition."
+        },
+        {
+          "path_or_url": "https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf",
+          "pin": "Shannon 1948 corrected reprint, section 6",
+          "sha256": null,
+          "scope": "Entropy definition and equally likely alternatives in section 6; browser-extracted original paper PDF. Cornell /courses/cs722/2000sp/shannon.pdf inspected but is a student presentation, excluded as original-paper support.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "hypotheses": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "probabilities": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "probe_outcomes": [
+            "left",
+            "left",
+            "right",
+            "right"
+          ]
+        },
+        "formula": "H=-sum(p*log2(p)); expected posterior entropy=sum(P(outcome)*H(hypothesis|outcome)); information gain=prior entropy-expected posterior entropy.",
+        "expected": {
+          "prior_bits": 2,
+          "expected_posterior_bits": 1,
+          "information_gain_bits": 1,
+          "outcome_probabilities": {
+            "left": 0.5,
+            "right": 0.5
+          }
+        },
+        "negative_control": {
+          "values": {
+            "hypotheses": [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            "probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ],
+            "probe_outcomes": [
+              "same",
+              "same",
+              "same",
+              "same"
+            ]
+          },
+          "expected": {
+            "prior_bits": 2,
+            "expected_posterior_bits": 2,
+            "information_gain_bits": 0,
+            "outcome_probabilities": {
+              "same": 1
+            }
+          },
+          "why": "An outcome shared by all hypotheses cannot reduce uncertainty."
+        },
+        "assumptions": [
+          "Prior probabilities are authored and sum to unity.",
+          "Each hypothesis deterministically predicts one error-free probe outcome."
+        ],
+        "limits": "Bits quantify this model uncertainty, not task utility, truth, time savings or observed experimental evidence."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the prior entropy of the authored alternatives.",
+          "expected_answer": "The prior entropy is `2` bits. Each alternative has probability `0.25`, and the entropy equals `log2(4)`. This is uncertainty inside the stipulated model, not uncertainty measured from actual agent failures.",
+          "decision": null
+        },
+        "2": {
+          "question": "Calculate outcome probabilities and expected posterior entropy.",
+          "expected_answer": "The outcomes `left` and `right` each have probability `0.5`. Each leaves two equally likely alternatives with entropy `1` bit, so the expected posterior entropy is `1` bit.",
+          "decision": null
+        },
+        "3": {
+          "question": "What is the main information gain, and when is that expectation defined?",
+          "expected_answer": "It is `2-1=1` bit, defined before the outcome is observed. An actual outcome would select a particular posterior group; its probability and identity must be retained rather than replaced by the expectation.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the constant-output control and explain the result.",
+          "expected_answer": "The only outcome has probability `1`, posterior entropy stays `2` bits and information gain is `0`. The probe cannot distinguish any hypothesis despite producing an output message.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does the most informative probe necessarily produce the best project decision?",
+          "expected_answer": "No. Probe cost, decision consequences, model misspecification and noisy outcomes can matter. These quantities are not supplied here. Retain the manual partition and reject an assistant claim that authored information gain proves a real investigation succeeded.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Compute prior entropy in declared bits.",
+          "decision": null
+        },
+        {
+          "criterion": "Renormalize within probe outcomes.",
+          "decision": null
+        },
+        {
+          "criterion": "Keep pre-observation expectation distinct from actual result.",
+          "decision": null
+        },
+        {
+          "criterion": "Explain zero-information control.",
+          "decision": null
+        },
+        {
+          "criterion": "Separate information gain from decision utility.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Choose between an authored partitioning probe and a constant report.",
+        "direct_manual_baseline": "Draw hypothesis groups and calculate prior and posterior entropies manually.",
+        "falsifier": "An allegedly informative probe produces the same outcome under every retained hypothesis.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "INF014",
+      "department": "information-theory",
+      "module_id": "inf-014-retain-message-codebook-versions",
+      "title": "Retain Message Codebook Versions",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-014-retain-message-codebook-versions.md",
+        "fr": "streeling/courses/information-theory/fr/inf-014-retain-message-codebook-versions.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-014-retain-message-codebook-versions.es.md"
+      },
+      "novelty_vs_prerequisites": "INF004 studies omitted handoff fields and INF012 event order. This course demonstrates a bijective but version-dependent codebook: perfect symbol transport can invert meaning when the decoder version is lost.",
+      "prerequisites": [
+        "inf-004-information-loss-in-agent-handoffs"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/information-theory/en/inf-004-information-loss-in-agent-handoffs.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "d8e755eae6b24d26cdfbebeaa3a3b6e347f06fa2659f21cc200801ea2c5c3b44",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule metadata returned separately from body, lines 10-42; representation analogy only, not binary message implementation."
+        },
+        {
+          "path_or_url": "https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf",
+          "pin": "Shannon 1948 corrected reprint, section 6",
+          "sha256": null,
+          "scope": "Entropy definition and equally likely alternatives in section 6; browser-extracted original paper PDF. Cornell /courses/cs722/2000sp/shannon.pdf inspected but is a student presentation, excluded as original-paper support.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        },
+        {
+          "path_or_url": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+          "pin": "W3C Recommendation 2013-04-30",
+          "sha256": null,
+          "scope": "Abstract, core entities/activities/agents, usage/derivation relations and Table 4; browser-rendered official Recommendation.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "codebooks": {
+            "v1": {
+              "0": "pass",
+              "1": "fail"
+            },
+            "v2": {
+              "0": "fail",
+              "1": "pass"
+            }
+          },
+          "sent_version": "v2",
+          "decoded_version": "v1",
+          "tags": [
+            0,
+            1,
+            1
+          ]
+        },
+        "formula": "Decode each tag by its versioned codebook; compare intended versus receiver labels positionwise.",
+        "expected": {
+          "intended": [
+            "fail",
+            "pass",
+            "pass"
+          ],
+          "received": [
+            "pass",
+            "fail",
+            "fail"
+          ],
+          "mismatches": 3
+        },
+        "negative_control": {
+          "values": {
+            "codebooks": {
+              "v1": {
+                "0": "pass",
+                "1": "fail"
+              },
+              "v2": {
+                "0": "fail",
+                "1": "pass"
+              }
+            },
+            "sent_version": "v2",
+            "decoded_version": "v2",
+            "tags": [
+              0,
+              1,
+              1
+            ]
+          },
+          "expected": {
+            "intended": [
+              "fail",
+              "pass",
+              "pass"
+            ],
+            "received": [
+              "fail",
+              "pass",
+              "pass"
+            ],
+            "mismatches": 0
+          },
+          "why": "Correct decoder version restores intended labels without changing transported tags."
+        },
+        "assumptions": [
+          "Codebooks are exact bijections on supplied symbols.",
+          "Tags arrive in order without channel errors; version identity is trusted for this case."
+        ],
+        "limits": "No real wire format or production protocol change; transport fidelity alone does not certify semantic agreement."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Decode the sent tags using the sender’s version.",
+          "expected_answer": "The intended labels are `[fail,pass,pass]` under `v2`. The mapping, not the visual size of a tag, determines its meaning. Keep that version attached before comparing any verdict counts.",
+          "decision": null
+        },
+        "2": {
+          "question": "Decode the same tags using the receiver’s version and count disagreements.",
+          "expected_answer": "The receiver obtains `[pass,fail,fail]` under `v1`. There are `3` positional mismatches. The tags themselves are unchanged, so byte integrity alone cannot distinguish these interpretations.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the corrected-version control. What repairs the disagreement?",
+          "expected_answer": "Using `v2` at both ends produces `[fail,pass,pass]` and `0` mismatches. No transported tag changes. Agreement is restored by selecting the shared codebook, not by changing the outcomes after decoding.",
+          "decision": null
+        },
+        "4": {
+          "question": "Can a hash of the tag sequence prove semantic compatibility?",
+          "expected_answer": "No. Equal bytes can be interpreted by different mappings. A compatibility claim must retain the relevant codebook identity and its association with the message, not merely the payload hash.",
+          "decision": null
+        },
+        "5": {
+          "question": "How should an assistant report an unknown codebook version?",
+          "expected_answer": "Retain the original tags and mark decoding unresolved. Do not choose a mapping because its verdict seems plausible. A future project change needs an explicit compatibility contract and real tests beyond this authored correspondence table.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Decode by explicit version.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain positional mismatches.",
+          "decision": null
+        },
+        {
+          "criterion": "Repair context without altering tags.",
+          "decision": null
+        },
+        {
+          "criterion": "Distinguish byte integrity from meaning.",
+          "decision": null
+        },
+        {
+          "criterion": "Leave unknown version unresolved.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Audit a compact verdict handoff with mismatched codebook versions.",
+        "direct_manual_baseline": "Decode unchanged tags twice using the two written dictionaries.",
+        "falsifier": "A compatibility claim accepts identical tags that decode to different intended labels.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "INF015",
+      "department": "information-theory",
+      "module_id": "inf-015-weight-sampled-telemetry-before-summarizing-failures",
+      "title": "Weight Sampled Telemetry Before Summarizing Failures",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-015-weight-sampled-telemetry-before-summarizing-failures.md",
+        "fr": "streeling/courses/information-theory/fr/inf-015-weight-sampled-telemetry-before-summarizing-failures.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-015-weight-sampled-telemetry-before-summarizing-failures.es.md"
+      },
+      "novelty_vs_prerequisites": "INF011 distinguishes size from preserved information; PM009 distinguishes cohort and event denominators. This lesson restores declared unequal sampling weights and separates adjusted counts, a ratio estimate, and unobserved population truth.",
+      "prerequisites": [
+        "inf-011-separate-compressed-size-from-preserved-information",
+        "pm-009-separate-release-adoption-from-artifact-downloads"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/information-theory/en/inf-011-separate-compressed-size-from-preserved-information.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "0806cd078a98d41564a9d4064c5e8b765554ace81823f43e64c4e67099b3c4dc",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "streeling/courses/product-management/en/pm-009-separate-release-adoption-from-artifact-downloads.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "d022e540be651daa1a413f0110333b6cfbf56e53033cfa26d29119d366963d7e",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "rag query fields include latency/results but scores_are_learner_retention=false; no sampled production telemetry read."
+        },
+        {
+          "path_or_url": "https://opentelemetry.io/docs/specs/otel/trace/tracestate-handling/",
+          "pin": "OpenTelemetry specification 1.62.0 displayed, read 2026-10-24",
+          "sha256": null,
+          "scope": "Sampling threshold, effective probability and adjusted count as inverse probability; browser-rendered official specification.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "sampled_failures": [
+            1,
+            0,
+            0
+          ],
+          "inclusion_probabilities": [
+            0.5,
+            0.25,
+            0.25
+          ]
+        },
+        "formula": "weight_i=1/p_i; adjusted_total=sum(weight_i); adjusted_failures=sum(weight_i*failure_i); ratio=adjusted_failures/adjusted_total; raw_rate=sum(failure_i)/n.",
+        "expected": {
+          "weights": [
+            2,
+            4,
+            4
+          ],
+          "adjusted_total": 10,
+          "adjusted_failures": 2,
+          "weighted_ratio": 0.2,
+          "raw_rate": 0.3333333333333333
+        },
+        "negative_control": {
+          "values": {
+            "sampled_failures": [
+              1,
+              0,
+              0
+            ],
+            "inclusion_probabilities": [
+              1,
+              1,
+              1
+            ]
+          },
+          "expected": {
+            "weights": [
+              1,
+              1,
+              1
+            ],
+            "adjusted_total": 3,
+            "adjusted_failures": 1,
+            "weighted_ratio": 0.3333333333333333,
+            "raw_rate": 0.3333333333333333
+          },
+          "why": "Equal inclusion weights make the weighted ratio equal the raw sample rate."
+        },
+        "assumptions": [
+          "Positive known inclusion probabilities correspond to each retained event.",
+          "Failure indicators refer to one declared event unit."
+        ],
+        "limits": "Adjusted counts and ratio are estimates; this finite ratio is not promised unbiased and does not reveal exact population failures."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate the weight assigned to each sampled event.",
+          "expected_answer": "The weights are `[2,4,4]`, obtained from reciprocal inclusion probabilities. They are adjusted event counts, not milliseconds, confidence values or copies of actual observed population events.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute adjusted total, adjusted failures and their ratio.",
+          "expected_answer": "Adjusted total is `10`, adjusted failures `2` and weighted ratio `0.2`. Only the first event contributes to the failure total. The adjusted values are estimates under the assumed sampling design.",
+          "decision": null
+        },
+        "3": {
+          "question": "Compare the raw sample failure rate and explain the discrepancy.",
+          "expected_answer": "The raw rate is `1/3=0.3333333333333333`. It assigns every sampled row equal weight. The weighted ratio gives more contribution to the lower-probability clean events, so it differs on this authored sample.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the equal-probability control.",
+          "expected_answer": "Weights become `[1,1,1]`, adjusted total `3`, failures `1` and weighted ratio `0.3333333333333333`, equal to the raw rate. Equal positive weights cancel in this ratio.",
+          "decision": null
+        },
+        "5": {
+          "question": "Can the weighted ratio be reported as the exact production failure rate?",
+          "expected_answer": "No. The population is unobserved, probabilities are stipulated and finite-sample uncertainty remains. A missing probability leaves the calculation unresolved. Preserve the sampling metadata and avoid claiming that a ratio of estimated totals is automatically unbiased.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Compute reciprocal positive inclusion weights.",
+          "decision": null
+        },
+        {
+          "criterion": "Keep adjusted counts distinct from observations.",
+          "decision": null
+        },
+        {
+          "criterion": "Explain weighted versus raw denominator.",
+          "decision": null
+        },
+        {
+          "criterion": "Replay equal-weight control.",
+          "decision": null
+        },
+        {
+          "criterion": "Avoid exact population or unbiased-ratio claim.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a sampling-aware failure summary and critique a raw-row headline.",
+        "direct_manual_baseline": "Write event probability, reciprocal weight and failure contribution columns.",
+        "falsifier": "A raw-row claim changes under unequal inclusion weights while hiding those probabilities.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "NET012",
+      "department": "network-science",
+      "module_id": "net-012-account-for-shared-dependencies-in-redundant-paths",
+      "title": "Account for Shared Dependencies in Redundant Paths",
+      "source_paths": {
+        "en": "streeling/courses/network-science/en/net-012-account-for-shared-dependencies-in-redundant-paths.md",
+        "fr": "streeling/courses/network-science/fr/net-012-account-for-shared-dependencies-in-redundant-paths.fr.md",
+        "es": "streeling/courses/network-science/es/net-012-account-for-shared-dependencies-in-redundant-paths.es.md"
+      },
+      "novelty_vs_prerequisites": "NET003 counts declared surviving worker routes under a mode cut. This course adds an authored probability model with conditionally independent branches sharing one required dependency; route count alone does not imply independent reliability.",
+      "prerequisites": [
+        "net-003-worker-lane-coverage-and-fragility"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/network-science/en/net-003-worker-lane-coverage-and-fragility.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "ba119428e8a1974d2e82a8812b66d8e3ff5e1112cb2212043735f03710dbc91d",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "code/streeling/functional-composition/vendor/GaAsync.fs",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "d07792410d218d660ae9875366ce6255a4eb5bd422ad85b9355b5deec505a641",
+          "scope": "zip and fanOutAll define parallel computations and result collection, lines 70-96; no reliability claim in source."
+        },
+        {
+          "path_or_url": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+          "pin": "W3C Recommendation 2013-04-30",
+          "sha256": null,
+          "scope": "Abstract, core entities/activities/agents, usage/derivation relations and Table 4; browser-rendered official Recommendation.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        },
+        {
+          "path_or_url": "https://learn.microsoft.com/dotnet/fsharp/",
+          "pin": "Microsoft F# documentation, read 2026-10-24",
+          "sha256": null,
+          "scope": "Official documentation landing, function/pattern matching/async guide entry points; no new language feature or compilation claim.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "shared_success": 0.95,
+          "branch_a_success_given_shared": 0.8,
+          "branch_b_success_given_shared": 0.9
+        },
+        "formula": "success=shared_success*(1-(1-a)*(1-b)); marginal_a=shared_success*a; marginal_b=shared_success*b; naive_independent=1-(1-marginal_a)*(1-marginal_b).",
+        "expected": {
+          "conditional_branch_union": 0.98,
+          "success": 0.931,
+          "marginal_a": 0.76,
+          "marginal_b": 0.855,
+          "naive_independent": 0.9652
+        },
+        "negative_control": {
+          "values": {
+            "shared_success": 0.5,
+            "branch_a_success_given_shared": 0.8,
+            "branch_b_success_given_shared": 0.9
+          },
+          "expected": {
+            "conditional_branch_union": 0.98,
+            "success": 0.49,
+            "marginal_a": 0.4,
+            "marginal_b": 0.45,
+            "naive_independent": 0.67
+          },
+          "why": "A weaker shared dependency worsens both paths together; independent marginal multiplication overstates the union."
+        },
+        "assumptions": [
+          "Branch successes independent conditional on the shared dependency succeeding.",
+          "Both paths fail if the shared dependency fails.",
+          "Authored probabilities refer to the same window and operation."
+        ],
+        "limits": "No live provider availability measured; correlation outside this conditional model may differ."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the conditional probability that at least one branch succeeds.",
+          "expected_answer": "It is `1-(1-0.8)*(1-0.9)=0.98`. The independence premise applies only after conditioning on the shared dependency succeeding. Without that condition the path events share a common cause of failure.",
+          "decision": null
+        },
+        "2": {
+          "question": "Calculate total success under the main model.",
+          "expected_answer": "It is `0.95*0.98=0.931`. The shared prerequisite must succeed as well as the branch union. The result cannot exceed the shared success probability under these assumptions.",
+          "decision": null
+        },
+        "3": {
+          "question": "Calculate the misleading independent-marginal shortcut.",
+          "expected_answer": "Marginals are `0.76` and `0.855`; the shortcut gives `0.9652`. It overstates `0.931` by ignoring common failure. Correct individual marginals do not make their joint behavior independent.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the weaker shared-dependency control.",
+          "expected_answer": "Conditional union remains `0.98`, actual model success becomes `0.49`, and the shortcut becomes `0.67`. Improving the independent branches alone cannot remove the common prerequisite limitation.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would justify a real redundant-route claim?",
+          "expected_answer": "Retain the operation and window, measured shared and branch outcomes, common services and justified dependence assumptions. The source helper and invented probabilities show how to ask the question, without establishing live availability or authorizing a new fallback mechanism.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Condition branch independence correctly.",
+          "decision": null
+        },
+        {
+          "criterion": "Apply shared prerequisite outside union.",
+          "decision": null
+        },
+        {
+          "criterion": "Identify marginal-independence overstatement.",
+          "decision": null
+        },
+        {
+          "criterion": "Recompute weaker-common-dependency control.",
+          "decision": null
+        },
+        {
+          "criterion": "Keep declared routes separate from measured reliability.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Audit a fictional two-route review proposal for a shared dependency.",
+        "direct_manual_baseline": "Draw the shared success condition and branch probability tree.",
+        "falsifier": "A claimed route union exceeds its required shared-dependency success probability.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "NET013",
+      "department": "network-science",
+      "module_id": "net-013-trace-causal-concurrency-with-vector-clocks",
+      "title": "Trace Causal Concurrency with Vector Clocks",
+      "source_paths": {
+        "en": "streeling/courses/network-science/en/net-013-trace-causal-concurrency-with-vector-clocks.md",
+        "fr": "streeling/courses/network-science/fr/net-013-trace-causal-concurrency-with-vector-clocks.fr.md",
+        "es": "streeling/courses/network-science/es/net-013-trace-causal-concurrency-with-vector-clocks.es.md"
+      },
+      "novelty_vs_prerequisites": "NET008 aligns physical clock coordinates and INF012 retains event order. This lesson models causal partial order with vector dominance, including incomparable concurrent events and receive-side merge; it does not infer duration.",
+      "prerequisites": [
+        "net-008-map-clock-domains-before-ordering-events",
+        "inf-012-retain-event-order-in-a-handoff-summary"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/network-science/en/net-008-map-clock-domains-before-ordering-events.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "b039b58ec8eaf543b002a674b0f9abc150550c0fb1afa3096e98e77c7037a619",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "streeling/courses/information-theory/en/inf-012-retain-event-order-in-a-handoff-summary.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "671231919c1aa58da71ceee664d343ef181267d94d0c7b495eefd5e70ea60981",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "code/streeling/functional-composition/vendor/GaAsync.fs",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "d07792410d218d660ae9875366ce6255a4eb5bd422ad85b9355b5deec505a641",
+          "scope": "zip and fanOutAll parallel declarations, lines 70-96; declarations do not timestamp an actual execution."
+        },
+        {
+          "path_or_url": "https://lamport.azurewebsites.net/pubs/time-clocks.pdf",
+          "pin": "Lamport 1978, Communications of ACM 21(7), pp. 558-565",
+          "sha256": null,
+          "scope": "Pages 558-559, process order, send/receive and transitivity defining happened-before; original-author PDF via browser extraction.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        },
+        {
+          "path_or_url": "https://www.cl.cam.ac.uk/teaching/2021/ConcDisSys/dist-sys-notes.pdf",
+          "pin": "Kleppmann, Cambridge Distributed Systems 2020/21",
+          "sha256": null,
+          "scope": "Slides 69-72, componentwise maximum receive rule and componentwise partial order; author course notes PDF via browser extraction.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        },
+        {
+          "path_or_url": "https://learn.microsoft.com/dotnet/fsharp/",
+          "pin": "Microsoft F# documentation, read 2026-10-24",
+          "sha256": null,
+          "scope": "Official documentation landing, function/pattern matching/async guide entry points; no new language feature or compilation claim.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "a": [
+            2,
+            0
+          ],
+          "b": [
+            0,
+            3
+          ],
+          "receiver_local": [
+            0,
+            3
+          ],
+          "incoming": [
+            2,
+            0
+          ],
+          "receiver_index": 1
+        },
+        "formula": "a precedes b iff every a[i]<=b[i] and at least one strict; concurrent iff neither precedes nor equal; receive=max(local,incoming) componentwise then increment receiver component.",
+        "expected": {
+          "a_before_b": false,
+          "b_before_a": false,
+          "concurrent": true,
+          "receive_clock": [
+            2,
+            4
+          ],
+          "a_before_receive": true
+        },
+        "negative_control": {
+          "values": {
+            "a": [
+              2,
+              0
+            ],
+            "b": [
+              3,
+              1
+            ],
+            "receiver_local": [
+              3,
+              1
+            ],
+            "incoming": [
+              2,
+              0
+            ],
+            "receiver_index": 1
+          },
+          "expected": {
+            "a_before_b": true,
+            "b_before_a": false,
+            "concurrent": false,
+            "receive_clock": [
+              3,
+              2
+            ],
+            "a_before_receive": true
+          },
+          "why": "Componentwise dominance replaces incomparability when causal knowledge includes the earlier event."
+        },
+        "assumptions": [
+          "Fixed node identities and component order.",
+          "Clocks are generated by the stated local-event/send/receive discipline with complete modeled communication."
+        ],
+        "limits": "Authored vectors are not live agent traces; omitted channels or restarted identities invalidate causal interpretation. No physical duration or permission follows."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compare the main vectors componentwise. Is either event causally earlier?",
+          "expected_answer": "Neither dominates: `a=[2,0]` is greater in the first component and `b=[0,3]` in the second. Thus `concurrent=true`. Their component sums cannot supply a happened-before relation.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the receive vector, keeping the increment order explicit.",
+          "expected_answer": "The maximum is `[2,3]`; incrementing receiver component `1` gives `[2,4]`. Merge occurs before the receive increment. The node index refers to the fixed declared component ordering.",
+          "decision": null
+        },
+        "3": {
+          "question": "Does the original event precede this receive event?",
+          "expected_answer": "Yes. `[2,0]` is componentwise no greater than `[2,4]` and is strictly smaller in one component, so `a_before_receive=true`. This is a causal relation, without a time-duration estimate.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the dominance control and contrast it with the main case.",
+          "expected_answer": "For `b=[3,1]`, `a_before_b=true` and `concurrent=false`. The receive clock is `[3,2]`. Additional causal knowledge changes the order relation rather than merely changing a displayed timestamp.",
+          "decision": null
+        },
+        "5": {
+          "question": "What can invalidate an actual trace interpretation?",
+          "expected_answer": "Missing message channels, reset counters, reused node identities or changed component order break the model assumptions. A total display order or source declaration of parallelism cannot fill missing trace evidence or authorize concurrent writes.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Compare vectors componentwise.",
+          "decision": null
+        },
+        {
+          "criterion": "Merge then increment receiver component.",
+          "decision": null
+        },
+        {
+          "criterion": "Separate causal precedence from duration.",
+          "decision": null
+        },
+        {
+          "criterion": "Recompute dominance control.",
+          "decision": null
+        },
+        {
+          "criterion": "Retain complete modeled channel and identity assumptions.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draw an authored agent message graph and critique scalar timestamp ordering.",
+        "direct_manual_baseline": "Mark send/receive arrows and compare vectors componentwise.",
+        "falsifier": "A claimed causal order ranks the incomparable main vectors or omits a relevant message channel.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PM010",
+      "department": "product-management",
+      "module_id": "pm-010-standardize-dogfood-failures-to-a-declared-task-mix",
+      "title": "Standardize Dogfood Failures to a Declared Task Mix",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.md",
+        "fr": "streeling/courses/product-management/fr/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.fr.md",
+        "es": "streeling/courses/product-management/es/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.es.md"
+      },
+      "novelty_vs_prerequisites": "PM009 defines cohort and outcome denominators; COG009 controls order. This course compares pooled sample failure with fixed-mix standardized failure when task strata are sampled unequally, without changing within-stratum rates.",
+      "prerequisites": [
+        "pm-009-separate-release-adoption-from-artifact-downloads",
+        "cog-009-counterbalance-practice-order-before-comparing-interfaces"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/product-management/en/pm-009-separate-release-adoption-from-artifact-downloads.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "d022e540be651daa1a413f0110333b6cfbf56e53033cfa26d29119d366963d7e",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "streeling/courses/cognitive-science/en/cog-009-counterbalance-practice-order-before-comparing-interfaces.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "6156f1beacc64b6863a18c3b07834869920390db8e55850c346475ff1d5fb4a0",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "selected exercise field names and missing learner_answer_events_shown; source fields are not actual dogfood trials."
+        },
+        {
+          "path_or_url": "https://www.itl.nist.gov/div898/handbook/pri/section3/pri332.htm",
+          "pin": "NIST/SEMATECH e-Handbook section 5.3.3.2, read 2026-10-24",
+          "sha256": null,
+          "scope": "Nuisance factors, homogeneous blocks, within-block comparisons and randomization; browser-rendered official handbook.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "strata": [
+            "routine",
+            "edge"
+          ],
+          "attempts": [
+            30,
+            10
+          ],
+          "failures": [
+            3,
+            4
+          ],
+          "target_weights": [
+            0.9,
+            0.1
+          ]
+        },
+        "formula": "rate_i=failures_i/attempts_i; pooled=sum(failures)/sum(attempts); standardized=sum(target_weight_i*rate_i).",
+        "expected": {
+          "stratum_rates": [
+            0.1,
+            0.4
+          ],
+          "pooled_rate": 0.175,
+          "standardized_rate": 0.13
+        },
+        "negative_control": {
+          "values": {
+            "strata": [
+              "routine",
+              "edge"
+            ],
+            "attempts": [
+              90,
+              10
+            ],
+            "failures": [
+              9,
+              4
+            ],
+            "target_weights": [
+              0.9,
+              0.1
+            ]
+          },
+          "expected": {
+            "stratum_rates": [
+              0.1,
+              0.4
+            ],
+            "pooled_rate": 0.13,
+            "standardized_rate": 0.13
+          },
+          "why": "Changing sample mix to match the declared target aligns pooled and standardized rates without improving either stratum."
+        },
+        "assumptions": [
+          "Target weights are authored, nonnegative and sum to unity.",
+          "Within-stratum rates are descriptive of supplied attempts; no representativeness guarantee."
+        ],
+        "limits": "No real dogfood cohort, user distribution, causal improvement or statistical precision was measured."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Calculate the two stratum failure rates.",
+          "expected_answer": "Routine rate is `3/30=0.1`; edge rate is `4/10=0.4`. Preserve the task labels and denominators, because the pooled value alone hides the much higher edge-case failure rate.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the pooled rate in the main sample.",
+          "expected_answer": "It is `7/40=0.175`. This describes the supplied sample mixture. It does not use the target weights, so it should not be labeled a standardized target-population rate.",
+          "decision": null
+        },
+        "3": {
+          "question": "Compute the rate standardized to the declared target mix.",
+          "expected_answer": "It is `0.9*0.1+0.1*0.4=0.13`. This applies the authored weights to the stratum rates. The calculation does not validate those weights as an actual usage distribution.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the control and determine whether either stratum improved.",
+          "expected_answer": "The pooled rate becomes `13/100=0.13`, matching the standardized rate. Stratum rates remain `[0.1,0.4]`. The lower pooled headline results from changed mix, without a within-stratum improvement.",
+          "decision": null
+        },
+        "5": {
+          "question": "What should a future dogfood comparison retain?",
+          "expected_answer": "Keep class definitions, attempts, failures, target weights and their rationale, actual answers, assistance and source revisions. Compare like strata before an aggregate. A changed task mix or invented counts cannot establish a real feature improvement.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Calculate within-stratum failure rates.",
+          "decision": null
+        },
+        {
+          "criterion": "Identify pooled sample weighting.",
+          "decision": null
+        },
+        {
+          "criterion": "Apply declared target weights.",
+          "decision": null
+        },
+        {
+          "criterion": "Reject mix-only improvement claim.",
+          "decision": null
+        },
+        {
+          "criterion": "Preserve real attempts and target-mix rationale.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Critique a fictional dogfood improvement report using a fixed task mix.",
+        "direct_manual_baseline": "Calculate rates within task strata before weighted and pooled aggregation.",
+        "falsifier": "An improvement headline persists when both stratum rates are unchanged and only sample mixture moves.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PM011",
+      "department": "product-management",
+      "module_id": "pm-011-include-review-and-correction-in-automation-break-even",
+      "title": "Include Review and Correction in Automation Break Even",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-011-include-review-and-correction-in-automation-break-even.md",
+        "fr": "streeling/courses/product-management/fr/pm-011-include-review-and-correction-in-automation-break-even.fr.md",
+        "es": "streeling/courses/product-management/es/pm-011-include-review-and-correction-in-automation-break-even.es.md"
+      },
+      "novelty_vs_prerequisites": "PM006 values information across a decision horizon and PM008 constrains review capacity. This course derives operational break-even from setup, drafting, mandatory review and expected correction, preserving equality and no-finite-break-even cases.",
+      "prerequisites": [
+        "pm-006-test-a-pilot-against-its-decision-horizon",
+        "pm-008-size-a-fifty-course-batch-by-review-capacity"
+      ],
+      "source_readings": [
+        {
+          "path_or_url": "streeling/courses/product-management/en/pm-006-test-a-pilot-against-its-decision-horizon.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "ed714eff740f12aee462f5cf156dc84d5989a033c444fd4740e53f2e542ef8b3",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "streeling/courses/product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "38f9f6bf4bcc8480d6c6a87729b2021fde7ca04e91cf7fbf1d5595b81db2544d",
+          "scope": "Actual baseline source read for topic novelty, assumptions, project question and prepared exercise boundary; not rerun."
+        },
+        {
+          "path_or_url": "code/streeling/evidence/pilot-value-2026-10-22/source-observations.json",
+          "pin": "b7a402c162c15e77fd76e6c57360994308e33279",
+          "sha256": "1059ca60f45178942a810a54500202331c8200d7246a0e5be06b9b506124cbae",
+          "scope": "loss-points-not-host-units and guide-is-methodology observations; no engineering time savings measured."
+        },
+        {
+          "path_or_url": "https://www.itl.nist.gov/div898/handbook/pri/section3/pri332.htm",
+          "pin": "NIST/SEMATECH e-Handbook section 5.3.3.2, read 2026-10-24",
+          "sha256": null,
+          "scope": "Nuisance factors, homogeneous blocks, within-block comparisons and randomization; browser-rendered official handbook.",
+          "read_method": "web open/find; text inspected; no raw-byte hash claimed"
+        }
+      ],
+      "authored_model": {
+        "values": {
+          "items": 40,
+          "manual_minutes_per_item": 12,
+          "setup_minutes": 60,
+          "draft_minutes_per_item": 3,
+          "review_minutes_per_item": 5,
+          "correction_probability": 0.25,
+          "correction_minutes_if_needed": 8
+        },
+        "formula": "automated_per_item=draft+review+p*correction; manual_total=n*manual; automated_total=setup+n*automated_per_item; net_saved=manual_total-automated_total; strict break-even requires n>setup/(manual-automated_per_item) when denominator positive.",
+        "expected": {
+          "automated_minutes_per_item": 10,
+          "manual_total_minutes": 480,
+          "automated_total_minutes": 460,
+          "net_saved_minutes": 20,
+          "equal_cost_items": 30,
+          "minimum_integer_items_for_strict_saving": 31
+        },
+        "negative_control": {
+          "values": {
+            "items": 40,
+            "manual_minutes_per_item": 12,
+            "setup_minutes": 60,
+            "draft_minutes_per_item": 3,
+            "review_minutes_per_item": 5,
+            "correction_probability": 0.25,
+            "correction_minutes_if_needed": 16
+          },
+          "expected": {
+            "automated_minutes_per_item": 12,
+            "manual_total_minutes": 480,
+            "automated_total_minutes": 540,
+            "net_saved_minutes": -60,
+            "equal_cost_items": null,
+            "minimum_integer_items_for_strict_saving": null
+          },
+          "why": "Zero per-item savings cannot recover a positive setup cost at any finite batch size."
+        },
+        "assumptions": [
+          "All times are invented active-work minutes on one comparable task.",
+          "Correction probability and conditional cost are stable and review is always performed.",
+          "Quality and completed scope must be comparable before cost comparison."
+        ],
+        "limits": "Expected-cost arithmetic, not measured throughput, real savings, learner value, monetary cost or production adoption."
+      },
+      "exercise_checks": {
+        "1": {
+          "question": "Compute automated expected active work per item.",
+          "expected_answer": "It is `3+5+0.25*8=10` minutes. Review is charged on every item and correction only in its stipulated probability-weighted amount. This is an expectation, without an observed timing run.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute totals and net saving for the declared batch.",
+          "expected_answer": "Manual total is `480` minutes, automated total `460` minutes and net saving `20` minutes. Setup is charged once, while all item work scales with `40` items.",
+          "decision": null
+        },
+        "3": {
+          "question": "Find equality and the smallest integer batch with strict saving.",
+          "expected_answer": "Equality occurs at `30` items because per-item saving is `2` minutes and setup is `60` minutes. The smallest strict-saving integer is `31`. A tie is not a positive saving.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the longer-correction control. Can a larger batch recover setup?",
+          "expected_answer": "Expected item cost becomes `12` minutes. At the declared size the total is `540` and net saving `-60`. Per-item saving is zero, so no finite strict break-even exists under the model.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would falsify a practical automation recommendation?",
+          "expected_answer": "Actual end-to-end active work that fails the predicted saving at comparable accepted quality would reject it. Keep setup, review, failed items, correction and assistance logs. Fast generation or these invented times cannot establish real adoption or production efficiency.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Include mandatory review and expected correction.",
+          "decision": null
+        },
+        {
+          "criterion": "Charge setup once with comparable scope.",
+          "decision": null
+        },
+        {
+          "criterion": "Distinguish equality from strict integer break-even.",
+          "decision": null
+        },
+        {
+          "criterion": "Recognize no finite recovery when per-item savings vanish.",
+          "decision": null
+        },
+        {
+          "criterion": "Require real quality-equivalent work logs.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a prospective automation cost card and a manual-versus-assisted dogfood falsifier.",
+        "direct_manual_baseline": "Add complete per-item work, setup and expected corrections on paper.",
+        "falsifier": "Actual quality-equivalent total work does not deliver the predicted saving, or omitted review reverses it.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    }
+  ]
+}

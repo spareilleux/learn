@@ -1,0 +1,32 @@
+{
+  "command": {
+    "args": [
+      "dotnet",
+      "fsi",
+      "--quiet",
+      "--exec",
+      "probe.fsx"
+    ],
+    "cwd": "C:\\tmp\\streeling-phrase-fret-native-20261022",
+    "sdk": "10.0.113",
+    "exit_code": 0,
+    "elapsed_seconds": 1.7447654000134207,
+    "stdout": {
+      "path": "C:\\tmp\\streeling-phrase-fret-native-20261022\\native.stdout.log",
+      "bytes": 2557,
+      "sha256": "b9e54f48ce6f3616309410cb8e5035ffc20758dd48ed393b92cfc60c2e3f469e"
+    },
+    "stderr": {
+      "path": "C:\\tmp\\streeling-phrase-fret-native-20261022\\native.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source_sha256": "8614a2a5d466b5bb792c50017ae7a6e09592b158f1362ac6bf8768683c428b36",
+    "wrapper_sha256": "6e048939e37a5d668d10741ed24c38ccdb2450307fb96297035533d8f87d78ce",
+    "global_json_sha256": "99c01299d359f9b053f4119acb6d41e13da0311c3eac5b667d4ea65a60067344"
+  },
+  "scope": "Fresh standalone execution of unchanged public F#helpers plus temporary verification wrapper. No C#mapper, temporal planner, MIDI parser, renderer, full GA build or dependency install.",
+  "source_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+  "source_unchanged": true,
+  "new_dependency_install": false
+}

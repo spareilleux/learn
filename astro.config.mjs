@@ -26,12 +26,14 @@ export default defineConfig({
 				PageTitle: './src/components/PageTitle.astro',
 				// Button that hides or shows the left sidebar on wide screens
 				SiteTitle: './src/components/SiteTitle.astro',
+				Sidebar: './src/components/Sidebar.astro',
 				// Renders ```mermaid code blocks as diagrams
 				MarkdownContent: './src/components/MarkdownContent.astro',
 			},
 			sidebar: [
 				{ label: 'Method', translations: { fr: 'Méthode', es: 'Método' }, slug: 'method' },
 				{ label: 'Artifacts', translations: { fr: 'Artefacts', es: 'Artefactos' }, slug: 'artifacts' },
+				{ label: 'Demos', translations: { fr: 'Démos', es: 'Demos' }, slug: 'demos' },
 				{
 					label: 'Software Engineering',
 					translations: { fr: 'Génie logiciel', es: 'Ingeniería de software' },
@@ -75,6 +77,18 @@ export default defineConfig({
 									translations: { fr: 'Java pour développeurs C#', es: 'Java para desarrolladores C#' },
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'java-for-csharp' } }],
+								},
+								{
+									label: 'Go for C#/Java developers',
+									translations: { fr: 'Go pour développeurs C#/Java', es: 'Go para desarrolladores C#/Java' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'go-for-csharp-java' } }],
+								},
+								{
+									label: 'Advanced Go',
+									translations: { fr: 'Go avancé', es: 'Go avanzado' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'go-advanced' } }],
 								},
 								{
 									label: 'Spring Boot, Spring Cloud and Reactor for C# developers',
@@ -235,6 +249,12 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'gaia' } }],
 								},
+								{
+									label: 'AutoHarness, self-writing skills for Claude Code',
+									translations: { fr: "AutoHarness, des skills qui s'écrivent seuls pour Claude Code", es: 'AutoHarness, skills que se escriben solas para Claude Code' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'autoharness' } }],
+								},
 							],
 						},
 					],
@@ -273,6 +293,11 @@ export default defineConfig({
 					label: '3D & graphics',
 					translations: { fr: '3D et graphisme', es: '3D y gráficos' },
 					items: [
+						{
+							label: 'Playable observatory',
+							translations: { fr: 'Observatoire interactif', es: 'Observatorio interactivo' },
+							slug: 'observatory',
+						},
 						{
 							label: 'Blender for developers',
 							translations: { fr: 'Blender pour les développeurs', es: 'Blender para desarrolladores' },

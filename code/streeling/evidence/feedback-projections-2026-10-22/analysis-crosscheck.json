@@ -1,0 +1,37 @@
+{
+  "scope": "Host separate arithmetic implementation crosscheck, not an independent reviewer or a new synthesis/physics run.",
+  "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+  "source_quantization_json_sha256": "136c19df51d516f20c34049f7d1a278456aa46c372d6bdf2dbc41589e0374879",
+  "checks": [
+    {
+      "mode": "baseline",
+      "float32_pairs": 176400,
+      "separate_Python_decode_and_integer_encoding_matches_Node": true,
+      "int16_payload_sha256": "a24121da0bde439bb553f35712cd6880cc9e8d1adf978f838bfeb76412ff42f8",
+      "max_reconstruction_error": 1.5258982790783415e-05,
+      "note": "floor(v*32767+.5) matches the resulting signed integer for these finite inputs; Python round was not used. Signed-zero JS Number identity is not preserved in int16 bytes.",
+      "unequal_four_byte_float32_words": 2918
+    },
+    {
+      "mode": "candidate",
+      "float32_pairs": 176400,
+      "separate_Python_decode_and_integer_encoding_matches_Node": true,
+      "int16_payload_sha256": "230a1d7956e9c8f81c5a0624ff8893477c90e61bb6cf806d466043c17003fb21",
+      "max_reconstruction_error": 1.525887933261083e-05,
+      "note": "floor(v*32767+.5) matches the resulting signed integer for these finite inputs; Python round was not used. Signed-zero JS Number identity is not preserved in int16 bytes.",
+      "unequal_four_byte_float32_words": 2926
+    }
+  ],
+  "negative_controls": {
+    "Python_bankers_round_would_disagree_at_half": true,
+    "distinct_f32_toy_maps_to_one_code": true
+  },
+  "float32_code_reachability": {
+    "candidate_codes_checked": 65535,
+    "construction": "Round k/32767 to float32, then encode with integer floor(value*32767+.5).",
+    "unreachable_codes_in_tested_integer_range": [],
+    "most_negative_code": -32767,
+    "positive_endpoint": 32767,
+    "outside_storage_code_minus32768_not_produced": true
+  }
+}

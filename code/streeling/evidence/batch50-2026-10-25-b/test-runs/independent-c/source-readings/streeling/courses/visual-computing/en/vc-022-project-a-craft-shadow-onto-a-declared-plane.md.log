@@ -1,0 +1,154 @@
+---
+module_id: "vc-022-project-a-craft-shadow-onto-a-declared-plane"
+department: "visual-computing"
+course: "Project a Craft Shadow onto a Declared Plane"
+level: "advanced"
+prerequisites: ["sem-006-preserve-orientation-across-scene-frames"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Project a Craft Shadow onto a Declared Plane
+
+> Draft for technical and fluent-language review. The numerical inputs, labels and expected results are authored teaching cases. They are not new physical material tests, native scene runs, learner observations or production outcomes. Human and learner decisions remain undecided.
+
+## Project operation and interpretation
+
+A folded paper ridge casts a proposed shadow onto a plinth in the Observatory. Moving the shadow directly under the ridge assumes a vertical light direction that the scene may not have. The operation here follows the declared direction of light travel until it meets a receiving plane. It is a geometric construction for an annotation, not a new shadow renderer or an observation of a physically illuminated sculpture.
+
+Solve the receiver’s depth equation for the ray parameter, then substitute that parameter into every coordinate. Keep the direction of travel distinct from a vector pointing toward the light. Reversing that convention can move the intersection behind the point. A forward-only ray rejects a negative parameter even though the corresponding infinite line meets the plane. A direction parallel to the receiver needs an explicit branch because division by its depth component is undefined.
+
+The control retains the source point and receiver but removes the depth motion. This isolates a missing geometric precondition. It cannot be repaired by clamping the parameter or inventing a very distant point. An eventual [Blender](https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md)-to-[Godot](https://docs.godotengine.org/en/4.5/) handoff should preserve the frame, receiver equation and travel convention, then separately test visibility and occlusion with a fixed capture. A point can project onto an infinite plane outside the actual plinth, or be hidden by another fold. Neither issue is represented by the simple intersection alone.
+
+Read the committed prerequisite and the scoped primary passage before calculating. Make a small ledger with separate columns for source definition, authored premise, derived result and future observation. A documentation page supports only the claim within its inspected scope. A source parameter, mathematical answer and runtime observation have different evidential roles; an assistant’s confident summary cannot exchange those roles. The evidence packet retains the source revision and the reading boundary so another reviewer can challenge a precise statement.
+
+Work first with the answer panels closed. Draw the table or diagram required by this operation and retain the intermediate quantities, including units or identity conventions. That handwritten derivation is the direct manual baseline. Only then consult an assistant or translation aid. Keep the question, the source location cited, the suggestion received and the change accepted or rejected. Compare the assisted result with the retained first attempt on identical inputs. A shorter answer is not an improvement when it omits a precondition or invents a completed project trial.
+
+## Fixed model and changed-input control
+
+```json
+{
+  "values": {
+    "point": [
+      2,
+      3,
+      4
+    ],
+    "light_travel": [
+      1,
+      0,
+      -2
+    ],
+    "plane_z": 0
+  },
+  "formula": "if d.z==0 return parallel; t=(plane_z-point.z)/d.z; if t<0 return behind; otherwise intersection=point+t*d",
+  "expected": {
+    "status": "hit",
+    "t": 2,
+    "intersection": [
+      4,
+      3,
+      0
+    ]
+  },
+  "negative_control": {
+    "values": {
+      "point": [
+        2,
+        3,
+        4
+      ],
+      "light_travel": [
+        1,
+        0,
+        0
+      ],
+      "plane_z": 0
+    },
+    "expected": {
+      "status": "parallel",
+      "t": null,
+      "intersection": null
+    }
+  }
+}
+```
+
+### Exercise 1
+
+Derive the intersection parameter.
+
+<details><summary>Answer 1</summary>
+
+It is `2`. Use the signed receiver offset divided by the signed depth component; the positive value permits forward travel.
+
+</details>
+
+### Exercise 2
+
+Find the candidate shadow point.
+
+<details><summary>Answer 2</summary>
+
+It is `[4,3,0]`. The horizontal displacement follows the supplied direction, while the unchanged middle coordinate is a consequence of its zero component.
+
+</details>
+
+### Exercise 3
+
+Which direction convention must travel with the data?
+
+<details><summary>Answer 3</summary>
+
+The vector describes light travel from the point toward the receiver. A vector toward the light has the opposite meaning and cannot be substituted silently.
+
+</details>
+
+### Exercise 4
+
+Apply the parallel control.
+
+<details><summary>Answer 4</summary>
+
+The result is `parallel`, with parameter and intersection `null`. A finite hit must not be fabricated by substituting a large denominator.
+
+</details>
+
+### Exercise 5
+
+Does the candidate point prove a visible shadow?
+
+<details><summary>Answer 5</summary>
+
+No. The receiving surface may be bounded or occluded, and light transport is absent. A fixed engine capture remains a separate proposed observation.
+
+</details>
+
+## Source-assisted task and direct baseline
+
+Draw a folded ridge, a plinth and the light-travel arrow in a common frame. Derive the candidate point manually, then write the bounded-surface and occlusion checks a future scene trial would require.
+
+Treat the control as a separate input record. Preserve the main case, write a prediction for the changed input and explain which premise changes. When a result disagrees with your first answer, distinguish arithmetic error, interpretation error and a model limitation. Keep a failed attempt beside its correction rather than replacing it. The task asks for a reviewable evidence note before proposing a DSL node or agent workflow; a manual table may already meet the project need.
+
+Submit the baseline, source locations, corrected explanation, control outcome and prospective falsifier together. The prepared criteria below are questions for a future reviewer, not accepted learner results. Actual learner answer, assistance history, corrected answer and learner decision remain empty until a real attempt is retained. Technical review, fluent-language review, runtime execution, production adoption and publication each require their own applicable evidence. A passing finite calculation would establish only the stated operation under its premises.
+
+## Prospective falsifier
+
+Any report of a finite shadow point for the parallel off-plane control contradicts the declared ray equation.
+
+## Prepared learner criteria
+
+- For exercise 1: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+- For exercise 2: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+- For exercise 3: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+- For exercise 4: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+- For exercise 5: retain a correct answer, the intermediate reasoning and the stated boundary; learner decision remains undecided.
+
+## Sources and claim boundary
+
+- [Committed prerequisite: sem-006-preserve-orientation-across-scene-frames](../../semiotics/en/sem-006-preserve-orientation-across-scene-frames.md)
+- [Retained project source](../../../../code/blender/scripts/atlas/kit.py)
+- [Primary reading](https://pbr-book.org/4ed/Shapes/Basic_Shape_Interface)
+- [Authored evidence packet](../../../../code/streeling/evidence/batch50-2026-10-25-b/unit-c.json)
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25-b/journal.md)

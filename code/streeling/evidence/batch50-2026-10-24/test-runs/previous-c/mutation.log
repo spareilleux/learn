@@ -1,0 +1,4 @@
+OBSERVATION {"case": "model", "code": "PHY017", "expected": {"growth_mm": 0.2, "remaining_gap_mm": 0.1}, "observed": {"growth_mm": 2.0, "remaining_gap_mm": -1.7}, "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."}
+MUTANT_REJECTED False is not true : (2.0, 0.2)
+{"substantive_mutation": "PHY017 coefficient 0.00002 -> 0.0002 in deep copy only", "rejected": true, "canonical_packet_before": "090ec207d4a457872f779052e8c8fe1af0d8209938d7aa5fb2926ca59d47ded2", "canonical_packet_after": "090ec207d4a457872f779052e8c8fe1af0d8209938d7aa5fb2926ca59d47ded2", "canonical_unchanged": true}
+

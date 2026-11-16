@@ -1,0 +1,114 @@
+name: Go course examples
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/content/docs/go-for-csharp-java/**'
+      - 'src/content/docs/go-advanced/**'
+      - 'src/content/docs/fr/go-for-csharp-java/**'
+      - 'src/content/docs/fr/go-advanced/**'
+      - 'src/content/docs/es/go-for-csharp-java/**'
+      - 'src/content/docs/es/go-advanced/**'
+      - 'code/go-for-csharp-java/**'
+      - 'code/go-advanced/**'
+      - 'scripts/check-go-courses.py'
+      - 'scripts/tests/test_check_go_courses.py'
+      - '.github/workflows/go-examples.yml'
+  pull_request:
+    paths:
+      - 'src/content/docs/go-for-csharp-java/**'
+      - 'src/content/docs/go-advanced/**'
+      - 'src/content/docs/fr/go-for-csharp-java/**'
+      - 'src/content/docs/fr/go-advanced/**'
+      - 'src/content/docs/es/go-for-csharp-java/**'
+      - 'src/content/docs/es/go-advanced/**'
+      - 'code/go-for-csharp-java/**'
+      - 'code/go-advanced/**'
+      - 'scripts/check-go-courses.py'
+      - 'scripts/tests/test_check_go_courses.py'
+      - '.github/workflows/go-examples.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  content:
+    name: Course structure and checker regressions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Checker regression tests
+        run: python3 -B -m unittest discover -s scripts/tests -p test_check_go_courses.py
+      - name: All locales, snippets, links and manifests
+        run: python3 -B scripts/check-go-courses.py --content-only
+
+  examples:
+    name: ${{ matrix.course }} (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        course: [go-for-csharp-java, go-advanced]
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/${{ matrix.course }}
+    steps:
+      - uses: actions/checkout@v7
+      # https://github.com/actions/setup-go documents v7 and cache: false.
+      - uses: actions/setup-go@v7
+        with:
+          go-version: '1.27.1'
+          cache: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+      - name: Toolchain
+        run: go version
+      - name: Formatting
+        run: |
+          unformatted=$(gofmt -l .)
+          if [ -n "$unformatted" ]; then
+            printf '%s\n' "$unformatted"
+            exit 1
+          fi
+      - name: Tests and fuzz seed corpus
+        run: go test -timeout=120s ./...
+      - name: Vet
+        run: go vet ./...
+      - name: Exact example stdout
+        working-directory: .
+        run: python -B scripts/check-go-courses.py ${{ matrix.course }}
+
+  race:
+    name: Linux race detector (${{ matrix.course }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        course: [go-for-csharp-java, go-advanced]
+    env:
+      CGO_ENABLED: '1'
+    defaults:
+      run:
+        working-directory: code/${{ matrix.course }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version: '1.27.1'
+          cache: false
+      # The detector requires cgo and covers only executed paths:
+      # https://go.dev/doc/articles/race_detector
+      - name: Race detector
+        run: go test -race -timeout=180s ./...
+      - name: One-iteration benchmark smoke
+        run: go test -run '^$' -bench . -benchtime=1x -timeout=120s ./...
+      - name: Bounded framing fuzz smoke
+        if: matrix.course == 'go-advanced'
+        run: go test ./framing -run=^$ -fuzz=^FuzzFrames$ -fuzztime=5s -parallel=2

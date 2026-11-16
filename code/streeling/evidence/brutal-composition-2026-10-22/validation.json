@@ -1,0 +1,111 @@
+{
+  "checked_at_utc": "2026-10-22T18:10:48.490305+00:00",
+  "base_learn_commit": "f3bde26bab1d38bbcfefb1e1bb2852667a4df032",
+  "latest_main_checked": "05aa47b12b97e626405e961016d5035f7ecf74be",
+  "source_ga_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "scope": "Three public-source BRUTAL courses in existing departments, actual temporary CPU-only execution of unchanged public F# projects and historical benchmark analysis. No new production/lab program or GPU run.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "cpu_verification": {
+    "sdk": "10.0.113",
+    "existing_tests_passed": 20,
+    "tests_failed": 0,
+    "public_source_files": 25,
+    "unchanged_compile_inputs": 16,
+    "command_logs": 17,
+    "selected_descriptions": 13,
+    "build_warnings": 0,
+    "build_errors": 0,
+    "source_and_locks_unchanged": true,
+    "new_gpu_run": false
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 3.8118057000101544,
+    "log": "C:\\tmp\\streeling-brutal-tests-20261022.log",
+    "log_sha256": "3b058dea93070eedca3b09f1419accf4ebf2eea8c7f2bbe6602c8e51927b4c7b",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.429859600000782,
+    "log": "C:\\tmp\\streeling-brutal-sync-20261022.log",
+    "log_sha256": "405a1611ee39bf93ca3c547b64fb8cb8be74a4e56d1c712aff28c3f105b68760",
+    "idempotent_checked_files": 590
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 79.9353342000104,
+    "log": "C:\\tmp\\streeling-brutal-build-20261022.log",
+    "log_sha256": "59492bc91dab61fef9d0e5fe19b03773a341cb652dcc153cf5045e794dde150e",
+    "pages": 1786,
+    "dependency_install": "Existing node_modules junction; no npm ci. CPU build used cached FSharp.Core.",
+    "warnings": "Highlighting fallback and empty i18n/404 warnings retained in complete log."
+  },
+  "rendered_articles": {
+    "pages": 21,
+    "links": 468,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "data_verdict": "pass_with_declared_evidence_limits",
+    "data_receipt_sha256": "67bb0990659559ebecd7e46eb466311348a4423566449d09eecf24d9a3922980",
+    "content_verdict": "pass_with_declared_evidence_limits",
+    "content_receipt_sha256": "bd41ec363d7fdd4f0d1d64b9aba3329eafc6a07281235cd63ba8e94c6f3fcd5b",
+    "exercise_pairs_checked": 45,
+    "learner_criteria_checked": 15,
+    "findings": [],
+    "scope": "Independent AI source/raw-output/arithmetic/course checks; not human approval.",
+    "human_subject": null,
+    "fluent_language": null,
+    "learner": null,
+    "new_gpu_experiment": null
+  },
+  "code_review_pipeline": "Documentation/data-only deliverable; existing public source was executed unchanged in a temporary verification environment. No new production/lab code emitted and no code-shipping review invoked.",
+  "manual_host_scan": "Checked public-source boundary, actual CPU logs and selected JSON, scene versus instance/box units, version/seed/anchor/transform behavior, refusal status, budget bounds, historical controls/timing/thresholds, task/rubric coverage, translations, reviewer bindings and generated links. No blocking issue remains for draft-source delivery.",
+  "source_inventory": {
+    "core_english_modules": 171,
+    "target": 525,
+    "original_departments": 21,
+    "remaining_core_source_gaps": 354,
+    "locale_counts": {
+      "en": 172,
+      "fr": 172,
+      "es": 172
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint/typecheck scripts configured; generator tests and Astro build used."
+}

@@ -1,0 +1,219 @@
+{
+  "tag": "baseline-audio-02",
+  "unit": "baseline",
+  "started_at_utc": "2026-10-24T00:31:45.169453+00:00",
+  "ended_at_utc": "2026-10-24T00:31:45.983416+00:00",
+  "base_learn_commit": "8f13637ae4596b614c2ba493b596b6a08e1cf43a",
+  "args": [
+    "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "code/streeling/evidence/batch50-2026-10-23/tests",
+    "-p",
+    "test_baseline_audio.py",
+    "-v"
+  ],
+  "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+  "elapsed_seconds": 0.8137404000153765,
+  "exit_code": 0,
+  "tests_run": 6,
+  "selected_courses": 3,
+  "observation_count": 6,
+  "observations": [
+    {
+      "code": "AUD009",
+      "case": "model",
+      "observed": {
+        "gain": 0.5,
+        "raw_rms": 0.27599252707274524,
+        "unity_rms": 0.15309310892394862,
+        "fitted_rms": 0.0,
+        "delay_ms": 0.25
+      },
+      "expected": {
+        "gain": 0.5,
+        "raw_rms": 0.27599252707274524,
+        "unity_rms": 0.15309310892394862,
+        "fitted_rms": 0,
+        "delay_ms": 0.25
+      },
+      "scope": "Previous tranche's authored mathematical case; no engine/listener trial."
+    },
+    {
+      "code": "AUD009",
+      "case": "negative",
+      "observed": {
+        "prefix_rms": 0.0,
+        "full_rms": 0.04419417382415922,
+        "coverage": 0.75,
+        "silence_energy": 0
+      },
+      "expected": {
+        "prefix_rms": 0,
+        "full_rms": 0.04419417382415922,
+        "coverage": 0.75,
+        "silence_energy": 0
+      },
+      "scope": "Previous tranche's authored mathematical case; no engine/listener trial."
+    },
+    {
+      "code": "GAS008",
+      "case": "model",
+      "observed": {
+        "max_envelope_error": 6.25888230132432e-15,
+        "carrier": 101.0,
+        "beat": 2.0
+      },
+      "expected": {
+        "max_envelope_error_bound": 1e-12,
+        "carrier": 101,
+        "beat": 2
+      },
+      "scope": "Previous tranche's authored mathematical case; no engine/listener trial."
+    },
+    {
+      "code": "GAS008",
+      "case": "negative",
+      "observed": {
+        "apparent_rate": -3.8121182505960336,
+        "component_rate": 1.0,
+        "zero_log": null
+      },
+      "expected": {
+        "apparent_rate": -3.8121182505960336,
+        "component_rate_positive": true,
+        "zero_log": null
+      },
+      "scope": "Previous tranche's authored mathematical case; no engine/listener trial."
+    },
+    {
+      "code": "INF009",
+      "case": "model",
+      "observed": {
+        "z_x": [
+          -1.3416407864998738,
+          -0.4472135954999579,
+          0.4472135954999579,
+          1.3416407864998738
+        ],
+        "z_y": [
+          -1.3416407864998738,
+          -0.4472135954999579,
+          0.4472135954999579,
+          1.3416407864998738
+        ],
+        "difference_rms": 0.23385358667337133,
+        "statistics": [
+          {
+            "key": "x",
+            "mean": 0.125,
+            "population_sigma": 0.2795084971874737
+          },
+          {
+            "key": "y",
+            "mean": 0.3125,
+            "population_sigma": 0.13975424859373686
+          }
+        ]
+      },
+      "expected": {
+        "z_equal": true,
+        "difference_rms": 0.23385358667337133,
+        "statistics": [
+          {
+            "key": "x",
+            "mean": 0.125,
+            "population_sigma": 0.2795084971874737
+          },
+          {
+            "key": "y",
+            "mean": 0.3125,
+            "population_sigma": 0.13975424859373686
+          }
+        ]
+      },
+      "scope": "Previous tranche's authored mathematical case; no engine/listener trial."
+    },
+    {
+      "code": "INF009",
+      "case": "negative",
+      "observed": {
+        "signed": -1.0,
+        "absolute": 1.0,
+        "constant_sigma": 0.0
+      },
+      "expected": {
+        "signed": -1,
+        "absolute": 1,
+        "constant_sigma": 0
+      },
+      "scope": "Previous tranche's authored mathematical case; no engine/listener trial."
+    }
+  ],
+  "complete_model_negative_coverage": true,
+  "missing_observations": [],
+  "unexpected_observations": [],
+  "passed": true,
+  "input_bindings": [
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-008-separate-beating-from-a-change-in-damping.md",
+      "sha256": "62ecc729fa4092631a07b7f4bd9bbe727699c8e4a7a5d5136d0ba76d21703ab2"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-008-separate-beating-from-a-change-in-damping.fr.md",
+      "sha256": "bf1a462fcb7931b3a494de296adb7d16ae7458e30b5c090673c540a77c9a7879"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-008-separate-beating-from-a-change-in-damping.es.md",
+      "sha256": "ff466c426ef9e755d4f12f1b75351a5d0ba5024640eb8e8cb33638d11f5de7ad"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-009-declare-alignment-before-a-null-test.md",
+      "sha256": "ca5b9928bc5376c52ad6b2eaa55574ed989e5f3772e17c294ef78c9d9731a1ea"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-009-declare-alignment-before-a-null-test.fr.md",
+      "sha256": "ff1c60ffdebd22e6f9f343ad7c7821a07829e2d9dc212c2590623acc2bb92020"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-009-declare-alignment-before-a-null-test.es.md",
+      "sha256": "334395cfc21c44ea54bc50aecd88a3ecc110f4f3a298a12cf8fdf2caf7f1acbc"
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-009-keep-level-when-normalizing-waveform-shape.md",
+      "sha256": "982aa0488cd63e7c76df670dfc894aeef4efc93c57115a57507bf18c357fc009"
+    },
+    {
+      "path": "streeling/courses/information-theory/fr/inf-009-keep-level-when-normalizing-waveform-shape.fr.md",
+      "sha256": "9681d059007533c4b52a69373206740707fde322e8a03441105ef7bc20a70797"
+    },
+    {
+      "path": "streeling/courses/information-theory/es/inf-009-keep-level-when-normalizing-waveform-shape.es.md",
+      "sha256": "ac0cb66bd461a729f51d13eea8cdc2567e44bbfe23da3322b5b197aef58717db"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-23/tests/test_baseline_audio.py",
+      "sha256": "e6e444db27f732e4b8663df09f3f40e5f8e90e734c275b9eb231a2ee13641383"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/beating-envelope.json",
+      "sha256": "5d97749972b417df1011452dc88f6e0d1909401b3253718878e07775db4b81c1"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/null-comparison.json",
+      "sha256": "14101adbc0a9a3db2d0868e9f7cbde0bb3222111a2938b402188dd4c06d87acb"
+    },
+    {
+      "path": "code/streeling/evidence/audio-comparison-2026-10-23/normalized-shape.json",
+      "sha256": "d065fa4c72d3cd2b3a500e9840f90eeb0afe09eeb3ee9d19f35bda0c05b742b5"
+    }
+  ],
+  "log": "code/streeling/evidence/batch50-2026-10-23/test-runs/baseline-audio-02.log",
+  "log_sha256": "8ace1567dc51f0f25e28c0029f871e82ead6850b503f50353eb613e7acdfafa3",
+  "scope": "Executed checks of authored fixed cases and counterexamples. Not engine, scene, physical, listening, human or learner validation."
+}

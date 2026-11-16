@@ -1,0 +1,113 @@
+{
+  "scope": "Extracted unchanged pinned handler and timeout; Node built-in type erasure with stub refs/callbacks. Not React mount, browser messaging, Godot rendering, WASM export, security audit or live click test.",
+  "ga_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+  "source_path": "ReactComponents/ga-react-components/src/components/PrimeRadiant/GodotScene.tsx",
+  "source_sha256": "57ac63eb8f937593fc971091a7655a0e87454f8a7c62c32f0cfc7d9b93267a54",
+  "node_version": "v24.12.0",
+  "type_erasure": "node:module.stripTypeScriptTypes",
+  "extraction": "Exact single function boundaries asserted against pinned source text.",
+  "handler_sha256": "d4c3b2896963b77a928904f55a4e698824ae8870b0b8c411a11748c8f75191c6",
+  "timeout_sha256": "3832708fb2b929e3ecfe14779a974b52d98543d471dbde43e4033080b8cf7015",
+  "steps": [
+    {
+      "label": "foreign-ready",
+      "ready": false,
+      "loading": true,
+      "events": []
+    },
+    {
+      "label": "pre-ready-click",
+      "ready": false,
+      "loading": true,
+      "events": [
+        {
+          "type": "click",
+          "nodeId": "belief-7"
+        }
+      ]
+    },
+    {
+      "label": "ready",
+      "ready": true,
+      "loading": false,
+      "events": [
+        {
+          "type": "click",
+          "nodeId": "belief-7"
+        },
+        {
+          "type": "ready"
+        }
+      ]
+    },
+    {
+      "label": "duplicate-ready",
+      "ready": true,
+      "loading": false,
+      "events": [
+        {
+          "type": "click",
+          "nodeId": "belief-7"
+        },
+        {
+          "type": "ready"
+        },
+        {
+          "type": "ready"
+        }
+      ]
+    },
+    {
+      "label": "click",
+      "ready": true,
+      "loading": false,
+      "events": [
+        {
+          "type": "click",
+          "nodeId": "belief-7"
+        },
+        {
+          "type": "ready"
+        },
+        {
+          "type": "ready"
+        },
+        {
+          "type": "click",
+          "nodeId": "belief-8"
+        }
+      ]
+    },
+    {
+      "label": "timeout",
+      "ready": true,
+      "loading": false,
+      "events": [
+        {
+          "type": "click",
+          "nodeId": "belief-7"
+        },
+        {
+          "type": "ready"
+        },
+        {
+          "type": "ready"
+        },
+        {
+          "type": "click",
+          "nodeId": "belief-8"
+        }
+      ]
+    }
+  ],
+  "expected_callback_sequence_match": true,
+  "controls": {
+    "foreign_ready_ignored_with_mounted_ref": true,
+    "timeout_without_ready": {
+      "loading": false,
+      "ready": false
+    },
+    "missing_nodeId_accepted_as_undefined": true,
+    "source_guard_skipped_with_absent_iframe": true
+  }
+}

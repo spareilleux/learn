@@ -1,0 +1,40 @@
+{
+  "kind": "native read-only final source-content delta audit",
+  "checked_utc": "2026-10-22T01:39:48.207768+00:00",
+  "worktree": "C:\\tmp\\learn-streeling-craft-transfer-20261022",
+  "baseline_english_head": "f1457e2591ce77628b7cd9d0b815835b823509ee",
+  "source_commit": "17f82a4b4b913d7c64942a3d3ff670abf4e6f85c",
+  "result": "No findings",
+  "findings": [],
+  "coverage": {
+    "declared_source_imports": 38,
+    "declared_prose_adjustments": 19,
+    "source_import_result": "All 38 source blobs match pinned Demerzel objects; original-link rewrites followed by declared prose adjustments reproduce current target bytes exactly.",
+    "link_scope": "18 local mapped references plus one pinned analyzer fallback; three destinations changed. Prose additions and new translations are outside original-link counters.",
+    "ga_fixtures": "All six copied snapshots exactly match raw pinned GA blobs at dc2e74cbd992a298f67efb928b5b3754615e1924.",
+    "research_cycles": "All eight archive cycle blob hashes and revision/path URLs match source objects; cycle IDs correspond to DV001-DV008.",
+    "translation_mapping": "All 14 new FR/ES mappings match current English Git blobs at f1457e2591ce77628b7cd9d0b815835b823509ee, English SHA256, translation SHA256, and locale-checks English blob fields.",
+    "representative_meaning": "Read full FR/ES DV006 and DV008. Corrected rounded-radius result, historical observations, units, comparability limits, unknown-versus-zero, synthetic counts and current migration/readback limitations are preserved.",
+    "inherited_dv001": "Read coordinator manual-equivalence receipt; independently replayed both inherited files from archived blobs plus declared offline-input addition. This pass does not replace fluent-language review.",
+    "approvals": "All eight archived review.completed and publish.completed flags remain false. New translations and coordinator/probe evidence retain pending human subject/fluent-language/learner/public gates.",
+    "learner_probe": "Current lesson/packet/raw-response SHA256 match setup; packet exactly contains current lesson with five explicit Answer lines removed plus exact v2 task. Raw response makes lesson exposure, prior AI competence, absent pretest, absent causal learning measure and absent human/approval result explicit.",
+    "craft_receipt_scope": "README and validation bind 102 EN / 96 FR / 96 ES counts to verified_head cf51371edc20692b9b103df29db39cdb960653a5 and label them historical rather than cumulative."
+  },
+  "input_sha256": {
+    "import.json": "41a849fdc3f56fe05b7a1d4ff4bbb1e5b22ec3661f50e9e45e543fd11d94edc2",
+    "locale-checks.json": "1fc11188bb013e2d066917f800d01aae6629a030edbe4c4a0f2302cfe9692c4e",
+    "learner-probe-setup.json": "626c5569e425c69118c2de23467a831560010086e6eedb3315966dbaf99312b3",
+    "content-review.json": "b8b23e67427ca76a99e59ca3644dd796d2ded570bad3ff1bbd8ae88369d960b0",
+    "reviews/dv-008-learner-task-v2.md": "d8a7cf7e43212980dc13d19081e20bd8ddaa5921d047c5ce7ca0a7e7e48c658c",
+    "reviews/dv-008-response.md": "2bf97af1adeba57a8a1cc46332cb80ca61480f7ac48c9169f9aefee9e532de18"
+  },
+  "limits": [
+    "Static bounded source-content delta review; no tests, builds, evaluator execution, browser or network checks in this pass.",
+    "Did not repeat the completed eight-lesson arithmetic audit.",
+    "Did not inspect final DV build or validation.json; coordinator owns that evidence.",
+    "Representative semantic sampling is not a full fluent-human FR/ES review.",
+    "No subject approval, human learner evidence, causal learning gain, public Learn readback, or independent-model approval granted."
+  ],
+  "repository_writes": "none",
+  "only_write": "C:/tmp/dv-pack-final-audit-20261022.json"
+}

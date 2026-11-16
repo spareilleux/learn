@@ -1,0 +1,1212 @@
+{
+  "reviewer": "independent-pedagogical-source-review-agent",
+  "checked_at_utc": "2026-10-23T02:28:01.688988+00:00",
+  "verdict": "pass",
+  "coverage": {
+    "exercise_answer_pairs": 45,
+    "learner_criteria": 15
+  },
+  "findings": [
+    {
+      "id": "coordinate-and-status-boundary",
+      "status": "observed-preserved",
+      "finding": "Full-capo origin equivalence applies to sounding strings in the stipulated12TET model. Muted-1 and invalid physical positions behind the capo remain different statuses. The partial-capo counterexample requires per-string offsets, and modulo pitch classes discard register."
+    },
+    {
+      "id": "two-coordinate-spelling",
+      "status": "observed-preserved",
+      "finding": "Diatonic letter steps and chromatic semitones each receive their separate octave contribution. Equal note numbers can preserve distinct spellings; B#3 and Cb4 demonstrate written-octave boundaries. Integer storage is not an accidental-range validation or implemented transposition."
+    },
+    {
+      "id": "declared-degree-context",
+      "status": "observed-preserved",
+      "finding": "Degree tables, tonic register, exact major/natural-minor form and syllable vocabulary are declared. A fifths count or nationality cannot supply missing context. The chosen degree1..7 domain imposes no universal prohibition on degree8."
+    },
+    {
+      "id": "revision-and-tool-provenance",
+      "status": "observed-preserved",
+      "finding": "Six actual GA copies at76ef were hash-verified; anchored PitchParser behavior at this pin does not rewrite WML005 atdc2e. The three retained chord-tool responses have unknown service revision and are not CapoSkill, physical fret mapping or native parser execution. Selected-file absence statements remain bounded."
+    },
+    {
+      "id": "primary-reading-and-chronology",
+      "status": "observed-preserved",
+      "finding": "Actual MusicXML bodies and the legacy author-published scale-degree body were read. Unused failed Pressbooks/LilyPond attempts supply no reading. The production plan followed initial reading/hand-worked examples and is not a physical or learner preregistration."
+    },
+    {
+      "id": "prerequisite-reading-limit",
+      "status": "resolved",
+      "finding": "The legacy GTR001 no-B#/no-E# shorthand was corrected surgically in English/French/Spanish. The new passages distinguish one-semitone natural-note spacing from valid enharmonic spellings and explicitly limit C/F equivalence to12TET. Only these three amended passages were reviewed; other old exercises and broad claims were not re-reviewed or ratified."
+    },
+    {
+      "id": "gaa006-progression-link",
+      "status": "resolved",
+      "finding": "GAA006 already teaches capo direction, quality, modulo/register and already-applied offsets. Root added it as a GTR008 prerequisite and linked a progression sentence explicitly extending the earlier lesson to per-string origins, invalid positions and partial coverage. Final English/French/Spanish metadata and paragraphs directly rechecked; exercises remain unchanged."
+    }
+  ],
+  "fix_requests": [],
+  "fix_history": [
+    {
+      "id": "gaa006-progression-link",
+      "origin": "independent novelty/prerequisite review",
+      "status": "resolved",
+      "finding": "GAA006 already teaches capo direction, quality, modulo/register and already-applied offsets. Root added it as a GTR008 prerequisite and linked a progression sentence explicitly extending the earlier lesson to per-string origins, invalid positions and partial coverage. Final English/French/Spanish metadata and paragraphs directly rechecked; exercises remain unchanged."
+    },
+    {
+      "id": "legacy-enharmonic-passage",
+      "origin": "independent prerequisite review followed by authorized root correction",
+      "status": "resolved",
+      "finding": "The legacy GTR001 no-B#/no-E# shorthand was corrected surgically in English/French/Spanish. The new passages distinguish one-semitone natural-note spacing from valid enharmonic spellings and explicitly limit C/F equivalence to12TET. Only these three amended passages were reviewed; other old exercises and broad claims were not re-reviewed or ratified.",
+      "prior_receipt_sha256": "54b098f502b5ae0301e68691b5a77d7ac213d5b5cbbedeb95aa4d56ff933566c",
+      "amended_source_bindings": [
+        {
+          "path": "streeling/courses/guitar-studies/en/gtr-001-the-fretboard-map.md",
+          "sha256": "7e347ca0726145ac950994b1f25f58bc3b9972361a4be11bc0658f3d3f3c572c"
+        },
+        {
+          "path": "streeling/courses/guitar-studies/fr/gtr-001-the-fretboard-map.fr.md",
+          "sha256": "3aad326d306dd56b6cf0f6ad088a8919c05774f9b7bac66f1433ae8a365fa207"
+        },
+        {
+          "path": "streeling/courses/guitar-studies/es/gtr-001-the-fretboard-map.es.md",
+          "sha256": "07132f1300af6fe162edc154a605ea2ed6c38cfec21dc744ff81444b609bdf9c"
+        }
+      ],
+      "verification": "Each exact reverse-passage replacement independently reconstructs its recorded baseline SHA256 and unchanged frontmatter. All9new sources and45exercise-answer/15criterion decisions are unchanged."
+    },
+    {
+      "id": "final-generated-manifest-binding",
+      "status": "resolved",
+      "finding": "Root resumed and supplied final bindings, locale checks, source inventory and amended-passage checks, with updated README and production plan. All were directly read and bound. Previous absent-manifest scope is superseded; root build/render/publication outputs remain excluded as separate gates.",
+      "refreshed_existing_bindings": [
+        {
+          "path": "code/streeling/evidence/capo-spelling-2026-10-22/production-plan.md",
+          "old_sha256": "6cdc45fb6d9253a857e502e9e5a8486314cb69649dce9e41c3b65f8469ad1691",
+          "new_sha256": "701142b80c6d862c668e854b975f2bc3e1b5f1a26ef1dc923849a4fa742d66c6"
+        },
+        {
+          "path": "code/streeling/evidence/capo-spelling-2026-10-22/README.md",
+          "old_sha256": "a9c0db17b2cac3db49a653e0f9507e3cbc4c8a91353db5342f55cf3fc32c0937",
+          "new_sha256": "3dd84c76615a08f203b374550c1427346b9f29c14ac44212e0c0e0af66732ffd"
+        },
+        {
+          "path": "streeling/courses/guitar-studies/en/gtr-001-the-fretboard-map.md",
+          "old_sha256": "ab28c76d3aaafdd716c80913ccab851bf1c666ae3cc59302b15883cee45dd633",
+          "new_sha256": "7e347ca0726145ac950994b1f25f58bc3b9972361a4be11bc0658f3d3f3c572c"
+        }
+      ]
+    }
+  ],
+  "scope": {
+    "reviewed": "All nine English/French/Spanish bodies and45localized answer pairs; all15prepared criteria and final standalone task; fixed capo/spelling/degree records and three retained actual tool responses; six immutable source copies and eight primary text bodies. Separately, three amended GTR001 enharmonic passages were semantically reviewed and reverse-replacement baseline hashes verified. Source bindings include their complete-file hashes for provenance, without claiming a full re-review of the old courses.",
+    "method": "Direct independent agent semantic/source review, mathematical derivation and comparison with21-pass independent data audit, exact SHA bindings and locale mechanical checks. No new tool probe,native/build/import/playback/instrument/participant experiment,dependency install or paid call.",
+    "prerequisite_progression": "Five prior English courses directly read. GTR008 explicitly extends GAA006 root/register reasoning to per-string origins,double counting,mute/invalid separation and partial coverage. MCL008 adds diatonic spelling coordinates and invertible representation beyond MCL005 register/context loss. WML007 adds tonic/form-relative degree and syllable resolution beyond WML005 declared absolute note-name conventions.",
+    "localization": "All six full locale bodies and individual answers directly reviewed, including final GAA006 progression paragraphs. These are AI checks, not human fluent-language,musician or learner approval. The three amended prerequisite passages also pass bounded semantic review in their declared12TET context.",
+    "publication": "Only canonical source/evidence reviewed. Root tests,sync,build,rendered-link,idempotence and immutable source readback are separate gates excluded from supporting bindings to avoid circularity."
+  },
+  "generated_manifest_review": {
+    "present_and_bound": [
+      "bindings.json",
+      "locale-checks.json",
+      "source-inventory.json",
+      "amended-locale-checks.json"
+    ],
+    "absent_not_claimed_reviewed": [],
+    "source_binding_method": "Direct canonical bytes verified against the final source manifest;9new full-course sources and3amended-passage sources bound separately in review scope."
+  },
+  "exercise_answer_checks": [
+    {
+      "id": "GTR008-en-exercise-1",
+      "module": "GTR008",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-studies/en/gtr-008-count-a-capo-offset-once.md",
+      "heading_line": 30,
+      "exercise_answer_sha256": "de5c2701ebeac7806584392b9ff1a0d7f5ebef1c8d6437ae93a2fb12e8d4b8b7",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Under ideal full-capo12TET and low-to-high tuning[40,45,50,55,59,64], Cshape[-1,3,2,0,1,0] at capo2 maps to physical[-1,5,4,2,3,2] and pitches[null,50,54,57,62,66]. Relative0 lies at physical2. Muted-1 is retained as status, not shifted or interpreted as zero frequency."
+    },
+    {
+      "id": "GTR008-en-exercise-2",
+      "module": "GTR008",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-studies/en/gtr-008-count-a-capo-offset-once.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "fdaea1be93160a0c683e30be1ea454a64bf990ac59a0014a895dea2f6d4e02ed",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "For each sounding string a=c+r and T+a=(T+c)+r. Fifth-string45+5=(45+2)+3=50, while(45+2)+5=52 counts capo2 twice. This ideal arithmetic establishes no measured intonation."
+    },
+    {
+      "id": "GTR008-en-exercise-3",
+      "module": "GTR008",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-studies/en/gtr-008-count-a-capo-offset-once.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "a2dd7dba94cc3331ea796c59caf0e420dfd0b9e4e6706832f8a95737472d4e85",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Sounding Bmajor at capo4 requires Gmajor root11-4=7. The recorded tool returned G for Bdown4, while quality preservation is inspected source behavior, not a CapoSkill execution. Modulo12 cannot detect the capo12 absolute rise by12; service revision remains unknown."
+    },
+    {
+      "id": "GTR008-en-exercise-4",
+      "module": "GTR008",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-studies/en/gtr-008-count-a-capo-offset-once.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "20abdab8f0bd8b501157ea9dd81b6992be6cabdaf2369eefe769d3423376fa58",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Physical1 behind full capo2 is invalid, not muted merely because1-2=-1. Partial shifts[0,2,2,2,2,2] give Eshape pitches[40,49,54,58,61,66], versus full[42,49,54,58,61,66]. Lowest-string distinction disproves uniform transposition for this example; no physical playability follows."
+    },
+    {
+      "id": "GTR008-en-exercise-5",
+      "module": "GTR008",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-studies/en/gtr-008-count-a-capo-offset-once.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "6254f563c5171a6d2c786a4f44f1196c14f31003af0db3d73c7943066895724c",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual selected sources store technical string/fret integers independently, lack capo in selected attributes, define RelativeFret as generic distance, and parse explicit navigation coordinates without a capo shift. MusicXML string1 is highest full-length string, opposite this array order. Handoff context and a typed-record baseline remain proposed; no import/render/playback/playing occurred."
+    },
+    {
+      "id": "GTR008-fr-exercise-1",
+      "module": "GTR008",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-studies/fr/gtr-008-count-a-capo-offset-once.fr.md",
+      "heading_line": 30,
+      "exercise_answer_sha256": "481a9883af5d5713d4fcf9a69fdecdc4fe81488f25e3af482999b875ec07c24b",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Under ideal full-capo12TET and low-to-high tuning[40,45,50,55,59,64], Cshape[-1,3,2,0,1,0] at capo2 maps to physical[-1,5,4,2,3,2] and pitches[null,50,54,57,62,66]. Relative0 lies at physical2. Muted-1 is retained as status, not shifted or interpreted as zero frequency."
+    },
+    {
+      "id": "GTR008-fr-exercise-2",
+      "module": "GTR008",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-studies/fr/gtr-008-count-a-capo-offset-once.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "81a592218311f2accec11ce8567a78e94feec745570cd070921a1326c7880101",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "For each sounding string a=c+r and T+a=(T+c)+r. Fifth-string45+5=(45+2)+3=50, while(45+2)+5=52 counts capo2 twice. This ideal arithmetic establishes no measured intonation."
+    },
+    {
+      "id": "GTR008-fr-exercise-3",
+      "module": "GTR008",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-studies/fr/gtr-008-count-a-capo-offset-once.fr.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "535bfc617a48644ab51ecf85b0f79ed09bb8d758c2bb00e0e5a60f68c499da6b",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Sounding Bmajor at capo4 requires Gmajor root11-4=7. The recorded tool returned G for Bdown4, while quality preservation is inspected source behavior, not a CapoSkill execution. Modulo12 cannot detect the capo12 absolute rise by12; service revision remains unknown."
+    },
+    {
+      "id": "GTR008-fr-exercise-4",
+      "module": "GTR008",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-studies/fr/gtr-008-count-a-capo-offset-once.fr.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "48625919865a562af7844d1c910115ebc1f80323283120032345a10419c81a9e",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Physical1 behind full capo2 is invalid, not muted merely because1-2=-1. Partial shifts[0,2,2,2,2,2] give Eshape pitches[40,49,54,58,61,66], versus full[42,49,54,58,61,66]. Lowest-string distinction disproves uniform transposition for this example; no physical playability follows."
+    },
+    {
+      "id": "GTR008-fr-exercise-5",
+      "module": "GTR008",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-studies/fr/gtr-008-count-a-capo-offset-once.fr.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "d5b864c9195c28204199dd3d82360617c802e33d985ff2d4285ce076e0a3df3e",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual selected sources store technical string/fret integers independently, lack capo in selected attributes, define RelativeFret as generic distance, and parse explicit navigation coordinates without a capo shift. MusicXML string1 is highest full-length string, opposite this array order. Handoff context and a typed-record baseline remain proposed; no import/render/playback/playing occurred."
+    },
+    {
+      "id": "GTR008-es-exercise-1",
+      "module": "GTR008",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-studies/es/gtr-008-count-a-capo-offset-once.es.md",
+      "heading_line": 30,
+      "exercise_answer_sha256": "daf666cef962a60d84e1f1f4b6e343fda8a389f8330a9a97faa48a04a681902f",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Under ideal full-capo12TET and low-to-high tuning[40,45,50,55,59,64], Cshape[-1,3,2,0,1,0] at capo2 maps to physical[-1,5,4,2,3,2] and pitches[null,50,54,57,62,66]. Relative0 lies at physical2. Muted-1 is retained as status, not shifted or interpreted as zero frequency."
+    },
+    {
+      "id": "GTR008-es-exercise-2",
+      "module": "GTR008",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-studies/es/gtr-008-count-a-capo-offset-once.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "f5e73406a42a94464e8964046fa24185898b9539cf083534f64ffa6be2166f5b",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "For each sounding string a=c+r and T+a=(T+c)+r. Fifth-string45+5=(45+2)+3=50, while(45+2)+5=52 counts capo2 twice. This ideal arithmetic establishes no measured intonation."
+    },
+    {
+      "id": "GTR008-es-exercise-3",
+      "module": "GTR008",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-studies/es/gtr-008-count-a-capo-offset-once.es.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "1c7eedfceb3e1debaa7898c5b5d03651ba619f04135d25ac6f97fbc01555e110",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Sounding Bmajor at capo4 requires Gmajor root11-4=7. The recorded tool returned G for Bdown4, while quality preservation is inspected source behavior, not a CapoSkill execution. Modulo12 cannot detect the capo12 absolute rise by12; service revision remains unknown."
+    },
+    {
+      "id": "GTR008-es-exercise-4",
+      "module": "GTR008",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-studies/es/gtr-008-count-a-capo-offset-once.es.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "b8565c37664ae38587557bb463768c941f52c2aa36d43eb2a0d6f879e8435d6c",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Physical1 behind full capo2 is invalid, not muted merely because1-2=-1. Partial shifts[0,2,2,2,2,2] give Eshape pitches[40,49,54,58,61,66], versus full[42,49,54,58,61,66]. Lowest-string distinction disproves uniform transposition for this example; no physical playability follows."
+    },
+    {
+      "id": "GTR008-es-exercise-5",
+      "module": "GTR008",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-studies/es/gtr-008-count-a-capo-offset-once.es.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "733d54070685263d27f6968ac04e029b870164b536e31051e6767efbe1ae1750",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual selected sources store technical string/fret integers independently, lack capo in selected attributes, define RelativeFret as generic distance, and parse explicit navigation coordinates without a capo shift. MusicXML string1 is highest full-length string, opposite this array order. Handoff context and a typed-record baseline remain proposed; no import/render/playback/playing occurred."
+    },
+    {
+      "id": "MCL008-en-exercise-1",
+      "module": "MCL008",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/en/mcl-008-keep-diatonic-and-chromatic-transposition-separate.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "54db916f7dc84e05c2cf17774a8d041ed66b9c20596f6ff1decc416c34b10c31",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The letter coordinate j=7*octave+letter_index and absolute number transform independently as j+d+7o,m+c+12o. From C4=60, chromatic+1 with diatonic0 gives C#4; diatonic+1 gives Db4. Both61 preserve different spellings; semitone offset alone underdetermines the letter."
+    },
+    {
+      "id": "MCL008-en-exercise-2",
+      "module": "MCL008",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/en/mcl-008-keep-diatonic-and-chromatic-transposition-separate.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "80cc670a31e92d20b0c22ce96207e29cb2a977a659bc7b53666c564f98bf6133",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "B3 plus one letter/semitone gives C4=60; C4 down one letter/two semitones gives Bb3=58. B#3=60 and Cb4=59 cross the natural C boundary. Letter, alteration and written octave jointly determine the sounding number."
+    },
+    {
+      "id": "MCL008-en-exercise-3",
+      "module": "MCL008",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/en/mcl-008-keep-diatonic-and-chromatic-transposition-separate.md",
+      "heading_line": 50,
+      "exercise_answer_sha256": "2a06e29587a7281f9255583e2346fae44cf4a171e75b4df3cccfb9ed35e6d3fa",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Octave change-1 with zero d/c changes j by-7 and m by-12, giving C3=48. C4 with alteration-12 reaches the number but not the intended representation. Integer storage/commented ranges alone do not validate accidental support."
+    },
+    {
+      "id": "MCL008-en-exercise-4",
+      "module": "MCL008",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/en/mcl-008-keep-diatonic-and-chromatic-transposition-separate.md",
+      "heading_line": 62,
+      "exercise_answer_sha256": "37be35262afe0e928c26a25cdc0acf59b82e6f9e399c178dac6424b1e4f9b209",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "C#4/Db4 plus one letter/two semitones become D#4/Eb4, both63. Keeping target spelling and declared offsets supports the demonstrated exact inverse; keeping only63 loses the two origins. The ten fixed cases are bounded arithmetic, not a general notation implementation."
+    },
+    {
+      "id": "MCL008-en-exercise-5",
+      "module": "MCL008",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/en/mcl-008-keep-diatonic-and-chromatic-transposition-separate.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "62fe5add4dfcc0ac24b393738b21dc95e53e95c401d8472e804b1423d8e37e3a",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual MusicXML type retains Step/Alter/Octave and computes an integer projection; selected parser attributes omit transpose. CapoSkill sharp/flat preference is distinct from diatonic spelling transformation. A typed transform with explicit supported context and independent enharmonic/boundary/inverse checks precedes any DSL proposal; no native adapter, score import/render or playback was delivered."
+    },
+    {
+      "id": "MCL008-fr-exercise-1",
+      "module": "MCL008",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/fr/mcl-008-keep-diatonic-and-chromatic-transposition-separate.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "b94f3cff3f06dcad07054ff7971bb958fe7f93a191ac5171280885c54775802b",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The letter coordinate j=7*octave+letter_index and absolute number transform independently as j+d+7o,m+c+12o. From C4=60, chromatic+1 with diatonic0 gives C#4; diatonic+1 gives Db4. Both61 preserve different spellings; semitone offset alone underdetermines the letter."
+    },
+    {
+      "id": "MCL008-fr-exercise-2",
+      "module": "MCL008",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/fr/mcl-008-keep-diatonic-and-chromatic-transposition-separate.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "8814a500cac7a2b45040e15fa86ecc5661e424a43c1d3296e813a2cc08ace453",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "B3 plus one letter/semitone gives C4=60; C4 down one letter/two semitones gives Bb3=58. B#3=60 and Cb4=59 cross the natural C boundary. Letter, alteration and written octave jointly determine the sounding number."
+    },
+    {
+      "id": "MCL008-fr-exercise-3",
+      "module": "MCL008",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/fr/mcl-008-keep-diatonic-and-chromatic-transposition-separate.fr.md",
+      "heading_line": 50,
+      "exercise_answer_sha256": "cc434710f35ad24805bc457d63cbc99752ad7b2aafecda3dc55ed13cdd2d59de",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Octave change-1 with zero d/c changes j by-7 and m by-12, giving C3=48. C4 with alteration-12 reaches the number but not the intended representation. Integer storage/commented ranges alone do not validate accidental support."
+    },
+    {
+      "id": "MCL008-fr-exercise-4",
+      "module": "MCL008",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/fr/mcl-008-keep-diatonic-and-chromatic-transposition-separate.fr.md",
+      "heading_line": 62,
+      "exercise_answer_sha256": "5120e50dc62ab71dcd73692e8177ce64ec398071fdee2417841894465f129244",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "C#4/Db4 plus one letter/two semitones become D#4/Eb4, both63. Keeping target spelling and declared offsets supports the demonstrated exact inverse; keeping only63 loses the two origins. The ten fixed cases are bounded arithmetic, not a general notation implementation."
+    },
+    {
+      "id": "MCL008-fr-exercise-5",
+      "module": "MCL008",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/fr/mcl-008-keep-diatonic-and-chromatic-transposition-separate.fr.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "72e2d861308ce9f667c3a571c8484e599f6463c9de2d8ba41e3c7a7a02dfff35",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual MusicXML type retains Step/Alter/Octave and computes an integer projection; selected parser attributes omit transpose. CapoSkill sharp/flat preference is distinct from diatonic spelling transformation. A typed transform with explicit supported context and independent enharmonic/boundary/inverse checks precedes any DSL proposal; no native adapter, score import/render or playback was delivered."
+    },
+    {
+      "id": "MCL008-es-exercise-1",
+      "module": "MCL008",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/es/mcl-008-keep-diatonic-and-chromatic-transposition-separate.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "aaea5d9aaba186dccc37d2c5d5f730f3d1d817fdcc955a7475896b073b6101d7",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "The letter coordinate j=7*octave+letter_index and absolute number transform independently as j+d+7o,m+c+12o. From C4=60, chromatic+1 with diatonic0 gives C#4; diatonic+1 gives Db4. Both61 preserve different spellings; semitone offset alone underdetermines the letter."
+    },
+    {
+      "id": "MCL008-es-exercise-2",
+      "module": "MCL008",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/es/mcl-008-keep-diatonic-and-chromatic-transposition-separate.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "4d82bbfaa51b6ca9777ec4b3b9f14882434e78067442455482436a1727bacab4",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "B3 plus one letter/semitone gives C4=60; C4 down one letter/two semitones gives Bb3=58. B#3=60 and Cb4=59 cross the natural C boundary. Letter, alteration and written octave jointly determine the sounding number."
+    },
+    {
+      "id": "MCL008-es-exercise-3",
+      "module": "MCL008",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/es/mcl-008-keep-diatonic-and-chromatic-transposition-separate.es.md",
+      "heading_line": 50,
+      "exercise_answer_sha256": "9ca93ffa600d3b9370593e3bb8991bb2715b6d790fe3d0667b1a638a054ca275",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Octave change-1 with zero d/c changes j by-7 and m by-12, giving C3=48. C4 with alteration-12 reaches the number but not the intended representation. Integer storage/commented ranges alone do not validate accidental support."
+    },
+    {
+      "id": "MCL008-es-exercise-4",
+      "module": "MCL008",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/es/mcl-008-keep-diatonic-and-chromatic-transposition-separate.es.md",
+      "heading_line": 62,
+      "exercise_answer_sha256": "4a639ef2f5f838a55cefbca99d38157178a093562cb683f8d9ecb98e2c43ca8b",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "C#4/Db4 plus one letter/two semitones become D#4/Eb4, both63. Keeping target spelling and declared offsets supports the demonstrated exact inverse; keeping only63 loses the two origins. The ten fixed cases are bounded arithmetic, not a general notation implementation."
+    },
+    {
+      "id": "MCL008-es-exercise-5",
+      "module": "MCL008",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/es/mcl-008-keep-diatonic-and-chromatic-transposition-separate.es.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "2781b95698c0d31730596fa8c154dc7d9a2a6b5ffe0e28d77d9673a8c6563ff7",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Actual MusicXML type retains Step/Alter/Octave and computes an integer projection; selected parser attributes omit transpose. CapoSkill sharp/flat preference is distinct from diatonic spelling transformation. A typed transform with explicit supported context and independent enharmonic/boundary/inverse checks precedes any DSL proposal; no native adapter, score import/render or playback was delivered."
+    },
+    {
+      "id": "WML007-en-exercise-1",
+      "module": "WML007",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/world-music-languages/en/wml-007-resolve-scale-degrees-against-tonic-and-mode.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "136408bfa7db18c839da9f401d665d63cb192a3457381cc11cfaafed281fd7f8",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Degree is an index into the declared scale table. D4major1/3/5 uses offsets0/4/7 giving62/66/69, not degree-minus-one semitones: degree3 is F#4=66 rather than E4=64. This is a bounded12TET example."
+    },
+    {
+      "id": "WML007-en-exercise-2",
+      "module": "WML007",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/world-music-languages/en/wml-007-resolve-scale-degrees-against-tonic-and-mode.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "b4983d035f2db8508444ff8ed90081cfb2405dc802283fb0f2efb29783ae5767",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "D4naturalminor yields62/65/69, changing only the third relative to the major triad. Tonic class2 supplies no register or scale form; generic minor does not specify every raised/lowered degree."
+    },
+    {
+      "id": "WML007-en-exercise-3",
+      "module": "WML007",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/world-music-languages/en/wml-007-resolve-scale-degrees-against-tonic-and-mode.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "94be39aa5671c46f162bfb33a9bfb81a79c141af0fab34e7384a480b9bd6ee24",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "MusicXML fifths2 counts a traditional signature, not a complete tonic/mode/register context. Even restricted to major/minor, Dclass2 and Bclass11 differ; absent mode or register cannot justify D4major. Other named modes remain possible."
+    },
+    {
+      "id": "WML007-en-exercise-4",
+      "module": "WML007",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/world-music-languages/en/wml-007-resolve-scale-degrees-against-tonic-and-mode.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "d15c436257a931ee78b212e17cbccdb1b0fe6efbc046ab46002103e8e395638a",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Declared relative-major D4do/re/mi gives62/64/66, while declared fixed natural names at register4 give60/62/64. Unqualified do needs convention/register. Degree8 lies outside this chosen1..7 interface, not outside all musical systems; nationality supplies no convention."
+    },
+    {
+      "id": "WML007-en-exercise-5",
+      "module": "WML007",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/world-music-languages/en/wml-007-resolve-scale-degrees-against-tonic-and-mode.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "8b6d6a19a70c14e679b3edde69cbb6d11f841203c20a921fccac62072d794d85",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Selected key parser stores fifths/optional mode without degree resolution. At76ef PitchParser uses anchored absolute A..G, optional single sharp/flat and octave; that observation does not rewrite WML005's distinct older-pin boundary. Proposed handoff retains token/vocabulary/tonic-register/form/direction-range/tuning/spelling/revision and unresolved context; no resolver, singing or learner outcome is established."
+    },
+    {
+      "id": "WML007-fr-exercise-1",
+      "module": "WML007",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/world-music-languages/fr/wml-007-resolve-scale-degrees-against-tonic-and-mode.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "8ca23eb3fc01321b808fe8462616928985457f9926e170f3b1502259b3fbd026",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Degree is an index into the declared scale table. D4major1/3/5 uses offsets0/4/7 giving62/66/69, not degree-minus-one semitones: degree3 is F#4=66 rather than E4=64. This is a bounded12TET example."
+    },
+    {
+      "id": "WML007-fr-exercise-2",
+      "module": "WML007",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/world-music-languages/fr/wml-007-resolve-scale-degrees-against-tonic-and-mode.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "1400d5075fc96a309e1095c9e099a02d0806b71a1cf9b70e051f7ea97b75d0c3",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "D4naturalminor yields62/65/69, changing only the third relative to the major triad. Tonic class2 supplies no register or scale form; generic minor does not specify every raised/lowered degree."
+    },
+    {
+      "id": "WML007-fr-exercise-3",
+      "module": "WML007",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/world-music-languages/fr/wml-007-resolve-scale-degrees-against-tonic-and-mode.fr.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "8b79fc871f50f140ba14bc46c7f8a4dd33e91a85b2d8e743dcd76a3ee5542222",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "MusicXML fifths2 counts a traditional signature, not a complete tonic/mode/register context. Even restricted to major/minor, Dclass2 and Bclass11 differ; absent mode or register cannot justify D4major. Other named modes remain possible."
+    },
+    {
+      "id": "WML007-fr-exercise-4",
+      "module": "WML007",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/world-music-languages/fr/wml-007-resolve-scale-degrees-against-tonic-and-mode.fr.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "73107552e01c8861c477f66bc554b8ffec6826314d9157d39c4d0aa26f6c50d0",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Declared relative-major D4do/re/mi gives62/64/66, while declared fixed natural names at register4 give60/62/64. Unqualified do needs convention/register. Degree8 lies outside this chosen1..7 interface, not outside all musical systems; nationality supplies no convention."
+    },
+    {
+      "id": "WML007-fr-exercise-5",
+      "module": "WML007",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/world-music-languages/fr/wml-007-resolve-scale-degrees-against-tonic-and-mode.fr.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "d1e2850496caf94434cb1527a4619119fef8a976d1fc67b0ef7890073689124d",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Selected key parser stores fifths/optional mode without degree resolution. At76ef PitchParser uses anchored absolute A..G, optional single sharp/flat and octave; that observation does not rewrite WML005's distinct older-pin boundary. Proposed handoff retains token/vocabulary/tonic-register/form/direction-range/tuning/spelling/revision and unresolved context; no resolver, singing or learner outcome is established."
+    },
+    {
+      "id": "WML007-es-exercise-1",
+      "module": "WML007",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/world-music-languages/es/wml-007-resolve-scale-degrees-against-tonic-and-mode.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "b17c53fac96c7ac88a47e90e84553ae61beea5706f0fe9daa6019a51ba331045",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Degree is an index into the declared scale table. D4major1/3/5 uses offsets0/4/7 giving62/66/69, not degree-minus-one semitones: degree3 is F#4=66 rather than E4=64. This is a bounded12TET example."
+    },
+    {
+      "id": "WML007-es-exercise-2",
+      "module": "WML007",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/world-music-languages/es/wml-007-resolve-scale-degrees-against-tonic-and-mode.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "df56035e429e0f37d36cd7854271459eebfa4f3641ca728e1f00d660c2cd4545",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "D4naturalminor yields62/65/69, changing only the third relative to the major triad. Tonic class2 supplies no register or scale form; generic minor does not specify every raised/lowered degree."
+    },
+    {
+      "id": "WML007-es-exercise-3",
+      "module": "WML007",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/world-music-languages/es/wml-007-resolve-scale-degrees-against-tonic-and-mode.es.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "d9d8e48377b7912f433b343561bd863b4d062e47fcbb7a71e7a6f115ed8c2f8d",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "MusicXML fifths2 counts a traditional signature, not a complete tonic/mode/register context. Even restricted to major/minor, Dclass2 and Bclass11 differ; absent mode or register cannot justify D4major. Other named modes remain possible."
+    },
+    {
+      "id": "WML007-es-exercise-4",
+      "module": "WML007",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/world-music-languages/es/wml-007-resolve-scale-degrees-against-tonic-and-mode.es.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "5d4097813500e7556790b401c799c768e2d38c570a9224e204b1333ea4af3dd5",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Declared relative-major D4do/re/mi gives62/64/66, while declared fixed natural names at register4 give60/62/64. Unqualified do needs convention/register. Degree8 lies outside this chosen1..7 interface, not outside all musical systems; nationality supplies no convention."
+    },
+    {
+      "id": "WML007-es-exercise-5",
+      "module": "WML007",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/world-music-languages/es/wml-007-resolve-scale-degrees-against-tonic-and-mode.es.md",
+      "heading_line": 74,
+      "exercise_answer_sha256": "321e86dc51e333db2f0076cbe4dcd0afb4b60f6c01d6a932a39a3abfa6a03dae",
+      "decision": "pass",
+      "learner_decision": null,
+      "checked_conclusion": "Selected key parser stores fifths/optional mode without degree resolution. At76ef PitchParser uses anchored absolute A..G, optional single sharp/flat and octave; that observation does not rewrite WML005's distinct older-pin boundary. Proposed handoff retains token/vocabulary/tonic-register/form/direction-range/tuning/spelling/revision and unresolved context; no resolver, singing or learner outcome is established."
+    }
+  ],
+  "learner_criterion_checks": [
+    {
+      "id": "GTR008-1",
+      "module": "GTR008",
+      "title": "coordinates",
+      "acceptance_reviewed": "Low->highT40/45/50/55/59/64,Cshape[-1,3,2,0,1,0],c2->absolute[-1,5,4,2,3,2],soundnull/50/54/57/62/66;mutestatusnotshift,relative0physical2.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Under ideal full-capo12TET and low-to-high tuning[40,45,50,55,59,64], Cshape[-1,3,2,0,1,0] at capo2 maps to physical[-1,5,4,2,3,2] and pitches[null,50,54,57,62,66]. Relative0 lies at physical2. Muted-1 is retained as status, not shifted or interpreted as zero frequency.",
+      "task_alignment": "Final standalone task explicitly elicits the prepared criterion, with the source-assisted course context. Actual answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "GTR008-2",
+      "module": "GTR008",
+      "title": "doublecount",
+      "acceptance_reviewed": "a=c+r,T+a=(T+c)+r. Fifthstring45+5=(45+2)+3=50;retuned+absolute52doublecounts2. IdealTETnotmeasurement.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "For each sounding string a=c+r and T+a=(T+c)+r. Fifth-string45+5=(45+2)+3=50, while(45+2)+5=52 counts capo2 twice. This ideal arithmetic establishes no measured intonation.",
+      "task_alignment": "Final standalone task explicitly elicits the prepared criterion, with the source-assisted course context. Actual answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "GTR008-3",
+      "module": "GTR008",
+      "title": "direction-register",
+      "acceptance_reviewed": "Bmajorcapo4->Gmajorroot11-4=7;actualBdown4toolGonlyroot,qualitysourceinspectednotexecuted. Capo12samePCbutabsolute+12. Servicerevunknown/CapoSkillnotcalled.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Sounding Bmajor at capo4 requires Gmajor root11-4=7. The recorded tool returned G for Bdown4, while quality preservation is inspected source behavior, not a CapoSkill execution. Modulo12 cannot detect the capo12 absolute rise by12; service revision remains unknown.",
+      "task_alignment": "Final standalone task explicitly elicits the prepared criterion, with the source-assisted course context. Actual answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "GTR008-4",
+      "module": "GTR008",
+      "title": "invalid-partial",
+      "acceptance_reviewed": "Physical1behindfullcapo2rawdifference-1isinvalidnotmute. Partialshift0/2/2/2/2/2Eshape->[40,49,54,58,61,66]vsfull[42,49,54,58,61,66],notuniformpitchshiftorplayability.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Physical1 behind full capo2 is invalid, not muted merely because1-2=-1. Partial shifts[0,2,2,2,2,2] give Eshape pitches[40,49,54,58,61,66], versus full[42,49,54,58,61,66]. Lowest-string distinction disproves uniform transposition for this example; no physical playability follows.",
+      "task_alignment": "Final standalone task explicitly elicits the prepared criterion, with the source-assisted course context. Actual answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "GTR008-5",
+      "module": "GTR008",
+      "title": "source-contract",
+      "acceptance_reviewed": "MusicXMLstring1highest,ourarraylowestfirst. Sourceindependenttechnicalints,noattributescapo;RelativeFretgenericnotcapoorigin,Navexplicitcoords. RetainT/order/coverage/origin/status/pitch/pin,typedrecordbeforeDSL;notimport/render/playback/playingtrial.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Actual selected sources store technical string/fret integers independently, lack capo in selected attributes, define RelativeFret as generic distance, and parse explicit navigation coordinates without a capo shift. MusicXML string1 is highest full-length string, opposite this array order. Handoff context and a typed-record baseline remain proposed; no import/render/playback/playing occurred.",
+      "task_alignment": "Final standalone task explicitly elicits the prepared criterion, with the source-assisted course context. Actual answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "MCL008-1",
+      "module": "MCL008",
+      "title": "two-coordinates",
+      "acceptance_reviewed": "j=7octave+letterindex;targetj+d+7o,m+c+12o,alterdifference. C4c1d0->C#4,c1d1->Db4,both61notspellingequal.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "The letter coordinate j=7*octave+letter_index and absolute number transform independently as j+d+7o,m+c+12o. From C4=60, chromatic+1 with diatonic0 gives C#4; diatonic+1 gives Db4. Both61 preserve different spellings; semitone offset alone underdetermines the letter.",
+      "task_alignment": "Final standalone task explicitly elicits the prepared criterion, with the source-assisted course context. Actual answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "MCL008-2",
+      "module": "MCL008",
+      "title": "octave-boundary",
+      "acceptance_reviewed": "B3+1letter/+1semiC4=60;C4-1letter/-2semiBb3=58. B#3=60,Cb4=59;letter+alter+octavenecessary.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "B3 plus one letter/semitone gives C4=60; C4 down one letter/two semitones gives Bb3=58. B#3=60 and Cb4=59 cross the natural C boundary. Letter, alteration and written octave jointly determine the sounding number.",
+      "task_alignment": "Final standalone task explicitly elicits the prepared criterion, with the source-assisted course context. Actual answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "MCL008-3",
+      "module": "MCL008",
+      "title": "octave-contribution",
+      "acceptance_reviewed": "C4o-1,d/c0 shiftsj-7,m-12->C3=48. C4alter-12numericallysamebutnotintendedrepresentation;intdoesnotvalidateaccidentalrange.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Octave change-1 with zero d/c changes j by-7 and m by-12, giving C3=48. C4 with alteration-12 reaches the number but not the intended representation. Integer storage/commented ranges alone do not validate accidental support.",
+      "task_alignment": "Final standalone task explicitly elicits the prepared criterion, with the source-assisted course context. Actual answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "MCL008-4",
+      "module": "MCL008",
+      "title": "inverse",
+      "acceptance_reviewed": "C#4/Db4+d1c2->D#4/Eb4both63. Retainedspell+offsetsinverseexact10cases;projected63cannotrecoverdistinctorigins.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "C#4/Db4 plus one letter/two semitones become D#4/Eb4, both63. Keeping target spelling and declared offsets supports the demonstrated exact inverse; keeping only63 loses the two origins. The ten fixed cases are bounded arithmetic, not a general notation implementation.",
+      "task_alignment": "Final standalone task explicitly elicits the prepared criterion, with the source-assisted course context. Actual answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "MCL008-5",
+      "module": "MCL008",
+      "title": "source-handoff",
+      "acceptance_reviewed": "MusicXMLstoresStep/Alter/Octave andMIDIconversioncollapse,selectedattributesnotranspose. Capo sharp/flatpreference notdiatonictransform. Retainoriginal/offsets/targetspellandnumber/pin/supportpolicy,testenharmonic/boundary/inverse;typedtransformbeforeDSL.Noactualadapter/import/score/playback.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Actual MusicXML type retains Step/Alter/Octave and computes an integer projection; selected parser attributes omit transpose. CapoSkill sharp/flat preference is distinct from diatonic spelling transformation. A typed transform with explicit supported context and independent enharmonic/boundary/inverse checks precedes any DSL proposal; no native adapter, score import/render or playback was delivered.",
+      "task_alignment": "Final standalone task explicitly elicits the prepared criterion, with the source-assisted course context. Actual answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "WML007-1",
+      "module": "WML007",
+      "title": "index",
+      "acceptance_reviewed": "D4=62majoroffset0/4/7=>62/66/69;degree3notdegree-1semitones64. BoundedTETtable.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Degree is an index into the declared scale table. D4major1/3/5 uses offsets0/4/7 giving62/66/69, not degree-minus-one semitones: degree3 is F#4=66 rather than E4=64. This is a bounded12TET example.",
+      "task_alignment": "Final standalone task explicitly elicits the prepared criterion, with the source-assisted course context. Actual answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "WML007-2",
+      "module": "WML007",
+      "title": "form-register",
+      "acceptance_reviewed": "Dnaturalminor62/65/69diffthird1semi;tonicPC2neitherregister4norscaleform. Genericminornotautomaticallyeveryraiseddegree.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "D4naturalminor yields62/65/69, changing only the third relative to the major triad. Tonic class2 supplies no register or scale form; generic minor does not specify every raised/lowered degree.",
+      "task_alignment": "Final standalone task explicitly elicits the prepared criterion, with the source-assisted course context. Actual answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "WML007-3",
+      "module": "WML007",
+      "title": "key-context",
+      "acceptance_reviewed": "fifths2nomode:majorDPC2vsminorBPC11atleast;modeandregisterguessesnotobserved. Othermodespossible,signaturealoneinsufficient.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "MusicXML fifths2 counts a traditional signature, not a complete tonic/mode/register context. Even restricted to major/minor, Dclass2 and Bclass11 differ; absent mode or register cannot justify D4major. Other named modes remain possible.",
+      "task_alignment": "Final standalone task explicitly elicits the prepared criterion, with the source-assisted course context. Actual answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "WML007-4",
+      "module": "WML007",
+      "title": "vocabulary",
+      "acceptance_reviewed": "DeclaredrelativemajorD4do/re/mi62/64/66 vsfixednaturalreg4C/D/E60/62/64;unknownneedsconvention/register,degree8outsidescoped1..7notuniversalrule/nationalityclaim.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Declared relative-major D4do/re/mi gives62/64/66, while declared fixed natural names at register4 give60/62/64. Unqualified do needs convention/register. Degree8 lies outside this chosen1..7 interface, not outside all musical systems; nationality supplies no convention.",
+      "task_alignment": "Final standalone task explicitly elicits the prepared criterion, with the source-assisted course context. Actual answers and assistance are required before a learner decision."
+    },
+    {
+      "id": "WML007-5",
+      "module": "WML007",
+      "title": "source-handoff",
+      "acceptance_reviewed": "KeyparserstoresFifths/optionalModestringnotdegreeprojection;76efPitchParseranchoredsingleaccidentalabsoluteoctave,notretroactiveolderpin. Originaltoken/vocab/tonicregister/form/directionrange/tuning/spelling/pin;preserveunknown,typedlookupbeforeDSL;notimplementedresolver/singing/learner.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Selected key parser stores fifths/optional mode without degree resolution. At76ef PitchParser uses anchored absolute A..G, optional single sharp/flat and octave; that observation does not rewrite WML005's distinct older-pin boundary. Proposed handoff retains token/vocabulary/tonic-register/form/direction-range/tuning/spelling/revision and unresolved context; no resolver, singing or learner outcome is established.",
+      "task_alignment": "Final standalone task explicitly elicits the prepared criterion, with the source-assisted course context. Actual answers and assistance are required before a learner decision."
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-008-count-a-capo-offset-once.md",
+      "sha256": "9722b08f06b5203cb9923295395aa89892891672503bf898d6557bad4477f49c"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/fr/gtr-008-count-a-capo-offset-once.fr.md",
+      "sha256": "7146652c07163c4b65d618c65f6b354301b68f1a10d0823c1ac76e10b88a5355"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/es/gtr-008-count-a-capo-offset-once.es.md",
+      "sha256": "b03e311604121c47539b86e7167fdf5f7d14c7b146e596d1c60b6cc3d9e48f86"
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-008-keep-diatonic-and-chromatic-transposition-separate.md",
+      "sha256": "c093d138add9d620ea4c6d0ec0d4c728de1ec0804f7f24ef26260928b1d821f4"
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-008-keep-diatonic-and-chromatic-transposition-separate.fr.md",
+      "sha256": "d9b8c3622e6f70222069b9eed6425e92d51398ebe56032d1a41ca04670be0138"
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-008-keep-diatonic-and-chromatic-transposition-separate.es.md",
+      "sha256": "717bcd7fc805846c013f83087be4c916d68d8a49046a0cda564b8bd1375c7cba"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-007-resolve-scale-degrees-against-tonic-and-mode.md",
+      "sha256": "6cdc497892019ec4163395c53f884187545a23809bb5789a931f29a12595441c"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/fr/wml-007-resolve-scale-degrees-against-tonic-and-mode.fr.md",
+      "sha256": "d3c8f19156625f8538aebcc44067a4a3a2e1563521afabda52156a17d2d53dab"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/es/wml-007-resolve-scale-degrees-against-tonic-and-mode.es.md",
+      "sha256": "bb86680427f61076d712f31a20ca827b667ea03748c5f8e92f5b47b0a4e10058"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-001-the-fretboard-map.md",
+      "sha256": "7e347ca0726145ac950994b1f25f58bc3b9972361a4be11bc0658f3d3f3c572c"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/fr/gtr-001-the-fretboard-map.fr.md",
+      "sha256": "3aad326d306dd56b6cf0f6ad088a8919c05774f9b7bac66f1433ae8a365fa207"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/es/gtr-001-the-fretboard-map.es.md",
+      "sha256": "07132f1300af6fe162edc154a605ea2ed6c38cfec21dc744ff81444b609bdf9c"
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/production-plan.md",
+      "sha256": "701142b80c6d862c668e854b975f2bc3e1b5f1a26ef1dc923849a4fa742d66c6"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/README.md",
+      "sha256": "3dd84c76615a08f203b374550c1427346b9f29c14ac44212e0c0e0af66732ffd"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/learner-task.md",
+      "sha256": "4283830ed333f94ce2e948279a799c2312880a804d0c581895bd699ac3ea25e6"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/reviewer-rubric.json",
+      "sha256": "9f1448309e0761399cc7715cb018685003faf05225a5380a129e973a09d30368"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/primary-readback.json",
+      "sha256": "83bb0e8a0f2614017ab585c1562a4df16186d57d5a295140f05550b166a5dd9d"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/primary-reading.json",
+      "sha256": "f7d91cab7599e3091c91d70e9a17fd67f7550a6fd47fcbd6017a062f7c3e93f5"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/source-observations.json",
+      "sha256": "b81027935227d237e818e080d86136aea37bd89076b3ce480f2be701e68f67f9"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/theory-tool-probes.json",
+      "sha256": "0712fa6564e851f30f33b57b7fb07f6b97d05918f2bff40313e86ea54ca84d8b"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/capo-coordinates.json",
+      "sha256": "794f000d87743564ed4b5dd668e0daed28a32460552f90e909ae9d864fa92950"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/spelled-transpositions.json",
+      "sha256": "9bf6df53d552a7a94771791c91ef16c8b3b22208f03f2e77b4cffc598d28c160"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/degree-context.json",
+      "sha256": "55215f759ee0060edd6e5771e0eef3b3b11e02458ef3027a6658451fbb6b911e"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/data-audit.json",
+      "sha256": "58c38af3e6e7efaca5a56b152dc36c5589eae96b2234521e989daf1ecc777cf5"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/official-links.json",
+      "sha256": "4ac3591e2589f8905f927fb0ba865b86cc03a150f6ecfaa0089ea1cf81343d69"
+    },
+    {
+      "path": "C:/tmp/streeling-capo-spelling-inputs-20261022/MusicXmlTypes.fs",
+      "sha256": "e894f70561db1f4d1bdd378e8ccc0646250793896144f0a7f39a66b18d40cd1a"
+    },
+    {
+      "path": "C:/tmp/streeling-capo-spelling-inputs-20261022/MusicXmlParser.fs",
+      "sha256": "73ab96a59b50831b9930cbb8d37368febd6fc8d124d57ca70a3ff4c289940fee"
+    },
+    {
+      "path": "C:/tmp/streeling-capo-spelling-inputs-20261022/CapoSkill.cs",
+      "sha256": "ea548ed5575a5ea70adfa8db1065bb84c286ac825817e8bfb2f443da96289130"
+    },
+    {
+      "path": "C:/tmp/streeling-capo-spelling-inputs-20261022/PitchParser.cs",
+      "sha256": "0d9e9b3fff2fd0e564ca33462adaaaf897f1a51117039523c04df3931a987d25"
+    },
+    {
+      "path": "C:/tmp/streeling-capo-spelling-inputs-20261022/RelativeFret.cs",
+      "sha256": "ff3bc51cd41fc59d04384348330c909f2c2bb17a64d593205b10f2eeb2faa618"
+    },
+    {
+      "path": "C:/tmp/streeling-capo-spelling-inputs-20261022/FretboardNavigationParser.fs",
+      "sha256": "b8bc69642cff4fb3d759d4068cf70586f26815fe5db5181591198d75768d3f4a"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/bindings.json",
+      "sha256": "9a16a267c58d28362f3c34938de2f573e19a74e04d2293a8245c0e0d31a2a0c4"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/locale-checks.json",
+      "sha256": "2a4b8432d63a9861fabee2ea9ee3c35d5b16f7cc03e4da33d439c523163f63ab"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/source-inventory.json",
+      "sha256": "35a5b69b9cbf421c1422421c1b0e705b6576c1efe111877772a48500e3688c1b"
+    },
+    {
+      "path": "code/streeling/evidence/capo-spelling-2026-10-22/amended-locale-checks.json",
+      "sha256": "b5ad0d6c1d2adee47d5d0fc8fbfa549fbe2903301d26f8e9139beadc2a8aa829"
+    }
+  ],
+  "prerequisite_bindings": [
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-001-the-fretboard-map.md",
+      "sha256": "7e347ca0726145ac950994b1f25f58bc3b9972361a4be11bc0658f3d3f3c572c"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-003-audit-voicing-playability.md",
+      "sha256": "b70485d9d047e2ef9151e6732762031fb56b442cadaf0129ea0bf4e24476276a"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-006-separate-capo-shapes-from-sounding-pitches.md",
+      "sha256": "e055691e582eedd19198e5138a0a7b761ab2ddcaf3698c92e6d7630375b0dba7"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-005-declare-note-name-conventions.md",
+      "sha256": "6f2b4dc89deddd995693c2be4dee7bf2bb130d3e1d04b3691a7922bfeb8abcbb"
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-005-preserve-written-and-sounding-pitch.md",
+      "sha256": "b4bcf44717f388103507ea2679cbe143bc01251cbd1079a1e6a5c8e89c5fd5dd"
+    }
+  ],
+  "locale_url_and_format_checks": [
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-008-count-a-capo-offset-once.md",
+      "ordered_urls_match_english": true,
+      "inline_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/guitar-studies/fr/gtr-008-count-a-capo-offset-once.fr.md",
+      "ordered_urls_match_english": true,
+      "inline_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/guitar-studies/es/gtr-008-count-a-capo-offset-once.es.md",
+      "ordered_urls_match_english": true,
+      "inline_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-008-keep-diatonic-and-chromatic-transposition-separate.md",
+      "ordered_urls_match_english": true,
+      "inline_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-008-keep-diatonic-and-chromatic-transposition-separate.fr.md",
+      "ordered_urls_match_english": true,
+      "inline_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-008-keep-diatonic-and-chromatic-transposition-separate.es.md",
+      "ordered_urls_match_english": true,
+      "inline_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-007-resolve-scale-degrees-against-tonic-and-mode.md",
+      "ordered_urls_match_english": true,
+      "inline_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/world-music-languages/fr/wml-007-resolve-scale-degrees-against-tonic-and-mode.fr.md",
+      "ordered_urls_match_english": true,
+      "inline_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/world-music-languages/es/wml-007-resolve-scale-degrees-against-tonic-and-mode.es.md",
+      "ordered_urls_match_english": true,
+      "inline_code_and_numeric_multisets_match_english": true,
+      "utf8_lf_no_bom": true
+    }
+  ],
+  "primary_source_review": [
+    {
+      "repo": "GuitarAlchemist/ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Common/GA.Business.DSL/Types/MusicXmlTypes.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Types/MusicXmlTypes.fs",
+      "temporary_path": "C:/tmp/streeling-capo-spelling-inputs-20261022/MusicXmlTypes.fs",
+      "sha256": "e894f70561db1f4d1bdd378e8ccc0646250793896144f0a7f39a66b18d40cd1a",
+      "review_scope": "Actual pinned selected source/type text read for the asserted coordinate,spelling,parser and routing boundaries; no native execution."
+    },
+    {
+      "repo": "GuitarAlchemist/ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Common/GA.Business.DSL/Parsers/MusicXmlParser.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Parsers/MusicXmlParser.fs",
+      "temporary_path": "C:/tmp/streeling-capo-spelling-inputs-20261022/MusicXmlParser.fs",
+      "sha256": "73ab96a59b50831b9930cbb8d37368febd6fc8d124d57ca70a3ff4c289940fee",
+      "review_scope": "Actual pinned selected source/type text read for the asserted coordinate,spelling,parser and routing boundaries; no native execution."
+    },
+    {
+      "repo": "GuitarAlchemist/ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Common/GA.Business.ML/Agents/Skills/CapoSkill.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.ML/Agents/Skills/CapoSkill.cs",
+      "temporary_path": "C:/tmp/streeling-capo-spelling-inputs-20261022/CapoSkill.cs",
+      "sha256": "ea548ed5575a5ea70adfa8db1065bb84c286ac825817e8bfb2f443da96289130",
+      "review_scope": "Actual pinned selected source/type text read for the asserted coordinate,spelling,parser and routing boundaries; no native execution."
+    },
+    {
+      "repo": "GuitarAlchemist/ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Common/GA.Domain.Core/Primitives/Notes/PitchParser.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Domain.Core/Primitives/Notes/PitchParser.cs",
+      "temporary_path": "C:/tmp/streeling-capo-spelling-inputs-20261022/PitchParser.cs",
+      "sha256": "0d9e9b3fff2fd0e564ca33462adaaaf897f1a51117039523c04df3931a987d25",
+      "review_scope": "Actual pinned selected source/type text read for the asserted coordinate,spelling,parser and routing boundaries; no native execution."
+    },
+    {
+      "repo": "GuitarAlchemist/ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Common/GA.Domain.Core/Instruments/Primitives/RelativeFret.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Domain.Core/Instruments/Primitives/RelativeFret.cs",
+      "temporary_path": "C:/tmp/streeling-capo-spelling-inputs-20261022/RelativeFret.cs",
+      "sha256": "ff3bc51cd41fc59d04384348330c909f2c2bb17a64d593205b10f2eeb2faa618",
+      "review_scope": "Actual pinned selected source/type text read for the asserted coordinate,spelling,parser and routing boundaries; no native execution."
+    },
+    {
+      "repo": "GuitarAlchemist/ga",
+      "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "path": "Common/GA.Business.DSL/Parsers/FretboardNavigationParser.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Parsers/FretboardNavigationParser.fs",
+      "temporary_path": "C:/tmp/streeling-capo-spelling-inputs-20261022/FretboardNavigationParser.fs",
+      "sha256": "b8bc69642cff4fb3d759d4068cf70586f26815fe5db5181591198d75768d3f4a",
+      "review_scope": "Actual pinned selected source/type text read for the asserted coordinate,spelling,parser and routing boundaries; no native execution."
+    }
+  ],
+  "official_document_review": [
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/capo/",
+      "actual_read": "Actual body read: fret placement changes staff-tuning open pitches by the stated half-steps."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fret/",
+      "actual_read": "Actual body read:0open/1first fret; this alone does not define a consumer capo-coordinate policy."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/string/",
+      "actual_read": "Actual body read:string1is highest-pitched full-length string."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/diatonic/",
+      "actual_read": "Actual body read:written-to-sounding pitch steps for enharmonic spelling, excluding separate octave-change."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/chromatic/",
+      "actual_read": "Actual body read:written-to-sounding semitones, excluding separate octave-change."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/mode/",
+      "actual_read": "Actual body read:major/minor and other named modes."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fifths/",
+      "actual_read": "Actual body read:traditional signature flats/sharps count; no tonic register."
+    },
+    {
+      "url": "https://openmusictheory.github.io/scales.html",
+      "actual_read": "Actual legacy author-published text read:major/natural-minor steps,tonic,scale degrees and movable-do. No images,newer inaccessible page,cultural classification or learner effect imported."
+    }
+  ],
+  "pending": {
+    "human_technical_review": null,
+    "musician_review": null,
+    "fluent_language_review": null,
+    "learner_attempts": null,
+    "independent_learner_transfer": null,
+    "runtime_validation": null,
+    "native_skill_execution": null,
+    "native_parser_execution": null,
+    "capo_adapter": null,
+    "degree_resolver": null,
+    "new_transposition_adapter": null,
+    "score_import": null,
+    "MusicXML_output": null,
+    "rendered_score": null,
+    "playback": null,
+    "playing_trial": null,
+    "instrument_measurement": null,
+    "intonation_measurement": null,
+    "physical_playability": null,
+    "singing_trial": null,
+    "causal_learning_benefit": null,
+    "new_DSL": null,
+    "production_contract": null,
+    "deployed_html": null
+  },
+  "human_technical_review": null,
+  "musician_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "independent_learner_transfer": null,
+  "runtime_validation": null,
+  "native_skill_execution": null,
+  "native_parser_execution": null,
+  "capo_adapter": null,
+  "degree_resolver": null,
+  "new_transposition_adapter": null,
+  "score_import": null,
+  "MusicXML_output": null,
+  "rendered_score": null,
+  "playback": null,
+  "playing_trial": null,
+  "instrument_measurement": null,
+  "intonation_measurement": null,
+  "physical_playability": null,
+  "singing_trial": null,
+  "causal_learning_benefit": null,
+  "new_DSL": null,
+  "production_contract": null,
+  "deployed_html": null,
+  "amended_passage_checks": [
+    {
+      "decision": "pass",
+      "learner_decision": null,
+      "path": "streeling/courses/guitar-studies/en/gtr-001-the-fretboard-map.md",
+      "sha256": "7e347ca0726145ac950994b1f25f58bc3b9972361a4be11bc0658f3d3f3c572c",
+      "amended_passage_sha256": "efb382be7b7782ec1d2034d48ffcabf4e007fe06e7a9609cf17c8cfb7442a73f",
+      "scope": "Only the amended enharmonic passage; old exercises and the remaining old course were not re-reviewed.",
+      "explanation": "One-semitone spacing of adjacent natural B/C and E/F does not forbid B# or E# spelling. In the explicitly declared twelve-tone equal-tempered model B#/E# sound at C/F; French and Spanish use Si#/Mi# and Do/Fa consistently. No universal intonation equivalence is claimed. MCL008 links spelling to the new lesson. Reversing only this passage reconstructs the exact baseline SHA256; metadata and other source bytes are preserved.",
+      "baseline_sha256_reconstructed": "ab28c76d3aaafdd716c80913ccab851bf1c666ae3cc59302b15883cee45dd633",
+      "metadata_and_rest_preserved": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "decision": "pass",
+      "learner_decision": null,
+      "path": "streeling/courses/guitar-studies/fr/gtr-001-the-fretboard-map.fr.md",
+      "sha256": "3aad326d306dd56b6cf0f6ad088a8919c05774f9b7bac66f1433ae8a365fa207",
+      "amended_passage_sha256": "406e87f0e2b155fa1a1a44feb921e57ed765f1252082cff5da2efc8f63f0a463",
+      "scope": "Only the amended enharmonic passage; old exercises and the remaining old course were not re-reviewed.",
+      "explanation": "One-semitone spacing of adjacent natural B/C and E/F does not forbid B# or E# spelling. In the explicitly declared twelve-tone equal-tempered model B#/E# sound at C/F; French and Spanish use Si#/Mi# and Do/Fa consistently. No universal intonation equivalence is claimed. MCL008 links spelling to the new lesson. Reversing only this passage reconstructs the exact baseline SHA256; metadata and other source bytes are preserved.",
+      "baseline_sha256_reconstructed": "6bfdcab0573c141538faf05cf4333f2dd8d9f85474df93c37638cc009fd55b97",
+      "metadata_and_rest_preserved": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "decision": "pass",
+      "learner_decision": null,
+      "path": "streeling/courses/guitar-studies/es/gtr-001-the-fretboard-map.es.md",
+      "sha256": "07132f1300af6fe162edc154a605ea2ed6c38cfec21dc744ff81444b609bdf9c",
+      "amended_passage_sha256": "65f9fab9e0f899cd49e0c176741ec4ba65dee0df55320ae4995e23bcc7ee6e3d",
+      "scope": "Only the amended enharmonic passage; old exercises and the remaining old course were not re-reviewed.",
+      "explanation": "One-semitone spacing of adjacent natural B/C and E/F does not forbid B# or E# spelling. In the explicitly declared twelve-tone equal-tempered model B#/E# sound at C/F; French and Spanish use Si#/Mi# and Do/Fa consistently. No universal intonation equivalence is claimed. MCL008 links spelling to the new lesson. Reversing only this passage reconstructs the exact baseline SHA256; metadata and other source bytes are preserved.",
+      "baseline_sha256_reconstructed": "78a6127e20d23443a8bf4fd561fc8a8e3facdcdd1c7b151ab83e0e77d7acadda",
+      "metadata_and_rest_preserved": true,
+      "utf8_lf_no_bom": true
+    }
+  ],
+  "amended_passage_coverage": 3,
+  "rechecked_at_utc": "2026-10-23T02:56:26.105678+00:00"
+}

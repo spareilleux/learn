@@ -312,6 +312,18 @@ public static class Report
         _ => string.Join(" ", properties.HomeStates.Select(m => m.ToString())),
     };
 
+    /// <summary>
+    /// The lines that differ between two listings, paired by position. Lesson 16 prints what a net
+    /// means as lines, and compares the listing before a round trip through PNML with the one after.
+    /// A line present in one listing only is paired with null: Zip would stop at the shorter listing
+    /// and drop it.
+    /// </summary>
+    public static IReadOnlyList<(string? Was, string? Now)> LineDifferences(IReadOnlyList<string> was, IReadOnlyList<string> now) =>
+        Enumerable.Range(0, Math.Max(was.Count, now.Count))
+            .Select(i => (Was: i < was.Count ? was[i] : null, Now: i < now.Count ? now[i] : null))
+            .Where(pair => pair.Was != pair.Now)
+            .ToList();
+
     private static string YesNo(bool value) => value ? "yes" : "no";
 
     private static string Plural(int count, string noun) => $"{count} {noun}" + (count == 1 ? "" : "s");

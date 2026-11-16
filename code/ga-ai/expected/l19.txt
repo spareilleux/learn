@@ -1,0 +1,54 @@
+# l19
+
+== The 15 candidates the tool pairs for each chord, at the pin, against the chord a textbook spells
+chord    exact   no fifth   more   part   other   exact in the index  first exact candidate
+C        10      0          0      5      0       63                  rank 1
+F        15      0          0      0      0       35                  rank 1
+Am       3       0          0      10     2       35                  rank 1
+G7       0       15         0      0      0       49                  none
+Cmaj7    5       3          0      7      0       42                  rank 4
+Dm7      0       5          0      10     0       25                  none
+G        15      0          0      0      0       35                  rank 1
+Em       15      0          0      0      0       63                  rank 1
+A7       0       2          0      7      6       35                  none
+Fmaj7    0       15         0      0      0       60                  none
+Bm7b5    4       0          0      11     0       25                  rank 1
+D        7       0          0      5      3       27                  rank 1
+A        5       0          0      5      5       21                  rank 11
+C7       1       12         0      2      0       49                  rank 15
+candidates 210: exact 80, no fifth 52, more 0, part 62, other 16
+
+== The tool's first pair for each prompt, at the pin, and the smoothest pair of exact voicings in the index
+prompt         first pair: from                           to                                   both right   smoothest exact pair in the index    least in pitch classes
+C → F          5: x-3-x-0-1-x C5, part                    x-3-x-2-1-1 F/C, exact               4 of 5       3: x-x-x-0-1-0 → x-x-x-2-1-1         3
+C → Am         3: x-3-2-x-1-x C + E (Major 3rd), part     x-3-2-2-x-x Am/C, exact              0 of 5       2: x-x-x-0-1-0 → x-x-x-2-1-0         2
+G7 → Cmaj7     3: x-2-3-x-0-3 G7(shell)/B, no fifth       x-2-x-0-1-3 C5/B, part               1 of 5       3: x-x-0-0-0-1 → x-3-x-0-0-0         3
+Dm7 → G7       6: x-3-3-x-3-x Dm7(shell)/C, no fifth      x-2-3-x-x-3 G7(shell)/B, no fifth    5 of 5       3: x-x-0-2-1-1 → x-x-0-0-0-1         3
+C → G          6: x-x-2-0-1-x C/E, exact                  x-x-0-0-0-3 G/D, exact               4 of 5       3: x-x-2-x-1-3 → x-x-0-x-0-3         3
+Em → A7        5: 3-x-2-x-0-0 Em/G, exact                 3-x-2-2-x-x A5/G, part               0 of 5       4: x-x-2-0-0-3 → x-x-2-2-2-3         4
+Fmaj7 → Bm7b5  4: 0-0-3-x-x-x Fmaj7(shell)/E, no fifth    1-0-3-x-0-x Bm7b5/F, part            1 of 5       3: x-x-2-2-1-1 → x-x-0-2-0-1         3
+D → A          4: x-0-x-2-3-x D5, part                    x-0-x-2-2-0 A, exact                 0 of 5       3: x-x-x-2-3-2 → x-x-x-2-2-0         3
+C7 → F         4: x-3-x-3-1-x Bb + C (Major 2nd), part    x-3-x-2-1-1 F/C, exact               4 of 5       4: x-x-2-3-1-3 → x-x-3-2-1-1         4
+G7 → C         5: x-x-3-0-0-3 G7(shell)/F, no fifth       x-x-2-0-1-x C/E, exact               5 of 5       4: x-x-0-0-0-1 → x-x-2-0-1-0         4
+prompts 10: first pair right on both sides 3, moves more than the smoothest exact pair 8; that pair moves the least in pitch classes 10
+the first pair for C → F, as the tool returns it: diagram x-1-0-x-3-x → 1-1-2-x-3-x
+
+== The first pair with 50 candidates per chord, the most the tool allows, at the pin
+prompt         distance   from         to           first pair
+C → F          3          part         part         0-x-2-x-x-0 E (unison) → 1-x-3-x-x-1 F (unison)
+C → Am         0          part         part         0-x-2-x-x-0 E (unison) → 0-x-2-x-x-0 E (unison)
+G7 → Cmaj7     3          no fifth     part         x-2-3-x-0-3 G7(shell)/B → x-2-x-0-1-3 C5/B
+Dm7 → G7       3          other        part         1-x-3-0-3-x G5/F → 1-x-3-0-x-x F + G (Major 2nd)
+C → G          0          part         part         3-x-x-0-x-3 G (unison) → 3-x-x-0-x-3 G (unison)
+Em → A7        0          other        part         x-0-x-0-x-0 A5 → x-0-x-0-x-0 A5
+Fmaj7 → Bm7b5  1          part         other        0-x-3-x-1-x F5/E → 0-x-3-x-0-x E5
+D → A          2          part         part         x-0-x-2-3-x D5 → x-0-x-2-x-0 A5
+C7 → F         4          part         exact        x-3-x-3-1-x Bb + C (Major 2nd) → x-3-x-2-1-1 F/C
+G7 → C         2          part         part         1-x-x-0-x-3 F + G (Major 2nd) → 3-x-x-0-x-3 G (unison)
+prompts 10: first pair right on both sides 0
+
+== The tool's distance on every pair it weighs for the ten prompts, at the pin, against the least motion
+pairs of equal size 867: the distance is the least over every pairing 867
+pairs of unequal size 1383: the distance is the least over every choice of notes 593
+the largest gap, 39 semitones: 0-2-2-0-0-0 Em [40 47 52 55 59 64] → x-x-x-2-2-3 A7(shell) [57 61 67], distance 55, least 16
+prompts whose first pair would move less with the least over every choice of notes: 0 of 10

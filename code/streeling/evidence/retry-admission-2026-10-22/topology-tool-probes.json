@@ -1,0 +1,121 @@
+{
+  "scope": "Actual bounded IX MCP responses, service revision unknown. Raw order and errors retained; no external effect tools, NL/LLM provider, worker-capacity measurement, cache-hit trial or runtime retry experiment.",
+  "responses": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "diamond",
+        "args": {
+          "operation": "info",
+          "steps": [
+            {
+              "id": "a"
+            },
+            {
+              "id": "b",
+              "depends_on": [
+                "a"
+              ]
+            },
+            {
+              "id": "c",
+              "depends_on": [
+                "a"
+              ]
+            },
+            {
+              "id": "d",
+              "depends_on": [
+                "b",
+                "c"
+              ]
+            }
+          ]
+        },
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"edge_count\": 4,\n  \"leaves\": [\n    \"d\"\n  ],\n  \"max_parallelism\": 2,\n  \"node_count\": 4,\n  \"parallel_levels\": [\n    [\n      \"a\"\n    ],\n    [\n      \"c\",\n      \"b\"\n    ],\n    [\n      \"d\"\n    ]\n  ],\n  \"roots\": [\n    \"a\"\n  ],\n  \"topological_order\": [\n    \"a\",\n    \"c\",\n    \"b\",\n    \"d\"\n  ]\n}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "wide-eight",
+        "args": {
+          "operation": "info",
+          "steps": [
+            {
+              "id": "w0"
+            },
+            {
+              "id": "w1"
+            },
+            {
+              "id": "w2"
+            },
+            {
+              "id": "w3"
+            },
+            {
+              "id": "w4"
+            },
+            {
+              "id": "w5"
+            },
+            {
+              "id": "w6"
+            },
+            {
+              "id": "w7"
+            }
+          ]
+        },
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"edge_count\": 0,\n  \"leaves\": [\n    \"w0\",\n    \"w1\",\n    \"w2\",\n    \"w3\",\n    \"w4\",\n    \"w5\",\n    \"w6\",\n    \"w7\"\n  ],\n  \"max_parallelism\": 8,\n  \"node_count\": 8,\n  \"parallel_levels\": [\n    [\n      \"w2\",\n      \"w5\",\n      \"w6\",\n      \"w0\",\n      \"w1\",\n      \"w7\",\n      \"w3\",\n      \"w4\"\n    ]\n  ],\n  \"roots\": [\n    \"w0\",\n    \"w1\",\n    \"w2\",\n    \"w3\",\n    \"w4\",\n    \"w5\",\n    \"w6\",\n    \"w7\"\n  ],\n  \"topological_order\": [\n    \"w2\",\n    \"w5\",\n    \"w6\",\n    \"w0\",\n    \"w3\",\n    \"w1\",\n    \"w4\",\n    \"w7\"\n  ]\n}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "cycle",
+        "args": {
+          "operation": "info",
+          "steps": [
+            {
+              "id": "a",
+              "depends_on": [
+                "b"
+              ]
+            },
+            {
+              "id": "b",
+              "depends_on": [
+                "a"
+              ]
+            }
+          ]
+        },
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Error: execution failed: adding edge a → b would create a cycle"
+            }
+          ],
+          "isError": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+COG021 fixed {"probabilities": [0.5, 0.119202922022], "information": [0.25, 0.419974341614], "best_indices": [1]}
+COG021 negative_control {"probabilities": [0.26894142137, 0.017986209962], "information": [0.196611933241, 0.070650824853], "best_indices": [0]}
+COG022 fixed {"fit": [0.2, 0.5, 0.5, 0.9], "weighted_squared_error": 0.12}
+COG022 negative_control {"fit": [0.2, 0.7, 0.7, 0.9], "weighted_squared_error": 0.12}
+COG023 fixed {"weights": [1.25, -0.25], "fused": 9.0, "variance": 0.875, "independence_weight_variance": 1.28}
+COG023 negative_control {"weights": [0.8, 0.2], "fused": 10.8, "variance": 0.8, "independence_weight_variance": 0.8}
+CYB021 fixed {"reachability_matrix": [[2, 1, 0], [1, 1, 1]], "rank": 2, "feasible_sequences": [[1, 0, 0]], "minimum_energy": 1, "optimal_controls": [[1, 0, 0]], "final_state": [2, 1]}
+CYB021 negative_control {"reachability_matrix": [[1, 0], [1, 1]], "rank": 2, "feasible_sequences": [], "minimum_energy": null, "optimal_controls": [], "final_state": null}
+CYB022 fixed {"feasible": true, "feasible_interval": [-2, 1], "action": 1, "next_state": 1, "squared_change": 4}
+CYB022 negative_control {"feasible": false, "feasible_interval": null, "action": null, "next_state": null, "squared_change": null}
+CYB023 fixed {"gram": [[2, 1], [1, 2]], "rhs": [7, 8], "determinant": 3, "rank": 2, "unique_parameters": [2.0, 3.0]}
+CYB023 negative_control {"gram": [[14, 14], [14, 14]], "rhs": [70, 70], "determinant": 0, "rank": 1, "unique_parameters": null}
+INF022 fixed {"unnormalized": ["2/5", "1/10"], "normalizer": "1/2", "posterior": ["4/5", "1/5"], "total_variation": "3/10"}
+INF022 negative_control {"unnormalized": ["1/5", "1/5"], "normalizer": "2/5", "posterior": ["1/2", "1/2"], "total_variation": "0"}
+INF023 fixed {"wire": ["A", "D", "G", "B", "E", "H", "C", "F", "I"], "reconstructed": [[null, "B", "C"], [null, "E", "F"], [null, "H", "I"]], "missing_per_block": [1, 1, 1], "missing_total": 3}
+INF023 negative_control {"wire": ["A", "B", "C", "D", "E", "F", "G", "H", "I"], "reconstructed": [[null, null, null], ["D", "E", "F"], ["G", "H", "I"]], "missing_per_block": [3, 0, 0], "missing_total": 3}
+INF024 fixed {"intervals": [["0", "1/4"], ["1/16", "1/4"], ["1/16", "7/64"]], "width": "3/64", "tag_inside": true, "decoded": "ABA"}
+INF024 negative_control {"intervals": [["0", "1/4"], ["1/16", "1/4"], ["7/64", "1/4"]], "width": "9/64", "tag_inside": true, "decoded": "ABB"}
+NET019 fixed {"minimum_cost": 6, "optimal_trees": [["AB", "BC", "CD"]]}
+NET019 negative_control {"minimum_cost": 8, "optimal_trees": [["AB", "BC", "BD"]]}
+NET020 fixed {"chromatic_number": 2, "colors": [0, 1, 0, 1]}
+NET020 negative_control {"chromatic_number": 3, "colors": [0, 1, 2, 1]}
+NET021 fixed {"cycle_product": 1, "consistent": true, "labels": [1, 1, -1]}
+NET021 negative_control {"cycle_product": -1, "consistent": false, "labels": null}
+PM016 fixed {"nondominated": ["A", "B", "D"], "dominance_pairs": [["A", "C"], ["B", "C"], ["D", "C"]]}
+PM016 negative_control {"nondominated": ["A", "B"], "dominance_pairs": [["A", "C"], ["A", "D"], ["B", "C"], ["B", "D"], ["D", "C"]]}
+PM017 fixed {"quotas": ["7/2", "21/10", "7/5"], "floors": [3, 2, 1], "remainder_order": [0, 2, 1], "allocation": [4, 2, 1]}
+PM017 negative_control {"quotas": ["4", "12/5", "8/5"], "floors": [4, 2, 1], "remainder_order": [2, 1, 0], "allocation": [4, 2, 2]}
+PM018 fixed {"scores": ["13/2", "3"], "winners": ["B"], "crossover_weight": "3/5", "crossover_scores": ["22/5", "22/5"], "crossover_winners": ["A", "B"]}
+PM018 negative_control {"scores": ["7/2", "5"], "winners": ["A"], "crossover_weight": "3/5", "crossover_scores": ["22/5", "22/5"], "crossover_winners": ["A", "B"]}
+PM019 fixed {"candidate_variances": ["4/7", "1/2", "8/15", "5/8", "4/5", "7/6", "16/7"], "optimal_allocations": [[2, 6]], "minimum_variance": "1/2"}
+PM019 negative_control {"candidate_variances": ["16/7", "7/6", "4/5", "5/8", "8/15", "1/2", "4/7"], "optimal_allocations": [[6, 2]], "minimum_variance": "1/2"}
+AUTHOR SELF CHECK PASS errors 0 prose minimum 820

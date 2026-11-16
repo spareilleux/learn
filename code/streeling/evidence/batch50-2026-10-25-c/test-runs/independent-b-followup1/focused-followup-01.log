@@ -1,0 +1,85 @@
+test_cog021 (__main__.UnitB.test_cog021) ... 
+OBSERVATION {"case": "model", "code": "COG021", "expected": {"best_indices": [1], "information": [0.25, 0.419974341614], "probabilities": [0.5, 0.119202922022]}, "observed": {"best_indices": [1], "information": [0.25, 0.419974341614], "probabilities": [0.5, 0.119202922022]}, "scope": "Stipulated one-dimensional Bernoulli logistic item curves, fixed ability and no guessing; no fitted learner result."}
+
+OBSERVATION {"case": "negative", "code": "COG021", "expected": {"best_indices": [0], "information": [0.196611933241, 0.070650824853], "probabilities": [0.26894142137, 0.017986209962]}, "observed": {"best_indices": [0], "information": [0.196611933241, 0.070650824853], "probabilities": [0.26894142137, 0.017986209962]}, "scope": "Stipulated one-dimensional Bernoulli logistic item curves, fixed ability and no guessing; no fitted learner result."}
+ok
+test_cog022 (__main__.UnitB.test_cog022) ... 
+OBSERVATION {"case": "model", "code": "COG022", "expected": {"fit": [0.2, 0.5, 0.5, 0.9], "weighted_squared_error": 0.12}, "observed": {"fit": [0.2, 0.5, 0.5, 0.9], "weighted_squared_error": 0.12}, "scope": "Four ordered training frequencies with positive case weights, weighted nondecreasing least squares; no held-out calibration."}
+
+OBSERVATION {"case": "negative", "code": "COG022", "expected": {"fit": [0.2, 0.7, 0.7, 0.9], "weighted_squared_error": 0.12}, "observed": {"fit": [0.2, 0.7, 0.7, 0.9], "weighted_squared_error": 0.12}, "scope": "Four ordered training frequencies with positive case weights, weighted nondecreasing least squares; no held-out calibration."}
+ok
+test_cog023 (__main__.UnitB.test_cog023) ... 
+OBSERVATION {"case": "model", "code": "COG023", "expected": {"fused": 9, "independence_weight_variance": 1.28, "variance": 0.875, "weights": [1.25, -0.25]}, "observed": {"fused": 9, "independence_weight_variance": 1.28, "variance": 0.875, "weights": [1.25, -0.25]}, "scope": "Two unbiased scalar estimates, known positive-definite covariance and unconstrained weights summing to one; no measured perception."}
+
+OBSERVATION {"case": "negative", "code": "COG023", "expected": {"fused": 10.8, "independence_weight_variance": 0.8, "variance": 0.8, "weights": [0.8, 0.2]}, "observed": {"fused": 10.8, "independence_weight_variance": 0.8, "variance": 0.8, "weights": [0.8, 0.2]}, "scope": "Two unbiased scalar estimates, known positive-definite covariance and unconstrained weights summing to one; no measured perception."}
+ok
+test_cyb021 (__main__.UnitB.test_cyb021) ... 
+OBSERVATION {"case": "model", "code": "CYB021", "expected": {"feasible_sequences": [[1, 0, 0]], "final_state": [2, 1], "minimum_energy": 1, "optimal_controls": [[1, 0, 0]], "rank": 2, "reachability_matrix": [[2, 1, 0], [1, 1, 1]]}, "observed": {"feasible_sequences": [[1, 0, 0]], "final_state": [2, 1], "minimum_energy": 1, "optimal_controls": [[1, 0, 0]], "rank": 2, "reachability_matrix": [[2, 1, 0], [1, 1, 1]]}, "scope": "Exact two-dimensional discrete recurrence, finite horizon and bounded finite action alphabet; energy is squared commands."}
+
+OBSERVATION {"case": "negative", "code": "CYB021", "expected": {"feasible_sequences": [], "final_state": null, "minimum_energy": null, "optimal_controls": [], "rank": 2, "reachability_matrix": [[1, 0], [1, 1]]}, "observed": {"feasible_sequences": [], "final_state": null, "minimum_energy": null, "optimal_controls": [], "rank": 2, "reachability_matrix": [[1, 0], [1, 1]]}, "scope": "Exact two-dimensional discrete recurrence, finite horizon and bounded finite action alphabet; energy is squared commands."}
+ok
+test_cyb022 (__main__.UnitB.test_cyb022) ... 
+OBSERVATION {"case": "model", "code": "CYB022", "expected": {"action": 1, "feasible": true, "feasible_interval": [-2, 1], "next_state": 1, "squared_change": 4}, "observed": {"action": 1, "feasible": true, "feasible_interval": [-2, 1], "next_state": 1, "squared_change": 4}, "scope": "Scalar exact next-state equation and one actuator interval; no disturbance or physical safety certification."}
+
+OBSERVATION {"case": "negative", "code": "CYB022", "expected": {"action": null, "feasible": false, "feasible_interval": null, "next_state": null, "squared_change": null}, "observed": {"action": null, "feasible": false, "feasible_interval": null, "next_state": null, "squared_change": null}, "scope": "Scalar exact next-state equation and one actuator interval; no disturbance or physical safety certification."}
+ok
+test_cyb023 (__main__.UnitB.test_cyb023) ... 
+OBSERVATION {"case": "model", "code": "CYB023", "expected": {"determinant": 3, "gram": [[2, 1], [1, 2]], "rank": 2, "rhs": [7, 8], "unique_parameters": [2, 3]}, "observed": {"determinant": 3, "gram": [[2, 1], [1, 2]], "rank": 2, "rhs": [7, 8], "unique_parameters": [2, 3]}, "scope": "Finite exact two-column design and normal equations; rank is not an infinite persistent-excitation guarantee."}
+
+OBSERVATION {"case": "negative", "code": "CYB023", "expected": {"determinant": 0, "gram": [[14, 14], [14, 14]], "rank": 1, "rhs": [70, 70], "unique_parameters": null}, "observed": {"determinant": 0, "gram": [[14, 14], [14, 14]], "rank": 1, "rhs": [70, 70], "unique_parameters": null}, "scope": "Finite exact two-column design and normal equations; rank is not an infinite persistent-excitation guarantee."}
+ok
+test_inf022 (__main__.UnitB.test_inf022) ... 
+OBSERVATION {"case": "model", "code": "INF022", "expected": {"normalizer": "1/2", "posterior": ["4/5", "1/5"], "total_variation": "3/10", "unnormalized": ["2/5", "1/10"]}, "observed": {"normalizer": "1/2", "posterior": ["4/5", "1/5"], "total_variation": "3/10", "unnormalized": ["2/5", "1/10"]}, "scope": "Complete finite prior/likelihood vectors and positive marginal; total variation measures movement, not truth."}
+
+OBSERVATION {"case": "negative", "code": "INF022", "expected": {"normalizer": "2/5", "posterior": ["1/2", "1/2"], "total_variation": "0", "unnormalized": ["1/5", "1/5"]}, "observed": {"normalizer": "2/5", "posterior": ["1/2", "1/2"], "total_variation": "0", "unnormalized": ["1/5", "1/5"]}, "scope": "Complete finite prior/likelihood vectors and positive marginal; total variation measures movement, not truth."}
+ok
+test_inf023 (__main__.UnitB.test_inf023) ... 
+OBSERVATION {"case": "model", "code": "INF023", "expected": {"missing_per_block": [1, 1, 1], "missing_total": 3, "reconstructed": [[null, "B", "C"], [null, "E", "F"], [null, "H", "I"]], "wire": ["A", "D", "G", "B", "E", "H", "C", "F", "I"]}, "observed": {"missing_per_block": [1, 1, 1], "missing_total": 3, "reconstructed": [[null, "B", "C"], [null, "E", "F"], [null, "H", "I"]], "wire": ["A", "D", "G", "B", "E", "H", "C", "F", "I"]}, "scope": "Rectangular position permutation and known erasure indices; no redundancy, symbol recovery or measured audio quality."}
+
+OBSERVATION {"case": "negative", "code": "INF023", "expected": {"missing_per_block": [3, 0, 0], "missing_total": 3, "reconstructed": [[null, null, null], ["D", "E", "F"], ["G", "H", "I"]], "wire": ["A", "B", "C", "D", "E", "F", "G", "H", "I"]}, "observed": {"missing_per_block": [3, 0, 0], "missing_total": 3, "reconstructed": [[null, null, null], ["D", "E", "F"], ["G", "H", "I"]], "wire": ["A", "B", "C", "D", "E", "F", "G", "H", "I"]}, "scope": "Rectangular position permutation and known erasure indices; no redundancy, symbol recovery or measured audio quality."}
+ok
+test_inf024 (__main__.UnitB.test_inf024) ... 
+OBSERVATION {"case": "model", "code": "INF024", "expected": {"decoded": "ABA", "intervals": [["0", "1/4"], ["1/16", "1/4"], ["1/16", "7/64"]], "tag_inside": true, "width": "3/64"}, "observed": {"decoded": "ABA", "intervals": [["0", "1/4"], ["1/16", "1/4"], ["1/16", "7/64"]], "tag_inside": true, "width": "3/64"}, "scope": "Exact rational half-open interval coding with declared single-character alphabet, frequencies and message length; no bitstream implementation."}
+
+OBSERVATION {"case": "negative", "code": "INF024", "expected": {"decoded": "ABB", "intervals": [["0", "1/4"], ["1/16", "1/4"], ["7/64", "1/4"]], "tag_inside": true, "width": "9/64"}, "observed": {"decoded": "ABB", "intervals": [["0", "1/4"], ["1/16", "1/4"], ["7/64", "1/4"]], "tag_inside": true, "width": "9/64"}, "scope": "Exact rational half-open interval coding with declared single-character alphabet, frequencies and message length; no bitstream implementation."}
+ok
+test_net019 (__main__.UnitB.test_net019) ... 
+OBSERVATION {"case": "model", "code": "NET019", "expected": {"minimum_cost": 6, "optimal_trees": [["AB", "BC", "CD"]]}, "observed": {"minimum_cost": 6, "optimal_trees": [["AB", "BC", "CD"]]}, "scope": "Connected simple undirected four-node graph and stipulated setup costs; minimum spanning trees do not provide failover."}
+
+OBSERVATION {"case": "negative", "code": "NET019", "expected": {"minimum_cost": 8, "optimal_trees": [["AB", "BC", "BD"]]}, "observed": {"minimum_cost": 8, "optimal_trees": [["AB", "BC", "BD"]]}, "scope": "Connected simple undirected four-node graph and stipulated setup costs; minimum spanning trees do not provide failover."}
+ok
+test_net020 (__main__.UnitB.test_net020) ... 
+OBSERVATION {"case": "model", "code": "NET020", "expected": {"chromatic_number": 2, "colors": [0, 1, 0, 1]}, "observed": {"chromatic_number": 2, "colors": [0, 1, 0, 1]}, "scope": "Finite undirected conflict graph, exact color enumeration; slots are not workers and durations are absent."}
+
+OBSERVATION {"case": "negative", "code": "NET020", "expected": {"chromatic_number": 3, "colors": [0, 1, 2, 1]}, "observed": {"chromatic_number": 3, "colors": [0, 1, 2, 1]}, "scope": "Finite undirected conflict graph, exact color enumeration; slots are not workers and durations are absent."}
+ok
+test_net021 (__main__.UnitB.test_net021) ... 
+OBSERVATION {"case": "model", "code": "NET021", "expected": {"consistent": true, "cycle_product": 1, "labels": [1, 1, -1]}, "observed": {"consistent": true, "cycle_product": 1, "labels": [1, 1, -1]}, "scope": "Three-node scalar-sign triangle with fixed root convention; no noncommuting spatial transformation claim."}
+
+OBSERVATION {"case": "negative", "code": "NET021", "expected": {"consistent": false, "cycle_product": -1, "labels": null}, "observed": {"consistent": false, "cycle_product": -1, "labels": null}, "scope": "Three-node scalar-sign triangle with fixed root convention; no noncommuting spatial transformation claim."}
+ok
+test_pm016 (__main__.UnitB.test_pm016) ... 
+OBSERVATION {"case": "model", "code": "PM016", "expected": {"dominance_pairs": [["A", "C"], ["B", "C"], ["D", "C"]], "nondominated": ["A", "B", "D"]}, "observed": {"dominance_pairs": [["A", "C"], ["B", "C"], ["D", "C"]], "nondominated": ["A", "B", "D"]}, "scope": "Fictional comparable minimization coordinates, strict Pareto dominance; no unique preference or release decision."}
+
+OBSERVATION {"case": "negative", "code": "PM016", "expected": {"dominance_pairs": [["A", "C"], ["A", "D"], ["B", "C"], ["B", "D"], ["D", "C"]], "nondominated": ["A", "B"]}, "observed": {"dominance_pairs": [["A", "C"], ["A", "D"], ["B", "C"], ["B", "D"], ["D", "C"]], "nondominated": ["A", "B"]}, "scope": "Fictional comparable minimization coordinates, strict Pareto dominance; no unique preference or release decision."}
+ok
+test_pm017 (__main__.UnitB.test_pm017) ... 
+OBSERVATION {"case": "model", "code": "PM017", "expected": {"allocation": [4, 2, 1], "floors": [3, 2, 1], "quotas": ["7/2", "21/10", "7/5"], "remainder_order": [0, 2, 1]}, "observed": {"allocation": [4, 2, 1], "floors": [3, 2, 1], "quotas": ["7/2", "21/10", "7/5"], "remainder_order": [0, 2, 1]}, "scope": "Indivisible fictional slots, exact nonnegative integer weights and lower-index tie rule; no universal fairness."}
+
+OBSERVATION {"case": "negative", "code": "PM017", "expected": {"allocation": [4, 2, 2], "floors": [4, 2, 1], "quotas": ["4", "12/5", "8/5"], "remainder_order": [2, 1, 0]}, "observed": {"allocation": [4, 2, 2], "floors": [4, 2, 1], "quotas": ["4", "12/5", "8/5"], "remainder_order": [2, 1, 0]}, "scope": "Indivisible fictional slots, exact nonnegative integer weights and lower-index tie rule; no universal fairness."}
+ok
+test_pm018 (__main__.UnitB.test_pm018) ... 
+OBSERVATION {"case": "model", "code": "PM018", "expected": {"crossover_scores": ["22/5", "22/5"], "crossover_weight": "3/5", "crossover_winners": ["A", "B"], "scores": ["13/2", "3"], "winners": ["B"]}, "observed": {"crossover_scores": ["22/5", "22/5"], "crossover_weight": "3/5", "crossover_winners": ["A", "B"], "scores": ["13/2", "3"], "winners": ["B"]}, "scope": "Two comparable point-scale affine scores with unit-interval preference weight; no measured workflow recommendation."}
+
+OBSERVATION {"case": "negative", "code": "PM018", "expected": {"crossover_scores": ["22/5", "22/5"], "crossover_weight": "3/5", "crossover_winners": ["A", "B"], "scores": ["7/2", "5"], "winners": ["A"]}, "observed": {"crossover_scores": ["22/5", "22/5"], "crossover_weight": "3/5", "crossover_winners": ["A", "B"], "scores": ["7/2", "5"], "winners": ["A"]}, "scope": "Two comparable point-scale affine scores with unit-interval preference weight; no measured workflow recommendation."}
+ok
+test_pm019 (__main__.UnitB.test_pm019) ... 
+OBSERVATION {"case": "model", "code": "PM019", "expected": {"candidate_variances": ["4/7", "1/2", "8/15", "5/8", "4/5", "7/6", "16/7"], "minimum_variance": "1/2", "optimal_allocations": [[2, 6]]}, "observed": {"candidate_variances": ["4/7", "1/2", "8/15", "5/8", "4/5", "7/6", "16/7"], "minimum_variance": "1/2", "optimal_allocations": [[2, 6]]}, "scope": "Two independent strata, known positive variances, with-replacement samples and positive integer splits of eight; no actual study."}
+
+OBSERVATION {"case": "negative", "code": "PM019", "expected": {"candidate_variances": ["16/7", "7/6", "4/5", "5/8", "8/15", "1/2", "4/7"], "minimum_variance": "1/2", "optimal_allocations": [[6, 2]]}, "observed": {"candidate_variances": ["16/7", "7/6", "4/5", "5/8", "8/15", "1/2", "4/7"], "minimum_variance": "1/2", "optimal_allocations": [[6, 2]]}, "scope": "Two independent strata, known positive variances, with-replacement samples and positive integer splits of eight; no actual study."}
+ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.003s
+
+OK

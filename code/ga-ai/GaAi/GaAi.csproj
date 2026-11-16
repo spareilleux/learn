@@ -18,6 +18,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Lessons 16 and 17's questions, compiled here and into GaMain -->
+    <Compile Include="../Shared/*.cs" />
+    <!-- GaMcpServer's tools, outside the projects they reference: the composition tools for lessons
+         19 and 20, the voicing search they read their strategy from and its vocabulary for lesson 21 -->
+    <Compile Include="$(GaRoot)GaMcpServer/Tools/CompositionTools.cs" />
+    <Compile Include="$(GaRoot)GaMcpServer/Tools/VoicingSearchTool.cs" />
+    <Compile Include="$(GaRoot)GaMcpServer/Tools/VoicingVocabularyTool.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- Where WebApplicationFactory finds the chatbot host's content root -->
     <AssemblyAttribute Include="Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute">
       <_Parameter1>GaChatbot.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</_Parameter1>
@@ -31,6 +41,12 @@
     <ProjectReference Include="$(GaRoot)Apps/GaChatbot.Api/GaChatbot.Api.csproj" />
     <ProjectReference Include="$(GaRoot)Common/GA.Business.ML/GA.Business.ML.csproj" />
     <ProjectReference Include="$(GaRoot)Demos/Music Theory/FretboardVoicingsCLI/FretboardVoicingsCLI.csproj" />
+    <!-- GA pull request #749's version of the improvisation skill, for lesson 7 only -->
+    <ProjectReference Include="../GaFix749/GaFix749.csproj" Aliases="fix749" />
+    <!-- GA's key identification service on main, for lesson 11 only -->
+    <ProjectReference Include="../GaKeysMain/GaKeysMain.csproj" Aliases="keysmain" />
+    <!-- GA's DSL closures on main, for lesson 13 only -->
+    <ProjectReference Include="../GaDslMain/GaDslMain.fsproj" Aliases="dslmain" />
   </ItemGroup>
 
 </Project>

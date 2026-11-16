@@ -1,0 +1,427 @@
+=== streeling/courses/audio-engineering/en/aud-011-count-valid-frames-separately-from-block-padding.md ===
+---
+module_id: aud-011-count-valid-frames-separately-from-block-padding
+department: audio-engineering
+course: "Count Valid Frames Separately from Block Padding"
+level: intermediate
+prerequisites: ["aud-005-pcm-guards-and-format-boundaries"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+
+# Count Valid Frames Separately from Block Padding
+
+> **Draft and evidence boundary.** This lesson contains an authored model and source reading. Human technical, musician, fluent-language and learner decisions remain pending. No new engine render, parser run, playing, listening or learner observation is claimed. Historical failures keep their original status.
+
+## The project question
+
+The GA teaching runner renders a final partial block. A reviewer who treats allocated capacity as valid audio silently adds time and dilutes a measurement. This lesson traces a deliberately small frame count through block arithmetic, byte counts and an RMS denominator. It supplies a boundary case for a future host review, without running a host.
+
+## Read the project evidence
+
+Read the linked prerequisite and retained project artifact before applying the model. Locate the particular representation, transformation or exclusion that matters to this question. The fixed packet records source identity, reading scope and authored values; a source location is evidence for its contents at that revision, not proof of current deployment. Keep a source-derived observation separate from an inferred proposal. Where a primary reference is linked, use its stated scope rather than extending it to unsupported cases.
+
+[Prerequisite: aud-005-pcm-guards-and-format-boundaries](../../audio-engineering/en/aud-005-pcm-guards-and-format-boundaries.md)
+
+[Retained project artifact](../../../../code/streeling/guitar-runtime/run.mjs)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-23/unit-a.json)
+
+[Validation journal](../../../../code/streeling/evidence/batch50-2026-10-23/journal.md)
+
+## 1. Exercise 1
+
+Choose 10 valid mono frames and block capacity 4. The valid counts are `[4,4,2]`; allocated capacity would total 12. The final capacity has two unused positions. They are not automatically part of the signal even when memory happens to contain zero there. Explicit valid counts travel with each block.
+
+Give the block counts, capacity and padding.
+
+> **Answer.** There are 3 blocks with valid counts `[4,4,2]`, capacity 12 and padding 2. Valid support remains 10 frames.
+
+## 2. Exercise 2
+
+At a stipulated clock of 1000 Hz, valid duration is .01 seconds; capacity duration would be .012 seconds. These quantities share a rate but use different supports. A processing deadline may depend on block capacity, while a saved excerpt's intended duration depends on valid frames. Name the quantity before dividing.
+
+Calculate both durations and the spurious extension caused by exporting capacity.
+
+> **Answer.** Valid duration is .01 seconds; capacity duration is .012 seconds. Exporting the padding adds .002 seconds to this authored excerpt.
+
+## 3. Exercise 3
+
+Let all valid samples equal 1 and unused slots equal 0. The valid squared-sample sum is 10. Dividing by 10 gives RMS 1; dividing by 12 gives approximately .912870929. Nothing about the valid waveform changed. The lower number comes entirely from a different denominator, so it is not evidence of quieter valid audio.
+
+Calculate the two RMS values and diagnose the apparent reduction.
+
+> **Answer.** Valid-support RMS is 1; padded-support RMS is approximately .912870929. The added zeros alter the denominator and support, not the original samples.
+
+## 4. Exercise 4
+
+Mono float32 storage uses four bytes per sample in this retained lab contract. The valid output therefore has 40 bytes, whereas storing all capacity would use 48. Byte identity checks require the same declared support. A hash mismatch between those outputs is expected and should not immediately be attributed to floating-point instability.
+
+Give the valid and capacity byte counts and the first question for a hash mismatch.
+
+> **Answer.** They are 40 and 48 bytes. First compare valid-frame contracts and padding policy, before attributing the mismatch to an engine or runtime.
+
+## 5. Exercise 5
+
+As a negative control, use 8 valid frames with the same block capacity. Both blocks are full and both denominators give RMS 1 for constant-unit samples. This control explains why a check restricted to exact multiples can miss the defect. In the retained runner, read the final-block minimum and copy length directly.
+
+Why is the full-block control insufficient alone, and what source detail matters?
+
+> **Answer.** With 8 frames there is no padding, so the two methods agree. The partial case is essential; inspect the runner's minimum of block capacity and remaining frames.
+
+## Source-assisted learner task
+
+Prepare a short review note from the fixed case before opening the prepared answers. First reproduce the calculation or table manually, keeping the stated units, support and assumptions. That direct result is the baseline for any source-assisted or agent-assisted answer. Then inspect the linked project artifact and identify one precise boundary relevant to the calculation. Record the actual source excerpt or field used, its revision, your proposed answer and every kind of assistance received. A calculator and source lookup are allowed; label them instead of presenting the result as unaided recall.
+
+Apply the negative control as well as the main case. Write the observable result that would falsify your conclusion, and state whether the control actually supplies it. If a model input is absent, retain an unresolved result rather than substituting a plausible value. Compare a proposed abstraction with the manual baseline before recommending a new agent workflow or DSL. The answer key is a prepared check, not a record of your attempt. Keep your original answer before reveal, any correction afterward and the reason for the correction.
+
+The packet contains five prepared learner criteria corresponding to the exercises. Their decisions remain null until actual answers, assistance and review are retained. Correct arithmetic supports only the declared model. A useful project decision still needs the relevant human judgment or runtime observation at its own boundary. Record actual checks, errors and refinements in the linked validation journal; the journal must distinguish executed tests from planned tests.
+
+=== streeling/courses/audio-engineering/en/aud-008-measure-a-filter-with-paired-input-and-output.md ===
+---
+module_id: aud-008-measure-a-filter-with-paired-input-and-output
+department: audio-engineering
+course: "Measure a Filter with Paired Input and Output"
+level: intermediate
+prerequisites: ["aud-006-calibrate-spectral-amplitudes", "cs-013-preserve-spectral-axes-and-units", "gas-007-distinguish-body-poles-from-string-partials"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Measure a Filter with Paired Input and Output
+
+> **Draft scope.** Authored periodic-signal calculations and pinned source inspection. Human technical, fluent-language, musician and learner reviews and deployed course HTML verification remain pending. No new recording, engine render or [ComfyUI](https://docs.comfy.org/) workflow was captured.
+
+## The project question
+
+An agent doubles a rendered partial's amplitude and announces a better body filter. Did the filter change, or did its input change? [GAS-007](../../guitar-acoustics/en/gas-007-distinguish-body-poles-from-string-partials.md) identifies a concrete input/output boundary before reverb. [AUD-006](aud-006-calibrate-spectral-amplitudes.md) handles amplitude calibration. Here we keep excitation and response together.
+
+## 1. Declare the experiment before dividing spectra
+
+Use a deliberately small authored finite impulse response, unrelated to any claim of measured guitar realism:
+
+```text
+h = [3/4, 1/4]
+y[n] = (3/4)*x[n] + (1/4)*x[n-1]
+H(omega) = 3/4 + (1/4)*exp(-i*omega)
+```
+
+For the following experiment x is periodic with period N = 8; x[-1] means x[7]. Observe one complete period in steady state. The [DFT convention](https://www.dsprelated.com/freebooks/mdft/DFT_Definition.html) is the unscaled forward transform with a negative exponential. At bin k = 2, omega = pi/2, so H = 0.75 - 0.25i and its magnitude is about 0.790569415.
+
+This example uses neither a Hann window nor a truncated startup. [CS-013](../../computer-science/en/cs-013-preserve-spectral-axes-and-units.md) explains the axes and framing metadata needed outside this small example.
+
+### Exercise 1 — Identify the measurement conditions
+
+Why does x[-1] = x[7] matter? What assumptions allow Y[k] = H[k]X[k] at the selected bins?
+
+> **Answer.** It supplies the preceding sample from the same periodic steady input. The system is the declared LTI filter and the record contains a full period with matching transform conventions. This is circular filtering of a periodic input, not the first eight samples of zero-initial linear convolution. Finite records with other boundaries need separate treatment.
+
+## 2. A larger output can come entirely from a larger input
+
+The [paired fixture](../../../../code/streeling/evidence/filter-phase-2026-10-22/paired-transfer.json) uses cosines at k = 2 with input amplitudes 0.25 and 0.50:
+
+| Input cosine amplitude | X[2] | Y[2] | Output cosine amplitude, approximately |
+| --- | --- | --- | --- |
+| 0.25 | 1 | 0.75 - 0.25i | 0.197642354 |
+| 0.50 | 2 | 1.50 - 0.50i | 0.395284708 |
+
+Dividing the paired complex coefficients gives the same filter response in both trials. Dividing output magnitudes across trials gives 2, which describes output scaling, not a doubled filter gain. No loudness or preference is measured.
+
+### Exercise 2 — Resolve the apparent improvement
+
+Calculate Y[2]/X[2] in both trials. Does the output-amplitude ratio of 2 establish a change in H?
+
+> **Answer.** Both ratios are 0.75 - 0.25i, with magnitude about 0.790569415. The filter is unchanged. Doubling the excitation doubles the output of this linear filter; the output-only comparison confounds input strength with response.
+
+## 3. An unexcited frequency is not a measured rejection
+
+At k = 1 the cosine fixture has analytically zero input and output coefficients. Tiny floating-point DFT residues can remain in a numerical computation. Their ratio does not establish the response. In fact the same filter's theoretical response at that frequency is nonzero.
+
+The situation is also fragile near zero. Let X = 0.000001 at k = 2 and add an authored output noise coefficient of 0.01. Then the apparent ratio becomes 10000.75 - 0.25i although the true H is still 0.75 - 0.25i. This is a sensitivity example, not a measured noise floor or a universal rejection threshold.
+
+### Exercise 3 — Refuse an unsupported ratio
+
+An agent records X[1] = 0 and Y[1] = 0, then stores a filter gain of 0. What should it store instead? Explain how the weak-excitation example changes its acquisition plan.
+
+> **Answer.** Store the ratio as undefined or unmeasured with an insufficient-excitation reason, not a zero gain. Use adequate excitation and an explicit noise and conditioning policy for frequencies of interest. The 0.01 noise term divided by 0.000001 input contributes 10000 to the false estimate. A threshold must follow the actual measurement conditions.
+
+## 4. Truncation can change the answer even with the correct filter
+
+For a separate control, use amplitude 0.25 and starting phase pi/4, still at k = 2. Now start the filter with a zero preceding input and retain only N = 8 output samples. The full finite linear convolution has 9 samples; the last sample has been discarded. Dividing the truncated eight-point spectra gives 0.71875 - 0.21875i, not 0.75 - 0.25i.
+
+### Exercise 4 — Diagnose the boundary mismatch
+
+Does the truncated ratio prove that the filter implementation changed? Give two valid ways to formulate a new comparison.
+
+> **Answer.** No. The control changed the boundary and discarded a nonzero tail. Either acquire a declared periodic steady-state record, or retain the complete finite convolution and zero-pad input and output to a common transform length sufficient for linear convolution. Keep sample alignment and transform scaling consistent. For long recursive responses, define settling and tail tolerances; an arbitrary short crop is insufficient.
+
+## 5. Preserve the representation required by the question
+
+At pinned IX commit `bd1336b7c4045e427dcdbe80b102790e45da5ce1`, [stft](https://github.com/GuitarAlchemist/ix/blob/bd1336b7c4045e427dcdbe80b102790e45da5ce1/crates/ix-signal/src/spectral.rs#L7-L30) returns complex spectra. The following [spectrogram projection](https://github.com/GuitarAlchemist/ix/blob/bd1336b7c4045e427dcdbe80b102790e45da5ce1/crates/ix-signal/src/spectral.rs#L32-L54) returns magnitudes or their decibel values. That projection discards each coefficient's phase.
+
+This source distinction does not guarantee that arbitrary windowed, transient STFT frame ratios are exact transfer functions. Window boundaries, unobserved filter memory, nonlinearities and time variation still matter. A statistical transfer estimate for noisy data requires a declared estimator and assumptions beyond the noiseless example here.
+
+### Exercise 5 — Specify the next captured artifact
+
+For a proposed body-filter test in GA or ComfyUI, list what to retain so another agent can distinguish gain, phase and excitation changes. Which source stage should be isolated, and what is still untested?
+
+> **Answer.** Retain paired input/output samples or their matched complex transforms, sample rate, timing and alignment, record and transform lengths, window and scale conventions, excitation, filter parameters, source revision and noise/settling decisions. Isolate the normalized string-sum to pre-reverb dry boundary identified by GAS-007; downstream reverb and clipping need separate trials. Magnitude-only outputs can support a qualified magnitude question but cannot supply the missing complex phase. No capture or adapter was implemented by this course. [INF-008](../../information-theory/en/inf-008-keep-phase-when-waveform-identity-matters.md) gives an exact phase counterexample.
+
+## Source-assisted learner task
+
+Write an acquisition plan that could reject the claim “larger output means larger filter gain.” Include both paired trials, an unexcited-bin refusal, the weak-excitation calculation, a boundary-mismatch control and the representation needed for phase. Record assistance and unresolved conditions. The [reviewer rubric](../../../../code/streeling/evidence/filter-phase-2026-10-22/reviewer-rubric.json) contains prepared criteria, not learner outcomes.
+
+The [source receipt](../../../../code/streeling/evidence/filter-phase-2026-10-22/primary-readback.json) binds the selected files. Authored arithmetic does not establish an actual guitar response, a working audio graph, an engine improvement or a perceptual result.
+
+=== code/streeling/guitar-runtime/run.mjs ===
+import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const [outputArgument, referenceArgument] = process.argv.slice(2);
+assert(outputArgument && referenceArgument, 'Supply a NEW output directory and the recorded reference WAV path.');
+const output = resolve(outputArgument);
+const referencePath = resolve(referenceArgument);
+const source = dirname(fileURLToPath(import.meta.url));
+const rate = 44100;
+const frames = 176400;
+const probeFrames = 4096;
+const hash = data => createHash('sha256').update(data).digest('hex');
+const referenceBytes = readFileSync(referencePath);
+assert.equal(hash(referenceBytes), '03a1965f275f0858be70476dab2bf55d2cbf2272ef7a50c61453d45e7f38b248');
+mkdirSync(output);
+const commands = [];
+function execute(command, args, cwd = source) {
+  commands.push({ command, args, cwd });
+  return execFileSync(command, args, { cwd, encoding: 'utf8', timeout: 60000 });
+}
+const executable = resolve(output, process.platform === 'win32' ? 'native.exe' : 'native');
+const wasmPath = resolve(output, 'engine.wasm');
+execute('rustc', ['--edition=2021', '-D', 'warnings', '-O', 'native.rs', '-o', executable]);
+execute('rustc', ['--edition=2021', '--crate-type=cdylib', '--target', 'wasm32-unknown-unknown', '-C', 'panic=abort', '-O', 'vendor/lib.rs', '-o', wasmPath]);
+const wasmBytes = readFileSync(wasmPath);
+const module = await WebAssembly.compile(wasmBytes);
+assert.deepEqual(WebAssembly.Module.imports(module), []);
+
+function renderNative(mode, count, block, name) {
+  const path = resolve(output, name + '.f32le');
+  execute(executable, [String(count), String(block), mode, path]);
+  return readFileSync(path);
+}
+async function renderWasm(mode, count, block) {
+  const instance = await WebAssembly.instantiate(module, {});
+  const api = instance.exports;
+  const engine = api.engine_init(rate);
+  assert.notEqual(engine, 0);
+  if (mode === 'candidate') api.engine_set_decay(engine, 0.9976);
+  if (mode !== 'silence') api.engine_note_on(engine, 82.4069, 0.1);
+  const pointer = api.alloc_buffer(block);
+  assert.notEqual(pointer, 0);
+  const bytes = Buffer.alloc(count * 4);
+  for (let at = 0; at < count; at += block) {
+    const length = Math.min(block, count - at);
+    api.engine_render(engine, pointer, length);
+    const view = new Float32Array(api.memory.buffer, pointer, length);
+    for (let i = 0; i < length; i++) bytes.writeFloatLE(view[i], (at + i) * 4);
+  }
+  return bytes;
+}
+function pcmGuard(bytes, count) {
+  assert.equal(bytes.length, count * 4, 'Unexpected f32 sample count');
+  let peak = 0;
+  for (let at = 0; at < bytes.length; at += 4) {
+    const sample = bytes.readFloatLE(at);
+    assert(Number.isFinite(sample), 'Nonfinite sample');
+    assert(Math.abs(sample) <= 1, 'Sample outside normalized PCM range');
+    peak = Math.max(peak, Math.abs(sample));
+  }
+  return peak;
+}
+function pcm16Wav(bytes) {
+  const payload = Buffer.alloc(bytes.length / 2);
+  for (let at = 0; at < bytes.length / 4; at++) payload.writeInt16LE(Math.round(bytes.readFloatLE(at * 4) * 32767), at * 2);
+  const header = Buffer.alloc(44);
+  header.write('RIFF', 0); header.writeUInt32LE(payload.length + 36, 4); header.write('WAVEfmt ', 8);
+  header.writeUInt32LE(16, 16); header.writeUInt16LE(1, 20); header.writeUInt16LE(1, 22);
+  header.writeUInt32LE(rate, 24); header.writeUInt32LE(rate * 2, 28); header.writeUInt16LE(2, 32); header.writeUInt16LE(16, 34);
+  header.write('data', 36); header.writeUInt32LE(payload.length, 40);
+  return Buffer.concat([header, payload]);
+}
+function decodeWav(bytes) {
+  assert.equal(bytes.toString('ascii', 0, 4), 'RIFF');
+  assert.equal(bytes.toString('ascii', 8, 12), 'WAVE');
+  let format, payload;
+  for (let at = 12; at + 8 <= bytes.length;) {
+    const name = bytes.toString('ascii', at, at + 4), length = bytes.readUInt32LE(at + 4);
+    assert(at + 8 + length <= bytes.length, 'Truncated WAV chunk');
+    if (name === 'fmt ') format = bytes.subarray(at + 8, at + 8 + length);
+    if (name === 'data') payload = bytes.subarray(at + 8, at + 8 + length);
+    at += 8 + length + (length % 2);
+  }
+  assert(format && payload, 'Missing WAV format or data');
+  const encoding = format.readUInt16LE(0), bits = format.readUInt16LE(14);
+  assert.equal(format.readUInt16LE(2), 1); assert.equal(format.readUInt32LE(4), rate);
+  if (encoding === 1 && bits === 16) {
+    assert.equal(payload.length % 2, 0);
+    return Array.from({ length: payload.length / 2 }, (_, i) => payload.readInt16LE(i * 2) / 32767);
+  }
+  assert(encoding === 3 && bits === 32, 'Expected PCM16 or IEEE float32 WAV');
+  assert.equal(payload.length % 4, 0);
+  const samples = Array.from({ length: payload.length / 4 }, (_, i) => payload.readFloatLE(i * 4));
+  assert(samples.every(Number.isFinite), 'Nonfinite WAV input');
+  return samples;
+}
+function rmsDb(samples, start, end) {
+  const first = Math.round(start * rate), last = Math.round(end * rate);
+  assert(last <= samples.length && last > first);
+  let sum = 0;
+  for (let i = first; i < last; i++) sum += samples[i] ** 2;
+  return 20 * Math.log10(Math.sqrt(sum / (last - first)) + 1e-12);
+}
+function decline(samples, onset) { return rmsDb(samples, onset + 1, onset + 1.2) - rmsDb(samples, onset + 0.2, onset + 0.4); }
+
+const referenceDecline = decline(decodeWav(referenceBytes), 1.1);
+const observations = {};
+for (const mode of ['baseline', 'candidate']) {
+  const native = renderNative(mode, frames, frames, 'native-' + mode);
+  const wasm = await renderWasm(mode, frames, 128);
+  writeFileSync(resolve(output, 'wasm-' + mode + '.f32le'), wasm);
+  const nativePeak = pcmGuard(native, frames), wasmPeak = pcmGuard(wasm, frames);
+  let differingSamples = 0, maximumDifference = 0;
+  for (let at = 0; at < native.length; at += 4) {
+    const difference = Math.abs(native.readFloatLE(at) - wasm.readFloatLE(at));
+    if (difference !== 0) differingSamples++;
+    maximumDifference = Math.max(maximumDifference, difference);
+  }
+  const oneBlock = renderNative(mode, probeFrames, probeFrames, 'native-' + mode + '-probe');
+  const chunked = renderNative(mode, probeFrames, 128, 'native-' + mode + '-chunked');
+  assert.deepEqual(oneBlock, chunked, 'Native block partition changed samples');
+  assert.deepEqual(oneBlock, native.subarray(0, probeFrames * 4), 'Fresh native prefix differs');
+  const wasmOne = await renderWasm(mode, probeFrames, probeFrames);
+  const wasmChunked = await renderWasm(mode, probeFrames, 128);
+  assert.deepEqual(wasmOne, wasmChunked, 'WASM block partition changed samples');
+  assert.deepEqual(wasmOne, wasm.subarray(0, probeFrames * 4), 'Fresh WASM prefix differs');
+  const wav = pcm16Wav(native);
+  const wasmWav = pcm16Wav(wasm);
+  writeFileSync(resolve(output, mode + '.wav'), wav);
+  const measuredDecline = decline(decodeWav(wav), 0);
+  observations[mode] = { native_f32le_sha256: hash(native), wasm_f32le_sha256: hash(wasm), wav_sha256: hash(wav), wasm_pcm16_wav_sha256: hash(wasmWav), native_wasm_pcm16_wav_bytes_equal: wav.equals(wasmWav), samples: frames, native_peak_abs: nativePeak, wasm_peak_abs: wasmPeak, differing_native_wasm_samples: differingSamples, maximum_abs_native_wasm_difference: maximumDifference, native_and_wasm_bit_exact: native.equals(wasm), fresh_native_prefix_equal: true, native_block_partition_equal: true, fresh_wasm_prefix_equal: true, wasm_block_partition_equal: true, decoded_pcm16_decline_db: measuredDecline, absolute_reference_decline_error_db: Math.abs(measuredDecline - referenceDecline) };
+}
+assert.notEqual(observations.baseline.native_f32le_sha256, observations.candidate.native_f32le_sha256, 'Native candidate intervention had no sample effect');
+assert.notEqual(observations.baseline.wasm_f32le_sha256, observations.candidate.wasm_f32le_sha256, 'WASM candidate intervention had no sample effect');
+const silenceNative = renderNative('silence', probeFrames, 128, 'native-silence');
+const silenceWasm = await renderWasm('silence', probeFrames, 128);
+assert.equal(pcmGuard(silenceNative, probeFrames), 0); assert.equal(pcmGuard(silenceWasm, probeFrames), 0);
+const nan = Buffer.alloc(4); nan.writeFloatLE(Number.NaN);
+const tooLoud = Buffer.alloc(4); tooLoud.writeFloatLE(1.01);
+assert.throws(() => pcmGuard(nan, 1), /Nonfinite sample/);
+assert.throws(() => pcmGuard(tooLoud, 1), /outside normalized PCM range/);
+assert.throws(() => pcmGuard(Buffer.alloc(3), 1), /Unexpected f32 sample count/);
+const improvement = observations.baseline.absolute_reference_decline_error_db - observations.candidate.absolute_reference_decline_error_db;
+const results = { scope: 'Pinned GA Rust module, native and Node WebAssembly, offline fixed E2; no AudioWorklet/browser capture or listening result.', source_commit: 'dc2e74cbd992a298f67efb928b5b3754615e1924', node: process.version, platform: process.platform, arch: process.arch, rustc: execFileSync('rustc', ['-vV'], { encoding: 'utf8' }).trim(), commands, sample_rate: rate, frames, probe_frames: probeFrames, frequency_hz_requested: 82.4069, velocity_requested: 0.1, reference_sha256: hash(referenceBytes), reference_decline_db: referenceDecline, observations, candidate_decline_error_improvement_db: improvement, required_improvement_db_from_GAS003: 1, candidate_passes_decline_gate: improvement >= 1, native_and_wasm_silence_peak: 0, pcm_guard_negative_controls_detected: 3, wasm_binary_sha256: hash(wasmBytes), wasm_imports: WebAssembly.Module.imports(module), wasm_exports: WebAssembly.Module.exports(module), limits: ['Comparison is one fixed E2 velocity and profile, one toolchain and OS.', 'PCM16 conversion uses JavaScript Math.round; raw f32 outputs are separately hashed.', 'No listening, pitch, partial-track, attack-preservation or whole-product acceptance claim.', 'No performance, cancellation, memory-lifetime or browser AudioWorklet certification.'] };
+writeFileSync(resolve(output, 'results.json'), JSON.stringify(results, null, 2) + '\n');
+console.log(JSON.stringify({ output, candidate_decline_error_improvement_db: improvement, candidate_passes_decline_gate: results.candidate_passes_decline_gate, observations }, null, 2));
+
+=== streeling/courses/audio-engineering/en/aud-013-resample-without-relabeling-the-clock.md ===
+---
+module_id: aud-013-resample-without-relabeling-the-clock
+department: audio-engineering
+course: "Resample Without Relabeling the Clock"
+level: intermediate
+prerequisites: ["aud-011-count-valid-frames-separately-from-block-padding"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Resample Without Relabeling the Clock
+
+> Authored example and source reading. No new guitar performance, audio or parser execution, participant response or production adoption is claimed. Human technical, fluent-language and learner decisions remain pending.
+
+A guitar reference and an offline Wasm render can use different sample rates. A comparison becomes misleading if an agent changes the rate label while keeping every sample unchanged. The waveform then occupies a different clock, even though its byte hash may remain identical. This lesson derives a duration-preserving conversion contract before choosing an implementation. Unlike the prerequisite's final-block accounting, the question is how sample coordinates refer to physical time when the rate itself changes.
+
+## Read the retained evidence
+
+In the retained runner, read the fixed rate and the WAV header writer together. The declared rate governs both rendering and interpretation. The Web Audio specification defines buffer duration from frame count divided by sample rate and describes resampling decoded data to the context rate. Those statements define quantities, rather than certifying a particular interpolation filter. Our case below is authored; no converter was executed.
+
+[Prerequisite](../../audio-engineering/en/aud-011-count-valid-frames-separately-from-block-padding.md)
+
+[Retained project artifact](../../../../code/streeling/guitar-runtime/run.mjs)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-24/unit-a.json)
+
+[Validation journal](../../../../code/streeling/evidence/batch50-2026-10-24/journal.md)
+
+[Primary reading](https://www.w3.org/TR/2026/WD-webaudio-1.1-20260922/)
+
+### Exercise 1
+
+Start with `44100` frames at `44100 Hz`, containing a stipulated `1000 Hz` tone. Duration is `N_in/F_in`. A frame count alone cannot tell a reviewer whether an excerpt represents a complete second. Retain the original rate with the samples before any comparison or workflow node changes their representation.
+
+What is the input duration, and which two fields determine it?
+
+<details><summary>Answer 1</summary>
+
+It is `1 s`, determined by `44100` frames and `44100 Hz`. Neither the filename nor a raw-byte hash supplies that clock relationship.
+
+</details>
+
+### Exercise 2
+
+The requested destination rate is `48000 Hz`. Preserving duration requires `N_out=duration*F_out`, giving `48000` output frames. This count specifies the intended time support, not the values between existing samples. An interpolation method and a band-limit policy remain necessary for a real converter, including how it handles the beginning and end of the buffer.
+
+What output count preserves the declared duration?
+
+<details><summary>Answer 2</summary>
+
+Use `48000` frames for `1 s`. The count is a contract to test; it is not evidence that a resampling filter produced correct samples.
+
+</details>
+
+### Exercise 3
+
+For the failure case, retain the original `44100` samples but label them `48000 Hz`. Playback now lasts `0.91875 s`. The stipulated tone scales to `1088.43537414966 Hz` under `f*F_out/F_in`. This is a clock error, not a guitarist playing sharp, and level normalization cannot restore the lost timing.
+
+Give the relabeled duration and frequency, and diagnose the change.
+
+<details><summary>Answer 3</summary>
+
+They are `0.91875 s` and `1088.43537414966 Hz`. Relabeling compresses time and raises frequency; it does not perform duration-preserving resampling.
+
+</details>
+
+### Exercise 4
+
+Use the structured negative control with output rate `44100 Hz`. Now the required output count is `44100`; keeping the original samples produces `1 s` and `1000 Hz`. A test suite containing only equal-rate cases would therefore tolerate the faulty relabeling shortcut. Controls must exercise the specific mismatch the proposed operation claims to handle.
+
+Why does this control pass the shortcut without validating it?
+
+<details><summary>Answer 4</summary>
+
+Equal input and output rates remove the mismatch. The result is `1 s` at `1000 Hz`, so this case cannot distinguish relabeling from a genuine conversion.
+
+</details>
+
+### Exercise 5
+
+For a downsampling proposal, duration agreement alone is insufficient: content above the destination Nyquist boundary needs a declared filtering policy. Keep that requirement separate from the clock arithmetic. A future ComfyUI or audio-tool handoff should name rate, valid frames, interpolation/filter scope and preserved duration, then retain an actual output probe before asserting fidelity.
+
+What would falsify the claimed duration-preserving conversion?
+
+<details><summary>Answer 5</summary>
+
+A retained output whose frame-count/rate duration differs from the input, or whose known test tone shifts as in the relabeling case, falsifies that claim. Alias rejection requires its own spectral observation.
+
+</details>
+
+## Source-assisted learner task
+
+Draft a review of a reference-to-Wasm comparison. Manually derive the main and control timelines, then locate the runner's rate declaration and header field. Propose a handoff record with the original and destination clocks and a duration check. State which observed tone or frame result would reject the proposal. Keep interpolation quality unresolved until an actual converter and its output are inspected.
+
+First retain your answer before revealing the prepared corrections. Use the manual table or calculation as the baseline for any calculator, source lookup or agent assistance, and record that assistance. Keep the original response and the corrected response separately. Match each exercise to a prepared criterion in the fixed packet; those criteria have no learner decisions yet. Record an actual source passage and its revision, then distinguish what it establishes from your proposed next step. Report any missing input as unresolved. A mathematically correct answer supports the stated example; human review, runtime execution and learner acceptance require their own retained observations.

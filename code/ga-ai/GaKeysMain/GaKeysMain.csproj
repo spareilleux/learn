@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- GA's KeyIdentificationService at 6baf32e, on main after #625, compiled against the pinned
+       GA.Domain.Core, whose Key.Items and Key.Notes are unchanged on main. The file is fetched
+       by ../fetch-ga.sh; lesson 11 reaches this assembly through the extern alias keysmain -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GaRoot>$(MSBuildThisFileDirectory)../.ga/</GaRoot>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../.ga-keys/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(GaRoot)Common/GA.Domain.Core/GA.Domain.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,246 @@
+{
+  "timestamp_utc": "2026-10-25T14:39:59.843287+00:00",
+  "runs": [
+    {
+      "label": "focused",
+      "command": [
+        "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\tests\\test_unit_b.py"
+      ],
+      "cwd": "C:\\tmp\\learn-streeling-craft-transfer-20261022",
+      "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+      "exit_code": 0,
+      "log_path": "C:\\tmp\\batch50-finish-b-20261025\\focused.log",
+      "log_sha256": "5a33b4d95ff876b58ca766ddd15bff2c8fb0ae82644c465b2c1871334336c237",
+      "observation_count": 16,
+      "test_count": 16,
+      "input_sha256": "3e25c7fe2cbe25b6e0be8dee147a6199369716f62bc595eb411607a22aa4b72d",
+      "test_sha256": "d60f2b0ce28cb1ab08ce59b3151434a24dd82e2a1616803b2d2654b9f1c8af8f"
+    },
+    {
+      "label": "mutation",
+      "command": [
+        "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\tests\\test_unit_b.py",
+        "--mutation-probe"
+      ],
+      "cwd": "C:\\tmp\\learn-streeling-craft-transfer-20261022",
+      "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+      "exit_code": 0,
+      "log_path": "C:\\tmp\\batch50-finish-b-20261025\\mutation.log",
+      "log_sha256": "e58441aff3f5ef8010756a504125b3e764b1c8bd10ed15464234d7ab7c530f9e",
+      "observation_count": 1,
+      "test_count": 0,
+      "input_sha256": "3e25c7fe2cbe25b6e0be8dee147a6199369716f62bc595eb411607a22aa4b72d",
+      "test_sha256": "d60f2b0ce28cb1ab08ce59b3151434a24dd82e2a1616803b2d2654b9f1c8af8f"
+    }
+  ],
+  "read_input_bindings": {
+    "streeling/courses/computer-science/en/cs-018-merge-replayed-agent-messages-by-identity.md": "52e486c140649d98a7653d10933ae3b806f4d212b040081c41534c7623f512f4",
+    "streeling/courses/computer-science/fr/cs-018-merge-replayed-agent-messages-by-identity.fr.md": "638d1b88ca2a14b06d1a2a2fdeafb432cb15f4dad2b2ebde89f7cb64bbb450ed",
+    "streeling/courses/computer-science/es/cs-018-merge-replayed-agent-messages-by-identity.es.md": "47ac3a31d312b52b54bd00ef59efe671d35ba98bd143c18ef44c0a95ffdfa205",
+    "streeling/courses/computer-science/en/cs-019-preserve-lexical-bindings-when-composing-fragments.md": "1a0fc3487a06266191ac370f527f3c8e6eec02f20b705c98b64ec23eb29fef37",
+    "streeling/courses/computer-science/fr/cs-019-preserve-lexical-bindings-when-composing-fragments.fr.md": "d715e585599deccc01bca1e4f5228ed820f1ec0007f7297f2c6be04336c4fb0e",
+    "streeling/courses/computer-science/es/cs-019-preserve-lexical-bindings-when-composing-fragments.es.md": "42710360f9090a03ee7f6f4a90e93577f56d67eea1c97514c3c148bde1014c1f",
+    "streeling/courses/computer-science/en/cs-020-audit-evidence-join-multiplicity.md": "4947e03ca4db1be5e8d58319399f5997f4b2fbdac6f58b6e9433b7e088f971f6",
+    "streeling/courses/computer-science/fr/cs-020-audit-evidence-join-multiplicity.fr.md": "e0289b68381a9da942a359040c16c5197ee8f9f5547795cccfe5748ccfea1688",
+    "streeling/courses/computer-science/es/cs-020-audit-evidence-join-multiplicity.es.md": "d0513a2d5d339914d04ae1f1c6186c4ad9bd93f47c42e91db6f6cede6ef07e7a",
+    "streeling/courses/cybernetics/en/cyb-012-test-feedback-delay-before-reusing-a-gain.md": "ea0e1d2f20328d3d035cb313f246805985aa67c8637bfe3c6a458afc27dc33fa",
+    "streeling/courses/cybernetics/fr/cyb-012-test-feedback-delay-before-reusing-a-gain.fr.md": "bf6c6239e83c90b4909ed2812bad8f407e3c281f3d8a7314eff78a79a8620bbe",
+    "streeling/courses/cybernetics/es/cyb-012-test-feedback-delay-before-reusing-a-gain.es.md": "5489e103d2dad5109b0a8971c762bebffd37b5480f229c42590ce1b98f0c4265",
+    "streeling/courses/cybernetics/en/cyb-013-bound-observation-age-before-a-control-decision.md": "a46ee6fd14a0cc0092f5cbcbd93e3cf675b53983994f2e12a877360cbcca7280",
+    "streeling/courses/cybernetics/fr/cyb-013-bound-observation-age-before-a-control-decision.fr.md": "8a3ac73a440842b81a9073f717693161ab0c4d32a7e3515e9a616b9af4e8da75",
+    "streeling/courses/cybernetics/es/cyb-013-bound-observation-age-before-a-control-decision.es.md": "18af4efa577c80ae30d2adf1596d8d37d367894659971165411e27e8f1a62653",
+    "streeling/courses/cybernetics/en/cyb-014-test-deadbands-with-quantized-actions.md": "e8dff6dcb4f82df2d0badd64c811d7520b6f28558f16df5fed32eaa7fbf5fef7",
+    "streeling/courses/cybernetics/fr/cyb-014-test-deadbands-with-quantized-actions.fr.md": "f2973ce149c163ca0e11b42c4fc20719d06137a7d341ce20b97ba716fd858d92",
+    "streeling/courses/cybernetics/es/cyb-014-test-deadbands-with-quantized-actions.es.md": "940dce60cee39d4bfebe5fbf09a8ce2af1888d0b4f1b9f8ad0ed798842234698",
+    "streeling/courses/cognitive-science/en/cog-012-separate-review-alert-hit-rate-from-response-bias.md": "a84e6e2e205d717b570313156e8d5f8835726d4fac96165295c1e9a9c1dd1a71",
+    "streeling/courses/cognitive-science/fr/cog-012-separate-review-alert-hit-rate-from-response-bias.fr.md": "7feefff9b7e8c0fbc470564fa14dc9e44ddbdcbd99fbcf131415ca04269e91ae",
+    "streeling/courses/cognitive-science/es/cog-012-separate-review-alert-hit-rate-from-response-bias.es.md": "c50d4f1e2770bdd148a0748f0c993a513a443904ee38c74df1b67a88d23d1875",
+    "streeling/courses/cognitive-science/en/cog-013-retain-catch-trial-misses-in-assisted-review.md": "c72d5fe7905194e797913cc861ee2292f159f581574102d23f0ed660e4087d5d",
+    "streeling/courses/cognitive-science/fr/cog-013-retain-catch-trial-misses-in-assisted-review.fr.md": "9854abd83e050e8fcda60ed3c402458d7e00704892a6802014006508c7d79c71",
+    "streeling/courses/cognitive-science/es/cog-013-retain-catch-trial-misses-in-assisted-review.es.md": "78cfd993b36de9452635045aee9676b5d1f610555503fbfe51bf6f001aa1c6b2",
+    "streeling/courses/cognitive-science/en/cog-014-report-risk-and-coverage-when-an-agent-abstains.md": "aa365b4ef04ccf942d06373619acee211a6a71dc667a69dd35d2ce1bbf65c5ff",
+    "streeling/courses/cognitive-science/fr/cog-014-report-risk-and-coverage-when-an-agent-abstains.fr.md": "e7b79631d30d2e97241292db68503054ea3755da0ffa48583074e8c7bb044abe",
+    "streeling/courses/cognitive-science/es/cog-014-report-risk-and-coverage-when-an-agent-abstains.es.md": "c8a494e0c62a9ca2f7b271b7086fe1521f2afba3bee6c810ccc8778e271a7f86",
+    "streeling/courses/information-theory/en/inf-013-value-an-evidence-probe-by-expected-information.md": "8547e09ca39f13845c229c48b238d0782902fd43550ed9e4b1cf6946c35bea65",
+    "streeling/courses/information-theory/fr/inf-013-value-an-evidence-probe-by-expected-information.fr.md": "ae3d1cdece24b753a8c8e45a73a7539f6908816fc72c28ddddf5490b72c35f58",
+    "streeling/courses/information-theory/es/inf-013-value-an-evidence-probe-by-expected-information.es.md": "c0aeb7789e3ef81e893006e981b537abae9912654f6857ffcbf117de202adcd5",
+    "streeling/courses/information-theory/en/inf-014-retain-message-codebook-versions.md": "3efe20a3ed8c9f4fdb35f63e7ce372d2b048f6e06cb3531ba2cfdc16891a910b",
+    "streeling/courses/information-theory/fr/inf-014-retain-message-codebook-versions.fr.md": "41fd370851a795d68d1f1b823829435732d9d4c3e34ee4fb8277395b29654da3",
+    "streeling/courses/information-theory/es/inf-014-retain-message-codebook-versions.es.md": "c1df53b4a049a08cd6238b02fbfbf7e03310f04ad9274ddd70b387cdf1fb82fc",
+    "streeling/courses/information-theory/en/inf-015-weight-sampled-telemetry-before-summarizing-failures.md": "93647912d5d2e39e5ef80b889a55379c6ef286806e6c9779d758dddc5de4f43a",
+    "streeling/courses/information-theory/fr/inf-015-weight-sampled-telemetry-before-summarizing-failures.fr.md": "9130a815ace3a874004d67a77939b547ec26f67ebb275e50163265f26b755a83",
+    "streeling/courses/information-theory/es/inf-015-weight-sampled-telemetry-before-summarizing-failures.es.md": "437c34baea8544033b9a44b24a55305a484cd7fee057b2fc52930046c00207f3",
+    "streeling/courses/network-science/en/net-012-account-for-shared-dependencies-in-redundant-paths.md": "1d9982a8d9fc9091c745949d79275912fce4575e6c4792cb2c867b330b90e22f",
+    "streeling/courses/network-science/fr/net-012-account-for-shared-dependencies-in-redundant-paths.fr.md": "d8443a7a172ec274d2a0a067f8fdebf925d7ca15dbab987a03efc45a4944c278",
+    "streeling/courses/network-science/es/net-012-account-for-shared-dependencies-in-redundant-paths.es.md": "dc29752fff19496a1450c90986c62474433f938e0ac1cfac5f6848e83cc5b3eb",
+    "streeling/courses/network-science/en/net-013-trace-causal-concurrency-with-vector-clocks.md": "fc099a61e39da7297b67c8f02f2920c6edc4c8aae0893f58d510fa63d8e5fe27",
+    "streeling/courses/network-science/fr/net-013-trace-causal-concurrency-with-vector-clocks.fr.md": "e8fde40200d59144bc41ba1511a430c962c84046c8966e8ef143ce418312f376",
+    "streeling/courses/network-science/es/net-013-trace-causal-concurrency-with-vector-clocks.es.md": "0f4430044e2b310e7598f93c8f7b32e78f17e0d76f932d12e07814da4a7f0beb",
+    "streeling/courses/product-management/en/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.md": "7d9fa6e8c0d0689e575d911a7760b7969110410759c30d08c9896bc9995b581c",
+    "streeling/courses/product-management/fr/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.fr.md": "ed2bfdf06873a516ab1119699a6ff0ccc5f4cdef8b8f09f5e549f157c2bfdee2",
+    "streeling/courses/product-management/es/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.es.md": "ca1a093c6b2b66645ffd43f8a290fd828d7249cb00f684d7c4f828007111113c",
+    "streeling/courses/product-management/en/pm-011-include-review-and-correction-in-automation-break-even.md": "7ffeeafcc5a7be1f70494e65cd1d6d2577a61015dd77a4b56a5d9fa9999b5601",
+    "streeling/courses/product-management/fr/pm-011-include-review-and-correction-in-automation-break-even.fr.md": "367ced7f0cdec2a545fc675a4c4caf92c047f62d5f7e3d3b6ae55f240f698abe",
+    "streeling/courses/product-management/es/pm-011-include-review-and-correction-in-automation-break-even.es.md": "fd4f737716df896a3484a823be15ad5784db036f7257b598a31819df2f83ea49",
+    "streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md": "34b464061549b75e54058e76896bbec739e197a1f8cf7e54b837a5698e01f531",
+    "scripts/streeling-lib.mjs": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+    "streeling/courses/computer-science/en/cs-006-ixql-pipeline-composition.md": "7077ccb18a5e5ac03bc3d0e0eaa89dc12e4c64ec09abcd143967da515f484117",
+    "code/streeling/functional-composition/vendor/GaAsync.fs": "d07792410d218d660ae9875366ce6255a4eb5bd422ad85b9355b5deec505a641",
+    "streeling/courses/computer-science/en/cs-008-compose-exact-source-review-verdicts.md": "fe241266735f1864f854fa1b74e17d0c0208cb068d255dce51a1e2a8bd99c0c8",
+    "streeling/courses/information-theory/en/inf-010-keep-joint-outcomes-when-composing-verdicts.md": "4dcdc388dca745b3563e5e8c639862d20b065bbd23355f0e84895f13c59e72e2",
+    "streeling/courses/cybernetics/en/cyb-008-check-convergence-before-repeating-a-correction.md": "0a0cbc4fa4266b833ae8d5fa2bc7d9e97360df8712ff55471815ebc7c29e6702",
+    "code/streeling/evidence/pilot-value-2026-10-22/source-observations.json": "1059ca60f45178942a810a54500202331c8200d7246a0e5be06b9b506124cbae",
+    "streeling/courses/cybernetics/en/cyb-004-observe-before-correcting-a-feedback-loop.md": "6422d5e4ca7197fa0a7f9fb855d4f11f4fac337f4fb167e94289fed90bf4a27e",
+    "streeling/courses/network-science/en/net-008-map-clock-domains-before-ordering-events.md": "b039b58ec8eaf543b002a674b0f9abc150550c0fb1afa3096e98e77c7037a619",
+    "streeling/courses/cybernetics/en/cyb-005-stop-render-policy-flapping.md": "b2d9936c3f7a35103f14cb995033654e4a177e36e43f3b2acd1cf22b45a89a1a",
+    "streeling/courses/cybernetics/en/cyb-011-prevent-integral-accumulation-under-saturation.md": "a73711166ecc017b610e2a8c51853bb951d9257ad5829d9432ecf5bb718114cf",
+    "streeling/courses/cognitive-science/en/cog-011-measure-rubric-disagreement-before-adjudication.md": "4a5c0fec641fa1c12758f2dcdac7eaab996bbbbc3feb716f7c130030e6761786",
+    "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+    "streeling/courses/cognitive-science/en/cog-007-separate-unaided-recall-from-assisted-success.md": "cc28d8be51e0d2c7ab4ad9d8f2cd14da93b148a14904f12e742e6d9024810f54",
+    "streeling/courses/cognitive-science/en/cog-009-counterbalance-practice-order-before-comparing-interfaces.md": "6156f1beacc64b6863a18c3b07834869920390db8e55850c346475ff1d5fb4a0",
+    "streeling/courses/cognitive-science/en/cog-003-calibrating-fretboard-confidence.md": "9610552ea1f8bf2727e820232fa1ad17f9914feb229b4f275173d5b861561e16",
+    "streeling/courses/information-theory/en/inf-001-entropy-of-governance.md": "909cc7900568651d75287a168187e9465152ca1c295799929fa71ddbf8bb5dd5",
+    "streeling/courses/cognitive-science/en/cog-008-choose-probes-that-distinguish-reasoning-models.md": "bbf93d2068d19a69c8326a30ce2772d56d8690efb1abb0ad48d0a85ad7a0444e",
+    "streeling/courses/information-theory/en/inf-004-information-loss-in-agent-handoffs.md": "d8e755eae6b24d26cdfbebeaa3a3b6e347f06fa2659f21cc200801ea2c5c3b44",
+    "streeling/courses/information-theory/en/inf-011-separate-compressed-size-from-preserved-information.md": "0806cd078a98d41564a9d4064c5e8b765554ace81823f43e64c4e67099b3c4dc",
+    "streeling/courses/product-management/en/pm-009-separate-release-adoption-from-artifact-downloads.md": "d022e540be651daa1a413f0110333b6cfbf56e53033cfa26d29119d366963d7e",
+    "streeling/courses/network-science/en/net-003-worker-lane-coverage-and-fragility.md": "ba119428e8a1974d2e82a8812b66d8e3ff5e1112cb2212043735f03710dbc91d",
+    "streeling/courses/information-theory/en/inf-012-retain-event-order-in-a-handoff-summary.md": "671231919c1aa58da71ceee664d343ef181267d94d0c7b495eefd5e70ea60981",
+    "streeling/courses/product-management/en/pm-006-test-a-pilot-against-its-decision-horizon.md": "ed714eff740f12aee462f5cf156dc84d5989a033c444fd4740e53f2e542ef8b3",
+    "streeling/courses/product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md": "38f9f6bf4bcc8480d6c6a87729b2021fde7ca04e91cf7fbf1d5595b81db2544d",
+    "code\\streeling\\evidence\\batch50-2026-10-24\\batch-plan.json": "f041291b35c55e9aa42475ee94d968d1efaed3c74494bde48007618eeaadf614",
+    "code\\streeling\\evidence\\batch50-2026-10-24\\review-protocol.md": "ed1561e057b76b39764d2fd75703ba275bf91a8ecad02fa1aa34d109ce072f65",
+    "code\\streeling\\evidence\\batch50-2026-10-24\\unit-b.json": "3e25c7fe2cbe25b6e0be8dee147a6199369716f62bc595eb411607a22aa4b72d",
+    "code\\streeling\\evidence\\batch50-2026-10-24\\unit-b-self-check.json": "17384b750d32868f14cd1034eb428ffc1c998b7cbaccfce8d2a1b41e81bc782d",
+    "code\\streeling\\evidence\\batch50-2026-10-24\\unit-b-review-amendment.json": "1da3820f582fedf4487f95c5c6b13f72e6d2ee70b205e6a3b8e2da2c9b01049c",
+    "code\\streeling\\evidence\\batch50-2026-10-24\\review-b-source-amendments.json": "36b1c19e6bdc01b0023075d868a0bed9805895790b8b5fb8f2caf5f37baecb21",
+    "code\\streeling\\evidence\\batch50-2026-10-24\\tests\\test_unit_b.py": "d60f2b0ce28cb1ab08ce59b3151434a24dd82e2a1616803b2d2654b9f1c8af8f",
+    "AGENTS.md": "a9f9fa23747f397cbe7a791eb3a4ae5736ff9448da6e120bd44f2ae3524fd15d",
+    "streeling/courses/computer-science/en/cs-015-compose-overlapping-chunks-without-duplicate-frames.md": "1de5f2ee3ced1be75e4eeb75991bc5f8e6dd5ee41e4d5eab3d832fff2af602a0",
+    "streeling/courses/computer-science/en/cs-017-test-pipeline-rewrites-with-counterexamples.md": "9c28b373054530234ce99a61848b87243c8acb65c250282a03ce7fdd95c46c68"
+  },
+  "read_inputs_unchanged": true,
+  "parity_checks": [
+    {
+      "code": "CS018",
+      "localized_model_equal": true,
+      "urls_equal": true,
+      "answer_code_spans_equal": true,
+      "english_answers_equal_packet": true
+    },
+    {
+      "code": "CS019",
+      "localized_model_equal": true,
+      "urls_equal": true,
+      "answer_code_spans_equal": true,
+      "english_answers_equal_packet": true
+    },
+    {
+      "code": "CS020",
+      "localized_model_equal": true,
+      "urls_equal": true,
+      "answer_code_spans_equal": true,
+      "english_answers_equal_packet": true
+    },
+    {
+      "code": "CYB012",
+      "localized_model_equal": true,
+      "urls_equal": true,
+      "answer_code_spans_equal": true,
+      "english_answers_equal_packet": true
+    },
+    {
+      "code": "CYB013",
+      "localized_model_equal": true,
+      "urls_equal": true,
+      "answer_code_spans_equal": true,
+      "english_answers_equal_packet": true
+    },
+    {
+      "code": "CYB014",
+      "localized_model_equal": true,
+      "urls_equal": true,
+      "answer_code_spans_equal": true,
+      "english_answers_equal_packet": true
+    },
+    {
+      "code": "COG012",
+      "localized_model_equal": true,
+      "urls_equal": true,
+      "answer_code_spans_equal": true,
+      "english_answers_equal_packet": true
+    },
+    {
+      "code": "COG013",
+      "localized_model_equal": true,
+      "urls_equal": true,
+      "answer_code_spans_equal": true,
+      "english_answers_equal_packet": true
+    },
+    {
+      "code": "COG014",
+      "localized_model_equal": true,
+      "urls_equal": true,
+      "answer_code_spans_equal": true,
+      "english_answers_equal_packet": true
+    },
+    {
+      "code": "INF013",
+      "localized_model_equal": true,
+      "urls_equal": true,
+      "answer_code_spans_equal": true,
+      "english_answers_equal_packet": true
+    },
+    {
+      "code": "INF014",
+      "localized_model_equal": true,
+      "urls_equal": true,
+      "answer_code_spans_equal": true,
+      "english_answers_equal_packet": true
+    },
+    {
+      "code": "INF015",
+      "localized_model_equal": true,
+      "urls_equal": true,
+      "answer_code_spans_equal": true,
+      "english_answers_equal_packet": true
+    },
+    {
+      "code": "NET012",
+      "localized_model_equal": true,
+      "urls_equal": true,
+      "answer_code_spans_equal": true,
+      "english_answers_equal_packet": true
+    },
+    {
+      "code": "NET013",
+      "localized_model_equal": true,
+      "urls_equal": true,
+      "answer_code_spans_equal": true,
+      "english_answers_equal_packet": true
+    },
+    {
+      "code": "PM010",
+      "localized_model_equal": true,
+      "urls_equal": true,
+      "answer_code_spans_equal": true,
+      "english_answers_equal_packet": true
+    },
+    {
+      "code": "PM011",
+      "localized_model_equal": true,
+      "urls_equal": true,
+      "answer_code_spans_equal": true,
+      "english_answers_equal_packet": true
+    }
+  ],
+  "scope": "Read-only source review; equality checks supplement manual localized content review. Reused inspected independent fixed-expectation test, no canonical mutation."
+}

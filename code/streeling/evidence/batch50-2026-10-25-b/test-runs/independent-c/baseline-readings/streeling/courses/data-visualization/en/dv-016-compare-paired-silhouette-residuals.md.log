@@ -1,0 +1,101 @@
+---
+module_id: dv-016-compare-paired-silhouette-residuals
+department: data-visualization
+course: "Compare Paired Silhouette Residuals"
+level: intermediate
+prerequisites: ["dv-006-position-length-area-comparisons"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Compare Paired Silhouette Residuals
+
+> Draft for technical and language review. Every scene, count, temperature, timing and outcome introduced below is an authored example. Source inspection and arithmetic do not constitute a physical craft trial, a [Godot](https://docs.godotengine.org/en/4.5/) import, a [Blender](https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md) render, a [ComfyUI](https://docs.comfy.org/) run or a learner observation. Human and runtime decisions remain undecided.
+
+## Project question
+
+A sculpture cleanup reduces the worst silhouette residual while making other views worse. Reporting only the mean improvement hides the affected views; sorting both columns separately destroys their pairing. This lesson prepares a before-and-after display keyed by camera identity. It asks which views changed, not merely whether two collections of numbers have different averages.
+
+## Read the retained boundary
+
+The cleanup pipeline requests multiple turntable frames and a capture resolution. The inspected arguments motivate viewpoint-specific review but contain no residual measurements for our sculpture. All residuals below are invented pixels under a fixed proposed comparison convention.
+
+Read the prerequisite and the retained project artifact before interpreting the model. The source has its own revision and purpose; it supplies the boundary described here, not the new classroom inputs. Keep a small evidence table separating an inspected field, an assumption, a derived quantity and a proposed scene effect. An agent summary must point back to the field it interprets. A source filename alone cannot establish an earlier result.
+
+## Interpret the model
+
+A residual needs a reference boundary, an image-space definition and a matched camera. Here each scalar is the declared error for one camera. Draw a segment between the before and after values on a common scale, preserving the camera label. Negative change means improvement because lower residual is preferred. Do not infer that all views improved from a negative mean. The control deliberately relabels values without changing their multiset. Aggregate summaries survive, but the paired differences change, showing why view identity is data rather than decorative text.
+
+The direct baseline is a labelled sketch and a hand calculation with the answer panels closed. Preserve intermediate values and units, then apply the changed input in the negative control. A disagreement is useful evidence: locate whether it comes from the definition, arithmetic, representation or intended task before changing the model. Agreement on the main case alone does not establish a universal rule. These finite examples deliberately expose an assumption that a smooth preview could conceal.
+
+```text
+{"view_ids":["front","side","back"],"before_px":[2,8,2],"after_px":[4,3,4]}
+delta_i=after_i-before_i; mean_delta=sum(delta)/len(delta); worst_before=max(before); worst_after=max(after)
+```
+
+## Corrected exercises
+
+### Exercise 1
+
+Compute the paired changes in the given camera order.
+
+<details><summary>Answer 1</summary>
+
+They are `[2,-5,2] px`. Front and back worsen, while side improves. Keep the camera order attached to the vector.
+
+</details>
+
+### Exercise 2
+
+Find mean change and the two worst residuals.
+
+<details><summary>Answer 2</summary>
+
+Mean change is `-1/3 px`; worst residual falls from `8 px` to `4 px`. These summaries coexist with worsening views.
+
+</details>
+
+### Exercise 3
+
+Apply the control with reassigned after values.
+
+<details><summary>Answer 3</summary>
+
+The changes become `[1,-4,2] px`, while mean change remains `-1/3 px` and worst residuals remain `8 px` and `4 px`. Pairing changes without aggregate change.
+
+</details>
+
+### Exercise 4
+
+Why is independently sorting the before and after lists misleading?
+
+<details><summary>Answer 4</summary>
+
+It pairs order statistics instead of matched cameras. A segment could connect different viewpoints and would no longer describe that view’s cleanup effect.
+
+</details>
+
+### Exercise 5
+
+Does a smaller maximum residual prove the sculpture is artistically more faithful?
+
+<details><summary>Answer 5</summary>
+
+No. The chosen residual measures one geometric task. Semantic features, materials, lighting and artistic judgment need additional criteria and actual observations.
+
+</details>
+
+## Source-assisted learner task
+
+Draw labelled paired segments and annotate every worsening view before opening answers. Locate the pipeline’s capture arguments and identify the missing reference-image contract. An apparent all-view improvement contradicted by a matched positive change falsifies that summary claim.
+
+Retain your original answer, source locations, assistance history and any later correction as separate records. State the observable result that would falsify your recommendation before proposing automation. Compare the source-assisted result with your direct manual baseline, including any extra uncertainty it introduces. The fixed packet contains five prepared criteria; each decision stays null until an actual learner attempt and review exist. Prepared answers are checks, not evidence that a learner performed the task.
+
+## Sources and validation journal
+
+- [Prerequisite: dv-006-position-length-area-comparisons](../../data-visualization/en/dv-006-position-length-area-comparisons.md)
+- [Retained project artifact](../../../../code/blender/scripts/glb_pipeline.py)
+- [Primary reading](https://docs.godotengine.org/en/4.5/classes/class_camera3d.html)
+- [Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-24/unit-c.json)
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-24/journal.md)

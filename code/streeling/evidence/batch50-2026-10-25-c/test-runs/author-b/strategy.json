@@ -1,0 +1,15 @@
+{
+  "strategy": "Content characterization: fixed authored models and actual arithmetic checks; independent reviewer implements proof tests. No production, learner, runtime or human acceptance is inferred. Preserve original failures and reruns.",
+  "tooling_failures": [
+    {
+      "operation": "Initial guessed NET018 file read",
+      "result": "Path did not exist",
+      "correction": "Resolved actual committed NET018 filename and read it. No course content or check result affected."
+    },
+    {
+      "operation": "Primary source discovery",
+      "result": "Toronto arithmetic PDF inaccessible; Nature full text redirected; initial StatCan article URL inaccessible; MIT robust chapter had no barrier passage",
+      "correction": "Use actual CMU arithmetic passage, PubMed abstract only when available, correct StatCan abstract URL and Caltech safety-filter paper; do not claim missing passages read."
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "unit": "b",
+  "artifact_list_origin": "C:\\tmp\\batch50-finish-b-20261025\\artifact-manifest.json",
+  "artifact_list_sha256": "f789c95878b4dde3a26268186e28e41e3098ba37d8a0c2b84f590c5372a5302c",
+  "artifacts": [
+    {
+      "origin": "C:\\tmp\\batch50-finish-b-20261025\\focused-observations.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-b/focused-observations.json",
+      "sha256": "1a3c4dfc0c00893fdbe4b7088648ff6f2557ff3173e2919b7296e6e495a049c0",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-finish-b-20261025\\focused.log",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-b/focused.log",
+      "sha256": "5a33b4d95ff876b58ca766ddd15bff2c8fb0ae82644c465b2c1871334336c237",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-finish-b-20261025\\judgments.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-b/judgments.json",
+      "sha256": "146149408753f0db32a33636cd63989348124c2637f9093015241b51c05ed062",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-finish-b-20261025\\mutation-observations.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-b/mutation-observations.json",
+      "sha256": "92c57dcdb4cfe2a819defc35528bea692ec9b411cde85f10801d9dc3ce0b9ab4",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-finish-b-20261025\\mutation.log",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-b/mutation.log",
+      "sha256": "e58441aff3f5ef8010756a504125b3e764b1c8bd10ed15464234d7ab7c530f9e",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-finish-b-20261025\\review-b.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-b/review-b.json",
+      "sha256": "6a1c1e291949cbb20f1e1dfc9c6c62f1fb76e6704410f0c9029ec7eb9d6d7fd4",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-finish-b-20261025\\run-receipt-v2.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-b/run-receipt-v2.json",
+      "sha256": "73d8bc6e2d42dc0826b628fc9a131e098620e9cf789fe96c0282555b529dd450",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-finish-b-20261025\\run-receipt.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-b/run-receipt.json",
+      "sha256": "a891dab6af193136365dbadc9d1870e3442eebbac617bd50556260f223eda407",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:\\tmp\\batch50-finish-b-20261025\\source-access.json",
+      "retained_path": "code/streeling/evidence/batch50-2026-10-24/test-runs/independent-b/source-access.json",
+      "sha256": "edc847b128736cb2b8b1a3d82622320a722c8e99cc7737357df91fa95146a6b4",
+      "byte_identical": true
+    }
+  ],
+  "unshipped_helpers": [
+    {
+      "path": "C:\\tmp\\batch50-finish-b-20261025\\build_receipt.py",
+      "sha256": "ff730e2bffaa382e419b638412a531b04b44134afeaedfdf6205e4b200448677",
+      "reason": "Temporary reviewer orchestration stays outside shipped proof-test scope. Exact executed outputs and receipts are retained."
+    },
+    {
+      "path": "C:\\tmp\\batch50-finish-b-20261025\\extract_observations.py",
+      "sha256": "2d5604c81f08ef35a7c27c94f9c2f6c7f248538d153858480417ba5a3d87f7a4",
+      "reason": "Temporary reviewer orchestration stays outside shipped proof-test scope. Exact executed outputs and receipts are retained."
+    },
+    {
+      "path": "C:\\tmp\\batch50-finish-b-20261025\\run_review.py",
+      "sha256": "72b638f6345a824d324a5967a22dcff4467239bcf27373916667e6dd37d2605f",
+      "reason": "Temporary reviewer orchestration stays outside shipped proof-test scope. Exact executed outputs and receipts are retained."
+    },
+    {
+      "path": "C:\\tmp\\batch50-finish-b-20261025\\verify_receipt.py",
+      "sha256": "3b90ca8cd90a1c379f7b39e5fcd9e93eb7f2cf959d06888ad019bc6c2e937bb2",
+      "reason": "Temporary reviewer orchestration stays outside shipped proof-test scope. Exact executed outputs and receipts are retained."
+    }
+  ],
+  "scope": "Byte-preserved independent focused/mutation/prerequisite evidence; deliberate mutant rejections are not failing canonical courses. Historical input hashes are not relabeled as final after corrections."
+}
