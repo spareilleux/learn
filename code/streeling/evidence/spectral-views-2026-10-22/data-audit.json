@@ -1,0 +1,1200 @@
+{
+  "checked_at_utc": "2026-10-22T17:12:42.873927+00:00",
+  "verdict": "PASS_WITH_LIMITS",
+  "scope": "Independent numerical audit of retained PCM16 WAV samples and pinned IX source inspection; no IX binary execution, engine rerender, dependency install, repository build, Git mutation or publication.",
+  "reviewer": "Independent data audit agent",
+  "method": {
+    "python": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.4.2",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "pcm_decode": "signed little-endian PCM16 divided by 32768",
+    "window": "symmetric Hann, np.hanning(W); separately compared with explicit 0.5-0.5*cos(2*pi*n/(W-1))",
+    "window_size": 2048,
+    "hop_size": 512,
+    "sample_rate_hz": 44100,
+    "fft": "np.fft.rfft, norm=backward, unscaled forward",
+    "amplitude": "2*abs(X)/sum(window) at interior bins; abs(X)/sum(window) at DC and Nyquist",
+    "matrix_hash_encoding": "float64 little-endian, row-major frame/bin bytes",
+    "direct_dft": "Explicit math.fsum of sine/cosine terms; absolute complex tolerance 1e-10"
+  },
+  "input_bindings": [
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/experiment-plan.md",
+      "sha256": "4bcb772475df1d451ce2319b0e0af6e30616a641402eef2a745039a56f759383",
+      "bytes": 5129,
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/calibration.json",
+      "sha256": "ead8164c0fa64d26c76ffa36badce9727a98813608b671931a699ed8310ed91e",
+      "bytes": 2163,
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/coordinates.json",
+      "sha256": "f00c412b0b3730792f23b157ed551c298ee2af63e1e1d141f36fa20ac8c8dd33",
+      "bytes": 7027,
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/display-comparison.json",
+      "sha256": "3c27d1d38386358c3c136d5e76ff8ff60280a334233bf05401cef7bc9b10f707",
+      "bytes": 2880,
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/execution.json",
+      "sha256": "02f477560bc10cf711a74626cc9761509f7b68e4a938526996d46766cac370ec",
+      "bytes": 1546,
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/primary-readback.json",
+      "sha256": "ae6079d238ccd1d60d0fb414033a3dbba4c8220a87279d380958b68dde40a768",
+      "bytes": 3775,
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/spectrogram-reference-comparison.png",
+      "sha256": "3e93a3d3843a26c5e57d1c62fbac7d87a62453b600de6860eceb57158a3cfdba",
+      "bytes": 139544
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/results.json",
+      "sha256": "d564b476e0fccaff1a435548b5ae795807337622fdff69fb19ce0ace0d320506",
+      "bytes": 7736,
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/execution.json",
+      "sha256": "1d64a71891cc91743cc872d964907ae2d1e9cb906275167dcf38ce382eaf39d4",
+      "bytes": 2942,
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/baseline.wav",
+      "sha256": "a78a70243a81aa79d806d9ef3db7baa1385c479505f7d5e97b8bf0c7866c3f98",
+      "bytes": 352844
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/candidate.wav",
+      "sha256": "055e03fb6064f62601b1bbc07942d3e2223da6d2fc614c6f63fa9ec8d964be73",
+      "bytes": 352844
+    }
+  ],
+  "pinned_source_bindings": [
+    {
+      "repository": "C:/Users/spare/source/repos/ix",
+      "commit": "bd1336b7c4045e427dcdbe80b102790e45da5ce1",
+      "path": "crates/ix-signal/src/spectral.rs",
+      "sha256": "32eb7cfb68af526e955fa7a517b47472579d77ecfee4ceba830ea31e49846141",
+      "bytes": 3746
+    },
+    {
+      "repository": "C:/Users/spare/source/repos/ix",
+      "commit": "bd1336b7c4045e427dcdbe80b102790e45da5ce1",
+      "path": "crates/ix-signal/src/window.rs",
+      "sha256": "2e619dc55133c53a824c3196b2f3b6997cff4424eb19faa961d1edb3e78089fc",
+      "bytes": 2912
+    },
+    {
+      "repository": "C:/Users/spare/source/repos/ix",
+      "commit": "bd1336b7c4045e427dcdbe80b102790e45da5ce1",
+      "path": "crates/ix-signal/src/fft.rs",
+      "sha256": "fb2260fc5c35d66c1b7dba445aad8a22de008ad3f8373f2a4175b45406bf4bbd",
+      "bytes": 6400
+    },
+    {
+      "repository": "C:/Users/spare/source/repos/ix",
+      "commit": "bd1336b7c4045e427dcdbe80b102790e45da5ce1",
+      "path": "crates/ix-agent/src/handlers.rs",
+      "sha256": "3c2e47086867b0830ac0e87a3d0426f5e62d99774a9a568a1454ab6a5362c724",
+      "bytes": 306072
+    }
+  ],
+  "source_observations": [
+    {
+      "path": "crates/ix-signal/src/spectral.rs",
+      "lines": [
+        6,
+        29
+      ],
+      "observation": "STFT rows are complete time frames; start advances by hop; samples multiply the window before unscaled forward FFT."
+    },
+    {
+      "path": "crates/ix-signal/src/spectral.rs",
+      "lines": [
+        32,
+        54
+      ],
+      "observation": "Spectrogram returns W/2+1 raw magnitudes; db=true uses 20*log10(max(magnitude,1e-10)). The teaching coherent-amplitude scaling and -80 dB floor are additional explicit analysis choices."
+    },
+    {
+      "path": "crates/ix-signal/src/window.rs",
+      "lines": [
+        10,
+        15
+      ],
+      "observation": "Symmetric Hann denominator is n-1."
+    },
+    {
+      "path": "crates/ix-signal/src/fft.rs",
+      "lines": [
+        84,
+        115
+      ],
+      "observation": "Forward FFT is unscaled; inverse FFT applies 1/n; rfft returns full complex FFT before spectral truncation."
+    },
+    {
+      "path": "crates/ix-agent/src/handlers.rs",
+      "lines": [
+        1145,
+        1190
+      ],
+      "observation": "Handler requires a power-of-two window at least 2 and no longer than signal, clamps hop to at least 1, and returns matrix with n_frames/n_bins/window/hop/db; it does not implement the advisory units/axes schema."
+    }
+  ],
+  "checks": [
+    {
+      "name": "pinned source binding: crates/ix-signal/src/spectral.rs",
+      "pass": true,
+      "details": {
+        "local_git_object_sha256": "32eb7cfb68af526e955fa7a517b47472579d77ecfee4ceba830ea31e49846141",
+        "recorded_sha256": "32eb7cfb68af526e955fa7a517b47472579d77ecfee4ceba830ea31e49846141",
+        "method": "Read-only git show; no IX build or execution."
+      }
+    },
+    {
+      "name": "pinned source binding: crates/ix-signal/src/window.rs",
+      "pass": true,
+      "details": {
+        "local_git_object_sha256": "2e619dc55133c53a824c3196b2f3b6997cff4424eb19faa961d1edb3e78089fc",
+        "recorded_sha256": "2e619dc55133c53a824c3196b2f3b6997cff4424eb19faa961d1edb3e78089fc",
+        "method": "Read-only git show; no IX build or execution."
+      }
+    },
+    {
+      "name": "pinned source binding: crates/ix-signal/src/fft.rs",
+      "pass": true,
+      "details": {
+        "local_git_object_sha256": "fb2260fc5c35d66c1b7dba445aad8a22de008ad3f8373f2a4175b45406bf4bbd",
+        "recorded_sha256": "fb2260fc5c35d66c1b7dba445aad8a22de008ad3f8373f2a4175b45406bf4bbd",
+        "method": "Read-only git show; no IX build or execution."
+      }
+    },
+    {
+      "name": "pinned source binding: crates/ix-agent/src/handlers.rs",
+      "pass": true,
+      "details": {
+        "local_git_object_sha256": "3c2e47086867b0830ac0e87a3d0426f5e62d99774a9a568a1454ab6a5362c724",
+        "recorded_sha256": "3c2e47086867b0830ac0e87a3d0426f5e62d99774a9a568a1454ab6a5362c724",
+        "method": "Read-only git show; no IX build or execution."
+      }
+    },
+    {
+      "name": "2048 DC endpoint factor exclusion",
+      "pass": true,
+      "details": {
+        "kind": "DC",
+        "bin": 0,
+        "raw_magnitude": 255.875,
+        "amplitude": 0.24999999999999997,
+        "incorrect_doubled_amplitude": 0.49999999999999994
+      }
+    },
+    {
+      "name": "2048 Nyquist endpoint factor exclusion",
+      "pass": true,
+      "details": {
+        "kind": "Nyquist",
+        "bin": 1024,
+        "raw_magnitude": 255.875,
+        "amplitude": 0.24999999999999997,
+        "incorrect_doubled_amplitude": 0.49999999999999994
+      }
+    },
+    {
+      "name": "2048 coherent cosine calibration",
+      "pass": true,
+      "details": {
+        "window_size": 2048,
+        "bin": 32,
+        "frequency_hz": 689.0625,
+        "window_sum": 1023.5000000000001,
+        "raw_magnitude": 127.9375151793639,
+        "raw_magnitude_db": 42.13995823068381,
+        "peak_amplitude_estimate": 0.25000002966167834,
+        "amplitude_db_re_unit_peak": -12.041198796007052,
+        "independent_direct_dft_complex_abs_error": 5.081872053457477e-13,
+        "endpoint_controls": [
+          {
+            "kind": "DC",
+            "bin": 0,
+            "raw_magnitude": 255.875,
+            "amplitude": 0.24999999999999997,
+            "incorrect_doubled_amplitude": 0.49999999999999994
+          },
+          {
+            "kind": "Nyquist",
+            "bin": 1024,
+            "raw_magnitude": 255.875,
+            "amplitude": 0.24999999999999997,
+            "incorrect_doubled_amplitude": 0.49999999999999994
+          }
+        ]
+      }
+    },
+    {
+      "name": "4096 DC endpoint factor exclusion",
+      "pass": true,
+      "details": {
+        "kind": "DC",
+        "bin": 0,
+        "raw_magnitude": 511.875,
+        "amplitude": 0.25,
+        "incorrect_doubled_amplitude": 0.5
+      }
+    },
+    {
+      "name": "4096 Nyquist endpoint factor exclusion",
+      "pass": true,
+      "details": {
+        "kind": "Nyquist",
+        "bin": 2048,
+        "raw_magnitude": 511.875,
+        "amplitude": 0.25,
+        "incorrect_doubled_amplitude": 0.5
+      }
+    },
+    {
+      "name": "4096 coherent cosine calibration",
+      "pass": true,
+      "details": {
+        "window_size": 4096,
+        "bin": 64,
+        "frequency_hz": 689.0625,
+        "window_sum": 2047.5,
+        "raw_magnitude": 255.93750379229243,
+        "raw_magnitude_db": 48.16267859751133,
+        "peak_amplitude_estimate": 0.25000000370431497,
+        "amplitude_db_re_unit_peak": -12.041199697858165,
+        "independent_direct_dft_complex_abs_error": 2.019804628166825e-12,
+        "endpoint_controls": [
+          {
+            "kind": "DC",
+            "bin": 0,
+            "raw_magnitude": 511.875,
+            "amplitude": 0.25,
+            "incorrect_doubled_amplitude": 0.5
+          },
+          {
+            "kind": "Nyquist",
+            "bin": 2048,
+            "raw_magnitude": 511.875,
+            "amplitude": 0.25,
+            "incorrect_doubled_amplitude": 0.5
+          }
+        ]
+      }
+    },
+    {
+      "name": "window doubling raw versus normalized dB",
+      "pass": true,
+      "details": {
+        "raw_db_change": 6.022720366827521,
+        "normalized_db_change": -9.018511128999762e-07,
+        "raw_magnitude_ratio": 2.0004883120754458
+      }
+    },
+    {
+      "name": "B PCM16 WAV identity and decoding",
+      "pass": true,
+      "details": {
+        "channels": 1,
+        "sample_width_bytes": 2,
+        "sample_rate_hz": 44100,
+        "samples": 176400,
+        "compression": "NONE",
+        "sha256": "a78a70243a81aa79d806d9ef3db7baa1385c479505f7d5e97b8bf0c7866c3f98",
+        "decoded_peak_abs": 0.46014404296875,
+        "decode_denominator": 32768
+      }
+    },
+    {
+      "name": "C PCM16 WAV identity and decoding",
+      "pass": true,
+      "details": {
+        "channels": 1,
+        "sample_width_bytes": 2,
+        "sample_rate_hz": 44100,
+        "samples": 176400,
+        "compression": "NONE",
+        "sha256": "055e03fb6064f62601b1bbc07942d3e2223da6d2fc614c6f63fa9ec8d964be73",
+        "decoded_peak_abs": 0.460052490234375,
+        "decode_denominator": 32768
+      }
+    },
+    {
+      "name": "complete-frame coordinates and tail",
+      "pass": true,
+      "details": {
+        "n_frames": 341,
+        "n_bins": 1025,
+        "total_cells": 349525,
+        "last_frame_start_sample": 174080,
+        "last_frame_end_exclusive": 176128,
+        "unframed_tail_samples": 272,
+        "frame_duration_seconds": 0.046439909297052155,
+        "hop_seconds": 0.011609977324263039,
+        "last_frame_start_seconds": 3.947392290249433,
+        "last_frame_support_end_seconds": 3.9938321995464854,
+        "display_hop_cell_end_seconds": 3.959002267573696
+      }
+    },
+    {
+      "name": "sentinel catches wrong stride",
+      "pass": true,
+      "details": {
+        "shape": [
+          3,
+          5
+        ],
+        "cell": [
+          2,
+          4
+        ],
+        "correct_offset": 14,
+        "correct_value": 204,
+        "wrong_stride": 3,
+        "wrong_offset": 10,
+        "wrong_value": 200
+      }
+    },
+    {
+      "name": "selected cell [0,0]",
+      "pass": true,
+      "details": {
+        "frame": 0,
+        "bin": 0,
+        "time_start_seconds": 0.0,
+        "frequency_hz": 0.0,
+        "amplitude": 0.11575026542447671,
+        "recorded_amplitude": 0.11575026542447671,
+        "absolute_difference": 0.0
+      }
+    },
+    {
+      "name": "selected cell [0,1]",
+      "pass": true,
+      "details": {
+        "frame": 0,
+        "bin": 1,
+        "time_start_seconds": 0.0,
+        "frequency_hz": 21.533203125,
+        "amplitude": 0.11383340549478874,
+        "recorded_amplitude": 0.11383340549478874,
+        "absolute_difference": 0.0
+      }
+    },
+    {
+      "name": "selected cell [0,4]",
+      "pass": true,
+      "details": {
+        "frame": 0,
+        "bin": 4,
+        "time_start_seconds": 0.0,
+        "frequency_hz": 86.1328125,
+        "amplitude": 0.1396993289223481,
+        "recorded_amplitude": 0.1396993289223481,
+        "absolute_difference": 0.0
+      }
+    },
+    {
+      "name": "selected cell [0,32]",
+      "pass": true,
+      "details": {
+        "frame": 0,
+        "bin": 32,
+        "time_start_seconds": 0.0,
+        "frequency_hz": 689.0625,
+        "amplitude": 0.0032367225924124685,
+        "recorded_amplitude": 0.0032367225924124685,
+        "absolute_difference": 0.0
+      }
+    },
+    {
+      "name": "selected cell [0,1024]",
+      "pass": true,
+      "details": {
+        "frame": 0,
+        "bin": 1024,
+        "time_start_seconds": 0.0,
+        "frequency_hz": 22050.0,
+        "amplitude": 0.0001519262764181568,
+        "recorded_amplitude": 0.0001519262764181568,
+        "absolute_difference": 0.0
+      }
+    },
+    {
+      "name": "selected cell [50,0]",
+      "pass": true,
+      "details": {
+        "frame": 50,
+        "bin": 0,
+        "time_start_seconds": 0.5804988662131519,
+        "frequency_hz": 0.0,
+        "amplitude": 0.11545596023215739,
+        "recorded_amplitude": 0.11545596023215739,
+        "absolute_difference": 0.0
+      }
+    },
+    {
+      "name": "selected cell [50,1]",
+      "pass": true,
+      "details": {
+        "frame": 50,
+        "bin": 1,
+        "time_start_seconds": 0.5804988662131519,
+        "frequency_hz": 21.533203125,
+        "amplitude": 0.11681336328038872,
+        "recorded_amplitude": 0.11681336328038872,
+        "absolute_difference": 0.0
+      }
+    },
+    {
+      "name": "selected cell [50,4]",
+      "pass": true,
+      "details": {
+        "frame": 50,
+        "bin": 4,
+        "time_start_seconds": 0.5804988662131519,
+        "frequency_hz": 86.1328125,
+        "amplitude": 0.10322235619840708,
+        "recorded_amplitude": 0.10322235619840708,
+        "absolute_difference": 0.0
+      }
+    },
+    {
+      "name": "selected cell [50,32]",
+      "pass": true,
+      "details": {
+        "frame": 50,
+        "bin": 32,
+        "time_start_seconds": 0.5804988662131519,
+        "frequency_hz": 689.0625,
+        "amplitude": 1.6542401501657827e-05,
+        "recorded_amplitude": 1.6542401501657827e-05,
+        "absolute_difference": 0.0
+      }
+    },
+    {
+      "name": "selected cell [50,1024]",
+      "pass": true,
+      "details": {
+        "frame": 50,
+        "bin": 1024,
+        "time_start_seconds": 0.5804988662131519,
+        "frequency_hz": 22050.0,
+        "amplitude": 6.755247967852501e-07,
+        "recorded_amplitude": 6.755247967852501e-07,
+        "absolute_difference": 0.0
+      }
+    },
+    {
+      "name": "selected cell [340,0]",
+      "pass": true,
+      "details": {
+        "frame": 340,
+        "bin": 0,
+        "time_start_seconds": 3.947392290249433,
+        "frequency_hz": 0.0,
+        "amplitude": 0.11885053228668939,
+        "recorded_amplitude": 0.11885053228668939,
+        "absolute_difference": 0.0
+      }
+    },
+    {
+      "name": "selected cell [340,1]",
+      "pass": true,
+      "details": {
+        "frame": 340,
+        "bin": 1,
+        "time_start_seconds": 3.947392290249433,
+        "frequency_hz": 21.533203125,
+        "amplitude": 0.11897530858555562,
+        "recorded_amplitude": 0.11897530858555562,
+        "absolute_difference": 0.0
+      }
+    },
+    {
+      "name": "selected cell [340,4]",
+      "pass": true,
+      "details": {
+        "frame": 340,
+        "bin": 4,
+        "time_start_seconds": 3.947392290249433,
+        "frequency_hz": 86.1328125,
+        "amplitude": 0.01787584639452566,
+        "recorded_amplitude": 0.01787584639452566,
+        "absolute_difference": 0.0
+      }
+    },
+    {
+      "name": "selected cell [340,32]",
+      "pass": true,
+      "details": {
+        "frame": 340,
+        "bin": 32,
+        "time_start_seconds": 3.947392290249433,
+        "frequency_hz": 689.0625,
+        "amplitude": 3.455771368887054e-07,
+        "recorded_amplitude": 3.455771368887054e-07,
+        "absolute_difference": 0.0
+      }
+    },
+    {
+      "name": "selected cell [340,1024]",
+      "pass": true,
+      "details": {
+        "frame": 340,
+        "bin": 1024,
+        "time_start_seconds": 3.947392290249433,
+        "frequency_hz": 22050.0,
+        "amplitude": 1.8046980770715603e-07,
+        "recorded_amplitude": 1.8046980770715603e-07,
+        "absolute_difference": 0.0
+      }
+    },
+    {
+      "name": "15 independent direct DFT guitar checks",
+      "pass": true,
+      "details": {
+        "method": "math.fsum of explicit cos/sin terms, no FFT in reference sum",
+        "tolerance": 1e-10,
+        "maximum_complex_abs_error": 1.5060406419148286e-13,
+        "cells": [
+          {
+            "label": "B",
+            "frame": 0,
+            "bin": 0,
+            "complex_abs_error": 0.0
+          },
+          {
+            "label": "B",
+            "frame": 0,
+            "bin": 1,
+            "complex_abs_error": 8.931992632569433e-15
+          },
+          {
+            "label": "B",
+            "frame": 0,
+            "bin": 4,
+            "complex_abs_error": 3.499017183300205e-14
+          },
+          {
+            "label": "B",
+            "frame": 0,
+            "bin": 32,
+            "complex_abs_error": 1.3833864489500786e-14
+          },
+          {
+            "label": "B",
+            "frame": 0,
+            "bin": 1024,
+            "complex_abs_error": 4.23803198622687e-14
+          },
+          {
+            "label": "B",
+            "frame": 50,
+            "bin": 0,
+            "complex_abs_error": 0.0
+          },
+          {
+            "label": "B",
+            "frame": 50,
+            "bin": 1,
+            "complex_abs_error": 1.6250646570963807e-14
+          },
+          {
+            "label": "B",
+            "frame": 50,
+            "bin": 4,
+            "complex_abs_error": 2.5864145986817697e-14
+          },
+          {
+            "label": "B",
+            "frame": 50,
+            "bin": 32,
+            "complex_abs_error": 6.304297893581757e-15
+          },
+          {
+            "label": "B",
+            "frame": 50,
+            "bin": 1024,
+            "complex_abs_error": 1.5060406419148286e-13
+          },
+          {
+            "label": "B",
+            "frame": 340,
+            "bin": 0,
+            "complex_abs_error": 1.4210854715202004e-14
+          },
+          {
+            "label": "B",
+            "frame": 340,
+            "bin": 1,
+            "complex_abs_error": 6.6405214660392176e-15
+          },
+          {
+            "label": "B",
+            "frame": 340,
+            "bin": 4,
+            "complex_abs_error": 3.552713678800501e-15
+          },
+          {
+            "label": "B",
+            "frame": 340,
+            "bin": 32,
+            "complex_abs_error": 7.136840439401098e-15
+          },
+          {
+            "label": "B",
+            "frame": 340,
+            "bin": 1024,
+            "complex_abs_error": 1.064198484269857e-13
+          }
+        ]
+      }
+    },
+    {
+      "name": "B full array hash and display statistics",
+      "pass": true,
+      "details": {
+        "label": "B",
+        "shape": [
+          341,
+          1025
+        ],
+        "matrix_float64le_sha256": "f80715e30113072c89de448ae844a09f42770f73d6fe3ed10e22fb33486064a8",
+        "recorded_hash_exact_match": true,
+        "max_amplitude": 0.1396993289223481,
+        "cells_at_or_below_fixed_floor": 340939,
+        "frame0_bin4": {
+          "amplitude": 0.1396993289223481,
+          "fixed_db": -17.096113602272005,
+          "relative_db": 0.0
+        }
+      }
+    },
+    {
+      "name": "C full array hash and display statistics",
+      "pass": true,
+      "details": {
+        "label": "C",
+        "shape": [
+          341,
+          1025
+        ],
+        "matrix_float64le_sha256": "c23fb79c84e14ccd1b0f8def3db4f4ae6c04c830797b3d23a9a945920a84c611",
+        "recorded_hash_exact_match": true,
+        "max_amplitude": 0.13964252163655008,
+        "cells_at_or_below_fixed_floor": 340959,
+        "frame0_bin4": {
+          "amplitude": 0.13964252163655008,
+          "fixed_db": -17.099646347694105,
+          "relative_db": 0.0
+        }
+      }
+    },
+    {
+      "name": "0.5B full array hash and display statistics",
+      "pass": true,
+      "details": {
+        "label": "0.5B",
+        "shape": [
+          341,
+          1025
+        ],
+        "matrix_float64le_sha256": "5dd614ce79be0f753c0efa84e47deb72a4e140565051aff988a9d771ce10dc03",
+        "recorded_hash_exact_match": true,
+        "max_amplitude": 0.06984966446117405,
+        "cells_at_or_below_fixed_floor": 343166,
+        "frame0_bin4": {
+          "amplitude": 0.06984966446117405,
+          "fixed_db": -23.116713515551627,
+          "relative_db": 0.0
+        }
+      }
+    },
+    {
+      "name": "half gain fixed versus relative control and floor",
+      "pass": true,
+      "details": {
+        "gain": 0.5,
+        "expected_db_shift": -6.020599913279624,
+        "common_unfloored_cells": 6359,
+        "measured_shift_min_db": -6.020599913279632,
+        "measured_shift_max_db": -6.020599913279611,
+        "maximum_relative_view_difference_db": 0.0,
+        "cells_clipped_in_both_fixed_views": 340939,
+        "cells_crossing_fixed_floor": 2227
+      }
+    },
+    {
+      "name": "symmetric Hann independent expression agreement",
+      "pass": true,
+      "details": {
+        "numpy_hanning_sum": 1023.5000000000001,
+        "explicit_formula_sum": 1023.5,
+        "window_max_abs_difference": 4.996003610813204e-16,
+        "amplitude_matrix_max_abs_difference": 5.551115123125783e-17,
+        "explicit_formula_matrix_float64le_sha256": "2b4dc5ec907b45f6e0669e9b65edda77c83952c8ec63a5237eaa23031f918aa2",
+        "interpretation": "Exact byte hashes reproduce np.hanning with this recorded NumPy version. Mathematically equivalent floating point evaluation changes bytes at rounding level; hashes are not a cross-implementation spectral tolerance."
+      }
+    },
+    {
+      "name": "preserve failed prior candidate gate",
+      "pass": true,
+      "details": {
+        "improvement_db_recomputed_from_old_errors": 0.11416614959438576,
+        "required_improvement_db": 1,
+        "candidate_passes": false,
+        "scope": "Preserved historical gate and checked its arithmetic from retained results; no new render or remeasurement of reference recording."
+      }
+    },
+    {
+      "name": "primary readback receipts preserve failed direct NumPy docs",
+      "pass": true,
+      "details": {
+        "recorded_numpy_documentation_reads": [
+          {
+            "url": "https://numpy.org/doc/stable/reference/generated/numpy.fft.rfft.html",
+            "status": 403,
+            "scope": "Direct Python documentation request failed; official page was separately read with web.open in this session. No successful byte hash claimed."
+          },
+          {
+            "url": "https://numpy.org/doc/stable/reference/generated/numpy.hanning.html",
+            "status": 403,
+            "scope": "Direct Python documentation request failed; official page was separately read with web.open in this session. No successful byte hash claimed."
+          }
+        ],
+        "scope": "Receipt honesty checked; historical network requests and separate web.open reads were not replayed by this audit."
+      }
+    },
+    {
+      "name": "primary old input readback byte bindings",
+      "pass": true,
+      "details": [
+        {
+          "path": "code/streeling/evidence/guitar-runtime-2026-10-22/baseline.wav",
+          "recorded_status": 200,
+          "hash_matches_local_checked_bytes": true
+        },
+        {
+          "path": "code/streeling/evidence/guitar-runtime-2026-10-22/candidate.wav",
+          "recorded_status": 200,
+          "hash_matches_local_checked_bytes": true
+        },
+        {
+          "path": "code/streeling/evidence/guitar-runtime-2026-10-22/results.json",
+          "recorded_status": 200,
+          "hash_matches_local_checked_bytes": true
+        },
+        {
+          "path": "code/streeling/evidence/guitar-runtime-2026-10-22/execution.json",
+          "recorded_status": 200,
+          "hash_matches_local_checked_bytes": true
+        }
+      ]
+    },
+    {
+      "name": "execution input and figure bindings",
+      "pass": true,
+      "details": {
+        "input_receipts": [
+          {
+            "path": "code/streeling/evidence/guitar-runtime-2026-10-22/results.json",
+            "sha256": "d564b476e0fccaff1a435548b5ae795807337622fdff69fb19ce0ace0d320506",
+            "bytes": 7736
+          },
+          {
+            "path": "code/streeling/evidence/guitar-runtime-2026-10-22/execution.json",
+            "sha256": "1d64a71891cc91743cc872d964907ae2d1e9cb906275167dcf38ce382eaf39d4",
+            "bytes": 2942
+          }
+        ],
+        "figure": {
+          "path": "code/streeling/evidence/spectral-views-2026-10-22/spectrogram-reference-comparison.png",
+          "sha256": "3e93a3d3843a26c5e57d1c62fbac7d87a62453b600de6860eceb57158a3cfdba",
+          "bytes": 139544
+        },
+        "original_temporary_analysis_script_hash": "Recorded only; original script not independently inspected."
+      }
+    },
+    {
+      "name": "no new engine or IX execution claim",
+      "pass": true,
+      "details": {
+        "new_engine_render": false,
+        "ix_binary_executed": false,
+        "dependency_install": false,
+        "source_pin": "bd1336b7c4045e427dcdbe80b102790e45da5ce1"
+      }
+    },
+    {
+      "name": "all audited input files stable during audit",
+      "pass": true,
+      "details": {
+        "files_checked": 11
+      }
+    }
+  ],
+  "findings": [],
+  "independent_values": {
+    "calibration": [
+      {
+        "window_size": 2048,
+        "bin": 32,
+        "frequency_hz": 689.0625,
+        "window_sum": 1023.5000000000001,
+        "raw_magnitude": 127.9375151793639,
+        "raw_magnitude_db": 42.13995823068381,
+        "peak_amplitude_estimate": 0.25000002966167834,
+        "amplitude_db_re_unit_peak": -12.041198796007052,
+        "independent_direct_dft_complex_abs_error": 5.081872053457477e-13,
+        "endpoint_controls": [
+          {
+            "kind": "DC",
+            "bin": 0,
+            "raw_magnitude": 255.875,
+            "amplitude": 0.24999999999999997,
+            "incorrect_doubled_amplitude": 0.49999999999999994
+          },
+          {
+            "kind": "Nyquist",
+            "bin": 1024,
+            "raw_magnitude": 255.875,
+            "amplitude": 0.24999999999999997,
+            "incorrect_doubled_amplitude": 0.49999999999999994
+          }
+        ]
+      },
+      {
+        "window_size": 4096,
+        "bin": 64,
+        "frequency_hz": 689.0625,
+        "window_sum": 2047.5,
+        "raw_magnitude": 255.93750379229243,
+        "raw_magnitude_db": 48.16267859751133,
+        "peak_amplitude_estimate": 0.25000000370431497,
+        "amplitude_db_re_unit_peak": -12.041199697858165,
+        "independent_direct_dft_complex_abs_error": 2.019804628166825e-12,
+        "endpoint_controls": [
+          {
+            "kind": "DC",
+            "bin": 0,
+            "raw_magnitude": 511.875,
+            "amplitude": 0.25,
+            "incorrect_doubled_amplitude": 0.5
+          },
+          {
+            "kind": "Nyquist",
+            "bin": 2048,
+            "raw_magnitude": 511.875,
+            "amplitude": 0.25,
+            "incorrect_doubled_amplitude": 0.5
+          }
+        ]
+      }
+    ],
+    "framing": {
+      "n_frames": 341,
+      "n_bins": 1025,
+      "total_cells": 349525,
+      "last_frame_start_sample": 174080,
+      "last_frame_end_exclusive": 176128,
+      "unframed_tail_samples": 272,
+      "frame_duration_seconds": 0.046439909297052155,
+      "hop_seconds": 0.011609977324263039,
+      "last_frame_start_seconds": 3.947392290249433,
+      "last_frame_support_end_seconds": 3.9938321995464854,
+      "display_hop_cell_end_seconds": 3.959002267573696
+    },
+    "wav": {
+      "B": {
+        "channels": 1,
+        "sample_width_bytes": 2,
+        "sample_rate_hz": 44100,
+        "samples": 176400,
+        "compression": "NONE",
+        "sha256": "a78a70243a81aa79d806d9ef3db7baa1385c479505f7d5e97b8bf0c7866c3f98",
+        "decoded_peak_abs": 0.46014404296875,
+        "decode_denominator": 32768
+      },
+      "C": {
+        "channels": 1,
+        "sample_width_bytes": 2,
+        "sample_rate_hz": 44100,
+        "samples": 176400,
+        "compression": "NONE",
+        "sha256": "055e03fb6064f62601b1bbc07942d3e2223da6d2fc614c6f63fa9ec8d964be73",
+        "decoded_peak_abs": 0.460052490234375,
+        "decode_denominator": 32768
+      }
+    },
+    "selected_baseline_cells": [
+      {
+        "frame": 0,
+        "bin": 0,
+        "time_start_seconds": 0.0,
+        "frequency_hz": 0.0,
+        "amplitude": 0.11575026542447671,
+        "recorded_amplitude": 0.11575026542447671,
+        "absolute_difference": 0.0
+      },
+      {
+        "frame": 0,
+        "bin": 1,
+        "time_start_seconds": 0.0,
+        "frequency_hz": 21.533203125,
+        "amplitude": 0.11383340549478874,
+        "recorded_amplitude": 0.11383340549478874,
+        "absolute_difference": 0.0
+      },
+      {
+        "frame": 0,
+        "bin": 4,
+        "time_start_seconds": 0.0,
+        "frequency_hz": 86.1328125,
+        "amplitude": 0.1396993289223481,
+        "recorded_amplitude": 0.1396993289223481,
+        "absolute_difference": 0.0
+      },
+      {
+        "frame": 0,
+        "bin": 32,
+        "time_start_seconds": 0.0,
+        "frequency_hz": 689.0625,
+        "amplitude": 0.0032367225924124685,
+        "recorded_amplitude": 0.0032367225924124685,
+        "absolute_difference": 0.0
+      },
+      {
+        "frame": 0,
+        "bin": 1024,
+        "time_start_seconds": 0.0,
+        "frequency_hz": 22050.0,
+        "amplitude": 0.0001519262764181568,
+        "recorded_amplitude": 0.0001519262764181568,
+        "absolute_difference": 0.0
+      },
+      {
+        "frame": 50,
+        "bin": 0,
+        "time_start_seconds": 0.5804988662131519,
+        "frequency_hz": 0.0,
+        "amplitude": 0.11545596023215739,
+        "recorded_amplitude": 0.11545596023215739,
+        "absolute_difference": 0.0
+      },
+      {
+        "frame": 50,
+        "bin": 1,
+        "time_start_seconds": 0.5804988662131519,
+        "frequency_hz": 21.533203125,
+        "amplitude": 0.11681336328038872,
+        "recorded_amplitude": 0.11681336328038872,
+        "absolute_difference": 0.0
+      },
+      {
+        "frame": 50,
+        "bin": 4,
+        "time_start_seconds": 0.5804988662131519,
+        "frequency_hz": 86.1328125,
+        "amplitude": 0.10322235619840708,
+        "recorded_amplitude": 0.10322235619840708,
+        "absolute_difference": 0.0
+      },
+      {
+        "frame": 50,
+        "bin": 32,
+        "time_start_seconds": 0.5804988662131519,
+        "frequency_hz": 689.0625,
+        "amplitude": 1.6542401501657827e-05,
+        "recorded_amplitude": 1.6542401501657827e-05,
+        "absolute_difference": 0.0
+      },
+      {
+        "frame": 50,
+        "bin": 1024,
+        "time_start_seconds": 0.5804988662131519,
+        "frequency_hz": 22050.0,
+        "amplitude": 6.755247967852501e-07,
+        "recorded_amplitude": 6.755247967852501e-07,
+        "absolute_difference": 0.0
+      },
+      {
+        "frame": 340,
+        "bin": 0,
+        "time_start_seconds": 3.947392290249433,
+        "frequency_hz": 0.0,
+        "amplitude": 0.11885053228668939,
+        "recorded_amplitude": 0.11885053228668939,
+        "absolute_difference": 0.0
+      },
+      {
+        "frame": 340,
+        "bin": 1,
+        "time_start_seconds": 3.947392290249433,
+        "frequency_hz": 21.533203125,
+        "amplitude": 0.11897530858555562,
+        "recorded_amplitude": 0.11897530858555562,
+        "absolute_difference": 0.0
+      },
+      {
+        "frame": 340,
+        "bin": 4,
+        "time_start_seconds": 3.947392290249433,
+        "frequency_hz": 86.1328125,
+        "amplitude": 0.01787584639452566,
+        "recorded_amplitude": 0.01787584639452566,
+        "absolute_difference": 0.0
+      },
+      {
+        "frame": 340,
+        "bin": 32,
+        "time_start_seconds": 3.947392290249433,
+        "frequency_hz": 689.0625,
+        "amplitude": 3.455771368887054e-07,
+        "recorded_amplitude": 3.455771368887054e-07,
+        "absolute_difference": 0.0
+      },
+      {
+        "frame": 340,
+        "bin": 1024,
+        "time_start_seconds": 3.947392290249433,
+        "frequency_hz": 22050.0,
+        "amplitude": 1.8046980770715603e-07,
+        "recorded_amplitude": 1.8046980770715603e-07,
+        "absolute_difference": 0.0
+      }
+    ],
+    "matrices": [
+      {
+        "label": "B",
+        "shape": [
+          341,
+          1025
+        ],
+        "matrix_float64le_sha256": "f80715e30113072c89de448ae844a09f42770f73d6fe3ed10e22fb33486064a8",
+        "recorded_hash_exact_match": true,
+        "max_amplitude": 0.1396993289223481,
+        "cells_at_or_below_fixed_floor": 340939,
+        "frame0_bin4": {
+          "amplitude": 0.1396993289223481,
+          "fixed_db": -17.096113602272005,
+          "relative_db": 0.0
+        }
+      },
+      {
+        "label": "C",
+        "shape": [
+          341,
+          1025
+        ],
+        "matrix_float64le_sha256": "c23fb79c84e14ccd1b0f8def3db4f4ae6c04c830797b3d23a9a945920a84c611",
+        "recorded_hash_exact_match": true,
+        "max_amplitude": 0.13964252163655008,
+        "cells_at_or_below_fixed_floor": 340959,
+        "frame0_bin4": {
+          "amplitude": 0.13964252163655008,
+          "fixed_db": -17.099646347694105,
+          "relative_db": 0.0
+        }
+      },
+      {
+        "label": "0.5B",
+        "shape": [
+          341,
+          1025
+        ],
+        "matrix_float64le_sha256": "5dd614ce79be0f753c0efa84e47deb72a4e140565051aff988a9d771ce10dc03",
+        "recorded_hash_exact_match": true,
+        "max_amplitude": 0.06984966446117405,
+        "cells_at_or_below_fixed_floor": 343166,
+        "frame0_bin4": {
+          "amplitude": 0.06984966446117405,
+          "fixed_db": -23.116713515551627,
+          "relative_db": 0.0
+        }
+      }
+    ],
+    "gain_control": {
+      "gain": 0.5,
+      "expected_db_shift": -6.020599913279624,
+      "common_unfloored_cells": 6359,
+      "measured_shift_min_db": -6.020599913279632,
+      "measured_shift_max_db": -6.020599913279611,
+      "maximum_relative_view_difference_db": 0.0,
+      "cells_clipped_in_both_fixed_views": 340939,
+      "cells_crossing_fixed_floor": 2227
+    },
+    "equivalent_hann_rounding": {
+      "numpy_hanning_sum": 1023.5000000000001,
+      "explicit_formula_sum": 1023.5,
+      "window_max_abs_difference": 4.996003610813204e-16,
+      "amplitude_matrix_max_abs_difference": 5.551115123125783e-17,
+      "explicit_formula_matrix_float64le_sha256": "2b4dc5ec907b45f6e0669e9b65edda77c83952c8ec63a5237eaa23031f918aa2",
+      "interpretation": "Exact byte hashes reproduce np.hanning with this recorded NumPy version. Mathematically equivalent floating point evaluation changes bytes at rounding level; hashes are not a cross-implementation spectral tolerance."
+    },
+    "prior_decay_gate": {
+      "improvement_db_recomputed_from_old_errors": 0.11416614959438576,
+      "required_improvement_db": 1,
+      "candidate_passes": false,
+      "scope": "Preserved historical gate and checked its arithmetic from retained results; no new render or remeasurement of reference recording."
+    }
+  },
+  "figure_review": {
+    "path": "code/streeling/evidence/spectral-views-2026-10-22/spectrogram-reference-comparison.png",
+    "sha256": "3e93a3d3843a26c5e57d1c62fbac7d87a62453b600de6860eceb57158a3cfdba",
+    "width": 2176,
+    "height": 1152,
+    "view_image_inspected": true,
+    "observations": [
+      "Six panels are arranged as B, C and 0.5B columns; top colorbar labels 20log10(A/1), bottom labels 20log10(A/max A).",
+      "Both rows show -80 to 0 dB colorbar limits; frequency axis is cropped to 0-2000 Hz and time is labeled in seconds.",
+      "Top half-gain control is darker than baseline; bottom half-gain control visually matches baseline, consistent with exact numerical relative-array equality.",
+      "A plotted display column represents a hop interval; analysis support is longer. The explicit numerical metadata gives both boundaries."
+    ],
+    "limits": [
+      "This visual inspection does not certify human learner usability, listening preference, perceptual loudness or fluent-language correctness."
+    ]
+  },
+  "review_status": {
+    "numerical_data_audit": "pass",
+    "source_inspection": "pass",
+    "visual_figure_inspection": "completed by audit agent",
+    "human_review": null,
+    "learner_participant_review": null,
+    "fluent_language_review": null,
+    "listening_review": null,
+    "deployed_course_html_review": null
+  },
+  "limits": [
+    "Only declared complete frames of decoded quantized WAV samples were recomputed. Original native float buffers are a distinct input and were not audited here.",
+    "Coherent isolated-tone amplitude calibration is not a PSD, broadband integrated power, general guitar-partial amplitude or loudness certification.",
+    "The actual candidate C remains a failed decay-gate candidate; constructed 0.5B is not another physical render.",
+    "Clipping at -80 dB hides differences; only 6359 cells are above the floor in both fixed half-gain panels.",
+    "Primary readback historical HTTP receipts were inspected and bound; this audit did not replay remote requests or claim the failed direct NumPy 403 requests succeeded.",
+    "Teaching metadata is advisory and is not a new ecosystem schema or ComfyUI adapter.",
+    "Receipt binds checked input bytes; later input changes require a fresh audit."
+  ]
+}

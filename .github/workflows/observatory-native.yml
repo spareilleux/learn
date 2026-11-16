@@ -1,0 +1,210 @@
+# The Observatory's native installers (code/observatory). Godot 4.6.1's official Linux editor and export
+# templates, checked against the SHA-512 sums Godot publishes, import the scene, run its selftest and
+# export it for Windows, Linux and macOS. Then each OS packages its own and installs, runs and removes it:
+# an .msi (WiX 5, per user), a .deb and an .rpm, a .dmg. A tag observatory-v<version> (the scene's
+# version as <n>.0.0) publishes them on a GitHub release with their SHA-256 sums.
+name: Observatory native installers
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['observatory-v*']
+  pull_request:
+    paths: ['code/observatory/**', '.github/workflows/observatory-native.yml']
+
+permissions:
+  contents: read
+
+env:
+  GODOT_VERSION: 4.6.1
+  # From https://github.com/godotengine/godot-builds/releases/download/4.6.1-stable/SHA512-SUMS.txt
+  GODOT_EDITOR_SHA512: a76fd0fe1d44a2dd6c065b6f7b434ad75f5593c07bda3d3017f8304f2d069acbcf0f39cb5d0976f0434b56e9ea852032ddbcbdb7e0ce1c75a47e1dacb6794bd7
+  GODOT_TEMPLATES_SHA512: d80001711c07973b1fd3e88077ba99644e19db7c9e52627e16f38a2937879f809f94dbd8493936fb8204908bbc57a521d41173dce5208061fe4c99772490c541
+
+jobs:
+  export:
+    runs-on: ubuntu-24.04
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - name: Version
+        id: version
+        run: echo "version=$(python3 code/observatory/packaging/native.py version code/observatory/project)" >> "$GITHUB_OUTPUT"
+      - name: The tag names this version
+        if: startsWith(github.ref, 'refs/tags/')
+        run: test "$GITHUB_REF_NAME" = "observatory-v${{ steps.version.outputs.version }}"
+      - name: Cache Godot's downloads
+        uses: actions/cache@v6
+        with:
+          path: ~/godot-download
+          key: godot-${{ env.GODOT_VERSION }}-linux-editor-templates
+      - name: Download and check Godot
+        run: |
+          mkdir -p ~/godot-download && cd ~/godot-download
+          base="https://github.com/godotengine/godot-builds/releases/download/$GODOT_VERSION-stable"
+          [ -f editor.zip ] || curl -sSfL -o editor.zip "$base/Godot_v$GODOT_VERSION-stable_linux.x86_64.zip"
+          [ -f templates.tpz ] || curl -sSfL -o templates.tpz "$base/Godot_v$GODOT_VERSION-stable_export_templates.tpz"
+          echo "$GODOT_EDITOR_SHA512  editor.zip" | sha512sum -c
+          echo "$GODOT_TEMPLATES_SHA512  templates.tpz" | sha512sum -c
+      - name: Unpack the editor and the desktop release templates
+        run: |
+          mkdir -p "$RUNNER_TEMP/godot" "$RUNNER_TEMP/templates"
+          unzip -q ~/godot-download/editor.zip -d "$RUNNER_TEMP/godot"
+          echo "GODOT=$RUNNER_TEMP/godot/Godot_v$GODOT_VERSION-stable_linux.x86_64" >> "$GITHUB_ENV"
+          unzip -q -j ~/godot-download/templates.tpz templates/version.txt templates/linux_release.x86_64 \
+            templates/windows_release_x86_64.exe templates/macos.zip -d "$RUNNER_TEMP/templates"
+          cat "$RUNNER_TEMP/templates/version.txt"
+      - name: Prepare the native tree
+        run: python3 code/observatory/packaging/native.py prepare code/observatory/project "$RUNNER_TEMP/tree" --templates "$RUNNER_TEMP/templates"
+      - name: Import, then the scene's selftest under Forward+
+        working-directory: ${{ runner.temp }}/tree
+        run: |
+          errors() { if grep -E 'SCRIPT ERROR|SHADER ERROR|Parse Error|ERROR: ' "$1"; then echo "error lines in $1"; return 1; fi; }
+          "$GODOT" --headless --path . --import > import.log 2>&1 || { tail -n 40 import.log; exit 1; }
+          errors import.log
+          "$GODOT" --headless --path . --rendering-method forward_plus -- --selftest > selftest.log 2>&1
+          grep -m1 '^SELFTEST' selftest.log | cut -c1-300
+          grep -q '^SELFTEST .*"missing":\[\]' selftest.log
+          errors selftest.log
+      - name: Export for Windows, Linux and macOS
+        working-directory: ${{ runner.temp }}/tree
+        run: |
+          errors() { if grep -E 'SCRIPT ERROR|SHADER ERROR|Parse Error|ERROR: ' "$1"; then echo "error lines in $1"; return 1; fi; }
+          for p in 'Windows Desktop|out/windows/Observatory.exe' 'Linux|out/linux/observatory.x86_64' 'macOS|out/macos/Observatory.zip'; do
+            mkdir -p "$(dirname "${p#*|}")"
+            "$GODOT" --headless --path . --export-release "${p%%|*}" "${p#*|}" > export.log 2>&1 || { tail -n 40 export.log; exit 1; }
+            errors export.log
+          done
+          for d in out/windows out/linux out/macos; do python3 "$GITHUB_WORKSPACE/code/observatory/packaging/native.py" stage "$d"; done
+          ls -lR out
+      - name: The Linux export runs headless
+        working-directory: ${{ runner.temp }}/tree
+        run: |
+          timeout 300 out/linux/observatory.x86_64 --headless --quit-after 30 > run.log 2>&1
+          head -n 1 run.log
+          if grep -E 'SCRIPT ERROR|SHADER ERROR|Parse Error|ERROR:' run.log; then exit 1; fi
+      - uses: actions/upload-artifact@v7
+        with:
+          name: observatory-export-windows
+          path: ${{ runner.temp }}/tree/out/windows
+          retention-days: 7
+      - uses: actions/upload-artifact@v7
+        with:
+          name: observatory-export-linux
+          path: ${{ runner.temp }}/tree/out/linux
+          retention-days: 7
+      - uses: actions/upload-artifact@v7
+        with:
+          name: observatory-export-macos
+          path: ${{ runner.temp }}/tree/out/macos
+          retention-days: 7
+
+  linux:
+    needs: export
+    runs-on: ubuntu-24.04
+    env:
+      VERSION: ${{ needs.export.outputs.version }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: observatory-export-linux
+          path: export
+      - name: Build the .deb and the .rpm
+        run: |
+          chmod 755 export/observatory.x86_64  # artifacts do not keep file modes
+          sudo apt-get update -qq && sudo apt-get install -y -qq rpm > /dev/null
+          bash code/observatory/packaging/linux/build-linux.sh export "$VERSION" dist
+      - name: Install, run and remove the .deb (this Ubuntu 24.04 runner)
+        run: sudo bash code/observatory/packaging/linux/test-linux.sh "dist/observatory_${VERSION}_amd64.deb"
+      - name: Install, run and remove the .deb (Debian 12)
+        run: docker run --rm -v "$PWD/dist:/pkgs:ro" -v "$PWD/code/observatory/packaging:/packaging:ro" debian:12 bash /packaging/linux/test-linux.sh "/pkgs/observatory_${VERSION}_amd64.deb"
+      - name: Install, run and remove the .rpm (Fedora 41)
+        run: docker run --rm -v "$PWD/dist:/pkgs:ro" -v "$PWD/code/observatory/packaging:/packaging:ro" fedora:41 bash /packaging/linux/test-linux.sh "/pkgs/observatory-${VERSION}-1.x86_64.rpm"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: observatory-linux
+          path: dist/*
+          retention-days: 7
+
+  windows:
+    needs: export
+    runs-on: windows-2025
+    env:
+      VERSION: ${{ needs.export.outputs.version }}
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: observatory-export-windows
+          path: export
+      - name: Build the .msi, and one a patch up for the update test
+        run: |
+          $parts = $env:VERSION.Split('.'); $up = "$($parts[0]).$($parts[1]).$([int]$parts[2] + 1)"
+          ./code/observatory/packaging/windows/build-msi.ps1 -ExportDir export -Version $env:VERSION -Out dist
+          ./code/observatory/packaging/windows/build-msi.ps1 -ExportDir export -Version $up -Out "$env:RUNNER_TEMP/msi-up"
+          "UP=$up" >> $env:GITHUB_ENV
+      - name: Install, run, update and uninstall
+        run: ./code/observatory/packaging/windows/test-msi.ps1 -Msi "dist/Observatory-$env:VERSION-windows-x64.msi" -MsiUp "$env:RUNNER_TEMP/msi-up/Observatory-$env:UP-windows-x64.msi" -ExportDir export -Work "$env:RUNNER_TEMP/msi-test"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: observatory-windows
+          path: dist/*.msi
+          retention-days: 7
+
+  macos:
+    needs: export
+    runs-on: macos-15
+    env:
+      VERSION: ${{ needs.export.outputs.version }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: observatory-export-macos
+          path: export
+      - name: Build the .dmg
+        run: bash code/observatory/packaging/macos/build-dmg.sh export/Observatory.zip "$VERSION" dist export
+      - name: Open it, copy the app out, run it, remove it
+        run: bash code/observatory/packaging/macos/test-dmg.sh "dist/Observatory-$VERSION-macos.dmg"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: observatory-macos
+          path: dist/*.dmg
+          retention-days: 7
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/observatory-v')
+    needs: [export, linux, windows, macos]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    env:
+      VERSION: ${{ needs.export.outputs.version }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: observatory-{windows,linux,macos}
+          path: dist
+          merge-multiple: true
+      - name: Publish the release
+        run: |
+          cd dist
+          sha256sum * > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+          sed "s/{version}/$VERSION/g" "$GITHUB_WORKSPACE/code/observatory/packaging/release-notes.md" > "$RUNNER_TEMP/notes.md"
+          cat SHA256SUMS.txt | sed 's/^/    /' >> "$RUNNER_TEMP/notes.md"
+          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" ./* --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" ./* --title "Observatory $VERSION" --notes-file "$RUNNER_TEMP/notes.md"
+          fi

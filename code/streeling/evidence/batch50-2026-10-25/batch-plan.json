@@ -1,0 +1,625 @@
+{
+  "execution": "knowledge-work with independently reviewed claim-test substep",
+  "base_learn_commit": "f93c0356d23c3700ad1ead501eef46802dca2a31",
+  "publication_base": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+  "source_catalog_base": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+  "baseline_core": 331,
+  "target": 525,
+  "original_departments": 21,
+  "batch_new_english_modules": 50,
+  "batch_locale_sources": 150,
+  "expected_core_after": 381,
+  "expected_remaining": 144,
+  "expected_locale_counts": {
+    "en": 382,
+    "fr": 382,
+    "es": 382
+  },
+  "units": {
+    "a": 18,
+    "b": 16,
+    "c": 16
+  },
+  "courses": [
+    {
+      "unit": "a",
+      "code": "AUD016",
+      "department": "audio-engineering",
+      "module_id": "aud-016-separate-dc-offset-from-ac-energy",
+      "title": "Separate DC Offset from AC Energy",
+      "source_paths": {
+        "en": "streeling/courses/audio-engineering/en/aud-016-separate-dc-offset-from-ac-energy.md",
+        "fr": "streeling/courses/audio-engineering/fr/aud-016-separate-dc-offset-from-ac-energy.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-016-separate-dc-offset-from-ac-energy.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "AUD017",
+      "department": "audio-engineering",
+      "module_id": "aud-017-report-ambiguous-correlation-lags",
+      "title": "Report Ambiguous Correlation Lags",
+      "source_paths": {
+        "en": "streeling/courses/audio-engineering/en/aud-017-report-ambiguous-correlation-lags.md",
+        "fr": "streeling/courses/audio-engineering/fr/aud-017-report-ambiguous-correlation-lags.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-017-report-ambiguous-correlation-lags.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "AUD018",
+      "department": "audio-engineering",
+      "module_id": "aud-018-recover-stereo-from-mid-and-side",
+      "title": "Recover Stereo from Mid and Side",
+      "source_paths": {
+        "en": "streeling/courses/audio-engineering/en/aud-018-recover-stereo-from-mid-and-side.md",
+        "fr": "streeling/courses/audio-engineering/fr/aud-018-recover-stereo-from-mid-and-side.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-018-recover-stereo-from-mid-and-side.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAS015",
+      "department": "guitar-acoustics",
+      "module_id": "gas-015-separate-mode-excitation-from-observation",
+      "title": "Separate Mode Excitation from Observation",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-015-separate-mode-excitation-from-observation.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-015-separate-mode-excitation-from-observation.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-015-separate-mode-excitation-from-observation.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAS016",
+      "department": "guitar-acoustics",
+      "module_id": "gas-016-couple-fretting-geometry-to-elastic-tension",
+      "title": "Couple Fretting Geometry to Elastic Tension",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-016-couple-fretting-geometry-to-elastic-tension.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-016-couple-fretting-geometry-to-elastic-tension.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-016-couple-fretting-geometry-to-elastic-tension.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAS017",
+      "department": "guitar-acoustics",
+      "module_id": "gas-017-recover-a-stiffness-coefficient-from-partial-ratios",
+      "title": "Recover a Stiffness Coefficient from Partial Ratios",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-017-recover-a-stiffness-coefficient-from-partial-ratios.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-017-recover-a-stiffness-coefficient-from-partial-ratios.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-017-recover-a-stiffness-coefficient-from-partial-ratios.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GTR015",
+      "department": "guitar-studies",
+      "module_id": "gtr-015-sample-a-vibrato-without-erasing-its-motion",
+      "title": "Sample a Vibrato Without Erasing Its Motion",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-015-sample-a-vibrato-without-erasing-its-motion.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-015-sample-a-vibrato-without-erasing-its-motion.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-015-sample-a-vibrato-without-erasing-its-motion.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GTR016",
+      "department": "guitar-studies",
+      "module_id": "gtr-016-move-the-boundary-for-an-artificial-harmonic",
+      "title": "Move the Boundary for an Artificial Harmonic",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-016-move-the-boundary-for-an-artificial-harmonic.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-016-move-the-boundary-for-an-artificial-harmonic.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-016-move-the-boundary-for-an-artificial-harmonic.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GTR017",
+      "department": "guitar-studies",
+      "module_id": "gtr-017-check-contact-continuity-during-finger-substitution",
+      "title": "Check Contact Continuity During Finger Substitution",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-017-check-contact-continuity-during-finger-substitution.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-017-check-contact-continuity-during-finger-substitution.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-017-check-contact-continuity-during-finger-substitution.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAA014",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-014-hold-out-whole-transposition-families",
+      "title": "Hold Out Whole Transposition Families",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-014-hold-out-whole-transposition-families.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-014-hold-out-whole-transposition-families.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-014-hold-out-whole-transposition-families.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAA015",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-015-keep-uncertainty-with-a-practice-pass-rate",
+      "title": "Keep Uncertainty with a Practice Pass Rate",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-015-keep-uncertainty-with-a-practice-pass-rate.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-015-keep-uncertainty-with-a-practice-pass-rate.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-015-keep-uncertainty-with-a-practice-pass-rate.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAA016",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-016-separate-order-drift-from-a-practice-condition",
+      "title": "Separate Order Drift from a Practice Condition",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-016-separate-order-drift-from-a-practice-condition.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-016-separate-order-drift-from-a-practice-condition.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-016-separate-order-drift-from-a-practice-condition.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "MCL015",
+      "department": "musicology",
+      "module_id": "mcl-015-separate-key-release-from-pedal-release",
+      "title": "Separate Key Release from Pedal Release",
+      "source_paths": {
+        "en": "streeling/courses/musicology/en/mcl-015-separate-key-release-from-pedal-release.md",
+        "fr": "streeling/courses/musicology/fr/mcl-015-separate-key-release-from-pedal-release.fr.md",
+        "es": "streeling/courses/musicology/es/mcl-015-separate-key-release-from-pedal-release.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "MCL016",
+      "department": "musicology",
+      "module_id": "mcl-016-reconstruct-polyphonic-score-cursors",
+      "title": "Reconstruct Polyphonic Score Cursors",
+      "source_paths": {
+        "en": "streeling/courses/musicology/en/mcl-016-reconstruct-polyphonic-score-cursors.md",
+        "fr": "streeling/courses/musicology/fr/mcl-016-reconstruct-polyphonic-score-cursors.fr.md",
+        "es": "streeling/courses/musicology/es/mcl-016-reconstruct-polyphonic-score-cursors.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "MCL017",
+      "department": "musicology",
+      "module_id": "mcl-017-integrate-a-tempo-ramp-in-beat-coordinates",
+      "title": "Integrate a Tempo Ramp in Beat Coordinates",
+      "source_paths": {
+        "en": "streeling/courses/musicology/en/mcl-017-integrate-a-tempo-ramp-in-beat-coordinates.md",
+        "fr": "streeling/courses/musicology/fr/mcl-017-integrate-a-tempo-ramp-in-beat-coordinates.fr.md",
+        "es": "streeling/courses/musicology/es/mcl-017-integrate-a-tempo-ramp-in-beat-coordinates.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "WML014",
+      "department": "world-music-languages",
+      "module_id": "wml-014-quantize-a-ratio-on-a-declared-octave-division",
+      "title": "Quantize a Ratio on a Declared Octave Division",
+      "source_paths": {
+        "en": "streeling/courses/world-music-languages/en/wml-014-quantize-a-ratio-on-a-declared-octave-division.md",
+        "fr": "streeling/courses/world-music-languages/fr/wml-014-quantize-a-ratio-on-a-declared-octave-division.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-014-quantize-a-ratio-on-a-declared-octave-division.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "WML015",
+      "department": "world-music-languages",
+      "module_id": "wml-015-carry-the-concert-reference-through-a-frequency-handoff",
+      "title": "Carry the Concert Reference Through a Frequency Handoff",
+      "source_paths": {
+        "en": "streeling/courses/world-music-languages/en/wml-015-carry-the-concert-reference-through-a-frequency-handoff.md",
+        "fr": "streeling/courses/world-music-languages/fr/wml-015-carry-the-concert-reference-through-a-frequency-handoff.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-015-carry-the-concert-reference-through-a-frequency-handoff.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "WML016",
+      "department": "world-music-languages",
+      "module_id": "wml-016-keep-chord-degree-operations-distinct",
+      "title": "Keep Chord Degree Operations Distinct",
+      "source_paths": {
+        "en": "streeling/courses/world-music-languages/en/wml-016-keep-chord-degree-operations-distinct.md",
+        "fr": "streeling/courses/world-music-languages/fr/wml-016-keep-chord-degree-operations-distinct.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-016-keep-chord-degree-operations-distinct.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "CS021",
+      "department": "computer-science",
+      "module_id": "cs-021-accumulate-independent-validation-errors",
+      "title": "Accumulate Independent Validation Errors",
+      "source_paths": {
+        "en": "streeling/courses/computer-science/en/cs-021-accumulate-independent-validation-errors.md",
+        "fr": "streeling/courses/computer-science/fr/cs-021-accumulate-independent-validation-errors.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-021-accumulate-independent-validation-errors.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "CS022",
+      "department": "computer-science",
+      "module_id": "cs-022-check-read-write-footprints-before-reordering",
+      "title": "Check Read and Write Footprints Before Reordering",
+      "source_paths": {
+        "en": "streeling/courses/computer-science/en/cs-022-check-read-write-footprints-before-reordering.md",
+        "fr": "streeling/courses/computer-science/fr/cs-022-check-read-write-footprints-before-reordering.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-022-check-read-write-footprints-before-reordering.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "CS023",
+      "department": "computer-science",
+      "module_id": "cs-023-unwind-only-acquired-resources",
+      "title": "Unwind Only the Resources Actually Acquired",
+      "source_paths": {
+        "en": "streeling/courses/computer-science/en/cs-023-unwind-only-acquired-resources.md",
+        "fr": "streeling/courses/computer-science/fr/cs-023-unwind-only-acquired-resources.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-023-unwind-only-acquired-resources.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "CYB015",
+      "department": "cybernetics",
+      "module_id": "cyb-015-carry-covariance-through-smoothed-telemetry",
+      "title": "Carry Covariance Through Smoothed Telemetry",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-015-carry-covariance-through-smoothed-telemetry.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-015-carry-covariance-through-smoothed-telemetry.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-015-carry-covariance-through-smoothed-telemetry.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "CYB016",
+      "department": "cybernetics",
+      "module_id": "cyb-016-test-feedforward-against-disturbance-mismatch",
+      "title": "Test Feedforward Against Disturbance Mismatch",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-016-test-feedforward-against-disturbance-mismatch.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-016-test-feedforward-against-disturbance-mismatch.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-016-test-feedforward-against-disturbance-mismatch.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "CYB017",
+      "department": "cybernetics",
+      "module_id": "cyb-017-limit-command-change-separately-from-amplitude",
+      "title": "Limit Command Change Separately from Amplitude",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-017-limit-command-change-separately-from-amplitude.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-017-limit-command-change-separately-from-amplitude.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-017-limit-command-change-separately-from-amplitude.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "COG015",
+      "department": "cognitive-science",
+      "module_id": "cog-015-transport-alert-precision-only-with-prevalence",
+      "title": "Transport Alert Precision Only with Prevalence",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-015-transport-alert-precision-only-with-prevalence.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-015-transport-alert-precision-only-with-prevalence.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-015-transport-alert-precision-only-with-prevalence.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "COG016",
+      "department": "cognitive-science",
+      "module_id": "cog-016-find-the-missing-answer-tipping-count",
+      "title": "Find the Missing-Answer Tipping Count",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-016-find-the-missing-answer-tipping-count.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-016-find-the-missing-answer-tipping-count.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-016-find-the-missing-answer-tipping-count.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "COG017",
+      "department": "cognitive-science",
+      "module_id": "cog-017-subtract-a-comparison-trend-before-crediting-assistance",
+      "title": "Subtract a Comparison Trend Before Crediting Assistance",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-017-subtract-a-comparison-trend-before-crediting-assistance.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-017-subtract-a-comparison-trend-before-crediting-assistance.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-017-subtract-a-comparison-trend-before-crediting-assistance.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "INF016",
+      "department": "information-theory",
+      "module_id": "inf-016-bind-a-delta-to-its-reference-state",
+      "title": "Bind a Delta to Its Reference State",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-016-bind-a-delta-to-its-reference-state.md",
+        "fr": "streeling/courses/information-theory/fr/inf-016-bind-a-delta-to-its-reference-state.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-016-bind-a-delta-to-its-reference-state.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "INF017",
+      "department": "information-theory",
+      "module_id": "inf-017-merge-sum-count-summaries-before-taking-means",
+      "title": "Merge Sum and Count Summaries Before Taking Means",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-017-merge-sum-count-summaries-before-taking-means.md",
+        "fr": "streeling/courses/information-theory/fr/inf-017-merge-sum-count-summaries-before-taking-means.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-017-merge-sum-count-summaries-before-taking-means.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "INF018",
+      "department": "information-theory",
+      "module_id": "inf-018-frame-text-by-utf8-byte-length",
+      "title": "Frame Text by Its UTF-8 Byte Length",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-018-frame-text-by-utf8-byte-length.md",
+        "fr": "streeling/courses/information-theory/fr/inf-018-frame-text-by-utf8-byte-length.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-018-frame-text-by-utf8-byte-length.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "NET014",
+      "department": "network-science",
+      "module_id": "net-014-bound-throughput-with-a-capacity-cut",
+      "title": "Bound Throughput with a Capacity Cut",
+      "source_paths": {
+        "en": "streeling/courses/network-science/en/net-014-bound-throughput-with-a-capacity-cut.md",
+        "fr": "streeling/courses/network-science/fr/net-014-bound-throughput-with-a-capacity-cut.fr.md",
+        "es": "streeling/courses/network-science/es/net-014-bound-throughput-with-a-capacity-cut.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "NET015",
+      "department": "network-science",
+      "module_id": "net-015-condense-mutual-dependencies-before-ordering-work",
+      "title": "Condense Mutual Dependencies Before Ordering Work",
+      "source_paths": {
+        "en": "streeling/courses/network-science/en/net-015-condense-mutual-dependencies-before-ordering-work.md",
+        "fr": "streeling/courses/network-science/fr/net-015-condense-mutual-dependencies-before-ordering-work.fr.md",
+        "es": "streeling/courses/network-science/es/net-015-condense-mutual-dependencies-before-ordering-work.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "PM012",
+      "department": "product-management",
+      "module_id": "pm-012-order-review-work-by-weighted-completion-cost",
+      "title": "Order Review Work by Weighted Completion Cost",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-012-order-review-work-by-weighted-completion-cost.md",
+        "fr": "streeling/courses/product-management/fr/pm-012-order-review-work-by-weighted-completion-cost.fr.md",
+        "es": "streeling/courses/product-management/es/pm-012-order-review-work-by-weighted-completion-cost.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "PM013",
+      "department": "product-management",
+      "module_id": "pm-013-retain-censoring-in-time-to-first-task-use",
+      "title": "Retain Censoring in Time to First Task Use",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-013-retain-censoring-in-time-to-first-task-use.md",
+        "fr": "streeling/courses/product-management/fr/pm-013-retain-censoring-in-time-to-first-task-use.fr.md",
+        "es": "streeling/courses/product-management/es/pm-013-retain-censoring-in-time-to-first-task-use.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "PHY019",
+      "department": "physics",
+      "module_id": "phy-019-test-sliding-before-calling-a-sculpture-stable",
+      "title": "Test Sliding before Calling a Sculpture Stable",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-019-test-sliding-before-calling-a-sculpture-stable.md",
+        "fr": "streeling/courses/physics/fr/phy-019-test-sliding-before-calling-a-sculpture-stable.fr.md",
+        "es": "streeling/courses/physics/es/phy-019-test-sliding-before-calling-a-sculpture-stable.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "PHY020",
+      "department": "physics",
+      "module_id": "phy-020-separate-section-geometry-from-material-stiffness",
+      "title": "Separate Section Geometry from Material Stiffness",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-020-separate-section-geometry-from-material-stiffness.md",
+        "fr": "streeling/courses/physics/fr/phy-020-separate-section-geometry-from-material-stiffness.fr.md",
+        "es": "streeling/courses/physics/es/phy-020-separate-section-geometry-from-material-stiffness.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "PHY021",
+      "department": "physics",
+      "module_id": "phy-021-separate-rebound-speed-from-retained-energy",
+      "title": "Separate Rebound Speed from Retained Energy",
+      "source_paths": {
+        "en": "streeling/courses/physics/en/phy-021-separate-rebound-speed-from-retained-energy.md",
+        "fr": "streeling/courses/physics/fr/phy-021-separate-rebound-speed-from-retained-energy.fr.md",
+        "es": "streeling/courses/physics/es/phy-021-separate-rebound-speed-from-retained-energy.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "VC017",
+      "department": "visual-computing",
+      "module_id": "vc-017-bound-relief-depth-separation-under-a-declared-quantizer",
+      "title": "Bound Relief Depth Separation under a Declared Quantizer",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-017-bound-relief-depth-separation-under-a-declared-quantizer.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-017-bound-relief-depth-separation-under-a-declared-quantizer.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-017-bound-relief-depth-separation-under-a-declared-quantizer.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "VC018",
+      "department": "visual-computing",
+      "module_id": "vc-018-carry-alpha-association-through-a-textile-edge",
+      "title": "Carry Alpha Association through a Textile Edge",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-018-carry-alpha-association-through-a-textile-edge.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-018-carry-alpha-association-through-a-textile-edge.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-018-carry-alpha-association-through-a-textile-edge.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "VC019",
+      "department": "visual-computing",
+      "module_id": "vc-019-measure-directional-uv-stretch-before-reusing-a-motif",
+      "title": "Measure Directional UV Stretch before Reusing a Motif",
+      "source_paths": {
+        "en": "streeling/courses/visual-computing/en/vc-019-measure-directional-uv-stretch-before-reusing-a-motif.md",
+        "fr": "streeling/courses/visual-computing/fr/vc-019-measure-directional-uv-stretch-before-reusing-a-motif.fr.md",
+        "es": "streeling/courses/visual-computing/es/vc-019-measure-directional-uv-stretch-before-reusing-a-motif.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "DV017",
+      "department": "data-visualization",
+      "module_id": "dv-017-summarize-fibre-axes-without-inventing-a-direction",
+      "title": "Summarize Fibre Axes without Inventing a Direction",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-017-summarize-fibre-axes-without-inventing-a-direction.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-017-summarize-fibre-axes-without-inventing-a-direction.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-017-summarize-fibre-axes-without-inventing-a-direction.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "DV018",
+      "department": "data-visualization",
+      "module_id": "dv-018-show-overlapping-craft-defects-as-a-union",
+      "title": "Show Overlapping Craft Defects as a Union",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-018-show-overlapping-craft-defects-as-a-union.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-018-show-overlapping-craft-defects-as-a-union.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-018-show-overlapping-craft-defects-as-a-union.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "DV019",
+      "department": "data-visualization",
+      "module_id": "dv-019-choose-a-minimal-view-set-for-declared-features",
+      "title": "Choose a Minimal View Set for Declared Features",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-019-choose-a-minimal-view-set-for-declared-features.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-019-choose-a-minimal-view-set-for-declared-features.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-019-choose-a-minimal-view-set-for-declared-features.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "SEM015",
+      "department": "semiotics",
+      "module_id": "sem-015-bind-a-surface-marker-to-barycentric-vertex-identity",
+      "title": "Bind a Surface Marker to Barycentric Vertex Identity",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-015-bind-a-surface-marker-to-barycentric-vertex-identity.md",
+        "fr": "streeling/courses/semiotics/fr/sem-015-bind-a-surface-marker-to-barycentric-vertex-identity.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-015-bind-a-surface-marker-to-barycentric-vertex-identity.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "SEM016",
+      "department": "semiotics",
+      "module_id": "sem-016-check-sign-consistency-around-a-craft-seam-cycle",
+      "title": "Check Sign Consistency around a Craft Seam Cycle",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-016-check-sign-consistency-around-a-craft-seam-cycle.md",
+        "fr": "streeling/courses/semiotics/fr/sem-016-check-sign-consistency-around-a-craft-seam-cycle.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-016-check-sign-consistency-around-a-craft-seam-cycle.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "SEM017",
+      "department": "semiotics",
+      "module_id": "sem-017-declare-boundary-ownership-for-negative-tile-coordinates",
+      "title": "Declare Boundary Ownership for Negative Tile Coordinates",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-017-declare-boundary-ownership-for-negative-tile-coordinates.md",
+        "fr": "streeling/courses/semiotics/fr/sem-017-declare-boundary-ownership-for-negative-tile-coordinates.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-017-declare-boundary-ownership-for-negative-tile-coordinates.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "PHI012",
+      "department": "philosophy",
+      "module_id": "phi-012-distinguish-equivalence-from-an-interval-containing-zero",
+      "title": "Distinguish Equivalence from an Interval Containing Zero",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-012-distinguish-equivalence-from-an-interval-containing-zero.md",
+        "fr": "streeling/courses/philosophy/fr/phi-012-distinguish-equivalence-from-an-interval-containing-zero.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-012-distinguish-equivalence-from-an-interval-containing-zero.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "PHI013",
+      "department": "philosophy",
+      "module_id": "phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core",
+      "title": "Explain an Infeasible Craft Plan with a Minimal Core",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core.md",
+        "fr": "streeling/courses/philosophy/fr/phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "FUT012",
+      "department": "futurology",
+      "module_id": "fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario",
+      "title": "Budget the Worst Tail Mass of a Renderer Scenario",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario.md",
+        "fr": "streeling/courses/futurology/fr/fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario.fr.md",
+        "es": "streeling/courses/futurology/es/fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "FUT013",
+      "department": "futurology",
+      "module_id": "fut-013-bound-a-future-craft-workflow-by-its-serial-fraction",
+      "title": "Bound a Future Craft Workflow by Its Serial Fraction",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-013-bound-a-future-craft-workflow-by-its-serial-fraction.md",
+        "fr": "streeling/courses/futurology/fr/fut-013-bound-a-future-craft-workflow-by-its-serial-fraction.fr.md",
+        "es": "streeling/courses/futurology/es/fut-013-bound-a-future-craft-workflow-by-its-serial-fraction.es.md"
+      }
+    }
+  ]
+}

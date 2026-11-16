@@ -1,0 +1,89 @@
+---
+module_id: cog-004-score-a-pitch-discrimination-task
+department: cognitive-science
+course: "Score a Pitch-Discrimination Task Without Inventing a Listening Result"
+level: intermediate
+prerequisites: ["cog-003-calibrating-fretboard-confidence"]
+estimated_duration: "35 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Score a Pitch-Discrimination Task Without Inventing a Listening Result
+
+> **Draft scope.** An authored public answer key, synthetic responses, exact probability calculations and prepared original tone assets. Human technical review, fluent-language review, participant attempts, listening outcomes and deployed course HTML verification remain pending. There are no observed listeners in this packet.
+
+## The project question
+
+An agent can produce two different frequencies and score answers. That does not show that a player heard the difference, preferred one sound or learned anything. [Creelman and Macmillan's auditory-procedure abstract](https://pubmed.ncbi.nlm.nih.gov/528924/) describes how measured sensitivity depends on the psychophysical procedure. Only the indexed abstract was read here; it does not validate our stimuli or any listener.
+
+This lesson defines a narrow task: after two sequential single-tone intervals, choose which interval has the higher frequency. The [constructed frequency record](../../../../code/streeling/evidence/intonation-listening-2026-10-22/intonation.json) gives 327.031956626 Hz and 329.627556913 Hz, separated by 13.686286135 cents. The ratio construction is not a prescription for a musical tradition. [WML-004](../../world-music-languages/en/wml-004-preserve-intonation-beyond-pitch-classes.md) covers that boundary.
+
+## 1. Define the question before scoring
+
+The prepared [tone A](../../../../code/streeling/evidence/intonation-listening-2026-10-22/tone-a.wav) and [tone B](../../../../code/streeling/evidence/intonation-listening-2026-10-22/tone-b.wav) are mono PCM16 at 44100 Hz and last one second each. They have 10 ms boundary fades. Their float RMS was matched to 0.05 before quantization; the [asset record](../../../../code/streeling/evidence/intonation-listening-2026-10-22/audio-assets.json) retains the decoded measurements. No numerical level preparation proves equal perceived loudness, calibrated playback or successful stimulus presentation.
+
+The requested response is interval 1 or interval 2. It is not a sound-quality rating, a tuning preference, a confidence estimate or a memory test. The simultaneous mixture in [PHY-007](../../physics/en/phy-007-separate-beating-from-decay.md) serves another task and must not replace these sequential stimuli silently.
+
+### Practice exercise 1: identify the outcome
+
+A participant chooses interval 2 when it contains the higher tone. Which defined outcome is correct, and which broader conclusions cannot be inferred from that response alone?
+
+> **Answer:** The response is correct for the higher-frequency discrimination task. One response alone does not establish a stable ability, perceptual threshold, sound preference, tuning quality or learning. Actual stimulus presentation and participant evidence would also need to be recorded before treating it as an observed result.
+
+## 2. Audit a deliberately public arithmetic fixture
+
+The [synthetic trace](../../../../code/streeling/evidence/intonation-listening-2026-10-22/synthetic-trials.json) has 20 authored trials. The correct interval is 1 on odd trial IDs and 2 on even IDs. Responses are deliberately incorrect on IDs 3, 7, 12, 16 and 20, and correct elsewhere. This public alternating key is convenient for checking arithmetic. It is not a randomized, hidden or administered listening schedule.
+
+The trace scores 15/20, or 0.75. Always choosing interval 1 scores 10/20, or 0.5. Conditional counts are 8/10 correct when the higher tone is first and 7/10 when it is second. The synthetic respondent chooses interval 1 eleven times. These are different summaries; none converts invented answers into participant data.
+
+### Practice exercise 2: check the position summaries
+
+Five authored responses are wrong. Give overall accuracy, the always-first baseline and the two conditional correct counts. Would publishing these numbers establish a listener's performance?
+
+> **Answer:** Overall accuracy is 15/20 = 0.75; the always-first baseline is 10/20 = 0.5. The conditional counts are 8/10 and 7/10 for higher-first and higher-second trials. They audit the fixture only. No participant completed this schedule, so no listener performance was observed.
+
+## 3. Distinguish a decision rule from a posterior belief
+
+Assume independent trials with fair guesses and success probability 0.5. Under this model, the count of correct answers follows a binomial distribution with 20 trials. The exact one-sided probability of at least a given success count is the sum of the corresponding integer combinations divided by `2^20`.
+
+The official [SciPy binomial documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html) defines its survival function as the probability strictly above the argument. Thus “at least 15” uses `binom.sf(14,20,0.5)`, not `binom.sf(15,20,0.5)`. Independent integer-combination calculations agree with the installed function within `1e-14`.
+
+| At least this many correct | One-sided tail probability |
+| --- | --- |
+| 12 | 0.2517223358154297 |
+| 14 | 0.057659149169921875 |
+| 15 | 0.020694732666015625 |
+| 16 | 0.005908966064453125 |
+
+For a predeclared one-sided rule with alpha 0.05, the smallest passing integer count is 15. This is an assumed statistical model and rule, not an observed listener result. A tail probability is not the probability that the guessing hypothesis is true, and a failing score does not prove an inability to discriminate.
+
+### Practice exercise 3: apply the exact rule
+
+Does 14/20 pass the declared rule? Which survival-function argument represents at least 15 successes, and what does its probability mean?
+
+> **Answer:** No: the tail for at least 14 is 0.057659149169921875, above 0.05. At least 15 uses argument 14 and has tail 0.020694732666015625. Under the assumed independent fair-guess model, this is the probability of a count at least that large. It is not a posterior probability that the model is true.
+
+## 4. Account for selecting a successful block
+
+Suppose an agent runs eight independent complete tests under that same null model and reports only a block that reaches 15 successes. The actual single-test false-positive probability for this discrete rule is `q=0.020694732666015625`. The probability that at least one of the eight crosses the threshold is `1-(1-q)^8`, approximately 0.154049944.
+
+Using the actual discrete tail matters: the rule's nominal alpha 0.05 is not its exact crossing probability here. Independence is also an assumption. Repeated blocks from one person can be dependent, and stopping early, changing stimuli or selecting analyses requires further accounting. The calculation does not describe an experiment that was run.
+
+### Practice exercise 4: expose the selection
+
+An agent reports its best passing block from eight independent null tests as if it were the only test. Calculate the chance of at least one threshold crossing and identify the missing disclosure.
+
+> **Answer:** `1-(1-q)^8` is approximately 0.154049944 with the stated q. The report must disclose all eight tests, the selection rule and the independence assumption. A selected passing block does not retain the single-test false-positive interpretation without accounting for selection.
+
+## 5. Prepare a real test without claiming it happened
+
+A future protocol must declare the comparison, presentation order policy, playback conditions, response timing, exclusions and analysis before collecting results. Keep the answer key and frequency-revealing filenames out of the participant interface. Use a hidden balanced randomized schedule rather than this predictable fixture, while retaining a reproducible private assignment record. Check level and unintended onset or interface cues as well as frequency.
+
+Record every attempt and declared exclusion, preserve participant privacy, and report uncertainty and the population actually sampled. Testing one separation cannot locate a perceptual threshold; that requires an appropriate multi-level procedure and evidence. A preference or learning claim needs its own outcome and study design. Human review and participant consent remain requirements for a real study, not completed gates in this packet.
+
+### Practice exercise 5: rewrite the release claim
+
+The release note says: “A score of 15/20 proves that players can hear a 13.686286135-cent difference and learn faster.” What is a supported replacement?
+
+> **Answer:** The packet prepares two constructed tones and verifies synthetic scoring and a declared statistical rule. It includes no observed participant response, perceptual threshold, population result or learning comparison. A real protocol with controlled presentation, hidden assignments, declared analysis and appropriate outcomes is still needed before those claims can be tested.

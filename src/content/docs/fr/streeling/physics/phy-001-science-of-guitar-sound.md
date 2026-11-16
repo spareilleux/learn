@@ -4,12 +4,13 @@ description: Acoustique et physique des ondes — Physique
 sidebar:
   label: PHY-001 · La science du son de la guitare
   order: 1
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physics/fr/phy-001-science-of-guitar-sound.fr.md
 ---
 
 :::note[Streeling University]
 **PHY-001** · Acoustique et physique des ondes · débutant · 25 minutes
 
-Généré par le département *Physique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/c72fb746116346ce1991a4f108cd12f5e012e3fb/state/streeling/courses/physics/fr/phy-001-science-of-guitar-sound.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Physique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-001-science-of-guitar-sound.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de physique** | Stade : Nigredo (Débutant) | Durée : 25 minutes
@@ -128,7 +129,7 @@ Le tempérament égal ajuste légèrement ces rapports pour que toutes les tonal
 
 ### Exercice pratique
 
-Mesurez la distance du sillet à la 12e frette sur votre guitare, puis mesurez de la 12e frette au chevalet. Elles devraient être presque exactement égales — confirmant que la 12e frette divise la longueur de la corde par deux, doublant la fréquence (une octave). Maintenant mesurez du sillet à la frette 7 : cela devrait représenter environ 2/3 de la longueur totale de la corde, correspondant au rapport 3:2 d'une quinte juste.
+Mesurez la distance du sillet à la 12e frette sur votre guitare, puis mesurez de la 12e frette au chevalet. Elles devraient être presque exactement égales — confirmant que la 12e frette divise la longueur de la corde par deux, doublant la fréquence (une octave). Maintenant mesurez de la frette 7 au chevalet : cela devrait représenter environ 2/3 de la longueur totale de la corde (la distance du sillet à la frette 7 en est le tiers restant), correspondant au rapport 3:2 d'une quinte juste.
 
 ---
 

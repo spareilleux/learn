@@ -1,0 +1,411 @@
+---
+title: "Leçon 10 : substitutions et emprunt modal"
+description: Les substitutions diatonique et tritonique, les dominantes secondaires et backdoor, et les accords empruntés aux modes homonymes, comparés avec la compétence du chatbot, les outils MCP, le service de l'API web et le fichier de configuration que Guitar Alchemist leur consacre.
+sidebar:
+  label: 10. Substitutions et emprunt modal
+  order: 10
+---
+
+La leçon 9 a mesuré la distance d'un accord au suivant. Cette leçon demande quel accord peut prendre la place d'un autre, et quels accords une tonalité peut emprunter à ses modes homonymes. [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) répond à cinq endroits : une compétence (*skill*) du chatbot, un outil de son serveur MCP, un second outil du même nom sur son API web, un service de cette API et un fichier YAML. Le programme du cours vérifie chacun, et exécute le code de GA lui-même partout où il le peut.
+
+Tous les liens vers GA pointent sur le commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Les sorties viennent de la commande ci-dessous ; le point d'entrée est `l12`.
+
+```bash
+dotnet run --project code/music-theory-ga/GaTheory -c Release -- l12
+```
+
+## Substitution diatonique
+
+### L'idée
+
+Une **substitution** remplace un accord par un autre qui fait le même travail. Wikipédia cite Alfred Blatter : "A chord substitution occurs when a chord is replaced by another that is made to function like the original. Usually substituted chords possess two pitches in common with the triad that they are replacing." ([Chord substitution](https://en.wikipedia.org/wiki/Chord_substitution), d'après Blatter 2007, p. 186). La leçon 9 a montré quelles triades partagent deux notes : celles dont les fondamentales sont à une tierce l'une de l'autre. En C majeur, A mineur et E mineur peuvent remplacer C, et D mineur et A mineur remplacer F. Wikipédia appelle le premier cas la substitution par le relatif majeur ou mineur, qui "shares two common tones" (même article).
+
+Le cours prend les triades de la tonalité sur les autres degrés et les classe selon le nombre de notes qu'elles partagent avec l'accord ([`Lesson12.CourseSubstitutes`](https://github.com/spareilleux/learn/blob/aab1f4f/code/music-theory-ga/GaTheory/Lesson12.cs#L85-L98)). Un accord de septième a quatre notes, donc une triade peut en partager trois avec lui : B diminué est G7 sans sa fondamentale, et E mineur est Cmaj7 sans la sienne.
+
+```text
+== Diatonic substitutes in C major, by the notes they share (GA: ga_chord_substitutions, the closure rewritten)
+chord      course                               GA                                   check
+Am         C 2, F 2, Dm 1, Em 1                 C 2, F 2, Dm 1, Em 1                 ok
+Em         C 2, G 2, Am 1, Bdim 1               C 2, G 2, Am 1, Bdim 1               ok
+F          Dm 2, Am 2, C 1, Bdim 1              Dm 2, Am 2, C 1, Bdim 1              ok
+C          Em 2, Am 2, F 1, G 1                 Em 2, Am 2, F 1, G 1                 ok
+G7         Bdim 3, Dm 2, Em 2, C 1, F 1         Bdim 3, Dm 2, Em 2, C 1, F 1         ok
+Cmaj7      Em 3, G 2, Am 2, F 1, Bdim 1         Em 3, G 2, Am 2, F 1, Bdim 1         ok
+Bm7b5      Dm 3, F 2, G 2, Em 1, Am 1           Dm 2, G 2, Bdim 2, Em 1, F 1, Am 1   DIFF
+  the course's Bm7b5: B D F A; the closure's: B D F# A
+```
+
+Les ex æquo gardent l'ordre de la gamme. La dernière ligne est un accord de septième semi-diminué, B D F A, et D mineur, D F A, partage trois de ses notes.
+
+### Dans GA : `ga_chord_substitutions`, l'outil du serveur MCP
+
+Le serveur MCP de GA répond avec `ga_chord_substitutions` ([`GaDslTool.cs#L208-L222`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/GaDslTool.cs#L208-L222)), qui exécute une closure F#, `domain.chordSubstitutions` ([`DomainClosures.fs#L535-L621`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L535-L621)). Elle fait la même chose : les triades de la tonalité qui partagent au moins une note avec l'accord, triées par nombre de notes partagées avec le tri stable de F#, `List.sortByDescending` ([`#L602`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L602)), l'accord lui-même écarté quand sa fondamentale et sa qualité coïncident toutes les deux ([`#L587`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L587)). La closure est en F# et le programme du cours en C#, donc le programme la réécrit, avec le parseur qu'elle appelle ([`Lesson12.ParseChord`](https://github.com/spareilleux/learn/blob/aab1f4f/code/music-theory-ga/GaTheory/Lesson12.cs#L134-L176), [`Lesson12.GaSubstitutions`](https://github.com/spareilleux/learn/blob/aab1f4f/code/music-theory-ga/GaTheory/Lesson12.cs#L241-L279)). Pour cet outil, le cours teste sa lecture du code de GA, pas le serveur en marche.
+
+Les deux s'accordent sur six accords. Le septième est de nouveau le défaut de la leçon 9 : le parseur garde le ♭5 de Bm7♭5 comme une altération ([`ChordParser.fs#L69-L84`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Parsers/ChordParser.fs#L69-L84)), et la closure construit l'accord à partir de sa qualité et de ses extensions seulement ([`DomainClosures.fs#L85-L98`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L85-L98), [`#L349-L355`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L349-L355)). B D F♯ A ne partage que deux notes avec D mineur, et B diminué se glisse dans la liste avec deux. Sur la branche `main` de GA, la closure prend ses notes dans `chordTones`, qu'a introduit [GA #681](https://github.com/GuitarAlchemist/ga/pull/681) ([`#L446-L450`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L446-L450) et [`#L663`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L663) au commit `5c3a52a`) ; lu, pas exécuté.
+
+Voici la réponse de la closure elle-même pour A mineur, réécrite ligne à ligne, à côté de l'exemple de la description de l'outil ([`GaDslTool.cs#L212`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/GaDslTool.cs#L212)) :
+
+```text
+== The closure's answer for Am in C major, and the example in the tool's description (GaDslTool.cs line 212)
+  Substitutions for Am in key of C major:
+    ★★  C      — 2 shared: C(m3/P1) E(P5/M3)
+    ★★  F      — 2 shared: A(P1/M3) C(m3/P5)
+    ★   Dm     — 1 shared: A(P1/P5)
+    ★   Em     — 1 shared: E(P5/P1)
+  description: Am in key of C major → C (★★★, relative major), Em (★★, shared E/B), F (★, shared A)
+```
+
+La description se trompe sur les trois accords. C partage deux notes avec A mineur, pas trois. E mineur ne partage que E, puisque A mineur n'a pas de B. F partage A et C, et se classe avec C.
+
+La tonalité est facultative. Sans elle, la closure prend la lettre de la fondamentale de l'accord, laisse tomber l'altération et suppose une tonalité majeure ([`#L558-L559`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L558-L559)) ; le paramètre de l'outil dit seulement "Defaults to chord root if omitted" ([`GaDslTool.cs#L215`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/GaDslTool.cs#L215)).
+
+```text
+== Without a key, the closure uses the chord's root letter as a major key (line 558)
+chord      GA's key     GA's ranking
+Am         A major      A 2, C#m 1, D 1, E 1, F#m 1
+Bb7        B major      C#m 1, D#m 1, E 1, F# 1, G#m 1, A#dim 1; tritone E7
+F#m        F major      F 1, Am 1, Dm 1
+Eb         E major      G#m 1, B 1, D#dim 1
+```
+
+Le premier substitut de A mineur est A majeur : la tonalité de A majeur le contient, et la closure n'écarte un accord que si la fondamentale *et* la qualité coïncident. F♯ mineur est comparé aux accords de F majeur, dont aucun ne contient F♯ ni C♯ ; E♭ à ceux de E majeur.
+
+## Substitution tritonique
+
+### L'idée
+
+Open Music Theory : "Tritone substitutions replace a dominant chord with another dominant chord a tritone away. The name refers both to the interval between the original and substituted chords and to the fact that the two chords share the same tritone." ([Open Music Theory, "Substitutions"](https://viva.pressbooks.pub/openmusictheory/chapter/substitutions/)). G7 est G B D F ; D♭7 est D♭ F A♭ C♭, et C♭ sonne comme B. Le triton B–F est dans les deux accords, rôles inversés : B est la tierce de G7 et la septième de D♭7. Les deux se résolvent sur C, et le substitut le fait par un demi-ton à la basse : "the most reliable way to recognize a tritone substitution in a song is by its chromatic resolution downward by a minor second" (même chapitre). Le module Streeling [MUS-005 · L'harmonie jazz à la guitare](../../streeling/music/mus-005-jazz-harmony/) la travaille dans sa section 5, sur les techniques de substitution.
+
+Le cours appelle un accord dominant quand il a une tierce majeure et une septième mineure au-dessus de sa fondamentale, avec ou sans extensions, et nomme le substitut une quinte diminuée au-dessus de la fondamentale : D♭ pour G.
+
+### Dans GA
+
+La closure ajoute une ligne de triton sous le même test, une tierce majeure et une septième mineure parmi ses intervalles ([`#L603-L609`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L603-L609)), et écrit la fondamentale avec des bémols :
+
+```text
+== The tritone substitute: the course's dominant chords, and the closure's test for M3 and m7 (lines 603-609)
+chord      course       GA           check
+G7         Db7          Db7          ok
+D7         Ab7          Ab7          ok
+E7         Bb7          Bb7          ok
+C7         Gb7          Gb7          ok
+G9         Db7          (none)       DIFF
+G13        Db7          (none)       DIFF
+Gm7        (none)       (none)       ok
+Cmaj7      (none)       (none)       ok
+```
+
+G9 et G13 n'ont pas de substitut. Au commit `a826864`, « 9 » et « 13 » n'ajoutent que leur propre degré ([`#L94-L98`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L94-L98)), si bien que la closure ne voit jamais la septième mineure que les deux accords contiennent. `chordTones`, sur `main`, la sous-entend (leçon 9).
+
+## Dominantes secondaires et dominante *backdoor*
+
+### L'idée
+
+Une **dominante secondaire** est la dominante d'un accord autre que la tonique. Open Music Theory les appelle "secondary dominant chords (V(7))" et donne la plus courante : "ii becomes II♯, which is V/V" ([Open Music Theory, "Tonicization"](https://viva.pressbooks.pub/openmusictheory/chapter/tonicization/)). En C majeur, c'est D7 qui va vers G. La cible doit être une triade majeure ou mineure : "Diminished and augmented triads can't be tonicized, since there are no diminished or augmented keys" (même chapitre). [MUS-003 · Comment fonctionne l'harmonie](../../streeling/music/mus-003-functional-harmony/) les traite dans sa section 5 ; une ligne de son tableau en G majeur est fausse (voir le [journal](../journal/)).
+
+La **dominante *backdoor*** atteint la tonique depuis un ton en dessous : ♭VII⁷ → I, B♭7 → C en C majeur. Wikipédia cite Jerry Coker : "The I chord, in a given progression, is often preceded by IV–7 to ♭VII7, instead of the usual V7 chord" ([Chord substitution](https://en.wikipedia.org/wiki/Chord_substitution), d'après Coker 1997, p. 82). MUS-005 la présente aussi, en bVII7 → I.
+
+Le cours lit une paire d'accords avec les cinq noms qu'utilise la compétence de GA ([`Lesson12.CourseRelations`](https://github.com/spareilleux/learn/blob/aab1f4f/code/music-theory-ga/GaTheory/Lesson12.cs#L420-L437)) : deux septièmes de dominante à un triton l'une de l'autre ; une triade majeure ou une septième de dominante une quinte au-dessus d'un accord majeur ou mineur ; une septième de dominante un ton sous sa résolution ; la même forme primaire, la classe d'ensembles de la leçon 4 ; et des vecteurs d'intervalles distants de 2 au plus.
+
+### Dans GA : la compétence `ChordSubstitutionSkill` du chatbot
+
+Le chatbot répond à ces questions avec `ChordSubstitutionSkill`, sans modèle de langage. Comme la compétence de la leçon 9, elle est choisie par le sens ([`ProductionOrchestrator.cs#L200-L206`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Core.Orchestration/Services/ProductionOrchestrator.cs#L200-L206)) ; puis elle lit les chiffrages d'accords avec sa propre expression régulière ([`ChordSubstitutionSkill.cs#L69-L71`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ChordSubstitutionSkill.cs#L69-L71)). Deux chiffrages donnent une comparaison, un seul une liste ([`#L144-L174`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ChordSubstitutionSkill.cs#L144-L174)). Le programme copie le motif, les tables et la sélection, sans le logger ni le texte de la réponse, et appelle `GrothendieckService` et `GrothendieckDelta` de GA, compilés tels quels ([`Lesson12.cs#L281-L416`](https://github.com/spareilleux/learn/blob/aab1f4f/code/music-theory-ga/GaTheory/Lesson12.cs#L281-L416)). Les douze exemples de requêtes de la compétence ([`#L35-L55`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ChordSubstitutionSkill.cs#L35-L55)) passent d'abord par le motif :
+
+```text
+== GA's chatbot skill: what its own twelve example prompts parse to (ChordSubstitutionSkill.cs lines 146-160)
+  Tritone substitution for G7                    lists substitutes for G7
+  What can I substitute for Cmaj7 in a ii-V-I?   lists substitutes for Cmaj7
+  Reharmonize Dm7 in a jazz context              lists substitutes for Dm7
+  Alternative chord for F major in C             compares F with C
+  What's the secondary dominant of Am?           lists substitutes for Am
+  Show me a backdoor dominant for C major        lists substitutes for C
+  Alternative chord for Cmaj7                    lists substitutes for Cmaj7
+  What can replace Dm7?                          lists substitutes for Dm7
+  Swap chord for G7                              lists substitutes for G7
+  Modal interchange substitutes for C major      lists substitutes for C
+  Borrow a chord from parallel minor             no chord: "Could not identify a chord symbol in your message."
+  Modal interchange options in F major           lists substitutes for F
+```
+
+Le motif est sensible à la casse et veut une majuscule de A à G sans lettre après, donc « Alternative » et « Borrow » ne sont pas des accords. « Alternative chord for F major in C » trouve deux accords, F et C, et les compare au lieu de lister des remplaçants de F. « Borrow a chord from parallel minor » n'a aucun chiffrage d'accord. Les comparaisons :
+
+```text
+== Two chords: the course's reading and the skill's labels (ClassifySubstitution, lines 246-298)
+G7 Db7     DIFF
+  course: Tritone Substitution, Set-Class Equivalent, ICV Neighbor (L1 = 0)
+  GA:     Tritone Substitution, Set-Class Equivalent, ICV Neighbor (L1 = 1)
+G7 C       ok
+  course and GA: Secondary Dominant
+D7 G       ok
+  course and GA: Secondary Dominant
+Dm G       DIFF
+  course: Set-Class Equivalent, ICV Neighbor (L1 = 0)
+  GA:     Secondary Dominant, Set-Class Equivalent, ICV Neighbor (L1 = 1)
+F# Bdim    DIFF
+  course: Harmonic Distance
+  GA:     Secondary Dominant
+C C        DIFF
+  course: Set-Class Equivalent, ICV Neighbor (L1 = 0)
+  GA:     Set-Class Equivalent, ICV Neighbor (L1 = 1)
+C Am       DIFF
+  course: Set-Class Equivalent, ICV Neighbor (L1 = 0)
+  GA:     Set-Class Equivalent, ICV Neighbor (L1 = 1)
+Bb7 C      ok
+  course and GA: Backdoor Dominant
+```
+
+Deux tests contredisent les manuels. **Secondary Dominant** ne regarde que les fondamentales ([`#L262`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ChordSubstitutionSkill.cs#L262)) : D mineur l'obtient avant G, et F♯ avant B diminué, alors qu'un accord mineur n'est pas une dominante et qu'une triade diminuée ne peut pas être tonicisée. **ICV Neighbor** donne une distance de 1 pour deux accords de même vecteur d'intervalles, là où la distance est 0 : `GrothendieckDelta.FromIcVs` change une différence nulle en 1, "to preserve musical differentiation expected by callers/tests" ([`GrothendieckDelta.cs#L125-L131`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Atonal/Grothendieck/GrothendieckDelta.cs#L125-L131)). C est donc à un pas de lui-même.
+
+## Classer des candidats par vecteur d'intervalles
+
+### L'idée
+
+Pour un seul accord, la compétence liste cinq substituts "ranked by ICV distance" ([`ChordSubstitutionSkill.cs#L182`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ChordSubstitutionSkill.cs#L182)). `FindNearby` de GA ([`GrothendieckService.cs#L45-L90`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Atonal/Grothendieck/GrothendieckService.cs#L45-L90)) parcourt les 4096 ensembles de classes de hauteurs et garde ceux dont le vecteur d'intervalles ([leçon 4](../04-set-classes/)) diffère de celui de l'accord de 3 au plus, en somme sur les six classes. Chacun reçoit un coût de 0,6 fois cette distance ([`#L39-L42`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Atonal/Grothendieck/GrothendieckService.cs#L39-L42)). La compétence garde les ensembles de la taille de l'accord et prend les cinq premiers par coût ([`ChordSubstitutionSkill.cs#L164-L174`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ChordSubstitutionSkill.cs#L164-L174)).
+
+Trier selon une clé qui fait des ex æquo est une question de C#. [`Enumerable.OrderBy`](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.orderby) est stable : "if the keys of two elements are equal, the order of the elements is preserved". Ici, presque tout est ex æquo. Les transpositions et les inversions d'un accord ont le même vecteur, donc les 24 triades majeures et mineures en partagent un, et les 12 septièmes de dominante et les 12 septièmes semi-diminuées un autre. Avec le zéro changé en un, tous sortent à la distance 1 et au coût 0,60, et le tri stable les laisse dans l'ordre où `FindNearby` les a rencontrés : l'ordre des nombres sur 12 bits.
+
+### Dans GA
+
+Le programme compile `FindNearby` tel quel, compte lui-même les ensembles de même vecteur, et imprime les cinq lignes de la compétence avec le nombre sur 12 bits de chaque ensemble et les notes qu'il partage avec l'accord ([`Lesson12.SkillCandidates`](https://github.com/spareilleux/learn/blob/aab1f4f/code/music-theory-ga/GaTheory/Lesson12.cs#L388-L394)) :
+
+```text
+== The skill's list for one chord: GA's FindNearby, then the first five of the same size, by cost
+course: the other chords of the same size with the same ICV; GA: the chords at the lowest cost it lists
+chord      course     GA         check
+G7         23         23         ok
+  - **Dm7b5** — harmonic cost 0.60 (Δ L1=1)   id  293, 2 notes in common with G7
+  - **Ab7** — harmonic cost 0.60 (Δ L1=1)     id  329, 0 notes in common with G7
+  - **F7** — harmonic cost 0.60 (Δ L1=1)      id  553, 1 note in common with G7
+  - **D7** — harmonic cost 0.60 (Δ L1=1)      id  581, 1 note in common with G7
+  - **Ebm7b5** — harmonic cost 0.60 (Δ L1=1)  id  586, 0 notes in common with G7
+  textbook Db7: number 19 of the 155 it lists, cost 0.60
+Am         23         23         ok
+  - **Cm** — harmonic cost 0.60 (Δ L1=1)      id  137, 1 note in common with Am
+  - **C** — harmonic cost 0.60 (Δ L1=1)       id  145, 2 notes in common with Am
+  - **Ab** — harmonic cost 0.60 (Δ L1=1)      id  265, 1 note in common with Am
+  - **Dbm** — harmonic cost 0.60 (Δ L1=1)     id  274, 1 note in common with Am
+  - **Fm** — harmonic cost 0.60 (Δ L1=1)      id  289, 1 note in common with Am
+  textbook C: number 2 of the 95 it lists, cost 0.60
+  textbook F: number 8 of the 95 it lists, cost 0.60
+C          23         23         ok
+  - **Cm** — harmonic cost 0.60 (Δ L1=1)      id  137, 2 notes in common with C
+  - **Ab** — harmonic cost 0.60 (Δ L1=1)      id  265, 1 note in common with C
+  - **Dbm** — harmonic cost 0.60 (Δ L1=1)     id  274, 1 note in common with C
+  - **Fm** — harmonic cost 0.60 (Δ L1=1)      id  289, 1 note in common with C
+  - **Db** — harmonic cost 0.60 (Δ L1=1)      id  290, 0 notes in common with C
+  textbook Am: number 6 of the 95 it lists, cost 0.60
+  textbook Em: number 21 of the 95 it lists, cost 0.60
+Cmaj7      11         11         ok
+  - **Dbmaj7** — harmonic cost 0.60 (Δ L1=1)  id  291, 1 note in common with Cmaj7
+  - **Abmaj7** — harmonic cost 0.60 (Δ L1=1)  id  393, 2 notes in common with Cmaj7
+  - **Fmaj7** — harmonic cost 0.60 (Δ L1=1)   id  561, 2 notes in common with Cmaj7
+  - **Dmaj7** — harmonic cost 0.60 (Δ L1=1)   id  582, 0 notes in common with Cmaj7
+  - **Amaj7** — harmonic cost 0.60 (Δ L1=1)   id  786, 1 note in common with Cmaj7
+  textbook Em7: not listed (Δ L1=4, beyond 3)
+  textbook Am7: not listed (Δ L1=4, beyond 3)
+Dm7        11         11         ok
+  - **Fm7** — harmonic cost 0.60 (Δ L1=1)     id  297, 2 notes in common with Dm7
+  - **F#m7** — harmonic cost 0.60 (Δ L1=1)    id  594, 1 note in common with Dm7
+  - **Am7** — harmonic cost 0.60 (Δ L1=1)     id  657, 2 notes in common with Dm7
+  - **Ebm7** — harmonic cost 0.60 (Δ L1=1)    id 1098, 0 notes in common with Dm7
+  - **Cm7** — harmonic cost 0.60 (Δ L1=1)     id 1161, 1 note in common with Dm7
+  textbook Fmaj7: not listed (Δ L1=4, beyond 3)
+```
+
+La liste est faite des cinq plus petits nombres de la classe d'ensembles de l'accord, l'accord lui-même mis à part. Le substitut des manuels vient plus loin. D♭7, le substitut tritonique que promet la description de la compétence elle-même ("tritone subs (G7 → Db7)", [`#L28-L33`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ChordSubstitutionSkill.cs#L28-L33)), arrive en 19e position, si bien que le premier exemple de requête de la compétence, « Tritone substitution for G7 », ne le montre jamais. Em7 et Am7, qui partagent trois notes avec Cmaj7, ne sont pas listés du tout : leur vecteur est à 4. Et les mêmes quelques accords reviennent pour presque toutes les fondamentales :
+
+```text
+== Over the twelve roots of each chord type, the skill's lists of five
+type     different chords   first suggestion, and for how many roots
+major    6                  Cm 12
+m        6                  C 1, Cm 11
+dim      6                  Dbdim 1, Cdim 11
+aug      4                  Dbaug 3, Caug 9
+7        6                  Dm7b5 12
+maj7     6                  Dbmaj7 11, Abmaj7 1
+m7       6                  Fm7 11, Dm7 1
+m7b5     6                  Dm7b5 11, Ab7 1
+dim7     3                  Dbdim7 4, Cdim7 8
+```
+
+Dm7♭5 est la première suggestion pour les douze septièmes de dominante. Un classement dont la clé fait autant d'ex æquo a besoin d'une seconde clé qui ait un sens : les notes communes, que le programme imprime, ou le mouvement de la fondamentale.
+
+GaApi, l'API web de GA, sert la même logique que la compétence sous la forme de deux outils MCP à elle, `ga_chord_substitutions` et `ga_chord_compare` ([`ChordSubstitutionMcpTools.cs#L44`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Mcp/ChordSubstitutionMcpTools.cs#L44), [`#L97`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Mcp/ChordSubstitutionMcpTools.cs#L97)), sur son point d'accès `/mcp` (enregistrés à [`Program.cs#L354-L357`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-server/GaApi/Program.cs#L354-L357), exposés à [`#L514`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-server/GaApi/Program.cs#L514)). Deux outils nommés `ga_chord_substitutions` répondent donc différemment : celui du serveur MCP classe les accords d'une tonalité par notes communes, celui de GaApi classe tous les ensembles par distance de vecteur.
+
+## Emprunt modal
+
+### L'idée
+
+Open Music Theory : "Modal mixture (or borrowing) is the harmonic technique of mixing the notes from the parallel major and natural-minor modes (e.g., C major and C minor)." L'emprunt "is more common in major keys (borrowing from the parallel minor)", et il "changes the quality of a chord, but not its function" ([Open Music Theory, "Modal Mixture"](https://viva.pressbooks.pub/openmusictheory/chapter/modal-mixture/)). Les fondamentales abaissées prennent un bémol : "Chords with lowered roots use a flat sign in front of the Roman numeral (e.g., ♭VI)." En C majeur, les plus courants sont iv (F mineur), ii° et iiø⁷ (D F A♭, avec C), ♭VI (A♭), ♭III (E♭) et ♭VII (B♭) ; changer I en i est courant aussi, V en v moins (même chapitre).
+
+Emprunter aux autres modes homonymes, dorien, phrygien, lydien, mixolydien et locrien, étend l'idée ; les musiciens de jazz et de rock parlent d'échange modal (*modal interchange*). Le cours écrit chaque mode sur C, une lettre par degré, et liste les triades que C majeur n'a pas, avec des chiffres romains lus par rapport à la gamme majeure ([`Lesson12.CourseBorrowed`](https://github.com/spareilleux/learn/blob/aab1f4f/code/music-theory-ga/GaTheory/Lesson12.cs#L499-L505), [`Lesson12.Numeral`](https://github.com/spareilleux/learn/blob/aab1f4f/code/music-theory-ga/GaTheory/Lesson12.cs#L58-L79)) :
+
+```text
+== The course's borrowed chords, mode by mode: every triad of the parallel mode that C major lacks
+mode         chords
+Dorian       i Cm, bIII Eb, v Gm, vi° Adim, bVII Bb
+Phrygian     i Cm, bII Db, bIII Eb, iv Fm, v° Gdim, bVI Ab, bvii Bbm
+Lydian       II D, #iv° F#dim, vii Bm
+Mixolydian   iii° Edim, v Gm, bVII Bb
+Aeolian      i Cm, ii° Ddim, bIII Eb, iv Fm, v Gm, bVI Ab, bVII Bb
+Locrian      i° Cdim, bII Db, biii Ebm, iv Fm, bV Gb, bVI Ab, bvii Bbm
+count              course   GA       check
+distinct chords    18       18       ok
+```
+
+La ligne Aeolian, le mode éolien, est l'emprunt d'Open Music Theory. Sur les six modes, il y a 18 accords différents ; la colonne GA de la dernière ligne vient de la section suivante.
+
+### Dans GA : `get_borrowed_chords`
+
+L'outil MCP `get_borrowed_chords` de GA transmet la tonalité à GaApi ([`ContextualChordsTool.cs#L72-L83`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/ContextualChordsTool.cs#L72-L83), [`ContextualChordsController.cs#L38-L41`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-server/GaApi/Controllers/ContextualChordsController.cs#L38-L41)), dont `ContextualChordService.GetBorrowedChordsAsync` ([`ContextualChordService.cs#L75-L119`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-server/GaApi/Services/ContextualChordService.cs#L75-L119)) construit les triades de chaque mode homonyme et garde celles qui manquent à la tonalité de départ. Le programme compile le service tel quel, avec `ChordTemplateFactory` de GA, et lui demande C majeur. GA écrit les dièses ♯ ; la comparaison les lit comme #, donc seule l'orthographe compte.
+
+```text
+== Borrowed chords for C major: GA's get_borrowed_chords (ContextualChordService, compiled as it is), chord by chord
+GA's mode    course             GA                 check
+Dorian       i Cm               i Cm               ok
+  notes: course C Eb G, GA C D♯ G
+Dorian       bIII Eb            III D#             DIFF
+  notes: course Eb G Bb, GA D♯ G A♯
+Dorian       v Gm               v Gm               ok
+  notes: course G Bb D, GA G A♯ D
+Dorian       vi° Adim           vi° Adim           ok
+  notes: course A C Eb, GA A C D♯
+Dorian       bVII Bb            VII A#             DIFF
+  notes: course Bb D F, GA A♯ D F
+Phrygian     bII Db             II C#              DIFF
+  notes: course Db F Ab, GA C♯ F G♯
+Phrygian     iv Fm              iv Fm              ok
+  notes: course F Ab C, GA F G♯ C
+Phrygian     v° Gdim            v° Gdim            ok
+  notes: course G Bb Db, GA G A♯ C♯
+Phrygian     bVI Ab             VI G#              DIFF
+  notes: course Ab C Eb, GA G♯ C D♯
+Phrygian     bvii Bbm           vii A#m            DIFF
+  notes: course Bb Db F, GA A♯ C♯ F
+Lydian       II D               II D               ok
+Lydian       #iv° F#dim         iv° F#dim          DIFF
+Lydian       vii Bm             vii Bm             ok
+Mixolydian   iii° Edim          iii° Edim          ok
+  notes: course E G Bb, GA E G A♯
+Aeolian      ii° Ddim           ii° Ddim           ok
+  notes: course D F Ab, GA D F G♯
+Locrian      i° Cdim            i° Cdim            ok
+  notes: course C Eb Gb, GA C D♯ F♯
+Locrian      biii Ebm           iii D#m            DIFF
+  notes: course Eb Gb Bb, GA D♯ F♯ A♯
+Locrian      bV Gb              V F#               DIFF
+  notes: course Gb Bb Db, GA F♯ A♯ C♯
+```
+
+Il trouve les mêmes 18 accords, avec trois différences. Chaque accord est attribué au premier mode de la boucle qui le contient ([`#L93-L109`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-server/GaApi/Services/ContextualChordService.cs#L93-L109)) : B♭ et G mineur sortent comme dorien, et le mineur homonyme d'Open Music Theory, l'éolien, ne garde que D diminué. Chaque fondamentale sur une touche noire s'écrit avec un dièse ([`#L137`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-server/GaApi/Services/ContextualChordService.cs#L137), par [`Note.cs#L75`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Primitives/Notes/Note.cs#L75)) : D♯ pour E♭, A♯ pour B♭, G♯ pour A♭, et même C mineur sort en C D♯ G. Et les chiffres romains ne portent aucune altération ([`#L157-L170`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-server/GaApi/Services/ContextualChordService.cs#L157-L170)) : l'accord de A♭ est « VI », et D♭ et D sont tous deux « II ».
+
+### Dans GA : `ModalInterchange.yaml`
+
+GA décrit aussi l'échange modal dans un fichier de configuration, [`ModalInterchange.yaml`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/ModalInterchange.yaml), 1549 lignes de chiffres romains, d'accords écrits en C majeur ou en A mineur, de morceaux et de conseils. Le programme écrit chaque accord à partir de son chiffre romain dans son mode d'origine ([`Lesson12.ReadMixtureChords`](https://github.com/spareilleux/learn/blob/aab1f4f/code/music-theory-ga/GaTheory/Lesson12.cs#L441-L458)) :
+
+```text
+== GA's ModalInterchange.yaml: each chord spelled from its numeral in its source mode
+entry, numeral           course           GA               check
+Parallel Minor bVI       Ab major         Ab major         ok
+Parallel Minor bVII      Bb major         Bb major         ok
+Parallel Minor iv        F minor          F minor          ok
+Parallel Minor ii°       D diminished     D diminished     ok
+Parallel Major VI        F# minor         F major          DIFF
+  F major is already a chord of A natural minor: nothing is borrowed
+Parallel Major VII       G# diminished    G major          DIFF
+  G major is already a chord of A natural minor: nothing is borrowed
+Parallel Major III       C# minor         C major          DIFF
+  C major is already a chord of A natural minor: nothing is borrowed
+Dorian IV                D major          D major          ok
+Dorian ii                B minor          B minor          ok
+Phrygian bII             Bb major         Bb major         ok
+Phrygian bii°            Bb major         Bb diminished    DIFF
+Mixolydian bVII          Bb major         Bb major         ok
+Mixolydian v             G minor          G minor          ok
+```
+
+Neuf des treize sont justes. Les trois accords « empruntés au majeur homonyme » dans A mineur sont les propres accords de A mineur ([`#L271-L362`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/ModalInterchange.yaml#L271-L362)) ; emprunter à A majeur donnerait F♯ mineur, G♯ diminué et C♯ mineur. « bii°, Bb diminished » n'est pas dans A phrygien, dont le deuxième degré porte B♭ majeur, l'entrée juste au-dessus ([`#L616-L619`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/ModalInterchange.yaml#L616-L619)). Les exemples des mineures harmonique et mélodique ne donnent que des chiffres romains ([`#L826-L875`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/ModalInterchange.yaml#L826-L875)) :
+
+```text
+== Its chromatic numerals, read in C: the chord on that degree of the mode
+mode, numeral            course     GA         check
+Harmonic Minor V7        V7         V7         ok
+  G B D F
+Harmonic Minor vii°7     vii°7      vii°7      ok
+  B D F Ab
+Harmonic Minor bVI+      bVI        bVI+       DIFF
+  Ab C Eb
+Melodic Minor iv+        IV         iv+        DIFF
+  F A C
+Melodic Minor V7         V7         V7         ok
+  G B D F
+Melodic Minor vii°7      viiø7      vii°7      DIFF
+  B D F A
+```
+
+Le ♭VI de la mineure harmonique est majeur, et sa triade augmentée est ♭III+. Le quatrième degré de la mineure mélodique porte un accord majeur. Son accord de septième sur vii est semi-diminué, pas diminué.
+
+Je m'attendais à ce que rien dans GA ne lise ce fichier : le surveillant de configuration le liste, et une modification tombe dans "Unknown configuration file" ([`ConfigurationWatcherService.cs#L55`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Configuration/Services/ConfigurationWatcherService.cs#L55), [`#L157-L158`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Configuration/Services/ConfigurationWatcherService.cs#L157-L158)). C'était faux. `YamlKnowledgeLoader` ([`YamlKnowledgeLoader.fs#L128-L140`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/YamlKnowledgeLoader.fs#L128-L140)) lit tous les fichiers YAML du répertoire de configuration, sauf cinq qui ont leur propre chargeur, et aplatit chaque entrée en texte. `YamlKnowledgeSyncService` stockerait ces textes avec des embeddings "for semantic retrieval by the chatbot agents", dit son commentaire ([`YamlKnowledgeSyncService.cs#L8-L25`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GA.Data.MongoDB/Services/DocumentServices/YamlKnowledgeSyncService.cs#L8-L25)), mais rien ne le lance à `a826864` : seul `AddSyncServices` l'enregistrerait ([`ServiceCollectionExtensions.cs#L32-L54`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GA.Data.MongoDB/Extensions/ServiceCollectionExtensions.cs#L32-L54)), rien n'appelle cette méthode, et GaCLI a l'appel en commentaire ([`Program.cs#L320-L321`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaCLI/Program.cs#L320-L321)). Le programme appelle le chargeur, qu'il compile déjà avec `GA.Business.Config` :
+
+```text
+== Who reads the file: GA's YamlKnowledgeLoader (GA.Business.Config, compiled), which flattens every content YAML
+  8 entries from ModalInterchange.yaml:
+    Borrowed Chords from Parallel Minor
+    Borrowed Chords from Parallel Major
+    Dorian Interchange
+    Phrygian Interchange
+    Mixolydian Interchange
+    Chromatic Modal Interchange
+    Parallel Modal Regions
+    Modal Pivot Chords
+  "InKeyOfAm: F major" in their text: yes
+  "InKeyOfAm: Bb diminished" in their text: yes
+  "bVI+" in their text: yes
+  "iv+" in their text: yes
+```
+
+Les accords et les chiffres romains faux arrivent dans ce texte. Mais rien à `a826864` ne stocke ce texte, et rien ne lit la collection `yaml_knowledge` que le service de synchronisation remplirait : hors de ce service, la collection n'apparaît que comme propriété de `MongoDbService` ([`MongoDbService.cs#L56-L57`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GA.Data.MongoDB/Services/MongoDbService.cs#L56-L57)). Au passage, le chargeur saute `SpecializedTunings.yaml`, qui ne se lit pas, avec un message sur la sortie d'erreur et rien d'autre.
+
+Sur la branche `main` de GA, au commit [`5c3a52a`](https://github.com/GuitarAlchemist/ga/tree/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26), les notes de la closure ont changé (#681) ; la tonalité par défaut, l'exemple de la description, les deux tests de la compétence, la distance forcée à 1, l'orthographe du service et son attribution au premier mode sont comme ci-dessus. Lu, pas exécuté.
+
+## Exercices
+
+1. Classe les substituts diatoniques de D mineur en F majeur selon les notes qu'ils partagent.
+2. Quel est le substitut tritonique de A7, et quel triton les deux accords partagent-ils ?
+3. Quel accord la compétence du chatbot liste-t-elle en premier pour A7, et pourquoi ?
+4. Quels accords G majeur emprunte-t-il à G mineur ? Comment `get_borrowed_chords("G major")` les écrit-il ?
+
+<details>
+<summary>Solutions</summary>
+
+1. F 2, B♭ 2, G mineur 1, A mineur 1. F et B♭ ont leur fondamentale à une tierce de D ; C et E diminué ne partagent rien avec D mineur.
+2. E♭7. A7 est A C♯ E G et E♭7 est E♭ G B♭ D♭ : G et C♯, qui sonne comme D♭, échangent leurs rôles.
+3. Dm7♭5, le nombre sur 12 bits 293, le plus petit des 23 ensembles qui ont le vecteur de A7. Le E♭7 des manuels vient plus loin.
+4. G mineur, A diminué, B♭, C mineur, D mineur, E♭ et F. GA trouve les mêmes sept parmi ses accords empruntés pour G majeur, avec A♯ pour B♭ et D♯ pour E♭.
+
+```text
+== Exercise solutions
+question               course                   GA                       check
+1. Dm in F major       F 2, Bb 2, Gm 1, Am 1    F 2, Bb 2, Gm 1, Am 1    ok
+2. A7, tritone         Eb7                      Eb7                      ok
+  A7: A C# E G; Eb7: Eb G Bb Db
+3. chatbot, A7         Eb7                      Dm7b5                    DIFF
+4. G minor in G        Gm Adim Bb Cm Dm Eb F    Gm Adim A# Cm Dm D# F    DIFF
+```
+
+</details>
+
+## À retenir
+
+- Un substitut fait le travail de l'accord d'origine ; un substitut diatonique partage deux notes avec une triade, sa fondamentale à une tierce. La closure MCP de GA classe les accords d'une tonalité de la même façon, mais sans tonalité elle prend la tonalité majeure de la lettre de la fondamentale, et au commit `a826864` elle perdait les altérations.
+- Deux septièmes de dominante à un triton l'une de l'autre partagent leur triton, et le substitut se résout un demi-ton plus bas. Le test de GA, une tierce majeure et une septième mineure, manquait les neuvièmes et les treizièmes, qui ne portaient pas leur septième au commit `a826864`.
+- Une dominante secondaire est une triade majeure ou une septième de dominante une quinte au-dessus d'un accord majeur ou mineur. La compétence de GA ne vérifie que les fondamentales, et sa distance entre vecteurs d'intervalles change 0 en 1.
+- Classer par distance de vecteur rend ex æquo tous les accords d'un type, et le `OrderBy` stable de LINQ garde l'ordre d'énumération : les cinq substituts du chatbot sont les plus petits nombres sur 12 bits de la classe d'ensembles de l'accord, Dm7♭5 en tête pour chaque septième de dominante. Un classement a besoin d'un départage qui ait un sens.
+- L'emprunt modal puise dans le mineur homonyme, et par extension dans chaque mode homonyme. Le service de GA trouve les mêmes 18 accords que le cours pour C majeur, mais les écrit avec des dièses, retire le ♭ des chiffres romains et attribue chaque accord au premier mode de sa boucle. `ModalInterchange.yaml` a 4 accords sur 13 et 3 chiffres romains sur 6 faux, et son texte arrive dans le chargeur de connaissances YAML de GA, même si rien à `a826864` ne lance le service qui le stockerait avec des embeddings.
+
+## Sources
+
+- Mark Gotham et al., [*Open Music Theory*](https://viva.pressbooks.pub/openmusictheory/), version 2, 2023, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) : chapitres [Modal Mixture](https://viva.pressbooks.pub/openmusictheory/chapter/modal-mixture/), [Substitutions](https://viva.pressbooks.pub/openmusictheory/chapter/substitutions/) et [Tonicization](https://viva.pressbooks.pub/openmusictheory/chapter/tonicization/).
+- Wikipédia : [Chord substitution](https://en.wikipedia.org/wiki/Chord_substitution), qui cite Alfred Blatter, *Revisiting Music Theory*, 2007, et Jerry Coker, *Elements of the Jazz Language for the Developing Improvisor*, 1997.
+- Microsoft Learn : [`Enumerable.OrderBy`](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.orderby).
+- GuitarAlchemist/ga au commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6) : `GaMcpServer/Tools/GaDslTool.cs`, `Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs`, `Common/GA.Business.ML/Agents/Skills/ChordSubstitutionSkill.cs`, `Common/GA.Domain.Services/Atonal/Grothendieck/GrothendieckService.cs`, `Common/GA.Domain.Services/Atonal/Grothendieck/GrothendieckDelta.cs`, `Apps/ga-server/GaApi/Services/ContextualChordService.cs`, `Common/GA.Business.Config/ModalInterchange.yaml`, `Common/GA.Business.Config/YamlKnowledgeLoader.fs`, `GA.Data.MongoDB/Services/DocumentServices/YamlKnowledgeSyncService.cs`, `GA.Data.MongoDB/Extensions/ServiceCollectionExtensions.cs`, `GA.Data.MongoDB/Services/MongoDbService.cs`, `GaCLI/Program.cs`.

@@ -17,6 +17,7 @@ sidebar:
 - [x] Traductions française et espagnole
 - [x] Un pipeline de nettoyage pour les modèles `.glb` générés dans ComfyUI, essayé sur deux modèles Hunyuan3D
 - [x] Deux modèles procéduraux en `bpy`, comparés aux modèles générés
+- [x] Quatre personnages pour la foule d'un moteur de jeu, leur marche portée par les UV
 - [ ] Leçon 5 : scripter avec `bpy`
 
 ## QA
@@ -49,6 +50,7 @@ Chaque ligne est une question que le cours a mesurée. L'hypothèse est celle qu
 | Un aperçu processeur à peu d'échantillons suffit-il à juger un cadrage avant de dépenser du temps GPU ? | Écrite à l'avance, dans l'entrée elle-même : un aperçu à peu d'échantillons suffit à juger un cadrage. | 6,698 s et 7,025 s à 24 échantillons ; le premier cadrage mettait des piliers en travers des anneaux focaux et a été rejeté à vue. | Confirmée pour le cadrage, pas pour la qualité finale de l'image | [2026-09-19](#2026-09-19--cathédrale-orbitale--le-cadrage-avant-la-génération) · [`orbital_cathedral.py`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/scripts/orbital_cathedral.py) |
 | Que rapporte la modélisation en `bpy` face à l'image→3D, pour les deux mêmes objets ? | Non écrite à l'avance comme prédiction : la comparaison était elle-même l'objet de l'exercice. | 3 370 et 5 950 triangles contre 890 140 et 1 017 760 ; 0 arête non manifold contre 19 084 et 189 748 ; pièces nommées, matériaux et animations, pour environ 510 lignes. | Confirmée | [2026-09-22](#2026-09-22--modéliser-en-bpy-face-à-limage3d) · [`atlas_check.py`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/scripts/atlas_check.py) |
 | Une occlusion cuite par sommet vaut-elle ses 40 Ko dans une page temps réel ? | Écrite à l'avance : oui, sur le terme ambiant — c'est pourquoi cette piste a été mesurée en premier. | Sur le terme ambiant, 4 à 5 % des pixels bougent d'une moyenne de 1,2/255 — rien. Sur le terme diffus, à exposition tenue fixe, la dispersion de la luminance croît de 1,44 à 1,95. | Réfutée sur le terme ambiant, confirmée sur le diffus | [2026-09-22](#2026-09-22--occlusion-cuite-dans-les-sommets-et-distinguer-un-effet-réel-dune-image-plus-sombre) · scripts non publiés |
+| La distance d'un sommet au milieu distingue-t-elle le bras d'un personnage de sa jambe ? | Pas écrite à l'avance comme une prédiction : la première version du script le supposait. | Le haut d'une jambe atteint 0,170 m du milieu et le bord intérieur d'un bras à l'épaule 0,145 m : ils se chevauchent sur 0,025 m. Les UV marquent les membres à la place. | Réfutée | [2026-10-04](#2026-10-04--une-foule-pour-un-moteur-de-jeu-sa-marche-portée-par-les-uv) · [`crowd_kit.py`](https://github.com/spareilleux/learn/blob/246c993/code/blender/scripts/crowd_kit.py) |
 
 ## 2026-09-16 — Versions et installation
 
@@ -168,6 +170,24 @@ La question vient d'une autre page de ce projet, le [Banc de Placement](../../ar
 - **Verdict : confirmé.** L'occlusion cuite par sommet achète ici de vraies ombres de contact, pour environ 40 Ko, mais sur la seconde piste seulement : sur le terme diffus, pas sur le seul terme ambiant.
 - **Où cela s'arrête, au même niveau que le résultat.** Trois vues d'une seule scène. Et seuls les 220 dessins statiques sont cuits : une ombre cuite est collée à sa géométrie, si bien qu'un objet déplacé au-dessus d'un sol cuit n'emporte pas son ombre et n'en reçoit pas. La technique ne vaut que pour ce qui ne bouge pas, et qui la reprend doit le savoir avant d'en budgéter les octets.
 - **Non publié.** La cuisson, la page rapiécée et le script de mesure vivent hors du dépôt et ne sont pas publiés ; l'artefact lui-même n'a pas été touché.
+
+## 2026-10-04 — Une foule pour un moteur de jeu, sa marche portée par les UV
+
+Les jardins du palais de la démo [Observatory](../../observatory/) ont reçu une foule clairsemée en version 38 : une centaine de personnes qui marchent en même temps dans une page web. [Godot](https://godotengine.org/) dessine chaque sorte de personnage comme un seul [MultiMesh](https://docs.godotengine.org/en/stable/classes/class_multimesh.html), chaque personne en étant une instance, et un vertex shader fait bouger les membres. Ce shader ne voit ni squelette ni nom de pièce, seulement des sommets : c'est donc le maillage lui-même qui doit dire, sommet par sommet, ce qui bouge et comment. [`scripts/crowd_kit.py`](https://github.com/spareilleux/learn/blob/246c993/code/blender/scripts/crowd_kit.py) construit les quatre personnages avec des boîtes, des tubes effilés et des sphères aplaties, et inscrit la marche dans leurs UV.
+
+| | Courtisan | Dame | Promeneur | Jardinier |
+|---|---|---|---|---|
+| Triangles | 436 | 392 | 380 | 412 |
+| Hauteur | 1,736 m | 1,745 m | 1,736 m | 1,790 m |
+| `.glb` | 19 384 octets | 18 480 octets | 17 900 octets | 18 848 octets |
+| Triangles qui balancent comme les jambes (avec les pieds), comme les bras (avec les mains), comme un tissu qui pend | 64 sous une robe, 80, 48 | 64 sous une robe, 80, 48 | 64, 80, 20 | 64, 80, 20 |
+
+- **Les UV comme canal.** Aucune texture ne les lit : les personnages sont colorés par instance. `u` est le balancement d'une jambe, `+` pour la jambe gauche et `−` pour la droite, sa valeur la foulée : 1, ou 0,6 sous une robe, où le pas est plus court. `±2` marque un bras, qui balance à l'opposé de la jambe de son côté. `v` dit à quelle distance sous la taille pend une robe ou une tunique, 0 à la taille et 1 à l'ourlet, pour son balancement.
+- **La première idée, réfutée.** Les bras devaient d'abord se distinguer des jambes par la distance d'un sommet au milieu. Le [rapport](https://github.com/spareilleux/learn/blob/246c993/code/blender/expected/crowd_kit.txt) montre pourquoi c'est impossible : le haut d'une jambe atteint 0,170 m du milieu, le bord intérieur d'un bras à l'épaule 0,145 m. Ils se chevauchent sur 0,025 m ; le script marque donc les bras avec `±2`.
+- **glTF retourne `v`.** Le `v` de glTF vaut 1 moins celui de Blender : le script stocke 1 − poids, et le moteur lit le poids. Relus par l'importeur de Blender, qui le retourne à nouveau, les trois matériaux reviennent en un seul maillage, et chaque marque et chaque poids sont inchangés.
+- **Un tissu lissé.** En ombrage plat, une robe à douze pans se lisait en jeu comme douze bandes, dont une noire dans l'ombre. La peau et le tissu sont lissés ; chaussures et chapeaux restent plats.
+- **Les mêmes fichiers.** La CI reconstruit les quatre personnages avec les autres scripts. Sur la machine de l'auteur, les fichiers qu'elle écrit sont, octet pour octet, ceux de la version publiée.
+- **Ce que le fichier ne contient pas.** Ni squelette ni animation : la marche vit dans le shader du moteur, qui n'est pas dans ce dépôt. Les visages sont nus exprès, et aucun costume ne vient d'un film ou d'une série.
 
 ## À vérifier
 

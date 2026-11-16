@@ -1,0 +1,27 @@
+{
+  "reviewer": "adversarial",
+  "findings": [
+    {
+      "title": "Invalid operation tokens retain passing proof receipts",
+      "severity": "P2",
+      "file": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py",
+      "line": 160,
+      "why_it_matters": "An invalid operation in an authored packet can still produce a passing model/control proof, so the receipt does not establish that the declared operation vocabulary was followed. WML016 silently treats every token other than add or alter as subtract; MCL016 likewise treats every token other than backup as a forward cursor movement. A nonmutating probe replacing the existing subtract and forward tokens with invalid_operation passed both independent fixed expectations and packet expectations. Explicit vocabulary checks preserve the finite-case scope while rejecting malformed fixture steps.",
+      "autofix_class": "manual",
+      "owner": "downstream-resolver",
+      "requires_verification": true,
+      "suggested_fix": "Before evaluating operations, require MCL016 op values to be exactly note, backup, or forward and WML016 op values to be exactly add, alter, or subtract. Replace the implicit WML016 else deletion with an explicit subtract branch and fail on any unknown token. Add targeted in-memory rejection probes for the existing forward/subtract steps with a misspelled operation.",
+      "confidence": 100,
+      "evidence": [
+        "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py:160 --             else: del degrees[key]",
+        "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py:140 --             cursor+=(-1 if op['op']=='backup' else 1)*op['duration']; states.append(cursor)",
+        "unit-a.json WML016 authored_model.formula declares add/alter/subtract; MCL016 authored_model.formula declares note/backup/forward. These are finite authored operations, not production parser behavior.",
+        "Nonmutating focused probe loaded test_unit_a.py with exec(compile(...)) and deep-copied COURSES. Setting WML016.authored_model.values.operations[2].op from subtract to invalid_operation left UnitA.check_course('WML016') passing, including both fixed and packet assertions and two observations.",
+        "The same focused probe set MCL016.authored_model.values.operations[3].op from forward to invalid_operation. UnitA.check_course('MCL016') also passed both fixed and packet assertions and two observations. Canonical files and the Git index were not changed."
+      ],
+      "pre_existing": false
+    }
+  ],
+  "residual_risks": [],
+  "testing_gaps": []
+}

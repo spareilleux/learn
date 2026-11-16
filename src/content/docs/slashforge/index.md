@@ -55,6 +55,7 @@ The last two rows are the ones to keep in mind. A branch policy is enforced by t
 | 4 | [`/slashforge:code`: ten phases and four gates](04-code-phases-and-gates/) | branch policies, a pull request template |
 | 5 | [`/slashforge:investigate` and `/slashforge:review-pr`](05-investigate-and-review-pr/) | a hotfix process, a bug report, a code review |
 | 6 | [Making it yours: rules, verification, a team install](06-making-it-yours/) | `.editorconfig`, a shared build configuration |
+| 7 | [Contributing back: from a finding to a verified fix](07-contributing-back/) | a bug report, a release note, a regression test |
 | — | [Journal](journal/) | |
 
 ## Resources

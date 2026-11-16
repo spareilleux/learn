@@ -1,0 +1,290 @@
+=== streeling/courses/world-music-languages/en/wml-019-distribute-onsets-with-a-floor-lattice.md ===
+---
+module_id: wml-019-distribute-onsets-with-a-floor-lattice
+department: world-music-languages
+course: "Distribute Onsets with a Floor Lattice"
+level: advanced
+prerequisites: ["wml-006-preserve-the-origin-of-an-additive-cycle"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Distribute Onsets with a Floor Lattice
+
+A rhythm-practice proposal asks for a fixed number of attacks spread across a pulse cycle. Merely preserving the total event count does not specify their spacing. We construct a floor-lattice pattern, inspect all cyclic gaps including the wrap, and apply a declared rotation. The prerequisite already checks whether a supplied grouping’s origin survives translation; this lesson supplies a new construction operation before the origin check.
+
+Take each event index times the pulse count, divide by the event count and round downward. The resulting integer starts distribute the authored events on the grid. Then rotate every start by the same amount and reduce modulo the cycle. Sorting is appropriate for displaying the anchored cycle, while the original event identity would need separate retention if a performance task distinguished individual strokes.
+
+Our verification criterion is deliberately limited to the largest and smallest cyclic gaps differing by at most a single pulse. Do not inflate it into a complete definition of musical evenness or a claim about a named rhythm tradition. The clustered control keeps counts and rotation but fails that criterion. Omitting the wrap gap would hide its largest empty interval. A direct circle drawing therefore provides a useful baseline for any rhythm-generation DSL or agent suggestion. The retained additive-cycle course motivates preserving origin, group order and cultural boundaries. No recording, culturally validated pattern or actual GA rhythm output supplied these authored events.
+
+[Prerequisite](../../world-music-languages/en/wml-006-preserve-the-origin-of-an-additive-cycle.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json)
+
+```json
+{
+  "values": {
+    "pulse_count": 8,
+    "onset_count": 3,
+    "rotation": 1,
+    "policy": "floor_lattice",
+    "supplied_onsets": null
+  },
+  "formula": "base[i]=floor(i*N/K) for i=0..K-1 in floor_lattice, else supplied_onsets; rotated=sorted((base+rotation)%N); gaps=cyclic differences including wrap; balanced=max(gaps)-min(gaps)<=1",
+  "expected": {
+    "base_onsets": [
+      0,
+      2,
+      5
+    ],
+    "rotated_onsets": [
+      1,
+      3,
+      6
+    ],
+    "cyclic_gaps": [
+      2,
+      3,
+      3
+    ],
+    "balanced": true
+  },
+  "negative_control": {
+    "values": {
+      "pulse_count": 8,
+      "onset_count": 3,
+      "rotation": 1,
+      "policy": "supplied",
+      "supplied_onsets": [
+        0,
+        1,
+        2
+      ]
+    },
+    "expected": {
+      "base_onsets": [
+        0,
+        1,
+        2
+      ],
+      "rotated_onsets": [
+        1,
+        2,
+        3
+      ],
+      "cyclic_gaps": [
+        1,
+        1,
+        6
+      ],
+      "balanced": false
+    }
+  }
+}
+```
+
+Assume distinct integer onsets on a uniform cyclic grid and positive counts within capacity. The gap criterion includes wraparound. It is the declared local spacing test, not a complete musical-evenness theorem or a cultural attribution.
+
+Construct every unrotated onset using the floor rule.
+
+Use each event index rather than repeatedly rounding a running sum; the fixed starts are listed above.
+
+Apply the declared rotation without changing event count.
+
+Add the rotation modulo the cycle to every start and sort the resulting distinct anchored positions.
+
+Compute all cyclic gaps, including the final wrap.
+
+The gaps sum to the pulse count and satisfy the displayed maximum-minus-minimum criterion in the main case.
+
+Why does the clustered control fail?
+
+Its wrap gap is much larger than its adjacent gaps despite identical cycle and event counts.
+
+What falsifies a count-only rhythm-preservation claim?
+
+Equal event counts with unequal cyclic gap patterns show that cardinality alone cannot reconstruct the spacing.
+
+Draw both onset circles before assistance. Draft a GA practice instruction retaining generator rule, rotation and cyclic gaps without assigning a tradition.
+=== streeling/courses/world-music-languages/en/wml-008-retain-register-in-drone-relative-intervals.md ===
+---
+module_id: wml-008-retain-register-in-drone-relative-intervals
+department: world-music-languages
+course: "Retain Register in Drone Relative Intervals"
+level: intermediate
+prerequisites: ["wml-007-resolve-scale-degrees-against-tonic-and-mode"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+
+# Retain Register in Drone Relative Intervals
+
+An agent describes every note relative to a drone but reduces intervals modulo an octave. The resulting labels can hide whether a note lies above or below the reference. We retain signed semitone distance and its reduced class as separate fields. The invented example attributes no system, scale or performance convention to a community.
+
+[Prerequisite: wml-007-resolve-scale-degrees-against-tonic-and-mode](../../world-music-languages/en/wml-007-resolve-scale-degrees-against-tonic-and-mode.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/capo-spelling-2026-10-22/degree-context.json)
+
+Stipulate absolute drone coordinate 60 and melody coordinates `[55,67,79]`. Subtract the same reference without reducing first. The signed intervals are `[-5,7,19]` semitones. Negative distance is meaningful: the first note lies below the reference, while the remaining notes lie above.
+
+Give all signed distances and identify the lower note.
+
+> **Answer.** Distances are `[-5,7,19]`; note 55 lies below drone 60.
+
+Reduce each signed interval to a nonnegative class modulo 12. All become 7. This identifies a chosen octave equivalence while discarding direction and register. A reduced-class display may be useful for one task, but it must not claim the three notes occupy the same absolute position or have identical provenance.
+
+What classes result, and what information disappears?
+
+> **Answer.** The classes are `[7,7,7]`; direction and octave displacement are lost.
+
+Recover a note with `note=drone+delta` when signed distance is retained. Adding only reduced class would produce 67 for every row, incorrectly replacing 55 and 79. This is the negative control against a proposed reversible class-only adapter. The lost octave coordinate cannot be restored from an attractive label or confidence score.
+
+Reconstruct the three notes from full distances.
+
+> **Answer.** They are `[55,67,79]`; class-only reconstruction would incorrectly yield `[67,67,67]`.
+
+The retained degree packet already requires tonic register before resolving absolute notes. A drone-relative interface additionally needs the chosen reference identity and range policy, especially when the melody crosses it. These semitone coordinates deliberately exclude frequency-ratio intonation, continuously changing pitch and conventions absent from the authored example.
+
+Does this model establish a universal drone-relative vocabulary?
+
+> **Answer.** No. It establishes only signed and reduced coordinates for the declared equal-tempered example.
+
+A future localized task should retain the original term and declared reference alongside any derived coordinate. Source assistance can verify the subtraction, while a fluent speaker and musician assess terminology and intended realization separately. Our numerical table cannot authorize a cultural equivalence or claim that someone sang or heard the intervals.
+
+What must remain in the handoff to preserve reversibility?
+
+> **Answer.** Reference60, signed distances, coordinate convention and original labels; reduced class7 alone is insufficient.
+=== streeling/courses/world-music-languages/en/wml-006-preserve-the-origin-of-an-additive-cycle.md ===
+---
+module_id: wml-006-preserve-the-origin-of-an-additive-cycle
+department: world-music-languages
+course: "Preserve the Origin of an Additive Cycle"
+level: intermediate
+prerequisites: ["wml-003-term-preservation-and-cultural-review", "mcl-006-preserve-meter-grouping-and-tempo-units"]
+estimated_duration: "40 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Preserve the Origin of an Additive Cycle
+
+> **Draft scope.** Authored pulse groups, exact finite enumeration and primary specification/source reading. Human technical, cultural, musician, fluent-language and learner reviews and deployed course HTML verification remain pending. No recording, performed tradition, translation panel or audio tool was tested.
+
+A localized GA exercise preserves the numbers in an additive rhythm but changes which group starts the bar. Has it preserved the requested pattern? A circular pattern and an anchored practice instruction answer different questions. This lesson gives a reviewer a numerical witness for the change without claiming that any of these invented patterns belongs to a particular musical culture.
+
+[MCL-006](../../musicology/en/mcl-006-preserve-meter-grouping-and-tempo-units.md) separates grouping from total duration and metronome units. The [MusicXML time reference](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/time/) permits additive numerator text. It does not give a translator permission to change the starting point of an authored exercise or attribute its performance to a tradition.
+
+## 1. Keep the bar origin attached
+
+Define seven equally spaced eighth-pulse positions, numbered 0 through 6, and repeat the cycle. In the authored pattern A, group lengths are 2, 2, 3; the group starts are 0, 2, 4. Pattern B uses lengths 3, 2, 2 and starts 0, 3, 5. Pattern C uses lengths 2, 3, 2 and starts 0, 2, 5.
+
+All three total seven pulses. At the fixed bar origin they request different starts. These starts are mathematical grouping markers, not observations of loudness, stress, syllables or a musician's timing. A translator can preserve them while adapting counting prose, but needs an explicit instruction before rebasing them.
+
+### Practice exercise 1: locate a translated change
+
+A source exercise requests A and its translation requests B, both starting at the same bar line. Give the start sets and state what was preserved and changed.
+
+> **Answer:** A starts at 0, 2, 4; B at 0, 3, 5. The total seven-pulse cycle was preserved. The ordered groups and their anchored starts changed. Equal total duration is insufficient to call the translated instruction identical.
+
+## 2. Rebase a circular pattern explicitly
+
+Keep A's circular events but declare its old pulse 4 to be the new origin. Subtract 4 from every old start and reduce modulo 7. The new starts are 0, 3, 5, with successive circular gaps 3, 2, 2: this is B. Rebasing at old pulse 2 instead gives C.
+
+This calculation explains a particular equivalence: the patterns have the same circular gap sequence up to a cyclic choice of group start. It does not make them interchangeable against an unchanged bar line, accompaniment, lyric or other track. Preserve both the chosen equivalence and the origin transformation when comparing records.
+
+### Practice exercise 2: recover the origin transform
+
+Which old A group start becomes B's origin? Calculate the new start set, then explain why silently applying that transform to just one track can change an arrangement.
+
+> **Answer:** Old pulse 4 becomes the origin. Subtracting 4 modulo 7 from 0, 2, 4 gives 3, 5, 0, or sorted starts 0, 3, 5. Rebasing only one track changes its alignment to tracks and bar references that were not rebased. A circular comparison does not erase that relative phase.
+
+## 3. Separate pulse rotations from group-start choices
+
+There are seven possible integer pulse shifts of A. All seven yield distinct onset sets. Only three of those sets include pulse 0 as a group start, corresponding to the three choices of original group boundary. Shifting A forward by 1 gives starts 1, 3, 5: the cycle still repeats every seven pulses, but its new pulse 0 is not a group start.
+
+The [enumeration record](../../../../code/streeling/evidence/meter-picking-2026-10-22/anchored-cycles.json) keeps the shifts and the separately labelled group-start rebases. Treating “three cyclic permutations of the group list” as “all seven pulse phases” would confuse two different sets of comparisons.
+
+### Practice exercise 3: count the right transformations
+
+How many distinct pulse shifts does A have? How many place a group start at pulse 0? Give the starts after a forward shift of 1.
+
+> **Answer:** There are seven distinct shifts, and three include a group start at 0. The shift by 1 gives starts 1, 3, 5. A new origin need not coincide with a grouping event unless that condition is required separately.
+
+## 4. State what a circular code classifies
+
+Choose any three distinct onset positions among the seven labelled pulse positions. Exact enumeration gives 35 anchored sets. Comparing them only up to integer rotation partitions them into five classes, each containing seven sets. This is a finite combinatorial result for this authored population. It is not a distribution of rhythms in recordings or a taxonomy of five traditions.
+
+The three-onset restriction matters. As negative controls, an empty set and a set containing all seven pulses each have only one distinct rotation. Therefore “every pattern has seven distinct phases” is false once the population changes. Labels, event multiplicities, unequal spacing or richer performance data would also define a different classification problem.
+
+### Practice exercise 4: bound the classification
+
+Give the number of anchored three-onset sets and rotation classes in this seven-pulse population. Why does the empty-pattern control reject a universal seven-phase claim, and why do the five classes establish no cultural classification?
+
+> **Answer:** There are 35 anchored sets and five classes of seven. The empty pattern is unchanged by every shift and has only one distinct rotation. These classes come from selected abstract positions and a chosen equivalence, not from evidence about communities, repertoire, musicians or performance practice.
+
+## 5. Preserve notation and attribution separately
+
+The pinned [GA time representation](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Types/MusicXmlTypes.fs#L115-L138) keeps an integer numerator and denominator; it does not retain this lesson's ordered group list or origin transform in those fields. The [selected parser](https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Common/GA.Business.DSL/Parsers/MusicXmlParser.fs#L123-L138) also has the additive-text boundary discussed in MCL-006. This does not prove that every GA subsystem lacks richer data.
+
+### Practice exercise 5: write a localization receipt
+
+What should a review record retain when a translator intentionally changes A to B? Can a matching circular code authorize a named cultural or musical-equivalence claim?
+
+> **Answer:** Retain the original and translated ordered groups, pulse unit, common bar reference, old-origin-to-new-origin transform, affected tracks, reason and reviewer decision. The A-to-B example rebases at old pulse 4. Circular equality alone authorizes no cultural, perceptual or arrangement-equivalence claim. Such claims require appropriate repertoire, musician and language evidence; none was gathered here.
+
+The [prepared learner task](../../../../code/streeling/evidence/meter-picking-2026-10-22/learner-task.md) asks for an explicit origin comparison. Its existence is not an observed learner or cultural review outcome.
+
+=== streeling/courses/world-music-languages/en/wml-012-preserve-direction-in-a-melodic-inventory.md ===
+---
+module_id: wml-012-preserve-direction-in-a-melodic-inventory
+department: world-music-languages
+course: "Preserve Direction in a Melodic Inventory"
+level: intermediate
+prerequisites: ["wml-007-resolve-scale-degrees-against-tonic-and-mode"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Preserve Direction in a Melodic Inventory
+
+A catalog pitch-class set can answer which tones appear somewhere, while failing to answer which are allowed on a particular melodic direction. An agent that replaces two directional inventories with their union can accept a phrase the original model excludes. We construct that loss explicitly for a future GA explanation or grammar proposal. The numbers are authored teaching material; they do not describe a named tradition or authorize conclusions about anyone's performance practice.
+
+Read the retained intonation packet's catalog observations and its separate constructed-frequency fields. The catalog summary is a selected pitch-class representation, not a full melodic grammar. The prerequisite resolves a degree against a declared scale form. Our additional input is direction. We examine a precise finite membership policy, rather than infer that every traditional melody can be described by two unordered sets.
+
+[Prerequisite](../../world-music-languages/en/wml-007-resolve-scale-degrees-against-tonic-and-mode.md)
+
+The ascending inventory is `[0,2,4,7,9]`; the descending inventory is `[0,2,3,7,9]`. Both are offsets in one declared register. Their union is `[0,2,3,4,7,9]`, but that union has no field saying where `3` or `4` was permitted. Keeping provenance separate prevents an authored contrast from becoming a mislabeled ethnomusicological claim.
+
+Which information does the union erase?
+
+It erases that `4` belongs only to the ascending inventory and `3` only to the descending one. The union preserves membership somewhere, not membership by direction.
+
+Use phrase `[0,4,7,4,0]`. Determine direction from each adjacent pair by comparing target and source, then test the target against the corresponding inventory. The first two moves rise, and their targets are allowed. This policy does not constrain jump size or require neighboring scale degrees; it is intentionally narrower than a complete melodic grammar.
+
+What are the first two decisions under this rule?
+
+They are `[true,true]`: targets `4` and `7` belong to the ascending inventory. This says nothing about their stylistic suitability or physical execution.
+
+The move from `7` to `4` descends, and `4` is absent from the descending inventory. The final move to `0` is allowed. Thus the complete decision vector is `[true,true,false,true]`, and phrase acceptance is false. The first failing position is a useful witness that a reviewer can inspect without running a music engine.
+
+Why does the original authored policy reject the phrase?
+
+Its descending move to `4` fails membership. The decision vector is `[true,true,false,true]`, so not all required steps are allowed.
+
+For the negative control, replace both inventories by `[0,2,3,4,7,9]`, their union. The same phrase now gives `[true,true,true,true]` and is accepted. The union itself is unchanged between descriptions, so a test checking only that projection cannot distinguish the original policy from its lossy replacement.
+
+What does the control prove about using a union as a complete policy?
+
+It supplies a phrase accepted after projection but rejected before it. Equal unions cannot establish equivalent directional acceptance rules.
+
+A real musical account might also depend on register, characteristic phrases, context, intonation and source authority. Our small policy intentionally omits those dimensions. A future DSL should first reproduce the manual witness and retain unknowns rather than promoting the simple sets to a normative tradition model. A parser accepting the data would not establish musical validity.
+
+What would falsify a handoff claiming to preserve this directional policy?
+
+If the receiver accepts the main phrase solely from the union while claiming equivalence to the original inventories, the witness contradicts that claim. Broader cultural interpretation still needs appropriate sources and musician review.
+
+Create the direction and membership table manually and repeat with the union control. Inspect the retained catalog boundary and state exactly what that representation can and cannot answer. Propose an advisory directional record and include the rejecting move as a falsifier of a lossy handoff. Keep its invented provenance explicit; do not label the table as a real musical tradition.

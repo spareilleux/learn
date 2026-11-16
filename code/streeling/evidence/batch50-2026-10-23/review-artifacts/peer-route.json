@@ -1,0 +1,16 @@
+{
+  "host_harness": "codex",
+  "host_family": "codex",
+  "target": "claude",
+  "route": "claude",
+  "native_cli": "C:/Users/spare/.local/bin/claude.exe",
+  "subscription_verified": {
+    "loggedIn": true,
+    "authMethod": "claude.ai",
+    "subscriptionType": "max",
+    "apiProvider": "firstParty"
+  },
+  "credential_environment_presence": false,
+  "outcome": "not-run",
+  "reason": "Sanctioned worker requires Bash runtime with provider CLI and Node available; only Windows WSL bash found. Actual WSL command-v discovery found neither claude nor node (only Windows npx), emitted podman permission error. Git Bash paths absent. No peer job started or external review sent; use documented local adversarial fallback."
+}

@@ -59,6 +59,18 @@ public static class Pnml
         {
             var source = (string?)element.Attribute("source") ?? throw new FormatException("An <arc> has no source.");
             var target = (string?)element.Attribute("target") ?? throw new FormatException("An <arc> has no target.");
+            // The P/T grammar has no arc kinds, but tools that model more mark one with a <type> or an
+            // <arctype> child, as an attribute (<type value="inhibitor"/>) or as a label
+            // (<type><text>inhibitor</text></type>). Read as an ordinary arc, an inhibitor or reset arc
+            // would consume tokens it should only test or empty, and the net would change without a word:
+            // refuse any such child that does not say normal, one that says nothing included (lesson 16).
+            // A kind recorded any other way, inside a <toolspecific> block for instance, is not recognised.
+            foreach (var marker in element.Elements().Where(child => child.Name.LocalName is "type" or "arctype"))
+            {
+                var kind = (string?)marker.Attribute("value") ?? Text(marker);
+                if (kind != "normal")
+                    throw new NotSupportedException($"Arc {(string?)element.Attribute("id") ?? $"{source} -> {target}"} is of type {kind ?? "(unstated)"}; the P/T reader reads ordinary arcs only.");
+            }
             var inscription = Text(element.Element(ns + "inscription"));
             arcs.Add(new Arc(source, target, inscription is null ? 1 : int.Parse(inscription.Trim(), CultureInfo.InvariantCulture)));
         }

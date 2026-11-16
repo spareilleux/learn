@@ -6,6 +6,10 @@ sidebar:
   order: 0
 ---
 
+![Arte conceptual: una ciudad subterránea de máquinas en una inmensa caverna. Engranajes de latón gigantes y brazos robóticos se inclinan sobre cúpulas de cristal que guardan forjas incandescentes, una pasarela cruza las paredes de roca, pequeñas siluetas humanas atraviesan el suelo y un pozo circular de luz del día se abre en lo alto.](../../../../assets/machine-learning-ix/ix-machine-city.webp)
+
+*Arte conceptual, no un diagrama: una ciudad subterránea original de máquinas de precisión, inspirada en el planeta-máquina Ix de* Dune, *de Frank Herbert. No muestra nada de los crates IX ni de su código. Generada en la máquina del autor con ComfyUI 0.36.0 y Z-Image-Turbo (licencia Apache 2.0), semilla 20260927; se desenfocó un panel indicador de 36 × 20 píxeles para quitar marcas parecidas a glifos. [Prompt, workflow y tiempos de generación](https://github.com/spareilleux/learn/tree/main/code/site-visuals).*
+
 :::note[Cómo se prueba este curso]
 Cada resultado de este curso lo imprime un programa de [`code/machine-learning-ix`](https://github.com/spareilleux/learn/tree/main/code/machine-learning-ix): un proyecto Cargo que depende de los crates de IX en el commit [`490c395`](https://github.com/GuitarAlchemist/ix/tree/490c39533627d296bf9f8f050e6fafc14d7a20c2). [`.github/workflows/ml-ix-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/ml-ix-examples.yml) ejecuta `cargo fmt`, `clippy`, las pruebas unitarias y cada ejemplo en Linux, Windows y macOS, y compara cada salida con el archivo de `expected/`. Solo en Linux, el mismo workflow recalcula con [numpy](https://numpy.org/doc/stable/) 2.4.2 y [scikit-learn](https://scikit-learn.org/stable/) 1.8.0 los resultados que no dependen de IX, y también los compara. Las salidas de las lecciones se capturaron con Rust 1.94 en Windows en septiembre de 2026, y son las mismas en los tres sistemas.
 :::
@@ -65,7 +69,7 @@ Cada enlace a código de IX en las lecciones apunta a ese commit, así que los n
 
 ## Plan
 
-Las lecciones 1 a 8 están escritas. El resto es el plan, una lección por familia de algoritmos que IX implementa, y cada una se publicará con su código y su comprobación cruzada como las demás.
+Las lecciones 1 a 9 están escritas. El resto es el plan, una lección por familia de algoritmos que IX implementa, y cada una se publicará con su código y su comprobación cruzada como las demás.
 
 | # | Lección | Crates de IX | Si conoces ML.NET |
 |---|---|---|---|
@@ -77,7 +81,7 @@ Las lecciones 1 a 8 están escritas. El resto es el plan, una lección por famil
 | 6 | [Conjuntos: bagging, bosques aleatorios y gradient boosting](06-ensembles/) | `ix-ensemble` | `FastForest`, `LightGbm` |
 | 7 | [Redes neuronales, y las diferencias finitas como juez](07-neural-networks/) | `ix-nn` | — |
 | 8 | [Optimización: descenso, momento, Adam y búsquedas sin gradiente](08-optimization/) | `ix-optimize`, `ix-math` | — |
-| 9 | Los demás reductores: t-SNE, MDS, ACP con núcleo, NMF, LDA | `ix-unsupervised` | — |
+| 9 | [Los demás reductores: MDS, ACP con núcleo, NMF, LDA, t-SNE](09-other-reducers/) | `ix-unsupervised` | — |
 | 10 | Secuencias: cadenas de Markov, modelos ocultos de Markov y Viterbi | `ix-graph` | — |
 | 11 | Contar sin contar: filtros de Bloom, HyperLogLog, count-min, cuco | `ix-probabilistic` | — |
 | 12 | Diferenciación automática: la cinta de Wengert | `ix-autograd` | — |

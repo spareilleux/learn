@@ -18,6 +18,7 @@ sidebar:
 - [x] Lección 7: ciclo de Compound Engineering y aprendizaje duradero
 - [ ] Sesiones de Codex: todas las capturas que necesitan el modelo (límite de uso hasta el 2026-09-19)
 - [ ] Lección 8: trabajar en GuitarAlchemist/ga
+- [x] Un formato de observación para ejecuciones de modelos, skills y subagentes, y su primera observación (2026-09-26)
 
 ## QA
 
@@ -37,10 +38,10 @@ No hay tabla de experimentos: este diario recoge sorpresas y hallazgos de espera
 | Las respuestas JSON-RPC vuelven en el orden en que se pidieron | Cinco líneas enviadas de golpe volvieron desordenadas: el id 4 antes que el id 3 | sesión MCP en crudo del curso | Arreglado esperando cada respuesta en vez de encadenarlas | Reproducido; el protocolo lo permite, el primer código del curso no [2026-09-14](#2026-09-14--el-servidor-mcp-y-sus-pruebas) |
 | `codex exec` sigue aceptando `--full-auto`, como muestran casi todos los tutoriales | La 0.154.0 lo rechaza (`unexpected argument '--full-auto'`); la política de aprobación `untrusted` está retirada y `--approve-for-me` es nueva | CLI de Codex 0.154.0 | Una opción retirada, una política retirada, una opción nueva | Reproducido; `codex mcp-server` también desapareció, y su página de documentación es ya un aviso de retirada [2026-09-14](#2026-09-14--sorpresas-en-codex) |
 | `codex mcp list` dice si un servidor funciona | Imprime «enabled» sin comprobar la conexión, a diferencia de `claude mcp list`, que arranca los servidores que puede | CLI de Codex 0.154.0 | Un estado que no puede fallar | Reproducido [2026-09-14](#2026-09-14--sorpresas-en-codex) |
-| `GetScaleNotes` escribe las notas según la tonalidad pedida | Solo escribe con sostenidos, sea cual sea la tonalidad | `GaMcpServer/Tools/ScaleTool.cs` 50-80 | «F major» da la♯ donde lo correcto es la♭ … si♭ | Reproducido, no reportado [2026-09-14](#2026-09-14--guitaralchemistga-en-el-commit-a826864) |
-| La herramienta acepta las escrituras con bemoles que su propia documentación usa de ejemplo | Las rechaza: `Unknown root note 'Bb'` | `GaMcpServer/Tools/ScaleTool.cs` | El ejemplo de la documentación es la entrada que falla | Reproducido, no reportado [2026-09-14](#2026-09-14--guitaralchemistga-en-el-commit-a826864) |
-| Un modo que no es mayor ni menor devuelve ese modo | Todo lo que no empieza por «minor» se trata como mayor: `D dorian` devuelve re mayor | `GaMcpServer/Tools/ScaleTool.cs` | Capturado en vivo durante la lección | Reproducido, no reportado [2026-09-14](#2026-09-14--guitaralchemistga-en-el-commit-a826864) |
-| Dos herramientas del mismo servidor escriben una nota igual | `get_key_notes("Key of F")` escribe si♭ mientras que `GetScaleNotes` solo escribe con sostenidos | servidor MCP de GA | Dos respuestas a una pregunta, desde un solo servidor | Reproducido, no reportado [2026-09-14](#2026-09-14--guitaralchemistga-en-el-commit-a826864) |
+| `GetScaleNotes` escribe las notas según la tonalidad pedida | Solo escribe con sostenidos, sea cual sea la tonalidad | `GaMcpServer/Tools/ScaleTool.cs` 50-80 | «F major» da la♯ donde lo correcto es la♭ … si♭ | Corregido upstream por [#681](https://github.com/GuitarAlchemist/ga/pull/681), fusionada el 2026-09-23, con pruebas [2026-09-14](#2026-09-14--guitaralchemistga-en-el-commit-a826864), [2026-09-24](#2026-09-24--correcciones-upstream) |
+| La herramienta acepta las escrituras con bemoles que su propia documentación usa de ejemplo | Las rechaza: `Unknown root note 'Bb'` | `GaMcpServer/Tools/ScaleTool.cs` | El ejemplo de la documentación es la entrada que falla | Corregido upstream por [#681](https://github.com/GuitarAlchemist/ga/pull/681), fusionada el 2026-09-23, con pruebas [2026-09-14](#2026-09-14--guitaralchemistga-en-el-commit-a826864), [2026-09-24](#2026-09-24--correcciones-upstream) |
+| Un modo que no es mayor ni menor devuelve ese modo | Todo lo que no empieza por «minor» se trata como mayor: `D dorian` devuelve re mayor | `GaMcpServer/Tools/ScaleTool.cs` | Capturado en vivo durante la lección | Corregido upstream por [#681](https://github.com/GuitarAlchemist/ga/pull/681), fusionada el 2026-09-23, con pruebas [2026-09-14](#2026-09-14--guitaralchemistga-en-el-commit-a826864), [2026-09-24](#2026-09-24--correcciones-upstream) |
+| Dos herramientas del mismo servidor escriben una nota igual | `get_key_notes("Key of F")` escribe si♭ mientras que `GetScaleNotes` solo escribe con sostenidos | servidor MCP de GA | Dos respuestas a una pregunta, desde un solo servidor | Corregido upstream por [#681](https://github.com/GuitarAlchemist/ga/pull/681), fusionada el 2026-09-23, con pruebas [2026-09-14](#2026-09-14--guitaralchemistga-en-el-commit-a826864), [2026-09-24](#2026-09-24--correcciones-upstream) |
 | Un error MCP se devuelve como error | Se devuelve como texto corriente | `GaMcpServer/Tools/ScaleTool.cs` | Ni `isError`, ni excepción: un cliente no puede distinguir el éxito del fallo | Reproducido, no reportado [2026-09-14](#2026-09-14--guitaralchemistga-en-el-commit-a826864) |
 | El `.mcp.json` en la raíz de un repositorio se puede compartir | El de GA contiene rutas absolutas propias de una máquina | raíz del repositorio de GA | Rutas que solo funcionan en una máquina | Reproducido, no reportado [2026-09-14](#2026-09-14--guitaralchemistga-en-el-commit-a826864) |
 
@@ -127,8 +128,75 @@ Hallazgos para el autor de ga; este curso no escribe en ga, y no se ha informado
 - No se usó ningún plugin, credencial ni proveedor de pago. Las ejecuciones Sandcastle y con modelo siguen siendo experimentos manuales.
 - Se documentó el conflicto upstream entre la antigua configuración Sandcastle en `config.json` y las plantillas TypeScript actuales, sin decidirlo en silencio.
 
+## 2026-09-24 — Correcciones upstream
+
+- Las cuatro filas de `ScaleTool` están corregidas upstream por [#681](https://github.com/GuitarAlchemist/ga/pull/681), fusionada el 2026-09-23. `GetScaleNotes` escribe una letra por grado: `F major` da `F G A Bb C D E`, y `Bb major`, el ejemplo de su propia documentación, se acepta y da `Bb C D Eb F G A`. `D dorian` da `D E F G A B C`. Cada caso es una prueba del `ScaleToolTests.cs` de GA, que leí en la rama main de GA sin ejecutarlo.
+- Las dos herramientas coinciden ahora. Una sesión que corregía otros hallazgos de los cursos llamó a `KeyTool.GetKeyNotes` y `ScaleTool.GetScaleNotes` para las 30 tonalidades de `Key.Items`, y escribieron las mismas notas en cada una.
+
+## 2026-09-26 — Un formato de observación para modelos, skills y subagentes
+
+Las notas sobre ejecuciones de agentes derivan hacia la anécdota: «Opus lo hizo más rápido», «el subagente se perdió». Una anécdota mezcla tres cosas: lo que razonó el modelo, lo que el arnés le dejó hacer y quién era dueño del trabajo. El formato de abajo las separa, para que dos observaciones puedan compararse, o declararse no comparables.
+
+**La ficha.** Una fila por ejecución. Un campo que no se tiene se escribe *desconocido*, nunca se adivina.
+
+| Campo | Qué va en él |
+|---|---|
+| Fecha, identificador de ejecución | Fecha y hora locales con su desfase; el identificador de correlación o de sesión |
+| Repositorio | El SHA exacto en que cada repositorio se leyó o se cambió |
+| Arnés | CLI o aplicación y su versión (`claude --version`), y el sistema operativo |
+| Modelo, pedido y observado | Lo que se pidió, y lo que muestra un recibo. Un nombre de modelo mostrado por una interfaz o por el propio agente es *autodeclarado*, no un recibo |
+| Skill o subagente | Nombre y versión, o un resumen criptográfico del archivo; el rol: padre, subagente o agente par |
+| Tarea y contexto | La tarea en una frase; qué contexto se dio (archivos, instrucciones, memoria) |
+| Permisos | El modo de permisos, y qué se permitió o se denegó |
+| Hipótesis | Escrita antes de la ejecución, o marcada como *observación retrospectiva* |
+| Evidencia | El comando, artefacto, registro o código de salida que un lector puede volver a abrir |
+| Resultado y estado | Uno de: enviado, visible, aceptado, completado, verificado de forma independiente |
+| Categoría de fallo | Razonamiento del modelo; lanzador, herramienta, autenticación, permiso o entorno; orquestación o propiedad |
+| Tokens y coste | La cifra y su procedencia: factura del proveedor, estimación del arnés o *desconocido* |
+| Confianza y límites | Tamaño de muestra, y lo que la ejecución no puede mostrar |
+| Reproducibilidad | Lo que necesita una segunda ejecución: mismas entradas, semilla, versiones |
+| Seguimiento | La próxima comprobación, con su responsable |
+
+**Los estados no son intercambiables.**
+- *Enviado*: la petición salió.
+- *Visible*: el destinatario la muestra.
+- *Aceptado*: el destinatario asumió la responsabilidad.
+- *Completado*: dice que terminó.
+- *Verificado de forma independiente*: otra persona volvió a comprobar la evidencia.
+
+Un wrapper que sigue corriendo, una CPU ocupada o un mensaje de «terminado» no prueba ninguno de los dos últimos.
+
+**Las categorías de fallo tampoco.**
+- Un tiempo agotado por un host lento es un fallo de entorno, no del modelo.
+- Una afirmación falsa hecha con todas las herramientas funcionando es un fallo de razonamiento.
+- Dos agentes que escriben el mismo archivo es un fallo de propiedad, sea cual sea el modelo.
+
+**Nada de clasificaciones a partir de anécdotas.** Tareas, presupuestos y contextos distintos no se clasifican entre sí. Una comparación justa de modelos necesita:
+- tareas emparejadas con entradas fijas;
+- ejecuciones o semillas repetidas donde los resultados varían;
+- criterios fijados y cegados antes de las ejecuciones;
+- una comprobación independiente de cada resultado;
+- el coste informado junto a la calidad.
+
+Esa comparación está *propuesta, no realizada*.
+
+**Primera observación: esta delegación, 2026-09-26.** Un coordinador (Codex) entregó a una sesión de Claude Code cuatro instrucciones de curso y un diagnóstico, correlación `test-quality-courses-20260926` y sus vecinas. Solo se registra la evidencia de la que dispone esta sesión.
+
+| Campo | Observación |
+|---|---|
+| Arnés | Claude Code 2.1.282 (`claude --version`, 13:39 EDT). La comprobación previa del coordinador también vio 2.1.282 instalada, mientras el registro de npm ofrecía 2.1.283. No se hizo ninguna actualización ni ningún reinicio |
+| Modelo | Solo autodeclarado: la interfaz de la sesión mostraba «Opus 5.5 (1M context)», razonamiento medio, y su prompt de sistema nombra el mismo modelo. No se comprobó ningún recibo del proveedor |
+| Roles | Codex como coordinador; esta sesión como único escritor en el worktree de learn; un subagente de solo lectura sobre un clon fijado de AutoHarness; un agente par (Augment) para una auditoría estática de solo lectura de Abide, escrita en la carpeta de traspaso compartida |
+| Bus compartido | El coordinador informó que las llamadas status e inbox del bus de mensajes compartido devolvían «Transport closed». Nada muestra que el bus aceptara una reclamación; la coordinación pasó por archivos en una carpeta compartida |
+| Hipótesis | Escritas antes de medir solo para el laboratorio test-quality ([lección 6 de repository-dogfooding](../../repository-dogfooding-lab/06-mutation-property-testing/)); todo lo demás aquí es *observación retrospectiva* |
+| Resultados, por estado | Laboratorio medido y diario escrito: completado, no verificado de forma independiente. La nota de supervisión del coordinador dice que volvió a analizar los informes de mutación y encontró las mismas cifras; es una nueva comprobación de la evidencia registrada, no una nueva ejecución. Diagnóstico de los hooks: completado; el coordinador calificó su causa raíz de hipótesis |
+| Fallos vistos, por categoría | Razonamiento, detectado antes de medir: un generador de entradas malformadas que podía construir una entrada válida. Uso de herramientas, detectado por una comprobación de hash: una edición por script convirtió en silencio un archivo prerregistrado a CRLF, y se revirtió. Lanzador y entorno: un here-document del shell no se pudo analizar, y no se escribió nada; en el host, arrancar un `bash` vacío tardaba unos 2,8 s durante el diagnóstico de los hooks. Orquestación: nada observado; se mantuvo un único escritor por repositorio |
+| Tokens y coste | *Desconocido*. No se leyó ninguna factura ni recibo de uso. No se llamó a ninguna API de pago |
+| Límites | Una sesión, un día, un coordinador; no es muestra de nada |
+
 ## Por verificar
 
+- Aplicar el formato de observación a una segunda delegación independiente, y que alguien distinto de su autor compruebe una ficha contra su evidencia.
 - Los comandos de instalación de la lección 1 en Linux, WSL y macOS, para ambos agentes, y el instalador PowerShell de Codex.
 - Una sesión de Codex que responda a la primera pregunta de la lección 1, y el mismo experimento `AGENTS.md` que en la lección 2.
 - Hooks de Codex: si el ejemplo `config.toml` de la lección 3 funciona en Windows con `command_windows`, y si su ruta relativa funciona cuando Codex arranca en un subdirectorio; el flujo de confianza en `/hooks`.

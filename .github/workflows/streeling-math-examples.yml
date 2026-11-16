@@ -1,0 +1,31 @@
+name: Streeling mathematics examples
+
+on:
+  push:
+    branches: [main]
+    paths: ['code/streeling-mathematics/**', '.github/workflows/streeling-math-examples.yml']
+  pull_request:
+    paths: ['code/streeling-mathematics/**', '.github/workflows/streeling-math-examples.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  rust:
+    name: rust (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - name: Toolchain
+        run: rustup show active-toolchain && cargo --version && rustc -vV
+      # The expected file carries a digest of every computed f64: a diff on one OS is a measured
+      # cross-platform difference (MAT-003 hypothesis P8), not noise to update away.
+      - name: Formatting, clippy, tests and examples
+        run: bash code/streeling-mathematics/check.sh

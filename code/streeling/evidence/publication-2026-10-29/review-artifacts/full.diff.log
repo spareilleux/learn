@@ -1,0 +1,428 @@
+diff --git a/scripts/sync-streeling.mjs b/scripts/sync-streeling.mjs
+index ecda98e0..1e23ec3e 100644
+--- a/scripts/sync-streeling.mjs
++++ b/scripts/sync-streeling.mjs
+@@ -358,95 +358,104 @@ function main() {
+ 			if (dept.catalog) parts.push(`## ${t.catalog}\n`, dept.catalog);
+ 			stage(path.join(OUT[lang], dept.id, 'index.md'), parts.join('\n'));
+ 		}
+ 	}
+ 
+ 	// Nothing is written while a link is broken, so a failed run leaves the previous pages in place.
+ 	if (problems.length) throw new Error(`Relative links must lead to a module or to a file of this repository:\n${problems.join('\n')}`);
+ 	for (const lang of LANGS) cleanOutput(OUT[lang]);
+ 	for (const [file, content] of pending) write(file, content);
+ 
+-	writeOverview(university, departments, origin);
++	writeOverview(university, departments, origin, totals);
+ 	writeJournals(departments);
+ 	writeSidebar(departments, outRoot);
+ 
+ 	// No timestamp: the same source must give the same files, so that a check can regenerate and compare them.
+ 	const lock = {
+ 		source: STREELING,
+ 		copied_from: origin,
+ 		departments: departments.length,
+ 		modules: Object.fromEntries(LANGS.map((lang) => [lang, totals[lang]])),
+ 	};
+ 	write(path.join(outRoot, 'streeling.lock.json'), JSON.stringify(lock, null, 2) + '\n');
+ 
+ 	console.log(`Streeling from ${STREELING}/ (copied from ${origin.repo} at ${origin.commit.slice(0, 7)})`);
+ 	console.log(`  departments: ${departments.length}, modules: ${LANGS.map((lang) => `${totals[lang]} ${lang}`).join(' / ')}`);
+ 	console.log(`  links: ${totals.internal} rewritten to site pages, ${totals.github} pointed at GitHub`);
+ }
+ 
+-function writeOverview(university, departments, origin) {
++function writeOverview(university, departments, origin, totals) {
++	const research = departments.find((department) => department.id === 'ix-research');
++	const extra = research?.modules.length ?? 0;
++	const core = totals.en - extra;
++	const target = (departments.length - Number(Boolean(research))) * 25;
++	const localizedPages = LANGS.reduce((sum, lang) => sum + totals[lang], 0);
++	const totalRow = `| **Total** | **${totals.en}** | **${totals.fr}** | **${totals.es}** |`;
+ 	const short = origin.commit.slice(0, 7);
+ 	const date = origin.commit_date.slice(0, 10);
+ 	const sourceLink = `[\`${SITE_REPO}\` → \`${COURSES}\`](https://github.com/${SITE_REPO}/tree/main/${COURSES})`;
+ 	const originLink = `[\`${origin.repo}\` → \`${origin.path}/courses\`](https://github.com/${origin.repo}/tree/${origin.commit}/${origin.path}/courses)`;
+ 	const supplementLinks = (label) => (origin.supplements ?? []).map((manifest) => `- [${label}](${blobUrl(manifest)})\n`).join('');
+ 	const rows = (lang) =>
+ 		departments
+ 			.map((d) => {
+ 				const translated = TRANSLATIONS.map((t) => d.modules.filter((m) => m[t]).length);
+ 				return `| [${d.label[lang]}](${d.id}/) | ${d.modules.length} | ${translated.join(' | ')} |`;
+ 			})
+ 			.join('\n');
+ 
+ 	write(
+ 		path.join(OUT.en, 'index.md'),
+ 		frontmatter({
+ 			title: 'Streeling University',
+ 			description: 'Modules produced by the Demerzel departments, imported to study them and keep a learning journal.',
+ 			sidebar: { label: 'Overview', order: 0 },
+ 		}) +
++			`## Published course count\n\n**${core} / ${target}** core curriculum modules. Additional IX Research modules: **${extra}**.\n\n**${totals.en}** distinct course modules: English **${totals.en}**, French **${totals.fr}**, Spanish **${totals.es}** — **${localizedPages}** localized lesson pages. Translations are not additional distinct courses.\n\n` +
+ 			`> ${university.mandate}\n\n` +
+ 			`Streeling University is the knowledge layer of [Demerzel](https://github.com/${DEMERZEL}), the governance framework of the GuitarAlchemist ecosystem. Each department is an agent persona that researches its discipline and writes course modules.\n\n` +
+ 			`:::caution[Generated content]\nThese modules were written by AI departments and have **not been reviewed**. Unlike the other courses on this site, nothing here has been tested on my machine yet — my [journal](journal/) tracks what I have actually studied and verified.\n:::\n\n` +
+-			`## Departments\n\n| Department | Modules | French | Spanish |\n|---|---|---|---|\n${rows('en')}\n\n` +
++			`## Departments\n\n| Department | Modules | French | Spanish |\n|---|---|---|---|\n${rows('en')}\n${totalRow}\n\n` +
+ 			`## Provenance\n\n- Initial source copy: ${sourceLink}, copied from ${originLink} at commit \`${short}\` (${date}), MIT license.\n` +
+ 			supplementLinks('Additional source provenance') +
+ 			`- Generated with \`npm run sync:streeling\` from \`${STREELING}/\`: change a module there, not on these pages — only \`journal.md\` is kept between syncs.\n`,
+ 	);
+ 
+ 	write(
+ 		path.join(OUT.fr, 'index.md'),
+ 		frontmatter({
+ 			title: 'Streeling University',
+ 			description: 'Modules produits par les départements de Demerzel, importés pour les étudier et tenir un journal.',
+ 			sidebar: { label: 'Présentation', order: 0 },
+ 		}) +
++			`## Nombre de cours publiés\n\n**${core} / ${target}** modules du programme. Modules IX Research hors quota : **${extra}**.\n\n**${totals.en}** cours distincts : anglais **${totals.en}**, français **${totals.fr}**, espagnol **${totals.es}** — **${localizedPages}** pages de cours au total. Les traductions ne sont pas des cours supplémentaires.\n\n` +
+ 			`> ${university.mandate}\n\n` +
+ 			`Streeling University est la couche de connaissances de [Demerzel](https://github.com/${DEMERZEL}), le cadre de gouvernance de l'écosystème GuitarAlchemist. Chaque département est une persona d'agent qui étudie sa discipline et rédige des modules de cours.\n\n` +
+ 			`:::caution[Contenu généré]\nCes modules ont été écrits par des départements IA et **n'ont pas été relus**. Contrairement aux autres cours du site, rien ici n'a encore été testé sur ma machine — mon [journal](journal/) suit ce que j'ai réellement étudié et vérifié.\n:::\n\n` +
+-			`## Départements\n\n| Département | Modules | En français | En espagnol |\n|---|---|---|---|\n${rows('fr')}\n\n` +
++			`## Départements\n\n| Département | Modules | En français | En espagnol |\n|---|---|---|---|\n${rows('fr')}\n${totalRow}\n\n` +
+ 			`## Provenance\n\n- Copie initiale des sources : ${sourceLink}, copiée depuis ${originLink} au commit \`${short}\` (${date}), licence MIT.\n` +
+ 			supplementLinks('Provenance des sources supplémentaires') +
+ 			`- Généré avec \`npm run sync:streeling\` depuis \`${STREELING}/\` : on modifie un module là, pas sur ces pages — seul \`journal.md\` est conservé entre deux synchronisations.\n`,
+ 	);
+ 
+ 	write(
+ 		path.join(OUT.es, 'index.md'),
+ 		frontmatter({
+ 			title: 'Streeling University',
+ 			description: 'Módulos producidos por los departamentos de Demerzel, importados para estudiarlos y llevar un diario de aprendizaje.',
+ 			sidebar: { label: 'Presentación', order: 0 },
+ 		}) +
++			`## Recuento de cursos publicados\n\n**${core} / ${target}** módulos del programa. Módulos adicionales de IX Research: **${extra}**.\n\n**${totals.en}** cursos distintos: inglés **${totals.en}**, francés **${totals.fr}**, español **${totals.es}** — **${localizedPages}** páginas de cursos en total. Las traducciones no son cursos adicionales.\n\n` +
+ 			`> ${university.mandate}\n\n` +
+ 			`Streeling University es la capa de conocimiento de [Demerzel](https://github.com/${DEMERZEL}), el marco de gobernanza del ecosistema GuitarAlchemist. Cada departamento es una persona de agente que investiga su disciplina y redacta módulos de curso.\n\n` +
+ 			`:::caution[Contenido generado]\nEstos módulos fueron escritos por departamentos de IA y **no han sido revisados**. A diferencia de los demás cursos del sitio, nada de lo que hay aquí se ha probado todavía en mi máquina — mi [diario](journal/) registra lo que realmente he estudiado y verificado.\n:::\n\n` +
+-			`## Departamentos\n\n| Departamento | Módulos | En francés | En español |\n|---|---|---|---|\n${rows('es')}\n\n` +
++			`## Departamentos\n\n| Departamento | Módulos | En francés | En español |\n|---|---|---|---|\n${rows('es')}\n${totalRow}\n\n` +
+ 			`## Procedencia\n\n- Copia inicial de las fuentes: ${sourceLink}, copiada de ${originLink} en el commit \`${short}\` (${date}), licencia MIT.\n` +
+ 			supplementLinks('Procedencia de las fuentes adicionales') +
+ 			`- Generado con \`npm run sync:streeling\` desde \`${STREELING}/\`: se modifica un módulo allí, no en estas páginas — solo \`journal.md\` se conserva entre sincronizaciones.\n`,
+ 	);
+ }
+ 
+ function writeJournals(departments) {
+ 	const all = departments.flatMap((d) => d.modules);
+ 	const checklist = (lang) =>
+ 		departments
+diff --git a/scripts/tests/streeling-nav-counts.test.mjs b/scripts/tests/streeling-nav-counts.test.mjs
+new file mode 100644
+index 00000000..dd9bc4a0
+--- /dev/null
++++ b/scripts/tests/streeling-nav-counts.test.mjs
+@@ -0,0 +1,82 @@
++import assert from 'node:assert/strict';
++import { test } from 'node:test';
++import { countDepartmentCourses, streelingLinkIdentity, updateStreelingNavCounts } from '../../src/scripts/streeling-nav-counts.mjs';
++
++const options = { baseUrl: '/learn/', pageUrl: 'https://example.test/learn/fr/streeling/' };
++
++test('published course identities handle base paths, locales, relative links and URL suffixes', () => {
++  assert.deepEqual(streelingLinkIdentity('/learn/es/streeling/music/mus-001/?from=nav#task', options), { department: 'music', course: 'mus-001' });
++  assert.deepEqual(streelingLinkIdentity('music/mus-001/', options), { department: 'music', course: 'mus-001' });
++  assert.deepEqual(streelingLinkIdentity('/campus/docs/en/streeling/music/mus-001/', { baseUrl: '/campus/docs/', pageUrl: 'https://example.test/campus/docs/' }), { department: 'music', course: 'mus-001' });
++  assert.deepEqual(streelingLinkIdentity('/streeling/music/', { baseUrl: '/', pageUrl: 'https://example.test/' }), { department: 'music', course: null });
++});
++
++test('each department counts unique published course URLs and retains empty departments', () => {
++  const counts = countDepartmentCourses([
++    '/learn/fr/streeling/music/', '/learn/fr/streeling/music/mus-001/',
++    '/learn/fr/streeling/music/mus-001/#exercise', '/learn/es/streeling/music/mus-001/',
++    '/learn/fr/streeling/music/mus-002/', '/learn/fr/streeling/empty/',
++    '/learn/fr/streeling/', '/learn/fr/streeling/journal/',
++    '/learn/fr/streeling/music/journal/', '/learn/fr/streeling/music/overview/',
++    '/learn/fr/streeling/music/index/', '/learn/fr/streeling/music/mus-003/lesson/',
++    '/learn/fr/streeling/music/resources/', '/learn/fr/streeling/music/mus-0010/',
++    '/learn/fr/method/', 'https://external.test/learn/fr/streeling/music/mus-004/',
++    '/another-base/fr/streeling/music/mus-005/', 'mailto:music@example.test',
++  ], options);
++  assert.deepEqual([...counts], [['music', 2], ['empty', 0]]);
++});
++
++// A small DOM fixture keeps these tests dependency-free while exercising the production updater.
++function navigationFixture(lang = 'en') {
++  const document = {
++    baseURI: options.pageUrl,
++    documentElement: { lang },
++    createElement: () => ({ setAttribute(name, value) { this[name] = value; } }),
++  };
++  function group(hrefs) {
++    const badges = [];
++    const label = { append: (badge) => badges.push(badge), querySelector: () => badges[0] ?? null };
++    const summary = { querySelector: () => label };
++    const details = { querySelector: () => summary, querySelectorAll: () => links };
++    const links = hrefs.map((href) => ({ getAttribute: () => href, closest: () => details }));
++    return { details, links, badges };
++  }
++  function tree(groups) {
++    return {
++      ownerDocument: document,
++      dataset: { streelingBase: '/learn/' },
++      querySelectorAll: (selector) => selector === 'a[href]' ? groups.flatMap((group) => group.links) : groups.map((group) => group.details),
++    };
++  }
++  const music = group(['/learn/fr/streeling/music/', '/learn/fr/streeling/music/mus-001/', '/learn/fr/streeling/music/mus-001/#task']);
++  const empty = group(['/learn/fr/streeling/empty/']);
++  const dialogMusic = group(['/learn/fr/streeling/music/', '/learn/fr/streeling/music/mus-001/']);
++  const trees = [tree([music, empty]), tree([dialogMusic])];
++  const root = { querySelectorAll: (selector) => { assert.equal(selector, '[data-streeling-nav]'); return trees; } };
++  return { root, music, empty, dialogMusic };
++}
++
++test('initialization scopes counts to each nav tree, retains zero and reuses its badge', () => {
++  const fixture = navigationFixture('fr');
++  updateStreelingNavCounts(fixture.root);
++  updateStreelingNavCounts(fixture.root);
++  assert.equal(fixture.music.badges.length, 1);
++  assert.equal(fixture.music.badges[0].textContent, '(1)');
++  assert.equal(fixture.music.badges[0]['aria-label'], '1 cours publié');
++  assert.equal(fixture.empty.badges[0].textContent, '(0)');
++  assert.equal(fixture.dialogMusic.badges[0].textContent, '(1)');
++  fixture.music.links.push({ getAttribute: () => '/learn/fr/streeling/music/mus-002/', closest: () => fixture.music.details });
++  updateStreelingNavCounts(fixture.root);
++  assert.equal(fixture.music.badges.length, 1);
++  assert.equal(fixture.music.badges[0].textContent, '(2)');
++  assert.equal(fixture.music.badges[0]['aria-label'], '2 cours publiés');
++  assert.equal(fixture.dialogMusic.badges[0].textContent, '(1)');
++});
++
++test('badge descriptions follow the document language', () => {
++  for (const [lang, label] of [['en', '1 published course'], ['es', '1 curso publicado']]) {
++    const fixture = navigationFixture(lang);
++    updateStreelingNavCounts(fixture.root);
++    assert.equal(fixture.music.badges[0]['aria-label'], label);
++  }
++});
+diff --git a/scripts/tests/sync-streeling.test.mjs b/scripts/tests/sync-streeling.test.mjs
+index f763bfce..43012304 100644
+--- a/scripts/tests/sync-streeling.test.mjs
++++ b/scripts/tests/sync-streeling.test.mjs
+@@ -133,20 +133,48 @@ test('translations are neither invented nor hidden', () => {
+ 				.sort();
+ 			assert.deepEqual(modules, HAS_PAGE[lang], `${site} ${lang} module pages`);
+ 			for (const [dept, ids] of [['alpha', ['alp-001', 'alp-002']], ['beta', ['bet-001']]]) {
+ 				const index = page(site, lang, path.join(dept, 'index.md'));
+ 				for (const id of ids) assert.ok(index.includes(`](${id}/)`), `${site} ${lang} ${dept} index lists ${id}`);
+ 			}
+ 		}
+ 	}
+ });
+ 
++test('the public overview shows distinct modules and actual translation totals', () => {
++	const headings = { en: 'Published course count', fr: 'Nombre de cours publiés', es: 'Recuento de cursos publicados' };
++	for (const lang of LANGS) {
++		const overview = page('fresh', lang, 'index.md');
++		assert.ok(overview.includes(`## ${headings[lang]}`), `${lang} visible count heading`);
++		assert.ok(overview.includes('**3 / 50**'), `${lang} three core modules across two departments`);
++		assert.ok(overview.includes('**3**'), `${lang} distinct modules`);
++		assert.ok(overview.includes('| **Total** | **3** | **2** | **1** |'), `${lang} counts actual translations, not English fallbacks`);
++		assert.ok(overview.includes('**6**'), `${lang} six localized lesson pages, not six courses`);
++	}
++});
++
++test('IX Research is published but stays outside the departmental quota', () => {
++	const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'streeling-extra-'));
++	const source = makeSource(path.join(dir, 'source'), {
++		'streeling/departments/ix-research.department.json': JSON.stringify({ full_name: 'IX Research' }),
++		'streeling/courses/ix-research/en/ixr-001-extra.md': moduleFile('ixr-001', 'Extra research', [], 'An optional research module.'),
++	});
++	const destination = path.join(dir, 'site');
++	sync(source, destination);
++	for (const lang of LANGS) {
++		const overview = fs.readFileSync(path.join(destination, DOCS[lang], 'index.md'), 'utf8');
++		assert.ok(overview.includes('**3 / 50**'), `${lang} optional research does not enlarge the quota`);
++		assert.ok(overview.includes('| **Total** | **4** | **2** | **1** |'), `${lang} optional module is still included in published totals`);
++		assert.ok(overview.includes('**7**'), `${lang} seven actual localized pages`);
++	}
++});
++
+ test('hand-written journals are left alone', () => {
+ 	for (const lang of LANGS) {
+ 		assert.equal(page('kept', lang, 'journal.md'), `hand-written ${lang} journal\n`);
+ 	}
+ });
+ 
+ test('generated course banners localize the duration unit', () => {
+ 	for (const [lang, duration] of Object.entries({ en: '35 minutes', fr: '35 minutes', es: '35 minutos' })) {
+ 		assert.ok(page('fresh', lang, 'alpha/alp-001.md').includes(` · ${duration}`), `${lang} banner should contain ${duration}`);
+ 	}
+diff --git a/src/components/GlobalMenu.astro b/src/components/GlobalMenu.astro
+index c1c98a2b..ad69843e 100644
+--- a/src/components/GlobalMenu.astro
++++ b/src/components/GlobalMenu.astro
+@@ -8,23 +8,24 @@ const label = lang.startsWith('fr') ? 'Menu global' : lang.startsWith('es') ? 'M
+ const close = lang.startsWith('fr') ? 'Fermer le menu' : lang.startsWith('es') ? 'Cerrar el menú' : 'Close menu';
+ ---
+ <button type="button" class:list={['global-menu-button', { 'docs-menu': hasSidebar }]} aria-haspopup="dialog" aria-controls="learn-global-menu" aria-expanded="false">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
+  <span>{label}</span>
+ </button>
+ <dialog id="learn-global-menu" aria-label={label}>
+  <div class="global-menu-heading"><strong>{label}</strong><button type="button" class="global-menu-close" autofocus>{close}</button></div>
+  <GlobalLinks />
+  <div class="global-preferences"><ThemeSelect /><LanguageSelect /></div>
+- <nav aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}><SidebarSublist sublist={sidebar} /></nav>
++ <nav aria-label={Astro.locals.t('sidebarNav.accessibleLabel')} data-streeling-nav data-streeling-base={import.meta.env.BASE_URL}><SidebarSublist sublist={sidebar} /></nav>
+ </dialog>
+ <script>
++ import '../scripts/streeling-nav-counts.mjs';
+  const dialog = document.querySelector<HTMLDialogElement>('#learn-global-menu');
+  const button = document.querySelector<HTMLButtonElement>('.global-menu-button');
+  if (dialog && button) {
+   const close = () => { if (dialog.open) dialog.close(); button.setAttribute('aria-expanded', 'false'); };
+   button.addEventListener('click', () => { dialog.showModal(); button.setAttribute('aria-expanded', 'true'); });
+   dialog.querySelector('.global-menu-close')?.addEventListener('click', close);
+   dialog.addEventListener('close', () => button.setAttribute('aria-expanded', 'false'));
+   dialog.addEventListener('click', (event) => { if ((event.target as Element).closest('a[href]')) close(); });
+   dialog.addEventListener('change', close);
+   window.addEventListener('pagehide', close);
+diff --git a/src/components/Sidebar.astro b/src/components/Sidebar.astro
+index 773c7014..d827a488 100644
+--- a/src/components/Sidebar.astro
++++ b/src/components/Sidebar.astro
+@@ -1,6 +1,11 @@
+ ---
+ import Default from '@astrojs/starlight/components/Sidebar.astro';
+ import GlobalLinks from './GlobalLinks.astro';
+ ---
+ <GlobalLinks />
+-<Default><slot /></Default>
++<div data-streeling-nav data-streeling-base={import.meta.env.BASE_URL}>
++ <Default><slot /></Default>
++</div>
++<script>
++ import '../scripts/streeling-nav-counts.mjs';
++</script>
+diff --git a/src/scripts/streeling-nav-counts.mjs b/src/scripts/streeling-nav-counts.mjs
+new file mode 100644
+index 00000000..f1353bef
+--- /dev/null
++++ b/src/scripts/streeling-nav-counts.mjs
+@@ -0,0 +1,77 @@
++/** Identify published Streeling department indexes and course leaves, independently of labels. */
++export function streelingLinkIdentity(href, { baseUrl, pageUrl }) {
++  if (!href) return null;
++  let url;
++  try {
++    url = new URL(href, pageUrl);
++  } catch {
++    return null;
++  }
++  if (url.origin !== new URL(pageUrl).origin) return null;
++  const base = new URL(baseUrl, pageUrl).pathname.replace(/\/$/, '');
++  if (base && !url.pathname.startsWith(`${base}/`)) return null;
++  const segments = url.pathname.slice(base.length).split('/').filter(Boolean);
++  if (['en', 'fr', 'es'].includes(segments[0])) segments.shift();
++  if (segments[0] !== 'streeling' || segments.length < 2 || segments.length > 3) return null;
++  const [, department, course = null] = segments;
++  if (course && !/^[a-z]+-\d{3}(?:-|$)/i.test(course)) return null;
++  const excluded = ['index', 'overview', 'journal'];
++  if (excluded.includes(department) || (course && excluded.includes(course))) return null;
++  return { department, course };
++}
++
++/** Deduplicate repeated anchors (including locale variants) within one published navigation tree. */
++export function countDepartmentCourses(hrefs, options) {
++  const inventory = new Map();
++  for (const href of hrefs) {
++    const identity = streelingLinkIdentity(href, options);
++    if (!identity) continue;
++    if (!inventory.has(identity.department)) inventory.set(identity.department, new Set());
++    if (identity.course) inventory.get(identity.department).add(identity.course);
++  }
++  return new Map([...inventory].map(([department, courses]) => [department, courses.size]));
++}
++
++function countLabel(count, lang) {
++  if (lang.startsWith('fr')) return `${count} cours publié${count === 1 ? '' : 's'}`;
++  if (lang.startsWith('es')) return `${count} curso${count === 1 ? '' : 's'} publicado${count === 1 ? '' : 's'}`;
++  return `${count} published course${count === 1 ? '' : 's'}`;
++}
++
++export function updateStreelingNavCounts(root = document) {
++  for (const navigation of root.querySelectorAll('[data-streeling-nav]')) {
++    const document = navigation.ownerDocument;
++    const options = { baseUrl: navigation.dataset.streelingBase || '/', pageUrl: document.baseURI };
++    const counts = countDepartmentCourses(
++      [...navigation.querySelectorAll('a[href]')].map((link) => link.getAttribute('href')),
++      options,
++    );
++    for (const group of navigation.querySelectorAll('details')) {
++      const departments = new Set(
++        [...group.querySelectorAll('a[href]')]
++          .filter((link) => link.closest('details') === group)
++          .map((link) => streelingLinkIdentity(link.getAttribute('href'), options)?.department)
++          .filter(Boolean),
++      );
++      if (departments.size !== 1) continue;
++      const department = [...departments][0];
++      const summary = group.querySelector(':scope > summary');
++      const label = summary?.querySelector('.group-label');
++      if (!label) continue;
++      let badge = label.querySelector('[data-streeling-count]');
++      if (!badge) {
++        badge = document.createElement('span');
++        badge.setAttribute('data-streeling-count', '');
++        label.append(badge);
++      }
++      const count = counts.get(department) ?? 0;
++      badge.textContent = `(${count})`;
++      badge.setAttribute('aria-label', countLabel(count, document.documentElement.lang));
++    }
++  }
++}
++
++if (typeof document !== 'undefined') {
++  updateStreelingNavCounts();
++  document.addEventListener('astro:page-load', () => updateStreelingNavCounts());
++}
+diff --git a/src/styles/custom.css b/src/styles/custom.css
+index 7740fba2..c8a84324 100644
+--- a/src/styles/custom.css
++++ b/src/styles/custom.css
+@@ -28,26 +28,38 @@
+ 	}
+ }
+ 
+ /*
+  * Starlight renders Markdown tables as scrollable blocks sized to their content,
+  * so a page that opens with a short table looks narrower than its neighbours.
+  * From 72rem (where the table of contents appears) tables span the whole column;
+  * phones and tablets keep Starlight's horizontal scrolling.
+  */
+ @media (min-width: 72rem) {
++	:root {
++		--sl-sidebar-width: 22rem;
++	}
+ 	.sl-markdown-content table:not(:where(.not-content *)) {
+ 		display: table;
+ 		width: 100%;
+ 	}
+ }
+ 
++[data-streeling-nav] [data-streeling-count] {
++	display: inline-block;
++	margin-inline-start: .35em;
++	font-size: .8em;
++	font-weight: 400;
++	white-space: nowrap;
++	color: var(--sl-color-gray-2);
++}
++
+ /*
+  * Collapsed left sidebar (button in src/components/SiteTitle.astro), from 50rem where Starlight shows the sidebar.
+  * The content takes the freed space; phones and tablets keep Starlight's menu.
+  */
+ @media (min-width: 50rem) {
+ 	:root[data-sidebar-collapsed][data-has-sidebar] {
+ 		--sl-content-inline-start: 0rem;
+ 	}
+ 	:root[data-sidebar-collapsed] .sidebar-pane {
+ 		display: none;

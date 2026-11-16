@@ -1,0 +1,53 @@
+
+   _____ _              _               _   _ ______ _______  
+  / ____| |            | |             | \ | |  ____|__   __| 
+ | (___ | |_ _ __ _   _| | _____ _ __  |  \| | |__     | |    
+  \___ \| __| '__| | | | |/ / _ \ '__| | . ` |  __|    | |    
+  ____) | |_| |  | |_| |   <  __/ |    | |\  | |____   | |    
+ |_____/ \__|_|   \__, |_|\_\___|_| (_)|_| \_|______|  |_|    
+                   __/ |                                      
+                  |___/                                       
+
+
+Version: 5.0.0
+
+[12:24:48 INF] Stryker will use a max of 2 parallel testsessions.
+[12:24:48 INF] Analysis starting.
+[12:24:48 INF] Analyzing 1 test project(s).
+[12:25:02 INF] Picking net10.0 for project C:\tmp\ga-test-quality\Common\GA.Domain.Core\GA.Domain.Core.csproj. 
+[12:25:02 INF] Found project C:\tmp\ga-test-quality\Common\GA.Domain.Core\GA.Domain.Core.csproj to mutate.
+[12:25:02 INF] Analysis complete.
+[12:25:02 INF] Building test project C:\tmp\ga-test-quality\Tests\GA.Domain.Core.Tests\GA.Domain.Core.Tests.csproj (1/1)
+[12:25:04 INF] Building project GA.Domain.Core.Tests.csproj using dotnet build GA.Domain.Core.Tests.csproj -c Debug --property:Platform=AnyCPU (directory C:\tmp\ga-test-quality\Tests\GA.Domain.Core.Tests.)
+[12:25:32 INF] Number of tests found: 704 for project C:\tmp\ga-test-quality\Common\GA.Domain.Core\GA.Domain.Core.csproj. Initial test run started.
+[12:25:44 WRN] An unidentified mutation in C:\tmp\ga-test-quality\Common\GA.Domain.Core\Instruments\Primitives\RelativeFretVector.cs resulted in a compile error (at 31:38) with id: CS0411, message: The type arguments for method 'Enumerable.Select<TSource, TResult>(IEnumerable<TSource>, Func<TSource, int, TResult>)' cannot be inferred from the usage. Try specifying the type arguments explicitly. (Source code: Select)
+[12:25:44 INF] Safe Mode! Stryker will remove all mutations in ToFretVector and mark them as 'compile error'.
+[12:25:44 WRN] An unidentified mutation in C:\tmp\ga-test-quality\Common\GA.Domain.Core\Theory\Harmony\ChordTemplate.cs resulted in a compile error (at 78:24) with id: CS0411, message: The type arguments for method 'Enumerable.Select<TSource, TResult>(IEnumerable<TSource>, Func<TSource, int, TResult>)' cannot be inferred from the usage. Try specifying the type arguments explicitly. (Source code: Select)
+[12:25:44 INF] Safe Mode! Stryker will remove all mutations in FromPitchClassSet and mark them as 'compile error'.
+[12:25:44 WRN] An unidentified mutation in C:\tmp\ga-test-quality\Common\GA.Domain.Core\Theory\Harmony\ChordTemplate.cs resulted in a compile error (at 78:152) with id: CS0411, message: The type arguments for method 'Enumerable.Select<TSource, TResult>(IEnumerable<TSource>, Func<TSource, int, TResult>)' cannot be inferred from the usage. Try specifying the type arguments explicitly. (Source code: Select)
+[12:25:44 INF] Safe Mode! Stryker will remove all mutations in FromPitchClassSet and mark them as 'compile error'.
+[12:25:44 WRN] An unidentified mutation in C:\tmp\ga-test-quality\Common\GA.Domain.Core\Theory\Atonal\ModalFamily.cs resulted in a compile error (at 116:45) with id: CS0411, message: The type arguments for method 'Enumerable.ToLookup<TSource, TKey>(IEnumerable<TSource>, Func<TSource, TKey>)' cannot be inferred from the usage. Try specifying the type arguments explicitly. (Source code: ToLookup)
+[12:25:44 INF] Safe Mode! Stryker will remove all mutations in GetEnumerator and mark them as 'compile error'.
+[12:25:49 INF] 4781 mutants created
+[12:25:49 INF] Capture mutant coverage using 'CoverageBasedTest' mode.
+[12:26:11 INF] 2     mutants got status CompileError. Reason: Could not be injected in code.
+[12:26:11 INF] 301   mutants got status CompileError. Reason: Mutant caused compile errors
+[12:26:11 INF] 5     mutants got status NoCoverage.   Reason: Not covered by any test.
+[12:26:11 INF] 9     mutants got status Ignored.      Reason: Removed by block already covered filter
+[12:26:11 INF] 4439  mutants got status Ignored.      Reason: Removed by mutate filter
+[12:26:11 INF] 4756  total mutants are skipped for the above mentioned reasons
+[12:26:11 INF] 25    total mutants will be tested
+
+
+All mutants have been tested, and your mutation score has been calculated
+…
+Your json report has been generated at:
+<scratch>
+  (Stryker B output folder)/reports/mutation-report.js
+on
+
+Your Markdown summary has been generated at:
+<scratch>
+  (Stryker B output folder)/reports/mutation-report.md
+[12:26:31 INF] Time Elapsed 00:01:43.4988752
+[12:26:31 INF] The final mutation score is 83.33 %

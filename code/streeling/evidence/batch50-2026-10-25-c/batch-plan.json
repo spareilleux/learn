@@ -1,0 +1,625 @@
+{
+  "execution": "knowledge-work with independently reviewed claim-test substep",
+  "base_learn_commit": "d687c942ccb1be716375280d112744dcc89cf920",
+  "publication_base": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+  "source_catalog_base": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+  "baseline_core": 431,
+  "target": 525,
+  "original_departments": 21,
+  "batch_new_english_modules": 50,
+  "batch_locale_sources": 150,
+  "expected_core_after": 481,
+  "expected_remaining": 44,
+  "expected_locale_counts": {
+    "en": 482,
+    "fr": 482,
+    "es": 482
+  },
+  "units": {
+    "a": 18,
+    "b": 16,
+    "c": 16
+  },
+  "courses": [
+    {
+      "unit": "a",
+      "code": "AUD022",
+      "department": "audio-engineering",
+      "module_id": "aud-022-flush-the-tail-of-a-finite-convolution",
+      "title": "Flush the Tail of a Finite Convolution",
+      "source_paths": {
+        "en": "streeling/courses/audio-engineering/en/aud-022-flush-the-tail-of-a-finite-convolution.md",
+        "fr": "streeling/courses/audio-engineering/fr/aud-022-flush-the-tail-of-a-finite-convolution.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-022-flush-the-tail-of-a-finite-convolution.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "AUD023",
+      "department": "audio-engineering",
+      "module_id": "aud-023-distinguish-allpass-magnitude-from-phase",
+      "title": "Distinguish Allpass Magnitude from Phase",
+      "source_paths": {
+        "en": "streeling/courses/audio-engineering/en/aud-023-distinguish-allpass-magnitude-from-phase.md",
+        "fr": "streeling/courses/audio-engineering/fr/aud-023-distinguish-allpass-magnitude-from-phase.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-023-distinguish-allpass-magnitude-from-phase.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "AUD024",
+      "department": "audio-engineering",
+      "module_id": "aud-024-prewarp-a-bilinear-filter-cutoff",
+      "title": "Prewarp a Bilinear Filter Cutoff",
+      "source_paths": {
+        "en": "streeling/courses/audio-engineering/en/aud-024-prewarp-a-bilinear-filter-cutoff.md",
+        "fr": "streeling/courses/audio-engineering/fr/aud-024-prewarp-a-bilinear-filter-cutoff.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-024-prewarp-a-bilinear-filter-cutoff.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "AUD025",
+      "department": "audio-engineering",
+      "module_id": "aud-025-separate-subtractive-dither-error-from-bias",
+      "title": "Separate Subtractive-Dither Error from Bias",
+      "source_paths": {
+        "en": "streeling/courses/audio-engineering/en/aud-025-separate-subtractive-dither-error-from-bias.md",
+        "fr": "streeling/courses/audio-engineering/fr/aud-025-separate-subtractive-dither-error-from-bias.fr.md",
+        "es": "streeling/courses/audio-engineering/es/aud-025-separate-subtractive-dither-error-from-bias.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAS021",
+      "department": "guitar-acoustics",
+      "module_id": "gas-021-normalize-modal-energy-before-comparing-amplitudes",
+      "title": "Normalize Modal Energy Before Comparing Amplitudes",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-021-normalize-modal-energy-before-comparing-amplitudes.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-021-normalize-modal-energy-before-comparing-amplitudes.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-021-normalize-modal-energy-before-comparing-amplitudes.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAS022",
+      "department": "guitar-acoustics",
+      "module_id": "gas-022-scale-a-helmholtz-cavity-with-effective-neck-length",
+      "title": "Scale a Helmholtz Cavity with Effective Neck Length",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-022-scale-a-helmholtz-cavity-with-effective-neck-length.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-022-scale-a-helmholtz-cavity-with-effective-neck-length.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-022-scale-a-helmholtz-cavity-with-effective-neck-length.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAS023",
+      "department": "guitar-acoustics",
+      "module_id": "gas-023-separate-phase-and-group-speed-in-bending-waves",
+      "title": "Separate Phase and Group Speed in Bending Waves",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-023-separate-phase-and-group-speed-in-bending-waves.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-023-separate-phase-and-group-speed-in-bending-waves.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-023-separate-phase-and-group-speed-in-bending-waves.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAS024",
+      "department": "guitar-acoustics",
+      "module_id": "gas-024-track-avoided-crossings-through-detuning",
+      "title": "Track Avoided Crossings Through Detuning",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-024-track-avoided-crossings-through-detuning.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-024-track-avoided-crossings-through-detuning.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-024-track-avoided-crossings-through-detuning.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GAS025",
+      "department": "guitar-acoustics",
+      "module_id": "gas-025-separate-active-and-reactive-acoustic-power",
+      "title": "Separate Active and Reactive Acoustic Power",
+      "source_paths": {
+        "en": "streeling/courses/guitar-acoustics/en/gas-025-separate-active-and-reactive-acoustic-power.md",
+        "fr": "streeling/courses/guitar-acoustics/fr/gas-025-separate-active-and-reactive-acoustic-power.fr.md",
+        "es": "streeling/courses/guitar-acoustics/es/gas-025-separate-active-and-reactive-acoustic-power.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GTR021",
+      "department": "guitar-studies",
+      "module_id": "gtr-021-check-lateral-clearance-between-string-envelopes",
+      "title": "Check Lateral Clearance Between String Envelopes",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-021-check-lateral-clearance-between-string-envelopes.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-021-check-lateral-clearance-between-string-envelopes.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-021-check-lateral-clearance-between-string-envelopes.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GTR022",
+      "department": "guitar-studies",
+      "module_id": "gtr-022-place-multiscale-frets-in-physical-coordinates",
+      "title": "Place Multiscale Frets in Physical Coordinates",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-022-place-multiscale-frets-in-physical-coordinates.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-022-place-multiscale-frets-in-physical-coordinates.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-022-place-multiscale-frets-in-physical-coordinates.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GTR023",
+      "department": "guitar-studies",
+      "module_id": "gtr-023-fit-a-straight-slide-bar-to-contact-targets",
+      "title": "Fit a Straight Slide Bar to Contact Targets",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-023-fit-a-straight-slide-bar-to-contact-targets.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-023-fit-a-straight-slide-bar-to-contact-targets.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-023-fit-a-straight-slide-bar-to-contact-targets.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GTR024",
+      "department": "guitar-studies",
+      "module_id": "gtr-024-schedule-plucking-recovery-separately-from-held-support",
+      "title": "Schedule Plucking Recovery Separately from Held Support",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-024-schedule-plucking-recovery-separately-from-held-support.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-024-schedule-plucking-recovery-separately-from-held-support.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-024-schedule-plucking-recovery-separately-from-held-support.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "GTR025",
+      "department": "guitar-studies",
+      "module_id": "gtr-025-compose-selective-capos-with-a-componentwise-join",
+      "title": "Compose Selective Capos with a Componentwise Join",
+      "source_paths": {
+        "en": "streeling/courses/guitar-studies/en/gtr-025-compose-selective-capos-with-a-componentwise-join.md",
+        "fr": "streeling/courses/guitar-studies/fr/gtr-025-compose-selective-capos-with-a-componentwise-join.fr.md",
+        "es": "streeling/courses/guitar-studies/es/gtr-025-compose-selective-capos-with-a-componentwise-join.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "WML020",
+      "department": "world-music-languages",
+      "module_id": "wml-020-audit-hocket-as-exclusive-voice-occupancy",
+      "title": "Audit Hocket as Exclusive Voice Occupancy",
+      "source_paths": {
+        "en": "streeling/courses/world-music-languages/en/wml-020-audit-hocket-as-exclusive-voice-occupancy.md",
+        "fr": "streeling/courses/world-music-languages/fr/wml-020-audit-hocket-as-exclusive-voice-occupancy.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-020-audit-hocket-as-exclusive-voice-occupancy.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "WML021",
+      "department": "world-music-languages",
+      "module_id": "wml-021-find-common-partials-without-equating-fundamentals",
+      "title": "Find Common Partials Without Equating Fundamentals",
+      "source_paths": {
+        "en": "streeling/courses/world-music-languages/en/wml-021-find-common-partials-without-equating-fundamentals.md",
+        "fr": "streeling/courses/world-music-languages/fr/wml-021-find-common-partials-without-equating-fundamentals.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-021-find-common-partials-without-equating-fundamentals.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "WML022",
+      "department": "world-music-languages",
+      "module_id": "wml-022-retain-circular-correspondence-between-event-labels",
+      "title": "Retain Circular Correspondence Between Event Labels",
+      "source_paths": {
+        "en": "streeling/courses/world-music-languages/en/wml-022-retain-circular-correspondence-between-event-labels.md",
+        "fr": "streeling/courses/world-music-languages/fr/wml-022-retain-circular-correspondence-between-event-labels.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-022-retain-circular-correspondence-between-event-labels.es.md"
+      }
+    },
+    {
+      "unit": "a",
+      "code": "WML023",
+      "department": "world-music-languages",
+      "module_id": "wml-023-accept-ordered-landmarks-with-intervening-events",
+      "title": "Accept Ordered Landmarks with Intervening Events",
+      "source_paths": {
+        "en": "streeling/courses/world-music-languages/en/wml-023-accept-ordered-landmarks-with-intervening-events.md",
+        "fr": "streeling/courses/world-music-languages/fr/wml-023-accept-ordered-landmarks-with-intervening-events.fr.md",
+        "es": "streeling/courses/world-music-languages/es/wml-023-accept-ordered-landmarks-with-intervening-events.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "COG021",
+      "department": "cognitive-science",
+      "module_id": "cog-021-compare-logistic-item-information-at-a-stated-ability",
+      "title": "Compare Logistic Item Information at a Stated Ability",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-021-compare-logistic-item-information-at-a-stated-ability.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-021-compare-logistic-item-information-at-a-stated-ability.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-021-compare-logistic-item-information-at-a-stated-ability.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "COG022",
+      "department": "cognitive-science",
+      "module_id": "cog-022-pool-adjacent-calibration-violations-with-case-weights",
+      "title": "Pool Adjacent Calibration Violations with Case Weights",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-022-pool-adjacent-calibration-violations-with-case-weights.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-022-pool-adjacent-calibration-violations-with-case-weights.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-022-pool-adjacent-calibration-violations-with-case-weights.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "COG023",
+      "department": "cognitive-science",
+      "module_id": "cog-023-carry-cue-covariance-into-linear-fusion",
+      "title": "Carry Cue Covariance into Linear Fusion",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-023-carry-cue-covariance-into-linear-fusion.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-023-carry-cue-covariance-into-linear-fusion.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-023-carry-cue-covariance-into-linear-fusion.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "CYB021",
+      "department": "cybernetics",
+      "module_id": "cyb-021-test-finite-horizon-control-reachability",
+      "title": "Test Finite-Horizon Control Reachability",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-021-test-finite-horizon-control-reachability.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-021-test-finite-horizon-control-reachability.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-021-test-finite-horizon-control-reachability.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "CYB022",
+      "department": "cybernetics",
+      "module_id": "cyb-022-project-proposed-actions-onto-a-declared-feasible-set",
+      "title": "Project Proposed Actions onto a Declared Feasible Set",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-022-project-proposed-actions-onto-a-declared-feasible-set.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-022-project-proposed-actions-onto-a-declared-feasible-set.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-022-project-proposed-actions-onto-a-declared-feasible-set.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "CYB023",
+      "department": "cybernetics",
+      "module_id": "cyb-023-check-regressor-rank-before-identifying-a-controller",
+      "title": "Check Regressor Rank before Identifying a Controller",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-023-check-regressor-rank-before-identifying-a-controller.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-023-check-regressor-rank-before-identifying-a-controller.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-023-check-regressor-rank-before-identifying-a-controller.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "INF022",
+      "department": "information-theory",
+      "module_id": "inf-022-measure-posterior-movement-with-total-variation",
+      "title": "Measure Posterior Movement with Total Variation",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-022-measure-posterior-movement-with-total-variation.md",
+        "fr": "streeling/courses/information-theory/fr/inf-022-measure-posterior-movement-with-total-variation.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-022-measure-posterior-movement-with-total-variation.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "INF023",
+      "department": "information-theory",
+      "module_id": "inf-023-deinterleave-burst-erasures-without-inventing-recovery",
+      "title": "Deinterleave Burst Erasures without Inventing Recovery",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-023-deinterleave-burst-erasures-without-inventing-recovery.md",
+        "fr": "streeling/courses/information-theory/fr/inf-023-deinterleave-burst-erasures-without-inventing-recovery.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-023-deinterleave-burst-erasures-without-inventing-recovery.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "INF024",
+      "department": "information-theory",
+      "module_id": "inf-024-refine-arithmetic-code-intervals-with-exact-rationals",
+      "title": "Refine Arithmetic-Code Intervals with Exact Rationals",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-024-refine-arithmetic-code-intervals-with-exact-rationals.md",
+        "fr": "streeling/courses/information-theory/fr/inf-024-refine-arithmetic-code-intervals-with-exact-rationals.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-024-refine-arithmetic-code-intervals-with-exact-rationals.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "NET019",
+      "department": "network-science",
+      "module_id": "net-019-connect-a-diagnostic-backbone-at-minimum-edge-cost",
+      "title": "Connect a Diagnostic Backbone at Minimum Edge Cost",
+      "source_paths": {
+        "en": "streeling/courses/network-science/en/net-019-connect-a-diagnostic-backbone-at-minimum-edge-cost.md",
+        "fr": "streeling/courses/network-science/fr/net-019-connect-a-diagnostic-backbone-at-minimum-edge-cost.fr.md",
+        "es": "streeling/courses/network-science/es/net-019-connect-a-diagnostic-backbone-at-minimum-edge-cost.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "NET020",
+      "department": "network-science",
+      "module_id": "net-020-color-conflicting-agent-tasks-with-an-exact-small-search",
+      "title": "Color Conflicting Agent Tasks with an Exact Small Search",
+      "source_paths": {
+        "en": "streeling/courses/network-science/en/net-020-color-conflicting-agent-tasks-with-an-exact-small-search.md",
+        "fr": "streeling/courses/network-science/fr/net-020-color-conflicting-agent-tasks-with-an-exact-small-search.fr.md",
+        "es": "streeling/courses/network-science/es/net-020-color-conflicting-agent-tasks-with-an-exact-small-search.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "NET021",
+      "department": "network-science",
+      "module_id": "net-021-check-signed-transform-consistency-around-a-cycle",
+      "title": "Check Signed Transform Consistency around a Cycle",
+      "source_paths": {
+        "en": "streeling/courses/network-science/en/net-021-check-signed-transform-consistency-around-a-cycle.md",
+        "fr": "streeling/courses/network-science/fr/net-021-check-signed-transform-consistency-around-a-cycle.fr.md",
+        "es": "streeling/courses/network-science/es/net-021-check-signed-transform-consistency-around-a-cycle.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "PM016",
+      "department": "product-management",
+      "module_id": "pm-016-retain-pareto-incomparable-verification-options",
+      "title": "Retain Pareto-Incomparable Verification Options",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-016-retain-pareto-incomparable-verification-options.md",
+        "fr": "streeling/courses/product-management/fr/pm-016-retain-pareto-incomparable-verification-options.fr.md",
+        "es": "streeling/courses/product-management/es/pm-016-retain-pareto-incomparable-verification-options.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "PM017",
+      "department": "product-management",
+      "module_id": "pm-017-allocate-whole-review-slots-by-largest-remainders",
+      "title": "Allocate Whole Review Slots by Largest Remainders",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-017-allocate-whole-review-slots-by-largest-remainders.md",
+        "fr": "streeling/courses/product-management/fr/pm-017-allocate-whole-review-slots-by-largest-remainders.fr.md",
+        "es": "streeling/courses/product-management/es/pm-017-allocate-whole-review-slots-by-largest-remainders.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "PM018",
+      "department": "product-management",
+      "module_id": "pm-018-find-the-weight-at-which-a-workflow-ranking-flips",
+      "title": "Find the Weight at Which a Workflow Ranking Flips",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-018-find-the-weight-at-which-a-workflow-ranking-flips.md",
+        "fr": "streeling/courses/product-management/fr/pm-018-find-the-weight-at-which-a-workflow-ranking-flips.fr.md",
+        "es": "streeling/courses/product-management/es/pm-018-find-the-weight-at-which-a-workflow-ranking-flips.es.md"
+      }
+    },
+    {
+      "unit": "b",
+      "code": "PM019",
+      "department": "product-management",
+      "module_id": "pm-019-minimize-stratified-review-variance-over-integer-allocations",
+      "title": "Minimize Stratified Review Variance over Integer Allocations",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-019-minimize-stratified-review-variance-over-integer-allocations.md",
+        "fr": "streeling/courses/product-management/fr/pm-019-minimize-stratified-review-variance-over-integer-allocations.fr.md",
+        "es": "streeling/courses/product-management/es/pm-019-minimize-stratified-review-variance-over-integer-allocations.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "DV023",
+      "department": "data-visualization",
+      "module_id": "dv-023-compress-signed-clearance-with-an-invertible-log-scale",
+      "title": "Compress Signed Clearance with an Invertible Log Scale",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-023-compress-signed-clearance-with-an-invertible-log-scale.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-023-compress-signed-clearance-with-an-invertible-log-scale.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-023-compress-signed-clearance-with-an-invertible-log-scale.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "DV024",
+      "department": "data-visualization",
+      "module_id": "dv-024-recover-layer-values-from-stacked-endpoints",
+      "title": "Recover Layer Values from Stacked Endpoints",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-024-recover-layer-values-from-stacked-endpoints.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-024-recover-layer-values-from-stacked-endpoints.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-024-recover-layer-values-from-stacked-endpoints.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "DV025",
+      "department": "data-visualization",
+      "module_id": "dv-025-check-overlay-contrast-from-linear-luminance",
+      "title": "Check Overlay Contrast from Linear Luminance",
+      "source_paths": {
+        "en": "streeling/courses/data-visualization/en/dv-025-check-overlay-contrast-from-linear-luminance.md",
+        "fr": "streeling/courses/data-visualization/fr/dv-025-check-overlay-contrast-from-linear-luminance.fr.md",
+        "es": "streeling/courses/data-visualization/es/dv-025-check-overlay-contrast-from-linear-luminance.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "FUT016",
+      "department": "futurology",
+      "module_id": "fut-016-bound-the-first-capacity-threshold-crossing",
+      "title": "Bound the First Capacity Threshold Crossing",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-016-bound-the-first-capacity-threshold-crossing.md",
+        "fr": "streeling/courses/futurology/fr/fut-016-bound-the-first-capacity-threshold-crossing.fr.md",
+        "es": "streeling/courses/futurology/es/fut-016-bound-the-first-capacity-threshold-crossing.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "FUT017",
+      "department": "futurology",
+      "module_id": "fut-017-separate-unit-learning-cost-from-cumulative-average",
+      "title": "Separate Unit Learning Cost from Cumulative Average",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-017-separate-unit-learning-cost-from-cumulative-average.md",
+        "fr": "streeling/courses/futurology/fr/fut-017-separate-unit-learning-cost-from-cumulative-average.fr.md",
+        "es": "streeling/courses/futurology/es/fut-017-separate-unit-learning-cost-from-cumulative-average.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "FUT018",
+      "department": "futurology",
+      "module_id": "fut-018-choose-a-reserve-under-a-declared-chance-constraint",
+      "title": "Choose a Reserve under a Declared Chance Constraint",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-018-choose-a-reserve-under-a-declared-chance-constraint.md",
+        "fr": "streeling/courses/futurology/fr/fut-018-choose-a-reserve-under-a-declared-chance-constraint.fr.md",
+        "es": "streeling/courses/futurology/es/fut-018-choose-a-reserve-under-a-declared-chance-constraint.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "FUT019",
+      "department": "futurology",
+      "module_id": "fut-019-find-minimal-combinations-that-overload-a-craft-plan",
+      "title": "Find Minimal Combinations that Overload a Craft Plan",
+      "source_paths": {
+        "en": "streeling/courses/futurology/en/fut-019-find-minimal-combinations-that-overload-a-craft-plan.md",
+        "fr": "streeling/courses/futurology/fr/fut-019-find-minimal-combinations-that-overload-a-craft-plan.fr.md",
+        "es": "streeling/courses/futurology/es/fut-019-find-minimal-combinations-that-overload-a-craft-plan.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "GAA020",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-020-cover-a-finite-practice-space-with-fixed-centres",
+      "title": "Cover a Finite Practice Space with Fixed Centres",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-020-cover-a-finite-practice-space-with-fixed-centres.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-020-cover-a-finite-practice-space-with-fixed-centres.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-020-cover-a-finite-practice-space-with-fixed-centres.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "GAA021",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-021-align-a-practice-attempt-with-unit-edit-costs",
+      "title": "Align a Practice Attempt with Unit Edit Costs",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-021-align-a-practice-attempt-with-unit-edit-costs.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-021-align-a-practice-attempt-with-unit-edit-costs.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-021-align-a-practice-attempt-with-unit-edit-costs.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "GAA022",
+      "department": "guitar-alchemist-academy",
+      "module_id": "gaa-022-retain-tempo-while-comparing-onset-ratios",
+      "title": "Retain Tempo while Comparing Onset Ratios",
+      "source_paths": {
+        "en": "streeling/courses/guitar-alchemist-academy/en/gaa-022-retain-tempo-while-comparing-onset-ratios.md",
+        "fr": "streeling/courses/guitar-alchemist-academy/fr/gaa-022-retain-tempo-while-comparing-onset-ratios.fr.md",
+        "es": "streeling/courses/guitar-alchemist-academy/es/gaa-022-retain-tempo-while-comparing-onset-ratios.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "PHI016",
+      "department": "philosophy",
+      "module_id": "phi-016-compose-unknown-evidence-with-strong-kleene-rules",
+      "title": "Compose Unknown Evidence with Strong Kleene Rules",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-016-compose-unknown-evidence-with-strong-kleene-rules.md",
+        "fr": "streeling/courses/philosophy/fr/phi-016-compose-unknown-evidence-with-strong-kleene-rules.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-016-compose-unknown-evidence-with-strong-kleene-rules.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "PHI017",
+      "department": "philosophy",
+      "module_id": "phi-017-retract-a-craft-default-when-a-defeater-arrives",
+      "title": "Retract a Craft Default when a Defeater Arrives",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-017-retract-a-craft-default-when-a-defeater-arrives.md",
+        "fr": "streeling/courses/philosophy/fr/phi-017-retract-a-craft-default-when-a-defeater-arrives.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-017-retract-a-craft-default-when-a-defeater-arrives.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "PHI018",
+      "department": "philosophy",
+      "module_id": "phi-018-compute-grounded-acceptance-before-an-agent-summary",
+      "title": "Compute Grounded Acceptance before an Agent Summary",
+      "source_paths": {
+        "en": "streeling/courses/philosophy/en/phi-018-compute-grounded-acceptance-before-an-agent-summary.md",
+        "fr": "streeling/courses/philosophy/fr/phi-018-compute-grounded-acceptance-before-an-agent-summary.fr.md",
+        "es": "streeling/courses/philosophy/es/phi-018-compute-grounded-acceptance-before-an-agent-summary.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "SEM021",
+      "department": "semiotics",
+      "module_id": "sem-021-retain-alternative-lineages-and-their-multiplicity",
+      "title": "Retain Alternative Lineages and Their Multiplicity",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-021-retain-alternative-lineages-and-their-multiplicity.md",
+        "fr": "streeling/courses/semiotics/fr/sem-021-retain-alternative-lineages-and-their-multiplicity.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-021-retain-alternative-lineages-and-their-multiplicity.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "SEM022",
+      "department": "semiotics",
+      "module_id": "sem-022-distinguish-an-independent-wrapper-from-independent-state",
+      "title": "Distinguish an Independent Wrapper from Independent State",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-022-distinguish-an-independent-wrapper-from-independent-state.md",
+        "fr": "streeling/courses/semiotics/fr/sem-022-distinguish-an-independent-wrapper-from-independent-state.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-022-distinguish-an-independent-wrapper-from-independent-state.es.md"
+      }
+    },
+    {
+      "unit": "c",
+      "code": "SEM023",
+      "department": "semiotics",
+      "module_id": "sem-023-keep-points-and-displacements-distinct-under-translation",
+      "title": "Keep Points and Displacements Distinct under Translation",
+      "source_paths": {
+        "en": "streeling/courses/semiotics/en/sem-023-keep-points-and-displacements-distinct-under-translation.md",
+        "fr": "streeling/courses/semiotics/fr/sem-023-keep-points-and-displacements-distinct-under-translation.fr.md",
+        "es": "streeling/courses/semiotics/es/sem-023-keep-points-and-displacements-distinct-under-translation.es.md"
+      }
+    }
+  ]
+}

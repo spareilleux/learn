@@ -1,0 +1,74 @@
+---
+module_id: sem-008-interpret-layer-order-relative-to-the-reference-normal
+department: semiotics
+course: "Interpret Layer Order Relative to the Reference Normal"
+level: intermediate
+prerequisites: ["sem-004-face-identity-under-reindexing", "sem-006-preserve-orientation-across-scene-frames"]
+estimated_duration: "40 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Interpret Layer Order Relative to the Reference Normal
+
+> **Draft scope.** Authored sign tables and pinned FOLD/IX source reading. No new adapter, scene transformation or native test was executed. Human technical, artisan, fluent-language and learner reviews remain pending; deployed course HTML verification is separate.
+
+## The project question
+
+Can an agent translate “above” into a layer-order sign without carrying the reference normal? [SEM-004](sem-004-face-identity-under-reindexing.md) preserves face identity under index changes; [SEM-006](sem-006-preserve-orientation-across-scene-frames.md) follows orientation through frames. This lesson derives a different rule: the sign's meaning depends on which face supplies the reference normal.
+
+The pinned [FOLD specification](https://github.com/edemaine/fold/blob/824f9fa6f944248787b0b2077ef622761489201e/doc/spec.md#L346-L377), labeled a version 1.2 rough draft, defines `[f,g,s]` relative to the normal of the second face. For `s=+1`, face `f` lies on the side pointed to by face `g`'s normal. For `s=-1`, it lies on the opposite side. This is not an absolute world-height flag.
+
+## 1. Convert to a declared global direction
+
+For an authored flat-layer example, let `d` be +1 when `f` is above `g` relative to one chosen global up axis, and -1 otherwise. Let `sigma_f` and `sigma_g` be the face-normal signs relative to that same axis. Both must be known and nonzero in this simplified example. The relative sign is `s=d*sigma_g`, so `d=s*sigma_g`.
+
+### Practice exercise 1: identify the reference face
+
+For `[2,5,+1]`, determine global order when face 5's normal points up and when it points down. Which face supplies the normal?
+
+> **Answer:** Face 5 supplies the reference normal. With `sigma_g=+1`, global order is `d=+1`; with `sigma_g=-1`, it is `d=-1`. The same positive relation can mean opposite global orders. The argument positions and reference direction are necessary information.
+
+## 2. Swapping arguments is not always sign negation
+
+Write the swapped relation as `[g,f,t]`. Its global order is `-d`, now measured against the other face's normal. Thus `t=-d*sigma_f=-s*sigma_f*sigma_g`. Equal normal directions require the opposite sign; opposite normal directions require the same sign. This agrees with the specification's swapped-triple rule.
+
+### Practice exercise 2: swap a concrete relation
+
+Use `[2,5,+1]`, `sigma_g=-1` and `sigma_f=+1`. Find `d` and the swapped sign. Then state what happens if the two normals instead have equal signs.
+
+> **Answer:** Global order is `d=-1`; the swapped sign is `t=+1`, giving `[5,2,+1]`. Opposite normals explain the unchanged sign. With equal normal signs, the swapped sign would instead be `t=-1`. Blindly negating on every argument swap is wrong.
+
+## 3. Turn the entire object over
+
+Under a whole-object turnover relative to the same global up, the global order and both normal signs reverse. Consequently `s'=(-d)*(-sigma_g)=s`: the stored relative sign remains unchanged. This operation differs from replacing one argument's label or changing the definition of “up.”
+
+The pinned [IX controls](https://github.com/GuitarAlchemist/ix/blob/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/controls.rs#L82-L107) implement a planar move separately from turnover. The turnover negates folded y coordinates while retaining raw face-order triples; its comments explain the joint orientation/up reversal. That is source evidence, not a fresh execution or a universal mapping to a host scene's vertical axis.
+
+### Practice exercise 3: reject a blanket sign flip
+
+Start with `d=+1`, `sigma_g=+1` and `s=+1`. Turn the entire model over. If an adapter also negates the stored sign, which global order would it imply?
+
+> **Answer:** The correct new values are `d'=-1`, `sigma_g'=-1` and unchanged `s'=+1`. Incorrectly storing `s'=-1` would imply `d'=s'*sigma_g'=+1`, contradicting the intended turnover. The geometry and its reference normals must be interpreted together.
+
+## 4. Distinguish equal bit changes from equal actions
+
+For a weave crossing, a role-based `warp_over` flag asks whether the strand currently called warp is higher along the chosen scene direction. Recoloring changes neither role nor order. Renaming warp and weft complements the flag while leaving the old physical warp strand at the same height. Turning the whole object over, keeping its role names, also complements the flag but reverses that old strand's global height relation.
+
+The [authored relation record](../../../../code/streeling/evidence/weave-material-2026-10-22/layer-relations.json) retains 8 sign combinations and separate crossing cards for `w2-f0` and `w3-f0`. These are finite semantic examples, not actual edits to the saved scene. A role flag and a FOLD relative-normal triple answer different questions.
+
+### Practice exercise 4: distinguish three edits
+
+A crossing initially has warp above weft. Compare recoloring, swapping the role names and turning the whole object over. Can a complemented boolean identify which operation happened?
+
+> **Answer:** Recoloring leaves the flag and physical order unchanged. A role-name swap complements the flag but preserves the old physical warp's height. Whole-object turnover with names retained complements the flag and reverses that height relation. A complemented boolean alone cannot identify the operation; retain strand identities, role assignment, frame and transformation provenance.
+
+## 5. Preserve unknown order and source scope
+
+In the pinned specification, `s=0` means unknown order; an omitted pair is likewise unknown. Neither means equal height or confirmed nonintersection. The pinned [IX layer module](https://github.com/GuitarAlchemist/ix/blob/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/layers.rs#L1-L16) checks supplied layer relations; it does not compute a complete ordering. An accepted check therefore cannot fill every absent relation.
+
+### Practice exercise 5: prepare a source-assisted handoff
+
+Read the specification and IX controls/module. An agent emits “face 2 is above face 5” from an omitted relation, then proposes a new DSL. What is the smallest useful correction and what evidence remains missing?
+
+> **Answer:** Keep the order unknown. For a known relation, retain source revision, face identity, ordered argument roles, sign definition, relevant normal/frame information and any transformation. A typed record plus a table-driven validator may suffice; a new DSL requires a demonstrated advantage. The selected checks do not infer missing order or establish physical realizability. No adapter or new native verification was delivered here.

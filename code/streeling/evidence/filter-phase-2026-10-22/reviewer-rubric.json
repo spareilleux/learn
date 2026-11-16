@@ -1,0 +1,121 @@
+{
+  "status": "prepared-not-performed",
+  "scope": "Prepared criterion review is not actual learner, audio engine, filter acquisition, physical instrument or listener evidence.",
+  "criteria": [
+    {
+      "id": "GAS007-1",
+      "module": "GAS007",
+      "title": "sign-convention",
+      "acceptance": "Derive H from additive recurrence; a2=-0.9025 vs denominator+0.9025; numerator gain is not constant response; pole radii below1 in isolated linear model.",
+      "decision": null
+    },
+    {
+      "id": "GAS007-2",
+      "module": "GAS007",
+      "title": "pole-versus-peak",
+      "acceptance": "At44100Hz cos optimum for110/240 exceeds1; endpoint peaks0. For110 DCgain29.268259 versus27.306424 at110. Not fullbank/globalpeak, f32runtime or physicalmeasurement.",
+      "decision": null
+    },
+    {
+      "id": "GAS007-3",
+      "module": "GAS007",
+      "title": "complex-mix",
+      "acceptance": "Hdry=.55+.45sumHi thenmagnitude;110 gives34.953699 vs35.364828 magnitude-onlyupperbound;statephaserequirementequality.",
+      "decision": null
+    },
+    {
+      "id": "GAS007-4",
+      "module": "GAS007",
+      "title": "steady-versus-natural",
+      "acceptance": "82.4069/164.8138 steady LTIinput retainsfrequencies;110poleangle doesnotaddsteadyline. Startupnaturalresponse distinct;downstreamnonlinearity excluded.",
+      "decision": null
+    },
+    {
+      "id": "GAS007-5",
+      "module": "GAS007",
+      "title": "physical-experiment",
+      "acceptance": "Pinnedpostfilter isnotcalibratedcoupledbridge/radiation;requiredefinedinstrument,geometryorresponsemeasurement/path,excitation/observation,fit/holdout;pairednormalizedstringsum/pre-reverbdrywithclockscale andseparatelistenerassessment.",
+      "decision": null
+    },
+    {
+      "id": "AUD008-1",
+      "module": "AUD008",
+      "title": "boundary",
+      "acceptance": "PeriodicN8,negativeforwardunscaledDFT,k2,twotap. x[-1]=x7; LTI/steadyfullperiod enablesY=HX,notarbitrarywindowframecrop.",
+      "decision": null
+    },
+    {
+      "id": "AUD008-2",
+      "module": "AUD008",
+      "title": "paired-gain",
+      "acceptance": "Amplitudes.25/.5giveX1/2,Y.75-.25i/1.5-.5i,commonH.75-.25i,mag.790569415.Outputratio2notfiltergainchange.",
+      "decision": null
+    },
+    {
+      "id": "AUD008-3",
+      "module": "AUD008",
+      "title": "excitation-refusal",
+      "acceptance": "AnalyticzeroX/Yatbin1\u2192undefinednotgain0;floatingresiduesnotidentification. NearX1e-6 plusoutputnoise.01 yields10000.75-.25i,needactualnoiseconditioningnotuniversalcutoff.",
+      "decision": null
+    },
+    {
+      "id": "AUD008-4",
+      "module": "AUD008",
+      "title": "boundary-control",
+      "acceptance": "Phasepi/4finite9samplelinearconvtruncated8 gives.71875-.21875i nottrueH. Useperiodicsteadyorcompletezero-paddedlinearcommonlength;IIRsettling/tailseparate.",
+      "decision": null
+    },
+    {
+      "id": "AUD008-5",
+      "module": "AUD008",
+      "title": "artifact",
+      "acceptance": "Preservepairedsamples/complexdata,Fs,alignment,N,windowscaling,excitation,revision,parameters,noise/settling;isolatebodypre-reverb,scalarIXspectrogramdropsphase,arbitrarySTFTratiosnotguaranteed. Noactualcapture/adapter.",
+      "decision": null
+    },
+    {
+      "id": "INF008-1",
+      "module": "INF008",
+      "title": "ambiguity",
+      "acceptance": "Provebothmag2=5/8+3/8cosw forA.75/.25andB.25/.75zero-padded8. Allintegercircularshiftsfail;notmerelyshiftbutdoesnotruleoutotherinvariances.",
+      "decision": null
+    },
+    {
+      "id": "INF008-2",
+      "module": "INF008",
+      "title": "phase",
+      "acceptance": "Atpi/2same.790569415mags vs.75-.25i and.25-.75i phases-.321750554/-1.249045772;DC+1both/Nyq+.5vs-.5;decibelscannotrestorephase.",
+      "decision": null
+    },
+    {
+      "id": "INF008-3",
+      "module": "INF008",
+      "title": "inverse",
+      "acceptance": "Fullcomplexinversepositiveexp1/Nreconstructseach;zero-phaseinverseinventsanewchoice. Do notclaimalloverlappingSTFTmagnituderetrievalimpossible.",
+      "decision": null
+    },
+    {
+      "id": "INF008-4",
+      "module": "INF008",
+      "title": "time-descriptor",
+      "acceptance": "Energy5/8both,centroids.1/.9difference.8sample;notpuredelay,groupdelaycurve,audibilityorpreference.",
+      "decision": null
+    },
+    {
+      "id": "INF008-5",
+      "module": "INF008",
+      "title": "domain",
+      "acceptance": "IXcomplexSTFTvsmagnitude;GASetClassprime-forminputvsactualchromaSpectralPhaseAlignment;phasecannotrestorepriorcanonicalizationloss. Handoffdomain/normalization/source/transform/axes/Fsaudio/alignment/complexdata/claiminvariance,notimplementedcontract.",
+      "decision": null
+    }
+  ],
+  "pass_policy": "All five criteria per module; retain actual answers and assistance before learner decision.",
+  "human_technical_review": null,
+  "musician_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "new_engine_run": null,
+  "physical_body_measurement": null,
+  "paired_filter_capture": null,
+  "listening_trial": null,
+  "deployed_html": null
+}

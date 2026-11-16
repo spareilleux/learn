@@ -1,0 +1,40 @@
+{
+  "status": "failed",
+  "checks": [
+    {
+      "name": "semantic_execution",
+      "passed": true,
+      "detail": "exit 0"
+    },
+    {
+      "name": "semantic_baselines",
+      "passed": true,
+      "detail": "Expected global 0 and restarted 12 adjacency violations"
+    },
+    {
+      "name": "semantic_admission",
+      "passed": false,
+      "detail": "Selected restarted-tile-parity: 12 adjacency violations"
+    }
+  ],
+  "platform": "win32",
+  "selected_variant": "restarted-tile-parity",
+  "sources": {
+    "evaluator": {
+      "path": "C:\\tmp\\streeling-weave-scene-20261022\\evaluate_weave.py",
+      "sha256": "43ba4e1a245ebc8c9d2ab34a9219419ad136ef73d021c1073e1f123e69479d9f"
+    },
+    "spec": {
+      "path": "C:\\tmp\\streeling-weave-scene-20261022\\weave-trial.json",
+      "sha256": "da33830148b1ee98a1c004e0b89a86770f438da369e059cbdad06803da3a1955"
+    },
+    "teaching_files": {
+      "run.mjs": "4a51d925831e24536894cfe5043fbc288dabbc274936c7c331f4922898f0de7a",
+      "trial.gd": "9e59b247bacff045398bfc9f00917fc3f0734b4d1e88424801f3f85c78fb8f99",
+      "project.godot": "0ba0ec9494527550d9b099e48c31d98157b15487c92f1e6332dd2e02bf56852d",
+      "expected-cases.json": "1ae7daf03475b6b689ddaad6ce5567320bf81fa8f8e4ffd0d20b54570944236f"
+    },
+    "evaluator_provenance": "Demerzel f23ccae6c049d9066a1be2221c68f3b0bcf48373 (caller-supplied file; hashes identify the actual input)"
+  },
+  "error": "semantic_admission: Selected restarted-tile-parity: 12 adjacency violations"
+}

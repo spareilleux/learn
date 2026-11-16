@@ -1,0 +1,20 @@
+# SlashForge course: check.sh in a disposable container, for Docker or Podman, including Docker Engine inside WSL.
+# Build context: code/slashforge. Nothing from the host is mounted: the lab is copied in at build time, and the
+# only network use is `npm ci` during the build. See container/run.sh for the limits the container runs under.
+# Node 24.12.0 is the version the expected/ outputs were recorded with; the digest was read from Docker Hub on
+# 2026-09-26 (multi-architecture index).
+FROM docker.io/library/node:24.12.0-bookworm-slim@sha256:7326fb2dbdce998edd72140946851be64ef4a643e8715e138ca467e8e9d92c99
+
+# The image's own unprivileged user (uid 1000); nothing runs as root after this line.
+USER node
+WORKDIR /home/node/lab
+
+COPY --chown=node:node package.json package-lock.json check.sh ./
+COPY --chown=node:node expected ./expected
+COPY --chown=node:node scripts ./scripts
+
+# slashforge 4.4.3 exactly, from package-lock.json; no install scripts run.
+RUN npm ci --ignore-scripts --no-audit --no-fund
+
+# check.sh writes only under ./out, inside the container, and sets its own throwaway HOME there.
+CMD ["bash", "check.sh"]

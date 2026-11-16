@@ -4,7 +4,13 @@ description: Aprender en público — cursos escritos a medida que aprendo.
 template: splash
 hero:
   tagline: Cursos escritos mientras aprendo, publicados tal cual — con los errores, los callejones sin salida y lo que al final funcionó.
+  image:
+    file: ../../../assets/home/research-observatory.webp
+    alt: "Arte conceptual: el interior de una biblioteca-observatorio circular, de noche. Galerías de estanterías en anillos se elevan bajo una cúpula de cristal surcada de órbitas, ornamentos de plata fluidos suben por los arcos de piedra, y finos rayos de luz verde caen sobre una cabina de acero remachada en el centro, con la puerta abierta a un pasillo cálido e iluminado."
   actions:
+    - text: Explorar el observatorio 3D
+      link: observatory/
+      icon: right-arrow
     - text: Skills de Matt Pocock
       link: agentic-coding/05-matt-pocock-skills/
       icon: rocket
@@ -18,6 +24,10 @@ hero:
 ---
 
 import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+*Arte conceptual, no un diagrama: un observatorio de investigación donde una biblioteca, ornamentos alquímicos, una luz de cálculo que cae como lluvia y una caja de investigación sellada comparten una misma sala. La imagen se inspira en* Fundación *de Asimov, en* Matrix *y en* Dark Matter, *sin copiar nada de ellas. Generada en la máquina del autor con ComfyUI 0.36.0 y Z-Image-Turbo (licencia Apache 2.0), semilla 20260927; se recortaron los 48 píxeles superiores para quitar un número parásito. [Prompt, workflow y tiempos de generación](https://github.com/spareilleux/learn/tree/main/code/site-visuals).*
+
+[Diario de actualizaciones y tablero de entregas](updates/) — publicaciones, pruebas y solicitudes pendientes.
 
 ## Por qué este sitio
 
@@ -59,6 +69,31 @@ Son públicos para que otros puedan aprovecharlos — y corregirme.
 	/>
 </CardGrid>
 
+## Demos
+
+<CardGrid>
+	<LinkCard
+		title="Observatorio interactivo"
+		description="Una escena 3D de Godot para explorar en el navegador, en un ordenador o en un teléfono, o con path tracing en una GeForce RTX."
+		href="observatory/"
+	/>
+	<LinkCard
+		title="BRUTAL: el Coloso"
+		description="Diez mil cuerpos se reúnen en un rostro entre torres brutalistas: un prototipo en C# y Vulkan, con path tracing, en un vídeo de un minuto."
+		href="observatory/brutal/"
+	/>
+	<LinkCard
+		title="Lego"
+		description="Una ciudad griega amurallada compuesta con bloques anidados de F#, desde una columna hasta la polis, dibujada en la ciudad del Coloso."
+		href="demos/#lego"
+	/>
+	<LinkCard
+		title="Todas las demos"
+		description="También las escenas de three.js (una guitarra para tocar, un estudio, púas con física, voicings) y los prototipos del Laboratorio Guitar Alchemist."
+		href="demos/"
+	/>
+</CardGrid>
+
 ## Cursos
 
 ### Ingeniería de software
@@ -89,6 +124,16 @@ Son públicos para que otros puedan aprovecharlos — y corregirme.
 	title="Java para desarrolladores C#"
 	description="Java 25 para desarrolladores C# — cada ejemplo, error de compilación y ejercicio probado en CI, con el lado C# mostrado al lado."
 	href="java-for-csharp/"
+/>
+<LinkCard
+	title="Go para desarrolladores C#/Java"
+	description="Catorce lecciones, desde módulos y semántica de valores hasta interfaces, errores, goroutines y una aplicación de consola probada, con ejemplos, ejercicios resueltos y diario."
+	href="go-for-csharp-java/"
+/>
+<LinkCard
+	title="Go avanzado"
+	description="Catorce lecciones sobre memoria, genéricos, cancelación, pipelines acotados, servicios HTTP, fuzzing y perfiles, con un servicio final probado en integración y un diario de mediciones."
+	href="go-advanced/"
 />
 <LinkCard
 	title="Spring Boot, Spring Cloud y Reactor para desarrolladores C#"
@@ -232,6 +277,12 @@ Son públicos para que otros puedan aprovecharlos — y corregirme.
 	href="gaia/"
 />
 
+<LinkCard
+	title="AutoHarness, skills que se escriben solas para Claude Code"
+	description="Un plugin de Claude Code que escribe y poda sus propias skills — leído en un commit fijado, probado con fixtures prerregistradas en un laboratorio aislado, sin instalarlo ni llamar a un modelo, y juzgado por la evidencia y no por su README."
+	href="autoharness/"
+/>
+
 ### Aprendizaje automático
 
 <LinkCard
@@ -278,6 +329,12 @@ Son públicos para que otros puedan aprovecharlos — y corregirme.
 	title="Laboratorio Guitar Alchemist"
 	description="Prototipos de principio a fin sobre los datos reales de Guitar Alchemist — una hipótesis escrita primero, mediciones y los fracasos publicados. P1: el espacio de voicings de GA en 3D, para recorrer, hacer clic y escuchar."
 	href="ga-lab/"
+/>
+
+<LinkCard
+	title="VexTab y VexFlow: notación y tablatura en el navegador"
+	description="Notación y tablatura de guitarra a partir de un pequeño lenguaje de texto, renderizadas en SVG con Node y comparadas en CI en tres sistemas operativos — técnicas, tonalidades y afinaciones, los defectos encontrados por el camino, y el código VexTab de Guitar Alchemist contrastado con el parser real."
+	href="vexflow-vextab/"
 />
 
 ### Otros

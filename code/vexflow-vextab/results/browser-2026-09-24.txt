@@ -1,0 +1,8 @@
+# node browser/measure.mjs <chrome> <5 examples> > out/browser5.json && node browser/compare.mjs out/browser5.json expected/ex
+# 2026-09-24, Windows 11, Chrome headless, fonts: Bravura loaded, Academico loaded
+HeadlessChrome/153.0.0.0
+l01-notation: size headless 600x270 chrome 600x270; texts 16/16; max |dx| 0.74 (#15 headless 187.78 chrome 188.52); max |dy| 0.67
+l02-chords: size headless 600x270 chrome 600x270; texts 36/36; max |dx| 0.74 (#35 headless 187.78 chrome 188.52); max |dy| 0.67
+l03-keys: size headless 600x500 chrome 600x500; texts 47/47; max |dx| 0.74 (#46 headless 187.78 chrome 188.52); max |dy| 0.67
+l02-vibrato-mute: size headless 600x270 chrome 600x270; texts 39/39; max |dx| 0.74 (#38 headless 187.78 chrome 188.52); max |dy| 0.67
+l03-strings: size headless 600x712 chrome 600x712; texts 19/19; max |dx| 0.74 (#18 headless 187.78 chrome 188.52); max |dy| 0.67

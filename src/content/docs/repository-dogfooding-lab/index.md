@@ -45,6 +45,7 @@ A finished course is not success. Success is a retained result: adoption with ev
 | 3 | [Dogfood the course method](03-course-method-dogfood/) | Improve examples, journals, locale parity and adoption feedback |
 | 4 | [Incubate, integrate, reject](04-incubate-integrate-reject/) | Promote only measured, reversible candidates |
 | 5 | [Jev × Petri authority boundary](05-jev-petri-authority/) | Show why high-confidence advice cannot grant an effect |
+| 6 | [Mutation and property testing](06-mutation-property-testing/) | Measure which faults a real parser's tests detect, with a pre-registration and a negative control |
 | — | [Journal](journal/) | Detailed experiments, rejected ideas and next gates |
 
 ## Run the lab

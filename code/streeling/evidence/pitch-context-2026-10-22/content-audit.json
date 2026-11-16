@@ -1,0 +1,991 @@
+{
+  "reviewer": "independent-pedagogical-source-review-agent",
+  "checked_at_utc": "2026-10-22T21:08:21.470018+00:00",
+  "verdict": "pass",
+  "findings": [],
+  "fix_history": [],
+  "coverage": {
+    "exercise_answer_pairs": 45,
+    "learner_criteria": 15
+  },
+  "scope": {
+    "reviewed": "Direct semantic review of all nine EN/FR/ES course sources, all45 localized exercise-answer pairs, prepared learner task, all15 rubric acceptance criteria, fixed evidence packet, six actual pinned GA source files and seven official versioned primary documents.",
+    "data_audit": "Read and verified the independent pass receipt with388/388 checks and its current packet input hashes. Exhaustive312-case/native rerun evidence is that independent data audit; this content reviewer did not rerun source code.",
+    "localization": "Semantic preservation checked by the agent; no claim of human fluent-language approval.",
+    "prerequisites": "Read existing English WML003 and GAA004 for prerequisite continuity only; this receipt does not approve their wider historical claims.",
+    "publication": "Source review only; generated-site tests, local/public route readback, deployed HTML and publication are separate receipts."
+  },
+  "exercise_answer_checks": [
+    {
+      "id": "WML005-en-exercise-1",
+      "module": "WML005",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/world-music-languages/en/wml-005-declare-note-name-conventions.md",
+      "heading_line": 35,
+      "exercise_answer_sha256": "4f45627408a6d17c7640268817a05776f6771f6b1c7ed3239c6b0f5fd4a64fd1",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "English B is B/class11; declared German B is Bb/class10. Neither is necessarily misspelled; declaration determines meaning."
+    },
+    {
+      "id": "WML005-en-exercise-2",
+      "module": "WML005",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/world-music-languages/en/wml-005-declare-note-name-conventions.md",
+      "heading_line": 47,
+      "exercise_answer_sha256": "41bee8f58b7b9de3e27bfcc286eb30b0dc596bdcc5a10ea440acc1d0847a0b52",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Declared German H at octave4 becomes B4. Unspecified B requires a convention; a root alone does not provide register."
+    },
+    {
+      "id": "WML005-en-exercise-3",
+      "module": "WML005",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/world-music-languages/en/wml-005-declare-note-name-conventions.md",
+      "heading_line": 59,
+      "exercise_answer_sha256": "ce8a67cb940dc418bde3fb0a13a7473f5ed0ada9cefb5dd5f4bab1617836176e",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "English B+2 gives C#/class1; German B normalized to Bb+2 gives C/class0. Both arithmetic branches are correct; convention is missing."
+    },
+    {
+      "id": "WML005-en-exercise-4",
+      "module": "WML005",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/world-music-languages/en/wml-005-declare-note-name-conventions.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "8d025d7f04a64a8f7f746c30f706dc3f57c124e524242688854e4755622b4b68",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Canonical B from English B and German H preserves a chosen class but loses source spelling unless token, convention and evidence are retained."
+    },
+    {
+      "id": "WML005-en-exercise-5",
+      "module": "WML005",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/world-music-languages/en/wml-005-declare-note-name-conventions.md",
+      "heading_line": 83,
+      "exercise_answer_sha256": "83e09e56a4a7a5fcb81021c52c34d6b346317ddb238c0bebc7ababff01116961",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Four rows resolve. Unspecified B needs-convention and English H outside-declared-vocabulary remain distinct; numeric coverage is not interpretation correctness."
+    },
+    {
+      "id": "WML005-fr-exercise-1",
+      "module": "WML005",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/world-music-languages/fr/wml-005-declare-note-name-conventions.fr.md",
+      "heading_line": 35,
+      "exercise_answer_sha256": "433fe57fd9d464729e90b01255ead85386396c2d0f194afb1636094e2a5a897f",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "English B is B/class11; declared German B is Bb/class10. Neither is necessarily misspelled; declaration determines meaning."
+    },
+    {
+      "id": "WML005-fr-exercise-2",
+      "module": "WML005",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/world-music-languages/fr/wml-005-declare-note-name-conventions.fr.md",
+      "heading_line": 47,
+      "exercise_answer_sha256": "e2170e52b6fbd9bb70a666e997d9fd139fca8f765f93381b80d8bfca3b53df38",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Declared German H at octave4 becomes B4. Unspecified B requires a convention; a root alone does not provide register."
+    },
+    {
+      "id": "WML005-fr-exercise-3",
+      "module": "WML005",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/world-music-languages/fr/wml-005-declare-note-name-conventions.fr.md",
+      "heading_line": 59,
+      "exercise_answer_sha256": "d1e1549bdf8de91eacd80abd92a1e4a13b157382544abb8d35bf24ffccbf5268",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "English B+2 gives C#/class1; German B normalized to Bb+2 gives C/class0. Both arithmetic branches are correct; convention is missing."
+    },
+    {
+      "id": "WML005-fr-exercise-4",
+      "module": "WML005",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/world-music-languages/fr/wml-005-declare-note-name-conventions.fr.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "39488af43db7ed9389f087e4e600156567afaf79b1016c625383ff909b7dc2d8",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Canonical B from English B and German H preserves a chosen class but loses source spelling unless token, convention and evidence are retained."
+    },
+    {
+      "id": "WML005-fr-exercise-5",
+      "module": "WML005",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/world-music-languages/fr/wml-005-declare-note-name-conventions.fr.md",
+      "heading_line": 83,
+      "exercise_answer_sha256": "7de3c851a21c6b5d9b8132d264d10ab70c23b7697dd67cd2839e08d3ba5e6ff5",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Four rows resolve. Unspecified B needs-convention and English H outside-declared-vocabulary remain distinct; numeric coverage is not interpretation correctness."
+    },
+    {
+      "id": "WML005-es-exercise-1",
+      "module": "WML005",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/world-music-languages/es/wml-005-declare-note-name-conventions.es.md",
+      "heading_line": 35,
+      "exercise_answer_sha256": "4a98b79bece35d917a046958bc12ff9f3d3df258f3aed74e5ccb5ad6ac491e09",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "English B is B/class11; declared German B is Bb/class10. Neither is necessarily misspelled; declaration determines meaning."
+    },
+    {
+      "id": "WML005-es-exercise-2",
+      "module": "WML005",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/world-music-languages/es/wml-005-declare-note-name-conventions.es.md",
+      "heading_line": 47,
+      "exercise_answer_sha256": "164e6bb375e32aaa97c7bec947bd3d989759ba61e675d95b088a81a967d02623",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Declared German H at octave4 becomes B4. Unspecified B requires a convention; a root alone does not provide register."
+    },
+    {
+      "id": "WML005-es-exercise-3",
+      "module": "WML005",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/world-music-languages/es/wml-005-declare-note-name-conventions.es.md",
+      "heading_line": 59,
+      "exercise_answer_sha256": "ef5d662f43acfc65f1d0ee115910243cebc909d5621685247dceab234d314ae0",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "English B+2 gives C#/class1; German B normalized to Bb+2 gives C/class0. Both arithmetic branches are correct; convention is missing."
+    },
+    {
+      "id": "WML005-es-exercise-4",
+      "module": "WML005",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/world-music-languages/es/wml-005-declare-note-name-conventions.es.md",
+      "heading_line": 71,
+      "exercise_answer_sha256": "76badcdb5c7a8f7eae5b952a7afa207b726721da3c11b30b038b794800459ed4",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Canonical B from English B and German H preserves a chosen class but loses source spelling unless token, convention and evidence are retained."
+    },
+    {
+      "id": "WML005-es-exercise-5",
+      "module": "WML005",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/world-music-languages/es/wml-005-declare-note-name-conventions.es.md",
+      "heading_line": 83,
+      "exercise_answer_sha256": "bdc5233b09af5a7e2b79cfbed984b73ac1a8346e31b45ef59f93987a533ba039",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Four rows resolve. Unspecified B needs-convention and English H outside-declared-vocabulary remain distinct; numeric coverage is not interpretation correctness."
+    },
+    {
+      "id": "MCL005-en-exercise-1",
+      "module": "MCL005",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/en/mcl-005-preserve-written-and-sounding-pitch.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "c32d3ba3b5a3abbf1443526813ec5860a258c1015be90b07fb02909c52ec2071",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Written E3/52 with chromatic0 and octave-change-1 gives40/E2; concert E2/40 without transpose also gives40. Instrument name does not justify repeating an offset."
+    },
+    {
+      "id": "MCL005-en-exercise-2",
+      "module": "MCL005",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/en/mcl-005-preserve-written-and-sounding-pitch.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "1df4d0d0a50d107523b94ffeef58b91b7568a3917447fc973f5eb5d193938e9e",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Equal retained records at52 cannot recover the lost downward transpose declaration or certify preserved sounding-pitch meaning."
+    },
+    {
+      "id": "MCL005-en-exercise-3",
+      "module": "MCL005",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/en/mcl-005-preserve-written-and-sounding-pitch.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "012cdad092ca5818ee5d912af36abd4978459e5f10973c107a8207ce5c649143",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Repeated subtraction gives28/E1 instead of40/E2. Clef metadata does not justify a blind second instrument offset; establish encoding policy."
+    },
+    {
+      "id": "MCL005-en-exercise-4",
+      "module": "MCL005",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/en/mcl-005-preserve-written-and-sounding-pitch.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "23516d32b9e895b242492d1c2f12c75f42dd045200b35964eb1e235ce057ff66",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Fractional alter0.5 is lost to None, then conversion defaults to0; H retains one note and zero pitches. Outer success certifies neither pitch retention nor fractional preservation."
+    },
+    {
+      "id": "MCL005-en-exercise-5",
+      "module": "MCL005",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/en/mcl-005-preserve-written-and-sounding-pitch.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "e2bbc863ea7775bef4c92518900b80a2a78ad5f9f9362abc294a2f05c658b28c",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "52 and40 both reduce to class4; an intended-versus-actual absolute sounding comparison detects the octave error. Schema/application/render/playback gates remain untested."
+    },
+    {
+      "id": "MCL005-fr-exercise-1",
+      "module": "MCL005",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/fr/mcl-005-preserve-written-and-sounding-pitch.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "2dc750977c45c025c298e31aabfb077d5929ebcf35cce71033c994b33dca390a",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Written E3/52 with chromatic0 and octave-change-1 gives40/E2; concert E2/40 without transpose also gives40. Instrument name does not justify repeating an offset."
+    },
+    {
+      "id": "MCL005-fr-exercise-2",
+      "module": "MCL005",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/fr/mcl-005-preserve-written-and-sounding-pitch.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "8596c8049adc3407718483f7d21f13c56c83020eb15787488dafe09ef51fe00e",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Equal retained records at52 cannot recover the lost downward transpose declaration or certify preserved sounding-pitch meaning."
+    },
+    {
+      "id": "MCL005-fr-exercise-3",
+      "module": "MCL005",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/fr/mcl-005-preserve-written-and-sounding-pitch.fr.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "2d6336cdd02aaabf7a4947f692ba9fcb50ae363a8135ef9e9ee993d8ed5bc0ed",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Repeated subtraction gives28/E1 instead of40/E2. Clef metadata does not justify a blind second instrument offset; establish encoding policy."
+    },
+    {
+      "id": "MCL005-fr-exercise-4",
+      "module": "MCL005",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/fr/mcl-005-preserve-written-and-sounding-pitch.fr.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "c6651a5021d9c3f07c127612899510c375732325d6a941f3157f517c74ea1048",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Fractional alter0.5 is lost to None, then conversion defaults to0; H retains one note and zero pitches. Outer success certifies neither pitch retention nor fractional preservation."
+    },
+    {
+      "id": "MCL005-fr-exercise-5",
+      "module": "MCL005",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/fr/mcl-005-preserve-written-and-sounding-pitch.fr.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "13e2fea4e325dc68ac6a08de234e2adcb54e701c79d554e1c54c4f3cc95cb6db",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "52 and40 both reduce to class4; an intended-versus-actual absolute sounding comparison detects the octave error. Schema/application/render/playback gates remain untested."
+    },
+    {
+      "id": "MCL005-es-exercise-1",
+      "module": "MCL005",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/musicology/es/mcl-005-preserve-written-and-sounding-pitch.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "85cd52bbaf5e2d8c573735e3ae19e2d817c5d238e6fa4695fd7d63e47ba34727",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Written E3/52 with chromatic0 and octave-change-1 gives40/E2; concert E2/40 without transpose also gives40. Instrument name does not justify repeating an offset."
+    },
+    {
+      "id": "MCL005-es-exercise-2",
+      "module": "MCL005",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/musicology/es/mcl-005-preserve-written-and-sounding-pitch.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "2e8d9bc0c1ce7f199d600541e55261ed2afce2f7cc6b90d258b5760e9c496af1",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Equal retained records at52 cannot recover the lost downward transpose declaration or certify preserved sounding-pitch meaning."
+    },
+    {
+      "id": "MCL005-es-exercise-3",
+      "module": "MCL005",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/musicology/es/mcl-005-preserve-written-and-sounding-pitch.es.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "95024ac47d93217f8f21bcbbddabc7b3a8b2536487a036f22f1870c41e0b46eb",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Repeated subtraction gives28/E1 instead of40/E2. Clef metadata does not justify a blind second instrument offset; establish encoding policy."
+    },
+    {
+      "id": "MCL005-es-exercise-4",
+      "module": "MCL005",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/musicology/es/mcl-005-preserve-written-and-sounding-pitch.es.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "37bd6333732f6b62d8de1c3687f6727cabf591f6353a1fefa0072914426f882e",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Fractional alter0.5 is lost to None, then conversion defaults to0; H retains one note and zero pitches. Outer success certifies neither pitch retention nor fractional preservation."
+    },
+    {
+      "id": "MCL005-es-exercise-5",
+      "module": "MCL005",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/musicology/es/mcl-005-preserve-written-and-sounding-pitch.es.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "917fb44a87684b512831509675011b1aa7101c1e9fdd2154e1a299cf686eb356",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "52 and40 both reduce to class4; an intended-versus-actual absolute sounding comparison detects the octave error. Schema/application/render/playback gates remain untested."
+    },
+    {
+      "id": "GAA006-en-exercise-1",
+      "module": "GAA006",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-006-separate-capo-shapes-from-sounding-pitches.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "42c59f63b60a2782e0c674cb43d352d51d9c54ce042d4a3dd8688bb6da625671",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "B-major shape/capo2 gives C# major, (11+2)%12=1. Sounding B minor/capo4 requires G-minor shape, (11-4)%12=7. Direction and quality are preserved."
+    },
+    {
+      "id": "GAA006-en-exercise-2",
+      "module": "GAA006",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-006-separate-capo-shapes-from-sounding-pitches.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "1eba569d56b5e63497edb4ef91eb0cc91fd1c69398dd296d3a698f67e098c9b7",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "G minor preserves0,3,7 and gives B minor; G major preserves0,4,7 and gives B major. Both roots reach11, so root-only success misses quality."
+    },
+    {
+      "id": "GAA006-en-exercise-3",
+      "module": "GAA006",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-006-separate-capo-shapes-from-sounding-pitches.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "dbb159ed0bc864170a5933e830905db2d5c1edd7768b410e1467008287d338dd",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "40+12=52 and both classes are4. E alone cannot certify octave; retain an absolute note/register for sounding-pitch tasks."
+    },
+    {
+      "id": "GAA006-en-exercise-4",
+      "module": "GAA006",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-006-separate-capo-shapes-from-sounding-pitches.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "dcca3e7be76319df3601c0a9c5817c1d56832cc239a3c22a6441c33b5475923d",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "C/class0 versus C#/class1 follows different source-B conventions. Eb/D# share class3 under declared equal temperament and differ in spelling."
+    },
+    {
+      "id": "GAA006-en-exercise-5",
+      "module": "GAA006",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-006-separate-capo-shapes-from-sounding-pitches.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "a77c52c9b6e5ef17f2da23d3e8f3b2b9f00e99fd198cf80a1b1971439dccca3f",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Explicitly unapplied control64-12+2 gives54. Already-final54 must not become56; clarify input/output domain and previously applied offsets first."
+    },
+    {
+      "id": "GAA006-fr-exercise-1",
+      "module": "GAA006",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-006-separate-capo-shapes-from-sounding-pitches.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "21a98745c21389cdfd6748af07fe55a3484708cbad6e8db679a591bc917c50fb",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "B-major shape/capo2 gives C# major, (11+2)%12=1. Sounding B minor/capo4 requires G-minor shape, (11-4)%12=7. Direction and quality are preserved."
+    },
+    {
+      "id": "GAA006-fr-exercise-2",
+      "module": "GAA006",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-006-separate-capo-shapes-from-sounding-pitches.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "c5782cf0d0e6d26b667e732f9835abb16f3ba5487e314017181c0490f48d8c41",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "G minor preserves0,3,7 and gives B minor; G major preserves0,4,7 and gives B major. Both roots reach11, so root-only success misses quality."
+    },
+    {
+      "id": "GAA006-fr-exercise-3",
+      "module": "GAA006",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-006-separate-capo-shapes-from-sounding-pitches.fr.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "dd09657c51422f3960c6847c46ee73bb3affd6187e0dc7b39c0002ee2bb3c878",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "40+12=52 and both classes are4. E alone cannot certify octave; retain an absolute note/register for sounding-pitch tasks."
+    },
+    {
+      "id": "GAA006-fr-exercise-4",
+      "module": "GAA006",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-006-separate-capo-shapes-from-sounding-pitches.fr.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "54daaa415dff2b7ce6bfdd7ddaa0250de3295e659c0004de9e0c922933eb8fbd",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "C/class0 versus C#/class1 follows different source-B conventions. Eb/D# share class3 under declared equal temperament and differ in spelling."
+    },
+    {
+      "id": "GAA006-fr-exercise-5",
+      "module": "GAA006",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-006-separate-capo-shapes-from-sounding-pitches.fr.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "076b16ac3dd5e7227813da2518c5e02a33b74ebab7ce0f472b9836e855f3b404",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Explicitly unapplied control64-12+2 gives54. Already-final54 must not become56; clarify input/output domain and previously applied offsets first."
+    },
+    {
+      "id": "GAA006-es-exercise-1",
+      "module": "GAA006",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-006-separate-capo-shapes-from-sounding-pitches.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "237fe46b4b61f214e73bfeac54fea3fc13ac44759ec997e1c59fd90ad96419ce",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "B-major shape/capo2 gives C# major, (11+2)%12=1. Sounding B minor/capo4 requires G-minor shape, (11-4)%12=7. Direction and quality are preserved."
+    },
+    {
+      "id": "GAA006-es-exercise-2",
+      "module": "GAA006",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-006-separate-capo-shapes-from-sounding-pitches.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "889b6efbe90b9973c53c8aecb2d035abf2364559bc5e89f144e15f8201f0ed52",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "G minor preserves0,3,7 and gives B minor; G major preserves0,4,7 and gives B major. Both roots reach11, so root-only success misses quality."
+    },
+    {
+      "id": "GAA006-es-exercise-3",
+      "module": "GAA006",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-006-separate-capo-shapes-from-sounding-pitches.es.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "b02347bdc5e2ab838394ace3e846e334def7cf1ac4db8d913f7e8d75eac08c55",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "40+12=52 and both classes are4. E alone cannot certify octave; retain an absolute note/register for sounding-pitch tasks."
+    },
+    {
+      "id": "GAA006-es-exercise-4",
+      "module": "GAA006",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-006-separate-capo-shapes-from-sounding-pitches.es.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "883a6f95174cb6dc0a6f8fd02edfc887eec554d8ad7e3591bb056e123b853a25",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "C/class0 versus C#/class1 follows different source-B conventions. Eb/D# share class3 under declared equal temperament and differ in spelling."
+    },
+    {
+      "id": "GAA006-es-exercise-5",
+      "module": "GAA006",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-006-separate-capo-shapes-from-sounding-pitches.es.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "9e11165134348ad8cef4c6a7d31d8dea2a52308a961e2f4d31680f98ea4e4f17",
+      "decision": "pass",
+      "review_basis": "Direct independent semantic reading of the localized prompt and answer against the English source, fixed packet and primary sources; not a fluent human or learner outcome.",
+      "checked_conclusion": "Explicitly unapplied control64-12+2 gives54. Already-final54 must not become56; clarify input/output domain and previously applied offsets first."
+    }
+  ],
+  "learner_criterion_checks": [
+    {
+      "id": "WML005-1",
+      "module": "WML005",
+      "title": "declared-mapping",
+      "acceptance_reviewed": "Reconstruct English B/Bb and German B/H with canonical English spellings and classes 11/10/10/11; do not infer convention from location.",
+      "decision": "pass",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no learner has been assessed.",
+      "review_note": "Table and lesson explicitly use declared conventions rather than nationality; all four mappings match the LilyPond language distinction without claiming LilyPond Bb syntax.",
+      "evidence_paths": [
+        "code/streeling/evidence/pitch-context-2026-10-22/language-decisions.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/primary-readback.json"
+      ],
+      "learner_decision": null
+    },
+    {
+      "id": "WML005-2",
+      "module": "WML005",
+      "title": "unresolved-outcomes",
+      "acceptance_reviewed": "Keep unspecified B as needs-convention and English H as outside-declared-vocabulary; neither may silently resolve.",
+      "decision": "pass",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no learner has been assessed.",
+      "review_note": "Task/rubric distinguish ambiguity from unsupported vocabulary, matching the six authored decision rows.",
+      "evidence_paths": [
+        "code/streeling/evidence/pitch-context-2026-10-22/language-decisions.json"
+      ],
+      "learner_decision": null
+    },
+    {
+      "id": "WML005-3",
+      "module": "WML005",
+      "title": "source-contract",
+      "acceptance_reviewed": "Identify A-G source grammar, required octave for PitchParser, root-versus-absolute distinction and unanchored-pattern caveat; no claim of fresh C# execution or LilyPond syntax compatibility.",
+      "decision": "pass",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no learner has been assessed.",
+      "review_note": "Pinned NaturalNote is A-G anchored; PitchParser has A-G alternatives, required octave and an unanchored pattern. Lessons retain non-execution and syntax boundaries.",
+      "evidence_paths": [
+        "code/streeling/evidence/pitch-context-2026-10-22/primary-readback.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/data-audit.json"
+      ],
+      "learner_decision": null
+    },
+    {
+      "id": "WML005-4",
+      "module": "WML005",
+      "title": "downstream-divergence",
+      "acceptance_reviewed": "Derive English B+2 to class1/C# versus German B normalized Bb+2 to class0/C; arithmetic cannot repair a guessed convention.",
+      "decision": "pass",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no learner has been assessed.",
+      "review_note": "Both arithmetic branches agree with independently audited arithmetic and two actual tool responses; ambiguity precedes transposition.",
+      "evidence_paths": [
+        "code/streeling/evidence/pitch-context-2026-10-22/language-decisions.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/theory-tool-probes.json"
+      ],
+      "learner_decision": null
+    },
+    {
+      "id": "WML005-5",
+      "module": "WML005",
+      "title": "reversible-handoff",
+      "acceptance_reviewed": "Retain original token, convention, canonical result and evidence; equal canonical B for English B/German H does not preserve original text; proposed design is not an installed schema.",
+      "decision": "pass",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no learner has been assessed.",
+      "review_note": "Task asks for preserved token/convention/evidence and unresolved state; advisory handoff is not asserted to be a mandatory schema or installed adapter.",
+      "evidence_paths": [
+        "code/streeling/evidence/pitch-context-2026-10-22/language-decisions.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/learner-task.md"
+      ],
+      "learner_decision": null
+    },
+    {
+      "id": "MCL005-1",
+      "module": "MCL005",
+      "title": "declared-transpose",
+      "acceptance_reviewed": "Derive 52+0+12*(-1)=40 and concert40+0=40; wrong repeated octave gives28. Chromatic excludes octave contribution; limited ordinary-note scope.",
+      "decision": "pass",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no learner has been assessed.",
+      "review_note": "MusicXML chromatic excludes octave-change and both add to written pitch. Limited non-doubled fixture calculations40/40 and wrong28 are correct.",
+      "evidence_paths": [
+        "code/streeling/evidence/pitch-context-2026-10-22/authored-xml-inputs.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/transposition-arithmetic.json"
+      ],
+      "learner_decision": null
+    },
+    {
+      "id": "MCL005-2",
+      "module": "MCL005",
+      "title": "retained-record",
+      "acceptance_reviewed": "Explain actual structural equality of base and transpose inputs, retained E3/52, and missing transpose field; source helper execution is not deployed application behavior.",
+      "decision": "pass",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no learner has been assessed.",
+      "review_note": "Actual parsed-score equality and retained E3/52 match packet; Attributes lacks transpose. Helper evidence is explicitly distinct from deployed application behavior.",
+      "evidence_paths": [
+        "code/streeling/evidence/pitch-context-2026-10-22/native-parser-results.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/execution.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/primary-readback.json"
+      ],
+      "learner_decision": null
+    },
+    {
+      "id": "MCL005-3",
+      "module": "MCL005",
+      "title": "clef-policy",
+      "acceptance_reviewed": "Explain base/clef-change equality and lost clef octave metadata without treating every clef indicator as a second sounding offset; require file encoding policy.",
+      "decision": "pass",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no learner has been assessed.",
+      "review_note": "Clef-change input/parsed equality establishes lost metadata only; no automatic second offset or universal score-producer policy is claimed.",
+      "evidence_paths": [
+        "code/streeling/evidence/pitch-context-2026-10-22/authored-xml-inputs.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/native-parser-results.json"
+      ],
+      "learner_decision": null
+    },
+    {
+      "id": "MCL005-4",
+      "module": "MCL005",
+      "title": "nested-losses",
+      "acceptance_reviewed": "Explain decimal0.5 becomes absent then defaults0, integer0 remains explicit, and H/missing-octave each retain one note/no pitch; sentinel-999 is not musical; deficient fixtures not schema validated.",
+      "decision": "pass",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no learner has been assessed.",
+      "review_note": "All nested losses match unchanged source and native observations: None vs explicit0, H/missing-octave one note/no pitch, -999 sentinel, no schema-validation claim.",
+      "evidence_paths": [
+        "code/streeling/evidence/pitch-context-2026-10-22/authored-xml-inputs.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/native-parser-results.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/native-stdout.txt",
+        "code/streeling/evidence/pitch-context-2026-10-22/primary-readback.json"
+      ],
+      "learner_decision": null
+    },
+    {
+      "id": "MCL005-5",
+      "module": "MCL005",
+      "title": "discriminating-check",
+      "acceptance_reviewed": "Show 52 and40 share class4 but differ in register; choose an absolute sounding comparison; retain missing schema/import/render/playback/human/learner tests.",
+      "decision": "pass",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no learner has been assessed.",
+      "review_note": "Absolute40 versus52 is a discriminating check while modulo12 fails. Missing application, schema, rendering, playback, human and learner gates remain visible.",
+      "evidence_paths": [
+        "code/streeling/evidence/pitch-context-2026-10-22/transposition-arithmetic.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/execution.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/learner-task.md"
+      ],
+      "learner_decision": null
+    },
+    {
+      "id": "GAA006-1",
+      "module": "GAA006",
+      "title": "direction",
+      "acceptance_reviewed": "Derive B shape/capo2→C# major and sounding B minor/capo4→G minor; add for sound, subtract for shape.",
+      "decision": "pass",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no learner has been assessed.",
+      "review_note": "Forward addition and inverse subtraction preserve major/minor quality for the stated B examples, matching arithmetic and recorded tool probes.",
+      "evidence_paths": [
+        "code/streeling/evidence/pitch-context-2026-10-22/capo-arithmetic.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/theory-tool-probes.json"
+      ],
+      "learner_decision": null
+    },
+    {
+      "id": "GAA006-2",
+      "module": "GAA006",
+      "title": "quality-and-scope",
+      "acceptance_reviewed": "Preserve relative major0,4,7 versus minor0,3,7; root-only success misses quality; 12*13*2=312 finite arithmetic cases do not prove arbitrary symbols, routing or comfort.",
+      "decision": "pass",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no learner has been assessed.",
+      "review_note": "Triad lists and312=12*13*2 coverage are correct; enumeration is finite arithmetic and is not represented as CapoSkill execution or ergonomic/routing evidence.",
+      "evidence_paths": [
+        "code/streeling/evidence/pitch-context-2026-10-22/capo-arithmetic.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/data-audit.json"
+      ],
+      "learner_decision": null
+    },
+    {
+      "id": "GAA006-3",
+      "module": "GAA006",
+      "title": "register",
+      "acceptance_reviewed": "Explain open40+capo12=52 with both class4; a root E cannot certify absolute pitch; tab source inspection is not a fresh converter run.",
+      "decision": "pass",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no learner has been assessed.",
+      "review_note": "Capo12 raises40 to52, preserving class4 only; inspected tab converter adds standard tuning and fret, lacks capo parameter, and was not freshly executed.",
+      "evidence_paths": [
+        "code/streeling/evidence/pitch-context-2026-10-22/capo-arithmetic.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/primary-readback.json"
+      ],
+      "learner_decision": null
+    },
+    {
+      "id": "GAA006-4",
+      "module": "GAA006",
+      "title": "interpretation-and-spelling",
+      "acceptance_reviewed": "Distinguish C/C# classes0/1 due to different B conventions from Eb/D# same class3 under equal temperament; tool responses have unknown revision and do not execute CapoSkill.",
+      "decision": "pass",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no learner has been assessed.",
+      "review_note": "Class disagreement due to naming convention and enharmonic spelling are separately taught. Three actual tool responses carry unknown runtime revision, not CapoSkill evidence.",
+      "evidence_paths": [
+        "code/streeling/evidence/pitch-context-2026-10-22/language-decisions.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/capo-arithmetic.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/theory-tool-probes.json"
+      ],
+      "learner_decision": null
+    },
+    {
+      "id": "GAA006-5",
+      "module": "GAA006",
+      "title": "composition-domain",
+      "acceptance_reviewed": "Derive explicitly unapplied64-12+2=54; already-final54 must not become56; clarify shape/written/sounding domain and previously applied adjustments before composing.",
+      "decision": "pass",
+      "meaning": "Prepared task and acceptance criterion are correct and supported; no learner has been assessed.",
+      "review_note": "Explicit unapplied64-12+2=54 and double-count54+2=56 controls are correct. Domain and already-applied-adjustment clarification are required before composition.",
+      "evidence_paths": [
+        "code/streeling/evidence/pitch-context-2026-10-22/capo-arithmetic.json",
+        "code/streeling/evidence/pitch-context-2026-10-22/learner-task.md"
+      ],
+      "learner_decision": null
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-005-declare-note-name-conventions.md",
+      "sha256": "6f2b4dc89deddd995693c2be4dee7bf2bb130d3e1d04b3691a7922bfeb8abcbb"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/fr/wml-005-declare-note-name-conventions.fr.md",
+      "sha256": "943a5012ce02b07019fdfe32c827f554bfe43458887a75f5e441b64da54bd380"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/es/wml-005-declare-note-name-conventions.es.md",
+      "sha256": "40423d305aceeb8d5f630d4d786b31881db9db52c1adee64016bce994ffb74b0"
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-005-preserve-written-and-sounding-pitch.md",
+      "sha256": "b4bcf44717f388103507ea2679cbe143bc01251cbd1079a1e6a5c8e89c5fd5dd"
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-005-preserve-written-and-sounding-pitch.fr.md",
+      "sha256": "eff474602ca9f65fc1981e34ec45c7f70dca5bb9ffb1a688f059eebe18dbb835"
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-005-preserve-written-and-sounding-pitch.es.md",
+      "sha256": "45288bbb3a99c7ed35c8f6221b4185996be646b7958b3b083d820183fe3aab2e"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-006-separate-capo-shapes-from-sounding-pitches.md",
+      "sha256": "e055691e582eedd19198e5138a0a7b761ab2ddcaf3698c92e6d7630375b0dba7"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-006-separate-capo-shapes-from-sounding-pitches.fr.md",
+      "sha256": "e2a460019b2eb826d786a794cc51fac7338a9a7e23f5883213ebae932db6a753"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-006-separate-capo-shapes-from-sounding-pitches.es.md",
+      "sha256": "086b367856e7298f0d65838a3401ecdf6da9774b0fada550b2496decbd96a2d7"
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/pitch-context-2026-10-22/production-plan.md",
+      "sha256": "d1fdd471a39c84d3dac14623f876b7d22bef2a8e7748882eba9116fef4aa5b73"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-context-2026-10-22/README.md",
+      "sha256": "b383a3ddc34eaa41bcb98d710f9ffd10e41a997a1f103986df42220c271734c7"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-context-2026-10-22/primary-readback.json",
+      "sha256": "8ee7cd6510d4607d5ecf5eb106b15fde027e1cb9c4ffbc5842edad3c7fab8734"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-context-2026-10-22/authored-xml-inputs.json",
+      "sha256": "e0fa8108e2853faa96ba1f889443ff43eb4669f320682589272b5a8313f54f07"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-context-2026-10-22/native-parser-results.json",
+      "sha256": "06d626aa775f6114c7ac8cb881d81426253bb74e516e867a3d4b8db4298822f2"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-context-2026-10-22/execution.json",
+      "sha256": "c692c80eb7509ab59aa977af93621a90391ff3ef2011a41a530aa23253002eae"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-context-2026-10-22/native-stdout.txt",
+      "sha256": "5fe106c42e48223dd3447bad2d549accc7e31866c38b4648d604c260d5784ae9"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-context-2026-10-22/native-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-context-2026-10-22/language-decisions.json",
+      "sha256": "8328cbe8c2a7599aa867b7950692ee94089fbdc9450537ff1ebcd4aa351c0261"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-context-2026-10-22/capo-arithmetic.json",
+      "sha256": "aee226df4b1ce88b9ea35da9c2dfd603f083d47511009888a15ecb674e8fad59"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-context-2026-10-22/transposition-arithmetic.json",
+      "sha256": "b7fa65403f7a82db717dca2bcfcb0b989c86bdc7a91369839abc9279efb5f4e6"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-context-2026-10-22/theory-tool-probes.json",
+      "sha256": "a6d5a5d5036c2b4ff4b9b562938e2c4d420a589bd06ee4b8dfec62b7e30049e9"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-context-2026-10-22/official-links.json",
+      "sha256": "6c835acb2f85304270d999fda285eca1f18ca7243f710816e8e8162795a349e3"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-context-2026-10-22/data-audit.json",
+      "sha256": "cc8156a219d7b058f7dbaa0ee5b588d38e3c7678e6c2ed455bf3b1c6b2811601"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-context-2026-10-22/learner-task.md",
+      "sha256": "2ba6a35be12d12c55dbc17db5e63b79a1e383fdcd736ea553af3117b7275e7de"
+    },
+    {
+      "path": "code/streeling/evidence/pitch-context-2026-10-22/reviewer-rubric.json",
+      "sha256": "277e11d7d0bf31cd5615dadca39877028f86a09104e3b32f17bf63e31fefa62f"
+    }
+  ],
+  "prerequisite_bindings": [
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-003-term-preservation-and-cultural-review.md",
+      "sha256": "e7d5b48dcccb9937971eaabd2e0b9fc9aa6ef6555b0fe24d0532f69303af5279"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-004-choose-a-useful-voicing.md",
+      "sha256": "d9a937a6af8e4f2ea684cf1735c584bea6aca49a62bbef5cd4b866522fa94d14"
+    }
+  ],
+  "primary_source_review": [
+    {
+      "path": "Common/GA.Domain.Core/Primitives/Notes/PitchParser.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Domain.Core/Primitives/Notes/PitchParser.cs",
+      "sha256": "4ee6a2f853461e60080b30d49dfc3fd618eb46d541230750c0e2ee1819094197",
+      "review_scope": "Actual pinned source file directly read; hash independently matched to data-audit source binding. No C# execution or deployed revision claim."
+    },
+    {
+      "path": "Common/GA.Domain.Core/Primitives/Notes/NaturalNote.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Domain.Core/Primitives/Notes/NaturalNote.cs",
+      "sha256": "dc10def9254dee4992dccffaae37a1356a81c6a34a3f068095405f3d001f043f",
+      "review_scope": "Actual pinned source file directly read; hash independently matched to data-audit source binding. No C# execution or deployed revision claim."
+    },
+    {
+      "path": "Common/GA.Business.DSL/Types/MusicXmlTypes.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.DSL/Types/MusicXmlTypes.fs",
+      "sha256": "e894f70561db1f4d1bdd378e8ccc0646250793896144f0a7f39a66b18d40cd1a",
+      "review_scope": "Actual pinned source file directly read; hash independently matched to data-audit source binding. No C# execution or deployed revision claim."
+    },
+    {
+      "path": "Common/GA.Business.DSL/Parsers/MusicXmlParser.fs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.DSL/Parsers/MusicXmlParser.fs",
+      "sha256": "73ab96a59b50831b9930cbb8d37368febd6fc8d124d57ca70a3ff4c289940fee",
+      "review_scope": "Actual pinned source file directly read; hash independently matched to data-audit source binding. No C# execution or deployed revision claim."
+    },
+    {
+      "path": "Common/GA.Business.ML/Agents/Skills/CapoSkill.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.ML/Agents/Skills/CapoSkill.cs",
+      "sha256": "ea548ed5575a5ea70adfa8db1065bb84c286ac825817e8bfb2f443da96289130",
+      "review_scope": "Actual pinned source file directly read; hash independently matched to data-audit source binding. No C# execution or deployed revision claim."
+    },
+    {
+      "path": "Common/GA.Business.ML/Tabs/TabToPitchConverter.cs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/dc2e74cbd992a298f67efb928b5b3754615e1924/Common/GA.Business.ML/Tabs/TabToPitchConverter.cs",
+      "sha256": "832ec67ce481fb0ebec6271e82b785746f27c02acfd9f1a525b9e75d6ee62ace",
+      "review_scope": "Actual pinned source file directly read; hash independently matched to data-audit source binding. No C# execution or deployed revision claim."
+    }
+  ],
+  "official_document_review": [
+    {
+      "url": "https://lilypond.org/doc/v2.24/Documentation/notation/writing-pitches",
+      "snapshot_sha256": "36929f6a09fde10044f296b2da3dd2cfe196f657d7ee32c9890f66d015d4c06c",
+      "review_scope": "Official versioned page directly opened and read independently; snapshot hash is the bound data-audit provenance."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/transpose/",
+      "snapshot_sha256": "ba953e7aae5ab2ce530d644cb4c863d2b72a56d2603a73ec4daa69228374c2eb",
+      "review_scope": "Official versioned page directly opened and read independently; snapshot hash is the bound data-audit provenance."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/chromatic/",
+      "snapshot_sha256": "0daf1e9d512305bdff5b11f2bc007c617a388cd02449b52e1cd20ec6cbcdd67e",
+      "review_scope": "Official versioned page directly opened and read independently; snapshot hash is the bound data-audit provenance."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/octave-change/",
+      "snapshot_sha256": "bc6c624005fa530a1f8ce1125444325301e47e3eee1feb4a811e40425d911e6e",
+      "review_scope": "Official versioned page directly opened and read independently; snapshot hash is the bound data-audit provenance."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pitch/",
+      "snapshot_sha256": "658e0b57f28167a11a3eb22dc659de32cd5311b9027d3223ac3d3004b1a8b7cb",
+      "review_scope": "Official versioned page directly opened and read independently; snapshot hash is the bound data-audit provenance."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/alter/",
+      "snapshot_sha256": "c6614155c8b1da316160a8d9c1dfce335dfb4ccab7fa0299c222d0051bc40e6d",
+      "review_scope": "Official versioned page directly opened and read independently; snapshot hash is the bound data-audit provenance."
+    },
+    {
+      "url": "https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/clef-octave-change/",
+      "snapshot_sha256": "20577abe7f785e47e05e84b8dcad0f71e98d809e80775d3ae5e64f1ecc93200b",
+      "review_scope": "Official versioned page directly opened and read independently; snapshot hash is the bound data-audit provenance."
+    }
+  ],
+  "pending": {
+    "human_technical_review": null,
+    "fluent_language_review": null,
+    "learner_attempts": null,
+    "independent_learner_transfer": null,
+    "physical_guitar": null,
+    "application_import": null,
+    "schema_validation": null,
+    "notation_rendering": null,
+    "audio_playback": null,
+    "deployed_html": null
+  },
+  "human_technical_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "boundaries": [
+    "Declared naming conventions are not inferred from nationality, interface language or location.",
+    "German B maps to English Bb, while German H maps to English B; canonical teaching spellings are not asserted as executable LilyPond syntax.",
+    "No C# parser, CapoSkill, tab converter or automatic language adapter execution is claimed.",
+    "MusicXML chromatic excludes the octave-change contribution; clef metadata is not blindly applied as a second offset.",
+    "Outer Result.Ok does not certify nested pitch preservation; -999 is an observation sentinel and0.5 loss is retained.",
+    "Modulo pitch class discards register;312 cases are authored arithmetic, not a CapoSkill, application-route or physical-guitar test.",
+    "Handoffs are advisory proposals, not mandatory ecosystem schema changes.",
+    "Three actual theory-tool responses have unknown runtime revision.",
+    "No builds, GPU/audio work, dependency installation or paid calls were performed by this reviewer."
+  ]
+}

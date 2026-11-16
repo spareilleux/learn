@@ -1,0 +1,86 @@
+{
+  "observed_at_utc": "2026-10-29T12:22:20.799531+00:00",
+  "command": [
+    "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "C:\\tmp\\batch25c-c-review\\false-finding-followup-2026-10-29T12-19-23-801Z\\mutation-probe.py"
+  ],
+  "cwd": "C:\\tmp\\learn-streeling-craft-transfer-20261022",
+  "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+  "exit": 0,
+  "test_count": null,
+  "observation_count": 1,
+  "log": {
+    "path": "C:\\tmp\\batch25c-c-review\\false-finding-followup-2026-10-29T12-19-23-801Z\\mutation-probe.log",
+    "sha256": "23e5c0426fd2171f9b03074f824b80fd76f4509a2549ca9902b9fb4111a88a6a"
+  },
+  "inputs": {
+    "packet": {
+      "path": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-25-c\\unit-c.json",
+      "sha256": "bca15c52393ab47680db75bb904f75ef7dbb5df006a9975b9fe63a4b176edad4"
+    },
+    "test": {
+      "path": "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-25-c\\tests\\test_unit_c.py",
+      "sha256": "481167b61423dd6cbbff69304ba6850c0b76cbe18e1c0aaf9103f8a264c1a4d1"
+    }
+  },
+  "scope": "Fresh deliberate co-mutated input detector probe against restored packet; rejection is expected and is not a course failure.",
+  "script": {
+    "path": "C:\\tmp\\batch25c-c-review\\false-finding-followup-2026-10-29T12-19-23-801Z\\mutation-probe.py",
+    "sha256": "99f7daba9825d1ae541d5dc7acdc5ee297857bfa2b90df8e073240ea7912771c"
+  },
+  "probe": {
+    "canonical_packet_modified": false,
+    "code": "SEM023",
+    "independent_fixed_oracle_rejected": true,
+    "kind": "deliberate detector probe; not course failure",
+    "mutation": "main p[0]: 1 -> 2; packet expected co-mutated to evaluator result",
+    "observed": {
+      "displacement": [
+        2.0,
+        4.0,
+        0.0
+      ],
+      "p_world": [
+        12.0,
+        0.0,
+        5.0
+      ],
+      "q_world": [
+        14.0,
+        4.0,
+        5.0
+      ],
+      "translated_difference": [
+        2.0,
+        4.0,
+        0.0
+      ]
+    },
+    "packet_consistency_passes": true,
+    "packet_expected": {
+      "displacement": [
+        2.0,
+        4.0,
+        0.0
+      ],
+      "p_world": [
+        12.0,
+        0.0,
+        5.0
+      ],
+      "q_world": [
+        14.0,
+        4.0,
+        5.0
+      ],
+      "translated_difference": [
+        2.0,
+        4.0,
+        0.0
+      ]
+    }
+  }
+}

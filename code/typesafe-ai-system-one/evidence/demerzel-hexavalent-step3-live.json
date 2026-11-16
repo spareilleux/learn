@@ -1,0 +1,2630 @@
+{
+  "status": "complete",
+  "plan": {
+    "mode": "plan",
+    "corpus": "demerzel-hexavalent/1",
+    "definitions": "leaning",
+    "cases": 60,
+    "agreed_cases": 58,
+    "arms": [
+      "canonical",
+      "reversed"
+    ],
+    "calls": 120,
+    "total_payload_utf8_bytes": 150162,
+    "input_cost_proxy_usd": 0.006306804,
+    "stop_after_reported_input_cost_usd": 0.05,
+    "actual_billed_cost_guaranteed": false,
+    "retries": 0
+  },
+  "corpus_sha256": "a06b65f67d6ed866bff02a3cb805429ea3b3dd7dd3c72f39152d4a2f97526ebf",
+  "calls": [
+    {
+      "arm": "canonical",
+      "id": "h01",
+      "request_sha256": "f513376396aed34a8ad4fabe15e6a05babe49c520fb0294f4abd5062f385169c",
+      "elapsed_ms": 429.5,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 639,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.99,
+      "probabilities": {
+        "T": 0.0,
+        "U": 0.0,
+        "P": 0.0,
+        "D": 0.0,
+        "C": 1.0,
+        "F": 0.0
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h02",
+      "request_sha256": "8c514c1da09387cc39a0b9415d9a477cf001e350b3cc6f51575d6f21e12fe1e3",
+      "elapsed_ms": 342.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 623,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.63,
+      "probabilities": {
+        "F": 0.7,
+        "D": 0.19,
+        "U": 0.08,
+        "P": 0.0,
+        "C": 0.03,
+        "T": 0.0
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h03",
+      "request_sha256": "7b9a180db6f373a7ac88b5f00968f406995e393ec8718c79cc0e7e617c294f03",
+      "elapsed_ms": 428.4,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 613,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.83,
+      "probabilities": {
+        "T": 0.0,
+        "P": 0.0,
+        "U": 0.0,
+        "D": 0.04,
+        "C": 0.09,
+        "F": 0.87
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h04",
+      "request_sha256": "a31120647e0455761b28ef6541c9becc413f032c520caae2b1cff84f6f68571a",
+      "elapsed_ms": 397.4,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 625,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.68,
+      "probabilities": {
+        "T": 0.0,
+        "F": 0.23,
+        "C": 0.74,
+        "U": 0.0,
+        "D": 0.03,
+        "P": 0.0
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h05",
+      "request_sha256": "d5486523c0b7edc979a3947f989405d311f6a6ae4e812587d9cdad9f9f3aa204",
+      "elapsed_ms": 399.2,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 609,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.82,
+      "probabilities": {
+        "D": 0.0,
+        "T": 0.86,
+        "C": 0.0,
+        "P": 0.13,
+        "F": 0.0,
+        "U": 0.01
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h06",
+      "request_sha256": "51ebc0536801c6b0fa445ef98977a6c6dd6fe95f17437391bf0e36542d306e2a",
+      "elapsed_ms": 415.7,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 618,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.9,
+      "probabilities": {
+        "F": 0.06,
+        "T": 0.0,
+        "P": 0.0,
+        "U": 0.02,
+        "C": 0.0,
+        "D": 0.92
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h07",
+      "request_sha256": "d61efc7b119eb8927200a3c6cb961f7f9af4c77613f0b9ac08b4faaf17dd945d",
+      "elapsed_ms": 378.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 592,
+        "output_tokens": 66
+      },
+      "prediction": "U",
+      "confidence": 0.48,
+      "probabilities": {
+        "D": 0.41,
+        "U": 0.5700000000000001,
+        "P": 0.01,
+        "F": 0.01,
+        "T": 0.0,
+        "C": 0.0
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h08",
+      "request_sha256": "7dee9b00085dbaa43770f0de7cf18571d8a3f33bf7a90477e4ae4a73bc25ac7c",
+      "elapsed_ms": 352.9,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 602,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.8,
+      "probabilities": {
+        "C": 0.0,
+        "T": 0.84,
+        "F": 0.0,
+        "D": 0.0,
+        "P": 0.15,
+        "U": 0.01
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h09",
+      "request_sha256": "1465fb110c9b3d0e942fbfe2c3a52bf2c5e10e866b9b5d2157a2752a7e823cee",
+      "elapsed_ms": 392.2,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 616,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.98,
+      "probabilities": {
+        "C": 0.01,
+        "U": 0.0,
+        "P": 0.0,
+        "D": 0.0,
+        "T": 0.0,
+        "F": 0.99
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h10",
+      "request_sha256": "507b1e136a86a548760855548a3645d6ef91a91316ac091c4d6c3ee9d9eb934b",
+      "elapsed_ms": 394.8,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 600,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.81,
+      "probabilities": {
+        "C": 0.0,
+        "T": 0.01,
+        "F": 0.0,
+        "D": 0.0,
+        "P": 0.84,
+        "U": 0.15
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h11",
+      "request_sha256": "23ab49f1162d6963c614ddb505315bdfcbdb8a1aabee92be2ffd04c9c1a9df77",
+      "elapsed_ms": 372.8,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 670,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.38,
+      "probabilities": {
+        "D": 0.02,
+        "T": 0.15,
+        "P": 0.01,
+        "F": 0.33,
+        "C": 0.48,
+        "U": 0.01
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h12",
+      "request_sha256": "eb737af7ed55d4a33c4658633a1998f4acb0bab637126afe0e3f6874d5ff0977",
+      "elapsed_ms": 386.1,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 599,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.87,
+      "probabilities": {
+        "C": 0.01,
+        "U": 0.01,
+        "T": 0.0,
+        "D": 0.88,
+        "P": 0.02,
+        "F": 0.08
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h13",
+      "request_sha256": "02e6badacd3aa48c97852196a6902d62eb3be667a86d4ae59691f596664e6559",
+      "elapsed_ms": 360.5,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 578,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.42,
+      "probabilities": {
+        "F": 0.06,
+        "C": 0.0,
+        "T": 0.0,
+        "D": 0.52,
+        "U": 0.41,
+        "P": 0.01
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h14",
+      "request_sha256": "6df96c3e7b61a0d2f9e1bebb693540d94b83a650ad91cb9de0537886c9d0eff3",
+      "elapsed_ms": 380.8,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 635,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.71,
+      "probabilities": {
+        "T": 0.76,
+        "U": 0.09,
+        "D": 0.01,
+        "C": 0.0,
+        "P": 0.13,
+        "F": 0.01
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h15",
+      "request_sha256": "a7e79fc5267e068a5f85a683385df1ad5278de42faba8d392f35b55cafbceaa0",
+      "elapsed_ms": 363.4,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 581,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.65,
+      "probabilities": {
+        "F": 0.01,
+        "D": 0.17,
+        "U": 0.1,
+        "P": 0.71,
+        "T": 0.0,
+        "C": 0.01
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h16",
+      "request_sha256": "fd908fc922c920fd1b8240df7ee64954efb852633ed9bee490806ca85b31b9c2",
+      "elapsed_ms": 373.9,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 640,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.58,
+      "probabilities": {
+        "C": 0.27,
+        "F": 0.65,
+        "P": 0.01,
+        "T": 0.0,
+        "D": 0.07,
+        "U": 0.0
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h17",
+      "request_sha256": "058286af432ec5842dbc02dcd3c3d2b45ddc215a1add333b45f3f7e950e627e7",
+      "elapsed_ms": 379.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 614,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.77,
+      "probabilities": {
+        "P": 0.0,
+        "F": 0.01,
+        "T": 0.0,
+        "C": 0.0,
+        "D": 0.81,
+        "U": 0.17
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h18",
+      "request_sha256": "82ee9a3106207f87310529eb32f25e5436dfc7dd43e3cd67e9d52723706eecd3",
+      "elapsed_ms": 351.2,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 615,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.72,
+      "probabilities": {
+        "P": 0.0,
+        "D": 0.03,
+        "F": 0.19,
+        "U": 0.0,
+        "T": 0.0,
+        "C": 0.78
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h19",
+      "request_sha256": "da2625a2fca8e3d97a8e6977bd07fe72104f87fb20c3553b4ee27201e2864be7",
+      "elapsed_ms": 377.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 608,
+        "output_tokens": 66
+      },
+      "prediction": "U",
+      "confidence": 0.56,
+      "probabilities": {
+        "F": 0.03,
+        "D": 0.33,
+        "U": 0.63,
+        "C": 0.0,
+        "T": 0.0,
+        "P": 0.01
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h20",
+      "request_sha256": "2026a53517df14f15d034a8043c4922ce108d4634dbc9e228f960a5d24d17ae9",
+      "elapsed_ms": 400.8,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 622,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.93,
+      "probabilities": {
+        "P": 0.03,
+        "D": 0.01,
+        "U": 0.01,
+        "T": 0.94,
+        "C": 0.0,
+        "F": 0.01
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h21",
+      "request_sha256": "03d499038eb19a8f1d2461790e42bf471bb2bde39e2195c834e75fe77b18bc26",
+      "elapsed_ms": 389.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 606,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.74,
+      "probabilities": {
+        "F": 0.8,
+        "U": 0.0,
+        "C": 0.13,
+        "P": 0.0,
+        "T": 0.0,
+        "D": 0.07
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h22",
+      "request_sha256": "3380f1891b2ccc8a95d7dbb6e154dd8594c439c4ede4b122a0361128c48fee58",
+      "elapsed_ms": 359.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 595,
+        "output_tokens": 66
+      },
+      "prediction": "U",
+      "confidence": 0.27,
+      "probabilities": {
+        "D": 0.33,
+        "P": 0.26,
+        "F": 0.01,
+        "T": 0.01,
+        "C": 0.0,
+        "U": 0.39
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h23",
+      "request_sha256": "090881f47e72f104aacf6727b91a3f885b94383917780352a4c9b2c1ae7de1f3",
+      "elapsed_ms": 385.1,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 600,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.31,
+      "probabilities": {
+        "D": 0.44,
+        "P": 0.1,
+        "F": 0.19,
+        "T": 0.01,
+        "U": 0.24,
+        "C": 0.02
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h24",
+      "request_sha256": "60c380d0a4a0d79c2b7941c8b6a7350129a2f5f7aa428809156859ca997d9eb1",
+      "elapsed_ms": 353.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 598,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.82,
+      "probabilities": {
+        "C": 0.0,
+        "U": 0.01,
+        "P": 0.0,
+        "T": 0.0,
+        "D": 0.86,
+        "F": 0.13
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h25",
+      "request_sha256": "a816059fe9368773452f02f51bead58b11725c1956e22bb217f19219adfdd9b1",
+      "elapsed_ms": 381.9,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 639,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.45,
+      "probabilities": {
+        "F": 0.42,
+        "D": 0.02,
+        "U": 0.0,
+        "P": 0.01,
+        "T": 0.01,
+        "C": 0.54
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h26",
+      "request_sha256": "0199ab1c870f7a5accce50ba38fef0e82d26422ceb7d76459fe928eca7ff8035",
+      "elapsed_ms": 379.4,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 603,
+        "output_tokens": 66
+      },
+      "prediction": "U",
+      "confidence": 0.37,
+      "probabilities": {
+        "T": 0.19,
+        "F": 0.0,
+        "P": 0.31,
+        "U": 0.49,
+        "D": 0.01,
+        "C": 0.0
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h27",
+      "request_sha256": "46a2f8324882ba26f918561a869acbc498e176e093215d4d42bbfa21f72b6b51",
+      "elapsed_ms": 398.2,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 581,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.56,
+      "probabilities": {
+        "T": 0.0,
+        "P": 0.64,
+        "C": 0.0,
+        "U": 0.27,
+        "D": 0.09,
+        "F": 0.0
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h28",
+      "request_sha256": "870c7df18f68acd9536fbe6e9bd2b7b4e1ca5134ab2469fc261ee1de21c6b340",
+      "elapsed_ms": 389.5,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 618,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.83,
+      "probabilities": {
+        "U": 0.0,
+        "D": 0.09,
+        "P": 0.01,
+        "F": 0.86,
+        "C": 0.03,
+        "T": 0.01
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h29",
+      "request_sha256": "a82b1ee649b296ae24fa14f49e31d21acc58987afee40fff9d7fb24380c67e61",
+      "elapsed_ms": 348.3,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 615,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.39,
+      "probabilities": {
+        "F": 0.49,
+        "P": 0.0,
+        "D": 0.41,
+        "T": 0.0,
+        "U": 0.07,
+        "C": 0.03
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h30",
+      "request_sha256": "af090aa2729b4fe2fae63f604694129e3d35bc869259eff9d8107d975e829df7",
+      "elapsed_ms": 360.9,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 582,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.84,
+      "probabilities": {
+        "T": 0.0,
+        "P": 0.0,
+        "U": 0.01,
+        "D": 0.87,
+        "C": 0.01,
+        "F": 0.11
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h31",
+      "request_sha256": "d91042f2be10fd21665f9b17d0d97a8499b527b24d624aa0c765e021653dfda5",
+      "elapsed_ms": 359.2,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 632,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.79,
+      "probabilities": {
+        "T": 0.84,
+        "F": 0.0,
+        "C": 0.0,
+        "U": 0.01,
+        "D": 0.0,
+        "P": 0.15
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h32",
+      "request_sha256": "c9bc9b408f17a2b080c2feb0def8273f16d51eab8c7f27467091d2bf921a4623",
+      "elapsed_ms": 374.9,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 622,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.81,
+      "probabilities": {
+        "T": 0.0,
+        "F": 0.01,
+        "D": 0.01,
+        "U": 0.13,
+        "P": 0.01,
+        "C": 0.84
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h33",
+      "request_sha256": "d7798cdbf27b149b3a060fb5440396152efc0b252399f840ffaa402770022a42",
+      "elapsed_ms": 402.8,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 589,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.97,
+      "probabilities": {
+        "T": 0.0,
+        "D": 0.97,
+        "C": 0.0,
+        "F": 0.01,
+        "P": 0.0,
+        "U": 0.02
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h34",
+      "request_sha256": "32f2a71d3cb2d37f2667ad6de000423dfda09d787a7344cc67f09f240335a431",
+      "elapsed_ms": 371.7,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 585,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.66,
+      "probabilities": {
+        "F": 0.0,
+        "U": 0.2,
+        "C": 0.0,
+        "P": 0.73,
+        "T": 0.02,
+        "D": 0.05
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h35",
+      "request_sha256": "dc2989dfc91f1ea1cfe005c86853167eae45e1a109b2b3a22343d8962aeae2d4",
+      "elapsed_ms": 533.7,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 602,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.33,
+      "probabilities": {
+        "D": 0.17,
+        "P": 0.04,
+        "U": 0.33,
+        "F": 0.44,
+        "T": 0.01,
+        "C": 0.01
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h36",
+      "request_sha256": "3c4fde7e9ae29646c74ec588d97fbd535af725a07c47ce403a48a7c81ef12edf",
+      "elapsed_ms": 386.2,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 594,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.38,
+      "probabilities": {
+        "T": 0.0,
+        "U": 0.02,
+        "C": 0.02,
+        "P": 0.0,
+        "F": 0.47,
+        "D": 0.49
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h37",
+      "request_sha256": "fe6298f751c584e7b7ba855d615f1b2410e071db4ed702e4ef061e7340c401b3",
+      "elapsed_ms": 361.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 627,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.98,
+      "probabilities": {
+        "T": 0.0,
+        "U": 0.0,
+        "C": 0.98,
+        "P": 0.0,
+        "F": 0.01,
+        "D": 0.01
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h38",
+      "request_sha256": "e33ecafa3fb1a4eb225ff1bb77b4fe529018668e909f42839b3e41b511fdbbe0",
+      "elapsed_ms": 386.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 588,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.86,
+      "probabilities": {
+        "D": 0.0,
+        "U": 0.01,
+        "P": 0.1,
+        "F": 0.0,
+        "T": 0.89,
+        "C": 0.0
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h39",
+      "request_sha256": "71e0ba442c8ccde257f1dbe52f8a8bb7f21edcb3acdf3ff332a4ee87774d06d8",
+      "elapsed_ms": 377.2,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 607,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.45,
+      "probabilities": {
+        "D": 0.54,
+        "P": 0.08,
+        "F": 0.05,
+        "U": 0.3,
+        "C": 0.02,
+        "T": 0.01
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h40",
+      "request_sha256": "ff099187f00684827bd3cdbfb747a3fdb0605443cb864284c7c0ce11d86f4f28",
+      "elapsed_ms": 362.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 581,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.77,
+      "probabilities": {
+        "F": 0.0,
+        "D": 0.01,
+        "U": 0.03,
+        "T": 0.16,
+        "C": 0.0,
+        "P": 0.8
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h41",
+      "request_sha256": "8eefc387566c53520b7522aa1d08c126d3a3cb65ff7fcfe62a56fba8dc109bed",
+      "elapsed_ms": 391.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 597,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.59,
+      "probabilities": {
+        "T": 0.0,
+        "U": 0.05,
+        "C": 0.02,
+        "P": 0.01,
+        "F": 0.25,
+        "D": 0.67
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h42",
+      "request_sha256": "6afd7e3e8b9c3362da4a155b190b054a76c827a6d7879579c66857b6d495a021",
+      "elapsed_ms": 406.4,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 632,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.69,
+      "probabilities": {
+        "T": 0.0,
+        "F": 0.74,
+        "D": 0.01,
+        "U": 0.01,
+        "P": 0.01,
+        "C": 0.23
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h43",
+      "request_sha256": "da77fac2b0f98d6e2aec5875c85af2ff9271db8159d8d37453010e328b1e41e4",
+      "elapsed_ms": 349.5,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 597,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.42,
+      "probabilities": {
+        "P": 0.43,
+        "F": 0.0,
+        "D": 0.0,
+        "C": 0.0,
+        "T": 0.52,
+        "U": 0.05
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h44",
+      "request_sha256": "566abf7a246fa69d741f871010d153864c11844d94058ad5fd36a4ac4a4baa16",
+      "elapsed_ms": 404.1,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 614,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.96,
+      "probabilities": {
+        "P": 0.0,
+        "T": 0.0,
+        "U": 0.0,
+        "D": 0.01,
+        "C": 0.97,
+        "F": 0.02
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h45",
+      "request_sha256": "cb952e44cf3b36c2baadd243fe402c9b3c50265f0418974854e67304956f1d9c",
+      "elapsed_ms": 444.3,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 630,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.59,
+      "probabilities": {
+        "F": 0.0,
+        "C": 0.0,
+        "U": 0.24,
+        "T": 0.0,
+        "D": 0.09,
+        "P": 0.67
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h46",
+      "request_sha256": "c2adbb2c43ee97524d14c72fadd4974971c52b5ec0c81ffa78db65528db714e6",
+      "elapsed_ms": 476.3,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 605,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.61,
+      "probabilities": {
+        "C": 0.12,
+        "F": 0.16,
+        "U": 0.03,
+        "T": 0.0,
+        "D": 0.67,
+        "P": 0.02
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h47",
+      "request_sha256": "60c9e7a3870b82612f11e631f60a69f55cf030439ab10e252921b3fda0747282",
+      "elapsed_ms": 376.3,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 582,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.77,
+      "probabilities": {
+        "F": 0.8,
+        "T": 0.02,
+        "U": 0.06,
+        "C": 0.06,
+        "D": 0.04,
+        "P": 0.02
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h48",
+      "request_sha256": "7154a1365ed44ddc5b168ce112dc3ab66e550fb677dfe6b03db85a0f5d0c4c14",
+      "elapsed_ms": 355.7,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 589,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.43,
+      "probabilities": {
+        "T": 0.01,
+        "C": 0.02,
+        "U": 0.15,
+        "D": 0.27,
+        "P": 0.03,
+        "F": 0.52
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h49",
+      "request_sha256": "14f8f86196edaca9b4a8121fdfa7c9c8598d126c9f7febe40e6c7a2580bcf063",
+      "elapsed_ms": 366.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 613,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.36,
+      "probabilities": {
+        "D": 0.07,
+        "T": 0.04,
+        "C": 0.45999999999999996,
+        "P": 0.05,
+        "F": 0.33,
+        "U": 0.05
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h50",
+      "request_sha256": "6202e3af66bba15718663747c72e2c53c56ba5b051f6898fe331d93849139d80",
+      "elapsed_ms": 409.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 621,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.43,
+      "probabilities": {
+        "F": 0.01,
+        "C": 0.0,
+        "D": 0.01,
+        "T": 0.52,
+        "U": 0.04,
+        "P": 0.42
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h51",
+      "request_sha256": "9b50c1b42ad2263ea5852fc593d2cdb69c2e1889a2a1721bfa87719aa981fe7c",
+      "elapsed_ms": 378.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 589,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.78,
+      "probabilities": {
+        "F": 0.02,
+        "D": 0.82,
+        "U": 0.13,
+        "P": 0.02,
+        "T": 0.0,
+        "C": 0.01
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h52",
+      "request_sha256": "e6df3cfac9d5dfa34f3a7cd64ce424a466d129f57611c343b29d5e9aa41a926a",
+      "elapsed_ms": 394.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 597,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.82,
+      "probabilities": {
+        "F": 0.0,
+        "T": 0.01,
+        "U": 0.08,
+        "C": 0.0,
+        "D": 0.05,
+        "P": 0.86
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h53",
+      "request_sha256": "7cf2b16b32b56992d86bdc42cd1fd9dec96185480a4c964780e1ade7ec0eb7a5",
+      "elapsed_ms": 393.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 587,
+        "output_tokens": 66
+      },
+      "prediction": "U",
+      "confidence": 0.95,
+      "probabilities": {
+        "C": 0.0,
+        "P": 0.0,
+        "F": 0.0,
+        "U": 0.96,
+        "T": 0.0,
+        "D": 0.04
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h54",
+      "request_sha256": "1a00f4310ee36fdd47fc97c6c4b8011abf4a4cfb57c788f34a563f4137bed4a3",
+      "elapsed_ms": 380.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 597,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.9,
+      "probabilities": {
+        "C": 0.04,
+        "T": 0.0,
+        "D": 0.03,
+        "P": 0.0,
+        "U": 0.02,
+        "F": 0.91
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h55",
+      "request_sha256": "b1891e3b6b541823d842941cf87eed3cd27d8fd0fccc20b62302451bdf24addf",
+      "elapsed_ms": 344.4,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 585,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.81,
+      "probabilities": {
+        "U": 0.01,
+        "F": 0.0,
+        "D": 0.0,
+        "P": 0.14,
+        "C": 0.0,
+        "T": 0.85
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h56",
+      "request_sha256": "85bca6bbf5c6850e4b882fd233e54a9f658f5bbbdadbf324484a1428fa9f600d",
+      "elapsed_ms": 367.5,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 609,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.95,
+      "probabilities": {
+        "F": 0.02,
+        "U": 0.0,
+        "C": 0.96,
+        "P": 0.0,
+        "T": 0.01,
+        "D": 0.01
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h57",
+      "request_sha256": "82ea7fb2532e73b5b772f162ef7061a7df8dba548ab7cae296bb616918b6b7cb",
+      "elapsed_ms": 407.5,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 588,
+        "output_tokens": 66
+      },
+      "prediction": "U",
+      "confidence": 0.55,
+      "probabilities": {
+        "C": 0.0,
+        "D": 0.25,
+        "T": 0.0,
+        "F": 0.02,
+        "P": 0.1,
+        "U": 0.63
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h58",
+      "request_sha256": "e34c5da9c46435827f75f5b5ba54a403154c9fbe167b992446d7cb4c81246f30",
+      "elapsed_ms": 409.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 583,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.82,
+      "probabilities": {
+        "P": 0.86,
+        "D": 0.04,
+        "U": 0.1,
+        "T": 0.0,
+        "C": 0.0,
+        "F": 0.0
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h59",
+      "request_sha256": "071124807ffccca5ea57b55cae55e6fe2cf4a5645154a5177363897904a011d3",
+      "elapsed_ms": 383.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 586,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.4,
+      "probabilities": {
+        "C": 0.5,
+        "D": 0.15,
+        "P": 0.0,
+        "F": 0.35,
+        "U": 0.0,
+        "T": 0.0
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "h60",
+      "request_sha256": "494018418106f4e0a70bdb040cad5a3b05d50c51f9695d066ad76641a862972f",
+      "elapsed_ms": 372.8,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 599,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.43,
+      "probabilities": {
+        "P": 0.53,
+        "D": 0.06,
+        "U": 0.4,
+        "T": 0.01,
+        "C": 0.0,
+        "F": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h01",
+      "request_sha256": "f513376396aed34a8ad4fabe15e6a05babe49c520fb0294f4abd5062f385169c",
+      "elapsed_ms": 335.5,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 639,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.99,
+      "probabilities": {
+        "C": 1.0,
+        "F": 0.0,
+        "T": 0.0,
+        "P": 0.0,
+        "D": 0.0,
+        "U": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h02",
+      "request_sha256": "8c514c1da09387cc39a0b9415d9a477cf001e350b3cc6f51575d6f21e12fe1e3",
+      "elapsed_ms": 360.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 623,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.6,
+      "probabilities": {
+        "P": 0.0,
+        "F": 0.67,
+        "C": 0.02,
+        "T": 0.0,
+        "U": 0.08,
+        "D": 0.23
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h03",
+      "request_sha256": "7b9a180db6f373a7ac88b5f00968f406995e393ec8718c79cc0e7e617c294f03",
+      "elapsed_ms": 400.8,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 613,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.85,
+      "probabilities": {
+        "F": 0.88,
+        "T": 0.0,
+        "U": 0.0,
+        "D": 0.03,
+        "C": 0.09,
+        "P": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h04",
+      "request_sha256": "a31120647e0455761b28ef6541c9becc413f032c520caae2b1cff84f6f68571a",
+      "elapsed_ms": 383.4,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 625,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.64,
+      "probabilities": {
+        "F": 0.28,
+        "D": 0.02,
+        "P": 0.0,
+        "T": 0.0,
+        "C": 0.7,
+        "U": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h05",
+      "request_sha256": "d5486523c0b7edc979a3947f989405d311f6a6ae4e812587d9cdad9f9f3aa204",
+      "elapsed_ms": 343.4,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 609,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.81,
+      "probabilities": {
+        "F": 0.0,
+        "U": 0.01,
+        "P": 0.14,
+        "T": 0.85,
+        "D": 0.0,
+        "C": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h06",
+      "request_sha256": "51ebc0536801c6b0fa445ef98977a6c6dd6fe95f17437391bf0e36542d306e2a",
+      "elapsed_ms": 400.3,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 618,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.91,
+      "probabilities": {
+        "T": 0.0,
+        "F": 0.05,
+        "C": 0.0,
+        "U": 0.02,
+        "D": 0.93,
+        "P": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h07",
+      "request_sha256": "d61efc7b119eb8927200a3c6cb961f7f9af4c77613f0b9ac08b4faaf17dd945d",
+      "elapsed_ms": 393.9,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 592,
+        "output_tokens": 66
+      },
+      "prediction": "U",
+      "confidence": 0.5,
+      "probabilities": {
+        "C": 0.0,
+        "F": 0.01,
+        "D": 0.4,
+        "P": 0.01,
+        "U": 0.58,
+        "T": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h08",
+      "request_sha256": "7dee9b00085dbaa43770f0de7cf18571d8a3f33bf7a90477e4ae4a73bc25ac7c",
+      "elapsed_ms": 371.4,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 602,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.82,
+      "probabilities": {
+        "U": 0.01,
+        "D": 0.0,
+        "P": 0.13,
+        "F": 0.0,
+        "C": 0.0,
+        "T": 0.86
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h09",
+      "request_sha256": "1465fb110c9b3d0e942fbfe2c3a52bf2c5e10e866b9b5d2157a2752a7e823cee",
+      "elapsed_ms": 411.7,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 616,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.98,
+      "probabilities": {
+        "F": 0.99,
+        "T": 0.0,
+        "P": 0.0,
+        "D": 0.0,
+        "C": 0.01,
+        "U": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h10",
+      "request_sha256": "507b1e136a86a548760855548a3645d6ef91a91316ac091c4d6c3ee9d9eb934b",
+      "elapsed_ms": 360.9,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 600,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.8,
+      "probabilities": {
+        "C": 0.0,
+        "T": 0.01,
+        "F": 0.0,
+        "D": 0.0,
+        "P": 0.83,
+        "U": 0.16
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h11",
+      "request_sha256": "23ab49f1162d6963c614ddb505315bdfcbdb8a1aabee92be2ffd04c9c1a9df77",
+      "elapsed_ms": 362.8,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 670,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.29,
+      "probabilities": {
+        "D": 0.02,
+        "P": 0.01,
+        "F": 0.39,
+        "U": 0.01,
+        "T": 0.16,
+        "C": 0.41000000000000003
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h12",
+      "request_sha256": "eb737af7ed55d4a33c4658633a1998f4acb0bab637126afe0e3f6874d5ff0977",
+      "elapsed_ms": 402.1,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 599,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.85,
+      "probabilities": {
+        "U": 0.01,
+        "D": 0.87,
+        "C": 0.01,
+        "F": 0.09,
+        "P": 0.02,
+        "T": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h13",
+      "request_sha256": "02e6badacd3aa48c97852196a6902d62eb3be667a86d4ae59691f596664e6559",
+      "elapsed_ms": 869.7,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 578,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.37,
+      "probabilities": {
+        "F": 0.06,
+        "T": 0.0,
+        "C": 0.0,
+        "P": 0.01,
+        "U": 0.45,
+        "D": 0.48
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h14",
+      "request_sha256": "6df96c3e7b61a0d2f9e1bebb693540d94b83a650ad91cb9de0537886c9d0eff3",
+      "elapsed_ms": 377.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 635,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.71,
+      "probabilities": {
+        "F": 0.01,
+        "D": 0.01,
+        "U": 0.11,
+        "C": 0.0,
+        "T": 0.75,
+        "P": 0.12
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h15",
+      "request_sha256": "a7e79fc5267e068a5f85a683385df1ad5278de42faba8d392f35b55cafbceaa0",
+      "elapsed_ms": 372.1,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 581,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.65,
+      "probabilities": {
+        "C": 0.01,
+        "T": 0.0,
+        "F": 0.01,
+        "D": 0.16,
+        "P": 0.71,
+        "U": 0.11
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h16",
+      "request_sha256": "fd908fc922c920fd1b8240df7ee64954efb852633ed9bee490806ca85b31b9c2",
+      "elapsed_ms": 381.4,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 640,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.6,
+      "probabilities": {
+        "P": 0.01,
+        "T": 0.0,
+        "C": 0.25,
+        "U": 0.0,
+        "D": 0.07,
+        "F": 0.67
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h17",
+      "request_sha256": "058286af432ec5842dbc02dcd3c3d2b45ddc215a1add333b45f3f7e950e627e7",
+      "elapsed_ms": 393.3,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 614,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.8,
+      "probabilities": {
+        "T": 0.0,
+        "F": 0.01,
+        "C": 0.0,
+        "U": 0.14,
+        "D": 0.84,
+        "P": 0.01
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h18",
+      "request_sha256": "82ee9a3106207f87310529eb32f25e5436dfc7dd43e3cd67e9d52723706eecd3",
+      "elapsed_ms": 412.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 615,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.75,
+      "probabilities": {
+        "D": 0.02,
+        "T": 0.0,
+        "C": 0.8,
+        "P": 0.0,
+        "F": 0.18,
+        "U": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h19",
+      "request_sha256": "da2625a2fca8e3d97a8e6977bd07fe72104f87fb20c3553b4ee27201e2864be7",
+      "elapsed_ms": 366.3,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 608,
+        "output_tokens": 66
+      },
+      "prediction": "U",
+      "confidence": 0.56,
+      "probabilities": {
+        "C": 0.0,
+        "D": 0.33,
+        "T": 0.0,
+        "F": 0.02,
+        "P": 0.01,
+        "U": 0.64
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h20",
+      "request_sha256": "2026a53517df14f15d034a8043c4922ce108d4634dbc9e228f960a5d24d17ae9",
+      "elapsed_ms": 413.3,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 622,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.89,
+      "probabilities": {
+        "F": 0.01,
+        "U": 0.02,
+        "P": 0.04,
+        "T": 0.92,
+        "D": 0.01,
+        "C": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h21",
+      "request_sha256": "03d499038eb19a8f1d2461790e42bf471bb2bde39e2195c834e75fe77b18bc26",
+      "elapsed_ms": 362.1,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 606,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.68,
+      "probabilities": {
+        "T": 0.0,
+        "U": 0.0,
+        "C": 0.15,
+        "P": 0.0,
+        "F": 0.74,
+        "D": 0.11
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h22",
+      "request_sha256": "3380f1891b2ccc8a95d7dbb6e154dd8594c439c4ede4b122a0361128c48fee58",
+      "elapsed_ms": 363.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 595,
+        "output_tokens": 66
+      },
+      "prediction": "U",
+      "confidence": 0.22,
+      "probabilities": {
+        "T": 0.01,
+        "U": 0.35,
+        "P": 0.32,
+        "D": 0.31,
+        "C": 0.0,
+        "F": 0.01
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h23",
+      "request_sha256": "090881f47e72f104aacf6727b91a3f885b94383917780352a4c9b2c1ae7de1f3",
+      "elapsed_ms": 359.2,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 600,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.35,
+      "probabilities": {
+        "U": 0.16,
+        "D": 0.46,
+        "P": 0.05,
+        "F": 0.3,
+        "C": 0.02,
+        "T": 0.01
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h24",
+      "request_sha256": "60c380d0a4a0d79c2b7941c8b6a7350129a2f5f7aa428809156859ca997d9eb1",
+      "elapsed_ms": 351.2,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 598,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.82,
+      "probabilities": {
+        "U": 0.01,
+        "T": 0.0,
+        "F": 0.13,
+        "D": 0.85,
+        "P": 0.0,
+        "C": 0.01
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h25",
+      "request_sha256": "a816059fe9368773452f02f51bead58b11725c1956e22bb217f19219adfdd9b1",
+      "elapsed_ms": 414.3,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 639,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.47,
+      "probabilities": {
+        "D": 0.02,
+        "P": 0.01,
+        "F": 0.4,
+        "U": 0.0,
+        "T": 0.01,
+        "C": 0.56
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h26",
+      "request_sha256": "0199ab1c870f7a5accce50ba38fef0e82d26422ceb7d76459fe928eca7ff8035",
+      "elapsed_ms": 379.7,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 603,
+        "output_tokens": 66
+      },
+      "prediction": "U",
+      "confidence": 0.32,
+      "probabilities": {
+        "T": 0.21,
+        "U": 0.44,
+        "P": 0.34,
+        "D": 0.01,
+        "C": 0.0,
+        "F": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h27",
+      "request_sha256": "46a2f8324882ba26f918561a869acbc498e176e093215d4d42bbfa21f72b6b51",
+      "elapsed_ms": 409.8,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 581,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.53,
+      "probabilities": {
+        "T": 0.0,
+        "F": 0.0,
+        "U": 0.28,
+        "C": 0.0,
+        "D": 0.11,
+        "P": 0.61
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h28",
+      "request_sha256": "870c7df18f68acd9536fbe6e9bd2b7b4e1ca5134ab2469fc261ee1de21c6b340",
+      "elapsed_ms": 378.8,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 618,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.86,
+      "probabilities": {
+        "C": 0.02,
+        "T": 0.01,
+        "F": 0.88,
+        "P": 0.01,
+        "D": 0.08,
+        "U": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h29",
+      "request_sha256": "a82b1ee649b296ae24fa14f49e31d21acc58987afee40fff9d7fb24380c67e61",
+      "elapsed_ms": 379.8,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 615,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.37,
+      "probabilities": {
+        "F": 0.48,
+        "D": 0.42,
+        "P": 0.0,
+        "U": 0.07,
+        "C": 0.03,
+        "T": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h30",
+      "request_sha256": "af090aa2729b4fe2fae63f604694129e3d35bc869259eff9d8107d975e829df7",
+      "elapsed_ms": 504.7,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 582,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.86,
+      "probabilities": {
+        "F": 0.09,
+        "U": 0.01,
+        "P": 0.0,
+        "T": 0.0,
+        "D": 0.89,
+        "C": 0.01
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h31",
+      "request_sha256": "d91042f2be10fd21665f9b17d0d97a8499b527b24d624aa0c765e021653dfda5",
+      "elapsed_ms": 628.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 632,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.78,
+      "probabilities": {
+        "D": 0.0,
+        "P": 0.16,
+        "U": 0.01,
+        "F": 0.0,
+        "T": 0.83,
+        "C": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h32",
+      "request_sha256": "c9bc9b408f17a2b080c2feb0def8273f16d51eab8c7f27467091d2bf921a4623",
+      "elapsed_ms": 360.2,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 622,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.79,
+      "probabilities": {
+        "P": 0.01,
+        "D": 0.01,
+        "F": 0.01,
+        "C": 0.82,
+        "T": 0.0,
+        "U": 0.15
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h33",
+      "request_sha256": "d7798cdbf27b149b3a060fb5440396152efc0b252399f840ffaa402770022a42",
+      "elapsed_ms": 407.5,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 589,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.97,
+      "probabilities": {
+        "T": 0.0,
+        "C": 0.0,
+        "D": 0.97,
+        "U": 0.01,
+        "P": 0.01,
+        "F": 0.01
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h34",
+      "request_sha256": "32f2a71d3cb2d37f2667ad6de000423dfda09d787a7344cc67f09f240335a431",
+      "elapsed_ms": 416.5,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 585,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.62,
+      "probabilities": {
+        "C": 0.01,
+        "P": 0.6799999999999999,
+        "U": 0.19,
+        "F": 0.01,
+        "T": 0.02,
+        "D": 0.09
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h35",
+      "request_sha256": "dc2989dfc91f1ea1cfe005c86853167eae45e1a109b2b3a22343d8962aeae2d4",
+      "elapsed_ms": 489.2,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 602,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.38,
+      "probabilities": {
+        "T": 0.01,
+        "D": 0.17,
+        "C": 0.02,
+        "F": 0.48,
+        "P": 0.05,
+        "U": 0.27
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h36",
+      "request_sha256": "3c4fde7e9ae29646c74ec588d97fbd535af725a07c47ce403a48a7c81ef12edf",
+      "elapsed_ms": 398.3,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 594,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.39,
+      "probabilities": {
+        "F": 0.49,
+        "D": 0.47,
+        "U": 0.02,
+        "T": 0.0,
+        "C": 0.02,
+        "P": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h37",
+      "request_sha256": "fe6298f751c584e7b7ba855d615f1b2410e071db4ed702e4ef061e7340c401b3",
+      "elapsed_ms": 389.2,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 627,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.98,
+      "probabilities": {
+        "T": 0.0,
+        "F": 0.0,
+        "C": 0.99,
+        "U": 0.01,
+        "D": 0.0,
+        "P": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h38",
+      "request_sha256": "e33ecafa3fb1a4eb225ff1bb77b4fe529018668e909f42839b3e41b511fdbbe0",
+      "elapsed_ms": 360.2,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 588,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.89,
+      "probabilities": {
+        "C": 0.0,
+        "F": 0.0,
+        "D": 0.0,
+        "U": 0.01,
+        "P": 0.08,
+        "T": 0.91
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h39",
+      "request_sha256": "71e0ba442c8ccde257f1dbe52f8a8bb7f21edcb3acdf3ff332a4ee87774d06d8",
+      "elapsed_ms": 422.2,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 607,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.47,
+      "probabilities": {
+        "C": 0.02,
+        "P": 0.06,
+        "D": 0.56,
+        "U": 0.29,
+        "F": 0.07,
+        "T": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h40",
+      "request_sha256": "ff099187f00684827bd3cdbfb747a3fdb0605443cb864284c7c0ce11d86f4f28",
+      "elapsed_ms": 353.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 581,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.76,
+      "probabilities": {
+        "F": 0.0,
+        "D": 0.01,
+        "U": 0.02,
+        "P": 0.8,
+        "T": 0.17,
+        "C": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h41",
+      "request_sha256": "8eefc387566c53520b7522aa1d08c126d3a3cb65ff7fcfe62a56fba8dc109bed",
+      "elapsed_ms": 359.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 597,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.66,
+      "probabilities": {
+        "D": 0.72,
+        "T": 0.0,
+        "C": 0.03,
+        "P": 0.01,
+        "F": 0.18,
+        "U": 0.06
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h42",
+      "request_sha256": "6afd7e3e8b9c3362da4a155b190b054a76c827a6d7879579c66857b6d495a021",
+      "elapsed_ms": 392.5,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 632,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.62,
+      "probabilities": {
+        "C": 0.29,
+        "D": 0.01,
+        "T": 0.01,
+        "F": 0.67,
+        "P": 0.01,
+        "U": 0.01
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h43",
+      "request_sha256": "da77fac2b0f98d6e2aec5875c85af2ff9271db8159d8d37453010e328b1e41e4",
+      "elapsed_ms": 372.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 597,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.36,
+      "probabilities": {
+        "P": 0.45,
+        "F": 0.0,
+        "T": 0.48,
+        "C": 0.0,
+        "D": 0.0,
+        "U": 0.07
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h44",
+      "request_sha256": "566abf7a246fa69d741f871010d153864c11844d94058ad5fd36a4ac4a4baa16",
+      "elapsed_ms": 499.9,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 614,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.96,
+      "probabilities": {
+        "T": 0.0,
+        "C": 0.97,
+        "U": 0.0,
+        "D": 0.01,
+        "F": 0.02,
+        "P": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h45",
+      "request_sha256": "cb952e44cf3b36c2baadd243fe402c9b3c50265f0418974854e67304956f1d9c",
+      "elapsed_ms": 367.3,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 630,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.59,
+      "probabilities": {
+        "T": 0.0,
+        "F": 0.0,
+        "C": 0.0,
+        "U": 0.26,
+        "D": 0.08,
+        "P": 0.66
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h46",
+      "request_sha256": "c2adbb2c43ee97524d14c72fadd4974971c52b5ec0c81ffa78db65528db714e6",
+      "elapsed_ms": 371.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 605,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.55,
+      "probabilities": {
+        "C": 0.18,
+        "T": 0.0,
+        "F": 0.14,
+        "P": 0.02,
+        "D": 0.63,
+        "U": 0.03
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h47",
+      "request_sha256": "60c9e7a3870b82612f11e631f60a69f55cf030439ab10e252921b3fda0747282",
+      "elapsed_ms": 409.4,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 582,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.76,
+      "probabilities": {
+        "T": 0.01,
+        "C": 0.07,
+        "U": 0.06,
+        "D": 0.04,
+        "F": 0.8,
+        "P": 0.02
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h48",
+      "request_sha256": "7154a1365ed44ddc5b168ce112dc3ab66e550fb677dfe6b03db85a0f5d0c4c14",
+      "elapsed_ms": 1347.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 589,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.32,
+      "probabilities": {
+        "T": 0.01,
+        "C": 0.02,
+        "D": 0.3,
+        "U": 0.18,
+        "P": 0.05,
+        "F": 0.44
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h49",
+      "request_sha256": "14f8f86196edaca9b4a8121fdfa7c9c8598d126c9f7febe40e6c7a2580bcf063",
+      "elapsed_ms": 374.1,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 613,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.37,
+      "probabilities": {
+        "U": 0.02,
+        "T": 0.03,
+        "F": 0.39,
+        "P": 0.04,
+        "D": 0.05,
+        "C": 0.47
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h50",
+      "request_sha256": "6202e3af66bba15718663747c72e2c53c56ba5b051f6898fe331d93849139d80",
+      "elapsed_ms": 342.3,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 621,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.43,
+      "probabilities": {
+        "U": 0.03,
+        "D": 0.0,
+        "C": 0.0,
+        "F": 0.0,
+        "P": 0.43,
+        "T": 0.54
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h51",
+      "request_sha256": "9b50c1b42ad2263ea5852fc593d2cdb69c2e1889a2a1721bfa87719aa981fe7c",
+      "elapsed_ms": 412.7,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 589,
+        "output_tokens": 68
+      },
+      "prediction": "D",
+      "confidence": 0.77,
+      "probabilities": {
+        "F": 0.02,
+        "T": 0.0,
+        "P": 0.02,
+        "C": 0.01,
+        "D": 0.81,
+        "U": 0.14
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h52",
+      "request_sha256": "e6df3cfac9d5dfa34f3a7cd64ce424a466d129f57611c343b29d5e9aa41a926a",
+      "elapsed_ms": 464.2,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 597,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.72,
+      "probabilities": {
+        "T": 0.03,
+        "F": 0.01,
+        "C": 0.0,
+        "U": 0.11,
+        "D": 0.08,
+        "P": 0.77
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h53",
+      "request_sha256": "7cf2b16b32b56992d86bdc42cd1fd9dec96185480a4c964780e1ade7ec0eb7a5",
+      "elapsed_ms": 352.1,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 587,
+        "output_tokens": 66
+      },
+      "prediction": "U",
+      "confidence": 0.96,
+      "probabilities": {
+        "F": 0.0,
+        "T": 0.0,
+        "U": 0.97,
+        "P": 0.0,
+        "C": 0.0,
+        "D": 0.03
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h54",
+      "request_sha256": "1a00f4310ee36fdd47fc97c6c4b8011abf4a4cfb57c788f34a563f4137bed4a3",
+      "elapsed_ms": 378.4,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 597,
+        "output_tokens": 66
+      },
+      "prediction": "F",
+      "confidence": 0.93,
+      "probabilities": {
+        "D": 0.02,
+        "T": 0.0,
+        "P": 0.0,
+        "F": 0.94,
+        "C": 0.03,
+        "U": 0.01
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h55",
+      "request_sha256": "b1891e3b6b541823d842941cf87eed3cd27d8fd0fccc20b62302451bdf24addf",
+      "elapsed_ms": 360.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 585,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.8,
+      "probabilities": {
+        "F": 0.0,
+        "P": 0.15,
+        "C": 0.0,
+        "T": 0.84,
+        "U": 0.01,
+        "D": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h56",
+      "request_sha256": "85bca6bbf5c6850e4b882fd233e54a9f658f5bbbdadbf324484a1428fa9f600d",
+      "elapsed_ms": 356.4,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 609,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.95,
+      "probabilities": {
+        "U": 0.0,
+        "F": 0.03,
+        "T": 0.01,
+        "P": 0.0,
+        "D": 0.01,
+        "C": 0.95
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h57",
+      "request_sha256": "82ea7fb2532e73b5b772f162ef7061a7df8dba548ab7cae296bb616918b6b7cb",
+      "elapsed_ms": 335.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 588,
+        "output_tokens": 66
+      },
+      "prediction": "U",
+      "confidence": 0.57,
+      "probabilities": {
+        "C": 0.0,
+        "D": 0.26,
+        "P": 0.08,
+        "U": 0.64,
+        "F": 0.02,
+        "T": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h58",
+      "request_sha256": "e34c5da9c46435827f75f5b5ba54a403154c9fbe167b992446d7cb4c81246f30",
+      "elapsed_ms": 352.3,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 583,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.82,
+      "probabilities": {
+        "C": 0.0,
+        "F": 0.0,
+        "D": 0.05,
+        "P": 0.85,
+        "U": 0.1,
+        "T": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h59",
+      "request_sha256": "071124807ffccca5ea57b55cae55e6fe2cf4a5645154a5177363897904a011d3",
+      "elapsed_ms": 390.8,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 586,
+        "output_tokens": 69
+      },
+      "prediction": "C",
+      "confidence": 0.37,
+      "probabilities": {
+        "T": 0.0,
+        "F": 0.31,
+        "D": 0.2,
+        "U": 0.0,
+        "P": 0.01,
+        "C": 0.48
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "h60",
+      "request_sha256": "494018418106f4e0a70bdb040cad5a3b05d50c51f9695d066ad76641a862972f",
+      "elapsed_ms": 356.9,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 599,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.46,
+      "probabilities": {
+        "U": 0.38,
+        "F": 0.0,
+        "T": 0.01,
+        "P": 0.55,
+        "D": 0.05,
+        "C": 0.0
+      }
+    }
+  ],
+  "reported_input_tokens": 72726,
+  "reported_output_tokens": 8054,
+  "reported_input_cost_proxy_usd": 0.0030544920000000002,
+  "summary": {
+    "canonical": {
+      "score": {
+        "agreed_cases": 58,
+        "correct": 48,
+        "invalid": 0,
+        "false_true": 0,
+        "absence_as_refutation": 7,
+        "over_unknown": 2,
+        "conflict_resolved": 0,
+        "unknown_cases": 10,
+        "confusion": {
+          "T": {
+            "T": 9,
+            "U": 1
+          },
+          "P": {
+            "P": 9,
+            "U": 1
+          },
+          "U": {
+            "F": 3,
+            "U": 3,
+            "D": 4
+          },
+          "D": {
+            "D": 8
+          },
+          "F": {
+            "F": 9,
+            "C": 1
+          },
+          "C": {
+            "C": 10
+          }
+        }
+      },
+      "verdict": "INCONCLUSIVE"
+    },
+    "reversed": {
+      "score": {
+        "agreed_cases": 58,
+        "correct": 48,
+        "invalid": 0,
+        "false_true": 0,
+        "absence_as_refutation": 7,
+        "over_unknown": 2,
+        "conflict_resolved": 0,
+        "unknown_cases": 10,
+        "confusion": {
+          "T": {
+            "T": 9,
+            "U": 1
+          },
+          "P": {
+            "P": 9,
+            "U": 1
+          },
+          "U": {
+            "F": 4,
+            "U": 3,
+            "D": 3
+          },
+          "D": {
+            "D": 8
+          },
+          "F": {
+            "F": 9,
+            "C": 1
+          },
+          "C": {
+            "C": 10
+          }
+        }
+      },
+      "verdict": "INCONCLUSIVE"
+    },
+    "overall_verdict": "INCONCLUSIVE",
+    "order_flips": [
+      "h36"
+    ],
+    "reported_input_tokens": 72726,
+    "reported_output_tokens": 8054
+  }
+}

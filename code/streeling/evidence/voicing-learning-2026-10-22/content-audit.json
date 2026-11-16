@@ -1,0 +1,372 @@
+{
+  "schema_version": 1,
+  "status": "no_outstanding_findings_within_static_source_and_content_scope",
+  "reviewer": "independent Codex agent voicing_learning_dependencies",
+  "reviewed_at_utc": "2026-10-22T02:55:18.3429493Z",
+  "archive": {
+    "root": "C:/Users/spare/source/repos/Demerzel-streeling-project-pilot",
+    "commit": "17f82a4b4b913d7c64942a3d3ff670abf4e6f85c"
+  },
+  "learn": {
+    "root": "C:/tmp/learn-streeling-craft-transfer-20261022",
+    "base_commit": "f14a2a9d15950f6f833a51d446ed16d7e0141151",
+    "manifest": "code/streeling/evidence/voicing-learning-2026-10-22/import.json"
+  },
+  "ga": {
+    "root": "C:/Users/spare/source/repos/ga",
+    "commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+    "method": "Read exact Git objects with git show; dirty working tree was not used or modified."
+  },
+  "scope": {
+    "english_modules": [
+      "gaa-004-choose-a-useful-voicing",
+      "gtr-003-audit-voicing-playability",
+      "gtr-004-hear-and-audit-parallel-motion",
+      "cog-002-feedback-integrity-fretboard-recall",
+      "cog-003-calibrating-fretboard-confidence",
+      "wml-002-dadgad-layout-and-cultural-claims",
+      "wml-003-term-preservation-and-cultural-review"
+    ],
+    "existing_fr_es_semantic_qualifiers": [
+      "gaa-004-choose-a-useful-voicing",
+      "gtr-003-audit-voicing-playability",
+      "cog-003-calibrating-fretboard-confidence"
+    ],
+    "new_translations": "Eight new FR/ES translations of GTR-004, COG-002, WML-002 and WML-003 reviewed for static technical and scientific fidelity; no human fluent-language approval.",
+    "import_comparison": "All 13 imported files equal archived text after manifest-declared immutable link rewrites, WML-003 source-boundary insertion and localized chronology notes, normalizing CRLF to LF. All 21 final course hashes, 13 import hashes, 8 translation hashes and 8 English dependency hashes match the final manifest.",
+    "human_approval": false
+  },
+  "checks": [
+    {
+      "topic": "GAA-004 candidate generation, ordering and filters",
+      "result": "consistent",
+      "source_refs": [
+        "Apps/ga-server/GaApi/Services/VoicingFilterService.cs:21-70",
+        "Tests/Apps/GaApi.Tests/Services/VoicingFilterServiceTests.cs:16-75"
+      ],
+      "observations": [
+        "Service emits fret arrays, score/category and barre fields, sorts ascending DifficultyScore, and filters played fret zero with noOpenStrings.",
+        "Tests assert known queries including C are nonempty and C scores are sorted. This static inspection does not establish a fresh pass or exact teaching-shape generation.",
+        "Independent note arithmetic verifies open C [-1,3,2,0,1,0] -> C,E,G,C,E; A-form [-1,3,5,5,5,3] -> C,G,C,E,G; E-form [8,10,10,9,8,8] -> C,G,C,E,G,C in low-to-high standard tuning."
+      ]
+    },
+    {
+      "topic": "GTR-003 comfort, difficulty and barre distinctions",
+      "result": "consistent",
+      "source_refs": [
+        "Apps/ga-server/GaApi/Services/VoicingComfortService.cs:24-51",
+        "Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs:86-152",
+        "Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs:219-232"
+      ],
+      "observations": [
+        "Comfort span is max-minus-min over positive frets only; all three fixture spans are 2.",
+        "Full-barre exclusion requires four or more occurrences of the lowest positive fret. A-form has two minima at 3 and E-form three at 8, so neither meets it.",
+        "Physical analyzer's separate predicate requires three adjacent equal positive frets: A-form true, E-form false.",
+        "Physical difficulty includes fret-distance span, barre flag, absence of open strings and distinct-positive-fret finger estimate; score caps at 10. Course does not equate it to individual comfort."
+      ]
+    },
+    {
+      "topic": "GTR-004 string-matched parallel motion",
+      "result": "consistent",
+      "source_refs": [
+        "Common/GA.Domain.Core/Instruments/Tuning.cs:20-23",
+        "Common/GA.Domain.Core/Instruments/Tuning.cs:66-108",
+        "Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ProgressionVoiceLeadingAnalyzer.cs:17-73",
+        "Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ProgressionVoiceLeadingReport.cs:17-25",
+        "Tests/Common/GA.Business.Core.Tests/Fretboard/Voicings/ProgressionVoiceLeadingAnalyzerTests.cs:12-126"
+      ],
+      "observations": [
+        "Default tuning text is E2,A2,D3,G3,B3,E4; indexed pitches are highest string first. Strings 4 and 3 map to D3/G3.",
+        "A=52/59, B=54/61, C=54/57 follow stated frets. A->B moves +2/+2 with seven-semitone intervals and one shared pair, predicting one Fifths issue and IsClean false.",
+        "A->C moves +2/-2 with target difference 3, predicting no issue; the lesson correctly warns it changes the target harmony.",
+        "Detector intersects played string keys, needs at least two, requires nonzero same-direction movement and checks absolute pitch difference modulo 12 for 7 or 0. It does not follow cross-string voice continuity.",
+        "Tests construct fret-zero positions with arbitrary supplied MIDI, correctly distinguished from physically consistent teaching fixtures. No execution was performed."
+      ]
+    },
+    {
+      "topic": "COG-002 historical label and callback boundaries",
+      "result": "consistent",
+      "source_refs": [
+        "ReactComponents/ga-react-components/src/pages/GuitarFretboardTest.tsx:5-38",
+        "ReactComponents/ga-react-components/src/components/GuitarFretboard.tsx:7-17",
+        "ReactComponents/ga-react-components/src/components/GuitarFretboard.tsx:75-85",
+        "ReactComponents/ga-react-components/src/components/GuitarFretboard.tsx:154-157",
+        "ReactComponents/ga-react-components/src/components/GuitarFretboard.tsx:239-318"
+      ],
+      "observations": [
+        "Component specifies zero-based high-to-low string indices and E,B,G,D,A,E default tuning. Demo does not override tuning.",
+        "Independent pitch-class arithmetic yields E,C,G,E,C,G; displayed labels E,C,G,E,C,C match five of six. G remains a C-major chord tone.",
+        "String-label and fret-number props do not suppress optional position labels. Click callback creates only {string,fret}.",
+        "Pinned source establishes no note-answer/confidence input, scored learner session or intervention. Historical marker mismatch is not asserted as current deployed behavior."
+      ]
+    },
+    {
+      "topic": "COG-003 Brier arithmetic and study qualifiers",
+      "result": "consistent",
+      "source_refs": [
+        "streeling/courses/cognitive-science/en/cog-003-calibrating-fretboard-confidence.md:29-106"
+      ],
+      "observations": [
+        "Synthetic outcomes [1,1,0,1,1,0], squared losses [0.01,0.04,0.49,0.16,0.01,0.81], sum 1.52, accuracy 4/6 and mean 0.253333... are correct.",
+        "Using contaminated C key on trial six changes total to 0.72 and mean to 0.12 without changed predictions.",
+        "The p=0.9 bin has 2/3 accuracy and gap 0.233333....",
+        "Expected loss q(1-p)^2+(1-q)p^2=(p-q)^2+q(1-q); for q=0.7 losses 0.21 at p=0.7 and 0.25 at p=0.9 differ by 0.04.",
+        "The lesson preserves binary chosen-answer correctness as its event, pre-feedback recording, synthetic-data boundaries, held-out next-day comparison, uncertainty and accuracy guardrail. It does not claim a real benefit or diagnose calibration from six invented items."
+      ]
+    },
+    {
+      "topic": "WML-002 alternate tuning lookup and cultural boundaries",
+      "result": "consistent",
+      "source_refs": [
+        "Common/GA.Business.ML/Agents/Skills/AlternateTuningsSkill.cs:19-22",
+        "Common/GA.Business.ML/Agents/Skills/AlternateTuningsSkill.cs:50-56",
+        "Common/GA.Business.ML/Agents/Skills/AlternateTuningsSkill.cs:78-82",
+        "Common/GA.Business.ML/Agents/Skills/AlternateTuningsSkill.cs:108-112",
+        "Common/GA.Business.ML/Agents/Skills/AlternateTuningsSkill.cs:133-177",
+        "Common/GA.Business.ML/Agents/Skills/AlternateTuningsSkill.cs:267-285",
+        "Tests/Common/GA.Business.ML.Tests/Unit/AlternateTuningsSkillTests.cs:18-125"
+      ],
+      "observations": [
+        "DADGAD and Open D arrays, string 6/2/1 whole-step drops, string 3 G->F# difference, Dsus4 versus D-major pitch collections are consistent.",
+        "Named patterns precede six-note reverse lookup; formatter numbers strings 6-i and includes uncited Flavor prose.",
+        "Successful Result assigns Confidence=1.0f. This is not historical/cultural validation. CanHandle returns false with semantic-routing comment and does not prove a live route.",
+        "Test source has no dedicated DADGAD outcome test. No cultural history, musician associations or actual skill execution were independently validated."
+      ]
+    },
+    {
+      "topic": "WML-003 historical lexical result and current source ownership",
+      "result": "consistent_with_stated_boundaries",
+      "source_refs": [
+        "state/streeling/fixtures/world-music-languages/wml-003/check_terms.py:16-68 at archive commit",
+        "state/streeling/fixtures/world-music-languages/wml-003/term-presence-f5b040a.json at archive commit",
+        "code/streeling/evidence/voicing-learning-2026-10-22/lexical-reproduction.json",
+        "AGENTS.md:3,11 at Learn commit 09b13e7f9eddc2b4ddbd87356001c1da2eec6b58"
+      ],
+      "observations": [
+        "Script statically reads six historical Demerzel Git blobs, checks seven casefolded literal terms, returns a receipt and optionally exits 1 for absences. Casefold does not strip accents.",
+        "42 comparisons, 40 matches and French alzap\u00faa/comp\u00e1s absences agree with checked JSON. Root's separate receipt records rerun equality, normal exit 0 and strict exit 1; this agent did not execute the checker.",
+        "New WML-003 paragraph accurately distinguishes historical six-locale Demerzel audit from current Learn EN/FR/ES authoring, generated pages and Demerzel PT/IT/DE ownership.",
+        "The paragraph requires rebinding later reviews to actual Learn blobs and does not promote lexical checks to human approval."
+      ]
+    },
+    {
+      "topic": "Six existing archived FR/ES localizations",
+      "result": "no_outstanding_semantic_qualifier_findings",
+      "source_refs": [
+        "streeling/courses/guitar-alchemist-academy/{fr,es}/gaa-004-choose-a-useful-voicing.{fr,es}.md",
+        "streeling/courses/guitar-studies/{fr,es}/gtr-003-audit-voicing-playability.{fr,es}.md",
+        "streeling/courses/cognitive-science/{fr,es}/cog-003-calibrating-fretboard-confidence.{fr,es}.md"
+      ],
+      "observations": [
+        "GAA-004 preserves teaching-fixture versus captured-output distinction, low-to-high orientation, hypothetical scores, query-not-run fallback, individual comfort check and prebuilt-test limitation.",
+        "GTR-003 preserves both barre rules, conditional exact-array predicate predictions, source-versus-human distinction and missing fresh build/generator/musician evidence.",
+        "COG-003 preserves corrected key, all six synthetic rows and arithmetic, pre-feedback probability event, proposed rather than implemented UI/study, next-day comparator and accuracy guardrail.",
+        "This is bounded static semantic parity; it is not fluent-language approval."
+      ]
+    }
+  ],
+  "findings": [],
+  "pending_gates": [
+    "Human musician, cognitive-science/subject, cultural, fluent-language and learner review remain pending.",
+    "Fresh pinned GA execution, live chatbot routing, browser behavior, learner performance and intervention benefit are not established.",
+    "Learn sync/build/deployment/public readback are outside this agent's executed scope."
+  ],
+  "limitations": [
+    "No repository edits; only this requested temporary audit JSON was written.",
+    "No build, test, network, source-script or GA-program execution.",
+    "Independent static verification supports the named source facts and calculations only; no human approval is issued.",
+    "Historical AI reviews and prebuilt test claims remain historical evidence."
+  ],
+  "next_verification": [
+    "Root completes build, generator/link/render checks and retains separate execution evidence.",
+    "Obtain exact-source human musician, subject/cultural, fluent-language and learner verdicts before representing these drafts as approved.",
+    "Public deployment requires its own anonymous readback; this audit does not establish publication."
+  ],
+  "final_delta": {
+    "reviewed_at_utc": "2026-10-22T02:55:18.4449762Z",
+    "status": "no_outstanding_findings_within_final_static_delta_scope",
+    "human_approval": false,
+    "course_bindings": [
+      {
+        "path": "streeling/courses/guitar-alchemist-academy/en/gaa-004-choose-a-useful-voicing.md",
+        "locale": "en",
+        "sha256": "d9a937a6af8e4f2ea684cf1735c584bea6aca49a62bbef5cd4b866522fa94d14"
+      },
+      {
+        "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-004-choose-a-useful-voicing.fr.md",
+        "locale": "fr",
+        "sha256": "0245622290a3ce50d16891730363a3f6243460d7ff735844e9e47b4db7fbec91"
+      },
+      {
+        "path": "streeling/courses/guitar-alchemist-academy/es/gaa-004-choose-a-useful-voicing.es.md",
+        "locale": "es",
+        "sha256": "988142f9c87aa1b3a0c3e302d1c1e60b09803746acea7097d82dfcf05c827324"
+      },
+      {
+        "path": "streeling/courses/guitar-studies/en/gtr-003-audit-voicing-playability.md",
+        "locale": "en",
+        "sha256": "b70485d9d047e2ef9151e6732762031fb56b442cadaf0129ea0bf4e24476276a"
+      },
+      {
+        "path": "streeling/courses/guitar-studies/fr/gtr-003-audit-voicing-playability.fr.md",
+        "locale": "fr",
+        "sha256": "d45caba4a73a1b27627b18fc6f5b1840a94bb61f65a41dec53a587828a800e10"
+      },
+      {
+        "path": "streeling/courses/guitar-studies/es/gtr-003-audit-voicing-playability.es.md",
+        "locale": "es",
+        "sha256": "93ffd640ed6266c22155e0220c71d6a407b216c4508f60f0026c04574400a582"
+      },
+      {
+        "path": "streeling/courses/guitar-studies/en/gtr-004-hear-and-audit-parallel-motion.md",
+        "locale": "en",
+        "sha256": "316bd71e22c162ada94a241fc671d43489d377d3fc538789570e574a92b680b2"
+      },
+      {
+        "path": "streeling/courses/guitar-studies/fr/gtr-004-hear-and-audit-parallel-motion.fr.md",
+        "locale": "fr",
+        "sha256": "172af1fdd8c59900b17985a8a611cf9bd2fc1c7958479b56b2dee624de08b0c5"
+      },
+      {
+        "path": "streeling/courses/guitar-studies/es/gtr-004-hear-and-audit-parallel-motion.es.md",
+        "locale": "es",
+        "sha256": "4af203f58c4fe848c119198440eb96503e6949957d1cb704189b3f6090519819"
+      },
+      {
+        "path": "streeling/courses/cognitive-science/en/cog-002-feedback-integrity-fretboard-recall.md",
+        "locale": "en",
+        "sha256": "77c313631f27943312d9320a8888e26a5f8a5ce9ec267d415ff33320fbb5b5e4"
+      },
+      {
+        "path": "streeling/courses/cognitive-science/fr/cog-002-feedback-integrity-fretboard-recall.fr.md",
+        "locale": "fr",
+        "sha256": "66258267c421a55e8c7855e149cd2b00fb618f1d01c80c6b338c6b2cf40aa58b"
+      },
+      {
+        "path": "streeling/courses/cognitive-science/es/cog-002-feedback-integrity-fretboard-recall.es.md",
+        "locale": "es",
+        "sha256": "2ec0faa62c8a33a8a448bc386ce35c4a083c1acc7c6761a4e11bc126430d44cb"
+      },
+      {
+        "path": "streeling/courses/cognitive-science/en/cog-003-calibrating-fretboard-confidence.md",
+        "locale": "en",
+        "sha256": "9610552ea1f8bf2727e820232fa1ad17f9914feb229b4f275173d5b861561e16"
+      },
+      {
+        "path": "streeling/courses/cognitive-science/fr/cog-003-calibrating-fretboard-confidence.fr.md",
+        "locale": "fr",
+        "sha256": "811060169d9ca7987a340be6c01d48e3d9893639ad1026cfec703da83917f2d3"
+      },
+      {
+        "path": "streeling/courses/cognitive-science/es/cog-003-calibrating-fretboard-confidence.es.md",
+        "locale": "es",
+        "sha256": "27dd23e901153372133a31f53f8dbbeeb3d3dd126201dca4684c5904bfe9bb71"
+      },
+      {
+        "path": "streeling/courses/world-music-languages/en/wml-002-dadgad-layout-and-cultural-claims.md",
+        "locale": "en",
+        "sha256": "dc1fcb416e66e68d3aceeecf741d3849a3fffd92b5188cc622e9853357bc174d"
+      },
+      {
+        "path": "streeling/courses/world-music-languages/fr/wml-002-dadgad-layout-and-cultural-claims.fr.md",
+        "locale": "fr",
+        "sha256": "290e714d35fe4b1041b851e5b757ffa227624a06411136f69245716d7c62ee19"
+      },
+      {
+        "path": "streeling/courses/world-music-languages/es/wml-002-dadgad-layout-and-cultural-claims.es.md",
+        "locale": "es",
+        "sha256": "4e0e76aba5b2f1d19ae0773e033695fb4dce3856b2518759a50a5a4da66caf92"
+      },
+      {
+        "path": "streeling/courses/world-music-languages/en/wml-003-term-preservation-and-cultural-review.md",
+        "locale": "en",
+        "sha256": "e7d5b48dcccb9937971eaabd2e0b9fc9aa6ef6555b0fe24d0532f69303af5279"
+      },
+      {
+        "path": "streeling/courses/world-music-languages/fr/wml-003-term-preservation-and-cultural-review.fr.md",
+        "locale": "fr",
+        "sha256": "da853083ee91ffbc2ca3ece703ffb88143ca18a395d7ac612779e9cd06099532"
+      },
+      {
+        "path": "streeling/courses/world-music-languages/es/wml-003-term-preservation-and-cultural-review.es.md",
+        "locale": "es",
+        "sha256": "612f76544e1004a9a7a576c269418bb9d19234525647e1faecc47d1cd86e7efb"
+      }
+    ],
+    "artifact_bindings": [
+      {
+        "path": "code/streeling/evidence/voicing-learning-2026-10-22/import.json",
+        "sha256": "8b6d3f0e8b18330fde849b72153165acadc639aafd87e92c70156a47b97467a4"
+      },
+      {
+        "path": "code/streeling/evidence/voicing-learning-2026-10-22/learner-tasks.md",
+        "sha256": "3cda90df95471f3e72d1c6e4adb588893cfa66c52432aa1c8057b129d3ce6b32"
+      },
+      {
+        "path": "code/streeling/evidence/voicing-learning-2026-10-22/review-rubric.json",
+        "sha256": "e6223927176cbf45b2414ec4063f8fd68cf9276d3fcf08257a2faaa8c35a5a24"
+      },
+      {
+        "path": "code/streeling/evidence/voicing-learning-2026-10-22/arithmetic-reproduction.json",
+        "sha256": "bfd813dc3691006386d9d86a98d340d8c7c60b7947df142c00028d33ce448cc2"
+      },
+      {
+        "path": "code/streeling/evidence/voicing-learning-2026-10-22/lexical-reproduction.json",
+        "sha256": "e7deabbd1ac0ea50a47279d21ba55183cda92a94eefd1eafd06c31e9449211f3"
+      }
+    ],
+    "binding_checks": {
+      "course_source_rows": 21,
+      "imported_rows": 13,
+      "new_translation_rows": 8,
+      "translation_english_dependencies": 8,
+      "rubric_english_dependencies": 7,
+      "all_match": true
+    },
+    "technical_parity": {
+      "modules": [
+        "gtr-004",
+        "cog-002",
+        "wml-002",
+        "wml-003"
+      ],
+      "locales": [
+        "fr",
+        "es"
+      ],
+      "metadata": "module_id, department, level, alchemical_stage where present, prerequisites, estimated_duration, produced_by, research_cycle and version equal English",
+      "external_urls": "Exact multiset equality for each English/localized pair",
+      "inline_code": "Exact multiset equality after excluding fenced blocks",
+      "fenced_code": "Exact content equality",
+      "manual_scientific_review": "All eight complete localized bodies preserve note/string orientation, arrays, MIDI values, semitone arithmetic, detector scope, hypothetical and source-derived outcomes, absent execution and missing human approval. WML-003 current-Learn ownership paragraph preserves exact-source and historical-receipt boundaries."
+    },
+    "chronology_notes": "Localized notes limit historic absent Learn import/build statements to the archive phase and direct readers to the present transfer record. They preserve all other unexecuted-experiment and human-review limits.",
+    "assessment_review": {
+      "learner_tasks": "Seven draft tasks; no participant result. Protocol withholds all inline answer blocks, original answered lesson and rubric until responses collected; available answers force open-book assisted-recall labeling.",
+      "measurement_limit": "Explicitly labels overlapping tasks lesson-exposed performance. New held-out items and a comparison or pretest are required before independent transfer or learning-gain claims.",
+      "rubric": "Seven tasks, three binary criteria per task; no automatic course approval or hypothetical-human-outcome substitution. All seven current English hashes match sources.",
+      "hash_history": "Before-chronology hashes are clearly named historical values; current english_source_sha256 fields bind current lesson text."
+    },
+    "evidence_review": {
+      "arithmetic": "Recorded marker 5/6 check, voicing notes and spans, two distinct barre predicates, 1.52/6 Brier, contaminated 0.12, expected losses 0.21/0.25 and A-to-B/C/D source-compatible predictions agree with independently reviewed source and calculations. Artifact explicitly denies GA executable/browser/guitar/learner evidence.",
+      "ga_blob_bindings": "Both arithmetic-reproduction Git blob IDs independently match pinned GA fretboard demo and component objects.",
+      "lexical": "Recorded full historical JSON equality, 42 pairs, 40 hits, French accent absences, normal exit 0 and strict exit 1 agree with source and historical receipt. Execution belongs to root; this agent did not run the checker."
+    },
+    "resolved_findings": [
+      {
+        "id": "localized-wml-draft-and-translation-chronology",
+        "status": "resolved",
+        "scope": "WML-002 and WML-003 FR/ES",
+        "observation": "Four translated status lines initially called themselves English drafts; WML-002 copied absent-translation wording could be read as present status.",
+        "verified_resolution": "All four status lines now identify French or Spanish drafts. WML-002 FR/ES explicitly attribute absent translation production to the historical English-source cycle and state that review of the present translation remains pending. Exact editorial_post_edits are recorded in the manifest."
+      }
+    ],
+    "findings": [],
+    "limitations": [
+      "This is static source/content/semantic-parity review, not human musician, subject, cultural, fluent-language or learner approval.",
+      "No repository files changed by reviewer. Only the requested temporary audit JSON was updated.",
+      "No scripts from the source, GA programs, tests, builds, browser flows or network requests were executed by reviewer. Root owns build/render/deployment verification.",
+      "Baseline checks above were performed before chronology-note insertions; final content identity is bound by the 21 hashes in this final_delta section."
+    ]
+  }
+}

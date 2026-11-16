@@ -1,0 +1,90 @@
+{
+  "checked_at_utc": "2026-10-22T16:44:37.083620+00:00",
+  "base_learn_commit": "1c9984bebbb18e634083d1ba06a9d09353ea9c2a",
+  "latest_main_checked": "05aa47b12b97e626405e961016d5035f7ecf74be",
+  "scope": "Three new trilingual course drafts and constructed phrase/event/melody arithmetic fixtures; source inspection only, no new GA solver/score/audio execution or production/lab program.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "fixture_analysis": {
+    "independent_checks": 33,
+    "findings": [],
+    "method": "Temporary Python stdlib calculations and independent source-assisted arithmetic/source audit.",
+    "live_voicing_request": "Invocation error; no candidate data or service revision returned.",
+    "ga_tab_solver_executed": false,
+    "musicxml_import_export_executed": false,
+    "playing_or_audio_trial": false
+  },
+  "script_tests": {
+    "files": [
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "passed": 18,
+    "failed": 0,
+    "exit_code": 0,
+    "log": "C:\\tmp\\streeling-music-phrase-final-tests-20261022.log",
+    "log_sha256": "1b437ddab8c42950184f3ca53bbf07edf545f0a696ffb9627646d7784b5192a7"
+  },
+  "sync": {
+    "idempotent_checked_generated_files": 83,
+    "all_music_ids_001_to_025_present_in_each_locale": true,
+    "log": "C:/tmp/streeling-music-phrase-final-sync-20261022.log"
+  },
+  "static_build": {
+    "exit_code": 0,
+    "elapsed_seconds": 103.54044240000076,
+    "log": "C:\\tmp\\streeling-music-phrase-build-20261022.log",
+    "pages": 1768,
+    "log_sha256": "e035f84e9d1eb9922a39b8878097039d5cf8f27ca651658edaa2441d11d71e73",
+    "dependency_install": "Existing node_modules junction; no fresh npm ci.",
+    "warnings": "Existing highlighting fallback and empty i18n/404 warnings; complete log retained."
+  },
+  "rendered_articles": {
+    "pages": 15,
+    "links": 375,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "factual_checks": 33,
+    "factual_findings": [],
+    "data_receipt_sha256": "388637cec39d4e140afb0aa70b918a2a9052508f78f340704b983c77d77eaf0e",
+    "content_verdict": "pass",
+    "content_findings": [],
+    "exercise_pairs_checked": 45,
+    "learner_criteria_checked": 15,
+    "content_receipt_sha256": "d2adb848d65f2b8b20e8a5c6a79f9edd01ad168a79c11f3653bca8c59edea203",
+    "scope": "AI factual/source-assisted course review; not formal CE or human approval.",
+    "human_subject": null,
+    "fluent_language": null,
+    "learner": null,
+    "playing_trial": null
+  },
+  "code_review_pipeline": "Documentation/data-only: no new production or lab code emitted; code-shipping review not invoked.",
+  "manual_host_scan": "Inspected source boundary claims, independent fixture arithmetic, final course distinctions, task/rubric alignment, exact bindings and generated indexes. No blocking issue remains for this draft-source lot.",
+  "source_inventory": {
+    "core_english_modules": 165,
+    "original_departments": 21,
+    "target": 525,
+    "remaining_core_source_gaps": 360,
+    "music_modules": 25,
+    "locale_counts": {
+      "en": 166,
+      "fr": 166,
+      "es": 166
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint or typecheck scripts configured; existing generator tests and Astro build used."
+}

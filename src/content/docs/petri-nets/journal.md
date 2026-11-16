@@ -22,6 +22,7 @@ sidebar:
 - [x] Lesson 13 — Against other formalisms
 - [x] Lesson 14 — On our own systems
 - [x] Lesson 15 — Limits and what comes next
+- [x] Lesson 16 — Interoperability: preserving behaviour, not just the drawing (its TINA leg is a pending recipe)
 
 ## QA
 
@@ -41,6 +42,9 @@ This course teaches a formalism and runs on an analyser I wrote, so there is no 
 | The coverability tree of a small bounded net is computable | `CoverabilityTree.Build(Nets.Kanban(1))`, a net with 160 reachable markings, does not return: capped at 2 GiB it throws `OutOfMemoryException` after 15.5 s, uncapped it reached 35.7 GB and twelve minutes of CPU | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs) | 160 markings, no result; the tree never merges two branches reaching the same marking, so its size follows the number of paths | Not a defect and not fixable: lesson 12 prints two bound columns instead of three, and says why (2026-09-22) |
 | A model checker says when it checked nothing | TLC with a state constraint that excludes the initial marking prints `Model checking completed. No error has been found.` and `0 distinct states found`, with no line distinguishing it from a complete run | `tla2tools.jar` 2.19, [TLA+ tools](https://github.com/tlaplus/tlaplus) | `queue_5.tla` with `Cap == 2` against an initial marking of 5 tokens: 1 state generated, 0 distinct, exit 0 | Reproduced on 2026-09-22; not reported upstream — reporting it needs the author's go-ahead. The lesson derives the cap from the place invariants instead (2026-09-22) |
 | The coverability tree approximates, and errs on the safe side | On a net with one inhibitor arc it answers omega for a place that never holds two tokens. Karp and Miller's acceleration assumes the sequence reaching a covering marking can be repeated, which an inhibitor arc breaks | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs), [`Inhibitor.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/Inhibitor.cs) | `self-inhibited`: tree says unbounded, reachable set is 2 markings with p <= 1 | Not a defect and not fixable — boundedness is undecidable for these nets. `InhibitorNet` ships with no coverability counterpart, and `InhibitorTests` holds the contradiction so nobody adds one (2026-09-22) |
+| A PNML arc the P/T reader does not model is refused | An arc marked `<type value="inhibitor"/>` was read as an ordinary consuming arc: lesson 16's admission net became a net that admits nobody, with no error. After that fix, review found the same silence for `<type><text>inhibitor</text></type>`, an `<arctype>` child and an empty `<type/>` | [`Pnml.cs:68-73`](https://github.com/spareilleux/learn/blob/3242df6132daba4f16e1cbc73cfb5722bcea37d1/code/petri-nets/PetriNets/Pnml.cs#L68-L73); tests [`PetriNetTests.cs:626`](https://github.com/spareilleux/learn/blob/3242df6132daba4f16e1cbc73cfb5722bcea37d1/code/petri-nets/Tests/PetriNetTests.cs#L626), [`PetriNetTests.cs:644`](https://github.com/spareilleux/learn/blob/3242df6132daba4f16e1cbc73cfb5722bcea37d1/code/petri-nets/Tests/PetriNetTests.cs#L644) | `l16` before the fix: `READ: 3 states`, dead with both jobs tested. `PnmlTests`: 1 of 5 failed, then 5 of 5; after review, 4 new cases failed, then 12 of 12 passed | Reproduced, fixed locally for a `<type>` or `<arctype>` child, attribute or label; a kind kept in `<toolspecific>` is still not recognised (2026-09-27); not independently verified |
+| A refused marking names its place | `FormatException: The input string 'two' was not in a correct format.`, the message of `int.Parse` | [`Pnml.cs:50`](https://github.com/spareilleux/learn/blob/3242df6132daba4f16e1cbc73cfb5722bcea37d1/code/petri-nets/PetriNets/Pnml.cs#L50) | `l16`, E3 | Observed, not fixed (2026-09-27) |
+| Lesson 16's round trip reports every line that changed | The two listings were paired with `Zip`, which stops at the shorter one. On E1's listing an added or lost dead marking was still seen, because the bounds line follows it, but it counted once and was never printed; a lost last line gave `same meaning: yes` | [`Report.cs:321`](https://github.com/spareilleux/learn/blob/3242df6132daba4f16e1cbc73cfb5722bcea37d1/code/petri-nets/PetriNets/Report.cs#L321), [`Program.cs:1130`](https://github.com/spareilleux/learn/blob/3242df6132daba4f16e1cbc73cfb5722bcea37d1/code/petri-nets/Examples/Program.cs#L1130); test [`PetriNetTests.cs:663`](https://github.com/spareilleux/learn/blob/3242df6132daba4f16e1cbc73cfb5722bcea37d1/code/petri-nets/Tests/PetriNetTests.cs#L663) | Found in review, not by a run. The test failed with `Zip` and passes after. Replayed on E1's 8 lines: 1 difference instead of 2 for an added or lost dead line, 0 instead of 1 for a lost last line | Fixed locally (2026-09-27); not independently verified |
 
 ## Experiments
 
@@ -75,6 +79,10 @@ One warning before the table: unlike the [GA Lab](../../ga-lab/journal/), this c
 | How does the cost of enumeration grow as components are added? | Like the markings, which is what everyone quotes | Like the **arcs per marking**: 1.3 to 3.9 over six philosophers, 3.9 to 8.8 over four Kanban cards, because each component multiplies the ways every existing state can be left | Confirmed as a shape, and it flattens: the ratio is an average out-degree and cannot exceed the transition count (2026-09-22) |
 | What does atomicity cost in state space? | A constant factor | Philosophers taking both forks at once: 29 markings at seven. One fork at a time: 198 at six. The difference is interleaving, and it is what unfoldings remove | Measured; neither unfolding nor partial order reduction is implemented here, and the lesson says so (2026-09-22) |
 | Does the coverability tree stay a safe approximation when the net gains an inhibitor arc? | Yes — it over-approximates by construction, so it should answer omega too often, never wrongly | It answers omega for a place that never holds two tokens. `self-inhibited` has 2 reachable markings and the tree says unbounded | Refuted. The acceleration's premise fails, and it fails because boundedness is undecidable here, so there is nothing to fix (2026-09-22) |
+| Does a hand-written PNML net keep its behaviour through a read, a write and a read? | Yes: same ids, marking, weights and enabled set, 9 markings, one dead marking, `running<=1`; the positions dropped | Exactly that, and the second write is byte-identical to the first; 9 positions in, 0 out | Confirmed, pre-registered in a file (2026-09-27) |
+| What does forgetting the release do? | 7 markings, and a dead marking with one job tested and never admitted, 4 firings away | `waiting=0 tested=1 capacity=0 running=0 done=1` after `test test admit finish` | Confirmed (2026-09-27) |
+| Are malformed files refused? | Both: an arc to a missing node, and a marking written `two` | Refused, with `ArgumentException` and `FormatException` | Confirmed (2026-09-27) |
+| Is an arc type the reader does not model refused? | No: from reading `Pnml.Parse`, an inhibitor arc is read as an ordinary one, which gives 3 markings | `READ: 3 states`, dead with `tested=2` | Confirmed, and it was a defect: arcs marked by a `<type>` or `<arctype>` child are now refused (2026-09-27) |
 
 ## 2026-09-15 — Lessons 1 to 4, and the analyser they run on
 
@@ -241,6 +249,40 @@ The cost arrives immediately. `self-inhibited` is one place, one transition, and
 
 That is also the answer to why every other net in this repository is an ordinary place/transition net. It is not conservatism. It is the line past which the analyser's verdicts stop meaning anything.
 
+## 2026-09-27 — Lesson 16, and a file that parsed and meant something else
+
+The question came from outside the course: does a net keep its **behaviour** across tools, not just its drawing? Everything ran at `e3cb4be` with this course's analyser only. TINA, pm4py and Graphviz are not installed on this machine, so the lesson's TINA leg is a recipe, and it says so.
+
+For once the predictions went into a file before the first run: `interop/preregistration.md`, hashed at 10:54:11 EDT (SHA-256 `44fd0d02…`). Four experiments, each with its numbers written down first:
+
+- **E1, the round trip of a hand-written admission net.** Reproduced as predicted:
+  - 9 markings, and one dead marking, which is the proper end;
+  - `running<=1`;
+  - the same meaning after writing the net and reading it back;
+  - 9 positions dropped.
+- **E2, the release forgotten.** Reproduced: 7 markings, and a dead marking after 4 firings, `test test admit finish`.
+- **E3, two malformed files:** an arc to a missing node, and a marking written `two`.
+  - Both are refused. **Reproduced.**
+  - The second refusal is `int.Parse`'s message, which does not name the place. **Observed**, left as it is.
+- **E4, an inhibitor arc marked `<type value="inhibitor"/>`.**
+  - Predicted, from reading `Pnml.Parse`, to be read as an ordinary arc. It was: `READ: 3 states`, a net that admits nobody. **Reproduced.**
+  - Then **fixed locally**: the reader now refuses any arc type other than `normal`.
+  - The unit test failed first (1 of 5 PNML tests) and passed after the fix (5 of 5). `check.sh` passes 92 tests and 19 compared outputs, `l16` included.
+
+Timing: the Examples build took 5 s, each `l16` run under a second, and the whole `check.sh` 47 s.
+
+Limits: this is the state space of a 9-marking net. It is not an execution of real jobs, and not a fairness proof. None of it is **independently verified** or **publicly published** yet.
+
+
+## 2026-09-27 — Lesson 16 after review
+
+Codex reviewed PR #28 at `3c1ff61` and asked for three repairs. All three are made at `3242df6`, with the tests written before the fixes:
+- **The round-trip comparison truncated.** It paired the two listings with `Zip`, which stops at the shorter one. On E1's listing that did not hide a change entirely, because the bounds line comes last, but a lost last line would have printed `same meaning: yes`. `Report.LineDifferences` now pairs every line.
+- **The arc-kind guard read one encoding,** `<type value="…"/>`. It now also refuses a `<type>` label, an `<arctype>` child in either form, and an empty `<type/>`. A kind kept in a `<toolspecific>` block is still not recognised, and lesson 16 now says so.
+- **The QA rows linked `blob/main`.** They now point at lines of `3242df6`.
+
+Before the fixes, 5 of the 12 `PnmlTests` failed: the 4 arc-kind cases and the comparison. After, all 12 pass. `check.sh` passes 99 tests and 19 compared outputs, and `expected/` did not change. The site builds (1231 pages) and its link check finds 0 broken links. None of this is independently verified yet.
+
 ## To verify
 
 - Lesson 15 names unfoldings, partial order reduction and decision diagrams and implements none of them. The claim that an unfolding is exponentially smaller for the philosopher family is the published result, not a measurement from this repository; the Karp–Miller and Araki–Kasami papers are confirmed through Crossref but paywalled and unread.
@@ -251,6 +293,9 @@ That is also the answer to why every other net in this repository is an ordinary
 - Murata 1989 remains paywalled and unread; every attribution to it in lessons 1 to 8 is marked in the page.
 - Lesson 7, exercise 3: build the philosophers with a timeout and check that the net is deadlock-free and has an infinite run in which nobody eats.
 - The claim that minimal siphon enumeration is NP-hard is stated in lesson 6 from general knowledge and not pinned to a paper.
+- Lesson 16's TINA leg. `tina -R interop/admission.pnml` should report 9 markings and one dead marking; TINA is not installed here. The same goes for `inhibitor-arc.pnml`, which TINA does model, with and without `-inh`.
+- Which tools write an arc's kind as `<type value="…"/>` in PNML is not pinned to a source. Lesson 16 says "tools that model more than P/T nets" and names none. The label and `<arctype>` forms it now refuses came from the review, not from a file seen in the wild.
+- An XES log of simulated runs of the admission net, checked against the model, and a DOT export of it. Neither pm4py nor Graphviz is installed here.
 
 ## Open questions
 

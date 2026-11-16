@@ -1,0 +1,35 @@
+OBSERVATION {"case": "model", "code": "FUT011", "expected": {"ambiguous_samples": [1, 2, 3, 4, 5, 6], "mesh_states": [true, true, true, true, false, false, true], "possible_mesh_states": [[false, true], [false, true], [false, true], [false, true], [false, true], [false, true], [true]], "robust_mesh_states": [false, false, false, false, false, false, true], "robust_switches": 1, "switches": 3}, "observed": {"ambiguous_samples": [1, 2, 3, 4, 5, 6], "mesh_states": [true, true, true, true, false, false, true], "possible_mesh_states": [[false, true], [false, true], [false, true], [false, true], [false, true], [false, true], [true]], "robust_mesh_states": [false, false, false, false, false, false, true], "robust_switches": 1, "switches": 3}, "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."}
+OBSERVATION {"case": "negative", "code": "FUT011", "expected": {"ambiguous_samples": [2], "mesh_states": [true, false, true, false, false, false, true], "possible_mesh_states": [[true], [false, true], [true], [false], [false], [false], [true]], "robust_mesh_states": [true, true, true, false, false, false, true], "robust_switches": 3, "switches": 5}, "observed": {"ambiguous_samples": [], "mesh_states": [true, false, true, false, false, false, true], "possible_mesh_states": [[true], [false], [true], [false], [false], [false], [true]], "robust_mesh_states": [true, false, true, false, false, false, true], "robust_switches": 5, "switches": 5}, "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."}
+Traceback (most recent call last):
+  File "C:\tmp\batch50-finish-c-20261025\mutation-probe.py", line 23, in <module>
+    module.UnitC('test_fut011').test_fut011()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-24\tests\test_unit_c.py", line 182, in test_fut011
+    self.check_course('FUT011',
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+        dict(mesh_states=[True,True,True,True,False,False,True], switches=3,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+             possible_mesh_states=[[True],[False,True],[True],[False],[False],[False],[True]],
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+             ambiguous_samples=[2]))
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-24\tests\test_unit_c.py", line 133, in check_course
+    self.equal_tree(observed, fixed)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-24\tests\test_unit_c.py", line 115, in equal_tree
+    self.equal_tree(observed[key], expected[key])
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-24\tests\test_unit_c.py", line 119, in equal_tree
+    self.equal_tree(a, b)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-24\tests\test_unit_c.py", line 121, in equal_tree
+    self.assertIs(observed, expected)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\spare\AppData\Local\Programs\Python\Python314\Lib\unittest\case.py", line 1206, in assertIs
+    self.fail(self._formatMessage(msg, standardMsg))
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\spare\AppData\Local\Programs\Python\Python314\Lib\unittest\case.py", line 750, in fail
+    raise self.failureException(msg)
+AssertionError: False is not True
+MUTATION_REJECTED {"canonical_data_unchanged": true, "canonical_hashes_after": {"C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\tests\\test_unit_c.py": "0f0abe05f476810ef8d9bd00314a62ce54731c97ae647892748a7ed952421804", "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\unit-c.json": "1805f12e9f6257fad9706c4435468c1463aa2372afeec5f39beefebb04477d0e"}, "canonical_hashes_before": {"C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\tests\\test_unit_c.py": "0f0abe05f476810ef8d9bd00314a62ce54731c97ae647892748a7ed952421804", "C:\\tmp\\learn-streeling-craft-transfer-20261022\\code\\streeling\\evidence\\batch50-2026-10-24\\unit-c.json": "1805f12e9f6257fad9706c4435468c1463aa2372afeec5f39beefebb04477d0e"}, "change": "control sample2 upper endpoint 2 -> 1.99 px", "course": "FUT011", "scope": "Intentional incorrect in-memory input rejected by current independent fixed expectations; not an actual course failure."}

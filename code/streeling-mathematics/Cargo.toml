@@ -1,0 +1,12 @@
+[package]
+name = "streeling-mathematics"
+version = "0.1.0"
+edition = "2024"
+publish = false
+description = "Executable experiments behind the Streeling mathematics modules, measured against a pinned IX"
+
+# IX pinned on one commit of main, the commit the Streeling curriculum plan read:
+# https://github.com/GuitarAlchemist/ix/commit/e35138b9d4c707d48f802649a7fcb3f7fc94934d
+[dependencies]
+ix-math = { git = "https://github.com/GuitarAlchemist/ix", rev = "e35138b9d4c707d48f802649a7fcb3f7fc94934d" }
+ndarray = "0.17"

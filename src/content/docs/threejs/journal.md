@@ -35,7 +35,7 @@ three.js r186 and the libraries around it are somebody else's software; this tab
 |---|---|---|---|---|
 | `WebGPURenderer` reports the draw calls the scene has, like `WebGLRenderer` | With tone mapping, or an output color space that differs from the working space, it renders into a target and draws that in an output pass | three.js r186 `WebGPURenderer` | 2 draw calls and 13 triangles for one cube, against 1 on WebGL; the two `info` objects also have different shapes | Reproduced [2026-09-16](#2026-09-16--surprises) |
 | `@types/three` describes `toJSON()` as the runtime writes it | In 0.186.0 `Object3DJSON` declares `children` as strings and has neither `geometries` nor `materials`; the runtime writes objects and both arrays | `@types/three` 0.186.0 | The compiler errors are kept in `errors/l01_tojson_types.ts` | Reproduced. No upstream issue looked for, none opened [2026-09-16](#2026-09-16--surprises) |
-| `PCFSoftShadowMap` works on `WebGPURenderer` | Removed in r186, and it warns. R3F sets it for any truthy `shadows` and gets the same warning once per render of `<Canvas>` | three.js r186, @react-three/fiber 9.7.0 | GA's `LunarLanderEngine.ts` and `MinimalThreeInstrument.tsx` still pair it with `WebGPURenderer` | Reproduced [2026-09-16](#2026-09-16--surprises) · [2026-09-16](#2026-09-16--lessons-9-to-13-what-the-pages-found) |
+| `PCFSoftShadowMap` works on `WebGPURenderer` | Removed in r186, and it warns. R3F sets it for any truthy `shadows` and gets the same warning once per render of `<Canvas>` | three.js r186, @react-three/fiber 9.7.0 | GA's `LunarLanderEngine.ts` and `MinimalThreeInstrument.tsx` still pair it with `WebGPURenderer` | Reproduced [2026-09-16](#2026-09-16--surprises) · [2026-09-16](#2026-09-16--lessons-9-to-13-what-the-pages-found) · Not yet in GA, which pins three 0.180.0, where it still works; [2026-09-24](#2026-09-24--upstream-fixes) |
 | A point light and a spot light convert lumens to candela the same way | `SpotLight.power` uses π instead of 4π and does not change with the cone's angle | three.js `SpotLight.power` | 800 lm gives 63.66 cd on a point light and 254.65 on a spot | Reproduced [2026-09-16](#2026-09-16--surprises) |
 | Building an equirectangular environment costs about one pass | The PMREM costs 17 renders: 1 into the first level, then 2 for each of the 8 others, even for a plain equirectangular texture | three.js `PMREMGenerator` | 17 renders for a 256 by 128 environment | Reproduced, by design [2026-09-16](#2026-09-16--surprises) |
 | The bundler ships the Draco decoders the browser loads | Since r185 `DRACOLoader` resolves them with `import.meta.url`, so Vite copies all five | three.js r185+ `DRACOLoader`, Vite | 1.31 MB bundled where a browser loads two files; the build also warns that `three.webgpu` is over 500 kB | Reproduced, changed behaviour since r184 [2026-09-16](#2026-09-16--surprises) |
@@ -198,6 +198,11 @@ Nothing below has been reported to GA.
 - R3F's build brought `three` next to `three/webgpu`: 565 kB gzip against 210 for the same scene without React.
 - The ComfyUI wood textures are pending: the ComfyUI GA lab's experiment 4 had no output yet.
 - CI (`threejs-ga-lab.yml`) compares `renderer.info` counters on WebGL 2 on three OSes, never times. A Playwright screenshot hung for 300 s once on macOS: the runner now keeps the result when a screenshot fails.
+
+## 2026-09-24 — Upstream fixes
+
+- The `PCFSoftShadowMap` row does not apply to GA yet. The removal and its warning are real in r186 (`Renderer.js` and `ShadowNode.js` of the `three@0.186.0` package), but GA pins three 0.180.0 and @react-three/fiber 8.18.0. In 0.180, `ShadowNode` still maps `PCFSoftShadowMap` to its soft filter, so there is no warning and the soft shadows work.
+- GA's two pairings with `WebGPURenderer`, in `LunarLanderEngine.ts` and `MinimalThreeInstrument.tsx`, will start warning when GA moves to r186 or later. Changing them now would lose the soft shadows, so [#733](https://github.com/GuitarAlchemist/ga/pull/733) left them for that upgrade and says so. Read in the package sources, not run (*to verify*).
 
 ## To verify
 

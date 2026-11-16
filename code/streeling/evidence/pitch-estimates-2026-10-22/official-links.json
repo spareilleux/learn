@@ -1,0 +1,66 @@
+{
+  "checked_at_utc": "2026-10-22T20:39:39.881602+00:00",
+  "scope": "All external English-course URLs. Direct bytes, substantive indexed-abstract reading and actual image decoding distinguished; no runtime/listener claim.",
+  "reads": [
+    {
+      "url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs#L281-L326",
+      "final_url": "https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs#L281-L326",
+      "status": 200,
+      "mime_type": "text/html",
+      "bytes": 652219,
+      "sha256": "10274c5f9bd7adc2f84c7fab3ed5dd9a126a1ba723ebb0f156e7d4587761048f"
+    },
+    {
+      "url": "https://numpy.org/doc/stable/reference/generated/numpy.fft.rfft.html",
+      "status": 403,
+      "direct_request_success": false,
+      "separate_browsing_read": {
+        "title": "NumPy real-input FFT official reference",
+        "content_read": "Parent read actual API body through web.open: real input, forward normalization and Hermitian endpoint conventions.",
+        "scope": "Primary documentation read, not a successful direct-byte request or detector execution."
+      }
+    },
+    {
+      "url": "https://numpy.org/doc/stable/reference/generated/numpy.frombuffer.html",
+      "status": 403,
+      "direct_request_success": false,
+      "separate_documentation_read": {
+        "provider": "Context7",
+        "source_url": "https://numpy.org/doc/stable/reference/generated/numpy.frombuffer.html",
+        "content_read": "Official NumPy frombuffer API: interprets a buffer as a one-dimensional array; dtype declares byte order. Parent retrieved actual API body and byte-order notes through Context7.",
+        "scope": "Primary documentation retrieval; direct web/open transport remained unavailable, not runtime confidence calibration."
+      }
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23015422/",
+      "final_url": "https://pubmed.ncbi.nlm.nih.gov/23015422/",
+      "status": 203,
+      "mime_type": "text/html",
+      "bytes": 5590,
+      "sha256": "4698daab86f00854fe0f413892e57594333ab75ef409c3ce29873f13a6920f0c",
+      "abstract_text_present_in_direct_body": false,
+      "separate_browsing_read": {
+        "title": "Oxenham2012 Pitch Perception indexed abstract",
+        "content_read": "Repetition rate is a primary physical correlate; interactions complicate perceived pitch. Parent read actual abstract through web.open; full paper and associated stimuli not read/played.",
+        "scope": "Primary indexed abstract only, no reproduced experiment or new listener evidence."
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/spareilleux/learn/c953607dc38126877032dd5919e57d894971b257/code/streeling/evidence/pitch-estimates-2026-10-22/baseline-native.f32le",
+      "final_url": "https://raw.githubusercontent.com/spareilleux/learn/c953607dc38126877032dd5919e57d894971b257/code/streeling/evidence/pitch-estimates-2026-10-22/baseline-native.f32le",
+      "status": 200,
+      "mime_type": "application/octet-stream",
+      "bytes": 705600,
+      "sha256": "e924c20a4305783870ae6a373b46844c5431a25bad7ec80d76fc1569cdee8363"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/spareilleux/learn/c953607dc38126877032dd5919e57d894971b257/code/streeling/evidence/pitch-estimates-2026-10-22/pitch-errors-and-availability.png",
+      "final_url": "https://raw.githubusercontent.com/spareilleux/learn/c953607dc38126877032dd5919e57d894971b257/code/streeling/evidence/pitch-estimates-2026-10-22/pitch-errors-and-availability.png",
+      "status": 200,
+      "mime_type": "image/png",
+      "bytes": 77816,
+      "sha256": "c553be8580299dec3e7d74e80cee1750edaa42f76dfaa20233a04eb198279d0f",
+      "decoded_png": true
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "checked_at_utc": "2026-10-22T20:15:47.201507+00:00",
+  "base_learn_commit": "0bc6e787ec96ab61e76b2fb4bc54e8788ca5eb52",
+  "source_ga_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "scope": "Three surface-normal/frame-orientation/scene-summary courses in existing departments; fresh unchanged F# helpers on authored Drafts and fixed geometric/information calculations. No new production/lab program.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "calculation_checks": {
+    "independent_checks": 88,
+    "passed": 88,
+    "failed": 0,
+    "public_ga_source_files": 6,
+    "native_validator_cases": 9,
+    "native_accepted_cases": 7,
+    "native_refused_cases": 2,
+    "native_authored_scenes": 2,
+    "independent_native_rerun": true,
+    "native_sdk": "10.0.113",
+    "new_generate_run": false,
+    "new_colossus_run": false,
+    "new_shader_run": false,
+    "new_gpu_run": false,
+    "new_audio_run": false,
+    "new_dependency_install": false
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.44834569998784,
+    "log": "C:\\tmp\\streeling-scene-frames-tests-20261022.log",
+    "log_sha256": "07db12f169c3d1dd97811f6f4081489a1da69a51d7927a15770de4a412543c5c",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.41995089998818,
+    "log": "C:\\tmp\\streeling-scene-frames-sync-20261022.log",
+    "log_sha256": "9cebafa34da1331ff6bda157ecc4284c89685694198f14a4bf1793541bd9f9be",
+    "idempotent_checked_files": 626
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 81.22527049999917,
+    "log": "C:\\tmp\\streeling-scene-frames-build-20261022.log",
+    "log_sha256": "5939ebdd5a3a452296bd89f59b5d312ea33a45902f9487dfbb243f305d1487b0",
+    "pages": 1822,
+    "dependency_install": "Existing node_modules junction; no install.",
+    "warnings": "Existing highlighting fallback and empty i18n/404 warnings retained in complete log."
+  },
+  "rendered_articles": {
+    "pages": 21,
+    "links": 381,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "data_verdict": "pass",
+    "data_receipt_sha256": "04feb829d67df7cb9c7682a366cd3fc6ae76c2ce715295794e01bc78d9f00ca3",
+    "content_verdict": "pass_with_declared_evidence_limits",
+    "content_receipt_sha256": "c070f2433cc45bf75b0b5bfdd955da32e4b09e0e2d31e891550fd2c446980274",
+    "exercise_pairs_checked": 45,
+    "learner_criteria_checked": 15,
+    "findings": [],
+    "scope": "Independent AI source/native/mathematical/course checks; not human approval.",
+    "human_technical": null,
+    "fluent_language": null,
+    "learner": null,
+    "host_render": null,
+    "import_result": null,
+    "camera_visibility": null,
+    "manufacturing": null
+  },
+  "code_review_pipeline": "Documentation/fixed-data-only deliverable with temporary verification wrappers; no new production/lab program emitted and no code-shipping review invoked.",
+  "manual_host_scan": "Checked six immutable public files, four unchanged FSI inputs, explicit teaching Drafts, local-size/finite-placement gate versus invertibility, row-vector composition and orthogonal control, inverse-transpose versus axis normals, reflection/winding/host meaning, affine extrema and two-endpoint negative control, closed-union membership, ideal versus float32 volume, finite-prior information values and final review hashes.",
+  "source_inventory": {
+    "core_english_modules": 183,
+    "target": 525,
+    "original_departments": 21,
+    "remaining_core_source_gaps": 342,
+    "locale_counts": {
+      "en": 184,
+      "fr": 184,
+      "es": 184
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint/typecheck scripts configured; existing generator tests and Astro build used."
+}

@@ -1,0 +1,316 @@
+{
+  "execution": "knowledge-work with a separately reviewed runnable-claim-test substep",
+  "base_learn_commit": "b77f44f82e1ad4547e6efd3aa2e4448cce6b2809",
+  "baseline_core": 431,
+  "target": 525,
+  "expected_core_after": 481,
+  "expected_remaining": 44,
+  "original_departments": 21,
+  "units": {
+    "a": 18,
+    "b": 16,
+    "c": 16
+  },
+  "courses": [
+    {
+      "unit": "a",
+      "department": "audio-engineering",
+      "code": "AUD022",
+      "filename_prefix": "aud-022-"
+    },
+    {
+      "unit": "a",
+      "department": "audio-engineering",
+      "code": "AUD023",
+      "filename_prefix": "aud-023-"
+    },
+    {
+      "unit": "a",
+      "department": "audio-engineering",
+      "code": "AUD024",
+      "filename_prefix": "aud-024-"
+    },
+    {
+      "unit": "a",
+      "department": "audio-engineering",
+      "code": "AUD025",
+      "filename_prefix": "aud-025-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-acoustics",
+      "code": "GAS021",
+      "filename_prefix": "gas-021-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-acoustics",
+      "code": "GAS022",
+      "filename_prefix": "gas-022-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-acoustics",
+      "code": "GAS023",
+      "filename_prefix": "gas-023-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-acoustics",
+      "code": "GAS024",
+      "filename_prefix": "gas-024-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-acoustics",
+      "code": "GAS025",
+      "filename_prefix": "gas-025-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-studies",
+      "code": "GTR021",
+      "filename_prefix": "gtr-021-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-studies",
+      "code": "GTR022",
+      "filename_prefix": "gtr-022-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-studies",
+      "code": "GTR023",
+      "filename_prefix": "gtr-023-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-studies",
+      "code": "GTR024",
+      "filename_prefix": "gtr-024-"
+    },
+    {
+      "unit": "a",
+      "department": "guitar-studies",
+      "code": "GTR025",
+      "filename_prefix": "gtr-025-"
+    },
+    {
+      "unit": "a",
+      "department": "world-music-languages",
+      "code": "WML020",
+      "filename_prefix": "wml-020-"
+    },
+    {
+      "unit": "a",
+      "department": "world-music-languages",
+      "code": "WML021",
+      "filename_prefix": "wml-021-"
+    },
+    {
+      "unit": "a",
+      "department": "world-music-languages",
+      "code": "WML022",
+      "filename_prefix": "wml-022-"
+    },
+    {
+      "unit": "a",
+      "department": "world-music-languages",
+      "code": "WML023",
+      "filename_prefix": "wml-023-"
+    },
+    {
+      "unit": "b",
+      "department": "cognitive-science",
+      "code": "COG021",
+      "filename_prefix": "cog-021-"
+    },
+    {
+      "unit": "b",
+      "department": "cognitive-science",
+      "code": "COG022",
+      "filename_prefix": "cog-022-"
+    },
+    {
+      "unit": "b",
+      "department": "cognitive-science",
+      "code": "COG023",
+      "filename_prefix": "cog-023-"
+    },
+    {
+      "unit": "b",
+      "department": "cybernetics",
+      "code": "CYB021",
+      "filename_prefix": "cyb-021-"
+    },
+    {
+      "unit": "b",
+      "department": "cybernetics",
+      "code": "CYB022",
+      "filename_prefix": "cyb-022-"
+    },
+    {
+      "unit": "b",
+      "department": "cybernetics",
+      "code": "CYB023",
+      "filename_prefix": "cyb-023-"
+    },
+    {
+      "unit": "b",
+      "department": "information-theory",
+      "code": "INF022",
+      "filename_prefix": "inf-022-"
+    },
+    {
+      "unit": "b",
+      "department": "information-theory",
+      "code": "INF023",
+      "filename_prefix": "inf-023-"
+    },
+    {
+      "unit": "b",
+      "department": "information-theory",
+      "code": "INF024",
+      "filename_prefix": "inf-024-"
+    },
+    {
+      "unit": "b",
+      "department": "network-science",
+      "code": "NET019",
+      "filename_prefix": "net-019-"
+    },
+    {
+      "unit": "b",
+      "department": "network-science",
+      "code": "NET020",
+      "filename_prefix": "net-020-"
+    },
+    {
+      "unit": "b",
+      "department": "network-science",
+      "code": "NET021",
+      "filename_prefix": "net-021-"
+    },
+    {
+      "unit": "b",
+      "department": "product-management",
+      "code": "PM016",
+      "filename_prefix": "pm-016-"
+    },
+    {
+      "unit": "b",
+      "department": "product-management",
+      "code": "PM017",
+      "filename_prefix": "pm-017-"
+    },
+    {
+      "unit": "b",
+      "department": "product-management",
+      "code": "PM018",
+      "filename_prefix": "pm-018-"
+    },
+    {
+      "unit": "b",
+      "department": "product-management",
+      "code": "PM019",
+      "filename_prefix": "pm-019-"
+    },
+    {
+      "unit": "c",
+      "department": "data-visualization",
+      "code": "DV023",
+      "filename_prefix": "dv-023-"
+    },
+    {
+      "unit": "c",
+      "department": "data-visualization",
+      "code": "DV024",
+      "filename_prefix": "dv-024-"
+    },
+    {
+      "unit": "c",
+      "department": "data-visualization",
+      "code": "DV025",
+      "filename_prefix": "dv-025-"
+    },
+    {
+      "unit": "c",
+      "department": "futurology",
+      "code": "FUT016",
+      "filename_prefix": "fut-016-"
+    },
+    {
+      "unit": "c",
+      "department": "futurology",
+      "code": "FUT017",
+      "filename_prefix": "fut-017-"
+    },
+    {
+      "unit": "c",
+      "department": "futurology",
+      "code": "FUT018",
+      "filename_prefix": "fut-018-"
+    },
+    {
+      "unit": "c",
+      "department": "futurology",
+      "code": "FUT019",
+      "filename_prefix": "fut-019-"
+    },
+    {
+      "unit": "c",
+      "department": "guitar-alchemist-academy",
+      "code": "GAA020",
+      "filename_prefix": "gaa-020-"
+    },
+    {
+      "unit": "c",
+      "department": "guitar-alchemist-academy",
+      "code": "GAA021",
+      "filename_prefix": "gaa-021-"
+    },
+    {
+      "unit": "c",
+      "department": "guitar-alchemist-academy",
+      "code": "GAA022",
+      "filename_prefix": "gaa-022-"
+    },
+    {
+      "unit": "c",
+      "department": "philosophy",
+      "code": "PHI016",
+      "filename_prefix": "phi-016-"
+    },
+    {
+      "unit": "c",
+      "department": "philosophy",
+      "code": "PHI017",
+      "filename_prefix": "phi-017-"
+    },
+    {
+      "unit": "c",
+      "department": "philosophy",
+      "code": "PHI018",
+      "filename_prefix": "phi-018-"
+    },
+    {
+      "unit": "c",
+      "department": "semiotics",
+      "code": "SEM021",
+      "filename_prefix": "sem-021-"
+    },
+    {
+      "unit": "c",
+      "department": "semiotics",
+      "code": "SEM022",
+      "filename_prefix": "sem-022-"
+    },
+    {
+      "unit": "c",
+      "department": "semiotics",
+      "code": "SEM023",
+      "filename_prefix": "sem-023-"
+    }
+  ]
+}

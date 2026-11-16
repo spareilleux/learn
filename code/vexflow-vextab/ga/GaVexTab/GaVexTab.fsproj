@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- GA's VexTab types, parser and generator, compiled from the pinned checkout in ../../.ga (bash fetch-ga.sh),
+       with FParsec at the version GA.Business.DSL.fsproj references -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);FS0064;FS3370</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../.ga/Common/GA.Business.DSL/Types/VexTabTypes.fs" />
+    <Compile Include="../../.ga/Common/GA.Business.DSL/Parsers/VexTabParser.fs" />
+    <Compile Include="../../.ga/Common/GA.Business.DSL/Generators/VexTabGenerator.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FParsec" Version="1.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../GaNotation/GaNotation.csproj" />
+  </ItemGroup>
+</Project>

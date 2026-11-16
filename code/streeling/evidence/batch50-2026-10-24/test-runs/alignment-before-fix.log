@@ -1,0 +1,4 @@
+OBSERVATION {"code": "AUD014", "case": "model", "observed": {"raw": [1.6, -1.6, 0.8], "mixed": [0.8, -0.8, 0.4], "peak": 0.8, "clipped_raw": [1, -1, 0.8]}, "expected": {"raw": [1.6, -1.6, 0.8], "mixed": [0.8, -0.8, 0.4], "peak": 0.8, "clipped_raw": [1, -1, 0.8]}, "scope": "Three aligned authored mono samples; linear summation and hard clipping only; no loudness."}
+OBSERVATION {"code": "AUD014", "case": "negative", "observed": {"raw": [0.0, 0.0, 0.0], "mixed": [0.0, 0.0, 0.0], "peak": 0.0, "clipped_raw": [0.0, 0.0, 0.0]}, "expected": {"raw": [0, 0, 0], "mixed": [0, 0, 0], "peak": 0, "clipped_raw": [0, 0, 0]}, "scope": "Three aligned authored mono samples; linear summation and hard clipping only; no loudness."}
+
+Wrong aligned-array input rejected: False

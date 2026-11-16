@@ -1,0 +1,204 @@
+{
+  "status": "complete",
+  "verdict": "needs-fixes",
+  "open_findings": [
+    {
+      "title": "Invalid operation tokens retain passing proof receipts",
+      "severity": "P2",
+      "file": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py",
+      "line": 160,
+      "why_it_matters": "An invalid operation in an authored packet can still produce a passing model/control proof, so the receipt does not establish that the declared operation vocabulary was followed. WML016 silently treats every token other than add or alter as subtract; MCL016 likewise treats every token other than backup as a forward cursor movement. A nonmutating probe replacing the existing subtract and forward tokens with invalid_operation passed both independent fixed expectations and packet expectations. Explicit vocabulary checks preserve the finite-case scope while rejecting malformed fixture steps.",
+      "autofix_class": "manual",
+      "owner": "downstream-resolver",
+      "requires_verification": true,
+      "suggested_fix": "Before evaluating operations, require MCL016 op values to be exactly note, backup, or forward and WML016 op values to be exactly add, alter, or subtract. Replace the implicit WML016 else deletion with an explicit subtract branch and fail on any unknown token. Add targeted in-memory rejection probes for the existing forward/subtract steps with a misspelled operation.",
+      "confidence": 100,
+      "evidence": [
+        "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py:160 --             else: del degrees[key]",
+        "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py:140 --             cursor+=(-1 if op['op']=='backup' else 1)*op['duration']; states.append(cursor)",
+        "unit-a.json WML016 authored_model.formula declares add/alter/subtract; MCL016 authored_model.formula declares note/backup/forward. These are finite authored operations, not production parser behavior.",
+        "Nonmutating focused probe loaded test_unit_a.py with exec(compile(...)) and deep-copied COURSES. Setting WML016.authored_model.values.operations[2].op from subtract to invalid_operation left UnitA.check_course('WML016') passing, including both fixed and packet assertions and two observations.",
+        "The same focused probe set MCL016.authored_model.values.operations[3].op from forward to invalid_operation. UnitA.check_course('MCL016') also passed both fixed and packet assertions and two observations. Canonical files and the Git index were not changed."
+      ],
+      "pre_existing": false,
+      "#": 1,
+      "first_evidence": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py:160 --             else: del degrees[key]",
+      "reviewers": [
+        "adversarial"
+      ],
+      "independent_reviewers": [
+        "adversarial"
+      ],
+      "validation_status": "confirmed",
+      "validation_reason": "Orchestrator reproduced both cases in memory without canonical writes; see operation-enum-probe.json and .log."
+    }
+  ],
+  "review_receipt": {
+    "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/review.json",
+    "sha256": "d975023e695e33fbd930891a8b3c3c8468264ce39aa258ab4eb3cb4ed94b9e00"
+  },
+  "test_bindings": [
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25/tests/test_course_metadata.mjs",
+      "sha256": "d647cc7c3b9c4dedc988d0de021401522620e6c564a1239f0666470a36a36535"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py",
+      "sha256": "c6d692259d7fde206df14f7c6bd48f1c443647120639cd6cbd3d2c6665ce63cd"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_b.py",
+      "sha256": "77350c60d915ab48b6977b73ed098160baab073df8c0432f3ccff65829a387ef"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_c.py",
+      "sha256": "973b9e0f91887e5cfc20f96bc06c6280e077e3787160cad24bb9c25c9c342bc6"
+    }
+  ],
+  "finding_resolutions": [],
+  "retained_review_artifacts": [
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/adversarial.json",
+      "sha256": "b81be7a0161ca4421f02af19887a17a6c55d14aa18ab4cf1772873ca20cd9e89"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/binding-verification.json",
+      "sha256": "b6f5387c9ea0542923844be6991f13f4a97a0da7e4fbbeb4c9a3bcce76565c5f"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/correctness.json",
+      "sha256": "a471ba991c2205e8f4cd36abac0996f7e06ec0c72529973a41be4802423e38f2"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/criteria-candidates.txt",
+      "sha256": "0b2daaf939459036db9814bbbdfd52f594d2653bdc7e2535081a6ce19f4c6b48"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/excluded-untracked.txt",
+      "sha256": "0c60d397f5041668f3a158e6fb25a86e3178317d9476366089877638a300a378"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/files.txt",
+      "sha256": "5fd2cdf1c62dbad89f4ca4e3a1d1df3b1f9f2a6383d1c9ed865c48598a40d622"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/integrated-final.json",
+      "sha256": "de678c60a5aa91bc2d942fc0e0ea907e3e426ea0ed95c56eee121421196b0c39"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/integrated-final.log",
+      "sha256": "9a52a0ebd5d3d5086ac90d4416368d8c4dcd7bcf9626c8f5e9e30ed0889a13d4"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/intent.txt",
+      "sha256": "6757832a2afbb63b20c9a433f5e4dbce506296ffa188444dc538b7366043b557"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/metadata-final.json",
+      "sha256": "b4880a2093e30b045bd2cea74de02ce22ce67c03e9cdb9e6b07b1d17196d4b58"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/metadata-final.log",
+      "sha256": "11208fbc27540e695e0e0d707febf48f7118931e276a59f556a610dcca013b41"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/metadata.json",
+      "sha256": "08c8964b2373b3920c8eee70c75bc471304c4064e908c961c824fe654246cf89"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/operation-enum-probe.json",
+      "sha256": "e4812aed2b00ca4fcb0e4a3bed44e4df48b5230e1f3166d1ad1f73d9e34d05cf"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/operation-enum-probe.log",
+      "sha256": "75b553fdb6d071cd23fd64a68e7cc19233c5a2de11e47262a4380eb2a5701b45"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/peer-scope-outcome.json",
+      "sha256": "0c975255dffc555b221de836b8743a4b125d65a4de30fc0c72d974735baba8f4"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/raw-returns.json",
+      "sha256": "aa106f811076071552c33463dabc39f600187687f3bccb45e27887e3ac18aa84"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/review.diff",
+      "sha256": "b2dd1c8f69e5b2563ec646fc6d8d5e49cee3ce03cc673df05244fc44e0f03061"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/review.json",
+      "sha256": "d975023e695e33fbd930891a8b3c3c8468264ce39aa258ab4eb3cb4ed94b9e00"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/reviewer-selection.json",
+      "sha256": "8d991731fb9e93e282bab5fd034042263f3cc4c23fbcf7d11380227274700979"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/scope-map.json",
+      "sha256": "280f213e397e098d46cb460a823f10cf624de525e33c9f386ec42ca1953d45db"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/scope-signals.json",
+      "sha256": "7c7e47e0476866897d0f22748959e8c043d7c0ae8c14b40dd29150c3f0f640aa"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/stages.jsonl",
+      "sha256": "bf4a2264ff815b3af859933dc672c31f43d7c09c90433978705b6ab2994f44b4"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/test-bindings.json",
+      "sha256": "489f0714bddab71831f1f07f45a5df8bb95350bfb902a27108f8b724eb7ab675"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/verified-authoritative-receipts.json",
+      "sha256": "64d478775f098fe8207b5ba455646bd53d343c158a7addbb7ef83c3784a9c249"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/verify-review-evidence.py",
+      "sha256": "7574e33e20ab285612ec06ff1ec988f279e65aaa6681a5fbea415b91e8ab9f88"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/retained-review-artifacts.json",
+      "sha256": "0a70f28bf5a31804c2291a19781a661024426dff7500b175f45cc5eb7cef4e05"
+    }
+  ],
+  "raw_output_logs": [
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/integrated-final.log",
+      "sha256": "9a52a0ebd5d3d5086ac90d4416368d8c4dcd7bcf9626c8f5e9e30ed0889a13d4"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/metadata-final.log",
+      "sha256": "11208fbc27540e695e0e0d707febf48f7118931e276a59f556a610dcca013b41"
+    },
+    {
+      "path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042/operation-enum-probe.log",
+      "sha256": "75b553fdb6d071cd23fd64a68e7cc19233c5a2de11e47262a4380eb2a5701b45"
+    }
+  ],
+  "coverage": {
+    "depth": "focused",
+    "criteria_files": [
+      "AGENTS.md",
+      "CLAUDE.md"
+    ],
+    "criteria_kind": "instruction-file fallback; no CODING_STANDARDS.md governs the four paths",
+    "compound_packs": "not applied on focused path; no declared packs",
+    "independent_read": "Native adversarial leaf, terminal full artifact and compact return collected. Same serving family; no confidence promotion.",
+    "peer": "Cross-model pass not run: the documented worker cannot restrict its whole-tree diff collection to the caller-authorized four proof-test files. One separately dispatched native adversarial reviewer completed and was collected in this turn; no cross-model corroboration is claimed.",
+    "scope_signals": "Bundled helper ran on canonical base-vs-tree and reported 0 executable non-test lines, small band, no hard full floor; full helper facts retained. Review diff itself restricted to four files.",
+    "untracked": "All untracked paths excluded; exact inventory in excluded-untracked.txt. Three staged Python tests included.",
+    "not_assessed": [
+      "learnings",
+      "agent-native gaps",
+      "deployment notes",
+      "production runtimes",
+      "human/learner acceptance",
+      "course prose and generated publication output"
+    ],
+    "validators": "No validator batch or finish leaves run on focused path; one targeted in-memory reproduction retained.",
+    "validation": "Authoritative 50-test/100-observation and 150-metadata receipts and logs retained byte-for-byte; ten relevant input bindings plus raw log hashes verified against current reviewed files. No broad test rerun."
+  },
+  "run_id": "20261025-proof-tests-aec2e042",
+  "artifact_path": "C:/tmp/compound-engineering-spare/ce-code-review/20261025-proof-tests-aec2e042"
+}

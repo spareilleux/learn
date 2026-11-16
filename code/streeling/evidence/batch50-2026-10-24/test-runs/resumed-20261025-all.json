@@ -1,0 +1,3150 @@
+{
+  "tag": "resumed-20261025-all",
+  "unit": "all",
+  "started_at_utc": "2026-10-25T14:33:27.935817+00:00",
+  "ended_at_utc": "2026-10-25T14:33:29.099416+00:00",
+  "base_learn_commit": "212ffe4351633588efbe46938cbceec80aded31e",
+  "args": [
+    "C:\\Users\\spare\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "code/streeling/evidence/batch50-2026-10-24/tests",
+    "-p",
+    "test_unit_*.py",
+    "-v"
+  ],
+  "python_version": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+  "elapsed_seconds": 1.1630527999950573,
+  "exit_code": 0,
+  "tests_run": 50,
+  "selected_courses": 50,
+  "observation_count": 100,
+  "observations": [
+    {
+      "code": "AUD013",
+      "case": "model",
+      "observed": {
+        "duration_s": 1.0,
+        "output_frames": 48000.0,
+        "relabeled_duration_s": 0.91875,
+        "relabeled_tone_hz": 1088.4353741496598
+      },
+      "expected": {
+        "duration_s": 1,
+        "output_frames": 48000,
+        "relabeled_duration_s": 0.91875,
+        "relabeled_tone_hz": 1088.43537414966
+      },
+      "scope": "Finite clock/count arithmetic only; no interpolation, alias or rendered tone test."
+    },
+    {
+      "code": "AUD013",
+      "case": "negative",
+      "observed": {
+        "duration_s": 1.0,
+        "output_frames": 44100.0,
+        "relabeled_duration_s": 1.0,
+        "relabeled_tone_hz": 1000.0
+      },
+      "expected": {
+        "duration_s": 1,
+        "output_frames": 44100,
+        "relabeled_duration_s": 1,
+        "relabeled_tone_hz": 1000
+      },
+      "scope": "Finite clock/count arithmetic only; no interpolation, alias or rendered tone test."
+    },
+    {
+      "code": "AUD014",
+      "case": "model",
+      "observed": {
+        "raw": [
+          1.6,
+          -1.6,
+          0.8
+        ],
+        "mixed": [
+          0.8,
+          -0.8,
+          0.4
+        ],
+        "peak": 0.8,
+        "clipped_raw": [
+          1,
+          -1,
+          0.8
+        ]
+      },
+      "expected": {
+        "raw": [
+          1.6,
+          -1.6,
+          0.8
+        ],
+        "mixed": [
+          0.8,
+          -0.8,
+          0.4
+        ],
+        "peak": 0.8,
+        "clipped_raw": [
+          1,
+          -1,
+          0.8
+        ]
+      },
+      "scope": "Three aligned authored mono samples; linear summation and hard clipping only; no loudness."
+    },
+    {
+      "code": "AUD014",
+      "case": "negative",
+      "observed": {
+        "raw": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mixed": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "peak": 0.0,
+        "clipped_raw": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "expected": {
+        "raw": [
+          0,
+          0,
+          0
+        ],
+        "mixed": [
+          0,
+          0,
+          0
+        ],
+        "peak": 0,
+        "clipped_raw": [
+          0,
+          0,
+          0
+        ]
+      },
+      "scope": "Three aligned authored mono samples; linear summation and hard clipping only; no loudness."
+    },
+    {
+      "code": "AUD015",
+      "case": "model",
+      "observed": {
+        "integers": [
+          0,
+          0,
+          16384,
+          -16383
+        ],
+        "decoded": [
+          0.0,
+          0.0,
+          0.500015259254738,
+          -0.499984740745262
+        ],
+        "errors": [
+          0.0,
+          -1e-05,
+          1.5259254737998162e-05,
+          1.5259254737998162e-05
+        ],
+        "half_step": 1.5259254737998596e-05
+      },
+      "expected": {
+        "integers": [
+          0,
+          0,
+          16384,
+          -16383
+        ],
+        "decoded": [
+          0,
+          0,
+          0.500015259254738,
+          -0.499984740745262
+        ],
+        "errors": [
+          0,
+          -1e-05,
+          1.5259254737998596e-05,
+          1.5259254737998596e-05
+        ],
+        "half_step": 1.5259254737998596e-05
+      },
+      "scope": "Finite normalized sample quantization using JS tie direction, scale32767; rejected overflow, no codec/listening."
+    },
+    {
+      "code": "AUD015",
+      "case": "negative",
+      "observed": {
+        "integer_before_int16_write": 36044,
+        "int16_representable": false
+      },
+      "expected": {
+        "integer_before_int16_write": 36044,
+        "int16_representable": false
+      },
+      "scope": "Finite normalized sample quantization using JS tie direction, scale32767; rejected overflow, no codec/listening."
+    },
+    {
+      "code": "GAA011",
+      "case": "model",
+      "observed": {
+        "total": 10,
+        "correct": 7,
+        "accuracy": 0.7,
+        "recall": [
+          0.75,
+          0.6666666666666666
+        ],
+        "majority_baseline": 0.6
+      },
+      "expected": {
+        "total": 10,
+        "correct": 7,
+        "accuracy": 0.7,
+        "recall": [
+          0.75,
+          0.6666666666666666
+        ],
+        "majority_baseline": 0.6
+      },
+      "scope": "Two-class authored complete confusion counts, fixed row/column labels; no participant or inference."
+    },
+    {
+      "code": "GAA011",
+      "case": "negative",
+      "observed": {
+        "total": 10,
+        "correct": 3,
+        "accuracy": 0.3,
+        "recall": [
+          0.25,
+          0.3333333333333333
+        ],
+        "majority_baseline": 0.6
+      },
+      "expected": {
+        "total": 10,
+        "correct": 3,
+        "accuracy": 0.3,
+        "recall": [
+          0.25,
+          0.3333333333333333
+        ],
+        "majority_baseline": 0.6
+      },
+      "scope": "Two-class authored complete confusion counts, fixed row/column labels; no participant or inference."
+    },
+    {
+      "code": "GAA012",
+      "case": "model",
+      "observed": {
+        "total_trials": 8,
+        "cell_counts": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "covered_cells": 4,
+        "balanced_complete": true
+      },
+      "expected": {
+        "total_trials": 8,
+        "cell_counts": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "covered_cells": 4,
+        "balanced_complete": true
+      },
+      "scope": "Two-by-two authored assignment counts only; no playback, randomization or responses."
+    },
+    {
+      "code": "GAA012",
+      "case": "negative",
+      "observed": {
+        "total_trials": 8,
+        "cell_counts": [
+          4,
+          0,
+          0,
+          4
+        ],
+        "covered_cells": 2,
+        "balanced_complete": false
+      },
+      "expected": {
+        "total_trials": 8,
+        "cell_counts": [
+          4,
+          0,
+          0,
+          4
+        ],
+        "covered_cells": 2,
+        "balanced_complete": false
+      },
+      "scope": "Two-by-two authored assignment counts only; no playback, randomization or responses."
+    },
+    {
+      "code": "GAA013",
+      "case": "model",
+      "observed": {
+        "distinct_pitch_class_sets": 1,
+        "distinct_voicings": 3,
+        "distinct_bass_classes": 2,
+        "pitch_class_keys": [
+          [
+            0,
+            4,
+            7
+          ]
+        ]
+      },
+      "expected": {
+        "distinct_pitch_class_sets": 1,
+        "distinct_voicings": 3,
+        "distinct_bass_classes": 2,
+        "pitch_class_keys": [
+          [
+            0,
+            4,
+            7
+          ]
+        ]
+      },
+      "scope": "Four nonempty ascending authored note lists; first-occurrence family order; no fingering/retrieval."
+    },
+    {
+      "code": "GAA013",
+      "case": "negative",
+      "observed": {
+        "distinct_pitch_class_sets": 2,
+        "distinct_voicings": 3,
+        "distinct_bass_classes": 2,
+        "pitch_class_keys": [
+          [
+            0,
+            4,
+            7
+          ],
+          [
+            0,
+            4,
+            5,
+            7
+          ]
+        ]
+      },
+      "expected": {
+        "distinct_pitch_class_sets": 2,
+        "distinct_voicings": 3,
+        "distinct_bass_classes": 2,
+        "pitch_class_keys": [
+          [
+            0,
+            4,
+            7
+          ],
+          [
+            0,
+            4,
+            5,
+            7
+          ]
+        ]
+      },
+      "scope": "Four nonempty ascending authored note lists; first-occurrence family order; no fingering/retrieval."
+    },
+    {
+      "code": "GAS012",
+      "case": "model",
+      "observed": {
+        "omega_rad_per_s": [
+          10.0,
+          20.0
+        ],
+        "frequencies_hz": [
+          1.5915494309189535,
+          3.183098861837907
+        ]
+      },
+      "expected": {
+        "omega_rad_per_s": [
+          10,
+          20
+        ],
+        "frequencies_hz": [
+          1.5915494309189535,
+          3.183098861837907
+        ]
+      },
+      "scope": "Two identical masses and symmetric linear undamped springs; derived eigenvalues in rad/s and Hz, no guitar coupling probe."
+    },
+    {
+      "code": "GAS012",
+      "case": "negative",
+      "observed": {
+        "omega_rad_per_s": [
+          10.0,
+          10.0
+        ],
+        "frequencies_hz": [
+          1.5915494309189535,
+          1.5915494309189535
+        ]
+      },
+      "expected": {
+        "omega_rad_per_s": [
+          10,
+          10
+        ],
+        "frequencies_hz": [
+          1.5915494309189535,
+          1.5915494309189535
+        ]
+      },
+      "scope": "Two identical masses and symmetric linear undamped springs; derived eigenvalues in rad/s and Hz, no guitar coupling probe."
+    },
+    {
+      "code": "GAS013",
+      "case": "model",
+      "observed": {
+        "initial_frequency_hz": 100.0,
+        "target_tension_n": 180.0,
+        "tension_ratio": 2.25
+      },
+      "expected": {
+        "initial_frequency_hz": 100,
+        "target_tension_n": 180,
+        "tension_ratio": 2.25
+      },
+      "scope": "Uniform flexible fixed-end string with SI parameters per case; no material or instrument acceptance."
+    },
+    {
+      "code": "GAS013",
+      "case": "negative",
+      "observed": {
+        "initial_frequency_hz": 150.0,
+        "target_tension_n": 80.0,
+        "tension_ratio": 1.0
+      },
+      "expected": {
+        "initial_frequency_hz": 150,
+        "target_tension_n": 80,
+        "tension_ratio": 1
+      },
+      "scope": "Uniform flexible fixed-end string with SI parameters per case; no material or instrument acceptance."
+    },
+    {
+      "code": "GAS014",
+      "case": "model",
+      "observed": {
+        "delay_s": 0.001,
+        "first_opposition_hz": 500.0,
+        "spacing_hz": 1000.0,
+        "magnitude_at_opposition": 0
+      },
+      "expected": {
+        "delay_s": 0.001,
+        "first_opposition_hz": 500,
+        "spacing_hz": 1000,
+        "magnitude_at_opposition": 0
+      },
+      "scope": "Two copies with stipulated distances, speed and fixed positive gains; no room measurement."
+    },
+    {
+      "code": "GAS014",
+      "case": "negative",
+      "observed": {
+        "delay_s": 0.001,
+        "first_opposition_hz": 500.0,
+        "spacing_hz": 1000.0,
+        "magnitude_at_opposition": 0.5
+      },
+      "expected": {
+        "delay_s": 0.001,
+        "first_opposition_hz": 500,
+        "spacing_hz": 1000,
+        "magnitude_at_opposition": 0.5
+      },
+      "scope": "Two copies with stipulated distances, speed and fixed positive gains; no room measurement."
+    },
+    {
+      "code": "GTR012",
+      "case": "model",
+      "observed": {
+        "surviving_modes": [
+          3,
+          6
+        ],
+        "frequencies_hz": [
+          330,
+          660
+        ],
+        "lowest_surviving_hz": 330
+      },
+      "expected": {
+        "surviving_modes": [
+          3,
+          6
+        ],
+        "frequencies_hz": [
+          330,
+          660
+        ],
+        "lowest_surviving_hz": 330
+      },
+      "scope": "Ideal node constraint restricted to six candidate modes; no amplitudes/contact performance."
+    },
+    {
+      "code": "GTR012",
+      "case": "negative",
+      "observed": {
+        "surviving_modes": [
+          2,
+          4,
+          6
+        ],
+        "frequencies_hz": [
+          220,
+          440,
+          660
+        ],
+        "lowest_surviving_hz": 220
+      },
+      "expected": {
+        "surviving_modes": [
+          2,
+          4,
+          6
+        ],
+        "frequencies_hz": [
+          220,
+          440,
+          660
+        ],
+        "lowest_surviving_hz": 220
+      },
+      "scope": "Ideal node constraint restricted to six candidate modes; no amplitudes/contact performance."
+    },
+    {
+      "code": "GTR013",
+      "case": "model",
+      "observed": {
+        "target_cents": 200,
+        "target_frequency_hz": 123.47082531403103,
+        "signed_error_cents": -5,
+        "worst_abs_error_cents": 8,
+        "established_within_tolerance": true
+      },
+      "expected": {
+        "target_cents": 200,
+        "target_frequency_hz": 123.47082531403103,
+        "signed_error_cents": -5,
+        "worst_abs_error_cents": 8,
+        "established_within_tolerance": true
+      },
+      "scope": "Authored bounded cent uncertainty and inclusive local tolerance; no tracker validation or actual bend."
+    },
+    {
+      "code": "GTR013",
+      "case": "negative",
+      "observed": {
+        "target_cents": 200,
+        "target_frequency_hz": 123.47082531403103,
+        "signed_error_cents": -9,
+        "worst_abs_error_cents": 12,
+        "established_within_tolerance": false
+      },
+      "expected": {
+        "target_cents": 200,
+        "target_frequency_hz": 123.47082531403103,
+        "signed_error_cents": -9,
+        "worst_abs_error_cents": 12,
+        "established_within_tolerance": false
+      },
+      "scope": "Authored bounded cent uncertainty and inclusive local tolerance; no tracker validation or actual bend."
+    },
+    {
+      "code": "GTR014",
+      "case": "model",
+      "observed": {
+        "pitches": [
+          64,
+          67,
+          64,
+          69
+        ],
+        "note_events": 4,
+        "pick_attacks": 2,
+        "legato_changes": 2
+      },
+      "expected": {
+        "pitches": [
+          64,
+          67,
+          64,
+          69
+        ],
+        "note_events": 4,
+        "pick_attacks": 2,
+        "legato_changes": 2
+      },
+      "scope": "Four instructed symbolic note actions on one stipulated valid string; no acoustic onset count."
+    },
+    {
+      "code": "GTR014",
+      "case": "negative",
+      "observed": {
+        "pitches": [
+          64,
+          67,
+          64,
+          69
+        ],
+        "note_events": 4,
+        "pick_attacks": 3,
+        "legato_changes": 1
+      },
+      "expected": {
+        "pitches": [
+          64,
+          67,
+          64,
+          69
+        ],
+        "note_events": 4,
+        "pick_attacks": 3,
+        "legato_changes": 1
+      },
+      "scope": "Four instructed symbolic note actions on one stipulated valid string; no acoustic onset count."
+    },
+    {
+      "code": "MCL012",
+      "case": "model",
+      "observed": {
+        "sounding_events": [
+          {
+            "pitch": 60,
+            "onset_beats": 0,
+            "duration_beats": 2
+          },
+          {
+            "pitch": 62,
+            "onset_beats": 2,
+            "duration_beats": 1
+          }
+        ],
+        "attacks": 2,
+        "total_span_beats": 3
+      },
+      "expected": {
+        "sounding_events": [
+          {
+            "pitch": 60,
+            "onset_beats": 0,
+            "duration_beats": 2
+          },
+          {
+            "pitch": 62,
+            "onset_beats": 2,
+            "duration_beats": 1
+          }
+        ],
+        "attacks": 2,
+        "total_span_beats": 3
+      },
+      "scope": "Single voice and first contiguous equal-pitch pair only; symbolic sound attacks, no parser."
+    },
+    {
+      "code": "MCL012",
+      "case": "negative",
+      "observed": {
+        "sounding_events": [
+          {
+            "pitch": 60,
+            "onset_beats": 0,
+            "duration_beats": 1
+          },
+          {
+            "pitch": 60,
+            "onset_beats": 1,
+            "duration_beats": 1
+          },
+          {
+            "pitch": 62,
+            "onset_beats": 2,
+            "duration_beats": 1
+          }
+        ],
+        "attacks": 3,
+        "total_span_beats": 3
+      },
+      "expected": {
+        "sounding_events": [
+          {
+            "pitch": 60,
+            "onset_beats": 0,
+            "duration_beats": 1
+          },
+          {
+            "pitch": 60,
+            "onset_beats": 1,
+            "duration_beats": 1
+          },
+          {
+            "pitch": 62,
+            "onset_beats": 2,
+            "duration_beats": 1
+          }
+        ],
+        "attacks": 3,
+        "total_span_beats": 3
+      },
+      "scope": "Single voice and first contiguous equal-pitch pair only; symbolic sound attacks, no parser."
+    },
+    {
+      "code": "MCL013",
+      "case": "model",
+      "observed": {
+        "per_note_ticks": 160.0,
+        "total_ticks": 480.0,
+        "total_quarters": 1.0
+      },
+      "expected": {
+        "per_note_ticks": 160,
+        "total_ticks": 480,
+        "total_quarters": 1
+      },
+      "scope": "One non-nested undotted tuplet at quarter-based resolution; exact rational time, no playback."
+    },
+    {
+      "code": "MCL013",
+      "case": "negative",
+      "observed": {
+        "per_note_ticks": 360.0,
+        "total_ticks": 1080.0,
+        "total_quarters": 2.25
+      },
+      "expected": {
+        "per_note_ticks": 360,
+        "total_ticks": 1080,
+        "total_quarters": 2.25
+      },
+      "scope": "One non-nested undotted tuplet at quarter-based resolution; exact rational time, no playback."
+    },
+    {
+      "code": "MCL014",
+      "case": "model",
+      "observed": {
+        "grace_each_s": 0.05,
+        "main_start_s": 1.1,
+        "main_duration_s": 0.4,
+        "next_boundary_s": 1.5
+      },
+      "expected": {
+        "grace_each_s": 0.05,
+        "main_start_s": 1.1,
+        "main_duration_s": 0.4,
+        "next_boundary_s": 1.5
+      },
+      "scope": "Two equal grace notes under declared seconds allocations; no stylistic default or MusicXML execution."
+    },
+    {
+      "code": "MCL014",
+      "case": "negative",
+      "observed": {
+        "grace_each_s": 0.05,
+        "main_start_s": 1.1,
+        "main_duration_s": 0.5,
+        "next_boundary_s": 1.6
+      },
+      "expected": {
+        "grace_each_s": 0.05,
+        "main_start_s": 1.1,
+        "main_duration_s": 0.5,
+        "next_boundary_s": 1.6
+      },
+      "scope": "Two equal grace notes under declared seconds allocations; no stylistic default or MusicXML execution."
+    },
+    {
+      "code": "WML011",
+      "case": "model",
+      "observed": {
+        "pitch_classes": [
+          0,
+          4,
+          7,
+          10
+        ],
+        "third_offset": 4,
+        "seventh_offset": 10
+      },
+      "expected": {
+        "pitch_classes": [
+          0,
+          4,
+          7,
+          10
+        ],
+        "third_offset": 4,
+        "seventh_offset": 10
+      },
+      "scope": "Explicit three-kind 12-TET dictionary and supplied root; no label parser or voicing."
+    },
+    {
+      "code": "WML011",
+      "case": "negative",
+      "observed": {
+        "pitch_classes": [
+          0,
+          4,
+          7,
+          11
+        ],
+        "third_offset": 4,
+        "seventh_offset": 11
+      },
+      "expected": {
+        "pitch_classes": [
+          0,
+          4,
+          7,
+          11
+        ],
+        "third_offset": 4,
+        "seventh_offset": 11
+      },
+      "scope": "Explicit three-kind 12-TET dictionary and supplied root; no label parser or voicing."
+    },
+    {
+      "code": "WML012",
+      "case": "model",
+      "observed": {
+        "step_allowed": [
+          true,
+          true,
+          false,
+          true
+        ],
+        "accepted": false,
+        "union": [
+          0,
+          2,
+          3,
+          4,
+          7,
+          9
+        ]
+      },
+      "expected": {
+        "step_allowed": [
+          true,
+          true,
+          false,
+          true
+        ],
+        "accepted": false,
+        "union": [
+          0,
+          2,
+          3,
+          4,
+          7,
+          9
+        ]
+      },
+      "scope": "Authored one-register phrase with no repeated adjacent pitches; directional target membership, no tradition."
+    },
+    {
+      "code": "WML012",
+      "case": "negative",
+      "observed": {
+        "step_allowed": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "accepted": true,
+        "union": [
+          0,
+          2,
+          3,
+          4,
+          7,
+          9
+        ]
+      },
+      "expected": {
+        "step_allowed": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "accepted": true,
+        "union": [
+          0,
+          2,
+          3,
+          4,
+          7,
+          9
+        ]
+      },
+      "scope": "Authored one-register phrase with no repeated adjacent pitches; directional target membership, no tradition."
+    },
+    {
+      "code": "WML013",
+      "case": "model",
+      "observed": {
+        "residual_ratio": 1.0136432647705078,
+        "residual_cents": 23.460010384649014,
+        "closes_exactly": false
+      },
+      "expected": {
+        "residual_ratio": 1.0136432647705078,
+        "residual_cents": 23.460010384649014,
+        "closes_exactly": false
+      },
+      "scope": "Stipulated fifth and octave counts; exact pure fraction and symbolic ET closure checked with floating tolerance; no tuning session."
+    },
+    {
+      "code": "WML013",
+      "case": "negative",
+      "observed": {
+        "residual_ratio": 1.0000000000000002,
+        "residual_cents": 3.8441118045779003e-13,
+        "closes_exactly": true
+      },
+      "expected": {
+        "residual_ratio": 1,
+        "residual_cents": 0,
+        "closes_exactly": true
+      },
+      "scope": "Stipulated fifth and octave counts; exact pure fraction and symbolic ET closure checked with floating tolerance; no tuning session."
+    },
+    {
+      "case": "model",
+      "code": "COG012",
+      "expected": {
+        "accuracy": 0.7,
+        "alert_rate": 0.6,
+        "false_alarm_rate": 0.4,
+        "hit_rate": 0.8,
+        "separation": 0.4
+      },
+      "observed": {
+        "accuracy": 0.7,
+        "alert_rate": 0.6,
+        "false_alarm_rate": 0.4,
+        "hit_rate": 0.8,
+        "separation": 0.4
+      },
+      "scope": "Authored external-key confusion counts; conditional rates are not psychological sensitivity."
+    },
+    {
+      "case": "negative",
+      "code": "COG012",
+      "expected": {
+        "accuracy": 0.5,
+        "alert_rate": 1,
+        "false_alarm_rate": 1,
+        "hit_rate": 1,
+        "separation": 0
+      },
+      "observed": {
+        "accuracy": 0.5,
+        "alert_rate": 1,
+        "false_alarm_rate": 1,
+        "hit_rate": 1,
+        "separation": 0
+      },
+      "scope": "Authored external-key confusion counts; conditional rates are not psychological sensitivity."
+    },
+    {
+      "case": "model",
+      "code": "COG013",
+      "expected": {
+        "assisted_miss_rate": 0.75,
+        "assisted_only_misses": [
+          "b",
+          "c"
+        ],
+        "manual_miss_rate": 0.25,
+        "manual_only_misses": [],
+        "paired_excess": 0.5
+      },
+      "observed": {
+        "assisted_miss_rate": 0.75,
+        "assisted_only_misses": [
+          "b",
+          "c"
+        ],
+        "manual_miss_rate": 0.25,
+        "manual_only_misses": [],
+        "paired_excess": 0.5
+      },
+      "scope": "Four paired invented catch items with retained identities; no participant or causal effect."
+    },
+    {
+      "case": "negative",
+      "code": "COG013",
+      "expected": {
+        "assisted_miss_rate": 0.25,
+        "assisted_only_misses": [],
+        "manual_miss_rate": 0.25,
+        "manual_only_misses": [],
+        "paired_excess": 0
+      },
+      "observed": {
+        "assisted_miss_rate": 0.25,
+        "assisted_only_misses": [],
+        "manual_miss_rate": 0.25,
+        "manual_only_misses": [],
+        "paired_excess": 0
+      },
+      "scope": "Four paired invented catch items with retained identities; no participant or causal effect."
+    },
+    {
+      "case": "model",
+      "code": "COG014",
+      "expected": {
+        "accepted": 3,
+        "accepted_indices": [
+          0,
+          1,
+          2
+        ],
+        "coverage": 0.6,
+        "errors": 1,
+        "risk": 0.3333333333333333
+      },
+      "observed": {
+        "accepted": 3,
+        "accepted_indices": [
+          0,
+          1,
+          2
+        ],
+        "coverage": 0.6,
+        "errors": 1,
+        "risk": 0.3333333333333333
+      },
+      "scope": "Five fixed eligible items, inclusive confidence threshold, null empty conditional risk."
+    },
+    {
+      "case": "negative",
+      "code": "COG014",
+      "expected": {
+        "accepted": 0,
+        "accepted_indices": [],
+        "coverage": 0,
+        "errors": 0,
+        "risk": null
+      },
+      "observed": {
+        "accepted": 0,
+        "accepted_indices": [],
+        "coverage": 0,
+        "errors": 0,
+        "risk": null
+      },
+      "scope": "Five fixed eligible items, inclusive confidence threshold, null empty conditional risk."
+    },
+    {
+      "case": "model",
+      "code": "CS018",
+      "expected": {
+        "conflict": false,
+        "sum": 8,
+        "unique_count": 2
+      },
+      "observed": {
+        "conflict": false,
+        "sum": 8,
+        "unique_count": 2
+      },
+      "scope": "Authored three-message identity merge, pointwise payload-set union; no transport execution."
+    },
+    {
+      "case": "negative",
+      "code": "CS018",
+      "expected": {
+        "conflict": true,
+        "sum": null,
+        "unique_count": 2
+      },
+      "observed": {
+        "conflict": true,
+        "sum": null,
+        "unique_count": 2
+      },
+      "scope": "Authored three-message identity merge, pointwise payload-set union; no transport execution."
+    },
+    {
+      "case": "model",
+      "code": "CS019",
+      "expected": {
+        "captured_result": 8,
+        "lexical_result": 14,
+        "renamed_result": 14
+      },
+      "observed": {
+        "captured_result": 8,
+        "lexical_result": 14,
+        "renamed_result": 14
+      },
+      "scope": "One stipulated local binding/free outer reference; arithmetic is not a parser or hygiene proof."
+    },
+    {
+      "case": "negative",
+      "code": "CS019",
+      "expected": {
+        "captured_result": 8,
+        "lexical_result": 8,
+        "renamed_result": 8
+      },
+      "observed": {
+        "captured_result": 8,
+        "lexical_result": 8,
+        "renamed_result": 8
+      },
+      "scope": "One stipulated local binding/free outer reference; arithmetic is not a parser or hygiene proof."
+    },
+    {
+      "case": "model",
+      "code": "CS020",
+      "expected": {
+        "distinct_artifacts": 2,
+        "joined_rows": 5,
+        "rows_per_artifact": {
+          "a": 4,
+          "b": 1
+        }
+      },
+      "observed": {
+        "distinct_artifacts": 2,
+        "joined_rows": 5,
+        "rows_per_artifact": {
+          "a": 4,
+          "b": 1
+        }
+      },
+      "scope": "Authored equality inner join with bag semantics and simplified artifact key."
+    },
+    {
+      "case": "negative",
+      "code": "CS020",
+      "expected": {
+        "distinct_artifacts": 2,
+        "joined_rows": 3,
+        "rows_per_artifact": {
+          "a": 2,
+          "b": 1
+        }
+      },
+      "observed": {
+        "distinct_artifacts": 2,
+        "joined_rows": 3,
+        "rows_per_artifact": {
+          "a": 2,
+          "b": 1
+        }
+      },
+      "scope": "Authored equality inner join with bag semantics and simplified artifact key."
+    },
+    {
+      "case": "model",
+      "code": "CYB012",
+      "expected": {
+        "asymptotically_stable": true,
+        "root_modulus": 0.7071067811865476,
+        "trace_from_k0": [
+          1,
+          0.5,
+          0,
+          -0.25,
+          -0.25,
+          -0.125,
+          0
+        ]
+      },
+      "observed": {
+        "asymptotically_stable": true,
+        "root_modulus": 0.7071067811865476,
+        "trace_from_k0": [
+          1,
+          0.5,
+          0,
+          -0.25,
+          -0.25,
+          -0.125,
+          0
+        ]
+      },
+      "scope": "Six updates with exactly one-update delay and exact rational state; roots of the specified scalar linear recurrence, not fleet stability."
+    },
+    {
+      "case": "negative",
+      "code": "CYB012",
+      "expected": {
+        "asymptotically_stable": false,
+        "root_modulus": 1,
+        "trace_from_k0": [
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          1,
+          1
+        ]
+      },
+      "observed": {
+        "asymptotically_stable": false,
+        "root_modulus": 0.9999999999999999,
+        "trace_from_k0": [
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          1,
+          1
+        ]
+      },
+      "scope": "Six updates with exactly one-update delay and exact rational state; roots of the specified scalar linear recurrence, not fleet stability."
+    },
+    {
+      "case": "model",
+      "code": "CYB013",
+      "expected": {
+        "age_seconds": 4,
+        "interval": [
+          2,
+          6
+        ],
+        "radius": 2,
+        "safe_certified": false
+      },
+      "observed": {
+        "age_seconds": 4,
+        "interval": [
+          2,
+          6
+        ],
+        "radius": 2,
+        "safe_certified": false
+      },
+      "scope": "Exact sample on one monotonic clock and assumed absolute rate bound; certificate is not a measurement."
+    },
+    {
+      "case": "negative",
+      "code": "CYB013",
+      "expected": {
+        "age_seconds": 1,
+        "interval": [
+          3.5,
+          4.5
+        ],
+        "radius": 0.5,
+        "safe_certified": true
+      },
+      "observed": {
+        "age_seconds": 1,
+        "interval": [
+          3.5,
+          4.5
+        ],
+        "radius": 0.5,
+        "safe_certified": true
+      },
+      "scope": "Exact sample on one monotonic clock and assumed absolute rate bound; certificate is not a measurement."
+    },
+    {
+      "case": "model",
+      "code": "CYB014",
+      "expected": {
+        "action_count": 1,
+        "final_error": -0.4,
+        "trace": [
+          0.6,
+          -0.4,
+          -0.4,
+          -0.4,
+          -0.4
+        ]
+      },
+      "observed": {
+        "action_count": 1,
+        "final_error": -0.4,
+        "trace": [
+          0.6,
+          -0.4,
+          -0.4,
+          -0.4,
+          -0.4
+        ]
+      },
+      "scope": "Four noiseless fixed-step actions with exact decimals and strict deadband comparison."
+    },
+    {
+      "case": "negative",
+      "code": "CYB014",
+      "expected": {
+        "action_count": 4,
+        "final_error": 0.6,
+        "trace": [
+          0.6,
+          -0.4,
+          0.6,
+          -0.4,
+          0.6
+        ]
+      },
+      "observed": {
+        "action_count": 4,
+        "final_error": 0.6,
+        "trace": [
+          0.6,
+          -0.4,
+          0.6,
+          -0.4,
+          0.6
+        ]
+      },
+      "scope": "Four noiseless fixed-step actions with exact decimals and strict deadband comparison."
+    },
+    {
+      "case": "model",
+      "code": "INF013",
+      "expected": {
+        "expected_posterior_bits": 1,
+        "information_gain_bits": 1,
+        "outcome_probabilities": {
+          "left": 0.5,
+          "right": 0.5
+        },
+        "prior_bits": 2
+      },
+      "observed": {
+        "expected_posterior_bits": 1.0,
+        "information_gain_bits": 1.0,
+        "outcome_probabilities": {
+          "left": 0.5,
+          "right": 0.5
+        },
+        "prior_bits": 2.0
+      },
+      "scope": "Four uniform authored hypotheses, deterministic error-free probe partition; bits are not utility."
+    },
+    {
+      "case": "negative",
+      "code": "INF013",
+      "expected": {
+        "expected_posterior_bits": 2,
+        "information_gain_bits": 0,
+        "outcome_probabilities": {
+          "same": 1
+        },
+        "prior_bits": 2
+      },
+      "observed": {
+        "expected_posterior_bits": 2.0,
+        "information_gain_bits": 0.0,
+        "outcome_probabilities": {
+          "same": 1
+        },
+        "prior_bits": 2.0
+      },
+      "scope": "Four uniform authored hypotheses, deterministic error-free probe partition; bits are not utility."
+    },
+    {
+      "case": "model",
+      "code": "INF014",
+      "expected": {
+        "intended": [
+          "fail",
+          "pass",
+          "pass"
+        ],
+        "mismatches": 3,
+        "received": [
+          "pass",
+          "fail",
+          "fail"
+        ]
+      },
+      "observed": {
+        "intended": [
+          "fail",
+          "pass",
+          "pass"
+        ],
+        "mismatches": 3,
+        "received": [
+          "pass",
+          "fail",
+          "fail"
+        ]
+      },
+      "scope": "Two stipulated bijective codebooks, three ordered tags and no channel errors."
+    },
+    {
+      "case": "negative",
+      "code": "INF014",
+      "expected": {
+        "intended": [
+          "fail",
+          "pass",
+          "pass"
+        ],
+        "mismatches": 0,
+        "received": [
+          "fail",
+          "pass",
+          "pass"
+        ]
+      },
+      "observed": {
+        "intended": [
+          "fail",
+          "pass",
+          "pass"
+        ],
+        "mismatches": 0,
+        "received": [
+          "fail",
+          "pass",
+          "pass"
+        ]
+      },
+      "scope": "Two stipulated bijective codebooks, three ordered tags and no channel errors."
+    },
+    {
+      "case": "model",
+      "code": "INF015",
+      "expected": {
+        "adjusted_failures": 2,
+        "adjusted_total": 10,
+        "raw_rate": 0.3333333333333333,
+        "weighted_ratio": 0.2,
+        "weights": [
+          2,
+          4,
+          4
+        ]
+      },
+      "observed": {
+        "adjusted_failures": 2,
+        "adjusted_total": 10,
+        "raw_rate": 0.3333333333333333,
+        "weighted_ratio": 0.2,
+        "weights": [
+          2,
+          4,
+          4
+        ]
+      },
+      "scope": "Three retained events with supplied positive inclusion probabilities; estimated ratio not exact population rate."
+    },
+    {
+      "case": "negative",
+      "code": "INF015",
+      "expected": {
+        "adjusted_failures": 1,
+        "adjusted_total": 3,
+        "raw_rate": 0.3333333333333333,
+        "weighted_ratio": 0.3333333333333333,
+        "weights": [
+          1,
+          1,
+          1
+        ]
+      },
+      "observed": {
+        "adjusted_failures": 1,
+        "adjusted_total": 3,
+        "raw_rate": 0.3333333333333333,
+        "weighted_ratio": 0.3333333333333333,
+        "weights": [
+          1,
+          1,
+          1
+        ]
+      },
+      "scope": "Three retained events with supplied positive inclusion probabilities; estimated ratio not exact population rate."
+    },
+    {
+      "case": "model",
+      "code": "NET012",
+      "expected": {
+        "conditional_branch_union": 0.98,
+        "marginal_a": 0.76,
+        "marginal_b": 0.855,
+        "naive_independent": 0.9652,
+        "success": 0.931
+      },
+      "observed": {
+        "conditional_branch_union": 0.98,
+        "marginal_a": 0.76,
+        "marginal_b": 0.855,
+        "naive_independent": 0.9652,
+        "success": 0.931
+      },
+      "scope": "Two conditionally independent branches and one necessary shared dependency; invented probabilities."
+    },
+    {
+      "case": "negative",
+      "code": "NET012",
+      "expected": {
+        "conditional_branch_union": 0.98,
+        "marginal_a": 0.4,
+        "marginal_b": 0.45,
+        "naive_independent": 0.67,
+        "success": 0.49
+      },
+      "observed": {
+        "conditional_branch_union": 0.98,
+        "marginal_a": 0.4,
+        "marginal_b": 0.45,
+        "naive_independent": 0.67,
+        "success": 0.49
+      },
+      "scope": "Two conditionally independent branches and one necessary shared dependency; invented probabilities."
+    },
+    {
+      "case": "model",
+      "code": "NET013",
+      "expected": {
+        "a_before_b": false,
+        "a_before_receive": true,
+        "b_before_a": false,
+        "concurrent": true,
+        "receive_clock": [
+          2,
+          4
+        ]
+      },
+      "observed": {
+        "a_before_b": false,
+        "a_before_receive": true,
+        "b_before_a": false,
+        "concurrent": true,
+        "receive_clock": [
+          2,
+          4
+        ]
+      },
+      "scope": "Two-component clocks under complete modeled communication and stable node ordering."
+    },
+    {
+      "case": "negative",
+      "code": "NET013",
+      "expected": {
+        "a_before_b": true,
+        "a_before_receive": true,
+        "b_before_a": false,
+        "concurrent": false,
+        "receive_clock": [
+          3,
+          2
+        ]
+      },
+      "observed": {
+        "a_before_b": true,
+        "a_before_receive": true,
+        "b_before_a": false,
+        "concurrent": false,
+        "receive_clock": [
+          3,
+          2
+        ]
+      },
+      "scope": "Two-component clocks under complete modeled communication and stable node ordering."
+    },
+    {
+      "case": "model",
+      "code": "PM010",
+      "expected": {
+        "pooled_rate": 0.175,
+        "standardized_rate": 0.13,
+        "stratum_rates": [
+          0.1,
+          0.4
+        ]
+      },
+      "observed": {
+        "pooled_rate": 0.175,
+        "standardized_rate": 0.13,
+        "stratum_rates": [
+          0.1,
+          0.4
+        ]
+      },
+      "scope": "Two authored task strata with fixed target weights; no observed user distribution."
+    },
+    {
+      "case": "negative",
+      "code": "PM010",
+      "expected": {
+        "pooled_rate": 0.13,
+        "standardized_rate": 0.13,
+        "stratum_rates": [
+          0.1,
+          0.4
+        ]
+      },
+      "observed": {
+        "pooled_rate": 0.13,
+        "standardized_rate": 0.13,
+        "stratum_rates": [
+          0.1,
+          0.4
+        ]
+      },
+      "scope": "Two authored task strata with fixed target weights; no observed user distribution."
+    },
+    {
+      "case": "model",
+      "code": "PM011",
+      "expected": {
+        "automated_minutes_per_item": 10,
+        "automated_total_minutes": 460,
+        "equal_cost_items": 30,
+        "manual_total_minutes": 480,
+        "minimum_integer_items_for_strict_saving": 31,
+        "net_saved_minutes": 20
+      },
+      "observed": {
+        "automated_minutes_per_item": 10,
+        "automated_total_minutes": 460,
+        "equal_cost_items": 30,
+        "manual_total_minutes": 480,
+        "minimum_integer_items_for_strict_saving": 31,
+        "net_saved_minutes": 20
+      },
+      "scope": "Invented expected active-work minutes with mandatory review and one setup charge; comparable quality assumed."
+    },
+    {
+      "case": "negative",
+      "code": "PM011",
+      "expected": {
+        "automated_minutes_per_item": 12,
+        "automated_total_minutes": 540,
+        "equal_cost_items": null,
+        "manual_total_minutes": 480,
+        "minimum_integer_items_for_strict_saving": null,
+        "net_saved_minutes": -60
+      },
+      "observed": {
+        "automated_minutes_per_item": 12,
+        "automated_total_minutes": 540,
+        "equal_cost_items": null,
+        "manual_total_minutes": 480,
+        "minimum_integer_items_for_strict_saving": null,
+        "net_saved_minutes": -60
+      },
+      "scope": "Invented expected active-work minutes with mandatory review and one setup charge; comparable quality assumed."
+    },
+    {
+      "case": "model",
+      "code": "DV014",
+      "expected": {
+        "contact_count": 1,
+        "mean_absolute_mm": 0.35,
+        "minimum_mm": -0.4,
+        "overlap_count": 1
+      },
+      "observed": {
+        "contact_count": 1,
+        "mean_absolute_mm": 0.35000000000000003,
+        "minimum_mm": -0.4,
+        "overlap_count": 1
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "negative",
+      "code": "DV014",
+      "expected": {
+        "contact_count": 1,
+        "mean_absolute_mm": 0.35,
+        "minimum_mm": 0,
+        "overlap_count": 0
+      },
+      "observed": {
+        "contact_count": 1,
+        "mean_absolute_mm": 0.35000000000000003,
+        "minimum_mm": 0,
+        "overlap_count": 0
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "model",
+      "code": "DV015",
+      "expected": {
+        "absent": 2,
+        "missing": 1,
+        "observed": 5,
+        "observed_absence_fraction": 0.4,
+        "present": 3
+      },
+      "observed": {
+        "absent": 2,
+        "missing": 1,
+        "observed": 5,
+        "observed_absence_fraction": 0.4,
+        "present": 3
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "negative",
+      "code": "DV015",
+      "expected": {
+        "absent": 3,
+        "missing": 0,
+        "observed": 6,
+        "observed_absence_fraction": 0.5,
+        "present": 3
+      },
+      "observed": {
+        "absent": 3,
+        "missing": 0,
+        "observed": 6,
+        "observed_absence_fraction": 0.5,
+        "present": 3
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "model",
+      "code": "DV016",
+      "expected": {
+        "delta_px": [
+          2,
+          -5,
+          2
+        ],
+        "mean_delta_px": -0.3333333333333333,
+        "worsened_views": [
+          "front",
+          "back"
+        ],
+        "worst_after_px": 4,
+        "worst_before_px": 8
+      },
+      "observed": {
+        "delta_px": [
+          2,
+          -5,
+          2
+        ],
+        "mean_delta_px": -0.3333333333333333,
+        "worsened_views": [
+          "front",
+          "back"
+        ],
+        "worst_after_px": 4,
+        "worst_before_px": 8
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "negative",
+      "code": "DV016",
+      "expected": {
+        "delta_px": [
+          1,
+          -4,
+          2
+        ],
+        "mean_delta_px": -0.3333333333333333,
+        "worsened_views": [
+          "front",
+          "back"
+        ],
+        "worst_after_px": 4,
+        "worst_before_px": 8
+      },
+      "observed": {
+        "delta_px": [
+          1,
+          -4,
+          2
+        ],
+        "mean_delta_px": -0.3333333333333333,
+        "worsened_views": [
+          "front",
+          "back"
+        ],
+        "worst_after_px": 4,
+        "worst_before_px": 8
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "model",
+      "code": "FUT010",
+      "expected": {
+        "base_crossings": 24,
+        "base_strands": 10,
+        "crossing_ratio": 4,
+        "future_crossings": 96,
+        "future_strands": 20,
+        "strand_ratio": 2
+      },
+      "observed": {
+        "base_crossings": 24,
+        "base_strands": 10,
+        "crossing_ratio": 4,
+        "future_crossings": 96,
+        "future_strands": 20,
+        "strand_ratio": 2.0
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "negative",
+      "code": "FUT010",
+      "expected": {
+        "base_crossings": 24,
+        "base_strands": 10,
+        "crossing_ratio": 2,
+        "future_crossings": 48,
+        "future_strands": 16,
+        "strand_ratio": 1.6
+      },
+      "observed": {
+        "base_crossings": 24,
+        "base_strands": 10,
+        "crossing_ratio": 2,
+        "future_crossings": 48,
+        "future_strands": 16,
+        "strand_ratio": 1.6
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "model",
+      "code": "FUT011",
+      "expected": {
+        "ambiguous_samples": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "mesh_states": [
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          true
+        ],
+        "possible_mesh_states": [
+          [
+            false,
+            true
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            true
+          ]
+        ],
+        "robust_mesh_states": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          true
+        ],
+        "robust_switches": 1,
+        "switches": 3
+      },
+      "observed": {
+        "ambiguous_samples": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "mesh_states": [
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          true
+        ],
+        "possible_mesh_states": [
+          [
+            false,
+            true
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            true
+          ]
+        ],
+        "robust_mesh_states": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          true
+        ],
+        "robust_switches": 1,
+        "switches": 3
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "negative",
+      "code": "FUT011",
+      "expected": {
+        "ambiguous_samples": [
+          2
+        ],
+        "mesh_states": [
+          true,
+          false,
+          true,
+          false,
+          false,
+          false,
+          true
+        ],
+        "possible_mesh_states": [
+          [
+            true
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            true
+          ],
+          [
+            false
+          ],
+          [
+            false
+          ],
+          [
+            false
+          ],
+          [
+            true
+          ]
+        ],
+        "robust_mesh_states": [
+          true,
+          true,
+          true,
+          false,
+          false,
+          false,
+          true
+        ],
+        "robust_switches": 3,
+        "switches": 5
+      },
+      "observed": {
+        "ambiguous_samples": [
+          2
+        ],
+        "mesh_states": [
+          true,
+          false,
+          true,
+          false,
+          false,
+          false,
+          true
+        ],
+        "possible_mesh_states": [
+          [
+            true
+          ],
+          [
+            false,
+            true
+          ],
+          [
+            true
+          ],
+          [
+            false
+          ],
+          [
+            false
+          ],
+          [
+            false
+          ],
+          [
+            true
+          ]
+        ],
+        "robust_mesh_states": [
+          true,
+          true,
+          true,
+          false,
+          false,
+          false,
+          true
+        ],
+        "robust_switches": 3,
+        "switches": 5
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "model",
+      "code": "PHI010",
+      "expected": {
+        "indistinguishable": true,
+        "observation_a": [
+          0,
+          0
+        ],
+        "observation_b": [
+          0,
+          0
+        ],
+        "requirement_a": true,
+        "requirement_b": false
+      },
+      "observed": {
+        "indistinguishable": true,
+        "observation_a": [
+          0,
+          0
+        ],
+        "observation_b": [
+          0,
+          0
+        ],
+        "requirement_a": true,
+        "requirement_b": false
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "negative",
+      "code": "PHI010",
+      "expected": {
+        "indistinguishable": false,
+        "observation_a": [
+          0,
+          0
+        ],
+        "observation_b": [
+          1,
+          0
+        ],
+        "requirement_a": true,
+        "requirement_b": false
+      },
+      "observed": {
+        "indistinguishable": false,
+        "observation_a": [
+          0,
+          0
+        ],
+        "observation_b": [
+          1,
+          0
+        ],
+        "requirement_a": true,
+        "requirement_b": false
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "model",
+      "code": "PHI011",
+      "expected": {
+        "average_mesh": -2,
+        "diagonal": 2,
+        "interaction": 0,
+        "mesh_flat": -2,
+        "mesh_lit": -2
+      },
+      "observed": {
+        "average_mesh": -2.0,
+        "diagonal": 2,
+        "interaction": 0,
+        "mesh_flat": -2,
+        "mesh_lit": -2
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "negative",
+      "code": "PHI011",
+      "expected": {
+        "average_mesh": 0,
+        "diagonal": 6,
+        "interaction": 4,
+        "mesh_flat": -2,
+        "mesh_lit": 2
+      },
+      "observed": {
+        "average_mesh": 0.0,
+        "diagonal": 6,
+        "interaction": 4,
+        "mesh_flat": -2,
+        "mesh_lit": 2
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "model",
+      "code": "PHY016",
+      "expected": {
+        "endpoint_mm": [
+          50,
+          86.60254037844386
+        ],
+        "radial_margin_mm": 10,
+        "swept_displacement_mm": 100
+      },
+      "observed": {
+        "endpoint_mm": [
+          50.000000000000014,
+          86.60254037844386
+        ],
+        "radial_margin_mm": 10,
+        "swept_displacement_mm": 99.99999999999999
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "negative",
+      "code": "PHY016",
+      "expected": {
+        "endpoint_mm": [
+          100,
+          0
+        ],
+        "radial_margin_mm": 10,
+        "swept_displacement_mm": 0
+      },
+      "observed": {
+        "endpoint_mm": [
+          100.0,
+          0.0
+        ],
+        "radial_margin_mm": 10,
+        "swept_displacement_mm": 0.0
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "model",
+      "code": "PHY017",
+      "expected": {
+        "growth_mm": 0.2,
+        "remaining_gap_mm": 0.1
+      },
+      "observed": {
+        "growth_mm": 0.2,
+        "remaining_gap_mm": 0.09999999999999998
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "negative",
+      "code": "PHY017",
+      "expected": {
+        "growth_mm": 0.4,
+        "remaining_gap_mm": -0.1
+      },
+      "observed": {
+        "growth_mm": 0.4,
+        "remaining_gap_mm": -0.10000000000000003
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "model",
+      "code": "PHY018",
+      "expected": {
+        "inside_support": true,
+        "margin_m": 0.02,
+        "x_cm_m": 0.1
+      },
+      "observed": {
+        "inside_support": true,
+        "margin_m": 0.020000000000000004,
+        "x_cm_m": 0.09999999999999999
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "negative",
+      "code": "PHY018",
+      "expected": {
+        "inside_support": false,
+        "margin_m": -0.08,
+        "x_cm_m": 0.2
+      },
+      "observed": {
+        "inside_support": false,
+        "margin_m": -0.07999999999999999,
+        "x_cm_m": 0.19999999999999998
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "model",
+      "code": "SEM012",
+      "expected": {
+        "commute": false,
+        "rotate_after_translate_mm": [
+          0,
+          2
+        ],
+        "translate_after_rotate_mm": [
+          1,
+          1
+        ]
+      },
+      "observed": {
+        "commute": false,
+        "rotate_after_translate_mm": [
+          0.0,
+          2.0
+        ],
+        "translate_after_rotate_mm": [
+          1.0,
+          1.0
+        ]
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "negative",
+      "code": "SEM012",
+      "expected": {
+        "commute": true,
+        "rotate_after_translate_mm": [
+          0,
+          1
+        ],
+        "translate_after_rotate_mm": [
+          0,
+          1
+        ]
+      },
+      "observed": {
+        "commute": true,
+        "rotate_after_translate_mm": [
+          0.0,
+          1.0
+        ],
+        "translate_after_rotate_mm": [
+          0.0,
+          1.0
+        ]
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "model",
+      "code": "SEM013",
+      "expected": {
+        "compatible": true,
+        "joint_period_cells": 6,
+        "phase_remainders": [
+          0,
+          0
+        ]
+      },
+      "observed": {
+        "compatible": true,
+        "joint_period_cells": 6,
+        "phase_remainders": [
+          0,
+          0
+        ]
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "negative",
+      "code": "SEM013",
+      "expected": {
+        "compatible": false,
+        "joint_period_cells": 6,
+        "phase_remainders": [
+          1,
+          0
+        ]
+      },
+      "observed": {
+        "compatible": false,
+        "joint_period_cells": 6,
+        "phase_remainders": [
+          1,
+          0
+        ]
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "model",
+      "code": "SEM014",
+      "expected": {
+        "AB": {
+          "metallic": 1,
+          "roughness": 0.6
+        },
+        "BA": {
+          "metallic": 1,
+          "roughness": 0.3
+        },
+        "commute": false
+      },
+      "observed": {
+        "AB": {
+          "metallic": 1,
+          "roughness": 0.6
+        },
+        "BA": {
+          "metallic": 1,
+          "roughness": 0.3
+        },
+        "commute": false
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "negative",
+      "code": "SEM014",
+      "expected": {
+        "AB": {
+          "metallic": 1,
+          "roughness": 0.3
+        },
+        "BA": {
+          "metallic": 1,
+          "roughness": 0.3
+        },
+        "commute": true
+      },
+      "observed": {
+        "AB": {
+          "metallic": 1,
+          "roughness": 0.3
+        },
+        "BA": {
+          "metallic": 1,
+          "roughness": 0.3
+        },
+        "commute": true
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "model",
+      "code": "VC014",
+      "expected": {
+        "focal_px": 500,
+        "meets_declared_threshold": false,
+        "width_px": 1
+      },
+      "observed": {
+        "focal_px": 500.00000000000006,
+        "meets_declared_threshold": false,
+        "width_px": 1.0000000000000002
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "negative",
+      "code": "VC014",
+      "expected": {
+        "focal_px": 500,
+        "meets_declared_threshold": true,
+        "width_px": 2
+      },
+      "observed": {
+        "focal_px": 500.00000000000006,
+        "meets_declared_threshold": true,
+        "width_px": 2.0000000000000004
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "model",
+      "code": "VC015",
+      "expected": {
+        "acceptable": false,
+        "perimeter_mm": 621.1657082460498,
+        "sagitta_mm": 3.407417371093169
+      },
+      "observed": {
+        "acceptable": false,
+        "perimeter_mm": 621.1657082460498,
+        "sagitta_mm": 3.407417371093169
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "negative",
+      "code": "VC015",
+      "expected": {
+        "acceptable": true,
+        "perimeter_mm": 626.5257226562476,
+        "sagitta_mm": 0.8555138626189618
+      },
+      "observed": {
+        "acceptable": true,
+        "perimeter_mm": 626.5257226562476,
+        "sagitta_mm": 0.8555138626189618
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "model",
+      "code": "VC016",
+      "expected": {
+        "effective_gutter_px": 2,
+        "meets_declared_margin": true
+      },
+      "observed": {
+        "effective_gutter_px": 2.0,
+        "meets_declared_margin": true
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    },
+    {
+      "case": "negative",
+      "code": "VC016",
+      "expected": {
+        "effective_gutter_px": 1,
+        "meets_declared_margin": false
+      },
+      "observed": {
+        "effective_gutter_px": 1.0,
+        "meets_declared_margin": false
+      },
+      "scope": "Authored finite classroom inputs only; no physical, image, engine, material, scene or learner observation."
+    }
+  ],
+  "complete_model_negative_coverage": true,
+  "missing_observations": [],
+  "unexpected_observations": [],
+  "passed": true,
+  "input_bindings": [
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-24/batch-plan.json",
+      "sha256": "f041291b35c55e9aa42475ee94d968d1efaed3c74494bde48007618eeaadf614"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-013-resample-without-relabeling-the-clock.md",
+      "sha256": "50ceaa2a3d4643f721285879da1164e2cda03f50990363a33fbe048e610845a7"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-013-resample-without-relabeling-the-clock.fr.md",
+      "sha256": "765c9a485280188c563bb9d8505bde4fb048bf0ebe22dc12e53dfc9d4e77f2de"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-013-resample-without-relabeling-the-clock.es.md",
+      "sha256": "d2511a048411771b9d4ccb0ec81a95818240ea6495677c2fc20cd5c61fa32bac"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-014-budget-headroom-for-correlated-plucks.md",
+      "sha256": "b7c6e94b3ff69ec39894ac38dfe53caaeb5f0b1e2f13dd256591452dfcca238c"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-014-budget-headroom-for-correlated-plucks.fr.md",
+      "sha256": "2133250b45f07acdec6a66bc7401acfcf957d584e9037b55c588bc6b740cab9e"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-014-budget-headroom-for-correlated-plucks.es.md",
+      "sha256": "55f2dd984c65697e6c39a2bdd33bcb7e1880c6929b9ec2abdffd0387024b4f4a"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-015-bound-quantization-error-before-comparing-wavs.md",
+      "sha256": "d95a064562f95072c6ce99b46d623dfeba26eb45231336eadbbcc9ac7bff3b49"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-015-bound-quantization-error-before-comparing-wavs.fr.md",
+      "sha256": "de5b1a96826b5e4057fc025892b2e5cc5899d5688863791ff7ce4299200ea5b1"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-015-bound-quantization-error-before-comparing-wavs.es.md",
+      "sha256": "5fc0097ad0491e7441f6cda96401e7e1ede6731c99822889e8b8af5f2c846c35"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-012-distinguish-coupling-from-parallel-resonance.md",
+      "sha256": "4602c4760843d6a4fc05fac9f71181fa2e858aa0b02a3b13f5e8484817276ca5"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-012-distinguish-coupling-from-parallel-resonance.fr.md",
+      "sha256": "5a0297a8aefc6bd1b043867e3a2469740a80842683bbac4f117a4b07c0ffdc34"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-012-distinguish-coupling-from-parallel-resonance.es.md",
+      "sha256": "2388bf478de9c9310ef6667440bb757c1e1010f2b656a469dba60683de9c91f0"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-013-retune-with-an-explicit-tension-assumption.md",
+      "sha256": "6cfd55b4319dcdf7d0817abdc3746292f5ddf6ad79f12a2ddff2a09aba8b25fd"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-013-retune-with-an-explicit-tension-assumption.fr.md",
+      "sha256": "9ffffb99491f8007128dc17e5ce7f3652fdfc39c054867c6ea22e74f40c7b0e0"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-013-retune-with-an-explicit-tension-assumption.es.md",
+      "sha256": "da8799447ccf61c865a1f3782a6d9b59e9fd95104a6c000f01ac912f23e0c90c"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-014-predict-a-two-path-comb-with-distance.md",
+      "sha256": "82e5480d60102e5015b6fdea2aaf2634434556abdc1fe1687a07f2edc67df112"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-014-predict-a-two-path-comb-with-distance.fr.md",
+      "sha256": "e267fc399f597bcf3881ba8ebc427e7947822ef1d76cd7da983d0205187e37ad"
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-014-predict-a-two-path-comb-with-distance.es.md",
+      "sha256": "2b32dea2902c2d26a9f68531da7eae8d55e79694a7810ea5b065c437a0a5a8d3"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-012-select-natural-harmonics-with-a-touch-node.md",
+      "sha256": "a756d4bba6f94f1d2f400107d15f7a0fd056d5ed125ecae7c45fd38b91487f89"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/fr/gtr-012-select-natural-harmonics-with-a-touch-node.fr.md",
+      "sha256": "2745287d15080497f46d7e5df04948311ee2a6f5d5c14d2d03ad7b4be7cb67e5"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/es/gtr-012-select-natural-harmonics-with-a-touch-node.es.md",
+      "sha256": "54c69925390bf99a0cf1040522c8c4389be2c7963fd97e1c28daf18725e3ad73"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-013-judge-a-bend-with-an-uncertainty-budget.md",
+      "sha256": "bae9dde9a8dcead487fce999094cf1a472a7cddab90456d3a9dd94c96402aa36"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/fr/gtr-013-judge-a-bend-with-an-uncertainty-budget.fr.md",
+      "sha256": "d4612d9ab64985cdb9deb7c0474792f676ebf0b54ccec3798f81c3fde04eb543"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/es/gtr-013-judge-a-bend-with-an-uncertainty-budget.es.md",
+      "sha256": "b1baf55446058242e7b7872a68fbd323969c051b23aa172f5011d9dbb1811c1c"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-014-count-legato-notes-separately-from-pick-attacks.md",
+      "sha256": "9b6d41b7d6dbe804bdc4a6d7aed23edaa3604b237f2fa4de16b0b08d36bf8bc5"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/fr/gtr-014-count-legato-notes-separately-from-pick-attacks.fr.md",
+      "sha256": "283f6d628f213b7862eb35969ffd904c771e72ffeafe113e435e891eae287ff4"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/es/gtr-014-count-legato-notes-separately-from-pick-attacks.es.md",
+      "sha256": "a6adc3d4558f238dd3c81781d1c04878c5841fc49f0ae0073816e6bf4232c6d4"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-011-diagnose-interval-errors-with-a-confusion-table.md",
+      "sha256": "794a598e7db5266d5ccb72e81fa5ce4f9bcab6b3ecc7bd958e289d288d866e2f"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-011-diagnose-interval-errors-with-a-confusion-table.fr.md",
+      "sha256": "4e152636d30501cecde388104a2d06d39d4b6eebb10f240c6409cfc184074e15"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-011-diagnose-interval-errors-with-a-confusion-table.es.md",
+      "sha256": "8394c5814c505137c5df4c89357dafd52f5848634bd1eefd615154413b1951e5"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-012-cross-timbre-with-interval-in-an-ear-trial.md",
+      "sha256": "ef8d7c00629ae3183bae2498d32f8897157ac6ed85899230a5851857ed6dd82d"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-012-cross-timbre-with-interval-in-an-ear-trial.fr.md",
+      "sha256": "3fe62a8946786e632e0192e325d61627696337df67ab8832b1f2342fd0ec27fe"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-012-cross-timbre-with-interval-in-an-ear-trial.es.md",
+      "sha256": "7ff7e5b3abb9ba954ddda279272691b3967f6de7e399c151820be03f632d221c"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-013-choose-a-voicing-diversity-key-for-the-task.md",
+      "sha256": "65ab0f0cd1329dcb7f970fb8108a93d722fe9bb606886d61a5aa6d4494a4959e"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-013-choose-a-voicing-diversity-key-for-the-task.fr.md",
+      "sha256": "bf0320459c6987528dc949a1c1c758065b0a3a5ecaf97226521e8e768dee6ece"
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-013-choose-a-voicing-diversity-key-for-the-task.es.md",
+      "sha256": "6120748c5d5cd5cf4b6d7dea6aed7241c425c3c37b76430b9efc6a98bd373d9f"
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-012-merge-ties-without-merging-slurs.md",
+      "sha256": "9360f9221b5551ccd549e6db68e936a073206eae42efd06d2c0fd1e809e01f87"
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-012-merge-ties-without-merging-slurs.fr.md",
+      "sha256": "cc542531b897b662b2afa5e47e59a01c333bd1cb0bb1f8fc71711fd75e2788ef"
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-012-merge-ties-without-merging-slurs.es.md",
+      "sha256": "b340bb2cc99587ddb171e2064a612d32164f46eb449091dcff379019f37d0bde"
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-013-keep-tuplet-duration-as-a-rational.md",
+      "sha256": "b73cc6d505ba4afc036b35877c59a59f61e1b03974a3a40bbdc728bf1f5c958a"
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-013-keep-tuplet-duration-as-a-rational.fr.md",
+      "sha256": "f71b849d8f8d240ee354d6d410efe9a83211cdcd2a2bdf25eda20be75a128082"
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-013-keep-tuplet-duration-as-a-rational.es.md",
+      "sha256": "36d9789b403cb414d7fca038fef247a2b79a48d62480ae55287cb4a49ef8b097"
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-014-declare-where-grace-notes-take-their-time.md",
+      "sha256": "c6028750712d9e0646dce78bd21bacf523a107efc9294c1cb3b6fe7e7ae9e164"
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-014-declare-where-grace-notes-take-their-time.fr.md",
+      "sha256": "2fe510e2fd1fa2a1803383042b0b92f61fdd5eed848bdb58a14c28a9023a7431"
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-014-declare-where-grace-notes-take-their-time.es.md",
+      "sha256": "d120cd01dc67b8b0ea7d91b31a92532c35d6b0eb060f65463ba16da536402171"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-011-preserve-the-kind-of-a-seventh-chord.md",
+      "sha256": "0a3322678aaee6b794ca85c475fd55e760ddf7461a0abd6ed51af828eab1ff0d"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/fr/wml-011-preserve-the-kind-of-a-seventh-chord.fr.md",
+      "sha256": "278da2d58eea8bf9cef6c71b65396041e816704005f671a7a02d1162dc7790a1"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/es/wml-011-preserve-the-kind-of-a-seventh-chord.es.md",
+      "sha256": "0e3fc67db938170ddedec8495b29d0dbc119ff95a3573f8715122cc8b87910db"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-012-preserve-direction-in-a-melodic-inventory.md",
+      "sha256": "73b59908bf104705c1c3fd8759dad4fe7263b94070da9736527ebfb5b7c5c358"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/fr/wml-012-preserve-direction-in-a-melodic-inventory.fr.md",
+      "sha256": "256689bccf45f1e54a9c533bee6dbba0097b07046f479dd5b875b5742c5c1267"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/es/wml-012-preserve-direction-in-a-melodic-inventory.es.md",
+      "sha256": "1c07e0b9c0d4dc642ad3d01bcaac8e313233b3db4a75bccb608af94bee7d5a54"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-013-check-whether-a-fifth-cycle-closes.md",
+      "sha256": "7340c6337b9ac9fe6f1a275d03b8c9d1d5c60a194ee9aea95baa1b37bd3c7a56"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/fr/wml-013-check-whether-a-fifth-cycle-closes.fr.md",
+      "sha256": "75f04943369bdfdf4cfee8fb17fc862e317bb909d15eaf1513c1390bcd68aef7"
+    },
+    {
+      "path": "streeling/courses/world-music-languages/es/wml-013-check-whether-a-fifth-cycle-closes.es.md",
+      "sha256": "f2f67fbb085054831ff0ffd043ef3983d1a402bdfe7bb334b6e264da4bbd0bbf"
+    },
+    {
+      "path": "streeling/courses/computer-science/en/cs-018-merge-replayed-agent-messages-by-identity.md",
+      "sha256": "52e486c140649d98a7653d10933ae3b806f4d212b040081c41534c7623f512f4"
+    },
+    {
+      "path": "streeling/courses/computer-science/fr/cs-018-merge-replayed-agent-messages-by-identity.fr.md",
+      "sha256": "638d1b88ca2a14b06d1a2a2fdeafb432cb15f4dad2b2ebde89f7cb64bbb450ed"
+    },
+    {
+      "path": "streeling/courses/computer-science/es/cs-018-merge-replayed-agent-messages-by-identity.es.md",
+      "sha256": "47ac3a31d312b52b54bd00ef59efe671d35ba98bd143c18ef44c0a95ffdfa205"
+    },
+    {
+      "path": "streeling/courses/computer-science/en/cs-019-preserve-lexical-bindings-when-composing-fragments.md",
+      "sha256": "1a0fc3487a06266191ac370f527f3c8e6eec02f20b705c98b64ec23eb29fef37"
+    },
+    {
+      "path": "streeling/courses/computer-science/fr/cs-019-preserve-lexical-bindings-when-composing-fragments.fr.md",
+      "sha256": "d715e585599deccc01bca1e4f5228ed820f1ec0007f7297f2c6be04336c4fb0e"
+    },
+    {
+      "path": "streeling/courses/computer-science/es/cs-019-preserve-lexical-bindings-when-composing-fragments.es.md",
+      "sha256": "42710360f9090a03ee7f6f4a90e93577f56d67eea1c97514c3c148bde1014c1f"
+    },
+    {
+      "path": "streeling/courses/computer-science/en/cs-020-audit-evidence-join-multiplicity.md",
+      "sha256": "4947e03ca4db1be5e8d58319399f5997f4b2fbdac6f58b6e9433b7e088f971f6"
+    },
+    {
+      "path": "streeling/courses/computer-science/fr/cs-020-audit-evidence-join-multiplicity.fr.md",
+      "sha256": "e0289b68381a9da942a359040c16c5197ee8f9f5547795cccfe5748ccfea1688"
+    },
+    {
+      "path": "streeling/courses/computer-science/es/cs-020-audit-evidence-join-multiplicity.es.md",
+      "sha256": "d0513a2d5d339914d04ae1f1c6186c4ad9bd93f47c42e91db6f6cede6ef07e7a"
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-012-test-feedback-delay-before-reusing-a-gain.md",
+      "sha256": "ea0e1d2f20328d3d035cb313f246805985aa67c8637bfe3c6a458afc27dc33fa"
+    },
+    {
+      "path": "streeling/courses/cybernetics/fr/cyb-012-test-feedback-delay-before-reusing-a-gain.fr.md",
+      "sha256": "bf6c6239e83c90b4909ed2812bad8f407e3c281f3d8a7314eff78a79a8620bbe"
+    },
+    {
+      "path": "streeling/courses/cybernetics/es/cyb-012-test-feedback-delay-before-reusing-a-gain.es.md",
+      "sha256": "5489e103d2dad5109b0a8971c762bebffd37b5480f229c42590ce1b98f0c4265"
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-013-bound-observation-age-before-a-control-decision.md",
+      "sha256": "a46ee6fd14a0cc0092f5cbcbd93e3cf675b53983994f2e12a877360cbcca7280"
+    },
+    {
+      "path": "streeling/courses/cybernetics/fr/cyb-013-bound-observation-age-before-a-control-decision.fr.md",
+      "sha256": "8a3ac73a440842b81a9073f717693161ab0c4d32a7e3515e9a616b9af4e8da75"
+    },
+    {
+      "path": "streeling/courses/cybernetics/es/cyb-013-bound-observation-age-before-a-control-decision.es.md",
+      "sha256": "18af4efa577c80ae30d2adf1596d8d37d367894659971165411e27e8f1a62653"
+    },
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-014-test-deadbands-with-quantized-actions.md",
+      "sha256": "e8dff6dcb4f82df2d0badd64c811d7520b6f28558f16df5fed32eaa7fbf5fef7"
+    },
+    {
+      "path": "streeling/courses/cybernetics/fr/cyb-014-test-deadbands-with-quantized-actions.fr.md",
+      "sha256": "f2973ce149c163ca0e11b42c4fc20719d06137a7d341ce20b97ba716fd858d92"
+    },
+    {
+      "path": "streeling/courses/cybernetics/es/cyb-014-test-deadbands-with-quantized-actions.es.md",
+      "sha256": "940dce60cee39d4bfebe5fbf09a8ce2af1888d0b4f1b9f8ad0ed798842234698"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-012-separate-review-alert-hit-rate-from-response-bias.md",
+      "sha256": "a84e6e2e205d717b570313156e8d5f8835726d4fac96165295c1e9a9c1dd1a71"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/fr/cog-012-separate-review-alert-hit-rate-from-response-bias.fr.md",
+      "sha256": "7feefff9b7e8c0fbc470564fa14dc9e44ddbdcbd99fbcf131415ca04269e91ae"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/es/cog-012-separate-review-alert-hit-rate-from-response-bias.es.md",
+      "sha256": "c50d4f1e2770bdd148a0748f0c993a513a443904ee38c74df1b67a88d23d1875"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-013-retain-catch-trial-misses-in-assisted-review.md",
+      "sha256": "c72d5fe7905194e797913cc861ee2292f159f581574102d23f0ed660e4087d5d"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/fr/cog-013-retain-catch-trial-misses-in-assisted-review.fr.md",
+      "sha256": "9854abd83e050e8fcda60ed3c402458d7e00704892a6802014006508c7d79c71"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/es/cog-013-retain-catch-trial-misses-in-assisted-review.es.md",
+      "sha256": "78cfd993b36de9452635045aee9676b5d1f610555503fbfe51bf6f001aa1c6b2"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/en/cog-014-report-risk-and-coverage-when-an-agent-abstains.md",
+      "sha256": "aa365b4ef04ccf942d06373619acee211a6a71dc667a69dd35d2ce1bbf65c5ff"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/fr/cog-014-report-risk-and-coverage-when-an-agent-abstains.fr.md",
+      "sha256": "e7b79631d30d2e97241292db68503054ea3755da0ffa48583074e8c7bb044abe"
+    },
+    {
+      "path": "streeling/courses/cognitive-science/es/cog-014-report-risk-and-coverage-when-an-agent-abstains.es.md",
+      "sha256": "c8a494e0c62a9ca2f7b271b7086fe1521f2afba3bee6c810ccc8778e271a7f86"
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-013-value-an-evidence-probe-by-expected-information.md",
+      "sha256": "8547e09ca39f13845c229c48b238d0782902fd43550ed9e4b1cf6946c35bea65"
+    },
+    {
+      "path": "streeling/courses/information-theory/fr/inf-013-value-an-evidence-probe-by-expected-information.fr.md",
+      "sha256": "ae3d1cdece24b753a8c8e45a73a7539f6908816fc72c28ddddf5490b72c35f58"
+    },
+    {
+      "path": "streeling/courses/information-theory/es/inf-013-value-an-evidence-probe-by-expected-information.es.md",
+      "sha256": "c0aeb7789e3ef81e893006e981b537abae9912654f6857ffcbf117de202adcd5"
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-014-retain-message-codebook-versions.md",
+      "sha256": "3efe20a3ed8c9f4fdb35f63e7ce372d2b048f6e06cb3531ba2cfdc16891a910b"
+    },
+    {
+      "path": "streeling/courses/information-theory/fr/inf-014-retain-message-codebook-versions.fr.md",
+      "sha256": "41fd370851a795d68d1f1b823829435732d9d4c3e34ee4fb8277395b29654da3"
+    },
+    {
+      "path": "streeling/courses/information-theory/es/inf-014-retain-message-codebook-versions.es.md",
+      "sha256": "c1df53b4a049a08cd6238b02fbfbf7e03310f04ad9274ddd70b387cdf1fb82fc"
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-015-weight-sampled-telemetry-before-summarizing-failures.md",
+      "sha256": "93647912d5d2e39e5ef80b889a55379c6ef286806e6c9779d758dddc5de4f43a"
+    },
+    {
+      "path": "streeling/courses/information-theory/fr/inf-015-weight-sampled-telemetry-before-summarizing-failures.fr.md",
+      "sha256": "9130a815ace3a874004d67a77939b547ec26f67ebb275e50163265f26b755a83"
+    },
+    {
+      "path": "streeling/courses/information-theory/es/inf-015-weight-sampled-telemetry-before-summarizing-failures.es.md",
+      "sha256": "437c34baea8544033b9a44b24a55305a484cd7fee057b2fc52930046c00207f3"
+    },
+    {
+      "path": "streeling/courses/network-science/en/net-012-account-for-shared-dependencies-in-redundant-paths.md",
+      "sha256": "1d9982a8d9fc9091c745949d79275912fce4575e6c4792cb2c867b330b90e22f"
+    },
+    {
+      "path": "streeling/courses/network-science/fr/net-012-account-for-shared-dependencies-in-redundant-paths.fr.md",
+      "sha256": "d8443a7a172ec274d2a0a067f8fdebf925d7ca15dbab987a03efc45a4944c278"
+    },
+    {
+      "path": "streeling/courses/network-science/es/net-012-account-for-shared-dependencies-in-redundant-paths.es.md",
+      "sha256": "dc29752fff19496a1450c90986c62474433f938e0ac1cfac5f6848e83cc5b3eb"
+    },
+    {
+      "path": "streeling/courses/network-science/en/net-013-trace-causal-concurrency-with-vector-clocks.md",
+      "sha256": "fc099a61e39da7297b67c8f02f2920c6edc4c8aae0893f58d510fa63d8e5fe27"
+    },
+    {
+      "path": "streeling/courses/network-science/fr/net-013-trace-causal-concurrency-with-vector-clocks.fr.md",
+      "sha256": "e8fde40200d59144bc41ba1511a430c962c84046c8966e8ef143ce418312f376"
+    },
+    {
+      "path": "streeling/courses/network-science/es/net-013-trace-causal-concurrency-with-vector-clocks.es.md",
+      "sha256": "0f4430044e2b310e7598f93c8f7b32e78f17e0d76f932d12e07814da4a7f0beb"
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.md",
+      "sha256": "7d9fa6e8c0d0689e575d911a7760b7969110410759c30d08c9896bc9995b581c"
+    },
+    {
+      "path": "streeling/courses/product-management/fr/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.fr.md",
+      "sha256": "ed2bfdf06873a516ab1119699a6ff0ccc5f4cdef8b8f09f5e549f157c2bfdee2"
+    },
+    {
+      "path": "streeling/courses/product-management/es/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.es.md",
+      "sha256": "ca1a093c6b2b66645ffd43f8a290fd828d7249cb00f684d7c4f828007111113c"
+    },
+    {
+      "path": "streeling/courses/product-management/en/pm-011-include-review-and-correction-in-automation-break-even.md",
+      "sha256": "7ffeeafcc5a7be1f70494e65cd1d6d2577a61015dd77a4b56a5d9fa9999b5601"
+    },
+    {
+      "path": "streeling/courses/product-management/fr/pm-011-include-review-and-correction-in-automation-break-even.fr.md",
+      "sha256": "367ced7f0cdec2a545fc675a4c4caf92c047f62d5f7e3d3b6ae55f240f698abe"
+    },
+    {
+      "path": "streeling/courses/product-management/es/pm-011-include-review-and-correction-in-automation-break-even.es.md",
+      "sha256": "fd4f737716df896a3484a823be15ad5784db036f7257b598a31819df2f83ea49"
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-016-bound-a-fold-hinge-sweep.md",
+      "sha256": "bae2e43e601f187622013cc1517707c6bd411f8da2cab88d0f5f3be06ebe8b52"
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-016-bound-a-fold-hinge-sweep.fr.md",
+      "sha256": "41cacde6c1f359e7d24b23707fa63353a04d9df2fd87df046e41d52551964653"
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-016-bound-a-fold-hinge-sweep.es.md",
+      "sha256": "b1038b426d3e7dfb8f5ac76ec990ca49885b67d6a5aeabe86f611e740f279189"
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-017-budget-thermal-growth-at-a-metal-joint.md",
+      "sha256": "7669d0f3c92103f8655d304a9bea0a712f605f083b3d4c7cb533e657d87664db"
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-017-budget-thermal-growth-at-a-metal-joint.fr.md",
+      "sha256": "b7277102e63825c347c85507c40c903df32c99a1621c03e2875439e77f9c46da"
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-017-budget-thermal-growth-at-a-metal-joint.es.md",
+      "sha256": "c6407e939f98a0a125329f9af4c13856282a1d8bb15ff72a7ae0a2724dcdb151"
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-018-locate-a-sculpture-mass-projection.md",
+      "sha256": "ccc408c1296529dc2c871ca11ae0f797d058f2d04983d98111c8395bc818a22c"
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-018-locate-a-sculpture-mass-projection.fr.md",
+      "sha256": "861e047d05ea498c654372129c4d89264f2f97cbe8b8630e46ffecd245993732"
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-018-locate-a-sculpture-mass-projection.es.md",
+      "sha256": "481ab54b63243f4309083639ce92ac25e834871ac6ae4d7d69d5a7a3a11e53d7"
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-014-predict-an-embroidered-stitch-pixel-footprint.md",
+      "sha256": "cc2381c2dbb044a1b42dffa164aa03a1b9216b4e186d866230fec2c8f66a3921"
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-014-predict-an-embroidered-stitch-pixel-footprint.fr.md",
+      "sha256": "d2a8512a029a0f5b7cef40be6e92dbbf0b8639a202eaa0815f41dd7a0af0d6ba"
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-014-predict-an-embroidered-stitch-pixel-footprint.es.md",
+      "sha256": "414740e32fe2bbb966899bbccf9072dd5cbf7c870818656e300b727fb9654ed0"
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-015-budget-a-sculpture-profile-chord-error.md",
+      "sha256": "dbd94df923ee91e548c3fd7a13eae0577d26266172cdea6018a7776a8c47674e"
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-015-budget-a-sculpture-profile-chord-error.fr.md",
+      "sha256": "0b6a25ddb64c8c9644c473371fb5fe26650f6acb5bd29df060f34eb9ff2df0e2"
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-015-budget-a-sculpture-profile-chord-error.es.md",
+      "sha256": "67dbd45e39c6dde09dd71ed723698f0afd61537ef590524db577b7a8959fc809"
+    },
+    {
+      "path": "streeling/courses/visual-computing/en/vc-016-track-uv-gutters-through-mip-levels.md",
+      "sha256": "89f79259c6e1d1dcd92deee482ecf41f5f6829f5f3df49bb3bdeda9d51589403"
+    },
+    {
+      "path": "streeling/courses/visual-computing/fr/vc-016-track-uv-gutters-through-mip-levels.fr.md",
+      "sha256": "99657696dd870e24bc4e3a1117c39caa2269659360b71f185efa2684c20a3618"
+    },
+    {
+      "path": "streeling/courses/visual-computing/es/vc-016-track-uv-gutters-through-mip-levels.es.md",
+      "sha256": "6ac7b8b418f73091a27b6dd523e31f4d57a6d3a980b1f3510299fe3e42873255"
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-014-plot-signed-craft-clearance.md",
+      "sha256": "7ec3a671d90b07a3ee78f05c3f2463fb7842a0976a70069ff598c32674b63eb3"
+    },
+    {
+      "path": "streeling/courses/data-visualization/fr/dv-014-plot-signed-craft-clearance.fr.md",
+      "sha256": "c404cb596065f3f7d87a9b4b93037053142983e050fea14112c865cf6d05d037"
+    },
+    {
+      "path": "streeling/courses/data-visualization/es/dv-014-plot-signed-craft-clearance.es.md",
+      "sha256": "bc545952d2688c8fb3f5728b9fb3ecdc2500225340538127feb1e50f633306b6"
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-015-map-missing-stitches-without-inventing-holes.md",
+      "sha256": "b73683f82be6f620edb0b08680eb97abbc8bade39c9d9d4d3f7940021daf40cf"
+    },
+    {
+      "path": "streeling/courses/data-visualization/fr/dv-015-map-missing-stitches-without-inventing-holes.fr.md",
+      "sha256": "db15bf47041351fa890a154daa12954b98553d2f1febfb280ce0ea225e077ff4"
+    },
+    {
+      "path": "streeling/courses/data-visualization/es/dv-015-map-missing-stitches-without-inventing-holes.es.md",
+      "sha256": "459ca10af7f74264ae9faa18a2f66dfaa0db9979664b24b2151dbad667fdbacb"
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-016-compare-paired-silhouette-residuals.md",
+      "sha256": "03b11a94f3cc40a75e56a36d73d80b531b355f298063456fd35f44b6b26e9777"
+    },
+    {
+      "path": "streeling/courses/data-visualization/fr/dv-016-compare-paired-silhouette-residuals.fr.md",
+      "sha256": "621354b45d7b36bcee59655d312efbec7ba0e9fb9d94e2ae37f67abd6e4ca905"
+    },
+    {
+      "path": "streeling/courses/data-visualization/es/dv-016-compare-paired-silhouette-residuals.es.md",
+      "sha256": "3d08d3f51ca0e79b99d160873d2face8f1de98fccaf9705afbb3c3e6ddc5ca17"
+    },
+    {
+      "path": "streeling/courses/semiotics/en/sem-012-preserve-the-order-of-stitch-frame-actions.md",
+      "sha256": "4e9dac3fd958be10adecb1452f2241c3027b5b9d90fedebf11c700a963a908ea"
+    },
+    {
+      "path": "streeling/courses/semiotics/fr/sem-012-preserve-the-order-of-stitch-frame-actions.fr.md",
+      "sha256": "c5abcbff98c4926096937487da9053e0a1264257204b38753e70b5e8670678f1"
+    },
+    {
+      "path": "streeling/courses/semiotics/es/sem-012-preserve-the-order-of-stitch-frame-actions.es.md",
+      "sha256": "b3d594719125616b80dfebb346a3d7c432412baffabbad6745879cd21f88e91c"
+    },
+    {
+      "path": "streeling/courses/semiotics/en/sem-013-align-two-motif-periods-at-a-textile-seam.md",
+      "sha256": "2ad8fcc953fde8b7cb8b88a343473d907736ecd03b83038a02570e9bd6267d15"
+    },
+    {
+      "path": "streeling/courses/semiotics/fr/sem-013-align-two-motif-periods-at-a-textile-seam.fr.md",
+      "sha256": "46c6357ef21a557ffc376b179962107e42a4788560e292f99865819ac1708d77"
+    },
+    {
+      "path": "streeling/courses/semiotics/es/sem-013-align-two-motif-periods-at-a-textile-seam.es.md",
+      "sha256": "949ded8eff705b6fbac30f28de3d3a35f32a2648619d5e3b658455030c0c088e"
+    },
+    {
+      "path": "streeling/courses/semiotics/en/sem-014-declare-material-patch-precedence.md",
+      "sha256": "e2b04eaa58d948d1944ef605e75b56f043719968f0eb4983fb3ad396bd0a2996"
+    },
+    {
+      "path": "streeling/courses/semiotics/fr/sem-014-declare-material-patch-precedence.fr.md",
+      "sha256": "33c8039bae6dd965b98c7f0c80e98843831a388fa0a07d5b574455835d5a4fce"
+    },
+    {
+      "path": "streeling/courses/semiotics/es/sem-014-declare-material-patch-precedence.es.md",
+      "sha256": "b9d7b0f63ec8874400dd98db9810e259bf474ccc7ed96e4f778abf09b6a67a9e"
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-010-state-what-a-craft-view-cannot-distinguish.md",
+      "sha256": "55d0c5a5c7ff2a200f66543a2fc0fd30af252db774cbef244fbf5dfbd0d24331"
+    },
+    {
+      "path": "streeling/courses/philosophy/fr/phi-010-state-what-a-craft-view-cannot-distinguish.fr.md",
+      "sha256": "35d9c767126a31f71a3aede3d5aa3f7ab741d1b4bae29eeeebec4c6340915d40"
+    },
+    {
+      "path": "streeling/courses/philosophy/es/phi-010-state-what-a-craft-view-cannot-distinguish.es.md",
+      "sha256": "8e9ade6c4c6cf008e369603ffbda711663f916fda6a7323b438001975d22af63"
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-011-cross-mesh-and-lighting-before-attributing-a-render-change.md",
+      "sha256": "0efa53b8143de554946ff6fa60e226f0faa2c9b57aaee779dab72decbe77e2d8"
+    },
+    {
+      "path": "streeling/courses/philosophy/fr/phi-011-cross-mesh-and-lighting-before-attributing-a-render-change.fr.md",
+      "sha256": "13bbdb394b5b502cb30549f788707f5d77448123995c9270304ed40cd00297e1"
+    },
+    {
+      "path": "streeling/courses/philosophy/es/phi-011-cross-mesh-and-lighting-before-attributing-a-render-change.es.md",
+      "sha256": "925b71b281df49e367e8d3531e81375a412a24d82b524ebece268fe4df1c5fcd"
+    },
+    {
+      "path": "streeling/courses/futurology/en/fut-010-project-weave-density-before-a-scene-expansion.md",
+      "sha256": "f2798dbc094190d03fcb003da03fd1065b9039e143c40bc0ad3b948668e7fea9"
+    },
+    {
+      "path": "streeling/courses/futurology/fr/fut-010-project-weave-density-before-a-scene-expansion.fr.md",
+      "sha256": "8437e89edd64e2fbad5d4e0a719a4e6405a0e45a925d698aad6628281c53c186"
+    },
+    {
+      "path": "streeling/courses/futurology/es/fut-010-project-weave-density-before-a-scene-expansion.es.md",
+      "sha256": "64b40473bf8a784569b9b630a9089501eccd3d759bb7ef753390d1f605c948a0"
+    },
+    {
+      "path": "streeling/courses/futurology/en/fut-011-plan-an-embroidery-representation-switch-with-memory.md",
+      "sha256": "64593959141686e6d3d62af63480171efb2c39e104655790563e0adb9609fd77"
+    },
+    {
+      "path": "streeling/courses/futurology/fr/fut-011-plan-an-embroidery-representation-switch-with-memory.fr.md",
+      "sha256": "52eee7d0860e9939211324bc79c5d5a49788a7b8a5422d684408f9905e0fc8bf"
+    },
+    {
+      "path": "streeling/courses/futurology/es/fut-011-plan-an-embroidery-representation-switch-with-memory.es.md",
+      "sha256": "18cf9034de7c68377584b041b8ac20deb0ebdf67b64485bf0edb22a8f8359b40"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-24/unit-a.json",
+      "sha256": "d02838183a7161a34cb9ebd4a0c0a70f4fb572c20d03ea033b19ffe06a6e7987"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-24/unit-b.json",
+      "sha256": "3e25c7fe2cbe25b6e0be8dee147a6199369716f62bc595eb411607a22aa4b72d"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-24/unit-c.json",
+      "sha256": "3eada91eae5f5baef028d22e71296a99b3baea4280c2ed2de20dc8b25c502a41"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-24/tests/test_unit_a.py",
+      "sha256": "bdadbba27518e74e465c3421666cac55b6ac8cbcd50836c7dcdca2c69aa7c267"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-24/tests/test_unit_b.py",
+      "sha256": "d60f2b0ce28cb1ab08ce59b3151434a24dd82e2a1616803b2d2654b9f1c8af8f"
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-24/tests/test_unit_c.py",
+      "sha256": "0f0abe05f476810ef8d9bd00314a62ce54731c97ae647892748a7ed952421804"
+    }
+  ],
+  "log": "code/streeling/evidence/batch50-2026-10-24/test-runs/resumed-20261025-all.log",
+  "log_sha256": "7bdba77f890e807689f8edcea5a32c04a6b9b27467050f36447a635907b4c8fc",
+  "scope": "Executed checks of authored fixed cases and counterexamples. Not engine, scene, physical, listening, human or learner validation."
+}

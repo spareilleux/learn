@@ -98,7 +98,7 @@ Four kinds of mistake:
 
 - **A tuning's name written as a pitch.** `PedalSteelGuitar.T1` begins with `C6` and `T2` with `E9`; [C6 and E9](https://en.wikipedia.org/wiki/Pedal_steel_guitar) are the names of the two standard pedal steel setups, not notes. The same slip put `C6` and `D6` at the head of the four ukulele tunings in lesson 8 — and those *do* parse as pitches, so they are invisible here. Lines that fail loudly are the lucky ones.
 - **A word where a list should be.** `Saz.BaglamaBozukDuzenSevenStrings` begins with the literal word `Tuning`; `Huapanguera.Standard` is the single word `Huapanguera`, the instrument's own name, with no tuning at all.
-- **A missing octave.** `Dulcimer.LydianMode` is `Bb C4 C4 F3 Bb2`: the first `Bb` has no octave number where every other token has one.
+- **Part of a name left in the pitches.** `Dulcimer.LydianMode` is `Bb C4 C4 F3 Bb2`. The first `Bb` looks like a pitch missing its octave, but [`Tunings.txt`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Tunings.txt#L112), the file the YAML came from, reads `Ducimer - Lydian Mode Bb C4 C4 F3 Bb2`: the `Bb` ends the tuning's name, *Lydian Mode Bb*.
 - **A separator with a meaning.** The two harp guitar entries use `|` to divide the six fretted strings from the three sub-bass strings. That is a real distinction the format has no field for, so it was written into the value.
 
 `PedalSteelGuitar.T2` also mixes spellings inside one tuning — `G#4` and `Eb4` in the same list — which lesson 3 shows GA cannot represent consistently anyway.

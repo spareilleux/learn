@@ -18,10 +18,11 @@ sidebar:
 - [x] Lesson 6: LadybugDB from Java
 - [x] Lesson 7: graph algorithms and full-text search
 - [x] Lesson 8: persistence, transactions and concurrency
+- [x] Lesson 9: a graph lab — translations, prerequisite cycles, bounded reachability
 
 ## QA
 
-LadybugDB 0.20.4 is somebody else's database, and writing eight lessons against it turned up nine findings. Six are silent bugs — no error, a wrong result — each with a reproduction that runs in an empty in-memory database; none of them had an upstream issue when the tracker was searched on 2026-09-14, and none has been reported. The last three come from the lessons themselves, and one of them was already open upstream.
+LadybugDB 0.20.4 is somebody else's database, and writing eight lessons against it turned up nine findings. Six are silent bugs — no error, a wrong result — each with a reproduction that runs in an empty in-memory database; none of them had an upstream issue when the tracker was searched on 2026-09-14, and none has been reported. The last three come from the lessons themselves, and one of them was already open upstream. Lesson 9's lab added a tenth, the reversed order of a closed witness; it has not been searched upstream.
 
 | Expected | What happens | Where | Measure | Status |
 |---|---|---|---|---|
@@ -34,6 +35,19 @@ LadybugDB 0.20.4 is somebody else's database, and writing eight lessons against 
 | `INSTALL algo` fetches the build matching the CLI | The 0.20.4 CLI downloads the 0.20.0 build, and `LOAD algo` then fails on all three runners, with paths from LadybugDB's own build machine in the message | `algo` extension, CLI 0.20.4 | `libnetworkit.so: cannot open shared object file` on Linux, `Library not loaded: @rpath/libnetworkit.dylib` on macOS, `The specified module could not be found.` on Windows | Open upstream as [issue #857](https://github.com/LadybugDB/ladybug/issues/857), not opened by this course [2026-09-14](#2026-09-14--lesson-7-extensions-algorithms-and-full-text-search) |
 | Louvain gives the same communities for the same graph and the same thread count | The sizes differ from one process to the next, with `CALL threads = 1` set | `algo` extension, Louvain | `[27,20,17,14,14]` in one process, `[25,20,18,18,11]` in the next two; three calls inside one process agree. Nodes with no relationship get `louvain_id` -1 | Reproduced, not reported [2026-09-14](#2026-09-14--lesson-7-extensions-algorithms-and-full-text-search) |
 | A read-only process and a writer on one file behave as the documentation says | The [concurrency page](https://docs.ladybugdb.com/concurrency/) says the combination is not allowed, but it is what happens: a read-only process opens a writer's file on Linux and macOS and sees committed changes through the `.wal`; a writer opens and checkpoints a file a reader holds, on all three, and the reader keeps answering from the old state | [`storage_manager.cpp` 87-91](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/storage/storage_manager.cpp#L87-L91) | On Windows the writer's `LockFileEx` makes the read fail with `Error 33` instead | Reproduced; documentation and behaviour disagree [2026-09-14](#2026-09-14--lesson-8-transactions-files-and-processes) |
+| `nodes(p)` on a closed pattern `(a)-[…]->(a)` lists the pages in the arrows' order, as it does on an open pattern | It lists them against the arrows; the pages and the length are right | `nodes()` on a closed variable-length pattern; source not located | Arrows `/lab/cycles/` → `/lab/paths/` → `/lab/intro/` → back: `[/lab/cycles/,/lab/intro/,/lab/paths/,/lab/cycles/]`. An open path from the same page is in order. Reproduced on the 3-page and 6-page cycles [2026-09-27](#2026-09-27--lesson-9-a-graph-lab) | Reproduced on Windows; upstream tracker not searched, not reported |
+
+## Experiments
+
+One row per measured experiment, with the hypothesis as written before the run in [`data/lab/preregistration.md`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/data/lab/preregistration.md).
+
+| Question | Hypothesis (before the run) | Result | Verdict | Entry and code |
+|---|---|---|---|---|
+| After a failed `COPY` into a relationship table, what is left? | The table unchanged, and the node key index intact | 2 links, as before; `found_by_key` 1 | Confirmed, 0.20.4 on Windows; observed, not a guarantee | [2026-09-27](#2026-09-27--lesson-9-a-graph-lab), [`09-graph-lab.cypher`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/cypher/09-graph-lab.cypher) |
+| Missing translations by content identity vs by title | Identity: 1 missing sibling; title: 4 rows, 3 false | 1 (`/lab/paths/`, `es`); 4 rows, 3 false | Confirmed | [2026-09-27](#2026-09-27--lesson-9-a-graph-lab) |
+| Is a closed-trail bound complete once it reaches the number of pages? | DAG: 0 at bound 3; 6-cycle: 0 at 5, 6 trails of length 6 at 6 | 0; 0; 6 of length 6 | Confirmed | [2026-09-27](#2026-09-27--lesson-9-a-graph-lab) |
+| Do navigation and prerequisites need separate relationship tables? | Navigation: 2 closed trails of length 2; prerequisites: 0 | 2 of length 2; 0 | Confirmed | [2026-09-27](#2026-09-27--lesson-9-a-graph-lab) |
+| Does a closed witness list its pages in the arrows' order? | Yes, as an open path does | No: reversed (QA row above) | Refuted | [2026-09-27](#2026-09-27--lesson-9-a-graph-lab) |
 
 ## 2026-09-14 — The data
 
@@ -276,8 +290,25 @@ f,c,tz
 
 Expected 13:30 for the first two as well: `COPY` and `LOAD FROM` convert the same text in a CSV file to 13:30 UTC (lesson 4). The offset is dropped without being applied. `timestamp(…)` in the C# package 0.19.1 returns 09:30 too (lesson 5).
 
+## 2026-09-27 — Lesson 9: a graph lab
+
+A lab on invented pages under `/lab/`, to extend lessons 2 and 3 rather than repeat them. The predictions went into [`data/lab/preregistration.md`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/data/lab/preregistration.md) first, hashed at 13:24 EDT (SHA-256 `234e0639…040d`) before any fixture was loaded. Every expected file was written from it by hand, before the run it checks. Runtime: LadybugDB CLI 0.20.4 on Windows, in-memory databases, `CALL threads = 1` before the compared `COPY`. The whole script runs in 1.5 to 6.5 s.
+
+- **Tracer and missing endpoint:** green on the first run. After the failed `COPY` into `LINKS_TO`, there are still 2 links and the key index works. Lesson 2's index bug concerned node tables.
+- **Translations:** green on the first run. Title equality gives 3 false reports out of 4.
+- **The first run of the cycle cases had two differences from the expected file:**
+  - **A script defect,** mine: `shortest` is a keyword, and the parser refused it as an alias.
+  - **An upstream behaviour:** a closed trail lists its pages against the arrows (QA row). The pages and the length were as predicted; only the order was not.
+
+  A probe on the six-page cycle, run before the addendum was written, separated open paths (in order) from closed ones (reversed). Both are recorded in a dated addendum; the original predictions were left as they were.
+- **Bounds:** confirmed. A bound of 5 misses a 6-cycle, and 6 finds it. A bound of 1 hides a prerequisite at depth 2.
+
+Not run: the full `check.sh` on this machine. Its `INSTALL json` would download an extension, and this lab was not allowed downloads. Only the two lesson 9 scripts were compared locally.
+
 ## To verify
 
+- Lesson 9 on Linux and macOS: the lab ran on Windows only. `ladybugdb-examples.yml` compares it on the three runners.
+- Whether `nodes()` on a closed pattern is reversed on purpose (undocumented) or a bug, and whether it is fixed after 0.20.4. The upstream tracker has not been searched.
 - The install script (`curl -s https://install.ladybugdb.com | bash`) and `brew install ladybug`: not run for this course.
 - The minimal reproductions were run on Windows only. The course scripts that show bugs 1, 2, 4 and 5 on the site data give the same output on the three CI runners.
 - Whether these bugs are already fixed on LadybugDB's main branch, after 0.20.4.

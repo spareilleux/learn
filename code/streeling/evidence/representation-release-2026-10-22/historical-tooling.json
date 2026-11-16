@@ -1,0 +1,50 @@
+{
+  "scope": "Prior same-session GitHub observation retained with its original timestamp; no new human approval or maintained helper inferred.",
+  "observation_source": "code/streeling/evidence/agentic-composition-2026-10-22/historical-pr-states.json",
+  "observation_sha256": "960f60aa6e4308daa180e4641af0d026608d278c5e7046ba5aecfc71f576a350",
+  "prior_observation": {
+    "checked_at_utc": "2026-10-22T03:22:42.900402+00:00",
+    "scope": "Current states of historical draft experiments; no approval or merge inferred.",
+    "pull_requests": [
+      {
+        "closedAt": "2026-10-21T20:52:21Z",
+        "headRefOid": "93ab280e2ad4baa39e2823c8b6343ba8528576c8",
+        "isDraft": true,
+        "mergedAt": null,
+        "state": "CLOSED",
+        "url": "https://github.com/GuitarAlchemist/Demerzel/pull/1207"
+      },
+      {
+        "closedAt": "2026-10-21T20:52:25Z",
+        "headRefOid": "5d7c1d1bd9972fe9d6d2e7a90ab3cdddabb8ed44",
+        "isDraft": true,
+        "mergedAt": null,
+        "state": "CLOSED",
+        "url": "https://github.com/GuitarAlchemist/Demerzel/pull/1211"
+      },
+      {
+        "closedAt": "2026-10-21T20:52:28Z",
+        "headRefOid": "02fc08c8f73e017412d1a623415ac4ab08645eb0",
+        "isDraft": true,
+        "mergedAt": null,
+        "state": "CLOSED",
+        "url": "https://github.com/spareilleux/learn/pull/170"
+      }
+    ]
+  },
+  "current_learn_head": "fbac860a18856e4d65d239b3c0d298835ff1106d",
+  "historical_helper_current_path_checks": [
+    {
+      "path": "scripts/streeling-review-status.mjs",
+      "exists_in_current_learn_HEAD": false
+    },
+    {
+      "path": "scripts/sync-streeling.mjs",
+      "exists_in_current_learn_HEAD": true
+    },
+    {
+      "path": "scripts/tests/sync-streeling.test.mjs",
+      "exists_in_current_learn_HEAD": true
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+OBSERVATION {"code": "AUD014", "case": "model", "observed": {"aligned_sample_counts": false, "a_length": 4, "b_length": 3}, "expected": {"aligned_sample_counts": true}, "scope": "Three aligned authored mono samples; linear summation and hard clipping only; no loudness."}
+Traceback (most recent call last):
+  File "C:\tmp\streeling-batch50-alignment-probe-20261025.py", line 9, in <module>
+    try:module.UnitA().check_course('AUD014')
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\tmp\learn-streeling-craft-transfer-20261022\code\streeling\evidence\batch50-2026-10-24\tests\test_unit_a.py", line 136, in check_course
+    self.assertEqual(len(values['a']),len(values['b']),'AUD014 requires aligned sample arrays of equal length')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\spare\AppData\Local\Programs\Python\Python314\Lib\unittest\case.py", line 925, in assertEqual
+    assertion_func(first, second, msg=msg)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\spare\AppData\Local\Programs\Python\Python314\Lib\unittest\case.py", line 918, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 4 != 3 : AUD014 requires aligned sample arrays of equal length
+
+Wrong aligned-array input rejected: True

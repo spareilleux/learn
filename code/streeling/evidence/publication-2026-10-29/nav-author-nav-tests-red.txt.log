@@ -1,0 +1,35 @@
+node:internal/modules/esm/resolve:274
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module 'C:\tmp\learn-streeling-craft-transfer-20261022\src\scripts\streeling-nav-counts.mjs' imported from C:\tmp\learn-streeling-craft-transfer-20261022\scripts\tests\streeling-nav-counts.test.mjs
+    at finalizeResolution (node:internal/modules/esm/resolve:274:11)
+    at moduleResolve (node:internal/modules/esm/resolve:864:10)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:718:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:735:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:764:52)
+    at #resolve (node:internal/modules/esm/loader:700:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:620:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:143:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:228:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///C:/tmp/learn-streeling-craft-transfer-20261022/src/scripts/streeling-nav-counts.mjs'
+}
+
+Node.js v24.12.0
+✖ scripts\tests\streeling-nav-counts.test.mjs (721.6547ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 727.2209
+
+✖ failing tests:
+
+test at scripts\tests\streeling-nav-counts.test.mjs:1:1
+✖ scripts\tests\streeling-nav-counts.test.mjs (721.6547ms)
+  'test failed'

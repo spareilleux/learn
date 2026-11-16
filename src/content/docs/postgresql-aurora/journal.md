@@ -46,7 +46,7 @@ There is no Experiments table. The journal records no hypothesis before any of i
 | A filtered nearest-neighbour query returns the ten rows asked for | The HNSW scan collects its candidates before the filter, none of them passes it, and the query returns nothing | pgvector 0.8.6, `enable_seqscan = off` | No rows where ten were asked for: 40 candidates, none a triad. Rebuilding the index five times gave the same 40 distances each time | By design; `hnsw.iterative_scan = strict_order` returns the ten, and the lesson sets it [2026-09-16](#2026-09-16--functions-and-pgvector) |
 | A script run with `sqlcmd -i` prints what the same statements print with `-Q` | With `-i`, every result after an uncaught error is dropped, when the error is the first statement of a batch following a batch with results | `sqlcmd` 18.6 against SQL Server 2025 CU9 | `-Q` printed the results; `-i` dropped them | Reproduced, not reported; the scripts catch their errors with `TRY … CATCH` [2026-09-16](#2026-09-16--migrating-from-sql-server) |
 | `Microsoft.Data.SqlClient` opens a connection from the course's C# project | It refuses, because the project sets `InvariantGlobalization` | `Microsoft.Data.SqlClient` 7.0.3, `OpenAsync` | `Globalization Invariant Mode is not supported.` | By design; the migration program has its own project [2026-09-16](#2026-09-16--migrating-from-sql-server) |
-| A converter that joins a list into one string reads back every element it saved | `StringSplitOptions.RemoveEmptyEntries` on the read side drops an empty alternate name | GuitarAlchemist/ga, the value converters of `MusicalKnowledgeDbContext.cs`, in three copies | Three names saved, two read back | Reproduced, not reported [2026-09-15](#2026-09-15--findings-in-guitar-alchemist) |
+| A converter that joins a list into one string reads back every element it saved | `StringSplitOptions.RemoveEmptyEntries` on the read side drops an empty alternate name | GuitarAlchemist/ga, the value converters of `MusicalKnowledgeDbContext.cs`, in three copies | Three names saved, two read back | Fixed upstream by [#734](https://github.com/GuitarAlchemist/ga/pull/734), merged 2026-09-24, in the three copies [2026-09-15](#2026-09-15--findings-in-guitar-alchemist), [2026-09-24](#2026-09-24--upstream-fixes) |
 | AWS's pages agree with each other on an end-of-life date | Two guides give two dates, and disagree on a default mode too | the CloudWatch guide and the Aurora User Guide's document history | Performance Insights ends on July 31, 2026 in one and November 30, 2025 in the other; Database Insights defaults to Standard in one and Advanced in the other | Reproduced in the documentation; not reported [2026-09-16](#2026-09-16--aurora-from-the-documentation) |
 
 ## 2026-09-15 — Versions
@@ -168,6 +168,10 @@ Nothing here was reported to the project; these are notes, with the queries that
 - SQL Server's `IDENT_CURRENT` was 6 with three rows: two failed inserts and a deleted row had used values.
 - AWS documentation read the same day: DMS doesn't list SQL Server 2025 as a source; Babelfish's parameter table and collations page give two different default server collations, and the collations page still says PostgreSQL doesn't support `LIKE` on nondeterministic collations; the open-source Babelfish stops at PostgreSQL 17.7 and has no container image.
 - Microsoft's SQL Server 2025 pricing web page refused scripted requests; the prices come from its PDF pricing sheet.
+
+## 2026-09-24 — Upstream fixes
+
+- [#734](https://github.com/GuitarAlchemist/ga/pull/734), merged 2026-09-24, fixes the list converters: the 11 string-list converters in the three copies of `MusicalKnowledgeDbContext` split without `RemoveEmptyEntries`, and an empty column reads back as an empty list. Its test fails on all 11 with the old code. One limit remains, and the PR says so: a list holding a single empty string still reads back as an empty list, because both store the same column value.
 
 ## To verify
 

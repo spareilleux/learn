@@ -1,6 +1,6 @@
 ---
 title: "Journal"
-description: "Notes d'avancement datées — IX épinglé à 490c395, les données extraites de la CI de ce site, la CI du code du cours, dix-neuf endroits où IX diffère du manuel ou de scikit-learn, ce qui a concordé, la carte d'API générée, et les points à vérifier."
+description: "Notes d'avancement datées — IX épinglé à 490c395, données et contrôles du cours, dix-neuf constats antérieurs et deux nouveaux constats d'API ou de documentation, carte d'API et points à vérifier."
 sidebar:
   order: 99
 ---
@@ -18,13 +18,14 @@ sidebar:
 - [x] Leçon 6 : ensembles
 - [x] Leçon 7 : réseaux de neurones
 - [x] Leçon 8 : optimisation
+- [x] Leçon 9 : cinq autres réducteurs, avec une MDS écrite à la main et des contrôles indépendants
 - [x] Annexe : la carte d'API, générée depuis le commit épinglé
-- [ ] Leçons 9 à 21
+- [ ] Leçons 10 à 21
 - [x] Traductions française et espagnole
 
 ## QA
 
-IX est la bibliothèque de quelqu'un d'autre, épinglée à `490c395`, et dix-neuf de ses réponses diffèrent du manuel ou de scikit-learn. Le journal les énumère ; ce qu'il ne dit pas pour chacune, c'est ce qu'aurait attendu un lecteur venu de scikit-learn, et c'est la première colonne ici. Aucune n'est déclarée comme ticket IX. Plusieurs sont des choix défendables plutôt que des défauts, et la colonne du milieu dit lesquels.
+IX est la bibliothèque de quelqu'un d'autre, épinglée à `490c395`. Les leçons précédentes ont recensé dix-neuf constats ; la leçon 9 ajoute deux constats d'API ou de documentation. La première colonne indique ce qu'attendrait un appelant. Aucun constat n'est déclaré comme ticket IX. Plusieurs sont des choix défendables plutôt que des défauts, et la colonne du milieu dit lesquels.
 
 | Attendu | Ce qui se passe | Où | Mesure | État |
 |---|---|---|---|---|
@@ -47,10 +48,12 @@ IX est la bibliothèque de quelqu'un d'autre, épinglée à `490c395`, et dix-ne
 | `Dense::new` accepte une graine | Il tire du générateur du thread : un réseau n'est donc pas reproductible | `ix-nn/layer.rs` 27 | Aucun paramètre de graine | Reproduit, non déclaré [2026-09-15](#2026-09-15--là-où-ix-diffère-suite) |
 | Un `Sequential` de deux couches `Dense` peut apprendre le XOR | `Dense` est le seul type qui implémente `Layer` : il n'existe aucune activation à glisser entre deux applications affines, et tout le réseau est une seule application affine | `ix-nn` | La perte plafonne à 0,25 après 50 000 époques et prédit 0,5 aux quatre coins | Reproduit, fonctionnalité manquante plutôt que défaut, non déclaré [2026-09-15](#2026-09-15--là-où-ix-diffère-suite) |
 | `minimize` distingue une exécution divergée d'une exécution à court d'itérations | Il rend le point de départ de l'appelant, étiqueté comme le meilleur vu, avec le même `converged: false` qu'une non-convergence ordinaire | `ix-optimize/gradient.rs` 124-165 | Rosenbrock au pas 0,01 rapporte `best f 24.200000`, la valeur au départ | Reproduit, non déclaré [2026-09-15](#2026-09-15--là-où-ix-diffère-suite) |
+| `TSNE::transform(new_rows)` place ces lignes sur la carte ajustée | L'argument est ignoré : la méthode rend l'embedding `12 × 2` mémorisé même pour une entrée `1 × 1` | [`tsne.rs` 249-253](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-unsupervised/src/tsne.rs#L249-L253) | La sortie est exactement l'embedding d'origine | Reproduit, non déclaré [2026-09-24](#2026-09-24--cinq-réducteurs-trois-entrées) |
+| L'en-tête Barnes-Hut du module t-SNE décrit l'implémentation | `compute_q` et le gradient parcourent toutes les paires de points | [`tsne.rs` 160-178, 205-217](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-unsupervised/src/tsne.rs#L160-L217) | Boucles quadratiques visibles dans le code ; débit non mesuré | Confirmé dans le code, non déclaré [2026-09-24](#2026-09-24--cinq-réducteurs-trois-entrées) |
 
 ## Expériences
 
-Un cours qui trouve dix-neuf divergences doit montrer ce qu'il a vérifié et trouvé juste, sans quoi les dix-neuf ne veulent rien dire. Ces six-là sont ces vérifications. La cinquième est celle qui a échoué, et elle a produit les constats 15 et 16.
+Un cours qui trouve des divergences doit montrer ce qu'il a vérifié et trouvé juste. Les six contrôles initiaux restent ci-dessous ; le cinquième a échoué et produit les constats 15 et 16. La leçon 9 ajoute deux contrôles géométriques exploratoires, non pré-enregistrés.
 
 | Question | Hypothèse | Résultat | Verdict | Où |
 |---|---|---|---|---|
@@ -60,6 +63,8 @@ Un cours qui trouve dix-neuf divergences doit montrer ce qu'il a vérifié et tr
 | Un xorshift 64 bits rejouable peut-il remplacer le `StdRng` non rejouable d'IX dans un contrôle par bootstrap ? | Écrite à l'avance : un générateur rejouable employé à l'identique en Rust et en Python retombe sur les mêmes lignes hors sac | Le contrôle numpy retombe sur les mêmes 48 lignes laissées de côté | Confirmée | [2026-09-15](#2026-09-15--ce-qui-a-concordé) |
 | Le gradient analytique d'`ix_nn` égale-t-il son gradient par différences finies ? | Écrite à l'avance : le rapport doit valoir 1 | 65,0000, puis 1, 2, 3, 4 selon le nombre de colonnes — constats 15 et 16 | Réfutée | [2026-09-15](#2026-09-15--ce-qui-a-concordé) |
 | La sommation flottante sur macOS-ARM change-t-elle une affirmation des leçons ? | Écrite à l'avance : seul le signe d'une valeur déjà nulle doit différer | `-0.0000` contre `0.0000` à deux coins, toutes les autres valeurs identiques à quatre décimales (exécution 35039180659) | Confirmée | [2026-09-16](#2026-09-16--un-zéro-négatif-sous-macos) |
+| La MDS classique écrite à la main conserve-t-elle les mêmes distances du carré qu'IX ? | Les deux devraient retrouver les six distances, quelle que soit l'orientation des axes | Erreur maximale inférieure à `1e-10` pour les deux ; numpy concorde | Confirmée, exploratoire | [2026-09-24](#2026-09-24--cinq-réducteurs-trois-entrées), [`l09_reducers.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/examples/l09_reducers.rs) |
+| Le premier axe de la PCA à noyau RBF sépare-t-il des anneaux concentriques ? | La similarité non linéaire devrait placer le contraste radial en premier | IX et scikit-learn le placent sur l'axe 4 ; écart de `0.5798` dans IX, nul sur l'axe 1 | Réfutée, exploratoire | [2026-09-24](#2026-09-24--cinq-réducteurs-trois-entrées), [`l09_reducers.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/examples/l09_reducers.rs) |
 
 ## 2026-09-14 — IX, épinglé
 
@@ -163,6 +168,13 @@ Cela mérite d'être consigné à côté des constats, car les leçons ont surto
 - [`fmt_vec`](https://github.com/spareilleux/learn/blob/be41ba8/code/machine-learning-ix/src/lib.rs#L52-L70) existe pour que « les sorties ne dépendent pas de la façon dont chaque OS imprime les derniers chiffres », ce qui en fait l'endroit du correctif : tout ce qui s'arrondit à zéro affiche désormais `0.0000`, jamais `-0.0000`, et tout autre signe survit. Un test unitaire fixe les deux moitiés. Aucun fichier `expected/` n'a changé, donc aucune leçon n'a eu à être recitée.
 - La note du 2026-09-14 — des décimales fixes, donc des sorties identiques sur les trois systèmes — avait raison sur le remède et lui manquait un cas. Des décimales fixes ne tranchent pas le signe d'un zéro, et un cours écrit sur une seule machine ne peut pas l'apprendre.
 
+## 2026-09-24 — Cinq réducteurs, trois entrées
+
+- [`l09_reducers.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/examples/l09_reducers.rs) a tourné sous Windows avec le commit IX épinglé : un carré pour la MDS, deux anneaux pour la PCA à noyau, et les données CI de 186 jobs pour la NMF et la LDA (les douze premières lignes standardisées pour t-SNE). La MDS écrite à la main et IX retrouvent les six distances du carré à `1e-10` près.
+- Sur les anneaux, l'écart du premier axe linéaire est `0.0000`. Celui du premier axe RBF est lui aussi `0.0000` ; le quatrième atteint `0.5798`. L'hypothèse exploratoire sur le premier axe est donc réfutée. Le signe et la rotation des vecteurs propres étant arbitraires, la comparaison prend les écarts absolus entre moyennes sans en déduire un score de classification.
+- La NMF de rang deux reconstruit la matrice brute des durées avec une erreur quadratique moyenne de `0.505` secondes carrées par cellule et refuse les entrées standardisées négatives. La LDA produit deux axes finis pour trois étiquettes de système d'exploitation, **sans prétention de classification hors échantillon**. t-SNE avec graine donne un arrangement fini de taille `12 × 2`, mais `transform` renvoie exactement le même arrangement avec une entrée sans rapport de taille `1 × 1`.
+- Le contrôle indépendant numpy/scikit-learn 1.8.0 confirme les distances du carré, le résultat des axes des anneaux, la reconstruction NMF finie, les deux axes LDA et l'embedding t-SNE fini. Ce sont des contrôles d'invariants, pas une égalité des facteurs NMF ni des coordonnées t-SNE entre implémentations. Les hypothèses n'ont pas été consignées avant l'exécution : il s'agit de résultats exploratoires, non de confirmations pré-enregistrées. La CI sur trois systèmes pour la leçon 9 reste à faire.
+
 ## À vérifier
 
 - L'outil `ix_ml_pipeline` de bout en bout : l'ordre de mise à l'échelle du constat 1, l'inférence de tâche du constat 2 sur un fichier CSV, et l'erreur `All rows contain NaN values` pour un fichier avec une colonne texte. Les trois sont lus dans le code, pas exécutés.
@@ -178,3 +190,4 @@ Cela mérite d'être consigné à côté des constats, car les leçons ont surto
 - Si les constats 10 à 19 sont déjà connus en amont : je n'ai toujours pas cherché dans les issues d'IX.
 - La carte d'API compte les déclarations `pub`, pas celles qui sont atteignables ; l'écart entre les deux nombres n'est pas mesuré.
 - Les valeurs affichées par un `println!("{:.6}")` direct plutôt que par `fmt_vec` — l'`intercept -0.000000` de la leçon 8 en est une — portent le même risque de zéro signé et ne sont pas normalisées. Celle-là concordait sur les trois systèmes dans l'exécution 35039180659 ; les autres n'ont pas été recensées.
+- Rejouer les sorties numériques de la leçon 9 sur les CI Linux et macOS ; vérifier que l'erreur NMF et l'écart du quatrième axe RBF s'arrondissent de la même façon. Mesurer séparément l'évolution du temps de t-SNE avant d'en chiffrer le coût.

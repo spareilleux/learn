@@ -1,0 +1,217 @@
+---
+title: "Lesson 2: Guitar techniques"
+description: Chords, bends, slides, hammer-ons and pull-offs, taps, vibrato, muted notes, strokes, rests, tuplets, ties, annotations and articulations in VexTab — what each draws, two annotation traps, and what VexTab cannot write at all.
+sidebar:
+  label: 2. Guitar techniques
+  order: 2
+---
+
+import Chords from '../../../assets/vexflow-vextab/l02-chords.svg';
+import Bends from '../../../assets/vexflow-vextab/l02-bends.svg';
+import Legato from '../../../assets/vexflow-vextab/l02-legato.svg';
+import VibratoMute from '../../../assets/vexflow-vextab/l02-vibrato-mute.svg';
+import Rests from '../../../assets/vexflow-vextab/l02-rests.svg';
+import Tuplets from '../../../assets/vexflow-vextab/l02-tuplets.svg';
+import Annotations from '../../../assets/vexflow-vextab/l02-annotations.svg';
+import AnnotationPitfall from '../../../assets/vexflow-vextab/l02-annotation-pitfall.svg';
+import Articulations from '../../../assets/vexflow-vextab/l02-articulations.svg';
+
+Tablature is for guitarists because it says *how* to play, not only what: which string, which finger does the work, where the pitch bends. This lesson writes the techniques a guitar tab carries, in the order a player meets them, and looks at what the drawing says for each. It ends with what VexTab has no syntax for.
+
+The grammar puts most techniques in one place: between two frets of the same string, before the `/string` ([`vextab.jison:289`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab.jison#L289) and [`vextab.jison:383-392`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab.jison#L383-L392)). `5h7/3` is "fret 5, hammer on to fret 7, both on string 3". The string comes last because it applies to the whole run.
+
+## Chords
+
+A chord is a list of `fret/string` in parentheses, separated by dots. The order inside does not matter.
+
+```vextab
+tabstave notation=true
+notes :q (0/1.1/2.0/3.2/4.3/5) (3/1.0/2.0/3.0/4.2/5.3/6) :h (2/1.3/2.2/3.0/4)
+```
+
+<Chords role="img" aria-label="Three chords on notation and tab: open C, open G and open D, the last as a half note." />
+
+Open C, open G, open D. A string that doesn't sound is simply left out; there is no `x` inside a chord (see [muted notes](#vibrato-muted-notes-and-strokes) for the `X` that exists). The notation stacks the pitches and adds the sharp of the D chord's F♯ by itself.
+
+## Bends
+
+`b` between two frets is a bend: `7b9` bends fret 7 up to the pitch of fret 9, a whole step. A third fret releases it: `7b9b7`. In a chord, each note can bend on its own.
+
+```vextab
+tabstave notation=true
+notes :q 7b9/3 7b9b7/3 :h 10b12/2 | :q 12b14v/1 :h (8/2.7b9b7/3)
+```
+
+<Bends role="img" aria-label="Five bends. The tab shows an arrow labelled Full for each whole-step bend, a second arrow and 'Bend to 7' for each release, and the target frets in parentheses." />
+
+The tab draws an arrow labelled `Full` for a whole step and writes the target fret in parentheses; a release adds a second arrow labelled `Bend to 7`. A half-step bend, `7b8`, is labelled `1/2`. The notation stave shows only the fret you pick; the bend lives on the tab.
+
+## Slides, hammer-ons, pull-offs and taps
+
+`s` is a slide, `h` a hammer-on, `p` a pull-off. `t` before a fret is a tap with the right hand. They chain: `5h7p5` is a trill-like figure picked once.
+
+```vextab
+tabstave notation=true
+notes :8 5h7/3 7p5/3 5h7p5/3 :q 7s9/3 | :8 t12p7p5h7/4 :q 7s5/4 :h 5/5
+```
+
+<Legato role="img" aria-label="Hammer-ons and pull-offs drawn as arcs labelled H and P between frets, slides as a short line labelled sl., and a tap marked T under the tab." />
+
+The arcs and their letters, `H`, `P`, `sl.`, are drawn over the tab, one per pair of frets; the tap's `T` goes under it. A duration can change in the middle of such a run with `:duration:` before the fret, as in the tutorial's `t:16:9s:8:3s:16:0/4`.
+
+## Vibrato, muted notes and strokes
+
+After a fret, before the `/`, a **decorator**: `v` for vibrato, `V` for the grammar's "harsh vibrato", `u` and `d` for up and down strokes. A decorator after a chord's closing parenthesis applies to the chord. A muted note is `X` in place of the fret.
+
+```vextab
+tabstave notation=true
+notes :q 7v/2 8V/1 X/6 X/5 | :8 5d-5u-5d-5u/3 :h (5/2.5/3.5/4)v
+```
+
+<VibratoMute role="img" aria-label="Vibrato drawn as the same wavy line above the tab for v and V. The two muted notes are crosses on the tab, but on the notation stave they are x noteheads above the staff, the first one cut in half by the top edge of the drawing. Down and up strokes are drawn as bow marks under both staves." />
+
+`v` and `V` draw the same line. VexTab asks for the harsh variant only if VexFlow offers it, `if (typeof modifier.setHarsh === 'function')` ([`ArticulationBuilder.ts:635-640`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts#L635-L640)), and VexFlow 5's `Vibrato` has no `setHarsh`: it has `setVibratoCode` for another glyph ([`vibrato.ts:86`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/vibrato.ts#L86)). The test is silent, so `V` falls back to `v`.
+
+Look at the notation of the two muted notes: x-shaped noteheads above the staff, and the first one is cut in half by the top edge of the drawing. For the lexer `X` is not a fret but a note name, in the same class as `A` to `G` ([`vextab.jison:84`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab.jison#L84)), and for a note name the number after the slash is an octave ([`NoteBuilder.ts:264-271`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/NoteBuilder.ts#L264-L271)). `X/5` is drawn where B5 would be, `X/6` an octave higher, where B6 would be: at y = 0 in the SVG, so half of it lies outside. The tab is right; the notation puts a muted low E string on the fifth ledger line above the staff. Chrome draws it at the same place (see the [journal](../journal/)). If the notation matters, keep muted notes out of it: write them on a `tabstave notation=false`, or leave them out.
+
+`d` and `u` are drawn as the bowing signs of string players, ⊓ and V. For strummed chords, the annotation `$.stroke/bd.$` or `$.stroke/bu.$` draws a brush arrow instead ([`ArticulationBuilder.ts:237-259`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts#L237-L259)).
+
+## Rests, tuplets and ties
+
+`##` is a rest in the notation, placed by VexFlow; `#5#` moves it. VexTab turns the number n into the pitch of fret (n + 5) × 2 on the sixth string and hangs the rest there, so each step is a whole tone and `#0#` is the same as `##` ([`NoteBuilder.ts:182-196`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/NoteBuilder.ts#L182-L196)); `#-2#` goes down. On the tab a rest is simply space: VexTab adds a `GhostNote`.
+
+```vextab
+tabstave notation=true
+notes :q 5/3 ## 7/3 ## | :8 5/3 #5# 7/3 #0# :h 5/2
+```
+
+<Rests role="img" aria-label="Quarter rests after two quarter notes, then eighth rests, one raised to position 5." />
+
+`^3^` makes a triplet of the three notes before it; `-` between frets repeats the string for a run of notes.
+
+```vextab
+tabstave notation=true time=4/4
+notes :8 5-7-8/3 ^3^ 5-7-8/2 ^3^ :q 5/1 7/1 | :16 5-7-8-7/1 :8 5/1 :h 7/2
+```
+
+<Tuplets role="img" aria-label="Two eighth-note triplets marked 3, two quarter notes, then sixteenth notes beamed in a group of four." />
+
+`T` between two frets of one string ties them: the second note is held, not picked. Both staves draw an arc between the two notes; the tab still prints the second fret, without a letter over the arc.
+
+```vextab
+tabstave notation=true
+notes :h 5/3 :q 5T5/3 7/3 | :w 5/2
+```
+
+## Annotations
+
+Text between dollar signs attaches to the note before it, under the tab by default; commas separate the texts of several notes. A prefix between dots changes the style: `.big.`, `.medium.`, `.italic.`, or `.Face-size-style.` for any font.
+
+```vextab
+tabstave notation=true
+notes :q (3/5.2/4.0/3.1/2) $Am$ 5/5 $.italic.let ring$ 7/4 $.big.P.M.$ :q 5/3
+```
+
+<Annotations role="img" aria-label="Three annotations under the tab: 'Am', 'let ring' in the same upright serif font as the logo, and 'P.M.' in bold." />
+
+Two things are not what they seem.
+
+**`let ring` is not italic.** VexTab passes `italic` to VexFlow as the third argument of `setFont` ([`ArticulationBuilder.ts:298-302`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts#L298-L302)). In VexFlow 5 the third argument is the weight and the style is the fourth ([`element.ts:392`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/element.ts#L392)), so the SVG says `font-weight="italic"`, which a browser ignores. The `vexflow.com` logo is set the same way ([`ArtistRenderer.ts:265`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArtistRenderer.ts#L265)) and is upright too.
+
+**A chord name can replace a fret.** Annotate three chords with their names:
+
+```vextab
+tabstave notation=true
+notes :q (3/6.2/5.0/4.0/3) $G$ (3/5.2/4.0/3.1/2) $C$ (0/4.2/3.3/2) $D$ :q 0/1
+```
+
+<AnnotationPitfall role="img" aria-label="The chord names G, C and D appear inside the tab, each in place of the fret number of the chord's lowest string, and no annotation is drawn under the tab." />
+
+No text is drawn under the tab. `G`, `C` and `D` took the place of the fret number of each chord's lowest string: the 3 of the G chord's sixth string became `G`. Before making an annotation, VexTab tries to read the text as a note name, `^([A-G])([#@n]{1,2})?(~?)(\d+)?(?:_(\d+)\/(\d+))?$`, and if it matches, it *overrides the fret text* instead ([`ArticulationBuilder.ts:362`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts#L362), used at [line 461](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts#L461)). The feature exists to print a note name on the tab; it catches any major chord named by one letter, and `C#` or `B@` too. `Am` and `G7` don't match and are annotations. Exercise 2 gets the names back.
+
+## Articulations
+
+An annotation of the form `$.a./bottom.$` is an articulation of the notation stave: `a.` staccato, `a>` accent, `a-` tenuto, `a^` marcato, `a@a` and `a@u` fermatas, and a few string signs, placed at `top` or `bottom`.
+
+```vextab
+tabstave notation=true
+notes :q 5/3 $.a./bottom.$ 7/3 $.a>/bottom.$ 5/2 $.a-/bottom.$ :q 7/2 $.a@a/top.$
+```
+
+<Articulations role="img" aria-label="A staccato dot, an accent and a tenuto line under the notes, and a fermata above the last note; the tab repeats them." />
+
+## What VexTab cannot write
+
+The grammar is small, and a few things every tab reader knows have no token:
+
+- **Harmonics.** There is no `<12>` or `*12`; `<` is not a character the lexer knows:
+
+  ```text
+  error Error: Parse error on line 2:
+  ...ation=truenotes :q <12>/3
+  ----------------------^
+  Expecting 'EOF', 'OPTIONS', 'TABSTAVE', 'STAVE', 'VOICE', 'TEXT', 'NOTES', 'SLUR', '=', '[', ']', '|', ':', '(', 'NUMBER', 'h', 'd', 'S', '-', 's', 't', 'T', 'b', 'p', '^', '$', '!', '#', 'ABC', got 'INVALID'
+  ```
+
+- **Palm muting and let ring** as markings with a dashed extent. `PM` fails the same way (`got 'INVALID'` at the `P`); what's left is an annotation on one note, `$.big.P.M.$`, as above.
+- **Grace notes, whammy-bar dips, pre-bends drawn as such, trills over a range.** VexFlow has classes for grace notes and for some of these; VexTab doesn't expose them. That is where lesson 5 starts writing VexFlow directly.
+- **Checks on what you wrote.** A bend to a lower fret, `9b7`, or a hammer-on to the same fret, `5h5`, is drawn without complaint.
+
+## Key takeaways
+
+- Techniques go between two frets of one string: `h`, `p`, `s`, `b`, `t`, `T` and `-`; decorators `v`, `V`, `u`, `d` go after a fret or a chord, and with VexFlow 5 `V` draws what `v` draws.
+- A chord is `(fret/string.fret/string…)`; an `X` in place of a fret is a note name, and its notation lands in the octave of the string's number.
+- Annotations take a style prefix, but `italic` reaches VexFlow 5 as a weight, and a one-letter chord name replaces a fret number.
+- Harmonics and palm muting have no syntax; VexFlow itself is the way out.
+
+## Exercises
+
+1. Write a whole-step bend and release on fret 7 of the G string with vibrato, then a pull-off from 7 to 5 in eighth notes, then fret 7 on the D string and a half note on fret 5 of the D string.
+
+<details>
+<summary>Solution</summary>
+
+```vextab
+tabstave notation=true
+notes :q 7b9b7v/3 :8 7p5/3 7/4 :h 5/4
+```
+
+The vibrato decorator goes after the last fret of the bend, before the `/`. Rendered as [`l02-ex-bend-pull`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/expected/ex/l02-ex-bend-pull.svg).
+
+</details>
+
+2. Make the chord names `G`, `C` and `D` of the trap above appear as annotations under the tab, leaving the fret numbers alone.
+
+<details>
+<summary>Solution</summary>
+
+Anything that stops the text from matching the note-name pattern works. A style prefix does, since the pattern is anchored at the start of the text; so does a trailing space:
+
+```vextab
+tabstave notation=true
+notes :q (3/6.2/5.0/4.0/3) $.big.G$ (3/5.2/4.0/3.1/2) $.italic.C$ (0/4.2/3.3/2) $D $ :q 0/1
+```
+
+The three names are drawn under the tab and the frets stay 3, 3 and 0 ([`l02-ex-chord-names`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/expected/ex/l02-ex-chord-names.svg)). Lesson 3's `text` lines are the cleaner answer for chord names over a whole bar.
+
+</details>
+
+3. Write an eighth-note triplet that picks fret 5 of the G string, hammers on to 7 and pulls off to 5, followed by two eighth notes and a half note, in 4/4.
+
+<details>
+<summary>Solution</summary>
+
+```vextab
+tabstave notation=true time=4/4
+notes :8 5h7p5/3 ^3^ 7/3 5/3 :h 7/4
+```
+
+`^3^` takes the three notes before it, however they are connected. Rendered as [`l02-ex-triplet`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/expected/ex/l02-ex-triplet.svg).
+
+</details>
+
+## Sources
+
+- Mohit Cheppudira, [The VexTab Tutorial](https://vexflow.com/vextab/tutorial.html), steps 5 to 11.
+- vextab at `3a5e00d`: [`src/vextab.jison`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab.jison), [`src/artist/ArticulationBuilder.ts`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts), [`src/artist/NoteBuilder.ts`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/NoteBuilder.ts).
+- VexFlow at `0ca6f88`: [`Element.setFont`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/element.ts#L392).

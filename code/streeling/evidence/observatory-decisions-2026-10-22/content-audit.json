@@ -1,0 +1,1605 @@
+{
+  "schema_version": "1.0",
+  "reviewed_at_utc": "2026-10-22T19:17:54.108713+00:00",
+  "reviewer": "independent course-content audit agent",
+  "verdict": "pass_with_declared_evidence_limits",
+  "scope": "Independent AI content, pedagogy, source-boundary, arithmetic and cross-locale semantic review of nine new CYB005/FUT004/PHI004 pages plus three existing PHY007 image-URL-only amended pages. Covers60 exercise-answer pairs and15 prepared criteria for the three new courses. Not learner, fluent-human, stakeholder, live-renderer, browser-rendering or deployed-HTML approval.",
+  "source_bindings": [
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-005-stop-render-policy-flapping.md",
+      "bytes": 10143,
+      "sha256": "b2d9936c3f7a35103f14cb995033654e4a177e36e43f3b2acd1cf22b45a89a1a"
+    },
+    {
+      "path": "streeling/courses/cybernetics/fr/cyb-005-stop-render-policy-flapping.fr.md",
+      "bytes": 12905,
+      "sha256": "fecfdd0a0dcdbb1c99d86c1520e7ff13c51591080651c55c61f3ea7a496110e3"
+    },
+    {
+      "path": "streeling/courses/cybernetics/es/cyb-005-stop-render-policy-flapping.es.md",
+      "bytes": 12340,
+      "sha256": "f3d5a682f0bfa1d9ffb9ff8004c7f3510dfaff19c1e645fd8df607319b0e4054"
+    },
+    {
+      "path": "streeling/courses/futurology/en/fut-004-scenario-test-an-observatory-renderer.md",
+      "bytes": 8610,
+      "sha256": "232bea032ecec5d8aba1ce2d2e5e0aa0919d24150fec634d7f1b17c6a5790328"
+    },
+    {
+      "path": "streeling/courses/futurology/fr/fut-004-scenario-test-an-observatory-renderer.fr.md",
+      "bytes": 10569,
+      "sha256": "33e6aa0ca25033d8d488428d18c6e1b59d4023094ab798a2d078eb52c20eff3a"
+    },
+    {
+      "path": "streeling/courses/futurology/es/fut-004-scenario-test-an-observatory-renderer.es.md",
+      "bytes": 10158,
+      "sha256": "87c7117b8eb618e7d7a137153fc0142f6224853ce7326da8d777f24148c0b173"
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-004-separate-performance-tradeoffs-from-values.md",
+      "bytes": 9111,
+      "sha256": "ead46e6a3f8afb121833f9ee5d11e2ab7e6f777d668415490bb772ecc0421ef7"
+    },
+    {
+      "path": "streeling/courses/philosophy/fr/phi-004-separate-performance-tradeoffs-from-values.fr.md",
+      "bytes": 10993,
+      "sha256": "3bb18fb4418aa9ce8a2e7e82ff5abd90c138ffd1bf14f6ce8f9c97c23d47a14e"
+    },
+    {
+      "path": "streeling/courses/philosophy/es/phi-004-separate-performance-tradeoffs-from-values.es.md",
+      "bytes": 10474,
+      "sha256": "e0730f3b2e6123327600da3ac0a6d3b40319e95e3ed2afb24651bdafbb85c2b4"
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-007-separate-beating-from-decay.md",
+      "bytes": 8860,
+      "sha256": "81dc95fd7b15249dc32914e41caddfba1ae40922c44472748c50ba30b01ce560"
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-007-separate-beating-from-decay.fr.md",
+      "bytes": 10734,
+      "sha256": "224cdb91aa433ef1b0b188c95ce07cf844d416e805fc4f325c35269698d43803"
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-007-separate-beating-from-decay.es.md",
+      "bytes": 10194,
+      "sha256": "7c32d832d632e01d8a8ee9c7a25b70428853ae499cad783d9fc9a83da8a8c532"
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/experiment-plan.md",
+      "bytes": 6135,
+      "sha256": "09c44ce06edb50763131d371b6b2a06eeaaa875fe0122ce96fa70402b7fd0916"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/primary-readback.json",
+      "bytes": 2150,
+      "sha256": "435044bd594d49b874b7978627696fbc9724e101ac33125c1d19b4298fd2fc75"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/source-controller.json",
+      "bytes": 1507,
+      "sha256": "01646d626ee3e98fd5181df0cb90a916295171a7eee10336189458221d7d6512"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/control-traces.json",
+      "bytes": 24100,
+      "sha256": "2847616ff3fde062031ff40d0c8d832c347344e43616547a7cda8b304b225674"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/scenario-decisions.json",
+      "bytes": 2534,
+      "sha256": "b90a355d4337e2b6cfae3e401cd037cf5d2044879c2d5ccbfb08a06dcacf989a"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/value-tradeoffs.json",
+      "bytes": 2912,
+      "sha256": "5fcdefd9755fb6d8a2d88fd21a714207b9debaf1cfeca972b3b32f7f0d808c55"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/execution.json",
+      "bytes": 1177,
+      "sha256": "28af163d6550d7b508e050a8f3532dab7561c5d7dea192c8abcac0aa407155ff"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/control-state-traces.png",
+      "bytes": 57290,
+      "sha256": "abe594d339328b26b8b02e767a269b6dd642f7df10b75933d7377598837c0ee0"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/two-attribute-options.png",
+      "bytes": 25375,
+      "sha256": "eb30cfbc92ca73c5b7f72c8e1aa6172b1df0f3ac102594bc460b7dbea16cfca8"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/README.md",
+      "bytes": 5385,
+      "sha256": "01d7a7a04b9d59fad8d1dae216f4beff7defb4fd4050fc6c589e0fb066ad9ba2"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/learner-task.md",
+      "bytes": 2889,
+      "sha256": "8c64b176da002f282847a791a8f8fcb7d8f18dd4682c28f9145971ff022a7b96"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/reviewer-rubric.json",
+      "bytes": 3997,
+      "sha256": "73c017b753fad25c4d642ea2074fc547e4423d9daaf64592935c4f2f85a8ed2a"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/official-links.json",
+      "bytes": 4408,
+      "sha256": "4b9ed2756c45c0b06c9ec9353854f840eb5cd660d9aa7a7831952ef09f6b10da"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/data-audit.json",
+      "bytes": 17952,
+      "sha256": "27cd71c27efb5f8539da81bde65a72b6cfe29eebd81fce5f216ab0a3e1dc2aac"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/image-source-readback.json",
+      "bytes": 2642,
+      "sha256": "1a26f400d030090edfc7218b2e64ae1ad029c0e965228f8c79809ec6ebc81a11"
+    },
+    {
+      "path": "code/streeling/evidence/observatory-decisions-2026-10-22/image-link-fixes.json",
+      "bytes": 8090,
+      "sha256": "9be2d6bbb033f5c0ffcbcddcb92f6d2ab12a77051572db02aa1b72a61700eaa4"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/beats.json",
+      "bytes": 2122,
+      "sha256": "dac4a59588f901c7d5f68a1aa86dcb2a3e5b5603f82fd7a488aabc3356ad0fb9"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/audio-assets.json",
+      "bytes": 2802,
+      "sha256": "67b4be3cac59e638685c675f4a413d96bb98bda362f6ff1cc405dfa4b849c872"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/experiment-plan.md",
+      "bytes": 5882,
+      "sha256": "d29645e3645a8fd554f9e386aae15306aee591d5d635cf608d94c472d7f97a36"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/two-tone-envelope.png",
+      "bytes": 183204,
+      "sha256": "1827aa7669136735e73c8d07054fb48527353c297e36a617fb7d1ccdeb25d021"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/tone-a.wav",
+      "bytes": 88244,
+      "sha256": "c75f061087aa80e51a767ca1fbe8297eb6b5020bdc04d2cbbf73aecf1f911153"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/tone-b.wav",
+      "bytes": 88244,
+      "sha256": "fd1d82859b50a6771d56b96176507cd7641039cd35bad70d5b8e0c0722f1a63f"
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/two-tone-illustration.wav",
+      "bytes": 352844,
+      "sha256": "ab931fd23b805edec2a493de17001923762a2583f80fb386f3cf944685a2dd5d"
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/README.md",
+      "bytes": 4704,
+      "sha256": "98e269e0d4f6e99dfe73d20bb3c8bd0a998b2c9b23ea1113a65d8ec697b7bbba"
+    }
+  ],
+  "coverage": {
+    "courses": 4,
+    "new_courses": 3,
+    "amended_existing_courses": 1,
+    "locales": [
+      "en",
+      "fr",
+      "es"
+    ],
+    "source_pages": 12,
+    "new_source_pages": 9,
+    "image_only_amended_source_pages": 3,
+    "exercise_answer_pairs": 60,
+    "new_course_exercise_answer_pairs": 45,
+    "existing_course_exercise_answer_pairs": 15,
+    "learner_tasks": 3,
+    "learner_criteria": 15,
+    "learner_criteria_scope": "Three new courses only; no new PHY007 learner criteria authored."
+  },
+  "exercise_answer_checks": [
+    {
+      "id": "CYB005-en-1",
+      "module": "CYB005",
+      "locale": "en",
+      "source": "streeling/courses/cybernetics/en/cyb-005-stop-render-policy-flapping.md",
+      "exercise": 1,
+      "heading": "Practice exercise 1: apply the strict source guard",
+      "question_sha256": "6f3d3c34d4ba8ba382dc6a29e45cb042d2fc8b4ad8296728991965f36f34dc36",
+      "answer_section_sha256": "53a410178628ae045e7afa4ba001ca359296c5706e4161501af61bd23726f0da",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Strict elapsed >1 holds at2 after last1 and decreases3 to2 at2.001. Configured pt.Length >0 is distinguished from runtime rtxOn; successful query is not numeric validity or active-render attestation.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "CYB005-en-2",
+      "module": "CYB005",
+      "locale": "en",
+      "source": "streeling/courses/cybernetics/en/cyb-005-stop-render-policy-flapping.md",
+      "exercise": 2,
+      "heading": "Practice exercise 2: use the memory in hysteresis",
+      "question_sha256": "61def8c1834197065741e1a4086cbe57d4cbd29eddb5d26fc8943c5cdb065071",
+      "answer_section_sha256": "d21f574219cff1c8547e04bdfcd5e2b9f5d6471e14d9f54168beaa761a557ecb",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "At14ms the low hysteretic state holds because recovery requires <10.4; memoryless <=16 selects high. State, neutral band and no health inference are explicit.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "CYB005-en-3",
+      "module": "CYB005",
+      "locale": "en",
+      "source": "streeling/courses/cybernetics/en/cyb-005-stop-render-policy-flapping.md",
+      "exercise": 3,
+      "heading": "Practice exercise 3: identify which guard blocks a change",
+      "question_sha256": "7626e4f3b82cf774e2b879ae29458c47e1a37956bcf71eda8d0ea9cc12fd991d",
+      "answer_section_sha256": "02920481b1b4ba4fadf18e49058cf92b82e1b8cb1d3c49adb7b50dfa34052479",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Independent replay gives8 versus4 changes and guarded times8,11,14,17. At16 a sufficient streak is blocked by2second dwell, released at17; persistence and dwell remain distinct.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "CYB005-en-4",
+      "module": "CYB005",
+      "locale": "en",
+      "source": "streeling/courses/cybernetics/en/cyb-005-stop-render-policy-flapping.md",
+      "exercise": 4,
+      "heading": "Practice exercise 4: interpret smoothing latency",
+      "question_sha256": "5f0e27e14b2265f332cb805ebae1aa2f831ac35c90680ef44c6f2c3c664b2d14",
+      "answer_section_sha256": "60155cedb5b2e6f8ab54777c30699b325ffbd9e51761430b7a78f5e27d2fbc7f",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Closed-form20*(1-.95^n) first exceeds16 at update32; no update cadence or first-actuation time inferred. Recording frame/60 and elapsed clock time remain distinct.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "CYB005-en-5",
+      "module": "CYB005",
+      "locale": "en",
+      "source": "streeling/courses/cybernetics/en/cyb-005-stop-render-policy-flapping.md",
+      "exercise": 5,
+      "heading": "Practice exercise 5: write a falsifiable next step",
+      "question_sha256": "a9102f38f00f77fda5e908adf0ed7641cfc9000ad2c88b49fbf4cfa845b337fe",
+      "answer_section_sha256": "7cb7f4dd2528a3fc51927c3988ec1b02951a197d4e6a7a12e345b6afaf41fdd7",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Missing reset [17,null,17,17] changes at4; authored invalid handling is separate from source. No-op0changes disproves switch count as sufficient objective; future closed-loop limits are proposed, not claimed achieved.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "CYB005-fr-1",
+      "module": "CYB005",
+      "locale": "fr",
+      "source": "streeling/courses/cybernetics/fr/cyb-005-stop-render-policy-flapping.fr.md",
+      "exercise": 1,
+      "heading": "Exercice pratique 1 : appliquer la garde stricte du code source",
+      "question_sha256": "05e3263a8a48f0f5091f9609677ea0a4050ff8d4b7982f7db5fd01b80e70bd84",
+      "answer_section_sha256": "86495997081aeadad0b9db45a1033788b8beb18165938e1cf8aa79ffe0a8b766",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Strict elapsed >1 holds at2 after last1 and decreases3 to2 at2.001. Configured pt.Length >0 is distinguished from runtime rtxOn; successful query is not numeric validity or active-render attestation.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "CYB005-fr-2",
+      "module": "CYB005",
+      "locale": "fr",
+      "source": "streeling/courses/cybernetics/fr/cyb-005-stop-render-policy-flapping.fr.md",
+      "exercise": 2,
+      "heading": "Exercice pratique 2 : utiliser la mémoire de l’hystérésis",
+      "question_sha256": "8b60612d55afcb37cb9472173a22b2f0112c5fbdbfa4223113edb742b720aa2e",
+      "answer_section_sha256": "898d7079757f518262490d1a290ccd7d60da9a933feee3d8a51201c2d50444de",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "At14ms the low hysteretic state holds because recovery requires <10.4; memoryless <=16 selects high. State, neutral band and no health inference are explicit.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "CYB005-fr-3",
+      "module": "CYB005",
+      "locale": "fr",
+      "source": "streeling/courses/cybernetics/fr/cyb-005-stop-render-policy-flapping.fr.md",
+      "exercise": 3,
+      "heading": "Exercice pratique 3 : trouver la garde qui bloque un changement",
+      "question_sha256": "6d012bb10fdb8468e3c8a22dea0cd4da859cb9709daeacdcf91817f5c5c2c75f",
+      "answer_section_sha256": "335ab75ad9aec03ba8af7776a5236e77d16dba34f4fc6bbfa8977397fd4fd09c",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Independent replay gives8 versus4 changes and guarded times8,11,14,17. At16 a sufficient streak is blocked by2second dwell, released at17; persistence and dwell remain distinct.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "CYB005-fr-4",
+      "module": "CYB005",
+      "locale": "fr",
+      "source": "streeling/courses/cybernetics/fr/cyb-005-stop-render-policy-flapping.fr.md",
+      "exercise": 4,
+      "heading": "Exercice pratique 4 : interpréter le retard du lissage",
+      "question_sha256": "e0faec84d32451dad7b8868538eedb9b2acdeed419778e7ba10a01f9b5a4f9e7",
+      "answer_section_sha256": "4ca16592d2bc3c285ebe513b095d6ea8440c7ce0bea7ce35d60ef767dd295704",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Closed-form20*(1-.95^n) first exceeds16 at update32; no update cadence or first-actuation time inferred. Recording frame/60 and elapsed clock time remain distinct.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "CYB005-fr-5",
+      "module": "CYB005",
+      "locale": "fr",
+      "source": "streeling/courses/cybernetics/fr/cyb-005-stop-render-policy-flapping.fr.md",
+      "exercise": 5,
+      "heading": "Exercice pratique 5 : formuler une prochaine étape réfutable",
+      "question_sha256": "64ddf8d0a272dcea132b37d0bae1d8ca7a3ff738b4ed1caa95cec3c34b8c06fd",
+      "answer_section_sha256": "547947a4360a843d5b458e76144658a83c0fa51ab2f3087d6b32e18dfaab579c",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Missing reset [17,null,17,17] changes at4; authored invalid handling is separate from source. No-op0changes disproves switch count as sufficient objective; future closed-loop limits are proposed, not claimed achieved.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "CYB005-es-1",
+      "module": "CYB005",
+      "locale": "es",
+      "source": "streeling/courses/cybernetics/es/cyb-005-stop-render-policy-flapping.es.md",
+      "exercise": 1,
+      "heading": "Ejercicio práctico 1: aplicar la condición estricta del código fuente",
+      "question_sha256": "9cae38136504ebc2589f2b37351b17ad15f2786826392b40d22a4111f3b89d1b",
+      "answer_section_sha256": "21e6e1e7b3cc4765a5719a47a915dce39b363f7e2e4594cffa8d04a57583fec1",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Strict elapsed >1 holds at2 after last1 and decreases3 to2 at2.001. Configured pt.Length >0 is distinguished from runtime rtxOn; successful query is not numeric validity or active-render attestation.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "CYB005-es-2",
+      "module": "CYB005",
+      "locale": "es",
+      "source": "streeling/courses/cybernetics/es/cyb-005-stop-render-policy-flapping.es.md",
+      "exercise": 2,
+      "heading": "Ejercicio práctico 2: usar la memoria de la histéresis",
+      "question_sha256": "7cf54ee4b101fa8733cf1241a2f1ff21a8509580416d3545b060fd38093e5ae7",
+      "answer_section_sha256": "73dfdb4214b87625aaa7579ae08fd06fe93adec86018e787f8aef89d9c7ab3f1",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "At14ms the low hysteretic state holds because recovery requires <10.4; memoryless <=16 selects high. State, neutral band and no health inference are explicit.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "CYB005-es-3",
+      "module": "CYB005",
+      "locale": "es",
+      "source": "streeling/courses/cybernetics/es/cyb-005-stop-render-policy-flapping.es.md",
+      "exercise": 3,
+      "heading": "Ejercicio práctico 3: identificar qué condición bloquea un cambio",
+      "question_sha256": "5a2e75cd7bf55d7b3bdce34b2441e7970229f0bb85a55adf358b6cfc7b52774d",
+      "answer_section_sha256": "296c927bbe4275bf1be4508c75c06e7413e34cf9ca73e8591d3816d77fa96fd3",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Independent replay gives8 versus4 changes and guarded times8,11,14,17. At16 a sufficient streak is blocked by2second dwell, released at17; persistence and dwell remain distinct.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "CYB005-es-4",
+      "module": "CYB005",
+      "locale": "es",
+      "source": "streeling/courses/cybernetics/es/cyb-005-stop-render-policy-flapping.es.md",
+      "exercise": 4,
+      "heading": "Ejercicio práctico 4: interpretar la latencia del suavizado",
+      "question_sha256": "6dd38252dc59fd2e05815c71fd4719e07fb162efb075b191692c6ef4887177ed",
+      "answer_section_sha256": "e4d35cb7a058d096019464d989ce0402940e9fc7218cbd0482e940813e2a89e5",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Closed-form20*(1-.95^n) first exceeds16 at update32; no update cadence or first-actuation time inferred. Recording frame/60 and elapsed clock time remain distinct.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "CYB005-es-5",
+      "module": "CYB005",
+      "locale": "es",
+      "source": "streeling/courses/cybernetics/es/cyb-005-stop-render-policy-flapping.es.md",
+      "exercise": 5,
+      "heading": "Ejercicio práctico 5: redactar un siguiente paso refutable",
+      "question_sha256": "32d2992944fc9affe7c4c1981634b6ba6880bcf5a45ec96a3a670cc2be228de9",
+      "answer_section_sha256": "ecb6b11dd2b57e91809e5f85cf5561f74c2206052c511b7bb0e2cd271c1b7e39",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Missing reset [17,null,17,17] changes at4; authored invalid handling is separate from source. No-op0changes disproves switch count as sufficient objective; future closed-loop limits are proposed, not claimed achieved.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "FUT004-en-1",
+      "module": "FUT004",
+      "locale": "en",
+      "source": "streeling/courses/futurology/en/fut-004-scenario-test-an-observatory-renderer.md",
+      "exercise": 1,
+      "heading": "Practice exercise 1: identify the unsupported inference",
+      "question_sha256": "b413f89d9c1fe73dfcbcc478da456b81ce7175fe5583476dc924fc87a974411d",
+      "answer_section_sha256": "5d072753cc3bbb71784626677cdae0b68de10a4c83fbbecf787ab7ed3e5f10ed",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "The loss scale is explicitly authored/comparable cardinal points. Scenario listing supplies neither measured GPU consequences nor probabilities; strategy names do not attest installed implementations.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "FUT004-en-2",
+      "module": "FUT004",
+      "locale": "en",
+      "source": "streeling/courses/futurology/en/fut-004-scenario-test-an-observatory-renderer.md",
+      "exercise": 2,
+      "heading": "Practice exercise 2: reconstruct the criterion",
+      "question_sha256": "646e777c923d42365402097a7bf7b5d9f4f1619c80c4c52b3b02b55c2d1d8d2b",
+      "answer_section_sha256": "1a743861a7be09a25d996fe3d6bfc082d9b9e75ef606ffb0ba617bd0d9f1ab42",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Independent column minima[3,0,5] yield regret rowsC[0,6,1],P[5,0,9],A[1,3,0] and maxima6/9/3. A is conditional minimax-regret choice, not a universal robustness guarantee.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "FUT004-en-3",
+      "module": "FUT004",
+      "locale": "en",
+      "source": "streeling/courses/futurology/en/fut-004-scenario-test-an-observatory-renderer.md",
+      "exercise": 3,
+      "heading": "Practice exercise 3: explain the changed choice",
+      "question_sha256": "7c7dc746026e65fcc1c31799b7ec7772774554b60eea6fab4fd52ade4fe449fe",
+      "answer_section_sha256": "0bd80475d92ed9c60fd92822da113a32d8ba719b6e632af564688ae6289a98e0",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Stipulated probabilities[.1,.8,.1] give expected losses5.7/2.2/3.3, selectingP; different criterion/premises explain difference without empirical frequency claims.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "FUT004-en-4",
+      "module": "FUT004",
+      "locale": "en",
+      "source": "streeling/courses/futurology/en/fut-004-scenario-test-an-observatory-renderer.md",
+      "exercise": 4,
+      "heading": "Practice exercise 4: derive the crossover",
+      "question_sha256": "5b624af77ab8575a5605cfed1baa009b31be96c08ac8cfe690b2f91a9d18a59c",
+      "answer_section_sha256": "3588c9e2412a2e37a5ae204d865e26653a37e99dac510e36a9966b818ee1d112",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Affine expected losses and P/A crossover13/19 are correct conditional algebra. They do not estimate probabilities; p0 retains C/A tie.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "FUT004-en-5",
+      "module": "FUT004",
+      "locale": "en",
+      "source": "streeling/courses/futurology/en/fut-004-scenario-test-an-observatory-renderer.md",
+      "exercise": 5,
+      "heading": "Practice exercise 5: write the next investigation",
+      "question_sha256": "a01bd439524e2d3641a222ffb961afa87b1411744e33141eca66293b6bfb0360",
+      "answer_section_sha256": "87304832e8c0355c9dc6e3392bf0e862954e3cc4afbbcec6da64ad29f88967f3",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Invented adapter-unavailable loss4/10/20 adds regret0/6/16, changes maxima to6/9/16 and selection toC. Revisit/reject triggers remain bounded and scenario coverage incomplete; historical follow-up remains inconclusive.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "FUT004-fr-1",
+      "module": "FUT004",
+      "locale": "fr",
+      "source": "streeling/courses/futurology/fr/fut-004-scenario-test-an-observatory-renderer.fr.md",
+      "exercise": 1,
+      "heading": "Exercice pratique 1 : repérer l’inférence non étayée",
+      "question_sha256": "174bf8e3b54b53b073470ece0375ae88f7cf0a32d5af23dc243c09217e0babe7",
+      "answer_section_sha256": "7dd13e8e08454cc087fa907c712d07f3c2511bca45699632bb11e13c2e06873b",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "The loss scale is explicitly authored/comparable cardinal points. Scenario listing supplies neither measured GPU consequences nor probabilities; strategy names do not attest installed implementations.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "FUT004-fr-2",
+      "module": "FUT004",
+      "locale": "fr",
+      "source": "streeling/courses/futurology/fr/fut-004-scenario-test-an-observatory-renderer.fr.md",
+      "exercise": 2,
+      "heading": "Exercice pratique 2 : reconstruire le critère",
+      "question_sha256": "b4b7f6451b429e9f01fb2bd289c52273ca437fff815a4bb00bff63be8a5492c0",
+      "answer_section_sha256": "25b0083351052f8e9268a72f495e00c4bae9f10760c4261c6a4451ccf94f4413",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Independent column minima[3,0,5] yield regret rowsC[0,6,1],P[5,0,9],A[1,3,0] and maxima6/9/3. A is conditional minimax-regret choice, not a universal robustness guarantee.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "FUT004-fr-3",
+      "module": "FUT004",
+      "locale": "fr",
+      "source": "streeling/courses/futurology/fr/fut-004-scenario-test-an-observatory-renderer.fr.md",
+      "exercise": 3,
+      "heading": "Exercice pratique 3 : expliquer le changement de choix",
+      "question_sha256": "293f452aeb977dc450a7121e79e20614a6212609ea679fa47bfea3897f1192a5",
+      "answer_section_sha256": "1a9527a9e223f9b15694e38e89caf6072080230178e1b56eaf598721e085de11",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Stipulated probabilities[.1,.8,.1] give expected losses5.7/2.2/3.3, selectingP; different criterion/premises explain difference without empirical frequency claims.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "FUT004-fr-4",
+      "module": "FUT004",
+      "locale": "fr",
+      "source": "streeling/courses/futurology/fr/fut-004-scenario-test-an-observatory-renderer.fr.md",
+      "exercise": 4,
+      "heading": "Exercice pratique 4 : calculer le point de croisement",
+      "question_sha256": "ba117dc37aef8f38addc969be5b395af98f780dc9f6f93fbf099ef647bd07a38",
+      "answer_section_sha256": "88533e5b20aa73b37a6e27165aa6860a8b66a7c10392efd6e95dd06ad40f070b",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Affine expected losses and P/A crossover13/19 are correct conditional algebra. They do not estimate probabilities; p0 retains C/A tie.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "FUT004-fr-5",
+      "module": "FUT004",
+      "locale": "fr",
+      "source": "streeling/courses/futurology/fr/fut-004-scenario-test-an-observatory-renderer.fr.md",
+      "exercise": 5,
+      "heading": "Exercice pratique 5 : définir la prochaine investigation",
+      "question_sha256": "4732e2958dac11554b7fd77af9b2e780351cc787303130d1c88fa359b335c7d1",
+      "answer_section_sha256": "7b44cf59c024a5a21f629cbe7dcbf3caba7c92e18a7c1e591341141f37fbd27d",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Invented adapter-unavailable loss4/10/20 adds regret0/6/16, changes maxima to6/9/16 and selection toC. Revisit/reject triggers remain bounded and scenario coverage incomplete; historical follow-up remains inconclusive.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "FUT004-es-1",
+      "module": "FUT004",
+      "locale": "es",
+      "source": "streeling/courses/futurology/es/fut-004-scenario-test-an-observatory-renderer.es.md",
+      "exercise": 1,
+      "heading": "Ejercicio práctico 1: identificar la inferencia sin respaldo",
+      "question_sha256": "f4a7f2433c06eacf46b5b1eb3bb109a11a8d6a26c274cc9dc03a524671e704cc",
+      "answer_section_sha256": "c6ac0b8049f01a7ded4bd8e7740d6729d845ca94f87232d8d82333253dafdefa",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "The loss scale is explicitly authored/comparable cardinal points. Scenario listing supplies neither measured GPU consequences nor probabilities; strategy names do not attest installed implementations.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "FUT004-es-2",
+      "module": "FUT004",
+      "locale": "es",
+      "source": "streeling/courses/futurology/es/fut-004-scenario-test-an-observatory-renderer.es.md",
+      "exercise": 2,
+      "heading": "Ejercicio práctico 2: reconstruir el criterio",
+      "question_sha256": "829c44aaed6e745f4027be532920879f3da9a523aa8296998f2c20d8d0773124",
+      "answer_section_sha256": "57188f0ce821c66d0d464f29ea86138cc4e31139f6e69a47deea42bffdfa40ff",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Independent column minima[3,0,5] yield regret rowsC[0,6,1],P[5,0,9],A[1,3,0] and maxima6/9/3. A is conditional minimax-regret choice, not a universal robustness guarantee.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "FUT004-es-3",
+      "module": "FUT004",
+      "locale": "es",
+      "source": "streeling/courses/futurology/es/fut-004-scenario-test-an-observatory-renderer.es.md",
+      "exercise": 3,
+      "heading": "Ejercicio práctico 3: explicar el cambio de decisión",
+      "question_sha256": "cbaca1ac5fe167cd29a31fa61a8c61a866b16fa1174dbdb5af8bf678938d1115",
+      "answer_section_sha256": "a1896baeb329e392396ccaf02e6d98d6505cf77118b11929ae366f674a96af49",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Stipulated probabilities[.1,.8,.1] give expected losses5.7/2.2/3.3, selectingP; different criterion/premises explain difference without empirical frequency claims.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "FUT004-es-4",
+      "module": "FUT004",
+      "locale": "es",
+      "source": "streeling/courses/futurology/es/fut-004-scenario-test-an-observatory-renderer.es.md",
+      "exercise": 4,
+      "heading": "Ejercicio práctico 4: obtener el punto de cruce",
+      "question_sha256": "ae9c51b8dba8a4b6cdab72aac01582771244f30ee0fa1e058d6203be9b26c6d3",
+      "answer_section_sha256": "30a160b5e8d08637c1ce12cda3fc9b704a435e517a9804f6c48f99cdad26e324",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Affine expected losses and P/A crossover13/19 are correct conditional algebra. They do not estimate probabilities; p0 retains C/A tie.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "FUT004-es-5",
+      "module": "FUT004",
+      "locale": "es",
+      "source": "streeling/courses/futurology/es/fut-004-scenario-test-an-observatory-renderer.es.md",
+      "exercise": 5,
+      "heading": "Ejercicio práctico 5: redactar la siguiente investigación",
+      "question_sha256": "adde4c1d88e4584a74b3c22e335d1714a34bf8e6e27cf0e339fc0f932e126da3",
+      "answer_section_sha256": "92e26e2d4680a1e6253cc8727f64af9f8233e72b80079cab266fdb34c7a79423",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Invented adapter-unavailable loss4/10/20 adds regret0/6/16, changes maxima to6/9/16 and selection toC. Revisit/reject triggers remain bounded and scenario coverage incomplete; historical follow-up remains inconclusive.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "PHI004-en-1",
+      "module": "PHI004",
+      "locale": "en",
+      "source": "streeling/courses/philosophy/en/phi-004-separate-performance-tradeoffs-from-values.md",
+      "exercise": 1,
+      "heading": "Practice exercise 1: expose the missing premise",
+      "question_sha256": "ae354062bb9607c1030f722dfaa13eab8a6d4fef66a5a1dc980e880b53789fd5",
+      "answer_section_sha256": "40e1ffa04614e5c73eff632b95d600f22d9edf7f75299cfb170ed114c109b100",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Highest authored detail95 does not establish empirical consequences, stakeholder preferences or decision authority. A missing value premise is correctly exposed.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "PHI004-en-2",
+      "module": "PHI004",
+      "locale": "en",
+      "source": "streeling/courses/philosophy/en/phi-004-separate-performance-tradeoffs-from-values.md",
+      "exercise": 2,
+      "heading": "Practice exercise 2: distinguish elimination from selection",
+      "question_sha256": "0ea0fa81eae5ee9467d6b5263d1501d410a3c0d8da8f2f8fea46e6f2c4a1e858",
+      "answer_section_sha256": "b5a1cf77331f0a9ada78e4dab6b28b3003e40c9132c1f6b6b63f9aa65840a404",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "L/B dominateW and L/B/H remain nondominated in the two declared attributes. No unique selection or omitted-attribute guarantee is inferred.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "PHI004-en-3",
+      "module": "PHI004",
+      "locale": "en",
+      "source": "streeling/courses/philosophy/en/phi-004-separate-performance-tradeoffs-from-values.md",
+      "exercise": 3,
+      "heading": "Practice exercise 3: reveal a unit error",
+      "question_sha256": "41f346c36128cb48a12d6bad88b3b1f819dfbf9d8382cdd367ff4e3120f8f992",
+      "answer_section_sha256": "93f7b218e1b7a7add1191b1844eb2058af8e1cff0f753d8f2e7060430c986a58",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "All U=D-lambda*O scores and choicesH/B/L at.5/2/6 independently checked. Cardinal/exchange-rate assumptions and units explicit;2points/ms converts to2000points/s; wrong2points/s selectsH. Tie weights10/7 and5 correct.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "PHI004-en-4",
+      "module": "PHI004",
+      "locale": "en",
+      "source": "streeling/courses/philosophy/en/phi-004-separate-performance-tradeoffs-from-values.md",
+      "exercise": 4,
+      "heading": "Practice exercise 4: apply feasibility before ranking",
+      "question_sha256": "a8e99b16de9f8670ca075bd7d51e742f0119f7176fadf5a46894d2d6df5a78a1",
+      "answer_section_sha256": "99f4f9c73d1dfba1277cd89220b05d600216f7e6d67031bf5eadbe33390b5372",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Authored O<=6ms feasibility precedes scoring; L/B feasible, B wins at.5. Compensation/averaging cannot silently remove stated hard constraint; adjacent-task overhead differs from source GPU frame time.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "PHI004-en-5",
+      "module": "PHI004",
+      "locale": "en",
+      "source": "streeling/courses/philosophy/en/phi-004-separate-performance-tradeoffs-from-values.md",
+      "exercise": 5,
+      "heading": "Practice exercise 5: write a justified recommendation",
+      "question_sha256": "d67f8f4bd063e459f15e121e3c79f98d5ea7b3ae7224197c209d259c40b26d88",
+      "answer_section_sha256": "3eee08c64cd6621fd4ec9db2165895443e7920ed76a3287f378818d94345caa8",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Recommendation separates empirical, value and authority premises, omitted interests and model falsifier. Arithmetic is not benchmark evidence, ethical mandate, elicited preference or authority to change runtime.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "PHI004-fr-1",
+      "module": "PHI004",
+      "locale": "fr",
+      "source": "streeling/courses/philosophy/fr/phi-004-separate-performance-tradeoffs-from-values.fr.md",
+      "exercise": 1,
+      "heading": "Exercice pratique 1 : révéler l’hypothèse manquante",
+      "question_sha256": "a1d686cde31025fbf5c27b6aa35c5d3caa088bd4c68849dfda94b7dc08c64ab6",
+      "answer_section_sha256": "bd8230e41ba2715dcdc09b863a8c06033d45e32cb7fd58aef51e9fc2729db5f7",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Highest authored detail95 does not establish empirical consequences, stakeholder preferences or decision authority. A missing value premise is correctly exposed.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "PHI004-fr-2",
+      "module": "PHI004",
+      "locale": "fr",
+      "source": "streeling/courses/philosophy/fr/phi-004-separate-performance-tradeoffs-from-values.fr.md",
+      "exercise": 2,
+      "heading": "Exercice pratique 2 : distinguer l’élimination de la sélection",
+      "question_sha256": "e8c64d23013819395145e92e4d2df589c3901454b4790e40395ce7f42f8cb4f9",
+      "answer_section_sha256": "932c691fa3712d52e810a8835378518d66f0d3d34fceffb37159c8e7e9a2ec79",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "L/B dominateW and L/B/H remain nondominated in the two declared attributes. No unique selection or omitted-attribute guarantee is inferred.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "PHI004-fr-3",
+      "module": "PHI004",
+      "locale": "fr",
+      "source": "streeling/courses/philosophy/fr/phi-004-separate-performance-tradeoffs-from-values.fr.md",
+      "exercise": 3,
+      "heading": "Exercice pratique 3 : révéler une erreur d’unité",
+      "question_sha256": "c275701760b255e980ebda4b8564f92a40a6fc5ea1f0302f00a29ab28ca5ab64",
+      "answer_section_sha256": "f903027079aa54bce932edcf5697c67aa407ccaa79c05a1bec1a338a8a49c9de",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "All U=D-lambda*O scores and choicesH/B/L at.5/2/6 independently checked. Cardinal/exchange-rate assumptions and units explicit;2points/ms converts to2000points/s; wrong2points/s selectsH. Tie weights10/7 and5 correct.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "PHI004-fr-4",
+      "module": "PHI004",
+      "locale": "fr",
+      "source": "streeling/courses/philosophy/fr/phi-004-separate-performance-tradeoffs-from-values.fr.md",
+      "exercise": 4,
+      "heading": "Exercice pratique 4 : vérifier l’admissibilité avant de classer",
+      "question_sha256": "7e3c88699fd805927a646e672ad2993ec3d1045a09ee4837740a613451b4d999",
+      "answer_section_sha256": "f3dc6d699d9ed1290bab1b6e0c96add593eb10b34f5d7663ec0328dc0d82a864",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Authored O<=6ms feasibility precedes scoring; L/B feasible, B wins at.5. Compensation/averaging cannot silently remove stated hard constraint; adjacent-task overhead differs from source GPU frame time.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "PHI004-fr-5",
+      "module": "PHI004",
+      "locale": "fr",
+      "source": "streeling/courses/philosophy/fr/phi-004-separate-performance-tradeoffs-from-values.fr.md",
+      "exercise": 5,
+      "heading": "Exercice pratique 5 : rédiger une recommandation justifiée",
+      "question_sha256": "146c391f219225707c1227618c634bfde12ecf2c207b41811aa0be33603082b4",
+      "answer_section_sha256": "c6bd02ad68601dfda2f07180da2281a875aa96a2c02b04be13afef00ae4d4a2c",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Recommendation separates empirical, value and authority premises, omitted interests and model falsifier. Arithmetic is not benchmark evidence, ethical mandate, elicited preference or authority to change runtime.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "PHI004-es-1",
+      "module": "PHI004",
+      "locale": "es",
+      "source": "streeling/courses/philosophy/es/phi-004-separate-performance-tradeoffs-from-values.es.md",
+      "exercise": 1,
+      "heading": "Ejercicio práctico 1: exponer la premisa ausente",
+      "question_sha256": "13da97f356a7e6f64dd4f69ec19a2bf0dc65bc04f0b479fdddf1e89cc45f920e",
+      "answer_section_sha256": "2c8d66192b13d71b683815c1c4bdf4407e61ed1fbc8485140774febd17a471fe",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Highest authored detail95 does not establish empirical consequences, stakeholder preferences or decision authority. A missing value premise is correctly exposed.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "PHI004-es-2",
+      "module": "PHI004",
+      "locale": "es",
+      "source": "streeling/courses/philosophy/es/phi-004-separate-performance-tradeoffs-from-values.es.md",
+      "exercise": 2,
+      "heading": "Ejercicio práctico 2: distinguir la eliminación de la selección",
+      "question_sha256": "3034d9fcf25e75a80a431103ade78ecdd287fb55c4204f383be06daef224c49f",
+      "answer_section_sha256": "ef8ce840e26604a2133ee6d07dd3f9f9566d6282cd83affc1cadbd3c2491069f",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "L/B dominateW and L/B/H remain nondominated in the two declared attributes. No unique selection or omitted-attribute guarantee is inferred.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "PHI004-es-3",
+      "module": "PHI004",
+      "locale": "es",
+      "source": "streeling/courses/philosophy/es/phi-004-separate-performance-tradeoffs-from-values.es.md",
+      "exercise": 3,
+      "heading": "Ejercicio práctico 3: revelar un error de unidades",
+      "question_sha256": "8acf725f5920d740a5fd87224669092f8966682db9f60bb655f5c9ec013c43ff",
+      "answer_section_sha256": "ceaaa332ecd7a0e72652a7f6ec1f30dd2065a5b20644d1ff5c83d34c79fb6233",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "All U=D-lambda*O scores and choicesH/B/L at.5/2/6 independently checked. Cardinal/exchange-rate assumptions and units explicit;2points/ms converts to2000points/s; wrong2points/s selectsH. Tie weights10/7 and5 correct.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "PHI004-es-4",
+      "module": "PHI004",
+      "locale": "es",
+      "source": "streeling/courses/philosophy/es/phi-004-separate-performance-tradeoffs-from-values.es.md",
+      "exercise": 4,
+      "heading": "Ejercicio práctico 4: aplicar la factibilidad antes de clasificar",
+      "question_sha256": "16ca4e407cd7b54df253e8c7522fc9ff8cc85720e40f79252834f95879ba2eed",
+      "answer_section_sha256": "4a497c2f0489c45336e087e01cd46e6f1b31c52ea4e6b00800d9ae4d78e50937",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Authored O<=6ms feasibility precedes scoring; L/B feasible, B wins at.5. Compensation/averaging cannot silently remove stated hard constraint; adjacent-task overhead differs from source GPU frame time.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "PHI004-es-5",
+      "module": "PHI004",
+      "locale": "es",
+      "source": "streeling/courses/philosophy/es/phi-004-separate-performance-tradeoffs-from-values.es.md",
+      "exercise": 5,
+      "heading": "Ejercicio práctico 5: redactar una recomendación justificada",
+      "question_sha256": "75809ffaaa1985cbee232474d9884c929b1aa24b476c41f0457c87b8fb818a07",
+      "answer_section_sha256": "80cffd0c564c521d2fa196580257a68cb03bb9734e721a11c4c9610780c24b04",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Recommendation separates empirical, value and authority premises, omitted interests and model falsifier. Arithmetic is not benchmark evidence, ethical mandate, elicited preference or authority to change runtime.",
+      "pass": true,
+      "change_scope": "new-course"
+    },
+    {
+      "id": "PHY007-en-1",
+      "module": "PHY007",
+      "locale": "en",
+      "source": "streeling/courses/physics/en/phy-007-separate-beating-from-decay.md",
+      "change_scope": "existing-course-image-url-only",
+      "exercise": 1,
+      "heading": "Practice exercise 1: name the measured recurrence",
+      "question_sha256": "5d7cf15deac1e6f608d33dc0eb13ffdf2e6f407826359c9b36a018cd26f13aac",
+      "answer_section_sha256": "c50e00a7a3e3e42140751ce739860e1afa7d493a61f17855816c65a3e5f4b920",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "From the fixed frequencies, T=1/abs(delta)=.3852673329409085seconds; signed modulator abs(delta)/2=1.2978001435608064Hz differs from unsigned-envelope2.595600287121613Hz recurrence. The answer retains the absolute-value/phase distinction.",
+      "pass": true
+    },
+    {
+      "id": "PHY007-en-2",
+      "module": "PHY007",
+      "locale": "en",
+      "source": "streeling/courses/physics/en/phy-007-separate-beating-from-decay.md",
+      "change_scope": "existing-course-image-url-only",
+      "exercise": 2,
+      "heading": "Practice exercise 2: reject an unsupported damping conclusion",
+      "question_sha256": "4b0e0aa13a9c815cdd733a96e279cbb0913547aa027d36b6f11a6a007cb46d09",
+      "answer_section_sha256": "eb53d6c915cc5319909605a149b10c8c23922be99d80679bb8a992f8392d691d",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Both mathematical components remain amplitude.125; initial cancellation recovers atT without exponential component damping. Selected falling interval cannot establish a physical-guitar mechanism or energy loss.",
+      "pass": true
+    },
+    {
+      "id": "PHY007-en-3",
+      "module": "PHY007",
+      "locale": "en",
+      "source": "streeling/courses/physics/en/phy-007-separate-beating-from-decay.md",
+      "change_scope": "existing-course-image-url-only",
+      "exercise": 3,
+      "heading": "Practice exercise 3: interpret the comparison",
+      "question_sha256": "86bb22c868a59ef47f1423a606838b9bfe850adeef6c14f56b62b580a54fc1b1",
+      "answer_section_sha256": "7492470187dcbc90b009128b387e02e7664f6b086988cac00b20760c9a3b2831",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Independent sampled20ms/ceil-half-open RMS replay reproduces dip-26.357732142785096dB,recovery+.0003730713746869126dB,equal-frequency control+.00008742925692068016dB. Predeclared10dB/1dB criteria pass only for constructed comparison.",
+      "pass": true
+    },
+    {
+      "id": "PHY007-en-4",
+      "module": "PHY007",
+      "locale": "en",
+      "source": "streeling/courses/physics/en/phy-007-separate-beating-from-decay.md",
+      "change_scope": "existing-course-image-url-only",
+      "exercise": 4,
+      "heading": "Practice exercise 4: choose the appropriate asset",
+      "question_sha256": "9d07b631d11ebf120f6bb43cba921fa3f9ea1e5ea2e046401c4575564c0efaa1",
+      "answer_section_sha256": "4fd3bd14e34fa2291c649b2e39371f429054d85e7fd7d272f896ba3a6e0a5267",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Mixture4seconds and sequential1second tone pair serve different questions. WAV hashes/monoPCM16/fs44100/sample counts/decoded RMS independently checked without playback. Numeric RMS preparation is not perceived-loudness equality or calibrated playback.",
+      "pass": true
+    },
+    {
+      "id": "PHY007-en-5",
+      "module": "PHY007",
+      "locale": "en",
+      "source": "streeling/courses/physics/en/phy-007-separate-beating-from-decay.md",
+      "change_scope": "existing-course-image-url-only",
+      "exercise": 5,
+      "heading": "Practice exercise 5: bound the agent's revision",
+      "question_sha256": "c9a3009d40d053c946370a914038a850bcb0c978c3bd17249ec93b8caac873b2",
+      "answer_section_sha256": "6be94525b9be900848d6ee32a2b4e9f4a4299b0a78523d12f3be88e2a0d027a6",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Earlier recorded candidate improvement.114166150dB remains below required1dB and failed. Constructed interference counterexample neither changes prior samples/verdict nor establishes actual physical cause or perceptual benefit.",
+      "pass": true
+    },
+    {
+      "id": "PHY007-fr-1",
+      "module": "PHY007",
+      "locale": "fr",
+      "source": "streeling/courses/physics/fr/phy-007-separate-beating-from-decay.fr.md",
+      "change_scope": "existing-course-image-url-only",
+      "exercise": 1,
+      "heading": "Exercice pratique 1 : nommer la récurrence mesurée",
+      "question_sha256": "197a0c966b55da349aa00a9a9f0e7946e05e6f6d1563a640abd9259304f977d0",
+      "answer_section_sha256": "1ca176ddbf7d7e46fa66b72c20dc6ed31d28059aeef888a277075b3510a5966e",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "From the fixed frequencies, T=1/abs(delta)=.3852673329409085seconds; signed modulator abs(delta)/2=1.2978001435608064Hz differs from unsigned-envelope2.595600287121613Hz recurrence. The answer retains the absolute-value/phase distinction.",
+      "pass": true
+    },
+    {
+      "id": "PHY007-fr-2",
+      "module": "PHY007",
+      "locale": "fr",
+      "source": "streeling/courses/physics/fr/phy-007-separate-beating-from-decay.fr.md",
+      "change_scope": "existing-course-image-url-only",
+      "exercise": 2,
+      "heading": "Exercice pratique 2 : rejeter une conclusion d’amortissement non étayée",
+      "question_sha256": "5a044d0185f0a9dd3b55f242825a29d20066e9b77993e0d8d9bbf23a186c73bf",
+      "answer_section_sha256": "ac16317c6a6145276a1ef03015c4de53ca8fc1b524e667dcb9d02adfb4251914",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Both mathematical components remain amplitude.125; initial cancellation recovers atT without exponential component damping. Selected falling interval cannot establish a physical-guitar mechanism or energy loss.",
+      "pass": true
+    },
+    {
+      "id": "PHY007-fr-3",
+      "module": "PHY007",
+      "locale": "fr",
+      "source": "streeling/courses/physics/fr/phy-007-separate-beating-from-decay.fr.md",
+      "change_scope": "existing-course-image-url-only",
+      "exercise": 3,
+      "heading": "Exercice pratique 3 : interpréter la comparaison",
+      "question_sha256": "36467c786e1bd5da5dbaa35546de51adecb49d09c69de304c82b206a44ae2b75",
+      "answer_section_sha256": "eb92e186554c8e4807029cd31c1ceb4b87404879674d0b531cd0445d35fd44ac",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Independent sampled20ms/ceil-half-open RMS replay reproduces dip-26.357732142785096dB,recovery+.0003730713746869126dB,equal-frequency control+.00008742925692068016dB. Predeclared10dB/1dB criteria pass only for constructed comparison.",
+      "pass": true
+    },
+    {
+      "id": "PHY007-fr-4",
+      "module": "PHY007",
+      "locale": "fr",
+      "source": "streeling/courses/physics/fr/phy-007-separate-beating-from-decay.fr.md",
+      "change_scope": "existing-course-image-url-only",
+      "exercise": 4,
+      "heading": "Exercice pratique 4 : choisir le fichier adapté",
+      "question_sha256": "34b3222cf017c3ea4837fca7a243e5b6e31ce603ee624f6b6e13ab7acce05b41",
+      "answer_section_sha256": "1ed81e0ac58692813783e0e89c47c3f1957e0cfd368c35b045d5986c8d127903",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Mixture4seconds and sequential1second tone pair serve different questions. WAV hashes/monoPCM16/fs44100/sample counts/decoded RMS independently checked without playback. Numeric RMS preparation is not perceived-loudness equality or calibrated playback.",
+      "pass": true
+    },
+    {
+      "id": "PHY007-fr-5",
+      "module": "PHY007",
+      "locale": "fr",
+      "source": "streeling/courses/physics/fr/phy-007-separate-beating-from-decay.fr.md",
+      "change_scope": "existing-course-image-url-only",
+      "exercise": 5,
+      "heading": "Exercice pratique 5 : délimiter la révision de l’agent",
+      "question_sha256": "49855111736ba28174249285ce9a504ca6a7b6e15fd068e5c5f9599d2adb446d",
+      "answer_section_sha256": "02114ac89d3f70a7662c185b7881193d7d4b56c3011b0fdf13e14e1a9fb106cb",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Earlier recorded candidate improvement.114166150dB remains below required1dB and failed. Constructed interference counterexample neither changes prior samples/verdict nor establishes actual physical cause or perceptual benefit.",
+      "pass": true
+    },
+    {
+      "id": "PHY007-es-1",
+      "module": "PHY007",
+      "locale": "es",
+      "source": "streeling/courses/physics/es/phy-007-separate-beating-from-decay.es.md",
+      "change_scope": "existing-course-image-url-only",
+      "exercise": 1,
+      "heading": "Ejercicio práctico 1: nombrar la recurrencia medida",
+      "question_sha256": "28223784a16c7d1016b36b751aff8e48dff1cc6d2df30ce6208a2f5639ab4a19",
+      "answer_section_sha256": "3868a2b570959d06b7f64f5369fff2cc4b0fcf3d9181ec30fca189da8f42d96c",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "From the fixed frequencies, T=1/abs(delta)=.3852673329409085seconds; signed modulator abs(delta)/2=1.2978001435608064Hz differs from unsigned-envelope2.595600287121613Hz recurrence. The answer retains the absolute-value/phase distinction.",
+      "pass": true
+    },
+    {
+      "id": "PHY007-es-2",
+      "module": "PHY007",
+      "locale": "es",
+      "source": "streeling/courses/physics/es/phy-007-separate-beating-from-decay.es.md",
+      "change_scope": "existing-course-image-url-only",
+      "exercise": 2,
+      "heading": "Ejercicio práctico 2: rechazar una conclusión de amortiguamiento sin respaldo",
+      "question_sha256": "c505cd86667f8e0929677272ed9acd9669f34197cb50ca04935714a652190e33",
+      "answer_section_sha256": "51e0de87f5c2d525626c08b641be67d82991dd8c33ddfa8f46df370dbb628cbf",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Both mathematical components remain amplitude.125; initial cancellation recovers atT without exponential component damping. Selected falling interval cannot establish a physical-guitar mechanism or energy loss.",
+      "pass": true
+    },
+    {
+      "id": "PHY007-es-3",
+      "module": "PHY007",
+      "locale": "es",
+      "source": "streeling/courses/physics/es/phy-007-separate-beating-from-decay.es.md",
+      "change_scope": "existing-course-image-url-only",
+      "exercise": 3,
+      "heading": "Ejercicio práctico 3: interpretar la comparación",
+      "question_sha256": "1fb86935e78869fb9e4979d86cac14112df4e35f944472b903b0fa89e1e90ef8",
+      "answer_section_sha256": "3e91a8d41d129b90f0b7e579f7eb3b7bdec81f04c8c9bb50daa12194dc65eb62",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Independent sampled20ms/ceil-half-open RMS replay reproduces dip-26.357732142785096dB,recovery+.0003730713746869126dB,equal-frequency control+.00008742925692068016dB. Predeclared10dB/1dB criteria pass only for constructed comparison.",
+      "pass": true
+    },
+    {
+      "id": "PHY007-es-4",
+      "module": "PHY007",
+      "locale": "es",
+      "source": "streeling/courses/physics/es/phy-007-separate-beating-from-decay.es.md",
+      "change_scope": "existing-course-image-url-only",
+      "exercise": 4,
+      "heading": "Ejercicio práctico 4: elegir el archivo adecuado",
+      "question_sha256": "9828c359c1895eb7281de3edf3faaa8f1fbd227ea18245df37a97e34495a086f",
+      "answer_section_sha256": "df32f2da037a9fb41bbc8b1e6efde87d6fa7c92b4bdbbfea4913db47820da371",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Mixture4seconds and sequential1second tone pair serve different questions. WAV hashes/monoPCM16/fs44100/sample counts/decoded RMS independently checked without playback. Numeric RMS preparation is not perceived-loudness equality or calibrated playback.",
+      "pass": true
+    },
+    {
+      "id": "PHY007-es-5",
+      "module": "PHY007",
+      "locale": "es",
+      "source": "streeling/courses/physics/es/phy-007-separate-beating-from-decay.es.md",
+      "change_scope": "existing-course-image-url-only",
+      "exercise": 5,
+      "heading": "Ejercicio práctico 5: acotar la revisión del agente",
+      "question_sha256": "38c85784c6eabde0c6b09b86ebe85e97777b3d9a11087e9e80e3bc1a896dd1b1",
+      "answer_section_sha256": "edbb9f0387528ac39e2b5c3c0f7e92a231d0f73df2b3f83e8ec86772ca389de2",
+      "substantive_question": true,
+      "corrected_answer": true,
+      "semantic_and_evidence_check": "Earlier recorded candidate improvement.114166150dB remains below required1dB and failed. Constructed interference counterexample neither changes prior samples/verdict nor establishes actual physical cause or perceptual benefit.",
+      "pass": true
+    }
+  ],
+  "learner_criterion_checks": [
+    {
+      "id": "CYB005-criterion-1",
+      "module": "CYB005",
+      "criterion": 1,
+      "criterion_text": "Applies source elapsed>1second strictly: at2 after last1 hold3 bounces, at2.001 decrease to2 if query success/configured --pt variant/smooth17>budget16; distinguishes configured variant from separate runtime rtxOn toggle, unavailable query from successful numeric validation, and elapsed clock passage.",
+      "criterion_text_sha256": "b739c83c167715323e4b1f32b25a52d9b2650c07e48d37f3c0d8f2540533372d",
+      "course_and_task_alignment": "Strict elapsed >1 holds at2 after last1 and decreases3 to2 at2.001. Configured pt.Length >0 is distinguished from runtime rtxOn; successful query is not numeric validity or active-render attestation.",
+      "prepared_assessment_is_substantive": true,
+      "outcome_claimed": false,
+      "pass": true
+    },
+    {
+      "id": "CYB005-criterion-2",
+      "module": "CYB005",
+      "criterion": 2,
+      "criterion_text": "Explains low setting retains at14ms in10.4..16 neutral band while memoryless rule selects high; differentiates hysteresis, persistence and dwell, source3levels/.05smoothing/>1second versus authored2states/2observations/>=3seconds.",
+      "criterion_text_sha256": "adeb2c2cd6c04880f43e29b5bf679b827f8bc7e394c17b1d9600ec4203f83233",
+      "course_and_task_alignment": "At14ms the low hysteretic state holds because recovery requires <10.4; memoryless <=16 selects high. State, neutral band and no health inference are explicit.",
+      "prepared_assessment_is_substantive": true,
+      "outcome_claimed": false,
+      "pass": true
+    },
+    {
+      "id": "CYB005-criterion-3",
+      "module": "CYB005",
+      "criterion": 3,
+      "criterion_text": "Recomputes naive8 changes at2,3,4,5,7,9,13,15 and guarded4 at8,11,14,17; at16 sufficient recovery streak is blocked by2second dwell, with continuing streak released at17.",
+      "criterion_text_sha256": "dc13863798d7483efd6aa004fa05543b28e1c0a443737c419fcdd48dc8928cb8",
+      "course_and_task_alignment": "Independent replay gives8 versus4 changes and guarded times8,11,14,17. At16 a sufficient streak is blocked by2second dwell, released at17; persistence and dwell remain distinct.",
+      "prepared_assessment_is_substantive": true,
+      "outcome_claimed": false,
+      "pass": true
+    },
+    {
+      "id": "CYB005-criterion-4",
+      "module": "CYB005",
+      "criterion": 4,
+      "criterion_text": "Derives20*(1-.95^n), first strict16ms crossing at update32, and refuses wall-clock/first-actuation inference without cadence/guards; distinguishes recording frame/60 timeline from elapsed clock.",
+      "criterion_text_sha256": "e1ce116cec29432cd9bd38bd85af156ebf6c13cd092c114b75c5c11aa95fa4b7",
+      "course_and_task_alignment": "Closed-form20*(1-.95^n) first exceeds16 at update32; no update cadence or first-actuation time inferred. Recording frame/60 and elapsed clock time remain distinct.",
+      "prepared_assessment_is_substantive": true,
+      "outcome_claimed": false,
+      "pass": true
+    },
+    {
+      "id": "CYB005-criterion-5",
+      "module": "CYB005",
+      "criterion": 5,
+      "criterion_text": "Derives reset control[17,null,17,17] switching at4, invalid authored input handling and no-op0changes responsiveness failure; proposes bounded quality/response/adjacent-task comparison with rejection limits and no claimed live benefit.",
+      "criterion_text_sha256": "419666811794074a794aa4c137dec9abf68d20b066ed75c727dd7e59cd031ce7",
+      "course_and_task_alignment": "Missing reset [17,null,17,17] changes at4; authored invalid handling is separate from source. No-op0changes disproves switch count as sufficient objective; future closed-loop limits are proposed, not claimed achieved.",
+      "prepared_assessment_is_substantive": true,
+      "outcome_claimed": false,
+      "pass": true
+    },
+    {
+      "id": "FUT004-criterion-1",
+      "module": "FUT004",
+      "criterion": 1,
+      "criterion_text": "Separates authored comparable cardinal loss points from measured hardware outcomes and stipulated probabilities from listed scenarios; treats strategy labels as hypothetical, not certified renderer modes.",
+      "criterion_text_sha256": "eddaade71d29998ee147778f525b540d4dfe4e95042db677c70eff8a44691164",
+      "course_and_task_alignment": "The loss scale is explicitly authored/comparable cardinal points. Scenario listing supplies neither measured GPU consequences nor probabilities; strategy names do not attest installed implementations.",
+      "prepared_assessment_is_substantive": true,
+      "outcome_claimed": false,
+      "pass": true
+    },
+    {
+      "id": "FUT004-criterion-2",
+      "module": "FUT004",
+      "criterion": 2,
+      "criterion_text": "Derives per-state minima[3,0,5], regret rows C[0,6,1],P[5,0,9],A[1,3,0], max6/9/3 and A under the declared minimax-regret criterion, not universal robustness.",
+      "criterion_text_sha256": "eec545dd5e9aef2ee07603580a019f5a298d1a95c83d503fa0e4ac085de119ad",
+      "course_and_task_alignment": "Independent column minima[3,0,5] yield regret rowsC[0,6,1],P[5,0,9],A[1,3,0] and maxima6/9/3. A is conditional minimax-regret choice, not a universal robustness guarantee.",
+      "prepared_assessment_is_substantive": true,
+      "outcome_claimed": false,
+      "pass": true
+    },
+    {
+      "id": "FUT004-criterion-3",
+      "module": "FUT004",
+      "criterion": 3,
+      "criterion_text": "Computes expected losses5.7/2.2/3.3 under[.1,.8,.1], selects P and explains criterion/probability-premise differences without claiming empirical frequencies.",
+      "criterion_text_sha256": "6f5603daf0c8e578783b04576ea3a3552211c34569620ae9191d56f72c66bed7",
+      "course_and_task_alignment": "Stipulated probabilities[.1,.8,.1] give expected losses5.7/2.2/3.3, selectingP; different criterion/premises explain difference without empirical frequency claims.",
+      "prepared_assessment_is_substantive": true,
+      "outcome_claimed": false,
+      "pass": true
+    },
+    {
+      "id": "FUT004-criterion-4",
+      "module": "FUT004",
+      "criterion": 4,
+      "criterion_text": "Derives expected expressions4.5+1.5p,11-11p,4.5-1.5p and crossover13/19; interprets pairwise conditional boundary, not forecast, retaining C/A tie atp0.",
+      "criterion_text_sha256": "e6c37d9b60f49583f96754b0e9a530eb5c093602ebfdedf3a2eeded15a4effd7",
+      "course_and_task_alignment": "Affine expected losses and P/A crossover13/19 are correct conditional algebra. They do not estimate probabilities; p0 retains C/A tie.",
+      "prepared_assessment_is_substantive": true,
+      "outcome_claimed": false,
+      "pass": true
+    },
+    {
+      "id": "FUT004-criterion-5",
+      "module": "FUT004",
+      "criterion": 5,
+      "criterion_text": "Adds adapter-unavailable losses4/10/20, derives new regrets0/6/16 and maxima6/9/16 selecting C; states measured availability/workload/objective revisit triggers and failure criteria while retaining historical inconclusive status and nonexhaustive future coverage.",
+      "criterion_text_sha256": "aa207e4a35d8700cbfeca3148b2d2f1ec6a5901326ab5cf383c93b111ee64c72",
+      "course_and_task_alignment": "Invented adapter-unavailable loss4/10/20 adds regret0/6/16, changes maxima to6/9/16 and selection toC. Revisit/reject triggers remain bounded and scenario coverage incomplete; historical follow-up remains inconclusive.",
+      "prepared_assessment_is_substantive": true,
+      "outcome_claimed": false,
+      "pass": true
+    },
+    {
+      "id": "PHI004-criterion-1",
+      "module": "PHI004",
+      "criterion": 1,
+      "criterion_text": "Identifies authored D/O attributes and missing empirical/user-preference evidence; separates empirical consequences, value priorities and authority rather than deriving best/ethical choice from the highest detail number.",
+      "criterion_text_sha256": "68bcca0dc5b10a3b3ae53d5bc89e3e2e0d355e4c267a7faaef5a665dadfa5f41",
+      "course_and_task_alignment": "Highest authored detail95 does not establish empirical consequences, stakeholder preferences or decision authority. A missing value premise is correctly exposed.",
+      "prepared_assessment_is_substantive": true,
+      "outcome_claimed": false,
+      "pass": true
+    },
+    {
+      "id": "PHI004-criterion-2",
+      "module": "PHI004",
+      "criterion": 2,
+      "criterion_text": "Derives W dominated by L/B and nondominated L/B/H, with no unique selection or guarantee under omitted attributes.",
+      "criterion_text_sha256": "690e801e167b39da870381bd37493d0bac02c601d1fd47052fbaa3e159eb578a",
+      "course_and_task_alignment": "L/B dominateW and L/B/H remain nondominated in the two declared attributes. No unique selection or omitted-attribute guarantee is inferred.",
+      "prepared_assessment_is_substantive": true,
+      "outcome_claimed": false,
+      "pass": true
+    },
+    {
+      "id": "PHI004-criterion-3",
+      "module": "PHI004",
+      "criterion": 3,
+      "criterion_text": "Computes score choices H/B/L forweights.5/2/6 and ties10/7,5; states cardinal/constant-exchange assumptions and units, converting2points/ms to2000points/s while erroneous2points/s selectsH.",
+      "criterion_text_sha256": "daa2ab3ae5b4db67ed65cc365c2e9768e89b26319e65fb3acf94512c1d6bdef0",
+      "course_and_task_alignment": "All U=D-lambda*O scores and choicesH/B/L at.5/2/6 independently checked. Cardinal/exchange-rate assumptions and units explicit;2points/ms converts to2000points/s; wrong2points/s selectsH. Tie weights10/7 and5 correct.",
+      "prepared_assessment_is_substantive": true,
+      "outcome_claimed": false,
+      "pass": true
+    },
+    {
+      "id": "PHI004-criterion-4",
+      "module": "PHI004",
+      "criterion": 4,
+      "criterion_text": "Applies hypothetical O<=6ms before scoring, retaining L/B and selectingB atweight.5; keeps hard constraints from compensatory averaging and distinguishes adjacent-task overhead from source GPU time/budget.",
+      "criterion_text_sha256": "6d77926405d381d1afdc54df6eb16438b3897397550ea1b15cc0ca6dd60f0c25",
+      "course_and_task_alignment": "Authored O<=6ms feasibility precedes scoring; L/B feasible, B wins at.5. Compensation/averaging cannot silently remove stated hard constraint; adjacent-task overhead differs from source GPU frame time.",
+      "prepared_assessment_is_substantive": true,
+      "outcome_claimed": false,
+      "pass": true
+    },
+    {
+      "id": "PHI004-criterion-5",
+      "module": "PHI004",
+      "criterion": 5,
+      "criterion_text": "Writes bounded recommendation with empirical, stakeholder-value and authority premises; notes consent/accessibility/privacy/omitted interests and a falsifier for the simplified model without ethical mandate, actual preference elicitation or live policy change.",
+      "criterion_text_sha256": "b2e7d58ba8990f0edbc2dbabae3986c445b5de2465f4b3e33e515282e9bfa6e1",
+      "course_and_task_alignment": "Recommendation separates empirical, value and authority premises, omitted interests and model falsifier. Arithmetic is not benchmark evidence, ethical mandate, elicited preference or authority to change runtime.",
+      "prepared_assessment_is_substantive": true,
+      "outcome_claimed": false,
+      "pass": true
+    }
+  ],
+  "locale_checks": [
+    {
+      "module": "CYB005",
+      "locale": "en",
+      "exercise_answer_pairs": 5,
+      "metadata_except_localized_course_equal": true,
+      "href_inline_code_numeric_parity": true,
+      "prerequisite_ids_exist": true,
+      "semantic_review": "AI read of all prose/exercises; not fluent-language human approval",
+      "pass": true
+    },
+    {
+      "module": "CYB005",
+      "locale": "fr",
+      "exercise_answer_pairs": 5,
+      "metadata_except_localized_course_equal": true,
+      "href_inline_code_numeric_parity": true,
+      "prerequisite_ids_exist": true,
+      "semantic_review": "AI read of all prose/exercises; not fluent-language human approval",
+      "pass": true
+    },
+    {
+      "module": "CYB005",
+      "locale": "es",
+      "exercise_answer_pairs": 5,
+      "metadata_except_localized_course_equal": true,
+      "href_inline_code_numeric_parity": true,
+      "prerequisite_ids_exist": true,
+      "semantic_review": "AI read of all prose/exercises; not fluent-language human approval",
+      "pass": true
+    },
+    {
+      "module": "FUT004",
+      "locale": "en",
+      "exercise_answer_pairs": 5,
+      "metadata_except_localized_course_equal": true,
+      "href_inline_code_numeric_parity": true,
+      "prerequisite_ids_exist": true,
+      "semantic_review": "AI read of all prose/exercises; not fluent-language human approval",
+      "pass": true
+    },
+    {
+      "module": "FUT004",
+      "locale": "fr",
+      "exercise_answer_pairs": 5,
+      "metadata_except_localized_course_equal": true,
+      "href_inline_code_numeric_parity": true,
+      "prerequisite_ids_exist": true,
+      "semantic_review": "AI read of all prose/exercises; not fluent-language human approval",
+      "pass": true
+    },
+    {
+      "module": "FUT004",
+      "locale": "es",
+      "exercise_answer_pairs": 5,
+      "metadata_except_localized_course_equal": true,
+      "href_inline_code_numeric_parity": true,
+      "prerequisite_ids_exist": true,
+      "semantic_review": "AI read of all prose/exercises; not fluent-language human approval",
+      "pass": true
+    },
+    {
+      "module": "PHI004",
+      "locale": "en",
+      "exercise_answer_pairs": 5,
+      "metadata_except_localized_course_equal": true,
+      "href_inline_code_numeric_parity": true,
+      "prerequisite_ids_exist": true,
+      "semantic_review": "AI read of all prose/exercises; not fluent-language human approval",
+      "pass": true
+    },
+    {
+      "module": "PHI004",
+      "locale": "fr",
+      "exercise_answer_pairs": 5,
+      "metadata_except_localized_course_equal": true,
+      "href_inline_code_numeric_parity": true,
+      "prerequisite_ids_exist": true,
+      "semantic_review": "AI read of all prose/exercises; not fluent-language human approval",
+      "pass": true
+    },
+    {
+      "module": "PHI004",
+      "locale": "es",
+      "exercise_answer_pairs": 5,
+      "metadata_except_localized_course_equal": true,
+      "href_inline_code_numeric_parity": true,
+      "prerequisite_ids_exist": true,
+      "semantic_review": "AI read of all prose/exercises; not fluent-language human approval",
+      "pass": true
+    },
+    {
+      "module": "PHY007",
+      "locale": "en",
+      "change_scope": "existing-course-image-url-only",
+      "exercise_answer_pairs": 5,
+      "metadata_except_localized_course_equal": true,
+      "href_inline_code_numeric_parity": true,
+      "prerequisite_ids_exist": true,
+      "semantic_review": "AI read of all prose/exercises and exact image-only diff; not fluent-language human approval",
+      "pass": true
+    },
+    {
+      "module": "PHY007",
+      "locale": "fr",
+      "change_scope": "existing-course-image-url-only",
+      "exercise_answer_pairs": 5,
+      "metadata_except_localized_course_equal": true,
+      "href_inline_code_numeric_parity": true,
+      "prerequisite_ids_exist": true,
+      "semantic_review": "AI read of all prose/exercises and exact image-only diff; not fluent-language human approval",
+      "pass": true
+    },
+    {
+      "module": "PHY007",
+      "locale": "es",
+      "change_scope": "existing-course-image-url-only",
+      "exercise_answer_pairs": 5,
+      "metadata_except_localized_course_equal": true,
+      "href_inline_code_numeric_parity": true,
+      "prerequisite_ids_exist": true,
+      "semantic_review": "AI read of all prose/exercises and exact image-only diff; not fluent-language human approval",
+      "pass": true
+    }
+  ],
+  "source_and_primary_reading_checks": [
+    {
+      "name": "pinned_actual_source",
+      "pass": true,
+      "evidence": "Read immutable Git Program.cs at76efbffd5af82b46c3146957a6bd4504008eeb89, including adaptive success branch and declarations. No mutable checkout source substituted."
+    },
+    {
+      "name": "configured_variant_and_runtime_toggle",
+      "pass": true,
+      "evidence": "Physical-device GetFeatures2 feeds rtx = !--no-rtx && RayQuery && AccelerationStructure && BufferDeviceAddress. pt is rtx && --pt; adaptive branch tests pt.Length>0. rtxOn separately initializes/toggles and gates rendering parameter, not adaptive decision."
+    },
+    {
+      "name": "controller_scope_and_validity",
+      "pass": true,
+      "evidence": "Source strict>1second/.05EMA/1..3 bounces differs from authored>=3seconds/2observations/2states. Unavailable query skips block assignments while clock advances; no explicit finite/nonnegative validation inside inspected block."
+    },
+    {
+      "name": "historical_coexistence",
+      "pass": true,
+      "evidence": "Read pinned M3 report: two controls drop and one uncapped drops. No new GPU test or upgraded causal verdict inferred."
+    },
+    {
+      "name": "official_primary_pages",
+      "pass": true,
+      "evidence": "Independently browsed MathWorks Relay, RAND RDM and SEP Decision Theory. Brief course paraphrases supported. Direct403 records for first two are kept distinct from readable browsing content. RAND workflow not equated with small minimax example."
+    },
+    {
+      "name": "figures",
+      "pass": true,
+      "evidence": "Viewed both PNGs. Control observations/thresholds/post-step states agree with fixed examples; attribute coordinates L(2,70),B(5,85),H(12,95),W(8,70), boundary6ms and labels agree. Captions identify authored inputs/decisions, not measured continuous plant response or quality."
+    },
+    {
+      "name": "independent_arithmetic",
+      "pass": true,
+      "evidence": "Executed independent calculator replay for guarded rows/change times, exact-rational EMA crossing, regret minima/maxima, assumed expectations, utility scores and exact ties; no source-controller/runtime run."
+    },
+    {
+      "name": "assessment_design",
+      "pass": true,
+      "evidence": "All60 exercise-answer pairs require substantive calculation or evidence/decision reasoning:45 in9new pages,15 in3image-only amended PHY007 pages. Three prepared new-course tasks and15criteria align; no participant results invented."
+    },
+    {
+      "name": "hypothesis_vs_requirement",
+      "pass": true,
+      "evidence": "Authored thresholds, losses, probabilities, utility weights and constraint remain advisory premises. Costs, simpler alternatives, falsifiers and revisit/rejection triggers are stated without ratifying production policy."
+    },
+    {
+      "name": "external_links_prerequisites",
+      "pass": true,
+      "evidence": "All8 unique new-course external URLs present in official-links. Three amended PHY007 sources separately retain linked OpenStax primary reading and now reference the immutable prior PNG. All4module prerequisites exist; href/inline/numeric parity checked across locales. Direct403 versus successful browsing distinctions preserved."
+    },
+    {
+      "name": "immutable_image_delivery",
+      "pass": true,
+      "evidence": "Independently anonymously fetched all3 raw URLs:200image/png, Pillow PNG dimensions/decoder valid, bytes identical to named immutable Git blobs and local originals. Separately fetched GitHubblob negative control:200text/html rejected as image. This checks delivery bytes, not browser/deployed course rendering."
+    },
+    {
+      "name": "image_only_diff_boundaries",
+      "pass": true,
+      "evidence": "All9link-fix before/after hashes independently reconstructed. Six new-page inverse replacements reproduce previously reviewed source hashes;3PHY007 inverse replacements exactly equal0e1080569fb174d7867eebc9248f4fc9193aa5a8 source blobs. Prose, metadata, exercises and image bytes unchanged."
+    },
+    {
+      "name": "phy007_extended_review",
+      "pass": true,
+      "evidence": "Read all3PHY007 pages and fixed beat/asset/plan/prior-gate records; viewed PNG; independent sampled oscillator/RMS arithmetic and PCM metadata/hash checks support15corrected pairs. Independently read OpenStax common cosine/beat identity; no third-party prose/media copied and no playback, new engine run or physical diagnosis performed."
+    }
+  ],
+  "resolved_findings": [
+    {
+      "issue": "Initial CYB005 wording could conflate configured pt variant with active runtime rendering.",
+      "resolution": "Root corrected EN, source boundary, task/rubric and translator corrected FR/ES. Final pages explicitly separate capability/argument configuration, pt.Length guard and rtxOn runtime toggle. Refreshed data audit independently checks the same boundary."
+    },
+    {
+      "issue": "Relative Markdown image targets were rewritten by generator to GitHub blob HTML rather than image bytes.",
+      "resolution": "Nine source image targets now point to immutable raw PNGs already publicly committed. Actual MIME/decoder/exact-byte positive checks and a200HTML negative control distinguish valid image delivery. Generated HTML image checks remain a separate root integration gate."
+    }
+  ],
+  "findings": [],
+  "limits": [
+    "Review covers12bound source pages:9new pages and3existing image-only amended pages;60pairs in total.",
+    "Fifteen prepared learner criteria concern the3new courses only; prior PHY007 criteria/outcomes are not replaced or newly claimed.",
+    "Human/fluent/learner/stakeholder/live outcomes remain unperformed; AI review and immutable image byte delivery do not prove them.",
+    "Synthetic control inputs and hypothetical scenario/attribute scales do not establish GPU, quality, adjacent-task or universal policy outcomes.",
+    "PHY007 constructed beats and numeric audio preparation establish no physical diagnosis, perception result or reversal of prior failed engine criterion.",
+    "Image readback verifies3immutable raw PNGs and rejects HTML; browser rendering, generated-page checks and public deployed HTML remain distinct verification stages."
+  ],
+  "human_technical_review": null,
+  "fluent_language_review": {
+    "en": null,
+    "fr": null,
+    "es": null
+  },
+  "learner_outcome": null,
+  "learner_transfer": null,
+  "live_control_outcome": null,
+  "rendered_quality_outcome": null,
+  "stakeholder_preferences": null,
+  "deployed_html_outcome": null,
+  "change_scopes": {
+    "new_course_sources": [
+      "streeling/courses/cybernetics/en/cyb-005-stop-render-policy-flapping.md",
+      "streeling/courses/cybernetics/fr/cyb-005-stop-render-policy-flapping.fr.md",
+      "streeling/courses/cybernetics/es/cyb-005-stop-render-policy-flapping.es.md",
+      "streeling/courses/futurology/en/fut-004-scenario-test-an-observatory-renderer.md",
+      "streeling/courses/futurology/fr/fut-004-scenario-test-an-observatory-renderer.fr.md",
+      "streeling/courses/futurology/es/fut-004-scenario-test-an-observatory-renderer.es.md",
+      "streeling/courses/philosophy/en/phi-004-separate-performance-tradeoffs-from-values.md",
+      "streeling/courses/philosophy/fr/phi-004-separate-performance-tradeoffs-from-values.fr.md",
+      "streeling/courses/philosophy/es/phi-004-separate-performance-tradeoffs-from-values.es.md"
+    ],
+    "image_only_amended_existing_sources": [
+      "streeling/courses/physics/en/phy-007-separate-beating-from-decay.md",
+      "streeling/courses/physics/fr/phy-007-separate-beating-from-decay.fr.md",
+      "streeling/courses/physics/es/phy-007-separate-beating-from-decay.es.md"
+    ],
+    "prior_existing_source_commit": "0e1080569fb174d7867eebc9248f4fc9193aa5a8",
+    "immutable_new_image_asset_commit": "218a2bffc18fe2251956197e882cb6c7ea5d7962"
+  },
+  "image_link_checks": [
+    {
+      "path": "streeling/courses/cybernetics/en/cyb-005-stop-render-policy-flapping.md",
+      "scope": "new-course-image-url",
+      "prior_content_commit": null,
+      "exactly_one_image_target_changed": true,
+      "prose_metadata_exercises_unchanged": true,
+      "immutable_image_url": "https://raw.githubusercontent.com/spareilleux/learn/218a2bffc18fe2251956197e882cb6c7ea5d7962/code/streeling/evidence/observatory-decisions-2026-10-22/control-state-traces.png",
+      "pass": true
+    },
+    {
+      "path": "streeling/courses/cybernetics/fr/cyb-005-stop-render-policy-flapping.fr.md",
+      "scope": "new-course-image-url",
+      "prior_content_commit": null,
+      "exactly_one_image_target_changed": true,
+      "prose_metadata_exercises_unchanged": true,
+      "immutable_image_url": "https://raw.githubusercontent.com/spareilleux/learn/218a2bffc18fe2251956197e882cb6c7ea5d7962/code/streeling/evidence/observatory-decisions-2026-10-22/control-state-traces.png",
+      "pass": true
+    },
+    {
+      "path": "streeling/courses/cybernetics/es/cyb-005-stop-render-policy-flapping.es.md",
+      "scope": "new-course-image-url",
+      "prior_content_commit": null,
+      "exactly_one_image_target_changed": true,
+      "prose_metadata_exercises_unchanged": true,
+      "immutable_image_url": "https://raw.githubusercontent.com/spareilleux/learn/218a2bffc18fe2251956197e882cb6c7ea5d7962/code/streeling/evidence/observatory-decisions-2026-10-22/control-state-traces.png",
+      "pass": true
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-004-separate-performance-tradeoffs-from-values.md",
+      "scope": "new-course-image-url",
+      "prior_content_commit": null,
+      "exactly_one_image_target_changed": true,
+      "prose_metadata_exercises_unchanged": true,
+      "immutable_image_url": "https://raw.githubusercontent.com/spareilleux/learn/218a2bffc18fe2251956197e882cb6c7ea5d7962/code/streeling/evidence/observatory-decisions-2026-10-22/two-attribute-options.png",
+      "pass": true
+    },
+    {
+      "path": "streeling/courses/philosophy/fr/phi-004-separate-performance-tradeoffs-from-values.fr.md",
+      "scope": "new-course-image-url",
+      "prior_content_commit": null,
+      "exactly_one_image_target_changed": true,
+      "prose_metadata_exercises_unchanged": true,
+      "immutable_image_url": "https://raw.githubusercontent.com/spareilleux/learn/218a2bffc18fe2251956197e882cb6c7ea5d7962/code/streeling/evidence/observatory-decisions-2026-10-22/two-attribute-options.png",
+      "pass": true
+    },
+    {
+      "path": "streeling/courses/philosophy/es/phi-004-separate-performance-tradeoffs-from-values.es.md",
+      "scope": "new-course-image-url",
+      "prior_content_commit": null,
+      "exactly_one_image_target_changed": true,
+      "prose_metadata_exercises_unchanged": true,
+      "immutable_image_url": "https://raw.githubusercontent.com/spareilleux/learn/218a2bffc18fe2251956197e882cb6c7ea5d7962/code/streeling/evidence/observatory-decisions-2026-10-22/two-attribute-options.png",
+      "pass": true
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-007-separate-beating-from-decay.md",
+      "scope": "existing-course-image-url-only",
+      "prior_content_commit": "0e1080569fb174d7867eebc9248f4fc9193aa5a8",
+      "exactly_one_image_target_changed": true,
+      "prose_metadata_exercises_unchanged": true,
+      "immutable_image_url": "https://raw.githubusercontent.com/spareilleux/learn/0e1080569fb174d7867eebc9248f4fc9193aa5a8/code/streeling/evidence/intonation-listening-2026-10-22/two-tone-envelope.png",
+      "pass": true
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-007-separate-beating-from-decay.fr.md",
+      "scope": "existing-course-image-url-only",
+      "prior_content_commit": "0e1080569fb174d7867eebc9248f4fc9193aa5a8",
+      "exactly_one_image_target_changed": true,
+      "prose_metadata_exercises_unchanged": true,
+      "immutable_image_url": "https://raw.githubusercontent.com/spareilleux/learn/0e1080569fb174d7867eebc9248f4fc9193aa5a8/code/streeling/evidence/intonation-listening-2026-10-22/two-tone-envelope.png",
+      "pass": true
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-007-separate-beating-from-decay.es.md",
+      "scope": "existing-course-image-url-only",
+      "prior_content_commit": "0e1080569fb174d7867eebc9248f4fc9193aa5a8",
+      "exactly_one_image_target_changed": true,
+      "prose_metadata_exercises_unchanged": true,
+      "immutable_image_url": "https://raw.githubusercontent.com/spareilleux/learn/0e1080569fb174d7867eebc9248f4fc9193aa5a8/code/streeling/evidence/intonation-listening-2026-10-22/two-tone-envelope.png",
+      "pass": true
+    }
+  ]
+}

@@ -18,10 +18,11 @@ sidebar:
 - [x] Leçon 6 : LadybugDB depuis Java
 - [x] Leçon 7 : algorithmes de graphe et recherche plein texte
 - [x] Leçon 8 : persistance, transactions et concurrence
+- [x] Leçon 9 : un laboratoire de graphe — traductions, cycles de prérequis, atteignabilité bornée
 
 ## QA
 
-LadybugDB 0.20.4 est la base de quelqu'un d'autre, et écrire huit leçons dessus a fait remonter neuf constats. Six sont des bugs silencieux — pas d'erreur, un résultat faux — chacun avec une reproduction qui tourne dans une base en mémoire vide ; aucun n'avait de ticket amont quand le tracker a été fouillé le 14 septembre 2026, et aucun n'a été signalé. Les trois derniers viennent des leçons elles-mêmes, et l'un d'eux était déjà ouvert en amont.
+LadybugDB 0.20.4 est la base de quelqu'un d'autre, et écrire huit leçons dessus a fait remonter neuf constats. Six sont des bugs silencieux — pas d'erreur, un résultat faux — chacun avec une reproduction qui tourne dans une base en mémoire vide ; aucun n'avait de ticket amont quand le tracker a été fouillé le 14 septembre 2026, et aucun n'a été signalé. Les trois derniers viennent des leçons elles-mêmes, et l'un d'eux était déjà ouvert en amont. Le laboratoire de la leçon 9 en a ajouté un dixième, l'ordre inversé d'un témoin fermé ; il n'a pas été cherché en amont.
 
 | Attendu | Ce qui se passe | Où | Mesure | État |
 |---|---|---|---|---|
@@ -34,6 +35,19 @@ LadybugDB 0.20.4 est la base de quelqu'un d'autre, et écrire huit leçons dessu
 | `INSTALL algo` récupère la build correspondant à la CLI | La CLI 0.20.4 télécharge la build 0.20.0, et `LOAD algo` échoue ensuite sur les trois exécuteurs, avec dans le message des chemins de la machine de build de LadybugDB | extension `algo`, CLI 0.20.4 | `libnetworkit.so: cannot open shared object file` sous Linux, `Library not loaded: @rpath/libnetworkit.dylib` sous macOS, `The specified module could not be found.` sous Windows | Ouvert en amont sous le [ticket #857](https://github.com/LadybugDB/ladybug/issues/857), pas ouvert par ce cours [2026-09-14](#2026-09-14--leçon-7--extensions-algorithmes-et-recherche-plein-texte) |
 | Louvain rend les mêmes communautés pour le même graphe et le même nombre de fils | Les tailles changent d'un processus à l'autre, `CALL threads = 1` posé | extension `algo`, Louvain | `[27,20,17,14,14]` dans un processus, `[25,20,18,18,11]` dans les deux suivants ; trois appels dans un même processus concordent. Les nœuds sans relation reçoivent `louvain_id` -1 | Reproduit, non signalé [2026-09-14](#2026-09-14--leçon-7--extensions-algorithmes-et-recherche-plein-texte) |
 | Un processus en lecture seule et un écrivain sur le même fichier se comportent comme la documentation le dit | La [page sur la concurrence](https://docs.ladybugdb.com/concurrency/) dit que la combinaison n'est pas permise, mais c'est bien ce qui se passe : un processus en lecture seule ouvre le fichier d'un écrivain sous Linux et macOS et voit ses changements validés via le `.wal` ; un écrivain ouvre et checkpointe un fichier tenu par un lecteur, sur les trois, et le lecteur continue de répondre depuis l'ancien état | [`storage_manager.cpp` 87-91](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/storage/storage_manager.cpp#L87-L91) | Sous Windows, le `LockFileEx` de l'écrivain fait plutôt échouer la lecture avec `Error 33` | Reproduit ; la documentation et le comportement se contredisent [2026-09-14](#2026-09-14--leçon-8--transactions-fichiers-et-processus) |
+| `nodes(p)` sur un motif fermé `(a)-[…]->(a)` liste les pages dans l'ordre des flèches, comme sur un motif ouvert | Elle les liste à contresens des flèches ; les pages et la longueur sont justes | `nodes()` sur un motif fermé de longueur variable ; source non localisée | Flèches `/lab/cycles/` → `/lab/paths/` → `/lab/intro/` → retour : `[/lab/cycles/,/lab/intro/,/lab/paths/,/lab/cycles/]`. Un chemin ouvert depuis la même page est dans l'ordre. Reproduit sur les cycles de 3 et de 6 pages [2026-09-27](#2026-09-27--leçon-9--un-laboratoire-de-graphe) | Reproduit sous Windows ; suivi amont non consulté, non signalé |
+
+## Expériences
+
+Une ligne par expérience mesurée, avec l'hypothèse telle qu'écrite avant l'exécution dans [`data/lab/preregistration.md`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/data/lab/preregistration.md).
+
+| Question | Hypothèse (avant l'exécution) | Résultat | Verdict | Entrée et code |
+|---|---|---|---|---|
+| Après un `COPY` échoué dans une table de relations, que reste-t-il ? | La table inchangée, et l'index de clé des nœuds intact | 2 liens, comme avant ; `found_by_key` 1 | Confirmé, 0.20.4 sous Windows ; observé, pas une garantie | [2026-09-27](#2026-09-27--leçon-9--un-laboratoire-de-graphe), [`09-graph-lab.cypher`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/cypher/09-graph-lab.cypher) |
+| Traductions manquantes par identité de contenu ou par titre | Identité : 1 page sœur manquante ; titre : 4 lignes, dont 3 fausses | 1 (`/lab/paths/`, `es`) ; 4 lignes, dont 3 fausses | Confirmé | [2026-09-27](#2026-09-27--leçon-9--un-laboratoire-de-graphe) |
+| Une borne de piste fermée est-elle complète dès qu'elle atteint le nombre de pages ? | DAG : 0 à la borne 3 ; cycle de 6 : 0 à 5, 6 pistes de longueur 6 à 6 | 0 ; 0 ; 6 de longueur 6 | Confirmé | [2026-09-27](#2026-09-27--leçon-9--un-laboratoire-de-graphe) |
+| Navigation et prérequis demandent-ils des tables de relations séparées ? | Navigation : 2 pistes fermées de longueur 2 ; prérequis : 0 | 2 de longueur 2 ; 0 | Confirmé | [2026-09-27](#2026-09-27--leçon-9--un-laboratoire-de-graphe) |
+| Un témoin fermé liste-t-il ses pages dans l'ordre des flèches ? | Oui, comme un chemin ouvert | Non : inversé (ligne QA ci-dessus) | Réfuté | [2026-09-27](#2026-09-27--leçon-9--un-laboratoire-de-graphe) |
 
 ## 2026-09-14 — Les données
 
@@ -276,8 +290,25 @@ f,c,tz
 
 J'attendais 13:30 pour les deux premières aussi : `COPY` et `LOAD FROM` convertissent le même texte dans un fichier CSV en 13:30 UTC (leçon 4). Le décalage est abandonné sans être appliqué. `timestamp(…)` dans le paquet C# 0.19.1 renvoie 09:30 lui aussi (leçon 5).
 
+## 2026-09-27 — Leçon 9 : un laboratoire de graphe
+
+Un laboratoire sur des pages inventées sous `/lab/`, pour prolonger les leçons 2 et 3 plutôt que les répéter. Les prédictions sont allées d'abord dans [`data/lab/preregistration.md`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/data/lab/preregistration.md), haché à 13:24 EDT (SHA-256 `234e0639…040d`) avant le chargement de tout jeu de données. Chaque fichier attendu en a été tiré à la main, avant l'exécution qu'il vérifie. Environnement : CLI LadybugDB 0.20.4 sous Windows, bases en mémoire, `CALL threads = 1` avant le `COPY` comparé. Le script entier tourne en 1,5 à 6,5 s.
+
+- **Traceur et extrémité absente :** verts dès la première exécution. Après le `COPY` échoué dans `LINKS_TO`, il reste 2 liens et l'index de clé fonctionne. Le bug d'index de la leçon 2 concernait les tables de nœuds.
+- **Traductions :** vertes dès la première exécution. L'égalité des titres donne 3 faux signalements sur 4.
+- **La première exécution des cas de cycles différait du fichier attendu en deux points :**
+  - **Un défaut du script,** le mien : `shortest` est un mot-clé, et l'analyseur l'a refusé comme alias.
+  - **Un comportement amont :** une piste fermée liste ses pages à contresens des flèches (ligne QA). Les pages et la longueur étaient conformes à la prédiction ; seul l'ordre ne l'était pas.
+
+  Une sonde sur le cycle de six pages, lancée avant la rédaction de l'addendum, a séparé les chemins ouverts (dans l'ordre) des fermés (inversés). Les deux points sont consignés dans un addendum daté ; les prédictions d'origine sont restées telles quelles.
+- **Bornes :** confirmé. Une borne de 5 manque un cycle de 6, et 6 le trouve. Une borne de 1 cache un prérequis à la profondeur 2.
+
+Non exécuté : le `check.sh` complet sur cette machine. Son `INSTALL json` téléchargerait une extension, et ce laboratoire n'avait pas droit aux téléchargements. Seuls les deux scripts de la leçon 9 ont été comparés en local.
+
 ## À vérifier
 
+- La leçon 9 sous Linux et macOS : le laboratoire n'a tourné que sous Windows. `ladybugdb-examples.yml` la compare sur les trois runners.
+- Si `nodes()` sur un motif fermé est inversé volontairement (non documenté) ou par bug, et si c'est corrigé après la 0.20.4. Le suivi amont n'a pas été consulté.
 - Le script d'installation (`curl -s https://install.ladybugdb.com | bash`) et `brew install ladybug` : pas exécutés pour ce cours.
 - Les reproductions minimales n'ont été exécutées que sous Windows. Les scripts du cours qui montrent les bugs 1, 2, 4 et 5 sur les données du site donnent la même sortie sur les trois runners de la CI.
 - Si ces bugs sont déjà corrigés sur la branche principale de LadybugDB, après la 0.20.4.

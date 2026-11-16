@@ -1,0 +1,73 @@
+# l20
+
+== The nine templates in the keys a textbook writes, at the pin, against the textbook's spelling
+template           mode    keys   chords   spelled right   pitch classes right
+ii-V-I             major   15     45       44              45
+circle-of-fifths   major   15     60       59              60
+rhythm-changes-a   major   15     120      118             120
+I-V-vi-IV          major   15     60       57              60
+I-vi-IV-V          major   15     60       57              60
+canon              major   15     120      113             120
+12-bar-blues       major   15     180      167             180
+minor-vamp         minor   15     45       44              45
+andalusian         minor   15     60       53              60
+chords 750: spelled right 712, pitch classes right 750
+the chords spelled otherwise, as the tool writes them, with the textbook's spelling and their count:
+  Cb major   Bmaj7 for Cbmaj7 3, B for Cb 4, E for Fb 4, B7 for Cb7 7, E7 for Fb7 3
+  C# major   Fm7 for E#m7 1, Fm for E#m 1
+  Gb major   B for Cb 4, B7 for Cb7 3
+  A# minor   F7 for E#7 1, F for E# 1
+  D minor    A# for Bb 1
+  G minor    D# for Eb 1
+  C minor    A# for Bb 1, G# for Ab 1
+  Eb minor   B for Cb 1
+  Ab minor   E for Fb 1
+
+== The tool against the twelve-key tables of GA's ChordProgressions.yaml, at the pin
+table                                template        keys   same chords   spelled otherwise by a textbook
+ii–V–I (Major) — 12 keys             ii-V-I          12     12            none
+Pop I–V–vi–IV — 12 keys (triads)     I-V-vi-IV       12     12            Gb: Gb Db Ebm B, textbook Gb Db Ebm Cb
+12-Bar Blues — common guitar keys    12-bar-blues    5      5             none
+
+== The roots the tool reads, at the pin
+root       template       chords, or the error
+C          I-V-vi-IV      C G Am F
+c          I-V-vi-IV      C G Am F
+B          I-V-vi-IV      B F# G#m E
+b          I-V-vi-IV      B Gb Abm E
+Bb         I-V-vi-IV      Bb F Gm Eb
+bb         I-V-vi-IV      Bb F Gm Eb
+B♭         I-V-vi-IV      unknown root 'B♭' — try C, D, Eb, F#, etc.
+Cb         I-V-vi-IV      B Gb Abm E
+E#         I-V-vi-IV      unknown root 'E#' — try C, D, Eb, F#, etc.
+F major    I-V-vi-IV      F C Dm A#
+D minor    I-V-vi-IV      D A Bm G
+D minor    andalusian     Dm C A# A
+Dm         andalusian     Dm C A# A
+C          andalusian     Cm A# G# G
+C7b9       andalusian     Cm Bb Ab G
+Cmaj7      ii-V-I         Dm7 G7 Cmaj7
+
+== The length, at the pin
+length   template       chords    last chord, characters of JSON
+(none)   12-bar-blues   12        V7 G7, 2288
+0        12-bar-blues   12        V7 G7, 2288
+-1       12-bar-blues   12        V7 G7, 2288
+4        12-bar-blues   4         I7 C7, 903
+13       12-bar-blues   13        I7 C7, 2461
+100000   12-bar-blues   100000    I7 C7, 17300216
+
+== Each template stitched with ga_voice_leading_pair, in C major or A minor, at the pin
+template           chords  moves      first pairs meet   sum of first pairs  least joined path
+ii-V-I             3       2          0 of 1             9                   10
+circle-of-fifths   4       3          0 of 2             13                  15
+rhythm-changes-a   8       7          0 of 6             35                  40
+I-V-vi-IV          4       3          0 of 2             13                  15
+I-vi-IV-V          4       3          1 of 2             13                  15
+canon              8       7          1 of 6             33                  42
+12-bar-blues       12      11         4 of 10            31                  34
+minor-vamp         3       2          0 of 1             6                   8
+andalusian         4       3          0 of 2             12                  16
+places where two first pairs should meet 32: they meet at 6; templates whose least joined path moves as little as the sum of first pairs 0 of 9
+I-V-vi-IV, the first pairs: x-x-2-0-1-x C/E → x-x-0-0-0-3 G/D, 6; x-2-0-0-x-x G/B → x-3-0-2-x-x D5/C, 3; x-3-2-2-x-x Am/C → x-3-3-2-x-1 F/C, 4
+I-V-vi-IV, the least joined path: x-3-2-0-1-x C → x-2-0-0-x-x G/B → x-3-2-2-x-x Am/C → x-3-3-2-x-1 F/C, 15

@@ -1,0 +1,84 @@
+{
+  "scope": "Real-arithmetic transcription of selected source index/window expressions, not Rust f32 execution, noise values, a modal decomposition or audio render.",
+  "rows": [
+    {
+      "velocity": 0,
+      "length": 100,
+      "pick_ratio": 0.78,
+      "pick_offset": 78,
+      "quantized_pick_pos": 0.78
+    },
+    {
+      "velocity": 0.1,
+      "length": 100,
+      "pick_ratio": 0.72,
+      "pick_offset": 72,
+      "quantized_pick_pos": 0.72
+    },
+    {
+      "velocity": 0.5,
+      "length": 100,
+      "pick_ratio": 0.48,
+      "pick_offset": 48,
+      "quantized_pick_pos": 0.48
+    },
+    {
+      "velocity": 1,
+      "length": 100,
+      "pick_ratio": 0.18,
+      "pick_offset": 18,
+      "quantized_pick_pos": 0.18
+    }
+  ],
+  "shape_at_velocity_half": [
+    {
+      "i": 0,
+      "position": 0.0,
+      "pick_shape": 0,
+      "ideal_triangle_y_over_h": 0.0
+    },
+    {
+      "i": 8,
+      "position": 0.08,
+      "pick_shape": 1.1102230246251565e-16,
+      "ideal_triangle_y_over_h": 0.16666666666666669
+    },
+    {
+      "i": 28,
+      "position": 0.28,
+      "pick_shape": 0.5000000000000001,
+      "ideal_triangle_y_over_h": 0.5833333333333334
+    },
+    {
+      "i": 48,
+      "position": 0.48,
+      "pick_shape": 1,
+      "ideal_triangle_y_over_h": 1.0
+    },
+    {
+      "i": 68,
+      "position": 0.68,
+      "pick_shape": 0.4999999999999998,
+      "ideal_triangle_y_over_h": 0.6153846153846153
+    },
+    {
+      "i": 88,
+      "position": 0.88,
+      "pick_shape": 0,
+      "ideal_triangle_y_over_h": 0.23076923076923075
+    },
+    {
+      "i": 99,
+      "position": 0.99,
+      "pick_shape": 0,
+      "ideal_triangle_y_over_h": 0.019230769230769246
+    }
+  ],
+  "positive_velocity_changes_multiple_inputs": true,
+  "velocity_zero_excitatory_samples_zero": true,
+  "orientation_to_physical_bridge": null,
+  "explicit_fret_or_bridge_distance_argument": false,
+  "noise_filter": "filtered=0.5*n+0.5*prev; prev=filtered",
+  "window": "clamp(1-2.5*abs(i/length-pick_offset/length),0,1)",
+  "strict_antialias_filter_established": false
+}
