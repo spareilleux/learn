@@ -1,9 +1,17 @@
 extends Node3D
-## A ride in the palace gardens on a self-balancing scooter (the author, 2026-10-04: "on doit pouvoir se
-## balader dans les jardins en Segway"), made by scripts/palace_gardens.gd. G gets on, on the terrace
-## before the ramp's head, facing down the garden. Riding:
-##   - W, Z or the up arrow go forward, S or the down arrow back; Shift rides faster;
-##   - A, Q or the left arrow and D or the right arrow turn the scooter, and the view with it;
+## A ride in the palace gardens, made by scripts/palace_gardens.gd: first on a self-balancing scooter (the
+## author, 2026-10-04: "on doit pouvoir se balader dans les jardins en Segway"), since 2026-10-15 on an
+## electric kick scooter (« Tu remplaceras le Segway par une trottinette électrique qui autorise des mouvements
+## plus fluides »; the node and this file keep their name, which the scene's other scripts and the tests call).
+## G gets on, on the terrace before the ramp's head, facing down the garden; out over the gardens or the Place
+## du Capitole (a view, the live view's pose), G rides and F walks from the ground under the camera (land).
+## Riding (_drive):
+##   - W, Z or the up arrow open the throttle, S or the down arrow brake, and at a stand walk the scooter
+##     backwards; Shift rides faster, up to 25 km/h; with no key it glides. The acceleration changes at most
+##     JERK a second: no jolt starting, braking or coming to a stand;
+##   - A, Q or the left arrow and D or the right arrow turn the handlebar, and the view goes round with the
+##     scooter; it turns as a bicycle does, about its rear wheel, the handlebar's lock narrowing with the
+##     speed, so that a turn at speed is wide and smooth; at a stand they walk it round;
 ##   - the mouse (a drag on a touch screen) looks round, and once the scooter moves it steers where the
 ##     view looks, unless the view looks back: standing still, a look round turns the head alone;
 ##   - hands off (no key and no look) for AUTO_AFTER seconds, the autopilot rides a tour of the gardens
@@ -15,42 +23,65 @@ extends Node3D
 ##     grounds; hedges, trees, lamp posts, the water, the balustrade, the walls and people stop the
 ##     scooter (palace_gardens.gd ground_at and push_out), and it goes no further than RIDE_R from the
 ##     hall;
-##   - the rider leans forward speeding up, back slowing down, and into a turn, as on a
-##     self-balancing scooter; not with --reduced-motion or the browser's reduced-motion setting.
+##   - the scooter and its rider lean into a turn as a bicycle does, the view's horizon with a share of it,
+##     and the view dips a little speeding up and slowing down; not with --reduced-motion or the browser's
+##     reduced-motion setting.
 ## G riding gets off beside the scooter, which stays where it is (the author: "on devrait pouvoir
 ## descendre et remonter sur le segway"); on foot, the same keys walk, stopped as the scooter is, and G
-## within REACH of the scooter gets back on. A preset (keys 1 to 9), or anything else that moves the
+## gets back on: beside it, or from further than REACH, the scooter comes under the feet (get_on). A
+## preset (keys 1 to 9), or anything else that moves the
 ## camera, ends the ride or the walk where it put the camera, and the scooter goes back to the terrace.
-## The scooter is a kit made in Blender (artpass/gardens/blender/segway_kit.py), generic, with no
-## maker's name: its handlebar shows looking down, its wheels turn as it rolls, its headlamp lights
-## the ground ahead. While riding or walking here, the fly camera's own moves and the walking body
+## The scooter is a kit made in Blender (artpass/gardens/blender/escooter_kit.py), generic, with no
+## maker's name: its handlebar and display show looking down, the handlebar turns with the fork and the
+## front wheel, its wheels turn as it rolls, its headlamp lights the ground ahead. While riding or walking here, the fly camera's own moves and the walking body
 ## stop, as the drone stops them (scripts/drone.gd); the camera's look and its presets stay.
 ## --segway (?segway=1) starts on the scooter. dismount() leaves the gardens, back where the visitor
 ## stood when they got on (on the roof view, if G was pressed there).
 
-const KIT := "res://assets/garden_segway_%s.obj"
-const PARTS := ["body", "metal", "trim", "light", "tyre", "dish", "spokes"]
-const SPEED := 5.5           # m/s, about 20 km/h: a self-balancing scooter's usual top speed
-const FAST := 1.6            # times SPEED, with Shift
-const BACK := 1.8            # m/s, backwards
-const ACCEL := 2.4           # m/s²
-const BRAKE := 4.5           # m/s², slowing with the other key
-const COAST := 2.0           # m/s², with no key: it slows to a stand, balancing
-const TURN := 1.7            # rad/s, with A or D
+## The electric kick scooter (artpass/gardens/blender/escooter_kit.py; the author, 2026-10-15: « Tu remplaceras
+## le Segway par une trottinette électrique qui autorise des mouvements plus fluides »): its frame, its steering
+## (turned about the head tube's axis, the front wheel with it) and one wheel, drawn twice.
+const KIT := "res://assets/garden_escooter_%s.obj"
+const PARTS := ["body", "trim", "metal", "tail", "steer_metal", "steer_body", "steer_trim", "steer_light", "steer_screen", "tyre", "dish", "spokes"]
+const SPEED := 5.6           # m/s, about 20 km/h
+const FAST := 1.24           # times SPEED with Shift: 25 km/h, an electric scooter's legal top speed in France
+const BACK := 0.9            # m/s: at a stand, S walks it backwards
+const ACCEL := 2.2           # m/s² at full throttle from a stand, fading towards the top speed
+const THROTTLE := 2.5        # per second: how fast the throttle and the brake open and close
+const JERK := 8.0            # m/s³: the most the acceleration changes in a second (no jolt)
+const BRAKE := 3.5           # m/s², the brake full on
+const COAST := 0.35          # m/s², rolling with no key: it glides
+const WHEELBASE := 0.98      # m, from axle to axle: the front wheel turns the scooter as a bicycle's does
+const STEER_MAX := 0.55      # rad: the handlebar's lock at a walk
+const STEER_FAST := 0.12     # rad: its lock at the top speed, so that a turn at speed is wide and smooth
+const STEER_RATE := 1.6      # rad/s: the most the handlebar turns in a second
+const A_LAT := 3.8           # m/s²: the most a turn pulls sideways; past it the handlebar holds
+const PIVOT_TURN := 1.4      # rad/s: at a stand, A or D walk the scooter round (eased in and out at 6 rad/s²)
 const FOLLOW := 2.6          # per second: how fast a moving scooter turns to where the view looks
 const LOOK_BACK := 1.6       # radians: a view further round than this looks, and does not steer
 const RADIUS := 0.4          # the rider on the scooter, against what stands round them
+const FRONT := 0.5           # m: the front wheel ahead of the rider, kept out of what stands there too
+const FRONT_R := 0.16
 const STEP := 0.35           # m: a rise or a drop up to this, in one step, is ridden over
 const SUB := 0.25            # m: the longest step, so that a slow frame cannot jump a hedge
-const DECK := 0.18           # the platform above the ground (segway_kit.py)
-const EYE := 1.66            # the eye above the platform
-const WHEEL_R := 0.24
-const TRACK := 0.3           # from the middle to each wheel
+const DECK := 0.165          # the deck above the ground (escooter_kit.py)
+const EYE := 1.62            # the eye above the deck
+const WHEEL_R := 0.127       # 10-inch tyres
+const AXLE_FRONT := -0.52    # the axles' z on the scooter (it faces -Z), its origin under the rider
+const AXLE_REAR := 0.46
+const STEER_PIVOT := Vector3(0.0, 0.127, -0.52)   # the steering's axis: through the front axle,
+const STEER_AXIS := Vector3(0.0, 0.9781, 0.2079)  # raked back 12 degrees
 const MOUNT := Vector2(0.0, 21.0)  # (x, z): on the terrace, before the ramp's head
 const LEAN := 0.012          # radians of pitch per m/s² of acceleration
 const LEAN_MAX := 0.05
-const ROLL := 0.01           # radians of roll per rad/s of turn and m/s of speed
-const ROLL_MAX := 0.06
+const ROLL_MAX := 0.28       # radians: the scooter and its rider leaning into a turn, as a bicycle does
+const ROLL_VIEW := 0.4       # the share of that lean the view's horizon takes
+const ROLL_EYE := 0.5        # and the eye's place: the body leans, the head stays nearer upright
+const EYE_EASE := 12.0       # per second: the eye's height after the ground's
+const HEADLAMP_AT := Vector3(0.0, 0.93, -0.42)  # the lamp's lens on the stem (escooter_kit.py lamp_at)
+const HEADLAMP_DIP := 0.16   # radians below level: its beam meets the ground about 6 m ahead
+const HEADLAMP_ENERGY := 2.0
+const POOL_XF := Transform3D(Basis(Vector3(3.2, 0.0, 0.0), Vector3(0.0, 1.0, 0.0), Vector3(0.0, 0.0, 8.0)), Vector3(0.0, 0.05, -5.5))
 # The autopilot.
 const AUTO_AFTER := 3.0      # s with no ride key and no look before it takes over
 const AUTO_SPEED := 3.2      # m/s on the tour, about 11.5 km/h
@@ -62,10 +93,18 @@ const LOOK_HOLD := 3.0       # s after a look round before the view turns back a
 const JOIN_R := 30.0         # m: how far the tour is looked for in a straight line
 const FILLET := 2.5          # m: the tour's corners rounded to this radius at most
 # On foot.
-const REACH := 2.5           # m from the scooter within which G gets back on
+## On foot this near the scooter, it lights up (a golden ring on the ground round it, pulsing, its display and
+## headlamp brighter) and a tag over it says the key: E or G gets on (the author, 2026-10-16: « j'ai extrêmement
+## de mal à interagir avec les trottinettes. Donc, idéalement, quand on est à côté, il faudrait que, euh, genre,
+## qu'elles s'illuminent et puis qu'on ait un petit, euh, petit truc à l'écran qui s'affiche pour pouvoir monter
+## dessus »).
+const BECKON_R := 4.0
+const BECKON_TEXT := {"en": "Ride the scooter", "fr": "Monter sur la trottinette", "es": "Subir al patinete"}
+const REACH := 2.5           # m from the scooter within which G gets back on where it stands; further, it comes
 const FOOT_RADIUS := 0.3
 const FOOT_SPRINT := 1.6
-const SCOOTER_R := 0.45      # the parked scooter, for the visitor on foot
+const SCOOTER_R := 0.3       # the parked scooter's deck, for the visitor on foot (its wheels: _foot_push)
+const LAND_R := 6.0          # m: how far from under the camera the free ground to land on may be (land)
 const TOUR_CELL := 8.0       # m: the tour's index, to find it near a place
 ## The ride's views drawn once, at the first mount, where the web build's renderer is. There the shaders
 ## of what the tour comes to compiled as it came to it: in a fresh browser, with the quality level fixed,
@@ -110,9 +149,9 @@ const TOUR := [
 	Vector2(15.5, 165.5), Vector2(1.0, 164.5), Vector2(1.0, 126.0), Vector2(8.75, 124.0), Vector2(65.5, 124.0), Vector2(65.5, 60.0), Vector2(8.75, 60.0),
 	Vector2(8.75, 66.5), Vector2(3.5, 66.5), Vector2(0.6, 63.5), Vector2(0.6, 25.0), Vector2(2.2, 21.6),
 ]
-const HUD := "SEGWAY  |  W/Z: forward  ·  S: back  ·  A/Q, D: turn  ·  Shift: faster  ·  G: get off\nMouse: look and steer  ·  Hands off 3 s: autopilot  ·  Esc: release  ·  1–9: back inside  ·  %d km/h"
-const HUD_AUTO := "SEGWAY, AUTOPILOT  |  a tour of the gardens  ·  W/Z, S, A/Q, D: take over  ·  G: get off\nMouse: look round  ·  Esc: release  ·  1–9: back inside  ·  %d km/h"
-const HUD_FOOT := "ON FOOT IN THE GARDENS  |  WASD/ZQSD: walk  ·  Shift: faster  ·  G by the scooter: ride (%d m away)\nClick: look  ·  Esc: release  ·  1–9: back inside"
+const HUD := "E-SCOOTER  |  W/Z: throttle  ·  S: brake, back at a stand  ·  A/Q, D: steer  ·  Shift: faster  ·  G: get off\nMouse: look and steer  ·  Hands off 3 s: autopilot  ·  Esc: release  ·  1–9: back inside  ·  %d km/h"
+const HUD_AUTO := "E-SCOOTER, AUTOPILOT  |  a tour of the gardens  ·  W/Z, S, A/Q, D: take over  ·  G: get off\nMouse: look round  ·  Esc: release  ·  1–9: back inside  ·  %d km/h"
+const HUD_FOOT := "ON FOOT IN THE GARDENS  |  WASD/ZQSD: walk  ·  Shift: faster  ·  G: ride (the scooter comes, %d m)\nClick: look  ·  Esc: release  ·  1–9: back inside"
 const HINT := "G: ride in the gardens"
 
 var riding := false
@@ -141,13 +180,22 @@ var _p := Vector2.ZERO          # (x, z)
 var _y := 0.0                   # the ground under the scooter
 var _heading := PI              # as the camera's yaw: 0 faces -Z
 var _v := 0.0
-var _turn := 0.0                # rad/s asked for with A or D, eased
+var _turn := 0.0                # rad/s, the autopilot's turn, eased
+var _thr := 0.0                 # the throttle, 0 to 1, eased
+var _brk := 0.0                 # the brake, 0 to 1, eased
+var _acc := 0.0                 # m/s², the acceleration, changing at most JERK a second
+var _pivot := 0.0               # rad/s, the scooter walked round at a stand
+var _steer := 0.0               # rad, the handlebar: left positive
 var _lean := 0.0
 var _roll := 0.0
 var _slope := 0.0
-var _spin := Vector2.ZERO       # the left and the right wheel's angles
+var _eye_y := NAN               # the eye's height, eased after the ground's
+var _spin := Vector2.ZERO       # the front and the rear wheel's angles
 var _last := Vector3.INF        # where this node left the camera
 var _model: Node3D
+var _steering: Node3D           # the fork, the stem and the handlebar, with the front wheel
+var _lamp: SpotLight3D          # natively, the headlamp's light
+var _pool: MeshInstance3D       # on the web, its pool on the ground
 var _wheels: Array[Node3D] = []
 var _kmh := -1
 var _frame := 0
@@ -177,6 +225,14 @@ var _foot_y := 0.0
 var _foot_v := Vector2.ZERO
 var _say := ""                  # a line in the hint for a few seconds
 var _say_left := 0.0
+# The scooter beckoning, on foot near it (BECKON_R).
+var _beckon := 0.0              # 0 .. 1, eased
+var _beckon_t := 0.0
+var _ring: MeshInstance3D
+var _ring_mat: ShaderMaterial
+var _screen_mat: ShaderMaterial
+var _light_mat: ShaderMaterial
+var _tag: Control
 # The ride's views drawn once (WARM_POSES).
 var _warm := {}                 # its viewport, camera, next pose and frame, while it runs
 var _warmed := false
@@ -277,12 +333,17 @@ func mount() -> bool:
 	_back_look = Vector2(float(_camera.get("_yaw")), float(_camera.get("_pitch")))
 	_pause()
 	_p = MOUNT
+	_steer = 0.0
 	_y = float(_gardens.call("ground_at", _p))
 	_heading = PI
 	_v = 0.0
 	_turn = 0.0
 	_lean = 0.0
 	_roll = 0.0
+	_thr = 0.0
+	_acc = 0.0
+	_pivot = 0.0
+	_brk = 0.0
 	_look(_heading, -0.12)
 	_cut()
 	riding = true
@@ -388,6 +449,113 @@ func dismount() -> void:
 	_publish()
 
 
+## Where on the ground under the camera a visitor would stand, when the camera is out over the gardens or the
+## Place du Capitole (a view, the live view's pose; the author, 2026-10-15: « On ne peut pas se promener dans la
+## place du Capitole »: G took them back to the terrace, 360 m away, and F to the hall): past the hall's wall,
+## neither in the library wing nor on the roof's view, above the ground, the free ground within LAND_R of the
+## point under it (palace_gardens.gd push_out keeps it within RIDE_R or on the square). Vector2.INF elsewhere.
+func spot_below() -> Vector2:
+	if _camera == null or _gardens == null or _obs == null:
+		return Vector2.INF
+	if _views != null and bool(_views.get("on_roof")):
+		return Vector2.INF
+	var c := _camera.global_position
+	var wing := _obs.get_node_or_null("LibraryWing")
+	if wing != null and wing.has_method("contains") and bool(wing.call("contains", c)):
+		return Vector2.INF
+	var p := Vector2(c.x, c.z)
+	if c.y < float(_gardens.call("ground_at", p)) + 0.5:
+		return Vector2.INF
+	return spot_at(p)
+
+
+## Where a visitor would stand on the ground at p (x, z): past the hall's wall, not in the library wing, the free
+## ground within LAND_R of p. Vector2.INF elsewhere. The telescope's jump aims with it too (scripts/teleport.gd).
+func spot_at(p: Vector2) -> Vector2:
+	if _gardens == null or _obs == null:
+		return Vector2.INF
+	if p.length() < float(_obs.get("outer_radius")) + 2.0:
+		return Vector2.INF
+	var y := float(_gardens.call("ground_at", p))
+	var wing := _obs.get_node_or_null("LibraryWing")
+	if wing != null and wing.has_method("contains") and bool(wing.call("contains", Vector3(p.x, y + 1.0, p.y))):
+		return Vector2.INF
+	var q: Vector2 = _gardens.call("push_out", p, FOOT_RADIUS, y, true)
+	if q.distance_to(p) > LAND_R or absf(float(_gardens.call("ground_at", q)) - y) > STEP:
+		return Vector2.INF
+	return q
+
+
+## G (`ride`) or F with the camera out over the gardens (spot_below): down on the ground under it, riding or
+## on foot with the scooter parked beside, facing where the camera faced. dismount() takes the camera back up
+## there. False where there is no such ground: G then gets on at MOUNT, and F is the camera's own.
+func land(ride: bool) -> bool:
+	if riding or on_foot:
+		return false
+	return land_at(spot_below(), ride)
+
+
+## Down on the ground at q (spot_at's), riding or on foot with the scooter parked beside, facing `yaw` (the
+## camera's when NAN). Already out, the visitor and the scooter are moved there, and dismount() still takes the
+## camera back to where the outing began; else back to `back` (the camera's transform and look, by default where
+## it is now), or to the roof's view (`from_roof`). The telescope's jump lands with it (scripts/teleport.gd).
+func land_at(q: Vector2, ride: bool, yaw := NAN, from_roof := false, back := Transform3D(), back_look := Vector2.INF) -> bool:
+	if q == Vector2.INF or not _can_ride():
+		return false
+	if not (riding or on_foot):
+		_from_roof = from_roof
+		_back = _camera.global_transform if back_look == Vector2.INF else back
+		_back_look = Vector2(float(_camera.get("_yaw")), float(_camera.get("_pitch"))) if back_look == Vector2.INF else back_look
+		_pause()
+	riding = false
+	on_foot = false
+	if is_nan(yaw):
+		yaw = float(_camera.get("_yaw"))
+	var fwd := Vector2(-sin(yaw), -cos(yaw))
+	var right := Vector2(cos(yaw), -sin(yaw))
+	_y = float(_gardens.call("ground_at", q))
+	_heading = yaw
+	_v = 0.0
+	_turn = 0.0
+	_lean = 0.0
+	_roll = 0.0
+	_thr = 0.0
+	_acc = 0.0
+	_pivot = 0.0
+	_brk = 0.0
+	auto = false
+	_look(yaw, clampf(float(_camera.get("_pitch")), -0.3, 0.15))
+	_p = _gardens.call("push_out", q, RADIUS, _y)
+	if not ride:
+		for s: Vector2 in [q + right * 1.0, q - right * 1.0, q + fwd * 1.2, q - fwd * 1.2]:
+			var at: Vector2 = _gardens.call("push_out", s, RADIUS, _y)
+			if at.distance_to(s) < 0.05 and absf(float(_gardens.call("ground_at", at)) - _y) <= STEP:
+				_p = at
+				break
+	_model.visible = true
+	_set_trail()
+	_cut()
+	stats.lands = int(stats.get("lands", 0)) + 1
+	if ride:
+		riding = true
+		stats.rides += 1
+		_place(0.0)
+		if not _warmed:
+			_warm_pending = true
+			_warm_try()
+	else:
+		on_foot = true
+		_foot = q
+		_foot_y = _y
+		_foot_v = Vector2.ZERO
+		_place_model(0.0)
+		_place_foot()
+	_kmh = -1
+	_hint()
+	_publish()
+	return true
+
+
 ## Out of the hall on foot through a bay's open doors (walk_physics.gd, when palace_gardens.gd bay_out):
 ## on the terrace at `at`, going on at `vel`, the scooter parked at MOUNT for G. Back in through the
 ## doors, the walking body takes the visitor on (_walk_in).
@@ -399,12 +567,17 @@ func walk_out(at: Vector2, vel := Vector2.ZERO) -> bool:
 	_back_look = Vector2(float(_camera.get("_yaw")), float(_camera.get("_pitch")))
 	_pause()
 	_p = MOUNT
+	_steer = 0.0
 	_y = float(_gardens.call("ground_at", _p))
 	_heading = PI
 	_v = 0.0
 	_turn = 0.0
 	_lean = 0.0
 	_roll = 0.0
+	_thr = 0.0
+	_acc = 0.0
+	_pivot = 0.0
+	_brk = 0.0
 	auto = false
 	on_foot = true
 	_foot = at
@@ -446,6 +619,10 @@ func get_off() -> bool:
 	_turn = 0.0
 	_lean = 0.0
 	_roll = 0.0
+	_thr = 0.0
+	_acc = 0.0
+	_pivot = 0.0
+	_brk = 0.0
 	_foot = at
 	_foot_y = float(_gardens.call("ground_at", at))
 	_foot_v = Vector2.ZERO
@@ -459,17 +636,34 @@ func get_off() -> bool:
 	return true
 
 
-## On foot within REACH of the scooter, gets back on; false further.
+## On foot, gets back on. Further than REACH from the scooter, the scooter comes under the visitor's feet
+## (the author, 2026-10-16: « Embarquer dans la trottinette devrait être facile »; until then G was refused
+## there, "The scooter is 11 m away: G beside it"), facing where they look, where the ground lets it stand:
+## the rider's RADIUS clear, within a metre of the feet and STEP of their ground. False there only.
 func get_on() -> bool:
 	if not on_foot:
 		return false
 	var d := _foot.distance_to(_p)
 	if d > REACH:
-		_tell("The scooter is %d m away: G beside it" % roundi(d))
-		return false
+		var q: Vector2 = _gardens.call("push_out", _foot, RADIUS, _foot_y)
+		var qy := float(_gardens.call("ground_at", q))
+		if q.distance_to(_foot) > 1.0 or absf(qy - _foot_y) > STEP:
+			_tell("No room for the scooter here: G a step away")
+			return false
+		_p = q
+		_y = qy
+		_heading = float(_camera.get("_yaw"))
+		_steer = 0.0
+		_set_trail()
+		stats.called = int(stats.get("called", 0)) + 1
+		_tell("The scooter came to you, from %d m" % roundi(d))
 	on_foot = false
 	riding = true
 	_v = 0.0
+	_thr = 0.0
+	_acc = 0.0
+	_pivot = 0.0
+	_brk = 0.0
 	_idle = 0.0
 	stats.ons += 1
 	_look(float(_camera.get("_yaw")), float(_camera.get("_pitch")))
@@ -564,11 +758,17 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_off()
 		elif on_foot:
 			get_on()
-		else:
+		elif not land(true):
 			mount()
+		get_viewport().set_input_as_handled()
+	elif code == KEY_E and on_foot and _foot.distance_to(_p) <= BECKON_R:
+		get_on()  # the key its tag shows (_draw_tag)
 		get_viewport().set_input_as_handled()
 	elif (riding or on_foot) and code == KEY_F:
 		get_viewport().set_input_as_handled()  # no free flight from the gardens
+	elif code == KEY_F and bool(_camera.get("_free_fly")) and land(false):
+		# Flying out over the gardens, F walks there: the camera's own walk would take it back to the hall.
+		get_viewport().set_input_as_handled()
 
 
 func _process(delta: float) -> void:
@@ -584,6 +784,7 @@ func _process(delta: float) -> void:
 
 func _run(delta: float) -> void:
 	_frame += 1
+	_beckon_step(minf(delta, 0.1))
 	if not riding and not on_foot:
 		_hint()
 		return
@@ -638,23 +839,16 @@ func _run(delta: float) -> void:
 			yaw += wrapf(_heading - yaw, -PI, PI) * (1.0 - exp(-1.5 * dt))
 			_camera.set("_pitch", lerpf(float(_camera.get("_pitch")), AUTO_PITCH, 1.0 - exp(-1.5 * dt)))
 	else:
-		var top := SPEED * (FAST if _held(KEY_SHIFT) else 1.0)
-		if ahead and not back:
-			_v = move_toward(_v, top, (ACCEL if _v >= 0.0 else BRAKE) * dt)
-		elif back and not ahead:
-			_v = move_toward(_v, -BACK, (BRAKE if _v > 0.0 else ACCEL) * dt)
-		else:
-			_v = move_toward(_v, 0.0, COAST * dt)
-		# Turning: the keys turn the scooter and the view together; moving, the scooter turns to the view.
-		var want := (TURN if left else 0.0) - (TURN if right else 0.0)
-		_turn = lerpf(_turn, want, 1.0 - exp(-8.0 * dt))
-		yaw += _turn * dt
-		_heading += _turn * dt
-		var off := wrapf(yaw - _heading, -PI, PI)
-		if absf(_v) > 0.2 and absf(off) < LOOK_BACK:
-			_heading += off * (1.0 - exp(-FOLLOW * minf(absf(_v) / 2.0, 1.0) * dt))
-		_heading = wrapf(_heading, -PI, PI)
+		_drive(dt, ahead, back, left, right, yaw)
+		# The keys turn the view with the scooter (and so does its walk round at a stand, easing out after the key);
+		# moving, the scooter steers to where the view looks.
+		if left != right or absf(_pivot) > 1e-4:
+			yaw += wrapf(_heading - h0, -PI, PI)
 	var rate := wrapf(_heading - h0, -PI, PI) / dt
+	if auto:
+		# The autopilot turns the scooter itself: the handlebar shows the turn it makes.
+		var bar := clampf(atan(rate * WHEELBASE / maxf(absf(_v), 0.5)), -STEER_MAX, STEER_MAX)
+		_steer = move_toward(_steer, bar, STEER_RATE * dt)
 	# Forward in steps no longer than SUB, each stopped or turned aside by what stands there.
 	dir = Vector2(-sin(_heading), -cos(_heading))
 	var start := _p
@@ -675,12 +869,13 @@ func _run(delta: float) -> void:
 		_grow_trail()
 	var accel := (_v - v0) / dt
 	var lean_to := 0.0 if reduced_motion else clampf(accel * LEAN, -LEAN_MAX, LEAN_MAX)
-	var roll_to := 0.0 if reduced_motion else clampf(rate * _v * ROLL, -ROLL_MAX, ROLL_MAX)
+	# Into a turn as a bicycle leans: the angle whose tangent is the sideways pull over gravity.
+	var roll_to := 0.0 if reduced_motion else clampf(atan(rate * _v / 9.81), -ROLL_MAX, ROLL_MAX)
 	_lean = lerpf(_lean, lean_to, 1.0 - exp(-6.0 * dt))
-	_roll = lerpf(_roll, roll_to, 1.0 - exp(-6.0 * dt))
+	_roll = lerpf(_roll, roll_to, 1.0 - exp(-3.0 * dt))
 	_camera.set("_yaw", yaw)
-	_spin.x -= (_v - rate * TRACK) / WHEEL_R * dt
-	_spin.y -= (_v + rate * TRACK) / WHEEL_R * dt
+	_spin.x -= _v / cos(_steer) / WHEEL_R * dt
+	_spin.y -= _v / WHEEL_R * dt
 	_place(dt)
 	var kmh := roundi(absf(_v) * 3.6)
 	if kmh != _kmh or _frame % 30 == 0:
@@ -688,6 +883,52 @@ func _run(delta: float) -> void:
 		_hint()
 	if _frame % 10 == 0:
 		_publish()
+
+
+## Ridden by hand: the throttle (W) and the brake (S) open and close over a fraction of a second and the
+## acceleration changes at most JERK a second, the motor's pull fading towards the top speed and the scooter
+## gliding with no key; the handlebar turns at most
+## STEER_RATE, its lock narrowing with the speed and with the sideways pull, and the scooter turns about its
+## rear wheel as a bicycle does, at its speed times the handlebar's tangent over the wheelbase. A or D hold the
+## handlebar over; with neither, moving, it steers to where the view `yaw` looks. At a stand, S walks the
+## scooter backwards and A or D walk it round.
+func _drive(dt: float, ahead: bool, back: bool, left: bool, right: bool, yaw: float) -> void:
+	var top := SPEED * (FAST if _held(KEY_SHIFT) else 1.0)
+	var walk_back := back and not ahead
+	_thr = move_toward(_thr, 1.0 if ahead and not back else 0.0, THROTTLE * dt)
+	_brk = move_toward(_brk, 1.0 if walk_back else 0.0, THROTTLE * 2.0 * dt)
+	var a := 0.0
+	if _v >= 0.0 and not (walk_back and _v < 0.25):
+		# The motor's full pull up to 70 % of the top speed, fading to nothing at it; the brake and the
+		# rolling's drag fading over the last 0.6 m/s, so that the scooter comes to a stand without a jolt.
+		a = ACCEL * _thr * smoothstep(0.0, 1.0, (top - _v) / (0.3 * top))
+		a -= (COAST + BRAKE * _brk) * clampf(_v / 0.6, 0.0, 1.0)
+	else:
+		# At a stand S walks the scooter backwards; let go, it comes back to a stand.
+		a = clampf(((-BACK if walk_back else 0.0) - _v) * 2.0, -1.2, 1.2)
+	_acc = move_toward(_acc, a, JERK * dt)
+	_v += _acc * dt
+	if absf(_v) < 0.02 and absf(a) < 0.05:
+		_v = 0.0
+		_acc = 0.0
+	var speed := absf(_v)
+	var lock := lerpf(STEER_MAX, STEER_FAST, smoothstep(0.0, SPEED * FAST, speed))
+	if speed > 0.05:
+		lock = minf(lock, atan(A_LAT * WHEELBASE / (speed * speed)))
+	var keys := (1.0 if left else 0.0) - (1.0 if right else 0.0)
+	var want := 0.0
+	if keys != 0.0:
+		want = keys * lock
+	else:
+		var off := wrapf(yaw - _heading, -PI, PI)
+		if speed > 0.2 and absf(off) < LOOK_BACK:
+			var rate_want := off * FOLLOW * minf(speed / 2.0, 1.0)
+			want = clampf(atan(rate_want * WHEELBASE / maxf(speed, 0.3)), -lock, lock)
+	_steer = clampf(move_toward(_steer, want, STEER_RATE * dt), -lock, lock)
+	var rate := _v * tan(_steer) / WHEELBASE
+	_pivot = move_toward(_pivot, keys * PIVOT_TURN * maxf(1.0 - speed / 0.3, 0.0), 6.0 * dt)
+	rate += _pivot
+	_heading = wrapf(_heading + rate * dt, -PI, PI)
 
 
 # --- The autopilot ---------------------------------------------------------------------------------
@@ -974,10 +1215,14 @@ func _heading_to(p: Vector2) -> float:
 func _foot_push(p: Vector2, y: float, scooter := true) -> Vector2:
 	var q: Vector2 = _gardens.call("push_out", p, FOOT_RADIUS, y, true)
 	if scooter:
-		var d := q - _p
-		var reach := SCOOTER_R + FOOT_RADIUS
-		if d.length_squared() < reach * reach:
-			q = _p + (d.normalized() if d.length_squared() > 1e-8 else Vector2.RIGHT) * reach
+		# The parked scooter: its deck, and its wheels at either end.
+		var dir := Vector2(-sin(_heading), -cos(_heading))
+		for s: Vector2 in [Vector2(0.0, SCOOTER_R), Vector2(-AXLE_FRONT, 0.2), Vector2(-AXLE_REAR, 0.2)]:
+			var c := _p + dir * s.x
+			var d := q - c
+			var reach := s.y + FOOT_RADIUS
+			if d.length_squared() < reach * reach:
+				q = c + (d.normalized() if d.length_squared() > 1e-8 else Vector2.RIGHT) * reach
 	return q
 
 
@@ -1036,10 +1281,15 @@ func _place_foot() -> void:
 ## One step to `to`, pushed out of what stands there, onto ground no more than STEP above or below;
 ## failing that, along x alone or along z alone. False when it cannot move.
 func _step(to: Vector2) -> bool:
+	var ahead := Vector2(-sin(_heading), -cos(_heading)) * FRONT
 	for c: Vector2 in [to, Vector2(to.x, _p.y), Vector2(_p.x, to.y)]:
 		var q: Vector2 = _gardens.call("push_out", c, RADIUS, _y)
+		# The front wheel too, FRONT ahead: the scooter moved back as far as it is pushed.
+		var f := q + ahead
+		q += (_gardens.call("push_out", f, FRONT_R, _y) as Vector2) - f
 		var gy := float(_gardens.call("ground_at", q))
-		if absf(gy - _y) <= STEP and q.distance_squared_to(_p) > 1e-8:
+		# 1 µm: the electric scooter's first steps from a stand, its acceleration eased in, are shorter than 0.1 mm.
+		if absf(gy - _y) <= STEP and q.distance_squared_to(_p) > 1e-12:
 			_p = q
 			_y = gy
 			return true
@@ -1051,21 +1301,36 @@ func _look(yaw: float, pitch: float) -> void:
 	_camera.set("_pitch", pitch)
 
 
-## The scooter on the ground, tilted with its slope; riding, the camera above its platform, leaning.
+## The scooter on the ground, tilted with its slope and leaning into its turn; riding, the camera above its
+## deck: the eye goes with ROLL_EYE of the lean, the horizon with ROLL_VIEW of it, and the eye's height eases after the
+## ground's (dt 0: at once).
 func _place(dt: float) -> void:
 	_place_model(dt)
-	_camera.global_position = Vector3(_p.x, _y + DECK + EYE, _p.y)
-	_camera.rotation = Vector3(float(_camera.get("_pitch")) - _lean, float(_camera.get("_yaw")), _roll)
+	var eye := Basis(Vector3.UP, _heading) * Basis(Vector3.BACK, _roll * ROLL_EYE) * Vector3(0.0, DECK + EYE, 0.0)
+	var want_y := _y + eye.y
+	_eye_y = want_y if dt <= 0.0 or is_nan(_eye_y) else lerpf(_eye_y, want_y, 1.0 - exp(-EYE_EASE * dt))
+	_camera.global_position = Vector3(_p.x + eye.x, _eye_y, _p.y + eye.z)
+	_camera.rotation = Vector3(float(_camera.get("_pitch")) - _lean, float(_camera.get("_yaw")), _roll * ROLL_VIEW)
 	_last = _camera.global_position
 	_set_look = Vector2(float(_camera.get("_yaw")), float(_camera.get("_pitch")))
 
 
 func _place_model(dt: float) -> void:
 	var dir := Vector2(-sin(_heading), -cos(_heading))
-	var rise := float(_gardens.call("ground_at", _p + dir * 0.3)) - float(_gardens.call("ground_at", _p - dir * 0.3))
-	var slope := clampf(atan2(rise, 0.6), -0.3, 0.3)
+	var rise := float(_gardens.call("ground_at", _p - dir * AXLE_FRONT)) - float(_gardens.call("ground_at", _p - dir * AXLE_REAR))
+	var slope := clampf(atan2(rise, WHEELBASE), -0.3, 0.3)
 	_slope = slope if dt <= 0.0 else lerpf(_slope, slope, 1.0 - exp(-12.0 * dt))
-	_model.global_transform = Transform3D(Basis(Vector3.UP, _heading) * Basis(Vector3.RIGHT, _slope), Vector3(_p.x, _y, _p.y))
+	_model.global_transform = Transform3D(Basis(Vector3.UP, _heading) * Basis(Vector3.RIGHT, _slope) * Basis(Vector3.BACK, _roll),
+		Vector3(_p.x, _y, _p.y))
+	if _steering != null:
+		var turn := Basis(STEER_AXIS.normalized(), _steer)
+		_steering.transform = Transform3D(turn, STEER_PIVOT - turn * STEER_PIVOT)
+	if _pool != null:
+		_pool.visible = riding
+		var flat := Transform3D(Basis(Vector3.UP, _heading) * Basis(Vector3.RIGHT, _slope), Vector3(_p.x, _y, _p.y)) * POOL_XF
+		_pool.transform = _model.global_transform.affine_inverse() * flat
+	if _lamp != null:
+		_lamp.visible = riding
 	for i in _wheels.size():
 		_wheels[i].rotation = Vector3(wrapf(_spin[i], -PI, PI), 0.0, 0.0)
 
@@ -1082,36 +1347,98 @@ func _build() -> void:
 	# Anodised dark grey: bright aluminium came out beige under the terrace's warm lanterns
 	# (artpass/gardens/ride1-fwd/handlebar).
 	var metal: Material = g.call("_gmat", 0, Color(0.24, 0.255, 0.28), {"sheen": 0.9})
+	var graphite: Material = g.call("_gmat", 0, Color(0.13, 0.14, 0.15), {"sheen": 0.35})
+	var rubber: Material = g.call("_gmat", 0, Color(0.05, 0.05, 0.05), {"sheen": 0.05})
 	var mats := {
-		"body": g.call("_gmat", 0, Color(0.13, 0.14, 0.15), {"sheen": 0.35}),
+		"body": graphite,
+		"trim": rubber,
 		"metal": metal,
-		"trim": g.call("_gmat", 0, Color(0.05, 0.05, 0.05), {"sheen": 0.05}),
-		"light": g.call("_gmat", 5, Color.WHITE, {"lamp_colour": Color(0.8, 0.92, 1.0), "lamp_energy": 0.6}),
+		"tail": g.call("_gmat", 5, Color.WHITE, {"lamp_colour": Color(1.0, 0.12, 0.07), "lamp_energy": 0.8}),
+		"steer_metal": metal,
+		"steer_body": graphite,
+		"steer_trim": rubber,
+		"steer_light": g.call("_gmat", 5, Color.WHITE, {"lamp_colour": Color(0.8, 0.92, 1.0), "lamp_energy": 0.6}),
+		# The display's glass, dim: at the headlamp's energy it was a white blot under the rider's eyes.
+		"steer_screen": g.call("_gmat", 5, Color.WHITE, {"lamp_colour": Color(0.2, 0.55, 0.65), "lamp_energy": 0.08}),
 		"tyre": g.call("_gmat", 0, Color(0.045, 0.045, 0.045), {"sheen": 0.08}),
 		"dish": g.call("_gmat", 0, Color(0.2, 0.21, 0.22), {"sheen": 0.3}),
 		"spokes": metal,
 	}
-	for part: String in ["body", "metal", "trim", "light"]:
+	for part: String in ["body", "trim", "metal", "tail"]:
 		_part(_model, part, mats[part])
-	for sx: float in [-1.0, 1.0]:
+	# The steering, turned about the head tube's axis (_place_model); its parts are in the scooter's frame.
+	_steering = Node3D.new()
+	_steering.name = "Steering"
+	_model.add_child(_steering)
+	for part: String in ["steer_metal", "steer_body", "steer_trim", "steer_light", "steer_screen"]:
+		_part(_steering, part, mats[part])
+	# The front wheel turns with the steering; the rear one is the frame's.
+	for front: bool in [true, false]:
 		var wheel := Node3D.new()
-		wheel.name = "WheelL" if sx < 0.0 else "WheelR"
-		wheel.position = Vector3(sx * TRACK, WHEEL_R, 0.0)
-		_model.add_child(wheel)
+		wheel.name = "WheelFront" if front else "WheelRear"
+		wheel.position = Vector3(0.0, WHEEL_R, AXLE_FRONT if front else AXLE_REAR)
+		(_steering if front else _model).add_child(wheel)
 		for part: String in ["tyre", "dish", "spokes"]:
 			_part(wheel, part, mats[part])
 		_wheels.append(wheel)
-	# The headlamp's light on the ground ahead, added over it (assets/palace_glow.gdshader).
+	# Beckoning (BECKON_R): a golden ring lying round it, a lamp's material, so that it glows in the rays as
+	# rasterized; its display and headlamp brighter.
+	_screen_mat = mats.steer_screen
+	_light_mat = mats.steer_light
+	var torus := TorusMesh.new()
+	torus.inner_radius = 0.93
+	torus.outer_radius = 1.0
+	torus.rings = 64
+	torus.ring_segments = 6
+	_ring_mat = g.call("_gmat", 5, Color.WHITE, {"lamp_colour": Color(1.0, 0.74, 0.3), "lamp_energy": 0.0})
+	_ring = MeshInstance3D.new()
+	_ring.name = "Beckon"
+	_ring.mesh = torus
+	_ring.material_override = _ring_mat
+	_ring.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_ring.gi_mode = GeometryInstance3D.GI_MODE_DISABLED
+	_ring.transform = Transform3D(Basis.from_scale(Vector3(0.62, 0.25, 0.85)), Vector3(0.0, 0.03, (AXLE_FRONT + AXLE_REAR) * 0.5))
+	_ring.visible = false
+	_model.add_child(_ring)
+	var layer := CanvasLayer.new()
+	layer.name = "BeckonTag"
+	layer.layer = 36
+	add_child(layer)
+	_tag = Control.new()
+	_tag.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_tag.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_tag.visible = false
+	_tag.draw.connect(_draw_tag)
+	layer.add_child(_tag)
+	# The headlamp's light, while riding: its pool on the ground ahead, added over it (assets/palace_glow.gdshader),
+	# for the raster views, where the gardens and the Place du Capitole's paving are unshaded and no light reaches
+	# them (a spot light at 8 times its energy changed nothing there, artpass/gardens/escooter/lamp_probe.gd). It
+	# keeps to the scooter's heading and slope but not its lean: leaning, half of it went under the square's
+	# paving, cut straight down the middle of the view (2026-10-16). Natively also a spot light from the lamp on
+	# the stem, turning with the handlebar, for the path tracer: its rays light the gardens (palace_garden.gdshader's
+	# RT variant), and they leave out the pool, a blended surface.
 	var plane := PlaneMesh.new()
 	plane.size = Vector2.ONE
-	var pool := MeshInstance3D.new()
-	pool.name = "Headlight"
-	pool.mesh = plane
+	_pool = MeshInstance3D.new()
+	_pool.name = "Headlight"
+	_pool.mesh = plane
 	# At 0.22, 3.6 m ahead, it was a white blot at the foot of the view (artpass/gardens/ride1-fwd).
-	pool.material_override = g.call("_glow", Color(0.85, 0.9, 0.95), 0.09, {"fade_top": 0.6, "fade_foot": 0.45, "edge": 1.0})
-	pool.transform = Transform3D(Basis.from_scale(Vector3(3.2, 1.0, 8.0)), Vector3(0.0, 0.05, -5.5))
-	pool.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	_model.add_child(pool)
+	_pool.material_override = g.call("_glow", Color(0.85, 0.9, 0.95), 0.09, {"fade_top": 0.6, "fade_foot": 0.45, "edge": 1.0})
+	_pool.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_pool.visible = false
+	_model.add_child(_pool)
+	if RenderingServer.get_current_rendering_method() != "gl_compatibility":
+		_lamp = SpotLight3D.new()
+		_lamp.name = "Headlamp"
+		_lamp.light_color = Color(0.85, 0.92, 1.0)
+		_lamp.light_energy = HEADLAMP_ENERGY
+		_lamp.light_specular = 0.3
+		_lamp.spot_range = 16.0
+		_lamp.spot_angle = 26.0
+		_lamp.spot_angle_attenuation = 1.4
+		_lamp.shadow_enabled = false
+		_lamp.transform = Transform3D(Basis(Vector3.RIGHT, -HEADLAMP_DIP), HEADLAMP_AT)
+		_steering.add_child(_lamp)
 	stats.kit = true
 
 
@@ -1123,6 +1450,63 @@ func _part(parent: Node3D, part: String, mat: Material) -> void:
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	mi.gi_mode = GeometryInstance3D.GI_MODE_DISABLED
 	parent.add_child(mi)
+
+
+## On foot near the scooter: it lights up and its tag shows; elsewhere both fade.
+func _beckon_step(dt: float) -> void:
+	if _ring == null:
+		return
+	var near := on_foot and not riding and _model != null and _model.visible and _foot.distance_to(_p) <= BECKON_R
+	_beckon = move_toward(_beckon, 1.0 if near else 0.0, dt / (0.25 if near else 0.4))
+	_beckon_t += dt
+	var pulse := 0.5 + 0.5 * sin(_beckon_t * TAU * 0.8)
+	_ring.visible = _beckon > 0.01
+	_ring_mat.set_shader_parameter("lamp_energy", _beckon * (0.9 + 0.9 * pulse))
+	_screen_mat.set_shader_parameter("lamp_energy", lerpf(0.08, 0.45, _beckon))
+	_light_mat.set_shader_parameter("lamp_energy", lerpf(0.6, 1.5, _beckon * pulse))
+	_tag.visible = _beckon > 0.01
+	if _tag.visible:
+		_tag.queue_redraw()
+
+
+## The tag over the beckoning scooter: the key and what it does, where the scooter is on the screen, or at
+## the foot of it when the scooter is behind the view.
+func _draw_tag() -> void:
+	var size := _tag.get_viewport_rect().size
+	var u := minf(size.x, size.y)
+	var font := ThemeDB.fallback_font
+	var fs := roundi(clampf(u * 0.03, 15.0, 30.0))
+	var lib := _obs.get_node_or_null("Generated/CourseShelves")
+	var lang := str(lib.get("lang")) if lib != null else "en"
+	var text: String = BECKON_TEXT.get(lang, BECKON_TEXT.en)
+	var touch := _obs.get_node_or_null("TouchControls") != null
+	var key := "" if touch else "E"
+	var top := Vector3(_p.x, _y + 1.35, _p.y)
+	var at := Vector2(size.x * 0.5, size.y * 0.7)
+	if not _camera.is_position_behind(top):
+		at = _camera.unproject_position(top)
+		at = at.clamp(Vector2(u * 0.2, u * 0.12), size - Vector2(u * 0.2, u * 0.22))
+	var a := clampf(_beckon, 0.0, 1.0)
+	var tw := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
+	var kw := 0.0 if key == "" else fs * 1.6
+	var w := tw + kw + fs * (1.6 if key != "" else 1.0)
+	var box := Rect2(at.x - w * 0.5, at.y - fs * 1.9, w, fs * 1.8)
+	var gilt := Color(0.86, 0.7, 0.42)
+	_tag.draw_rect(box, Color(0.035, 0.03, 0.028, 0.82 * a))
+	_tag.draw_rect(box, Color(gilt, 0.85 * a), false, maxf(1.5, fs * 0.08))
+	var x := box.position.x + fs * 0.5
+	if key != "":
+		var cap := Rect2(x, box.position.y + fs * 0.25, kw, fs * 1.3)
+		_tag.draw_rect(cap, Color(gilt, 0.95 * a))
+		var cw := font.get_string_size(key, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
+		_tag.draw_string(font, Vector2(cap.get_center().x - cw * 0.5, cap.get_center().y + fs * 0.36), key, HORIZONTAL_ALIGNMENT_LEFT, -1, fs,
+			Color(0.06, 0.05, 0.04, a))
+		x += kw + fs * 0.6
+	_tag.draw_string(font, Vector2(x, box.get_center().y + fs * 0.36), text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color(0.97, 0.94, 0.87, a))
+	# A little pointer down to the scooter.
+	var tip := Vector2(at.x, box.end.y + fs * 0.5)
+	_tag.draw_colored_polygon(PackedVector2Array([Vector2(at.x - fs * 0.35, box.end.y), Vector2(at.x + fs * 0.35, box.end.y), tip]),
+		Color(gilt, 0.85 * a))
 
 
 ## A line in the hint for a few seconds.

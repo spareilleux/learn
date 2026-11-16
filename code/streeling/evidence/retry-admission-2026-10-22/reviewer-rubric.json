@@ -1,0 +1,119 @@
+{
+  "status": "prepared-not-performed",
+  "scope": "Source-assisted learner task, no participant outcomes. Review assesses criterion correctness rather than student success.",
+  "criteria": [
+    {
+      "id": "NET007-1",
+      "module": "NET007",
+      "title": "readiness",
+      "acceptance": "Reconstruct the diamond with four edges and level sets a | b,c | d, reported width 2; the eight-node independent graph has reported width 8. The cycle returns an error. These are dependency properties, not observed workers or a general graph-width theorem.",
+      "decision": null
+    },
+    {
+      "id": "NET007-2",
+      "module": "NET007",
+      "title": "schedule",
+      "acceptance": "Eight unit jobs with two slots need four waves and four ticks. The weighted diamond a=1,b=4,c=2,d=1 has critical path a-b-d of cost 6 with two workers, versus serial cost 8. Actual costs and overlap were not measured.",
+      "decision": null
+    },
+    {
+      "id": "NET007-3",
+      "module": "NET007",
+      "title": "source-control-flow",
+      "acceptance": "Identify the sequential legacy loop and direct synchronous compute in ix-pipeline map/collect despite comments. There is no thread spawn in that branch; internal tool parallelism is a separate question. Preserve the correction and absence of native Rust execution.",
+      "decision": null
+    },
+    {
+      "id": "NET007-4",
+      "module": "NET007",
+      "title": "partial-order",
+      "acceptance": "Both actual orders preserve first before second and third, while raw sibling orders differ. Equal numeric maps do not attest the pinned deterministic-order revision. Keep the runtime revision unknown and the raw receipts unchanged.",
+      "decision": null
+    },
+    {
+      "id": "NET007-5",
+      "module": "NET007",
+      "title": "admission-state",
+      "acceptance": "Under the proposed two-slot rule, at most two of eight ready jobs are admitted. Distinguish admission from an observed running attempt and terminal completion. No installed editor states, full failure trace or capacity contract was delivered.",
+      "decision": null
+    },
+    {
+      "id": "CYB006-1",
+      "module": "CYB006",
+      "title": "attempt-probability",
+      "acceptance": "Under independent failure probability 1/2 and at most 3 attempts, the 8 equally likely pre-sampled strings stop at first success. Expected attempts are 7/4, success probability 7/8 and terminal failure probability 1/8. The unused suffix is not executed.",
+      "decision": null
+    },
+    {
+      "id": "CYB006-2",
+      "module": "CYB006",
+      "title": "workload-units",
+      "acceptance": "6 logical requests/s times 7/4 yields 10.5 attempts/s against capacity 10 attempts/s; the boundary is 40/7 logical requests/s. A 30-second mean excess of 15 attempt-work units is neither 15 observed queued jobs nor a general stability proof.",
+      "decision": null
+    },
+    {
+      "id": "CYB006-3",
+      "module": "CYB006",
+      "title": "timing-versus-work",
+      "acceptance": "Backoff or jitter timing alone leaves fixed-model expected attempts at 7/4. A changed failure process needs new evidence. The persistent-failure control uses 3 attempts and succeeds with probability 0; no universal retry improvement is established.",
+      "decision": null
+    },
+    {
+      "id": "CYB006-4",
+      "module": "CYB006",
+      "title": "delayed-outcome",
+      "acceptance": "Starts at 0,1,2 with duration 3 complete at 3,4,5 and peak at 3 active attempts. Two-slot admission leaves starts 0,1, completions 3,4 and peak 2. Accepting a result at 3 does not cancel the active second attempt; timeout does not prove stopped work.",
+      "decision": null
+    },
+    {
+      "id": "CYB006-5",
+      "module": "CYB006",
+      "title": "falsifiable-controller",
+      "acceptance": "Compare accepted logical results, total attempt work, active-attempt observations and effect reconciliation against a single-attempt baseline. No returned result packet is not proof of absent work. The controller policy remains proposed, not installed.",
+      "decision": null
+    },
+    {
+      "id": "PHI005-1",
+      "module": "PHI005",
+      "title": "property-and-counterexample",
+      "acceptance": "Set7 once or twice yields 7 for initial states -2,0,5; increment once and twice differ. Identical ok responses cannot prove intended-effect idempotence. Incidental logging is outside the declared intended-effect comparison.",
+      "decision": null
+    },
+    {
+      "id": "PHI005-2",
+      "module": "PHI005",
+      "title": "actual-replay-scope",
+      "acceptance": "Observed numeric means 2,5,15 agree while sibling orders differ. Empty hit lists and null keys provide no cache-hit trial. Reported 0 ms is not zero cost. No external business resource was mutated and no runtime revision was attested.",
+      "decision": null
+    },
+    {
+      "id": "PHI005-3",
+      "module": "PHI005",
+      "title": "logical-intent",
+      "acceptance": "In the ideal serial atomic rule, job-A repeated increments once, ending at 1; fresh attempt keys increment twice, ending at 2. Distinct logical jobs may intend two effects with equal arguments. This model does not prove a durable store, crash safety or concurrent correctness.",
+      "decision": null
+    },
+    {
+      "id": "PHI005-4",
+      "module": "PHI005",
+      "title": "cache-identity",
+      "acceptance": "The pinned legacy key directly binds asset name, tool name and serialized resolved arguments, not step ID, implementation revision or external-state revision. Adequacy depends on the task. A matching key does not prove durable external-effect deduplication.",
+      "decision": null
+    },
+    {
+      "id": "PHI005-5",
+      "module": "PHI005",
+      "title": "unknown-outcome",
+      "acceptance": "An error at b without an aggregate cannot prove that a never ran or mutated state. Propose attempt/effect witnesses and single/repeated/lost-response/recovery tests, while retaining the absence of an actual recovery or safe unconditional-retry result.",
+      "decision": null
+    }
+  ],
+  "pass_policy": "All five criteria per module must pass; record actual answers, assistance, reviewer, evidence and individual decisions. Preserve failures.",
+  "human_technical_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "concurrency_measurement": null,
+  "runtime_retry_controller": null,
+  "durable_effect_store": null,
+  "deployed_html": null
+}

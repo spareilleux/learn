@@ -1,0 +1,267 @@
+=== GAS023 en streeling/courses/guitar-acoustics/en/gas-023-separate-phase-and-group-speed-in-bending-waves.md ===
+---
+module_id: gas-023-separate-phase-and-group-speed-in-bending-waves
+department: guitar-acoustics
+course: "Separate Phase and Group Speed in Bending Waves"
+level: advanced
+prerequisites: ["gas-010-distinguish-stiff-string-partials-from-harmonics"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Separate Phase and Group Speed in Bending Waves
+
+A body-wave animation may move crests and a packet envelope at the same speed by default. An ideal bending-wave dispersion law makes those speeds different. Differentiate angular frequency with respect to wave number instead of dividing it by wave number. The narrow-packet interpretation needs a local band and negligible distortion; it is not a claim that every visible pulse travels rigidly. This calculation supplies a candidate diagnostic for a [Godot](https://godotengine.org/) acoustic visualization, while actual meshes, materials and wave propagation remain untested.
+
+Use positive wave number and coefficient with the displayed power law. Group speed is the local derivative for a narrow band. No material solver, calibrated body response, broadband pulse or scene simulation was executed.
+
+[Prerequisite](../../guitar-acoustics/en/gas-010-distinguish-stiff-string-partials-from-harmonics.md)
+
+[Primary reading](https://www.dsprelated.com/freebooks/pasp/Stiff_String.html)
+
+> **Answer:** Angular frequency is 18, phase speed is 6 and group speed is 12 in consistent stipulated units.
+
+> **Answer:** A crest follows phase; a narrow envelope follows the local derivative under the stated approximation.
+
+> **Answer:** A broad packet can spread, so assigning one unchanged envelope speed requires additional evidence.
+
+> **Answer:** The linear control returns equal speeds 2; it isolates the curvature of the dispersion relation.
+
+> **Answer:** A claimed quadratic-wave animation with equal crest and local group speeds contradicts this model.
+=== GAS023 fr streeling/courses/guitar-acoustics/fr/gas-023-separate-phase-and-group-speed-in-bending-waves.fr.md ===
+---
+module_id: gas-023-separate-phase-and-group-speed-in-bending-waves
+department: guitar-acoustics
+course: "Distinguer vitesses de phase et de groupe en flexion"
+level: advanced
+prerequisites: ["gas-010-distinguish-stiff-string-partials-from-harmonics"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Distinguer vitesses de phase et de groupe en flexion
+
+Une animation d’onde de caisse peut déplacer crêtes et enveloppe à la même vitesse par défaut. Une loi idéale de dispersion en flexion leur donne des vitesses différentes. Dérivez la fréquence angulaire par rapport au nombre d’onde au lieu de les diviser. L’interprétation en paquet étroit suppose une bande locale et une faible déformation ; elle ne promet pas un déplacement rigide de toute impulsion. Le calcul propose un diagnostic pour une visualisation acoustique [Godot](https://godotengine.org/) ; maillages, matériaux et propagation réelle restent à tester.
+
+Utilisez un nombre d’onde et un coefficient positifs dans la loi de puissance affichée. La vitesse de groupe est la dérivée locale pour une bande étroite. Aucun solveur de matériau, réponse de caisse étalonnée, paquet large ni simulation de scène n’a été exécuté.
+
+[Prérequis](../../guitar-acoustics/en/gas-010-distinguish-stiff-string-partials-from-harmonics.md)
+
+[Lecture primaire](https://www.dsprelated.com/freebooks/pasp/Stiff_String.html)
+
+> **Réponse:** La fréquence angulaire vaut 18, la vitesse de phase 6 et celle de groupe 12, dans des unités cohérentes stipulées.
+
+> **Réponse:** Une crête suit la phase ; une enveloppe étroite suit la dérivée locale dans l’approximation déclarée.
+
+> **Réponse:** Un paquet large peut se disperser ; lui attribuer une vitesse d’enveloppe inchangée exige d’autres preuves.
+
+> **Réponse:** Le témoin linéaire donne deux vitesses égales à 2 ; il isole la courbure de la dispersion.
+
+> **Réponse:** Une animation déclarée quadratique qui égalise vitesse des crêtes et vitesse locale de groupe contredit ce modèle.
+=== GAS023 es streeling/courses/guitar-acoustics/es/gas-023-separate-phase-and-group-speed-in-bending-waves.es.md ===
+---
+module_id: gas-023-separate-phase-and-group-speed-in-bending-waves
+department: guitar-acoustics
+course: "Distinguir velocidades de fase y grupo en ondas de flexión"
+level: advanced
+prerequisites: ["gas-010-distinguish-stiff-string-partials-from-harmonics"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Distinguir velocidades de fase y grupo en ondas de flexión
+
+Una animación de ondas de caja puede mover crestas y envolvente a igual velocidad por defecto. Una ley ideal de dispersión por flexión da velocidades distintas. Derive la frecuencia angular respecto al número de onda en vez de dividirlos. La interpretación de paquete estrecho supone banda local y poca deformación; no promete traslación rígida de cualquier pulso. El cálculo propone un diagnóstico para una visualización acústica [Godot](https://godotengine.org/); mallas, materiales y propagación real quedan pendientes.
+
+Use número de onda y coeficiente positivos en la ley de potencias mostrada. La velocidad de grupo es la derivada local en banda estrecha. No se ejecutó solver material, respuesta de caja calibrada, pulso ancho ni simulación de escena.
+
+[Prerrequisito](../../guitar-acoustics/en/gas-010-distinguish-stiff-string-partials-from-harmonics.md)
+
+[Lectura primaria](https://www.dsprelated.com/freebooks/pasp/Stiff_String.html)
+
+> **Respuesta:** La frecuencia angular es 18, la velocidad de fase 6 y la de grupo 12, en unidades coherentes estipuladas.
+
+> **Respuesta:** Una cresta sigue la fase; una envolvente estrecha sigue la derivada local bajo la aproximación declarada.
+
+> **Respuesta:** Un paquete ancho puede dispersarse; asignarle una velocidad de envolvente invariable exige más pruebas.
+
+> **Respuesta:** El control lineal da ambas velocidades iguales a 2; aísla la curvatura de la dispersión.
+
+> **Respuesta:** Una animación declarada cuadrática que iguale velocidad de crestas y velocidad local de grupo contradice este modelo.
+=== GAS024 en streeling/courses/guitar-acoustics/en/gas-024-track-avoided-crossings-through-detuning.md ===
+---
+module_id: gas-024-track-avoided-crossings-through-detuning
+department: guitar-acoustics
+course: "Track Avoided Crossings Through Detuning"
+level: advanced
+prerequisites: ["gas-012-distinguish-coupling-from-parallel-resonance"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Track Avoided Crossings Through Detuning
+
+Two spectral peaks can exchange their dominant physical character as a body parameter passes through a string resonance. Sorting peaks by frequency does not preserve a component label. Follow the eigenbranches of a declared symmetric squared-frequency matrix across a detuning sweep. The off-diagonal coupling opens a minimum gap in squared frequency. That gap is not a damping width, and its square roots have a different separation. The exercise provides an authored continuation table for [GA](https://github.com/GuitarAlchemist/ga) diagnostics without fitting an actual guitar.
+
+The matrix is real symmetric and its selected squared-frequency eigenvalues stay positive. There is no damping. The minimum reported is over the supplied finite detuning sweep; no fitted physical coupling is claimed.
+
+[Prerequisite](../../guitar-acoustics/en/gas-012-distinguish-coupling-from-parallel-resonance.md)
+
+> **Answer:** At zero detuning the squared-frequency branches are 8 and 12; their gap is 4.
+
+> **Answer:** Squared-frequency separation differs from ordinary or angular frequency separation; retain the coordinate before taking roots.
+
+> **Answer:** This finite sweep contains the symmetric minimum, but it does not identify damping or a real guitar coupling.
+
+> **Answer:** With coupling 0 the two branches meet at 10, so the minimum gap becomes 0.
+
+> **Answer:** A zero detuning gap of 0 with the retained nonzero coupling would reject the displayed eigenbranch prediction.
+=== GAS024 fr streeling/courses/guitar-acoustics/fr/gas-024-track-avoided-crossings-through-detuning.fr.md ===
+---
+module_id: gas-024-track-avoided-crossings-through-detuning
+department: guitar-acoustics
+course: "Suivre un croisement évité en faisant varier le désaccord"
+level: advanced
+prerequisites: ["gas-012-distinguish-coupling-from-parallel-resonance"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Suivre un croisement évité en faisant varier le désaccord
+
+Deux pics peuvent échanger leur caractère physique dominant lorsqu’un paramètre de caisse traverse une résonance de corde. Trier les pics par fréquence ne conserve pas l’identité d’un composant. Suivez les branches propres d’une matrice symétrique de fréquences au carré pendant un balayage du désaccord. Le couplage ouvre un écart minimal entre ces valeurs propres. Cet écart n’est pas une largeur d’amortissement ; les racines carrées ont une autre séparation. La table construite sert au diagnostic [GA](https://github.com/GuitarAlchemist/ga) sans ajuster une vraie guitare.
+
+La matrice est réelle symétrique et les valeurs propres de fréquence au carré restent positives. L’amortissement est absent. Le minimum porte sur le balayage fini fourni ; aucun couplage physique ajusté n’est revendiqué.
+
+[Prérequis](../../guitar-acoustics/en/gas-012-distinguish-coupling-from-parallel-resonance.md)
+
+> **Réponse:** Au désaccord nul, les branches de fréquence au carré valent 8 et 12 ; leur écart vaut 4.
+
+> **Réponse:** L’écart des fréquences au carré diffère d’un écart fréquentiel ; conservez la coordonnée avant de prendre les racines.
+
+> **Réponse:** Ce balayage fini contient le minimum symétrique, mais n’identifie ni amortissement ni couplage d’une vraie guitare.
+
+> **Réponse:** Avec un couplage de 0, les branches se rejoignent à 10 et l’écart minimal vaut 0.
+
+> **Réponse:** Un écart de 0 au désaccord nul avec le couplage non nul conservé réfuterait la prédiction affichée.
+=== GAS024 es streeling/courses/guitar-acoustics/es/gas-024-track-avoided-crossings-through-detuning.es.md ===
+---
+module_id: gas-024-track-avoided-crossings-through-detuning
+department: guitar-acoustics
+course: "Seguir un cruce evitado al variar la desintonización"
+level: advanced
+prerequisites: ["gas-012-distinguish-coupling-from-parallel-resonance"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Seguir un cruce evitado al variar la desintonización
+
+Dos picos pueden intercambiar su carácter físico dominante cuando un parámetro de caja cruza una resonancia de cuerda. Ordenarlos por frecuencia no conserva la identidad de un componente. Siga las ramas propias de una matriz simétrica de frecuencias al cuadrado durante un barrido de desintonización. El acoplamiento abre una separación mínima entre esos autovalores. No es un ancho de amortiguamiento; sus raíces cuadradas tienen otra separación. La tabla elaborada sirve al diagnóstico [GA](https://github.com/GuitarAlchemist/ga) sin ajustar una guitarra real.
+
+La matriz es real simétrica y sus autovalores de frecuencia al cuadrado son positivos. No hay amortiguamiento. El mínimo se toma en el barrido finito proporcionado; no se afirma acoplamiento físico ajustado.
+
+[Prerrequisito](../../guitar-acoustics/en/gas-012-distinguish-coupling-from-parallel-resonance.md)
+
+> **Respuesta:** Con desintonización nula, las ramas de frecuencia al cuadrado son 8 y 12; la separación es 4.
+
+> **Respuesta:** La separación de frecuencias al cuadrado difiere de una separación frecuencial; conserve la coordenada antes de extraer raíces.
+
+> **Respuesta:** Este barrido finito contiene el mínimo simétrico, pero no identifica amortiguamiento ni acoplamiento de una guitarra real.
+
+> **Respuesta:** Con acoplamiento 0, ambas ramas se encuentran en 10 y la separación mínima es 0.
+
+> **Respuesta:** Una separación de 0 con desintonización nula y acoplamiento no nulo conservado refutaría la predicción mostrada.
+=== GAS025 en streeling/courses/guitar-acoustics/en/gas-025-separate-active-and-reactive-acoustic-power.md ===
+---
+module_id: gas-025-separate-active-and-reactive-acoustic-power
+department: guitar-acoustics
+course: "Separate Active and Reactive Acoustic Power"
+level: advanced
+prerequisites: ["gas-018-account-for-energy-at-an-impedance-junction"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Separate Active and Reactive Acoustic Power
+
+Large oscillating pressure and flow do not guarantee large average transferred power. Their phase relation matters. Multiply pressure by conjugate volume velocity and retain the peak-phasor factor before taking the real part. The imaginary part encodes reactive exchange under the chosen sign convention; it is not additional average dissipated power. This port calculation helps review a proposed body-resonator diagnostic while leaving actual pressure calibration and boundary measurements open. Do not replace volume velocity with point particle velocity without also changing the physical quantity.
+
+Use peak phasors with the positive complex-exponential time convention, and pressure and volume velocity at the same port. Flow points into the port. Neither a spatial intensity field nor an actual calibrated power measurement was obtained.
+
+[Prerequisite](../../guitar-acoustics/en/gas-018-account-for-energy-at-an-impedance-junction.md)
+
+> **Answer:** The main complex power is `-1j`, with active power 0 and reactive power -1.
+
+> **Answer:** Reactive power is not added to average dissipation; it records quadrature exchange for the chosen convention.
+
+> **Answer:** The factor 0.5 belongs to peak phasors; RMS phasors would require another normalization.
+
+> **Answer:** In phase, complex power is 1, active power is 1 and reactive power is 0 despite unchanged magnitudes.
+
+> **Answer:** A magnitude-only rule predicting identical average power for both cases is refuted by their phase difference.
+=== GAS025 fr streeling/courses/guitar-acoustics/fr/gas-025-separate-active-and-reactive-acoustic-power.fr.md ===
+---
+module_id: gas-025-separate-active-and-reactive-acoustic-power
+department: guitar-acoustics
+course: "Distinguer puissances acoustiques active et réactive"
+level: advanced
+prerequisites: ["gas-018-account-for-energy-at-an-impedance-junction"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Distinguer puissances acoustiques active et réactive
+
+Une pression et un débit oscillants élevés ne garantissent pas une forte puissance moyenne transférée. Leur phase relative compte. Multipliez la pression par le débit conjugué en conservant le facteur des phaseurs de crête avant de prendre la partie réelle. La partie imaginaire décrit l’échange réactif selon le signe choisi ; ce n’est pas une puissance moyenne dissipée supplémentaire. Ce calcul de port aide à examiner un diagnostic de caisse, sans étalonner ni mesurer la pression réelle. Ne remplacez pas le débit par la vitesse locale sans changer de grandeur.
+
+Utilisez des phaseurs de crête avec la convention temporelle exponentielle complexe positive, et pression et débit au même port. Le débit entre dans le port. Aucun champ spatial d’intensité ni aucune mesure étalonnée de puissance n’a été obtenu.
+
+[Prérequis](../../guitar-acoustics/en/gas-018-account-for-energy-at-an-impedance-junction.md)
+
+> **Réponse:** La puissance complexe principale vaut `-1j`, avec une puissance active de 0 et réactive de -1.
+
+> **Réponse:** La puissance réactive ne s’ajoute pas à la dissipation moyenne ; elle décrit l’échange en quadrature selon la convention.
+
+> **Réponse:** Le facteur 0.5 appartient aux phaseurs de crête ; des phaseurs efficaces demanderaient une autre normalisation.
+
+> **Réponse:** En phase, la puissance complexe vaut 1, l’active 1 et la réactive 0 malgré les modules inchangés.
+
+> **Réponse:** Une règle fondée seulement sur les modules prédisant la même puissance moyenne est réfutée par leur phase différente.
+=== GAS025 es streeling/courses/guitar-acoustics/es/gas-025-separate-active-and-reactive-acoustic-power.es.md ===
+---
+module_id: gas-025-separate-active-and-reactive-acoustic-power
+department: guitar-acoustics
+course: "Distinguir potencia acústica activa y reactiva"
+level: advanced
+prerequisites: ["gas-018-account-for-energy-at-an-impedance-junction"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Distinguir potencia acústica activa y reactiva
+
+Presión y caudal oscilantes grandes no garantizan gran potencia media transferida. Importa su fase relativa. Multiplique presión por caudal conjugado y conserve el factor de fasores de pico antes de tomar la parte real. La parte imaginaria describe intercambio reactivo según el signo elegido; no es potencia media disipada adicional. Este cálculo de puerto ayuda a revisar un diagnóstico de caja sin calibrar ni medir presión real. No sustituya caudal por velocidad local sin cambiar de magnitud.
+
+Use fasores de pico con convención temporal exponencial compleja positiva, y presión y caudal en el mismo puerto. El flujo entra al puerto. No se obtuvo campo espacial de intensidad ni medida calibrada real de potencia.
+
+[Prerrequisito](../../guitar-acoustics/en/gas-018-account-for-energy-at-an-impedance-junction.md)
+
+> **Respuesta:** La potencia compleja principal es `-1j`, con potencia activa 0 y reactiva -1.
+
+> **Respuesta:** La potencia reactiva no se suma a la disipación media; describe intercambio en cuadratura según la convención.
+
+> **Respuesta:** El factor 0.5 pertenece a fasores de pico; los fasores eficaces requieren otra normalización.
+
+> **Respuesta:** En fase, la potencia compleja es 1, la activa 1 y la reactiva 0 pese a módulos sin cambios.
+
+> **Respuesta:** Una regla basada solo en módulos que prediga igual potencia media queda refutada por su diferencia de fase.

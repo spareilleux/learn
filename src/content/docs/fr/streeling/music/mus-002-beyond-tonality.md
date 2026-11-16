@@ -4,12 +4,13 @@ description: Fondements de la théorie musicale — Musique
 sidebar:
   label: MUS-002 · Au-delà de la tonalité
   order: 2
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/fr/mus-002-beyond-tonality.fr.md
 ---
 
 :::note[Streeling University]
 **MUS-002** · Fondements de la théorie musicale · intermédiaire · 45 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/music/fr/mus-002-beyond-tonality.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-002-beyond-tonality.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-001](../../music/mus-001-what-is-a-chord/)
 :::

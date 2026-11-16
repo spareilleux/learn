@@ -1,0 +1,3199 @@
+{
+  "schema": "streeling-batch50-unit-evidence-v1",
+  "unit": "b",
+  "base_learn_commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+  "plan_commit": "f93c0356d23c3700ad1ead501eef46802dca2a31",
+  "scope": "Sixteen authored system/agentic courses and full EN/FR/ES source. Fixed mathematical cases are authored. Structural author checks are not independent claim tests, runtime observations or learner evidence.",
+  "primary_references": [
+    {
+      "id": "result",
+      "url": "https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-resultmodule.html",
+      "pin": "FSharp.Core documentation, read 2026-10-25",
+      "actual_reading_scope": "Result.bind definition and Error/Ok branches; browser text lines 15-45."
+    },
+    {
+      "id": "use",
+      "url": "https://learn.microsoft.com/dotnet/fsharp/language-reference/resource-management-the-use-keyword",
+      "pin": "Microsoft F# language reference, read 2026-10-25",
+      "actual_reading_scope": "Resource acquisition/release, scope exit and reverse disposal order; English localized response lines 32-68 inspected."
+    },
+    {
+      "id": "sqlite",
+      "url": "https://www.sqlite.org/isolation.html",
+      "pin": "SQLite isolation documentation, updated 2022-04-18",
+      "actual_reading_scope": "Separate connections, single writer and snapshot isolation; lines 23-53 inspected. This motivates explicit effects, not a proof of our static rule."
+    },
+    {
+      "id": "ewma",
+      "url": "https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc324.htm",
+      "pin": "NIST e-Handbook section 6.3.2.4, read 2026-10-25",
+      "actual_reading_scope": "Recurrence, initialization and asymptotic variance formula, with independence and representative-data conditions; lines 7-21."
+    },
+    {
+      "id": "feed",
+      "url": "https://www.cds.caltech.edu/~murray/books/AM08/pdf/cds101-complete_20Sep07.pdf",
+      "pin": "Astrom and Murray, Feedback Systems draft 2007-09-20, chapter 11",
+      "actual_reading_scope": "Official-host search extraction of measured-disturbance feedforward and equations 11.6-11.7; full PDF fetch timed out. Only extracted passage read; no whole-chapter reading claimed."
+    },
+    {
+      "id": "rate",
+      "url": "https://arxiv.org/abs/1903.05508",
+      "pin": "Nie and Kerrigan, arXiv:1903.05508v2, 2020-02-28",
+      "actual_reading_scope": "Author abstract: explicit rate constraints and linear constraint equations. No implementation or full paper read; our clamp is independently declared."
+    },
+    {
+      "id": "metrics",
+      "url": "https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall",
+      "pin": "Google ML Crash Course, updated 2026-01-12",
+      "actual_reading_scope": "Recall, false-positive rate, precision definitions and denominators; lines 92-127 inspected."
+    },
+    {
+      "id": "prov",
+      "url": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+      "pin": "W3C Recommendation 2013-04-30",
+      "actual_reading_scope": "Abstract and component list, entities/activities/derivation; lines 34-38. Supports provenance distinction only, not missingness arithmetic."
+    },
+    {
+      "id": "did",
+      "url": "https://blogs.worldbank.org/en/impactevaluations/did-you-see-beta-beta-who-part-1",
+      "pin": "Duhaut, Kondylis, Loeser and Piza, World Bank, 2021-11-02",
+      "actual_reading_scope": "Canonical two-cohort/two-period comparison, parallel trends and limits on transport; lines 33-45 inspected."
+    },
+    {
+      "id": "delta",
+      "url": "https://www.rfc-editor.org/rfc/rfc3284.html",
+      "pin": "RFC 3284, June 2002, section 1",
+      "actual_reading_scope": "Differencing a target given a source versus source-free compression; lines 78-104 inspected. Our integer deltas are not VCDIFF."
+    },
+    {
+      "id": "select",
+      "url": "https://www.sqlite.org/lang_select.html",
+      "pin": "SQLite SELECT documentation section 2.1, read in retained preceding batch and refreshed 2026-10-25",
+      "actual_reading_scope": "Join row/bag and aggregate semantics; used only to distinguish rows from summary unit."
+    },
+    {
+      "id": "cbor",
+      "url": "https://www.rfc-editor.org/rfc/rfc8949.html",
+      "pin": "RFC 8949, December 2020, sections 3 and 3.1",
+      "actual_reading_scope": "Definite lengths, byte counts, text UTF-8 and incomplete items; browser lines 289-345 inspected. Toy framing is not CBOR wire encoding."
+    },
+    {
+      "id": "flow",
+      "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.flow.maximum_flow.html",
+      "pin": "NetworkX 3.7 documentation, read 2026-10-25",
+      "actual_reading_scope": "Capacity attribute, flow value/dictionary and minimum-cut equivalence notes; API documentation inspected, package not run."
+    },
+    {
+      "id": "scc",
+      "url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.components.condensation.html",
+      "pin": "NetworkX 3.7 documentation, read 2026-10-25",
+      "actual_reading_scope": "SCC contraction, member mapping and resulting DAG; browser lines 93-128 inspected."
+    },
+    {
+      "id": "schedule",
+      "url": "https://developers.google.com/optimization/scheduling/job_shop",
+      "pin": "Google OR-Tools scheduling guide, read 2026-10-25",
+      "actual_reading_scope": "Precedence, exclusive resources, nonpreemption and makespan objective; lines 78-113. Our weighted completion objective is separately defined and no solver is run."
+    },
+    {
+      "id": "km",
+      "url": "https://itl.nist.gov/div898/handbook/apr/section2/apr215.htm",
+      "pin": "NIST e-Handbook section 8.2.1.5, read 2026-10-25",
+      "actual_reading_scope": "Exact event times, risk sets and recursive product-limit factors; official page/search text inspected."
+    }
+  ],
+  "courses": [
+    {
+      "code": "CS021",
+      "department": "computer-science",
+      "module_id": "cs-021-accumulate-independent-validation-errors",
+      "prerequisites": [
+        "cs-010-compose-fail-fast-ga-computations"
+      ],
+      "novelty_vs_prerequisites": "CS010 propagates the first dependent failure. This operation evaluates independent field checks and accumulates all errors in a declared order; dependent steps remain blocked.",
+      "authored_model": {
+        "values": {
+          "sample_rate_hz": 0,
+          "channels": 3,
+          "frames": -1
+        },
+        "formula": "Validate fields independently in sample_rate_hz, channels, frames order: rate>0; channels in [1,2]; frames>=0. Concatenate error field names. Reject if any error; no effects occur.",
+        "expected": {
+          "errors": [
+            "sample_rate_hz",
+            "channels",
+            "frames"
+          ],
+          "error_count": 3,
+          "accepted": false
+        },
+        "negative_control": {
+          "values": {
+            "sample_rate_hz": 48000,
+            "channels": 2,
+            "frames": 64
+          },
+          "expected": {
+            "errors": [],
+            "error_count": 0,
+            "accepted": true
+          },
+          "why": "Valid inputs remove every independent error without substituting defaults."
+        },
+        "assumptions": [
+          "Pure total field checks; no check depends on another field being valid.",
+          "Error order follows declared field order; frames is an integer."
+        ],
+        "limits": "Accumulation does not authorize dependent audio work or provide a GA implementation.",
+        "input_types": {
+          "sample_rate_hz": "integer",
+          "channels": "integer",
+          "frames": "integer"
+        }
+      },
+      "title": "Accumulate Independent Validation Errors",
+      "source_paths": {
+        "en": "streeling/courses/computer-science/en/cs-021-accumulate-independent-validation-errors.md",
+        "fr": "streeling/courses/computer-science/fr/cs-021-accumulate-independent-validation-errors.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-021-accumulate-independent-validation-errors.es.md"
+      },
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/computer-science/en/cs-021-accumulate-independent-validation-errors.md",
+          "sha256": "523d49915bd42d294802f5cf67d610a4f2cc58079ae1aee5701ee582b65b5a45"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/computer-science/fr/cs-021-accumulate-independent-validation-errors.fr.md",
+          "sha256": "3f28818f819dd7a936284210ef7f64b9afbbb27c2dcc72976dc411e6229899b7"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/computer-science/es/cs-021-accumulate-independent-validation-errors.es.md",
+          "sha256": "3218e7b19e546b78d0708b67dea7a707e7a9ce75f76d0f53970507111627db92"
+        }
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/computer-science/en/cs-010-compose-fail-fast-ga-computations.md",
+          "path_or_url": "streeling/courses/computer-science/en/cs-010-compose-fail-fast-ga-computations.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "5f739c45f20c66cdbf484880b46596deb97a39687a9de00baf469fe9d33f8fdf",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule frontmatter/heading/body and englishModuleKeys set construction; actual source lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "Retained observation statements distinguish retrieval metrics, offered responses and learner evidence; no new outcome read or inferred."
+        },
+        {
+          "path_or_url": "https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-resultmodule.html",
+          "pin": "FSharp.Core documentation, read 2026-10-25",
+          "sha256": null,
+          "scope": "Result.bind definition and Error/Ok branches; browser text lines 15-45.",
+          "read_method": "Actual browser text or explicitly bounded official search extraction inspected; HTTP status alone was not treated as reading."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "List the errors in the fixed case.",
+          "expected_answer": "The ordered list is `[sample_rate_hz,channels,frames]`, with `3` errors. Each field independently violates its rule; order follows the contract, not discovery timing.",
+          "decision": null
+        },
+        "2": {
+          "question": "What would a fail-fast field chain return?",
+          "expected_answer": "It would retain only `sample_rate_hz` under this order. That behavior can be correct for dependent computations, but it does not implement the requested complete diagnostic list.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the valid control.",
+          "expected_answer": "With `48000`, `2` and `64`, the list is `[]`, the count is `0` and the request is accepted. No default repaired an invalid value.",
+          "decision": null
+        },
+        "4": {
+          "question": "May a decoder run while these errors are collected?",
+          "expected_answer": "Only if its own prerequisites are established separately. These pure field checks do not supply a valid buffer or authorize dependent effects.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would refute an accumulation proposal?",
+          "expected_answer": "Losing a field error, changing its identity, or constructing an accepted request while errors remain refutes the contract. Extra prose cannot compensate for a missing diagnostic.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: List the errors in the fixed case. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: What would a fail-fast field chain return? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Apply the valid control. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: May a decoder run while these errors are collected? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: What would refute an accumulation proposal? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare an input-diagnostic note for a fictional GA audio request and challenge an assistant to preserve every independent failure.",
+        "direct_manual_baseline": "Write a field/rule/error table by hand, then concatenate errors in the stated order.",
+        "falsifier": "Any invalid independent field disappears from diagnostics or a nonempty list produces acceptance.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CS022",
+      "department": "computer-science",
+      "module_id": "cs-022-check-read-write-footprints-before-reordering",
+      "prerequisites": [
+        "cs-017-test-pipeline-rewrites-with-counterexamples"
+      ],
+      "novelty_vs_prerequisites": "CS017 refutes value rewrites with witnesses and distinguishes order from reassociation. This adds a static read/write conflict calculation, including read-after-write dependencies even with different output files.",
+      "authored_model": {
+        "values": {
+          "a": {
+            "reads": [
+              "source"
+            ],
+            "writes": [
+              "manifest"
+            ]
+          },
+          "b": {
+            "reads": [
+              "manifest"
+            ],
+            "writes": [
+              "report"
+            ]
+          }
+        },
+        "formula": "conflicts=(Wa intersect (Rb union Wb)) union (Wb intersect (Ra union Wa)); sort unique names; independent iff conflicts empty.",
+        "expected": {
+          "conflicts": [
+            "manifest"
+          ],
+          "independent": false
+        },
+        "negative_control": {
+          "values": {
+            "a": {
+              "reads": [
+                "source"
+              ],
+              "writes": [
+                "manifest"
+              ]
+            },
+            "b": {
+              "reads": [
+                "source"
+              ],
+              "writes": [
+                "report"
+              ]
+            }
+          },
+          "expected": {
+            "conflicts": [],
+            "independent": true
+          },
+          "why": "Removing the read-after-write dependency leaves disjoint writes and shared read-only input."
+        },
+        "assumptions": [
+          "Exact resource names cover every read and write; stages otherwise deterministic.",
+          "No clocks, network effects, hidden mutable state or failures are represented."
+        ],
+        "limits": "Empty conflicts is a sufficient footprint check under these assumptions, not universal commutativity or a concurrent runtime.",
+        "input_types": {
+          "a": "{reads:set<string>,writes:set<string>}",
+          "b": "{reads:set<string>,writes:set<string>}"
+        }
+      },
+      "title": "Check Read and Write Footprints Before Reordering",
+      "source_paths": {
+        "en": "streeling/courses/computer-science/en/cs-022-check-read-write-footprints-before-reordering.md",
+        "fr": "streeling/courses/computer-science/fr/cs-022-check-read-write-footprints-before-reordering.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-022-check-read-write-footprints-before-reordering.es.md"
+      },
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/computer-science/en/cs-022-check-read-write-footprints-before-reordering.md",
+          "sha256": "fb00e447bc55be816bf60956c0e97aad797f476f64937f923a14ec1709af4fbe"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/computer-science/fr/cs-022-check-read-write-footprints-before-reordering.fr.md",
+          "sha256": "38f9265da80ad3df973e9169af2cd2e0f13305ebb0f2a560475ddeeaff887a68"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/computer-science/es/cs-022-check-read-write-footprints-before-reordering.es.md",
+          "sha256": "843f1eaeb2c152ac9b9c016ecefda2cca6757b33ce21e54559a1763344b7494e"
+        }
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/computer-science/en/cs-017-test-pipeline-rewrites-with-counterexamples.md",
+          "path_or_url": "streeling/courses/computer-science/en/cs-017-test-pipeline-rewrites-with-counterexamples.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "9c28b373054530234ce99a61848b87243c8acb65c250282a03ce7fdd95c46c68",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule frontmatter/heading/body and englishModuleKeys set construction; actual source lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "Retained observation statements distinguish retrieval metrics, offered responses and learner evidence; no new outcome read or inferred."
+        },
+        {
+          "path_or_url": "https://www.sqlite.org/isolation.html",
+          "pin": "SQLite isolation documentation, updated 2022-04-18",
+          "sha256": null,
+          "scope": "Separate connections, single writer and snapshot isolation; lines 23-53 inspected. This motivates explicit effects, not a proof of our static rule.",
+          "read_method": "Actual browser text or explicitly bounded official search extraction inspected; HTTP status alone was not treated as reading."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Find the fixed-case conflict.",
+          "expected_answer": "`manifest` belongs to the first write set and second read set. The conflict list is `[manifest]`, so `independent=false`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Why do different output files not suffice?",
+          "expected_answer": "The second stage consumes a value the first changes. Reversing them can read an older manifest even though their write sets are disjoint.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the shared-read control.",
+          "expected_answer": "Both stages read `source`, while writing different resources. The conflict list is `[]` and `independent=true` under complete footprints.",
+          "decision": null
+        },
+        "4": {
+          "question": "Does a conflict prove noncommutativity?",
+          "expected_answer": "No. This is a sufficient independence test. A separate argument could show equal behavior despite an overlap, but the footprint alone cannot.",
+          "decision": null
+        },
+        "5": {
+          "question": "Name a falsifying hidden effect.",
+          "expected_answer": "An unlisted write to a shared cache invalidates the completeness premise. Retain it and recompute; do not call an incomplete empty intersection a safety proof.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Find the fixed-case conflict. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Why do different output files not suffice? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Apply the shared-read control. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: Does a conflict prove noncommutativity? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: Name a falsifying hidden effect. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Annotate fictional Learn stages with read/write sets and ask an assistant to justify or reject a reorder.",
+        "direct_manual_baseline": "Intersect the write sets with the other stage’s read/write union on paper.",
+        "falsifier": "A read-after-write overlap is omitted or an unlisted effect is treated as covered.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CS023",
+      "department": "computer-science",
+      "module_id": "cs-023-unwind-only-acquired-resources",
+      "prerequisites": [
+        "cs-010-compose-fail-fast-ga-computations"
+      ],
+      "novelty_vs_prerequisites": "CS010 skips dependent callbacks and explicitly does not undo earlier effects. This adds ownership-scoped cleanup traces under work failure and partial acquisition; cleanup is not compensation.",
+      "authored_model": {
+        "values": {
+          "resources": [
+            "input",
+            "output"
+          ],
+          "fail_acquire": null,
+          "work_error": true
+        },
+        "formula": "Acquire in listed order until failure. If acquisition completes run work. Release every successfully acquired resource exactly once in reverse order. Release cannot fail in this model.",
+        "expected": {
+          "acquired": [
+            "input",
+            "output"
+          ],
+          "released": [
+            "output",
+            "input"
+          ],
+          "outcome": "work_error"
+        },
+        "negative_control": {
+          "values": {
+            "resources": [
+              "input",
+              "output"
+            ],
+            "fail_acquire": "output",
+            "work_error": true
+          },
+          "expected": {
+            "acquired": [
+              "input"
+            ],
+            "released": [
+              "input"
+            ],
+            "outcome": "acquire_error"
+          },
+          "why": "A failed acquisition does not create ownership; work is skipped and only input is released."
+        },
+        "assumptions": [
+          "Acquisition failure returns no resource; all releases succeed.",
+          "Nested scopes own their acquired resources; no process crash or escaping borrow."
+        ],
+        "limits": "No implementation, exception suppression policy, asynchronous disposal or crash recovery is provided.",
+        "input_types": {
+          "resources": "ordered list<unique string>",
+          "fail_acquire": "string|null",
+          "work_error": "boolean"
+        }
+      },
+      "title": "Unwind Only the Resources Actually Acquired",
+      "source_paths": {
+        "en": "streeling/courses/computer-science/en/cs-023-unwind-only-acquired-resources.md",
+        "fr": "streeling/courses/computer-science/fr/cs-023-unwind-only-acquired-resources.fr.md",
+        "es": "streeling/courses/computer-science/es/cs-023-unwind-only-acquired-resources.es.md"
+      },
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/computer-science/en/cs-023-unwind-only-acquired-resources.md",
+          "sha256": "59a081151c6320cab40b453fcf43980c9e80dfdfaf936df76c0c0e3a10ad262b"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/computer-science/fr/cs-023-unwind-only-acquired-resources.fr.md",
+          "sha256": "6fbe44a0486954e7d6c94c7e5ef9b72f052bcc73bdd63a800daac29467eb1871"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/computer-science/es/cs-023-unwind-only-acquired-resources.es.md",
+          "sha256": "a859983041c0e46999a17c0a423caa039b676a821288ae628dbd8723454bedc5"
+        }
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/computer-science/en/cs-010-compose-fail-fast-ga-computations.md",
+          "path_or_url": "streeling/courses/computer-science/en/cs-010-compose-fail-fast-ga-computations.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "5f739c45f20c66cdbf484880b46596deb97a39687a9de00baf469fe9d33f8fdf",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule frontmatter/heading/body and englishModuleKeys set construction; actual source lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "Retained observation statements distinguish retrieval metrics, offered responses and learner evidence; no new outcome read or inferred."
+        },
+        {
+          "path_or_url": "https://learn.microsoft.com/dotnet/fsharp/language-reference/resource-management-the-use-keyword",
+          "pin": "Microsoft F# language reference, read 2026-10-25",
+          "sha256": null,
+          "scope": "Resource acquisition/release, scope exit and reverse disposal order; English localized response lines 32-68 inspected.",
+          "read_method": "Actual browser text or explicitly bounded official search extraction inspected; HTTP status alone was not treated as reading."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Trace cleanup after the work failure.",
+          "expected_answer": "Acquired resources are `[input,output]`; release order is `[output,input]`. The outcome stays `work_error`; cleanup does not convert failed work into success.",
+          "decision": null
+        },
+        "2": {
+          "question": "Why is reverse order useful here?",
+          "expected_answer": "The inner scope may depend on the outer resource. Closing the inner resource first respects nested ownership. This explanation assumes the declared scope relation.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the failed-acquisition control.",
+          "expected_answer": "Only `[input]` is acquired and released. The outcome is `acquire_error`; `output` was never owned, and the work body is skipped.",
+          "decision": null
+        },
+        "4": {
+          "question": "Does release roll back an exported artifact?",
+          "expected_answer": "No. Handle lifetime and business compensation are different operations. This trace says nothing about partial bytes, transactions or remote effects.",
+          "decision": null
+        },
+        "5": {
+          "question": "Which assumption must change for a release failure?",
+          "expected_answer": "The successful-release premise fails. A new policy must preserve both work and cleanup errors; no masking or suppression behavior has been defined here.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Trace cleanup after the work failure. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Why is reverse order useful here? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Apply the failed-acquisition control. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: Does release roll back an exported artifact? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: Which assumption must change for a release failure? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Write a resource-lifetime card for an authored GA export and compare an assistant’s trace with the nested scopes.",
+        "direct_manual_baseline": "List successful acquisitions, then reverse that list for cleanup and retain the original failure.",
+        "falsifier": "A never-acquired resource is released, an acquired one leaks, or cleanup turns work failure into success.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CYB015",
+      "department": "cybernetics",
+      "module_id": "cyb-015-carry-covariance-through-smoothed-telemetry",
+      "prerequisites": [
+        "cyb-010-separate-derivative-noise-from-plant-motion"
+      ],
+      "novelty_vs_prerequisites": "CYB010 computes a derivative and a smoothed trace. This adds finite initialized weights and a covariance quadratic form; correlated samples change uncertainty even when the mean trace is unchanged.",
+      "authored_model": {
+        "values": {
+          "alpha": 0.5,
+          "initial": 0,
+          "true_level": 4,
+          "error_covariance": [
+            [
+              4,
+              2
+            ],
+            [
+              2,
+              4
+            ]
+          ]
+        },
+        "formula": "After two EWMA updates weights are [alpha*(1-alpha),alpha]; expected=sum(weights)*true_level+(1-alpha)^2*initial; bias=expected-true_level; variance=w^T*Cov*w.",
+        "expected": {
+          "weights": [
+            0.25,
+            0.5
+          ],
+          "expected_level": 3,
+          "bias": -1,
+          "variance": 1.75
+        },
+        "negative_control": {
+          "values": {
+            "alpha": 0.5,
+            "initial": 0,
+            "true_level": 4,
+            "error_covariance": [
+              [
+                4,
+                0
+              ],
+              [
+                0,
+                4
+              ]
+            ]
+          },
+          "expected": {
+            "weights": [
+              0.25,
+              0.5
+            ],
+            "expected_level": 3,
+            "bias": -1,
+            "variance": 1.25
+          },
+          "why": "Removing cross-covariance changes variance while the initialized mean and bias stay fixed."
+        },
+        "assumptions": [
+          "Two zero-mean errors with the stipulated covariance matrix; deterministic initial state.",
+          "No feedback or changing true level."
+        ],
+        "limits": "Finite authored moments, not estimated GA noise, confidence intervals or closed-loop stability.",
+        "input_types": {
+          "alpha": "real in (0,1]",
+          "initial": "real",
+          "true_level": "real",
+          "error_covariance": "positive semidefinite 2x2 matrix"
+        }
+      },
+      "title": "Carry Covariance Through Smoothed Telemetry",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-015-carry-covariance-through-smoothed-telemetry.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-015-carry-covariance-through-smoothed-telemetry.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-015-carry-covariance-through-smoothed-telemetry.es.md"
+      },
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/cybernetics/en/cyb-015-carry-covariance-through-smoothed-telemetry.md",
+          "sha256": "5e25e02722276f8925750bc88faf9222200c7a91bbffe20051f8ef48686905c2"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/cybernetics/fr/cyb-015-carry-covariance-through-smoothed-telemetry.fr.md",
+          "sha256": "78734c382ac627f4fcc993c701a557b10bbdef3d75171aade78d146e1fad5b47"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/cybernetics/es/cyb-015-carry-covariance-through-smoothed-telemetry.es.md",
+          "sha256": "d0aeabd7c87e6a8256407c6743d75c72734a28b56788e0492a36a33dfdd59e66"
+        }
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/cybernetics/en/cyb-010-separate-derivative-noise-from-plant-motion.md",
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-010-separate-derivative-noise-from-plant-motion.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "2a75f3e964759a7335eeb94c46e8ca743f1789421a9b07724386439bb9b07247",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule frontmatter/heading/body and englishModuleKeys set construction; actual source lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "Retained observation statements distinguish retrieval metrics, offered responses and learner evidence; no new outcome read or inferred."
+        },
+        {
+          "path_or_url": "https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc324.htm",
+          "pin": "NIST e-Handbook section 6.3.2.4, read 2026-10-25",
+          "sha256": null,
+          "scope": "Recurrence, initialization and asymptotic variance formula, with independence and representative-data conditions; lines 7-21.",
+          "read_method": "Actual browser text or explicitly bounded official search extraction inspected; HTTP status alone was not treated as reading."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Expand the measurement weights.",
+          "expected_answer": "The weights are `[0.25,0.5]`; the initial state retains weight `0.25`. The measurement weights sum to `0.75`, so initialization still matters.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the expectation and bias.",
+          "expected_answer": "Expected level is `3`; bias relative to `4` is `-1`. Smoothing has not reached the stipulated true level after this finite history.",
+          "decision": null
+        },
+        "3": {
+          "question": "Compute variance with covariance.",
+          "expected_answer": "Diagonal terms contribute `1.25`; the cross terms contribute `0.5`, giving `1.75`. Dropping covariance changes the calculation.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the independent-error control.",
+          "expected_answer": "Variance becomes `1.25`. Expected level remains `3` and bias `-1`; independence does not remove initialization bias.",
+          "decision": null
+        },
+        "5": {
+          "question": "Can a quieter display establish stability?",
+          "expected_answer": "No. This model contains no plant or feedback. A future comparison needs actual errors, timing and task costs before choosing a policy.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Expand the measurement weights. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Compute the expectation and bias. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Compute variance with covariance. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: Apply the independent-error control. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: Can a quieter display establish stability? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a two-update uncertainty note for fictional GA monitoring values.",
+        "direct_manual_baseline": "Expand both updates on paper, keep initial weight, and multiply the full covariance matrix.",
+        "falsifier": "A favorable variance ignores off-diagonal terms or applies the steady-state formula to this initialized finite case.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CYB016",
+      "department": "cybernetics",
+      "module_id": "cyb-016-test-feedforward-against-disturbance-mismatch",
+      "prerequisites": [
+        "cyb-010-separate-derivative-noise-from-plant-motion"
+      ],
+      "novelty_vs_prerequisites": "Prior feedback lessons react to residuals or smooth measurements. This operation uses a separately measured disturbance before action, and retains a worse-than-baseline mismatch counterexample.",
+      "authored_model": {
+        "values": {
+          "target": 10,
+          "plant_gain": 2,
+          "disturbance": 4,
+          "measured_disturbance": 3,
+          "assumed_gain": 2
+        },
+        "formula": "No compensation: u=target/assumed_gain. Feedforward: u=(target-measured_disturbance)/assumed_gain. Actual y=plant_gain*u+disturbance; error=y-target.",
+        "expected": {
+          "baseline_command": 5,
+          "baseline_output": 14,
+          "baseline_error": 4,
+          "command": 3.5,
+          "output": 11,
+          "error": 1
+        },
+        "negative_control": {
+          "values": {
+            "target": 10,
+            "plant_gain": 2,
+            "disturbance": 4,
+            "measured_disturbance": 10,
+            "assumed_gain": 2
+          },
+          "expected": {
+            "baseline_command": 5,
+            "baseline_output": 14,
+            "baseline_error": 4,
+            "command": 0,
+            "output": 4,
+            "error": -6
+          },
+          "why": "Overstating the disturbance makes compensation worse in absolute error than the direct baseline."
+        },
+        "assumptions": [
+          "Static scalar plant, known positive gain, additive disturbance; command unrestricted.",
+          "Measurement available before command; no feedback, delay or noise distribution."
+        ],
+        "limits": "No live GA controller or universal benefit; inaccurate gain or disturbance can reverse the comparison.",
+        "input_types": {
+          "target": "real output units",
+          "plant_gain": "positive real output/command",
+          "disturbance": "real output units",
+          "measured_disturbance": "real output units",
+          "assumed_gain": "positive real output/command"
+        }
+      },
+      "title": "Test Feedforward Against Disturbance Mismatch",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-016-test-feedforward-against-disturbance-mismatch.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-016-test-feedforward-against-disturbance-mismatch.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-016-test-feedforward-against-disturbance-mismatch.es.md"
+      },
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/cybernetics/en/cyb-016-test-feedforward-against-disturbance-mismatch.md",
+          "sha256": "0e3cf8802157be25a8ccb771fbdf88c1429d99efdae83479961c55ce33a393b1"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/cybernetics/fr/cyb-016-test-feedforward-against-disturbance-mismatch.fr.md",
+          "sha256": "009c25a1fce6cbb0964acf28b0d116f9a6b80ba2b535322acc6d2e52b72c13b0"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/cybernetics/es/cyb-016-test-feedforward-against-disturbance-mismatch.es.md",
+          "sha256": "e5511d427064788af94e23bf0af913d71587ae5e6b35a3393cf983b241899204"
+        }
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/cybernetics/en/cyb-010-separate-derivative-noise-from-plant-motion.md",
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-010-separate-derivative-noise-from-plant-motion.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "2a75f3e964759a7335eeb94c46e8ca743f1789421a9b07724386439bb9b07247",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule frontmatter/heading/body and englishModuleKeys set construction; actual source lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "Retained observation statements distinguish retrieval metrics, offered responses and learner evidence; no new outcome read or inferred."
+        },
+        {
+          "path_or_url": "https://www.cds.caltech.edu/~murray/books/AM08/pdf/cds101-complete_20Sep07.pdf",
+          "pin": "Astrom and Murray, Feedback Systems draft 2007-09-20, chapter 11",
+          "sha256": null,
+          "scope": "Official-host search extraction of measured-disturbance feedforward and equations 11.6-11.7; full PDF fetch timed out. Only extracted passage read; no whole-chapter reading claimed.",
+          "read_method": "Actual browser text or explicitly bounded official search extraction inspected; HTTP status alone was not treated as reading."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the uncompensated baseline.",
+          "expected_answer": "Command `5` gives output `14` and error `4`. The baseline uses the target and assumed gain, without disturbance subtraction.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the proposed command and output.",
+          "expected_answer": "Command `3.5` gives output `11` and error `1`. The actual disturbance remains `4`, although its estimate is `3`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Why not use the measured disturbance for actual output?",
+          "expected_answer": "It would replace the stipulated world with the controller’s estimate and conceal mismatch. Prediction and actual model input occupy different roles.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the overstated-disturbance control.",
+          "expected_answer": "Command `0` gives output `4` and error `-6`. Its absolute error exceeds the baseline’s `4`; feedforward is worse here.",
+          "decision": null
+        },
+        "5": {
+          "question": "What would a project recommendation still need?",
+          "expected_answer": "A justified gain, timely disturbance measurement, command limits and actual task evidence. This fixed calculation does not supply those observations.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Compute the uncompensated baseline. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Compute the proposed command and output. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Why not use the measured disturbance for actual output? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: Apply the overstated-disturbance control. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: What would a project recommendation still need? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Compare direct and disturbance-compensated commands in a fictional GA resource-load note.",
+        "direct_manual_baseline": "Use separate columns for assumed gain, estimated disturbance and actual output equation.",
+        "falsifier": "The proposed compensation is declared universally better despite the worse control residual.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "CYB017",
+      "department": "cybernetics",
+      "module_id": "cyb-017-limit-command-change-separately-from-amplitude",
+      "prerequisites": [
+        "cyb-011-prevent-integral-accumulation-under-saturation"
+      ],
+      "novelty_vs_prerequisites": "CYB011 caps amplitude and studies integral state. This adds a separate per-step rate bound on applied commands with explicit dt and a path-dependent final command.",
+      "authored_model": {
+        "values": {
+          "requests": [
+            4,
+            4,
+            0
+          ],
+          "initial_command": 0,
+          "rate_per_second": 2,
+          "dt_seconds": 0.5,
+          "lower": 0,
+          "upper": 4
+        },
+        "formula": "First clip requested amplitude to [lower,upper]; then clip it to [previous-rate*dt,previous+rate*dt]. Initial command is inside amplitude range.",
+        "expected": {
+          "amplitude_only": [
+            4,
+            4,
+            0
+          ],
+          "commands": [
+            1,
+            2,
+            1
+          ],
+          "deltas": [
+            1,
+            1,
+            -1
+          ],
+          "final": 1
+        },
+        "negative_control": {
+          "values": {
+            "requests": [
+              4,
+              4,
+              0
+            ],
+            "initial_command": 0,
+            "rate_per_second": 8,
+            "dt_seconds": 0.5,
+            "lower": 0,
+            "upper": 4
+          },
+          "expected": {
+            "amplitude_only": [
+              4,
+              4,
+              0
+            ],
+            "commands": [
+              4,
+              4,
+              0
+            ],
+            "deltas": [
+              4,
+              0,
+              -4
+            ],
+            "final": 0
+          },
+          "why": "A wide rate bound makes these requests feasible without changing the amplitude range."
+        },
+        "assumptions": [
+          "Uniform positive time step, initial command within bounds, no plant.",
+          "Rate bound applies to applied command differences, not derivative estimates."
+        ],
+        "limits": "No physical actuator, settling guarantee or anti-windup policy was tested.",
+        "input_types": {
+          "requests": "list<real command units>",
+          "initial_command": "real",
+          "rate_per_second": "nonnegative real command units/second",
+          "dt_seconds": "positive real",
+          "lower": "real",
+          "upper": "real >= lower"
+        }
+      },
+      "title": "Limit Command Change Separately from Amplitude",
+      "source_paths": {
+        "en": "streeling/courses/cybernetics/en/cyb-017-limit-command-change-separately-from-amplitude.md",
+        "fr": "streeling/courses/cybernetics/fr/cyb-017-limit-command-change-separately-from-amplitude.fr.md",
+        "es": "streeling/courses/cybernetics/es/cyb-017-limit-command-change-separately-from-amplitude.es.md"
+      },
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/cybernetics/en/cyb-017-limit-command-change-separately-from-amplitude.md",
+          "sha256": "dec0ab5226f2853aec56fdbb4320f6d6aad574ab12629ae4a0b2420e7d5bcdc0"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/cybernetics/fr/cyb-017-limit-command-change-separately-from-amplitude.fr.md",
+          "sha256": "76f65626a5d2de8ff52ab36ab18a9b1882ec4c7347c53bdadaed9ad0e89545e1"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/cybernetics/es/cyb-017-limit-command-change-separately-from-amplitude.es.md",
+          "sha256": "9b13709c66a635ef4a419bd726c8244efa6e80f7cd46dd4e0aa4e8f43baabb89"
+        }
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/cybernetics/en/cyb-011-prevent-integral-accumulation-under-saturation.md",
+          "path_or_url": "streeling/courses/cybernetics/en/cyb-011-prevent-integral-accumulation-under-saturation.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "a73711166ecc017b610e2a8c51853bb951d9257ad5829d9432ecf5bb718114cf",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule frontmatter/heading/body and englishModuleKeys set construction; actual source lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "Retained observation statements distinguish retrieval metrics, offered responses and learner evidence; no new outcome read or inferred."
+        },
+        {
+          "path_or_url": "https://arxiv.org/abs/1903.05508",
+          "pin": "Nie and Kerrigan, arXiv:1903.05508v2, 2020-02-28",
+          "sha256": null,
+          "scope": "Author abstract: explicit rate constraints and linear constraint equations. No implementation or full paper read; our clamp is independently declared.",
+          "read_method": "Actual browser text or explicitly bounded official search extraction inspected; HTTP status alone was not treated as reading."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the allowed change per update.",
+          "expected_answer": "`2*0.5=1` command unit. A rate per second must be multiplied by the actual interval.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute applied commands and differences.",
+          "expected_answer": "Commands are `[1,2,1]` and differences `[1,1,-1]`. Every difference satisfies the declared bound.",
+          "decision": null
+        },
+        "3": {
+          "question": "Why does the final request not produce zero output?",
+          "expected_answer": "The previous command is `2`; only a change of magnitude `1` is permitted, so the next applied value is `1`.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the wide-rate control.",
+          "expected_answer": "Commands are `[4,4,0]`, differences `[4,0,-4]` and final value `0`. Amplitude bounds are unchanged.",
+          "decision": null
+        },
+        "5": {
+          "question": "Would halving dt preserve the allowed jump?",
+          "expected_answer": "No. At the same rate the per-update allowance halves. This statement concerns the constraint, not a measured actuator response.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Compute the allowed change per update. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Compute applied commands and differences. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Why does the final request not produce zero output? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: Apply the wide-rate control. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: Would halving dt preserve the allowed jump? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Annotate a fictional GA load-control trace with both amplitude and change limits.",
+        "direct_manual_baseline": "Make request, amplitude-clipped value, previous applied value and feasible-interval columns.",
+        "falsifier": "An applied jump exceeds rate times interval or the next interval uses the previous request instead of applied command.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "COG015",
+      "department": "cognitive-science",
+      "module_id": "cog-015-transport-alert-precision-only-with-prevalence",
+      "prerequisites": [
+        "cog-012-separate-review-alert-hit-rate-from-response-bias"
+      ],
+      "novelty_vs_prerequisites": "COG012 distinguishes hits from false alarms in a fixed confusion table. This adds a prospective population shift: carry conditional rates, rebuild expected counts and recompute alert precision rather than transporting it unchanged.",
+      "authored_model": {
+        "values": {
+          "items": 1000,
+          "prevalence": 0.1,
+          "hit_rate": 0.8,
+          "false_alarm_rate": 0.1
+        },
+        "formula": "TP=N*pi*hit; FP=N*(1-pi)*false_alarm; precision=TP/(TP+FP); counts are expected counts under stipulated rates.",
+        "expected": {
+          "true_positives": 80,
+          "false_positives": 90,
+          "alerts": 170,
+          "precision": 0.47058823529411764
+        },
+        "negative_control": {
+          "values": {
+            "items": 1000,
+            "prevalence": 0.5,
+            "hit_rate": 0.8,
+            "false_alarm_rate": 0.1
+          },
+          "expected": {
+            "true_positives": 400,
+            "false_positives": 50,
+            "alerts": 450,
+            "precision": 0.8888888888888888
+          },
+          "why": "Class-conditional rates stay fixed while prevalence changes the composition of alerts."
+        },
+        "assumptions": [
+          "Same fixed threshold and class-conditional response rates in both populations.",
+          "Prevalence stipulated; expected counts happen to be integers."
+        ],
+        "limits": "No observed review behavior or evidence that class-conditional rates actually transport.",
+        "input_types": {
+          "items": "positive integer",
+          "prevalence": "real in [0,1]",
+          "hit_rate": "real in [0,1]",
+          "false_alarm_rate": "real in [0,1]"
+        }
+      },
+      "title": "Transport Alert Precision Only with Prevalence",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-015-transport-alert-precision-only-with-prevalence.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-015-transport-alert-precision-only-with-prevalence.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-015-transport-alert-precision-only-with-prevalence.es.md"
+      },
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/cognitive-science/en/cog-015-transport-alert-precision-only-with-prevalence.md",
+          "sha256": "507d32f29a44534fc0c7cdf59b71cbc43146ba2fec99e038e1d198a055831c4d"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/cognitive-science/fr/cog-015-transport-alert-precision-only-with-prevalence.fr.md",
+          "sha256": "1a7f05a739e6fcb38631156d43e671100a5b4f3edd193db9d69dca41dae6a254"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/cognitive-science/es/cog-015-transport-alert-precision-only-with-prevalence.es.md",
+          "sha256": "ece131ac52f41fa9ee8cedb6f8c74f2b73aae5d5b7c0dd1e915dfe129109a339"
+        }
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/cognitive-science/en/cog-012-separate-review-alert-hit-rate-from-response-bias.md",
+          "path_or_url": "streeling/courses/cognitive-science/en/cog-012-separate-review-alert-hit-rate-from-response-bias.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "a84e6e2e205d717b570313156e8d5f8835726d4fac96165295c1e9a9c1dd1a71",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule frontmatter/heading/body and englishModuleKeys set construction; actual source lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "Retained observation statements distinguish retrieval metrics, offered responses and learner evidence; no new outcome read or inferred."
+        },
+        {
+          "path_or_url": "https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall",
+          "pin": "Google ML Crash Course, updated 2026-01-12",
+          "sha256": null,
+          "scope": "Recall, false-positive rate, precision definitions and denominators; lines 92-127 inspected.",
+          "read_method": "Actual browser text or explicitly bounded official search extraction inspected; HTTP status alone was not treated as reading."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Compute expected true and false alerts.",
+          "expected_answer": "There are `80` true positives and `90` false positives, for `170` alerts. Each rate uses its own true-class denominator.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute precision in the fixed case.",
+          "expected_answer": "`80/170=0.47058823529411764`. Precision concerns the composition of alerts, not the fraction of defects detected.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the higher-prevalence control.",
+          "expected_answer": "Expected counts become `400` true positives and `50` false positives, totaling `450`; precision is `0.8888888888888888`.",
+          "decision": null
+        },
+        "4": {
+          "question": "Did the control improve the reviewer’s conditional rates?",
+          "expected_answer": "No. The rates are unchanged; the population mix changed. Calling this a skill improvement would misattribute the construction.",
+          "decision": null
+        },
+        "5": {
+          "question": "What could invalidate the transported estimate?",
+          "expected_answer": "A changed threshold or different conditional behavior invalidates the premise. Actual task data are needed; the source definition does not supply those rates.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Compute expected true and false alerts. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Compute precision in the fixed case. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Apply the higher-prevalence control. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: Did the control improve the reviewer’s conditional rates? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: What could invalidate the transported estimate? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Write a prevalence-aware alert summary for fictional Learn defect review.",
+        "direct_manual_baseline": "Build separate defect and clean rows before computing the alert denominator.",
+        "falsifier": "Precision is copied across populations without rebuilding the class mixture.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "COG016",
+      "department": "cognitive-science",
+      "module_id": "cog-016-find-the-missing-answer-tipping-count",
+      "prerequisites": [
+        "cog-007-separate-unaided-recall-from-assisted-success",
+        "phi-007-test-a-learning-gain-against-counterfactuals"
+      ],
+      "novelty_vs_prerequisites": "COG007 already bounds missing recorded answers; PHI007 bounds missing counterfactuals. This course adds the smallest integer missing-success assignment needed to reverse a named descriptive ranking, including strict-equality handling and an impossible control.",
+      "authored_model": {
+        "values": {
+          "offered": 10,
+          "observed_successes": 6,
+          "missing": 4,
+          "comparison_successes": 7,
+          "comparison_offered": 10
+        },
+        "formula": "For k missing successes in integers 0..missing, rate=(successes+k)/offered; strict superiority requires rate>comparison_successes/comparison_offered. Return smallest feasible k or null.",
+        "expected": {
+          "lower": 0.6,
+          "upper": 1,
+          "comparison_rate": 0.7,
+          "minimum_missing_successes_for_strict_superiority": 2,
+          "identified_strict_superiority": false
+        },
+        "negative_control": {
+          "values": {
+            "offered": 10,
+            "observed_successes": 6,
+            "missing": 0,
+            "comparison_successes": 7,
+            "comparison_offered": 10
+          },
+          "expected": {
+            "lower": 0.6,
+            "upper": 0.6,
+            "comparison_rate": 0.7,
+            "minimum_missing_successes_for_strict_superiority": null,
+            "identified_strict_superiority": false
+          },
+          "why": "Complete inferior results leave no missing-answer assignment that can reverse the ranking."
+        },
+        "assumptions": [
+          "One binary endpoint per eligible offer; comparison complete.",
+          "Missing results may be either value; no missingness model."
+        ],
+        "limits": "Descriptive ranking sensitivity only; no causal benefit, probability for completions or statistical interval.",
+        "input_types": {
+          "offered": "positive integer",
+          "observed_successes": "integer in [0,offered-missing]",
+          "missing": "integer in [0,offered]",
+          "comparison_successes": "integer",
+          "comparison_offered": "positive integer"
+        }
+      },
+      "title": "Find the Missing-Answer Tipping Count",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-016-find-the-missing-answer-tipping-count.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-016-find-the-missing-answer-tipping-count.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-016-find-the-missing-answer-tipping-count.es.md"
+      },
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/cognitive-science/en/cog-016-find-the-missing-answer-tipping-count.md",
+          "sha256": "2d7a91851231c6231dcb4e0b752dc62e048d9697e3b1cee040c69650bb4d6f31"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/cognitive-science/fr/cog-016-find-the-missing-answer-tipping-count.fr.md",
+          "sha256": "8abe9bd26db16223915d0d5009d27ca7d4626e791950777e9cfce6bdddb65534"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/cognitive-science/es/cog-016-find-the-missing-answer-tipping-count.es.md",
+          "sha256": "b10de04622ece6ef7ff77838591c6b5c0ba9499f70b9acf806d2cfa9c2cad7c7"
+        }
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/cognitive-science/en/cog-007-separate-unaided-recall-from-assisted-success.md",
+          "path_or_url": "streeling/courses/cognitive-science/en/cog-007-separate-unaided-recall-from-assisted-success.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "cc28d8be51e0d2c7ab4ad9d8f2cd14da93b148a14904f12e742e6d9024810f54",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "streeling/courses/philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md",
+          "path_or_url": "streeling/courses/philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "a8056e98feade4a0da8a72311335b3124f8b3414d9e7cef136d7665b395b7b94",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule frontmatter/heading/body and englishModuleKeys set construction; actual source lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "Retained observation statements distinguish retrieval metrics, offered responses and learner evidence; no new outcome read or inferred."
+        },
+        {
+          "path_or_url": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+          "pin": "W3C Recommendation 2013-04-30",
+          "sha256": null,
+          "scope": "Abstract and component list, entities/activities/derivation; lines 34-38. Supports provenance distinction only, not missingness arithmetic.",
+          "read_method": "Actual browser text or explicitly bounded official search extraction inspected; HTTP status alone was not treated as reading."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the full-offer bounds.",
+          "expected_answer": "They are `0.6` and `1`; the complete comparison rate is `0.7`. The interval permits several rankings without choosing among them.",
+          "decision": null
+        },
+        "2": {
+          "question": "How many missing successes give equality?",
+          "expected_answer": "With `1` missing success the completed rate is `0.7`. Equality does not satisfy strict superiority.",
+          "decision": null
+        },
+        "3": {
+          "question": "Find the tipping count for strict superiority.",
+          "expected_answer": "The smallest count is `2`, giving `0.8`. This is a hypothetical completion requirement, not evidence that those answers were correct.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the no-missing control.",
+          "expected_answer": "Both bounds are `0.6`, below `0.7`; the minimum count is `null`. No feasible missing assignment can produce a reversal.",
+          "decision": null
+        },
+        "5": {
+          "question": "Can the tipping count be called a probability of benefit?",
+          "expected_answer": "No. We assign no probabilities to completions, and descriptive ranking does not identify a causal effect. Retain the unanswered offers.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Compute the full-offer bounds. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: How many missing successes give equality? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Find the tipping count for strict superiority. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: Apply the no-missing control. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: Can the tipping count be called a probability of benefit? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a ranking-sensitivity note for fictional GA assisted and manual review answers.",
+        "direct_manual_baseline": "Enumerate integer missing-success counts with the full offer denominator and mark the first strict crossing.",
+        "falsifier": "Equality is labeled superiority or a hypothetical missing response is reported as observed.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "COG017",
+      "department": "cognitive-science",
+      "module_id": "cog-017-subtract-a-comparison-trend-before-crediting-assistance",
+      "prerequisites": [
+        "cog-009-counterbalance-practice-order-before-comparing-interfaces",
+        "phi-007-test-a-learning-gain-against-counterfactuals"
+      ],
+      "novelty_vs_prerequisites": "COG009 cancels an imposed period effect by counterbalancing; PHI007 shows before-after non-identification. This adds a distinct two-group/two-period trend contrast and states the extra counterfactual assumption needed to read it causally.",
+      "authored_model": {
+        "values": {
+          "assisted_before": 0.4,
+          "assisted_after": 0.7,
+          "comparison_before": 0.5,
+          "comparison_after": 0.6
+        },
+        "formula": "assisted_change=after-before; comparison_change=after-before; contrast=assisted_change-comparison_change.",
+        "expected": {
+          "assisted_change": 0.3,
+          "comparison_change": 0.1,
+          "contrast": 0.2
+        },
+        "negative_control": {
+          "values": {
+            "assisted_before": 0.4,
+            "assisted_after": 0.7,
+            "comparison_before": 0.5,
+            "comparison_after": 0.8
+          },
+          "expected": {
+            "assisted_change": 0.3,
+            "comparison_change": 0.3,
+            "contrast": 0
+          },
+          "why": "Equal group changes erase the differential despite assisted before-after improvement."
+        },
+        "assumptions": [
+          "Comparable endpoints and stable group composition; no interference.",
+          "A causal reading additionally requires parallel untreated trends and no differential concurrent change."
+        ],
+        "limits": "Arithmetic contrast is descriptive; two periods cannot establish parallel trends, randomization or learner benefit.",
+        "input_types": {
+          "assisted_before": "proportion",
+          "assisted_after": "proportion",
+          "comparison_before": "proportion",
+          "comparison_after": "proportion"
+        }
+      },
+      "title": "Subtract a Comparison Trend Before Crediting Assistance",
+      "source_paths": {
+        "en": "streeling/courses/cognitive-science/en/cog-017-subtract-a-comparison-trend-before-crediting-assistance.md",
+        "fr": "streeling/courses/cognitive-science/fr/cog-017-subtract-a-comparison-trend-before-crediting-assistance.fr.md",
+        "es": "streeling/courses/cognitive-science/es/cog-017-subtract-a-comparison-trend-before-crediting-assistance.es.md"
+      },
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/cognitive-science/en/cog-017-subtract-a-comparison-trend-before-crediting-assistance.md",
+          "sha256": "1b6ab57c30fc226f2f130939f8ac1647a535cc5fef53220bf457639ee11cbc23"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/cognitive-science/fr/cog-017-subtract-a-comparison-trend-before-crediting-assistance.fr.md",
+          "sha256": "3d331ef6f5b8819e7cd13a23a2afb0ecd5504b46ba948be2265c8a0b6b3883a3"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/cognitive-science/es/cog-017-subtract-a-comparison-trend-before-crediting-assistance.es.md",
+          "sha256": "04922c9228bf9f7e1fc333a5a65c330fdff22424773e83a1afa1ec44f17a84e3"
+        }
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/cognitive-science/en/cog-009-counterbalance-practice-order-before-comparing-interfaces.md",
+          "path_or_url": "streeling/courses/cognitive-science/en/cog-009-counterbalance-practice-order-before-comparing-interfaces.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "6156f1beacc64b6863a18c3b07834869920390db8e55850c346475ff1d5fb4a0",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "streeling/courses/philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md",
+          "path_or_url": "streeling/courses/philosophy/en/phi-007-test-a-learning-gain-against-counterfactuals.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "a8056e98feade4a0da8a72311335b3124f8b3414d9e7cef136d7665b395b7b94",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule frontmatter/heading/body and englishModuleKeys set construction; actual source lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "Retained observation statements distinguish retrieval metrics, offered responses and learner evidence; no new outcome read or inferred."
+        },
+        {
+          "path_or_url": "https://blogs.worldbank.org/en/impactevaluations/did-you-see-beta-beta-who-part-1",
+          "pin": "Duhaut, Kondylis, Loeser and Piza, World Bank, 2021-11-02",
+          "sha256": null,
+          "scope": "Canonical two-cohort/two-period comparison, parallel trends and limits on transport; lines 33-45 inspected.",
+          "read_method": "Actual browser text or explicitly bounded official search extraction inspected; HTTP status alone was not treated as reading."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the assisted change.",
+          "expected_answer": "`0.7-0.4=0.3`. It describes the supplied group’s change, not an identified intervention effect.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute comparison change and the contrast.",
+          "expected_answer": "`0.6-0.5=0.1`, so the contrast is `0.3-0.1=0.2`. Both changes must retain the same subtraction direction.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the equal-trend control.",
+          "expected_answer": "The comparison change becomes `0.8-0.5=0.3`; the contrast is `0`. Assisted improvement alone persists.",
+          "decision": null
+        },
+        "4": {
+          "question": "Does a different initial level refute parallel trends?",
+          "expected_answer": "No. The assumption concerns changes in untreated potential outcomes, not equal starting levels. It remains unverified here.",
+          "decision": null
+        },
+        "5": {
+          "question": "What prevents a causal claim from these numbers alone?",
+          "expected_answer": "Unobserved untreated trends, changing group composition or concurrent changes could alter interpretation. The arithmetic does not observe those counterfactuals.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Compute the assisted change. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Compute comparison change and the contrast. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Apply the equal-trend control. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: Does a different initial level refute parallel trends? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: What prevents a causal claim from these numbers alone? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Draft a comparison card for fictional GA assisted-review groups before requesting an agent’s benefit summary.",
+        "direct_manual_baseline": "Write the two before-after differences and subtract them with fixed group labels.",
+        "falsifier": "An agent equates the assisted change with benefit when the equal-trend control has zero contrast.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "INF016",
+      "department": "information-theory",
+      "module_id": "inf-016-bind-a-delta-to-its-reference-state",
+      "prerequisites": [
+        "inf-011-separate-compressed-size-from-preserved-information",
+        "inf-014-retain-message-codebook-versions"
+      ],
+      "novelty_vs_prerequisites": "INF011 separates reversible encoding from size; INF014 binds symbols to a codebook. This adds state-dependent reconstruction: the decoder mapping is unchanged but its reference value differs, requiring immutable base identity.",
+      "authored_model": {
+        "values": {
+          "sender_base_id": "b1",
+          "sender_base": 10,
+          "target": 13,
+          "receiver_base_id": "b1",
+          "receiver_base": 10
+        },
+        "formula": "delta=target-sender_base; naive=receiver_base+delta; accept iff receiver_base_id==sender_base_id; guarded reconstruction is naive if accepted else null.",
+        "expected": {
+          "delta": 3,
+          "naive_reconstruction": 13,
+          "accepted": true,
+          "guarded_reconstruction": 13
+        },
+        "negative_control": {
+          "values": {
+            "sender_base_id": "b1",
+            "sender_base": 10,
+            "target": 13,
+            "receiver_base_id": "b2",
+            "receiver_base": 20
+          },
+          "expected": {
+            "delta": 3,
+            "naive_reconstruction": 23,
+            "accepted": false,
+            "guarded_reconstruction": null
+          },
+          "why": "An intact delta added to another base produces another value; a base-identity guard rejects it."
+        },
+        "assumptions": [
+          "Integers exact; each trusted base identity denotes one immutable value.",
+          "No overflow, missing delta or transport corruption."
+        ],
+        "limits": "Toy scalar differencing, not VCDIFF encoding, authentic identity or production synchronization.",
+        "input_types": {
+          "sender_base_id": "string",
+          "sender_base": "integer",
+          "target": "integer",
+          "receiver_base_id": "string",
+          "receiver_base": "integer"
+        }
+      },
+      "title": "Bind a Delta to Its Reference State",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-016-bind-a-delta-to-its-reference-state.md",
+        "fr": "streeling/courses/information-theory/fr/inf-016-bind-a-delta-to-its-reference-state.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-016-bind-a-delta-to-its-reference-state.es.md"
+      },
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/information-theory/en/inf-016-bind-a-delta-to-its-reference-state.md",
+          "sha256": "a205df0e8d8775eeafac45ae6ce1bb10cc85e99e8c6ff859f4afd676428763e2"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/information-theory/fr/inf-016-bind-a-delta-to-its-reference-state.fr.md",
+          "sha256": "792297a9ffb1041e5d63f13ef159e915104a79dd66b0610e2124ddcb06bec9aa"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/information-theory/es/inf-016-bind-a-delta-to-its-reference-state.es.md",
+          "sha256": "21399782ef581562048f4228e3343effbeef5a8bd28dccd7cdecaae1a22d0d35"
+        }
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/information-theory/en/inf-011-separate-compressed-size-from-preserved-information.md",
+          "path_or_url": "streeling/courses/information-theory/en/inf-011-separate-compressed-size-from-preserved-information.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "0806cd078a98d41564a9d4064c5e8b765554ace81823f43e64c4e67099b3c4dc",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "streeling/courses/information-theory/en/inf-014-retain-message-codebook-versions.md",
+          "path_or_url": "streeling/courses/information-theory/en/inf-014-retain-message-codebook-versions.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "3efe20a3ed8c9f4fdb35f63e7ce372d2b048f6e06cb3531ba2cfdc16891a910b",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule frontmatter/heading/body and englishModuleKeys set construction; actual source lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "Retained observation statements distinguish retrieval metrics, offered responses and learner evidence; no new outcome read or inferred."
+        },
+        {
+          "path_or_url": "https://www.rfc-editor.org/rfc/rfc3284.html",
+          "pin": "RFC 3284, June 2002, section 1",
+          "sha256": null,
+          "scope": "Differencing a target given a source versus source-free compression; lines 78-104 inspected. Our integer deltas are not VCDIFF.",
+          "read_method": "Actual browser text or explicitly bounded official search extraction inspected; HTTP status alone was not treated as reading."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the sender’s delta.",
+          "expected_answer": "`13-10=3`. The delta describes a relation to the sender’s base; it is not the target value by itself.",
+          "decision": null
+        },
+        "2": {
+          "question": "Reconstruct the matching-base case.",
+          "expected_answer": "`10+3=13`; base identifiers match, so `accepted=true` and the guarded reconstruction is `13`.",
+          "decision": null
+        },
+        "3": {
+          "question": "Apply the mismatched-base control.",
+          "expected_answer": "Naive addition gives `20+3=23`, but `accepted=false` and guarded reconstruction is `null`. The changed base is retained as the reason.",
+          "decision": null
+        },
+        "4": {
+          "question": "Would a checksum of the delta catch this mistake?",
+          "expected_answer": "No. The delta can arrive intact while the reference differs. Retain base identity and validate its associated state.",
+          "decision": null
+        },
+        "5": {
+          "question": "Is base equality the same as authorization to update?",
+          "expected_answer": "No. This arithmetic precondition supplies neither authority nor an atomic update. Those need separate evidence and contracts.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Compute the sender’s delta. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Reconstruct the matching-base case. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Apply the mismatched-base control. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: Would a checksum of the delta catch this mistake? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: Is base equality the same as authorization to update? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a reference-state card for fictional Learn counter handoffs and challenge an assistant with the wrong base.",
+        "direct_manual_baseline": "Subtract the sender base, then add the unchanged delta to each stated receiver base.",
+        "falsifier": "A mismatched base produces an accepted target or the delta is silently recomputed at the receiver.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "INF017",
+      "department": "information-theory",
+      "module_id": "inf-017-merge-sum-count-summaries-before-taking-means",
+      "prerequisites": [
+        "inf-015-weight-sampled-telemetry-before-summarizing-failures"
+      ],
+      "novelty_vs_prerequisites": "INF015 weights sampled events by inclusion probability. Here no sampling occurs: partition cardinality is required to merge exact summaries associatively and preserve a global mean under repartitioning.",
+      "authored_model": {
+        "values": {
+          "partitions": [
+            [
+              2
+            ],
+            [
+              4,
+              6,
+              8
+            ]
+          ]
+        },
+        "formula": "Each partition summary=(sum,count). Merge by componentwise addition; mean=total_sum/total_count. Naive mean averages nonempty partition means with equal partition weights.",
+        "expected": {
+          "summaries": [
+            [
+              2,
+              1
+            ],
+            [
+              18,
+              3
+            ]
+          ],
+          "merged": [
+            20,
+            4
+          ],
+          "mean": 5,
+          "naive_mean": 4
+        },
+        "negative_control": {
+          "values": {
+            "partitions": [
+              [
+                2,
+                4
+              ],
+              [
+                6,
+                8
+              ]
+            ]
+          },
+          "expected": {
+            "summaries": [
+              [
+                6,
+                2
+              ],
+              [
+                14,
+                2
+              ]
+            ],
+            "merged": [
+              20,
+              4
+            ],
+            "mean": 5,
+            "naive_mean": 5
+          },
+          "why": "Equal-sized partitions hide the naive reducer error; the unequal main case exposes it."
+        },
+        "assumptions": [
+          "Disjoint partitions cover the same exact numeric items once.",
+          "Arithmetic exact; empty summary is [0,0] and final empty mean undefined."
+        ],
+        "limits": "Sufficient only for arithmetic mean, not variance, quantiles, identity audits or unbiased population estimates.",
+        "input_types": {
+          "partitions": "list<list<real>>"
+        }
+      },
+      "title": "Merge Sum and Count Summaries Before Taking Means",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-017-merge-sum-count-summaries-before-taking-means.md",
+        "fr": "streeling/courses/information-theory/fr/inf-017-merge-sum-count-summaries-before-taking-means.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-017-merge-sum-count-summaries-before-taking-means.es.md"
+      },
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/information-theory/en/inf-017-merge-sum-count-summaries-before-taking-means.md",
+          "sha256": "2bcfee2a77dd810c5bcb99007d9c9305ea9a129f4996be8e5afcb87f9e306db2"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/information-theory/fr/inf-017-merge-sum-count-summaries-before-taking-means.fr.md",
+          "sha256": "8d1cdeb04f1cbb72ee8dfeb8808affec25981d2c59c5aa4b42d39e88fd956549"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/information-theory/es/inf-017-merge-sum-count-summaries-before-taking-means.es.md",
+          "sha256": "52f028c7e2f14ef17e0b7c12ad8734cfbef441edba5918d8eaf1a5493f7b8b44"
+        }
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/information-theory/en/inf-015-weight-sampled-telemetry-before-summarizing-failures.md",
+          "path_or_url": "streeling/courses/information-theory/en/inf-015-weight-sampled-telemetry-before-summarizing-failures.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "93647912d5d2e39e5ef80b889a55379c6ef286806e6c9779d758dddc5de4f43a",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule frontmatter/heading/body and englishModuleKeys set construction; actual source lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "Retained observation statements distinguish retrieval metrics, offered responses and learner evidence; no new outcome read or inferred."
+        },
+        {
+          "path_or_url": "https://www.sqlite.org/lang_select.html",
+          "pin": "SQLite SELECT documentation section 2.1, read in retained preceding batch and refreshed 2026-10-25",
+          "sha256": null,
+          "scope": "Join row/bag and aggregate semantics; used only to distinguish rows from summary unit.",
+          "read_method": "Actual browser text or explicitly bounded official search extraction inspected; HTTP status alone was not treated as reading."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the partition summaries.",
+          "expected_answer": "They are `[2,1]` and `[18,3]`, written as sum then count. Keep the units and ordering explicit.",
+          "decision": null
+        },
+        "2": {
+          "question": "Merge and compute the global mean.",
+          "expected_answer": "The merged pair is `[20,4]`, giving mean `5`. Partition size determines each group’s contribution.",
+          "decision": null
+        },
+        "3": {
+          "question": "Compute the naive average of averages.",
+          "expected_answer": "Partition means are `2` and `6`; their equal-weight mean is `4`. It answers a different weighting question.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the equal-size control.",
+          "expected_answer": "Summaries `[6,2]` and `[14,2]` merge to `[20,4]`. Both methods give `5`, so this control alone cannot detect the error.",
+          "decision": null
+        },
+        "5": {
+          "question": "Can the merged pair answer an exact median?",
+          "expected_answer": "No. Many item collections share a sum and count. Retain richer data when the requested query needs order information or identities.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Compute the partition summaries. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Merge and compute the global mean. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Compute the naive average of averages. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: Apply the equal-size control. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: Can the merged pair answer an exact median? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Write a composable summary card for fictional Learn review-item durations without adding a runtime reducer.",
+        "direct_manual_baseline": "Calculate each sum and count on paper, add pairs and divide once.",
+        "falsifier": "Changing only the partition boundaries changes the reported item mean.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "INF018",
+      "department": "information-theory",
+      "module_id": "inf-018-frame-text-by-utf8-byte-length",
+      "prerequisites": [
+        "inf-014-retain-message-codebook-versions"
+      ],
+      "novelty_vs_prerequisites": "INF014 fixes semantic codebook selection. This adds boundary recovery with variable-length UTF-8 payloads: delimiter collisions and character/byte confusion can break framing even with a shared codebook.",
+      "authored_model": {
+        "values": {
+          "messages": [
+            "é",
+            "A|B"
+          ],
+          "declared_lengths": [
+            2,
+            3
+          ]
+        },
+        "formula": "actual_lengths=count UTF-8 bytes per message; valid iff declared lengths equal actual lengths; if valid frame=concatenate(decimal_length+colon+message), else null.",
+        "expected": {
+          "actual_lengths": [
+            2,
+            3
+          ],
+          "valid": true,
+          "frame": "2:é3:A|B",
+          "naive_delimited": "é|A|B"
+        },
+        "negative_control": {
+          "values": {
+            "messages": [
+              "é",
+              "A|B"
+            ],
+            "declared_lengths": [
+              1,
+              3
+            ]
+          },
+          "expected": {
+            "actual_lengths": [
+              2,
+              3
+            ],
+            "valid": false,
+            "frame": null,
+            "naive_delimited": "é|A|B"
+          },
+          "why": "Counting Unicode characters for the first length understates its UTF-8 byte span."
+        },
+        "assumptions": [
+          "Decimal nonnegative byte length terminated by colon; valid UTF-8 payload.",
+          "Read exactly that many bytes after each length; no stream truncation or malformed prefix."
+        ],
+        "limits": "Toy framing is not CBOR, an escaping implementation, authentication or arbitrary-stream parser.",
+        "input_types": {
+          "messages": "list<Unicode string>",
+          "declared_lengths": "list<nonnegative integer> of same size"
+        }
+      },
+      "title": "Frame Text by Its UTF-8 Byte Length",
+      "source_paths": {
+        "en": "streeling/courses/information-theory/en/inf-018-frame-text-by-utf8-byte-length.md",
+        "fr": "streeling/courses/information-theory/fr/inf-018-frame-text-by-utf8-byte-length.fr.md",
+        "es": "streeling/courses/information-theory/es/inf-018-frame-text-by-utf8-byte-length.es.md"
+      },
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/information-theory/en/inf-018-frame-text-by-utf8-byte-length.md",
+          "sha256": "a53057b405b757c5639f2b0275bf42406b5ea37d45d71d07788fff6bcd531d6a"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/information-theory/fr/inf-018-frame-text-by-utf8-byte-length.fr.md",
+          "sha256": "7540ea0bab3584f90696f2340102682c794326564a64a93ac059932f6b50eac8"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/information-theory/es/inf-018-frame-text-by-utf8-byte-length.es.md",
+          "sha256": "33441228881bfa5868e7fec14427f50acdea82e742c4542013844807cd2da6f7"
+        }
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/information-theory/en/inf-014-retain-message-codebook-versions.md",
+          "path_or_url": "streeling/courses/information-theory/en/inf-014-retain-message-codebook-versions.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "3efe20a3ed8c9f4fdb35f63e7ce372d2b048f6e06cb3531ba2cfdc16891a910b",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule frontmatter/heading/body and englishModuleKeys set construction; actual source lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "Retained observation statements distinguish retrieval metrics, offered responses and learner evidence; no new outcome read or inferred."
+        },
+        {
+          "path_or_url": "https://www.rfc-editor.org/rfc/rfc8949.html",
+          "pin": "RFC 8949, December 2020, sections 3 and 3.1",
+          "sha256": null,
+          "scope": "Definite lengths, byte counts, text UTF-8 and incomplete items; browser lines 289-345 inspected. Toy framing is not CBOR wire encoding.",
+          "read_method": "Actual browser text or explicitly bounded official search extraction inspected; HTTP status alone was not treated as reading."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Count the UTF-8 bytes.",
+          "expected_answer": "The counts are `[2,3]` for `[é,A|B]`. A displayed character need not occupy a single byte.",
+          "decision": null
+        },
+        "2": {
+          "question": "Write the valid frame.",
+          "expected_answer": "The frame is `2:é3:A|B`. Payload delimiters remain payload because the length determines each boundary.",
+          "decision": null
+        },
+        "3": {
+          "question": "Why is the naive joined text ambiguous?",
+          "expected_answer": "`é|A|B` also fits messages `[é|A,B]`. The joined bytes alone do not identify which partition was intended.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the character-count control.",
+          "expected_answer": "Declared lengths `[1,3]` differ from `[2,3]`; `valid=false` and `frame=null`. Do not silently repair the prefix.",
+          "decision": null
+        },
+        "5": {
+          "question": "What remains before a streaming implementation is justified?",
+          "expected_answer": "Malformed lengths, truncated input, size limits and error recovery need separate contracts and checks. No live decoder was exercised here.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Count the UTF-8 bytes. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Write the valid frame. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Why is the naive joined text ambiguous? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: Apply the character-count control. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: What remains before a streaming implementation is justified? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a framing note for fictional multilingual agent messages and challenge the byte-count assumption.",
+        "direct_manual_baseline": "Write UTF-8 byte counts and trace each boundary manually before abbreviating the representation.",
+        "falsifier": "The accented payload is counted as a byte or a delimiter inside it creates a new boundary.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "NET014",
+      "department": "network-science",
+      "module_id": "net-014-bound-throughput-with-a-capacity-cut",
+      "prerequisites": [
+        "net-010-compute-critical-paths-with-resource-assumptions"
+      ],
+      "novelty_vs_prerequisites": "NET010 accounts for durations and exclusive resources in a finite schedule. This adds conserved steady flow and a cut upper bound; path count stays unchanged when attainable capacity falls.",
+      "authored_model": {
+        "values": {
+          "nodes": [
+            "s",
+            "a",
+            "b",
+            "t"
+          ],
+          "edges": [
+            [
+              "s",
+              "a",
+              3
+            ],
+            [
+              "s",
+              "b",
+              2
+            ],
+            [
+              "a",
+              "t",
+              2
+            ],
+            [
+              "b",
+              "t",
+              2
+            ],
+            [
+              "a",
+              "b",
+              1
+            ]
+          ],
+          "source": "s",
+          "sink": "t"
+        },
+        "formula": "Nonnegative flow obeys capacities and conservation at a,b. Maximize source outflow; minimum cut is minimum sum of directed capacities from source-side set to its complement.",
+        "expected": {
+          "maximum_flow": 4,
+          "minimum_cut_capacity": 4,
+          "sink_cut_capacity": 4,
+          "simple_path_count": 3
+        },
+        "negative_control": {
+          "values": {
+            "nodes": [
+              "s",
+              "a",
+              "b",
+              "t"
+            ],
+            "edges": [
+              [
+                "s",
+                "a",
+                3
+              ],
+              [
+                "s",
+                "b",
+                2
+              ],
+              [
+                "a",
+                "t",
+                2
+              ],
+              [
+                "b",
+                "t",
+                1
+              ],
+              [
+                "a",
+                "b",
+                1
+              ]
+            ],
+            "source": "s",
+            "sink": "t"
+          },
+          "expected": {
+            "maximum_flow": 3,
+            "minimum_cut_capacity": 3,
+            "sink_cut_capacity": 3,
+            "simple_path_count": 3
+          },
+          "why": "One sink capacity falls while reachability and path count remain unchanged."
+        },
+        "assumptions": [
+          "Directed capacities use common hypothetical items per tick; divisible steady flow.",
+          "No latency, node capacity, semantic mismatch or queue storage limit."
+        ],
+        "limits": "Flow bounds are not an observed worker rate, a finite nonpreemptive schedule or delivery guarantee.",
+        "input_types": {
+          "nodes": "set<string>",
+          "edges": "list<[from,to,nonnegative capacity]>",
+          "source": "node",
+          "sink": "different node"
+        }
+      },
+      "title": "Bound Throughput with a Capacity Cut",
+      "source_paths": {
+        "en": "streeling/courses/network-science/en/net-014-bound-throughput-with-a-capacity-cut.md",
+        "fr": "streeling/courses/network-science/fr/net-014-bound-throughput-with-a-capacity-cut.fr.md",
+        "es": "streeling/courses/network-science/es/net-014-bound-throughput-with-a-capacity-cut.es.md"
+      },
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/network-science/en/net-014-bound-throughput-with-a-capacity-cut.md",
+          "sha256": "8b63756e6866e0573eedf7240d07ca947a4dc772cb74fc69f0c8f39829eb01ae"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/network-science/fr/net-014-bound-throughput-with-a-capacity-cut.fr.md",
+          "sha256": "eeec9c5cebba23bfb988aa4bfd8cb6b9f20fc85fb471471e0fc3d2e02ec5cc04"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/network-science/es/net-014-bound-throughput-with-a-capacity-cut.es.md",
+          "sha256": "96b93b7819f38c6af74f20dcdff79655b65aec222f13206d2510d9c3910a0297"
+        }
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/network-science/en/net-010-compute-critical-paths-with-resource-assumptions.md",
+          "path_or_url": "streeling/courses/network-science/en/net-010-compute-critical-paths-with-resource-assumptions.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "61b217eef1cf38c0d21ec94cea890f4733515db27080b9f40405b42a230ee699",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule frontmatter/heading/body and englishModuleKeys set construction; actual source lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "Retained observation statements distinguish retrieval metrics, offered responses and learner evidence; no new outcome read or inferred."
+        },
+        {
+          "path_or_url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.flow.maximum_flow.html",
+          "pin": "NetworkX 3.7 documentation, read 2026-10-25",
+          "sha256": null,
+          "scope": "Capacity attribute, flow value/dictionary and minimum-cut equivalence notes; API documentation inspected, package not run.",
+          "read_method": "Actual browser text or explicitly bounded official search extraction inspected; HTTP status alone was not treated as reading."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Give a feasible fixed-case flow.",
+          "expected_answer": "Send `2` units through `s-a-t` and `2` through `s-b-t`, with `0` on `a-b`. Total flow is `4` and conservation holds.",
+          "decision": null
+        },
+        "2": {
+          "question": "Give a matching upper bound.",
+          "expected_answer": "The edges entering `t` have total capacity `4`. Every feasible delivered flow crosses that cut, so `4` is also an upper bound.",
+          "decision": null
+        },
+        "3": {
+          "question": "Count simple routes.",
+          "expected_answer": "There are `3`: `s-a-t`, `s-b-t` and `s-a-b-t`. Route count is not flow capacity.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the reduced-capacity control.",
+          "expected_answer": "Maximum flow and sink-cut capacity become `3`; simple route count remains `3`. Removing capacity need not remove reachability.",
+          "decision": null
+        },
+        "5": {
+          "question": "Does the optimum guarantee a project delivery rate?",
+          "expected_answer": "No. Steady divisible flow omits task granularity, failures, timing and semantic compatibility. The numerical optimum is conditional on this model.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Give a feasible fixed-case flow. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Give a matching upper bound. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Count simple routes. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: Apply the reduced-capacity control. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: Does the optimum guarantee a project delivery rate? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a capacity-cut note for an authored Learn evidence pipeline.",
+        "direct_manual_baseline": "Draw conservation balances, exhibit a feasible flow and sum a separating cut.",
+        "falsifier": "An alleged delivered rate exceeds a separating cut or a route count is used as capacity.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "NET015",
+      "department": "network-science",
+      "module_id": "net-015-condense-mutual-dependencies-before-ordering-work",
+      "prerequisites": [
+        "net-009-detect-global-cycles-in-a-panel-stack"
+      ],
+      "novelty_vs_prerequisites": "NET009 detects cycles and merges flat-joint identities for rigid constraints. This operation instead partitions distinct nodes by mutual reachability and builds a DAG of SCCs without identifying their internal semantics.",
+      "authored_model": {
+        "values": {
+          "nodes": [
+            "a",
+            "b",
+            "c",
+            "d",
+            "e"
+          ],
+          "edges": [
+            [
+              "a",
+              "b"
+            ],
+            [
+              "b",
+              "a"
+            ],
+            [
+              "b",
+              "c"
+            ],
+            [
+              "c",
+              "d"
+            ],
+            [
+              "d",
+              "c"
+            ],
+            [
+              "d",
+              "e"
+            ]
+          ]
+        },
+        "formula": "Group nodes by mutual reachability (including zero-length self path); sort members and components lexically. Emit unique edges between distinct components. Count SCCs and condensed edges.",
+        "expected": {
+          "components": [
+            [
+              "a",
+              "b"
+            ],
+            [
+              "c",
+              "d"
+            ],
+            [
+              "e"
+            ]
+          ],
+          "component_count": 3,
+          "condensed_edges": [
+            [
+              "ab",
+              "cd"
+            ],
+            [
+              "cd",
+              "e"
+            ]
+          ],
+          "condensed_edge_count": 2
+        },
+        "negative_control": {
+          "values": {
+            "nodes": [
+              "a",
+              "b",
+              "c",
+              "d",
+              "e"
+            ],
+            "edges": [
+              [
+                "a",
+                "b"
+              ],
+              [
+                "b",
+                "a"
+              ],
+              [
+                "b",
+                "c"
+              ],
+              [
+                "c",
+                "d"
+              ],
+              [
+                "d",
+                "c"
+              ],
+              [
+                "d",
+                "e"
+              ],
+              [
+                "e",
+                "a"
+              ]
+            ]
+          },
+          "expected": {
+            "components": [
+              [
+                "a",
+                "b",
+                "c",
+                "d",
+                "e"
+              ]
+            ],
+            "component_count": 1,
+            "condensed_edges": [],
+            "condensed_edge_count": 0
+          },
+          "why": "One return dependency makes every node mutually reachable; hiding only the obvious local cycles would miss the larger component."
+        },
+        "assumptions": [
+          "Exact finite directed dependency graph; condensed labels concatenate sorted unique single-letter names.",
+          "An edge means a dependency relation only, not a legal execution trigger."
+        ],
+        "limits": "Contraction identifies coupled groups; it does not resolve a cycle, execute a fixed point or authorize simultaneous writes.",
+        "input_types": {
+          "nodes": "set<unique single-letter string>",
+          "edges": "list<[node,node]>"
+        }
+      },
+      "title": "Condense Mutual Dependencies Before Ordering Work",
+      "source_paths": {
+        "en": "streeling/courses/network-science/en/net-015-condense-mutual-dependencies-before-ordering-work.md",
+        "fr": "streeling/courses/network-science/fr/net-015-condense-mutual-dependencies-before-ordering-work.fr.md",
+        "es": "streeling/courses/network-science/es/net-015-condense-mutual-dependencies-before-ordering-work.es.md"
+      },
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/network-science/en/net-015-condense-mutual-dependencies-before-ordering-work.md",
+          "sha256": "fcc1382f3d88dc953cc96aae982ccb72a2eebce97a01060b38041c4839bef295"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/network-science/fr/net-015-condense-mutual-dependencies-before-ordering-work.fr.md",
+          "sha256": "7f2bec86362e38f5f63db7a768aab2bff742243c142f0d759843c498557b276a"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/network-science/es/net-015-condense-mutual-dependencies-before-ordering-work.es.md",
+          "sha256": "75da77d72e1cf07b28696ab1bb2cba4b4ef32025198002c9353b531f8465388f"
+        }
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/network-science/en/net-009-detect-global-cycles-in-a-panel-stack.md",
+          "path_or_url": "streeling/courses/network-science/en/net-009-detect-global-cycles-in-a-panel-stack.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ea8645490b3eab50a4b7d7c5e9539d1da9d08bd8f48600af9606630712861641",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule frontmatter/heading/body and englishModuleKeys set construction; actual source lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "Retained observation statements distinguish retrieval metrics, offered responses and learner evidence; no new outcome read or inferred."
+        },
+        {
+          "path_or_url": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.components.condensation.html",
+          "pin": "NetworkX 3.7 documentation, read 2026-10-25",
+          "sha256": null,
+          "scope": "SCC contraction, member mapping and resulting DAG; browser lines 93-128 inspected.",
+          "read_method": "Actual browser text or explicitly bounded official search extraction inspected; HTTP status alone was not treated as reading."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Find the mutual-dependency groups.",
+          "expected_answer": "The groups are `[a,b]`, `[c,d]` and `[e]`, so the component count is `3`. Each pair in a group has paths both ways.",
+          "decision": null
+        },
+        "2": {
+          "question": "Write the condensed edges.",
+          "expected_answer": "They are `ab->cd` and `cd->e`, totaling `2`. Internal edges are represented by membership rather than retained as group self-loops.",
+          "decision": null
+        },
+        "3": {
+          "question": "Does the DAG resolve the original cycles?",
+          "expected_answer": "No. It orders groups only. The internal dependencies and original node identities remain unresolved and must stay recoverable.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the return-edge control.",
+          "expected_answer": "All nodes form `[a,b,c,d,e]`; there is `1` component and `0` condensed edges. The return path couples the entire graph.",
+          "decision": null
+        },
+        "5": {
+          "question": "Why retain the membership map?",
+          "expected_answer": "Without it, a concise acyclic picture could conceal which real tasks still depend on each other. Contraction is a view, not permission to merge effects.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Find the mutual-dependency groups. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Write the condensed edges. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Does the DAG resolve the original cycles? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: Apply the return-edge control. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: Why retain the membership map? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a dependency-region map for a fictional Demerzel review plan.",
+        "direct_manual_baseline": "Mark all mutually reachable pairs, form equivalence classes and draw only interclass edges.",
+        "falsifier": "One-way reachability merges groups or a condensed DAG is reported as a resolved execution schedule.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PM012",
+      "department": "product-management",
+      "module_id": "pm-012-order-review-work-by-weighted-completion-cost",
+      "prerequisites": [
+        "pm-003-review-queue-flow-metrics",
+        "net-010-compute-critical-paths-with-resource-assumptions"
+      ],
+      "novelty_vs_prerequisites": "PM003 measures queue movement and NET010 bounds makespan under resource constraints. This adds an explicit weighted sum of completion times, with the same makespan in different orders and a priority-reversal control.",
+      "authored_model": {
+        "values": {
+          "jobs": [
+            "A",
+            "B",
+            "C"
+          ],
+          "duration_ticks": {
+            "A": 4,
+            "B": 1,
+            "C": 2
+          },
+          "weight_per_tick": {
+            "A": 4,
+            "B": 3,
+            "C": 1
+          },
+          "baseline_order": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "formula": "Single nonpreemptive reviewer, all jobs ready at time zero. Completion time is cumulative duration. Cost=sum(weight[j]*completion[j]). Enumerate all permutations; choose minimum cost.",
+        "expected": {
+          "optimal_order": [
+            "B",
+            "A",
+            "C"
+          ],
+          "optimal_completion": {
+            "B": 1,
+            "A": 5,
+            "C": 7
+          },
+          "optimal_cost": 30,
+          "baseline_cost": 38,
+          "makespan": 7
+        },
+        "negative_control": {
+          "values": {
+            "jobs": [
+              "A",
+              "B",
+              "C"
+            ],
+            "duration_ticks": {
+              "A": 4,
+              "B": 1,
+              "C": 2
+            },
+            "weight_per_tick": {
+              "A": 8,
+              "B": 1,
+              "C": 1
+            },
+            "baseline_order": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          "expected": {
+            "optimal_order": [
+              "A",
+              "B",
+              "C"
+            ],
+            "optimal_completion": {
+              "A": 4,
+              "B": 5,
+              "C": 7
+            },
+            "optimal_cost": 44,
+            "baseline_cost": 44,
+            "makespan": 7
+          },
+          "why": "Changing delay weights reverses the preferred first job despite identical durations and makespan."
+        },
+        "assumptions": [
+          "All work available initially; one exclusive reviewer; no interruptions, deadlines or setup costs.",
+          "Weights are stipulated cardinal delay loss per tick, not human importance or measured money."
+        ],
+        "limits": "No real review capacity, optimal general scheduler, quality tradeoff or authority to skip gates.",
+        "input_types": {
+          "jobs": "list<unique string>",
+          "duration_ticks": "map<job,positive integer>",
+          "weight_per_tick": "map<job,nonnegative real>",
+          "baseline_order": "permutation<jobs>"
+        }
+      },
+      "title": "Order Review Work by Weighted Completion Cost",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-012-order-review-work-by-weighted-completion-cost.md",
+        "fr": "streeling/courses/product-management/fr/pm-012-order-review-work-by-weighted-completion-cost.fr.md",
+        "es": "streeling/courses/product-management/es/pm-012-order-review-work-by-weighted-completion-cost.es.md"
+      },
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/product-management/en/pm-012-order-review-work-by-weighted-completion-cost.md",
+          "sha256": "521c983beb74f69ee940b01a786bae54aae67d3afd0a279cd0f4d5b34ed17a1e"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/product-management/fr/pm-012-order-review-work-by-weighted-completion-cost.fr.md",
+          "sha256": "425d348702fe6af1a1920af7c291160078f74a3c87d5d760aad52a63b68d6b1d"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/product-management/es/pm-012-order-review-work-by-weighted-completion-cost.es.md",
+          "sha256": "c183487421c5fc985107dcec5a3d99e78d957c68007a7ade6271ec676baedee6"
+        }
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/product-management/en/pm-003-review-queue-flow-metrics.md",
+          "path_or_url": "streeling/courses/product-management/en/pm-003-review-queue-flow-metrics.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "737a59b015767ceb7a97efa0eb158881cf71014939d4038ef25014ab08f1c83a",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "streeling/courses/network-science/en/net-010-compute-critical-paths-with-resource-assumptions.md",
+          "path_or_url": "streeling/courses/network-science/en/net-010-compute-critical-paths-with-resource-assumptions.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "61b217eef1cf38c0d21ec94cea890f4733515db27080b9f40405b42a230ee699",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule frontmatter/heading/body and englishModuleKeys set construction; actual source lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "Retained observation statements distinguish retrieval metrics, offered responses and learner evidence; no new outcome read or inferred."
+        },
+        {
+          "path_or_url": "https://developers.google.com/optimization/scheduling/job_shop",
+          "pin": "Google OR-Tools scheduling guide, read 2026-10-25",
+          "sha256": null,
+          "scope": "Precedence, exclusive resources, nonpreemption and makespan objective; lines 78-113. Our weighted completion objective is separately defined and no solver is run.",
+          "read_method": "Actual browser text or explicitly bounded official search extraction inspected; HTTP status alone was not treated as reading."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Compute the baseline cost.",
+          "expected_answer": "In `ABC`, completion times are `[4,5,7]`; cost is `4*4+3*5+1*7=38`. The makespan is `7`.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the proposed order’s cost.",
+          "expected_answer": "In `BAC`, completion times are `[1,5,7]`; cost is `3*1+4*5+1*7=30`. The makespan remains `7`.",
+          "decision": null
+        },
+        "3": {
+          "question": "How can optimality be checked without a solver?",
+          "expected_answer": "Enumerate all `6` permutations and compute the declared objective for each. A feasible favorable order alone is not an optimality proof.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the changed-weight control.",
+          "expected_answer": "`ABC` is now optimal with cost `44`, while `BAC` costs `48`. Fixed durations do not imply fixed priority.",
+          "decision": null
+        },
+        "5": {
+          "question": "Would the best order permit skipping a learner gate?",
+          "expected_answer": "No. An objective over eligible review jobs does not change eligibility or authority. Actual gate decisions and costs remain separate.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Compute the baseline cost. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Compute the proposed order’s cost. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: How can optimality be checked without a solver? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: Apply the changed-weight control. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: Would the best order permit skipping a learner gate? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a fictional Learn review-order card with an explicit delay-cost objective.",
+        "direct_manual_baseline": "Enumerate every order on paper and record completion times and weighted totals.",
+        "falsifier": "A proposed optimum has a larger cost than another feasible order or silently optimizes makespan instead.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    },
+    {
+      "code": "PM013",
+      "department": "product-management",
+      "module_id": "pm-013-retain-censoring-in-time-to-first-task-use",
+      "prerequisites": [
+        "pm-009-separate-release-adoption-from-artifact-downloads"
+      ],
+      "novelty_vs_prerequisites": "PM009 defines cohort action fractions in a common fixed window. This adds unequal followup, right-censored first-use histories and risk-set product limits; an unchanged event count no longer fixes the estimate.",
+      "authored_model": {
+        "values": {
+          "followup_days": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "event": [
+            1,
+            0,
+            1,
+            0
+          ],
+          "horizon_days": 3
+        },
+        "formula": "Event=first eligible task use; zero=censored at followup. At each event time <=horizon, risk=count(followup>=time), failures=count(event=1 at time); S multiplies (1-failures/risk). Report 1-S and raw observed events/N separately.",
+        "expected": {
+          "event_times": [
+            1,
+            3
+          ],
+          "risk_sets": [
+            4,
+            2
+          ],
+          "survival": [
+            0.75,
+            0.375
+          ],
+          "cumulative_first_use": 0.625,
+          "raw_event_fraction": 0.5
+        },
+        "negative_control": {
+          "values": {
+            "followup_days": [
+              1,
+              4,
+              3,
+              4
+            ],
+            "event": [
+              1,
+              0,
+              1,
+              0
+            ],
+            "horizon_days": 3
+          },
+          "expected": {
+            "event_times": [
+              1,
+              3
+            ],
+            "risk_sets": [
+              4,
+              3
+            ],
+            "survival": [
+              0.75,
+              0.5
+            ],
+            "cumulative_first_use": 0.5,
+            "raw_event_fraction": 0.5
+          },
+          "why": "Extending the early censored followup changes the later risk set without changing observed event count."
+        },
+        "assumptions": [
+          "Common eligible entry time and exact first-event times; distinct event times.",
+          "Independent noninformative censoring is required for a population interpretation; no competing events."
+        ],
+        "limits": "Authored time-to-event estimate, not observed adoption, causal benefit, retention or uncertainty interval.",
+        "input_types": {
+          "followup_days": "list<positive real>",
+          "event": "same-length list<0|1>",
+          "horizon_days": "positive real"
+        }
+      },
+      "title": "Retain Censoring in Time to First Task Use",
+      "source_paths": {
+        "en": "streeling/courses/product-management/en/pm-013-retain-censoring-in-time-to-first-task-use.md",
+        "fr": "streeling/courses/product-management/fr/pm-013-retain-censoring-in-time-to-first-task-use.fr.md",
+        "es": "streeling/courses/product-management/es/pm-013-retain-censoring-in-time-to-first-task-use.es.md"
+      },
+      "source_bindings": [
+        {
+          "locale": "en",
+          "path": "streeling/courses/product-management/en/pm-013-retain-censoring-in-time-to-first-task-use.md",
+          "sha256": "ab49839652e463e79c4cfffa62014419d2de8e2080ed6e1b3261058b0e5e5bb6"
+        },
+        {
+          "locale": "fr",
+          "path": "streeling/courses/product-management/fr/pm-013-retain-censoring-in-time-to-first-task-use.fr.md",
+          "sha256": "c5c7b4d4b02e0d63cc0b26bfad69c1cef6a6873f464881a357bf82992ff5e825"
+        },
+        {
+          "locale": "es",
+          "path": "streeling/courses/product-management/es/pm-013-retain-censoring-in-time-to-first-task-use.es.md",
+          "sha256": "2d728cc9c4d5799b50d92858150940cfd9d9b464f20039c3849c37d1de68a264"
+        }
+      ],
+      "source_readings": [
+        {
+          "path": "streeling/courses/product-management/en/pm-009-separate-release-adoption-from-artifact-downloads.md",
+          "path_or_url": "streeling/courses/product-management/en/pm-009-separate-release-adoption-from-artifact-downloads.md",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d022e540be651daa1a413f0110333b6cfbf56e53033cfa26d29119d366963d7e",
+          "scope": "Relevant complete instructional passages, fixed inputs and source/claim boundary inspected for prerequisite and novelty; no historical checks rerun."
+        },
+        {
+          "path": "scripts/streeling-lib.mjs",
+          "path_or_url": "scripts/streeling-lib.mjs",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "ad61876ba7fd33010340255c9cf647a32d8413a44803ebf4a40d28903075f7e9",
+          "scope": "parseModule frontmatter/heading/body and englishModuleKeys set construction; actual source lines 10-42 and 77-92 inspected."
+        },
+        {
+          "path": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "path_or_url": "code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json",
+          "pin": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+          "sha256": "d3915d90f514855a357e9fd5571390fba7ad1a30d18cd45d27baf91c5c0379e1",
+          "scope": "Retained observation statements distinguish retrieval metrics, offered responses and learner evidence; no new outcome read or inferred."
+        },
+        {
+          "path_or_url": "https://itl.nist.gov/div898/handbook/apr/section2/apr215.htm",
+          "pin": "NIST e-Handbook section 8.2.1.5, read 2026-10-25",
+          "sha256": null,
+          "scope": "Exact event times, risk sets and recursive product-limit factors; official page/search text inspected.",
+          "read_method": "Actual browser text or explicitly bounded official search extraction inspected; HTTP status alone was not treated as reading."
+        }
+      ],
+      "exercise_checks": {
+        "1": {
+          "question": "Construct the event-time risk sets.",
+          "expected_answer": "At times `[1,3]`, the risk sets have sizes `[4,2]`. The person censored earlier is absent from the later set.",
+          "decision": null
+        },
+        "2": {
+          "question": "Compute the product-limit survival.",
+          "expected_answer": "The values are `[0.75,0.375]`; each event multiplies the preceding survival by its non-event fraction.",
+          "decision": null
+        },
+        "3": {
+          "question": "Compare cumulative first use and raw fraction.",
+          "expected_answer": "The estimate is `0.625`, while the observed event fraction is `0.5`. These quantities use different handling of followup.",
+          "decision": null
+        },
+        "4": {
+          "question": "Apply the extended-followup control.",
+          "expected_answer": "Risk sets become `[4,3]`, survival `[0.75,0.5]` and cumulative first use `0.5`. The raw fraction stays `0.5`.",
+          "decision": null
+        },
+        "5": {
+          "question": "Can independent censoring be inferred from a correct calculation?",
+          "expected_answer": "No. It concerns why followup ends relative to future event times. Actual context and evidence are needed; the finite table stipulates no such observation.",
+          "decision": null
+        }
+      },
+      "learner_criteria": [
+        {
+          "criterion": "Exercise 1: Construct the event-time risk sets. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 2: Compute the product-limit survival. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 3: Compare cumulative first use and raw fraction. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 4: Apply the extended-followup control. Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        },
+        {
+          "criterion": "Exercise 5: Can independent censoring be inferred from a correct calculation? Answer must preserve the stated operation, units and claim limits.",
+          "decision": null
+        }
+      ],
+      "actual_task": {
+        "description": "Prepare a first-task-use measurement card for a fictional GA release cohort, retaining censor flags.",
+        "direct_manual_baseline": "Sort event times, count who is still observed just before each and multiply the factors by hand.",
+        "falsifier": "Censoring is counted as an event or someone remains at risk after their followup ends.",
+        "actual_learner_answer": null,
+        "assistance_history": null,
+        "corrected_answer": null,
+        "learner_decision": null
+      },
+      "human_technical_review": null,
+      "fluent_language_review": null,
+      "learner_attempt": null,
+      "runtime_execution": null,
+      "production_adoption": null,
+      "publication_decision": null
+    }
+  ]
+}

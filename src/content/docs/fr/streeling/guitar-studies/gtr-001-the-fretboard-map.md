@@ -4,12 +4,13 @@ description: Fondamentaux de la guitare — Études de guitare
 sidebar:
   label: GTR-001 · La carte du manche
   order: 1
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar-studies/fr/gtr-001-the-fretboard-map.fr.md
 ---
 
 :::note[Streeling University]
 **GTR-001** · Fondamentaux de la guitare · débutant · 30 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/guitar-studies/fr/gtr-001-the-fretboard-map.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-001-the-fretboard-map.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département d'études de guitare** | Stade : Nigredo (Débutant) | Durée : 30 minutes
@@ -62,9 +63,11 @@ La gamme chromatique (les 12 notes) dans l'ordre :
 La → La#/Sib → Si → Do → Do#/Réb → Ré → Ré#/Mib → Mi → Fa → Fa#/Solb → Sol → Sol#/Lab → (retour à La)
 ```
 
-Deux exceptions importantes où il n'y a **pas de dièse/bémol entre les notes naturelles adjacentes** :
-- **Si à Do** — un demi-ton, pas de Si#
-- **Mi à Fa** — un demi-ton, pas de Mi#
+Deux paires de notes naturelles adjacentes sont **séparées d'un demi-ton, sans demi-ton supplémentaire entre elles** :
+- **Si à Do** — un demi-ton.
+- **Mi à Fa** — un demi-ton.
+
+Si# et Mi# sont des écritures valides ; dans ce modèle au tempérament égal à douze sons, elles correspondent respectivement à Do et Fa. La liste chromatique utilise Do et Fa par commodité. [MCL-008](../../musicology/mcl-008-keep-diatonic-and-chromatic-transposition-separate/) explique pourquoi l'orthographe des notes peut compter.
 
 Toutes les autres notes naturelles ont un dièse/bémol entre elles (par ex., La à Si a La#/Sib entre les deux — soit deux demi-tons).
 

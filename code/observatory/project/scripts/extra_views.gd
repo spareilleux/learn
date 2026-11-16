@@ -21,6 +21,9 @@ const GARDENS_SCRIPT_PATH := "res://scripts/palace_gardens.gd"
 const WING_SCRIPT_PATH := "res://scripts/library_wing.gd"
 ## The telescope view, O (scripts/telescope.gd), beside the curio wheel's monocle.
 const TELESCOPE_SCRIPT_PATH := "res://scripts/telescope.gd"
+## The duck's other modes, Shift with the duck held (scripts/duck_gun.gd: the guns, the dice, the dominoes),
+## where observatory.gd has not made them: the builds' is version 28's, older than they are.
+const DUCK_GUN_SCRIPT_PATH := "res://scripts/duck_gun.gd"
 ## [position, target, vertical fov], as fly_camera.gd's PRESETS.
 const VIEWS := {
 	"glass": [Vector3(0.0, 23.9, 4.5), Vector3(0.0, 23.0, 9.96), 62.0],
@@ -98,6 +101,7 @@ func _ready() -> void:
 	_make_gardens()
 	_make_wing()
 	_make_telescope()
+	_make_duck_gun.call_deferred()
 	var start := ""
 	var film := OS.get_cmdline_user_args().has("--cinematic")
 	for arg in OS.get_cmdline_user_args():
@@ -190,6 +194,18 @@ func _make_telescope() -> void:
 	scope.name = "Telescope"
 	scope.call("configure", _obs, _camera)
 	_obs.add_child.call_deferred(scope)
+
+
+## Deferred: the curio wheel comes after this node (observatory.gd _ready), and the guns after the wheel, as
+## observatory.gd adds them, so that their _input, called first, takes the left button while a gun is up.
+func _make_duck_gun() -> void:
+	if _obs.get_node_or_null("DuckGun") != null or _obs.get_node_or_null("CurioWheel") == null \
+			or not ResourceLoader.exists(DUCK_GUN_SCRIPT_PATH):
+		return
+	var guns: Node = load(DUCK_GUN_SCRIPT_PATH).new()
+	guns.name = "DuckGun"
+	guns.call("configure", _obs, _camera)
+	_obs.add_child(guns)
 
 
 ## --cinematic (?cinematic=1) plays it once the hall has had a moment to settle.

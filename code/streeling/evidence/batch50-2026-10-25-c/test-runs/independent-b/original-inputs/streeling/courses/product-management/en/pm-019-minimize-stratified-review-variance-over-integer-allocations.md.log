@@ -1,0 +1,166 @@
+---
+module_id: "pm-019-minimize-stratified-review-variance-over-integer-allocations"
+department: "product-management"
+course: "Minimize Stratified Review Variance over Integer Allocations"
+title: "Minimize Stratified Review Variance over Integer Allocations"
+level: "intermediate"
+prerequisites: ["pm-010-standardize-dogfood-failures-to-a-declared-task-mix", "pm-008-size-a-fifty-course-batch-by-review-capacity"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Minimize Stratified Review Variance over Integer Allocations
+
+> This is an authored finite mathematical or logical case supported by bounded source reading. Human technical review, fluent-language review, learner attempts, native runtime execution, production adoption and publication decisions remain undecided.
+
+A review study must distribute a fixed sample budget between task strata with different variability. Giving every stratum the same number of observations can waste precision when their contributions differ. This lesson asks a narrow design question: which positive integer allocation minimizes the stipulated variance of a stratified mean under the declared sampling assumptions?
+
+The target mean is a weighted sum of independent stratum sample means. Under independent sampling with replacement and known within-stratum variances, its variance is the sum of squared target weights times stratum variance divided by stratum sample count. Enumerate every positive integer split of the fixed total. Compare exact rational values and retain all minimizing splits. The continuous allocation is useful intuition but rounding it is not a general proof of the integer optimum.
+
+The fixed variances favour more sampling in the more variable stratum; the control swaps those variances and reverses the allocation. No observed defect rate or actual reviewer availability supplies these numbers. Mandatory content coverage, dependent repeated learners, unequal observation costs and finite-population corrections would change the design. The primary abstract explicitly distinguishes exact integer allocation from rounded continuous allocation. A future review planner should retain the full feasible split table before presenting an optimality claim.
+
+## Sources and project boundary
+
+[Prerequisite: pm-010-standardize-dogfood-failures-to-a-declared-task-mix](../../product-management/en/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.md)
+
+[Prerequisite: pm-008-size-a-fifty-course-batch-by-review-capacity](../../product-management/en/pm-008-size-a-fifty-course-batch-by-review-capacity.md)
+
+[Retained project artifact](../../../../scripts/streeling-lib.mjs)
+
+[Primary reading](https://www.census.gov/library/working-papers/2014/adrm/rrs2014-07.html)
+
+## Fixed model and negative control
+
+```json
+{
+  "values": {
+    "total_samples": 8,
+    "target_weights": [
+      "1/2",
+      "1/2"
+    ],
+    "stratum_variances": [
+      1,
+      9
+    ]
+  },
+  "formula": "Enumerate [n1,total_samples-n1] with 1<=n1<total_samples. Under independent with-replacement samples, variance=sum(target_weights[h]**2*stratum_variances[h]/n[h]); keep all exact-rational minima in n1 order.",
+  "expected": {
+    "candidate_variances": [
+      "4/7",
+      "1/2",
+      "8/15",
+      "5/8",
+      "4/5",
+      "7/6",
+      "16/7"
+    ],
+    "optimal_allocations": [
+      [
+        2,
+        6
+      ]
+    ],
+    "minimum_variance": "1/2"
+  },
+  "negative_control": {
+    "values": {
+      "total_samples": 8,
+      "target_weights": [
+        "1/2",
+        "1/2"
+      ],
+      "stratum_variances": [
+        9,
+        1
+      ]
+    },
+    "expected": {
+      "candidate_variances": [
+        "16/7",
+        "7/6",
+        "4/5",
+        "5/8",
+        "8/15",
+        "1/2",
+        "4/7"
+      ],
+      "optimal_allocations": [
+        [
+          6,
+          2
+        ]
+      ],
+      "minimum_variance": "1/2"
+    },
+    "why": "Swapping stratum variability reverses the exact optimal integer allocation."
+  },
+  "input_types": {
+    "total_samples": "integer at least two",
+    "target_weights": "two nonnegative rational strings summing to one",
+    "stratum_variances": "two strictly positive rational variances"
+  },
+  "assumptions": [
+    "All inputs are stipulated teaching values, not measured project events.",
+    "Only the declared finite objective and constraints are represented."
+  ],
+  "limits": "No actual review precision, independent learner sampling, measured stratum variance, finite-population correction or staffing decision is established."
+}
+```
+
+## Source-assisted task and journal
+
+**Direct manual baseline:** Enumerate each positive integer sample split and calculate its exact stratified-mean variance on paper.
+
+**Falsifier:** A purported optimum ignores a feasible lower-variance split or silently substitutes actual dependent attempts for independent stratum samples.
+
+Read the prerequisite and the retained project representation before treating this example as a proposed feature. The linked Learn source helper extracts metadata, title and body, then indexes English module identities. That is an actual representation boundary to inspect; it supplies neither the invented inputs nor an implementation of this mathematical operation. Keep the source revision attached to the reading note so that a later change cannot silently inherit this inspection.
+
+For the source-assisted task, reproduce the fixed case directly before asking an assistant to explain it. Use the input types and assumptions in the packet as part of the question, preserve intermediate quantities and compare the declared negative control. Ask the assistant to identify which premise makes the two results differ. A plausible explanation that never calculates the changed input has not demonstrated the operation.
+
+Record the exact question, supplied sources, answer, assistance history and any correction in the journal. The prepared corrected answers below are an answer key, not a learner attempt. An independent model check can establish the finite arithmetic while still missing a poor prompt or a misleading translation. Human technical review, fluent-language review, learner acceptance, native runtime behavior, production adoption and publication decisions therefore remain undecided. Retain a failed check and its diagnosis before recording a successful replay; do not replace an original failure with the corrected result.
+
+## Corrected exercises
+
+### Exercise 1
+
+Find the exact fixed optimum.
+
+> **Answer:** Allocation `[2,6]` gives variance `1/2`, the minimum over all positive integer splits. Equal allocation gives `5/8`.
+
+### Exercise 2
+
+Apply the variance-swapped control.
+
+> **Answer:** The optimum becomes `[6,2]` with minimum `1/2`. The target weights and total sample count are unchanged.
+
+### Exercise 3
+
+Does proportional allocation solve this objective?
+
+> **Answer:** Not generally. It uses target weights alone, while this variance objective also depends on within-stratum variability and integer feasibility.
+
+### Exercise 4
+
+What does the retained project helper actually establish?
+
+> **Answer:** It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.
+
+### Exercise 5
+
+Which acceptance decisions can the corrected answer key close?
+
+> **Answer:** None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.
+
+## Prepared learner criteria
+
+These criteria are prepared; every learner decision remains undecided.
+
+- Exercise 1: Allocation `[2,6]` gives variance `1/2`, the minimum over all positive integer splits. Equal allocation gives `5/8`.
+- Exercise 2: The optimum becomes `[6,2]` with minimum `1/2`. The target weights and total sample count are unchanged.
+- Exercise 3: Not generally. It uses target weights alone, while this variance objective also depends on within-stratum variability and integer feasibility.
+- Exercise 4: It extracts metadata, title and body and indexes English module identities. Reading that code supports this representation claim; it does not execute the authored model or validate a live project feature.
+- Exercise 5: None of the human or learner gates. A real attempt needs its actual answer, assistance history and correction; the finite case does not establish native runtime behavior, production adoption or release approval.
+
+[Fixed unit packet](../../../../code/streeling/evidence/batch50-2026-10-25-c/unit-b.json) · [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25-c/journal.md)

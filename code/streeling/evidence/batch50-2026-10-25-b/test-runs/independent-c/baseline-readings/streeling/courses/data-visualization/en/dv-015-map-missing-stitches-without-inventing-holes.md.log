@@ -1,0 +1,101 @@
+---
+module_id: dv-015-map-missing-stitches-without-inventing-holes
+department: data-visualization
+course: "Map Missing Stitches without Inventing Holes"
+level: intermediate
+prerequisites: ["dv-010-show-pitch-errors-and-missing-estimates"]
+estimated_duration: "45 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Map Missing Stitches without Inventing Holes
+
+> Draft for technical and language review. Every scene, count, temperature, timing and outcome introduced below is an authored example. Source inspection and arithmetic do not constitute a physical craft trial, a [Godot](https://docs.godotengine.org/en/4.5/) import, a [Blender](https://raw.githubusercontent.com/blender/blender/v4.5.0/README.md) render, a [ComfyUI](https://docs.comfy.org/) run or a learner observation. Human and runtime decisions remain undecided.
+
+## Project question
+
+An embroidery inspection map leaves a blank cell where no observation exists. A scene author reads the blank as a hole and removes geometry. This lesson separates an observed absent stitch from an unobserved location, preserving spatial identity as well as the denominator. It transfers the prerequisite’s missing-value distinction from a time trace to a proposed craft surface without pretending that an image is a physical inspection.
+
+## Read the retained boundary
+
+The retained crossing fixture gives each crossing an ID and grid coordinates. Those fields demonstrate an explicit spatial address. Its booleans concern weave order, not stitch presence, so our presence table is authored separately and must not overwrite their meaning.
+
+Read the prerequisite and the retained project artifact before interpreting the model. The source has its own revision and purpose; it supplies the boundary described here, not the new classroom inputs. Keep a small evidence table separating an inspected field, an assumption, a derived quantity and a proposed scene effect. An agent summary must point back to the field it interprets. A source filename alone cannot establish an earlier result.
+
+## Interpret the model
+
+Use a row-major table with three semantic states. True means a stitch was observed, false means its absence was observed, and null means the site was not observed. Draw missing locations with an explicit mark and a text legend; do not let the background imply physical emptiness. Report both observed absence and coverage. The observation mask is part of the data, not an aesthetic overlay that can be discarded after plotting. A connected gap in observed sites also does not establish a continuous tear between sites, because the intervening surface has not been modeled or sampled.
+
+The direct baseline is a labelled sketch and a hand calculation with the answer panels closed. Preserve intermediate values and units, then apply the changed input in the negative control. A disagreement is useful evidence: locate whether it comes from the definition, arithmetic, representation or intended task before changing the model. Agreement on the main case alone does not establish a universal rule. These finite examples deliberately expose an assumption that a smooth preview could conceal.
+
+```text
+{"grid_width":3,"grid_height":2,"observed_stitch":[true,false,null,true,false,true]}
+observed=count(v is not null); present=count(v is true); absent=count(v is false); missing=total-observed; observed_absence_fraction=absent/observed
+```
+
+## Corrected exercises
+
+### Exercise 1
+
+Count present, absent and unobserved sites in the main case.
+
+<details><summary>Answer 1</summary>
+
+There are `3` present, `2` observed absent and `1` missing sites. The observation count is `5`; the grid has `6` sites.
+
+</details>
+
+### Exercise 2
+
+Calculate observed absence fraction. What population does it describe?
+
+<details><summary>Answer 2</summary>
+
+The fraction is `0.4`, using only `5` observed sites. It describes this observed subset; it is not an estimate justified for every location on a real textile.
+
+</details>
+
+### Exercise 3
+
+Apply the control replacing the missing value with false.
+
+<details><summary>Answer 3</summary>
+
+The observed count becomes `6`, absent count `3`, missing count `0` and observed absence fraction `0.5`. The replacement invents an observation.
+
+</details>
+
+### Exercise 4
+
+How should a scene legend distinguish the two kinds of blank?
+
+<details><summary>Answer 4</summary>
+
+Use separate text states and marks for observed absence and unobserved location. A transparent background alone cannot tell a missing measurement from an actual hole.
+
+</details>
+
+### Exercise 5
+
+May this grid certify a connected physical tear?
+
+<details><summary>Answer 5</summary>
+
+No. Sparse site states do not define the intervening material or its connectivity. Additional geometry or inspection is required before removing a continuous surface.
+
+</details>
+
+## Source-assisted learner task
+
+Draw the grid, label its observation mask and reproduce both denominators manually. Point to the fixture’s address fields and explain why its order boolean cannot be reused as presence. A display that turns the missing site into confirmed absence falsifies preservation of the observation boundary.
+
+Retain your original answer, source locations, assistance history and any later correction as separate records. State the observable result that would falsify your recommendation before proposing automation. Compare the source-assisted result with your direct manual baseline, including any extra uncertainty it introduces. The fixed packet contains five prepared criteria; each decision stays null until an actual learner attempt and review exist. Prepared answers are checks, not evidence that a learner performed the task.
+
+## Sources and validation journal
+
+- [Prerequisite: dv-010-show-pitch-errors-and-missing-estimates](../../data-visualization/en/dv-010-show-pitch-errors-and-missing-estimates.md)
+- [Retained project artifact](../../../../code/streeling/evidence/weave-scene-2026-10-22/crossings.json)
+- [Primary reading](https://docs.godotengine.org/en/4.5/classes/class_camera3d.html)
+- [Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-24/unit-c.json)
+- [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-24/journal.md)

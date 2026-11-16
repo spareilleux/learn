@@ -1,0 +1,121 @@
+{
+  "status": "prepared-not-performed",
+  "scope": "Criterion review is not a real learner attempt, retention result or causal study.",
+  "criteria": [
+    {
+      "id": "GAA007-1",
+      "module": "GAA007",
+      "title": "target-cue",
+      "acceptance": "Distinguish naming target with chord label hidden versus any-triad/exact-learned-shape tasks with target chord label visible; exact target and order explicit.",
+      "decision": null
+    },
+    {
+      "id": "GAA007-2",
+      "module": "GAA007",
+      "title": "key-order",
+      "acceptance": "Raw0-1-0-2-3-x reverses to chartx-3-2-0-1-0; tuning40,45,50,55,59,64 gives48,52,55,60,64 with no capo. Preserve raw/display distinction/source identity.",
+      "decision": null
+    },
+    {
+      "id": "GAA007-3",
+      "module": "GAA007",
+      "title": "acceptance",
+      "acceptance": "Exact-A acceptsAonly; restricted all-and-onlyCEG acceptsA/B/D notC(extra11/B). Symbolic criterion is not physical playability or every musical brief.",
+      "decision": null
+    },
+    {
+      "id": "GAA007-4",
+      "module": "GAA007",
+      "title": "score",
+      "acceptance": "Scores-0.2/0.8/1.2 clamp0/0.8/1 but are not learner recall probabilities. Require actual defined delayed response and calibration evidence.",
+      "decision": null
+    },
+    {
+      "id": "GAA007-5",
+      "module": "GAA007",
+      "title": "attempt-record",
+      "acceptance": "Retain target/cues/key/rule/source/tuning/order/query, actual answer before reveal, assistance/attempt/timing and delayed/comparison evidence. Plan/tracking/RAG score is not an attempt or causal benefit.",
+      "decision": null
+    },
+    {
+      "id": "COG007-1",
+      "module": "COG007",
+      "title": "first-endpoint",
+      "acceptance": "Raw3/7; observed eligible first2/6=1/3 after exposedP03 excluded. MissingP08 is not wrong and exposedcorrect is not unaided.",
+      "decision": null
+    },
+    {
+      "id": "COG007-2",
+      "module": "COG007",
+      "title": "aggregation",
+      "acceptance": "Allresponses6/11 and finalitems6/7 have different endpoints; repeated rows not independent new learners or unaided trials.",
+      "decision": null
+    },
+    {
+      "id": "COG007-3",
+      "module": "COG007",
+      "title": "assistance",
+      "acceptance": "Hintretry3/3selected; eligibleoffers7with6responses give bounds2/7to3/7. No causal/delayed effect or hidden missing-as-failure inference.",
+      "decision": null
+    },
+    {
+      "id": "COG007-4",
+      "module": "COG007",
+      "title": "delayed",
+      "acceptance": "At24hours8heldoutoffers,6responses5correct give5/6observed, bounds5/8to7/8 with4binarymissing completions. Deterministic bounds notCI or observed missing outcomes.",
+      "decision": null
+    },
+    {
+      "id": "COG007-5",
+      "module": "COG007",
+      "title": "bounded-report",
+      "acceptance": "Keep all endpoints separate in authoredtrace, APSabstract scope, actual timed/cued/assistance/missingness records and comparable delayed endpoint plus justified comparison needed; source labels/retrieval not retention.",
+      "decision": null
+    },
+    {
+      "id": "PHI007-1",
+      "module": "PHI007",
+      "title": "counterfactual-time",
+      "acceptance": "Before4/8after6/8change1/4; defineY1/Y0at same later time, pretest-as-Y0 adds assumption.",
+      "decision": null
+    },
+    {
+      "id": "PHI007-2",
+      "module": "PHI007",
+      "title": "countermodels",
+      "acceptance": "Benefit/noeffect/harm worlds share all supplied observations with effects1/4,0,-1/4. Need justified premise or comparison to distinguish.",
+      "decision": null
+    },
+    {
+      "id": "PHI007-3",
+      "module": "PHI007",
+      "title": "bounds",
+      "acceptance": "256binaryY0vectors yield tight-1/4to3/4 bounds witnessedallones/allzeros; no assignedprior/CI. Pretest may inform justified design but not unrestricted laterY0.",
+      "decision": null
+    },
+    {
+      "id": "PHI007-4",
+      "module": "PHI007",
+      "title": "randomization",
+      "acceptance": "70balancedallocations meanbenefitcontrast1/4 under fixedpotentialoutcomes/consistentwell-definedtreatment/nointerference/uniformassignment; units1,2,4,6 yield1/2minus1=-1/2. No singleassignment sign/precision guarantee or actual run.",
+      "decision": null
+    },
+    {
+      "id": "PHI007-5",
+      "module": "PHI007",
+      "title": "unit-evidence",
+      "acceptance": "Elevenresponse rows fromonelearner are not11randomizedparticipants. Requireversionedcomparison,units/assignmentprocedure,realcomparabletimedoutcomes,assistance/missingness and assumptionchecks beforebenefit.",
+      "decision": null
+    }
+  ],
+  "pass_policy": "All five criteria per module; retain actual answers and assistance before learner decisions.",
+  "human_technical_review": null,
+  "musician_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "runtime_validation": null,
+  "retention": null,
+  "randomization": null,
+  "causal_effect": null,
+  "deployed_html": null
+}

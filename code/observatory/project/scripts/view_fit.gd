@@ -16,11 +16,18 @@ extends Node
 ## `zoom` magnifies whatever the screen would show by its inverse (the curio wheel's monocle,
 ## scripts/curio_wheel.gd, eases it between 1 and 0.4; the telescope, scripts/telescope.gd, down to
 ## 0.01); it applies with ?fit=off too.
+## `max_across` narrows a wide screen's field instead (the author, 2026-10-16, of the native RTX view on a
+## 1.87:1 window: « la focale a l'air étrange non? »): 60 degrees from top to bottom were 94 across there,
+## a 17 mm lens on a full-frame camera, which stretches the edges. The RTX package's Lens setting
+## (artpass/publish/rtx/rtx_play.gd) sets it; at 0, as everywhere else, the field stays as given. It applies
+## with ?fit=off too.
 
 const MIN_H := 60.0  ## degrees across that a narrow screen is widened to
 const MAX_V := 90.0  ## but never more than this many degrees from top to bottom
 
 var enabled := true
+## Degrees across that no field exceeds; 0: no limit.
+var max_across := 0.0
 ## Tests set the screen's width over height here instead of resizing the window.
 var aspect_override := 0.0
 ## 1: the field as fitted; below 1, magnified by 1 / zoom (tan of the half angle).
@@ -83,9 +90,13 @@ func _process(_delta: float) -> void:
 
 ## The fov the screen shows when the others set `given`.
 func fitted(given: float) -> float:
-	if _camera == null or not enabled or _camera.keep_aspect != Camera3D.KEEP_HEIGHT:
+	if _camera == null or _camera.keep_aspect != Camera3D.KEEP_HEIGHT:
 		return given
-	return fit(given, _aspect())
+	var aspect := _aspect()
+	var f := fit(given, aspect) if enabled else given
+	if max_across > 0.0:
+		f = minf(f, rad_to_deg(2.0 * atan(tan(deg_to_rad(max_across) * 0.5) / maxf(aspect, 0.01))))
+	return f
 
 
 func _aspect() -> float:

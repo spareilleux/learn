@@ -1,0 +1,1127 @@
+{
+  "schema": "streeling-independent-data-audit/1",
+  "checked_at_utc": "2026-10-22T17:56:34.020777+00:00",
+  "source_repository": "https://github.com/GuitarAlchemist/ga",
+  "source_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "verdict": "pass_with_declared_evidence_limits",
+  "input_bindings": [
+    {
+      "path": "experiment-plan.md",
+      "sha256": "a0a696c30ed157e9bcd6ca8e4d6672a1b0987a04609f0e90c96c05122baa8d88"
+    },
+    {
+      "path": "primary-readback.json",
+      "sha256": "ab8e870e137af9f47598ba835438dbabc0ac63ddd41a7e5f76416d49cc510707"
+    },
+    {
+      "path": "cpu-source-inputs.json",
+      "sha256": "51b3f031187c2cdd5f6e7a71519c50a1aac8764ccb000dbc6bc2ff75ae94d96f"
+    },
+    {
+      "path": "cpu-execution.json",
+      "sha256": "62023664f561067ca5d5e530633671dc758068acef1402927a2366ae683e165c"
+    },
+    {
+      "path": "cpu-descriptions.json",
+      "sha256": "4d75d09894b7e0ec84a8965a001046439952e9d09243d5ba47815b325612431f"
+    },
+    {
+      "path": "composition-calculations.json",
+      "sha256": "89ff2231c3b7d57d9c22b5926bb3a8364180904b34783c6c4960eb2a6d501b9f"
+    },
+    {
+      "path": "historical-comparison.json",
+      "sha256": "d35004017d62ec1936ebf482aa0fb53e8e4288aa0c4b395598b85b0cbfdeb1e0"
+    },
+    {
+      "path": "official-links.json",
+      "sha256": "aa7839f136fbfe0be9144bed481a48f92bcd8c077a3de8f26e84a908064c7def"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\sdk.log",
+      "sha256": "8e7c476a9a3e5d546635877d2b16dc5cd4d9f770d2c1fb1d5b07aa3bce3b6d6c"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\restore.log",
+      "sha256": "cb33e378b0e3dafbc1f44929ef67e818009584961cabae370ece5e3a5a6948da"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\build.log",
+      "sha256": "9494134436aecdb5d7c7d8af0e3459a7f66702c0a7ef9445dd3b704d07fd2374"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\tests.log",
+      "sha256": "0d806d83ec2ce092dabbd51050778462e2595455579cbb01c374883dd83934ab"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\column1.log",
+      "sha256": "f2bd3afd421c4799d4e0441dae2c019f07081afb57a26993ba429931d38ac0ea"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\column2.log",
+      "sha256": "c2d74fc46b95a7f9d62373a899e0c5fc31611243c83102c4c30e117fa00fa4b7"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\colonnade4-v1.log",
+      "sha256": "caf272fef8c0e1edc87881caa0a7e61872a55e5c1b5b07e0c1ecc62c45c3156b"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\colonnade4-v2.log",
+      "sha256": "a03f28dc077a496d46b2f46d047895c74ce93e795b2c06c2eda7ec63c9959b80"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\colonnade-attachment.log",
+      "sha256": "40772b6e7928c5b5dfc91ece1393684479ed1a8c5ed97c188abe43b876748649"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\sanctuary-level2.log",
+      "sha256": "a8a81339d3ff0936636b2546230338b6b408dbd8b04d5b76db5a22e3cf3f17b9"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\sanctuary-level3.log",
+      "sha256": "b2027f22f575ea4e16dbe44e68dda201baf5fd654e3bb8d627191a87e644137d"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\temple-instances10.log",
+      "sha256": "30c44a677a7c245fa379f31df84638e50014b9ea130e4cadc45f093ee0fc54d7"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\temple-depth1.log",
+      "sha256": "aed64907c11652470d39f8d1a0abaa7cdebbb87b9cad72ec0c53ff1d0c446524"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\colonnade-count-fraction.log",
+      "sha256": "9d73fdeb21d5a61344a40945c88d38f2836f7104b26e719266fe1551306d7498"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\temple-seed7.log",
+      "sha256": "b45c9411ff801d7648bb2749b6d44592ebf6e784c16a809efabe21ff28674788"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\temple-seed8.log",
+      "sha256": "cbd2d28ae489faee3d57fef0bef7b407a5dcd5bc002ca04f10ca96247a4ba66d"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\colonnade4-repeat.log",
+      "sha256": "caf272fef8c0e1edc87881caa0a7e61872a55e5c1b5b07e0c1ecc62c45c3156b"
+    },
+    {
+      "path": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\full-cpu-descriptions.json",
+      "sha256": "41537a988af1c50eb920e45abe8d5ff780cb18cab9d5fdfea74615d2f8044e78"
+    },
+    {
+      "path": "C:\\Users\\spare\\.nuget\\packages\\fsharp.core\\10.0.113\\fsharp.core.10.0.113.nupkg",
+      "sha256": "8b8410443122a7e9df46ecc75438b0881cd996085e385d0c76aecd505c6273e6"
+    }
+  ],
+  "scope": "Independent read-only audit of immutable public Git objects, final evidence files, retained command logs and raw CPU JSON. Only data-audit.json was written. No build, test runner, renderer, window, GPU, DLSS, audio or stream was started during this audit.",
+  "findings": [],
+  "blockers": [],
+  "source_checks": [
+    {
+      "path": "Experiments/Brutal/Lego.Cli/Lego.Cli.fsproj",
+      "sha256": "f7ab2b9cc132eeca84151adbda1584375c753654aad6dc460593f0c6dc3bbd60",
+      "bytes": 700,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": true,
+      "extracted_sha256": "f7ab2b9cc132eeca84151adbda1584375c753654aad6dc460593f0c6dc3bbd60",
+      "unchanged_extracted_bytes": true,
+      "compilation_manifest_matches": true
+    },
+    {
+      "path": "Experiments/Brutal/Lego.Cli/Program.fs",
+      "sha256": "2088a26130c9e363f50fc620e9d5757847db60c8f3dd9a1863015c385a0e34ad",
+      "bytes": 1917,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": true,
+      "extracted_sha256": "2088a26130c9e363f50fc620e9d5757847db60c8f3dd9a1863015c385a0e34ad",
+      "unchanged_extracted_bytes": true,
+      "compilation_manifest_matches": true
+    },
+    {
+      "path": "Experiments/Brutal/Lego.Cli/Tests.fs",
+      "sha256": "617e47bd960eae186fc2b2ac8589ddd7eae01ba5f739ba9f65339dfa07b4af1d",
+      "bytes": 15682,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": true,
+      "extracted_sha256": "617e47bd960eae186fc2b2ac8589ddd7eae01ba5f739ba9f65339dfa07b4af1d",
+      "unchanged_extracted_bytes": true,
+      "compilation_manifest_matches": true
+    },
+    {
+      "path": "Experiments/Brutal/Lego.Cli/packages.lock.json",
+      "sha256": "43906190c1ff1055deee4b8d5e81898a1e3d2cd1f7082dec70c406ea93bc8f73",
+      "bytes": 434,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": true,
+      "extracted_sha256": "43906190c1ff1055deee4b8d5e81898a1e3d2cd1f7082dec70c406ea93bc8f73",
+      "unchanged_extracted_bytes": true,
+      "compilation_manifest_matches": true
+    },
+    {
+      "path": "Experiments/Brutal/Lego/Api.fs",
+      "sha256": "e319b6f77e357126bce08f595e7c6d1113d63de90523a1b33fc36bba857067c4",
+      "bytes": 4005,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": true,
+      "extracted_sha256": "e319b6f77e357126bce08f595e7c6d1113d63de90523a1b33fc36bba857067c4",
+      "unchanged_extracted_bytes": true,
+      "compilation_manifest_matches": true
+    },
+    {
+      "path": "Experiments/Brutal/Lego/Blocks.fs",
+      "sha256": "cd442e706bb54b24b9e10fe8b5673c89a34ed847bed66974e4f603d26b2d9688",
+      "bytes": 18832,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": true,
+      "extracted_sha256": "cd442e706bb54b24b9e10fe8b5673c89a34ed847bed66974e4f603d26b2d9688",
+      "unchanged_extracted_bytes": true,
+      "compilation_manifest_matches": true
+    },
+    {
+      "path": "Experiments/Brutal/Lego/Describe.fs",
+      "sha256": "613309c7dd02c30e200f164c5f41a358e456197ea6881e0f7e069756f753a429",
+      "bytes": 5629,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": true,
+      "extracted_sha256": "613309c7dd02c30e200f164c5f41a358e456197ea6881e0f7e069756f753a429",
+      "unchanged_extracted_bytes": true,
+      "compilation_manifest_matches": true
+    },
+    {
+      "path": "Experiments/Brutal/Lego/Generate.fs",
+      "sha256": "8b994f93e1b14cc5f770d38d8d804615a6163e3de111fbeeba9d77368fe8bbc5",
+      "bytes": 8843,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": true,
+      "extracted_sha256": "8b994f93e1b14cc5f770d38d8d804615a6163e3de111fbeeba9d77368fe8bbc5",
+      "unchanged_extracted_bytes": true,
+      "compilation_manifest_matches": true
+    },
+    {
+      "path": "Experiments/Brutal/Lego/Lego.fsproj",
+      "sha256": "16a8c5005eddae27976ea772dfa4e5424ae45d185b72c7c6202c5d310b6d989d",
+      "bytes": 943,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": true,
+      "extracted_sha256": "16a8c5005eddae27976ea772dfa4e5424ae45d185b72c7c6202c5d310b6d989d",
+      "unchanged_extracted_bytes": true,
+      "compilation_manifest_matches": true
+    },
+    {
+      "path": "Experiments/Brutal/Lego/Model.fs",
+      "sha256": "ac44e7067730897d4fca91617ff68af67e7a1529b56c367d49add89ab6af5228",
+      "bytes": 9322,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": true,
+      "extracted_sha256": "ac44e7067730897d4fca91617ff68af67e7a1529b56c367d49add89ab6af5228",
+      "unchanged_extracted_bytes": true,
+      "compilation_manifest_matches": true
+    },
+    {
+      "path": "Experiments/Brutal/Lego/Polis.fs",
+      "sha256": "348a38216a40e312d5cd4de7d6ac8a0ba4db7d23b8a0ab936099649c0c7bcc32",
+      "bytes": 30858,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": true,
+      "extracted_sha256": "348a38216a40e312d5cd4de7d6ac8a0ba4db7d23b8a0ab936099649c0c7bcc32",
+      "unchanged_extracted_bytes": true,
+      "compilation_manifest_matches": true
+    },
+    {
+      "path": "Experiments/Brutal/Lego/Seeds.fs",
+      "sha256": "5fc46fef00a42a48963cd4cff4fbf6a58f9e945c0f06e4cb2b87681db4059aad",
+      "bytes": 1548,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": true,
+      "extracted_sha256": "5fc46fef00a42a48963cd4cff4fbf6a58f9e945c0f06e4cb2b87681db4059aad",
+      "unchanged_extracted_bytes": true,
+      "compilation_manifest_matches": true
+    },
+    {
+      "path": "Experiments/Brutal/Lego/Space.fs",
+      "sha256": "c1580d2297f1bfedfac4f8d1adb126d29a4cf4cc2e10857f04eb7d991b6c3acc",
+      "bytes": 1809,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": true,
+      "extracted_sha256": "c1580d2297f1bfedfac4f8d1adb126d29a4cf4cc2e10857f04eb7d991b6c3acc",
+      "unchanged_extracted_bytes": true,
+      "compilation_manifest_matches": true
+    },
+    {
+      "path": "Experiments/Brutal/Lego/Validate.fs",
+      "sha256": "7722806ad2db8e5847753ca6b7211d123d1e0c3319375c5ba14b5e80de72a387",
+      "bytes": 2260,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": true,
+      "extracted_sha256": "7722806ad2db8e5847753ca6b7211d123d1e0c3319375c5ba14b5e80de72a387",
+      "unchanged_extracted_bytes": true,
+      "compilation_manifest_matches": true
+    },
+    {
+      "path": "Experiments/Brutal/Lego/packages.lock.json",
+      "sha256": "ec99fbed7bed8cc0aed93cb1e9d0dc9a20acbda3e332ad6a7e3fe59fa28042d1",
+      "bytes": 306,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": true,
+      "extracted_sha256": "ec99fbed7bed8cc0aed93cb1e9d0dc9a20acbda3e332ad6a7e3fe59fa28042d1",
+      "unchanged_extracted_bytes": true,
+      "compilation_manifest_matches": true
+    },
+    {
+      "path": "global.json",
+      "sha256": "f061145bf60fc20151a6f2b9e4ecff80d3d4eb224b5c9e79ea3f0058597c0e6b",
+      "bytes": 81,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": true,
+      "extracted_sha256": "f061145bf60fc20151a6f2b9e4ecff80d3d4eb224b5c9e79ea3f0058597c0e6b",
+      "unchanged_extracted_bytes": true,
+      "compilation_manifest_matches": true
+    },
+    {
+      "path": "Experiments/Brutal/README.md",
+      "sha256": "4cb7e4e068eb000e97b5cd4bb323fbfd8a929749ad14ec3b96127f2d303d3fe7",
+      "bytes": 80539,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": false
+    },
+    {
+      "path": "Experiments/Brutal/Colossus/Program.cs",
+      "sha256": "2ae759eace2d9037f2771bc82b5f901c02bf4ec2751ff4e510f4e1aa4ab60c15",
+      "bytes": 261839,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": false
+    },
+    {
+      "path": "Experiments/Brutal/run-m1.ps1",
+      "sha256": "975374171316780e2f3938042104262e601fbeff5cf18f6b5803d621e0ece788",
+      "bytes": 7502,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": false
+    },
+    {
+      "path": "Experiments/Brutal/run-m2.ps1",
+      "sha256": "d443214bc4d20b3841bbd5d8f8276474cc9bcbe4c74b494a03c6e3c943c7329c",
+      "bytes": 12509,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": false
+    },
+    {
+      "path": "Experiments/Brutal/run-m3.ps1",
+      "sha256": "d3def2897f60632a054dd6263483dda3266594a5369d740b6c87075f17b06b5b",
+      "bytes": 8762,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": false
+    },
+    {
+      "path": "Experiments/Brutal/evidence/m2-20261019-235218.md",
+      "sha256": "e830a6b0bfaf06e6b5b0af4a0ff9f668109e5006bc42b5db9614c065ce91db56",
+      "bytes": 4001,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": false
+    },
+    {
+      "path": "Experiments/Brutal/evidence/m2-20261019-235332.md",
+      "sha256": "945c43cf0d5a6f0b482e3644201377a58cf8c0cc39fd5bda8e879054af774cd0",
+      "bytes": 4106,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": false
+    },
+    {
+      "path": "Experiments/Brutal/evidence/m3-20261020-000131.md",
+      "sha256": "954c8779a775a4e17309aae3b6ae3ff6856c6809d81be772f1455e155ee82fbb",
+      "bytes": 4381,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": false
+    },
+    {
+      "path": "Experiments/Brutal/evidence/m3-20261020-000727.md",
+      "sha256": "7da3fd920f42caeba1cbb83a18980cd37670b4a20787253a16803814c7a1b7d6",
+      "bytes": 2755,
+      "immutable_git_object_matches_manifest": true,
+      "recorded_anonymous_http_status": 200,
+      "extracted_for_cpu": false
+    }
+  ],
+  "compilation_input_count": 16,
+  "command_checks": [
+    {
+      "label": "sdk",
+      "argv": [
+        "dotnet",
+        "--version"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\sdk.log",
+      "sha256": "8e7c476a9a3e5d546635877d2b16dc5cd4d9f770d2c1fb1d5b07aa3bce3b6d6c",
+      "sha256_matches_record": true,
+      "bytes": 10,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 0,
+      "expected_exit_code": 0,
+      "recorded_exit_matches_expected": true
+    },
+    {
+      "label": "restore",
+      "argv": [
+        "dotnet",
+        "restore",
+        "Experiments/Brutal/Lego.Cli/Lego.Cli.fsproj",
+        "--locked-mode",
+        "--disable-parallel",
+        "-p:ImportDirectoryBuildProps=false",
+        "-p:ImportDirectoryBuildTargets=false"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\restore.log",
+      "sha256": "cb33e378b0e3dafbc1f44929ef67e818009584961cabae370ece5e3a5a6948da",
+      "sha256_matches_record": true,
+      "bytes": 255,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 0,
+      "expected_exit_code": 0,
+      "recorded_exit_matches_expected": true
+    },
+    {
+      "label": "build",
+      "argv": [
+        "dotnet",
+        "build",
+        "Experiments/Brutal/Lego.Cli/Lego.Cli.fsproj",
+        "-c",
+        "Release",
+        "--no-restore",
+        "-m:1",
+        "-p:BuildInParallel=false",
+        "-p:UseSharedCompilation=false",
+        "-p:ImportDirectoryBuildProps=false",
+        "-p:ImportDirectoryBuildTargets=false"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\build.log",
+      "sha256": "9494134436aecdb5d7c7d8af0e3459a7f66702c0a7ef9445dd3b704d07fd2374",
+      "sha256_matches_record": true,
+      "bytes": 310,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 0,
+      "expected_exit_code": 0,
+      "recorded_exit_matches_expected": true
+    },
+    {
+      "label": "tests",
+      "argv": [
+        "dotnet",
+        "C:\\tmp\\streeling-brutal-public-cpu-20261022\\Experiments\\Brutal\\Lego.Cli\\bin\\Release\\net10.0\\Lego.Cli.dll",
+        "test"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\tests.log",
+      "sha256": "0d806d83ec2ce092dabbd51050778462e2595455579cbb01c374883dd83934ab",
+      "sha256_matches_record": true,
+      "bytes": 1378,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 0,
+      "expected_exit_code": 0,
+      "recorded_exit_matches_expected": true
+    },
+    {
+      "label": "column1",
+      "argv": [
+        "dotnet",
+        "C:\\tmp\\streeling-brutal-public-cpu-20261022\\Experiments\\Brutal\\Lego.Cli\\bin\\Release\\net10.0\\Lego.Cli.dll",
+        "describe",
+        "column@1",
+        "--seed",
+        "7"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\column1.log",
+      "sha256": "f2bd3afd421c4799d4e0441dae2c019f07081afb57a26993ba429931d38ac0ea",
+      "sha256_matches_record": true,
+      "bytes": 2046,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 0,
+      "expected_exit_code": 0,
+      "recorded_exit_matches_expected": true
+    },
+    {
+      "label": "column2",
+      "argv": [
+        "dotnet",
+        "C:\\tmp\\streeling-brutal-public-cpu-20261022\\Experiments\\Brutal\\Lego.Cli\\bin\\Release\\net10.0\\Lego.Cli.dll",
+        "describe",
+        "column@2",
+        "--seed",
+        "7"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\column2.log",
+      "sha256": "c2d74fc46b95a7f9d62373a899e0c5fc31611243c83102c4c30e117fa00fa4b7",
+      "sha256_matches_record": true,
+      "bytes": 3435,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 0,
+      "expected_exit_code": 0,
+      "recorded_exit_matches_expected": true
+    },
+    {
+      "label": "colonnade4-v1",
+      "argv": [
+        "dotnet",
+        "C:\\tmp\\streeling-brutal-public-cpu-20261022\\Experiments\\Brutal\\Lego.Cli\\bin\\Release\\net10.0\\Lego.Cli.dll",
+        "describe",
+        "colonnade",
+        "--arg",
+        "count=4",
+        "--arg",
+        "spacing=3",
+        "--seed",
+        "7"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\colonnade4-v1.log",
+      "sha256": "caf272fef8c0e1edc87881caa0a7e61872a55e5c1b5b07e0c1ecc62c45c3156b",
+      "sha256_matches_record": true,
+      "bytes": 8943,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 0,
+      "expected_exit_code": 0,
+      "recorded_exit_matches_expected": true
+    },
+    {
+      "label": "colonnade4-v2",
+      "argv": [
+        "dotnet",
+        "C:\\tmp\\streeling-brutal-public-cpu-20261022\\Experiments\\Brutal\\Lego.Cli\\bin\\Release\\net10.0\\Lego.Cli.dll",
+        "describe",
+        "colonnade",
+        "--arg",
+        "count=4",
+        "--arg",
+        "spacing=3",
+        "--arg",
+        "column=2",
+        "--seed",
+        "7"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\colonnade4-v2.log",
+      "sha256": "a03f28dc077a496d46b2f46d047895c74ce93e795b2c06c2eda7ec63c9959b80",
+      "sha256_matches_record": true,
+      "bytes": 14449,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 0,
+      "expected_exit_code": 0,
+      "recorded_exit_matches_expected": true
+    },
+    {
+      "label": "colonnade-attachment",
+      "argv": [
+        "dotnet",
+        "C:\\tmp\\streeling-brutal-public-cpu-20261022\\Experiments\\Brutal\\Lego.Cli\\bin\\Release\\net10.0\\Lego.Cli.dll",
+        "describe",
+        "colonnade",
+        "--arg",
+        "height=9",
+        "--arg",
+        "count=3",
+        "--arg",
+        "spacing=2",
+        "--seed",
+        "7"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\colonnade-attachment.log",
+      "sha256": "40772b6e7928c5b5dfc91ece1393684479ed1a8c5ed97c188abe43b876748649",
+      "sha256_matches_record": true,
+      "bytes": 6879,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 0,
+      "expected_exit_code": 0,
+      "recorded_exit_matches_expected": true
+    },
+    {
+      "label": "sanctuary-level2",
+      "argv": [
+        "dotnet",
+        "C:\\tmp\\streeling-brutal-public-cpu-20261022\\Experiments\\Brutal\\Lego.Cli\\bin\\Release\\net10.0\\Lego.Cli.dll",
+        "describe",
+        "sanctuary",
+        "--arg",
+        "level=2",
+        "--seed",
+        "7"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\sanctuary-level2.log",
+      "sha256": "a8a81339d3ff0936636b2546230338b6b408dbd8b04d5b76db5a22e3cf3f17b9",
+      "sha256_matches_record": true,
+      "bytes": 1822210,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 0,
+      "expected_exit_code": 0,
+      "recorded_exit_matches_expected": true
+    },
+    {
+      "label": "sanctuary-level3",
+      "argv": [
+        "dotnet",
+        "C:\\tmp\\streeling-brutal-public-cpu-20261022\\Experiments\\Brutal\\Lego.Cli\\bin\\Release\\net10.0\\Lego.Cli.dll",
+        "describe",
+        "sanctuary",
+        "--arg",
+        "level=3",
+        "--seed",
+        "7"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\sanctuary-level3.log",
+      "sha256": "b2027f22f575ea4e16dbe44e68dda201baf5fd654e3bb8d627191a87e644137d",
+      "sha256_matches_record": true,
+      "bytes": 250,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 2,
+      "expected_exit_code": 2,
+      "recorded_exit_matches_expected": true
+    },
+    {
+      "label": "temple-instances10",
+      "argv": [
+        "dotnet",
+        "C:\\tmp\\streeling-brutal-public-cpu-20261022\\Experiments\\Brutal\\Lego.Cli\\bin\\Release\\net10.0\\Lego.Cli.dll",
+        "describe",
+        "temple@1",
+        "--max-instances",
+        "10",
+        "--seed",
+        "7"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\temple-instances10.log",
+      "sha256": "30c44a677a7c245fa379f31df84638e50014b9ea130e4cadc45f093ee0fc54d7",
+      "sha256_matches_record": true,
+      "bytes": 207,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 2,
+      "expected_exit_code": 2,
+      "recorded_exit_matches_expected": true
+    },
+    {
+      "label": "temple-depth1",
+      "argv": [
+        "dotnet",
+        "C:\\tmp\\streeling-brutal-public-cpu-20261022\\Experiments\\Brutal\\Lego.Cli\\bin\\Release\\net10.0\\Lego.Cli.dll",
+        "describe",
+        "temple@1",
+        "--max-depth",
+        "1",
+        "--seed",
+        "7"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\temple-depth1.log",
+      "sha256": "aed64907c11652470d39f8d1a0abaa7cdebbb87b9cad72ec0c53ff1d0c446524",
+      "sha256_matches_record": true,
+      "bytes": 3996,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 2,
+      "expected_exit_code": 2,
+      "recorded_exit_matches_expected": true
+    },
+    {
+      "label": "colonnade-count-fraction",
+      "argv": [
+        "dotnet",
+        "C:\\tmp\\streeling-brutal-public-cpu-20261022\\Experiments\\Brutal\\Lego.Cli\\bin\\Release\\net10.0\\Lego.Cli.dll",
+        "describe",
+        "colonnade",
+        "--arg",
+        "count=2.5",
+        "--seed",
+        "7"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\colonnade-count-fraction.log",
+      "sha256": "9d73fdeb21d5a61344a40945c88d38f2836f7104b26e719266fe1551306d7498",
+      "sha256_matches_record": true,
+      "bytes": 215,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 2,
+      "expected_exit_code": 2,
+      "recorded_exit_matches_expected": true
+    },
+    {
+      "label": "temple-seed7",
+      "argv": [
+        "dotnet",
+        "C:\\tmp\\streeling-brutal-public-cpu-20261022\\Experiments\\Brutal\\Lego.Cli\\bin\\Release\\net10.0\\Lego.Cli.dll",
+        "describe",
+        "temple@1",
+        "--seed",
+        "7"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\temple-seed7.log",
+      "sha256": "b45c9411ff801d7648bb2749b6d44592ebf6e784c16a809efabe21ff28674788",
+      "sha256_matches_record": true,
+      "bytes": 75317,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 0,
+      "expected_exit_code": 0,
+      "recorded_exit_matches_expected": true
+    },
+    {
+      "label": "temple-seed8",
+      "argv": [
+        "dotnet",
+        "C:\\tmp\\streeling-brutal-public-cpu-20261022\\Experiments\\Brutal\\Lego.Cli\\bin\\Release\\net10.0\\Lego.Cli.dll",
+        "describe",
+        "temple@1",
+        "--seed",
+        "8"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\temple-seed8.log",
+      "sha256": "cbd2d28ae489faee3d57fef0bef7b407a5dcd5bc002ca04f10ca96247a4ba66d",
+      "sha256_matches_record": true,
+      "bytes": 75230,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 0,
+      "expected_exit_code": 0,
+      "recorded_exit_matches_expected": true
+    },
+    {
+      "label": "colonnade4-repeat",
+      "argv": [
+        "dotnet",
+        "C:\\tmp\\streeling-brutal-public-cpu-20261022\\Experiments\\Brutal\\Lego.Cli\\bin\\Release\\net10.0\\Lego.Cli.dll",
+        "describe",
+        "colonnade",
+        "--arg",
+        "count=4",
+        "--arg",
+        "spacing=3",
+        "--seed",
+        "7"
+      ],
+      "output_file": "C:\\tmp\\streeling-brutal-public-cpu-20261022\\colonnade4-repeat.log",
+      "sha256": "caf272fef8c0e1edc87881caa0a7e61872a55e5c1b5b07e0c1ecc62c45c3156b",
+      "sha256_matches_record": true,
+      "bytes": 8943,
+      "byte_count_matches_record": true,
+      "recorded_exit_code": 0,
+      "expected_exit_code": 0,
+      "recorded_exit_matches_expected": true
+    }
+  ],
+  "execution_record_checks": {
+    "sdk": "10.0.113",
+    "build_succeeded_in_bound_log": true,
+    "build_warnings": 0,
+    "build_errors": 0,
+    "native_cli_test_cases_counted_from_ok_lines": 20,
+    "native_cli_test_summary": "20 passed, 0 failed",
+    "test_runner_scope": "The existing F# CLI test runner; this does not attest native rendering or GPU binaries.",
+    "restore_flags_checked": [
+      "--locked-mode",
+      "--disable-parallel",
+      "-p:ImportDirectoryBuildProps=false",
+      "-p:ImportDirectoryBuildTargets=false"
+    ],
+    "build_flags_checked": [
+      "-c Release",
+      "--no-restore",
+      "-m:1",
+      "-p:BuildInParallel=false",
+      "-p:UseSharedCompilation=false",
+      "-p:ImportDirectoryBuildProps=false",
+      "-p:ImportDirectoryBuildTargets=false"
+    ],
+    "cached_fsharp_core_sha256_matches": true,
+    "exit_code_scope": "Recorded exit codes agree across execution receipt and full/compact captures and with pinned CLI Program.fs (valid=0, refused=2). Hashes and raw output bytes were independently checked. Historical process exit codes cannot be re-observed without rerunning; no commands were rerun."
+  },
+  "description_checks": [
+    {
+      "case": "column1",
+      "full_capture_matches_raw_json": true,
+      "case_metadata_matches_full_capture": true,
+      "recorded_exit_matches_execution": true,
+      "output_hash_matches_execution": true,
+      "summary_fields_match_raw": true,
+      "recursive_tree_aggregate_matches": true,
+      "all_selected_node_fields_match_raw": true,
+      "scene_hash_matches_raw_tree_bytes": true,
+      "raw_totals_match_tree": true,
+      "root_depth_is_zero": true,
+      "composition_case_matches_raw": true
+    },
+    {
+      "case": "column2",
+      "full_capture_matches_raw_json": true,
+      "case_metadata_matches_full_capture": true,
+      "recorded_exit_matches_execution": true,
+      "output_hash_matches_execution": true,
+      "summary_fields_match_raw": true,
+      "recursive_tree_aggregate_matches": true,
+      "all_selected_node_fields_match_raw": true,
+      "scene_hash_matches_raw_tree_bytes": true,
+      "raw_totals_match_tree": true,
+      "root_depth_is_zero": true,
+      "composition_case_matches_raw": true
+    },
+    {
+      "case": "colonnade4-v1",
+      "full_capture_matches_raw_json": true,
+      "case_metadata_matches_full_capture": true,
+      "recorded_exit_matches_execution": true,
+      "output_hash_matches_execution": true,
+      "summary_fields_match_raw": true,
+      "recursive_tree_aggregate_matches": true,
+      "all_selected_node_fields_match_raw": true,
+      "scene_hash_matches_raw_tree_bytes": true,
+      "raw_totals_match_tree": true,
+      "root_depth_is_zero": true,
+      "composition_case_matches_raw": true
+    },
+    {
+      "case": "colonnade4-v2",
+      "full_capture_matches_raw_json": true,
+      "case_metadata_matches_full_capture": true,
+      "recorded_exit_matches_execution": true,
+      "output_hash_matches_execution": true,
+      "summary_fields_match_raw": true,
+      "recursive_tree_aggregate_matches": true,
+      "all_selected_node_fields_match_raw": true,
+      "scene_hash_matches_raw_tree_bytes": true,
+      "raw_totals_match_tree": true,
+      "root_depth_is_zero": true,
+      "composition_case_matches_raw": true
+    },
+    {
+      "case": "colonnade-attachment",
+      "full_capture_matches_raw_json": true,
+      "case_metadata_matches_full_capture": true,
+      "recorded_exit_matches_execution": true,
+      "output_hash_matches_execution": true,
+      "summary_fields_match_raw": true,
+      "recursive_tree_aggregate_matches": true,
+      "all_selected_node_fields_match_raw": true,
+      "scene_hash_matches_raw_tree_bytes": true,
+      "raw_totals_match_tree": true,
+      "root_depth_is_zero": true,
+      "composition_case_matches_raw": true
+    },
+    {
+      "case": "sanctuary-level2",
+      "full_capture_matches_raw_json": true,
+      "case_metadata_matches_full_capture": true,
+      "recorded_exit_matches_execution": true,
+      "output_hash_matches_execution": true,
+      "summary_fields_match_raw": true,
+      "recursive_tree_aggregate_matches": true,
+      "all_selected_node_fields_match_raw": true,
+      "scene_hash_matches_raw_tree_bytes": true,
+      "raw_totals_match_tree": true,
+      "root_depth_is_zero": true,
+      "composition_case_matches_raw": true
+    },
+    {
+      "case": "sanctuary-level3",
+      "full_capture_matches_raw_json": true,
+      "case_metadata_matches_full_capture": true,
+      "recorded_exit_matches_execution": true,
+      "output_hash_matches_execution": true,
+      "full_error_json_preserved": true,
+      "error_format_and_exit_preserved": true,
+      "composition_case_matches_raw": true
+    },
+    {
+      "case": "temple-instances10",
+      "full_capture_matches_raw_json": true,
+      "case_metadata_matches_full_capture": true,
+      "recorded_exit_matches_execution": true,
+      "output_hash_matches_execution": true,
+      "full_error_json_preserved": true,
+      "error_format_and_exit_preserved": true,
+      "composition_case_matches_raw": true
+    },
+    {
+      "case": "temple-depth1",
+      "full_capture_matches_raw_json": true,
+      "case_metadata_matches_full_capture": true,
+      "recorded_exit_matches_execution": true,
+      "output_hash_matches_execution": true,
+      "full_error_json_preserved": true,
+      "error_format_and_exit_preserved": true,
+      "composition_case_matches_raw": true
+    },
+    {
+      "case": "colonnade-count-fraction",
+      "full_capture_matches_raw_json": true,
+      "case_metadata_matches_full_capture": true,
+      "recorded_exit_matches_execution": true,
+      "output_hash_matches_execution": true,
+      "full_error_json_preserved": true,
+      "error_format_and_exit_preserved": true,
+      "composition_case_matches_raw": true
+    },
+    {
+      "case": "temple-seed7",
+      "full_capture_matches_raw_json": true,
+      "case_metadata_matches_full_capture": true,
+      "recorded_exit_matches_execution": true,
+      "output_hash_matches_execution": true,
+      "summary_fields_match_raw": true,
+      "recursive_tree_aggregate_matches": true,
+      "all_selected_node_fields_match_raw": true,
+      "scene_hash_matches_raw_tree_bytes": true,
+      "raw_totals_match_tree": true,
+      "root_depth_is_zero": true,
+      "composition_case_matches_raw": true
+    },
+    {
+      "case": "temple-seed8",
+      "full_capture_matches_raw_json": true,
+      "case_metadata_matches_full_capture": true,
+      "recorded_exit_matches_execution": true,
+      "output_hash_matches_execution": true,
+      "summary_fields_match_raw": true,
+      "recursive_tree_aggregate_matches": true,
+      "all_selected_node_fields_match_raw": true,
+      "scene_hash_matches_raw_tree_bytes": true,
+      "raw_totals_match_tree": true,
+      "root_depth_is_zero": true,
+      "composition_case_matches_raw": true
+    },
+    {
+      "case": "colonnade4-repeat",
+      "full_capture_matches_raw_json": true,
+      "case_metadata_matches_full_capture": true,
+      "recorded_exit_matches_execution": true,
+      "output_hash_matches_execution": true,
+      "summary_fields_match_raw": true,
+      "recursive_tree_aggregate_matches": true,
+      "all_selected_node_fields_match_raw": true,
+      "scene_hash_matches_raw_tree_bytes": true,
+      "raw_totals_match_tree": true,
+      "root_depth_is_zero": true,
+      "composition_case_matches_raw": true
+    }
+  ],
+  "independent_arithmetic": {
+    "column_v1_boxes": 11,
+    "column_v2_boxes": 19,
+    "entablature_boxes": 9,
+    "colonnade_v1_boxes": 53,
+    "colonnade_v2_boxes": 85,
+    "box_difference": 32,
+    "origins_metres": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        0,
+        0
+      ],
+      [
+        6,
+        0,
+        0
+      ],
+      [
+        9,
+        0,
+        0
+      ]
+    ],
+    "instances_including_root": 5,
+    "attachment_translation_metres": [
+      2,
+      9,
+      0
+    ],
+    "right_angle_yaw_of_unit_x": [
+      0,
+      0,
+      -1
+    ],
+    "scale_yaw_translate": [
+      1,
+      2,
+      1
+    ],
+    "wrong_order_translate_scale_yaw": [
+      6,
+      4,
+      -4
+    ],
+    "colonnade_v1_box_triangles": 636,
+    "colonnade_v2_box_triangles": 1020,
+    "box_triangle_difference": 384,
+    "sanctuary_level2_boxes": 8505,
+    "sanctuary_level2_instances": 756,
+    "sanctuary_level2_box_triangles": 102060,
+    "repeat_stdout_bytes_equal": true,
+    "repeat_parsed_json_equal": true,
+    "repeat_scene_hash_equal": true,
+    "changed_seed_boxes_equal": true,
+    "changed_seed_instances_equal": true,
+    "changed_seed_scene_hash_differs": true,
+    "changed_seed_box_colors_differ": true
+  },
+  "source_semantics_checks": {
+    "column_default_drums": 4,
+    "column_versions_explicitly_distinct": true,
+    "unversioned_column_resolves_highest_installed_version": 2,
+    "colonnade_default_column_version": 1,
+    "triangle_count_scope": "12 triangles per declared box; neither measured renderer workload nor GPU memory, draw calls or frame time.",
+    "standard_limits": {
+      "max_depth": 8,
+      "max_instances": 4096,
+      "max_boxes": 20000,
+      "root_depth": 0
+    },
+    "generation_bounds": {
+      "maximum_box_counter": 20001,
+      "maximum_retained_boxes": 20000,
+      "derivation": "Generate.fs 140-154 increments Boxes only while not Spent; the first count above MaxBoxes sets Spent and does not append the box. Later boxes cannot increment or append. Root is invoked at depth 0 (line 188); children use depth+1 (line 161).",
+      "source_only": true,
+      "not_an_observed_or_accepted_level3_scene_count": true
+    },
+    "transform_refs": [
+      "Experiments/Brutal/Lego/Space.fs:1-4",
+      "Experiments/Brutal/Lego/Space.fs:35-38",
+      "Experiments/Brutal/Lego/Generate.fs:165",
+      "Experiments/Brutal/Lego.Cli/Tests.fs:96-101"
+    ],
+    "native_transform_tolerance": "abs(a-b) < 1e-3f; exact independent quarter-turn arithmetic is recorded above.",
+    "refused_controls": {
+      "sanctuary-level3": {
+        "exit_code": 2,
+        "format": "lego-errors/1",
+        "error_kinds": [
+          "too-many-boxes"
+        ]
+      },
+      "temple-instances10": {
+        "exit_code": 2,
+        "format": "lego-errors/1",
+        "error_kinds": [
+          "too-many-instances"
+        ]
+      },
+      "temple-depth1": {
+        "exit_code": 2,
+        "format": "lego-errors/1",
+        "error_kinds": [
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep",
+          "too-deep"
+        ]
+      },
+      "colonnade-count-fraction": {
+        "exit_code": 2,
+        "format": "lego-errors/1",
+        "error_kinds": [
+          "bad-argument"
+        ]
+      }
+    }
+  },
+  "historical_checks": {
+    "all_six_control_rows_match_immutable_report": true,
+    "control_drops": 2,
+    "uncapped_drops": 1,
+    "drop_rule_checked_against_recorded_minima": true,
+    "control_threshold_fps": 58,
+    "sweep_threshold_fps": 60,
+    "threshold_examples_recomputed": [
+      {
+        "run": "cap 120",
+        "minimum_fps": 59,
+        "original_rule_minimum60_passes": false,
+        "hypothetical_rule_minimum58_passes": true
+      },
+      {
+        "run": "cap 480",
+        "minimum_fps": 59,
+        "original_rule_minimum60_passes": false,
+        "hypothetical_rule_minimum58_passes": true
+      }
+    ],
+    "m2_median_before_fps": 60,
+    "m2_median_during_fps": 2,
+    "m2_relative_median_change": -0.9666666666666667,
+    "m2_reported_revision": "29dd107c",
+    "m3_reported_revision": "96816dd7",
+    "both_reports_declare_uncommitted_changes": true,
+    "document_pin_is_not_binary_attestation": true,
+    "m2_frame_endpoint": "start of frame work to present",
+    "m3_frame_endpoint": "previous present to next present",
+    "percentiles_directly_comparable": false,
+    "m2_p50_ms": 0.073,
+    "m3_sweep_uncapped_p50_ms": 0.064,
+    "followup_verdict": "inconclusive",
+    "causal_effect_established": false,
+    "future_protocol_executed": false,
+    "scope": "All GPU figures remain historical reported measurements. The pinned report documents dirty source; its presence in this commit does not identify the exact binary/diff used for those runs."
+  },
+  "official_links_checks": {
+    "recorded_rows_read": 3,
+    "all_recorded_statuses_200": true,
+    "independently_refetched_during_this_audit": false,
+    "scope": "The final official-links receipt is hash-bound. Its HTTP status and historical page bytes are recorded observations; this audit makes no fresh live-link or SDK documentation assertion."
+  },
+  "review_outcomes": {
+    "human_review": null,
+    "fluent_language_review": null,
+    "learner_review": null,
+    "participant_review": null,
+    "gpu_review": null,
+    "dlss_review": null
+  },
+  "evidence_limits": [
+    "No fresh CPU build or test execution was requested or performed; this audit verifies retained evidence and unchanged source.",
+    "No renderer, GPU, DLSS, window, audio or stream runtime result is supplied by the CPU descriptions.",
+    "Historical M2/M3 reports are not exact binary attestations and do not establish a repeatable causal effect.",
+    "Human, fluent-language and learner approval remain unmeasured."
+  ]
+}

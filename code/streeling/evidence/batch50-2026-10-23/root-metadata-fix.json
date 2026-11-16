@@ -1,0 +1,330 @@
+{
+  "scope": "Root correction after real150-case parser regression:118pass32fail. Original author receipts retained as historical pre-correction evidence; independent review must bind these final bytes.",
+  "finding": "Localized body titles but English course metadata yielded English page descriptions for16FR+16ESsources.",
+  "source_support": "scripts/sync-streeling.mjs description uses parsed.meta.course; parseModule reads H1 separately.",
+  "changes": [
+    {
+      "code": "CS015",
+      "locale": "fr",
+      "path": "streeling/courses/computer-science/fr/cs-015-compose-overlapping-chunks-without-duplicate-frames.fr.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Compose Overlapping Chunks Without Duplicate Frames\"",
+      "after": "\"Composer des blocs qui se chevauchent sans dupliquer les trames\"",
+      "before_sha256": "26911ed70e2bbaba268352767a0ef26dc6861985e37ab5d17cd26fa8be84fc09",
+      "after_sha256": "a0a837042ba3cd4a1a122f80f8b4082dbc20c85fe803bb3bd7ffb537ae99366f"
+    },
+    {
+      "code": "CS015",
+      "locale": "es",
+      "path": "streeling/courses/computer-science/es/cs-015-compose-overlapping-chunks-without-duplicate-frames.es.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Compose Overlapping Chunks Without Duplicate Frames\"",
+      "after": "\"Componer bloques solapados sin duplicar fotogramas\"",
+      "before_sha256": "e70691cbb93303929d99beb867eb50317b9c3af21cb11ac7a5f4a9cf5d262b0f",
+      "after_sha256": "be5c66cb4e7e8dec46e83e7af2846b208d141a2345281db60ae175cc0833c987"
+    },
+    {
+      "code": "CS016",
+      "locale": "fr",
+      "path": "streeling/courses/computer-science/fr/cs-016-make-cancellation-an-explicit-pipeline-outcome.fr.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Make Cancellation an Explicit Pipeline Outcome\"",
+      "after": "\"Faire de l\u2019annulation un r\u00e9sultat explicite du pipeline\"",
+      "before_sha256": "ec9589ee3564c276f81e3b3e0a71a735de57a58a2a2e7cc77564b1d0b5ccb80e",
+      "after_sha256": "cf5a781273770e9710b4796794ba2e68dedd15f5dee65dfd66ac7cdf0acc545c"
+    },
+    {
+      "code": "CS016",
+      "locale": "es",
+      "path": "streeling/courses/computer-science/es/cs-016-make-cancellation-an-explicit-pipeline-outcome.es.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Make Cancellation an Explicit Pipeline Outcome\"",
+      "after": "\"Convertir la cancelaci\u00f3n en un resultado expl\u00edcito del pipeline\"",
+      "before_sha256": "36883851cfaad0193d910e39c954f9e87c42163f7dd9d33c771f0e565b3f4fa2",
+      "after_sha256": "72135b5b34c5409df996a6c7f52a4e343715315ac3ef564bd4f233a574a9c55b"
+    },
+    {
+      "code": "CS017",
+      "locale": "fr",
+      "path": "streeling/courses/computer-science/fr/cs-017-test-pipeline-rewrites-with-counterexamples.fr.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Test Pipeline Rewrites with Counterexamples\"",
+      "after": "\"Tester les r\u00e9\u00e9critures de pipeline avec des contre-exemples\"",
+      "before_sha256": "70c22ed20441647ecd129ac669a517399374cfc7c1e4a9c09c37683cd51e8bac",
+      "after_sha256": "723453efe0cce2279a202d8071b4f008f3768f0fc4f130d226eb61970f4482fd"
+    },
+    {
+      "code": "CS017",
+      "locale": "es",
+      "path": "streeling/courses/computer-science/es/cs-017-test-pipeline-rewrites-with-counterexamples.es.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Test Pipeline Rewrites with Counterexamples\"",
+      "after": "\"Probar reescrituras de pipelines con contraejemplos\"",
+      "before_sha256": "4639ac3be07d5f76b2fb3d9ed3dd2eebf1cc0e6df1618a29a22f627258a18af1",
+      "after_sha256": "b29076de9581dc9b50b78208dc0326556b521d9adcc477f09853bb1287755509"
+    },
+    {
+      "code": "CYB009",
+      "locale": "fr",
+      "path": "streeling/courses/cybernetics/fr/cyb-009-bound-admission-with-a-token-bucket.fr.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Bound Admission with a Token Bucket\"",
+      "after": "\"Limiter l\u2019admission avec un seau \u00e0 jetons\"",
+      "before_sha256": "4397614ab819c8f5d96427d558fe91a0d687bd6989406aca16d0270c39ac8bf7",
+      "after_sha256": "154085b0167aa10ae0a96751bebe045e045fcdbb568cd8db88346fb8104fddbf"
+    },
+    {
+      "code": "CYB009",
+      "locale": "es",
+      "path": "streeling/courses/cybernetics/es/cyb-009-bound-admission-with-a-token-bucket.es.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Bound Admission with a Token Bucket\"",
+      "after": "\"Limitar la admisi\u00f3n con un dep\u00f3sito de tokens\"",
+      "before_sha256": "a796856bc326c6a395a2cf45472dd2b5934a381a2414115e3ffb04844adc7741",
+      "after_sha256": "b73d27a1e125e665b36f5ced7320e98992914828ced84001132a5f4ca0229e3a"
+    },
+    {
+      "code": "CYB010",
+      "locale": "fr",
+      "path": "streeling/courses/cybernetics/fr/cyb-010-separate-derivative-noise-from-plant-motion.fr.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Separate Derivative Noise from Plant Motion\"",
+      "after": "\"Distinguer le bruit de d\u00e9rivation du mouvement du syst\u00e8me\"",
+      "before_sha256": "dc74190e43129b4e8b023dff92ee11b518b436e28858ca05f4e0a56a3f6ba562",
+      "after_sha256": "b66fd813086f2548b81158025f5969fb6a3c07aed27df03d4bdd058c8b7de7fc"
+    },
+    {
+      "code": "CYB010",
+      "locale": "es",
+      "path": "streeling/courses/cybernetics/es/cyb-010-separate-derivative-noise-from-plant-motion.es.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Separate Derivative Noise from Plant Motion\"",
+      "after": "\"Separar el ruido de derivaci\u00f3n del movimiento del sistema\"",
+      "before_sha256": "2bfd2b0caf7624503441abcbcda35770c73361778135abb75ed6c9e3a6b9eba9",
+      "after_sha256": "d6008adbfb520b4705548071f43a37c70a3ca4fccb650078affa3878b50e50c4"
+    },
+    {
+      "code": "CYB011",
+      "locale": "fr",
+      "path": "streeling/courses/cybernetics/fr/cyb-011-prevent-integral-accumulation-under-saturation.fr.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Prevent Integral Accumulation Under Saturation\"",
+      "after": "\"\u00c9viter l\u2019accumulation int\u00e9grale en saturation\"",
+      "before_sha256": "4e050174fa3cec076491506a47890a2cc22c0a91a8df84c5a37edb93537e8ead",
+      "after_sha256": "5a1807be81f2565a5b3b05f08495671b55d1edee43260747f89b61b6f991eb6c"
+    },
+    {
+      "code": "CYB011",
+      "locale": "es",
+      "path": "streeling/courses/cybernetics/es/cyb-011-prevent-integral-accumulation-under-saturation.es.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Prevent Integral Accumulation Under Saturation\"",
+      "after": "\"Evitar la acumulaci\u00f3n integral durante la saturaci\u00f3n\"",
+      "before_sha256": "455f19af5c636f4355d4ddac56f8ac9af5c67c8a4eb99a6af2acdb8cda673ca3",
+      "after_sha256": "c7879cfb1f12e613782775ed4ca6534240475eb58e8addcd481a9c0248217a89"
+    },
+    {
+      "code": "COG009",
+      "locale": "fr",
+      "path": "streeling/courses/cognitive-science/fr/cog-009-counterbalance-practice-order-before-comparing-interfaces.fr.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Counterbalance Practice Order Before Comparing Interfaces\"",
+      "after": "\"Contrebalancer l\u2019ordre de pratique avant de comparer des interfaces\"",
+      "before_sha256": "971c56b96a2c443bb53b68eb0a4aa9d924ad91d68ba87d31eeaf90b937042aa7",
+      "after_sha256": "0496290cb9baf7f49b024a7c418823af49801ead13e37588fc68fe7f00565074"
+    },
+    {
+      "code": "COG009",
+      "locale": "es",
+      "path": "streeling/courses/cognitive-science/es/cog-009-counterbalance-practice-order-before-comparing-interfaces.es.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Counterbalance Practice Order Before Comparing Interfaces\"",
+      "after": "\"Contrabalancear el orden de pr\u00e1ctica antes de comparar interfaces\"",
+      "before_sha256": "f21b05f90baf183b31f969db6c57581262bac482b79047bc4cd67f04697b2e54",
+      "after_sha256": "2660586358097a4beece081fdf0e05fb51c966d8111ab720c590715e3093a79f"
+    },
+    {
+      "code": "COG010",
+      "locale": "fr",
+      "path": "streeling/courses/cognitive-science/fr/cog-010-use-delayed-transfer-probes-beyond-repeated-items.fr.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Use Delayed Transfer Probes Beyond Repeated Items\"",
+      "after": "\"Utiliser des \u00e9preuves diff\u00e9r\u00e9es de transfert au-del\u00e0 des items r\u00e9p\u00e9t\u00e9s\"",
+      "before_sha256": "e0e55206dafa3472402757b30d8c38191c6357f4bd8490abbcc0e447c4e14a11",
+      "after_sha256": "802d1fa2ff1019424f264410e9b54e045f8e5e39cd5b7bd207e185ea4d1fda0b"
+    },
+    {
+      "code": "COG010",
+      "locale": "es",
+      "path": "streeling/courses/cognitive-science/es/cog-010-use-delayed-transfer-probes-beyond-repeated-items.es.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Use Delayed Transfer Probes Beyond Repeated Items\"",
+      "after": "\"Usar pruebas diferidas de transferencia m\u00e1s all\u00e1 de los elementos repetidos\"",
+      "before_sha256": "e0dd55e01d51b99f925a43dffecdf2059c511b1e59981dba04d70b0bc3ca1867",
+      "after_sha256": "b9e33defd3c90ef845a93f59d2a43edba991beb2b0b4c1738890c601c5696cf3"
+    },
+    {
+      "code": "COG011",
+      "locale": "fr",
+      "path": "streeling/courses/cognitive-science/fr/cog-011-measure-rubric-disagreement-before-adjudication.fr.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Measure Rubric Disagreement Before Adjudication\"",
+      "after": "\"Mesurer le d\u00e9saccord de notation avant arbitrage\"",
+      "before_sha256": "5daf167a37df95d258e158470f4c6b9ff59582093a82c765eb933d10449664c8",
+      "after_sha256": "7570575452c25d6df8dc1cbe0cd8c558d97a72fea477693583f6b5d2225b2a4d"
+    },
+    {
+      "code": "COG011",
+      "locale": "es",
+      "path": "streeling/courses/cognitive-science/es/cog-011-measure-rubric-disagreement-before-adjudication.es.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Measure Rubric Disagreement Before Adjudication\"",
+      "after": "\"Medir el desacuerdo de la r\u00fabrica antes de adjudicar\"",
+      "before_sha256": "5c8e95670ad22da83db6c452597d39e65aa40f0e29d86923ecad6669115c6022",
+      "after_sha256": "d02dd07c0a9ed184f49537182e5082c2d30c952e2385d3e536a8598f8a8065dc"
+    },
+    {
+      "code": "INF010",
+      "locale": "fr",
+      "path": "streeling/courses/information-theory/fr/inf-010-keep-joint-outcomes-when-composing-verdicts.fr.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Keep Joint Outcomes When Composing Verdicts\"",
+      "after": "\"Conserver les r\u00e9sultats conjoints en composant des verdicts\"",
+      "before_sha256": "7a2a4cb746ffdead15e5ba1d6706b9a6851e3fd60569dfa866ad48757f1c1971",
+      "after_sha256": "b0047131ce20f08a75cebb20615974008e0497ba652a803ba2b245719319df47"
+    },
+    {
+      "code": "INF010",
+      "locale": "es",
+      "path": "streeling/courses/information-theory/es/inf-010-keep-joint-outcomes-when-composing-verdicts.es.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Keep Joint Outcomes When Composing Verdicts\"",
+      "after": "\"Conservar resultados conjuntos al componer veredictos\"",
+      "before_sha256": "f40eb6737ab9f78af981d6cdcaa45dda50172e2112ed589f5c6cc73c6d4181ae",
+      "after_sha256": "5525af4a2aa6201f0cb271769dafcd659cb78e22741ef10571b1e46c4e63f553"
+    },
+    {
+      "code": "INF011",
+      "locale": "fr",
+      "path": "streeling/courses/information-theory/fr/inf-011-separate-compressed-size-from-preserved-information.fr.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Separate Compressed Size from Preserved Information\"",
+      "after": "\"Distinguer taille comprim\u00e9e et information pr\u00e9serv\u00e9e\"",
+      "before_sha256": "4fbf17daf56dbf21b593cdc945dfba6c14390a0a6a4a21ea095f5e9ded7de086",
+      "after_sha256": "4c2b28baa9e556d41e3d5986ac6b320c335f0b35cab4f2496e83ea03ab50f287"
+    },
+    {
+      "code": "INF011",
+      "locale": "es",
+      "path": "streeling/courses/information-theory/es/inf-011-separate-compressed-size-from-preserved-information.es.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Separate Compressed Size from Preserved Information\"",
+      "after": "\"Separar el tama\u00f1o comprimido de la informaci\u00f3n conservada\"",
+      "before_sha256": "713c028540d02b5dca27478f70801eb04b7cd6431cf7e88d5e0cfa35dfc3278c",
+      "after_sha256": "18e9f228bf33dfa976dfa0f2e07e943d6098d72f7c29e900f1249c3cc39096bf"
+    },
+    {
+      "code": "INF012",
+      "locale": "fr",
+      "path": "streeling/courses/information-theory/fr/inf-012-retain-event-order-in-a-handoff-summary.fr.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Retain Event Order in a Handoff Summary\"",
+      "after": "\"Conserver l\u2019ordre des \u00e9v\u00e9nements dans une passation\"",
+      "before_sha256": "c7a08ba977f1000a95e11a4517c0a88c932731570e1eaab9bc2f98ad34c2050d",
+      "after_sha256": "368b0b11044e1ad2eac41529f1f2b8dcb00a9ae2fe76f7a6a7a9245880dcdd49"
+    },
+    {
+      "code": "INF012",
+      "locale": "es",
+      "path": "streeling/courses/information-theory/es/inf-012-retain-event-order-in-a-handoff-summary.es.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Retain Event Order in a Handoff Summary\"",
+      "after": "\"Conservar el orden de los eventos en un traspaso\"",
+      "before_sha256": "f8c0df82d1df70d6dbe64cdb2e47fcff3fb8c417ec7cd35deda4bc32e1a5b21c",
+      "after_sha256": "8ad5b441c139cfe8636571890f5ffc8317a70ddd57f50c01c2914dfd58d1ac54"
+    },
+    {
+      "code": "NET010",
+      "locale": "fr",
+      "path": "streeling/courses/network-science/fr/net-010-compute-critical-paths-with-resource-assumptions.fr.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Compute Critical Paths with Resource Assumptions\"",
+      "after": "\"Calculer les chemins critiques en pr\u00e9cisant les ressources\"",
+      "before_sha256": "b4c7a4a484b3a6d7a7fb4c03e893b4d8f59847fda8411ee24b6ef9e0e2fdc1e6",
+      "after_sha256": "f888236f01326e28593ebef441c78e83f617fda7ed958488a655f5097c891a4e"
+    },
+    {
+      "code": "NET010",
+      "locale": "es",
+      "path": "streeling/courses/network-science/es/net-010-compute-critical-paths-with-resource-assumptions.es.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Compute Critical Paths with Resource Assumptions\"",
+      "after": "\"Calcular rutas cr\u00edticas con supuestos de recursos\"",
+      "before_sha256": "0bfe177162f1ff12a872cb1d609db0f4a93400e78901a3722ed21024f4e77e7a",
+      "after_sha256": "9022f76fdb11ad65b104dc6b111f74bd37aacba4392c3bf648c4aa876eb8356f"
+    },
+    {
+      "code": "NET011",
+      "locale": "fr",
+      "path": "streeling/courses/network-science/fr/net-011-separate-reachability-from-semantic-compatibility.fr.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Separate Reachability from Semantic Compatibility\"",
+      "after": "\"Distinguer accessibilit\u00e9 et compatibilit\u00e9 s\u00e9mantique\"",
+      "before_sha256": "89a26b125304931ba501f3b6def00edf7c54f3d8be2c324a38fb58b5adbd4b80",
+      "after_sha256": "3787fd6011753ed2a97a30e7add2f59284fa923e1ab4d6fcc25c4d71e302765b"
+    },
+    {
+      "code": "NET011",
+      "locale": "es",
+      "path": "streeling/courses/network-science/es/net-011-separate-reachability-from-semantic-compatibility.es.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Separate Reachability from Semantic Compatibility\"",
+      "after": "\"Separar alcanzabilidad y compatibilidad sem\u00e1ntica\"",
+      "before_sha256": "3d925f8d3f31259ada73ceebe77f2f1e569fc1369975bad86fc64310566fe02f",
+      "after_sha256": "4c8b4ad73fd8699d25bee0682776fb116c6f16ab1c5e128c3a48efab80488fb5"
+    },
+    {
+      "code": "PM008",
+      "locale": "fr",
+      "path": "streeling/courses/product-management/fr/pm-008-size-a-fifty-course-batch-by-review-capacity.fr.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Size a Fifty Course Batch by Review Capacity\"",
+      "after": "\"Dimensionner un lot de cinquante cours selon la capacit\u00e9 de revue\"",
+      "before_sha256": "67f59df163aa56ff1e45236869ad0e4486f58533eccb3287d0653d122ac05eda",
+      "after_sha256": "97fae0f55a32d3fd7aa8e8f5685593963c6715ad53d79a85f4fe194a415f20b6"
+    },
+    {
+      "code": "PM008",
+      "locale": "es",
+      "path": "streeling/courses/product-management/es/pm-008-size-a-fifty-course-batch-by-review-capacity.es.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Size a Fifty Course Batch by Review Capacity\"",
+      "after": "\"Dimensionar un lote de cincuenta cursos seg\u00fan la capacidad de revisi\u00f3n\"",
+      "before_sha256": "ae317629274a372cd47cc62da122fb1ea60323b5622ea58b0de7a05181f40d0c",
+      "after_sha256": "dbb4f9ad21ec01055be5051e2291ba7c831f7d40cf738d0a30bf3425dea2c516"
+    },
+    {
+      "code": "PM009",
+      "locale": "fr",
+      "path": "streeling/courses/product-management/fr/pm-009-separate-release-adoption-from-artifact-downloads.fr.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Separate Release Adoption from Artifact Downloads\"",
+      "after": "\"Distinguer adoption d\u2019une version et t\u00e9l\u00e9chargements\"",
+      "before_sha256": "9434225c272a8d8a186644d094e9ce142787a0553d36c23f4c71f95b61fd318c",
+      "after_sha256": "557230f5426cb8fc398f90e5105815c6a6ff2c350d3ac9e1edab76217e82932e"
+    },
+    {
+      "code": "PM009",
+      "locale": "es",
+      "path": "streeling/courses/product-management/es/pm-009-separate-release-adoption-from-artifact-downloads.es.md",
+      "change": "Only course metadata scalar replaced with the existing localized title scalar.",
+      "before": "\"Separate Release Adoption from Artifact Downloads\"",
+      "after": "\"Separar la adopci\u00f3n de una versi\u00f3n de las descargas\"",
+      "before_sha256": "315df3ff12997a87ab51fd37b0a14c9d1d9350a3bfd0b1957b7fdccaf167da74",
+      "after_sha256": "869bb4ed2be3e52457aab27c02900198a0b26e9fda3f997abae65e82a52b93fd"
+    }
+  ],
+  "pre_fix_run": "test-runs/metadata-before-fix.json",
+  "replay": "test-runs/metadata-after-fix.json",
+  "domain_numeric_changes": false
+}

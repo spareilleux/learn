@@ -1,0 +1,58 @@
+{
+  "checked_at_utc": "2026-10-22T12:49:40.495540+00:00",
+  "scope": "Native pinned-module characterization with synthetic inputs; no GA host build, fleet, durable transport, IXQL or learner run.",
+  "sdk": "10.0.113",
+  "os": "Windows",
+  "command": [
+    "dotnet",
+    "fsi",
+    "--exec",
+    "code/streeling/functional-composition/exercise.fsx"
+  ],
+  "exit_code": 0,
+  "stderr": "",
+  "assertion_count": 24,
+  "two_native_runs_have_identical_stdout": true,
+  "runner_sha256": "15e653f08aeb92ff3f1392e15e218b7926bd49bab90a61ee3d14b8acae932949",
+  "module_sha256": "d07792410d218d660ae9875366ce6255a4eb5bd422ad85b9355b5deec505a641",
+  "license_sha256": "b0592d8995a0b7963cd8226d5a1e70f75c055810fc68ce3b0e5e6e3fa646c3c0",
+  "negative_controls": [
+    {
+      "name": "wrong-expectation",
+      "temporary_path": "C:\\tmp\\streeling-functional-control-k0o512mz",
+      "exit_code": 1,
+      "expected_failure_observed": "bind-success expected",
+      "stderr": "System.Exception: bind-success expected Ok \"ready:12\", got Ok \"ready:11\"\n   at Microsoft.FSharp.Core.PrintfModule.PrintFormatToStringThenFail@1447.Invoke(String message)\n   at Microsoft.FSharp.Core.OptimizedClosures.Invoke@3779.Invoke(T2 u) in D:\\a\\_work\\1\\s\\src\\fsharp\\src\\FSharp.Core\\prim-types.fs:line 3779\n   at FSI_0002.record[a](String id, a expected, a actual) in C:\\tmp\\streeling-functional-control-k0o512mz\\exercise.fsx:line 13\n   at <StartupCode$FSI_0002>.$FSI_0002.main@() in C:\\tmp\\streeling-functional-control-k0o512mz\\exercise.fsx:line 22\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)\nStopped due to error\n",
+      "canonical_lab_unchanged": true
+    },
+    {
+      "name": "broken-bind",
+      "temporary_path": "C:\\tmp\\streeling-functional-control-nwtofp4y",
+      "exit_code": 1,
+      "expected_failure_observed": "bind-error expected",
+      "stderr": "System.Exception: bind-error expected Error (DomainError \"invalid-pitch\"), got Ok 1\n   at Microsoft.FSharp.Core.PrintfModule.PrintFormatToStringThenFail@1447.Invoke(String message)\n   at Microsoft.FSharp.Core.OptimizedClosures.Invoke@3779.Invoke(T2 u) in D:\\a\\_work\\1\\s\\src\\fsharp\\src\\FSharp.Core\\prim-types.fs:line 3779\n   at FSI_0002.record[a](String id, a expected, a actual) in C:\\tmp\\streeling-functional-control-nwtofp4y\\exercise.fsx:line 13\n   at <StartupCode$FSI_0002>.$FSI_0002.main@() in C:\\tmp\\streeling-functional-control-nwtofp4y\\exercise.fsx:line 26\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)\nStopped due to error\n",
+      "canonical_lab_unchanged": true
+    },
+    {
+      "name": "lost-fanout-values",
+      "temporary_path": "C:\\tmp\\streeling-functional-control-aqz0y4ct",
+      "exit_code": 1,
+      "expected_failure_observed": "fanout-all-success expected",
+      "stderr": "System.Exception: fanout-all-success expected Ok [100; 300], got Ok []\n   at Microsoft.FSharp.Core.PrintfModule.PrintFormatToStringThenFail@1447.Invoke(String message)\n   at Microsoft.FSharp.Core.OptimizedClosures.Invoke@3779.Invoke(T2 u) in D:\\a\\_work\\1\\s\\src\\fsharp\\src\\FSharp.Core\\prim-types.fs:line 3779\n   at FSI_0002.record[a](String id, a expected, a actual) in C:\\tmp\\streeling-functional-control-aqz0y4ct\\exercise.fsx:line 13\n   at <StartupCode$FSI_0002>.$FSI_0002.main@() in C:\\tmp\\streeling-functional-control-aqz0y4ct\\exercise.fsx:line 53\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)\nStopped due to error\n",
+      "canonical_lab_unchanged": true
+    }
+  ],
+  "preparation_failures": [
+    "Initial ephemeral runner assertions reached output serialization, which failed because System.Text.Json does not directly serialize F# union objects; observations now use F# display strings. Explicit generic fail calls were replaced with a typed helper to remove FS0686 warnings.",
+    "The guessed official dotnet-fsi documentation URL returned 404; the corrected fsharp-interactive URL returned 200."
+  ],
+  "existing_tests_inspected": "Pinned Tests/Common/GA.Business.DSL.Tests/GaClosureAndCeTests.cs early-bind, mapError and PartialFailure cases; not executed as a suite.",
+  "production_behavior_changed": false,
+  "new_executable_artifact": "Teaching assertion runner only; unchanged vendored GA implementation.",
+  "coverage_limits": [
+    "Bounded examples, not a universal algebraic proof.",
+    "No cancellation contract, completion-order, throughput or durability measurement.",
+    "Windows execution only; other OSs not run.",
+    "AI static review is not human subject/language/learner approval."
+  ]
+}

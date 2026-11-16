@@ -1,0 +1,83 @@
+[
+  {
+    "code": "CS018",
+    "locale": "en",
+    "path": "streeling/courses/computer-science/en/cs-018-merge-replayed-agent-messages-by-identity.md",
+    "old": "A composable merge is useful only",
+    "new": "CS015 already assigns overlapping frames to a first writer and rejects conflicting duplicates. The additional question here is whether independently accumulated message states can merge in any order without erasing a conflict. Represent each logical identity by the set of payloads observed for it. Merge states by set union at each identity; a missing identity contributes the empty set. Union is associative, commutative and idempotent, so grouping, arrival order and equal replay cannot change the final state. A singleton set is consistent; a set with more than one value is conflicting. Further union cannot remove a conflicting value. Sum singleton payloads only after every identity has passed that check. This algebra supplies a conflict-preserving state merge, beyond choosing ownership of a frame interval.\n\nA composable merge is useful only",
+    "before_sha256": "efdd3ab1855198da2c62cd58b76f5b9babc00b9b31b1d5f8474f0990c7d75369",
+    "after_sha256": "52e486c140649d98a7653d10933ae3b806f4d212b040081c41534c7623f512f4"
+  },
+  {
+    "code": "CS018",
+    "locale": "fr",
+    "path": "streeling/courses/computer-science/fr/cs-018-merge-replayed-agent-messages-by-identity.fr.md",
+    "old": "Une fusion composable n’est utile que",
+    "new": "CS015 attribue déjà les images d’analyse communes au premier auteur et refuse les doublons conflictuels. La question supplémentaire est de fusionner des états accumulés séparément dans un ordre quelconque sans effacer un conflit. Représentez chaque identité logique par l’ensemble de ses contenus observés. Fusionnez les états par union à chaque identité ; une identité absente apporte l’ensemble vide. L’union est associative, commutative et idempotente : regroupement, ordre d’arrivée et rejeu égal ne changent pas l’état final. Un singleton est cohérent ; plusieurs valeurs signalent un conflit. Une nouvelle union ne peut retirer une valeur conflictuelle. Ne sommez les singletons qu’après validation de toutes les identités. Cette algèbre conserve les conflits lors des fusions, au-delà de l’attribution d’un intervalle d’images.\n\nUne fusion composable n’est utile que",
+    "before_sha256": "25b7082e1cac9ed6bd9edb03a01079501d8d068d49b3b4d44be213302386ef00",
+    "after_sha256": "638d1b88ca2a14b06d1a2a2fdeafb432cb15f4dad2b2ebde89f7cb64bbb450ed"
+  },
+  {
+    "code": "CS018",
+    "locale": "es",
+    "path": "streeling/courses/computer-science/es/cs-018-merge-replayed-agent-messages-by-identity.es.md",
+    "old": "Una fusión componible solo resulta útil",
+    "new": "CS015 ya asigna marcos de análisis solapados al primer escritor y rechaza duplicados conflictivos. La cuestión adicional es fusionar estados acumulados por separado en cualquier orden sin borrar conflictos. Represente cada identidad lógica mediante el conjunto de sus contenidos observados. Fusione estados por unión en cada identidad; una identidad ausente aporta el conjunto vacío. La unión es asociativa, conmutativa e idempotente: agrupación, orden de llegada y repetición igual no cambian el estado final. Un conjunto unitario es coherente; varios valores indican conflicto. Una unión posterior no puede retirar un valor conflictivo. Sume contenidos unitarios solo después de validar todas las identidades. Esta álgebra conserva conflictos al fusionar estados, más allá de asignar propiedad de un intervalo de marcos.\n\nUna fusión componible solo resulta útil",
+    "before_sha256": "74892fd5586bf16b6f32869c513e03f6f5a16704102ecc7473534d91fa3192f4",
+    "after_sha256": "47ac3a31d312b52b54bd00ef59efe671d35ba98bd143c18ef44c0a95ffdfa205"
+  },
+  {
+    "code": "CYB012",
+    "locale": "en",
+    "path": "streeling/courses/cybernetics/en/cyb-012-test-feedback-delay-before-reusing-a-gain.md",
+    "old": "The characteristic polynomial comes from",
+    "new": "CYB008 already introduces a delayed residual and derives an unstable characteristic-root counterexample. The new task here is to derive the complete scalar gain interval, rather than introduce delay again. Write g for gain in r^2-r+g=0. For 0<g<=1/4, both roots (1+/-sqrt(1-4*g))/2 lie strictly between 0 and 1; at g=1/4 the repeated root is 1/2 and its possible k*(1/2)^k factor still decays. For 1/4<g<1, the conjugate roots have modulus sqrt(g)<1. At g=0 a unit root prevents asymptotic stability; for g<0 one real root exceeds 1; and for g>=1 the conjugate modulus is at least 1. Thus asymptotic stability for all finite initial pairs holds exactly when 0<gain<1. The six-step examples below illustrate two points of this analytically derived interval; their finite length does not prove it.\n\nThe characteristic polynomial comes from",
+    "before_sha256": "ad82d0ce34096b08d0a692a472994a3544fb904741a201e0d7495efbb1a38b3b",
+    "after_sha256": "ea0e1d2f20328d3d035cb313f246805985aa67c8637bfe3c6a458afc27dc33fa"
+  },
+  {
+    "code": "CYB012",
+    "locale": "fr",
+    "path": "streeling/courses/cybernetics/fr/cyb-012-test-feedback-delay-before-reusing-a-gain.fr.md",
+    "old": "Le polynôme caractéristique s’obtient",
+    "new": "CYB008 introduit déjà un résidu retardé et un contre-exemple instable fondé sur les racines. La nouvelle tâche est de dériver tout l’intervalle scalaire du gain. Écrivons g pour le gain dans r^2-r+g=0. Pour 0<g<=1/4, les racines (1+/-sqrt(1-4*g))/2 sont strictement entre 0 et 1 ; à g=1/4, la racine double vaut 1/2 et son éventuel facteur k*(1/2)^k tend encore vers zéro. Pour 1/4<g<1, les racines conjuguées ont pour module sqrt(g)<1. À g=0, une racine unité empêche la stabilité asymptotique ; pour g<0, une racine réelle dépasse 1 ; pour g>=1, le module conjugué vaut au moins 1. La stabilité asymptotique pour toute paire initiale finie équivaut donc exactement à 0<gain<1. Les six mises à jour illustrent deux points de cet intervalle dérivé analytiquement ; leur nombre fini ne le démontre pas.\n\nLe polynôme caractéristique s’obtient",
+    "before_sha256": "cd9a61f72e5ac746499bc5845c7b6a3fe43b9016d3d6c1b1f735b96463c88ac1",
+    "after_sha256": "bf6c6239e83c90b4909ed2812bad8f407e3c281f3d8a7314eff78a79a8620bbe"
+  },
+  {
+    "code": "CYB012",
+    "locale": "es",
+    "path": "streeling/courses/cybernetics/es/cyb-012-test-feedback-delay-before-reusing-a-gain.es.md",
+    "old": "El polinomio característico resulta",
+    "new": "CYB008 ya introduce un residuo retardado y un contraejemplo inestable basado en raíces. La tarea nueva es derivar todo el intervalo escalar de ganancia. Escriba g para la ganancia en r^2-r+g=0. Para 0<g<=1/4, ambas raíces (1+/-sqrt(1-4*g))/2 están estrictamente entre 0 y 1; en g=1/4 la raíz doble es 1/2 y su posible factor k*(1/2)^k también decae. Para 1/4<g<1, las raíces conjugadas tienen módulo sqrt(g)<1. En g=0, una raíz unidad impide estabilidad asintótica; para g<0, una raíz real supera 1; y para g>=1 el módulo conjugado es al menos 1. Por tanto, hay estabilidad asintótica para toda pareja inicial finita exactamente cuando 0<gain<1. Las seis actualizaciones ilustran dos puntos del intervalo derivado analíticamente; su longitud finita no lo demuestra.\n\nEl polinomio característico resulta",
+    "before_sha256": "e2be2c8c0ad39ca8ccbf6fadd3fa536f6da3983150a0c527c817ed14e9958f19",
+    "after_sha256": "5489e103d2dad5109b0a8971c762bebffd37b5480f229c42590ce1b98f0c4265"
+  },
+  {
+    "code": "COG014",
+    "locale": "en",
+    "path": "streeling/courses/cognitive-science/en/cog-014-report-risk-and-coverage-when-an-agent-abstains.md",
+    "old": "A lower threshold can increase both service and error in this particular ordering; neither direction is guaranteed for arbitrary data.",
+    "new": "On a fixed eligible set, lowering the threshold cannot decrease coverage. Conditional risk can increase, decrease or stay equal depending on the correctness of the newly accepted items; its direction is not guaranteed for arbitrary data.",
+    "before_sha256": "bd9aec2c5748e65db458bc285c5194593ea74323c6d645b870b9c36fc063531c",
+    "after_sha256": "aa365b4ef04ccf942d06373619acee211a6a71dc667a69dd35d2ce1bbf65c5ff"
+  },
+  {
+    "code": "COG014",
+    "locale": "fr",
+    "path": "streeling/courses/cognitive-science/fr/cog-014-report-risk-and-coverage-when-an-agent-abstains.fr.md",
+    "old": "Un seuil inférieur peut accroître ici le service et l’erreur ; cette direction n’est pas garantie pour des données arbitraires.",
+    "new": "Sur un ensemble admissible fixe, abaisser le seuil ne peut pas réduire la couverture. Le risque conditionnel peut augmenter, diminuer ou rester égal selon la correction des nouveaux éléments acceptés ; son sens de variation n’est pas garanti pour des données arbitraires.",
+    "before_sha256": "14a532c80785311856a953290c36a83978e7a628ec695935118600c5ae1ac6dd",
+    "after_sha256": "e7b79631d30d2e97241292db68503054ea3755da0ffa48583074e8c7bb044abe"
+  },
+  {
+    "code": "COG014",
+    "locale": "es",
+    "path": "streeling/courses/cognitive-science/es/cog-014-report-risk-and-coverage-when-an-agent-abstains.es.md",
+    "old": "Un umbral inferior puede aumentar aquí servicio y error; esa dirección no está garantizada para datos arbitrarios.",
+    "new": "En un conjunto elegible fijo, bajar el umbral no puede reducir la cobertura. El riesgo condicional puede aumentar, disminuir o mantenerse según la corrección de los nuevos elementos aceptados; su dirección no está garantizada para datos arbitrarios.",
+    "before_sha256": "050365d0ae46da2130df6b5f480771bb5a830f49dedcc997ab127e29f8eb11f8",
+    "after_sha256": "c8a494e0c62a9ca2f7b271b7086fe1521f2afba3bee6c810ccc8778e271a7f86"
+  }
+]

@@ -4,12 +4,13 @@ description: "Teoría de las transiciones de fase: cuándo los sistemas de gober
 sidebar:
   label: PSY-002 · Transiciones de fase de la gobernanza
   order: 2
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/es/psy-002-governance-phase-transitions.es.md
 ---
 
 :::note[Streeling University]
 **PSY-002** · Teoría de las transiciones de fase: cuándo los sistemas de gobernanza cambian de régimen · intermedio · 35 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/psychohistory/es/psy-002-governance-phase-transitions.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-002-governance-phase-transitions.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-001](../../psychohistory/psy-001-intro-fractal-compounding/)
 :::

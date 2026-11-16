@@ -4,12 +4,13 @@ description: Problèmes aux valeurs propres symétriques — Mathématiques
 sidebar:
   label: MAT-005 · Problèmes aux valeurs propres symétriques
   order: 5
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/fr/mat-005-symmetric-eigenproblems.fr.md
 ---
 
 :::note[Streeling University]
 **MAT-005** · Problèmes aux valeurs propres symétriques · intermédiaire · 50 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/mathematics/fr/mat-005-symmetric-eigenproblems.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/fr/mat-005-symmetric-eigenproblems.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-004](../../mathematics/mat-004-vectors-matrices-norms/)
 :::

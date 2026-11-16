@@ -13,6 +13,10 @@ render_mode unshaded, blend_add, depth_draw_never, cull_disabled, fog_disabled, 
 //   writes v the other way; glTF flips it); threads of drops running with the flow, brighter where it
 //   is seen edge-on (more water along the line of sight), lit warm from the light under the water at
 //   its nozzle (foot_colour, foot_glow)
+//   mode 4: the city's columns of light (scripts/night_city.gd), alive (the author, 2026-10-15: « rayons dans
+//   le ciel semblent figés »): each column's foot in UV2 (x, z in the mesh); a third of them searchlights whose
+//   tops turn round a cone, the others swaying slowly, each its own way; pulses of light rising up them, and
+//   a slow breath in their brightness
 
 uniform int mode = 0;
 uniform sampler2D lantern_map : filter_linear, repeat_disable;
@@ -36,12 +40,37 @@ uniform float mist = 0.05;
 // along the flow from its end (1 - UV.y): this much film there, fading to `mist` beyond.
 uniform float nozzle_film = 0.0;
 uniform float nozzle_to = 0.5;
+// mode 4: the columns' foot (the mesh's y), and how far their tops lean (metres sideways per metre up).
+uniform float beam_foot_y = -12.0;
+uniform float beam_lean = 0.07;
 
 varying vec3 v_wpos;
 varying vec3 v_tint;
 varying vec3 v_n;
+varying vec2 v_foot;
+
+float hash12(vec2 p) {
+	vec3 p3 = fract(vec3(p.xyx) * 0.1031);
+	p3 += dot(p3, p3.yzx + 33.33);
+	return fract((p3.x + p3.y) * p3.z);
+}
 
 void vertex() {
+	v_foot = UV2;
+	if (mode == 4) {
+		float h1 = hash12(UV2 * 0.013 + 1.3);
+		float h2 = hash12(UV2 * 0.017 + 4.1);
+		float t = TIME * time_scale;
+		vec2 lean;
+		if (h1 < 0.34) {
+			// A searchlight: its top turning round a cone, 25 to 50 s a turn, some one way, some the other.
+			float a = t * 6.2832 / mix(25.0, 50.0, h2) * (h2 < 0.5 ? 1.0 : -1.0) + h1 * 40.0;
+			lean = vec2(cos(a), sin(a)) * beam_lean * 1.3;
+		} else {
+			lean = vec2(sin(t * mix(0.05, 0.12, h2) + h1 * 20.0), sin(t * mix(0.04, 0.1, h1) + h2 * 30.0)) * beam_lean;
+		}
+		VERTEX.xz += lean * max(VERTEX.y - beam_foot_y, 0.0);
+	}
 	v_wpos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	v_tint = COLOR.rgb;  // a mesh's vertex colour tints it: white without one
 	v_n = normalize(MODEL_NORMAL_MATRIX * NORMAL);
@@ -59,12 +88,6 @@ vec3 aces(vec3 x) {
 }
 #endif
 
-float hash12(vec2 p) {
-	vec3 p3 = fract(vec3(p.xyx) * 0.1031);
-	p3 += dot(p3, p3.yzx + 33.33);
-	return fract((p3.x + p3.y) * p3.z);
-}
-
 void fragment() {
 	vec3 c = colour;
 	float k = smoothstep(0.0, fade_top, UV.y) * (1.0 - smoothstep(1.0 - fade_foot, 1.0, UV.y));
@@ -74,6 +97,18 @@ void fragment() {
 		// (1 at the post's foot, about a third at 1 m, a tenth at 2 m), dark behind a hedge.
 		float b = texture(lantern_map, clamp((v_wpos.xz - lantern_rect.xy) * lantern_rect.zw, 0.0, 1.0)).b;
 		k = b * b;
+	}
+	if (mode == 4) {
+		// Pulses rising up the column, 7 to 12 s from foot to top, two at a time; a slow breath; now and then
+		// a column dims for a while and comes back.
+		float h1 = hash12(v_foot * 0.013 + 1.3);
+		float t = TIME * time_scale;
+		float y = 1.0 - UV.y;
+		float rise = fract(y * 2.0 - t * mix(0.17, 0.29, h1) + h1 * 7.0);
+		float p = smoothstep(0.0, 0.06, rise) * (1.0 - smoothstep(0.08, 0.3, rise));
+		float breath = 0.85 + 0.15 * sin(t * mix(0.3, 0.55, h1) + h1 * 30.0);
+		float spell = hash12(vec2(floor(t / 47.0 + h1), h1 * 91.0));
+		k *= (0.7 + 0.9 * p) * breath * (spell < 0.15 ? 0.35 : 1.0);
 	}
 	if (mode == 1) {
 		// Drops rising up the jet: streaks that move, brighter at the jet's core.

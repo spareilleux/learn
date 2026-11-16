@@ -1,0 +1,2089 @@
+{
+  "reviewer": "independent-data-source-auditor",
+  "checked_at_utc": "2026-10-22T21:26:23.933324+00:00",
+  "verdict": "pass",
+  "findings": [
+    {
+      "id": "derived-cycle-error-encoding",
+      "status": "resolved",
+      "finding": "Initial observed-probe-summary cycle_error contained mojibake a â†’ b rather than the raw Unicode a → b.",
+      "resolution": "Author regenerated derived JSON using explicit UTF-8 reads. Exact final equality is checked against raw MCP text; no raw tool call was rerun."
+    },
+    {
+      "id": "executor-comment-control-flow",
+      "status": "resolved",
+      "finding": "Initial parallel std-thread executor interpretation trusted comments. The actual multi-node map/collect branch invokes node.compute synchronously without spawning.",
+      "resolution": "Production plan and admission model preserve the source inspection correction. Pinned implementation and unknown service runtime/order remain distinct."
+    }
+  ],
+  "fix_requests": [],
+  "check_count": 128,
+  "passed_check_count": 128,
+  "checks": [
+    {
+      "id": "topology-response-count",
+      "pass_": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "id": "execution-response-count",
+      "pass_": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "id": "diamond-level-sets",
+      "pass_": true,
+      "actual": [
+        [
+          "a"
+        ],
+        [
+          "b",
+          "c"
+        ],
+        [
+          "d"
+        ]
+      ],
+      "expected": [
+        [
+          "a"
+        ],
+        [
+          "b",
+          "c"
+        ],
+        [
+          "d"
+        ]
+      ]
+    },
+    {
+      "id": "diamond-nodes",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "id": "diamond-edges",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "id": "diamond-width",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "diamond-order-covers-nodes",
+      "pass_": true,
+      "actual": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "id": "diamond-order-obeys-deps",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "diamond-roots",
+      "pass_": true,
+      "actual": [
+        "a"
+      ],
+      "expected": [
+        "a"
+      ]
+    },
+    {
+      "id": "diamond-leaves",
+      "pass_": true,
+      "actual": [
+        "d"
+      ],
+      "expected": [
+        "d"
+      ]
+    },
+    {
+      "id": "wide-eight-level-sets",
+      "pass_": true,
+      "actual": [
+        [
+          "w0",
+          "w1",
+          "w2",
+          "w3",
+          "w4",
+          "w5",
+          "w6",
+          "w7"
+        ]
+      ],
+      "expected": [
+        [
+          "w0",
+          "w1",
+          "w2",
+          "w3",
+          "w4",
+          "w5",
+          "w6",
+          "w7"
+        ]
+      ]
+    },
+    {
+      "id": "wide-eight-nodes",
+      "pass_": true,
+      "actual": 8,
+      "expected": 8
+    },
+    {
+      "id": "wide-eight-edges",
+      "pass_": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "id": "wide-eight-width",
+      "pass_": true,
+      "actual": 8,
+      "expected": 8
+    },
+    {
+      "id": "wide-eight-order-covers-nodes",
+      "pass_": true,
+      "actual": [
+        "w0",
+        "w1",
+        "w2",
+        "w3",
+        "w4",
+        "w5",
+        "w6",
+        "w7"
+      ],
+      "expected": [
+        "w0",
+        "w1",
+        "w2",
+        "w3",
+        "w4",
+        "w5",
+        "w6",
+        "w7"
+      ]
+    },
+    {
+      "id": "wide-eight-order-obeys-deps",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "wide-eight-roots",
+      "pass_": true,
+      "actual": [
+        "w0",
+        "w1",
+        "w2",
+        "w3",
+        "w4",
+        "w5",
+        "w6",
+        "w7"
+      ],
+      "expected": [
+        "w0",
+        "w1",
+        "w2",
+        "w3",
+        "w4",
+        "w5",
+        "w6",
+        "w7"
+      ]
+    },
+    {
+      "id": "wide-eight-leaves",
+      "pass_": true,
+      "actual": [
+        "w0",
+        "w1",
+        "w2",
+        "w3",
+        "w4",
+        "w5",
+        "w6",
+        "w7"
+      ],
+      "expected": [
+        "w0",
+        "w1",
+        "w2",
+        "w3",
+        "w4",
+        "w5",
+        "w6",
+        "w7"
+      ]
+    },
+    {
+      "id": "cycle-error-flag",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "cycle-error-preserved",
+      "pass_": true,
+      "actual": "Error: execution failed: adding edge a → b would create a cycle",
+      "expected": "Error: execution failed: adding edge a → b would create a cycle"
+    },
+    {
+      "id": "summary-diamond",
+      "pass_": true,
+      "actual": {
+        "nodes": 4,
+        "edges": 4,
+        "level_sets": [
+          [
+            "a"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "d"
+          ]
+        ],
+        "reported_width": 2,
+        "raw_topological_order": [
+          "a",
+          "c",
+          "b",
+          "d"
+        ]
+      },
+      "expected": {
+        "nodes": 4,
+        "edges": 4,
+        "level_sets": [
+          [
+            "a"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "d"
+          ]
+        ],
+        "reported_width": 2,
+        "raw_topological_order": [
+          "a",
+          "c",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "summary-wide",
+      "pass_": true,
+      "actual": {
+        "nodes": 8,
+        "edges": 0,
+        "reported_width": 8
+      },
+      "expected": {
+        "nodes": 8,
+        "edges": 0,
+        "reported_width": 8
+      }
+    },
+    {
+      "id": "summary-call-counts",
+      "pass_": true,
+      "actual": [
+        3,
+        3
+      ],
+      "expected": [
+        3,
+        3
+      ]
+    },
+    {
+      "id": "repeat-inputs-equal",
+      "pass_": true,
+      "actual": {
+        "steps": [
+          {
+            "id": "first",
+            "tool": "ix_stats",
+            "arguments": {
+              "data": [
+                1,
+                2,
+                3
+              ]
+            }
+          },
+          {
+            "id": "second",
+            "tool": "ix_stats",
+            "arguments": {
+              "data": [
+                4,
+                6
+              ]
+            },
+            "depends_on": [
+              "first"
+            ]
+          },
+          {
+            "id": "third",
+            "tool": "ix_stats",
+            "arguments": {
+              "data": [
+                10,
+                20
+              ]
+            },
+            "depends_on": [
+              "first"
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "steps": [
+          {
+            "id": "first",
+            "tool": "ix_stats",
+            "arguments": {
+              "data": [
+                1,
+                2,
+                3
+              ]
+            }
+          },
+          {
+            "id": "second",
+            "tool": "ix_stats",
+            "arguments": {
+              "data": [
+                4,
+                6
+              ]
+            },
+            "depends_on": [
+              "first"
+            ]
+          },
+          {
+            "id": "third",
+            "tool": "ix_stats",
+            "arguments": {
+              "data": [
+                10,
+                20
+              ]
+            },
+            "depends_on": [
+              "first"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "repeat-results-equal",
+      "pass_": true,
+      "actual": {
+        "first": {
+          "count": 3,
+          "max": 3.0,
+          "mean": 2.0,
+          "median": 2.0,
+          "min": 1.0,
+          "std_dev": 0.816496580927726,
+          "variance": 0.6666666666666666
+        },
+        "second": {
+          "count": 2,
+          "max": 6.0,
+          "mean": 5.0,
+          "median": 5.0,
+          "min": 4.0,
+          "std_dev": 1.0,
+          "variance": 1.0
+        },
+        "third": {
+          "count": 2,
+          "max": 20.0,
+          "mean": 15.0,
+          "median": 15.0,
+          "min": 10.0,
+          "std_dev": 5.0,
+          "variance": 25.0
+        }
+      },
+      "expected": {
+        "first": {
+          "count": 3,
+          "max": 3.0,
+          "mean": 2.0,
+          "median": 2.0,
+          "min": 1.0,
+          "std_dev": 0.816496580927726,
+          "variance": 0.6666666666666666
+        },
+        "second": {
+          "count": 2,
+          "max": 6.0,
+          "mean": 5.0,
+          "median": 5.0,
+          "min": 4.0,
+          "std_dev": 1.0,
+          "variance": 1.0
+        },
+        "third": {
+          "count": 2,
+          "max": 20.0,
+          "mean": 15.0,
+          "median": 15.0,
+          "min": 10.0,
+          "std_dev": 5.0,
+          "variance": 25.0
+        }
+      }
+    },
+    {
+      "id": "repeat-orders-differ",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "summary-repeat-results",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "summary-orders",
+      "pass_": true,
+      "actual": [
+        [
+          "first",
+          "second",
+          "third"
+        ],
+        [
+          "first",
+          "third",
+          "second"
+        ],
+        true
+      ],
+      "expected": [
+        [
+          "first",
+          "second",
+          "third"
+        ],
+        [
+          "first",
+          "third",
+          "second"
+        ],
+        true
+      ]
+    },
+    {
+      "id": "first-run-valid-order",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "first-run-first-all-stats",
+      "pass_": true,
+      "actual": {
+        "count": 3,
+        "max": 3.0,
+        "mean": 2.0,
+        "median": 2.0,
+        "min": 1.0,
+        "std_dev": 0.816496580927726,
+        "variance": 0.6666666666666666
+      },
+      "expected": {
+        "count": 3,
+        "max": 3,
+        "min": 1,
+        "mean": 2,
+        "median": 2,
+        "std_dev": 0.816496580927726,
+        "variance": 0.6666666666666666
+      }
+    },
+    {
+      "id": "first-run-first-lineage",
+      "pass_": true,
+      "actual": {
+        "asset_name": null,
+        "cache_key": null,
+        "depends_on": [],
+        "tool": "ix_stats",
+        "upstream_cache_keys": []
+      },
+      "expected": {
+        "asset_name": null,
+        "cache_key": null,
+        "depends_on": [],
+        "tool": "ix_stats",
+        "upstream_cache_keys": []
+      }
+    },
+    {
+      "id": "first-run-second-all-stats",
+      "pass_": true,
+      "actual": {
+        "count": 2,
+        "max": 6.0,
+        "mean": 5.0,
+        "median": 5.0,
+        "min": 4.0,
+        "std_dev": 1.0,
+        "variance": 1.0
+      },
+      "expected": {
+        "count": 2,
+        "max": 6,
+        "min": 4,
+        "mean": 5,
+        "median": 5.0,
+        "std_dev": 1.0,
+        "variance": 1
+      }
+    },
+    {
+      "id": "first-run-second-lineage",
+      "pass_": true,
+      "actual": {
+        "asset_name": null,
+        "cache_key": null,
+        "depends_on": [
+          "first"
+        ],
+        "tool": "ix_stats",
+        "upstream_cache_keys": [
+          null
+        ]
+      },
+      "expected": {
+        "asset_name": null,
+        "cache_key": null,
+        "depends_on": [
+          "first"
+        ],
+        "tool": "ix_stats",
+        "upstream_cache_keys": [
+          null
+        ]
+      }
+    },
+    {
+      "id": "first-run-third-all-stats",
+      "pass_": true,
+      "actual": {
+        "count": 2,
+        "max": 20.0,
+        "mean": 15.0,
+        "median": 15.0,
+        "min": 10.0,
+        "std_dev": 5.0,
+        "variance": 25.0
+      },
+      "expected": {
+        "count": 2,
+        "max": 20,
+        "min": 10,
+        "mean": 15,
+        "median": 15.0,
+        "std_dev": 5.0,
+        "variance": 25
+      }
+    },
+    {
+      "id": "first-run-third-lineage",
+      "pass_": true,
+      "actual": {
+        "asset_name": null,
+        "cache_key": null,
+        "depends_on": [
+          "first"
+        ],
+        "tool": "ix_stats",
+        "upstream_cache_keys": [
+          null
+        ]
+      },
+      "expected": {
+        "asset_name": null,
+        "cache_key": null,
+        "depends_on": [
+          "first"
+        ],
+        "tool": "ix_stats",
+        "upstream_cache_keys": [
+          null
+        ]
+      }
+    },
+    {
+      "id": "first-run-cache-hits",
+      "pass_": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "id": "first-run-cache-keys",
+      "pass_": true,
+      "actual": {
+        "first": null,
+        "second": null,
+        "third": null
+      },
+      "expected": {
+        "first": null,
+        "second": null,
+        "third": null
+      }
+    },
+    {
+      "id": "first-run-reported-durations",
+      "pass_": true,
+      "actual": {
+        "first": 0,
+        "second": 0,
+        "third": 0
+      },
+      "expected": {
+        "first": 0,
+        "second": 0,
+        "third": 0
+      },
+      "detail": "Integer millisecond reports do not establish zero runtime, zero cost, free work, or a throughput bound."
+    },
+    {
+      "id": "repeat-run-valid-order",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "repeat-run-first-all-stats",
+      "pass_": true,
+      "actual": {
+        "count": 3,
+        "max": 3.0,
+        "mean": 2.0,
+        "median": 2.0,
+        "min": 1.0,
+        "std_dev": 0.816496580927726,
+        "variance": 0.6666666666666666
+      },
+      "expected": {
+        "count": 3,
+        "max": 3,
+        "min": 1,
+        "mean": 2,
+        "median": 2,
+        "std_dev": 0.816496580927726,
+        "variance": 0.6666666666666666
+      }
+    },
+    {
+      "id": "repeat-run-first-lineage",
+      "pass_": true,
+      "actual": {
+        "asset_name": null,
+        "cache_key": null,
+        "depends_on": [],
+        "tool": "ix_stats",
+        "upstream_cache_keys": []
+      },
+      "expected": {
+        "asset_name": null,
+        "cache_key": null,
+        "depends_on": [],
+        "tool": "ix_stats",
+        "upstream_cache_keys": []
+      }
+    },
+    {
+      "id": "repeat-run-second-all-stats",
+      "pass_": true,
+      "actual": {
+        "count": 2,
+        "max": 6.0,
+        "mean": 5.0,
+        "median": 5.0,
+        "min": 4.0,
+        "std_dev": 1.0,
+        "variance": 1.0
+      },
+      "expected": {
+        "count": 2,
+        "max": 6,
+        "min": 4,
+        "mean": 5,
+        "median": 5.0,
+        "std_dev": 1.0,
+        "variance": 1
+      }
+    },
+    {
+      "id": "repeat-run-second-lineage",
+      "pass_": true,
+      "actual": {
+        "asset_name": null,
+        "cache_key": null,
+        "depends_on": [
+          "first"
+        ],
+        "tool": "ix_stats",
+        "upstream_cache_keys": [
+          null
+        ]
+      },
+      "expected": {
+        "asset_name": null,
+        "cache_key": null,
+        "depends_on": [
+          "first"
+        ],
+        "tool": "ix_stats",
+        "upstream_cache_keys": [
+          null
+        ]
+      }
+    },
+    {
+      "id": "repeat-run-third-all-stats",
+      "pass_": true,
+      "actual": {
+        "count": 2,
+        "max": 20.0,
+        "mean": 15.0,
+        "median": 15.0,
+        "min": 10.0,
+        "std_dev": 5.0,
+        "variance": 25.0
+      },
+      "expected": {
+        "count": 2,
+        "max": 20,
+        "min": 10,
+        "mean": 15,
+        "median": 15.0,
+        "std_dev": 5.0,
+        "variance": 25
+      }
+    },
+    {
+      "id": "repeat-run-third-lineage",
+      "pass_": true,
+      "actual": {
+        "asset_name": null,
+        "cache_key": null,
+        "depends_on": [
+          "first"
+        ],
+        "tool": "ix_stats",
+        "upstream_cache_keys": [
+          null
+        ]
+      },
+      "expected": {
+        "asset_name": null,
+        "cache_key": null,
+        "depends_on": [
+          "first"
+        ],
+        "tool": "ix_stats",
+        "upstream_cache_keys": [
+          null
+        ]
+      }
+    },
+    {
+      "id": "repeat-run-cache-hits",
+      "pass_": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "id": "repeat-run-cache-keys",
+      "pass_": true,
+      "actual": {
+        "first": null,
+        "second": null,
+        "third": null
+      },
+      "expected": {
+        "first": null,
+        "second": null,
+        "third": null
+      }
+    },
+    {
+      "id": "repeat-run-reported-durations",
+      "pass_": true,
+      "actual": {
+        "first": 0,
+        "second": 0,
+        "third": 0
+      },
+      "expected": {
+        "first": 0,
+        "second": 0,
+        "third": 0
+      },
+      "detail": "Integer millisecond reports do not establish zero runtime, zero cost, free work, or a throughput bound."
+    },
+    {
+      "id": "summary-means",
+      "pass_": true,
+      "actual": {
+        "first": 2.0,
+        "second": 5.0,
+        "third": 15.0
+      },
+      "expected": {
+        "first": 2.0,
+        "second": 5.0,
+        "third": 15.0
+      }
+    },
+    {
+      "id": "summary-cache",
+      "pass_": true,
+      "actual": [
+        [],
+        [],
+        true
+      ],
+      "expected": [
+        [],
+        [],
+        true
+      ]
+    },
+    {
+      "id": "summary-duration",
+      "pass_": true,
+      "actual": {
+        "first": 0,
+        "second": 0,
+        "third": 0
+      },
+      "expected": {
+        "first": 0,
+        "second": 0,
+        "third": 0
+      }
+    },
+    {
+      "id": "missing-tool-error-flag",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "missing-tool-summary",
+      "pass_": true,
+      "actual": "Error: ix_pipeline_run: step 'b' (tool 'ix_streeling_deliberately_missing_tool') failed: Unknown tool: ix_streeling_deliberately_missing_tool",
+      "expected": "Error: ix_pipeline_run: step 'b' (tool 'ix_streeling_deliberately_missing_tool') failed: Unknown tool: ix_streeling_deliberately_missing_tool"
+    },
+    {
+      "id": "error-has-no-aggregate",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "earlier-step-not-observed",
+      "pass_": true,
+      "actual": null,
+      "expected": null,
+      "detail": "The final error does not observe whether an earlier tool actually ran, even though pinned source control flow dispatches sequentially."
+    },
+    {
+      "id": "no-partial-packet",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "wide-unit-assumptions",
+      "pass_": true,
+      "actual": [
+        8,
+        8,
+        2,
+        1
+      ],
+      "expected": [
+        8,
+        8,
+        2,
+        1
+      ]
+    },
+    {
+      "id": "wide-schedule-waves",
+      "pass_": true,
+      "actual": [
+        [
+          "w0",
+          "w1"
+        ],
+        [
+          "w2",
+          "w3"
+        ],
+        [
+          "w4",
+          "w5"
+        ],
+        [
+          "w6",
+          "w7"
+        ]
+      ],
+      "expected": [
+        [
+          "w0",
+          "w1"
+        ],
+        [
+          "w2",
+          "w3"
+        ],
+        [
+          "w4",
+          "w5"
+        ],
+        [
+          "w6",
+          "w7"
+        ]
+      ]
+    },
+    {
+      "id": "wide-schedule-makespan",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "id": "wide-maximum-active",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "diamond-durations",
+      "pass_": true,
+      "actual": {
+        "a": 1,
+        "b": 4,
+        "c": 2,
+        "d": 1
+      },
+      "expected": {
+        "a": 1,
+        "b": 4,
+        "c": 2,
+        "d": 1
+      }
+    },
+    {
+      "id": "schedule-duration-a",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "id": "schedule-duration-b",
+      "pass_": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "id": "schedule-duration-c",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "schedule-duration-d",
+      "pass_": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "id": "schedule-dependencies",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "schedule-no-worker-overlap",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "schedule-two-worker-ids",
+      "pass_": true,
+      "actual": [
+        0,
+        1
+      ],
+      "expected": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "schedule-two-worker-makespan",
+      "pass_": true,
+      "actual": 6,
+      "expected": 6
+    },
+    {
+      "id": "critical-path",
+      "pass_": true,
+      "actual": [
+        "a",
+        "b",
+        "d"
+      ],
+      "expected": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "critical-path-duration",
+      "pass_": true,
+      "actual": 6,
+      "expected": 6
+    },
+    {
+      "id": "critical-path-and-makespan",
+      "pass_": true,
+      "actual": [
+        6,
+        6,
+        8
+      ],
+      "expected": [
+        6,
+        6,
+        8
+      ]
+    },
+    {
+      "id": "serial-duration",
+      "pass_": true,
+      "actual": 8,
+      "expected": 8
+    },
+    {
+      "id": "retry-outcome-complete",
+      "pass_": true,
+      "actual": [
+        "FFF",
+        "FFS",
+        "FSF",
+        "FSS",
+        "SFF",
+        "SFS",
+        "SSF",
+        "SSS"
+      ],
+      "expected": [
+        "FFF",
+        "FFS",
+        "FSF",
+        "FSS",
+        "SFF",
+        "SFS",
+        "SSF",
+        "SSS"
+      ]
+    },
+    {
+      "id": "retry-SSS",
+      "pass_": true,
+      "actual": [
+        1,
+        true,
+        "S",
+        "1/8"
+      ],
+      "expected": [
+        1,
+        true,
+        "S",
+        "1/8"
+      ]
+    },
+    {
+      "id": "retry-SSF",
+      "pass_": true,
+      "actual": [
+        1,
+        true,
+        "S",
+        "1/8"
+      ],
+      "expected": [
+        1,
+        true,
+        "S",
+        "1/8"
+      ]
+    },
+    {
+      "id": "retry-SFS",
+      "pass_": true,
+      "actual": [
+        1,
+        true,
+        "S",
+        "1/8"
+      ],
+      "expected": [
+        1,
+        true,
+        "S",
+        "1/8"
+      ]
+    },
+    {
+      "id": "retry-SFF",
+      "pass_": true,
+      "actual": [
+        1,
+        true,
+        "S",
+        "1/8"
+      ],
+      "expected": [
+        1,
+        true,
+        "S",
+        "1/8"
+      ]
+    },
+    {
+      "id": "retry-FSS",
+      "pass_": true,
+      "actual": [
+        2,
+        true,
+        "FS",
+        "1/8"
+      ],
+      "expected": [
+        2,
+        true,
+        "FS",
+        "1/8"
+      ]
+    },
+    {
+      "id": "retry-FSF",
+      "pass_": true,
+      "actual": [
+        2,
+        true,
+        "FS",
+        "1/8"
+      ],
+      "expected": [
+        2,
+        true,
+        "FS",
+        "1/8"
+      ]
+    },
+    {
+      "id": "retry-FFS",
+      "pass_": true,
+      "actual": [
+        3,
+        true,
+        "FFS",
+        "1/8"
+      ],
+      "expected": [
+        3,
+        true,
+        "FFS",
+        "1/8"
+      ]
+    },
+    {
+      "id": "retry-FFF",
+      "pass_": true,
+      "actual": [
+        3,
+        false,
+        "FFF",
+        "1/8"
+      ],
+      "expected": [
+        3,
+        false,
+        "FFF",
+        "1/8"
+      ]
+    },
+    {
+      "id": "retry-total-probability",
+      "pass_": true,
+      "actual": "1",
+      "expected": "1"
+    },
+    {
+      "id": "retry-expected-attempts",
+      "pass_": true,
+      "actual": "7/4",
+      "expected": "7/4"
+    },
+    {
+      "id": "retry-success",
+      "pass_": true,
+      "actual": "7/8",
+      "expected": "7/8"
+    },
+    {
+      "id": "retry-failure",
+      "pass_": true,
+      "actual": "1/8",
+      "expected": "1/8"
+    },
+    {
+      "id": "fluid-demand",
+      "pass_": true,
+      "actual": "21/2",
+      "expected": "21/2"
+    },
+    {
+      "id": "fluid-excess",
+      "pass_": true,
+      "actual": "1/2",
+      "expected": "1/2"
+    },
+    {
+      "id": "fluid-boundary",
+      "pass_": true,
+      "actual": "40/7",
+      "expected": "40/7"
+    },
+    {
+      "id": "fluid-30s-work-excess",
+      "pass_": true,
+      "actual": "15",
+      "expected": "15"
+    },
+    {
+      "id": "fluid-values",
+      "pass_": true,
+      "actual": [
+        "7/4",
+        "21/2",
+        "40/7",
+        "15"
+      ],
+      "expected": [
+        "7/4",
+        "21/2",
+        "40/7",
+        "15"
+      ]
+    },
+    {
+      "id": "fluid-spare-capacity",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "fluid-no-actual-queue-claim",
+      "pass_": true,
+      "actual": true,
+      "expected": true,
+      "detail": "The 15 are excess mean attempt-work units across 30 seconds, not 15 observed queued logical jobs."
+    },
+    {
+      "id": "retry-persistent-failure",
+      "pass_": true,
+      "actual": {
+        "failure_probability": 1,
+        "attempts_per_request": 3,
+        "success_probability": 0
+      },
+      "expected": {
+        "failure_probability": 1,
+        "attempts_per_request": 3,
+        "success_probability": 0
+      }
+    },
+    {
+      "id": "unbounded-trace",
+      "pass_": true,
+      "actual": [
+        {
+          "tick": 0,
+          "active_attempts": [
+            0
+          ],
+          "completions": []
+        },
+        {
+          "tick": 1,
+          "active_attempts": [
+            0,
+            1
+          ],
+          "completions": []
+        },
+        {
+          "tick": 2,
+          "active_attempts": [
+            0,
+            1,
+            2
+          ],
+          "completions": []
+        },
+        {
+          "tick": 3,
+          "active_attempts": [
+            1,
+            2
+          ],
+          "completions": [
+            0
+          ]
+        },
+        {
+          "tick": 4,
+          "active_attempts": [
+            2
+          ],
+          "completions": [
+            1
+          ]
+        },
+        {
+          "tick": 5,
+          "active_attempts": [],
+          "completions": [
+            2
+          ]
+        }
+      ],
+      "expected": [
+        {
+          "tick": 0,
+          "active_attempts": [
+            0
+          ],
+          "completions": []
+        },
+        {
+          "tick": 1,
+          "active_attempts": [
+            0,
+            1
+          ],
+          "completions": []
+        },
+        {
+          "tick": 2,
+          "active_attempts": [
+            0,
+            1,
+            2
+          ],
+          "completions": []
+        },
+        {
+          "tick": 3,
+          "active_attempts": [
+            1,
+            2
+          ],
+          "completions": [
+            0
+          ]
+        },
+        {
+          "tick": 4,
+          "active_attempts": [
+            2
+          ],
+          "completions": [
+            1
+          ]
+        },
+        {
+          "tick": 5,
+          "active_attempts": [],
+          "completions": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unbounded-completions",
+      "pass_": true,
+      "actual": [
+        3,
+        4,
+        5
+      ],
+      "expected": [
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "id": "unbounded-peak",
+      "pass_": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "id": "two_slot-trace",
+      "pass_": true,
+      "actual": [
+        {
+          "tick": 0,
+          "active_attempts": [
+            0
+          ],
+          "completions": []
+        },
+        {
+          "tick": 1,
+          "active_attempts": [
+            0,
+            1
+          ],
+          "completions": []
+        },
+        {
+          "tick": 2,
+          "active_attempts": [
+            0,
+            1
+          ],
+          "completions": []
+        },
+        {
+          "tick": 3,
+          "active_attempts": [
+            1
+          ],
+          "completions": [
+            0
+          ]
+        },
+        {
+          "tick": 4,
+          "active_attempts": [],
+          "completions": [
+            1
+          ]
+        },
+        {
+          "tick": 5,
+          "active_attempts": [],
+          "completions": []
+        }
+      ],
+      "expected": [
+        {
+          "tick": 0,
+          "active_attempts": [
+            0
+          ],
+          "completions": []
+        },
+        {
+          "tick": 1,
+          "active_attempts": [
+            0,
+            1
+          ],
+          "completions": []
+        },
+        {
+          "tick": 2,
+          "active_attempts": [
+            0,
+            1
+          ],
+          "completions": []
+        },
+        {
+          "tick": 3,
+          "active_attempts": [
+            1
+          ],
+          "completions": [
+            0
+          ]
+        },
+        {
+          "tick": 4,
+          "active_attempts": [],
+          "completions": [
+            1
+          ]
+        },
+        {
+          "tick": 5,
+          "active_attempts": [],
+          "completions": []
+        }
+      ]
+    },
+    {
+      "id": "two_slot-completions",
+      "pass_": true,
+      "actual": [
+        3,
+        4
+      ],
+      "expected": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": "two_slot-peak",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "two-slot-rejection",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "two-slot-first-result",
+      "pass_": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "id": "two-slot-second-not-cancelled",
+      "pass_": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "id": "two-slot-capacity-full-at-rejected-start",
+      "pass_": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "id": "state--2",
+      "pass_": true,
+      "actual": [
+        7,
+        7,
+        -1,
+        0,
+        [
+          "ok",
+          "ok"
+        ],
+        [
+          "ok",
+          "ok"
+        ]
+      ],
+      "expected": [
+        7,
+        7,
+        -1,
+        0,
+        [
+          "ok",
+          "ok"
+        ],
+        [
+          "ok",
+          "ok"
+        ]
+      ]
+    },
+    {
+      "id": "state-0",
+      "pass_": true,
+      "actual": [
+        7,
+        7,
+        1,
+        2,
+        [
+          "ok",
+          "ok"
+        ],
+        [
+          "ok",
+          "ok"
+        ]
+      ],
+      "expected": [
+        7,
+        7,
+        1,
+        2,
+        [
+          "ok",
+          "ok"
+        ],
+        [
+          "ok",
+          "ok"
+        ]
+      ]
+    },
+    {
+      "id": "state-5",
+      "pass_": true,
+      "actual": [
+        7,
+        7,
+        6,
+        7,
+        [
+          "ok",
+          "ok"
+        ],
+        [
+          "ok",
+          "ok"
+        ]
+      ],
+      "expected": [
+        7,
+        7,
+        6,
+        7,
+        [
+          "ok",
+          "ok"
+        ],
+        [
+          "ok",
+          "ok"
+        ]
+      ]
+    },
+    {
+      "id": "same_logical_key",
+      "pass_": true,
+      "actual": [
+        1,
+        1
+      ],
+      "expected": [
+        1,
+        1
+      ],
+      "detail": "Ideal serial atomic key store only; no durable/concurrent/crash behavior was executed."
+    },
+    {
+      "id": "new_key_per_attempt",
+      "pass_": true,
+      "actual": [
+        2,
+        2
+      ],
+      "expected": [
+        2,
+        2
+      ],
+      "detail": "Ideal serial atomic key store only; no durable/concurrent/crash behavior was executed."
+    },
+    {
+      "id": "same_arguments_distinct_intents",
+      "pass_": true,
+      "actual": [
+        2,
+        2
+      ],
+      "expected": [
+        2,
+        2
+      ],
+      "detail": "Ideal serial atomic key store only; no durable/concurrent/crash behavior was executed."
+    },
+    {
+      "id": "same-key-changed-args",
+      "pass_": true,
+      "actual": "conflicting intent requires explicit contract; do not silently return previous result",
+      "expected": "conflicting intent requires explicit contract; do not silently return previous result"
+    },
+    {
+      "id": "cache-key-boundary",
+      "pass_": true,
+      "actual": {
+        "source_key_inputs": [
+          "asset_name",
+          "tool",
+          "resolved_arguments"
+        ],
+        "step_id_in_key": false,
+        "tool_implementation_revision_in_key": false,
+        "external_state_revision_in_key": false,
+        "live_cache_hit_experiment": false
+      },
+      "expected": {
+        "source_key_inputs": [
+          "asset_name",
+          "tool",
+          "resolved_arguments"
+        ],
+        "step_id_in_key": false,
+        "tool_implementation_revision_in_key": false,
+        "external_state_revision_in_key": false,
+        "live_cache_hit_experiment": false
+      }
+    },
+    {
+      "id": "source-hash-crates/ix-pipeline/src/dag.rs",
+      "pass_": true,
+      "actual": "b2bf8462f9a266bd32de0555b3c5dd7abea68cd704a5ad538e136fd53cd745e5",
+      "expected": "b2bf8462f9a266bd32de0555b3c5dd7abea68cd704a5ad538e136fd53cd745e5"
+    },
+    {
+      "id": "source-hash-crates/ix-pipeline/src/executor.rs",
+      "pass_": true,
+      "actual": "8fe49c0e63822fba8a04ce06d7d4c4696784bebae81e42b273d2b8f6b1d24b35",
+      "expected": "8fe49c0e63822fba8a04ce06d7d4c4696784bebae81e42b273d2b8f6b1d24b35"
+    },
+    {
+      "id": "source-hash-crates/ix-pipeline/src/spec.rs",
+      "pass_": true,
+      "actual": "48d191450480cf57129dd423572887600278d9d505e3ae0abef96c227c4d2e79",
+      "expected": "48d191450480cf57129dd423572887600278d9d505e3ae0abef96c227c4d2e79"
+    },
+    {
+      "id": "source-hash-crates/ix-agent/src/tools.rs",
+      "pass_": true,
+      "actual": "5adb4b80bde1aefff760d604925e661074538201a52151ac76113800329dd767",
+      "expected": "5adb4b80bde1aefff760d604925e661074538201a52151ac76113800329dd767"
+    },
+    {
+      "id": "source-hash-docs/pipelines/dag-execution.md",
+      "pass_": true,
+      "actual": "05b1c20b8f95a3f6f9d369c7db43e0dcfad63f1339f1d4a920c16a9dba1b21dc",
+      "expected": "05b1c20b8f95a3f6f9d369c7db43e0dcfad63f1339f1d4a920c16a9dba1b21dc"
+    },
+    {
+      "id": "executor-sync-compute-in-iterator",
+      "pass_": true,
+      "actual": true,
+      "expected": true,
+      "detail": "Actual control flow executes each map closure synchronously; variable handles and parallel/spawn comments do not create threads."
+    },
+    {
+      "id": "executor-no-spawn",
+      "pass_": true,
+      "actual": true,
+      "expected": true,
+      "detail": "Bounded to the inspected executor.rs file; no repository-wide absence claim."
+    },
+    {
+      "id": "legacy-runner-sequential-call",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "legacy-runner-error-before-aggregate",
+      "pass_": true,
+      "actual": true,
+      "expected": true,
+      "detail": "? propagation returns the first dispatch error before the final aggregate constructor."
+    },
+    {
+      "id": "legacy-cache-key-inputs",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "exposed-run-schema-no-asset",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "dag-rejects-structural-errors",
+      "pass_": true,
+      "actual": true,
+      "expected": true,
+      "detail": "Duplicate node IDs are rejected; repeated identical edges are held in HashSets, not reported as duplicate-node errors."
+    },
+    {
+      "id": "pinned-dag-tie-order-deterministic",
+      "pass_": true,
+      "actual": true,
+      "expected": true,
+      "detail": "Actual observed replay orders differ; unknown service revision prevents equating observed runtime with this pinned implementation."
+    },
+    {
+      "id": "canonical-spec-shallow-validation",
+      "pass_": true,
+      "actual": true,
+      "expected": true,
+      "detail": "Canonical PipelineSpec is distinct from the legacy MCP steps surface; shape validation does not alone prove registry/cycle validation."
+    },
+    {
+      "id": "source-correction-recorded",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "id": "plan-correction-recorded",
+      "pass_": true,
+      "actual": true,
+      "expected": true
+    }
+  ],
+  "input_bindings": [
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/production-plan.md",
+      "sha256": "ffa2d12de16c366ac1e0834a0fbe76c21426f278090456acd3b88cf114231d96"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/primary-readback.json",
+      "sha256": "9daed5ca3852ca1a5d898481af0754ac1165b80c1050e348838f8ed01e4a0d13"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/topology-tool-probes.json",
+      "sha256": "0d163eb67073d9b731c5879fea51f7ad7d1b64ec7680fc8d6bd788e3f3d79703"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/execution-tool-probes.json",
+      "sha256": "527d4e6ecb8d8224d1fcec9e62963c32f34cf0b5cdce6d501b087937fa09778f"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/observed-probe-summary.json",
+      "sha256": "2b6417cb23ca707c66167a52094f8a64de0f73b0a97a925164477f8a244e7a34"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/admission-model.json",
+      "sha256": "cbdbc8283637fc277cceb4c8e527e6ddfa7f6e05ec582eb25082c7d5e55fed0c"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/retry-load-model.json",
+      "sha256": "60d807fa24399144c85efb4e2bf8b9ae30620cefe241c8bec9ed614e6edf34c6"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/delayed-completion-model.json",
+      "sha256": "844d89cc0680a58f5d3732fe8cd9cf849333315f6a023a40479cb187a37da770"
+    },
+    {
+      "path": "code/streeling/evidence/retry-admission-2026-10-22/effect-identity-model.json",
+      "sha256": "53706256ee2667d676e2452679acbd4e84f95a77e9bc34419606fa90be0aeb97"
+    }
+  ],
+  "immutable_source_provenance": {
+    "repository": "GuitarAlchemist/ix",
+    "commit": "456df065ee837e33b5bbe22a4df0616a4fcb76e5",
+    "anonymous_fresh_retrieval": true,
+    "files": [
+      {
+        "path": "crates/ix-pipeline/src/dag.rs",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/dag.rs",
+        "sha256": "b2bf8462f9a266bd32de0555b3c5dd7abea68cd704a5ad538e136fd53cd745e5",
+        "expected_sha256": "b2bf8462f9a266bd32de0555b3c5dd7abea68cd704a5ad538e136fd53cd745e5",
+        "temporary_path": "C:\\tmp\\retry-admission-independent-audit-20261022\\dag.rs"
+      },
+      {
+        "path": "crates/ix-pipeline/src/executor.rs",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/executor.rs",
+        "sha256": "8fe49c0e63822fba8a04ce06d7d4c4696784bebae81e42b273d2b8f6b1d24b35",
+        "expected_sha256": "8fe49c0e63822fba8a04ce06d7d4c4696784bebae81e42b273d2b8f6b1d24b35",
+        "temporary_path": "C:\\tmp\\retry-admission-independent-audit-20261022\\executor.rs"
+      },
+      {
+        "path": "crates/ix-pipeline/src/spec.rs",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/spec.rs",
+        "sha256": "48d191450480cf57129dd423572887600278d9d505e3ae0abef96c227c4d2e79",
+        "expected_sha256": "48d191450480cf57129dd423572887600278d9d505e3ae0abef96c227c4d2e79",
+        "temporary_path": "C:\\tmp\\retry-admission-independent-audit-20261022\\spec.rs"
+      },
+      {
+        "path": "crates/ix-agent/src/tools.rs",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-agent/src/tools.rs",
+        "sha256": "5adb4b80bde1aefff760d604925e661074538201a52151ac76113800329dd767",
+        "expected_sha256": "5adb4b80bde1aefff760d604925e661074538201a52151ac76113800329dd767",
+        "temporary_path": "C:\\tmp\\retry-admission-independent-audit-20261022\\tools.rs"
+      },
+      {
+        "path": "docs/pipelines/dag-execution.md",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/456df065ee837e33b5bbe22a4df0616a4fcb76e5/docs/pipelines/dag-execution.md",
+        "sha256": "05b1c20b8f95a3f6f9d369c7db43e0dcfad63f1339f1d4a920c16a9dba1b21dc",
+        "expected_sha256": "05b1c20b8f95a3f6f9d369c7db43e0dcfad63f1339f1d4a920c16a9dba1b21dc",
+        "temporary_path": "C:\\tmp\\retry-admission-independent-audit-20261022\\dag-execution.md"
+      }
+    ],
+    "read_scope": "dag.rs production methods; executor.rs whole file; spec.rs whole file; tools.rs bounded run_pipeline implementation and exposed schema; dag-execution.md architecture/executor sections. Unrelated tools.rs handlers were not reviewed."
+  },
+  "official_documentation_provenance": [
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+      "temporary_path": "C:/tmp/retry-admission-independent-audit-20261022/official-0.html",
+      "sha256": "d431760660ea44e130f6e919dab216df2d0b3a490567a98089267523368fe1e5",
+      "retrieved_at_utc": "2026-10-22T21:26:23.933311+00:00",
+      "provenance": "Actual official primary page read; downloaded bytes snapshot bound by SHA256. RFC9110 is versioned; AWS guidance page is a dated article, not immutable Git."
+    },
+    {
+      "url": "https://builder.aws.com/content/3EumjoZascWd1oZiEgL8ORlv3qE/timeouts-retries-and-backoff-with-jitter",
+      "temporary_path": "C:/tmp/retry-admission-independent-audit-20261022/official-1.html",
+      "sha256": "df38f01de77c02bba8bf67c7b724075c79c46ef753402a3f77df48bdcb2642f1",
+      "retrieved_at_utc": "2026-10-22T21:26:23.933320+00:00",
+      "provenance": "Actual official primary page read; downloaded bytes snapshot bound by SHA256. RFC9110 is versioned; AWS guidance page is a dated article, not immutable Git."
+    },
+    {
+      "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+      "temporary_path": "C:/tmp/retry-admission-independent-audit-20261022/official-2.html",
+      "sha256": "71fc3686a79a2ebbfbfa79ec46befd654ad774b4b9bdbb4f41ea9d5f25386d27",
+      "retrieved_at_utc": "2026-10-22T21:26:23.933322+00:00",
+      "provenance": "Actual official primary page read; downloaded bytes snapshot bound by SHA256. RFC9110 is versioned; AWS guidance page is a dated article, not immutable Git."
+    }
+  ],
+  "raw_orders_preserved": {
+    "diamond_levels": [
+      [
+        "a"
+      ],
+      [
+        "c",
+        "b"
+      ],
+      [
+        "d"
+      ]
+    ],
+    "diamond_topological_order": [
+      "a",
+      "c",
+      "b",
+      "d"
+    ],
+    "wide_levels": [
+      [
+        "w2",
+        "w5",
+        "w6",
+        "w0",
+        "w1",
+        "w7",
+        "w3",
+        "w4"
+      ]
+    ],
+    "wide_topological_order": [
+      "w2",
+      "w5",
+      "w6",
+      "w0",
+      "w3",
+      "w1",
+      "w4",
+      "w7"
+    ],
+    "first_execution_order": [
+      "first",
+      "second",
+      "third"
+    ],
+    "repeat_execution_order": [
+      "first",
+      "third",
+      "second"
+    ]
+  },
+  "checked_boundaries": [
+    "DAG levels are readiness sets and do not prove execution overlap or grant runtime capacity. Authored scheduling examples are arithmetic, not observed IX timings.",
+    "All 8 equally likely three-outcome strings are a presampling counting device; execution stops after first success. E[attempts]=7/4, success=7/8, terminal failure=1/8 require independent p=1/2 failures and cap three.",
+    "Fluid mean workload is 10.5 attempts/s versus capacity 10; logical boundary 40/7 and 30-second excess 15 denote attempt-work demand, not exactly 15 observed queued jobs. Backoff can affect actual failure/load behavior; this fixed model holds probabilities constant.",
+    "The delayed traces specify half-open active intervals [start,start+3); rejecting the third start does not cancel the already active second attempt. Timeout observation alone is not stopped-work evidence.",
+    "Equal numeric results, response labels, and zero integer-millisecond reports do not prove cached execution, effect idempotence, zero cost or durable deduplication. Both cache-hit arrays are empty and all observed cache keys null.",
+    "Final error has no partial aggregate; whether earlier steps actually executed remains unknown from that raw receipt.",
+    "Ideal serial logical-key deduplication is mathematical only; atomic storage/effect publication, crash windows, concurrency, retention and changed-argument policy are not implemented or tested.",
+    "Pinned source is immutable source evidence; exposed service revision is unknown. Its changed replay sibling order is retained even though pinned DAG tie ordering is deterministic.",
+    "RFC9110 section9.2.2 concerns intended effect, not mandatory identical responses; AWS guidance distinguishes caller intent, atomic token/effect handling and parameter conflicts."
+  ],
+  "scope": "Independent AI data/source review of nine fixed packet files, five pinned public IX source files and three official primary references. No learner/human approval.",
+  "unexecuted": [
+    "Rust compilation or full builds/tests",
+    "additional MCP/tool probes",
+    "cache reads/writes or cache-hit trials",
+    "external effects, retry/admission controllers, cancellation or durable deduplication",
+    "capacity, throughput, latency or cost benchmarks",
+    "repository-wide retry/backpressure absence search",
+    "human review, translation fluency or learner trials"
+  ],
+  "human_approval": null,
+  "learner_trial": null,
+  "temporary_calculation_script_sha256": "80b4edb4c617377670eb8d984783e284c43a9b46d5dbe3f91b6b23d89b1758b1"
+}

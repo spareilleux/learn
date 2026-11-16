@@ -1,0 +1,3259 @@
+{
+  "checks": [
+    {
+      "detail": "Actual manifest bytes must match the controller digest",
+      "name": "source_manifest_sha256",
+      "passed": true
+    },
+    {
+      "detail": "4.6.1-stable (official)",
+      "name": "godot_version",
+      "passed": true
+    },
+    {
+      "detail": "36 admitted crossings",
+      "name": "manifest_input",
+      "passed": true
+    },
+    {
+      "detail": 0,
+      "name": "scene_pack",
+      "passed": true
+    },
+    {
+      "detail": 0,
+      "name": "scene_save",
+      "passed": true
+    },
+    {
+      "detail": "Load the saved native scene",
+      "name": "scene_load",
+      "passed": true
+    },
+    {
+      "detail": "Root metadata survives serialization",
+      "name": "loaded_manifest_binding",
+      "passed": true
+    },
+    {
+      "detail": {
+        "collision_shapes": 72,
+        "crossings": 36,
+        "meshes": 72,
+        "static_bodies": 72
+      },
+      "name": "loaded_counts",
+      "passed": true
+    },
+    {
+      "detail": {
+        "materials": 2,
+        "meshes": 2,
+        "shapes": 2
+      },
+      "name": "shared_resources",
+      "passed": true
+    },
+    {
+      "detail": "w0-f0",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w0-f0"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w0-f0",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w0-f0"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w0-f0"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w1-f0",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w1-f0"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w1-f0",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w1-f0"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w1-f0"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w2-f0",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w2-f0"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w2-f0",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w2-f0"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w2-f0"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w3-f0",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w3-f0"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w3-f0",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w3-f0"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w3-f0"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w4-f0",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w4-f0"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w4-f0",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w4-f0"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w4-f0"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w5-f0",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w5-f0"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w5-f0",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w5-f0"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w5-f0"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w0-f1",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w0-f1"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w0-f1",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w0-f1"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w0-f1"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w1-f1",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w1-f1"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w1-f1",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w1-f1"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w1-f1"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w2-f1",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w2-f1"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w2-f1",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w2-f1"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w2-f1"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w3-f1",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w3-f1"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w3-f1",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w3-f1"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w3-f1"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w4-f1",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w4-f1"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w4-f1",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w4-f1"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w4-f1"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w5-f1",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w5-f1"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w5-f1",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w5-f1"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w5-f1"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w0-f2",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w0-f2"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w0-f2",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w0-f2"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w0-f2"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w1-f2",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w1-f2"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w1-f2",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w1-f2"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w1-f2"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w2-f2",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w2-f2"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w2-f2",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w2-f2"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w2-f2"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w3-f2",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w3-f2"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w3-f2",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w3-f2"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w3-f2"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w4-f2",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w4-f2"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w4-f2",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w4-f2"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w4-f2"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w5-f2",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w5-f2"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w5-f2",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w5-f2"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w5-f2"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w0-f3",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w0-f3"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w0-f3",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w0-f3"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w0-f3"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w1-f3",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w1-f3"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w1-f3",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w1-f3"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w1-f3"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w2-f3",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w2-f3"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w2-f3",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w2-f3"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w2-f3"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w3-f3",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w3-f3"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w3-f3",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w3-f3"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w3-f3"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w4-f3",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w4-f3"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w4-f3",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w4-f3"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w4-f3"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w5-f3",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w5-f3"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w5-f3",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w5-f3"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w5-f3"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w0-f4",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w0-f4"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w0-f4",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w0-f4"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w0-f4"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w1-f4",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w1-f4"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w1-f4",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w1-f4"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w1-f4"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w2-f4",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w2-f4"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w2-f4",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w2-f4"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w2-f4"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w3-f4",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w3-f4"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w3-f4",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w3-f4"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w3-f4"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w4-f4",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w4-f4"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w4-f4",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w4-f4"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w4-f4"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w5-f4",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w5-f4"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w5-f4",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w5-f4"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w5-f4"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w0-f5",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w0-f5"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w0-f5",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w0-f5"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w0-f5"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w1-f5",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w1-f5"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w1-f5",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w1-f5"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w1-f5"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w2-f5",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w2-f5"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w2-f5",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w2-f5"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w2-f5"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w3-f5",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w3-f5"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w3-f5",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w3-f5"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w3-f5"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w4-f5",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w4-f5"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w4-f5",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w4-f5"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "weft",
+        "expected": "weft",
+        "id": "w4-f5"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": "w5-f5",
+      "name": "independent_world_metres",
+      "passed": true
+    },
+    {
+      "detail": {
+        "gap_metres": 0.00100000004749745,
+        "id": "w5-f5"
+      },
+      "name": "aabb_clearance",
+      "passed": true
+    },
+    {
+      "detail": "w5-f5",
+      "name": "loaded_metadata",
+      "passed": true
+    },
+    {
+      "detail": {
+        "actual": "wrong-crossing",
+        "expected": "w5-f5"
+      },
+      "name": "ray_crossing_identity",
+      "passed": false
+    },
+    {
+      "detail": {
+        "actual": "warp",
+        "expected": "warp",
+        "id": "w5-f5"
+      },
+      "name": "ray_upper_strand",
+      "passed": true
+    },
+    {
+      "detail": 0,
+      "name": "all_ray_identities",
+      "passed": false
+    }
+  ],
+  "counts": {
+    "collision_shapes": 72,
+    "crossings": 36,
+    "meshes": 72,
+    "static_bodies": 72
+  },
+  "crossings": [
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w0-f0",
+      "lower_aabb_metres": {
+        "position": [
+          -0.0020000000949949,
+          -0.00249999994412065,
+          -0.00100000004749745
+        ],
+        "size": [
+          0.00400000018998981,
+          0.00199999986216426,
+          0.0020000000949949
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0,
+          0.00250000017695129,
+          0.0
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          -0.00100000004749745,
+          0.000499999965541065,
+          -0.0020000000949949
+        ],
+        "size": [
+          0.0020000000949949,
+          0.00199999986216426,
+          0.00400000018998981
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.0,
+        0.00150000001303852,
+        0.0
+      ],
+      "weft_position_metres": [
+        0.0,
+        -0.00150000001303852,
+        0.0
+      ],
+      "world_position_metres": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w1-f0",
+      "lower_aabb_metres": {
+        "position": [
+          0.00400000018998981,
+          -0.00249999994412065,
+          -0.0020000000949949
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000018998981
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.00499999988824129,
+          0.00250000017695129,
+          0.0
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.00300000025890768,
+          0.000499999965541065,
+          -0.00100000004749745
+        ],
+        "size": [
+          0.00399999972432852,
+          0.00199999986216426,
+          0.0020000000949949
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.00500000035390258,
+        -0.00150000001303852,
+        0.0
+      ],
+      "weft_position_metres": [
+        0.00500000035390258,
+        0.00150000001303852,
+        0.0
+      ],
+      "world_position_metres": [
+        0.00500000035390258,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w2-f0",
+      "lower_aabb_metres": {
+        "position": [
+          0.00800000037997961,
+          -0.00249999994412065,
+          -0.00100000004749745
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.0020000000949949
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.00999999977648258,
+          0.00250000017695129,
+          0.0
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.00900000054389238,
+          0.000499999965541065,
+          -0.0020000000949949
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000018998981
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.0100000007078052,
+        0.00150000001303852,
+        0.0
+      ],
+      "weft_position_metres": [
+        0.0100000007078052,
+        -0.00150000001303852,
+        0.0
+      ],
+      "world_position_metres": [
+        0.0100000007078052,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w3-f0",
+      "lower_aabb_metres": {
+        "position": [
+          0.0140000004321337,
+          -0.00249999994412065,
+          -0.0020000000949949
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000018998981
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0149999996647239,
+          0.00250000017695129,
+          0.0
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0130000002682209,
+          0.000499999965541065,
+          -0.00100000004749745
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.0020000000949949
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.0150000005960464,
+        -0.00150000001303852,
+        0.0
+      ],
+      "weft_position_metres": [
+        0.0150000005960464,
+        0.00150000001303852,
+        0.0
+      ],
+      "world_position_metres": [
+        0.0150000005960464,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w4-f0",
+      "lower_aabb_metres": {
+        "position": [
+          0.0180000010877848,
+          -0.00249999994412065,
+          -0.00100000004749745
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.0020000000949949
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0199999995529652,
+          0.00250000017695129,
+          0.0
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0190000012516975,
+          0.000499999965541065,
+          -0.0020000000949949
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000018998981
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.0200000014156103,
+        0.00150000001303852,
+        0.0
+      ],
+      "weft_position_metres": [
+        0.0200000014156103,
+        -0.00150000001303852,
+        0.0
+      ],
+      "world_position_metres": [
+        0.0200000014156103,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w5-f0",
+      "lower_aabb_metres": {
+        "position": [
+          0.0240000002086163,
+          -0.00249999994412065,
+          -0.0020000000949949
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000018998981
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.025000000372529,
+          0.00250000017695129,
+          0.0
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0230000000447035,
+          0.000499999965541065,
+          -0.00100000004749745
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.0020000000949949
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.025000000372529,
+        -0.00150000001303852,
+        0.0
+      ],
+      "weft_position_metres": [
+        0.025000000372529,
+        0.00150000001303852,
+        0.0
+      ],
+      "world_position_metres": [
+        0.025000000372529,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w0-f1",
+      "lower_aabb_metres": {
+        "position": [
+          -0.00100000004749745,
+          -0.00249999994412065,
+          0.00300000025890768
+        ],
+        "size": [
+          0.0020000000949949,
+          0.00199999986216426,
+          0.00399999972432852
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0,
+          0.00250000017695129,
+          0.00499999988824129
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          -0.0020000000949949,
+          0.000499999965541065,
+          0.00400000018998981
+        ],
+        "size": [
+          0.00400000018998981,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.0,
+        -0.00150000001303852,
+        0.00500000035390258
+      ],
+      "weft_position_metres": [
+        0.0,
+        0.00150000001303852,
+        0.00500000035390258
+      ],
+      "world_position_metres": [
+        0.0,
+        0.0,
+        0.00500000035390258
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w1-f1",
+      "lower_aabb_metres": {
+        "position": [
+          0.00300000025890768,
+          -0.00249999994412065,
+          0.00400000018998981
+        ],
+        "size": [
+          0.00399999972432852,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.00499999988824129,
+          0.00250000017695129,
+          0.00499999988824129
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.00400000018998981,
+          0.000499999965541065,
+          0.00300000025890768
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00399999972432852
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.00500000035390258,
+        0.00150000001303852,
+        0.00500000035390258
+      ],
+      "weft_position_metres": [
+        0.00500000035390258,
+        -0.00150000001303852,
+        0.00500000035390258
+      ],
+      "world_position_metres": [
+        0.00500000035390258,
+        0.0,
+        0.00500000035390258
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w2-f1",
+      "lower_aabb_metres": {
+        "position": [
+          0.00900000054389238,
+          -0.00249999994412065,
+          0.00300000025890768
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00399999972432852
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.00999999977648258,
+          0.00250000017695129,
+          0.00499999988824129
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.00800000037997961,
+          0.000499999965541065,
+          0.00400000018998981
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.0100000007078052,
+        -0.00150000001303852,
+        0.00500000035390258
+      ],
+      "weft_position_metres": [
+        0.0100000007078052,
+        0.00150000001303852,
+        0.00500000035390258
+      ],
+      "world_position_metres": [
+        0.0100000007078052,
+        0.0,
+        0.00500000035390258
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w3-f1",
+      "lower_aabb_metres": {
+        "position": [
+          0.0130000002682209,
+          -0.00249999994412065,
+          0.00400000018998981
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0149999996647239,
+          0.00250000017695129,
+          0.00499999988824129
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0140000004321337,
+          0.000499999965541065,
+          0.00300000025890768
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00399999972432852
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.0150000005960464,
+        0.00150000001303852,
+        0.00500000035390258
+      ],
+      "weft_position_metres": [
+        0.0150000005960464,
+        -0.00150000001303852,
+        0.00500000035390258
+      ],
+      "world_position_metres": [
+        0.0150000005960464,
+        0.0,
+        0.00500000035390258
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w4-f1",
+      "lower_aabb_metres": {
+        "position": [
+          0.0190000012516975,
+          -0.00249999994412065,
+          0.00300000025890768
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00399999972432852
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0199999995529652,
+          0.00250000017695129,
+          0.00499999988824129
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0180000010877848,
+          0.000499999965541065,
+          0.00400000018998981
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.0200000014156103,
+        -0.00150000001303852,
+        0.00500000035390258
+      ],
+      "weft_position_metres": [
+        0.0200000014156103,
+        0.00150000001303852,
+        0.00500000035390258
+      ],
+      "world_position_metres": [
+        0.0200000014156103,
+        0.0,
+        0.00500000035390258
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w5-f1",
+      "lower_aabb_metres": {
+        "position": [
+          0.0230000000447035,
+          -0.00249999994412065,
+          0.00400000018998981
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.025000000372529,
+          0.00250000017695129,
+          0.00499999988824129
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0240000002086163,
+          0.000499999965541065,
+          0.00300000025890768
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00399999972432852
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.025000000372529,
+        0.00150000001303852,
+        0.00500000035390258
+      ],
+      "weft_position_metres": [
+        0.025000000372529,
+        -0.00150000001303852,
+        0.00500000035390258
+      ],
+      "world_position_metres": [
+        0.025000000372529,
+        0.0,
+        0.00500000035390258
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w0-f2",
+      "lower_aabb_metres": {
+        "position": [
+          -0.0020000000949949,
+          -0.00249999994412065,
+          0.00900000054389238
+        ],
+        "size": [
+          0.00400000018998981,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0,
+          0.00250000017695129,
+          0.00999999977648258
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          -0.00100000004749745,
+          0.000499999965541065,
+          0.00800000037997961
+        ],
+        "size": [
+          0.0020000000949949,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.0,
+        0.00150000001303852,
+        0.0100000007078052
+      ],
+      "weft_position_metres": [
+        0.0,
+        -0.00150000001303852,
+        0.0100000007078052
+      ],
+      "world_position_metres": [
+        0.0,
+        0.0,
+        0.0100000007078052
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w1-f2",
+      "lower_aabb_metres": {
+        "position": [
+          0.00400000018998981,
+          -0.00249999994412065,
+          0.00800000037997961
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.00499999988824129,
+          0.00250000017695129,
+          0.00999999977648258
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.00300000025890768,
+          0.000499999965541065,
+          0.00900000054389238
+        ],
+        "size": [
+          0.00399999972432852,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.00500000035390258,
+        -0.00150000001303852,
+        0.0100000007078052
+      ],
+      "weft_position_metres": [
+        0.00500000035390258,
+        0.00150000001303852,
+        0.0100000007078052
+      ],
+      "world_position_metres": [
+        0.00500000035390258,
+        0.0,
+        0.0100000007078052
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w2-f2",
+      "lower_aabb_metres": {
+        "position": [
+          0.00800000037997961,
+          -0.00249999994412065,
+          0.00900000054389238
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.00999999977648258,
+          0.00250000017695129,
+          0.00999999977648258
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.00900000054389238,
+          0.000499999965541065,
+          0.00800000037997961
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.0100000007078052,
+        0.00150000001303852,
+        0.0100000007078052
+      ],
+      "weft_position_metres": [
+        0.0100000007078052,
+        -0.00150000001303852,
+        0.0100000007078052
+      ],
+      "world_position_metres": [
+        0.0100000007078052,
+        0.0,
+        0.0100000007078052
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w3-f2",
+      "lower_aabb_metres": {
+        "position": [
+          0.0140000004321337,
+          -0.00249999994412065,
+          0.00800000037997961
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0149999996647239,
+          0.00250000017695129,
+          0.00999999977648258
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0130000002682209,
+          0.000499999965541065,
+          0.00900000054389238
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.0150000005960464,
+        -0.00150000001303852,
+        0.0100000007078052
+      ],
+      "weft_position_metres": [
+        0.0150000005960464,
+        0.00150000001303852,
+        0.0100000007078052
+      ],
+      "world_position_metres": [
+        0.0150000005960464,
+        0.0,
+        0.0100000007078052
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w4-f2",
+      "lower_aabb_metres": {
+        "position": [
+          0.0180000010877848,
+          -0.00249999994412065,
+          0.00900000054389238
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0199999995529652,
+          0.00250000017695129,
+          0.00999999977648258
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0190000012516975,
+          0.000499999965541065,
+          0.00800000037997961
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.0200000014156103,
+        0.00150000001303852,
+        0.0100000007078052
+      ],
+      "weft_position_metres": [
+        0.0200000014156103,
+        -0.00150000001303852,
+        0.0100000007078052
+      ],
+      "world_position_metres": [
+        0.0200000014156103,
+        0.0,
+        0.0100000007078052
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w5-f2",
+      "lower_aabb_metres": {
+        "position": [
+          0.0240000002086163,
+          -0.00249999994412065,
+          0.00800000037997961
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.025000000372529,
+          0.00250000017695129,
+          0.00999999977648258
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0230000000447035,
+          0.000499999965541065,
+          0.00900000054389238
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.025000000372529,
+        -0.00150000001303852,
+        0.0100000007078052
+      ],
+      "weft_position_metres": [
+        0.025000000372529,
+        0.00150000001303852,
+        0.0100000007078052
+      ],
+      "world_position_metres": [
+        0.025000000372529,
+        0.0,
+        0.0100000007078052
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w0-f3",
+      "lower_aabb_metres": {
+        "position": [
+          -0.00100000004749745,
+          -0.00249999994412065,
+          0.0130000002682209
+        ],
+        "size": [
+          0.0020000000949949,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0,
+          0.00250000017695129,
+          0.0149999996647239
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          -0.0020000000949949,
+          0.000499999965541065,
+          0.0140000004321337
+        ],
+        "size": [
+          0.00400000018998981,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.0,
+        -0.00150000001303852,
+        0.0150000005960464
+      ],
+      "weft_position_metres": [
+        0.0,
+        0.00150000001303852,
+        0.0150000005960464
+      ],
+      "world_position_metres": [
+        0.0,
+        0.0,
+        0.0150000005960464
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w1-f3",
+      "lower_aabb_metres": {
+        "position": [
+          0.00300000025890768,
+          -0.00249999994412065,
+          0.0140000004321337
+        ],
+        "size": [
+          0.00399999972432852,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.00499999988824129,
+          0.00250000017695129,
+          0.0149999996647239
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.00400000018998981,
+          0.000499999965541065,
+          0.0130000002682209
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.00500000035390258,
+        0.00150000001303852,
+        0.0150000005960464
+      ],
+      "weft_position_metres": [
+        0.00500000035390258,
+        -0.00150000001303852,
+        0.0150000005960464
+      ],
+      "world_position_metres": [
+        0.00500000035390258,
+        0.0,
+        0.0150000005960464
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w2-f3",
+      "lower_aabb_metres": {
+        "position": [
+          0.00900000054389238,
+          -0.00249999994412065,
+          0.0130000002682209
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.00999999977648258,
+          0.00250000017695129,
+          0.0149999996647239
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.00800000037997961,
+          0.000499999965541065,
+          0.0140000004321337
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.0100000007078052,
+        -0.00150000001303852,
+        0.0150000005960464
+      ],
+      "weft_position_metres": [
+        0.0100000007078052,
+        0.00150000001303852,
+        0.0150000005960464
+      ],
+      "world_position_metres": [
+        0.0100000007078052,
+        0.0,
+        0.0150000005960464
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w3-f3",
+      "lower_aabb_metres": {
+        "position": [
+          0.0130000002682209,
+          -0.00249999994412065,
+          0.0140000004321337
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0149999996647239,
+          0.00250000017695129,
+          0.0149999996647239
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0140000004321337,
+          0.000499999965541065,
+          0.0130000002682209
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.0150000005960464,
+        0.00150000001303852,
+        0.0150000005960464
+      ],
+      "weft_position_metres": [
+        0.0150000005960464,
+        -0.00150000001303852,
+        0.0150000005960464
+      ],
+      "world_position_metres": [
+        0.0150000005960464,
+        0.0,
+        0.0150000005960464
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w4-f3",
+      "lower_aabb_metres": {
+        "position": [
+          0.0190000012516975,
+          -0.00249999994412065,
+          0.0130000002682209
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0199999995529652,
+          0.00250000017695129,
+          0.0149999996647239
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0180000010877848,
+          0.000499999965541065,
+          0.0140000004321337
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.0200000014156103,
+        -0.00150000001303852,
+        0.0150000005960464
+      ],
+      "weft_position_metres": [
+        0.0200000014156103,
+        0.00150000001303852,
+        0.0150000005960464
+      ],
+      "world_position_metres": [
+        0.0200000014156103,
+        0.0,
+        0.0150000005960464
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w5-f3",
+      "lower_aabb_metres": {
+        "position": [
+          0.0230000000447035,
+          -0.00249999994412065,
+          0.0140000004321337
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.025000000372529,
+          0.00250000017695129,
+          0.0149999996647239
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0240000002086163,
+          0.000499999965541065,
+          0.0130000002682209
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.025000000372529,
+        0.00150000001303852,
+        0.0150000005960464
+      ],
+      "weft_position_metres": [
+        0.025000000372529,
+        -0.00150000001303852,
+        0.0150000005960464
+      ],
+      "world_position_metres": [
+        0.025000000372529,
+        0.0,
+        0.0150000005960464
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w0-f4",
+      "lower_aabb_metres": {
+        "position": [
+          -0.0020000000949949,
+          -0.00249999994412065,
+          0.0190000012516975
+        ],
+        "size": [
+          0.00400000018998981,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0,
+          0.00250000017695129,
+          0.0199999995529652
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          -0.00100000004749745,
+          0.000499999965541065,
+          0.0180000010877848
+        ],
+        "size": [
+          0.0020000000949949,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.0,
+        0.00150000001303852,
+        0.0200000014156103
+      ],
+      "weft_position_metres": [
+        0.0,
+        -0.00150000001303852,
+        0.0200000014156103
+      ],
+      "world_position_metres": [
+        0.0,
+        0.0,
+        0.0200000014156103
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w1-f4",
+      "lower_aabb_metres": {
+        "position": [
+          0.00400000018998981,
+          -0.00249999994412065,
+          0.0180000010877848
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.00499999988824129,
+          0.00250000017695129,
+          0.0199999995529652
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.00300000025890768,
+          0.000499999965541065,
+          0.0190000012516975
+        ],
+        "size": [
+          0.00399999972432852,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.00500000035390258,
+        -0.00150000001303852,
+        0.0200000014156103
+      ],
+      "weft_position_metres": [
+        0.00500000035390258,
+        0.00150000001303852,
+        0.0200000014156103
+      ],
+      "world_position_metres": [
+        0.00500000035390258,
+        0.0,
+        0.0200000014156103
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w2-f4",
+      "lower_aabb_metres": {
+        "position": [
+          0.00800000037997961,
+          -0.00249999994412065,
+          0.0190000012516975
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.00999999977648258,
+          0.00250000017695129,
+          0.0199999995529652
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.00900000054389238,
+          0.000499999965541065,
+          0.0180000010877848
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.0100000007078052,
+        0.00150000001303852,
+        0.0200000014156103
+      ],
+      "weft_position_metres": [
+        0.0100000007078052,
+        -0.00150000001303852,
+        0.0200000014156103
+      ],
+      "world_position_metres": [
+        0.0100000007078052,
+        0.0,
+        0.0200000014156103
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w3-f4",
+      "lower_aabb_metres": {
+        "position": [
+          0.0140000004321337,
+          -0.00249999994412065,
+          0.0180000010877848
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0149999996647239,
+          0.00250000017695129,
+          0.0199999995529652
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0130000002682209,
+          0.000499999965541065,
+          0.0190000012516975
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.0150000005960464,
+        -0.00150000001303852,
+        0.0200000014156103
+      ],
+      "weft_position_metres": [
+        0.0150000005960464,
+        0.00150000001303852,
+        0.0200000014156103
+      ],
+      "world_position_metres": [
+        0.0150000005960464,
+        0.0,
+        0.0200000014156103
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w4-f4",
+      "lower_aabb_metres": {
+        "position": [
+          0.0180000010877848,
+          -0.00249999994412065,
+          0.0190000012516975
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0199999995529652,
+          0.00250000017695129,
+          0.0199999995529652
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0190000012516975,
+          0.000499999965541065,
+          0.0180000010877848
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.0200000014156103,
+        0.00150000001303852,
+        0.0200000014156103
+      ],
+      "weft_position_metres": [
+        0.0200000014156103,
+        -0.00150000001303852,
+        0.0200000014156103
+      ],
+      "world_position_metres": [
+        0.0200000014156103,
+        0.0,
+        0.0200000014156103
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w5-f4",
+      "lower_aabb_metres": {
+        "position": [
+          0.0240000002086163,
+          -0.00249999994412065,
+          0.0180000010877848
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.025000000372529,
+          0.00250000017695129,
+          0.0199999995529652
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0230000000447035,
+          0.000499999965541065,
+          0.0190000012516975
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.025000000372529,
+        -0.00150000001303852,
+        0.0200000014156103
+      ],
+      "weft_position_metres": [
+        0.025000000372529,
+        0.00150000001303852,
+        0.0200000014156103
+      ],
+      "world_position_metres": [
+        0.025000000372529,
+        0.0,
+        0.0200000014156103
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w0-f5",
+      "lower_aabb_metres": {
+        "position": [
+          -0.00100000004749745,
+          -0.00249999994412065,
+          0.0230000000447035
+        ],
+        "size": [
+          0.0020000000949949,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0,
+          0.00250000017695129,
+          0.025000000372529
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          -0.0020000000949949,
+          0.000499999965541065,
+          0.0240000002086163
+        ],
+        "size": [
+          0.00400000018998981,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.0,
+        -0.00150000001303852,
+        0.025000000372529
+      ],
+      "weft_position_metres": [
+        0.0,
+        0.00150000001303852,
+        0.025000000372529
+      ],
+      "world_position_metres": [
+        0.0,
+        0.0,
+        0.025000000372529
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w1-f5",
+      "lower_aabb_metres": {
+        "position": [
+          0.00300000025890768,
+          -0.00249999994412065,
+          0.0240000002086163
+        ],
+        "size": [
+          0.00399999972432852,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.00499999988824129,
+          0.00250000017695129,
+          0.025000000372529
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.00400000018998981,
+          0.000499999965541065,
+          0.0230000000447035
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.00500000035390258,
+        0.00150000001303852,
+        0.025000000372529
+      ],
+      "weft_position_metres": [
+        0.00500000035390258,
+        -0.00150000001303852,
+        0.025000000372529
+      ],
+      "world_position_metres": [
+        0.00500000035390258,
+        0.0,
+        0.025000000372529
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w2-f5",
+      "lower_aabb_metres": {
+        "position": [
+          0.00900000054389238,
+          -0.00249999994412065,
+          0.0230000000447035
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.00999999977648258,
+          0.00250000017695129,
+          0.025000000372529
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.00800000037997961,
+          0.000499999965541065,
+          0.0240000002086163
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.0100000007078052,
+        -0.00150000001303852,
+        0.025000000372529
+      ],
+      "weft_position_metres": [
+        0.0100000007078052,
+        0.00150000001303852,
+        0.025000000372529
+      ],
+      "world_position_metres": [
+        0.0100000007078052,
+        0.0,
+        0.025000000372529
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w3-f5",
+      "lower_aabb_metres": {
+        "position": [
+          0.0130000002682209,
+          -0.00249999994412065,
+          0.0240000002086163
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0149999996647239,
+          0.00250000017695129,
+          0.025000000372529
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0140000004321337,
+          0.000499999965541065,
+          0.0230000000447035
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.0150000005960464,
+        0.00150000001303852,
+        0.025000000372529
+      ],
+      "weft_position_metres": [
+        0.0150000005960464,
+        -0.00150000001303852,
+        0.025000000372529
+      ],
+      "world_position_metres": [
+        0.0150000005960464,
+        0.0,
+        0.025000000372529
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w4-f5",
+      "lower_aabb_metres": {
+        "position": [
+          0.0190000012516975,
+          -0.00249999994412065,
+          0.0230000000447035
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.0199999995529652,
+          0.00250000017695129,
+          0.025000000372529
+        ],
+        "strand": "weft"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0180000010877848,
+          0.000499999965541065,
+          0.0240000002086163
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "warp_over": false,
+      "warp_position_metres": [
+        0.0200000014156103,
+        -0.00150000001303852,
+        0.025000000372529
+      ],
+      "weft_position_metres": [
+        0.0200000014156103,
+        0.00150000001303852,
+        0.025000000372529
+      ],
+      "world_position_metres": [
+        0.0200000014156103,
+        0.0,
+        0.025000000372529
+      ]
+    },
+    {
+      "gap_metres": 0.00100000004749745,
+      "id": "w5-f5",
+      "lower_aabb_metres": {
+        "position": [
+          0.0230000000447035,
+          -0.00249999994412065,
+          0.0240000002086163
+        ],
+        "size": [
+          0.00400000065565109,
+          0.00199999986216426,
+          0.00200000032782555
+        ]
+      },
+      "ray": {
+        "crossing_id": "wrong-crossing",
+        "position_metres": [
+          0.025000000372529,
+          0.00250000017695129,
+          0.025000000372529
+        ],
+        "strand": "warp"
+      },
+      "upper_aabb_metres": {
+        "position": [
+          0.0240000002086163,
+          0.000499999965541065,
+          0.0230000000447035
+        ],
+        "size": [
+          0.00200000032782555,
+          0.00199999986216426,
+          0.00400000065565109
+        ]
+      },
+      "warp_over": true,
+      "warp_position_metres": [
+        0.025000000372529,
+        0.00150000001303852,
+        0.025000000372529
+      ],
+      "weft_position_metres": [
+        0.025000000372529,
+        -0.00150000001303852,
+        0.025000000372529
+      ],
+      "world_position_metres": [
+        0.025000000372529,
+        0.0,
+        0.025000000372529
+      ]
+    }
+  ],
+  "godot_version": {
+    "build": "official",
+    "hash": "14d19694e0c88a3f9e82d899a0400f27a24c176e",
+    "hex": 263681,
+    "major": 4,
+    "minor": 6,
+    "patch": 1,
+    "status": "stable",
+    "string": "4.6.1-stable (official)",
+    "timestamp": 0
+  },
+  "matching_ray_identities": 0,
+  "resources": {
+    "materials": 2,
+    "meshes": 2,
+    "shapes": 2
+  },
+  "scene_sha256": "fc17d88636155da8761fe8c69c03cdc7a8ffc05c57e0f8d32ab043ec683cb8e8",
+  "source_manifest_sha256": "05ff96258db853cfdf31bbe53f4589e0a4d088045449035036123a0577056ab1",
+  "status": "failed"
+}

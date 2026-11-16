@@ -2112,6 +2112,59 @@ towers' pixels changed, against 0.4 to 4.8 % over the five seconds, the share
 lit unchanged. Not tested: a real phone or tablet, Safari, Firefox, and the
 update from version 48 to version 49 on Pages itself.
 
+Version 50, stamped 2026-10-31 16:44:02 UTC, puts every course on the shelves
+at once and opens a course in the scene. It is version 49's tree (the
+Foundation copy at 917d016) with five changes from the catalogue candidate,
+built against the Foundation at c0ff859. scripts/course_library.gd drops the
+shelves' pages: a series starts on the row at eye height, fills the rows under
+it, then those over its sign, either side of the banner, and a series longer
+than its bay runs on into the free course bays, its first book there marked
+"continued" ("suite", "continuación"); the hall's decorative books behind the
+course rows are hidden. A click or Enter on a book opens its course on panels
+of light between the camera and the book, at eye height, with the course's
+area and department stacked behind it (scripts/holo_tree.gd, new here, with
+open_on); a course the tree lacks still opens in a new tab, and books are not
+aimed at through the open panels. scripts/aim_glow.gd (new) lights the aimed
+book. assets/course_tree.json (new) and its 236 texts in assets/course_text/
+(gzip JSON, English, French and Spanish) were built from this repository at
+5560e01 by the Foundation's artpass/pedestals/course_tree.py: 5 areas, 37
+courses, 358 pages and 482 Streeling modules, 519 courses in all.
+export_presets.cfg's include_filter now names assets/course_text/*.json.gz:
+Godot exports a file that is not a resource only through it, and without it
+the texts were missing from the pack. scripts/catalogue_request.gd (new) takes
+the live course list with a size limit, no redirect, a validation of every
+field and a cache in user:// on native builds; in the browser it sets no
+timeout, because the hall's first frames are built while the request runs:
+with the native 10 s timeout the first export of this version kept the
+embedded 74 courses in headless Chrome (RESULT_TIMEOUT), where version 49
+took the live 519. Every other script is version 49's. index.pck is now
+72,638,428 bytes, 17,136,904 more than version 49's, most of it the course
+texts; index.html changes only that size, sw.js only its BUILD line, and
+index.wasm, index.js, the manifest and the icons are unchanged.
+Version 50's checks, on the export's build tree with stock Godot 4.6.1,
+headless: the shelves' geometry, 35 checks (every course on a slot, rows in
+their bay, the overflow bays, the hidden hall books); the course panels, 12
+checks (a site course and a Streeling module open on their own node with
+their parents stacked, between the camera and the book at its eye height, no
+book aimed at through them, the language followed, the panels hidden once
+closed even with no key pressed yet, a course the tree lacks left to the
+browser); the catalogue's transport, cache, malformed, duplicate, oversized,
+redirected, failing, timed-out and offline answers and the real public list,
+46 checks against a local server and GitHub Pages; the rebuild with 74 and
+519 courses (68 to 71 ms of CPU for 519, 17 to 18 ms for 74); the library's own regression; the
+selftest under Compatibility and Forward+, missing [] with 519 courses and
+519 volumes and no script error. The pack read alone (--main-pack) gives the
+course tree and all 877 of its texts in the three languages. Version 50's web
+test, on its export in headless Chrome 156 served as GitHub Pages serves it
+(artpass/publish/gzip_server.py, the public courses.json gzip-encoded,
+catalogue-web.mjs with a 40 s wait): it reports version 50 (built
+1793465042), its hint reads "L: all 519 courses", and the console has no
+error and no warning; version 49's export, the same way, also reads 519.
+Not run for this version: version 49's twelve web tests and 52 native
+regression runs, which test what version 50 leaves unchanged. Not tested: a
+real phone or tablet, Safari, Firefox, opening a course with a real mouse in
+the browser, and the update from version 49 to version 50 on Pages itself.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -2123,11 +2176,15 @@ by about 15 percent.
 SHA-256 source inputs of the exported project:
 project.godot 0846106a4b8947e8435170c3d7fd5bcdbd1b71d54794961d7a5e3a757906a554
 main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
-export_presets.cfg 38e6c4584777b1bf5beb1499a046899f6c0ba192972678167b953cb774760cdf
+export_presets.cfg 392dbd250c139457228ff89ebcf6e9eb2cdca587987dbc12b7197f889d386785
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
 scripts/observatory.gd cdbab5d96d8679c893602ca4e67064a899982642f58e4c655975e0f2e97acbec
-scripts/course_library.gd 1b942ad4c7da8111fe6e8390f02d11f8927c1e2bec9a39b893883ec6fc647f06
+scripts/course_library.gd 1fa5a79b2d5669a17a5954fe224ff1784c20aeb178276aaba56323c86cb9f2b2
+scripts/catalogue_request.gd 34baabe9069228170223b919667ddb5a7030ed1d26f050c9a1f96900d32aef6d
+scripts/holo_tree.gd 71890eb4d13b2c275ee15ce63d6d3ee01357b69e1e9e596fb9789b7400ed4d40
+scripts/aim_glow.gd fa49e6c0c32d837ef68c4acbeddc477b6d323af67f5285e8ec1e9e5d73f5a524
+assets/course_tree.json 6721aec65d74947e3f44455f91e08b4c4907cdfa9516350e7fc80113a550722c
 scripts/steel_cube.gd fee81a60fe3050a017e60d099a3bceb3555b502eb3e09d0d83febaeafe3e7773
 scripts/seldon_statue.gd f0261780bbad9dd047e27ecaaf07e1dc72604a52edc197564da50c8376861acd
 scripts/touch_controls.gd f4d4076608a731c8d0e58c6eea6ecb5a981655279589b45ab8ff34a666fa394c
@@ -2183,7 +2240,7 @@ assets/fresco_panel.gdshader e9c20421cf254119e9d85da22a70bb8a965cee0be524f5c95b2
 assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
 assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
 assets/fresco_motion.png aa7148be2c28917ddae5d92b7a155c46fe024460c67e919106be23782fdf7822
-scripts/build_info.gd bf5aff70a43859c2f4fbe0e00585d719a8f034ddc0a516d7c056ed71e79398fa
+scripts/build_info.gd 1d4d0e15a89f107ed99b2437bf04120b2b52245d6f1b7f1b9d5751d0cee5d503
 scripts/sfx_takes.gd 069f573898d4c4ad48fde9f1f592dba0974433b1881d7ed045d6797c3c3a0ac6
 assets/sfx/curio_wheel-beep.wav a1d999098afbd222622a6c4625ee16bb9788059c6fe37901067d9cd239f5ec8c
 assets/sfx/curio_wheel-chime.wav 6b580b1e57194c1f84183044c367bcab9d07e3d4c876da3dee5736ba78298c9e
@@ -2326,10 +2383,10 @@ assets/garden_escooter_trim.obj fd0fe8976bd3ca2f50a5454c57b49c564d323ab394170f44
 assets/garden_escooter_tyre.obj f61d3311121303b8212d1c0ee998cef670b13a07b7e6076b1e202a6b78a24498
 
 SHA-256 output files:
-index.pck 6358a524f30c5b097707e4c54af90b73e948ea83a88f485815970b852c53ddb0
+index.pck 1620f6cc021e6a9369558cf2345371892e6b3a4ed68f5c8d5fc97ad80512d54d
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
-sw.js bb6524ffa053c75d4a58404080184aa51561c5105d99e7adae9e64b5d40891db
+sw.js 09d6c9c37b424fbf95a420f7b7107380d1ebdcb27e42e6d7782d1ab314b73b65
 manifest.webmanifest 73676491cb7a7ea9befd37c4e09561739497a6dae9299c344b7941adecb54210
 icon-192.png 3d731897f85db4062648a71925e24449e608db622cb5d0c34cec70636eaab459
 icon-512.png 11e906507b24dfd9dae51d65b93d7027828f41a8aaab6a8c378b92e39e1da10b
@@ -2337,7 +2394,7 @@ icon-512.png 11e906507b24dfd9dae51d65b93d7027828f41a8aaab6a8c378b92e39e1da10b
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (55.5 MB here) to the binary history.
+index.pck (72.6 MB here) to the binary history.
 
 2026-10-03 post-merge recording sound correction: v28 preserved the v27
 `scripts/seldon_recording.gd` hash above before this correction. Fresh R or a

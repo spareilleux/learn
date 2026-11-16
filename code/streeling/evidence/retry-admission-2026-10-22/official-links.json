@@ -1,0 +1,70 @@
+{
+  "checked_at_utc": "2026-10-22T21:30:31.616048+00:00",
+  "scope": "Transport checks plus distinct actual primary-source reading provenance; not runtime/public-deployment proof.",
+  "links": [
+    {
+      "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+      "status": 200,
+      "bytes": 455504,
+      "sha256": "4a1d5271e802185dba96d4b73978e5b5648d3e4f06b583a28d907dce12ff66a3",
+      "final_url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+      "mime": "text/html;charset=utf-8",
+      "separate_primary_document_read": "Actual web.open/find read client request identity, same arguments versus distinct intent, atomic token/effect need and response semantic equivalence."
+    },
+    {
+      "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+      "status": 200,
+      "bytes": 129500,
+      "sha256": "cd6cc137d0d7b20cc4beac1c8fb16ea067adc14c61be35a93599c73ca5570d91",
+      "final_url": "https://builder.aws.com/content/3EumjoZascWd1oZiEgL8ORlv3qE/timeouts-retries-and-backoff-with-jitter",
+      "mime": "text/html; charset=utf-8",
+      "separate_primary_document_read": "Actual web.open read the primary discussion: retries add work, backoff/jitter spread timing, timeout does not imply absence of effects. New examples authored independently."
+    },
+    {
+      "url": "https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.map",
+      "status": 200,
+      "bytes": 718685,
+      "sha256": "9a660f8ff1ae4d88955cd8ea4e7f2683e8850929565e58e0e1554054db300bfb",
+      "final_url": "https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.map",
+      "mime": "text/html",
+      "actual_direct_content_read": "Official map description and supplied closure semantics read from fetched HTML; not a native execution.",
+      "separate_primary_document_read": "Read actual official Iterator map documentation; this method creates an iterator transformation and does not itself spawn threads. Actual source branch compute/map/collect was also independently inspected."
+    },
+    {
+      "url": "https://github.com/GuitarAlchemist/ix/blob/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-agent/src/tools.rs#L408-L450",
+      "status": 200,
+      "bytes": 1080578,
+      "sha256": "a5bacdba114cb0e8b3f540fc9e8045302b1fd26f8e0c2058e3b1e9a069defeda",
+      "final_url": "https://github.com/GuitarAlchemist/ix/blob/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-agent/src/tools.rs#L408-L450",
+      "mime": "text/html; charset=utf-8",
+      "content_read": "Actual pinned Git bytes and independent source review bound in primary-readback/data-audit; HTML transport alone is not the source review."
+    },
+    {
+      "url": "https://github.com/GuitarAlchemist/ix/blob/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/dag.rs",
+      "status": 200,
+      "bytes": 662568,
+      "sha256": "b23a3117c36a5eafe528cbe334477588fe8f124323eac464fdd9a9085fa283d2",
+      "final_url": "https://github.com/GuitarAlchemist/ix/blob/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/dag.rs",
+      "mime": "text/html; charset=utf-8",
+      "content_read": "Actual pinned Git bytes and independent source review bound in primary-readback/data-audit; HTML transport alone is not the source review."
+    },
+    {
+      "url": "https://github.com/GuitarAlchemist/ix/blob/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/executor.rs#L115-L243",
+      "status": 200,
+      "bytes": 613247,
+      "sha256": "2aae00aa447b2dc111305928b9ac873a82ca51b8d33ca11202a091d946ce773b",
+      "final_url": "https://github.com/GuitarAlchemist/ix/blob/456df065ee837e33b5bbe22a4df0616a4fcb76e5/crates/ix-pipeline/src/executor.rs#L115-L243",
+      "mime": "text/html; charset=utf-8",
+      "content_read": "Actual pinned Git bytes and independent source review bound in primary-readback/data-audit; HTML transport alone is not the source review."
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2",
+      "status": 200,
+      "bytes": 1187554,
+      "sha256": "d431760660ea44e130f6e919dab216df2d0b3a490567a98089267523368fe1e5",
+      "final_url": "https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2",
+      "mime": "text/html",
+      "separate_primary_document_read": "Actual web.open/find read section9.2.2 intended-effect idempotence, response differences and incidental logging distinction. HTTP semantics not automatically applied to arbitrary tools."
+    }
+  ]
+}

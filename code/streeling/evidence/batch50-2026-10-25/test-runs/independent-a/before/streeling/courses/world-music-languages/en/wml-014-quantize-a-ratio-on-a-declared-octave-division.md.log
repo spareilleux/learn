@@ -1,0 +1,122 @@
+---
+module_id: wml-014-quantize-a-ratio-on-a-declared-octave-division
+department: world-music-languages
+course: "Quantize a Ratio on a Declared Octave Division"
+level: advanced
+prerequisites: ["wml-004-preserve-intonation-beyond-pitch-classes"]
+estimated_duration: "60 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Quantize a Ratio on a Declared Octave Division
+
+> Authored model and source reading. Human technical, fluent-language, musician and learner decisions remain pending. No new performance, listening, parser execution, engine render or production adoption is claimed.
+
+An integer step has no fixed musical size without its division of the octave. A [GA](https://github.com/GuitarAlchemist/ga) scale handoff that keeps the number and drops the grid can change the intended interval. We approximate one authored ratio on two equal divisions and keep the residual. The target, representation and error remain separate quantities.
+
+## Read the retained evidence
+
+The primary reading defines cents multiplicatively. The retained intonation packet already shows a discrete projection losing a ratio difference. This lesson makes the destination grid variable, without assigning either grid to a culture or claiming that the engine supports it.
+
+[Prerequisite](../../world-music-languages/en/wml-004-preserve-intonation-beyond-pitch-classes.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/intonation-listening-2026-10-22/intonation.json)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-25/unit-a.json)
+
+[Primary reading](https://www.nist.gov/pml/time-and-frequency-division/popular-links/time-frequency-z)
+
+## Fixed case and prepared quantities
+
+```json
+{
+  "values": {
+    "target_ratio": 1.25,
+    "octave_divisions": 19
+  },
+  "formula": "target_cents=1200*log2(ratio); step=floor(divisions*log2(ratio)+0.5); represented_cents=1200*step/divisions; error_cents=represented_cents-target_cents",
+  "expected": {
+    "target_cents": 386.3137138648348,
+    "step": 6,
+    "represented_cents": 378.94736842105266,
+    "error_cents": -7.366345443782166
+  },
+  "negative_control": {
+    "values": {
+      "target_ratio": 1.25,
+      "octave_divisions": 12
+    },
+    "expected": {
+      "target_cents": 386.3137138648348,
+      "step": 4,
+      "represented_cents": 400,
+      "error_cents": 13.686286135165204
+    }
+  }
+}
+```
+
+## Keep approximation separate from cultural interpretation
+
+Equal division of the octave is a mathematical construction. Its number of steps does not by itself identify a musical tradition, a repertoire or a performer’s intonation. A grid can approximate a selected ratio closely while poorly representing other intervals important to a task. Choosing a grid from one small error therefore needs a declared objective rather than a universal superiority claim.
+
+The signed residual is useful for more than ranking closeness. It tells a future renderer which direction separates the represented target from the requested ratio. An absolute error alone would hide that direction. Conversely, retaining only a residual without the original ratio and grid would also be insufficient: the receiver needs to know which reference the correction belongs to. Keep all of these fields as separate authored quantities.
+
+The existing discrete catalog boundary illustrates why an advisory record must not be mistaken for supported runtime behavior. A representation capable of storing a grid identifier is different from an instrument that can realize it. A normal equal-tempered fretboard may not provide the requested frequencies without another technique or instrument, and a software entry point still needs output measurement. The manual table is enough to expose information loss before proposing a tuning DSL. A richer implementation is justified only after its intended musical use and measurable preservation requirements are explicit.
+
+### Exercise 1
+
+Convert the target ratio to cents. Does the destination grid change that target?
+
+<details><summary>Answer 1</summary>
+
+The target cent value stays the same in both cases. It describes the requested frequency ratio before quantization, independently of the chosen grid.
+
+</details>
+
+### Exercise 2
+
+Choose the nearest step on the main grid. Which rounding convention matters at a tie?
+
+<details><summary>Answer 2</summary>
+
+Use the displayed step. The authored rule rounds ties upward; although this input is not a tie, the convention belongs in a reproducible handoff.
+
+</details>
+
+### Exercise 3
+
+Compute the represented interval and signed error. What does a negative residual mean?
+
+<details><summary>Answer 3</summary>
+
+The represented interval lies below the target. Its residual is an approximation error under this grid, not an observed guitarist playing flat.
+
+</details>
+
+### Exercise 4
+
+Apply the alternative-grid control. Which values must change?
+
+<details><summary>Answer 4</summary>
+
+The step, represented cents and residual change, while the target remains fixed. Comparing raw step integers across grids would compare incompatible units.
+
+</details>
+
+### Exercise 5
+
+What falsifies a handoff claiming to preserve the exact ratio?
+
+<details><summary>Answer 5</summary>
+
+Replacing the target with either approximate step alone loses the nonzero residual. Retain the ratio and grid together; musical suitability still needs tradition-specific evidence and human judgment.
+
+</details>
+
+## Source-assisted learner task
+
+Build the target/grid/error table manually before assistance. Inspect the retained projection boundary, then propose a record preserving ratio and grid identity. Reject an exactness claim when its residual is discarded; leave cultural interpretation and tuning support undecided.
+
+First retain your unaided derivation before revealing the answers. Then inspect a specific source passage and its revision, record every kind of assistance, and keep the original and corrected responses separately. Use the direct manual result as the baseline for any calculator, DSL or agent proposal. Missing inputs stay unresolved. The fixed packet holds a prepared criterion for each exercise with no learner decision. A correct model answer supports only the declared case; acceptance needs an actual attempt and review. Record a falsifier before choosing an abstraction, then state the additional runtime or human evidence needed at the next boundary.

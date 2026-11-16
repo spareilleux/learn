@@ -1,0 +1,145 @@
+{
+  "current_read_scope": [
+    {
+      "key": "racket",
+      "url": "https://docs.racket-lang.org/guide/pattern-macros.html",
+      "version": "Official Guide section16.1.2",
+      "scope": "Rendered lines86-128, naive tmp capture and scope-preserving renamed expansion.",
+      "sha256": null,
+      "read_at": "2026-10-25",
+      "method": "web open/find, actual rendered text inspected; no raw-byte hash claimed"
+    },
+    {
+      "key": "http",
+      "url": "https://www.rfc-editor.org/rfc/rfc9110.html#name-idempotent-methods",
+      "version": "RFC9110 June2022",
+      "scope": "Section9.2.2 rendered lines1984-1990, intended effect, separate logging and retry restriction.",
+      "sha256": null,
+      "read_at": "2026-10-25",
+      "method": "web open/find, actual rendered text inspected; no raw-byte hash claimed"
+    },
+    {
+      "key": "prov",
+      "url": "https://www.w3.org/TR/2013/REC-prov-dm-20130430/",
+      "version": "Recommendation2013-04-30",
+      "scope": "Abstract lines34-38: entities, activities and responsible agents; no deeper theorem imported.",
+      "sha256": null,
+      "read_at": "2026-10-25",
+      "method": "web open/find, actual rendered text inspected; no raw-byte hash claimed"
+    },
+    {
+      "key": "nist",
+      "url": "https://www.itl.nist.gov/div898/handbook/pri/section3/pri332.htm",
+      "version": "e-Handbook5.3.3.2",
+      "scope": "Lines7-15: nuisance factors, homogeneous blocks, within-block comparisons, balance and randomization.",
+      "sha256": null,
+      "read_at": "2026-10-25",
+      "method": "web open/find, actual rendered text inspected; no raw-byte hash claimed"
+    },
+    {
+      "key": "selective",
+      "url": "https://arxiv.org/abs/1705.08500v2",
+      "version": "Geifman/El-Yaniv v2 2017-06-01",
+      "scope": "Version metadata and author abstract only, lines8-26; no neural-network guarantees imported.",
+      "sha256": null,
+      "read_at": "2026-10-25",
+      "method": "web open/find, actual rendered text inspected; no raw-byte hash claimed"
+    },
+    {
+      "key": "otel",
+      "url": "https://opentelemetry.io/docs/specs/otel/trace/tracestate-handling/",
+      "version": "Displayed specification1.62.0",
+      "scope": "Sampling threshold subsection lines176-212, effective probability and inverse-probability adjusted count; no library execution.",
+      "sha256": null,
+      "read_at": "2026-10-25",
+      "method": "web open/find, actual rendered text inspected; no raw-byte hash claimed"
+    },
+    {
+      "key": "vector",
+      "url": "https://www.cl.cam.ac.uk/teaching/2021/ConcDisSys/dist-sys-notes.pdf",
+      "version": "Kleppmann2020/21 Cambridge notes",
+      "scope": "Slides69-72, extracted lines1547-1652, receive maxima then local increment and componentwise partial order/concurrency.",
+      "sha256": null,
+      "read_at": "2026-10-25",
+      "method": "web open/find, actual rendered text inspected; no raw-byte hash claimed"
+    },
+    {
+      "key": "lamport",
+      "url": "https://lamport.azurewebsites.net/pubs/time-clocks.pdf",
+      "version": "Lamport CACM1978 21(7)",
+      "scope": "Pages558-559, extracted lines122-181, local/send-receive/transitive happened-before. PDF extraction mangles negation glyphs; explanatory prose and independent Cambridge partial-order definition used.",
+      "sha256": null,
+      "read_at": "2026-10-25",
+      "method": "web open/find, actual rendered text inspected; no raw-byte hash claimed"
+    },
+    {
+      "key": "matrix",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html",
+      "version": "Displayed1.9.1 docs",
+      "scope": "Definition lines638-641 and parameters, true rows and predicted columns; no sklearn execution.",
+      "sha256": null,
+      "read_at": "2026-10-25",
+      "method": "web open/find, actual rendered text inspected; no raw-byte hash claimed"
+    },
+    {
+      "key": "shannon",
+      "url": "https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf",
+      "version": "Shannon1948 corrected reprint",
+      "scope": "Introduction selected-message/representation distinction; section6 pages10-11 extracted lines493-579, weighted successive choices and entropy. Extraction loses minus glyphs; independently checked -sum(p*log2(p)) and positive entropy figure.",
+      "sha256": null,
+      "read_at": "2026-10-25",
+      "method": "web open/find, actual rendered text inspected; no raw-byte hash claimed"
+    },
+    {
+      "key": "sql",
+      "url": "https://sqlite.org/lang_select.html",
+      "version": "Official SELECT page live2026-10-25",
+      "scope": "Section2.1 lines272-284, Cartesian combinations and ON filtering. Actual official non-www fallback body read after two www-host timeouts; no database executed.",
+      "sha256": null,
+      "read_at": "2026-10-25",
+      "method": "web open/find, actual rendered text inspected; no raw-byte hash claimed"
+    },
+    {
+      "key": "ga-adaptive",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs",
+      "version": "GA76efbffd5af82b46c3146957a6bd4504008eeb89",
+      "scope": "Actual raw rendered lines2739-2762 and initial tuple2292: query-success guard, gpuSmooth update, strict>1 dwell, whole-step bounces and0.65 recovery threshold. No renderer run.",
+      "sha256": null,
+      "read_at": "2026-10-25",
+      "method": "web open/find, actual rendered text inspected; no raw-byte hash claimed"
+    }
+  ],
+  "failed_or_limited_access": [
+    {
+      "attempt": "www.sqlite.org/lang_select.html twice",
+      "result": "web timeout; no body inferred",
+      "fallback": "Official non-www sqlite.org section2.1 body actually read"
+    },
+    {
+      "attempt": "Initial test path guesses code/streeling/tests/test_unit_b.py and tests/test_unit_b.py",
+      "result": "Files absent",
+      "fallback": "Exact inventory located evidence/batch50-2026-10-24/tests/test_unit_b.py, then inspected and executed"
+    },
+    {
+      "attempt": "Guessed CS015 partition-overlapping-work-with-frame-ownership filename",
+      "result": "File absent",
+      "fallback": "Exact inventory located compose-overlapping-chunks-without-duplicate-frames and actual body/model read"
+    },
+    {
+      "attempt": "Some combined local outputs",
+      "result": "Truncated",
+      "fallback": "Current omitted CS019 ES and CS020 EN reread; smaller course groups and targeted baseline project/novelty passages used. No complete historical-baseline reading claim"
+    },
+    {
+      "attempt": "Historical author F# docs landing access",
+      "result": "Historical author scope only",
+      "fallback": "Fresh local GaAsync lexical binding/parallel source inspected; no new F# API/compiler claim required docs lookup"
+    },
+    {
+      "attempt": "Initial single-shell receipt builder creation",
+      "result": "Windows os error206: command too long, process not created",
+      "fallback": "External builder written via apply_patch; no canonical write or course/test failure"
+    }
+  ],
+  "scope": "All48 current locale files: unique narrative and all questions/answers inspected; all embedded models compared exactly with separately read packet. Common learner-task prose read per locale and identity checked across remaining files. Relevant actual prerequisite passages read, not every historical answer or transitive external citation."
+}

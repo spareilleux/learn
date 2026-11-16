@@ -1,0 +1,506 @@
+=== AUD022 en streeling/courses/audio-engineering/en/aud-022-flush-the-tail-of-a-finite-convolution.md ===
+---
+module_id: aud-022-flush-the-tail-of-a-finite-convolution
+department: audio-engineering
+course: "Flush the Tail of a Finite Convolution"
+level: advanced
+prerequisites: ["aud-011-count-valid-frames-separately-from-block-padding"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Flush the Tail of a Finite Convolution
+
+> Authored finite model and bounded source reading. Human technical, fluent-language, musician and learner decisions remain pending. No new engine render, listening, playing, parser execution or production adoption is claimed.
+
+A [GA](https://github.com/GuitarAlchemist/ga) guitar render can end its input while a cabinet response still has pending output. The finite convolution support extends beyond the input support. Calling every later sample padding discards a legitimate tail. Conversely, feeding zeros forever is unnecessary for a finite response. Build the index table and find the last possible product before proposing a streaming adapter. This is an authored convolution, not a newly rendered guitar recording.
+
+The missing operation is the end-of-input transition. The fixed schedule records `input` followed by `flush`, retains delay history newest first and stops only when the pending drain count is zero. No fresh input event is created by feeding a flush zero. Stopping when the caller has no input leaves a nonempty history and pending valid output. The earlier transfer-estimation course already identifies a discarded tail; this lesson makes the drain protocol explicit so a later adapter can preserve state across that boundary.
+
+## Specific assumptions and limits
+
+Use nonempty causal real arrays and zero extension. Output support follows finite linear convolution; the emission count must lie within that support. No cabinet capture or streaming exporter was executed.
+
+## Work from the direct representation
+
+Write the main input table before opening the prepared answers. Identify the coordinate system, physical or logical unit, support and ordering rule for every field. A number without its convention cannot safely cross into an audio graph, a scene or an agent message. Derive intermediate quantities as well as the final decision. The displayed packet deliberately keeps inputs and expected outputs separate so a second reader can recompute the result rather than merely recognize a familiar label.
+
+Repeat the operation with the negative control, keeping its changed inputs visible. Explain which invariant survives and which claim fails. A useful control targets the mechanism under discussion; a different example that only looks plausible may never exercise the risky boundary. Agreement in the main case alone cannot show that a proposed abstraction preserves the operation. Conversely, a rejected control is an expected outcome of the teaching model, not an observed defect in an existing product.
+
+Read the full prerequisite and the retained project artifact below. The prerequisite establishes an earlier operation with its own limits. The retained runner supplies an actual audio comparison workflow and separates raw samples, encoded output and acceptance claims. It does not implement this lesson’s new model. Local source hashes identify complete bytes at the pinned revision; they do not turn a source inspection into runtime execution. Where a primary reference is linked, use only the bounded definition recorded in the packet.
+
+## Prepare a source-assisted project handoff
+
+Create a short GA review note containing your manual calculation, the declared convention and the rejecting witness. Keep that direct result as the baseline before proposing a DSL node, agent instruction or scene control. Such a proposal must explain what information its input preserves and which observation would disprove its fidelity. If a required input is absent, leave the result unresolved instead of filling the gap with a convenient default.
+
+Retain your unaided response before revealing the corrections. Record any calculator, source lookup or agent assistance, then preserve the corrected response alongside the original and explain the change. The packet contains a prepared criterion for each exercise, with no accepted learner decisions. Matching an answer key does not establish independent recall or a successful learner trial. Record actual commands, inputs, outputs, failures and replays in the validation journal when the model is tested. Keep human technical review, fluent-language review, musician judgment, production runtime and publication as separately supported decisions.
+
+[Prerequisite](../../audio-engineering/en/aud-011-count-valid-frames-separately-from-block-padding.md)
+
+[Retained project artifact](../../../../code/streeling/guitar-runtime/run.mjs)
+
+[Fixed authored packet](../../../../code/streeling/evidence/batch50-2026-10-25-c/unit-a.json)
+
+[Validation journal](../../../../code/streeling/evidence/batch50-2026-10-25-c/journal.md)
+
+[Primary reading](https://www.dsprelated.com/freebooks/mdft/Convolution.html)
+
+## Fixed case and prepared quantities
+
+````
+
+### Exercise 1
+
+Calculate the full output.
+
+> **Answer:** It is `[1,2.5,1.25,0.5]`; the last value comes from the final input and final response coefficient.
+
+### Exercise 2
+
+How much valid output follows the input support?
+
+> **Answer:** The tail has 2 samples. Its validity follows from the convolution support, independently of buffer capacity.
+
+### Exercise 3
+
+Does a zero input after exhaustion imply zero output immediately?
+
+> **Answer:** No. Stored earlier input still contributes through delayed response coefficients.
+
+### Exercise 4
+
+What does the truncated control lose?
+
+> **Answer:** It loses `[1.25,0.5]`, so its emitted vector cannot represent the complete response.
+
+### Exercise 5
+
+What falsifies complete export?
+
+> **Answer:** Any nonzero omitted value inside the declared full convolution support rejects that claim.
+
+## Source-assisted learner task
+
+Apply the direct project handoff above to both fixed cases. Preserve the typed input table, every intermediate result, the negative-control explanation and the final rejecting witness. The prepared answers are checks, not observations of your work.
+
+=== AUD022 fr streeling/courses/audio-engineering/fr/aud-022-flush-the-tail-of-a-finite-convolution.fr.md ===
+---
+module_id: aud-022-flush-the-tail-of-a-finite-convolution
+department: audio-engineering
+course: "Conserver la queue d’une convolution finie"
+level: advanced
+prerequisites: ["aud-011-count-valid-frames-separately-from-block-padding"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Conserver la queue d’une convolution finie
+
+> Modèle fini construit et lecture bornée des sources. Les décisions techniques humaines, linguistiques, musicales et des apprenants restent en attente. Aucun nouveau rendu, essai d’écoute, jeu instrumental, parseur exécuté ni adoption en production n’est revendiqué.
+
+Un rendu de guitare [GA](https://github.com/GuitarAlchemist/ga) peut épuiser son entrée alors que la réponse de baffle produit encore une sortie. Le support de la convolution finie dépasse celui de l’entrée. Qualifier tous les échantillons suivants de remplissage supprime une vraie queue. À l’inverse, une réponse finie ne demande pas une alimentation indéfinie en zéros. Construisez la table des indices avant de proposer un adaptateur de flux. Cette convolution est un exemple construit, pas un nouvel enregistrement.
+
+L’opération ajoutée est la transition de fin d’entrée. Le calendrier fixe distingue `input` puis `flush`, conserve l’historique du plus récent au plus ancien et s’arrête quand le compte restant est nul. Un zéro de vidange ne crée pas un nouvel événement d’entrée. Arrêter faute d’entrée laisse un historique non vide et une sortie valide en attente. Le cours sur l’estimation de transfert identifie déjà une queue supprimée ; celui-ci explicite le protocole de vidange pour un futur adaptateur.
+
+## Hypothèses et limites propres au cas
+
+Utilisez des tableaux réels causaux non vides et un prolongement nul. Le support suit la convolution linéaire finie ; le compte émis doit rester dans ce support. Aucune capture de baffle ni aucun exporteur de flux n’a été exécuté.
+
+## Partir de la représentation directe
+
+Écrivez la table principale avant de consulter les réponses préparées. Précisez pour chaque champ le repère, l’unité physique ou logique, le support et l’ordre. Une valeur privée de sa convention ne peut pas circuler fidèlement entre graphe audio, scène et message d’agent. Dérivez les grandeurs intermédiaires autant que la décision finale. Le paquet distingue volontairement entrées et résultats attendus : une autre personne doit pouvoir recalculer, pas seulement reconnaître une étiquette familière.
+
+Répétez l’opération avec le témoin négatif en gardant visibles les entrées modifiées. Expliquez quel invariant subsiste et quelle affirmation échoue. Un témoin utile cible le mécanisme étudié ; un autre exemple simplement plausible peut ignorer la frontière risquée. L’accord du seul cas principal ne prouve pas qu’une abstraction conserve l’opération. À l’inverse, le rejet du témoin est un résultat prévu du modèle pédagogique, pas un défaut observé dans un produit existant.
+
+Lisez le prérequis complet et l’artefact conservé ci-dessous. Le prérequis établit une opération antérieure avec ses limites. Le programme conservé fournit un vrai processus de comparaison audio et sépare échantillons bruts, sortie codée et décisions d’acceptation. Il n’implémente pas le nouveau modèle de ce cours. Les empreintes locales identifient les octets complets à la révision indiquée ; elles ne transforment pas une inspection en exécution. Une référence primaire liée ne soutient que la définition bornée consignée dans le paquet.
+
+## Préparer une transmission de projet avec les sources
+
+Rédigez une courte note de revue GA avec votre calcul manuel, la convention et le témoin de rejet. Gardez ce résultat direct comme référence avant de proposer un nœud DSL, une instruction d’agent ou un contrôle de scène. La proposition doit préciser les informations préservées en entrée et l’observation qui réfuterait sa fidélité. Si une entrée manque, laissez le résultat indécis au lieu d’inventer une valeur commode.
+
+Conservez la réponse sans aide avant de révéler les corrections. Notez calculatrice, consultation de source et assistance d’agent, puis gardez correction et original avec l’explication du changement. Le paquet prépare un critère par exercice, sans décision d’acceptation d’apprenant. Retrouver un corrigé ne prouve ni rappel autonome ni essai réussi. Consignez commandes, entrées, sorties, échecs et reprises réellement exécutés dans le journal de validation. Revue technique humaine, revue linguistique, jugement musical, exécution en production et publication exigent chacun leurs propres éléments.
+
+[Prérequis](../../audio-engineering/en/aud-011-count-valid-frames-separately-from-block-padding.md)
+
+[Artefact de projet conservé](../../../../code/streeling/guitar-runtime/run.mjs)
+
+[Paquet construit fixe](../../../../code/streeling/evidence/batch50-2026-10-25-c/unit-a.json)
+
+[Journal de validation](../../../../code/streeling/evidence/batch50-2026-10-25-c/journal.md)
+
+[Lecture primaire](https://www.dsprelated.com/freebooks/mdft/Convolution.html)
+
+## Cas fixe et grandeurs préparées
+
+### Exercice 1
+
+Calculez la sortie complète.
+
+> **Réponse:** Elle vaut `[1,2.5,1.25,0.5]` ; la dernière valeur combine les derniers coefficients de l’entrée et de la réponse.
+
+### Exercice 2
+
+Quelle sortie valide suit le support d’entrée ?
+
+> **Réponse:** La queue compte 2 échantillons. Sa validité découle du support de convolution, indépendamment de la capacité du tampon.
+
+### Exercice 3
+
+Une entrée nulle après épuisement impose-t-elle une sortie immédiatement nulle ?
+
+> **Réponse:** Non. Les entrées antérieures contribuent encore par les coefficients retardés de la réponse.
+
+### Exercice 4
+
+Que perd le témoin tronqué ?
+
+> **Réponse:** Il perd `[1.25,0.5]` ; son vecteur émis ne représente donc pas la réponse complète.
+
+### Exercice 5
+
+Qu’est-ce qui réfute un export complet ?
+
+> **Réponse:** Toute valeur non nulle omise dans le support complet déclaré réfute cette affirmation.
+
+## Tâche d’apprenant avec les sources
+
+Appliquez la transmission directe ci-dessus aux deux cas fixes. Conservez table d’entrée typée, résultats intermédiaires, explication du témoin négatif et témoin final de rejet. Les corrigés sont des vérifications préparées, pas des observations de votre travail.
+
+=== AUD022 es streeling/courses/audio-engineering/es/aud-022-flush-the-tail-of-a-finite-convolution.es.md ===
+---
+module_id: aud-022-flush-the-tail-of-a-finite-convolution
+department: audio-engineering
+course: "Conservar la cola de una convolución finita"
+level: advanced
+prerequisites: ["aud-011-count-valid-frames-separately-from-block-padding"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Conservar la cola de una convolución finita
+
+> Modelo finito elaborado y lectura acotada de fuentes. Las decisiones técnicas humanas, lingüísticas, musicales y de estudiantes siguen pendientes. No se afirma un nuevo renderizado, escucha, interpretación instrumental, ejecución de parser ni adopción en producción.
+
+Un renderizado de guitarra [GA](https://github.com/GuitarAlchemist/ga) puede agotar la entrada mientras la respuesta del altavoz aún produce salida. El soporte de la convolución finita supera al de la entrada. Considerar relleno todas las muestras posteriores elimina una cola válida. Tampoco hace falta introducir ceros indefinidamente para una respuesta finita. Construya la tabla de índices antes de proponer un adaptador de flujo. Esta convolución es un ejemplo elaborado, no una nueva grabación.
+
+La operación añadida es la transición al final de entrada. El calendario fijo distingue `input` seguido de `flush`, conserva historial de más reciente a más antiguo y termina cuando no quedan pasos de vaciado. Un cero de vaciado no crea un evento nuevo de entrada. Parar por falta de entrada deja historial no vacío y salida válida pendiente. La lección de estimación de transferencia ya identifica una cola descartada; esta explicita el protocolo de vaciado para un futuro adaptador.
+
+## Supuestos y límites específicos
+
+Use matrices reales causales no vacías y extensión nula. El soporte sigue la convolución lineal finita; la cantidad emitida debe quedar dentro de él. No se ejecutó captura de altavoz ni exportador de flujo.
+
+## Partir de la representación directa
+
+Escriba la tabla principal antes de abrir las respuestas preparadas. Identifique marco de coordenadas, unidad física o lógica, soporte y orden de cada campo. Una cifra sin su convención no puede pasar fielmente a un grafo de audio, una escena o un mensaje de agente. Deduzca magnitudes intermedias además de la decisión final. El paquete separa deliberadamente entradas y resultados esperados para que otra persona pueda recalcular, en vez de reconocer una etiqueta familiar.
+
+Repita la operación con el control negativo y mantenga visibles sus entradas modificadas. Explique qué invariante se conserva y qué afirmación falla. Un control útil apunta al mecanismo estudiado; otro ejemplo meramente plausible puede no tocar la frontera arriesgada. El acuerdo del caso principal por sí solo no demuestra que una abstracción conserve la operación. A la inversa, rechazar el control es un resultado previsto del modelo didáctico, no un defecto observado en un producto existente.
+
+Lea el prerrequisito completo y el artefacto conservado de abajo. El prerrequisito establece una operación anterior con sus límites. El programa conservado ofrece un proceso real de comparación de audio y separa muestras brutas, salida codificada y decisiones de aceptación. No implementa el nuevo modelo de esta lección. Las huellas locales identifican bytes completos en la revisión fijada; no convierten una inspección en ejecución. Una referencia primaria enlazada solo respalda la definición acotada registrada en el paquete.
+
+## Preparar una entrega de proyecto con las fuentes
+
+Redacte una breve nota de revisión GA con su cálculo manual, convención y testigo de rechazo. Conserve ese resultado directo como referencia antes de proponer un nodo DSL, instrucción de agente o control de escena. La propuesta debe explicar qué información conserva su entrada y qué observación refutaría su fidelidad. Si falta una entrada, deje el resultado sin resolver en vez de sustituirlo por un valor conveniente.
+
+Conserve su respuesta sin ayuda antes de revelar las correcciones. Registre calculadora, consulta de fuentes y asistencia de agentes; guarde después respuesta corregida y original con el motivo del cambio. El paquete prepara un criterio por ejercicio, sin decisiones de aceptación de estudiantes. Coincidir con la clave no prueba recuerdo independiente ni ensayo exitoso. Registre comandos, entradas, salidas, fallos y repeticiones realmente ejecutados en el diario de validación. Revisión técnica humana, revisión lingüística, juicio musical, ejecución en producción y publicación requieren sus propias pruebas.
+
+[Prerrequisito](../../audio-engineering/en/aud-011-count-valid-frames-separately-from-block-padding.md)
+
+[Artefacto de proyecto conservado](../../../../code/streeling/guitar-runtime/run.mjs)
+
+[Paquete elaborado fijo](../../../../code/streeling/evidence/batch50-2026-10-25-c/unit-a.json)
+
+[Diario de validación](../../../../code/streeling/evidence/batch50-2026-10-25-c/journal.md)
+
+[Lectura primaria](https://www.dsprelated.com/freebooks/mdft/Convolution.html)
+
+## Caso fijo y magnitudes preparadas
+
+### Ejercicio 1
+
+Calcule la salida completa.
+
+> **Respuesta:** Es `[1,2.5,1.25,0.5]`; el último valor combina los últimos coeficientes de entrada y respuesta.
+
+### Ejercicio 2
+
+¿Qué salida válida sigue al soporte de entrada?
+
+> **Respuesta:** La cola contiene 2 muestras. Su validez deriva del soporte de convolución, independientemente de la capacidad del búfer.
+
+### Ejercicio 3
+
+¿Una entrada nula después del final implica salida nula inmediata?
+
+> **Respuesta:** No. Las entradas anteriores aún contribuyen mediante coeficientes retardados de la respuesta.
+
+### Ejercicio 4
+
+¿Qué pierde el control truncado?
+
+> **Respuesta:** Pierde `[1.25,0.5]`; su vector emitido no representa la respuesta completa.
+
+### Ejercicio 5
+
+¿Qué refuta una exportación completa?
+
+> **Respuesta:** Cualquier valor no nulo omitido dentro del soporte completo declarado refuta esa afirmación.
+
+## Tarea del estudiante con fuentes
+
+Aplique la entrega directa anterior a ambos casos fijos. Conserve tabla de entrada tipada, resultados intermedios, explicación del control negativo y testigo final de rechazo. Las respuestas son comprobaciones preparadas, no observaciones de su trabajo.
+
+=== AUD023 en streeling/courses/audio-engineering/en/aud-023-distinguish-allpass-magnitude-from-phase.md ===
+---
+module_id: aud-023-distinguish-allpass-magnitude-from-phase
+department: audio-engineering
+course: "Distinguish Allpass Magnitude from Phase"
+level: advanced
+prerequisites: ["aud-008-measure-a-filter-with-paired-input-and-output"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Distinguish Allpass Magnitude from Phase
+
+A spectral magnitude overlay can make an allpass stage look like an identity operator. The numerator and denominator have equal squared magnitude on the unit circle, yet their complex quotient changes phase. In a guitar feedback loop that phase can change tuning even when magnitude stays flat. Compare the complex response with a bypass before proposing an allegedly transparent composition. A frequency witness does not establish the audible size of a transient change.
+
+The real coefficient has magnitude below unity, ensuring the declared pole is stable. Evaluate a steady complex response; do not infer finite cropped impulse energy or audible transparency. No compiled filter or loop tuning was tested.
+
+Create a short [GA](https://github.com/GuitarAlchemist/ga) review note containing your manual calculation, the declared convention and the rejecting witness. Keep that direct result as the baseline before proposing a DSL node, agent instruction or scene control. Such a proposal must explain what information its input preserves and which observation would disprove its fidelity. If a required input is absent, leave the result unresolved instead of filling the gap with a convenient default.
+
+[Prerequisite](../../audio-engineering/en/aud-008-measure-a-filter-with-paired-input-and-output.md)
+
+[Primary reading](https://www.dsprelated.com/freebooks/filters/Allpass_Filters.html)
+
+Compute the complex response.
+
+> **Answer:** It is `0.8-0.6j`, with magnitude 1 and a nonzero imaginary part.
+
+Why is equal magnitude insufficient for identity?
+
+> **Answer:** Identity also requires the complex response to equal 1; the displayed imaginary component disproves that.
+
+Which expression establishes flat magnitude?
+
+> **Answer:** Both squared magnitudes are `1+a*a+2*a*cos(omega)` before the extra numerator scaling.
+
+What does the scaled control show?
+
+> **Answer:** Its magnitude is 2, so stability of the unchanged pole alone does not certify an allpass magnitude.
+
+What falsifies sample-transparent bypass?
+
+> **Answer:** A nonidentity complex response at an admitted frequency is a counterexample to universal identity.
+=== AUD023 fr streeling/courses/audio-engineering/fr/aud-023-distinguish-allpass-magnitude-from-phase.fr.md ===
+---
+module_id: aud-023-distinguish-allpass-magnitude-from-phase
+department: audio-engineering
+course: "Distinguer amplitude et phase d’un filtre passe-tout"
+level: advanced
+prerequisites: ["aud-008-measure-a-filter-with-paired-input-and-output"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Distinguer amplitude et phase d’un filtre passe-tout
+
+Une superposition de spectres d’amplitude peut faire passer un étage passe-tout pour l’identité. Numérateur et dénominateur ont le même module sur le cercle unité, mais leur quotient complexe modifie la phase. Dans une boucle de guitare, cette phase peut changer l’accord malgré une amplitude plate. Comparez la réponse complexe à une dérivation directe avant de proposer une composition transparente. Un témoin fréquentiel ne mesure pas l’effet audible sur une attaque.
+
+Le coefficient réel a un module inférieur à l’unité, ce qui stabilise le pôle déclaré. Évaluez une réponse complexe établie sans en déduire l’énergie d’une impulsion tronquée ni une transparence audible. Aucun filtre compilé ni accord de boucle n’a été testé.
+
+Rédigez une courte note de revue [GA](https://github.com/GuitarAlchemist/ga) avec votre calcul manuel, la convention et le témoin de rejet. Gardez ce résultat direct comme référence avant de proposer un nœud DSL, une instruction d’agent ou un contrôle de scène. La proposition doit préciser les informations préservées en entrée et l’observation qui réfuterait sa fidélité. Si une entrée manque, laissez le résultat indécis au lieu d’inventer une valeur commode.
+
+[Prérequis](../../audio-engineering/en/aud-008-measure-a-filter-with-paired-input-and-output.md)
+
+[Lecture primaire](https://www.dsprelated.com/freebooks/filters/Allpass_Filters.html)
+
+Calculez la réponse complexe.
+
+> **Réponse:** Elle vaut `0.8-0.6j`, de module 1, avec une partie imaginaire non nulle.
+
+Pourquoi le même module ne suffit-il pas ?
+
+> **Réponse:** L’identité exige aussi une réponse complexe égale à 1 ; la composante imaginaire affichée la réfute.
+
+Quelle expression établit le module constant ?
+
+> **Réponse:** Les deux modules au carré valent `1+a*a+2*a*cos(omega)` avant le facteur supplémentaire du numérateur.
+
+Que montre le témoin amplifié ?
+
+> **Réponse:** Son module vaut 2 ; la stabilité du pôle inchangé ne certifie donc pas un module passe-tout.
+
+Qu’est-ce qui réfute la transparence de la dérivation ?
+
+> **Réponse:** Une réponse complexe différente de l’identité à une fréquence admise réfute l’identité universelle.
+=== AUD023 es streeling/courses/audio-engineering/es/aud-023-distinguish-allpass-magnitude-from-phase.es.md ===
+---
+module_id: aud-023-distinguish-allpass-magnitude-from-phase
+department: audio-engineering
+course: "Distinguir magnitud y fase de un filtro pasa todo"
+level: advanced
+prerequisites: ["aud-008-measure-a-filter-with-paired-input-and-output"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Distinguir magnitud y fase de un filtro pasa todo
+
+Una superposición de magnitudes puede hacer que una etapa pasa todo parezca la identidad. Numerador y denominador tienen igual módulo sobre el círculo unidad, pero su cociente complejo cambia la fase. En una realimentación de guitarra, esa fase puede alterar la afinación aunque la magnitud sea plana. Compare la respuesta compleja con una conexión directa antes de proponer una composición transparente. Un testigo frecuencial no mide el efecto audible sobre un ataque.
+
+El coeficiente real tiene módulo inferior a la unidad, por lo que el polo declarado es estable. Evalúe respuesta compleja estacionaria sin inferir energía de impulso truncado ni transparencia audible. No se probó filtro compilado ni afinación de bucle.
+
+Redacte una breve nota de revisión [GA](https://github.com/GuitarAlchemist/ga) con su cálculo manual, convención y testigo de rechazo. Conserve ese resultado directo como referencia antes de proponer un nodo DSL, instrucción de agente o control de escena. La propuesta debe explicar qué información conserva su entrada y qué observación refutaría su fidelidad. Si falta una entrada, deje el resultado sin resolver en vez de sustituirlo por un valor conveniente.
+
+[Prerrequisito](../../audio-engineering/en/aud-008-measure-a-filter-with-paired-input-and-output.md)
+
+[Lectura primaria](https://www.dsprelated.com/freebooks/filters/Allpass_Filters.html)
+
+Calcule la respuesta compleja.
+
+> **Respuesta:** Es `0.8-0.6j`, de módulo 1, con parte imaginaria no nula.
+
+¿Por qué no basta la misma magnitud?
+
+> **Respuesta:** La identidad exige respuesta compleja igual a 1; la componente imaginaria mostrada la refuta.
+
+¿Qué expresión establece la magnitud constante?
+
+> **Respuesta:** Ambos módulos al cuadrado valen `1+a*a+2*a*cos(omega)` antes del factor adicional del numerador.
+
+¿Qué muestra el control amplificado?
+
+> **Respuesta:** Su módulo es 2; la estabilidad del polo sin cambios no certifica magnitud de pasa todo.
+
+¿Qué refuta la transparencia de la conexión directa?
+
+> **Respuesta:** Una respuesta compleja distinta de la identidad en una frecuencia admitida refuta la identidad universal.
+=== AUD024 en streeling/courses/audio-engineering/en/aud-024-prewarp-a-bilinear-filter-cutoff.md ===
+---
+module_id: aud-024-prewarp-a-bilinear-filter-cutoff
+department: audio-engineering
+course: "Prewarp a Bilinear Filter Cutoff"
+level: advanced
+prerequisites: ["aud-013-resample-without-relabeling-the-clock"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Prewarp a Bilinear Filter Cutoff
+
+A filter design request names a digital cutoff, while an analog prototype accepts angular frequency. Copying the requested frequency directly into the prototype ignores the bilinear map. Invert that map before generating coefficients for a future guitar filter. The chosen clock deliberately makes the mismatch easy to see. The mapping preserves a selected target, not every bandwidth or shape in ordinary frequency coordinates; a complete design still needs its own specification.
+
+The clock is positive and the target lies strictly below Nyquist and above zero. Use the stated bilinear factor and the principal real arctangent. This is frequency-map arithmetic, not executed filter coefficient generation.
+
+[Prerequisite](../../audio-engineering/en/aud-013-resample-without-relabeling-the-clock.md)
+
+[Primary reading](https://www.dsprelated.com/freebooks/filters/Frequency_Warping.html)
+
+Find the prewarped analog target.
+
+> **Answer:** It is `16 rad/s`; the tangent argument is `pi/4`.
+
+Map it back to digital frequency.
+
+> **Answer:** The inverse gives `2 Hz`, so the selected target error is 0.
+
+Can hertz be substituted for angular frequency?
+
+> **Answer:** No. Their units differ; the conversion factor belongs in the declared map.
+
+Why does the naive control miss the target?
+
+> **Answer:** Its analog value `4*pi` is smaller than 16 and the monotone map returns a lower digital cutoff.
+
+What rejects the requested cutoff claim?
+
+> **Answer:** A mapped achieved frequency differing from the retained requested target rejects it under this map.
+=== AUD024 fr streeling/courses/audio-engineering/fr/aud-024-prewarp-a-bilinear-filter-cutoff.fr.md ===
+---
+module_id: aud-024-prewarp-a-bilinear-filter-cutoff
+department: audio-engineering
+course: "Précompenser la fréquence de coupure bilinéaire"
+level: advanced
+prerequisites: ["aud-013-resample-without-relabeling-the-clock"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Précompenser la fréquence de coupure bilinéaire
+
+Une demande de filtre nomme une coupure numérique, tandis que le prototype analogique attend une fréquence angulaire. Recopier directement la fréquence demandée ignore la transformation bilinéaire. Inversez cette transformation avant de produire les coefficients d’un futur filtre de guitare. L’horloge choisie rend l’écart visible. La correspondance conserve une cible choisie, pas toutes les largeurs de bande en fréquence ordinaire ; le filtre complet demande encore ses spécifications.
+
+L’horloge est positive et la cible est strictement comprise entre zéro et Nyquist. Utilisez le facteur bilinéaire déclaré et l’arctangente réelle principale. Il s’agit du calcul d’une correspondance fréquentielle, pas d’un générateur de coefficients exécuté.
+
+[Prérequis](../../audio-engineering/en/aud-013-resample-without-relabeling-the-clock.md)
+
+[Lecture primaire](https://www.dsprelated.com/freebooks/filters/Frequency_Warping.html)
+
+Trouvez la cible analogique précompensée.
+
+> **Réponse:** Elle vaut `16 rad/s` ; l’argument de la tangente est `pi/4`.
+
+Ramenez-la à la fréquence numérique.
+
+> **Réponse:** L’inverse donne `2 Hz` ; l’erreur à la cible choisie vaut donc 0.
+
+Peut-on remplacer une fréquence angulaire par des hertz ?
+
+> **Réponse:** Non. Les unités diffèrent ; le facteur de conversion appartient à la transformation déclarée.
+
+Pourquoi le témoin naïf manque-t-il la cible ?
+
+> **Réponse:** Sa valeur analogique `4*pi` est inférieure à 16 et la transformation croissante donne une coupure numérique plus basse.
+
+Qu’est-ce qui réfute la coupure annoncée ?
+
+> **Réponse:** Une fréquence obtenue différente de la cible conservée la réfute dans cette transformation.
+=== AUD024 es streeling/courses/audio-engineering/es/aud-024-prewarp-a-bilinear-filter-cutoff.es.md ===
+---
+module_id: aud-024-prewarp-a-bilinear-filter-cutoff
+department: audio-engineering
+course: "Precompensar la frecuencia de corte bilineal"
+level: advanced
+prerequisites: ["aud-013-resample-without-relabeling-the-clock"]
+estimated_duration: "55 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Precompensar la frecuencia de corte bilineal
+
+Una petición de filtro indica un corte digital, mientras que el prototipo analógico espera frecuencia angular. Copiar directamente la frecuencia solicitada ignora la transformación bilineal. Invierta esa transformación antes de producir coeficientes para un futuro filtro de guitarra. El reloj elegido hace visible la diferencia. La correspondencia conserva un objetivo elegido, no todos los anchos de banda en frecuencia ordinaria; el diseño completo aún necesita sus especificaciones.
+
+El reloj es positivo y el objetivo queda estrictamente entre cero y Nyquist. Use el factor bilineal declarado y la arcotangente real principal. Es aritmética de correspondencia frecuencial, no generación ejecutada de coeficientes.
+
+[Prerrequisito](../../audio-engineering/en/aud-013-resample-without-relabeling-the-clock.md)
+
+[Lectura primaria](https://www.dsprelated.com/freebooks/filters/Frequency_Warping.html)
+
+Encuentre el objetivo analógico precompensado.
+
+> **Respuesta:** Es `16 rad/s`; el argumento de la tangente es `pi/4`.
+
+Devuélvalo a frecuencia digital.
+
+> **Respuesta:** La inversa da `2 Hz`; el error en el objetivo elegido es 0.
+
+¿Pueden sustituirse hercios por frecuencia angular?
+
+> **Respuesta:** No. Las unidades difieren; el factor de conversión pertenece a la transformación declarada.
+
+¿Por qué falla el control ingenuo?
+
+> **Respuesta:** Su valor analógico `4*pi` es menor que 16 y la transformación creciente devuelve un corte digital menor.
+
+¿Qué refuta el corte anunciado?
+
+> **Respuesta:** Una frecuencia obtenida distinta del objetivo conservado lo refuta bajo esta transformación.

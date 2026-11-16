@@ -603,7 +603,8 @@ func _build_glow() -> void:
 		"near_fade_from": -1.0, "near_fade_to": 0.0}))
 
 
-## Columns of light from the plazas: two crossed sheets each, brightest at the foot.
+## Columns of light from the plazas: two crossed sheets each, brightest at the foot; each column's foot in UV2,
+## by which assets/palace_glow.gdshader's mode 4 sways it or turns it as a searchlight, with pulses rising up it.
 func _build_beams() -> void:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -619,7 +620,10 @@ func _build_beams() -> void:
 			var hi1 := lo1 + Vector3(0, b.z, 0)
 			for v: Array in [[hi0, Vector2(0, 0)], [hi1, Vector2(1, 0)], [lo1, Vector2(1, 1)], [hi0, Vector2(0, 0)], [lo1, Vector2(1, 1)], [lo0, Vector2(0, 1)]]:
 				st.set_uv(v[1])
+				st.set_uv2(Vector2(b.x, b.y))
 				st.add_vertex(v[0])
-	_add_to(self, "Beams", st.commit(), _glow_mat(BEAM_COLOUR, 0.16, {"fade_top": 0.92, "fade_foot": 0.03, "edge": 0.85,
-		"near_fade_from": -1.0, "near_fade_to": 0.0}))
+	var beams := _add_to(self, "Beams", st.commit(), _glow_mat(BEAM_COLOUR, 0.16, {"fade_top": 0.92, "fade_foot": 0.03,
+		"edge": 0.85, "near_fade_from": -1.0, "near_fade_to": 0.0, "mode": 4, "beam_foot_y": foot}))
+	# Leaning, their tops go past the sheets' bounds.
+	beams.extra_cull_margin = 400.0
 	stats.beams = _beams.size()

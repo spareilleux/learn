@@ -1,0 +1,160 @@
+---
+module_id: "cog-014-report-risk-and-coverage-when-an-agent-abstains"
+department: "cognitive-science"
+course: "Report Risk and Coverage When an Agent Abstains"
+level: "intermediate"
+prerequisites: ["cog-003-calibrating-fretboard-confidence"]
+estimated_duration: "45 minutes"
+produced_by: "codex-project-pilot"
+version: "0.1.0"
+---
+
+# Report Risk and Coverage When an Agent Abstains
+
+> This lesson uses an authored fixed case and inspected sources. Counts, times, labels and signals are invented teaching inputs. Human technical review, fluent-language review, actual learner attempts, runtime execution, production adoption and publication decisions remain undecided.
+
+An agent emits only answers whose confidence exceeds a threshold and reports fewer wrong answers. It may simply answer fewer questions. The confidence prerequisite evaluates probability accuracy with a proper score; this lesson evaluates the selection decision itself. A confidence ordering can be used for selection even when its numbers have not been shown to represent probabilities. Do not import a calibration claim from the label.
+
+Keep every candidate item, including abstentions, in the retained table. Coverage divides accepted answers by all eligible items. Conditional risk divides accepted errors by accepted answers. The denominators express different questions and both are needed to interpret a policy. Reporting the raw error count alone rewards silence without showing the service that was withheld.
+
+The selective-classification paper’s author abstract frames a trade between risk and coverage. We use that framing for a finite table, without borrowing its neural-network results or probabilistic guarantees. The main threshold includes equality. One highly ranked wrong answer remains accepted, demonstrating that confidence selection does not remove the need for a correctness key. On a fixed eligible set, lowering the threshold cannot decrease coverage. Conditional risk can increase, decrease or stay equal depending on the correctness of the newly accepted items; its direction is not guaranteed for arbitrary data.
+
+The all-abstain control is essential. With no accepted items, the conditional risk denominator is empty. Record it as unresolved rather than assigning a perfect score. The retained project source observations distinguish retrieval confidence from learner outcomes, so they cannot populate our correctness vector. A dogfood proposal should compare against answering the same eligible task set manually, retain rejected items, and state the cost of abstention before recommending a threshold.
+
+## Sources and project boundary
+
+Read the prerequisite before using the model. Inspect the linked retained project artifact at the revision recorded in the packet, and identify the field or branch that supports the stated source observation. The source gives a representation or declared behavior; it does not turn the invented case into an observed project result. The primary reading supplies the named concept within its stated scope.
+
+[Prerequisite: cog-003-calibrating-fretboard-confidence](../../cognitive-science/en/cog-003-calibrating-fretboard-confidence.md)
+
+[Retained project artifact](../../../../code/streeling/evidence/practice-outcomes-2026-10-22/source-observations.json)
+
+[Primary reading: Geifman and El-Yaniv, 1705.08500v2, 2017-06-01](https://arxiv.org/abs/1705.08500)
+
+## Fixed model and control
+
+```json
+{
+  "values": {
+    "confidence": [
+      0.95,
+      0.9,
+      0.8,
+      0.6,
+      0.4
+    ],
+    "correct": [
+      1,
+      0,
+      1,
+      0,
+      1
+    ],
+    "threshold": 0.8
+  },
+  "formula": "Accept when confidence>=threshold; coverage=accepted/n; risk=accepted_errors/accepted, null if accepted=0.",
+  "expected": {
+    "accepted_indices": [
+      0,
+      1,
+      2
+    ],
+    "accepted": 3,
+    "errors": 1,
+    "coverage": 0.6,
+    "risk": 0.3333333333333333
+  },
+  "negative_control": {
+    "values": {
+      "confidence": [
+        0.95,
+        0.9,
+        0.8,
+        0.6,
+        0.4
+      ],
+      "correct": [
+        1,
+        0,
+        1,
+        0,
+        1
+      ],
+      "threshold": 0.99
+    },
+    "expected": {
+      "accepted_indices": [],
+      "accepted": 0,
+      "errors": 0,
+      "coverage": 0,
+      "risk": null
+    },
+    "why": "Abstaining on everything supplies no conditional error estimate, rather than perfect answers."
+  },
+  "assumptions": [
+    "Correctness key is stipulated external and fixed.",
+    "Equality at threshold is accepted; original item order retained."
+  ],
+  "limits": "Finite authored risk/coverage point, not calibrated confidence, statistical risk guarantee or measured GA use."
+}
+```
+
+### Exercise 1
+
+Which indices are accepted at the declared threshold, including its boundary?
+
+<details><summary>Answer 1</summary>
+
+Indices `[0,1,2]` are accepted. There are `3` accepted answers and `1` error. The item at confidence `0.8` is included because the comparison uses greater than or equal, not strict greater than.
+
+</details>
+
+### Exercise 2
+
+Compute coverage and conditional risk for the main case.
+
+<details><summary>Answer 2</summary>
+
+Coverage is `0.6`; risk is `1/3=0.3333333333333333`. The former uses all eligible items, while the latter uses only emitted answers. Keep the denominators explicit in a status report.
+
+</details>
+
+### Exercise 3
+
+If the threshold is lowered to `0.4`, what happens on this exact table?
+
+<details><summary>Answer 3</summary>
+
+All `5` items are accepted, coverage is `1` and risk is `2/5=0.4`. This comparison concerns one fixed ranking, not a universal monotonic law for empirical conditional risk.
+
+</details>
+
+### Exercise 4
+
+Apply the all-abstain control. Is its risk zero?
+
+<details><summary>Answer 4</summary>
+
+No. Coverage is `0` and risk is `null` because no answers were emitted. An empty conditional denominator supplies no error estimate; calling it perfect performance would reward withholding every answer.
+
+</details>
+
+### Exercise 5
+
+What would justify a real threshold recommendation?
+
+<details><summary>Answer 5</summary>
+
+Retain the eligible task set, actual correctness key, emitted and withheld answers, assistance and the cost of abstention. Compare with the manual baseline. Neither a retrieval score nor these invented vectors demonstrates learner ability or production risk guarantees.
+
+</details>
+
+## Source-assisted learner task
+
+Start with a paper table before revealing the answers. Copy the inputs and their units, apply the declared operation, and retain intermediate results. This direct calculation is the manual baseline against which an assistant or a proposed composable notation must be compared. A shorter response has no demonstrated advantage if it loses an input identity, a failure category or the counterexample.
+
+Then inspect the precise source passage recorded in the packet. Quote only the small field or branch needed for your explanation and record its revision. Ask an assistant to challenge one assumption after you have saved your first answer. Retain the prompt, reply, accepted corrections and rejected suggestions. Source lookup and calculator use are allowed; record them as assistance so the result cannot be mistaken for unaided recall.
+
+Apply the changed input in the negative control and state an observable falsifier before making a recommendation. An unexpected control result requires checking the calculation and assumptions before changing a project workflow. Submit the original answer, corrected answer, assistance history and remaining uncertainty together. The packet prepares five learner criteria, one per exercise, with undecided decisions. Prepared solutions and author checks do not fill those decisions. A future dogfood comparison needs actual attempts on the same task and a retained manual baseline; no new agent mechanism or DSL implementation is required by this lesson.
+
+[Fixed unit packet](../../../../code/streeling/evidence/batch50-2026-10-24/unit-b.json) · [Validation journal](../../../../code/streeling/evidence/batch50-2026-10-24/journal.md)

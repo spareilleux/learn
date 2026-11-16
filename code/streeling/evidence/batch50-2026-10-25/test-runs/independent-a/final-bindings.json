@@ -1,0 +1,602 @@
+{
+  "source_bindings": [
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-016-separate-dc-offset-from-ac-energy.md",
+      "sha256": "d33d6543111c09860f90be2b51333740de6313fb7f3f977ed5dad204267a48c1",
+      "code": "AUD016",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-016-separate-dc-offset-from-ac-energy.fr.md",
+      "sha256": "d3407a62caa60f5c975ac9dbd7c3478dccafbedd81ca0068f31342d7c29f98ed",
+      "code": "AUD016",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-016-separate-dc-offset-from-ac-energy.es.md",
+      "sha256": "a27ca4aa3c5707301451c4d2f20a6186102944f4e4680b0b60bc91d6d8b19060",
+      "code": "AUD016",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-017-report-ambiguous-correlation-lags.md",
+      "sha256": "b365090849fad62a232206b8320b33391fe0674b5863a07fc3b2fb8035df821f",
+      "code": "AUD017",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-017-report-ambiguous-correlation-lags.fr.md",
+      "sha256": "ac81349fe4164ae69498ba396d39917be3c5bf2387dd00ecd5633f31fda3db6d",
+      "code": "AUD017",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-017-report-ambiguous-correlation-lags.es.md",
+      "sha256": "6122a7a2d52aa5d971638dc8510d8f4071c5f789e94f53fccd39eab2e2168eb5",
+      "code": "AUD017",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-018-recover-stereo-from-mid-and-side.md",
+      "sha256": "be3ba884a64ec4b915027ebdcc0f23576c19ec6878fa29948f683c83b3d0abf6",
+      "code": "AUD018",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-018-recover-stereo-from-mid-and-side.fr.md",
+      "sha256": "814aacf6a980fb5e3b8f355d2f8fb083703d2cc50b73d1a1cf3252397bce9523",
+      "code": "AUD018",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-018-recover-stereo-from-mid-and-side.es.md",
+      "sha256": "b84afb0beca0f1cb83b39350a25eefdcdce4a38f847970252593f407f8470afe",
+      "code": "AUD018",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-015-separate-mode-excitation-from-observation.md",
+      "sha256": "db80dfc92762cc87c5dac4b4abff69e84bd9f5d07c0f8bd68478d31f6c2ca427",
+      "code": "GAS015",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-015-separate-mode-excitation-from-observation.fr.md",
+      "sha256": "6b6126be2ffd61f92fdc8284c005c7d8a55bd3aaf1156ca5e2cf0135b69a6feb",
+      "code": "GAS015",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-015-separate-mode-excitation-from-observation.es.md",
+      "sha256": "517107d11c4bd18982fdc85abbcfafdb063b19849896c853a0cc2e6a1bb41f62",
+      "code": "GAS015",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-016-couple-fretting-geometry-to-elastic-tension.md",
+      "sha256": "2cfe3853a8318c4f08b7e505266ad35e5cddeb806702e6dac0e6fb4532e2e6b2",
+      "code": "GAS016",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-016-couple-fretting-geometry-to-elastic-tension.fr.md",
+      "sha256": "ebd9976fe97e6bbe56b09c2c8806e683e6837e2e1997248563df5a80e63e7ef5",
+      "code": "GAS016",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-016-couple-fretting-geometry-to-elastic-tension.es.md",
+      "sha256": "ef9d699496010c0b70a003fbd444c78d7b03f2df824b8f4a0f46252e26b3feba",
+      "code": "GAS016",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-017-recover-a-stiffness-coefficient-from-partial-ratios.md",
+      "sha256": "a7a177a11c92a533b0b95ed2988cd123c542bf36362758bfddb9d1ddf86f1794",
+      "code": "GAS017",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/fr/gas-017-recover-a-stiffness-coefficient-from-partial-ratios.fr.md",
+      "sha256": "ed2fc58f42866dd8bdb0a03d7255a23ad7e9b096fd567eeaafa3dcf46802289b",
+      "code": "GAS017",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/es/gas-017-recover-a-stiffness-coefficient-from-partial-ratios.es.md",
+      "sha256": "63cf42bb890bee6b860c8da389c65a7cdf14c27a32d96bad3600692c304cdd7e",
+      "code": "GAS017",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-015-sample-a-vibrato-without-erasing-its-motion.md",
+      "sha256": "3a83fde5ff7bf49c479ae5c42436025044b156c75f4c15c3046ba716652bb3fe",
+      "code": "GTR015",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-studies/fr/gtr-015-sample-a-vibrato-without-erasing-its-motion.fr.md",
+      "sha256": "285db30cc1491705b2a4f9b34a93d97dc58dbaae534c5b634ddc41c70a9e4bd7",
+      "code": "GTR015",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-studies/es/gtr-015-sample-a-vibrato-without-erasing-its-motion.es.md",
+      "sha256": "9210810c8e3e4ed9fb60925c5b7c5f977b425320e0df1c514a50726f535ee089",
+      "code": "GTR015",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-016-move-the-boundary-for-an-artificial-harmonic.md",
+      "sha256": "715c1e45287e8bcf1a653703d2db444c2d6a9fe4911f00570b2539e094732f3e",
+      "code": "GTR016",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-studies/fr/gtr-016-move-the-boundary-for-an-artificial-harmonic.fr.md",
+      "sha256": "4b73cfe59f2dbd6086a675903124473141bdae5e10a08d888af3143b7ac18c23",
+      "code": "GTR016",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-studies/es/gtr-016-move-the-boundary-for-an-artificial-harmonic.es.md",
+      "sha256": "1f25b8b2b752298eb0023ff75481bdfe856ddcd0b6de769c9710b38d3e0146de",
+      "code": "GTR016",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-017-check-contact-continuity-during-finger-substitution.md",
+      "sha256": "78361857b1c3fb9bd49817833e8bb9aa1c49ad73bb956c98d4638e323903c243",
+      "code": "GTR017",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-studies/fr/gtr-017-check-contact-continuity-during-finger-substitution.fr.md",
+      "sha256": "db8ce704f7865c0422ec7e5a587b68f551cd435c80fa05979134c9c9370dd040",
+      "code": "GTR017",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-studies/es/gtr-017-check-contact-continuity-during-finger-substitution.es.md",
+      "sha256": "abba81f4842bad2cdbac70bd011dcae139f11ef677b9755789674dc3c07388d9",
+      "code": "GTR017",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-014-hold-out-whole-transposition-families.md",
+      "sha256": "808652b3838e444d77842046c76f23a2d73977337cf603330cd3ef800919cd8f",
+      "code": "GAA014",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-014-hold-out-whole-transposition-families.fr.md",
+      "sha256": "1190eba40a469518d6b538b6ef88569a2e14860482444d18720b27dd5c8cafd2",
+      "code": "GAA014",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-014-hold-out-whole-transposition-families.es.md",
+      "sha256": "d424a2be35d194a3871fab09561ff36908420eb3bdd1bc2d604da8c9a560d689",
+      "code": "GAA014",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-015-keep-uncertainty-with-a-practice-pass-rate.md",
+      "sha256": "e3a3e742684e46facd5c1a4122694773341fdff2981f5e34d68765bbba73e310",
+      "code": "GAA015",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-015-keep-uncertainty-with-a-practice-pass-rate.fr.md",
+      "sha256": "fa18b3f8b0c1cc83a115e92086cd6bf94e51e3e70936cdd2e4de90907cc4245a",
+      "code": "GAA015",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-015-keep-uncertainty-with-a-practice-pass-rate.es.md",
+      "sha256": "422203a348e9bc6de1552f24d7da367786e919b0ead20cf3dbfe083b228d5b9e",
+      "code": "GAA015",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-016-separate-order-drift-from-a-practice-condition.md",
+      "sha256": "3177a8dc1c6c23432c3f1bfdb7f84bbb2327fd8b0e0497ca98bcd9fbb3cfb91d",
+      "code": "GAA016",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/fr/gaa-016-separate-order-drift-from-a-practice-condition.fr.md",
+      "sha256": "61e9200b075495b59376a0b1e872519cbeda20e455db76f77d994bb03abea7c6",
+      "code": "GAA016",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/es/gaa-016-separate-order-drift-from-a-practice-condition.es.md",
+      "sha256": "4f9758de5ff1c7fe7a34deb81cd8315cf6c52f0795a191dcc4b2332df5dcb075",
+      "code": "GAA016",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-015-separate-key-release-from-pedal-release.md",
+      "sha256": "8c7823b687d41a1292f0eebdf23578f6c36471e0df1d5e3e5ba74fcdfb492231",
+      "code": "MCL015",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-015-separate-key-release-from-pedal-release.fr.md",
+      "sha256": "4f4dde0ff827b31bdedf02421531fb31dca1e6c36695c34d666d8a1d6f23f576",
+      "code": "MCL015",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-015-separate-key-release-from-pedal-release.es.md",
+      "sha256": "22072d984b1621482598760609a01b3978ee49d2b72773b6a03d72130b7505c4",
+      "code": "MCL015",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-016-reconstruct-polyphonic-score-cursors.md",
+      "sha256": "0a15242f2c8f1638b08288950bbb448ae47c8fe850c24391e51827a59dfb4ed1",
+      "code": "MCL016",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-016-reconstruct-polyphonic-score-cursors.fr.md",
+      "sha256": "67581d4a55b8e709c0333abc6c4df69b66a5076115ca0e2c3e50448b6c4e1ed5",
+      "code": "MCL016",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-016-reconstruct-polyphonic-score-cursors.es.md",
+      "sha256": "f837a87ec87591be3baae96d14722cb6903fdab2e36632a97c3d4cfd565d6de1",
+      "code": "MCL016",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-017-integrate-a-tempo-ramp-in-beat-coordinates.md",
+      "sha256": "60703969b0e20404737aa31bc21fd3e93cbef2ae8ba29283373dd2ce45345a97",
+      "code": "MCL017",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/musicology/fr/mcl-017-integrate-a-tempo-ramp-in-beat-coordinates.fr.md",
+      "sha256": "a123678a70370c1a65c9d6ee7c1344ec63d305adab836ea8ced69aef922b4893",
+      "code": "MCL017",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/musicology/es/mcl-017-integrate-a-tempo-ramp-in-beat-coordinates.es.md",
+      "sha256": "5933b0975d2956b2baa8da96d553affd34795c4f4f45d5e1eacd3f44619f5f39",
+      "code": "MCL017",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-014-quantize-a-ratio-on-a-declared-octave-division.md",
+      "sha256": "7f1668b45a30d438b1764b4b9d505e10eeb9d94421499a1cc72a3982444cf1bb",
+      "code": "WML014",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/world-music-languages/fr/wml-014-quantize-a-ratio-on-a-declared-octave-division.fr.md",
+      "sha256": "f2fce585e9b9ba5631ce710673ae8f9d86180406727bd9f2b86708eefc748530",
+      "code": "WML014",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/world-music-languages/es/wml-014-quantize-a-ratio-on-a-declared-octave-division.es.md",
+      "sha256": "56fc748d5f2b96d34e5fb5d803d5c9e2d294cba53abd011003675927be080dd8",
+      "code": "WML014",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-015-carry-the-concert-reference-through-a-frequency-handoff.md",
+      "sha256": "b01970255a176d486f2eca5cd7272369eb2dc59e829025a3fbe63d5f1bc776b3",
+      "code": "WML015",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/world-music-languages/fr/wml-015-carry-the-concert-reference-through-a-frequency-handoff.fr.md",
+      "sha256": "aa0c1a6a38ea3fc5815b755cc35893f4139f2babf761d122c7459b64e43e8e9c",
+      "code": "WML015",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/world-music-languages/es/wml-015-carry-the-concert-reference-through-a-frequency-handoff.es.md",
+      "sha256": "3ad941287e8f41bd00b626b2ef58e7c32e4a7779f671b51fb9e45951979b77c3",
+      "code": "WML015",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-016-keep-chord-degree-operations-distinct.md",
+      "sha256": "6d48cb0ec228590ae430113ee30bcb319fcccd99680399a00b9791e0eeb65408",
+      "code": "WML016",
+      "locale": "en",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/world-music-languages/fr/wml-016-keep-chord-degree-operations-distinct.fr.md",
+      "sha256": "4fc538c6a75a2e5df78a2bd204216d2db7c36033f770919f405e2bb848fb6b9a",
+      "code": "WML016",
+      "locale": "fr",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    },
+    {
+      "path": "streeling/courses/world-music-languages/es/wml-016-keep-chord-degree-operations-distinct.es.md",
+      "sha256": "8acb4c4b3b306506da42f42a07cae214119ba93e01652e80f1ab9c709e8239b9",
+      "code": "WML016",
+      "locale": "es",
+      "read_scope": "Complete localized lesson prose, questions/answers and task; repeated fenced model bytes independently parsed against inspected packet. Final LF bytes."
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "a9f9fa23747f397cbe7a791eb3a4ae5736ff9448da6e120bd44f2ae3524fd15d",
+      "role": "Actual read input or final independently authored proof test."
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25/production-plan.md",
+      "sha256": "1c3a96d1d89104430444eb67004536730d1a65fb9cdd7a9089b3e5d2eba6b018",
+      "role": "Actual read input or final independently authored proof test."
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25/allocation.json",
+      "sha256": "ecaa71aef1889ab6c4b40885dd41ab1feb5fc266f7f79b1ca5582203dc7e64a2",
+      "role": "Actual read input or final independently authored proof test."
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25/review-protocol.md",
+      "sha256": "fc9fba08d7c46f8f110bacf3ec93a9ed1341530c95640e4d8f5953638e5015de",
+      "role": "Actual read input or final independently authored proof test."
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25/unit-a.json",
+      "sha256": "dd20b6310052520a2888d7f51535da54318fba1dfd9eb159815750f0df3c5b58",
+      "role": "Actual read input or final independently authored proof test."
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25/unit-a-self-check.json",
+      "sha256": "d3997b5e7714fd7eb9e7876cdd0449ee14d4ce93356798c0bd14ccbf1d0c67cb",
+      "role": "Read review input; prior self-check and byte-normalization records are historical, not current independent passes."
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25/unit-a-byte-normalization.json",
+      "sha256": "6fec629a76789039052b37ac8c7aafc54c2aefae2fcc7f573af35a26b41ea30d",
+      "role": "Read review input; prior self-check and byte-normalization records are historical, not current independent passes."
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25/tests/test_unit_a.py",
+      "sha256": "c6d692259d7fde206df14f7c6bd48f1c443647120639cd6cbd3d2c6665ce63cd",
+      "role": "Actual read input or final independently authored proof test."
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-25/tests/test_course_metadata.mjs",
+      "sha256": "d647cc7c3b9c4dedc988d0de021401522620e6c564a1239f0666470a36a36535",
+      "role": "Actual read input or final independently authored proof test."
+    },
+    {
+      "path": "code/streeling/evidence/batch50-2026-10-24/tests/test_unit_a.py",
+      "sha256": "c2eb73be2f024bab8ec53e958e0c6e18d3b00f9c78d895379bacb2e70f1a9082",
+      "role": "Actual read input or final independently authored proof test."
+    },
+    {
+      "path": "scripts/tests/sync-streeling.test.mjs",
+      "sha256": "33f2538ccfe801665a28c87a3477cc7d6383bbe529b8c3196365207bfcb72721",
+      "role": "Actual read input or final independently authored proof test."
+    },
+    {
+      "path": "scripts/tests/streeling-copy-source.test.mjs",
+      "sha256": "732766b7444e89cc55f0ef11e1902f44e43c6df3df678cff4dd2f7a25e878592",
+      "role": "Actual read input or final independently authored proof test."
+    },
+    {
+      "path": "code/streeling/guitar-runtime/run.mjs",
+      "sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+      "read_scope": "Complete source read: guard, mono WAV header, RMS windows, raw/WASM comparisons. Not executed."
+    },
+    {
+      "path": "code/streeling/guitar-runtime/vendor/lib.rs",
+      "sha256": "d693e1ea1a5ca42d080c5829336bcc8423396c104ebee64d2e76ccd9bb503562",
+      "read_scope": "Lines 50-75 voice state, 281-330 excitation/frequency, 417-442 dispersion/allpass, 517-523 entry and 545-552 dispersion setter read. Not executed."
+    },
+    {
+      "path": "code/streeling/evidence/intonation-listening-2026-10-22/intonation.json",
+      "sha256": "88e77c28a2b03d1fab494fa2572e4a7eb1ec8414b39a57254823fb33a35d1a16",
+      "read_scope": "Complete reference, ratio/projection and source-boundary packet read."
+    },
+    {
+      "path": "code/streeling/evidence/phrase-performance-2026-10-22/string-occupancy.json",
+      "sha256": "6356c1bbbe0151940c7df105d48e1cdb42a3ef1aec2d314dc6a5e205580eb1c3",
+      "read_scope": "Lines 1-100: interval convention, event identity and initial occupancy plans read."
+    },
+    {
+      "path": "code/streeling/evidence/practice-outcomes-2026-10-22/practice-items.json",
+      "sha256": "8b62207df7d7fa84e97053ef4d7c6cea36b7eae73ce7a867d14cfdbfa49b9cc6",
+      "read_scope": "Complete candidate, cue-policy and confidence-control packet read."
+    },
+    {
+      "path": "code/streeling/evidence/music-phrase-2026-10-22/timed-events.json",
+      "sha256": "390485ec3d789336e26e8a727b98733ce12ab39f6b1d5eaf786cde3e6ef1ad10",
+      "read_scope": "Lines 1-100: authored scope, fixed tempo, absolute events and initial snapshot boundary read."
+    }
+  ],
+  "prerequisite_bindings": [
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-005-pcm-guards-and-format-boundaries.md",
+      "sha256": "1f15d25a97ddff5b2f2ca57e1af9ababcc2a6c4a4b368306eb8b775316f35341",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "1f15d25a97ddff5b2f2ca57e1af9ababcc2a6c4a4b368306eb8b775316f35341",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-009-declare-alignment-before-a-null-test.md",
+      "sha256": "ca5b9928bc5376c52ad6b2eaa55574ed989e5f3772e17c294ef78c9d9731a1ea",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "ca5b9928bc5376c52ad6b2eaa55574ed989e5f3772e17c294ef78c9d9731a1ea",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-010-preserve-channels-before-downmixing.md",
+      "sha256": "76c9a5f562dd98a7aab9c12938ed4b8f2a4d11670e72b84e66a786eefd4ec462",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "76c9a5f562dd98a7aab9c12938ed4b8f2a4d11670e72b84e66a786eefd4ec462",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-006-relate-pluck-position-to-string-modes.md",
+      "sha256": "0eb9f99878d0d2714a8e09b59b0a8b25e76d8f546d7d2bd5b0454743196c404f",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "0eb9f99878d0d2714a8e09b59b0a8b25e76d8f546d7d2bd5b0454743196c404f",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-013-retune-with-an-explicit-tension-assumption.md",
+      "sha256": "6cfd55b4319dcdf7d0817abdc3746292f5ddf6ad79f12a2ddff2a09aba8b25fd",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "6cfd55b4319dcdf7d0817abdc3746292f5ddf6ad79f12a2ddff2a09aba8b25fd",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/guitar-acoustics/en/gas-010-distinguish-stiff-string-partials-from-harmonics.md",
+      "sha256": "7557634ea11b4ca8a3a491a512c2ec1f2bece93c738495fda1424ffbe013de32",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "7557634ea11b4ca8a3a491a512c2ec1f2bece93c738495fda1424ffbe013de32",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-013-judge-a-bend-with-an-uncertainty-budget.md",
+      "sha256": "bae9dde9a8dcead487fce999094cf1a472a7cddab90456d3a9dd94c96402aa36",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "bae9dde9a8dcead487fce999094cf1a472a7cddab90456d3a9dd94c96402aa36",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-012-select-natural-harmonics-with-a-touch-node.md",
+      "sha256": "a756d4bba6f94f1d2f400107d15f7a0fd056d5ed125ecae7c45fd38b91487f89",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "a756d4bba6f94f1d2f400107d15f7a0fd056d5ed125ecae7c45fd38b91487f89",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-011-test-barre-coverage-before-calling-a-shape-playable.md",
+      "sha256": "c0c5ec20af0dfc6fae1ef652652dc752848ac60c47e9feb748d6572230d219ae",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "c0c5ec20af0dfc6fae1ef652652dc752848ac60c47e9feb748d6572230d219ae",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-009-test-transposition-beyond-a-memorized-fret-pattern.md",
+      "sha256": "2322558da7c6e76ce88ceea7355c683c7c68eae5323f5ea675ee4df865477dfc",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "2322558da7c6e76ce88ceea7355c683c7c68eae5323f5ea675ee4df865477dfc",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-010-define-a-practice-pass-before-counting-success.md",
+      "sha256": "8430b444c193c843ac56e127da5ade544d0c35add69d98343180c6e59ea87e9f",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "8430b444c193c843ac56e127da5ade544d0c35add69d98343180c6e59ea87e9f",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/guitar-alchemist-academy/en/gaa-012-cross-timbre-with-interval-in-an-ear-trial.md",
+      "sha256": "ef8d7c00629ae3183bae2498d32f8897157ac6ed85899230a5851857ed6dd82d",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "ef8d7c00629ae3183bae2498d32f8897157ac6ed85899230a5851857ed6dd82d",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-012-merge-ties-without-merging-slurs.md",
+      "sha256": "9360f9221b5551ccd549e6db68e936a073206eae42efd06d2c0fd1e809e01f87",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "9360f9221b5551ccd549e6db68e936a073206eae42efd06d2c0fd1e809e01f87",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/musicology/en/mcl-007-integrate-a-midi-tempo-map-before-scheduling.md",
+      "sha256": "00fb1aab5455d884d2b31ad0f05dd9cbf5df4bb087a8042a4c6a5387cf64e2c1",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "00fb1aab5455d884d2b31ad0f05dd9cbf5df4bb087a8042a4c6a5387cf64e2c1",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-004-preserve-intonation-beyond-pitch-classes.md",
+      "sha256": "1f43c926a8c86cd07402c0436991f13356bbd57572909825b98f57f76d545468",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "1f43c926a8c86cd07402c0436991f13356bbd57572909825b98f57f76d545468",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/world-music-languages/en/wml-011-preserve-the-kind-of-a-seventh-chord.md",
+      "sha256": "0a3322678aaee6b794ca85c475fd55e760ddf7461a0abd6ed51af828eab1ff0d",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "0a3322678aaee6b794ca85c475fd55e760ddf7461a0abd6ed51af828eab1ff0d",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-009-keep-level-when-normalizing-waveform-shape.md",
+      "sha256": "982aa0488cd63e7c76df670dfc894aeef4efc93c57115a57507bf18c357fc009",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "982aa0488cd63e7c76df670dfc894aeef4efc93c57115a57507bf18c357fc009",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    },
+    {
+      "path": "streeling/courses/physics/en/phy-007-separate-beating-from-decay.md",
+      "sha256": "81dc95fd7b15249dc32914e41caddfba1ae40922c44472748c50ba30b01ce560",
+      "commit": "bb292f5656852e3a6e9e9f67c95ce320a4551b5f",
+      "baseline_blob_sha256": "81dc95fd7b15249dc32914e41caddfba1ae40922c44472748c50ba30b01ce560",
+      "read_scope": "Course introduction, model statements, complete relevant exercise/answer passages and evidence limits; baseline file unchanged."
+    }
+  ]
+}

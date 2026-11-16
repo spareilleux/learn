@@ -18,12 +18,18 @@ extends Node
 ## here as its fallback. Added by scripts/observatory.gd.
 
 const TEXT := {
-	"en": {"title": "DRONE", "chase": "Chase view", "board": "On board", "land": "Land",
-		"keys": "V: view  ·  Esc: land", "no_sky": "No sky in here: the drone stays in your hand."},
-	"fr": {"title": "DRONE", "chase": "Vue de poursuite", "board": "À bord", "land": "Atterrir",
-		"keys": "V : vue  ·  Échap : atterrir", "no_sky": "Pas de ciel ici : le drone reste dans ta main."},
-	"es": {"title": "DRON", "chase": "Vista de persecución", "board": "A bordo", "land": "Aterrizar",
-		"keys": "V: vista  ·  Esc: aterrizar", "no_sky": "Aquí no hay cielo: el dron se queda en tu mano."},
+	"en": {"title": "DRONE", "chase": "Chase view", "board": "On board", "land": "Land", "voltige": "STUNTS",
+		"manual": "BY HAND", "auto": "AUTOPILOT",
+		"hand": "W A S D: fly  ·  Space / C: up, down  ·  Q E or ← →: turn  ·  let go: autopilot",
+		"keys": "V: view  ·  Shift held: stunts  ·  Esc: land", "no_sky": "No sky in here: the drone stays in your hand."},
+	"fr": {"title": "DRONE", "chase": "Vue de poursuite", "board": "À bord", "land": "Atterrir", "voltige": "VOLTIGE",
+		"manual": "AUX COMMANDES", "auto": "PILOTE AUTO",
+		"hand": "Z Q S D : piloter  ·  Espace / C : monter, descendre  ·  A E ou ← → : tourner  ·  lâcher : pilote auto",
+		"keys": "V : vue  ·  Maj maintenue : voltige  ·  Échap : atterrir", "no_sky": "Pas de ciel ici : le drone reste dans ta main."},
+	"es": {"title": "DRON", "chase": "Vista de persecución", "board": "A bordo", "land": "Aterrizar", "voltige": "ACROBACIAS",
+		"manual": "A LOS MANDOS", "auto": "PILOTO AUTOMÁTICO",
+		"hand": "W A S D: pilotar  ·  Espacio / C: subir, bajar  ·  Q E o ← →: girar  ·  soltar: piloto automático",
+		"keys": "V: vista  ·  Mayús pulsada: acrobacias  ·  Esc: aterrizar", "no_sky": "Aquí no hay cielo: el dron se queda en tu mano."},
 }
 const SFX_PATH := "res://scripts/sfx_takes.gd"
 const WEB_LOOP_PATH := "res://scripts/web_loop.gd"
@@ -106,14 +112,60 @@ const SUB := 1.0 / 120.0     # s: the follower is integrated in steps no longer 
 const RISE := 1.4            # s from the hand, watched from where you stand, before the cut
 const FADE := 0.22           # s each way of a cut
 const HUSH := -60.0
+# Stunts (the author, 2026-10-15: « rajoute un mode voltige au drone (haute vitesse, acrobaties) - ON quand
+# Maj est appuyée, OFF quand relâchée »): a racing quad's flight on the same tour, blended in and out over
+# BLEND seconds. Its speed is still planned ahead of every bend, with a racer's braking, and the racer's
+# authority stays while the craft is faster than its cruise, so letting go of Shift before a bend never
+# leaves it too fast for the camera drone's limits. On straights it rolls or flips; on board the view is
+# an FPV camera's, fixed to the frame and tilted up, the horizon turning with it.
+const V_CRUISE := 9.0        # m/s, 32 km/h
+const V_A_LAT := 18.0        # m/s², nearly 2 g in a bend
+const V_A_GO := 9.0
+const V_A_BRAKE := 14.0
+const V_JERK := 60.0
+const V_A_MAX := 24.0        # m/s²: atan(24 / 9.81) is 68 degrees of tilt
+const V_KP := 70.0
+const V_KD := 16.0           # nearly critical again
+const V_W_ATT := 20.0
+const V_YAW_K := 6.0
+const V_YAW_MAX := 7.0
+const V_LOOK := 14.0         # m: from 9 m/s, stopping at 7 m/s² takes 5.8 m
+const V_CHASE_FOV := 68.0
+const V_UPTILT := 0.35       # rad, the FPV camera's tilt up from the frame
+const BLEND := 0.35          # s
+const TRICK_TIME := 0.62     # s for a roll or a flip
+const TRICK_GAP := 1.4       # s at least between two
+const TRICK_CLEAR := 0.2     # 1/m: no bend tighter than 5 m within the trick's flight
+# By hand (the author, 2026-10-16: « je voudrais pouvoir euh, contrôler le drone quand ça me chante. Et
+# ensuite, quand je lâche les commandes, ça reprend euh, le contrôle normal, le pilote automatique. »):
+# a stick touched takes the craft off the tour, its speed asked in the nose's frame; let go for M_LET_GO,
+# the autopilot takes it back from the tour's nearest place in sight, and the reference waits for it.
+const M_FWD := 3.2           # m/s forward and back
+const M_SIDE := 2.4          # m/s sideways
+const M_UP := 1.8            # m/s up and down
+const M_YAW := 1.5           # rad/s
+const M_RESP := 2.4          # 1/s: how fast the craft takes up the speed asked
+const M_TURBO := 3.0         # times those speeds, stunts held
+const M_LET_GO := 1.2        # s without a stick before the autopilot takes back
+const M_BODY := 0.14         # m kept from walls, floors and ceilings
+const SHELF_FRONT := 17.15   # m, the shelves' fronts
+const REJOIN_MAX := 25.0     # s for the autopilot to bring the craft back to the tour, or it cuts there
 
 var lang := "en"
 var touch := false
 var reduced_motion := false
 var view := "chase"          # or "board"
+## Stunts: whether Shift holds them; voltige_hold holds them for tests.
+var voltige := false
+var voltige_hold := false
 ## Counts for tests.
 var stats := {"launches": 0, "refused": 0, "landings": 0, "views": 0, "laps": 0, "frames": 0,
-	"max_tilt_deg": 0.0, "max_speed": 0.0}
+	"max_tilt_deg": 0.0, "max_speed": 0.0, "tricks": 0, "takeovers": 0, "handovers": 0, "manual_frames": 0,
+	"kept": 0, "rejoin_cuts": 0}
+## By hand: whether the visitor holds the sticks; manual_hold holds them for tests (forward, right, up,
+## turn right, each -1 to 1).
+var manual := false
+var manual_hold := Vector4.ZERO
 
 var _obs: Node3D
 var _camera: Camera3D        # the visitor's (fly_camera.gd)
@@ -145,6 +197,21 @@ var _roll_v := 0.0
 var _site := 0.0             # the gimbal's pitch, on board
 var _eye := Vector3.INF      # the chase camera, late on the craft
 var _ref_prev := Vector3.INF
+var _vb := 0.0               # 0 the camera drone .. 1 the racer, eased over BLEND
+var _auth := 0.0             # the racer's limits: _vb, or more while the craft is faster than CRUISE
+var _trick := ""             # "roll", "flip" or none
+var _trick_t := 0.0
+var _trick_gap := 0.0
+var _trick_dir := 1.0
+var _stick := Vector4.ZERO   # this frame's sticks
+var _idle_hand := 0.0        # s since a stick was last held
+var _rejoin := false         # the autopilot taking back: the craft kept in bounds until it is on the tour
+var _rejoin_t := 0.0
+var _auto_t := 0.0           # s left showing that the autopilot took back
+var _obstacles: Array = []   # [centre, unit u, unit v, half sizes, y0, y1]: piers, pedestals, the steel box
+var _lift_at := Vector2.INF  # the lift's shaft, its axis on the floor (lift.gd LIFT_BAY, AXIS_R)
+var _spring := 16.1          # the colonnade's arches spring here (observatory.gd column_height - 2.9)
+var _orrery: Array = []      # [centre, axis, radius, body's radius]: each orbit's ring, its body going round it
 # What the flight puts aside and gives back on landing.
 var _hidden_layers: Array[CanvasLayer] = []
 var _paused: Array[Node] = []
@@ -355,13 +422,33 @@ static func outside(p: Vector3) -> bool:
 func _fly(dt: float) -> void:
 	var V := _tour
 	var q := path_at(V, _s)
-	var vc := holdable(V, _s, CRUISE * float(q[1]), A_LAT, A_BRAKE, LOOK)
-	var want := clampf((vc - _vit) * 3.2, -A_BRAKE, A_GO)
-	_acc += clampf(want - _acc, -JERK * dt, JERK * dt)
+	# The racer's limits while stunts are held, and while the craft is still faster than the camera
+	# drone's cruise once they are let go.
+	# (The tour's fastest stretch asks 1.45 times CRUISE: the camera drone never reaches 1.6.) The
+	# craft's own speed counts too: the reference brakes first, and on the reference's speed alone the
+	# craft, still at 8 m/s, was left a camera drone's 4.6 m/s² and ran 1.5 m wide (--voltige-toggle).
+	var fast := maxf(_vit, _v.length())
+	_auth = maxf(_vb, clampf((fast - CRUISE * 1.6) / (V_CRUISE - CRUISE * 1.6), 0.0, 1.0))
+	var b := _auth
+	var vmax := lerpf(CRUISE * float(q[1]), V_CRUISE * (0.55 + 0.45 * float(q[1])), _vb)
+	var brake := lerpf(A_BRAKE, V_A_BRAKE, b)
+	var vc := holdable(V, _s, vmax, lerpf(A_LAT, V_A_LAT, b), brake, lerpf(LOOK, V_LOOK, b))
+	var want := clampf((vc - _vit) * 3.2, -brake, lerpf(A_GO, V_A_GO, b))
+	var jerk := lerpf(JERK, V_JERK, b)
+	_acc += clampf(want - _acc, -jerk * dt, jerk * dt)
 	_vit = maxf(0.0, _vit + _acc * dt)
 	# The reference waits for the craft: a follower that falls behind and keeps going cuts corners.
 	var lag := 0.0 if _ref_prev == Vector3.INF else _ref_prev.distance_to(_p)
 	var s0 := _s
+	if lag > 0.0:
+		# Only what is behind the reference or beside it counts: a craft ahead of it, counted as lag,
+		# held the reference back and the craft further ahead, 1.8 m at 9 m/s (dronetest --voltige),
+		# and let go of stunts there, the reference crawled to it at a tenth of its speed.
+		var h0 := _stencil(V, s0, 0.22)
+		var tg0 := ((path_at(V, s0 + h0)[0] as Vector3) - (path_at(V, s0 - h0)[0] as Vector3)).normalized()
+		var off := _ref_prev - _p
+		var along := off.dot(tg0)
+		lag = sqrt(maxf(along, 0.0) * maxf(along, 0.0) + (off - tg0 * along).length_squared())
 	_s = fposmod(_s + _vit * dt / (1.0 + maxf(0.0, lag - 0.08) / 0.2), float(V.L))
 	if _s < s0 - 1.0:
 		stats.laps += 1
@@ -371,22 +458,36 @@ func _fly(dt: float) -> void:
 	var v_ref := tg * _vit
 	var a_ref := path_accel(V, _s, _vit, _acc, 0.22)
 	_ref_prev = p_ref
-	var a := a_ref + (p_ref - _p) * KP + (v_ref - _v) * KD
+	var a := a_ref + (p_ref - _p) * lerpf(KP, V_KP, b) + (v_ref - _v) * lerpf(KD, V_KD, b)
 	if not reduced_motion:
 		a += air(_t, 0.42 if outside(_p) else 0.16)
 	# The bound is not cosmetic: it forbids what the thrust could not do, and so makes the gap to
 	# the planned path.
-	if a.length() > A_MAX:
-		a = a.normalized() * A_MAX
+	var a_max := lerpf(A_MAX, V_A_MAX, b)
+	if a.length() > a_max:
+		a = a.normalized() * a_max
 	_a = a
 	_v += a * dt
-	_p += _v * dt
+	if _rejoin:
+		# Taken back from the hand: kept in bounds until it is on the tour again; if it has not got
+		# there in REJOIN_MAX seconds, the view cuts to it on the tour.
+		_move_kept(dt)
+		_rejoin_t += dt
+		if (p_ref - _p).length() < 0.3:
+			_rejoin = false
+		elif _rejoin_t > REJOIN_MAX and not _busy:
+			_rejoin = false
+			stats.rejoin_cuts += 1
+			_cut(func() -> void: place_at(_s, _vit))
+	else:
+		_p += _v * dt
 	# The nose: free on a multirotor, so a camera drone turns it at a bounded rate, and not at all
 	# when stopped.
 	var vh := Vector2(_v.x, _v.z).length()
 	var w := 0.0
 	if vh > 0.12:
-		w = clampf(wrapf(atan2(-_v.x, -_v.z) - _yaw, -PI, PI) * YAW_K, -YAW_MAX, YAW_MAX)
+		var yaw_max := lerpf(YAW_MAX, V_YAW_MAX, b)
+		w = clampf(wrapf(atan2(-_v.x, -_v.z) - _yaw, -PI, PI) * lerpf(YAW_K, V_YAW_K, b), -yaw_max, yaw_max)
 	_yaw_v += (w - _yaw_v) * (1.0 - exp(-dt * 9.0))
 	_yaw += _yaw_v * dt
 	_attitude(a, dt)
@@ -400,14 +501,382 @@ func _attitude(a: Vector3, dt: float) -> void:
 	var right := Vector3(cos(_yaw), 0.0, -sin(_yaw))
 	var pitch_to := -atan2(up.dot(fwd), maxf(up.y, 0.05))
 	var roll_to := -asin(clampf(up.dot(right), -1.0, 1.0))
-	_pitch_v += (W_ATT * W_ATT * (pitch_to - _pitch) - 2.0 * Z_ATT * W_ATT * _pitch_v) * dt
+	var w_att := lerpf(W_ATT, V_W_ATT, _auth)
+	_pitch_v += (w_att * w_att * (pitch_to - _pitch) - 2.0 * Z_ATT * w_att * _pitch_v) * dt
 	_pitch += _pitch_v * dt
-	_roll_v += (W_ATT * W_ATT * (roll_to - _roll) - 2.0 * Z_ATT * W_ATT * _roll_v) * dt
+	_roll_v += (w_att * w_att * (roll_to - _roll) - 2.0 * Z_ATT * w_att * _roll_v) * dt
 	_roll += _roll_v * dt
+
+
+# --- By hand ----------------------------------------------------------------------------------
+
+## The sticks: W/S or the arrows forward and back, A/D sideways (by their place on the keyboard: Z/S and
+## Q/D on an AZERTY one), Space up, C or Ctrl down, Q/E or the arrows to turn; a gamepad's sticks and
+## triggers too. Forward, right, up, turn right; nothing on a touch screen yet.
+func _sticks() -> Vector4:
+	if manual_hold != Vector4.ZERO:
+		return manual_hold
+	if touch or _busy:
+		return Vector4.ZERO
+	var s := Vector4(_keys(KEY_W, KEY_S) + _keys(KEY_UP, KEY_DOWN), _keys(KEY_D, KEY_A),
+		_keys(KEY_SPACE, KEY_C) - float(Input.is_physical_key_pressed(KEY_CTRL)), _keys(KEY_E, KEY_Q) + _keys(KEY_RIGHT, KEY_LEFT))
+	for pad in Input.get_connected_joypads():
+		var dz := func(x: float) -> float: return 0.0 if absf(x) < 0.2 else (x - signf(x) * 0.2) / 0.8
+		s += Vector4(-dz.call(Input.get_joy_axis(pad, JOY_AXIS_LEFT_Y)), dz.call(Input.get_joy_axis(pad, JOY_AXIS_LEFT_X)),
+			Input.get_joy_axis(pad, JOY_AXIS_TRIGGER_RIGHT) - Input.get_joy_axis(pad, JOY_AXIS_TRIGGER_LEFT),
+			dz.call(Input.get_joy_axis(pad, JOY_AXIS_RIGHT_X)))
+	return s.clamp(-Vector4.ONE, Vector4.ONE)
+
+
+func _keys(plus: Key, minus: Key) -> float:
+	return float(Input.is_physical_key_pressed(plus)) - float(Input.is_physical_key_pressed(minus))
+
+
+## Who flies this frame: a stick held takes the craft; let go for M_LET_GO, the autopilot takes it back.
+func _hands(delta: float) -> void:
+	_stick = _sticks()
+	_auto_t = maxf(0.0, _auto_t - delta)
+	if _stick.length_squared() > 1e-4:
+		if not manual:
+			manual = true
+			_rejoin = false
+			_trick = ""
+			stats.takeovers += 1
+			_gather_obstacles()
+		_idle_hand = 0.0
+	elif manual:
+		_idle_hand += delta
+		if _idle_hand >= M_LET_GO:
+			_hand_back()
+
+
+## The autopilot takes back: from the tour's nearest place that the craft can fly to straight, its
+## reference starting at the craft's speed along the tour, and waiting while the craft comes.
+func _hand_back() -> void:
+	manual = false
+	_rejoin = true
+	_rejoin_t = 0.0
+	_auto_t = 2.5
+	stats.handovers += 1
+	_s = rejoin_at(_p)
+	var p_ref: Vector3 = path_at(_tour, _s)[0]
+	var tg := ((path_at(_tour, _s + 0.3)[0] as Vector3) - p_ref).normalized()
+	_vit = clampf(_v.dot(tg), 0.0, CRUISE)
+	_acc = 0.0
+	_ref_prev = p_ref
+	_trick_gap = TRICK_GAP
+
+
+## The tour's place nearest p that a straight flight from p reaches without meeting anything; the
+## nearest at all if none does.
+func rejoin_at(p: Vector3) -> float:
+	var P: PackedVector3Array = _tour.P
+	var S: PackedFloat32Array = _tour.S
+	var order: Array = []
+	for i in P.size():
+		order.append([P[i].distance_squared_to(p), i])
+	order.sort_custom(func(a: Array, b: Array) -> bool: return float(a[0]) < float(b[0]))
+	for k in mini(order.size(), 60):
+		var i: int = order[k][1]
+		if _clear(p, P[i]):
+			return S[i]
+	return S[int(order[0][1])] if not order.is_empty() else 0.0
+
+
+func _clear(a: Vector3, b: Vector3) -> bool:
+	var n := maxi(1, ceili(a.distance_to(b) / 0.3))
+	var q := a
+	for k in n:
+		var to := a.lerp(b, float(k + 1) / n)
+		if keep_in(q, to).distance_to(to) > 0.01:
+			return false
+		q = to
+	return true
+
+
+## One step by hand, dt seconds: the speed asked in the nose's frame, reached at a bounded tilt, kept in
+## bounds; the nose turned by the stick.
+func _fly_manual(dt: float) -> void:
+	var turbo := lerpf(1.0, M_TURBO, _vb)
+	var fwd := Vector3(-sin(_yaw), 0.0, -cos(_yaw))
+	var right := Vector3(cos(_yaw), 0.0, -sin(_yaw))
+	var want := (fwd * _stick.x * M_FWD + right * _stick.y * M_SIDE) * turbo + Vector3.UP * _stick.z * M_UP * lerpf(1.0, 2.0, _vb)
+	var a := (want - _v) * M_RESP * lerpf(1.0, 2.5, _vb)
+	if not reduced_motion:
+		a += air(_t, 0.42 if outside(_p) else 0.16)
+	var a_max := lerpf(A_MAX, V_A_MAX, _vb)
+	if a.length() > a_max:
+		a = a.normalized() * a_max
+	_a = a
+	_v += a * dt
+	_move_kept(dt)
+	_yaw_v += (-_stick.w * M_YAW * lerpf(1.0, 2.2, _vb) - _yaw_v) * (1.0 - exp(-dt * 9.0))
+	_yaw += _yaw_v * dt
+	_vit = _v.length()
+	_acc = 0.0
+	_attitude(a, dt)
+	stats.manual_frames += 1
+
+
+## The craft moved by its velocity, kept in bounds: what of its velocity ran into a bound is lost.
+func _move_kept(dt: float) -> void:
+	var to := _p + _v * dt
+	var kept := keep_in(_p, to)
+	var push := kept - to
+	if push.length() > 1e-5:
+		var nrm := push.normalized()
+		var vn := _v.dot(nrm)
+		if vn < 0.0:
+			_v -= nrm * vn
+		stats.kept += 1
+	_p = kept
+
+
+func _wing() -> Node:
+	var wing := _obs.get_node_or_null("LibraryWing") if _obs != null else null
+	return wing if wing != null and wing.has_method("fly") else null
+
+
+func _gardens() -> Node:
+	var g := _obs.get_node_or_null("PalaceGardens") if _obs != null else null
+	return g if g != null and g.has_method("ground_at") else null
+
+
+func _hall(key: String, fallback: float) -> float:
+	var v: Variant = _obs.get(key) if _obs != null else null
+	return float(v) if v != null else fallback
+
+
+## The hall's obstacles as boxes, as the walking body finds them (walk_physics.gd _gather, _boxes): the
+## piers, the pedestals, the door leaves, and the steel box with its roof's statues.
+func _gather_obstacles() -> void:
+	_obstacles.clear()
+	if _obs == null:
+		return
+	for n in _obs.find_children("*", "MeshInstance3D", true, false):
+		var m := n as MeshInstance3D
+		var id := String(m.name)
+		if m.mesh == null or not (id == "Pedestal" or id == "DoorLeaf" or (id.begins_with("Pier") and id.trim_prefix("Pier").is_valid_int())
+				or (id.begins_with("Plinth") and id.trim_prefix("Plinth").is_valid_int())):
+			continue
+		var xf := m.global_transform
+		var bb := m.mesh.get_aabb()
+		var c := xf * bb.get_center()
+		var ax := xf.basis.x * bb.size.x * 0.5
+		var az := xf.basis.z * bb.size.z * 0.5
+		var h := Vector2(Vector2(ax.x, ax.z).length(), Vector2(az.x, az.z).length())
+		if h.x > 1e-4 and h.y > 1e-4:
+			var hy := absf((xf.basis.y * bb.size.y * 0.5).y)
+			_obstacles.append([Vector2(c.x, c.z), Vector2(ax.x, ax.z) / h.x, Vector2(az.x, az.z) / h.y, h, c.y - hy, c.y + hy])
+	var steel := _obs.get_node_or_null("SteelCube") as Node3D
+	if steel != null:
+		var size: Vector3 = steel.get("box_size")
+		var o := steel.global_position
+		_obstacles.append([Vector2(o.x, o.z), Vector2.RIGHT, Vector2.DOWN, Vector2(size.x, size.z) * 0.5 + Vector2(0.2, 0.2), o.y - 0.1, o.y + size.y + 1.2])
+	_spring = _hall("column_height", 19.0) - 2.9
+	_orrery.clear()
+	for pivot in _obs.find_children("Orbit*", "Node3D", true, false):
+		var body := (pivot as Node3D).get_node_or_null("Body") as MeshInstance3D
+		if body != null:
+			var sphere := body.mesh as SphereMesh
+			_orrery.append([(pivot as Node3D).global_position, (pivot as Node3D).global_basis.y.normalized(), body.position.length(),
+				sphere.radius if sphere != null else 0.3])
+	_lift_at = Vector2.INF
+	var lift := _obs.get_node_or_null("Lift")
+	if lift != null and lift.get_script() != null:
+		var c: Dictionary = (lift.get_script() as Script).get_script_constant_map()
+		var a := TAU * (float(c.get("LIFT_BAY", 3)) + 0.5) / _hall("bay_count", 16.0)
+		_lift_at = Vector2(cos(a), sin(a)) * float(c.get("AXIS_R", 16.1))
+
+
+## Where p is: "hall" inside the drum, its oculus included; "wing" in a library wing; "out" outside.
+func zone_of(p: Vector3) -> String:
+	var rf := Vector2(p.x, p.z).length()
+	if rf <= SHELF_FRONT + 0.05 and p.y < _hall("_ceiling_y", 20.8) + 4.1:
+		return "hall"
+	var wing := _wing()
+	if wing != null:
+		var q: Vector3 = wing.call("fly", p, 0.05)
+		if q != Vector3.INF and q.distance_to(p) < 0.05:
+			return "wing"
+	return "out"
+
+
+## Where the craft may go by hand, from `from` towards p, a body of M_BODY: in the hall within the
+## shelves' fronts, over the floor and under the ceiling, off the galleries' walkways and rails, the
+## piers and the steel box, and up through the oculus; in a library wing within its walls and vaults
+## (library_wing.gd fly), entered and left through its portal; outside over the hall's roof and the
+## gardens' ground, off its facade and the gardens' solids, back in through the oculus only.
+func keep_in(from: Vector3, p: Vector3, r := M_BODY) -> Vector3:
+	var ocu := _hall("oculus_radius", 5.0)
+	var ceil_y := _hall("_ceiling_y", 20.8)
+	var drum_top := ceil_y + 4.1
+	var outer := _hall("outer_radius", 18.0)
+	var wing := _wing()
+	var where := zone_of(from)
+	var flat := Vector2(p.x, p.z)
+	var rf := flat.length()
+	var y := p.y
+	if where == "wing":
+		var q: Vector3 = wing.call("fly", p, r) if wing != null else Vector3.INF
+		if q != Vector3.INF:
+			return Vector3(q.x, maxf(q.y, r + 0.05), q.z)
+		return p if rf <= SHELF_FRONT - r else from  # out through its portal only
+	if where == "hall":
+		if rf > SHELF_FRONT - r:
+			var q: Vector3 = wing.call("fly", p, r) if wing != null else Vector3.INF
+			if q != Vector3.INF and y < ceil_y:
+				return q  # into a wing, through its portal
+			flat = flat.normalized() * (SHELF_FRONT - r)
+			rf = SHELF_FRONT - r
+		y = maxf(y, r + 0.05)
+		if rf > ocu - r:
+			y = minf(y, ceil_y - r)
+		var g_in := _hall("colonnade_radius", 13.0) + 0.78
+		var levels: Variant = _obs.get("gallery_levels") if _obs != null else null
+		var rf0 := Vector2(from.x, from.z).length()
+		if levels is PackedFloat32Array:
+			for g: float in (levels as PackedFloat32Array):
+				# The walkway from g_in - 0.3 to the shelves, its slab and gilded edge 0.62 m deep: out by the
+				# least way.
+				if rf > g_in - 0.3 - r and y > g - 0.62 - r and y < g + r:
+					var up := g + r - y
+					var down := y - (g - 0.62 - r)
+					var inward := rf - (g_in - 0.3 - r)
+					if inward < up and inward < down:
+						flat = flat.normalized() * (g_in - 0.3 - r)
+						rf = g_in - 0.3 - r
+					elif up <= down:
+						y = g + r
+					else:
+						y = g - 0.62 - r
+				# The rail, 1.07 m high on its edge: a thin wall, crossed over its top.
+				if y > g - 0.35 and y < g + 1.07 + r and absf(rf - g_in) < r + 0.03:
+					rf = g_in - r - 0.03 if rf0 < g_in else g_in + r + 0.03
+					flat = flat.normalized() * rf
+		# The colonnade's capitals, arches and entablature: a ring 2 m thick from under the capitals up
+		# to the ceiling, kept to the side the craft came from, or passed under.
+		var col := _hall("colonnade_radius", 13.0)
+		if y > _spring - 0.75 - r and absf(rf - col) < 1.0 + r:
+			if y - (_spring - 0.75 - r) < 1.0 + r - absf(rf - col):
+				y = _spring - 0.75 - r
+			else:
+				rf = col + (1.0 + r) * (1.0 if rf0 >= col else -1.0)
+				flat = flat.normalized() * rf
+		# The orrery in the oculus: each orbit's ring, with its body going round it, kept clear of.
+		for o: Array in _orrery:
+			var at := Vector3(flat.x, y, flat.y)
+			var ax: Vector3 = o[1]
+			var rel: Vector3 = at - (o[0] as Vector3)
+			var q := rel - ax * rel.dot(ax)
+			var on := q.normalized() if q.length() > 1e-4 else ax.cross(Vector3.RIGHT if absf(ax.x) < 0.9 else Vector3.UP).normalized()
+			var ring: Vector3 = (o[0] as Vector3) + on * float(o[2])
+			var keep := float(o[3]) + 0.05 + r
+			var off := at - ring
+			if off.length() < keep:
+				at = ring + (off.normalized() if off.length() > 1e-4 else ax) * keep
+				flat = Vector2(at.x, at.z)
+				y = at.y
+		# The lift's shaft, floor to ceiling.
+		if _lift_at != Vector2.INF and flat.distance_to(_lift_at) < 1.25 + r:
+			var away := flat - _lift_at
+			flat = _lift_at + (away.normalized() if away.length() > 1e-4 else Vector2.RIGHT) * (1.25 + r)
+			if flat.length() > SHELF_FRONT - r:
+				flat = flat.normalized() * (SHELF_FRONT - r)
+		for b: Array in _obstacles:
+			var d: Vector2 = flat - (b[0] as Vector2)
+			var u: Vector2 = b[1]
+			var v: Vector2 = b[2]
+			var h: Vector2 = b[3]
+			var lu := d.dot(u)
+			var lv := d.dot(v)
+			if absf(lu) >= h.x + r or absf(lv) >= h.y + r or y <= float(b[4]) - r or y >= float(b[5]) + r:
+				continue
+			var outs := [h.x + r - absf(lu), h.y + r - absf(lv), float(b[5]) + r - y]
+			var k := outs.find(outs.min())
+			if k == 0:
+				flat += u * signf(lu) * float(outs[0])
+			elif k == 1:
+				flat += v * signf(lv) * float(outs[1])
+			else:
+				y = float(b[5]) + r
+		return Vector3(flat.x, y, flat.y)
+	# Outside: down into the hall through the oculus only; elsewhere the hall's mass, a solid of turning
+	# from its facade (outer + 0.65) up to the roof's lead (21.75 m at the oculus' drum, 21.15 at the eave,
+	# 19.3 m out) and the drum round the oculus up to its top.
+	if wing != null:
+		var q: Vector3 = wing.call("fly", p, 0.05)
+		if q != Vector3.INF and q.distance_to(p) < 0.05:
+			return from  # not into a wing through its roof or walls
+	if rf < 19.3 + r and not (rf < ocu - r):
+		# The drum round the oculus with its cornice, then the lead.
+		var top := drum_top + 0.6 if rf < ocu + 1.2 + r else lerpf(21.75, 21.15, clampf((rf - ocu - 1.2) / maxf(19.3 - ocu - 1.2, 0.1), 0.0, 1.0))
+		var face := outer + 0.65
+		var dir := flat.normalized() if rf > 1e-4 else Vector2.RIGHT
+		if rf < face + r:
+			# The facade and the roof: up over it, or off the facade, by the least.
+			if y < top + r:
+				if face + r - rf < top + r - y:
+					flat = dir * (face + r)
+				else:
+					y = top + r
+		elif y < top + r and y > top - 0.35 - r:
+			# The eave's overhang, 0.35 m deep: over it, under it, or off its edge.
+			var up := top + r - y
+			var down := y - (top - 0.35 - r)
+			var side := 19.3 + r - rf
+			if side < up and side < down:
+				flat = dir * (19.3 + r)
+			elif up <= down:
+				y = top + r
+			else:
+				y = top - 0.35 - r
+	var gardens := _gardens()
+	if gardens != null and rf > outer:
+		var g0 := float(gardens.call("ground_at", flat))
+		y = maxf(y, g0 + r + 0.05)
+		if gardens.has_method("push_out") and y < g0 + 3.0:
+			flat = gardens.call("push_out", flat, r, g0)
+	flat = flat.limit_length(900.0)
+	return Vector3(flat.x, minf(y, 160.0), flat.y)
 
 
 func _craft_basis() -> Basis:
 	return Basis(Vector3.UP, _yaw) * Basis(Vector3.RIGHT, _pitch) * Basis(Vector3.BACK, _roll)
+
+
+## The craft as shown: its attitude, turned through a roll or a flip while one runs.
+func _shown_basis() -> Basis:
+	if _trick == "":
+		return _craft_basis()
+	var turn := TAU * smoothstep(0.0, 1.0, _trick_t / TRICK_TIME) * _trick_dir
+	return _craft_basis() * Basis(Vector3.BACK if _trick == "roll" else Vector3.RIGHT, turn)
+
+
+## A roll or a flip, on a straight only: none starts while a bend sharper than TRICK_CLEAR lies within
+## the trick's flight and a little more. Only the craft as shown turns; its flight is the planned one.
+func _tricks(dt: float) -> void:
+	_trick_gap = maxf(0.0, _trick_gap - dt)
+	if _trick != "":
+		_trick_t += dt
+		if _trick_t >= TRICK_TIME:
+			_trick = ""
+		return
+	var sp := _v.length()
+	if _vb < 0.9 or _trick_gap > 0.0 or sp < 4.0 or manual or _rejoin:
+		return
+	var ahead := sp * (TRICK_TIME + 0.3)
+	var d := 0.0
+	while d <= ahead:
+		if curvature(_tour, _s + d) > TRICK_CLEAR:
+			return
+		d += 0.5
+	var n := int(stats.tricks)
+	_trick = "flip" if n % 3 == 2 else "roll"
+	_trick_dir = 1.0 if n % 2 == 0 else -1.0
+	_trick_t = 0.0
+	_trick_gap = TRICK_GAP + 0.4 * float(n % 3)
+	stats.tricks += 1
 
 
 ## The view: behind the craft and late on it, or on board on a gimbal.
@@ -420,16 +889,25 @@ func _aim(dt: float) -> void:
 		var slope := atan2(_v.y, maxf(vh, 0.01))
 		_site += (slope * 0.55 - _site) * (1.0 - exp(-dt * 2.2))
 		var b := Basis(Vector3.UP, _yaw) * Basis(Vector3.RIGHT, _site)
+		# Stunts: an FPV camera, fixed to the frame and tilted up, rolls and flips with the craft.
+		if _vb > 0.0 and not reduced_motion:
+			var fpv := _shown_basis() * Basis(Vector3.RIGHT, V_UPTILT)
+			b = Basis(b.get_rotation_quaternion().slerp(fpv.get_rotation_quaternion(), _vb))
 		_cam.global_transform = Transform3D(b, _p + _craft_basis() * Vector3(0.0, 0.011, -0.03))
 		return
 	# The chase: the eye aims at a place behind the craft's velocity, not its plan, and reaches it
-	# late; that lag lets the craft slide across the frame in a bend.
-	var along := _v.normalized() if vh > 0.08 or absf(_v.y) > 0.08 else Vector3(-sin(_yaw), 0.0, -cos(_yaw))
+	# late; that lag lets the craft slide across the frame in a bend. Faster behind the racer, or it
+	# would trail metres behind.
+	# By hand, behind the nose: sliding sideways or backing off, the view stays the pilot's.
+	var nose := Vector3(-sin(_yaw), 0.0, -cos(_yaw))
+	var along := _v.normalized() if not manual and (vh > 0.08 or absf(_v.y) > 0.08) else nose
+	if manual and absf(_v.y) > 0.3:
+		along = (nose + Vector3(0.0, _v.y * 0.15, 0.0)).normalized()
 	var back := Vector3(-along.x, -along.y * 0.3, -along.z).normalized()
-	var to := _p + back * CHASE_BACK + Vector3(0.0, CHASE_UP, 0.0)
+	var to := _p + back * lerpf(CHASE_BACK, 0.6, _vb) + Vector3(0.0, CHASE_UP, 0.0)
 	if _eye == Vector3.INF:
 		_eye = to
-	_eye = _eye.lerp(to, 1.0 - exp(-dt * 4.2))
+	_eye = _eye.lerp(to, 1.0 - exp(-dt * lerpf(4.2, 11.0, _auth)))
 	var look := _p + along * 0.22 - _eye
 	var up := Vector3.UP if absf(look.normalized().y) < 0.97 else Vector3(-sin(_yaw), 0.0, -cos(_yaw))
 	_cam.global_transform = Transform3D(Basis.looking_at(look, up), _eye)
@@ -455,6 +933,10 @@ func place_at(s: float, speed := 1.0) -> void:
 	_roll_v = 0.0
 	_site = 0.0
 	_eye = Vector3.INF
+	_trick = ""
+	_trick_gap = 0.0
+	manual = false
+	_rejoin = false
 
 
 ## A frame of flight and view, dt seconds, in steps the follower stays stable at.
@@ -462,9 +944,13 @@ func step(dt: float) -> void:
 	var n := maxi(1, ceili(dt / SUB))
 	for i in n:
 		_t += dt / n
-		_fly(dt / n)
+		if manual:
+			_fly_manual(dt / n)
+		else:
+			_fly(dt / n)
+	_tricks(dt)
 	_aim(dt)
-	_craft.global_transform = Transform3D(_craft_basis(), _p)
+	_craft.global_transform = Transform3D(_shown_basis(), _p)
 	stats.frames += 1
 	stats.max_speed = maxf(float(stats.max_speed), _v.length())
 	var tilt := rad_to_deg(acos(clampf((_craft_basis() * Vector3.UP).y, -1.0, 1.0)))
@@ -510,6 +996,11 @@ func land() -> void:
 
 func _landed() -> void:
 	_phase = "idle"
+	voltige = false
+	_vb = 0.0
+	_trick = ""
+	manual = false
+	_rejoin = false
 	_craft.visible = false
 	_camera.make_current()
 	_give_back()
@@ -619,9 +1110,14 @@ func _process(delta: float) -> void:
 	if _phase == "rise":
 		_rise(delta)
 	elif _phase == "fly":
+		# Stunts while Shift is held (a key only: a touch screen's stick sends Shift to walk faster).
+		voltige = voltige_hold or (not touch and not _busy and Input.is_physical_key_pressed(KEY_SHIFT))
+		_vb = move_toward(_vb, 1.0 if voltige else 0.0, delta / BLEND)
+		_hands(delta)
 		step(delta)
-		# Behind it, a narrower field than the visitor's, so that nine centimetres read at 40.
-		_cam.fov = minf(_camera.fov, CHASE_FOV) if view == "chase" else _camera.fov
+		# Behind it, a narrower field than the visitor's, so that nine centimetres read at 40; wider
+		# behind the racer, for the speed.
+		_cam.fov = minf(_camera.fov, lerpf(CHASE_FOV, V_CHASE_FOV, _vb)) if view == "chase" else _camera.fov
 		_cam.near = _camera.near
 		_cam.far = _camera.far
 	_spin = move_toward(_spin, 1.0 if _phase != "idle" else 0.0, delta / RISE)
@@ -688,7 +1184,7 @@ func _sound() -> void:
 	# stays even in flight (the author, 2026-10-12).
 	_hum_loop.call("run", _spin > 0.01,
 		clampf((0.35 + 0.65 * _spin) * (0.97 + 0.06 * (thrust - 1.0) * 4.0 + 0.025 * _vit / CRUISE), 0.3, 1.3),
-		lerpf(HUSH, -21.0, minf(1.0, _spin * 1.5)))
+		lerpf(HUSH, -21.0 + 6.0 * _vb, minf(1.0, _spin * 1.5)))
 
 
 # --- On screen --------------------------------------------------------------------------------
@@ -746,10 +1242,17 @@ func _draw_ui() -> void:
 	# Top left: what it is and which view; bottom: the buttons, and the keys on a computer.
 	var fs := roundi(clampf(u * 0.03, 13.0, 26.0))
 	var caption := _t_("title") + "  ·  " + _t_(view)
+	if manual:
+		caption += "  ·  " + _t_("manual")
+	elif _auto_t > 0.0:
+		caption += "  ·  " + _t_("auto")
+	if _vb > 0.0:
+		caption += "  ·  " + _t_("voltige") + "  %d km/h" % roundi(_v.length() * 3.6)
 	var cw := font.get_string_size(caption, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
 	var m := maxf(16.0, u * 0.025)
 	_ui.draw_rect(Rect2(m, m, cw + fs * 1.4, fs * 2.0), lacquer)
-	_ui.draw_string(font, Vector2(m + fs * 0.7, m + fs * 1.35), caption, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, gilt)
+	_ui.draw_string(font, Vector2(m + fs * 0.7, m + fs * 1.35), caption, HORIZONTAL_ALIGNMENT_LEFT, -1, fs,
+		gilt.lerp(Color(1.0, 0.42, 0.2), _vb))
 	var b := _buttons()
 	var bfs: int = b.fs
 	var mouse := _ui.get_viewport().get_mouse_position()
@@ -762,11 +1265,17 @@ func _draw_ui() -> void:
 		var w := font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, bfs).x
 		_ui.draw_string(font, Vector2(r.get_center().x - w * 0.5, r.get_center().y + bfs * 0.35), label, HORIZONTAL_ALIGNMENT_LEFT, -1, bfs, Color(0.97, 0.94, 0.87))
 	if not touch:
-		var keys := _t_("keys")
-		var kw := font.get_string_size(keys, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
+		# The sticks' keys over the others: whoever holds the sticks sees how to let go.
 		var top := (b.view as Rect2).position.y - fs * 1.9
-		_ui.draw_rect(Rect2(size.x * 0.5 - kw * 0.5 - fs * 0.6, top - fs * 0.2, kw + fs * 1.2, fs * 1.6), Color(lacquer, 0.6))
-		_ui.draw_string(font, Vector2(size.x * 0.5 - kw * 0.5, top + fs * 1.0), keys, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color(0.88, 0.85, 0.78))
+		for keys: String in [_t_("keys"), _t_("hand")]:
+			var kfs := fs
+			var kw := font.get_string_size(keys, HORIZONTAL_ALIGNMENT_LEFT, -1, kfs).x
+			if kw > size.x - 2.0 * m:
+				kfs = maxi(10, floori(kfs * (size.x - 2.0 * m) / kw))
+				kw = font.get_string_size(keys, HORIZONTAL_ALIGNMENT_LEFT, -1, kfs).x
+			_ui.draw_rect(Rect2(size.x * 0.5 - kw * 0.5 - kfs * 0.6, top - kfs * 0.2, kw + kfs * 1.2, kfs * 1.6), Color(lacquer, 0.6))
+			_ui.draw_string(font, Vector2(size.x * 0.5 - kw * 0.5, top + kfs * 1.0), keys, HORIZONTAL_ALIGNMENT_LEFT, -1, kfs, Color(0.88, 0.85, 0.78))
+			top -= fs * 1.75
 
 
 # --- The model and its sound ------------------------------------------------------------------

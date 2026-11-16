@@ -1,0 +1,190 @@
+{
+  "checked_at_utc": "2026-10-23T00:27:32.863615+00:00",
+  "base_learn_commit": "2604a3d889e13c04de77efdd3e07b6575c432b3a",
+  "source_ga_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "source_ix_commit": "bd1336b7c4045e427dcdbe80b102790e45da5ce1",
+  "scope": "Three body-pole, paired-transfer and phase-identity courses with authored mathematical examples and pinned source/test interpretation. No new Rust/C# engine, audio capture, ComfyUI workflow, physical body calibration, listener trial, runnable lab or production adapter.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "calculation_checks": {
+    "independent_grouped_checks": 28,
+    "passed": 28,
+    "failed": 0,
+    "audit_history": [
+      {
+        "event": "prior_staging_path_report",
+        "status": "invalidated",
+        "resolution": "seven declared temporary source files were directly read and SHA256-verified"
+      },
+      {
+        "event": "ambiguous_true_gain_ratio",
+        "status": "resolved",
+        "resolution": "bound to between_trial_complex_transfer_ratio, independently verified as 1+0i"
+      }
+    ],
+    "public_source_test_files": 7,
+    "actual_primary_reference_bodies": 5,
+    "isolated_body_sections": 5,
+    "complex_bank_frequency_rows": 10,
+    "finite_impulse_samples_per_section": 2048,
+    "two_tap_DFT_length": 8,
+    "integer_circular_shift_controls": 8,
+    "paired_periodic_trials": 2,
+    "finite_linear_convolution_samples": 9,
+    "truncated_record_samples": 8,
+    "weak_excitation_control": true,
+    "unexcited_ratio": null,
+    "real_arithmetic_is_not_f32_runtime": true,
+    "physical_calibration": null,
+    "new_audio_capture": null,
+    "listener_trial": null
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 3.831597599986708,
+    "log": "C:\\tmp\\streeling-filter-phase-tests-20261022.log",
+    "log_sha256": "024429f6918ae089c31e50705e44a0dd7cc971c7307f5157250713ce14a2c3db",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 5.983297200000379,
+    "log": "C:\\tmp\\streeling-filter-phase-sync-20261022.log",
+    "log_sha256": "5f34b0d164299574348d726cda2f1bffca8a9cd7491953260746061c30a21cab",
+    "idempotent_checked_files": 725
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 157.52458810000098,
+    "log": "C:\\tmp\\streeling-filter-phase-build-20261022.log",
+    "log_sha256": "9c5c01f7200629ff21331b800c6c7d3773a7add1b9d0031b5f38a688eddae287",
+    "pages": 1921,
+    "dependency_install": "Existing node_modules junction; no install.",
+    "warnings": "Existing highlighting fallback and empty i18n/404 warnings retained in complete log."
+  },
+  "rendered_articles": {
+    "pages": 21,
+    "links": 423,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "data_verdict": "pass",
+    "data_receipt_sha256": "4d02c271d8d68effd55d852fabeb08da8892359f667ebb748729e1d2952977e2",
+    "content_verdict": "pass",
+    "content_receipt_sha256": "cdf897bf3ef914a3dfd9c5807c38c9ffec983a94218d2d0b57b1a5c8679f5858",
+    "exercise_pairs_checked": 45,
+    "learner_criteria_checked": 15,
+    "open_course_findings": [],
+    "content_observations": [
+      {
+        "id": "isolated-model-boundary",
+        "status": "observed-preserved",
+        "finding": "The 110/240 isolated DC maxima and complex dry gains are authored ideal binary64 calculations. Source uses Rust f32 and has downstream reverb/nonlinear output. Neither a full-bank/global measured peak nor physical bridge calibration, retuning or realism improvement follows."
+      },
+      {
+        "id": "excitation-and-record-boundaries",
+        "status": "observed-preserved",
+        "finding": "Analytically empty bins retain an undefined transfer ratio despite floating residues. Weak excitation and cropped finite convolution invalidate naive identification under the displayed conditions; no universal cutoff or arbitrary transient-STFT ratio is established."
+      },
+      {
+        "id": "limited-phase-counterexample",
+        "status": "observed-preserved",
+        "finding": "Unequal reversed two taps share all-frequency magnitudes and fail all eight integer circular-shift comparisons. This is not a universal phase-retrieval impossibility theorem. Centroid difference supplies no pure-delay, group-delay, audibility or preference result."
+      },
+      {
+        "id": "input-domain-boundary",
+        "status": "observed-preserved",
+        "finding": "SetClass transforms a canonical spectral prime-form vector; keeping its phase cannot restore removed original transposition. The separate actual-chroma alignment path and audio time-domain transforms have distinct inputs and invariances."
+      },
+      {
+        "id": "planning-chronology",
+        "status": "observed-preserved",
+        "finding": "Production plan explicitly records that it followed initial source reading, calculations and English drafting. It is not an advance preregistration."
+      }
+    ],
+    "content_fix_history": [
+      {
+        "id": "prior_staging_path_report",
+        "origin": "code/streeling/evidence/filter-phase-2026-10-22/data-audit.json",
+        "status": "resolved",
+        "prior_audit_status": "invalidated",
+        "resolution": "seven declared temporary source files were directly read and SHA256-verified"
+      },
+      {
+        "id": "ambiguous_true_gain_ratio",
+        "origin": "code/streeling/evidence/filter-phase-2026-10-22/data-audit.json",
+        "status": "resolved",
+        "prior_audit_status": "resolved",
+        "resolution": "bound to between_trial_complex_transfer_ratio, independently verified as 1+0i"
+      },
+      {
+        "id": "spanish-addition-signs",
+        "origin": "independent locale semantic review",
+        "status": "resolved",
+        "finding": "GAS007 Spanish could describe denominator coefficient values as all positive. Translator changed signos positivos to signos de suma, preserving algebraic plus signs without restricting coefficient values. Final source directly rechecked."
+      },
+      {
+        "id": "task-numeric-elicitation",
+        "origin": "independent task/rubric alignment review",
+        "status": "resolved",
+        "finding": "Standalone GAS007 items2/3 and AUD008 item3 previously described the topic without explicitly requesting rubric numerical subresults. Root added the 110/240 endpoint and first-section gains, complex dry versus magnitude-sum comparison, and weak-excitation complex calculation. GAS007 embedded task and both translations now mirror the expanded elicitation; directly rechecked."
+      }
+    ],
+    "scope": "Independent AI source/theory/model/content checks; not human approval.",
+    "human_technical": null,
+    "musician": null,
+    "fluent_language": null,
+    "learner": null,
+    "engine_run": null,
+    "physical_body_measurement": null,
+    "paired_filter_capture": null,
+    "listening_trial": null
+  },
+  "code_review_pipeline": "Documentation/fixed-data-only deliverable with temporary verification wrappers; no new production/lab program emitted and no code-shipping review invoked.",
+  "manual_host_scan": "Pinned Rust body recurrence, constructor and pre-reverb mix inspected; complex versus scalar IX projection and canonical versus actual-chroma GA input boundaries retained. Analytic isolated peaks are not full-bank or physical body maxima. Sum complex sections before magnitude. Steady LTI two-tone response is distinct from natural startup ringing and downstream clipping. Paired periodic filtering is distinct from cropped finite convolution; unexcited bins remain unmeasured and weak excitation amplifies noise. Equal magnitudes do not identify unequal reversed impulses; integer shifts, centroids and inverse-phase assumptions are explicit. Do not infer audibility or universal overlapping-STFT impossibility. Production plan was recorded after preliminary calculations and does not claim preregistration.",
+  "source_inventory": {
+    "core_english_modules": 216,
+    "target": 525,
+    "original_departments": 21,
+    "remaining_core_source_gaps": 309,
+    "locale_counts": {
+      "en": 217,
+      "fr": 217,
+      "es": 217
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint/typecheck scripts configured; existing generator tests and Astro build used."
+}
