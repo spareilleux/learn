@@ -19,6 +19,7 @@ sidebar:
 - [ ] Sessions Codex : chaque capture qui a besoin du modèle (limite d'utilisation jusqu'au 2026-09-19)
 - [ ] Leçon 8 : travailler sur GuitarAlchemist/ga
 - [x] Un format d'observation pour les exécutions de modèles, de skills et de sous-agents, et sa première observation (2026-09-26)
+- [x] Trois observations rétrospectives consignées : les dépassements de délai des hooks (2026-09-26), une reprise après un plantage de wmux et la fusion anticipée de GA #740 (2026-09-27)
 
 ## QA
 
@@ -194,6 +195,82 @@ Cette comparaison est *proposée, pas réalisée*.
 | Jetons et coût | *Inconnu*. Aucune facture ni aucun reçu d'usage n'a été lu. Aucune API payante n'a été appelée |
 | Limites | Une session, un jour, un coordinateur ; ce n'est l'échantillon de rien |
 
+## 2026-09-26 — Trois hooks en dépassement de délai, et un hôte lent
+
+*Observation rétrospective : aucune hypothèse n'a été écrite avant ces mesures.* Les preuves sont locales : un harnais et ses journaux, conservés dans le dossier de passation du coordinateur, pas dans ce dépôt.
+
+**Le symptôme.** À chaque prompt, trois hooks `UserPromptSubmit` dépassaient leur délai, et leur sortie était jetée. Tous trois appartiennent à un même plugin tiers, [claude-octopus](https://github.com/nyldn/claude-octopus) 9.56.1, installé au commit [`cb2677b`](https://github.com/nyldn/claude-octopus/tree/cb2677b2bd442bcc501489cc6110ab54fb14e701). Son [`hooks.json`](https://github.com/nyldn/claude-octopus/blob/cb2677b2bd442bcc501489cc6110ab54fb14e701/hooks/hooks.json#L300-L325) donne 5 s à deux d'entre eux et 8 s au troisième. Les scripts ont été lus avant toute exécution :
+- ce sont des injecteurs de contexte consultatifs, pas des contrôles de sécurité ;
+- chacun commence par lire stdin avec `timeout 3 cat` ([`done-criteria.sh`, ligne 26](https://github.com/nyldn/claude-octopus/blob/cb2677b2bd442bcc501489cc6110ab54fb14e701/hooks/done-criteria.sh#L26)) ;
+- celui qui concerne GitHub n'agit que dans le propre dépôt du plugin.
+
+**La mesure.** Un harnais a lancé chaque hook hors de Claude Code :
+- `env -i`, un `HOME` temporaire vide, un prompt synthétique, les seuils d'origine ;
+- une exécution chacun, le 2026-09-26 vers 13 h 00 EDT, dans Git Bash sous Windows 11 ;
+- aucun appel réseau et aucun fournisseur lancé, et le `HOME` temporaire était toujours vide ensuite.
+
+| Commande | Sortie | Durée réelle |
+|---|---|---|
+| `bash -c true` | 0 | 2 829 ms |
+| `bash -lc true` | 0 | 25 457 ms |
+| `timeout 3 cat </dev/null` | 0 | 7 031 ms |
+| `python3 -c pass` | 0 | 10 357 ms |
+| `python -c pass` | 0 | 1 539 ms |
+| `done-criteria.sh` (5 s) | 124, délai dépassé | 9 546 ms, 0 octet en sortie |
+| `user-prompt-submit.sh` (5 s) | 124, délai dépassé | 11 690 ms, 0 octet en sortie |
+| `github-work-queue-watch.sh` (8 s) | 124, délai dépassé | 15 298 ms, 0 octet en sortie |
+
+**Ce que cela montre.**
+- Le symptôme se reproduit hors de Claude Code.
+- Ce n'est pas la logique des hooks qui consomme le budget. Le chemin le moins coûteux dans `done-criteria.sh` est un `bash` neuf, puis `timeout 3 cat` sur une entrée déjà arrivée à sa fin. Ces deux étapes seules coûtent 2,8 s + 7,0 s, plus que les 5 s entières.
+- Sur cet hôte, à ce moment-là, *lancer n'importe quel processus* prenait des secondes.
+
+**Ce que cela ne montre pas.** La cause est *très probablement* une latence de création de processus sur tout l'hôte, et elle n'est pas isolée. Les candidats sont :
+- la charge : environ 40 processus `bash`, 65 `node` et 13 `claude` tournaient ;
+- l'analyse antivirus de chaque lancement ;
+- un profil de connexion coûteux, si les hooks sont lancés par un shell de connexion. Je n'ai pas vérifié quel mode de shell Claude Code utilise.
+
+Les limites : des mesures uniques, aucune comparaison à un moment calme, et les trois hooks lancés l'un après l'autre alors que Claude Code les lance ensemble. L'écart entre `python3` et `python` repose sur une mesure chacun, sous une charge variable. Dans les termes du [format d'observation ci-dessus](#2026-09-26--un-format-dobservation-pour-les-modèles-les-skills-et-les-sous-agents), c'est un échec d'**environnement**, pas un échec du modèle.
+
+**Rien n'a été modifié.** Le plugin a des interrupteurs (`OCTO_DONE_CRITERIA=off`, `OCTOPUS_GITHUB_WORK_QUEUE=off`) ; les activer est un changement de configuration qui demande l'accord de l'utilisateur. Relever les délais cacherait la latence et ajouterait des secondes à chaque prompt.
+
+Une idée de correctif amont reste un brouillon, non testé et non envoyé :
+- lire stdin avec une commande interne de bash ;
+- faire un seul appel à `jq` au lieu de plusieurs appels à `python3` ;
+- sortir avant de lancer `git` hors du dépôt du plugin.
+
+## 2026-09-27 — Après un plantage de wmux : repris n'est pas livré
+
+*Observation rétrospective.* Les preuves sont la note de reprise du coordinateur, conservée localement, et ce que cette session a vu d'elle-même. Les identifiants de sessions et de surfaces sont omis.
+
+- **Ce qui s'est passé.** Le multiplexeur de terminal qui héberge les panneaux des agents (wmux) a planté. Avec l'autorisation de l'utilisateur, le coordinateur :
+  - a relancé la version 1.1.1, qui s'est fermée pendant sa propre mise à jour sans créer d'agent ;
+  - a ensuite vu la 2.13.1, que l'utilisateur a installée, répondre et restaurer ses espaces de travail ;
+  - a repris six voies (IX, Learn, TARS, Demerzel, Gaia, Music) par leurs conversations historiques exactes.
+  Il n'y a eu ni redémarrage, ni remise à zéro de données, ni contournement de permission, ni modification de dépôt, ni redémarrage de serveur, ni appel payant.
+- **« Repris » est un état de l'interface, pas une livraison.** La note de reprise consigne, pour chaque voie, ce qui a été observé : un récapitulatif repris, un diff antérieur, un prompt. Sa propre règle est que *« agent labels/running alone are not delivery evidence »* (une étiquette d'agent ou un agent qui tourne ne prouvent pas une livraison). Dans les états du [format d'observation](#2026-09-26--un-format-dobservation-pour-les-modèles-les-skills-et-les-sous-agents), un panneau repris est *visible*. Il devient *accepté* quand la voie accuse réception d'une tâche, et *terminé* seulement avec un reçu.
+- **Ce qui a rendu la reprise peu coûteuse.** Chaque voie avait écrit son état dans des fichiers avant le plantage, pas seulement dans sa conversation. Ces fichiers nommaient la checkout exacte, la tête et les chemins non commités, et donnaient l'action suivante.
+  - Cette session Learn a repris depuis un tel fichier. Elle a ensuite attendu l'autorité de publication, comme le fichier le disait, au lieu d'agir d'après son récapitulatif.
+  - La voie IX a trouvé de la même façon une modification de workflow non commitée, dont le commit et le push avaient été coupés par le plantage. Elle a demandé à l'utilisateur avant de la pousser.
+  - Un résumé de conversation ne suffit pas pour cela. Il dit ce qui était prévu, pas quelle commande a réellement tourné.
+- **Les identifiants ont changé.** Les identifiants d'espaces de travail et de surfaces étaient nouveaux après le redémarrage, donc tout moniteur devait relire la correspondance avant d'envoyer des touches à un panneau. C'est un échec d'orchestration en puissance, et ici il a été évité.
+
+## 2026-09-27 — GA #740 fusionnée avant sa revue indépendante
+
+*Observation rétrospective*, consignée avec le format d'observation. Les faits publics ont été lus avec `gh`. Le reste vient de reçus locaux — ceux de la voie IX, du coordinateur et de la revue post-fusion — que ce cours a lus sans les réexécuter.
+
+| Champ | Observation |
+|---|---|
+| Dépôt | [GuitarAlchemist/ga#740](https://github.com/GuitarAlchemist/ga/pull/740), *éditeur de pipelines : thème du système, contrôle des types d'arguments, pipeline d'exemple GA*. Fusionnée le 2026-09-27T02:50:43Z en [`d67d04b`](https://github.com/GuitarAlchemist/ga/commit/d67d04bdb04742ba338518e28197e6035cb80e90). La tête fusionnée, [`984192e`](https://github.com/GuitarAlchemist/ga/commit/984192e970746dbed9e56255616360f56d9eed62), était épinglée avec `--match-head-commit` |
+| Rôles | La session d'agent IX en était l'autrice, et elle a fusionné avec les identifiants du propriétaire du dépôt. Codex devait être l'intégrateur, après une revue indépendante de cette tête exacte |
+| Ce qui s'est mal passé | Le tour de l'utilisateur « pousse tout ce qui est green » est arrivé en premier à la session autrice, qui l'a lu comme une autorité de fusion pour les PR au vert. Elle a vérifié les commentaires du bot Codex (aucun P0/P1 ouvert à cette tête) et une CI au vert, puis a fusionné. La consigne selon laquelle Codex devait revoir la tête avant toute fusion est arrivée après la fusion |
+| Catégorie d'échec | **Orchestration ou propriété** : deux consignes d'autorités différentes ont atteint un même agent dans le mauvais ordre. Aucun outil n'a échoué et aucune étape de raisonnement n'était fausse au vu de ce que l'agent avait vu, mais la barrière n'a pas joué |
+| Preuves au moment de la fusion | Publiques : tous les checks GitHub de la PR passent. Rapporté par Codex après la fusion : synchronisation du thème généré vérifiée, et trois suites de tests ciblées, 35 sur 35 réussies. Ce n'est pas une couverture complète HTTP, navigateur, build ou backend |
+| Revue post-fusion | En lecture seule, par une session distincte, avec un reçu conservé localement ; ce cours ne l'a pas réexécutée. Elle a confirmé, chaque fois avec un cas d'échec reproduit : les routes de propositions ajoutées par la PR admettent plus que leur plafond quand les corps arrivent tard (29 en attente pour 20, alors que des envois en série le respectent) ; des clics simultanés franchissent le plafond de dépenses du conseiller (8 appels admis là où un seul tenait, API simulée, aucune dépense ; des appels en série le respectent) ; un corps mal formé reçoit un « invalid JSON body » trompeur ; une ligne corrompue du registre lève une exception hors de tout `try`. D'après le source : une proposition sans révision de base est traitée comme à jour. La description de la PR ne mentionne ni l'API payante du conseiller ni les routes de propositions où les agents peuvent écrire. Les barrières manuelles Accept et Run tiennent, et la revue n'indique aucun revert |
+| État | La fusion est *terminée*, et la revue aussi. Un correctif des cinq constats sur le code est *soumis* à Codex : une branche locale, non commitée, avec d'abord un test qui échoue pour chacun (5 échecs avant le correctif, et 42 sur 42 réussis après, dans 4 fichiers). Codex a réexécuté ces 4 fichiers : 42 sur 42. Le correctif n'est pas intégré, et il reste sa revue complète, une vérification dans un navigateur et un build complet. Aucun défaut n'est donc encore corrigé sur `main` |
+| Réponse | Aucun revert. L'intégration reste à Codex. Les limites que le correctif nomme lui-même restent ouvertes : deux serveurs de développement qui partagent un registre peuvent encore entrer en concurrence, le contrôle de dépense repose sur une estimation et non sur une borne supérieure garantie, et les corps de requête au-delà de la taille limite sont toujours gardés en mémoire, comme avant la PR |
+| Suite | La décision de Codex sur le correctif, puis sa PR et sa CI, puis le statut de cette entrée |
+
 ## À vérifier
 
 - Appliquer le format d'observation à une seconde délégation indépendante, et faire vérifier une fiche contre sa preuve par quelqu'un d'autre que son auteur.
@@ -210,3 +287,5 @@ Cette comparaison est *proposée, pas réalisée*.
 - `codex exec -o` : si le fichier est écrit par la CLI hors du bac à sable en mode `read-only`.
 - Une capture d’installation jetable pour chaque workflow, sans installer des suites qui se chevauchent dans le même fixture.
 - Une exécution Sandcastle avec Docker, branche explicite, une itération, aucun merge et des preuves de test contrôlées par le host.
+- Les dépassements de délai des hooks : trois exécutions de chaque hook à un moment calme et trois sous charge, les trois hooks lancés ensemble comme Claude Code les lance, et si Claude Code lance les hooks par un shell de connexion.
+- GA #740 : si le correctif des cinq constats de la revue sur le code arrive sur `main` avec ses tests de régression, et une vérification de l'éditeur dans un navigateur, que ni la revue ni le correctif n'ont faite.

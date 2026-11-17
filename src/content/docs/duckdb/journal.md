@@ -100,6 +100,40 @@ Four questions the course asked before it measured. None is a hypothesis the aut
 - A process holding a database file blocks every other process, read-only ones included, with a different message on each OS. Files written by DuckDB 1.5.5 are tagged `storage_version=v1.0.0+` and were read by the DuckDB 1.0.0 CLI; with `STORAGE_VERSION 'v1.5.0'`, 1.0.0 refused them (version number 68, can only read 64).
 - The CI now also runs `timings/07-performance.sql` (not compared: 17 s on Ubuntu, 32 s on Windows, with a 1 GB CSV file) and `shell/08-*.sh`.
 
+## 2026-09-27 — A DuckDB query tool in IX, and four reported findings
+
+*Retrospective observation.* Nothing here was run by this course. The public facts were read with `gh`, and the code at the PR's head. The author's own probes are labelled as such.
+
+**What the tool does.** [GuitarAlchemist/ix#357](https://github.com/GuitarAlchemist/ix/pull/357) adds `ix_duckdb_query`, an MCP tool that runs SQL over rows the caller passes in. Read at the head, [`a28ac7f`](https://github.com/GuitarAlchemist/ix/tree/a28ac7fc2e172032ee622d09f978737ac4d77609):
+- It starts the DuckDB CLI as `duckdb -safe -bail -json -no-init`, in memory ([`duckdb.rs`, line 252](https://github.com/GuitarAlchemist/ix/blob/a28ac7fc2e172032ee622d09f978737ac4d77609/crates/ix-agent/src/skills/duckdb.rs#L252)).
+- It loads each table with `unnest(from_json(…), recursive := true)` ([line 132](https://github.com/GuitarAlchemist/ix/blob/a28ac7fc2e172032ee622d09f978737ac4d77609/crates/ix-agent/src/skills/duckdb.rs#L132)).
+- It reads the CLI's JSON output with serde_json ([line 316](https://github.com/GuitarAlchemist/ix/blob/a28ac7fc2e172032ee622d09f978737ac4d77609/crates/ix-agent/src/skills/duckdb.rs#L316)).
+- It caps the SQL at 64 KB, the tables at 16, and the output at 16 MB.
+
+The CLI version is **1.5.3**, pinned in IX's CI. This course pins 1.5.5.
+
+**CI.** The head adds one step to IX's `duckdb-sql` job:
+- it runs `cargo test -p ix-agent --test duckdb_query` against the pinned CLI, with `IX_REQUIRE_DUCKDB=1`, so the tests fail instead of skipping when the CLI is missing;
+- that job [passed](https://github.com/GuitarAlchemist/ix/actions/runs/36289800154/job/108537575092) in 1 min 58 s, with 4 tests, including one that the query cannot read, write or attach a file;
+- every other check passed on Linux and Windows, except [`risk-report`](https://github.com/GuitarAlchemist/ix/actions/runs/36289800102/job/108537575134).
+
+`risk-report` fails as expected: a change to `.github/workflows/ci.yml` is a blocked path, and only the owner's review label can clear it. The PR is open and not merged.
+
+**Four findings from Codex's review.** They were posted on 2026-09-27 on commit `d8bb634`, whose `duckdb.rs` is identical to the head's. They are *reported*: this course has not reproduced them, and none is fixed.
+
+| Finding | What the code at the head shows | The author's probe (local, DuckDB 1.5.3) |
+|---|---|---|
+| [P1: the query's memory is not bounded](https://github.com/GuitarAlchemist/ix/pull/357#discussion_r4113788138), for a tool that is auto-approved | No memory setting is passed to the CLI | Under `-safe`, `SET memory_limit` fails with "the configuration has been locked", and passing it with `-cmd` fails the same way. The default limit on that machine was 50 GiB |
+| [P1: duplicate column names are lost](https://github.com/GuitarAlchemist/ix/pull/357#discussion_r4113788144) | The JSON goes into serde_json's map type, where a repeated key keeps its last value | `SELECT 1 AS a, 2 AS a` comes out of the CLI as `[{"a":1,"a":2}]`, so one value disappears without an error. `SELECT t.*, u.*` is the everyday case |
+| [P2: nested objects are flattened](https://github.com/GuitarAlchemist/ix/pull/357#discussion_r4113788149) | `recursive := true` also expands nested `STRUCT` columns, so nested fields no longer arrive as the `STRUCT` columns that [lesson 3](../03-nested-data/) reads | none |
+| [P2: an empty result has no columns](https://github.com/GuitarAlchemist/ix/pull/357#discussion_r4113788152) | The column list is read from the first row ([lines 147-151](https://github.com/GuitarAlchemist/ix/blob/a28ac7fc2e172032ee622d09f978737ac4d77609/crates/ix-agent/src/skills/duckdb.rs#L147-L151)), so zero rows give zero columns | none |
+
+Two of the four are about DuckDB itself rather than the tool, and they belong to this course's subject:
+- `-safe` locks the configuration, so no memory limit can be set after it. The [QA row on `memory_limit`](#qa) shows why a limit matters.
+- `-json` prints a repeated column name twice in one object.
+
+Both rest on the author's probe on 1.5.3. Until this course reproduces them on 1.5.5, they are not QA rows.
+
 ## To verify
 
 - Why step number 4 is missing from the jobs of `Deploy to GitHub Pages` (`withastro/action` step): an internal step of the composite action?
@@ -108,3 +142,4 @@ Four questions the course asked before it measured. None is a hypothesis the aut
 - Write conflicts and read-only connections with DuckDB.NET (lesson 8): tested with JDBC only.
 - Opening, writing and closing a database file from several processes under load (lesson 8, exercise 3).
 - The Quack remote protocol and DuckLake, for several writing processes: mentioned, not tried.
+- On DuckDB 1.5.5: whether `SET memory_limit` is refused under `-safe`, and whether `-json` prints `SELECT 1 AS a, 2 AS a` as one object with the key twice. Both come from IX #357's author on 1.5.3.
