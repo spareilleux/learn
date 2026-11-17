@@ -121,8 +121,24 @@ export function sanitize(input: unknown): ReaderData | null {
 	return data;
 }
 
-/** Adds the imported bookmarks, and for a note on the same page keeps the more recent one */
-export function merge(into: ReaderData, from: ReaderData): { bookmarks: number; notes: number } {
+const DAY = 86_400_000;
+
+/**
+ * A note's time in milliseconds, or null when it isn't an ISO time in UTC, as `toISOString` writes it, or lies more
+ * than a day past `now`. The day leaves room for another device whose clock runs ahead.
+ */
+function noteTime(value: string, now: number): number | null {
+	if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/.test(value)) return null;
+	const time = Date.parse(value);
+	return Number.isNaN(time) || time > now + DAY ? null : time;
+}
+
+/**
+ * Adds the imported bookmarks, and for a note on the same page keeps the more recent one. An imported note whose time
+ * is malformed or in the future replaces no note, and a new one is stored as updated now: otherwise a file dated
+ * "9999" would win every later merge.
+ */
+export function merge(into: ReaderData, from: ReaderData, now = Date.now()): { bookmarks: number; notes: number } {
 	let bookmarks = 0;
 	let notes = 0;
 	for (const [key, b] of Object.entries(from.bookmarks)) {
@@ -133,7 +149,11 @@ export function merge(into: ReaderData, from: ReaderData): { bookmarks: number; 
 	}
 	for (const [key, n] of Object.entries(from.notes)) {
 		const mine = into.notes[key];
-		if (!mine || (mine.text !== n.text && n.updated > mine.updated)) {
+		const time = noteTime(n.updated, now);
+		if (!mine) {
+			into.notes[key] = time === null ? { ...n, updated: new Date(now).toISOString() } : n;
+			notes++;
+		} else if (mine.text !== n.text && time !== null && time > (noteTime(mine.updated, now) ?? -Infinity)) {
 			into.notes[key] = n;
 			notes++;
 		}

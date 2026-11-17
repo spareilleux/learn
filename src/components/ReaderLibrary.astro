@@ -144,7 +144,10 @@ const t = readerStrings(Astro.locals.starlightRoute.lang);
 				return;
 			}
 			const count = merge(data, imported);
-			save(data);
+			if (!save(data)) {
+				message.textContent = t.importNotSaved;
+				return;
+			}
 			message.textContent = t.imported.replace('{bookmarks}', String(count.bookmarks)).replace('{notes}', String(count.notes));
 		});
 
