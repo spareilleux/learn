@@ -16,7 +16,7 @@ Cada entrada fechada termina con bloques **Para repetir**: dónde ejecutar, el c
 - [x] Lección 1: las palabras de trenza y el polinomio de Jones
 - [x] Traducciones al francés y al español
 - [x] Dos revisiones independientes del curso contra el código fuente de IX, y los hallazgos bloqueantes del curso corregidos; el último, compartir la presentación inglesa, le corresponde al propietario
-- [ ] Un workflow de CI que ejecute `check.sh` en Windows, Linux y macOS
+- [x] Un workflow de CI que ejecute `check.sh` en Windows, Linux y macOS
 - [ ] Lección 2: el código de Gauss (espera a que se publique el código de Gauss de IX)
 - [ ] Lección 3: lo que IX rechaza, y por qué
 - [ ] Lección 4: los nudos marineros en 3D (espera a que se publique la cuerda apoyada de IX)
@@ -144,9 +144,28 @@ La revisión también señaló que la presentación francesa ha cambiado desde l
 
 - Comprobación: exactamente estas dos líneas. `exit 0` es el estado del propio script, que `check.sh` añade a su salida.
 
+## 2026-11-16 — `check.sh` en Windows, Linux y macOS en la CI
+
+El workflow ejecuta ahora `check.sh` en los tres sistemas, en cada pull request y cada push a `main` que tocan el código del curso o el workflow ([pull request #217](https://github.com/spareilleux/learn/pull/217)). En Windows se ejecuta en Git Bash, que elige `shell: bash`. Su primera ejecución, [44018329148](https://github.com/spareilleux/learn/actions/runs/44018329148), en el commit `0056beeb`, mostró `ok` para las 9 salidas en cada sistema:
+
+| Imagen del runner | Python | Salidas |
+|---|---|---|
+| ubuntu-26.04 | 3.14.10 | 9 de 9 `ok` |
+| windows-2025-vs2026 | 3.14.10 | 9 de 9 `ok` |
+| macos-26-arm64 | 3.14.10 | 9 de 9 `ok` |
+
+Entre las salidas comparadas está `oracle`: las 26 comprobaciones contra IX se cumplen, pues, en los tres sistemas.
+
+**Para repetir 5: la comprobación en tres sistemas.** Ejecutado por la CI del curso, no en la máquina del autor.
+
+- Dónde: el workflow [Speaking in knots course examples](https://github.com/spareilleux/learn/actions/workflows/speaking-in-knots-examples.yml), con *Run workflow* en `main`, o cualquier pull request que toque `code/speaking-in-knots/`.
+- Entrada: ninguna.
+- Comando: el paso del workflow, `bash code/speaking-in-knots/check.sh`.
+- Salida esperada: en cada uno de los tres jobs, nueve líneas `ok   <nombre>`, de `ok   oracle` a `ok   mutants`, y ningún `FAIL`.
+- Comprobación: los tres jobs pasan. `check.sh` termina con el código 1 si alguna salida difiere de `expected/`.
+
 ## Por verificar
 
-- `check.sh` en Linux y macOS: solo se ejecutó en Windows 11.
 - Para repetir 2 en la máquina del autor: el curso solo se apoya en la CI de IX para ello.
 - Si el Knot Atlas dibuja el trébol izquierdo bajo 3_1, la razón que daba la segunda hipótesis; solo se comparó el polinomio.
 - La pull request #366 sigue abierta: los enlaces a IX apuntan al commit `e8684cf` y siguen siendo válidos después de una fusión, pero el código puede cambiar antes.
@@ -157,4 +176,3 @@ La revisión también señaló que la presentación francesa ha cambiado desde l
 
 - ¿Debería la documentación de IX decir qué imagen especular es cada nudo con nombre, para que comparar con una tabla no exija las dos?
 - La documentación de IX dice que todo enlace anfiquiral tiene *V*(*t*) = *V*(1/*t*) ([`jones.rs`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/jones.rs#L42-L43), [`knot.rs`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-agent/src/skills/knot.rs#L64)). Dos anillos enganchados son su propia imagen especular una vez olvidados los sentidos, y sin embargo ni `s1^2` ni `s1^-2` tiene la simetría: ¿debería la documentación decir que la imagen especular debe conservar los sentidos?
-- ¿Debería un workflow de CI ejecutar `check.sh` en tres sistemas operativos, como hacen los workflows de los otros cursos? Añadir uno toca `.github/`, que revisa el propietario del repositorio.
