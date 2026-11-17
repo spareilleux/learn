@@ -181,7 +181,7 @@ gradient for a u32 Var: None
 - **A value that shares the variable's buffer is refused**, and `detach` shares it. `w - lr · grad` is a new tensor, so a descent step passes.
 - **The shape and the element type must match**; the dtype error names `copy_strided`, the internal operation, with `lhs` and `rhs` in the reverse order of `set`.
 
-[`candle-nn`'s optimizers](https://docs.rs/candle-nn/0.11.0/candle_nn/optim/index.html) do the same `set` for you (lesson 5). This lesson writes the step by hand, to compare it with the IX course.
+[`candle-nn`'s optimizers](https://docs.rs/candle-nn/0.11.0/candle_nn/optim/index.html) do the same `set` for you ([lesson 5](../05-candle-nn/)). This lesson writes the step by hand, to compare it with the IX course.
 
 ## The IX course's linear regression
 
@@ -283,7 +283,7 @@ F64: ws 2.605694, bs 17.384615 -> w 0.041707, b 9.708880, gap to the closed form
 F32: ws 2.605694, bs 17.384611 -> w 0.041707, b 9.708877, gap to the closed form 2.8e-6
 ```
 
-`f64` lands on the IX course's `ws 2.605694, bs 17.384615`. `f32` misses `b` in the sixth decimal: its roughly seven significant digits don't hold `17.384615` plus the rounding of 52 squared errors. For a model of build times, it doesn't matter; for comparing two implementations to `1e-9`, as above, use `f64`. The `f32` sum of the same numbers may also round differently on another processor (*to verify* on macOS ARM, where the course's CI hasn't run yet).
+`f64` lands on the IX course's `ws 2.605694, bs 17.384615`. `f32` misses `b` in the sixth decimal: its roughly seven significant digits don't hold `17.384615` plus the rounding of 52 squared errors. For a model of build times, it doesn't matter; for comparing two implementations to `1e-9`, as above, use `f64`. The `f32` sum of the same numbers could round differently on another processor; the course's CI gave these digits on macOS ARM too.
 
 ## Key takeaways
 
