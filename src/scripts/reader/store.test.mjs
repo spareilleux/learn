@@ -56,6 +56,43 @@ test('valid import merge remains idempotent and keeps a newer note', () => {
   assert.equal(into.notes[b.key].text, 'Newer');
 });
 
+test('an imported note dated in the future or malformed never wins a merge', () => {
+  const now = Date.parse('2026-11-16T12:00:00Z');
+  const path = '/learn/course/lesson/';
+  const key = store.splitPath(path).key;
+  const mine = () => ({ bookmarks: {}, notes: { [key]: { ...note(path), text: 'Mine' } } });
+  for (const updated of ['9999', '9999-12-31T23:59:59Z', '2026-11-18T00:00:00Z', '2026-11-16', 'tomorrow', '']) {
+    const from = store.sanitize({ notes: { [key]: { ...note(path), text: 'Imported', updated } } });
+    const into = mine();
+    assert.deepEqual(store.merge(into, from, now), { bookmarks: 0, notes: 0 }, updated);
+    assert.equal(into.notes[key].text, 'Mine', updated);
+    // A new note is kept, but stamped now, so it can't block the reader's later edits either
+    const fresh = { bookmarks: {}, notes: {} };
+    assert.deepEqual(store.merge(fresh, from, now), { bookmarks: 0, notes: 1 }, updated);
+    assert.equal(fresh.notes[key].text, 'Imported', updated);
+    assert.equal(fresh.notes[key].updated, '2026-11-16T12:00:00.000Z', updated);
+  }
+});
+
+test('notes compare by time, allow a day of clock skew, and a valid note replaces a future-dated one', () => {
+  const now = Date.parse('2026-11-16T12:00:00Z');
+  const path = '/learn/course/lesson/';
+  const key = store.splitPath(path).key;
+  const merged = (mineUpdated, importedUpdated) => {
+    const into = { bookmarks: {}, notes: { [key]: { ...note(path), text: 'Mine', updated: mineUpdated } } };
+    store.merge(into, { bookmarks: {}, notes: { [key]: { ...note(path), text: 'Imported', updated: importedUpdated } } }, now);
+    return into.notes[key].text;
+  };
+  // Milliseconds or not, the later time wins: as strings, '...00.500Z' sorts before '...00Z'
+  assert.equal(merged('2026-11-01T00:00:00Z', '2026-11-01T00:00:00.500Z'), 'Imported');
+  assert.equal(merged('2026-11-01T00:00:00.500Z', '2026-11-01T00:00:00Z'), 'Mine');
+  // Another device's clock a few hours ahead
+  assert.equal(merged('2026-11-16T11:00:00Z', '2026-11-16T20:00:00Z'), 'Imported');
+  // A note stored before this check with a date in the future gives way to a valid one
+  assert.equal(merged('9999', '2026-11-16T11:00:00Z'), 'Imported');
+  assert.equal(merged('9999-12-31T23:59:59Z', '2026-11-16T11:00:00Z'), 'Imported');
+});
+
 
 test('malformed Unicode section ids cannot break fragment encoding', () => {
   for (const hash of ['\ud800', '\udfff']) {
