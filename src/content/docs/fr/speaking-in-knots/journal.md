@@ -16,7 +16,7 @@ Chaque entrée datée se termine par des blocs **À rejouer** : où lancer, la c
 - [x] Leçon 1 : les mots de tresse et le polynôme de Jones
 - [x] Traductions française et espagnole
 - [x] Deux relectures indépendantes du cours contre le code source d'IX, et les constats bloquants qui portent sur le cours corrigés ; le dernier, partager le diaporama anglais, revient au propriétaire
-- [ ] Un workflow de CI qui lance `check.sh` sous Windows, Linux et macOS
+- [x] Un workflow de CI qui lance `check.sh` sous Windows, Linux et macOS
 - [ ] Leçon 2 : le code de Gauss (attend que le code de Gauss d'IX soit poussé)
 - [ ] Leçon 3 : ce qu'IX refuse, et pourquoi
 - [ ] Leçon 4 : les nœuds marins en 3D (attend que la corde posée d'IX soit poussée)
@@ -144,9 +144,28 @@ La relecture a aussi noté que le diaporama français a changé depuis la copie 
 
 - Vérification : exactement ces deux lignes. `exit 0` est le statut du script lui-même, que `check.sh` ajoute à sa sortie.
 
+## 2026-11-16 — `check.sh` sous Windows, Linux et macOS en CI
+
+Le workflow lance désormais `check.sh` sur les trois systèmes, à chaque pull request et à chaque push sur `main` qui touchent le code du cours ou le workflow ([pull request #217](https://github.com/spareilleux/learn/pull/217)). Sous Windows, il tourne dans Git Bash, que choisit `shell: bash`. Son premier run, [44018329148](https://github.com/spareilleux/learn/actions/runs/44018329148), au commit `0056beeb`, a affiché `ok` pour les 9 sorties sur chaque système :
+
+| Image du runner | Python | Sorties |
+|---|---|---|
+| ubuntu-26.04 | 3.14.10 | 9 sur 9 `ok` |
+| windows-2025-vs2026 | 3.14.10 | 9 sur 9 `ok` |
+| macos-26-arm64 | 3.14.10 | 9 sur 9 `ok` |
+
+Parmi les sorties comparées figure `oracle` : les 26 vérifications contre IX tiennent donc sur les trois systèmes.
+
+**À rejouer 5 : la vérification sur trois systèmes.** Lancé par la CI du cours, pas sur la machine de l'auteur.
+
+- Où : le workflow [Speaking in knots course examples](https://github.com/spareilleux/learn/actions/workflows/speaking-in-knots-examples.yml), avec *Run workflow* sur `main`, ou toute pull request qui touche `code/speaking-in-knots/`.
+- Entrée : aucune.
+- Commande : l'étape du workflow, `bash code/speaking-in-knots/check.sh`.
+- Sortie attendue : dans chacun des trois jobs, neuf lignes `ok   <nom>`, de `ok   oracle` à `ok   mutants`, et aucun `FAIL`.
+- Vérification : les trois jobs passent. `check.sh` sort avec le code 1 si une sortie diffère de `expected/`.
+
 ## À vérifier
 
-- `check.sh` sous Linux et macOS : il n'a été lancé que sous Windows 11.
 - À rejouer 2 sur la machine de l'auteur : le cours ne s'appuie que sur la CI d'IX pour cela.
 - Si le Knot Atlas dessine le trèfle gauche sous 3_1, la raison que donnait la seconde hypothèse ; seul le polynôme a été comparé.
 - La pull request #366 est encore ouverte : les liens vers IX pointent vers le commit `e8684cf`, et restent valides après une fusion, mais le code peut changer d'ici là.
@@ -157,4 +176,3 @@ La relecture a aussi noté que le diaporama français a changé depuis la copie 
 
 - La documentation d'IX devrait-elle dire quelle image miroir est chaque nœud nommé, pour que comparer à une table ne demande pas les deux ?
 - La documentation d'IX dit que tout entrelacs amphichiral a *V*(*t*) = *V*(1/*t*) ([`jones.rs`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/jones.rs#L42-L43), [`knot.rs`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-agent/src/skills/knot.rs#L64)). Deux anneaux accrochés sont leur propre image miroir une fois les sens oubliés, et pourtant ni `s1^2` ni `s1^-2` n'a la symétrie : la documentation devrait-elle dire que l'image miroir doit garder les sens ?
-- Un workflow de CI devrait-il lancer `check.sh` sur trois OS, comme le font les workflows des autres cours ? En ajouter un touche `.github/`, que relit le propriétaire du dépôt.

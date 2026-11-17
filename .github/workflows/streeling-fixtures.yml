@@ -22,6 +22,14 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         python: ['3.9', '3.12', '3.14']
+        # ubuntu-latest is Ubuntu 26.04 since November 2026, and setup-python has no Python 3.9 for it ("The version
+        # '3.9' with architecture 'x64' was not found for Ubuntu 26.04"): Linux runs 3.9 on Ubuntu 24.04 instead.
+        exclude:
+          - os: ubuntu-latest
+            python: '3.9'
+        include:
+          - os: ubuntu-24.04
+            python: '3.9'
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     steps:

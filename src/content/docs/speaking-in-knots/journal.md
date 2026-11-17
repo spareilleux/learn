@@ -16,7 +16,7 @@ Each dated entry ends with **Replay** blocks: where to run, the exact command, i
 - [x] Lesson 1: braid words and the Jones polynomial
 - [x] French and Spanish translations
 - [x] Two independent reviews of the course against IX's source, and the blocking findings in the course fixed; the last one, sharing the English deck, is the owner's step
-- [ ] A CI workflow that runs `check.sh` on Windows, Linux and macOS
+- [x] A CI workflow that runs `check.sh` on Windows, Linux and macOS
 - [ ] Lesson 2: the Gauss code (waits for IX's Gauss code to be pushed)
 - [ ] Lesson 3: what IX refuses, and why
 - [ ] Lesson 4: sailors' knots in 3D (waits for IX's laid-down rope to be pushed)
@@ -144,9 +144,28 @@ The review also noted that the French deck has changed since the copy was made: 
 
 - Check: exactly these two lines. `exit 0` is the script's own status, which `check.sh` appends to its output.
 
+## 2026-11-16 — `check.sh` on Windows, Linux and macOS in CI
+
+The workflow now runs `check.sh` on the three systems, for each pull request and push to `main` that touches the course's code or the workflow ([pull request #217](https://github.com/spareilleux/learn/pull/217)). On Windows it runs under Git Bash, which `shell: bash` selects. Its first run, [44018329148](https://github.com/spareilleux/learn/actions/runs/44018329148), at commit `0056beeb`, printed `ok` for all 9 outputs on each system:
+
+| Runner image | Python | Outputs |
+|---|---|---|
+| ubuntu-26.04 | 3.14.10 | 9 of 9 `ok` |
+| windows-2025-vs2026 | 3.14.10 | 9 of 9 `ok` |
+| macos-26-arm64 | 3.14.10 | 9 of 9 `ok` |
+
+The outputs compared include `oracle`, so the 26 checks against IX hold on the three systems.
+
+**Replay 5: the check on three systems.** Run by the course's CI, not on the author's machine.
+
+- Where: the [Speaking in knots course examples](https://github.com/spareilleux/learn/actions/workflows/speaking-in-knots-examples.yml) workflow, with *Run workflow* on `main`, or any pull request that touches `code/speaking-in-knots/`.
+- Input: none.
+- Command: the workflow's step, `bash code/speaking-in-knots/check.sh`.
+- Expected output: in each of the three jobs, nine lines `ok   <name>`, from `ok   oracle` to `ok   mutants`, and no `FAIL`.
+- Check: the three jobs pass. `check.sh` exits with status 1 if any output differs from `expected/`.
+
 ## To verify
 
-- `check.sh` on Linux and macOS: it was only run on Windows 11.
 - Replay 2 on the author's machine: the course only relies on IX's CI for it.
 - Whether the Knot Atlas draws the left-handed trefoil under 3_1, the reason the second hypothesis gave; only the polynomial was compared.
 - Pull request #366 is still open: the links to IX point to commit `e8684cf`, and stay valid after a merge, but the code may change before then.
@@ -157,4 +176,3 @@ The review also noted that the French deck has changed since the copy was made: 
 
 - Should IX's documentation say which mirror image each named knot is, so that comparing with a table does not need both?
 - IX's documentation says that every amphichiral link has *V*(*t*) = *V*(1/*t*) ([`jones.rs`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/jones.rs#L42-L43), [`knot.rs`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-agent/src/skills/knot.rs#L64)). Two hooked rings are their own mirror image once directions are forgotten, yet neither `s1^2` nor `s1^-2` has the symmetry: should the documentation say that the mirror image must keep the directions?
-- Should a CI workflow run `check.sh` on three OSes, as the other courses' workflows do? Adding one touches `.github/`, which is for the repository's owner to review.
