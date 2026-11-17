@@ -1,0 +1,75 @@
+# l28
+
+== TheoryComparisonSkill: the regex that finds the pair in each phrasing, and the answer
+source   phrasing                                                   regex              answer
+example  What is the difference between major and minor             DifferencePattern  answer
+example  Compare major and minor                                    ComparePattern     answer
+example  Major vs minor                                             VsPattern          answer
+example  Major versus minor                                         VsPattern          answer
+example  Difference between major and minor scales                  DifferencePattern  answer
+example  Explain the difference between major and minor             DifferencePattern  answer
+example  How do major and minor differ                              HowDifferPattern   answer
+course   Minor vs major                                             VsPattern          answer
+course   Major vs. minor                                            VsPattern          answer
+course   Compare minor with major                                   ComparePattern     answer
+course   What is the difference between minor and major             DifferencePattern  answer
+course   What's the difference between major and minor keys         DifferencePattern  answer
+course   Major and minor difference                                 none               refused
+course   How are major and minor different                          none               refused
+course   Major or minor: what's the difference?                     none               refused
+course   Majors vs minors                                           none               refused
+course   What is the difference between the major and minor scales  none               refused
+course   Difference between a major and a minor chord               none               refused
+course   Explain the major vs minor difference                      none               refused
+course   Which sounds sadder, a major vs minor chord?               none               refused
+course   C major vs C minor                                         none               refused
+course   What's the difference between C major and C minor          none               refused
+course   Major vs major                                             VsPattern          same pair
+course   Major vs dorian                                            none               refused
+course   Dorian vs Aeolian                                          none               refused
+course   Harmonic minor vs melodic minor                            none               refused
+course   Major pentatonic vs minor pentatonic                       none               refused
+example prompts 7: answer 7; the course's 20: answer 5, same pair 1, refused 14; CanHandle accepts 0
+
+== TheoryComparisonSkill's answer to "What is the difference between major and minor"
+  | Major and minor differ primarily in the **third scale degree**, with secondary differences at the 6th and 7th depending on the minor form.
+  | 
+  | **Scale formulas (semitones from root):**
+  | - Major:   2 2 1 2 2 2 1 — degrees `1 2 3 4 5 6 7` (major third = 4 semitones)
+  | - Minor:   2 1 2 2 1 2 2 — degrees `1 2 b3 4 5 b6 b7` (minor third = 3 semitones, natural minor)
+  | 
+  | The single interval that flips is the **third**: a major third (4 semitones) versus a minor third (3 semitones). That one-semitone shift changes the entire harmonic and emotional character of the key — chords built on the same root come out major or minor accordingly.
+  | 
+  | **Common associations:** major sounds bright and stable (often "happy"); minor sounds darker and more ambiguous (often "sad" but really just emotionally richer). These are cultural shorthand, not absolutes.
+  | 
+  | **Minor variants:**
+  | - Natural minor: `1 2 b3 4 5 b6 b7`
+  | - Harmonic minor: `1 2 b3 4 5 b6 7` — raised 7th for stronger dominant resolution
+  | - Melodic minor: `1 2 b3 4 5 6 7` ascending (raised 6th and 7th), natural minor descending
+  | 
+  | **In context:**
+  | - Relative pairs share a key signature (C major ↔ A minor, G major ↔ E minor)
+  | - Parallel pairs share a root but flip quality (C major ↔ C minor)
+  | - Diatonic chords differ: I IV V (major-quality) vs i iv V (minor with raised 7th in V)
+
+== The scales in the answer, against a textbook: the degrees it writes, the degrees its steps give, and a textbook's
+scale            the answer writes  its steps give     a textbook         the same  degrees not major's
+Major            1 2 3 4 5 6 7      1 2 3 4 5 6 7      1 2 3 4 5 6 7      yes       none
+Minor            1 2 b3 4 5 b6 b7   1 2 b3 4 5 b6 b7   1 2 b3 4 5 b6 b7   yes       3 6 7
+Natural minor    1 2 b3 4 5 b6 b7   -                  1 2 b3 4 5 b6 b7   yes       3 6 7
+Harmonic minor   1 2 b3 4 5 b6 7    -                  1 2 b3 4 5 b6 7    yes       3 6
+Melodic minor    1 2 b3 4 5 6 7     -                  1 2 b3 4 5 6 7     yes       3
+relative pairs: C major ↔ A minor: the same notes yes; G major ↔ E minor: the same notes yes
+triads on degrees 1, 4 and 5: major: major, major, major; natural minor: minor, minor, minor; harmonic minor: minor, minor, major
+
+== The same pair twice: the answer, the comparison it suggests, and the skill's answer to that
+question         suggests             answer to the suggestion
+Major vs major   major vs dorian      refused
+Minor vs minor   minor vs dorian      refused
+  | You asked to compare major to itself — there's no difference. Try comparing major to its opposite (major↔minor) or to a specific mode (e.g. "major vs dorian").
+
+== RelativeKeySkill, which VsPattern's comment says handles "C major vs C minor": confidence and the first line of the answer
+question                                             confidence   answer
+C major vs C minor                                   0.100        Ask about the relative or parallel key of a given major/minor key, or how many sharps/flats a key has.
+What's the difference between C major and C minor    0.100        Ask about the relative or parallel key of a given major/minor key, or how many sharps/flats a key has.
+Parallel minor of C major                            1.000        The parallel minor of **C major** is **C minor**.
