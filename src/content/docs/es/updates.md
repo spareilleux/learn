@@ -51,6 +51,12 @@ El módulo, el índice de matemáticas, la [entrada del diario de Streeling](../
 
 Estos dos elementos pasan así de pendientes a verificados. El catálogo de matemáticas sigue teniendo dos módulos, MAT-001 y MAT-003.
 
+## 2026-09-27 — Tracer-bullet de Rust avanzado preparado
+
+El [curso Rust avanzado](../rust-advanced/) tiene ahora un plan de doce lecciones basadas en pruebas y una primera porción vertical completa: disposición de memoria y representación, crate Cargo independiente, salida capturada y contrato compile-fail. La misma misión, lección y [diario del curso](../rust-advanced/journal/) existen en inglés, francés y español.
+
+El gate local pasó en Windows con Rust 1.94.0: formato, Clippy con los warnings denegados, la prueba unitaria, el doctest compile-fail y la comparación de la salida capturada. El curso sale con la lección 1 de su plan; las lecciones 2 a 12 están planificadas y aún no escritas, como muestra el [plan del curso](../rust-advanced/).
+
 ## 2026-09-27 — Ilustraciones de la portada y de IX publicadas
 
 La [PR de Learn #23](https://github.com/spareilleux/learn/pull/23) se fusionó como `3c8c1de`, y su [despliegue Pages](https://github.com/spareilleux/learn/actions/runs/36299159809) fue correcto. La [portada](../) y la [introducción del curso IX](../machine-learning-ix/) muestran ahora las dos imágenes generadas localmente con ComfyUI y modelos en caché. En los tres idiomas, cada una se presenta como arte conceptual, no un diagrama. Las seis páginas respondieron 200 sin autenticación, y las dos imágenes eran idénticas, byte a byte, a una compilación local.
