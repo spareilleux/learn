@@ -47,7 +47,7 @@ Aucun jeu de données téléchargé : les deux fichiers viennent de ce dépôt, 
 
 ## IX, épinglé
 
-Le cours utilise pour l'instant sept crates IX : `ix-math` (statistiques, mise à l'échelle, découpage, calcul différentiel), `ix-supervised` (régression, classification, métriques, validation croisée), `ix-optimize` (descente de gradient, recuit, essaim particulaire), `ix-unsupervised` (k-means, DBSCAN, mélanges gaussiens, ACP), `ix-ensemble` (forêts aléatoires, gradient boosting), `ix-nn` (couches, pertes, attention) et `ix-voicings` (le score de silhouette et le partitionnement des *voicings* de guitare). [`Cargo.toml`](https://github.com/spareilleux/learn/blob/37b8830/code/machine-learning-ix/Cargo.toml) les prend depuis Git, épinglées à un commit, comme le décrit la [référence Cargo](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) :
+Le cours lie dix-neuf crates IX, de `ix-math` à la leçon 1 jusqu'à `ix-pipeline` à la leçon 21 ; le plan ci-dessous donne celles de chaque leçon. La leçon 21 lance aussi le serveur d'`ix-agent`, construit à part plutôt que lié. [`Cargo.toml`](https://github.com/spareilleux/learn/blob/450cea9e/code/machine-learning-ix/Cargo.toml) prend les dix-neuf depuis Git, toutes épinglées au même commit, comme le décrit la [référence Cargo](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) :
 
 ```toml
 ix-supervised = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
