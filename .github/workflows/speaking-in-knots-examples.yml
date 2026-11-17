@@ -15,8 +15,12 @@ permissions:
 
 jobs:
   check:
-    name: speaking-in-knots (ubuntu-latest)
-    runs-on: ubuntu-latest
+    name: speaking-in-knots (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
@@ -24,6 +28,8 @@ jobs:
         with:
           python-version: '3.14'
       - name: State sum, braid words and mutation check
+        # Git Bash on Windows: a bare `bash` under PowerShell may resolve to WSL's
+        shell: bash
         env:
           PYTHON: python
         run: bash code/speaking-in-knots/check.sh
