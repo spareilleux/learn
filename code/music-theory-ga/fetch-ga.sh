@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Music theory for Guitar Alchemist: fetch the three GA projects the course program references,
-# the files of GA.Domain.Services, GA.Business.Core and GaApi it compiles directly, and one file of
-# GaMcpServer it reads, pinned on one commit of GuitarAlchemist/ga (blobless clone, sparse checkout)
+# the files of GA.Domain.Services, GA.Business.Core, GA.Business.ML, GA.Business.AI and GaApi it compiles
+# directly, and the files of GaMcpServer and of the React experiments it reads, pinned on one commit of
+# GuitarAlchemist/ga (blobless clone, sparse checkout)
 set -euo pipefail
 GA_SHA=a826864f3a012cad88e415954bf57eca0ce12aa6
 PATHS=(
@@ -61,6 +62,12 @@ PATHS=(
   /Common/GA.Business.ML/Agents/ChordVocabulary.cs
   /Common/GA.Business.ML/Agents/IOrchestratorSkill.cs
   /GuitarAlchemist.Registry/GaSkillAttribute.cs
+  # lesson 17: the P, L and R of GA.Business.AI with the records they return, and the Tonnetz component of the
+  # React experiments with the page that calls it, read as text
+  /Common/GA.Business.AI/Interpretation/SemanticAnalysisService.cs
+  /Common/GA.Business.AI/Interpretation/SemanticAnalysisModels.cs
+  /Experiments/React/reactapp1.client/src/TonnetzDiagram.tsx
+  /Experiments/React/reactapp1.client/src/App.tsx
 )
 cd "$(dirname "$0")"
 if [ "$(git -C .ga rev-parse HEAD 2>/dev/null || true)" = "$GA_SHA" ]; then

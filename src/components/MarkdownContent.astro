@@ -1,8 +1,11 @@
 ---
 import Default from '@astrojs/starlight/components/MarkdownContent.astro';
+import ReaderTools from './ReaderTools.astro';
 ---
 
+<ReaderTools part="bar" />
 <Default><slot /></Default>
+<ReaderTools part="notes" />
 
 <script>
 	// Replaces each ```mermaid code block with its diagram, drawn again when the theme changes.

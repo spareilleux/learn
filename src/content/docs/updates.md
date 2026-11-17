@@ -51,6 +51,12 @@ The module, the mathematics index, the [Streeling journal entry](../streeling/jo
 
 These two items therefore move from awaiting to verified. The mathematics catalogue still has two modules, MAT-001 and MAT-003.
 
+## 2026-09-27 — Advanced Rust tracer-bullet prepared
+
+The [Advanced Rust course](../rust-advanced/) now has a twelve-lesson evidence plan and one complete vertical slice: memory layout and representation, an independent Cargo crate, captured output and a compile-fail contract. The same mission, lesson and [course journal](../rust-advanced/journal/) exist in English, French and Spanish.
+
+The local gate passed on Windows with Rust 1.94.0: formatting, Clippy with warnings denied, the unit test, the compile-fail doctest and the captured-output comparison. The course goes out with lesson 1 of its plan; lessons 2 to 12 are planned and not yet written, as the [course outline](../rust-advanced/) shows.
+
 ## 2026-09-27 — The homepage and IX illustrations published
 
 [Learn PR #23](https://github.com/spareilleux/learn/pull/23) merged as `3c8c1de`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/36299159809) succeeded. The [home page](../) and the [IX course introduction](../machine-learning-ix/) now show the two images generated locally with ComfyUI and cached models. In the three languages, each is labelled conceptual art, not a diagram. The six pages answered 200 anonymously, and both images were byte-identical to a local build.

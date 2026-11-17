@@ -1,0 +1,32 @@
+== a Linear layer from given tensors: y = x · wᵀ + b
+x: shape [2, 2], F64, [10.0, 100.0, 1.0, 1.0]
+layer.forward(&x): shape [2, 3], F64, [210.5, 429.5, 650.0, 3.5, 6.5, 11.0]
+x.matmul(&w.t()) + b: shape [2, 3], F64, [210.5, 429.5, 650.0, 3.5, 6.5, 11.0]
+
+== a Sequential: Linear, ReLU, Linear
+model.len(): 3
+after layer 0: shape [2, 2], F64, [-90.0, 90.0, 0.0, 0.0]
+after layer 1: shape [2, 2], F64, [0.0, 90.0, 0.0, 0.0]
+after layer 2: shape [2, 1], F64, [90.0, 0.0]
+
+== a VarMap behind a VarBuilder: linear(4, 16) and linear(16, 3)
+hidden.bias: [16]
+hidden.weight: [16, 4]
+out.bias: [3]
+out.weight: [3, 16]
+parameters: 131, all_vars(): 4 variables
+hidden.weight asked again with Init::Const(0.): same tensor true, values still nonzero true
+hidden.weight asked with the shape (4, 16): error: shape mismatch on hidden.weight: [4, 16] <> [16, 4]
+
+== the initialization of linear(512, 512), f64
+weights: 262144 values, |mean| < 0.001 true, sd within 1% of √(2 / 512) = 0.0625 true
+share beyond 2 sd within half a point of 4.55%, as a normal distribution: true
+PyTorch's nn.Linear: sd 1/√(3 · 512) = 0.0255; candle's is 2.449 times larger
+biases: 512 values, all within ±1/√512 = ±0.0442 true, sd within 10% of 0.0255 true
+
+== two VarMaps filled by the same calls
+same values: false
+after reseed(&varmap, 5) on both: same values true
+hidden.weight, first row: shape [4], F64, [0.811031, -0.095405, -0.839404, -0.109659]
+all 64 weights within ±√(6 / 4) = ±1.2247: true
+exit 0

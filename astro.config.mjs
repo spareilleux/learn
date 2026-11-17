@@ -27,13 +27,14 @@ export default defineConfig({
 				// Button that hides or shows the left sidebar on wide screens
 				SiteTitle: './src/components/SiteTitle.astro',
 				Sidebar: './src/components/Sidebar.astro',
-				// Renders ```mermaid code blocks as diagrams
+				// Renders ```mermaid code blocks as diagrams, and puts the reader's bookmarks and notes around the content
 				MarkdownContent: './src/components/MarkdownContent.astro',
 			},
 			sidebar: [
 				{ label: 'Method', translations: { fr: 'Méthode', es: 'Método' }, slug: 'method' },
 				{ label: 'Artifacts', translations: { fr: 'Artefacts', es: 'Artefactos' }, slug: 'artifacts' },
 				{ label: 'Demos', translations: { fr: 'Démos', es: 'Demos' }, slug: 'demos' },
+				{ label: 'My bookmarks and notes', translations: { fr: 'Mes favoris et notes', es: 'Mis marcadores y notas' }, slug: 'my-notes' },
 				{
 					label: 'Software Engineering',
 					translations: { fr: 'Génie logiciel', es: 'Ingeniería de software' },
@@ -65,6 +66,12 @@ export default defineConfig({
 									translations: { fr: 'Rust pour développeurs C#/Java', es: 'Rust para desarrolladores C#/Java' },
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'rust-for-csharp-java' } }],
+								},
+								{
+									label: 'Advanced Rust',
+									translations: { fr: 'Rust avancé', es: 'Rust avanzado' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'rust-advanced' } }],
 								},
 								{
 									label: 'Java for C# developers',
@@ -297,6 +304,12 @@ export default defineConfig({
 							translations: { fr: 'Blender pour les développeurs', es: 'Blender para desarrolladores' },
 							collapsed: true,
 							items: [{ autogenerate: { directory: 'blender' } }],
+						},
+						{
+							label: 'Speaking in knots',
+							translations: { fr: 'Parler en nœuds', es: 'Hablar en nudos' },
+							collapsed: true,
+							items: [{ autogenerate: { directory: 'speaking-in-knots' } }],
 						},
 					],
 				},

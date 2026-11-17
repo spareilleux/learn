@@ -6,7 +6,7 @@ cd "$(dirname "$0")"
 bash fetch-ga.sh
 dotnet build GaTheory -c Release -m:4 --nologo -v quiet
 status=0
-for lesson in l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 l11 l12 l13 l14 l15 l16 l17 l18; do
+for lesson in l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 l11 l12 l13 l14 l15 l16 l17 l18 l19; do
   if dotnet run --project GaTheory -c Release --no-build -- "$lesson" | diff --strip-trailing-cr "expected/$lesson.txt" -; then
     echo "ok   $lesson"
   else
@@ -19,6 +19,13 @@ if dotnet run --project GaTheory -c Release --no-build -- svg ../../src/assets/m
   echo "ok   svg"
 else
   echo "FAIL svg: run  dotnet run --project code/music-theory-ga/GaTheory -c Release -- svg src/assets/music-theory-ga"
+  status=1
+fi
+# lesson 17: GA's NeoRiemannianConfig loader as it is and without `private` on its three records
+if bash loader-ab/run.sh | diff --strip-trailing-cr loader-ab/expected.txt -; then
+  echo "ok   loader-ab"
+else
+  echo "FAIL loader-ab"
   status=1
 fi
 exit $status

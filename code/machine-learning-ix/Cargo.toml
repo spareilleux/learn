@@ -7,13 +7,29 @@ description = "Examples of the 'Machine learning, as applied in IX' course: each
 
 # IX pinned on one commit of main: https://github.com/GuitarAlchemist/ix/commit/490c39533627d296bf9f8f050e6fafc14d7a20c2
 [dependencies]
+ix-adversarial = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-autograd = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2", features = ["fft-autograd"] }
 ix-ensemble = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-evolution = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-gpu = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-graph = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-manifold = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
 ix-math = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
 ix-nn = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
 ix-optimize = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-pipeline = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-probabilistic = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-rl = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-search = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-signal = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
 ix-supervised = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-topo = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
 ix-unsupervised = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
 ix-voicings = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
 ndarray = "0.17"
 csv = "1.4"
 serde_json = "1"
+# The trait that IX's evolution operators take; 0.9.5 is already in the lock through IX
+rand = { version = "0.9", default-features = false }
+# The limits and the naga of IX's ix-gpu; 28.0.0 is already in the lock through IX
+wgpu = "28"

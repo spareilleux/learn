@@ -1,0 +1,18 @@
+{
+  "version": "gaia-structured-publication-evidence/1",
+  "scope": "Sanitized scenarios derived from Gaia source at c94df3f5a53cd9f472e8a97b656dc23d7c940389; not production receipts or a held-out real-world sample.",
+  "source": "https://github.com/GuitarAlchemist/gaia/blob/c94df3f5a53cd9f472e8a97b656dc23d7c940389/src/github-portfolio-publication.mjs",
+  "hypothesis_before_test": "For explicit expected/observed fields, a deterministic parser will classify all cases without Jev: any known mismatch is contradicted, otherwise any missing required observation is insufficient, otherwise supported.",
+  "labels": ["supported", "contradicted", "insufficient"],
+  "cases": [
+    {"id": "head_match", "seam": "validateObservation", "checks": [{"field": "headOid", "expected": "1111", "observed": "1111"}], "expected": "supported"},
+    {"id": "head_mismatch", "seam": "validateObservation", "checks": [{"field": "headOid", "expected": "1111", "observed": "2222"}], "expected": "contradicted"},
+    {"id": "head_missing", "seam": "validateObservation", "checks": [{"field": "headOid", "expected": "1111"}], "expected": "insufficient"},
+    {"id": "grant_match", "seam": "validateAuthorization", "checks": [{"field": "status", "expected": "AUTHORIZED", "observed": "AUTHORIZED"}, {"field": "intentRevision", "expected": "aaaa", "observed": "aaaa"}], "expected": "supported"},
+    {"id": "grant_mismatch_and_missing", "seam": "validateAuthorization", "checks": [{"field": "status", "expected": "AUTHORIZED", "observed": "REFUSED"}, {"field": "intentRevision", "expected": "aaaa"}], "expected": "contradicted"},
+    {"id": "grant_revision_missing", "seam": "validateAuthorization", "checks": [{"field": "status", "expected": "AUTHORIZED", "observed": "AUTHORIZED"}, {"field": "intentRevision", "expected": "aaaa"}], "expected": "insufficient"},
+    {"id": "pr_head_match", "seam": "validatePullRequest", "checks": [{"field": "pullRequest.headOid", "expected": "3333", "observed": "3333"}], "expected": "supported"},
+    {"id": "pr_head_mismatch", "seam": "validatePullRequest", "checks": [{"field": "pullRequest.headOid", "expected": "3333", "observed": "4444"}], "expected": "contradicted"},
+    {"id": "pr_head_missing", "seam": "validatePullRequest", "checks": [{"field": "pullRequest.headOid", "expected": "3333"}], "expected": "insufficient"}
+  ]
+}

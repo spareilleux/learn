@@ -35,7 +35,7 @@ The [fixture](https://github.com/spareilleux/learn/blob/main/code/repository-dog
 
 ## What this does **not** establish
 
-- No TypeSafe call, billed token measurement, or Jev quality estimate occurred.
+- The original Petri tracer made no TypeSafe call and measured no billed tokens or Jev quality. Later live synthetic pilots and a pinned Gaia-seam check are reported in the [dated journal](../journal/); they do not validate the production transition.
 - No production Gaia or IX state was read or changed. The case text is a pinned teaching fixture, not a current authority receipt.
 - The guarded net checks a finite abstraction. It cannot establish that real code enforces the same guards, that receipts are authentic, or that concurrency and retries preserve them.
 

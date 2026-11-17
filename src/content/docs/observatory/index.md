@@ -20,7 +20,7 @@ sidebar:
 ### The RTX version in three steps
 
 1. Download the installer and double-click it. It installs for your Windows account only, without administrator rights, into `%LOCALAPPDATA%\Programs\Observatory-RTX`, and adds **Observatory RTX** to the Start menu. Windows may say it protected your PC, because the installer is not signed: **More info**, then **Run anyway**.
-2. Start **Observatory RTX** from the Start menu.
+2. Start **Observatory RTX** from the Start menu, or with **Play the RTX version** at the top of this page (from 0.2.6 on; your browser asks before it opens it).
 3. The first time, a window asks whether to fetch NVIDIA's DLSS files (276 MB, once): press **Enter**.
 
 To remove it: **Settings → Apps → Installed apps**; NVIDIA's files go with it. A later version is meant to install over it and keep them: tested from 0.1.0 to a test package, not yet from one release to the next (*to verify*). Over 0.2.1, version 0.2.2 asks once more, because it needs Streamline 2.14.1's files in place of 2.10.0's: **Enter** replaces them, **N** removes them and starts without DLSS (tested from the zip). Versions 0.2.3 to 0.2.6 use the same files as 0.2.2: nothing new to fetch. Version 0.3.0 asks once more, because it takes Streamline 2.14.16's files: **Enter** replaces them.

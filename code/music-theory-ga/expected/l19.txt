@@ -1,0 +1,186 @@
+# l19
+
+== P, L and R keep two notes of a triad and move the third to its mirror image about them: the course's three, from C major and from C minor
+triad  op  keeps   moves         gives  notes
+C      P   C G     E to E♭ (-1)  Cm     C E♭ G
+C      L   E G     C to B (-1)   Em     E G B
+C      R   C E     G to A (+2)   Am     A C E
+Cm     P   C G     E♭ to E (+1)  C      C E G
+Cm     L   C E♭    G to A♭ (+1)  A♭     A♭ C E♭
+Cm     R   E♭ G    C to B♭ (-2)  E♭     E♭ G B♭
+
+== The 24 triads through P, L and R: the course against NeoRiemannianConfig.Apply, against NeoRiemannian.yaml as the course reads it, and against SemanticAnalysisService (GA.Business.AI)
+op  = Apply   = file    = service  undone by itself  common tones  movement
+P   0 of 24   24 of 24  24 of 24   24 of 24          2             1
+L   0 of 24   24 of 24  24 of 24   24 of 24          2             1
+R   0 of 24   24 of 24  24 of 24   24 of 24          2             2
+
+== SemanticAnalysisService on C major: the record each of its three methods returns
+P (Parallel): C major -> C minor, CommonTones 2. The P operation transforms C major to its parallel C minor by moving the 3rd, keeping root and 5th.
+L (Leading-tone): C major -> E minor, CommonTones 2. The L operation transforms C major to E minor by moving one note by a semitone, keeping 2 common tones.
+R (Relative): C major -> A minor, CommonTones 2. The R operation transforms C major to its relative A minor. These share 2 common tones and are in the same key.
+
+== SemanticAnalysisService on a root that is not the triad's, and on sets that are not major or minor triads
+C E G with the root C      P C minor, L E minor, R A minor
+C E G with the root E      P (null), L (null), R (null)
+C E G♯ with the root C     P (null), L (null), R (null)
+C E♭ G♭ with the root C    P (null), L (null), R (null)
+C E G B with the root C    P (null), L (null), R (null)
+C E with the root C        P (null), L (null), R (null)
+
+== NeoRiemannianConfig (GA.Business.Config), which loads NeoRiemannian.yaml: GetAllTransforms returns 0 transforms, GetHexatonicCycles 0 cycles, GetOctatonicCycles 0
+Apply("P", "C_maj") -> (none)
+Apply("L", "G#_maj") -> (none)
+Apply("S", "C_maj") -> (none)
+Apply("P", "Db_maj") -> (none)
+Apply("p", "C_maj") -> (none)
+Apply("PL", "C_maj") -> (none)
+TryGetTransform("H") -> (none); TryGetTransform("h") -> (none); TryGetTransform("PL") -> (none)
+
+== Added after the first run: the exceptions thrown while NeoRiemannianConfig loaded its file, which its loader catches: 3
+System.MissingMethodException: No parameterless constructor defined for type 'GA.Business.Config.NeoRiemannianConfig+NeoRiemannianYaml'.
+System.InvalidOperationException: Failed to create an instance of type 'GA.Business.Config.NeoRiemannianConfig+NeoRiemannianYaml'.
+  inner: System.MissingMethodException: No parameterless constructor defined for type 'GA.Business.Config.NeoRiemannianConfig+NeoRiemannianYaml'.
+YamlDotNet.Core.YamlException: Exception during deserialization
+  inner: System.InvalidOperationException: Failed to create an instance of type 'GA.Business.Config.NeoRiemannianConfig+NeoRiemannianYaml'.
+  inner: System.MissingMethodException: No parameterless constructor defined for type 'GA.Business.Config.NeoRiemannianConfig+NeoRiemannianYaml'.
+
+== Added after the first run: the [<CLIMutable>] records of GA.Business.Config, by module: how the assembly exposes them, and how many have a public constructor without parameters
+module                       records  exposed as  public constructor
+AtonalModalFamiliesConfig    3        public      3 of 3
+ExtendedScalesConfig         1        public      1 of 1
+ModesConfig                  3        public      3 of 3
+NeoRiemannianConfig          3        internal    0 of 3
+ScalesConfig                 1        public      1 of 1
+SemanticConfig               3        public      3 of 3
+TabSourcesConfig             2        public      2 of 2
+CycleYaml: constructors internal with 0 parameters, internal with 2 parameters; setters Name internal, Triads internal
+NeoRiemannianYaml: constructors internal with 0 parameters, internal with 3 parameters; setters Transforms internal, HexatonicCycles internal, OctatonicCycles internal
+TransformYaml: constructors internal with 0 parameters, internal with 3 parameters; setters Description internal, VoiceLeadingCost internal, Mappings internal
+
+== Added after the first run: NeoRiemannian.yaml through the deserializer GA builds, into public types of the same shape: 6 transforms, 4 hexatonic cycles, 3 octatonic cycles
+name  mappings  cost  description
+P     24        1     Parallel — swaps major/minor of the same root; 3rd moves by 1 semitone
+L     24        1     Leading-tone — M(x) paired with m(x+4); root moves 1 semitone, becomes 5th of target
+R     24        2     Relative — M(x) paired with m(x+9); 5th moves 2 semitones, becomes root of target
+S     24        2     Slide — L o P o R; M(x) paired with m(x+1); shares the 3rd, 2 voices move
+N     24        2     Nebenverwandt — R o L o P; M(x) paired with m(x+5); shares the root, 2 voices move
+H     24        3     Hexatonic pole — L o P o L; M(x) paired with m(x+8); no common tones, 3 voices move
+
+== Each transform of the file over the course's 24 triads: the triads it maps, its distinct images, whether it undoes itself and swaps major and minor, and the minor root above the major root
+name  maps  images  undone by itself  swaps  semitones
+P     24    24      24 of 24          24     0
+L     24    24      24 of 24          24     4
+R     24    24      24 of 24          24     9
+S     24    24      24 of 24          24     1
+N     24    24      24 of 24          24     5
+H     24    24      24 of 24          24     8
+names the file does not write: Db_maj absent, Ab_maj absent, c_maj absent, C absent; transforms: H found, h absent, PL absent, LPR absent
+
+== S, N and H as the file's header writes them, read from left to right and from right to left, against the file's own mappings
+name  header     left to right  right to left  order  from C
+S     L o P o R  24 of 24       24 of 24       2      C♯m
+N     R o L o P  24 of 24       24 of 24       2      Fm
+H     L o P o L  24 of 24       24 of 24       2      G♯m
+
+== docs/methodology/invariants-catalog.md, invariant 15, "PLR composites match: L∘P∘R = S, P∘L = N": words of two and three letters against the file's N
+PL   equals N on  0 of 24 triads; order 3; from C: A♭
+LP   equals N on  0 of 24 triads; order 3; from C: E
+PLR  equals N on 24 of 24 triads; order 2; from C: Fm
+RLP  equals N on 24 of 24 triads; order 2; from C: Fm
+
+== The three pairs of letters: the order of the word, and the triads met from C major by alternating its two letters
+PL: order 3, 6 triads: C Cm A♭ G♯m E Em
+PR: order 4, 8 triads: C Cm E♭ E♭m F♯ F♯m A Am
+LR: order 12, 24 triads: C Em G Bm D F♯m A C♯m E G♯m B E♭m F♯ B♭m D♭ Fm A♭ Cm E♭ Gm B♭ Dm F Am
+
+== VoiceLeadingCost in the file against the smallest total movement between the two triads, with the notes they share
+name  file  course  shared  the major triad's note = the minor triad's
+P     1     1       2       root = root, fifth = fifth
+L     1     1       2       third = root, fifth = third
+R     2     2       2       root = third, third = fifth
+S     2     2       1       third = third
+N     2     2       1       root = fifth
+H     3     3       0       none
+
+== NeoRiemannian.yaml, read as text: its top-level keys, and its remarks above the two lists of cycles
+keys: Transforms, HexatonicCycles, OctatonicCycles
+198: # Hexatonic cycles: 4 disjoint cycles of 6 triads each, produced by alternating
+199: # P and L. Roots in each cycle form a hexatonic pitch-class set (union of two
+200: # augmented triads related by semitone). Names are derived from the three
+201: # major-triad roots present in each cycle.
+212: # Octatonic cycles: 3 disjoint cycles of 8 triads each, produced by alternating
+213: # P and R. Roots in each cycle form a diminished-7 pitch-class set {pc, pc+3,
+214: # pc+6, pc+9}. Names use OCT(i,j) notation, where {i,j} are the two smallest
+215: # interval classes of the underlying octatonic scale — a math-derivation label.
+
+== The file's 4 hexatonic cycles: the step from each triad to the next and back to the first, the roots, and the notes of the six triads together
+name           steps   roots        notes                prime form of the notes
+Cycle_C_E_G♯   PLPLPL  C E G♯ (3)   C D♯ E G G♯ B (6)    0 1 4 5 8 9
+Cycle_C♯_F_A   PLPLPL  C♯ F A (3)   C C♯ E F G♯ A (6)    0 1 4 5 8 9
+Cycle_D_F♯_A♯  PLPLPL  D F♯ A♯ (3)  C♯ D F F♯ A A♯ (6)   0 1 4 5 8 9
+Cycle_D♯_G_B   PLPLPL  D♯ G B (3)   D D♯ F♯ G A♯ B (6)   0 1 4 5 8 9
+prime form of the roots: 0 4 8; triads in the 4 cycles: 24, distinct: 24; the same triads in the same order as the course's P and L from the first: 4 of 4
+
+== The file's 3 octatonic cycles: the steps, the roots, the notes of the eight triads together, and the two numbers of each name
+name      steps     roots          notes                      holds both  two lowest  interval-class vector
+OCT(0,1)  PRPRPRPR  C D♯ F♯ A (4)  C C♯ D♯ E F♯ G A A♯ (8)    True        0 1         <4 4 8 4 4 4>
+OCT(1,2)  PRPRPRPR  C♯ E G A♯ (4)  C♯ D E F G G♯ A♯ B (8)     True        1 2         <4 4 8 4 4 4>
+OCT(2,3)  PRPRPRPR  D F G♯ B (4)   C D D♯ F F♯ G♯ A B (8)     True        0 2         <4 4 8 4 4 4>
+prime form of the roots: 0 3 6 9; prime form of the notes: 0 1 3 4 6 7 9 T; triads in the 3 cycles: 24, distinct: 24; the same triads in the same order as the course's P and R from the first: 3 of 3
+
+== invariants-catalog.md, invariant 8, "Every NeoRiemannian.yaml triad name resolves to a valid SetClass"
+distinct names in the file: 24; among the course's 24: 24; GA's set classes for them: 1, prime form 0 3 7; the course's prime form of C major: 0 3 7
+
+== The Tonnetz as a graph: the 12 pitch classes, joined when they lie a minor third, a major third or a fifth apart
+notes: 12; edges: 36, 12 of interval class 3, 12 of interval class 4, 12 of interval class 5
+triangles: 28; with one edge of each kind: 24, all of them among the 24 triads: True; the others: 4, with the edges 4 4 4: C E G♯, C♯ F A, D F♯ A♯, D♯ G B
+notes - edges + triads = 0
+triads on each note: 6; triads on each edge: 2
+the two triads on an edge of interval class 5 are each other's P: 12 of 12
+the two triads on an edge of interval class 3 are each other's L: 12 of 12
+the two triads on an edge of interval class 4 are each other's R: 12 of 12
+
+== The graph of the 24 triads joined by P, L and R: from C major, the triads at each distance with a shortest word, their common tones with C major and the movement to them
+steps  triads  common  movement  triad and word
+0      1       3       0         C
+1      3       2       1 to 2    Cm P, Em L, Am R
+2      6       1       2 to 3    A♭ PL, E♭ PR, E LP, G LR, A RP, F RL
+3      8       0 to 1  2 to 5    G♯m PLP, Fm PLR, E♭m PRP, Gm PRL, C♯m LPR, Bm LRL, F♯m RPR, Dm RLR
+4      5       0       3 to 6    B PLPR, D♭ PLRL, F♯ PRPR, B♭ PRLR, D LRLR
+5      1       0       5         B♭m PLRLR
+edges: 36; triads at each distance, from each of the 24: 1 3 6 8 5 1; five steps from C: B♭m; from Cm: D
+
+== Wikipedia's three examples, from C major: steps on the graph against common tones and movement
+triad  steps  word  common  movement
+F      2      RL    1       3
+Fm     3      PLR   1       2
+E♭m    3      PRP   0       4
+
+== The eight triads whose root lies a third from C, from C major: common tones, a shortest word, the file's transform if it has one, and the name of the relation
+triad  root      common  word  file  relation
+Em     M3 above  2       L     L     diatonic
+Am     m3 below  2       R     R     diatonic
+E      M3 above  1       LP    -     chromatic mediant
+A      m3 below  1       RP    -     chromatic mediant
+E♭     m3 above  1       PR    -     chromatic mediant
+A♭     M3 below  1       PL    -     chromatic mediant
+E♭m    m3 above  0       PRP   -     doubly chromatic mediant
+G♯m    M3 below  0       PLP   H     doubly chromatic mediant
+GA's cadence "Chromatic Mediant (Metal)" of lesson 7, Em to Gm: common tones 1, word RP, movement 3
+
+== SemanticAnalysisService.ExplainTriadRelationship on the 576 ordered pairs of triads, then on sets that are not triads
+distinct answers: 1
+"To move between triads, you can use L (Leading-tone), P (Parallel), or R (Relative) operations. Each operation keeps 2 common tones while moving only 1 note by 1-2 semitones."
+C D E to F G A: the same answer True
+C E G B to C E G: "Neo-Riemannian operations only apply to triads (3-note chords)."
+
+== GA's TonnetzDiagram.tsx (Experiments/React, read as text): its 12 cells, four to a row, and the cells it fills for the scale 2741 of App.tsx
+row 0                          : C G D A
+row 1, half a cell to the right: E B F♯ C♯
+row 2                          : G♯ D♯ A♯ F
+as the component places them: 23 pairs of neighbours; interval class 5: 9, interval class 4: 8, interval class 3: 3, interval class 1: 3; outside the Tonnetz's three: E-D♯, B-A♯, F♯-F
+each row half a cell further: 23 pairs of neighbours; interval class 5: 9, interval class 4: 8, interval class 3: 6; outside the Tonnetz's three: none
+scale 2741 = 101010110101, bit n for pitch class n: C D E F G A B
+cells filled, by position in the list: C D E B C♯ D♯ F
+cells whose note is in the scale:     C G D A E B F
