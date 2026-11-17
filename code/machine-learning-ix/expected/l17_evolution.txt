@@ -1,0 +1,45 @@
+== selection, 100000 draws each (best, middle, worst)
+  tournament, k = 3, on [0, 1, 2]:  0.7027 0.2607 0.0366   (19/27, 7/27, 1/27)
+  rank on [0, 1, 2]:                0.5027 0.3321 0.1652   (3/6, 2/6, 1/6)
+  roulette on [0, 1, 2]:            0.6657 0.3342 0.0000   (2/3, 1/3, 0)
+  roulette on [0, 1, 1000]:         0.5009 0.4991 0.0000   (1000/1999, 999/1999, 0)
+  roulette on [0, 1]:               1.0000 0.0000
+  roulette drew the worst 0 times
+
+== BLX-0.5 crossover, 200 pairs of parents with 1000 genes each
+  parents' variance 1.0013, children's variance 1.1639 (7/6 = 1.1667); every child gene inside its interval: true
+
+== mutate(rate) on 100000 genes at 0
+  rate  0.1: fraction changed 0.3010, standard deviation of the changes 0.1009
+  rate    1: fraction changed 0.3010, standard deviation of the changes 1.0093
+  rate -0.1: fraction changed 0.3010, standard deviation of the changes 0.1009
+  rate    0: fraction changed 0.0000, standard deviation of the changes 0.0000
+  rate  NaN: panic "called `Result::unwrap()` on an `Err` value: BadVariance"
+
+== IX's GA on the sphere in 3 dimensions, 20 seeds, its defaults except elitism
+  elitism 0: returned fitness above the best recorded for 20 of 20; history rises for 20
+             median returned 2.37e-5, median best recorded 5.73e-7
+  elitism 2: history never rises and returned at most its last entry for 20 of 20
+             median returned 1.87e-8
+
+== minimize_linreg_mse's loss over (w0, w1, w2, b): evaluations until it first falls below 0.01, 20 seeds
+  GA, defaults: 49100 evaluations per run, below 0.01 in 20 of 20 runs, first after a median of 916.0 (min 485, max 1356)
+      final loss, median 2.34e-7
+  DE, defaults: 50050 evaluations per run, below 0.01 in 20 of 20 runs, first after a median of 1250.0 (min 496, max 1715)
+      final loss, median 1.81e-13
+  Adam, lesson 12: below 0.01 at step 31
+
+== DifferentialEvolution::minimize in a thread, 10 generations, waited for 2 s
+  3 individuals: returned false
+  4 individuals: returned true
+
+== pareto::rank on 100 sets of 200 uniform points, every objective minimized
+  2 dimensions: mean size of front 0 6.220 (expected 5.878); all fronts equal to brute force 100 of 100; unchanged with the rows reversed 100 of 100
+  3 dimensions: mean size of front 0 17.810 (expected 18.096); all fronts equal to brute force 100 of 100; unchanged with the rows reversed 100 of 100
+
+== frontier on two rows for one candidate and metric, directions "min" and "Max"
+  in that order: UnknownDirection "min"
+  reversed:      UnknownDirection "Max"
+  a valid table of 300 rows: 21 frontier rows, the same CSV for 50 of 50 shuffles
+  IX's table with several defects: "candidate a in rev-a/t repeats metric cost", the same error for 50 of 50 shuffles
+exit 0

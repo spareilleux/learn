@@ -69,7 +69,7 @@ Chaque lien vers du code IX dans les leçons pointe vers ce commit, si bien que 
 
 ## Plan
 
-Les leçons 1 à 9 sont écrites. Le reste est le plan, une leçon par famille d'algorithmes qu'IX implémente, et chacune sera publiée avec son code et sa vérification croisée comme les autres.
+Les 21 leçons du plan sont écrites, une par famille d'algorithmes qu'IX implémente, chacune avec son code et sa vérification croisée.
 
 | # | Leçon | Crates IX | Si tu connais ML.NET |
 |---|---|---|---|
@@ -82,18 +82,18 @@ Les leçons 1 à 9 sont écrites. Le reste est le plan, une leçon par famille d
 | 7 | [Réseaux de neurones, et les différences finies comme juge](07-neural-networks/) | `ix-nn` | — |
 | 8 | [Optimisation : descente, momentum, Adam, et recherches sans gradient](08-optimization/) | `ix-optimize`, `ix-math` | — |
 | 9 | [Les autres réducteurs : MDS, ACP à noyau, NMF, LDA, t-SNE](09-other-reducers/) | `ix-unsupervised` | — |
-| 10 | Séquences : chaînes de Markov, modèles de Markov cachés et Viterbi | `ix-graph` | — |
-| 11 | Compter sans compter : filtres de Bloom, HyperLogLog, count-min, coucou | `ix-probabilistic` | — |
-| 12 | Différentiation automatique : le ruban de Wengert | `ix-autograd` | — |
-| 13 | Attention, normalisation de couche et un bloc transformeur | `ix-nn` | — |
-| 14 | Apprentissage par renforcement : bandits et Q-learning | `ix-rl` | — |
-| 15 | Signaux : transformée de Fourier, ondelettes, filtres et Kalman | `ix-signal` | — |
-| 16 | Recherche : A\*, recherche arborescente Monte-Carlo, recherche locale | `ix-search`, `ix-graph` | — |
-| 17 | Évolution : algorithmes génétiques, évolution différentielle, fronts de Pareto | `ix-evolution` | — |
-| 18 | Exemples adverses, empoisonnement et les défenses | `ix-adversarial` | — |
-| 19 | La forme des données : homologie persistante | `ix-topo`, `ix-manifold` | — |
-| 20 | Sur le GPU : produits matriciels, distances et k plus proches voisins en WGSL | `ix-gpu` | — |
-| 21 | Pipelines de bout en bout, et les outils MCP qu'appelle un assistant | `ix-pipeline`, `ix-agent` | `MLContext` |
+| 10 | [Séquences : chaînes de Markov, modèles de Markov cachés et Viterbi](10-sequences/) | `ix-graph` | — |
+| 11 | [Compter sans compter : filtres de Bloom, HyperLogLog, count-min, coucou](11-probabilistic/) | `ix-probabilistic` | — |
+| 12 | [Différentiation automatique : le ruban de Wengert](12-autodiff/) | `ix-autograd` | — |
+| 13 | [Attention, normalisation de couche et un bloc transformeur](13-transformer/) | `ix-nn` | — |
+| 14 | [Apprentissage par renforcement : bandits et Q-learning](14-reinforcement-learning/) | `ix-rl` | — |
+| 15 | [Signaux : transformée de Fourier, ondelettes, filtres et Kalman](15-signals/) | `ix-signal` | — |
+| 16 | [Recherche : A\*, recherche arborescente Monte-Carlo, recherche locale](16-search/) | `ix-search`, `ix-graph` | — |
+| 17 | [Évolution : algorithmes génétiques, évolution différentielle, fronts de Pareto](17-evolution/) | `ix-evolution` | — |
+| 18 | [Exemples adverses, empoisonnement et les défenses](18-adversarial/) | `ix-adversarial` | — |
+| 19 | [La forme des données : homologie persistante](19-persistent-homology/) | `ix-topo`, `ix-manifold` | — |
+| 20 | [Sur le GPU : les shaders WGSL d'IX, leurs limites et leurs accélérations](20-gpu-wgsl/) | `ix-gpu` | — |
+| 21 | [Pipelines de bout en bout, et les outils MCP qu'appelle un assistant](21-pipelines-mcp/) | `ix-pipeline`, `ix-agent` | `MLContext` |
 | — | [Chaque crate et chaque fonction publique](api-map/) | les 80 qui ont une surface publique | — |
 | — | [Journal](journal/) | | |
 

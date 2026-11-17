@@ -1,0 +1,38 @@
+== P1, a diamond: load -> a and b -> report, a and b sleeping 50 ms each
+  parallel_levels: [["load"], ["a", "b"], ["report"]]
+  compute functions run: 4, all on the thread that called execute: yes
+  total_duration at least 100 ms: yes; report = 5.0
+
+== P2, one cache shared by two pipelines: f(x) = x + 1, then f(x) = 2x, on value = 10
+  x + 1: output 11, cache hits 0
+  2x: output 11, cache hits 1
+
+== P3, final_outputs and input_field
+  final_outputs on the diamond: 4 entries, for 1 leaf
+  field "missing" of {"a": 1}: {"a":1}; field "a": 1
+
+== P4, the lock file's args_hash, and lower without a linked skill
+  canonical args: {"data":[1.0,2.0]}
+  args_hash:                        fnv1a64:4762d1a4ed81a34d
+  DefaultHasher of that string:     fnv1a64:4762d1a4ed81a34d  same: yes
+  FNV-1a 64 of the same bytes:      fnv1a64:8091c3ce6ff9b24c  same: no
+  lower(PipelineSpec::scaffold("demo")): stage 'load' references unknown skill 'stats'
+
+== P5, labels 1 and 2, all predicted right
+  the tool's loop over classes 0 to 2: precision 0.6666666666666666, recall 0.6666666666666666, f1 0.6666666666666666
+  precision_avg, recall_avg, f1_avg with Average::Macro: 0.6666666666666666, 0.6666666666666666, 0.6666666666666666
+  labels 0 and 1, the tool's loop over classes 0 and 1: 1, 1, 1
+  P5's call replayed, labels 1 and 2: classify, knn, 14 training and 6 test rows, classes among the test predictions [1, 2], accuracy 1, macro [0.6666666666666666, 0.6666666666666666, 0.6666666666666666]
+  P5's call replayed, labels 0 and 1: classify, knn, 14 training and 6 test rows, classes among the test predictions [0, 1], accuracy 1, macro [1.0, 1.0, 1.0]
+
+== P6, lesson 1's items replayed on builds.csv: pages -> build_seconds, 65 rows
+  build_seconds: 18 distinct values, all whole: yes; task and model on auto: classify, knn
+  knn, k = 5, 52 training and 13 test rows, 49 classes counted: accuracy 0.153846, precision 0.030612, recall 0.030612, f1 0.027211
+  linear regression, scaler on all rows (the tool): mse 63.8479, rmse 7.9905, r2 0.042735
+  linear regression, scaler on the training rows: mse 63.8479, rmse 7.9905, r2 0.042735
+  the two replays' 13 predictions and 3 metrics: largest difference below 1e-9: yes
+
+== The order ML.NET's MLContext follows, as an ix-pipeline DAG
+  levels: [["data"], ["split"], ["scaler"], ["scale"], ["fit_predict"], ["score"]]
+  the same 16 numbers as the training-rows replay, bit for bit: 16 of 16
+exit 0
