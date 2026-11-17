@@ -72,11 +72,17 @@
     <Compile Include="$(GaRoot)Common/GA.Business.ML/Agents/ChordVocabulary.cs" Link="Ga/ChordVocabulary.cs" />
     <Compile Include="$(GaRoot)Common/GA.Business.ML/Agents/IOrchestratorSkill.cs" Link="Ga/IOrchestratorSkill.cs" />
     <Compile Include="$(GaRoot)GuitarAlchemist.Registry/GaSkillAttribute.cs" Link="Ga/GaSkillAttribute.cs" />
+    <!-- Lesson 17 compiles the P, L and R of GA.Business.AI and the records they return, as they are -->
+    <Compile Include="$(GaRoot)Common/GA.Business.AI/Interpretation/SemanticAnalysisService.cs" Link="Ga/SemanticAnalysisService.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Business.AI/Interpretation/SemanticAnalysisModels.cs" Link="Ga/SemanticAnalysisModels.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Lesson 15 reads the table of the ga_easier_voicings MCP tool from its source, as text, next to the program -->
     <None Include="$(GaRoot)GaMcpServer/Tools/GuitaristProblemTools.cs" Link="GuitaristProblemTools.cs" CopyToOutputDirectory="PreserveNewest" />
+    <!-- Lesson 17 reads the Tonnetz component of GA's React experiments, and the page that calls it, as text -->
+    <None Include="$(GaRoot)Experiments/React/reactapp1.client/src/TonnetzDiagram.tsx" Link="TonnetzDiagram.tsx" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="$(GaRoot)Experiments/React/reactapp1.client/src/App.tsx" Link="App.tsx" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
