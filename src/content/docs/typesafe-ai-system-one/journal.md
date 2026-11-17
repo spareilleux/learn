@@ -1,6 +1,6 @@
 ---
 title: Journal
-description: "Dated evidence for the TypeSafe AI System One and Jev course: official facts checked, the deterministic mock experiment, live measurements still absent, and repository hypotheses still awaiting labeled corpora."
+description: "Dated TypeSafe AI and Jev evidence: offline controls, small live synthetic pilots, and remaining repository-calibration gaps."
 sidebar:
   order: 99
 ---
@@ -13,10 +13,11 @@ sidebar:
 - [x] Detailed one-call live protocol written with budget and stop conditions
 - [x] Bounded hypotheses for Gaia, GA, Demerzel, IX and TARS
 - [x] French and Spanish mirrors
-- [ ] Live Jev call
+- [x] Small live Jev calls on synthetic corpora; not repository calibration
 - [x] Labeled repository corpus and offline scoring harness
 - [x] Shared-state batching plan corrected; offline confidence-gate stress fixture and 23 tests run
 - [ ] Live calibration study
+- [x] Offline deterministic negative control for structured Gaia evidence
 
 ## Experiments
 
@@ -25,6 +26,8 @@ sidebar:
 | Can the policy fail closed without a provider? | A closed mock response can exercise validation and refuse dispatch when authority is absent | 14/14 tests passed in 0.078 s; route was `human_review:no_explicit_authority` | confirmed for the local policy only | [2026-09-20 entry](#2026-09-20--offline-baseline), [`code/typesafe-ai-system-one`](https://github.com/spareilleux/learn/tree/main/code/typesafe-ai-system-one) |
 | Can a bounded harness test the 50% token-saving hypothesis before spending? | A fixed corpus and exact call plan can expose cost, quality and retry guardrails without contacting Jev | Historical plan: 12 cases, 13 calls, 17,663 UTF-8 bytes, 19/19 tests; it mislabeled bytes as tokens and changed state between arms | invalidated as a token/cost bound; [corrected below](#2026-09-22--batching-protocol-correction-and-gate-stress-test) | [2026-09-20 entry](#2026-09-20--token-cost-benchmark-harness), [lesson 4](../04-token-cost-benchmark/) |
 | Can a confidence threshold alone prevent false support? | A deliberately wrong high-confidence support should still pass a threshold while lower thresholds trade review load for coverage | Synthetic fixture: at 0.95, 1/12 passes and it is false; corrected 13-call plan totals 46,318 request bytes; 23/23 tests in 0.086 s | refuted for confidence-only gating; no Jev quality or billed cost measured | [2026-09-22 entry](#2026-09-22--batching-protocol-correction-and-gate-stress-test), [lesson 5](../05-confidence-gate-stress/) |
+| Does an explicit absence-versus-conflict rule improve Jev's labels? | Explicitly treating missing evidence as insufficient will correct at least one baseline mistake | Exploratory nine-case corpus: generic 8/9, explicit 9/9 and exact repeat 9/9; explicit prompt added 702 input tokens (36.5%) per batch | preliminary; corpus prepared after the earlier error, not held out | [challenge below](#2026-09-22--live-absence-versus-conflict-challenge) |
+| Does structured Gaia publication evidence need Jev for equality checks? | A deterministic rule should classify all nine source-derived fixture scenarios without a model call | 9/9 fixture labels; three offline tests passed; zero provider calls | confirmed only for deliberately simple, synthetic structured comparisons | [negative control below](#2026-09-23--structured-gaia-evidence-negative-control) |
 | Can Jev classify Demerzel evidence into T/P/U/D/F/C and keep absence apart from refutation? | Pre-registered: ADVISORY_USEFUL needs ≥ 75% exact, ≤ 1 false T, ≤ 1 absence read as F/D | Step 1: 41/58, 0 false T, 7/10 absences read as F/D. Step 2 (explicit U and C text): 46/58 and 44/58, conflicts 10/10, absences 4–5/10, but P fell into U 6/10 | INCONCLUSIVE, then NOT_FIXED | [entry](#2026-09-25--demerzel-hexavalent-classification-with-jev), [pre-registration](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/demerzel-hexavalent-PREREG.md) |
 
 ## 2026-09-20 — Official-source review
@@ -61,6 +64,16 @@ Pre-registered hypothesis: a high confidence threshold alone will not prevent a 
 ## 2026-09-22 — Python 3.10 to 3.14, offline
 
 Hypothesis before running: the offline suite uses only the standard library, so it passes unchanged from Python 3.10 to 3.14. Command, on a fresh export of `code/typesafe-ai-system-one` at `b3a9c16`, one interpreter at a time through uv 0.10.4: `uv run --no-project --python <v> python -W error::ResourceWarning -m unittest`. Result on Windows 11: 23/23 tests pass on 3.10.19, 3.11.14, 3.12.12, 3.13.12 and 3.14.3, in 0.104 to 0.132 s. The hosted CI for the same commit ([run 35804194871](https://github.com/spareilleux/learn/actions/runs/35804194871)) passes on Ubuntu, Windows and macOS with Python 3.14. Verdict: confirmed for the offline suite; CI still tests 3.14 only. No API key was read and no provider was called: the live call and the 13-call calibration still wait for the operator's `TYPESAFE_API_KEY` and an explicit approval of the ceiling, which are human decisions.
+
+The preceding Python entry describes the state at that moment; the live calls below happened later and supersede its pending-call statement.
+
+## 2026-09-22 — Live absence-versus-conflict challenge
+
+After the [live batching run](../../repository-dogfooding-lab/journal/#jev-batching-2026-09-22) read missing digest evidence as `contradicted` rather than `insufficient`, we prepared a **new but not untouched held-out** [nine-case synthetic corpus](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/absence-vs-conflict-corpus.json): three missing-evidence, three contradicting-evidence and three supported cases. Before the calls, we hypothesized that an explicit rule would fix at least one label without losing other correct labels. With `jev-latest` resolving to `jev-1.13.0`, the generic prompt scored 8/9, zero false supports, Brier 0.103067, and 1,921 reported input tokens. The explicit rule scored 9/9, zero false supports, Brier 0.005356, and 2,623 input tokens; an exact repeat scored 9/9, Brier 0.006067, and 2,623 input tokens. The repaired case was `missing_receipt_sha` (`contradicted` → `insufficient`). The three captured calls used 7,167 input tokens, estimated $0.000301014 at the published rate. This is exploratory prompt development, not calibration or proof of generalization; the extra 702 tokens per batch may erase savings elsewhere. The model remains advisory and cannot authorize effects.
+
+## 2026-09-23 — Structured Gaia evidence negative control
+
+Before running, we specified the rule: a known mismatch is `contradicted`; otherwise a missing required observation is `insufficient`; otherwise all matching checks are `supported`. Nine sanitized scenarios were derived from Gaia's pinned `validateObservation`, `validateAuthorization`, and `validatePullRequest` seams at `c94df3f5a53cd9f472e8a97b656dc23d7c940389`. The [corpus](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/gaia-structured-evidence-corpus.json) contains three scenarios per class and no production receipt. The [offline baseline](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/test_gaia_structured_evidence.py) classified 9/9 labels; its three tests passed. A mixed missing-and-mismatched case confirms that a known conflict takes precedence. No Jev request or external effect occurred. This is a designed fixture, so 9/9 does not estimate field accuracy or model superiority. **Decision:** keep these structured comparisons in deterministic validation; reserve Jev experiments for genuinely semantic, ambiguous evidence, with no authority over effects.
 
 ## 2026-09-25 — Demerzel hexavalent classification with Jev
 
@@ -102,11 +115,10 @@ A test caught a bug before any call: with a tolerance of 0.01, a two-decimal sum
 
 ## To verify
 
-- Merge the division-of-labour rule into Demerzel ([Demerzel#1127](https://github.com/GuitarAlchemist/Demerzel/pull/1127)); revisit Jev on evidence only when a repository builds a model-on-evidence seam ([gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159)).
-- Run exactly one live call after the operator exports `TYPESAFE_API_KEY`; record concrete model, usage, cost and latency without recording the secret.
+- Revisit Jev on evidence only when a repository builds a model-on-evidence seam ([gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159)).
+- Check posted provider billing against the token-based estimates; do not equate published rates with an observed invoice.
 - Confirm the response schema against the live service and decide whether the validator should adopt an official JSON Schema.
-- Run the 13-call live calibration only after explicit approval of the $0.0021 ceiling.
-- Measure accuracy, calibration, abstention/human-review rate, cost and latency against a deterministic baseline.
+- Run a preregistered, untouched labeled repository corpus with redaction, baseline, latency and end-to-end cost measurements.
 - Recheck price, model IDs and limits immediately before a live run.
 
 ## Open questions

@@ -1,6 +1,6 @@
 ---
 title: Diario
-description: Evidencia fechada del curso TypeSafe AI System One y Jev — hechos oficiales, experimento mock determinista, mediciones en vivo ausentes e hipótesis pendientes de corpus etiquetados.
+description: Evidencia fechada sobre TypeSafe AI y Jev — controles sin conexión, pequeños pilotos sintéticos en vivo y calibración pendiente en nuestros repositorios.
 sidebar:
   order: 99
 ---
@@ -13,10 +13,11 @@ sidebar:
 - [x] Protocolo en vivo detallado de una llamada, con presupuesto y parada
 - [x] Hipótesis acotadas para Gaia, GA, Demerzel, IX y TARS
 - [x] Versiones francesa y española
-- [ ] Llamada Jev en vivo
+- [x] Pequeñas llamadas Jev en vivo con corpus sintéticos; sin calibración en repositorios
 - [x] Corpus etiquetado y harness de scoring sin conexión
 - [x] Plan de batching con estado idéntico corregido; fixture sintética de estrés del gate y 23 pruebas ejecutadas
 - [ ] Estudio de calibración en vivo
+- [x] Control negativo determinista sin conexión para evidencia estructurada de Gaia
 
 ## Experimentos
 
@@ -25,6 +26,8 @@ sidebar:
 | ¿Puede la política fallar de forma cerrada sin proveedor? | Un mock cerrado puede validar y rechazar el despacho sin autoridad | 14/14 pruebas en 0,078 s; `human_review:no_explicit_authority` | confirmado solo para política local | [entrada del 20 de septiembre](#2026-09-20--base-sin-conexión), [`code/typesafe-ai-system-one`](https://github.com/spareilleux/learn/tree/main/code/typesafe-ai-system-one) |
 | ¿Puede un harness acotado probar la hipótesis de ahorro del 50 % antes de gastar? | Un corpus fijo y un plan exacto deben exponer coste, calidad y reintentos sin contactar Jev | Plan histórico: 12 casos, 13 llamadas, 17.663 bytes UTF-8, 19/19 pruebas; confundía bytes con tokens y cambiaba el estado entre brazos | invalidado como límite de tokens/coste; [corregido abajo](#2026-09-22--corrección-del-protocolo-de-batching-y-prueba-del-gate) | [entrada del 20 de septiembre](#2026-09-20--harness-del-benchmark-de-coste), [lección 4](../04-token-cost-benchmark/) |
 | ¿Basta un umbral de confianza para evitar falsos soportes? | Un soporte erróneo de alta confianza debe poder pasar un umbral, mientras subirlo reduce cobertura | Fixture sintética: con 0,95 pasa 1/12 y es falso; plan corregido de 13 llamadas con 46.318 bytes; 23/23 pruebas en 0,086 s | refutada la hipótesis de gate basado solo en confianza; sin calidad Jev ni coste facturado medidos | [entrada del 22 de septiembre](#2026-09-22--corrección-del-protocolo-de-batching-y-prueba-del-gate), [lección 5](../05-confidence-gate-stress/) |
+| ¿Ayuda una regla explícita a distinguir ausencia y contradicción? | Corregirá al menos un error sin perder otras respuestas correctas | Nueve casos exploratorios: 8/9 con consigna general, 9/9 y 9/9 con regla explícita; +702 tokens de entrada por lote (+36,5 %) | preliminar; corpus creado después del primer error | [desafío siguiente](#2026-09-22--desafío-live-de-ausencia-frente-a-contradicción) |
+| ¿Necesitan Jev las igualdades estructuradas de publicación Gaia? | Una regla determinista clasificará nueve escenarios derivados del código sin llamar al modelo | 9/9 etiquetas de fixture; tres pruebas sin conexión aprobadas; cero llamadas al proveedor | confirmado solo para estas comparaciones sintéticas simples | [control negativo siguiente](#2026-09-23--control-negativo-de-evidencia-estructurada-de-gaia) |
 | ¿Clasifica Jev evidencia de Demerzel en T/P/U/D/F/C separando ausencia y refutación? | Prerregistrado: ADVISORY_USEFUL exige ≥ 75 % exacto, ≤ 1 T falso, ≤ 1 ausencia leída F/D | Paso 1: 41/58, 0 T falsos, 7/10 ausencias leídas F/D. Paso 2 (textos U y C explícitos): 46/58 y 44/58, conflictos 10/10, ausencias 4–5/10, pero P cae en U 6/10 | INCONCLUSIVE, luego NOT_FIXED | [entrada](#2026-09-25--lógica-hexavalente-de-demerzel-con-jev), [prerregistro](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/demerzel-hexavalent-PREREG.md) |
 
 ## 2026-09-20 — Revisión de fuentes oficiales
@@ -58,6 +61,16 @@ Hipótesis previa: un umbral de confianza alto no impedirá un falso `supported`
 ## 2026-09-22 — Python 3.10 a 3.14, sin conexión
 
 Hipótesis previa: la suite sin conexión solo usa la biblioteca estándar, así que pasa sin cambios de Python 3.10 a 3.14. Comando, sobre una exportación limpia de `code/typesafe-ai-system-one` en `b3a9c16`, un intérprete cada vez mediante uv 0.10.4: `uv run --no-project --python <v> python -W error::ResourceWarning -m unittest`. Resultado en Windows 11: 23/23 pruebas pasan en 3.10.19, 3.11.14, 3.12.12, 3.13.12 y 3.14.3, en 0,104 a 0,132 s. La CI alojada para el mismo commit ([run 35804194871](https://github.com/spareilleux/learn/actions/runs/35804194871)) pasa en Ubuntu, Windows y macOS con Python 3.14. Veredicto: confirmado para la suite sin conexión; la CI sigue probando solo 3.14. No se leyó ninguna clave de API ni se llamó a ningún proveedor: la llamada en vivo y la calibración de 13 llamadas siguen esperando la `TYPESAFE_API_KEY` del operador y una aprobación explícita del techo, que son decisiones humanas.
+
+La entrada anterior sobre Python describe el estado de aquel momento; las llamadas en vivo posteriores sustituyen su mención de llamadas pendientes.
+
+## 2026-09-22 — Desafío live de ausencia frente a contradicción
+
+Después de que la [ejecución en vivo del batching](../../repository-dogfooding-lab/journal/#jev-batching-2026-09-22) clasificara un digest ausente como `contradicted` en lugar de `insufficient`, preparamos un [nuevo corpus sintético de nueve casos](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/absence-vs-conflict-corpus.json), **no reservado como holdout intacto**: tres ausencias, tres contradicciones y tres soportes. Hipótesis previa a las llamadas: una regla explícita corregirá al menos una etiqueta sin perder las demás. `jev-latest` resolvió a `jev-1.13.0`. La consigna general obtuvo 8/9, cero falsos soportes, Brier 0,103067 y 1.921 tokens de entrada. La regla explícita obtuvo 9/9, cero falsos soportes, Brier 0,005356 y 2.623 tokens; su repetición exacta obtuvo 9/9, Brier 0,006067 y 2.623 tokens. Se corrigió `missing_receipt_sha` (`contradicted` → `insufficient`). Las tres llamadas capturadas sumaron 7.167 tokens de entrada, coste estimado de 0,000301014 $ a la tarifa publicada. Es desarrollo exploratorio de instrucciones, no calibración ni generalización; 702 tokens adicionales por lote pueden cancelar otros ahorros. Jev sigue siendo consultivo y no autoriza efectos.
+
+## 2026-09-23 — Control negativo de evidencia estructurada de Gaia
+
+Regla fijada antes de probar: una divergencia conocida es `contradicted`; si no, una observación obligatoria ausente es `insufficient`; si no, las comprobaciones coincidentes son `supported`. Nueve escenarios saneados derivan de los seams `validateObservation`, `validateAuthorization` y `validatePullRequest` de Gaia, fijados en `c94df3f5a53cd9f472e8a97b656dc23d7c940389`. El [corpus](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/gaia-structured-evidence-corpus.json) contiene tres casos por clase, pero ningún recibo de producción. La [base sin conexión](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/test_gaia_structured_evidence.py) clasificó 9/9; sus tres pruebas pasaron. Un caso con ausencia y divergencia confirma la prioridad de un conflicto conocido. No hubo llamada Jev ni efecto externo. Estos casos diseñados para la regla no estiman precisión real ni superioridad del modelo. **Decisión:** mantener las igualdades estructuradas en validación determinista y reservar Jev para evidencia verdaderamente ambigua en lo semántico, sin darle autoridad para actuar.
 
 ## 2026-09-25 — Lógica hexavalente de Demerzel con Jev
 
@@ -99,11 +112,10 @@ Una prueba encontró un fallo antes de cualquier llamada: con tolerancia 0,01, u
 
 ## Por verificar
 
-- Fusionar la regla de reparto de papeles en Demerzel ([Demerzel#1127](https://github.com/GuitarAlchemist/Demerzel/pull/1127)); volver a Jev sobre evidencia solo si un repositorio construye un paso donde un modelo juzgue evidencia ([gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159)).
-- Ejecutar una llamada tras exportar `TYPESAFE_API_KEY`, sin registrar el secreto.
+- Volver a Jev sobre evidencia solo si un repositorio construye un paso donde un modelo juzgue evidencia ([gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159)).
+- Comprobar la facturación real; no confundir tarifa publicada con factura observada.
 - Confirmar el esquema vivo y valorar un JSON Schema oficial.
-- Ejecutar la calibración en vivo de 13 llamadas solo tras aprobar explícitamente el techo de 0,0021 $.
-- Medir precisión, calibración, revisión humana, coste y latencia contra una base determinista.
+- Evaluar un corpus de repositorios etiquetado, saneado e intacto, con base determinista, latencia y coste de extremo a extremo.
 - Revisar precio, modelos y límites justo antes de llamar.
 
 ## Preguntas abiertas

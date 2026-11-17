@@ -35,7 +35,7 @@ La [fixture](https://github.com/spareilleux/learn/blob/main/code/repository-dogf
 
 ## Lo que no demuestra
 
-- No hubo llamadas a TypeSafe, medición de tokens facturados ni estimación de calidad de Jev.
+- El tracer Petri inicial no hizo llamadas a TypeSafe ni midió tokens facturados o calidad Jev. Los pilotos sintéticos en vivo posteriores y la comprobación de un seam Gaia fijado constan en el [diario fechado](../journal/); no validan la transición de producción.
 - No se leyó ni modificó el estado de producción de Gaia o IX. El texto del caso es una fixture didáctica fijada, no un recibo de autoridad actual.
 - La red protegida comprueba una abstracción finita. No demuestra que el código real imponga las mismas guardas, que los recibos sean auténticos ni que la concurrencia y los reintentos las preserven.
 
