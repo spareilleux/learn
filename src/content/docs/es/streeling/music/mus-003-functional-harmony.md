@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/
 :::note[Streeling University]
 **MUS-003** · Fundamentos de teoría musical · intermedio · 45 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-003-functional-harmony.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-003-functional-harmony.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-001](../../music/mus-001-what-is-a-chord/)
 :::

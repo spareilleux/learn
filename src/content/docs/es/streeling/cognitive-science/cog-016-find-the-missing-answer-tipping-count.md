@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-016** · Hallar cuántas respuestas faltantes invierten la clasificación · intermedio · 45 minutos
 
-Generado por el departamento *Ciencia cognitiva* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-016-find-the-missing-answer-tipping-count.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia cognitiva* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-016-find-the-missing-answer-tipping-count.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [COG-007](../../cognitive-science/cog-007-separate-unaided-recall-from-assisted-success/), [PHI-007](../../philosophy/phi-007-test-a-learning-gain-against-counterfactuals/)
 :::

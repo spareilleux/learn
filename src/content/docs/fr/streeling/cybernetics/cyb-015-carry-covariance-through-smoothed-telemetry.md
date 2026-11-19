@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-015** · Propager la covariance dans une télémétrie lissée · intermédiaire · 45 minutes
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-015-carry-covariance-through-smoothed-telemetry.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-015-carry-covariance-through-smoothed-telemetry.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CYB-010](../../cybernetics/cyb-010-separate-derivative-noise-from-plant-motion/)
 :::

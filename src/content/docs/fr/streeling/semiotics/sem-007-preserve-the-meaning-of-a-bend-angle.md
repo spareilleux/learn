@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-007** · Préserver le sens d'un angle de pliage · intermédiaire · 40 minutes
 
-Généré par le département *Sémiotique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-007-preserve-the-meaning-of-a-bend-angle.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sémiotique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-007-preserve-the-meaning-of-a-bend-angle.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [SEM-006](../../semiotics/sem-006-preserve-orientation-across-scene-frames/), [PHY-011](../../physics/phy-011-compute-bend-length-on-a-declared-neutral-layer/)
 :::

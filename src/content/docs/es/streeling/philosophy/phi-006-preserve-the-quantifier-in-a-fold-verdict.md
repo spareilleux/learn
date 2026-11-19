@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-006** · Conservar el cuantificador en un veredicto de plegado · intermedio · 40 minutos
 
-Generado por el departamento *Filosofía* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-006-preserve-the-quantifier-in-a-fold-verdict.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Filosofía* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-006-preserve-the-quantifier-in-a-fold-verdict.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHI-002](../../philosophy/phi-002-when-is-an-advisory-decision-justified/), [PHY-010](../../physics/phy-010-check-local-flat-fold-angles/), [CS-009](../../computer-science/cs-009-composing-origami-panel-constraints/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/
 :::note[Streeling University]
 **MUS-008** · Intervalles, renversements et intervalles composés · débutant · 45 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-008-intervals-inversion-compound.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-008-intervals-inversion-compound.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-007](../../music/mus-007-pitch-spelling-enharmonic-identity/)
 :::

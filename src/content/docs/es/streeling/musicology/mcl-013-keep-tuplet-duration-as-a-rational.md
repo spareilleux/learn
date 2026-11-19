@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-013** · Conservar la duración del grupo irregular como racional · intermedio · 55 minutos
 
-Generado por el departamento *Musicología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-013-keep-tuplet-duration-as-a-rational.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Musicología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-013-keep-tuplet-duration-as-a-rational.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MCL-006](../../musicology/mcl-006-preserve-meter-grouping-and-tempo-units/)
 :::

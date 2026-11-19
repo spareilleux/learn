@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-012** · Conservar el orden de los eventos en un traspaso · intermedio · 45 minutos
 
-Generado por el departamento *Teoría de la información* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-012-retain-event-order-in-a-handoff-summary.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Teoría de la información* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-012-retain-event-order-in-a-handoff-summary.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [INF-004](../../information-theory/inf-004-information-loss-in-agent-handoffs/)
 :::

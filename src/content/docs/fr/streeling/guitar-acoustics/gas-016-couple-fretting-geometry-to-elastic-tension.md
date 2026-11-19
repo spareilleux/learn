@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-016** · Relier la géométrie du frettage à la tension élastique · avancé · 60 minutes
 
-Généré par le département *Acoustique de la guitare et synthèse sonore* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/fr/gas-016-couple-fretting-geometry-to-elastic-tension.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Acoustique de la guitare et synthèse sonore* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/fr/gas-016-couple-fretting-geometry-to-elastic-tension.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAS-013](../../guitar-acoustics/gas-013-retune-with-an-explicit-tension-assumption/)
 :::

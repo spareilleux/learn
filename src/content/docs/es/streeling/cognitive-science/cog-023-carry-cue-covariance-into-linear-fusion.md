@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-023** · Incorporar la covarianza de las señales a su fusión lineal · intermedio · 45 minutos
 
-Generado por el departamento *Ciencia cognitiva* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-023-carry-cue-covariance-into-linear-fusion.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia cognitiva* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-023-carry-cue-covariance-into-linear-fusion.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [COG-005](../../cognitive-science/cog-005-separate-pitch-estimates-from-listener-reports/), [CYB-015](../../cybernetics/cyb-015-carry-covariance-through-smoothed-telemetry/)
 :::

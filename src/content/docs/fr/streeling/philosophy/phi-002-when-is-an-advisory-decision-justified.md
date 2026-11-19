@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-002** · Philosophie : preuves et autorité dans les décisions consultatives · intermédiaire · 35 minutes
 
-Généré par le département *Philosophie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/fr/phi-002-when-is-an-advisory-decision-justified.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Philosophie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/fr/phi-002-when-is-an-advisory-decision-justified.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHI-001](../../philosophy/phi-001-how-to-argue-well/)
 :::

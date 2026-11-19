@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-020** · Intersecter un rayon de sélection avec les tranches d’une boîte · avancé · 45 minutes
 
-Généré par le département *Informatique visuelle* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-020-intersect-a-scene-picking-ray-with-box-slabs.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique visuelle* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-020-intersect-a-scene-picking-ray-with-box-slabs.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [VC-008](../../visual-computing/vc-008-save-and-query-a-weave-scene/)
 :::

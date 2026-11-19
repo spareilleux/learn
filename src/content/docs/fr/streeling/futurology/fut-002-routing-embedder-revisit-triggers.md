@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-002** · Conditions de réexamen de l’embedder de routage de GA · early-intermediate · 35 minutes
 
-Généré par le département *Futurologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/fr/fut-002-routing-embedder-revisit-triggers.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Futurologie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/fr/fut-002-routing-embedder-revisit-triggers.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [FUT-001](../../futurology/fut-001-thinking-about-tomorrow/)
 :::

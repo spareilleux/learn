@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/
 :::note[Streeling University]
 **MUS-023** · Planifier la conduite des voix sur une phrase entière · intermédiaire · 60 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-023-plan-voice-leading-across-a-phrase.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-023-plan-voice-leading-across-a-phrase.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-005](../../music/mus-005-jazz-harmony/), [MUS-016](../../music/mus-016-recover-voice-correspondence/)
 :::

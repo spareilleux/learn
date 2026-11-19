@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/produc
 :::note[Streeling University]
 **PM-010** · Estandarizar fallos de dogfooding con una mezcla declarada de tareas · intermedio · 45 minutos
 
-Generado por el departamento *Gestión de productos y proyectos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Gestión de productos y proyectos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-010-standardize-dogfood-failures-to-a-declared-task-mix.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PM-009](../../product-management/pm-009-separate-release-adoption-from-artifact-downloads/), [COG-009](../../cognitive-science/cog-009-counterbalance-practice-order-before-comparing-interfaces/)
 :::

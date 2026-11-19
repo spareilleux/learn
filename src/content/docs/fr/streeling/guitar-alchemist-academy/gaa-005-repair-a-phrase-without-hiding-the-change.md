@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-005** · Réparer une phrase sans dissimuler la modification · early-intermediate · 35 minutes
 
-Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-005-repair-a-phrase-without-hiding-the-change.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Guitar Alchemist Academy* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-005-repair-a-phrase-without-hiding-the-change.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAA-004](../../guitar-alchemist-academy/gaa-004-choose-a-useful-voicing/)
 :::

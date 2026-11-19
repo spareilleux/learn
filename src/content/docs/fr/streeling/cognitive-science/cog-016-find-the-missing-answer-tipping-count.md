@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-016** · Trouver le nombre de réponses manquantes qui inverse le classement · intermédiaire · 45 minutes
 
-Généré par le département *Sciences cognitives* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-016-find-the-missing-answer-tipping-count.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sciences cognitives* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-016-find-the-missing-answer-tipping-count.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [COG-007](../../cognitive-science/cog-007-separate-unaided-recall-from-assisted-success/), [PHI-007](../../philosophy/phi-007-test-a-learning-gain-against-counterfactuals/)
 :::

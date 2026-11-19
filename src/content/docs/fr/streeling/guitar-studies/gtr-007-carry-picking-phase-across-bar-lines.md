@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-007** · Conserver la phase d'aller-retour au-delà des barres de mesure · intermédiaire · 40 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-007-carry-picking-phase-across-bar-lines.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-007-carry-picking-phase-across-bar-lines.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GTR-005](../../guitar-studies/gtr-005-plan-which-string-keeps-ringing/), [MCL-006](../../musicology/mcl-006-preserve-meter-grouping-and-tempo-units/)
 :::

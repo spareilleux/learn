@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-014** · Prévoir un peigne à deux trajets à partir des distances · intermédiaire · 55 minutes
 
-Généré par le département *Acoustique de la guitare et synthèse sonore* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/fr/gas-014-predict-a-two-path-comb-with-distance.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Acoustique de la guitare et synthèse sonore* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/fr/gas-014-predict-a-two-path-comb-with-distance.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [AUD-009](../../audio-engineering/aud-009-declare-alignment-before-a-null-test/)
 :::

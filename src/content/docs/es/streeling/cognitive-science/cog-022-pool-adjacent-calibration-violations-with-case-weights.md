@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-022** · Agrupar violaciones adyacentes de calibración con pesos · intermedio · 45 minutos
 
-Generado por el departamento *Ciencia cognitiva* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-022-pool-adjacent-calibration-violations-with-case-weights.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia cognitiva* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-022-pool-adjacent-calibration-violations-with-case-weights.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [COG-003](../../cognitive-science/cog-003-calibrating-fretboard-confidence/), [PSY-017](../../psychohistory/psy-017-calibration-with-six-observations/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-015** · Cartographier les points manquants sans inventer de trous · intermédiaire · 45 minutes
 
-Généré par le département *Visualisation de données* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/fr/dv-015-map-missing-stitches-without-inventing-holes.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Visualisation de données* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/fr/dv-015-map-missing-stitches-without-inventing-holes.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [DV-010](../../data-visualization/dv-010-show-pitch-errors-and-missing-estimates/)
 :::

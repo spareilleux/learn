@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-019** · Distinguir recorrido inverso y reflejo de un diagrama de nudo · avanzado · 45 minutos
 
-Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-019-distinguish-knot-diagram-reversal-from-mirroring.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Semiótica* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-019-distinguish-knot-diagram-reversal-from-mirroring.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [SEM-005](../../semiotics/sem-005-bind-scene-hits-to-crossing-identity/)
 :::

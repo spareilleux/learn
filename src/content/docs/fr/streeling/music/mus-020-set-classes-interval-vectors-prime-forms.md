@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/
 :::note[Streeling University]
 **MUS-020** · Classes d'ensembles, vecteurs d'intervalles, relation Z et formes premières · intermédiaire · 60 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-020-set-classes-interval-vectors-prime-forms.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-020-set-classes-interval-vectors-prime-forms.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-001](../../music/mus-001-what-is-a-chord/), [MUS-002](../../music/mus-002-beyond-tonality/)
 :::

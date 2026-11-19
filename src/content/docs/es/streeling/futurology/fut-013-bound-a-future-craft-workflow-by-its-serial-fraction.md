@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-013** · Acotar un futuro flujo artesanal por su fracción secuencial · avanzado · 45 minutos
 
-Generado por el departamento *Futurología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-013-bound-a-future-craft-workflow-by-its-serial-fraction.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Futurología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-013-bound-a-future-craft-workflow-by-its-serial-fraction.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [FUT-008](../../futurology/fut-008-stress-test-a-release-plan-against-review-backlogs/), [PM-011](../../product-management/pm-011-include-review-and-correction-in-automation-break-even/)
 :::

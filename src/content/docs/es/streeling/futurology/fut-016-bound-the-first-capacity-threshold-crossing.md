@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-016** · Acotar el primer cruce de un umbral de capacidad · avanzado · 50 minutos
 
-Generado por el departamento *Futurología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-016-bound-the-first-capacity-threshold-crossing.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Futurología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-016-bound-the-first-capacity-threshold-crossing.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [FUT-010](../../futurology/fut-010-project-weave-density-before-a-scene-expansion/)
 :::

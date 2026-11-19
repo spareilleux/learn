@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-017** · Séparer le coût d’apprentissage unitaire du coût moyen cumulé · avancé · 50 minutes
 
-Généré par le département *Futurologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/fr/fut-017-separate-unit-learning-cost-from-cumulative-average.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Futurologie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/fr/fut-017-separate-unit-learning-cost-from-cumulative-average.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [FUT-013](../../futurology/fut-013-bound-a-future-craft-workflow-by-its-serial-fraction/)
 :::

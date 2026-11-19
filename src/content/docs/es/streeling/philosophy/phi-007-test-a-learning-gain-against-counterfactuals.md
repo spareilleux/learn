@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-007** · Contrastar una ganancia de aprendizaje con contrafactuales · intermedio · 45 minutos
 
-Generado por el departamento *Filosofía* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-007-test-a-learning-gain-against-counterfactuals.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Filosofía* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-007-test-a-learning-gain-against-counterfactuals.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHI-001](../../philosophy/phi-001-how-to-argue-well/), [COG-007](../../cognitive-science/cog-007-separate-unaided-recall-from-assisted-success/)
 :::

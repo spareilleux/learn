@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-011** · Conservar los recuentos de un mapa de calor normalizado · intermedio · 40 minutos
 
-Generado por el departamento *Visualización de datos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-011-retain-raw-counts-behind-normalized-heatmaps.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Visualización de datos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-011-retain-raw-counts-behind-normalized-heatmaps.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [DV-002](../../data-visualization/dv-002-denominators-and-test-populations/), [DV-008](../../data-visualization/dv-008-streeling-evidence-stage-map/)
 :::

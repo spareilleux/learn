@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-023** · Distinguir puntos y desplazamientos bajo traslación · avanzado · 50 minutos
 
-Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-023-keep-points-and-displacements-distinct-under-translation.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Semiótica* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-023-keep-points-and-displacements-distinct-under-translation.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [SEM-009](../../semiotics/sem-009-keep-units-in-a-composed-craft-instruction/), [SEM-006](../../semiotics/sem-006-preserve-orientation-across-scene-frames/)
 :::

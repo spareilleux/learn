@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-020** · Intersectar un rayo de selección con las franjas de una caja · avanzado · 45 minutos
 
-Generado por el departamento *Computación visual* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-020-intersect-a-scene-picking-ray-with-box-slabs.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Computación visual* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-020-intersect-a-scene-picking-ray-with-box-slabs.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [VC-008](../../visual-computing/vc-008-save-and-query-a-weave-scene/)
 :::

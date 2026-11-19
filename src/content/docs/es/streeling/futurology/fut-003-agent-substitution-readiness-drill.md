@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-003** · Ensayar un cambio de agente sin perder las pruebas · early-intermediate · 35 minutos
 
-Generado por el departamento *Futurología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-003-agent-substitution-readiness-drill.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Futurología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-003-agent-substitution-readiness-drill.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [FUT-002](../../futurology/fut-002-routing-embedder-revisit-triggers/)
 :::

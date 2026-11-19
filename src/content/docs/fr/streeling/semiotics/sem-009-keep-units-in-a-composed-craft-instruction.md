@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-009** · Conserver les unités dans une instruction artisanale composée · intermédiaire · 40 minutes
 
-Généré par le département *Sémiotique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-009-keep-units-in-a-composed-craft-instruction.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sémiotique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-009-keep-units-in-a-composed-craft-instruction.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [SEM-007](../../semiotics/sem-007-preserve-the-meaning-of-a-bend-angle/), [PHY-005](../../physics/phy-005-sheet-thickness-and-scene-units/)
 :::

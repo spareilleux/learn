@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-009** · Componer las restricciones de origami antes de aceptar un apilamiento rígido · intermedio · 40 minutos
 
-Generado por el departamento *Ciencias de la computación* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/es/cs-009-composing-origami-panel-constraints.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencias de la computación* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/es/cs-009-composing-origami-panel-constraints.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CS-001](../../computer-science/cs-001-thinking-algorithmically/), [CS-006](../../computer-science/cs-006-ixql-pipeline-composition/)
 :::

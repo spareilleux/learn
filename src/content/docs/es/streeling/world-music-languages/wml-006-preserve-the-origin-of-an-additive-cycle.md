@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/world-
 :::note[Streeling University]
 **WML-006** · Conservar el origen de un ciclo aditivo · intermedio · 40 minutos
 
-Generado por el departamento *Músicas y lenguas del mundo* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/es/wml-006-preserve-the-origin-of-an-additive-cycle.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Músicas y lenguas del mundo* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/es/wml-006-preserve-the-origin-of-an-additive-cycle.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [WML-003](../../world-music-languages/wml-003-term-preservation-and-cultural-review/), [MCL-006](../../musicology/mcl-006-preserve-meter-grouping-and-tempo-units/)
 :::

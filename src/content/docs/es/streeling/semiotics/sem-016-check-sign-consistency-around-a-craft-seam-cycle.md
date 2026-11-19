@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-016** · Comprobar la coherencia de signos en un ciclo de costuras · avanzado · 45 minutos
 
-Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-016-check-sign-consistency-around-a-craft-seam-cycle.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Semiótica* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-016-check-sign-consistency-around-a-craft-seam-cycle.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [SEM-013](../../semiotics/sem-013-align-two-motif-periods-at-a-textile-seam/), [NET-009](../../network-science/net-009-detect-global-cycles-in-a-panel-stack/)
 :::

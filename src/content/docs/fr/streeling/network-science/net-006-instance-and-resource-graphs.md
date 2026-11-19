@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/networ
 :::note[Streeling University]
 **NET-006** · Graphes d’instances et de ressources · intermédiaire · 40 minutes
 
-Généré par le département *Science des réseaux* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/fr/net-006-instance-and-resource-graphs.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Science des réseaux* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/fr/net-006-instance-and-resource-graphs.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [NET-002](../../network-science/net-002-capability-graphs-and-projections/), [VC-008](../../visual-computing/vc-008-save-and-query-a-weave-scene/)
 :::

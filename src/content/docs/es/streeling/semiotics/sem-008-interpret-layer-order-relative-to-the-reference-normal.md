@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-008** · Interpretar el orden de capas respecto a la normal de referencia · intermedio · 40 minutos
 
-Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-008-interpret-layer-order-relative-to-the-reference-normal.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Semiótica* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-008-interpret-layer-order-relative-to-the-reference-normal.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [SEM-004](../../semiotics/sem-004-face-identity-under-reindexing/), [SEM-006](../../semiotics/sem-006-preserve-orientation-across-scene-frames/)
 :::

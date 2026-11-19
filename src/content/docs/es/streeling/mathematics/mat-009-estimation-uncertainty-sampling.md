@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathem
 :::note[Streeling University]
 **MAT-009** · Estimación, incertidumbre y muestreo reproducible · intermedio · 50 minutos
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/es/mat-009-estimation-uncertainty-sampling.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/es/mat-009-estimation-uncertainty-sampling.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-008](../../mathematics/mat-008-probability-conditional-reasoning/)
 :::

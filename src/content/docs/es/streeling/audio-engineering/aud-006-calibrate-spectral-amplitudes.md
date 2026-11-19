@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-006** · Calibrar una amplitud espectral antes de comparar renderizados · intermedio · 35 minutos
 
-Generado por el departamento *Ingeniería de audio* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-006-calibrate-spectral-amplitudes.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ingeniería de audio* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-006-calibrate-spectral-amplitudes.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [AUD-003](../../audio-engineering/aud-003-transient-preservation-gate/), [AUD-005](../../audio-engineering/aud-005-pcm-guards-and-format-boundaries/)
 :::

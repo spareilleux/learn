@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-007** · Préserver les croisements du tissage à travers une frontière de scène Godot · intermédiaire · 40 minutes
 
-Généré par le département *Informatique visuelle* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-007-weave-seams-as-scene-contracts.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique visuelle* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-007-weave-seams-as-scene-contracts.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [VC-005](../../visual-computing/vc-005-craft-details-through-blender-to-godot/)
 :::

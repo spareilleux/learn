@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/
 :::note[Streeling University]
 **MUS-015** · Elegir qué ignora una distancia de conducción de voces · intermedio · 60 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-015-choose-voice-leading-equivalences.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-015-choose-voice-leading-equivalences.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-014](../../music/mus-014-inversions-bass-line/)
 :::

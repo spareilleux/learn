@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-023** · Ajuster un bottleneck droit à des cibles de contact · avancé · 55 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-023-fit-a-straight-slide-bar-to-contact-targets.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-023-fit-a-straight-slide-bar-to-contact-targets.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GTR-019](../../guitar-studies/gtr-019-declare-the-coordinate-of-a-continuous-slide/)
 :::

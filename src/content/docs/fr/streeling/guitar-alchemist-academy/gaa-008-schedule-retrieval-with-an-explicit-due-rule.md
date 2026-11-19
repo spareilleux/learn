@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-008** · Programmer le rappel avec une règle d’échéance explicite · intermédiaire · 45 minutes
 
-Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-008-schedule-retrieval-with-an-explicit-due-rule.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Guitar Alchemist Academy* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-008-schedule-retrieval-with-an-explicit-due-rule.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAA-007](../../guitar-alchemist-academy/gaa-007-turn-a-voicing-result-into-a-practice-item/)
 :::

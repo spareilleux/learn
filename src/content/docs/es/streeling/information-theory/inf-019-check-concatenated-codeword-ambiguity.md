@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-019** · Comprobar la ambigüedad de palabras de código concatenadas · intermedio · 45 minutos
 
-Generado por el departamento *Teoría de la información* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-019-check-concatenated-codeword-ambiguity.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Teoría de la información* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-019-check-concatenated-codeword-ambiguity.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [INF-014](../../information-theory/inf-014-retain-message-codebook-versions/), [INF-018](../../information-theory/inf-018-frame-text-by-utf8-byte-length/)
 :::

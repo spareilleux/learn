@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-020** · Moyenner un mode sur l’ouverture d’un capteur · avancé · 45 minutes
 
-Généré par le département *Acoustique de la guitare et synthèse sonore* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/fr/gas-020-average-a-mode-over-a-pickup-aperture.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Acoustique de la guitare et synthèse sonore* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/fr/gas-020-average-a-mode-over-a-pickup-aperture.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAS-015](../../guitar-acoustics/gas-015-separate-mode-excitation-from-observation/)
 :::

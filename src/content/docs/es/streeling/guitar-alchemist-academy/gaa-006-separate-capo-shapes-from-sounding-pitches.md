@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-006** · Distinguir las posiciones de acordes con capo de las alturas reales · early-intermediate · 35 minutos
 
-Generado por el departamento *Guitar Alchemist Academy* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/es/gaa-006-separate-capo-shapes-from-sounding-pitches.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Guitar Alchemist Academy* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/es/gaa-006-separate-capo-shapes-from-sounding-pitches.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAA-004](../../guitar-alchemist-academy/gaa-004-choose-a-useful-voicing/), [WML-005](../../world-music-languages/wml-005-declare-note-name-conventions/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/
 :::note[Streeling University]
 **MUS-014** · Inversiones y línea de bajo · intermedio · 45 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-014-inversions-bass-line.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-014-inversions-bass-line.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-013](../../music/mus-013-root-bass-pitch-class-set/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-003** · Musicologie : les étiquettes de style comme preuves · intermédiaire · 35 minutes
 
-Généré par le département *Musicologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-003-style-labels-as-evidence.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musicologie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-003-style-labels-as-evidence.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MCL-002](../../musicology/mcl-002-musical-form/)
 :::

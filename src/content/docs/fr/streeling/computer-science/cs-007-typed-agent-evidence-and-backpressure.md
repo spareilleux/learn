@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-007** · Typer les preuves des agents avant de composer les verdicts · intermédiaire · 40 minutes
 
-Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-007-typed-agent-evidence-and-backpressure.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-007-typed-agent-evidence-and-backpressure.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CS-005](../../computer-science/cs-005-agent-handoff-evidence-contract/), [CS-006](../../computer-science/cs-006-ixql-pipeline-composition/)
 :::

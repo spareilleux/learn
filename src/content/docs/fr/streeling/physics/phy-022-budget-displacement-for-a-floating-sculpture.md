@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physic
 :::note[Streeling University]
 **PHY-022** · Dimensionner le volume déplacé par une sculpture flottante · avancé · 45 minutes
 
-Généré par le département *Physique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-022-budget-displacement-for-a-floating-sculpture.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Physique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-022-budget-displacement-for-a-floating-sculpture.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHY-014](../../physics/phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh/)
 :::

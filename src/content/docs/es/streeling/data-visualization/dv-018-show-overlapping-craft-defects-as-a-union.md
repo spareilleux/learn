@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-018** · Mostrar los defectos artesanales superpuestos mediante su unión · avanzado · 45 minutos
 
-Generado por el departamento *Visualización de datos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-018-show-overlapping-craft-defects-as-a-union.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Visualización de datos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-018-show-overlapping-craft-defects-as-a-union.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [DV-015](../../data-visualization/dv-015-map-missing-stitches-without-inventing-holes/)
 :::

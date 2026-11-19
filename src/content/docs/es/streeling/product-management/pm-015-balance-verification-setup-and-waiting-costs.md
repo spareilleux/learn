@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/produc
 :::note[Streeling University]
 **PM-015** · Equilibrar costes de preparación y espera de verificación · intermedio · 45 minutos
 
-Generado por el departamento *Gestión de productos y proyectos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-015-balance-verification-setup-and-waiting-costs.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Gestión de productos y proyectos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-015-balance-verification-setup-and-waiting-costs.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PM-008](../../product-management/pm-008-size-a-fifty-course-batch-by-review-capacity/), [PM-011](../../product-management/pm-011-include-review-and-correction-in-automation-break-even/)
 :::

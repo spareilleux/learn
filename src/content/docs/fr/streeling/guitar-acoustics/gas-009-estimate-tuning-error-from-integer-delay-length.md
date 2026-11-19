@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-009** · Estimer l’erreur d’accordage due à une longueur de retard entière · intermédiaire · 45 minutes
 
-Généré par le département *Acoustique de la guitare et synthèse sonore* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/fr/gas-009-estimate-tuning-error-from-integer-delay-length.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Acoustique de la guitare et synthèse sonore* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/fr/gas-009-estimate-tuning-error-from-integer-delay-length.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAS-005](../../guitar-acoustics/gas-005-separate-a-partial-peak-from-a-period/)
 :::

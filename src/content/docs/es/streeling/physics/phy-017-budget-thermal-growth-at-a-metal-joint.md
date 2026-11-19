@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physic
 :::note[Streeling University]
 **PHY-017** · Prever la dilatación térmica en una junta metálica · intermedio · 45 minutos
 
-Generado por el departamento *Física* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/es/phy-017-budget-thermal-growth-at-a-metal-joint.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Física* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/es/phy-017-budget-thermal-growth-at-a-metal-joint.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHY-015](../../physics/phy-015-bound-clearance-after-thickening-a-panel/)
 :::

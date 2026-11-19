@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-015** · Distinguir la excitación de un modo de su observación · avanzado · 60 minutos
 
-Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-015-separate-mode-excitation-from-observation.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-015-separate-mode-excitation-from-observation.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAS-006](../../guitar-acoustics/gas-006-relate-pluck-position-to-string-modes/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/
 :::note[Streeling University]
 **MUS-025** · Mantener la melodía exigida en un voicing · intermedio · 60 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-025-keep-the-melody-in-a-voicing.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-025-keep-the-melody-in-a-voicing.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-012](../../music/mus-012-chord-formulas-essential-tones-doubling/), [MUS-016](../../music/mus-016-recover-voice-correspondence/), [MUS-024](../../music/mus-024-preserve-attacks-and-harmonic-boundaries/)
 :::

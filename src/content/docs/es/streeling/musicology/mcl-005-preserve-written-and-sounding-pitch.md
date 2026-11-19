@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-005** · Conservar la altura escrita y la altura real al importar una partitura · intermedio · 35 minutos
 
-Generado por el departamento *Musicología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-005-preserve-written-and-sounding-pitch.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Musicología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-005-preserve-written-and-sounding-pitch.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [WML-005](../../world-music-languages/wml-005-declare-note-name-conventions/)
 :::

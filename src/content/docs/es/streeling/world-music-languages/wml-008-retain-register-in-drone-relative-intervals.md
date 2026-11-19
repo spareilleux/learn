@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/world-
 :::note[Streeling University]
 **WML-008** · Conservar el registro en intervalos relativos a un bordón · intermedio · 45 minutos
 
-Generado por el departamento *Músicas y lenguas del mundo* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/es/wml-008-retain-register-in-drone-relative-intervals.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Músicas y lenguas del mundo* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/es/wml-008-retain-register-in-drone-relative-intervals.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [WML-007](../../world-music-languages/wml-007-resolve-scale-degrees-against-tonic-and-mode/)
 :::

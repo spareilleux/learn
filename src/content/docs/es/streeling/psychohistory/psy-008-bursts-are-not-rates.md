@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psycho
 :::note[Streeling University]
 **PSY-008** · Las ráfagas no son tasas: llegadas de eventos en el registro de disparadores · intermedio · 40 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-008-bursts-are-not-rates.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-008-bursts-are-not-rates.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-002](../../psychohistory/psy-002-governance-phase-transitions/), [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/)
 :::

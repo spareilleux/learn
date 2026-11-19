@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physic
 :::note[Streeling University]
 **PHY-004** · Quand la vélocité déplace la position de pincement dans le moteur de guitare GA · intermédiaire · 40 minutes
 
-Généré par le département *Physique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-004-velocity-pick-position-guitar-engine.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Physique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-004-velocity-pick-position-guitar-engine.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHY-001](../../physics/phy-001-science-of-guitar-sound/), [PHY-003](../../physics/phy-003-sampling-aliasing-guitar-engine/)
 :::

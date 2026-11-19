@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-019** · Distinguer inversion du parcours et miroir d’un diagramme de nœud · avancé · 45 minutes
 
-Généré par le département *Sémiotique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-019-distinguish-knot-diagram-reversal-from-mirroring.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sémiotique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-019-distinguish-knot-diagram-reversal-from-mirroring.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [SEM-005](../../semiotics/sem-005-bind-scene-hits-to-crossing-identity/)
 :::

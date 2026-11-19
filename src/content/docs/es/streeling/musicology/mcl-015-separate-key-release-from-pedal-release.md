@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-015** · Separar la liberación de la tecla de la del pedal · avanzado · 60 minutos
 
-Generado por el departamento *Musicología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-015-separate-key-release-from-pedal-release.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Musicología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-015-separate-key-release-from-pedal-release.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MCL-012](../../musicology/mcl-012-merge-ties-without-merging-slurs/)
 :::

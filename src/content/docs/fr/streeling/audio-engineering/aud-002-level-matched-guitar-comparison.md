@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-002** · Comparer un rendu de guitare GA à niveau de lecture égalisé · intermédiaire · 30 minutes
 
-Généré par le département *Ingénierie audio* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/fr/aud-002-level-matched-guitar-comparison.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Ingénierie audio* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/fr/aud-002-level-matched-guitar-comparison.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAS-001](../../guitar-acoustics/gas-001-open-string-audio-evidence/)
 :::

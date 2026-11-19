@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-023** · Ajustar una barra de slide recta a contactos objetivo · avanzado · 55 minutos
 
-Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-023-fit-a-straight-slide-bar-to-contact-targets.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Estudios de guitarra* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-023-fit-a-straight-slide-bar-to-contact-targets.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GTR-019](../../guitar-studies/gtr-019-declare-the-coordinate-of-a-continuous-slide/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-004** · Modéliser le placement temporel sans inventer un style · intermédiaire · 40 minutes
 
-Généré par le département *Musicologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-004-model-timing-without-inventing-a-style.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musicologie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-004-model-timing-without-inventing-a-style.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MCL-003](../../musicology/mcl-003-style-labels-as-evidence/), [MUS-004](../../music/mus-004-rhythm-and-groove/)
 :::

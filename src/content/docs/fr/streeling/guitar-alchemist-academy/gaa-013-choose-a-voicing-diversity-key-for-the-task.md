@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-013** · Choisir une clé de diversité des voicings selon la tâche · intermédiaire · 55 minutes
 
-Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-013-choose-a-voicing-diversity-key-for-the-task.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Guitar Alchemist Academy* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-013-choose-a-voicing-diversity-key-for-the-task.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAA-004](../../guitar-alchemist-academy/gaa-004-choose-a-useful-voicing/)
 :::

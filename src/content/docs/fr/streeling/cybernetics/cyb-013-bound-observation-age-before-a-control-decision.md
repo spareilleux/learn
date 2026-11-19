@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-013** · Borner l’ancienneté d’une observation avant une décision de contrôle · intermédiaire · 45 minutes
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-013-bound-observation-age-before-a-control-decision.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-013-bound-observation-age-before-a-control-decision.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CYB-004](../../cybernetics/cyb-004-observe-before-correcting-a-feedback-loop/), [NET-008](../../network-science/net-008-map-clock-domains-before-ordering-events/)
 :::

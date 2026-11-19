@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-003** · Medir la deriva de las distribuciones de veredictos con la divergencia de Jensen-Shannon · intermedio · 35 minutos
 
-Generado por el departamento *Teoría de la información* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-003-verdict-distribution-drift.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Teoría de la información* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-003-verdict-distribution-drift.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [INF-001](../../information-theory/inf-001-entropy-of-governance/)
 :::

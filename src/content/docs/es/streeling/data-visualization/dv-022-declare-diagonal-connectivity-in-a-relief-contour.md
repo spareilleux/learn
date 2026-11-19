@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-022** · Declarar la conectividad diagonal de un contorno de relieve · avanzado · 45 minutos
 
-Generado por el departamento *Visualización de datos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-022-declare-diagonal-connectivity-in-a-relief-contour.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Visualización de datos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-022-declare-diagonal-connectivity-in-a-relief-contour.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [DV-015](../../data-visualization/dv-015-map-missing-stitches-without-inventing-holes/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-017** · Limitar el cambio de mando por separado de su amplitud · intermedio · 45 minutos
 
-Generado por el departamento *Cibernética* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-017-limit-command-change-separately-from-amplitude.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Cibernética* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-017-limit-command-change-separately-from-amplitude.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CYB-011](../../cybernetics/cyb-011-prevent-integral-accumulation-under-saturation/)
 :::

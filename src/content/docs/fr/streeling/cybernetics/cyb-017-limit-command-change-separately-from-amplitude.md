@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-017** · Limiter la variation de commande séparément de son amplitude · intermédiaire · 45 minutes
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-017-limit-command-change-separately-from-amplitude.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-017-limit-command-change-separately-from-amplitude.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CYB-011](../../cybernetics/cyb-011-prevent-integral-accumulation-under-saturation/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/networ
 :::note[Streeling University]
 **NET-016** · Encontrar pasos obligatorios mediante dominadores · intermedio · 45 minutos
 
-Generado por el departamento *Ciencia de redes* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-016-find-mandatory-gates-with-dominators.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia de redes* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-016-find-mandatory-gates-with-dominators.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [NET-004](../../network-science/net-004-semantic-backpressure-and-evidence-dependencies/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-021** · Distinguer le taux d’entropie d’un flux de l’entropie des étiquettes · intermédiaire · 45 minutes
 
-Généré par le département *Théorie de l'information* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-021-distinguish-stream-entropy-rate-from-label-entropy.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Théorie de l'information* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-021-distinguish-stream-entropy-rate-from-label-entropy.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [INF-012](../../information-theory/inf-012-retain-event-order-in-a-handoff-summary/), [INF-010](../../information-theory/inf-010-keep-joint-outcomes-when-composing-verdicts/)
 :::

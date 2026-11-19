@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-019** · Développer un trille avec une note finale explicite · avancé · 45 minutes
 
-Généré par le département *Musicologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-019-expand-a-trill-with-an-explicit-terminal-note.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musicologie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-019-expand-a-trill-with-an-explicit-terminal-note.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MCL-014](../../musicology/mcl-014-declare-where-grace-notes-take-their-time/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-005** · Separar las estimaciones de altura de las respuestas de los oyentes · intermedio · 40 minutos
 
-Generado por el departamento *Ciencia cognitiva* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-005-separate-pitch-estimates-from-listener-reports.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia cognitiva* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-005-separate-pitch-estimates-from-listener-reports.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [COG-004](../../cognitive-science/cog-004-score-a-pitch-discrimination-task/), [GAS-005](../../guitar-acoustics/gas-005-separate-a-partial-peak-from-a-period/)
 :::

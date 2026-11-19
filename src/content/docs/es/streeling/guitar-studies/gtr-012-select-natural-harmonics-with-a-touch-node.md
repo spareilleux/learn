@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-012** · Seleccionar armónicos naturales con un punto de contacto · intermedio · 55 minutos
 
-Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-012-select-natural-harmonics-with-a-touch-node.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Estudios de guitarra* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-012-select-natural-harmonics-with-a-touch-node.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAS-006](../../guitar-acoustics/gas-006-relate-pluck-position-to-string-modes/)
 :::

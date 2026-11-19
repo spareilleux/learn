@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-012** · Choisir un fondu en explicitant son coût énergétique · intermédiaire · 45 minutes
 
-Généré par le département *Ingénierie audio* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/fr/aud-012-choose-a-fade-without-hiding-its-energy-cost.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Ingénierie audio* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/fr/aud-012-choose-a-fade-without-hiding-its-energy-cost.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [AUD-006](../../audio-engineering/aud-006-calibrate-spectral-amplitudes/), [AUD-009](../../audio-engineering/aud-009-declare-alignment-before-a-null-test/)
 :::

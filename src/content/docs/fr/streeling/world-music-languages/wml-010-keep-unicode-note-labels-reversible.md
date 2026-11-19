@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/world-
 :::note[Streeling University]
 **WML-010** · Préserver la réversibilité des étiquettes de notes Unicode · intermédiaire · 45 minutes
 
-Généré par le département *Musiques et langues du monde* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/fr/wml-010-keep-unicode-note-labels-reversible.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musiques et langues du monde* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/fr/wml-010-keep-unicode-note-labels-reversible.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [WML-005](../../world-music-languages/wml-005-declare-note-name-conventions/), [WML-007](../../world-music-languages/wml-007-resolve-scale-degrees-against-tonic-and-mode/)
 :::

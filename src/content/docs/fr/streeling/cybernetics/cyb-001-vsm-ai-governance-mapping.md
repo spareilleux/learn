@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-001** · Fondements de la gouvernance cybernétique
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-001-vsm-ai-governance-mapping.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-001-vsm-ai-governance-mapping.fr.md) · [Mon journal](../../journal/)
 :::
 
 **Département :** Cybernétique

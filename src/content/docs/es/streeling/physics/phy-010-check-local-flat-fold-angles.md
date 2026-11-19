@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physic
 :::note[Streeling University]
 **PHY-010** · Comprobar los ángulos locales de un plegado plano · intermedio · 40 minutos
 
-Generado por el departamento *Física* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/es/phy-010-check-local-flat-fold-angles.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Física* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/es/phy-010-check-local-flat-fold-angles.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHY-005](../../physics/phy-005-sheet-thickness-and-scene-units/), [CS-009](../../computer-science/cs-009-composing-origami-panel-constraints/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-024** · Precompensar la frecuencia de corte bilineal · avanzado · 55 minutos
 
-Generado por el departamento *Ingeniería de audio* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-024-prewarp-a-bilinear-filter-cutoff.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ingeniería de audio* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-024-prewarp-a-bilinear-filter-cutoff.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [AUD-013](../../audio-engineering/aud-013-resample-without-relabeling-the-clock/)
 :::

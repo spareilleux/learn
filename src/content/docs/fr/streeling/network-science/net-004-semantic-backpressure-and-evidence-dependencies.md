@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/networ
 :::note[Streeling University]
 **NET-004** · Tester la contre-pression sémantique à l’aide de dépendances de preuves · intermédiaire · 40 minutes
 
-Généré par le département *Science des réseaux* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/fr/net-004-semantic-backpressure-and-evidence-dependencies.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Science des réseaux* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/fr/net-004-semantic-backpressure-and-evidence-dependencies.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [NET-003](../../network-science/net-003-worker-lane-coverage-and-fragility/)
 :::

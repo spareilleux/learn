@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-022** · Proyectar acciones propuestas sobre un conjunto factible · intermedio · 45 minutos
 
-Generado por el departamento *Cibernética* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-022-project-proposed-actions-onto-a-declared-feasible-set.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Cibernética* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-022-project-proposed-actions-onto-a-declared-feasible-set.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CYB-017](../../cybernetics/cyb-017-limit-command-change-separately-from-amplitude/), [CYB-020](../../cybernetics/cyb-020-check-disturbance-robust-set-closure/)
 :::

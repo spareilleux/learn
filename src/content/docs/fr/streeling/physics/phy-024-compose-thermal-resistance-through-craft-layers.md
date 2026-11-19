@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physic
 :::note[Streeling University]
 **PHY-024** · Composer la résistance thermique de couches artisanales · avancé · 45 minutes
 
-Généré par le département *Physique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-024-compose-thermal-resistance-through-craft-layers.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Physique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-024-compose-thermal-resistance-through-craft-layers.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHY-017](../../physics/phy-017-budget-thermal-growth-at-a-metal-joint/)
 :::

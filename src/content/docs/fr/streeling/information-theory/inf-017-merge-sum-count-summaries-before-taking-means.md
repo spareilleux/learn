@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-017** · Fusionner sommes et effectifs avant de calculer les moyennes · intermédiaire · 45 minutes
 
-Généré par le département *Théorie de l'information* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-017-merge-sum-count-summaries-before-taking-means.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Théorie de l'information* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-017-merge-sum-count-summaries-before-taking-means.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [INF-015](../../information-theory/inf-015-weight-sampled-telemetry-before-summarizing-failures/)
 :::

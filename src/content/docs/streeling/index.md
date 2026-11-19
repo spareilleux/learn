@@ -17,7 +17,7 @@ sidebar:
 Streeling University is the knowledge layer of [Demerzel](https://github.com/GuitarAlchemist/Demerzel), the governance framework of the GuitarAlchemist ecosystem. Each department is an agent persona that researches its discipline and writes course modules.
 
 :::caution[Generated content]
-These modules were written by AI departments and have **not been reviewed**. Unlike the other courses on this site, nothing here has been tested on my machine yet — my [journal](journal/) tracks what I have actually studied and verified.
+These modules were written by AI departments, and no review is recorded for any of their **1446** lesson pages yet. Unlike the other courses on this site, nothing here has been tested on my machine yet — my [journal](journal/) tracks what I have actually studied and verified.
 :::
 
 ## Departments

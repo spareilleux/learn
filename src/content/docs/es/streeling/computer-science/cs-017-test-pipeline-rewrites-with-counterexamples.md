@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-017** · Probar reescrituras de pipelines con contraejemplos · intermedio · 45 minutos
 
-Generado por el departamento *Ciencias de la computación* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/es/cs-017-test-pipeline-rewrites-with-counterexamples.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencias de la computación* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/es/cs-017-test-pipeline-rewrites-with-counterexamples.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CS-010](../../computer-science/cs-010-compose-fail-fast-ga-computations/)
 :::

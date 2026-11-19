@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-018** · Faire le bilan d’énergie à une jonction d’impédances · avancé · 45 minutes
 
-Généré par le département *Acoustique de la guitare et synthèse sonore* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/fr/gas-018-account-for-energy-at-an-impedance-junction.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Acoustique de la guitare et synthèse sonore* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/fr/gas-018-account-for-energy-at-an-impedance-junction.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAS-011](../../guitar-acoustics/gas-011-track-reflection-polarity-at-string-boundaries/)
 :::

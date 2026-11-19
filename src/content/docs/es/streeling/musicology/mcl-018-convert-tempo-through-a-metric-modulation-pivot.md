@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-018** · Convertir el tempo mediante un pivote de modulación métrica · avanzado · 45 minutos
 
-Generado por el departamento *Musicología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-018-convert-tempo-through-a-metric-modulation-pivot.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Musicología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-018-convert-tempo-through-a-metric-modulation-pivot.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MCL-006](../../musicology/mcl-006-preserve-meter-grouping-and-tempo-units/)
 :::

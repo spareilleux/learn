@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-024** · Retrouver les valeurs des couches à partir des extrémités empilées · avancé · 50 minutes
 
-Généré par le département *Visualisation de données* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/fr/dv-024-recover-layer-values-from-stacked-endpoints.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Visualisation de données* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/fr/dv-024-recover-layer-values-from-stacked-endpoints.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [DV-006](../../data-visualization/dv-006-position-length-area-comparisons/)
 :::

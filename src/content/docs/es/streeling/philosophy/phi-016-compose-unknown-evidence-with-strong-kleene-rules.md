@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-016** · Componer evidencia desconocida con reglas fuertes de Kleene · avanzado · 50 minutos
 
-Generado por el departamento *Filosofía* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-016-compose-unknown-evidence-with-strong-kleene-rules.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Filosofía* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-016-compose-unknown-evidence-with-strong-kleene-rules.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHI-001](../../philosophy/phi-001-how-to-argue-well/), [SEM-003](../../semiotics/sem-003-status-signs-and-evidence/)
 :::

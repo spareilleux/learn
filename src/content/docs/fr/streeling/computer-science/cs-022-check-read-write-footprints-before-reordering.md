@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-022** · Examiner les lectures et écritures avant de réordonner · intermédiaire · 45 minutes
 
-Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-022-check-read-write-footprints-before-reordering.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-022-check-read-write-footprints-before-reordering.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CS-017](../../computer-science/cs-017-test-pipeline-rewrites-with-counterexamples/)
 :::

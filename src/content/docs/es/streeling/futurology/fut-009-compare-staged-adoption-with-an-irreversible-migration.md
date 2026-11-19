@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-009** · Comparar adopción por etapas y migración irreversible · intermedio · 40 minutos
 
-Generado por el departamento *Futurología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-009-compare-staged-adoption-with-an-irreversible-migration.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Futurología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-009-compare-staged-adoption-with-an-irreversible-migration.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [FUT-004](../../futurology/fut-004-scenario-test-an-observatory-renderer/), [FUT-005](../../futurology/fut-005-value-a-renderer-pilot-before-running-it/)
 :::

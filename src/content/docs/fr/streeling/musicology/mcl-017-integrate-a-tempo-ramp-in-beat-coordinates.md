@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-017** · Intégrer une rampe de tempo dans le repère des temps musicaux · avancé · 60 minutes
 
-Généré par le département *Musicologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-017-integrate-a-tempo-ramp-in-beat-coordinates.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musicologie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-017-integrate-a-tempo-ramp-in-beat-coordinates.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MCL-007](../../musicology/mcl-007-integrate-a-midi-tempo-map-before-scheduling/)
 :::

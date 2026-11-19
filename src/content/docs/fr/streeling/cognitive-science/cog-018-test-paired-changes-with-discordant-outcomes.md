@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-018** · Tester des changements appariés à partir des résultats discordants · intermédiaire · 45 minutes
 
-Généré par le département *Sciences cognitives* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-018-test-paired-changes-with-discordant-outcomes.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sciences cognitives* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-018-test-paired-changes-with-discordant-outcomes.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [COG-009](../../cognitive-science/cog-009-counterbalance-practice-order-before-comparing-interfaces/), [COG-011](../../cognitive-science/cog-011-measure-rubric-disagreement-before-adjudication/)
 :::

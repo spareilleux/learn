@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-022** · Placer les frettes multidiapasons dans l’espace physique · avancé · 55 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-022-place-multiscale-frets-in-physical-coordinates.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-022-place-multiscale-frets-in-physical-coordinates.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GTR-006](../../guitar-studies/gtr-006-keep-picking-distance-relative-to-frets/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-019** · Corriger l’accord de revue selon les marges des étiquettes · intermédiaire · 45 minutes
 
-Généré par le département *Sciences cognitives* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-019-correct-review-agreement-for-label-marginals.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sciences cognitives* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-019-correct-review-agreement-for-label-marginals.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [COG-011](../../cognitive-science/cog-011-measure-rubric-disagreement-before-adjudication/)
 :::

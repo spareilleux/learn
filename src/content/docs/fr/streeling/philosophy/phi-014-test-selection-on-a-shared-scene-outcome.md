@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-014** · Tester la sélection sur un résultat de scène commun · avancé · 45 minutes
 
-Généré par le département *Philosophie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/fr/phi-014-test-selection-on-a-shared-scene-outcome.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Philosophie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/fr/phi-014-test-selection-on-a-shared-scene-outcome.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHI-011](../../philosophy/phi-011-cross-mesh-and-lighting-before-attributing-a-render-change/)
 :::

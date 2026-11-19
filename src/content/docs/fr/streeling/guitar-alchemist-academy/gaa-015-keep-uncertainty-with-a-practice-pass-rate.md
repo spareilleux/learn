@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-015** · Conserver l’incertitude avec un taux de réussite · avancé · 60 minutes
 
-Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-015-keep-uncertainty-with-a-practice-pass-rate.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Guitar Alchemist Academy* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-015-keep-uncertainty-with-a-practice-pass-rate.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAA-010](../../guitar-alchemist-academy/gaa-010-define-a-practice-pass-before-counting-success/)
 :::

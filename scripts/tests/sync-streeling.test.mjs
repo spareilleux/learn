@@ -249,6 +249,106 @@ test('a broken relative link stops the sync before any page changes', () => {
 	}
 });
 
+// Review receipts. The blob is computed by Git here, not by the generator's own code.
+const blobOf = (text) => execFileSync('git', ['hash-object', '--stdin'], { input: text }).toString().trim();
+const ALP1 = { en: 'streeling/courses/alpha/en/alp-001-first.md', fr: 'streeling/courses/alpha/fr/alp-001-first.fr.md', es: 'streeling/courses/alpha/es/alp-001-first.es.md' };
+const ALP2_EN = 'streeling/courses/alpha/en/alp-002-second.md';
+const BET1_EN = 'streeling/courses/beta/en/bet-001-other.md';
+const receipt = (source, blob, kind, verdict, reviewer, date, n) =>
+	JSON.stringify({ source, blob, kind, reviewer, date, verdict, evidence: `https://example.org/review/${n}` });
+const NONE = {
+	en: 'No review of this text is recorded yet.',
+	fr: "Aucune relecture de ce texte n'est encore consignée.",
+	es: 'Todavía no hay ninguna revisión registrada de este texto.',
+};
+const STALE_ONE = {
+	en: 'One was recorded for an earlier version, which has changed since.',
+	fr: 'Une relecture avait été consignée pour une version antérieure, qui a changé depuis.',
+	es: 'Se registró una para una versión anterior, que ha cambiado desde entonces.',
+};
+// The review sentence of a module page: what follows the department, up to the link to the source.
+const reviewLine = (text) => text.match(/(?:department|Demerzel)\.\s(.*?)\s\[(?:View source|Voir la source|Ver la fuente)\]/)[1];
+
+function syncWith(name, extra) {
+	const dir = fs.mkdtempSync(path.join(os.tmpdir(), `streeling-${name}-`));
+	const destination = path.join(dir, 'site');
+	sync(makeSource(path.join(dir, 'source'), extra), destination);
+	return (lang, file) => fs.readFileSync(path.join(destination, DOCS[lang], file), 'utf8');
+}
+
+test('with no receipt, every module page and the overview say that no review is recorded', () => {
+	const overviews = {
+		en: 'no review is recorded for any of their **6** lesson pages yet.',
+		fr: "aucune relecture n'est encore consignée pour leurs **6** pages de cours.",
+		es: 'todavía no hay ninguna revisión registrada para sus **6** páginas de cursos.',
+	};
+	for (const lang of LANGS) {
+		for (const id of HAS_PAGE[lang]) {
+			const text = page('fresh', lang, path.join(id.startsWith('alp') ? 'alpha' : 'beta', `${id}.md`));
+			assert.equal(reviewLine(text), NONE[lang], `${lang} ${id}`);
+			assert.ok(!/by me|par moi|lo he revisado/.test(text), `${lang} ${id} no longer speaks of the site owner's study`);
+		}
+		assert.ok(page('fresh', lang, 'index.md').includes(overviews[lang]), `${lang} overview`);
+	}
+});
+
+test('a receipt shows only on the exact file and blob it names, and the overview counts what is shown', () => {
+	const read = syncWith('receipts', {
+		// alp-001 in English: an older verdict, then the one that shows.
+		'streeling/review-receipts/r1.json': receipt(ALP1.en, blobOf(FIXTURE[ALP1.en]), 'subject', 'changes_requested', 'Ada', '2026-11-01', 1),
+		'streeling/review-receipts/r2.json': receipt(ALP1.en, blobOf(FIXTURE[ALP1.en]), 'subject', 'approved', 'Ada', '2026-11-20', 2),
+		// alp-001 in French: a language review of the French text.
+		'streeling/review-receipts/r3.json': receipt(ALP1.fr, blobOf(FIXTURE[ALP1.fr]), 'language', 'changes_requested', 'Bea', '2026-11-21', 3),
+		// alp-001 in Spanish: names the Spanish file, but the blob is the English text's.
+		'streeling/review-receipts/r4.json': receipt(ALP1.es, blobOf(FIXTURE[ALP1.en]), 'language', 'approved', 'Cid', '2026-11-22', 4),
+		// alp-002: a blob the file never had.
+		'streeling/review-receipts/r5.json': receipt(ALP2_EN, '0'.repeat(40), 'subject', 'approved', 'Dee', '2026-11-23', 5),
+		// bet-001: right file and blob, but no verdict.
+		'streeling/review-receipts/r6.json': JSON.stringify({ source: BET1_EN, blob: blobOf(FIXTURE[BET1_EN]), kind: 'subject', reviewer: 'Eve', date: '2026-11-24', evidence: 'https://example.org/review/6' }),
+	});
+	assert.equal(
+		reviewLine(read('en', 'alpha/alp-001.md')),
+		'Subject review: approved (Ada, 2026-11-20, [evidence](https://example.org/review/2)). No other review of this text is recorded.',
+	);
+	assert.equal(
+		reviewLine(read('fr', 'alpha/alp-001.md')),
+		"Relecture de la langue : modifications demandées (Bea, 2026-11-21, [preuve](https://example.org/review/3)). Aucune autre relecture de ce texte n'est consignée.",
+	);
+	assert.equal(reviewLine(read('es', 'alpha/alp-001.md')), `${NONE.es} ${STALE_ONE.es}`, 'another text’s blob does not count');
+	assert.equal(reviewLine(read('en', 'alpha/alp-002.md')), `${NONE.en} ${STALE_ONE.en}`);
+	assert.equal(reviewLine(read('en', 'beta/bet-001.md')), NONE.en, 'an incomplete receipt stays pending');
+	assert.equal(reviewLine(read('fr', 'beta/bet-001.md')), NONE.fr);
+
+	const overviews = {
+		en: 'A review is recorded for **2** of their **6** lesson pages, and each of those pages says which review and its verdict; the other **4** have none. 2 older reviews no longer apply: their text has changed.',
+		fr: "Une relecture est consignée pour **2** de leurs **6** pages de cours, et chacune de ces pages dit laquelle et son verdict ; les **4** autres n'en ont aucune. 2 relectures plus anciennes ne valent plus : leur texte a changé.",
+		es: 'Hay una revisión registrada para **2** de sus **6** páginas de cursos, y cada una de esas páginas dice cuál y su veredicto; las otras **4** no tienen ninguna. 2 revisiones más antiguas ya no valen: su texto ha cambiado.',
+	};
+	for (const lang of LANGS) assert.ok(read(lang, 'index.md').includes(overviews[lang]), `${lang} overview`);
+});
+
+test('editing a reviewed file takes its verdict off the page until the new text is reviewed', () => {
+	const edited = FIXTURE[ALP1.en].replace('Next:', 'Then:');
+	const read = syncWith('edited', {
+		[ALP1.en]: edited,
+		'streeling/review-receipts/r1.json': receipt(ALP1.en, blobOf(FIXTURE[ALP1.en]), 'subject', 'approved', 'Ada', '2026-11-20', 1),
+	});
+	assert.equal(reviewLine(read('en', 'alpha/alp-001.md')), `${NONE.en} ${STALE_ONE.en}`);
+	assert.ok(read('en', 'index.md').includes('no review is recorded for any of their **6** lesson pages yet. One older review no longer applies: its text has changed.'));
+
+	const rereviewed = syncWith('rereviewed', {
+		[ALP1.en]: edited,
+		'streeling/review-receipts/r1.json': receipt(ALP1.en, blobOf(FIXTURE[ALP1.en]), 'subject', 'approved', 'Ada', '2026-11-20', 1),
+		'streeling/review-receipts/r2.json': receipt(ALP1.en, blobOf(edited), 'subject', 'approved', 'Ada', '2026-11-25', 2),
+	});
+	assert.equal(
+		reviewLine(rereviewed('en', 'alpha/alp-001.md')),
+		'Subject review: approved (Ada, 2026-11-25, [evidence](https://example.org/review/2)). No other review of this text is recorded.',
+		'the review of the earlier text is not mentioned once the new one is reviewed',
+	);
+	assert.ok(rereviewed('en', 'index.md').includes('A review is recorded for **1** of their **6** lesson pages, and that page says which review and its verdict; the other **5** have none. Unlike the other courses'));
+});
+
 test('the old Demerzel import option says where the source went', () => {
 	assert.throws(
 		() => execFileSync(process.execPath, [SCRIPT, '--ref', 'HEAD', '--out', path.join(tmp, 'ref')], { stdio: 'pipe' }),

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/world-
 :::note[Streeling University]
 **WML-002** · Músicas del mundo e idiomas: DADGAD en una respuesta de GA sobre afinaciones · intermedio · 35 minutos
 
-Generado por el departamento *Músicas y lenguas del mundo* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/es/wml-002-dadgad-layout-and-cultural-claims.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Músicas y lenguas del mundo* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/es/wml-002-dadgad-layout-and-cultural-claims.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [WML-001](../../world-music-languages/wml-001-guitar-around-the-world/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-004** · Puntuar una tarea de discriminación de altura sin inventar un resultado de escucha · intermedio · 35 minutos
 
-Generado por el departamento *Ciencia cognitiva* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-004-score-a-pitch-discrimination-task.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia cognitiva* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-004-score-a-pitch-discrimination-task.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [COG-003](../../cognitive-science/cog-003-calibrating-fretboard-confidence/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-020** · Reconstruire un signal avec les poids de recouvrement-addition · avancé · 45 minutes
 
-Généré par le département *Ingénierie audio* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/fr/aud-020-reconstruct-a-signal-with-overlap-add-weights.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Ingénierie audio* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/fr/aud-020-reconstruct-a-signal-with-overlap-add-weights.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [AUD-006](../../audio-engineering/aud-006-calibrate-spectral-amplitudes/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-013** · Comparar curvas de aprendizaje con presupuestos de evaluación iguales · intermedio · 40 minutos
 
-Generado por el departamento *Visualización de datos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-013-compare-learning-curves-at-equal-evaluation-budgets.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Visualización de datos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-013-compare-learning-curves-at-equal-evaluation-budgets.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [DV-002](../../data-visualization/dv-002-denominators-and-test-populations/), [PHI-007](../../philosophy/phi-007-test-a-learning-gain-against-counterfactuals/)
 :::

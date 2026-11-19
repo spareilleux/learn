@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-005** · Probar la idempotencia más allá de los valores devueltos al repetir · intermedio · 35 minutos
 
-Generado por el departamento *Filosofía* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-005-test-idempotence-beyond-replayed-values.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Filosofía* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-005-test-idempotence-beyond-replayed-values.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHI-002](../../philosophy/phi-002-when-is-an-advisory-decision-justified/), [NET-007](../../network-science/net-007-separate-dag-readiness-from-admission/)
 :::

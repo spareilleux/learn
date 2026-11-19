@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-014** · Probar bandas muertas con acciones cuantizadas · intermedio · 45 minutos
 
-Generado por el departamento *Cibernética* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-014-test-deadbands-with-quantized-actions.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Cibernética* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-014-test-deadbands-with-quantized-actions.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CYB-005](../../cybernetics/cyb-005-stop-render-policy-flapping/), [CYB-011](../../cybernetics/cyb-011-prevent-integral-accumulation-under-saturation/)
 :::

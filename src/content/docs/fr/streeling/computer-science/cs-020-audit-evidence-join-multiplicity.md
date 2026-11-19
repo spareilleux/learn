@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-020** · Auditer la multiplicité d’une jointure de preuves · intermédiaire · 45 minutes
 
-Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-020-audit-evidence-join-multiplicity.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-020-audit-evidence-join-multiplicity.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CS-008](../../computer-science/cs-008-compose-exact-source-review-verdicts/), [INF-010](../../information-theory/inf-010-keep-joint-outcomes-when-composing-verdicts/)
 :::

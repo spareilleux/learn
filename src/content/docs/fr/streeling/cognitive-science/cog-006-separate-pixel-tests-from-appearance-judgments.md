@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-006** · Distinguer les tests de pixels des jugements d'apparence · intermédiaire · 35 minutes
 
-Généré par le département *Sciences cognitives* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-006-separate-pixel-tests-from-appearance-judgments.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sciences cognitives* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-006-separate-pixel-tests-from-appearance-judgments.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHY-009](../../physics/phy-009-distinguish-linear-color-from-display-encoding/)
 :::

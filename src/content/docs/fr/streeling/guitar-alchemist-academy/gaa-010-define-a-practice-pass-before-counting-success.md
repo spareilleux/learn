@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-010** · Définir une réussite de pratique avant de compter les succès · intermédiaire · 45 minutes
 
-Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-010-define-a-practice-pass-before-counting-success.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Guitar Alchemist Academy* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-010-define-a-practice-pass-before-counting-success.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAA-007](../../guitar-alchemist-academy/gaa-007-turn-a-voicing-result-into-a-practice-item/)
 :::

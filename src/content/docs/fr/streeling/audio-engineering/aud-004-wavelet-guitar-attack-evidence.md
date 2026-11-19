@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-004** · Choisir des preuves par ondelettes pour une attaque de guitare évolutive · intermédiaire · 40 minutes
 
-Généré par le département *Ingénierie audio* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/fr/aud-004-wavelet-guitar-attack-evidence.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Ingénierie audio* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/fr/aud-004-wavelet-guitar-attack-evidence.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [AUD-003](../../audio-engineering/aud-003-transient-preservation-gate/), [PHY-002](../../physics/phy-002-time-frequency-guitar-transients/)
 :::

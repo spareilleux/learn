@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-009** · Conserver le décalage de l’anacrouse dans les adresses de mesure · intermédiaire · 45 minutes
 
-Généré par le département *Musicologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-009-preserve-pickup-offsets-in-bar-addresses.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musicologie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-009-preserve-pickup-offsets-in-bar-addresses.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MCL-006](../../musicology/mcl-006-preserve-meter-grouping-and-tempo-units/), [MCL-007](../../musicology/mcl-007-integrate-a-midi-tempo-map-before-scheduling/)
 :::

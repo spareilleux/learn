@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/networ
 :::note[Streeling University]
 **NET-018** · Reducir aristas de precedencia sin borrar evidencias · intermedio · 45 minutos
 
-Generado por el departamento *Ciencia de redes* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-018-reduce-precedence-edges-without-erasing-evidence.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia de redes* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-018-reduce-precedence-edges-without-erasing-evidence.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [NET-015](../../network-science/net-015-condense-mutual-dependencies-before-ordering-work/)
 :::

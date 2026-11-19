@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-025** · Vérifier si une clé de cache préserve les résultats · intermédiaire · 45 minutes
 
-Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-025-test-whether-a-cache-key-preserves-results.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-025-test-whether-a-cache-key-preserves-results.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CS-017](../../computer-science/cs-017-test-pipeline-rewrites-with-counterexamples/), [INF-014](../../information-theory/inf-014-retain-message-codebook-versions/)
 :::

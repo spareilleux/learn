@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-018** · Reconstruire la stéréo à partir des composantes centrale et latérale · avancé · 60 minutes
 
-Généré par le département *Ingénierie audio* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/fr/aud-018-recover-stereo-from-mid-and-side.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Ingénierie audio* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/fr/aud-018-recover-stereo-from-mid-and-side.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [AUD-010](../../audio-engineering/aud-010-preserve-channels-before-downmixing/)
 :::

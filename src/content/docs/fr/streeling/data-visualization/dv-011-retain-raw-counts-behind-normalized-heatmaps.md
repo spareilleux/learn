@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-011** · Conserver les effectifs derrière une carte thermique normalisée · intermédiaire · 40 minutes
 
-Généré par le département *Visualisation de données* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/fr/dv-011-retain-raw-counts-behind-normalized-heatmaps.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Visualisation de données* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/fr/dv-011-retain-raw-counts-behind-normalized-heatmaps.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [DV-002](../../data-visualization/dv-002-denominators-and-test-populations/), [DV-008](../../data-visualization/dv-008-streeling-evidence-stage-map/)
 :::

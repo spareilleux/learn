@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/produc
 :::note[Streeling University]
 **PM-005** · Interpretar los experimentos de coexistencia BRUTAL antes de elegir una configuración predeterminada · intermedio · 35 minutos
 
-Generado por el departamento *Gestión de productos y proyectos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-005-interpret-brutal-coexistence-experiments.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Gestión de productos y proyectos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-005-interpret-brutal-coexistence-experiments.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PM-004](../../product-management/pm-004-craft-extension-release-decision/), [VC-009](../../visual-computing/vc-009-budget-brutal-scene-expansion/)
 :::

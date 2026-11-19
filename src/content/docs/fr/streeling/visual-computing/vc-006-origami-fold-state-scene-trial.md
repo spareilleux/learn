@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-006** · Tester le sens des états de pli dans une scène Blender-vers-Godot · intermédiaire · 40 minutes
 
-Généré par le département *Informatique visuelle* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-006-origami-fold-state-scene-trial.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique visuelle* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-006-origami-fold-state-scene-trial.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [VC-005](../../visual-computing/vc-005-craft-details-through-blender-to-godot/)
 :::

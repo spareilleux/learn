@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-021** · Normaliser l’énergie modale avant de comparer les amplitudes · avancé · 55 minutes
 
-Généré par le département *Acoustique de la guitare et synthèse sonore* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/fr/gas-021-normalize-modal-energy-before-comparing-amplitudes.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Acoustique de la guitare et synthèse sonore* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/fr/gas-021-normalize-modal-energy-before-comparing-amplitudes.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAS-015](../../guitar-acoustics/gas-015-separate-mode-excitation-from-observation/)
 :::

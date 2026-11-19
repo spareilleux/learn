@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-011** · Diagnosticar errores de intervalo con una tabla de confusión · intermedio · 55 minutos
 
-Generado por el departamento *Guitar Alchemist Academy* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/es/gaa-011-diagnose-interval-errors-with-a-confusion-table.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Guitar Alchemist Academy* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/es/gaa-011-diagnose-interval-errors-with-a-confusion-table.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAA-010](../../guitar-alchemist-academy/gaa-010-define-a-practice-pass-before-counting-success/)
 :::

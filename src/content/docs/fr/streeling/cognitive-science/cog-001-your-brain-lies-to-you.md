@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-001** · Fondements des sciences cognitives · débutant · 25 minutes
 
-Généré par le département *Sciences cognitives* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-001-your-brain-lies-to-you.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sciences cognitives* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-001-your-brain-lies-to-you.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de sciences cognitives** | Niveau : Débutant | Durée : 25 minutes

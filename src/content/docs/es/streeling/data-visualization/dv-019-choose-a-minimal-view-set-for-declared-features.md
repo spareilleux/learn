@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-019** · Elegir un conjunto mínimo de vistas para rasgos declarados · avanzado · 45 minutos
 
-Generado por el departamento *Visualización de datos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-019-choose-a-minimal-view-set-for-declared-features.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Visualización de datos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-019-choose-a-minimal-view-set-for-declared-features.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHI-010](../../philosophy/phi-010-state-what-a-craft-view-cannot-distinguish/), [DV-016](../../data-visualization/dv-016-compare-paired-silhouette-residuals/)
 :::

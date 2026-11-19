@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-017** · Evaluar la separación del relieve con un cuantizador declarado · avanzado · 45 minutos
 
-Generado por el departamento *Computación visual* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-017-bound-relief-depth-separation-under-a-declared-quantizer.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Computación visual* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-017-bound-relief-depth-separation-under-a-declared-quantizer.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [VC-014](../../visual-computing/vc-014-predict-an-embroidered-stitch-pixel-footprint/), [INF-005](../../information-theory/inf-005-quantization-and-indistinguishable-renders/)
 :::

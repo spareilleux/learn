@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-013** · Évaluer un bend avec un budget d’incertitude · intermédiaire · 55 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-013-judge-a-bend-with-an-uncertainty-budget.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-013-judge-a-bend-with-an-uncertainty-budget.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [WML-004](../../world-music-languages/wml-004-preserve-intonation-beyond-pitch-classes/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-010** · Componer cálculos de GA con interrupción al primer fallo · intermedio · 45 minutos
 
-Generado por el departamento *Ciencias de la computación* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/es/cs-010-compose-fail-fast-ga-computations.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencias de la computación* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/es/cs-010-compose-fail-fast-ga-computations.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CS-004](../../computer-science/cs-004-composable-agentic-audio-loop/)
 :::

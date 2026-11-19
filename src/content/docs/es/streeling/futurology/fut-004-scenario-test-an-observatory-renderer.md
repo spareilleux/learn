@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-004** · Evaluar un renderizador del Observatorio mediante escenarios · intermedio · 35 minutos
 
-Generado por el departamento *Futurología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-004-scenario-test-an-observatory-renderer.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Futurología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-004-scenario-test-an-observatory-renderer.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [FUT-003](../../futurology/fut-003-agent-substitution-readiness-drill/)
 :::

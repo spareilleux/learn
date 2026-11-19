@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physic
 :::note[Streeling University]
 **PHY-013** · Vérifier le couple lors du déplacement d’un pivot de scène · intermédiaire · 40 minutes
 
-Généré par le département *Physique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-013-check-torque-when-moving-a-scene-pivot.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Physique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-013-check-torque-when-moving-a-scene-pivot.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHY-005](../../physics/phy-005-sheet-thickness-and-scene-units/)
 :::

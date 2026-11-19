@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-012** · Tester le retard de retour avant de réutiliser un gain · intermédiaire · 45 minutes
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-012-test-feedback-delay-before-reusing-a-gain.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-012-test-feedback-delay-before-reusing-a-gain.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CYB-008](../../cybernetics/cyb-008-check-convergence-before-repeating-a-correction/)
 :::

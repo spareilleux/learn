@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/produc
 :::note[Streeling University]
 **PM-018** · Hallar el peso que invierte el orden de procesos · intermedio · 45 minutos
 
-Generado por el departamento *Gestión de productos y proyectos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-018-find-the-weight-at-which-a-workflow-ranking-flips.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Gestión de productos y proyectos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-018-find-the-weight-at-which-a-workflow-ranking-flips.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PM-011](../../product-management/pm-011-include-review-and-correction-in-automation-break-even/), [PM-004](../../product-management/pm-004-craft-extension-release-decision/)
 :::

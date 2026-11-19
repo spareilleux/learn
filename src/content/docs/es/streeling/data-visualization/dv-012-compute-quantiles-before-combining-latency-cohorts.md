@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-012** · Calcular los cuantiles antes de combinar cohortes de latencia · intermedio · 40 minutos
 
-Generado por el departamento *Visualización de datos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-012-compute-quantiles-before-combining-latency-cohorts.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Visualización de datos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-012-compute-quantiles-before-combining-latency-cohorts.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [DV-003](../../data-visualization/dv-003-instrument-cohorts-and-units/), [DV-005](../../data-visualization/dv-005-baselines-alerts-and-targets/)
 :::

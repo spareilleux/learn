@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physic
 :::note[Streeling University]
 **PHY-016** · Acotar el barrido de una bisagra de pliegue · intermedio · 45 minutos
 
-Generado por el departamento *Física* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/es/phy-016-bound-a-fold-hinge-sweep.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Física* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/es/phy-016-bound-a-fold-hinge-sweep.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHY-013](../../physics/phy-013-check-torque-when-moving-a-scene-pivot/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-016** · Desplazar el límite para un armónico artificial · avanzado · 60 minutos
 
-Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-016-move-the-boundary-for-an-artificial-harmonic.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Estudios de guitarra* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-016-move-the-boundary-for-an-artificial-harmonic.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GTR-012](../../guitar-studies/gtr-012-select-natural-harmonics-with-a-touch-node/)
 :::

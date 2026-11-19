@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-006** · Probar una promesa de automatización creativa sin estiramiento · intermedio · 45 minutos
 
-Generado por el departamento *Futurología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-006-test-a-no-stretch-craft-automation-claim.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Futurología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-006-test-a-no-stretch-craft-automation-claim.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [FUT-003](../../futurology/fut-003-agent-substitution-readiness-drill/), [PHY-011](../../physics/phy-011-compute-bend-length-on-a-declared-neutral-layer/), [SEM-007](../../semiotics/sem-007-preserve-the-meaning-of-a-bend-angle/)
 :::

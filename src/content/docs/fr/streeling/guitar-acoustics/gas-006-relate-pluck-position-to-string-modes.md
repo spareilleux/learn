@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-006** · Relier la position de pincement aux modes de la corde · intermédiaire · 40 minutes
 
-Généré par le département *Acoustique de la guitare et synthèse sonore* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/fr/gas-006-relate-pluck-position-to-string-modes.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Acoustique de la guitare et synthèse sonore* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/fr/gas-006-relate-pluck-position-to-string-modes.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAS-002](../../guitar-acoustics/gas-002-brightness-control-and-evaluation-gate/), [GAS-005](../../guitar-acoustics/gas-005-separate-a-partial-peak-from-a-period/), [PHY-004](../../physics/phy-004-velocity-pick-position-guitar-engine/)
 :::

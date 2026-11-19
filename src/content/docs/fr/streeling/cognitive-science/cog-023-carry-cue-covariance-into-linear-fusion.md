@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-023** · Intégrer la covariance des indices à leur fusion linéaire · intermédiaire · 45 minutes
 
-Généré par le département *Sciences cognitives* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-023-carry-cue-covariance-into-linear-fusion.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sciences cognitives* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-023-carry-cue-covariance-into-linear-fusion.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [COG-005](../../cognitive-science/cog-005-separate-pitch-estimates-from-listener-reports/), [CYB-015](../../cybernetics/cyb-015-carry-covariance-through-smoothed-telemetry/)
 :::

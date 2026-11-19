@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psycho
 :::note[Streeling University]
 **PSY-006** · Estimar una matriz de transición a partir de recuentos observados · intermedio · 45 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-006-transition-matrix-from-counts.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-006-transition-matrix-from-counts.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-005](../../psychohistory/psy-005-persistence-baseline/), [MAT-020](../../mathematics/mat-020-markov-chains-hmm/)
 :::

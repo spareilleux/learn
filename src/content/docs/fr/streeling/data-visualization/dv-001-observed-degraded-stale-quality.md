@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-001** · Mesures, exécutions dégradées et données périmées · débutant · 35 minutes
 
-Généré par le département *Visualisation de données* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/fr/dv-001-observed-degraded-stale-quality.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Visualisation de données* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/fr/dv-001-observed-degraded-stale-quality.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de visualisation des données** | Niveau : débutant | Durée estimée : 35 minutes | Statut : en attente de relecture

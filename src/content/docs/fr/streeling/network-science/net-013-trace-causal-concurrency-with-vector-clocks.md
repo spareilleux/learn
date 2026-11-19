@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/networ
 :::note[Streeling University]
 **NET-013** · Tracer la concurrence causale avec des horloges vectorielles · intermédiaire · 45 minutes
 
-Généré par le département *Science des réseaux* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/fr/net-013-trace-causal-concurrency-with-vector-clocks.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Science des réseaux* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/fr/net-013-trace-causal-concurrency-with-vector-clocks.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [NET-008](../../network-science/net-008-map-clock-domains-before-ordering-events/), [INF-012](../../information-theory/inf-012-retain-event-order-in-a-handoff-summary/)
 :::

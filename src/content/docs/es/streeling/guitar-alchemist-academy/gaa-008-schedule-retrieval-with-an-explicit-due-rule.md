@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-008** · Programar el recuerdo con una regla explícita de vencimiento · intermedio · 45 minutos
 
-Generado por el departamento *Guitar Alchemist Academy* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/es/gaa-008-schedule-retrieval-with-an-explicit-due-rule.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Guitar Alchemist Academy* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/es/gaa-008-schedule-retrieval-with-an-explicit-due-rule.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAA-007](../../guitar-alchemist-academy/gaa-007-turn-a-voicing-result-into-a-practice-item/)
 :::

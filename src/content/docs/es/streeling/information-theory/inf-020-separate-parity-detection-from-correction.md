@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-020** · Separar detección por paridad y corrección · intermedio · 45 minutos
 
-Generado por el departamento *Teoría de la información* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-020-separate-parity-detection-from-correction.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Teoría de la información* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-020-separate-parity-detection-from-correction.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [INF-014](../../information-theory/inf-014-retain-message-codebook-versions/)
 :::

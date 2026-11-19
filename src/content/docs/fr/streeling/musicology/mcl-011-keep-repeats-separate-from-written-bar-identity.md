@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-011** · Distinguer les reprises de l’identité des mesures écrites · intermédiaire · 45 minutes
 
-Généré par le département *Musicologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-011-keep-repeats-separate-from-written-bar-identity.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musicologie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-011-keep-repeats-separate-from-written-bar-identity.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MCL-002](../../musicology/mcl-002-musical-form/), [MCL-007](../../musicology/mcl-007-integrate-a-midi-tempo-map-before-scheduling/)
 :::

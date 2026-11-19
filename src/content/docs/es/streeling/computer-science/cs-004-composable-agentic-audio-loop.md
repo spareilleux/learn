@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-004** · Componer y probar con uso propio un ciclo de mejora de audio con agentes · intermedio · 45 minutos
 
-Generado por el departamento *Ciencias de la computación* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/es/cs-004-composable-agentic-audio-loop.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencias de la computación* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/es/cs-004-composable-agentic-audio-loop.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CS-002](../../computer-science/cs-002-governing-agentic-loops/), [GAS-001](../../guitar-acoustics/gas-001-open-string-audio-evidence/)
 :::

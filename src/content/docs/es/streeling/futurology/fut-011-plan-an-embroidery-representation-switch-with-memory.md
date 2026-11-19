@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-011** · Planear un cambio de representación de bordado con memoria · intermedio · 45 minutos
 
-Generado por el departamento *Futurología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-011-plan-an-embroidery-representation-switch-with-memory.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Futurología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-011-plan-an-embroidery-representation-switch-with-memory.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [FUT-005](../../futurology/fut-005-value-a-renderer-pilot-before-running-it/), [CYB-005](../../cybernetics/cyb-005-stop-render-policy-flapping/)
 :::

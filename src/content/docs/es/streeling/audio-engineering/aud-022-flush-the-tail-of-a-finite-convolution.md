@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-022** · Conservar la cola de una convolución finita · avanzado · 55 minutos
 
-Generado por el departamento *Ingeniería de audio* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-022-flush-the-tail-of-a-finite-convolution.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ingeniería de audio* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-022-flush-the-tail-of-a-finite-convolution.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [AUD-011](../../audio-engineering/aud-011-count-valid-frames-separately-from-block-padding/)
 :::

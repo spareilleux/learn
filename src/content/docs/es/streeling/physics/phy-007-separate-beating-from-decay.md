@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physic
 :::note[Streeling University]
 **PHY-007** · Distinguir los batimientos de dos tonos del decaimiento · intermedio · 35 minutos
 
-Generado por el departamento *Física* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/es/phy-007-separate-beating-from-decay.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Física* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/es/phy-007-separate-beating-from-decay.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHY-001](../../physics/phy-001-science-of-guitar-sound/)
 :::

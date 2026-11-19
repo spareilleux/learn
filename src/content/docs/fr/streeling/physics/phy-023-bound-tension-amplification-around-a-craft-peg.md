@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physic
 :::note[Streeling University]
 **PHY-023** · Borner l’amplification de tension autour d’un plot artisanal · avancé · 45 minutes
 
-Généré par le département *Physique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-023-bound-tension-amplification-around-a-craft-peg.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Physique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-023-bound-tension-amplification-around-a-craft-peg.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHY-019](../../physics/phy-019-test-sliding-before-calling-a-sculpture-stable/)
 :::

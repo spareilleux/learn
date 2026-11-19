@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-023** · Distinguir magnitud y fase de un filtro pasa todo · avanzado · 55 minutos
 
-Generado por el departamento *Ingeniería de audio* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-023-distinguish-allpass-magnitude-from-phase.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ingeniería de audio* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-023-distinguish-allpass-magnitude-from-phase.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [AUD-008](../../audio-engineering/aud-008-measure-a-filter-with-paired-input-and-output/)
 :::

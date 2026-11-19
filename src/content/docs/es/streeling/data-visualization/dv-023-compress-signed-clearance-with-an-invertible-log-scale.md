@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-023** · Comprimir las holguras con signo mediante una escala logarítmica invertible · avanzado · 50 minutos
 
-Generado por el departamento *Visualización de datos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-023-compress-signed-clearance-with-an-invertible-log-scale.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Visualización de datos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-023-compress-signed-clearance-with-an-invertible-log-scale.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [DV-014](../../data-visualization/dv-014-plot-signed-craft-clearance/)
 :::

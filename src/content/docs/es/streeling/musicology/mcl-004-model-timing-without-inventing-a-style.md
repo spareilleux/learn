@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-004** · Modelar la temporización sin inventar un estilo · intermedio · 40 minutos
 
-Generado por el departamento *Musicología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-004-model-timing-without-inventing-a-style.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Musicología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-004-model-timing-without-inventing-a-style.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MCL-003](../../musicology/mcl-003-style-labels-as-evidence/), [MUS-004](../../music/mus-004-rhythm-and-groove/)
 :::

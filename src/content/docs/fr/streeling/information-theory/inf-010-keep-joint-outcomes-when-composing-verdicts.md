@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-010** · Conserver les résultats conjoints en composant des verdicts · intermédiaire · 45 minutes
 
-Généré par le département *Théorie de l'information* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-010-keep-joint-outcomes-when-composing-verdicts.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Théorie de l'information* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-010-keep-joint-outcomes-when-composing-verdicts.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CS-008](../../computer-science/cs-008-compose-exact-source-review-verdicts/)
 :::

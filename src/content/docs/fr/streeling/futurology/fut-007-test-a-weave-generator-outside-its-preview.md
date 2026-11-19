@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-007** · Tester un générateur de tissage au-delà de son aperçu · intermédiaire · 45 minutes
 
-Généré par le département *Futurologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/fr/fut-007-test-a-weave-generator-outside-its-preview.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Futurologie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/fr/fut-007-test-a-weave-generator-outside-its-preview.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [FUT-003](../../futurology/fut-003-agent-substitution-readiness-drill/), [VC-007](../../visual-computing/vc-007-weave-seams-as-scene-contracts/), [SEM-008](../../semiotics/sem-008-interpret-layer-order-relative-to-the-reference-normal/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-005** · Conservar detalles artesanales en una prueba de recursos de Blender a Godot · intermedio · 40 minutos
 
-Generado por el departamento *Computación visual* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-005-craft-details-through-blender-to-godot.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Computación visual* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-005-craft-details-through-blender-to-godot.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [VC-004](../../visual-computing/vc-004-godot-observatory-capture-gate/)
 :::

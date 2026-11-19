@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-006** · Probar el significado del estado de pliegue en una escena de Blender a Godot · intermedio · 40 minutos
 
-Generado por el departamento *Computación visual* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-006-origami-fold-state-scene-trial.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Computación visual* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-006-origami-fold-state-scene-trial.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [VC-005](../../visual-computing/vc-005-craft-details-through-blender-to-godot/)
 :::

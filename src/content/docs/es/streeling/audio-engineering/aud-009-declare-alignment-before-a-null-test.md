@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-009** · Declarar la alineación antes de una prueba de cancelación · intermedio · 45 minutos
 
-Generado por el departamento *Ingeniería de audio* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-009-declare-alignment-before-a-null-test.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ingeniería de audio* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-009-declare-alignment-before-a-null-test.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [AUD-005](../../audio-engineering/aud-005-pcm-guards-and-format-boundaries/), [AUD-008](../../audio-engineering/aud-008-measure-a-filter-with-paired-input-and-output/)
 :::

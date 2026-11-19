@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-011** · Vérifier la couverture d’un barré avant de déclarer une forme jouable · intermédiaire · 45 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-011-test-barre-coverage-before-calling-a-shape-playable.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-011-test-barre-coverage-before-calling-a-shape-playable.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GTR-003](../../guitar-studies/gtr-003-audit-voicing-playability/)
 :::

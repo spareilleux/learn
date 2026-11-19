@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-006** · Separar las pruebas de píxeles de los juicios de apariencia · intermedio · 35 minutos
 
-Generado por el departamento *Ciencia cognitiva* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-006-separate-pixel-tests-from-appearance-judgments.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia cognitiva* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-006-separate-pixel-tests-from-appearance-judgments.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHY-009](../../physics/phy-009-distinguish-linear-color-from-display-encoding/)
 :::

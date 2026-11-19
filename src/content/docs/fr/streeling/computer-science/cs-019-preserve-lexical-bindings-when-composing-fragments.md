@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-019** · Préserver les liaisons lexicales lors de la composition de fragments · intermédiaire · 45 minutes
 
-Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-019-preserve-lexical-bindings-when-composing-fragments.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-019-preserve-lexical-bindings-when-composing-fragments.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CS-006](../../computer-science/cs-006-ixql-pipeline-composition/)
 :::

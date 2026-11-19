@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-012** · Unir ligaduras de prolongación sin unir las de expresión · intermedio · 55 minutos
 
-Generado por el departamento *Musicología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-012-merge-ties-without-merging-slurs.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Musicología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-012-merge-ties-without-merging-slurs.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MCL-007](../../musicology/mcl-007-integrate-a-midi-tempo-map-before-scheduling/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/produc
 :::note[Streeling University]
 **PM-007** · Medir la latencia de reproducción desde el punto de vista del usuario · intermedio · 45 minutos
 
-Generado por el departamento *Gestión de productos y proyectos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-007-measure-playback-latency-at-the-user-boundary.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Gestión de productos y proyectos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-007-measure-playback-latency-at-the-user-boundary.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PM-005](../../product-management/pm-005-interpret-brutal-coexistence-experiments/), [NET-008](../../network-science/net-008-map-clock-domains-before-ordering-events/)
 :::

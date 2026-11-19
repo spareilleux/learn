@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-002** · Filosofía: pruebas y autoridad en las decisiones consultivas · intermedio · 35 minutos
 
-Generado por el departamento *Filosofía* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-002-when-is-an-advisory-decision-justified.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Filosofía* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-002-when-is-an-advisory-decision-justified.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHI-001](../../philosophy/phi-001-how-to-argue-well/)
 :::

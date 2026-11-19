@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-017** · Retirar una conclusión por defecto cuando llega un refutador · avanzado · 50 minutos
 
-Generado por el departamento *Filosofía* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-017-retract-a-craft-default-when-a-defeater-arrives.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Filosofía* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-017-retract-a-craft-default-when-a-defeater-arrives.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHI-008](../../philosophy/phi-008-separate-a-test-oracle-from-a-specification/), [PHI-009](../../philosophy/phi-009-state-who-may-authorize-an-agent-effect/)
 :::

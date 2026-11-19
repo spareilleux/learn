@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-005** · Planificar qué cuerda debe seguir sonando · intermedio · 40 minutos
 
-Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-005-plan-which-string-keeps-ringing.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Estudios de guitarra* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-005-plan-which-string-keeps-ringing.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GTR-003](../../guitar-studies/gtr-003-audit-voicing-playability/)
 :::

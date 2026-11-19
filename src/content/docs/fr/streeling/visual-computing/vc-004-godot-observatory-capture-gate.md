@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-004** · Une condition de capture pour l’observatoire Godot · intermédiaire · 35 minutes
 
-Généré par le département *Informatique visuelle* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-004-godot-observatory-capture-gate.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique visuelle* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-004-godot-observatory-capture-gate.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [VC-002](../../visual-computing/vc-002-godot-react-bridge-evidence/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-020** · Deducir los ataques de un acorde a partir de un barrido · avanzado · 45 minutos
 
-Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-020-derive-strum-onsets-from-a-sweep.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Estudios de guitarra* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-020-derive-strum-onsets-from-a-sweep.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GTR-010](../../guitar-studies/gtr-010-separate-muting-from-releasing-a-fretted-note/)
 :::

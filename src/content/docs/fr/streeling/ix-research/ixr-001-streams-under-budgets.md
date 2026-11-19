@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/ix-res
 :::note[Streeling University]
 **IXR-001** · Pipelines IX en flux, sous budgets · intermédiaire · 40 minutes
 
-Généré par le département *Recherche sur IX* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/ix-research/fr/ixr-001-streams-under-budgets.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Recherche sur IX* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/ix-research/fr/ixr-001-streams-under-budgets.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de recherche sur IX** | Intermédiaire | 40 minutes | Traduction française du brouillon anglais ; revue humaine en attente. Aucune fiche de cycle de recherche n'existe pour ce module (voir « Provenance »).

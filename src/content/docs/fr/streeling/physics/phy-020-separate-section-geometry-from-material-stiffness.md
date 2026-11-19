@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physic
 :::note[Streeling University]
 **PHY-020** · Distinguer la géométrie de section de la rigidité du matériau · avancé · 45 minutes
 
-Généré par le département *Physique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-020-separate-section-geometry-from-material-stiffness.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Physique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-020-separate-section-geometry-from-material-stiffness.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHY-012](../../physics/phy-012-rotate-directional-stiffness-with-the-material/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psycho
 :::note[Streeling University]
 **PSY-004** · Qu'est-ce qu'un grand nombre ? La prévisibilité d'un agrégat de quatorze agents · intermédiaire · 45 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-004-how-large-is-large.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-004-how-large-is-large.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/), [PSY-002](../../psychohistory/psy-002-governance-phase-transitions/)
 :::

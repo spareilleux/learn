@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/networ
 :::note[Streeling University]
 **NET-020** · Colorear tareas agénticas incompatibles con búsqueda exacta · intermedio · 45 minutos
 
-Generado por el departamento *Ciencia de redes* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-020-color-conflicting-agent-tasks-with-an-exact-small-search.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia de redes* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-020-color-conflicting-agent-tasks-with-an-exact-small-search.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [NET-017](../../network-science/net-017-match-simultaneous-roles-without-double-booking/), [NET-007](../../network-science/net-007-separate-dag-readiness-from-admission/)
 :::

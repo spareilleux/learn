@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-016** · Reconstruir cursores de una partitura polifónica · avanzado · 60 minutos
 
-Generado por el departamento *Musicología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-016-reconstruct-polyphonic-score-cursors.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Musicología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-016-reconstruct-polyphonic-score-cursors.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MCL-007](../../musicology/mcl-007-integrate-a-midi-tempo-map-before-scheduling/)
 :::

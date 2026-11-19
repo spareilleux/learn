@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-021** · Replier l’hémisphère inférieur dans un encodage de normales · avancé · 45 minutes
 
-Généré par le département *Informatique visuelle* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-021-fold-the-lower-hemisphere-in-a-normal-encoding.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique visuelle* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-021-fold-the-lower-hemisphere-in-a-normal-encoding.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHY-008](../../physics/phy-008-keep-surface-normals-perpendicular/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/
 :::note[Streeling University]
 **MUS-013** · Fundamental, bajo y conjunto de clases de altura · intermedio · 45 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-013-root-bass-pitch-class-set.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-013-root-bass-pitch-class-set.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-012](../../music/mus-012-chord-formulas-essential-tones-doubling/), [MUS-020](../../music/mus-020-set-classes-interval-vectors-prime-forms/)
 :::

@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "review-receipt.schema.json",
+  "title": "Streeling review receipt",
+  "description": "One verdict on one exact text: a module file of streeling/courses/, in one language, at one Git blob. The pages show it only while that file still has that blob.",
+  "type": "object",
+  "required": ["source", "blob", "kind", "reviewer", "date", "verdict", "evidence"],
+  "properties": {
+    "source": {
+      "type": "string",
+      "pattern": "^streeling/courses/[^/]+/(en|fr|es)/[^/]+\\.md$",
+      "description": "The reviewed file, from the repository root: streeling/courses/<department>/<language>/<module>.md, or <module>.<language>.md for a translation. The path names the module and the language."
+    },
+    "blob": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$",
+      "description": "Git blob id of the reviewed text: git rev-parse <commit>:<source>, or git hash-object <source> on a checkout. Any later edit of the file changes it, and the verdict no longer shows."
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["subject", "language", "learner"],
+      "description": "subject: a reviewer who knows the discipline checked the content. language: a fluent speaker checked the language of this text. learner: a learner attempted the module's learner task."
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Who gave the verdict: a name or a pseudonym the reviewer agreed to publish."
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "description": "UTC date of the verdict, YYYY-MM-DD."
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["approved", "changes_requested", "not_assessed"]
+    },
+    "evidence": {
+      "type": "string",
+      "pattern": "^https://[^\\s()]+$",
+      "description": "Where the review itself can be read: an issue, a pull request review, a comment, a file on GitHub."
+    },
+    "findings": {
+      "type": "string",
+      "description": "Optional: what the reviewer found, in a few sentences. The pages do not show it; the evidence does."
+    }
+  },
+  "additionalProperties": false
+}

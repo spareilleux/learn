@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physic
 :::note[Streeling University]
 **PHY-004** · Cuando la velocidad desplaza la posición de pulsación en el motor de guitarra de GA · intermedio · 40 minutos
 
-Generado por el departamento *Física* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/es/phy-004-velocity-pick-position-guitar-engine.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Física* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/es/phy-004-velocity-pick-position-guitar-engine.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHY-001](../../physics/phy-001-science-of-guitar-sound/), [PHY-003](../../physics/phy-003-sampling-aliasing-guitar-engine/)
 :::

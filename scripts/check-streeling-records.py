@@ -12,6 +12,9 @@ notices when one is malformed or names a module that does not exist.
   module that exist in streeling/.
 - Every streeling/reviews/<code>-review-brief.md has its <code>-learner-task.md and the reverse, <code> is the
   code of an English module, and every relative link in them resolves.
+- Every streeling/review-receipts/*.json is valid against streeling/schemas/review-receipt.schema.json, names a
+  module file that exists and whose name matches its language folder, and is dated no later than today (UTC). Its
+  blob may be an earlier text of the file: the pages then show the review as no longer applying.
 
 Needs jsonschema (`pip install jsonschema`). Exits non-zero when one check fails.
 """
@@ -86,8 +89,37 @@ def check(streeling: Path, quiet: bool = False) -> list[str]:
             if not (path.parent / href.split("#", 1)[0]).exists():
                 failures.append(f"{name}: link {href} does not resolve")
 
+    receipt_schema = json.loads((streeling / "schemas" / "review-receipt.schema.json").read_text(encoding="utf-8"))
+    receipt_validator = jsonschema.validators.validator_for(receipt_schema)(receipt_schema)
+    receipts = sorted((streeling / "review-receipts").glob("*.json"))
+    today = datetime.datetime.now(datetime.timezone.utc).date()
+    for path in receipts:
+        name = path.relative_to(streeling).as_posix()
+        try:
+            receipt = json.loads(path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            failures.append(f"{name}: not JSON: {exc}")
+            continue
+        errors = sorted(receipt_validator.iter_errors(receipt), key=lambda e: list(e.path))
+        for error in errors:
+            failures.append(f"{name}: {'/'.join(map(str, error.path)) or '(root)'}: {error.message}")
+        if errors:
+            continue
+        source = receipt["source"]
+        lang, file_name = source.split("/")[-2:]
+        suffix = ".md" if lang == "en" else f".{lang}.md"
+        if not file_name.endswith(suffix) or (lang == "en" and re.search(r"\.[a-z]{2}\.md$", file_name)):
+            failures.append(f"{name}: {source} is not named for its language folder, {lang}")
+        elif not (streeling.parent / source).is_file():
+            failures.append(f"{name}: {source} does not exist")
+        try:
+            if datetime.date.fromisoformat(receipt["date"]) > today:
+                failures.append(f"{name}: date {receipt['date']} is later than today, {today}")
+        except ValueError:
+            failures.append(f"{name}: date {receipt['date']} is not a calendar date")
+
     if not quiet:
-        print(f"{len(records)} production records, {len(packets)} review files")
+        print(f"{len(records)} production records, {len(packets)} review files, {len(receipts)} review receipts")
     return failures
 
 
@@ -111,6 +143,30 @@ def self_test() -> int:
     def drop_learner_task(root: Path) -> None:
         sorted((root / "reviews").glob("*-learner-task.md"))[0].unlink()
 
+    def add_receipt(**changes):
+        """Write one receipt for the first English module; a change of None removes that field."""
+        def apply(root: Path) -> None:
+            module = sorted(p for p in (root / "courses").glob("*/en/*.md") if p.name != "README.md")[0]
+            receipt = {
+                "source": f"streeling/{module.relative_to(root).as_posix()}",
+                "blob": "0" * 40,
+                "kind": "subject",
+                "reviewer": "Self-test",
+                "date": "2026-11-17",
+                "verdict": "approved",
+                "evidence": "https://example.org/review",
+            }
+            for field, value in changes.items():
+                if callable(value):
+                    receipt[field] = value(receipt[field])
+                elif value is None:
+                    del receipt[field]
+                else:
+                    receipt[field] = value
+            (root / "review-receipts").mkdir(exist_ok=True)
+            (root / "review-receipts" / "self-test.json").write_text(json.dumps(receipt), encoding="utf-8")
+        return apply
+
     breaks = [
         ("a required field removed", edit_record("status", None), "'status' is a required property"),
         ("a status outside the enum", edit_record("status", "done"), "is not one of"),
@@ -118,10 +174,17 @@ def self_test() -> int:
         ("a timestamp without a time zone", edit_record("timestamp", "2026-10-13T12:00:00"), "has no time zone"),
         ("a module that does not exist", edit_record("module_id", "psy-999-nowhere"), "is not an English module"),
         ("a review brief without its learner task", drop_learner_task, "-learner-task.md is missing"),
+        ("a receipt without its verdict", add_receipt(verdict=None), "'verdict' is a required property"),
+        ("a receipt with a kind outside the enum", add_receipt(kind="vibes"), "is not one of"),
+        ("a receipt of a file that does not exist", add_receipt(source=lambda s: s.replace(".md", "-nowhere.md")), "does not exist"),
+        ("a receipt whose file is not named for its folder", add_receipt(source=lambda s: s.replace("/en/", "/fr/")), "is not named for its language folder"),
+        ("a receipt dated in the future", add_receipt(date="2999-01-01"), "is later than today"),
+        ("a receipt dated on no calendar day", add_receipt(date="2026-02-30"), "is not a calendar date"),
     ]
+    intact = [("the intact copy", None, None), ("a complete receipt", add_receipt(), None)]
     failed = 0
     with tempfile.TemporaryDirectory() as scratch:
-        for label, apply, expected in [("the intact copy", None, None)] + breaks:
+        for label, apply, expected in intact + breaks:
             root = Path(scratch) / "streeling"
             shutil.rmtree(root, ignore_errors=True)
             shutil.copytree(REPO / "streeling", root)
@@ -131,7 +194,7 @@ def self_test() -> int:
             ok = not found if expected is None else any(expected in f for f in found)
             print(f"{'ok  ' if ok else 'FAIL'} {label}: {len(found)} failure(s) reported")
             failed += not ok
-    print(f"self-test: {len(breaks) + 1 - failed}/{len(breaks) + 1} cases behave")
+    print(f"self-test: {len(intact) + len(breaks) - failed}/{len(intact) + len(breaks)} cases behave")
     return 1 if failed else 0
 
 

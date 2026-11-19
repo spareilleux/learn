@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-014** · Informar del riesgo y la cobertura cuando un agente se abstiene · intermedio · 45 minutos
 
-Generado por el departamento *Ciencia cognitiva* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-014-report-risk-and-coverage-when-an-agent-abstains.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia cognitiva* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-014-report-risk-and-coverage-when-an-agent-abstains.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [COG-003](../../cognitive-science/cog-003-calibrating-fretboard-confidence/)
 :::

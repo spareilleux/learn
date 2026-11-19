@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-002** · Fundamentos de la gobernanza cibernética
 
-Generado por el departamento *Cibernética* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-002-active-dampening-cross-repo-oscillation.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Cibernética* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-002-active-dampening-cross-repo-oscillation.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CYB-001](../../cybernetics/cyb-001-vsm-ai-governance-mapping/)
 :::

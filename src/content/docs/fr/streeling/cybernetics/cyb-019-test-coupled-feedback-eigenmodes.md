@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-019** · Tester les modes propres de boucles couplées · intermédiaire · 45 minutes
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-019-test-coupled-feedback-eigenmodes.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-019-test-coupled-feedback-eigenmodes.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CYB-008](../../cybernetics/cyb-008-check-convergence-before-repeating-a-correction/)
 :::

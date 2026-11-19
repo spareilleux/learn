@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-015** · Vincular un marcador de superficie a la identidad de sus vértices baricéntricos · avanzado · 45 minutos
 
-Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-015-bind-a-surface-marker-to-barycentric-vertex-identity.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Semiótica* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-015-bind-a-surface-marker-to-barycentric-vertex-identity.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [SEM-004](../../semiotics/sem-004-face-identity-under-reindexing/)
 :::

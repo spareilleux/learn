@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-025** · Composer des capodastres sélectifs par une borne supérieure composante par composante · avancé · 55 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-025-compose-selective-capos-with-a-componentwise-join.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-025-compose-selective-capos-with-a-componentwise-join.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GTR-008](../../guitar-studies/gtr-008-count-a-capo-offset-once/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-019** · Vérifier si l’écrêtage commute avec le gain · avancé · 45 minutes
 
-Généré par le département *Ingénierie audio* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/fr/aud-019-test-whether-clipping-commutes-with-gain.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Ingénierie audio* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/fr/aud-019-test-whether-clipping-commutes-with-gain.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [AUD-005](../../audio-engineering/aud-005-pcm-guards-and-format-boundaries/)
 :::

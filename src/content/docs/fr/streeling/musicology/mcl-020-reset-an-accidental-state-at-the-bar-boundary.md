@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-020** · Réinitialiser l’état des altérations à la barre de mesure · avancé · 45 minutes
 
-Généré par le département *Musicologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-020-reset-an-accidental-state-at-the-bar-boundary.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musicologie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-020-reset-an-accidental-state-at-the-bar-boundary.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MCL-005](../../musicology/mcl-005-preserve-written-and-sounding-pitch/)
 :::

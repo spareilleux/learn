@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-021** · Vérifier le dégagement latéral entre cordes · avancé · 55 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-021-check-lateral-clearance-between-string-envelopes.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-021-check-lateral-clearance-between-string-envelopes.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GTR-013](../../guitar-studies/gtr-013-judge-a-bend-with-an-uncertainty-budget/)
 :::

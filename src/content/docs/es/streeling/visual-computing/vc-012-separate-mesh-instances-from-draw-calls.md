@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-012** · Distinguir instancias de malla y llamadas de dibujo · intermedio · 40 minutos
 
-Generado por el departamento *Computación visual* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-012-separate-mesh-instances-from-draw-calls.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Computación visual* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-012-separate-mesh-instances-from-draw-calls.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [VC-009](../../visual-computing/vc-009-budget-brutal-scene-expansion/)
 :::

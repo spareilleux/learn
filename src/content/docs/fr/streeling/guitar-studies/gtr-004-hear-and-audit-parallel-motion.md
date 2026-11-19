@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-004** · Écouter et examiner le mouvement parallèle sur deux cordes de guitare · intermédiaire · 35 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-004-hear-and-audit-parallel-motion.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-004-hear-and-audit-parallel-motion.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GTR-003](../../guitar-studies/gtr-003-audit-voicing-playability/)
 :::

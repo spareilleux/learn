@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-017** · Comprobar la continuidad del contacto al sustituir un dedo · avanzado · 60 minutos
 
-Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-017-check-contact-continuity-during-finger-substitution.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Estudios de guitarra* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-017-check-contact-continuity-during-finger-substitution.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GTR-011](../../guitar-studies/gtr-011-test-barre-coverage-before-calling-a-shape-playable/)
 :::

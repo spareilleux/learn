@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-010** · Projeter la densité du tissage avant d’agrandir une scène · intermédiaire · 45 minutes
 
-Généré par le département *Futurologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/fr/fut-010-project-weave-density-before-a-scene-expansion.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Futurologie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/fr/fut-010-project-weave-density-before-a-scene-expansion.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [FUT-007](../../futurology/fut-007-test-a-weave-generator-outside-its-preview/)
 :::

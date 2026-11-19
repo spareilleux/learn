@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-017** · Declarar la pertenencia de fronteras para coordenadas de teselas negativas · avanzado · 45 minutos
 
-Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-017-declare-boundary-ownership-for-negative-tile-coordinates.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Semiótica* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-017-declare-boundary-ownership-for-negative-tile-coordinates.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [SEM-013](../../semiotics/sem-013-align-two-motif-periods-at-a-textile-seam/), [CS-015](../../computer-science/cs-015-compose-overlapping-chunks-without-duplicate-frames/)
 :::

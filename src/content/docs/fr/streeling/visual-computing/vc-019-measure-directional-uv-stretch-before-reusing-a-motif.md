@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-019** · Mesurer l’étirement UV directionnel avant de réutiliser un motif · avancé · 45 minutes
 
-Généré par le département *Informatique visuelle* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-019-measure-directional-uv-stretch-before-reusing-a-motif.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique visuelle* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-019-measure-directional-uv-stretch-before-reusing-a-motif.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [VC-016](../../visual-computing/vc-016-track-uv-gutters-through-mip-levels/)
 :::
