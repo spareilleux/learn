@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-012** · Conserver l’ordre des actions d’un repère de broderie · intermédiaire · 45 minutes
 
-Généré par le département *Sémiotique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-012-preserve-the-order-of-stitch-frame-actions.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sémiotique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-012-preserve-the-order-of-stitch-frame-actions.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [SEM-006](../../semiotics/sem-006-preserve-orientation-across-scene-frames/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/world-
 :::note[Streeling University]
 **WML-016** · Distinguir las operaciones sobre grados de un acorde · avanzado · 60 minutos
 
-Generado por el departamento *Músicas y lenguas del mundo* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/es/wml-016-keep-chord-degree-operations-distinct.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Músicas y lenguas del mundo* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/es/wml-016-keep-chord-degree-operations-distinct.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [WML-011](../../world-music-languages/wml-011-preserve-the-kind-of-a-seventh-chord/)
 :::

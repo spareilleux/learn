@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-025** · Vérifier le contraste d’une annotation avec la luminance linéaire · avancé · 50 minutes
 
-Généré par le département *Visualisation de données* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/fr/dv-025-check-overlay-contrast-from-linear-luminance.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Visualisation de données* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/fr/dv-025-check-overlay-contrast-from-linear-luminance.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [DV-006](../../data-visualization/dv-006-position-length-area-comparisons/), [VC-001](../../visual-computing/vc-001-accessible-fretboard-paths/)
 :::

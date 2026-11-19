@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-009** · Precisar quién puede autorizar un efecto de agente · intermedio · 40 minutos
 
-Generado por el departamento *Filosofía* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-009-state-who-may-authorize-an-agent-effect.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Filosofía* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-009-state-who-may-authorize-an-agent-effect.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHI-002](../../philosophy/phi-002-when-is-an-advisory-decision-justified/), [PHI-005](../../philosophy/phi-005-test-idempotence-beyond-replayed-values/)
 :::

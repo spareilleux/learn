@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-018** · Conservar la asociación alfa en el borde de un textil · avanzado · 45 minutos
 
-Generado por el departamento *Computación visual* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-018-carry-alpha-association-through-a-textile-edge.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Computación visual* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-018-carry-alpha-association-through-a-textile-edge.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHY-009](../../physics/phy-009-distinguish-linear-color-from-display-encoding/), [VC-010](../../visual-computing/vc-010-preserve-packed-texture-channel-contracts/)
 :::

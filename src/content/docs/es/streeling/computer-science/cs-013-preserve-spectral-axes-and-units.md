@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-013** · Preservar ejes y unidades al componer salidas espectrales · intermedio · 35 minutos
 
-Generado por el departamento *Ciencias de la computación* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/es/cs-013-preserve-spectral-axes-and-units.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencias de la computación* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/es/cs-013-preserve-spectral-axes-and-units.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CS-012](../../computer-science/cs-012-native-and-wasm-render-boundaries/), [AUD-006](../../audio-engineering/aud-006-calibrate-spectral-amplitudes/)
 :::

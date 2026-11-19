@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psycho
 :::note[Streeling University]
 **PSY-016** · Pronósticos probabilísticos y la puntuación de Brier · intermedio · 45 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-016-brier-score.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-016-brier-score.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-005](../../psychohistory/psy-005-persistence-baseline/)
 :::

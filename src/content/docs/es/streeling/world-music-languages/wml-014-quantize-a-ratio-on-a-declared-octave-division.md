@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/world-
 :::note[Streeling University]
 **WML-014** · Cuantizar una razón sobre una división declarada de la octava · avanzado · 60 minutos
 
-Generado por el departamento *Músicas y lenguas del mundo* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/es/wml-014-quantize-a-ratio-on-a-declared-octave-division.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Músicas y lenguas del mundo* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/es/wml-014-quantize-a-ratio-on-a-declared-octave-division.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [WML-004](../../world-music-languages/wml-004-preserve-intonation-beyond-pitch-classes/)
 :::

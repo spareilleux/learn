@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psycho
 :::note[Streeling University]
 **PSY-011** · Changement de mesure ou changement du système ? Les rebaselines de la tendance de qualité · intermédiaire · 40 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-011-measurement-change-or-system-change.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-011-measurement-change-or-system-change.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-002](../../psychohistory/psy-002-governance-phase-transitions/), [PSY-005](../../psychohistory/psy-005-persistence-baseline/)
 :::

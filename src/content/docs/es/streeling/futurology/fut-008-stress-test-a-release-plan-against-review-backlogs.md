@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-008** · Someter un plan de publicación a pruebas de acumulación de revisiones · intermedio · 40 minutos
 
-Generado por el departamento *Futurología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-008-stress-test-a-release-plan-against-review-backlogs.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Futurología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-008-stress-test-a-release-plan-against-review-backlogs.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [FUT-003](../../futurology/fut-003-agent-substitution-readiness-drill/), [DV-008](../../data-visualization/dv-008-streeling-evidence-stage-map/)
 :::

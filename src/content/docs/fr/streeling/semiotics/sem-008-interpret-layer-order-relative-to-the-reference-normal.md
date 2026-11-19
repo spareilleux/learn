@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-008** · Interpréter l'ordre des couches par rapport à la normale de référence · intermédiaire · 40 minutes
 
-Généré par le département *Sémiotique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-008-interpret-layer-order-relative-to-the-reference-normal.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sémiotique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-008-interpret-layer-order-relative-to-the-reference-normal.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [SEM-004](../../semiotics/sem-004-face-identity-under-reindexing/), [SEM-006](../../semiotics/sem-006-preserve-orientation-across-scene-frames/)
 :::

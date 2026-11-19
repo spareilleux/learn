@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-013** · Borner un futur flux artisanal par sa fraction séquentielle · avancé · 45 minutes
 
-Généré par le département *Futurologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/fr/fut-013-bound-a-future-craft-workflow-by-its-serial-fraction.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Futurologie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/fr/fut-013-bound-a-future-craft-workflow-by-its-serial-fraction.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [FUT-008](../../futurology/fut-008-stress-test-a-release-plan-against-review-backlogs/), [PM-011](../../product-management/pm-011-include-review-and-correction-in-automation-break-even/)
 :::

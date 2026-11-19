@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-013** · Explicar un plan artesanal inviable mediante un núcleo mínimo · avanzado · 45 minutos
 
-Generado por el departamento *Filosofía* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Filosofía* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CS-009](../../computer-science/cs-009-composing-origami-panel-constraints/), [PHI-008](../../philosophy/phi-008-separate-a-test-oracle-from-a-specification/)
 :::

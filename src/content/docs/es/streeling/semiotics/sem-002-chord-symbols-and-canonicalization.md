@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-002** · Símbolos de acordes, canonicalización y significado en el DSL de GA · intermedio · 35 minutos
 
-Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-002-chord-symbols-and-canonicalization.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Semiótica* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-002-chord-symbols-and-canonicalization.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [SEM-001](../../semiotics/sem-001-signs-in-governance/)
 :::

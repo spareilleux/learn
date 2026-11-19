@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-017** · Resumir los ejes de fibras sin inventar una dirección · avanzado · 45 minutos
 
-Generado por el departamento *Visualización de datos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-017-summarize-fibre-axes-without-inventing-a-direction.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Visualización de datos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-017-summarize-fibre-axes-without-inventing-a-direction.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [DV-006](../../data-visualization/dv-006-position-length-area-comparisons/)
 :::

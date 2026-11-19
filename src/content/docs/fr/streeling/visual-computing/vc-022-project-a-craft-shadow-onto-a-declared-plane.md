@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-022** · Projeter une ombre artisanale sur un plan déclaré · avancé · 45 minutes
 
-Généré par le département *Informatique visuelle* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-022-project-a-craft-shadow-onto-a-declared-plane.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique visuelle* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-022-project-a-craft-shadow-onto-a-declared-plane.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [SEM-006](../../semiotics/sem-006-preserve-orientation-across-scene-frames/)
 :::

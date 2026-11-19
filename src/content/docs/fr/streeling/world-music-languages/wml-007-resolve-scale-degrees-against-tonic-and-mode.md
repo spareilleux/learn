@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/world-
 :::note[Streeling University]
 **WML-007** · Résoudre les degrés d’une gamme selon la tonique et le mode · intermédiaire · 40 minutes
 
-Généré par le département *Musiques et langues du monde* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/fr/wml-007-resolve-scale-degrees-against-tonic-and-mode.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musiques et langues du monde* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/fr/wml-007-resolve-scale-degrees-against-tonic-and-mode.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [WML-005](../../world-music-languages/wml-005-declare-note-name-conventions/), [MCL-005](../../musicology/mcl-005-preserve-written-and-sounding-pitch/)
 :::

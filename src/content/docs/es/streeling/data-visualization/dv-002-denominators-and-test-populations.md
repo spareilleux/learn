@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-002** · Denominadores y poblaciones de prueba cambiantes · principiante · 30 minutos
 
-Generado por el departamento *Visualización de datos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-002-denominators-and-test-populations.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Visualización de datos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-002-denominators-and-test-populations.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [DV-001](../../data-visualization/dv-001-observed-degraded-stale-quality/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-020** · Vérifier la fermeture d’un ensemble face aux perturbations · intermédiaire · 45 minutes
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-020-check-disturbance-robust-set-closure.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-020-check-disturbance-robust-set-closure.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CYB-013](../../cybernetics/cyb-013-bound-observation-age-before-a-control-decision/)
 :::

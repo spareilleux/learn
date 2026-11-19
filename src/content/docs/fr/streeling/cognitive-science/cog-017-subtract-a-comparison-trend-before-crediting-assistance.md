@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-017** · Soustraire la tendance de comparaison avant de créditer l’assistance · intermédiaire · 45 minutes
 
-Généré par le département *Sciences cognitives* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-017-subtract-a-comparison-trend-before-crediting-assistance.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sciences cognitives* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-017-subtract-a-comparison-trend-before-crediting-assistance.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [COG-009](../../cognitive-science/cog-009-counterbalance-practice-order-before-comparing-interfaces/), [PHI-007](../../philosophy/phi-007-test-a-learning-gain-against-counterfactuals/)
 :::

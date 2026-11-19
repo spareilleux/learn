@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-021** · Comprobar la holgura lateral entre cuerdas · avanzado · 55 minutos
 
-Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-021-check-lateral-clearance-between-string-envelopes.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Estudios de guitarra* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-021-check-lateral-clearance-between-string-envelopes.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GTR-013](../../guitar-studies/gtr-013-judge-a-bend-with-an-uncertainty-budget/)
 :::

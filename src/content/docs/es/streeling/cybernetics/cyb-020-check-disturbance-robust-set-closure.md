@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-020** · Comprobar el cierre de un conjunto ante perturbaciones · intermedio · 45 minutos
 
-Generado por el departamento *Cibernética* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-020-check-disturbance-robust-set-closure.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Cibernética* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-020-check-disturbance-robust-set-closure.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CYB-013](../../cybernetics/cyb-013-bound-observation-age-before-a-control-decision/)
 :::

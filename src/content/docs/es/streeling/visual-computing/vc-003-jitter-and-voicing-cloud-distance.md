@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-003** · ¿Cuándo ayuda el jitter a una nube de voicings? · intermedio · 35 minutos
 
-Generado por el departamento *Computación visual* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-003-jitter-and-voicing-cloud-distance.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Computación visual* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-003-jitter-and-voicing-cloud-distance.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [VC-002](../../visual-computing/vc-002-godot-react-bridge-evidence/)
 :::

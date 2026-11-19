@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-013** · Alinear dos periodos de motivos en una costura textil · intermedio · 45 minutos
 
-Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-013-align-two-motif-periods-at-a-textile-seam.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Semiótica* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-013-align-two-motif-periods-at-a-textile-seam.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [SEM-008](../../semiotics/sem-008-interpret-layer-order-relative-to-the-reference-normal/)
 :::

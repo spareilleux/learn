@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-024** · Seguir un cruce evitado al variar la desintonización · avanzado · 55 minutos
 
-Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-024-track-avoided-crossings-through-detuning.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-024-track-avoided-crossings-through-detuning.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAS-012](../../guitar-acoustics/gas-012-distinguish-coupling-from-parallel-resonance/)
 :::

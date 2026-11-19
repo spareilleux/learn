@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-009** · Conservar el nivel al normalizar la forma de onda · intermedio · 45 minutos
 
-Generado por el departamento *Teoría de la información* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-009-keep-level-when-normalizing-waveform-shape.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Teoría de la información* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-009-keep-level-when-normalizing-waveform-shape.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [INF-005](../../information-theory/inf-005-quantization-and-indistinguishable-renders/), [INF-008](../../information-theory/inf-008-keep-phase-when-waveform-identity-matters/)
 :::

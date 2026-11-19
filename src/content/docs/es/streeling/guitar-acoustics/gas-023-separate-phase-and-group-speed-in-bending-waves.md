@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-023** · Distinguir velocidades de fase y grupo en ondas de flexión · avanzado · 55 minutos
 
-Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-023-separate-phase-and-group-speed-in-bending-waves.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-023-separate-phase-and-group-speed-in-bending-waves.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAS-010](../../guitar-acoustics/gas-010-distinguish-stiff-string-partials-from-harmonics/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-015** · Composer des blocs qui se chevauchent sans dupliquer les trames · intermédiaire · 45 minutes
 
-Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-015-compose-overlapping-chunks-without-duplicate-frames.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-015-compose-overlapping-chunks-without-duplicate-frames.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CS-013](../../computer-science/cs-013-preserve-spectral-axes-and-units/)
 :::

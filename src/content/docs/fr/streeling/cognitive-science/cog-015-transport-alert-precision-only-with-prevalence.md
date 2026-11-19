@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-015** · Ne transférer la précision des alertes qu’avec leur prévalence · intermédiaire · 45 minutes
 
-Généré par le département *Sciences cognitives* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-015-transport-alert-precision-only-with-prevalence.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sciences cognitives* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-015-transport-alert-precision-only-with-prevalence.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [COG-012](../../cognitive-science/cog-012-separate-review-alert-hit-rate-from-response-bias/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-004** · Elegir pruebas con wavelets para un ataque de guitarra cambiante · intermedio · 40 minutos
 
-Generado por el departamento *Ingeniería de audio* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-004-wavelet-guitar-attack-evidence.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ingeniería de audio* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-004-wavelet-guitar-attack-evidence.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [AUD-003](../../audio-engineering/aud-003-transient-preservation-gate/), [PHY-002](../../physics/phy-002-time-frequency-guitar-transients/)
 :::

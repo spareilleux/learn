@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-011** · Croiser maillage et éclairage avant d’attribuer un changement de rendu · intermédiaire · 45 minutes
 
-Généré par le département *Philosophie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/fr/phi-011-cross-mesh-and-lighting-before-attributing-a-render-change.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Philosophie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/fr/phi-011-cross-mesh-and-lighting-before-attributing-a-render-change.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHI-007](../../philosophy/phi-007-test-a-learning-gain-against-counterfactuals/)
 :::

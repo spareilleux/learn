@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-022** · Mesurer le déplacement a posteriori par variation totale · intermédiaire · 45 minutes
 
-Généré par le département *Théorie de l'information* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-022-measure-posterior-movement-with-total-variation.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Théorie de l'information* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-022-measure-posterior-movement-with-total-variation.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [INF-013](../../information-theory/inf-013-value-an-evidence-probe-by-expected-information/), [INF-003](../../information-theory/inf-003-verdict-distribution-drift/)
 :::

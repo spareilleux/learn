@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-015** · Distinguer le relâchement de la touche de celui de la pédale · avancé · 60 minutes
 
-Généré par le département *Musicologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-015-separate-key-release-from-pedal-release.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musicologie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-015-separate-key-release-from-pedal-release.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MCL-012](../../musicology/mcl-012-merge-ties-without-merging-slurs/)
 :::

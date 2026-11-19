@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-007** · Traducir los coeficientes de ataque a duraciones · intermedio · 40 minutos
 
-Generado por el departamento *Ingeniería de audio* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-007-translate-attack-coefficients-into-time.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ingeniería de audio* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-007-translate-attack-coefficients-into-time.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [AUD-005](../../audio-engineering/aud-005-pcm-guards-and-format-boundaries/), [GAS-002](../../guitar-acoustics/gas-002-brightness-control-and-evaluation-gate/)
 :::

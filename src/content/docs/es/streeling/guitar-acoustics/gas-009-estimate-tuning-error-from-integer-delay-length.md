@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-009** · Estimar el error de afinación de una longitud de retardo entera · intermedio · 45 minutos
 
-Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-009-estimate-tuning-error-from-integer-delay-length.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-009-estimate-tuning-error-from-integer-delay-length.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAS-005](../../guitar-acoustics/gas-005-separate-a-partial-peak-from-a-period/)
 :::

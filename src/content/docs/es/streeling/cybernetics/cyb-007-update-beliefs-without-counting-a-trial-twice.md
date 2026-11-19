@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-007** · Actualizar creencias sin contar un ensayo dos veces · intermedio · 40 minutos
 
-Generado por el departamento *Cibernética* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-007-update-beliefs-without-counting-a-trial-twice.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Cibernética* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-007-update-beliefs-without-counting-a-trial-twice.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CYB-004](../../cybernetics/cyb-004-observe-before-correcting-a-feedback-loop/), [FUT-005](../../futurology/fut-005-value-a-renderer-pilot-before-running-it/)
 :::

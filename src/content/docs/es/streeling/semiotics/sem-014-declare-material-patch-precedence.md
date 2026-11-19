@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-014** · Declarar la prioridad de cambios de material · intermedio · 45 minutos
 
-Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-014-declare-material-patch-precedence.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Semiótica* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-014-declare-material-patch-precedence.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [SEM-011](../../semiotics/sem-011-version-a-dsl-meaning-before-renaming-its-syntax/)
 :::

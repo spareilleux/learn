@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-023** · Vérifier le rang des régresseurs avant l’identification · intermédiaire · 45 minutes
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-023-check-regressor-rank-before-identifying-a-controller.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-023-check-regressor-rank-before-identifying-a-controller.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CYB-018](../../cybernetics/cyb-018-reconstruct-hidden-state-from-distinct-dynamics/), [CYB-016](../../cybernetics/cyb-016-test-feedforward-against-disturbance-mismatch/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-015** · Diagnostiquer une prédiction échouée avec une prémisse auxiliaire · avancé · 45 minutes
 
-Généré par le département *Philosophie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/fr/phi-015-diagnose-a-failed-prediction-with-an-auxiliary-premise.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Philosophie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/fr/phi-015-diagnose-a-failed-prediction-with-an-auxiliary-premise.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHI-008](../../philosophy/phi-008-separate-a-test-oracle-from-a-specification/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-003** · Signos de estado y pruebas en el trabajo agéntico · intermedio · 35 minutos
 
-Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-003-status-signs-and-evidence.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Semiótica* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-003-status-signs-and-evidence.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [SEM-001](../../semiotics/sem-001-signs-in-governance/)
 :::

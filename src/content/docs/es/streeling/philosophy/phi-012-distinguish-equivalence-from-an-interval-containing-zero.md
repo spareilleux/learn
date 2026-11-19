@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-012** · Distinguir la equivalencia de un intervalo que contiene cero · avanzado · 45 minutos
 
-Generado por el departamento *Filosofía* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-012-distinguish-equivalence-from-an-interval-containing-zero.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Filosofía* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-012-distinguish-equivalence-from-an-interval-containing-zero.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHI-006](../../philosophy/phi-006-preserve-the-quantifier-in-a-fold-verdict/), [PHI-011](../../philosophy/phi-011-cross-mesh-and-lighting-before-attributing-a-render-change/)
 :::

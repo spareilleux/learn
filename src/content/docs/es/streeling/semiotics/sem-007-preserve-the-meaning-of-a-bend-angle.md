@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-007** · Conservar el significado de un ángulo de doblado · intermedio · 40 minutos
 
-Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-007-preserve-the-meaning-of-a-bend-angle.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Semiótica* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-007-preserve-the-meaning-of-a-bend-angle.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [SEM-006](../../semiotics/sem-006-preserve-orientation-across-scene-frames/), [PHY-011](../../physics/phy-011-compute-bend-length-on-a-declared-neutral-layer/)
 :::

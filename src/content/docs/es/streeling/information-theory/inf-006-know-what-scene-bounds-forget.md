@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-006** · Comprender qué olvidan los límites de una escena · intermedio · 40 minutos
 
-Generado por el departamento *Teoría de la información* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-006-know-what-scene-bounds-forget.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Teoría de la información* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-006-know-what-scene-bounds-forget.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [INF-004](../../information-theory/inf-004-information-loss-in-agent-handoffs/), [VC-009](../../visual-computing/vc-009-budget-brutal-scene-expansion/)
 :::

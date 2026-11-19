@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/produc
 :::note[Streeling University]
 **PM-003** · Medir la cola de revisión de Streeling sin contar los borradores como flujo completado · principiante · 30 minutos
 
-Generado por el departamento *Gestión de productos y proyectos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-003-review-queue-flow-metrics.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Gestión de productos y proyectos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-003-review-queue-flow-metrics.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PM-002](../../product-management/pm-002-release-evidence-gate/)
 :::

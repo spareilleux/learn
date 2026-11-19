@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-006** · Comprendre ce que les bornes d'une scène oublient · intermédiaire · 40 minutes
 
-Généré par le département *Théorie de l'information* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-006-know-what-scene-bounds-forget.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Théorie de l'information* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-006-know-what-scene-bounds-forget.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [INF-004](../../information-theory/inf-004-information-loss-in-agent-handoffs/), [VC-009](../../visual-computing/vc-009-budget-brutal-scene-expansion/)
 :::

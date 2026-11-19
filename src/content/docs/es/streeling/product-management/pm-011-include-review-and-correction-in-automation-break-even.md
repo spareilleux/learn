@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/produc
 :::note[Streeling University]
 **PM-011** · Incluir revisión y corrección en el equilibrio de automatización · intermedio · 45 minutos
 
-Generado por el departamento *Gestión de productos y proyectos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-011-include-review-and-correction-in-automation-break-even.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Gestión de productos y proyectos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-011-include-review-and-correction-in-automation-break-even.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PM-006](../../product-management/pm-006-test-a-pilot-against-its-decision-horizon/), [PM-008](../../product-management/pm-008-size-a-fifty-course-batch-by-review-capacity/)
 :::

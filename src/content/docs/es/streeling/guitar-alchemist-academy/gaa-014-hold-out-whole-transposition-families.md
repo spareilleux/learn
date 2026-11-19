@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-014** · Reservar familias completas de transposición para la evaluación · avanzado · 60 minutos
 
-Generado por el departamento *Guitar Alchemist Academy* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/es/gaa-014-hold-out-whole-transposition-families.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Guitar Alchemist Academy* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/es/gaa-014-hold-out-whole-transposition-families.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAA-009](../../guitar-alchemist-academy/gaa-009-test-transposition-beyond-a-memorized-fret-pattern/)
 :::

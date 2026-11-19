@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/networ
 :::note[Streeling University]
 **NET-017** · Asignar roles simultáneos sin doble reserva · intermedio · 45 minutos
 
-Generado por el departamento *Ciencia de redes* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-017-match-simultaneous-roles-without-double-booking.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia de redes* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-017-match-simultaneous-roles-without-double-booking.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [NET-003](../../network-science/net-003-worker-lane-coverage-and-fragility/), [NET-014](../../network-science/net-014-bound-throughput-with-a-capacity-cut/)
 :::

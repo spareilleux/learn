@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-015** · Ponderar la telemetría muestreada antes de resumir fallos · intermedio · 45 minutos
 
-Generado por el departamento *Teoría de la información* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-015-weight-sampled-telemetry-before-summarizing-failures.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Teoría de la información* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-015-weight-sampled-telemetry-before-summarizing-failures.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [INF-011](../../information-theory/inf-011-separate-compressed-size-from-preserved-information/), [PM-009](../../product-management/pm-009-separate-release-adoption-from-artifact-downloads/)
 :::

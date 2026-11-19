@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/networ
 :::note[Streeling University]
 **NET-014** · Borner le débit par une coupe de capacité · intermédiaire · 45 minutes
 
-Généré par le département *Science des réseaux* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/fr/net-014-bound-throughput-with-a-capacity-cut.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Science des réseaux* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/fr/net-014-bound-throughput-with-a-capacity-cut.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [NET-010](../../network-science/net-010-compute-critical-paths-with-resource-assumptions/)
 :::

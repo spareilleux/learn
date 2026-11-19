@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-011** · Versionar el significado de un DSL antes de renombrar su sintaxis · intermedio · 40 minutos
 
-Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-011-version-a-dsl-meaning-before-renaming-its-syntax.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Semiótica* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-011-version-a-dsl-meaning-before-renaming-its-syntax.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [SEM-001](../../semiotics/sem-001-signs-in-governance/), [CS-014](../../computer-science/cs-014-compose-brutal-scene-descriptions/)
 :::

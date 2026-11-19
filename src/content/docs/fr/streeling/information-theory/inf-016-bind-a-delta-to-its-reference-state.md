@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-016** · Lier un delta à son état de référence · intermédiaire · 45 minutes
 
-Généré par le département *Théorie de l'information* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-016-bind-a-delta-to-its-reference-state.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Théorie de l'information* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-016-bind-a-delta-to-its-reference-state.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [INF-011](../../information-theory/inf-011-separate-compressed-size-from-preserved-information/), [INF-014](../../information-theory/inf-014-retain-message-codebook-versions/)
 :::

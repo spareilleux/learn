@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-018** · Choisir une réserve sous une contrainte probabiliste déclarée · avancé · 50 minutes
 
-Généré par le département *Futurologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/fr/fut-018-choose-a-reserve-under-a-declared-chance-constraint.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Futurologie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/fr/fut-018-choose-a-reserve-under-a-declared-chance-constraint.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [FUT-012](../../futurology/fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario/)
 :::

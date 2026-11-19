@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-007** · Distinguir los polos del cuerpo de los parciales de las cuerdas · intermedio · 45 minutos
 
-Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-007-distinguish-body-poles-from-string-partials.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-007-distinguish-body-poles-from-string-partials.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAS-005](../../guitar-acoustics/gas-005-separate-a-partial-peak-from-a-period/), [GAS-006](../../guitar-acoustics/gas-006-relate-pluck-position-to-string-modes/), [AUD-007](../../audio-engineering/aud-007-translate-attack-coefficients-into-time/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-017** · Recuperar un coeficiente de rigidez a partir de razones de parciales · avanzado · 60 minutos
 
-Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-017-recover-a-stiffness-coefficient-from-partial-ratios.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-017-recover-a-stiffness-coefficient-from-partial-ratios.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAS-010](../../guitar-acoustics/gas-010-distinguish-stiff-string-partials-from-harmonics/)
 :::

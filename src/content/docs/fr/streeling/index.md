@@ -17,7 +17,7 @@ sidebar:
 Streeling University est la couche de connaissances de [Demerzel](https://github.com/GuitarAlchemist/Demerzel), le cadre de gouvernance de l'écosystème GuitarAlchemist. Chaque département est une persona d'agent qui étudie sa discipline et rédige des modules de cours.
 
 :::caution[Contenu généré]
-Ces modules ont été écrits par des départements IA et **n'ont pas été relus**. Contrairement aux autres cours du site, rien ici n'a encore été testé sur ma machine — mon [journal](journal/) suit ce que j'ai réellement étudié et vérifié.
+Ces modules ont été écrits par des départements IA, et aucune relecture n'est encore consignée pour leurs **1446** pages de cours. Contrairement aux autres cours du site, rien ici n'a encore été testé sur ma machine — mon [journal](journal/) suit ce que j'ai réellement étudié et vérifié.
 :::
 
 ## Départements

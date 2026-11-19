@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physic
 :::note[Streeling University]
 **PHY-021** · Distinguir la velocidad de rebote de la energía conservada · avanzado · 45 minutos
 
-Generado por el departamento *Física* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/es/phy-021-separate-rebound-speed-from-retained-energy.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Física* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/es/phy-021-separate-rebound-speed-from-retained-energy.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHY-014](../../physics/phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh/)
 :::

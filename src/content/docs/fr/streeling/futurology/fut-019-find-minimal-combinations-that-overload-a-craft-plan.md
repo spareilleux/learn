@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-019** · Trouver les combinaisons minimales qui surchargent un plan artisanal · avancé · 50 minutes
 
-Généré par le département *Futurologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/fr/fut-019-find-minimal-combinations-that-overload-a-craft-plan.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Futurologie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/fr/fut-019-find-minimal-combinations-that-overload-a-craft-plan.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [FUT-008](../../futurology/fut-008-stress-test-a-release-plan-against-review-backlogs/), [PHI-013](../../philosophy/phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core/)
 :::

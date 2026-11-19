@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-007** · Mettre un gain d'apprentissage à l'épreuve des contrefactuels · intermédiaire · 45 minutes
 
-Généré par le département *Philosophie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/fr/phi-007-test-a-learning-gain-against-counterfactuals.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Philosophie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/fr/phi-007-test-a-learning-gain-against-counterfactuals.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHI-001](../../philosophy/phi-001-how-to-argue-well/), [COG-007](../../cognitive-science/cog-007-separate-unaided-recall-from-assisted-success/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/produc
 :::note[Streeling University]
 **PM-009** · Distinguer adoption d’une version et téléchargements · intermédiaire · 45 minutes
 
-Généré par le département *Gestion de produit et de projet* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/fr/pm-009-separate-release-adoption-from-artifact-downloads.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Gestion de produit et de projet* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/fr/pm-009-separate-release-adoption-from-artifact-downloads.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PM-002](../../product-management/pm-002-release-evidence-gate/), [PM-006](../../product-management/pm-006-test-a-pilot-against-its-decision-horizon/)
 :::

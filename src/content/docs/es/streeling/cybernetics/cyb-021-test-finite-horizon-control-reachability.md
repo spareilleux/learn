@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-021** · Comprobar la alcanzabilidad en un horizonte finito · intermedio · 45 minutos
 
-Generado por el departamento *Cibernética* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-021-test-finite-horizon-control-reachability.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Cibernética* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-021-test-finite-horizon-control-reachability.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CYB-018](../../cybernetics/cyb-018-reconstruct-hidden-state-from-distinct-dynamics/), [CYB-019](../../cybernetics/cyb-019-test-coupled-feedback-eigenmodes/), [MAT-024](../../mathematics/mat-024-dynamical-systems-stability-feedback/)
 :::

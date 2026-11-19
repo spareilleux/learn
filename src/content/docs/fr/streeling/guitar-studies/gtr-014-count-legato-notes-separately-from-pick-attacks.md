@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-014** · Compter les notes en legato séparément des coups de médiator · intermédiaire · 55 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-014-count-legato-notes-separately-from-pick-attacks.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-014-count-legato-notes-separately-from-pick-attacks.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GTR-010](../../guitar-studies/gtr-010-separate-muting-from-releasing-a-fretted-note/)
 :::

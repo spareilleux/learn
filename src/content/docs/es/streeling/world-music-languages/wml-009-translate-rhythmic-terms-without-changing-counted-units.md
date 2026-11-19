@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/world-
 :::note[Streeling University]
 **WML-009** · Traducir términos rítmicos sin cambiar las unidades contadas · intermedio · 45 minutos
 
-Generado por el departamento *Músicas y lenguas del mundo* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/es/wml-009-translate-rhythmic-terms-without-changing-counted-units.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Músicas y lenguas del mundo* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/es/wml-009-translate-rhythmic-terms-without-changing-counted-units.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [WML-006](../../world-music-languages/wml-006-preserve-the-origin-of-an-additive-cycle/), [MCL-006](../../musicology/mcl-006-preserve-meter-grouping-and-tempo-units/)
 :::

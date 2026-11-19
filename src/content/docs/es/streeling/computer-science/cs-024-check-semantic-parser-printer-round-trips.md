@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-024** · Comprobar el significado tras un recorrido entre analizador e impresor · intermedio · 45 minutos
 
-Generado por el departamento *Ciencias de la computación* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/es/cs-024-check-semantic-parser-printer-round-trips.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencias de la computación* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/es/cs-024-check-semantic-parser-printer-round-trips.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CS-019](../../computer-science/cs-019-preserve-lexical-bindings-when-composing-fragments/), [SEM-002](../../semiotics/sem-002-chord-symbols-and-canonicalization/)
 :::

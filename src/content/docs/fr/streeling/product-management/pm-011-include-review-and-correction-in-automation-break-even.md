@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/produc
 :::note[Streeling University]
 **PM-011** · Inclure revue et correction dans le seuil de rentabilité de l’automatisation · intermédiaire · 45 minutes
 
-Généré par le département *Gestion de produit et de projet* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/fr/pm-011-include-review-and-correction-in-automation-break-even.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Gestion de produit et de projet* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/fr/pm-011-include-review-and-correction-in-automation-break-even.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PM-006](../../product-management/pm-006-test-a-pilot-against-its-decision-horizon/), [PM-008](../../product-management/pm-008-size-a-fifty-course-batch-by-review-capacity/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-018** · Délimiter les textes par leur longueur en octets UTF-8 · intermédiaire · 45 minutes
 
-Généré par le département *Théorie de l'information* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-018-frame-text-by-utf8-byte-length.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Théorie de l'information* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-018-frame-text-by-utf8-byte-length.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [INF-014](../../information-theory/inf-014-retain-message-codebook-versions/)
 :::

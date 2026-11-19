@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-018** · Elegir una reserva con una restricción probabilística declarada · avanzado · 50 minutos
 
-Generado por el departamento *Futurología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-018-choose-a-reserve-under-a-declared-chance-constraint.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Futurología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-018-choose-a-reserve-under-a-declared-chance-constraint.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [FUT-012](../../futurology/fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario/)
 :::

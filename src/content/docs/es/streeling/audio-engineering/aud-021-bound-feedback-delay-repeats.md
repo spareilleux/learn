@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-021** · Acotar las repeticiones de un retardo con realimentación · avanzado · 45 minutos
 
-Generado por el departamento *Ingeniería de audio* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-021-bound-feedback-delay-repeats.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ingeniería de audio* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-021-bound-feedback-delay-repeats.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [AUD-007](../../audio-engineering/aud-007-translate-attack-coefficients-into-time/)
 :::

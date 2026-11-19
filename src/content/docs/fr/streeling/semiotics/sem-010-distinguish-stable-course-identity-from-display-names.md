@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-010** · Distinguer identité stable d’un cours et titre affiché · intermédiaire · 40 minutes
 
-Généré par le département *Sémiotique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-010-distinguish-stable-course-identity-from-display-names.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sémiotique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-010-distinguish-stable-course-identity-from-display-names.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [SEM-004](../../semiotics/sem-004-face-identity-under-reindexing/), [DV-008](../../data-visualization/dv-008-streeling-evidence-stage-map/)
 :::

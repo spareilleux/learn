@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-018** · Reconstruire un état caché grâce à des dynamiques distinctes · intermédiaire · 45 minutes
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-018-reconstruct-hidden-state-from-distinct-dynamics.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-018-reconstruct-hidden-state-from-distinct-dynamics.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CYB-004](../../cybernetics/cyb-004-observe-before-correcting-a-feedback-loop/), [GAS-015](../../guitar-acoustics/gas-015-separate-mode-excitation-from-observation/)
 :::

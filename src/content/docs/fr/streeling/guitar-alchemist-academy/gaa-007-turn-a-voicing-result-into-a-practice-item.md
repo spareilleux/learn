@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-007** · Transformer un résultat de voicing en question d'entraînement · early-intermediate · 40 minutes
 
-Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-007-turn-a-voicing-result-into-a-practice-item.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Guitar Alchemist Academy* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-007-turn-a-voicing-result-into-a-practice-item.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAA-004](../../guitar-alchemist-academy/gaa-004-choose-a-useful-voicing/), [COG-002](../../cognitive-science/cog-002-feedback-integrity-fretboard-recall/)
 :::

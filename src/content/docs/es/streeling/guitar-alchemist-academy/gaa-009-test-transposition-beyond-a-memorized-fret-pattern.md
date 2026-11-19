@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-009** · Evaluar la transposición más allá de un patrón de trastes memorizado · intermedio · 45 minutos
 
-Generado por el departamento *Guitar Alchemist Academy* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/es/gaa-009-test-transposition-beyond-a-memorized-fret-pattern.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Guitar Alchemist Academy* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/es/gaa-009-test-transposition-beyond-a-memorized-fret-pattern.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAA-006](../../guitar-alchemist-academy/gaa-006-separate-capo-shapes-from-sounding-pitches/), [GAA-007](../../guitar-alchemist-academy/gaa-007-turn-a-voicing-result-into-a-practice-item/)
 :::

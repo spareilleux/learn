@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/world-
 :::note[Streeling University]
 **WML-023** · Reconnaître des repères ordonnés malgré des événements intercalés · avancé · 55 minutes
 
-Généré par le département *Musiques et langues du monde* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/fr/wml-023-accept-ordered-landmarks-with-intervening-events.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musiques et langues du monde* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/fr/wml-023-accept-ordered-landmarks-with-intervening-events.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [WML-012](../../world-music-languages/wml-012-preserve-direction-in-a-melodic-inventory/)
 :::

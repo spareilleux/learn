@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psycho
 :::note[Streeling University]
 **PSY-001** · Fondements de la Psychohistoire · intermédiaire · 30 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-001-intro-fractal-compounding.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-001-intro-fractal-compounding.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de Psychohistoire** | Étape : L'œuvre au blanc (Intermédiaire) | Durée : 30 minutes

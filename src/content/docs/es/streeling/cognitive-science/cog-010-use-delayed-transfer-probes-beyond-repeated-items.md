@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-010** · Usar pruebas diferidas de transferencia más allá de los elementos repetidos · intermedio · 45 minutos
 
-Generado por el departamento *Ciencia cognitiva* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-010-use-delayed-transfer-probes-beyond-repeated-items.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia cognitiva* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-010-use-delayed-transfer-probes-beyond-repeated-items.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [COG-007](../../cognitive-science/cog-007-separate-unaided-recall-from-assisted-success/), [COG-008](../../cognitive-science/cog-008-choose-probes-that-distinguish-reasoning-models/)
 :::

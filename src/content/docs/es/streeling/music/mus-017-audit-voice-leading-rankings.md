@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/
 :::note[Streeling University]
 **MUS-017** · Auditar una clasificación de disposiciones de voces según su contrato de distancia · intermedio · 60 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-017-audit-voice-leading-rankings.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-017-audit-voice-leading-rankings.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-015](../../music/mus-015-choose-voice-leading-equivalences/), [MUS-016](../../music/mus-016-recover-voice-correspondence/)
 :::

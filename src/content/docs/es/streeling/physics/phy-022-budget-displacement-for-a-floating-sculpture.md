@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physic
 :::note[Streeling University]
 **PHY-022** · Calcular el desplazamiento de una escultura flotante · avanzado · 45 minutos
 
-Generado por el departamento *Física* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/es/phy-022-budget-displacement-for-a-floating-sculpture.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Física* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/es/phy-022-budget-displacement-for-a-floating-sculpture.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHY-014](../../physics/phy-014-preserve-mass-assumptions-when-scaling-a-craft-mesh/)
 :::

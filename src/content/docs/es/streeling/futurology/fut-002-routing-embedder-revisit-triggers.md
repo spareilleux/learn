@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-002** · Condiciones para revisar el embedder de enrutamiento de GA · early-intermediate · 35 minutos
 
-Generado por el departamento *Futurología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-002-routing-embedder-revisit-triggers.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Futurología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-002-routing-embedder-revisit-triggers.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [FUT-001](../../futurology/fut-001-thinking-about-tomorrow/)
 :::

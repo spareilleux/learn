@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-022** · Medir el cambio posterior con variación total · intermedio · 45 minutos
 
-Generado por el departamento *Teoría de la información* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-022-measure-posterior-movement-with-total-variation.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Teoría de la información* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-022-measure-posterior-movement-with-total-variation.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [INF-013](../../information-theory/inf-013-value-an-evidence-probe-by-expected-information/), [INF-003](../../information-theory/inf-003-verdict-distribution-drift/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psycho
 :::note[Streeling University]
 **PSY-023** · Surveiller un plan : bandes de tolérance et règles d'alerte · intermédiaire · 40 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-023-monitoring-a-plan.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-023-monitoring-a-plan.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-012](../../psychohistory/psy-012-early-warning-false-alarms/), [PSY-004](../../psychohistory/psy-004-how-large-is-large/)
 :::

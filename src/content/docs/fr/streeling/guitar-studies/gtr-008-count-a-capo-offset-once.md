@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-008** · Compter une seule fois le décalage du capodastre · intermédiaire · 40 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-008-count-a-capo-offset-once.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-008-count-a-capo-offset-once.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GTR-001](../../guitar-studies/gtr-001-the-fretboard-map/), [GTR-003](../../guitar-studies/gtr-003-audit-voicing-playability/), [WML-005](../../world-music-languages/wml-005-declare-note-name-conventions/), [GAA-006](../../guitar-alchemist-academy/gaa-006-separate-capo-shapes-from-sounding-pitches/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/produc
 :::note[Streeling University]
 **PM-003** · Mesurer la file de révision Streeling sans compter les brouillons comme du débit · débutant · 30 minutes
 
-Généré par le département *Gestion de produit et de projet* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/fr/pm-003-review-queue-flow-metrics.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Gestion de produit et de projet* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/fr/pm-003-review-queue-flow-metrics.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PM-002](../../product-management/pm-002-release-evidence-gate/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-009** · Limitar la admisión con un depósito de tokens · intermedio · 45 minutos
 
-Generado por el departamento *Cibernética* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-009-bound-admission-with-a-token-bucket.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Cibernética* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-009-bound-admission-with-a-token-bucket.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CYB-006](../../cybernetics/cyb-006-bound-retry-feedback-and-workload/)
 :::

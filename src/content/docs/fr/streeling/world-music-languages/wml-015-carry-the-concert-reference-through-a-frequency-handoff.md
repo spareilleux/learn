@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/world-
 :::note[Streeling University]
 **WML-015** · Conserver le diapason de référence lors d’un transfert de fréquences · avancé · 60 minutes
 
-Généré par le département *Musiques et langues du monde* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/fr/wml-015-carry-the-concert-reference-through-a-frequency-handoff.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musiques et langues du monde* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/fr/wml-015-carry-the-concert-reference-through-a-frequency-handoff.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [WML-004](../../world-music-languages/wml-004-preserve-intonation-beyond-pitch-classes/)
 :::

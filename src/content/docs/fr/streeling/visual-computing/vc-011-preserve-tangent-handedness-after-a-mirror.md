@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-011** · Préserver l’orientation du repère tangent après une symétrie · intermédiaire · 40 minutes
 
-Généré par le département *Informatique visuelle* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-011-preserve-tangent-handedness-after-a-mirror.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique visuelle* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-011-preserve-tangent-handedness-after-a-mirror.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHY-008](../../physics/phy-008-keep-surface-normals-perpendicular/), [VC-010](../../visual-computing/vc-010-preserve-packed-texture-channel-contracts/)
 :::

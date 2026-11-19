@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-009** · Composer les contraintes d’origami avant d’accepter un empilement rigide · intermédiaire · 40 minutes
 
-Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-009-composing-origami-panel-constraints.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-009-composing-origami-panel-constraints.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CS-001](../../computer-science/cs-001-thinking-algorithmically/), [CS-006](../../computer-science/cs-006-ixql-pipeline-composition/)
 :::

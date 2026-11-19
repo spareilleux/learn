@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-013** · Expliquer un projet artisanal impossible par un noyau minimal · avancé · 45 minutes
 
-Généré par le département *Philosophie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/fr/phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Philosophie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/fr/phi-013-explain-an-infeasible-craft-plan-with-a-minimal-core.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CS-009](../../computer-science/cs-009-composing-origami-panel-constraints/), [PHI-008](../../philosophy/phi-008-separate-a-test-oracle-from-a-specification/)
 :::

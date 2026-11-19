@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-019** · Choisir un ensemble minimal de vues pour des traits déclarés · avancé · 45 minutes
 
-Généré par le département *Visualisation de données* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/fr/dv-019-choose-a-minimal-view-set-for-declared-features.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Visualisation de données* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/fr/dv-019-choose-a-minimal-view-set-for-declared-features.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHI-010](../../philosophy/phi-010-state-what-a-craft-view-cannot-distinguish/), [DV-016](../../data-visualization/dv-016-compare-paired-silhouette-residuals/)
 :::

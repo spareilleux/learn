@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-013** · Évaluer une sonde de preuve par son information attendue · intermédiaire · 45 minutes
 
-Généré par le département *Théorie de l'information* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-013-value-an-evidence-probe-by-expected-information.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Théorie de l'information* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-013-value-an-evidence-probe-by-expected-information.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [INF-001](../../information-theory/inf-001-entropy-of-governance/), [COG-008](../../cognitive-science/cog-008-choose-probes-that-distinguish-reasoning-models/)
 :::

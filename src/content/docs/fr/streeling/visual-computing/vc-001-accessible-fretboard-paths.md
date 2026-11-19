@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-001** · Un manche, trois modes d'accès · débutant · 35 minutes
 
-Généré par le département *Informatique visuelle* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-001-accessible-fretboard-paths.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique visuelle* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-001-accessible-fretboard-paths.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de visual computing** | Niveau : débutant | Durée estimée : 35 minutes | Statut : en attente de relecture

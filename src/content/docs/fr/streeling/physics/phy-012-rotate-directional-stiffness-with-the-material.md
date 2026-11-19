@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physic
 :::note[Streeling University]
 **PHY-012** · Faire tourner la rigidité directionnelle avec le matériau · intermédiaire · 45 minutes
 
-Généré par le département *Physique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-012-rotate-directional-stiffness-with-the-material.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Physique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-012-rotate-directional-stiffness-with-the-material.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHY-006](../../physics/phy-006-check-weave-scene-units/), [PHY-008](../../physics/phy-008-keep-surface-normals-perpendicular/)
 :::

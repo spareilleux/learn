@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-018** · Interpréter un bref de tissage à plusieurs cadres · avancé · 45 minutes
 
-Généré par le département *Sémiotique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-018-interpret-a-multi-shaft-weaving-draft.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sémiotique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-018-interpret-a-multi-shaft-weaving-draft.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [VC-007](../../visual-computing/vc-007-weave-seams-as-scene-contracts/)
 :::

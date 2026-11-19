@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physic
 :::note[Streeling University]
 **PHY-009** · Distinguer la couleur linéaire de l'encodage d'affichage · intermédiaire · 35 minutes
 
-Généré par le département *Physique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-009-distinguish-linear-color-from-display-encoding.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Physique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-009-distinguish-linear-color-from-display-encoding.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [VC-005](../../visual-computing/vc-005-craft-details-through-blender-to-godot/)
 :::

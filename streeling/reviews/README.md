@@ -9,6 +9,9 @@ One pair per module:
 No verdict exists yet. Each brief says so and keeps the review and publication flags of its production record, in
 [`../course-productions/`](../course-productions/), false until one is recorded.
 
+When a reviewer gives one, record it as a receipt in [`../review-receipts/`](../review-receipts/), one per verdict.
+The pages read that, not these briefs or the production records.
+
 ## Their targets are Demerzel files
 
 These packets were written in GuitarAlchemist/Demerzel and copied here unchanged from commit `1beb089`. They name

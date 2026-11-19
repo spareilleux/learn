@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-008** · Composer des verdicts de révision liés aux sources exactes · intermédiaire · 45 minutes
 
-Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-008-compose-exact-source-review-verdicts.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-008-compose-exact-source-review-verdicts.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CS-005](../../computer-science/cs-005-agent-handoff-evidence-contract/), [CS-007](../../computer-science/cs-007-typed-agent-evidence-and-backpressure/)
 :::

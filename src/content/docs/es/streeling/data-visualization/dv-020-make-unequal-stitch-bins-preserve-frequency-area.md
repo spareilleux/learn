@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-020** · Conservar las frecuencias por área con intervalos desiguales de puntadas · avanzado · 45 minutos
 
-Generado por el departamento *Visualización de datos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-020-make-unequal-stitch-bins-preserve-frequency-area.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Visualización de datos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-020-make-unequal-stitch-bins-preserve-frequency-area.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [DV-011](../../data-visualization/dv-011-retain-raw-counts-behind-normalized-heatmaps/)
 :::

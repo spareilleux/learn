@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-007** · Separar el recuerdo sin ayuda del éxito asistido · intermedio · 40 minutos
 
-Generado por el departamento *Ciencia cognitiva* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-007-separate-unaided-recall-from-assisted-success.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia cognitiva* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-007-separate-unaided-recall-from-assisted-success.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [COG-002](../../cognitive-science/cog-002-feedback-integrity-fretboard-recall/), [COG-003](../../cognitive-science/cog-003-calibrating-fretboard-confidence/), [GAA-007](../../guitar-alchemist-academy/gaa-007-turn-a-voicing-result-into-a-practice-item/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-016** · Faire de l’annulation un résultat explicite du pipeline · intermédiaire · 45 minutes
 
-Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-016-make-cancellation-an-explicit-pipeline-outcome.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-016-make-cancellation-an-explicit-pipeline-outcome.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CS-011](../../computer-science/cs-011-preserve-absence-and-failure-boundaries/)
 :::

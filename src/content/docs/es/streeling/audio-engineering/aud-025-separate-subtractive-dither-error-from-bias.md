@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-025** · Separar error y sesgo con dither sustractivo · avanzado · 55 minutos
 
-Generado por el departamento *Ingeniería de audio* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-025-separate-subtractive-dither-error-from-bias.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ingeniería de audio* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-025-separate-subtractive-dither-error-from-bias.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [AUD-015](../../audio-engineering/aud-015-bound-quantization-error-before-comparing-wavs/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-005** · Références, seuils d'alerte et objectifs historiques · débutant · 30 minutes
 
-Généré par le département *Visualisation de données* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/fr/dv-005-baselines-alerts-and-targets.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Visualisation de données* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/fr/dv-005-baselines-alerts-and-targets.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [DV-001](../../data-visualization/dv-001-observed-degraded-stale-quality/), [DV-004](../../data-visualization/dv-004-uncertainty-in-small-qa-suites/)
 :::

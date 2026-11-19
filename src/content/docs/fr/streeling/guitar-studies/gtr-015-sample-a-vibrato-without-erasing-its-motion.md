@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-015** · Échantillonner un vibrato sans effacer son mouvement · avancé · 60 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-015-sample-a-vibrato-without-erasing-its-motion.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-015-sample-a-vibrato-without-erasing-its-motion.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GTR-013](../../guitar-studies/gtr-013-judge-a-bend-with-an-uncertainty-budget/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-020** · Localizar una celda de motivo mediante longitudes de tramo positivas · avanzado · 45 minutos
 
-Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-020-locate-a-motif-cell-in-positive-run-lengths.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Semiótica* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-020-locate-a-motif-cell-in-positive-run-lengths.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [SEM-013](../../semiotics/sem-013-align-two-motif-periods-at-a-textile-seam/), [INF-011](../../information-theory/inf-011-separate-compressed-size-from-preserved-information/)
 :::

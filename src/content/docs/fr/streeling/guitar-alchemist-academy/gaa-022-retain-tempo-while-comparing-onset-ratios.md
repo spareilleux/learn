@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-022** · Conserver le tempo en comparant les rapports d’attaque · avancé · 50 minutes
 
-Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-022-retain-tempo-while-comparing-onset-ratios.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Guitar Alchemist Academy* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-022-retain-tempo-while-comparing-onset-ratios.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAA-010](../../guitar-alchemist-academy/gaa-010-define-a-practice-pass-before-counting-success/), [MCL-017](../../musicology/mcl-017-integrate-a-tempo-ramp-in-beat-coordinates/)
 :::

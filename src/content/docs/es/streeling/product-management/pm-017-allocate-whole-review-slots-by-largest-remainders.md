@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/produc
 :::note[Streeling University]
 **PM-017** · Asignar turnos enteros por mayores restos · intermedio · 45 minutos
 
-Generado por el departamento *Gestión de productos y proyectos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-017-allocate-whole-review-slots-by-largest-remainders.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Gestión de productos y proyectos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-017-allocate-whole-review-slots-by-largest-remainders.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PM-008](../../product-management/pm-008-size-a-fifty-course-batch-by-review-capacity/), [PM-010](../../product-management/pm-010-standardize-dogfood-failures-to-a-declared-task-mix/)
 :::

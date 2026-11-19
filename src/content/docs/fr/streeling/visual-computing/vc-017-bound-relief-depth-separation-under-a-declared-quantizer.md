@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-017** · Évaluer la séparation d’un relief avec un quantificateur déclaré · avancé · 45 minutes
 
-Généré par le département *Informatique visuelle* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-017-bound-relief-depth-separation-under-a-declared-quantizer.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique visuelle* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-017-bound-relief-depth-separation-under-a-declared-quantizer.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [VC-014](../../visual-computing/vc-014-predict-an-embroidered-stitch-pixel-footprint/), [INF-005](../../information-theory/inf-005-quantization-and-indistinguishable-renders/)
 :::

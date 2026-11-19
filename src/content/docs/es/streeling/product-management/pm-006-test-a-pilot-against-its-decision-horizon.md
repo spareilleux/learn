@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/produc
 :::note[Streeling University]
 **PM-006** · Evaluar una prueba piloto según su horizonte de decisión · intermedio · 40 minutos
 
-Generado por el departamento *Gestión de productos y proyectos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-006-test-a-pilot-against-its-decision-horizon.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Gestión de productos y proyectos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-006-test-a-pilot-against-its-decision-horizon.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PM-005](../../product-management/pm-005-interpret-brutal-coexistence-experiments/), [FUT-005](../../futurology/fut-005-value-a-renderer-pilot-before-running-it/)
 :::

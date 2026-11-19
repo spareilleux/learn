@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-018** · Contrastar cambios emparejados con resultados discordantes · intermedio · 45 minutos
 
-Generado por el departamento *Ciencia cognitiva* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-018-test-paired-changes-with-discordant-outcomes.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia cognitiva* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-018-test-paired-changes-with-discordant-outcomes.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [COG-009](../../cognitive-science/cog-009-counterbalance-practice-order-before-comparing-interfaces/), [COG-011](../../cognitive-science/cog-011-measure-rubric-disagreement-before-adjudication/)
 :::

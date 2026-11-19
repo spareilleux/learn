@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/world-
 :::note[Streeling University]
 **WML-021** · Trouver les partiels communs sans égaliser les fondamentales · avancé · 55 minutes
 
-Généré par le département *Musiques et langues du monde* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/fr/wml-021-find-common-partials-without-equating-fundamentals.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musiques et langues du monde* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/fr/wml-021-find-common-partials-without-equating-fundamentals.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [WML-008](../../world-music-languages/wml-008-retain-register-in-drone-relative-intervals/)
 :::

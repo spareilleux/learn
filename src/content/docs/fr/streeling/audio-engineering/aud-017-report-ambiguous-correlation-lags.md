@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-017** · Signaler les retards de corrélation ambigus · avancé · 60 minutes
 
-Généré par le département *Ingénierie audio* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/fr/aud-017-report-ambiguous-correlation-lags.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Ingénierie audio* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/fr/aud-017-report-ambiguous-correlation-lags.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [AUD-009](../../audio-engineering/aud-009-declare-alignment-before-a-null-test/)
 :::

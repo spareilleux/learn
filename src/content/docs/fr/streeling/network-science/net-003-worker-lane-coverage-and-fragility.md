@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/networ
 :::note[Streeling University]
 **NET-003** · Mesurer la couverture des voies de travail après un changement de mode · intermédiaire · 35 minutes
 
-Généré par le département *Science des réseaux* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/fr/net-003-worker-lane-coverage-and-fragility.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Science des réseaux* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/fr/net-003-worker-lane-coverage-and-fragility.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [NET-002](../../network-science/net-002-capability-graphs-and-projections/)
 :::

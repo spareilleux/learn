@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-002** · Acústica de la guitarra: probar un control de brillo en GA WASM · intermedio · 35 minutos
 
-Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-002-brightness-control-and-evaluation-gate.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-002-brightness-control-and-evaluation-gate.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAS-001](../../guitar-acoustics/gas-001-open-string-audio-evidence/)
 :::

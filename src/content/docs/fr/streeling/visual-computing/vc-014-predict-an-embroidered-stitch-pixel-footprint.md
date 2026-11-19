@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-014** · Prévoir la largeur en pixels d’un point de broderie · intermédiaire · 45 minutes
 
-Généré par le département *Informatique visuelle* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-014-predict-an-embroidered-stitch-pixel-footprint.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique visuelle* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-014-predict-an-embroidered-stitch-pixel-footprint.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [VC-005](../../visual-computing/vc-005-craft-details-through-blender-to-godot/)
 :::

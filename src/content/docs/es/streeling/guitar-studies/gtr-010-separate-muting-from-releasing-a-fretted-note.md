@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-010** · Distinguir apagar una cuerda de liberar una nota pisada · intermedio · 45 minutos
 
-Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-010-separate-muting-from-releasing-a-fretted-note.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Estudios de guitarra* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-010-separate-muting-from-releasing-a-fretted-note.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GTR-005](../../guitar-studies/gtr-005-plan-which-string-keeps-ringing/)
 :::

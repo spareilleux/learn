@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-005** · Transferir el trabajo de un agente mediante un contrato de pruebas · intermedio · 30 minutos
 
-Generado por el departamento *Ciencias de la computación* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/es/cs-005-agent-handoff-evidence-contract.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencias de la computación* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/es/cs-005-agent-handoff-evidence-contract.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CS-002](../../computer-science/cs-002-governing-agentic-loops/)
 :::

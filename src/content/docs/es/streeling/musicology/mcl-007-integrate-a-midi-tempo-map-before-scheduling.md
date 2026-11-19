@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-007** · Integrar un mapa de tempo MIDI antes de programar la reproducción · intermedio · 60 minutos
 
-Generado por el departamento *Musicología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-007-integrate-a-midi-tempo-map-before-scheduling.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Musicología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-007-integrate-a-midi-tempo-map-before-scheduling.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MCL-004](../../musicology/mcl-004-model-timing-without-inventing-a-style/), [MCL-006](../../musicology/mcl-006-preserve-meter-grouping-and-tempo-units/)
 :::

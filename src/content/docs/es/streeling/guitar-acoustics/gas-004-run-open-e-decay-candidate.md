@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-004** · Ejecutar y rechazar un ajuste de decaimiento del mi al aire · intermedio · 45 minutos
 
-Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-004-run-open-e-decay-candidate.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-004-run-open-e-decay-candidate.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAS-003](../../guitar-acoustics/gas-003-decay-calibration-open-e/)
 :::

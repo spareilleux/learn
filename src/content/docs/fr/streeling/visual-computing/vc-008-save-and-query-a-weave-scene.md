@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-008** · Enregistrer une scène de tissage et l’interroger · intermédiaire · 45 minutes
 
-Généré par le département *Informatique visuelle* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-008-save-and-query-a-weave-scene.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique visuelle* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-008-save-and-query-a-weave-scene.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [VC-007](../../visual-computing/vc-007-weave-seams-as-scene-contracts/)
 :::

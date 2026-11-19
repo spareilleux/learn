@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-013** · Conserver les erreurs manquées dans les essais pièges de revue assistée · intermédiaire · 45 minutes
 
-Généré par le département *Sciences cognitives* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-013-retain-catch-trial-misses-in-assisted-review.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sciences cognitives* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-013-retain-catch-trial-misses-in-assisted-review.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [COG-007](../../cognitive-science/cog-007-separate-unaided-recall-from-assisted-success/), [COG-009](../../cognitive-science/cog-009-counterbalance-practice-order-before-comparing-interfaces/)
 :::

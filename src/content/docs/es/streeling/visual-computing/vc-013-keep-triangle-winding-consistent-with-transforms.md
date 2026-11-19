@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-013** · Mantener coherentes el orden de los triángulos y las transformaciones · intermedio · 40 minutos
 
-Generado por el departamento *Computación visual* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-013-keep-triangle-winding-consistent-with-transforms.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Computación visual* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-013-keep-triangle-winding-consistent-with-transforms.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [SEM-006](../../semiotics/sem-006-preserve-orientation-across-scene-frames/), [PHY-008](../../physics/phy-008-keep-surface-normals-perpendicular/)
 :::

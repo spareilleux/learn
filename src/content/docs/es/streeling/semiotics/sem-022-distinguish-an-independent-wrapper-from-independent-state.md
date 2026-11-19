@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-022** · Distinguir una envoltura independiente de un estado independiente · avanzado · 50 minutos
 
-Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-022-distinguish-an-independent-wrapper-from-independent-state.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Semiótica* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-022-distinguish-an-independent-wrapper-from-independent-state.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [SEM-014](../../semiotics/sem-014-declare-material-patch-precedence/), [CS-019](../../computer-science/cs-019-preserve-lexical-bindings-when-composing-fragments/)
 :::

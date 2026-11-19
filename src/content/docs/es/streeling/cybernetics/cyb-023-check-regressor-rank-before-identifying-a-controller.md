@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-023** · Comprobar el rango de los regresores antes de identificar un controlador · intermedio · 45 minutos
 
-Generado por el departamento *Cibernética* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-023-check-regressor-rank-before-identifying-a-controller.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Cibernética* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-023-check-regressor-rank-before-identifying-a-controller.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CYB-018](../../cybernetics/cyb-018-reconstruct-hidden-state-from-distinct-dynamics/), [CYB-016](../../cybernetics/cyb-016-test-feedforward-against-disturbance-mismatch/)
 :::

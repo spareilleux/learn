@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-005** · Éviter les oscillations d’une politique de rendu · intermédiaire · 40 minutes
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-005-stop-render-policy-flapping.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-005-stop-render-policy-flapping.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CYB-004](../../cybernetics/cyb-004-observe-before-correcting-a-feedback-loop/)
 :::

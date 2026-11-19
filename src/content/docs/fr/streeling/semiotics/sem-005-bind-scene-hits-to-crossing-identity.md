@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-005** · Relier les résultats de collision à l’identité des croisements · intermédiaire · 45 minutes
 
-Généré par le département *Sémiotique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-005-bind-scene-hits-to-crossing-identity.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sémiotique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-005-bind-scene-hits-to-crossing-identity.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [SEM-004](../../semiotics/sem-004-face-identity-under-reindexing/)
 :::

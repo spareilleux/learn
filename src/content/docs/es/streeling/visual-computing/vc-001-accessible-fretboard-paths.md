@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-001** · Un diapasón, tres vías de acceso · principiante · 35 minutos
 
-Generado por el departamento *Computación visual* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-001-accessible-fretboard-paths.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Computación visual* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-001-accessible-fretboard-paths.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Computación Visual** | Nivel: principiante | Duración estimada: 35 minutos | Estado: pendiente de revisión

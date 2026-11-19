@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/networ
 :::note[Streeling University]
 **NET-010** · Calcular rutas críticas con supuestos de recursos · intermedio · 45 minutos
 
-Generado por el departamento *Ciencia de redes* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-010-compute-critical-paths-with-resource-assumptions.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia de redes* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-010-compute-critical-paths-with-resource-assumptions.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [NET-007](../../network-science/net-007-separate-dag-readiness-from-admission/)
 :::

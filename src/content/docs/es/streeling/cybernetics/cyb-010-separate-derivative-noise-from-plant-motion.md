@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-010** · Separar el ruido de derivación del movimiento del sistema · intermedio · 45 minutos
 
-Generado por el departamento *Cibernética* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-010-separate-derivative-noise-from-plant-motion.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Cibernética* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/es/cyb-010-separate-derivative-noise-from-plant-motion.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [CYB-008](../../cybernetics/cyb-008-check-convergence-before-repeating-a-correction/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-024** · Vérifier le sens après un aller-retour entre analyseur et imprimeur · intermédiaire · 45 minutes
 
-Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-024-check-semantic-parser-printer-round-trips.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-024-check-semantic-parser-printer-round-trips.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CS-019](../../computer-science/cs-019-preserve-lexical-bindings-when-composing-fragments/), [SEM-002](../../semiotics/sem-002-chord-symbols-and-canonicalization/)
 :::

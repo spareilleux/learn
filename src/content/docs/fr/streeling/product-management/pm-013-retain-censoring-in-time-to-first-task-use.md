@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/produc
 :::note[Streeling University]
 **PM-013** · Conserver la censure du délai avant la première utilisation · intermédiaire · 45 minutes
 
-Généré par le département *Gestion de produit et de projet* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/fr/pm-013-retain-censoring-in-time-to-first-task-use.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Gestion de produit et de projet* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/fr/pm-013-retain-censoring-in-time-to-first-task-use.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PM-009](../../product-management/pm-009-separate-release-adoption-from-artifact-downloads/)
 :::

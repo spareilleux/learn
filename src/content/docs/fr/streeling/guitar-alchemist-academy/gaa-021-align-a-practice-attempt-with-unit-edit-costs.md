@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-021** · Aligner une tentative musicale avec des coûts d’édition unitaires · avancé · 50 minutes
 
-Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-021-align-a-practice-attempt-with-unit-edit-costs.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Guitar Alchemist Academy* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-021-align-a-practice-attempt-with-unit-edit-costs.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAA-019](../../guitar-alchemist-academy/gaa-019-retrieve-overlapping-interval-motifs/)
 :::

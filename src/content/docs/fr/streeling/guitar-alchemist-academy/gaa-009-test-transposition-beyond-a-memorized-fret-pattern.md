@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-009** · Tester la transposition au-delà d’un dessin de cases mémorisé · intermédiaire · 45 minutes
 
-Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-009-test-transposition-beyond-a-memorized-fret-pattern.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Guitar Alchemist Academy* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-009-test-transposition-beyond-a-memorized-fret-pattern.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAA-006](../../guitar-alchemist-academy/gaa-006-separate-capo-shapes-from-sounding-pitches/), [GAA-007](../../guitar-alchemist-academy/gaa-007-turn-a-voicing-result-into-a-practice-item/)
 :::

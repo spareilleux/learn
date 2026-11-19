@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-021** · Comparar la información de ítems logísticos a una habilidad dada · intermedio · 45 minutos
 
-Generado por el departamento *Ciencia cognitiva* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-021-compare-logistic-item-information-at-a-stated-ability.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia cognitiva* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-021-compare-logistic-item-information-at-a-stated-ability.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [COG-020](../../cognitive-science/cog-020-screen-an-item-using-the-rest-score/)
 :::

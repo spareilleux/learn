@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psycho
 :::note[Streeling University]
 **PSY-009** · Concentración: cuando cuatro días reúnen la mitad de los eventos · intermedio · 40 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-009-concentration-and-heavy-tails.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-009-concentration-and-heavy-tails.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-008](../../psychohistory/psy-008-bursts-are-not-rates/)
 :::

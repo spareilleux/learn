@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-012** · Distinguer le couplage de résonances en parallèle · intermédiaire · 55 minutes
 
-Généré par le département *Acoustique de la guitare et synthèse sonore* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/fr/gas-012-distinguish-coupling-from-parallel-resonance.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Acoustique de la guitare et synthèse sonore* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/fr/gas-012-distinguish-coupling-from-parallel-resonance.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAS-007](../../guitar-acoustics/gas-007-distinguish-body-poles-from-string-partials/)
 :::

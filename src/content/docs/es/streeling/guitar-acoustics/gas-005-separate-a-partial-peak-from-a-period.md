@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-005** · Distinguir el pico de un parcial de un período · intermedio · 40 minutos
 
-Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-005-separate-a-partial-peak-from-a-period.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-005-separate-a-partial-peak-from-a-period.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAS-001](../../guitar-acoustics/gas-001-open-string-audio-evidence/), [AUD-006](../../audio-engineering/aud-006-calibrate-spectral-amplitudes/)
 :::

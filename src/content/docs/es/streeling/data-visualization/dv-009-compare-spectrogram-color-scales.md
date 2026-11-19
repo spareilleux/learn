@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-009** · Comparar espectrogramas sin ocultar un cambio de ganancia · intermedio · 35 minutos
 
-Generado por el departamento *Visualización de datos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-009-compare-spectrogram-color-scales.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Visualización de datos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-009-compare-spectrogram-color-scales.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [DV-007](../../data-visualization/dv-007-optick-partition-small-multiples/), [AUD-006](../../audio-engineering/aud-006-calibrate-spectral-amplitudes/), [CS-013](../../computer-science/cs-013-preserve-spectral-axes-and-units/)
 :::

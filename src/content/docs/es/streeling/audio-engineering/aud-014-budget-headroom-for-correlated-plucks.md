@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-014** · Prever margen para ataques correlacionados · intermedio · 55 minutos
 
-Generado por el departamento *Ingeniería de audio* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-014-budget-headroom-for-correlated-plucks.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ingeniería de audio* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-014-budget-headroom-for-correlated-plucks.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [AUD-010](../../audio-engineering/aud-010-preserve-channels-before-downmixing/)
 :::

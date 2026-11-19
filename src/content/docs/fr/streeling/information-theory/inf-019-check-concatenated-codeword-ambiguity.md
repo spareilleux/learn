@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-019** · Vérifier l’ambiguïté de mots de code concaténés · intermédiaire · 45 minutes
 
-Généré par le département *Théorie de l'information* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-019-check-concatenated-codeword-ambiguity.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Théorie de l'information* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-019-check-concatenated-codeword-ambiguity.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [INF-014](../../information-theory/inf-014-retain-message-codebook-versions/), [INF-018](../../information-theory/inf-018-frame-text-by-utf8-byte-length/)
 :::

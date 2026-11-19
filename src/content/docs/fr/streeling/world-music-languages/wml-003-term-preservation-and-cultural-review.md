@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/world-
 :::note[Streeling University]
 **WML-003** · Auditer les termes de guitare dans six langues · intermédiaire · 40 minutes
 
-Généré par le département *Musiques et langues du monde* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/fr/wml-003-term-preservation-and-cultural-review.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musiques et langues du monde* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/fr/wml-003-term-preservation-and-cultural-review.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [WML-001](../../world-music-languages/wml-001-guitar-around-the-world/), [WML-002](../../world-music-languages/wml-002-dadgad-layout-and-cultural-claims/)
 :::

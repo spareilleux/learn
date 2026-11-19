@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/networ
 :::note[Streeling University]
 **NET-002** · Ciencia de redes para ecosistemas de IA · early-intermediate · 30 minutos
 
-Generado por el departamento *Ciencia de redes* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-002-capability-graphs-and-projections.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia de redes* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-002-capability-graphs-and-projections.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [NET-001](../../network-science/net-001-scale-free-tool-networks/)
 :::

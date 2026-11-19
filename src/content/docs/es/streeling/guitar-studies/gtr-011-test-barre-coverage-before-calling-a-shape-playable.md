@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-011** · Comprobar la cobertura de una cejilla antes de declarar tocable una forma · intermedio · 45 minutos
 
-Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-011-test-barre-coverage-before-calling-a-shape-playable.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Estudios de guitarra* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-011-test-barre-coverage-before-calling-a-shape-playable.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GTR-003](../../guitar-studies/gtr-003-audit-voicing-playability/)
 :::

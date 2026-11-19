@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-018** · Comprobar restricciones de dirección al cambiar de cuerda · avanzado · 45 minutos
 
-Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-018-check-direction-constraints-at-string-crossings.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Estudios de guitarra* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-018-check-direction-constraints-at-string-crossings.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GTR-007](../../guitar-studies/gtr-007-carry-picking-phase-across-bar-lines/)
 :::

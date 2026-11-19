@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-008** · Medir un filtro con entrada y salida emparejadas · intermedio · 45 minutos
 
-Generado por el departamento *Ingeniería de audio* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-008-measure-a-filter-with-paired-input-and-output.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ingeniería de audio* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/es/aud-008-measure-a-filter-with-paired-input-and-output.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [AUD-006](../../audio-engineering/aud-006-calibrate-spectral-amplitudes/), [CS-013](../../computer-science/cs-013-preserve-spectral-axes-and-units/), [GAS-007](../../guitar-acoustics/gas-007-distinguish-body-poles-from-string-partials/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognit
 :::note[Streeling University]
 **COG-017** · Restar la tendencia de comparación antes de atribuir mejoras a la asistencia · intermedio · 45 minutos
 
-Generado por el departamento *Ciencia cognitiva* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-017-subtract-a-comparison-trend-before-crediting-assistance.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia cognitiva* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-017-subtract-a-comparison-trend-before-crediting-assistance.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [COG-009](../../cognitive-science/cog-009-counterbalance-practice-order-before-comparing-interfaces/), [PHI-007](../../philosophy/phi-007-test-a-learning-gain-against-counterfactuals/)
 :::

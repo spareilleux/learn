@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/networ
 :::note[Streeling University]
 **NET-009** · Détecter les cycles globaux dans un empilement de panneaux · intermédiaire · 45 minutes
 
-Généré par le département *Science des réseaux* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/fr/net-009-detect-global-cycles-in-a-panel-stack.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Science des réseaux* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/fr/net-009-detect-global-cycles-in-a-panel-stack.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [NET-006](../../network-science/net-006-instance-and-resource-graphs/), [SEM-008](../../semiotics/sem-008-interpret-layer-order-relative-to-the-reference-normal/)
 :::

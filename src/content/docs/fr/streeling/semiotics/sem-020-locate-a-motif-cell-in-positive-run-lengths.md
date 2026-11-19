@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-020** · Localiser une cellule de motif dans des longueurs de séquence positives · avancé · 45 minutes
 
-Généré par le département *Sémiotique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-020-locate-a-motif-cell-in-positive-run-lengths.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sémiotique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-020-locate-a-motif-cell-in-positive-run-lengths.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [SEM-013](../../semiotics/sem-013-align-two-motif-periods-at-a-textile-seam/), [INF-011](../../information-theory/inf-011-separate-compressed-size-from-preserved-information/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-012** · Distinguer instances de maillage et appels de dessin · intermédiaire · 40 minutes
 
-Généré par le département *Informatique visuelle* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-012-separate-mesh-instances-from-draw-calls.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique visuelle* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-012-separate-mesh-instances-from-draw-calls.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [VC-009](../../visual-computing/vc-009-budget-brutal-scene-expansion/)
 :::

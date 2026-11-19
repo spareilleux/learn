@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-008** · Distinguir los batimientos de un cambio de amortiguamiento · intermedio · 45 minutos
 
-Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-008-separate-beating-from-a-change-in-damping.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-008-separate-beating-from-a-change-in-damping.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAS-004](../../guitar-acoustics/gas-004-run-open-e-decay-candidate/), [GAS-007](../../guitar-acoustics/gas-007-distinguish-body-poles-from-string-partials/)
 :::

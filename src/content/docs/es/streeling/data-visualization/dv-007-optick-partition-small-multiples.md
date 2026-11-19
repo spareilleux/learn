@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-007** · Pequeños múltiplos para diagnosticar las particiones de OPTIC-K · intermedio · 35 minutos
 
-Generado por el departamento *Visualización de datos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-007-optick-partition-small-multiples.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Visualización de datos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-007-optick-partition-small-multiples.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [DV-001](../../data-visualization/dv-001-observed-degraded-stale-quality/), [DV-006](../../data-visualization/dv-006-position-length-area-comparisons/)
 :::

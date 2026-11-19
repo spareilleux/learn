@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-018** · Hacer el balance de energía en una unión de impedancias · avanzado · 45 minutos
 
-Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-018-account-for-energy-at-an-impedance-junction.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-018-account-for-energy-at-an-impedance-junction.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAS-011](../../guitar-acoustics/gas-011-track-reflection-polarity-at-string-boundaries/)
 :::

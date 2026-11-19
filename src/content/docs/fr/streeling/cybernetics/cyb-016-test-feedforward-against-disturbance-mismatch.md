@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-016** · Éprouver l’anticipation face à une perturbation mal estimée · intermédiaire · 45 minutes
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-016-test-feedforward-against-disturbance-mismatch.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-016-test-feedforward-against-disturbance-mismatch.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CYB-010](../../cybernetics/cyb-010-separate-derivative-noise-from-plant-motion/)
 :::

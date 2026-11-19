@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/produc
 :::note[Streeling University]
 **PM-019** · Minimiser la variance d’une revue stratifiée par allocations entières · intermédiaire · 45 minutes
 
-Généré par le département *Gestion de produit et de projet* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/fr/pm-019-minimize-stratified-review-variance-over-integer-allocations.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Gestion de produit et de projet* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/fr/pm-019-minimize-stratified-review-variance-over-integer-allocations.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PM-010](../../product-management/pm-010-standardize-dogfood-failures-to-a-declared-task-mix/), [PM-008](../../product-management/pm-008-size-a-fifty-course-batch-by-review-capacity/)
 :::

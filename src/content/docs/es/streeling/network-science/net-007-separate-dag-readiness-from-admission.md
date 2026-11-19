@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/networ
 :::note[Streeling University]
 **NET-007** · Distinguir los nodos listos de un DAG de su admisión a los workers · intermedio · 35 minutos
 
-Generado por el departamento *Ciencia de redes* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-007-separate-dag-readiness-from-admission.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia de redes* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-007-separate-dag-readiness-from-admission.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [NET-005](../../network-science/net-005-fanout-results-and-dependency-joins/)
 :::

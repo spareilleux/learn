@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futuro
 :::note[Streeling University]
 **FUT-012** · Presupuestar la peor masa de cola de un escenario de renderizado · avanzado · 45 minutos
 
-Generado por el departamento *Futurología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Futurología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/es/fut-012-budget-the-worst-tail-mass-of-a-renderer-scenario.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [FUT-004](../../futurology/fut-004-scenario-test-an-observatory-renderer/), [DV-012](../../data-visualization/dv-012-compute-quantiles-before-combining-latency-cohorts/)
 :::

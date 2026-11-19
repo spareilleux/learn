@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-006** · Préserver le quantificateur dans un verdict de pliage · intermédiaire · 40 minutes
 
-Généré par le département *Philosophie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/fr/phi-006-preserve-the-quantifier-in-a-fold-verdict.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Philosophie* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/fr/phi-006-preserve-the-quantifier-in-a-fold-verdict.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHI-002](../../philosophy/phi-002-when-is-an-advisory-decision-justified/), [PHY-010](../../physics/phy-010-check-local-flat-fold-angles/), [CS-009](../../computer-science/cs-009-composing-origami-panel-constraints/)
 :::

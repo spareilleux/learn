@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psycho
 :::note[Streeling University]
 **PSY-012** · Las señales de alerta temprana y sus falsas alarmas · intermedio · 40 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-012-early-warning-false-alarms.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-012-early-warning-false-alarms.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-002](../../psychohistory/psy-002-governance-phase-transitions/), [MAT-008](../../mathematics/mat-008-probability-conditional-reasoning/), [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/)
 :::

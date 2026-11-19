@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-019** · Medir el ancho de media potencia antes de informar Q · avanzado · 45 minutos
 
-Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-019-measure-half-power-bandwidth-before-reporting-q.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-019-measure-half-power-bandwidth-before-reporting-q.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAS-007](../../guitar-acoustics/gas-007-distinguish-body-poles-from-string-partials/)
 :::

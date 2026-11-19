@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-009** · Limiter l’admission avec un seau à jetons · intermédiaire · 45 minutes
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-009-bound-admission-with-a-token-bucket.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-009-bound-admission-with-a-token-bucket.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CYB-006](../../cybernetics/cyb-006-bound-retry-feedback-and-workload/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-011** · Conservar la orientación de la base tangente tras un reflejo · intermedio · 40 minutos
 
-Generado por el departamento *Computación visual* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-011-preserve-tangent-handedness-after-a-mirror.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Computación visual* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-011-preserve-tangent-handedness-after-a-mirror.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHY-008](../../physics/phy-008-keep-surface-normals-perpendicular/), [VC-010](../../visual-computing/vc-010-preserve-packed-texture-channel-contracts/)
 :::

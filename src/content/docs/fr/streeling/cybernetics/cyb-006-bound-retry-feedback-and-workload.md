@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybern
 :::note[Streeling University]
 **CYB-006** · Borner la rétroaction des nouvelles tentatives avant d'ajouter des workers · intermédiaire · 35 minutes
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-006-bound-retry-feedback-and-workload.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-006-bound-retry-feedback-and-workload.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CYB-004](../../cybernetics/cyb-004-observe-before-correcting-a-feedback-loop/), [NET-007](../../network-science/net-007-separate-dag-readiness-from-admission/)
 :::

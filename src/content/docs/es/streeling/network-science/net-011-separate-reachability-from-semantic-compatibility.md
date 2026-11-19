@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/networ
 :::note[Streeling University]
 **NET-011** · Separar alcanzabilidad y compatibilidad semántica · intermedio · 45 minutos
 
-Generado por el departamento *Ciencia de redes* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-011-separate-reachability-from-semantic-compatibility.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia de redes* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-011-separate-reachability-from-semantic-compatibility.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [NET-002](../../network-science/net-002-capability-graphs-and-projections/), [CS-013](../../computer-science/cs-013-preserve-spectral-axes-and-units/)
 :::

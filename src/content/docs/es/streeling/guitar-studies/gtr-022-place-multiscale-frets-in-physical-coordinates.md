@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-022** · Situar trastes multiescala en coordenadas físicas · avanzado · 55 minutos
 
-Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-022-place-multiscale-frets-in-physical-coordinates.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Estudios de guitarra* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-022-place-multiscale-frets-in-physical-coordinates.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GTR-006](../../guitar-studies/gtr-006-keep-picking-distance-relative-to-frets/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-024** · Raffiner les intervalles de codage arithmétique en rationnels exacts · intermédiaire · 45 minutes
 
-Généré par le département *Théorie de l'information* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-024-refine-arithmetic-code-intervals-with-exact-rationals.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Théorie de l'information* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-024-refine-arithmetic-code-intervals-with-exact-rationals.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [INF-019](../../information-theory/inf-019-check-concatenated-codeword-ambiguity/), [INF-014](../../information-theory/inf-014-retain-message-codebook-versions/)
 :::

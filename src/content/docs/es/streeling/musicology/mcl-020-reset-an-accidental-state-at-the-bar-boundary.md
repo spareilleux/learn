@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musico
 :::note[Streeling University]
 **MCL-020** · Reiniciar el estado de alteraciones en la barra de compás · avanzado · 45 minutos
 
-Generado por el departamento *Musicología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-020-reset-an-accidental-state-at-the-bar-boundary.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Musicología* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/es/mcl-020-reset-an-accidental-state-at-the-bar-boundary.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MCL-005](../../musicology/mcl-005-preserve-written-and-sounding-pitch/)
 :::

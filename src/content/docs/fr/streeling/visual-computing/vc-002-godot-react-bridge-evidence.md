@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-002** · Preuves pour un pont d’observatoire entre Godot et React · intermédiaire · 35 minutes
 
-Généré par le département *Informatique visuelle* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-002-godot-react-bridge-evidence.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique visuelle* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-002-godot-react-bridge-evidence.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [VC-001](../../visual-computing/vc-001-accessible-fretboard-paths/)
 :::

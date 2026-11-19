@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GTR-009** · Prévoir le temps nécessaire à un changement de position · intermédiaire · 45 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-009-budget-time-for-a-position-shift.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-009-budget-time-for-a-position-shift.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GTR-003](../../guitar-studies/gtr-003-audit-voicing-playability/), [GTR-005](../../guitar-studies/gtr-005-plan-which-string-keeps-ringing/)
 :::

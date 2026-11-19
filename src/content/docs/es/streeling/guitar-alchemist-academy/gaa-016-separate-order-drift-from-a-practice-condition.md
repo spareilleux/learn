@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-016** · Separar la deriva temporal del efecto de una condición de práctica · avanzado · 60 minutos
 
-Generado por el departamento *Guitar Alchemist Academy* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/es/gaa-016-separate-order-drift-from-a-practice-condition.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Guitar Alchemist Academy* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/es/gaa-016-separate-order-drift-from-a-practice-condition.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAA-012](../../guitar-alchemist-academy/gaa-012-cross-timbre-with-interval-in-an-ear-trial/)
 :::

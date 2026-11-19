@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/audio-
 :::note[Streeling University]
 **AUD-005** · Contrôles PCM et frontières de format dans le laboratoire de guitare · intermédiaire · 45 minutes
 
-Généré par le département *Ingénierie audio* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/fr/aud-005-pcm-guards-and-format-boundaries.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Ingénierie audio* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/audio-engineering/fr/aud-005-pcm-guards-and-format-boundaries.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [AUD-002](../../audio-engineering/aud-002-level-matched-guitar-comparison/)
 :::

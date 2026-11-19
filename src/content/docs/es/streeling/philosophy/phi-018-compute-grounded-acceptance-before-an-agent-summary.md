@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philos
 :::note[Streeling University]
 **PHI-018** · Calcular la aceptación fundamentada antes de un resumen agéntico · avanzado · 50 minutos
 
-Generado por el departamento *Filosofía* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-018-compute-grounded-acceptance-before-an-agent-summary.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Filosofía* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-018-compute-grounded-acceptance-before-an-agent-summary.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PHI-001](../../philosophy/phi-001-how-to-argue-well/), [PHI-008](../../philosophy/phi-008-separate-a-test-oracle-from-a-specification/)
 :::

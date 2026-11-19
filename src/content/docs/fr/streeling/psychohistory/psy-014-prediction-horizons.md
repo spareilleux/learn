@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psycho
 :::note[Streeling University]
 **PSY-014** · Horizons de prévisibilité : à quelle vitesse croissent les petites erreurs · intermédiaire · 45 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-014-prediction-horizons.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-014-prediction-horizons.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-024](../../mathematics/mat-024-dynamical-systems-stability-feedback/)
 :::

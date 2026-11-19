@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-008** · Conserver la phase lorsque l'identité des formes d'onde compte · intermédiaire · 40 minutes
 
-Généré par le département *Théorie de l'information* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-008-keep-phase-when-waveform-identity-matters.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Théorie de l'information* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-008-keep-phase-when-waveform-identity-matters.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [INF-005](../../information-theory/inf-005-quantization-and-indistinguishable-renders/), [AUD-008](../../audio-engineering/aud-008-measure-a-filter-with-paired-input-and-output/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psycho
 :::note[Streeling University]
 **PSY-023** · Vigilar un plan: bandas de tolerancia y reglas de alarma · intermedio · 40 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-023-monitoring-a-plan.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-023-monitoring-a-plan.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-012](../../psychohistory/psy-012-early-warning-false-alarms/), [PSY-004](../../psychohistory/psy-004-how-large-is-large/)
 :::

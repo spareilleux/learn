@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiot
 :::note[Streeling University]
 **SEM-017** · Déclarer la propriété des frontières pour les coordonnées de tuiles négatives · avancé · 45 minutes
 
-Généré par le département *Sémiotique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-017-declare-boundary-ownership-for-negative-tile-coordinates.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sémiotique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/fr/sem-017-declare-boundary-ownership-for-negative-tile-coordinates.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [SEM-013](../../semiotics/sem-013-align-two-motif-periods-at-a-textile-seam/), [CS-015](../../computer-science/cs-015-compose-overlapping-chunks-without-duplicate-frames/)
 :::

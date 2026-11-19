@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-019** · Retrouver les motifs d’intervalles qui se chevauchent · avancé · 45 minutes
 
-Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-019-retrieve-overlapping-interval-motifs.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Guitar Alchemist Academy* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-019-retrieve-overlapping-interval-motifs.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAA-009](../../guitar-alchemist-academy/gaa-009-test-transposition-beyond-a-memorized-fret-pattern/)
 :::

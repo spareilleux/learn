@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/produc
 :::note[Streeling University]
 **PM-016** · Conserver les options de vérification incomparables au sens de Pareto · intermédiaire · 45 minutes
 
-Généré par le département *Gestion de produit et de projet* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/fr/pm-016-retain-pareto-incomparable-verification-options.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Gestion de produit et de projet* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/fr/pm-016-retain-pareto-incomparable-verification-options.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PM-014](../../product-management/pm-014-select-a-budgeted-portfolio-with-prerequisite-closure/), [PM-004](../../product-management/pm-004-craft-extension-release-decision/)
 :::

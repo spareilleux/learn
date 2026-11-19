@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-009** · Presupuestar la expansión de escenas BRUTAL antes de renderizarlas · intermedio · 35 minutos
 
-Generado por el departamento *Computación visual* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-009-budget-brutal-scene-expansion.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Computación visual* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-009-budget-brutal-scene-expansion.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [VC-008](../../visual-computing/vc-008-save-and-query-a-weave-scene/), [CS-014](../../computer-science/cs-014-compose-brutal-scene-descriptions/)
 :::

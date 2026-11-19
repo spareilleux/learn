@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-016** · Comparar residuos de silueta emparejados · intermedio · 45 minutos
 
-Generado por el departamento *Visualización de datos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-016-compare-paired-silhouette-residuals.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Visualización de datos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/es/dv-016-compare-paired-silhouette-residuals.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [DV-006](../../data-visualization/dv-006-position-length-area-comparisons/)
 :::

@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/inform
 :::note[Streeling University]
 **INF-013** · Valorar una prueba de evidencia por su información esperada · intermedio · 45 minutos
 
-Generado por el departamento *Teoría de la información* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-013-value-an-evidence-probe-by-expected-information.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Teoría de la información* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-013-value-an-evidence-probe-by-expected-information.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [INF-001](../../information-theory/inf-001-entropy-of-governance/), [COG-008](../../cognitive-science/cog-008-choose-probes-that-distinguish-reasoning-models/)
 :::

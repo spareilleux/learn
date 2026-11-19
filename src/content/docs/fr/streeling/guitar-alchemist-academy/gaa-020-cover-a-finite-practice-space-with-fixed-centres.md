@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAA-020** · Couvrir un espace fini d’exercices avec des centres fixés · avancé · 50 minutes
 
-Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-020-cover-a-finite-practice-space-with-fixed-centres.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Guitar Alchemist Academy* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-alchemist-academy/fr/gaa-020-cover-a-finite-practice-space-with-fixed-centres.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAA-013](../../guitar-alchemist-academy/gaa-013-choose-a-voicing-diversity-key-for-the-task/)
 :::

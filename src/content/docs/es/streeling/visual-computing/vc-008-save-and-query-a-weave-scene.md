@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-008** · Guardar y consultar una escena de tejido · intermedio · 45 minutos
 
-Generado por el departamento *Computación visual* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-008-save-and-query-a-weave-scene.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Computación visual* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-008-save-and-query-a-weave-scene.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [VC-007](../../visual-computing/vc-007-weave-seams-as-scene-contracts/)
 :::

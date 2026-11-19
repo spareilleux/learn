@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/data-v
 :::note[Streeling University]
 **DV-023** · Comprimer les jeux signés avec une échelle logarithmique inversible · avancé · 50 minutes
 
-Généré par le département *Visualisation de données* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/fr/dv-023-compress-signed-clearance-with-an-invertible-log-scale.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Visualisation de données* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/data-visualization/fr/dv-023-compress-signed-clearance-with-an-invertible-log-scale.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [DV-014](../../data-visualization/dv-014-plot-signed-craft-clearance/)
 :::

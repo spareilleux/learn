@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/produc
 :::note[Streeling University]
 **PM-012** · Ordenar revisiones por su coste ponderado de finalización · intermedio · 45 minutos
 
-Generado por el departamento *Gestión de productos y proyectos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-012-order-review-work-by-weighted-completion-cost.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Gestión de productos y proyectos* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-012-order-review-work-by-weighted-completion-cost.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PM-003](../../product-management/pm-003-review-queue-flow-metrics/), [NET-010](../../network-science/net-010-compute-critical-paths-with-resource-assumptions/)
 :::

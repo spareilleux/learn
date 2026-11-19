@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar
 :::note[Streeling University]
 **GAS-011** · Seguir la polaridad de las reflexiones en los extremos de una cuerda · intermedio · 45 minutos
 
-Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-011-track-reflection-polarity-at-string-boundaries.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Acústica de la guitarra y síntesis sonora* de Demerzel. Todavía no hay ninguna revisión registrada de este texto. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-acoustics/es/gas-011-track-reflection-polarity-at-string-boundaries.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAS-006](../../guitar-acoustics/gas-006-relate-pluck-position-to-string-modes/)
 :::

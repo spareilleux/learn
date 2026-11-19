@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physic
 :::note[Streeling University]
 **PHY-015** · Borner le jeu après épaississement d’un panneau · intermédiaire · 40 minutes
 
-Généré par le département *Physique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-015-bound-clearance-after-thickening-a-panel.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Physique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/fr/phy-015-bound-clearance-after-thickening-a-panel.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PHY-005](../../physics/phy-005-sheet-thickness-and-scene-units/), [PHY-011](../../physics/phy-011-compute-bend-length-on-a-declared-neutral-layer/)
 :::

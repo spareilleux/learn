@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/
 :::note[Streeling University]
 **MUS-017** · Auditer un classement de voicings selon son contrat de distance · intermédiaire · 60 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-017-audit-voice-leading-rankings.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-017-audit-voice-leading-rankings.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-015](../../music/mus-015-choose-voice-leading-equivalences/), [MUS-016](../../music/mus-016-recover-voice-correspondence/)
 :::

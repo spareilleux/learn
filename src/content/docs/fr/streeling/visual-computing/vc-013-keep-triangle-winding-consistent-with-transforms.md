@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 :::note[Streeling University]
 **VC-013** · Maintenir la cohérence entre orientation des triangles et transformations · intermédiaire · 40 minutes
 
-Généré par le département *Informatique visuelle* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-013-keep-triangle-winding-consistent-with-transforms.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique visuelle* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-013-keep-triangle-winding-consistent-with-transforms.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [SEM-006](../../semiotics/sem-006-preserve-orientation-across-scene-frames/), [PHY-008](../../physics/phy-008-keep-surface-normals-perpendicular/)
 :::

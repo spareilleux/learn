@@ -10,7 +10,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 :::note[Streeling University]
 **CS-012** · Délimiter la comparaison des rendus natifs et WASM · intermédiaire · 45 minutes
 
-Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-012-native-and-wasm-render-boundaries.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique* de Demerzel. Aucune relecture de ce texte n'est encore consignée. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-012-native-and-wasm-render-boundaries.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CS-010](../../computer-science/cs-010-compose-fail-fast-ga-computations/)
 :::
