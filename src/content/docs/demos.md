@@ -85,6 +85,24 @@ The same program and the same oval, centred on the Château Frontenac: the Duffe
 
 Captured on 2026-11-14, with the code of pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851). As for Ottawa, the tiles are streamed from Google at each run and none is stored.
 
+### GeoTiles: above the Place du Capitole, Toulouse
+
+<video controls playsinline preload="metadata" poster="../demos/geotiles/toulouse-drone.jpg" width="1920" height="1080" style="width: 100%; height: auto;"><source src="../demos/geotiles/toulouse-drone.mp4" type="video/mp4"></video>
+
+*A drone flight above the Place du Capitole and the old town of Toulouse: 60 s, 30 MB, without sound. Imagery: Google Maps.*
+
+The same oval, centred on the Place du Capitole: the façade of the Capitole, the square and the garden behind it pass below the camera, among the brick and tile roofs. The run walked 122 nested tilesets to pick 216 tiles, about 965,000 triangles, with 339 requests in one Google session. It ran full screen at 3840 × 2160 and 59 frames a second; the video is 1920 × 1080.
+
+### GeoTiles: above the Piazza di Spagna, Rome
+
+<video controls playsinline preload="metadata" poster="../demos/geotiles/rome-drone.jpg" width="1920" height="1080" style="width: 100%; height: auto;"><source src="../demos/geotiles/rome-drone.mp4" type="video/mp4"></video>
+
+*A drone flight above the Piazza di Spagna in Rome: 60 s, 34 MB, without sound. Imagery: Google Maps.*
+
+The same oval, centred on the Piazza di Spagna: the Spanish Steps, the church of Trinità dei Monti and the Villa Medici above them pass below the camera. The run walked 125 nested tilesets to pick 285 tiles, about 738,000 triangles, with 411 requests in one Google session, full screen at 3840 × 2160 and 60 frames a second.
+
+Both captured on 2026-11-25, with the code of pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851); the tiles are streamed from Google at each run and none is stored.
+
 ## Also
 
 The [Artifacts](../artifacts/) page lists interactive pages hosted on claude.ai, such as the *Atlas des Douze* and a microphone placement bench.

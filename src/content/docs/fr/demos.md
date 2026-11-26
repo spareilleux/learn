@@ -85,6 +85,24 @@ Le même programme et le même ovale, centrés sur le Château Frontenac : la te
 
 Capture du 2026-11-14, avec le code de la pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851). Comme pour Ottawa, les tuiles viennent de Google à chaque exécution et aucune n'est conservée.
 
+### GeoTiles : au-dessus de la place du Capitole, à Toulouse
+
+<video controls playsinline preload="metadata" poster="../../demos/geotiles/toulouse-drone.jpg" width="1920" height="1080" style="width: 100%; height: auto;"><source src="../../demos/geotiles/toulouse-drone.mp4" type="video/mp4"></video>
+
+*Un vol de drone au-dessus de la place du Capitole et du centre ancien de Toulouse : 60 s, 30 Mo, sans son. Imagerie : Google Maps.*
+
+Le même ovale, centré sur la place du Capitole : la façade du Capitole, la place et le jardin derrière lui passent sous la caméra, parmi les toits de brique et de tuile. Le programme a parcouru 122 tilesets imbriqués pour choisir 216 tuiles, environ 965 000 triangles, en 339 requêtes et une seule session Google. Il tournait en plein écran, en 3840 × 2160 à 59 images par seconde ; la vidéo est en 1920 × 1080.
+
+### GeoTiles : au-dessus de la place d'Espagne, à Rome
+
+<video controls playsinline preload="metadata" poster="../../demos/geotiles/rome-drone.jpg" width="1920" height="1080" style="width: 100%; height: auto;"><source src="../../demos/geotiles/rome-drone.mp4" type="video/mp4"></video>
+
+*Un vol de drone au-dessus de la place d'Espagne, à Rome : 60 s, 34 Mo, sans son. Imagerie : Google Maps.*
+
+Le même ovale, centré sur la place d'Espagne : l'escalier de la Trinité-des-Monts, l'église de la Trinité-des-Monts et, au-dessus, la villa Médicis passent sous la caméra. Le programme a parcouru 125 tilesets imbriqués pour choisir 285 tuiles, environ 738 000 triangles, en 411 requêtes et une seule session Google, en plein écran, en 3840 × 2160 à 60 images par seconde.
+
+Captures du 2026-11-25, avec le code de la pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851) ; les tuiles viennent de Google à chaque exécution et aucune n'est conservée.
+
 ## Voir aussi
 
 La page [Artefacts](../artifacts/) liste des pages interactives hébergées sur claude.ai, comme l'*Atlas des Douze* et un banc de placement de micros.
