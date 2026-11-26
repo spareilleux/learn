@@ -85,6 +85,24 @@ El mismo programa y el mismo óvalo, centrados en el Château Frontenac: la terr
 
 Captura del 2026-11-14, con el código de la pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851). Como en Ottawa, las teselas llegan de Google en cada ejecución y no se guarda ninguna.
 
+### GeoTiles: sobre la Place du Capitole, en Toulouse
+
+<video controls playsinline preload="metadata" poster="../../demos/geotiles/toulouse-drone.jpg" width="1920" height="1080" style="width: 100%; height: auto;"><source src="../../demos/geotiles/toulouse-drone.mp4" type="video/mp4"></video>
+
+*Un vuelo de dron sobre la Place du Capitole y el casco antiguo de Toulouse: 60 s, 30 MB, sin sonido. Imágenes: Google Maps.*
+
+El mismo óvalo, centrado en la Place du Capitole: la fachada del Capitole, la plaza y el jardín de detrás pasan bajo la cámara, entre los tejados de ladrillo y teja. El programa recorrió 122 tilesets anidados para elegir 216 teselas, unos 965 000 triángulos, con 339 peticiones en una sola sesión de Google. Funcionó a pantalla completa, en 3840 × 2160 a 59 imágenes por segundo; el vídeo está en 1920 × 1080.
+
+### GeoTiles: sobre la Piazza di Spagna, en Roma
+
+<video controls playsinline preload="metadata" poster="../../demos/geotiles/rome-drone.jpg" width="1920" height="1080" style="width: 100%; height: auto;"><source src="../../demos/geotiles/rome-drone.mp4" type="video/mp4"></video>
+
+*Un vuelo de dron sobre la Piazza di Spagna, en Roma: 60 s, 34 MB, sin sonido. Imágenes: Google Maps.*
+
+El mismo óvalo, centrado en la Piazza di Spagna: la escalinata de Trinità dei Monti, la iglesia de Trinità dei Monti y, encima, la Villa Médici pasan bajo la cámara. El programa recorrió 125 tilesets anidados para elegir 285 teselas, unos 738 000 triángulos, con 411 peticiones en una sola sesión de Google, a pantalla completa, en 3840 × 2160 a 60 imágenes por segundo.
+
+Capturas del 2026-11-25, con el código de la pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851); las teselas llegan de Google en cada ejecución y no se guarda ninguna.
+
 ## Ver también
 
 La página [Artefactos](../artifacts/) recoge páginas interactivas alojadas en claude.ai, como el *Atlas des Douze* y un banco de colocación de micrófonos.
