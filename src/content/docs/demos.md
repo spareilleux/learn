@@ -103,6 +103,16 @@ The same oval, centred on the Piazza di Spagna: the Spanish Steps, the church of
 
 Both captured on 2026-11-25, with the code of pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851); the tiles are streamed from Google at each run and none is stored.
 
+### Delta: a tour of its hall
+
+<video controls playsinline preload="metadata" poster="../demos/delta/delta-demo.jpg" width="1920" height="1080" style="width: 100%; height: auto;"><source src="../demos/delta/delta-demo.mp4" type="video/mp4"></video>
+
+*Delta shows a visitor around its hall: 2 min, 31 MB, with sound. Voice: [Piper](https://github.com/rhasspy/piper) with the LJ Speech voice (public domain). Streets: © OpenStreetMap contributors.*
+
+Delta is a small robot in a window on the author's screen: it hears the microphone, thinks with Claude and answers out loud. It lives in a hall drawn in C# and Vulkan with [BRUTAL](https://github.com/ahwootech/BRUTAL). The tour passes Pong on Delta's chest, an office where each little robot at a desk is a Claude Code session, Gaia's planet, clocks for Ottawa and Paris, a gallery of the courses and demos, a lectern to read a course, twenty-one sailors' knots and a paper crane checked by IX, a gymnasium and the streets of Ottawa. One shot turns on Max out: path tracing with DLSS Ray Reconstruction.
+
+Filmed on 2026-11-26 in a hidden window at 1920 × 1080. The visitor's question and Delta's answers were written beforehand and spoken by Piper; nothing came from a microphone. The office shows demo sessions, not the author's. The code is in [brickyard](https://github.com/GuitarAlchemist/brickyard).
+
 ## Also
 
 The [Artifacts](../artifacts/) page lists interactive pages hosted on claude.ai, such as the *Atlas des Douze* and a microphone placement bench.

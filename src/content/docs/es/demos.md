@@ -103,6 +103,16 @@ El mismo óvalo, centrado en la Piazza di Spagna: la escalinata de Trinità dei 
 
 Capturas del 2026-11-25, con el código de la pull request [#851](https://github.com/GuitarAlchemist/ga/pull/851); las teselas llegan de Google en cada ejecución y no se guarda ninguna.
 
+### Delta: una visita a su sala
+
+<video controls playsinline preload="metadata" poster="../../demos/delta/delta-demo.jpg" width="1920" height="1080" style="width: 100%; height: auto;"><source src="../../demos/delta/delta-demo.mp4" type="video/mp4"></video>
+
+*Delta enseña su sala a un visitante: 2 min, 31 MB, con sonido, en inglés. Voz: [Piper](https://github.com/rhasspy/piper) con la voz LJ Speech (dominio público). Calles: © colaboradores de OpenStreetMap.*
+
+Delta es un pequeño robot en una ventana de la pantalla del autor: oye el micrófono, piensa con Claude y responde en voz alta. Vive en una sala dibujada en C# y Vulkan con [BRUTAL](https://github.com/ahwootech/BRUTAL). La visita pasa por Pong en el pecho de Delta, una oficina donde cada robotito en su mesa es una sesión de Claude Code, el planeta de Gaia, relojes para Ottawa y París, una galería de los cursos y las demos, un atril para leer un curso, veintiún nudos marineros y una grulla de papel verificados por IX, un gimnasio y las calles de Ottawa. Un plano enciende Max out: el path tracing con DLSS Ray Reconstruction.
+
+Filmado el 2026-11-26 en una ventana oculta, a 1920 × 1080. La pregunta del visitante y las respuestas de Delta se escribieron de antemano y las dijo Piper; nada viene de un micrófono. La oficina muestra sesiones de demostración, no las del autor. El código está en [brickyard](https://github.com/GuitarAlchemist/brickyard) (en inglés).
+
 ## Ver también
 
 La página [Artefactos](../artifacts/) recoge páginas interactivas alojadas en claude.ai, como el *Atlas des Douze* y un banco de colocación de micrófonos.
